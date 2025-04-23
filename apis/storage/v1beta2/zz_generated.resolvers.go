@@ -9,10 +9,12 @@ package v1beta2
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
+	helper "github.com/crossplane/crossplane-tools/pkg/helpers"
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 
 	// ResolveReferences of this Account.
@@ -35,7 +37,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.NetworkRules.VirtualNetworkSubnetIds),
+				CurrentValues: helper.FromPtrValues(mg.Spec.ForProvider.NetworkRules.VirtualNetworkSubnetIds),
 				Extract:       resource.ExtractResourceID(),
 				References:    mg.Spec.ForProvider.NetworkRules.VirtualNetworkSubnetIdsRefs,
 				Selector:      mg.Spec.ForProvider.NetworkRules.VirtualNetworkSubnetIdsSelector,
@@ -45,7 +47,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.NetworkRules.VirtualNetworkSubnetIds")
 		}
-		mg.Spec.ForProvider.NetworkRules.VirtualNetworkSubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.ForProvider.NetworkRules.VirtualNetworkSubnetIds = helper.ToPtrValues(mrsp.ResolvedValues)
 		mg.Spec.ForProvider.NetworkRules.VirtualNetworkSubnetIdsRefs = mrsp.ResolvedReferences
 
 	}
@@ -55,7 +57,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -65,7 +67,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	if mg.Spec.InitProvider.NetworkRules != nil {
@@ -75,7 +77,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.NetworkRules.VirtualNetworkSubnetIds),
+				CurrentValues: helper.FromPtrValues(mg.Spec.InitProvider.NetworkRules.VirtualNetworkSubnetIds),
 				Extract:       resource.ExtractResourceID(),
 				References:    mg.Spec.InitProvider.NetworkRules.VirtualNetworkSubnetIdsRefs,
 				Selector:      mg.Spec.InitProvider.NetworkRules.VirtualNetworkSubnetIdsSelector,
@@ -85,7 +87,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.NetworkRules.VirtualNetworkSubnetIds")
 		}
-		mg.Spec.InitProvider.NetworkRules.VirtualNetworkSubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.NetworkRules.VirtualNetworkSubnetIds = helper.ToPtrValues(mrsp.ResolvedValues)
 		mg.Spec.InitProvider.NetworkRules.VirtualNetworkSubnetIdsRefs = mrsp.ResolvedReferences
 
 	}
@@ -109,7 +111,7 @@ func (mg *AccountLocalUser) ResolveReferences(ctx context.Context, c client.Read
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PermissionScope[i3].ResourceName),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.PermissionScope[i3].ResourceName, ""),
 				Extract:      reference.ExternalName(),
 				Reference:    mg.Spec.ForProvider.PermissionScope[i3].ResourceNameRef,
 				Selector:     mg.Spec.ForProvider.PermissionScope[i3].ResourceNameSelector,
@@ -119,7 +121,7 @@ func (mg *AccountLocalUser) ResolveReferences(ctx context.Context, c client.Read
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.PermissionScope[i3].ResourceName")
 		}
-		mg.Spec.ForProvider.PermissionScope[i3].ResourceName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.PermissionScope[i3].ResourceName = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.PermissionScope[i3].ResourceNameRef = rsp.ResolvedReference
 
 	}
@@ -129,7 +131,7 @@ func (mg *AccountLocalUser) ResolveReferences(ctx context.Context, c client.Read
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccountID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.StorageAccountID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.StorageAccountIDRef,
 			Selector:     mg.Spec.ForProvider.StorageAccountIDSelector,
@@ -139,7 +141,7 @@ func (mg *AccountLocalUser) ResolveReferences(ctx context.Context, c client.Read
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.StorageAccountID")
 	}
-	mg.Spec.ForProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StorageAccountID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageAccountIDRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.PermissionScope); i3++ {
@@ -149,7 +151,7 @@ func (mg *AccountLocalUser) ResolveReferences(ctx context.Context, c client.Read
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PermissionScope[i3].ResourceName),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.PermissionScope[i3].ResourceName, ""),
 				Extract:      reference.ExternalName(),
 				Reference:    mg.Spec.InitProvider.PermissionScope[i3].ResourceNameRef,
 				Selector:     mg.Spec.InitProvider.PermissionScope[i3].ResourceNameSelector,
@@ -159,7 +161,7 @@ func (mg *AccountLocalUser) ResolveReferences(ctx context.Context, c client.Read
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.PermissionScope[i3].ResourceName")
 		}
-		mg.Spec.InitProvider.PermissionScope[i3].ResourceName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.PermissionScope[i3].ResourceName = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.PermissionScope[i3].ResourceNameRef = rsp.ResolvedReference
 
 	}
@@ -183,7 +185,7 @@ func (mg *BlobInventoryPolicy) ResolveReferences(ctx context.Context, c client.R
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Rules[i3].StorageContainerName),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.Rules[i3].StorageContainerName, ""),
 				Extract:      reference.ExternalName(),
 				Reference:    mg.Spec.ForProvider.Rules[i3].StorageContainerNameRef,
 				Selector:     mg.Spec.ForProvider.Rules[i3].StorageContainerNameSelector,
@@ -193,7 +195,7 @@ func (mg *BlobInventoryPolicy) ResolveReferences(ctx context.Context, c client.R
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.Rules[i3].StorageContainerName")
 		}
-		mg.Spec.ForProvider.Rules[i3].StorageContainerName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Rules[i3].StorageContainerName = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.Rules[i3].StorageContainerNameRef = rsp.ResolvedReference
 
 	}
@@ -203,7 +205,7 @@ func (mg *BlobInventoryPolicy) ResolveReferences(ctx context.Context, c client.R
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccountID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.StorageAccountID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.StorageAccountIDRef,
 			Selector:     mg.Spec.ForProvider.StorageAccountIDSelector,
@@ -213,7 +215,7 @@ func (mg *BlobInventoryPolicy) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.StorageAccountID")
 	}
-	mg.Spec.ForProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StorageAccountID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageAccountIDRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.Rules); i3++ {
@@ -223,7 +225,7 @@ func (mg *BlobInventoryPolicy) ResolveReferences(ctx context.Context, c client.R
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Rules[i3].StorageContainerName),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.Rules[i3].StorageContainerName, ""),
 				Extract:      reference.ExternalName(),
 				Reference:    mg.Spec.InitProvider.Rules[i3].StorageContainerNameRef,
 				Selector:     mg.Spec.InitProvider.Rules[i3].StorageContainerNameSelector,
@@ -233,7 +235,7 @@ func (mg *BlobInventoryPolicy) ResolveReferences(ctx context.Context, c client.R
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.Rules[i3].StorageContainerName")
 		}
-		mg.Spec.InitProvider.Rules[i3].StorageContainerName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Rules[i3].StorageContainerName = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.Rules[i3].StorageContainerNameRef = rsp.ResolvedReference
 
 	}
@@ -243,7 +245,7 @@ func (mg *BlobInventoryPolicy) ResolveReferences(ctx context.Context, c client.R
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccountID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.StorageAccountID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.StorageAccountIDRef,
 			Selector:     mg.Spec.InitProvider.StorageAccountIDSelector,
@@ -253,7 +255,7 @@ func (mg *BlobInventoryPolicy) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccountID")
 	}
-	mg.Spec.InitProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageAccountID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.StorageAccountIDRef = rsp.ResolvedReference
 
 	return nil
@@ -274,7 +276,7 @@ func (mg *ManagementPolicy) ResolveReferences(ctx context.Context, c client.Read
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccountID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.StorageAccountID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.StorageAccountIDRef,
 			Selector:     mg.Spec.ForProvider.StorageAccountIDSelector,
@@ -284,7 +286,7 @@ func (mg *ManagementPolicy) ResolveReferences(ctx context.Context, c client.Read
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.StorageAccountID")
 	}
-	mg.Spec.ForProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StorageAccountID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageAccountIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
@@ -293,7 +295,7 @@ func (mg *ManagementPolicy) ResolveReferences(ctx context.Context, c client.Read
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccountID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.StorageAccountID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.StorageAccountIDRef,
 			Selector:     mg.Spec.InitProvider.StorageAccountIDSelector,
@@ -303,7 +305,7 @@ func (mg *ManagementPolicy) ResolveReferences(ctx context.Context, c client.Read
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccountID")
 	}
-	mg.Spec.InitProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageAccountID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.StorageAccountIDRef = rsp.ResolvedReference
 
 	return nil

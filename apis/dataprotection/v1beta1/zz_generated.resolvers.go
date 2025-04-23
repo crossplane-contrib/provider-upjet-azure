@@ -16,6 +16,7 @@ import (
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -34,7 +35,7 @@ func (mg *BackupInstanceBlobStorage) ResolveReferences( // ResolveReferences of 
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BackupPolicyID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.BackupPolicyID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.BackupPolicyIDRef,
 			Selector:     mg.Spec.ForProvider.BackupPolicyIDSelector,
@@ -44,7 +45,7 @@ func (mg *BackupInstanceBlobStorage) ResolveReferences( // ResolveReferences of 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.BackupPolicyID")
 	}
-	mg.Spec.ForProvider.BackupPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.BackupPolicyID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.BackupPolicyIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
@@ -53,7 +54,7 @@ func (mg *BackupInstanceBlobStorage) ResolveReferences( // ResolveReferences of 
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccountID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.StorageAccountID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.StorageAccountIDRef,
 			Selector:     mg.Spec.ForProvider.StorageAccountIDSelector,
@@ -63,7 +64,7 @@ func (mg *BackupInstanceBlobStorage) ResolveReferences( // ResolveReferences of 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.StorageAccountID")
 	}
-	mg.Spec.ForProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StorageAccountID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageAccountIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("dataprotection.azure.upbound.io", "v1beta2", "BackupVault", "BackupVaultList")
@@ -72,7 +73,7 @@ func (mg *BackupInstanceBlobStorage) ResolveReferences( // ResolveReferences of 
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VaultID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.VaultID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.VaultIDRef,
 			Selector:     mg.Spec.ForProvider.VaultIDSelector,
@@ -82,7 +83,7 @@ func (mg *BackupInstanceBlobStorage) ResolveReferences( // ResolveReferences of 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.VaultID")
 	}
-	mg.Spec.ForProvider.VaultID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VaultID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VaultIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("dataprotection.azure.upbound.io", "v1beta1", "BackupPolicyBlobStorage", "BackupPolicyBlobStorageList")
@@ -91,7 +92,7 @@ func (mg *BackupInstanceBlobStorage) ResolveReferences( // ResolveReferences of 
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BackupPolicyID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.BackupPolicyID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.BackupPolicyIDRef,
 			Selector:     mg.Spec.InitProvider.BackupPolicyIDSelector,
@@ -101,7 +102,7 @@ func (mg *BackupInstanceBlobStorage) ResolveReferences( // ResolveReferences of 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.BackupPolicyID")
 	}
-	mg.Spec.InitProvider.BackupPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.BackupPolicyID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.BackupPolicyIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
@@ -110,7 +111,7 @@ func (mg *BackupInstanceBlobStorage) ResolveReferences( // ResolveReferences of 
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccountID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.StorageAccountID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.StorageAccountIDRef,
 			Selector:     mg.Spec.InitProvider.StorageAccountIDSelector,
@@ -120,7 +121,7 @@ func (mg *BackupInstanceBlobStorage) ResolveReferences( // ResolveReferences of 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccountID")
 	}
-	mg.Spec.InitProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageAccountID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.StorageAccountIDRef = rsp.ResolvedReference
 
 	return nil
@@ -141,7 +142,7 @@ func (mg *BackupInstanceDisk) ResolveReferences(ctx context.Context, c client.Re
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BackupPolicyID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.BackupPolicyID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.BackupPolicyIDRef,
 			Selector:     mg.Spec.ForProvider.BackupPolicyIDSelector,
@@ -151,7 +152,7 @@ func (mg *BackupInstanceDisk) ResolveReferences(ctx context.Context, c client.Re
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.BackupPolicyID")
 	}
-	mg.Spec.ForProvider.BackupPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.BackupPolicyID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.BackupPolicyIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("compute.azure.upbound.io", "v1beta2", "ManagedDisk", "ManagedDiskList")
@@ -160,7 +161,7 @@ func (mg *BackupInstanceDisk) ResolveReferences(ctx context.Context, c client.Re
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DiskID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.DiskID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.DiskIDRef,
 			Selector:     mg.Spec.ForProvider.DiskIDSelector,
@@ -170,7 +171,7 @@ func (mg *BackupInstanceDisk) ResolveReferences(ctx context.Context, c client.Re
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.DiskID")
 	}
-	mg.Spec.ForProvider.DiskID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DiskID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DiskIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -179,7 +180,7 @@ func (mg *BackupInstanceDisk) ResolveReferences(ctx context.Context, c client.Re
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SnapshotResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.SnapshotResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.SnapshotResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.SnapshotResourceGroupNameSelector,
@@ -189,7 +190,7 @@ func (mg *BackupInstanceDisk) ResolveReferences(ctx context.Context, c client.Re
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.SnapshotResourceGroupName")
 	}
-	mg.Spec.ForProvider.SnapshotResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SnapshotResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SnapshotResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("dataprotection.azure.upbound.io", "v1beta2", "BackupVault", "BackupVaultList")
@@ -198,7 +199,7 @@ func (mg *BackupInstanceDisk) ResolveReferences(ctx context.Context, c client.Re
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VaultID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.VaultID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.VaultIDRef,
 			Selector:     mg.Spec.ForProvider.VaultIDSelector,
@@ -208,7 +209,7 @@ func (mg *BackupInstanceDisk) ResolveReferences(ctx context.Context, c client.Re
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.VaultID")
 	}
-	mg.Spec.ForProvider.VaultID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VaultID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VaultIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("dataprotection.azure.upbound.io", "v1beta2", "BackupPolicyDisk", "BackupPolicyDiskList")
@@ -217,7 +218,7 @@ func (mg *BackupInstanceDisk) ResolveReferences(ctx context.Context, c client.Re
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BackupPolicyID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.BackupPolicyID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.BackupPolicyIDRef,
 			Selector:     mg.Spec.InitProvider.BackupPolicyIDSelector,
@@ -227,7 +228,7 @@ func (mg *BackupInstanceDisk) ResolveReferences(ctx context.Context, c client.Re
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.BackupPolicyID")
 	}
-	mg.Spec.InitProvider.BackupPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.BackupPolicyID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.BackupPolicyIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("compute.azure.upbound.io", "v1beta2", "ManagedDisk", "ManagedDiskList")
@@ -236,7 +237,7 @@ func (mg *BackupInstanceDisk) ResolveReferences(ctx context.Context, c client.Re
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DiskID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.DiskID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.DiskIDRef,
 			Selector:     mg.Spec.InitProvider.DiskIDSelector,
@@ -246,7 +247,7 @@ func (mg *BackupInstanceDisk) ResolveReferences(ctx context.Context, c client.Re
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.DiskID")
 	}
-	mg.Spec.InitProvider.DiskID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DiskID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DiskIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -255,7 +256,7 @@ func (mg *BackupInstanceDisk) ResolveReferences(ctx context.Context, c client.Re
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SnapshotResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.SnapshotResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.SnapshotResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.SnapshotResourceGroupNameSelector,
@@ -265,7 +266,7 @@ func (mg *BackupInstanceDisk) ResolveReferences(ctx context.Context, c client.Re
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.SnapshotResourceGroupName")
 	}
-	mg.Spec.InitProvider.SnapshotResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SnapshotResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.SnapshotResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -286,7 +287,7 @@ func (mg *BackupInstanceKubernetesCluster) ResolveReferences(ctx context.Context
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BackupPolicyID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.BackupPolicyID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.BackupPolicyIDRef,
 			Selector:     mg.Spec.ForProvider.BackupPolicyIDSelector,
@@ -296,7 +297,7 @@ func (mg *BackupInstanceKubernetesCluster) ResolveReferences(ctx context.Context
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.BackupPolicyID")
 	}
-	mg.Spec.ForProvider.BackupPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.BackupPolicyID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.BackupPolicyIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("containerservice.azure.upbound.io", "v1beta2", "KubernetesCluster", "KubernetesClusterList")
@@ -305,7 +306,7 @@ func (mg *BackupInstanceKubernetesCluster) ResolveReferences(ctx context.Context
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KubernetesClusterID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.KubernetesClusterID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.KubernetesClusterIDRef,
 			Selector:     mg.Spec.ForProvider.KubernetesClusterIDSelector,
@@ -315,7 +316,7 @@ func (mg *BackupInstanceKubernetesCluster) ResolveReferences(ctx context.Context
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.KubernetesClusterID")
 	}
-	mg.Spec.ForProvider.KubernetesClusterID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.KubernetesClusterID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KubernetesClusterIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -324,7 +325,7 @@ func (mg *BackupInstanceKubernetesCluster) ResolveReferences(ctx context.Context
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SnapshotResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.SnapshotResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.SnapshotResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.SnapshotResourceGroupNameSelector,
@@ -334,7 +335,7 @@ func (mg *BackupInstanceKubernetesCluster) ResolveReferences(ctx context.Context
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.SnapshotResourceGroupName")
 	}
-	mg.Spec.ForProvider.SnapshotResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SnapshotResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SnapshotResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("dataprotection.azure.upbound.io", "v1beta2", "BackupVault", "BackupVaultList")
@@ -343,7 +344,7 @@ func (mg *BackupInstanceKubernetesCluster) ResolveReferences(ctx context.Context
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VaultID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.VaultID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.VaultIDRef,
 			Selector:     mg.Spec.ForProvider.VaultIDSelector,
@@ -353,7 +354,7 @@ func (mg *BackupInstanceKubernetesCluster) ResolveReferences(ctx context.Context
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.VaultID")
 	}
-	mg.Spec.ForProvider.VaultID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VaultID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VaultIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("dataprotection.azure.upbound.io", "v1beta1", "BackupPolicyKubernetesCluster", "BackupPolicyKubernetesClusterList")
@@ -362,7 +363,7 @@ func (mg *BackupInstanceKubernetesCluster) ResolveReferences(ctx context.Context
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BackupPolicyID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.BackupPolicyID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.BackupPolicyIDRef,
 			Selector:     mg.Spec.InitProvider.BackupPolicyIDSelector,
@@ -372,7 +373,7 @@ func (mg *BackupInstanceKubernetesCluster) ResolveReferences(ctx context.Context
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.BackupPolicyID")
 	}
-	mg.Spec.InitProvider.BackupPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.BackupPolicyID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.BackupPolicyIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("containerservice.azure.upbound.io", "v1beta2", "KubernetesCluster", "KubernetesClusterList")
@@ -381,7 +382,7 @@ func (mg *BackupInstanceKubernetesCluster) ResolveReferences(ctx context.Context
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KubernetesClusterID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.KubernetesClusterID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.KubernetesClusterIDRef,
 			Selector:     mg.Spec.InitProvider.KubernetesClusterIDSelector,
@@ -391,7 +392,7 @@ func (mg *BackupInstanceKubernetesCluster) ResolveReferences(ctx context.Context
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.KubernetesClusterID")
 	}
-	mg.Spec.InitProvider.KubernetesClusterID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KubernetesClusterID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.KubernetesClusterIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -400,7 +401,7 @@ func (mg *BackupInstanceKubernetesCluster) ResolveReferences(ctx context.Context
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SnapshotResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.SnapshotResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.SnapshotResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.SnapshotResourceGroupNameSelector,
@@ -410,7 +411,7 @@ func (mg *BackupInstanceKubernetesCluster) ResolveReferences(ctx context.Context
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.SnapshotResourceGroupName")
 	}
-	mg.Spec.InitProvider.SnapshotResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SnapshotResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.SnapshotResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -431,7 +432,7 @@ func (mg *BackupInstancePostgreSQL) ResolveReferences(ctx context.Context, c cli
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BackupPolicyID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.BackupPolicyID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.BackupPolicyIDRef,
 			Selector:     mg.Spec.ForProvider.BackupPolicyIDSelector,
@@ -441,7 +442,7 @@ func (mg *BackupInstancePostgreSQL) ResolveReferences(ctx context.Context, c cli
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.BackupPolicyID")
 	}
-	mg.Spec.ForProvider.BackupPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.BackupPolicyID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.BackupPolicyIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta1", "Secret", "SecretList")
@@ -450,7 +451,7 @@ func (mg *BackupInstancePostgreSQL) ResolveReferences(ctx context.Context, c cli
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseCredentialKeyVaultSecretID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.DatabaseCredentialKeyVaultSecretID, ""),
 			Extract:      resource.ExtractParamPath("versionless_id", true),
 			Reference:    mg.Spec.ForProvider.DatabaseCredentialKeyVaultSecretIDRef,
 			Selector:     mg.Spec.ForProvider.DatabaseCredentialKeyVaultSecretIDSelector,
@@ -460,7 +461,7 @@ func (mg *BackupInstancePostgreSQL) ResolveReferences(ctx context.Context, c cli
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.DatabaseCredentialKeyVaultSecretID")
 	}
-	mg.Spec.ForProvider.DatabaseCredentialKeyVaultSecretID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DatabaseCredentialKeyVaultSecretID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DatabaseCredentialKeyVaultSecretIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("dbforpostgresql.azure.upbound.io", "v1beta1", "Database", "DatabaseList")
@@ -469,7 +470,7 @@ func (mg *BackupInstancePostgreSQL) ResolveReferences(ctx context.Context, c cli
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.DatabaseID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.DatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.DatabaseIDSelector,
@@ -479,7 +480,7 @@ func (mg *BackupInstancePostgreSQL) ResolveReferences(ctx context.Context, c cli
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.DatabaseID")
 	}
-	mg.Spec.ForProvider.DatabaseID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DatabaseID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DatabaseIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("dataprotection.azure.upbound.io", "v1beta2", "BackupVault", "BackupVaultList")
@@ -488,7 +489,7 @@ func (mg *BackupInstancePostgreSQL) ResolveReferences(ctx context.Context, c cli
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VaultID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.VaultID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.VaultIDRef,
 			Selector:     mg.Spec.ForProvider.VaultIDSelector,
@@ -498,7 +499,7 @@ func (mg *BackupInstancePostgreSQL) ResolveReferences(ctx context.Context, c cli
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.VaultID")
 	}
-	mg.Spec.ForProvider.VaultID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VaultID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VaultIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("dataprotection.azure.upbound.io", "v1beta2", "BackupPolicyPostgreSQL", "BackupPolicyPostgreSQLList")
@@ -507,7 +508,7 @@ func (mg *BackupInstancePostgreSQL) ResolveReferences(ctx context.Context, c cli
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BackupPolicyID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.BackupPolicyID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.BackupPolicyIDRef,
 			Selector:     mg.Spec.InitProvider.BackupPolicyIDSelector,
@@ -517,7 +518,7 @@ func (mg *BackupInstancePostgreSQL) ResolveReferences(ctx context.Context, c cli
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.BackupPolicyID")
 	}
-	mg.Spec.InitProvider.BackupPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.BackupPolicyID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.BackupPolicyIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta1", "Secret", "SecretList")
@@ -526,7 +527,7 @@ func (mg *BackupInstancePostgreSQL) ResolveReferences(ctx context.Context, c cli
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DatabaseCredentialKeyVaultSecretID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.DatabaseCredentialKeyVaultSecretID, ""),
 			Extract:      resource.ExtractParamPath("versionless_id", true),
 			Reference:    mg.Spec.InitProvider.DatabaseCredentialKeyVaultSecretIDRef,
 			Selector:     mg.Spec.InitProvider.DatabaseCredentialKeyVaultSecretIDSelector,
@@ -536,7 +537,7 @@ func (mg *BackupInstancePostgreSQL) ResolveReferences(ctx context.Context, c cli
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.DatabaseCredentialKeyVaultSecretID")
 	}
-	mg.Spec.InitProvider.DatabaseCredentialKeyVaultSecretID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DatabaseCredentialKeyVaultSecretID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DatabaseCredentialKeyVaultSecretIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("dbforpostgresql.azure.upbound.io", "v1beta1", "Database", "DatabaseList")
@@ -545,7 +546,7 @@ func (mg *BackupInstancePostgreSQL) ResolveReferences(ctx context.Context, c cli
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DatabaseID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.DatabaseID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.DatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.DatabaseIDSelector,
@@ -555,7 +556,7 @@ func (mg *BackupInstancePostgreSQL) ResolveReferences(ctx context.Context, c cli
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.DatabaseID")
 	}
-	mg.Spec.InitProvider.DatabaseID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DatabaseID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DatabaseIDRef = rsp.ResolvedReference
 
 	return nil
@@ -576,7 +577,7 @@ func (mg *BackupPolicyBlobStorage) ResolveReferences(ctx context.Context, c clie
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VaultID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.VaultID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.VaultIDRef,
 			Selector:     mg.Spec.ForProvider.VaultIDSelector,
@@ -586,7 +587,7 @@ func (mg *BackupPolicyBlobStorage) ResolveReferences(ctx context.Context, c clie
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.VaultID")
 	}
-	mg.Spec.ForProvider.VaultID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VaultID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VaultIDRef = rsp.ResolvedReference
 
 	return nil
@@ -607,7 +608,7 @@ func (mg *BackupPolicyDisk) ResolveReferences(ctx context.Context, c client.Read
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VaultID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.VaultID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.VaultIDRef,
 			Selector:     mg.Spec.ForProvider.VaultIDSelector,
@@ -617,7 +618,7 @@ func (mg *BackupPolicyDisk) ResolveReferences(ctx context.Context, c client.Read
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.VaultID")
 	}
-	mg.Spec.ForProvider.VaultID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VaultID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VaultIDRef = rsp.ResolvedReference
 
 	return nil
@@ -638,7 +639,7 @@ func (mg *BackupPolicyKubernetesCluster) ResolveReferences(ctx context.Context, 
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -648,7 +649,7 @@ func (mg *BackupPolicyKubernetesCluster) ResolveReferences(ctx context.Context, 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("dataprotection.azure.upbound.io", "v1beta2", "BackupVault", "BackupVaultList")
@@ -657,7 +658,7 @@ func (mg *BackupPolicyKubernetesCluster) ResolveReferences(ctx context.Context, 
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VaultName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.VaultName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.VaultNameRef,
 			Selector:     mg.Spec.ForProvider.VaultNameSelector,
@@ -667,7 +668,7 @@ func (mg *BackupPolicyKubernetesCluster) ResolveReferences(ctx context.Context, 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.VaultName")
 	}
-	mg.Spec.ForProvider.VaultName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VaultName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VaultNameRef = rsp.ResolvedReference
 
 	return nil
@@ -688,7 +689,7 @@ func (mg *BackupPolicyPostgreSQL) ResolveReferences(ctx context.Context, c clien
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -698,7 +699,7 @@ func (mg *BackupPolicyPostgreSQL) ResolveReferences(ctx context.Context, c clien
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("dataprotection.azure.upbound.io", "v1beta1", "BackupVault", "BackupVaultList")
@@ -707,7 +708,7 @@ func (mg *BackupPolicyPostgreSQL) ResolveReferences(ctx context.Context, c clien
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VaultName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.VaultName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.VaultNameRef,
 			Selector:     mg.Spec.ForProvider.VaultNameSelector,
@@ -717,7 +718,7 @@ func (mg *BackupPolicyPostgreSQL) ResolveReferences(ctx context.Context, c clien
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.VaultName")
 	}
-	mg.Spec.ForProvider.VaultName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VaultName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VaultNameRef = rsp.ResolvedReference
 
 	return nil
@@ -738,7 +739,7 @@ func (mg *BackupVault) ResolveReferences(ctx context.Context, c client.Reader) e
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -748,7 +749,7 @@ func (mg *BackupVault) ResolveReferences(ctx context.Context, c client.Reader) e
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -769,7 +770,7 @@ func (mg *ResourceGuard) ResolveReferences(ctx context.Context, c client.Reader)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -779,7 +780,7 @@ func (mg *ResourceGuard) ResolveReferences(ctx context.Context, c client.Reader)
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil

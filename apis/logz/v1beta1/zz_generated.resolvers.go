@@ -13,6 +13,7 @@ import (
 	errors "github.com/pkg/errors"
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 
 	// ResolveReferences of this Monitor.
@@ -33,7 +34,7 @@ func (mg *Monitor) ResolveReferences(ctx context.Context, c client.Reader) error
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -43,7 +44,7 @@ func (mg *Monitor) ResolveReferences(ctx context.Context, c client.Reader) error
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -64,7 +65,7 @@ func (mg *SubAccount) ResolveReferences(ctx context.Context, c client.Reader) er
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogzMonitorID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.LogzMonitorID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.LogzMonitorIDRef,
 			Selector:     mg.Spec.ForProvider.LogzMonitorIDSelector,
@@ -74,7 +75,7 @@ func (mg *SubAccount) ResolveReferences(ctx context.Context, c client.Reader) er
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.LogzMonitorID")
 	}
-	mg.Spec.ForProvider.LogzMonitorID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LogzMonitorID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LogzMonitorIDRef = rsp.ResolvedReference
 
 	return nil
@@ -95,7 +96,7 @@ func (mg *SubAccountTagRule) ResolveReferences(ctx context.Context, c client.Rea
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogzSubAccountID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.LogzSubAccountID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.LogzSubAccountIDRef,
 			Selector:     mg.Spec.ForProvider.LogzSubAccountIDSelector,
@@ -105,7 +106,7 @@ func (mg *SubAccountTagRule) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.LogzSubAccountID")
 	}
-	mg.Spec.ForProvider.LogzSubAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LogzSubAccountID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LogzSubAccountIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("logz.azure.upbound.io", "v1beta2", "SubAccount", "SubAccountList")
@@ -114,7 +115,7 @@ func (mg *SubAccountTagRule) ResolveReferences(ctx context.Context, c client.Rea
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LogzSubAccountID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.LogzSubAccountID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.LogzSubAccountIDRef,
 			Selector:     mg.Spec.InitProvider.LogzSubAccountIDSelector,
@@ -124,7 +125,7 @@ func (mg *SubAccountTagRule) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.LogzSubAccountID")
 	}
-	mg.Spec.InitProvider.LogzSubAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LogzSubAccountID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.LogzSubAccountIDRef = rsp.ResolvedReference
 
 	return nil
@@ -145,7 +146,7 @@ func (mg *TagRule) ResolveReferences(ctx context.Context, c client.Reader) error
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogzMonitorID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.LogzMonitorID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.LogzMonitorIDRef,
 			Selector:     mg.Spec.ForProvider.LogzMonitorIDSelector,
@@ -155,7 +156,7 @@ func (mg *TagRule) ResolveReferences(ctx context.Context, c client.Reader) error
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.LogzMonitorID")
 	}
-	mg.Spec.ForProvider.LogzMonitorID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LogzMonitorID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LogzMonitorIDRef = rsp.ResolvedReference
 
 	return nil

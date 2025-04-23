@@ -14,6 +14,7 @@ import (
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -32,7 +33,7 @@ func (mg *ContactProfile) ResolveReferences( // ResolveReferences of this Contac
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkConfigurationSubnetID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.NetworkConfigurationSubnetID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.NetworkConfigurationSubnetIDRef,
 			Selector:     mg.Spec.ForProvider.NetworkConfigurationSubnetIDSelector,
@@ -42,7 +43,7 @@ func (mg *ContactProfile) ResolveReferences( // ResolveReferences of this Contac
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.NetworkConfigurationSubnetID")
 	}
-	mg.Spec.ForProvider.NetworkConfigurationSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.NetworkConfigurationSubnetID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NetworkConfigurationSubnetIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -51,7 +52,7 @@ func (mg *ContactProfile) ResolveReferences( // ResolveReferences of this Contac
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -61,7 +62,7 @@ func (mg *ContactProfile) ResolveReferences( // ResolveReferences of this Contac
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
@@ -70,7 +71,7 @@ func (mg *ContactProfile) ResolveReferences( // ResolveReferences of this Contac
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkConfigurationSubnetID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.NetworkConfigurationSubnetID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.NetworkConfigurationSubnetIDRef,
 			Selector:     mg.Spec.InitProvider.NetworkConfigurationSubnetIDSelector,
@@ -80,7 +81,7 @@ func (mg *ContactProfile) ResolveReferences( // ResolveReferences of this Contac
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.NetworkConfigurationSubnetID")
 	}
-	mg.Spec.InitProvider.NetworkConfigurationSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.NetworkConfigurationSubnetID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.NetworkConfigurationSubnetIDRef = rsp.ResolvedReference
 
 	return nil
@@ -101,7 +102,7 @@ func (mg *Spacecraft) ResolveReferences(ctx context.Context, c client.Reader) er
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -111,7 +112,7 @@ func (mg *Spacecraft) ResolveReferences(ctx context.Context, c client.Reader) er
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil

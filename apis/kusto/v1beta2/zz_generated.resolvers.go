@@ -15,6 +15,7 @@ import (
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	rconfig "github.com/upbound/provider-azure/apis/rconfig"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -33,7 +34,7 @@ func (mg *AttachedDatabaseConfiguration) ResolveReferences( // ResolveReferences
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ClusterName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ClusterName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ClusterNameRef,
 			Selector:     mg.Spec.ForProvider.ClusterNameSelector,
@@ -43,7 +44,7 @@ func (mg *AttachedDatabaseConfiguration) ResolveReferences( // ResolveReferences
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ClusterName")
 	}
-	mg.Spec.ForProvider.ClusterName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ClusterName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ClusterNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("kusto.azure.upbound.io", "v1beta2", "Cluster", "ClusterList")
@@ -52,7 +53,7 @@ func (mg *AttachedDatabaseConfiguration) ResolveReferences( // ResolveReferences
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ClusterResourceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ClusterResourceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.ClusterResourceIDRef,
 			Selector:     mg.Spec.ForProvider.ClusterResourceIDSelector,
@@ -62,7 +63,7 @@ func (mg *AttachedDatabaseConfiguration) ResolveReferences( // ResolveReferences
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ClusterResourceID")
 	}
-	mg.Spec.ForProvider.ClusterResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ClusterResourceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ClusterResourceIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("kusto.azure.upbound.io", "v1beta1", "Database", "DatabaseList")
@@ -71,7 +72,7 @@ func (mg *AttachedDatabaseConfiguration) ResolveReferences( // ResolveReferences
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.DatabaseName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.DatabaseNameRef,
 			Selector:     mg.Spec.ForProvider.DatabaseNameSelector,
@@ -81,7 +82,7 @@ func (mg *AttachedDatabaseConfiguration) ResolveReferences( // ResolveReferences
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.DatabaseName")
 	}
-	mg.Spec.ForProvider.DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DatabaseName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DatabaseNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -90,7 +91,7 @@ func (mg *AttachedDatabaseConfiguration) ResolveReferences( // ResolveReferences
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -100,7 +101,7 @@ func (mg *AttachedDatabaseConfiguration) ResolveReferences( // ResolveReferences
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("kusto.azure.upbound.io", "v1beta2", "Cluster", "ClusterList")
@@ -109,7 +110,7 @@ func (mg *AttachedDatabaseConfiguration) ResolveReferences( // ResolveReferences
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ClusterName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ClusterName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.ClusterNameRef,
 			Selector:     mg.Spec.InitProvider.ClusterNameSelector,
@@ -119,7 +120,7 @@ func (mg *AttachedDatabaseConfiguration) ResolveReferences( // ResolveReferences
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ClusterName")
 	}
-	mg.Spec.InitProvider.ClusterName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ClusterName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ClusterNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("kusto.azure.upbound.io", "v1beta2", "Cluster", "ClusterList")
@@ -128,7 +129,7 @@ func (mg *AttachedDatabaseConfiguration) ResolveReferences( // ResolveReferences
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ClusterResourceID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ClusterResourceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.ClusterResourceIDRef,
 			Selector:     mg.Spec.InitProvider.ClusterResourceIDSelector,
@@ -138,7 +139,7 @@ func (mg *AttachedDatabaseConfiguration) ResolveReferences( // ResolveReferences
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ClusterResourceID")
 	}
-	mg.Spec.InitProvider.ClusterResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ClusterResourceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ClusterResourceIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("kusto.azure.upbound.io", "v1beta1", "Database", "DatabaseList")
@@ -147,7 +148,7 @@ func (mg *AttachedDatabaseConfiguration) ResolveReferences( // ResolveReferences
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DatabaseName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.DatabaseName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.DatabaseNameRef,
 			Selector:     mg.Spec.InitProvider.DatabaseNameSelector,
@@ -157,7 +158,7 @@ func (mg *AttachedDatabaseConfiguration) ResolveReferences( // ResolveReferences
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.DatabaseName")
 	}
-	mg.Spec.InitProvider.DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DatabaseName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DatabaseNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -166,7 +167,7 @@ func (mg *AttachedDatabaseConfiguration) ResolveReferences( // ResolveReferences
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
@@ -176,7 +177,7 @@ func (mg *AttachedDatabaseConfiguration) ResolveReferences( // ResolveReferences
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
 	}
-	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -197,7 +198,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -207,7 +208,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	if mg.Spec.ForProvider.VirtualNetworkConfiguration != nil {
@@ -217,7 +218,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VirtualNetworkConfiguration.SubnetID),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.VirtualNetworkConfiguration.SubnetID, ""),
 				Extract:      rconfig.ExtractResourceID(),
 				Reference:    mg.Spec.ForProvider.VirtualNetworkConfiguration.SubnetIDRef,
 				Selector:     mg.Spec.ForProvider.VirtualNetworkConfiguration.SubnetIDSelector,
@@ -227,7 +228,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.VirtualNetworkConfiguration.SubnetID")
 		}
-		mg.Spec.ForProvider.VirtualNetworkConfiguration.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.VirtualNetworkConfiguration.SubnetID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.VirtualNetworkConfiguration.SubnetIDRef = rsp.ResolvedReference
 
 	}
@@ -238,7 +239,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VirtualNetworkConfiguration.SubnetID),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.VirtualNetworkConfiguration.SubnetID, ""),
 				Extract:      rconfig.ExtractResourceID(),
 				Reference:    mg.Spec.InitProvider.VirtualNetworkConfiguration.SubnetIDRef,
 				Selector:     mg.Spec.InitProvider.VirtualNetworkConfiguration.SubnetIDSelector,
@@ -248,7 +249,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.VirtualNetworkConfiguration.SubnetID")
 		}
-		mg.Spec.InitProvider.VirtualNetworkConfiguration.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.VirtualNetworkConfiguration.SubnetID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.VirtualNetworkConfiguration.SubnetIDRef = rsp.ResolvedReference
 
 	}

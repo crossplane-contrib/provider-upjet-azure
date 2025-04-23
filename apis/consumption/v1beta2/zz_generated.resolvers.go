@@ -9,12 +9,14 @@ package v1beta2
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
+	helper "github.com/crossplane/crossplane-tools/pkg/helpers"
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	rconfig "github.com/upbound/provider-azure/apis/rconfig"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -36,7 +38,7 @@ func (mg *BudgetManagementGroup) ResolveReferences( // ResolveReferences of this
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-					CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Filter.Dimension[i4].Values),
+					CurrentValues: helper.FromPtrValues(mg.Spec.ForProvider.Filter.Dimension[i4].Values),
 					Extract:       reference.ExternalName(),
 					References:    mg.Spec.ForProvider.Filter.Dimension[i4].ValuesRefs,
 					Selector:      mg.Spec.ForProvider.Filter.Dimension[i4].ValuesSelector,
@@ -46,7 +48,7 @@ func (mg *BudgetManagementGroup) ResolveReferences( // ResolveReferences of this
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.ForProvider.Filter.Dimension[i4].Values")
 			}
-			mg.Spec.ForProvider.Filter.Dimension[i4].Values = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.ForProvider.Filter.Dimension[i4].Values = helper.ToPtrValues(mrsp.ResolvedValues)
 			mg.Spec.ForProvider.Filter.Dimension[i4].ValuesRefs = mrsp.ResolvedReferences
 
 		}
@@ -57,7 +59,7 @@ func (mg *BudgetManagementGroup) ResolveReferences( // ResolveReferences of this
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagementGroupID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ManagementGroupID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.ManagementGroupIDRef,
 			Selector:     mg.Spec.ForProvider.ManagementGroupIDSelector,
@@ -67,7 +69,7 @@ func (mg *BudgetManagementGroup) ResolveReferences( // ResolveReferences of this
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ManagementGroupID")
 	}
-	mg.Spec.ForProvider.ManagementGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ManagementGroupID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ManagementGroupIDRef = rsp.ResolvedReference
 
 	if mg.Spec.InitProvider.Filter != nil {
@@ -78,7 +80,7 @@ func (mg *BudgetManagementGroup) ResolveReferences( // ResolveReferences of this
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-					CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Filter.Dimension[i4].Values),
+					CurrentValues: helper.FromPtrValues(mg.Spec.InitProvider.Filter.Dimension[i4].Values),
 					Extract:       reference.ExternalName(),
 					References:    mg.Spec.InitProvider.Filter.Dimension[i4].ValuesRefs,
 					Selector:      mg.Spec.InitProvider.Filter.Dimension[i4].ValuesSelector,
@@ -88,7 +90,7 @@ func (mg *BudgetManagementGroup) ResolveReferences( // ResolveReferences of this
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.InitProvider.Filter.Dimension[i4].Values")
 			}
-			mg.Spec.InitProvider.Filter.Dimension[i4].Values = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.InitProvider.Filter.Dimension[i4].Values = helper.ToPtrValues(mrsp.ResolvedValues)
 			mg.Spec.InitProvider.Filter.Dimension[i4].ValuesRefs = mrsp.ResolvedReferences
 
 		}
@@ -99,7 +101,7 @@ func (mg *BudgetManagementGroup) ResolveReferences( // ResolveReferences of this
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagementGroupID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ManagementGroupID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.ManagementGroupIDRef,
 			Selector:     mg.Spec.InitProvider.ManagementGroupIDSelector,
@@ -109,7 +111,7 @@ func (mg *BudgetManagementGroup) ResolveReferences( // ResolveReferences of this
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ManagementGroupID")
 	}
-	mg.Spec.InitProvider.ManagementGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ManagementGroupID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ManagementGroupIDRef = rsp.ResolvedReference
 
 	return nil
@@ -133,7 +135,7 @@ func (mg *BudgetResourceGroup) ResolveReferences(ctx context.Context, c client.R
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-					CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Filter.Dimension[i4].Values),
+					CurrentValues: helper.FromPtrValues(mg.Spec.ForProvider.Filter.Dimension[i4].Values),
 					Extract:       resource.ExtractResourceID(),
 					References:    mg.Spec.ForProvider.Filter.Dimension[i4].ValuesRefs,
 					Selector:      mg.Spec.ForProvider.Filter.Dimension[i4].ValuesSelector,
@@ -143,7 +145,7 @@ func (mg *BudgetResourceGroup) ResolveReferences(ctx context.Context, c client.R
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.ForProvider.Filter.Dimension[i4].Values")
 			}
-			mg.Spec.ForProvider.Filter.Dimension[i4].Values = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.ForProvider.Filter.Dimension[i4].Values = helper.ToPtrValues(mrsp.ResolvedValues)
 			mg.Spec.ForProvider.Filter.Dimension[i4].ValuesRefs = mrsp.ResolvedReferences
 
 		}
@@ -155,7 +157,7 @@ func (mg *BudgetResourceGroup) ResolveReferences(ctx context.Context, c client.R
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Notification[i3].ContactGroups),
+				CurrentValues: helper.FromPtrValues(mg.Spec.ForProvider.Notification[i3].ContactGroups),
 				Extract:       resource.ExtractResourceID(),
 				References:    mg.Spec.ForProvider.Notification[i3].ContactGroupsRefs,
 				Selector:      mg.Spec.ForProvider.Notification[i3].ContactGroupsSelector,
@@ -165,7 +167,7 @@ func (mg *BudgetResourceGroup) ResolveReferences(ctx context.Context, c client.R
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.Notification[i3].ContactGroups")
 		}
-		mg.Spec.ForProvider.Notification[i3].ContactGroups = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.ForProvider.Notification[i3].ContactGroups = helper.ToPtrValues(mrsp.ResolvedValues)
 		mg.Spec.ForProvider.Notification[i3].ContactGroupsRefs = mrsp.ResolvedReferences
 
 	}
@@ -175,7 +177,7 @@ func (mg *BudgetResourceGroup) ResolveReferences(ctx context.Context, c client.R
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupIDRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupIDSelector,
@@ -185,7 +187,7 @@ func (mg *BudgetResourceGroup) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupID")
 	}
-	mg.Spec.ForProvider.ResourceGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupIDRef = rsp.ResolvedReference
 
 	if mg.Spec.InitProvider.Filter != nil {
@@ -196,7 +198,7 @@ func (mg *BudgetResourceGroup) ResolveReferences(ctx context.Context, c client.R
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-					CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Filter.Dimension[i4].Values),
+					CurrentValues: helper.FromPtrValues(mg.Spec.InitProvider.Filter.Dimension[i4].Values),
 					Extract:       resource.ExtractResourceID(),
 					References:    mg.Spec.InitProvider.Filter.Dimension[i4].ValuesRefs,
 					Selector:      mg.Spec.InitProvider.Filter.Dimension[i4].ValuesSelector,
@@ -206,7 +208,7 @@ func (mg *BudgetResourceGroup) ResolveReferences(ctx context.Context, c client.R
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.InitProvider.Filter.Dimension[i4].Values")
 			}
-			mg.Spec.InitProvider.Filter.Dimension[i4].Values = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.InitProvider.Filter.Dimension[i4].Values = helper.ToPtrValues(mrsp.ResolvedValues)
 			mg.Spec.InitProvider.Filter.Dimension[i4].ValuesRefs = mrsp.ResolvedReferences
 
 		}
@@ -218,7 +220,7 @@ func (mg *BudgetResourceGroup) ResolveReferences(ctx context.Context, c client.R
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Notification[i3].ContactGroups),
+				CurrentValues: helper.FromPtrValues(mg.Spec.InitProvider.Notification[i3].ContactGroups),
 				Extract:       resource.ExtractResourceID(),
 				References:    mg.Spec.InitProvider.Notification[i3].ContactGroupsRefs,
 				Selector:      mg.Spec.InitProvider.Notification[i3].ContactGroupsSelector,
@@ -228,7 +230,7 @@ func (mg *BudgetResourceGroup) ResolveReferences(ctx context.Context, c client.R
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.Notification[i3].ContactGroups")
 		}
-		mg.Spec.InitProvider.Notification[i3].ContactGroups = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.Notification[i3].ContactGroups = helper.ToPtrValues(mrsp.ResolvedValues)
 		mg.Spec.InitProvider.Notification[i3].ContactGroupsRefs = mrsp.ResolvedReferences
 
 	}
@@ -238,7 +240,7 @@ func (mg *BudgetResourceGroup) ResolveReferences(ctx context.Context, c client.R
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ResourceGroupID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupIDRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupIDSelector,
@@ -248,7 +250,7 @@ func (mg *BudgetResourceGroup) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupID")
 	}
-	mg.Spec.InitProvider.ResourceGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ResourceGroupIDRef = rsp.ResolvedReference
 
 	return nil
@@ -271,7 +273,7 @@ func (mg *BudgetSubscription) ResolveReferences(ctx context.Context, c client.Re
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-					CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Filter.Dimension[i4].Values),
+					CurrentValues: helper.FromPtrValues(mg.Spec.ForProvider.Filter.Dimension[i4].Values),
 					Extract:       reference.ExternalName(),
 					References:    mg.Spec.ForProvider.Filter.Dimension[i4].ValuesRefs,
 					Selector:      mg.Spec.ForProvider.Filter.Dimension[i4].ValuesSelector,
@@ -281,7 +283,7 @@ func (mg *BudgetSubscription) ResolveReferences(ctx context.Context, c client.Re
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.ForProvider.Filter.Dimension[i4].Values")
 			}
-			mg.Spec.ForProvider.Filter.Dimension[i4].Values = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.ForProvider.Filter.Dimension[i4].Values = helper.ToPtrValues(mrsp.ResolvedValues)
 			mg.Spec.ForProvider.Filter.Dimension[i4].ValuesRefs = mrsp.ResolvedReferences
 
 		}
@@ -293,7 +295,7 @@ func (mg *BudgetSubscription) ResolveReferences(ctx context.Context, c client.Re
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Notification[i3].ContactGroups),
+				CurrentValues: helper.FromPtrValues(mg.Spec.ForProvider.Notification[i3].ContactGroups),
 				Extract:       rconfig.ExtractResourceID(),
 				References:    mg.Spec.ForProvider.Notification[i3].ContactGroupsRefs,
 				Selector:      mg.Spec.ForProvider.Notification[i3].ContactGroupsSelector,
@@ -303,7 +305,7 @@ func (mg *BudgetSubscription) ResolveReferences(ctx context.Context, c client.Re
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.Notification[i3].ContactGroups")
 		}
-		mg.Spec.ForProvider.Notification[i3].ContactGroups = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.ForProvider.Notification[i3].ContactGroups = helper.ToPtrValues(mrsp.ResolvedValues)
 		mg.Spec.ForProvider.Notification[i3].ContactGroupsRefs = mrsp.ResolvedReferences
 
 	}
@@ -315,7 +317,7 @@ func (mg *BudgetSubscription) ResolveReferences(ctx context.Context, c client.Re
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-					CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Filter.Dimension[i4].Values),
+					CurrentValues: helper.FromPtrValues(mg.Spec.InitProvider.Filter.Dimension[i4].Values),
 					Extract:       reference.ExternalName(),
 					References:    mg.Spec.InitProvider.Filter.Dimension[i4].ValuesRefs,
 					Selector:      mg.Spec.InitProvider.Filter.Dimension[i4].ValuesSelector,
@@ -325,7 +327,7 @@ func (mg *BudgetSubscription) ResolveReferences(ctx context.Context, c client.Re
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.InitProvider.Filter.Dimension[i4].Values")
 			}
-			mg.Spec.InitProvider.Filter.Dimension[i4].Values = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.InitProvider.Filter.Dimension[i4].Values = helper.ToPtrValues(mrsp.ResolvedValues)
 			mg.Spec.InitProvider.Filter.Dimension[i4].ValuesRefs = mrsp.ResolvedReferences
 
 		}
@@ -337,7 +339,7 @@ func (mg *BudgetSubscription) ResolveReferences(ctx context.Context, c client.Re
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Notification[i3].ContactGroups),
+				CurrentValues: helper.FromPtrValues(mg.Spec.InitProvider.Notification[i3].ContactGroups),
 				Extract:       rconfig.ExtractResourceID(),
 				References:    mg.Spec.InitProvider.Notification[i3].ContactGroupsRefs,
 				Selector:      mg.Spec.InitProvider.Notification[i3].ContactGroupsSelector,
@@ -347,7 +349,7 @@ func (mg *BudgetSubscription) ResolveReferences(ctx context.Context, c client.Re
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.Notification[i3].ContactGroups")
 		}
-		mg.Spec.InitProvider.Notification[i3].ContactGroups = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.Notification[i3].ContactGroups = helper.ToPtrValues(mrsp.ResolvedValues)
 		mg.Spec.InitProvider.Notification[i3].ContactGroupsRefs = mrsp.ResolvedReferences
 
 	}

@@ -14,6 +14,7 @@ import (
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -32,7 +33,7 @@ func (mg *ResourceGroupPolicyAssignment) ResolveReferences( // ResolveReferences
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PolicyDefinitionID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.PolicyDefinitionID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.PolicyDefinitionIDRef,
 			Selector:     mg.Spec.ForProvider.PolicyDefinitionIDSelector,
@@ -42,7 +43,7 @@ func (mg *ResourceGroupPolicyAssignment) ResolveReferences( // ResolveReferences
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.PolicyDefinitionID")
 	}
-	mg.Spec.ForProvider.PolicyDefinitionID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.PolicyDefinitionID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PolicyDefinitionIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -51,7 +52,7 @@ func (mg *ResourceGroupPolicyAssignment) ResolveReferences( // ResolveReferences
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupIDRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupIDSelector,
@@ -61,7 +62,7 @@ func (mg *ResourceGroupPolicyAssignment) ResolveReferences( // ResolveReferences
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupID")
 	}
-	mg.Spec.ForProvider.ResourceGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("authorization.azure.upbound.io", "v1beta1", "PolicyDefinition", "PolicyDefinitionList")
@@ -70,7 +71,7 @@ func (mg *ResourceGroupPolicyAssignment) ResolveReferences( // ResolveReferences
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PolicyDefinitionID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.PolicyDefinitionID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.PolicyDefinitionIDRef,
 			Selector:     mg.Spec.InitProvider.PolicyDefinitionIDSelector,
@@ -80,7 +81,7 @@ func (mg *ResourceGroupPolicyAssignment) ResolveReferences( // ResolveReferences
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.PolicyDefinitionID")
 	}
-	mg.Spec.InitProvider.PolicyDefinitionID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PolicyDefinitionID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.PolicyDefinitionIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -89,7 +90,7 @@ func (mg *ResourceGroupPolicyAssignment) ResolveReferences( // ResolveReferences
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ResourceGroupID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupIDRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupIDSelector,
@@ -99,7 +100,7 @@ func (mg *ResourceGroupPolicyAssignment) ResolveReferences( // ResolveReferences
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupID")
 	}
-	mg.Spec.InitProvider.ResourceGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ResourceGroupIDRef = rsp.ResolvedReference
 
 	return nil
@@ -120,7 +121,7 @@ func (mg *ResourcePolicyAssignment) ResolveReferences(ctx context.Context, c cli
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PolicyDefinitionID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.PolicyDefinitionID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.PolicyDefinitionIDRef,
 			Selector:     mg.Spec.ForProvider.PolicyDefinitionIDSelector,
@@ -130,7 +131,7 @@ func (mg *ResourcePolicyAssignment) ResolveReferences(ctx context.Context, c cli
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.PolicyDefinitionID")
 	}
-	mg.Spec.ForProvider.PolicyDefinitionID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.PolicyDefinitionID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PolicyDefinitionIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("authorization.azure.upbound.io", "v1beta1", "PolicyDefinition", "PolicyDefinitionList")
@@ -139,7 +140,7 @@ func (mg *ResourcePolicyAssignment) ResolveReferences(ctx context.Context, c cli
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PolicyDefinitionID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.PolicyDefinitionID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.PolicyDefinitionIDRef,
 			Selector:     mg.Spec.InitProvider.PolicyDefinitionIDSelector,
@@ -149,7 +150,7 @@ func (mg *ResourcePolicyAssignment) ResolveReferences(ctx context.Context, c cli
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.PolicyDefinitionID")
 	}
-	mg.Spec.InitProvider.PolicyDefinitionID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PolicyDefinitionID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.PolicyDefinitionIDRef = rsp.ResolvedReference
 
 	return nil
@@ -170,7 +171,7 @@ func (mg *SubscriptionPolicyAssignment) ResolveReferences(ctx context.Context, c
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PolicyDefinitionID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.PolicyDefinitionID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.PolicyDefinitionIDRef,
 			Selector:     mg.Spec.ForProvider.PolicyDefinitionIDSelector,
@@ -180,7 +181,7 @@ func (mg *SubscriptionPolicyAssignment) ResolveReferences(ctx context.Context, c
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.PolicyDefinitionID")
 	}
-	mg.Spec.ForProvider.PolicyDefinitionID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.PolicyDefinitionID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PolicyDefinitionIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("authorization.azure.upbound.io", "v1beta1", "PolicyDefinition", "PolicyDefinitionList")
@@ -189,7 +190,7 @@ func (mg *SubscriptionPolicyAssignment) ResolveReferences(ctx context.Context, c
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PolicyDefinitionID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.PolicyDefinitionID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.PolicyDefinitionIDRef,
 			Selector:     mg.Spec.InitProvider.PolicyDefinitionIDSelector,
@@ -199,7 +200,7 @@ func (mg *SubscriptionPolicyAssignment) ResolveReferences(ctx context.Context, c
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.PolicyDefinitionID")
 	}
-	mg.Spec.InitProvider.PolicyDefinitionID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PolicyDefinitionID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.PolicyDefinitionIDRef = rsp.ResolvedReference
 
 	return nil

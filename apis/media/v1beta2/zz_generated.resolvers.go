@@ -16,6 +16,7 @@ import (
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -34,7 +35,7 @@ func (mg *AssetFilter) ResolveReferences( // ResolveReferences of this AssetFilt
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AssetID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.AssetID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.AssetIDRef,
 			Selector:     mg.Spec.ForProvider.AssetIDSelector,
@@ -44,7 +45,7 @@ func (mg *AssetFilter) ResolveReferences( // ResolveReferences of this AssetFilt
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.AssetID")
 	}
-	mg.Spec.ForProvider.AssetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AssetID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AssetIDRef = rsp.ResolvedReference
 
 	return nil
@@ -65,7 +66,7 @@ func (mg *ContentKeyPolicy) ResolveReferences(ctx context.Context, c client.Read
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MediaServicesAccountName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.MediaServicesAccountName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.MediaServicesAccountNameRef,
 			Selector:     mg.Spec.ForProvider.MediaServicesAccountNameSelector,
@@ -75,7 +76,7 @@ func (mg *ContentKeyPolicy) ResolveReferences(ctx context.Context, c client.Read
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.MediaServicesAccountName")
 	}
-	mg.Spec.ForProvider.MediaServicesAccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.MediaServicesAccountName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.MediaServicesAccountNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -84,7 +85,7 @@ func (mg *ContentKeyPolicy) ResolveReferences(ctx context.Context, c client.Read
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -94,7 +95,7 @@ func (mg *ContentKeyPolicy) ResolveReferences(ctx context.Context, c client.Read
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -116,7 +117,7 @@ func (mg *Job) ResolveReferences(ctx context.Context, c client.Reader) error {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.InputAsset.Name),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.InputAsset.Name, ""),
 				Extract:      reference.ExternalName(),
 				Reference:    mg.Spec.ForProvider.InputAsset.NameRef,
 				Selector:     mg.Spec.ForProvider.InputAsset.NameSelector,
@@ -126,7 +127,7 @@ func (mg *Job) ResolveReferences(ctx context.Context, c client.Reader) error {
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.InputAsset.Name")
 		}
-		mg.Spec.ForProvider.InputAsset.Name = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.InputAsset.Name = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.InputAsset.NameRef = rsp.ResolvedReference
 
 	}
@@ -136,7 +137,7 @@ func (mg *Job) ResolveReferences(ctx context.Context, c client.Reader) error {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MediaServicesAccountName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.MediaServicesAccountName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.MediaServicesAccountNameRef,
 			Selector:     mg.Spec.ForProvider.MediaServicesAccountNameSelector,
@@ -146,7 +147,7 @@ func (mg *Job) ResolveReferences(ctx context.Context, c client.Reader) error {
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.MediaServicesAccountName")
 	}
-	mg.Spec.ForProvider.MediaServicesAccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.MediaServicesAccountName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.MediaServicesAccountNameRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.OutputAsset); i3++ {
@@ -156,7 +157,7 @@ func (mg *Job) ResolveReferences(ctx context.Context, c client.Reader) error {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OutputAsset[i3].Name),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.OutputAsset[i3].Name, ""),
 				Extract:      reference.ExternalName(),
 				Reference:    mg.Spec.ForProvider.OutputAsset[i3].NameRef,
 				Selector:     mg.Spec.ForProvider.OutputAsset[i3].NameSelector,
@@ -166,7 +167,7 @@ func (mg *Job) ResolveReferences(ctx context.Context, c client.Reader) error {
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.OutputAsset[i3].Name")
 		}
-		mg.Spec.ForProvider.OutputAsset[i3].Name = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.OutputAsset[i3].Name = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.OutputAsset[i3].NameRef = rsp.ResolvedReference
 
 	}
@@ -176,7 +177,7 @@ func (mg *Job) ResolveReferences(ctx context.Context, c client.Reader) error {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -186,7 +187,7 @@ func (mg *Job) ResolveReferences(ctx context.Context, c client.Reader) error {
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("media.azure.upbound.io", "v1beta2", "Transform", "TransformList")
@@ -195,7 +196,7 @@ func (mg *Job) ResolveReferences(ctx context.Context, c client.Reader) error {
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TransformName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.TransformName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.TransformNameRef,
 			Selector:     mg.Spec.ForProvider.TransformNameSelector,
@@ -205,7 +206,7 @@ func (mg *Job) ResolveReferences(ctx context.Context, c client.Reader) error {
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.TransformName")
 	}
-	mg.Spec.ForProvider.TransformName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.TransformName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TransformNameRef = rsp.ResolvedReference
 
 	if mg.Spec.InitProvider.InputAsset != nil {
@@ -215,7 +216,7 @@ func (mg *Job) ResolveReferences(ctx context.Context, c client.Reader) error {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InputAsset.Name),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.InputAsset.Name, ""),
 				Extract:      reference.ExternalName(),
 				Reference:    mg.Spec.InitProvider.InputAsset.NameRef,
 				Selector:     mg.Spec.InitProvider.InputAsset.NameSelector,
@@ -225,7 +226,7 @@ func (mg *Job) ResolveReferences(ctx context.Context, c client.Reader) error {
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.InputAsset.Name")
 		}
-		mg.Spec.InitProvider.InputAsset.Name = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.InputAsset.Name = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.InputAsset.NameRef = rsp.ResolvedReference
 
 	}
@@ -236,7 +237,7 @@ func (mg *Job) ResolveReferences(ctx context.Context, c client.Reader) error {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.OutputAsset[i3].Name),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.OutputAsset[i3].Name, ""),
 				Extract:      reference.ExternalName(),
 				Reference:    mg.Spec.InitProvider.OutputAsset[i3].NameRef,
 				Selector:     mg.Spec.InitProvider.OutputAsset[i3].NameSelector,
@@ -246,7 +247,7 @@ func (mg *Job) ResolveReferences(ctx context.Context, c client.Reader) error {
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.OutputAsset[i3].Name")
 		}
-		mg.Spec.InitProvider.OutputAsset[i3].Name = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.OutputAsset[i3].Name = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.OutputAsset[i3].NameRef = rsp.ResolvedReference
 
 	}
@@ -269,7 +270,7 @@ func (mg *LiveEvent) ResolveReferences(ctx context.Context, c client.Reader) err
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MediaServicesAccountName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.MediaServicesAccountName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.MediaServicesAccountNameRef,
 			Selector:     mg.Spec.ForProvider.MediaServicesAccountNameSelector,
@@ -279,7 +280,7 @@ func (mg *LiveEvent) ResolveReferences(ctx context.Context, c client.Reader) err
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.MediaServicesAccountName")
 	}
-	mg.Spec.ForProvider.MediaServicesAccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.MediaServicesAccountName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.MediaServicesAccountNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -288,7 +289,7 @@ func (mg *LiveEvent) ResolveReferences(ctx context.Context, c client.Reader) err
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -298,7 +299,7 @@ func (mg *LiveEvent) ResolveReferences(ctx context.Context, c client.Reader) err
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -319,7 +320,7 @@ func (mg *ServicesAccount) ResolveReferences(ctx context.Context, c client.Reade
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -329,7 +330,7 @@ func (mg *ServicesAccount) ResolveReferences(ctx context.Context, c client.Reade
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.StorageAccount); i3++ {
@@ -339,7 +340,7 @@ func (mg *ServicesAccount) ResolveReferences(ctx context.Context, c client.Reade
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccount[i3].ID),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.StorageAccount[i3].ID, ""),
 				Extract:      rconfig.ExtractResourceID(),
 				Reference:    mg.Spec.ForProvider.StorageAccount[i3].IDRef,
 				Selector:     mg.Spec.ForProvider.StorageAccount[i3].IDSelector,
@@ -349,7 +350,7 @@ func (mg *ServicesAccount) ResolveReferences(ctx context.Context, c client.Reade
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.StorageAccount[i3].ID")
 		}
-		mg.Spec.ForProvider.StorageAccount[i3].ID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.StorageAccount[i3].ID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.StorageAccount[i3].IDRef = rsp.ResolvedReference
 
 	}
@@ -360,7 +361,7 @@ func (mg *ServicesAccount) ResolveReferences(ctx context.Context, c client.Reade
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccount[i3].ID),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.StorageAccount[i3].ID, ""),
 				Extract:      rconfig.ExtractResourceID(),
 				Reference:    mg.Spec.InitProvider.StorageAccount[i3].IDRef,
 				Selector:     mg.Spec.InitProvider.StorageAccount[i3].IDSelector,
@@ -370,7 +371,7 @@ func (mg *ServicesAccount) ResolveReferences(ctx context.Context, c client.Reade
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccount[i3].ID")
 		}
-		mg.Spec.InitProvider.StorageAccount[i3].ID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.StorageAccount[i3].ID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.StorageAccount[i3].IDRef = rsp.ResolvedReference
 
 	}
@@ -393,7 +394,7 @@ func (mg *ServicesAccountFilter) ResolveReferences(ctx context.Context, c client
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MediaServicesAccountName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.MediaServicesAccountName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.MediaServicesAccountNameRef,
 			Selector:     mg.Spec.ForProvider.MediaServicesAccountNameSelector,
@@ -403,7 +404,7 @@ func (mg *ServicesAccountFilter) ResolveReferences(ctx context.Context, c client
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.MediaServicesAccountName")
 	}
-	mg.Spec.ForProvider.MediaServicesAccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.MediaServicesAccountName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.MediaServicesAccountNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -412,7 +413,7 @@ func (mg *ServicesAccountFilter) ResolveReferences(ctx context.Context, c client
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -422,7 +423,7 @@ func (mg *ServicesAccountFilter) ResolveReferences(ctx context.Context, c client
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -443,7 +444,7 @@ func (mg *StreamingEndpoint) ResolveReferences(ctx context.Context, c client.Rea
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MediaServicesAccountName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.MediaServicesAccountName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.MediaServicesAccountNameRef,
 			Selector:     mg.Spec.ForProvider.MediaServicesAccountNameSelector,
@@ -453,7 +454,7 @@ func (mg *StreamingEndpoint) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.MediaServicesAccountName")
 	}
-	mg.Spec.ForProvider.MediaServicesAccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.MediaServicesAccountName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.MediaServicesAccountNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -462,7 +463,7 @@ func (mg *StreamingEndpoint) ResolveReferences(ctx context.Context, c client.Rea
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -472,7 +473,7 @@ func (mg *StreamingEndpoint) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -495,7 +496,7 @@ func (mg *StreamingPolicy) ResolveReferences(ctx context.Context, c client.Reade
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CommonEncryptionCenc.DefaultContentKey.PolicyName),
+					CurrentValue: ptr.Deref(mg.Spec.ForProvider.CommonEncryptionCenc.DefaultContentKey.PolicyName, ""),
 					Extract:      reference.ExternalName(),
 					Reference:    mg.Spec.ForProvider.CommonEncryptionCenc.DefaultContentKey.PolicyNameRef,
 					Selector:     mg.Spec.ForProvider.CommonEncryptionCenc.DefaultContentKey.PolicyNameSelector,
@@ -505,7 +506,7 @@ func (mg *StreamingPolicy) ResolveReferences(ctx context.Context, c client.Reade
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.ForProvider.CommonEncryptionCenc.DefaultContentKey.PolicyName")
 			}
-			mg.Spec.ForProvider.CommonEncryptionCenc.DefaultContentKey.PolicyName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.CommonEncryptionCenc.DefaultContentKey.PolicyName = ptr.To(rsp.ResolvedValue)
 			mg.Spec.ForProvider.CommonEncryptionCenc.DefaultContentKey.PolicyNameRef = rsp.ResolvedReference
 
 		}
@@ -516,7 +517,7 @@ func (mg *StreamingPolicy) ResolveReferences(ctx context.Context, c client.Reade
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MediaServicesAccountName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.MediaServicesAccountName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.MediaServicesAccountNameRef,
 			Selector:     mg.Spec.ForProvider.MediaServicesAccountNameSelector,
@@ -526,7 +527,7 @@ func (mg *StreamingPolicy) ResolveReferences(ctx context.Context, c client.Reade
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.MediaServicesAccountName")
 	}
-	mg.Spec.ForProvider.MediaServicesAccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.MediaServicesAccountName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.MediaServicesAccountNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -535,7 +536,7 @@ func (mg *StreamingPolicy) ResolveReferences(ctx context.Context, c client.Reade
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -545,7 +546,7 @@ func (mg *StreamingPolicy) ResolveReferences(ctx context.Context, c client.Reade
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	if mg.Spec.InitProvider.CommonEncryptionCenc != nil {
@@ -556,7 +557,7 @@ func (mg *StreamingPolicy) ResolveReferences(ctx context.Context, c client.Reade
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CommonEncryptionCenc.DefaultContentKey.PolicyName),
+					CurrentValue: ptr.Deref(mg.Spec.InitProvider.CommonEncryptionCenc.DefaultContentKey.PolicyName, ""),
 					Extract:      reference.ExternalName(),
 					Reference:    mg.Spec.InitProvider.CommonEncryptionCenc.DefaultContentKey.PolicyNameRef,
 					Selector:     mg.Spec.InitProvider.CommonEncryptionCenc.DefaultContentKey.PolicyNameSelector,
@@ -566,7 +567,7 @@ func (mg *StreamingPolicy) ResolveReferences(ctx context.Context, c client.Reade
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.InitProvider.CommonEncryptionCenc.DefaultContentKey.PolicyName")
 			}
-			mg.Spec.InitProvider.CommonEncryptionCenc.DefaultContentKey.PolicyName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.CommonEncryptionCenc.DefaultContentKey.PolicyName = ptr.To(rsp.ResolvedValue)
 			mg.Spec.InitProvider.CommonEncryptionCenc.DefaultContentKey.PolicyNameRef = rsp.ResolvedReference
 
 		}
@@ -590,7 +591,7 @@ func (mg *Transform) ResolveReferences(ctx context.Context, c client.Reader) err
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MediaServicesAccountName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.MediaServicesAccountName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.MediaServicesAccountNameRef,
 			Selector:     mg.Spec.ForProvider.MediaServicesAccountNameSelector,
@@ -600,7 +601,7 @@ func (mg *Transform) ResolveReferences(ctx context.Context, c client.Reader) err
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.MediaServicesAccountName")
 	}
-	mg.Spec.ForProvider.MediaServicesAccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.MediaServicesAccountName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.MediaServicesAccountNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -609,7 +610,7 @@ func (mg *Transform) ResolveReferences(ctx context.Context, c client.Reader) err
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -619,7 +620,7 @@ func (mg *Transform) ResolveReferences(ctx context.Context, c client.Reader) err
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil

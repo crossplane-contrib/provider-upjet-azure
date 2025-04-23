@@ -13,6 +13,7 @@ import (
 	errors "github.com/pkg/errors"
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 
 	// ResolveReferences of this HPCCache.
@@ -33,7 +34,7 @@ func (mg *HPCCache) ResolveReferences(ctx context.Context, c client.Reader) erro
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -43,7 +44,7 @@ func (mg *HPCCache) ResolveReferences(ctx context.Context, c client.Reader) erro
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
@@ -52,7 +53,7 @@ func (mg *HPCCache) ResolveReferences(ctx context.Context, c client.Reader) erro
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.SubnetID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.SubnetIDRef,
 			Selector:     mg.Spec.ForProvider.SubnetIDSelector,
@@ -62,7 +63,7 @@ func (mg *HPCCache) ResolveReferences(ctx context.Context, c client.Reader) erro
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.SubnetID")
 	}
-	mg.Spec.ForProvider.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SubnetID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SubnetIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
@@ -71,7 +72,7 @@ func (mg *HPCCache) ResolveReferences(ctx context.Context, c client.Reader) erro
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubnetID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.SubnetID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.SubnetIDRef,
 			Selector:     mg.Spec.InitProvider.SubnetIDSelector,
@@ -81,7 +82,7 @@ func (mg *HPCCache) ResolveReferences(ctx context.Context, c client.Reader) erro
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.SubnetID")
 	}
-	mg.Spec.InitProvider.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SubnetID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.SubnetIDRef = rsp.ResolvedReference
 
 	return nil
@@ -102,7 +103,7 @@ func (mg *HPCCacheAccessPolicy) ResolveReferences(ctx context.Context, c client.
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.HPCCacheID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.HPCCacheID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.HPCCacheIDRef,
 			Selector:     mg.Spec.ForProvider.HPCCacheIDSelector,
@@ -112,7 +113,7 @@ func (mg *HPCCacheAccessPolicy) ResolveReferences(ctx context.Context, c client.
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.HPCCacheID")
 	}
-	mg.Spec.ForProvider.HPCCacheID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.HPCCacheID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.HPCCacheIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storagecache.azure.upbound.io", "v1beta2", "HPCCache", "HPCCacheList")
@@ -121,7 +122,7 @@ func (mg *HPCCacheAccessPolicy) ResolveReferences(ctx context.Context, c client.
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.HPCCacheID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.HPCCacheID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.HPCCacheIDRef,
 			Selector:     mg.Spec.InitProvider.HPCCacheIDSelector,
@@ -131,7 +132,7 @@ func (mg *HPCCacheAccessPolicy) ResolveReferences(ctx context.Context, c client.
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.HPCCacheID")
 	}
-	mg.Spec.InitProvider.HPCCacheID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.HPCCacheID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.HPCCacheIDRef = rsp.ResolvedReference
 
 	return nil
@@ -152,7 +153,7 @@ func (mg *HPCCacheBlobNFSTarget) ResolveReferences(ctx context.Context, c client
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CacheName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.CacheName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.CacheNameRef,
 			Selector:     mg.Spec.ForProvider.CacheNameSelector,
@@ -162,7 +163,7 @@ func (mg *HPCCacheBlobNFSTarget) ResolveReferences(ctx context.Context, c client
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.CacheName")
 	}
-	mg.Spec.ForProvider.CacheName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CacheName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CacheNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -171,7 +172,7 @@ func (mg *HPCCacheBlobNFSTarget) ResolveReferences(ctx context.Context, c client
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -181,7 +182,7 @@ func (mg *HPCCacheBlobNFSTarget) ResolveReferences(ctx context.Context, c client
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storagecache.azure.upbound.io", "v1beta2", "HPCCache", "HPCCacheList")
@@ -190,7 +191,7 @@ func (mg *HPCCacheBlobNFSTarget) ResolveReferences(ctx context.Context, c client
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CacheName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.CacheName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.CacheNameRef,
 			Selector:     mg.Spec.InitProvider.CacheNameSelector,
@@ -200,7 +201,7 @@ func (mg *HPCCacheBlobNFSTarget) ResolveReferences(ctx context.Context, c client
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.CacheName")
 	}
-	mg.Spec.InitProvider.CacheName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.CacheName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.CacheNameRef = rsp.ResolvedReference
 
 	return nil
@@ -221,7 +222,7 @@ func (mg *HPCCacheBlobTarget) ResolveReferences(ctx context.Context, c client.Re
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CacheName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.CacheName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.CacheNameRef,
 			Selector:     mg.Spec.ForProvider.CacheNameSelector,
@@ -231,7 +232,7 @@ func (mg *HPCCacheBlobTarget) ResolveReferences(ctx context.Context, c client.Re
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.CacheName")
 	}
-	mg.Spec.ForProvider.CacheName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CacheName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CacheNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -240,7 +241,7 @@ func (mg *HPCCacheBlobTarget) ResolveReferences(ctx context.Context, c client.Re
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -250,7 +251,7 @@ func (mg *HPCCacheBlobTarget) ResolveReferences(ctx context.Context, c client.Re
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Container", "ContainerList")
@@ -259,7 +260,7 @@ func (mg *HPCCacheBlobTarget) ResolveReferences(ctx context.Context, c client.Re
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageContainerID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.StorageContainerID, ""),
 			Extract:      resource.ExtractParamPath("resource_manager_id", true),
 			Reference:    mg.Spec.ForProvider.StorageContainerIDRef,
 			Selector:     mg.Spec.ForProvider.StorageContainerIDSelector,
@@ -269,7 +270,7 @@ func (mg *HPCCacheBlobTarget) ResolveReferences(ctx context.Context, c client.Re
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.StorageContainerID")
 	}
-	mg.Spec.ForProvider.StorageContainerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StorageContainerID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageContainerIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storagecache.azure.upbound.io", "v1beta2", "HPCCache", "HPCCacheList")
@@ -278,7 +279,7 @@ func (mg *HPCCacheBlobTarget) ResolveReferences(ctx context.Context, c client.Re
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CacheName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.CacheName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.CacheNameRef,
 			Selector:     mg.Spec.InitProvider.CacheNameSelector,
@@ -288,7 +289,7 @@ func (mg *HPCCacheBlobTarget) ResolveReferences(ctx context.Context, c client.Re
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.CacheName")
 	}
-	mg.Spec.InitProvider.CacheName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.CacheName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.CacheNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Container", "ContainerList")
@@ -297,7 +298,7 @@ func (mg *HPCCacheBlobTarget) ResolveReferences(ctx context.Context, c client.Re
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageContainerID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.StorageContainerID, ""),
 			Extract:      resource.ExtractParamPath("resource_manager_id", true),
 			Reference:    mg.Spec.InitProvider.StorageContainerIDRef,
 			Selector:     mg.Spec.InitProvider.StorageContainerIDSelector,
@@ -307,7 +308,7 @@ func (mg *HPCCacheBlobTarget) ResolveReferences(ctx context.Context, c client.Re
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.StorageContainerID")
 	}
-	mg.Spec.InitProvider.StorageContainerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageContainerID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.StorageContainerIDRef = rsp.ResolvedReference
 
 	return nil
@@ -328,7 +329,7 @@ func (mg *HPCCacheNFSTarget) ResolveReferences(ctx context.Context, c client.Rea
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CacheName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.CacheName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.CacheNameRef,
 			Selector:     mg.Spec.ForProvider.CacheNameSelector,
@@ -338,7 +339,7 @@ func (mg *HPCCacheNFSTarget) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.CacheName")
 	}
-	mg.Spec.ForProvider.CacheName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CacheName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CacheNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -347,7 +348,7 @@ func (mg *HPCCacheNFSTarget) ResolveReferences(ctx context.Context, c client.Rea
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -357,7 +358,7 @@ func (mg *HPCCacheNFSTarget) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storagecache.azure.upbound.io", "v1beta2", "HPCCache", "HPCCacheList")
@@ -366,7 +367,7 @@ func (mg *HPCCacheNFSTarget) ResolveReferences(ctx context.Context, c client.Rea
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CacheName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.CacheName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.CacheNameRef,
 			Selector:     mg.Spec.InitProvider.CacheNameSelector,
@@ -376,7 +377,7 @@ func (mg *HPCCacheNFSTarget) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.CacheName")
 	}
-	mg.Spec.InitProvider.CacheName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.CacheName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.CacheNameRef = rsp.ResolvedReference
 
 	return nil

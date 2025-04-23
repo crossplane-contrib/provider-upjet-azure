@@ -15,6 +15,7 @@ import (
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -33,7 +34,7 @@ func (mg *FunctionJavascriptUda) ResolveReferences( // ResolveReferences of this
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StreamAnalyticsJobID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.StreamAnalyticsJobID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.StreamAnalyticsJobIDRef,
 			Selector:     mg.Spec.ForProvider.StreamAnalyticsJobIDSelector,
@@ -43,7 +44,7 @@ func (mg *FunctionJavascriptUda) ResolveReferences( // ResolveReferences of this
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.StreamAnalyticsJobID")
 	}
-	mg.Spec.ForProvider.StreamAnalyticsJobID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StreamAnalyticsJobID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StreamAnalyticsJobIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("streamanalytics.azure.upbound.io", "v1beta2", "Job", "JobList")
@@ -52,7 +53,7 @@ func (mg *FunctionJavascriptUda) ResolveReferences( // ResolveReferences of this
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StreamAnalyticsJobID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.StreamAnalyticsJobID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.StreamAnalyticsJobIDRef,
 			Selector:     mg.Spec.InitProvider.StreamAnalyticsJobIDSelector,
@@ -62,7 +63,7 @@ func (mg *FunctionJavascriptUda) ResolveReferences( // ResolveReferences of this
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.StreamAnalyticsJobID")
 	}
-	mg.Spec.InitProvider.StreamAnalyticsJobID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StreamAnalyticsJobID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.StreamAnalyticsJobIDRef = rsp.ResolvedReference
 
 	return nil
@@ -83,7 +84,7 @@ func (mg *Job) ResolveReferences(ctx context.Context, c client.Reader) error {
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -93,7 +94,7 @@ func (mg *Job) ResolveReferences(ctx context.Context, c client.Reader) error {
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -114,7 +115,7 @@ func (mg *OutputBlob) ResolveReferences(ctx context.Context, c client.Reader) er
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -124,7 +125,7 @@ func (mg *OutputBlob) ResolveReferences(ctx context.Context, c client.Reader) er
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
@@ -133,7 +134,7 @@ func (mg *OutputBlob) ResolveReferences(ctx context.Context, c client.Reader) er
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccountName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.StorageAccountName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.StorageAccountNameRef,
 			Selector:     mg.Spec.ForProvider.StorageAccountNameSelector,
@@ -143,7 +144,7 @@ func (mg *OutputBlob) ResolveReferences(ctx context.Context, c client.Reader) er
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.StorageAccountName")
 	}
-	mg.Spec.ForProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StorageAccountName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageAccountNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Container", "ContainerList")
@@ -152,7 +153,7 @@ func (mg *OutputBlob) ResolveReferences(ctx context.Context, c client.Reader) er
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageContainerName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.StorageContainerName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.StorageContainerNameRef,
 			Selector:     mg.Spec.ForProvider.StorageContainerNameSelector,
@@ -162,7 +163,7 @@ func (mg *OutputBlob) ResolveReferences(ctx context.Context, c client.Reader) er
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.StorageContainerName")
 	}
-	mg.Spec.ForProvider.StorageContainerName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StorageContainerName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageContainerNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("streamanalytics.azure.upbound.io", "v1beta2", "Job", "JobList")
@@ -171,7 +172,7 @@ func (mg *OutputBlob) ResolveReferences(ctx context.Context, c client.Reader) er
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StreamAnalyticsJobName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.StreamAnalyticsJobName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.StreamAnalyticsJobNameRef,
 			Selector:     mg.Spec.ForProvider.StreamAnalyticsJobNameSelector,
@@ -181,7 +182,7 @@ func (mg *OutputBlob) ResolveReferences(ctx context.Context, c client.Reader) er
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.StreamAnalyticsJobName")
 	}
-	mg.Spec.ForProvider.StreamAnalyticsJobName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StreamAnalyticsJobName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StreamAnalyticsJobNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
@@ -190,7 +191,7 @@ func (mg *OutputBlob) ResolveReferences(ctx context.Context, c client.Reader) er
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccountName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.StorageAccountName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.StorageAccountNameRef,
 			Selector:     mg.Spec.InitProvider.StorageAccountNameSelector,
@@ -200,7 +201,7 @@ func (mg *OutputBlob) ResolveReferences(ctx context.Context, c client.Reader) er
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccountName")
 	}
-	mg.Spec.InitProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageAccountName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.StorageAccountNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Container", "ContainerList")
@@ -209,7 +210,7 @@ func (mg *OutputBlob) ResolveReferences(ctx context.Context, c client.Reader) er
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageContainerName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.StorageContainerName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.StorageContainerNameRef,
 			Selector:     mg.Spec.InitProvider.StorageContainerNameSelector,
@@ -219,7 +220,7 @@ func (mg *OutputBlob) ResolveReferences(ctx context.Context, c client.Reader) er
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.StorageContainerName")
 	}
-	mg.Spec.InitProvider.StorageContainerName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageContainerName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.StorageContainerNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("streamanalytics.azure.upbound.io", "v1beta2", "Job", "JobList")
@@ -228,7 +229,7 @@ func (mg *OutputBlob) ResolveReferences(ctx context.Context, c client.Reader) er
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StreamAnalyticsJobName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.StreamAnalyticsJobName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.StreamAnalyticsJobNameRef,
 			Selector:     mg.Spec.InitProvider.StreamAnalyticsJobNameSelector,
@@ -238,7 +239,7 @@ func (mg *OutputBlob) ResolveReferences(ctx context.Context, c client.Reader) er
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.StreamAnalyticsJobName")
 	}
-	mg.Spec.InitProvider.StreamAnalyticsJobName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StreamAnalyticsJobName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.StreamAnalyticsJobNameRef = rsp.ResolvedReference
 
 	return nil
@@ -259,7 +260,7 @@ func (mg *OutputEventHub) ResolveReferences(ctx context.Context, c client.Reader
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EventHubName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.EventHubName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.EventHubNameRef,
 			Selector:     mg.Spec.ForProvider.EventHubNameSelector,
@@ -269,7 +270,7 @@ func (mg *OutputEventHub) ResolveReferences(ctx context.Context, c client.Reader
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.EventHubName")
 	}
-	mg.Spec.ForProvider.EventHubName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.EventHubName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.EventHubNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -278,7 +279,7 @@ func (mg *OutputEventHub) ResolveReferences(ctx context.Context, c client.Reader
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -288,7 +289,7 @@ func (mg *OutputEventHub) ResolveReferences(ctx context.Context, c client.Reader
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("eventhub.azure.upbound.io", "v1beta2", "EventHubNamespace", "EventHubNamespaceList")
@@ -297,7 +298,7 @@ func (mg *OutputEventHub) ResolveReferences(ctx context.Context, c client.Reader
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServiceBusNamespace),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ServiceBusNamespace, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ServiceBusNamespaceRef,
 			Selector:     mg.Spec.ForProvider.ServiceBusNamespaceSelector,
@@ -307,7 +308,7 @@ func (mg *OutputEventHub) ResolveReferences(ctx context.Context, c client.Reader
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ServiceBusNamespace")
 	}
-	mg.Spec.ForProvider.ServiceBusNamespace = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ServiceBusNamespace = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServiceBusNamespaceRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("eventhub.azure.upbound.io", "v1beta2", "EventHub", "EventHubList")
@@ -316,7 +317,7 @@ func (mg *OutputEventHub) ResolveReferences(ctx context.Context, c client.Reader
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EventHubName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.EventHubName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.EventHubNameRef,
 			Selector:     mg.Spec.InitProvider.EventHubNameSelector,
@@ -326,7 +327,7 @@ func (mg *OutputEventHub) ResolveReferences(ctx context.Context, c client.Reader
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.EventHubName")
 	}
-	mg.Spec.InitProvider.EventHubName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.EventHubName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.EventHubNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("eventhub.azure.upbound.io", "v1beta2", "EventHubNamespace", "EventHubNamespaceList")
@@ -335,7 +336,7 @@ func (mg *OutputEventHub) ResolveReferences(ctx context.Context, c client.Reader
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServiceBusNamespace),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ServiceBusNamespace, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.ServiceBusNamespaceRef,
 			Selector:     mg.Spec.InitProvider.ServiceBusNamespaceSelector,
@@ -345,7 +346,7 @@ func (mg *OutputEventHub) ResolveReferences(ctx context.Context, c client.Reader
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ServiceBusNamespace")
 	}
-	mg.Spec.InitProvider.ServiceBusNamespace = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ServiceBusNamespace = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ServiceBusNamespaceRef = rsp.ResolvedReference
 
 	return nil
@@ -366,7 +367,7 @@ func (mg *OutputServiceBusQueue) ResolveReferences(ctx context.Context, c client
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.QueueName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.QueueName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.QueueNameRef,
 			Selector:     mg.Spec.ForProvider.QueueNameSelector,
@@ -376,7 +377,7 @@ func (mg *OutputServiceBusQueue) ResolveReferences(ctx context.Context, c client
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.QueueName")
 	}
-	mg.Spec.ForProvider.QueueName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.QueueName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.QueueNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -385,7 +386,7 @@ func (mg *OutputServiceBusQueue) ResolveReferences(ctx context.Context, c client
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -395,7 +396,7 @@ func (mg *OutputServiceBusQueue) ResolveReferences(ctx context.Context, c client
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("servicebus.azure.upbound.io", "v1beta2", "ServiceBusNamespace", "ServiceBusNamespaceList")
@@ -404,7 +405,7 @@ func (mg *OutputServiceBusQueue) ResolveReferences(ctx context.Context, c client
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServiceBusNamespace),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ServiceBusNamespace, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ServiceBusNamespaceRef,
 			Selector:     mg.Spec.ForProvider.ServiceBusNamespaceSelector,
@@ -414,7 +415,7 @@ func (mg *OutputServiceBusQueue) ResolveReferences(ctx context.Context, c client
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ServiceBusNamespace")
 	}
-	mg.Spec.ForProvider.ServiceBusNamespace = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ServiceBusNamespace = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServiceBusNamespaceRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("streamanalytics.azure.upbound.io", "v1beta2", "Job", "JobList")
@@ -423,7 +424,7 @@ func (mg *OutputServiceBusQueue) ResolveReferences(ctx context.Context, c client
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StreamAnalyticsJobName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.StreamAnalyticsJobName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.StreamAnalyticsJobNameRef,
 			Selector:     mg.Spec.ForProvider.StreamAnalyticsJobNameSelector,
@@ -433,7 +434,7 @@ func (mg *OutputServiceBusQueue) ResolveReferences(ctx context.Context, c client
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.StreamAnalyticsJobName")
 	}
-	mg.Spec.ForProvider.StreamAnalyticsJobName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StreamAnalyticsJobName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StreamAnalyticsJobNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("servicebus.azure.upbound.io", "v1beta1", "Queue", "QueueList")
@@ -442,7 +443,7 @@ func (mg *OutputServiceBusQueue) ResolveReferences(ctx context.Context, c client
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.QueueName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.QueueName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.QueueNameRef,
 			Selector:     mg.Spec.InitProvider.QueueNameSelector,
@@ -452,7 +453,7 @@ func (mg *OutputServiceBusQueue) ResolveReferences(ctx context.Context, c client
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.QueueName")
 	}
-	mg.Spec.InitProvider.QueueName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.QueueName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.QueueNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -461,7 +462,7 @@ func (mg *OutputServiceBusQueue) ResolveReferences(ctx context.Context, c client
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
@@ -471,7 +472,7 @@ func (mg *OutputServiceBusQueue) ResolveReferences(ctx context.Context, c client
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
 	}
-	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("servicebus.azure.upbound.io", "v1beta2", "ServiceBusNamespace", "ServiceBusNamespaceList")
@@ -480,7 +481,7 @@ func (mg *OutputServiceBusQueue) ResolveReferences(ctx context.Context, c client
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServiceBusNamespace),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ServiceBusNamespace, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.ServiceBusNamespaceRef,
 			Selector:     mg.Spec.InitProvider.ServiceBusNamespaceSelector,
@@ -490,7 +491,7 @@ func (mg *OutputServiceBusQueue) ResolveReferences(ctx context.Context, c client
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ServiceBusNamespace")
 	}
-	mg.Spec.InitProvider.ServiceBusNamespace = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ServiceBusNamespace = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ServiceBusNamespaceRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("streamanalytics.azure.upbound.io", "v1beta2", "Job", "JobList")
@@ -499,7 +500,7 @@ func (mg *OutputServiceBusQueue) ResolveReferences(ctx context.Context, c client
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StreamAnalyticsJobName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.StreamAnalyticsJobName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.StreamAnalyticsJobNameRef,
 			Selector:     mg.Spec.InitProvider.StreamAnalyticsJobNameSelector,
@@ -509,7 +510,7 @@ func (mg *OutputServiceBusQueue) ResolveReferences(ctx context.Context, c client
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.StreamAnalyticsJobName")
 	}
-	mg.Spec.InitProvider.StreamAnalyticsJobName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StreamAnalyticsJobName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.StreamAnalyticsJobNameRef = rsp.ResolvedReference
 
 	return nil
@@ -530,7 +531,7 @@ func (mg *OutputServiceBusTopic) ResolveReferences(ctx context.Context, c client
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -540,7 +541,7 @@ func (mg *OutputServiceBusTopic) ResolveReferences(ctx context.Context, c client
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("servicebus.azure.upbound.io", "v1beta2", "ServiceBusNamespace", "ServiceBusNamespaceList")
@@ -549,7 +550,7 @@ func (mg *OutputServiceBusTopic) ResolveReferences(ctx context.Context, c client
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServiceBusNamespace),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ServiceBusNamespace, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ServiceBusNamespaceRef,
 			Selector:     mg.Spec.ForProvider.ServiceBusNamespaceSelector,
@@ -559,7 +560,7 @@ func (mg *OutputServiceBusTopic) ResolveReferences(ctx context.Context, c client
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ServiceBusNamespace")
 	}
-	mg.Spec.ForProvider.ServiceBusNamespace = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ServiceBusNamespace = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServiceBusNamespaceRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("streamanalytics.azure.upbound.io", "v1beta2", "Job", "JobList")
@@ -568,7 +569,7 @@ func (mg *OutputServiceBusTopic) ResolveReferences(ctx context.Context, c client
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StreamAnalyticsJobName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.StreamAnalyticsJobName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.StreamAnalyticsJobNameRef,
 			Selector:     mg.Spec.ForProvider.StreamAnalyticsJobNameSelector,
@@ -578,7 +579,7 @@ func (mg *OutputServiceBusTopic) ResolveReferences(ctx context.Context, c client
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.StreamAnalyticsJobName")
 	}
-	mg.Spec.ForProvider.StreamAnalyticsJobName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StreamAnalyticsJobName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StreamAnalyticsJobNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("servicebus.azure.upbound.io", "v1beta1", "Topic", "TopicList")
@@ -587,7 +588,7 @@ func (mg *OutputServiceBusTopic) ResolveReferences(ctx context.Context, c client
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TopicName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.TopicName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.TopicNameRef,
 			Selector:     mg.Spec.ForProvider.TopicNameSelector,
@@ -597,7 +598,7 @@ func (mg *OutputServiceBusTopic) ResolveReferences(ctx context.Context, c client
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.TopicName")
 	}
-	mg.Spec.ForProvider.TopicName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.TopicName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TopicNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -606,7 +607,7 @@ func (mg *OutputServiceBusTopic) ResolveReferences(ctx context.Context, c client
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
@@ -616,7 +617,7 @@ func (mg *OutputServiceBusTopic) ResolveReferences(ctx context.Context, c client
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
 	}
-	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("servicebus.azure.upbound.io", "v1beta2", "ServiceBusNamespace", "ServiceBusNamespaceList")
@@ -625,7 +626,7 @@ func (mg *OutputServiceBusTopic) ResolveReferences(ctx context.Context, c client
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServiceBusNamespace),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ServiceBusNamespace, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.ServiceBusNamespaceRef,
 			Selector:     mg.Spec.InitProvider.ServiceBusNamespaceSelector,
@@ -635,7 +636,7 @@ func (mg *OutputServiceBusTopic) ResolveReferences(ctx context.Context, c client
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ServiceBusNamespace")
 	}
-	mg.Spec.InitProvider.ServiceBusNamespace = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ServiceBusNamespace = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ServiceBusNamespaceRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("streamanalytics.azure.upbound.io", "v1beta2", "Job", "JobList")
@@ -644,7 +645,7 @@ func (mg *OutputServiceBusTopic) ResolveReferences(ctx context.Context, c client
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StreamAnalyticsJobName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.StreamAnalyticsJobName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.StreamAnalyticsJobNameRef,
 			Selector:     mg.Spec.InitProvider.StreamAnalyticsJobNameSelector,
@@ -654,7 +655,7 @@ func (mg *OutputServiceBusTopic) ResolveReferences(ctx context.Context, c client
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.StreamAnalyticsJobName")
 	}
-	mg.Spec.InitProvider.StreamAnalyticsJobName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StreamAnalyticsJobName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.StreamAnalyticsJobNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("servicebus.azure.upbound.io", "v1beta1", "Topic", "TopicList")
@@ -663,7 +664,7 @@ func (mg *OutputServiceBusTopic) ResolveReferences(ctx context.Context, c client
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TopicName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.TopicName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.TopicNameRef,
 			Selector:     mg.Spec.InitProvider.TopicNameSelector,
@@ -673,7 +674,7 @@ func (mg *OutputServiceBusTopic) ResolveReferences(ctx context.Context, c client
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.TopicName")
 	}
-	mg.Spec.InitProvider.TopicName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.TopicName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.TopicNameRef = rsp.ResolvedReference
 
 	return nil
@@ -694,7 +695,7 @@ func (mg *ReferenceInputBlob) ResolveReferences(ctx context.Context, c client.Re
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -704,7 +705,7 @@ func (mg *ReferenceInputBlob) ResolveReferences(ctx context.Context, c client.Re
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
@@ -713,7 +714,7 @@ func (mg *ReferenceInputBlob) ResolveReferences(ctx context.Context, c client.Re
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccountName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.StorageAccountName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.StorageAccountNameRef,
 			Selector:     mg.Spec.ForProvider.StorageAccountNameSelector,
@@ -723,7 +724,7 @@ func (mg *ReferenceInputBlob) ResolveReferences(ctx context.Context, c client.Re
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.StorageAccountName")
 	}
-	mg.Spec.ForProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StorageAccountName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageAccountNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Container", "ContainerList")
@@ -732,7 +733,7 @@ func (mg *ReferenceInputBlob) ResolveReferences(ctx context.Context, c client.Re
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageContainerName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.StorageContainerName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.StorageContainerNameRef,
 			Selector:     mg.Spec.ForProvider.StorageContainerNameSelector,
@@ -742,7 +743,7 @@ func (mg *ReferenceInputBlob) ResolveReferences(ctx context.Context, c client.Re
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.StorageContainerName")
 	}
-	mg.Spec.ForProvider.StorageContainerName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StorageContainerName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageContainerNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("streamanalytics.azure.upbound.io", "v1beta2", "Job", "JobList")
@@ -751,7 +752,7 @@ func (mg *ReferenceInputBlob) ResolveReferences(ctx context.Context, c client.Re
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StreamAnalyticsJobName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.StreamAnalyticsJobName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.StreamAnalyticsJobNameRef,
 			Selector:     mg.Spec.ForProvider.StreamAnalyticsJobNameSelector,
@@ -761,7 +762,7 @@ func (mg *ReferenceInputBlob) ResolveReferences(ctx context.Context, c client.Re
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.StreamAnalyticsJobName")
 	}
-	mg.Spec.ForProvider.StreamAnalyticsJobName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StreamAnalyticsJobName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StreamAnalyticsJobNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -770,7 +771,7 @@ func (mg *ReferenceInputBlob) ResolveReferences(ctx context.Context, c client.Re
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
@@ -780,7 +781,7 @@ func (mg *ReferenceInputBlob) ResolveReferences(ctx context.Context, c client.Re
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
 	}
-	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
@@ -789,7 +790,7 @@ func (mg *ReferenceInputBlob) ResolveReferences(ctx context.Context, c client.Re
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccountName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.StorageAccountName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.StorageAccountNameRef,
 			Selector:     mg.Spec.InitProvider.StorageAccountNameSelector,
@@ -799,7 +800,7 @@ func (mg *ReferenceInputBlob) ResolveReferences(ctx context.Context, c client.Re
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccountName")
 	}
-	mg.Spec.InitProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageAccountName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.StorageAccountNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Container", "ContainerList")
@@ -808,7 +809,7 @@ func (mg *ReferenceInputBlob) ResolveReferences(ctx context.Context, c client.Re
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageContainerName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.StorageContainerName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.StorageContainerNameRef,
 			Selector:     mg.Spec.InitProvider.StorageContainerNameSelector,
@@ -818,7 +819,7 @@ func (mg *ReferenceInputBlob) ResolveReferences(ctx context.Context, c client.Re
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.StorageContainerName")
 	}
-	mg.Spec.InitProvider.StorageContainerName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageContainerName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.StorageContainerNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("streamanalytics.azure.upbound.io", "v1beta2", "Job", "JobList")
@@ -827,7 +828,7 @@ func (mg *ReferenceInputBlob) ResolveReferences(ctx context.Context, c client.Re
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StreamAnalyticsJobName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.StreamAnalyticsJobName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.StreamAnalyticsJobNameRef,
 			Selector:     mg.Spec.InitProvider.StreamAnalyticsJobNameSelector,
@@ -837,7 +838,7 @@ func (mg *ReferenceInputBlob) ResolveReferences(ctx context.Context, c client.Re
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.StreamAnalyticsJobName")
 	}
-	mg.Spec.InitProvider.StreamAnalyticsJobName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StreamAnalyticsJobName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.StreamAnalyticsJobNameRef = rsp.ResolvedReference
 
 	return nil
@@ -858,7 +859,7 @@ func (mg *StreamInputBlob) ResolveReferences(ctx context.Context, c client.Reade
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -868,7 +869,7 @@ func (mg *StreamInputBlob) ResolveReferences(ctx context.Context, c client.Reade
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
@@ -877,7 +878,7 @@ func (mg *StreamInputBlob) ResolveReferences(ctx context.Context, c client.Reade
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccountName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.StorageAccountName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.StorageAccountNameRef,
 			Selector:     mg.Spec.ForProvider.StorageAccountNameSelector,
@@ -887,7 +888,7 @@ func (mg *StreamInputBlob) ResolveReferences(ctx context.Context, c client.Reade
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.StorageAccountName")
 	}
-	mg.Spec.ForProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StorageAccountName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageAccountNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Container", "ContainerList")
@@ -896,7 +897,7 @@ func (mg *StreamInputBlob) ResolveReferences(ctx context.Context, c client.Reade
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageContainerName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.StorageContainerName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.StorageContainerNameRef,
 			Selector:     mg.Spec.ForProvider.StorageContainerNameSelector,
@@ -906,7 +907,7 @@ func (mg *StreamInputBlob) ResolveReferences(ctx context.Context, c client.Reade
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.StorageContainerName")
 	}
-	mg.Spec.ForProvider.StorageContainerName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StorageContainerName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageContainerNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("streamanalytics.azure.upbound.io", "v1beta2", "Job", "JobList")
@@ -915,7 +916,7 @@ func (mg *StreamInputBlob) ResolveReferences(ctx context.Context, c client.Reade
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StreamAnalyticsJobName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.StreamAnalyticsJobName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.StreamAnalyticsJobNameRef,
 			Selector:     mg.Spec.ForProvider.StreamAnalyticsJobNameSelector,
@@ -925,7 +926,7 @@ func (mg *StreamInputBlob) ResolveReferences(ctx context.Context, c client.Reade
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.StreamAnalyticsJobName")
 	}
-	mg.Spec.ForProvider.StreamAnalyticsJobName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StreamAnalyticsJobName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StreamAnalyticsJobNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -934,7 +935,7 @@ func (mg *StreamInputBlob) ResolveReferences(ctx context.Context, c client.Reade
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
@@ -944,7 +945,7 @@ func (mg *StreamInputBlob) ResolveReferences(ctx context.Context, c client.Reade
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
 	}
-	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
@@ -953,7 +954,7 @@ func (mg *StreamInputBlob) ResolveReferences(ctx context.Context, c client.Reade
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccountName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.StorageAccountName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.StorageAccountNameRef,
 			Selector:     mg.Spec.InitProvider.StorageAccountNameSelector,
@@ -963,7 +964,7 @@ func (mg *StreamInputBlob) ResolveReferences(ctx context.Context, c client.Reade
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccountName")
 	}
-	mg.Spec.InitProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageAccountName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.StorageAccountNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Container", "ContainerList")
@@ -972,7 +973,7 @@ func (mg *StreamInputBlob) ResolveReferences(ctx context.Context, c client.Reade
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageContainerName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.StorageContainerName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.StorageContainerNameRef,
 			Selector:     mg.Spec.InitProvider.StorageContainerNameSelector,
@@ -982,7 +983,7 @@ func (mg *StreamInputBlob) ResolveReferences(ctx context.Context, c client.Reade
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.StorageContainerName")
 	}
-	mg.Spec.InitProvider.StorageContainerName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageContainerName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.StorageContainerNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("streamanalytics.azure.upbound.io", "v1beta2", "Job", "JobList")
@@ -991,7 +992,7 @@ func (mg *StreamInputBlob) ResolveReferences(ctx context.Context, c client.Reade
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StreamAnalyticsJobName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.StreamAnalyticsJobName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.StreamAnalyticsJobNameRef,
 			Selector:     mg.Spec.InitProvider.StreamAnalyticsJobNameSelector,
@@ -1001,7 +1002,7 @@ func (mg *StreamInputBlob) ResolveReferences(ctx context.Context, c client.Reade
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.StreamAnalyticsJobName")
 	}
-	mg.Spec.InitProvider.StreamAnalyticsJobName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StreamAnalyticsJobName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.StreamAnalyticsJobNameRef = rsp.ResolvedReference
 
 	return nil
@@ -1022,7 +1023,7 @@ func (mg *StreamInputEventHub) ResolveReferences(ctx context.Context, c client.R
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EventHubConsumerGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.EventHubConsumerGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.EventHubConsumerGroupNameRef,
 			Selector:     mg.Spec.ForProvider.EventHubConsumerGroupNameSelector,
@@ -1032,7 +1033,7 @@ func (mg *StreamInputEventHub) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.EventHubConsumerGroupName")
 	}
-	mg.Spec.ForProvider.EventHubConsumerGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.EventHubConsumerGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.EventHubConsumerGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("eventhub.azure.upbound.io", "v1beta2", "EventHub", "EventHubList")
@@ -1041,7 +1042,7 @@ func (mg *StreamInputEventHub) ResolveReferences(ctx context.Context, c client.R
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EventHubName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.EventHubName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.EventHubNameRef,
 			Selector:     mg.Spec.ForProvider.EventHubNameSelector,
@@ -1051,7 +1052,7 @@ func (mg *StreamInputEventHub) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.EventHubName")
 	}
-	mg.Spec.ForProvider.EventHubName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.EventHubName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.EventHubNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -1060,7 +1061,7 @@ func (mg *StreamInputEventHub) ResolveReferences(ctx context.Context, c client.R
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -1070,7 +1071,7 @@ func (mg *StreamInputEventHub) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("eventhub.azure.upbound.io", "v1beta2", "EventHubNamespace", "EventHubNamespaceList")
@@ -1079,7 +1080,7 @@ func (mg *StreamInputEventHub) ResolveReferences(ctx context.Context, c client.R
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServiceBusNamespace),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ServiceBusNamespace, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ServiceBusNamespaceRef,
 			Selector:     mg.Spec.ForProvider.ServiceBusNamespaceSelector,
@@ -1089,7 +1090,7 @@ func (mg *StreamInputEventHub) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ServiceBusNamespace")
 	}
-	mg.Spec.ForProvider.ServiceBusNamespace = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ServiceBusNamespace = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServiceBusNamespaceRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("streamanalytics.azure.upbound.io", "v1beta2", "Job", "JobList")
@@ -1098,7 +1099,7 @@ func (mg *StreamInputEventHub) ResolveReferences(ctx context.Context, c client.R
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StreamAnalyticsJobName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.StreamAnalyticsJobName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.StreamAnalyticsJobNameRef,
 			Selector:     mg.Spec.ForProvider.StreamAnalyticsJobNameSelector,
@@ -1108,7 +1109,7 @@ func (mg *StreamInputEventHub) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.StreamAnalyticsJobName")
 	}
-	mg.Spec.ForProvider.StreamAnalyticsJobName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StreamAnalyticsJobName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StreamAnalyticsJobNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("eventhub.azure.upbound.io", "v1beta1", "ConsumerGroup", "ConsumerGroupList")
@@ -1117,7 +1118,7 @@ func (mg *StreamInputEventHub) ResolveReferences(ctx context.Context, c client.R
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EventHubConsumerGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.EventHubConsumerGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.EventHubConsumerGroupNameRef,
 			Selector:     mg.Spec.InitProvider.EventHubConsumerGroupNameSelector,
@@ -1127,7 +1128,7 @@ func (mg *StreamInputEventHub) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.EventHubConsumerGroupName")
 	}
-	mg.Spec.InitProvider.EventHubConsumerGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.EventHubConsumerGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.EventHubConsumerGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("eventhub.azure.upbound.io", "v1beta2", "EventHub", "EventHubList")
@@ -1136,7 +1137,7 @@ func (mg *StreamInputEventHub) ResolveReferences(ctx context.Context, c client.R
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EventHubName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.EventHubName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.EventHubNameRef,
 			Selector:     mg.Spec.InitProvider.EventHubNameSelector,
@@ -1146,7 +1147,7 @@ func (mg *StreamInputEventHub) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.EventHubName")
 	}
-	mg.Spec.InitProvider.EventHubName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.EventHubName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.EventHubNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -1155,7 +1156,7 @@ func (mg *StreamInputEventHub) ResolveReferences(ctx context.Context, c client.R
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
@@ -1165,7 +1166,7 @@ func (mg *StreamInputEventHub) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
 	}
-	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("eventhub.azure.upbound.io", "v1beta2", "EventHubNamespace", "EventHubNamespaceList")
@@ -1174,7 +1175,7 @@ func (mg *StreamInputEventHub) ResolveReferences(ctx context.Context, c client.R
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServiceBusNamespace),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ServiceBusNamespace, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.ServiceBusNamespaceRef,
 			Selector:     mg.Spec.InitProvider.ServiceBusNamespaceSelector,
@@ -1184,7 +1185,7 @@ func (mg *StreamInputEventHub) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ServiceBusNamespace")
 	}
-	mg.Spec.InitProvider.ServiceBusNamespace = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ServiceBusNamespace = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ServiceBusNamespaceRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("streamanalytics.azure.upbound.io", "v1beta2", "Job", "JobList")
@@ -1193,7 +1194,7 @@ func (mg *StreamInputEventHub) ResolveReferences(ctx context.Context, c client.R
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StreamAnalyticsJobName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.StreamAnalyticsJobName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.StreamAnalyticsJobNameRef,
 			Selector:     mg.Spec.InitProvider.StreamAnalyticsJobNameSelector,
@@ -1203,7 +1204,7 @@ func (mg *StreamInputEventHub) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.StreamAnalyticsJobName")
 	}
-	mg.Spec.InitProvider.StreamAnalyticsJobName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StreamAnalyticsJobName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.StreamAnalyticsJobNameRef = rsp.ResolvedReference
 
 	return nil
@@ -1224,7 +1225,7 @@ func (mg *StreamInputIOTHub) ResolveReferences(ctx context.Context, c client.Rea
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EventHubConsumerGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.EventHubConsumerGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.EventHubConsumerGroupNameRef,
 			Selector:     mg.Spec.ForProvider.EventHubConsumerGroupNameSelector,
@@ -1234,7 +1235,7 @@ func (mg *StreamInputIOTHub) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.EventHubConsumerGroupName")
 	}
-	mg.Spec.ForProvider.EventHubConsumerGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.EventHubConsumerGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.EventHubConsumerGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("devices.azure.upbound.io", "v1beta2", "IOTHub", "IOTHubList")
@@ -1243,7 +1244,7 @@ func (mg *StreamInputIOTHub) ResolveReferences(ctx context.Context, c client.Rea
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IOTHubNamespace),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.IOTHubNamespace, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.IOTHubNamespaceRef,
 			Selector:     mg.Spec.ForProvider.IOTHubNamespaceSelector,
@@ -1253,7 +1254,7 @@ func (mg *StreamInputIOTHub) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.IOTHubNamespace")
 	}
-	mg.Spec.ForProvider.IOTHubNamespace = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.IOTHubNamespace = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.IOTHubNamespaceRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -1262,7 +1263,7 @@ func (mg *StreamInputIOTHub) ResolveReferences(ctx context.Context, c client.Rea
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -1272,7 +1273,7 @@ func (mg *StreamInputIOTHub) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("streamanalytics.azure.upbound.io", "v1beta2", "Job", "JobList")
@@ -1281,7 +1282,7 @@ func (mg *StreamInputIOTHub) ResolveReferences(ctx context.Context, c client.Rea
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StreamAnalyticsJobName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.StreamAnalyticsJobName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.StreamAnalyticsJobNameRef,
 			Selector:     mg.Spec.ForProvider.StreamAnalyticsJobNameSelector,
@@ -1291,7 +1292,7 @@ func (mg *StreamInputIOTHub) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.StreamAnalyticsJobName")
 	}
-	mg.Spec.ForProvider.StreamAnalyticsJobName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StreamAnalyticsJobName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StreamAnalyticsJobNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("eventhub.azure.upbound.io", "v1beta1", "ConsumerGroup", "ConsumerGroupList")
@@ -1300,7 +1301,7 @@ func (mg *StreamInputIOTHub) ResolveReferences(ctx context.Context, c client.Rea
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EventHubConsumerGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.EventHubConsumerGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.EventHubConsumerGroupNameRef,
 			Selector:     mg.Spec.InitProvider.EventHubConsumerGroupNameSelector,
@@ -1310,7 +1311,7 @@ func (mg *StreamInputIOTHub) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.EventHubConsumerGroupName")
 	}
-	mg.Spec.InitProvider.EventHubConsumerGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.EventHubConsumerGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.EventHubConsumerGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("devices.azure.upbound.io", "v1beta2", "IOTHub", "IOTHubList")
@@ -1319,7 +1320,7 @@ func (mg *StreamInputIOTHub) ResolveReferences(ctx context.Context, c client.Rea
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IOTHubNamespace),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.IOTHubNamespace, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.IOTHubNamespaceRef,
 			Selector:     mg.Spec.InitProvider.IOTHubNamespaceSelector,
@@ -1329,7 +1330,7 @@ func (mg *StreamInputIOTHub) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.IOTHubNamespace")
 	}
-	mg.Spec.InitProvider.IOTHubNamespace = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.IOTHubNamespace = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.IOTHubNamespaceRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -1338,7 +1339,7 @@ func (mg *StreamInputIOTHub) ResolveReferences(ctx context.Context, c client.Rea
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
@@ -1348,7 +1349,7 @@ func (mg *StreamInputIOTHub) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
 	}
-	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("streamanalytics.azure.upbound.io", "v1beta2", "Job", "JobList")
@@ -1357,7 +1358,7 @@ func (mg *StreamInputIOTHub) ResolveReferences(ctx context.Context, c client.Rea
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StreamAnalyticsJobName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.StreamAnalyticsJobName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.StreamAnalyticsJobNameRef,
 			Selector:     mg.Spec.InitProvider.StreamAnalyticsJobNameSelector,
@@ -1367,7 +1368,7 @@ func (mg *StreamInputIOTHub) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.StreamAnalyticsJobName")
 	}
-	mg.Spec.InitProvider.StreamAnalyticsJobName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StreamAnalyticsJobName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.StreamAnalyticsJobNameRef = rsp.ResolvedReference
 
 	return nil

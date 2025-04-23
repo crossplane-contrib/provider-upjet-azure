@@ -9,11 +9,13 @@ package v1beta2
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
+	helper "github.com/crossplane/crossplane-tools/pkg/helpers"
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	rconfig "github.com/upbound/provider-azure/apis/rconfig"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 
 	// ResolveReferences of this Registry.
@@ -36,7 +38,7 @@ func (mg *Registry) ResolveReferences(ctx context.Context, c client.Reader) erro
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Encryption.IdentityClientID),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.Encryption.IdentityClientID, ""),
 				Extract:      resource.ExtractParamPath("client_id", true),
 				Reference:    mg.Spec.ForProvider.Encryption.IdentityClientIDRef,
 				Selector:     mg.Spec.ForProvider.Encryption.IdentityClientIDSelector,
@@ -46,7 +48,7 @@ func (mg *Registry) ResolveReferences(ctx context.Context, c client.Reader) erro
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.Encryption.IdentityClientID")
 		}
-		mg.Spec.ForProvider.Encryption.IdentityClientID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Encryption.IdentityClientID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.Encryption.IdentityClientIDRef = rsp.ResolvedReference
 
 	}
@@ -57,7 +59,7 @@ func (mg *Registry) ResolveReferences(ctx context.Context, c client.Reader) erro
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Identity.IdentityIds),
+				CurrentValues: helper.FromPtrValues(mg.Spec.ForProvider.Identity.IdentityIds),
 				Extract:       resource.ExtractResourceID(),
 				References:    mg.Spec.ForProvider.Identity.IdentityIdsRefs,
 				Selector:      mg.Spec.ForProvider.Identity.IdentityIdsSelector,
@@ -67,7 +69,7 @@ func (mg *Registry) ResolveReferences(ctx context.Context, c client.Reader) erro
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.Identity.IdentityIds")
 		}
-		mg.Spec.ForProvider.Identity.IdentityIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.ForProvider.Identity.IdentityIds = helper.ToPtrValues(mrsp.ResolvedValues)
 		mg.Spec.ForProvider.Identity.IdentityIdsRefs = mrsp.ResolvedReferences
 
 	}
@@ -79,7 +81,7 @@ func (mg *Registry) ResolveReferences(ctx context.Context, c client.Reader) erro
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkRuleSet.VirtualNetwork[i4].SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.ForProvider.NetworkRuleSet.VirtualNetwork[i4].SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.ForProvider.NetworkRuleSet.VirtualNetwork[i4].SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.NetworkRuleSet.VirtualNetwork[i4].SubnetIDSelector,
@@ -89,7 +91,7 @@ func (mg *Registry) ResolveReferences(ctx context.Context, c client.Reader) erro
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.ForProvider.NetworkRuleSet.VirtualNetwork[i4].SubnetID")
 			}
-			mg.Spec.ForProvider.NetworkRuleSet.VirtualNetwork[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.NetworkRuleSet.VirtualNetwork[i4].SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.ForProvider.NetworkRuleSet.VirtualNetwork[i4].SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -100,7 +102,7 @@ func (mg *Registry) ResolveReferences(ctx context.Context, c client.Reader) erro
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -110,7 +112,7 @@ func (mg *Registry) ResolveReferences(ctx context.Context, c client.Reader) erro
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	if mg.Spec.InitProvider.Encryption != nil {
@@ -120,7 +122,7 @@ func (mg *Registry) ResolveReferences(ctx context.Context, c client.Reader) erro
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Encryption.IdentityClientID),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.Encryption.IdentityClientID, ""),
 				Extract:      resource.ExtractParamPath("client_id", true),
 				Reference:    mg.Spec.InitProvider.Encryption.IdentityClientIDRef,
 				Selector:     mg.Spec.InitProvider.Encryption.IdentityClientIDSelector,
@@ -130,7 +132,7 @@ func (mg *Registry) ResolveReferences(ctx context.Context, c client.Reader) erro
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.Encryption.IdentityClientID")
 		}
-		mg.Spec.InitProvider.Encryption.IdentityClientID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Encryption.IdentityClientID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.Encryption.IdentityClientIDRef = rsp.ResolvedReference
 
 	}
@@ -141,7 +143,7 @@ func (mg *Registry) ResolveReferences(ctx context.Context, c client.Reader) erro
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Identity.IdentityIds),
+				CurrentValues: helper.FromPtrValues(mg.Spec.InitProvider.Identity.IdentityIds),
 				Extract:       resource.ExtractResourceID(),
 				References:    mg.Spec.InitProvider.Identity.IdentityIdsRefs,
 				Selector:      mg.Spec.InitProvider.Identity.IdentityIdsSelector,
@@ -151,7 +153,7 @@ func (mg *Registry) ResolveReferences(ctx context.Context, c client.Reader) erro
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.Identity.IdentityIds")
 		}
-		mg.Spec.InitProvider.Identity.IdentityIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.Identity.IdentityIds = helper.ToPtrValues(mrsp.ResolvedValues)
 		mg.Spec.InitProvider.Identity.IdentityIdsRefs = mrsp.ResolvedReferences
 
 	}
@@ -163,7 +165,7 @@ func (mg *Registry) ResolveReferences(ctx context.Context, c client.Reader) erro
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkRuleSet.VirtualNetwork[i4].SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.InitProvider.NetworkRuleSet.VirtualNetwork[i4].SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.InitProvider.NetworkRuleSet.VirtualNetwork[i4].SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.NetworkRuleSet.VirtualNetwork[i4].SubnetIDSelector,
@@ -173,7 +175,7 @@ func (mg *Registry) ResolveReferences(ctx context.Context, c client.Reader) erro
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.InitProvider.NetworkRuleSet.VirtualNetwork[i4].SubnetID")
 			}
-			mg.Spec.InitProvider.NetworkRuleSet.VirtualNetwork[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.NetworkRuleSet.VirtualNetwork[i4].SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.InitProvider.NetworkRuleSet.VirtualNetwork[i4].SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -197,7 +199,7 @@ func (mg *TokenPassword) ResolveReferences(ctx context.Context, c client.Reader)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerRegistryTokenID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ContainerRegistryTokenID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.ContainerRegistryTokenIDRef,
 			Selector:     mg.Spec.ForProvider.ContainerRegistryTokenIDSelector,
@@ -207,7 +209,7 @@ func (mg *TokenPassword) ResolveReferences(ctx context.Context, c client.Reader)
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ContainerRegistryTokenID")
 	}
-	mg.Spec.ForProvider.ContainerRegistryTokenID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ContainerRegistryTokenID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ContainerRegistryTokenIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("containerregistry.azure.upbound.io", "v1beta1", "Token", "TokenList")
@@ -216,7 +218,7 @@ func (mg *TokenPassword) ResolveReferences(ctx context.Context, c client.Reader)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ContainerRegistryTokenID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ContainerRegistryTokenID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.ContainerRegistryTokenIDRef,
 			Selector:     mg.Spec.InitProvider.ContainerRegistryTokenIDSelector,
@@ -226,7 +228,7 @@ func (mg *TokenPassword) ResolveReferences(ctx context.Context, c client.Reader)
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ContainerRegistryTokenID")
 	}
-	mg.Spec.InitProvider.ContainerRegistryTokenID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ContainerRegistryTokenID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ContainerRegistryTokenIDRef = rsp.ResolvedReference
 
 	return nil

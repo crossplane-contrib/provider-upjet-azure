@@ -14,6 +14,7 @@ import (
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -32,7 +33,7 @@ func (mg *PolicyVirtualMachineConfigurationAssignment) ResolveReferences( // Res
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VirtualMachineID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.VirtualMachineID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.VirtualMachineIDRef,
 			Selector:     mg.Spec.ForProvider.VirtualMachineIDSelector,
@@ -42,7 +43,7 @@ func (mg *PolicyVirtualMachineConfigurationAssignment) ResolveReferences( // Res
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.VirtualMachineID")
 	}
-	mg.Spec.ForProvider.VirtualMachineID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VirtualMachineID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VirtualMachineIDRef = rsp.ResolvedReference
 
 	return nil

@@ -9,10 +9,12 @@ package v1beta2
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
+	helper "github.com/crossplane/crossplane-tools/pkg/helpers"
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 
 	// ResolveReferences of this Endpoint.
@@ -33,7 +35,7 @@ func (mg *Endpoint) ResolveReferences(ctx context.Context, c client.Reader) erro
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ProfileName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ProfileName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ProfileNameRef,
 			Selector:     mg.Spec.ForProvider.ProfileNameSelector,
@@ -43,7 +45,7 @@ func (mg *Endpoint) ResolveReferences(ctx context.Context, c client.Reader) erro
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ProfileName")
 	}
-	mg.Spec.ForProvider.ProfileName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ProfileName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ProfileNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -52,7 +54,7 @@ func (mg *Endpoint) ResolveReferences(ctx context.Context, c client.Reader) erro
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -62,7 +64,7 @@ func (mg *Endpoint) ResolveReferences(ctx context.Context, c client.Reader) erro
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -83,7 +85,7 @@ func (mg *FrontdoorCustomDomain) ResolveReferences(ctx context.Context, c client
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CdnFrontdoorProfileID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.CdnFrontdoorProfileID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.CdnFrontdoorProfileIDRef,
 			Selector:     mg.Spec.ForProvider.CdnFrontdoorProfileIDSelector,
@@ -93,7 +95,7 @@ func (mg *FrontdoorCustomDomain) ResolveReferences(ctx context.Context, c client
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.CdnFrontdoorProfileID")
 	}
-	mg.Spec.ForProvider.CdnFrontdoorProfileID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CdnFrontdoorProfileID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CdnFrontdoorProfileIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "DNSZone", "DNSZoneList")
@@ -102,7 +104,7 @@ func (mg *FrontdoorCustomDomain) ResolveReferences(ctx context.Context, c client
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DNSZoneID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.DNSZoneID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.DNSZoneIDRef,
 			Selector:     mg.Spec.ForProvider.DNSZoneIDSelector,
@@ -112,7 +114,7 @@ func (mg *FrontdoorCustomDomain) ResolveReferences(ctx context.Context, c client
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.DNSZoneID")
 	}
-	mg.Spec.ForProvider.DNSZoneID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DNSZoneID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DNSZoneIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "DNSZone", "DNSZoneList")
@@ -121,7 +123,7 @@ func (mg *FrontdoorCustomDomain) ResolveReferences(ctx context.Context, c client
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DNSZoneID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.DNSZoneID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.DNSZoneIDRef,
 			Selector:     mg.Spec.InitProvider.DNSZoneIDSelector,
@@ -131,7 +133,7 @@ func (mg *FrontdoorCustomDomain) ResolveReferences(ctx context.Context, c client
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.DNSZoneID")
 	}
-	mg.Spec.InitProvider.DNSZoneID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DNSZoneID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DNSZoneIDRef = rsp.ResolvedReference
 
 	return nil
@@ -152,7 +154,7 @@ func (mg *FrontdoorOrigin) ResolveReferences(ctx context.Context, c client.Reade
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CdnFrontdoorOriginGroupID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.CdnFrontdoorOriginGroupID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.CdnFrontdoorOriginGroupIDRef,
 			Selector:     mg.Spec.ForProvider.CdnFrontdoorOriginGroupIDSelector,
@@ -162,7 +164,7 @@ func (mg *FrontdoorOrigin) ResolveReferences(ctx context.Context, c client.Reade
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.CdnFrontdoorOriginGroupID")
 	}
-	mg.Spec.ForProvider.CdnFrontdoorOriginGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CdnFrontdoorOriginGroupID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CdnFrontdoorOriginGroupIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
@@ -171,7 +173,7 @@ func (mg *FrontdoorOrigin) ResolveReferences(ctx context.Context, c client.Reade
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.HostName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.HostName, ""),
 			Extract:      resource.ExtractParamPath("primary_blob_host", true),
 			Reference:    mg.Spec.ForProvider.HostNameRef,
 			Selector:     mg.Spec.ForProvider.HostNameSelector,
@@ -181,7 +183,7 @@ func (mg *FrontdoorOrigin) ResolveReferences(ctx context.Context, c client.Reade
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.HostName")
 	}
-	mg.Spec.ForProvider.HostName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.HostName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.HostNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
@@ -190,7 +192,7 @@ func (mg *FrontdoorOrigin) ResolveReferences(ctx context.Context, c client.Reade
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OriginHostHeader),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.OriginHostHeader, ""),
 			Extract:      resource.ExtractParamPath("primary_blob_host", true),
 			Reference:    mg.Spec.ForProvider.OriginHostHeaderRef,
 			Selector:     mg.Spec.ForProvider.OriginHostHeaderSelector,
@@ -200,7 +202,7 @@ func (mg *FrontdoorOrigin) ResolveReferences(ctx context.Context, c client.Reade
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.OriginHostHeader")
 	}
-	mg.Spec.ForProvider.OriginHostHeader = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.OriginHostHeader = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.OriginHostHeaderRef = rsp.ResolvedReference
 
 	if mg.Spec.ForProvider.PrivateLink != nil {
@@ -210,7 +212,7 @@ func (mg *FrontdoorOrigin) ResolveReferences(ctx context.Context, c client.Reade
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrivateLink.Location),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.PrivateLink.Location, ""),
 				Extract:      resource.ExtractParamPath("location", false),
 				Reference:    mg.Spec.ForProvider.PrivateLink.LocationRef,
 				Selector:     mg.Spec.ForProvider.PrivateLink.LocationSelector,
@@ -220,7 +222,7 @@ func (mg *FrontdoorOrigin) ResolveReferences(ctx context.Context, c client.Reade
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.PrivateLink.Location")
 		}
-		mg.Spec.ForProvider.PrivateLink.Location = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.PrivateLink.Location = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.PrivateLink.LocationRef = rsp.ResolvedReference
 
 	}
@@ -231,7 +233,7 @@ func (mg *FrontdoorOrigin) ResolveReferences(ctx context.Context, c client.Reade
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrivateLink.PrivateLinkTargetID),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.PrivateLink.PrivateLinkTargetID, ""),
 				Extract:      resource.ExtractResourceID(),
 				Reference:    mg.Spec.ForProvider.PrivateLink.PrivateLinkTargetIDRef,
 				Selector:     mg.Spec.ForProvider.PrivateLink.PrivateLinkTargetIDSelector,
@@ -241,7 +243,7 @@ func (mg *FrontdoorOrigin) ResolveReferences(ctx context.Context, c client.Reade
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.PrivateLink.PrivateLinkTargetID")
 		}
-		mg.Spec.ForProvider.PrivateLink.PrivateLinkTargetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.PrivateLink.PrivateLinkTargetID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.PrivateLink.PrivateLinkTargetIDRef = rsp.ResolvedReference
 
 	}
@@ -251,7 +253,7 @@ func (mg *FrontdoorOrigin) ResolveReferences(ctx context.Context, c client.Reade
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.HostName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.HostName, ""),
 			Extract:      resource.ExtractParamPath("primary_blob_host", true),
 			Reference:    mg.Spec.InitProvider.HostNameRef,
 			Selector:     mg.Spec.InitProvider.HostNameSelector,
@@ -261,7 +263,7 @@ func (mg *FrontdoorOrigin) ResolveReferences(ctx context.Context, c client.Reade
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.HostName")
 	}
-	mg.Spec.InitProvider.HostName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.HostName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.HostNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
@@ -270,7 +272,7 @@ func (mg *FrontdoorOrigin) ResolveReferences(ctx context.Context, c client.Reade
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.OriginHostHeader),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.OriginHostHeader, ""),
 			Extract:      resource.ExtractParamPath("primary_blob_host", true),
 			Reference:    mg.Spec.InitProvider.OriginHostHeaderRef,
 			Selector:     mg.Spec.InitProvider.OriginHostHeaderSelector,
@@ -280,7 +282,7 @@ func (mg *FrontdoorOrigin) ResolveReferences(ctx context.Context, c client.Reade
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.OriginHostHeader")
 	}
-	mg.Spec.InitProvider.OriginHostHeader = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.OriginHostHeader = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.OriginHostHeaderRef = rsp.ResolvedReference
 
 	if mg.Spec.InitProvider.PrivateLink != nil {
@@ -290,7 +292,7 @@ func (mg *FrontdoorOrigin) ResolveReferences(ctx context.Context, c client.Reade
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrivateLink.Location),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.PrivateLink.Location, ""),
 				Extract:      resource.ExtractParamPath("location", false),
 				Reference:    mg.Spec.InitProvider.PrivateLink.LocationRef,
 				Selector:     mg.Spec.InitProvider.PrivateLink.LocationSelector,
@@ -300,7 +302,7 @@ func (mg *FrontdoorOrigin) ResolveReferences(ctx context.Context, c client.Reade
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.PrivateLink.Location")
 		}
-		mg.Spec.InitProvider.PrivateLink.Location = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.PrivateLink.Location = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.PrivateLink.LocationRef = rsp.ResolvedReference
 
 	}
@@ -311,7 +313,7 @@ func (mg *FrontdoorOrigin) ResolveReferences(ctx context.Context, c client.Reade
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrivateLink.PrivateLinkTargetID),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.PrivateLink.PrivateLinkTargetID, ""),
 				Extract:      resource.ExtractResourceID(),
 				Reference:    mg.Spec.InitProvider.PrivateLink.PrivateLinkTargetIDRef,
 				Selector:     mg.Spec.InitProvider.PrivateLink.PrivateLinkTargetIDSelector,
@@ -321,7 +323,7 @@ func (mg *FrontdoorOrigin) ResolveReferences(ctx context.Context, c client.Reade
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.PrivateLink.PrivateLinkTargetID")
 		}
-		mg.Spec.InitProvider.PrivateLink.PrivateLinkTargetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.PrivateLink.PrivateLinkTargetID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.PrivateLink.PrivateLinkTargetIDRef = rsp.ResolvedReference
 
 	}
@@ -344,7 +346,7 @@ func (mg *FrontdoorOriginGroup) ResolveReferences(ctx context.Context, c client.
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CdnFrontdoorProfileID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.CdnFrontdoorProfileID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.CdnFrontdoorProfileIDRef,
 			Selector:     mg.Spec.ForProvider.CdnFrontdoorProfileIDSelector,
@@ -354,7 +356,7 @@ func (mg *FrontdoorOriginGroup) ResolveReferences(ctx context.Context, c client.
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.CdnFrontdoorProfileID")
 	}
-	mg.Spec.ForProvider.CdnFrontdoorProfileID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CdnFrontdoorProfileID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CdnFrontdoorProfileIDRef = rsp.ResolvedReference
 
 	return nil
@@ -376,7 +378,7 @@ func (mg *FrontdoorRoute) ResolveReferences(ctx context.Context, c client.Reader
 		}
 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.CdnFrontdoorCustomDomainIds),
+			CurrentValues: helper.FromPtrValues(mg.Spec.ForProvider.CdnFrontdoorCustomDomainIds),
 			Extract:       resource.ExtractResourceID(),
 			References:    mg.Spec.ForProvider.CdnFrontdoorCustomDomainIdsRefs,
 			Selector:      mg.Spec.ForProvider.CdnFrontdoorCustomDomainIdsSelector,
@@ -386,7 +388,7 @@ func (mg *FrontdoorRoute) ResolveReferences(ctx context.Context, c client.Reader
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.CdnFrontdoorCustomDomainIds")
 	}
-	mg.Spec.ForProvider.CdnFrontdoorCustomDomainIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.CdnFrontdoorCustomDomainIds = helper.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.CdnFrontdoorCustomDomainIdsRefs = mrsp.ResolvedReferences
 	{
 		m, l, err = apisresolver.GetManagedResource("cdn.azure.upbound.io", "v1beta1", "FrontdoorEndpoint", "FrontdoorEndpointList")
@@ -395,7 +397,7 @@ func (mg *FrontdoorRoute) ResolveReferences(ctx context.Context, c client.Reader
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CdnFrontdoorEndpointID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.CdnFrontdoorEndpointID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.CdnFrontdoorEndpointIDRef,
 			Selector:     mg.Spec.ForProvider.CdnFrontdoorEndpointIDSelector,
@@ -405,7 +407,7 @@ func (mg *FrontdoorRoute) ResolveReferences(ctx context.Context, c client.Reader
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.CdnFrontdoorEndpointID")
 	}
-	mg.Spec.ForProvider.CdnFrontdoorEndpointID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CdnFrontdoorEndpointID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CdnFrontdoorEndpointIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("cdn.azure.upbound.io", "v1beta2", "FrontdoorOriginGroup", "FrontdoorOriginGroupList")
@@ -414,7 +416,7 @@ func (mg *FrontdoorRoute) ResolveReferences(ctx context.Context, c client.Reader
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CdnFrontdoorOriginGroupID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.CdnFrontdoorOriginGroupID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.CdnFrontdoorOriginGroupIDRef,
 			Selector:     mg.Spec.ForProvider.CdnFrontdoorOriginGroupIDSelector,
@@ -424,7 +426,7 @@ func (mg *FrontdoorRoute) ResolveReferences(ctx context.Context, c client.Reader
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.CdnFrontdoorOriginGroupID")
 	}
-	mg.Spec.ForProvider.CdnFrontdoorOriginGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CdnFrontdoorOriginGroupID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CdnFrontdoorOriginGroupIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("cdn.azure.upbound.io", "v1beta2", "FrontdoorOrigin", "FrontdoorOriginList")
@@ -433,7 +435,7 @@ func (mg *FrontdoorRoute) ResolveReferences(ctx context.Context, c client.Reader
 		}
 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.CdnFrontdoorOriginIds),
+			CurrentValues: helper.FromPtrValues(mg.Spec.ForProvider.CdnFrontdoorOriginIds),
 			Extract:       resource.ExtractResourceID(),
 			References:    mg.Spec.ForProvider.CdnFrontdoorOriginIdsRefs,
 			Selector:      mg.Spec.ForProvider.CdnFrontdoorOriginIdsSelector,
@@ -443,7 +445,7 @@ func (mg *FrontdoorRoute) ResolveReferences(ctx context.Context, c client.Reader
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.CdnFrontdoorOriginIds")
 	}
-	mg.Spec.ForProvider.CdnFrontdoorOriginIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.CdnFrontdoorOriginIds = helper.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.CdnFrontdoorOriginIdsRefs = mrsp.ResolvedReferences
 	{
 		m, l, err = apisresolver.GetManagedResource("cdn.azure.upbound.io", "v1beta1", "FrontdoorRuleSet", "FrontdoorRuleSetList")
@@ -452,7 +454,7 @@ func (mg *FrontdoorRoute) ResolveReferences(ctx context.Context, c client.Reader
 		}
 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.CdnFrontdoorRuleSetIds),
+			CurrentValues: helper.FromPtrValues(mg.Spec.ForProvider.CdnFrontdoorRuleSetIds),
 			Extract:       resource.ExtractResourceID(),
 			References:    mg.Spec.ForProvider.CdnFrontdoorRuleSetIdsRefs,
 			Selector:      mg.Spec.ForProvider.CdnFrontdoorRuleSetIdsSelector,
@@ -462,7 +464,7 @@ func (mg *FrontdoorRoute) ResolveReferences(ctx context.Context, c client.Reader
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.CdnFrontdoorRuleSetIds")
 	}
-	mg.Spec.ForProvider.CdnFrontdoorRuleSetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.CdnFrontdoorRuleSetIds = helper.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.CdnFrontdoorRuleSetIdsRefs = mrsp.ResolvedReferences
 	{
 		m, l, err = apisresolver.GetManagedResource("cdn.azure.upbound.io", "v1beta2", "FrontdoorCustomDomain", "FrontdoorCustomDomainList")
@@ -471,7 +473,7 @@ func (mg *FrontdoorRoute) ResolveReferences(ctx context.Context, c client.Reader
 		}
 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.CdnFrontdoorCustomDomainIds),
+			CurrentValues: helper.FromPtrValues(mg.Spec.InitProvider.CdnFrontdoorCustomDomainIds),
 			Extract:       resource.ExtractResourceID(),
 			References:    mg.Spec.InitProvider.CdnFrontdoorCustomDomainIdsRefs,
 			Selector:      mg.Spec.InitProvider.CdnFrontdoorCustomDomainIdsSelector,
@@ -481,7 +483,7 @@ func (mg *FrontdoorRoute) ResolveReferences(ctx context.Context, c client.Reader
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.CdnFrontdoorCustomDomainIds")
 	}
-	mg.Spec.InitProvider.CdnFrontdoorCustomDomainIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.CdnFrontdoorCustomDomainIds = helper.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.InitProvider.CdnFrontdoorCustomDomainIdsRefs = mrsp.ResolvedReferences
 	{
 		m, l, err = apisresolver.GetManagedResource("cdn.azure.upbound.io", "v1beta2", "FrontdoorOriginGroup", "FrontdoorOriginGroupList")
@@ -490,7 +492,7 @@ func (mg *FrontdoorRoute) ResolveReferences(ctx context.Context, c client.Reader
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CdnFrontdoorOriginGroupID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.CdnFrontdoorOriginGroupID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.CdnFrontdoorOriginGroupIDRef,
 			Selector:     mg.Spec.InitProvider.CdnFrontdoorOriginGroupIDSelector,
@@ -500,7 +502,7 @@ func (mg *FrontdoorRoute) ResolveReferences(ctx context.Context, c client.Reader
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.CdnFrontdoorOriginGroupID")
 	}
-	mg.Spec.InitProvider.CdnFrontdoorOriginGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.CdnFrontdoorOriginGroupID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.CdnFrontdoorOriginGroupIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("cdn.azure.upbound.io", "v1beta2", "FrontdoorOrigin", "FrontdoorOriginList")
@@ -509,7 +511,7 @@ func (mg *FrontdoorRoute) ResolveReferences(ctx context.Context, c client.Reader
 		}
 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.CdnFrontdoorOriginIds),
+			CurrentValues: helper.FromPtrValues(mg.Spec.InitProvider.CdnFrontdoorOriginIds),
 			Extract:       resource.ExtractResourceID(),
 			References:    mg.Spec.InitProvider.CdnFrontdoorOriginIdsRefs,
 			Selector:      mg.Spec.InitProvider.CdnFrontdoorOriginIdsSelector,
@@ -519,7 +521,7 @@ func (mg *FrontdoorRoute) ResolveReferences(ctx context.Context, c client.Reader
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.CdnFrontdoorOriginIds")
 	}
-	mg.Spec.InitProvider.CdnFrontdoorOriginIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.CdnFrontdoorOriginIds = helper.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.InitProvider.CdnFrontdoorOriginIdsRefs = mrsp.ResolvedReferences
 	{
 		m, l, err = apisresolver.GetManagedResource("cdn.azure.upbound.io", "v1beta1", "FrontdoorRuleSet", "FrontdoorRuleSetList")
@@ -528,7 +530,7 @@ func (mg *FrontdoorRoute) ResolveReferences(ctx context.Context, c client.Reader
 		}
 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.CdnFrontdoorRuleSetIds),
+			CurrentValues: helper.FromPtrValues(mg.Spec.InitProvider.CdnFrontdoorRuleSetIds),
 			Extract:       resource.ExtractResourceID(),
 			References:    mg.Spec.InitProvider.CdnFrontdoorRuleSetIdsRefs,
 			Selector:      mg.Spec.InitProvider.CdnFrontdoorRuleSetIdsSelector,
@@ -538,7 +540,7 @@ func (mg *FrontdoorRoute) ResolveReferences(ctx context.Context, c client.Reader
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.CdnFrontdoorRuleSetIds")
 	}
-	mg.Spec.InitProvider.CdnFrontdoorRuleSetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.CdnFrontdoorRuleSetIds = helper.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.InitProvider.CdnFrontdoorRuleSetIdsRefs = mrsp.ResolvedReferences
 
 	return nil
@@ -561,7 +563,7 @@ func (mg *FrontdoorRule) ResolveReferences(ctx context.Context, c client.Reader)
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Actions.RouteConfigurationOverrideAction.CdnFrontdoorOriginGroupID),
+					CurrentValue: ptr.Deref(mg.Spec.ForProvider.Actions.RouteConfigurationOverrideAction.CdnFrontdoorOriginGroupID, ""),
 					Extract:      resource.ExtractResourceID(),
 					Reference:    mg.Spec.ForProvider.Actions.RouteConfigurationOverrideAction.CdnFrontdoorOriginGroupIDRef,
 					Selector:     mg.Spec.ForProvider.Actions.RouteConfigurationOverrideAction.CdnFrontdoorOriginGroupIDSelector,
@@ -571,7 +573,7 @@ func (mg *FrontdoorRule) ResolveReferences(ctx context.Context, c client.Reader)
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.ForProvider.Actions.RouteConfigurationOverrideAction.CdnFrontdoorOriginGroupID")
 			}
-			mg.Spec.ForProvider.Actions.RouteConfigurationOverrideAction.CdnFrontdoorOriginGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Actions.RouteConfigurationOverrideAction.CdnFrontdoorOriginGroupID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.ForProvider.Actions.RouteConfigurationOverrideAction.CdnFrontdoorOriginGroupIDRef = rsp.ResolvedReference
 
 		}
@@ -582,7 +584,7 @@ func (mg *FrontdoorRule) ResolveReferences(ctx context.Context, c client.Reader)
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CdnFrontdoorRuleSetID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.CdnFrontdoorRuleSetID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.CdnFrontdoorRuleSetIDRef,
 			Selector:     mg.Spec.ForProvider.CdnFrontdoorRuleSetIDSelector,
@@ -592,7 +594,7 @@ func (mg *FrontdoorRule) ResolveReferences(ctx context.Context, c client.Reader)
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.CdnFrontdoorRuleSetID")
 	}
-	mg.Spec.ForProvider.CdnFrontdoorRuleSetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CdnFrontdoorRuleSetID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CdnFrontdoorRuleSetIDRef = rsp.ResolvedReference
 
 	if mg.Spec.InitProvider.Actions != nil {
@@ -603,7 +605,7 @@ func (mg *FrontdoorRule) ResolveReferences(ctx context.Context, c client.Reader)
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Actions.RouteConfigurationOverrideAction.CdnFrontdoorOriginGroupID),
+					CurrentValue: ptr.Deref(mg.Spec.InitProvider.Actions.RouteConfigurationOverrideAction.CdnFrontdoorOriginGroupID, ""),
 					Extract:      resource.ExtractResourceID(),
 					Reference:    mg.Spec.InitProvider.Actions.RouteConfigurationOverrideAction.CdnFrontdoorOriginGroupIDRef,
 					Selector:     mg.Spec.InitProvider.Actions.RouteConfigurationOverrideAction.CdnFrontdoorOriginGroupIDSelector,
@@ -613,7 +615,7 @@ func (mg *FrontdoorRule) ResolveReferences(ctx context.Context, c client.Reader)
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.InitProvider.Actions.RouteConfigurationOverrideAction.CdnFrontdoorOriginGroupID")
 			}
-			mg.Spec.InitProvider.Actions.RouteConfigurationOverrideAction.CdnFrontdoorOriginGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Actions.RouteConfigurationOverrideAction.CdnFrontdoorOriginGroupID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.InitProvider.Actions.RouteConfigurationOverrideAction.CdnFrontdoorOriginGroupIDRef = rsp.ResolvedReference
 
 		}
@@ -637,7 +639,7 @@ func (mg *FrontdoorSecurityPolicy) ResolveReferences(ctx context.Context, c clie
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CdnFrontdoorProfileID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.CdnFrontdoorProfileID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.CdnFrontdoorProfileIDRef,
 			Selector:     mg.Spec.ForProvider.CdnFrontdoorProfileIDSelector,
@@ -647,7 +649,7 @@ func (mg *FrontdoorSecurityPolicy) ResolveReferences(ctx context.Context, c clie
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.CdnFrontdoorProfileID")
 	}
-	mg.Spec.ForProvider.CdnFrontdoorProfileID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CdnFrontdoorProfileID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CdnFrontdoorProfileIDRef = rsp.ResolvedReference
 
 	if mg.Spec.ForProvider.SecurityPolicies != nil {
@@ -660,7 +662,7 @@ func (mg *FrontdoorSecurityPolicy) ResolveReferences(ctx context.Context, c clie
 							return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 						}
 						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-							CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SecurityPolicies.Firewall.Association.Domain[i6].CdnFrontdoorDomainID),
+							CurrentValue: ptr.Deref(mg.Spec.ForProvider.SecurityPolicies.Firewall.Association.Domain[i6].CdnFrontdoorDomainID, ""),
 							Extract:      resource.ExtractResourceID(),
 							Reference:    mg.Spec.ForProvider.SecurityPolicies.Firewall.Association.Domain[i6].CdnFrontdoorDomainIDRef,
 							Selector:     mg.Spec.ForProvider.SecurityPolicies.Firewall.Association.Domain[i6].CdnFrontdoorDomainIDSelector,
@@ -670,7 +672,7 @@ func (mg *FrontdoorSecurityPolicy) ResolveReferences(ctx context.Context, c clie
 					if err != nil {
 						return errors.Wrap(err, "mg.Spec.ForProvider.SecurityPolicies.Firewall.Association.Domain[i6].CdnFrontdoorDomainID")
 					}
-					mg.Spec.ForProvider.SecurityPolicies.Firewall.Association.Domain[i6].CdnFrontdoorDomainID = reference.ToPtrValue(rsp.ResolvedValue)
+					mg.Spec.ForProvider.SecurityPolicies.Firewall.Association.Domain[i6].CdnFrontdoorDomainID = ptr.To(rsp.ResolvedValue)
 					mg.Spec.ForProvider.SecurityPolicies.Firewall.Association.Domain[i6].CdnFrontdoorDomainIDRef = rsp.ResolvedReference
 
 				}
@@ -685,7 +687,7 @@ func (mg *FrontdoorSecurityPolicy) ResolveReferences(ctx context.Context, c clie
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SecurityPolicies.Firewall.CdnFrontdoorFirewallPolicyID),
+					CurrentValue: ptr.Deref(mg.Spec.ForProvider.SecurityPolicies.Firewall.CdnFrontdoorFirewallPolicyID, ""),
 					Extract:      resource.ExtractResourceID(),
 					Reference:    mg.Spec.ForProvider.SecurityPolicies.Firewall.CdnFrontdoorFirewallPolicyIDRef,
 					Selector:     mg.Spec.ForProvider.SecurityPolicies.Firewall.CdnFrontdoorFirewallPolicyIDSelector,
@@ -695,7 +697,7 @@ func (mg *FrontdoorSecurityPolicy) ResolveReferences(ctx context.Context, c clie
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.ForProvider.SecurityPolicies.Firewall.CdnFrontdoorFirewallPolicyID")
 			}
-			mg.Spec.ForProvider.SecurityPolicies.Firewall.CdnFrontdoorFirewallPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.SecurityPolicies.Firewall.CdnFrontdoorFirewallPolicyID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.ForProvider.SecurityPolicies.Firewall.CdnFrontdoorFirewallPolicyIDRef = rsp.ResolvedReference
 
 		}
@@ -710,7 +712,7 @@ func (mg *FrontdoorSecurityPolicy) ResolveReferences(ctx context.Context, c clie
 							return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 						}
 						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-							CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SecurityPolicies.Firewall.Association.Domain[i6].CdnFrontdoorDomainID),
+							CurrentValue: ptr.Deref(mg.Spec.InitProvider.SecurityPolicies.Firewall.Association.Domain[i6].CdnFrontdoorDomainID, ""),
 							Extract:      resource.ExtractResourceID(),
 							Reference:    mg.Spec.InitProvider.SecurityPolicies.Firewall.Association.Domain[i6].CdnFrontdoorDomainIDRef,
 							Selector:     mg.Spec.InitProvider.SecurityPolicies.Firewall.Association.Domain[i6].CdnFrontdoorDomainIDSelector,
@@ -720,7 +722,7 @@ func (mg *FrontdoorSecurityPolicy) ResolveReferences(ctx context.Context, c clie
 					if err != nil {
 						return errors.Wrap(err, "mg.Spec.InitProvider.SecurityPolicies.Firewall.Association.Domain[i6].CdnFrontdoorDomainID")
 					}
-					mg.Spec.InitProvider.SecurityPolicies.Firewall.Association.Domain[i6].CdnFrontdoorDomainID = reference.ToPtrValue(rsp.ResolvedValue)
+					mg.Spec.InitProvider.SecurityPolicies.Firewall.Association.Domain[i6].CdnFrontdoorDomainID = ptr.To(rsp.ResolvedValue)
 					mg.Spec.InitProvider.SecurityPolicies.Firewall.Association.Domain[i6].CdnFrontdoorDomainIDRef = rsp.ResolvedReference
 
 				}
@@ -735,7 +737,7 @@ func (mg *FrontdoorSecurityPolicy) ResolveReferences(ctx context.Context, c clie
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SecurityPolicies.Firewall.CdnFrontdoorFirewallPolicyID),
+					CurrentValue: ptr.Deref(mg.Spec.InitProvider.SecurityPolicies.Firewall.CdnFrontdoorFirewallPolicyID, ""),
 					Extract:      resource.ExtractResourceID(),
 					Reference:    mg.Spec.InitProvider.SecurityPolicies.Firewall.CdnFrontdoorFirewallPolicyIDRef,
 					Selector:     mg.Spec.InitProvider.SecurityPolicies.Firewall.CdnFrontdoorFirewallPolicyIDSelector,
@@ -745,7 +747,7 @@ func (mg *FrontdoorSecurityPolicy) ResolveReferences(ctx context.Context, c clie
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.InitProvider.SecurityPolicies.Firewall.CdnFrontdoorFirewallPolicyID")
 			}
-			mg.Spec.InitProvider.SecurityPolicies.Firewall.CdnFrontdoorFirewallPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.SecurityPolicies.Firewall.CdnFrontdoorFirewallPolicyID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.InitProvider.SecurityPolicies.Firewall.CdnFrontdoorFirewallPolicyIDRef = rsp.ResolvedReference
 
 		}

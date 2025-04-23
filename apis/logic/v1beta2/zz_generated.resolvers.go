@@ -14,6 +14,7 @@ import (
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -32,7 +33,7 @@ func (mg *AppIntegrationAccountBatchConfiguration) ResolveReferences( // Resolve
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IntegrationAccountName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.IntegrationAccountName, ""),
 			Extract:      resource.ExtractParamPath("name", false),
 			Reference:    mg.Spec.ForProvider.IntegrationAccountNameRef,
 			Selector:     mg.Spec.ForProvider.IntegrationAccountNameSelector,
@@ -42,7 +43,7 @@ func (mg *AppIntegrationAccountBatchConfiguration) ResolveReferences( // Resolve
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.IntegrationAccountName")
 	}
-	mg.Spec.ForProvider.IntegrationAccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.IntegrationAccountName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.IntegrationAccountNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -51,7 +52,7 @@ func (mg *AppIntegrationAccountBatchConfiguration) ResolveReferences( // Resolve
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -61,7 +62,7 @@ func (mg *AppIntegrationAccountBatchConfiguration) ResolveReferences( // Resolve
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("logic.azure.upbound.io", "v1beta1", "AppIntegrationAccount", "AppIntegrationAccountList")
@@ -70,7 +71,7 @@ func (mg *AppIntegrationAccountBatchConfiguration) ResolveReferences( // Resolve
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IntegrationAccountName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.IntegrationAccountName, ""),
 			Extract:      resource.ExtractParamPath("name", false),
 			Reference:    mg.Spec.InitProvider.IntegrationAccountNameRef,
 			Selector:     mg.Spec.InitProvider.IntegrationAccountNameSelector,
@@ -80,7 +81,7 @@ func (mg *AppIntegrationAccountBatchConfiguration) ResolveReferences( // Resolve
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.IntegrationAccountName")
 	}
-	mg.Spec.InitProvider.IntegrationAccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.IntegrationAccountName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.IntegrationAccountNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -89,7 +90,7 @@ func (mg *AppIntegrationAccountBatchConfiguration) ResolveReferences( // Resolve
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
@@ -99,7 +100,7 @@ func (mg *AppIntegrationAccountBatchConfiguration) ResolveReferences( // Resolve
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
 	}
-	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -120,7 +121,7 @@ func (mg *AppTriggerRecurrence) ResolveReferences(ctx context.Context, c client.
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogicAppID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.LogicAppID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.LogicAppIDRef,
 			Selector:     mg.Spec.ForProvider.LogicAppIDSelector,
@@ -130,7 +131,7 @@ func (mg *AppTriggerRecurrence) ResolveReferences(ctx context.Context, c client.
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.LogicAppID")
 	}
-	mg.Spec.ForProvider.LogicAppID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LogicAppID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LogicAppIDRef = rsp.ResolvedReference
 
 	return nil
@@ -151,7 +152,7 @@ func (mg *AppWorkflow) ResolveReferences(ctx context.Context, c client.Reader) e
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -161,7 +162,7 @@ func (mg *AppWorkflow) ResolveReferences(ctx context.Context, c client.Reader) e
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil

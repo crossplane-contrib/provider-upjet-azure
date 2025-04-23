@@ -14,6 +14,7 @@ import (
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -32,7 +33,7 @@ func (mg *EventRelayNamespace) ResolveReferences( // ResolveReferences of this E
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -42,7 +43,7 @@ func (mg *EventRelayNamespace) ResolveReferences( // ResolveReferences of this E
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -63,7 +64,7 @@ func (mg *HybridConnection) ResolveReferences(ctx context.Context, c client.Read
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RelayNamespaceName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.RelayNamespaceName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.RelayNamespaceNameRef,
 			Selector:     mg.Spec.ForProvider.RelayNamespaceNameSelector,
@@ -73,7 +74,7 @@ func (mg *HybridConnection) ResolveReferences(ctx context.Context, c client.Read
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.RelayNamespaceName")
 	}
-	mg.Spec.ForProvider.RelayNamespaceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.RelayNamespaceName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RelayNamespaceNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -82,7 +83,7 @@ func (mg *HybridConnection) ResolveReferences(ctx context.Context, c client.Read
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -92,7 +93,7 @@ func (mg *HybridConnection) ResolveReferences(ctx context.Context, c client.Read
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("relay.azure.upbound.io", "v1beta1", "EventRelayNamespace", "EventRelayNamespaceList")
@@ -101,7 +102,7 @@ func (mg *HybridConnection) ResolveReferences(ctx context.Context, c client.Read
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RelayNamespaceName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.RelayNamespaceName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.RelayNamespaceNameRef,
 			Selector:     mg.Spec.InitProvider.RelayNamespaceNameSelector,
@@ -111,7 +112,7 @@ func (mg *HybridConnection) ResolveReferences(ctx context.Context, c client.Read
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.RelayNamespaceName")
 	}
-	mg.Spec.InitProvider.RelayNamespaceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RelayNamespaceName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.RelayNamespaceNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -120,7 +121,7 @@ func (mg *HybridConnection) ResolveReferences(ctx context.Context, c client.Read
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
@@ -130,7 +131,7 @@ func (mg *HybridConnection) ResolveReferences(ctx context.Context, c client.Read
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
 	}
-	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -151,7 +152,7 @@ func (mg *HybridConnectionAuthorizationRule) ResolveReferences(ctx context.Conte
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.HybridConnectionName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.HybridConnectionName, ""),
 			Extract:      resource.ExtractParamPath("name", false),
 			Reference:    mg.Spec.ForProvider.HybridConnectionNameRef,
 			Selector:     mg.Spec.ForProvider.HybridConnectionNameSelector,
@@ -161,7 +162,7 @@ func (mg *HybridConnectionAuthorizationRule) ResolveReferences(ctx context.Conte
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.HybridConnectionName")
 	}
-	mg.Spec.ForProvider.HybridConnectionName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.HybridConnectionName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.HybridConnectionNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("relay.azure.upbound.io", "v1beta1", "EventRelayNamespace", "EventRelayNamespaceList")
@@ -170,7 +171,7 @@ func (mg *HybridConnectionAuthorizationRule) ResolveReferences(ctx context.Conte
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NamespaceName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.NamespaceName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.NamespaceNameRef,
 			Selector:     mg.Spec.ForProvider.NamespaceNameSelector,
@@ -180,7 +181,7 @@ func (mg *HybridConnectionAuthorizationRule) ResolveReferences(ctx context.Conte
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.NamespaceName")
 	}
-	mg.Spec.ForProvider.NamespaceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.NamespaceName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NamespaceNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -189,7 +190,7 @@ func (mg *HybridConnectionAuthorizationRule) ResolveReferences(ctx context.Conte
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -199,7 +200,7 @@ func (mg *HybridConnectionAuthorizationRule) ResolveReferences(ctx context.Conte
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("relay.azure.upbound.io", "v1beta1", "EventRelayNamespace", "EventRelayNamespaceList")
@@ -208,7 +209,7 @@ func (mg *HybridConnectionAuthorizationRule) ResolveReferences(ctx context.Conte
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NamespaceName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.NamespaceName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.NamespaceNameRef,
 			Selector:     mg.Spec.InitProvider.NamespaceNameSelector,
@@ -218,7 +219,7 @@ func (mg *HybridConnectionAuthorizationRule) ResolveReferences(ctx context.Conte
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.NamespaceName")
 	}
-	mg.Spec.InitProvider.NamespaceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.NamespaceName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.NamespaceNameRef = rsp.ResolvedReference
 
 	return nil
@@ -239,7 +240,7 @@ func (mg *NamespaceAuthorizationRule) ResolveReferences(ctx context.Context, c c
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NamespaceName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.NamespaceName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.NamespaceNameRef,
 			Selector:     mg.Spec.ForProvider.NamespaceNameSelector,
@@ -249,7 +250,7 @@ func (mg *NamespaceAuthorizationRule) ResolveReferences(ctx context.Context, c c
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.NamespaceName")
 	}
-	mg.Spec.ForProvider.NamespaceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.NamespaceName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NamespaceNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -258,7 +259,7 @@ func (mg *NamespaceAuthorizationRule) ResolveReferences(ctx context.Context, c c
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -268,7 +269,7 @@ func (mg *NamespaceAuthorizationRule) ResolveReferences(ctx context.Context, c c
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil

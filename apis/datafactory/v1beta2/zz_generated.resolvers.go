@@ -15,6 +15,7 @@ import (
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	rconfig "github.com/upbound/provider-azure/apis/rconfig"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -33,7 +34,7 @@ func (mg *CustomDataSet) ResolveReferences( // ResolveReferences of this CustomD
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataFactoryID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.DataFactoryID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.DataFactoryIDRef,
 			Selector:     mg.Spec.ForProvider.DataFactoryIDSelector,
@@ -43,7 +44,7 @@ func (mg *CustomDataSet) ResolveReferences( // ResolveReferences of this CustomD
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.DataFactoryID")
 	}
-	mg.Spec.ForProvider.DataFactoryID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DataFactoryID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataFactoryIDRef = rsp.ResolvedReference
 
 	if mg.Spec.ForProvider.LinkedService != nil {
@@ -53,7 +54,7 @@ func (mg *CustomDataSet) ResolveReferences( // ResolveReferences of this CustomD
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LinkedService.Name),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.LinkedService.Name, ""),
 				Extract:      reference.ExternalName(),
 				Reference:    mg.Spec.ForProvider.LinkedService.NameRef,
 				Selector:     mg.Spec.ForProvider.LinkedService.NameSelector,
@@ -63,7 +64,7 @@ func (mg *CustomDataSet) ResolveReferences( // ResolveReferences of this CustomD
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.LinkedService.Name")
 		}
-		mg.Spec.ForProvider.LinkedService.Name = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.LinkedService.Name = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.LinkedService.NameRef = rsp.ResolvedReference
 
 	}
@@ -74,7 +75,7 @@ func (mg *CustomDataSet) ResolveReferences( // ResolveReferences of this CustomD
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LinkedService.Name),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.LinkedService.Name, ""),
 				Extract:      reference.ExternalName(),
 				Reference:    mg.Spec.InitProvider.LinkedService.NameRef,
 				Selector:     mg.Spec.InitProvider.LinkedService.NameSelector,
@@ -84,7 +85,7 @@ func (mg *CustomDataSet) ResolveReferences( // ResolveReferences of this CustomD
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.LinkedService.Name")
 		}
-		mg.Spec.InitProvider.LinkedService.Name = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.LinkedService.Name = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.LinkedService.NameRef = rsp.ResolvedReference
 
 	}
@@ -107,7 +108,7 @@ func (mg *DataFlow) ResolveReferences(ctx context.Context, c client.Reader) erro
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataFactoryID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.DataFactoryID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.DataFactoryIDRef,
 			Selector:     mg.Spec.ForProvider.DataFactoryIDSelector,
@@ -117,7 +118,7 @@ func (mg *DataFlow) ResolveReferences(ctx context.Context, c client.Reader) erro
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.DataFactoryID")
 	}
-	mg.Spec.ForProvider.DataFactoryID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DataFactoryID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataFactoryIDRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.Sink); i3++ {
@@ -128,7 +129,7 @@ func (mg *DataFlow) ResolveReferences(ctx context.Context, c client.Reader) erro
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Sink[i3].DataSet.Name),
+					CurrentValue: ptr.Deref(mg.Spec.ForProvider.Sink[i3].DataSet.Name, ""),
 					Extract:      reference.ExternalName(),
 					Reference:    mg.Spec.ForProvider.Sink[i3].DataSet.NameRef,
 					Selector:     mg.Spec.ForProvider.Sink[i3].DataSet.NameSelector,
@@ -138,7 +139,7 @@ func (mg *DataFlow) ResolveReferences(ctx context.Context, c client.Reader) erro
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.ForProvider.Sink[i3].DataSet.Name")
 			}
-			mg.Spec.ForProvider.Sink[i3].DataSet.Name = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Sink[i3].DataSet.Name = ptr.To(rsp.ResolvedValue)
 			mg.Spec.ForProvider.Sink[i3].DataSet.NameRef = rsp.ResolvedReference
 
 		}
@@ -151,7 +152,7 @@ func (mg *DataFlow) ResolveReferences(ctx context.Context, c client.Reader) erro
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Source[i3].DataSet.Name),
+					CurrentValue: ptr.Deref(mg.Spec.ForProvider.Source[i3].DataSet.Name, ""),
 					Extract:      reference.ExternalName(),
 					Reference:    mg.Spec.ForProvider.Source[i3].DataSet.NameRef,
 					Selector:     mg.Spec.ForProvider.Source[i3].DataSet.NameSelector,
@@ -161,7 +162,7 @@ func (mg *DataFlow) ResolveReferences(ctx context.Context, c client.Reader) erro
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.ForProvider.Source[i3].DataSet.Name")
 			}
-			mg.Spec.ForProvider.Source[i3].DataSet.Name = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Source[i3].DataSet.Name = ptr.To(rsp.ResolvedValue)
 			mg.Spec.ForProvider.Source[i3].DataSet.NameRef = rsp.ResolvedReference
 
 		}
@@ -174,7 +175,7 @@ func (mg *DataFlow) ResolveReferences(ctx context.Context, c client.Reader) erro
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Sink[i3].DataSet.Name),
+					CurrentValue: ptr.Deref(mg.Spec.InitProvider.Sink[i3].DataSet.Name, ""),
 					Extract:      reference.ExternalName(),
 					Reference:    mg.Spec.InitProvider.Sink[i3].DataSet.NameRef,
 					Selector:     mg.Spec.InitProvider.Sink[i3].DataSet.NameSelector,
@@ -184,7 +185,7 @@ func (mg *DataFlow) ResolveReferences(ctx context.Context, c client.Reader) erro
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.InitProvider.Sink[i3].DataSet.Name")
 			}
-			mg.Spec.InitProvider.Sink[i3].DataSet.Name = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Sink[i3].DataSet.Name = ptr.To(rsp.ResolvedValue)
 			mg.Spec.InitProvider.Sink[i3].DataSet.NameRef = rsp.ResolvedReference
 
 		}
@@ -197,7 +198,7 @@ func (mg *DataFlow) ResolveReferences(ctx context.Context, c client.Reader) erro
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Source[i3].DataSet.Name),
+					CurrentValue: ptr.Deref(mg.Spec.InitProvider.Source[i3].DataSet.Name, ""),
 					Extract:      reference.ExternalName(),
 					Reference:    mg.Spec.InitProvider.Source[i3].DataSet.NameRef,
 					Selector:     mg.Spec.InitProvider.Source[i3].DataSet.NameSelector,
@@ -207,7 +208,7 @@ func (mg *DataFlow) ResolveReferences(ctx context.Context, c client.Reader) erro
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.InitProvider.Source[i3].DataSet.Name")
 			}
-			mg.Spec.InitProvider.Source[i3].DataSet.Name = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Source[i3].DataSet.Name = ptr.To(rsp.ResolvedValue)
 			mg.Spec.InitProvider.Source[i3].DataSet.NameRef = rsp.ResolvedReference
 
 		}
@@ -231,7 +232,7 @@ func (mg *DataSetBinary) ResolveReferences(ctx context.Context, c client.Reader)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataFactoryID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.DataFactoryID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.DataFactoryIDRef,
 			Selector:     mg.Spec.ForProvider.DataFactoryIDSelector,
@@ -241,7 +242,7 @@ func (mg *DataSetBinary) ResolveReferences(ctx context.Context, c client.Reader)
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.DataFactoryID")
 	}
-	mg.Spec.ForProvider.DataFactoryID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DataFactoryID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataFactoryIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "LinkedServiceSFTP", "LinkedServiceSFTPList")
@@ -250,7 +251,7 @@ func (mg *DataSetBinary) ResolveReferences(ctx context.Context, c client.Reader)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LinkedServiceName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.LinkedServiceName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.LinkedServiceNameRef,
 			Selector:     mg.Spec.ForProvider.LinkedServiceNameSelector,
@@ -260,7 +261,7 @@ func (mg *DataSetBinary) ResolveReferences(ctx context.Context, c client.Reader)
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.LinkedServiceName")
 	}
-	mg.Spec.ForProvider.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LinkedServiceName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LinkedServiceNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "LinkedServiceSFTP", "LinkedServiceSFTPList")
@@ -269,7 +270,7 @@ func (mg *DataSetBinary) ResolveReferences(ctx context.Context, c client.Reader)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LinkedServiceName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.LinkedServiceName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.LinkedServiceNameRef,
 			Selector:     mg.Spec.InitProvider.LinkedServiceNameSelector,
@@ -279,7 +280,7 @@ func (mg *DataSetBinary) ResolveReferences(ctx context.Context, c client.Reader)
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.LinkedServiceName")
 	}
-	mg.Spec.InitProvider.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LinkedServiceName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.LinkedServiceNameRef = rsp.ResolvedReference
 
 	return nil
@@ -300,7 +301,7 @@ func (mg *DataSetDelimitedText) ResolveReferences(ctx context.Context, c client.
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataFactoryID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.DataFactoryID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.DataFactoryIDRef,
 			Selector:     mg.Spec.ForProvider.DataFactoryIDSelector,
@@ -310,7 +311,7 @@ func (mg *DataSetDelimitedText) ResolveReferences(ctx context.Context, c client.
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.DataFactoryID")
 	}
-	mg.Spec.ForProvider.DataFactoryID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DataFactoryID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataFactoryIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "LinkedServiceWeb", "LinkedServiceWebList")
@@ -319,7 +320,7 @@ func (mg *DataSetDelimitedText) ResolveReferences(ctx context.Context, c client.
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LinkedServiceName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.LinkedServiceName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.LinkedServiceNameRef,
 			Selector:     mg.Spec.ForProvider.LinkedServiceNameSelector,
@@ -329,7 +330,7 @@ func (mg *DataSetDelimitedText) ResolveReferences(ctx context.Context, c client.
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.LinkedServiceName")
 	}
-	mg.Spec.ForProvider.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LinkedServiceName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LinkedServiceNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "LinkedServiceWeb", "LinkedServiceWebList")
@@ -338,7 +339,7 @@ func (mg *DataSetDelimitedText) ResolveReferences(ctx context.Context, c client.
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LinkedServiceName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.LinkedServiceName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.LinkedServiceNameRef,
 			Selector:     mg.Spec.InitProvider.LinkedServiceNameSelector,
@@ -348,7 +349,7 @@ func (mg *DataSetDelimitedText) ResolveReferences(ctx context.Context, c client.
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.LinkedServiceName")
 	}
-	mg.Spec.InitProvider.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LinkedServiceName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.LinkedServiceNameRef = rsp.ResolvedReference
 
 	return nil
@@ -369,7 +370,7 @@ func (mg *DataSetJSON) ResolveReferences(ctx context.Context, c client.Reader) e
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataFactoryID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.DataFactoryID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.DataFactoryIDRef,
 			Selector:     mg.Spec.ForProvider.DataFactoryIDSelector,
@@ -379,7 +380,7 @@ func (mg *DataSetJSON) ResolveReferences(ctx context.Context, c client.Reader) e
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.DataFactoryID")
 	}
-	mg.Spec.ForProvider.DataFactoryID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DataFactoryID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataFactoryIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "LinkedServiceWeb", "LinkedServiceWebList")
@@ -388,7 +389,7 @@ func (mg *DataSetJSON) ResolveReferences(ctx context.Context, c client.Reader) e
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LinkedServiceName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.LinkedServiceName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.LinkedServiceNameRef,
 			Selector:     mg.Spec.ForProvider.LinkedServiceNameSelector,
@@ -398,7 +399,7 @@ func (mg *DataSetJSON) ResolveReferences(ctx context.Context, c client.Reader) e
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.LinkedServiceName")
 	}
-	mg.Spec.ForProvider.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LinkedServiceName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LinkedServiceNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "LinkedServiceWeb", "LinkedServiceWebList")
@@ -407,7 +408,7 @@ func (mg *DataSetJSON) ResolveReferences(ctx context.Context, c client.Reader) e
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LinkedServiceName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.LinkedServiceName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.LinkedServiceNameRef,
 			Selector:     mg.Spec.InitProvider.LinkedServiceNameSelector,
@@ -417,7 +418,7 @@ func (mg *DataSetJSON) ResolveReferences(ctx context.Context, c client.Reader) e
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.LinkedServiceName")
 	}
-	mg.Spec.InitProvider.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LinkedServiceName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.LinkedServiceNameRef = rsp.ResolvedReference
 
 	return nil
@@ -438,7 +439,7 @@ func (mg *DataSetParquet) ResolveReferences(ctx context.Context, c client.Reader
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataFactoryID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.DataFactoryID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.DataFactoryIDRef,
 			Selector:     mg.Spec.ForProvider.DataFactoryIDSelector,
@@ -448,7 +449,7 @@ func (mg *DataSetParquet) ResolveReferences(ctx context.Context, c client.Reader
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.DataFactoryID")
 	}
-	mg.Spec.ForProvider.DataFactoryID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DataFactoryID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataFactoryIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "LinkedServiceWeb", "LinkedServiceWebList")
@@ -457,7 +458,7 @@ func (mg *DataSetParquet) ResolveReferences(ctx context.Context, c client.Reader
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LinkedServiceName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.LinkedServiceName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.LinkedServiceNameRef,
 			Selector:     mg.Spec.ForProvider.LinkedServiceNameSelector,
@@ -467,7 +468,7 @@ func (mg *DataSetParquet) ResolveReferences(ctx context.Context, c client.Reader
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.LinkedServiceName")
 	}
-	mg.Spec.ForProvider.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LinkedServiceName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LinkedServiceNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "LinkedServiceWeb", "LinkedServiceWebList")
@@ -476,7 +477,7 @@ func (mg *DataSetParquet) ResolveReferences(ctx context.Context, c client.Reader
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LinkedServiceName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.LinkedServiceName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.LinkedServiceNameRef,
 			Selector:     mg.Spec.InitProvider.LinkedServiceNameSelector,
@@ -486,7 +487,7 @@ func (mg *DataSetParquet) ResolveReferences(ctx context.Context, c client.Reader
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.LinkedServiceName")
 	}
-	mg.Spec.InitProvider.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LinkedServiceName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.LinkedServiceNameRef = rsp.ResolvedReference
 
 	return nil
@@ -507,7 +508,7 @@ func (mg *Factory) ResolveReferences(ctx context.Context, c client.Reader) error
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -517,7 +518,7 @@ func (mg *Factory) ResolveReferences(ctx context.Context, c client.Reader) error
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -538,7 +539,7 @@ func (mg *IntegrationRuntimeAzureSSIS) ResolveReferences(ctx context.Context, c 
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataFactoryID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.DataFactoryID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.DataFactoryIDRef,
 			Selector:     mg.Spec.ForProvider.DataFactoryIDSelector,
@@ -548,7 +549,7 @@ func (mg *IntegrationRuntimeAzureSSIS) ResolveReferences(ctx context.Context, c 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.DataFactoryID")
 	}
-	mg.Spec.ForProvider.DataFactoryID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DataFactoryID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataFactoryIDRef = rsp.ResolvedReference
 
 	if mg.Spec.ForProvider.ExpressVnetIntegration != nil {
@@ -558,7 +559,7 @@ func (mg *IntegrationRuntimeAzureSSIS) ResolveReferences(ctx context.Context, c 
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExpressVnetIntegration.SubnetID),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.ExpressVnetIntegration.SubnetID, ""),
 				Extract:      rconfig.ExtractResourceID(),
 				Reference:    mg.Spec.ForProvider.ExpressVnetIntegration.SubnetIDRef,
 				Selector:     mg.Spec.ForProvider.ExpressVnetIntegration.SubnetIDSelector,
@@ -568,7 +569,7 @@ func (mg *IntegrationRuntimeAzureSSIS) ResolveReferences(ctx context.Context, c 
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.ExpressVnetIntegration.SubnetID")
 		}
-		mg.Spec.ForProvider.ExpressVnetIntegration.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.ExpressVnetIntegration.SubnetID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.ExpressVnetIntegration.SubnetIDRef = rsp.ResolvedReference
 
 	}
@@ -579,7 +580,7 @@ func (mg *IntegrationRuntimeAzureSSIS) ResolveReferences(ctx context.Context, c 
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VnetIntegration.SubnetID),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.VnetIntegration.SubnetID, ""),
 				Extract:      rconfig.ExtractResourceID(),
 				Reference:    mg.Spec.ForProvider.VnetIntegration.SubnetIDRef,
 				Selector:     mg.Spec.ForProvider.VnetIntegration.SubnetIDSelector,
@@ -589,7 +590,7 @@ func (mg *IntegrationRuntimeAzureSSIS) ResolveReferences(ctx context.Context, c 
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.VnetIntegration.SubnetID")
 		}
-		mg.Spec.ForProvider.VnetIntegration.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.VnetIntegration.SubnetID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.VnetIntegration.SubnetIDRef = rsp.ResolvedReference
 
 	}
@@ -600,7 +601,7 @@ func (mg *IntegrationRuntimeAzureSSIS) ResolveReferences(ctx context.Context, c 
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VnetIntegration.SubnetName),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.VnetIntegration.SubnetName, ""),
 				Extract:      reference.ExternalName(),
 				Reference:    mg.Spec.ForProvider.VnetIntegration.SubnetNameRef,
 				Selector:     mg.Spec.ForProvider.VnetIntegration.SubnetNameSelector,
@@ -610,7 +611,7 @@ func (mg *IntegrationRuntimeAzureSSIS) ResolveReferences(ctx context.Context, c 
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.VnetIntegration.SubnetName")
 		}
-		mg.Spec.ForProvider.VnetIntegration.SubnetName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.VnetIntegration.SubnetName = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.VnetIntegration.SubnetNameRef = rsp.ResolvedReference
 
 	}
@@ -621,7 +622,7 @@ func (mg *IntegrationRuntimeAzureSSIS) ResolveReferences(ctx context.Context, c 
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExpressVnetIntegration.SubnetID),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.ExpressVnetIntegration.SubnetID, ""),
 				Extract:      rconfig.ExtractResourceID(),
 				Reference:    mg.Spec.InitProvider.ExpressVnetIntegration.SubnetIDRef,
 				Selector:     mg.Spec.InitProvider.ExpressVnetIntegration.SubnetIDSelector,
@@ -631,7 +632,7 @@ func (mg *IntegrationRuntimeAzureSSIS) ResolveReferences(ctx context.Context, c 
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.ExpressVnetIntegration.SubnetID")
 		}
-		mg.Spec.InitProvider.ExpressVnetIntegration.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.ExpressVnetIntegration.SubnetID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.ExpressVnetIntegration.SubnetIDRef = rsp.ResolvedReference
 
 	}
@@ -642,7 +643,7 @@ func (mg *IntegrationRuntimeAzureSSIS) ResolveReferences(ctx context.Context, c 
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VnetIntegration.SubnetID),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.VnetIntegration.SubnetID, ""),
 				Extract:      rconfig.ExtractResourceID(),
 				Reference:    mg.Spec.InitProvider.VnetIntegration.SubnetIDRef,
 				Selector:     mg.Spec.InitProvider.VnetIntegration.SubnetIDSelector,
@@ -652,7 +653,7 @@ func (mg *IntegrationRuntimeAzureSSIS) ResolveReferences(ctx context.Context, c 
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.VnetIntegration.SubnetID")
 		}
-		mg.Spec.InitProvider.VnetIntegration.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.VnetIntegration.SubnetID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.VnetIntegration.SubnetIDRef = rsp.ResolvedReference
 
 	}
@@ -663,7 +664,7 @@ func (mg *IntegrationRuntimeAzureSSIS) ResolveReferences(ctx context.Context, c 
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VnetIntegration.SubnetName),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.VnetIntegration.SubnetName, ""),
 				Extract:      reference.ExternalName(),
 				Reference:    mg.Spec.InitProvider.VnetIntegration.SubnetNameRef,
 				Selector:     mg.Spec.InitProvider.VnetIntegration.SubnetNameSelector,
@@ -673,7 +674,7 @@ func (mg *IntegrationRuntimeAzureSSIS) ResolveReferences(ctx context.Context, c 
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.VnetIntegration.SubnetName")
 		}
-		mg.Spec.InitProvider.VnetIntegration.SubnetName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.VnetIntegration.SubnetName = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.VnetIntegration.SubnetNameRef = rsp.ResolvedReference
 
 	}
@@ -696,7 +697,7 @@ func (mg *IntegrationRuntimeManaged) ResolveReferences(ctx context.Context, c cl
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataFactoryID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.DataFactoryID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.DataFactoryIDRef,
 			Selector:     mg.Spec.ForProvider.DataFactoryIDSelector,
@@ -706,7 +707,7 @@ func (mg *IntegrationRuntimeManaged) ResolveReferences(ctx context.Context, c cl
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.DataFactoryID")
 	}
-	mg.Spec.ForProvider.DataFactoryID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DataFactoryID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataFactoryIDRef = rsp.ResolvedReference
 
 	if mg.Spec.ForProvider.VnetIntegration != nil {
@@ -716,7 +717,7 @@ func (mg *IntegrationRuntimeManaged) ResolveReferences(ctx context.Context, c cl
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VnetIntegration.SubnetName),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.VnetIntegration.SubnetName, ""),
 				Extract:      reference.ExternalName(),
 				Reference:    mg.Spec.ForProvider.VnetIntegration.SubnetNameRef,
 				Selector:     mg.Spec.ForProvider.VnetIntegration.SubnetNameSelector,
@@ -726,7 +727,7 @@ func (mg *IntegrationRuntimeManaged) ResolveReferences(ctx context.Context, c cl
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.VnetIntegration.SubnetName")
 		}
-		mg.Spec.ForProvider.VnetIntegration.SubnetName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.VnetIntegration.SubnetName = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.VnetIntegration.SubnetNameRef = rsp.ResolvedReference
 
 	}
@@ -737,7 +738,7 @@ func (mg *IntegrationRuntimeManaged) ResolveReferences(ctx context.Context, c cl
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VnetIntegration.SubnetName),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.VnetIntegration.SubnetName, ""),
 				Extract:      reference.ExternalName(),
 				Reference:    mg.Spec.InitProvider.VnetIntegration.SubnetNameRef,
 				Selector:     mg.Spec.InitProvider.VnetIntegration.SubnetNameSelector,
@@ -747,7 +748,7 @@ func (mg *IntegrationRuntimeManaged) ResolveReferences(ctx context.Context, c cl
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.VnetIntegration.SubnetName")
 		}
-		mg.Spec.InitProvider.VnetIntegration.SubnetName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.VnetIntegration.SubnetName = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.VnetIntegration.SubnetNameRef = rsp.ResolvedReference
 
 	}
@@ -770,7 +771,7 @@ func (mg *LinkedCustomService) ResolveReferences(ctx context.Context, c client.R
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataFactoryID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.DataFactoryID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.DataFactoryIDRef,
 			Selector:     mg.Spec.ForProvider.DataFactoryIDSelector,
@@ -780,7 +781,7 @@ func (mg *LinkedCustomService) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.DataFactoryID")
 	}
-	mg.Spec.ForProvider.DataFactoryID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DataFactoryID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataFactoryIDRef = rsp.ResolvedReference
 
 	return nil
@@ -801,7 +802,7 @@ func (mg *LinkedServiceAzureBlobStorage) ResolveReferences(ctx context.Context, 
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataFactoryID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.DataFactoryID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.DataFactoryIDRef,
 			Selector:     mg.Spec.ForProvider.DataFactoryIDSelector,
@@ -811,7 +812,7 @@ func (mg *LinkedServiceAzureBlobStorage) ResolveReferences(ctx context.Context, 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.DataFactoryID")
 	}
-	mg.Spec.ForProvider.DataFactoryID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DataFactoryID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataFactoryIDRef = rsp.ResolvedReference
 
 	if mg.Spec.ForProvider.KeyVaultSASToken != nil {
@@ -821,7 +822,7 @@ func (mg *LinkedServiceAzureBlobStorage) ResolveReferences(ctx context.Context, 
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KeyVaultSASToken.LinkedServiceName),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.KeyVaultSASToken.LinkedServiceName, ""),
 				Extract:      reference.ExternalName(),
 				Reference:    mg.Spec.ForProvider.KeyVaultSASToken.LinkedServiceNameRef,
 				Selector:     mg.Spec.ForProvider.KeyVaultSASToken.LinkedServiceNameSelector,
@@ -831,7 +832,7 @@ func (mg *LinkedServiceAzureBlobStorage) ResolveReferences(ctx context.Context, 
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.KeyVaultSASToken.LinkedServiceName")
 		}
-		mg.Spec.ForProvider.KeyVaultSASToken.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.KeyVaultSASToken.LinkedServiceName = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.KeyVaultSASToken.LinkedServiceNameRef = rsp.ResolvedReference
 
 	}
@@ -842,7 +843,7 @@ func (mg *LinkedServiceAzureBlobStorage) ResolveReferences(ctx context.Context, 
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServicePrincipalLinkedKeyVaultKey.LinkedServiceName),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.ServicePrincipalLinkedKeyVaultKey.LinkedServiceName, ""),
 				Extract:      reference.ExternalName(),
 				Reference:    mg.Spec.ForProvider.ServicePrincipalLinkedKeyVaultKey.LinkedServiceNameRef,
 				Selector:     mg.Spec.ForProvider.ServicePrincipalLinkedKeyVaultKey.LinkedServiceNameSelector,
@@ -852,7 +853,7 @@ func (mg *LinkedServiceAzureBlobStorage) ResolveReferences(ctx context.Context, 
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.ServicePrincipalLinkedKeyVaultKey.LinkedServiceName")
 		}
-		mg.Spec.ForProvider.ServicePrincipalLinkedKeyVaultKey.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.ServicePrincipalLinkedKeyVaultKey.LinkedServiceName = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.ServicePrincipalLinkedKeyVaultKey.LinkedServiceNameRef = rsp.ResolvedReference
 
 	}
@@ -863,7 +864,7 @@ func (mg *LinkedServiceAzureBlobStorage) ResolveReferences(ctx context.Context, 
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyVaultSASToken.LinkedServiceName),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.KeyVaultSASToken.LinkedServiceName, ""),
 				Extract:      reference.ExternalName(),
 				Reference:    mg.Spec.InitProvider.KeyVaultSASToken.LinkedServiceNameRef,
 				Selector:     mg.Spec.InitProvider.KeyVaultSASToken.LinkedServiceNameSelector,
@@ -873,7 +874,7 @@ func (mg *LinkedServiceAzureBlobStorage) ResolveReferences(ctx context.Context, 
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.KeyVaultSASToken.LinkedServiceName")
 		}
-		mg.Spec.InitProvider.KeyVaultSASToken.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.KeyVaultSASToken.LinkedServiceName = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.KeyVaultSASToken.LinkedServiceNameRef = rsp.ResolvedReference
 
 	}
@@ -884,7 +885,7 @@ func (mg *LinkedServiceAzureBlobStorage) ResolveReferences(ctx context.Context, 
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServicePrincipalLinkedKeyVaultKey.LinkedServiceName),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.ServicePrincipalLinkedKeyVaultKey.LinkedServiceName, ""),
 				Extract:      reference.ExternalName(),
 				Reference:    mg.Spec.InitProvider.ServicePrincipalLinkedKeyVaultKey.LinkedServiceNameRef,
 				Selector:     mg.Spec.InitProvider.ServicePrincipalLinkedKeyVaultKey.LinkedServiceNameSelector,
@@ -894,7 +895,7 @@ func (mg *LinkedServiceAzureBlobStorage) ResolveReferences(ctx context.Context, 
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.ServicePrincipalLinkedKeyVaultKey.LinkedServiceName")
 		}
-		mg.Spec.InitProvider.ServicePrincipalLinkedKeyVaultKey.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.ServicePrincipalLinkedKeyVaultKey.LinkedServiceName = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.ServicePrincipalLinkedKeyVaultKey.LinkedServiceNameRef = rsp.ResolvedReference
 
 	}
@@ -917,7 +918,7 @@ func (mg *LinkedServiceAzureDatabricks) ResolveReferences(ctx context.Context, c
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataFactoryID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.DataFactoryID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.DataFactoryIDRef,
 			Selector:     mg.Spec.ForProvider.DataFactoryIDSelector,
@@ -927,7 +928,7 @@ func (mg *LinkedServiceAzureDatabricks) ResolveReferences(ctx context.Context, c
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.DataFactoryID")
 	}
-	mg.Spec.ForProvider.DataFactoryID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DataFactoryID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataFactoryIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("databricks.azure.upbound.io", "v1beta2", "Workspace", "WorkspaceList")
@@ -936,7 +937,7 @@ func (mg *LinkedServiceAzureDatabricks) ResolveReferences(ctx context.Context, c
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MsiWorkSpaceResourceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.MsiWorkSpaceResourceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.MsiWorkSpaceResourceIDRef,
 			Selector:     mg.Spec.ForProvider.MsiWorkSpaceResourceIDSelector,
@@ -946,7 +947,7 @@ func (mg *LinkedServiceAzureDatabricks) ResolveReferences(ctx context.Context, c
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.MsiWorkSpaceResourceID")
 	}
-	mg.Spec.ForProvider.MsiWorkSpaceResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.MsiWorkSpaceResourceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.MsiWorkSpaceResourceIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("databricks.azure.upbound.io", "v1beta2", "Workspace", "WorkspaceList")
@@ -955,7 +956,7 @@ func (mg *LinkedServiceAzureDatabricks) ResolveReferences(ctx context.Context, c
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MsiWorkSpaceResourceID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.MsiWorkSpaceResourceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.MsiWorkSpaceResourceIDRef,
 			Selector:     mg.Spec.InitProvider.MsiWorkSpaceResourceIDSelector,
@@ -965,7 +966,7 @@ func (mg *LinkedServiceAzureDatabricks) ResolveReferences(ctx context.Context, c
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.MsiWorkSpaceResourceID")
 	}
-	mg.Spec.InitProvider.MsiWorkSpaceResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.MsiWorkSpaceResourceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.MsiWorkSpaceResourceIDRef = rsp.ResolvedReference
 
 	return nil
@@ -986,7 +987,7 @@ func (mg *LinkedServiceAzureFileStorage) ResolveReferences(ctx context.Context, 
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataFactoryID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.DataFactoryID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.DataFactoryIDRef,
 			Selector:     mg.Spec.ForProvider.DataFactoryIDSelector,
@@ -996,7 +997,7 @@ func (mg *LinkedServiceAzureFileStorage) ResolveReferences(ctx context.Context, 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.DataFactoryID")
 	}
-	mg.Spec.ForProvider.DataFactoryID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DataFactoryID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataFactoryIDRef = rsp.ResolvedReference
 
 	return nil
@@ -1017,7 +1018,7 @@ func (mg *LinkedServiceAzureFunction) ResolveReferences(ctx context.Context, c c
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataFactoryID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.DataFactoryID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.DataFactoryIDRef,
 			Selector:     mg.Spec.ForProvider.DataFactoryIDSelector,
@@ -1027,7 +1028,7 @@ func (mg *LinkedServiceAzureFunction) ResolveReferences(ctx context.Context, c c
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.DataFactoryID")
 	}
-	mg.Spec.ForProvider.DataFactoryID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DataFactoryID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataFactoryIDRef = rsp.ResolvedReference
 
 	return nil
@@ -1048,7 +1049,7 @@ func (mg *LinkedServiceAzureSQLDatabase) ResolveReferences(ctx context.Context, 
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataFactoryID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.DataFactoryID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.DataFactoryIDRef,
 			Selector:     mg.Spec.ForProvider.DataFactoryIDSelector,
@@ -1058,7 +1059,7 @@ func (mg *LinkedServiceAzureSQLDatabase) ResolveReferences(ctx context.Context, 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.DataFactoryID")
 	}
-	mg.Spec.ForProvider.DataFactoryID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DataFactoryID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataFactoryIDRef = rsp.ResolvedReference
 
 	return nil
@@ -1079,7 +1080,7 @@ func (mg *LinkedServiceOData) ResolveReferences(ctx context.Context, c client.Re
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataFactoryID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.DataFactoryID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.DataFactoryIDRef,
 			Selector:     mg.Spec.ForProvider.DataFactoryIDSelector,
@@ -1089,7 +1090,7 @@ func (mg *LinkedServiceOData) ResolveReferences(ctx context.Context, c client.Re
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.DataFactoryID")
 	}
-	mg.Spec.ForProvider.DataFactoryID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DataFactoryID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataFactoryIDRef = rsp.ResolvedReference
 
 	return nil
@@ -1110,7 +1111,7 @@ func (mg *LinkedServiceOdbc) ResolveReferences(ctx context.Context, c client.Rea
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataFactoryID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.DataFactoryID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.DataFactoryIDRef,
 			Selector:     mg.Spec.ForProvider.DataFactoryIDSelector,
@@ -1120,7 +1121,7 @@ func (mg *LinkedServiceOdbc) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.DataFactoryID")
 	}
-	mg.Spec.ForProvider.DataFactoryID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DataFactoryID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataFactoryIDRef = rsp.ResolvedReference
 
 	return nil
@@ -1141,7 +1142,7 @@ func (mg *LinkedServiceSQLServer) ResolveReferences(ctx context.Context, c clien
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataFactoryID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.DataFactoryID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.DataFactoryIDRef,
 			Selector:     mg.Spec.ForProvider.DataFactoryIDSelector,
@@ -1151,7 +1152,7 @@ func (mg *LinkedServiceSQLServer) ResolveReferences(ctx context.Context, c clien
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.DataFactoryID")
 	}
-	mg.Spec.ForProvider.DataFactoryID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DataFactoryID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataFactoryIDRef = rsp.ResolvedReference
 
 	if mg.Spec.ForProvider.KeyVaultPassword != nil {
@@ -1161,7 +1162,7 @@ func (mg *LinkedServiceSQLServer) ResolveReferences(ctx context.Context, c clien
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KeyVaultPassword.LinkedServiceName),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.KeyVaultPassword.LinkedServiceName, ""),
 				Extract:      reference.ExternalName(),
 				Reference:    mg.Spec.ForProvider.KeyVaultPassword.LinkedServiceNameRef,
 				Selector:     mg.Spec.ForProvider.KeyVaultPassword.LinkedServiceNameSelector,
@@ -1171,7 +1172,7 @@ func (mg *LinkedServiceSQLServer) ResolveReferences(ctx context.Context, c clien
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.KeyVaultPassword.LinkedServiceName")
 		}
-		mg.Spec.ForProvider.KeyVaultPassword.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.KeyVaultPassword.LinkedServiceName = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.KeyVaultPassword.LinkedServiceNameRef = rsp.ResolvedReference
 
 	}
@@ -1182,7 +1183,7 @@ func (mg *LinkedServiceSQLServer) ResolveReferences(ctx context.Context, c clien
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyVaultPassword.LinkedServiceName),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.KeyVaultPassword.LinkedServiceName, ""),
 				Extract:      reference.ExternalName(),
 				Reference:    mg.Spec.InitProvider.KeyVaultPassword.LinkedServiceNameRef,
 				Selector:     mg.Spec.InitProvider.KeyVaultPassword.LinkedServiceNameSelector,
@@ -1192,7 +1193,7 @@ func (mg *LinkedServiceSQLServer) ResolveReferences(ctx context.Context, c clien
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.KeyVaultPassword.LinkedServiceName")
 		}
-		mg.Spec.InitProvider.KeyVaultPassword.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.KeyVaultPassword.LinkedServiceName = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.KeyVaultPassword.LinkedServiceNameRef = rsp.ResolvedReference
 
 	}
@@ -1215,7 +1216,7 @@ func (mg *LinkedServiceSnowflake) ResolveReferences(ctx context.Context, c clien
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataFactoryID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.DataFactoryID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.DataFactoryIDRef,
 			Selector:     mg.Spec.ForProvider.DataFactoryIDSelector,
@@ -1225,7 +1226,7 @@ func (mg *LinkedServiceSnowflake) ResolveReferences(ctx context.Context, c clien
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.DataFactoryID")
 	}
-	mg.Spec.ForProvider.DataFactoryID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DataFactoryID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataFactoryIDRef = rsp.ResolvedReference
 
 	if mg.Spec.ForProvider.KeyVaultPassword != nil {
@@ -1235,7 +1236,7 @@ func (mg *LinkedServiceSnowflake) ResolveReferences(ctx context.Context, c clien
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KeyVaultPassword.LinkedServiceName),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.KeyVaultPassword.LinkedServiceName, ""),
 				Extract:      reference.ExternalName(),
 				Reference:    mg.Spec.ForProvider.KeyVaultPassword.LinkedServiceNameRef,
 				Selector:     mg.Spec.ForProvider.KeyVaultPassword.LinkedServiceNameSelector,
@@ -1245,7 +1246,7 @@ func (mg *LinkedServiceSnowflake) ResolveReferences(ctx context.Context, c clien
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.KeyVaultPassword.LinkedServiceName")
 		}
-		mg.Spec.ForProvider.KeyVaultPassword.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.KeyVaultPassword.LinkedServiceName = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.KeyVaultPassword.LinkedServiceNameRef = rsp.ResolvedReference
 
 	}
@@ -1256,7 +1257,7 @@ func (mg *LinkedServiceSnowflake) ResolveReferences(ctx context.Context, c clien
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyVaultPassword.LinkedServiceName),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.KeyVaultPassword.LinkedServiceName, ""),
 				Extract:      reference.ExternalName(),
 				Reference:    mg.Spec.InitProvider.KeyVaultPassword.LinkedServiceNameRef,
 				Selector:     mg.Spec.InitProvider.KeyVaultPassword.LinkedServiceNameSelector,
@@ -1266,7 +1267,7 @@ func (mg *LinkedServiceSnowflake) ResolveReferences(ctx context.Context, c clien
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.KeyVaultPassword.LinkedServiceName")
 		}
-		mg.Spec.InitProvider.KeyVaultPassword.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.KeyVaultPassword.LinkedServiceName = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.KeyVaultPassword.LinkedServiceNameRef = rsp.ResolvedReference
 
 	}
@@ -1289,7 +1290,7 @@ func (mg *LinkedServiceSynapse) ResolveReferences(ctx context.Context, c client.
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataFactoryID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.DataFactoryID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.DataFactoryIDRef,
 			Selector:     mg.Spec.ForProvider.DataFactoryIDSelector,
@@ -1299,7 +1300,7 @@ func (mg *LinkedServiceSynapse) ResolveReferences(ctx context.Context, c client.
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.DataFactoryID")
 	}
-	mg.Spec.ForProvider.DataFactoryID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DataFactoryID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataFactoryIDRef = rsp.ResolvedReference
 
 	if mg.Spec.ForProvider.KeyVaultPassword != nil {
@@ -1309,7 +1310,7 @@ func (mg *LinkedServiceSynapse) ResolveReferences(ctx context.Context, c client.
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KeyVaultPassword.LinkedServiceName),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.KeyVaultPassword.LinkedServiceName, ""),
 				Extract:      reference.ExternalName(),
 				Reference:    mg.Spec.ForProvider.KeyVaultPassword.LinkedServiceNameRef,
 				Selector:     mg.Spec.ForProvider.KeyVaultPassword.LinkedServiceNameSelector,
@@ -1319,7 +1320,7 @@ func (mg *LinkedServiceSynapse) ResolveReferences(ctx context.Context, c client.
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.KeyVaultPassword.LinkedServiceName")
 		}
-		mg.Spec.ForProvider.KeyVaultPassword.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.KeyVaultPassword.LinkedServiceName = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.KeyVaultPassword.LinkedServiceNameRef = rsp.ResolvedReference
 
 	}
@@ -1330,7 +1331,7 @@ func (mg *LinkedServiceSynapse) ResolveReferences(ctx context.Context, c client.
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyVaultPassword.LinkedServiceName),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.KeyVaultPassword.LinkedServiceName, ""),
 				Extract:      reference.ExternalName(),
 				Reference:    mg.Spec.InitProvider.KeyVaultPassword.LinkedServiceNameRef,
 				Selector:     mg.Spec.InitProvider.KeyVaultPassword.LinkedServiceNameSelector,
@@ -1340,7 +1341,7 @@ func (mg *LinkedServiceSynapse) ResolveReferences(ctx context.Context, c client.
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.KeyVaultPassword.LinkedServiceName")
 		}
-		mg.Spec.InitProvider.KeyVaultPassword.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.KeyVaultPassword.LinkedServiceName = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.KeyVaultPassword.LinkedServiceNameRef = rsp.ResolvedReference
 
 	}
@@ -1363,7 +1364,7 @@ func (mg *TriggerSchedule) ResolveReferences(ctx context.Context, c client.Reade
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataFactoryID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.DataFactoryID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.DataFactoryIDRef,
 			Selector:     mg.Spec.ForProvider.DataFactoryIDSelector,
@@ -1373,7 +1374,7 @@ func (mg *TriggerSchedule) ResolveReferences(ctx context.Context, c client.Reade
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.DataFactoryID")
 	}
-	mg.Spec.ForProvider.DataFactoryID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DataFactoryID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataFactoryIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Pipeline", "PipelineList")
@@ -1382,7 +1383,7 @@ func (mg *TriggerSchedule) ResolveReferences(ctx context.Context, c client.Reade
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PipelineName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.PipelineName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.PipelineNameRef,
 			Selector:     mg.Spec.ForProvider.PipelineNameSelector,
@@ -1392,7 +1393,7 @@ func (mg *TriggerSchedule) ResolveReferences(ctx context.Context, c client.Reade
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.PipelineName")
 	}
-	mg.Spec.ForProvider.PipelineName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.PipelineName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PipelineNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Pipeline", "PipelineList")
@@ -1401,7 +1402,7 @@ func (mg *TriggerSchedule) ResolveReferences(ctx context.Context, c client.Reade
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PipelineName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.PipelineName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.PipelineNameRef,
 			Selector:     mg.Spec.InitProvider.PipelineNameSelector,
@@ -1411,7 +1412,7 @@ func (mg *TriggerSchedule) ResolveReferences(ctx context.Context, c client.Reade
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.PipelineName")
 	}
-	mg.Spec.InitProvider.PipelineName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PipelineName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.PipelineNameRef = rsp.ResolvedReference
 
 	return nil

@@ -9,11 +9,13 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
+	helper "github.com/crossplane/crossplane-tools/pkg/helpers"
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	rconfig "github.com/upbound/provider-azure/apis/rconfig"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 
 	// ResolveReferences of this Account.
@@ -36,7 +38,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Identity[i3].IdentityIds),
+				CurrentValues: helper.FromPtrValues(mg.Spec.ForProvider.Identity[i3].IdentityIds),
 				Extract:       resource.ExtractResourceID(),
 				References:    mg.Spec.ForProvider.Identity[i3].IdentityIdsRefs,
 				Selector:      mg.Spec.ForProvider.Identity[i3].IdentityIdsSelector,
@@ -46,7 +48,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.Identity[i3].IdentityIds")
 		}
-		mg.Spec.ForProvider.Identity[i3].IdentityIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.ForProvider.Identity[i3].IdentityIds = helper.ToPtrValues(mrsp.ResolvedValues)
 		mg.Spec.ForProvider.Identity[i3].IdentityIdsRefs = mrsp.ResolvedReferences
 
 	}
@@ -56,7 +58,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -66,7 +68,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.Identity); i3++ {
@@ -76,7 +78,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Identity[i3].IdentityIds),
+				CurrentValues: helper.FromPtrValues(mg.Spec.InitProvider.Identity[i3].IdentityIds),
 				Extract:       resource.ExtractResourceID(),
 				References:    mg.Spec.InitProvider.Identity[i3].IdentityIdsRefs,
 				Selector:      mg.Spec.InitProvider.Identity[i3].IdentityIdsSelector,
@@ -86,7 +88,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.Identity[i3].IdentityIds")
 		}
-		mg.Spec.InitProvider.Identity[i3].IdentityIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.Identity[i3].IdentityIds = helper.ToPtrValues(mrsp.ResolvedValues)
 		mg.Spec.InitProvider.Identity[i3].IdentityIdsRefs = mrsp.ResolvedReferences
 
 	}
@@ -109,7 +111,7 @@ func (mg *Pool) ResolveReferences(ctx context.Context, c client.Reader) error {
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.AccountName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.AccountNameRef,
 			Selector:     mg.Spec.ForProvider.AccountNameSelector,
@@ -119,7 +121,7 @@ func (mg *Pool) ResolveReferences(ctx context.Context, c client.Reader) error {
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.AccountName")
 	}
-	mg.Spec.ForProvider.AccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AccountName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AccountNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -128,7 +130,7 @@ func (mg *Pool) ResolveReferences(ctx context.Context, c client.Reader) error {
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -138,7 +140,7 @@ func (mg *Pool) ResolveReferences(ctx context.Context, c client.Reader) error {
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -159,7 +161,7 @@ func (mg *Snapshot) ResolveReferences(ctx context.Context, c client.Reader) erro
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.AccountName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.AccountNameRef,
 			Selector:     mg.Spec.ForProvider.AccountNameSelector,
@@ -169,7 +171,7 @@ func (mg *Snapshot) ResolveReferences(ctx context.Context, c client.Reader) erro
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.AccountName")
 	}
-	mg.Spec.ForProvider.AccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AccountName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AccountNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("netapp.azure.upbound.io", "v1beta1", "Pool", "PoolList")
@@ -178,7 +180,7 @@ func (mg *Snapshot) ResolveReferences(ctx context.Context, c client.Reader) erro
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PoolName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.PoolName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.PoolNameRef,
 			Selector:     mg.Spec.ForProvider.PoolNameSelector,
@@ -188,7 +190,7 @@ func (mg *Snapshot) ResolveReferences(ctx context.Context, c client.Reader) erro
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.PoolName")
 	}
-	mg.Spec.ForProvider.PoolName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.PoolName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PoolNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -197,7 +199,7 @@ func (mg *Snapshot) ResolveReferences(ctx context.Context, c client.Reader) erro
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -207,7 +209,7 @@ func (mg *Snapshot) ResolveReferences(ctx context.Context, c client.Reader) erro
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("netapp.azure.upbound.io", "v1beta2", "Volume", "VolumeList")
@@ -216,7 +218,7 @@ func (mg *Snapshot) ResolveReferences(ctx context.Context, c client.Reader) erro
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VolumeName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.VolumeName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.VolumeNameRef,
 			Selector:     mg.Spec.ForProvider.VolumeNameSelector,
@@ -226,7 +228,7 @@ func (mg *Snapshot) ResolveReferences(ctx context.Context, c client.Reader) erro
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.VolumeName")
 	}
-	mg.Spec.ForProvider.VolumeName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VolumeName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VolumeNameRef = rsp.ResolvedReference
 
 	return nil
@@ -247,7 +249,7 @@ func (mg *SnapshotPolicy) ResolveReferences(ctx context.Context, c client.Reader
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.AccountName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.AccountNameRef,
 			Selector:     mg.Spec.ForProvider.AccountNameSelector,
@@ -257,7 +259,7 @@ func (mg *SnapshotPolicy) ResolveReferences(ctx context.Context, c client.Reader
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.AccountName")
 	}
-	mg.Spec.ForProvider.AccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AccountName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AccountNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -266,7 +268,7 @@ func (mg *SnapshotPolicy) ResolveReferences(ctx context.Context, c client.Reader
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -276,7 +278,7 @@ func (mg *SnapshotPolicy) ResolveReferences(ctx context.Context, c client.Reader
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -297,7 +299,7 @@ func (mg *Volume) ResolveReferences(ctx context.Context, c client.Reader) error 
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.AccountName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.AccountNameRef,
 			Selector:     mg.Spec.ForProvider.AccountNameSelector,
@@ -307,7 +309,7 @@ func (mg *Volume) ResolveReferences(ctx context.Context, c client.Reader) error 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.AccountName")
 	}
-	mg.Spec.ForProvider.AccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AccountName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AccountNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("netapp.azure.upbound.io", "v1beta1", "Snapshot", "SnapshotList")
@@ -316,7 +318,7 @@ func (mg *Volume) ResolveReferences(ctx context.Context, c client.Reader) error 
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CreateFromSnapshotResourceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.CreateFromSnapshotResourceID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.CreateFromSnapshotResourceIDRef,
 			Selector:     mg.Spec.ForProvider.CreateFromSnapshotResourceIDSelector,
@@ -326,7 +328,7 @@ func (mg *Volume) ResolveReferences(ctx context.Context, c client.Reader) error 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.CreateFromSnapshotResourceID")
 	}
-	mg.Spec.ForProvider.CreateFromSnapshotResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CreateFromSnapshotResourceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CreateFromSnapshotResourceIDRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.DataProtectionReplication); i3++ {
@@ -336,7 +338,7 @@ func (mg *Volume) ResolveReferences(ctx context.Context, c client.Reader) error 
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataProtectionReplication[i3].RemoteVolumeResourceID),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.DataProtectionReplication[i3].RemoteVolumeResourceID, ""),
 				Extract:      rconfig.ExtractResourceID(),
 				Reference:    mg.Spec.ForProvider.DataProtectionReplication[i3].RemoteVolumeResourceIDRef,
 				Selector:     mg.Spec.ForProvider.DataProtectionReplication[i3].RemoteVolumeResourceIDSelector,
@@ -346,7 +348,7 @@ func (mg *Volume) ResolveReferences(ctx context.Context, c client.Reader) error 
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.DataProtectionReplication[i3].RemoteVolumeResourceID")
 		}
-		mg.Spec.ForProvider.DataProtectionReplication[i3].RemoteVolumeResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.DataProtectionReplication[i3].RemoteVolumeResourceID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.DataProtectionReplication[i3].RemoteVolumeResourceIDRef = rsp.ResolvedReference
 
 	}
@@ -357,7 +359,7 @@ func (mg *Volume) ResolveReferences(ctx context.Context, c client.Reader) error 
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataProtectionSnapshotPolicy[i3].SnapshotPolicyID),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.DataProtectionSnapshotPolicy[i3].SnapshotPolicyID, ""),
 				Extract:      rconfig.ExtractResourceID(),
 				Reference:    mg.Spec.ForProvider.DataProtectionSnapshotPolicy[i3].SnapshotPolicyIDRef,
 				Selector:     mg.Spec.ForProvider.DataProtectionSnapshotPolicy[i3].SnapshotPolicyIDSelector,
@@ -367,7 +369,7 @@ func (mg *Volume) ResolveReferences(ctx context.Context, c client.Reader) error 
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.DataProtectionSnapshotPolicy[i3].SnapshotPolicyID")
 		}
-		mg.Spec.ForProvider.DataProtectionSnapshotPolicy[i3].SnapshotPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.DataProtectionSnapshotPolicy[i3].SnapshotPolicyID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.DataProtectionSnapshotPolicy[i3].SnapshotPolicyIDRef = rsp.ResolvedReference
 
 	}
@@ -377,7 +379,7 @@ func (mg *Volume) ResolveReferences(ctx context.Context, c client.Reader) error 
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PoolName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.PoolName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.PoolNameRef,
 			Selector:     mg.Spec.ForProvider.PoolNameSelector,
@@ -387,7 +389,7 @@ func (mg *Volume) ResolveReferences(ctx context.Context, c client.Reader) error 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.PoolName")
 	}
-	mg.Spec.ForProvider.PoolName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.PoolName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PoolNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -396,7 +398,7 @@ func (mg *Volume) ResolveReferences(ctx context.Context, c client.Reader) error 
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -406,7 +408,7 @@ func (mg *Volume) ResolveReferences(ctx context.Context, c client.Reader) error 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
@@ -415,7 +417,7 @@ func (mg *Volume) ResolveReferences(ctx context.Context, c client.Reader) error 
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.SubnetID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.SubnetIDRef,
 			Selector:     mg.Spec.ForProvider.SubnetIDSelector,
@@ -425,7 +427,7 @@ func (mg *Volume) ResolveReferences(ctx context.Context, c client.Reader) error 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.SubnetID")
 	}
-	mg.Spec.ForProvider.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SubnetID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SubnetIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("netapp.azure.upbound.io", "v1beta1", "Snapshot", "SnapshotList")
@@ -434,7 +436,7 @@ func (mg *Volume) ResolveReferences(ctx context.Context, c client.Reader) error 
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CreateFromSnapshotResourceID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.CreateFromSnapshotResourceID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.CreateFromSnapshotResourceIDRef,
 			Selector:     mg.Spec.InitProvider.CreateFromSnapshotResourceIDSelector,
@@ -444,7 +446,7 @@ func (mg *Volume) ResolveReferences(ctx context.Context, c client.Reader) error 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.CreateFromSnapshotResourceID")
 	}
-	mg.Spec.InitProvider.CreateFromSnapshotResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.CreateFromSnapshotResourceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.CreateFromSnapshotResourceIDRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.DataProtectionReplication); i3++ {
@@ -454,7 +456,7 @@ func (mg *Volume) ResolveReferences(ctx context.Context, c client.Reader) error 
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DataProtectionReplication[i3].RemoteVolumeResourceID),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.DataProtectionReplication[i3].RemoteVolumeResourceID, ""),
 				Extract:      rconfig.ExtractResourceID(),
 				Reference:    mg.Spec.InitProvider.DataProtectionReplication[i3].RemoteVolumeResourceIDRef,
 				Selector:     mg.Spec.InitProvider.DataProtectionReplication[i3].RemoteVolumeResourceIDSelector,
@@ -464,7 +466,7 @@ func (mg *Volume) ResolveReferences(ctx context.Context, c client.Reader) error 
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.DataProtectionReplication[i3].RemoteVolumeResourceID")
 		}
-		mg.Spec.InitProvider.DataProtectionReplication[i3].RemoteVolumeResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.DataProtectionReplication[i3].RemoteVolumeResourceID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.DataProtectionReplication[i3].RemoteVolumeResourceIDRef = rsp.ResolvedReference
 
 	}
@@ -475,7 +477,7 @@ func (mg *Volume) ResolveReferences(ctx context.Context, c client.Reader) error 
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DataProtectionSnapshotPolicy[i3].SnapshotPolicyID),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.DataProtectionSnapshotPolicy[i3].SnapshotPolicyID, ""),
 				Extract:      rconfig.ExtractResourceID(),
 				Reference:    mg.Spec.InitProvider.DataProtectionSnapshotPolicy[i3].SnapshotPolicyIDRef,
 				Selector:     mg.Spec.InitProvider.DataProtectionSnapshotPolicy[i3].SnapshotPolicyIDSelector,
@@ -485,7 +487,7 @@ func (mg *Volume) ResolveReferences(ctx context.Context, c client.Reader) error 
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.DataProtectionSnapshotPolicy[i3].SnapshotPolicyID")
 		}
-		mg.Spec.InitProvider.DataProtectionSnapshotPolicy[i3].SnapshotPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.DataProtectionSnapshotPolicy[i3].SnapshotPolicyID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.DataProtectionSnapshotPolicy[i3].SnapshotPolicyIDRef = rsp.ResolvedReference
 
 	}
@@ -495,7 +497,7 @@ func (mg *Volume) ResolveReferences(ctx context.Context, c client.Reader) error 
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubnetID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.SubnetID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.SubnetIDRef,
 			Selector:     mg.Spec.InitProvider.SubnetIDSelector,
@@ -505,7 +507,7 @@ func (mg *Volume) ResolveReferences(ctx context.Context, c client.Reader) error 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.SubnetID")
 	}
-	mg.Spec.InitProvider.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SubnetID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.SubnetIDRef = rsp.ResolvedReference
 
 	return nil

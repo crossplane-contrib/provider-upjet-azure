@@ -14,6 +14,7 @@ import (
 	rconfig "github.com/upbound/provider-azure/apis/rconfig"
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 
 	// ResolveReferences of this Account.
@@ -34,7 +35,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -44,7 +45,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -65,7 +66,7 @@ func (mg *DataSetBlobStorage) ResolveReferences(ctx context.Context, c client.Re
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ContainerName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ContainerNameRef,
 			Selector:     mg.Spec.ForProvider.ContainerNameSelector,
@@ -75,7 +76,7 @@ func (mg *DataSetBlobStorage) ResolveReferences(ctx context.Context, c client.Re
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ContainerName")
 	}
-	mg.Spec.ForProvider.ContainerName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ContainerName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ContainerNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("datashare.azure.upbound.io", "v1beta1", "DataShare", "DataShareList")
@@ -84,7 +85,7 @@ func (mg *DataSetBlobStorage) ResolveReferences(ctx context.Context, c client.Re
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataShareID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.DataShareID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.DataShareIDRef,
 			Selector:     mg.Spec.ForProvider.DataShareIDSelector,
@@ -94,7 +95,7 @@ func (mg *DataSetBlobStorage) ResolveReferences(ctx context.Context, c client.Re
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.DataShareID")
 	}
-	mg.Spec.ForProvider.DataShareID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DataShareID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataShareIDRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.StorageAccount); i3++ {
@@ -104,7 +105,7 @@ func (mg *DataSetBlobStorage) ResolveReferences(ctx context.Context, c client.Re
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccount[i3].Name),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.StorageAccount[i3].Name, ""),
 				Extract:      reference.ExternalName(),
 				Reference:    mg.Spec.ForProvider.StorageAccount[i3].NameRef,
 				Selector:     mg.Spec.ForProvider.StorageAccount[i3].NameSelector,
@@ -114,7 +115,7 @@ func (mg *DataSetBlobStorage) ResolveReferences(ctx context.Context, c client.Re
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.StorageAccount[i3].Name")
 		}
-		mg.Spec.ForProvider.StorageAccount[i3].Name = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.StorageAccount[i3].Name = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.StorageAccount[i3].NameRef = rsp.ResolvedReference
 
 	}
@@ -125,7 +126,7 @@ func (mg *DataSetBlobStorage) ResolveReferences(ctx context.Context, c client.Re
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccount[i3].ResourceGroupName),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.StorageAccount[i3].ResourceGroupName, ""),
 				Extract:      reference.ExternalName(),
 				Reference:    mg.Spec.ForProvider.StorageAccount[i3].ResourceGroupNameRef,
 				Selector:     mg.Spec.ForProvider.StorageAccount[i3].ResourceGroupNameSelector,
@@ -135,7 +136,7 @@ func (mg *DataSetBlobStorage) ResolveReferences(ctx context.Context, c client.Re
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.StorageAccount[i3].ResourceGroupName")
 		}
-		mg.Spec.ForProvider.StorageAccount[i3].ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.StorageAccount[i3].ResourceGroupName = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.StorageAccount[i3].ResourceGroupNameRef = rsp.ResolvedReference
 
 	}
@@ -145,7 +146,7 @@ func (mg *DataSetBlobStorage) ResolveReferences(ctx context.Context, c client.Re
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ContainerName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ContainerName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.ContainerNameRef,
 			Selector:     mg.Spec.InitProvider.ContainerNameSelector,
@@ -155,7 +156,7 @@ func (mg *DataSetBlobStorage) ResolveReferences(ctx context.Context, c client.Re
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ContainerName")
 	}
-	mg.Spec.InitProvider.ContainerName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ContainerName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ContainerNameRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.StorageAccount); i3++ {
@@ -165,7 +166,7 @@ func (mg *DataSetBlobStorage) ResolveReferences(ctx context.Context, c client.Re
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccount[i3].Name),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.StorageAccount[i3].Name, ""),
 				Extract:      reference.ExternalName(),
 				Reference:    mg.Spec.InitProvider.StorageAccount[i3].NameRef,
 				Selector:     mg.Spec.InitProvider.StorageAccount[i3].NameSelector,
@@ -175,7 +176,7 @@ func (mg *DataSetBlobStorage) ResolveReferences(ctx context.Context, c client.Re
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccount[i3].Name")
 		}
-		mg.Spec.InitProvider.StorageAccount[i3].Name = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.StorageAccount[i3].Name = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.StorageAccount[i3].NameRef = rsp.ResolvedReference
 
 	}
@@ -186,7 +187,7 @@ func (mg *DataSetBlobStorage) ResolveReferences(ctx context.Context, c client.Re
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccount[i3].ResourceGroupName),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.StorageAccount[i3].ResourceGroupName, ""),
 				Extract:      reference.ExternalName(),
 				Reference:    mg.Spec.InitProvider.StorageAccount[i3].ResourceGroupNameRef,
 				Selector:     mg.Spec.InitProvider.StorageAccount[i3].ResourceGroupNameSelector,
@@ -196,7 +197,7 @@ func (mg *DataSetBlobStorage) ResolveReferences(ctx context.Context, c client.Re
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccount[i3].ResourceGroupName")
 		}
-		mg.Spec.InitProvider.StorageAccount[i3].ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.StorageAccount[i3].ResourceGroupName = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.StorageAccount[i3].ResourceGroupNameRef = rsp.ResolvedReference
 
 	}
@@ -219,7 +220,7 @@ func (mg *DataSetDataLakeGen2) ResolveReferences(ctx context.Context, c client.R
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FileSystemName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.FileSystemName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.FileSystemNameRef,
 			Selector:     mg.Spec.ForProvider.FileSystemNameSelector,
@@ -229,7 +230,7 @@ func (mg *DataSetDataLakeGen2) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.FileSystemName")
 	}
-	mg.Spec.ForProvider.FileSystemName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.FileSystemName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.FileSystemNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("datashare.azure.upbound.io", "v1beta2", "DataShare", "DataShareList")
@@ -238,7 +239,7 @@ func (mg *DataSetDataLakeGen2) ResolveReferences(ctx context.Context, c client.R
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ShareID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ShareID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.ShareIDRef,
 			Selector:     mg.Spec.ForProvider.ShareIDSelector,
@@ -248,7 +249,7 @@ func (mg *DataSetDataLakeGen2) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ShareID")
 	}
-	mg.Spec.ForProvider.ShareID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ShareID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ShareIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
@@ -257,7 +258,7 @@ func (mg *DataSetDataLakeGen2) ResolveReferences(ctx context.Context, c client.R
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccountID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.StorageAccountID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.StorageAccountIDRef,
 			Selector:     mg.Spec.ForProvider.StorageAccountIDSelector,
@@ -267,7 +268,7 @@ func (mg *DataSetDataLakeGen2) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.StorageAccountID")
 	}
-	mg.Spec.ForProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StorageAccountID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageAccountIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "DataLakeGen2FileSystem", "DataLakeGen2FileSystemList")
@@ -276,7 +277,7 @@ func (mg *DataSetDataLakeGen2) ResolveReferences(ctx context.Context, c client.R
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FileSystemName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.FileSystemName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.FileSystemNameRef,
 			Selector:     mg.Spec.InitProvider.FileSystemNameSelector,
@@ -286,7 +287,7 @@ func (mg *DataSetDataLakeGen2) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.FileSystemName")
 	}
-	mg.Spec.InitProvider.FileSystemName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FileSystemName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.FileSystemNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
@@ -295,7 +296,7 @@ func (mg *DataSetDataLakeGen2) ResolveReferences(ctx context.Context, c client.R
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccountID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.StorageAccountID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.StorageAccountIDRef,
 			Selector:     mg.Spec.InitProvider.StorageAccountIDSelector,
@@ -305,7 +306,7 @@ func (mg *DataSetDataLakeGen2) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccountID")
 	}
-	mg.Spec.InitProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageAccountID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.StorageAccountIDRef = rsp.ResolvedReference
 
 	return nil
@@ -326,7 +327,7 @@ func (mg *DataSetKustoCluster) ResolveReferences(ctx context.Context, c client.R
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KustoClusterID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.KustoClusterID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.KustoClusterIDRef,
 			Selector:     mg.Spec.ForProvider.KustoClusterIDSelector,
@@ -336,7 +337,7 @@ func (mg *DataSetKustoCluster) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.KustoClusterID")
 	}
-	mg.Spec.ForProvider.KustoClusterID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.KustoClusterID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KustoClusterIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("datashare.azure.upbound.io", "v1beta2", "DataShare", "DataShareList")
@@ -345,7 +346,7 @@ func (mg *DataSetKustoCluster) ResolveReferences(ctx context.Context, c client.R
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ShareID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ShareID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.ShareIDRef,
 			Selector:     mg.Spec.ForProvider.ShareIDSelector,
@@ -355,7 +356,7 @@ func (mg *DataSetKustoCluster) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ShareID")
 	}
-	mg.Spec.ForProvider.ShareID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ShareID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ShareIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("kusto.azure.upbound.io", "v1beta2", "Cluster", "ClusterList")
@@ -364,7 +365,7 @@ func (mg *DataSetKustoCluster) ResolveReferences(ctx context.Context, c client.R
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KustoClusterID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.KustoClusterID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.KustoClusterIDRef,
 			Selector:     mg.Spec.InitProvider.KustoClusterIDSelector,
@@ -374,7 +375,7 @@ func (mg *DataSetKustoCluster) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.KustoClusterID")
 	}
-	mg.Spec.InitProvider.KustoClusterID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KustoClusterID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.KustoClusterIDRef = rsp.ResolvedReference
 
 	return nil
@@ -395,7 +396,7 @@ func (mg *DataSetKustoDatabase) ResolveReferences(ctx context.Context, c client.
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KustoDatabaseID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.KustoDatabaseID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.KustoDatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.KustoDatabaseIDSelector,
@@ -405,7 +406,7 @@ func (mg *DataSetKustoDatabase) ResolveReferences(ctx context.Context, c client.
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.KustoDatabaseID")
 	}
-	mg.Spec.ForProvider.KustoDatabaseID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.KustoDatabaseID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KustoDatabaseIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("datashare.azure.upbound.io", "v1beta2", "DataShare", "DataShareList")
@@ -414,7 +415,7 @@ func (mg *DataSetKustoDatabase) ResolveReferences(ctx context.Context, c client.
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ShareID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ShareID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.ShareIDRef,
 			Selector:     mg.Spec.ForProvider.ShareIDSelector,
@@ -424,7 +425,7 @@ func (mg *DataSetKustoDatabase) ResolveReferences(ctx context.Context, c client.
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ShareID")
 	}
-	mg.Spec.ForProvider.ShareID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ShareID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ShareIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("kusto.azure.upbound.io", "v1beta1", "Database", "DatabaseList")
@@ -433,7 +434,7 @@ func (mg *DataSetKustoDatabase) ResolveReferences(ctx context.Context, c client.
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KustoDatabaseID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.KustoDatabaseID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.KustoDatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.KustoDatabaseIDSelector,
@@ -443,7 +444,7 @@ func (mg *DataSetKustoDatabase) ResolveReferences(ctx context.Context, c client.
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.KustoDatabaseID")
 	}
-	mg.Spec.InitProvider.KustoDatabaseID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KustoDatabaseID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.KustoDatabaseIDRef = rsp.ResolvedReference
 
 	return nil
@@ -464,7 +465,7 @@ func (mg *DataShare) ResolveReferences(ctx context.Context, c client.Reader) err
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.AccountID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.AccountIDRef,
 			Selector:     mg.Spec.ForProvider.AccountIDSelector,
@@ -474,7 +475,7 @@ func (mg *DataShare) ResolveReferences(ctx context.Context, c client.Reader) err
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.AccountID")
 	}
-	mg.Spec.ForProvider.AccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AccountID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AccountIDRef = rsp.ResolvedReference
 
 	return nil

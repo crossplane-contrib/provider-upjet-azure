@@ -13,6 +13,7 @@ import (
 	errors "github.com/pkg/errors"
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 
 	// ResolveReferences of this Monitor.
@@ -33,7 +34,7 @@ func (mg *Monitor) ResolveReferences(ctx context.Context, c client.Reader) error
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -43,7 +44,7 @@ func (mg *Monitor) ResolveReferences(ctx context.Context, c client.Reader) error
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -64,7 +65,7 @@ func (mg *SubAccount) ResolveReferences(ctx context.Context, c client.Reader) er
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogzMonitorID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.LogzMonitorID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.LogzMonitorIDRef,
 			Selector:     mg.Spec.ForProvider.LogzMonitorIDSelector,
@@ -74,7 +75,7 @@ func (mg *SubAccount) ResolveReferences(ctx context.Context, c client.Reader) er
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.LogzMonitorID")
 	}
-	mg.Spec.ForProvider.LogzMonitorID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LogzMonitorID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LogzMonitorIDRef = rsp.ResolvedReference
 
 	return nil

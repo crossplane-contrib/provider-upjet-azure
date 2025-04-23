@@ -13,6 +13,7 @@ import (
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -31,7 +32,7 @@ func (mg *AuthorizationRule) ResolveReferences( // ResolveReferences of this Aut
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NamespaceName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.NamespaceName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.NamespaceNameRef,
 			Selector:     mg.Spec.ForProvider.NamespaceNameSelector,
@@ -41,7 +42,7 @@ func (mg *AuthorizationRule) ResolveReferences( // ResolveReferences of this Aut
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.NamespaceName")
 	}
-	mg.Spec.ForProvider.NamespaceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.NamespaceName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NamespaceNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("notificationhubs.azure.upbound.io", "v1beta2", "NotificationHub", "NotificationHubList")
@@ -50,7 +51,7 @@ func (mg *AuthorizationRule) ResolveReferences( // ResolveReferences of this Aut
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NotificationHubName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.NotificationHubName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.NotificationHubNameRef,
 			Selector:     mg.Spec.ForProvider.NotificationHubNameSelector,
@@ -60,7 +61,7 @@ func (mg *AuthorizationRule) ResolveReferences( // ResolveReferences of this Aut
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.NotificationHubName")
 	}
-	mg.Spec.ForProvider.NotificationHubName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.NotificationHubName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NotificationHubNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -69,7 +70,7 @@ func (mg *AuthorizationRule) ResolveReferences( // ResolveReferences of this Aut
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -79,7 +80,7 @@ func (mg *AuthorizationRule) ResolveReferences( // ResolveReferences of this Aut
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -100,7 +101,7 @@ func (mg *NotificationHub) ResolveReferences(ctx context.Context, c client.Reade
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NamespaceName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.NamespaceName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.NamespaceNameRef,
 			Selector:     mg.Spec.ForProvider.NamespaceNameSelector,
@@ -110,7 +111,7 @@ func (mg *NotificationHub) ResolveReferences(ctx context.Context, c client.Reade
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.NamespaceName")
 	}
-	mg.Spec.ForProvider.NamespaceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.NamespaceName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NamespaceNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -119,7 +120,7 @@ func (mg *NotificationHub) ResolveReferences(ctx context.Context, c client.Reade
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -129,7 +130,7 @@ func (mg *NotificationHub) ResolveReferences(ctx context.Context, c client.Reade
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -150,7 +151,7 @@ func (mg *NotificationHubNamespace) ResolveReferences(ctx context.Context, c cli
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -160,7 +161,7 @@ func (mg *NotificationHubNamespace) ResolveReferences(ctx context.Context, c cli
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil

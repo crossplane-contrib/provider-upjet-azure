@@ -16,6 +16,7 @@ import (
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -34,7 +35,7 @@ func (mg *ContainerApp) ResolveReferences( // ResolveReferences of this Containe
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerAppEnvironmentID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ContainerAppEnvironmentID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.ContainerAppEnvironmentIDRef,
 			Selector:     mg.Spec.ForProvider.ContainerAppEnvironmentIDSelector,
@@ -44,7 +45,7 @@ func (mg *ContainerApp) ResolveReferences( // ResolveReferences of this Containe
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ContainerAppEnvironmentID")
 	}
-	mg.Spec.ForProvider.ContainerAppEnvironmentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ContainerAppEnvironmentID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ContainerAppEnvironmentIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -53,7 +54,7 @@ func (mg *ContainerApp) ResolveReferences( // ResolveReferences of this Containe
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -63,7 +64,7 @@ func (mg *ContainerApp) ResolveReferences( // ResolveReferences of this Containe
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("containerapp.azure.upbound.io", "v1beta1", "Environment", "EnvironmentList")
@@ -72,7 +73,7 @@ func (mg *ContainerApp) ResolveReferences( // ResolveReferences of this Containe
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ContainerAppEnvironmentID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ContainerAppEnvironmentID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.ContainerAppEnvironmentIDRef,
 			Selector:     mg.Spec.InitProvider.ContainerAppEnvironmentIDSelector,
@@ -82,7 +83,7 @@ func (mg *ContainerApp) ResolveReferences( // ResolveReferences of this Containe
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ContainerAppEnvironmentID")
 	}
-	mg.Spec.InitProvider.ContainerAppEnvironmentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ContainerAppEnvironmentID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ContainerAppEnvironmentIDRef = rsp.ResolvedReference
 
 	return nil
@@ -103,7 +104,7 @@ func (mg *CustomDomain) ResolveReferences(ctx context.Context, c client.Reader) 
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerAppEnvironmentCertificateID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ContainerAppEnvironmentCertificateID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.ContainerAppEnvironmentCertificateIDRef,
 			Selector:     mg.Spec.ForProvider.ContainerAppEnvironmentCertificateIDSelector,
@@ -113,7 +114,7 @@ func (mg *CustomDomain) ResolveReferences(ctx context.Context, c client.Reader) 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ContainerAppEnvironmentCertificateID")
 	}
-	mg.Spec.ForProvider.ContainerAppEnvironmentCertificateID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ContainerAppEnvironmentCertificateID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ContainerAppEnvironmentCertificateIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("containerapp.azure.upbound.io", "v1beta2", "ContainerApp", "ContainerAppList")
@@ -122,7 +123,7 @@ func (mg *CustomDomain) ResolveReferences(ctx context.Context, c client.Reader) 
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerAppID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ContainerAppID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.ContainerAppIDRef,
 			Selector:     mg.Spec.ForProvider.ContainerAppIDSelector,
@@ -132,7 +133,7 @@ func (mg *CustomDomain) ResolveReferences(ctx context.Context, c client.Reader) 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ContainerAppID")
 	}
-	mg.Spec.ForProvider.ContainerAppID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ContainerAppID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ContainerAppIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("containerapp.azure.upbound.io", "v1beta1", "EnvironmentCertificate", "EnvironmentCertificateList")
@@ -141,7 +142,7 @@ func (mg *CustomDomain) ResolveReferences(ctx context.Context, c client.Reader) 
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ContainerAppEnvironmentCertificateID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ContainerAppEnvironmentCertificateID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.ContainerAppEnvironmentCertificateIDRef,
 			Selector:     mg.Spec.InitProvider.ContainerAppEnvironmentCertificateIDSelector,
@@ -151,7 +152,7 @@ func (mg *CustomDomain) ResolveReferences(ctx context.Context, c client.Reader) 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ContainerAppEnvironmentCertificateID")
 	}
-	mg.Spec.InitProvider.ContainerAppEnvironmentCertificateID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ContainerAppEnvironmentCertificateID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ContainerAppEnvironmentCertificateIDRef = rsp.ResolvedReference
 
 	return nil
@@ -172,7 +173,7 @@ func (mg *Environment) ResolveReferences(ctx context.Context, c client.Reader) e
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.InfrastructureResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.InfrastructureResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.InfrastructureResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.InfrastructureResourceGroupNameSelector,
@@ -182,7 +183,7 @@ func (mg *Environment) ResolveReferences(ctx context.Context, c client.Reader) e
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.InfrastructureResourceGroupName")
 	}
-	mg.Spec.ForProvider.InfrastructureResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.InfrastructureResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.InfrastructureResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
@@ -191,7 +192,7 @@ func (mg *Environment) ResolveReferences(ctx context.Context, c client.Reader) e
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.InfrastructureSubnetID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.InfrastructureSubnetID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.InfrastructureSubnetIDRef,
 			Selector:     mg.Spec.ForProvider.InfrastructureSubnetIDSelector,
@@ -201,7 +202,7 @@ func (mg *Environment) ResolveReferences(ctx context.Context, c client.Reader) e
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.InfrastructureSubnetID")
 	}
-	mg.Spec.ForProvider.InfrastructureSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.InfrastructureSubnetID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.InfrastructureSubnetIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("operationalinsights.azure.upbound.io", "v1beta2", "Workspace", "WorkspaceList")
@@ -210,7 +211,7 @@ func (mg *Environment) ResolveReferences(ctx context.Context, c client.Reader) e
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogAnalyticsWorkspaceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.LogAnalyticsWorkspaceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.LogAnalyticsWorkspaceIDRef,
 			Selector:     mg.Spec.ForProvider.LogAnalyticsWorkspaceIDSelector,
@@ -220,7 +221,7 @@ func (mg *Environment) ResolveReferences(ctx context.Context, c client.Reader) e
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.LogAnalyticsWorkspaceID")
 	}
-	mg.Spec.ForProvider.LogAnalyticsWorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LogAnalyticsWorkspaceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LogAnalyticsWorkspaceIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -229,7 +230,7 @@ func (mg *Environment) ResolveReferences(ctx context.Context, c client.Reader) e
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -239,7 +240,7 @@ func (mg *Environment) ResolveReferences(ctx context.Context, c client.Reader) e
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -248,7 +249,7 @@ func (mg *Environment) ResolveReferences(ctx context.Context, c client.Reader) e
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InfrastructureResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.InfrastructureResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.InfrastructureResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.InfrastructureResourceGroupNameSelector,
@@ -258,7 +259,7 @@ func (mg *Environment) ResolveReferences(ctx context.Context, c client.Reader) e
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.InfrastructureResourceGroupName")
 	}
-	mg.Spec.InitProvider.InfrastructureResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.InfrastructureResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.InfrastructureResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
@@ -267,7 +268,7 @@ func (mg *Environment) ResolveReferences(ctx context.Context, c client.Reader) e
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InfrastructureSubnetID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.InfrastructureSubnetID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.InfrastructureSubnetIDRef,
 			Selector:     mg.Spec.InitProvider.InfrastructureSubnetIDSelector,
@@ -277,7 +278,7 @@ func (mg *Environment) ResolveReferences(ctx context.Context, c client.Reader) e
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.InfrastructureSubnetID")
 	}
-	mg.Spec.InitProvider.InfrastructureSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.InfrastructureSubnetID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.InfrastructureSubnetIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("operationalinsights.azure.upbound.io", "v1beta2", "Workspace", "WorkspaceList")
@@ -286,7 +287,7 @@ func (mg *Environment) ResolveReferences(ctx context.Context, c client.Reader) e
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LogAnalyticsWorkspaceID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.LogAnalyticsWorkspaceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.LogAnalyticsWorkspaceIDRef,
 			Selector:     mg.Spec.InitProvider.LogAnalyticsWorkspaceIDSelector,
@@ -296,7 +297,7 @@ func (mg *Environment) ResolveReferences(ctx context.Context, c client.Reader) e
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.LogAnalyticsWorkspaceID")
 	}
-	mg.Spec.InitProvider.LogAnalyticsWorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LogAnalyticsWorkspaceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.LogAnalyticsWorkspaceIDRef = rsp.ResolvedReference
 
 	return nil
@@ -317,7 +318,7 @@ func (mg *EnvironmentCertificate) ResolveReferences(ctx context.Context, c clien
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerAppEnvironmentID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ContainerAppEnvironmentID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.ContainerAppEnvironmentIDRef,
 			Selector:     mg.Spec.ForProvider.ContainerAppEnvironmentIDSelector,
@@ -327,7 +328,7 @@ func (mg *EnvironmentCertificate) ResolveReferences(ctx context.Context, c clien
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ContainerAppEnvironmentID")
 	}
-	mg.Spec.ForProvider.ContainerAppEnvironmentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ContainerAppEnvironmentID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ContainerAppEnvironmentIDRef = rsp.ResolvedReference
 
 	return nil
@@ -348,7 +349,7 @@ func (mg *EnvironmentCustomDomain) ResolveReferences(ctx context.Context, c clie
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerAppEnvironmentID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ContainerAppEnvironmentID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.ContainerAppEnvironmentIDRef,
 			Selector:     mg.Spec.ForProvider.ContainerAppEnvironmentIDSelector,
@@ -358,7 +359,7 @@ func (mg *EnvironmentCustomDomain) ResolveReferences(ctx context.Context, c clie
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ContainerAppEnvironmentID")
 	}
-	mg.Spec.ForProvider.ContainerAppEnvironmentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ContainerAppEnvironmentID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ContainerAppEnvironmentIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("containerapp.azure.upbound.io", "v1beta1", "Environment", "EnvironmentList")
@@ -367,7 +368,7 @@ func (mg *EnvironmentCustomDomain) ResolveReferences(ctx context.Context, c clie
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ContainerAppEnvironmentID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ContainerAppEnvironmentID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.ContainerAppEnvironmentIDRef,
 			Selector:     mg.Spec.InitProvider.ContainerAppEnvironmentIDSelector,
@@ -377,7 +378,7 @@ func (mg *EnvironmentCustomDomain) ResolveReferences(ctx context.Context, c clie
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ContainerAppEnvironmentID")
 	}
-	mg.Spec.InitProvider.ContainerAppEnvironmentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ContainerAppEnvironmentID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ContainerAppEnvironmentIDRef = rsp.ResolvedReference
 
 	return nil
@@ -398,7 +399,7 @@ func (mg *EnvironmentDaprComponent) ResolveReferences(ctx context.Context, c cli
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerAppEnvironmentID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ContainerAppEnvironmentID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.ContainerAppEnvironmentIDRef,
 			Selector:     mg.Spec.ForProvider.ContainerAppEnvironmentIDSelector,
@@ -408,7 +409,7 @@ func (mg *EnvironmentDaprComponent) ResolveReferences(ctx context.Context, c cli
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ContainerAppEnvironmentID")
 	}
-	mg.Spec.ForProvider.ContainerAppEnvironmentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ContainerAppEnvironmentID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ContainerAppEnvironmentIDRef = rsp.ResolvedReference
 
 	return nil
@@ -429,7 +430,7 @@ func (mg *EnvironmentStorage) ResolveReferences(ctx context.Context, c client.Re
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.AccountName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.AccountNameRef,
 			Selector:     mg.Spec.ForProvider.AccountNameSelector,
@@ -439,7 +440,7 @@ func (mg *EnvironmentStorage) ResolveReferences(ctx context.Context, c client.Re
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.AccountName")
 	}
-	mg.Spec.ForProvider.AccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AccountName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AccountNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("containerapp.azure.upbound.io", "v1beta1", "Environment", "EnvironmentList")
@@ -448,7 +449,7 @@ func (mg *EnvironmentStorage) ResolveReferences(ctx context.Context, c client.Re
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerAppEnvironmentID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ContainerAppEnvironmentID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.ContainerAppEnvironmentIDRef,
 			Selector:     mg.Spec.ForProvider.ContainerAppEnvironmentIDSelector,
@@ -458,7 +459,7 @@ func (mg *EnvironmentStorage) ResolveReferences(ctx context.Context, c client.Re
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ContainerAppEnvironmentID")
 	}
-	mg.Spec.ForProvider.ContainerAppEnvironmentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ContainerAppEnvironmentID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ContainerAppEnvironmentIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Share", "ShareList")
@@ -467,7 +468,7 @@ func (mg *EnvironmentStorage) ResolveReferences(ctx context.Context, c client.Re
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ShareName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ShareName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ShareNameRef,
 			Selector:     mg.Spec.ForProvider.ShareNameSelector,
@@ -477,7 +478,7 @@ func (mg *EnvironmentStorage) ResolveReferences(ctx context.Context, c client.Re
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ShareName")
 	}
-	mg.Spec.ForProvider.ShareName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ShareName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ShareNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
@@ -486,7 +487,7 @@ func (mg *EnvironmentStorage) ResolveReferences(ctx context.Context, c client.Re
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AccountName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.AccountName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.AccountNameRef,
 			Selector:     mg.Spec.InitProvider.AccountNameSelector,
@@ -496,7 +497,7 @@ func (mg *EnvironmentStorage) ResolveReferences(ctx context.Context, c client.Re
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.AccountName")
 	}
-	mg.Spec.InitProvider.AccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.AccountName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.AccountNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Share", "ShareList")
@@ -505,7 +506,7 @@ func (mg *EnvironmentStorage) ResolveReferences(ctx context.Context, c client.Re
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ShareName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ShareName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.ShareNameRef,
 			Selector:     mg.Spec.InitProvider.ShareNameSelector,
@@ -515,7 +516,7 @@ func (mg *EnvironmentStorage) ResolveReferences(ctx context.Context, c client.Re
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ShareName")
 	}
-	mg.Spec.InitProvider.ShareName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ShareName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ShareNameRef = rsp.ResolvedReference
 
 	return nil

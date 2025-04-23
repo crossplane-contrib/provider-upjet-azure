@@ -15,6 +15,7 @@ import (
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	rconfig "github.com/upbound/provider-azure/apis/rconfig"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -33,7 +34,7 @@ func (mg *RedisCache) ResolveReferences( // ResolveReferences of this RedisCache
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -43,7 +44,7 @@ func (mg *RedisCache) ResolveReferences( // ResolveReferences of this RedisCache
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
@@ -52,7 +53,7 @@ func (mg *RedisCache) ResolveReferences( // ResolveReferences of this RedisCache
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.SubnetID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.SubnetIDRef,
 			Selector:     mg.Spec.ForProvider.SubnetIDSelector,
@@ -62,7 +63,7 @@ func (mg *RedisCache) ResolveReferences( // ResolveReferences of this RedisCache
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.SubnetID")
 	}
-	mg.Spec.ForProvider.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SubnetID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SubnetIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
@@ -71,7 +72,7 @@ func (mg *RedisCache) ResolveReferences( // ResolveReferences of this RedisCache
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubnetID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.SubnetID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.SubnetIDRef,
 			Selector:     mg.Spec.InitProvider.SubnetIDSelector,
@@ -81,7 +82,7 @@ func (mg *RedisCache) ResolveReferences( // ResolveReferences of this RedisCache
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.SubnetID")
 	}
-	mg.Spec.InitProvider.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SubnetID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.SubnetIDRef = rsp.ResolvedReference
 
 	return nil
@@ -102,7 +103,7 @@ func (mg *RedisCacheAccessPolicy) ResolveReferences(ctx context.Context, c clien
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RedisCacheID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.RedisCacheID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.RedisCacheIDRef,
 			Selector:     mg.Spec.ForProvider.RedisCacheIDSelector,
@@ -112,7 +113,7 @@ func (mg *RedisCacheAccessPolicy) ResolveReferences(ctx context.Context, c clien
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.RedisCacheID")
 	}
-	mg.Spec.ForProvider.RedisCacheID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.RedisCacheID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RedisCacheIDRef = rsp.ResolvedReference
 
 	return nil
@@ -133,7 +134,7 @@ func (mg *RedisCacheAccessPolicyAssignment) ResolveReferences(ctx context.Contex
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RedisCacheID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.RedisCacheID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.RedisCacheIDRef,
 			Selector:     mg.Spec.ForProvider.RedisCacheIDSelector,
@@ -143,7 +144,7 @@ func (mg *RedisCacheAccessPolicyAssignment) ResolveReferences(ctx context.Contex
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.RedisCacheID")
 	}
-	mg.Spec.ForProvider.RedisCacheID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.RedisCacheID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RedisCacheIDRef = rsp.ResolvedReference
 
 	return nil
@@ -164,7 +165,7 @@ func (mg *RedisEnterpriseCluster) ResolveReferences(ctx context.Context, c clien
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -174,7 +175,7 @@ func (mg *RedisEnterpriseCluster) ResolveReferences(ctx context.Context, c clien
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -195,7 +196,7 @@ func (mg *RedisEnterpriseDatabase) ResolveReferences(ctx context.Context, c clie
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ClusterID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ClusterID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.ClusterIDRef,
 			Selector:     mg.Spec.ForProvider.ClusterIDSelector,
@@ -205,7 +206,7 @@ func (mg *RedisEnterpriseDatabase) ResolveReferences(ctx context.Context, c clie
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ClusterID")
 	}
-	mg.Spec.ForProvider.ClusterID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ClusterID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ClusterIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -214,7 +215,7 @@ func (mg *RedisEnterpriseDatabase) ResolveReferences(ctx context.Context, c clie
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -224,7 +225,7 @@ func (mg *RedisEnterpriseDatabase) ResolveReferences(ctx context.Context, c clie
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -233,7 +234,7 @@ func (mg *RedisEnterpriseDatabase) ResolveReferences(ctx context.Context, c clie
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
@@ -243,7 +244,7 @@ func (mg *RedisEnterpriseDatabase) ResolveReferences(ctx context.Context, c clie
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
 	}
-	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -264,7 +265,7 @@ func (mg *RedisFirewallRule) ResolveReferences(ctx context.Context, c client.Rea
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RedisCacheName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.RedisCacheName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.RedisCacheNameRef,
 			Selector:     mg.Spec.ForProvider.RedisCacheNameSelector,
@@ -274,7 +275,7 @@ func (mg *RedisFirewallRule) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.RedisCacheName")
 	}
-	mg.Spec.ForProvider.RedisCacheName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.RedisCacheName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RedisCacheNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -283,7 +284,7 @@ func (mg *RedisFirewallRule) ResolveReferences(ctx context.Context, c client.Rea
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -293,7 +294,7 @@ func (mg *RedisFirewallRule) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -314,7 +315,7 @@ func (mg *RedisLinkedServer) ResolveReferences(ctx context.Context, c client.Rea
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LinkedRedisCacheID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.LinkedRedisCacheID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.LinkedRedisCacheIDRef,
 			Selector:     mg.Spec.ForProvider.LinkedRedisCacheIDSelector,
@@ -324,7 +325,7 @@ func (mg *RedisLinkedServer) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.LinkedRedisCacheID")
 	}
-	mg.Spec.ForProvider.LinkedRedisCacheID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LinkedRedisCacheID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LinkedRedisCacheIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -333,7 +334,7 @@ func (mg *RedisLinkedServer) ResolveReferences(ctx context.Context, c client.Rea
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -343,7 +344,7 @@ func (mg *RedisLinkedServer) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("cache.azure.upbound.io", "v1beta2", "RedisCache", "RedisCacheList")
@@ -352,7 +353,7 @@ func (mg *RedisLinkedServer) ResolveReferences(ctx context.Context, c client.Rea
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TargetRedisCacheName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.TargetRedisCacheName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.TargetRedisCacheNameRef,
 			Selector:     mg.Spec.ForProvider.TargetRedisCacheNameSelector,
@@ -362,7 +363,7 @@ func (mg *RedisLinkedServer) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.TargetRedisCacheName")
 	}
-	mg.Spec.ForProvider.TargetRedisCacheName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.TargetRedisCacheName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TargetRedisCacheNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("cache.azure.upbound.io", "v1beta2", "RedisCache", "RedisCacheList")
@@ -371,7 +372,7 @@ func (mg *RedisLinkedServer) ResolveReferences(ctx context.Context, c client.Rea
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LinkedRedisCacheID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.LinkedRedisCacheID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.LinkedRedisCacheIDRef,
 			Selector:     mg.Spec.InitProvider.LinkedRedisCacheIDSelector,
@@ -381,7 +382,7 @@ func (mg *RedisLinkedServer) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.LinkedRedisCacheID")
 	}
-	mg.Spec.InitProvider.LinkedRedisCacheID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LinkedRedisCacheID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.LinkedRedisCacheIDRef = rsp.ResolvedReference
 
 	return nil

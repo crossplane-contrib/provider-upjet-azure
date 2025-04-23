@@ -9,6 +9,7 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
+	helper "github.com/crossplane/crossplane-tools/pkg/helpers"
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
 
@@ -16,6 +17,7 @@ import (
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -35,7 +37,7 @@ func (mg *SpringCloudAPIPortal) ResolveReferences( // ResolveReferences of this 
 		}
 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.GatewayIds),
+			CurrentValues: helper.FromPtrValues(mg.Spec.ForProvider.GatewayIds),
 			Extract:       resource.ExtractResourceID(),
 			References:    mg.Spec.ForProvider.GatewayIdsRefs,
 			Selector:      mg.Spec.ForProvider.GatewayIdsSelector,
@@ -45,7 +47,7 @@ func (mg *SpringCloudAPIPortal) ResolveReferences( // ResolveReferences of this 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.GatewayIds")
 	}
-	mg.Spec.ForProvider.GatewayIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.GatewayIds = helper.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.GatewayIdsRefs = mrsp.ResolvedReferences
 	{
 		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta1", "SpringCloudService", "SpringCloudServiceList")
@@ -54,7 +56,7 @@ func (mg *SpringCloudAPIPortal) ResolveReferences( // ResolveReferences of this 
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SpringCloudServiceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.SpringCloudServiceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.SpringCloudServiceIDRef,
 			Selector:     mg.Spec.ForProvider.SpringCloudServiceIDSelector,
@@ -64,7 +66,7 @@ func (mg *SpringCloudAPIPortal) ResolveReferences( // ResolveReferences of this 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.SpringCloudServiceID")
 	}
-	mg.Spec.ForProvider.SpringCloudServiceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SpringCloudServiceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SpringCloudServiceIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta1", "SpringCloudGateway", "SpringCloudGatewayList")
@@ -73,7 +75,7 @@ func (mg *SpringCloudAPIPortal) ResolveReferences( // ResolveReferences of this 
 		}
 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.GatewayIds),
+			CurrentValues: helper.FromPtrValues(mg.Spec.InitProvider.GatewayIds),
 			Extract:       resource.ExtractResourceID(),
 			References:    mg.Spec.InitProvider.GatewayIdsRefs,
 			Selector:      mg.Spec.InitProvider.GatewayIdsSelector,
@@ -83,7 +85,7 @@ func (mg *SpringCloudAPIPortal) ResolveReferences( // ResolveReferences of this 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.GatewayIds")
 	}
-	mg.Spec.InitProvider.GatewayIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.GatewayIds = helper.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.InitProvider.GatewayIdsRefs = mrsp.ResolvedReferences
 
 	return nil
@@ -104,7 +106,7 @@ func (mg *SpringCloudAPIPortalCustomDomain) ResolveReferences(ctx context.Contex
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SpringCloudAPIPortalID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.SpringCloudAPIPortalID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.SpringCloudAPIPortalIDRef,
 			Selector:     mg.Spec.ForProvider.SpringCloudAPIPortalIDSelector,
@@ -114,7 +116,7 @@ func (mg *SpringCloudAPIPortalCustomDomain) ResolveReferences(ctx context.Contex
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.SpringCloudAPIPortalID")
 	}
-	mg.Spec.ForProvider.SpringCloudAPIPortalID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SpringCloudAPIPortalID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SpringCloudAPIPortalIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta2", "SpringCloudAPIPortal", "SpringCloudAPIPortalList")
@@ -123,7 +125,7 @@ func (mg *SpringCloudAPIPortalCustomDomain) ResolveReferences(ctx context.Contex
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SpringCloudAPIPortalID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.SpringCloudAPIPortalID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.SpringCloudAPIPortalIDRef,
 			Selector:     mg.Spec.InitProvider.SpringCloudAPIPortalIDSelector,
@@ -133,7 +135,7 @@ func (mg *SpringCloudAPIPortalCustomDomain) ResolveReferences(ctx context.Contex
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.SpringCloudAPIPortalID")
 	}
-	mg.Spec.InitProvider.SpringCloudAPIPortalID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SpringCloudAPIPortalID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.SpringCloudAPIPortalIDRef = rsp.ResolvedReference
 
 	return nil
@@ -154,7 +156,7 @@ func (mg *SpringCloudAccelerator) ResolveReferences(ctx context.Context, c clien
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SpringCloudServiceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.SpringCloudServiceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.SpringCloudServiceIDRef,
 			Selector:     mg.Spec.ForProvider.SpringCloudServiceIDSelector,
@@ -164,7 +166,7 @@ func (mg *SpringCloudAccelerator) ResolveReferences(ctx context.Context, c clien
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.SpringCloudServiceID")
 	}
-	mg.Spec.ForProvider.SpringCloudServiceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SpringCloudServiceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SpringCloudServiceIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta2", "SpringCloudService", "SpringCloudServiceList")
@@ -173,7 +175,7 @@ func (mg *SpringCloudAccelerator) ResolveReferences(ctx context.Context, c clien
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SpringCloudServiceID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.SpringCloudServiceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.SpringCloudServiceIDRef,
 			Selector:     mg.Spec.InitProvider.SpringCloudServiceIDSelector,
@@ -183,7 +185,7 @@ func (mg *SpringCloudAccelerator) ResolveReferences(ctx context.Context, c clien
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.SpringCloudServiceID")
 	}
-	mg.Spec.InitProvider.SpringCloudServiceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SpringCloudServiceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.SpringCloudServiceIDRef = rsp.ResolvedReference
 
 	return nil
@@ -204,7 +206,7 @@ func (mg *SpringCloudActiveDeployment) ResolveReferences(ctx context.Context, c 
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DeploymentName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.DeploymentName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.DeploymentNameRef,
 			Selector:     mg.Spec.ForProvider.DeploymentNameSelector,
@@ -214,7 +216,7 @@ func (mg *SpringCloudActiveDeployment) ResolveReferences(ctx context.Context, c 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.DeploymentName")
 	}
-	mg.Spec.ForProvider.DeploymentName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DeploymentName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DeploymentNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta2", "SpringCloudApp", "SpringCloudAppList")
@@ -223,7 +225,7 @@ func (mg *SpringCloudActiveDeployment) ResolveReferences(ctx context.Context, c 
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SpringCloudAppID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.SpringCloudAppID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.SpringCloudAppIDRef,
 			Selector:     mg.Spec.ForProvider.SpringCloudAppIDSelector,
@@ -233,7 +235,7 @@ func (mg *SpringCloudActiveDeployment) ResolveReferences(ctx context.Context, c 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.SpringCloudAppID")
 	}
-	mg.Spec.ForProvider.SpringCloudAppID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SpringCloudAppID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SpringCloudAppIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta2", "SpringCloudJavaDeployment", "SpringCloudJavaDeploymentList")
@@ -242,7 +244,7 @@ func (mg *SpringCloudActiveDeployment) ResolveReferences(ctx context.Context, c 
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DeploymentName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.DeploymentName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.DeploymentNameRef,
 			Selector:     mg.Spec.InitProvider.DeploymentNameSelector,
@@ -252,7 +254,7 @@ func (mg *SpringCloudActiveDeployment) ResolveReferences(ctx context.Context, c 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.DeploymentName")
 	}
-	mg.Spec.InitProvider.DeploymentName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DeploymentName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DeploymentNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta2", "SpringCloudApp", "SpringCloudAppList")
@@ -261,7 +263,7 @@ func (mg *SpringCloudActiveDeployment) ResolveReferences(ctx context.Context, c 
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SpringCloudAppID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.SpringCloudAppID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.SpringCloudAppIDRef,
 			Selector:     mg.Spec.InitProvider.SpringCloudAppIDSelector,
@@ -271,7 +273,7 @@ func (mg *SpringCloudActiveDeployment) ResolveReferences(ctx context.Context, c 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.SpringCloudAppID")
 	}
-	mg.Spec.InitProvider.SpringCloudAppID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SpringCloudAppID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.SpringCloudAppIDRef = rsp.ResolvedReference
 
 	return nil
@@ -292,7 +294,7 @@ func (mg *SpringCloudApp) ResolveReferences(ctx context.Context, c client.Reader
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -302,7 +304,7 @@ func (mg *SpringCloudApp) ResolveReferences(ctx context.Context, c client.Reader
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta1", "SpringCloudService", "SpringCloudServiceList")
@@ -311,7 +313,7 @@ func (mg *SpringCloudApp) ResolveReferences(ctx context.Context, c client.Reader
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServiceName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ServiceName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ServiceNameRef,
 			Selector:     mg.Spec.ForProvider.ServiceNameSelector,
@@ -321,7 +323,7 @@ func (mg *SpringCloudApp) ResolveReferences(ctx context.Context, c client.Reader
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ServiceName")
 	}
-	mg.Spec.ForProvider.ServiceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ServiceName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServiceNameRef = rsp.ResolvedReference
 
 	return nil
@@ -342,7 +344,7 @@ func (mg *SpringCloudAppCosmosDBAssociation) ResolveReferences(ctx context.Conte
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CosmosDBAccessKey),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.CosmosDBAccessKey, ""),
 			Extract:      resource.ExtractParamPath("primary_key", true),
 			Reference:    mg.Spec.ForProvider.CosmosDBAccessKeyRef,
 			Selector:     mg.Spec.ForProvider.CosmosDBAccessKeySelector,
@@ -352,7 +354,7 @@ func (mg *SpringCloudAppCosmosDBAssociation) ResolveReferences(ctx context.Conte
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.CosmosDBAccessKey")
 	}
-	mg.Spec.ForProvider.CosmosDBAccessKey = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CosmosDBAccessKey = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CosmosDBAccessKeyRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta2", "Account", "AccountList")
@@ -361,7 +363,7 @@ func (mg *SpringCloudAppCosmosDBAssociation) ResolveReferences(ctx context.Conte
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CosmosDBAccountID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.CosmosDBAccountID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.CosmosDBAccountIDRef,
 			Selector:     mg.Spec.ForProvider.CosmosDBAccountIDSelector,
@@ -371,7 +373,7 @@ func (mg *SpringCloudAppCosmosDBAssociation) ResolveReferences(ctx context.Conte
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.CosmosDBAccountID")
 	}
-	mg.Spec.ForProvider.CosmosDBAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CosmosDBAccountID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CosmosDBAccountIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta2", "SpringCloudApp", "SpringCloudAppList")
@@ -380,7 +382,7 @@ func (mg *SpringCloudAppCosmosDBAssociation) ResolveReferences(ctx context.Conte
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SpringCloudAppID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.SpringCloudAppID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.SpringCloudAppIDRef,
 			Selector:     mg.Spec.ForProvider.SpringCloudAppIDSelector,
@@ -390,7 +392,7 @@ func (mg *SpringCloudAppCosmosDBAssociation) ResolveReferences(ctx context.Conte
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.SpringCloudAppID")
 	}
-	mg.Spec.ForProvider.SpringCloudAppID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SpringCloudAppID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SpringCloudAppIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta2", "Account", "AccountList")
@@ -399,7 +401,7 @@ func (mg *SpringCloudAppCosmosDBAssociation) ResolveReferences(ctx context.Conte
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CosmosDBAccessKey),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.CosmosDBAccessKey, ""),
 			Extract:      resource.ExtractParamPath("primary_key", true),
 			Reference:    mg.Spec.InitProvider.CosmosDBAccessKeyRef,
 			Selector:     mg.Spec.InitProvider.CosmosDBAccessKeySelector,
@@ -409,7 +411,7 @@ func (mg *SpringCloudAppCosmosDBAssociation) ResolveReferences(ctx context.Conte
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.CosmosDBAccessKey")
 	}
-	mg.Spec.InitProvider.CosmosDBAccessKey = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.CosmosDBAccessKey = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.CosmosDBAccessKeyRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta2", "Account", "AccountList")
@@ -418,7 +420,7 @@ func (mg *SpringCloudAppCosmosDBAssociation) ResolveReferences(ctx context.Conte
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CosmosDBAccountID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.CosmosDBAccountID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.CosmosDBAccountIDRef,
 			Selector:     mg.Spec.InitProvider.CosmosDBAccountIDSelector,
@@ -428,7 +430,7 @@ func (mg *SpringCloudAppCosmosDBAssociation) ResolveReferences(ctx context.Conte
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.CosmosDBAccountID")
 	}
-	mg.Spec.InitProvider.CosmosDBAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.CosmosDBAccountID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.CosmosDBAccountIDRef = rsp.ResolvedReference
 
 	return nil
@@ -449,7 +451,7 @@ func (mg *SpringCloudAppMySQLAssociation) ResolveReferences(ctx context.Context,
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.DatabaseName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.DatabaseNameRef,
 			Selector:     mg.Spec.ForProvider.DatabaseNameSelector,
@@ -459,7 +461,7 @@ func (mg *SpringCloudAppMySQLAssociation) ResolveReferences(ctx context.Context,
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.DatabaseName")
 	}
-	mg.Spec.ForProvider.DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DatabaseName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DatabaseNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("dbformysql.azure.upbound.io", "v1beta2", "Server", "ServerList")
@@ -468,7 +470,7 @@ func (mg *SpringCloudAppMySQLAssociation) ResolveReferences(ctx context.Context,
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MySQLServerID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.MySQLServerID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.MySQLServerIDRef,
 			Selector:     mg.Spec.ForProvider.MySQLServerIDSelector,
@@ -478,7 +480,7 @@ func (mg *SpringCloudAppMySQLAssociation) ResolveReferences(ctx context.Context,
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.MySQLServerID")
 	}
-	mg.Spec.ForProvider.MySQLServerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.MySQLServerID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.MySQLServerIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta2", "SpringCloudApp", "SpringCloudAppList")
@@ -487,7 +489,7 @@ func (mg *SpringCloudAppMySQLAssociation) ResolveReferences(ctx context.Context,
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SpringCloudAppID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.SpringCloudAppID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.SpringCloudAppIDRef,
 			Selector:     mg.Spec.ForProvider.SpringCloudAppIDSelector,
@@ -497,7 +499,7 @@ func (mg *SpringCloudAppMySQLAssociation) ResolveReferences(ctx context.Context,
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.SpringCloudAppID")
 	}
-	mg.Spec.ForProvider.SpringCloudAppID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SpringCloudAppID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SpringCloudAppIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("dbformysql.azure.upbound.io", "v1beta2", "Server", "ServerList")
@@ -506,7 +508,7 @@ func (mg *SpringCloudAppMySQLAssociation) ResolveReferences(ctx context.Context,
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Username),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.Username, ""),
 			Extract:      resource.ExtractParamPath("administrator_login", false),
 			Reference:    mg.Spec.ForProvider.UsernameRef,
 			Selector:     mg.Spec.ForProvider.UsernameSelector,
@@ -516,7 +518,7 @@ func (mg *SpringCloudAppMySQLAssociation) ResolveReferences(ctx context.Context,
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.Username")
 	}
-	mg.Spec.ForProvider.Username = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.Username = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.UsernameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("dbformysql.azure.upbound.io", "v1beta1", "Database", "DatabaseList")
@@ -525,7 +527,7 @@ func (mg *SpringCloudAppMySQLAssociation) ResolveReferences(ctx context.Context,
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DatabaseName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.DatabaseName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.DatabaseNameRef,
 			Selector:     mg.Spec.InitProvider.DatabaseNameSelector,
@@ -535,7 +537,7 @@ func (mg *SpringCloudAppMySQLAssociation) ResolveReferences(ctx context.Context,
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.DatabaseName")
 	}
-	mg.Spec.InitProvider.DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DatabaseName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DatabaseNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("dbformysql.azure.upbound.io", "v1beta2", "Server", "ServerList")
@@ -544,7 +546,7 @@ func (mg *SpringCloudAppMySQLAssociation) ResolveReferences(ctx context.Context,
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MySQLServerID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.MySQLServerID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.MySQLServerIDRef,
 			Selector:     mg.Spec.InitProvider.MySQLServerIDSelector,
@@ -554,7 +556,7 @@ func (mg *SpringCloudAppMySQLAssociation) ResolveReferences(ctx context.Context,
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.MySQLServerID")
 	}
-	mg.Spec.InitProvider.MySQLServerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.MySQLServerID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.MySQLServerIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("dbformysql.azure.upbound.io", "v1beta2", "Server", "ServerList")
@@ -563,7 +565,7 @@ func (mg *SpringCloudAppMySQLAssociation) ResolveReferences(ctx context.Context,
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Username),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.Username, ""),
 			Extract:      resource.ExtractParamPath("administrator_login", false),
 			Reference:    mg.Spec.InitProvider.UsernameRef,
 			Selector:     mg.Spec.InitProvider.UsernameSelector,
@@ -573,7 +575,7 @@ func (mg *SpringCloudAppMySQLAssociation) ResolveReferences(ctx context.Context,
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.Username")
 	}
-	mg.Spec.InitProvider.Username = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.Username = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.UsernameRef = rsp.ResolvedReference
 
 	return nil
@@ -594,7 +596,7 @@ func (mg *SpringCloudAppRedisAssociation) ResolveReferences(ctx context.Context,
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RedisAccessKey),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.RedisAccessKey, ""),
 			Extract:      resource.ExtractParamPath("primary_access_key", true),
 			Reference:    mg.Spec.ForProvider.RedisAccessKeyRef,
 			Selector:     mg.Spec.ForProvider.RedisAccessKeySelector,
@@ -604,7 +606,7 @@ func (mg *SpringCloudAppRedisAssociation) ResolveReferences(ctx context.Context,
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.RedisAccessKey")
 	}
-	mg.Spec.ForProvider.RedisAccessKey = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.RedisAccessKey = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RedisAccessKeyRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("cache.azure.upbound.io", "v1beta2", "RedisCache", "RedisCacheList")
@@ -613,7 +615,7 @@ func (mg *SpringCloudAppRedisAssociation) ResolveReferences(ctx context.Context,
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RedisCacheID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.RedisCacheID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.RedisCacheIDRef,
 			Selector:     mg.Spec.ForProvider.RedisCacheIDSelector,
@@ -623,7 +625,7 @@ func (mg *SpringCloudAppRedisAssociation) ResolveReferences(ctx context.Context,
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.RedisCacheID")
 	}
-	mg.Spec.ForProvider.RedisCacheID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.RedisCacheID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RedisCacheIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta2", "SpringCloudApp", "SpringCloudAppList")
@@ -632,7 +634,7 @@ func (mg *SpringCloudAppRedisAssociation) ResolveReferences(ctx context.Context,
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SpringCloudAppID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.SpringCloudAppID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.SpringCloudAppIDRef,
 			Selector:     mg.Spec.ForProvider.SpringCloudAppIDSelector,
@@ -642,7 +644,7 @@ func (mg *SpringCloudAppRedisAssociation) ResolveReferences(ctx context.Context,
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.SpringCloudAppID")
 	}
-	mg.Spec.ForProvider.SpringCloudAppID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SpringCloudAppID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SpringCloudAppIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("cache.azure.upbound.io", "v1beta2", "RedisCache", "RedisCacheList")
@@ -651,7 +653,7 @@ func (mg *SpringCloudAppRedisAssociation) ResolveReferences(ctx context.Context,
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RedisAccessKey),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.RedisAccessKey, ""),
 			Extract:      resource.ExtractParamPath("primary_access_key", true),
 			Reference:    mg.Spec.InitProvider.RedisAccessKeyRef,
 			Selector:     mg.Spec.InitProvider.RedisAccessKeySelector,
@@ -661,7 +663,7 @@ func (mg *SpringCloudAppRedisAssociation) ResolveReferences(ctx context.Context,
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.RedisAccessKey")
 	}
-	mg.Spec.InitProvider.RedisAccessKey = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RedisAccessKey = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.RedisAccessKeyRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("cache.azure.upbound.io", "v1beta2", "RedisCache", "RedisCacheList")
@@ -670,7 +672,7 @@ func (mg *SpringCloudAppRedisAssociation) ResolveReferences(ctx context.Context,
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RedisCacheID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.RedisCacheID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.RedisCacheIDRef,
 			Selector:     mg.Spec.InitProvider.RedisCacheIDSelector,
@@ -680,7 +682,7 @@ func (mg *SpringCloudAppRedisAssociation) ResolveReferences(ctx context.Context,
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.RedisCacheID")
 	}
-	mg.Spec.InitProvider.RedisCacheID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RedisCacheID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.RedisCacheIDRef = rsp.ResolvedReference
 
 	return nil
@@ -701,7 +703,7 @@ func (mg *SpringCloudBuildDeployment) ResolveReferences(ctx context.Context, c c
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SpringCloudAppID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.SpringCloudAppID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.SpringCloudAppIDRef,
 			Selector:     mg.Spec.ForProvider.SpringCloudAppIDSelector,
@@ -711,7 +713,7 @@ func (mg *SpringCloudBuildDeployment) ResolveReferences(ctx context.Context, c c
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.SpringCloudAppID")
 	}
-	mg.Spec.ForProvider.SpringCloudAppID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SpringCloudAppID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SpringCloudAppIDRef = rsp.ResolvedReference
 
 	return nil
@@ -732,7 +734,7 @@ func (mg *SpringCloudBuildPackBinding) ResolveReferences(ctx context.Context, c 
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SpringCloudBuilderID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.SpringCloudBuilderID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.SpringCloudBuilderIDRef,
 			Selector:     mg.Spec.ForProvider.SpringCloudBuilderIDSelector,
@@ -742,7 +744,7 @@ func (mg *SpringCloudBuildPackBinding) ResolveReferences(ctx context.Context, c 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.SpringCloudBuilderID")
 	}
-	mg.Spec.ForProvider.SpringCloudBuilderID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SpringCloudBuilderID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SpringCloudBuilderIDRef = rsp.ResolvedReference
 
 	return nil
@@ -763,7 +765,7 @@ func (mg *SpringCloudBuilder) ResolveReferences(ctx context.Context, c client.Re
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SpringCloudServiceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.SpringCloudServiceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.SpringCloudServiceIDRef,
 			Selector:     mg.Spec.ForProvider.SpringCloudServiceIDSelector,
@@ -773,7 +775,7 @@ func (mg *SpringCloudBuilder) ResolveReferences(ctx context.Context, c client.Re
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.SpringCloudServiceID")
 	}
-	mg.Spec.ForProvider.SpringCloudServiceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SpringCloudServiceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SpringCloudServiceIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta1", "SpringCloudService", "SpringCloudServiceList")
@@ -782,7 +784,7 @@ func (mg *SpringCloudBuilder) ResolveReferences(ctx context.Context, c client.Re
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SpringCloudServiceID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.SpringCloudServiceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.SpringCloudServiceIDRef,
 			Selector:     mg.Spec.InitProvider.SpringCloudServiceIDSelector,
@@ -792,7 +794,7 @@ func (mg *SpringCloudBuilder) ResolveReferences(ctx context.Context, c client.Re
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.SpringCloudServiceID")
 	}
-	mg.Spec.InitProvider.SpringCloudServiceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SpringCloudServiceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.SpringCloudServiceIDRef = rsp.ResolvedReference
 
 	return nil
@@ -813,7 +815,7 @@ func (mg *SpringCloudCertificate) ResolveReferences(ctx context.Context, c clien
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KeyVaultCertificateID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.KeyVaultCertificateID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.KeyVaultCertificateIDRef,
 			Selector:     mg.Spec.ForProvider.KeyVaultCertificateIDSelector,
@@ -823,7 +825,7 @@ func (mg *SpringCloudCertificate) ResolveReferences(ctx context.Context, c clien
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.KeyVaultCertificateID")
 	}
-	mg.Spec.ForProvider.KeyVaultCertificateID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.KeyVaultCertificateID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KeyVaultCertificateIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -832,7 +834,7 @@ func (mg *SpringCloudCertificate) ResolveReferences(ctx context.Context, c clien
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -842,7 +844,7 @@ func (mg *SpringCloudCertificate) ResolveReferences(ctx context.Context, c clien
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta2", "SpringCloudService", "SpringCloudServiceList")
@@ -851,7 +853,7 @@ func (mg *SpringCloudCertificate) ResolveReferences(ctx context.Context, c clien
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServiceName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ServiceName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ServiceNameRef,
 			Selector:     mg.Spec.ForProvider.ServiceNameSelector,
@@ -861,7 +863,7 @@ func (mg *SpringCloudCertificate) ResolveReferences(ctx context.Context, c clien
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ServiceName")
 	}
-	mg.Spec.ForProvider.ServiceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ServiceName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServiceNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta2", "Certificate", "CertificateList")
@@ -870,7 +872,7 @@ func (mg *SpringCloudCertificate) ResolveReferences(ctx context.Context, c clien
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyVaultCertificateID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.KeyVaultCertificateID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.KeyVaultCertificateIDRef,
 			Selector:     mg.Spec.InitProvider.KeyVaultCertificateIDSelector,
@@ -880,7 +882,7 @@ func (mg *SpringCloudCertificate) ResolveReferences(ctx context.Context, c clien
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.KeyVaultCertificateID")
 	}
-	mg.Spec.InitProvider.KeyVaultCertificateID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KeyVaultCertificateID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.KeyVaultCertificateIDRef = rsp.ResolvedReference
 
 	return nil
@@ -901,7 +903,7 @@ func (mg *SpringCloudConfigurationService) ResolveReferences(ctx context.Context
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SpringCloudServiceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.SpringCloudServiceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.SpringCloudServiceIDRef,
 			Selector:     mg.Spec.ForProvider.SpringCloudServiceIDSelector,
@@ -911,7 +913,7 @@ func (mg *SpringCloudConfigurationService) ResolveReferences(ctx context.Context
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.SpringCloudServiceID")
 	}
-	mg.Spec.ForProvider.SpringCloudServiceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SpringCloudServiceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SpringCloudServiceIDRef = rsp.ResolvedReference
 
 	return nil
@@ -932,7 +934,7 @@ func (mg *SpringCloudContainerDeployment) ResolveReferences(ctx context.Context,
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SpringCloudAppID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.SpringCloudAppID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.SpringCloudAppIDRef,
 			Selector:     mg.Spec.ForProvider.SpringCloudAppIDSelector,
@@ -942,7 +944,7 @@ func (mg *SpringCloudContainerDeployment) ResolveReferences(ctx context.Context,
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.SpringCloudAppID")
 	}
-	mg.Spec.ForProvider.SpringCloudAppID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SpringCloudAppID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SpringCloudAppIDRef = rsp.ResolvedReference
 
 	return nil
@@ -963,7 +965,7 @@ func (mg *SpringCloudCustomDomain) ResolveReferences(ctx context.Context, c clie
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SpringCloudAppID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.SpringCloudAppID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.SpringCloudAppIDRef,
 			Selector:     mg.Spec.ForProvider.SpringCloudAppIDSelector,
@@ -973,7 +975,7 @@ func (mg *SpringCloudCustomDomain) ResolveReferences(ctx context.Context, c clie
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.SpringCloudAppID")
 	}
-	mg.Spec.ForProvider.SpringCloudAppID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SpringCloudAppID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SpringCloudAppIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta2", "SpringCloudApp", "SpringCloudAppList")
@@ -982,7 +984,7 @@ func (mg *SpringCloudCustomDomain) ResolveReferences(ctx context.Context, c clie
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SpringCloudAppID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.SpringCloudAppID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.SpringCloudAppIDRef,
 			Selector:     mg.Spec.InitProvider.SpringCloudAppIDSelector,
@@ -992,7 +994,7 @@ func (mg *SpringCloudCustomDomain) ResolveReferences(ctx context.Context, c clie
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.SpringCloudAppID")
 	}
-	mg.Spec.InitProvider.SpringCloudAppID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SpringCloudAppID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.SpringCloudAppIDRef = rsp.ResolvedReference
 
 	return nil
@@ -1013,7 +1015,7 @@ func (mg *SpringCloudCustomizedAccelerator) ResolveReferences(ctx context.Contex
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SpringCloudAcceleratorID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.SpringCloudAcceleratorID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.SpringCloudAcceleratorIDRef,
 			Selector:     mg.Spec.ForProvider.SpringCloudAcceleratorIDSelector,
@@ -1023,7 +1025,7 @@ func (mg *SpringCloudCustomizedAccelerator) ResolveReferences(ctx context.Contex
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.SpringCloudAcceleratorID")
 	}
-	mg.Spec.ForProvider.SpringCloudAcceleratorID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SpringCloudAcceleratorID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SpringCloudAcceleratorIDRef = rsp.ResolvedReference
 
 	return nil
@@ -1044,7 +1046,7 @@ func (mg *SpringCloudDevToolPortal) ResolveReferences(ctx context.Context, c cli
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SpringCloudServiceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.SpringCloudServiceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.SpringCloudServiceIDRef,
 			Selector:     mg.Spec.ForProvider.SpringCloudServiceIDSelector,
@@ -1054,7 +1056,7 @@ func (mg *SpringCloudDevToolPortal) ResolveReferences(ctx context.Context, c cli
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.SpringCloudServiceID")
 	}
-	mg.Spec.ForProvider.SpringCloudServiceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SpringCloudServiceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SpringCloudServiceIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta1", "SpringCloudService", "SpringCloudServiceList")
@@ -1063,7 +1065,7 @@ func (mg *SpringCloudDevToolPortal) ResolveReferences(ctx context.Context, c cli
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SpringCloudServiceID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.SpringCloudServiceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.SpringCloudServiceIDRef,
 			Selector:     mg.Spec.InitProvider.SpringCloudServiceIDSelector,
@@ -1073,7 +1075,7 @@ func (mg *SpringCloudDevToolPortal) ResolveReferences(ctx context.Context, c cli
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.SpringCloudServiceID")
 	}
-	mg.Spec.InitProvider.SpringCloudServiceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SpringCloudServiceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.SpringCloudServiceIDRef = rsp.ResolvedReference
 
 	return nil
@@ -1094,7 +1096,7 @@ func (mg *SpringCloudGateway) ResolveReferences(ctx context.Context, c client.Re
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SpringCloudServiceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.SpringCloudServiceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.SpringCloudServiceIDRef,
 			Selector:     mg.Spec.ForProvider.SpringCloudServiceIDSelector,
@@ -1104,7 +1106,7 @@ func (mg *SpringCloudGateway) ResolveReferences(ctx context.Context, c client.Re
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.SpringCloudServiceID")
 	}
-	mg.Spec.ForProvider.SpringCloudServiceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SpringCloudServiceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SpringCloudServiceIDRef = rsp.ResolvedReference
 
 	return nil
@@ -1125,7 +1127,7 @@ func (mg *SpringCloudGatewayCustomDomain) ResolveReferences(ctx context.Context,
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SpringCloudGatewayID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.SpringCloudGatewayID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.SpringCloudGatewayIDRef,
 			Selector:     mg.Spec.ForProvider.SpringCloudGatewayIDSelector,
@@ -1135,7 +1137,7 @@ func (mg *SpringCloudGatewayCustomDomain) ResolveReferences(ctx context.Context,
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.SpringCloudGatewayID")
 	}
-	mg.Spec.ForProvider.SpringCloudGatewayID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SpringCloudGatewayID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SpringCloudGatewayIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta2", "SpringCloudGateway", "SpringCloudGatewayList")
@@ -1144,7 +1146,7 @@ func (mg *SpringCloudGatewayCustomDomain) ResolveReferences(ctx context.Context,
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SpringCloudGatewayID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.SpringCloudGatewayID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.SpringCloudGatewayIDRef,
 			Selector:     mg.Spec.InitProvider.SpringCloudGatewayIDSelector,
@@ -1154,7 +1156,7 @@ func (mg *SpringCloudGatewayCustomDomain) ResolveReferences(ctx context.Context,
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.SpringCloudGatewayID")
 	}
-	mg.Spec.InitProvider.SpringCloudGatewayID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SpringCloudGatewayID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.SpringCloudGatewayIDRef = rsp.ResolvedReference
 
 	return nil
@@ -1175,7 +1177,7 @@ func (mg *SpringCloudJavaDeployment) ResolveReferences(ctx context.Context, c cl
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SpringCloudAppID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.SpringCloudAppID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.SpringCloudAppIDRef,
 			Selector:     mg.Spec.ForProvider.SpringCloudAppIDSelector,
@@ -1185,7 +1187,7 @@ func (mg *SpringCloudJavaDeployment) ResolveReferences(ctx context.Context, c cl
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.SpringCloudAppID")
 	}
-	mg.Spec.ForProvider.SpringCloudAppID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SpringCloudAppID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SpringCloudAppIDRef = rsp.ResolvedReference
 
 	return nil
@@ -1207,7 +1209,7 @@ func (mg *SpringCloudService) ResolveReferences(ctx context.Context, c client.Re
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Network[i3].AppSubnetID),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.Network[i3].AppSubnetID, ""),
 				Extract:      rconfig.ExtractResourceID(),
 				Reference:    mg.Spec.ForProvider.Network[i3].AppSubnetIDRef,
 				Selector:     mg.Spec.ForProvider.Network[i3].AppSubnetIDSelector,
@@ -1217,7 +1219,7 @@ func (mg *SpringCloudService) ResolveReferences(ctx context.Context, c client.Re
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.Network[i3].AppSubnetID")
 		}
-		mg.Spec.ForProvider.Network[i3].AppSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Network[i3].AppSubnetID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.Network[i3].AppSubnetIDRef = rsp.ResolvedReference
 
 	}
@@ -1228,7 +1230,7 @@ func (mg *SpringCloudService) ResolveReferences(ctx context.Context, c client.Re
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Network[i3].ServiceRuntimeSubnetID),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.Network[i3].ServiceRuntimeSubnetID, ""),
 				Extract:      rconfig.ExtractResourceID(),
 				Reference:    mg.Spec.ForProvider.Network[i3].ServiceRuntimeSubnetIDRef,
 				Selector:     mg.Spec.ForProvider.Network[i3].ServiceRuntimeSubnetIDSelector,
@@ -1238,7 +1240,7 @@ func (mg *SpringCloudService) ResolveReferences(ctx context.Context, c client.Re
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.Network[i3].ServiceRuntimeSubnetID")
 		}
-		mg.Spec.ForProvider.Network[i3].ServiceRuntimeSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Network[i3].ServiceRuntimeSubnetID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.Network[i3].ServiceRuntimeSubnetIDRef = rsp.ResolvedReference
 
 	}
@@ -1248,7 +1250,7 @@ func (mg *SpringCloudService) ResolveReferences(ctx context.Context, c client.Re
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -1258,7 +1260,7 @@ func (mg *SpringCloudService) ResolveReferences(ctx context.Context, c client.Re
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.Trace); i3++ {
@@ -1268,7 +1270,7 @@ func (mg *SpringCloudService) ResolveReferences(ctx context.Context, c client.Re
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Trace[i3].ConnectionString),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.Trace[i3].ConnectionString, ""),
 				Extract:      resource.ExtractParamPath("connection_string", true),
 				Reference:    mg.Spec.ForProvider.Trace[i3].ConnectionStringRef,
 				Selector:     mg.Spec.ForProvider.Trace[i3].ConnectionStringSelector,
@@ -1278,7 +1280,7 @@ func (mg *SpringCloudService) ResolveReferences(ctx context.Context, c client.Re
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.Trace[i3].ConnectionString")
 		}
-		mg.Spec.ForProvider.Trace[i3].ConnectionString = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Trace[i3].ConnectionString = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.Trace[i3].ConnectionStringRef = rsp.ResolvedReference
 
 	}
@@ -1289,7 +1291,7 @@ func (mg *SpringCloudService) ResolveReferences(ctx context.Context, c client.Re
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Network[i3].AppSubnetID),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.Network[i3].AppSubnetID, ""),
 				Extract:      rconfig.ExtractResourceID(),
 				Reference:    mg.Spec.InitProvider.Network[i3].AppSubnetIDRef,
 				Selector:     mg.Spec.InitProvider.Network[i3].AppSubnetIDSelector,
@@ -1299,7 +1301,7 @@ func (mg *SpringCloudService) ResolveReferences(ctx context.Context, c client.Re
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.Network[i3].AppSubnetID")
 		}
-		mg.Spec.InitProvider.Network[i3].AppSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Network[i3].AppSubnetID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.Network[i3].AppSubnetIDRef = rsp.ResolvedReference
 
 	}
@@ -1310,7 +1312,7 @@ func (mg *SpringCloudService) ResolveReferences(ctx context.Context, c client.Re
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Network[i3].ServiceRuntimeSubnetID),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.Network[i3].ServiceRuntimeSubnetID, ""),
 				Extract:      rconfig.ExtractResourceID(),
 				Reference:    mg.Spec.InitProvider.Network[i3].ServiceRuntimeSubnetIDRef,
 				Selector:     mg.Spec.InitProvider.Network[i3].ServiceRuntimeSubnetIDSelector,
@@ -1320,7 +1322,7 @@ func (mg *SpringCloudService) ResolveReferences(ctx context.Context, c client.Re
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.Network[i3].ServiceRuntimeSubnetID")
 		}
-		mg.Spec.InitProvider.Network[i3].ServiceRuntimeSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Network[i3].ServiceRuntimeSubnetID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.Network[i3].ServiceRuntimeSubnetIDRef = rsp.ResolvedReference
 
 	}
@@ -1331,7 +1333,7 @@ func (mg *SpringCloudService) ResolveReferences(ctx context.Context, c client.Re
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Trace[i3].ConnectionString),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.Trace[i3].ConnectionString, ""),
 				Extract:      resource.ExtractParamPath("connection_string", true),
 				Reference:    mg.Spec.InitProvider.Trace[i3].ConnectionStringRef,
 				Selector:     mg.Spec.InitProvider.Trace[i3].ConnectionStringSelector,
@@ -1341,7 +1343,7 @@ func (mg *SpringCloudService) ResolveReferences(ctx context.Context, c client.Re
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.Trace[i3].ConnectionString")
 		}
-		mg.Spec.InitProvider.Trace[i3].ConnectionString = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Trace[i3].ConnectionString = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.Trace[i3].ConnectionStringRef = rsp.ResolvedReference
 
 	}
@@ -1364,7 +1366,7 @@ func (mg *SpringCloudStorage) ResolveReferences(ctx context.Context, c client.Re
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SpringCloudServiceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.SpringCloudServiceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.SpringCloudServiceIDRef,
 			Selector:     mg.Spec.ForProvider.SpringCloudServiceIDSelector,
@@ -1374,7 +1376,7 @@ func (mg *SpringCloudStorage) ResolveReferences(ctx context.Context, c client.Re
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.SpringCloudServiceID")
 	}
-	mg.Spec.ForProvider.SpringCloudServiceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SpringCloudServiceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SpringCloudServiceIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
@@ -1383,7 +1385,7 @@ func (mg *SpringCloudStorage) ResolveReferences(ctx context.Context, c client.Re
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccountKey),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.StorageAccountKey, ""),
 			Extract:      resource.ExtractParamPath("primary_access_key", true),
 			Reference:    mg.Spec.ForProvider.StorageAccountKeyRef,
 			Selector:     mg.Spec.ForProvider.StorageAccountKeySelector,
@@ -1393,7 +1395,7 @@ func (mg *SpringCloudStorage) ResolveReferences(ctx context.Context, c client.Re
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.StorageAccountKey")
 	}
-	mg.Spec.ForProvider.StorageAccountKey = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StorageAccountKey = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageAccountKeyRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
@@ -1402,7 +1404,7 @@ func (mg *SpringCloudStorage) ResolveReferences(ctx context.Context, c client.Re
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccountName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.StorageAccountName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.StorageAccountNameRef,
 			Selector:     mg.Spec.ForProvider.StorageAccountNameSelector,
@@ -1412,7 +1414,7 @@ func (mg *SpringCloudStorage) ResolveReferences(ctx context.Context, c client.Re
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.StorageAccountName")
 	}
-	mg.Spec.ForProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StorageAccountName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageAccountNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
@@ -1421,7 +1423,7 @@ func (mg *SpringCloudStorage) ResolveReferences(ctx context.Context, c client.Re
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccountKey),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.StorageAccountKey, ""),
 			Extract:      resource.ExtractParamPath("primary_access_key", true),
 			Reference:    mg.Spec.InitProvider.StorageAccountKeyRef,
 			Selector:     mg.Spec.InitProvider.StorageAccountKeySelector,
@@ -1431,7 +1433,7 @@ func (mg *SpringCloudStorage) ResolveReferences(ctx context.Context, c client.Re
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccountKey")
 	}
-	mg.Spec.InitProvider.StorageAccountKey = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageAccountKey = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.StorageAccountKeyRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
@@ -1440,7 +1442,7 @@ func (mg *SpringCloudStorage) ResolveReferences(ctx context.Context, c client.Re
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccountName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.StorageAccountName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.StorageAccountNameRef,
 			Selector:     mg.Spec.InitProvider.StorageAccountNameSelector,
@@ -1450,7 +1452,7 @@ func (mg *SpringCloudStorage) ResolveReferences(ctx context.Context, c client.Re
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccountName")
 	}
-	mg.Spec.InitProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageAccountName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.StorageAccountNameRef = rsp.ResolvedReference
 
 	return nil

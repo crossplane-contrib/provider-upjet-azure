@@ -14,6 +14,7 @@ import (
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -32,7 +33,7 @@ func (mg *ContainerApp) ResolveReferences( // ResolveReferences of this Containe
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerAppEnvironmentID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ContainerAppEnvironmentID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.ContainerAppEnvironmentIDRef,
 			Selector:     mg.Spec.ForProvider.ContainerAppEnvironmentIDSelector,
@@ -42,7 +43,7 @@ func (mg *ContainerApp) ResolveReferences( // ResolveReferences of this Containe
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ContainerAppEnvironmentID")
 	}
-	mg.Spec.ForProvider.ContainerAppEnvironmentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ContainerAppEnvironmentID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ContainerAppEnvironmentIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -51,7 +52,7 @@ func (mg *ContainerApp) ResolveReferences( // ResolveReferences of this Containe
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -61,7 +62,7 @@ func (mg *ContainerApp) ResolveReferences( // ResolveReferences of this Containe
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("containerapp.azure.upbound.io", "v1beta1", "Environment", "EnvironmentList")
@@ -70,7 +71,7 @@ func (mg *ContainerApp) ResolveReferences( // ResolveReferences of this Containe
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ContainerAppEnvironmentID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ContainerAppEnvironmentID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.ContainerAppEnvironmentIDRef,
 			Selector:     mg.Spec.InitProvider.ContainerAppEnvironmentIDSelector,
@@ -80,7 +81,7 @@ func (mg *ContainerApp) ResolveReferences( // ResolveReferences of this Containe
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ContainerAppEnvironmentID")
 	}
-	mg.Spec.InitProvider.ContainerAppEnvironmentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ContainerAppEnvironmentID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ContainerAppEnvironmentIDRef = rsp.ResolvedReference
 
 	return nil

@@ -13,6 +13,7 @@ import (
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	rconfig "github.com/upbound/provider-azure/apis/rconfig"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 
 	// ResolveReferences of this EventHub.
@@ -33,7 +34,7 @@ func (mg *EventHub) ResolveReferences(ctx context.Context, c client.Reader) erro
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NamespaceName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.NamespaceName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.NamespaceNameRef,
 			Selector:     mg.Spec.ForProvider.NamespaceNameSelector,
@@ -43,7 +44,7 @@ func (mg *EventHub) ResolveReferences(ctx context.Context, c client.Reader) erro
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.NamespaceName")
 	}
-	mg.Spec.ForProvider.NamespaceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.NamespaceName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NamespaceNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -52,7 +53,7 @@ func (mg *EventHub) ResolveReferences(ctx context.Context, c client.Reader) erro
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -62,7 +63,7 @@ func (mg *EventHub) ResolveReferences(ctx context.Context, c client.Reader) erro
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -85,7 +86,7 @@ func (mg *EventHubNamespace) ResolveReferences(ctx context.Context, c client.Rea
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkRulesets.VirtualNetworkRule[i4].SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.ForProvider.NetworkRulesets.VirtualNetworkRule[i4].SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.ForProvider.NetworkRulesets.VirtualNetworkRule[i4].SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.NetworkRulesets.VirtualNetworkRule[i4].SubnetIDSelector,
@@ -95,7 +96,7 @@ func (mg *EventHubNamespace) ResolveReferences(ctx context.Context, c client.Rea
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.ForProvider.NetworkRulesets.VirtualNetworkRule[i4].SubnetID")
 			}
-			mg.Spec.ForProvider.NetworkRulesets.VirtualNetworkRule[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.NetworkRulesets.VirtualNetworkRule[i4].SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.ForProvider.NetworkRulesets.VirtualNetworkRule[i4].SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -106,7 +107,7 @@ func (mg *EventHubNamespace) ResolveReferences(ctx context.Context, c client.Rea
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -116,7 +117,7 @@ func (mg *EventHubNamespace) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	if mg.Spec.InitProvider.NetworkRulesets != nil {
@@ -127,7 +128,7 @@ func (mg *EventHubNamespace) ResolveReferences(ctx context.Context, c client.Rea
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkRulesets.VirtualNetworkRule[i4].SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.InitProvider.NetworkRulesets.VirtualNetworkRule[i4].SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.InitProvider.NetworkRulesets.VirtualNetworkRule[i4].SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.NetworkRulesets.VirtualNetworkRule[i4].SubnetIDSelector,
@@ -137,7 +138,7 @@ func (mg *EventHubNamespace) ResolveReferences(ctx context.Context, c client.Rea
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.InitProvider.NetworkRulesets.VirtualNetworkRule[i4].SubnetID")
 			}
-			mg.Spec.InitProvider.NetworkRulesets.VirtualNetworkRule[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.NetworkRulesets.VirtualNetworkRule[i4].SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.InitProvider.NetworkRulesets.VirtualNetworkRule[i4].SubnetIDRef = rsp.ResolvedReference
 
 		}
