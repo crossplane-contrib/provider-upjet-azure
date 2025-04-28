@@ -16,7 +16,7 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: rgroupnamelabel
-    sku: Standard_Verizon
+    sku: Standard_Microsoft
     tags:
       cost_center: MSFT
       environment: Production
