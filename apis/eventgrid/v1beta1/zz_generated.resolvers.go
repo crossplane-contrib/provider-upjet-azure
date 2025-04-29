@@ -13,6 +13,7 @@ import (
 	errors "github.com/pkg/errors"
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 
 	// ResolveReferences of this Domain.
@@ -33,7 +34,7 @@ func (mg *Domain) ResolveReferences(ctx context.Context, c client.Reader) error 
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -43,7 +44,7 @@ func (mg *Domain) ResolveReferences(ctx context.Context, c client.Reader) error 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -64,7 +65,7 @@ func (mg *DomainTopic) ResolveReferences(ctx context.Context, c client.Reader) e
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DomainName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.DomainName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.DomainNameRef,
 			Selector:     mg.Spec.ForProvider.DomainNameSelector,
@@ -74,7 +75,7 @@ func (mg *DomainTopic) ResolveReferences(ctx context.Context, c client.Reader) e
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.DomainName")
 	}
-	mg.Spec.ForProvider.DomainName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DomainName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DomainNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -83,7 +84,7 @@ func (mg *DomainTopic) ResolveReferences(ctx context.Context, c client.Reader) e
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -93,7 +94,7 @@ func (mg *DomainTopic) ResolveReferences(ctx context.Context, c client.Reader) e
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -114,7 +115,7 @@ func (mg *EventSubscription) ResolveReferences(ctx context.Context, c client.Rea
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Scope),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.Scope, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.ScopeRef,
 			Selector:     mg.Spec.ForProvider.ScopeSelector,
@@ -124,7 +125,7 @@ func (mg *EventSubscription) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.Scope")
 	}
-	mg.Spec.ForProvider.Scope = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.Scope = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ScopeRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.StorageQueueEndpoint); i3++ {
@@ -134,7 +135,7 @@ func (mg *EventSubscription) ResolveReferences(ctx context.Context, c client.Rea
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageQueueEndpoint[i3].QueueName),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.StorageQueueEndpoint[i3].QueueName, ""),
 				Extract:      reference.ExternalName(),
 				Reference:    mg.Spec.ForProvider.StorageQueueEndpoint[i3].QueueNameRef,
 				Selector:     mg.Spec.ForProvider.StorageQueueEndpoint[i3].QueueNameSelector,
@@ -144,7 +145,7 @@ func (mg *EventSubscription) ResolveReferences(ctx context.Context, c client.Rea
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.StorageQueueEndpoint[i3].QueueName")
 		}
-		mg.Spec.ForProvider.StorageQueueEndpoint[i3].QueueName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.StorageQueueEndpoint[i3].QueueName = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.StorageQueueEndpoint[i3].QueueNameRef = rsp.ResolvedReference
 
 	}
@@ -155,7 +156,7 @@ func (mg *EventSubscription) ResolveReferences(ctx context.Context, c client.Rea
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageQueueEndpoint[i3].StorageAccountID),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.StorageQueueEndpoint[i3].StorageAccountID, ""),
 				Extract:      resource.ExtractResourceID(),
 				Reference:    mg.Spec.ForProvider.StorageQueueEndpoint[i3].StorageAccountIDRef,
 				Selector:     mg.Spec.ForProvider.StorageQueueEndpoint[i3].StorageAccountIDSelector,
@@ -165,7 +166,7 @@ func (mg *EventSubscription) ResolveReferences(ctx context.Context, c client.Rea
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.StorageQueueEndpoint[i3].StorageAccountID")
 		}
-		mg.Spec.ForProvider.StorageQueueEndpoint[i3].StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.StorageQueueEndpoint[i3].StorageAccountID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.StorageQueueEndpoint[i3].StorageAccountIDRef = rsp.ResolvedReference
 
 	}
@@ -175,7 +176,7 @@ func (mg *EventSubscription) ResolveReferences(ctx context.Context, c client.Rea
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Scope),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.Scope, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.ScopeRef,
 			Selector:     mg.Spec.InitProvider.ScopeSelector,
@@ -185,7 +186,7 @@ func (mg *EventSubscription) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.Scope")
 	}
-	mg.Spec.InitProvider.Scope = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.Scope = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ScopeRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.StorageQueueEndpoint); i3++ {
@@ -195,7 +196,7 @@ func (mg *EventSubscription) ResolveReferences(ctx context.Context, c client.Rea
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageQueueEndpoint[i3].QueueName),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.StorageQueueEndpoint[i3].QueueName, ""),
 				Extract:      reference.ExternalName(),
 				Reference:    mg.Spec.InitProvider.StorageQueueEndpoint[i3].QueueNameRef,
 				Selector:     mg.Spec.InitProvider.StorageQueueEndpoint[i3].QueueNameSelector,
@@ -205,7 +206,7 @@ func (mg *EventSubscription) ResolveReferences(ctx context.Context, c client.Rea
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.StorageQueueEndpoint[i3].QueueName")
 		}
-		mg.Spec.InitProvider.StorageQueueEndpoint[i3].QueueName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.StorageQueueEndpoint[i3].QueueName = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.StorageQueueEndpoint[i3].QueueNameRef = rsp.ResolvedReference
 
 	}
@@ -216,7 +217,7 @@ func (mg *EventSubscription) ResolveReferences(ctx context.Context, c client.Rea
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageQueueEndpoint[i3].StorageAccountID),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.StorageQueueEndpoint[i3].StorageAccountID, ""),
 				Extract:      resource.ExtractResourceID(),
 				Reference:    mg.Spec.InitProvider.StorageQueueEndpoint[i3].StorageAccountIDRef,
 				Selector:     mg.Spec.InitProvider.StorageQueueEndpoint[i3].StorageAccountIDSelector,
@@ -226,7 +227,7 @@ func (mg *EventSubscription) ResolveReferences(ctx context.Context, c client.Rea
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.StorageQueueEndpoint[i3].StorageAccountID")
 		}
-		mg.Spec.InitProvider.StorageQueueEndpoint[i3].StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.StorageQueueEndpoint[i3].StorageAccountID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.StorageQueueEndpoint[i3].StorageAccountIDRef = rsp.ResolvedReference
 
 	}
@@ -249,7 +250,7 @@ func (mg *SystemTopic) ResolveReferences(ctx context.Context, c client.Reader) e
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -259,7 +260,7 @@ func (mg *SystemTopic) ResolveReferences(ctx context.Context, c client.Reader) e
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Account", "AccountList")
@@ -268,7 +269,7 @@ func (mg *SystemTopic) ResolveReferences(ctx context.Context, c client.Reader) e
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceArmResourceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.SourceArmResourceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.SourceArmResourceIDRef,
 			Selector:     mg.Spec.ForProvider.SourceArmResourceIDSelector,
@@ -278,7 +279,7 @@ func (mg *SystemTopic) ResolveReferences(ctx context.Context, c client.Reader) e
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.SourceArmResourceID")
 	}
-	mg.Spec.ForProvider.SourceArmResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SourceArmResourceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SourceArmResourceIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Account", "AccountList")
@@ -287,7 +288,7 @@ func (mg *SystemTopic) ResolveReferences(ctx context.Context, c client.Reader) e
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceArmResourceID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.SourceArmResourceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.SourceArmResourceIDRef,
 			Selector:     mg.Spec.InitProvider.SourceArmResourceIDSelector,
@@ -297,7 +298,7 @@ func (mg *SystemTopic) ResolveReferences(ctx context.Context, c client.Reader) e
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.SourceArmResourceID")
 	}
-	mg.Spec.InitProvider.SourceArmResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SourceArmResourceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.SourceArmResourceIDRef = rsp.ResolvedReference
 
 	return nil
@@ -318,7 +319,7 @@ func (mg *Topic) ResolveReferences(ctx context.Context, c client.Reader) error {
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -328,7 +329,7 @@ func (mg *Topic) ResolveReferences(ctx context.Context, c client.Reader) error {
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil

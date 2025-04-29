@@ -14,6 +14,7 @@ import (
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -32,7 +33,7 @@ func (mg *SentinelAlertRuleFusion) ResolveReferences( // ResolveReferences of th
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogAnalyticsWorkspaceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.LogAnalyticsWorkspaceID, ""),
 			Extract:      resource.ExtractParamPath("workspace_resource_id", false),
 			Reference:    mg.Spec.ForProvider.LogAnalyticsWorkspaceIDRef,
 			Selector:     mg.Spec.ForProvider.LogAnalyticsWorkspaceIDSelector,
@@ -42,7 +43,7 @@ func (mg *SentinelAlertRuleFusion) ResolveReferences( // ResolveReferences of th
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.LogAnalyticsWorkspaceID")
 	}
-	mg.Spec.ForProvider.LogAnalyticsWorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LogAnalyticsWorkspaceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LogAnalyticsWorkspaceIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("operationsmanagement.azure.upbound.io", "v1beta2", "LogAnalyticsSolution", "LogAnalyticsSolutionList")
@@ -51,7 +52,7 @@ func (mg *SentinelAlertRuleFusion) ResolveReferences( // ResolveReferences of th
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LogAnalyticsWorkspaceID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.LogAnalyticsWorkspaceID, ""),
 			Extract:      resource.ExtractParamPath("workspace_resource_id", false),
 			Reference:    mg.Spec.InitProvider.LogAnalyticsWorkspaceIDRef,
 			Selector:     mg.Spec.InitProvider.LogAnalyticsWorkspaceIDSelector,
@@ -61,7 +62,7 @@ func (mg *SentinelAlertRuleFusion) ResolveReferences( // ResolveReferences of th
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.LogAnalyticsWorkspaceID")
 	}
-	mg.Spec.InitProvider.LogAnalyticsWorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LogAnalyticsWorkspaceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.LogAnalyticsWorkspaceIDRef = rsp.ResolvedReference
 
 	return nil
@@ -82,7 +83,7 @@ func (mg *SentinelAlertRuleMSSecurityIncident) ResolveReferences(ctx context.Con
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogAnalyticsWorkspaceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.LogAnalyticsWorkspaceID, ""),
 			Extract:      resource.ExtractParamPath("workspace_id", false),
 			Reference:    mg.Spec.ForProvider.LogAnalyticsWorkspaceIDRef,
 			Selector:     mg.Spec.ForProvider.LogAnalyticsWorkspaceIDSelector,
@@ -92,7 +93,7 @@ func (mg *SentinelAlertRuleMSSecurityIncident) ResolveReferences(ctx context.Con
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.LogAnalyticsWorkspaceID")
 	}
-	mg.Spec.ForProvider.LogAnalyticsWorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LogAnalyticsWorkspaceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LogAnalyticsWorkspaceIDRef = rsp.ResolvedReference
 
 	return nil
@@ -113,7 +114,7 @@ func (mg *SentinelAlertRuleMachineLearningBehaviorAnalytics) ResolveReferences(c
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogAnalyticsWorkspaceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.LogAnalyticsWorkspaceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.LogAnalyticsWorkspaceIDRef,
 			Selector:     mg.Spec.ForProvider.LogAnalyticsWorkspaceIDSelector,
@@ -123,7 +124,7 @@ func (mg *SentinelAlertRuleMachineLearningBehaviorAnalytics) ResolveReferences(c
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.LogAnalyticsWorkspaceID")
 	}
-	mg.Spec.ForProvider.LogAnalyticsWorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LogAnalyticsWorkspaceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LogAnalyticsWorkspaceIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("operationalinsights.azure.upbound.io", "v1beta2", "Workspace", "WorkspaceList")
@@ -132,7 +133,7 @@ func (mg *SentinelAlertRuleMachineLearningBehaviorAnalytics) ResolveReferences(c
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LogAnalyticsWorkspaceID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.LogAnalyticsWorkspaceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.LogAnalyticsWorkspaceIDRef,
 			Selector:     mg.Spec.InitProvider.LogAnalyticsWorkspaceIDSelector,
@@ -142,7 +143,7 @@ func (mg *SentinelAlertRuleMachineLearningBehaviorAnalytics) ResolveReferences(c
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.LogAnalyticsWorkspaceID")
 	}
-	mg.Spec.InitProvider.LogAnalyticsWorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LogAnalyticsWorkspaceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.LogAnalyticsWorkspaceIDRef = rsp.ResolvedReference
 
 	return nil
@@ -163,7 +164,7 @@ func (mg *SentinelAutomationRule) ResolveReferences(ctx context.Context, c clien
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogAnalyticsWorkspaceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.LogAnalyticsWorkspaceID, ""),
 			Extract:      resource.ExtractParamPath("workspace_id", false),
 			Reference:    mg.Spec.ForProvider.LogAnalyticsWorkspaceIDRef,
 			Selector:     mg.Spec.ForProvider.LogAnalyticsWorkspaceIDSelector,
@@ -173,7 +174,7 @@ func (mg *SentinelAutomationRule) ResolveReferences(ctx context.Context, c clien
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.LogAnalyticsWorkspaceID")
 	}
-	mg.Spec.ForProvider.LogAnalyticsWorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LogAnalyticsWorkspaceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LogAnalyticsWorkspaceIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("securityinsights.azure.upbound.io", "v1beta1", "SentinelLogAnalyticsWorkspaceOnboarding", "SentinelLogAnalyticsWorkspaceOnboardingList")
@@ -182,7 +183,7 @@ func (mg *SentinelAutomationRule) ResolveReferences(ctx context.Context, c clien
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LogAnalyticsWorkspaceID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.LogAnalyticsWorkspaceID, ""),
 			Extract:      resource.ExtractParamPath("workspace_id", false),
 			Reference:    mg.Spec.InitProvider.LogAnalyticsWorkspaceIDRef,
 			Selector:     mg.Spec.InitProvider.LogAnalyticsWorkspaceIDSelector,
@@ -192,7 +193,7 @@ func (mg *SentinelAutomationRule) ResolveReferences(ctx context.Context, c clien
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.LogAnalyticsWorkspaceID")
 	}
-	mg.Spec.InitProvider.LogAnalyticsWorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LogAnalyticsWorkspaceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.LogAnalyticsWorkspaceIDRef = rsp.ResolvedReference
 
 	return nil
@@ -213,7 +214,7 @@ func (mg *SentinelDataConnectorIOT) ResolveReferences(ctx context.Context, c cli
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogAnalyticsWorkspaceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.LogAnalyticsWorkspaceID, ""),
 			Extract:      resource.ExtractParamPath("workspace_id", false),
 			Reference:    mg.Spec.ForProvider.LogAnalyticsWorkspaceIDRef,
 			Selector:     mg.Spec.ForProvider.LogAnalyticsWorkspaceIDSelector,
@@ -223,7 +224,7 @@ func (mg *SentinelDataConnectorIOT) ResolveReferences(ctx context.Context, c cli
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.LogAnalyticsWorkspaceID")
 	}
-	mg.Spec.ForProvider.LogAnalyticsWorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LogAnalyticsWorkspaceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LogAnalyticsWorkspaceIDRef = rsp.ResolvedReference
 
 	return nil
@@ -244,7 +245,7 @@ func (mg *SentinelLogAnalyticsWorkspaceOnboarding) ResolveReferences(ctx context
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -254,7 +255,7 @@ func (mg *SentinelLogAnalyticsWorkspaceOnboarding) ResolveReferences(ctx context
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("operationalinsights.azure.upbound.io", "v1beta2", "Workspace", "WorkspaceList")
@@ -263,7 +264,7 @@ func (mg *SentinelLogAnalyticsWorkspaceOnboarding) ResolveReferences(ctx context
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WorkspaceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.WorkspaceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.WorkspaceIDRef,
 			Selector:     mg.Spec.ForProvider.WorkspaceIDSelector,
@@ -273,7 +274,7 @@ func (mg *SentinelLogAnalyticsWorkspaceOnboarding) ResolveReferences(ctx context
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.WorkspaceID")
 	}
-	mg.Spec.ForProvider.WorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.WorkspaceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.WorkspaceIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("operationalinsights.azure.upbound.io", "v1beta2", "Workspace", "WorkspaceList")
@@ -282,7 +283,7 @@ func (mg *SentinelLogAnalyticsWorkspaceOnboarding) ResolveReferences(ctx context
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WorkspaceName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.WorkspaceName, ""),
 			Extract:      resource.ExtractParamPath("name", true),
 			Reference:    mg.Spec.ForProvider.WorkspaceNameRef,
 			Selector:     mg.Spec.ForProvider.WorkspaceNameSelector,
@@ -292,7 +293,7 @@ func (mg *SentinelLogAnalyticsWorkspaceOnboarding) ResolveReferences(ctx context
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.WorkspaceName")
 	}
-	mg.Spec.ForProvider.WorkspaceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.WorkspaceName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.WorkspaceNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -301,7 +302,7 @@ func (mg *SentinelLogAnalyticsWorkspaceOnboarding) ResolveReferences(ctx context
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
@@ -311,7 +312,7 @@ func (mg *SentinelLogAnalyticsWorkspaceOnboarding) ResolveReferences(ctx context
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
 	}
-	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("operationalinsights.azure.upbound.io", "v1beta2", "Workspace", "WorkspaceList")
@@ -320,7 +321,7 @@ func (mg *SentinelLogAnalyticsWorkspaceOnboarding) ResolveReferences(ctx context
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.WorkspaceID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.WorkspaceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.WorkspaceIDRef,
 			Selector:     mg.Spec.InitProvider.WorkspaceIDSelector,
@@ -330,7 +331,7 @@ func (mg *SentinelLogAnalyticsWorkspaceOnboarding) ResolveReferences(ctx context
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.WorkspaceID")
 	}
-	mg.Spec.InitProvider.WorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.WorkspaceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.WorkspaceIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("operationalinsights.azure.upbound.io", "v1beta2", "Workspace", "WorkspaceList")
@@ -339,7 +340,7 @@ func (mg *SentinelLogAnalyticsWorkspaceOnboarding) ResolveReferences(ctx context
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.WorkspaceName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.WorkspaceName, ""),
 			Extract:      resource.ExtractParamPath("name", true),
 			Reference:    mg.Spec.InitProvider.WorkspaceNameRef,
 			Selector:     mg.Spec.InitProvider.WorkspaceNameSelector,
@@ -349,7 +350,7 @@ func (mg *SentinelLogAnalyticsWorkspaceOnboarding) ResolveReferences(ctx context
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.WorkspaceName")
 	}
-	mg.Spec.InitProvider.WorkspaceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.WorkspaceName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.WorkspaceNameRef = rsp.ResolvedReference
 
 	return nil
@@ -370,7 +371,7 @@ func (mg *SentinelWatchlist) ResolveReferences(ctx context.Context, c client.Rea
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogAnalyticsWorkspaceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.LogAnalyticsWorkspaceID, ""),
 			Extract:      resource.ExtractParamPath("workspace_id", false),
 			Reference:    mg.Spec.ForProvider.LogAnalyticsWorkspaceIDRef,
 			Selector:     mg.Spec.ForProvider.LogAnalyticsWorkspaceIDSelector,
@@ -380,7 +381,7 @@ func (mg *SentinelWatchlist) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.LogAnalyticsWorkspaceID")
 	}
-	mg.Spec.ForProvider.LogAnalyticsWorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LogAnalyticsWorkspaceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LogAnalyticsWorkspaceIDRef = rsp.ResolvedReference
 
 	return nil
