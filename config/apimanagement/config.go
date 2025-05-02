@@ -83,6 +83,23 @@ func Configure(p *config.Provider) {
 			TerraformName: "azurerm_api_management",
 		}
 	})
+	p.AddResourceConfigurator("azurerm_api_management_group", func(r *config.Resource) {
+		r.References["api_management_name"] = config.Reference{
+			TerraformName: "azurerm_api_management",
+		}
+	})
+	p.AddResourceConfigurator("azurerm_api_management_product_group", func(r *config.Resource) {
+		r.References["group_name"] = config.Reference{
+			TerraformName: "azurerm_api_management_group",
+		}
+		r.References["product_id"] = config.Reference{
+			TerraformName: "azurerm_api_management_product",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["api_management_name"] = config.Reference{
+			TerraformName: "azurerm_api_management",
+		}
+	})
 	p.AddResourceConfigurator("azurerm_api_management_gateway_api", func(r *config.Resource) {
 		r.References["gateway_id"] = config.Reference{
 			TerraformName: "azurerm_api_management_gateway",
