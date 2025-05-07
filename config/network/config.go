@@ -478,6 +478,26 @@ func Configure(p *config.Provider) {
 			TerraformName: "azurerm_public_ip",
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
+		r.ServerSideApplyMergeStrategies["frontend_ip_configuration"] = config.MergeStrategy{
+			ListMergeStrategy: config.ListMergeStrategy{
+				ListMapKeys: config.ListMapKeys{
+					Keys: []string{
+						"name",
+					},
+				},
+				MergeStrategy: config.ListTypeMap,
+			},
+		}
+		r.ServerSideApplyMergeStrategies["gateway_ip_configuration"] = config.MergeStrategy{
+			ListMergeStrategy: config.ListMergeStrategy{
+				ListMapKeys: config.ListMapKeys{
+					Keys: []string{
+						"name",
+					},
+				},
+				MergeStrategy: config.ListTypeMap,
+			},
+		}
 	})
 
 	/*p.AddResourceConfigurator("azurerm_virtual_desktop_application", func(r *config.Resource) {
