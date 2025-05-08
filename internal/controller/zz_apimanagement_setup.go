@@ -28,6 +28,7 @@ import (
 	gateway "github.com/upbound/provider-azure/internal/controller/apimanagement/gateway"
 	gatewayapi "github.com/upbound/provider-azure/internal/controller/apimanagement/gatewayapi"
 	globalschema "github.com/upbound/provider-azure/internal/controller/apimanagement/globalschema"
+	group "github.com/upbound/provider-azure/internal/controller/apimanagement/group"
 	identityprovideraad "github.com/upbound/provider-azure/internal/controller/apimanagement/identityprovideraad"
 	identityproviderfacebook "github.com/upbound/provider-azure/internal/controller/apimanagement/identityproviderfacebook"
 	identityprovidergoogle "github.com/upbound/provider-azure/internal/controller/apimanagement/identityprovidergoogle"
@@ -42,6 +43,7 @@ import (
 	policy "github.com/upbound/provider-azure/internal/controller/apimanagement/policy"
 	product "github.com/upbound/provider-azure/internal/controller/apimanagement/product"
 	productapi "github.com/upbound/provider-azure/internal/controller/apimanagement/productapi"
+	productgroup "github.com/upbound/provider-azure/internal/controller/apimanagement/productgroup"
 	productpolicy "github.com/upbound/provider-azure/internal/controller/apimanagement/productpolicy"
 	producttag "github.com/upbound/provider-azure/internal/controller/apimanagement/producttag"
 	rediscache "github.com/upbound/provider-azure/internal/controller/apimanagement/rediscache"
@@ -73,6 +75,7 @@ func Setup_apimanagement(mgr ctrl.Manager, o controller.Options) error {
 		gateway.Setup,
 		gatewayapi.Setup,
 		globalschema.Setup,
+		group.Setup,
 		identityprovideraad.Setup,
 		identityproviderfacebook.Setup,
 		identityprovidergoogle.Setup,
@@ -87,6 +90,7 @@ func Setup_apimanagement(mgr ctrl.Manager, o controller.Options) error {
 		policy.Setup,
 		product.Setup,
 		productapi.Setup,
+		productgroup.Setup,
 		productpolicy.Setup,
 		producttag.Setup,
 		rediscache.Setup,
