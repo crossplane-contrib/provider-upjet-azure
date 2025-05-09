@@ -14,6 +14,7 @@ import (
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	rconfig "github.com/upbound/provider-azure/apis/rconfig"
+	management "github.com/upbound/provider-azure/config/management"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -103,7 +104,7 @@ func (mg *ManagementGroupSubscriptionAssociation) ResolveReferences(ctx context.
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubscriptionID),
-			Extract:      rconfig.ExtractResourceID(),
+			Extract:      management.SubscriptionIDExtractor(),
 			Reference:    mg.Spec.ForProvider.SubscriptionIDRef,
 			Selector:     mg.Spec.ForProvider.SubscriptionIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -141,7 +142,7 @@ func (mg *ManagementGroupSubscriptionAssociation) ResolveReferences(ctx context.
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubscriptionID),
-			Extract:      rconfig.ExtractResourceID(),
+			Extract:      management.SubscriptionIDExtractor(),
 			Reference:    mg.Spec.InitProvider.SubscriptionIDRef,
 			Selector:     mg.Spec.InitProvider.SubscriptionIDSelector,
 			To:           reference.To{List: l, Managed: m},
