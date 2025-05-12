@@ -16,6 +16,7 @@ import (
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -36,7 +37,7 @@ func (mg *HBaseCluster) ResolveReferences( // ResolveReferences of this HBaseClu
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.ForProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.ForProvider.PrivateLinkConfiguration.IPConfiguration.SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.PrivateLinkConfiguration.IPConfiguration.SubnetIDSelector,
@@ -46,7 +47,7 @@ func (mg *HBaseCluster) ResolveReferences( // ResolveReferences of this HBaseClu
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.ForProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID")
 			}
-			mg.Spec.ForProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.ForProvider.PrivateLinkConfiguration.IPConfiguration.SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -57,7 +58,7 @@ func (mg *HBaseCluster) ResolveReferences( // ResolveReferences of this HBaseClu
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -67,7 +68,7 @@ func (mg *HBaseCluster) ResolveReferences( // ResolveReferences of this HBaseClu
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	if mg.Spec.ForProvider.Roles != nil {
@@ -78,7 +79,7 @@ func (mg *HBaseCluster) ResolveReferences( // ResolveReferences of this HBaseClu
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Roles.HeadNode.SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.ForProvider.Roles.HeadNode.SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.ForProvider.Roles.HeadNode.SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.Roles.HeadNode.SubnetIDSelector,
@@ -88,7 +89,7 @@ func (mg *HBaseCluster) ResolveReferences( // ResolveReferences of this HBaseClu
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.ForProvider.Roles.HeadNode.SubnetID")
 			}
-			mg.Spec.ForProvider.Roles.HeadNode.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Roles.HeadNode.SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.ForProvider.Roles.HeadNode.SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -101,7 +102,7 @@ func (mg *HBaseCluster) ResolveReferences( // ResolveReferences of this HBaseClu
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Roles.WorkerNode.SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.ForProvider.Roles.WorkerNode.SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.ForProvider.Roles.WorkerNode.SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.Roles.WorkerNode.SubnetIDSelector,
@@ -111,7 +112,7 @@ func (mg *HBaseCluster) ResolveReferences( // ResolveReferences of this HBaseClu
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.ForProvider.Roles.WorkerNode.SubnetID")
 			}
-			mg.Spec.ForProvider.Roles.WorkerNode.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Roles.WorkerNode.SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.ForProvider.Roles.WorkerNode.SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -124,7 +125,7 @@ func (mg *HBaseCluster) ResolveReferences( // ResolveReferences of this HBaseClu
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Roles.ZookeeperNode.SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.ForProvider.Roles.ZookeeperNode.SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.ForProvider.Roles.ZookeeperNode.SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.Roles.ZookeeperNode.SubnetIDSelector,
@@ -134,7 +135,7 @@ func (mg *HBaseCluster) ResolveReferences( // ResolveReferences of this HBaseClu
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.ForProvider.Roles.ZookeeperNode.SubnetID")
 			}
-			mg.Spec.ForProvider.Roles.ZookeeperNode.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Roles.ZookeeperNode.SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.ForProvider.Roles.ZookeeperNode.SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -146,7 +147,7 @@ func (mg *HBaseCluster) ResolveReferences( // ResolveReferences of this HBaseClu
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccount[i3].StorageContainerID),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.StorageAccount[i3].StorageContainerID, ""),
 				Extract:      resource.ExtractResourceID(),
 				Reference:    mg.Spec.ForProvider.StorageAccount[i3].StorageContainerIDRef,
 				Selector:     mg.Spec.ForProvider.StorageAccount[i3].StorageContainerIDSelector,
@@ -156,7 +157,7 @@ func (mg *HBaseCluster) ResolveReferences( // ResolveReferences of this HBaseClu
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.StorageAccount[i3].StorageContainerID")
 		}
-		mg.Spec.ForProvider.StorageAccount[i3].StorageContainerID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.StorageAccount[i3].StorageContainerID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.StorageAccount[i3].StorageContainerIDRef = rsp.ResolvedReference
 
 	}
@@ -168,7 +169,7 @@ func (mg *HBaseCluster) ResolveReferences( // ResolveReferences of this HBaseClu
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.InitProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.InitProvider.PrivateLinkConfiguration.IPConfiguration.SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.PrivateLinkConfiguration.IPConfiguration.SubnetIDSelector,
@@ -178,7 +179,7 @@ func (mg *HBaseCluster) ResolveReferences( // ResolveReferences of this HBaseClu
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.InitProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID")
 			}
-			mg.Spec.InitProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.InitProvider.PrivateLinkConfiguration.IPConfiguration.SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -191,7 +192,7 @@ func (mg *HBaseCluster) ResolveReferences( // ResolveReferences of this HBaseClu
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles.HeadNode.SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.InitProvider.Roles.HeadNode.SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.InitProvider.Roles.HeadNode.SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.Roles.HeadNode.SubnetIDSelector,
@@ -201,7 +202,7 @@ func (mg *HBaseCluster) ResolveReferences( // ResolveReferences of this HBaseClu
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.InitProvider.Roles.HeadNode.SubnetID")
 			}
-			mg.Spec.InitProvider.Roles.HeadNode.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Roles.HeadNode.SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.InitProvider.Roles.HeadNode.SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -214,7 +215,7 @@ func (mg *HBaseCluster) ResolveReferences( // ResolveReferences of this HBaseClu
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles.WorkerNode.SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.InitProvider.Roles.WorkerNode.SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.InitProvider.Roles.WorkerNode.SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.Roles.WorkerNode.SubnetIDSelector,
@@ -224,7 +225,7 @@ func (mg *HBaseCluster) ResolveReferences( // ResolveReferences of this HBaseClu
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.InitProvider.Roles.WorkerNode.SubnetID")
 			}
-			mg.Spec.InitProvider.Roles.WorkerNode.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Roles.WorkerNode.SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.InitProvider.Roles.WorkerNode.SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -237,7 +238,7 @@ func (mg *HBaseCluster) ResolveReferences( // ResolveReferences of this HBaseClu
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles.ZookeeperNode.SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.InitProvider.Roles.ZookeeperNode.SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.InitProvider.Roles.ZookeeperNode.SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.Roles.ZookeeperNode.SubnetIDSelector,
@@ -247,7 +248,7 @@ func (mg *HBaseCluster) ResolveReferences( // ResolveReferences of this HBaseClu
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.InitProvider.Roles.ZookeeperNode.SubnetID")
 			}
-			mg.Spec.InitProvider.Roles.ZookeeperNode.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Roles.ZookeeperNode.SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.InitProvider.Roles.ZookeeperNode.SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -259,7 +260,7 @@ func (mg *HBaseCluster) ResolveReferences( // ResolveReferences of this HBaseClu
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccount[i3].StorageContainerID),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.StorageAccount[i3].StorageContainerID, ""),
 				Extract:      resource.ExtractResourceID(),
 				Reference:    mg.Spec.InitProvider.StorageAccount[i3].StorageContainerIDRef,
 				Selector:     mg.Spec.InitProvider.StorageAccount[i3].StorageContainerIDSelector,
@@ -269,7 +270,7 @@ func (mg *HBaseCluster) ResolveReferences( // ResolveReferences of this HBaseClu
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccount[i3].StorageContainerID")
 		}
-		mg.Spec.InitProvider.StorageAccount[i3].StorageContainerID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.StorageAccount[i3].StorageContainerID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.StorageAccount[i3].StorageContainerIDRef = rsp.ResolvedReference
 
 	}
@@ -294,7 +295,7 @@ func (mg *HadoopCluster) ResolveReferences(ctx context.Context, c client.Reader)
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.ForProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.ForProvider.PrivateLinkConfiguration.IPConfiguration.SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.PrivateLinkConfiguration.IPConfiguration.SubnetIDSelector,
@@ -304,7 +305,7 @@ func (mg *HadoopCluster) ResolveReferences(ctx context.Context, c client.Reader)
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.ForProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID")
 			}
-			mg.Spec.ForProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.ForProvider.PrivateLinkConfiguration.IPConfiguration.SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -315,7 +316,7 @@ func (mg *HadoopCluster) ResolveReferences(ctx context.Context, c client.Reader)
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -325,7 +326,7 @@ func (mg *HadoopCluster) ResolveReferences(ctx context.Context, c client.Reader)
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	if mg.Spec.ForProvider.Roles != nil {
@@ -336,7 +337,7 @@ func (mg *HadoopCluster) ResolveReferences(ctx context.Context, c client.Reader)
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Roles.HeadNode.SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.ForProvider.Roles.HeadNode.SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.ForProvider.Roles.HeadNode.SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.Roles.HeadNode.SubnetIDSelector,
@@ -346,7 +347,7 @@ func (mg *HadoopCluster) ResolveReferences(ctx context.Context, c client.Reader)
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.ForProvider.Roles.HeadNode.SubnetID")
 			}
-			mg.Spec.ForProvider.Roles.HeadNode.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Roles.HeadNode.SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.ForProvider.Roles.HeadNode.SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -359,7 +360,7 @@ func (mg *HadoopCluster) ResolveReferences(ctx context.Context, c client.Reader)
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Roles.WorkerNode.SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.ForProvider.Roles.WorkerNode.SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.ForProvider.Roles.WorkerNode.SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.Roles.WorkerNode.SubnetIDSelector,
@@ -369,7 +370,7 @@ func (mg *HadoopCluster) ResolveReferences(ctx context.Context, c client.Reader)
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.ForProvider.Roles.WorkerNode.SubnetID")
 			}
-			mg.Spec.ForProvider.Roles.WorkerNode.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Roles.WorkerNode.SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.ForProvider.Roles.WorkerNode.SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -382,7 +383,7 @@ func (mg *HadoopCluster) ResolveReferences(ctx context.Context, c client.Reader)
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Roles.ZookeeperNode.SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.ForProvider.Roles.ZookeeperNode.SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.ForProvider.Roles.ZookeeperNode.SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.Roles.ZookeeperNode.SubnetIDSelector,
@@ -392,7 +393,7 @@ func (mg *HadoopCluster) ResolveReferences(ctx context.Context, c client.Reader)
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.ForProvider.Roles.ZookeeperNode.SubnetID")
 			}
-			mg.Spec.ForProvider.Roles.ZookeeperNode.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Roles.ZookeeperNode.SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.ForProvider.Roles.ZookeeperNode.SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -404,7 +405,7 @@ func (mg *HadoopCluster) ResolveReferences(ctx context.Context, c client.Reader)
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccount[i3].StorageContainerID),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.StorageAccount[i3].StorageContainerID, ""),
 				Extract:      resource.ExtractResourceID(),
 				Reference:    mg.Spec.ForProvider.StorageAccount[i3].StorageContainerIDRef,
 				Selector:     mg.Spec.ForProvider.StorageAccount[i3].StorageContainerIDSelector,
@@ -414,7 +415,7 @@ func (mg *HadoopCluster) ResolveReferences(ctx context.Context, c client.Reader)
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.StorageAccount[i3].StorageContainerID")
 		}
-		mg.Spec.ForProvider.StorageAccount[i3].StorageContainerID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.StorageAccount[i3].StorageContainerID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.StorageAccount[i3].StorageContainerIDRef = rsp.ResolvedReference
 
 	}
@@ -426,7 +427,7 @@ func (mg *HadoopCluster) ResolveReferences(ctx context.Context, c client.Reader)
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.InitProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.InitProvider.PrivateLinkConfiguration.IPConfiguration.SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.PrivateLinkConfiguration.IPConfiguration.SubnetIDSelector,
@@ -436,7 +437,7 @@ func (mg *HadoopCluster) ResolveReferences(ctx context.Context, c client.Reader)
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.InitProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID")
 			}
-			mg.Spec.InitProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.InitProvider.PrivateLinkConfiguration.IPConfiguration.SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -449,7 +450,7 @@ func (mg *HadoopCluster) ResolveReferences(ctx context.Context, c client.Reader)
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles.HeadNode.SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.InitProvider.Roles.HeadNode.SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.InitProvider.Roles.HeadNode.SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.Roles.HeadNode.SubnetIDSelector,
@@ -459,7 +460,7 @@ func (mg *HadoopCluster) ResolveReferences(ctx context.Context, c client.Reader)
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.InitProvider.Roles.HeadNode.SubnetID")
 			}
-			mg.Spec.InitProvider.Roles.HeadNode.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Roles.HeadNode.SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.InitProvider.Roles.HeadNode.SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -472,7 +473,7 @@ func (mg *HadoopCluster) ResolveReferences(ctx context.Context, c client.Reader)
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles.WorkerNode.SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.InitProvider.Roles.WorkerNode.SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.InitProvider.Roles.WorkerNode.SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.Roles.WorkerNode.SubnetIDSelector,
@@ -482,7 +483,7 @@ func (mg *HadoopCluster) ResolveReferences(ctx context.Context, c client.Reader)
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.InitProvider.Roles.WorkerNode.SubnetID")
 			}
-			mg.Spec.InitProvider.Roles.WorkerNode.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Roles.WorkerNode.SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.InitProvider.Roles.WorkerNode.SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -495,7 +496,7 @@ func (mg *HadoopCluster) ResolveReferences(ctx context.Context, c client.Reader)
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles.ZookeeperNode.SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.InitProvider.Roles.ZookeeperNode.SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.InitProvider.Roles.ZookeeperNode.SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.Roles.ZookeeperNode.SubnetIDSelector,
@@ -505,7 +506,7 @@ func (mg *HadoopCluster) ResolveReferences(ctx context.Context, c client.Reader)
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.InitProvider.Roles.ZookeeperNode.SubnetID")
 			}
-			mg.Spec.InitProvider.Roles.ZookeeperNode.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Roles.ZookeeperNode.SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.InitProvider.Roles.ZookeeperNode.SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -517,7 +518,7 @@ func (mg *HadoopCluster) ResolveReferences(ctx context.Context, c client.Reader)
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccount[i3].StorageContainerID),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.StorageAccount[i3].StorageContainerID, ""),
 				Extract:      resource.ExtractResourceID(),
 				Reference:    mg.Spec.InitProvider.StorageAccount[i3].StorageContainerIDRef,
 				Selector:     mg.Spec.InitProvider.StorageAccount[i3].StorageContainerIDSelector,
@@ -527,7 +528,7 @@ func (mg *HadoopCluster) ResolveReferences(ctx context.Context, c client.Reader)
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccount[i3].StorageContainerID")
 		}
-		mg.Spec.InitProvider.StorageAccount[i3].StorageContainerID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.StorageAccount[i3].StorageContainerID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.StorageAccount[i3].StorageContainerIDRef = rsp.ResolvedReference
 
 	}
@@ -552,7 +553,7 @@ func (mg *InteractiveQueryCluster) ResolveReferences(ctx context.Context, c clie
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.ForProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.ForProvider.PrivateLinkConfiguration.IPConfiguration.SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.PrivateLinkConfiguration.IPConfiguration.SubnetIDSelector,
@@ -562,7 +563,7 @@ func (mg *InteractiveQueryCluster) ResolveReferences(ctx context.Context, c clie
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.ForProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID")
 			}
-			mg.Spec.ForProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.ForProvider.PrivateLinkConfiguration.IPConfiguration.SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -573,7 +574,7 @@ func (mg *InteractiveQueryCluster) ResolveReferences(ctx context.Context, c clie
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -583,7 +584,7 @@ func (mg *InteractiveQueryCluster) ResolveReferences(ctx context.Context, c clie
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	if mg.Spec.ForProvider.Roles != nil {
@@ -594,7 +595,7 @@ func (mg *InteractiveQueryCluster) ResolveReferences(ctx context.Context, c clie
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Roles.HeadNode.SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.ForProvider.Roles.HeadNode.SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.ForProvider.Roles.HeadNode.SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.Roles.HeadNode.SubnetIDSelector,
@@ -604,7 +605,7 @@ func (mg *InteractiveQueryCluster) ResolveReferences(ctx context.Context, c clie
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.ForProvider.Roles.HeadNode.SubnetID")
 			}
-			mg.Spec.ForProvider.Roles.HeadNode.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Roles.HeadNode.SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.ForProvider.Roles.HeadNode.SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -617,7 +618,7 @@ func (mg *InteractiveQueryCluster) ResolveReferences(ctx context.Context, c clie
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Roles.WorkerNode.SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.ForProvider.Roles.WorkerNode.SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.ForProvider.Roles.WorkerNode.SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.Roles.WorkerNode.SubnetIDSelector,
@@ -627,7 +628,7 @@ func (mg *InteractiveQueryCluster) ResolveReferences(ctx context.Context, c clie
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.ForProvider.Roles.WorkerNode.SubnetID")
 			}
-			mg.Spec.ForProvider.Roles.WorkerNode.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Roles.WorkerNode.SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.ForProvider.Roles.WorkerNode.SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -640,7 +641,7 @@ func (mg *InteractiveQueryCluster) ResolveReferences(ctx context.Context, c clie
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Roles.ZookeeperNode.SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.ForProvider.Roles.ZookeeperNode.SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.ForProvider.Roles.ZookeeperNode.SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.Roles.ZookeeperNode.SubnetIDSelector,
@@ -650,7 +651,7 @@ func (mg *InteractiveQueryCluster) ResolveReferences(ctx context.Context, c clie
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.ForProvider.Roles.ZookeeperNode.SubnetID")
 			}
-			mg.Spec.ForProvider.Roles.ZookeeperNode.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Roles.ZookeeperNode.SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.ForProvider.Roles.ZookeeperNode.SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -662,7 +663,7 @@ func (mg *InteractiveQueryCluster) ResolveReferences(ctx context.Context, c clie
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccount[i3].StorageContainerID),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.StorageAccount[i3].StorageContainerID, ""),
 				Extract:      resource.ExtractResourceID(),
 				Reference:    mg.Spec.ForProvider.StorageAccount[i3].StorageContainerIDRef,
 				Selector:     mg.Spec.ForProvider.StorageAccount[i3].StorageContainerIDSelector,
@@ -672,7 +673,7 @@ func (mg *InteractiveQueryCluster) ResolveReferences(ctx context.Context, c clie
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.StorageAccount[i3].StorageContainerID")
 		}
-		mg.Spec.ForProvider.StorageAccount[i3].StorageContainerID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.StorageAccount[i3].StorageContainerID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.StorageAccount[i3].StorageContainerIDRef = rsp.ResolvedReference
 
 	}
@@ -684,7 +685,7 @@ func (mg *InteractiveQueryCluster) ResolveReferences(ctx context.Context, c clie
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.InitProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.InitProvider.PrivateLinkConfiguration.IPConfiguration.SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.PrivateLinkConfiguration.IPConfiguration.SubnetIDSelector,
@@ -694,7 +695,7 @@ func (mg *InteractiveQueryCluster) ResolveReferences(ctx context.Context, c clie
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.InitProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID")
 			}
-			mg.Spec.InitProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.InitProvider.PrivateLinkConfiguration.IPConfiguration.SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -707,7 +708,7 @@ func (mg *InteractiveQueryCluster) ResolveReferences(ctx context.Context, c clie
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles.HeadNode.SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.InitProvider.Roles.HeadNode.SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.InitProvider.Roles.HeadNode.SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.Roles.HeadNode.SubnetIDSelector,
@@ -717,7 +718,7 @@ func (mg *InteractiveQueryCluster) ResolveReferences(ctx context.Context, c clie
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.InitProvider.Roles.HeadNode.SubnetID")
 			}
-			mg.Spec.InitProvider.Roles.HeadNode.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Roles.HeadNode.SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.InitProvider.Roles.HeadNode.SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -730,7 +731,7 @@ func (mg *InteractiveQueryCluster) ResolveReferences(ctx context.Context, c clie
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles.WorkerNode.SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.InitProvider.Roles.WorkerNode.SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.InitProvider.Roles.WorkerNode.SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.Roles.WorkerNode.SubnetIDSelector,
@@ -740,7 +741,7 @@ func (mg *InteractiveQueryCluster) ResolveReferences(ctx context.Context, c clie
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.InitProvider.Roles.WorkerNode.SubnetID")
 			}
-			mg.Spec.InitProvider.Roles.WorkerNode.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Roles.WorkerNode.SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.InitProvider.Roles.WorkerNode.SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -753,7 +754,7 @@ func (mg *InteractiveQueryCluster) ResolveReferences(ctx context.Context, c clie
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles.ZookeeperNode.SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.InitProvider.Roles.ZookeeperNode.SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.InitProvider.Roles.ZookeeperNode.SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.Roles.ZookeeperNode.SubnetIDSelector,
@@ -763,7 +764,7 @@ func (mg *InteractiveQueryCluster) ResolveReferences(ctx context.Context, c clie
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.InitProvider.Roles.ZookeeperNode.SubnetID")
 			}
-			mg.Spec.InitProvider.Roles.ZookeeperNode.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Roles.ZookeeperNode.SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.InitProvider.Roles.ZookeeperNode.SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -775,7 +776,7 @@ func (mg *InteractiveQueryCluster) ResolveReferences(ctx context.Context, c clie
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccount[i3].StorageContainerID),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.StorageAccount[i3].StorageContainerID, ""),
 				Extract:      resource.ExtractResourceID(),
 				Reference:    mg.Spec.InitProvider.StorageAccount[i3].StorageContainerIDRef,
 				Selector:     mg.Spec.InitProvider.StorageAccount[i3].StorageContainerIDSelector,
@@ -785,7 +786,7 @@ func (mg *InteractiveQueryCluster) ResolveReferences(ctx context.Context, c clie
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccount[i3].StorageContainerID")
 		}
-		mg.Spec.InitProvider.StorageAccount[i3].StorageContainerID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.StorageAccount[i3].StorageContainerID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.StorageAccount[i3].StorageContainerIDRef = rsp.ResolvedReference
 
 	}
@@ -810,7 +811,7 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.ForProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.ForProvider.PrivateLinkConfiguration.IPConfiguration.SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.PrivateLinkConfiguration.IPConfiguration.SubnetIDSelector,
@@ -820,7 +821,7 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.ForProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID")
 			}
-			mg.Spec.ForProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.ForProvider.PrivateLinkConfiguration.IPConfiguration.SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -831,7 +832,7 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -841,7 +842,7 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	if mg.Spec.ForProvider.Roles != nil {
@@ -852,7 +853,7 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Roles.HeadNode.SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.ForProvider.Roles.HeadNode.SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.ForProvider.Roles.HeadNode.SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.Roles.HeadNode.SubnetIDSelector,
@@ -862,7 +863,7 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.ForProvider.Roles.HeadNode.SubnetID")
 			}
-			mg.Spec.ForProvider.Roles.HeadNode.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Roles.HeadNode.SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.ForProvider.Roles.HeadNode.SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -875,7 +876,7 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Roles.KafkaManagementNode.SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.ForProvider.Roles.KafkaManagementNode.SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.ForProvider.Roles.KafkaManagementNode.SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.Roles.KafkaManagementNode.SubnetIDSelector,
@@ -885,7 +886,7 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.ForProvider.Roles.KafkaManagementNode.SubnetID")
 			}
-			mg.Spec.ForProvider.Roles.KafkaManagementNode.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Roles.KafkaManagementNode.SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.ForProvider.Roles.KafkaManagementNode.SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -898,7 +899,7 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Roles.WorkerNode.SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.ForProvider.Roles.WorkerNode.SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.ForProvider.Roles.WorkerNode.SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.Roles.WorkerNode.SubnetIDSelector,
@@ -908,7 +909,7 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.ForProvider.Roles.WorkerNode.SubnetID")
 			}
-			mg.Spec.ForProvider.Roles.WorkerNode.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Roles.WorkerNode.SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.ForProvider.Roles.WorkerNode.SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -921,7 +922,7 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Roles.ZookeeperNode.SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.ForProvider.Roles.ZookeeperNode.SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.ForProvider.Roles.ZookeeperNode.SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.Roles.ZookeeperNode.SubnetIDSelector,
@@ -931,7 +932,7 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.ForProvider.Roles.ZookeeperNode.SubnetID")
 			}
-			mg.Spec.ForProvider.Roles.ZookeeperNode.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Roles.ZookeeperNode.SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.ForProvider.Roles.ZookeeperNode.SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -943,7 +944,7 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccount[i3].StorageContainerID),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.StorageAccount[i3].StorageContainerID, ""),
 				Extract:      resource.ExtractResourceID(),
 				Reference:    mg.Spec.ForProvider.StorageAccount[i3].StorageContainerIDRef,
 				Selector:     mg.Spec.ForProvider.StorageAccount[i3].StorageContainerIDSelector,
@@ -953,7 +954,7 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.StorageAccount[i3].StorageContainerID")
 		}
-		mg.Spec.ForProvider.StorageAccount[i3].StorageContainerID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.StorageAccount[i3].StorageContainerID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.StorageAccount[i3].StorageContainerIDRef = rsp.ResolvedReference
 
 	}
@@ -965,7 +966,7 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.InitProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.InitProvider.PrivateLinkConfiguration.IPConfiguration.SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.PrivateLinkConfiguration.IPConfiguration.SubnetIDSelector,
@@ -975,7 +976,7 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.InitProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID")
 			}
-			mg.Spec.InitProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.InitProvider.PrivateLinkConfiguration.IPConfiguration.SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -988,7 +989,7 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles.HeadNode.SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.InitProvider.Roles.HeadNode.SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.InitProvider.Roles.HeadNode.SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.Roles.HeadNode.SubnetIDSelector,
@@ -998,7 +999,7 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.InitProvider.Roles.HeadNode.SubnetID")
 			}
-			mg.Spec.InitProvider.Roles.HeadNode.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Roles.HeadNode.SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.InitProvider.Roles.HeadNode.SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -1011,7 +1012,7 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles.KafkaManagementNode.SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.InitProvider.Roles.KafkaManagementNode.SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.InitProvider.Roles.KafkaManagementNode.SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.Roles.KafkaManagementNode.SubnetIDSelector,
@@ -1021,7 +1022,7 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.InitProvider.Roles.KafkaManagementNode.SubnetID")
 			}
-			mg.Spec.InitProvider.Roles.KafkaManagementNode.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Roles.KafkaManagementNode.SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.InitProvider.Roles.KafkaManagementNode.SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -1034,7 +1035,7 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles.WorkerNode.SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.InitProvider.Roles.WorkerNode.SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.InitProvider.Roles.WorkerNode.SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.Roles.WorkerNode.SubnetIDSelector,
@@ -1044,7 +1045,7 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.InitProvider.Roles.WorkerNode.SubnetID")
 			}
-			mg.Spec.InitProvider.Roles.WorkerNode.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Roles.WorkerNode.SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.InitProvider.Roles.WorkerNode.SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -1057,7 +1058,7 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles.ZookeeperNode.SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.InitProvider.Roles.ZookeeperNode.SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.InitProvider.Roles.ZookeeperNode.SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.Roles.ZookeeperNode.SubnetIDSelector,
@@ -1067,7 +1068,7 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.InitProvider.Roles.ZookeeperNode.SubnetID")
 			}
-			mg.Spec.InitProvider.Roles.ZookeeperNode.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Roles.ZookeeperNode.SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.InitProvider.Roles.ZookeeperNode.SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -1079,7 +1080,7 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccount[i3].StorageContainerID),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.StorageAccount[i3].StorageContainerID, ""),
 				Extract:      resource.ExtractResourceID(),
 				Reference:    mg.Spec.InitProvider.StorageAccount[i3].StorageContainerIDRef,
 				Selector:     mg.Spec.InitProvider.StorageAccount[i3].StorageContainerIDSelector,
@@ -1089,7 +1090,7 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccount[i3].StorageContainerID")
 		}
-		mg.Spec.InitProvider.StorageAccount[i3].StorageContainerID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.StorageAccount[i3].StorageContainerID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.StorageAccount[i3].StorageContainerIDRef = rsp.ResolvedReference
 
 	}
@@ -1114,7 +1115,7 @@ func (mg *SparkCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.ForProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.ForProvider.PrivateLinkConfiguration.IPConfiguration.SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.PrivateLinkConfiguration.IPConfiguration.SubnetIDSelector,
@@ -1124,7 +1125,7 @@ func (mg *SparkCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.ForProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID")
 			}
-			mg.Spec.ForProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.ForProvider.PrivateLinkConfiguration.IPConfiguration.SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -1135,7 +1136,7 @@ func (mg *SparkCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -1145,7 +1146,7 @@ func (mg *SparkCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	if mg.Spec.ForProvider.Roles != nil {
@@ -1156,7 +1157,7 @@ func (mg *SparkCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Roles.HeadNode.SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.ForProvider.Roles.HeadNode.SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.ForProvider.Roles.HeadNode.SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.Roles.HeadNode.SubnetIDSelector,
@@ -1166,7 +1167,7 @@ func (mg *SparkCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.ForProvider.Roles.HeadNode.SubnetID")
 			}
-			mg.Spec.ForProvider.Roles.HeadNode.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Roles.HeadNode.SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.ForProvider.Roles.HeadNode.SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -1179,7 +1180,7 @@ func (mg *SparkCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Roles.WorkerNode.SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.ForProvider.Roles.WorkerNode.SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.ForProvider.Roles.WorkerNode.SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.Roles.WorkerNode.SubnetIDSelector,
@@ -1189,7 +1190,7 @@ func (mg *SparkCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.ForProvider.Roles.WorkerNode.SubnetID")
 			}
-			mg.Spec.ForProvider.Roles.WorkerNode.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Roles.WorkerNode.SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.ForProvider.Roles.WorkerNode.SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -1202,7 +1203,7 @@ func (mg *SparkCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Roles.ZookeeperNode.SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.ForProvider.Roles.ZookeeperNode.SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.ForProvider.Roles.ZookeeperNode.SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.Roles.ZookeeperNode.SubnetIDSelector,
@@ -1212,7 +1213,7 @@ func (mg *SparkCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.ForProvider.Roles.ZookeeperNode.SubnetID")
 			}
-			mg.Spec.ForProvider.Roles.ZookeeperNode.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Roles.ZookeeperNode.SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.ForProvider.Roles.ZookeeperNode.SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -1224,7 +1225,7 @@ func (mg *SparkCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccount[i3].StorageContainerID),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.StorageAccount[i3].StorageContainerID, ""),
 				Extract:      resource.ExtractResourceID(),
 				Reference:    mg.Spec.ForProvider.StorageAccount[i3].StorageContainerIDRef,
 				Selector:     mg.Spec.ForProvider.StorageAccount[i3].StorageContainerIDSelector,
@@ -1234,7 +1235,7 @@ func (mg *SparkCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.StorageAccount[i3].StorageContainerID")
 		}
-		mg.Spec.ForProvider.StorageAccount[i3].StorageContainerID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.StorageAccount[i3].StorageContainerID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.StorageAccount[i3].StorageContainerIDRef = rsp.ResolvedReference
 
 	}
@@ -1246,7 +1247,7 @@ func (mg *SparkCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.InitProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.InitProvider.PrivateLinkConfiguration.IPConfiguration.SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.PrivateLinkConfiguration.IPConfiguration.SubnetIDSelector,
@@ -1256,7 +1257,7 @@ func (mg *SparkCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.InitProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID")
 			}
-			mg.Spec.InitProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.PrivateLinkConfiguration.IPConfiguration.SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.InitProvider.PrivateLinkConfiguration.IPConfiguration.SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -1269,7 +1270,7 @@ func (mg *SparkCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles.HeadNode.SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.InitProvider.Roles.HeadNode.SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.InitProvider.Roles.HeadNode.SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.Roles.HeadNode.SubnetIDSelector,
@@ -1279,7 +1280,7 @@ func (mg *SparkCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.InitProvider.Roles.HeadNode.SubnetID")
 			}
-			mg.Spec.InitProvider.Roles.HeadNode.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Roles.HeadNode.SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.InitProvider.Roles.HeadNode.SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -1292,7 +1293,7 @@ func (mg *SparkCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles.WorkerNode.SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.InitProvider.Roles.WorkerNode.SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.InitProvider.Roles.WorkerNode.SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.Roles.WorkerNode.SubnetIDSelector,
@@ -1302,7 +1303,7 @@ func (mg *SparkCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.InitProvider.Roles.WorkerNode.SubnetID")
 			}
-			mg.Spec.InitProvider.Roles.WorkerNode.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Roles.WorkerNode.SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.InitProvider.Roles.WorkerNode.SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -1315,7 +1316,7 @@ func (mg *SparkCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles.ZookeeperNode.SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.InitProvider.Roles.ZookeeperNode.SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.InitProvider.Roles.ZookeeperNode.SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.Roles.ZookeeperNode.SubnetIDSelector,
@@ -1325,7 +1326,7 @@ func (mg *SparkCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.InitProvider.Roles.ZookeeperNode.SubnetID")
 			}
-			mg.Spec.InitProvider.Roles.ZookeeperNode.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Roles.ZookeeperNode.SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.InitProvider.Roles.ZookeeperNode.SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -1337,7 +1338,7 @@ func (mg *SparkCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccount[i3].StorageContainerID),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.StorageAccount[i3].StorageContainerID, ""),
 				Extract:      resource.ExtractResourceID(),
 				Reference:    mg.Spec.InitProvider.StorageAccount[i3].StorageContainerIDRef,
 				Selector:     mg.Spec.InitProvider.StorageAccount[i3].StorageContainerIDSelector,
@@ -1347,7 +1348,7 @@ func (mg *SparkCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccount[i3].StorageContainerID")
 		}
-		mg.Spec.InitProvider.StorageAccount[i3].StorageContainerID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.StorageAccount[i3].StorageContainerID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.StorageAccount[i3].StorageContainerIDRef = rsp.ResolvedReference
 
 	}

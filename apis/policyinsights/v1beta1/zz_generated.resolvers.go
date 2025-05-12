@@ -14,6 +14,7 @@ import (
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -32,7 +33,7 @@ func (mg *ResourcePolicyRemediation) ResolveReferences( // ResolveReferences of 
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PolicyAssignmentID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.PolicyAssignmentID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.PolicyAssignmentIDRef,
 			Selector:     mg.Spec.ForProvider.PolicyAssignmentIDSelector,
@@ -42,7 +43,7 @@ func (mg *ResourcePolicyRemediation) ResolveReferences( // ResolveReferences of 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.PolicyAssignmentID")
 	}
-	mg.Spec.ForProvider.PolicyAssignmentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.PolicyAssignmentID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PolicyAssignmentIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "VirtualNetwork", "VirtualNetworkList")
@@ -51,7 +52,7 @@ func (mg *ResourcePolicyRemediation) ResolveReferences( // ResolveReferences of 
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.ResourceIDRef,
 			Selector:     mg.Spec.ForProvider.ResourceIDSelector,
@@ -61,7 +62,7 @@ func (mg *ResourcePolicyRemediation) ResolveReferences( // ResolveReferences of 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceID")
 	}
-	mg.Spec.ForProvider.ResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("authorization.azure.upbound.io", "v1beta2", "ResourceGroupPolicyAssignment", "ResourceGroupPolicyAssignmentList")
@@ -70,7 +71,7 @@ func (mg *ResourcePolicyRemediation) ResolveReferences( // ResolveReferences of 
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PolicyAssignmentID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.PolicyAssignmentID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.PolicyAssignmentIDRef,
 			Selector:     mg.Spec.InitProvider.PolicyAssignmentIDSelector,
@@ -80,7 +81,7 @@ func (mg *ResourcePolicyRemediation) ResolveReferences( // ResolveReferences of 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.PolicyAssignmentID")
 	}
-	mg.Spec.InitProvider.PolicyAssignmentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PolicyAssignmentID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.PolicyAssignmentIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "VirtualNetwork", "VirtualNetworkList")
@@ -89,7 +90,7 @@ func (mg *ResourcePolicyRemediation) ResolveReferences( // ResolveReferences of 
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ResourceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.ResourceIDRef,
 			Selector:     mg.Spec.InitProvider.ResourceIDSelector,
@@ -99,7 +100,7 @@ func (mg *ResourcePolicyRemediation) ResolveReferences( // ResolveReferences of 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceID")
 	}
-	mg.Spec.InitProvider.ResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ResourceIDRef = rsp.ResolvedReference
 
 	return nil
@@ -120,7 +121,7 @@ func (mg *SubscriptionPolicyRemediation) ResolveReferences(ctx context.Context, 
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PolicyAssignmentID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.PolicyAssignmentID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.PolicyAssignmentIDRef,
 			Selector:     mg.Spec.ForProvider.PolicyAssignmentIDSelector,
@@ -130,7 +131,7 @@ func (mg *SubscriptionPolicyRemediation) ResolveReferences(ctx context.Context, 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.PolicyAssignmentID")
 	}
-	mg.Spec.ForProvider.PolicyAssignmentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.PolicyAssignmentID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PolicyAssignmentIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("authorization.azure.upbound.io", "v1beta2", "SubscriptionPolicyAssignment", "SubscriptionPolicyAssignmentList")
@@ -139,7 +140,7 @@ func (mg *SubscriptionPolicyRemediation) ResolveReferences(ctx context.Context, 
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PolicyAssignmentID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.PolicyAssignmentID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.PolicyAssignmentIDRef,
 			Selector:     mg.Spec.InitProvider.PolicyAssignmentIDSelector,
@@ -149,7 +150,7 @@ func (mg *SubscriptionPolicyRemediation) ResolveReferences(ctx context.Context, 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.PolicyAssignmentID")
 	}
-	mg.Spec.InitProvider.PolicyAssignmentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PolicyAssignmentID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.PolicyAssignmentIDRef = rsp.ResolvedReference
 
 	return nil

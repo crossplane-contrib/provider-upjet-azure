@@ -16,6 +16,7 @@ import (
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -36,7 +37,7 @@ func (mg *ServiceBusNamespace) ResolveReferences( // ResolveReferences of this S
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkRuleSet.NetworkRules[i4].SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.ForProvider.NetworkRuleSet.NetworkRules[i4].SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.ForProvider.NetworkRuleSet.NetworkRules[i4].SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.NetworkRuleSet.NetworkRules[i4].SubnetIDSelector,
@@ -46,7 +47,7 @@ func (mg *ServiceBusNamespace) ResolveReferences( // ResolveReferences of this S
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.ForProvider.NetworkRuleSet.NetworkRules[i4].SubnetID")
 			}
-			mg.Spec.ForProvider.NetworkRuleSet.NetworkRules[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.NetworkRuleSet.NetworkRules[i4].SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.ForProvider.NetworkRuleSet.NetworkRules[i4].SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -57,7 +58,7 @@ func (mg *ServiceBusNamespace) ResolveReferences( // ResolveReferences of this S
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -67,7 +68,7 @@ func (mg *ServiceBusNamespace) ResolveReferences( // ResolveReferences of this S
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	if mg.Spec.InitProvider.NetworkRuleSet != nil {
@@ -78,7 +79,7 @@ func (mg *ServiceBusNamespace) ResolveReferences( // ResolveReferences of this S
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkRuleSet.NetworkRules[i4].SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.InitProvider.NetworkRuleSet.NetworkRules[i4].SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.InitProvider.NetworkRuleSet.NetworkRules[i4].SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.NetworkRuleSet.NetworkRules[i4].SubnetIDSelector,
@@ -88,7 +89,7 @@ func (mg *ServiceBusNamespace) ResolveReferences( // ResolveReferences of this S
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.InitProvider.NetworkRuleSet.NetworkRules[i4].SubnetID")
 			}
-			mg.Spec.InitProvider.NetworkRuleSet.NetworkRules[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.NetworkRuleSet.NetworkRules[i4].SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.InitProvider.NetworkRuleSet.NetworkRules[i4].SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -112,7 +113,7 @@ func (mg *Subscription) ResolveReferences(ctx context.Context, c client.Reader) 
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TopicID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.TopicID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.TopicIDRef,
 			Selector:     mg.Spec.ForProvider.TopicIDSelector,
@@ -122,7 +123,7 @@ func (mg *Subscription) ResolveReferences(ctx context.Context, c client.Reader) 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.TopicID")
 	}
-	mg.Spec.ForProvider.TopicID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.TopicID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TopicIDRef = rsp.ResolvedReference
 
 	return nil
@@ -143,7 +144,7 @@ func (mg *SubscriptionRule) ResolveReferences(ctx context.Context, c client.Read
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubscriptionID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.SubscriptionID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.SubscriptionIDRef,
 			Selector:     mg.Spec.ForProvider.SubscriptionIDSelector,
@@ -153,7 +154,7 @@ func (mg *SubscriptionRule) ResolveReferences(ctx context.Context, c client.Read
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.SubscriptionID")
 	}
-	mg.Spec.ForProvider.SubscriptionID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SubscriptionID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SubscriptionIDRef = rsp.ResolvedReference
 
 	return nil

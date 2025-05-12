@@ -14,6 +14,7 @@ import (
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -32,7 +33,7 @@ func (mg *CloudApplicationLiveView) ResolveReferences( // ResolveReferences of t
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SpringCloudServiceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.SpringCloudServiceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.SpringCloudServiceIDRef,
 			Selector:     mg.Spec.ForProvider.SpringCloudServiceIDSelector,
@@ -42,7 +43,7 @@ func (mg *CloudApplicationLiveView) ResolveReferences( // ResolveReferences of t
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.SpringCloudServiceID")
 	}
-	mg.Spec.ForProvider.SpringCloudServiceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SpringCloudServiceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SpringCloudServiceIDRef = rsp.ResolvedReference
 
 	return nil

@@ -14,6 +14,7 @@ import (
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -32,7 +33,7 @@ func (mg *IOTHubDeviceUpdateAccount) ResolveReferences( // ResolveReferences of 
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -42,7 +43,7 @@ func (mg *IOTHubDeviceUpdateAccount) ResolveReferences( // ResolveReferences of 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -63,7 +64,7 @@ func (mg *IOTHubDeviceUpdateInstance) ResolveReferences(ctx context.Context, c c
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DeviceUpdateAccountID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.DeviceUpdateAccountID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.DeviceUpdateAccountIDRef,
 			Selector:     mg.Spec.ForProvider.DeviceUpdateAccountIDSelector,
@@ -73,7 +74,7 @@ func (mg *IOTHubDeviceUpdateInstance) ResolveReferences(ctx context.Context, c c
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.DeviceUpdateAccountID")
 	}
-	mg.Spec.ForProvider.DeviceUpdateAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DeviceUpdateAccountID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DeviceUpdateAccountIDRef = rsp.ResolvedReference
 
 	if mg.Spec.ForProvider.DiagnosticStorageAccount != nil {
@@ -83,7 +84,7 @@ func (mg *IOTHubDeviceUpdateInstance) ResolveReferences(ctx context.Context, c c
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DiagnosticStorageAccount.ID),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.DiagnosticStorageAccount.ID, ""),
 				Extract:      resource.ExtractResourceID(),
 				Reference:    mg.Spec.ForProvider.DiagnosticStorageAccount.IDRef,
 				Selector:     mg.Spec.ForProvider.DiagnosticStorageAccount.IDSelector,
@@ -93,7 +94,7 @@ func (mg *IOTHubDeviceUpdateInstance) ResolveReferences(ctx context.Context, c c
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.DiagnosticStorageAccount.ID")
 		}
-		mg.Spec.ForProvider.DiagnosticStorageAccount.ID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.DiagnosticStorageAccount.ID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.DiagnosticStorageAccount.IDRef = rsp.ResolvedReference
 
 	}
@@ -103,7 +104,7 @@ func (mg *IOTHubDeviceUpdateInstance) ResolveReferences(ctx context.Context, c c
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IOTHubID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.IOTHubID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.IOTHubIDRef,
 			Selector:     mg.Spec.ForProvider.IOTHubIDSelector,
@@ -113,7 +114,7 @@ func (mg *IOTHubDeviceUpdateInstance) ResolveReferences(ctx context.Context, c c
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.IOTHubID")
 	}
-	mg.Spec.ForProvider.IOTHubID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.IOTHubID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.IOTHubIDRef = rsp.ResolvedReference
 
 	if mg.Spec.InitProvider.DiagnosticStorageAccount != nil {
@@ -123,7 +124,7 @@ func (mg *IOTHubDeviceUpdateInstance) ResolveReferences(ctx context.Context, c c
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DiagnosticStorageAccount.ID),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.DiagnosticStorageAccount.ID, ""),
 				Extract:      resource.ExtractResourceID(),
 				Reference:    mg.Spec.InitProvider.DiagnosticStorageAccount.IDRef,
 				Selector:     mg.Spec.InitProvider.DiagnosticStorageAccount.IDSelector,
@@ -133,7 +134,7 @@ func (mg *IOTHubDeviceUpdateInstance) ResolveReferences(ctx context.Context, c c
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.DiagnosticStorageAccount.ID")
 		}
-		mg.Spec.InitProvider.DiagnosticStorageAccount.ID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.DiagnosticStorageAccount.ID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.DiagnosticStorageAccount.IDRef = rsp.ResolvedReference
 
 	}
@@ -143,7 +144,7 @@ func (mg *IOTHubDeviceUpdateInstance) ResolveReferences(ctx context.Context, c c
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IOTHubID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.IOTHubID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.IOTHubIDRef,
 			Selector:     mg.Spec.InitProvider.IOTHubIDSelector,
@@ -153,7 +154,7 @@ func (mg *IOTHubDeviceUpdateInstance) ResolveReferences(ctx context.Context, c c
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.IOTHubID")
 	}
-	mg.Spec.InitProvider.IOTHubID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.IOTHubID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.IOTHubIDRef = rsp.ResolvedReference
 
 	return nil

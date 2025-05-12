@@ -9,11 +9,13 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
+	helper "github.com/crossplane/crossplane-tools/pkg/helpers"
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	rconfig "github.com/upbound/provider-azure/apis/rconfig"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 
 	// ResolveReferences of this Account.
@@ -36,7 +38,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Identity[i3].IdentityIds),
+				CurrentValues: helper.FromPtrValues(mg.Spec.ForProvider.Identity[i3].IdentityIds),
 				Extract:       resource.ExtractResourceID(),
 				References:    mg.Spec.ForProvider.Identity[i3].IdentityIdsRefs,
 				Selector:      mg.Spec.ForProvider.Identity[i3].IdentityIdsSelector,
@@ -46,7 +48,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.Identity[i3].IdentityIds")
 		}
-		mg.Spec.ForProvider.Identity[i3].IdentityIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.ForProvider.Identity[i3].IdentityIds = helper.ToPtrValues(mrsp.ResolvedValues)
 		mg.Spec.ForProvider.Identity[i3].IdentityIdsRefs = mrsp.ResolvedReferences
 
 	}
@@ -56,7 +58,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -66,7 +68,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.Restore); i3++ {
@@ -76,7 +78,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Restore[i3].SourceCosmosDBAccountID),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.Restore[i3].SourceCosmosDBAccountID, ""),
 				Extract:      rconfig.ExtractResourceID(),
 				Reference:    mg.Spec.ForProvider.Restore[i3].SourceCosmosDBAccountIDRef,
 				Selector:     mg.Spec.ForProvider.Restore[i3].SourceCosmosDBAccountIDSelector,
@@ -86,7 +88,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.Restore[i3].SourceCosmosDBAccountID")
 		}
-		mg.Spec.ForProvider.Restore[i3].SourceCosmosDBAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Restore[i3].SourceCosmosDBAccountID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.Restore[i3].SourceCosmosDBAccountIDRef = rsp.ResolvedReference
 
 	}
@@ -97,7 +99,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Identity[i3].IdentityIds),
+				CurrentValues: helper.FromPtrValues(mg.Spec.InitProvider.Identity[i3].IdentityIds),
 				Extract:       resource.ExtractResourceID(),
 				References:    mg.Spec.InitProvider.Identity[i3].IdentityIdsRefs,
 				Selector:      mg.Spec.InitProvider.Identity[i3].IdentityIdsSelector,
@@ -107,7 +109,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.Identity[i3].IdentityIds")
 		}
-		mg.Spec.InitProvider.Identity[i3].IdentityIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.Identity[i3].IdentityIds = helper.ToPtrValues(mrsp.ResolvedValues)
 		mg.Spec.InitProvider.Identity[i3].IdentityIdsRefs = mrsp.ResolvedReferences
 
 	}
@@ -118,7 +120,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Restore[i3].SourceCosmosDBAccountID),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.Restore[i3].SourceCosmosDBAccountID, ""),
 				Extract:      rconfig.ExtractResourceID(),
 				Reference:    mg.Spec.InitProvider.Restore[i3].SourceCosmosDBAccountIDRef,
 				Selector:     mg.Spec.InitProvider.Restore[i3].SourceCosmosDBAccountIDSelector,
@@ -128,7 +130,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.Restore[i3].SourceCosmosDBAccountID")
 		}
-		mg.Spec.InitProvider.Restore[i3].SourceCosmosDBAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Restore[i3].SourceCosmosDBAccountID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.Restore[i3].SourceCosmosDBAccountIDRef = rsp.ResolvedReference
 
 	}
@@ -151,7 +153,7 @@ func (mg *CassandraCluster) ResolveReferences(ctx context.Context, c client.Read
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DelegatedManagementSubnetID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.DelegatedManagementSubnetID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.DelegatedManagementSubnetIDRef,
 			Selector:     mg.Spec.ForProvider.DelegatedManagementSubnetIDSelector,
@@ -161,7 +163,7 @@ func (mg *CassandraCluster) ResolveReferences(ctx context.Context, c client.Read
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.DelegatedManagementSubnetID")
 	}
-	mg.Spec.ForProvider.DelegatedManagementSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DelegatedManagementSubnetID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DelegatedManagementSubnetIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -170,7 +172,7 @@ func (mg *CassandraCluster) ResolveReferences(ctx context.Context, c client.Read
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -180,7 +182,7 @@ func (mg *CassandraCluster) ResolveReferences(ctx context.Context, c client.Read
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
@@ -189,7 +191,7 @@ func (mg *CassandraCluster) ResolveReferences(ctx context.Context, c client.Read
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DelegatedManagementSubnetID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.DelegatedManagementSubnetID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.DelegatedManagementSubnetIDRef,
 			Selector:     mg.Spec.InitProvider.DelegatedManagementSubnetIDSelector,
@@ -199,7 +201,7 @@ func (mg *CassandraCluster) ResolveReferences(ctx context.Context, c client.Read
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.DelegatedManagementSubnetID")
 	}
-	mg.Spec.InitProvider.DelegatedManagementSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DelegatedManagementSubnetID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DelegatedManagementSubnetIDRef = rsp.ResolvedReference
 
 	return nil
@@ -220,7 +222,7 @@ func (mg *CassandraDatacenter) ResolveReferences(ctx context.Context, c client.R
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CassandraClusterID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.CassandraClusterID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.CassandraClusterIDRef,
 			Selector:     mg.Spec.ForProvider.CassandraClusterIDSelector,
@@ -230,7 +232,7 @@ func (mg *CassandraDatacenter) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.CassandraClusterID")
 	}
-	mg.Spec.ForProvider.CassandraClusterID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CassandraClusterID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CassandraClusterIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
@@ -239,7 +241,7 @@ func (mg *CassandraDatacenter) ResolveReferences(ctx context.Context, c client.R
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DelegatedManagementSubnetID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.DelegatedManagementSubnetID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.DelegatedManagementSubnetIDRef,
 			Selector:     mg.Spec.ForProvider.DelegatedManagementSubnetIDSelector,
@@ -249,7 +251,7 @@ func (mg *CassandraDatacenter) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.DelegatedManagementSubnetID")
 	}
-	mg.Spec.ForProvider.DelegatedManagementSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DelegatedManagementSubnetID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DelegatedManagementSubnetIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
@@ -258,7 +260,7 @@ func (mg *CassandraDatacenter) ResolveReferences(ctx context.Context, c client.R
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DelegatedManagementSubnetID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.DelegatedManagementSubnetID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.DelegatedManagementSubnetIDRef,
 			Selector:     mg.Spec.InitProvider.DelegatedManagementSubnetIDSelector,
@@ -268,7 +270,7 @@ func (mg *CassandraDatacenter) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.DelegatedManagementSubnetID")
 	}
-	mg.Spec.InitProvider.DelegatedManagementSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DelegatedManagementSubnetID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DelegatedManagementSubnetIDRef = rsp.ResolvedReference
 
 	return nil
@@ -289,7 +291,7 @@ func (mg *CassandraKeySpace) ResolveReferences(ctx context.Context, c client.Rea
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.AccountName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.AccountNameRef,
 			Selector:     mg.Spec.ForProvider.AccountNameSelector,
@@ -299,7 +301,7 @@ func (mg *CassandraKeySpace) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.AccountName")
 	}
-	mg.Spec.ForProvider.AccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AccountName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AccountNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -308,7 +310,7 @@ func (mg *CassandraKeySpace) ResolveReferences(ctx context.Context, c client.Rea
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -318,7 +320,7 @@ func (mg *CassandraKeySpace) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -339,7 +341,7 @@ func (mg *CassandraTable) ResolveReferences(ctx context.Context, c client.Reader
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CassandraKeySpaceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.CassandraKeySpaceID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.CassandraKeySpaceIDRef,
 			Selector:     mg.Spec.ForProvider.CassandraKeySpaceIDSelector,
@@ -349,7 +351,7 @@ func (mg *CassandraTable) ResolveReferences(ctx context.Context, c client.Reader
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.CassandraKeySpaceID")
 	}
-	mg.Spec.ForProvider.CassandraKeySpaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CassandraKeySpaceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CassandraKeySpaceIDRef = rsp.ResolvedReference
 
 	return nil
@@ -370,7 +372,7 @@ func (mg *GremlinDatabase) ResolveReferences(ctx context.Context, c client.Reade
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.AccountName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.AccountNameRef,
 			Selector:     mg.Spec.ForProvider.AccountNameSelector,
@@ -380,7 +382,7 @@ func (mg *GremlinDatabase) ResolveReferences(ctx context.Context, c client.Reade
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.AccountName")
 	}
-	mg.Spec.ForProvider.AccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AccountName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AccountNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -389,7 +391,7 @@ func (mg *GremlinDatabase) ResolveReferences(ctx context.Context, c client.Reade
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -399,7 +401,7 @@ func (mg *GremlinDatabase) ResolveReferences(ctx context.Context, c client.Reade
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -420,7 +422,7 @@ func (mg *GremlinGraph) ResolveReferences(ctx context.Context, c client.Reader) 
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.AccountName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.AccountNameRef,
 			Selector:     mg.Spec.ForProvider.AccountNameSelector,
@@ -430,7 +432,7 @@ func (mg *GremlinGraph) ResolveReferences(ctx context.Context, c client.Reader) 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.AccountName")
 	}
-	mg.Spec.ForProvider.AccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AccountName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AccountNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta1", "GremlinDatabase", "GremlinDatabaseList")
@@ -439,7 +441,7 @@ func (mg *GremlinGraph) ResolveReferences(ctx context.Context, c client.Reader) 
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.DatabaseName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.DatabaseNameRef,
 			Selector:     mg.Spec.ForProvider.DatabaseNameSelector,
@@ -449,7 +451,7 @@ func (mg *GremlinGraph) ResolveReferences(ctx context.Context, c client.Reader) 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.DatabaseName")
 	}
-	mg.Spec.ForProvider.DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DatabaseName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DatabaseNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -458,7 +460,7 @@ func (mg *GremlinGraph) ResolveReferences(ctx context.Context, c client.Reader) 
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -468,7 +470,7 @@ func (mg *GremlinGraph) ResolveReferences(ctx context.Context, c client.Reader) 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -489,7 +491,7 @@ func (mg *MongoCollection) ResolveReferences(ctx context.Context, c client.Reade
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.AccountName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.AccountNameRef,
 			Selector:     mg.Spec.ForProvider.AccountNameSelector,
@@ -499,7 +501,7 @@ func (mg *MongoCollection) ResolveReferences(ctx context.Context, c client.Reade
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.AccountName")
 	}
-	mg.Spec.ForProvider.AccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AccountName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AccountNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta1", "MongoDatabase", "MongoDatabaseList")
@@ -508,7 +510,7 @@ func (mg *MongoCollection) ResolveReferences(ctx context.Context, c client.Reade
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.DatabaseName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.DatabaseNameRef,
 			Selector:     mg.Spec.ForProvider.DatabaseNameSelector,
@@ -518,7 +520,7 @@ func (mg *MongoCollection) ResolveReferences(ctx context.Context, c client.Reade
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.DatabaseName")
 	}
-	mg.Spec.ForProvider.DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DatabaseName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DatabaseNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -527,7 +529,7 @@ func (mg *MongoCollection) ResolveReferences(ctx context.Context, c client.Reade
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -537,7 +539,7 @@ func (mg *MongoCollection) ResolveReferences(ctx context.Context, c client.Reade
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -558,7 +560,7 @@ func (mg *MongoDatabase) ResolveReferences(ctx context.Context, c client.Reader)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.AccountName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.AccountNameRef,
 			Selector:     mg.Spec.ForProvider.AccountNameSelector,
@@ -568,7 +570,7 @@ func (mg *MongoDatabase) ResolveReferences(ctx context.Context, c client.Reader)
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.AccountName")
 	}
-	mg.Spec.ForProvider.AccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AccountName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AccountNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -577,7 +579,7 @@ func (mg *MongoDatabase) ResolveReferences(ctx context.Context, c client.Reader)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -587,7 +589,7 @@ func (mg *MongoDatabase) ResolveReferences(ctx context.Context, c client.Reader)
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -608,7 +610,7 @@ func (mg *MongoRoleDefinition) ResolveReferences(ctx context.Context, c client.R
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CosmosMongoDatabaseID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.CosmosMongoDatabaseID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.CosmosMongoDatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.CosmosMongoDatabaseIDSelector,
@@ -618,7 +620,7 @@ func (mg *MongoRoleDefinition) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.CosmosMongoDatabaseID")
 	}
-	mg.Spec.ForProvider.CosmosMongoDatabaseID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CosmosMongoDatabaseID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CosmosMongoDatabaseIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta2", "MongoDatabase", "MongoDatabaseList")
@@ -627,7 +629,7 @@ func (mg *MongoRoleDefinition) ResolveReferences(ctx context.Context, c client.R
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CosmosMongoDatabaseID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.CosmosMongoDatabaseID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.CosmosMongoDatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.CosmosMongoDatabaseIDSelector,
@@ -637,7 +639,7 @@ func (mg *MongoRoleDefinition) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.CosmosMongoDatabaseID")
 	}
-	mg.Spec.InitProvider.CosmosMongoDatabaseID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.CosmosMongoDatabaseID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.CosmosMongoDatabaseIDRef = rsp.ResolvedReference
 
 	return nil
@@ -658,7 +660,7 @@ func (mg *MongoUserDefinition) ResolveReferences(ctx context.Context, c client.R
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CosmosMongoDatabaseID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.CosmosMongoDatabaseID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.CosmosMongoDatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.CosmosMongoDatabaseIDSelector,
@@ -668,7 +670,7 @@ func (mg *MongoUserDefinition) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.CosmosMongoDatabaseID")
 	}
-	mg.Spec.ForProvider.CosmosMongoDatabaseID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CosmosMongoDatabaseID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CosmosMongoDatabaseIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta2", "MongoDatabase", "MongoDatabaseList")
@@ -677,7 +679,7 @@ func (mg *MongoUserDefinition) ResolveReferences(ctx context.Context, c client.R
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CosmosMongoDatabaseID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.CosmosMongoDatabaseID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.CosmosMongoDatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.CosmosMongoDatabaseIDSelector,
@@ -687,7 +689,7 @@ func (mg *MongoUserDefinition) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.CosmosMongoDatabaseID")
 	}
-	mg.Spec.InitProvider.CosmosMongoDatabaseID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.CosmosMongoDatabaseID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.CosmosMongoDatabaseIDRef = rsp.ResolvedReference
 
 	return nil
@@ -708,7 +710,7 @@ func (mg *SQLContainer) ResolveReferences(ctx context.Context, c client.Reader) 
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.AccountName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.AccountNameRef,
 			Selector:     mg.Spec.ForProvider.AccountNameSelector,
@@ -718,7 +720,7 @@ func (mg *SQLContainer) ResolveReferences(ctx context.Context, c client.Reader) 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.AccountName")
 	}
-	mg.Spec.ForProvider.AccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AccountName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AccountNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta1", "SQLDatabase", "SQLDatabaseList")
@@ -727,7 +729,7 @@ func (mg *SQLContainer) ResolveReferences(ctx context.Context, c client.Reader) 
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.DatabaseName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.DatabaseNameRef,
 			Selector:     mg.Spec.ForProvider.DatabaseNameSelector,
@@ -737,7 +739,7 @@ func (mg *SQLContainer) ResolveReferences(ctx context.Context, c client.Reader) 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.DatabaseName")
 	}
-	mg.Spec.ForProvider.DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DatabaseName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DatabaseNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -746,7 +748,7 @@ func (mg *SQLContainer) ResolveReferences(ctx context.Context, c client.Reader) 
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -756,7 +758,7 @@ func (mg *SQLContainer) ResolveReferences(ctx context.Context, c client.Reader) 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -777,7 +779,7 @@ func (mg *SQLDatabase) ResolveReferences(ctx context.Context, c client.Reader) e
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.AccountName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.AccountNameRef,
 			Selector:     mg.Spec.ForProvider.AccountNameSelector,
@@ -787,7 +789,7 @@ func (mg *SQLDatabase) ResolveReferences(ctx context.Context, c client.Reader) e
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.AccountName")
 	}
-	mg.Spec.ForProvider.AccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AccountName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AccountNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -796,7 +798,7 @@ func (mg *SQLDatabase) ResolveReferences(ctx context.Context, c client.Reader) e
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -806,7 +808,7 @@ func (mg *SQLDatabase) ResolveReferences(ctx context.Context, c client.Reader) e
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -827,7 +829,7 @@ func (mg *SQLDedicatedGateway) ResolveReferences(ctx context.Context, c client.R
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CosmosDBAccountID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.CosmosDBAccountID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.CosmosDBAccountIDRef,
 			Selector:     mg.Spec.ForProvider.CosmosDBAccountIDSelector,
@@ -837,7 +839,7 @@ func (mg *SQLDedicatedGateway) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.CosmosDBAccountID")
 	}
-	mg.Spec.ForProvider.CosmosDBAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CosmosDBAccountID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CosmosDBAccountIDRef = rsp.ResolvedReference
 
 	return nil
@@ -858,7 +860,7 @@ func (mg *SQLFunction) ResolveReferences(ctx context.Context, c client.Reader) e
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ContainerID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.ContainerIDRef,
 			Selector:     mg.Spec.ForProvider.ContainerIDSelector,
@@ -868,7 +870,7 @@ func (mg *SQLFunction) ResolveReferences(ctx context.Context, c client.Reader) e
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ContainerID")
 	}
-	mg.Spec.ForProvider.ContainerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ContainerID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ContainerIDRef = rsp.ResolvedReference
 
 	return nil
@@ -889,7 +891,7 @@ func (mg *SQLRoleAssignment) ResolveReferences(ctx context.Context, c client.Rea
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.AccountName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.AccountNameRef,
 			Selector:     mg.Spec.ForProvider.AccountNameSelector,
@@ -899,7 +901,7 @@ func (mg *SQLRoleAssignment) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.AccountName")
 	}
-	mg.Spec.ForProvider.AccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AccountName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AccountNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -908,7 +910,7 @@ func (mg *SQLRoleAssignment) ResolveReferences(ctx context.Context, c client.Rea
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -918,7 +920,7 @@ func (mg *SQLRoleAssignment) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta1", "SQLRoleDefinition", "SQLRoleDefinitionList")
@@ -927,7 +929,7 @@ func (mg *SQLRoleAssignment) ResolveReferences(ctx context.Context, c client.Rea
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleDefinitionID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.RoleDefinitionID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.RoleDefinitionIDRef,
 			Selector:     mg.Spec.ForProvider.RoleDefinitionIDSelector,
@@ -937,7 +939,7 @@ func (mg *SQLRoleAssignment) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.RoleDefinitionID")
 	}
-	mg.Spec.ForProvider.RoleDefinitionID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.RoleDefinitionID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RoleDefinitionIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta2", "Account", "AccountList")
@@ -946,7 +948,7 @@ func (mg *SQLRoleAssignment) ResolveReferences(ctx context.Context, c client.Rea
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Scope),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.Scope, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.ScopeRef,
 			Selector:     mg.Spec.ForProvider.ScopeSelector,
@@ -956,7 +958,7 @@ func (mg *SQLRoleAssignment) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.Scope")
 	}
-	mg.Spec.ForProvider.Scope = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.Scope = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ScopeRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta2", "Account", "AccountList")
@@ -965,7 +967,7 @@ func (mg *SQLRoleAssignment) ResolveReferences(ctx context.Context, c client.Rea
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AccountName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.AccountName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.AccountNameRef,
 			Selector:     mg.Spec.InitProvider.AccountNameSelector,
@@ -975,7 +977,7 @@ func (mg *SQLRoleAssignment) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.AccountName")
 	}
-	mg.Spec.InitProvider.AccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.AccountName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.AccountNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -984,7 +986,7 @@ func (mg *SQLRoleAssignment) ResolveReferences(ctx context.Context, c client.Rea
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
@@ -994,7 +996,7 @@ func (mg *SQLRoleAssignment) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
 	}
-	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta1", "SQLRoleDefinition", "SQLRoleDefinitionList")
@@ -1003,7 +1005,7 @@ func (mg *SQLRoleAssignment) ResolveReferences(ctx context.Context, c client.Rea
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleDefinitionID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.RoleDefinitionID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.RoleDefinitionIDRef,
 			Selector:     mg.Spec.InitProvider.RoleDefinitionIDSelector,
@@ -1013,7 +1015,7 @@ func (mg *SQLRoleAssignment) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.RoleDefinitionID")
 	}
-	mg.Spec.InitProvider.RoleDefinitionID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RoleDefinitionID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.RoleDefinitionIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta2", "Account", "AccountList")
@@ -1022,7 +1024,7 @@ func (mg *SQLRoleAssignment) ResolveReferences(ctx context.Context, c client.Rea
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Scope),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.Scope, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.ScopeRef,
 			Selector:     mg.Spec.InitProvider.ScopeSelector,
@@ -1032,7 +1034,7 @@ func (mg *SQLRoleAssignment) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.Scope")
 	}
-	mg.Spec.InitProvider.Scope = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.Scope = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ScopeRef = rsp.ResolvedReference
 
 	return nil
@@ -1053,7 +1055,7 @@ func (mg *SQLRoleDefinition) ResolveReferences(ctx context.Context, c client.Rea
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.AccountName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.AccountNameRef,
 			Selector:     mg.Spec.ForProvider.AccountNameSelector,
@@ -1063,7 +1065,7 @@ func (mg *SQLRoleDefinition) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.AccountName")
 	}
-	mg.Spec.ForProvider.AccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AccountName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AccountNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -1072,7 +1074,7 @@ func (mg *SQLRoleDefinition) ResolveReferences(ctx context.Context, c client.Rea
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -1082,7 +1084,7 @@ func (mg *SQLRoleDefinition) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta2", "Account", "AccountList")
@@ -1091,7 +1093,7 @@ func (mg *SQLRoleDefinition) ResolveReferences(ctx context.Context, c client.Rea
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AccountName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.AccountName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.AccountNameRef,
 			Selector:     mg.Spec.InitProvider.AccountNameSelector,
@@ -1101,7 +1103,7 @@ func (mg *SQLRoleDefinition) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.AccountName")
 	}
-	mg.Spec.InitProvider.AccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.AccountName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.AccountNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -1110,7 +1112,7 @@ func (mg *SQLRoleDefinition) ResolveReferences(ctx context.Context, c client.Rea
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
@@ -1120,7 +1122,7 @@ func (mg *SQLRoleDefinition) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
 	}
-	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -1141,7 +1143,7 @@ func (mg *SQLStoredProcedure) ResolveReferences(ctx context.Context, c client.Re
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.AccountName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.AccountNameRef,
 			Selector:     mg.Spec.ForProvider.AccountNameSelector,
@@ -1151,7 +1153,7 @@ func (mg *SQLStoredProcedure) ResolveReferences(ctx context.Context, c client.Re
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.AccountName")
 	}
-	mg.Spec.ForProvider.AccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AccountName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AccountNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta2", "SQLContainer", "SQLContainerList")
@@ -1160,7 +1162,7 @@ func (mg *SQLStoredProcedure) ResolveReferences(ctx context.Context, c client.Re
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ContainerName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ContainerNameRef,
 			Selector:     mg.Spec.ForProvider.ContainerNameSelector,
@@ -1170,7 +1172,7 @@ func (mg *SQLStoredProcedure) ResolveReferences(ctx context.Context, c client.Re
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ContainerName")
 	}
-	mg.Spec.ForProvider.ContainerName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ContainerName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ContainerNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta2", "SQLDatabase", "SQLDatabaseList")
@@ -1179,7 +1181,7 @@ func (mg *SQLStoredProcedure) ResolveReferences(ctx context.Context, c client.Re
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.DatabaseName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.DatabaseNameRef,
 			Selector:     mg.Spec.ForProvider.DatabaseNameSelector,
@@ -1189,7 +1191,7 @@ func (mg *SQLStoredProcedure) ResolveReferences(ctx context.Context, c client.Re
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.DatabaseName")
 	}
-	mg.Spec.ForProvider.DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DatabaseName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DatabaseNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -1198,7 +1200,7 @@ func (mg *SQLStoredProcedure) ResolveReferences(ctx context.Context, c client.Re
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -1208,7 +1210,7 @@ func (mg *SQLStoredProcedure) ResolveReferences(ctx context.Context, c client.Re
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -1229,7 +1231,7 @@ func (mg *SQLTrigger) ResolveReferences(ctx context.Context, c client.Reader) er
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ContainerID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.ContainerIDRef,
 			Selector:     mg.Spec.ForProvider.ContainerIDSelector,
@@ -1239,7 +1241,7 @@ func (mg *SQLTrigger) ResolveReferences(ctx context.Context, c client.Reader) er
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ContainerID")
 	}
-	mg.Spec.ForProvider.ContainerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ContainerID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ContainerIDRef = rsp.ResolvedReference
 
 	return nil
@@ -1260,7 +1262,7 @@ func (mg *Table) ResolveReferences(ctx context.Context, c client.Reader) error {
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.AccountName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.AccountNameRef,
 			Selector:     mg.Spec.ForProvider.AccountNameSelector,
@@ -1270,7 +1272,7 @@ func (mg *Table) ResolveReferences(ctx context.Context, c client.Reader) error {
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.AccountName")
 	}
-	mg.Spec.ForProvider.AccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AccountName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AccountNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -1279,7 +1281,7 @@ func (mg *Table) ResolveReferences(ctx context.Context, c client.Reader) error {
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -1289,7 +1291,7 @@ func (mg *Table) ResolveReferences(ctx context.Context, c client.Reader) error {
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil

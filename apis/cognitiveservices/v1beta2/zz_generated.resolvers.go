@@ -14,6 +14,7 @@ import (
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	rconfig "github.com/upbound/provider-azure/apis/rconfig"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 
 	// ResolveReferences of this Account.
@@ -36,7 +37,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkAcls.VirtualNetworkRules[i4].SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.ForProvider.NetworkAcls.VirtualNetworkRules[i4].SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.ForProvider.NetworkAcls.VirtualNetworkRules[i4].SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.NetworkAcls.VirtualNetworkRules[i4].SubnetIDSelector,
@@ -46,7 +47,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.ForProvider.NetworkAcls.VirtualNetworkRules[i4].SubnetID")
 			}
-			mg.Spec.ForProvider.NetworkAcls.VirtualNetworkRules[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.NetworkAcls.VirtualNetworkRules[i4].SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.ForProvider.NetworkAcls.VirtualNetworkRules[i4].SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -57,7 +58,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -67,7 +68,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	if mg.Spec.InitProvider.NetworkAcls != nil {
@@ -78,7 +79,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkAcls.VirtualNetworkRules[i4].SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.InitProvider.NetworkAcls.VirtualNetworkRules[i4].SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.InitProvider.NetworkAcls.VirtualNetworkRules[i4].SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.NetworkAcls.VirtualNetworkRules[i4].SubnetIDSelector,
@@ -88,7 +89,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.InitProvider.NetworkAcls.VirtualNetworkRules[i4].SubnetID")
 			}
-			mg.Spec.InitProvider.NetworkAcls.VirtualNetworkRules[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.NetworkAcls.VirtualNetworkRules[i4].SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.InitProvider.NetworkAcls.VirtualNetworkRules[i4].SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -112,7 +113,7 @@ func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) er
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CognitiveAccountID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.CognitiveAccountID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.CognitiveAccountIDRef,
 			Selector:     mg.Spec.ForProvider.CognitiveAccountIDSelector,
@@ -122,7 +123,7 @@ func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) er
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.CognitiveAccountID")
 	}
-	mg.Spec.ForProvider.CognitiveAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CognitiveAccountID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CognitiveAccountIDRef = rsp.ResolvedReference
 
 	return nil

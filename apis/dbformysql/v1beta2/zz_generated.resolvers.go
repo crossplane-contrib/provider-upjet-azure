@@ -15,6 +15,7 @@ import (
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	rconfig "github.com/upbound/provider-azure/apis/rconfig"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -33,7 +34,7 @@ func (mg *FlexibleServer) ResolveReferences( // ResolveReferences of this Flexib
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DelegatedSubnetID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.DelegatedSubnetID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.DelegatedSubnetIDRef,
 			Selector:     mg.Spec.ForProvider.DelegatedSubnetIDSelector,
@@ -43,7 +44,7 @@ func (mg *FlexibleServer) ResolveReferences( // ResolveReferences of this Flexib
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.DelegatedSubnetID")
 	}
-	mg.Spec.ForProvider.DelegatedSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DelegatedSubnetID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DelegatedSubnetIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "PrivateDNSZone", "PrivateDNSZoneList")
@@ -52,7 +53,7 @@ func (mg *FlexibleServer) ResolveReferences( // ResolveReferences of this Flexib
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrivateDNSZoneID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.PrivateDNSZoneID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.PrivateDNSZoneIDRef,
 			Selector:     mg.Spec.ForProvider.PrivateDNSZoneIDSelector,
@@ -62,7 +63,7 @@ func (mg *FlexibleServer) ResolveReferences( // ResolveReferences of this Flexib
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.PrivateDNSZoneID")
 	}
-	mg.Spec.ForProvider.PrivateDNSZoneID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.PrivateDNSZoneID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PrivateDNSZoneIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -71,7 +72,7 @@ func (mg *FlexibleServer) ResolveReferences( // ResolveReferences of this Flexib
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -81,7 +82,7 @@ func (mg *FlexibleServer) ResolveReferences( // ResolveReferences of this Flexib
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
@@ -90,7 +91,7 @@ func (mg *FlexibleServer) ResolveReferences( // ResolveReferences of this Flexib
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DelegatedSubnetID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.DelegatedSubnetID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.DelegatedSubnetIDRef,
 			Selector:     mg.Spec.InitProvider.DelegatedSubnetIDSelector,
@@ -100,7 +101,7 @@ func (mg *FlexibleServer) ResolveReferences( // ResolveReferences of this Flexib
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.DelegatedSubnetID")
 	}
-	mg.Spec.InitProvider.DelegatedSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DelegatedSubnetID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DelegatedSubnetIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "PrivateDNSZone", "PrivateDNSZoneList")
@@ -109,7 +110,7 @@ func (mg *FlexibleServer) ResolveReferences( // ResolveReferences of this Flexib
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrivateDNSZoneID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.PrivateDNSZoneID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.PrivateDNSZoneIDRef,
 			Selector:     mg.Spec.InitProvider.PrivateDNSZoneIDSelector,
@@ -119,7 +120,7 @@ func (mg *FlexibleServer) ResolveReferences( // ResolveReferences of this Flexib
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.PrivateDNSZoneID")
 	}
-	mg.Spec.InitProvider.PrivateDNSZoneID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PrivateDNSZoneID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.PrivateDNSZoneIDRef = rsp.ResolvedReference
 
 	return nil
@@ -140,7 +141,7 @@ func (mg *Server) ResolveReferences(ctx context.Context, c client.Reader) error 
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -150,7 +151,7 @@ func (mg *Server) ResolveReferences(ctx context.Context, c client.Reader) error 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
