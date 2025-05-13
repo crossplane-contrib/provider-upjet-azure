@@ -147,8 +147,15 @@ spec:
                       type: object
                     type: array
                   enforcePrivateLinkEndpointNetworkPolicies:
+                    description: '`enforcePrivateLinkEndpointNetworkPolicies` will
+                      be removed in favour of the property `privateEndpointNetworkPolicies`
+                      in version 2.0 of the provider. Conflicts with privateEndpointNetworkPoliciesEnabled,
+                      privateEndpointNetworkPolicies.'
                     type: boolean
                   enforcePrivateLinkServiceNetworkPolicies:
+                    description: '`enforcePrivateLinkServiceNetworkPolicies` will
+                      be removed in favour of the property `privateLinkServiceNetworkPoliciesEnabled`
+                      in version 2.0 of the provider. Conflicts with privateLinkServiceNetworkPoliciesEnabled.'
                     type: boolean
                   privateEndpointNetworkPolicies:
                     description: Enable or Disable network policies for the private
@@ -157,6 +164,10 @@ spec:
                       to Disabled.
                     type: string
                   privateEndpointNetworkPoliciesEnabled:
+                    description: '`privateEndpointNetworkPoliciesEnabled` will be
+                      removed in favour of the property `privateEndpointNetworkPolicies`
+                      in version 2.0 of the provider. Conflicts with enforcePrivateLinkEndpointNetworkPolicies,
+                      privateEndpointNetworkPolicies.'
                     type: boolean
                   privateLinkServiceNetworkPoliciesEnabled:
                     description: Enable or Disable network policies for the private
@@ -429,8 +440,15 @@ spec:
                       type: object
                     type: array
                   enforcePrivateLinkEndpointNetworkPolicies:
+                    description: '`enforcePrivateLinkEndpointNetworkPolicies` will
+                      be removed in favour of the property `privateEndpointNetworkPolicies`
+                      in version 2.0 of the provider. Conflicts with privateEndpointNetworkPoliciesEnabled,
+                      privateEndpointNetworkPolicies.'
                     type: boolean
                   enforcePrivateLinkServiceNetworkPolicies:
+                    description: '`enforcePrivateLinkServiceNetworkPolicies` will
+                      be removed in favour of the property `privateLinkServiceNetworkPoliciesEnabled`
+                      in version 2.0 of the provider. Conflicts with privateLinkServiceNetworkPoliciesEnabled.'
                     type: boolean
                   privateEndpointNetworkPolicies:
                     description: Enable or Disable network policies for the private
@@ -439,6 +457,10 @@ spec:
                       to Disabled.
                     type: string
                   privateEndpointNetworkPoliciesEnabled:
+                    description: '`privateEndpointNetworkPoliciesEnabled` will be
+                      removed in favour of the property `privateEndpointNetworkPolicies`
+                      in version 2.0 of the provider. Conflicts with enforcePrivateLinkEndpointNetworkPolicies,
+                      privateEndpointNetworkPolicies.'
                     type: boolean
                   privateLinkServiceNetworkPoliciesEnabled:
                     description: Enable or Disable network policies for the private
@@ -715,8 +737,15 @@ spec:
                       type: object
                     type: array
                   enforcePrivateLinkEndpointNetworkPolicies:
+                    description: '`enforcePrivateLinkEndpointNetworkPolicies` will
+                      be removed in favour of the property `privateEndpointNetworkPolicies`
+                      in version 2.0 of the provider. Conflicts with privateEndpointNetworkPoliciesEnabled,
+                      privateEndpointNetworkPolicies.'
                     type: boolean
                   enforcePrivateLinkServiceNetworkPolicies:
+                    description: '`enforcePrivateLinkServiceNetworkPolicies` will
+                      be removed in favour of the property `privateLinkServiceNetworkPoliciesEnabled`
+                      in version 2.0 of the provider. Conflicts with privateLinkServiceNetworkPoliciesEnabled.'
                     type: boolean
                   id:
                     description: The subnet ID.
@@ -728,6 +757,10 @@ spec:
                       to Disabled.
                     type: string
                   privateEndpointNetworkPoliciesEnabled:
+                    description: '`privateEndpointNetworkPoliciesEnabled` will be
+                      removed in favour of the property `privateEndpointNetworkPolicies`
+                      in version 2.0 of the provider. Conflicts with enforcePrivateLinkEndpointNetworkPolicies,
+                      privateEndpointNetworkPolicies.'
                     type: boolean
                   privateLinkServiceNetworkPoliciesEnabled:
                     description: Enable or Disable network policies for the private
@@ -947,8 +980,15 @@ spec:
                       type: object
                     type: array
                   enforcePrivateLinkEndpointNetworkPolicies:
+                    description: '`enforcePrivateLinkEndpointNetworkPolicies` will
+                      be removed in favour of the property `privateEndpointNetworkPolicies`
+                      in version 2.0 of the provider. Conflicts with privateEndpointNetworkPoliciesEnabled,
+                      privateEndpointNetworkPolicies.'
                     type: boolean
                   enforcePrivateLinkServiceNetworkPolicies:
+                    description: '`enforcePrivateLinkServiceNetworkPolicies` will
+                      be removed in favour of the property `privateLinkServiceNetworkPoliciesEnabled`
+                      in version 2.0 of the provider. Conflicts with privateLinkServiceNetworkPoliciesEnabled.'
                     type: boolean
                   privateEndpointNetworkPolicies:
                     description: Enable or Disable network policies for the private
@@ -957,6 +997,10 @@ spec:
                       to Disabled.
                     type: string
                   privateEndpointNetworkPoliciesEnabled:
+                    description: '`privateEndpointNetworkPoliciesEnabled` will be
+                      removed in favour of the property `privateEndpointNetworkPolicies`
+                      in version 2.0 of the provider. Conflicts with enforcePrivateLinkEndpointNetworkPolicies,
+                      privateEndpointNetworkPolicies.'
                     type: boolean
                   privateLinkServiceNetworkPoliciesEnabled:
                     description: Enable or Disable network policies for the private
@@ -1225,8 +1269,15 @@ spec:
                       type: object
                     type: array
                   enforcePrivateLinkEndpointNetworkPolicies:
+                    description: '`enforcePrivateLinkEndpointNetworkPolicies` will
+                      be removed in favour of the property `privateEndpointNetworkPolicies`
+                      in version 2.0 of the provider. Conflicts with privateEndpointNetworkPoliciesEnabled,
+                      privateEndpointNetworkPolicies.'
                     type: boolean
                   enforcePrivateLinkServiceNetworkPolicies:
+                    description: '`enforcePrivateLinkServiceNetworkPolicies` will
+                      be removed in favour of the property `privateLinkServiceNetworkPoliciesEnabled`
+                      in version 2.0 of the provider. Conflicts with privateLinkServiceNetworkPoliciesEnabled.'
                     type: boolean
                   privateEndpointNetworkPolicies:
                     description: Enable or Disable network policies for the private
@@ -1235,6 +1286,10 @@ spec:
                       to Disabled.
                     type: string
                   privateEndpointNetworkPoliciesEnabled:
+                    description: '`privateEndpointNetworkPoliciesEnabled` will be
+                      removed in favour of the property `privateEndpointNetworkPolicies`
+                      in version 2.0 of the provider. Conflicts with enforcePrivateLinkEndpointNetworkPolicies,
+                      privateEndpointNetworkPolicies.'
                     type: boolean
                   privateLinkServiceNetworkPoliciesEnabled:
                     description: Enable or Disable network policies for the private
@@ -1505,8 +1560,15 @@ spec:
                       type: object
                     type: array
                   enforcePrivateLinkEndpointNetworkPolicies:
+                    description: '`enforcePrivateLinkEndpointNetworkPolicies` will
+                      be removed in favour of the property `privateEndpointNetworkPolicies`
+                      in version 2.0 of the provider. Conflicts with privateEndpointNetworkPoliciesEnabled,
+                      privateEndpointNetworkPolicies.'
                     type: boolean
                   enforcePrivateLinkServiceNetworkPolicies:
+                    description: '`enforcePrivateLinkServiceNetworkPolicies` will
+                      be removed in favour of the property `privateLinkServiceNetworkPoliciesEnabled`
+                      in version 2.0 of the provider. Conflicts with privateLinkServiceNetworkPoliciesEnabled.'
                     type: boolean
                   id:
                     description: The subnet ID.
@@ -1518,6 +1580,10 @@ spec:
                       to Disabled.
                     type: string
                   privateEndpointNetworkPoliciesEnabled:
+                    description: '`privateEndpointNetworkPoliciesEnabled` will be
+                      removed in favour of the property `privateEndpointNetworkPolicies`
+                      in version 2.0 of the provider. Conflicts with enforcePrivateLinkEndpointNetworkPolicies,
+                      privateEndpointNetworkPolicies.'
                     type: boolean
                   privateLinkServiceNetworkPoliciesEnabled:
                     description: Enable or Disable network policies for the private

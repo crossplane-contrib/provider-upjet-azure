@@ -538,11 +538,17 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_subnet", func(r *config.Resource) {
 		r.Kind = "Subnet"
 		r.LateInitializer = config.LateInitializer{
-			IgnoredFields: []string{"address_prefix"},
+			IgnoredFields: []string{"address_prefix",
+				"enforce_private_link_endpoint_network_policies",
+				"private_endpoint_network_policies_enabled",
+				"enforce_private_link_service_network_policies"},
 		}
 		r.References["virtual_network_name"] = config.Reference{
 			TerraformName: "azurerm_virtual_network",
 		}
+		r.TerraformResource.Schema["enforce_private_link_endpoint_network_policies"].Description = "`enforcePrivateLinkEndpointNetworkPolicies` will be removed in favour of the property `privateEndpointNetworkPolicies` in version 2.0 of the provider. Conflicts with privateEndpointNetworkPoliciesEnabled, privateEndpointNetworkPolicies."
+		r.TerraformResource.Schema["private_endpoint_network_policies_enabled"].Description = "`privateEndpointNetworkPoliciesEnabled` will be removed in favour of the property `privateEndpointNetworkPolicies` in version 2.0 of the provider. Conflicts with enforcePrivateLinkEndpointNetworkPolicies, privateEndpointNetworkPolicies."
+		r.TerraformResource.Schema["enforce_private_link_service_network_policies"].Description = "`enforcePrivateLinkServiceNetworkPolicies` will be removed in favour of the property `privateLinkServiceNetworkPoliciesEnabled` in version 2.0 of the provider. Conflicts with privateLinkServiceNetworkPoliciesEnabled."
 	})
 
 	p.AddResourceConfigurator("azurerm_subnet_nat_gateway_association", func(r *config.Resource) {
