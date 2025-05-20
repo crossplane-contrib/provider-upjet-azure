@@ -1,0 +1,193 @@
+apiVersion: sql.azure.upbound.io/v1beta1
+kind: MSSQLManagedInstanceTransparentDataEncryption
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlmanagedinstancetransparentdataencryption
+  labels:
+    testing.upbound.io/example-name: example-mssqlmi-tde
+  name: example-mssqlmi-tde
+spec:
+  forProvider:
+    managedInstanceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-mssqlmi-tde
+
+---
+
+apiVersion: sql.azure.upbound.io/v1beta2
+kind: MSSQLManagedInstance
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlmanagedinstancetransparentdataencryption
+  labels:
+    testing.upbound.io/example-name: example-mssqlmi-tde
+  name: example-mssqlmi-tde
+spec:
+  forProvider:
+    administratorLogin: missadministrator
+    administratorLoginPasswordSecretRef:
+      key: password
+      name: example-mssqlmi-tde-secret
+      namespace: upbound-system
+    identity:
+      type: SystemAssigned
+    licenseType: BasePrice
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-mssqlmi-tde
+    skuName: GP_Gen5
+    storageSizeInGb: 32
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-mssqlmi-tde
+    vcores: 4
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlmanagedinstancetransparentdataencryption
+  labels:
+    testing.upbound.io/example-name: example-mssqlmi-tde
+  name: example-mssqlmi-tde
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlmanagedinstancetransparentdataencryption
+  labels:
+    testing.upbound.io/example-name: example-mssqlmi-tde
+  name: example-mssqlmi-tde
+spec:
+  forProvider:
+    addressPrefixes:
+    - 10.0.0.0/24
+    delegation:
+    - name: managedinstancedelegation
+      serviceDelegation:
+        actions:
+        - Microsoft.Network/virtualNetworks/subnets/join/action
+        - Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action
+        - Microsoft.Network/virtualNetworks/subnets/unprepareNetworkPolicies/action
+        name: Microsoft.Sql/managedInstances
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-mssqlmi-tde
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-mssqlmi-tde
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlmanagedinstancetransparentdataencryption
+  labels:
+    testing.upbound.io/example-name: example-mssqlmi-tde
+  name: example-mssqlmi-tde
+spec:
+  forProvider:
+    addressSpace:
+    - 10.0.0.0/16
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-mssqlmi-tde
+
+---
+
+apiVersion: v1
+data:
+  password: dGVzdFBhc3N3b3JkITEyMw==
+kind: Secret
+metadata:
+  name: example-mssqlmi-tde-secret
+  namespace: upbound-system
+type: Opaque
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlmanagedinstancetransparentdataencryption
+  labels:
+    testing.upbound.io/example-name: example-mssqlmi-tde
+  name: example-mssqlmi-tde
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-mssqlmi-tde
+    tags:
+      environment: Production
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: SubnetNetworkSecurityGroupAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlmanagedinstancetransparentdataencryption
+  labels:
+    testing.upbound.io/example-name: example-mssqlmi-tde
+  name: example-mssqlmi-tde
+spec:
+  forProvider:
+    networkSecurityGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-mssqlmi-tde
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-mssqlmi-tde
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: RouteTable
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlmanagedinstancetransparentdataencryption
+  labels:
+    testing.upbound.io/example-name: example-mssqlmi-tde
+  name: example-mssqlmi-tde
+spec:
+  forProvider:
+    disableBgpRoutePropagation: false
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-mssqlmi-tde
+    tags:
+      environment: Production
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: SubnetRouteTableAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlmanagedinstancetransparentdataencryption
+  labels:
+    testing.upbound.io/example-name: example-mssqlmi-tde
+  name: example-mssqlmi-tde
+spec:
+  forProvider:
+    routeTableIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-mssqlmi-tde
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-mssqlmi-tde
