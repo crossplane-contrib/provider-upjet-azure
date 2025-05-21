@@ -1387,6 +1387,10 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// EventGrid Event Subscription's can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.EventGrid/topics/topic1/providers/Microsoft.EventGrid/eventSubscriptions/eventSubscription1
 	"azurerm_eventgrid_event_subscription": config.IdentifierFromProvider,
+
+	// EventGrid System Topic Event Subscriptions can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.EventGrid/systemTopics/topic1/eventSubscriptions/subscription1
+	"azurerm_eventgrid_system_topic_event_subscription": config.IdentifierFromProvider,
 	// Event Grid System Topic can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.EventGrid/systemTopics/systemTopic1
 	"azurerm_eventgrid_system_topic": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.EventGrid/systemTopics/{{ .external_name }}"),
