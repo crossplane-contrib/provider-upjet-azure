@@ -14,6 +14,7 @@ import (
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -33,7 +34,7 @@ func (mg *NetworkACL) ResolveReferences( // ResolveReferences of this NetworkACL
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrivateEndpoint[i3].ID),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.PrivateEndpoint[i3].ID, ""),
 				Extract:      resource.ExtractResourceID(),
 				Reference:    mg.Spec.ForProvider.PrivateEndpoint[i3].IDRef,
 				Selector:     mg.Spec.ForProvider.PrivateEndpoint[i3].IDSelector,
@@ -43,7 +44,7 @@ func (mg *NetworkACL) ResolveReferences( // ResolveReferences of this NetworkACL
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.PrivateEndpoint[i3].ID")
 		}
-		mg.Spec.ForProvider.PrivateEndpoint[i3].ID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.PrivateEndpoint[i3].ID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.PrivateEndpoint[i3].IDRef = rsp.ResolvedReference
 
 	}
@@ -53,7 +54,7 @@ func (mg *NetworkACL) ResolveReferences( // ResolveReferences of this NetworkACL
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SignalrServiceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.SignalrServiceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.SignalrServiceIDRef,
 			Selector:     mg.Spec.ForProvider.SignalrServiceIDSelector,
@@ -63,7 +64,7 @@ func (mg *NetworkACL) ResolveReferences( // ResolveReferences of this NetworkACL
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.SignalrServiceID")
 	}
-	mg.Spec.ForProvider.SignalrServiceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SignalrServiceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SignalrServiceIDRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.PrivateEndpoint); i3++ {
@@ -73,7 +74,7 @@ func (mg *NetworkACL) ResolveReferences( // ResolveReferences of this NetworkACL
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrivateEndpoint[i3].ID),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.PrivateEndpoint[i3].ID, ""),
 				Extract:      resource.ExtractResourceID(),
 				Reference:    mg.Spec.InitProvider.PrivateEndpoint[i3].IDRef,
 				Selector:     mg.Spec.InitProvider.PrivateEndpoint[i3].IDSelector,
@@ -83,7 +84,7 @@ func (mg *NetworkACL) ResolveReferences( // ResolveReferences of this NetworkACL
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.PrivateEndpoint[i3].ID")
 		}
-		mg.Spec.InitProvider.PrivateEndpoint[i3].ID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.PrivateEndpoint[i3].ID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.PrivateEndpoint[i3].IDRef = rsp.ResolvedReference
 
 	}
@@ -93,7 +94,7 @@ func (mg *NetworkACL) ResolveReferences( // ResolveReferences of this NetworkACL
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SignalrServiceID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.SignalrServiceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.SignalrServiceIDRef,
 			Selector:     mg.Spec.InitProvider.SignalrServiceIDSelector,
@@ -103,7 +104,7 @@ func (mg *NetworkACL) ResolveReferences( // ResolveReferences of this NetworkACL
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.SignalrServiceID")
 	}
-	mg.Spec.InitProvider.SignalrServiceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SignalrServiceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.SignalrServiceIDRef = rsp.ResolvedReference
 
 	return nil
@@ -124,7 +125,7 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -134,7 +135,7 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -155,7 +156,7 @@ func (mg *SignalrSharedPrivateLinkResource) ResolveReferences(ctx context.Contex
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SignalrServiceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.SignalrServiceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.SignalrServiceIDRef,
 			Selector:     mg.Spec.ForProvider.SignalrServiceIDSelector,
@@ -165,7 +166,7 @@ func (mg *SignalrSharedPrivateLinkResource) ResolveReferences(ctx context.Contex
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.SignalrServiceID")
 	}
-	mg.Spec.ForProvider.SignalrServiceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SignalrServiceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SignalrServiceIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta2", "Vault", "VaultList")
@@ -174,7 +175,7 @@ func (mg *SignalrSharedPrivateLinkResource) ResolveReferences(ctx context.Contex
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TargetResourceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.TargetResourceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.TargetResourceIDRef,
 			Selector:     mg.Spec.ForProvider.TargetResourceIDSelector,
@@ -184,7 +185,7 @@ func (mg *SignalrSharedPrivateLinkResource) ResolveReferences(ctx context.Contex
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.TargetResourceID")
 	}
-	mg.Spec.ForProvider.TargetResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.TargetResourceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TargetResourceIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("signalrservice.azure.upbound.io", "v1beta2", "Service", "ServiceList")
@@ -193,7 +194,7 @@ func (mg *SignalrSharedPrivateLinkResource) ResolveReferences(ctx context.Contex
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SignalrServiceID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.SignalrServiceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.SignalrServiceIDRef,
 			Selector:     mg.Spec.InitProvider.SignalrServiceIDSelector,
@@ -203,7 +204,7 @@ func (mg *SignalrSharedPrivateLinkResource) ResolveReferences(ctx context.Contex
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.SignalrServiceID")
 	}
-	mg.Spec.InitProvider.SignalrServiceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SignalrServiceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.SignalrServiceIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta2", "Vault", "VaultList")
@@ -212,7 +213,7 @@ func (mg *SignalrSharedPrivateLinkResource) ResolveReferences(ctx context.Contex
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TargetResourceID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.TargetResourceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.TargetResourceIDRef,
 			Selector:     mg.Spec.InitProvider.TargetResourceIDSelector,
@@ -222,7 +223,7 @@ func (mg *SignalrSharedPrivateLinkResource) ResolveReferences(ctx context.Contex
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.TargetResourceID")
 	}
-	mg.Spec.InitProvider.TargetResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.TargetResourceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.TargetResourceIDRef = rsp.ResolvedReference
 
 	return nil
@@ -243,7 +244,7 @@ func (mg *WebPubsub) ResolveReferences(ctx context.Context, c client.Reader) err
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -253,7 +254,7 @@ func (mg *WebPubsub) ResolveReferences(ctx context.Context, c client.Reader) err
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -262,7 +263,7 @@ func (mg *WebPubsub) ResolveReferences(ctx context.Context, c client.Reader) err
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
@@ -272,7 +273,7 @@ func (mg *WebPubsub) ResolveReferences(ctx context.Context, c client.Reader) err
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
 	}
-	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -295,7 +296,7 @@ func (mg *WebPubsubHub) ResolveReferences(ctx context.Context, c client.Reader) 
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EventHandler[i3].Auth[i4].ManagedIdentityID),
+					CurrentValue: ptr.Deref(mg.Spec.ForProvider.EventHandler[i3].Auth[i4].ManagedIdentityID, ""),
 					Extract:      resource.ExtractResourceID(),
 					Reference:    mg.Spec.ForProvider.EventHandler[i3].Auth[i4].ManagedIdentityIDRef,
 					Selector:     mg.Spec.ForProvider.EventHandler[i3].Auth[i4].ManagedIdentityIDSelector,
@@ -305,7 +306,7 @@ func (mg *WebPubsubHub) ResolveReferences(ctx context.Context, c client.Reader) 
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.ForProvider.EventHandler[i3].Auth[i4].ManagedIdentityID")
 			}
-			mg.Spec.ForProvider.EventHandler[i3].Auth[i4].ManagedIdentityID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.EventHandler[i3].Auth[i4].ManagedIdentityID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.ForProvider.EventHandler[i3].Auth[i4].ManagedIdentityIDRef = rsp.ResolvedReference
 
 		}
@@ -317,7 +318,7 @@ func (mg *WebPubsubHub) ResolveReferences(ctx context.Context, c client.Reader) 
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EventListener[i3].EventHubName),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.EventListener[i3].EventHubName, ""),
 				Extract:      reference.ExternalName(),
 				Reference:    mg.Spec.ForProvider.EventListener[i3].EventHubNameRef,
 				Selector:     mg.Spec.ForProvider.EventListener[i3].EventHubNameSelector,
@@ -327,7 +328,7 @@ func (mg *WebPubsubHub) ResolveReferences(ctx context.Context, c client.Reader) 
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.EventListener[i3].EventHubName")
 		}
-		mg.Spec.ForProvider.EventListener[i3].EventHubName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.EventListener[i3].EventHubName = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.EventListener[i3].EventHubNameRef = rsp.ResolvedReference
 
 	}
@@ -338,7 +339,7 @@ func (mg *WebPubsubHub) ResolveReferences(ctx context.Context, c client.Reader) 
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EventListener[i3].EventHubNamespaceName),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.EventListener[i3].EventHubNamespaceName, ""),
 				Extract:      reference.ExternalName(),
 				Reference:    mg.Spec.ForProvider.EventListener[i3].EventHubNamespaceNameRef,
 				Selector:     mg.Spec.ForProvider.EventListener[i3].EventHubNamespaceNameSelector,
@@ -348,7 +349,7 @@ func (mg *WebPubsubHub) ResolveReferences(ctx context.Context, c client.Reader) 
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.EventListener[i3].EventHubNamespaceName")
 		}
-		mg.Spec.ForProvider.EventListener[i3].EventHubNamespaceName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.EventListener[i3].EventHubNamespaceName = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.EventListener[i3].EventHubNamespaceNameRef = rsp.ResolvedReference
 
 	}
@@ -358,7 +359,7 @@ func (mg *WebPubsubHub) ResolveReferences(ctx context.Context, c client.Reader) 
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WebPubsubID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.WebPubsubID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.WebPubsubIDRef,
 			Selector:     mg.Spec.ForProvider.WebPubsubIDSelector,
@@ -368,7 +369,7 @@ func (mg *WebPubsubHub) ResolveReferences(ctx context.Context, c client.Reader) 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.WebPubsubID")
 	}
-	mg.Spec.ForProvider.WebPubsubID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.WebPubsubID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.WebPubsubIDRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.EventHandler); i3++ {
@@ -379,7 +380,7 @@ func (mg *WebPubsubHub) ResolveReferences(ctx context.Context, c client.Reader) 
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EventHandler[i3].Auth[i4].ManagedIdentityID),
+					CurrentValue: ptr.Deref(mg.Spec.InitProvider.EventHandler[i3].Auth[i4].ManagedIdentityID, ""),
 					Extract:      resource.ExtractResourceID(),
 					Reference:    mg.Spec.InitProvider.EventHandler[i3].Auth[i4].ManagedIdentityIDRef,
 					Selector:     mg.Spec.InitProvider.EventHandler[i3].Auth[i4].ManagedIdentityIDSelector,
@@ -389,7 +390,7 @@ func (mg *WebPubsubHub) ResolveReferences(ctx context.Context, c client.Reader) 
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.InitProvider.EventHandler[i3].Auth[i4].ManagedIdentityID")
 			}
-			mg.Spec.InitProvider.EventHandler[i3].Auth[i4].ManagedIdentityID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.EventHandler[i3].Auth[i4].ManagedIdentityID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.InitProvider.EventHandler[i3].Auth[i4].ManagedIdentityIDRef = rsp.ResolvedReference
 
 		}
@@ -401,7 +402,7 @@ func (mg *WebPubsubHub) ResolveReferences(ctx context.Context, c client.Reader) 
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EventListener[i3].EventHubName),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.EventListener[i3].EventHubName, ""),
 				Extract:      reference.ExternalName(),
 				Reference:    mg.Spec.InitProvider.EventListener[i3].EventHubNameRef,
 				Selector:     mg.Spec.InitProvider.EventListener[i3].EventHubNameSelector,
@@ -411,7 +412,7 @@ func (mg *WebPubsubHub) ResolveReferences(ctx context.Context, c client.Reader) 
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.EventListener[i3].EventHubName")
 		}
-		mg.Spec.InitProvider.EventListener[i3].EventHubName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.EventListener[i3].EventHubName = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.EventListener[i3].EventHubNameRef = rsp.ResolvedReference
 
 	}
@@ -422,7 +423,7 @@ func (mg *WebPubsubHub) ResolveReferences(ctx context.Context, c client.Reader) 
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EventListener[i3].EventHubNamespaceName),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.EventListener[i3].EventHubNamespaceName, ""),
 				Extract:      reference.ExternalName(),
 				Reference:    mg.Spec.InitProvider.EventListener[i3].EventHubNamespaceNameRef,
 				Selector:     mg.Spec.InitProvider.EventListener[i3].EventHubNamespaceNameSelector,
@@ -432,7 +433,7 @@ func (mg *WebPubsubHub) ResolveReferences(ctx context.Context, c client.Reader) 
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.EventListener[i3].EventHubNamespaceName")
 		}
-		mg.Spec.InitProvider.EventListener[i3].EventHubNamespaceName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.EventListener[i3].EventHubNamespaceName = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.EventListener[i3].EventHubNamespaceNameRef = rsp.ResolvedReference
 
 	}
@@ -442,7 +443,7 @@ func (mg *WebPubsubHub) ResolveReferences(ctx context.Context, c client.Reader) 
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.WebPubsubID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.WebPubsubID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.WebPubsubIDRef,
 			Selector:     mg.Spec.InitProvider.WebPubsubIDSelector,
@@ -452,7 +453,7 @@ func (mg *WebPubsubHub) ResolveReferences(ctx context.Context, c client.Reader) 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.WebPubsubID")
 	}
-	mg.Spec.InitProvider.WebPubsubID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.WebPubsubID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.WebPubsubIDRef = rsp.ResolvedReference
 
 	return nil
@@ -474,7 +475,7 @@ func (mg *WebPubsubNetworkACL) ResolveReferences(ctx context.Context, c client.R
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrivateEndpoint[i3].ID),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.PrivateEndpoint[i3].ID, ""),
 				Extract:      resource.ExtractResourceID(),
 				Reference:    mg.Spec.ForProvider.PrivateEndpoint[i3].IDRef,
 				Selector:     mg.Spec.ForProvider.PrivateEndpoint[i3].IDSelector,
@@ -484,7 +485,7 @@ func (mg *WebPubsubNetworkACL) ResolveReferences(ctx context.Context, c client.R
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.PrivateEndpoint[i3].ID")
 		}
-		mg.Spec.ForProvider.PrivateEndpoint[i3].ID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.PrivateEndpoint[i3].ID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.PrivateEndpoint[i3].IDRef = rsp.ResolvedReference
 
 	}
@@ -494,7 +495,7 @@ func (mg *WebPubsubNetworkACL) ResolveReferences(ctx context.Context, c client.R
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WebPubsubID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.WebPubsubID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.WebPubsubIDRef,
 			Selector:     mg.Spec.ForProvider.WebPubsubIDSelector,
@@ -504,7 +505,7 @@ func (mg *WebPubsubNetworkACL) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.WebPubsubID")
 	}
-	mg.Spec.ForProvider.WebPubsubID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.WebPubsubID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.WebPubsubIDRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.PrivateEndpoint); i3++ {
@@ -514,7 +515,7 @@ func (mg *WebPubsubNetworkACL) ResolveReferences(ctx context.Context, c client.R
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrivateEndpoint[i3].ID),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.PrivateEndpoint[i3].ID, ""),
 				Extract:      resource.ExtractResourceID(),
 				Reference:    mg.Spec.InitProvider.PrivateEndpoint[i3].IDRef,
 				Selector:     mg.Spec.InitProvider.PrivateEndpoint[i3].IDSelector,
@@ -524,7 +525,7 @@ func (mg *WebPubsubNetworkACL) ResolveReferences(ctx context.Context, c client.R
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.PrivateEndpoint[i3].ID")
 		}
-		mg.Spec.InitProvider.PrivateEndpoint[i3].ID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.PrivateEndpoint[i3].ID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.PrivateEndpoint[i3].IDRef = rsp.ResolvedReference
 
 	}
@@ -534,7 +535,7 @@ func (mg *WebPubsubNetworkACL) ResolveReferences(ctx context.Context, c client.R
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.WebPubsubID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.WebPubsubID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.WebPubsubIDRef,
 			Selector:     mg.Spec.InitProvider.WebPubsubIDSelector,
@@ -544,7 +545,7 @@ func (mg *WebPubsubNetworkACL) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.WebPubsubID")
 	}
-	mg.Spec.InitProvider.WebPubsubID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.WebPubsubID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.WebPubsubIDRef = rsp.ResolvedReference
 
 	return nil

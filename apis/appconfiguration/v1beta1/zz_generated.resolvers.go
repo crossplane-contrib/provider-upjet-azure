@@ -9,11 +9,13 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
+	helper "github.com/crossplane/crossplane-tools/pkg/helpers"
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -34,7 +36,7 @@ func (mg *Configuration) ResolveReferences( // ResolveReferences of this Configu
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Encryption[i3].IdentityClientID),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.Encryption[i3].IdentityClientID, ""),
 				Extract:      resource.ExtractParamPath("client_id", true),
 				Reference:    mg.Spec.ForProvider.Encryption[i3].IdentityClientIDRef,
 				Selector:     mg.Spec.ForProvider.Encryption[i3].IdentityClientIDSelector,
@@ -44,7 +46,7 @@ func (mg *Configuration) ResolveReferences( // ResolveReferences of this Configu
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.Encryption[i3].IdentityClientID")
 		}
-		mg.Spec.ForProvider.Encryption[i3].IdentityClientID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Encryption[i3].IdentityClientID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.Encryption[i3].IdentityClientIDRef = rsp.ResolvedReference
 
 	}
@@ -55,7 +57,7 @@ func (mg *Configuration) ResolveReferences( // ResolveReferences of this Configu
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Encryption[i3].KeyVaultKeyIdentifier),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.Encryption[i3].KeyVaultKeyIdentifier, ""),
 				Extract:      resource.ExtractResourceID(),
 				Reference:    mg.Spec.ForProvider.Encryption[i3].KeyVaultKeyIdentifierRef,
 				Selector:     mg.Spec.ForProvider.Encryption[i3].KeyVaultKeyIdentifierSelector,
@@ -65,7 +67,7 @@ func (mg *Configuration) ResolveReferences( // ResolveReferences of this Configu
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.Encryption[i3].KeyVaultKeyIdentifier")
 		}
-		mg.Spec.ForProvider.Encryption[i3].KeyVaultKeyIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Encryption[i3].KeyVaultKeyIdentifier = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.Encryption[i3].KeyVaultKeyIdentifierRef = rsp.ResolvedReference
 
 	}
@@ -76,7 +78,7 @@ func (mg *Configuration) ResolveReferences( // ResolveReferences of this Configu
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Identity[i3].IdentityIds),
+				CurrentValues: helper.FromPtrValues(mg.Spec.ForProvider.Identity[i3].IdentityIds),
 				Extract:       resource.ExtractResourceID(),
 				References:    mg.Spec.ForProvider.Identity[i3].IdentityIdsRefs,
 				Selector:      mg.Spec.ForProvider.Identity[i3].IdentityIdsSelector,
@@ -86,7 +88,7 @@ func (mg *Configuration) ResolveReferences( // ResolveReferences of this Configu
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.Identity[i3].IdentityIds")
 		}
-		mg.Spec.ForProvider.Identity[i3].IdentityIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.ForProvider.Identity[i3].IdentityIds = helper.ToPtrValues(mrsp.ResolvedValues)
 		mg.Spec.ForProvider.Identity[i3].IdentityIdsRefs = mrsp.ResolvedReferences
 
 	}
@@ -96,7 +98,7 @@ func (mg *Configuration) ResolveReferences( // ResolveReferences of this Configu
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -106,7 +108,7 @@ func (mg *Configuration) ResolveReferences( // ResolveReferences of this Configu
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.Encryption); i3++ {
@@ -116,7 +118,7 @@ func (mg *Configuration) ResolveReferences( // ResolveReferences of this Configu
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Encryption[i3].IdentityClientID),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.Encryption[i3].IdentityClientID, ""),
 				Extract:      resource.ExtractParamPath("client_id", true),
 				Reference:    mg.Spec.InitProvider.Encryption[i3].IdentityClientIDRef,
 				Selector:     mg.Spec.InitProvider.Encryption[i3].IdentityClientIDSelector,
@@ -126,7 +128,7 @@ func (mg *Configuration) ResolveReferences( // ResolveReferences of this Configu
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.Encryption[i3].IdentityClientID")
 		}
-		mg.Spec.InitProvider.Encryption[i3].IdentityClientID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Encryption[i3].IdentityClientID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.Encryption[i3].IdentityClientIDRef = rsp.ResolvedReference
 
 	}
@@ -137,7 +139,7 @@ func (mg *Configuration) ResolveReferences( // ResolveReferences of this Configu
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Encryption[i3].KeyVaultKeyIdentifier),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.Encryption[i3].KeyVaultKeyIdentifier, ""),
 				Extract:      resource.ExtractResourceID(),
 				Reference:    mg.Spec.InitProvider.Encryption[i3].KeyVaultKeyIdentifierRef,
 				Selector:     mg.Spec.InitProvider.Encryption[i3].KeyVaultKeyIdentifierSelector,
@@ -147,7 +149,7 @@ func (mg *Configuration) ResolveReferences( // ResolveReferences of this Configu
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.Encryption[i3].KeyVaultKeyIdentifier")
 		}
-		mg.Spec.InitProvider.Encryption[i3].KeyVaultKeyIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Encryption[i3].KeyVaultKeyIdentifier = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.Encryption[i3].KeyVaultKeyIdentifierRef = rsp.ResolvedReference
 
 	}
@@ -158,7 +160,7 @@ func (mg *Configuration) ResolveReferences( // ResolveReferences of this Configu
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Identity[i3].IdentityIds),
+				CurrentValues: helper.FromPtrValues(mg.Spec.InitProvider.Identity[i3].IdentityIds),
 				Extract:       resource.ExtractResourceID(),
 				References:    mg.Spec.InitProvider.Identity[i3].IdentityIdsRefs,
 				Selector:      mg.Spec.InitProvider.Identity[i3].IdentityIdsSelector,
@@ -168,7 +170,7 @@ func (mg *Configuration) ResolveReferences( // ResolveReferences of this Configu
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.Identity[i3].IdentityIds")
 		}
-		mg.Spec.InitProvider.Identity[i3].IdentityIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.Identity[i3].IdentityIds = helper.ToPtrValues(mrsp.ResolvedValues)
 		mg.Spec.InitProvider.Identity[i3].IdentityIdsRefs = mrsp.ResolvedReferences
 
 	}

@@ -9,11 +9,13 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
+	helper "github.com/crossplane/crossplane-tools/pkg/helpers"
 	errors "github.com/pkg/errors"
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	rconfig "github.com/upbound/provider-azure/apis/rconfig"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -34,7 +36,7 @@ func (mg *ResourceDeploymentScriptAzureCli) ResolveReferences( // ResolveReferen
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Identity[i3].IdentityIds),
+				CurrentValues: helper.FromPtrValues(mg.Spec.ForProvider.Identity[i3].IdentityIds),
 				Extract:       rconfig.ExtractResourceID(),
 				References:    mg.Spec.ForProvider.Identity[i3].IdentityIdsRefs,
 				Selector:      mg.Spec.ForProvider.Identity[i3].IdentityIdsSelector,
@@ -44,7 +46,7 @@ func (mg *ResourceDeploymentScriptAzureCli) ResolveReferences( // ResolveReferen
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.Identity[i3].IdentityIds")
 		}
-		mg.Spec.ForProvider.Identity[i3].IdentityIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.ForProvider.Identity[i3].IdentityIds = helper.ToPtrValues(mrsp.ResolvedValues)
 		mg.Spec.ForProvider.Identity[i3].IdentityIdsRefs = mrsp.ResolvedReferences
 
 	}
@@ -54,7 +56,7 @@ func (mg *ResourceDeploymentScriptAzureCli) ResolveReferences( // ResolveReferen
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -64,7 +66,7 @@ func (mg *ResourceDeploymentScriptAzureCli) ResolveReferences( // ResolveReferen
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.Identity); i3++ {
@@ -74,7 +76,7 @@ func (mg *ResourceDeploymentScriptAzureCli) ResolveReferences( // ResolveReferen
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Identity[i3].IdentityIds),
+				CurrentValues: helper.FromPtrValues(mg.Spec.InitProvider.Identity[i3].IdentityIds),
 				Extract:       rconfig.ExtractResourceID(),
 				References:    mg.Spec.InitProvider.Identity[i3].IdentityIdsRefs,
 				Selector:      mg.Spec.InitProvider.Identity[i3].IdentityIdsSelector,
@@ -84,7 +86,7 @@ func (mg *ResourceDeploymentScriptAzureCli) ResolveReferences( // ResolveReferen
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.Identity[i3].IdentityIds")
 		}
-		mg.Spec.InitProvider.Identity[i3].IdentityIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.Identity[i3].IdentityIds = helper.ToPtrValues(mrsp.ResolvedValues)
 		mg.Spec.InitProvider.Identity[i3].IdentityIdsRefs = mrsp.ResolvedReferences
 
 	}
@@ -94,7 +96,7 @@ func (mg *ResourceDeploymentScriptAzureCli) ResolveReferences( // ResolveReferen
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
@@ -104,7 +106,7 @@ func (mg *ResourceDeploymentScriptAzureCli) ResolveReferences( // ResolveReferen
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
 	}
-	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -127,7 +129,7 @@ func (mg *ResourceDeploymentScriptAzurePowerShell) ResolveReferences(ctx context
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Identity[i3].IdentityIds),
+				CurrentValues: helper.FromPtrValues(mg.Spec.ForProvider.Identity[i3].IdentityIds),
 				Extract:       rconfig.ExtractResourceID(),
 				References:    mg.Spec.ForProvider.Identity[i3].IdentityIdsRefs,
 				Selector:      mg.Spec.ForProvider.Identity[i3].IdentityIdsSelector,
@@ -137,7 +139,7 @@ func (mg *ResourceDeploymentScriptAzurePowerShell) ResolveReferences(ctx context
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.Identity[i3].IdentityIds")
 		}
-		mg.Spec.ForProvider.Identity[i3].IdentityIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.ForProvider.Identity[i3].IdentityIds = helper.ToPtrValues(mrsp.ResolvedValues)
 		mg.Spec.ForProvider.Identity[i3].IdentityIdsRefs = mrsp.ResolvedReferences
 
 	}
@@ -147,7 +149,7 @@ func (mg *ResourceDeploymentScriptAzurePowerShell) ResolveReferences(ctx context
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -157,7 +159,7 @@ func (mg *ResourceDeploymentScriptAzurePowerShell) ResolveReferences(ctx context
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.Identity); i3++ {
@@ -167,7 +169,7 @@ func (mg *ResourceDeploymentScriptAzurePowerShell) ResolveReferences(ctx context
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Identity[i3].IdentityIds),
+				CurrentValues: helper.FromPtrValues(mg.Spec.InitProvider.Identity[i3].IdentityIds),
 				Extract:       rconfig.ExtractResourceID(),
 				References:    mg.Spec.InitProvider.Identity[i3].IdentityIdsRefs,
 				Selector:      mg.Spec.InitProvider.Identity[i3].IdentityIdsSelector,
@@ -177,7 +179,7 @@ func (mg *ResourceDeploymentScriptAzurePowerShell) ResolveReferences(ctx context
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.Identity[i3].IdentityIds")
 		}
-		mg.Spec.InitProvider.Identity[i3].IdentityIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.Identity[i3].IdentityIds = helper.ToPtrValues(mrsp.ResolvedValues)
 		mg.Spec.InitProvider.Identity[i3].IdentityIdsRefs = mrsp.ResolvedReferences
 
 	}
@@ -187,7 +189,7 @@ func (mg *ResourceDeploymentScriptAzurePowerShell) ResolveReferences(ctx context
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
@@ -197,7 +199,7 @@ func (mg *ResourceDeploymentScriptAzurePowerShell) ResolveReferences(ctx context
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
 	}
-	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -218,7 +220,7 @@ func (mg *ResourceGroupTemplateDeployment) ResolveReferences(ctx context.Context
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -228,7 +230,7 @@ func (mg *ResourceGroupTemplateDeployment) ResolveReferences(ctx context.Context
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil

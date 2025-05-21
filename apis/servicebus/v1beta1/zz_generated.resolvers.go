@@ -16,6 +16,7 @@ import (
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -34,7 +35,7 @@ func (mg *NamespaceAuthorizationRule) ResolveReferences( // ResolveReferences of
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NamespaceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.NamespaceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.NamespaceIDRef,
 			Selector:     mg.Spec.ForProvider.NamespaceIDSelector,
@@ -44,7 +45,7 @@ func (mg *NamespaceAuthorizationRule) ResolveReferences( // ResolveReferences of
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.NamespaceID")
 	}
-	mg.Spec.ForProvider.NamespaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.NamespaceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NamespaceIDRef = rsp.ResolvedReference
 
 	return nil
@@ -65,7 +66,7 @@ func (mg *NamespaceDisasterRecoveryConfig) ResolveReferences(ctx context.Context
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AliasAuthorizationRuleID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.AliasAuthorizationRuleID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.AliasAuthorizationRuleIDRef,
 			Selector:     mg.Spec.ForProvider.AliasAuthorizationRuleIDSelector,
@@ -75,7 +76,7 @@ func (mg *NamespaceDisasterRecoveryConfig) ResolveReferences(ctx context.Context
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.AliasAuthorizationRuleID")
 	}
-	mg.Spec.ForProvider.AliasAuthorizationRuleID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AliasAuthorizationRuleID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AliasAuthorizationRuleIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("servicebus.azure.upbound.io", "v1beta2", "ServiceBusNamespace", "ServiceBusNamespaceList")
@@ -84,7 +85,7 @@ func (mg *NamespaceDisasterRecoveryConfig) ResolveReferences(ctx context.Context
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PartnerNamespaceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.PartnerNamespaceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.PartnerNamespaceIDRef,
 			Selector:     mg.Spec.ForProvider.PartnerNamespaceIDSelector,
@@ -94,7 +95,7 @@ func (mg *NamespaceDisasterRecoveryConfig) ResolveReferences(ctx context.Context
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.PartnerNamespaceID")
 	}
-	mg.Spec.ForProvider.PartnerNamespaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.PartnerNamespaceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PartnerNamespaceIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("servicebus.azure.upbound.io", "v1beta2", "ServiceBusNamespace", "ServiceBusNamespaceList")
@@ -103,7 +104,7 @@ func (mg *NamespaceDisasterRecoveryConfig) ResolveReferences(ctx context.Context
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrimaryNamespaceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.PrimaryNamespaceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.PrimaryNamespaceIDRef,
 			Selector:     mg.Spec.ForProvider.PrimaryNamespaceIDSelector,
@@ -113,7 +114,7 @@ func (mg *NamespaceDisasterRecoveryConfig) ResolveReferences(ctx context.Context
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.PrimaryNamespaceID")
 	}
-	mg.Spec.ForProvider.PrimaryNamespaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.PrimaryNamespaceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PrimaryNamespaceIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("servicebus.azure.upbound.io", "v1beta1", "NamespaceAuthorizationRule", "NamespaceAuthorizationRuleList")
@@ -122,7 +123,7 @@ func (mg *NamespaceDisasterRecoveryConfig) ResolveReferences(ctx context.Context
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AliasAuthorizationRuleID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.AliasAuthorizationRuleID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.AliasAuthorizationRuleIDRef,
 			Selector:     mg.Spec.InitProvider.AliasAuthorizationRuleIDSelector,
@@ -132,7 +133,7 @@ func (mg *NamespaceDisasterRecoveryConfig) ResolveReferences(ctx context.Context
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.AliasAuthorizationRuleID")
 	}
-	mg.Spec.InitProvider.AliasAuthorizationRuleID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.AliasAuthorizationRuleID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.AliasAuthorizationRuleIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("servicebus.azure.upbound.io", "v1beta2", "ServiceBusNamespace", "ServiceBusNamespaceList")
@@ -141,7 +142,7 @@ func (mg *NamespaceDisasterRecoveryConfig) ResolveReferences(ctx context.Context
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PartnerNamespaceID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.PartnerNamespaceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.PartnerNamespaceIDRef,
 			Selector:     mg.Spec.InitProvider.PartnerNamespaceIDSelector,
@@ -151,7 +152,7 @@ func (mg *NamespaceDisasterRecoveryConfig) ResolveReferences(ctx context.Context
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.PartnerNamespaceID")
 	}
-	mg.Spec.InitProvider.PartnerNamespaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PartnerNamespaceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.PartnerNamespaceIDRef = rsp.ResolvedReference
 
 	return nil
@@ -172,7 +173,7 @@ func (mg *NamespaceNetworkRuleSet) ResolveReferences(ctx context.Context, c clie
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NamespaceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.NamespaceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.NamespaceIDRef,
 			Selector:     mg.Spec.ForProvider.NamespaceIDSelector,
@@ -182,7 +183,7 @@ func (mg *NamespaceNetworkRuleSet) ResolveReferences(ctx context.Context, c clie
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.NamespaceID")
 	}
-	mg.Spec.ForProvider.NamespaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.NamespaceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NamespaceIDRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.NetworkRules); i3++ {
@@ -192,7 +193,7 @@ func (mg *NamespaceNetworkRuleSet) ResolveReferences(ctx context.Context, c clie
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkRules[i3].SubnetID),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.NetworkRules[i3].SubnetID, ""),
 				Extract:      resource.ExtractResourceID(),
 				Reference:    mg.Spec.ForProvider.NetworkRules[i3].SubnetIDRef,
 				Selector:     mg.Spec.ForProvider.NetworkRules[i3].SubnetIDSelector,
@@ -202,7 +203,7 @@ func (mg *NamespaceNetworkRuleSet) ResolveReferences(ctx context.Context, c clie
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.NetworkRules[i3].SubnetID")
 		}
-		mg.Spec.ForProvider.NetworkRules[i3].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.NetworkRules[i3].SubnetID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.NetworkRules[i3].SubnetIDRef = rsp.ResolvedReference
 
 	}
@@ -212,7 +213,7 @@ func (mg *NamespaceNetworkRuleSet) ResolveReferences(ctx context.Context, c clie
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NamespaceID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.NamespaceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.NamespaceIDRef,
 			Selector:     mg.Spec.InitProvider.NamespaceIDSelector,
@@ -222,7 +223,7 @@ func (mg *NamespaceNetworkRuleSet) ResolveReferences(ctx context.Context, c clie
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.NamespaceID")
 	}
-	mg.Spec.InitProvider.NamespaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.NamespaceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.NamespaceIDRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.NetworkRules); i3++ {
@@ -232,7 +233,7 @@ func (mg *NamespaceNetworkRuleSet) ResolveReferences(ctx context.Context, c clie
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkRules[i3].SubnetID),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.NetworkRules[i3].SubnetID, ""),
 				Extract:      resource.ExtractResourceID(),
 				Reference:    mg.Spec.InitProvider.NetworkRules[i3].SubnetIDRef,
 				Selector:     mg.Spec.InitProvider.NetworkRules[i3].SubnetIDSelector,
@@ -242,7 +243,7 @@ func (mg *NamespaceNetworkRuleSet) ResolveReferences(ctx context.Context, c clie
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.NetworkRules[i3].SubnetID")
 		}
-		mg.Spec.InitProvider.NetworkRules[i3].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.NetworkRules[i3].SubnetID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.NetworkRules[i3].SubnetIDRef = rsp.ResolvedReference
 
 	}
@@ -265,7 +266,7 @@ func (mg *Queue) ResolveReferences(ctx context.Context, c client.Reader) error {
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NamespaceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.NamespaceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.NamespaceIDRef,
 			Selector:     mg.Spec.ForProvider.NamespaceIDSelector,
@@ -275,7 +276,7 @@ func (mg *Queue) ResolveReferences(ctx context.Context, c client.Reader) error {
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.NamespaceID")
 	}
-	mg.Spec.ForProvider.NamespaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.NamespaceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NamespaceIDRef = rsp.ResolvedReference
 
 	return nil
@@ -296,7 +297,7 @@ func (mg *QueueAuthorizationRule) ResolveReferences(ctx context.Context, c clien
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.QueueID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.QueueID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.QueueIDRef,
 			Selector:     mg.Spec.ForProvider.QueueIDSelector,
@@ -306,7 +307,7 @@ func (mg *QueueAuthorizationRule) ResolveReferences(ctx context.Context, c clien
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.QueueID")
 	}
-	mg.Spec.ForProvider.QueueID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.QueueID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.QueueIDRef = rsp.ResolvedReference
 
 	return nil
@@ -329,7 +330,7 @@ func (mg *ServiceBusNamespace) ResolveReferences(ctx context.Context, c client.R
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkRuleSet[i3].NetworkRules[i4].SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.ForProvider.NetworkRuleSet[i3].NetworkRules[i4].SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.ForProvider.NetworkRuleSet[i3].NetworkRules[i4].SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.NetworkRuleSet[i3].NetworkRules[i4].SubnetIDSelector,
@@ -339,7 +340,7 @@ func (mg *ServiceBusNamespace) ResolveReferences(ctx context.Context, c client.R
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.ForProvider.NetworkRuleSet[i3].NetworkRules[i4].SubnetID")
 			}
-			mg.Spec.ForProvider.NetworkRuleSet[i3].NetworkRules[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.NetworkRuleSet[i3].NetworkRules[i4].SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.ForProvider.NetworkRuleSet[i3].NetworkRules[i4].SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -350,7 +351,7 @@ func (mg *ServiceBusNamespace) ResolveReferences(ctx context.Context, c client.R
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -360,7 +361,7 @@ func (mg *ServiceBusNamespace) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.NetworkRuleSet); i3++ {
@@ -371,7 +372,7 @@ func (mg *ServiceBusNamespace) ResolveReferences(ctx context.Context, c client.R
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkRuleSet[i3].NetworkRules[i4].SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.InitProvider.NetworkRuleSet[i3].NetworkRules[i4].SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.InitProvider.NetworkRuleSet[i3].NetworkRules[i4].SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.NetworkRuleSet[i3].NetworkRules[i4].SubnetIDSelector,
@@ -381,7 +382,7 @@ func (mg *ServiceBusNamespace) ResolveReferences(ctx context.Context, c client.R
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.InitProvider.NetworkRuleSet[i3].NetworkRules[i4].SubnetID")
 			}
-			mg.Spec.InitProvider.NetworkRuleSet[i3].NetworkRules[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.NetworkRuleSet[i3].NetworkRules[i4].SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.InitProvider.NetworkRuleSet[i3].NetworkRules[i4].SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -405,7 +406,7 @@ func (mg *Subscription) ResolveReferences(ctx context.Context, c client.Reader) 
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TopicID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.TopicID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.TopicIDRef,
 			Selector:     mg.Spec.ForProvider.TopicIDSelector,
@@ -415,7 +416,7 @@ func (mg *Subscription) ResolveReferences(ctx context.Context, c client.Reader) 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.TopicID")
 	}
-	mg.Spec.ForProvider.TopicID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.TopicID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TopicIDRef = rsp.ResolvedReference
 
 	return nil
@@ -436,7 +437,7 @@ func (mg *SubscriptionRule) ResolveReferences(ctx context.Context, c client.Read
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubscriptionID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.SubscriptionID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.SubscriptionIDRef,
 			Selector:     mg.Spec.ForProvider.SubscriptionIDSelector,
@@ -446,7 +447,7 @@ func (mg *SubscriptionRule) ResolveReferences(ctx context.Context, c client.Read
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.SubscriptionID")
 	}
-	mg.Spec.ForProvider.SubscriptionID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SubscriptionID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SubscriptionIDRef = rsp.ResolvedReference
 
 	return nil
@@ -467,7 +468,7 @@ func (mg *Topic) ResolveReferences(ctx context.Context, c client.Reader) error {
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NamespaceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.NamespaceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.NamespaceIDRef,
 			Selector:     mg.Spec.ForProvider.NamespaceIDSelector,
@@ -477,7 +478,7 @@ func (mg *Topic) ResolveReferences(ctx context.Context, c client.Reader) error {
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.NamespaceID")
 	}
-	mg.Spec.ForProvider.NamespaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.NamespaceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NamespaceIDRef = rsp.ResolvedReference
 
 	return nil
@@ -498,7 +499,7 @@ func (mg *TopicAuthorizationRule) ResolveReferences(ctx context.Context, c clien
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TopicID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.TopicID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.TopicIDRef,
 			Selector:     mg.Spec.ForProvider.TopicIDSelector,
@@ -508,7 +509,7 @@ func (mg *TopicAuthorizationRule) ResolveReferences(ctx context.Context, c clien
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.TopicID")
 	}
-	mg.Spec.ForProvider.TopicID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.TopicID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TopicIDRef = rsp.ResolvedReference
 
 	return nil
