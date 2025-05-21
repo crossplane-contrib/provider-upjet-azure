@@ -660,6 +660,7 @@ import (
 	mssqlmanagedinstance "github.com/upbound/provider-azure/internal/controller/sql/mssqlmanagedinstance"
 	mssqlmanagedinstanceactivedirectoryadministrator "github.com/upbound/provider-azure/internal/controller/sql/mssqlmanagedinstanceactivedirectoryadministrator"
 	mssqlmanagedinstancefailovergroup "github.com/upbound/provider-azure/internal/controller/sql/mssqlmanagedinstancefailovergroup"
+	mssqlmanagedinstancetransparentdataencryption "github.com/upbound/provider-azure/internal/controller/sql/mssqlmanagedinstancetransparentdataencryption"
 	mssqlmanagedinstancevulnerabilityassessment "github.com/upbound/provider-azure/internal/controller/sql/mssqlmanagedinstancevulnerabilityassessment"
 	mssqloutboundfirewallrule "github.com/upbound/provider-azure/internal/controller/sql/mssqloutboundfirewallrule"
 	mssqlserver "github.com/upbound/provider-azure/internal/controller/sql/mssqlserver"
@@ -1414,6 +1415,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		mssqlmanagedinstance.Setup,
 		mssqlmanagedinstanceactivedirectoryadministrator.Setup,
 		mssqlmanagedinstancefailovergroup.Setup,
+		mssqlmanagedinstancetransparentdataencryption.Setup,
 		mssqlmanagedinstancevulnerabilityassessment.Setup,
 		mssqloutboundfirewallrule.Setup,
 		mssqlserver.Setup,

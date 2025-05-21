@@ -25,6 +25,9 @@ func (tr *MSSQLJobCredential) Hub() {}
 func (tr *MSSQLManagedInstanceActiveDirectoryAdministrator) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *MSSQLManagedInstanceTransparentDataEncryption) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *MSSQLOutboundFirewallRule) Hub() {}
 
 // Hub marks this type as a conversion hub.

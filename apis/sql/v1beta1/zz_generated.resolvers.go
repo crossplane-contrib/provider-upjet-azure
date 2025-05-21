@@ -820,6 +820,75 @@ func (mg *MSSQLManagedInstanceFailoverGroup) ResolveReferences(ctx context.Conte
 	return nil
 }
 
+// ResolveReferences of this MSSQLManagedInstanceTransparentDataEncryption.
+func (mg *MSSQLManagedInstanceTransparentDataEncryption) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta2", "Key", "KeyList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KeyVaultKeyID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.KeyVaultKeyIDRef,
+			Selector:     mg.Spec.ForProvider.KeyVaultKeyIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.KeyVaultKeyID")
+	}
+	mg.Spec.ForProvider.KeyVaultKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.KeyVaultKeyIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("sql.azure.upbound.io", "v1beta2", "MSSQLManagedInstance", "MSSQLManagedInstanceList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagedInstanceID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.ManagedInstanceIDRef,
+			Selector:     mg.Spec.ForProvider.ManagedInstanceIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ManagedInstanceID")
+	}
+	mg.Spec.ForProvider.ManagedInstanceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ManagedInstanceIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta2", "Key", "KeyList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyVaultKeyID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.KeyVaultKeyIDRef,
+			Selector:     mg.Spec.InitProvider.KeyVaultKeyIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.KeyVaultKeyID")
+	}
+	mg.Spec.InitProvider.KeyVaultKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KeyVaultKeyIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this MSSQLManagedInstanceVulnerabilityAssessment.
 func (mg *MSSQLManagedInstanceVulnerabilityAssessment) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
