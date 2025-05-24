@@ -82,13 +82,16 @@ type SubnetInitParameters struct {
 	// One or more delegation blocks as defined below.
 	Delegation []DelegationInitParameters `json:"delegation,omitempty" tf:"delegation,omitempty"`
 
+	// `enforcePrivateLinkEndpointNetworkPolicies` will be removed in favour of the property `privateEndpointNetworkPolicies` in version 2.0 of the provider. Conflicts with privateEndpointNetworkPoliciesEnabled, privateEndpointNetworkPolicies.
 	EnforcePrivateLinkEndpointNetworkPolicies *bool `json:"enforcePrivateLinkEndpointNetworkPolicies,omitempty" tf:"enforce_private_link_endpoint_network_policies,omitempty"`
 
+	// `enforcePrivateLinkServiceNetworkPolicies` will be removed in favour of the property `privateLinkServiceNetworkPoliciesEnabled` in version 2.0 of the provider. Conflicts with privateLinkServiceNetworkPoliciesEnabled.
 	EnforcePrivateLinkServiceNetworkPolicies *bool `json:"enforcePrivateLinkServiceNetworkPolicies,omitempty" tf:"enforce_private_link_service_network_policies,omitempty"`
 
 	// Enable or Disable network policies for the private endpoint on the subnet. Possible values are Disabled, Enabled, NetworkSecurityGroupEnabled and RouteTableEnabled. Defaults to Disabled.
 	PrivateEndpointNetworkPolicies *string `json:"privateEndpointNetworkPolicies,omitempty" tf:"private_endpoint_network_policies,omitempty"`
 
+	// `privateEndpointNetworkPoliciesEnabled` will be removed in favour of the property `privateEndpointNetworkPolicies` in version 2.0 of the provider. Conflicts with enforcePrivateLinkEndpointNetworkPolicies, privateEndpointNetworkPolicies.
 	PrivateEndpointNetworkPoliciesEnabled *bool `json:"privateEndpointNetworkPoliciesEnabled,omitempty" tf:"private_endpoint_network_policies_enabled,omitempty"`
 
 	// Enable or Disable network policies for the private link service on the subnet. Defaults to true.
@@ -114,8 +117,10 @@ type SubnetObservation struct {
 	// One or more delegation blocks as defined below.
 	Delegation []DelegationObservation `json:"delegation,omitempty" tf:"delegation,omitempty"`
 
+	// `enforcePrivateLinkEndpointNetworkPolicies` will be removed in favour of the property `privateEndpointNetworkPolicies` in version 2.0 of the provider. Conflicts with privateEndpointNetworkPoliciesEnabled, privateEndpointNetworkPolicies.
 	EnforcePrivateLinkEndpointNetworkPolicies *bool `json:"enforcePrivateLinkEndpointNetworkPolicies,omitempty" tf:"enforce_private_link_endpoint_network_policies,omitempty"`
 
+	// `enforcePrivateLinkServiceNetworkPolicies` will be removed in favour of the property `privateLinkServiceNetworkPoliciesEnabled` in version 2.0 of the provider. Conflicts with privateLinkServiceNetworkPoliciesEnabled.
 	EnforcePrivateLinkServiceNetworkPolicies *bool `json:"enforcePrivateLinkServiceNetworkPolicies,omitempty" tf:"enforce_private_link_service_network_policies,omitempty"`
 
 	// The subnet ID.
@@ -124,6 +129,7 @@ type SubnetObservation struct {
 	// Enable or Disable network policies for the private endpoint on the subnet. Possible values are Disabled, Enabled, NetworkSecurityGroupEnabled and RouteTableEnabled. Defaults to Disabled.
 	PrivateEndpointNetworkPolicies *string `json:"privateEndpointNetworkPolicies,omitempty" tf:"private_endpoint_network_policies,omitempty"`
 
+	// `privateEndpointNetworkPoliciesEnabled` will be removed in favour of the property `privateEndpointNetworkPolicies` in version 2.0 of the provider. Conflicts with enforcePrivateLinkEndpointNetworkPolicies, privateEndpointNetworkPolicies.
 	PrivateEndpointNetworkPoliciesEnabled *bool `json:"privateEndpointNetworkPoliciesEnabled,omitempty" tf:"private_endpoint_network_policies_enabled,omitempty"`
 
 	// Enable or Disable network policies for the private link service on the subnet. Defaults to true.
@@ -158,9 +164,11 @@ type SubnetParameters struct {
 	// +kubebuilder:validation:Optional
 	Delegation []DelegationParameters `json:"delegation,omitempty" tf:"delegation,omitempty"`
 
+	// `enforcePrivateLinkEndpointNetworkPolicies` will be removed in favour of the property `privateEndpointNetworkPolicies` in version 2.0 of the provider. Conflicts with privateEndpointNetworkPoliciesEnabled, privateEndpointNetworkPolicies.
 	// +kubebuilder:validation:Optional
 	EnforcePrivateLinkEndpointNetworkPolicies *bool `json:"enforcePrivateLinkEndpointNetworkPolicies,omitempty" tf:"enforce_private_link_endpoint_network_policies,omitempty"`
 
+	// `enforcePrivateLinkServiceNetworkPolicies` will be removed in favour of the property `privateLinkServiceNetworkPoliciesEnabled` in version 2.0 of the provider. Conflicts with privateLinkServiceNetworkPoliciesEnabled.
 	// +kubebuilder:validation:Optional
 	EnforcePrivateLinkServiceNetworkPolicies *bool `json:"enforcePrivateLinkServiceNetworkPolicies,omitempty" tf:"enforce_private_link_service_network_policies,omitempty"`
 
@@ -168,6 +176,7 @@ type SubnetParameters struct {
 	// +kubebuilder:validation:Optional
 	PrivateEndpointNetworkPolicies *string `json:"privateEndpointNetworkPolicies,omitempty" tf:"private_endpoint_network_policies,omitempty"`
 
+	// `privateEndpointNetworkPoliciesEnabled` will be removed in favour of the property `privateEndpointNetworkPolicies` in version 2.0 of the provider. Conflicts with enforcePrivateLinkEndpointNetworkPolicies, privateEndpointNetworkPolicies.
 	// +kubebuilder:validation:Optional
 	PrivateEndpointNetworkPoliciesEnabled *bool `json:"privateEndpointNetworkPoliciesEnabled,omitempty" tf:"private_endpoint_network_policies_enabled,omitempty"`
 
