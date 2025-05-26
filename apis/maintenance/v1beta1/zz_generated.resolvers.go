@@ -14,6 +14,7 @@ import (
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -32,7 +33,7 @@ func (mg *MaintenanceAssignmentDedicatedHost) ResolveReferences( // ResolveRefer
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DedicatedHostID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.DedicatedHostID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.DedicatedHostIDRef,
 			Selector:     mg.Spec.ForProvider.DedicatedHostIDSelector,
@@ -42,7 +43,7 @@ func (mg *MaintenanceAssignmentDedicatedHost) ResolveReferences( // ResolveRefer
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.DedicatedHostID")
 	}
-	mg.Spec.ForProvider.DedicatedHostID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DedicatedHostID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DedicatedHostIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("maintenance.azure.upbound.io", "v1beta2", "MaintenanceConfiguration", "MaintenanceConfigurationList")
@@ -51,7 +52,7 @@ func (mg *MaintenanceAssignmentDedicatedHost) ResolveReferences( // ResolveRefer
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MaintenanceConfigurationID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.MaintenanceConfigurationID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.MaintenanceConfigurationIDRef,
 			Selector:     mg.Spec.ForProvider.MaintenanceConfigurationIDSelector,
@@ -61,7 +62,7 @@ func (mg *MaintenanceAssignmentDedicatedHost) ResolveReferences( // ResolveRefer
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.MaintenanceConfigurationID")
 	}
-	mg.Spec.ForProvider.MaintenanceConfigurationID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.MaintenanceConfigurationID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.MaintenanceConfigurationIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("compute.azure.upbound.io", "v1beta1", "DedicatedHost", "DedicatedHostList")
@@ -70,7 +71,7 @@ func (mg *MaintenanceAssignmentDedicatedHost) ResolveReferences( // ResolveRefer
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DedicatedHostID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.DedicatedHostID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.DedicatedHostIDRef,
 			Selector:     mg.Spec.InitProvider.DedicatedHostIDSelector,
@@ -80,7 +81,7 @@ func (mg *MaintenanceAssignmentDedicatedHost) ResolveReferences( // ResolveRefer
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.DedicatedHostID")
 	}
-	mg.Spec.InitProvider.DedicatedHostID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DedicatedHostID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DedicatedHostIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("maintenance.azure.upbound.io", "v1beta2", "MaintenanceConfiguration", "MaintenanceConfigurationList")
@@ -89,7 +90,7 @@ func (mg *MaintenanceAssignmentDedicatedHost) ResolveReferences( // ResolveRefer
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MaintenanceConfigurationID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.MaintenanceConfigurationID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.MaintenanceConfigurationIDRef,
 			Selector:     mg.Spec.InitProvider.MaintenanceConfigurationIDSelector,
@@ -99,7 +100,7 @@ func (mg *MaintenanceAssignmentDedicatedHost) ResolveReferences( // ResolveRefer
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.MaintenanceConfigurationID")
 	}
-	mg.Spec.InitProvider.MaintenanceConfigurationID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.MaintenanceConfigurationID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.MaintenanceConfigurationIDRef = rsp.ResolvedReference
 
 	return nil
@@ -120,7 +121,7 @@ func (mg *MaintenanceAssignmentVirtualMachine) ResolveReferences(ctx context.Con
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MaintenanceConfigurationID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.MaintenanceConfigurationID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.MaintenanceConfigurationIDRef,
 			Selector:     mg.Spec.ForProvider.MaintenanceConfigurationIDSelector,
@@ -130,7 +131,7 @@ func (mg *MaintenanceAssignmentVirtualMachine) ResolveReferences(ctx context.Con
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.MaintenanceConfigurationID")
 	}
-	mg.Spec.ForProvider.MaintenanceConfigurationID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.MaintenanceConfigurationID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.MaintenanceConfigurationIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("compute.azure.upbound.io", "v1beta2", "LinuxVirtualMachine", "LinuxVirtualMachineList")
@@ -139,7 +140,7 @@ func (mg *MaintenanceAssignmentVirtualMachine) ResolveReferences(ctx context.Con
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VirtualMachineID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.VirtualMachineID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.VirtualMachineIDRef,
 			Selector:     mg.Spec.ForProvider.VirtualMachineIDSelector,
@@ -149,7 +150,7 @@ func (mg *MaintenanceAssignmentVirtualMachine) ResolveReferences(ctx context.Con
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.VirtualMachineID")
 	}
-	mg.Spec.ForProvider.VirtualMachineID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VirtualMachineID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VirtualMachineIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("maintenance.azure.upbound.io", "v1beta2", "MaintenanceConfiguration", "MaintenanceConfigurationList")
@@ -158,7 +159,7 @@ func (mg *MaintenanceAssignmentVirtualMachine) ResolveReferences(ctx context.Con
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MaintenanceConfigurationID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.MaintenanceConfigurationID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.MaintenanceConfigurationIDRef,
 			Selector:     mg.Spec.InitProvider.MaintenanceConfigurationIDSelector,
@@ -168,7 +169,7 @@ func (mg *MaintenanceAssignmentVirtualMachine) ResolveReferences(ctx context.Con
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.MaintenanceConfigurationID")
 	}
-	mg.Spec.InitProvider.MaintenanceConfigurationID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.MaintenanceConfigurationID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.MaintenanceConfigurationIDRef = rsp.ResolvedReference
 
 	return nil
@@ -189,7 +190,7 @@ func (mg *MaintenanceConfiguration) ResolveReferences(ctx context.Context, c cli
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -199,7 +200,7 @@ func (mg *MaintenanceConfiguration) ResolveReferences(ctx context.Context, c cli
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil

@@ -15,6 +15,7 @@ import (
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	rconfig "github.com/upbound/provider-azure/apis/rconfig"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -33,7 +34,7 @@ func (mg *ManagementGroup) ResolveReferences( // ResolveReferences of this Manag
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ParentManagementGroupID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ParentManagementGroupID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.ParentManagementGroupIDRef,
 			Selector:     mg.Spec.ForProvider.ParentManagementGroupIDSelector,
@@ -43,7 +44,7 @@ func (mg *ManagementGroup) ResolveReferences( // ResolveReferences of this Manag
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ParentManagementGroupID")
 	}
-	mg.Spec.ForProvider.ParentManagementGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ParentManagementGroupID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ParentManagementGroupIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("management.azure.upbound.io", "v1beta1", "ManagementGroup", "ManagementGroupList")
@@ -52,7 +53,7 @@ func (mg *ManagementGroup) ResolveReferences( // ResolveReferences of this Manag
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ParentManagementGroupID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ParentManagementGroupID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.ParentManagementGroupIDRef,
 			Selector:     mg.Spec.InitProvider.ParentManagementGroupIDSelector,
@@ -62,7 +63,7 @@ func (mg *ManagementGroup) ResolveReferences( // ResolveReferences of this Manag
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ParentManagementGroupID")
 	}
-	mg.Spec.InitProvider.ParentManagementGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ParentManagementGroupID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ParentManagementGroupIDRef = rsp.ResolvedReference
 
 	return nil
@@ -83,7 +84,7 @@ func (mg *ManagementGroupSubscriptionAssociation) ResolveReferences(ctx context.
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagementGroupID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ManagementGroupID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.ManagementGroupIDRef,
 			Selector:     mg.Spec.ForProvider.ManagementGroupIDSelector,
@@ -93,7 +94,7 @@ func (mg *ManagementGroupSubscriptionAssociation) ResolveReferences(ctx context.
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ManagementGroupID")
 	}
-	mg.Spec.ForProvider.ManagementGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ManagementGroupID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ManagementGroupIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "Subscription", "SubscriptionList")
@@ -102,7 +103,7 @@ func (mg *ManagementGroupSubscriptionAssociation) ResolveReferences(ctx context.
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubscriptionID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.SubscriptionID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.SubscriptionIDRef,
 			Selector:     mg.Spec.ForProvider.SubscriptionIDSelector,
@@ -112,7 +113,7 @@ func (mg *ManagementGroupSubscriptionAssociation) ResolveReferences(ctx context.
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.SubscriptionID")
 	}
-	mg.Spec.ForProvider.SubscriptionID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SubscriptionID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SubscriptionIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("management.azure.upbound.io", "v1beta1", "ManagementGroup", "ManagementGroupList")
@@ -121,7 +122,7 @@ func (mg *ManagementGroupSubscriptionAssociation) ResolveReferences(ctx context.
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagementGroupID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ManagementGroupID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.ManagementGroupIDRef,
 			Selector:     mg.Spec.InitProvider.ManagementGroupIDSelector,
@@ -131,7 +132,7 @@ func (mg *ManagementGroupSubscriptionAssociation) ResolveReferences(ctx context.
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ManagementGroupID")
 	}
-	mg.Spec.InitProvider.ManagementGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ManagementGroupID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ManagementGroupIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "Subscription", "SubscriptionList")
@@ -140,7 +141,7 @@ func (mg *ManagementGroupSubscriptionAssociation) ResolveReferences(ctx context.
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubscriptionID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.SubscriptionID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.SubscriptionIDRef,
 			Selector:     mg.Spec.InitProvider.SubscriptionIDSelector,
@@ -150,7 +151,7 @@ func (mg *ManagementGroupSubscriptionAssociation) ResolveReferences(ctx context.
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.SubscriptionID")
 	}
-	mg.Spec.InitProvider.SubscriptionID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SubscriptionID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.SubscriptionIDRef = rsp.ResolvedReference
 
 	return nil

@@ -14,6 +14,7 @@ import (
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -32,7 +33,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -42,7 +43,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -51,7 +52,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
@@ -61,7 +62,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
 	}
-	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -82,7 +83,7 @@ func (mg *ApplicationNetworkRuleSet) ResolveReferences(ctx context.Context, c cl
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IotcentralApplicationID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.IotcentralApplicationID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.IotcentralApplicationIDRef,
 			Selector:     mg.Spec.ForProvider.IotcentralApplicationIDSelector,
@@ -92,7 +93,7 @@ func (mg *ApplicationNetworkRuleSet) ResolveReferences(ctx context.Context, c cl
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.IotcentralApplicationID")
 	}
-	mg.Spec.ForProvider.IotcentralApplicationID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.IotcentralApplicationID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.IotcentralApplicationIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("iotcentral.azure.upbound.io", "v1beta2", "Application", "ApplicationList")
@@ -101,7 +102,7 @@ func (mg *ApplicationNetworkRuleSet) ResolveReferences(ctx context.Context, c cl
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IotcentralApplicationID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.IotcentralApplicationID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.IotcentralApplicationIDRef,
 			Selector:     mg.Spec.InitProvider.IotcentralApplicationIDSelector,
@@ -111,7 +112,7 @@ func (mg *ApplicationNetworkRuleSet) ResolveReferences(ctx context.Context, c cl
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.IotcentralApplicationID")
 	}
-	mg.Spec.InitProvider.IotcentralApplicationID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.IotcentralApplicationID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.IotcentralApplicationIDRef = rsp.ResolvedReference
 
 	return nil

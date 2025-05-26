@@ -13,6 +13,7 @@ import (
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -31,7 +32,7 @@ func (mg *Gen2Environment) ResolveReferences( // ResolveReferences of this Gen2E
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -41,7 +42,7 @@ func (mg *Gen2Environment) ResolveReferences( // ResolveReferences of this Gen2E
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	if mg.Spec.ForProvider.Storage != nil {
@@ -51,7 +52,7 @@ func (mg *Gen2Environment) ResolveReferences( // ResolveReferences of this Gen2E
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Storage.Name),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.Storage.Name, ""),
 				Extract:      reference.ExternalName(),
 				Reference:    mg.Spec.ForProvider.Storage.NameRef,
 				Selector:     mg.Spec.ForProvider.Storage.NameSelector,
@@ -61,7 +62,7 @@ func (mg *Gen2Environment) ResolveReferences( // ResolveReferences of this Gen2E
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.Storage.Name")
 		}
-		mg.Spec.ForProvider.Storage.Name = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Storage.Name = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.Storage.NameRef = rsp.ResolvedReference
 
 	}
@@ -72,7 +73,7 @@ func (mg *Gen2Environment) ResolveReferences( // ResolveReferences of this Gen2E
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Storage.Name),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.Storage.Name, ""),
 				Extract:      reference.ExternalName(),
 				Reference:    mg.Spec.InitProvider.Storage.NameRef,
 				Selector:     mg.Spec.InitProvider.Storage.NameSelector,
@@ -82,7 +83,7 @@ func (mg *Gen2Environment) ResolveReferences( // ResolveReferences of this Gen2E
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.Storage.Name")
 		}
-		mg.Spec.InitProvider.Storage.Name = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Storage.Name = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.Storage.NameRef = rsp.ResolvedReference
 
 	}
