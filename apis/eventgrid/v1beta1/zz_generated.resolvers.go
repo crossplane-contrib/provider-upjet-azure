@@ -303,6 +303,178 @@ func (mg *SystemTopic) ResolveReferences(ctx context.Context, c client.Reader) e
 	return nil
 }
 
+// ResolveReferences of this SystemTopicEventSubscription.
+func (mg *SystemTopicEventSubscription) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	if mg.Spec.ForProvider.StorageQueueEndpoint != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Queue", "QueueList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageQueueEndpoint.QueueName),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.StorageQueueEndpoint.QueueNameRef,
+				Selector:     mg.Spec.ForProvider.StorageQueueEndpoint.QueueNameSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.StorageQueueEndpoint.QueueName")
+		}
+		mg.Spec.ForProvider.StorageQueueEndpoint.QueueName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.StorageQueueEndpoint.QueueNameRef = rsp.ResolvedReference
+
+	}
+	if mg.Spec.ForProvider.StorageQueueEndpoint != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageQueueEndpoint.StorageAccountID),
+				Extract:      resource.ExtractResourceID(),
+				Reference:    mg.Spec.ForProvider.StorageQueueEndpoint.StorageAccountIDRef,
+				Selector:     mg.Spec.ForProvider.StorageQueueEndpoint.StorageAccountIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.StorageQueueEndpoint.StorageAccountID")
+		}
+		mg.Spec.ForProvider.StorageQueueEndpoint.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.StorageQueueEndpoint.StorageAccountIDRef = rsp.ResolvedReference
+
+	}
+	{
+		m, l, err = apisresolver.GetManagedResource("eventgrid.azure.upbound.io", "v1beta2", "SystemTopic", "SystemTopicList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SystemTopic),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.SystemTopicRef,
+			Selector:     mg.Spec.ForProvider.SystemTopicSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SystemTopic")
+	}
+	mg.Spec.ForProvider.SystemTopic = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SystemTopicRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
+			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
+	}
+	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	if mg.Spec.InitProvider.StorageQueueEndpoint != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Queue", "QueueList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageQueueEndpoint.QueueName),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.InitProvider.StorageQueueEndpoint.QueueNameRef,
+				Selector:     mg.Spec.InitProvider.StorageQueueEndpoint.QueueNameSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.StorageQueueEndpoint.QueueName")
+		}
+		mg.Spec.InitProvider.StorageQueueEndpoint.QueueName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.StorageQueueEndpoint.QueueNameRef = rsp.ResolvedReference
+
+	}
+	if mg.Spec.InitProvider.StorageQueueEndpoint != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageQueueEndpoint.StorageAccountID),
+				Extract:      resource.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.StorageQueueEndpoint.StorageAccountIDRef,
+				Selector:     mg.Spec.InitProvider.StorageQueueEndpoint.StorageAccountIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.StorageQueueEndpoint.StorageAccountID")
+		}
+		mg.Spec.InitProvider.StorageQueueEndpoint.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.StorageQueueEndpoint.StorageAccountIDRef = rsp.ResolvedReference
+
+	}
+	{
+		m, l, err = apisresolver.GetManagedResource("eventgrid.azure.upbound.io", "v1beta2", "SystemTopic", "SystemTopicList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SystemTopic),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.SystemTopicRef,
+			Selector:     mg.Spec.InitProvider.SystemTopicSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SystemTopic")
+	}
+	mg.Spec.InitProvider.SystemTopic = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SystemTopicRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this Topic.
 func (mg *Topic) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed

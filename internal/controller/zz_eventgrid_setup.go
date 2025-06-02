@@ -13,6 +13,7 @@ import (
 	domaintopic "github.com/upbound/provider-azure/internal/controller/eventgrid/domaintopic"
 	eventsubscription "github.com/upbound/provider-azure/internal/controller/eventgrid/eventsubscription"
 	systemtopic "github.com/upbound/provider-azure/internal/controller/eventgrid/systemtopic"
+	systemtopiceventsubscription "github.com/upbound/provider-azure/internal/controller/eventgrid/systemtopiceventsubscription"
 	topic "github.com/upbound/provider-azure/internal/controller/eventgrid/topic"
 )
 
@@ -24,6 +25,7 @@ func Setup_eventgrid(mgr ctrl.Manager, o controller.Options) error {
 		domaintopic.Setup,
 		eventsubscription.Setup,
 		systemtopic.Setup,
+		systemtopiceventsubscription.Setup,
 		topic.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
