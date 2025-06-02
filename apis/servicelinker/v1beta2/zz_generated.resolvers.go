@@ -14,6 +14,7 @@ import (
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -32,7 +33,7 @@ func (mg *SpringCloudConnection) ResolveReferences( // ResolveReferences of this
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SpringCloudID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.SpringCloudID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.SpringCloudIDRef,
 			Selector:     mg.Spec.ForProvider.SpringCloudIDSelector,
@@ -42,7 +43,7 @@ func (mg *SpringCloudConnection) ResolveReferences( // ResolveReferences of this
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.SpringCloudID")
 	}
-	mg.Spec.ForProvider.SpringCloudID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SpringCloudID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SpringCloudIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta2", "SQLDatabase", "SQLDatabaseList")
@@ -51,7 +52,7 @@ func (mg *SpringCloudConnection) ResolveReferences( // ResolveReferences of this
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TargetResourceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.TargetResourceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.TargetResourceIDRef,
 			Selector:     mg.Spec.ForProvider.TargetResourceIDSelector,
@@ -61,7 +62,7 @@ func (mg *SpringCloudConnection) ResolveReferences( // ResolveReferences of this
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.TargetResourceID")
 	}
-	mg.Spec.ForProvider.TargetResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.TargetResourceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TargetResourceIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta2", "SpringCloudJavaDeployment", "SpringCloudJavaDeploymentList")
@@ -70,7 +71,7 @@ func (mg *SpringCloudConnection) ResolveReferences( // ResolveReferences of this
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SpringCloudID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.SpringCloudID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.SpringCloudIDRef,
 			Selector:     mg.Spec.InitProvider.SpringCloudIDSelector,
@@ -80,7 +81,7 @@ func (mg *SpringCloudConnection) ResolveReferences( // ResolveReferences of this
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.SpringCloudID")
 	}
-	mg.Spec.InitProvider.SpringCloudID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SpringCloudID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.SpringCloudIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta2", "SQLDatabase", "SQLDatabaseList")
@@ -89,7 +90,7 @@ func (mg *SpringCloudConnection) ResolveReferences( // ResolveReferences of this
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TargetResourceID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.TargetResourceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.TargetResourceIDRef,
 			Selector:     mg.Spec.InitProvider.TargetResourceIDSelector,
@@ -99,7 +100,7 @@ func (mg *SpringCloudConnection) ResolveReferences( // ResolveReferences of this
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.TargetResourceID")
 	}
-	mg.Spec.InitProvider.TargetResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.TargetResourceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.TargetResourceIDRef = rsp.ResolvedReference
 
 	return nil

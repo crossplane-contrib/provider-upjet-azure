@@ -9,12 +9,14 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
+	helper "github.com/crossplane/crossplane-tools/pkg/helpers"
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	rconfig "github.com/upbound/provider-azure/apis/rconfig"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -35,7 +37,7 @@ func (mg *KubernetesCluster) ResolveReferences( // ResolveReferences of this Kub
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.APIServerAccessProfile[i3].SubnetID),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.APIServerAccessProfile[i3].SubnetID, ""),
 				Extract:      rconfig.ExtractResourceID(),
 				Reference:    mg.Spec.ForProvider.APIServerAccessProfile[i3].SubnetIDRef,
 				Selector:     mg.Spec.ForProvider.APIServerAccessProfile[i3].SubnetIDSelector,
@@ -45,7 +47,7 @@ func (mg *KubernetesCluster) ResolveReferences( // ResolveReferences of this Kub
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.APIServerAccessProfile[i3].SubnetID")
 		}
-		mg.Spec.ForProvider.APIServerAccessProfile[i3].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.APIServerAccessProfile[i3].SubnetID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.APIServerAccessProfile[i3].SubnetIDRef = rsp.ResolvedReference
 
 	}
@@ -56,7 +58,7 @@ func (mg *KubernetesCluster) ResolveReferences( // ResolveReferences of this Kub
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AciConnectorLinux[i3].SubnetName),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.AciConnectorLinux[i3].SubnetName, ""),
 				Extract:      reference.ExternalName(),
 				Reference:    mg.Spec.ForProvider.AciConnectorLinux[i3].SubnetNameRef,
 				Selector:     mg.Spec.ForProvider.AciConnectorLinux[i3].SubnetNameSelector,
@@ -66,7 +68,7 @@ func (mg *KubernetesCluster) ResolveReferences( // ResolveReferences of this Kub
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.AciConnectorLinux[i3].SubnetName")
 		}
-		mg.Spec.ForProvider.AciConnectorLinux[i3].SubnetName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.AciConnectorLinux[i3].SubnetName = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.AciConnectorLinux[i3].SubnetNameRef = rsp.ResolvedReference
 
 	}
@@ -77,7 +79,7 @@ func (mg *KubernetesCluster) ResolveReferences( // ResolveReferences of this Kub
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DefaultNodePool[i3].PodSubnetID),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.DefaultNodePool[i3].PodSubnetID, ""),
 				Extract:      rconfig.ExtractResourceID(),
 				Reference:    mg.Spec.ForProvider.DefaultNodePool[i3].PodSubnetIDRef,
 				Selector:     mg.Spec.ForProvider.DefaultNodePool[i3].PodSubnetIDSelector,
@@ -87,7 +89,7 @@ func (mg *KubernetesCluster) ResolveReferences( // ResolveReferences of this Kub
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.DefaultNodePool[i3].PodSubnetID")
 		}
-		mg.Spec.ForProvider.DefaultNodePool[i3].PodSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.DefaultNodePool[i3].PodSubnetID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.DefaultNodePool[i3].PodSubnetIDRef = rsp.ResolvedReference
 
 	}
@@ -98,7 +100,7 @@ func (mg *KubernetesCluster) ResolveReferences( // ResolveReferences of this Kub
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DefaultNodePool[i3].VnetSubnetID),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.DefaultNodePool[i3].VnetSubnetID, ""),
 				Extract:      rconfig.ExtractResourceID(),
 				Reference:    mg.Spec.ForProvider.DefaultNodePool[i3].VnetSubnetIDRef,
 				Selector:     mg.Spec.ForProvider.DefaultNodePool[i3].VnetSubnetIDSelector,
@@ -108,7 +110,7 @@ func (mg *KubernetesCluster) ResolveReferences( // ResolveReferences of this Kub
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.DefaultNodePool[i3].VnetSubnetID")
 		}
-		mg.Spec.ForProvider.DefaultNodePool[i3].VnetSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.DefaultNodePool[i3].VnetSubnetID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.DefaultNodePool[i3].VnetSubnetIDRef = rsp.ResolvedReference
 
 	}
@@ -119,7 +121,7 @@ func (mg *KubernetesCluster) ResolveReferences( // ResolveReferences of this Kub
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Identity[i3].IdentityIds),
+				CurrentValues: helper.FromPtrValues(mg.Spec.ForProvider.Identity[i3].IdentityIds),
 				Extract:       rconfig.ExtractResourceID(),
 				References:    mg.Spec.ForProvider.Identity[i3].IdentityIdsRefs,
 				Selector:      mg.Spec.ForProvider.Identity[i3].IdentityIdsSelector,
@@ -129,7 +131,7 @@ func (mg *KubernetesCluster) ResolveReferences( // ResolveReferences of this Kub
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.Identity[i3].IdentityIds")
 		}
-		mg.Spec.ForProvider.Identity[i3].IdentityIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.ForProvider.Identity[i3].IdentityIds = helper.ToPtrValues(mrsp.ResolvedValues)
 		mg.Spec.ForProvider.Identity[i3].IdentityIdsRefs = mrsp.ResolvedReferences
 
 	}
@@ -140,7 +142,7 @@ func (mg *KubernetesCluster) ResolveReferences( // ResolveReferences of this Kub
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IngressApplicationGateway[i3].SubnetID),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.IngressApplicationGateway[i3].SubnetID, ""),
 				Extract:      rconfig.ExtractResourceID(),
 				Reference:    mg.Spec.ForProvider.IngressApplicationGateway[i3].SubnetIDRef,
 				Selector:     mg.Spec.ForProvider.IngressApplicationGateway[i3].SubnetIDSelector,
@@ -150,7 +152,7 @@ func (mg *KubernetesCluster) ResolveReferences( // ResolveReferences of this Kub
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.IngressApplicationGateway[i3].SubnetID")
 		}
-		mg.Spec.ForProvider.IngressApplicationGateway[i3].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.IngressApplicationGateway[i3].SubnetID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.IngressApplicationGateway[i3].SubnetIDRef = rsp.ResolvedReference
 
 	}
@@ -160,7 +162,7 @@ func (mg *KubernetesCluster) ResolveReferences( // ResolveReferences of this Kub
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrivateDNSZoneID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.PrivateDNSZoneID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.PrivateDNSZoneIDRef,
 			Selector:     mg.Spec.ForProvider.PrivateDNSZoneIDSelector,
@@ -170,7 +172,7 @@ func (mg *KubernetesCluster) ResolveReferences( // ResolveReferences of this Kub
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.PrivateDNSZoneID")
 	}
-	mg.Spec.ForProvider.PrivateDNSZoneID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.PrivateDNSZoneID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PrivateDNSZoneIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -179,7 +181,7 @@ func (mg *KubernetesCluster) ResolveReferences( // ResolveReferences of this Kub
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -189,7 +191,7 @@ func (mg *KubernetesCluster) ResolveReferences( // ResolveReferences of this Kub
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.APIServerAccessProfile); i3++ {
@@ -199,7 +201,7 @@ func (mg *KubernetesCluster) ResolveReferences( // ResolveReferences of this Kub
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.APIServerAccessProfile[i3].SubnetID),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.APIServerAccessProfile[i3].SubnetID, ""),
 				Extract:      rconfig.ExtractResourceID(),
 				Reference:    mg.Spec.InitProvider.APIServerAccessProfile[i3].SubnetIDRef,
 				Selector:     mg.Spec.InitProvider.APIServerAccessProfile[i3].SubnetIDSelector,
@@ -209,7 +211,7 @@ func (mg *KubernetesCluster) ResolveReferences( // ResolveReferences of this Kub
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.APIServerAccessProfile[i3].SubnetID")
 		}
-		mg.Spec.InitProvider.APIServerAccessProfile[i3].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.APIServerAccessProfile[i3].SubnetID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.APIServerAccessProfile[i3].SubnetIDRef = rsp.ResolvedReference
 
 	}
@@ -220,7 +222,7 @@ func (mg *KubernetesCluster) ResolveReferences( // ResolveReferences of this Kub
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AciConnectorLinux[i3].SubnetName),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.AciConnectorLinux[i3].SubnetName, ""),
 				Extract:      reference.ExternalName(),
 				Reference:    mg.Spec.InitProvider.AciConnectorLinux[i3].SubnetNameRef,
 				Selector:     mg.Spec.InitProvider.AciConnectorLinux[i3].SubnetNameSelector,
@@ -230,7 +232,7 @@ func (mg *KubernetesCluster) ResolveReferences( // ResolveReferences of this Kub
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.AciConnectorLinux[i3].SubnetName")
 		}
-		mg.Spec.InitProvider.AciConnectorLinux[i3].SubnetName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.AciConnectorLinux[i3].SubnetName = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.AciConnectorLinux[i3].SubnetNameRef = rsp.ResolvedReference
 
 	}
@@ -241,7 +243,7 @@ func (mg *KubernetesCluster) ResolveReferences( // ResolveReferences of this Kub
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DefaultNodePool[i3].PodSubnetID),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.DefaultNodePool[i3].PodSubnetID, ""),
 				Extract:      rconfig.ExtractResourceID(),
 				Reference:    mg.Spec.InitProvider.DefaultNodePool[i3].PodSubnetIDRef,
 				Selector:     mg.Spec.InitProvider.DefaultNodePool[i3].PodSubnetIDSelector,
@@ -251,7 +253,7 @@ func (mg *KubernetesCluster) ResolveReferences( // ResolveReferences of this Kub
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.DefaultNodePool[i3].PodSubnetID")
 		}
-		mg.Spec.InitProvider.DefaultNodePool[i3].PodSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.DefaultNodePool[i3].PodSubnetID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.DefaultNodePool[i3].PodSubnetIDRef = rsp.ResolvedReference
 
 	}
@@ -262,7 +264,7 @@ func (mg *KubernetesCluster) ResolveReferences( // ResolveReferences of this Kub
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DefaultNodePool[i3].VnetSubnetID),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.DefaultNodePool[i3].VnetSubnetID, ""),
 				Extract:      rconfig.ExtractResourceID(),
 				Reference:    mg.Spec.InitProvider.DefaultNodePool[i3].VnetSubnetIDRef,
 				Selector:     mg.Spec.InitProvider.DefaultNodePool[i3].VnetSubnetIDSelector,
@@ -272,7 +274,7 @@ func (mg *KubernetesCluster) ResolveReferences( // ResolveReferences of this Kub
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.DefaultNodePool[i3].VnetSubnetID")
 		}
-		mg.Spec.InitProvider.DefaultNodePool[i3].VnetSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.DefaultNodePool[i3].VnetSubnetID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.DefaultNodePool[i3].VnetSubnetIDRef = rsp.ResolvedReference
 
 	}
@@ -283,7 +285,7 @@ func (mg *KubernetesCluster) ResolveReferences( // ResolveReferences of this Kub
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Identity[i3].IdentityIds),
+				CurrentValues: helper.FromPtrValues(mg.Spec.InitProvider.Identity[i3].IdentityIds),
 				Extract:       rconfig.ExtractResourceID(),
 				References:    mg.Spec.InitProvider.Identity[i3].IdentityIdsRefs,
 				Selector:      mg.Spec.InitProvider.Identity[i3].IdentityIdsSelector,
@@ -293,7 +295,7 @@ func (mg *KubernetesCluster) ResolveReferences( // ResolveReferences of this Kub
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.Identity[i3].IdentityIds")
 		}
-		mg.Spec.InitProvider.Identity[i3].IdentityIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.Identity[i3].IdentityIds = helper.ToPtrValues(mrsp.ResolvedValues)
 		mg.Spec.InitProvider.Identity[i3].IdentityIdsRefs = mrsp.ResolvedReferences
 
 	}
@@ -304,7 +306,7 @@ func (mg *KubernetesCluster) ResolveReferences( // ResolveReferences of this Kub
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IngressApplicationGateway[i3].SubnetID),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.IngressApplicationGateway[i3].SubnetID, ""),
 				Extract:      rconfig.ExtractResourceID(),
 				Reference:    mg.Spec.InitProvider.IngressApplicationGateway[i3].SubnetIDRef,
 				Selector:     mg.Spec.InitProvider.IngressApplicationGateway[i3].SubnetIDSelector,
@@ -314,7 +316,7 @@ func (mg *KubernetesCluster) ResolveReferences( // ResolveReferences of this Kub
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.IngressApplicationGateway[i3].SubnetID")
 		}
-		mg.Spec.InitProvider.IngressApplicationGateway[i3].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.IngressApplicationGateway[i3].SubnetID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.IngressApplicationGateway[i3].SubnetIDRef = rsp.ResolvedReference
 
 	}
@@ -324,7 +326,7 @@ func (mg *KubernetesCluster) ResolveReferences( // ResolveReferences of this Kub
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrivateDNSZoneID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.PrivateDNSZoneID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.PrivateDNSZoneIDRef,
 			Selector:     mg.Spec.InitProvider.PrivateDNSZoneIDSelector,
@@ -334,7 +336,7 @@ func (mg *KubernetesCluster) ResolveReferences( // ResolveReferences of this Kub
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.PrivateDNSZoneID")
 	}
-	mg.Spec.InitProvider.PrivateDNSZoneID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PrivateDNSZoneID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.PrivateDNSZoneIDRef = rsp.ResolvedReference
 
 	return nil
@@ -355,7 +357,7 @@ func (mg *KubernetesClusterExtension) ResolveReferences(ctx context.Context, c c
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ClusterID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ClusterID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.ClusterIDRef,
 			Selector:     mg.Spec.ForProvider.ClusterIDSelector,
@@ -365,7 +367,7 @@ func (mg *KubernetesClusterExtension) ResolveReferences(ctx context.Context, c c
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ClusterID")
 	}
-	mg.Spec.ForProvider.ClusterID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ClusterID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ClusterIDRef = rsp.ResolvedReference
 
 	return nil
@@ -386,7 +388,7 @@ func (mg *KubernetesClusterNodePool) ResolveReferences(ctx context.Context, c cl
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KubernetesClusterID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.KubernetesClusterID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.KubernetesClusterIDRef,
 			Selector:     mg.Spec.ForProvider.KubernetesClusterIDSelector,
@@ -396,7 +398,7 @@ func (mg *KubernetesClusterNodePool) ResolveReferences(ctx context.Context, c cl
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.KubernetesClusterID")
 	}
-	mg.Spec.ForProvider.KubernetesClusterID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.KubernetesClusterID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KubernetesClusterIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
@@ -405,7 +407,7 @@ func (mg *KubernetesClusterNodePool) ResolveReferences(ctx context.Context, c cl
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PodSubnetID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.PodSubnetID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.PodSubnetIDRef,
 			Selector:     mg.Spec.ForProvider.PodSubnetIDSelector,
@@ -415,7 +417,7 @@ func (mg *KubernetesClusterNodePool) ResolveReferences(ctx context.Context, c cl
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.PodSubnetID")
 	}
-	mg.Spec.ForProvider.PodSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.PodSubnetID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PodSubnetIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
@@ -424,7 +426,7 @@ func (mg *KubernetesClusterNodePool) ResolveReferences(ctx context.Context, c cl
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VnetSubnetID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.VnetSubnetID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.VnetSubnetIDRef,
 			Selector:     mg.Spec.ForProvider.VnetSubnetIDSelector,
@@ -434,7 +436,7 @@ func (mg *KubernetesClusterNodePool) ResolveReferences(ctx context.Context, c cl
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.VnetSubnetID")
 	}
-	mg.Spec.ForProvider.VnetSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VnetSubnetID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VnetSubnetIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
@@ -443,7 +445,7 @@ func (mg *KubernetesClusterNodePool) ResolveReferences(ctx context.Context, c cl
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PodSubnetID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.PodSubnetID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.PodSubnetIDRef,
 			Selector:     mg.Spec.InitProvider.PodSubnetIDSelector,
@@ -453,7 +455,7 @@ func (mg *KubernetesClusterNodePool) ResolveReferences(ctx context.Context, c cl
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.PodSubnetID")
 	}
-	mg.Spec.InitProvider.PodSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PodSubnetID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.PodSubnetIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
@@ -462,7 +464,7 @@ func (mg *KubernetesClusterNodePool) ResolveReferences(ctx context.Context, c cl
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VnetSubnetID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.VnetSubnetID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.VnetSubnetIDRef,
 			Selector:     mg.Spec.InitProvider.VnetSubnetIDSelector,
@@ -472,7 +474,7 @@ func (mg *KubernetesClusterNodePool) ResolveReferences(ctx context.Context, c cl
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.VnetSubnetID")
 	}
-	mg.Spec.InitProvider.VnetSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.VnetSubnetID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.VnetSubnetIDRef = rsp.ResolvedReference
 
 	return nil
@@ -493,7 +495,7 @@ func (mg *KubernetesFleetManager) ResolveReferences(ctx context.Context, c clien
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -503,7 +505,7 @@ func (mg *KubernetesFleetManager) ResolveReferences(ctx context.Context, c clien
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil

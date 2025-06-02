@@ -14,6 +14,7 @@ import (
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -32,7 +33,7 @@ func (mg *GlobalVMShutdownSchedule) ResolveReferences( // ResolveReferences of t
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VirtualMachineID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.VirtualMachineID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.VirtualMachineIDRef,
 			Selector:     mg.Spec.ForProvider.VirtualMachineIDSelector,
@@ -42,7 +43,7 @@ func (mg *GlobalVMShutdownSchedule) ResolveReferences( // ResolveReferences of t
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.VirtualMachineID")
 	}
-	mg.Spec.ForProvider.VirtualMachineID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VirtualMachineID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VirtualMachineIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("compute.azure.upbound.io", "v1beta2", "LinuxVirtualMachine", "LinuxVirtualMachineList")
@@ -51,7 +52,7 @@ func (mg *GlobalVMShutdownSchedule) ResolveReferences( // ResolveReferences of t
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VirtualMachineID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.VirtualMachineID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.VirtualMachineIDRef,
 			Selector:     mg.Spec.InitProvider.VirtualMachineIDSelector,
@@ -61,7 +62,7 @@ func (mg *GlobalVMShutdownSchedule) ResolveReferences( // ResolveReferences of t
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.VirtualMachineID")
 	}
-	mg.Spec.InitProvider.VirtualMachineID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.VirtualMachineID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.VirtualMachineIDRef = rsp.ResolvedReference
 
 	return nil
@@ -82,7 +83,7 @@ func (mg *LinuxVirtualMachine) ResolveReferences(ctx context.Context, c client.R
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LabName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.LabName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.LabNameRef,
 			Selector:     mg.Spec.ForProvider.LabNameSelector,
@@ -92,7 +93,7 @@ func (mg *LinuxVirtualMachine) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.LabName")
 	}
-	mg.Spec.ForProvider.LabName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LabName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LabNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
@@ -101,7 +102,7 @@ func (mg *LinuxVirtualMachine) ResolveReferences(ctx context.Context, c client.R
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LabSubnetName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.LabSubnetName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.LabSubnetNameRef,
 			Selector:     mg.Spec.ForProvider.LabSubnetNameSelector,
@@ -111,7 +112,7 @@ func (mg *LinuxVirtualMachine) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.LabSubnetName")
 	}
-	mg.Spec.ForProvider.LabSubnetName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LabSubnetName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LabSubnetNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("devtestlab.azure.upbound.io", "v1beta2", "VirtualNetwork", "VirtualNetworkList")
@@ -120,7 +121,7 @@ func (mg *LinuxVirtualMachine) ResolveReferences(ctx context.Context, c client.R
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LabVirtualNetworkID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.LabVirtualNetworkID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.LabVirtualNetworkIDRef,
 			Selector:     mg.Spec.ForProvider.LabVirtualNetworkIDSelector,
@@ -130,7 +131,7 @@ func (mg *LinuxVirtualMachine) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.LabVirtualNetworkID")
 	}
-	mg.Spec.ForProvider.LabVirtualNetworkID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LabVirtualNetworkID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LabVirtualNetworkIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -139,7 +140,7 @@ func (mg *LinuxVirtualMachine) ResolveReferences(ctx context.Context, c client.R
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -149,7 +150,7 @@ func (mg *LinuxVirtualMachine) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("devtestlab.azure.upbound.io", "v1beta1", "Lab", "LabList")
@@ -158,7 +159,7 @@ func (mg *LinuxVirtualMachine) ResolveReferences(ctx context.Context, c client.R
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LabName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.LabName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.LabNameRef,
 			Selector:     mg.Spec.InitProvider.LabNameSelector,
@@ -168,7 +169,7 @@ func (mg *LinuxVirtualMachine) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.LabName")
 	}
-	mg.Spec.InitProvider.LabName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LabName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.LabNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
@@ -177,7 +178,7 @@ func (mg *LinuxVirtualMachine) ResolveReferences(ctx context.Context, c client.R
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LabSubnetName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.LabSubnetName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.LabSubnetNameRef,
 			Selector:     mg.Spec.InitProvider.LabSubnetNameSelector,
@@ -187,7 +188,7 @@ func (mg *LinuxVirtualMachine) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.LabSubnetName")
 	}
-	mg.Spec.InitProvider.LabSubnetName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LabSubnetName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.LabSubnetNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("devtestlab.azure.upbound.io", "v1beta2", "VirtualNetwork", "VirtualNetworkList")
@@ -196,7 +197,7 @@ func (mg *LinuxVirtualMachine) ResolveReferences(ctx context.Context, c client.R
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LabVirtualNetworkID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.LabVirtualNetworkID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.LabVirtualNetworkIDRef,
 			Selector:     mg.Spec.InitProvider.LabVirtualNetworkIDSelector,
@@ -206,7 +207,7 @@ func (mg *LinuxVirtualMachine) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.LabVirtualNetworkID")
 	}
-	mg.Spec.InitProvider.LabVirtualNetworkID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LabVirtualNetworkID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.LabVirtualNetworkIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -215,7 +216,7 @@ func (mg *LinuxVirtualMachine) ResolveReferences(ctx context.Context, c client.R
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
@@ -225,7 +226,7 @@ func (mg *LinuxVirtualMachine) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
 	}
-	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -246,7 +247,7 @@ func (mg *Schedule) ResolveReferences(ctx context.Context, c client.Reader) erro
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LabName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.LabName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.LabNameRef,
 			Selector:     mg.Spec.ForProvider.LabNameSelector,
@@ -256,7 +257,7 @@ func (mg *Schedule) ResolveReferences(ctx context.Context, c client.Reader) erro
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.LabName")
 	}
-	mg.Spec.ForProvider.LabName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LabName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LabNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -265,7 +266,7 @@ func (mg *Schedule) ResolveReferences(ctx context.Context, c client.Reader) erro
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -275,7 +276,7 @@ func (mg *Schedule) ResolveReferences(ctx context.Context, c client.Reader) erro
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -296,7 +297,7 @@ func (mg *VirtualNetwork) ResolveReferences(ctx context.Context, c client.Reader
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LabName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.LabName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.LabNameRef,
 			Selector:     mg.Spec.ForProvider.LabNameSelector,
@@ -306,7 +307,7 @@ func (mg *VirtualNetwork) ResolveReferences(ctx context.Context, c client.Reader
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.LabName")
 	}
-	mg.Spec.ForProvider.LabName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LabName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LabNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -315,7 +316,7 @@ func (mg *VirtualNetwork) ResolveReferences(ctx context.Context, c client.Reader
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -325,7 +326,7 @@ func (mg *VirtualNetwork) ResolveReferences(ctx context.Context, c client.Reader
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("devtestlab.azure.upbound.io", "v1beta1", "Lab", "LabList")
@@ -334,7 +335,7 @@ func (mg *VirtualNetwork) ResolveReferences(ctx context.Context, c client.Reader
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LabName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.LabName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.LabNameRef,
 			Selector:     mg.Spec.InitProvider.LabNameSelector,
@@ -344,7 +345,7 @@ func (mg *VirtualNetwork) ResolveReferences(ctx context.Context, c client.Reader
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.LabName")
 	}
-	mg.Spec.InitProvider.LabName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LabName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.LabNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -353,7 +354,7 @@ func (mg *VirtualNetwork) ResolveReferences(ctx context.Context, c client.Reader
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
@@ -363,7 +364,7 @@ func (mg *VirtualNetwork) ResolveReferences(ctx context.Context, c client.Reader
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
 	}
-	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -384,7 +385,7 @@ func (mg *WindowsVirtualMachine) ResolveReferences(ctx context.Context, c client
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LabName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.LabName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.LabNameRef,
 			Selector:     mg.Spec.ForProvider.LabNameSelector,
@@ -394,7 +395,7 @@ func (mg *WindowsVirtualMachine) ResolveReferences(ctx context.Context, c client
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.LabName")
 	}
-	mg.Spec.ForProvider.LabName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LabName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LabNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
@@ -403,7 +404,7 @@ func (mg *WindowsVirtualMachine) ResolveReferences(ctx context.Context, c client
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LabSubnetName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.LabSubnetName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.LabSubnetNameRef,
 			Selector:     mg.Spec.ForProvider.LabSubnetNameSelector,
@@ -413,7 +414,7 @@ func (mg *WindowsVirtualMachine) ResolveReferences(ctx context.Context, c client
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.LabSubnetName")
 	}
-	mg.Spec.ForProvider.LabSubnetName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LabSubnetName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LabSubnetNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("devtestlab.azure.upbound.io", "v1beta2", "VirtualNetwork", "VirtualNetworkList")
@@ -422,7 +423,7 @@ func (mg *WindowsVirtualMachine) ResolveReferences(ctx context.Context, c client
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LabVirtualNetworkID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.LabVirtualNetworkID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.LabVirtualNetworkIDRef,
 			Selector:     mg.Spec.ForProvider.LabVirtualNetworkIDSelector,
@@ -432,7 +433,7 @@ func (mg *WindowsVirtualMachine) ResolveReferences(ctx context.Context, c client
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.LabVirtualNetworkID")
 	}
-	mg.Spec.ForProvider.LabVirtualNetworkID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LabVirtualNetworkID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LabVirtualNetworkIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -441,7 +442,7 @@ func (mg *WindowsVirtualMachine) ResolveReferences(ctx context.Context, c client
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -451,7 +452,7 @@ func (mg *WindowsVirtualMachine) ResolveReferences(ctx context.Context, c client
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("devtestlab.azure.upbound.io", "v1beta1", "Lab", "LabList")
@@ -460,7 +461,7 @@ func (mg *WindowsVirtualMachine) ResolveReferences(ctx context.Context, c client
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LabName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.LabName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.LabNameRef,
 			Selector:     mg.Spec.InitProvider.LabNameSelector,
@@ -470,7 +471,7 @@ func (mg *WindowsVirtualMachine) ResolveReferences(ctx context.Context, c client
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.LabName")
 	}
-	mg.Spec.InitProvider.LabName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LabName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.LabNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
@@ -479,7 +480,7 @@ func (mg *WindowsVirtualMachine) ResolveReferences(ctx context.Context, c client
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LabSubnetName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.LabSubnetName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.LabSubnetNameRef,
 			Selector:     mg.Spec.InitProvider.LabSubnetNameSelector,
@@ -489,7 +490,7 @@ func (mg *WindowsVirtualMachine) ResolveReferences(ctx context.Context, c client
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.LabSubnetName")
 	}
-	mg.Spec.InitProvider.LabSubnetName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LabSubnetName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.LabSubnetNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("devtestlab.azure.upbound.io", "v1beta2", "VirtualNetwork", "VirtualNetworkList")
@@ -498,7 +499,7 @@ func (mg *WindowsVirtualMachine) ResolveReferences(ctx context.Context, c client
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LabVirtualNetworkID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.LabVirtualNetworkID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.LabVirtualNetworkIDRef,
 			Selector:     mg.Spec.InitProvider.LabVirtualNetworkIDSelector,
@@ -508,7 +509,7 @@ func (mg *WindowsVirtualMachine) ResolveReferences(ctx context.Context, c client
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.LabVirtualNetworkID")
 	}
-	mg.Spec.InitProvider.LabVirtualNetworkID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LabVirtualNetworkID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.LabVirtualNetworkIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -517,7 +518,7 @@ func (mg *WindowsVirtualMachine) ResolveReferences(ctx context.Context, c client
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
@@ -527,7 +528,7 @@ func (mg *WindowsVirtualMachine) ResolveReferences(ctx context.Context, c client
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
 	}
-	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil

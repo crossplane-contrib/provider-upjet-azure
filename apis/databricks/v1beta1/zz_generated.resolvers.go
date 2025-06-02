@@ -15,6 +15,7 @@ import (
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	rconfig "github.com/upbound/provider-azure/apis/rconfig"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -33,7 +34,7 @@ func (mg *AccessConnector) ResolveReferences( // ResolveReferences of this Acces
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -43,7 +44,7 @@ func (mg *AccessConnector) ResolveReferences( // ResolveReferences of this Acces
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -65,7 +66,7 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CustomParameters[i3].PrivateSubnetName),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.CustomParameters[i3].PrivateSubnetName, ""),
 				Extract:      reference.ExternalName(),
 				Reference:    mg.Spec.ForProvider.CustomParameters[i3].PrivateSubnetNameRef,
 				Selector:     mg.Spec.ForProvider.CustomParameters[i3].PrivateSubnetNameSelector,
@@ -75,7 +76,7 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.CustomParameters[i3].PrivateSubnetName")
 		}
-		mg.Spec.ForProvider.CustomParameters[i3].PrivateSubnetName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.CustomParameters[i3].PrivateSubnetName = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.CustomParameters[i3].PrivateSubnetNameRef = rsp.ResolvedReference
 
 	}
@@ -86,7 +87,7 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CustomParameters[i3].PublicSubnetName),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.CustomParameters[i3].PublicSubnetName, ""),
 				Extract:      reference.ExternalName(),
 				Reference:    mg.Spec.ForProvider.CustomParameters[i3].PublicSubnetNameRef,
 				Selector:     mg.Spec.ForProvider.CustomParameters[i3].PublicSubnetNameSelector,
@@ -96,7 +97,7 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.CustomParameters[i3].PublicSubnetName")
 		}
-		mg.Spec.ForProvider.CustomParameters[i3].PublicSubnetName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.CustomParameters[i3].PublicSubnetName = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.CustomParameters[i3].PublicSubnetNameRef = rsp.ResolvedReference
 
 	}
@@ -106,7 +107,7 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagedResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ManagedResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ManagedResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ManagedResourceGroupNameSelector,
@@ -116,7 +117,7 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ManagedResourceGroupName")
 	}
-	mg.Spec.ForProvider.ManagedResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ManagedResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ManagedResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -125,7 +126,7 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -135,7 +136,7 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.CustomParameters); i3++ {
@@ -145,7 +146,7 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CustomParameters[i3].PrivateSubnetName),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.CustomParameters[i3].PrivateSubnetName, ""),
 				Extract:      reference.ExternalName(),
 				Reference:    mg.Spec.InitProvider.CustomParameters[i3].PrivateSubnetNameRef,
 				Selector:     mg.Spec.InitProvider.CustomParameters[i3].PrivateSubnetNameSelector,
@@ -155,7 +156,7 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.CustomParameters[i3].PrivateSubnetName")
 		}
-		mg.Spec.InitProvider.CustomParameters[i3].PrivateSubnetName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.CustomParameters[i3].PrivateSubnetName = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.CustomParameters[i3].PrivateSubnetNameRef = rsp.ResolvedReference
 
 	}
@@ -166,7 +167,7 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CustomParameters[i3].PublicSubnetName),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.CustomParameters[i3].PublicSubnetName, ""),
 				Extract:      reference.ExternalName(),
 				Reference:    mg.Spec.InitProvider.CustomParameters[i3].PublicSubnetNameRef,
 				Selector:     mg.Spec.InitProvider.CustomParameters[i3].PublicSubnetNameSelector,
@@ -176,7 +177,7 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.CustomParameters[i3].PublicSubnetName")
 		}
-		mg.Spec.InitProvider.CustomParameters[i3].PublicSubnetName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.CustomParameters[i3].PublicSubnetName = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.CustomParameters[i3].PublicSubnetNameRef = rsp.ResolvedReference
 
 	}
@@ -186,7 +187,7 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagedResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ManagedResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.ManagedResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ManagedResourceGroupNameSelector,
@@ -196,7 +197,7 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ManagedResourceGroupName")
 	}
-	mg.Spec.InitProvider.ManagedResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ManagedResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ManagedResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -217,7 +218,7 @@ func (mg *WorkspaceCustomerManagedKey) ResolveReferences(ctx context.Context, c 
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KeyVaultKeyID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.KeyVaultKeyID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.KeyVaultKeyIDRef,
 			Selector:     mg.Spec.ForProvider.KeyVaultKeyIDSelector,
@@ -227,7 +228,7 @@ func (mg *WorkspaceCustomerManagedKey) ResolveReferences(ctx context.Context, c 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.KeyVaultKeyID")
 	}
-	mg.Spec.ForProvider.KeyVaultKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.KeyVaultKeyID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KeyVaultKeyIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("databricks.azure.upbound.io", "v1beta2", "Workspace", "WorkspaceList")
@@ -236,7 +237,7 @@ func (mg *WorkspaceCustomerManagedKey) ResolveReferences(ctx context.Context, c 
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WorkspaceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.WorkspaceID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.WorkspaceIDRef,
 			Selector:     mg.Spec.ForProvider.WorkspaceIDSelector,
@@ -246,7 +247,7 @@ func (mg *WorkspaceCustomerManagedKey) ResolveReferences(ctx context.Context, c 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.WorkspaceID")
 	}
-	mg.Spec.ForProvider.WorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.WorkspaceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.WorkspaceIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta2", "Key", "KeyList")
@@ -255,7 +256,7 @@ func (mg *WorkspaceCustomerManagedKey) ResolveReferences(ctx context.Context, c 
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyVaultKeyID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.KeyVaultKeyID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.KeyVaultKeyIDRef,
 			Selector:     mg.Spec.InitProvider.KeyVaultKeyIDSelector,
@@ -265,7 +266,7 @@ func (mg *WorkspaceCustomerManagedKey) ResolveReferences(ctx context.Context, c 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.KeyVaultKeyID")
 	}
-	mg.Spec.InitProvider.KeyVaultKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KeyVaultKeyID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.KeyVaultKeyIDRef = rsp.ResolvedReference
 
 	return nil
@@ -286,7 +287,7 @@ func (mg *WorkspaceRootDbfsCustomerManagedKey) ResolveReferences(ctx context.Con
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KeyVaultKeyID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.KeyVaultKeyID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.KeyVaultKeyIDRef,
 			Selector:     mg.Spec.ForProvider.KeyVaultKeyIDSelector,
@@ -296,7 +297,7 @@ func (mg *WorkspaceRootDbfsCustomerManagedKey) ResolveReferences(ctx context.Con
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.KeyVaultKeyID")
 	}
-	mg.Spec.ForProvider.KeyVaultKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.KeyVaultKeyID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KeyVaultKeyIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("databricks.azure.upbound.io", "v1beta2", "Workspace", "WorkspaceList")
@@ -305,7 +306,7 @@ func (mg *WorkspaceRootDbfsCustomerManagedKey) ResolveReferences(ctx context.Con
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WorkspaceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.WorkspaceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.WorkspaceIDRef,
 			Selector:     mg.Spec.ForProvider.WorkspaceIDSelector,
@@ -315,7 +316,7 @@ func (mg *WorkspaceRootDbfsCustomerManagedKey) ResolveReferences(ctx context.Con
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.WorkspaceID")
 	}
-	mg.Spec.ForProvider.WorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.WorkspaceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.WorkspaceIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta2", "Key", "KeyList")
@@ -324,7 +325,7 @@ func (mg *WorkspaceRootDbfsCustomerManagedKey) ResolveReferences(ctx context.Con
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyVaultKeyID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.KeyVaultKeyID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.KeyVaultKeyIDRef,
 			Selector:     mg.Spec.InitProvider.KeyVaultKeyIDSelector,
@@ -334,7 +335,7 @@ func (mg *WorkspaceRootDbfsCustomerManagedKey) ResolveReferences(ctx context.Con
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.KeyVaultKeyID")
 	}
-	mg.Spec.InitProvider.KeyVaultKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KeyVaultKeyID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.KeyVaultKeyIDRef = rsp.ResolvedReference
 
 	return nil

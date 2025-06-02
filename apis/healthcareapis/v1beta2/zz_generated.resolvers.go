@@ -15,6 +15,7 @@ import (
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	rconfig "github.com/upbound/provider-azure/apis/rconfig"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -33,7 +34,7 @@ func (mg *HealthcareDICOMService) ResolveReferences( // ResolveReferences of thi
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WorkspaceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.WorkspaceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.WorkspaceIDRef,
 			Selector:     mg.Spec.ForProvider.WorkspaceIDSelector,
@@ -43,7 +44,7 @@ func (mg *HealthcareDICOMService) ResolveReferences( // ResolveReferences of thi
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.WorkspaceID")
 	}
-	mg.Spec.ForProvider.WorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.WorkspaceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.WorkspaceIDRef = rsp.ResolvedReference
 
 	return nil
@@ -64,7 +65,7 @@ func (mg *HealthcareFHIRService) ResolveReferences(ctx context.Context, c client
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -74,7 +75,7 @@ func (mg *HealthcareFHIRService) ResolveReferences(ctx context.Context, c client
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("healthcareapis.azure.upbound.io", "v1beta1", "HealthcareWorkspace", "HealthcareWorkspaceList")
@@ -83,7 +84,7 @@ func (mg *HealthcareFHIRService) ResolveReferences(ctx context.Context, c client
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WorkspaceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.WorkspaceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.WorkspaceIDRef,
 			Selector:     mg.Spec.ForProvider.WorkspaceIDSelector,
@@ -93,7 +94,7 @@ func (mg *HealthcareFHIRService) ResolveReferences(ctx context.Context, c client
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.WorkspaceID")
 	}
-	mg.Spec.ForProvider.WorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.WorkspaceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.WorkspaceIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -102,7 +103,7 @@ func (mg *HealthcareFHIRService) ResolveReferences(ctx context.Context, c client
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
@@ -112,7 +113,7 @@ func (mg *HealthcareFHIRService) ResolveReferences(ctx context.Context, c client
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
 	}
-	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -133,7 +134,7 @@ func (mg *HealthcareMedtechService) ResolveReferences(ctx context.Context, c cli
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EventHubConsumerGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.EventHubConsumerGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.EventHubConsumerGroupNameRef,
 			Selector:     mg.Spec.ForProvider.EventHubConsumerGroupNameSelector,
@@ -143,7 +144,7 @@ func (mg *HealthcareMedtechService) ResolveReferences(ctx context.Context, c cli
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.EventHubConsumerGroupName")
 	}
-	mg.Spec.ForProvider.EventHubConsumerGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.EventHubConsumerGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.EventHubConsumerGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("eventhub.azure.upbound.io", "v1beta2", "EventHub", "EventHubList")
@@ -152,7 +153,7 @@ func (mg *HealthcareMedtechService) ResolveReferences(ctx context.Context, c cli
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EventHubName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.EventHubName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.EventHubNameRef,
 			Selector:     mg.Spec.ForProvider.EventHubNameSelector,
@@ -162,7 +163,7 @@ func (mg *HealthcareMedtechService) ResolveReferences(ctx context.Context, c cli
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.EventHubName")
 	}
-	mg.Spec.ForProvider.EventHubName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.EventHubName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.EventHubNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("eventhub.azure.upbound.io", "v1beta2", "EventHubNamespace", "EventHubNamespaceList")
@@ -171,7 +172,7 @@ func (mg *HealthcareMedtechService) ResolveReferences(ctx context.Context, c cli
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EventHubNamespaceName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.EventHubNamespaceName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.EventHubNamespaceNameRef,
 			Selector:     mg.Spec.ForProvider.EventHubNamespaceNameSelector,
@@ -181,7 +182,7 @@ func (mg *HealthcareMedtechService) ResolveReferences(ctx context.Context, c cli
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.EventHubNamespaceName")
 	}
-	mg.Spec.ForProvider.EventHubNamespaceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.EventHubNamespaceName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.EventHubNamespaceNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("healthcareapis.azure.upbound.io", "v1beta1", "HealthcareWorkspace", "HealthcareWorkspaceList")
@@ -190,7 +191,7 @@ func (mg *HealthcareMedtechService) ResolveReferences(ctx context.Context, c cli
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WorkspaceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.WorkspaceID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.WorkspaceIDRef,
 			Selector:     mg.Spec.ForProvider.WorkspaceIDSelector,
@@ -200,7 +201,7 @@ func (mg *HealthcareMedtechService) ResolveReferences(ctx context.Context, c cli
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.WorkspaceID")
 	}
-	mg.Spec.ForProvider.WorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.WorkspaceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.WorkspaceIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("eventhub.azure.upbound.io", "v1beta1", "ConsumerGroup", "ConsumerGroupList")
@@ -209,7 +210,7 @@ func (mg *HealthcareMedtechService) ResolveReferences(ctx context.Context, c cli
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EventHubConsumerGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.EventHubConsumerGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.EventHubConsumerGroupNameRef,
 			Selector:     mg.Spec.InitProvider.EventHubConsumerGroupNameSelector,
@@ -219,7 +220,7 @@ func (mg *HealthcareMedtechService) ResolveReferences(ctx context.Context, c cli
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.EventHubConsumerGroupName")
 	}
-	mg.Spec.InitProvider.EventHubConsumerGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.EventHubConsumerGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.EventHubConsumerGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("eventhub.azure.upbound.io", "v1beta2", "EventHub", "EventHubList")
@@ -228,7 +229,7 @@ func (mg *HealthcareMedtechService) ResolveReferences(ctx context.Context, c cli
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EventHubName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.EventHubName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.EventHubNameRef,
 			Selector:     mg.Spec.InitProvider.EventHubNameSelector,
@@ -238,7 +239,7 @@ func (mg *HealthcareMedtechService) ResolveReferences(ctx context.Context, c cli
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.EventHubName")
 	}
-	mg.Spec.InitProvider.EventHubName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.EventHubName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.EventHubNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("eventhub.azure.upbound.io", "v1beta2", "EventHubNamespace", "EventHubNamespaceList")
@@ -247,7 +248,7 @@ func (mg *HealthcareMedtechService) ResolveReferences(ctx context.Context, c cli
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EventHubNamespaceName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.EventHubNamespaceName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.EventHubNamespaceNameRef,
 			Selector:     mg.Spec.InitProvider.EventHubNamespaceNameSelector,
@@ -257,7 +258,7 @@ func (mg *HealthcareMedtechService) ResolveReferences(ctx context.Context, c cli
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.EventHubNamespaceName")
 	}
-	mg.Spec.InitProvider.EventHubNamespaceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.EventHubNamespaceName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.EventHubNamespaceNameRef = rsp.ResolvedReference
 
 	return nil
@@ -278,7 +279,7 @@ func (mg *HealthcareService) ResolveReferences(ctx context.Context, c client.Rea
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -288,7 +289,7 @@ func (mg *HealthcareService) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
