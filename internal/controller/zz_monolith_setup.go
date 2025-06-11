@@ -83,6 +83,7 @@ import (
 	pimeligibleroleassignment "github.com/upbound/provider-azure/internal/controller/authorization/pimeligibleroleassignment"
 	policydefinition "github.com/upbound/provider-azure/internal/controller/authorization/policydefinition"
 	resourcegrouppolicyassignment "github.com/upbound/provider-azure/internal/controller/authorization/resourcegrouppolicyassignment"
+	resourcegrouppolicyexemption "github.com/upbound/provider-azure/internal/controller/authorization/resourcegrouppolicyexemption"
 	resourcepolicyassignment "github.com/upbound/provider-azure/internal/controller/authorization/resourcepolicyassignment"
 	resourcepolicyexemption "github.com/upbound/provider-azure/internal/controller/authorization/resourcepolicyexemption"
 	roleassignment "github.com/upbound/provider-azure/internal/controller/authorization/roleassignment"
@@ -835,6 +836,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		pimeligibleroleassignment.Setup,
 		policydefinition.Setup,
 		resourcegrouppolicyassignment.Setup,
+		resourcegrouppolicyexemption.Setup,
 		resourcepolicyassignment.Setup,
 		resourcepolicyexemption.Setup,
 		roleassignment.Setup,

@@ -52,6 +52,15 @@ func (l *ResourceGroupPolicyAssignmentList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this ResourceGroupPolicyExemptionList.
+func (l *ResourceGroupPolicyExemptionList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this ResourcePolicyAssignmentList.
 func (l *ResourcePolicyAssignmentList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))

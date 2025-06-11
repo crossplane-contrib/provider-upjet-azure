@@ -307,6 +307,66 @@ func (mg *ResourceGroupPolicyAssignment) SetWriteConnectionSecretToReference(r *
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this ResourceGroupPolicyExemption.
+func (mg *ResourceGroupPolicyExemption) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this ResourceGroupPolicyExemption.
+func (mg *ResourceGroupPolicyExemption) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this ResourceGroupPolicyExemption.
+func (mg *ResourceGroupPolicyExemption) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this ResourceGroupPolicyExemption.
+func (mg *ResourceGroupPolicyExemption) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetPublishConnectionDetailsTo of this ResourceGroupPolicyExemption.
+func (mg *ResourceGroupPolicyExemption) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this ResourceGroupPolicyExemption.
+func (mg *ResourceGroupPolicyExemption) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this ResourceGroupPolicyExemption.
+func (mg *ResourceGroupPolicyExemption) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this ResourceGroupPolicyExemption.
+func (mg *ResourceGroupPolicyExemption) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this ResourceGroupPolicyExemption.
+func (mg *ResourceGroupPolicyExemption) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this ResourceGroupPolicyExemption.
+func (mg *ResourceGroupPolicyExemption) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetPublishConnectionDetailsTo of this ResourceGroupPolicyExemption.
+func (mg *ResourceGroupPolicyExemption) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this ResourceGroupPolicyExemption.
+func (mg *ResourceGroupPolicyExemption) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this ResourcePolicyAssignment.
 func (mg *ResourcePolicyAssignment) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
