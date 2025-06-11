@@ -2130,16 +2130,12 @@ func policyDefinitionExternalName() config.ExternalName {
 		},
 
 		GetExternalNameFn: func(tfstate map[string]interface{}) (string, error) {
-			idRaw, ok := tfstate["id"]
+			id, ok := tfstate["id"]
 			if !ok {
 				return "", errors.New("cannot find 'id' in tfstate")
 			}
-			id, ok := idRaw.(string)
-			if !ok || id == "" {
-				return "", errors.New("invalid or empty 'id' in tfstate")
-			}
 
-			parts := strings.Split(id, "/")
+			parts := strings.Split(id.(string), "/")
 			if len(parts) < 2 {
 				return "", errors.New("unexpected format for 'id' in tfstate")
 			}
