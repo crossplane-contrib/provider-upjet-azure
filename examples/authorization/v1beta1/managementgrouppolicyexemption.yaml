@@ -1,0 +1,56 @@
+apiVersion: authorization.azure.upbound.io/v1beta1
+kind: ManagementGroupPolicyExemption
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta1/managementgrouppolicyexemption
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    exemptionCategory: Mitigated
+    managementGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    policyAssignmentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: management.azure.upbound.io/v1beta1
+kind: ManagementGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta1/managementgrouppolicyexemption
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    displayName: Example MgmtGroup
+
+---
+
+apiVersion: authorization.azure.upbound.io/v1beta1
+kind: ManagementGroupPolicyAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta1/managementgrouppolicyexemption
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    managementGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    policyDefinitionId: "/providers/Microsoft.Authorization/policyDefinitions/e56962a6-4747-49cd-b67b-bf8b01975c4c"
+    parameters: |
+      {
+        "listOfAllowedLocations": {
+            "value": [
+                "westus"
+            ]
+        }
+      }
