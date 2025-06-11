@@ -78,6 +78,8 @@ import (
 	springcloudservice "github.com/upbound/provider-azure/internal/controller/appplatform/springcloudservice"
 	springcloudstorage "github.com/upbound/provider-azure/internal/controller/appplatform/springcloudstorage"
 	provider "github.com/upbound/provider-azure/internal/controller/attestation/provider"
+	managementgrouppolicyassignment "github.com/upbound/provider-azure/internal/controller/authorization/managementgrouppolicyassignment"
+	managementgrouppolicyexemption "github.com/upbound/provider-azure/internal/controller/authorization/managementgrouppolicyexemption"
 	managementlock "github.com/upbound/provider-azure/internal/controller/authorization/managementlock"
 	pimactiveroleassignment "github.com/upbound/provider-azure/internal/controller/authorization/pimactiveroleassignment"
 	pimeligibleroleassignment "github.com/upbound/provider-azure/internal/controller/authorization/pimeligibleroleassignment"
@@ -831,6 +833,8 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		springcloudservice.Setup,
 		springcloudstorage.Setup,
 		provider.Setup,
+		managementgrouppolicyassignment.Setup,
+		managementgrouppolicyexemption.Setup,
 		managementlock.Setup,
 		pimactiveroleassignment.Setup,
 		pimeligibleroleassignment.Setup,

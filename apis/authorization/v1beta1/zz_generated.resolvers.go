@@ -18,8 +18,146 @@ import (
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-func (mg *ManagementLock) ResolveReferences( // ResolveReferences of this ManagementLock.
+func (mg *ManagementGroupPolicyAssignment) ResolveReferences( // ResolveReferences of this ManagementGroupPolicyAssignment.
 	ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("management.azure.upbound.io", "v1beta1", "ManagementGroup", "ManagementGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagementGroupID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.ManagementGroupIDRef,
+			Selector:     mg.Spec.ForProvider.ManagementGroupIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ManagementGroupID")
+	}
+	mg.Spec.ForProvider.ManagementGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ManagementGroupIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("authorization.azure.upbound.io", "v1beta1", "PolicyDefinition", "PolicyDefinitionList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PolicyDefinitionID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.PolicyDefinitionIDRef,
+			Selector:     mg.Spec.ForProvider.PolicyDefinitionIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.PolicyDefinitionID")
+	}
+	mg.Spec.ForProvider.PolicyDefinitionID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.PolicyDefinitionIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("authorization.azure.upbound.io", "v1beta1", "PolicyDefinition", "PolicyDefinitionList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PolicyDefinitionID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.PolicyDefinitionIDRef,
+			Selector:     mg.Spec.InitProvider.PolicyDefinitionIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.PolicyDefinitionID")
+	}
+	mg.Spec.InitProvider.PolicyDefinitionID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PolicyDefinitionIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this ManagementGroupPolicyExemption.
+func (mg *ManagementGroupPolicyExemption) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("management.azure.upbound.io", "v1beta1", "ManagementGroup", "ManagementGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagementGroupID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.ManagementGroupIDRef,
+			Selector:     mg.Spec.ForProvider.ManagementGroupIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ManagementGroupID")
+	}
+	mg.Spec.ForProvider.ManagementGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ManagementGroupIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("authorization.azure.upbound.io", "v1beta1", "ManagementGroupPolicyAssignment", "ManagementGroupPolicyAssignmentList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PolicyAssignmentID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.PolicyAssignmentIDRef,
+			Selector:     mg.Spec.ForProvider.PolicyAssignmentIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.PolicyAssignmentID")
+	}
+	mg.Spec.ForProvider.PolicyAssignmentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.PolicyAssignmentIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("authorization.azure.upbound.io", "v1beta1", "ManagementGroupPolicyAssignment", "ManagementGroupPolicyAssignmentList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PolicyAssignmentID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.PolicyAssignmentIDRef,
+			Selector:     mg.Spec.InitProvider.PolicyAssignmentIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.PolicyAssignmentID")
+	}
+	mg.Spec.InitProvider.PolicyAssignmentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PolicyAssignmentIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this ManagementLock.
+func (mg *ManagementLock) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList
 	r := reference.NewAPIResolver(c, mg)

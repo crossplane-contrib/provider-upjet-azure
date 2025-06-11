@@ -9,6 +9,8 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
+	managementgrouppolicyassignment "github.com/upbound/provider-azure/internal/controller/authorization/managementgrouppolicyassignment"
+	managementgrouppolicyexemption "github.com/upbound/provider-azure/internal/controller/authorization/managementgrouppolicyexemption"
 	managementlock "github.com/upbound/provider-azure/internal/controller/authorization/managementlock"
 	pimactiveroleassignment "github.com/upbound/provider-azure/internal/controller/authorization/pimactiveroleassignment"
 	pimeligibleroleassignment "github.com/upbound/provider-azure/internal/controller/authorization/pimeligibleroleassignment"
@@ -28,6 +30,8 @@ import (
 // the supplied manager.
 func Setup_authorization(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		managementgrouppolicyassignment.Setup,
+		managementgrouppolicyexemption.Setup,
 		managementlock.Setup,
 		pimactiveroleassignment.Setup,
 		pimeligibleroleassignment.Setup,

@@ -7,6 +7,126 @@ package v1beta1
 
 import xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 
+// GetCondition of this ManagementGroupPolicyAssignment.
+func (mg *ManagementGroupPolicyAssignment) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this ManagementGroupPolicyAssignment.
+func (mg *ManagementGroupPolicyAssignment) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this ManagementGroupPolicyAssignment.
+func (mg *ManagementGroupPolicyAssignment) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this ManagementGroupPolicyAssignment.
+func (mg *ManagementGroupPolicyAssignment) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetPublishConnectionDetailsTo of this ManagementGroupPolicyAssignment.
+func (mg *ManagementGroupPolicyAssignment) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this ManagementGroupPolicyAssignment.
+func (mg *ManagementGroupPolicyAssignment) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this ManagementGroupPolicyAssignment.
+func (mg *ManagementGroupPolicyAssignment) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this ManagementGroupPolicyAssignment.
+func (mg *ManagementGroupPolicyAssignment) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this ManagementGroupPolicyAssignment.
+func (mg *ManagementGroupPolicyAssignment) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this ManagementGroupPolicyAssignment.
+func (mg *ManagementGroupPolicyAssignment) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetPublishConnectionDetailsTo of this ManagementGroupPolicyAssignment.
+func (mg *ManagementGroupPolicyAssignment) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this ManagementGroupPolicyAssignment.
+func (mg *ManagementGroupPolicyAssignment) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this ManagementGroupPolicyExemption.
+func (mg *ManagementGroupPolicyExemption) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this ManagementGroupPolicyExemption.
+func (mg *ManagementGroupPolicyExemption) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this ManagementGroupPolicyExemption.
+func (mg *ManagementGroupPolicyExemption) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this ManagementGroupPolicyExemption.
+func (mg *ManagementGroupPolicyExemption) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetPublishConnectionDetailsTo of this ManagementGroupPolicyExemption.
+func (mg *ManagementGroupPolicyExemption) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this ManagementGroupPolicyExemption.
+func (mg *ManagementGroupPolicyExemption) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this ManagementGroupPolicyExemption.
+func (mg *ManagementGroupPolicyExemption) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this ManagementGroupPolicyExemption.
+func (mg *ManagementGroupPolicyExemption) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this ManagementGroupPolicyExemption.
+func (mg *ManagementGroupPolicyExemption) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this ManagementGroupPolicyExemption.
+func (mg *ManagementGroupPolicyExemption) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetPublishConnectionDetailsTo of this ManagementGroupPolicyExemption.
+func (mg *ManagementGroupPolicyExemption) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this ManagementGroupPolicyExemption.
+func (mg *ManagementGroupPolicyExemption) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this ManagementLock.
 func (mg *ManagementLock) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
