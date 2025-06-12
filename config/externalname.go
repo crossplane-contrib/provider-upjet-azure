@@ -2125,8 +2125,8 @@ func mongoDatabaseBasedId(nameField string, objectType string) config.ExternalNa
 //   - /providers/Microsoft.Management/managementgroups/<MGMT_GROUP_ID>/providers/Microsoft.Authorization/policyDefinitions/<POLICY_NAME>
 func policyDefinitionExternalName() config.ExternalName {
 	return config.ExternalName{
-		SetIdentifierArgumentFn: func(base map[string]any, name string) {
-			base["name"] = name
+		SetIdentifierArgumentFn: func(base map[string]any, externalName string) {
+			base["name"] = externalName
 		},
 
 		GetExternalNameFn: func(tfstate map[string]interface{}) (string, error) {
