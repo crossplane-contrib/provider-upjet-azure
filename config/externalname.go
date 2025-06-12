@@ -2136,7 +2136,7 @@ func policyDefinitionExternalName() config.ExternalName {
 			}
 
 			parts := strings.Split(id.(string), "/")
-			if len(parts) < 2 {
+			if len(parts) != 6 || len(parts) != 8 {
 				return "", errors.New("unexpected format for 'id' in tfstate")
 			}
 			return parts[len(parts)-1], nil
