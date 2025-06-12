@@ -2161,7 +2161,10 @@ func policyDefinitionExternalName() config.ExternalName {
 
 			return fmt.Sprintf("/subscriptions/%s/providers/Microsoft.Authorization/policyDefinitions/%s", subID, externalName), nil
 		},
-		OmittedFields: []string{"name"},
+		OmittedFields: []string{
+			"name",
+			"name_prefix",
+		},
 	}
 }
 
