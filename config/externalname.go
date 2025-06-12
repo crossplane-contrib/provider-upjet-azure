@@ -14,7 +14,6 @@ import (
 	"github.com/pkg/errors"
 
 	"github.com/crossplane/upjet/pkg/config"
-	"github.com/crossplane/upjet/pkg/terraform"
 )
 
 // TerraformPluginSDKExternalNameConfigs contains all external name configurations
@@ -2151,7 +2150,7 @@ func policyDefinitionExternalName() config.ExternalName {
 			}
 
 			// Subscription level
-			conf, ok := terraformProviderConfig["configuration"].(terraform.ProviderConfiguration)
+			conf, ok := terraformProviderConfig["configuration"].(map[string]any)
 			if !ok {
 				return "", errors.New("terraform provider configuration is not a map")
 			}
