@@ -4,17 +4,17 @@ metadata:
   annotations:
     meta.upbound.io/example-id: authorization/v1beta1/managementgrouppolicyexemption
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: managementgrouppolicyexemption
+  name: mgmtgrouppolicyexempt
 spec:
   forProvider:
     exemptionCategory: Mitigated
     managementGroupIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: managementgrouppolicyexemption
     policyAssignmentIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: managementgrouppolicyexemption
 
 ---
 
@@ -24,8 +24,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: authorization/v1beta1/managementgrouppolicyexemption
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: managementgrouppolicyexemption
+  name: mgmtgrouppolicyexempt
 spec:
   forProvider:
     displayName: Example MgmtGroup
@@ -38,13 +38,13 @@ metadata:
   annotations:
     meta.upbound.io/example-id: authorization/v1beta1/managementgrouppolicyexemption
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: managementgrouppolicyexemption
+  name: mgmtgrouppolicyexempt
 spec:
   forProvider:
     managementGroupIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: managementgrouppolicyexemption
     policyDefinitionId: "/providers/Microsoft.Authorization/policyDefinitions/e56962a6-4747-49cd-b67b-bf8b01975c4c"
     parameters: |
       {

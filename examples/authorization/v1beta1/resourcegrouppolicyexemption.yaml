@@ -4,17 +4,17 @@ metadata:
   annotations:
     meta.upbound.io/example-id: authorization/v1beta1/resourcegrouppolicyexemption
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: resourcegrouppolicyexemption
+  name: resgrouppolicyexempt
 spec:
   forProvider:
     exemptionCategory: Mitigated
     policyAssignmentIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: resourcegrouppolicyexemption
     resourceGroupIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: resourcegrouppolicyexemption
 
 ---
 
@@ -24,8 +24,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: authorization/v1beta1/resourcegrouppolicyexemption
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: resourcegrouppolicyexemption
+  name: resgrouppolicyexempt
 spec:
   forProvider:
     location: westus
@@ -38,8 +38,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: authorization/v1beta1/resourcegrouppolicyexemption
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: resourcegrouppolicyexemption
+  name: resgrouppolicyexempt
 spec:
   forProvider:
     parameters: |
@@ -53,5 +53,5 @@ spec:
     policyDefinitionId: "/providers/Microsoft.Authorization/policyDefinitions/e56962a6-4747-49cd-b67b-bf8b01975c4c"
     resourceGroupIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: resourcegrouppolicyexemption
 
