@@ -78,11 +78,14 @@ import (
 	springcloudservice "github.com/upbound/provider-azure/internal/controller/appplatform/springcloudservice"
 	springcloudstorage "github.com/upbound/provider-azure/internal/controller/appplatform/springcloudstorage"
 	provider "github.com/upbound/provider-azure/internal/controller/attestation/provider"
+	managementgrouppolicyassignment "github.com/upbound/provider-azure/internal/controller/authorization/managementgrouppolicyassignment"
+	managementgrouppolicyexemption "github.com/upbound/provider-azure/internal/controller/authorization/managementgrouppolicyexemption"
 	managementlock "github.com/upbound/provider-azure/internal/controller/authorization/managementlock"
 	pimactiveroleassignment "github.com/upbound/provider-azure/internal/controller/authorization/pimactiveroleassignment"
 	pimeligibleroleassignment "github.com/upbound/provider-azure/internal/controller/authorization/pimeligibleroleassignment"
 	policydefinition "github.com/upbound/provider-azure/internal/controller/authorization/policydefinition"
 	resourcegrouppolicyassignment "github.com/upbound/provider-azure/internal/controller/authorization/resourcegrouppolicyassignment"
+	resourcegrouppolicyexemption "github.com/upbound/provider-azure/internal/controller/authorization/resourcegrouppolicyexemption"
 	resourcepolicyassignment "github.com/upbound/provider-azure/internal/controller/authorization/resourcepolicyassignment"
 	resourcepolicyexemption "github.com/upbound/provider-azure/internal/controller/authorization/resourcepolicyexemption"
 	roleassignment "github.com/upbound/provider-azure/internal/controller/authorization/roleassignment"
@@ -830,11 +833,14 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		springcloudservice.Setup,
 		springcloudstorage.Setup,
 		provider.Setup,
+		managementgrouppolicyassignment.Setup,
+		managementgrouppolicyexemption.Setup,
 		managementlock.Setup,
 		pimactiveroleassignment.Setup,
 		pimeligibleroleassignment.Setup,
 		policydefinition.Setup,
 		resourcegrouppolicyassignment.Setup,
+		resourcegrouppolicyexemption.Setup,
 		resourcepolicyassignment.Setup,
 		resourcepolicyexemption.Setup,
 		roleassignment.Setup,

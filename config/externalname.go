@@ -131,8 +131,18 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_api_management_custom_domain": config.TemplatedStringAsIdentifier("", "{{ .parameters.api_management_id }}/customDomains/{{ .external_name }}"),
 
 	// authorization
-	"azurerm_resource_group_policy_assignment":               config.TemplatedStringAsIdentifier("name", "{{ .parameters.resource_group_id }}/providers/Microsoft.Authorization/policyAssignments/{{ .external_name }}"),
-	"azurerm_role_assignment":                                config.IdentifierFromProvider,
+	"azurerm_resource_group_policy_assignment": config.TemplatedStringAsIdentifier("name", "{{ .parameters.resource_group_id }}/providers/Microsoft.Authorization/policyAssignments/{{ .external_name }}"),
+	// Policy Exemptions can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-000000000000/resourceGroups/resGroup1/providers/Microsoft.Authorization/policyExemptions/exemption1
+	"azurerm_resource_group_policy_exemption": config.TemplatedStringAsIdentifier("name", "{{ .parameters.resource_group_id }}/providers/Microsoft.Authorization/policyExemptions/{{ .external_name }}"),
+	// Management Group Policy Assignments can be imported using the resource id
+	// /providers/Microsoft.Management/managementGroups/group1/providers/Microsoft.Authorization/policyAssignments/assignment1
+	"azurerm_management_group_policy_assignment": config.TemplatedStringAsIdentifier("name", "{{ .parameters.management_group_id }}/providers/Microsoft.Authorization/policyAssignments/{{ .external_name }}"),
+	// /providers/Microsoft.Management/managementGroups/group1/providers/Microsoft.Authorization/policyExemptions/exemption1
+	"azurerm_management_group_policy_exemption": config.TemplatedStringAsIdentifier("name", "{{ .parameters.management_group_id }}/providers/Microsoft.Authorization/policyExemptions/{{ .external_name }}"),
+	// Policy Remediations can be imported using the resource id
+	"azurerm_role_assignment": config.IdentifierFromProvider,
+	// An existing Kubernetes Cluster Trusted Access Role Binding can be imported into Terraform using the resource id
 	"azurerm_kubernetes_cluster_trusted_access_role_binding": config.TemplatedStringAsIdentifier("name", "{{ .parameters.kubernetes_cluster_id }}/trustedAccessRoleBindings/{{ .external_name }}"),
 	// Pim Eligible Role Assignments can be imported using the resource id
 	"azurerm_pim_eligible_role_assignment": config.IdentifierFromProvider,
