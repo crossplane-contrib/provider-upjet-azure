@@ -14,6 +14,7 @@ import (
 	"github.com/pkg/errors"
 
 	"github.com/crossplane/upjet/pkg/config"
+	"github.com/crossplane/upjet/pkg/terraform"
 )
 
 // TerraformPluginSDKExternalNameConfigs contains all external name configurations
@@ -892,9 +893,11 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.TimeSeriesInsights/environments/example
 	"azurerm_iot_time_series_insights_standard_environment": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.TimeSeriesInsights/environments/{{ .external_name }}"),
 
-	// azurerm_policy_definition can be imported
-	// azurerm_policy_definition.examplePolicy /subscriptions/<SUBSCRIPTION_ID>/providers/Microsoft.Authorization/policyDefinitions/<POLICY_NAME>
-	"azurerm_policy_definition": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/providers/Microsoft.Authorization/policyDefinitions/{{ .external_name }}"),
+	// azurerm_policy_definition can be imported at subscription or management group level
+	// Example IDs:
+	//	/subscriptions/<SUBSCRIPTION_ID>/providers/Microsoft.Authorization/policyDefinitions/<POLICY_NAME>
+	//	/providers/Microsoft.Management/managementgroups/<MGMT_GROUP_ID>/providers/Microsoft.Authorization/policyDefinitions/<POLICY_NAME>
+	"azurerm_policy_definition": policyDefinitionExternalName(),
 
 	// alertsmanagement
 	//
@@ -2118,6 +2121,60 @@ func mongoDatabaseBasedId(nameField string, objectType string) config.ExternalNa
 			databaseName := w[len(w)-1]
 
 			return strings.Join(append(accountId, objectType, databaseName+"."+externalName), "/"), nil
+		},
+	}
+}
+
+// policyDefinitionExternalName returns a custom ExternalName configuration
+// for azurerm_policy_definition. It supports both subscription and management
+// group level policy definitions by constructing and parsing the appropriate
+// Azure resource ID formats.
+//
+// Supported ID formats:
+//   - /subscriptions/<SUBSCRIPTION_ID>/providers/Microsoft.Authorization/policyDefinitions/<POLICY_NAME>
+//   - /providers/Microsoft.Management/managementgroups/<MGMT_GROUP_ID>/providers/Microsoft.Authorization/policyDefinitions/<POLICY_NAME>
+func policyDefinitionExternalName() config.ExternalName {
+	return config.ExternalName{
+		SetIdentifierArgumentFn: func(base map[string]any, externalName string) {
+			base["name"] = externalName
+		},
+
+		GetExternalNameFn: func(tfstate map[string]interface{}) (string, error) {
+			id, ok := tfstate["id"]
+			if !ok {
+				return "", errors.New("cannot find 'id' in tfstate")
+			}
+
+			parts := strings.Split(id.(string), "/")
+			if len(parts) != 7 && len(parts) != 9 {
+				return "", errors.New("unexpected format for 'id' in tfstate")
+			}
+			return parts[len(parts)-1], nil
+		},
+
+		GetIDFn: func(_ context.Context, externalName string, parameters map[string]interface{}, terraformProviderConfig map[string]interface{}) (string, error) {
+			// Management group level
+			if mg, ok := parameters["management_group_id"]; ok {
+				if mgStr, ok := mg.(string); ok && mgStr != "" {
+					return fmt.Sprintf("%s/providers/Microsoft.Authorization/policyDefinitions/%s", mgStr, externalName), nil
+				}
+			}
+
+			// Subscription level
+			conf, ok := terraformProviderConfig["configuration"].(terraform.ProviderConfiguration)
+			if !ok {
+				return "", errors.New("terraform provider configuration is not a map")
+			}
+			subID, ok := conf["subscription_id"].(string)
+			if !ok || subID == "" {
+				return "", errors.New("unable to extract 'subscription_id' from provider configuration")
+			}
+
+			return fmt.Sprintf("/subscriptions/%s/providers/Microsoft.Authorization/policyDefinitions/%s", subID, externalName), nil
+		},
+		OmittedFields: []string{
+			"name",
+			"name_prefix",
 		},
 	}
 }
