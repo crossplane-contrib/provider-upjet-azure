@@ -7,6 +7,12 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
+func (tr *ManagementGroupPolicyAssignment) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *ManagementGroupPolicyExemption) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *ManagementLock) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -17,6 +23,9 @@ func (tr *PimEligibleRoleAssignment) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *PolicyDefinition) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *ResourceGroupPolicyExemption) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *ResourcePolicyExemption) Hub() {}

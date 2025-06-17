@@ -1,0 +1,41 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: authorization.azure.upbound.io/v1beta1
+kind: ManagementGroupPolicyAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta1/managementgrouppolicyassignment
+  labels:
+    testing.upbound.io/example-name: managementgrouppolicyassignment
+  name: mgmtgrouppolicyassign
+spec:
+  forProvider:
+    managementGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: managementgrouppolicyassignment
+    policyDefinitionId: "/providers/Microsoft.Authorization/policyDefinitions/e56962a6-4747-49cd-b67b-bf8b01975c4c"
+    parameters: |
+      {
+        "listOfAllowedLocations": {
+            "value": [
+                "westus"
+            ]
+        }
+      }
+
+---
+
+apiVersion: management.azure.upbound.io/v1beta1
+kind: ManagementGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta1/managementgrouppolicyassignment
+    uptest.upbound.io/pre-delete-hook: testhooks/delete-management-group-policy-assignment-mgmtgrouppolicyassign.sh
+  labels:
+    testing.upbound.io/example-name: managementgrouppolicyassignment
+  name: mgmtgrouppolicyassign
+spec:
+  forProvider:
+    displayName: Some Management Group
