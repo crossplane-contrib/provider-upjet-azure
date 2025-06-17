@@ -28,6 +28,7 @@ kind: ManagementGroup
 metadata:
   annotations:
     meta.upbound.io/example-id: authorization/v1beta1/managementgrouppolicyassignment
+    uptest.upbound.io/pre-delete-hook: testhooks/delete-management-group-policy-assignment-mgmtgrouppolicyassign.sh
   labels:
     testing.upbound.io/example-name: managementgrouppolicyassignment
   name: mgmtgrouppolicyassign
