@@ -189,7 +189,7 @@ func GetProvider(ctx context.Context, generationProvider bool) (*ujconfig.Provid
 	// We need to include the controllers for this group into the base packages
 	// list to get their controllers packaged together with the config package
 	// controllers (provider family config package).
-	for _, c := range []string{"internal/controller/azure/resourcegroup", "internal/controller/azure/resourceproviderregistration", "internal/controller/azure/subscription"} {
+	for _, c := range []string{"azure/resourcegroup", "azure/resourceproviderregistration", "azure/subscription"} {
 		pc.BasePackages.ControllerMap[c] = "config"
 	}
 
