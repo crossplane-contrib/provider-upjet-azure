@@ -897,7 +897,11 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// Example IDs:
 	//	/subscriptions/<SUBSCRIPTION_ID>/providers/Microsoft.Authorization/policyDefinitions/<POLICY_NAME>
 	//	/providers/Microsoft.Management/managementgroups/<MGMT_GROUP_ID>/providers/Microsoft.Authorization/policyDefinitions/<POLICY_NAME>
-	"azurerm_policy_definition": policyDefinitionExternalName(),
+	"azurerm_policy_definition": policyDefinitionExternalName("policyDefinitions"),
+	// azurerm_policy_set_definition can be imported at subscription or management group level
+	// /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Authorization/policySetDefinitions/testPolicySet
+	// /providers/Microsoft.Management/managementGroups/my-mgmt-group-id/providers/Microsoft.Authorization/policySetDefinitions/testPolicySet
+	"azurerm_policy_set_definition": policyDefinitionExternalName("policySetDefinitions"),
 
 	// alertsmanagement
 	//
@@ -2133,7 +2137,7 @@ func mongoDatabaseBasedId(nameField string, objectType string) config.ExternalNa
 // Supported ID formats:
 //   - /subscriptions/<SUBSCRIPTION_ID>/providers/Microsoft.Authorization/policyDefinitions/<POLICY_NAME>
 //   - /providers/Microsoft.Management/managementgroups/<MGMT_GROUP_ID>/providers/Microsoft.Authorization/policyDefinitions/<POLICY_NAME>
-func policyDefinitionExternalName() config.ExternalName {
+func policyDefinitionExternalName(resourceType string) config.ExternalName {
 	return config.ExternalName{
 		SetIdentifierArgumentFn: func(base map[string]any, externalName string) {
 			base["name"] = externalName
@@ -2156,7 +2160,7 @@ func policyDefinitionExternalName() config.ExternalName {
 			// Management group level
 			if mg, ok := parameters["management_group_id"]; ok {
 				if mgStr, ok := mg.(string); ok && mgStr != "" {
-					return fmt.Sprintf("%s/providers/Microsoft.Authorization/policyDefinitions/%s", mgStr, externalName), nil
+					return fmt.Sprintf("%s/providers/Microsoft.Authorization/%s/%s", mgStr, resourceType, externalName), nil
 				}
 			}
 
@@ -2170,7 +2174,7 @@ func policyDefinitionExternalName() config.ExternalName {
 				return "", errors.New("unable to extract 'subscription_id' from provider configuration")
 			}
 
-			return fmt.Sprintf("/subscriptions/%s/providers/Microsoft.Authorization/policyDefinitions/%s", subID, externalName), nil
+			return fmt.Sprintf("/subscriptions/%s/providers/Microsoft.Authorization/%s/%s", subID, resourceType, externalName), nil
 		},
 		OmittedFields: []string{
 			"name",

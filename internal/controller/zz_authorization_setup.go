@@ -15,6 +15,7 @@ import (
 	pimactiveroleassignment "github.com/upbound/provider-azure/internal/controller/authorization/pimactiveroleassignment"
 	pimeligibleroleassignment "github.com/upbound/provider-azure/internal/controller/authorization/pimeligibleroleassignment"
 	policydefinition "github.com/upbound/provider-azure/internal/controller/authorization/policydefinition"
+	policysetdefinition "github.com/upbound/provider-azure/internal/controller/authorization/policysetdefinition"
 	resourcegrouppolicyassignment "github.com/upbound/provider-azure/internal/controller/authorization/resourcegrouppolicyassignment"
 	resourcegrouppolicyexemption "github.com/upbound/provider-azure/internal/controller/authorization/resourcegrouppolicyexemption"
 	resourcepolicyassignment "github.com/upbound/provider-azure/internal/controller/authorization/resourcepolicyassignment"
@@ -36,6 +37,7 @@ func Setup_authorization(mgr ctrl.Manager, o controller.Options) error {
 		pimactiveroleassignment.Setup,
 		pimeligibleroleassignment.Setup,
 		policydefinition.Setup,
+		policysetdefinition.Setup,
 		resourcegrouppolicyassignment.Setup,
 		resourcegrouppolicyexemption.Setup,
 		resourcepolicyassignment.Setup,

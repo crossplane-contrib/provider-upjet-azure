@@ -22,7 +22,17 @@ type PolicyDefinitionInitParameters struct {
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// The id of the Management Group where this policy should be defined. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/management/v1beta1.ManagementGroup
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	ManagementGroupID *string `json:"managementGroupId,omitempty" tf:"management_group_id,omitempty"`
+
+	// Reference to a ManagementGroup in management to populate managementGroupId.
+	// +kubebuilder:validation:Optional
+	ManagementGroupIDRef *v1.Reference `json:"managementGroupIdRef,omitempty" tf:"-"`
+
+	// Selector for a ManagementGroup in management to populate managementGroupId.
+	// +kubebuilder:validation:Optional
+	ManagementGroupIDSelector *v1.Selector `json:"managementGroupIdSelector,omitempty" tf:"-"`
 
 	// The metadata for the policy definition. This is a JSON string representing additional metadata that should be stored with the policy definition.
 	Metadata *string `json:"metadata,omitempty" tf:"metadata,omitempty"`
@@ -84,8 +94,18 @@ type PolicyDefinitionParameters struct {
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// The id of the Management Group where this policy should be defined. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/management/v1beta1.ManagementGroup
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ManagementGroupID *string `json:"managementGroupId,omitempty" tf:"management_group_id,omitempty"`
+
+	// Reference to a ManagementGroup in management to populate managementGroupId.
+	// +kubebuilder:validation:Optional
+	ManagementGroupIDRef *v1.Reference `json:"managementGroupIdRef,omitempty" tf:"-"`
+
+	// Selector for a ManagementGroup in management to populate managementGroupId.
+	// +kubebuilder:validation:Optional
+	ManagementGroupIDSelector *v1.Selector `json:"managementGroupIdSelector,omitempty" tf:"-"`
 
 	// The metadata for the policy definition. This is a JSON string representing additional metadata that should be stored with the policy definition.
 	// +kubebuilder:validation:Optional

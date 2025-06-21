@@ -30,4 +30,19 @@ func Configure(p *config.Provider) {
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
+
+	p.AddResourceConfigurator("azurerm_policy_definition", func(r *config.Resource) {
+		r.Kind = "PolicyDefinition"
+		r.References["management_group_id"] = config.Reference{
+			TerraformName: "azurerm_management_group",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+	p.AddResourceConfigurator("azurerm_policy_set_definition", func(r *config.Resource) {
+		r.Kind = "PolicySetDefinition"
+		r.References["management_group_id"] = config.Reference{
+			TerraformName: "azurerm_management_group",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+	})
 }

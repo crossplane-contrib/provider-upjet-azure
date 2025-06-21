@@ -25,6 +25,9 @@ func (tr *PimEligibleRoleAssignment) Hub() {}
 func (tr *PolicyDefinition) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *PolicySetDefinition) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *ResourceGroupPolicyExemption) Hub() {}
 
 // Hub marks this type as a conversion hub.
