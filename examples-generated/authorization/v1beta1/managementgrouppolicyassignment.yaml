@@ -42,7 +42,9 @@ metadata:
 spec:
   forProvider:
     displayName: my-policy-definition
-    managementGroupId: ${azurerm_management_group.example.id}
+    managementGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     mode: All
     policyRule: |2
        {
