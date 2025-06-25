@@ -2,17 +2,32 @@
 #
 # SPDX-License-Identifier: CC0-1.0
 
+apiVersion: management.azure.upbound.io/v1beta1
+kind: ManagementGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta1/policysetdefinition-management-group
+  labels:
+    testing.upbound.io/example-name: policysetdefinition-management-group
+  name: policysetdefinition-management-group
+spec:
+  forProvider:
+    displayName: PolicySetDefinitionManagementGroup
+---
 apiVersion: authorization.azure.upbound.io/v1beta1
 kind: PolicySetDefinition
 metadata:
   annotations:
-    meta.upbound.io/example-id: authorization/v1beta1/policysetdefinition-subscription
+    meta.upbound.io/example-id: authorization/v1beta1/policysetdefinition-management-group
   labels:
-    testing.upbound.io/example-name: policysetdefinition-subscription
-  name: policysetdefinition-subscription
+    testing.upbound.io/example-name: policysetdefinition-management-group
+  name: policysetdefinition-management-group
 spec:
   forProvider:
-    displayName: Test Policy Set
+    displayName: Test Policy Set on Management Group
+    managementGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: policysetdefinition-management-group
     parameters: |
         {
             "allowedLocations": {
