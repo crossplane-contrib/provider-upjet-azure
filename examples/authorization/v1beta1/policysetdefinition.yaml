@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: authorization.azure.upbound.io/v1beta1
+kind: PolicySetDefinition
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta1/policysetdefinition-subscription
+  labels:
+    testing.upbound.io/example-name: policysetdefinition-subscription
+  name: policysetdefinition-subscription
+spec:
+  forProvider:
+    displayName: Test Policy Set
+    parameters: |
+        {
+            "allowedLocations": {
+                "type": "Array",
+                "metadata": {
+                    "description": "The list of allowed locations for resources.",
+                    "displayName": "Allowed locations",
+                    "strongType": "location"
+                }
+            }
+        }
+    policyDefinitionReference:
+    - parameterValues: |
+        {
+          "listOfAllowedLocations": {"value": "[parameters('allowedLocations')]"}
+        }
+      policyDefinitionId: /providers/Microsoft.Authorization/policyDefinitions/e765b5de-1225-4ba3-bd56-1ac6695af988
+    policyType: Custom
