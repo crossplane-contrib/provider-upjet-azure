@@ -14,6 +14,7 @@ import (
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -32,7 +33,7 @@ func (mg *BackupPolicyFileShare) ResolveReferences( // ResolveReferences of this
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RecoveryVaultName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.RecoveryVaultName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.RecoveryVaultNameRef,
 			Selector:     mg.Spec.ForProvider.RecoveryVaultNameSelector,
@@ -42,7 +43,7 @@ func (mg *BackupPolicyFileShare) ResolveReferences( // ResolveReferences of this
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.RecoveryVaultName")
 	}
-	mg.Spec.ForProvider.RecoveryVaultName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.RecoveryVaultName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RecoveryVaultNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -51,7 +52,7 @@ func (mg *BackupPolicyFileShare) ResolveReferences( // ResolveReferences of this
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -61,7 +62,7 @@ func (mg *BackupPolicyFileShare) ResolveReferences( // ResolveReferences of this
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -82,7 +83,7 @@ func (mg *BackupPolicyVM) ResolveReferences(ctx context.Context, c client.Reader
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RecoveryVaultName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.RecoveryVaultName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.RecoveryVaultNameRef,
 			Selector:     mg.Spec.ForProvider.RecoveryVaultNameSelector,
@@ -92,7 +93,7 @@ func (mg *BackupPolicyVM) ResolveReferences(ctx context.Context, c client.Reader
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.RecoveryVaultName")
 	}
-	mg.Spec.ForProvider.RecoveryVaultName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.RecoveryVaultName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RecoveryVaultNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -101,7 +102,7 @@ func (mg *BackupPolicyVM) ResolveReferences(ctx context.Context, c client.Reader
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -111,7 +112,7 @@ func (mg *BackupPolicyVM) ResolveReferences(ctx context.Context, c client.Reader
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -132,7 +133,7 @@ func (mg *BackupPolicyVMWorkload) ResolveReferences(ctx context.Context, c clien
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RecoveryVaultName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.RecoveryVaultName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.RecoveryVaultNameRef,
 			Selector:     mg.Spec.ForProvider.RecoveryVaultNameSelector,
@@ -142,7 +143,7 @@ func (mg *BackupPolicyVMWorkload) ResolveReferences(ctx context.Context, c clien
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.RecoveryVaultName")
 	}
-	mg.Spec.ForProvider.RecoveryVaultName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.RecoveryVaultName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RecoveryVaultNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -151,7 +152,7 @@ func (mg *BackupPolicyVMWorkload) ResolveReferences(ctx context.Context, c clien
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -161,7 +162,7 @@ func (mg *BackupPolicyVMWorkload) ResolveReferences(ctx context.Context, c clien
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -182,7 +183,7 @@ func (mg *SiteRecoveryProtectionContainerMapping) ResolveReferences(ctx context.
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RecoveryFabricName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.RecoveryFabricName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.RecoveryFabricNameRef,
 			Selector:     mg.Spec.ForProvider.RecoveryFabricNameSelector,
@@ -192,7 +193,7 @@ func (mg *SiteRecoveryProtectionContainerMapping) ResolveReferences(ctx context.
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.RecoveryFabricName")
 	}
-	mg.Spec.ForProvider.RecoveryFabricName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.RecoveryFabricName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RecoveryFabricNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.upbound.io", "v1beta1", "SiteRecoveryReplicationPolicy", "SiteRecoveryReplicationPolicyList")
@@ -201,7 +202,7 @@ func (mg *SiteRecoveryProtectionContainerMapping) ResolveReferences(ctx context.
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RecoveryReplicationPolicyID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.RecoveryReplicationPolicyID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.RecoveryReplicationPolicyIDRef,
 			Selector:     mg.Spec.ForProvider.RecoveryReplicationPolicyIDSelector,
@@ -211,7 +212,7 @@ func (mg *SiteRecoveryProtectionContainerMapping) ResolveReferences(ctx context.
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.RecoveryReplicationPolicyID")
 	}
-	mg.Spec.ForProvider.RecoveryReplicationPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.RecoveryReplicationPolicyID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RecoveryReplicationPolicyIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.upbound.io", "v1beta1", "SiteRecoveryProtectionContainer", "SiteRecoveryProtectionContainerList")
@@ -220,7 +221,7 @@ func (mg *SiteRecoveryProtectionContainerMapping) ResolveReferences(ctx context.
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RecoverySourceProtectionContainerName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.RecoverySourceProtectionContainerName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.RecoverySourceProtectionContainerNameRef,
 			Selector:     mg.Spec.ForProvider.RecoverySourceProtectionContainerNameSelector,
@@ -230,7 +231,7 @@ func (mg *SiteRecoveryProtectionContainerMapping) ResolveReferences(ctx context.
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.RecoverySourceProtectionContainerName")
 	}
-	mg.Spec.ForProvider.RecoverySourceProtectionContainerName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.RecoverySourceProtectionContainerName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RecoverySourceProtectionContainerNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.upbound.io", "v1beta1", "SiteRecoveryProtectionContainer", "SiteRecoveryProtectionContainerList")
@@ -239,7 +240,7 @@ func (mg *SiteRecoveryProtectionContainerMapping) ResolveReferences(ctx context.
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RecoveryTargetProtectionContainerID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.RecoveryTargetProtectionContainerID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.RecoveryTargetProtectionContainerIDRef,
 			Selector:     mg.Spec.ForProvider.RecoveryTargetProtectionContainerIDSelector,
@@ -249,7 +250,7 @@ func (mg *SiteRecoveryProtectionContainerMapping) ResolveReferences(ctx context.
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.RecoveryTargetProtectionContainerID")
 	}
-	mg.Spec.ForProvider.RecoveryTargetProtectionContainerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.RecoveryTargetProtectionContainerID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RecoveryTargetProtectionContainerIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.upbound.io", "v1beta2", "Vault", "VaultList")
@@ -258,7 +259,7 @@ func (mg *SiteRecoveryProtectionContainerMapping) ResolveReferences(ctx context.
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RecoveryVaultName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.RecoveryVaultName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.RecoveryVaultNameRef,
 			Selector:     mg.Spec.ForProvider.RecoveryVaultNameSelector,
@@ -268,7 +269,7 @@ func (mg *SiteRecoveryProtectionContainerMapping) ResolveReferences(ctx context.
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.RecoveryVaultName")
 	}
-	mg.Spec.ForProvider.RecoveryVaultName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.RecoveryVaultName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RecoveryVaultNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -277,7 +278,7 @@ func (mg *SiteRecoveryProtectionContainerMapping) ResolveReferences(ctx context.
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -287,7 +288,7 @@ func (mg *SiteRecoveryProtectionContainerMapping) ResolveReferences(ctx context.
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.upbound.io", "v1beta1", "SiteRecoveryReplicationPolicy", "SiteRecoveryReplicationPolicyList")
@@ -296,7 +297,7 @@ func (mg *SiteRecoveryProtectionContainerMapping) ResolveReferences(ctx context.
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RecoveryReplicationPolicyID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.RecoveryReplicationPolicyID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.RecoveryReplicationPolicyIDRef,
 			Selector:     mg.Spec.InitProvider.RecoveryReplicationPolicyIDSelector,
@@ -306,7 +307,7 @@ func (mg *SiteRecoveryProtectionContainerMapping) ResolveReferences(ctx context.
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.RecoveryReplicationPolicyID")
 	}
-	mg.Spec.InitProvider.RecoveryReplicationPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RecoveryReplicationPolicyID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.RecoveryReplicationPolicyIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.upbound.io", "v1beta1", "SiteRecoveryProtectionContainer", "SiteRecoveryProtectionContainerList")
@@ -315,7 +316,7 @@ func (mg *SiteRecoveryProtectionContainerMapping) ResolveReferences(ctx context.
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RecoveryTargetProtectionContainerID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.RecoveryTargetProtectionContainerID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.RecoveryTargetProtectionContainerIDRef,
 			Selector:     mg.Spec.InitProvider.RecoveryTargetProtectionContainerIDSelector,
@@ -325,7 +326,7 @@ func (mg *SiteRecoveryProtectionContainerMapping) ResolveReferences(ctx context.
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.RecoveryTargetProtectionContainerID")
 	}
-	mg.Spec.InitProvider.RecoveryTargetProtectionContainerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RecoveryTargetProtectionContainerID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.RecoveryTargetProtectionContainerIDRef = rsp.ResolvedReference
 
 	return nil
@@ -346,7 +347,7 @@ func (mg *Vault) ResolveReferences(ctx context.Context, c client.Reader) error {
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -356,7 +357,7 @@ func (mg *Vault) ResolveReferences(ctx context.Context, c client.Reader) error {
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil

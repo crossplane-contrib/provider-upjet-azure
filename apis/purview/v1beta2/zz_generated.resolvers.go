@@ -12,6 +12,7 @@ import (
 	errors "github.com/pkg/errors"
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 
 	// ResolveReferences of this Account.
@@ -32,7 +33,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagedResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ManagedResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ManagedResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ManagedResourceGroupNameSelector,
@@ -42,7 +43,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ManagedResourceGroupName")
 	}
-	mg.Spec.ForProvider.ManagedResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ManagedResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ManagedResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -51,7 +52,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -61,7 +62,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -70,7 +71,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagedResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ManagedResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.ManagedResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ManagedResourceGroupNameSelector,
@@ -80,7 +81,7 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ManagedResourceGroupName")
 	}
-	mg.Spec.InitProvider.ManagedResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ManagedResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ManagedResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil

@@ -9,6 +9,7 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
+	helper "github.com/crossplane/crossplane-tools/pkg/helpers"
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
 
@@ -16,6 +17,7 @@ import (
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -36,7 +38,7 @@ func (mg *MSSQLDatabase) ResolveReferences( // ResolveReferences of this MSSQLDa
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Identity[i3].IdentityIds),
+				CurrentValues: helper.FromPtrValues(mg.Spec.ForProvider.Identity[i3].IdentityIds),
 				Extract:       resource.ExtractResourceID(),
 				References:    mg.Spec.ForProvider.Identity[i3].IdentityIdsRefs,
 				Selector:      mg.Spec.ForProvider.Identity[i3].IdentityIdsSelector,
@@ -46,7 +48,7 @@ func (mg *MSSQLDatabase) ResolveReferences( // ResolveReferences of this MSSQLDa
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.Identity[i3].IdentityIds")
 		}
-		mg.Spec.ForProvider.Identity[i3].IdentityIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.ForProvider.Identity[i3].IdentityIds = helper.ToPtrValues(mrsp.ResolvedValues)
 		mg.Spec.ForProvider.Identity[i3].IdentityIdsRefs = mrsp.ResolvedReferences
 
 	}
@@ -56,7 +58,7 @@ func (mg *MSSQLDatabase) ResolveReferences( // ResolveReferences of this MSSQLDa
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServerID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ServerID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.ServerIDRef,
 			Selector:     mg.Spec.ForProvider.ServerIDSelector,
@@ -66,7 +68,7 @@ func (mg *MSSQLDatabase) ResolveReferences( // ResolveReferences of this MSSQLDa
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ServerID")
 	}
-	mg.Spec.ForProvider.ServerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ServerID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServerIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta1", "Key", "KeyList")
@@ -75,7 +77,7 @@ func (mg *MSSQLDatabase) ResolveReferences( // ResolveReferences of this MSSQLDa
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TransparentDataEncryptionKeyVaultKeyID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.TransparentDataEncryptionKeyVaultKeyID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.TransparentDataEncryptionKeyVaultKeyIDRef,
 			Selector:     mg.Spec.ForProvider.TransparentDataEncryptionKeyVaultKeyIDSelector,
@@ -85,7 +87,7 @@ func (mg *MSSQLDatabase) ResolveReferences( // ResolveReferences of this MSSQLDa
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.TransparentDataEncryptionKeyVaultKeyID")
 	}
-	mg.Spec.ForProvider.TransparentDataEncryptionKeyVaultKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.TransparentDataEncryptionKeyVaultKeyID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TransparentDataEncryptionKeyVaultKeyIDRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.Identity); i3++ {
@@ -95,7 +97,7 @@ func (mg *MSSQLDatabase) ResolveReferences( // ResolveReferences of this MSSQLDa
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Identity[i3].IdentityIds),
+				CurrentValues: helper.FromPtrValues(mg.Spec.InitProvider.Identity[i3].IdentityIds),
 				Extract:       resource.ExtractResourceID(),
 				References:    mg.Spec.InitProvider.Identity[i3].IdentityIdsRefs,
 				Selector:      mg.Spec.InitProvider.Identity[i3].IdentityIdsSelector,
@@ -105,7 +107,7 @@ func (mg *MSSQLDatabase) ResolveReferences( // ResolveReferences of this MSSQLDa
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.Identity[i3].IdentityIds")
 		}
-		mg.Spec.InitProvider.Identity[i3].IdentityIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.Identity[i3].IdentityIds = helper.ToPtrValues(mrsp.ResolvedValues)
 		mg.Spec.InitProvider.Identity[i3].IdentityIdsRefs = mrsp.ResolvedReferences
 
 	}
@@ -115,7 +117,7 @@ func (mg *MSSQLDatabase) ResolveReferences( // ResolveReferences of this MSSQLDa
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TransparentDataEncryptionKeyVaultKeyID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.TransparentDataEncryptionKeyVaultKeyID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.TransparentDataEncryptionKeyVaultKeyIDRef,
 			Selector:     mg.Spec.InitProvider.TransparentDataEncryptionKeyVaultKeyIDSelector,
@@ -125,7 +127,7 @@ func (mg *MSSQLDatabase) ResolveReferences( // ResolveReferences of this MSSQLDa
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.TransparentDataEncryptionKeyVaultKeyID")
 	}
-	mg.Spec.InitProvider.TransparentDataEncryptionKeyVaultKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.TransparentDataEncryptionKeyVaultKeyID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.TransparentDataEncryptionKeyVaultKeyIDRef = rsp.ResolvedReference
 
 	return nil
@@ -146,7 +148,7 @@ func (mg *MSSQLDatabaseExtendedAuditingPolicy) ResolveReferences(ctx context.Con
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.DatabaseID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.DatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.DatabaseIDSelector,
@@ -156,7 +158,7 @@ func (mg *MSSQLDatabaseExtendedAuditingPolicy) ResolveReferences(ctx context.Con
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.DatabaseID")
 	}
-	mg.Spec.ForProvider.DatabaseID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DatabaseID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DatabaseIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
@@ -165,7 +167,7 @@ func (mg *MSSQLDatabaseExtendedAuditingPolicy) ResolveReferences(ctx context.Con
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageEndpoint),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.StorageEndpoint, ""),
 			Extract:      resource.ExtractParamPath("primary_blob_endpoint", true),
 			Reference:    mg.Spec.ForProvider.StorageEndpointRef,
 			Selector:     mg.Spec.ForProvider.StorageEndpointSelector,
@@ -175,7 +177,7 @@ func (mg *MSSQLDatabaseExtendedAuditingPolicy) ResolveReferences(ctx context.Con
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.StorageEndpoint")
 	}
-	mg.Spec.ForProvider.StorageEndpoint = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StorageEndpoint = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageEndpointRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
@@ -184,7 +186,7 @@ func (mg *MSSQLDatabaseExtendedAuditingPolicy) ResolveReferences(ctx context.Con
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageEndpoint),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.StorageEndpoint, ""),
 			Extract:      resource.ExtractParamPath("primary_blob_endpoint", true),
 			Reference:    mg.Spec.InitProvider.StorageEndpointRef,
 			Selector:     mg.Spec.InitProvider.StorageEndpointSelector,
@@ -194,7 +196,7 @@ func (mg *MSSQLDatabaseExtendedAuditingPolicy) ResolveReferences(ctx context.Con
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.StorageEndpoint")
 	}
-	mg.Spec.InitProvider.StorageEndpoint = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageEndpoint = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.StorageEndpointRef = rsp.ResolvedReference
 
 	return nil
@@ -215,7 +217,7 @@ func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) ResolveReferences(ct
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.DatabaseName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.DatabaseNameRef,
 			Selector:     mg.Spec.ForProvider.DatabaseNameSelector,
@@ -225,7 +227,7 @@ func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) ResolveReferences(ct
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.DatabaseName")
 	}
-	mg.Spec.ForProvider.DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DatabaseName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DatabaseNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("sql.azure.upbound.io", "v1beta2", "MSSQLServerVulnerabilityAssessment", "MSSQLServerVulnerabilityAssessmentList")
@@ -234,7 +236,7 @@ func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) ResolveReferences(ct
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServerVulnerabilityAssessmentID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ServerVulnerabilityAssessmentID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.ServerVulnerabilityAssessmentIDRef,
 			Selector:     mg.Spec.ForProvider.ServerVulnerabilityAssessmentIDSelector,
@@ -244,7 +246,7 @@ func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) ResolveReferences(ct
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ServerVulnerabilityAssessmentID")
 	}
-	mg.Spec.ForProvider.ServerVulnerabilityAssessmentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ServerVulnerabilityAssessmentID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServerVulnerabilityAssessmentIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("sql.azure.upbound.io", "v1beta2", "MSSQLDatabase", "MSSQLDatabaseList")
@@ -253,7 +255,7 @@ func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) ResolveReferences(ct
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DatabaseName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.DatabaseName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.DatabaseNameRef,
 			Selector:     mg.Spec.InitProvider.DatabaseNameSelector,
@@ -263,7 +265,7 @@ func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) ResolveReferences(ct
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.DatabaseName")
 	}
-	mg.Spec.InitProvider.DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DatabaseName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DatabaseNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("sql.azure.upbound.io", "v1beta2", "MSSQLServerVulnerabilityAssessment", "MSSQLServerVulnerabilityAssessmentList")
@@ -272,7 +274,7 @@ func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) ResolveReferences(ct
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServerVulnerabilityAssessmentID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ServerVulnerabilityAssessmentID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.ServerVulnerabilityAssessmentIDRef,
 			Selector:     mg.Spec.InitProvider.ServerVulnerabilityAssessmentIDSelector,
@@ -282,7 +284,7 @@ func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) ResolveReferences(ct
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ServerVulnerabilityAssessmentID")
 	}
-	mg.Spec.InitProvider.ServerVulnerabilityAssessmentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ServerVulnerabilityAssessmentID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ServerVulnerabilityAssessmentIDRef = rsp.ResolvedReference
 
 	return nil
@@ -303,7 +305,7 @@ func (mg *MSSQLElasticPool) ResolveReferences(ctx context.Context, c client.Read
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -313,7 +315,7 @@ func (mg *MSSQLElasticPool) ResolveReferences(ctx context.Context, c client.Read
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("sql.azure.upbound.io", "v1beta1", "MSSQLServer", "MSSQLServerList")
@@ -322,7 +324,7 @@ func (mg *MSSQLElasticPool) ResolveReferences(ctx context.Context, c client.Read
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServerName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ServerName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ServerNameRef,
 			Selector:     mg.Spec.ForProvider.ServerNameSelector,
@@ -332,7 +334,7 @@ func (mg *MSSQLElasticPool) ResolveReferences(ctx context.Context, c client.Read
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ServerName")
 	}
-	mg.Spec.ForProvider.ServerName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ServerName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServerNameRef = rsp.ResolvedReference
 
 	return nil
@@ -354,7 +356,7 @@ func (mg *MSSQLFailoverGroup) ResolveReferences(ctx context.Context, c client.Re
 		}
 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Databases),
+			CurrentValues: helper.FromPtrValues(mg.Spec.ForProvider.Databases),
 			Extract:       rconfig.ExtractResourceID(),
 			References:    mg.Spec.ForProvider.DatabasesRefs,
 			Selector:      mg.Spec.ForProvider.DatabasesSelector,
@@ -364,7 +366,7 @@ func (mg *MSSQLFailoverGroup) ResolveReferences(ctx context.Context, c client.Re
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.Databases")
 	}
-	mg.Spec.ForProvider.Databases = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.Databases = helper.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.DatabasesRefs = mrsp.ResolvedReferences
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.PartnerServer); i3++ {
@@ -374,7 +376,7 @@ func (mg *MSSQLFailoverGroup) ResolveReferences(ctx context.Context, c client.Re
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PartnerServer[i3].ID),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.PartnerServer[i3].ID, ""),
 				Extract:      rconfig.ExtractResourceID(),
 				Reference:    mg.Spec.ForProvider.PartnerServer[i3].IDRef,
 				Selector:     mg.Spec.ForProvider.PartnerServer[i3].IDSelector,
@@ -384,7 +386,7 @@ func (mg *MSSQLFailoverGroup) ResolveReferences(ctx context.Context, c client.Re
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.PartnerServer[i3].ID")
 		}
-		mg.Spec.ForProvider.PartnerServer[i3].ID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.PartnerServer[i3].ID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.PartnerServer[i3].IDRef = rsp.ResolvedReference
 
 	}
@@ -394,7 +396,7 @@ func (mg *MSSQLFailoverGroup) ResolveReferences(ctx context.Context, c client.Re
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServerID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ServerID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.ServerIDRef,
 			Selector:     mg.Spec.ForProvider.ServerIDSelector,
@@ -404,7 +406,7 @@ func (mg *MSSQLFailoverGroup) ResolveReferences(ctx context.Context, c client.Re
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ServerID")
 	}
-	mg.Spec.ForProvider.ServerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ServerID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServerIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("sql.azure.upbound.io", "v1beta1", "MSSQLDatabase", "MSSQLDatabaseList")
@@ -413,7 +415,7 @@ func (mg *MSSQLFailoverGroup) ResolveReferences(ctx context.Context, c client.Re
 		}
 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Databases),
+			CurrentValues: helper.FromPtrValues(mg.Spec.InitProvider.Databases),
 			Extract:       rconfig.ExtractResourceID(),
 			References:    mg.Spec.InitProvider.DatabasesRefs,
 			Selector:      mg.Spec.InitProvider.DatabasesSelector,
@@ -423,7 +425,7 @@ func (mg *MSSQLFailoverGroup) ResolveReferences(ctx context.Context, c client.Re
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.Databases")
 	}
-	mg.Spec.InitProvider.Databases = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.Databases = helper.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.InitProvider.DatabasesRefs = mrsp.ResolvedReferences
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.PartnerServer); i3++ {
@@ -433,7 +435,7 @@ func (mg *MSSQLFailoverGroup) ResolveReferences(ctx context.Context, c client.Re
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PartnerServer[i3].ID),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.PartnerServer[i3].ID, ""),
 				Extract:      rconfig.ExtractResourceID(),
 				Reference:    mg.Spec.InitProvider.PartnerServer[i3].IDRef,
 				Selector:     mg.Spec.InitProvider.PartnerServer[i3].IDSelector,
@@ -443,7 +445,7 @@ func (mg *MSSQLFailoverGroup) ResolveReferences(ctx context.Context, c client.Re
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.PartnerServer[i3].ID")
 		}
-		mg.Spec.InitProvider.PartnerServer[i3].ID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.PartnerServer[i3].ID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.PartnerServer[i3].IDRef = rsp.ResolvedReference
 
 	}
@@ -466,7 +468,7 @@ func (mg *MSSQLFirewallRule) ResolveReferences(ctx context.Context, c client.Rea
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServerID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ServerID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.ServerIDRef,
 			Selector:     mg.Spec.ForProvider.ServerIDSelector,
@@ -476,7 +478,7 @@ func (mg *MSSQLFirewallRule) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ServerID")
 	}
-	mg.Spec.ForProvider.ServerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ServerID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServerIDRef = rsp.ResolvedReference
 
 	return nil
@@ -497,7 +499,7 @@ func (mg *MSSQLJobAgent) ResolveReferences(ctx context.Context, c client.Reader)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.DatabaseID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.DatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.DatabaseIDSelector,
@@ -507,7 +509,7 @@ func (mg *MSSQLJobAgent) ResolveReferences(ctx context.Context, c client.Reader)
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.DatabaseID")
 	}
-	mg.Spec.ForProvider.DatabaseID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DatabaseID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DatabaseIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("sql.azure.upbound.io", "v1beta2", "MSSQLDatabase", "MSSQLDatabaseList")
@@ -516,7 +518,7 @@ func (mg *MSSQLJobAgent) ResolveReferences(ctx context.Context, c client.Reader)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DatabaseID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.DatabaseID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.DatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.DatabaseIDSelector,
@@ -526,7 +528,7 @@ func (mg *MSSQLJobAgent) ResolveReferences(ctx context.Context, c client.Reader)
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.DatabaseID")
 	}
-	mg.Spec.InitProvider.DatabaseID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DatabaseID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DatabaseIDRef = rsp.ResolvedReference
 
 	return nil
@@ -547,7 +549,7 @@ func (mg *MSSQLJobCredential) ResolveReferences(ctx context.Context, c client.Re
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.JobAgentID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.JobAgentID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.JobAgentIDRef,
 			Selector:     mg.Spec.ForProvider.JobAgentIDSelector,
@@ -557,7 +559,7 @@ func (mg *MSSQLJobCredential) ResolveReferences(ctx context.Context, c client.Re
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.JobAgentID")
 	}
-	mg.Spec.ForProvider.JobAgentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.JobAgentID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.JobAgentIDRef = rsp.ResolvedReference
 
 	return nil
@@ -578,7 +580,7 @@ func (mg *MSSQLManagedDatabase) ResolveReferences(ctx context.Context, c client.
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagedInstanceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ManagedInstanceID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.ManagedInstanceIDRef,
 			Selector:     mg.Spec.ForProvider.ManagedInstanceIDSelector,
@@ -588,7 +590,7 @@ func (mg *MSSQLManagedDatabase) ResolveReferences(ctx context.Context, c client.
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ManagedInstanceID")
 	}
-	mg.Spec.ForProvider.ManagedInstanceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ManagedInstanceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ManagedInstanceIDRef = rsp.ResolvedReference
 
 	return nil
@@ -609,7 +611,7 @@ func (mg *MSSQLManagedInstance) ResolveReferences(ctx context.Context, c client.
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DNSZonePartnerID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.DNSZonePartnerID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.DNSZonePartnerIDRef,
 			Selector:     mg.Spec.ForProvider.DNSZonePartnerIDSelector,
@@ -619,7 +621,7 @@ func (mg *MSSQLManagedInstance) ResolveReferences(ctx context.Context, c client.
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.DNSZonePartnerID")
 	}
-	mg.Spec.ForProvider.DNSZonePartnerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DNSZonePartnerID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DNSZonePartnerIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -628,7 +630,7 @@ func (mg *MSSQLManagedInstance) ResolveReferences(ctx context.Context, c client.
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -638,7 +640,7 @@ func (mg *MSSQLManagedInstance) ResolveReferences(ctx context.Context, c client.
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
@@ -647,7 +649,7 @@ func (mg *MSSQLManagedInstance) ResolveReferences(ctx context.Context, c client.
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.SubnetID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.SubnetIDRef,
 			Selector:     mg.Spec.ForProvider.SubnetIDSelector,
@@ -657,7 +659,7 @@ func (mg *MSSQLManagedInstance) ResolveReferences(ctx context.Context, c client.
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.SubnetID")
 	}
-	mg.Spec.ForProvider.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SubnetID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SubnetIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("sql.azure.upbound.io", "v1beta1", "MSSQLManagedInstance", "MSSQLManagedInstanceList")
@@ -666,7 +668,7 @@ func (mg *MSSQLManagedInstance) ResolveReferences(ctx context.Context, c client.
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DNSZonePartnerID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.DNSZonePartnerID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.DNSZonePartnerIDRef,
 			Selector:     mg.Spec.InitProvider.DNSZonePartnerIDSelector,
@@ -676,7 +678,7 @@ func (mg *MSSQLManagedInstance) ResolveReferences(ctx context.Context, c client.
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.DNSZonePartnerID")
 	}
-	mg.Spec.InitProvider.DNSZonePartnerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DNSZonePartnerID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DNSZonePartnerIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
@@ -685,7 +687,7 @@ func (mg *MSSQLManagedInstance) ResolveReferences(ctx context.Context, c client.
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubnetID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.SubnetID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.SubnetIDRef,
 			Selector:     mg.Spec.InitProvider.SubnetIDSelector,
@@ -695,7 +697,7 @@ func (mg *MSSQLManagedInstance) ResolveReferences(ctx context.Context, c client.
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.SubnetID")
 	}
-	mg.Spec.InitProvider.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SubnetID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.SubnetIDRef = rsp.ResolvedReference
 
 	return nil
@@ -716,7 +718,7 @@ func (mg *MSSQLManagedInstanceActiveDirectoryAdministrator) ResolveReferences(ct
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagedInstanceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ManagedInstanceID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.ManagedInstanceIDRef,
 			Selector:     mg.Spec.ForProvider.ManagedInstanceIDSelector,
@@ -726,7 +728,7 @@ func (mg *MSSQLManagedInstanceActiveDirectoryAdministrator) ResolveReferences(ct
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ManagedInstanceID")
 	}
-	mg.Spec.ForProvider.ManagedInstanceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ManagedInstanceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ManagedInstanceIDRef = rsp.ResolvedReference
 
 	return nil
@@ -747,7 +749,7 @@ func (mg *MSSQLManagedInstanceFailoverGroup) ResolveReferences(ctx context.Conte
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagedInstanceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ManagedInstanceID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.ManagedInstanceIDRef,
 			Selector:     mg.Spec.ForProvider.ManagedInstanceIDSelector,
@@ -757,7 +759,7 @@ func (mg *MSSQLManagedInstanceFailoverGroup) ResolveReferences(ctx context.Conte
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ManagedInstanceID")
 	}
-	mg.Spec.ForProvider.ManagedInstanceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ManagedInstanceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ManagedInstanceIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("sql.azure.upbound.io", "v1beta1", "MSSQLManagedInstance", "MSSQLManagedInstanceList")
@@ -766,7 +768,7 @@ func (mg *MSSQLManagedInstanceFailoverGroup) ResolveReferences(ctx context.Conte
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PartnerManagedInstanceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.PartnerManagedInstanceID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.PartnerManagedInstanceIDRef,
 			Selector:     mg.Spec.ForProvider.PartnerManagedInstanceIDSelector,
@@ -776,7 +778,7 @@ func (mg *MSSQLManagedInstanceFailoverGroup) ResolveReferences(ctx context.Conte
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.PartnerManagedInstanceID")
 	}
-	mg.Spec.ForProvider.PartnerManagedInstanceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.PartnerManagedInstanceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PartnerManagedInstanceIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("sql.azure.upbound.io", "v1beta1", "MSSQLManagedInstance", "MSSQLManagedInstanceList")
@@ -785,7 +787,7 @@ func (mg *MSSQLManagedInstanceFailoverGroup) ResolveReferences(ctx context.Conte
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagedInstanceID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ManagedInstanceID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.ManagedInstanceIDRef,
 			Selector:     mg.Spec.InitProvider.ManagedInstanceIDSelector,
@@ -795,7 +797,7 @@ func (mg *MSSQLManagedInstanceFailoverGroup) ResolveReferences(ctx context.Conte
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ManagedInstanceID")
 	}
-	mg.Spec.InitProvider.ManagedInstanceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ManagedInstanceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ManagedInstanceIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("sql.azure.upbound.io", "v1beta1", "MSSQLManagedInstance", "MSSQLManagedInstanceList")
@@ -804,7 +806,7 @@ func (mg *MSSQLManagedInstanceFailoverGroup) ResolveReferences(ctx context.Conte
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PartnerManagedInstanceID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.PartnerManagedInstanceID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.PartnerManagedInstanceIDRef,
 			Selector:     mg.Spec.InitProvider.PartnerManagedInstanceIDSelector,
@@ -814,7 +816,7 @@ func (mg *MSSQLManagedInstanceFailoverGroup) ResolveReferences(ctx context.Conte
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.PartnerManagedInstanceID")
 	}
-	mg.Spec.InitProvider.PartnerManagedInstanceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PartnerManagedInstanceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.PartnerManagedInstanceIDRef = rsp.ResolvedReference
 
 	return nil
@@ -904,7 +906,7 @@ func (mg *MSSQLManagedInstanceVulnerabilityAssessment) ResolveReferences(ctx con
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagedInstanceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ManagedInstanceID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.ManagedInstanceIDRef,
 			Selector:     mg.Spec.ForProvider.ManagedInstanceIDSelector,
@@ -914,7 +916,7 @@ func (mg *MSSQLManagedInstanceVulnerabilityAssessment) ResolveReferences(ctx con
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ManagedInstanceID")
 	}
-	mg.Spec.ForProvider.ManagedInstanceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ManagedInstanceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ManagedInstanceIDRef = rsp.ResolvedReference
 
 	return nil
@@ -935,7 +937,7 @@ func (mg *MSSQLOutboundFirewallRule) ResolveReferences(ctx context.Context, c cl
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServerID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ServerID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.ServerIDRef,
 			Selector:     mg.Spec.ForProvider.ServerIDSelector,
@@ -945,7 +947,7 @@ func (mg *MSSQLOutboundFirewallRule) ResolveReferences(ctx context.Context, c cl
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ServerID")
 	}
-	mg.Spec.ForProvider.ServerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ServerID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServerIDRef = rsp.ResolvedReference
 
 	return nil
@@ -968,7 +970,7 @@ func (mg *MSSQLServer) ResolveReferences(ctx context.Context, c client.Reader) e
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AzureadAdministrator[i3].LoginUsername),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.AzureadAdministrator[i3].LoginUsername, ""),
 				Extract:      resource.ExtractParamPath("name", false),
 				Reference:    mg.Spec.ForProvider.AzureadAdministrator[i3].LoginUsernameRef,
 				Selector:     mg.Spec.ForProvider.AzureadAdministrator[i3].LoginUsernameSelector,
@@ -978,7 +980,7 @@ func (mg *MSSQLServer) ResolveReferences(ctx context.Context, c client.Reader) e
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.AzureadAdministrator[i3].LoginUsername")
 		}
-		mg.Spec.ForProvider.AzureadAdministrator[i3].LoginUsername = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.AzureadAdministrator[i3].LoginUsername = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.AzureadAdministrator[i3].LoginUsernameRef = rsp.ResolvedReference
 
 	}
@@ -989,7 +991,7 @@ func (mg *MSSQLServer) ResolveReferences(ctx context.Context, c client.Reader) e
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AzureadAdministrator[i3].ObjectID),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.AzureadAdministrator[i3].ObjectID, ""),
 				Extract:      resource.ExtractParamPath("principal_id", true),
 				Reference:    mg.Spec.ForProvider.AzureadAdministrator[i3].ObjectIDRef,
 				Selector:     mg.Spec.ForProvider.AzureadAdministrator[i3].ObjectIDSelector,
@@ -999,7 +1001,7 @@ func (mg *MSSQLServer) ResolveReferences(ctx context.Context, c client.Reader) e
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.AzureadAdministrator[i3].ObjectID")
 		}
-		mg.Spec.ForProvider.AzureadAdministrator[i3].ObjectID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.AzureadAdministrator[i3].ObjectID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.AzureadAdministrator[i3].ObjectIDRef = rsp.ResolvedReference
 
 	}
@@ -1010,7 +1012,7 @@ func (mg *MSSQLServer) ResolveReferences(ctx context.Context, c client.Reader) e
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Identity[i3].IdentityIds),
+				CurrentValues: helper.FromPtrValues(mg.Spec.ForProvider.Identity[i3].IdentityIds),
 				Extract:       resource.ExtractResourceID(),
 				References:    mg.Spec.ForProvider.Identity[i3].IdentityIdsRefs,
 				Selector:      mg.Spec.ForProvider.Identity[i3].IdentityIdsSelector,
@@ -1020,7 +1022,7 @@ func (mg *MSSQLServer) ResolveReferences(ctx context.Context, c client.Reader) e
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.Identity[i3].IdentityIds")
 		}
-		mg.Spec.ForProvider.Identity[i3].IdentityIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.ForProvider.Identity[i3].IdentityIds = helper.ToPtrValues(mrsp.ResolvedValues)
 		mg.Spec.ForProvider.Identity[i3].IdentityIdsRefs = mrsp.ResolvedReferences
 
 	}
@@ -1030,7 +1032,7 @@ func (mg *MSSQLServer) ResolveReferences(ctx context.Context, c client.Reader) e
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrimaryUserAssignedIdentityID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.PrimaryUserAssignedIdentityID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.PrimaryUserAssignedIdentityIDRef,
 			Selector:     mg.Spec.ForProvider.PrimaryUserAssignedIdentityIDSelector,
@@ -1040,7 +1042,7 @@ func (mg *MSSQLServer) ResolveReferences(ctx context.Context, c client.Reader) e
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.PrimaryUserAssignedIdentityID")
 	}
-	mg.Spec.ForProvider.PrimaryUserAssignedIdentityID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.PrimaryUserAssignedIdentityID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PrimaryUserAssignedIdentityIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -1049,7 +1051,7 @@ func (mg *MSSQLServer) ResolveReferences(ctx context.Context, c client.Reader) e
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -1059,7 +1061,7 @@ func (mg *MSSQLServer) ResolveReferences(ctx context.Context, c client.Reader) e
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta1", "Key", "KeyList")
@@ -1068,7 +1070,7 @@ func (mg *MSSQLServer) ResolveReferences(ctx context.Context, c client.Reader) e
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TransparentDataEncryptionKeyVaultKeyID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.TransparentDataEncryptionKeyVaultKeyID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.TransparentDataEncryptionKeyVaultKeyIDRef,
 			Selector:     mg.Spec.ForProvider.TransparentDataEncryptionKeyVaultKeyIDSelector,
@@ -1078,7 +1080,7 @@ func (mg *MSSQLServer) ResolveReferences(ctx context.Context, c client.Reader) e
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.TransparentDataEncryptionKeyVaultKeyID")
 	}
-	mg.Spec.ForProvider.TransparentDataEncryptionKeyVaultKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.TransparentDataEncryptionKeyVaultKeyID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TransparentDataEncryptionKeyVaultKeyIDRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.AzureadAdministrator); i3++ {
@@ -1088,7 +1090,7 @@ func (mg *MSSQLServer) ResolveReferences(ctx context.Context, c client.Reader) e
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AzureadAdministrator[i3].LoginUsername),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.AzureadAdministrator[i3].LoginUsername, ""),
 				Extract:      resource.ExtractParamPath("name", false),
 				Reference:    mg.Spec.InitProvider.AzureadAdministrator[i3].LoginUsernameRef,
 				Selector:     mg.Spec.InitProvider.AzureadAdministrator[i3].LoginUsernameSelector,
@@ -1098,7 +1100,7 @@ func (mg *MSSQLServer) ResolveReferences(ctx context.Context, c client.Reader) e
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.AzureadAdministrator[i3].LoginUsername")
 		}
-		mg.Spec.InitProvider.AzureadAdministrator[i3].LoginUsername = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.AzureadAdministrator[i3].LoginUsername = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.AzureadAdministrator[i3].LoginUsernameRef = rsp.ResolvedReference
 
 	}
@@ -1109,7 +1111,7 @@ func (mg *MSSQLServer) ResolveReferences(ctx context.Context, c client.Reader) e
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AzureadAdministrator[i3].ObjectID),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.AzureadAdministrator[i3].ObjectID, ""),
 				Extract:      resource.ExtractParamPath("principal_id", true),
 				Reference:    mg.Spec.InitProvider.AzureadAdministrator[i3].ObjectIDRef,
 				Selector:     mg.Spec.InitProvider.AzureadAdministrator[i3].ObjectIDSelector,
@@ -1119,7 +1121,7 @@ func (mg *MSSQLServer) ResolveReferences(ctx context.Context, c client.Reader) e
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.AzureadAdministrator[i3].ObjectID")
 		}
-		mg.Spec.InitProvider.AzureadAdministrator[i3].ObjectID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.AzureadAdministrator[i3].ObjectID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.AzureadAdministrator[i3].ObjectIDRef = rsp.ResolvedReference
 
 	}
@@ -1130,7 +1132,7 @@ func (mg *MSSQLServer) ResolveReferences(ctx context.Context, c client.Reader) e
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Identity[i3].IdentityIds),
+				CurrentValues: helper.FromPtrValues(mg.Spec.InitProvider.Identity[i3].IdentityIds),
 				Extract:       resource.ExtractResourceID(),
 				References:    mg.Spec.InitProvider.Identity[i3].IdentityIdsRefs,
 				Selector:      mg.Spec.InitProvider.Identity[i3].IdentityIdsSelector,
@@ -1140,7 +1142,7 @@ func (mg *MSSQLServer) ResolveReferences(ctx context.Context, c client.Reader) e
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.Identity[i3].IdentityIds")
 		}
-		mg.Spec.InitProvider.Identity[i3].IdentityIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.Identity[i3].IdentityIds = helper.ToPtrValues(mrsp.ResolvedValues)
 		mg.Spec.InitProvider.Identity[i3].IdentityIdsRefs = mrsp.ResolvedReferences
 
 	}
@@ -1150,7 +1152,7 @@ func (mg *MSSQLServer) ResolveReferences(ctx context.Context, c client.Reader) e
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrimaryUserAssignedIdentityID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.PrimaryUserAssignedIdentityID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.PrimaryUserAssignedIdentityIDRef,
 			Selector:     mg.Spec.InitProvider.PrimaryUserAssignedIdentityIDSelector,
@@ -1160,7 +1162,7 @@ func (mg *MSSQLServer) ResolveReferences(ctx context.Context, c client.Reader) e
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.PrimaryUserAssignedIdentityID")
 	}
-	mg.Spec.InitProvider.PrimaryUserAssignedIdentityID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PrimaryUserAssignedIdentityID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.PrimaryUserAssignedIdentityIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta1", "Key", "KeyList")
@@ -1169,7 +1171,7 @@ func (mg *MSSQLServer) ResolveReferences(ctx context.Context, c client.Reader) e
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TransparentDataEncryptionKeyVaultKeyID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.TransparentDataEncryptionKeyVaultKeyID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.TransparentDataEncryptionKeyVaultKeyIDRef,
 			Selector:     mg.Spec.InitProvider.TransparentDataEncryptionKeyVaultKeyIDSelector,
@@ -1179,7 +1181,7 @@ func (mg *MSSQLServer) ResolveReferences(ctx context.Context, c client.Reader) e
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.TransparentDataEncryptionKeyVaultKeyID")
 	}
-	mg.Spec.InitProvider.TransparentDataEncryptionKeyVaultKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.TransparentDataEncryptionKeyVaultKeyID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.TransparentDataEncryptionKeyVaultKeyIDRef = rsp.ResolvedReference
 
 	return nil
@@ -1200,7 +1202,7 @@ func (mg *MSSQLServerDNSAlias) ResolveReferences(ctx context.Context, c client.R
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MSSQLServerID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.MSSQLServerID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.MSSQLServerIDRef,
 			Selector:     mg.Spec.ForProvider.MSSQLServerIDSelector,
@@ -1210,7 +1212,7 @@ func (mg *MSSQLServerDNSAlias) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.MSSQLServerID")
 	}
-	mg.Spec.ForProvider.MSSQLServerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.MSSQLServerID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.MSSQLServerIDRef = rsp.ResolvedReference
 
 	return nil
@@ -1231,7 +1233,7 @@ func (mg *MSSQLServerMicrosoftSupportAuditingPolicy) ResolveReferences(ctx conte
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BlobStorageEndpoint),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.BlobStorageEndpoint, ""),
 			Extract:      resource.ExtractParamPath("primary_blob_endpoint", true),
 			Reference:    mg.Spec.ForProvider.BlobStorageEndpointRef,
 			Selector:     mg.Spec.ForProvider.BlobStorageEndpointSelector,
@@ -1241,7 +1243,7 @@ func (mg *MSSQLServerMicrosoftSupportAuditingPolicy) ResolveReferences(ctx conte
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.BlobStorageEndpoint")
 	}
-	mg.Spec.ForProvider.BlobStorageEndpoint = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.BlobStorageEndpoint = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.BlobStorageEndpointRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("sql.azure.upbound.io", "v1beta2", "MSSQLServer", "MSSQLServerList")
@@ -1250,7 +1252,7 @@ func (mg *MSSQLServerMicrosoftSupportAuditingPolicy) ResolveReferences(ctx conte
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServerID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ServerID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.ServerIDRef,
 			Selector:     mg.Spec.ForProvider.ServerIDSelector,
@@ -1260,7 +1262,7 @@ func (mg *MSSQLServerMicrosoftSupportAuditingPolicy) ResolveReferences(ctx conte
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ServerID")
 	}
-	mg.Spec.ForProvider.ServerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ServerID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServerIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
@@ -1269,7 +1271,7 @@ func (mg *MSSQLServerMicrosoftSupportAuditingPolicy) ResolveReferences(ctx conte
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BlobStorageEndpoint),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.BlobStorageEndpoint, ""),
 			Extract:      resource.ExtractParamPath("primary_blob_endpoint", true),
 			Reference:    mg.Spec.InitProvider.BlobStorageEndpointRef,
 			Selector:     mg.Spec.InitProvider.BlobStorageEndpointSelector,
@@ -1279,7 +1281,7 @@ func (mg *MSSQLServerMicrosoftSupportAuditingPolicy) ResolveReferences(ctx conte
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.BlobStorageEndpoint")
 	}
-	mg.Spec.InitProvider.BlobStorageEndpoint = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.BlobStorageEndpoint = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.BlobStorageEndpointRef = rsp.ResolvedReference
 
 	return nil
@@ -1300,7 +1302,7 @@ func (mg *MSSQLServerSecurityAlertPolicy) ResolveReferences(ctx context.Context,
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -1310,7 +1312,7 @@ func (mg *MSSQLServerSecurityAlertPolicy) ResolveReferences(ctx context.Context,
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("sql.azure.upbound.io", "v1beta2", "MSSQLServer", "MSSQLServerList")
@@ -1319,7 +1321,7 @@ func (mg *MSSQLServerSecurityAlertPolicy) ResolveReferences(ctx context.Context,
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServerName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ServerName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ServerNameRef,
 			Selector:     mg.Spec.ForProvider.ServerNameSelector,
@@ -1329,7 +1331,7 @@ func (mg *MSSQLServerSecurityAlertPolicy) ResolveReferences(ctx context.Context,
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ServerName")
 	}
-	mg.Spec.ForProvider.ServerName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ServerName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServerNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
@@ -1338,7 +1340,7 @@ func (mg *MSSQLServerSecurityAlertPolicy) ResolveReferences(ctx context.Context,
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageEndpoint),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.StorageEndpoint, ""),
 			Extract:      resource.ExtractParamPath("primary_blob_endpoint", true),
 			Reference:    mg.Spec.ForProvider.StorageEndpointRef,
 			Selector:     mg.Spec.ForProvider.StorageEndpointSelector,
@@ -1348,7 +1350,7 @@ func (mg *MSSQLServerSecurityAlertPolicy) ResolveReferences(ctx context.Context,
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.StorageEndpoint")
 	}
-	mg.Spec.ForProvider.StorageEndpoint = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StorageEndpoint = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageEndpointRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
@@ -1357,7 +1359,7 @@ func (mg *MSSQLServerSecurityAlertPolicy) ResolveReferences(ctx context.Context,
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageEndpoint),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.StorageEndpoint, ""),
 			Extract:      resource.ExtractParamPath("primary_blob_endpoint", true),
 			Reference:    mg.Spec.InitProvider.StorageEndpointRef,
 			Selector:     mg.Spec.InitProvider.StorageEndpointSelector,
@@ -1367,7 +1369,7 @@ func (mg *MSSQLServerSecurityAlertPolicy) ResolveReferences(ctx context.Context,
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.StorageEndpoint")
 	}
-	mg.Spec.InitProvider.StorageEndpoint = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageEndpoint = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.StorageEndpointRef = rsp.ResolvedReference
 
 	return nil
@@ -1388,7 +1390,7 @@ func (mg *MSSQLServerTransparentDataEncryption) ResolveReferences(ctx context.Co
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KeyVaultKeyID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.KeyVaultKeyID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.KeyVaultKeyIDRef,
 			Selector:     mg.Spec.ForProvider.KeyVaultKeyIDSelector,
@@ -1398,7 +1400,7 @@ func (mg *MSSQLServerTransparentDataEncryption) ResolveReferences(ctx context.Co
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.KeyVaultKeyID")
 	}
-	mg.Spec.ForProvider.KeyVaultKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.KeyVaultKeyID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KeyVaultKeyIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("sql.azure.upbound.io", "v1beta2", "MSSQLServer", "MSSQLServerList")
@@ -1407,7 +1409,7 @@ func (mg *MSSQLServerTransparentDataEncryption) ResolveReferences(ctx context.Co
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServerID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ServerID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.ServerIDRef,
 			Selector:     mg.Spec.ForProvider.ServerIDSelector,
@@ -1417,7 +1419,7 @@ func (mg *MSSQLServerTransparentDataEncryption) ResolveReferences(ctx context.Co
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ServerID")
 	}
-	mg.Spec.ForProvider.ServerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ServerID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServerIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta2", "Key", "KeyList")
@@ -1426,7 +1428,7 @@ func (mg *MSSQLServerTransparentDataEncryption) ResolveReferences(ctx context.Co
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyVaultKeyID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.KeyVaultKeyID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.KeyVaultKeyIDRef,
 			Selector:     mg.Spec.InitProvider.KeyVaultKeyIDSelector,
@@ -1436,7 +1438,7 @@ func (mg *MSSQLServerTransparentDataEncryption) ResolveReferences(ctx context.Co
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.KeyVaultKeyID")
 	}
-	mg.Spec.InitProvider.KeyVaultKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KeyVaultKeyID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.KeyVaultKeyIDRef = rsp.ResolvedReference
 
 	return nil
@@ -1457,7 +1459,7 @@ func (mg *MSSQLServerVulnerabilityAssessment) ResolveReferences(ctx context.Cont
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServerSecurityAlertPolicyID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ServerSecurityAlertPolicyID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.ServerSecurityAlertPolicyIDRef,
 			Selector:     mg.Spec.ForProvider.ServerSecurityAlertPolicyIDSelector,
@@ -1467,7 +1469,7 @@ func (mg *MSSQLServerVulnerabilityAssessment) ResolveReferences(ctx context.Cont
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ServerSecurityAlertPolicyID")
 	}
-	mg.Spec.ForProvider.ServerSecurityAlertPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ServerSecurityAlertPolicyID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServerSecurityAlertPolicyIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("sql.azure.upbound.io", "v1beta1", "MSSQLServerSecurityAlertPolicy", "MSSQLServerSecurityAlertPolicyList")
@@ -1476,7 +1478,7 @@ func (mg *MSSQLServerVulnerabilityAssessment) ResolveReferences(ctx context.Cont
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServerSecurityAlertPolicyID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ServerSecurityAlertPolicyID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.ServerSecurityAlertPolicyIDRef,
 			Selector:     mg.Spec.InitProvider.ServerSecurityAlertPolicyIDSelector,
@@ -1486,7 +1488,7 @@ func (mg *MSSQLServerVulnerabilityAssessment) ResolveReferences(ctx context.Cont
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ServerSecurityAlertPolicyID")
 	}
-	mg.Spec.InitProvider.ServerSecurityAlertPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ServerSecurityAlertPolicyID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ServerSecurityAlertPolicyIDRef = rsp.ResolvedReference
 
 	return nil
@@ -1507,7 +1509,7 @@ func (mg *MSSQLVirtualNetworkRule) ResolveReferences(ctx context.Context, c clie
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServerID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ServerID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.ServerIDRef,
 			Selector:     mg.Spec.ForProvider.ServerIDSelector,
@@ -1517,7 +1519,7 @@ func (mg *MSSQLVirtualNetworkRule) ResolveReferences(ctx context.Context, c clie
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ServerID")
 	}
-	mg.Spec.ForProvider.ServerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ServerID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServerIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
@@ -1526,7 +1528,7 @@ func (mg *MSSQLVirtualNetworkRule) ResolveReferences(ctx context.Context, c clie
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.SubnetID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.SubnetIDRef,
 			Selector:     mg.Spec.ForProvider.SubnetIDSelector,
@@ -1536,7 +1538,7 @@ func (mg *MSSQLVirtualNetworkRule) ResolveReferences(ctx context.Context, c clie
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.SubnetID")
 	}
-	mg.Spec.ForProvider.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SubnetID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SubnetIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
@@ -1545,7 +1547,7 @@ func (mg *MSSQLVirtualNetworkRule) ResolveReferences(ctx context.Context, c clie
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubnetID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.SubnetID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.SubnetIDRef,
 			Selector:     mg.Spec.InitProvider.SubnetIDSelector,
@@ -1555,7 +1557,7 @@ func (mg *MSSQLVirtualNetworkRule) ResolveReferences(ctx context.Context, c clie
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.SubnetID")
 	}
-	mg.Spec.InitProvider.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SubnetID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.SubnetIDRef = rsp.ResolvedReference
 
 	return nil

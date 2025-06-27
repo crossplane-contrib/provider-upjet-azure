@@ -9,6 +9,7 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
+	helper "github.com/crossplane/crossplane-tools/pkg/helpers"
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
 
@@ -16,6 +17,7 @@ import (
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -34,7 +36,7 @@ func (mg *LogAnalyticsDataExportRule) ResolveReferences( // ResolveReferences of
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DestinationResourceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.DestinationResourceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.DestinationResourceIDRef,
 			Selector:     mg.Spec.ForProvider.DestinationResourceIDSelector,
@@ -44,7 +46,7 @@ func (mg *LogAnalyticsDataExportRule) ResolveReferences( // ResolveReferences of
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.DestinationResourceID")
 	}
-	mg.Spec.ForProvider.DestinationResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DestinationResourceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DestinationResourceIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -53,7 +55,7 @@ func (mg *LogAnalyticsDataExportRule) ResolveReferences( // ResolveReferences of
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -63,7 +65,7 @@ func (mg *LogAnalyticsDataExportRule) ResolveReferences( // ResolveReferences of
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("operationalinsights.azure.upbound.io", "v1beta2", "Workspace", "WorkspaceList")
@@ -72,7 +74,7 @@ func (mg *LogAnalyticsDataExportRule) ResolveReferences( // ResolveReferences of
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WorkspaceResourceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.WorkspaceResourceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.WorkspaceResourceIDRef,
 			Selector:     mg.Spec.ForProvider.WorkspaceResourceIDSelector,
@@ -82,7 +84,7 @@ func (mg *LogAnalyticsDataExportRule) ResolveReferences( // ResolveReferences of
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.WorkspaceResourceID")
 	}
-	mg.Spec.ForProvider.WorkspaceResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.WorkspaceResourceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.WorkspaceResourceIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
@@ -91,7 +93,7 @@ func (mg *LogAnalyticsDataExportRule) ResolveReferences( // ResolveReferences of
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DestinationResourceID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.DestinationResourceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.DestinationResourceIDRef,
 			Selector:     mg.Spec.InitProvider.DestinationResourceIDSelector,
@@ -101,7 +103,7 @@ func (mg *LogAnalyticsDataExportRule) ResolveReferences( // ResolveReferences of
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.DestinationResourceID")
 	}
-	mg.Spec.InitProvider.DestinationResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DestinationResourceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DestinationResourceIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -110,7 +112,7 @@ func (mg *LogAnalyticsDataExportRule) ResolveReferences( // ResolveReferences of
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
@@ -120,7 +122,7 @@ func (mg *LogAnalyticsDataExportRule) ResolveReferences( // ResolveReferences of
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
 	}
-	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -141,7 +143,7 @@ func (mg *LogAnalyticsDataSourceWindowsEvent) ResolveReferences(ctx context.Cont
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -151,7 +153,7 @@ func (mg *LogAnalyticsDataSourceWindowsEvent) ResolveReferences(ctx context.Cont
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("operationalinsights.azure.upbound.io", "v1beta2", "Workspace", "WorkspaceList")
@@ -160,7 +162,7 @@ func (mg *LogAnalyticsDataSourceWindowsEvent) ResolveReferences(ctx context.Cont
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WorkspaceName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.WorkspaceName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.WorkspaceNameRef,
 			Selector:     mg.Spec.ForProvider.WorkspaceNameSelector,
@@ -170,7 +172,7 @@ func (mg *LogAnalyticsDataSourceWindowsEvent) ResolveReferences(ctx context.Cont
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.WorkspaceName")
 	}
-	mg.Spec.ForProvider.WorkspaceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.WorkspaceName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.WorkspaceNameRef = rsp.ResolvedReference
 
 	return nil
@@ -191,7 +193,7 @@ func (mg *LogAnalyticsDataSourceWindowsPerformanceCounter) ResolveReferences(ctx
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -201,7 +203,7 @@ func (mg *LogAnalyticsDataSourceWindowsPerformanceCounter) ResolveReferences(ctx
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("operationalinsights.azure.upbound.io", "v1beta2", "Workspace", "WorkspaceList")
@@ -210,7 +212,7 @@ func (mg *LogAnalyticsDataSourceWindowsPerformanceCounter) ResolveReferences(ctx
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WorkspaceName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.WorkspaceName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.WorkspaceNameRef,
 			Selector:     mg.Spec.ForProvider.WorkspaceNameSelector,
@@ -220,7 +222,7 @@ func (mg *LogAnalyticsDataSourceWindowsPerformanceCounter) ResolveReferences(ctx
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.WorkspaceName")
 	}
-	mg.Spec.ForProvider.WorkspaceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.WorkspaceName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.WorkspaceNameRef = rsp.ResolvedReference
 
 	return nil
@@ -241,7 +243,7 @@ func (mg *LogAnalyticsLinkedService) ResolveReferences(ctx context.Context, c cl
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ReadAccessID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ReadAccessID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.ReadAccessIDRef,
 			Selector:     mg.Spec.ForProvider.ReadAccessIDSelector,
@@ -251,7 +253,7 @@ func (mg *LogAnalyticsLinkedService) ResolveReferences(ctx context.Context, c cl
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ReadAccessID")
 	}
-	mg.Spec.ForProvider.ReadAccessID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ReadAccessID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ReadAccessIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -260,7 +262,7 @@ func (mg *LogAnalyticsLinkedService) ResolveReferences(ctx context.Context, c cl
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -270,7 +272,7 @@ func (mg *LogAnalyticsLinkedService) ResolveReferences(ctx context.Context, c cl
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("operationalinsights.azure.upbound.io", "v1beta2", "Workspace", "WorkspaceList")
@@ -279,7 +281,7 @@ func (mg *LogAnalyticsLinkedService) ResolveReferences(ctx context.Context, c cl
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WorkspaceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.WorkspaceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.WorkspaceIDRef,
 			Selector:     mg.Spec.ForProvider.WorkspaceIDSelector,
@@ -289,7 +291,7 @@ func (mg *LogAnalyticsLinkedService) ResolveReferences(ctx context.Context, c cl
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.WorkspaceID")
 	}
-	mg.Spec.ForProvider.WorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.WorkspaceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.WorkspaceIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("automation.azure.upbound.io", "v1beta2", "Account", "AccountList")
@@ -298,7 +300,7 @@ func (mg *LogAnalyticsLinkedService) ResolveReferences(ctx context.Context, c cl
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ReadAccessID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ReadAccessID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.ReadAccessIDRef,
 			Selector:     mg.Spec.InitProvider.ReadAccessIDSelector,
@@ -308,7 +310,7 @@ func (mg *LogAnalyticsLinkedService) ResolveReferences(ctx context.Context, c cl
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ReadAccessID")
 	}
-	mg.Spec.InitProvider.ReadAccessID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ReadAccessID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ReadAccessIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -317,7 +319,7 @@ func (mg *LogAnalyticsLinkedService) ResolveReferences(ctx context.Context, c cl
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
@@ -327,7 +329,7 @@ func (mg *LogAnalyticsLinkedService) ResolveReferences(ctx context.Context, c cl
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
 	}
-	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -349,7 +351,7 @@ func (mg *LogAnalyticsLinkedStorageAccount) ResolveReferences(ctx context.Contex
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -359,7 +361,7 @@ func (mg *LogAnalyticsLinkedStorageAccount) ResolveReferences(ctx context.Contex
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
@@ -368,7 +370,7 @@ func (mg *LogAnalyticsLinkedStorageAccount) ResolveReferences(ctx context.Contex
 		}
 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.StorageAccountIds),
+			CurrentValues: helper.FromPtrValues(mg.Spec.ForProvider.StorageAccountIds),
 			Extract:       rconfig.ExtractResourceID(),
 			References:    mg.Spec.ForProvider.StorageAccountIdsRefs,
 			Selector:      mg.Spec.ForProvider.StorageAccountIdsSelector,
@@ -378,7 +380,7 @@ func (mg *LogAnalyticsLinkedStorageAccount) ResolveReferences(ctx context.Contex
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.StorageAccountIds")
 	}
-	mg.Spec.ForProvider.StorageAccountIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.StorageAccountIds = helper.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.StorageAccountIdsRefs = mrsp.ResolvedReferences
 	{
 		m, l, err = apisresolver.GetManagedResource("operationalinsights.azure.upbound.io", "v1beta2", "Workspace", "WorkspaceList")
@@ -387,7 +389,7 @@ func (mg *LogAnalyticsLinkedStorageAccount) ResolveReferences(ctx context.Contex
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WorkspaceResourceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.WorkspaceResourceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.WorkspaceResourceIDRef,
 			Selector:     mg.Spec.ForProvider.WorkspaceResourceIDSelector,
@@ -397,7 +399,7 @@ func (mg *LogAnalyticsLinkedStorageAccount) ResolveReferences(ctx context.Contex
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.WorkspaceResourceID")
 	}
-	mg.Spec.ForProvider.WorkspaceResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.WorkspaceResourceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.WorkspaceResourceIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -406,7 +408,7 @@ func (mg *LogAnalyticsLinkedStorageAccount) ResolveReferences(ctx context.Contex
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
@@ -416,7 +418,7 @@ func (mg *LogAnalyticsLinkedStorageAccount) ResolveReferences(ctx context.Contex
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
 	}
-	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
@@ -425,7 +427,7 @@ func (mg *LogAnalyticsLinkedStorageAccount) ResolveReferences(ctx context.Contex
 		}
 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.StorageAccountIds),
+			CurrentValues: helper.FromPtrValues(mg.Spec.InitProvider.StorageAccountIds),
 			Extract:       rconfig.ExtractResourceID(),
 			References:    mg.Spec.InitProvider.StorageAccountIdsRefs,
 			Selector:      mg.Spec.InitProvider.StorageAccountIdsSelector,
@@ -435,7 +437,7 @@ func (mg *LogAnalyticsLinkedStorageAccount) ResolveReferences(ctx context.Contex
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccountIds")
 	}
-	mg.Spec.InitProvider.StorageAccountIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.StorageAccountIds = helper.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.InitProvider.StorageAccountIdsRefs = mrsp.ResolvedReferences
 	{
 		m, l, err = apisresolver.GetManagedResource("operationalinsights.azure.upbound.io", "v1beta2", "Workspace", "WorkspaceList")
@@ -444,7 +446,7 @@ func (mg *LogAnalyticsLinkedStorageAccount) ResolveReferences(ctx context.Contex
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.WorkspaceResourceID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.WorkspaceResourceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.WorkspaceResourceIDRef,
 			Selector:     mg.Spec.InitProvider.WorkspaceResourceIDSelector,
@@ -454,7 +456,7 @@ func (mg *LogAnalyticsLinkedStorageAccount) ResolveReferences(ctx context.Contex
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.WorkspaceResourceID")
 	}
-	mg.Spec.InitProvider.WorkspaceResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.WorkspaceResourceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.WorkspaceResourceIDRef = rsp.ResolvedReference
 
 	return nil
@@ -475,7 +477,7 @@ func (mg *LogAnalyticsQueryPack) ResolveReferences(ctx context.Context, c client
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -485,7 +487,7 @@ func (mg *LogAnalyticsQueryPack) ResolveReferences(ctx context.Context, c client
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -506,7 +508,7 @@ func (mg *LogAnalyticsQueryPackQuery) ResolveReferences(ctx context.Context, c c
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.QueryPackID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.QueryPackID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.QueryPackIDRef,
 			Selector:     mg.Spec.ForProvider.QueryPackIDSelector,
@@ -516,7 +518,7 @@ func (mg *LogAnalyticsQueryPackQuery) ResolveReferences(ctx context.Context, c c
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.QueryPackID")
 	}
-	mg.Spec.ForProvider.QueryPackID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.QueryPackID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.QueryPackIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("operationalinsights.azure.upbound.io", "v1beta1", "LogAnalyticsQueryPack", "LogAnalyticsQueryPackList")
@@ -525,7 +527,7 @@ func (mg *LogAnalyticsQueryPackQuery) ResolveReferences(ctx context.Context, c c
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.QueryPackID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.QueryPackID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.QueryPackIDRef,
 			Selector:     mg.Spec.InitProvider.QueryPackIDSelector,
@@ -535,7 +537,7 @@ func (mg *LogAnalyticsQueryPackQuery) ResolveReferences(ctx context.Context, c c
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.QueryPackID")
 	}
-	mg.Spec.InitProvider.QueryPackID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.QueryPackID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.QueryPackIDRef = rsp.ResolvedReference
 
 	return nil
@@ -556,7 +558,7 @@ func (mg *LogAnalyticsSavedSearch) ResolveReferences(ctx context.Context, c clie
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogAnalyticsWorkspaceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.LogAnalyticsWorkspaceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.LogAnalyticsWorkspaceIDRef,
 			Selector:     mg.Spec.ForProvider.LogAnalyticsWorkspaceIDSelector,
@@ -566,7 +568,7 @@ func (mg *LogAnalyticsSavedSearch) ResolveReferences(ctx context.Context, c clie
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.LogAnalyticsWorkspaceID")
 	}
-	mg.Spec.ForProvider.LogAnalyticsWorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LogAnalyticsWorkspaceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LogAnalyticsWorkspaceIDRef = rsp.ResolvedReference
 
 	return nil
@@ -587,7 +589,7 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -597,7 +599,7 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil

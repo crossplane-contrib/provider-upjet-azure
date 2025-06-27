@@ -9,6 +9,7 @@ package v1beta2
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
+	helper "github.com/crossplane/crossplane-tools/pkg/helpers"
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
 
@@ -16,6 +17,7 @@ import (
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -34,7 +36,7 @@ func (mg *CapacityReservation) ResolveReferences( // ResolveReferences of this C
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CapacityReservationGroupID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.CapacityReservationGroupID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.CapacityReservationGroupIDRef,
 			Selector:     mg.Spec.ForProvider.CapacityReservationGroupIDSelector,
@@ -44,7 +46,7 @@ func (mg *CapacityReservation) ResolveReferences( // ResolveReferences of this C
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.CapacityReservationGroupID")
 	}
-	mg.Spec.ForProvider.CapacityReservationGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CapacityReservationGroupID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CapacityReservationGroupIDRef = rsp.ResolvedReference
 
 	return nil
@@ -65,7 +67,7 @@ func (mg *DiskEncryptionSet) ResolveReferences(ctx context.Context, c client.Rea
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KeyVaultKeyID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.KeyVaultKeyID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.KeyVaultKeyIDRef,
 			Selector:     mg.Spec.ForProvider.KeyVaultKeyIDSelector,
@@ -75,7 +77,7 @@ func (mg *DiskEncryptionSet) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.KeyVaultKeyID")
 	}
-	mg.Spec.ForProvider.KeyVaultKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.KeyVaultKeyID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KeyVaultKeyIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -84,7 +86,7 @@ func (mg *DiskEncryptionSet) ResolveReferences(ctx context.Context, c client.Rea
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -94,7 +96,7 @@ func (mg *DiskEncryptionSet) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta2", "Key", "KeyList")
@@ -103,7 +105,7 @@ func (mg *DiskEncryptionSet) ResolveReferences(ctx context.Context, c client.Rea
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyVaultKeyID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.KeyVaultKeyID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.KeyVaultKeyIDRef,
 			Selector:     mg.Spec.InitProvider.KeyVaultKeyIDSelector,
@@ -113,7 +115,7 @@ func (mg *DiskEncryptionSet) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.KeyVaultKeyID")
 	}
-	mg.Spec.InitProvider.KeyVaultKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KeyVaultKeyID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.KeyVaultKeyIDRef = rsp.ResolvedReference
 
 	return nil
@@ -134,7 +136,7 @@ func (mg *GalleryApplicationVersion) ResolveReferences(ctx context.Context, c cl
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.GalleryApplicationID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.GalleryApplicationID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.GalleryApplicationIDRef,
 			Selector:     mg.Spec.ForProvider.GalleryApplicationIDSelector,
@@ -144,7 +146,7 @@ func (mg *GalleryApplicationVersion) ResolveReferences(ctx context.Context, c cl
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.GalleryApplicationID")
 	}
-	mg.Spec.ForProvider.GalleryApplicationID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.GalleryApplicationID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.GalleryApplicationIDRef = rsp.ResolvedReference
 
 	if mg.Spec.ForProvider.Source != nil {
@@ -154,7 +156,7 @@ func (mg *GalleryApplicationVersion) ResolveReferences(ctx context.Context, c cl
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Source.MediaLink),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.Source.MediaLink, ""),
 				Extract:      resource.ExtractResourceID(),
 				Reference:    mg.Spec.ForProvider.Source.MediaLinkRef,
 				Selector:     mg.Spec.ForProvider.Source.MediaLinkSelector,
@@ -164,7 +166,7 @@ func (mg *GalleryApplicationVersion) ResolveReferences(ctx context.Context, c cl
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.Source.MediaLink")
 		}
-		mg.Spec.ForProvider.Source.MediaLink = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Source.MediaLink = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.Source.MediaLinkRef = rsp.ResolvedReference
 
 	}
@@ -175,7 +177,7 @@ func (mg *GalleryApplicationVersion) ResolveReferences(ctx context.Context, c cl
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TargetRegion[i3].Name),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.TargetRegion[i3].Name, ""),
 				Extract:      resource.ExtractParamPath("location", false),
 				Reference:    mg.Spec.ForProvider.TargetRegion[i3].NameRef,
 				Selector:     mg.Spec.ForProvider.TargetRegion[i3].NameSelector,
@@ -185,7 +187,7 @@ func (mg *GalleryApplicationVersion) ResolveReferences(ctx context.Context, c cl
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.TargetRegion[i3].Name")
 		}
-		mg.Spec.ForProvider.TargetRegion[i3].Name = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.TargetRegion[i3].Name = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.TargetRegion[i3].NameRef = rsp.ResolvedReference
 
 	}
@@ -195,7 +197,7 @@ func (mg *GalleryApplicationVersion) ResolveReferences(ctx context.Context, c cl
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.GalleryApplicationID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.GalleryApplicationID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.GalleryApplicationIDRef,
 			Selector:     mg.Spec.InitProvider.GalleryApplicationIDSelector,
@@ -205,7 +207,7 @@ func (mg *GalleryApplicationVersion) ResolveReferences(ctx context.Context, c cl
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.GalleryApplicationID")
 	}
-	mg.Spec.InitProvider.GalleryApplicationID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.GalleryApplicationID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.GalleryApplicationIDRef = rsp.ResolvedReference
 
 	if mg.Spec.InitProvider.Source != nil {
@@ -215,7 +217,7 @@ func (mg *GalleryApplicationVersion) ResolveReferences(ctx context.Context, c cl
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Source.MediaLink),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.Source.MediaLink, ""),
 				Extract:      resource.ExtractResourceID(),
 				Reference:    mg.Spec.InitProvider.Source.MediaLinkRef,
 				Selector:     mg.Spec.InitProvider.Source.MediaLinkSelector,
@@ -225,7 +227,7 @@ func (mg *GalleryApplicationVersion) ResolveReferences(ctx context.Context, c cl
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.Source.MediaLink")
 		}
-		mg.Spec.InitProvider.Source.MediaLink = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Source.MediaLink = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.Source.MediaLinkRef = rsp.ResolvedReference
 
 	}
@@ -236,7 +238,7 @@ func (mg *GalleryApplicationVersion) ResolveReferences(ctx context.Context, c cl
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TargetRegion[i3].Name),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.TargetRegion[i3].Name, ""),
 				Extract:      resource.ExtractParamPath("location", false),
 				Reference:    mg.Spec.InitProvider.TargetRegion[i3].NameRef,
 				Selector:     mg.Spec.InitProvider.TargetRegion[i3].NameSelector,
@@ -246,7 +248,7 @@ func (mg *GalleryApplicationVersion) ResolveReferences(ctx context.Context, c cl
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.TargetRegion[i3].Name")
 		}
-		mg.Spec.InitProvider.TargetRegion[i3].Name = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.TargetRegion[i3].Name = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.TargetRegion[i3].NameRef = rsp.ResolvedReference
 
 	}
@@ -269,7 +271,7 @@ func (mg *Image) ResolveReferences(ctx context.Context, c client.Reader) error {
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -279,7 +281,7 @@ func (mg *Image) ResolveReferences(ctx context.Context, c client.Reader) error {
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -301,7 +303,7 @@ func (mg *LinuxVirtualMachine) ResolveReferences(ctx context.Context, c client.R
 		}
 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.NetworkInterfaceIds),
+			CurrentValues: helper.FromPtrValues(mg.Spec.ForProvider.NetworkInterfaceIds),
 			Extract:       rconfig.ExtractResourceID(),
 			References:    mg.Spec.ForProvider.NetworkInterfaceIdsRefs,
 			Selector:      mg.Spec.ForProvider.NetworkInterfaceIdsSelector,
@@ -311,7 +313,7 @@ func (mg *LinuxVirtualMachine) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.NetworkInterfaceIds")
 	}
-	mg.Spec.ForProvider.NetworkInterfaceIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.NetworkInterfaceIds = helper.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.NetworkInterfaceIdsRefs = mrsp.ResolvedReferences
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -320,7 +322,7 @@ func (mg *LinuxVirtualMachine) ResolveReferences(ctx context.Context, c client.R
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -330,7 +332,7 @@ func (mg *LinuxVirtualMachine) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "NetworkInterface", "NetworkInterfaceList")
@@ -339,7 +341,7 @@ func (mg *LinuxVirtualMachine) ResolveReferences(ctx context.Context, c client.R
 		}
 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.NetworkInterfaceIds),
+			CurrentValues: helper.FromPtrValues(mg.Spec.InitProvider.NetworkInterfaceIds),
 			Extract:       rconfig.ExtractResourceID(),
 			References:    mg.Spec.InitProvider.NetworkInterfaceIdsRefs,
 			Selector:      mg.Spec.InitProvider.NetworkInterfaceIdsSelector,
@@ -349,7 +351,7 @@ func (mg *LinuxVirtualMachine) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.NetworkInterfaceIds")
 	}
-	mg.Spec.InitProvider.NetworkInterfaceIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.NetworkInterfaceIds = helper.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.InitProvider.NetworkInterfaceIdsRefs = mrsp.ResolvedReferences
 
 	return nil
@@ -372,7 +374,7 @@ func (mg *LinuxVirtualMachineScaleSet) ResolveReferences(ctx context.Context, c 
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetID, ""),
 					Extract:      resource.ExtractResourceID(),
 					Reference:    mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDSelector,
@@ -382,7 +384,7 @@ func (mg *LinuxVirtualMachineScaleSet) ResolveReferences(ctx context.Context, c 
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetID")
 			}
-			mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -393,7 +395,7 @@ func (mg *LinuxVirtualMachineScaleSet) ResolveReferences(ctx context.Context, c 
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -403,7 +405,7 @@ func (mg *LinuxVirtualMachineScaleSet) ResolveReferences(ctx context.Context, c 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.NetworkInterface); i3++ {
@@ -414,7 +416,7 @@ func (mg *LinuxVirtualMachineScaleSet) ResolveReferences(ctx context.Context, c 
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetID, ""),
 					Extract:      resource.ExtractResourceID(),
 					Reference:    mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDSelector,
@@ -424,7 +426,7 @@ func (mg *LinuxVirtualMachineScaleSet) ResolveReferences(ctx context.Context, c 
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetID")
 			}
-			mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -448,7 +450,7 @@ func (mg *ManagedDisk) ResolveReferences(ctx context.Context, c client.Reader) e
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -458,7 +460,7 @@ func (mg *ManagedDisk) ResolveReferences(ctx context.Context, c client.Reader) e
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("compute.azure.upbound.io", "v1beta2", "ManagedDisk", "ManagedDiskList")
@@ -467,7 +469,7 @@ func (mg *ManagedDisk) ResolveReferences(ctx context.Context, c client.Reader) e
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceResourceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.SourceResourceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.SourceResourceIDRef,
 			Selector:     mg.Spec.ForProvider.SourceResourceIDSelector,
@@ -477,7 +479,7 @@ func (mg *ManagedDisk) ResolveReferences(ctx context.Context, c client.Reader) e
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.SourceResourceID")
 	}
-	mg.Spec.ForProvider.SourceResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SourceResourceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SourceResourceIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("compute.azure.upbound.io", "v1beta2", "ManagedDisk", "ManagedDiskList")
@@ -486,7 +488,7 @@ func (mg *ManagedDisk) ResolveReferences(ctx context.Context, c client.Reader) e
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceResourceID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.SourceResourceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.SourceResourceIDRef,
 			Selector:     mg.Spec.InitProvider.SourceResourceIDSelector,
@@ -496,7 +498,7 @@ func (mg *ManagedDisk) ResolveReferences(ctx context.Context, c client.Reader) e
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.SourceResourceID")
 	}
-	mg.Spec.InitProvider.SourceResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SourceResourceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.SourceResourceIDRef = rsp.ResolvedReference
 
 	return nil
@@ -519,7 +521,7 @@ func (mg *OrchestratedVirtualMachineScaleSet) ResolveReferences(ctx context.Cont
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDSelector,
@@ -529,7 +531,7 @@ func (mg *OrchestratedVirtualMachineScaleSet) ResolveReferences(ctx context.Cont
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetID")
 			}
-			mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -540,7 +542,7 @@ func (mg *OrchestratedVirtualMachineScaleSet) ResolveReferences(ctx context.Cont
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -550,7 +552,7 @@ func (mg *OrchestratedVirtualMachineScaleSet) ResolveReferences(ctx context.Cont
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.NetworkInterface); i3++ {
@@ -561,7 +563,7 @@ func (mg *OrchestratedVirtualMachineScaleSet) ResolveReferences(ctx context.Cont
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetID, ""),
 					Extract:      rconfig.ExtractResourceID(),
 					Reference:    mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDSelector,
@@ -571,7 +573,7 @@ func (mg *OrchestratedVirtualMachineScaleSet) ResolveReferences(ctx context.Cont
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetID")
 			}
-			mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -595,7 +597,7 @@ func (mg *SharedImage) ResolveReferences(ctx context.Context, c client.Reader) e
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.GalleryName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.GalleryName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.GalleryNameRef,
 			Selector:     mg.Spec.ForProvider.GalleryNameSelector,
@@ -605,7 +607,7 @@ func (mg *SharedImage) ResolveReferences(ctx context.Context, c client.Reader) e
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.GalleryName")
 	}
-	mg.Spec.ForProvider.GalleryName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.GalleryName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.GalleryNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -614,7 +616,7 @@ func (mg *SharedImage) ResolveReferences(ctx context.Context, c client.Reader) e
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -624,7 +626,7 @@ func (mg *SharedImage) ResolveReferences(ctx context.Context, c client.Reader) e
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -645,7 +647,7 @@ func (mg *SharedImageGallery) ResolveReferences(ctx context.Context, c client.Re
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -655,7 +657,7 @@ func (mg *SharedImageGallery) ResolveReferences(ctx context.Context, c client.Re
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
@@ -676,7 +678,7 @@ func (mg *Snapshot) ResolveReferences(ctx context.Context, c client.Reader) erro
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -686,7 +688,7 @@ func (mg *Snapshot) ResolveReferences(ctx context.Context, c client.Reader) erro
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("compute.azure.upbound.io", "v1beta2", "ManagedDisk", "ManagedDiskList")
@@ -695,7 +697,7 @@ func (mg *Snapshot) ResolveReferences(ctx context.Context, c client.Reader) erro
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceURI),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.SourceURI, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.SourceURIRef,
 			Selector:     mg.Spec.ForProvider.SourceURISelector,
@@ -705,7 +707,7 @@ func (mg *Snapshot) ResolveReferences(ctx context.Context, c client.Reader) erro
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.SourceURI")
 	}
-	mg.Spec.ForProvider.SourceURI = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SourceURI = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SourceURIRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("compute.azure.upbound.io", "v1beta2", "ManagedDisk", "ManagedDiskList")
@@ -714,7 +716,7 @@ func (mg *Snapshot) ResolveReferences(ctx context.Context, c client.Reader) erro
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceURI),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.SourceURI, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.SourceURIRef,
 			Selector:     mg.Spec.InitProvider.SourceURISelector,
@@ -724,7 +726,7 @@ func (mg *Snapshot) ResolveReferences(ctx context.Context, c client.Reader) erro
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.SourceURI")
 	}
-	mg.Spec.InitProvider.SourceURI = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SourceURI = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.SourceURIRef = rsp.ResolvedReference
 
 	return nil
@@ -745,7 +747,7 @@ func (mg *VirtualMachineExtension) ResolveReferences(ctx context.Context, c clie
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VirtualMachineID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.VirtualMachineID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.VirtualMachineIDRef,
 			Selector:     mg.Spec.ForProvider.VirtualMachineIDSelector,
@@ -755,7 +757,7 @@ func (mg *VirtualMachineExtension) ResolveReferences(ctx context.Context, c clie
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.VirtualMachineID")
 	}
-	mg.Spec.ForProvider.VirtualMachineID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VirtualMachineID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VirtualMachineIDRef = rsp.ResolvedReference
 
 	return nil
@@ -776,7 +778,7 @@ func (mg *VirtualMachineRunCommand) ResolveReferences(ctx context.Context, c cli
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ErrorBlobURI),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ErrorBlobURI, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.ErrorBlobURIRef,
 			Selector:     mg.Spec.ForProvider.ErrorBlobURISelector,
@@ -786,7 +788,7 @@ func (mg *VirtualMachineRunCommand) ResolveReferences(ctx context.Context, c cli
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ErrorBlobURI")
 	}
-	mg.Spec.ForProvider.ErrorBlobURI = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ErrorBlobURI = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ErrorBlobURIRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Blob", "BlobList")
@@ -795,7 +797,7 @@ func (mg *VirtualMachineRunCommand) ResolveReferences(ctx context.Context, c cli
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OutputBlobURI),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.OutputBlobURI, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.OutputBlobURIRef,
 			Selector:     mg.Spec.ForProvider.OutputBlobURISelector,
@@ -805,7 +807,7 @@ func (mg *VirtualMachineRunCommand) ResolveReferences(ctx context.Context, c cli
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.OutputBlobURI")
 	}
-	mg.Spec.ForProvider.OutputBlobURI = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.OutputBlobURI = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.OutputBlobURIRef = rsp.ResolvedReference
 
 	if mg.Spec.ForProvider.Source != nil {
@@ -815,7 +817,7 @@ func (mg *VirtualMachineRunCommand) ResolveReferences(ctx context.Context, c cli
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Source.ScriptURI),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.Source.ScriptURI, ""),
 				Extract:      resource.ExtractResourceID(),
 				Reference:    mg.Spec.ForProvider.Source.ScriptURIRef,
 				Selector:     mg.Spec.ForProvider.Source.ScriptURISelector,
@@ -825,7 +827,7 @@ func (mg *VirtualMachineRunCommand) ResolveReferences(ctx context.Context, c cli
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.Source.ScriptURI")
 		}
-		mg.Spec.ForProvider.Source.ScriptURI = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Source.ScriptURI = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.Source.ScriptURIRef = rsp.ResolvedReference
 
 	}
@@ -835,7 +837,7 @@ func (mg *VirtualMachineRunCommand) ResolveReferences(ctx context.Context, c cli
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VirtualMachineID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.VirtualMachineID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.VirtualMachineIDRef,
 			Selector:     mg.Spec.ForProvider.VirtualMachineIDSelector,
@@ -845,7 +847,7 @@ func (mg *VirtualMachineRunCommand) ResolveReferences(ctx context.Context, c cli
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.VirtualMachineID")
 	}
-	mg.Spec.ForProvider.VirtualMachineID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VirtualMachineID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VirtualMachineIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Blob", "BlobList")
@@ -854,7 +856,7 @@ func (mg *VirtualMachineRunCommand) ResolveReferences(ctx context.Context, c cli
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ErrorBlobURI),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ErrorBlobURI, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.ErrorBlobURIRef,
 			Selector:     mg.Spec.InitProvider.ErrorBlobURISelector,
@@ -864,7 +866,7 @@ func (mg *VirtualMachineRunCommand) ResolveReferences(ctx context.Context, c cli
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ErrorBlobURI")
 	}
-	mg.Spec.InitProvider.ErrorBlobURI = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ErrorBlobURI = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ErrorBlobURIRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Blob", "BlobList")
@@ -873,7 +875,7 @@ func (mg *VirtualMachineRunCommand) ResolveReferences(ctx context.Context, c cli
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.OutputBlobURI),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.OutputBlobURI, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.OutputBlobURIRef,
 			Selector:     mg.Spec.InitProvider.OutputBlobURISelector,
@@ -883,7 +885,7 @@ func (mg *VirtualMachineRunCommand) ResolveReferences(ctx context.Context, c cli
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.OutputBlobURI")
 	}
-	mg.Spec.InitProvider.OutputBlobURI = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.OutputBlobURI = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.OutputBlobURIRef = rsp.ResolvedReference
 
 	if mg.Spec.InitProvider.Source != nil {
@@ -893,7 +895,7 @@ func (mg *VirtualMachineRunCommand) ResolveReferences(ctx context.Context, c cli
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Source.ScriptURI),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.Source.ScriptURI, ""),
 				Extract:      resource.ExtractResourceID(),
 				Reference:    mg.Spec.InitProvider.Source.ScriptURIRef,
 				Selector:     mg.Spec.InitProvider.Source.ScriptURISelector,
@@ -903,7 +905,7 @@ func (mg *VirtualMachineRunCommand) ResolveReferences(ctx context.Context, c cli
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.Source.ScriptURI")
 		}
-		mg.Spec.InitProvider.Source.ScriptURI = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Source.ScriptURI = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.Source.ScriptURIRef = rsp.ResolvedReference
 
 	}
@@ -927,7 +929,7 @@ func (mg *WindowsVirtualMachine) ResolveReferences(ctx context.Context, c client
 		}
 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.NetworkInterfaceIds),
+			CurrentValues: helper.FromPtrValues(mg.Spec.ForProvider.NetworkInterfaceIds),
 			Extract:       rconfig.ExtractResourceID(),
 			References:    mg.Spec.ForProvider.NetworkInterfaceIdsRefs,
 			Selector:      mg.Spec.ForProvider.NetworkInterfaceIdsSelector,
@@ -937,7 +939,7 @@ func (mg *WindowsVirtualMachine) ResolveReferences(ctx context.Context, c client
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.NetworkInterfaceIds")
 	}
-	mg.Spec.ForProvider.NetworkInterfaceIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.NetworkInterfaceIds = helper.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.NetworkInterfaceIdsRefs = mrsp.ResolvedReferences
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -946,7 +948,7 @@ func (mg *WindowsVirtualMachine) ResolveReferences(ctx context.Context, c client
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -956,7 +958,7 @@ func (mg *WindowsVirtualMachine) ResolveReferences(ctx context.Context, c client
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "NetworkInterface", "NetworkInterfaceList")
@@ -965,7 +967,7 @@ func (mg *WindowsVirtualMachine) ResolveReferences(ctx context.Context, c client
 		}
 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.NetworkInterfaceIds),
+			CurrentValues: helper.FromPtrValues(mg.Spec.InitProvider.NetworkInterfaceIds),
 			Extract:       rconfig.ExtractResourceID(),
 			References:    mg.Spec.InitProvider.NetworkInterfaceIdsRefs,
 			Selector:      mg.Spec.InitProvider.NetworkInterfaceIdsSelector,
@@ -975,7 +977,7 @@ func (mg *WindowsVirtualMachine) ResolveReferences(ctx context.Context, c client
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.NetworkInterfaceIds")
 	}
-	mg.Spec.InitProvider.NetworkInterfaceIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.NetworkInterfaceIds = helper.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.InitProvider.NetworkInterfaceIdsRefs = mrsp.ResolvedReferences
 
 	return nil
@@ -998,7 +1000,7 @@ func (mg *WindowsVirtualMachineScaleSet) ResolveReferences(ctx context.Context, 
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetID, ""),
 					Extract:      resource.ExtractResourceID(),
 					Reference:    mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDSelector,
@@ -1008,7 +1010,7 @@ func (mg *WindowsVirtualMachineScaleSet) ResolveReferences(ctx context.Context, 
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetID")
 			}
-			mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDRef = rsp.ResolvedReference
 
 		}
@@ -1019,7 +1021,7 @@ func (mg *WindowsVirtualMachineScaleSet) ResolveReferences(ctx context.Context, 
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -1029,7 +1031,7 @@ func (mg *WindowsVirtualMachineScaleSet) ResolveReferences(ctx context.Context, 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.NetworkInterface); i3++ {
@@ -1040,7 +1042,7 @@ func (mg *WindowsVirtualMachineScaleSet) ResolveReferences(ctx context.Context, 
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetID),
+					CurrentValue: ptr.Deref(mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetID, ""),
 					Extract:      resource.ExtractResourceID(),
 					Reference:    mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDSelector,
@@ -1050,7 +1052,7 @@ func (mg *WindowsVirtualMachineScaleSet) ResolveReferences(ctx context.Context, 
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetID")
 			}
-			mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetID = ptr.To(rsp.ResolvedValue)
 			mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDRef = rsp.ResolvedReference
 
 		}
