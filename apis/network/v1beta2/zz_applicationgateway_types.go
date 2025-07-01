@@ -43,12 +43,16 @@ type ApplicationGatewayInitParameters struct {
 	ForceFirewallPolicyAssociation *bool `json:"forceFirewallPolicyAssociation,omitempty" tf:"force_firewall_policy_association,omitempty"`
 
 	// One or more frontend_ip_configuration blocks as defined below.
+	// +listType=map
+	// +listMapKey=name
 	FrontendIPConfiguration []FrontendIPConfigurationInitParameters `json:"frontendIpConfiguration,omitempty" tf:"frontend_ip_configuration,omitempty"`
 
 	// One or more frontend_port blocks as defined below.
 	FrontendPort []FrontendPortInitParameters `json:"frontendPort,omitempty" tf:"frontend_port,omitempty"`
 
 	// One or more gateway_ip_configuration blocks as defined below.
+	// +listType=map
+	// +listMapKey=name
 	GatewayIPConfiguration []GatewayIPConfigurationInitParameters `json:"gatewayIpConfiguration,omitempty" tf:"gateway_ip_configuration,omitempty"`
 
 	// A global block as defined below.
@@ -141,12 +145,16 @@ type ApplicationGatewayObservation struct {
 	ForceFirewallPolicyAssociation *bool `json:"forceFirewallPolicyAssociation,omitempty" tf:"force_firewall_policy_association,omitempty"`
 
 	// One or more frontend_ip_configuration blocks as defined below.
+	// +listType=map
+	// +listMapKey=name
 	FrontendIPConfiguration []FrontendIPConfigurationObservation `json:"frontendIpConfiguration,omitempty" tf:"frontend_ip_configuration,omitempty"`
 
 	// One or more frontend_port blocks as defined below.
 	FrontendPort []FrontendPortObservation `json:"frontendPort,omitempty" tf:"frontend_port,omitempty"`
 
 	// One or more gateway_ip_configuration blocks as defined below.
+	// +listType=map
+	// +listMapKey=name
 	GatewayIPConfiguration []GatewayIPConfigurationObservation `json:"gatewayIpConfiguration,omitempty" tf:"gateway_ip_configuration,omitempty"`
 
 	// A global block as defined below.
@@ -258,6 +266,8 @@ type ApplicationGatewayParameters struct {
 
 	// One or more frontend_ip_configuration blocks as defined below.
 	// +kubebuilder:validation:Optional
+	// +listType=map
+	// +listMapKey=name
 	FrontendIPConfiguration []FrontendIPConfigurationParameters `json:"frontendIpConfiguration,omitempty" tf:"frontend_ip_configuration,omitempty"`
 
 	// One or more frontend_port blocks as defined below.
@@ -266,6 +276,8 @@ type ApplicationGatewayParameters struct {
 
 	// One or more gateway_ip_configuration blocks as defined below.
 	// +kubebuilder:validation:Optional
+	// +listType=map
+	// +listMapKey=name
 	GatewayIPConfiguration []GatewayIPConfigurationParameters `json:"gatewayIpConfiguration,omitempty" tf:"gateway_ip_configuration,omitempty"`
 
 	// A global block as defined below.
