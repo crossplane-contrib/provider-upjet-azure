@@ -19,7 +19,8 @@ import (
 	"k8s.io/apimachinery/pkg/types"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	"github.com/upbound/provider-azure/apis/v1beta1"
+	clusterv1beta1 "github.com/upbound/provider-azure/apis/cluster/v1beta1"
+	namespacedv1beta1 "github.com/upbound/provider-azure/apis/namespaced/v1beta1"
 )
 
 const (
@@ -73,18 +74,9 @@ func TerraformSetupBuilder(tfProvider *schema.Provider) terraform.SetupFn { //no
 	return func(ctx context.Context, client client.Client, mg xpresource.Managed) (terraform.Setup, error) {
 		ps := terraform.Setup{}
 
-		configRef := mg.GetProviderConfigReference()
-		if configRef == nil {
-			return ps, errors.New(errNoProviderConfig)
-		}
-		pc := &v1beta1.ProviderConfig{}
-		if err := client.Get(ctx, types.NamespacedName{Name: configRef.Name}, pc); err != nil {
-			return ps, errors.Wrap(err, errGetProviderConfig)
-		}
-
-		t := xpresource.NewProviderConfigUsageTracker(client, &v1beta1.ProviderConfigUsage{})
-		if err := t.Track(ctx, mg); err != nil {
-			return ps, errors.Wrap(err, errTrackUsage)
+		pcSpec, err := resolveProviderConfig(ctx, client, mg)
+		if err != nil {
+			return terraform.Setup{}, err
 		}
 
 		ps.Configuration = map[string]interface{}{
@@ -98,16 +90,15 @@ func TerraformSetupBuilder(tfProvider *schema.Provider) terraform.SetupFn { //no
 			keySkipProviderRegistration: true,
 		}
 
-		var err error
-		switch pc.Spec.Credentials.Source { //nolint:exhaustive
+		switch pcSpec.Credentials.Source { //nolint:exhaustive
 		case credentialsSourceSystemAssignedManagedIdentity, credentialsSourceUserAssignedManagedIdentity:
-			err = msiAuth(pc, &ps)
+			err = msiAuth(pcSpec, &ps)
 		case credentialsSourceOIDCTokenFile:
-			err = oidcAuth(pc, &ps)
+			err = oidcAuth(pcSpec, &ps)
 		case credentialsSourceUpbound:
-			err = upboundAuth(pc, &ps)
+			err = upboundAuth(pcSpec, &ps)
 		default:
-			err = spAuth(ctx, pc, &ps, client)
+			err = spAuth(ctx, pcSpec, &ps, client)
 		}
 		if err != nil {
 			return terraform.Setup{}, errors.Wrap(err, "failed to prepare terraform.Setup")
@@ -128,8 +119,8 @@ func configureNoForkAzureClient(ctx context.Context, ps *terraform.Setup, p sche
 	return nil
 }
 
-func spAuth(ctx context.Context, pc *v1beta1.ProviderConfig, ps *terraform.Setup, client client.Client) error {
-	data, err := xpresource.CommonCredentialExtractor(ctx, pc.Spec.Credentials.Source, client, pc.Spec.Credentials.CommonCredentialSelectors)
+func spAuth(ctx context.Context, pcSpec *namespacedv1beta1.ProviderConfigSpec, ps *terraform.Setup, client client.Client) error {
+	data, err := xpresource.CommonCredentialExtractor(ctx, pcSpec.Credentials.Source, client, pcSpec.Credentials.CommonCredentialSelectors)
 	if err != nil {
 		return errors.Wrap(err, errExtractCredentials)
 	}
@@ -149,81 +140,169 @@ func spAuth(ctx context.Context, pc *v1beta1.ProviderConfig, ps *terraform.Setup
 			ps.Configuration[keyClientCertPassword] = clientCertPass
 		}
 	}
-	if pc.Spec.SubscriptionID != nil {
-		ps.Configuration[keySubscriptionID] = *pc.Spec.SubscriptionID
+	if pcSpec.SubscriptionID != nil {
+		ps.Configuration[keySubscriptionID] = *pcSpec.SubscriptionID
 	}
-	if pc.Spec.TenantID != nil {
-		ps.Configuration[keyTenantID] = *pc.Spec.TenantID
+	if pcSpec.TenantID != nil {
+		ps.Configuration[keyTenantID] = *pcSpec.TenantID
 	}
-	if pc.Spec.ClientID != nil {
-		ps.Configuration[keyClientID] = *pc.Spec.ClientID
+	if pcSpec.ClientID != nil {
+		ps.Configuration[keyClientID] = *pcSpec.ClientID
 	}
-	if pc.Spec.Environment != nil {
-		ps.Configuration[keyEnvironment] = *pc.Spec.Environment
+	if pcSpec.Environment != nil {
+		ps.Configuration[keyEnvironment] = *pcSpec.Environment
 	}
 	return nil
 }
 
-func msiAuth(pc *v1beta1.ProviderConfig, ps *terraform.Setup) error {
-	if pc.Spec.SubscriptionID == nil || len(*pc.Spec.SubscriptionID) == 0 {
+func msiAuth(pcSpec *namespacedv1beta1.ProviderConfigSpec, ps *terraform.Setup) error {
+	if pcSpec.SubscriptionID == nil || len(*pcSpec.SubscriptionID) == 0 {
 		return errors.New(errSubscriptionIDNotSet)
 	}
-	if pc.Spec.TenantID == nil || len(*pc.Spec.TenantID) == 0 {
+	if pcSpec.TenantID == nil || len(*pcSpec.TenantID) == 0 {
 		return errors.New(errTenantIDNotSet)
 	}
-	ps.Configuration[keySubscriptionID] = *pc.Spec.SubscriptionID
-	ps.Configuration[keyTenantID] = *pc.Spec.TenantID
+	ps.Configuration[keySubscriptionID] = *pcSpec.SubscriptionID
+	ps.Configuration[keyTenantID] = *pcSpec.TenantID
 	ps.Configuration[keyUseMSI] = "true"
-	if pc.Spec.MSIEndpoint != nil {
-		ps.Configuration[keyMSIEndpoint] = *pc.Spec.MSIEndpoint
+	if pcSpec.MSIEndpoint != nil {
+		ps.Configuration[keyMSIEndpoint] = *pcSpec.MSIEndpoint
 	}
-	if pc.Spec.ClientID != nil {
-		ps.Configuration[keyClientID] = *pc.Spec.ClientID
+	if pcSpec.ClientID != nil {
+		ps.Configuration[keyClientID] = *pcSpec.ClientID
 	}
-	if pc.Spec.Environment != nil {
-		ps.Configuration[keyEnvironment] = *pc.Spec.Environment
+	if pcSpec.Environment != nil {
+		ps.Configuration[keyEnvironment] = *pcSpec.Environment
 	}
 	return nil
 }
 
-func oidcAuth(pc *v1beta1.ProviderConfig, ps *terraform.Setup) error {
-	if pc.Spec.SubscriptionID == nil || len(*pc.Spec.SubscriptionID) == 0 {
+func oidcAuth(pcSpec *namespacedv1beta1.ProviderConfigSpec, ps *terraform.Setup) error {
+	if pcSpec.SubscriptionID == nil || len(*pcSpec.SubscriptionID) == 0 {
 		return errors.New(errSubscriptionIDNotSet)
 	}
-	if pc.Spec.TenantID == nil || len(*pc.Spec.TenantID) == 0 {
+	if pcSpec.TenantID == nil || len(*pcSpec.TenantID) == 0 {
 		return errors.New(errTenantIDNotSet)
 	}
-	if pc.Spec.ClientID == nil || len(*pc.Spec.ClientID) == 0 {
+	if pcSpec.ClientID == nil || len(*pcSpec.ClientID) == 0 {
 		return errors.New(errClientIDNotSet)
 	}
 	// OIDC Token File Path defaults to a projected-volume path mounted in the pod running in the AKS cluster, when workload identity is enabled on the pod.
 	ps.Configuration[keyOidcTokenFilePath] = defaultOidcTokenFilePath
-	if pc.Spec.OidcTokenFilePath != nil {
-		ps.Configuration[keyOidcTokenFilePath] = *pc.Spec.OidcTokenFilePath
+	if pcSpec.OidcTokenFilePath != nil {
+		ps.Configuration[keyOidcTokenFilePath] = *pcSpec.OidcTokenFilePath
 	}
-	ps.Configuration[keySubscriptionID] = *pc.Spec.SubscriptionID
-	ps.Configuration[keyTenantID] = *pc.Spec.TenantID
-	ps.Configuration[keyClientID] = *pc.Spec.ClientID
+	ps.Configuration[keySubscriptionID] = *pcSpec.SubscriptionID
+	ps.Configuration[keyTenantID] = *pcSpec.TenantID
+	ps.Configuration[keyClientID] = *pcSpec.ClientID
 	ps.Configuration[keyUseOIDC] = "true"
 	return nil
 
 }
 
-func upboundAuth(pc *v1beta1.ProviderConfig, ps *terraform.Setup) error {
-	if pc.Spec.SubscriptionID == nil || len(*pc.Spec.SubscriptionID) == 0 {
+func upboundAuth(pcSpec *namespacedv1beta1.ProviderConfigSpec, ps *terraform.Setup) error {
+	if pcSpec.SubscriptionID == nil || len(*pcSpec.SubscriptionID) == 0 {
 		return errors.New(errSubscriptionIDNotSet)
 	}
-	if pc.Spec.TenantID == nil || len(*pc.Spec.TenantID) == 0 {
+	if pcSpec.TenantID == nil || len(*pcSpec.TenantID) == 0 {
 		return errors.New(errTenantIDNotSet)
 	}
-	if pc.Spec.ClientID == nil || len(*pc.Spec.ClientID) == 0 {
+	if pcSpec.ClientID == nil || len(*pcSpec.ClientID) == 0 {
 		return errors.New(errClientIDNotSet)
 	}
 	ps.Configuration[keyOidcTokenFilePath] = upboundProviderIdentityTokenFile
-	ps.Configuration[keySubscriptionID] = *pc.Spec.SubscriptionID
-	ps.Configuration[keyTenantID] = *pc.Spec.TenantID
-	ps.Configuration[keyClientID] = *pc.Spec.ClientID
+	ps.Configuration[keySubscriptionID] = *pcSpec.SubscriptionID
+	ps.Configuration[keyTenantID] = *pcSpec.TenantID
+	ps.Configuration[keyClientID] = *pcSpec.ClientID
 	ps.Configuration[keyUseOIDC] = "true"
 	return nil
 
+}
+
+func legacyToModernProviderConfigSpec(pc *clusterv1beta1.ProviderConfig) (*namespacedv1beta1.ProviderConfigSpec, error) {
+	// TODO(erhan): this is hacky and potentially lossy, generate or manually implement
+	if pc == nil {
+		return nil, nil
+	}
+	data, err := json.Marshal(pc.Spec)
+	if err != nil {
+		return nil, err
+	}
+
+	var mSpec namespacedv1beta1.ProviderConfigSpec
+	err = json.Unmarshal(data, &mSpec)
+	return &mSpec, err
+}
+
+func enrichLocalSecretRefs(pc *namespacedv1beta1.ProviderConfig, mg xpresource.Managed) {
+	if pc != nil && pc.Spec.Credentials.SecretRef != nil {
+		pc.Spec.Credentials.SecretRef.Namespace = mg.GetNamespace()
+	}
+}
+
+func resolveProviderConfig(ctx context.Context, crClient client.Client, mg xpresource.Managed) (*namespacedv1beta1.ProviderConfigSpec, error) {
+	switch managed := mg.(type) {
+	case xpresource.LegacyManaged:
+		return resolveProviderConfigLegacy(ctx, crClient, managed)
+	case xpresource.ModernManaged:
+		return resolveProviderConfigModern(ctx, crClient, managed)
+	default:
+		return nil, errors.New("resource is not a managed")
+	}
+}
+
+func resolveProviderConfigLegacy(ctx context.Context, client client.Client, mg xpresource.LegacyManaged) (*namespacedv1beta1.ProviderConfigSpec, error) {
+	configRef := mg.GetProviderConfigReference()
+	if configRef == nil {
+		return nil, errors.New(errNoProviderConfig)
+	}
+	pc := &clusterv1beta1.ProviderConfig{}
+	if err := client.Get(ctx, types.NamespacedName{Name: configRef.Name}, pc); err != nil {
+		return nil, errors.Wrap(err, errGetProviderConfig)
+	}
+
+	t := xpresource.NewLegacyProviderConfigUsageTracker(client, &clusterv1beta1.ProviderConfigUsage{})
+	if err := t.Track(ctx, mg); err != nil {
+		return nil, errors.Wrap(err, errTrackUsage)
+	}
+
+	return legacyToModernProviderConfigSpec(pc)
+}
+
+func resolveProviderConfigModern(ctx context.Context, crClient client.Client, mg xpresource.ModernManaged) (*namespacedv1beta1.ProviderConfigSpec, error) {
+	configRef := mg.GetProviderConfigReference()
+	if configRef == nil {
+		return nil, errors.New(errNoProviderConfig)
+	}
+
+	pcRuntimeObj, err := crClient.Scheme().New(namespacedv1beta1.SchemeGroupVersion.WithKind(configRef.Kind))
+	if err != nil {
+		return nil, errors.Wrapf(err, "referenced provider config kind %q is invalid for %s/%s", configRef.Kind, mg.GetNamespace(), mg.GetName())
+	}
+	pcObj, ok := pcRuntimeObj.(xpresource.ProviderConfig)
+	if !ok {
+		return nil, errors.Errorf("referenced provider config kind %q is not a provider config type %s/%s", configRef.Kind, mg.GetNamespace(), mg.GetName())
+	}
+
+	// Namespace will be ignored if the PC is a cluster-scoped type
+	if err := crClient.Get(ctx, types.NamespacedName{Name: configRef.Name, Namespace: mg.GetNamespace()}, pcObj); err != nil {
+		return nil, errors.Wrap(err, errGetProviderConfig)
+	}
+
+	var pcSpec namespacedv1beta1.ProviderConfigSpec
+	switch pc := pcObj.(type) {
+	case *namespacedv1beta1.ProviderConfig:
+		enrichLocalSecretRefs(pc, mg)
+		pcSpec = pc.Spec
+	case *namespacedv1beta1.ClusterProviderConfig:
+		pcSpec = pc.Spec
+	default:
+		// TODO(erhan)
+		return nil, errors.New("unknown")
+	}
+	t := xpresource.NewProviderConfigUsageTracker(crClient, &namespacedv1beta1.ProviderConfigUsage{})
+	if err := t.Track(ctx, mg); err != nil {
+		return nil, errors.Wrap(err, errTrackUsage)
+	}
+	return &pcSpec, nil
 }
