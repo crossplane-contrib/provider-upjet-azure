@@ -17,7 +17,6 @@ import (
 	conversiontfjson "github.com/crossplane/upjet/pkg/types/conversion/tfjson"
 	tfjson "github.com/hashicorp/terraform-json"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"github.com/hashicorp/terraform-provider-azurerm/xpprovider"
 	"github.com/pkg/errors"
 
 	"github.com/upbound/provider-azure/config/cluster/common"
@@ -148,12 +147,7 @@ func getProviderSchema(s string) (*schema.Provider, error) {
 }
 
 // GetProvider returns provider configuration
-func GetProvider(ctx context.Context, generationProvider bool) (*ujconfig.Provider, error) {
-	sdkProvider, err := xpprovider.GetProviderSchema(ctx)
-	if err != nil {
-		return nil, errors.Wrap(err, "cannot get the Terraform SDK provider")
-	}
-
+func GetProvider(_ context.Context, sdkProvider *schema.Provider, generationProvider bool) (*ujconfig.Provider, error) {
 	if generationProvider {
 		p, err := getProviderSchema(providerSchema)
 		if err != nil {
