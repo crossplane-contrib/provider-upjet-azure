@@ -32,7 +32,6 @@ import (
 	"github.com/upbound/provider-azure/config/insights"
 	"github.com/upbound/provider-azure/config/keyvault"
 	"github.com/upbound/provider-azure/config/kusto"
-	"github.com/upbound/provider-azure/config/logic"
 	"github.com/upbound/provider-azure/config/management"
 	"github.com/upbound/provider-azure/config/mariadb"
 	"github.com/upbound/provider-azure/config/media"
@@ -77,7 +76,6 @@ func init() {
 	ProviderConfiguration.AddConfig(datafactory.Configure)
 	ProviderConfiguration.AddConfig(apimanagement.Configure)
 	ProviderConfiguration.AddConfig(healthcareapis.Configure)
-	ProviderConfiguration.AddConfig(logic.Configure)
 	ProviderConfiguration.AddConfig(security.Configure)
 	ProviderConfiguration.AddConfig(securityinsights.Configure)
 	ProviderConfiguration.AddConfig(base.Configure)
