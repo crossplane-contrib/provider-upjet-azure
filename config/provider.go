@@ -22,7 +22,6 @@ import (
 	"github.com/upbound/provider-azure/config/containerservice"
 	"github.com/upbound/provider-azure/config/cosmosdb"
 	"github.com/upbound/provider-azure/config/costmanagement"
-	"github.com/upbound/provider-azure/config/databricks"
 	"github.com/upbound/provider-azure/config/datafactory"
 	"github.com/upbound/provider-azure/config/dataprotection"
 	"github.com/upbound/provider-azure/config/datashare"
@@ -107,5 +106,4 @@ func init() {
 	ProviderConfiguration.AddConfig(certificateregistration.Configure)
 	ProviderConfiguration.AddConfig(orbital.Configure)
 	ProviderConfiguration.AddConfig(appplatform.Configure)
-	ProviderConfiguration.AddConfig(databricks.Configure)
 }
