@@ -563,12 +563,6 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.DigitalTwins/digitalTwinsInstances/dt1
 	"azurerm_digital_twins_instance": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DigitalTwins/digitalTwinsInstances/{{ .external_name }}"),
 
-	// disk
-	//
-	// Disk Pools can be imported using the resource id
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resGroup1/providers/Microsoft.StoragePool/diskPools/diskPool1
-	"azurerm_disk_pool": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StoragePool/diskPools/{{ .external_name }}"),
-
 	// netapp
 	"azurerm_netapp_account":         config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.NetApp/netAppAccounts/{{ .external_name }}"),
 	"azurerm_netapp_pool":            config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.NetApp/netAppAccounts/{{ .parameters.account_name }}/capacityPools/{{ .external_name }}"),
