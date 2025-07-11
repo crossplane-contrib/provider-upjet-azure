@@ -1592,13 +1592,6 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	//  /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.OperationalInsights/workspaces/workspace1/providers/Microsoft.SecurityInsights/onboardingStates/defaults
 	"azurerm_sentinel_log_analytics_workspace_onboarding": config.IdentifierFromProvider,
 
-	// lab_service
-	//
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.LabServices/labPlans/labPlan1
-	"azurerm_lab_service_plan": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.LabServices/labPlans/{{ .external_name }}"),
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.LabServices/labs/lab1
-	"azurerm_lab_service_lab": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.LabServices/labs/{{ .external_name }}"),
-
 	// log_analytics
 	//
 	// /subscriptions/12345678-1234-9876-4563-123456789012/resourceGroups/group1/providers/Microsoft.OperationalInsights/queryPacks/queryPack1
