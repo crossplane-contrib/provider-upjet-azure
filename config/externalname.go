@@ -1226,10 +1226,6 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// The contact can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Security/securityContacts/default1
 	"azurerm_security_center_contact": config.TemplatedStringAsIdentifier("", "/subscriptions/{{ .setup.configuration.subscription_id }}/providers/Microsoft.Security/securityContacts/default1"),
-	// DEPRECATED
-	// Server Vulnerability Assessments can be imported using the resource id
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource-group-name/providers/Microsoft.Compute/virtualMachines/vm-name/providers/Microsoft.Security/serverVulnerabilityAssessments/Default
-	"azurerm_security_center_server_vulnerability_assessment": config.IdentifierFromProvider,
 	// Server Vulnerability Assessments can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource-group-name/providers/Microsoft.Compute/virtualMachines/vm-name/providers/Microsoft.Security/serverVulnerabilityAssessments/Default
 	"azurerm_security_center_server_vulnerability_assessment_virtual_machine": config.TemplatedStringAsIdentifier("", "{{ .parameters.virtual_machine_id }}/providers/Microsoft.Security/serverVulnerabilityAssessments/Default"),
@@ -1253,10 +1249,6 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// Service Bus DR configs can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.ServiceBus/namespaces/namespace1/disasterRecoveryConfigs/config1
 	"azurerm_servicebus_namespace_disaster_recovery_config": config.TemplatedStringAsIdentifier("name", "{{ .parameters.primary_namespace_id }}/disasterRecoveryConfigs/{{ .external_name }}"),
-	// Service Bus Namespace can be imported using the resource id
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.ServiceBus/namespaces/sbns1
-	// TODO: Check documentation, it seems there is a bug
-	"azurerm_servicebus_namespace_network_rule_set": config.IdentifierFromProvider,
 	// Service Bus Queue can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.ServiceBus/namespaces/sbns1/queues/snqueue1
 	"azurerm_servicebus_queue": config.TemplatedStringAsIdentifier("name", "{{ .parameters.namespace_id }}/queues/{{ .external_name }}"),
