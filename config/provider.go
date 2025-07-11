@@ -33,7 +33,6 @@ import (
 	"github.com/upbound/provider-azure/config/keyvault"
 	"github.com/upbound/provider-azure/config/kusto"
 	"github.com/upbound/provider-azure/config/management"
-	"github.com/upbound/provider-azure/config/media"
 	"github.com/upbound/provider-azure/config/netapp"
 	"github.com/upbound/provider-azure/config/network"
 	"github.com/upbound/provider-azure/config/notificationhubs"
@@ -59,7 +58,6 @@ func init() {
 	ProviderConfiguration.AddConfig(alertsmanagement.Configure)
 	ProviderConfiguration.AddConfig(network.Configure)
 	ProviderConfiguration.AddConfig(management.Configure)
-	ProviderConfiguration.AddConfig(media.Configure)
 	ProviderConfiguration.AddConfig(cache.Configure)
 	ProviderConfiguration.AddConfig(resource.Configure)
 	ProviderConfiguration.AddConfig(resources.Configure)
