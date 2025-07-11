@@ -5,15 +5,9 @@
 package dbformysql
 
 import (
-	"fmt"
-	"strconv"
-
-	xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
-
 	"github.com/upbound/provider-azure/apis/rconfig"
 
 	"github.com/crossplane/upjet/pkg/config"
-	"github.com/crossplane/upjet/pkg/registry"
 )
 
 const (
@@ -44,17 +38,6 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_mysql_flexible_server_firewall_rule", func(r *config.Resource) {
 		r.References["server_name"] = config.Reference{
 			TerraformName: "azurerm_mysql_flexible_server",
-		}
-	})
-	p.AddResourceConfigurator("azurerm_mysql_server", func(r *config.Resource) {
-		r.MetaResource.ExternalName = registry.RandRFC1123Subdomain
-		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]interface{}) (map[string][]byte, error) {
-			return map[string][]byte{
-				xpv1.ResourceCredentialsSecretUserKey:     []byte(fmt.Sprintf("%s@%s", attr["administrator_login"], attr["name"])),
-				xpv1.ResourceCredentialsSecretPasswordKey: []byte(attr["administrator_login_password"].(string)),
-				xpv1.ResourceCredentialsSecretEndpointKey: []byte(attr["fqdn"].(string)),
-				xpv1.ResourceCredentialsSecretPortKey:     []byte(strconv.Itoa(mysqlServerPort)),
-			}, nil
 		}
 	})
 }
