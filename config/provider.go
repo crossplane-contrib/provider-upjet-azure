@@ -33,7 +33,6 @@ import (
 	"github.com/upbound/provider-azure/config/keyvault"
 	"github.com/upbound/provider-azure/config/kusto"
 	"github.com/upbound/provider-azure/config/management"
-	"github.com/upbound/provider-azure/config/mariadb"
 	"github.com/upbound/provider-azure/config/media"
 	"github.com/upbound/provider-azure/config/netapp"
 	"github.com/upbound/provider-azure/config/network"
@@ -85,7 +84,6 @@ func init() {
 	ProviderConfiguration.AddConfig(storagesync.Configure)
 	ProviderConfiguration.AddConfig(keyvault.Configure)
 	ProviderConfiguration.AddConfig(eventhub.Configure)
-	ProviderConfiguration.AddConfig(mariadb.Configure)
 	ProviderConfiguration.AddConfig(compute.Configure)
 	ProviderConfiguration.AddConfig(containerregistry.Configure)
 	ProviderConfiguration.AddConfig(dbformysql.Configure)
