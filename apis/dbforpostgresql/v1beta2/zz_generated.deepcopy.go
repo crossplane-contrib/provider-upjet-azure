@@ -248,6 +248,16 @@ func (in *FlexibleServerInitParameters) DeepCopyInto(out *FlexibleServerInitPara
 		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
+	if in.AdministratorPasswordWo != nil {
+		in, out := &in.AdministratorPasswordWo, &out.AdministratorPasswordWo
+		*out = new(string)
+		**out = **in
+	}
+	if in.AdministratorPasswordWoVersion != nil {
+		in, out := &in.AdministratorPasswordWoVersion, &out.AdministratorPasswordWoVersion
+		*out = new(float64)
+		**out = **in
+	}
 	if in.Authentication != nil {
 		in, out := &in.Authentication, &out.Authentication
 		*out = new(AuthenticationInitParameters)
@@ -441,6 +451,16 @@ func (in *FlexibleServerObservation) DeepCopyInto(out *FlexibleServerObservation
 		*out = new(string)
 		**out = **in
 	}
+	if in.AdministratorPasswordWo != nil {
+		in, out := &in.AdministratorPasswordWo, &out.AdministratorPasswordWo
+		*out = new(string)
+		**out = **in
+	}
+	if in.AdministratorPasswordWoVersion != nil {
+		in, out := &in.AdministratorPasswordWoVersion, &out.AdministratorPasswordWoVersion
+		*out = new(float64)
+		**out = **in
+	}
 	if in.Authentication != nil {
 		in, out := &in.Authentication, &out.Authentication
 		*out = new(AuthenticationObservation)
@@ -600,6 +620,16 @@ func (in *FlexibleServerParameters) DeepCopyInto(out *FlexibleServerParameters) 
 	if in.AdministratorPasswordSecretRef != nil {
 		in, out := &in.AdministratorPasswordSecretRef, &out.AdministratorPasswordSecretRef
 		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.AdministratorPasswordWo != nil {
+		in, out := &in.AdministratorPasswordWo, &out.AdministratorPasswordWo
+		*out = new(string)
+		**out = **in
+	}
+	if in.AdministratorPasswordWoVersion != nil {
+		in, out := &in.AdministratorPasswordWoVersion, &out.AdministratorPasswordWoVersion
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Authentication != nil {
@@ -930,6 +960,16 @@ func (in *IdentityObservation) DeepCopyInto(out *IdentityObservation) {
 			}
 		}
 	}
+	if in.PrincipalID != nil {
+		in, out := &in.PrincipalID, &out.PrincipalID
+		*out = new(string)
+		**out = **in
+	}
+	if in.TenantID != nil {
+		in, out := &in.TenantID, &out.TenantID
+		*out = new(string)
+		**out = **in
+	}
 	if in.Type != nil {
 		in, out := &in.Type, &out.Type
 		*out = new(string)
@@ -1178,6 +1218,16 @@ func (in *ServerInitParameters) DeepCopyInto(out *ServerInitParameters) {
 		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
+	if in.AdministratorLoginPasswordWo != nil {
+		in, out := &in.AdministratorLoginPasswordWo, &out.AdministratorLoginPasswordWo
+		*out = new(string)
+		**out = **in
+	}
+	if in.AdministratorLoginPasswordWoVersion != nil {
+		in, out := &in.AdministratorLoginPasswordWoVersion, &out.AdministratorLoginPasswordWoVersion
+		*out = new(float64)
+		**out = **in
+	}
 	if in.AutoGrowEnabled != nil {
 		in, out := &in.AutoGrowEnabled, &out.AutoGrowEnabled
 		*out = new(bool)
@@ -1326,6 +1376,16 @@ func (in *ServerObservation) DeepCopyInto(out *ServerObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.AdministratorLoginPasswordWo != nil {
+		in, out := &in.AdministratorLoginPasswordWo, &out.AdministratorLoginPasswordWo
+		*out = new(string)
+		**out = **in
+	}
+	if in.AdministratorLoginPasswordWoVersion != nil {
+		in, out := &in.AdministratorLoginPasswordWoVersion, &out.AdministratorLoginPasswordWoVersion
+		*out = new(float64)
+		**out = **in
+	}
 	if in.AutoGrowEnabled != nil {
 		in, out := &in.AutoGrowEnabled, &out.AutoGrowEnabled
 		*out = new(bool)
@@ -1460,6 +1520,16 @@ func (in *ServerParameters) DeepCopyInto(out *ServerParameters) {
 	if in.AdministratorLoginPasswordSecretRef != nil {
 		in, out := &in.AdministratorLoginPasswordSecretRef, &out.AdministratorLoginPasswordSecretRef
 		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.AdministratorLoginPasswordWo != nil {
+		in, out := &in.AdministratorLoginPasswordWo, &out.AdministratorLoginPasswordWo
+		*out = new(string)
+		**out = **in
+	}
+	if in.AdministratorLoginPasswordWoVersion != nil {
+		in, out := &in.AdministratorLoginPasswordWoVersion, &out.AdministratorLoginPasswordWoVersion
+		*out = new(float64)
 		**out = **in
 	}
 	if in.AutoGrowEnabled != nil {

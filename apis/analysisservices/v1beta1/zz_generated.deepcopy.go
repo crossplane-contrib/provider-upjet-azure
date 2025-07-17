@@ -149,11 +149,6 @@ func (in *ServerInitParameters) DeepCopyInto(out *ServerInitParameters) {
 		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
-	if in.EnablePowerBiService != nil {
-		in, out := &in.EnablePowerBiService, &out.EnablePowerBiService
-		*out = new(bool)
-		**out = **in
-	}
 	if in.IPv4FirewallRule != nil {
 		in, out := &in.IPv4FirewallRule, &out.IPv4FirewallRule
 		*out = make([]IPv4FirewallRuleInitParameters, len(*in))
@@ -275,11 +270,6 @@ func (in *ServerObservation) DeepCopyInto(out *ServerObservation) {
 			}
 		}
 	}
-	if in.EnablePowerBiService != nil {
-		in, out := &in.EnablePowerBiService, &out.EnablePowerBiService
-		*out = new(bool)
-		**out = **in
-	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
@@ -372,11 +362,6 @@ func (in *ServerParameters) DeepCopyInto(out *ServerParameters) {
 	if in.BackupBlobContainerURISecretRef != nil {
 		in, out := &in.BackupBlobContainerURISecretRef, &out.BackupBlobContainerURISecretRef
 		*out = new(v1.SecretKeySelector)
-		**out = **in
-	}
-	if in.EnablePowerBiService != nil {
-		in, out := &in.EnablePowerBiService, &out.EnablePowerBiService
-		*out = new(bool)
 		**out = **in
 	}
 	if in.IPv4FirewallRule != nil {

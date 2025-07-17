@@ -6578,16 +6578,6 @@ spec:
                               App. Possible values include dotnet, dotnetcore, node,
                               python, php, and java.
                             type: string
-                          dockerContainerName:
-                            description: The name of the container to be used. This
-                              value is required with docker_container_tag.
-                            type: string
-                          dockerContainerRegistry:
-                            type: string
-                          dockerContainerTag:
-                            description: The tag of the container to be used. This
-                              value is required with docker_container_name.
-                            type: string
                           dockerImageName:
                             description: The docker image, including tag, to be used.
                               e.g. azure-app-service/windows/parkingpage:latest.
@@ -6628,7 +6618,7 @@ spec:
                           dotnetVersion:
                             description: The version of .NET to use when current_stack
                               is set to dotnet. Possible values include v2.0,v3.0,
-                              v4.0, v5.0, v6.0, v7.0 and v8.0.
+                              v4.0, v5.0, v6.0, v7.0, v8.0 and v9.0.
                             type: string
                           javaContainer:
                             type: string
@@ -6647,7 +6637,7 @@ spec:
                           nodeVersion:
                             description: The version of node to use when current_stack
                               is set to node. Possible values include ~12, ~14, ~16,
-                              ~18 and ~20.
+                              ~18, ~20 and ~22.
                             type: string
                           phpVersion:
                             description: The version of PHP to use when current_stack
@@ -6656,17 +6646,11 @@ spec:
                           python:
                             description: The app is a Python app. Defaults to false.
                             type: boolean
-                          pythonVersion:
-                            type: string
                           tomcatVersion:
                             description: The version of Tomcat the Java App should
                               use.
                             type: string
                         type: object
-                      autoHealEnabled:
-                        description: Should Auto heal rules be enabled. Required with
-                          auto_heal_setting.
-                        type: boolean
                       autoHealSetting:
                         description: A auto_heal_setting block as defined above. Required
                           with auto_heal.
@@ -6728,10 +6712,6 @@ spec:
                                     type: number
                                   interval:
                                     description: The time interval in the form hh:mm:ss.
-                                    type: string
-                                  path:
-                                    description: The path to which this rule status
-                                      code applies.
                                     type: string
                                   timeTaken:
                                     description: The threshold of time passed to qualify
@@ -7040,8 +7020,8 @@ spec:
                           to false.
                         type: boolean
                       remoteDebuggingVersion:
-                        description: The Remote Debugging Version. Possible values
-                          include VS2017, VS2019 and VS2022
+                        description: The Remote Debugging Version. Currently only
+                          VS2022 is supported.
                         type: string
                       scmIpRestriction:
                         description: One or more scm_ip_restriction blocks as defined
@@ -7302,6 +7282,10 @@ spec:
                       Windows Web App Slot.
                     type: object
                     x-kubernetes-map-type: granular
+                  virtualNetworkBackupRestoreEnabled:
+                    description: Whether backup and restore operations over the linked
+                      virtual network are enabled. Defaults to false.
+                    type: boolean
                   virtualNetworkSubnetId:
                     description: The subnet id which will be used by this Web App
                       Slot for regional virtual network integration.
@@ -8345,16 +8329,6 @@ spec:
                               App. Possible values include dotnet, dotnetcore, node,
                               python, php, and java.
                             type: string
-                          dockerContainerName:
-                            description: The name of the container to be used. This
-                              value is required with docker_container_tag.
-                            type: string
-                          dockerContainerRegistry:
-                            type: string
-                          dockerContainerTag:
-                            description: The tag of the container to be used. This
-                              value is required with docker_container_name.
-                            type: string
                           dockerImageName:
                             description: The docker image, including tag, to be used.
                               e.g. azure-app-service/windows/parkingpage:latest.
@@ -8395,7 +8369,7 @@ spec:
                           dotnetVersion:
                             description: The version of .NET to use when current_stack
                               is set to dotnet. Possible values include v2.0,v3.0,
-                              v4.0, v5.0, v6.0, v7.0 and v8.0.
+                              v4.0, v5.0, v6.0, v7.0, v8.0 and v9.0.
                             type: string
                           javaContainer:
                             type: string
@@ -8414,7 +8388,7 @@ spec:
                           nodeVersion:
                             description: The version of node to use when current_stack
                               is set to node. Possible values include ~12, ~14, ~16,
-                              ~18 and ~20.
+                              ~18, ~20 and ~22.
                             type: string
                           phpVersion:
                             description: The version of PHP to use when current_stack
@@ -8423,17 +8397,11 @@ spec:
                           python:
                             description: The app is a Python app. Defaults to false.
                             type: boolean
-                          pythonVersion:
-                            type: string
                           tomcatVersion:
                             description: The version of Tomcat the Java App should
                               use.
                             type: string
                         type: object
-                      autoHealEnabled:
-                        description: Should Auto heal rules be enabled. Required with
-                          auto_heal_setting.
-                        type: boolean
                       autoHealSetting:
                         description: A auto_heal_setting block as defined above. Required
                           with auto_heal.
@@ -8495,10 +8463,6 @@ spec:
                                     type: number
                                   interval:
                                     description: The time interval in the form hh:mm:ss.
-                                    type: string
-                                  path:
-                                    description: The path to which this rule status
-                                      code applies.
                                     type: string
                                   timeTaken:
                                     description: The threshold of time passed to qualify
@@ -8807,8 +8771,8 @@ spec:
                           to false.
                         type: boolean
                       remoteDebuggingVersion:
-                        description: The Remote Debugging Version. Possible values
-                          include VS2017, VS2019 and VS2022
+                        description: The Remote Debugging Version. Currently only
+                          VS2022 is supported.
                         type: string
                       scmIpRestriction:
                         description: One or more scm_ip_restriction blocks as defined
@@ -9071,6 +9035,10 @@ spec:
                       Windows Web App Slot.
                     type: object
                     x-kubernetes-map-type: granular
+                  virtualNetworkBackupRestoreEnabled:
+                    description: Whether backup and restore operations over the linked
+                      virtual network are enabled. Defaults to false.
+                    type: boolean
                   virtualNetworkSubnetId:
                     description: The subnet id which will be used by this Web App
                       Slot for regional virtual network integration.
@@ -10187,16 +10155,6 @@ spec:
                               App. Possible values include dotnet, dotnetcore, node,
                               python, php, and java.
                             type: string
-                          dockerContainerName:
-                            description: The name of the container to be used. This
-                              value is required with docker_container_tag.
-                            type: string
-                          dockerContainerRegistry:
-                            type: string
-                          dockerContainerTag:
-                            description: The tag of the container to be used. This
-                              value is required with docker_container_name.
-                            type: string
                           dockerImageName:
                             description: The docker image, including tag, to be used.
                               e.g. azure-app-service/windows/parkingpage:latest.
@@ -10219,7 +10177,7 @@ spec:
                           dotnetVersion:
                             description: The version of .NET to use when current_stack
                               is set to dotnet. Possible values include v2.0,v3.0,
-                              v4.0, v5.0, v6.0, v7.0 and v8.0.
+                              v4.0, v5.0, v6.0, v7.0, v8.0 and v9.0.
                             type: string
                           javaContainer:
                             type: string
@@ -10238,7 +10196,7 @@ spec:
                           nodeVersion:
                             description: The version of node to use when current_stack
                               is set to node. Possible values include ~12, ~14, ~16,
-                              ~18 and ~20.
+                              ~18, ~20 and ~22.
                             type: string
                           phpVersion:
                             description: The version of PHP to use when current_stack
@@ -10247,17 +10205,11 @@ spec:
                           python:
                             description: The app is a Python app. Defaults to false.
                             type: boolean
-                          pythonVersion:
-                            type: string
                           tomcatVersion:
                             description: The version of Tomcat the Java App should
                               use.
                             type: string
                         type: object
-                      autoHealEnabled:
-                        description: Should Auto heal rules be enabled. Required with
-                          auto_heal_setting.
-                        type: boolean
                       autoHealSetting:
                         description: A auto_heal_setting block as defined above. Required
                           with auto_heal.
@@ -10319,10 +10271,6 @@ spec:
                                     type: number
                                   interval:
                                     description: The time interval in the form hh:mm:ss.
-                                    type: string
-                                  path:
-                                    description: The path to which this rule status
-                                      code applies.
                                     type: string
                                   timeTaken:
                                     description: The threshold of time passed to qualify
@@ -10559,8 +10507,8 @@ spec:
                           to false.
                         type: boolean
                       remoteDebuggingVersion:
-                        description: The Remote Debugging Version. Possible values
-                          include VS2017, VS2019 and VS2022
+                        description: The Remote Debugging Version. Currently only
+                          VS2022 is supported.
                         type: string
                       scmIpRestriction:
                         description: One or more scm_ip_restriction blocks as defined
@@ -10732,6 +10680,10 @@ spec:
                       Windows Web App Slot.
                     type: object
                     x-kubernetes-map-type: granular
+                  virtualNetworkBackupRestoreEnabled:
+                    description: Whether backup and restore operations over the linked
+                      virtual network are enabled. Defaults to false.
+                    type: boolean
                   virtualNetworkSubnetId:
                     description: The subnet id which will be used by this Web App
                       Slot for regional virtual network integration.

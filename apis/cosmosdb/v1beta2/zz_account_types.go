@@ -51,20 +51,15 @@ type AccountInitParameters struct {
 	// The default identity for accessing Key Vault. Possible values are FirstPartyIdentity, SystemAssignedIdentity or UserAssignedIdentity. Defaults to FirstPartyIdentity.
 	DefaultIdentityType *string `json:"defaultIdentityType,omitempty" tf:"default_identity_type,omitempty"`
 
-	EnableAutomaticFailover *bool `json:"enableAutomaticFailover,omitempty" tf:"enable_automatic_failover,omitempty"`
-
-	EnableFreeTier *bool `json:"enableFreeTier,omitempty" tf:"enable_free_tier,omitempty"`
-
-	EnableMultipleWriteLocations *bool `json:"enableMultipleWriteLocations,omitempty" tf:"enable_multiple_write_locations,omitempty"`
-
 	// Enable the Free Tier pricing option for this Cosmos DB account. Defaults to false. Changing this forces a new resource to be created.
 	FreeTierEnabled *bool `json:"freeTierEnabled,omitempty" tf:"free_tier_enabled,omitempty"`
 
 	// Specifies a geo_location resource, used to define where data should be replicated with the failover_priority 0 specifying the primary location. Value is a geo_location block as defined below.
 	GeoLocation []GeoLocationInitParameters `json:"geoLocation,omitempty" tf:"geo_location,omitempty"`
 
-	// CosmosDB Firewall Support: This value specifies the set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IPs for a given database account. IP addresses/ranges must be comma separated and must not contain any spaces.
-	IPRangeFilter *string `json:"ipRangeFilter,omitempty" tf:"ip_range_filter,omitempty"`
+	// A set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IPs for a given database account. For example ["55.0.1.0/24", "55.0.2.0/24"].
+	// +listType=set
+	IPRangeFilter []*string `json:"ipRangeFilter,omitempty" tf:"ip_range_filter,omitempty"`
 
 	// An identity block as defined below.
 	Identity *IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
@@ -84,10 +79,13 @@ type AccountInitParameters struct {
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// A versionless Managed HSM Key ID for CMK encryption. Changing this forces a new resource to be created.
+	ManagedHSMKeyID *string `json:"managedHsmKeyId,omitempty" tf:"managed_hsm_key_id,omitempty"`
+
 	// Specifies the minimal TLS version for the CosmosDB account. Possible values are: Tls, Tls11, and Tls12. Defaults to Tls12.
 	MinimalTLSVersion *string `json:"minimalTlsVersion,omitempty" tf:"minimal_tls_version,omitempty"`
 
-	// The Server Version of a MongoDB account. Possible values are 4.2, 4.0, 3.6, and 3.2.
+	// The Server Version of a MongoDB account. Possible values are 7.0, 6.0, 5.0, 4.2, 4.0, 3.6, and 3.2.
 	MongoServerVersion *string `json:"mongoServerVersion,omitempty" tf:"mongo_server_version,omitempty"`
 
 	// Enable multiple write locations for this Cosmos DB account.
@@ -157,12 +155,6 @@ type AccountObservation struct {
 	// The default identity for accessing Key Vault. Possible values are FirstPartyIdentity, SystemAssignedIdentity or UserAssignedIdentity. Defaults to FirstPartyIdentity.
 	DefaultIdentityType *string `json:"defaultIdentityType,omitempty" tf:"default_identity_type,omitempty"`
 
-	EnableAutomaticFailover *bool `json:"enableAutomaticFailover,omitempty" tf:"enable_automatic_failover,omitempty"`
-
-	EnableFreeTier *bool `json:"enableFreeTier,omitempty" tf:"enable_free_tier,omitempty"`
-
-	EnableMultipleWriteLocations *bool `json:"enableMultipleWriteLocations,omitempty" tf:"enable_multiple_write_locations,omitempty"`
-
 	// The endpoint used to connect to the CosmosDB account.
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
@@ -175,8 +167,9 @@ type AccountObservation struct {
 	// The CosmosDB Account ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// CosmosDB Firewall Support: This value specifies the set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IPs for a given database account. IP addresses/ranges must be comma separated and must not contain any spaces.
-	IPRangeFilter *string `json:"ipRangeFilter,omitempty" tf:"ip_range_filter,omitempty"`
+	// A set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IPs for a given database account. For example ["55.0.1.0/24", "55.0.2.0/24"].
+	// +listType=set
+	IPRangeFilter []*string `json:"ipRangeFilter,omitempty" tf:"ip_range_filter,omitempty"`
 
 	// An identity block as defined below.
 	Identity *IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
@@ -196,10 +189,13 @@ type AccountObservation struct {
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// A versionless Managed HSM Key ID for CMK encryption. Changing this forces a new resource to be created.
+	ManagedHSMKeyID *string `json:"managedHsmKeyId,omitempty" tf:"managed_hsm_key_id,omitempty"`
+
 	// Specifies the minimal TLS version for the CosmosDB account. Possible values are: Tls, Tls11, and Tls12. Defaults to Tls12.
 	MinimalTLSVersion *string `json:"minimalTlsVersion,omitempty" tf:"minimal_tls_version,omitempty"`
 
-	// The Server Version of a MongoDB account. Possible values are 4.2, 4.0, 3.6, and 3.2.
+	// The Server Version of a MongoDB account. Possible values are 7.0, 6.0, 5.0, 4.2, 4.0, 3.6, and 3.2.
 	MongoServerVersion *string `json:"mongoServerVersion,omitempty" tf:"mongo_server_version,omitempty"`
 
 	// Enable multiple write locations for this Cosmos DB account.
@@ -290,15 +286,6 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	DefaultIdentityType *string `json:"defaultIdentityType,omitempty" tf:"default_identity_type,omitempty"`
 
-	// +kubebuilder:validation:Optional
-	EnableAutomaticFailover *bool `json:"enableAutomaticFailover,omitempty" tf:"enable_automatic_failover,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	EnableFreeTier *bool `json:"enableFreeTier,omitempty" tf:"enable_free_tier,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	EnableMultipleWriteLocations *bool `json:"enableMultipleWriteLocations,omitempty" tf:"enable_multiple_write_locations,omitempty"`
-
 	// Enable the Free Tier pricing option for this Cosmos DB account. Defaults to false. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	FreeTierEnabled *bool `json:"freeTierEnabled,omitempty" tf:"free_tier_enabled,omitempty"`
@@ -307,9 +294,10 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	GeoLocation []GeoLocationParameters `json:"geoLocation,omitempty" tf:"geo_location,omitempty"`
 
-	// CosmosDB Firewall Support: This value specifies the set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IPs for a given database account. IP addresses/ranges must be comma separated and must not contain any spaces.
+	// A set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IPs for a given database account. For example ["55.0.1.0/24", "55.0.2.0/24"].
 	// +kubebuilder:validation:Optional
-	IPRangeFilter *string `json:"ipRangeFilter,omitempty" tf:"ip_range_filter,omitempty"`
+	// +listType=set
+	IPRangeFilter []*string `json:"ipRangeFilter,omitempty" tf:"ip_range_filter,omitempty"`
 
 	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
@@ -335,11 +323,15 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// A versionless Managed HSM Key ID for CMK encryption. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	ManagedHSMKeyID *string `json:"managedHsmKeyId,omitempty" tf:"managed_hsm_key_id,omitempty"`
+
 	// Specifies the minimal TLS version for the CosmosDB account. Possible values are: Tls, Tls11, and Tls12. Defaults to Tls12.
 	// +kubebuilder:validation:Optional
 	MinimalTLSVersion *string `json:"minimalTlsVersion,omitempty" tf:"minimal_tls_version,omitempty"`
 
-	// The Server Version of a MongoDB account. Possible values are 4.2, 4.0, 3.6, and 3.2.
+	// The Server Version of a MongoDB account. Possible values are 7.0, 6.0, 5.0, 4.2, 4.0, 3.6, and 3.2.
 	// +kubebuilder:validation:Optional
 	MongoServerVersion *string `json:"mongoServerVersion,omitempty" tf:"mongo_server_version,omitempty"`
 
@@ -474,19 +466,19 @@ type BackupParameters struct {
 
 type CapabilitiesInitParameters struct {
 
-	// The capability to enable - Possible values are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableMongo16MBDocumentSupport, EnableMongoRetryableWrites, EnableMongoRoleBasedAccessControl, EnablePartialUniqueIndex, EnableServerless, EnableTable, EnableTtlOnCustomPath, EnableUniqueCompoundNestedDocs, MongoDBv3.4 and mongoEnableDocLevelTTL.
+	// The capability to enable - Possible values are AllowSelfServeUpgradeToMongo36, DeleteAllItemsByPartitionKey, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableMongo16MBDocumentSupport, EnableMongoRetryableWrites, EnableMongoRoleBasedAccessControl, EnableNoSQLVectorSearch, EnableNoSQLFullTextSearch, EnablePartialUniqueIndex,  EnableServerless, EnableTable, EnableTtlOnCustomPath, EnableUniqueCompoundNestedDocs, MongoDBv3.4 and mongoEnableDocLevelTTL.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type CapabilitiesObservation struct {
 
-	// The capability to enable - Possible values are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableMongo16MBDocumentSupport, EnableMongoRetryableWrites, EnableMongoRoleBasedAccessControl, EnablePartialUniqueIndex, EnableServerless, EnableTable, EnableTtlOnCustomPath, EnableUniqueCompoundNestedDocs, MongoDBv3.4 and mongoEnableDocLevelTTL.
+	// The capability to enable - Possible values are AllowSelfServeUpgradeToMongo36, DeleteAllItemsByPartitionKey, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableMongo16MBDocumentSupport, EnableMongoRetryableWrites, EnableMongoRoleBasedAccessControl, EnableNoSQLVectorSearch, EnableNoSQLFullTextSearch, EnablePartialUniqueIndex,  EnableServerless, EnableTable, EnableTtlOnCustomPath, EnableUniqueCompoundNestedDocs, MongoDBv3.4 and mongoEnableDocLevelTTL.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type CapabilitiesParameters struct {
 
-	// The capability to enable - Possible values are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableMongo16MBDocumentSupport, EnableMongoRetryableWrites, EnableMongoRoleBasedAccessControl, EnablePartialUniqueIndex, EnableServerless, EnableTable, EnableTtlOnCustomPath, EnableUniqueCompoundNestedDocs, MongoDBv3.4 and mongoEnableDocLevelTTL.
+	// The capability to enable - Possible values are AllowSelfServeUpgradeToMongo36, DeleteAllItemsByPartitionKey, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableMongo16MBDocumentSupport, EnableMongoRetryableWrites, EnableMongoRoleBasedAccessControl, EnableNoSQLVectorSearch, EnableNoSQLFullTextSearch, EnablePartialUniqueIndex,  EnableServerless, EnableTable, EnableTtlOnCustomPath, EnableUniqueCompoundNestedDocs, MongoDBv3.4 and mongoEnableDocLevelTTL.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 }

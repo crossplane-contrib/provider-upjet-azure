@@ -74,10 +74,8 @@ spec:
               forProvider:
                 properties:
                   bgpRoutePropagationEnabled:
-                    type: boolean
-                  disableBgpRoutePropagation:
                     description: Boolean flag which controls propagation of routes
-                      learned by BGP on that route table. True means disable.
+                      learned by BGP on that route table. Defaults to true.
                     type: boolean
                   location:
                     description: Specifies the supported Azure location where the
@@ -209,10 +207,8 @@ spec:
                   autoscaler.
                 properties:
                   bgpRoutePropagationEnabled:
-                    type: boolean
-                  disableBgpRoutePropagation:
                     description: Boolean flag which controls propagation of routes
-                      learned by BGP on that route table. True means disable.
+                      learned by BGP on that route table. Defaults to true.
                     type: boolean
                   location:
                     description: Specifies the supported Azure location where the
@@ -428,10 +424,8 @@ spec:
               atProvider:
                 properties:
                   bgpRoutePropagationEnabled:
-                    type: boolean
-                  disableBgpRoutePropagation:
                     description: Boolean flag which controls propagation of routes
-                      learned by BGP on that route table. True means disable.
+                      learned by BGP on that route table. Defaults to true.
                     type: boolean
                   id:
                     description: The Route Table ID.

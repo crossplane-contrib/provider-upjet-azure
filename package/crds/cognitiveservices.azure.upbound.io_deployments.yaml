@@ -755,14 +755,17 @@ spec:
                             type: string
                         type: object
                     type: object
+                  dynamicThrottlingEnabled:
+                    description: Whether dynamic throttling is enabled.
+                    type: boolean
                   model:
                     description: A model block as defined below. Changing this forces
                       a new resource to be created.
                     properties:
                       format:
                         description: The format of the Cognitive Services Account
-                          Deployment model. Changing this forces a new resource to
-                          be created. Possible value is OpenAI.
+                          Deployment model. Possible values are OpenAI and Cohere.
+                          Changing this forces a new resource to be created.
                         type: string
                       name:
                         description: The name of the Cognitive Services Account Deployment
@@ -777,8 +780,8 @@ spec:
                   raiPolicyName:
                     description: The name of RAI policy.
                     type: string
-                  scale:
-                    description: A scale block as defined below.
+                  sku:
+                    description: A sku block as defined below.
                     properties:
                       capacity:
                         description: Tokens-per-Minute (TPM). The unit of measure
@@ -795,6 +798,12 @@ spec:
                           for the same SKU, then that can be captured here. Changing
                           this forces a new resource to be created.
                         type: string
+                      name:
+                        description: The name of the SKU. Possible values include
+                          Standard, DataZoneBatch, DataZoneStandard, DataZoneProvisionedManaged,
+                          GlobalBatch, GlobalProvisionedManaged, GlobalStandard, and
+                          ProvisionedManaged.
+                        type: string
                       size:
                         description: The SKU size. When the name field is the combination
                           of tier and some other value, this would be the standalone
@@ -802,11 +811,8 @@ spec:
                         type: string
                       tier:
                         description: Possible values are Free, Basic, Standard, Premium,
-                          Enterprise. Changing this forces a new resource to be created.
-                        type: string
-                      type:
-                        description: The name of the SKU. Ex - Standard or P3. It
-                          is typically a letter+number code. Changing this forces
+                          Enterprise. This property is required only when multiple
+                          tiers are available with the SKU name. Changing this forces
                           a new resource to be created.
                         type: string
                     type: object
@@ -829,14 +835,17 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  dynamicThrottlingEnabled:
+                    description: Whether dynamic throttling is enabled.
+                    type: boolean
                   model:
                     description: A model block as defined below. Changing this forces
                       a new resource to be created.
                     properties:
                       format:
                         description: The format of the Cognitive Services Account
-                          Deployment model. Changing this forces a new resource to
-                          be created. Possible value is OpenAI.
+                          Deployment model. Possible values are OpenAI and Cohere.
+                          Changing this forces a new resource to be created.
                         type: string
                       name:
                         description: The name of the Cognitive Services Account Deployment
@@ -851,8 +860,8 @@ spec:
                   raiPolicyName:
                     description: The name of RAI policy.
                     type: string
-                  scale:
-                    description: A scale block as defined below.
+                  sku:
+                    description: A sku block as defined below.
                     properties:
                       capacity:
                         description: Tokens-per-Minute (TPM). The unit of measure
@@ -869,6 +878,12 @@ spec:
                           for the same SKU, then that can be captured here. Changing
                           this forces a new resource to be created.
                         type: string
+                      name:
+                        description: The name of the SKU. Possible values include
+                          Standard, DataZoneBatch, DataZoneStandard, DataZoneProvisionedManaged,
+                          GlobalBatch, GlobalProvisionedManaged, GlobalStandard, and
+                          ProvisionedManaged.
+                        type: string
                       size:
                         description: The SKU size. When the name field is the combination
                           of tier and some other value, this would be the standalone
@@ -876,11 +891,8 @@ spec:
                         type: string
                       tier:
                         description: Possible values are Free, Basic, Standard, Premium,
-                          Enterprise. Changing this forces a new resource to be created.
-                        type: string
-                      type:
-                        description: The name of the SKU. Ex - Standard or P3. It
-                          is typically a letter+number code. Changing this forces
+                          Enterprise. This property is required only when multiple
+                          tiers are available with the SKU name. Changing this forces
                           a new resource to be created.
                         type: string
                     type: object
@@ -1062,10 +1074,10 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.model)
                 || (has(self.initProvider) && has(self.initProvider.model))'
-            - message: spec.forProvider.scale is a required parameter
+            - message: spec.forProvider.sku is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.scale)
-                || (has(self.initProvider) && has(self.initProvider.scale))'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.sku)
+                || (has(self.initProvider) && has(self.initProvider.sku))'
           status:
             description: DeploymentStatus defines the observed state of Deployment.
             properties:
@@ -1075,6 +1087,9 @@ spec:
                     description: The ID of the Cognitive Services Account. Changing
                       this forces a new resource to be created.
                     type: string
+                  dynamicThrottlingEnabled:
+                    description: Whether dynamic throttling is enabled.
+                    type: boolean
                   id:
                     description: The ID of the Deployment for Azure Cognitive Services
                       Account.
@@ -1085,8 +1100,8 @@ spec:
                     properties:
                       format:
                         description: The format of the Cognitive Services Account
-                          Deployment model. Changing this forces a new resource to
-                          be created. Possible value is OpenAI.
+                          Deployment model. Possible values are OpenAI and Cohere.
+                          Changing this forces a new resource to be created.
                         type: string
                       name:
                         description: The name of the Cognitive Services Account Deployment
@@ -1101,8 +1116,8 @@ spec:
                   raiPolicyName:
                     description: The name of RAI policy.
                     type: string
-                  scale:
-                    description: A scale block as defined below.
+                  sku:
+                    description: A sku block as defined below.
                     properties:
                       capacity:
                         description: Tokens-per-Minute (TPM). The unit of measure
@@ -1119,6 +1134,12 @@ spec:
                           for the same SKU, then that can be captured here. Changing
                           this forces a new resource to be created.
                         type: string
+                      name:
+                        description: The name of the SKU. Possible values include
+                          Standard, DataZoneBatch, DataZoneStandard, DataZoneProvisionedManaged,
+                          GlobalBatch, GlobalProvisionedManaged, GlobalStandard, and
+                          ProvisionedManaged.
+                        type: string
                       size:
                         description: The SKU size. When the name field is the combination
                           of tier and some other value, this would be the standalone
@@ -1126,11 +1147,8 @@ spec:
                         type: string
                       tier:
                         description: Possible values are Free, Basic, Standard, Premium,
-                          Enterprise. Changing this forces a new resource to be created.
-                        type: string
-                      type:
-                        description: The name of the SKU. Ex - Standard or P3. It
-                          is typically a letter+number code. Changing this forces
+                          Enterprise. This property is required only when multiple
+                          tiers are available with the SKU name. Changing this forces
                           a new resource to be created.
                         type: string
                     type: object

@@ -1161,8 +1161,6 @@ spec:
                     description: Is the cluster's double encryption enabled? Changing
                       this forces a new resource to be created.
                     type: boolean
-                  engine:
-                    type: string
                   identity:
                     description: An identity block as defined below.
                     properties:
@@ -1186,9 +1184,34 @@ spec:
                       3.10.8 image. Note that PYTHON_3.10.8 is only available in skus
                       which support nested virtualization.'
                     items:
-                      type: string
+                      properties:
+                        image:
+                          type: string
+                        name:
+                          description: The name of the SKU. Possible values are Dev(No
+                            SLA)_Standard_D11_v2, Dev(No SLA)_Standard_E2a_v4, Standard_D14_v2,
+                            Standard_D11_v2, Standard_D16d_v5, Standard_D13_v2, Standard_D12_v2,
+                            Standard_DS14_v2+4TB_PS, Standard_DS14_v2+3TB_PS, Standard_DS13_v2+1TB_PS,
+                            Standard_DS13_v2+2TB_PS, Standard_D32d_v5, Standard_D32d_v4,
+                            Standard_EC8ads_v5, Standard_EC8as_v5+1TB_PS, Standard_EC8as_v5+2TB_PS,
+                            Standard_EC16ads_v5, Standard_EC16as_v5+4TB_PS, Standard_EC16as_v5+3TB_PS,
+                            Standard_E80ids_v4, Standard_E8a_v4, Standard_E8ads_v5,
+                            Standard_E8as_v5+1TB_PS, Standard_E8as_v5+2TB_PS, Standard_E8as_v4+1TB_PS,
+                            Standard_E8as_v4+2TB_PS, Standard_E8d_v5, Standard_E8d_v4,
+                            Standard_E8s_v5+1TB_PS, Standard_E8s_v5+2TB_PS, Standard_E8s_v4+1TB_PS,
+                            Standard_E8s_v4+2TB_PS, Standard_E4a_v4, Standard_E4ads_v5,
+                            Standard_E4d_v5, Standard_E4d_v4, Standard_E16a_v4, Standard_E16ads_v5,
+                            Standard_E16as_v5+4TB_PS, Standard_E16as_v5+3TB_PS, Standard_E16as_v4+4TB_PS,
+                            Standard_E16as_v4+3TB_PS, Standard_E16d_v5, Standard_E16d_v4,
+                            Standard_E16s_v5+4TB_PS, Standard_E16s_v5+3TB_PS, Standard_E16s_v4+4TB_PS,
+                            Standard_E16s_v4+3TB_PS, Standard_E64i_v3, Standard_E2a_v4,
+                            Standard_E2ads_v5, Standard_E2d_v5, Standard_E2d_v4, Standard_L8as_v3,
+                            Standard_L8s, Standard_L8s_v3, Standard_L8s_v2, Standard_L4s,
+                            Standard_L16as_v3, Standard_L16s, Standard_L16s_v3, Standard_L16s_v2,
+                            Standard_L32as_v3 and Standard_L32s_v3.
+                          type: string
+                      type: object
                     type: array
-                    x-kubernetes-list-type: set
                   location:
                     description: The location where the Kusto Cluster should be created.
                       Changing this forces a new resource to be created.
@@ -1487,8 +1510,6 @@ spec:
                     description: Is the cluster's double encryption enabled? Changing
                       this forces a new resource to be created.
                     type: boolean
-                  engine:
-                    type: string
                   identity:
                     description: An identity block as defined below.
                     properties:
@@ -1512,9 +1533,34 @@ spec:
                       3.10.8 image. Note that PYTHON_3.10.8 is only available in skus
                       which support nested virtualization.'
                     items:
-                      type: string
+                      properties:
+                        image:
+                          type: string
+                        name:
+                          description: The name of the SKU. Possible values are Dev(No
+                            SLA)_Standard_D11_v2, Dev(No SLA)_Standard_E2a_v4, Standard_D14_v2,
+                            Standard_D11_v2, Standard_D16d_v5, Standard_D13_v2, Standard_D12_v2,
+                            Standard_DS14_v2+4TB_PS, Standard_DS14_v2+3TB_PS, Standard_DS13_v2+1TB_PS,
+                            Standard_DS13_v2+2TB_PS, Standard_D32d_v5, Standard_D32d_v4,
+                            Standard_EC8ads_v5, Standard_EC8as_v5+1TB_PS, Standard_EC8as_v5+2TB_PS,
+                            Standard_EC16ads_v5, Standard_EC16as_v5+4TB_PS, Standard_EC16as_v5+3TB_PS,
+                            Standard_E80ids_v4, Standard_E8a_v4, Standard_E8ads_v5,
+                            Standard_E8as_v5+1TB_PS, Standard_E8as_v5+2TB_PS, Standard_E8as_v4+1TB_PS,
+                            Standard_E8as_v4+2TB_PS, Standard_E8d_v5, Standard_E8d_v4,
+                            Standard_E8s_v5+1TB_PS, Standard_E8s_v5+2TB_PS, Standard_E8s_v4+1TB_PS,
+                            Standard_E8s_v4+2TB_PS, Standard_E4a_v4, Standard_E4ads_v5,
+                            Standard_E4d_v5, Standard_E4d_v4, Standard_E16a_v4, Standard_E16ads_v5,
+                            Standard_E16as_v5+4TB_PS, Standard_E16as_v5+3TB_PS, Standard_E16as_v4+4TB_PS,
+                            Standard_E16as_v4+3TB_PS, Standard_E16d_v5, Standard_E16d_v4,
+                            Standard_E16s_v5+4TB_PS, Standard_E16s_v5+3TB_PS, Standard_E16s_v4+4TB_PS,
+                            Standard_E16s_v4+3TB_PS, Standard_E64i_v3, Standard_E2a_v4,
+                            Standard_E2ads_v5, Standard_E2d_v5, Standard_E2d_v4, Standard_L8as_v3,
+                            Standard_L8s, Standard_L8s_v3, Standard_L8s_v2, Standard_L4s,
+                            Standard_L16as_v3, Standard_L16s, Standard_L16s_v3, Standard_L16s_v2,
+                            Standard_L32as_v3 and Standard_L32s_v3.
+                          type: string
+                      type: object
                     type: array
-                    x-kubernetes-list-type: set
                   location:
                     description: The location where the Kusto Cluster should be created.
                       Changing this forces a new resource to be created.
@@ -1904,8 +1950,6 @@ spec:
                     description: Is the cluster's double encryption enabled? Changing
                       this forces a new resource to be created.
                     type: boolean
-                  engine:
-                    type: string
                   id:
                     description: The Kusto Cluster ID.
                     type: string
@@ -1940,9 +1984,34 @@ spec:
                       3.10.8 image. Note that PYTHON_3.10.8 is only available in skus
                       which support nested virtualization.'
                     items:
-                      type: string
+                      properties:
+                        image:
+                          type: string
+                        name:
+                          description: The name of the SKU. Possible values are Dev(No
+                            SLA)_Standard_D11_v2, Dev(No SLA)_Standard_E2a_v4, Standard_D14_v2,
+                            Standard_D11_v2, Standard_D16d_v5, Standard_D13_v2, Standard_D12_v2,
+                            Standard_DS14_v2+4TB_PS, Standard_DS14_v2+3TB_PS, Standard_DS13_v2+1TB_PS,
+                            Standard_DS13_v2+2TB_PS, Standard_D32d_v5, Standard_D32d_v4,
+                            Standard_EC8ads_v5, Standard_EC8as_v5+1TB_PS, Standard_EC8as_v5+2TB_PS,
+                            Standard_EC16ads_v5, Standard_EC16as_v5+4TB_PS, Standard_EC16as_v5+3TB_PS,
+                            Standard_E80ids_v4, Standard_E8a_v4, Standard_E8ads_v5,
+                            Standard_E8as_v5+1TB_PS, Standard_E8as_v5+2TB_PS, Standard_E8as_v4+1TB_PS,
+                            Standard_E8as_v4+2TB_PS, Standard_E8d_v5, Standard_E8d_v4,
+                            Standard_E8s_v5+1TB_PS, Standard_E8s_v5+2TB_PS, Standard_E8s_v4+1TB_PS,
+                            Standard_E8s_v4+2TB_PS, Standard_E4a_v4, Standard_E4ads_v5,
+                            Standard_E4d_v5, Standard_E4d_v4, Standard_E16a_v4, Standard_E16ads_v5,
+                            Standard_E16as_v5+4TB_PS, Standard_E16as_v5+3TB_PS, Standard_E16as_v4+4TB_PS,
+                            Standard_E16as_v4+3TB_PS, Standard_E16d_v5, Standard_E16d_v4,
+                            Standard_E16s_v5+4TB_PS, Standard_E16s_v5+3TB_PS, Standard_E16s_v4+4TB_PS,
+                            Standard_E16s_v4+3TB_PS, Standard_E64i_v3, Standard_E2a_v4,
+                            Standard_E2ads_v5, Standard_E2d_v5, Standard_E2d_v4, Standard_L8as_v3,
+                            Standard_L8s, Standard_L8s_v3, Standard_L8s_v2, Standard_L4s,
+                            Standard_L16as_v3, Standard_L16s, Standard_L16s_v3, Standard_L16s_v2,
+                            Standard_L32as_v3 and Standard_L32s_v3.
+                          type: string
+                      type: object
                     type: array
-                    x-kubernetes-list-type: set
                   location:
                     description: The location where the Kusto Cluster should be created.
                       Changing this forces a new resource to be created.

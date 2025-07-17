@@ -53,7 +53,7 @@ type EnvironmentInitParameters struct {
 	// Specifies the supported Azure location where the Container App Environment is to exist. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The ID for the Log Analytics Workspace to link this Container Apps Managed Environment to. Changing this forces a new resource to be created.
+	// The ID for the Log Analytics Workspace to link this Container Apps Managed Environment to.
 	// The ID for the Log Analytics Workspace to link this Container Apps Managed Environment to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/operationalinsights/v1beta2.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
@@ -67,6 +67,9 @@ type EnvironmentInitParameters struct {
 	// +kubebuilder:validation:Optional
 	LogAnalyticsWorkspaceIDSelector *v1.Selector `json:"logAnalyticsWorkspaceIdSelector,omitempty" tf:"-"`
 
+	// Where the application logs will be saved for this Container Apps Managed Environment. Possible values include log-analytics and azure-monitor. Omitting this value will result in logs being streamed only.
+	LogsDestination *string `json:"logsDestination,omitempty" tf:"logs_destination,omitempty"`
+
 	// Should mutual transport layer security (mTLS) be enabled? Defaults to false.
 	// Should mutual transport layer security (mTLS) be enabled? Defaults to `false`. **Note:** This feature is in public preview. Enabling mTLS for your applications may increase response latency and reduce maximum throughput in high-load scenarios.
 	MutualTLSEnabled *bool `json:"mutualTlsEnabled,omitempty" tf:"mutual_tls_enabled,omitempty"`
@@ -75,7 +78,7 @@ type EnvironmentInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The profile of the workload to scope the container app execution. A workload_profile block as defined below.
+	// One or more workload_profile blocks as defined below.
 	WorkloadProfile []WorkloadProfileInitParameters `json:"workloadProfile,omitempty" tf:"workload_profile,omitempty"`
 
 	// Should the Container App Environment be created with Zone Redundancy enabled? Defaults to false. Changing this forces a new resource to be created.
@@ -114,9 +117,12 @@ type EnvironmentObservation struct {
 	// Specifies the supported Azure location where the Container App Environment is to exist. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The ID for the Log Analytics Workspace to link this Container Apps Managed Environment to. Changing this forces a new resource to be created.
+	// The ID for the Log Analytics Workspace to link this Container Apps Managed Environment to.
 	// The ID for the Log Analytics Workspace to link this Container Apps Managed Environment to.
 	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId,omitempty" tf:"log_analytics_workspace_id,omitempty"`
+
+	// Where the application logs will be saved for this Container Apps Managed Environment. Possible values include log-analytics and azure-monitor. Omitting this value will result in logs being streamed only.
+	LogsDestination *string `json:"logsDestination,omitempty" tf:"logs_destination,omitempty"`
 
 	// Should mutual transport layer security (mTLS) be enabled? Defaults to false.
 	// Should mutual transport layer security (mTLS) be enabled? Defaults to `false`. **Note:** This feature is in public preview. Enabling mTLS for your applications may increase response latency and reduce maximum throughput in high-load scenarios.
@@ -141,7 +147,7 @@ type EnvironmentObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The profile of the workload to scope the container app execution. A workload_profile block as defined below.
+	// One or more workload_profile blocks as defined below.
 	WorkloadProfile []WorkloadProfileObservation `json:"workloadProfile,omitempty" tf:"workload_profile,omitempty"`
 
 	// Should the Container App Environment be created with Zone Redundancy enabled? Defaults to false. Changing this forces a new resource to be created.
@@ -193,7 +199,7 @@ type EnvironmentParameters struct {
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The ID for the Log Analytics Workspace to link this Container Apps Managed Environment to. Changing this forces a new resource to be created.
+	// The ID for the Log Analytics Workspace to link this Container Apps Managed Environment to.
 	// The ID for the Log Analytics Workspace to link this Container Apps Managed Environment to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/operationalinsights/v1beta2.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
@@ -207,6 +213,10 @@ type EnvironmentParameters struct {
 	// Selector for a Workspace in operationalinsights to populate logAnalyticsWorkspaceId.
 	// +kubebuilder:validation:Optional
 	LogAnalyticsWorkspaceIDSelector *v1.Selector `json:"logAnalyticsWorkspaceIdSelector,omitempty" tf:"-"`
+
+	// Where the application logs will be saved for this Container Apps Managed Environment. Possible values include log-analytics and azure-monitor. Omitting this value will result in logs being streamed only.
+	// +kubebuilder:validation:Optional
+	LogsDestination *string `json:"logsDestination,omitempty" tf:"logs_destination,omitempty"`
 
 	// Should mutual transport layer security (mTLS) be enabled? Defaults to false.
 	// Should mutual transport layer security (mTLS) be enabled? Defaults to `false`. **Note:** This feature is in public preview. Enabling mTLS for your applications may increase response latency and reduce maximum throughput in high-load scenarios.
@@ -231,7 +241,7 @@ type EnvironmentParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The profile of the workload to scope the container app execution. A workload_profile block as defined below.
+	// One or more workload_profile blocks as defined below.
 	// +kubebuilder:validation:Optional
 	WorkloadProfile []WorkloadProfileParameters `json:"workloadProfile,omitempty" tf:"workload_profile,omitempty"`
 

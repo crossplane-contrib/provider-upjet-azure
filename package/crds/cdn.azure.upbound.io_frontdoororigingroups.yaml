@@ -729,8 +729,7 @@ spec:
                     properties:
                       intervalInSeconds:
                         description: Specifies the number of seconds between health
-                          probes. Possible values are between 5 and 31536000 seconds
-                          (inclusive).
+                          probes. Possible values are between 1 and 255 seconds (inclusive).
                         type: number
                       path:
                         description: Specifies the path relative to the origin that
@@ -795,8 +794,7 @@ spec:
                     properties:
                       intervalInSeconds:
                         description: Specifies the number of seconds between health
-                          probes. Possible values are between 5 and 31536000 seconds
-                          (inclusive).
+                          probes. Possible values are between 1 and 255 seconds (inclusive).
                         type: number
                       path:
                         description: Specifies the path relative to the origin that
@@ -1031,8 +1029,7 @@ spec:
                     properties:
                       intervalInSeconds:
                         description: Specifies the number of seconds between health
-                          probes. Possible values are between 5 and 31536000 seconds
-                          (inclusive).
+                          probes. Possible values are between 1 and 255 seconds (inclusive).
                         type: number
                       path:
                         description: Specifies the path relative to the origin that

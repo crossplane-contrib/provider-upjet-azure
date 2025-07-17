@@ -162,8 +162,7 @@ spec:
                             2006-01-02T15:04:00Z. Defaults to OnlyNewObjects.'
                           type: string
                         destinationContainerName:
-                          description: The destination storage container name. Changing
-                            this forces a new Storage Object Replication to be created.
+                          description: The destination storage container name.
                           type: string
                         destinationContainerNameRef:
                           description: Reference to a Container in storage to populate
@@ -249,8 +248,7 @@ spec:
                           type: array
                           x-kubernetes-list-type: set
                         sourceContainerName:
-                          description: The source storage container name. Changing
-                            this forces a new Storage Object Replication to be created.
+                          description: The source storage container name.
                           type: string
                         sourceContainerNameRef:
                           description: Reference to a Container in storage to populate
@@ -511,8 +509,7 @@ spec:
                             2006-01-02T15:04:00Z. Defaults to OnlyNewObjects.'
                           type: string
                         destinationContainerName:
-                          description: The destination storage container name. Changing
-                            this forces a new Storage Object Replication to be created.
+                          description: The destination storage container name.
                           type: string
                         destinationContainerNameRef:
                           description: Reference to a Container in storage to populate
@@ -598,8 +595,7 @@ spec:
                           type: array
                           x-kubernetes-list-type: set
                         sourceContainerName:
-                          description: The source storage container name. Changing
-                            this forces a new Storage Object Replication to be created.
+                          description: The source storage container name.
                           type: string
                         sourceContainerNameRef:
                           description: Reference to a Container in storage to populate
@@ -958,8 +954,7 @@ spec:
                             2006-01-02T15:04:00Z. Defaults to OnlyNewObjects.'
                           type: string
                         destinationContainerName:
-                          description: The destination storage container name. Changing
-                            this forces a new Storage Object Replication to be created.
+                          description: The destination storage container name.
                           type: string
                         filterOutBlobsWithPrefix:
                           description: Specifies a list of filters prefixes, the blobs
@@ -971,8 +966,7 @@ spec:
                         name:
                           type: string
                         sourceContainerName:
-                          description: The source storage container name. Changing
-                            this forces a new Storage Object Replication to be created.
+                          description: The source storage container name.
                           type: string
                       type: object
                     type: array

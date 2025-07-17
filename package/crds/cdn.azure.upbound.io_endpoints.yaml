@@ -2719,7 +2719,8 @@ spec:
     name: v1beta2
     schema:
       openAPIV3Schema:
-        description: Endpoint is the Schema for the Endpoints API. Manages a CDN Endpoint.
+        description: Endpoint is the Schema for the Endpoints API. Manages a CDN (classic)
+          Endpoint.
         properties:
           apiVersion:
             description: |-

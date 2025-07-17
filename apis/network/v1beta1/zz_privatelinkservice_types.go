@@ -98,6 +98,9 @@ type PrivateLinkServiceInitParameters struct {
 	// +listType=set
 	AutoApprovalSubscriptionIds []*string `json:"autoApprovalSubscriptionIds,omitempty" tf:"auto_approval_subscription_ids,omitempty"`
 
+	// The destination IP address of the Private Link Service.
+	DestinationIPAddress *string `json:"destinationIpAddress,omitempty" tf:"destination_ip_address,omitempty"`
+
 	// Should the Private Link Service support the Proxy Protocol?
 	EnableProxyProtocol *bool `json:"enableProxyProtocol,omitempty" tf:"enable_proxy_protocol,omitempty"`
 
@@ -131,6 +134,9 @@ type PrivateLinkServiceObservation struct {
 	// A list of Subscription UUID/GUID's that will be automatically be able to use this Private Link Service.
 	// +listType=set
 	AutoApprovalSubscriptionIds []*string `json:"autoApprovalSubscriptionIds,omitempty" tf:"auto_approval_subscription_ids,omitempty"`
+
+	// The destination IP address of the Private Link Service.
+	DestinationIPAddress *string `json:"destinationIpAddress,omitempty" tf:"destination_ip_address,omitempty"`
 
 	// Should the Private Link Service support the Proxy Protocol?
 	EnableProxyProtocol *bool `json:"enableProxyProtocol,omitempty" tf:"enable_proxy_protocol,omitempty"`
@@ -168,6 +174,10 @@ type PrivateLinkServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	AutoApprovalSubscriptionIds []*string `json:"autoApprovalSubscriptionIds,omitempty" tf:"auto_approval_subscription_ids,omitempty"`
+
+	// The destination IP address of the Private Link Service.
+	// +kubebuilder:validation:Optional
+	DestinationIPAddress *string `json:"destinationIpAddress,omitempty" tf:"destination_ip_address,omitempty"`
 
 	// Should the Private Link Service support the Proxy Protocol?
 	// +kubebuilder:validation:Optional
@@ -250,7 +260,6 @@ type PrivateLinkServiceStatus struct {
 type PrivateLinkService struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.loadBalancerFrontendIpConfigurationIds) || (has(self.initProvider) && has(self.initProvider.loadBalancerFrontendIpConfigurationIds))",message="spec.forProvider.loadBalancerFrontendIpConfigurationIds is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || (has(self.initProvider) && has(self.initProvider.location))",message="spec.forProvider.location is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.natIpConfiguration) || (has(self.initProvider) && has(self.initProvider.natIpConfiguration))",message="spec.forProvider.natIpConfiguration is a required parameter"
 	Spec   PrivateLinkServiceSpec   `json:"spec"`

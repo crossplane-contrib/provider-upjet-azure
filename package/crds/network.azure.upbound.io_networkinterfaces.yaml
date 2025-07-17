@@ -101,10 +101,6 @@ spec:
                       this Network Interface should exist. Changing this forces a
                       new Network Interface to be created.
                     type: string
-                  enableAcceleratedNetworking:
-                    type: boolean
-                  enableIpForwarding:
-                    type: boolean
                   internalDnsNameLabel:
                     description: The (relative) DNS Name used for internal communications
                       between Virtual Machines in the same Virtual Network.
@@ -434,10 +430,6 @@ spec:
                       this Network Interface should exist. Changing this forces a
                       new Network Interface to be created.
                     type: string
-                  enableAcceleratedNetworking:
-                    type: boolean
-                  enableIpForwarding:
-                    type: boolean
                   internalDnsNameLabel:
                     description: The (relative) DNS Name used for internal communications
                       between Virtual Machines in the same Virtual Network.
@@ -862,10 +854,6 @@ spec:
                       this Network Interface should exist. Changing this forces a
                       new Network Interface to be created.
                     type: string
-                  enableAcceleratedNetworking:
-                    type: boolean
-                  enableIpForwarding:
-                    type: boolean
                   id:
                     description: The ID of the Network Interface.
                     type: string

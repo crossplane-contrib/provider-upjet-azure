@@ -21,7 +21,7 @@ func (mg *LinkedServiceSFTP) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this LinkedServiceSFTP
 func (tr *LinkedServiceSFTP) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"password": "passwordSecretRef"}
+	return map[string]string{"password": "passwordSecretRef", "private_key_content_base64": "privateKeyContentBase64SecretRef", "private_key_passphrase": "privateKeyPassphraseSecretRef"}
 }
 
 // GetObservation of this LinkedServiceSFTP

@@ -32350,6 +32350,11 @@ func (in *ServicePlanInitParameters) DeepCopyInto(out *ServicePlanInitParameters
 		*out = new(bool)
 		**out = **in
 	}
+	if in.PremiumPlanAutoScaleEnabled != nil {
+		in, out := &in.PremiumPlanAutoScaleEnabled, &out.PremiumPlanAutoScaleEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.SkuName != nil {
 		in, out := &in.SkuName, &out.SkuName
 		*out = new(string)
@@ -32463,6 +32468,11 @@ func (in *ServicePlanObservation) DeepCopyInto(out *ServicePlanObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.PremiumPlanAutoScaleEnabled != nil {
+		in, out := &in.PremiumPlanAutoScaleEnabled, &out.PremiumPlanAutoScaleEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Reserved != nil {
 		in, out := &in.Reserved, &out.Reserved
 		*out = new(bool)
@@ -32541,6 +32551,11 @@ func (in *ServicePlanParameters) DeepCopyInto(out *ServicePlanParameters) {
 	}
 	if in.PerSiteScalingEnabled != nil {
 		in, out := &in.PerSiteScalingEnabled, &out.PerSiteScalingEnabled
+		*out = new(bool)
+		**out = **in
+	}
+	if in.PremiumPlanAutoScaleEnabled != nil {
+		in, out := &in.PremiumPlanAutoScaleEnabled, &out.PremiumPlanAutoScaleEnabled
 		*out = new(bool)
 		**out = **in
 	}

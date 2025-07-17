@@ -77,7 +77,7 @@ spec:
   forProvider:
     addressPrefixes:
     - 10.5.2.0/24
-    enforcePrivateLinkEndpointNetworkPolicies: true
+    enforce_private_link_endpoint_network_policies: true
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example

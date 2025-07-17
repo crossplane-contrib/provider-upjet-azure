@@ -15,8 +15,11 @@ import (
 
 type RouteServerInitParameters struct {
 
-	// Whether to enable route exchange between Azure Route Server and the gateway(s)
+	// Whether to enable route exchange between Azure Route Server and the gateway(s).
 	BranchToBranchTrafficEnabled *bool `json:"branchToBranchTrafficEnabled,omitempty" tf:"branch_to_branch_traffic_enabled,omitempty"`
+
+	// The hub routing preference. Valid values are ASPath, ExpressRoute or VpnGateway. Defaults to ExpressRoute.
+	HubRoutingPreference *string `json:"hubRoutingPreference,omitempty" tf:"hub_routing_preference,omitempty"`
 
 	// Specifies the supported Azure location where the Route Server should exist. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -57,10 +60,13 @@ type RouteServerInitParameters struct {
 
 type RouteServerObservation struct {
 
-	// Whether to enable route exchange between Azure Route Server and the gateway(s)
+	// Whether to enable route exchange between Azure Route Server and the gateway(s).
 	BranchToBranchTrafficEnabled *bool `json:"branchToBranchTrafficEnabled,omitempty" tf:"branch_to_branch_traffic_enabled,omitempty"`
 
-	// The ID of the Route Server .
+	// The hub routing preference. Valid values are ASPath, ExpressRoute or VpnGateway. Defaults to ExpressRoute.
+	HubRoutingPreference *string `json:"hubRoutingPreference,omitempty" tf:"hub_routing_preference,omitempty"`
+
+	// The ID of the Route Server.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Specifies the supported Azure location where the Route Server should exist. Changing this forces a new resource to be created.
@@ -92,9 +98,13 @@ type RouteServerObservation struct {
 
 type RouteServerParameters struct {
 
-	// Whether to enable route exchange between Azure Route Server and the gateway(s)
+	// Whether to enable route exchange between Azure Route Server and the gateway(s).
 	// +kubebuilder:validation:Optional
 	BranchToBranchTrafficEnabled *bool `json:"branchToBranchTrafficEnabled,omitempty" tf:"branch_to_branch_traffic_enabled,omitempty"`
+
+	// The hub routing preference. Valid values are ASPath, ExpressRoute or VpnGateway. Defaults to ExpressRoute.
+	// +kubebuilder:validation:Optional
+	HubRoutingPreference *string `json:"hubRoutingPreference,omitempty" tf:"hub_routing_preference,omitempty"`
 
 	// Specifies the supported Azure location where the Route Server should exist. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional

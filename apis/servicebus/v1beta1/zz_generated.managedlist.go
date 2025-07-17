@@ -25,15 +25,6 @@ func (l *NamespaceDisasterRecoveryConfigList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this NamespaceNetworkRuleSetList.
-func (l *NamespaceNetworkRuleSetList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this QueueAuthorizationRuleList.
 func (l *QueueAuthorizationRuleList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))

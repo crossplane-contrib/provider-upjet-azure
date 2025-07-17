@@ -36,7 +36,7 @@ type RoleAssignmentInitParameters struct {
 	// The type of the principal_id. Possible values are User, Group and ServicePrincipal. Changing this forces a new resource to be created. It is necessary to explicitly set this attribute when creating role assignments if the principal creating the assignment is constrained by ABAC rules that filters on the PrincipalType attribute.
 	PrincipalType *string `json:"principalType,omitempty" tf:"principal_type,omitempty"`
 
-	// The Scoped-ID of the Role Definition. Changing this forces a new resource to be created. Conflicts with role_definition_name.
+	// The Scoped-ID of the Role Definition. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/authorization/v1beta1.RoleDefinition
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("role_definition_resource_id",true)
 	RoleDefinitionID *string `json:"roleDefinitionId,omitempty" tf:"role_definition_id,omitempty"`
@@ -49,7 +49,7 @@ type RoleAssignmentInitParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleDefinitionIDSelector *v1.Selector `json:"roleDefinitionIdSelector,omitempty" tf:"-"`
 
-	// The name of a built-in Role. Changing this forces a new resource to be created. Conflicts with role_definition_id.
+	// The name of a built-in Role. Changing this forces a new resource to be created.
 	RoleDefinitionName *string `json:"roleDefinitionName,omitempty" tf:"role_definition_name,omitempty"`
 
 	// The scope at which the Role Assignment applies to, such as /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333, /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup, or /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup/providers/Microsoft.Compute/virtualMachines/myVM, or /providers/Microsoft.Management/managementGroups/myMG. Changing this forces a new resource to be created.
@@ -85,10 +85,10 @@ type RoleAssignmentObservation struct {
 	// The type of the principal_id. Possible values are User, Group and ServicePrincipal. Changing this forces a new resource to be created. It is necessary to explicitly set this attribute when creating role assignments if the principal creating the assignment is constrained by ABAC rules that filters on the PrincipalType attribute.
 	PrincipalType *string `json:"principalType,omitempty" tf:"principal_type,omitempty"`
 
-	// The Scoped-ID of the Role Definition. Changing this forces a new resource to be created. Conflicts with role_definition_name.
+	// The Scoped-ID of the Role Definition. Changing this forces a new resource to be created.
 	RoleDefinitionID *string `json:"roleDefinitionId,omitempty" tf:"role_definition_id,omitempty"`
 
-	// The name of a built-in Role. Changing this forces a new resource to be created. Conflicts with role_definition_id.
+	// The name of a built-in Role. Changing this forces a new resource to be created.
 	RoleDefinitionName *string `json:"roleDefinitionName,omitempty" tf:"role_definition_name,omitempty"`
 
 	// The scope at which the Role Assignment applies to, such as /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333, /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup, or /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup/providers/Microsoft.Compute/virtualMachines/myVM, or /providers/Microsoft.Management/managementGroups/myMG. Changing this forces a new resource to be created.
@@ -128,7 +128,7 @@ type RoleAssignmentParameters struct {
 	// +kubebuilder:validation:Optional
 	PrincipalType *string `json:"principalType,omitempty" tf:"principal_type,omitempty"`
 
-	// The Scoped-ID of the Role Definition. Changing this forces a new resource to be created. Conflicts with role_definition_name.
+	// The Scoped-ID of the Role Definition. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/authorization/v1beta1.RoleDefinition
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("role_definition_resource_id",true)
 	// +kubebuilder:validation:Optional
@@ -142,7 +142,7 @@ type RoleAssignmentParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleDefinitionIDSelector *v1.Selector `json:"roleDefinitionIdSelector,omitempty" tf:"-"`
 
-	// The name of a built-in Role. Changing this forces a new resource to be created. Conflicts with role_definition_id.
+	// The name of a built-in Role. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	RoleDefinitionName *string `json:"roleDefinitionName,omitempty" tf:"role_definition_name,omitempty"`
 

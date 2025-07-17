@@ -242,8 +242,8 @@ spec:
                     type: object
                   role:
                     description: The cluster role assigned to the principal. Valid
-                      values include AllDatabasesAdmin and AllDatabasesViewer. Changing
-                      this forces a new resource to be created.
+                      values include AllDatabasesAdmin, AllDatabasesViewer, and AllDatabasesMonitor.
+                      Changing this forces a new resource to be created.
                     type: string
                   tenantId:
                     description: The tenant id in which the principal resides. Changing
@@ -273,8 +273,8 @@ spec:
                     type: string
                   role:
                     description: The cluster role assigned to the principal. Valid
-                      values include AllDatabasesAdmin and AllDatabasesViewer. Changing
-                      this forces a new resource to be created.
+                      values include AllDatabasesAdmin, AllDatabasesViewer, and AllDatabasesMonitor.
+                      Changing this forces a new resource to be created.
                     type: string
                   tenantId:
                     description: The tenant id in which the principal resides. Changing
@@ -495,8 +495,8 @@ spec:
                     type: string
                   role:
                     description: The cluster role assigned to the principal. Valid
-                      values include AllDatabasesAdmin and AllDatabasesViewer. Changing
-                      this forces a new resource to be created.
+                      values include AllDatabasesAdmin, AllDatabasesViewer, and AllDatabasesMonitor.
+                      Changing this forces a new resource to be created.
                     type: string
                   tenantId:
                     description: The tenant id in which the principal resides. Changing

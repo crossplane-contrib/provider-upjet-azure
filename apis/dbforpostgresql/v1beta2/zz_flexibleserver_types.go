@@ -15,10 +15,10 @@ import (
 
 type AuthenticationInitParameters struct {
 
-	// Whether or not Active Directory authentication is allowed to access the PostgreSQL Flexible Server. Defaults to false.
+	// Whether Active Directory authentication is allowed to access the PostgreSQL Flexible Server. Defaults to false.
 	ActiveDirectoryAuthEnabled *bool `json:"activeDirectoryAuthEnabled,omitempty" tf:"active_directory_auth_enabled,omitempty"`
 
-	// Whether or not password authentication is allowed to access the PostgreSQL Flexible Server. Defaults to true.
+	// Whether password authentication is allowed to access the PostgreSQL Flexible Server. Defaults to true.
 	PasswordAuthEnabled *bool `json:"passwordAuthEnabled,omitempty" tf:"password_auth_enabled,omitempty"`
 
 	// The Tenant ID of the Azure Active Directory which is used by the Active Directory authentication. active_directory_auth_enabled must be set to true.
@@ -27,10 +27,10 @@ type AuthenticationInitParameters struct {
 
 type AuthenticationObservation struct {
 
-	// Whether or not Active Directory authentication is allowed to access the PostgreSQL Flexible Server. Defaults to false.
+	// Whether Active Directory authentication is allowed to access the PostgreSQL Flexible Server. Defaults to false.
 	ActiveDirectoryAuthEnabled *bool `json:"activeDirectoryAuthEnabled,omitempty" tf:"active_directory_auth_enabled,omitempty"`
 
-	// Whether or not password authentication is allowed to access the PostgreSQL Flexible Server. Defaults to true.
+	// Whether password authentication is allowed to access the PostgreSQL Flexible Server. Defaults to true.
 	PasswordAuthEnabled *bool `json:"passwordAuthEnabled,omitempty" tf:"password_auth_enabled,omitempty"`
 
 	// The Tenant ID of the Azure Active Directory which is used by the Active Directory authentication. active_directory_auth_enabled must be set to true.
@@ -39,11 +39,11 @@ type AuthenticationObservation struct {
 
 type AuthenticationParameters struct {
 
-	// Whether or not Active Directory authentication is allowed to access the PostgreSQL Flexible Server. Defaults to false.
+	// Whether Active Directory authentication is allowed to access the PostgreSQL Flexible Server. Defaults to false.
 	// +kubebuilder:validation:Optional
 	ActiveDirectoryAuthEnabled *bool `json:"activeDirectoryAuthEnabled,omitempty" tf:"active_directory_auth_enabled,omitempty"`
 
-	// Whether or not password authentication is allowed to access the PostgreSQL Flexible Server. Defaults to true.
+	// Whether password authentication is allowed to access the PostgreSQL Flexible Server. Defaults to true.
 	// +kubebuilder:validation:Optional
 	PasswordAuthEnabled *bool `json:"passwordAuthEnabled,omitempty" tf:"password_auth_enabled,omitempty"`
 
@@ -54,49 +54,49 @@ type AuthenticationParameters struct {
 
 type CustomerManagedKeyInitParameters struct {
 
-	// The ID of the geo backup Key Vault Key. It can't cross region and need Customer Managed Key in same region as geo backup.
+	// The versioned ID of the geo backup Key Vault Key.
 	GeoBackupKeyVaultKeyID *string `json:"geoBackupKeyVaultKeyId,omitempty" tf:"geo_backup_key_vault_key_id,omitempty"`
 
-	// The geo backup user managed identity id for a Customer Managed Key. Should be added with identity_ids. It can't cross region and need identity in same region as geo backup.
+	// The geo backup user managed identity id for a Customer Managed Key. Must be added to identity.identity_ids.
 	GeoBackupUserAssignedIdentityID *string `json:"geoBackupUserAssignedIdentityId,omitempty" tf:"geo_backup_user_assigned_identity_id,omitempty"`
 
-	// The ID of the Key Vault Key.
+	// The versioned/versionless ID of the Key Vault Key.
 	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
 
-	// Specifies the primary user managed identity id for a Customer Managed Key. Should be added with identity_ids.
+	// Specifies the primary user managed identity id for a Customer Managed Key. Must be added to identity.identity_ids.
 	PrimaryUserAssignedIdentityID *string `json:"primaryUserAssignedIdentityId,omitempty" tf:"primary_user_assigned_identity_id,omitempty"`
 }
 
 type CustomerManagedKeyObservation struct {
 
-	// The ID of the geo backup Key Vault Key. It can't cross region and need Customer Managed Key in same region as geo backup.
+	// The versioned ID of the geo backup Key Vault Key.
 	GeoBackupKeyVaultKeyID *string `json:"geoBackupKeyVaultKeyId,omitempty" tf:"geo_backup_key_vault_key_id,omitempty"`
 
-	// The geo backup user managed identity id for a Customer Managed Key. Should be added with identity_ids. It can't cross region and need identity in same region as geo backup.
+	// The geo backup user managed identity id for a Customer Managed Key. Must be added to identity.identity_ids.
 	GeoBackupUserAssignedIdentityID *string `json:"geoBackupUserAssignedIdentityId,omitempty" tf:"geo_backup_user_assigned_identity_id,omitempty"`
 
-	// The ID of the Key Vault Key.
+	// The versioned/versionless ID of the Key Vault Key.
 	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
 
-	// Specifies the primary user managed identity id for a Customer Managed Key. Should be added with identity_ids.
+	// Specifies the primary user managed identity id for a Customer Managed Key. Must be added to identity.identity_ids.
 	PrimaryUserAssignedIdentityID *string `json:"primaryUserAssignedIdentityId,omitempty" tf:"primary_user_assigned_identity_id,omitempty"`
 }
 
 type CustomerManagedKeyParameters struct {
 
-	// The ID of the geo backup Key Vault Key. It can't cross region and need Customer Managed Key in same region as geo backup.
+	// The versioned ID of the geo backup Key Vault Key.
 	// +kubebuilder:validation:Optional
 	GeoBackupKeyVaultKeyID *string `json:"geoBackupKeyVaultKeyId,omitempty" tf:"geo_backup_key_vault_key_id,omitempty"`
 
-	// The geo backup user managed identity id for a Customer Managed Key. Should be added with identity_ids. It can't cross region and need identity in same region as geo backup.
+	// The geo backup user managed identity id for a Customer Managed Key. Must be added to identity.identity_ids.
 	// +kubebuilder:validation:Optional
 	GeoBackupUserAssignedIdentityID *string `json:"geoBackupUserAssignedIdentityId,omitempty" tf:"geo_backup_user_assigned_identity_id,omitempty"`
 
-	// The ID of the Key Vault Key.
+	// The versioned/versionless ID of the Key Vault Key.
 	// +kubebuilder:validation:Optional
 	KeyVaultKeyID *string `json:"keyVaultKeyId" tf:"key_vault_key_id,omitempty"`
 
-	// Specifies the primary user managed identity id for a Customer Managed Key. Should be added with identity_ids.
+	// Specifies the primary user managed identity id for a Customer Managed Key. Must be added to identity.identity_ids.
 	// +kubebuilder:validation:Optional
 	PrimaryUserAssignedIdentityID *string `json:"primaryUserAssignedIdentityId,omitempty" tf:"primary_user_assigned_identity_id,omitempty"`
 }
@@ -106,9 +106,15 @@ type FlexibleServerInitParameters struct {
 	// The Administrator login for the PostgreSQL Flexible Server. Required when create_mode is Default and authentication.password_auth_enabled is true.
 	AdministratorLogin *string `json:"administratorLogin,omitempty" tf:"administrator_login,omitempty"`
 
-	// The Password associated with the administrator_login for the PostgreSQL Flexible Server. Required when create_mode is Default and authentication.password_auth_enabled is true.
+	// The Password associated with the administrator_login for the PostgreSQL Flexible Server.
 	// Password for the master DB user. If you set autoGeneratePassword to true, the Secret referenced here will be created or updated with generated password if it does not already contain one.
 	AdministratorPasswordSecretRef *v1.SecretKeySelector `json:"administratorPasswordSecretRef,omitempty" tf:"-"`
+
+	// The Password associated with the administrator_login for the PostgreSQL Flexible Server.
+	AdministratorPasswordWo *string `json:"administratorPasswordWo,omitempty" tf:"administrator_password_wo,omitempty"`
+
+	// An integer value used to trigger an update for administrator_password_wo. This property should be incremented when updating administrator_password_wo.
+	AdministratorPasswordWoVersion *float64 `json:"administratorPasswordWoVersion,omitempty" tf:"administrator_password_wo_version,omitempty"`
 
 	// An authentication block as defined below.
 	Authentication *AuthenticationInitParameters `json:"authentication,omitempty" tf:"authentication,omitempty"`
@@ -119,7 +125,7 @@ type FlexibleServerInitParameters struct {
 	// The backup retention days for the PostgreSQL Flexible Server. Possible values are between 7 and 35 days.
 	BackupRetentionDays *float64 `json:"backupRetentionDays,omitempty" tf:"backup_retention_days,omitempty"`
 
-	// The creation mode which can be used to restore or replicate existing servers. Possible values are Default, GeoRestore, PointInTimeRestore, Replica and Update. Changing this forces a new PostgreSQL Flexible Server to be created.
+	// The creation mode which can be used to restore or replicate existing servers. Possible values are Default, GeoRestore, PointInTimeRestore, Replica, ReviveDropped and Update.
 	CreateMode *string `json:"createMode,omitempty" tf:"create_mode,omitempty"`
 
 	// A customer_managed_key block as defined below. Changing this forces a new resource to be created.
@@ -203,6 +209,12 @@ type FlexibleServerObservation struct {
 	// The Administrator login for the PostgreSQL Flexible Server. Required when create_mode is Default and authentication.password_auth_enabled is true.
 	AdministratorLogin *string `json:"administratorLogin,omitempty" tf:"administrator_login,omitempty"`
 
+	// The Password associated with the administrator_login for the PostgreSQL Flexible Server.
+	AdministratorPasswordWo *string `json:"administratorPasswordWo,omitempty" tf:"administrator_password_wo,omitempty"`
+
+	// An integer value used to trigger an update for administrator_password_wo. This property should be incremented when updating administrator_password_wo.
+	AdministratorPasswordWoVersion *float64 `json:"administratorPasswordWoVersion,omitempty" tf:"administrator_password_wo_version,omitempty"`
+
 	// An authentication block as defined below.
 	Authentication *AuthenticationObservation `json:"authentication,omitempty" tf:"authentication,omitempty"`
 
@@ -212,7 +224,7 @@ type FlexibleServerObservation struct {
 	// The backup retention days for the PostgreSQL Flexible Server. Possible values are between 7 and 35 days.
 	BackupRetentionDays *float64 `json:"backupRetentionDays,omitempty" tf:"backup_retention_days,omitempty"`
 
-	// The creation mode which can be used to restore or replicate existing servers. Possible values are Default, GeoRestore, PointInTimeRestore, Replica and Update. Changing this forces a new PostgreSQL Flexible Server to be created.
+	// The creation mode which can be used to restore or replicate existing servers. Possible values are Default, GeoRestore, PointInTimeRestore, Replica, ReviveDropped and Update.
 	CreateMode *string `json:"createMode,omitempty" tf:"create_mode,omitempty"`
 
 	// A customer_managed_key block as defined below. Changing this forces a new resource to be created.
@@ -286,10 +298,18 @@ type FlexibleServerParameters struct {
 	// +kubebuilder:validation:Optional
 	AdministratorLogin *string `json:"administratorLogin,omitempty" tf:"administrator_login,omitempty"`
 
-	// The Password associated with the administrator_login for the PostgreSQL Flexible Server. Required when create_mode is Default and authentication.password_auth_enabled is true.
+	// The Password associated with the administrator_login for the PostgreSQL Flexible Server.
 	// Password for the master DB user. If you set autoGeneratePassword to true, the Secret referenced here will be created or updated with generated password if it does not already contain one.
 	// +kubebuilder:validation:Optional
 	AdministratorPasswordSecretRef *v1.SecretKeySelector `json:"administratorPasswordSecretRef,omitempty" tf:"-"`
+
+	// The Password associated with the administrator_login for the PostgreSQL Flexible Server.
+	// +kubebuilder:validation:Optional
+	AdministratorPasswordWo *string `json:"administratorPasswordWo,omitempty" tf:"administrator_password_wo,omitempty"`
+
+	// An integer value used to trigger an update for administrator_password_wo. This property should be incremented when updating administrator_password_wo.
+	// +kubebuilder:validation:Optional
+	AdministratorPasswordWoVersion *float64 `json:"administratorPasswordWoVersion,omitempty" tf:"administrator_password_wo_version,omitempty"`
 
 	// An authentication block as defined below.
 	// +kubebuilder:validation:Optional
@@ -308,7 +328,7 @@ type FlexibleServerParameters struct {
 	// +kubebuilder:validation:Optional
 	BackupRetentionDays *float64 `json:"backupRetentionDays,omitempty" tf:"backup_retention_days,omitempty"`
 
-	// The creation mode which can be used to restore or replicate existing servers. Possible values are Default, GeoRestore, PointInTimeRestore, Replica and Update. Changing this forces a new PostgreSQL Flexible Server to be created.
+	// The creation mode which can be used to restore or replicate existing servers. Possible values are Default, GeoRestore, PointInTimeRestore, Replica, ReviveDropped and Update.
 	// +kubebuilder:validation:Optional
 	CreateMode *string `json:"createMode,omitempty" tf:"create_mode,omitempty"`
 
@@ -454,7 +474,7 @@ type IdentityInitParameters struct {
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
-	// Specifies the type of Managed Service Identity that should be configured on this PostgreSQL Flexible Server. The only possible value is UserAssigned.
+	// Specifies the type of Managed Service Identity that should be configured on this PostgreSQL Flexible Server. Possible values are UserAssigned, SystemAssigned and SystemAssigned, UserAssigned.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -464,7 +484,13 @@ type IdentityObservation struct {
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
-	// Specifies the type of Managed Service Identity that should be configured on this PostgreSQL Flexible Server. The only possible value is UserAssigned.
+	// The Principal ID associated with this Managed Service Identity.
+	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
+
+	// The Tenant ID associated with this Managed Service Identity.
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this PostgreSQL Flexible Server. Possible values are UserAssigned, SystemAssigned and SystemAssigned, UserAssigned.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -473,9 +499,9 @@ type IdentityParameters struct {
 	// A list of User Assigned Managed Identity IDs to be assigned to this PostgreSQL Flexible Server. Required if used together with customer_managed_key block.
 	// +kubebuilder:validation:Optional
 	// +listType=set
-	IdentityIds []*string `json:"identityIds" tf:"identity_ids,omitempty"`
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
-	// Specifies the type of Managed Service Identity that should be configured on this PostgreSQL Flexible Server. The only possible value is UserAssigned.
+	// Specifies the type of Managed Service Identity that should be configured on this PostgreSQL Flexible Server. Possible values are UserAssigned, SystemAssigned and SystemAssigned, UserAssigned.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }

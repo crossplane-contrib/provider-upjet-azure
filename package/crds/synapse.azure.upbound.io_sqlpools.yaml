@@ -668,8 +668,7 @@ spec:
                     description: Is transparent data encryption enabled?
                     type: boolean
                   geoBackupPolicyEnabled:
-                    description: Is geo-backup policy enabled? Possible values include
-                      true or false. Defaults to true.
+                    description: Is geo-backup policy enabled? Defaults to true.
                     type: boolean
                   recoveryDatabaseId:
                     description: The ID of the Synapse SQL Pool or SQL Database which
@@ -702,7 +701,6 @@ spec:
                     description: The storage account type that will be used to store
                       backups for this Synapse SQL Pool. Possible values are LRS or
                       GRS. Changing this forces a new Synapse SQL Pool to be created.
-                      Defaults to GRS.
                     type: string
                   synapseWorkspaceId:
                     description: The ID of Synapse Workspace within which this SQL
@@ -820,8 +818,7 @@ spec:
                     description: Is transparent data encryption enabled?
                     type: boolean
                   geoBackupPolicyEnabled:
-                    description: Is geo-backup policy enabled? Possible values include
-                      true or false. Defaults to true.
+                    description: Is geo-backup policy enabled? Defaults to true.
                     type: boolean
                   recoveryDatabaseId:
                     description: The ID of the Synapse SQL Pool or SQL Database which
@@ -854,7 +851,6 @@ spec:
                     description: The storage account type that will be used to store
                       backups for this Synapse SQL Pool. Possible values are LRS or
                       GRS. Changing this forces a new Synapse SQL Pool to be created.
-                      Defaults to GRS.
                     type: string
                   tags:
                     additionalProperties:
@@ -1036,6 +1032,10 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.skuName)
                 || (has(self.initProvider) && has(self.initProvider.skuName))'
+            - message: spec.forProvider.storageAccountType is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.storageAccountType)
+                || (has(self.initProvider) && has(self.initProvider.storageAccountType))'
           status:
             description: SQLPoolStatus defines the observed state of SQLPool.
             properties:
@@ -1057,8 +1057,7 @@ spec:
                     description: Is transparent data encryption enabled?
                     type: boolean
                   geoBackupPolicyEnabled:
-                    description: Is geo-backup policy enabled? Possible values include
-                      true or false. Defaults to true.
+                    description: Is geo-backup policy enabled? Defaults to true.
                     type: boolean
                   id:
                     description: The ID of the Synapse SQL Pool.
@@ -1094,7 +1093,6 @@ spec:
                     description: The storage account type that will be used to store
                       backups for this Synapse SQL Pool. Possible values are LRS or
                       GRS. Changing this forces a new Synapse SQL Pool to be created.
-                      Defaults to GRS.
                     type: string
                   synapseWorkspaceId:
                     description: The ID of Synapse Workspace within which this SQL

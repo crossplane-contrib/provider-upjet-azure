@@ -140,9 +140,8 @@ type CertificateContactsStatus struct {
 type CertificateContacts struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.contact) || (has(self.initProvider) && has(self.initProvider.contact))",message="spec.forProvider.contact is a required parameter"
-	Spec   CertificateContactsSpec   `json:"spec"`
-	Status CertificateContactsStatus `json:"status,omitempty"`
+	Spec              CertificateContactsSpec   `json:"spec"`
+	Status            CertificateContactsStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -2450,7 +2450,7 @@ spec:
                         type: object
                     type: object
                   osDisk:
-                    description: A os_disk block as defined below.
+                    description: An os_disk block as defined below.
                     properties:
                       caching:
                         description: The Type of Caching which should be used for
@@ -2468,9 +2468,9 @@ spec:
                             type: string
                           placement:
                             description: Specifies where to store the Ephemeral Disk.
-                              Possible values are CacheDisk and ResourceDisk. Defaults
-                              to CacheDisk. Changing this forces a new resource to
-                              be created.
+                              Possible values are CacheDisk, ResourceDisk and NvmeDisk.
+                              Defaults to CacheDisk. Changing this forces a new resource
+                              to be created.
                             type: string
                         type: object
                       diskEncryptionSetId:
@@ -2755,8 +2755,8 @@ spec:
                       Set that this Virtual Machine should be created within.
                     type: string
                   vmAgentPlatformUpdatesEnabled:
-                    description: Specifies whether VMAgent Platform Updates is enabled.
-                      Defaults to false.
+                    description: Are Virtual Machine Agent Platform Updates enabled
+                      on this Virtual Machine?
                     type: boolean
                   vtpmEnabled:
                     description: Specifies if vTPM (virtual Trusted Platform Module)
@@ -3122,7 +3122,7 @@ spec:
                         type: object
                     type: object
                   osDisk:
-                    description: A os_disk block as defined below.
+                    description: An os_disk block as defined below.
                     properties:
                       caching:
                         description: The Type of Caching which should be used for
@@ -3140,9 +3140,9 @@ spec:
                             type: string
                           placement:
                             description: Specifies where to store the Ephemeral Disk.
-                              Possible values are CacheDisk and ResourceDisk. Defaults
-                              to CacheDisk. Changing this forces a new resource to
-                              be created.
+                              Possible values are CacheDisk, ResourceDisk and NvmeDisk.
+                              Defaults to CacheDisk. Changing this forces a new resource
+                              to be created.
                             type: string
                         type: object
                       diskEncryptionSetId:
@@ -3346,8 +3346,8 @@ spec:
                       Set that this Virtual Machine should be created within.
                     type: string
                   vmAgentPlatformUpdatesEnabled:
-                    description: Specifies whether VMAgent Platform Updates is enabled.
-                      Defaults to false.
+                    description: Are Virtual Machine Agent Platform Updates enabled
+                      on this Virtual Machine?
                     type: boolean
                   vtpmEnabled:
                     description: Specifies if vTPM (virtual Trusted Platform Module)
@@ -3768,7 +3768,7 @@ spec:
                       type: string
                     type: array
                   osDisk:
-                    description: A os_disk block as defined below.
+                    description: An os_disk block as defined below.
                     properties:
                       caching:
                         description: The Type of Caching which should be used for
@@ -3786,9 +3786,9 @@ spec:
                             type: string
                           placement:
                             description: Specifies where to store the Ephemeral Disk.
-                              Possible values are CacheDisk and ResourceDisk. Defaults
-                              to CacheDisk. Changing this forces a new resource to
-                              be created.
+                              Possible values are CacheDisk, ResourceDisk and NvmeDisk.
+                              Defaults to CacheDisk. Changing this forces a new resource
+                              to be created.
                             type: string
                         type: object
                       diskEncryptionSetId:
@@ -3800,6 +3800,9 @@ spec:
                           wish to vary from the size used in the image this Virtual
                           Machine is sourced from.
                         type: number
+                      id:
+                        description: The ID of the OS disk.
+                        type: string
                       name:
                         description: The name which should be used for the Internal
                           OS Disk. Changing this forces a new resource to be created.
@@ -4021,8 +4024,8 @@ spec:
                       Set that this Virtual Machine should be created within.
                     type: string
                   vmAgentPlatformUpdatesEnabled:
-                    description: Specifies whether VMAgent Platform Updates is enabled.
-                      Defaults to false.
+                    description: Are Virtual Machine Agent Platform Updates enabled
+                      on this Virtual Machine?
                     type: boolean
                   vtpmEnabled:
                     description: Specifies if vTPM (virtual Trusted Platform Module)

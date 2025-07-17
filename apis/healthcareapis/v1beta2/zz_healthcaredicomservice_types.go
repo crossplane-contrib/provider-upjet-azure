@@ -29,7 +29,75 @@ type AuthenticationObservation struct {
 type AuthenticationParameters struct {
 }
 
+type CorsInitParameters struct {
+
+	// Whether to allow credentials in CORS. Defaults to false.
+	AllowCredentials *bool `json:"allowCredentials,omitempty" tf:"allow_credentials,omitempty"`
+
+	// A list of allowed headers for CORS.
+	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
+
+	// A list of allowed methods for CORS.
+	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
+
+	// A list of allowed origins for CORS.
+	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
+
+	// The maximum age in seconds for the CORS configuration (must be between 0 and 99998 inclusive).
+	MaxAgeInSeconds *float64 `json:"maxAgeInSeconds,omitempty" tf:"max_age_in_seconds,omitempty"`
+}
+
+type CorsObservation struct {
+
+	// Whether to allow credentials in CORS. Defaults to false.
+	AllowCredentials *bool `json:"allowCredentials,omitempty" tf:"allow_credentials,omitempty"`
+
+	// A list of allowed headers for CORS.
+	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
+
+	// A list of allowed methods for CORS.
+	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
+
+	// A list of allowed origins for CORS.
+	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
+
+	// The maximum age in seconds for the CORS configuration (must be between 0 and 99998 inclusive).
+	MaxAgeInSeconds *float64 `json:"maxAgeInSeconds,omitempty" tf:"max_age_in_seconds,omitempty"`
+}
+
+type CorsParameters struct {
+
+	// Whether to allow credentials in CORS. Defaults to false.
+	// +kubebuilder:validation:Optional
+	AllowCredentials *bool `json:"allowCredentials,omitempty" tf:"allow_credentials,omitempty"`
+
+	// A list of allowed headers for CORS.
+	// +kubebuilder:validation:Optional
+	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
+
+	// A list of allowed methods for CORS.
+	// +kubebuilder:validation:Optional
+	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
+
+	// A list of allowed origins for CORS.
+	// +kubebuilder:validation:Optional
+	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
+
+	// The maximum age in seconds for the CORS configuration (must be between 0 and 99998 inclusive).
+	// +kubebuilder:validation:Optional
+	MaxAgeInSeconds *float64 `json:"maxAgeInSeconds,omitempty" tf:"max_age_in_seconds,omitempty"`
+}
+
 type HealthcareDICOMServiceInitParameters struct {
+
+	// A cors block as defined below.
+	Cors *CorsInitParameters `json:"cors,omitempty" tf:"cors,omitempty"`
+
+	// If data partitions are enabled or not. Defaults to false. Changing this forces a new Healthcare DICOM Service to be created.
+	DataPartitionsEnabled *bool `json:"dataPartitionsEnabled,omitempty" tf:"data_partitions_enabled,omitempty"`
+
+	// The URL of the key to use for encryption as part of the customer-managed key encryption settings. For more details, refer to the Azure Customer-Managed Keys Overview.
+	EncryptionKeyURL *string `json:"encryptionKeyUrl,omitempty" tf:"encryption_key_url,omitempty"`
 
 	// An identity block as defined below.
 	Identity *IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
@@ -40,6 +108,9 @@ type HealthcareDICOMServiceInitParameters struct {
 	// Whether to enabled public networks when data plane traffic coming from public networks while private endpoint is enabled. Defaults to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
+	// A storage block as defined below.
+	Storage *StorageInitParameters `json:"storage,omitempty" tf:"storage,omitempty"`
+
 	// A mapping of tags to assign to the Healthcare DICOM Service.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -49,6 +120,15 @@ type HealthcareDICOMServiceObservation struct {
 
 	// The authentication block as defined below.
 	Authentication []AuthenticationObservation `json:"authentication,omitempty" tf:"authentication,omitempty"`
+
+	// A cors block as defined below.
+	Cors *CorsObservation `json:"cors,omitempty" tf:"cors,omitempty"`
+
+	// If data partitions are enabled or not. Defaults to false. Changing this forces a new Healthcare DICOM Service to be created.
+	DataPartitionsEnabled *bool `json:"dataPartitionsEnabled,omitempty" tf:"data_partitions_enabled,omitempty"`
+
+	// The URL of the key to use for encryption as part of the customer-managed key encryption settings. For more details, refer to the Azure Customer-Managed Keys Overview.
+	EncryptionKeyURL *string `json:"encryptionKeyUrl,omitempty" tf:"encryption_key_url,omitempty"`
 
 	// The ID of the Healthcare DICOM Service.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -67,15 +147,30 @@ type HealthcareDICOMServiceObservation struct {
 	// The url of the Healthcare DICOM Services.
 	ServiceURL *string `json:"serviceUrl,omitempty" tf:"service_url,omitempty"`
 
+	// A storage block as defined below.
+	Storage *StorageObservation `json:"storage,omitempty" tf:"storage,omitempty"`
+
 	// A mapping of tags to assign to the Healthcare DICOM Service.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Specifies the id of the Healthcare Workspace where the Healthcare DICOM Service should exist. Changing this forces a new Healthcare DICOM Service to be created.
+	// Specifies the ID of the Healthcare Workspace where the Healthcare DICOM Service should exist. Changing this forces a new Healthcare DICOM Service to be created.
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 }
 
 type HealthcareDICOMServiceParameters struct {
+
+	// A cors block as defined below.
+	// +kubebuilder:validation:Optional
+	Cors *CorsParameters `json:"cors,omitempty" tf:"cors,omitempty"`
+
+	// If data partitions are enabled or not. Defaults to false. Changing this forces a new Healthcare DICOM Service to be created.
+	// +kubebuilder:validation:Optional
+	DataPartitionsEnabled *bool `json:"dataPartitionsEnabled,omitempty" tf:"data_partitions_enabled,omitempty"`
+
+	// The URL of the key to use for encryption as part of the customer-managed key encryption settings. For more details, refer to the Azure Customer-Managed Keys Overview.
+	// +kubebuilder:validation:Optional
+	EncryptionKeyURL *string `json:"encryptionKeyUrl,omitempty" tf:"encryption_key_url,omitempty"`
 
 	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
@@ -89,12 +184,16 @@ type HealthcareDICOMServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
+	// A storage block as defined below.
+	// +kubebuilder:validation:Optional
+	Storage *StorageParameters `json:"storage,omitempty" tf:"storage,omitempty"`
+
 	// A mapping of tags to assign to the Healthcare DICOM Service.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Specifies the id of the Healthcare Workspace where the Healthcare DICOM Service should exist. Changing this forces a new Healthcare DICOM Service to be created.
+	// Specifies the ID of the Healthcare Workspace where the Healthcare DICOM Service should exist. Changing this forces a new Healthcare DICOM Service to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/healthcareapis/v1beta1.HealthcareWorkspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -160,6 +259,35 @@ type PrivateEndpointObservation struct {
 }
 
 type PrivateEndpointParameters struct {
+}
+
+type StorageInitParameters struct {
+
+	// The filesystem name of connected storage account. Changing this forces a new Healthcare DICOM Service to be created.
+	FileSystemName *string `json:"fileSystemName,omitempty" tf:"file_system_name,omitempty"`
+
+	// The resource ID of connected storage account. Changing this forces a new Healthcare DICOM Service to be created.
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+}
+
+type StorageObservation struct {
+
+	// The filesystem name of connected storage account. Changing this forces a new Healthcare DICOM Service to be created.
+	FileSystemName *string `json:"fileSystemName,omitempty" tf:"file_system_name,omitempty"`
+
+	// The resource ID of connected storage account. Changing this forces a new Healthcare DICOM Service to be created.
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+}
+
+type StorageParameters struct {
+
+	// The filesystem name of connected storage account. Changing this forces a new Healthcare DICOM Service to be created.
+	// +kubebuilder:validation:Optional
+	FileSystemName *string `json:"fileSystemName" tf:"file_system_name,omitempty"`
+
+	// The resource ID of connected storage account. Changing this forces a new Healthcare DICOM Service to be created.
+	// +kubebuilder:validation:Optional
+	StorageAccountID *string `json:"storageAccountId" tf:"storage_account_id,omitempty"`
 }
 
 // HealthcareDICOMServiceSpec defines the desired state of HealthcareDICOMService

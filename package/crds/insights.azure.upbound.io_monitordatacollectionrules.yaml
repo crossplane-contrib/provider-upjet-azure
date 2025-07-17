@@ -3367,8 +3367,8 @@ spec:
                                 type: string
                               type: array
                             format:
-                              description: The data format of the log files. possible
-                                value is text.
+                              description: The data format of the log files. Possible
+                                values are text and json.
                               type: string
                             name:
                               description: The name which should be used for this
@@ -4468,8 +4468,8 @@ spec:
                                 type: string
                               type: array
                             format:
-                              description: The data format of the log files. possible
-                                value is text.
+                              description: The data format of the log files. Possible
+                                values are text and json.
                               type: string
                             name:
                               description: The name which should be used for this
@@ -5585,8 +5585,8 @@ spec:
                                 type: string
                               type: array
                             format:
-                              description: The data format of the log files. possible
-                                value is text.
+                              description: The data format of the log files. Possible
+                                values are text and json.
                               type: string
                             name:
                               description: The name which should be used for this

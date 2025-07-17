@@ -3243,7 +3243,8 @@ spec:
                       properties:
                         publicKey:
                           description: The Public Key which should be used for authentication,
-                            which needs to be at least 2048-bit and in ssh-rsa format.
+                            which needs to be in ssh-rsa format with at least 2048-bit
+                            or in ssh-ed25519 format.
                           type: string
                         username:
                           description: The Username for which this Public SSH Key
@@ -3519,27 +3520,6 @@ spec:
                         versionId:
                           description: Specifies the Gallery Application Version resource
                             ID. Changing this forces a new resource to be created.
-                          type: string
-                      type: object
-                    type: array
-                  galleryApplications:
-                    items:
-                      properties:
-                        configurationReferenceBlobUri:
-                          type: string
-                        order:
-                          description: Specifies the order in which the packages have
-                            to be installed. Possible values are between 0 and 2147483647.
-                            Defaults to 0. Changing this forces a new resource to
-                            be created.
-                          type: number
-                        packageReferenceId:
-                          description: The ID of the Linux Virtual Machine Scale Set.
-                          type: string
-                        tag:
-                          description: The IP Tag associated with the Public IP, such
-                            as SQL or Storage. Changing this forces a new resource
-                            to be created.
                           type: string
                       type: object
                     type: array
@@ -4144,20 +4124,6 @@ spec:
                       Virtual Machine Scale Set.
                     type: object
                     x-kubernetes-map-type: granular
-                  terminateNotification:
-                    description: A terminate_notification block as defined below.
-                    properties:
-                      enabled:
-                        description: Should the terminate notification be enabled
-                          on this Virtual Machine Scale Set?
-                        type: boolean
-                      timeout:
-                        description: Length of time (in minutes, between 5 and 15)
-                          a notification to be sent to the VM on the instance metadata
-                          server till the VM gets deleted. The time duration should
-                          be specified in ISO 8601 format. Defaults to PT5M.
-                        type: string
-                    type: object
                   terminationNotification:
                     description: A termination_notification block as defined below.
                     properties:
@@ -4193,8 +4159,7 @@ spec:
                     type: boolean
                   zones:
                     description: Specifies a list of Availability Zones in which this
-                      Linux Virtual Machine Scale Set should be located. Changing
-                      this forces a new Linux Virtual Machine Scale Set to be created.
+                      Linux Virtual Machine Scale Set should be located.
                     items:
                       type: string
                     type: array
@@ -4248,7 +4213,8 @@ spec:
                       properties:
                         publicKey:
                           description: The Public Key which should be used for authentication,
-                            which needs to be at least 2048-bit and in ssh-rsa format.
+                            which needs to be in ssh-rsa format with at least 2048-bit
+                            or in ssh-ed25519 format.
                           type: string
                         username:
                           description: The Username for which this Public SSH Key
@@ -4524,27 +4490,6 @@ spec:
                         versionId:
                           description: Specifies the Gallery Application Version resource
                             ID. Changing this forces a new resource to be created.
-                          type: string
-                      type: object
-                    type: array
-                  galleryApplications:
-                    items:
-                      properties:
-                        configurationReferenceBlobUri:
-                          type: string
-                        order:
-                          description: Specifies the order in which the packages have
-                            to be installed. Possible values are between 0 and 2147483647.
-                            Defaults to 0. Changing this forces a new resource to
-                            be created.
-                          type: number
-                        packageReferenceId:
-                          description: The ID of the Linux Virtual Machine Scale Set.
-                          type: string
-                        tag:
-                          description: The IP Tag associated with the Public IP, such
-                            as SQL or Storage. Changing this forces a new resource
-                            to be created.
                           type: string
                       type: object
                     type: array
@@ -5068,20 +5013,6 @@ spec:
                       Virtual Machine Scale Set.
                     type: object
                     x-kubernetes-map-type: granular
-                  terminateNotification:
-                    description: A terminate_notification block as defined below.
-                    properties:
-                      enabled:
-                        description: Should the terminate notification be enabled
-                          on this Virtual Machine Scale Set?
-                        type: boolean
-                      timeout:
-                        description: Length of time (in minutes, between 5 and 15)
-                          a notification to be sent to the VM on the instance metadata
-                          server till the VM gets deleted. The time duration should
-                          be specified in ISO 8601 format. Defaults to PT5M.
-                        type: string
-                    type: object
                   terminationNotification:
                     description: A termination_notification block as defined below.
                     properties:
@@ -5117,8 +5048,7 @@ spec:
                     type: boolean
                   zones:
                     description: Specifies a list of Availability Zones in which this
-                      Linux Virtual Machine Scale Set should be located. Changing
-                      this forces a new Linux Virtual Machine Scale Set to be created.
+                      Linux Virtual Machine Scale Set should be located.
                     items:
                       type: string
                     type: array
@@ -5334,7 +5264,8 @@ spec:
                       properties:
                         publicKey:
                           description: The Public Key which should be used for authentication,
-                            which needs to be at least 2048-bit and in ssh-rsa format.
+                            which needs to be in ssh-rsa format with at least 2048-bit
+                            or in ssh-ed25519 format.
                           type: string
                         username:
                           description: The Username for which this Public SSH Key
@@ -5574,27 +5505,6 @@ spec:
                         versionId:
                           description: Specifies the Gallery Application Version resource
                             ID. Changing this forces a new resource to be created.
-                          type: string
-                      type: object
-                    type: array
-                  galleryApplications:
-                    items:
-                      properties:
-                        configurationReferenceBlobUri:
-                          type: string
-                        order:
-                          description: Specifies the order in which the packages have
-                            to be installed. Possible values are between 0 and 2147483647.
-                            Defaults to 0. Changing this forces a new resource to
-                            be created.
-                          type: number
-                        packageReferenceId:
-                          description: The ID of the Linux Virtual Machine Scale Set.
-                          type: string
-                        tag:
-                          description: The IP Tag associated with the Public IP, such
-                            as SQL or Storage. Changing this forces a new resource
-                            to be created.
                           type: string
                       type: object
                     type: array
@@ -5969,8 +5879,6 @@ spec:
                           to this doc.
                         type: string
                     type: object
-                  scaleInPolicy:
-                    type: string
                   secret:
                     description: One or more secret blocks as defined below.
                     items:
@@ -6060,20 +5968,6 @@ spec:
                       Virtual Machine Scale Set.
                     type: object
                     x-kubernetes-map-type: granular
-                  terminateNotification:
-                    description: A terminate_notification block as defined below.
-                    properties:
-                      enabled:
-                        description: Should the terminate notification be enabled
-                          on this Virtual Machine Scale Set?
-                        type: boolean
-                      timeout:
-                        description: Length of time (in minutes, between 5 and 15)
-                          a notification to be sent to the VM on the instance metadata
-                          server till the VM gets deleted. The time duration should
-                          be specified in ISO 8601 format. Defaults to PT5M.
-                        type: string
-                    type: object
                   terminationNotification:
                     description: A termination_notification block as defined below.
                     properties:
@@ -6113,8 +6007,7 @@ spec:
                     type: boolean
                   zones:
                     description: Specifies a list of Availability Zones in which this
-                      Linux Virtual Machine Scale Set should be located. Changing
-                      this forces a new Linux Virtual Machine Scale Set to be created.
+                      Linux Virtual Machine Scale Set should be located.
                     items:
                       type: string
                     type: array

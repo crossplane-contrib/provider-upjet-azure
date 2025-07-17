@@ -18,7 +18,7 @@ type NamespaceSchemaGroupInitParameters struct {
 	// Specifies the compatibility of this schema group. Possible values are None, Backward, Forward. Changing this forces a new resource to be created.
 	SchemaCompatibility *string `json:"schemaCompatibility,omitempty" tf:"schema_compatibility,omitempty"`
 
-	// Specifies the Type of this schema group. Possible values are Avro, Unknown. Changing this forces a new resource to be created.
+	// Specifies the Type of this schema group. Possible values are Avro, Unknown and Json. Changing this forces a new resource to be created.
 	SchemaType *string `json:"schemaType,omitempty" tf:"schema_type,omitempty"`
 }
 
@@ -33,7 +33,7 @@ type NamespaceSchemaGroupObservation struct {
 	// Specifies the compatibility of this schema group. Possible values are None, Backward, Forward. Changing this forces a new resource to be created.
 	SchemaCompatibility *string `json:"schemaCompatibility,omitempty" tf:"schema_compatibility,omitempty"`
 
-	// Specifies the Type of this schema group. Possible values are Avro, Unknown. Changing this forces a new resource to be created.
+	// Specifies the Type of this schema group. Possible values are Avro, Unknown and Json. Changing this forces a new resource to be created.
 	SchemaType *string `json:"schemaType,omitempty" tf:"schema_type,omitempty"`
 }
 
@@ -57,7 +57,7 @@ type NamespaceSchemaGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	SchemaCompatibility *string `json:"schemaCompatibility,omitempty" tf:"schema_compatibility,omitempty"`
 
-	// Specifies the Type of this schema group. Possible values are Avro, Unknown. Changing this forces a new resource to be created.
+	// Specifies the Type of this schema group. Possible values are Avro, Unknown and Json. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	SchemaType *string `json:"schemaType,omitempty" tf:"schema_type,omitempty"`
 }

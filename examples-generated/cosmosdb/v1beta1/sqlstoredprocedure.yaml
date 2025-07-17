@@ -41,7 +41,7 @@ spec:
     databaseNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    partitionKeyPath: /id
+    partition_key_path: /id
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: azurerm_cosmosdb_account

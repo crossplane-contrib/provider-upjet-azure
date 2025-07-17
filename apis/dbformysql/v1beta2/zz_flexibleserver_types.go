@@ -67,8 +67,14 @@ type FlexibleServerInitParameters struct {
 	// The Administrator login for the MySQL Flexible Server. Required when create_mode is Default. Changing this forces a new MySQL Flexible Server to be created.
 	AdministratorLogin *string `json:"administratorLogin,omitempty" tf:"administrator_login,omitempty"`
 
-	// The Password associated with the administrator_login for the MySQL Flexible Server. Required when create_mode is Default.
+	// The Password associated with the administrator_login for the MySQL Flexible Server.
 	AdministratorPasswordSecretRef *v1.SecretKeySelector `json:"administratorPasswordSecretRef,omitempty" tf:"-"`
+
+	// The Password associated with the administrator_login for the MySQL Flexible Server.
+	AdministratorPasswordWo *string `json:"administratorPasswordWo,omitempty" tf:"administrator_password_wo,omitempty"`
+
+	// An integer value used to trigger an update for administrator_password_wo. This property should be incremented when updating administrator_password_wo.
+	AdministratorPasswordWoVersion *float64 `json:"administratorPasswordWoVersion,omitempty" tf:"administrator_password_wo_version,omitempty"`
 
 	// The backup retention days for the MySQL Flexible Server. Possible values are between 1 and 35 days. Defaults to 7.
 	BackupRetentionDays *float64 `json:"backupRetentionDays,omitempty" tf:"backup_retention_days,omitempty"`
@@ -123,6 +129,9 @@ type FlexibleServerInitParameters struct {
 	// +kubebuilder:validation:Optional
 	PrivateDNSZoneIDSelector *v1.Selector `json:"privateDnsZoneIdSelector,omitempty" tf:"-"`
 
+	// Whether approved public traffic is allowed through the firewall to this server. Possible values are Enabled and Disabled.
+	PublicNetworkAccess *string `json:"publicNetworkAccess,omitempty" tf:"public_network_access,omitempty"`
+
 	// The replication role. Possible value is None.
 	ReplicationRole *string `json:"replicationRole,omitempty" tf:"replication_role,omitempty"`
 
@@ -139,7 +148,7 @@ type FlexibleServerInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The version of the MySQL Flexible Server to use. Possible values are 5.7, and 8.0.21. Changing this forces a new MySQL Flexible Server to be created.
+	// The version of the MySQL Flexible Server to use. Possible values are 5.7, and 8.0.21.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
 	// Specifies the Availability Zone in which this MySQL Flexible Server should be located. Possible values are 1, 2 and 3.
@@ -150,6 +159,12 @@ type FlexibleServerObservation struct {
 
 	// The Administrator login for the MySQL Flexible Server. Required when create_mode is Default. Changing this forces a new MySQL Flexible Server to be created.
 	AdministratorLogin *string `json:"administratorLogin,omitempty" tf:"administrator_login,omitempty"`
+
+	// The Password associated with the administrator_login for the MySQL Flexible Server.
+	AdministratorPasswordWo *string `json:"administratorPasswordWo,omitempty" tf:"administrator_password_wo,omitempty"`
+
+	// An integer value used to trigger an update for administrator_password_wo. This property should be incremented when updating administrator_password_wo.
+	AdministratorPasswordWoVersion *float64 `json:"administratorPasswordWoVersion,omitempty" tf:"administrator_password_wo_version,omitempty"`
 
 	// The backup retention days for the MySQL Flexible Server. Possible values are between 1 and 35 days. Defaults to 7.
 	BackupRetentionDays *float64 `json:"backupRetentionDays,omitempty" tf:"backup_retention_days,omitempty"`
@@ -190,7 +205,9 @@ type FlexibleServerObservation struct {
 	// The ID of the private DNS zone to create the MySQL Flexible Server. Changing this forces a new MySQL Flexible Server to be created.
 	PrivateDNSZoneID *string `json:"privateDnsZoneId,omitempty" tf:"private_dns_zone_id,omitempty"`
 
-	// Is the public network access enabled?
+	// Whether approved public traffic is allowed through the firewall to this server. Possible values are Enabled and Disabled.
+	PublicNetworkAccess *string `json:"publicNetworkAccess,omitempty" tf:"public_network_access,omitempty"`
+
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The maximum number of replicas that a primary MySQL Flexible Server can have.
@@ -215,7 +232,7 @@ type FlexibleServerObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The version of the MySQL Flexible Server to use. Possible values are 5.7, and 8.0.21. Changing this forces a new MySQL Flexible Server to be created.
+	// The version of the MySQL Flexible Server to use. Possible values are 5.7, and 8.0.21.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
 	// Specifies the Availability Zone in which this MySQL Flexible Server should be located. Possible values are 1, 2 and 3.
@@ -228,9 +245,17 @@ type FlexibleServerParameters struct {
 	// +kubebuilder:validation:Optional
 	AdministratorLogin *string `json:"administratorLogin,omitempty" tf:"administrator_login,omitempty"`
 
-	// The Password associated with the administrator_login for the MySQL Flexible Server. Required when create_mode is Default.
+	// The Password associated with the administrator_login for the MySQL Flexible Server.
 	// +kubebuilder:validation:Optional
 	AdministratorPasswordSecretRef *v1.SecretKeySelector `json:"administratorPasswordSecretRef,omitempty" tf:"-"`
+
+	// The Password associated with the administrator_login for the MySQL Flexible Server.
+	// +kubebuilder:validation:Optional
+	AdministratorPasswordWo *string `json:"administratorPasswordWo,omitempty" tf:"administrator_password_wo,omitempty"`
+
+	// An integer value used to trigger an update for administrator_password_wo. This property should be incremented when updating administrator_password_wo.
+	// +kubebuilder:validation:Optional
+	AdministratorPasswordWoVersion *float64 `json:"administratorPasswordWoVersion,omitempty" tf:"administrator_password_wo_version,omitempty"`
 
 	// The backup retention days for the MySQL Flexible Server. Possible values are between 1 and 35 days. Defaults to 7.
 	// +kubebuilder:validation:Optional
@@ -296,6 +321,10 @@ type FlexibleServerParameters struct {
 	// +kubebuilder:validation:Optional
 	PrivateDNSZoneIDSelector *v1.Selector `json:"privateDnsZoneIdSelector,omitempty" tf:"-"`
 
+	// Whether approved public traffic is allowed through the firewall to this server. Possible values are Enabled and Disabled.
+	// +kubebuilder:validation:Optional
+	PublicNetworkAccess *string `json:"publicNetworkAccess,omitempty" tf:"public_network_access,omitempty"`
+
 	// The replication role. Possible value is None.
 	// +kubebuilder:validation:Optional
 	ReplicationRole *string `json:"replicationRole,omitempty" tf:"replication_role,omitempty"`
@@ -330,7 +359,7 @@ type FlexibleServerParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The version of the MySQL Flexible Server to use. Possible values are 5.7, and 8.0.21. Changing this forces a new MySQL Flexible Server to be created.
+	// The version of the MySQL Flexible Server to use. Possible values are 5.7, and 8.0.21.
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
@@ -450,6 +479,9 @@ type StorageInitParameters struct {
 	// The storage IOPS for the MySQL Flexible Server. Possible values are between 360 and 20000.
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
+	// Should Storage Log On Disk be enabled? Defaults to false.
+	LogOnDiskEnabled *bool `json:"logOnDiskEnabled,omitempty" tf:"log_on_disk_enabled,omitempty"`
+
 	// The max storage allowed for the MySQL Flexible Server. Possible values are between 20 and 16384.
 	SizeGb *float64 `json:"sizeGb,omitempty" tf:"size_gb,omitempty"`
 }
@@ -464,6 +496,9 @@ type StorageObservation struct {
 
 	// The storage IOPS for the MySQL Flexible Server. Possible values are between 360 and 20000.
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+
+	// Should Storage Log On Disk be enabled? Defaults to false.
+	LogOnDiskEnabled *bool `json:"logOnDiskEnabled,omitempty" tf:"log_on_disk_enabled,omitempty"`
 
 	// The max storage allowed for the MySQL Flexible Server. Possible values are between 20 and 16384.
 	SizeGb *float64 `json:"sizeGb,omitempty" tf:"size_gb,omitempty"`
@@ -482,6 +517,10 @@ type StorageParameters struct {
 	// The storage IOPS for the MySQL Flexible Server. Possible values are between 360 and 20000.
 	// +kubebuilder:validation:Optional
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+
+	// Should Storage Log On Disk be enabled? Defaults to false.
+	// +kubebuilder:validation:Optional
+	LogOnDiskEnabled *bool `json:"logOnDiskEnabled,omitempty" tf:"log_on_disk_enabled,omitempty"`
 
 	// The max storage allowed for the MySQL Flexible Server. Possible values are between 20 and 16384.
 	// +kubebuilder:validation:Optional

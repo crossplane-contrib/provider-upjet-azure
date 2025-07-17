@@ -736,11 +736,6 @@ func (in *LabInitParameters) DeepCopyInto(out *LabInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.StorageType != nil {
-		in, out := &in.StorageType, &out.StorageType
-		*out = new(string)
-		**out = **in
-	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -844,11 +839,6 @@ func (in *LabObservation) DeepCopyInto(out *LabObservation) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.StorageType != nil {
-		in, out := &in.StorageType, &out.StorageType
-		*out = new(string)
-		**out = **in
-	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -904,11 +894,6 @@ func (in *LabParameters) DeepCopyInto(out *LabParameters) {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
-	}
-	if in.StorageType != nil {
-		in, out := &in.StorageType, &out.StorageType
-		*out = new(string)
-		**out = **in
 	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags

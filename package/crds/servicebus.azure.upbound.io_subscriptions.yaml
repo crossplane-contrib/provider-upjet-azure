@@ -691,9 +691,11 @@ spec:
                   autoDeleteOnIdle:
                     description: The idle interval after which the topic is automatically
                       deleted as an ISO 8601 duration. The minimum duration is 5 minutes
-                      or PT5M.
+                      or PT5M. Defaults to P10675199DT2H48M5.4775807S.
                     type: string
                   batchedOperationsEnabled:
+                    description: Boolean flag which controls whether the Subscription
+                      supports batched operations.
                     type: boolean
                   clientScopedSubscription:
                     description: A client_scoped_subscription block as defined below.
@@ -726,13 +728,9 @@ spec:
                     description: The Default message timespan to live as an ISO 8601
                       duration. This is the duration after which the message expires,
                       starting from when the message is sent to Service Bus. This
-                      is the default value used when TimeToLive is not set on a message
-                      itself.
+                      is the value used when TimeToLive is not set on a message itself.
+                      Defaults to P10675199DT2H48M5.4775807S.
                     type: string
-                  enableBatchedOperations:
-                    description: Boolean flag which controls whether the Subscription
-                      supports batched operations.
-                    type: boolean
                   forwardDeadLetteredMessagesTo:
                     description: The name of a Queue or Topic to automatically forward
                       Dead Letter messages to.
@@ -744,7 +742,7 @@ spec:
                   lockDuration:
                     description: The lock duration for the subscription as an ISO
                       8601 duration. The default value is 1 minute or P0DT0H1M0S .
-                      The maximum value is 5 minutes or P0DT0H5M0S .
+                      The maximum value is 5 minutes or P0DT0H5M0S . Defaults to PT1M.
                     type: string
                   maxDeliveryCount:
                     description: The maximum number of deliveries.
@@ -853,9 +851,11 @@ spec:
                   autoDeleteOnIdle:
                     description: The idle interval after which the topic is automatically
                       deleted as an ISO 8601 duration. The minimum duration is 5 minutes
-                      or PT5M.
+                      or PT5M. Defaults to P10675199DT2H48M5.4775807S.
                     type: string
                   batchedOperationsEnabled:
+                    description: Boolean flag which controls whether the Subscription
+                      supports batched operations.
                     type: boolean
                   clientScopedSubscription:
                     description: A client_scoped_subscription block as defined below.
@@ -888,13 +888,9 @@ spec:
                     description: The Default message timespan to live as an ISO 8601
                       duration. This is the duration after which the message expires,
                       starting from when the message is sent to Service Bus. This
-                      is the default value used when TimeToLive is not set on a message
-                      itself.
+                      is the value used when TimeToLive is not set on a message itself.
+                      Defaults to P10675199DT2H48M5.4775807S.
                     type: string
-                  enableBatchedOperations:
-                    description: Boolean flag which controls whether the Subscription
-                      supports batched operations.
-                    type: boolean
                   forwardDeadLetteredMessagesTo:
                     description: The name of a Queue or Topic to automatically forward
                       Dead Letter messages to.
@@ -906,7 +902,7 @@ spec:
                   lockDuration:
                     description: The lock duration for the subscription as an ISO
                       8601 duration. The default value is 1 minute or P0DT0H1M0S .
-                      The maximum value is 5 minutes or P0DT0H5M0S .
+                      The maximum value is 5 minutes or P0DT0H5M0S . Defaults to PT1M.
                     type: string
                   maxDeliveryCount:
                     description: The maximum number of deliveries.
@@ -1101,9 +1097,11 @@ spec:
                   autoDeleteOnIdle:
                     description: The idle interval after which the topic is automatically
                       deleted as an ISO 8601 duration. The minimum duration is 5 minutes
-                      or PT5M.
+                      or PT5M. Defaults to P10675199DT2H48M5.4775807S.
                     type: string
                   batchedOperationsEnabled:
+                    description: Boolean flag which controls whether the Subscription
+                      supports batched operations.
                     type: boolean
                   clientScopedSubscription:
                     description: A client_scoped_subscription block as defined below.
@@ -1141,13 +1139,9 @@ spec:
                     description: The Default message timespan to live as an ISO 8601
                       duration. This is the duration after which the message expires,
                       starting from when the message is sent to Service Bus. This
-                      is the default value used when TimeToLive is not set on a message
-                      itself.
+                      is the value used when TimeToLive is not set on a message itself.
+                      Defaults to P10675199DT2H48M5.4775807S.
                     type: string
-                  enableBatchedOperations:
-                    description: Boolean flag which controls whether the Subscription
-                      supports batched operations.
-                    type: boolean
                   forwardDeadLetteredMessagesTo:
                     description: The name of a Queue or Topic to automatically forward
                       Dead Letter messages to.
@@ -1162,7 +1156,7 @@ spec:
                   lockDuration:
                     description: The lock duration for the subscription as an ISO
                       8601 duration. The default value is 1 minute or P0DT0H1M0S .
-                      The maximum value is 5 minutes or P0DT0H5M0S .
+                      The maximum value is 5 minutes or P0DT0H5M0S . Defaults to PT1M.
                     type: string
                   maxDeliveryCount:
                     description: The maximum number of deliveries.

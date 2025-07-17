@@ -966,6 +966,10 @@ spec:
                           be uploaded. Changing this forces a new resource to be created.
                         type: string
                     type: object
+                  fileFormat:
+                    description: Format for export. Valid values are Csv only. Default
+                      is Csv.
+                    type: string
                   recurrencePeriodEndDate:
                     description: The date the export will stop capturing information.
                     type: string
@@ -1177,6 +1181,10 @@ spec:
                           be uploaded. Changing this forces a new resource to be created.
                         type: string
                     type: object
+                  fileFormat:
+                    description: Format for export. Valid values are Csv only. Default
+                      is Csv.
+                    type: string
                   recurrencePeriodEndDate:
                     description: The date the export will stop capturing information.
                     type: string
@@ -1493,6 +1501,10 @@ spec:
                           be uploaded. Changing this forces a new resource to be created.
                         type: string
                     type: object
+                  fileFormat:
+                    description: Format for export. Valid values are Csv only. Default
+                      is Csv.
+                    type: string
                   id:
                     description: The ID of the Cost Management Export for this Resource
                       Group.

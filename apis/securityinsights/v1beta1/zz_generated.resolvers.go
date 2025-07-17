@@ -26,14 +26,14 @@ func (mg *SentinelAlertRuleFusion) ResolveReferences( // ResolveReferences of th
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("operationsmanagement.azure.upbound.io", "v1beta2", "LogAnalyticsSolution", "LogAnalyticsSolutionList")
+		m, l, err = apisresolver.GetManagedResource("securityinsights.azure.upbound.io", "v1beta1", "SentinelLogAnalyticsWorkspaceOnboarding", "SentinelLogAnalyticsWorkspaceOnboardingList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogAnalyticsWorkspaceID),
-			Extract:      resource.ExtractParamPath("workspace_resource_id", false),
+			Extract:      resource.ExtractParamPath("workspace_id", false),
 			Reference:    mg.Spec.ForProvider.LogAnalyticsWorkspaceIDRef,
 			Selector:     mg.Spec.ForProvider.LogAnalyticsWorkspaceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -45,14 +45,14 @@ func (mg *SentinelAlertRuleFusion) ResolveReferences( // ResolveReferences of th
 	mg.Spec.ForProvider.LogAnalyticsWorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LogAnalyticsWorkspaceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("operationsmanagement.azure.upbound.io", "v1beta2", "LogAnalyticsSolution", "LogAnalyticsSolutionList")
+		m, l, err = apisresolver.GetManagedResource("securityinsights.azure.upbound.io", "v1beta1", "SentinelLogAnalyticsWorkspaceOnboarding", "SentinelLogAnalyticsWorkspaceOnboardingList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LogAnalyticsWorkspaceID),
-			Extract:      resource.ExtractParamPath("workspace_resource_id", false),
+			Extract:      resource.ExtractParamPath("workspace_id", false),
 			Reference:    mg.Spec.InitProvider.LogAnalyticsWorkspaceIDRef,
 			Selector:     mg.Spec.InitProvider.LogAnalyticsWorkspaceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -238,25 +238,6 @@ func (mg *SentinelLogAnalyticsWorkspaceOnboarding) ResolveReferences(ctx context
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
-			Extract:      reference.ExternalName(),
-			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
-			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
-	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
-	{
 		m, l, err = apisresolver.GetManagedResource("operationalinsights.azure.upbound.io", "v1beta2", "Workspace", "WorkspaceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
@@ -282,44 +263,6 @@ func (mg *SentinelLogAnalyticsWorkspaceOnboarding) ResolveReferences(ctx context
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WorkspaceName),
-			Extract:      resource.ExtractParamPath("name", true),
-			Reference:    mg.Spec.ForProvider.WorkspaceNameRef,
-			Selector:     mg.Spec.ForProvider.WorkspaceNameSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.WorkspaceName")
-	}
-	mg.Spec.ForProvider.WorkspaceName = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.WorkspaceNameRef = rsp.ResolvedReference
-	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
-			Extract:      reference.ExternalName(),
-			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
-			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
-	}
-	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
-	{
-		m, l, err = apisresolver.GetManagedResource("operationalinsights.azure.upbound.io", "v1beta2", "Workspace", "WorkspaceList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.WorkspaceID),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.WorkspaceIDRef,
@@ -332,25 +275,6 @@ func (mg *SentinelLogAnalyticsWorkspaceOnboarding) ResolveReferences(ctx context
 	}
 	mg.Spec.InitProvider.WorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.WorkspaceIDRef = rsp.ResolvedReference
-	{
-		m, l, err = apisresolver.GetManagedResource("operationalinsights.azure.upbound.io", "v1beta2", "Workspace", "WorkspaceList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.WorkspaceName),
-			Extract:      resource.ExtractParamPath("name", true),
-			Reference:    mg.Spec.InitProvider.WorkspaceNameRef,
-			Selector:     mg.Spec.InitProvider.WorkspaceNameSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.WorkspaceName")
-	}
-	mg.Spec.InitProvider.WorkspaceName = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.WorkspaceNameRef = rsp.ResolvedReference
 
 	return nil
 }

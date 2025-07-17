@@ -15,8 +15,8 @@ spec:
     - format: OpenAI
       name: text-curie-001
       version: "1"
-    scale:
-    - type: Standard
+    sku:
+    - name: Standard
 
 ---
 

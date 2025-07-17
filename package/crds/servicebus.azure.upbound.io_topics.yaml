@@ -76,43 +76,36 @@ spec:
                   autoDeleteOnIdle:
                     description: The ISO 8601 timespan duration of the idle interval
                       after which the Topic is automatically deleted, minimum of 5
-                      minutes.
+                      minutes. Defaults to P10675199DT2H48M5.4775807S.
                     type: string
                   batchedOperationsEnabled:
+                    description: Boolean flag which controls if server-side batched
+                      operations are enabled.
                     type: boolean
                   defaultMessageTtl:
                     description: The ISO 8601 timespan duration of TTL of messages
                       sent to this topic if no TTL value is set on the message itself.
+                      Defaults to P10675199DT2H48M5.4775807S.
                     type: string
                   duplicateDetectionHistoryTimeWindow:
                     description: The ISO 8601 timespan duration during which duplicates
-                      can be detected. Defaults to 10 minutes. (PT10M)
+                      can be detected. Defaults to PT10M (10 Minutes).
                     type: string
-                  enableBatchedOperations:
-                    description: Boolean flag which controls if server-side batched
-                      operations are enabled.
-                    type: boolean
-                  enableExpress:
+                  expressEnabled:
                     description: Boolean flag which controls whether Express Entities
                       are enabled. An express topic holds a message in memory temporarily
                       before writing it to persistent storage.
-                    type: boolean
-                  enablePartitioning:
-                    description: Boolean flag which controls whether to enable the
-                      topic to be partitioned across multiple message brokers. Changing
-                      this forces a new resource to be created.
-                    type: boolean
-                  expressEnabled:
                     type: boolean
                   maxMessageSizeInKilobytes:
                     description: Integer value which controls the maximum size of
                       a message allowed on the topic for Premium SKU. For supported
                       values see the "Large messages support" section of this document.
+                      Defaults to 256.
                     type: number
                   maxSizeInMegabytes:
                     description: Integer value which controls the size of memory allocated
                       for the topic. For supported values see the "Queue/topic size"
-                      section of this document.
+                      section of this document. Defaults to 5120.
                     type: number
                   namespaceId:
                     description: The ID of the ServiceBus Namespace to create this
@@ -195,6 +188,9 @@ spec:
                         type: object
                     type: object
                   partitioningEnabled:
+                    description: Boolean flag which controls whether to enable the
+                      topic to be partitioned across multiple message brokers. Changing
+                      this forces a new resource to be created.
                     type: boolean
                   requiresDuplicateDetection:
                     description: Boolean flag which controls whether the Topic requires
@@ -226,45 +222,41 @@ spec:
                   autoDeleteOnIdle:
                     description: The ISO 8601 timespan duration of the idle interval
                       after which the Topic is automatically deleted, minimum of 5
-                      minutes.
+                      minutes. Defaults to P10675199DT2H48M5.4775807S.
                     type: string
                   batchedOperationsEnabled:
+                    description: Boolean flag which controls if server-side batched
+                      operations are enabled.
                     type: boolean
                   defaultMessageTtl:
                     description: The ISO 8601 timespan duration of TTL of messages
                       sent to this topic if no TTL value is set on the message itself.
+                      Defaults to P10675199DT2H48M5.4775807S.
                     type: string
                   duplicateDetectionHistoryTimeWindow:
                     description: The ISO 8601 timespan duration during which duplicates
-                      can be detected. Defaults to 10 minutes. (PT10M)
+                      can be detected. Defaults to PT10M (10 Minutes).
                     type: string
-                  enableBatchedOperations:
-                    description: Boolean flag which controls if server-side batched
-                      operations are enabled.
-                    type: boolean
-                  enableExpress:
+                  expressEnabled:
                     description: Boolean flag which controls whether Express Entities
                       are enabled. An express topic holds a message in memory temporarily
                       before writing it to persistent storage.
-                    type: boolean
-                  enablePartitioning:
-                    description: Boolean flag which controls whether to enable the
-                      topic to be partitioned across multiple message brokers. Changing
-                      this forces a new resource to be created.
-                    type: boolean
-                  expressEnabled:
                     type: boolean
                   maxMessageSizeInKilobytes:
                     description: Integer value which controls the maximum size of
                       a message allowed on the topic for Premium SKU. For supported
                       values see the "Large messages support" section of this document.
+                      Defaults to 256.
                     type: number
                   maxSizeInMegabytes:
                     description: Integer value which controls the size of memory allocated
                       for the topic. For supported values see the "Queue/topic size"
-                      section of this document.
+                      section of this document. Defaults to 5120.
                     type: number
                   partitioningEnabled:
+                    description: Boolean flag which controls whether to enable the
+                      topic to be partitioned across multiple message brokers. Changing
+                      this forces a new resource to be created.
                     type: boolean
                   requiresDuplicateDetection:
                     description: Boolean flag which controls whether the Topic requires
@@ -455,33 +447,25 @@ spec:
                   autoDeleteOnIdle:
                     description: The ISO 8601 timespan duration of the idle interval
                       after which the Topic is automatically deleted, minimum of 5
-                      minutes.
+                      minutes. Defaults to P10675199DT2H48M5.4775807S.
                     type: string
                   batchedOperationsEnabled:
+                    description: Boolean flag which controls if server-side batched
+                      operations are enabled.
                     type: boolean
                   defaultMessageTtl:
                     description: The ISO 8601 timespan duration of TTL of messages
                       sent to this topic if no TTL value is set on the message itself.
+                      Defaults to P10675199DT2H48M5.4775807S.
                     type: string
                   duplicateDetectionHistoryTimeWindow:
                     description: The ISO 8601 timespan duration during which duplicates
-                      can be detected. Defaults to 10 minutes. (PT10M)
+                      can be detected. Defaults to PT10M (10 Minutes).
                     type: string
-                  enableBatchedOperations:
-                    description: Boolean flag which controls if server-side batched
-                      operations are enabled.
-                    type: boolean
-                  enableExpress:
+                  expressEnabled:
                     description: Boolean flag which controls whether Express Entities
                       are enabled. An express topic holds a message in memory temporarily
                       before writing it to persistent storage.
-                    type: boolean
-                  enablePartitioning:
-                    description: Boolean flag which controls whether to enable the
-                      topic to be partitioned across multiple message brokers. Changing
-                      this forces a new resource to be created.
-                    type: boolean
-                  expressEnabled:
                     type: boolean
                   id:
                     description: The ServiceBus Topic ID.
@@ -490,17 +474,21 @@ spec:
                     description: Integer value which controls the maximum size of
                       a message allowed on the topic for Premium SKU. For supported
                       values see the "Large messages support" section of this document.
+                      Defaults to 256.
                     type: number
                   maxSizeInMegabytes:
                     description: Integer value which controls the size of memory allocated
                       for the topic. For supported values see the "Queue/topic size"
-                      section of this document.
+                      section of this document. Defaults to 5120.
                     type: number
                   namespaceId:
                     description: The ID of the ServiceBus Namespace to create this
                       topic in. Changing this forces a new resource to be created.
                     type: string
                   partitioningEnabled:
+                    description: Boolean flag which controls whether to enable the
+                      topic to be partitioned across multiple message brokers. Changing
+                      this forces a new resource to be created.
                     type: boolean
                   requiresDuplicateDetection:
                     description: Boolean flag which controls whether the Topic requires

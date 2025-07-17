@@ -991,6 +991,10 @@ spec:
                   description:
                     description: A description of this Shared Image.
                     type: string
+                  diskControllerTypeNvmeEnabled:
+                    description: Specifies if the Shared Image supports NVMe disks.
+                      Changing this forces a new resource to be created.
+                    type: boolean
                   diskTypesNotAllowed:
                     description: One or more Disk Types not allowed for the Image.
                       Possible values include Standard_LRS and Premium_LRS.
@@ -1086,6 +1090,10 @@ spec:
                             type: string
                         type: object
                     type: object
+                  hibernationEnabled:
+                    description: Specifies if the Shared Image supports hibernation.
+                      Changing this forces a new resource to be created.
+                    type: boolean
                   hyperVGeneration:
                     description: The generation of HyperV that the Virtual Machine
                       used to create the Shared Image is based on. Possible values
@@ -1297,6 +1305,10 @@ spec:
                   description:
                     description: A description of this Shared Image.
                     type: string
+                  diskControllerTypeNvmeEnabled:
+                    description: Specifies if the Shared Image supports NVMe disks.
+                      Changing this forces a new resource to be created.
+                    type: boolean
                   diskTypesNotAllowed:
                     description: One or more Disk Types not allowed for the Image.
                       Possible values include Standard_LRS and Premium_LRS.
@@ -1311,6 +1323,10 @@ spec:
                     description: The End User Licence Agreement for the Shared Image.
                       Changing this forces a new resource to be created.
                     type: string
+                  hibernationEnabled:
+                    description: Specifies if the Shared Image supports hibernation.
+                      Changing this forces a new resource to be created.
+                    type: boolean
                   hyperVGeneration:
                     description: The generation of HyperV that the Virtual Machine
                       used to create the Shared Image is based on. Possible values
@@ -1613,6 +1629,10 @@ spec:
                   description:
                     description: A description of this Shared Image.
                     type: string
+                  diskControllerTypeNvmeEnabled:
+                    description: Specifies if the Shared Image supports NVMe disks.
+                      Changing this forces a new resource to be created.
+                    type: boolean
                   diskTypesNotAllowed:
                     description: One or more Disk Types not allowed for the Image.
                       Possible values include Standard_LRS and Premium_LRS.
@@ -1632,6 +1652,10 @@ spec:
                       which this Shared Image should exist. Changing this forces a
                       new resource to be created.
                     type: string
+                  hibernationEnabled:
+                    description: Specifies if the Shared Image supports hibernation.
+                      Changing this forces a new resource to be created.
+                    type: boolean
                   hyperVGeneration:
                     description: The generation of HyperV that the Virtual Machine
                       used to create the Shared Image is based on. Possible values

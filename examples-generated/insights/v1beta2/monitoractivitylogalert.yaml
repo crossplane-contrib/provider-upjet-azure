@@ -21,6 +21,7 @@ spec:
         matchLabels:
           testing.upbound.io/example-name: to_monitor
     description: This alert will monitor a specific storage account updates.
+    location: West Europe
     name: example-activitylogalert
     resourceGroupNameSelector:
       matchLabels:

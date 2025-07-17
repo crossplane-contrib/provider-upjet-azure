@@ -25,6 +25,9 @@ type EventGridDataConnectionInitParameters struct {
 	DatabaseRoutingType *string `json:"databaseRoutingType,omitempty" tf:"database_routing_type,omitempty"`
 
 	// The resource ID of the event grid that is subscribed to the storage account events.
+	EventGridEventSubscriptionID *string `json:"eventgridEventSubscriptionId,omitempty" tf:"eventgrid_event_subscription_id,omitempty"`
+
+	// The ID of the Kusto Event Grid Data Connection.
 	EventGridResourceID *string `json:"eventgridResourceId,omitempty" tf:"eventgrid_resource_id,omitempty"`
 
 	// Specifies the Event Hub consumer group this data connection will use for ingestion. Changing this forces a new resource to be created.
@@ -56,6 +59,9 @@ type EventGridDataConnectionInitParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Empty for non-managed identity based data connection. For system assigned identity, provide cluster resource Id. For user assigned identity (UAI) provide the UAI resource Id.
+	ManagedIdentityID *string `json:"managedIdentityId,omitempty" tf:"managed_identity_id,omitempty"`
+
+	// The ID of the Kusto Event Grid Data Connection.
 	ManagedIdentityResourceID *string `json:"managedIdentityResourceId,omitempty" tf:"managed_identity_resource_id,omitempty"`
 
 	// Specifies the mapping rule used for the message ingestion. Mapping rule must exist before resource is created.
@@ -99,6 +105,9 @@ type EventGridDataConnectionObservation struct {
 	DatabaseRoutingType *string `json:"databaseRoutingType,omitempty" tf:"database_routing_type,omitempty"`
 
 	// The resource ID of the event grid that is subscribed to the storage account events.
+	EventGridEventSubscriptionID *string `json:"eventgridEventSubscriptionId,omitempty" tf:"eventgrid_event_subscription_id,omitempty"`
+
+	// The ID of the Kusto Event Grid Data Connection.
 	EventGridResourceID *string `json:"eventgridResourceId,omitempty" tf:"eventgrid_resource_id,omitempty"`
 
 	// Specifies the Event Hub consumer group this data connection will use for ingestion. Changing this forces a new resource to be created.
@@ -114,6 +123,9 @@ type EventGridDataConnectionObservation struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Empty for non-managed identity based data connection. For system assigned identity, provide cluster resource Id. For user assigned identity (UAI) provide the UAI resource Id.
+	ManagedIdentityID *string `json:"managedIdentityId,omitempty" tf:"managed_identity_id,omitempty"`
+
+	// The ID of the Kusto Event Grid Data Connection.
 	ManagedIdentityResourceID *string `json:"managedIdentityResourceId,omitempty" tf:"managed_identity_resource_id,omitempty"`
 
 	// Specifies the mapping rule used for the message ingestion. Mapping rule must exist before resource is created.
@@ -174,6 +186,10 @@ type EventGridDataConnectionParameters struct {
 
 	// The resource ID of the event grid that is subscribed to the storage account events.
 	// +kubebuilder:validation:Optional
+	EventGridEventSubscriptionID *string `json:"eventgridEventSubscriptionId,omitempty" tf:"eventgrid_event_subscription_id,omitempty"`
+
+	// The ID of the Kusto Event Grid Data Connection.
+	// +kubebuilder:validation:Optional
 	EventGridResourceID *string `json:"eventgridResourceId,omitempty" tf:"eventgrid_resource_id,omitempty"`
 
 	// Specifies the Event Hub consumer group this data connection will use for ingestion. Changing this forces a new resource to be created.
@@ -208,6 +224,10 @@ type EventGridDataConnectionParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Empty for non-managed identity based data connection. For system assigned identity, provide cluster resource Id. For user assigned identity (UAI) provide the UAI resource Id.
+	// +kubebuilder:validation:Optional
+	ManagedIdentityID *string `json:"managedIdentityId,omitempty" tf:"managed_identity_id,omitempty"`
+
+	// The ID of the Kusto Event Grid Data Connection.
 	// +kubebuilder:validation:Optional
 	ManagedIdentityResourceID *string `json:"managedIdentityResourceId,omitempty" tf:"managed_identity_resource_id,omitempty"`
 

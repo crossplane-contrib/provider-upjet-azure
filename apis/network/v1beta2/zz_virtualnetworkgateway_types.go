@@ -697,7 +697,7 @@ type VirtualNetworkGatewayInitParameters struct {
 	// The Generation of the Virtual Network gateway. Possible values include Generation1, Generation2 or None. Changing this forces a new resource to be created.
 	Generation *string `json:"generation,omitempty" tf:"generation,omitempty"`
 
-	// One or more (up to 3) ip_configuration blocks documented below.
+	// One or more (up to 3) ip_configuration blocks documented below. Changing this forces a new resource to be created.
 	// An active-standby gateway requires exactly one ip_configuration block,
 	// an active-active gateway requires exactly two ip_configuration blocks whereas
 	// an active-active zone redundant gateway with P2S configuration requires exactly three ip_configuration blocks.
@@ -770,7 +770,7 @@ type VirtualNetworkGatewayObservation struct {
 	// The ID of the Virtual Network Gateway.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// One or more (up to 3) ip_configuration blocks documented below.
+	// One or more (up to 3) ip_configuration blocks documented below. Changing this forces a new resource to be created.
 	// An active-standby gateway requires exactly one ip_configuration block,
 	// an active-active gateway requires exactly two ip_configuration blocks whereas
 	// an active-active zone redundant gateway with P2S configuration requires exactly three ip_configuration blocks.
@@ -852,7 +852,7 @@ type VirtualNetworkGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	Generation *string `json:"generation,omitempty" tf:"generation,omitempty"`
 
-	// One or more (up to 3) ip_configuration blocks documented below.
+	// One or more (up to 3) ip_configuration blocks documented below. Changing this forces a new resource to be created.
 	// An active-standby gateway requires exactly one ip_configuration block,
 	// an active-active gateway requires exactly two ip_configuration blocks whereas
 	// an active-active zone redundant gateway with P2S configuration requires exactly three ip_configuration blocks.

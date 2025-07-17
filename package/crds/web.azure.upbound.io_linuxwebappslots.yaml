@@ -6411,13 +6411,9 @@ spec:
                       applicationStack:
                         description: A application_stack block as defined above.
                         properties:
-                          dockerImage:
-                            type: string
                           dockerImageName:
                             description: The docker image, including tag, to be used.
                               e.g. appsvc/staticsite:latest.
-                            type: string
-                          dockerImageTag:
                             type: string
                           dockerRegistryPasswordSecretRef:
                             description: The User Name to use for authentication against
@@ -6449,7 +6445,7 @@ spec:
                             type: string
                           dotnetVersion:
                             description: The version of .NET to use. Possible values
-                              include 3.1, 5.0, 6.0, 7.0 and 8.0.
+                              include 3.1, 5.0, 6.0, 7.0, 8.0 and 9.0.
                             type: string
                           goVersion:
                             description: The version of Go to use. Possible values
@@ -6468,8 +6464,8 @@ spec:
                             type: string
                           nodeVersion:
                             description: The version of Node to run. Possible values
-                              are 12-lts, 14-lts, 16-lts, 18-lts and 20-lts. This
-                              property conflicts with java_version.
+                              are 12-lts, 14-lts, 16-lts, 18-lts, 20-lts and 22-lts.
+                              This property conflicts with java_version.
                             type: string
                           phpVersion:
                             description: The version of PHP to run. Possible values
@@ -6477,17 +6473,13 @@ spec:
                             type: string
                           pythonVersion:
                             description: The version of Python to run. Possible values
-                              include 3.7, 3.8, 3.9, 3.10, 3.11 and 3.12.
+                              include 3.13, 3.12, 3.11, 3.10, 3.9, 3.8 and 3.7.
                             type: string
                           rubyVersion:
                             description: The version of Ruby to run. Possible values
                               include 2.6 and 2.7.
                             type: string
                         type: object
-                      autoHealEnabled:
-                        description: Should Auto heal rules be enabled? Required with
-                          auto_heal_setting.
-                        type: boolean
                       autoHealSetting:
                         description: A auto_heal_setting block as defined above. Required
                           with auto_heal.
@@ -6532,10 +6524,6 @@ spec:
                                     type: number
                                   interval:
                                     description: The time interval in the form hh:mm:ss.
-                                    type: string
-                                  path:
-                                    description: The path to which this rule status
-                                      code applies.
                                     type: string
                                   timeTaken:
                                     description: The threshold of time passed to qualify
@@ -6826,8 +6814,8 @@ spec:
                           to false.
                         type: boolean
                       remoteDebuggingVersion:
-                        description: The Remote Debugging Version. Possible values
-                          include VS2017, VS2019 and VS2022
+                        description: The Remote Debugging Version. Currently only
+                          VS2022 is supported.
                         type: string
                       scmIpRestriction:
                         description: One or more scm_ip_restriction blocks as defined
@@ -7056,6 +7044,10 @@ spec:
                       Linux Web App.
                     type: object
                     x-kubernetes-map-type: granular
+                  virtualNetworkBackupRestoreEnabled:
+                    description: Whether backup and restore operations over the linked
+                      virtual network are enabled. Defaults to false.
+                    type: boolean
                   virtualNetworkSubnetId:
                     description: The subnet id which will be used by this Web App
                       Slot for regional virtual network integration.
@@ -8177,13 +8169,9 @@ spec:
                       applicationStack:
                         description: A application_stack block as defined above.
                         properties:
-                          dockerImage:
-                            type: string
                           dockerImageName:
                             description: The docker image, including tag, to be used.
                               e.g. appsvc/staticsite:latest.
-                            type: string
-                          dockerImageTag:
                             type: string
                           dockerRegistryPasswordSecretRef:
                             description: The User Name to use for authentication against
@@ -8215,7 +8203,7 @@ spec:
                             type: string
                           dotnetVersion:
                             description: The version of .NET to use. Possible values
-                              include 3.1, 5.0, 6.0, 7.0 and 8.0.
+                              include 3.1, 5.0, 6.0, 7.0, 8.0 and 9.0.
                             type: string
                           goVersion:
                             description: The version of Go to use. Possible values
@@ -8234,8 +8222,8 @@ spec:
                             type: string
                           nodeVersion:
                             description: The version of Node to run. Possible values
-                              are 12-lts, 14-lts, 16-lts, 18-lts and 20-lts. This
-                              property conflicts with java_version.
+                              are 12-lts, 14-lts, 16-lts, 18-lts, 20-lts and 22-lts.
+                              This property conflicts with java_version.
                             type: string
                           phpVersion:
                             description: The version of PHP to run. Possible values
@@ -8243,17 +8231,13 @@ spec:
                             type: string
                           pythonVersion:
                             description: The version of Python to run. Possible values
-                              include 3.7, 3.8, 3.9, 3.10, 3.11 and 3.12.
+                              include 3.13, 3.12, 3.11, 3.10, 3.9, 3.8 and 3.7.
                             type: string
                           rubyVersion:
                             description: The version of Ruby to run. Possible values
                               include 2.6 and 2.7.
                             type: string
                         type: object
-                      autoHealEnabled:
-                        description: Should Auto heal rules be enabled? Required with
-                          auto_heal_setting.
-                        type: boolean
                       autoHealSetting:
                         description: A auto_heal_setting block as defined above. Required
                           with auto_heal.
@@ -8298,10 +8282,6 @@ spec:
                                     type: number
                                   interval:
                                     description: The time interval in the form hh:mm:ss.
-                                    type: string
-                                  path:
-                                    description: The path to which this rule status
-                                      code applies.
                                     type: string
                                   timeTaken:
                                     description: The threshold of time passed to qualify
@@ -8592,8 +8572,8 @@ spec:
                           to false.
                         type: boolean
                       remoteDebuggingVersion:
-                        description: The Remote Debugging Version. Possible values
-                          include VS2017, VS2019 and VS2022
+                        description: The Remote Debugging Version. Currently only
+                          VS2022 is supported.
                         type: string
                       scmIpRestriction:
                         description: One or more scm_ip_restriction blocks as defined
@@ -8824,6 +8804,10 @@ spec:
                       Linux Web App.
                     type: object
                     x-kubernetes-map-type: granular
+                  virtualNetworkBackupRestoreEnabled:
+                    description: Whether backup and restore operations over the linked
+                      virtual network are enabled. Defaults to false.
+                    type: boolean
                   virtualNetworkSubnetId:
                     description: The subnet id which will be used by this Web App
                       Slot for regional virtual network integration.
@@ -9949,13 +9933,9 @@ spec:
                       applicationStack:
                         description: A application_stack block as defined above.
                         properties:
-                          dockerImage:
-                            type: string
                           dockerImageName:
                             description: The docker image, including tag, to be used.
                               e.g. appsvc/staticsite:latest.
-                            type: string
-                          dockerImageTag:
                             type: string
                           dockerRegistryUrl:
                             description: The URL of the container registry where the
@@ -9969,7 +9949,7 @@ spec:
                             type: string
                           dotnetVersion:
                             description: The version of .NET to use. Possible values
-                              include 3.1, 5.0, 6.0, 7.0 and 8.0.
+                              include 3.1, 5.0, 6.0, 7.0, 8.0 and 9.0.
                             type: string
                           goVersion:
                             description: The version of Go to use. Possible values
@@ -9988,8 +9968,8 @@ spec:
                             type: string
                           nodeVersion:
                             description: The version of Node to run. Possible values
-                              are 12-lts, 14-lts, 16-lts, 18-lts and 20-lts. This
-                              property conflicts with java_version.
+                              are 12-lts, 14-lts, 16-lts, 18-lts, 20-lts and 22-lts.
+                              This property conflicts with java_version.
                             type: string
                           phpVersion:
                             description: The version of PHP to run. Possible values
@@ -9997,17 +9977,13 @@ spec:
                             type: string
                           pythonVersion:
                             description: The version of Python to run. Possible values
-                              include 3.7, 3.8, 3.9, 3.10, 3.11 and 3.12.
+                              include 3.13, 3.12, 3.11, 3.10, 3.9, 3.8 and 3.7.
                             type: string
                           rubyVersion:
                             description: The version of Ruby to run. Possible values
                               include 2.6 and 2.7.
                             type: string
                         type: object
-                      autoHealEnabled:
-                        description: Should Auto heal rules be enabled? Required with
-                          auto_heal_setting.
-                        type: boolean
                       autoHealSetting:
                         description: A auto_heal_setting block as defined above. Required
                           with auto_heal.
@@ -10052,10 +10028,6 @@ spec:
                                     type: number
                                   interval:
                                     description: The time interval in the form hh:mm:ss.
-                                    type: string
-                                  path:
-                                    description: The path to which this rule status
-                                      code applies.
                                     type: string
                                   timeTaken:
                                     description: The threshold of time passed to qualify
@@ -10276,8 +10248,8 @@ spec:
                           to false.
                         type: boolean
                       remoteDebuggingVersion:
-                        description: The Remote Debugging Version. Possible values
-                          include VS2017, VS2019 and VS2022
+                        description: The Remote Debugging Version. Currently only
+                          VS2022 is supported.
                         type: string
                       scmIpRestriction:
                         description: One or more scm_ip_restriction blocks as defined
@@ -10415,6 +10387,10 @@ spec:
                       Linux Web App.
                     type: object
                     x-kubernetes-map-type: granular
+                  virtualNetworkBackupRestoreEnabled:
+                    description: Whether backup and restore operations over the linked
+                      virtual network are enabled. Defaults to false.
+                    type: boolean
                   virtualNetworkSubnetId:
                     description: The subnet id which will be used by this Web App
                       Slot for regional virtual network integration.

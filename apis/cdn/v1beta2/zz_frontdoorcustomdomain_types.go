@@ -106,7 +106,7 @@ type TLSInitParameters struct {
 	// Defines the source of the SSL certificate. Possible values include CustomerCertificate and ManagedCertificate. Defaults to ManagedCertificate.
 	CertificateType *string `json:"certificateType,omitempty" tf:"certificate_type,omitempty"`
 
-	// TLS protocol version that will be used for Https. Possible values include TLS10 and TLS12. Defaults to TLS12.
+	// TLS protocol version that will be used for Https. Possible values are TLS12. Defaults to TLS12.
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 }
 
@@ -118,7 +118,7 @@ type TLSObservation struct {
 	// Defines the source of the SSL certificate. Possible values include CustomerCertificate and ManagedCertificate. Defaults to ManagedCertificate.
 	CertificateType *string `json:"certificateType,omitempty" tf:"certificate_type,omitempty"`
 
-	// TLS protocol version that will be used for Https. Possible values include TLS10 and TLS12. Defaults to TLS12.
+	// TLS protocol version that will be used for Https. Possible values are TLS12. Defaults to TLS12.
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 }
 
@@ -132,7 +132,7 @@ type TLSParameters struct {
 	// +kubebuilder:validation:Optional
 	CertificateType *string `json:"certificateType,omitempty" tf:"certificate_type,omitempty"`
 
-	// TLS protocol version that will be used for Https. Possible values include TLS10 and TLS12. Defaults to TLS12.
+	// TLS protocol version that will be used for Https. Possible values are TLS12. Defaults to TLS12.
 	// +kubebuilder:validation:Optional
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 }

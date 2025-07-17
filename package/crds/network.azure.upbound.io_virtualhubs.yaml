@@ -195,7 +195,7 @@ spec:
                     x-kubernetes-map-type: granular
                   virtualRouterAutoScaleMinCapacity:
                     description: Minimum instance capacity for the scaling configuration
-                      of the Virtual Hub Router.
+                      of the Virtual Hub Router. Defaults to 2.
                     type: number
                   virtualWanId:
                     description: The ID of a Virtual WAN within which the Virtual
@@ -333,7 +333,7 @@ spec:
                     x-kubernetes-map-type: granular
                   virtualRouterAutoScaleMinCapacity:
                     description: Minimum instance capacity for the scaling configuration
-                      of the Virtual Hub Router.
+                      of the Virtual Hub Router. Defaults to 2.
                     type: number
                   virtualWanId:
                     description: The ID of a Virtual WAN within which the Virtual
@@ -651,7 +651,7 @@ spec:
                     type: number
                   virtualRouterAutoScaleMinCapacity:
                     description: Minimum instance capacity for the scaling configuration
-                      of the Virtual Hub Router.
+                      of the Virtual Hub Router. Defaults to 2.
                     type: number
                   virtualRouterIps:
                     description: The IP addresses of the Virtual Hub BGP router.

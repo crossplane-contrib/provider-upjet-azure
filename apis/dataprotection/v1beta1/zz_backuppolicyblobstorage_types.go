@@ -21,9 +21,6 @@ type BackupPolicyBlobStorageInitParameters struct {
 	// The duration of operational default retention rule. It should follow ISO 8601 duration format. Changing this forces a new Backup Policy Blob Storage to be created.
 	OperationalDefaultRetentionDuration *string `json:"operationalDefaultRetentionDuration,omitempty" tf:"operational_default_retention_duration,omitempty"`
 
-	// Duration of deletion after given timespan. It should follow ISO 8601 duration format. Changing this forces a new Backup Policy Blob Storage to be created.
-	RetentionDuration *string `json:"retentionDuration,omitempty" tf:"retention_duration,omitempty"`
-
 	// One or more retention_rule blocks as defined below. Changing this forces a new Backup Policy Blob Storage to be created.
 	RetentionRule []BackupPolicyBlobStorageRetentionRuleInitParameters `json:"retentionRule,omitempty" tf:"retention_rule,omitempty"`
 
@@ -44,9 +41,6 @@ type BackupPolicyBlobStorageObservation struct {
 
 	// The duration of operational default retention rule. It should follow ISO 8601 duration format. Changing this forces a new Backup Policy Blob Storage to be created.
 	OperationalDefaultRetentionDuration *string `json:"operationalDefaultRetentionDuration,omitempty" tf:"operational_default_retention_duration,omitempty"`
-
-	// Duration of deletion after given timespan. It should follow ISO 8601 duration format. Changing this forces a new Backup Policy Blob Storage to be created.
-	RetentionDuration *string `json:"retentionDuration,omitempty" tf:"retention_duration,omitempty"`
 
 	// One or more retention_rule blocks as defined below. Changing this forces a new Backup Policy Blob Storage to be created.
 	RetentionRule []BackupPolicyBlobStorageRetentionRuleObservation `json:"retentionRule,omitempty" tf:"retention_rule,omitempty"`
@@ -70,10 +64,6 @@ type BackupPolicyBlobStorageParameters struct {
 	// The duration of operational default retention rule. It should follow ISO 8601 duration format. Changing this forces a new Backup Policy Blob Storage to be created.
 	// +kubebuilder:validation:Optional
 	OperationalDefaultRetentionDuration *string `json:"operationalDefaultRetentionDuration,omitempty" tf:"operational_default_retention_duration,omitempty"`
-
-	// Duration of deletion after given timespan. It should follow ISO 8601 duration format. Changing this forces a new Backup Policy Blob Storage to be created.
-	// +kubebuilder:validation:Optional
-	RetentionDuration *string `json:"retentionDuration,omitempty" tf:"retention_duration,omitempty"`
 
 	// One or more retention_rule blocks as defined below. Changing this forces a new Backup Policy Blob Storage to be created.
 	// +kubebuilder:validation:Optional
@@ -240,7 +230,7 @@ type LifeCycleInitParameters struct {
 	// The type of data store. The only possible value is VaultStore. Changing this forces a new Backup Policy Blob Storage to be created.
 	DataStoreType *string `json:"dataStoreType,omitempty" tf:"data_store_type,omitempty"`
 
-	// Duration after which the backup is deleted. It should follow ISO 8601 duration format. Changing this forces a new Backup Policy Blob Storage to be created.
+	// The retention duration up to which the backups are to be retained in the data stores. It should follow ISO 8601 duration format. Changing this forces a new Backup Policy Blob Storage to be created.
 	Duration *string `json:"duration,omitempty" tf:"duration,omitempty"`
 }
 
@@ -249,7 +239,7 @@ type LifeCycleObservation struct {
 	// The type of data store. The only possible value is VaultStore. Changing this forces a new Backup Policy Blob Storage to be created.
 	DataStoreType *string `json:"dataStoreType,omitempty" tf:"data_store_type,omitempty"`
 
-	// Duration after which the backup is deleted. It should follow ISO 8601 duration format. Changing this forces a new Backup Policy Blob Storage to be created.
+	// The retention duration up to which the backups are to be retained in the data stores. It should follow ISO 8601 duration format. Changing this forces a new Backup Policy Blob Storage to be created.
 	Duration *string `json:"duration,omitempty" tf:"duration,omitempty"`
 }
 
@@ -259,7 +249,7 @@ type LifeCycleParameters struct {
 	// +kubebuilder:validation:Optional
 	DataStoreType *string `json:"dataStoreType" tf:"data_store_type,omitempty"`
 
-	// Duration after which the backup is deleted. It should follow ISO 8601 duration format. Changing this forces a new Backup Policy Blob Storage to be created.
+	// The retention duration up to which the backups are to be retained in the data stores. It should follow ISO 8601 duration format. Changing this forces a new Backup Policy Blob Storage to be created.
 	// +kubebuilder:validation:Optional
 	Duration *string `json:"duration" tf:"duration,omitempty"`
 }

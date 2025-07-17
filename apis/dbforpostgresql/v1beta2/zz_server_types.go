@@ -43,8 +43,14 @@ type ServerInitParameters struct {
 	// The Administrator login for the PostgreSQL Server. Required when create_mode is Default. Changing this forces a new resource to be created.
 	AdministratorLogin *string `json:"administratorLogin,omitempty" tf:"administrator_login,omitempty"`
 
-	// The Password associated with the administrator_login for the PostgreSQL Server. Required when create_mode is Default.
+	// The Password associated with the administrator_login for the PostgreSQL Server.
 	AdministratorLoginPasswordSecretRef *v1.SecretKeySelector `json:"administratorLoginPasswordSecretRef,omitempty" tf:"-"`
+
+	// The Password associated with the administrator_login for the PostgreSQL Server.
+	AdministratorLoginPasswordWo *string `json:"administratorLoginPasswordWo,omitempty" tf:"administrator_login_password_wo,omitempty"`
+
+	// An integer value used to trigger an update for administrator_login_password_wo. This property should be incremented when updating administrator_login_password_wo.
+	AdministratorLoginPasswordWoVersion *float64 `json:"administratorLoginPasswordWoVersion,omitempty" tf:"administrator_login_password_wo_version,omitempty"`
 
 	// Enable/Disable auto-growing of the storage. Storage auto-grow prevents your server from running out of storage and becoming read-only. If storage auto grow is enabled, the storage automatically grows without impacting the workload. Defaults to true.
 	AutoGrowEnabled *bool `json:"autoGrowEnabled,omitempty" tf:"auto_grow_enabled,omitempty"`
@@ -103,6 +109,12 @@ type ServerObservation struct {
 
 	// The Administrator login for the PostgreSQL Server. Required when create_mode is Default. Changing this forces a new resource to be created.
 	AdministratorLogin *string `json:"administratorLogin,omitempty" tf:"administrator_login,omitempty"`
+
+	// The Password associated with the administrator_login for the PostgreSQL Server.
+	AdministratorLoginPasswordWo *string `json:"administratorLoginPasswordWo,omitempty" tf:"administrator_login_password_wo,omitempty"`
+
+	// An integer value used to trigger an update for administrator_login_password_wo. This property should be incremented when updating administrator_login_password_wo.
+	AdministratorLoginPasswordWoVersion *float64 `json:"administratorLoginPasswordWoVersion,omitempty" tf:"administrator_login_password_wo_version,omitempty"`
 
 	// Enable/Disable auto-growing of the storage. Storage auto-grow prevents your server from running out of storage and becoming read-only. If storage auto grow is enabled, the storage automatically grows without impacting the workload. Defaults to true.
 	AutoGrowEnabled *bool `json:"autoGrowEnabled,omitempty" tf:"auto_grow_enabled,omitempty"`
@@ -172,9 +184,17 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Optional
 	AdministratorLogin *string `json:"administratorLogin,omitempty" tf:"administrator_login,omitempty"`
 
-	// The Password associated with the administrator_login for the PostgreSQL Server. Required when create_mode is Default.
+	// The Password associated with the administrator_login for the PostgreSQL Server.
 	// +kubebuilder:validation:Optional
 	AdministratorLoginPasswordSecretRef *v1.SecretKeySelector `json:"administratorLoginPasswordSecretRef,omitempty" tf:"-"`
+
+	// The Password associated with the administrator_login for the PostgreSQL Server.
+	// +kubebuilder:validation:Optional
+	AdministratorLoginPasswordWo *string `json:"administratorLoginPasswordWo,omitempty" tf:"administrator_login_password_wo,omitempty"`
+
+	// An integer value used to trigger an update for administrator_login_password_wo. This property should be incremented when updating administrator_login_password_wo.
+	// +kubebuilder:validation:Optional
+	AdministratorLoginPasswordWoVersion *float64 `json:"administratorLoginPasswordWoVersion,omitempty" tf:"administrator_login_password_wo_version,omitempty"`
 
 	// Enable/Disable auto-growing of the storage. Storage auto-grow prevents your server from running out of storage and becoming read-only. If storage auto grow is enabled, the storage automatically grows without impacting the workload. Defaults to true.
 	// +kubebuilder:validation:Optional

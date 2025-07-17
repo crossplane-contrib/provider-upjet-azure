@@ -29,6 +29,3 @@ func (tr *AppTriggerCustom) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *AppTriggerHTTPRequest) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *IntegrationServiceEnvironment) Hub() {}

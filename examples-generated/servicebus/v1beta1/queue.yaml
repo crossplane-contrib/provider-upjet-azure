@@ -8,10 +8,10 @@ metadata:
   name: example
 spec:
   forProvider:
-    enablePartitioning: true
     namespaceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+    partitioningEnabled: true
 
 ---
 

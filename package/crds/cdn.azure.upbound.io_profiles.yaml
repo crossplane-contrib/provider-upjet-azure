@@ -34,8 +34,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Profile is the Schema for the Profiles API. Manages a CDN Profile
-          to create a collection of CDN Endpoints.
+        description: Profile is the Schema for the Profiles API. Manages a CDN (classic)
+          Profile to create a collection of CDN Endpoints.
         properties:
           apiVersion:
             description: |-

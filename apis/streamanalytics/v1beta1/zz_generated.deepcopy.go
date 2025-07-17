@@ -2627,6 +2627,16 @@ func (in *OutputMSSQLInitParameters) DeepCopyInto(out *OutputMSSQLInitParameters
 		*out = new(string)
 		**out = **in
 	}
+	if in.DatabaseRef != nil {
+		in, out := &in.DatabaseRef, &out.DatabaseRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DatabaseSelector != nil {
+		in, out := &in.DatabaseSelector, &out.DatabaseSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.MaxBatchCount != nil {
 		in, out := &in.MaxBatchCount, &out.MaxBatchCount
 		*out = new(float64)
@@ -2711,6 +2721,16 @@ func (in *OutputMSSQLInitParameters) DeepCopyInto(out *OutputMSSQLInitParameters
 		in, out := &in.User, &out.User
 		*out = new(string)
 		**out = **in
+	}
+	if in.UserRef != nil {
+		in, out := &in.UserRef, &out.UserRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.UserSelector != nil {
+		in, out := &in.UserSelector, &out.UserSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -2839,6 +2859,16 @@ func (in *OutputMSSQLParameters) DeepCopyInto(out *OutputMSSQLParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DatabaseRef != nil {
+		in, out := &in.DatabaseRef, &out.DatabaseRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DatabaseSelector != nil {
+		in, out := &in.DatabaseSelector, &out.DatabaseSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.MaxBatchCount != nil {
 		in, out := &in.MaxBatchCount, &out.MaxBatchCount
 		*out = new(float64)
@@ -2923,6 +2953,16 @@ func (in *OutputMSSQLParameters) DeepCopyInto(out *OutputMSSQLParameters) {
 		in, out := &in.User, &out.User
 		*out = new(string)
 		**out = **in
+	}
+	if in.UserRef != nil {
+		in, out := &in.UserRef, &out.UserRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.UserSelector != nil {
+		in, out := &in.UserSelector, &out.UserSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 

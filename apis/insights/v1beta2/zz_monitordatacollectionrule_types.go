@@ -635,7 +635,7 @@ type LogFileInitParameters struct {
 	// Specifies a list of file patterns where the log files are located. For example, C:\\JavaLogs\\*.log.
 	FilePatterns []*string `json:"filePatterns,omitempty" tf:"file_patterns,omitempty"`
 
-	// The data format of the log files. possible value is text.
+	// The data format of the log files. Possible values are text and json.
 	Format *string `json:"format,omitempty" tf:"format,omitempty"`
 
 	// The name which should be used for this data source. This name should be unique across all data sources regardless of type within the Data Collection Rule.
@@ -653,7 +653,7 @@ type LogFileObservation struct {
 	// Specifies a list of file patterns where the log files are located. For example, C:\\JavaLogs\\*.log.
 	FilePatterns []*string `json:"filePatterns,omitempty" tf:"file_patterns,omitempty"`
 
-	// The data format of the log files. possible value is text.
+	// The data format of the log files. Possible values are text and json.
 	Format *string `json:"format,omitempty" tf:"format,omitempty"`
 
 	// The name which should be used for this data source. This name should be unique across all data sources regardless of type within the Data Collection Rule.
@@ -672,7 +672,7 @@ type LogFileParameters struct {
 	// +kubebuilder:validation:Optional
 	FilePatterns []*string `json:"filePatterns" tf:"file_patterns,omitempty"`
 
-	// The data format of the log files. possible value is text.
+	// The data format of the log files. Possible values are text and json.
 	// +kubebuilder:validation:Optional
 	Format *string `json:"format" tf:"format,omitempty"`
 
@@ -1296,7 +1296,7 @@ type SyslogParameters struct {
 
 	// Specifies a list of streams that this data source will be sent to. A stream indicates what schema will be used for this data and usually what table in Log Analytics the data will be sent to.
 	// +kubebuilder:validation:Optional
-	Streams []*string `json:"streams,omitempty" tf:"streams,omitempty"`
+	Streams []*string `json:"streams" tf:"streams,omitempty"`
 }
 
 type TextInitParameters struct {

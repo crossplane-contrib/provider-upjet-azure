@@ -21,7 +21,7 @@ type CustomParametersInitParameters struct {
 	// Name of the NAT gateway for Secure Cluster Connectivity (No Public IP) workspace subnets (only for workspace with managed virtual network). Defaults to nat-gateway. Changing this forces a new resource to be created.
 	NATGatewayName *string `json:"natGatewayName,omitempty" tf:"nat_gateway_name,omitempty"`
 
-	// Are public IP Addresses not allowed? Possible values are true or false. Defaults to false.
+	// Are public IP Addresses not allowed? Possible values are true or false. Defaults to true.
 	NoPublicIP *bool `json:"noPublicIp,omitempty" tf:"no_public_ip,omitempty"`
 
 	// The name of the Private Subnet within the Virtual Network. Required if virtual_network_id is set. Changing this forces a new resource to be created.
@@ -78,7 +78,7 @@ type CustomParametersObservation struct {
 	// Name of the NAT gateway for Secure Cluster Connectivity (No Public IP) workspace subnets (only for workspace with managed virtual network). Defaults to nat-gateway. Changing this forces a new resource to be created.
 	NATGatewayName *string `json:"natGatewayName,omitempty" tf:"nat_gateway_name,omitempty"`
 
-	// Are public IP Addresses not allowed? Possible values are true or false. Defaults to false.
+	// Are public IP Addresses not allowed? Possible values are true or false. Defaults to true.
 	NoPublicIP *bool `json:"noPublicIp,omitempty" tf:"no_public_ip,omitempty"`
 
 	// The name of the Private Subnet within the Virtual Network. Required if virtual_network_id is set. Changing this forces a new resource to be created.
@@ -119,7 +119,7 @@ type CustomParametersParameters struct {
 	// +kubebuilder:validation:Optional
 	NATGatewayName *string `json:"natGatewayName,omitempty" tf:"nat_gateway_name,omitempty"`
 
-	// Are public IP Addresses not allowed? Possible values are true or false. Defaults to false.
+	// Are public IP Addresses not allowed? Possible values are true or false. Defaults to true.
 	// +kubebuilder:validation:Optional
 	NoPublicIP *bool `json:"noPublicIp,omitempty" tf:"no_public_ip,omitempty"`
 
@@ -178,6 +178,58 @@ type CustomParametersParameters struct {
 	VnetAddressPrefix *string `json:"vnetAddressPrefix,omitempty" tf:"vnet_address_prefix,omitempty"`
 }
 
+type EnhancedSecurityComplianceInitParameters struct {
+
+	// Enables automatic cluster updates for this workspace. Defaults to false.
+	AutomaticClusterUpdateEnabled *bool `json:"automaticClusterUpdateEnabled,omitempty" tf:"automatic_cluster_update_enabled,omitempty"`
+
+	// Enables compliance security profile for this workspace. Defaults to false.
+	ComplianceSecurityProfileEnabled *bool `json:"complianceSecurityProfileEnabled,omitempty" tf:"compliance_security_profile_enabled,omitempty"`
+
+	// A list of standards to enforce on this workspace. Possible values include HIPAA and PCI_DSS.
+	// +listType=set
+	ComplianceSecurityProfileStandards []*string `json:"complianceSecurityProfileStandards,omitempty" tf:"compliance_security_profile_standards,omitempty"`
+
+	// Enables enhanced security monitoring for this workspace. Defaults to false.
+	EnhancedSecurityMonitoringEnabled *bool `json:"enhancedSecurityMonitoringEnabled,omitempty" tf:"enhanced_security_monitoring_enabled,omitempty"`
+}
+
+type EnhancedSecurityComplianceObservation struct {
+
+	// Enables automatic cluster updates for this workspace. Defaults to false.
+	AutomaticClusterUpdateEnabled *bool `json:"automaticClusterUpdateEnabled,omitempty" tf:"automatic_cluster_update_enabled,omitempty"`
+
+	// Enables compliance security profile for this workspace. Defaults to false.
+	ComplianceSecurityProfileEnabled *bool `json:"complianceSecurityProfileEnabled,omitempty" tf:"compliance_security_profile_enabled,omitempty"`
+
+	// A list of standards to enforce on this workspace. Possible values include HIPAA and PCI_DSS.
+	// +listType=set
+	ComplianceSecurityProfileStandards []*string `json:"complianceSecurityProfileStandards,omitempty" tf:"compliance_security_profile_standards,omitempty"`
+
+	// Enables enhanced security monitoring for this workspace. Defaults to false.
+	EnhancedSecurityMonitoringEnabled *bool `json:"enhancedSecurityMonitoringEnabled,omitempty" tf:"enhanced_security_monitoring_enabled,omitempty"`
+}
+
+type EnhancedSecurityComplianceParameters struct {
+
+	// Enables automatic cluster updates for this workspace. Defaults to false.
+	// +kubebuilder:validation:Optional
+	AutomaticClusterUpdateEnabled *bool `json:"automaticClusterUpdateEnabled,omitempty" tf:"automatic_cluster_update_enabled,omitempty"`
+
+	// Enables compliance security profile for this workspace. Defaults to false.
+	// +kubebuilder:validation:Optional
+	ComplianceSecurityProfileEnabled *bool `json:"complianceSecurityProfileEnabled,omitempty" tf:"compliance_security_profile_enabled,omitempty"`
+
+	// A list of standards to enforce on this workspace. Possible values include HIPAA and PCI_DSS.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	ComplianceSecurityProfileStandards []*string `json:"complianceSecurityProfileStandards,omitempty" tf:"compliance_security_profile_standards,omitempty"`
+
+	// Enables enhanced security monitoring for this workspace. Defaults to false.
+	// +kubebuilder:validation:Optional
+	EnhancedSecurityMonitoringEnabled *bool `json:"enhancedSecurityMonitoringEnabled,omitempty" tf:"enhanced_security_monitoring_enabled,omitempty"`
+}
+
 type ManagedDiskIdentityInitParameters struct {
 }
 
@@ -227,6 +279,9 @@ type WorkspaceInitParameters struct {
 
 	// Disallow public access to default storage account. Defaults to false.
 	DefaultStorageFirewallEnabled *bool `json:"defaultStorageFirewallEnabled,omitempty" tf:"default_storage_firewall_enabled,omitempty"`
+
+	// An enhanced_security_compliance block as documented below. This feature is only valid if sku is set to premium.
+	EnhancedSecurityCompliance *EnhancedSecurityComplianceInitParameters `json:"enhancedSecurityCompliance,omitempty" tf:"enhanced_security_compliance,omitempty"`
 
 	// Is the Databricks File System root file system enabled with a secondary layer of encryption with platform managed keys? Possible values are true or false. Defaults to false. This field is only valid if the Databricks Workspace sku is set to premium. Changing this forces a new resource to be created.
 	InfrastructureEncryptionEnabled *bool `json:"infrastructureEncryptionEnabled,omitempty" tf:"infrastructure_encryption_enabled,omitempty"`
@@ -294,6 +349,9 @@ type WorkspaceObservation struct {
 
 	// The ID of Managed Disk Encryption Set created by the Databricks Workspace.
 	DiskEncryptionSetID *string `json:"diskEncryptionSetId,omitempty" tf:"disk_encryption_set_id,omitempty"`
+
+	// An enhanced_security_compliance block as documented below. This feature is only valid if sku is set to premium.
+	EnhancedSecurityCompliance *EnhancedSecurityComplianceObservation `json:"enhancedSecurityCompliance,omitempty" tf:"enhanced_security_compliance,omitempty"`
 
 	// The ID of the Databricks Workspace in the Azure management plane.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -374,6 +432,10 @@ type WorkspaceParameters struct {
 	// Disallow public access to default storage account. Defaults to false.
 	// +kubebuilder:validation:Optional
 	DefaultStorageFirewallEnabled *bool `json:"defaultStorageFirewallEnabled,omitempty" tf:"default_storage_firewall_enabled,omitempty"`
+
+	// An enhanced_security_compliance block as documented below. This feature is only valid if sku is set to premium.
+	// +kubebuilder:validation:Optional
+	EnhancedSecurityCompliance *EnhancedSecurityComplianceParameters `json:"enhancedSecurityCompliance,omitempty" tf:"enhanced_security_compliance,omitempty"`
 
 	// Is the Databricks File System root file system enabled with a secondary layer of encryption with platform managed keys? Possible values are true or false. Defaults to false. This field is only valid if the Databricks Workspace sku is set to premium. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional

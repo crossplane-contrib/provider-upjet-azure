@@ -36,11 +36,8 @@ type BotChannelsRegistrationInitParameters struct {
 	// The Bot Channels Registration endpoint.
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
-	// The icon URL to visually identify the Bot Channels Registration.
+	// The icon URL to visually identify the Bot Channels Registration. Defaults to https://docs.botframework.com/static/devportal/client/images/bot-framework-default.png.
 	IconURL *string `json:"iconUrl,omitempty" tf:"icon_url,omitempty"`
-
-	// Is the Bot Channels Registration in an isolated network?
-	IsolatedNetworkEnabled *bool `json:"isolatedNetworkEnabled,omitempty" tf:"isolated_network_enabled,omitempty"`
 
 	// The supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -100,11 +97,8 @@ type BotChannelsRegistrationObservation struct {
 	// The ID of the Bot Channels Registration.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The icon URL to visually identify the Bot Channels Registration.
+	// The icon URL to visually identify the Bot Channels Registration. Defaults to https://docs.botframework.com/static/devportal/client/images/bot-framework-default.png.
 	IconURL *string `json:"iconUrl,omitempty" tf:"icon_url,omitempty"`
-
-	// Is the Bot Channels Registration in an isolated network?
-	IsolatedNetworkEnabled *bool `json:"isolatedNetworkEnabled,omitempty" tf:"isolated_network_enabled,omitempty"`
 
 	// The supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -162,13 +156,9 @@ type BotChannelsRegistrationParameters struct {
 	// +kubebuilder:validation:Optional
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
-	// The icon URL to visually identify the Bot Channels Registration.
+	// The icon URL to visually identify the Bot Channels Registration. Defaults to https://docs.botframework.com/static/devportal/client/images/bot-framework-default.png.
 	// +kubebuilder:validation:Optional
 	IconURL *string `json:"iconUrl,omitempty" tf:"icon_url,omitempty"`
-
-	// Is the Bot Channels Registration in an isolated network?
-	// +kubebuilder:validation:Optional
-	IsolatedNetworkEnabled *bool `json:"isolatedNetworkEnabled,omitempty" tf:"isolated_network_enabled,omitempty"`
 
 	// The supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional

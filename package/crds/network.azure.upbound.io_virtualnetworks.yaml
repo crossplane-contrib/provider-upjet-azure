@@ -680,6 +680,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   bgpCommunity:
                     description: The BGP community attribute in format <as-number>:<community-value>.
                     type: string
@@ -718,9 +719,30 @@ spec:
                       which is used to enable connection tracking for intra-VM flows.
                       Possible values are between 4 and 30 minutes.
                     type: number
+                  ipAddressPool:
+                    description: One or two ip_address_pool blocks as defined below.
+                      Only one association of each IP type(IPv4 or IPv6) is allowed.
+                    items:
+                      properties:
+                        id:
+                          description: The ID of the Network Manager IP Address Management
+                            (IPAM) Pool.
+                          type: string
+                        numberOfIpAddresses:
+                          description: The number of IP addresses to allocated to
+                            the Virtual Network. The value must be a string that represents
+                            a positive number, e.g., "100".
+                          type: string
+                      type: object
+                    type: array
                   location:
                     description: The location/region where the virtual network is
                       created. Changing this forces a new resource to be created.
+                    type: string
+                  privateEndpointVnetPolicies:
+                    description: The Private Endpoint VNet Policies for the Virtual
+                      Network. Possible values are Disabled and Basic. Defaults to
+                      Disabled.
                     type: string
                   resourceGroupName:
                     description: The name of the resource group in which to create
@@ -829,6 +851,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   bgpCommunity:
                     description: The BGP community attribute in format <as-number>:<community-value>.
                     type: string
@@ -867,9 +890,30 @@ spec:
                       which is used to enable connection tracking for intra-VM flows.
                       Possible values are between 4 and 30 minutes.
                     type: number
+                  ipAddressPool:
+                    description: One or two ip_address_pool blocks as defined below.
+                      Only one association of each IP type(IPv4 or IPv6) is allowed.
+                    items:
+                      properties:
+                        id:
+                          description: The ID of the Network Manager IP Address Management
+                            (IPAM) Pool.
+                          type: string
+                        numberOfIpAddresses:
+                          description: The number of IP addresses to allocated to
+                            the Virtual Network. The value must be a string that represents
+                            a positive number, e.g., "100".
+                          type: string
+                      type: object
+                    type: array
                   location:
                     description: The location/region where the virtual network is
                       created. Changing this forces a new resource to be created.
+                    type: string
+                  privateEndpointVnetPolicies:
+                    description: The Private Endpoint VNet Policies for the Virtual
+                      Network. Possible values are Disabled and Basic. Defaults to
+                      Disabled.
                     type: string
                   tags:
                     additionalProperties:
@@ -1046,10 +1090,6 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.addressSpace is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.addressSpace)
-                || (has(self.initProvider) && has(self.initProvider.addressSpace))'
             - message: spec.forProvider.location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
@@ -1065,6 +1105,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   bgpCommunity:
                     description: The BGP community attribute in format <as-number>:<community-value>.
                     type: string
@@ -1104,14 +1145,41 @@ spec:
                       Possible values are between 4 and 30 minutes.
                     type: number
                   guid:
-                    description: The GUID of the virtual network.
+                    description: The GUID of the Virtual Network.
                     type: string
                   id:
-                    description: The virtual NetworkConfiguration ID.
+                    description: The Virtual Network ID.
                     type: string
+                  ipAddressPool:
+                    description: One or two ip_address_pool blocks as defined below.
+                      Only one association of each IP type(IPv4 or IPv6) is allowed.
+                    items:
+                      properties:
+                        allocatedIpAddressPrefixes:
+                          description: The list of IP address prefixes allocated to
+                            the Virtual Network.
+                          items:
+                            type: string
+                          type: array
+                        id:
+                          description: The ID of the Network Manager IP Address Management
+                            (IPAM) Pool.
+                          type: string
+                        numberOfIpAddresses:
+                          description: The number of IP addresses to allocated to
+                            the Virtual Network. The value must be a string that represents
+                            a positive number, e.g., "100".
+                          type: string
+                      type: object
+                    type: array
                   location:
                     description: The location/region where the virtual network is
                       created. Changing this forces a new resource to be created.
+                    type: string
+                  privateEndpointVnetPolicies:
+                    description: The Private Endpoint VNet Policies for the Virtual
+                      Network. Possible values are Disabled and Basic. Defaults to
+                      Disabled.
                     type: string
                   resourceGroupName:
                     description: The name of the resource group in which to create
@@ -1123,19 +1191,85 @@ spec:
                       subnets. Each subnet block supports fields documented below.
                     items:
                       properties:
-                        addressPrefix:
-                          description: The address prefix to use for the subnet.
-                          type: string
+                        addressPrefixes:
+                          description: The address prefixes to use for the subnet.
+                          items:
+                            type: string
+                          type: array
+                        defaultOutboundAccessEnabled:
+                          description: Enable default outbound access to the internet
+                            for the subnet. Defaults to true.
+                          type: boolean
+                        delegation:
+                          description: One or more delegation blocks as defined below.
+                          properties:
+                            name:
+                              description: The name of the subnet.
+                              type: string
+                            serviceDelegation:
+                              description: A service_delegation block as defined below.
+                              properties:
+                                actions:
+                                  description: A list of Actions which should be delegated.
+                                    This list is specific to the service to delegate
+                                    to. Possible values are Microsoft.Network/networkinterfaces/*,
+                                    Microsoft.Network/publicIPAddresses/join/action,
+                                    Microsoft.Network/publicIPAddresses/read, Microsoft.Network/virtualNetworks/read,
+                                    Microsoft.Network/virtualNetworks/subnets/action,
+                                    Microsoft.Network/virtualNetworks/subnets/join/action,
+                                    Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action,
+                                    and Microsoft.Network/virtualNetworks/subnets/unprepareNetworkPolicies/action.
+                                  items:
+                                    type: string
+                                  type: array
+                                  x-kubernetes-list-type: set
+                                name:
+                                  description: The name of the subnet.
+                                  type: string
+                              type: object
+                          type: object
                         id:
                           description: The ID of this subnet.
                           type: string
                         name:
                           description: The name of the subnet.
                           type: string
+                        privateEndpointNetworkPolicies:
+                          description: Enable or Disable network policies for the
+                            private endpoint on the subnet. Possible values are Disabled,
+                            Enabled, NetworkSecurityGroupEnabled and RouteTableEnabled.
+                            Defaults to Disabled.
+                          type: string
+                        privateLinkServiceNetworkPoliciesEnabled:
+                          description: Enable or Disable network policies for the
+                            private link service on the subnet. Defaults to true.
+                          type: boolean
+                        routeTableId:
+                          description: The ID of the Route Table that should be associated
+                            with this subnet.
+                          type: string
                         securityGroup:
                           description: The Network Security Group to associate with
-                            the subnet. (Referenced by id, ie. azurerm_network_security_group.example.id)
+                            the subnet. (Referenced by id, i.e. azurerm_network_security_group.example.id)
                           type: string
+                        serviceEndpointPolicyIds:
+                          description: The list of IDs of Service Endpoint Policies
+                            to associate with the subnet.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                        serviceEndpoints:
+                          description: 'The list of Service endpoints to associate
+                            with the subnet. Possible values include: Microsoft.AzureActiveDirectory,
+                            Microsoft.AzureCosmosDB, Microsoft.ContainerRegistry,
+                            Microsoft.EventHub, Microsoft.KeyVault, Microsoft.ServiceBus,
+                            Microsoft.Sql, Microsoft.Storage, Microsoft.Storage.Global
+                            and Microsoft.Web.'
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   tags:

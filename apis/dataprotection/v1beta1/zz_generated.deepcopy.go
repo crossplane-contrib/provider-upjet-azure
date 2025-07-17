@@ -1448,11 +1448,6 @@ func (in *BackupPolicyBlobStorageInitParameters) DeepCopyInto(out *BackupPolicyB
 		*out = new(string)
 		**out = **in
 	}
-	if in.RetentionDuration != nil {
-		in, out := &in.RetentionDuration, &out.RetentionDuration
-		*out = new(string)
-		**out = **in
-	}
 	if in.RetentionRule != nil {
 		in, out := &in.RetentionRule, &out.RetentionRule
 		*out = make([]BackupPolicyBlobStorageRetentionRuleInitParameters, len(*in))
@@ -1538,11 +1533,6 @@ func (in *BackupPolicyBlobStorageObservation) DeepCopyInto(out *BackupPolicyBlob
 		*out = new(string)
 		**out = **in
 	}
-	if in.RetentionDuration != nil {
-		in, out := &in.RetentionDuration, &out.RetentionDuration
-		*out = new(string)
-		**out = **in
-	}
 	if in.RetentionRule != nil {
 		in, out := &in.RetentionRule, &out.RetentionRule
 		*out = make([]BackupPolicyBlobStorageRetentionRuleObservation, len(*in))
@@ -1593,11 +1583,6 @@ func (in *BackupPolicyBlobStorageParameters) DeepCopyInto(out *BackupPolicyBlobS
 	}
 	if in.OperationalDefaultRetentionDuration != nil {
 		in, out := &in.OperationalDefaultRetentionDuration, &out.OperationalDefaultRetentionDuration
-		*out = new(string)
-		**out = **in
-	}
-	if in.RetentionDuration != nil {
-		in, out := &in.RetentionDuration, &out.RetentionDuration
 		*out = new(string)
 		**out = **in
 	}

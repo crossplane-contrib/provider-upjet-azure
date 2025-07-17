@@ -6057,18 +6057,18 @@ spec:
                         properties:
                           dotnetVersion:
                             description: |-
-                              The version of .Net. Possible values are v3.0, v4.0, v6.0, v7.0 and v8.0. Defaults to v4.0.
-                              The version of .Net. Possible values are `v3.0`, `v4.0`, `v6.0` and `v7.0`
+                              The version of .Net. Possible values are v3.0, v4.0, v6.0, v7.0, v8.0 and v9.0. Defaults to v4.0.
+                              The version of .Net. Possible values are `v3.0`, `v4.0`, `v6.0`, `v7.0`, `v8.0` and `v9.0`
                             type: string
                           javaVersion:
                             description: |-
                               The version of Java to use. Possible values are 1.8, 11 and 17 (In-Preview).
-                              The version of Java to use. Possible values are `1.8`, `11` and `17`
+                              The version of Java to use. Possible values are `1.8`, `11`, `17`, and `21`
                             type: string
                           nodeVersion:
                             description: |-
-                              The version of Node to use. Possible values are ~12, ~14, ~16, ~18 and ~20.
-                              The version of Node to use. Possible values include `12`, `14`, `16` and `18`
+                              The version of Node to use. Possible values are ~12, ~14, ~16, ~18, ~20, and ~22.
+                              The version of Node to use. Possible values include `~12`, `~14`, `~16`, `~18`, `~20` and `~22`
                             type: string
                           powershellCoreVersion:
                             description: |-
@@ -6303,8 +6303,8 @@ spec:
                         type: string
                       minimumTlsVersion:
                         description: |-
-                          The configures the minimum version of TLS required for SSL requests. Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
-                          The configures the minimum version of TLS required for SSL requests. Possible values include: `1.0`, `1.1`, and  `1.2`. Defaults to `1.2`.
+                          The configures the minimum version of TLS required for SSL requests. Possible values include: 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
+                          The configures the minimum version of TLS required for SSL requests. Possible values include: `1.0`, `1.1`, `1.2` and `1.3`. Defaults to `1.2`.
                         type: string
                       preWarmedInstanceCount:
                         description: |-
@@ -6318,8 +6318,8 @@ spec:
                         type: boolean
                       remoteDebuggingVersion:
                         description: |-
-                          The Remote Debugging Version. Possible values include VS2017, VS2019, and VS2022
-                          The Remote Debugging Version. Possible values include `VS2017`, `VS2019`, and `VS2022`
+                          The Remote Debugging Version. Currently only VS2022 is supported.
+                          The Remote Debugging Version. Currently only `VS2022` is supported.
                         type: string
                       runtimeScaleMonitoringEnabled:
                         description: |-
@@ -6480,8 +6480,8 @@ spec:
                         type: string
                       scmMinimumTlsVersion:
                         description: |-
-                          Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
-                          Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: `1.0`, `1.1`, and  `1.2`. Defaults to `1.2`.
+                          Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
+                          Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: `1.0`, `1.1`, `1.2` and `1.3`. Defaults to `1.2`.
                         type: string
                       scmUseMainIpRestriction:
                         description: |-
@@ -6665,6 +6665,10 @@ spec:
                       Windows Function App Slot.
                     type: object
                     x-kubernetes-map-type: granular
+                  virtualNetworkBackupRestoreEnabled:
+                    description: Whether backup and restore operations over the linked
+                      virtual network are enabled. Defaults to false.
+                    type: boolean
                   virtualNetworkSubnetId:
                     description: The subnet id which will be used by this Function
                       App Slot for regional virtual network integration.
@@ -6743,6 +6747,11 @@ spec:
                             type: string
                         type: object
                     type: object
+                  vnetImagePullEnabled:
+                    description: |-
+                      Specifies whether traffic for the image pull should be routed over virtual network. Defaults to false.
+                      Is container image pull over virtual network enabled? Defaults to `false`.
+                    type: boolean
                   webdeployPublishBasicAuthenticationEnabled:
                     description: Should the default WebDeploy Basic Authentication
                       publishing credentials enabled. Defaults to true.
@@ -7702,18 +7711,18 @@ spec:
                         properties:
                           dotnetVersion:
                             description: |-
-                              The version of .Net. Possible values are v3.0, v4.0, v6.0, v7.0 and v8.0. Defaults to v4.0.
-                              The version of .Net. Possible values are `v3.0`, `v4.0`, `v6.0` and `v7.0`
+                              The version of .Net. Possible values are v3.0, v4.0, v6.0, v7.0, v8.0 and v9.0. Defaults to v4.0.
+                              The version of .Net. Possible values are `v3.0`, `v4.0`, `v6.0`, `v7.0`, `v8.0` and `v9.0`
                             type: string
                           javaVersion:
                             description: |-
                               The version of Java to use. Possible values are 1.8, 11 and 17 (In-Preview).
-                              The version of Java to use. Possible values are `1.8`, `11` and `17`
+                              The version of Java to use. Possible values are `1.8`, `11`, `17`, and `21`
                             type: string
                           nodeVersion:
                             description: |-
-                              The version of Node to use. Possible values are ~12, ~14, ~16, ~18 and ~20.
-                              The version of Node to use. Possible values include `12`, `14`, `16` and `18`
+                              The version of Node to use. Possible values are ~12, ~14, ~16, ~18, ~20, and ~22.
+                              The version of Node to use. Possible values include `~12`, `~14`, `~16`, `~18`, `~20` and `~22`
                             type: string
                           powershellCoreVersion:
                             description: |-
@@ -7948,8 +7957,8 @@ spec:
                         type: string
                       minimumTlsVersion:
                         description: |-
-                          The configures the minimum version of TLS required for SSL requests. Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
-                          The configures the minimum version of TLS required for SSL requests. Possible values include: `1.0`, `1.1`, and  `1.2`. Defaults to `1.2`.
+                          The configures the minimum version of TLS required for SSL requests. Possible values include: 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
+                          The configures the minimum version of TLS required for SSL requests. Possible values include: `1.0`, `1.1`, `1.2` and `1.3`. Defaults to `1.2`.
                         type: string
                       preWarmedInstanceCount:
                         description: |-
@@ -7963,8 +7972,8 @@ spec:
                         type: boolean
                       remoteDebuggingVersion:
                         description: |-
-                          The Remote Debugging Version. Possible values include VS2017, VS2019, and VS2022
-                          The Remote Debugging Version. Possible values include `VS2017`, `VS2019`, and `VS2022`
+                          The Remote Debugging Version. Currently only VS2022 is supported.
+                          The Remote Debugging Version. Currently only `VS2022` is supported.
                         type: string
                       runtimeScaleMonitoringEnabled:
                         description: |-
@@ -8125,8 +8134,8 @@ spec:
                         type: string
                       scmMinimumTlsVersion:
                         description: |-
-                          Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
-                          Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: `1.0`, `1.1`, and  `1.2`. Defaults to `1.2`.
+                          Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
+                          Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: `1.0`, `1.1`, `1.2` and `1.3`. Defaults to `1.2`.
                         type: string
                       scmUseMainIpRestriction:
                         description: |-
@@ -8312,6 +8321,10 @@ spec:
                       Windows Function App Slot.
                     type: object
                     x-kubernetes-map-type: granular
+                  virtualNetworkBackupRestoreEnabled:
+                    description: Whether backup and restore operations over the linked
+                      virtual network are enabled. Defaults to false.
+                    type: boolean
                   virtualNetworkSubnetId:
                     description: The subnet id which will be used by this Function
                       App Slot for regional virtual network integration.
@@ -8390,6 +8403,11 @@ spec:
                             type: string
                         type: object
                     type: object
+                  vnetImagePullEnabled:
+                    description: |-
+                      Specifies whether traffic for the image pull should be routed over virtual network. Defaults to false.
+                      Is container image pull over virtual network enabled? Defaults to `false`.
+                    type: boolean
                   webdeployPublishBasicAuthenticationEnabled:
                     description: Should the default WebDeploy Basic Authentication
                       publishing credentials enabled. Defaults to true.
@@ -9415,18 +9433,18 @@ spec:
                         properties:
                           dotnetVersion:
                             description: |-
-                              The version of .Net. Possible values are v3.0, v4.0, v6.0, v7.0 and v8.0. Defaults to v4.0.
-                              The version of .Net. Possible values are `v3.0`, `v4.0`, `v6.0` and `v7.0`
+                              The version of .Net. Possible values are v3.0, v4.0, v6.0, v7.0, v8.0 and v9.0. Defaults to v4.0.
+                              The version of .Net. Possible values are `v3.0`, `v4.0`, `v6.0`, `v7.0`, `v8.0` and `v9.0`
                             type: string
                           javaVersion:
                             description: |-
                               The version of Java to use. Possible values are 1.8, 11 and 17 (In-Preview).
-                              The version of Java to use. Possible values are `1.8`, `11` and `17`
+                              The version of Java to use. Possible values are `1.8`, `11`, `17`, and `21`
                             type: string
                           nodeVersion:
                             description: |-
-                              The version of Node to use. Possible values are ~12, ~14, ~16, ~18 and ~20.
-                              The version of Node to use. Possible values include `12`, `14`, `16` and `18`
+                              The version of Node to use. Possible values are ~12, ~14, ~16, ~18, ~20, and ~22.
+                              The version of Node to use. Possible values include `~12`, `~14`, `~16`, `~18`, `~20` and `~22`
                             type: string
                           powershellCoreVersion:
                             description: |-
@@ -9590,8 +9608,8 @@ spec:
                         type: string
                       minimumTlsVersion:
                         description: |-
-                          The configures the minimum version of TLS required for SSL requests. Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
-                          The configures the minimum version of TLS required for SSL requests. Possible values include: `1.0`, `1.1`, and  `1.2`. Defaults to `1.2`.
+                          The configures the minimum version of TLS required for SSL requests. Possible values include: 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
+                          The configures the minimum version of TLS required for SSL requests. Possible values include: `1.0`, `1.1`, `1.2` and `1.3`. Defaults to `1.2`.
                         type: string
                       preWarmedInstanceCount:
                         description: |-
@@ -9605,8 +9623,8 @@ spec:
                         type: boolean
                       remoteDebuggingVersion:
                         description: |-
-                          The Remote Debugging Version. Possible values include VS2017, VS2019, and VS2022
-                          The Remote Debugging Version. Possible values include `VS2017`, `VS2019`, and `VS2022`
+                          The Remote Debugging Version. Currently only VS2022 is supported.
+                          The Remote Debugging Version. Currently only `VS2022` is supported.
                         type: string
                       runtimeScaleMonitoringEnabled:
                         description: |-
@@ -9691,8 +9709,8 @@ spec:
                         type: string
                       scmMinimumTlsVersion:
                         description: |-
-                          Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
-                          Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: `1.0`, `1.1`, and  `1.2`. Defaults to `1.2`.
+                          Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
+                          Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: `1.0`, `1.1`, `1.2` and `1.3`. Defaults to `1.2`.
                         type: string
                       scmType:
                         description: |-
@@ -9776,10 +9794,19 @@ spec:
                       Windows Function App Slot.
                     type: object
                     x-kubernetes-map-type: granular
+                  virtualNetworkBackupRestoreEnabled:
+                    description: Whether backup and restore operations over the linked
+                      virtual network are enabled. Defaults to false.
+                    type: boolean
                   virtualNetworkSubnetId:
                     description: The subnet id which will be used by this Function
                       App Slot for regional virtual network integration.
                     type: string
+                  vnetImagePullEnabled:
+                    description: |-
+                      Specifies whether traffic for the image pull should be routed over virtual network. Defaults to false.
+                      Is container image pull over virtual network enabled? Defaults to `false`.
+                    type: boolean
                   webdeployPublishBasicAuthenticationEnabled:
                     description: Should the default WebDeploy Basic Authentication
                       publishing credentials enabled. Defaults to true.

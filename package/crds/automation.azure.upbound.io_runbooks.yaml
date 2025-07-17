@@ -1252,7 +1252,7 @@ spec:
                     description: The desired content of the runbook.
                     type: string
                   description:
-                    description: A description for this credential.
+                    description: A description for the runbook.
                     type: string
                   draft:
                     description: A draft block as defined below.
@@ -1565,7 +1565,7 @@ spec:
                     description: The desired content of the runbook.
                     type: string
                   description:
-                    description: A description for this credential.
+                    description: A description for the runbook.
                     type: string
                   draft:
                     description: A draft block as defined below.
@@ -1982,7 +1982,7 @@ spec:
                     description: The desired content of the runbook.
                     type: string
                   description:
-                    description: A description for this credential.
+                    description: A description for the runbook.
                     type: string
                   draft:
                     description: A draft block as defined below.

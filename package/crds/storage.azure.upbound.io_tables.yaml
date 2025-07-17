@@ -528,6 +528,11 @@ spec:
                       the storage account the table is located. Changing this forces
                       a new resource to be created.
                     type: string
+                  resourceManagerId:
+                    description: |-
+                      The Resource Manager ID of this Storage Table.
+                      The Resource Manager ID of this Storage Table.
+                    type: string
                   storageAccountName:
                     description: Specifies the storage account in which to create
                       the storage table. Changing this forces a new resource to be

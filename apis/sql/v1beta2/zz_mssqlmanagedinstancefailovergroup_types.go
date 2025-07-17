@@ -46,6 +46,9 @@ type MSSQLManagedInstanceFailoverGroupInitParameters struct {
 
 	// Failover policy for the read-only endpoint. Defaults to true.
 	ReadonlyEndpointFailoverPolicyEnabled *bool `json:"readonlyEndpointFailoverPolicyEnabled,omitempty" tf:"readonly_endpoint_failover_policy_enabled,omitempty"`
+
+	// The type of the secondary Managed Instance. Possible values are Geo, Standby. Defaults to Geo.
+	SecondaryType *string `json:"secondaryType,omitempty" tf:"secondary_type,omitempty"`
 }
 
 type MSSQLManagedInstanceFailoverGroupObservation struct {
@@ -73,6 +76,9 @@ type MSSQLManagedInstanceFailoverGroupObservation struct {
 
 	// The local replication role of the Managed Instance Failover Group.
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
+
+	// The type of the secondary Managed Instance. Possible values are Geo, Standby. Defaults to Geo.
+	SecondaryType *string `json:"secondaryType,omitempty" tf:"secondary_type,omitempty"`
 }
 
 type MSSQLManagedInstanceFailoverGroupParameters struct {
@@ -116,6 +122,10 @@ type MSSQLManagedInstanceFailoverGroupParameters struct {
 	// Failover policy for the read-only endpoint. Defaults to true.
 	// +kubebuilder:validation:Optional
 	ReadonlyEndpointFailoverPolicyEnabled *bool `json:"readonlyEndpointFailoverPolicyEnabled,omitempty" tf:"readonly_endpoint_failover_policy_enabled,omitempty"`
+
+	// The type of the secondary Managed Instance. Possible values are Geo, Standby. Defaults to Geo.
+	// +kubebuilder:validation:Optional
+	SecondaryType *string `json:"secondaryType,omitempty" tf:"secondary_type,omitempty"`
 }
 
 type MSSQLManagedInstanceFailoverGroupReadWriteEndpointFailoverPolicyInitParameters struct {

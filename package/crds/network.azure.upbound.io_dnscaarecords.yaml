@@ -83,8 +83,8 @@ spec:
                             to set the issuer critical flag.
                           type: number
                         tag:
-                          description: A property tag, options are issue, issuewild
-                            and iodef.
+                          description: A property tag, options are issue, issuewild,
+                            iodef, and contactemail.
                           type: string
                         value:
                           description: A property value such as a registrar domain.
@@ -283,8 +283,8 @@ spec:
                             to set the issuer critical flag.
                           type: number
                         tag:
-                          description: A property tag, options are issue, issuewild
-                            and iodef.
+                          description: A property tag, options are issue, issuewild,
+                            iodef, and contactemail.
                           type: string
                         value:
                           description: A property value such as a registrar domain.
@@ -498,8 +498,8 @@ spec:
                             to set the issuer critical flag.
                           type: number
                         tag:
-                          description: A property tag, options are issue, issuewild
-                            and iodef.
+                          description: A property tag, options are issue, issuewild,
+                            iodef, and contactemail.
                           type: string
                         value:
                           description: A property value such as a registrar domain.

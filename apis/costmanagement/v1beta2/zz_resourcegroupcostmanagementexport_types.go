@@ -102,6 +102,9 @@ type ResourceGroupCostManagementExportInitParameters struct {
 	// A export_data_storage_location block as defined below.
 	ExportDataStorageLocation *ExportDataStorageLocationInitParameters `json:"exportDataStorageLocation,omitempty" tf:"export_data_storage_location,omitempty"`
 
+	// Format for export. Valid values are Csv only. Default is Csv.
+	FileFormat *string `json:"fileFormat,omitempty" tf:"file_format,omitempty"`
+
 	// The date the export will stop capturing information.
 	RecurrencePeriodEndDate *string `json:"recurrencePeriodEndDate,omitempty" tf:"recurrence_period_end_date,omitempty"`
 
@@ -136,6 +139,9 @@ type ResourceGroupCostManagementExportObservation struct {
 	// A export_data_storage_location block as defined below.
 	ExportDataStorageLocation *ExportDataStorageLocationObservation `json:"exportDataStorageLocation,omitempty" tf:"export_data_storage_location,omitempty"`
 
+	// Format for export. Valid values are Csv only. Default is Csv.
+	FileFormat *string `json:"fileFormat,omitempty" tf:"file_format,omitempty"`
+
 	// The ID of the Cost Management Export for this Resource Group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -165,6 +171,10 @@ type ResourceGroupCostManagementExportParameters struct {
 	// A export_data_storage_location block as defined below.
 	// +kubebuilder:validation:Optional
 	ExportDataStorageLocation *ExportDataStorageLocationParameters `json:"exportDataStorageLocation,omitempty" tf:"export_data_storage_location,omitempty"`
+
+	// Format for export. Valid values are Csv only. Default is Csv.
+	// +kubebuilder:validation:Optional
+	FileFormat *string `json:"fileFormat,omitempty" tf:"file_format,omitempty"`
 
 	// The date the export will stop capturing information.
 	// +kubebuilder:validation:Optional

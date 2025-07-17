@@ -158,10 +158,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  storageType:
-                    description: The type of storage used by the Dev Test Lab. Possible
-                      values are Standard and Premium. Defaults to Premium.
-                    type: string
                   tags:
                     additionalProperties:
                       type: string
@@ -186,10 +182,6 @@ spec:
                     description: Specifies the supported Azure location where the
                       Dev Test Lab should exist. Changing this forces a new resource
                       to be created.
-                    type: string
-                  storageType:
-                    description: The type of storage used by the Dev Test Lab. Possible
-                      values are Standard and Premium. Defaults to Premium.
                     type: string
                   tags:
                     additionalProperties:
@@ -405,10 +397,6 @@ spec:
                     description: The name of the resource group under which the Dev
                       Test Lab resource has to be created. Changing this forces a
                       new resource to be created.
-                    type: string
-                  storageType:
-                    description: The type of storage used by the Dev Test Lab. Possible
-                      values are Standard and Premium. Defaults to Premium.
                     type: string
                   tags:
                     additionalProperties:

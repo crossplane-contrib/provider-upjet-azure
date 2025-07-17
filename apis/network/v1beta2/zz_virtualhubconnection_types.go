@@ -193,6 +193,9 @@ type VirtualHubConnectionRoutingInitParameters struct {
 	// The static VNet local route override criteria that is used to determine whether NVA in spoke VNet is bypassed for traffic with destination in spoke VNet. Possible values are Contains and Equal. Defaults to Contains. Changing this forces a new resource to be created.
 	StaticVnetLocalRouteOverrideCriteria *string `json:"staticVnetLocalRouteOverrideCriteria,omitempty" tf:"static_vnet_local_route_override_criteria,omitempty"`
 
+	// Whether the static routes should be propagated to the Virtual Hub. Defaults to true.
+	StaticVnetPropagateStaticRoutesEnabled *bool `json:"staticVnetPropagateStaticRoutesEnabled,omitempty" tf:"static_vnet_propagate_static_routes_enabled,omitempty"`
+
 	// A static_vnet_route block as defined below.
 	StaticVnetRoute []StaticVnetRouteInitParameters `json:"staticVnetRoute,omitempty" tf:"static_vnet_route,omitempty"`
 }
@@ -213,6 +216,9 @@ type VirtualHubConnectionRoutingObservation struct {
 
 	// The static VNet local route override criteria that is used to determine whether NVA in spoke VNet is bypassed for traffic with destination in spoke VNet. Possible values are Contains and Equal. Defaults to Contains. Changing this forces a new resource to be created.
 	StaticVnetLocalRouteOverrideCriteria *string `json:"staticVnetLocalRouteOverrideCriteria,omitempty" tf:"static_vnet_local_route_override_criteria,omitempty"`
+
+	// Whether the static routes should be propagated to the Virtual Hub. Defaults to true.
+	StaticVnetPropagateStaticRoutesEnabled *bool `json:"staticVnetPropagateStaticRoutesEnabled,omitempty" tf:"static_vnet_propagate_static_routes_enabled,omitempty"`
 
 	// A static_vnet_route block as defined below.
 	StaticVnetRoute []StaticVnetRouteObservation `json:"staticVnetRoute,omitempty" tf:"static_vnet_route,omitempty"`
@@ -249,6 +255,10 @@ type VirtualHubConnectionRoutingParameters struct {
 	// The static VNet local route override criteria that is used to determine whether NVA in spoke VNet is bypassed for traffic with destination in spoke VNet. Possible values are Contains and Equal. Defaults to Contains. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	StaticVnetLocalRouteOverrideCriteria *string `json:"staticVnetLocalRouteOverrideCriteria,omitempty" tf:"static_vnet_local_route_override_criteria,omitempty"`
+
+	// Whether the static routes should be propagated to the Virtual Hub. Defaults to true.
+	// +kubebuilder:validation:Optional
+	StaticVnetPropagateStaticRoutesEnabled *bool `json:"staticVnetPropagateStaticRoutesEnabled,omitempty" tf:"static_vnet_propagate_static_routes_enabled,omitempty"`
 
 	// A static_vnet_route block as defined below.
 	// +kubebuilder:validation:Optional

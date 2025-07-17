@@ -77,7 +77,7 @@ spec:
                   cleanupEnabled:
                     description: Cluster will not be recycled and it will be used
                       in next data flow activity run until TTL (time to live) is reached
-                      if this is set as false. Default is true.
+                      if this is set as false. Defaults to true.
                     type: boolean
                   computeType:
                     description: Compute type of the cluster which will execute data
@@ -203,7 +203,7 @@ spec:
                   cleanupEnabled:
                     description: Cluster will not be recycled and it will be used
                       in next data flow activity run until TTL (time to live) is reached
-                      if this is set as false. Default is true.
+                      if this is set as false. Defaults to true.
                     type: boolean
                   computeType:
                     description: Compute type of the cluster which will execute data
@@ -414,7 +414,7 @@ spec:
                   cleanupEnabled:
                     description: Cluster will not be recycled and it will be used
                       in next data flow activity run until TTL (time to live) is reached
-                      if this is set as false. Default is true.
+                      if this is set as false. Defaults to true.
                     type: boolean
                   computeType:
                     description: Compute type of the cluster which will execute data

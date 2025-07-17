@@ -8,7 +8,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    charset: utf8
+    charset: UTF8
     collation: en_US.utf8
     serverIdSelector:
       matchLabels:

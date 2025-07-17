@@ -1123,7 +1123,7 @@ type ResponseInitParameters struct {
 	// One or more header blocks as defined above.
 	Header []ResponseHeaderInitParameters `json:"header,omitempty" tf:"header,omitempty"`
 
-	// One or more representation blocks as defined below.
+	// One or more representation blocks as defined above.
 	Representation []ResponseRepresentationInitParameters `json:"representation,omitempty" tf:"representation,omitempty"`
 
 	// The HTTP Status Code.
@@ -1138,7 +1138,7 @@ type ResponseObservation struct {
 	// One or more header blocks as defined above.
 	Header []ResponseHeaderObservation `json:"header,omitempty" tf:"header,omitempty"`
 
-	// One or more representation blocks as defined below.
+	// One or more representation blocks as defined above.
 	Representation []ResponseRepresentationObservation `json:"representation,omitempty" tf:"representation,omitempty"`
 
 	// The HTTP Status Code.
@@ -1155,7 +1155,7 @@ type ResponseParameters struct {
 	// +kubebuilder:validation:Optional
 	Header []ResponseHeaderParameters `json:"header,omitempty" tf:"header,omitempty"`
 
-	// One or more representation blocks as defined below.
+	// One or more representation blocks as defined above.
 	// +kubebuilder:validation:Optional
 	Representation []ResponseRepresentationParameters `json:"representation,omitempty" tf:"representation,omitempty"`
 

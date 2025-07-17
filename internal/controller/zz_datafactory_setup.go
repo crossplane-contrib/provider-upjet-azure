@@ -25,7 +25,6 @@ import (
 	factory "github.com/upbound/provider-azure/internal/controller/datafactory/factory"
 	integrationruntimeazure "github.com/upbound/provider-azure/internal/controller/datafactory/integrationruntimeazure"
 	integrationruntimeazuressis "github.com/upbound/provider-azure/internal/controller/datafactory/integrationruntimeazuressis"
-	integrationruntimemanaged "github.com/upbound/provider-azure/internal/controller/datafactory/integrationruntimemanaged"
 	integrationruntimeselfhosted "github.com/upbound/provider-azure/internal/controller/datafactory/integrationruntimeselfhosted"
 	linkedcustomservice "github.com/upbound/provider-azure/internal/controller/datafactory/linkedcustomservice"
 	linkedserviceazureblobstorage "github.com/upbound/provider-azure/internal/controller/datafactory/linkedserviceazureblobstorage"
@@ -76,7 +75,6 @@ func Setup_datafactory(mgr ctrl.Manager, o controller.Options) error {
 		factory.Setup,
 		integrationruntimeazure.Setup,
 		integrationruntimeazuressis.Setup,
-		integrationruntimemanaged.Setup,
 		integrationruntimeselfhosted.Setup,
 		linkedcustomservice.Setup,
 		linkedserviceazureblobstorage.Setup,

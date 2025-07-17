@@ -823,7 +823,7 @@ spec:
                     type: string
                   dataLocale:
                     description: Specifies the Data Locale of the Job, which should
-                      be a supported .NET Culture.
+                      be a supported .NET Culture. Defaults to en-US.
                     type: string
                   eventsLateArrivalMaxDelayInSeconds:
                     description: Specifies the maximum tolerable delay in seconds
@@ -992,7 +992,8 @@ spec:
                   streamingUnits:
                     description: Specifies the number of streaming units that the
                       streaming job uses. Supported values are 1, 3, 6 and multiples
-                      of 6 up to 120.
+                      of 6 up to 120. A conversion table for V2 streaming units can
+                      be found here
                     type: number
                   tags:
                     additionalProperties:
@@ -1035,7 +1036,7 @@ spec:
                     type: string
                   dataLocale:
                     description: Specifies the Data Locale of the Job, which should
-                      be a supported .NET Culture.
+                      be a supported .NET Culture. Defaults to en-US.
                     type: string
                   eventsLateArrivalMaxDelayInSeconds:
                     description: Specifies the maximum tolerable delay in seconds
@@ -1125,7 +1126,8 @@ spec:
                   streamingUnits:
                     description: Specifies the number of streaming units that the
                       streaming job uses. Supported values are 1, 3, 6 and multiples
-                      of 6 up to 120.
+                      of 6 up to 120. A conversion table for V2 streaming units can
+                      be found here
                     type: number
                   tags:
                     additionalProperties:
@@ -1336,7 +1338,7 @@ spec:
                     type: string
                   dataLocale:
                     description: Specifies the Data Locale of the Job, which should
-                      be a supported .NET Culture.
+                      be a supported .NET Culture. Defaults to en-US.
                     type: string
                   eventsLateArrivalMaxDelayInSeconds:
                     description: Specifies the maximum tolerable delay in seconds
@@ -1426,7 +1428,8 @@ spec:
                   streamingUnits:
                     description: Specifies the number of streaming units that the
                       streaming job uses. Supported values are 1, 3, 6 and multiples
-                      of 6 up to 120.
+                      of 6 up to 120. A conversion table for V2 streaming units can
+                      be found here
                     type: number
                   tags:
                     additionalProperties:

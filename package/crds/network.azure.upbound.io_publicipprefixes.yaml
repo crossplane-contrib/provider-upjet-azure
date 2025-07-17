@@ -173,6 +173,11 @@ spec:
                       are Standard. Defaults to Standard. Changing this forces a new
                       resource to be created.
                     type: string
+                  skuTier:
+                    description: The SKU Tier that should be used for the Public IP.
+                      Possible values are Regional and Global. Defaults to Regional.
+                      Changing this forces a new resource to be created.
+                    type: string
                   tags:
                     additionalProperties:
                       type: string
@@ -219,6 +224,11 @@ spec:
                     description: The SKU of the Public IP Prefix. Accepted values
                       are Standard. Defaults to Standard. Changing this forces a new
                       resource to be created.
+                    type: string
+                  skuTier:
+                    description: The SKU Tier that should be used for the Public IP.
+                      Possible values are Regional and Global. Defaults to Regional.
+                      Changing this forces a new resource to be created.
                     type: string
                   tags:
                     additionalProperties:
@@ -441,6 +451,11 @@ spec:
                     description: The SKU of the Public IP Prefix. Accepted values
                       are Standard. Defaults to Standard. Changing this forces a new
                       resource to be created.
+                    type: string
+                  skuTier:
+                    description: The SKU Tier that should be used for the Public IP.
+                      Possible values are Regional and Global. Defaults to Regional.
+                      Changing this forces a new resource to be created.
                     type: string
                   tags:
                     additionalProperties:

@@ -351,10 +351,7 @@ type WorkspaceInitParameters struct {
 	// +kubebuilder:validation:Optional
 	PrimaryUserAssignedIdentitySelector *v1.Selector `json:"primaryUserAssignedIdentitySelector,omitempty" tf:"-"`
 
-	// Enable public access when this Machine Learning Workspace is behind a VNet. Changing this forces a new resource to be created.
-	PublicAccessBehindVirtualNetworkEnabled *bool `json:"publicAccessBehindVirtualNetworkEnabled,omitempty" tf:"public_access_behind_virtual_network_enabled,omitempty"`
-
-	// Enable public access when this Machine Learning Workspace is behind VNet.
+	// Enable public access when this Machine Learning Workspace is behind VNet. Defaults to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// A serverless_compute block as defined below.
@@ -434,10 +431,7 @@ type WorkspaceObservation struct {
 	// The user assigned identity id that represents the workspace identity.
 	PrimaryUserAssignedIdentity *string `json:"primaryUserAssignedIdentity,omitempty" tf:"primary_user_assigned_identity,omitempty"`
 
-	// Enable public access when this Machine Learning Workspace is behind a VNet. Changing this forces a new resource to be created.
-	PublicAccessBehindVirtualNetworkEnabled *bool `json:"publicAccessBehindVirtualNetworkEnabled,omitempty" tf:"public_access_behind_virtual_network_enabled,omitempty"`
-
-	// Enable public access when this Machine Learning Workspace is behind VNet.
+	// Enable public access when this Machine Learning Workspace is behind VNet. Defaults to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// Specifies the name of the Resource Group in which the Machine Learning Workspace should exist. Changing this forces a new resource to be created.
@@ -551,11 +545,7 @@ type WorkspaceParameters struct {
 	// +kubebuilder:validation:Optional
 	PrimaryUserAssignedIdentitySelector *v1.Selector `json:"primaryUserAssignedIdentitySelector,omitempty" tf:"-"`
 
-	// Enable public access when this Machine Learning Workspace is behind a VNet. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	PublicAccessBehindVirtualNetworkEnabled *bool `json:"publicAccessBehindVirtualNetworkEnabled,omitempty" tf:"public_access_behind_virtual_network_enabled,omitempty"`
-
-	// Enable public access when this Machine Learning Workspace is behind VNet.
+	// Enable public access when this Machine Learning Workspace is behind VNet. Defaults to true.
 	// +kubebuilder:validation:Optional
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 

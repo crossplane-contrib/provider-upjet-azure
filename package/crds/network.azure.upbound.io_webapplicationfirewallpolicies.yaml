@@ -1467,7 +1467,7 @@ spec:
                       properties:
                         action:
                           description: Type of action. Possible values are Allow,
-                            Block and Log.
+                            Block, JSChallenge and Log.
                           type: string
                         enabled:
                           description: Describes if the policy is in enabled state
@@ -1519,7 +1519,8 @@ spec:
                               transforms:
                                 description: A list of transformations to do before
                                   the match is attempted. Possible values are HtmlEntityDecode,
-                                  Lowercase, RemoveNulls, Trim, UrlDecode and UrlEncode.
+                                  Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode
+                                  and UrlEncode.
                                 items:
                                   type: string
                                 type: array
@@ -1605,7 +1606,7 @@ spec:
                                   type: string
                                 version:
                                   description: 'The rule set version. Possible values:
-                                    0.1, 1.0, 2.1, 2.2.9, 3.0, 3.1 and 3.2.'
+                                    0.1, 1.0, 1.1, 2.1, 2.2.9, 3.0, 3.1 and 3.2.'
                                   type: string
                               type: object
                             matchVariable:
@@ -1634,10 +1635,6 @@ spec:
                                 below.
                               items:
                                 properties:
-                                  disabledRules:
-                                    items:
-                                      type: string
-                                    type: array
                                   rule:
                                     description: One or more rule block defined below.
                                     items:
@@ -1687,7 +1684,7 @@ spec:
                               type: string
                             version:
                               description: 'The rule set version. Possible values:
-                                0.1, 1.0, 2.1, 2.2.9, 3.0, 3.1 and 3.2.'
+                                0.1, 1.0, 1.1, 2.1, 2.2.9, 3.0, 3.1 and 3.2.'
                               type: string
                           type: object
                         type: array
@@ -1698,6 +1695,10 @@ spec:
                       enabled:
                         description: Describes if the policy is in enabled state or
                           disabled state. Defaults to true.
+                        type: boolean
+                      fileUploadEnforcement:
+                        description: '- Whether the firewall should block a request
+                          with upload size greater then file_upload_limit_in_mb.'
                         type: boolean
                       fileUploadLimitInMb:
                         description: The File Upload Limit in MB. Accepted values
@@ -1754,6 +1755,11 @@ spec:
                         type: string
                       requestBodyCheck:
                         description: Is Request Body Inspection enabled? Defaults
+                          to true.
+                        type: boolean
+                      requestBodyEnforcement:
+                        description: Whether the firewall should block a request with
+                          body size greater then max_request_body_size_in_kb. Defaults
                           to true.
                         type: boolean
                       requestBodyInspectLimitInKb:
@@ -1869,7 +1875,7 @@ spec:
                       properties:
                         action:
                           description: Type of action. Possible values are Allow,
-                            Block and Log.
+                            Block, JSChallenge and Log.
                           type: string
                         enabled:
                           description: Describes if the policy is in enabled state
@@ -1921,7 +1927,8 @@ spec:
                               transforms:
                                 description: A list of transformations to do before
                                   the match is attempted. Possible values are HtmlEntityDecode,
-                                  Lowercase, RemoveNulls, Trim, UrlDecode and UrlEncode.
+                                  Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode
+                                  and UrlEncode.
                                 items:
                                   type: string
                                 type: array
@@ -2007,7 +2014,7 @@ spec:
                                   type: string
                                 version:
                                   description: 'The rule set version. Possible values:
-                                    0.1, 1.0, 2.1, 2.2.9, 3.0, 3.1 and 3.2.'
+                                    0.1, 1.0, 1.1, 2.1, 2.2.9, 3.0, 3.1 and 3.2.'
                                   type: string
                               type: object
                             matchVariable:
@@ -2036,10 +2043,6 @@ spec:
                                 below.
                               items:
                                 properties:
-                                  disabledRules:
-                                    items:
-                                      type: string
-                                    type: array
                                   rule:
                                     description: One or more rule block defined below.
                                     items:
@@ -2089,7 +2092,7 @@ spec:
                               type: string
                             version:
                               description: 'The rule set version. Possible values:
-                                0.1, 1.0, 2.1, 2.2.9, 3.0, 3.1 and 3.2.'
+                                0.1, 1.0, 1.1, 2.1, 2.2.9, 3.0, 3.1 and 3.2.'
                               type: string
                           type: object
                         type: array
@@ -2100,6 +2103,10 @@ spec:
                       enabled:
                         description: Describes if the policy is in enabled state or
                           disabled state. Defaults to true.
+                        type: boolean
+                      fileUploadEnforcement:
+                        description: '- Whether the firewall should block a request
+                          with upload size greater then file_upload_limit_in_mb.'
                         type: boolean
                       fileUploadLimitInMb:
                         description: The File Upload Limit in MB. Accepted values
@@ -2156,6 +2163,11 @@ spec:
                         type: string
                       requestBodyCheck:
                         description: Is Request Body Inspection enabled? Defaults
+                          to true.
+                        type: boolean
+                      requestBodyEnforcement:
+                        description: Whether the firewall should block a request with
+                          body size greater then max_request_body_size_in_kb. Defaults
                           to true.
                         type: boolean
                       requestBodyInspectLimitInKb:
@@ -2360,7 +2372,7 @@ spec:
                       properties:
                         action:
                           description: Type of action. Possible values are Allow,
-                            Block and Log.
+                            Block, JSChallenge and Log.
                           type: string
                         enabled:
                           description: Describes if the policy is in enabled state
@@ -2412,7 +2424,8 @@ spec:
                               transforms:
                                 description: A list of transformations to do before
                                   the match is attempted. Possible values are HtmlEntityDecode,
-                                  Lowercase, RemoveNulls, Trim, UrlDecode and UrlEncode.
+                                  Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode
+                                  and UrlEncode.
                                 items:
                                   type: string
                                 type: array
@@ -2506,7 +2519,7 @@ spec:
                                   type: string
                                 version:
                                   description: 'The rule set version. Possible values:
-                                    0.1, 1.0, 2.1, 2.2.9, 3.0, 3.1 and 3.2.'
+                                    0.1, 1.0, 1.1, 2.1, 2.2.9, 3.0, 3.1 and 3.2.'
                                   type: string
                               type: object
                             matchVariable:
@@ -2535,10 +2548,6 @@ spec:
                                 below.
                               items:
                                 properties:
-                                  disabledRules:
-                                    items:
-                                      type: string
-                                    type: array
                                   rule:
                                     description: One or more rule block defined below.
                                     items:
@@ -2588,7 +2597,7 @@ spec:
                               type: string
                             version:
                               description: 'The rule set version. Possible values:
-                                0.1, 1.0, 2.1, 2.2.9, 3.0, 3.1 and 3.2.'
+                                0.1, 1.0, 1.1, 2.1, 2.2.9, 3.0, 3.1 and 3.2.'
                               type: string
                           type: object
                         type: array
@@ -2604,6 +2613,10 @@ spec:
                       enabled:
                         description: Describes if the policy is in enabled state or
                           disabled state. Defaults to true.
+                        type: boolean
+                      fileUploadEnforcement:
+                        description: '- Whether the firewall should block a request
+                          with upload size greater then file_upload_limit_in_mb.'
                         type: boolean
                       fileUploadLimitInMb:
                         description: The File Upload Limit in MB. Accepted values
@@ -2660,6 +2673,11 @@ spec:
                         type: string
                       requestBodyCheck:
                         description: Is Request Body Inspection enabled? Defaults
+                          to true.
+                        type: boolean
+                      requestBodyEnforcement:
+                        description: Whether the firewall should block a request with
+                          body size greater then max_request_body_size_in_kb. Defaults
                           to true.
                         type: boolean
                       requestBodyInspectLimitInKb:

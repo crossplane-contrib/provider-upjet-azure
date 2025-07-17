@@ -3649,8 +3649,9 @@ spec:
                               properties:
                                 publicKey:
                                   description: The Public Key which should be used
-                                    for authentication, which needs to be at least
-                                    2048-bit and in ssh-rsa format.
+                                    for authentication, which needs to be in ssh-rsa
+                                    format with at least 2048-bit or in ssh-ed25519
+                                    format.
                                   type: string
                                 username:
                                   description: The Username for which this Public
@@ -3993,6 +3994,57 @@ spec:
                             type: string
                         type: object
                     type: object
+                  rollingUpgradePolicy:
+                    description: A rolling_upgrade_policy block as defined below.
+                      This is Required when upgrade_mode is set to Rolling and cannot
+                      be specified when upgrade_mode is set to Manual. Changing this
+                      forces a new resource to be created.
+                    properties:
+                      crossZoneUpgradesEnabled:
+                        description: Should the Virtual Machine Scale Set ignore the
+                          Azure Zone boundaries when constructing upgrade batches?
+                          Possible values are true or false.
+                        type: boolean
+                      maxBatchInstancePercent:
+                        description: The maximum percent of total virtual machine
+                          instances that will be upgraded simultaneously by the rolling
+                          upgrade in one batch. As this is a maximum, unhealthy instances
+                          in previous or future batches can cause the percentage of
+                          instances in a batch to decrease to ensure higher reliability.
+                        type: number
+                      maxUnhealthyInstancePercent:
+                        description: The maximum percentage of the total virtual machine
+                          instances in the scale set that can be simultaneously unhealthy,
+                          either as a result of being upgraded, or by being found
+                          in an unhealthy state by the virtual machine health checks
+                          before the rolling upgrade aborts. This constraint will
+                          be checked prior to starting any batch.
+                        type: number
+                      maxUnhealthyUpgradedInstancePercent:
+                        description: The maximum percentage of upgraded virtual machine
+                          instances that can be found to be in an unhealthy state.
+                          This check will happen after each batch is upgraded. If
+                          this percentage is ever exceeded, the rolling update aborts.
+                        type: number
+                      maximumSurgeInstancesEnabled:
+                        description: Create new virtual machines to upgrade the scale
+                          set, rather than updating the existing virtual machines.
+                          Existing virtual machines will be deleted once the new virtual
+                          machines are created for each batch. Possible values are
+                          true or false.
+                        type: boolean
+                      pauseTimeBetweenBatches:
+                        description: The wait time between completing the update for
+                          all virtual machines in one batch and starting the next
+                          batch. The time duration should be specified in ISO 8601
+                          duration format.
+                        type: string
+                      prioritizeUnhealthyInstancesEnabled:
+                        description: Upgrade all unhealthy instances in a scale set
+                          before any healthy instances. Possible values are true or
+                          false.
+                        type: boolean
+                    type: object
                   singlePlacementGroup:
                     description: Should this Virtual Machine Scale Set be limited
                       to a Single Placement Group, which means the number of instances
@@ -4006,6 +4058,23 @@ spec:
                       optimized, FPGA optimized, High performance, or Previous generation
                       virtual machine SKUs.'
                     type: string
+                  skuProfile:
+                    description: An sku_profile block as defined below. Changing this
+                      forces a new resource to be created.
+                    properties:
+                      allocationStrategy:
+                        description: Specifies the allocation strategy for the virtual
+                          machine scale set based on which the VMs will be allocated.
+                          Possible values are LowestPrice and CapacityOptimized.
+                        type: string
+                      vmSizes:
+                        description: Specifies the VM sizes for the virtual machine
+                          scale set.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                    type: object
                   sourceImageId:
                     description: The ID of an Image which each Virtual Machine in
                       this Scale Set should be based on. Possible Image ID types include
@@ -4057,6 +4126,12 @@ spec:
                           be specified in ISO 8601 format. Defaults to PT5M.
                         type: string
                     type: object
+                  upgradeMode:
+                    description: Specifies how upgrades (e.g. changing the Image/SKU)
+                      should be performed to Virtual Machine Instances. Possible values
+                      are Automatic, Manual and Rolling. Defaults to Manual. Changing
+                      this forces a new resource to be created.
+                    type: string
                   userDataBase64SecretRef:
                     description: The Base64-Encoded User Data which should be used
                       for this Virtual Machine Scale Set.
@@ -4082,8 +4157,7 @@ spec:
                     type: boolean
                   zones:
                     description: Specifies a list of Availability Zones across which
-                      the Virtual Machine Scale Set will create instances. Changing
-                      this forces a new Virtual Machine Scale Set to be created.
+                      the Virtual Machine Scale Set will create instances.
                     items:
                       type: string
                     type: array
@@ -4652,8 +4726,9 @@ spec:
                               properties:
                                 publicKey:
                                   description: The Public Key which should be used
-                                    for authentication, which needs to be at least
-                                    2048-bit and in ssh-rsa format.
+                                    for authentication, which needs to be in ssh-rsa
+                                    format with at least 2048-bit or in ssh-ed25519
+                                    format.
                                   type: string
                                 username:
                                   description: The Username for which this Public
@@ -4919,6 +4994,57 @@ spec:
                       Virtual Machine should be assigned to. Changing this forces
                       a new resource to be created.
                     type: string
+                  rollingUpgradePolicy:
+                    description: A rolling_upgrade_policy block as defined below.
+                      This is Required when upgrade_mode is set to Rolling and cannot
+                      be specified when upgrade_mode is set to Manual. Changing this
+                      forces a new resource to be created.
+                    properties:
+                      crossZoneUpgradesEnabled:
+                        description: Should the Virtual Machine Scale Set ignore the
+                          Azure Zone boundaries when constructing upgrade batches?
+                          Possible values are true or false.
+                        type: boolean
+                      maxBatchInstancePercent:
+                        description: The maximum percent of total virtual machine
+                          instances that will be upgraded simultaneously by the rolling
+                          upgrade in one batch. As this is a maximum, unhealthy instances
+                          in previous or future batches can cause the percentage of
+                          instances in a batch to decrease to ensure higher reliability.
+                        type: number
+                      maxUnhealthyInstancePercent:
+                        description: The maximum percentage of the total virtual machine
+                          instances in the scale set that can be simultaneously unhealthy,
+                          either as a result of being upgraded, or by being found
+                          in an unhealthy state by the virtual machine health checks
+                          before the rolling upgrade aborts. This constraint will
+                          be checked prior to starting any batch.
+                        type: number
+                      maxUnhealthyUpgradedInstancePercent:
+                        description: The maximum percentage of upgraded virtual machine
+                          instances that can be found to be in an unhealthy state.
+                          This check will happen after each batch is upgraded. If
+                          this percentage is ever exceeded, the rolling update aborts.
+                        type: number
+                      maximumSurgeInstancesEnabled:
+                        description: Create new virtual machines to upgrade the scale
+                          set, rather than updating the existing virtual machines.
+                          Existing virtual machines will be deleted once the new virtual
+                          machines are created for each batch. Possible values are
+                          true or false.
+                        type: boolean
+                      pauseTimeBetweenBatches:
+                        description: The wait time between completing the update for
+                          all virtual machines in one batch and starting the next
+                          batch. The time duration should be specified in ISO 8601
+                          duration format.
+                        type: string
+                      prioritizeUnhealthyInstancesEnabled:
+                        description: Upgrade all unhealthy instances in a scale set
+                          before any healthy instances. Possible values are true or
+                          false.
+                        type: boolean
+                    type: object
                   singlePlacementGroup:
                     description: Should this Virtual Machine Scale Set be limited
                       to a Single Placement Group, which means the number of instances
@@ -4932,6 +5058,23 @@ spec:
                       optimized, FPGA optimized, High performance, or Previous generation
                       virtual machine SKUs.'
                     type: string
+                  skuProfile:
+                    description: An sku_profile block as defined below. Changing this
+                      forces a new resource to be created.
+                    properties:
+                      allocationStrategy:
+                        description: Specifies the allocation strategy for the virtual
+                          machine scale set based on which the VMs will be allocated.
+                          Possible values are LowestPrice and CapacityOptimized.
+                        type: string
+                      vmSizes:
+                        description: Specifies the VM sizes for the virtual machine
+                          scale set.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                    type: object
                   sourceImageId:
                     description: The ID of an Image which each Virtual Machine in
                       this Scale Set should be based on. Possible Image ID types include
@@ -4983,6 +5126,12 @@ spec:
                           be specified in ISO 8601 format. Defaults to PT5M.
                         type: string
                     type: object
+                  upgradeMode:
+                    description: Specifies how upgrades (e.g. changing the Image/SKU)
+                      should be performed to Virtual Machine Instances. Possible values
+                      are Automatic, Manual and Rolling. Defaults to Manual. Changing
+                      this forces a new resource to be created.
+                    type: string
                   userDataBase64SecretRef:
                     description: The Base64-Encoded User Data which should be used
                       for this Virtual Machine Scale Set.
@@ -5008,8 +5157,7 @@ spec:
                     type: boolean
                   zones:
                     description: Specifies a list of Availability Zones across which
-                      the Virtual Machine Scale Set will create instances. Changing
-                      this forces a new Virtual Machine Scale Set to be created.
+                      the Virtual Machine Scale Set will create instances.
                     items:
                       type: string
                     type: array
@@ -5619,8 +5767,9 @@ spec:
                               properties:
                                 publicKey:
                                   description: The Public Key which should be used
-                                    for authentication, which needs to be at least
-                                    2048-bit and in ssh-rsa format.
+                                    for authentication, which needs to be in ssh-rsa
+                                    format with at least 2048-bit or in ssh-ed25519
+                                    format.
                                   type: string
                                 username:
                                   description: The Username for which this Public
@@ -5848,6 +5997,57 @@ spec:
                       Machine Scale Set should exist. Changing this forces a new resource
                       to be created.
                     type: string
+                  rollingUpgradePolicy:
+                    description: A rolling_upgrade_policy block as defined below.
+                      This is Required when upgrade_mode is set to Rolling and cannot
+                      be specified when upgrade_mode is set to Manual. Changing this
+                      forces a new resource to be created.
+                    properties:
+                      crossZoneUpgradesEnabled:
+                        description: Should the Virtual Machine Scale Set ignore the
+                          Azure Zone boundaries when constructing upgrade batches?
+                          Possible values are true or false.
+                        type: boolean
+                      maxBatchInstancePercent:
+                        description: The maximum percent of total virtual machine
+                          instances that will be upgraded simultaneously by the rolling
+                          upgrade in one batch. As this is a maximum, unhealthy instances
+                          in previous or future batches can cause the percentage of
+                          instances in a batch to decrease to ensure higher reliability.
+                        type: number
+                      maxUnhealthyInstancePercent:
+                        description: The maximum percentage of the total virtual machine
+                          instances in the scale set that can be simultaneously unhealthy,
+                          either as a result of being upgraded, or by being found
+                          in an unhealthy state by the virtual machine health checks
+                          before the rolling upgrade aborts. This constraint will
+                          be checked prior to starting any batch.
+                        type: number
+                      maxUnhealthyUpgradedInstancePercent:
+                        description: The maximum percentage of upgraded virtual machine
+                          instances that can be found to be in an unhealthy state.
+                          This check will happen after each batch is upgraded. If
+                          this percentage is ever exceeded, the rolling update aborts.
+                        type: number
+                      maximumSurgeInstancesEnabled:
+                        description: Create new virtual machines to upgrade the scale
+                          set, rather than updating the existing virtual machines.
+                          Existing virtual machines will be deleted once the new virtual
+                          machines are created for each batch. Possible values are
+                          true or false.
+                        type: boolean
+                      pauseTimeBetweenBatches:
+                        description: The wait time between completing the update for
+                          all virtual machines in one batch and starting the next
+                          batch. The time duration should be specified in ISO 8601
+                          duration format.
+                        type: string
+                      prioritizeUnhealthyInstancesEnabled:
+                        description: Upgrade all unhealthy instances in a scale set
+                          before any healthy instances. Possible values are true or
+                          false.
+                        type: boolean
+                    type: object
                   singlePlacementGroup:
                     description: Should this Virtual Machine Scale Set be limited
                       to a Single Placement Group, which means the number of instances
@@ -5861,6 +6061,23 @@ spec:
                       optimized, FPGA optimized, High performance, or Previous generation
                       virtual machine SKUs.'
                     type: string
+                  skuProfile:
+                    description: An sku_profile block as defined below. Changing this
+                      forces a new resource to be created.
+                    properties:
+                      allocationStrategy:
+                        description: Specifies the allocation strategy for the virtual
+                          machine scale set based on which the VMs will be allocated.
+                          Possible values are LowestPrice and CapacityOptimized.
+                        type: string
+                      vmSizes:
+                        description: Specifies the VM sizes for the virtual machine
+                          scale set.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                    type: object
                   sourceImageId:
                     description: The ID of an Image which each Virtual Machine in
                       this Scale Set should be based on. Possible Image ID types include
@@ -5915,6 +6132,12 @@ spec:
                   uniqueId:
                     description: The Unique ID for the Virtual Machine Scale Set.
                     type: string
+                  upgradeMode:
+                    description: Specifies how upgrades (e.g. changing the Image/SKU)
+                      should be performed to Virtual Machine Instances. Possible values
+                      are Automatic, Manual and Rolling. Defaults to Manual. Changing
+                      this forces a new resource to be created.
+                    type: string
                   zoneBalance:
                     description: Should the Virtual Machines in this Scale Set be
                       strictly evenly distributed across Availability Zones? Defaults
@@ -5922,8 +6145,7 @@ spec:
                     type: boolean
                   zones:
                     description: Specifies a list of Availability Zones across which
-                      the Virtual Machine Scale Set will create instances. Changing
-                      this forces a new Virtual Machine Scale Set to be created.
+                      the Virtual Machine Scale Set will create instances.
                     items:
                       type: string
                     type: array

@@ -1341,8 +1341,6 @@ spec:
                               be found as id on the azurerm_key_vault resource.
                             type: string
                         type: object
-                      enabled:
-                        type: boolean
                       keyEncryptionKey:
                         description: A key_encryption_key block as defined below.
                         properties:
@@ -1719,8 +1717,6 @@ spec:
                               be found as id on the azurerm_key_vault resource.
                             type: string
                         type: object
-                      enabled:
-                        type: boolean
                       keyEncryptionKey:
                         description: A key_encryption_key block as defined below.
                         properties:
@@ -2188,8 +2184,6 @@ spec:
                               be found as id on the azurerm_key_vault resource.
                             type: string
                         type: object
-                      enabled:
-                        type: boolean
                       keyEncryptionKey:
                         description: A key_encryption_key block as defined below.
                         properties:

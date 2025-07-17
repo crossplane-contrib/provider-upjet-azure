@@ -95,7 +95,7 @@ type MonitorScheduledQueryRulesAlertInitParameters struct {
 	AuthorizedResourceIdsSelector *v1.Selector `json:"authorizedResourceIdsSelector,omitempty" tf:"-"`
 
 	// Should the alerts in this Metric Alert be auto resolved? Defaults to false.
-	// -> NOTE auto_mitigation_enabled and throttling are mutually exclusive and cannot both be set.
+	// -> Note: auto_mitigation_enabled and throttling are mutually exclusive and cannot both be set.
 	AutoMitigationEnabled *bool `json:"autoMitigationEnabled,omitempty" tf:"auto_mitigation_enabled,omitempty"`
 
 	// The resource URI over which log search query is to be run. Changing this forces a new resource to be created.
@@ -171,7 +171,7 @@ type MonitorScheduledQueryRulesAlertObservation struct {
 	AuthorizedResourceIds []*string `json:"authorizedResourceIds,omitempty" tf:"authorized_resource_ids,omitempty"`
 
 	// Should the alerts in this Metric Alert be auto resolved? Defaults to false.
-	// -> NOTE auto_mitigation_enabled and throttling are mutually exclusive and cannot both be set.
+	// -> Note: auto_mitigation_enabled and throttling are mutually exclusive and cannot both be set.
 	AutoMitigationEnabled *bool `json:"autoMitigationEnabled,omitempty" tf:"auto_mitigation_enabled,omitempty"`
 
 	// The resource URI over which log search query is to be run. Changing this forces a new resource to be created.
@@ -243,7 +243,7 @@ type MonitorScheduledQueryRulesAlertParameters struct {
 	AuthorizedResourceIdsSelector *v1.Selector `json:"authorizedResourceIdsSelector,omitempty" tf:"-"`
 
 	// Should the alerts in this Metric Alert be auto resolved? Defaults to false.
-	// -> NOTE auto_mitigation_enabled and throttling are mutually exclusive and cannot both be set.
+	// -> Note: auto_mitigation_enabled and throttling are mutually exclusive and cannot both be set.
 	// +kubebuilder:validation:Optional
 	AutoMitigationEnabled *bool `json:"autoMitigationEnabled,omitempty" tf:"auto_mitigation_enabled,omitempty"`
 

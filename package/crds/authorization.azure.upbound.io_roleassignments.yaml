@@ -111,7 +111,7 @@ spec:
                     type: string
                   roleDefinitionId:
                     description: The Scoped-ID of the Role Definition. Changing this
-                      forces a new resource to be created. Conflicts with role_definition_name.
+                      forces a new resource to be created.
                     type: string
                   roleDefinitionIdRef:
                     description: Reference to a RoleDefinition in authorization to
@@ -191,7 +191,7 @@ spec:
                     type: object
                   roleDefinitionName:
                     description: The name of a built-in Role. Changing this forces
-                      a new resource to be created. Conflicts with role_definition_id.
+                      a new resource to be created.
                     type: string
                   scope:
                     description: The scope at which the Role Assignment applies to,
@@ -260,7 +260,7 @@ spec:
                     type: string
                   roleDefinitionId:
                     description: The Scoped-ID of the Role Definition. Changing this
-                      forces a new resource to be created. Conflicts with role_definition_name.
+                      forces a new resource to be created.
                     type: string
                   roleDefinitionIdRef:
                     description: Reference to a RoleDefinition in authorization to
@@ -340,7 +340,7 @@ spec:
                     type: object
                   roleDefinitionName:
                     description: The name of a built-in Role. Changing this forces
-                      a new resource to be created. Conflicts with role_definition_id.
+                      a new resource to be created.
                     type: string
                   scope:
                     description: The scope at which the Role Assignment applies to,
@@ -580,11 +580,11 @@ spec:
                     type: string
                   roleDefinitionId:
                     description: The Scoped-ID of the Role Definition. Changing this
-                      forces a new resource to be created. Conflicts with role_definition_name.
+                      forces a new resource to be created.
                     type: string
                   roleDefinitionName:
                     description: The name of a built-in Role. Changing this forces
-                      a new resource to be created. Conflicts with role_definition_id.
+                      a new resource to be created.
                     type: string
                   scope:
                     description: The scope at which the Role Assignment applies to,

@@ -124,44 +124,6 @@ spec:
                           type: string
                       type: object
                     type: array
-                  condition:
-                    description: One or more condition blocks as defined below.
-                    items:
-                      properties:
-                        operator:
-                          description: 'The operator to use for evaluate the condition.
-                            Possible values include: Equals, NotEquals, Contains,
-                            NotContains, StartsWith, NotStartsWith, EndsWith, NotEndsWith.'
-                          type: string
-                        property:
-                          description: The property to use for evaluate the condition.
-                            Possible values are AccountAadTenantId, AccountAadUserId,
-                            AccountNTDomain, AccountName, AccountObjectGuid, AccountPUID,
-                            AccountSid, AccountUPNSuffix, AlertAnalyticRuleIds, AlertProductNames,
-                            AzureResourceResourceId, AzureResourceSubscriptionId,
-                            CloudApplicationAppId, CloudApplicationAppName, DNSDomainName,
-                            FileDirectory, FileHashValue, FileName, HostAzureID, HostNTDomain,
-                            HostName, HostNetBiosName, HostOSVersion, IPAddress, IncidentCustomDetailsKey,
-                            IncidentCustomDetailsValue, IncidentDescription, IncidentLabel,
-                            IncidentProviderName, IncidentRelatedAnalyticRuleIds,
-                            IncidentSeverity, IncidentStatus, IncidentTactics, IncidentTitle,
-                            IncidentUpdatedBySource, IoTDeviceId, IoTDeviceModel,
-                            IoTDeviceName, IoTDeviceOperatingSystem, IoTDeviceType,
-                            IoTDeviceVendor, MailMessageDeliveryAction, MailMessageDeliveryLocation,
-                            MailMessageP1Sender, MailMessageP2Sender, MailMessageRecipient,
-                            MailMessageSenderIP, MailMessageSubject, MailboxDisplayName,
-                            MailboxPrimaryAddress, MailboxUPN, MalwareCategory, MalwareName,
-                            ProcessCommandLine, ProcessId, RegistryKey, RegistryValueData
-                            and Url.
-                          type: string
-                        values:
-                          description: Specifies a list of values to use for evaluate
-                            the condition.
-                          items:
-                            type: string
-                          type: array
-                      type: object
-                    type: array
                   conditionJson:
                     description: A JSON array of one or more condition JSON objects
                       as is defined here.
@@ -339,44 +301,6 @@ spec:
                         tenantId:
                           description: The ID of the Tenant that owns the playbook.
                           type: string
-                      type: object
-                    type: array
-                  condition:
-                    description: One or more condition blocks as defined below.
-                    items:
-                      properties:
-                        operator:
-                          description: 'The operator to use for evaluate the condition.
-                            Possible values include: Equals, NotEquals, Contains,
-                            NotContains, StartsWith, NotStartsWith, EndsWith, NotEndsWith.'
-                          type: string
-                        property:
-                          description: The property to use for evaluate the condition.
-                            Possible values are AccountAadTenantId, AccountAadUserId,
-                            AccountNTDomain, AccountName, AccountObjectGuid, AccountPUID,
-                            AccountSid, AccountUPNSuffix, AlertAnalyticRuleIds, AlertProductNames,
-                            AzureResourceResourceId, AzureResourceSubscriptionId,
-                            CloudApplicationAppId, CloudApplicationAppName, DNSDomainName,
-                            FileDirectory, FileHashValue, FileName, HostAzureID, HostNTDomain,
-                            HostName, HostNetBiosName, HostOSVersion, IPAddress, IncidentCustomDetailsKey,
-                            IncidentCustomDetailsValue, IncidentDescription, IncidentLabel,
-                            IncidentProviderName, IncidentRelatedAnalyticRuleIds,
-                            IncidentSeverity, IncidentStatus, IncidentTactics, IncidentTitle,
-                            IncidentUpdatedBySource, IoTDeviceId, IoTDeviceModel,
-                            IoTDeviceName, IoTDeviceOperatingSystem, IoTDeviceType,
-                            IoTDeviceVendor, MailMessageDeliveryAction, MailMessageDeliveryLocation,
-                            MailMessageP1Sender, MailMessageP2Sender, MailMessageRecipient,
-                            MailMessageSenderIP, MailMessageSubject, MailboxDisplayName,
-                            MailboxPrimaryAddress, MailboxUPN, MalwareCategory, MalwareName,
-                            ProcessCommandLine, ProcessId, RegistryKey, RegistryValueData
-                            and Url.
-                          type: string
-                        values:
-                          description: Specifies a list of values to use for evaluate
-                            the condition.
-                          items:
-                            type: string
-                          type: array
                       type: object
                     type: array
                   conditionJson:
@@ -729,44 +653,6 @@ spec:
                         tenantId:
                           description: The ID of the Tenant that owns the playbook.
                           type: string
-                      type: object
-                    type: array
-                  condition:
-                    description: One or more condition blocks as defined below.
-                    items:
-                      properties:
-                        operator:
-                          description: 'The operator to use for evaluate the condition.
-                            Possible values include: Equals, NotEquals, Contains,
-                            NotContains, StartsWith, NotStartsWith, EndsWith, NotEndsWith.'
-                          type: string
-                        property:
-                          description: The property to use for evaluate the condition.
-                            Possible values are AccountAadTenantId, AccountAadUserId,
-                            AccountNTDomain, AccountName, AccountObjectGuid, AccountPUID,
-                            AccountSid, AccountUPNSuffix, AlertAnalyticRuleIds, AlertProductNames,
-                            AzureResourceResourceId, AzureResourceSubscriptionId,
-                            CloudApplicationAppId, CloudApplicationAppName, DNSDomainName,
-                            FileDirectory, FileHashValue, FileName, HostAzureID, HostNTDomain,
-                            HostName, HostNetBiosName, HostOSVersion, IPAddress, IncidentCustomDetailsKey,
-                            IncidentCustomDetailsValue, IncidentDescription, IncidentLabel,
-                            IncidentProviderName, IncidentRelatedAnalyticRuleIds,
-                            IncidentSeverity, IncidentStatus, IncidentTactics, IncidentTitle,
-                            IncidentUpdatedBySource, IoTDeviceId, IoTDeviceModel,
-                            IoTDeviceName, IoTDeviceOperatingSystem, IoTDeviceType,
-                            IoTDeviceVendor, MailMessageDeliveryAction, MailMessageDeliveryLocation,
-                            MailMessageP1Sender, MailMessageP2Sender, MailMessageRecipient,
-                            MailMessageSenderIP, MailMessageSubject, MailboxDisplayName,
-                            MailboxPrimaryAddress, MailboxUPN, MalwareCategory, MalwareName,
-                            ProcessCommandLine, ProcessId, RegistryKey, RegistryValueData
-                            and Url.
-                          type: string
-                        values:
-                          description: Specifies a list of values to use for evaluate
-                            the condition.
-                          items:
-                            type: string
-                          type: array
                       type: object
                     type: array
                   conditionJson:

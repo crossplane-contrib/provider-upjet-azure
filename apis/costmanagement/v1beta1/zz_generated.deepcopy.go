@@ -69,6 +69,11 @@ func (in *CostAnomalyAlertInitParameters) DeepCopyInto(out *CostAnomalyAlertInit
 		*out = new(string)
 		**out = **in
 	}
+	if in.NotificationEmail != nil {
+		in, out := &in.NotificationEmail, &out.NotificationEmail
+		*out = new(string)
+		**out = **in
+	}
 	if in.SubscriptionID != nil {
 		in, out := &in.SubscriptionID, &out.SubscriptionID
 		*out = new(string)
@@ -152,6 +157,11 @@ func (in *CostAnomalyAlertObservation) DeepCopyInto(out *CostAnomalyAlertObserva
 		*out = new(string)
 		**out = **in
 	}
+	if in.NotificationEmail != nil {
+		in, out := &in.NotificationEmail, &out.NotificationEmail
+		*out = new(string)
+		**out = **in
+	}
 	if in.SubscriptionID != nil {
 		in, out := &in.SubscriptionID, &out.SubscriptionID
 		*out = new(string)
@@ -195,6 +205,11 @@ func (in *CostAnomalyAlertParameters) DeepCopyInto(out *CostAnomalyAlertParamete
 	}
 	if in.Message != nil {
 		in, out := &in.Message, &out.Message
+		*out = new(string)
+		**out = **in
+	}
+	if in.NotificationEmail != nil {
+		in, out := &in.NotificationEmail, &out.NotificationEmail
 		*out = new(string)
 		**out = **in
 	}

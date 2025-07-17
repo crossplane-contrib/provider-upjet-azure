@@ -79,6 +79,8 @@ spec:
                       minutes.
                     type: string
                   batchedOperationsEnabled:
+                    description: Boolean flag which controls whether server-side batched
+                      operations are enabled. Defaults to true.
                     type: boolean
                   deadLetteringOnMessageExpiration:
                     description: Boolean flag which controls whether the Queue has
@@ -91,25 +93,13 @@ spec:
                     type: string
                   duplicateDetectionHistoryTimeWindow:
                     description: The ISO 8601 timespan duration during which duplicates
-                      can be detected. Defaults to 10 minutes (PT10M).
+                      can be detected. Defaults to PT10M (10 Minutes).
                     type: string
-                  enableBatchedOperations:
-                    description: Boolean flag which controls whether server-side batched
-                      operations are enabled. Defaults to true.
-                    type: boolean
-                  enableExpress:
+                  expressEnabled:
                     description: Boolean flag which controls whether Express Entities
                       are enabled. An express queue holds a message in memory temporarily
                       before writing it to persistent storage. Defaults to false for
                       Basic and Standard. For Premium, it MUST be set to false.
-                    type: boolean
-                  enablePartitioning:
-                    description: Boolean flag which controls whether to enable the
-                      queue to be partitioned across multiple message brokers. Changing
-                      this forces a new resource to be created. Defaults to false
-                      for Basic and Standard.
-                    type: boolean
-                  expressEnabled:
                     type: boolean
                   forwardDeadLetteredMessagesTo:
                     description: The name of a Queue or Topic to automatically forward
@@ -122,8 +112,7 @@ spec:
                   lockDuration:
                     description: The ISO 8601 timespan duration of a peek-lock; that
                       is, the amount of time that the message is locked for other
-                      receivers. Maximum value is 5 minutes. Defaults to 1 minute
-                      (PT1M).
+                      receivers. Maximum value is 5 minutes. Defaults to PT1M (1 Minute).
                     type: string
                   maxDeliveryCount:
                     description: Integer value which controls when a message is automatically
@@ -137,7 +126,7 @@ spec:
                   maxSizeInMegabytes:
                     description: Integer value which controls the size of memory allocated
                       for the queue. For supported values see the "Queue or topic
-                      size" section of Service Bus Quotas. Defaults to 1024.
+                      size" section of Service Bus Quotas.
                     type: number
                   namespaceId:
                     description: The ID of the ServiceBus Namespace to create this
@@ -220,6 +209,10 @@ spec:
                         type: object
                     type: object
                   partitioningEnabled:
+                    description: Boolean flag which controls whether to enable the
+                      queue to be partitioned across multiple message brokers. Changing
+                      this forces a new resource to be created. Defaults to false
+                      for Basic and Standard.
                     type: boolean
                   requiresDuplicateDetection:
                     description: Boolean flag which controls whether the Queue requires
@@ -258,6 +251,8 @@ spec:
                       minutes.
                     type: string
                   batchedOperationsEnabled:
+                    description: Boolean flag which controls whether server-side batched
+                      operations are enabled. Defaults to true.
                     type: boolean
                   deadLetteringOnMessageExpiration:
                     description: Boolean flag which controls whether the Queue has
@@ -270,25 +265,13 @@ spec:
                     type: string
                   duplicateDetectionHistoryTimeWindow:
                     description: The ISO 8601 timespan duration during which duplicates
-                      can be detected. Defaults to 10 minutes (PT10M).
+                      can be detected. Defaults to PT10M (10 Minutes).
                     type: string
-                  enableBatchedOperations:
-                    description: Boolean flag which controls whether server-side batched
-                      operations are enabled. Defaults to true.
-                    type: boolean
-                  enableExpress:
+                  expressEnabled:
                     description: Boolean flag which controls whether Express Entities
                       are enabled. An express queue holds a message in memory temporarily
                       before writing it to persistent storage. Defaults to false for
                       Basic and Standard. For Premium, it MUST be set to false.
-                    type: boolean
-                  enablePartitioning:
-                    description: Boolean flag which controls whether to enable the
-                      queue to be partitioned across multiple message brokers. Changing
-                      this forces a new resource to be created. Defaults to false
-                      for Basic and Standard.
-                    type: boolean
-                  expressEnabled:
                     type: boolean
                   forwardDeadLetteredMessagesTo:
                     description: The name of a Queue or Topic to automatically forward
@@ -301,8 +284,7 @@ spec:
                   lockDuration:
                     description: The ISO 8601 timespan duration of a peek-lock; that
                       is, the amount of time that the message is locked for other
-                      receivers. Maximum value is 5 minutes. Defaults to 1 minute
-                      (PT1M).
+                      receivers. Maximum value is 5 minutes. Defaults to PT1M (1 Minute).
                     type: string
                   maxDeliveryCount:
                     description: Integer value which controls when a message is automatically
@@ -316,9 +298,13 @@ spec:
                   maxSizeInMegabytes:
                     description: Integer value which controls the size of memory allocated
                       for the queue. For supported values see the "Queue or topic
-                      size" section of Service Bus Quotas. Defaults to 1024.
+                      size" section of Service Bus Quotas.
                     type: number
                   partitioningEnabled:
+                    description: Boolean flag which controls whether to enable the
+                      queue to be partitioned across multiple message brokers. Changing
+                      this forces a new resource to be created. Defaults to false
+                      for Basic and Standard.
                     type: boolean
                   requiresDuplicateDetection:
                     description: Boolean flag which controls whether the Queue requires
@@ -516,6 +502,8 @@ spec:
                       minutes.
                     type: string
                   batchedOperationsEnabled:
+                    description: Boolean flag which controls whether server-side batched
+                      operations are enabled. Defaults to true.
                     type: boolean
                   deadLetteringOnMessageExpiration:
                     description: Boolean flag which controls whether the Queue has
@@ -528,25 +516,13 @@ spec:
                     type: string
                   duplicateDetectionHistoryTimeWindow:
                     description: The ISO 8601 timespan duration during which duplicates
-                      can be detected. Defaults to 10 minutes (PT10M).
+                      can be detected. Defaults to PT10M (10 Minutes).
                     type: string
-                  enableBatchedOperations:
-                    description: Boolean flag which controls whether server-side batched
-                      operations are enabled. Defaults to true.
-                    type: boolean
-                  enableExpress:
+                  expressEnabled:
                     description: Boolean flag which controls whether Express Entities
                       are enabled. An express queue holds a message in memory temporarily
                       before writing it to persistent storage. Defaults to false for
                       Basic and Standard. For Premium, it MUST be set to false.
-                    type: boolean
-                  enablePartitioning:
-                    description: Boolean flag which controls whether to enable the
-                      queue to be partitioned across multiple message brokers. Changing
-                      this forces a new resource to be created. Defaults to false
-                      for Basic and Standard.
-                    type: boolean
-                  expressEnabled:
                     type: boolean
                   forwardDeadLetteredMessagesTo:
                     description: The name of a Queue or Topic to automatically forward
@@ -562,8 +538,7 @@ spec:
                   lockDuration:
                     description: The ISO 8601 timespan duration of a peek-lock; that
                       is, the amount of time that the message is locked for other
-                      receivers. Maximum value is 5 minutes. Defaults to 1 minute
-                      (PT1M).
+                      receivers. Maximum value is 5 minutes. Defaults to PT1M (1 Minute).
                     type: string
                   maxDeliveryCount:
                     description: Integer value which controls when a message is automatically
@@ -577,13 +552,17 @@ spec:
                   maxSizeInMegabytes:
                     description: Integer value which controls the size of memory allocated
                       for the queue. For supported values see the "Queue or topic
-                      size" section of Service Bus Quotas. Defaults to 1024.
+                      size" section of Service Bus Quotas.
                     type: number
                   namespaceId:
                     description: The ID of the ServiceBus Namespace to create this
                       queue in. Changing this forces a new resource to be created.
                     type: string
                   partitioningEnabled:
+                    description: Boolean flag which controls whether to enable the
+                      queue to be partitioned across multiple message brokers. Changing
+                      this forces a new resource to be created. Defaults to false
+                      for Basic and Standard.
                     type: boolean
                   requiresDuplicateDetection:
                     description: Boolean flag which controls whether the Queue requires

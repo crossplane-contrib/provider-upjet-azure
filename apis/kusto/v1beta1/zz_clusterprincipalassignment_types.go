@@ -21,7 +21,7 @@ type ClusterPrincipalAssignmentInitParameters struct {
 	// The type of the principal. Valid values include App, Group, User. Changing this forces a new resource to be created.
 	PrincipalType *string `json:"principalType,omitempty" tf:"principal_type,omitempty"`
 
-	// The cluster role assigned to the principal. Valid values include AllDatabasesAdmin and AllDatabasesViewer. Changing this forces a new resource to be created.
+	// The cluster role assigned to the principal. Valid values include AllDatabasesAdmin, AllDatabasesViewer, and AllDatabasesMonitor. Changing this forces a new resource to be created.
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
 	// The tenant id in which the principal resides. Changing this forces a new resource to be created.
@@ -48,7 +48,7 @@ type ClusterPrincipalAssignmentObservation struct {
 	// The name of the resource group in which to create the resource. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// The cluster role assigned to the principal. Valid values include AllDatabasesAdmin and AllDatabasesViewer. Changing this forces a new resource to be created.
+	// The cluster role assigned to the principal. Valid values include AllDatabasesAdmin, AllDatabasesViewer, and AllDatabasesMonitor. Changing this forces a new resource to be created.
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
 	// The tenant id in which the principal resides. Changing this forces a new resource to be created.
@@ -94,7 +94,7 @@ type ClusterPrincipalAssignmentParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// The cluster role assigned to the principal. Valid values include AllDatabasesAdmin and AllDatabasesViewer. Changing this forces a new resource to be created.
+	// The cluster role assigned to the principal. Valid values include AllDatabasesAdmin, AllDatabasesViewer, and AllDatabasesMonitor. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 

@@ -56,7 +56,7 @@ type ExpressRoutePortInitParameters struct {
 	// Bandwidth of the Express Route Port in Gbps. Changing this forces a new Express Route Port to be created.
 	BandwidthInGbps *float64 `json:"bandwidthInGbps,omitempty" tf:"bandwidth_in_gbps,omitempty"`
 
-	// The billing type of the Express Route Port. Possible values are MeteredData and UnlimitedData.
+	// The billing type of the Express Route Port. Possible values are MeteredData and UnlimitedData. Defaults to MeteredData.
 	BillingType *string `json:"billingType,omitempty" tf:"billing_type,omitempty"`
 
 	// The encapsulation method used for the Express Route Port. Changing this forces a new Express Route Port to be created. Possible values are: Dot1Q, QinQ.
@@ -87,7 +87,7 @@ type ExpressRoutePortObservation struct {
 	// Bandwidth of the Express Route Port in Gbps. Changing this forces a new Express Route Port to be created.
 	BandwidthInGbps *float64 `json:"bandwidthInGbps,omitempty" tf:"bandwidth_in_gbps,omitempty"`
 
-	// The billing type of the Express Route Port. Possible values are MeteredData and UnlimitedData.
+	// The billing type of the Express Route Port. Possible values are MeteredData and UnlimitedData. Defaults to MeteredData.
 	BillingType *string `json:"billingType,omitempty" tf:"billing_type,omitempty"`
 
 	// The encapsulation method used for the Express Route Port. Changing this forces a new Express Route Port to be created. Possible values are: Dot1Q, QinQ.
@@ -134,7 +134,7 @@ type ExpressRoutePortParameters struct {
 	// +kubebuilder:validation:Optional
 	BandwidthInGbps *float64 `json:"bandwidthInGbps,omitempty" tf:"bandwidth_in_gbps,omitempty"`
 
-	// The billing type of the Express Route Port. Possible values are MeteredData and UnlimitedData.
+	// The billing type of the Express Route Port. Possible values are MeteredData and UnlimitedData. Defaults to MeteredData.
 	// +kubebuilder:validation:Optional
 	BillingType *string `json:"billingType,omitempty" tf:"billing_type,omitempty"`
 

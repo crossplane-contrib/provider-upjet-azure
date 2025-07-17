@@ -15,34 +15,28 @@ import (
 
 type TopicInitParameters struct {
 
-	// The ISO 8601 timespan duration of the idle interval after which the Topic is automatically deleted, minimum of 5 minutes.
+	// The ISO 8601 timespan duration of the idle interval after which the Topic is automatically deleted, minimum of 5 minutes. Defaults to P10675199DT2H48M5.4775807S.
 	AutoDeleteOnIdle *string `json:"autoDeleteOnIdle,omitempty" tf:"auto_delete_on_idle,omitempty"`
 
+	// Boolean flag which controls if server-side batched operations are enabled.
 	BatchedOperationsEnabled *bool `json:"batchedOperationsEnabled,omitempty" tf:"batched_operations_enabled,omitempty"`
 
-	// The ISO 8601 timespan duration of TTL of messages sent to this topic if no TTL value is set on the message itself.
+	// The ISO 8601 timespan duration of TTL of messages sent to this topic if no TTL value is set on the message itself. Defaults to P10675199DT2H48M5.4775807S.
 	DefaultMessageTTL *string `json:"defaultMessageTtl,omitempty" tf:"default_message_ttl,omitempty"`
 
-	// The ISO 8601 timespan duration during which duplicates can be detected. Defaults to 10 minutes. (PT10M)
+	// The ISO 8601 timespan duration during which duplicates can be detected. Defaults to PT10M (10 Minutes).
 	DuplicateDetectionHistoryTimeWindow *string `json:"duplicateDetectionHistoryTimeWindow,omitempty" tf:"duplicate_detection_history_time_window,omitempty"`
 
-	// Boolean flag which controls if server-side batched operations are enabled.
-	EnableBatchedOperations *bool `json:"enableBatchedOperations,omitempty" tf:"enable_batched_operations,omitempty"`
-
 	// Boolean flag which controls whether Express Entities are enabled. An express topic holds a message in memory temporarily before writing it to persistent storage.
-	EnableExpress *bool `json:"enableExpress,omitempty" tf:"enable_express,omitempty"`
-
-	// Boolean flag which controls whether to enable the topic to be partitioned across multiple message brokers. Changing this forces a new resource to be created.
-	EnablePartitioning *bool `json:"enablePartitioning,omitempty" tf:"enable_partitioning,omitempty"`
-
 	ExpressEnabled *bool `json:"expressEnabled,omitempty" tf:"express_enabled,omitempty"`
 
-	// Integer value which controls the maximum size of a message allowed on the topic for Premium SKU. For supported values see the "Large messages support" section of this document.
+	// Integer value which controls the maximum size of a message allowed on the topic for Premium SKU. For supported values see the "Large messages support" section of this document. Defaults to 256.
 	MaxMessageSizeInKilobytes *float64 `json:"maxMessageSizeInKilobytes,omitempty" tf:"max_message_size_in_kilobytes,omitempty"`
 
-	// Integer value which controls the size of memory allocated for the topic. For supported values see the "Queue/topic size" section of this document.
+	// Integer value which controls the size of memory allocated for the topic. For supported values see the "Queue/topic size" section of this document. Defaults to 5120.
 	MaxSizeInMegabytes *float64 `json:"maxSizeInMegabytes,omitempty" tf:"max_size_in_megabytes,omitempty"`
 
+	// Boolean flag which controls whether to enable the topic to be partitioned across multiple message brokers. Changing this forces a new resource to be created.
 	PartitioningEnabled *bool `json:"partitioningEnabled,omitempty" tf:"partitioning_enabled,omitempty"`
 
 	// Boolean flag which controls whether the Topic requires duplicate detection. Defaults to false. Changing this forces a new resource to be created.
@@ -57,40 +51,34 @@ type TopicInitParameters struct {
 
 type TopicObservation struct {
 
-	// The ISO 8601 timespan duration of the idle interval after which the Topic is automatically deleted, minimum of 5 minutes.
+	// The ISO 8601 timespan duration of the idle interval after which the Topic is automatically deleted, minimum of 5 minutes. Defaults to P10675199DT2H48M5.4775807S.
 	AutoDeleteOnIdle *string `json:"autoDeleteOnIdle,omitempty" tf:"auto_delete_on_idle,omitempty"`
 
+	// Boolean flag which controls if server-side batched operations are enabled.
 	BatchedOperationsEnabled *bool `json:"batchedOperationsEnabled,omitempty" tf:"batched_operations_enabled,omitempty"`
 
-	// The ISO 8601 timespan duration of TTL of messages sent to this topic if no TTL value is set on the message itself.
+	// The ISO 8601 timespan duration of TTL of messages sent to this topic if no TTL value is set on the message itself. Defaults to P10675199DT2H48M5.4775807S.
 	DefaultMessageTTL *string `json:"defaultMessageTtl,omitempty" tf:"default_message_ttl,omitempty"`
 
-	// The ISO 8601 timespan duration during which duplicates can be detected. Defaults to 10 minutes. (PT10M)
+	// The ISO 8601 timespan duration during which duplicates can be detected. Defaults to PT10M (10 Minutes).
 	DuplicateDetectionHistoryTimeWindow *string `json:"duplicateDetectionHistoryTimeWindow,omitempty" tf:"duplicate_detection_history_time_window,omitempty"`
 
-	// Boolean flag which controls if server-side batched operations are enabled.
-	EnableBatchedOperations *bool `json:"enableBatchedOperations,omitempty" tf:"enable_batched_operations,omitempty"`
-
 	// Boolean flag which controls whether Express Entities are enabled. An express topic holds a message in memory temporarily before writing it to persistent storage.
-	EnableExpress *bool `json:"enableExpress,omitempty" tf:"enable_express,omitempty"`
-
-	// Boolean flag which controls whether to enable the topic to be partitioned across multiple message brokers. Changing this forces a new resource to be created.
-	EnablePartitioning *bool `json:"enablePartitioning,omitempty" tf:"enable_partitioning,omitempty"`
-
 	ExpressEnabled *bool `json:"expressEnabled,omitempty" tf:"express_enabled,omitempty"`
 
 	// The ServiceBus Topic ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Integer value which controls the maximum size of a message allowed on the topic for Premium SKU. For supported values see the "Large messages support" section of this document.
+	// Integer value which controls the maximum size of a message allowed on the topic for Premium SKU. For supported values see the "Large messages support" section of this document. Defaults to 256.
 	MaxMessageSizeInKilobytes *float64 `json:"maxMessageSizeInKilobytes,omitempty" tf:"max_message_size_in_kilobytes,omitempty"`
 
-	// Integer value which controls the size of memory allocated for the topic. For supported values see the "Queue/topic size" section of this document.
+	// Integer value which controls the size of memory allocated for the topic. For supported values see the "Queue/topic size" section of this document. Defaults to 5120.
 	MaxSizeInMegabytes *float64 `json:"maxSizeInMegabytes,omitempty" tf:"max_size_in_megabytes,omitempty"`
 
 	// The ID of the ServiceBus Namespace to create this topic in. Changing this forces a new resource to be created.
 	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
 
+	// Boolean flag which controls whether to enable the topic to be partitioned across multiple message brokers. Changing this forces a new resource to be created.
 	PartitioningEnabled *bool `json:"partitioningEnabled,omitempty" tf:"partitioning_enabled,omitempty"`
 
 	// Boolean flag which controls whether the Topic requires duplicate detection. Defaults to false. Changing this forces a new resource to be created.
@@ -105,41 +93,31 @@ type TopicObservation struct {
 
 type TopicParameters struct {
 
-	// The ISO 8601 timespan duration of the idle interval after which the Topic is automatically deleted, minimum of 5 minutes.
+	// The ISO 8601 timespan duration of the idle interval after which the Topic is automatically deleted, minimum of 5 minutes. Defaults to P10675199DT2H48M5.4775807S.
 	// +kubebuilder:validation:Optional
 	AutoDeleteOnIdle *string `json:"autoDeleteOnIdle,omitempty" tf:"auto_delete_on_idle,omitempty"`
 
+	// Boolean flag which controls if server-side batched operations are enabled.
 	// +kubebuilder:validation:Optional
 	BatchedOperationsEnabled *bool `json:"batchedOperationsEnabled,omitempty" tf:"batched_operations_enabled,omitempty"`
 
-	// The ISO 8601 timespan duration of TTL of messages sent to this topic if no TTL value is set on the message itself.
+	// The ISO 8601 timespan duration of TTL of messages sent to this topic if no TTL value is set on the message itself. Defaults to P10675199DT2H48M5.4775807S.
 	// +kubebuilder:validation:Optional
 	DefaultMessageTTL *string `json:"defaultMessageTtl,omitempty" tf:"default_message_ttl,omitempty"`
 
-	// The ISO 8601 timespan duration during which duplicates can be detected. Defaults to 10 minutes. (PT10M)
+	// The ISO 8601 timespan duration during which duplicates can be detected. Defaults to PT10M (10 Minutes).
 	// +kubebuilder:validation:Optional
 	DuplicateDetectionHistoryTimeWindow *string `json:"duplicateDetectionHistoryTimeWindow,omitempty" tf:"duplicate_detection_history_time_window,omitempty"`
 
-	// Boolean flag which controls if server-side batched operations are enabled.
-	// +kubebuilder:validation:Optional
-	EnableBatchedOperations *bool `json:"enableBatchedOperations,omitempty" tf:"enable_batched_operations,omitempty"`
-
 	// Boolean flag which controls whether Express Entities are enabled. An express topic holds a message in memory temporarily before writing it to persistent storage.
-	// +kubebuilder:validation:Optional
-	EnableExpress *bool `json:"enableExpress,omitempty" tf:"enable_express,omitempty"`
-
-	// Boolean flag which controls whether to enable the topic to be partitioned across multiple message brokers. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	EnablePartitioning *bool `json:"enablePartitioning,omitempty" tf:"enable_partitioning,omitempty"`
-
 	// +kubebuilder:validation:Optional
 	ExpressEnabled *bool `json:"expressEnabled,omitempty" tf:"express_enabled,omitempty"`
 
-	// Integer value which controls the maximum size of a message allowed on the topic for Premium SKU. For supported values see the "Large messages support" section of this document.
+	// Integer value which controls the maximum size of a message allowed on the topic for Premium SKU. For supported values see the "Large messages support" section of this document. Defaults to 256.
 	// +kubebuilder:validation:Optional
 	MaxMessageSizeInKilobytes *float64 `json:"maxMessageSizeInKilobytes,omitempty" tf:"max_message_size_in_kilobytes,omitempty"`
 
-	// Integer value which controls the size of memory allocated for the topic. For supported values see the "Queue/topic size" section of this document.
+	// Integer value which controls the size of memory allocated for the topic. For supported values see the "Queue/topic size" section of this document. Defaults to 5120.
 	// +kubebuilder:validation:Optional
 	MaxSizeInMegabytes *float64 `json:"maxSizeInMegabytes,omitempty" tf:"max_size_in_megabytes,omitempty"`
 
@@ -157,6 +135,7 @@ type TopicParameters struct {
 	// +kubebuilder:validation:Optional
 	NamespaceIDSelector *v1.Selector `json:"namespaceIdSelector,omitempty" tf:"-"`
 
+	// Boolean flag which controls whether to enable the topic to be partitioned across multiple message brokers. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	PartitioningEnabled *bool `json:"partitioningEnabled,omitempty" tf:"partitioning_enabled,omitempty"`
 

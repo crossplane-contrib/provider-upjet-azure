@@ -28,7 +28,7 @@ metadata:
 spec:
   forProvider:
     capacity: 1
-    enableNonSslPort: false
+    enable_non_ssl_port: false
     family: P
     location: East US
     redisConfiguration:

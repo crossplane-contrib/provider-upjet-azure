@@ -292,7 +292,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    disableBgpRoutePropagation: false
+    bgpRoutePropagationEnabled: true
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:

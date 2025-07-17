@@ -165,14 +165,23 @@ type MSSQLServerInitParameters struct {
 	// The administrator login name for the new server. Required unless azuread_authentication_only in the azuread_administrator block is true. When omitted, Azure will generate a default username which cannot be subsequently changed. Changing this forces a new resource to be created.
 	AdministratorLogin *string `json:"administratorLogin,omitempty" tf:"administrator_login,omitempty"`
 
-	// The password associated with the administrator_login user. Needs to comply with Azure's Password Policy. Required unless azuread_authentication_only in the azuread_administrator block is true.
+	// The password associated with the administrator_login user. Needs to comply with Azure's Password Policy.
 	AdministratorLoginPasswordSecretRef *v1.SecretKeySelector `json:"administratorLoginPasswordSecretRef,omitempty" tf:"-"`
+
+	// The Password associated with the administrator_login user. Needs to comply with Azure's Password Policy.
+	AdministratorLoginPasswordWoSecretRef *v1.SecretKeySelector `json:"administratorLoginPasswordWoSecretRef,omitempty" tf:"-"`
+
+	// An integer value used to trigger an update for administrator_login_password_wo. This property should be incremented when updating administrator_login_password_wo.
+	AdministratorLoginPasswordWoVersion *float64 `json:"administratorLoginPasswordWoVersion,omitempty" tf:"administrator_login_password_wo_version,omitempty"`
 
 	// An azuread_administrator block as defined below.
 	AzureadAdministrator *AzureadAdministratorInitParameters `json:"azureadAdministrator,omitempty" tf:"azuread_administrator,omitempty"`
 
 	// The connection policy the server will use. Possible values are Default, Proxy, and Redirect. Defaults to Default.
 	ConnectionPolicy *string `json:"connectionPolicy,omitempty" tf:"connection_policy,omitempty"`
+
+	// Whether to enable the Express Vulnerability Assessment Configuration. Defaults to false.
+	ExpressVulnerabilityAssessmentEnabled *bool `json:"expressVulnerabilityAssessmentEnabled,omitempty" tf:"express_vulnerability_assessment_enabled,omitempty"`
 
 	// An identity block as defined below.
 	Identity *MSSQLServerIdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
@@ -228,11 +237,17 @@ type MSSQLServerObservation struct {
 	// The administrator login name for the new server. Required unless azuread_authentication_only in the azuread_administrator block is true. When omitted, Azure will generate a default username which cannot be subsequently changed. Changing this forces a new resource to be created.
 	AdministratorLogin *string `json:"administratorLogin,omitempty" tf:"administrator_login,omitempty"`
 
+	// An integer value used to trigger an update for administrator_login_password_wo. This property should be incremented when updating administrator_login_password_wo.
+	AdministratorLoginPasswordWoVersion *float64 `json:"administratorLoginPasswordWoVersion,omitempty" tf:"administrator_login_password_wo_version,omitempty"`
+
 	// An azuread_administrator block as defined below.
 	AzureadAdministrator *AzureadAdministratorObservation `json:"azureadAdministrator,omitempty" tf:"azuread_administrator,omitempty"`
 
 	// The connection policy the server will use. Possible values are Default, Proxy, and Redirect. Defaults to Default.
 	ConnectionPolicy *string `json:"connectionPolicy,omitempty" tf:"connection_policy,omitempty"`
+
+	// Whether to enable the Express Vulnerability Assessment Configuration. Defaults to false.
+	ExpressVulnerabilityAssessmentEnabled *bool `json:"expressVulnerabilityAssessmentEnabled,omitempty" tf:"express_vulnerability_assessment_enabled,omitempty"`
 
 	// The fully qualified domain name of the Azure SQL Server (e.g. myServerName.database.windows.net)
 	FullyQualifiedDomainName *string `json:"fullyQualifiedDomainName,omitempty" tf:"fully_qualified_domain_name,omitempty"`
@@ -281,9 +296,17 @@ type MSSQLServerParameters struct {
 	// +kubebuilder:validation:Optional
 	AdministratorLogin *string `json:"administratorLogin,omitempty" tf:"administrator_login,omitempty"`
 
-	// The password associated with the administrator_login user. Needs to comply with Azure's Password Policy. Required unless azuread_authentication_only in the azuread_administrator block is true.
+	// The password associated with the administrator_login user. Needs to comply with Azure's Password Policy.
 	// +kubebuilder:validation:Optional
 	AdministratorLoginPasswordSecretRef *v1.SecretKeySelector `json:"administratorLoginPasswordSecretRef,omitempty" tf:"-"`
+
+	// The Password associated with the administrator_login user. Needs to comply with Azure's Password Policy.
+	// +kubebuilder:validation:Optional
+	AdministratorLoginPasswordWoSecretRef *v1.SecretKeySelector `json:"administratorLoginPasswordWoSecretRef,omitempty" tf:"-"`
+
+	// An integer value used to trigger an update for administrator_login_password_wo. This property should be incremented when updating administrator_login_password_wo.
+	// +kubebuilder:validation:Optional
+	AdministratorLoginPasswordWoVersion *float64 `json:"administratorLoginPasswordWoVersion,omitempty" tf:"administrator_login_password_wo_version,omitempty"`
 
 	// An azuread_administrator block as defined below.
 	// +kubebuilder:validation:Optional
@@ -292,6 +315,10 @@ type MSSQLServerParameters struct {
 	// The connection policy the server will use. Possible values are Default, Proxy, and Redirect. Defaults to Default.
 	// +kubebuilder:validation:Optional
 	ConnectionPolicy *string `json:"connectionPolicy,omitempty" tf:"connection_policy,omitempty"`
+
+	// Whether to enable the Express Vulnerability Assessment Configuration. Defaults to false.
+	// +kubebuilder:validation:Optional
+	ExpressVulnerabilityAssessmentEnabled *bool `json:"expressVulnerabilityAssessmentEnabled,omitempty" tf:"express_vulnerability_assessment_enabled,omitempty"`
 
 	// An identity block as defined below.
 	// +kubebuilder:validation:Optional

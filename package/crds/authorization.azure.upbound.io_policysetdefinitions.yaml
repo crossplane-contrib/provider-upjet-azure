@@ -74,15 +74,13 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: The description of the policy set definition.
+                    description: The description of this Policy Set Definition.
                     type: string
                   displayName:
-                    description: The display name of the policy set definition.
+                    description: The display name of this Policy Set Definition.
                     type: string
                   managementGroupId:
-                    description: The id of the Management Group where this policy
-                      set definition should be defined. Changing this forces a new
-                      resource to be created.
+                    description: The ID of the Policy Set Definition.
                     type: string
                   managementGroupIdRef:
                     description: Reference to a ManagementGroup in management to populate
@@ -161,14 +159,12 @@ spec:
                         type: object
                     type: object
                   metadata:
-                    description: The metadata for the policy set definition. This
-                      is a JSON object representing additional metadata that should
-                      be stored with the policy definition.
+                    description: The metadata for the Policy Set Definition in JSON
+                      format.
                     type: string
                   parameters:
-                    description: Parameters for the policy set definition. This field
-                      is a JSON object that allows you to parameterize your policy
-                      definition.
+                    description: The parameters for the Policy Set Definition in JSON
+                      format.
                     type: string
                   policyDefinitionGroup:
                     description: One or more policy_definition_group blocks as defined
@@ -177,20 +173,21 @@ spec:
                       properties:
                         additionalMetadataResourceId:
                           description: The ID of a resource that contains additional
-                            metadata about this policy definition group.
+                            metadata for this Policy Definition Group.
                           type: string
                         category:
-                          description: The category of this policy definition group.
+                          description: The category of this Policy Definition Group.
                           type: string
                         description:
-                          description: The description of this policy definition group.
+                          description: The description of this Policy Definition Group.
                           type: string
                         displayName:
-                          description: The display name of this policy definition
-                            group.
+                          description: The display name of this Policy Definition
+                            Group.
                           type: string
                         name:
-                          description: The name of this policy definition group.
+                          description: The name which should be used for this Policy
+                            Definition Group.
                           type: string
                       type: object
                     type: array
@@ -200,31 +197,33 @@ spec:
                     items:
                       properties:
                         parameterValues:
-                          description: Parameter values for the referenced policy
-                            rule. This field is a JSON string that allows you to assign
-                            parameters to this policy rule.
+                          description: Parameter values for the references Policy
+                            Definition in JSON format.
                           type: string
                         policyDefinitionId:
-                          description: The ID of the policy definition that will be
-                            included in this policy set definition.
+                          description: The ID of the Policy Definition to include
+                            in this Policy Set Definition.
                           type: string
                         policyGroupNames:
-                          description: A list of names of the policy definition groups
-                            that this policy definition reference belongs to.
+                          description: Specifies a list of Policy Definition Groups
+                            names that this Policy Definition Reference belongs to.
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                         referenceId:
-                          description: A unique ID within this policy set definition
-                            for this policy definition reference.
+                          description: A unique ID within this Policy Set Definition
+                            for this Policy Definition Reference.
+                          type: string
+                        version:
+                          description: The version of the Policy Definition to use.
                           type: string
                       type: object
                     type: array
                   policyType:
-                    description: The policy set type. Possible values are BuiltIn,
-                      Custom, NotSpecified and Static. Changing this forces a new
-                      resource to be created.
+                    description: The Policy Set Definition type. Possible values are
+                      BuiltIn, Custom, NotSpecified, and Static. Changing this forces
+                      a new Policy Set Definition to be created.
                     type: string
                 type: object
               initProvider:
@@ -241,15 +240,13 @@ spec:
                   autoscaler.
                 properties:
                   description:
-                    description: The description of the policy set definition.
+                    description: The description of this Policy Set Definition.
                     type: string
                   displayName:
-                    description: The display name of the policy set definition.
+                    description: The display name of this Policy Set Definition.
                     type: string
                   managementGroupId:
-                    description: The id of the Management Group where this policy
-                      set definition should be defined. Changing this forces a new
-                      resource to be created.
+                    description: The ID of the Policy Set Definition.
                     type: string
                   managementGroupIdRef:
                     description: Reference to a ManagementGroup in management to populate
@@ -328,14 +325,12 @@ spec:
                         type: object
                     type: object
                   metadata:
-                    description: The metadata for the policy set definition. This
-                      is a JSON object representing additional metadata that should
-                      be stored with the policy definition.
+                    description: The metadata for the Policy Set Definition in JSON
+                      format.
                     type: string
                   parameters:
-                    description: Parameters for the policy set definition. This field
-                      is a JSON object that allows you to parameterize your policy
-                      definition.
+                    description: The parameters for the Policy Set Definition in JSON
+                      format.
                     type: string
                   policyDefinitionGroup:
                     description: One or more policy_definition_group blocks as defined
@@ -344,20 +339,21 @@ spec:
                       properties:
                         additionalMetadataResourceId:
                           description: The ID of a resource that contains additional
-                            metadata about this policy definition group.
+                            metadata for this Policy Definition Group.
                           type: string
                         category:
-                          description: The category of this policy definition group.
+                          description: The category of this Policy Definition Group.
                           type: string
                         description:
-                          description: The description of this policy definition group.
+                          description: The description of this Policy Definition Group.
                           type: string
                         displayName:
-                          description: The display name of this policy definition
-                            group.
+                          description: The display name of this Policy Definition
+                            Group.
                           type: string
                         name:
-                          description: The name of this policy definition group.
+                          description: The name which should be used for this Policy
+                            Definition Group.
                           type: string
                       type: object
                     type: array
@@ -367,31 +363,33 @@ spec:
                     items:
                       properties:
                         parameterValues:
-                          description: Parameter values for the referenced policy
-                            rule. This field is a JSON string that allows you to assign
-                            parameters to this policy rule.
+                          description: Parameter values for the references Policy
+                            Definition in JSON format.
                           type: string
                         policyDefinitionId:
-                          description: The ID of the policy definition that will be
-                            included in this policy set definition.
+                          description: The ID of the Policy Definition to include
+                            in this Policy Set Definition.
                           type: string
                         policyGroupNames:
-                          description: A list of names of the policy definition groups
-                            that this policy definition reference belongs to.
+                          description: Specifies a list of Policy Definition Groups
+                            names that this Policy Definition Reference belongs to.
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                         referenceId:
-                          description: A unique ID within this policy set definition
-                            for this policy definition reference.
+                          description: A unique ID within this Policy Set Definition
+                            for this Policy Definition Reference.
+                          type: string
+                        version:
+                          description: The version of the Policy Definition to use.
                           type: string
                       type: object
                     type: array
                   policyType:
-                    description: The policy set type. Possible values are BuiltIn,
-                      Custom, NotSpecified and Static. Changing this forces a new
-                      resource to be created.
+                    description: The Policy Set Definition type. Possible values are
+                      BuiltIn, Custom, NotSpecified, and Static. Changing this forces
+                      a new Policy Set Definition to be created.
                     type: string
                 type: object
               managementPolicies:
@@ -580,28 +578,24 @@ spec:
               atProvider:
                 properties:
                   description:
-                    description: The description of the policy set definition.
+                    description: The description of this Policy Set Definition.
                     type: string
                   displayName:
-                    description: The display name of the policy set definition.
+                    description: The display name of this Policy Set Definition.
                     type: string
                   id:
                     description: The ID of the Policy Set Definition.
                     type: string
                   managementGroupId:
-                    description: The id of the Management Group where this policy
-                      set definition should be defined. Changing this forces a new
-                      resource to be created.
+                    description: The ID of the Policy Set Definition.
                     type: string
                   metadata:
-                    description: The metadata for the policy set definition. This
-                      is a JSON object representing additional metadata that should
-                      be stored with the policy definition.
+                    description: The metadata for the Policy Set Definition in JSON
+                      format.
                     type: string
                   parameters:
-                    description: Parameters for the policy set definition. This field
-                      is a JSON object that allows you to parameterize your policy
-                      definition.
+                    description: The parameters for the Policy Set Definition in JSON
+                      format.
                     type: string
                   policyDefinitionGroup:
                     description: One or more policy_definition_group blocks as defined
@@ -610,20 +604,21 @@ spec:
                       properties:
                         additionalMetadataResourceId:
                           description: The ID of a resource that contains additional
-                            metadata about this policy definition group.
+                            metadata for this Policy Definition Group.
                           type: string
                         category:
-                          description: The category of this policy definition group.
+                          description: The category of this Policy Definition Group.
                           type: string
                         description:
-                          description: The description of this policy definition group.
+                          description: The description of this Policy Definition Group.
                           type: string
                         displayName:
-                          description: The display name of this policy definition
-                            group.
+                          description: The display name of this Policy Definition
+                            Group.
                           type: string
                         name:
-                          description: The name of this policy definition group.
+                          description: The name which should be used for this Policy
+                            Definition Group.
                           type: string
                       type: object
                     type: array
@@ -633,31 +628,33 @@ spec:
                     items:
                       properties:
                         parameterValues:
-                          description: Parameter values for the referenced policy
-                            rule. This field is a JSON string that allows you to assign
-                            parameters to this policy rule.
+                          description: Parameter values for the references Policy
+                            Definition in JSON format.
                           type: string
                         policyDefinitionId:
-                          description: The ID of the policy definition that will be
-                            included in this policy set definition.
+                          description: The ID of the Policy Definition to include
+                            in this Policy Set Definition.
                           type: string
                         policyGroupNames:
-                          description: A list of names of the policy definition groups
-                            that this policy definition reference belongs to.
+                          description: Specifies a list of Policy Definition Groups
+                            names that this Policy Definition Reference belongs to.
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                         referenceId:
-                          description: A unique ID within this policy set definition
-                            for this policy definition reference.
+                          description: A unique ID within this Policy Set Definition
+                            for this Policy Definition Reference.
+                          type: string
+                        version:
+                          description: The version of the Policy Definition to use.
                           type: string
                       type: object
                     type: array
                   policyType:
-                    description: The policy set type. Possible values are BuiltIn,
-                      Custom, NotSpecified and Static. Changing this forces a new
-                      resource to be created.
+                    description: The Policy Set Definition type. Possible values are
+                      BuiltIn, Custom, NotSpecified, and Static. Changing this forces
+                      a new Policy Set Definition to be created.
                     type: string
                 type: object
               conditions:

@@ -1287,6 +1287,10 @@ spec:
                       property is specified, custom_subdomain_name is also required
                       to be set.
                     properties:
+                      bypass:
+                        description: Whether to allow trusted Azure Services to access
+                          the service. Possible values are None and AzureServices.
+                        type: string
                       defaultAction:
                         description: The Default Action to use when no rules match
                           from ip_rules / virtual_network_rules. Possible values are
@@ -1637,6 +1641,10 @@ spec:
                       property is specified, custom_subdomain_name is also required
                       to be set.
                     properties:
+                      bypass:
+                        description: Whether to allow trusted Azure Services to access
+                          the service. Possible values are None and AzureServices.
+                        type: string
                       defaultAction:
                         description: The Default Action to use when no rules match
                           from ip_rules / virtual_network_rules. Possible values are
@@ -2075,6 +2083,10 @@ spec:
                       property is specified, custom_subdomain_name is also required
                       to be set.
                     properties:
+                      bypass:
+                        description: Whether to allow trusted Azure Services to access
+                          the service. Possible values are None and AzureServices.
+                        type: string
                       defaultAction:
                         description: The Default Action to use when no rules match
                           from ip_rules / virtual_network_rules. Possible values are

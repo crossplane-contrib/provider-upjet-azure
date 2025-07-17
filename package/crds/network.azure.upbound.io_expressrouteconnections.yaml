@@ -989,9 +989,6 @@ spec:
                         type: object
                     type: object
                   privateLinkFastPathEnabled:
-                    description: Bypass the Express Route gateway when accessing private-links.
-                      When enabled express_route_gateway_bypass_enabled must be set
-                      to true.
                     type: boolean
                   routing:
                     description: A routing block as defined below.
@@ -1140,9 +1137,6 @@ spec:
                       Wan Firewall Hub. Defaults to false.
                     type: boolean
                   privateLinkFastPathEnabled:
-                    description: Bypass the Express Route gateway when accessing private-links.
-                      When enabled express_route_gateway_bypass_enabled must be set
-                      to true.
                     type: boolean
                   routing:
                     description: A routing block as defined below.
@@ -1383,9 +1377,6 @@ spec:
                     description: The ID of the Express Route Connection.
                     type: string
                   privateLinkFastPathEnabled:
-                    description: Bypass the Express Route gateway when accessing private-links.
-                      When enabled express_route_gateway_bypass_enabled must be set
-                      to true.
                     type: boolean
                   routing:
                     description: A routing block as defined below.

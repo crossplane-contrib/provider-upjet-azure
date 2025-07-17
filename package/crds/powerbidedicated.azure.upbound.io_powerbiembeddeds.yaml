@@ -173,7 +173,7 @@ spec:
                     type: object
                   skuName:
                     description: 'Sets the PowerBI Embedded''s pricing level''s SKU.
-                      Possible values include: A1, A2, A3, A4, A5, A6.'
+                      Possible values include: A1, A2, A3, A4, A5, A6, A7 and A8.'
                     type: string
                   tags:
                     additionalProperties:
@@ -214,7 +214,7 @@ spec:
                     type: string
                   skuName:
                     description: 'Sets the PowerBI Embedded''s pricing level''s SKU.
-                      Possible values include: A1, A2, A3, A4, A5, A6.'
+                      Possible values include: A1, A2, A3, A4, A5, A6, A7 and A8.'
                     type: string
                   tags:
                     additionalProperties:
@@ -435,7 +435,7 @@ spec:
                     type: string
                   skuName:
                     description: 'Sets the PowerBI Embedded''s pricing level''s SKU.
-                      Possible values include: A1, A2, A3, A4, A5, A6.'
+                      Possible values include: A1, A2, A3, A4, A5, A6, A7 and A8.'
                     type: string
                   tags:
                     additionalProperties:

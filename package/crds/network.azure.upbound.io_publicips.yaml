@@ -91,6 +91,14 @@ spec:
                       the FQDN. If a domain name label is specified, an A DNS record
                       is created for the public IP in the Microsoft Azure DNS system.
                     type: string
+                  domainNameLabelScope:
+                    description: Scope for the domain name label. If a domain name
+                      label scope is specified, an A DNS record is created for the
+                      public IP in the Microsoft Azure DNS system with a hashed value
+                      includes in FQDN. Possible values are NoReuse, ResourceGroupReuse,
+                      SubscriptionReuse and TenantReuse. Changing this forces a new
+                      Public IP to be created.
+                    type: string
                   edgeZone:
                     description: Specifies the Edge Zone within the Azure Region where
                       this Public IP should exist. Changing this forces a new Public
@@ -210,7 +218,7 @@ spec:
                     type: string
                   sku:
                     description: The SKU of the Public IP. Accepted values are Basic
-                      and Standard. Defaults to Basic. Changing this forces a new
+                      and Standard. Defaults to Standard. Changing this forces a new
                       resource to be created.
                     type: string
                   skuTier:
@@ -264,6 +272,14 @@ spec:
                       the FQDN. If a domain name label is specified, an A DNS record
                       is created for the public IP in the Microsoft Azure DNS system.
                     type: string
+                  domainNameLabelScope:
+                    description: Scope for the domain name label. If a domain name
+                      label scope is specified, an A DNS record is created for the
+                      public IP in the Microsoft Azure DNS system with a hashed value
+                      includes in FQDN. Possible values are NoReuse, ResourceGroupReuse,
+                      SubscriptionReuse and TenantReuse. Changing this forces a new
+                      Public IP to be created.
+                    type: string
                   edgeZone:
                     description: Specifies the Edge Zone within the Azure Region where
                       this Public IP should exist. Changing this forces a new Public
@@ -302,7 +318,7 @@ spec:
                     type: string
                   sku:
                     description: The SKU of the Public IP. Accepted values are Basic
-                      and Standard. Defaults to Basic. Changing this forces a new
+                      and Standard. Defaults to Standard. Changing this forces a new
                       resource to be created.
                     type: string
                   skuTier:
@@ -524,6 +540,14 @@ spec:
                       the FQDN. If a domain name label is specified, an A DNS record
                       is created for the public IP in the Microsoft Azure DNS system.
                     type: string
+                  domainNameLabelScope:
+                    description: Scope for the domain name label. If a domain name
+                      label scope is specified, an A DNS record is created for the
+                      public IP in the Microsoft Azure DNS system with a hashed value
+                      includes in FQDN. Possible values are NoReuse, ResourceGroupReuse,
+                      SubscriptionReuse and TenantReuse. Changing this forces a new
+                      Public IP to be created.
+                    type: string
                   edgeZone:
                     description: Specifies the Edge Zone within the Azure Region where
                       this Public IP should exist. Changing this forces a new Public
@@ -579,7 +603,7 @@ spec:
                     type: string
                   sku:
                     description: The SKU of the Public IP. Accepted values are Basic
-                      and Standard. Defaults to Basic. Changing this forces a new
+                      and Standard. Defaults to Standard. Changing this forces a new
                       resource to be created.
                     type: string
                   skuTier:

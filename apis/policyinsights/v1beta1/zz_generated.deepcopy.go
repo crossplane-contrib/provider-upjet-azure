@@ -84,11 +84,6 @@ func (in *ResourcePolicyRemediationInitParameters) DeepCopyInto(out *ResourcePol
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
-	if in.PolicyDefinitionID != nil {
-		in, out := &in.PolicyDefinitionID, &out.PolicyDefinitionID
-		*out = new(string)
-		**out = **in
-	}
 	if in.PolicyDefinitionReferenceID != nil {
 		in, out := &in.PolicyDefinitionReferenceID, &out.PolicyDefinitionReferenceID
 		*out = new(string)
@@ -202,11 +197,6 @@ func (in *ResourcePolicyRemediationObservation) DeepCopyInto(out *ResourcePolicy
 		*out = new(string)
 		**out = **in
 	}
-	if in.PolicyDefinitionID != nil {
-		in, out := &in.PolicyDefinitionID, &out.PolicyDefinitionID
-		*out = new(string)
-		**out = **in
-	}
 	if in.PolicyDefinitionReferenceID != nil {
 		in, out := &in.PolicyDefinitionReferenceID, &out.PolicyDefinitionReferenceID
 		*out = new(string)
@@ -282,11 +272,6 @@ func (in *ResourcePolicyRemediationParameters) DeepCopyInto(out *ResourcePolicyR
 		in, out := &in.PolicyAssignmentIDSelector, &out.PolicyAssignmentIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
-	}
-	if in.PolicyDefinitionID != nil {
-		in, out := &in.PolicyDefinitionID, &out.PolicyDefinitionID
-		*out = new(string)
-		**out = **in
 	}
 	if in.PolicyDefinitionReferenceID != nil {
 		in, out := &in.PolicyDefinitionReferenceID, &out.PolicyDefinitionReferenceID
@@ -431,11 +416,6 @@ func (in *SubscriptionPolicyRemediationInitParameters) DeepCopyInto(out *Subscri
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
-	if in.PolicyDefinitionID != nil {
-		in, out := &in.PolicyDefinitionID, &out.PolicyDefinitionID
-		*out = new(string)
-		**out = **in
-	}
 	if in.PolicyDefinitionReferenceID != nil {
 		in, out := &in.PolicyDefinitionReferenceID, &out.PolicyDefinitionReferenceID
 		*out = new(string)
@@ -534,11 +514,6 @@ func (in *SubscriptionPolicyRemediationObservation) DeepCopyInto(out *Subscripti
 		*out = new(string)
 		**out = **in
 	}
-	if in.PolicyDefinitionID != nil {
-		in, out := &in.PolicyDefinitionID, &out.PolicyDefinitionID
-		*out = new(string)
-		**out = **in
-	}
 	if in.PolicyDefinitionReferenceID != nil {
 		in, out := &in.PolicyDefinitionReferenceID, &out.PolicyDefinitionReferenceID
 		*out = new(string)
@@ -609,11 +584,6 @@ func (in *SubscriptionPolicyRemediationParameters) DeepCopyInto(out *Subscriptio
 		in, out := &in.PolicyAssignmentIDSelector, &out.PolicyAssignmentIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
-	}
-	if in.PolicyDefinitionID != nil {
-		in, out := &in.PolicyDefinitionID, &out.PolicyDefinitionID
-		*out = new(string)
-		**out = **in
 	}
 	if in.PolicyDefinitionReferenceID != nil {
 		in, out := &in.PolicyDefinitionReferenceID, &out.PolicyDefinitionReferenceID

@@ -1176,6 +1176,8 @@ spec:
                         description: The Content from which the API Definition should
                           be imported. When a content_format of *-link-* is specified
                           this must be a URL, otherwise this must be defined inline.
+                          The URL must be accessible and return a valid document;
+                          otherwise, deployment may fail.
                         type: string
                       wsdlSelector:
                         description: A wsdl_selector block as defined below, which
@@ -1333,10 +1335,6 @@ spec:
                     description: Absolute URL of the backend service implementing
                       this API.
                     type: string
-                  soapPassThrough:
-                    description: Should this API expose a SOAP frontend, rather than
-                      a HTTP frontend? Defaults to false.
-                    type: boolean
                   sourceApiId:
                     description: The API id of the source API, which could be in format
                       azurerm_api_management_api.example.id or in format azurerm_api_management_api.example.id;rev=1
@@ -1425,6 +1423,8 @@ spec:
                         description: The Content from which the API Definition should
                           be imported. When a content_format of *-link-* is specified
                           this must be a URL, otherwise this must be defined inline.
+                          The URL must be accessible and return a valid document;
+                          otherwise, deployment may fail.
                         type: string
                       wsdlSelector:
                         description: A wsdl_selector block as defined below, which
@@ -1498,10 +1498,6 @@ spec:
                     description: Absolute URL of the backend service implementing
                       this API.
                     type: string
-                  soapPassThrough:
-                    description: Should this API expose a SOAP frontend, rather than
-                      a HTTP frontend? Defaults to false.
-                    type: boolean
                   sourceApiId:
                     description: The API id of the source API, which could be in format
                       azurerm_api_management_api.example.id or in format azurerm_api_management_api.example.id;rev=1
@@ -1755,6 +1751,8 @@ spec:
                         description: The Content from which the API Definition should
                           be imported. When a content_format of *-link-* is specified
                           this must be a URL, otherwise this must be defined inline.
+                          The URL must be accessible and return a valid document;
+                          otherwise, deployment may fail.
                         type: string
                       wsdlSelector:
                         description: A wsdl_selector block as defined below, which
@@ -1842,10 +1840,6 @@ spec:
                     description: Absolute URL of the backend service implementing
                       this API.
                     type: string
-                  soapPassThrough:
-                    description: Should this API expose a SOAP frontend, rather than
-                      a HTTP frontend? Defaults to false.
-                    type: boolean
                   sourceApiId:
                     description: The API id of the source API, which could be in format
                       azurerm_api_management_api.example.id or in format azurerm_api_management_api.example.id;rev=1

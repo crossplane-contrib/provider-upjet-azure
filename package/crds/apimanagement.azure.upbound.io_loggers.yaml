@@ -960,6 +960,23 @@ spec:
                     description: An application_insights block as documented below.
                       Changing this forces a new resource to be created.
                     properties:
+                      connectionStringSecretRef:
+                        description: The connection string of Application Insights.
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
                       instrumentationKeySecretRef:
                         description: The instrumentation key used to push data to
                           Application Insights.
@@ -1200,6 +1217,23 @@ spec:
                     description: An application_insights block as documented below.
                       Changing this forces a new resource to be created.
                     properties:
+                      connectionStringSecretRef:
+                        description: The connection string of Application Insights.
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
                       instrumentationKeySecretRef:
                         description: The instrumentation key used to push data to
                           Application Insights.
@@ -1218,8 +1252,6 @@ spec:
                         - name
                         - namespace
                         type: object
-                    required:
-                    - instrumentationKeySecretRef
                     type: object
                   buffered:
                     description: Specifies whether records should be buffered in the
@@ -1525,6 +1557,23 @@ spec:
                     description: An application_insights block as documented below.
                       Changing this forces a new resource to be created.
                     properties:
+                      connectionStringSecretRef:
+                        description: The connection string of Application Insights.
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
                       instrumentationKeySecretRef:
                         description: The instrumentation key used to push data to
                           Application Insights.

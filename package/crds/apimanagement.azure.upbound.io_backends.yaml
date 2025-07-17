@@ -1281,7 +1281,12 @@ spec:
                         type: boolean
                     type: object
                   url:
-                    description: The URL of the backend host.
+                    description: The backend host URL should be specified in the format
+                      "https://backend.com/api", avoiding trailing slashes (/) to
+                      minimize misconfiguration risks. Azure API Management instance
+                      will append the backend resource name to this URL. This URL
+                      typically serves as the base-url in the set-backend-service
+                      policy, enabling seamless transitions from frontend to backend.
                     type: string
                 type: object
               initProvider:
@@ -1436,7 +1441,12 @@ spec:
                         type: boolean
                     type: object
                   url:
-                    description: The URL of the backend host.
+                    description: The backend host URL should be specified in the format
+                      "https://backend.com/api", avoiding trailing slashes (/) to
+                      minimize misconfiguration risks. Azure API Management instance
+                      will append the backend resource name to this URL. This URL
+                      typically serves as the base-url in the set-backend-service
+                      policy, enabling seamless transitions from frontend to backend.
                     type: string
                 type: object
               managementPolicies:
@@ -1754,7 +1764,12 @@ spec:
                         type: boolean
                     type: object
                   url:
-                    description: The URL of the backend host.
+                    description: The backend host URL should be specified in the format
+                      "https://backend.com/api", avoiding trailing slashes (/) to
+                      minimize misconfiguration risks. Azure API Management instance
+                      will append the backend resource name to this URL. This URL
+                      typically serves as the base-url in the set-backend-service
+                      policy, enabling seamless transitions from frontend to backend.
                     type: string
                 type: object
               conditions:

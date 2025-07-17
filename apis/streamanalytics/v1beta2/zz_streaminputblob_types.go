@@ -15,6 +15,9 @@ import (
 
 type StreamInputBlobInitParameters struct {
 
+	// The authentication mode for the Stream Analytics Input. Possible values are Msi and ConnectionString. Defaults to ConnectionString.
+	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
+
 	// The date format. Wherever {date} appears in path_pattern, the value of this property is used as the date format instead.
 	DateFormat *string `json:"dateFormat,omitempty" tf:"date_format,omitempty"`
 
@@ -84,6 +87,9 @@ type StreamInputBlobInitParameters struct {
 
 type StreamInputBlobObservation struct {
 
+	// The authentication mode for the Stream Analytics Input. Possible values are Msi and ConnectionString. Defaults to ConnectionString.
+	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
+
 	// The date format. Wherever {date} appears in path_pattern, the value of this property is used as the date format instead.
 	DateFormat *string `json:"dateFormat,omitempty" tf:"date_format,omitempty"`
 
@@ -116,6 +122,10 @@ type StreamInputBlobObservation struct {
 }
 
 type StreamInputBlobParameters struct {
+
+	// The authentication mode for the Stream Analytics Input. Possible values are Msi and ConnectionString. Defaults to ConnectionString.
+	// +kubebuilder:validation:Optional
+	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
 
 	// The date format. Wherever {date} appears in path_pattern, the value of this property is used as the date format instead.
 	// +kubebuilder:validation:Optional

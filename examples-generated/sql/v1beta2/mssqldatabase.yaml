@@ -11,15 +11,13 @@ spec:
     collation: SQL_Latin1_General_CP1_CI_AS
     enclaveType: VBS
     licenseType: LicenseIncluded
-    maxSizeGb: 4
-    readScale: true
+    maxSizeGb: 2
     serverIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
     skuName: S0
     tags:
       foo: bar
-    zoneRedundant: true
 
 ---
 
@@ -57,22 +55,3 @@ metadata:
 spec:
   forProvider:
     location: West Europe
-
----
-
-apiVersion: storage.azure.upbound.io/v1beta2
-kind: Account
-metadata:
-  annotations:
-    meta.upbound.io/example-id: sql/v1beta2/mssqldatabase
-  labels:
-    testing.upbound.io/example-name: example
-  name: example
-spec:
-  forProvider:
-    accountReplicationType: LRS
-    accountTier: Standard
-    location: West Europe
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example

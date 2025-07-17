@@ -351,13 +351,17 @@ spec:
                       the Bastion Host. Possible values are between 2 and 50. Defaults
                       to 2.
                     type: number
+                  sessionRecordingEnabled:
+                    description: Is Session Recording feature enabled for the Bastion
+                      Host. Defaults to false.
+                    type: boolean
                   shareableLinkEnabled:
                     description: Is Shareable Link feature enabled for the Bastion
                       Host. Defaults to false.
                     type: boolean
                   sku:
                     description: The SKU of the Bastion Host. Accepted values are
-                      Developer, Basic and Standard. Defaults to Basic.
+                      Developer, Basic, Standard and Premium. Defaults to Basic.
                     type: string
                   tags:
                     additionalProperties:
@@ -373,6 +377,14 @@ spec:
                     description: The ID of the Virtual Network for the Developer Bastion
                       Host. Changing this forces a new resource to be created.
                     type: string
+                  zones:
+                    description: Specifies a list of Availability Zones in which this
+                      Public Bastion Host should be located. Changing this forces
+                      a new resource to be created.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                 type: object
               initProvider:
                 description: |-
@@ -584,13 +596,17 @@ spec:
                       the Bastion Host. Possible values are between 2 and 50. Defaults
                       to 2.
                     type: number
+                  sessionRecordingEnabled:
+                    description: Is Session Recording feature enabled for the Bastion
+                      Host. Defaults to false.
+                    type: boolean
                   shareableLinkEnabled:
                     description: Is Shareable Link feature enabled for the Bastion
                       Host. Defaults to false.
                     type: boolean
                   sku:
                     description: The SKU of the Bastion Host. Accepted values are
-                      Developer, Basic and Standard. Defaults to Basic.
+                      Developer, Basic, Standard and Premium. Defaults to Basic.
                     type: string
                   tags:
                     additionalProperties:
@@ -606,6 +622,14 @@ spec:
                     description: The ID of the Virtual Network for the Developer Bastion
                       Host. Changing this forces a new resource to be created.
                     type: string
+                  zones:
+                    description: Specifies a list of Availability Zones in which this
+                      Public Bastion Host should be located. Changing this forces
+                      a new resource to be created.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                 type: object
               managementPolicies:
                 default:
@@ -840,13 +864,17 @@ spec:
                       the Bastion Host. Possible values are between 2 and 50. Defaults
                       to 2.
                     type: number
+                  sessionRecordingEnabled:
+                    description: Is Session Recording feature enabled for the Bastion
+                      Host. Defaults to false.
+                    type: boolean
                   shareableLinkEnabled:
                     description: Is Shareable Link feature enabled for the Bastion
                       Host. Defaults to false.
                     type: boolean
                   sku:
                     description: The SKU of the Bastion Host. Accepted values are
-                      Developer, Basic and Standard. Defaults to Basic.
+                      Developer, Basic, Standard and Premium. Defaults to Basic.
                     type: string
                   tags:
                     additionalProperties:
@@ -862,6 +890,14 @@ spec:
                     description: The ID of the Virtual Network for the Developer Bastion
                       Host. Changing this forces a new resource to be created.
                     type: string
+                  zones:
+                    description: Specifies a list of Availability Zones in which this
+                      Public Bastion Host should be located. Changing this forces
+                      a new resource to be created.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                 type: object
               conditions:
                 description: Conditions of the resource.

@@ -92,14 +92,15 @@ spec:
                     type: array
                   resourceType:
                     description: The resource type this setting affects. Possible
-                      values are Api, AppServices, ContainerRegistry, KeyVaults, KubernetesService,
-                      SqlServers, SqlServerVirtualMachines, StorageAccounts, VirtualMachines,
-                      Arm, Dns, OpenSourceRelationalDatabases, Containers, CosmosDbs
-                      and CloudPosture. Defaults to VirtualMachines
+                      values are AI, Api, AppServices, ContainerRegistry, KeyVaults,
+                      KubernetesService, SqlServers, SqlServerVirtualMachines, StorageAccounts,
+                      VirtualMachines, Arm, Dns, OpenSourceRelationalDatabases, Containers,
+                      CosmosDbs and CloudPosture. Defaults to VirtualMachines
                     type: string
                   subplan:
                     description: Resource type pricing subplan. Contact your MSFT
-                      representative for possible values.
+                      representative for possible values. Changing this forces a new
+                      resource to be created.
                     type: string
                   tier:
                     description: The pricing tier to use. Possible values are Free
@@ -137,14 +138,15 @@ spec:
                     type: array
                   resourceType:
                     description: The resource type this setting affects. Possible
-                      values are Api, AppServices, ContainerRegistry, KeyVaults, KubernetesService,
-                      SqlServers, SqlServerVirtualMachines, StorageAccounts, VirtualMachines,
-                      Arm, Dns, OpenSourceRelationalDatabases, Containers, CosmosDbs
-                      and CloudPosture. Defaults to VirtualMachines
+                      values are AI, Api, AppServices, ContainerRegistry, KeyVaults,
+                      KubernetesService, SqlServers, SqlServerVirtualMachines, StorageAccounts,
+                      VirtualMachines, Arm, Dns, OpenSourceRelationalDatabases, Containers,
+                      CosmosDbs and CloudPosture. Defaults to VirtualMachines
                     type: string
                   subplan:
                     description: Resource type pricing subplan. Contact your MSFT
-                      representative for possible values.
+                      representative for possible values. Changing this forces a new
+                      resource to be created.
                     type: string
                   tier:
                     description: The pricing tier to use. Possible values are Free
@@ -350,14 +352,15 @@ spec:
                     type: string
                   resourceType:
                     description: The resource type this setting affects. Possible
-                      values are Api, AppServices, ContainerRegistry, KeyVaults, KubernetesService,
-                      SqlServers, SqlServerVirtualMachines, StorageAccounts, VirtualMachines,
-                      Arm, Dns, OpenSourceRelationalDatabases, Containers, CosmosDbs
-                      and CloudPosture. Defaults to VirtualMachines
+                      values are AI, Api, AppServices, ContainerRegistry, KeyVaults,
+                      KubernetesService, SqlServers, SqlServerVirtualMachines, StorageAccounts,
+                      VirtualMachines, Arm, Dns, OpenSourceRelationalDatabases, Containers,
+                      CosmosDbs and CloudPosture. Defaults to VirtualMachines
                     type: string
                   subplan:
                     description: Resource type pricing subplan. Contact your MSFT
-                      representative for possible values.
+                      representative for possible values. Changing this forces a new
+                      resource to be created.
                     type: string
                   tier:
                     description: The pricing tier to use. Possible values are Free

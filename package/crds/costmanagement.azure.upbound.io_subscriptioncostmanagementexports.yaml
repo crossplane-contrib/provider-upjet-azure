@@ -981,6 +981,10 @@ spec:
                           be uploaded. Changing this forces a new resource to be created.
                         type: string
                     type: object
+                  fileFormat:
+                    description: Format for export. Valid values are Csv only. Default
+                      is Csv.
+                    type: string
                   name:
                     description: Specifies the name of the Cost Management Export.
                       Changing this forces a new resource to be created.
@@ -1196,6 +1200,10 @@ spec:
                           be uploaded. Changing this forces a new resource to be created.
                         type: string
                     type: object
+                  fileFormat:
+                    description: Format for export. Valid values are Csv only. Default
+                      is Csv.
+                    type: string
                   name:
                     description: Specifies the name of the Cost Management Export.
                       Changing this forces a new resource to be created.
@@ -1520,6 +1528,10 @@ spec:
                           be uploaded. Changing this forces a new resource to be created.
                         type: string
                     type: object
+                  fileFormat:
+                    description: Format for export. Valid values are Csv only. Default
+                      is Csv.
+                    type: string
                   id:
                     description: The ID of the Cost Management Export for this Subscription.
                     type: string

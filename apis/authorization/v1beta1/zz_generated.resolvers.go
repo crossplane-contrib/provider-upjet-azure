@@ -751,6 +751,95 @@ func (mg *RoleAssignment) ResolveReferences(ctx context.Context, c client.Reader
 	return nil
 }
 
+// ResolveReferences of this RoleDefinition.
+func (mg *RoleDefinition) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("management.azure.upbound.io", "v1beta1", "ManagementGroup", "ManagementGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.AssignableScopes),
+			Extract:       resource.ExtractResourceID(),
+			References:    mg.Spec.ForProvider.AssignableScopesRefs,
+			Selector:      mg.Spec.ForProvider.AssignableScopesSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.AssignableScopes")
+	}
+	mg.Spec.ForProvider.AssignableScopes = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.AssignableScopesRefs = mrsp.ResolvedReferences
+	{
+		m, l, err = apisresolver.GetManagedResource("management.azure.upbound.io", "v1beta1", "ManagementGroup", "ManagementGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Scope),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.ScopeRef,
+			Selector:     mg.Spec.ForProvider.ScopeSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.Scope")
+	}
+	mg.Spec.ForProvider.Scope = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ScopeRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("management.azure.upbound.io", "v1beta1", "ManagementGroup", "ManagementGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.AssignableScopes),
+			Extract:       resource.ExtractResourceID(),
+			References:    mg.Spec.InitProvider.AssignableScopesRefs,
+			Selector:      mg.Spec.InitProvider.AssignableScopesSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.AssignableScopes")
+	}
+	mg.Spec.InitProvider.AssignableScopes = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.AssignableScopesRefs = mrsp.ResolvedReferences
+	{
+		m, l, err = apisresolver.GetManagedResource("management.azure.upbound.io", "v1beta1", "ManagementGroup", "ManagementGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Scope),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.ScopeRef,
+			Selector:     mg.Spec.InitProvider.ScopeSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Scope")
+	}
+	mg.Spec.InitProvider.Scope = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ScopeRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this SubscriptionPolicyAssignment.
 func (mg *SubscriptionPolicyAssignment) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed

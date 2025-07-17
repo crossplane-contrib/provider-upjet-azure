@@ -670,8 +670,7 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: Description of the resource. Changing this forces
-                      a new Load Test to be created.
+                    description: Description of the resource.
                     type: string
                   encryption:
                     description: An encryption block as defined below. Changing this
@@ -824,8 +823,7 @@ spec:
                   autoscaler.
                 properties:
                   description:
-                    description: Description of the resource. Changing this forces
-                      a new Load Test to be created.
+                    description: Description of the resource.
                     type: string
                   encryption:
                     description: An encryption block as defined below. Changing this
@@ -1064,8 +1062,7 @@ spec:
                     description: Resource data plane URI.
                     type: string
                   description:
-                    description: Description of the resource. Changing this forces
-                      a new Load Test to be created.
+                    description: Description of the resource.
                     type: string
                   encryption:
                     description: An encryption block as defined below. Changing this

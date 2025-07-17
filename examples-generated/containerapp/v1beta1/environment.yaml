@@ -12,6 +12,7 @@ spec:
     logAnalyticsWorkspaceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+    logsDestination: log-analytics
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example

@@ -16,6 +16,7 @@ spec:
         matchLabels:
           testing.upbound.io/example-name: example
       rootFolderPath: /root/updated
+    fileFormat: Csv
     name: example
     recurrencePeriodEndDate: "2020-09-18T00:00:00Z"
     recurrencePeriodStartDate: "2020-08-18T00:00:00Z"

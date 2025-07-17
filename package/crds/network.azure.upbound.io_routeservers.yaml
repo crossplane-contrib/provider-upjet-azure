@@ -75,8 +75,12 @@ spec:
                 properties:
                   branchToBranchTrafficEnabled:
                     description: Whether to enable route exchange between Azure Route
-                      Server and the gateway(s)
+                      Server and the gateway(s).
                     type: boolean
+                  hubRoutingPreference:
+                    description: The hub routing preference. Valid values are ASPath,
+                      ExpressRoute or VpnGateway. Defaults to ExpressRoute.
+                    type: string
                   location:
                     description: Specifies the supported Azure location where the
                       Route Server should exist. Changing this forces a new resource
@@ -346,8 +350,12 @@ spec:
                 properties:
                   branchToBranchTrafficEnabled:
                     description: Whether to enable route exchange between Azure Route
-                      Server and the gateway(s)
+                      Server and the gateway(s).
                     type: boolean
+                  hubRoutingPreference:
+                    description: The hub routing preference. Valid values are ASPath,
+                      ExpressRoute or VpnGateway. Defaults to ExpressRoute.
+                    type: string
                   location:
                     description: Specifies the supported Azure location where the
                       Route Server should exist. Changing this forces a new resource
@@ -704,10 +712,14 @@ spec:
                 properties:
                   branchToBranchTrafficEnabled:
                     description: Whether to enable route exchange between Azure Route
-                      Server and the gateway(s)
+                      Server and the gateway(s).
                     type: boolean
+                  hubRoutingPreference:
+                    description: The hub routing preference. Valid values are ASPath,
+                      ExpressRoute or VpnGateway. Defaults to ExpressRoute.
+                    type: string
                   id:
-                    description: The ID of the Route Server .
+                    description: The ID of the Route Server.
                     type: string
                   location:
                     description: Specifies the supported Azure location where the

@@ -15,6 +15,12 @@ import (
 
 type PimEligibleRoleAssignmentInitParameters struct {
 
+	// The condition that limits the resources that the role can be assigned to. See the official conditions documentation for details. Changing this forces a new resource to be created.
+	Condition *string `json:"condition,omitempty" tf:"condition,omitempty"`
+
+	// The version of the condition. Supported values include 2.0. Changing this forces a new resource to be created.
+	ConditionVersion *string `json:"conditionVersion,omitempty" tf:"condition_version,omitempty"`
+
 	// The justification of the role assignment. Changing this forces a new resource to be created.
 	// The justification for this eligible role assignment
 	Justification *string `json:"justification,omitempty" tf:"justification,omitempty"`
@@ -52,6 +58,12 @@ type PimEligibleRoleAssignmentInitParameters struct {
 
 type PimEligibleRoleAssignmentObservation struct {
 
+	// The condition that limits the resources that the role can be assigned to. See the official conditions documentation for details. Changing this forces a new resource to be created.
+	Condition *string `json:"condition,omitempty" tf:"condition,omitempty"`
+
+	// The version of the condition. Supported values include 2.0. Changing this forces a new resource to be created.
+	ConditionVersion *string `json:"conditionVersion,omitempty" tf:"condition_version,omitempty"`
+
 	// The ID of the PIM Eligible Role Assignment.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -85,6 +97,14 @@ type PimEligibleRoleAssignmentObservation struct {
 }
 
 type PimEligibleRoleAssignmentParameters struct {
+
+	// The condition that limits the resources that the role can be assigned to. See the official conditions documentation for details. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	Condition *string `json:"condition,omitempty" tf:"condition,omitempty"`
+
+	// The version of the condition. Supported values include 2.0. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	ConditionVersion *string `json:"conditionVersion,omitempty" tf:"condition_version,omitempty"`
 
 	// The justification of the role assignment. Changing this forces a new resource to be created.
 	// The justification for this eligible role assignment

@@ -387,18 +387,18 @@ func (mg *LogAnalyticsLinkedStorageAccount) ResolveReferences(ctx context.Contex
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WorkspaceResourceID),
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WorkspaceID),
 			Extract:      resource.ExtractResourceID(),
-			Reference:    mg.Spec.ForProvider.WorkspaceResourceIDRef,
-			Selector:     mg.Spec.ForProvider.WorkspaceResourceIDSelector,
+			Reference:    mg.Spec.ForProvider.WorkspaceIDRef,
+			Selector:     mg.Spec.ForProvider.WorkspaceIDSelector,
 			To:           reference.To{List: l, Managed: m},
 		})
 	}
 	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.WorkspaceResourceID")
+		return errors.Wrap(err, "mg.Spec.ForProvider.WorkspaceID")
 	}
-	mg.Spec.ForProvider.WorkspaceResourceID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.WorkspaceResourceIDRef = rsp.ResolvedReference
+	mg.Spec.ForProvider.WorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.WorkspaceIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
@@ -444,18 +444,18 @@ func (mg *LogAnalyticsLinkedStorageAccount) ResolveReferences(ctx context.Contex
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.WorkspaceResourceID),
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.WorkspaceID),
 			Extract:      resource.ExtractResourceID(),
-			Reference:    mg.Spec.InitProvider.WorkspaceResourceIDRef,
-			Selector:     mg.Spec.InitProvider.WorkspaceResourceIDSelector,
+			Reference:    mg.Spec.InitProvider.WorkspaceIDRef,
+			Selector:     mg.Spec.InitProvider.WorkspaceIDSelector,
 			To:           reference.To{List: l, Managed: m},
 		})
 	}
 	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.WorkspaceResourceID")
+		return errors.Wrap(err, "mg.Spec.InitProvider.WorkspaceID")
 	}
-	mg.Spec.InitProvider.WorkspaceResourceID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.WorkspaceResourceIDRef = rsp.ResolvedReference
+	mg.Spec.InitProvider.WorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.WorkspaceIDRef = rsp.ResolvedReference
 
 	return nil
 }

@@ -927,8 +927,7 @@ spec:
                     items:
                       properties:
                         filter:
-                          description: A filter block as defined above. Can only be
-                            set when the scope is Blob.
+                          description: A filter block as defined above.
                           properties:
                             blobTypes:
                               description: A set of blob types. Possible values are
@@ -1167,8 +1166,7 @@ spec:
                     items:
                       properties:
                         filter:
-                          description: A filter block as defined above. Can only be
-                            set when the scope is Blob.
+                          description: A filter block as defined above.
                           properties:
                             blobTypes:
                               description: A set of blob types. Possible values are
@@ -1574,8 +1572,7 @@ spec:
                     items:
                       properties:
                         filter:
-                          description: A filter block as defined above. Can only be
-                            set when the scope is Blob.
+                          description: A filter block as defined above.
                           properties:
                             blobTypes:
                               description: A set of blob types. Possible values are

@@ -74,8 +74,8 @@ type IPConfigurationsParameters struct {
 
 type PrivateDNSResolverInboundEndpointInitParameters struct {
 
-	// Can be specified multiple times to define multiple IP configurations. Each ip_configurations block as defined below.
-	IPConfigurations []IPConfigurationsInitParameters `json:"ipConfigurations,omitempty" tf:"ip_configurations,omitempty"`
+	// One ip_configurations block as defined below. Changing this forces a new Private DNS Resolver Inbound Endpoint to be created.
+	IPConfigurations *IPConfigurationsInitParameters `json:"ipConfigurations,omitempty" tf:"ip_configurations,omitempty"`
 
 	// Specifies the Azure Region where the Private DNS Resolver Inbound Endpoint should exist. Changing this forces a new Private DNS Resolver Inbound Endpoint to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -90,8 +90,8 @@ type PrivateDNSResolverInboundEndpointObservation struct {
 	// The ID of the Private DNS Resolver Inbound Endpoint.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Can be specified multiple times to define multiple IP configurations. Each ip_configurations block as defined below.
-	IPConfigurations []IPConfigurationsObservation `json:"ipConfigurations,omitempty" tf:"ip_configurations,omitempty"`
+	// One ip_configurations block as defined below. Changing this forces a new Private DNS Resolver Inbound Endpoint to be created.
+	IPConfigurations *IPConfigurationsObservation `json:"ipConfigurations,omitempty" tf:"ip_configurations,omitempty"`
 
 	// Specifies the Azure Region where the Private DNS Resolver Inbound Endpoint should exist. Changing this forces a new Private DNS Resolver Inbound Endpoint to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -106,9 +106,9 @@ type PrivateDNSResolverInboundEndpointObservation struct {
 
 type PrivateDNSResolverInboundEndpointParameters struct {
 
-	// Can be specified multiple times to define multiple IP configurations. Each ip_configurations block as defined below.
+	// One ip_configurations block as defined below. Changing this forces a new Private DNS Resolver Inbound Endpoint to be created.
 	// +kubebuilder:validation:Optional
-	IPConfigurations []IPConfigurationsParameters `json:"ipConfigurations,omitempty" tf:"ip_configurations,omitempty"`
+	IPConfigurations *IPConfigurationsParameters `json:"ipConfigurations,omitempty" tf:"ip_configurations,omitempty"`
 
 	// Specifies the Azure Region where the Private DNS Resolver Inbound Endpoint should exist. Changing this forces a new Private DNS Resolver Inbound Endpoint to be created.
 	// +kubebuilder:validation:Optional

@@ -1154,10 +1154,45 @@ spec:
                     - name
                     - namespace
                     type: object
+                  azureActiveDirectoryAdministrator:
+                    description: An azure_active_directory_administrator block as
+                      defined below.
+                    properties:
+                      azureadAuthenticationOnlyEnabled:
+                        description: Specifies whether only Azure AD authentication
+                          can be used to log in to this SQL Managed Instance. When
+                          true, the administrator_login and administrator_login_password
+                          properties can be omitted. Defaults to false.
+                        type: boolean
+                      loginUsername:
+                        description: The login username of the Azure AD Administrator
+                          of this SQL Managed Instance.
+                        type: string
+                      objectId:
+                        description: The object id of the Azure AD Administrator of
+                          this SQL Managed Instance.
+                        type: string
+                      principalType:
+                        description: The principal type of the Azure AD Administrator
+                          of this SQL Managed Instance. Possible values are Application,
+                          Group, User.
+                        type: string
+                      tenantId:
+                        description: The tenant id of the Azure AD Administrator of
+                          this SQL Managed Instance. Should be specified if the Azure
+                          AD Administrator is homed in a different tenant to the SQL
+                          Managed Instance.
+                        type: string
+                    type: object
                   collation:
                     description: Specifies how the SQL Managed Instance will be collated.
                       Default value is SQL_Latin1_General_CP1_CI_AS. Changing this
                       forces a new resource to be created.
+                    type: string
+                  databaseFormat:
+                    description: Specifies the internal format of the SQL Managed
+                      Instance databases specific to the SQL engine version. Possible
+                      values are AlwaysUpToDate and SQLServer2022. Defaults to SQLServer2022.
                     type: string
                   dnsZonePartnerId:
                     description: The ID of the SQL Managed Instance which will share
@@ -1240,13 +1275,18 @@ spec:
                             type: string
                         type: object
                     type: object
+                  hybridSecondaryUsage:
+                    description: Specifies the hybrid secondary usage for disaster
+                      recovery of the SQL Managed Instance. Possible values are Active
+                      and Passive. Defaults to Active.
+                    type: string
                   identity:
                     description: An identity block as defined below.
                     properties:
                       identityIds:
                         description: Specifies a list of User Assigned Managed Identity
                           IDs to be assigned to this SQL Managed Instance. Required
-                          when type is set to UserAssigned.
+                          when type includes UserAssigned.
                         items:
                           type: string
                         type: array
@@ -1254,7 +1294,8 @@ spec:
                       type:
                         description: Specifies the type of Managed Service Identity
                           that should be configured on this SQL Managed Instance.
-                          Possible values are SystemAssigned, UserAssigned.
+                          Possible values are SystemAssigned, UserAssigned, SystemAssigned,
+                          UserAssigned.
                         type: string
                     type: object
                   licenseType:
@@ -1365,6 +1406,10 @@ spec:
                             type: string
                         type: object
                     type: object
+                  servicePrincipalType:
+                    description: The service principal type. The only possible value
+                      is SystemAssigned.
+                    type: string
                   skuName:
                     description: Specifies the SKU Name for the SQL Managed Instance.
                       Valid values include GP_Gen4, GP_Gen5, GP_Gen8IM, GP_Gen8IH,
@@ -1372,9 +1417,8 @@ spec:
                     type: string
                   storageAccountType:
                     description: Specifies the storage account type used to store
-                      backups for this database. Changing this forces a new resource
-                      to be created. Possible values are GRS, GZRS, LRS, and ZRS.
-                      Defaults to GRS.
+                      backups for this database. Possible values are GRS, GZRS, LRS,
+                      and ZRS. Defaults to GRS.
                     type: string
                   storageSizeInGb:
                     description: Maximum storage space for the SQL Managed instance.
@@ -1382,8 +1426,7 @@ spec:
                     type: number
                   subnetId:
                     description: The subnet resource id that the SQL Managed Instance
-                      will be associated with. Changing this forces a new resource
-                      to be created.
+                      will be associated with.
                     type: string
                   subnetIdRef:
                     description: Reference to a Subnet in network to populate subnetId.
@@ -1516,10 +1559,45 @@ spec:
                     - name
                     - namespace
                     type: object
+                  azureActiveDirectoryAdministrator:
+                    description: An azure_active_directory_administrator block as
+                      defined below.
+                    properties:
+                      azureadAuthenticationOnlyEnabled:
+                        description: Specifies whether only Azure AD authentication
+                          can be used to log in to this SQL Managed Instance. When
+                          true, the administrator_login and administrator_login_password
+                          properties can be omitted. Defaults to false.
+                        type: boolean
+                      loginUsername:
+                        description: The login username of the Azure AD Administrator
+                          of this SQL Managed Instance.
+                        type: string
+                      objectId:
+                        description: The object id of the Azure AD Administrator of
+                          this SQL Managed Instance.
+                        type: string
+                      principalType:
+                        description: The principal type of the Azure AD Administrator
+                          of this SQL Managed Instance. Possible values are Application,
+                          Group, User.
+                        type: string
+                      tenantId:
+                        description: The tenant id of the Azure AD Administrator of
+                          this SQL Managed Instance. Should be specified if the Azure
+                          AD Administrator is homed in a different tenant to the SQL
+                          Managed Instance.
+                        type: string
+                    type: object
                   collation:
                     description: Specifies how the SQL Managed Instance will be collated.
                       Default value is SQL_Latin1_General_CP1_CI_AS. Changing this
                       forces a new resource to be created.
+                    type: string
+                  databaseFormat:
+                    description: Specifies the internal format of the SQL Managed
+                      Instance databases specific to the SQL engine version. Possible
+                      values are AlwaysUpToDate and SQLServer2022. Defaults to SQLServer2022.
                     type: string
                   dnsZonePartnerId:
                     description: The ID of the SQL Managed Instance which will share
@@ -1602,13 +1680,18 @@ spec:
                             type: string
                         type: object
                     type: object
+                  hybridSecondaryUsage:
+                    description: Specifies the hybrid secondary usage for disaster
+                      recovery of the SQL Managed Instance. Possible values are Active
+                      and Passive. Defaults to Active.
+                    type: string
                   identity:
                     description: An identity block as defined below.
                     properties:
                       identityIds:
                         description: Specifies a list of User Assigned Managed Identity
                           IDs to be assigned to this SQL Managed Instance. Required
-                          when type is set to UserAssigned.
+                          when type includes UserAssigned.
                         items:
                           type: string
                         type: array
@@ -1616,7 +1699,8 @@ spec:
                       type:
                         description: Specifies the type of Managed Service Identity
                           that should be configured on this SQL Managed Instance.
-                          Possible values are SystemAssigned, UserAssigned.
+                          Possible values are SystemAssigned, UserAssigned, SystemAssigned,
+                          UserAssigned.
                         type: string
                     type: object
                   licenseType:
@@ -1646,6 +1730,10 @@ spec:
                     description: Is the public data endpoint enabled? Default value
                       is false.
                     type: boolean
+                  servicePrincipalType:
+                    description: The service principal type. The only possible value
+                      is SystemAssigned.
+                    type: string
                   skuName:
                     description: Specifies the SKU Name for the SQL Managed Instance.
                       Valid values include GP_Gen4, GP_Gen5, GP_Gen8IM, GP_Gen8IH,
@@ -1653,9 +1741,8 @@ spec:
                     type: string
                   storageAccountType:
                     description: Specifies the storage account type used to store
-                      backups for this database. Changing this forces a new resource
-                      to be created. Possible values are GRS, GZRS, LRS, and ZRS.
-                      Defaults to GRS.
+                      backups for this database. Possible values are GRS, GZRS, LRS,
+                      and ZRS. Defaults to GRS.
                     type: string
                   storageSizeInGb:
                     description: Maximum storage space for the SQL Managed instance.
@@ -1663,8 +1750,7 @@ spec:
                     type: number
                   subnetId:
                     description: The subnet resource id that the SQL Managed Instance
-                      will be associated with. Changing this forces a new resource
-                      to be created.
+                      will be associated with.
                     type: string
                   subnetIdRef:
                     description: Reference to a Subnet in network to populate subnetId.
@@ -1761,8 +1847,6 @@ spec:
                     description: Specifies whether or not the SQL Managed Instance
                       is zone redundant. Defaults to false.
                     type: boolean
-                required:
-                - administratorLoginPasswordSecretRef
                 type: object
               managementPolicies:
                 default:
@@ -1932,14 +2016,6 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.administratorLogin is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.administratorLogin)
-                || (has(self.initProvider) && has(self.initProvider.administratorLogin))'
-            - message: spec.forProvider.administratorLoginPasswordSecretRef is a required
-                parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.administratorLoginPasswordSecretRef)'
             - message: spec.forProvider.licenseType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.licenseType)
@@ -1970,10 +2046,45 @@ spec:
                     description: The administrator login name for the new SQL Managed
                       Instance. Changing this forces a new resource to be created.
                     type: string
+                  azureActiveDirectoryAdministrator:
+                    description: An azure_active_directory_administrator block as
+                      defined below.
+                    properties:
+                      azureadAuthenticationOnlyEnabled:
+                        description: Specifies whether only Azure AD authentication
+                          can be used to log in to this SQL Managed Instance. When
+                          true, the administrator_login and administrator_login_password
+                          properties can be omitted. Defaults to false.
+                        type: boolean
+                      loginUsername:
+                        description: The login username of the Azure AD Administrator
+                          of this SQL Managed Instance.
+                        type: string
+                      objectId:
+                        description: The object id of the Azure AD Administrator of
+                          this SQL Managed Instance.
+                        type: string
+                      principalType:
+                        description: The principal type of the Azure AD Administrator
+                          of this SQL Managed Instance. Possible values are Application,
+                          Group, User.
+                        type: string
+                      tenantId:
+                        description: The tenant id of the Azure AD Administrator of
+                          this SQL Managed Instance. Should be specified if the Azure
+                          AD Administrator is homed in a different tenant to the SQL
+                          Managed Instance.
+                        type: string
+                    type: object
                   collation:
                     description: Specifies how the SQL Managed Instance will be collated.
                       Default value is SQL_Latin1_General_CP1_CI_AS. Changing this
                       forces a new resource to be created.
+                    type: string
+                  databaseFormat:
+                    description: Specifies the internal format of the SQL Managed
+                      Instance databases specific to the SQL engine version. Possible
+                      values are AlwaysUpToDate and SQLServer2022. Defaults to SQLServer2022.
                     type: string
                   dnsZone:
                     description: The Dns Zone where the SQL Managed Instance is located.
@@ -1987,6 +2098,11 @@ spec:
                     description: The fully qualified domain name of the Azure Managed
                       SQL Instance
                     type: string
+                  hybridSecondaryUsage:
+                    description: Specifies the hybrid secondary usage for disaster
+                      recovery of the SQL Managed Instance. Possible values are Active
+                      and Passive. Defaults to Active.
+                    type: string
                   id:
                     description: The SQL Managed Instance ID.
                     type: string
@@ -1996,7 +2112,7 @@ spec:
                       identityIds:
                         description: Specifies a list of User Assigned Managed Identity
                           IDs to be assigned to this SQL Managed Instance. Required
-                          when type is set to UserAssigned.
+                          when type includes UserAssigned.
                         items:
                           type: string
                         type: array
@@ -2012,7 +2128,8 @@ spec:
                       type:
                         description: Specifies the type of Managed Service Identity
                           that should be configured on this SQL Managed Instance.
-                          Possible values are SystemAssigned, UserAssigned.
+                          Possible values are SystemAssigned, UserAssigned, SystemAssigned,
+                          UserAssigned.
                         type: string
                     type: object
                   licenseType:
@@ -2047,6 +2164,10 @@ spec:
                       the SQL Managed Instance. Changing this forces a new resource
                       to be created.
                     type: string
+                  servicePrincipalType:
+                    description: The service principal type. The only possible value
+                      is SystemAssigned.
+                    type: string
                   skuName:
                     description: Specifies the SKU Name for the SQL Managed Instance.
                       Valid values include GP_Gen4, GP_Gen5, GP_Gen8IM, GP_Gen8IH,
@@ -2054,9 +2175,8 @@ spec:
                     type: string
                   storageAccountType:
                     description: Specifies the storage account type used to store
-                      backups for this database. Changing this forces a new resource
-                      to be created. Possible values are GRS, GZRS, LRS, and ZRS.
-                      Defaults to GRS.
+                      backups for this database. Possible values are GRS, GZRS, LRS,
+                      and ZRS. Defaults to GRS.
                     type: string
                   storageSizeInGb:
                     description: Maximum storage space for the SQL Managed instance.
@@ -2064,8 +2184,7 @@ spec:
                     type: number
                   subnetId:
                     description: The subnet resource id that the SQL Managed Instance
-                      will be associated with. Changing this forces a new resource
-                      to be created.
+                      will be associated with.
                     type: string
                   tags:
                     additionalProperties:

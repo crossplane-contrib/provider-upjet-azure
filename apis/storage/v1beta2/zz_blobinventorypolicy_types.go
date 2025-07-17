@@ -145,7 +145,7 @@ type FilterParameters struct {
 
 type RulesInitParameters struct {
 
-	// A filter block as defined above. Can only be set when the scope is Blob.
+	// A filter block as defined above.
 	Filter *FilterInitParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
 	// The format of the inventory files. Possible values are Csv and Parquet.
@@ -178,7 +178,7 @@ type RulesInitParameters struct {
 
 type RulesObservation struct {
 
-	// A filter block as defined above. Can only be set when the scope is Blob.
+	// A filter block as defined above.
 	Filter *FilterObservation `json:"filter,omitempty" tf:"filter,omitempty"`
 
 	// The format of the inventory files. Possible values are Csv and Parquet.
@@ -202,7 +202,7 @@ type RulesObservation struct {
 
 type RulesParameters struct {
 
-	// A filter block as defined above. Can only be set when the scope is Blob.
+	// A filter block as defined above.
 	// +kubebuilder:validation:Optional
 	Filter *FilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 

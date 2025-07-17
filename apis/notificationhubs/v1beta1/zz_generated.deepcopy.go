@@ -236,18 +236,8 @@ func (in *AuthorizationRuleObservation) DeepCopyInto(out *AuthorizationRuleObser
 		*out = new(string)
 		**out = **in
 	}
-	if in.PrimaryAccessKey != nil {
-		in, out := &in.PrimaryAccessKey, &out.PrimaryAccessKey
-		*out = new(string)
-		**out = **in
-	}
 	if in.ResourceGroupName != nil {
 		in, out := &in.ResourceGroupName, &out.ResourceGroupName
-		*out = new(string)
-		**out = **in
-	}
-	if in.SecondaryAccessKey != nil {
-		in, out := &in.SecondaryAccessKey, &out.SecondaryAccessKey
 		*out = new(string)
 		**out = **in
 	}

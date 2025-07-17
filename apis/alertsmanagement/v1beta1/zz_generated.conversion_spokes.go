@@ -13,46 +13,6 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/conversion"
 )
 
-// ConvertTo converts this MonitorActionRuleActionGroup to the hub type.
-func (tr *MonitorActionRuleActionGroup) ConvertTo(dstRaw conversion.Hub) error {
-	spokeVersion := tr.GetObjectKind().GroupVersionKind().Version
-	hubVersion := dstRaw.GetObjectKind().GroupVersionKind().Version
-	if err := ujconversion.RoundTrip(dstRaw.(resource.Terraformed), tr); err != nil {
-		return errors.Wrapf(err, "cannot convert from the spoke version %q to the hub version %q", spokeVersion, hubVersion)
-	}
-	return nil
-}
-
-// ConvertFrom converts from the hub type to the MonitorActionRuleActionGroup type.
-func (tr *MonitorActionRuleActionGroup) ConvertFrom(srcRaw conversion.Hub) error {
-	spokeVersion := tr.GetObjectKind().GroupVersionKind().Version
-	hubVersion := srcRaw.GetObjectKind().GroupVersionKind().Version
-	if err := ujconversion.RoundTrip(tr, srcRaw.(resource.Terraformed)); err != nil {
-		return errors.Wrapf(err, "cannot convert from the hub version %q to the spoke version %q", hubVersion, spokeVersion)
-	}
-	return nil
-}
-
-// ConvertTo converts this MonitorActionRuleSuppression to the hub type.
-func (tr *MonitorActionRuleSuppression) ConvertTo(dstRaw conversion.Hub) error {
-	spokeVersion := tr.GetObjectKind().GroupVersionKind().Version
-	hubVersion := dstRaw.GetObjectKind().GroupVersionKind().Version
-	if err := ujconversion.RoundTrip(dstRaw.(resource.Terraformed), tr); err != nil {
-		return errors.Wrapf(err, "cannot convert from the spoke version %q to the hub version %q", spokeVersion, hubVersion)
-	}
-	return nil
-}
-
-// ConvertFrom converts from the hub type to the MonitorActionRuleSuppression type.
-func (tr *MonitorActionRuleSuppression) ConvertFrom(srcRaw conversion.Hub) error {
-	spokeVersion := tr.GetObjectKind().GroupVersionKind().Version
-	hubVersion := srcRaw.GetObjectKind().GroupVersionKind().Version
-	if err := ujconversion.RoundTrip(tr, srcRaw.(resource.Terraformed)); err != nil {
-		return errors.Wrapf(err, "cannot convert from the hub version %q to the spoke version %q", hubVersion, spokeVersion)
-	}
-	return nil
-}
-
 // ConvertTo converts this MonitorAlertProcessingRuleActionGroup to the hub type.
 func (tr *MonitorAlertProcessingRuleActionGroup) ConvertTo(dstRaw conversion.Hub) error {
 	spokeVersion := tr.GetObjectKind().GroupVersionKind().Version

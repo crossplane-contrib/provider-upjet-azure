@@ -3290,6 +3290,11 @@ func (in *BastionHostInitParameters) DeepCopyInto(out *BastionHostInitParameters
 		*out = new(float64)
 		**out = **in
 	}
+	if in.SessionRecordingEnabled != nil {
+		in, out := &in.SessionRecordingEnabled, &out.SessionRecordingEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ShareableLinkEnabled != nil {
 		in, out := &in.ShareableLinkEnabled, &out.ShareableLinkEnabled
 		*out = new(bool)
@@ -3325,6 +3330,17 @@ func (in *BastionHostInitParameters) DeepCopyInto(out *BastionHostInitParameters
 		in, out := &in.VirtualNetworkID, &out.VirtualNetworkID
 		*out = new(string)
 		**out = **in
+	}
+	if in.Zones != nil {
+		in, out := &in.Zones, &out.Zones
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
 	}
 }
 
@@ -3423,6 +3439,11 @@ func (in *BastionHostObservation) DeepCopyInto(out *BastionHostObservation) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.SessionRecordingEnabled != nil {
+		in, out := &in.SessionRecordingEnabled, &out.SessionRecordingEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ShareableLinkEnabled != nil {
 		in, out := &in.ShareableLinkEnabled, &out.ShareableLinkEnabled
 		*out = new(bool)
@@ -3458,6 +3479,17 @@ func (in *BastionHostObservation) DeepCopyInto(out *BastionHostObservation) {
 		in, out := &in.VirtualNetworkID, &out.VirtualNetworkID
 		*out = new(string)
 		**out = **in
+	}
+	if in.Zones != nil {
+		in, out := &in.Zones, &out.Zones
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
 	}
 }
 
@@ -3524,6 +3556,11 @@ func (in *BastionHostParameters) DeepCopyInto(out *BastionHostParameters) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.SessionRecordingEnabled != nil {
+		in, out := &in.SessionRecordingEnabled, &out.SessionRecordingEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ShareableLinkEnabled != nil {
 		in, out := &in.ShareableLinkEnabled, &out.ShareableLinkEnabled
 		*out = new(bool)
@@ -3559,6 +3596,17 @@ func (in *BastionHostParameters) DeepCopyInto(out *BastionHostParameters) {
 		in, out := &in.VirtualNetworkID, &out.VirtualNetworkID
 		*out = new(string)
 		**out = **in
+	}
+	if in.Zones != nil {
+		in, out := &in.Zones, &out.Zones
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
 	}
 }
 
@@ -28259,16 +28307,6 @@ func (in *NetworkInterfaceInitParameters) DeepCopyInto(out *NetworkInterfaceInit
 		*out = new(string)
 		**out = **in
 	}
-	if in.EnableAcceleratedNetworking != nil {
-		in, out := &in.EnableAcceleratedNetworking, &out.EnableAcceleratedNetworking
-		*out = new(bool)
-		**out = **in
-	}
-	if in.EnableIPForwarding != nil {
-		in, out := &in.EnableIPForwarding, &out.EnableIPForwarding
-		*out = new(bool)
-		**out = **in
-	}
 	if in.IPConfiguration != nil {
 		in, out := &in.IPConfiguration, &out.IPConfiguration
 		*out = make([]NetworkInterfaceIPConfigurationInitParameters, len(*in))
@@ -28625,16 +28663,6 @@ func (in *NetworkInterfaceObservation) DeepCopyInto(out *NetworkInterfaceObserva
 		*out = new(string)
 		**out = **in
 	}
-	if in.EnableAcceleratedNetworking != nil {
-		in, out := &in.EnableAcceleratedNetworking, &out.EnableAcceleratedNetworking
-		*out = new(bool)
-		**out = **in
-	}
-	if in.EnableIPForwarding != nil {
-		in, out := &in.EnableIPForwarding, &out.EnableIPForwarding
-		*out = new(bool)
-		**out = **in
-	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
@@ -28758,16 +28786,6 @@ func (in *NetworkInterfaceParameters) DeepCopyInto(out *NetworkInterfaceParamete
 	if in.EdgeZone != nil {
 		in, out := &in.EdgeZone, &out.EdgeZone
 		*out = new(string)
-		**out = **in
-	}
-	if in.EnableAcceleratedNetworking != nil {
-		in, out := &in.EnableAcceleratedNetworking, &out.EnableAcceleratedNetworking
-		*out = new(bool)
-		**out = **in
-	}
-	if in.EnableIPForwarding != nil {
-		in, out := &in.EnableIPForwarding, &out.EnableIPForwarding
-		*out = new(bool)
 		**out = **in
 	}
 	if in.IPConfiguration != nil {
@@ -33647,10 +33665,8 @@ func (in *PrivateDNSResolverInboundEndpointInitParameters) DeepCopyInto(out *Pri
 	*out = *in
 	if in.IPConfigurations != nil {
 		in, out := &in.IPConfigurations, &out.IPConfigurations
-		*out = make([]IPConfigurationsInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(IPConfigurationsInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Location != nil {
 		in, out := &in.Location, &out.Location
@@ -33727,10 +33743,8 @@ func (in *PrivateDNSResolverInboundEndpointObservation) DeepCopyInto(out *Privat
 	}
 	if in.IPConfigurations != nil {
 		in, out := &in.IPConfigurations, &out.IPConfigurations
-		*out = make([]IPConfigurationsObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(IPConfigurationsObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Location != nil {
 		in, out := &in.Location, &out.Location
@@ -33775,10 +33789,8 @@ func (in *PrivateDNSResolverInboundEndpointParameters) DeepCopyInto(out *Private
 	*out = *in
 	if in.IPConfigurations != nil {
 		in, out := &in.IPConfigurations, &out.IPConfigurations
-		*out = make([]IPConfigurationsParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(IPConfigurationsParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Location != nil {
 		in, out := &in.Location, &out.Location
@@ -36910,6 +36922,11 @@ func (in *PrivateLinkServiceInitParameters) DeepCopyInto(out *PrivateLinkService
 			}
 		}
 	}
+	if in.DestinationIPAddress != nil {
+		in, out := &in.DestinationIPAddress, &out.DestinationIPAddress
+		*out = new(string)
+		**out = **in
+	}
 	if in.EnableProxyProtocol != nil {
 		in, out := &in.EnableProxyProtocol, &out.EnableProxyProtocol
 		*out = new(bool)
@@ -37039,6 +37056,11 @@ func (in *PrivateLinkServiceObservation) DeepCopyInto(out *PrivateLinkServiceObs
 			}
 		}
 	}
+	if in.DestinationIPAddress != nil {
+		in, out := &in.DestinationIPAddress, &out.DestinationIPAddress
+		*out = new(string)
+		**out = **in
+	}
 	if in.EnableProxyProtocol != nil {
 		in, out := &in.EnableProxyProtocol, &out.EnableProxyProtocol
 		*out = new(bool)
@@ -37140,6 +37162,11 @@ func (in *PrivateLinkServiceParameters) DeepCopyInto(out *PrivateLinkServicePara
 				**out = **in
 			}
 		}
+	}
+	if in.DestinationIPAddress != nil {
+		in, out := &in.DestinationIPAddress, &out.DestinationIPAddress
+		*out = new(string)
+		**out = **in
 	}
 	if in.EnableProxyProtocol != nil {
 		in, out := &in.EnableProxyProtocol, &out.EnableProxyProtocol
@@ -38218,6 +38245,11 @@ func (in *PublicIPInitParameters) DeepCopyInto(out *PublicIPInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DomainNameLabelScope != nil {
+		in, out := &in.DomainNameLabelScope, &out.DomainNameLabelScope
+		*out = new(string)
+		**out = **in
+	}
 	if in.EdgeZone != nil {
 		in, out := &in.EdgeZone, &out.EdgeZone
 		*out = new(string)
@@ -38368,6 +38400,11 @@ func (in *PublicIPObservation) DeepCopyInto(out *PublicIPObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DomainNameLabelScope != nil {
+		in, out := &in.DomainNameLabelScope, &out.DomainNameLabelScope
+		*out = new(string)
+		**out = **in
+	}
 	if in.EdgeZone != nil {
 		in, out := &in.EdgeZone, &out.EdgeZone
 		*out = new(string)
@@ -38503,6 +38540,11 @@ func (in *PublicIPParameters) DeepCopyInto(out *PublicIPParameters) {
 	}
 	if in.DomainNameLabel != nil {
 		in, out := &in.DomainNameLabel, &out.DomainNameLabel
+		*out = new(string)
+		**out = **in
+	}
+	if in.DomainNameLabelScope != nil {
+		in, out := &in.DomainNameLabelScope, &out.DomainNameLabelScope
 		*out = new(string)
 		**out = **in
 	}
@@ -38666,6 +38708,11 @@ func (in *PublicIPPrefixInitParameters) DeepCopyInto(out *PublicIPPrefixInitPara
 		*out = new(string)
 		**out = **in
 	}
+	if in.SkuTier != nil {
+		in, out := &in.SkuTier, &out.SkuTier
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -38775,6 +38822,11 @@ func (in *PublicIPPrefixObservation) DeepCopyInto(out *PublicIPPrefixObservation
 		*out = new(string)
 		**out = **in
 	}
+	if in.SkuTier != nil {
+		in, out := &in.SkuTier, &out.SkuTier
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -38849,6 +38901,11 @@ func (in *PublicIPPrefixParameters) DeepCopyInto(out *PublicIPPrefixParameters) 
 	}
 	if in.Sku != nil {
 		in, out := &in.Sku, &out.Sku
+		*out = new(string)
+		**out = **in
+	}
+	if in.SkuTier != nil {
+		in, out := &in.SkuTier, &out.SkuTier
 		*out = new(string)
 		**out = **in
 	}
@@ -41864,6 +41921,11 @@ func (in *RouteServerInitParameters) DeepCopyInto(out *RouteServerInitParameters
 		*out = new(bool)
 		**out = **in
 	}
+	if in.HubRoutingPreference != nil {
+		in, out := &in.HubRoutingPreference, &out.HubRoutingPreference
+		*out = new(string)
+		**out = **in
+	}
 	if in.Location != nil {
 		in, out := &in.Location, &out.Location
 		*out = new(string)
@@ -41972,6 +42034,11 @@ func (in *RouteServerObservation) DeepCopyInto(out *RouteServerObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.HubRoutingPreference != nil {
+		in, out := &in.HubRoutingPreference, &out.HubRoutingPreference
+		*out = new(string)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
@@ -42057,6 +42124,11 @@ func (in *RouteServerParameters) DeepCopyInto(out *RouteServerParameters) {
 	if in.BranchToBranchTrafficEnabled != nil {
 		in, out := &in.BranchToBranchTrafficEnabled, &out.BranchToBranchTrafficEnabled
 		*out = new(bool)
+		**out = **in
+	}
+	if in.HubRoutingPreference != nil {
+		in, out := &in.HubRoutingPreference, &out.HubRoutingPreference
+		*out = new(string)
 		**out = **in
 	}
 	if in.Location != nil {
@@ -42247,11 +42319,6 @@ func (in *RouteTableInitParameters) DeepCopyInto(out *RouteTableInitParameters) 
 		*out = new(bool)
 		**out = **in
 	}
-	if in.DisableBGPRoutePropagation != nil {
-		in, out := &in.DisableBGPRoutePropagation, &out.DisableBGPRoutePropagation
-		*out = new(bool)
-		**out = **in
-	}
 	if in.Location != nil {
 		in, out := &in.Location, &out.Location
 		*out = new(string)
@@ -42332,11 +42399,6 @@ func (in *RouteTableObservation) DeepCopyInto(out *RouteTableObservation) {
 		*out = new(bool)
 		**out = **in
 	}
-	if in.DisableBGPRoutePropagation != nil {
-		in, out := &in.DisableBGPRoutePropagation, &out.DisableBGPRoutePropagation
-		*out = new(bool)
-		**out = **in
-	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
@@ -42403,11 +42465,6 @@ func (in *RouteTableParameters) DeepCopyInto(out *RouteTableParameters) {
 	*out = *in
 	if in.BGPRoutePropagationEnabled != nil {
 		in, out := &in.BGPRoutePropagationEnabled, &out.BGPRoutePropagationEnabled
-		*out = new(bool)
-		**out = **in
-	}
-	if in.DisableBGPRoutePropagation != nil {
-		in, out := &in.DisableBGPRoutePropagation, &out.DisableBGPRoutePropagation
 		*out = new(bool)
 		**out = **in
 	}

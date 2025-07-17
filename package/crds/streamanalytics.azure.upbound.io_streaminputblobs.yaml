@@ -1178,6 +1178,11 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  authenticationMode:
+                    description: The authentication mode for the Stream Analytics
+                      Input. Possible values are Msi and ConnectionString. Defaults
+                      to ConnectionString.
+                    type: string
                   dateFormat:
                     description: The date format. Wherever {date} appears in path_pattern,
                       the value of this property is used as the date format instead.
@@ -1560,6 +1565,11 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  authenticationMode:
+                    description: The authentication mode for the Stream Analytics
+                      Input. Possible values are Msi and ConnectionString. Defaults
+                      to ConnectionString.
+                    type: string
                   dateFormat:
                     description: The date format. Wherever {date} appears in path_pattern,
                       the value of this property is used as the date format instead.
@@ -2127,6 +2137,11 @@ spec:
             properties:
               atProvider:
                 properties:
+                  authenticationMode:
+                    description: The authentication mode for the Stream Analytics
+                      Input. Possible values are Msi and ConnectionString. Defaults
+                      to ConnectionString.
+                    type: string
                   dateFormat:
                     description: The date format. Wherever {date} appears in path_pattern,
                       the value of this property is used as the date format instead.

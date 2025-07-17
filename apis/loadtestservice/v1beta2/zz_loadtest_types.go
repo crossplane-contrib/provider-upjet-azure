@@ -111,7 +111,7 @@ type LoadTestIdentityParameters struct {
 
 type LoadTestInitParameters struct {
 
-	// Description of the resource. Changing this forces a new Load Test to be created.
+	// Description of the resource.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// An encryption block as defined below. Changing this forces a new Load Test to be created.
@@ -133,7 +133,7 @@ type LoadTestObservation struct {
 	// Resource data plane URI.
 	DataPlaneURI *string `json:"dataPlaneUri,omitempty" tf:"data_plane_uri,omitempty"`
 
-	// Description of the resource. Changing this forces a new Load Test to be created.
+	// Description of the resource.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// An encryption block as defined below. Changing this forces a new Load Test to be created.
@@ -158,7 +158,7 @@ type LoadTestObservation struct {
 
 type LoadTestParameters struct {
 
-	// Description of the resource. Changing this forces a new Load Test to be created.
+	// Description of the resource.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 

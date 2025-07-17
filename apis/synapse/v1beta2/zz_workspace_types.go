@@ -13,40 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type AADAdminInitParameters struct {
-	Login *string `json:"login,omitempty" tf:"login"`
-
-	// The ID of the synapse Workspace.
-	ObjectID *string `json:"objectId,omitempty" tf:"object_id"`
-
-	// The Tenant ID for the Service Principal associated with the Managed Service Identity of this Synapse Workspace.
-	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id"`
-}
-
-type AADAdminObservation struct {
-	Login *string `json:"login,omitempty" tf:"login,omitempty"`
-
-	// The ID of the synapse Workspace.
-	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
-
-	// The Tenant ID for the Service Principal associated with the Managed Service Identity of this Synapse Workspace.
-	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
-}
-
-type AADAdminParameters struct {
-
-	// +kubebuilder:validation:Optional
-	Login *string `json:"login,omitempty" tf:"login"`
-
-	// The ID of the synapse Workspace.
-	// +kubebuilder:validation:Optional
-	ObjectID *string `json:"objectId,omitempty" tf:"object_id"`
-
-	// The Tenant ID for the Service Principal associated with the Managed Service Identity of this Synapse Workspace.
-	// +kubebuilder:validation:Optional
-	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id"`
-}
-
 type AzureDevopsRepoInitParameters struct {
 
 	// Specifies the Azure DevOps account name.
@@ -292,42 +258,7 @@ type IdentityParameters struct {
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
-type SQLAADAdminInitParameters struct {
-	Login *string `json:"login,omitempty" tf:"login"`
-
-	// The ID of the synapse Workspace.
-	ObjectID *string `json:"objectId,omitempty" tf:"object_id"`
-
-	// The Tenant ID for the Service Principal associated with the Managed Service Identity of this Synapse Workspace.
-	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id"`
-}
-
-type SQLAADAdminObservation struct {
-	Login *string `json:"login,omitempty" tf:"login,omitempty"`
-
-	// The ID of the synapse Workspace.
-	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
-
-	// The Tenant ID for the Service Principal associated with the Managed Service Identity of this Synapse Workspace.
-	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
-}
-
-type SQLAADAdminParameters struct {
-
-	// +kubebuilder:validation:Optional
-	Login *string `json:"login,omitempty" tf:"login"`
-
-	// The ID of the synapse Workspace.
-	// +kubebuilder:validation:Optional
-	ObjectID *string `json:"objectId,omitempty" tf:"object_id"`
-
-	// The Tenant ID for the Service Principal associated with the Managed Service Identity of this Synapse Workspace.
-	// +kubebuilder:validation:Optional
-	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id"`
-}
-
 type WorkspaceInitParameters struct {
-	AADAdmin *AADAdminInitParameters `json:"aadAdmin,omitempty" tf:"aad_admin,omitempty"`
 
 	// An azure_devops_repo block as defined below.
 	AzureDevopsRepo *AzureDevopsRepoInitParameters `json:"azureDevopsRepo,omitempty" tf:"azure_devops_repo,omitempty"`
@@ -387,12 +318,10 @@ type WorkspaceInitParameters struct {
 	// The ID of purview account.
 	PurviewID *string `json:"purviewId,omitempty" tf:"purview_id,omitempty"`
 
-	SQLAADAdmin *SQLAADAdminInitParameters `json:"sqlAadAdmin,omitempty" tf:"sql_aad_admin,omitempty"`
-
-	// Specifies The login name of the SQL administrator. Changing this forces a new resource to be created. If this is not provided aad_admin or customer_managed_key must be provided.
+	// Specifies The login name of the SQL administrator. Changing this forces a new resource to be created. If this is not provided customer_managed_key must be provided.
 	SQLAdministratorLogin *string `json:"sqlAdministratorLogin,omitempty" tf:"sql_administrator_login,omitempty"`
 
-	// The Password associated with the sql_administrator_login for the SQL administrator. If this is not provided aad_admin or customer_managed_key must be provided.
+	// The Password associated with the sql_administrator_login for the SQL administrator. If this is not provided customer_managed_key must be provided.
 	SQLAdministratorLoginPasswordSecretRef *v1.SecretKeySelector `json:"sqlAdministratorLoginPasswordSecretRef,omitempty" tf:"-"`
 
 	// Are pipelines (running as workspace's system assigned identity) allowed to access SQL pools?
@@ -417,7 +346,6 @@ type WorkspaceInitParameters struct {
 }
 
 type WorkspaceObservation struct {
-	AADAdmin *AADAdminObservation `json:"aadAdmin,omitempty" tf:"aad_admin,omitempty"`
 
 	// An azure_devops_repo block as defined below.
 	AzureDevopsRepo *AzureDevopsRepoObservation `json:"azureDevopsRepo,omitempty" tf:"azure_devops_repo,omitempty"`
@@ -428,7 +356,7 @@ type WorkspaceObservation struct {
 	// Subnet ID used for computes in workspace Changing this forces a new resource to be created.
 	ComputeSubnetID *string `json:"computeSubnetId,omitempty" tf:"compute_subnet_id,omitempty"`
 
-	// A list of Connectivity endpoints for this Synapse Workspace.
+	// A map of Connectivity endpoints for this Synapse Workspace. Possible key values are dev, sql, sqlOnDemand, and web.
 	// +mapType=granular
 	ConnectivityEndpoints map[string]*string `json:"connectivityEndpoints,omitempty" tf:"connectivity_endpoints,omitempty"`
 
@@ -468,9 +396,7 @@ type WorkspaceObservation struct {
 	// Specifies the name of the Resource Group where the synapse Workspace should exist. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	SQLAADAdmin *SQLAADAdminObservation `json:"sqlAadAdmin,omitempty" tf:"sql_aad_admin,omitempty"`
-
-	// Specifies The login name of the SQL administrator. Changing this forces a new resource to be created. If this is not provided aad_admin or customer_managed_key must be provided.
+	// Specifies The login name of the SQL administrator. Changing this forces a new resource to be created. If this is not provided customer_managed_key must be provided.
 	SQLAdministratorLogin *string `json:"sqlAdministratorLogin,omitempty" tf:"sql_administrator_login,omitempty"`
 
 	// Are pipelines (running as workspace's system assigned identity) allowed to access SQL pools?
@@ -485,9 +411,6 @@ type WorkspaceObservation struct {
 }
 
 type WorkspaceParameters struct {
-
-	// +kubebuilder:validation:Optional
-	AADAdmin *AADAdminParameters `json:"aadAdmin,omitempty" tf:"aad_admin,omitempty"`
 
 	// An azure_devops_repo block as defined below.
 	// +kubebuilder:validation:Optional
@@ -573,14 +496,11 @@ type WorkspaceParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// +kubebuilder:validation:Optional
-	SQLAADAdmin *SQLAADAdminParameters `json:"sqlAadAdmin,omitempty" tf:"sql_aad_admin,omitempty"`
-
-	// Specifies The login name of the SQL administrator. Changing this forces a new resource to be created. If this is not provided aad_admin or customer_managed_key must be provided.
+	// Specifies The login name of the SQL administrator. Changing this forces a new resource to be created. If this is not provided customer_managed_key must be provided.
 	// +kubebuilder:validation:Optional
 	SQLAdministratorLogin *string `json:"sqlAdministratorLogin,omitempty" tf:"sql_administrator_login,omitempty"`
 
-	// The Password associated with the sql_administrator_login for the SQL administrator. If this is not provided aad_admin or customer_managed_key must be provided.
+	// The Password associated with the sql_administrator_login for the SQL administrator. If this is not provided customer_managed_key must be provided.
 	// +kubebuilder:validation:Optional
 	SQLAdministratorLoginPasswordSecretRef *v1.SecretKeySelector `json:"sqlAdministratorLoginPasswordSecretRef,omitempty" tf:"-"`
 

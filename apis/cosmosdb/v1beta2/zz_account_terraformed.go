@@ -21,7 +21,7 @@ func (mg *Account) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Account
 func (tr *Account) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"connection_strings[*]": "status.atProvider.connectionStrings[*]", "primary_key": "status.atProvider.primaryKey", "primary_mongodb_connection_string": "status.atProvider.primaryMongodbConnectionString", "primary_readonly_key": "status.atProvider.primaryReadonlyKey", "primary_readonly_mongodb_connection_string": "status.atProvider.primaryReadonlyMongodbConnectionString", "primary_readonly_sql_connection_string": "status.atProvider.primaryReadonlySqlConnectionString", "primary_sql_connection_string": "status.atProvider.primarySqlConnectionString", "secondary_key": "status.atProvider.secondaryKey", "secondary_mongodb_connection_string": "status.atProvider.secondaryMongodbConnectionString", "secondary_readonly_key": "status.atProvider.secondaryReadonlyKey", "secondary_readonly_mongodb_connection_string": "status.atProvider.secondaryReadonlyMongodbConnectionString", "secondary_readonly_sql_connection_string": "status.atProvider.secondaryReadonlySqlConnectionString", "secondary_sql_connection_string": "status.atProvider.secondarySqlConnectionString"}
+	return map[string]string{"primary_key": "status.atProvider.primaryKey", "primary_mongodb_connection_string": "status.atProvider.primaryMongodbConnectionString", "primary_readonly_key": "status.atProvider.primaryReadonlyKey", "primary_readonly_mongodb_connection_string": "status.atProvider.primaryReadonlyMongodbConnectionString", "primary_readonly_sql_connection_string": "status.atProvider.primaryReadonlySqlConnectionString", "primary_sql_connection_string": "status.atProvider.primarySqlConnectionString", "secondary_key": "status.atProvider.secondaryKey", "secondary_mongodb_connection_string": "status.atProvider.secondaryMongodbConnectionString", "secondary_readonly_key": "status.atProvider.secondaryReadonlyKey", "secondary_readonly_mongodb_connection_string": "status.atProvider.secondaryReadonlyMongodbConnectionString", "secondary_readonly_sql_connection_string": "status.atProvider.secondaryReadonlySqlConnectionString", "secondary_sql_connection_string": "status.atProvider.secondarySqlConnectionString"}
 }
 
 // GetObservation of this Account
@@ -125,5 +125,5 @@ func (tr *Account) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *Account) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }

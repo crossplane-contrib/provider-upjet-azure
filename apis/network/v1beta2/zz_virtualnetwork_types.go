@@ -42,6 +42,22 @@ type DDOSProtectionPlanParameters struct {
 	ID *string `json:"id" tf:"id,omitempty"`
 }
 
+type DelegationServiceDelegationInitParameters struct {
+}
+
+type DelegationServiceDelegationObservation struct {
+
+	// A list of Actions which should be delegated. This list is specific to the service to delegate to. Possible values are Microsoft.Network/networkinterfaces/*, Microsoft.Network/publicIPAddresses/join/action, Microsoft.Network/publicIPAddresses/read, Microsoft.Network/virtualNetworks/read, Microsoft.Network/virtualNetworks/subnets/action, Microsoft.Network/virtualNetworks/subnets/join/action, Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action, and Microsoft.Network/virtualNetworks/subnets/unprepareNetworkPolicies/action.
+	// +listType=set
+	Actions []*string `json:"actions,omitempty" tf:"actions,omitempty"`
+
+	// The name of the subnet.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type DelegationServiceDelegationParameters struct {
+}
+
 type EncryptionInitParameters struct {
 
 	// Specifies if the encrypted Virtual Network allows VM that does not support encryption. Possible values are DropUnencrypted and AllowUnencrypted.
@@ -61,9 +77,57 @@ type EncryptionParameters struct {
 	Enforcement *string `json:"enforcement" tf:"enforcement,omitempty"`
 }
 
+type IPAddressPoolInitParameters struct {
+
+	// The ID of the Network Manager IP Address Management (IPAM) Pool.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The number of IP addresses to allocated to the Virtual Network. The value must be a string that represents a positive number, e.g., "100".
+	NumberOfIPAddresses *string `json:"numberOfIpAddresses,omitempty" tf:"number_of_ip_addresses,omitempty"`
+}
+
+type IPAddressPoolObservation struct {
+
+	// The list of IP address prefixes allocated to the Virtual Network.
+	AllocatedIPAddressPrefixes []*string `json:"allocatedIpAddressPrefixes,omitempty" tf:"allocated_ip_address_prefixes,omitempty"`
+
+	// The ID of the Network Manager IP Address Management (IPAM) Pool.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The number of IP addresses to allocated to the Virtual Network. The value must be a string that represents a positive number, e.g., "100".
+	NumberOfIPAddresses *string `json:"numberOfIpAddresses,omitempty" tf:"number_of_ip_addresses,omitempty"`
+}
+
+type IPAddressPoolParameters struct {
+
+	// The ID of the Network Manager IP Address Management (IPAM) Pool.
+	// +kubebuilder:validation:Optional
+	ID *string `json:"id" tf:"id,omitempty"`
+
+	// The number of IP addresses to allocated to the Virtual Network. The value must be a string that represents a positive number, e.g., "100".
+	// +kubebuilder:validation:Optional
+	NumberOfIPAddresses *string `json:"numberOfIpAddresses" tf:"number_of_ip_addresses,omitempty"`
+}
+
+type SubnetDelegationInitParameters struct {
+}
+
+type SubnetDelegationObservation struct {
+
+	// The name of the subnet.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A service_delegation block as defined below.
+	ServiceDelegation *DelegationServiceDelegationObservation `json:"serviceDelegation,omitempty" tf:"service_delegation,omitempty"`
+}
+
+type SubnetDelegationParameters struct {
+}
+
 type VirtualNetworkInitParameters struct {
 
 	// The address space that is used the virtual network. You can supply more than one address space.
+	// +listType=set
 	AddressSpace []*string `json:"addressSpace,omitempty" tf:"address_space,omitempty"`
 
 	// The BGP community attribute in format <as-number>:<community-value>.
@@ -84,8 +148,14 @@ type VirtualNetworkInitParameters struct {
 	// The flow timeout in minutes for the Virtual Network, which is used to enable connection tracking for intra-VM flows. Possible values are between 4 and 30 minutes.
 	FlowTimeoutInMinutes *float64 `json:"flowTimeoutInMinutes,omitempty" tf:"flow_timeout_in_minutes,omitempty"`
 
+	// One or two ip_address_pool blocks as defined below. Only one association of each IP type(IPv4 or IPv6) is allowed.
+	IPAddressPool []IPAddressPoolInitParameters `json:"ipAddressPool,omitempty" tf:"ip_address_pool,omitempty"`
+
 	// The location/region where the virtual network is created. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The Private Endpoint VNet Policies for the Virtual Network. Possible values are Disabled and Basic. Defaults to Disabled.
+	PrivateEndpointVnetPolicies *string `json:"privateEndpointVnetPolicies,omitempty" tf:"private_endpoint_vnet_policies,omitempty"`
 
 	// A mapping of tags to assign to the resource.
 	// +mapType=granular
@@ -95,6 +165,7 @@ type VirtualNetworkInitParameters struct {
 type VirtualNetworkObservation struct {
 
 	// The address space that is used the virtual network. You can supply more than one address space.
+	// +listType=set
 	AddressSpace []*string `json:"addressSpace,omitempty" tf:"address_space,omitempty"`
 
 	// The BGP community attribute in format <as-number>:<community-value>.
@@ -115,14 +186,20 @@ type VirtualNetworkObservation struct {
 	// The flow timeout in minutes for the Virtual Network, which is used to enable connection tracking for intra-VM flows. Possible values are between 4 and 30 minutes.
 	FlowTimeoutInMinutes *float64 `json:"flowTimeoutInMinutes,omitempty" tf:"flow_timeout_in_minutes,omitempty"`
 
-	// The GUID of the virtual network.
+	// The GUID of the Virtual Network.
 	GUID *string `json:"guid,omitempty" tf:"guid,omitempty"`
 
-	// The virtual NetworkConfiguration ID.
+	// The Virtual Network ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// One or two ip_address_pool blocks as defined below. Only one association of each IP type(IPv4 or IPv6) is allowed.
+	IPAddressPool []IPAddressPoolObservation `json:"ipAddressPool,omitempty" tf:"ip_address_pool,omitempty"`
 
 	// The location/region where the virtual network is created. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The Private Endpoint VNet Policies for the Virtual Network. Possible values are Disabled and Basic. Defaults to Disabled.
+	PrivateEndpointVnetPolicies *string `json:"privateEndpointVnetPolicies,omitempty" tf:"private_endpoint_vnet_policies,omitempty"`
 
 	// The name of the resource group in which to create the virtual network. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -139,6 +216,7 @@ type VirtualNetworkParameters struct {
 
 	// The address space that is used the virtual network. You can supply more than one address space.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AddressSpace []*string `json:"addressSpace,omitempty" tf:"address_space,omitempty"`
 
 	// The BGP community attribute in format <as-number>:<community-value>.
@@ -165,9 +243,17 @@ type VirtualNetworkParameters struct {
 	// +kubebuilder:validation:Optional
 	FlowTimeoutInMinutes *float64 `json:"flowTimeoutInMinutes,omitempty" tf:"flow_timeout_in_minutes,omitempty"`
 
+	// One or two ip_address_pool blocks as defined below. Only one association of each IP type(IPv4 or IPv6) is allowed.
+	// +kubebuilder:validation:Optional
+	IPAddressPool []IPAddressPoolParameters `json:"ipAddressPool,omitempty" tf:"ip_address_pool,omitempty"`
+
 	// The location/region where the virtual network is created. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The Private Endpoint VNet Policies for the Virtual Network. Possible values are Disabled and Basic. Defaults to Disabled.
+	// +kubebuilder:validation:Optional
+	PrivateEndpointVnetPolicies *string `json:"privateEndpointVnetPolicies,omitempty" tf:"private_endpoint_vnet_policies,omitempty"`
 
 	// The name of the resource group in which to create the virtual network. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -193,8 +279,14 @@ type VirtualNetworkSubnetInitParameters struct {
 
 type VirtualNetworkSubnetObservation struct {
 
-	// The address prefix to use for the subnet.
-	AddressPrefix *string `json:"addressPrefix,omitempty" tf:"address_prefix,omitempty"`
+	// The address prefixes to use for the subnet.
+	AddressPrefixes []*string `json:"addressPrefixes,omitempty" tf:"address_prefixes,omitempty"`
+
+	// Enable default outbound access to the internet for the subnet. Defaults to true.
+	DefaultOutboundAccessEnabled *bool `json:"defaultOutboundAccessEnabled,omitempty" tf:"default_outbound_access_enabled,omitempty"`
+
+	// One or more delegation blocks as defined below.
+	Delegation *SubnetDelegationObservation `json:"delegation,omitempty" tf:"delegation,omitempty"`
 
 	// The ID of this subnet.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -202,8 +294,25 @@ type VirtualNetworkSubnetObservation struct {
 	// The name of the subnet.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The Network Security Group to associate with the subnet. (Referenced by id, ie. azurerm_network_security_group.example.id)
+	// Enable or Disable network policies for the private endpoint on the subnet. Possible values are Disabled, Enabled, NetworkSecurityGroupEnabled and RouteTableEnabled. Defaults to Disabled.
+	PrivateEndpointNetworkPolicies *string `json:"privateEndpointNetworkPolicies,omitempty" tf:"private_endpoint_network_policies,omitempty"`
+
+	// Enable or Disable network policies for the private link service on the subnet. Defaults to true.
+	PrivateLinkServiceNetworkPoliciesEnabled *bool `json:"privateLinkServiceNetworkPoliciesEnabled,omitempty" tf:"private_link_service_network_policies_enabled,omitempty"`
+
+	// The ID of the Route Table that should be associated with this subnet.
+	RouteTableID *string `json:"routeTableId,omitempty" tf:"route_table_id,omitempty"`
+
+	// The Network Security Group to associate with the subnet. (Referenced by id, i.e. azurerm_network_security_group.example.id)
 	SecurityGroup *string `json:"securityGroup,omitempty" tf:"security_group,omitempty"`
+
+	// The list of IDs of Service Endpoint Policies to associate with the subnet.
+	// +listType=set
+	ServiceEndpointPolicyIds []*string `json:"serviceEndpointPolicyIds,omitempty" tf:"service_endpoint_policy_ids,omitempty"`
+
+	// The list of Service endpoints to associate with the subnet. Possible values include: Microsoft.AzureActiveDirectory, Microsoft.AzureCosmosDB, Microsoft.ContainerRegistry, Microsoft.EventHub, Microsoft.KeyVault, Microsoft.ServiceBus, Microsoft.Sql, Microsoft.Storage, Microsoft.Storage.Global and Microsoft.Web.
+	// +listType=set
+	ServiceEndpoints []*string `json:"serviceEndpoints,omitempty" tf:"service_endpoints,omitempty"`
 }
 
 type VirtualNetworkSubnetParameters struct {
@@ -244,7 +353,6 @@ type VirtualNetworkStatus struct {
 type VirtualNetwork struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.addressSpace) || (has(self.initProvider) && has(self.initProvider.addressSpace))",message="spec.forProvider.addressSpace is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || (has(self.initProvider) && has(self.initProvider.location))",message="spec.forProvider.location is a required parameter"
 	Spec   VirtualNetworkSpec   `json:"spec"`
 	Status VirtualNetworkStatus `json:"status,omitempty"`

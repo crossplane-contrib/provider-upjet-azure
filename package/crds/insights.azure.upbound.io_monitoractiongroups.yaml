@@ -1367,9 +1367,6 @@ spec:
                       below.
                     items:
                       properties:
-                        eventHubId:
-                          description: The resource ID of the respective Event Hub.
-                          type: string
                         eventHubName:
                           description: The name of the specific Event Hub queue.
                           type: string
@@ -1722,9 +1719,6 @@ spec:
                       below.
                     items:
                       properties:
-                        eventHubId:
-                          description: The resource ID of the respective Event Hub.
-                          type: string
                         eventHubName:
                           description: The name of the specific Event Hub queue.
                           type: string
@@ -2160,9 +2154,6 @@ spec:
                       below.
                     items:
                       properties:
-                        eventHubId:
-                          description: The resource ID of the respective Event Hub.
-                          type: string
                         eventHubName:
                           description: The name of the specific Event Hub queue.
                           type: string

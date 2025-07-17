@@ -808,7 +808,6 @@ spec:
               forProvider:
                 properties:
                   contact:
-                    description: One or more contact block as defined below.
                     items:
                       properties:
                         email:
@@ -991,7 +990,6 @@ spec:
                   autoscaler.
                 properties:
                   contact:
-                    description: One or more contact block as defined below.
                     items:
                       properties:
                         email:
@@ -1321,7 +1319,6 @@ spec:
                       type: object
                     type: array
                   contact:
-                    description: One or more contact block as defined below.
                     items:
                       properties:
                         email:

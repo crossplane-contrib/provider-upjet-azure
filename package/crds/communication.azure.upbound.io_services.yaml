@@ -77,9 +77,9 @@ spec:
                     description: The location where the Communication service stores
                       its data at rest. Possible values are Africa, Asia Pacific,
                       Australia, Brazil, Canada, Europe, France, Germany, India, Japan,
-                      Korea, Norway, Switzerland, UAE, UK and United States. Defaults
-                      to United States. Changing this forces a new Communication Service
-                      to be created.
+                      Korea, Norway, Switzerland, UAE, UK, usgov and United States.
+                      Defaults to United States. Changing this forces a new Communication
+                      Service to be created.
                     type: string
                   resourceGroupName:
                     description: The name of the Resource Group where the Communication
@@ -187,9 +187,9 @@ spec:
                     description: The location where the Communication service stores
                       its data at rest. Possible values are Africa, Asia Pacific,
                       Australia, Brazil, Canada, Europe, France, Germany, India, Japan,
-                      Korea, Norway, Switzerland, UAE, UK and United States. Defaults
-                      to United States. Changing this forces a new Communication Service
-                      to be created.
+                      Korea, Norway, Switzerland, UAE, UK, usgov and United States.
+                      Defaults to United States. Changing this forces a new Communication
+                      Service to be created.
                     type: string
                   tags:
                     additionalProperties:
@@ -375,9 +375,12 @@ spec:
                     description: The location where the Communication service stores
                       its data at rest. Possible values are Africa, Asia Pacific,
                       Australia, Brazil, Canada, Europe, France, Germany, India, Japan,
-                      Korea, Norway, Switzerland, UAE, UK and United States. Defaults
-                      to United States. Changing this forces a new Communication Service
-                      to be created.
+                      Korea, Norway, Switzerland, UAE, UK, usgov and United States.
+                      Defaults to United States. Changing this forces a new Communication
+                      Service to be created.
+                    type: string
+                  hostname:
+                    description: The hostname of the Communication Service
                     type: string
                   id:
                     description: The ID of the Communication Service.

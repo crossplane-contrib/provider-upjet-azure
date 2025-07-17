@@ -68,7 +68,7 @@ type BackendInitParameters struct {
 	// The title of the backend.
 	Title *string `json:"title,omitempty" tf:"title,omitempty"`
 
-	// The URL of the backend host.
+	// The backend host URL should be specified in the format "https://backend.com/api", avoiding trailing slashes (/) to minimize misconfiguration risks. Azure API Management instance will append the backend resource name to this URL. This URL typically serves as the base-url in the set-backend-service policy, enabling seamless transitions from frontend to backend.
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
@@ -107,7 +107,7 @@ type BackendObservation struct {
 	// The title of the backend.
 	Title *string `json:"title,omitempty" tf:"title,omitempty"`
 
-	// The URL of the backend host.
+	// The backend host URL should be specified in the format "https://backend.com/api", avoiding trailing slashes (/) to minimize misconfiguration risks. Azure API Management instance will append the backend resource name to this URL. This URL typically serves as the base-url in the set-backend-service policy, enabling seamless transitions from frontend to backend.
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
@@ -171,7 +171,7 @@ type BackendParameters struct {
 	// +kubebuilder:validation:Optional
 	Title *string `json:"title,omitempty" tf:"title,omitempty"`
 
-	// The URL of the backend host.
+	// The backend host URL should be specified in the format "https://backend.com/api", avoiding trailing slashes (/) to minimize misconfiguration risks. Azure API Management instance will append the backend resource name to this URL. This URL typically serves as the base-url in the set-backend-service policy, enabling seamless transitions from frontend to backend.
 	// +kubebuilder:validation:Optional
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }

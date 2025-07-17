@@ -912,7 +912,7 @@ spec:
                         type: string
                       minimumTlsVersion:
                         description: TLS protocol version that will be used for Https.
-                          Possible values include TLS10 and TLS12. Defaults to TLS12.
+                          Possible values are TLS12. Defaults to TLS12.
                         type: string
                     type: object
                 type: object
@@ -1031,7 +1031,7 @@ spec:
                         type: string
                       minimumTlsVersion:
                         description: TLS protocol version that will be used for Https.
-                          Possible values include TLS10 and TLS12. Defaults to TLS12.
+                          Possible values are TLS12. Defaults to TLS12.
                         type: string
                     type: object
                 type: object
@@ -1255,7 +1255,7 @@ spec:
                         type: string
                       minimumTlsVersion:
                         description: TLS protocol version that will be used for Https.
-                          Possible values include TLS10 and TLS12. Defaults to TLS12.
+                          Possible values are TLS12. Defaults to TLS12.
                         type: string
                     type: object
                   validationToken:

@@ -89,8 +89,8 @@ spec:
                       Fusion Alert Rule to be created.
                     type: string
                   logAnalyticsWorkspaceIdRef:
-                    description: Reference to a LogAnalyticsSolution in operationsmanagement
-                      to populate logAnalyticsWorkspaceId.
+                    description: Reference to a SentinelLogAnalyticsWorkspaceOnboarding
+                      in securityinsights to populate logAnalyticsWorkspaceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -124,8 +124,8 @@ spec:
                     - name
                     type: object
                   logAnalyticsWorkspaceIdSelector:
-                    description: Selector for a LogAnalyticsSolution in operationsmanagement
-                      to populate logAnalyticsWorkspaceId.
+                    description: Selector for a SentinelLogAnalyticsWorkspaceOnboarding
+                      in securityinsights to populate logAnalyticsWorkspaceId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -165,9 +165,9 @@ spec:
                         type: object
                     type: object
                   name:
-                    description: The name which should be used for this Sentinel Fusion
-                      Alert Rule. Changing this forces a new Sentinel Fusion Alert
-                      Rule to be created.
+                    description: The Name of the source subtype under a given source
+                      signal in Fusion detection. Refer to Fusion alert rule template
+                      for supported values.
                     type: string
                   source:
                     description: One or more source blocks as defined below.
@@ -237,8 +237,8 @@ spec:
                       Fusion Alert Rule to be created.
                     type: string
                   logAnalyticsWorkspaceIdRef:
-                    description: Reference to a LogAnalyticsSolution in operationsmanagement
-                      to populate logAnalyticsWorkspaceId.
+                    description: Reference to a SentinelLogAnalyticsWorkspaceOnboarding
+                      in securityinsights to populate logAnalyticsWorkspaceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -272,8 +272,8 @@ spec:
                     - name
                     type: object
                   logAnalyticsWorkspaceIdSelector:
-                    description: Selector for a LogAnalyticsSolution in operationsmanagement
-                      to populate logAnalyticsWorkspaceId.
+                    description: Selector for a SentinelLogAnalyticsWorkspaceOnboarding
+                      in securityinsights to populate logAnalyticsWorkspaceId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -313,9 +313,9 @@ spec:
                         type: object
                     type: object
                   name:
-                    description: The name which should be used for this Sentinel Fusion
-                      Alert Rule. Changing this forces a new Sentinel Fusion Alert
-                      Rule to be created.
+                    description: The Name of the source subtype under a given source
+                      signal in Fusion detection. Refer to Fusion alert rule template
+                      for supported values.
                     type: string
                   source:
                     description: One or more source blocks as defined below.
@@ -529,10 +529,6 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.alertRuleTemplateGuid)
                 || (has(self.initProvider) && has(self.initProvider.alertRuleTemplateGuid))'
-            - message: spec.forProvider.name is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || (has(self.initProvider) && has(self.initProvider.name))'
           status:
             description: SentinelAlertRuleFusionStatus defines the observed state
               of SentinelAlertRuleFusion.
@@ -557,9 +553,9 @@ spec:
                       Fusion Alert Rule to be created.
                     type: string
                   name:
-                    description: The name which should be used for this Sentinel Fusion
-                      Alert Rule. Changing this forces a new Sentinel Fusion Alert
-                      Rule to be created.
+                    description: The Name of the source subtype under a given source
+                      signal in Fusion detection. Refer to Fusion alert rule template
+                      for supported values.
                     type: string
                   source:
                     description: One or more source blocks as defined below.

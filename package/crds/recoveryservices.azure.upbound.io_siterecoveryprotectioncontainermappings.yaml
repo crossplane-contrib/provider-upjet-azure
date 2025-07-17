@@ -1117,6 +1117,7 @@ spec:
                       authenticationType:
                         description: The authentication type used for automation account.
                           Possible values are RunAsAccount and SystemAssignedIdentity.
+                          Defaults to SystemAssignedIdentity.
                         type: string
                       automationAccountId:
                         description: The automation account ID which holds the automatic
@@ -1629,6 +1630,7 @@ spec:
                       authenticationType:
                         description: The authentication type used for automation account.
                           Possible values are RunAsAccount and SystemAssignedIdentity.
+                          Defaults to SystemAssignedIdentity.
                         type: string
                       automationAccountId:
                         description: The automation account ID which holds the automatic
@@ -1979,6 +1981,7 @@ spec:
                       authenticationType:
                         description: The authentication type used for automation account.
                           Possible values are RunAsAccount and SystemAssignedIdentity.
+                          Defaults to SystemAssignedIdentity.
                         type: string
                       automationAccountId:
                         description: The automation account ID which holds the automatic

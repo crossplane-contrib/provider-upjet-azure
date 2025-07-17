@@ -2637,7 +2637,7 @@ spec:
                           type: array
                         representation:
                           description: One or more representation blocks as defined
-                            below.
+                            above.
                           items:
                             properties:
                               contentType:
@@ -3124,7 +3124,7 @@ spec:
                           type: array
                         representation:
                           description: One or more representation blocks as defined
-                            below.
+                            above.
                           items:
                             properties:
                               contentType:
@@ -3799,7 +3799,7 @@ spec:
                           type: array
                         representation:
                           description: One or more representation blocks as defined
-                            below.
+                            above.
                           items:
                             properties:
                               contentType:

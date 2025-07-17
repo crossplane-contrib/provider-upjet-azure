@@ -50,9 +50,6 @@ type AutoHealSettingTriggerSlowRequestInitParameters struct {
 	// The time interval in the form hh:mm:ss.
 	Interval *string `json:"interval,omitempty" tf:"interval,omitempty"`
 
-	// The path to which this rule status code applies.
-	Path *string `json:"path,omitempty" tf:"path,omitempty"`
-
 	// The threshold of time passed to qualify as a Slow Request in hh:mm:ss.
 	TimeTaken *string `json:"timeTaken,omitempty" tf:"time_taken,omitempty"`
 }
@@ -64,9 +61,6 @@ type AutoHealSettingTriggerSlowRequestObservation struct {
 
 	// The time interval in the form hh:mm:ss.
 	Interval *string `json:"interval,omitempty" tf:"interval,omitempty"`
-
-	// The path to which this rule status code applies.
-	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
 	// The threshold of time passed to qualify as a Slow Request in hh:mm:ss.
 	TimeTaken *string `json:"timeTaken,omitempty" tf:"time_taken,omitempty"`
@@ -81,10 +75,6 @@ type AutoHealSettingTriggerSlowRequestParameters struct {
 	// The time interval in the form hh:mm:ss.
 	// +kubebuilder:validation:Optional
 	Interval *string `json:"interval" tf:"interval,omitempty"`
-
-	// The path to which this rule status code applies.
-	// +kubebuilder:validation:Optional
-	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
 	// The threshold of time passed to qualify as a Slow Request in hh:mm:ss.
 	// +kubebuilder:validation:Optional
@@ -2342,6 +2332,9 @@ type WindowsWebAppInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Whether backup and restore operations over the linked virtual network are enabled. Defaults to false.
+	VirtualNetworkBackupRestoreEnabled *bool `json:"virtualNetworkBackupRestoreEnabled,omitempty" tf:"virtual_network_backup_restore_enabled,omitempty"`
+
 	// The subnet id which will be used by this Web App for regional virtual network integration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
@@ -2594,6 +2587,9 @@ type WindowsWebAppObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Whether backup and restore operations over the linked virtual network are enabled. Defaults to false.
+	VirtualNetworkBackupRestoreEnabled *bool `json:"virtualNetworkBackupRestoreEnabled,omitempty" tf:"virtual_network_backup_restore_enabled,omitempty"`
+
 	// The subnet id which will be used by this Web App for regional virtual network integration.
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
@@ -2721,6 +2717,10 @@ type WindowsWebAppParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Whether backup and restore operations over the linked virtual network are enabled. Defaults to false.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkBackupRestoreEnabled *bool `json:"virtualNetworkBackupRestoreEnabled,omitempty" tf:"virtual_network_backup_restore_enabled,omitempty"`
+
 	// The subnet id which will be used by this Web App for regional virtual network integration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
@@ -2750,14 +2750,6 @@ type WindowsWebAppSiteConfigApplicationStackInitParameters struct {
 	// The Application Stack for the Windows Web App. Possible values include dotnet, dotnetcore, node, python, php, and java.
 	CurrentStack *string `json:"currentStack,omitempty" tf:"current_stack,omitempty"`
 
-	// The name of the container to be used. This value is required with docker_container_tag.
-	DockerContainerName *string `json:"dockerContainerName,omitempty" tf:"docker_container_name,omitempty"`
-
-	DockerContainerRegistry *string `json:"dockerContainerRegistry,omitempty" tf:"docker_container_registry,omitempty"`
-
-	// The tag of the container to be used. This value is required with docker_container_name.
-	DockerContainerTag *string `json:"dockerContainerTag,omitempty" tf:"docker_container_tag,omitempty"`
-
 	// The docker image, including tag, to be used. e.g. azure-app-service/windows/parkingpage:latest.
 	DockerImageName *string `json:"dockerImageName,omitempty" tf:"docker_image_name,omitempty"`
 
@@ -2774,7 +2766,7 @@ type WindowsWebAppSiteConfigApplicationStackInitParameters struct {
 	// The version of DotNetCore to use.
 	DotnetCoreVersion *string `json:"dotnetCoreVersion,omitempty" tf:"dotnet_core_version,omitempty"`
 
-	// The version of .NET to use when current_stack is set to dotnet. Possible values include v2.0,v3.0, v4.0, v5.0, v6.0, v7.0 and v8.0.
+	// The version of .NET to use when current_stack is set to dotnet. Possible values include v2.0,v3.0, v4.0, v5.0, v6.0, v7.0, v8.0 and v9.0.
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
 	JavaContainer *string `json:"javaContainer,omitempty" tf:"java_container,omitempty"`
@@ -2788,7 +2780,7 @@ type WindowsWebAppSiteConfigApplicationStackInitParameters struct {
 	// The version of Java to use when current_stack is set to java.
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
-	// The version of node to use when current_stack is set to node. Possible values are ~12, ~14, ~16, ~18 and ~20.
+	// The version of node to use when current_stack is set to node. Possible values are ~12, ~14, ~16, ~18, ~20 and ~22.
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
 	// The version of PHP to use when current_stack is set to php. Possible values are 7.1, 7.4 and Off.
@@ -2796,8 +2788,6 @@ type WindowsWebAppSiteConfigApplicationStackInitParameters struct {
 
 	// Specifies whether this is a Python app. Defaults to false.
 	Python *bool `json:"python,omitempty" tf:"python,omitempty"`
-
-	PythonVersion *string `json:"pythonVersion,omitempty" tf:"python_version,omitempty"`
 
 	// The version of Tomcat the Java App should use. Conflicts with java_embedded_server_enabled
 	TomcatVersion *string `json:"tomcatVersion,omitempty" tf:"tomcat_version,omitempty"`
@@ -2807,14 +2797,6 @@ type WindowsWebAppSiteConfigApplicationStackObservation struct {
 
 	// The Application Stack for the Windows Web App. Possible values include dotnet, dotnetcore, node, python, php, and java.
 	CurrentStack *string `json:"currentStack,omitempty" tf:"current_stack,omitempty"`
-
-	// The name of the container to be used. This value is required with docker_container_tag.
-	DockerContainerName *string `json:"dockerContainerName,omitempty" tf:"docker_container_name,omitempty"`
-
-	DockerContainerRegistry *string `json:"dockerContainerRegistry,omitempty" tf:"docker_container_registry,omitempty"`
-
-	// The tag of the container to be used. This value is required with docker_container_name.
-	DockerContainerTag *string `json:"dockerContainerTag,omitempty" tf:"docker_container_tag,omitempty"`
 
 	// The docker image, including tag, to be used. e.g. azure-app-service/windows/parkingpage:latest.
 	DockerImageName *string `json:"dockerImageName,omitempty" tf:"docker_image_name,omitempty"`
@@ -2829,7 +2811,7 @@ type WindowsWebAppSiteConfigApplicationStackObservation struct {
 	// The version of DotNetCore to use.
 	DotnetCoreVersion *string `json:"dotnetCoreVersion,omitempty" tf:"dotnet_core_version,omitempty"`
 
-	// The version of .NET to use when current_stack is set to dotnet. Possible values include v2.0,v3.0, v4.0, v5.0, v6.0, v7.0 and v8.0.
+	// The version of .NET to use when current_stack is set to dotnet. Possible values include v2.0,v3.0, v4.0, v5.0, v6.0, v7.0, v8.0 and v9.0.
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
 	JavaContainer *string `json:"javaContainer,omitempty" tf:"java_container,omitempty"`
@@ -2843,7 +2825,7 @@ type WindowsWebAppSiteConfigApplicationStackObservation struct {
 	// The version of Java to use when current_stack is set to java.
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
-	// The version of node to use when current_stack is set to node. Possible values are ~12, ~14, ~16, ~18 and ~20.
+	// The version of node to use when current_stack is set to node. Possible values are ~12, ~14, ~16, ~18, ~20 and ~22.
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
 	// The version of PHP to use when current_stack is set to php. Possible values are 7.1, 7.4 and Off.
@@ -2851,8 +2833,6 @@ type WindowsWebAppSiteConfigApplicationStackObservation struct {
 
 	// Specifies whether this is a Python app. Defaults to false.
 	Python *bool `json:"python,omitempty" tf:"python,omitempty"`
-
-	PythonVersion *string `json:"pythonVersion,omitempty" tf:"python_version,omitempty"`
 
 	// The version of Tomcat the Java App should use. Conflicts with java_embedded_server_enabled
 	TomcatVersion *string `json:"tomcatVersion,omitempty" tf:"tomcat_version,omitempty"`
@@ -2864,17 +2844,6 @@ type WindowsWebAppSiteConfigApplicationStackParameters struct {
 	// +kubebuilder:validation:Optional
 	CurrentStack *string `json:"currentStack,omitempty" tf:"current_stack,omitempty"`
 
-	// The name of the container to be used. This value is required with docker_container_tag.
-	// +kubebuilder:validation:Optional
-	DockerContainerName *string `json:"dockerContainerName,omitempty" tf:"docker_container_name,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	DockerContainerRegistry *string `json:"dockerContainerRegistry,omitempty" tf:"docker_container_registry,omitempty"`
-
-	// The tag of the container to be used. This value is required with docker_container_name.
-	// +kubebuilder:validation:Optional
-	DockerContainerTag *string `json:"dockerContainerTag,omitempty" tf:"docker_container_tag,omitempty"`
-
 	// The docker image, including tag, to be used. e.g. azure-app-service/windows/parkingpage:latest.
 	// +kubebuilder:validation:Optional
 	DockerImageName *string `json:"dockerImageName,omitempty" tf:"docker_image_name,omitempty"`
@@ -2896,7 +2865,7 @@ type WindowsWebAppSiteConfigApplicationStackParameters struct {
 	// +kubebuilder:validation:Optional
 	DotnetCoreVersion *string `json:"dotnetCoreVersion,omitempty" tf:"dotnet_core_version,omitempty"`
 
-	// The version of .NET to use when current_stack is set to dotnet. Possible values include v2.0,v3.0, v4.0, v5.0, v6.0, v7.0 and v8.0.
+	// The version of .NET to use when current_stack is set to dotnet. Possible values include v2.0,v3.0, v4.0, v5.0, v6.0, v7.0, v8.0 and v9.0.
 	// +kubebuilder:validation:Optional
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
@@ -2915,7 +2884,7 @@ type WindowsWebAppSiteConfigApplicationStackParameters struct {
 	// +kubebuilder:validation:Optional
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
-	// The version of node to use when current_stack is set to node. Possible values are ~12, ~14, ~16, ~18 and ~20.
+	// The version of node to use when current_stack is set to node. Possible values are ~12, ~14, ~16, ~18, ~20 and ~22.
 	// +kubebuilder:validation:Optional
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
@@ -2926,9 +2895,6 @@ type WindowsWebAppSiteConfigApplicationStackParameters struct {
 	// Specifies whether this is a Python app. Defaults to false.
 	// +kubebuilder:validation:Optional
 	Python *bool `json:"python,omitempty" tf:"python,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	PythonVersion *string `json:"pythonVersion,omitempty" tf:"python_version,omitempty"`
 
 	// The version of Tomcat the Java App should use. Conflicts with java_embedded_server_enabled
 	// +kubebuilder:validation:Optional
@@ -3198,9 +3164,6 @@ type WindowsWebAppSiteConfigInitParameters struct {
 	// A application_stack block as defined above.
 	ApplicationStack *WindowsWebAppSiteConfigApplicationStackInitParameters `json:"applicationStack,omitempty" tf:"application_stack,omitempty"`
 
-	// Should Auto heal rules be enabled. Required with auto_heal_setting.
-	AutoHealEnabled *bool `json:"autoHealEnabled,omitempty" tf:"auto_heal_enabled,omitempty"`
-
 	// A auto_heal_setting block as defined above. Required with auto_heal.
 	AutoHealSetting *WindowsWebAppSiteConfigAutoHealSettingInitParameters `json:"autoHealSetting,omitempty" tf:"auto_heal_setting,omitempty"`
 
@@ -3247,13 +3210,13 @@ type WindowsWebAppSiteConfigInitParameters struct {
 	// Managed pipeline mode. Possible values include: Integrated, Classic. Defaults to Integrated.
 	ManagedPipelineMode *string `json:"managedPipelineMode,omitempty" tf:"managed_pipeline_mode,omitempty"`
 
-	// The configures the minimum version of TLS required for SSL requests. Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
+	// The configures the minimum version of TLS required for SSL requests. Possible values include: 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
 	// Should Remote Debugging be enabled. Defaults to false.
 	RemoteDebuggingEnabled *bool `json:"remoteDebuggingEnabled,omitempty" tf:"remote_debugging_enabled,omitempty"`
 
-	// The Remote Debugging Version. Possible values include VS2017, VS2019 and VS2022.
+	// The Remote Debugging Version. Currently only VS2022 is supported.
 	RemoteDebuggingVersion *string `json:"remoteDebuggingVersion,omitempty" tf:"remote_debugging_version,omitempty"`
 
 	// One or more scm_ip_restriction blocks as defined above.
@@ -3301,9 +3264,6 @@ type WindowsWebAppSiteConfigObservation struct {
 
 	// A application_stack block as defined above.
 	ApplicationStack *WindowsWebAppSiteConfigApplicationStackObservation `json:"applicationStack,omitempty" tf:"application_stack,omitempty"`
-
-	// Should Auto heal rules be enabled. Required with auto_heal_setting.
-	AutoHealEnabled *bool `json:"autoHealEnabled,omitempty" tf:"auto_heal_enabled,omitempty"`
 
 	// A auto_heal_setting block as defined above. Required with auto_heal.
 	AutoHealSetting *WindowsWebAppSiteConfigAutoHealSettingObservation `json:"autoHealSetting,omitempty" tf:"auto_heal_setting,omitempty"`
@@ -3356,13 +3316,13 @@ type WindowsWebAppSiteConfigObservation struct {
 	// Managed pipeline mode. Possible values include: Integrated, Classic. Defaults to Integrated.
 	ManagedPipelineMode *string `json:"managedPipelineMode,omitempty" tf:"managed_pipeline_mode,omitempty"`
 
-	// The configures the minimum version of TLS required for SSL requests. Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
+	// The configures the minimum version of TLS required for SSL requests. Possible values include: 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
 	// Should Remote Debugging be enabled. Defaults to false.
 	RemoteDebuggingEnabled *bool `json:"remoteDebuggingEnabled,omitempty" tf:"remote_debugging_enabled,omitempty"`
 
-	// The Remote Debugging Version. Possible values include VS2017, VS2019 and VS2022.
+	// The Remote Debugging Version. Currently only VS2022 is supported.
 	RemoteDebuggingVersion *string `json:"remoteDebuggingVersion,omitempty" tf:"remote_debugging_version,omitempty"`
 
 	// One or more scm_ip_restriction blocks as defined above.
@@ -3419,10 +3379,6 @@ type WindowsWebAppSiteConfigParameters struct {
 	// A application_stack block as defined above.
 	// +kubebuilder:validation:Optional
 	ApplicationStack *WindowsWebAppSiteConfigApplicationStackParameters `json:"applicationStack,omitempty" tf:"application_stack,omitempty"`
-
-	// Should Auto heal rules be enabled. Required with auto_heal_setting.
-	// +kubebuilder:validation:Optional
-	AutoHealEnabled *bool `json:"autoHealEnabled,omitempty" tf:"auto_heal_enabled,omitempty"`
 
 	// A auto_heal_setting block as defined above. Required with auto_heal.
 	// +kubebuilder:validation:Optional
@@ -3485,7 +3441,7 @@ type WindowsWebAppSiteConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	ManagedPipelineMode *string `json:"managedPipelineMode,omitempty" tf:"managed_pipeline_mode,omitempty"`
 
-	// The configures the minimum version of TLS required for SSL requests. Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
+	// The configures the minimum version of TLS required for SSL requests. Possible values include: 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
 	// +kubebuilder:validation:Optional
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
@@ -3493,7 +3449,7 @@ type WindowsWebAppSiteConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	RemoteDebuggingEnabled *bool `json:"remoteDebuggingEnabled,omitempty" tf:"remote_debugging_enabled,omitempty"`
 
-	// The Remote Debugging Version. Possible values include VS2017, VS2019 and VS2022.
+	// The Remote Debugging Version. Currently only VS2022 is supported.
 	// +kubebuilder:validation:Optional
 	RemoteDebuggingVersion *string `json:"remoteDebuggingVersion,omitempty" tf:"remote_debugging_version,omitempty"`
 

@@ -125,5 +125,5 @@ func (tr *IntegrationRuntimeSelfHosted) LateInitialize(attrs []byte) (bool, erro
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *IntegrationRuntimeSelfHosted) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }

@@ -24,9 +24,9 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    skuName: GP_Standard_D4s_v3
+    skuName: B_Standard_B1ms
     storageMb: 32768
-    storageTier: P30
+    storageTier: P4
     version: "12"
     zone: "1"
 

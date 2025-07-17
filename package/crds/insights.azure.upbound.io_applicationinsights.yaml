@@ -84,11 +84,11 @@ spec:
                     type: string
                   dailyDataCapInGb:
                     description: Specifies the Application Insights component daily
-                      data volume cap in GB.
+                      data volume cap in GB. Defaults to 100.
                     type: number
                   dailyDataCapNotificationsDisabled:
-                    description: Specifies if a notification email will be send when
-                      the daily data volume cap is met.
+                    description: Specifies if a notification email will be sent when
+                      the daily data volume cap is met. Defaults to false.
                     type: boolean
                   disableIpMasking:
                     description: By default the real client IP is masked as 0.0.0.0
@@ -316,11 +316,11 @@ spec:
                     type: string
                   dailyDataCapInGb:
                     description: Specifies the Application Insights component daily
-                      data volume cap in GB.
+                      data volume cap in GB. Defaults to 100.
                     type: number
                   dailyDataCapNotificationsDisabled:
-                    description: Specifies if a notification email will be send when
-                      the daily data volume cap is met.
+                    description: Specifies if a notification email will be sent when
+                      the daily data volume cap is met. Defaults to false.
                     type: boolean
                   disableIpMasking:
                     description: By default the real client IP is masked as 0.0.0.0
@@ -639,11 +639,11 @@ spec:
                     type: string
                   dailyDataCapInGb:
                     description: Specifies the Application Insights component daily
-                      data volume cap in GB.
+                      data volume cap in GB. Defaults to 100.
                     type: number
                   dailyDataCapNotificationsDisabled:
-                    description: Specifies if a notification email will be send when
-                      the daily data volume cap is met.
+                    description: Specifies if a notification email will be sent when
+                      the daily data volume cap is met. Defaults to false.
                     type: boolean
                   disableIpMasking:
                     description: By default the real client IP is masked as 0.0.0.0

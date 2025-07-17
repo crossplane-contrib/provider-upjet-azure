@@ -2086,6 +2086,11 @@ func (in *EventGridDataConnectionInitParameters) DeepCopyInto(out *EventGridData
 		*out = new(string)
 		**out = **in
 	}
+	if in.EventGridEventSubscriptionID != nil {
+		in, out := &in.EventGridEventSubscriptionID, &out.EventGridEventSubscriptionID
+		*out = new(string)
+		**out = **in
+	}
 	if in.EventGridResourceID != nil {
 		in, out := &in.EventGridResourceID, &out.EventGridResourceID
 		*out = new(string)
@@ -2123,6 +2128,11 @@ func (in *EventGridDataConnectionInitParameters) DeepCopyInto(out *EventGridData
 	}
 	if in.Location != nil {
 		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
+	if in.ManagedIdentityID != nil {
+		in, out := &in.ManagedIdentityID, &out.ManagedIdentityID
 		*out = new(string)
 		**out = **in
 	}
@@ -2233,6 +2243,11 @@ func (in *EventGridDataConnectionObservation) DeepCopyInto(out *EventGridDataCon
 		*out = new(string)
 		**out = **in
 	}
+	if in.EventGridEventSubscriptionID != nil {
+		in, out := &in.EventGridEventSubscriptionID, &out.EventGridEventSubscriptionID
+		*out = new(string)
+		**out = **in
+	}
 	if in.EventGridResourceID != nil {
 		in, out := &in.EventGridResourceID, &out.EventGridResourceID
 		*out = new(string)
@@ -2255,6 +2270,11 @@ func (in *EventGridDataConnectionObservation) DeepCopyInto(out *EventGridDataCon
 	}
 	if in.Location != nil {
 		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
+	if in.ManagedIdentityID != nil {
+		in, out := &in.ManagedIdentityID, &out.ManagedIdentityID
 		*out = new(string)
 		**out = **in
 	}
@@ -2348,6 +2368,11 @@ func (in *EventGridDataConnectionParameters) DeepCopyInto(out *EventGridDataConn
 		*out = new(string)
 		**out = **in
 	}
+	if in.EventGridEventSubscriptionID != nil {
+		in, out := &in.EventGridEventSubscriptionID, &out.EventGridEventSubscriptionID
+		*out = new(string)
+		**out = **in
+	}
 	if in.EventGridResourceID != nil {
 		in, out := &in.EventGridResourceID, &out.EventGridResourceID
 		*out = new(string)
@@ -2385,6 +2410,11 @@ func (in *EventGridDataConnectionParameters) DeepCopyInto(out *EventGridDataConn
 	}
 	if in.Location != nil {
 		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
+	if in.ManagedIdentityID != nil {
+		in, out := &in.ManagedIdentityID, &out.ManagedIdentityID
 		*out = new(string)
 		**out = **in
 	}

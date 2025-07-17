@@ -161,7 +161,9 @@ spec:
                         type: object
                     type: object
                   managedHsmKeyId:
-                    description: The ID of the MSSQL encryption protector
+                    description: To use customer managed keys from a managed HSM,
+                      provide the Managed HSM Key ID. To use service managed keys,
+                      omit this field.
                     type: string
                   serverId:
                     description: Specifies the name of the MS SQL Server. Changing
@@ -342,7 +344,9 @@ spec:
                         type: object
                     type: object
                   managedHsmKeyId:
-                    description: The ID of the MSSQL encryption protector
+                    description: To use customer managed keys from a managed HSM,
+                      provide the Managed HSM Key ID. To use service managed keys,
+                      omit this field.
                     type: string
                 type: object
               managementPolicies:
@@ -534,7 +538,9 @@ spec:
                       field.
                     type: string
                   managedHsmKeyId:
-                    description: The ID of the MSSQL encryption protector
+                    description: To use customer managed keys from a managed HSM,
+                      provide the Managed HSM Key ID. To use service managed keys,
+                      omit this field.
                     type: string
                   serverId:
                     description: Specifies the name of the MS SQL Server. Changing

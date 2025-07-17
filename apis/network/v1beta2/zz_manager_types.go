@@ -33,19 +33,19 @@ type CrossTenantScopesParameters struct {
 
 type ManagerInitParameters struct {
 
-	// A description of the network manager.
+	// A description of the Network Manager.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Specifies the Azure Region where the Network Managers should exist. Changing this forces a new resource to be created.
+	// Specifies the Azure Region where the Network Manager should exist. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A scope block as defined below.
 	Scope *ScopeInitParameters `json:"scope,omitempty" tf:"scope,omitempty"`
 
-	// A list of configuration deployment type. Possible values are Connectivity and SecurityAdmin, corresponds to if Connectivity Configuration and Security Admin Configuration is allowed for the Network Manager.
+	// A list of configuration deployment types. Possible values are Connectivity, SecurityAdmin and Routing, which specify whether Connectivity Configuration, Security Admin Configuration or Routing Configuration are allowed for the Network Manager.
 	ScopeAccesses []*string `json:"scopeAccesses,omitempty" tf:"scope_accesses,omitempty"`
 
-	// A mapping of tags which should be assigned to the Network Managers.
+	// A mapping of tags which should be assigned to the Network Manager.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -55,40 +55,40 @@ type ManagerObservation struct {
 	// One or more cross_tenant_scopes blocks as defined below.
 	CrossTenantScopes []CrossTenantScopesObservation `json:"crossTenantScopes,omitempty" tf:"cross_tenant_scopes,omitempty"`
 
-	// A description of the network manager.
+	// A description of the Network Manager.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The ID of the Network Managers.
+	// The ID of the Network Manager.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Specifies the Azure Region where the Network Managers should exist. Changing this forces a new resource to be created.
+	// Specifies the Azure Region where the Network Manager should exist. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// Specifies the name of the Resource Group where the Network Managers should exist. Changing this forces a new Network Managers to be created.
+	// Specifies the name of the Resource Group where the Network Manager should exist. Changing this forces a new Network Manager to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// A scope block as defined below.
 	Scope *ScopeObservation `json:"scope,omitempty" tf:"scope,omitempty"`
 
-	// A list of configuration deployment type. Possible values are Connectivity and SecurityAdmin, corresponds to if Connectivity Configuration and Security Admin Configuration is allowed for the Network Manager.
+	// A list of configuration deployment types. Possible values are Connectivity, SecurityAdmin and Routing, which specify whether Connectivity Configuration, Security Admin Configuration or Routing Configuration are allowed for the Network Manager.
 	ScopeAccesses []*string `json:"scopeAccesses,omitempty" tf:"scope_accesses,omitempty"`
 
-	// A mapping of tags which should be assigned to the Network Managers.
+	// A mapping of tags which should be assigned to the Network Manager.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type ManagerParameters struct {
 
-	// A description of the network manager.
+	// A description of the Network Manager.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Specifies the Azure Region where the Network Managers should exist. Changing this forces a new resource to be created.
+	// Specifies the Azure Region where the Network Manager should exist. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// Specifies the name of the Resource Group where the Network Managers should exist. Changing this forces a new Network Managers to be created.
+	// Specifies the name of the Resource Group where the Network Manager should exist. Changing this forces a new Network Manager to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -105,11 +105,11 @@ type ManagerParameters struct {
 	// +kubebuilder:validation:Optional
 	Scope *ScopeParameters `json:"scope,omitempty" tf:"scope,omitempty"`
 
-	// A list of configuration deployment type. Possible values are Connectivity and SecurityAdmin, corresponds to if Connectivity Configuration and Security Admin Configuration is allowed for the Network Manager.
+	// A list of configuration deployment types. Possible values are Connectivity, SecurityAdmin and Routing, which specify whether Connectivity Configuration, Security Admin Configuration or Routing Configuration are allowed for the Network Manager.
 	// +kubebuilder:validation:Optional
 	ScopeAccesses []*string `json:"scopeAccesses,omitempty" tf:"scope_accesses,omitempty"`
 
-	// A mapping of tags which should be assigned to the Network Managers.
+	// A mapping of tags which should be assigned to the Network Manager.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -170,7 +170,7 @@ type ManagerStatus struct {
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
 
-// Manager is the Schema for the Managers API. Manages a Network Managers.
+// Manager is the Schema for the Managers API. Manages a Network Manager.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
@@ -181,7 +181,6 @@ type Manager struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || (has(self.initProvider) && has(self.initProvider.location))",message="spec.forProvider.location is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.scope) || (has(self.initProvider) && has(self.initProvider.scope))",message="spec.forProvider.scope is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.scopeAccesses) || (has(self.initProvider) && has(self.initProvider.scopeAccesses))",message="spec.forProvider.scopeAccesses is a required parameter"
 	Spec   ManagerSpec   `json:"spec"`
 	Status ManagerStatus `json:"status,omitempty"`
 }

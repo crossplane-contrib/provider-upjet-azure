@@ -673,11 +673,6 @@ func (in *ComputeInstanceInitParameters) DeepCopyInto(out *ComputeInstanceInitPa
 		*out = new(bool)
 		**out = **in
 	}
-	if in.Location != nil {
-		in, out := &in.Location, &out.Location
-		*out = new(string)
-		**out = **in
-	}
 	if in.NodePublicIPEnabled != nil {
 		in, out := &in.NodePublicIPEnabled, &out.NodePublicIPEnabled
 		*out = new(bool)
@@ -801,11 +796,6 @@ func (in *ComputeInstanceObservation) DeepCopyInto(out *ComputeInstanceObservati
 		*out = new(bool)
 		**out = **in
 	}
-	if in.Location != nil {
-		in, out := &in.Location, &out.Location
-		*out = new(string)
-		**out = **in
-	}
 	if in.MachineLearningWorkspaceID != nil {
 		in, out := &in.MachineLearningWorkspaceID, &out.MachineLearningWorkspaceID
 		*out = new(string)
@@ -885,11 +875,6 @@ func (in *ComputeInstanceParameters) DeepCopyInto(out *ComputeInstanceParameters
 	if in.LocalAuthEnabled != nil {
 		in, out := &in.LocalAuthEnabled, &out.LocalAuthEnabled
 		*out = new(bool)
-		**out = **in
-	}
-	if in.Location != nil {
-		in, out := &in.Location, &out.Location
-		*out = new(string)
 		**out = **in
 	}
 	if in.MachineLearningWorkspaceID != nil {
@@ -2415,11 +2400,6 @@ func (in *WorkspaceInitParameters) DeepCopyInto(out *WorkspaceInitParameters) {
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
-	if in.PublicAccessBehindVirtualNetworkEnabled != nil {
-		in, out := &in.PublicAccessBehindVirtualNetworkEnabled, &out.PublicAccessBehindVirtualNetworkEnabled
-		*out = new(bool)
-		**out = **in
-	}
 	if in.PublicNetworkAccessEnabled != nil {
 		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
 		*out = new(bool)
@@ -2598,11 +2578,6 @@ func (in *WorkspaceObservation) DeepCopyInto(out *WorkspaceObservation) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.PublicAccessBehindVirtualNetworkEnabled != nil {
-		in, out := &in.PublicAccessBehindVirtualNetworkEnabled, &out.PublicAccessBehindVirtualNetworkEnabled
-		*out = new(bool)
-		**out = **in
-	}
 	if in.PublicNetworkAccessEnabled != nil {
 		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
 		*out = new(bool)
@@ -2768,11 +2743,6 @@ func (in *WorkspaceParameters) DeepCopyInto(out *WorkspaceParameters) {
 		in, out := &in.PrimaryUserAssignedIdentitySelector, &out.PrimaryUserAssignedIdentitySelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
-	}
-	if in.PublicAccessBehindVirtualNetworkEnabled != nil {
-		in, out := &in.PublicAccessBehindVirtualNetworkEnabled, &out.PublicAccessBehindVirtualNetworkEnabled
-		*out = new(bool)
-		**out = **in
 	}
 	if in.PublicNetworkAccessEnabled != nil {
 		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled

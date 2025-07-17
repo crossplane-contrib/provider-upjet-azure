@@ -443,7 +443,7 @@ func (mg *SpringCloudAppMySQLAssociation) ResolveReferences(ctx context.Context,
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("dbformysql.azure.upbound.io", "v1beta1", "Database", "DatabaseList")
+		m, l, err = apisresolver.GetManagedResource("dbformysql.azure.upbound.io", "v1beta1", "FlexibleDatabase", "FlexibleDatabaseList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -462,7 +462,7 @@ func (mg *SpringCloudAppMySQLAssociation) ResolveReferences(ctx context.Context,
 	mg.Spec.ForProvider.DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DatabaseNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("dbformysql.azure.upbound.io", "v1beta2", "Server", "ServerList")
+		m, l, err = apisresolver.GetManagedResource("dbformysql.azure.upbound.io", "v1beta2", "FlexibleServer", "FlexibleServerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -500,7 +500,7 @@ func (mg *SpringCloudAppMySQLAssociation) ResolveReferences(ctx context.Context,
 	mg.Spec.ForProvider.SpringCloudAppID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SpringCloudAppIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("dbformysql.azure.upbound.io", "v1beta2", "Server", "ServerList")
+		m, l, err = apisresolver.GetManagedResource("dbformysql.azure.upbound.io", "v1beta2", "FlexibleServer", "FlexibleServerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -519,7 +519,7 @@ func (mg *SpringCloudAppMySQLAssociation) ResolveReferences(ctx context.Context,
 	mg.Spec.ForProvider.Username = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.UsernameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("dbformysql.azure.upbound.io", "v1beta1", "Database", "DatabaseList")
+		m, l, err = apisresolver.GetManagedResource("dbformysql.azure.upbound.io", "v1beta1", "FlexibleDatabase", "FlexibleDatabaseList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -538,7 +538,7 @@ func (mg *SpringCloudAppMySQLAssociation) ResolveReferences(ctx context.Context,
 	mg.Spec.InitProvider.DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DatabaseNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("dbformysql.azure.upbound.io", "v1beta2", "Server", "ServerList")
+		m, l, err = apisresolver.GetManagedResource("dbformysql.azure.upbound.io", "v1beta2", "FlexibleServer", "FlexibleServerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -557,7 +557,7 @@ func (mg *SpringCloudAppMySQLAssociation) ResolveReferences(ctx context.Context,
 	mg.Spec.InitProvider.MySQLServerID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.MySQLServerIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("dbformysql.azure.upbound.io", "v1beta2", "Server", "ServerList")
+		m, l, err = apisresolver.GetManagedResource("dbformysql.azure.upbound.io", "v1beta2", "FlexibleServer", "FlexibleServerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

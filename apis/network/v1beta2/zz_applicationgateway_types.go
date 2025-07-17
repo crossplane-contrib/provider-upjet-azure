@@ -75,7 +75,7 @@ type ApplicationGatewayInitParameters struct {
 	// One or more request_routing_rule blocks as defined below.
 	RequestRoutingRule []RequestRoutingRuleInitParameters `json:"requestRoutingRule,omitempty" tf:"request_routing_rule,omitempty"`
 
-	// One or more rewrite_rule_set blocks as defined below. Only valid for v2 SKUs.
+	// One or more rewrite_rule_set blocks as defined below. Only valid for v2 WAF and Standard SKUs.
 	RewriteRuleSet []RewriteRuleSetInitParameters `json:"rewriteRuleSet,omitempty" tf:"rewrite_rule_set,omitempty"`
 
 	// One or more ssl_certificate blocks as defined below.
@@ -182,7 +182,7 @@ type ApplicationGatewayObservation struct {
 	// The name of the resource group in which to the Application Gateway should exist. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// One or more rewrite_rule_set blocks as defined below. Only valid for v2 SKUs.
+	// One or more rewrite_rule_set blocks as defined below. Only valid for v2 WAF and Standard SKUs.
 	RewriteRuleSet []RewriteRuleSetObservation `json:"rewriteRuleSet,omitempty" tf:"rewrite_rule_set,omitempty"`
 
 	// One or more ssl_certificate blocks as defined below.
@@ -313,7 +313,7 @@ type ApplicationGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// One or more rewrite_rule_set blocks as defined below. Only valid for v2 SKUs.
+	// One or more rewrite_rule_set blocks as defined below. Only valid for v2 WAF and Standard SKUs.
 	// +kubebuilder:validation:Optional
 	RewriteRuleSet []RewriteRuleSetParameters `json:"rewriteRuleSet,omitempty" tf:"rewrite_rule_set,omitempty"`
 
@@ -716,7 +716,7 @@ type CustomErrorConfigurationInitParameters struct {
 	// Error page URL of the application gateway customer error.
 	CustomErrorPageURL *string `json:"customErrorPageUrl,omitempty" tf:"custom_error_page_url,omitempty"`
 
-	// Status code of the application gateway customer error. Possible values are HttpStatus403 and HttpStatus502
+	// Status code of the application gateway customer error. Possible values are HttpStatus400, HttpStatus403, HttpStatus404, HttpStatus405, HttpStatus408, HttpStatus500, HttpStatus502, HttpStatus503 and HttpStatus504
 	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
 }
 
@@ -728,7 +728,7 @@ type CustomErrorConfigurationObservation struct {
 	// The ID of the Custom Error Configuration.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Status code of the application gateway customer error. Possible values are HttpStatus403 and HttpStatus502
+	// Status code of the application gateway customer error. Possible values are HttpStatus400, HttpStatus403, HttpStatus404, HttpStatus405, HttpStatus408, HttpStatus500, HttpStatus502, HttpStatus503 and HttpStatus504
 	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
 }
 
@@ -738,7 +738,7 @@ type CustomErrorConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	CustomErrorPageURL *string `json:"customErrorPageUrl" tf:"custom_error_page_url,omitempty"`
 
-	// Status code of the application gateway customer error. Possible values are HttpStatus403 and HttpStatus502
+	// Status code of the application gateway customer error. Possible values are HttpStatus400, HttpStatus403, HttpStatus404, HttpStatus405, HttpStatus408, HttpStatus500, HttpStatus502, HttpStatus503 and HttpStatus504
 	// +kubebuilder:validation:Optional
 	StatusCode *string `json:"statusCode" tf:"status_code,omitempty"`
 }
@@ -1518,7 +1518,7 @@ type ProbeInitParameters struct {
 	// Whether the host header should be picked from the backend HTTP settings. Defaults to false.
 	PickHostNameFromBackendHTTPSettings *bool `json:"pickHostNameFromBackendHttpSettings,omitempty" tf:"pick_host_name_from_backend_http_settings,omitempty"`
 
-	// Custom port which will be used for probing the backend servers. The valid value ranges from 1 to 65535. In case not set, port from HTTP settings will be used. This property is valid for Standard_v2 and WAF_v2 only.
+	// Custom port which will be used for probing the backend servers. The valid value ranges from 1 to 65535. In case not set, port from HTTP settings will be used. This property is valid for Basic, Standard_v2 and WAF_v2 only.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// The Protocol used for this Probe. Possible values are Http and Https.
@@ -1557,7 +1557,7 @@ type ProbeObservation struct {
 	// Whether the host header should be picked from the backend HTTP settings. Defaults to false.
 	PickHostNameFromBackendHTTPSettings *bool `json:"pickHostNameFromBackendHttpSettings,omitempty" tf:"pick_host_name_from_backend_http_settings,omitempty"`
 
-	// Custom port which will be used for probing the backend servers. The valid value ranges from 1 to 65535. In case not set, port from HTTP settings will be used. This property is valid for Standard_v2 and WAF_v2 only.
+	// Custom port which will be used for probing the backend servers. The valid value ranges from 1 to 65535. In case not set, port from HTTP settings will be used. This property is valid for Basic, Standard_v2 and WAF_v2 only.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// The Protocol used for this Probe. Possible values are Http and Https.
@@ -1600,7 +1600,7 @@ type ProbeParameters struct {
 	// +kubebuilder:validation:Optional
 	PickHostNameFromBackendHTTPSettings *bool `json:"pickHostNameFromBackendHttpSettings,omitempty" tf:"pick_host_name_from_backend_http_settings,omitempty"`
 
-	// Custom port which will be used for probing the backend servers. The valid value ranges from 1 to 65535. In case not set, port from HTTP settings will be used. This property is valid for Standard_v2 and WAF_v2 only.
+	// Custom port which will be used for probing the backend servers. The valid value ranges from 1 to 65535. In case not set, port from HTTP settings will be used. This property is valid for Basic, Standard_v2 and WAF_v2 only.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
@@ -1976,7 +1976,7 @@ type SSLCertificateInitParameters struct {
 	// The base64-encoded PFX certificate data. Required if key_vault_secret_id is not set.
 	DataSecretRef *v1.SecretKeySelector `json:"dataSecretRef,omitempty" tf:"-"`
 
-	// The Secret ID of (base-64 encoded unencrypted pfx) the Secret or Certificate object stored in Azure KeyVault. You need to enable soft delete for Key Vault to use this feature. Required if data is not set.
+	// The Secret ID of the (base-64 encoded unencrypted pfx) Secret or Certificate object stored in Azure KeyVault. You need to enable soft delete for Key Vault to use this feature. Required if data is not set.
 	KeyVaultSecretID *string `json:"keyVaultSecretId,omitempty" tf:"key_vault_secret_id,omitempty"`
 
 	// The Name of the SSL certificate that is unique within this Application Gateway
@@ -1991,7 +1991,7 @@ type SSLCertificateObservation struct {
 	// The ID of the SSL Certificate.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The Secret ID of (base-64 encoded unencrypted pfx) the Secret or Certificate object stored in Azure KeyVault. You need to enable soft delete for Key Vault to use this feature. Required if data is not set.
+	// The Secret ID of the (base-64 encoded unencrypted pfx) Secret or Certificate object stored in Azure KeyVault. You need to enable soft delete for Key Vault to use this feature. Required if data is not set.
 	KeyVaultSecretID *string `json:"keyVaultSecretId,omitempty" tf:"key_vault_secret_id,omitempty"`
 
 	// The Name of the SSL certificate that is unique within this Application Gateway
@@ -2007,7 +2007,7 @@ type SSLCertificateParameters struct {
 	// +kubebuilder:validation:Optional
 	DataSecretRef *v1.SecretKeySelector `json:"dataSecretRef,omitempty" tf:"-"`
 
-	// The Secret ID of (base-64 encoded unencrypted pfx) the Secret or Certificate object stored in Azure KeyVault. You need to enable soft delete for Key Vault to use this feature. Required if data is not set.
+	// The Secret ID of the (base-64 encoded unencrypted pfx) Secret or Certificate object stored in Azure KeyVault. You need to enable soft delete for Key Vault to use this feature. Required if data is not set.
 	// +kubebuilder:validation:Optional
 	KeyVaultSecretID *string `json:"keyVaultSecretId,omitempty" tf:"key_vault_secret_id,omitempty"`
 
@@ -2202,39 +2202,39 @@ type SSLProfileSSLPolicyParameters struct {
 
 type SkuInitParameters struct {
 
-	// The Capacity of the SKU to use for this Application Gateway. When using a V1 SKU this value must be between 1 and 32, and 1 to 125 for a V2 SKU. This property is optional if autoscale_configuration is set.
+	// The Capacity of the SKU to use for this Application Gateway. When using a V1 SKU this value must be between 1 and 32, and 1 to 125 for a V2 SKU. When using a Basic SKU this property must be between 1 and 2. This property is optional if autoscale_configuration is set.
 	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
 
-	// The Name of the SKU to use for this Application Gateway. Possible values are Standard_Small, Standard_Medium, Standard_Large, Standard_v2, WAF_Medium, WAF_Large, and WAF_v2.
+	// The Name of the SKU to use for this Application Gateway. Possible values are Basic, Standard_v2, and WAF_v2.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The Tier of the SKU to use for this Application Gateway. Possible values are Standard, Standard_v2, WAF and WAF_v2.
+	// The Tier of the SKU to use for this Application Gateway. Possible values are Basic, Standard_v2, and WAF_v2.
 	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
 }
 
 type SkuObservation struct {
 
-	// The Capacity of the SKU to use for this Application Gateway. When using a V1 SKU this value must be between 1 and 32, and 1 to 125 for a V2 SKU. This property is optional if autoscale_configuration is set.
+	// The Capacity of the SKU to use for this Application Gateway. When using a V1 SKU this value must be between 1 and 32, and 1 to 125 for a V2 SKU. When using a Basic SKU this property must be between 1 and 2. This property is optional if autoscale_configuration is set.
 	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
 
-	// The Name of the SKU to use for this Application Gateway. Possible values are Standard_Small, Standard_Medium, Standard_Large, Standard_v2, WAF_Medium, WAF_Large, and WAF_v2.
+	// The Name of the SKU to use for this Application Gateway. Possible values are Basic, Standard_v2, and WAF_v2.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The Tier of the SKU to use for this Application Gateway. Possible values are Standard, Standard_v2, WAF and WAF_v2.
+	// The Tier of the SKU to use for this Application Gateway. Possible values are Basic, Standard_v2, and WAF_v2.
 	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
 }
 
 type SkuParameters struct {
 
-	// The Capacity of the SKU to use for this Application Gateway. When using a V1 SKU this value must be between 1 and 32, and 1 to 125 for a V2 SKU. This property is optional if autoscale_configuration is set.
+	// The Capacity of the SKU to use for this Application Gateway. When using a V1 SKU this value must be between 1 and 32, and 1 to 125 for a V2 SKU. When using a Basic SKU this property must be between 1 and 2. This property is optional if autoscale_configuration is set.
 	// +kubebuilder:validation:Optional
 	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
 
-	// The Name of the SKU to use for this Application Gateway. Possible values are Standard_Small, Standard_Medium, Standard_Large, Standard_v2, WAF_Medium, WAF_Large, and WAF_v2.
+	// The Name of the SKU to use for this Application Gateway. Possible values are Basic, Standard_v2, and WAF_v2.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The Tier of the SKU to use for this Application Gateway. Possible values are Standard, Standard_v2, WAF and WAF_v2.
+	// The Tier of the SKU to use for this Application Gateway. Possible values are Basic, Standard_v2, and WAF_v2.
 	// +kubebuilder:validation:Optional
 	Tier *string `json:"tier" tf:"tier,omitempty"`
 }
@@ -2273,7 +2273,7 @@ type TrustedRootCertificateInitParameters struct {
 	// The contents of the Trusted Root Certificate which should be used. Required if key_vault_secret_id is not set.
 	DataSecretRef *v1.SecretKeySelector `json:"dataSecretRef,omitempty" tf:"-"`
 
-	// The Secret ID of (base-64 encoded unencrypted pfx) Secret or Certificate object stored in Azure KeyVault. You need to enable soft delete for the Key Vault to use this feature. Required if data is not set.
+	// The Secret ID of the (base-64 encoded unencrypted pfx) Secret or Certificate object stored in Azure KeyVault. You need to enable soft delete for the Key Vault to use this feature. Required if data is not set.
 	KeyVaultSecretID *string `json:"keyVaultSecretId,omitempty" tf:"key_vault_secret_id,omitempty"`
 
 	// The Name of the Trusted Root Certificate to use.
@@ -2285,7 +2285,7 @@ type TrustedRootCertificateObservation struct {
 	// The ID of the URL Path Map.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The Secret ID of (base-64 encoded unencrypted pfx) Secret or Certificate object stored in Azure KeyVault. You need to enable soft delete for the Key Vault to use this feature. Required if data is not set.
+	// The Secret ID of the (base-64 encoded unencrypted pfx) Secret or Certificate object stored in Azure KeyVault. You need to enable soft delete for the Key Vault to use this feature. Required if data is not set.
 	KeyVaultSecretID *string `json:"keyVaultSecretId,omitempty" tf:"key_vault_secret_id,omitempty"`
 
 	// The Name of the Trusted Root Certificate to use.
@@ -2298,7 +2298,7 @@ type TrustedRootCertificateParameters struct {
 	// +kubebuilder:validation:Optional
 	DataSecretRef *v1.SecretKeySelector `json:"dataSecretRef,omitempty" tf:"-"`
 
-	// The Secret ID of (base-64 encoded unencrypted pfx) Secret or Certificate object stored in Azure KeyVault. You need to enable soft delete for the Key Vault to use this feature. Required if data is not set.
+	// The Secret ID of the (base-64 encoded unencrypted pfx) Secret or Certificate object stored in Azure KeyVault. You need to enable soft delete for the Key Vault to use this feature. Required if data is not set.
 	// +kubebuilder:validation:Optional
 	KeyVaultSecretID *string `json:"keyVaultSecretId,omitempty" tf:"key_vault_secret_id,omitempty"`
 
@@ -2466,7 +2466,7 @@ type WafConfigurationInitParameters struct {
 	// The Type of the Rule Set used for this Web Application Firewall. Possible values are OWASP, Microsoft_BotManagerRuleSet and Microsoft_DefaultRuleSet. Defaults to OWASP.
 	RuleSetType *string `json:"ruleSetType,omitempty" tf:"rule_set_type,omitempty"`
 
-	// The Version of the Rule Set used for this Web Application Firewall. Possible values are 0.1, 1.0, 2.1, 2.2.9, 3.0, 3.1 and 3.2.
+	// The Version of the Rule Set used for this Web Application Firewall. Possible values are 0.1, 1.0, 1.1, 2.1, 2.2.9, 3.0, 3.1 and 3.2.
 	RuleSetVersion *string `json:"ruleSetVersion,omitempty" tf:"rule_set_version,omitempty"`
 }
 
@@ -2496,7 +2496,7 @@ type WafConfigurationObservation struct {
 	// The Type of the Rule Set used for this Web Application Firewall. Possible values are OWASP, Microsoft_BotManagerRuleSet and Microsoft_DefaultRuleSet. Defaults to OWASP.
 	RuleSetType *string `json:"ruleSetType,omitempty" tf:"rule_set_type,omitempty"`
 
-	// The Version of the Rule Set used for this Web Application Firewall. Possible values are 0.1, 1.0, 2.1, 2.2.9, 3.0, 3.1 and 3.2.
+	// The Version of the Rule Set used for this Web Application Firewall. Possible values are 0.1, 1.0, 1.1, 2.1, 2.2.9, 3.0, 3.1 and 3.2.
 	RuleSetVersion *string `json:"ruleSetVersion,omitempty" tf:"rule_set_version,omitempty"`
 }
 
@@ -2534,7 +2534,7 @@ type WafConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	RuleSetType *string `json:"ruleSetType,omitempty" tf:"rule_set_type,omitempty"`
 
-	// The Version of the Rule Set used for this Web Application Firewall. Possible values are 0.1, 1.0, 2.1, 2.2.9, 3.0, 3.1 and 3.2.
+	// The Version of the Rule Set used for this Web Application Firewall. Possible values are 0.1, 1.0, 1.1, 2.1, 2.2.9, 3.0, 3.1 and 3.2.
 	// +kubebuilder:validation:Optional
 	RuleSetVersion *string `json:"ruleSetVersion" tf:"rule_set_version,omitempty"`
 }

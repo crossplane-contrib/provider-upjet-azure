@@ -311,7 +311,7 @@ spec:
                     description: Specifies how much traffic should be distributed
                       to this endpoint, this must be specified for Profiles using
                       the Weighted traffic routing method. Valid values are between
-                      1 and 1000.
+                      1 and 1000. Defaults to 1.
                     type: number
                 type: object
               initProvider:
@@ -483,7 +483,7 @@ spec:
                     description: Specifies how much traffic should be distributed
                       to this endpoint, this must be specified for Profiles using
                       the Weighted traffic routing method. Valid values are between
-                      1 and 1000.
+                      1 and 1000. Defaults to 1.
                     type: number
                 type: object
               managementPolicies:
@@ -752,7 +752,7 @@ spec:
                     description: Specifies how much traffic should be distributed
                       to this endpoint, this must be specified for Profiles using
                       the Weighted traffic routing method. Valid values are between
-                      1 and 1000.
+                      1 and 1000. Defaults to 1.
                     type: number
                 type: object
               conditions:

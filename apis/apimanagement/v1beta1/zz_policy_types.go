@@ -15,7 +15,7 @@ import (
 
 type PolicyInitParameters_2 struct {
 
-	// The XML Content for this Policy as a string.
+	// The XML Content for this Policy as a string. To integrate frontend and backend services in Azure API Management, utilize the set-backend-service policy, specifying the base-url value. Typically, this value corresponds to the url property defined in the azurerm_api_management_backend configuration.
 	XMLContent *string `json:"xmlContent,omitempty" tf:"xml_content,omitempty"`
 
 	// A link to a Policy XML Document, which must be publicly available.
@@ -30,7 +30,7 @@ type PolicyObservation_2 struct {
 	// The ID of the API Management service Policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The XML Content for this Policy as a string.
+	// The XML Content for this Policy as a string. To integrate frontend and backend services in Azure API Management, utilize the set-backend-service policy, specifying the base-url value. Typically, this value corresponds to the url property defined in the azurerm_api_management_backend configuration.
 	XMLContent *string `json:"xmlContent,omitempty" tf:"xml_content,omitempty"`
 
 	// A link to a Policy XML Document, which must be publicly available.
@@ -53,7 +53,7 @@ type PolicyParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	APIManagementIDSelector *v1.Selector `json:"apiManagementIdSelector,omitempty" tf:"-"`
 
-	// The XML Content for this Policy as a string.
+	// The XML Content for this Policy as a string. To integrate frontend and backend services in Azure API Management, utilize the set-backend-service policy, specifying the base-url value. Typically, this value corresponds to the url property defined in the azurerm_api_management_backend configuration.
 	// +kubebuilder:validation:Optional
 	XMLContent *string `json:"xmlContent,omitempty" tf:"xml_content,omitempty"`
 

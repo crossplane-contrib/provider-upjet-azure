@@ -520,6 +520,10 @@ spec:
                     description: The ID of the Container App Environment Certificate
                       to use. Changing this forces a new resource to be created.
                     type: string
+                  containerAppEnvironmentManagedCertificateId:
+                    description: The ID of the Container App Environment Managed Certificate
+                      to use.
+                    type: string
                   containerAppId:
                     description: The ID of the Container App to which this Custom
                       Domain should be bound. Changing this forces a new resource

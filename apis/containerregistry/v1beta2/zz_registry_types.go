@@ -15,9 +15,6 @@ import (
 
 type EncryptionInitParameters struct {
 
-	// Boolean value that indicates whether the policy is enabled.
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled"`
-
 	// The client ID of the managed identity associated with the encryption key.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/managedidentity/v1beta1.UserAssignedIdentity
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("client_id",true)
@@ -37,9 +34,6 @@ type EncryptionInitParameters struct {
 
 type EncryptionObservation struct {
 
-	// Boolean value that indicates whether the policy is enabled.
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-
 	// The client ID of the managed identity associated with the encryption key.
 	IdentityClientID *string `json:"identityClientId,omitempty" tf:"identity_client_id,omitempty"`
 
@@ -48,10 +42,6 @@ type EncryptionObservation struct {
 }
 
 type EncryptionParameters struct {
-
-	// Boolean value that indicates whether the policy is enabled.
-	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled"`
 
 	// The client ID of the managed identity associated with the encryption key.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/managedidentity/v1beta1.UserAssignedIdentity
@@ -218,8 +208,6 @@ type NetworkRuleSetInitParameters struct {
 
 	// One or more ip_rule blocks as defined below.
 	IPRule []IPRuleInitParameters `json:"ipRule,omitempty" tf:"ip_rule"`
-
-	VirtualNetwork []VirtualNetworkInitParameters `json:"virtualNetwork,omitempty" tf:"virtual_network"`
 }
 
 type NetworkRuleSetObservation struct {
@@ -229,8 +217,6 @@ type NetworkRuleSetObservation struct {
 
 	// One or more ip_rule blocks as defined below.
 	IPRule []IPRuleObservation `json:"ipRule,omitempty" tf:"ip_rule,omitempty"`
-
-	VirtualNetwork []VirtualNetworkObservation `json:"virtualNetwork,omitempty" tf:"virtual_network,omitempty"`
 }
 
 type NetworkRuleSetParameters struct {
@@ -242,9 +228,6 @@ type NetworkRuleSetParameters struct {
 	// One or more ip_rule blocks as defined below.
 	// +kubebuilder:validation:Optional
 	IPRule []IPRuleParameters `json:"ipRule,omitempty" tf:"ip_rule"`
-
-	// +kubebuilder:validation:Optional
-	VirtualNetwork []VirtualNetworkParameters `json:"virtualNetwork,omitempty" tf:"virtual_network"`
 }
 
 type RegistryInitParameters struct {
@@ -252,7 +235,7 @@ type RegistryInitParameters struct {
 	// Specifies whether the admin user is enabled. Defaults to false.
 	AdminEnabled *bool `json:"adminEnabled,omitempty" tf:"admin_enabled,omitempty"`
 
-	// Whether allows anonymous (unauthenticated) pull access to this Container Registry? This is only supported on resources with the Standard or Premium SKU.
+	// Whether to allow anonymous (unauthenticated) pull access to this Container Registry. This is only supported on resources with the Standard or Premium SKU.
 	AnonymousPullEnabled *bool `json:"anonymousPullEnabled,omitempty" tf:"anonymous_pull_enabled,omitempty"`
 
 	// Whether to enable dedicated data endpoints for this Container Registry? This is only supported on resources with the Premium SKU.
@@ -264,7 +247,7 @@ type RegistryInitParameters struct {
 	// Boolean value that indicates whether export policy is enabled. Defaults to true. In order to set it to false, make sure the public_network_access_enabled is also set to false.
 	ExportPolicyEnabled *bool `json:"exportPolicyEnabled,omitempty" tf:"export_policy_enabled,omitempty"`
 
-	// A georeplications block as documented below.
+	// One or more georeplications blocks as documented below.
 	Georeplications []GeoreplicationsInitParameters `json:"georeplications,omitempty" tf:"georeplications,omitempty"`
 
 	// An identity block as defined below.
@@ -273,7 +256,7 @@ type RegistryInitParameters struct {
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// Whether to allow trusted Azure services to access a network restricted Container Registry? Possible values are None and AzureServices. Defaults to AzureServices.
+	// Whether to allow trusted Azure services to access a network-restricted Container Registry? Possible values are None and AzureServices. Defaults to AzureServices.
 	NetworkRuleBypassOption *string `json:"networkRuleBypassOption,omitempty" tf:"network_rule_bypass_option,omitempty"`
 
 	// A network_rule_set block as documented below.
@@ -285,8 +268,8 @@ type RegistryInitParameters struct {
 	// Boolean value that indicates whether quarantine policy is enabled.
 	QuarantinePolicyEnabled *bool `json:"quarantinePolicyEnabled,omitempty" tf:"quarantine_policy_enabled,omitempty"`
 
-	// A retention_policy block as documented below.
-	RetentionPolicy *RetentionPolicyInitParameters `json:"retentionPolicy,omitempty" tf:"retention_policy,omitempty"`
+	// The number of days to retain and untagged manifest after which it gets purged. Defaults to 7.
+	RetentionPolicyInDays *float64 `json:"retentionPolicyInDays,omitempty" tf:"retention_policy_in_days,omitempty"`
 
 	// The SKU name of the container registry. Possible values are Basic, Standard and Premium.
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
@@ -295,8 +278,8 @@ type RegistryInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A trust_policy block as documented below.
-	TrustPolicy *TrustPolicyInitParameters `json:"trustPolicy,omitempty" tf:"trust_policy,omitempty"`
+	// Boolean value that indicated whether trust policy is enabled. Defaults to false.
+	TrustPolicyEnabled *bool `json:"trustPolicyEnabled,omitempty" tf:"trust_policy_enabled,omitempty"`
 
 	// Whether zone redundancy is enabled for this Container Registry? Changing this forces a new resource to be created. Defaults to false.
 	ZoneRedundancyEnabled *bool `json:"zoneRedundancyEnabled,omitempty" tf:"zone_redundancy_enabled,omitempty"`
@@ -310,7 +293,7 @@ type RegistryObservation struct {
 	// The Username associated with the Container Registry Admin account - if the admin account is enabled.
 	AdminUsername *string `json:"adminUsername,omitempty" tf:"admin_username,omitempty"`
 
-	// Whether allows anonymous (unauthenticated) pull access to this Container Registry? This is only supported on resources with the Standard or Premium SKU.
+	// Whether to allow anonymous (unauthenticated) pull access to this Container Registry. This is only supported on resources with the Standard or Premium SKU.
 	AnonymousPullEnabled *bool `json:"anonymousPullEnabled,omitempty" tf:"anonymous_pull_enabled,omitempty"`
 
 	// Whether to enable dedicated data endpoints for this Container Registry? This is only supported on resources with the Premium SKU.
@@ -322,7 +305,7 @@ type RegistryObservation struct {
 	// Boolean value that indicates whether export policy is enabled. Defaults to true. In order to set it to false, make sure the public_network_access_enabled is also set to false.
 	ExportPolicyEnabled *bool `json:"exportPolicyEnabled,omitempty" tf:"export_policy_enabled,omitempty"`
 
-	// A georeplications block as documented below.
+	// One or more georeplications blocks as documented below.
 	Georeplications []GeoreplicationsObservation `json:"georeplications,omitempty" tf:"georeplications,omitempty"`
 
 	// The ID of the Container Registry.
@@ -337,7 +320,7 @@ type RegistryObservation struct {
 	// The URL that can be used to log into the container registry.
 	LoginServer *string `json:"loginServer,omitempty" tf:"login_server,omitempty"`
 
-	// Whether to allow trusted Azure services to access a network restricted Container Registry? Possible values are None and AzureServices. Defaults to AzureServices.
+	// Whether to allow trusted Azure services to access a network-restricted Container Registry? Possible values are None and AzureServices. Defaults to AzureServices.
 	NetworkRuleBypassOption *string `json:"networkRuleBypassOption,omitempty" tf:"network_rule_bypass_option,omitempty"`
 
 	// A network_rule_set block as documented below.
@@ -352,8 +335,8 @@ type RegistryObservation struct {
 	// The name of the resource group in which to create the Container Registry. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// A retention_policy block as documented below.
-	RetentionPolicy *RetentionPolicyObservation `json:"retentionPolicy,omitempty" tf:"retention_policy,omitempty"`
+	// The number of days to retain and untagged manifest after which it gets purged. Defaults to 7.
+	RetentionPolicyInDays *float64 `json:"retentionPolicyInDays,omitempty" tf:"retention_policy_in_days,omitempty"`
 
 	// The SKU name of the container registry. Possible values are Basic, Standard and Premium.
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
@@ -362,8 +345,8 @@ type RegistryObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A trust_policy block as documented below.
-	TrustPolicy *TrustPolicyObservation `json:"trustPolicy,omitempty" tf:"trust_policy,omitempty"`
+	// Boolean value that indicated whether trust policy is enabled. Defaults to false.
+	TrustPolicyEnabled *bool `json:"trustPolicyEnabled,omitempty" tf:"trust_policy_enabled,omitempty"`
 
 	// Whether zone redundancy is enabled for this Container Registry? Changing this forces a new resource to be created. Defaults to false.
 	ZoneRedundancyEnabled *bool `json:"zoneRedundancyEnabled,omitempty" tf:"zone_redundancy_enabled,omitempty"`
@@ -375,7 +358,7 @@ type RegistryParameters struct {
 	// +kubebuilder:validation:Optional
 	AdminEnabled *bool `json:"adminEnabled,omitempty" tf:"admin_enabled,omitempty"`
 
-	// Whether allows anonymous (unauthenticated) pull access to this Container Registry? This is only supported on resources with the Standard or Premium SKU.
+	// Whether to allow anonymous (unauthenticated) pull access to this Container Registry. This is only supported on resources with the Standard or Premium SKU.
 	// +kubebuilder:validation:Optional
 	AnonymousPullEnabled *bool `json:"anonymousPullEnabled,omitempty" tf:"anonymous_pull_enabled,omitempty"`
 
@@ -391,7 +374,7 @@ type RegistryParameters struct {
 	// +kubebuilder:validation:Optional
 	ExportPolicyEnabled *bool `json:"exportPolicyEnabled,omitempty" tf:"export_policy_enabled,omitempty"`
 
-	// A georeplications block as documented below.
+	// One or more georeplications blocks as documented below.
 	// +kubebuilder:validation:Optional
 	Georeplications []GeoreplicationsParameters `json:"georeplications,omitempty" tf:"georeplications,omitempty"`
 
@@ -403,7 +386,7 @@ type RegistryParameters struct {
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// Whether to allow trusted Azure services to access a network restricted Container Registry? Possible values are None and AzureServices. Defaults to AzureServices.
+	// Whether to allow trusted Azure services to access a network-restricted Container Registry? Possible values are None and AzureServices. Defaults to AzureServices.
 	// +kubebuilder:validation:Optional
 	NetworkRuleBypassOption *string `json:"networkRuleBypassOption,omitempty" tf:"network_rule_bypass_option,omitempty"`
 
@@ -432,9 +415,9 @@ type RegistryParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// A retention_policy block as documented below.
+	// The number of days to retain and untagged manifest after which it gets purged. Defaults to 7.
 	// +kubebuilder:validation:Optional
-	RetentionPolicy *RetentionPolicyParameters `json:"retentionPolicy,omitempty" tf:"retention_policy,omitempty"`
+	RetentionPolicyInDays *float64 `json:"retentionPolicyInDays,omitempty" tf:"retention_policy_in_days,omitempty"`
 
 	// The SKU name of the container registry. Possible values are Basic, Standard and Premium.
 	// +kubebuilder:validation:Optional
@@ -445,110 +428,13 @@ type RegistryParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A trust_policy block as documented below.
+	// Boolean value that indicated whether trust policy is enabled. Defaults to false.
 	// +kubebuilder:validation:Optional
-	TrustPolicy *TrustPolicyParameters `json:"trustPolicy,omitempty" tf:"trust_policy,omitempty"`
+	TrustPolicyEnabled *bool `json:"trustPolicyEnabled,omitempty" tf:"trust_policy_enabled,omitempty"`
 
 	// Whether zone redundancy is enabled for this Container Registry? Changing this forces a new resource to be created. Defaults to false.
 	// +kubebuilder:validation:Optional
 	ZoneRedundancyEnabled *bool `json:"zoneRedundancyEnabled,omitempty" tf:"zone_redundancy_enabled,omitempty"`
-}
-
-type RetentionPolicyInitParameters struct {
-
-	// The number of days to retain an untagged manifest after which it gets purged. Default is 7.
-	Days *float64 `json:"days,omitempty" tf:"days"`
-
-	// Boolean value that indicates whether the policy is enabled.
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled"`
-}
-
-type RetentionPolicyObservation struct {
-
-	// The number of days to retain an untagged manifest after which it gets purged. Default is 7.
-	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
-
-	// Boolean value that indicates whether the policy is enabled.
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-}
-
-type RetentionPolicyParameters struct {
-
-	// The number of days to retain an untagged manifest after which it gets purged. Default is 7.
-	// +kubebuilder:validation:Optional
-	Days *float64 `json:"days,omitempty" tf:"days"`
-
-	// Boolean value that indicates whether the policy is enabled.
-	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled"`
-}
-
-type TrustPolicyInitParameters struct {
-
-	// Boolean value that indicates whether the policy is enabled.
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled"`
-}
-
-type TrustPolicyObservation struct {
-
-	// Boolean value that indicates whether the policy is enabled.
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-}
-
-type TrustPolicyParameters struct {
-
-	// Boolean value that indicates whether the policy is enabled.
-	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled"`
-}
-
-type VirtualNetworkInitParameters struct {
-
-	// The behaviour for requests matching this rule. At this time the only supported value is Allow
-	Action *string `json:"action,omitempty" tf:"action"`
-
-	// The ID of the Container Registry.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
-	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id"`
-
-	// Reference to a Subnet in network to populate subnetId.
-	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
-
-	// Selector for a Subnet in network to populate subnetId.
-	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
-}
-
-type VirtualNetworkObservation struct {
-
-	// The behaviour for requests matching this rule. At this time the only supported value is Allow
-	Action *string `json:"action,omitempty" tf:"action,omitempty"`
-
-	// The ID of the Container Registry.
-	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
-}
-
-type VirtualNetworkParameters struct {
-
-	// The behaviour for requests matching this rule. At this time the only supported value is Allow
-	// +kubebuilder:validation:Optional
-	Action *string `json:"action,omitempty" tf:"action"`
-
-	// The ID of the Container Registry.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id"`
-
-	// Reference to a Subnet in network to populate subnetId.
-	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
-
-	// Selector for a Subnet in network to populate subnetId.
-	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 // RegistrySpec defines the desired state of Registry

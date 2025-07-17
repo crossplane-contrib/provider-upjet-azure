@@ -2001,7 +2001,6 @@ spec:
                   location:
                     description: The Azure Region where the activity log alert rule
                       should exist. Changing this forces a new resource to be created.
-                      Defaults to global.
                     type: string
                   name:
                     description: The name of the activity log alert. Changing this
@@ -2533,7 +2532,6 @@ spec:
                   location:
                     description: The Azure Region where the activity log alert rule
                       should exist. Changing this forces a new resource to be created.
-                      Defaults to global.
                     type: string
                   name:
                     description: The name of the activity log alert. Changing this
@@ -2886,6 +2884,10 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.criteria)
                 || (has(self.initProvider) && has(self.initProvider.criteria))'
+            - message: spec.forProvider.location is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || (has(self.initProvider) && has(self.initProvider.location))'
             - message: spec.forProvider.name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
@@ -3085,7 +3087,6 @@ spec:
                   location:
                     description: The Azure Region where the activity log alert rule
                       should exist. Changing this forces a new resource to be created.
-                      Defaults to global.
                     type: string
                   name:
                     description: The name of the activity log alert. Changing this

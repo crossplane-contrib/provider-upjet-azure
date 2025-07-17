@@ -941,30 +941,33 @@ spec:
                               items:
                                 type: string
                               type: array
+                              x-kubernetes-list-type: set
                             name:
                               description: The name of service to delegate to. Possible
-                                values are GitHub.Network/networkSettings, Microsoft.ApiManagement/service,
-                                Microsoft.Apollo/npu, Microsoft.App/environments,
-                                Microsoft.App/testClients, Microsoft.AVS/PrivateClouds,
-                                Microsoft.AzureCosmosDB/clusters, Microsoft.BareMetal/AzureHostedService,
-                                Microsoft.BareMetal/AzureHPC, Microsoft.BareMetal/AzurePaymentHSM,
-                                Microsoft.BareMetal/AzureVMware, Microsoft.BareMetal/CrayServers,
-                                Microsoft.BareMetal/MonitoringServers, Microsoft.Batch/batchAccounts,
-                                Microsoft.CloudTest/hostedpools, Microsoft.CloudTest/images,
-                                Microsoft.CloudTest/pools, Microsoft.Codespaces/plans,
-                                Microsoft.ContainerInstance/containerGroups, Microsoft.ContainerService/managedClusters,
-                                Microsoft.ContainerService/TestClients, Microsoft.Databricks/workspaces,
-                                Microsoft.DBforMySQL/flexibleServers, Microsoft.DBforMySQL/servers,
-                                Microsoft.DBforMySQL/serversv2, Microsoft.DBforPostgreSQL/flexibleServers,
-                                Microsoft.DBforPostgreSQL/serversv2, Microsoft.DBforPostgreSQL/singleServers,
-                                Microsoft.DelegatedNetwork/controller, Microsoft.DevCenter/networkConnection,
+                                values are GitHub.Network/networkSettings, Informatica.DataManagement/organizations,
+                                Microsoft.ApiManagement/service, Microsoft.Apollo/npu,
+                                Microsoft.App/environments, Microsoft.App/testClients,
+                                Microsoft.AVS/PrivateClouds, Microsoft.AzureCosmosDB/clusters,
+                                Microsoft.BareMetal/AzureHostedService, Microsoft.BareMetal/AzureHPC,
+                                Microsoft.BareMetal/AzurePaymentHSM, Microsoft.BareMetal/AzureVMware,
+                                Microsoft.BareMetal/CrayServers, Microsoft.BareMetal/MonitoringServers,
+                                Microsoft.Batch/batchAccounts, Microsoft.CloudTest/hostedpools,
+                                Microsoft.CloudTest/images, Microsoft.CloudTest/pools,
+                                Microsoft.Codespaces/plans, Microsoft.ContainerInstance/containerGroups,
+                                Microsoft.ContainerService/managedClusters, Microsoft.ContainerService/TestClients,
+                                Microsoft.Databricks/workspaces, Microsoft.DBforMySQL/flexibleServers,
+                                Microsoft.DBforMySQL/servers, Microsoft.DBforMySQL/serversv2,
+                                Microsoft.DBforPostgreSQL/flexibleServers, Microsoft.DBforPostgreSQL/serversv2,
+                                Microsoft.DBforPostgreSQL/singleServers, Microsoft.DelegatedNetwork/controller,
+                                Microsoft.DevCenter/networkConnection, Microsoft.DevOpsInfrastructure/pools,
                                 Microsoft.DocumentDB/cassandraClusters, Microsoft.Fidalgo/networkSettings,
                                 Microsoft.HardwareSecurityModules/dedicatedHSMs, Microsoft.Kusto/clusters,
                                 Microsoft.LabServices/labplans, Microsoft.Logic/integrationServiceEnvironments,
                                 Microsoft.MachineLearningServices/workspaces, Microsoft.Netapp/volumes,
-                                Microsoft.Network/dnsResolvers, Microsoft.Network/managedResolvers,
-                                Microsoft.Network/fpgaNetworkInterfaces, Microsoft.Network/networkWatchers.,
-                                Microsoft.Network/virtualNetworkGateways, Microsoft.Orbital/orbitalGateways,
+                                Microsoft.Network/applicationGateways, Microsoft.Network/dnsResolvers,
+                                Microsoft.Network/managedResolvers, Microsoft.Network/fpgaNetworkInterfaces,
+                                Microsoft.Network/networkWatchers., Microsoft.Network/virtualNetworkGateways,
+                                Microsoft.Orbital/orbitalGateways, Microsoft.PowerAutomate/hostedRpa,
                                 Microsoft.PowerPlatform/enterprisePolicies, Microsoft.PowerPlatform/vnetaccesslinks,
                                 Microsoft.ServiceFabricMesh/networks, Microsoft.ServiceNetworking/trafficControllers,
                                 Microsoft.Singularity/accounts/networks, Microsoft.Singularity/accounts/npu,
@@ -979,29 +982,12 @@ spec:
                           type: object
                       type: object
                     type: array
-                  enforcePrivateLinkEndpointNetworkPolicies:
-                    description: '`enforcePrivateLinkEndpointNetworkPolicies` will
-                      be removed in favour of the property `privateEndpointNetworkPolicies`
-                      in version 2.0 of the provider. Conflicts with privateEndpointNetworkPoliciesEnabled,
-                      privateEndpointNetworkPolicies.'
-                    type: boolean
-                  enforcePrivateLinkServiceNetworkPolicies:
-                    description: '`enforcePrivateLinkServiceNetworkPolicies` will
-                      be removed in favour of the property `privateLinkServiceNetworkPoliciesEnabled`
-                      in version 2.0 of the provider. Conflicts with privateLinkServiceNetworkPoliciesEnabled.'
-                    type: boolean
                   privateEndpointNetworkPolicies:
                     description: Enable or Disable network policies for the private
                       endpoint on the subnet. Possible values are Disabled, Enabled,
                       NetworkSecurityGroupEnabled and RouteTableEnabled. Defaults
                       to Disabled.
                     type: string
-                  privateEndpointNetworkPoliciesEnabled:
-                    description: '`privateEndpointNetworkPoliciesEnabled` will be
-                      removed in favour of the property `privateEndpointNetworkPolicies`
-                      in version 2.0 of the provider. Conflicts with enforcePrivateLinkEndpointNetworkPolicies,
-                      privateEndpointNetworkPolicies.'
-                    type: boolean
                   privateLinkServiceNetworkPoliciesEnabled:
                     description: Enable or Disable network policies for the private
                       link service on the subnet. Defaults to true.
@@ -1230,30 +1216,33 @@ spec:
                               items:
                                 type: string
                               type: array
+                              x-kubernetes-list-type: set
                             name:
                               description: The name of service to delegate to. Possible
-                                values are GitHub.Network/networkSettings, Microsoft.ApiManagement/service,
-                                Microsoft.Apollo/npu, Microsoft.App/environments,
-                                Microsoft.App/testClients, Microsoft.AVS/PrivateClouds,
-                                Microsoft.AzureCosmosDB/clusters, Microsoft.BareMetal/AzureHostedService,
-                                Microsoft.BareMetal/AzureHPC, Microsoft.BareMetal/AzurePaymentHSM,
-                                Microsoft.BareMetal/AzureVMware, Microsoft.BareMetal/CrayServers,
-                                Microsoft.BareMetal/MonitoringServers, Microsoft.Batch/batchAccounts,
-                                Microsoft.CloudTest/hostedpools, Microsoft.CloudTest/images,
-                                Microsoft.CloudTest/pools, Microsoft.Codespaces/plans,
-                                Microsoft.ContainerInstance/containerGroups, Microsoft.ContainerService/managedClusters,
-                                Microsoft.ContainerService/TestClients, Microsoft.Databricks/workspaces,
-                                Microsoft.DBforMySQL/flexibleServers, Microsoft.DBforMySQL/servers,
-                                Microsoft.DBforMySQL/serversv2, Microsoft.DBforPostgreSQL/flexibleServers,
-                                Microsoft.DBforPostgreSQL/serversv2, Microsoft.DBforPostgreSQL/singleServers,
-                                Microsoft.DelegatedNetwork/controller, Microsoft.DevCenter/networkConnection,
+                                values are GitHub.Network/networkSettings, Informatica.DataManagement/organizations,
+                                Microsoft.ApiManagement/service, Microsoft.Apollo/npu,
+                                Microsoft.App/environments, Microsoft.App/testClients,
+                                Microsoft.AVS/PrivateClouds, Microsoft.AzureCosmosDB/clusters,
+                                Microsoft.BareMetal/AzureHostedService, Microsoft.BareMetal/AzureHPC,
+                                Microsoft.BareMetal/AzurePaymentHSM, Microsoft.BareMetal/AzureVMware,
+                                Microsoft.BareMetal/CrayServers, Microsoft.BareMetal/MonitoringServers,
+                                Microsoft.Batch/batchAccounts, Microsoft.CloudTest/hostedpools,
+                                Microsoft.CloudTest/images, Microsoft.CloudTest/pools,
+                                Microsoft.Codespaces/plans, Microsoft.ContainerInstance/containerGroups,
+                                Microsoft.ContainerService/managedClusters, Microsoft.ContainerService/TestClients,
+                                Microsoft.Databricks/workspaces, Microsoft.DBforMySQL/flexibleServers,
+                                Microsoft.DBforMySQL/servers, Microsoft.DBforMySQL/serversv2,
+                                Microsoft.DBforPostgreSQL/flexibleServers, Microsoft.DBforPostgreSQL/serversv2,
+                                Microsoft.DBforPostgreSQL/singleServers, Microsoft.DelegatedNetwork/controller,
+                                Microsoft.DevCenter/networkConnection, Microsoft.DevOpsInfrastructure/pools,
                                 Microsoft.DocumentDB/cassandraClusters, Microsoft.Fidalgo/networkSettings,
                                 Microsoft.HardwareSecurityModules/dedicatedHSMs, Microsoft.Kusto/clusters,
                                 Microsoft.LabServices/labplans, Microsoft.Logic/integrationServiceEnvironments,
                                 Microsoft.MachineLearningServices/workspaces, Microsoft.Netapp/volumes,
-                                Microsoft.Network/dnsResolvers, Microsoft.Network/managedResolvers,
-                                Microsoft.Network/fpgaNetworkInterfaces, Microsoft.Network/networkWatchers.,
-                                Microsoft.Network/virtualNetworkGateways, Microsoft.Orbital/orbitalGateways,
+                                Microsoft.Network/applicationGateways, Microsoft.Network/dnsResolvers,
+                                Microsoft.Network/managedResolvers, Microsoft.Network/fpgaNetworkInterfaces,
+                                Microsoft.Network/networkWatchers., Microsoft.Network/virtualNetworkGateways,
+                                Microsoft.Orbital/orbitalGateways, Microsoft.PowerAutomate/hostedRpa,
                                 Microsoft.PowerPlatform/enterprisePolicies, Microsoft.PowerPlatform/vnetaccesslinks,
                                 Microsoft.ServiceFabricMesh/networks, Microsoft.ServiceNetworking/trafficControllers,
                                 Microsoft.Singularity/accounts/networks, Microsoft.Singularity/accounts/npu,
@@ -1268,29 +1257,12 @@ spec:
                           type: object
                       type: object
                     type: array
-                  enforcePrivateLinkEndpointNetworkPolicies:
-                    description: '`enforcePrivateLinkEndpointNetworkPolicies` will
-                      be removed in favour of the property `privateEndpointNetworkPolicies`
-                      in version 2.0 of the provider. Conflicts with privateEndpointNetworkPoliciesEnabled,
-                      privateEndpointNetworkPolicies.'
-                    type: boolean
-                  enforcePrivateLinkServiceNetworkPolicies:
-                    description: '`enforcePrivateLinkServiceNetworkPolicies` will
-                      be removed in favour of the property `privateLinkServiceNetworkPoliciesEnabled`
-                      in version 2.0 of the provider. Conflicts with privateLinkServiceNetworkPoliciesEnabled.'
-                    type: boolean
                   privateEndpointNetworkPolicies:
                     description: Enable or Disable network policies for the private
                       endpoint on the subnet. Possible values are Disabled, Enabled,
                       NetworkSecurityGroupEnabled and RouteTableEnabled. Defaults
                       to Disabled.
                     type: string
-                  privateEndpointNetworkPoliciesEnabled:
-                    description: '`privateEndpointNetworkPoliciesEnabled` will be
-                      removed in favour of the property `privateEndpointNetworkPolicies`
-                      in version 2.0 of the provider. Conflicts with enforcePrivateLinkEndpointNetworkPolicies,
-                      privateEndpointNetworkPolicies.'
-                    type: boolean
                   privateLinkServiceNetworkPoliciesEnabled:
                     description: Enable or Disable network policies for the private
                       link service on the subnet. Defaults to true.
@@ -1521,30 +1493,33 @@ spec:
                               items:
                                 type: string
                               type: array
+                              x-kubernetes-list-type: set
                             name:
                               description: The name of service to delegate to. Possible
-                                values are GitHub.Network/networkSettings, Microsoft.ApiManagement/service,
-                                Microsoft.Apollo/npu, Microsoft.App/environments,
-                                Microsoft.App/testClients, Microsoft.AVS/PrivateClouds,
-                                Microsoft.AzureCosmosDB/clusters, Microsoft.BareMetal/AzureHostedService,
-                                Microsoft.BareMetal/AzureHPC, Microsoft.BareMetal/AzurePaymentHSM,
-                                Microsoft.BareMetal/AzureVMware, Microsoft.BareMetal/CrayServers,
-                                Microsoft.BareMetal/MonitoringServers, Microsoft.Batch/batchAccounts,
-                                Microsoft.CloudTest/hostedpools, Microsoft.CloudTest/images,
-                                Microsoft.CloudTest/pools, Microsoft.Codespaces/plans,
-                                Microsoft.ContainerInstance/containerGroups, Microsoft.ContainerService/managedClusters,
-                                Microsoft.ContainerService/TestClients, Microsoft.Databricks/workspaces,
-                                Microsoft.DBforMySQL/flexibleServers, Microsoft.DBforMySQL/servers,
-                                Microsoft.DBforMySQL/serversv2, Microsoft.DBforPostgreSQL/flexibleServers,
-                                Microsoft.DBforPostgreSQL/serversv2, Microsoft.DBforPostgreSQL/singleServers,
-                                Microsoft.DelegatedNetwork/controller, Microsoft.DevCenter/networkConnection,
+                                values are GitHub.Network/networkSettings, Informatica.DataManagement/organizations,
+                                Microsoft.ApiManagement/service, Microsoft.Apollo/npu,
+                                Microsoft.App/environments, Microsoft.App/testClients,
+                                Microsoft.AVS/PrivateClouds, Microsoft.AzureCosmosDB/clusters,
+                                Microsoft.BareMetal/AzureHostedService, Microsoft.BareMetal/AzureHPC,
+                                Microsoft.BareMetal/AzurePaymentHSM, Microsoft.BareMetal/AzureVMware,
+                                Microsoft.BareMetal/CrayServers, Microsoft.BareMetal/MonitoringServers,
+                                Microsoft.Batch/batchAccounts, Microsoft.CloudTest/hostedpools,
+                                Microsoft.CloudTest/images, Microsoft.CloudTest/pools,
+                                Microsoft.Codespaces/plans, Microsoft.ContainerInstance/containerGroups,
+                                Microsoft.ContainerService/managedClusters, Microsoft.ContainerService/TestClients,
+                                Microsoft.Databricks/workspaces, Microsoft.DBforMySQL/flexibleServers,
+                                Microsoft.DBforMySQL/servers, Microsoft.DBforMySQL/serversv2,
+                                Microsoft.DBforPostgreSQL/flexibleServers, Microsoft.DBforPostgreSQL/serversv2,
+                                Microsoft.DBforPostgreSQL/singleServers, Microsoft.DelegatedNetwork/controller,
+                                Microsoft.DevCenter/networkConnection, Microsoft.DevOpsInfrastructure/pools,
                                 Microsoft.DocumentDB/cassandraClusters, Microsoft.Fidalgo/networkSettings,
                                 Microsoft.HardwareSecurityModules/dedicatedHSMs, Microsoft.Kusto/clusters,
                                 Microsoft.LabServices/labplans, Microsoft.Logic/integrationServiceEnvironments,
                                 Microsoft.MachineLearningServices/workspaces, Microsoft.Netapp/volumes,
-                                Microsoft.Network/dnsResolvers, Microsoft.Network/managedResolvers,
-                                Microsoft.Network/fpgaNetworkInterfaces, Microsoft.Network/networkWatchers.,
-                                Microsoft.Network/virtualNetworkGateways, Microsoft.Orbital/orbitalGateways,
+                                Microsoft.Network/applicationGateways, Microsoft.Network/dnsResolvers,
+                                Microsoft.Network/managedResolvers, Microsoft.Network/fpgaNetworkInterfaces,
+                                Microsoft.Network/networkWatchers., Microsoft.Network/virtualNetworkGateways,
+                                Microsoft.Orbital/orbitalGateways, Microsoft.PowerAutomate/hostedRpa,
                                 Microsoft.PowerPlatform/enterprisePolicies, Microsoft.PowerPlatform/vnetaccesslinks,
                                 Microsoft.ServiceFabricMesh/networks, Microsoft.ServiceNetworking/trafficControllers,
                                 Microsoft.Singularity/accounts/networks, Microsoft.Singularity/accounts/npu,
@@ -1559,17 +1534,6 @@ spec:
                           type: object
                       type: object
                     type: array
-                  enforcePrivateLinkEndpointNetworkPolicies:
-                    description: '`enforcePrivateLinkEndpointNetworkPolicies` will
-                      be removed in favour of the property `privateEndpointNetworkPolicies`
-                      in version 2.0 of the provider. Conflicts with privateEndpointNetworkPoliciesEnabled,
-                      privateEndpointNetworkPolicies.'
-                    type: boolean
-                  enforcePrivateLinkServiceNetworkPolicies:
-                    description: '`enforcePrivateLinkServiceNetworkPolicies` will
-                      be removed in favour of the property `privateLinkServiceNetworkPoliciesEnabled`
-                      in version 2.0 of the provider. Conflicts with privateLinkServiceNetworkPoliciesEnabled.'
-                    type: boolean
                   id:
                     description: The subnet ID.
                     type: string
@@ -1579,12 +1543,6 @@ spec:
                       NetworkSecurityGroupEnabled and RouteTableEnabled. Defaults
                       to Disabled.
                     type: string
-                  privateEndpointNetworkPoliciesEnabled:
-                    description: '`privateEndpointNetworkPoliciesEnabled` will be
-                      removed in favour of the property `privateEndpointNetworkPolicies`
-                      in version 2.0 of the provider. Conflicts with enforcePrivateLinkEndpointNetworkPolicies,
-                      privateEndpointNetworkPolicies.'
-                    type: boolean
                   privateLinkServiceNetworkPoliciesEnabled:
                     description: Enable or Disable network policies for the private
                       link service on the subnet. Defaults to true.

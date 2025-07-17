@@ -80,6 +80,9 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  destinationIpAddress:
+                    description: The destination IP address of the Private Link Service.
+                    type: string
                   enableProxyProtocol:
                     description: Should the Private Link Service support the Proxy
                       Protocol?
@@ -323,6 +326,9 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  destinationIpAddress:
+                    description: The destination IP address of the Private Link Service.
+                    type: string
                   enableProxyProtocol:
                     description: Should the Private Link Service support the Proxy
                       Protocol?
@@ -633,11 +639,6 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.loadBalancerFrontendIpConfigurationIds is
-                a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.loadBalancerFrontendIpConfigurationIds)
-                || (has(self.initProvider) && has(self.initProvider.loadBalancerFrontendIpConfigurationIds))'
             - message: spec.forProvider.location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
@@ -663,6 +664,9 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  destinationIpAddress:
+                    description: The destination IP address of the Private Link Service.
+                    type: string
                   enableProxyProtocol:
                     description: Should the Private Link Service support the Proxy
                       Protocol?

@@ -745,6 +745,11 @@ spec:
                           description: Specifies the caching mode as ReadWrite, ReadOnly,
                             or None. Defaults to None.
                           type: string
+                        diskEncryptionSetId:
+                          description: The ID of the Disk Encryption Set which should
+                            be used to encrypt this disk. Changing this forces a new
+                            resource to be created.
+                          type: string
                         lun:
                           description: Specifies the logical unit number of the data
                             disk.
@@ -758,6 +763,11 @@ spec:
                           description: Specifies the size of the image to be created.
                             The target size can't be smaller than the source size.
                           type: number
+                        storageType:
+                          description: |-
+                            The type of Storage Disk to use. Possible values are Premium_LRS, PremiumV2_LRS, Premium_ZRS, Standard_LRS, StandardSSD_LRS, StandardSSD_ZRS and UltraSSD_LRS. Changing this forces a new resource to be created.
+                            The type of storage disk
+                          type: string
                       type: object
                     type: array
                   hyperVGeneration:
@@ -784,7 +794,7 @@ spec:
                         type: string
                       diskEncryptionSetId:
                         description: The ID of the Disk Encryption Set which should
-                          be used to encrypt this image. Changing this forces a new
+                          be used to encrypt this disk. Changing this forces a new
                           resource to be created.
                         type: string
                       managedDiskId:
@@ -805,6 +815,11 @@ spec:
                         description: Specifies the size of the image to be created.
                           Changing this forces a new resource to be created.
                         type: number
+                      storageType:
+                        description: |-
+                          The type of Storage Disk to use. Possible values are Premium_LRS, PremiumV2_LRS, Premium_ZRS, Standard_LRS, StandardSSD_LRS, StandardSSD_ZRS and UltraSSD_LRS. Changing this forces a new resource to be created.
+                          The type of storage disk
+                        type: string
                     type: object
                   resourceGroupName:
                     description: The name of the resource group in which to create
@@ -925,6 +940,11 @@ spec:
                           description: Specifies the caching mode as ReadWrite, ReadOnly,
                             or None. Defaults to None.
                           type: string
+                        diskEncryptionSetId:
+                          description: The ID of the Disk Encryption Set which should
+                            be used to encrypt this disk. Changing this forces a new
+                            resource to be created.
+                          type: string
                         lun:
                           description: Specifies the logical unit number of the data
                             disk.
@@ -938,6 +958,11 @@ spec:
                           description: Specifies the size of the image to be created.
                             The target size can't be smaller than the source size.
                           type: number
+                        storageType:
+                          description: |-
+                            The type of Storage Disk to use. Possible values are Premium_LRS, PremiumV2_LRS, Premium_ZRS, Standard_LRS, StandardSSD_LRS, StandardSSD_ZRS and UltraSSD_LRS. Changing this forces a new resource to be created.
+                            The type of storage disk
+                          type: string
                       type: object
                     type: array
                   hyperVGeneration:
@@ -964,7 +989,7 @@ spec:
                         type: string
                       diskEncryptionSetId:
                         description: The ID of the Disk Encryption Set which should
-                          be used to encrypt this image. Changing this forces a new
+                          be used to encrypt this disk. Changing this forces a new
                           resource to be created.
                         type: string
                       managedDiskId:
@@ -985,6 +1010,11 @@ spec:
                         description: Specifies the size of the image to be created.
                           Changing this forces a new resource to be created.
                         type: number
+                      storageType:
+                        description: |-
+                          The type of Storage Disk to use. Possible values are Premium_LRS, PremiumV2_LRS, Premium_ZRS, Standard_LRS, StandardSSD_LRS, StandardSSD_ZRS and UltraSSD_LRS. Changing this forces a new resource to be created.
+                          The type of storage disk
+                        type: string
                     type: object
                   sourceVirtualMachineId:
                     description: The Virtual Machine ID from which to create the image.
@@ -1189,6 +1219,11 @@ spec:
                           description: Specifies the caching mode as ReadWrite, ReadOnly,
                             or None. Defaults to None.
                           type: string
+                        diskEncryptionSetId:
+                          description: The ID of the Disk Encryption Set which should
+                            be used to encrypt this disk. Changing this forces a new
+                            resource to be created.
+                          type: string
                         lun:
                           description: Specifies the logical unit number of the data
                             disk.
@@ -1202,6 +1237,11 @@ spec:
                           description: Specifies the size of the image to be created.
                             The target size can't be smaller than the source size.
                           type: number
+                        storageType:
+                          description: |-
+                            The type of Storage Disk to use. Possible values are Premium_LRS, PremiumV2_LRS, Premium_ZRS, Standard_LRS, StandardSSD_LRS, StandardSSD_ZRS and UltraSSD_LRS. Changing this forces a new resource to be created.
+                            The type of storage disk
+                          type: string
                       type: object
                     type: array
                   hyperVGeneration:
@@ -1231,7 +1271,7 @@ spec:
                         type: string
                       diskEncryptionSetId:
                         description: The ID of the Disk Encryption Set which should
-                          be used to encrypt this image. Changing this forces a new
+                          be used to encrypt this disk. Changing this forces a new
                           resource to be created.
                         type: string
                       managedDiskId:
@@ -1252,6 +1292,11 @@ spec:
                         description: Specifies the size of the image to be created.
                           Changing this forces a new resource to be created.
                         type: number
+                      storageType:
+                        description: |-
+                          The type of Storage Disk to use. Possible values are Premium_LRS, PremiumV2_LRS, Premium_ZRS, Standard_LRS, StandardSSD_LRS, StandardSSD_ZRS and UltraSSD_LRS. Changing this forces a new resource to be created.
+                          The type of storage disk
+                        type: string
                     type: object
                   resourceGroupName:
                     description: The name of the resource group in which to create

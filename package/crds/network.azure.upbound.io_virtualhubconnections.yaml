@@ -1196,6 +1196,10 @@ spec:
                           are Contains and Equal. Defaults to Contains. Changing this
                           forces a new resource to be created.
                         type: string
+                      staticVnetPropagateStaticRoutesEnabled:
+                        description: Whether the static routes should be propagated
+                          to the Virtual Hub. Defaults to true.
+                        type: boolean
                       staticVnetRoute:
                         description: A static_vnet_route block as defined below.
                         items:
@@ -1513,6 +1517,10 @@ spec:
                           are Contains and Equal. Defaults to Contains. Changing this
                           forces a new resource to be created.
                         type: string
+                      staticVnetPropagateStaticRoutesEnabled:
+                        description: Whether the static routes should be propagated
+                          to the Virtual Hub. Defaults to true.
+                        type: boolean
                       staticVnetRoute:
                         description: A static_vnet_route block as defined below.
                         items:
@@ -1760,6 +1768,10 @@ spec:
                           are Contains and Equal. Defaults to Contains. Changing this
                           forces a new resource to be created.
                         type: string
+                      staticVnetPropagateStaticRoutesEnabled:
+                        description: Whether the static routes should be propagated
+                          to the Virtual Hub. Defaults to true.
+                        type: boolean
                       staticVnetRoute:
                         description: A static_vnet_route block as defined below.
                         items:

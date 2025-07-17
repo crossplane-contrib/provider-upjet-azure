@@ -125,5 +125,5 @@ func (tr *IntegrationRuntimeAzure) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *IntegrationRuntimeAzure) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }

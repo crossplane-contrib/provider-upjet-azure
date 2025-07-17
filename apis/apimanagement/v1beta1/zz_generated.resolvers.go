@@ -837,18 +837,18 @@ func (mg *CustomDomain) ResolveReferences(ctx context.Context, c client.Reader) 
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DeveloperPortal[i3].KeyVaultID),
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DeveloperPortal[i3].KeyVaultCertificateID),
 				Extract:      resource.ExtractParamPath("versionless_secret_id", true),
-				Reference:    mg.Spec.ForProvider.DeveloperPortal[i3].KeyVaultIDRef,
-				Selector:     mg.Spec.ForProvider.DeveloperPortal[i3].KeyVaultIDSelector,
+				Reference:    mg.Spec.ForProvider.DeveloperPortal[i3].KeyVaultCertificateIDRef,
+				Selector:     mg.Spec.ForProvider.DeveloperPortal[i3].KeyVaultCertificateIDSelector,
 				To:           reference.To{List: l, Managed: m},
 			})
 		}
 		if err != nil {
-			return errors.Wrap(err, "mg.Spec.ForProvider.DeveloperPortal[i3].KeyVaultID")
+			return errors.Wrap(err, "mg.Spec.ForProvider.DeveloperPortal[i3].KeyVaultCertificateID")
 		}
-		mg.Spec.ForProvider.DeveloperPortal[i3].KeyVaultID = reference.ToPtrValue(rsp.ResolvedValue)
-		mg.Spec.ForProvider.DeveloperPortal[i3].KeyVaultIDRef = rsp.ResolvedReference
+		mg.Spec.ForProvider.DeveloperPortal[i3].KeyVaultCertificateID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.DeveloperPortal[i3].KeyVaultCertificateIDRef = rsp.ResolvedReference
 
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.Gateway); i3++ {
@@ -858,18 +858,18 @@ func (mg *CustomDomain) ResolveReferences(ctx context.Context, c client.Reader) 
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Gateway[i3].KeyVaultID),
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Gateway[i3].KeyVaultCertificateID),
 				Extract:      resource.ExtractParamPath("versionless_secret_id", true),
-				Reference:    mg.Spec.ForProvider.Gateway[i3].KeyVaultIDRef,
-				Selector:     mg.Spec.ForProvider.Gateway[i3].KeyVaultIDSelector,
+				Reference:    mg.Spec.ForProvider.Gateway[i3].KeyVaultCertificateIDRef,
+				Selector:     mg.Spec.ForProvider.Gateway[i3].KeyVaultCertificateIDSelector,
 				To:           reference.To{List: l, Managed: m},
 			})
 		}
 		if err != nil {
-			return errors.Wrap(err, "mg.Spec.ForProvider.Gateway[i3].KeyVaultID")
+			return errors.Wrap(err, "mg.Spec.ForProvider.Gateway[i3].KeyVaultCertificateID")
 		}
-		mg.Spec.ForProvider.Gateway[i3].KeyVaultID = reference.ToPtrValue(rsp.ResolvedValue)
-		mg.Spec.ForProvider.Gateway[i3].KeyVaultIDRef = rsp.ResolvedReference
+		mg.Spec.ForProvider.Gateway[i3].KeyVaultCertificateID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Gateway[i3].KeyVaultCertificateIDRef = rsp.ResolvedReference
 
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.DeveloperPortal); i3++ {
@@ -879,18 +879,18 @@ func (mg *CustomDomain) ResolveReferences(ctx context.Context, c client.Reader) 
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DeveloperPortal[i3].KeyVaultID),
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DeveloperPortal[i3].KeyVaultCertificateID),
 				Extract:      resource.ExtractParamPath("versionless_secret_id", true),
-				Reference:    mg.Spec.InitProvider.DeveloperPortal[i3].KeyVaultIDRef,
-				Selector:     mg.Spec.InitProvider.DeveloperPortal[i3].KeyVaultIDSelector,
+				Reference:    mg.Spec.InitProvider.DeveloperPortal[i3].KeyVaultCertificateIDRef,
+				Selector:     mg.Spec.InitProvider.DeveloperPortal[i3].KeyVaultCertificateIDSelector,
 				To:           reference.To{List: l, Managed: m},
 			})
 		}
 		if err != nil {
-			return errors.Wrap(err, "mg.Spec.InitProvider.DeveloperPortal[i3].KeyVaultID")
+			return errors.Wrap(err, "mg.Spec.InitProvider.DeveloperPortal[i3].KeyVaultCertificateID")
 		}
-		mg.Spec.InitProvider.DeveloperPortal[i3].KeyVaultID = reference.ToPtrValue(rsp.ResolvedValue)
-		mg.Spec.InitProvider.DeveloperPortal[i3].KeyVaultIDRef = rsp.ResolvedReference
+		mg.Spec.InitProvider.DeveloperPortal[i3].KeyVaultCertificateID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.DeveloperPortal[i3].KeyVaultCertificateIDRef = rsp.ResolvedReference
 
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.Gateway); i3++ {
@@ -900,18 +900,18 @@ func (mg *CustomDomain) ResolveReferences(ctx context.Context, c client.Reader) 
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Gateway[i3].KeyVaultID),
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Gateway[i3].KeyVaultCertificateID),
 				Extract:      resource.ExtractParamPath("versionless_secret_id", true),
-				Reference:    mg.Spec.InitProvider.Gateway[i3].KeyVaultIDRef,
-				Selector:     mg.Spec.InitProvider.Gateway[i3].KeyVaultIDSelector,
+				Reference:    mg.Spec.InitProvider.Gateway[i3].KeyVaultCertificateIDRef,
+				Selector:     mg.Spec.InitProvider.Gateway[i3].KeyVaultCertificateIDSelector,
 				To:           reference.To{List: l, Managed: m},
 			})
 		}
 		if err != nil {
-			return errors.Wrap(err, "mg.Spec.InitProvider.Gateway[i3].KeyVaultID")
+			return errors.Wrap(err, "mg.Spec.InitProvider.Gateway[i3].KeyVaultCertificateID")
 		}
-		mg.Spec.InitProvider.Gateway[i3].KeyVaultID = reference.ToPtrValue(rsp.ResolvedValue)
-		mg.Spec.InitProvider.Gateway[i3].KeyVaultIDRef = rsp.ResolvedReference
+		mg.Spec.InitProvider.Gateway[i3].KeyVaultCertificateID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Gateway[i3].KeyVaultCertificateIDRef = rsp.ResolvedReference
 
 	}
 

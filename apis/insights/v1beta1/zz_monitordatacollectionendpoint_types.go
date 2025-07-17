@@ -55,6 +55,9 @@ type MonitorDataCollectionEndpointObservation struct {
 	// The endpoint used for ingesting logs, e.g., https://mydce-abcd.eastus-1.ingest.monitor.azure.com.
 	LogsIngestionEndpoint *string `json:"logsIngestionEndpoint,omitempty" tf:"logs_ingestion_endpoint,omitempty"`
 
+	// The endpoint used for ingesting metrics, e.g., https://mydce-abcd.eastus-1.metrics.ingest.monitor.azure.com.
+	MetricsIngestionEndpoint *string `json:"metricsIngestionEndpoint,omitempty" tf:"metrics_ingestion_endpoint,omitempty"`
+
 	// Whether network access from public internet to the Data Collection Endpoint are allowed. Possible values are true and false. Default to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 

@@ -225,56 +225,6 @@ func (mg *SecurityCenterAssessment) ResolveReferences(ctx context.Context, c cli
 	return nil
 }
 
-// ResolveReferences of this SecurityCenterServerVulnerabilityAssessment.
-func (mg *SecurityCenterServerVulnerabilityAssessment) ResolveReferences(ctx context.Context, c client.Reader) error {
-	var m xpresource.Managed
-	var l xpresource.ManagedList
-	r := reference.NewAPIResolver(c, mg)
-
-	var rsp reference.ResolutionResponse
-	var err error
-	{
-		m, l, err = apisresolver.GetManagedResource("compute.azure.upbound.io", "v1beta2", "LinuxVirtualMachine", "LinuxVirtualMachineList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VirtualMachineID),
-			Extract:      resource.ExtractResourceID(),
-			Reference:    mg.Spec.ForProvider.VirtualMachineIDRef,
-			Selector:     mg.Spec.ForProvider.VirtualMachineIDSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.VirtualMachineID")
-	}
-	mg.Spec.ForProvider.VirtualMachineID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.VirtualMachineIDRef = rsp.ResolvedReference
-	{
-		m, l, err = apisresolver.GetManagedResource("compute.azure.upbound.io", "v1beta2", "LinuxVirtualMachine", "LinuxVirtualMachineList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VirtualMachineID),
-			Extract:      resource.ExtractResourceID(),
-			Reference:    mg.Spec.InitProvider.VirtualMachineIDRef,
-			Selector:     mg.Spec.InitProvider.VirtualMachineIDSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.VirtualMachineID")
-	}
-	mg.Spec.InitProvider.VirtualMachineID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.VirtualMachineIDRef = rsp.ResolvedReference
-
-	return nil
-}
-
 // ResolveReferences of this SecurityCenterServerVulnerabilityAssessmentVirtualMachine.
 func (mg *SecurityCenterServerVulnerabilityAssessmentVirtualMachine) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed

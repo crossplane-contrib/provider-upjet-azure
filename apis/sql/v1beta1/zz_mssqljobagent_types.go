@@ -13,9 +13,41 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type MSSQLJobAgentIdentityInitParameters struct {
+
+	// Specifies a list of User Assigned Managed Identity IDs to assign to this Elastic Job Agent.
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Elastic Job Agent. Currently only UserAssigned is supported.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type MSSQLJobAgentIdentityObservation struct {
+
+	// Specifies a list of User Assigned Managed Identity IDs to assign to this Elastic Job Agent.
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Elastic Job Agent. Currently only UserAssigned is supported.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type MSSQLJobAgentIdentityParameters struct {
+
+	// Specifies a list of User Assigned Managed Identity IDs to assign to this Elastic Job Agent.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	IdentityIds []*string `json:"identityIds" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Elastic Job Agent. Currently only UserAssigned is supported.
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type" tf:"type,omitempty"`
+}
+
 type MSSQLJobAgentInitParameters struct {
 
-	// The ID of the database to store metadata for the Elastic Job Agent. Changing this forces a new Elastic Job Agent to be created.
+	// The ID of the database to store metadata for this Elastic Job Agent. Changing this forces a new Elastic Job Agent to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/sql/v1beta2.MSSQLDatabase
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	DatabaseID *string `json:"databaseId,omitempty" tf:"database_id,omitempty"`
@@ -28,39 +60,51 @@ type MSSQLJobAgentInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DatabaseIDSelector *v1.Selector `json:"databaseIdSelector,omitempty" tf:"-"`
 
-	// The Azure Region where the Elastic Job Agent should exist. Changing this forces a new Elastic Job Agent to be created.
+	// An identity block as defined below.
+	Identity *MSSQLJobAgentIdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// The Azure Region where this Elastic Job Agent should exist. Changing this forces a new Elastic Job Agent to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name which should be used for this Elastic Job Agent. Changing this forces a new Elastic Job Agent to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// A mapping of tags which should be assigned to the Database.
+	// The name of the SKU to use for this Elastic Job Agent. Possible values are JA100, JA200, JA400, and JA800. Defaults to JA100.
+	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
+
+	// A mapping of tags which should be assigned to this Elastic Job Agent.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type MSSQLJobAgentObservation struct {
 
-	// The ID of the database to store metadata for the Elastic Job Agent. Changing this forces a new Elastic Job Agent to be created.
+	// The ID of the database to store metadata for this Elastic Job Agent. Changing this forces a new Elastic Job Agent to be created.
 	DatabaseID *string `json:"databaseId,omitempty" tf:"database_id,omitempty"`
 
 	// The ID of the Elastic Job Agent.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The Azure Region where the Elastic Job Agent should exist. Changing this forces a new Elastic Job Agent to be created.
+	// An identity block as defined below.
+	Identity *MSSQLJobAgentIdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// The Azure Region where this Elastic Job Agent should exist. Changing this forces a new Elastic Job Agent to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name which should be used for this Elastic Job Agent. Changing this forces a new Elastic Job Agent to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// A mapping of tags which should be assigned to the Database.
+	// The name of the SKU to use for this Elastic Job Agent. Possible values are JA100, JA200, JA400, and JA800. Defaults to JA100.
+	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
+
+	// A mapping of tags which should be assigned to this Elastic Job Agent.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type MSSQLJobAgentParameters struct {
 
-	// The ID of the database to store metadata for the Elastic Job Agent. Changing this forces a new Elastic Job Agent to be created.
+	// The ID of the database to store metadata for this Elastic Job Agent. Changing this forces a new Elastic Job Agent to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/sql/v1beta2.MSSQLDatabase
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -74,7 +118,11 @@ type MSSQLJobAgentParameters struct {
 	// +kubebuilder:validation:Optional
 	DatabaseIDSelector *v1.Selector `json:"databaseIdSelector,omitempty" tf:"-"`
 
-	// The Azure Region where the Elastic Job Agent should exist. Changing this forces a new Elastic Job Agent to be created.
+	// An identity block as defined below.
+	// +kubebuilder:validation:Optional
+	Identity *MSSQLJobAgentIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// The Azure Region where this Elastic Job Agent should exist. Changing this forces a new Elastic Job Agent to be created.
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -82,7 +130,11 @@ type MSSQLJobAgentParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// A mapping of tags which should be assigned to the Database.
+	// The name of the SKU to use for this Elastic Job Agent. Possible values are JA100, JA200, JA400, and JA800. Defaults to JA100.
+	// +kubebuilder:validation:Optional
+	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
+
+	// A mapping of tags which should be assigned to this Elastic Job Agent.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`

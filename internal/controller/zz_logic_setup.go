@@ -20,7 +20,6 @@ import (
 	apptriggerhttprequest "github.com/upbound/provider-azure/internal/controller/logic/apptriggerhttprequest"
 	apptriggerrecurrence "github.com/upbound/provider-azure/internal/controller/logic/apptriggerrecurrence"
 	appworkflow "github.com/upbound/provider-azure/internal/controller/logic/appworkflow"
-	integrationserviceenvironment "github.com/upbound/provider-azure/internal/controller/logic/integrationserviceenvironment"
 )
 
 // Setup_logic creates all controllers with the supplied logger and adds them to
@@ -38,7 +37,6 @@ func Setup_logic(mgr ctrl.Manager, o controller.Options) error {
 		apptriggerhttprequest.Setup,
 		apptriggerrecurrence.Setup,
 		appworkflow.Setup,
-		integrationserviceenvironment.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

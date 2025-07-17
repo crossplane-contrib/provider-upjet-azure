@@ -18,11 +18,8 @@ type BudgetResourceGroupFilterInitParameters struct {
 	// One or more dimension blocks as defined below to filter the budget on.
 	Dimension []FilterDimensionInitParameters `json:"dimension,omitempty" tf:"dimension,omitempty"`
 
-	// A not block as defined below to filter the budget on. This is deprecated as the API no longer supports it and will be removed in version 4.0 of the provider.
-	Not *FilterNotInitParameters `json:"not,omitempty" tf:"not,omitempty"`
-
 	// One or more tag blocks as defined below to filter the budget on.
-	Tag []BudgetResourceGroupFilterTagInitParameters `json:"tag,omitempty" tf:"tag,omitempty"`
+	Tag []FilterTagInitParameters `json:"tag,omitempty" tf:"tag,omitempty"`
 }
 
 type BudgetResourceGroupFilterObservation struct {
@@ -30,11 +27,8 @@ type BudgetResourceGroupFilterObservation struct {
 	// One or more dimension blocks as defined below to filter the budget on.
 	Dimension []FilterDimensionObservation `json:"dimension,omitempty" tf:"dimension,omitempty"`
 
-	// A not block as defined below to filter the budget on. This is deprecated as the API no longer supports it and will be removed in version 4.0 of the provider.
-	Not *FilterNotObservation `json:"not,omitempty" tf:"not,omitempty"`
-
 	// One or more tag blocks as defined below to filter the budget on.
-	Tag []BudgetResourceGroupFilterTagObservation `json:"tag,omitempty" tf:"tag,omitempty"`
+	Tag []FilterTagObservation `json:"tag,omitempty" tf:"tag,omitempty"`
 }
 
 type BudgetResourceGroupFilterParameters struct {
@@ -43,52 +37,9 @@ type BudgetResourceGroupFilterParameters struct {
 	// +kubebuilder:validation:Optional
 	Dimension []FilterDimensionParameters `json:"dimension,omitempty" tf:"dimension,omitempty"`
 
-	// A not block as defined below to filter the budget on. This is deprecated as the API no longer supports it and will be removed in version 4.0 of the provider.
-	// +kubebuilder:validation:Optional
-	Not *FilterNotParameters `json:"not,omitempty" tf:"not,omitempty"`
-
 	// One or more tag blocks as defined below to filter the budget on.
 	// +kubebuilder:validation:Optional
-	Tag []BudgetResourceGroupFilterTagParameters `json:"tag,omitempty" tf:"tag,omitempty"`
-}
-
-type BudgetResourceGroupFilterTagInitParameters struct {
-
-	// The name of the tag to use for the filter.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// The operator to use for comparison. The allowed values are In. Defaults to In.
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
-
-	// Specifies a list of values for the tag.
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
-}
-
-type BudgetResourceGroupFilterTagObservation struct {
-
-	// The name of the tag to use for the filter.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// The operator to use for comparison. The allowed values are In. Defaults to In.
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
-
-	// Specifies a list of values for the tag.
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
-}
-
-type BudgetResourceGroupFilterTagParameters struct {
-
-	// The name of the tag to use for the filter.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name" tf:"name,omitempty"`
-
-	// The operator to use for comparison. The allowed values are In. Defaults to In.
-	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
-
-	// Specifies a list of values for the tag.
-	// +kubebuilder:validation:Optional
-	Values []*string `json:"values" tf:"values,omitempty"`
+	Tag []FilterTagParameters `json:"tag,omitempty" tf:"tag,omitempty"`
 }
 
 type BudgetResourceGroupInitParameters struct {
@@ -158,7 +109,7 @@ type BudgetResourceGroupNotificationInitParameters struct {
 	// Threshold value associated with a notification. Notification is sent when the cost exceeded the threshold. It is always percent and has to be between 0 and 1000.
 	Threshold *float64 `json:"threshold,omitempty" tf:"threshold,omitempty"`
 
-	// The type of threshold for the notification. This determines whether the notification is triggered by forecasted costs or actual costs. The allowed values are Actual and Forecasted. Default is Actual. Changing this forces a new resource to be created.
+	// The type of threshold for the notification. This determines whether the notification is triggered by forecasted costs or actual costs. The allowed values are Actual and Forecasted. Default is Actual.
 	ThresholdType *string `json:"thresholdType,omitempty" tf:"threshold_type,omitempty"`
 }
 
@@ -182,7 +133,7 @@ type BudgetResourceGroupNotificationObservation struct {
 	// Threshold value associated with a notification. Notification is sent when the cost exceeded the threshold. It is always percent and has to be between 0 and 1000.
 	Threshold *float64 `json:"threshold,omitempty" tf:"threshold,omitempty"`
 
-	// The type of threshold for the notification. This determines whether the notification is triggered by forecasted costs or actual costs. The allowed values are Actual and Forecasted. Default is Actual. Changing this forces a new resource to be created.
+	// The type of threshold for the notification. This determines whether the notification is triggered by forecasted costs or actual costs. The allowed values are Actual and Forecasted. Default is Actual.
 	ThresholdType *string `json:"thresholdType,omitempty" tf:"threshold_type,omitempty"`
 }
 
@@ -222,7 +173,7 @@ type BudgetResourceGroupNotificationParameters struct {
 	// +kubebuilder:validation:Optional
 	Threshold *float64 `json:"threshold" tf:"threshold,omitempty"`
 
-	// The type of threshold for the notification. This determines whether the notification is triggered by forecasted costs or actual costs. The allowed values are Actual and Forecasted. Default is Actual. Changing this forces a new resource to be created.
+	// The type of threshold for the notification. This determines whether the notification is triggered by forecasted costs or actual costs. The allowed values are Actual and Forecasted. Default is Actual.
 	// +kubebuilder:validation:Optional
 	ThresholdType *string `json:"thresholdType,omitempty" tf:"threshold_type,omitempty"`
 }
@@ -390,7 +341,7 @@ type FilterDimensionParameters struct {
 	ValuesSelector *v1.Selector `json:"valuesSelector,omitempty" tf:"-"`
 }
 
-type FilterNotDimensionInitParameters struct {
+type FilterTagInitParameters struct {
 
 	// The name of the tag to use for the filter.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -402,7 +353,7 @@ type FilterNotDimensionInitParameters struct {
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
-type FilterNotDimensionObservation struct {
+type FilterTagObservation struct {
 
 	// The name of the tag to use for the filter.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -414,75 +365,7 @@ type FilterNotDimensionObservation struct {
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
-type FilterNotDimensionParameters struct {
-
-	// The name of the tag to use for the filter.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name" tf:"name,omitempty"`
-
-	// The operator to use for comparison. The allowed values are In. Defaults to In.
-	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
-
-	// Specifies a list of values for the tag.
-	// +kubebuilder:validation:Optional
-	Values []*string `json:"values" tf:"values,omitempty"`
-}
-
-type FilterNotInitParameters struct {
-
-	// One dimension block as defined below to filter the budget on. Conflicts with tag.
-	Dimension *FilterNotDimensionInitParameters `json:"dimension,omitempty" tf:"dimension,omitempty"`
-
-	// One tag block as defined below to filter the budget on. Conflicts with dimension.
-	Tag *NotTagInitParameters `json:"tag,omitempty" tf:"tag,omitempty"`
-}
-
-type FilterNotObservation struct {
-
-	// One dimension block as defined below to filter the budget on. Conflicts with tag.
-	Dimension *FilterNotDimensionObservation `json:"dimension,omitempty" tf:"dimension,omitempty"`
-
-	// One tag block as defined below to filter the budget on. Conflicts with dimension.
-	Tag *NotTagObservation `json:"tag,omitempty" tf:"tag,omitempty"`
-}
-
-type FilterNotParameters struct {
-
-	// One dimension block as defined below to filter the budget on. Conflicts with tag.
-	// +kubebuilder:validation:Optional
-	Dimension *FilterNotDimensionParameters `json:"dimension,omitempty" tf:"dimension,omitempty"`
-
-	// One tag block as defined below to filter the budget on. Conflicts with dimension.
-	// +kubebuilder:validation:Optional
-	Tag *NotTagParameters `json:"tag,omitempty" tf:"tag,omitempty"`
-}
-
-type NotTagInitParameters struct {
-
-	// The name of the tag to use for the filter.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// The operator to use for comparison. The allowed values are In. Defaults to In.
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
-
-	// Specifies a list of values for the tag.
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
-}
-
-type NotTagObservation struct {
-
-	// The name of the tag to use for the filter.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// The operator to use for comparison. The allowed values are In. Defaults to In.
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
-
-	// Specifies a list of values for the tag.
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
-}
-
-type NotTagParameters struct {
+type FilterTagParameters struct {
 
 	// The name of the tag to use for the filter.
 	// +kubebuilder:validation:Optional

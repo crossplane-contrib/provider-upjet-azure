@@ -3320,7 +3320,8 @@ spec:
                         type: string
                       elasticInstanceMinimum:
                         description: The number of minimum instances for this function
-                          app. Only affects apps on the Premium plan.
+                          app. Only affects apps on the Premium plan. Possible values
+                          are between 1 and 20.
                         type: number
                       ftpsState:
                         description: 'State of FTP / FTPS service for this function
@@ -4315,7 +4316,8 @@ spec:
                         type: string
                       elasticInstanceMinimum:
                         description: The number of minimum instances for this function
-                          app. Only affects apps on the Premium plan.
+                          app. Only affects apps on the Premium plan. Possible values
+                          are between 1 and 20.
                         type: number
                       ftpsState:
                         description: 'State of FTP / FTPS service for this function
@@ -5246,7 +5248,8 @@ spec:
                         type: string
                       elasticInstanceMinimum:
                         description: The number of minimum instances for this function
-                          app. Only affects apps on the Premium plan.
+                          app. Only affects apps on the Premium plan. Possible values
+                          are between 1 and 20.
                         type: number
                       ftpsState:
                         description: 'State of FTP / FTPS service for this function

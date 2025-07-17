@@ -1019,8 +1019,8 @@ spec:
                       to route traffic either via the Microsoft network (default value,
                       Microsoft Network), or via the ISP network (public internet,
                       set to Internet). More context of the configuration can be found
-                      in the Microsoft Docs to create a VPN Gateway. Changing this
-                      forces a new resource to be created.
+                      in the Microsoft Docs to create a VPN Gateway. Defaults to Microsoft
+                      Network. Changing this forces a new resource to be created.
                     type: string
                   scaleUnit:
                     description: The Scale Unit for this VPN Gateway. Defaults to
@@ -1177,8 +1177,8 @@ spec:
                       to route traffic either via the Microsoft network (default value,
                       Microsoft Network), or via the ISP network (public internet,
                       set to Internet). More context of the configuration can be found
-                      in the Microsoft Docs to create a VPN Gateway. Changing this
-                      forces a new resource to be created.
+                      in the Microsoft Docs to create a VPN Gateway. Defaults to Microsoft
+                      Network. Changing this forces a new resource to be created.
                     type: string
                   scaleUnit:
                     description: The Scale Unit for this VPN Gateway. Defaults to
@@ -1530,6 +1530,22 @@ spec:
                   id:
                     description: The ID of the VPN Gateway.
                     type: string
+                  ipConfiguration:
+                    description: An ip_configuration block as defined below.
+                    items:
+                      properties:
+                        id:
+                          description: The identifier of the IP configuration for
+                            the VPN Gateway.
+                          type: string
+                        privateIpAddress:
+                          description: The private IP address of this IP configuration.
+                          type: string
+                        publicIpAddress:
+                          description: The public IP address of this IP configuration.
+                          type: string
+                      type: object
+                    type: array
                   location:
                     description: The Azure location where this VPN Gateway should
                       be created. Changing this forces a new resource to be created.
@@ -1545,8 +1561,8 @@ spec:
                       to route traffic either via the Microsoft network (default value,
                       Microsoft Network), or via the ISP network (public internet,
                       set to Internet). More context of the configuration can be found
-                      in the Microsoft Docs to create a VPN Gateway. Changing this
-                      forces a new resource to be created.
+                      in the Microsoft Docs to create a VPN Gateway. Defaults to Microsoft
+                      Network. Changing this forces a new resource to be created.
                     type: string
                   scaleUnit:
                     description: The Scale Unit for this VPN Gateway. Defaults to

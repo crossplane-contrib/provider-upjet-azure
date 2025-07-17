@@ -138,8 +138,6 @@ type NetworkAclsParameters struct {
 }
 
 type VaultInitParameters struct {
-
-	// One or more contact block as defined below.
 	Contact []ContactInitParameters `json:"contact,omitempty" tf:"contact,omitempty"`
 
 	// Boolean flag to specify whether Azure Key Vault uses Role Based Access Control (RBAC) for authorization of data actions.
@@ -185,7 +183,6 @@ type VaultObservation struct {
 	// A list of access_policy objects (up to 1024) describing access policies, as described below.
 	AccessPolicy []AccessPolicyObservation `json:"accessPolicy,omitempty" tf:"access_policy,omitempty"`
 
-	// One or more contact block as defined below.
 	Contact []ContactObservation `json:"contact,omitempty" tf:"contact,omitempty"`
 
 	// Boolean flag to specify whether Azure Key Vault uses Role Based Access Control (RBAC) for authorization of data actions.
@@ -237,7 +234,6 @@ type VaultObservation struct {
 
 type VaultParameters struct {
 
-	// One or more contact block as defined below.
 	// +kubebuilder:validation:Optional
 	Contact []ContactParameters `json:"contact,omitempty" tf:"contact,omitempty"`
 

@@ -259,12 +259,10 @@ type SQLContainerInitParameters struct {
 	// Define a partition key kind. Possible values are Hash and MultiHash. Defaults to Hash. Changing this forces a new resource to be created.
 	PartitionKeyKind *string `json:"partitionKeyKind,omitempty" tf:"partition_key_kind,omitempty"`
 
-	PartitionKeyPath *string `json:"partitionKeyPath,omitempty" tf:"partition_key_path,omitempty"`
-
 	// A list of partition key paths. Changing this forces a new resource to be created.
 	PartitionKeyPaths []*string `json:"partitionKeyPaths,omitempty" tf:"partition_key_paths,omitempty"`
 
-	// Define a partition key version. Changing this forces a new resource to be created. Possible values are 1and 2. This should be set to 2 in order to use large partition keys.
+	// Define a partition key version. Possible values are 1and 2. This should be set to 2 in order to use large partition keys.
 	PartitionKeyVersion *float64 `json:"partitionKeyVersion,omitempty" tf:"partition_key_version,omitempty"`
 
 	// The throughput of SQL container (RU/s). Must be set in increments of 100. The minimum value is 400.
@@ -303,12 +301,10 @@ type SQLContainerObservation struct {
 	// Define a partition key kind. Possible values are Hash and MultiHash. Defaults to Hash. Changing this forces a new resource to be created.
 	PartitionKeyKind *string `json:"partitionKeyKind,omitempty" tf:"partition_key_kind,omitempty"`
 
-	PartitionKeyPath *string `json:"partitionKeyPath,omitempty" tf:"partition_key_path,omitempty"`
-
 	// A list of partition key paths. Changing this forces a new resource to be created.
 	PartitionKeyPaths []*string `json:"partitionKeyPaths,omitempty" tf:"partition_key_paths,omitempty"`
 
-	// Define a partition key version. Changing this forces a new resource to be created. Possible values are 1and 2. This should be set to 2 in order to use large partition keys.
+	// Define a partition key version. Possible values are 1and 2. This should be set to 2 in order to use large partition keys.
 	PartitionKeyVersion *float64 `json:"partitionKeyVersion,omitempty" tf:"partition_key_version,omitempty"`
 
 	// The name of the resource group in which the Cosmos DB SQL Container is created. Changing this forces a new resource to be created.
@@ -373,14 +369,11 @@ type SQLContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	PartitionKeyKind *string `json:"partitionKeyKind,omitempty" tf:"partition_key_kind,omitempty"`
 
-	// +kubebuilder:validation:Optional
-	PartitionKeyPath *string `json:"partitionKeyPath,omitempty" tf:"partition_key_path,omitempty"`
-
 	// A list of partition key paths. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	PartitionKeyPaths []*string `json:"partitionKeyPaths,omitempty" tf:"partition_key_paths,omitempty"`
 
-	// Define a partition key version. Changing this forces a new resource to be created. Possible values are 1and 2. This should be set to 2 in order to use large partition keys.
+	// Define a partition key version. Possible values are 1and 2. This should be set to 2 in order to use large partition keys.
 	// +kubebuilder:validation:Optional
 	PartitionKeyVersion *float64 `json:"partitionKeyVersion,omitempty" tf:"partition_key_version,omitempty"`
 
@@ -463,8 +456,9 @@ type SQLContainerStatus struct {
 type SQLContainer struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SQLContainerSpec   `json:"spec"`
-	Status            SQLContainerStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.partitionKeyPaths) || (has(self.initProvider) && has(self.initProvider.partitionKeyPaths))",message="spec.forProvider.partitionKeyPaths is a required parameter"
+	Spec   SQLContainerSpec   `json:"spec"`
+	Status SQLContainerStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

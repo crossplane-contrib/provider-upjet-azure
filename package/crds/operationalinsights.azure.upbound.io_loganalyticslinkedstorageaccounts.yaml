@@ -245,14 +245,14 @@ spec:
                             type: string
                         type: object
                     type: object
-                  workspaceResourceId:
+                  workspaceId:
                     description: The resource ID of the Log Analytics Workspace. Changing
                       this forces a new Log Analytics Linked Storage Account to be
                       created.
                     type: string
-                  workspaceResourceIdRef:
+                  workspaceIdRef:
                     description: Reference to a Workspace in operationalinsights to
-                      populate workspaceResourceId.
+                      populate workspaceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -285,9 +285,9 @@ spec:
                     required:
                     - name
                     type: object
-                  workspaceResourceIdSelector:
+                  workspaceIdSelector:
                     description: Selector for a Workspace in operationalinsights to
-                      populate workspaceResourceId.
+                      populate workspaceId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -326,6 +326,9 @@ spec:
                             type: string
                         type: object
                     type: object
+                  workspaceResourceId:
+                    description: The ID of the Log Analytics Linked Storage Account.
+                    type: string
                 type: object
               initProvider:
                 description: |-
@@ -511,14 +514,14 @@ spec:
                             type: string
                         type: object
                     type: object
-                  workspaceResourceId:
+                  workspaceId:
                     description: The resource ID of the Log Analytics Workspace. Changing
                       this forces a new Log Analytics Linked Storage Account to be
                       created.
                     type: string
-                  workspaceResourceIdRef:
+                  workspaceIdRef:
                     description: Reference to a Workspace in operationalinsights to
-                      populate workspaceResourceId.
+                      populate workspaceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -551,9 +554,9 @@ spec:
                     required:
                     - name
                     type: object
-                  workspaceResourceIdSelector:
+                  workspaceIdSelector:
                     description: Selector for a Workspace in operationalinsights to
-                      populate workspaceResourceId.
+                      populate workspaceId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -592,6 +595,9 @@ spec:
                             type: string
                         type: object
                     type: object
+                  workspaceResourceId:
+                    description: The ID of the Log Analytics Linked Storage Account.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -791,10 +797,13 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
-                  workspaceResourceId:
+                  workspaceId:
                     description: The resource ID of the Log Analytics Workspace. Changing
                       this forces a new Log Analytics Linked Storage Account to be
                       created.
+                    type: string
+                  workspaceResourceId:
+                    description: The ID of the Log Analytics Linked Storage Account.
                     type: string
                 type: object
               conditions:

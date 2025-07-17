@@ -1728,8 +1728,10 @@ spec:
                   enclaveType:
                     description: Specifies the type of enclave to be used by the elastic
                       pool. When enclave_type is not specified (e.g., the default)
-                      enclaves are not enabled on the database.  Possible values are
-                      Default or VBS.
+                      enclaves are not enabled on the database. Once enabled (e.g.,
+                      by specifying Default or VBS) removing the enclave_type field
+                      from the configuration file will force the creation of a new
+                      resource. Possible values are Default or VBS.
                     type: string
                   geoBackupEnabled:
                     description: A boolean that specifies if the Geo Backup Policy
@@ -1902,13 +1904,11 @@ spec:
                     description: A long_term_retention_policy block as defined below.
                     properties:
                       immutableBackupsEnabled:
-                        description: Specifies if the backups are immutable. Defaults
-                          to false.
                         type: boolean
                       monthlyRetention:
                         description: The monthly retention policy for an LTR backup
                           in an ISO 8601 format. Valid value is between 1 to 120 months.
-                          e.g. P1Y, P1M, P4W or P30D.
+                          e.g. P1Y, P1M, P4W or P30D. Defaults to PT0S.
                         type: string
                       weekOfYear:
                         description: The week of year to take the yearly backup. Value
@@ -1917,12 +1917,12 @@ spec:
                       weeklyRetention:
                         description: The weekly retention policy for an LTR backup
                           in an ISO 8601 format. Valid value is between 1 to 520 weeks.
-                          e.g. P1Y, P1M, P1W or P7D.
+                          e.g. P1Y, P1M, P1W or P7D. Defaults to PT0S.
                         type: string
                       yearlyRetention:
                         description: The yearly retention policy for an LTR backup
                           in an ISO 8601 format. Valid value is between 1 to 10 years.
-                          e.g. P1Y, P12M, P52W or P365D.
+                          e.g. P1Y, P12M, P52W or P365D. Defaults to PT0S.
                         type: string
                     type: object
                   maintenanceConfigurationName:
@@ -1946,7 +1946,10 @@ spec:
                       SQL_WestUS_DB_2, SQL_WestCentralUS_DB_1, SQL_FranceSouth_DB_1,
                       SQL_WestCentralUS_DB_2, SQL_FranceSouth_DB_2, SQL_SwitzerlandNorth_DB_1,
                       SQL_SwitzerlandNorth_DB_2, SQL_BrazilSoutheast_DB_1, SQL_UAENorth_DB_1,
-                      SQL_BrazilSoutheast_DB_2, SQL_UAENorth_DB_2. Defaults to SQL_Default.
+                      SQL_BrazilSoutheast_DB_2, SQL_UAENorth_DB_2, SQL_SouthAfricaNorth_DB_1,
+                      SQL_SouthAfricaNorth_DB_2, SQL_WestUS3_DB_1, SQL_WestUS3_DB_2,
+                      SQL_SwedenCentral_DB_1, SQL_SwedenCentral_DB_2. Defaults to
+                      SQL_Default.
                     type: string
                   maxSizeGb:
                     description: The max size of the database in gigabytes.
@@ -2302,8 +2305,10 @@ spec:
                   enclaveType:
                     description: Specifies the type of enclave to be used by the elastic
                       pool. When enclave_type is not specified (e.g., the default)
-                      enclaves are not enabled on the database.  Possible values are
-                      Default or VBS.
+                      enclaves are not enabled on the database. Once enabled (e.g.,
+                      by specifying Default or VBS) removing the enclave_type field
+                      from the configuration file will force the creation of a new
+                      resource. Possible values are Default or VBS.
                     type: string
                   geoBackupEnabled:
                     description: A boolean that specifies if the Geo Backup Policy
@@ -2479,13 +2484,11 @@ spec:
                     description: A long_term_retention_policy block as defined below.
                     properties:
                       immutableBackupsEnabled:
-                        description: Specifies if the backups are immutable. Defaults
-                          to false.
                         type: boolean
                       monthlyRetention:
                         description: The monthly retention policy for an LTR backup
                           in an ISO 8601 format. Valid value is between 1 to 120 months.
-                          e.g. P1Y, P1M, P4W or P30D.
+                          e.g. P1Y, P1M, P4W or P30D. Defaults to PT0S.
                         type: string
                       weekOfYear:
                         description: The week of year to take the yearly backup. Value
@@ -2494,12 +2497,12 @@ spec:
                       weeklyRetention:
                         description: The weekly retention policy for an LTR backup
                           in an ISO 8601 format. Valid value is between 1 to 520 weeks.
-                          e.g. P1Y, P1M, P1W or P7D.
+                          e.g. P1Y, P1M, P1W or P7D. Defaults to PT0S.
                         type: string
                       yearlyRetention:
                         description: The yearly retention policy for an LTR backup
                           in an ISO 8601 format. Valid value is between 1 to 10 years.
-                          e.g. P1Y, P12M, P52W or P365D.
+                          e.g. P1Y, P12M, P52W or P365D. Defaults to PT0S.
                         type: string
                     type: object
                   maintenanceConfigurationName:
@@ -2523,7 +2526,10 @@ spec:
                       SQL_WestUS_DB_2, SQL_WestCentralUS_DB_1, SQL_FranceSouth_DB_1,
                       SQL_WestCentralUS_DB_2, SQL_FranceSouth_DB_2, SQL_SwitzerlandNorth_DB_1,
                       SQL_SwitzerlandNorth_DB_2, SQL_BrazilSoutheast_DB_1, SQL_UAENorth_DB_1,
-                      SQL_BrazilSoutheast_DB_2, SQL_UAENorth_DB_2. Defaults to SQL_Default.
+                      SQL_BrazilSoutheast_DB_2, SQL_UAENorth_DB_2, SQL_SouthAfricaNorth_DB_1,
+                      SQL_SouthAfricaNorth_DB_2, SQL_WestUS3_DB_1, SQL_WestUS3_DB_2,
+                      SQL_SwedenCentral_DB_1, SQL_SwedenCentral_DB_2. Defaults to
+                      SQL_Default.
                     type: string
                   maxSizeGb:
                     description: The max size of the database in gigabytes.
@@ -2960,8 +2966,10 @@ spec:
                   enclaveType:
                     description: Specifies the type of enclave to be used by the elastic
                       pool. When enclave_type is not specified (e.g., the default)
-                      enclaves are not enabled on the database.  Possible values are
-                      Default or VBS.
+                      enclaves are not enabled on the database. Once enabled (e.g.,
+                      by specifying Default or VBS) removing the enclave_type field
+                      from the configuration file will force the creation of a new
+                      resource. Possible values are Default or VBS.
                     type: string
                   geoBackupEnabled:
                     description: A boolean that specifies if the Geo Backup Policy
@@ -3024,13 +3032,11 @@ spec:
                     description: A long_term_retention_policy block as defined below.
                     properties:
                       immutableBackupsEnabled:
-                        description: Specifies if the backups are immutable. Defaults
-                          to false.
                         type: boolean
                       monthlyRetention:
                         description: The monthly retention policy for an LTR backup
                           in an ISO 8601 format. Valid value is between 1 to 120 months.
-                          e.g. P1Y, P1M, P4W or P30D.
+                          e.g. P1Y, P1M, P4W or P30D. Defaults to PT0S.
                         type: string
                       weekOfYear:
                         description: The week of year to take the yearly backup. Value
@@ -3039,12 +3045,12 @@ spec:
                       weeklyRetention:
                         description: The weekly retention policy for an LTR backup
                           in an ISO 8601 format. Valid value is between 1 to 520 weeks.
-                          e.g. P1Y, P1M, P1W or P7D.
+                          e.g. P1Y, P1M, P1W or P7D. Defaults to PT0S.
                         type: string
                       yearlyRetention:
                         description: The yearly retention policy for an LTR backup
                           in an ISO 8601 format. Valid value is between 1 to 10 years.
-                          e.g. P1Y, P12M, P52W or P365D.
+                          e.g. P1Y, P12M, P52W or P365D. Defaults to PT0S.
                         type: string
                     type: object
                   maintenanceConfigurationName:
@@ -3068,7 +3074,10 @@ spec:
                       SQL_WestUS_DB_2, SQL_WestCentralUS_DB_1, SQL_FranceSouth_DB_1,
                       SQL_WestCentralUS_DB_2, SQL_FranceSouth_DB_2, SQL_SwitzerlandNorth_DB_1,
                       SQL_SwitzerlandNorth_DB_2, SQL_BrazilSoutheast_DB_1, SQL_UAENorth_DB_1,
-                      SQL_BrazilSoutheast_DB_2, SQL_UAENorth_DB_2. Defaults to SQL_Default.
+                      SQL_BrazilSoutheast_DB_2, SQL_UAENorth_DB_2, SQL_SouthAfricaNorth_DB_1,
+                      SQL_SouthAfricaNorth_DB_2, SQL_WestUS3_DB_1, SQL_WestUS3_DB_2,
+                      SQL_SwedenCentral_DB_1, SQL_SwedenCentral_DB_2. Defaults to
+                      SQL_Default.
                     type: string
                   maxSizeGb:
                     description: The max size of the database in gigabytes.

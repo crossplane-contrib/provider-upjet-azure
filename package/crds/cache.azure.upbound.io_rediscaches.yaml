@@ -1311,14 +1311,16 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  accessKeysAuthenticationEnabled:
+                    description: Whether access key authentication is enabled? Defaults
+                      to true. active_directory_authentication_enabled must be set
+                      to true to disable access key authentication.
+                    type: boolean
                   capacity:
                     description: The size of the Redis cache to deploy. Valid values
                       for a SKU family of C (Basic/Standard) are 0, 1, 2, 3, 4, 5,
                       6, and for P (Premium) family are 1, 2, 3, 4, 5.
                     type: number
-                  enableNonSslPort:
-                    description: Enable the non-SSL port (6379) - disabled by default.
-                    type: boolean
                   family:
                     description: The SKU family/pricing group to use. Valid values
                       are C (for Basic/Standard SKU family) and P (for Premium)
@@ -1349,6 +1351,7 @@ spec:
                       1.1 and 1.2. Defaults to 1.0.
                     type: string
                   nonSslPortEnabled:
+                    description: Enable the non-SSL port (6379) - disabled by default.
                     type: boolean
                   patchSchedule:
                     description: A list of patch_schedule blocks as defined below.
@@ -1429,16 +1432,14 @@ spec:
                         - namespace
                         type: object
                       authenticationEnabled:
+                        description: If set to false, the Redis instance will be accessible
+                          without authentication. Defaults to true.
                         type: boolean
                       dataPersistenceAuthenticationMethod:
                         description: Preferred auth method to communicate to storage
                           account used for data persistence. Possible values are SAS
-                          and ManagedIdentity. Defaults to SAS.
+                          and ManagedIdentity.
                         type: string
-                      enableAuthentication:
-                        description: If set to false, the Redis instance will be accessible
-                          without authentication. Defaults to true.
-                        type: boolean
                       maxfragmentationmemoryReserved:
                         description: Value in megabytes reserved to accommodate for
                           memory fragmentation. Defaults are shown below.
@@ -1497,8 +1498,8 @@ spec:
                         type: string
                     type: object
                   redisVersion:
-                    description: 'Redis version. Only major version needed. Valid
-                      values: 4, 6.'
+                    description: Redis version. Only major version needed. Possible
+                      values are 4 and 6. Defaults to 6.
                     type: string
                   replicasPerMaster:
                     description: Amount of replicas to create per master for this
@@ -1713,14 +1714,16 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  accessKeysAuthenticationEnabled:
+                    description: Whether access key authentication is enabled? Defaults
+                      to true. active_directory_authentication_enabled must be set
+                      to true to disable access key authentication.
+                    type: boolean
                   capacity:
                     description: The size of the Redis cache to deploy. Valid values
                       for a SKU family of C (Basic/Standard) are 0, 1, 2, 3, 4, 5,
                       6, and for P (Premium) family are 1, 2, 3, 4, 5.
                     type: number
-                  enableNonSslPort:
-                    description: Enable the non-SSL port (6379) - disabled by default.
-                    type: boolean
                   family:
                     description: The SKU family/pricing group to use. Valid values
                       are C (for Basic/Standard SKU family) and P (for Premium)
@@ -1751,6 +1754,7 @@ spec:
                       1.1 and 1.2. Defaults to 1.0.
                     type: string
                   nonSslPortEnabled:
+                    description: Enable the non-SSL port (6379) - disabled by default.
                     type: boolean
                   patchSchedule:
                     description: A list of patch_schedule blocks as defined below.
@@ -1831,16 +1835,14 @@ spec:
                         - namespace
                         type: object
                       authenticationEnabled:
+                        description: If set to false, the Redis instance will be accessible
+                          without authentication. Defaults to true.
                         type: boolean
                       dataPersistenceAuthenticationMethod:
                         description: Preferred auth method to communicate to storage
                           account used for data persistence. Possible values are SAS
-                          and ManagedIdentity. Defaults to SAS.
+                          and ManagedIdentity.
                         type: string
-                      enableAuthentication:
-                        description: If set to false, the Redis instance will be accessible
-                          without authentication. Defaults to true.
-                        type: boolean
                       maxfragmentationmemoryReserved:
                         description: Value in megabytes reserved to accommodate for
                           memory fragmentation. Defaults are shown below.
@@ -1899,8 +1901,8 @@ spec:
                         type: string
                     type: object
                   redisVersion:
-                    description: 'Redis version. Only major version needed. Valid
-                      values: 4, 6.'
+                    description: Redis version. Only major version needed. Possible
+                      values are 4 and 6. Defaults to 6.
                     type: string
                   replicasPerMaster:
                     description: Amount of replicas to create per master for this
@@ -2214,14 +2216,16 @@ spec:
             properties:
               atProvider:
                 properties:
+                  accessKeysAuthenticationEnabled:
+                    description: Whether access key authentication is enabled? Defaults
+                      to true. active_directory_authentication_enabled must be set
+                      to true to disable access key authentication.
+                    type: boolean
                   capacity:
                     description: The size of the Redis cache to deploy. Valid values
                       for a SKU family of C (Basic/Standard) are 0, 1, 2, 3, 4, 5,
                       6, and for P (Premium) family are 1, 2, 3, 4, 5.
                     type: number
-                  enableNonSslPort:
-                    description: Enable the non-SSL port (6379) - disabled by default.
-                    type: boolean
                   family:
                     description: The SKU family/pricing group to use. Valid values
                       are C (for Basic/Standard SKU family) and P (for Premium)
@@ -2264,6 +2268,7 @@ spec:
                       1.1 and 1.2. Defaults to 1.0.
                     type: string
                   nonSslPortEnabled:
+                    description: Enable the non-SSL port (6379) - disabled by default.
                     type: boolean
                   patchSchedule:
                     description: A list of patch_schedule blocks as defined below.
@@ -2311,16 +2316,14 @@ spec:
                           Cache. Defaults to false.
                         type: boolean
                       authenticationEnabled:
+                        description: If set to false, the Redis instance will be accessible
+                          without authentication. Defaults to true.
                         type: boolean
                       dataPersistenceAuthenticationMethod:
                         description: Preferred auth method to communicate to storage
                           account used for data persistence. Possible values are SAS
-                          and ManagedIdentity. Defaults to SAS.
+                          and ManagedIdentity.
                         type: string
-                      enableAuthentication:
-                        description: If set to false, the Redis instance will be accessible
-                          without authentication. Defaults to true.
-                        type: boolean
                       maxclients:
                         description: Returns the max number of connected clients at
                           the same time.
@@ -2365,8 +2368,8 @@ spec:
                         type: string
                     type: object
                   redisVersion:
-                    description: 'Redis version. Only major version needed. Valid
-                      values: 4, 6.'
+                    description: Redis version. Only major version needed. Possible
+                      values are 4 and 6. Defaults to 6.
                     type: string
                   replicasPerMaster:
                     description: Amount of replicas to create per master for this

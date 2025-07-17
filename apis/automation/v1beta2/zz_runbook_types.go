@@ -330,7 +330,7 @@ type RunBookInitParameters struct {
 	// The desired content of the runbook.
 	Content *string `json:"content,omitempty" tf:"content,omitempty"`
 
-	// A description for this credential.
+	// A description for the runbook.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A draft block as defined below.
@@ -385,7 +385,7 @@ type RunBookObservation struct {
 	// The desired content of the runbook.
 	Content *string `json:"content,omitempty" tf:"content,omitempty"`
 
-	// A description for this credential.
+	// A description for the runbook.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A draft block as defined below.
@@ -445,7 +445,7 @@ type RunBookParameters struct {
 	// +kubebuilder:validation:Optional
 	Content *string `json:"content,omitempty" tf:"content,omitempty"`
 
-	// A description for this credential.
+	// A description for the runbook.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 

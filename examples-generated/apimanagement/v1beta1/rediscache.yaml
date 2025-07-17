@@ -54,7 +54,7 @@ metadata:
 spec:
   forProvider:
     capacity: 1
-    enableNonSslPort: false
+    enable_non_ssl_port: false
     family: C
     location: West Europe
     minimumTlsVersion: "1.2"

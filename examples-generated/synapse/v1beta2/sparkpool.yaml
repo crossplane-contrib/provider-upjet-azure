@@ -25,6 +25,7 @@ spec:
     - content: |
         spark.shuffle.spill                true
       filename: config.txt
+    sparkVersion: 3.2
     synapseWorkspaceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example

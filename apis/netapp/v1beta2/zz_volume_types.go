@@ -13,6 +13,54 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DataProtectionBackupPolicyInitParameters struct {
+
+	// Resource ID of the backup policy to apply to the volume.
+	// The ID of the backup policy to associate with this volume.
+	BackupPolicyID *string `json:"backupPolicyId,omitempty" tf:"backup_policy_id,omitempty"`
+
+	// Resource ID of the backup backup vault to associate this volume to.
+	// The ID of the backup vault to associate with this volume.
+	BackupVaultID *string `json:"backupVaultId,omitempty" tf:"backup_vault_id,omitempty"`
+
+	// Enables the backup policy on the volume, defaults to true.
+	// If set to false, the backup policy will not be enabled on this volume, thus disabling scheduled backups.
+	PolicyEnabled *bool `json:"policyEnabled,omitempty" tf:"policy_enabled,omitempty"`
+}
+
+type DataProtectionBackupPolicyObservation struct {
+
+	// Resource ID of the backup policy to apply to the volume.
+	// The ID of the backup policy to associate with this volume.
+	BackupPolicyID *string `json:"backupPolicyId,omitempty" tf:"backup_policy_id,omitempty"`
+
+	// Resource ID of the backup backup vault to associate this volume to.
+	// The ID of the backup vault to associate with this volume.
+	BackupVaultID *string `json:"backupVaultId,omitempty" tf:"backup_vault_id,omitempty"`
+
+	// Enables the backup policy on the volume, defaults to true.
+	// If set to false, the backup policy will not be enabled on this volume, thus disabling scheduled backups.
+	PolicyEnabled *bool `json:"policyEnabled,omitempty" tf:"policy_enabled,omitempty"`
+}
+
+type DataProtectionBackupPolicyParameters struct {
+
+	// Resource ID of the backup policy to apply to the volume.
+	// The ID of the backup policy to associate with this volume.
+	// +kubebuilder:validation:Optional
+	BackupPolicyID *string `json:"backupPolicyId" tf:"backup_policy_id,omitempty"`
+
+	// Resource ID of the backup backup vault to associate this volume to.
+	// The ID of the backup vault to associate with this volume.
+	// +kubebuilder:validation:Optional
+	BackupVaultID *string `json:"backupVaultId" tf:"backup_vault_id,omitempty"`
+
+	// Enables the backup policy on the volume, defaults to true.
+	// If set to false, the backup policy will not be enabled on this volume, thus disabling scheduled backups.
+	// +kubebuilder:validation:Optional
+	PolicyEnabled *bool `json:"policyEnabled,omitempty" tf:"policy_enabled,omitempty"`
+}
+
 type DataProtectionReplicationInitParameters struct {
 
 	// The endpoint type, default value is dst for destination.
@@ -258,7 +306,7 @@ type VolumeInitParameters struct {
 	// Is the NetApp Volume enabled for Azure VMware Solution (AVS) datastore purpose. Defaults to false. Changing this forces a new resource to be created.
 	AzureVMwareDataStoreEnabled *bool `json:"azureVmwareDataStoreEnabled,omitempty" tf:"azure_vmware_data_store_enabled,omitempty"`
 
-	// Creates volume from snapshot. Following properties must be the same as the original volume where the snapshot was taken from: protocols, subnet_id, location, service_level, resource_group_name, account_name and pool_name. Changing this forces a new resource to be created.
+	// Creates volume from snapshot. Following properties must be the same as the original volume where the snapshot was taken from: protocols, subnet_id, location, service_level, resource_group_name and account_name. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/netapp/v1beta1.Snapshot
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	CreateFromSnapshotResourceID *string `json:"createFromSnapshotResourceId,omitempty" tf:"create_from_snapshot_resource_id,omitempty"`
@@ -270,6 +318,9 @@ type VolumeInitParameters struct {
 	// Selector for a Snapshot in netapp to populate createFromSnapshotResourceId.
 	// +kubebuilder:validation:Optional
 	CreateFromSnapshotResourceIDSelector *v1.Selector `json:"createFromSnapshotResourceIdSelector,omitempty" tf:"-"`
+
+	// A data_protection_backup_policy block as defined below.
+	DataProtectionBackupPolicy *DataProtectionBackupPolicyInitParameters `json:"dataProtectionBackupPolicy,omitempty" tf:"data_protection_backup_policy,omitempty"`
 
 	// A data_protection_replication block as defined below. Changing this forces a new resource to be created.
 	DataProtectionReplication *DataProtectionReplicationInitParameters `json:"dataProtectionReplication,omitempty" tf:"data_protection_replication,omitempty"`
@@ -283,12 +334,16 @@ type VolumeInitParameters struct {
 	// One or more export_policy_rule block defined below.
 	ExportPolicyRule []ExportPolicyRuleInitParameters `json:"exportPolicyRule,omitempty" tf:"export_policy_rule,omitempty"`
 
-	// Enable to allow Kerberos secured volumes. Requires appropriate export rules.
+	// Enable to allow Kerberos secured volumes. Requires appropriate export rules. Changing this forces a new resource to be created.
 	// Enable to allow Kerberos secured volumes. Requires appropriate export rules as well as the parent `azurerm_netapp_account` having a defined AD connection.
 	KerberosEnabled *bool `json:"kerberosEnabled,omitempty" tf:"kerberos_enabled,omitempty"`
 
 	// The Private Endpoint ID for Key Vault, which is required when using customer-managed keys. This is required with encryption_key_source. Changing this forces a new resource to be created.
 	KeyVaultPrivateEndpointID *string `json:"keyVaultPrivateEndpointId,omitempty" tf:"key_vault_private_endpoint_id,omitempty"`
+
+	// A boolean specifying if the volume is a large volume. Defaults to false.
+	// Indicates whether the volume is a large volume.
+	LargeVolumeEnabled *bool `json:"largeVolumeEnabled,omitempty" tf:"large_volume_enabled,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -304,7 +359,7 @@ type VolumeInitParameters struct {
 	// Enable access based enumeration setting for SMB/Dual Protocol volume. When enabled, users who do not have permission to access a shared folder or file underneath it, do not see that shared resource displayed in their environment.
 	SMBAccessBasedEnumerationEnabled *bool `json:"smbAccessBasedEnumerationEnabled,omitempty" tf:"smb_access_based_enumeration_enabled,omitempty"`
 
-	// Enable SMB Continuous Availability.
+	// Enable SMB Continuous Availability. Changing this forces a new resource to be created.
 	// Continuous availability option should be used only for SQL and FSLogix workloads. Using it for any other SMB workloads is not supported.
 	SMBContinuousAvailabilityEnabled *bool `json:"smbContinuousAvailabilityEnabled,omitempty" tf:"smb_continuous_availability_enabled,omitempty"`
 
@@ -315,10 +370,14 @@ type VolumeInitParameters struct {
 	// Volume security style, accepted values are unix or ntfs. If not provided, single-protocol volume is created defaulting to unix if it is NFSv3 or NFSv4.1 volume, if CIFS, it will default to ntfs. In a dual-protocol volume, if not provided, its value will be ntfs. Changing this forces a new resource to be created.
 	SecurityStyle *string `json:"securityStyle,omitempty" tf:"security_style,omitempty"`
 
-	// The target performance of the file system. Valid values include Premium, Standard, or Ultra. Changing this forces a new resource to be created.
+	// The target performance of the file system. Valid values include Premium, Standard, or Ultra.
 	ServiceLevel *string `json:"serviceLevel,omitempty" tf:"service_level,omitempty"`
 
-	// Specifies whether the .snapshot (NFS clients) or ~snapshot (SMB clients) path of a volume is visible, default value is true.
+	// Enable SMB encryption. Changing this forces a new resource to be created.
+	// SMB3 encryption option should be used only for SMB/DualProtocol volumes. Using it for any other workloads is not supported.
+	Smb3ProtocolEncryptionEnabled *bool `json:"smb3ProtocolEncryptionEnabled,omitempty" tf:"smb3_protocol_encryption_enabled,omitempty"`
+
+	// Specifies whether the .snapshot (NFS clients) or ~snapshot (SMB clients) path of a volume is visible. Defaults to true.
 	SnapshotDirectoryVisible *bool `json:"snapshotDirectoryVisible,omitempty" tf:"snapshot_directory_visible,omitempty"`
 
 	// The maximum Storage Quota allowed for a file system in Gigabytes.
@@ -359,8 +418,11 @@ type VolumeObservation struct {
 	// Is the NetApp Volume enabled for Azure VMware Solution (AVS) datastore purpose. Defaults to false. Changing this forces a new resource to be created.
 	AzureVMwareDataStoreEnabled *bool `json:"azureVmwareDataStoreEnabled,omitempty" tf:"azure_vmware_data_store_enabled,omitempty"`
 
-	// Creates volume from snapshot. Following properties must be the same as the original volume where the snapshot was taken from: protocols, subnet_id, location, service_level, resource_group_name, account_name and pool_name. Changing this forces a new resource to be created.
+	// Creates volume from snapshot. Following properties must be the same as the original volume where the snapshot was taken from: protocols, subnet_id, location, service_level, resource_group_name and account_name. Changing this forces a new resource to be created.
 	CreateFromSnapshotResourceID *string `json:"createFromSnapshotResourceId,omitempty" tf:"create_from_snapshot_resource_id,omitempty"`
+
+	// A data_protection_backup_policy block as defined below.
+	DataProtectionBackupPolicy *DataProtectionBackupPolicyObservation `json:"dataProtectionBackupPolicy,omitempty" tf:"data_protection_backup_policy,omitempty"`
 
 	// A data_protection_replication block as defined below. Changing this forces a new resource to be created.
 	DataProtectionReplication *DataProtectionReplicationObservation `json:"dataProtectionReplication,omitempty" tf:"data_protection_replication,omitempty"`
@@ -377,12 +439,16 @@ type VolumeObservation struct {
 	// The ID of the NetApp Volume.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Enable to allow Kerberos secured volumes. Requires appropriate export rules.
+	// Enable to allow Kerberos secured volumes. Requires appropriate export rules. Changing this forces a new resource to be created.
 	// Enable to allow Kerberos secured volumes. Requires appropriate export rules as well as the parent `azurerm_netapp_account` having a defined AD connection.
 	KerberosEnabled *bool `json:"kerberosEnabled,omitempty" tf:"kerberos_enabled,omitempty"`
 
 	// The Private Endpoint ID for Key Vault, which is required when using customer-managed keys. This is required with encryption_key_source. Changing this forces a new resource to be created.
 	KeyVaultPrivateEndpointID *string `json:"keyVaultPrivateEndpointId,omitempty" tf:"key_vault_private_endpoint_id,omitempty"`
+
+	// A boolean specifying if the volume is a large volume. Defaults to false.
+	// Indicates whether the volume is a large volume.
+	LargeVolumeEnabled *bool `json:"largeVolumeEnabled,omitempty" tf:"large_volume_enabled,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -393,7 +459,7 @@ type VolumeObservation struct {
 	// Indicates which network feature to use, accepted values are Basic or Standard, it defaults to Basic if not defined. This is a feature in public preview and for more information about it and how to register, please refer to Configure network features for an Azure NetApp Files volume.
 	NetworkFeatures *string `json:"networkFeatures,omitempty" tf:"network_features,omitempty"`
 
-	// The name of the NetApp pool in which the NetApp Volume should be created. Changing this forces a new resource to be created.
+	// The name of the NetApp pool in which the NetApp Volume should be created.
 	PoolName *string `json:"poolName,omitempty" tf:"pool_name,omitempty"`
 
 	// The target volume protocol expressed as a list. Supported single value include CIFS, NFSv3, or NFSv4.1. If argument is not defined it will default to NFSv3. Changing this forces a new resource to be created and data will be lost. Dual protocol scenario is supported for CIFS and NFSv3, for more information, please refer to Create a dual-protocol volume for Azure NetApp Files document.
@@ -407,7 +473,7 @@ type VolumeObservation struct {
 	// Enable access based enumeration setting for SMB/Dual Protocol volume. When enabled, users who do not have permission to access a shared folder or file underneath it, do not see that shared resource displayed in their environment.
 	SMBAccessBasedEnumerationEnabled *bool `json:"smbAccessBasedEnumerationEnabled,omitempty" tf:"smb_access_based_enumeration_enabled,omitempty"`
 
-	// Enable SMB Continuous Availability.
+	// Enable SMB Continuous Availability. Changing this forces a new resource to be created.
 	// Continuous availability option should be used only for SQL and FSLogix workloads. Using it for any other SMB workloads is not supported.
 	SMBContinuousAvailabilityEnabled *bool `json:"smbContinuousAvailabilityEnabled,omitempty" tf:"smb_continuous_availability_enabled,omitempty"`
 
@@ -418,10 +484,14 @@ type VolumeObservation struct {
 	// Volume security style, accepted values are unix or ntfs. If not provided, single-protocol volume is created defaulting to unix if it is NFSv3 or NFSv4.1 volume, if CIFS, it will default to ntfs. In a dual-protocol volume, if not provided, its value will be ntfs. Changing this forces a new resource to be created.
 	SecurityStyle *string `json:"securityStyle,omitempty" tf:"security_style,omitempty"`
 
-	// The target performance of the file system. Valid values include Premium, Standard, or Ultra. Changing this forces a new resource to be created.
+	// The target performance of the file system. Valid values include Premium, Standard, or Ultra.
 	ServiceLevel *string `json:"serviceLevel,omitempty" tf:"service_level,omitempty"`
 
-	// Specifies whether the .snapshot (NFS clients) or ~snapshot (SMB clients) path of a volume is visible, default value is true.
+	// Enable SMB encryption. Changing this forces a new resource to be created.
+	// SMB3 encryption option should be used only for SMB/DualProtocol volumes. Using it for any other workloads is not supported.
+	Smb3ProtocolEncryptionEnabled *bool `json:"smb3ProtocolEncryptionEnabled,omitempty" tf:"smb3_protocol_encryption_enabled,omitempty"`
+
+	// Specifies whether the .snapshot (NFS clients) or ~snapshot (SMB clients) path of a volume is visible. Defaults to true.
 	SnapshotDirectoryVisible *bool `json:"snapshotDirectoryVisible,omitempty" tf:"snapshot_directory_visible,omitempty"`
 
 	// The maximum Storage Quota allowed for a file system in Gigabytes.
@@ -463,7 +533,7 @@ type VolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	AzureVMwareDataStoreEnabled *bool `json:"azureVmwareDataStoreEnabled,omitempty" tf:"azure_vmware_data_store_enabled,omitempty"`
 
-	// Creates volume from snapshot. Following properties must be the same as the original volume where the snapshot was taken from: protocols, subnet_id, location, service_level, resource_group_name, account_name and pool_name. Changing this forces a new resource to be created.
+	// Creates volume from snapshot. Following properties must be the same as the original volume where the snapshot was taken from: protocols, subnet_id, location, service_level, resource_group_name and account_name. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/netapp/v1beta1.Snapshot
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -476,6 +546,10 @@ type VolumeParameters struct {
 	// Selector for a Snapshot in netapp to populate createFromSnapshotResourceId.
 	// +kubebuilder:validation:Optional
 	CreateFromSnapshotResourceIDSelector *v1.Selector `json:"createFromSnapshotResourceIdSelector,omitempty" tf:"-"`
+
+	// A data_protection_backup_policy block as defined below.
+	// +kubebuilder:validation:Optional
+	DataProtectionBackupPolicy *DataProtectionBackupPolicyParameters `json:"dataProtectionBackupPolicy,omitempty" tf:"data_protection_backup_policy,omitempty"`
 
 	// A data_protection_replication block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -493,7 +567,7 @@ type VolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	ExportPolicyRule []ExportPolicyRuleParameters `json:"exportPolicyRule,omitempty" tf:"export_policy_rule,omitempty"`
 
-	// Enable to allow Kerberos secured volumes. Requires appropriate export rules.
+	// Enable to allow Kerberos secured volumes. Requires appropriate export rules. Changing this forces a new resource to be created.
 	// Enable to allow Kerberos secured volumes. Requires appropriate export rules as well as the parent `azurerm_netapp_account` having a defined AD connection.
 	// +kubebuilder:validation:Optional
 	KerberosEnabled *bool `json:"kerberosEnabled,omitempty" tf:"kerberos_enabled,omitempty"`
@@ -501,6 +575,11 @@ type VolumeParameters struct {
 	// The Private Endpoint ID for Key Vault, which is required when using customer-managed keys. This is required with encryption_key_source. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	KeyVaultPrivateEndpointID *string `json:"keyVaultPrivateEndpointId,omitempty" tf:"key_vault_private_endpoint_id,omitempty"`
+
+	// A boolean specifying if the volume is a large volume. Defaults to false.
+	// Indicates whether the volume is a large volume.
+	// +kubebuilder:validation:Optional
+	LargeVolumeEnabled *bool `json:"largeVolumeEnabled,omitempty" tf:"large_volume_enabled,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -510,7 +589,7 @@ type VolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkFeatures *string `json:"networkFeatures,omitempty" tf:"network_features,omitempty"`
 
-	// The name of the NetApp pool in which the NetApp Volume should be created. Changing this forces a new resource to be created.
+	// The name of the NetApp pool in which the NetApp Volume should be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/netapp/v1beta1.Pool
 	// +kubebuilder:validation:Optional
 	PoolName *string `json:"poolName,omitempty" tf:"pool_name,omitempty"`
@@ -546,7 +625,7 @@ type VolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	SMBAccessBasedEnumerationEnabled *bool `json:"smbAccessBasedEnumerationEnabled,omitempty" tf:"smb_access_based_enumeration_enabled,omitempty"`
 
-	// Enable SMB Continuous Availability.
+	// Enable SMB Continuous Availability. Changing this forces a new resource to be created.
 	// Continuous availability option should be used only for SQL and FSLogix workloads. Using it for any other SMB workloads is not supported.
 	// +kubebuilder:validation:Optional
 	SMBContinuousAvailabilityEnabled *bool `json:"smbContinuousAvailabilityEnabled,omitempty" tf:"smb_continuous_availability_enabled,omitempty"`
@@ -560,11 +639,16 @@ type VolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityStyle *string `json:"securityStyle,omitempty" tf:"security_style,omitempty"`
 
-	// The target performance of the file system. Valid values include Premium, Standard, or Ultra. Changing this forces a new resource to be created.
+	// The target performance of the file system. Valid values include Premium, Standard, or Ultra.
 	// +kubebuilder:validation:Optional
 	ServiceLevel *string `json:"serviceLevel,omitempty" tf:"service_level,omitempty"`
 
-	// Specifies whether the .snapshot (NFS clients) or ~snapshot (SMB clients) path of a volume is visible, default value is true.
+	// Enable SMB encryption. Changing this forces a new resource to be created.
+	// SMB3 encryption option should be used only for SMB/DualProtocol volumes. Using it for any other workloads is not supported.
+	// +kubebuilder:validation:Optional
+	Smb3ProtocolEncryptionEnabled *bool `json:"smb3ProtocolEncryptionEnabled,omitempty" tf:"smb3_protocol_encryption_enabled,omitempty"`
+
+	// Specifies whether the .snapshot (NFS clients) or ~snapshot (SMB clients) path of a volume is visible. Defaults to true.
 	// +kubebuilder:validation:Optional
 	SnapshotDirectoryVisible *bool `json:"snapshotDirectoryVisible,omitempty" tf:"snapshot_directory_visible,omitempty"`
 

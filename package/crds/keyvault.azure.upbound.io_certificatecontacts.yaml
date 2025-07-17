@@ -441,11 +441,6 @@ spec:
             required:
             - forProvider
             type: object
-            x-kubernetes-validations:
-            - message: spec.forProvider.contact is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.contact)
-                || (has(self.initProvider) && has(self.initProvider.contact))'
           status:
             description: CertificateContactsStatus defines the observed state of CertificateContacts.
             properties:

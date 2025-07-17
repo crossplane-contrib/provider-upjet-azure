@@ -1009,8 +1009,6 @@ spec:
                         type: boolean
                     type: object
                   liveTraceEnabled:
-                    description: Specifies if Live Trace is enabled or not. Defaults
-                      to false.
                     type: boolean
                   localAuthEnabled:
                     description: Whether to enable local auth? Defaults to true.
@@ -1250,8 +1248,6 @@ spec:
                         type: boolean
                     type: object
                   liveTraceEnabled:
-                    description: Specifies if Live Trace is enabled or not. Defaults
-                      to false.
                     type: boolean
                   localAuthEnabled:
                     description: Whether to enable local auth? Defaults to true.
@@ -1593,8 +1589,6 @@ spec:
                         type: boolean
                     type: object
                   liveTraceEnabled:
-                    description: Specifies if Live Trace is enabled or not. Defaults
-                      to false.
                     type: boolean
                   localAuthEnabled:
                     description: Whether to enable local auth? Defaults to true.

@@ -588,7 +588,8 @@ spec:
                       type:
                         description: Specifies the type of Managed Service Identity
                           that should be configured on the Databricks Access Connector.
-                          Possible values include SystemAssigned or UserAssigned.
+                          Possible values are SystemAssigned, UserAssigned, SystemAssigned,
+                          UserAssigned.
                         type: string
                     type: object
                   location:
@@ -712,7 +713,8 @@ spec:
                       type:
                         description: Specifies the type of Managed Service Identity
                           that should be configured on the Databricks Access Connector.
-                          Possible values include SystemAssigned or UserAssigned.
+                          Possible values are SystemAssigned, UserAssigned, SystemAssigned,
+                          UserAssigned.
                         type: string
                     type: object
                   location:
@@ -931,7 +933,8 @@ spec:
                       type:
                         description: Specifies the type of Managed Service Identity
                           that should be configured on the Databricks Access Connector.
-                          Possible values include SystemAssigned or UserAssigned.
+                          Possible values are SystemAssigned, UserAssigned, SystemAssigned,
+                          UserAssigned.
                         type: string
                     type: object
                   location:

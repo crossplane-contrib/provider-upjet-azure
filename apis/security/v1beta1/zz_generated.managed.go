@@ -427,66 +427,6 @@ func (mg *SecurityCenterContact) SetWriteConnectionSecretToReference(r *xpv1.Sec
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
-// GetCondition of this SecurityCenterServerVulnerabilityAssessment.
-func (mg *SecurityCenterServerVulnerabilityAssessment) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
-	return mg.Status.GetCondition(ct)
-}
-
-// GetDeletionPolicy of this SecurityCenterServerVulnerabilityAssessment.
-func (mg *SecurityCenterServerVulnerabilityAssessment) GetDeletionPolicy() xpv1.DeletionPolicy {
-	return mg.Spec.DeletionPolicy
-}
-
-// GetManagementPolicies of this SecurityCenterServerVulnerabilityAssessment.
-func (mg *SecurityCenterServerVulnerabilityAssessment) GetManagementPolicies() xpv1.ManagementPolicies {
-	return mg.Spec.ManagementPolicies
-}
-
-// GetProviderConfigReference of this SecurityCenterServerVulnerabilityAssessment.
-func (mg *SecurityCenterServerVulnerabilityAssessment) GetProviderConfigReference() *xpv1.Reference {
-	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this SecurityCenterServerVulnerabilityAssessment.
-func (mg *SecurityCenterServerVulnerabilityAssessment) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
-// GetWriteConnectionSecretToReference of this SecurityCenterServerVulnerabilityAssessment.
-func (mg *SecurityCenterServerVulnerabilityAssessment) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
-	return mg.Spec.WriteConnectionSecretToReference
-}
-
-// SetConditions of this SecurityCenterServerVulnerabilityAssessment.
-func (mg *SecurityCenterServerVulnerabilityAssessment) SetConditions(c ...xpv1.Condition) {
-	mg.Status.SetConditions(c...)
-}
-
-// SetDeletionPolicy of this SecurityCenterServerVulnerabilityAssessment.
-func (mg *SecurityCenterServerVulnerabilityAssessment) SetDeletionPolicy(r xpv1.DeletionPolicy) {
-	mg.Spec.DeletionPolicy = r
-}
-
-// SetManagementPolicies of this SecurityCenterServerVulnerabilityAssessment.
-func (mg *SecurityCenterServerVulnerabilityAssessment) SetManagementPolicies(r xpv1.ManagementPolicies) {
-	mg.Spec.ManagementPolicies = r
-}
-
-// SetProviderConfigReference of this SecurityCenterServerVulnerabilityAssessment.
-func (mg *SecurityCenterServerVulnerabilityAssessment) SetProviderConfigReference(r *xpv1.Reference) {
-	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this SecurityCenterServerVulnerabilityAssessment.
-func (mg *SecurityCenterServerVulnerabilityAssessment) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
-// SetWriteConnectionSecretToReference of this SecurityCenterServerVulnerabilityAssessment.
-func (mg *SecurityCenterServerVulnerabilityAssessment) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
-	mg.Spec.WriteConnectionSecretToReference = r
-}
-
 // GetCondition of this SecurityCenterServerVulnerabilityAssessmentVirtualMachine.
 func (mg *SecurityCenterServerVulnerabilityAssessmentVirtualMachine) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)

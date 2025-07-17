@@ -1015,12 +1015,11 @@ spec:
                     type: string
                   maximumThroughputUnits:
                     description: Specifies the maximum number of throughput units
-                      when Auto Inflate is Enabled. Valid values range from 1 - 20.
+                      when Auto Inflate is Enabled. Valid values range from 1 - 40.
                     type: number
                   minimumTlsVersion:
                     description: 'The minimum supported TLS version for this EventHub
-                      Namespace. Valid values are: 1.0, 1.1 and 1.2. The current default
-                      minimum TLS version is 1.2.'
+                      Namespace. Valid values are: 1.0, 1.1 and 1.2. Defaults to 1.2.'
                     type: string
                   networkRulesets:
                     description: A network_rulesets block as defined below.
@@ -1236,11 +1235,6 @@ spec:
                     description: A mapping of tags to assign to the resource.
                     type: object
                     x-kubernetes-map-type: granular
-                  zoneRedundant:
-                    description: Specifies if the EventHub Namespace should be Zone
-                      Redundant (created across Availability Zones). Changing this
-                      forces a new resource to be created. Defaults to false.
-                    type: boolean
                 type: object
               initProvider:
                 description: |-
@@ -1295,12 +1289,11 @@ spec:
                     type: string
                   maximumThroughputUnits:
                     description: Specifies the maximum number of throughput units
-                      when Auto Inflate is Enabled. Valid values range from 1 - 20.
+                      when Auto Inflate is Enabled. Valid values range from 1 - 40.
                     type: number
                   minimumTlsVersion:
                     description: 'The minimum supported TLS version for this EventHub
-                      Namespace. Valid values are: 1.0, 1.1 and 1.2. The current default
-                      minimum TLS version is 1.2.'
+                      Namespace. Valid values are: 1.0, 1.1 and 1.2. Defaults to 1.2.'
                     type: string
                   networkRulesets:
                     description: A network_rulesets block as defined below.
@@ -1436,11 +1429,6 @@ spec:
                     description: A mapping of tags to assign to the resource.
                     type: object
                     x-kubernetes-map-type: granular
-                  zoneRedundant:
-                    description: Specifies if the EventHub Namespace should be Zone
-                      Redundant (created across Availability Zones). Changing this
-                      forces a new resource to be created. Defaults to false.
-                    type: boolean
                 type: object
               managementPolicies:
                 default:
@@ -1674,12 +1662,11 @@ spec:
                     type: string
                   maximumThroughputUnits:
                     description: Specifies the maximum number of throughput units
-                      when Auto Inflate is Enabled. Valid values range from 1 - 20.
+                      when Auto Inflate is Enabled. Valid values range from 1 - 40.
                     type: number
                   minimumTlsVersion:
                     description: 'The minimum supported TLS version for this EventHub
-                      Namespace. Valid values are: 1.0, 1.1 and 1.2. The current default
-                      minimum TLS version is 1.2.'
+                      Namespace. Valid values are: 1.0, 1.1 and 1.2. Defaults to 1.2.'
                     type: string
                   networkRulesets:
                     description: A network_rulesets block as defined below.
@@ -1743,11 +1730,6 @@ spec:
                     description: A mapping of tags to assign to the resource.
                     type: object
                     x-kubernetes-map-type: granular
-                  zoneRedundant:
-                    description: Specifies if the EventHub Namespace should be Zone
-                      Redundant (created across Availability Zones). Changing this
-                      forces a new resource to be created. Defaults to false.
-                    type: boolean
                 type: object
               conditions:
                 description: Conditions of the resource.

@@ -9754,6 +9754,11 @@ func (in *MonitorDataCollectionEndpointObservation) DeepCopyInto(out *MonitorDat
 		*out = new(string)
 		**out = **in
 	}
+	if in.MetricsIngestionEndpoint != nil {
+		in, out := &in.MetricsIngestionEndpoint, &out.MetricsIngestionEndpoint
+		*out = new(string)
+		**out = **in
+	}
 	if in.PublicNetworkAccessEnabled != nil {
 		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
 		*out = new(bool)

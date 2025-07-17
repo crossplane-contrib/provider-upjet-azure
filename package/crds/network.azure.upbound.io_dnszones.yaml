@@ -721,11 +721,6 @@ spec:
                         description: The expire time for the SOA record. Defaults
                           to 2419200.
                         type: number
-                      hostName:
-                        description: The domain name of the authoritative name server
-                          for the SOA record. If not set, computed value from Azure
-                          will be used.
-                        type: string
                       minimumTtl:
                         description: The minimum Time To Live for the SOA record.
                           By convention, it is used to determine the negative caching
@@ -784,11 +779,6 @@ spec:
                         description: The expire time for the SOA record. Defaults
                           to 2419200.
                         type: number
-                      hostName:
-                        description: The domain name of the authoritative name server
-                          for the SOA record. If not set, computed value from Azure
-                          will be used.
-                        type: string
                       minimumTtl:
                         description: The minimum Time To Live for the SOA record.
                           By convention, it is used to determine the negative caching

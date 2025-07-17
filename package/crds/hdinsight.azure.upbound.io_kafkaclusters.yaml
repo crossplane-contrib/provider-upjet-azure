@@ -4216,6 +4216,7 @@ spec:
                           scriptActions:
                             description: The script action which will run on the cluster.
                               One or more script_actions blocks as defined below.
+                              Changing this forces a new resource to be created.
                             items:
                               properties:
                                 name:
@@ -4351,12 +4352,18 @@ spec:
                               Standard_D96a_V4, Standard_E2a_V4, Standard_E4a_V4,
                               Standard_E8a_V4, Standard_E16a_V4, Standard_E20a_V4,
                               Standard_E32a_V4, Standard_E48a_V4, Standard_E64a_V4,
-                              Standard_E96a_V4, Standard_G1, Standard_G2, Standard_G3,
-                              Standard_G4, Standard_G5, Standard_F2s_V2, Standard_F4s_V2,
-                              Standard_F8s_V2, Standard_F16s_V2, Standard_F32s_V2,
-                              Standard_F64s_V2, Standard_F72s_V2, Standard_GS1, Standard_GS2,
-                              Standard_GS3, Standard_GS4, Standard_GS5 and Standard_NC24.
-                              Changing this forces a new resource to be created.
+                              Standard_E96a_V4, Standard_D2ads_V5, Standard_D4ads_V5,
+                              Standard_D8ads_V5, Standard_D16ads_V5, Standard_D32ads_V5,
+                              Standard_D48ads_V5, Standard_D64ads_V5, Standard_D96ads_V5,
+                              Standard_E2ads_V5, Standard_E4ads_V5, Standard_E8ads_V5,
+                              Standard_E16ads_V5, Standard_E20ads_V5, Standard_E32ads_V5,
+                              Standard_E48ads_V5, Standard_E64ads_V5, Standard_E96ads_V5,
+                              Standard_G1, Standard_G2, Standard_G3, Standard_G4,
+                              Standard_G5, Standard_F2s_V2, Standard_F4s_V2, Standard_F8s_V2,
+                              Standard_F16s_V2, Standard_F32s_V2, Standard_F64s_V2,
+                              Standard_F72s_V2, Standard_GS1, Standard_GS2, Standard_GS3,
+                              Standard_GS4, Standard_GS5 and Standard_NC24. Changing
+                              this forces a new resource to be created.
                             type: string
                         type: object
                       kafkaManagementNode:
@@ -4384,6 +4391,7 @@ spec:
                           scriptActions:
                             description: The script action which will run on the cluster.
                               One or more script_actions blocks as defined below.
+                              Changing this forces a new resource to be created.
                             items:
                               properties:
                                 name:
@@ -4486,11 +4494,6 @@ spec:
                                     type: string
                                 type: object
                             type: object
-                          username:
-                            description: The Username of the local administrator for
-                              the Zookeeper Nodes. Changing this forces a new resource
-                              to be created.
-                            type: string
                           virtualNetworkId:
                             description: The ID of the Virtual Network where the Zookeeper
                               Nodes should be provisioned within. Changing this forces
@@ -4519,12 +4522,18 @@ spec:
                               Standard_D96a_V4, Standard_E2a_V4, Standard_E4a_V4,
                               Standard_E8a_V4, Standard_E16a_V4, Standard_E20a_V4,
                               Standard_E32a_V4, Standard_E48a_V4, Standard_E64a_V4,
-                              Standard_E96a_V4, Standard_G1, Standard_G2, Standard_G3,
-                              Standard_G4, Standard_G5, Standard_F2s_V2, Standard_F4s_V2,
-                              Standard_F8s_V2, Standard_F16s_V2, Standard_F32s_V2,
-                              Standard_F64s_V2, Standard_F72s_V2, Standard_GS1, Standard_GS2,
-                              Standard_GS3, Standard_GS4, Standard_GS5 and Standard_NC24.
-                              Changing this forces a new resource to be created.
+                              Standard_E96a_V4, Standard_D2ads_V5, Standard_D4ads_V5,
+                              Standard_D8ads_V5, Standard_D16ads_V5, Standard_D32ads_V5,
+                              Standard_D48ads_V5, Standard_D64ads_V5, Standard_D96ads_V5,
+                              Standard_E2ads_V5, Standard_E4ads_V5, Standard_E8ads_V5,
+                              Standard_E16ads_V5, Standard_E20ads_V5, Standard_E32ads_V5,
+                              Standard_E48ads_V5, Standard_E64ads_V5, Standard_E96ads_V5,
+                              Standard_G1, Standard_G2, Standard_G3, Standard_G4,
+                              Standard_G5, Standard_F2s_V2, Standard_F4s_V2, Standard_F8s_V2,
+                              Standard_F16s_V2, Standard_F32s_V2, Standard_F64s_V2,
+                              Standard_F72s_V2, Standard_GS1, Standard_GS2, Standard_GS3,
+                              Standard_GS4, Standard_GS5 and Standard_NC24. Changing
+                              this forces a new resource to be created.
                             type: string
                         type: object
                       workerNode:
@@ -4557,6 +4566,7 @@ spec:
                           scriptActions:
                             description: The script action which will run on the cluster.
                               One or more script_actions blocks as defined below.
+                              Changing this forces a new resource to be created.
                             items:
                               properties:
                                 name:
@@ -4696,12 +4706,18 @@ spec:
                               Standard_D96a_V4, Standard_E2a_V4, Standard_E4a_V4,
                               Standard_E8a_V4, Standard_E16a_V4, Standard_E20a_V4,
                               Standard_E32a_V4, Standard_E48a_V4, Standard_E64a_V4,
-                              Standard_E96a_V4, Standard_G1, Standard_G2, Standard_G3,
-                              Standard_G4, Standard_G5, Standard_F2s_V2, Standard_F4s_V2,
-                              Standard_F8s_V2, Standard_F16s_V2, Standard_F32s_V2,
-                              Standard_F64s_V2, Standard_F72s_V2, Standard_GS1, Standard_GS2,
-                              Standard_GS3, Standard_GS4, Standard_GS5 and Standard_NC24.
-                              Changing this forces a new resource to be created.
+                              Standard_E96a_V4, Standard_D2ads_V5, Standard_D4ads_V5,
+                              Standard_D8ads_V5, Standard_D16ads_V5, Standard_D32ads_V5,
+                              Standard_D48ads_V5, Standard_D64ads_V5, Standard_D96ads_V5,
+                              Standard_E2ads_V5, Standard_E4ads_V5, Standard_E8ads_V5,
+                              Standard_E16ads_V5, Standard_E20ads_V5, Standard_E32ads_V5,
+                              Standard_E48ads_V5, Standard_E64ads_V5, Standard_E96ads_V5,
+                              Standard_G1, Standard_G2, Standard_G3, Standard_G4,
+                              Standard_G5, Standard_F2s_V2, Standard_F4s_V2, Standard_F8s_V2,
+                              Standard_F16s_V2, Standard_F32s_V2, Standard_F64s_V2,
+                              Standard_F72s_V2, Standard_GS1, Standard_GS2, Standard_GS3,
+                              Standard_GS4, Standard_GS5 and Standard_NC24. Changing
+                              this forces a new resource to be created.
                             type: string
                         type: object
                       zookeeperNode:
@@ -4729,6 +4745,7 @@ spec:
                           scriptActions:
                             description: The script action which will run on the cluster.
                               One or more script_actions blocks as defined below.
+                              Changing this forces a new resource to be created.
                             items:
                               properties:
                                 name:
@@ -4864,12 +4881,18 @@ spec:
                               Standard_D96a_V4, Standard_E2a_V4, Standard_E4a_V4,
                               Standard_E8a_V4, Standard_E16a_V4, Standard_E20a_V4,
                               Standard_E32a_V4, Standard_E48a_V4, Standard_E64a_V4,
-                              Standard_E96a_V4, Standard_G1, Standard_G2, Standard_G3,
-                              Standard_G4, Standard_G5, Standard_F2s_V2, Standard_F4s_V2,
-                              Standard_F8s_V2, Standard_F16s_V2, Standard_F32s_V2,
-                              Standard_F64s_V2, Standard_F72s_V2, Standard_GS1, Standard_GS2,
-                              Standard_GS3, Standard_GS4, Standard_GS5 and Standard_NC24.
-                              Changing this forces a new resource to be created.
+                              Standard_E96a_V4, Standard_D2ads_V5, Standard_D4ads_V5,
+                              Standard_D8ads_V5, Standard_D16ads_V5, Standard_D32ads_V5,
+                              Standard_D48ads_V5, Standard_D64ads_V5, Standard_D96ads_V5,
+                              Standard_E2ads_V5, Standard_E4ads_V5, Standard_E8ads_V5,
+                              Standard_E16ads_V5, Standard_E20ads_V5, Standard_E32ads_V5,
+                              Standard_E48ads_V5, Standard_E64ads_V5, Standard_E96ads_V5,
+                              Standard_G1, Standard_G2, Standard_G3, Standard_G4,
+                              Standard_G5, Standard_F2s_V2, Standard_F4s_V2, Standard_F8s_V2,
+                              Standard_F16s_V2, Standard_F32s_V2, Standard_F64s_V2,
+                              Standard_F72s_V2, Standard_GS1, Standard_GS2, Standard_GS3,
+                              Standard_GS4, Standard_GS5 and Standard_NC24. Changing
+                              this forces a new resource to be created.
                             type: string
                         type: object
                     type: object
@@ -5518,6 +5541,7 @@ spec:
                           scriptActions:
                             description: The script action which will run on the cluster.
                               One or more script_actions blocks as defined below.
+                              Changing this forces a new resource to be created.
                             items:
                               properties:
                                 name:
@@ -5653,12 +5677,18 @@ spec:
                               Standard_D96a_V4, Standard_E2a_V4, Standard_E4a_V4,
                               Standard_E8a_V4, Standard_E16a_V4, Standard_E20a_V4,
                               Standard_E32a_V4, Standard_E48a_V4, Standard_E64a_V4,
-                              Standard_E96a_V4, Standard_G1, Standard_G2, Standard_G3,
-                              Standard_G4, Standard_G5, Standard_F2s_V2, Standard_F4s_V2,
-                              Standard_F8s_V2, Standard_F16s_V2, Standard_F32s_V2,
-                              Standard_F64s_V2, Standard_F72s_V2, Standard_GS1, Standard_GS2,
-                              Standard_GS3, Standard_GS4, Standard_GS5 and Standard_NC24.
-                              Changing this forces a new resource to be created.
+                              Standard_E96a_V4, Standard_D2ads_V5, Standard_D4ads_V5,
+                              Standard_D8ads_V5, Standard_D16ads_V5, Standard_D32ads_V5,
+                              Standard_D48ads_V5, Standard_D64ads_V5, Standard_D96ads_V5,
+                              Standard_E2ads_V5, Standard_E4ads_V5, Standard_E8ads_V5,
+                              Standard_E16ads_V5, Standard_E20ads_V5, Standard_E32ads_V5,
+                              Standard_E48ads_V5, Standard_E64ads_V5, Standard_E96ads_V5,
+                              Standard_G1, Standard_G2, Standard_G3, Standard_G4,
+                              Standard_G5, Standard_F2s_V2, Standard_F4s_V2, Standard_F8s_V2,
+                              Standard_F16s_V2, Standard_F32s_V2, Standard_F64s_V2,
+                              Standard_F72s_V2, Standard_GS1, Standard_GS2, Standard_GS3,
+                              Standard_GS4, Standard_GS5 and Standard_NC24. Changing
+                              this forces a new resource to be created.
                             type: string
                         type: object
                       kafkaManagementNode:
@@ -5686,6 +5716,7 @@ spec:
                           scriptActions:
                             description: The script action which will run on the cluster.
                               One or more script_actions blocks as defined below.
+                              Changing this forces a new resource to be created.
                             items:
                               properties:
                                 name:
@@ -5788,11 +5819,6 @@ spec:
                                     type: string
                                 type: object
                             type: object
-                          username:
-                            description: The Username of the local administrator for
-                              the Zookeeper Nodes. Changing this forces a new resource
-                              to be created.
-                            type: string
                           virtualNetworkId:
                             description: The ID of the Virtual Network where the Zookeeper
                               Nodes should be provisioned within. Changing this forces
@@ -5821,12 +5847,18 @@ spec:
                               Standard_D96a_V4, Standard_E2a_V4, Standard_E4a_V4,
                               Standard_E8a_V4, Standard_E16a_V4, Standard_E20a_V4,
                               Standard_E32a_V4, Standard_E48a_V4, Standard_E64a_V4,
-                              Standard_E96a_V4, Standard_G1, Standard_G2, Standard_G3,
-                              Standard_G4, Standard_G5, Standard_F2s_V2, Standard_F4s_V2,
-                              Standard_F8s_V2, Standard_F16s_V2, Standard_F32s_V2,
-                              Standard_F64s_V2, Standard_F72s_V2, Standard_GS1, Standard_GS2,
-                              Standard_GS3, Standard_GS4, Standard_GS5 and Standard_NC24.
-                              Changing this forces a new resource to be created.
+                              Standard_E96a_V4, Standard_D2ads_V5, Standard_D4ads_V5,
+                              Standard_D8ads_V5, Standard_D16ads_V5, Standard_D32ads_V5,
+                              Standard_D48ads_V5, Standard_D64ads_V5, Standard_D96ads_V5,
+                              Standard_E2ads_V5, Standard_E4ads_V5, Standard_E8ads_V5,
+                              Standard_E16ads_V5, Standard_E20ads_V5, Standard_E32ads_V5,
+                              Standard_E48ads_V5, Standard_E64ads_V5, Standard_E96ads_V5,
+                              Standard_G1, Standard_G2, Standard_G3, Standard_G4,
+                              Standard_G5, Standard_F2s_V2, Standard_F4s_V2, Standard_F8s_V2,
+                              Standard_F16s_V2, Standard_F32s_V2, Standard_F64s_V2,
+                              Standard_F72s_V2, Standard_GS1, Standard_GS2, Standard_GS3,
+                              Standard_GS4, Standard_GS5 and Standard_NC24. Changing
+                              this forces a new resource to be created.
                             type: string
                         type: object
                       workerNode:
@@ -5859,6 +5891,7 @@ spec:
                           scriptActions:
                             description: The script action which will run on the cluster.
                               One or more script_actions blocks as defined below.
+                              Changing this forces a new resource to be created.
                             items:
                               properties:
                                 name:
@@ -5998,12 +6031,18 @@ spec:
                               Standard_D96a_V4, Standard_E2a_V4, Standard_E4a_V4,
                               Standard_E8a_V4, Standard_E16a_V4, Standard_E20a_V4,
                               Standard_E32a_V4, Standard_E48a_V4, Standard_E64a_V4,
-                              Standard_E96a_V4, Standard_G1, Standard_G2, Standard_G3,
-                              Standard_G4, Standard_G5, Standard_F2s_V2, Standard_F4s_V2,
-                              Standard_F8s_V2, Standard_F16s_V2, Standard_F32s_V2,
-                              Standard_F64s_V2, Standard_F72s_V2, Standard_GS1, Standard_GS2,
-                              Standard_GS3, Standard_GS4, Standard_GS5 and Standard_NC24.
-                              Changing this forces a new resource to be created.
+                              Standard_E96a_V4, Standard_D2ads_V5, Standard_D4ads_V5,
+                              Standard_D8ads_V5, Standard_D16ads_V5, Standard_D32ads_V5,
+                              Standard_D48ads_V5, Standard_D64ads_V5, Standard_D96ads_V5,
+                              Standard_E2ads_V5, Standard_E4ads_V5, Standard_E8ads_V5,
+                              Standard_E16ads_V5, Standard_E20ads_V5, Standard_E32ads_V5,
+                              Standard_E48ads_V5, Standard_E64ads_V5, Standard_E96ads_V5,
+                              Standard_G1, Standard_G2, Standard_G3, Standard_G4,
+                              Standard_G5, Standard_F2s_V2, Standard_F4s_V2, Standard_F8s_V2,
+                              Standard_F16s_V2, Standard_F32s_V2, Standard_F64s_V2,
+                              Standard_F72s_V2, Standard_GS1, Standard_GS2, Standard_GS3,
+                              Standard_GS4, Standard_GS5 and Standard_NC24. Changing
+                              this forces a new resource to be created.
                             type: string
                         type: object
                       zookeeperNode:
@@ -6031,6 +6070,7 @@ spec:
                           scriptActions:
                             description: The script action which will run on the cluster.
                               One or more script_actions blocks as defined below.
+                              Changing this forces a new resource to be created.
                             items:
                               properties:
                                 name:
@@ -6166,12 +6206,18 @@ spec:
                               Standard_D96a_V4, Standard_E2a_V4, Standard_E4a_V4,
                               Standard_E8a_V4, Standard_E16a_V4, Standard_E20a_V4,
                               Standard_E32a_V4, Standard_E48a_V4, Standard_E64a_V4,
-                              Standard_E96a_V4, Standard_G1, Standard_G2, Standard_G3,
-                              Standard_G4, Standard_G5, Standard_F2s_V2, Standard_F4s_V2,
-                              Standard_F8s_V2, Standard_F16s_V2, Standard_F32s_V2,
-                              Standard_F64s_V2, Standard_F72s_V2, Standard_GS1, Standard_GS2,
-                              Standard_GS3, Standard_GS4, Standard_GS5 and Standard_NC24.
-                              Changing this forces a new resource to be created.
+                              Standard_E96a_V4, Standard_D2ads_V5, Standard_D4ads_V5,
+                              Standard_D8ads_V5, Standard_D16ads_V5, Standard_D32ads_V5,
+                              Standard_D48ads_V5, Standard_D64ads_V5, Standard_D96ads_V5,
+                              Standard_E2ads_V5, Standard_E4ads_V5, Standard_E8ads_V5,
+                              Standard_E16ads_V5, Standard_E20ads_V5, Standard_E32ads_V5,
+                              Standard_E48ads_V5, Standard_E64ads_V5, Standard_E96ads_V5,
+                              Standard_G1, Standard_G2, Standard_G3, Standard_G4,
+                              Standard_G5, Standard_F2s_V2, Standard_F4s_V2, Standard_F8s_V2,
+                              Standard_F16s_V2, Standard_F32s_V2, Standard_F64s_V2,
+                              Standard_F72s_V2, Standard_GS1, Standard_GS2, Standard_GS3,
+                              Standard_GS4, Standard_GS5 and Standard_NC24. Changing
+                              this forces a new resource to be created.
                             type: string
                         type: object
                     type: object
@@ -6808,6 +6854,7 @@ spec:
                           scriptActions:
                             description: The script action which will run on the cluster.
                               One or more script_actions blocks as defined below.
+                              Changing this forces a new resource to be created.
                             items:
                               properties:
                                 name:
@@ -6867,12 +6914,18 @@ spec:
                               Standard_D96a_V4, Standard_E2a_V4, Standard_E4a_V4,
                               Standard_E8a_V4, Standard_E16a_V4, Standard_E20a_V4,
                               Standard_E32a_V4, Standard_E48a_V4, Standard_E64a_V4,
-                              Standard_E96a_V4, Standard_G1, Standard_G2, Standard_G3,
-                              Standard_G4, Standard_G5, Standard_F2s_V2, Standard_F4s_V2,
-                              Standard_F8s_V2, Standard_F16s_V2, Standard_F32s_V2,
-                              Standard_F64s_V2, Standard_F72s_V2, Standard_GS1, Standard_GS2,
-                              Standard_GS3, Standard_GS4, Standard_GS5 and Standard_NC24.
-                              Changing this forces a new resource to be created.
+                              Standard_E96a_V4, Standard_D2ads_V5, Standard_D4ads_V5,
+                              Standard_D8ads_V5, Standard_D16ads_V5, Standard_D32ads_V5,
+                              Standard_D48ads_V5, Standard_D64ads_V5, Standard_D96ads_V5,
+                              Standard_E2ads_V5, Standard_E4ads_V5, Standard_E8ads_V5,
+                              Standard_E16ads_V5, Standard_E20ads_V5, Standard_E32ads_V5,
+                              Standard_E48ads_V5, Standard_E64ads_V5, Standard_E96ads_V5,
+                              Standard_G1, Standard_G2, Standard_G3, Standard_G4,
+                              Standard_G5, Standard_F2s_V2, Standard_F4s_V2, Standard_F8s_V2,
+                              Standard_F16s_V2, Standard_F32s_V2, Standard_F64s_V2,
+                              Standard_F72s_V2, Standard_GS1, Standard_GS2, Standard_GS3,
+                              Standard_GS4, Standard_GS5 and Standard_NC24. Changing
+                              this forces a new resource to be created.
                             type: string
                         type: object
                       kafkaManagementNode:
@@ -6881,6 +6934,7 @@ spec:
                           scriptActions:
                             description: The script action which will run on the cluster.
                               One or more script_actions blocks as defined below.
+                              Changing this forces a new resource to be created.
                             items:
                               properties:
                                 name:
@@ -6940,12 +6994,18 @@ spec:
                               Standard_D96a_V4, Standard_E2a_V4, Standard_E4a_V4,
                               Standard_E8a_V4, Standard_E16a_V4, Standard_E20a_V4,
                               Standard_E32a_V4, Standard_E48a_V4, Standard_E64a_V4,
-                              Standard_E96a_V4, Standard_G1, Standard_G2, Standard_G3,
-                              Standard_G4, Standard_G5, Standard_F2s_V2, Standard_F4s_V2,
-                              Standard_F8s_V2, Standard_F16s_V2, Standard_F32s_V2,
-                              Standard_F64s_V2, Standard_F72s_V2, Standard_GS1, Standard_GS2,
-                              Standard_GS3, Standard_GS4, Standard_GS5 and Standard_NC24.
-                              Changing this forces a new resource to be created.
+                              Standard_E96a_V4, Standard_D2ads_V5, Standard_D4ads_V5,
+                              Standard_D8ads_V5, Standard_D16ads_V5, Standard_D32ads_V5,
+                              Standard_D48ads_V5, Standard_D64ads_V5, Standard_D96ads_V5,
+                              Standard_E2ads_V5, Standard_E4ads_V5, Standard_E8ads_V5,
+                              Standard_E16ads_V5, Standard_E20ads_V5, Standard_E32ads_V5,
+                              Standard_E48ads_V5, Standard_E64ads_V5, Standard_E96ads_V5,
+                              Standard_G1, Standard_G2, Standard_G3, Standard_G4,
+                              Standard_G5, Standard_F2s_V2, Standard_F4s_V2, Standard_F8s_V2,
+                              Standard_F16s_V2, Standard_F32s_V2, Standard_F64s_V2,
+                              Standard_F72s_V2, Standard_GS1, Standard_GS2, Standard_GS3,
+                              Standard_GS4, Standard_GS5 and Standard_NC24. Changing
+                              this forces a new resource to be created.
                             type: string
                         type: object
                       workerNode:
@@ -6959,6 +7019,7 @@ spec:
                           scriptActions:
                             description: The script action which will run on the cluster.
                               One or more script_actions blocks as defined below.
+                              Changing this forces a new resource to be created.
                             items:
                               properties:
                                 name:
@@ -7022,12 +7083,18 @@ spec:
                               Standard_D96a_V4, Standard_E2a_V4, Standard_E4a_V4,
                               Standard_E8a_V4, Standard_E16a_V4, Standard_E20a_V4,
                               Standard_E32a_V4, Standard_E48a_V4, Standard_E64a_V4,
-                              Standard_E96a_V4, Standard_G1, Standard_G2, Standard_G3,
-                              Standard_G4, Standard_G5, Standard_F2s_V2, Standard_F4s_V2,
-                              Standard_F8s_V2, Standard_F16s_V2, Standard_F32s_V2,
-                              Standard_F64s_V2, Standard_F72s_V2, Standard_GS1, Standard_GS2,
-                              Standard_GS3, Standard_GS4, Standard_GS5 and Standard_NC24.
-                              Changing this forces a new resource to be created.
+                              Standard_E96a_V4, Standard_D2ads_V5, Standard_D4ads_V5,
+                              Standard_D8ads_V5, Standard_D16ads_V5, Standard_D32ads_V5,
+                              Standard_D48ads_V5, Standard_D64ads_V5, Standard_D96ads_V5,
+                              Standard_E2ads_V5, Standard_E4ads_V5, Standard_E8ads_V5,
+                              Standard_E16ads_V5, Standard_E20ads_V5, Standard_E32ads_V5,
+                              Standard_E48ads_V5, Standard_E64ads_V5, Standard_E96ads_V5,
+                              Standard_G1, Standard_G2, Standard_G3, Standard_G4,
+                              Standard_G5, Standard_F2s_V2, Standard_F4s_V2, Standard_F8s_V2,
+                              Standard_F16s_V2, Standard_F32s_V2, Standard_F64s_V2,
+                              Standard_F72s_V2, Standard_GS1, Standard_GS2, Standard_GS3,
+                              Standard_GS4, Standard_GS5 and Standard_NC24. Changing
+                              this forces a new resource to be created.
                             type: string
                         type: object
                       zookeeperNode:
@@ -7036,6 +7103,7 @@ spec:
                           scriptActions:
                             description: The script action which will run on the cluster.
                               One or more script_actions blocks as defined below.
+                              Changing this forces a new resource to be created.
                             items:
                               properties:
                                 name:
@@ -7095,12 +7163,18 @@ spec:
                               Standard_D96a_V4, Standard_E2a_V4, Standard_E4a_V4,
                               Standard_E8a_V4, Standard_E16a_V4, Standard_E20a_V4,
                               Standard_E32a_V4, Standard_E48a_V4, Standard_E64a_V4,
-                              Standard_E96a_V4, Standard_G1, Standard_G2, Standard_G3,
-                              Standard_G4, Standard_G5, Standard_F2s_V2, Standard_F4s_V2,
-                              Standard_F8s_V2, Standard_F16s_V2, Standard_F32s_V2,
-                              Standard_F64s_V2, Standard_F72s_V2, Standard_GS1, Standard_GS2,
-                              Standard_GS3, Standard_GS4, Standard_GS5 and Standard_NC24.
-                              Changing this forces a new resource to be created.
+                              Standard_E96a_V4, Standard_D2ads_V5, Standard_D4ads_V5,
+                              Standard_D8ads_V5, Standard_D16ads_V5, Standard_D32ads_V5,
+                              Standard_D48ads_V5, Standard_D64ads_V5, Standard_D96ads_V5,
+                              Standard_E2ads_V5, Standard_E4ads_V5, Standard_E8ads_V5,
+                              Standard_E16ads_V5, Standard_E20ads_V5, Standard_E32ads_V5,
+                              Standard_E48ads_V5, Standard_E64ads_V5, Standard_E96ads_V5,
+                              Standard_G1, Standard_G2, Standard_G3, Standard_G4,
+                              Standard_G5, Standard_F2s_V2, Standard_F4s_V2, Standard_F8s_V2,
+                              Standard_F16s_V2, Standard_F32s_V2, Standard_F64s_V2,
+                              Standard_F72s_V2, Standard_GS1, Standard_GS2, Standard_GS3,
+                              Standard_GS4, Standard_GS5 and Standard_NC24. Changing
+                              this forces a new resource to be created.
                             type: string
                         type: object
                     type: object

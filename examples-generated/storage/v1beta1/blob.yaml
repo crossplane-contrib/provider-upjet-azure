@@ -63,6 +63,6 @@ metadata:
 spec:
   forProvider:
     containerAccessType: private
-    storageAccountNameSelector:
+    storageAccountIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example

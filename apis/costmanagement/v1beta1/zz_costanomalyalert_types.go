@@ -28,6 +28,9 @@ type CostAnomalyAlertInitParameters struct {
 	// The message of the Cost Anomaly Alert. Maximum length of the message is 250.
 	Message *string `json:"message,omitempty" tf:"message,omitempty"`
 
+	// The email address of the point of contact that should get the unsubscribe requests and notification emails.
+	NotificationEmail *string `json:"notificationEmail,omitempty" tf:"notification_email,omitempty"`
+
 	// The ID of the Subscription this Cost Anomaly Alert is scoped to. Changing this forces a new resource to be created. When not supplied this defaults to the subscription configured in the provider.
 	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
 }
@@ -49,6 +52,9 @@ type CostAnomalyAlertObservation struct {
 
 	// The message of the Cost Anomaly Alert. Maximum length of the message is 250.
 	Message *string `json:"message,omitempty" tf:"message,omitempty"`
+
+	// The email address of the point of contact that should get the unsubscribe requests and notification emails.
+	NotificationEmail *string `json:"notificationEmail,omitempty" tf:"notification_email,omitempty"`
 
 	// The ID of the Subscription this Cost Anomaly Alert is scoped to. Changing this forces a new resource to be created. When not supplied this defaults to the subscription configured in the provider.
 	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
@@ -72,6 +78,10 @@ type CostAnomalyAlertParameters struct {
 	// The message of the Cost Anomaly Alert. Maximum length of the message is 250.
 	// +kubebuilder:validation:Optional
 	Message *string `json:"message,omitempty" tf:"message,omitempty"`
+
+	// The email address of the point of contact that should get the unsubscribe requests and notification emails.
+	// +kubebuilder:validation:Optional
+	NotificationEmail *string `json:"notificationEmail,omitempty" tf:"notification_email,omitempty"`
 
 	// The ID of the Subscription this Cost Anomaly Alert is scoped to. Changing this forces a new resource to be created. When not supplied this defaults to the subscription configured in the provider.
 	// +kubebuilder:validation:Optional

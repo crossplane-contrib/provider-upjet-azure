@@ -5453,20 +5453,25 @@ func (in *CustomDomainDeveloperPortalInitParameters) DeepCopyInto(out *CustomDom
 		*out = new(string)
 		**out = **in
 	}
+	if in.KeyVaultCertificateID != nil {
+		in, out := &in.KeyVaultCertificateID, &out.KeyVaultCertificateID
+		*out = new(string)
+		**out = **in
+	}
+	if in.KeyVaultCertificateIDRef != nil {
+		in, out := &in.KeyVaultCertificateIDRef, &out.KeyVaultCertificateIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.KeyVaultCertificateIDSelector != nil {
+		in, out := &in.KeyVaultCertificateIDSelector, &out.KeyVaultCertificateIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.KeyVaultID != nil {
 		in, out := &in.KeyVaultID, &out.KeyVaultID
 		*out = new(string)
 		**out = **in
-	}
-	if in.KeyVaultIDRef != nil {
-		in, out := &in.KeyVaultIDRef, &out.KeyVaultIDRef
-		*out = new(v1.Reference)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.KeyVaultIDSelector != nil {
-		in, out := &in.KeyVaultIDSelector, &out.KeyVaultIDSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
 	}
 	if in.NegotiateClientCertificate != nil {
 		in, out := &in.NegotiateClientCertificate, &out.NegotiateClientCertificate
@@ -5510,6 +5515,11 @@ func (in *CustomDomainDeveloperPortalObservation) DeepCopyInto(out *CustomDomain
 	}
 	if in.HostName != nil {
 		in, out := &in.HostName, &out.HostName
+		*out = new(string)
+		**out = **in
+	}
+	if in.KeyVaultCertificateID != nil {
+		in, out := &in.KeyVaultCertificateID, &out.KeyVaultCertificateID
 		*out = new(string)
 		**out = **in
 	}
@@ -5568,20 +5578,25 @@ func (in *CustomDomainDeveloperPortalParameters) DeepCopyInto(out *CustomDomainD
 		*out = new(string)
 		**out = **in
 	}
+	if in.KeyVaultCertificateID != nil {
+		in, out := &in.KeyVaultCertificateID, &out.KeyVaultCertificateID
+		*out = new(string)
+		**out = **in
+	}
+	if in.KeyVaultCertificateIDRef != nil {
+		in, out := &in.KeyVaultCertificateIDRef, &out.KeyVaultCertificateIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.KeyVaultCertificateIDSelector != nil {
+		in, out := &in.KeyVaultCertificateIDSelector, &out.KeyVaultCertificateIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.KeyVaultID != nil {
 		in, out := &in.KeyVaultID, &out.KeyVaultID
 		*out = new(string)
 		**out = **in
-	}
-	if in.KeyVaultIDRef != nil {
-		in, out := &in.KeyVaultIDRef, &out.KeyVaultIDRef
-		*out = new(v1.Reference)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.KeyVaultIDSelector != nil {
-		in, out := &in.KeyVaultIDSelector, &out.KeyVaultIDSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
 	}
 	if in.NegotiateClientCertificate != nil {
 		in, out := &in.NegotiateClientCertificate, &out.NegotiateClientCertificate
@@ -5705,6 +5720,11 @@ func (in *CustomDomainManagementInitParameters) DeepCopyInto(out *CustomDomainMa
 		*out = new(string)
 		**out = **in
 	}
+	if in.KeyVaultCertificateID != nil {
+		in, out := &in.KeyVaultCertificateID, &out.KeyVaultCertificateID
+		*out = new(string)
+		**out = **in
+	}
 	if in.KeyVaultID != nil {
 		in, out := &in.KeyVaultID, &out.KeyVaultID
 		*out = new(string)
@@ -5752,6 +5772,11 @@ func (in *CustomDomainManagementObservation) DeepCopyInto(out *CustomDomainManag
 	}
 	if in.HostName != nil {
 		in, out := &in.HostName, &out.HostName
+		*out = new(string)
+		**out = **in
+	}
+	if in.KeyVaultCertificateID != nil {
+		in, out := &in.KeyVaultCertificateID, &out.KeyVaultCertificateID
 		*out = new(string)
 		**out = **in
 	}
@@ -5807,6 +5832,11 @@ func (in *CustomDomainManagementParameters) DeepCopyInto(out *CustomDomainManage
 	}
 	if in.HostName != nil {
 		in, out := &in.HostName, &out.HostName
+		*out = new(string)
+		**out = **in
+	}
+	if in.KeyVaultCertificateID != nil {
+		in, out := &in.KeyVaultCertificateID, &out.KeyVaultCertificateID
 		*out = new(string)
 		**out = **in
 	}
@@ -5980,6 +6010,11 @@ func (in *CustomDomainPortalInitParameters) DeepCopyInto(out *CustomDomainPortal
 		*out = new(string)
 		**out = **in
 	}
+	if in.KeyVaultCertificateID != nil {
+		in, out := &in.KeyVaultCertificateID, &out.KeyVaultCertificateID
+		*out = new(string)
+		**out = **in
+	}
 	if in.KeyVaultID != nil {
 		in, out := &in.KeyVaultID, &out.KeyVaultID
 		*out = new(string)
@@ -6027,6 +6062,11 @@ func (in *CustomDomainPortalObservation) DeepCopyInto(out *CustomDomainPortalObs
 	}
 	if in.HostName != nil {
 		in, out := &in.HostName, &out.HostName
+		*out = new(string)
+		**out = **in
+	}
+	if in.KeyVaultCertificateID != nil {
+		in, out := &in.KeyVaultCertificateID, &out.KeyVaultCertificateID
 		*out = new(string)
 		**out = **in
 	}
@@ -6085,6 +6125,11 @@ func (in *CustomDomainPortalParameters) DeepCopyInto(out *CustomDomainPortalPara
 		*out = new(string)
 		**out = **in
 	}
+	if in.KeyVaultCertificateID != nil {
+		in, out := &in.KeyVaultCertificateID, &out.KeyVaultCertificateID
+		*out = new(string)
+		**out = **in
+	}
 	if in.KeyVaultID != nil {
 		in, out := &in.KeyVaultID, &out.KeyVaultID
 		*out = new(string)
@@ -6127,6 +6172,11 @@ func (in *CustomDomainScmInitParameters) DeepCopyInto(out *CustomDomainScmInitPa
 	}
 	if in.HostName != nil {
 		in, out := &in.HostName, &out.HostName
+		*out = new(string)
+		**out = **in
+	}
+	if in.KeyVaultCertificateID != nil {
+		in, out := &in.KeyVaultCertificateID, &out.KeyVaultCertificateID
 		*out = new(string)
 		**out = **in
 	}
@@ -6177,6 +6227,11 @@ func (in *CustomDomainScmObservation) DeepCopyInto(out *CustomDomainScmObservati
 	}
 	if in.HostName != nil {
 		in, out := &in.HostName, &out.HostName
+		*out = new(string)
+		**out = **in
+	}
+	if in.KeyVaultCertificateID != nil {
+		in, out := &in.KeyVaultCertificateID, &out.KeyVaultCertificateID
 		*out = new(string)
 		**out = **in
 	}
@@ -6232,6 +6287,11 @@ func (in *CustomDomainScmParameters) DeepCopyInto(out *CustomDomainScmParameters
 	}
 	if in.HostName != nil {
 		in, out := &in.HostName, &out.HostName
+		*out = new(string)
+		**out = **in
+	}
+	if in.KeyVaultCertificateID != nil {
+		in, out := &in.KeyVaultCertificateID, &out.KeyVaultCertificateID
 		*out = new(string)
 		**out = **in
 	}
@@ -9873,20 +9933,25 @@ func (in *GatewayInitParameters) DeepCopyInto(out *GatewayInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.KeyVaultCertificateID != nil {
+		in, out := &in.KeyVaultCertificateID, &out.KeyVaultCertificateID
+		*out = new(string)
+		**out = **in
+	}
+	if in.KeyVaultCertificateIDRef != nil {
+		in, out := &in.KeyVaultCertificateIDRef, &out.KeyVaultCertificateIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.KeyVaultCertificateIDSelector != nil {
+		in, out := &in.KeyVaultCertificateIDSelector, &out.KeyVaultCertificateIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.KeyVaultID != nil {
 		in, out := &in.KeyVaultID, &out.KeyVaultID
 		*out = new(string)
 		**out = **in
-	}
-	if in.KeyVaultIDRef != nil {
-		in, out := &in.KeyVaultIDRef, &out.KeyVaultIDRef
-		*out = new(v1.Reference)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.KeyVaultIDSelector != nil {
-		in, out := &in.KeyVaultIDSelector, &out.KeyVaultIDSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
 	}
 	if in.NegotiateClientCertificate != nil {
 		in, out := &in.NegotiateClientCertificate, &out.NegotiateClientCertificate
@@ -10012,6 +10077,11 @@ func (in *GatewayObservation) DeepCopyInto(out *GatewayObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.KeyVaultCertificateID != nil {
+		in, out := &in.KeyVaultCertificateID, &out.KeyVaultCertificateID
+		*out = new(string)
+		**out = **in
+	}
 	if in.KeyVaultID != nil {
 		in, out := &in.KeyVaultID, &out.KeyVaultID
 		*out = new(string)
@@ -10109,20 +10179,25 @@ func (in *GatewayParameters) DeepCopyInto(out *GatewayParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.KeyVaultCertificateID != nil {
+		in, out := &in.KeyVaultCertificateID, &out.KeyVaultCertificateID
+		*out = new(string)
+		**out = **in
+	}
+	if in.KeyVaultCertificateIDRef != nil {
+		in, out := &in.KeyVaultCertificateIDRef, &out.KeyVaultCertificateIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.KeyVaultCertificateIDSelector != nil {
+		in, out := &in.KeyVaultCertificateIDSelector, &out.KeyVaultCertificateIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.KeyVaultID != nil {
 		in, out := &in.KeyVaultID, &out.KeyVaultID
 		*out = new(string)
 		**out = **in
-	}
-	if in.KeyVaultIDRef != nil {
-		in, out := &in.KeyVaultIDRef, &out.KeyVaultIDRef
-		*out = new(v1.Reference)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.KeyVaultIDSelector != nil {
-		in, out := &in.KeyVaultIDSelector, &out.KeyVaultIDSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
 	}
 	if in.NegotiateClientCertificate != nil {
 		in, out := &in.NegotiateClientCertificate, &out.NegotiateClientCertificate

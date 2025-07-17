@@ -1190,8 +1190,7 @@ spec:
                     additionalProperties:
                       type: string
                     description: Specifies the environment variables of the Spring
-                      Cloud Gateway as a map of key-value pairs. Changing this forces
-                      a new resource to be created.
+                      Cloud Gateway as a map of key-value pairs.
                     type: object
                     x-kubernetes-map-type: granular
                   httpsOnly:
@@ -1250,8 +1249,7 @@ spec:
                     type: object
                   sensitiveEnvironmentVariablesSecretRef:
                     description: Specifies the sensitive environment variables of
-                      the Spring Cloud Gateway as a map of key-value pairs. Changing
-                      this forces a new resource to be created.
+                      the Spring Cloud Gateway as a map of key-value pairs.
                     properties:
                       name:
                         description: Name of the secret.
@@ -1482,8 +1480,7 @@ spec:
                     additionalProperties:
                       type: string
                     description: Specifies the environment variables of the Spring
-                      Cloud Gateway as a map of key-value pairs. Changing this forces
-                      a new resource to be created.
+                      Cloud Gateway as a map of key-value pairs.
                     type: object
                     x-kubernetes-map-type: granular
                   httpsOnly:
@@ -1842,8 +1839,7 @@ spec:
                     additionalProperties:
                       type: string
                     description: Specifies the environment variables of the Spring
-                      Cloud Gateway as a map of key-value pairs. Changing this forces
-                      a new resource to be created.
+                      Cloud Gateway as a map of key-value pairs.
                     type: object
                     x-kubernetes-map-type: granular
                   httpsOnly:

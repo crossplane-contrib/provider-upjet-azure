@@ -328,7 +328,7 @@ type MonitorActivityLogAlertInitParameters struct {
 	// Should this Activity Log Alert be enabled? Defaults to true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The Azure Region where the activity log alert rule should exist. Changing this forces a new resource to be created. Defaults to global.
+	// The Azure Region where the activity log alert rule should exist. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the activity log alert. Changing this forces a new resource to be created.
@@ -382,7 +382,7 @@ type MonitorActivityLogAlertObservation struct {
 	// The ID of the activity log alert.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The Azure Region where the activity log alert rule should exist. Changing this forces a new resource to be created. Defaults to global.
+	// The Azure Region where the activity log alert rule should exist. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the activity log alert. Changing this forces a new resource to be created.
@@ -418,7 +418,7 @@ type MonitorActivityLogAlertParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The Azure Region where the activity log alert rule should exist. Changing this forces a new resource to be created. Defaults to global.
+	// The Azure Region where the activity log alert rule should exist. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -592,6 +592,7 @@ type MonitorActivityLogAlert struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.criteria) || (has(self.initProvider) && has(self.initProvider.criteria))",message="spec.forProvider.criteria is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || (has(self.initProvider) && has(self.initProvider.location))",message="spec.forProvider.location is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
 	Spec   MonitorActivityLogAlertSpec   `json:"spec"`
 	Status MonitorActivityLogAlertStatus `json:"status,omitempty"`
