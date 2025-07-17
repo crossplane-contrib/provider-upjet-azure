@@ -10,10 +10,6 @@ import (
 	"github.com/crossplane/upjet/pkg/config"
 )
 
-const (
-	mysqlServerPort = 3306
-)
-
 // Configure configures dbformysql group
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_mysql_flexible_server", func(r *config.Resource) {
