@@ -44,7 +44,7 @@ type ActionParameters struct {
 
 type ApplicationLogsInitParameters struct {
 
-	// A azure_blob_storage_http block as defined below.
+	// A azure_blob_storage_http block as defined above.
 	AzureBlobStorage []AzureBlobStorageInitParameters `json:"azureBlobStorage,omitempty" tf:"azure_blob_storage,omitempty"`
 
 	// Log level. Possible values include: Off, Verbose, Information, Warning, and Error.
@@ -53,7 +53,7 @@ type ApplicationLogsInitParameters struct {
 
 type ApplicationLogsObservation struct {
 
-	// A azure_blob_storage_http block as defined below.
+	// A azure_blob_storage_http block as defined above.
 	AzureBlobStorage []AzureBlobStorageObservation `json:"azureBlobStorage,omitempty" tf:"azure_blob_storage,omitempty"`
 
 	// Log level. Possible values include: Off, Verbose, Information, Warning, and Error.
@@ -62,7 +62,7 @@ type ApplicationLogsObservation struct {
 
 type ApplicationLogsParameters struct {
 
-	// A azure_blob_storage_http block as defined below.
+	// A azure_blob_storage_http block as defined above.
 	// +kubebuilder:validation:Optional
 	AzureBlobStorage []AzureBlobStorageParameters `json:"azureBlobStorage,omitempty" tf:"azure_blob_storage,omitempty"`
 
@@ -172,6 +172,9 @@ type HTTPLogsAzureBlobStorageInitParameters struct {
 
 	// The retention period in days. A value of 0 means no retention.
 	RetentionInDays *float64 `json:"retentionInDays,omitempty" tf:"retention_in_days,omitempty"`
+
+	// SAS url to an Azure blob container with read/write/list/delete permissions.
+	SASURLSecretRef v1.SecretKeySelector `json:"sasurlSecretRef" tf:"-"`
 }
 
 type HTTPLogsAzureBlobStorageObservation struct {
@@ -187,13 +190,13 @@ type HTTPLogsAzureBlobStorageParameters struct {
 	RetentionInDays *float64 `json:"retentionInDays,omitempty" tf:"retention_in_days,omitempty"`
 
 	// SAS url to an Azure blob container with read/write/list/delete permissions.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	SASURLSecretRef v1.SecretKeySelector `json:"sasurlSecretRef" tf:"-"`
 }
 
 type HTTPLogsInitParameters struct {
 
-	// A azure_blob_storage_http block as defined below.
+	// A azure_blob_storage_http block as defined above.
 	AzureBlobStorage []HTTPLogsAzureBlobStorageInitParameters `json:"azureBlobStorage,omitempty" tf:"azure_blob_storage,omitempty"`
 
 	// A file_system block as defined above.
@@ -202,7 +205,7 @@ type HTTPLogsInitParameters struct {
 
 type HTTPLogsObservation struct {
 
-	// A azure_blob_storage_http block as defined below.
+	// A azure_blob_storage_http block as defined above.
 	AzureBlobStorage []HTTPLogsAzureBlobStorageObservation `json:"azureBlobStorage,omitempty" tf:"azure_blob_storage,omitempty"`
 
 	// A file_system block as defined above.
@@ -211,7 +214,7 @@ type HTTPLogsObservation struct {
 
 type HTTPLogsParameters struct {
 
-	// A azure_blob_storage_http block as defined below.
+	// A azure_blob_storage_http block as defined above.
 	// +kubebuilder:validation:Optional
 	AzureBlobStorage []HTTPLogsAzureBlobStorageParameters `json:"azureBlobStorage,omitempty" tf:"azure_blob_storage,omitempty"`
 
@@ -781,7 +784,7 @@ type LinuxWebAppAuthSettingsV2ActiveDirectoryV2InitParameters struct {
 	// +mapType=granular
 	LoginParameters map[string]*string `json:"loginParameters,omitempty" tf:"login_parameters,omitempty"`
 
-	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/v2.0/{tenant-guid}/
+	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/{tenant-guid}/v2.0/
 	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. `https://login.microsoftonline.com/v2.0/{tenant-guid}/`.
 	TenantAuthEndpoint *string `json:"tenantAuthEndpoint,omitempty" tf:"tenant_auth_endpoint,omitempty"`
 
@@ -833,7 +836,7 @@ type LinuxWebAppAuthSettingsV2ActiveDirectoryV2Observation struct {
 	// +mapType=granular
 	LoginParameters map[string]*string `json:"loginParameters,omitempty" tf:"login_parameters,omitempty"`
 
-	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/v2.0/{tenant-guid}/
+	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/{tenant-guid}/v2.0/
 	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. `https://login.microsoftonline.com/v2.0/{tenant-guid}/`.
 	TenantAuthEndpoint *string `json:"tenantAuthEndpoint,omitempty" tf:"tenant_auth_endpoint,omitempty"`
 
@@ -895,7 +898,7 @@ type LinuxWebAppAuthSettingsV2ActiveDirectoryV2Parameters struct {
 	// +mapType=granular
 	LoginParameters map[string]*string `json:"loginParameters,omitempty" tf:"login_parameters,omitempty"`
 
-	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/v2.0/{tenant-guid}/
+	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/{tenant-guid}/v2.0/
 	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. `https://login.microsoftonline.com/v2.0/{tenant-guid}/`.
 	// +kubebuilder:validation:Optional
 	TenantAuthEndpoint *string `json:"tenantAuthEndpoint" tf:"tenant_auth_endpoint,omitempty"`
@@ -1759,6 +1762,10 @@ type LinuxWebAppBackupInitParameters struct {
 
 	// A schedule block as defined below.
 	Schedule []LinuxWebAppBackupScheduleInitParameters `json:"schedule,omitempty" tf:"schedule,omitempty"`
+
+	// The SAS URL to the container.
+	// The SAS URL to the container.
+	StorageAccountURLSecretRef v1.SecretKeySelector `json:"storageAccountUrlSecretRef" tf:"-"`
 }
 
 type LinuxWebAppBackupObservation struct {
@@ -1793,7 +1800,7 @@ type LinuxWebAppBackupParameters struct {
 
 	// The SAS URL to the container.
 	// The SAS URL to the container.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	StorageAccountURLSecretRef v1.SecretKeySelector `json:"storageAccountUrlSecretRef" tf:"-"`
 }
 
@@ -1883,6 +1890,10 @@ type LinuxWebAppConnectionStringInitParameters struct {
 	// Type of database. Possible values include: MySQL, SQLServer, SQLAzure, Custom, NotificationHub, ServiceBus, EventHub, APIHub, DocDb, RedisCache, and PostgreSQL.
 	// Type of database. Possible values include: `MySQL`, `SQLServer`, `SQLAzure`, `Custom`, `NotificationHub`, `ServiceBus`, `EventHub`, `APIHub`, `DocDb`, `RedisCache`, and `PostgreSQL`.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// The connection string value.
+	// The connection string value.
+	ValueSecretRef v1.SecretKeySelector `json:"valueSecretRef" tf:"-"`
 }
 
 type LinuxWebAppConnectionStringObservation struct {
@@ -1910,7 +1921,7 @@ type LinuxWebAppConnectionStringParameters struct {
 
 	// The connection string value.
 	// The connection string value.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	ValueSecretRef v1.SecretKeySelector `json:"valueSecretRef" tf:"-"`
 }
 
@@ -2033,6 +2044,9 @@ type LinuxWebAppInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Whether backup and restore operations over the linked virtual network are enabled. Defaults to false.
+	VirtualNetworkBackupRestoreEnabled *bool `json:"virtualNetworkBackupRestoreEnabled,omitempty" tf:"virtual_network_backup_restore_enabled,omitempty"`
+
 	// The subnet id which will be used by this Web App for regional virtual network integration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
@@ -2151,6 +2165,9 @@ type LinuxWebAppObservation struct {
 	// A mapping of tags which should be assigned to the Linux Web App.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Whether backup and restore operations over the linked virtual network are enabled. Defaults to false.
+	VirtualNetworkBackupRestoreEnabled *bool `json:"virtualNetworkBackupRestoreEnabled,omitempty" tf:"virtual_network_backup_restore_enabled,omitempty"`
 
 	// The subnet id which will be used by this Web App for regional virtual network integration.
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
@@ -2279,6 +2296,10 @@ type LinuxWebAppParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Whether backup and restore operations over the linked virtual network are enabled. Defaults to false.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkBackupRestoreEnabled *bool `json:"virtualNetworkBackupRestoreEnabled,omitempty" tf:"virtual_network_backup_restore_enabled,omitempty"`
+
 	// The subnet id which will be used by this Web App for regional virtual network integration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
@@ -2304,12 +2325,9 @@ type LinuxWebAppParameters struct {
 }
 
 type LinuxWebAppSiteConfigApplicationStackInitParameters struct {
-	DockerImage *string `json:"dockerImage,omitempty" tf:"docker_image,omitempty"`
 
 	// The docker image, including tag, to be used. e.g. appsvc/staticsite:latest.
 	DockerImageName *string `json:"dockerImageName,omitempty" tf:"docker_image_name,omitempty"`
-
-	DockerImageTag *string `json:"dockerImageTag,omitempty" tf:"docker_image_tag,omitempty"`
 
 	// The User Name to use for authentication against the registry to pull the image.
 	DockerRegistryPasswordSecretRef *v1.SecretKeySelector `json:"dockerRegistryPasswordSecretRef,omitempty" tf:"-"`
@@ -2320,7 +2338,7 @@ type LinuxWebAppSiteConfigApplicationStackInitParameters struct {
 	// The User Name to use for authentication against the registry to pull the image.
 	DockerRegistryUsername *string `json:"dockerRegistryUsername,omitempty" tf:"docker_registry_username,omitempty"`
 
-	// The version of .NET to use. Possible values include 3.1, 5.0, 6.0, 7.0 and 8.0.
+	// The version of .NET to use. Possible values include 3.1, 5.0, 6.0, 7.0, 8.0 and 9.0.
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
 	// The version of Go to use. Possible values include 1.18, and 1.19.
@@ -2332,16 +2350,16 @@ type LinuxWebAppSiteConfigApplicationStackInitParameters struct {
 	// The Version of the java_server to use.
 	JavaServerVersion *string `json:"javaServerVersion,omitempty" tf:"java_server_version,omitempty"`
 
-	// The Version of Java to use. Possible values include 8, 11, and 17.
+	// The Version of Java to use. Possible values include 8, 11, 17, and 21.
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
-	// The version of Node to run. Possible values include 12-lts, 14-lts, 16-lts, 18-lts and 20-lts. This property conflicts with java_version.
+	// The version of Node to run. Possible values include 12-lts, 14-lts, 16-lts, 18-lts, 20-lts and 22-lts. This property conflicts with java_version.
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
-	// The version of PHP to run. Possible values are 7.4, 8.0, 8.1 and 8.2.
+	// The version of PHP to run. Possible values are 7.4, 8.0, 8.1, 8.2 and 8.3.
 	PHPVersion *string `json:"phpVersion,omitempty" tf:"php_version,omitempty"`
 
-	// The version of Python to run. Possible values include 3.7, 3.8, 3.9, 3.10, 3.11 and 3.12.
+	// The version of Python to run. Possible values include 3.13, 3.12, 3.11, 3.10, 3.9, 3.8 and 3.7.
 	PythonVersion *string `json:"pythonVersion,omitempty" tf:"python_version,omitempty"`
 
 	// The version of Ruby to run. Possible values include 2.6 and 2.7.
@@ -2349,12 +2367,9 @@ type LinuxWebAppSiteConfigApplicationStackInitParameters struct {
 }
 
 type LinuxWebAppSiteConfigApplicationStackObservation struct {
-	DockerImage *string `json:"dockerImage,omitempty" tf:"docker_image,omitempty"`
 
 	// The docker image, including tag, to be used. e.g. appsvc/staticsite:latest.
 	DockerImageName *string `json:"dockerImageName,omitempty" tf:"docker_image_name,omitempty"`
-
-	DockerImageTag *string `json:"dockerImageTag,omitempty" tf:"docker_image_tag,omitempty"`
 
 	// The URL of the container registry where the docker_image_name is located. e.g. https://index.docker.io or https://mcr.microsoft.com. This value is required with docker_image_name.
 	DockerRegistryURL *string `json:"dockerRegistryUrl,omitempty" tf:"docker_registry_url,omitempty"`
@@ -2362,7 +2377,7 @@ type LinuxWebAppSiteConfigApplicationStackObservation struct {
 	// The User Name to use for authentication against the registry to pull the image.
 	DockerRegistryUsername *string `json:"dockerRegistryUsername,omitempty" tf:"docker_registry_username,omitempty"`
 
-	// The version of .NET to use. Possible values include 3.1, 5.0, 6.0, 7.0 and 8.0.
+	// The version of .NET to use. Possible values include 3.1, 5.0, 6.0, 7.0, 8.0 and 9.0.
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
 	// The version of Go to use. Possible values include 1.18, and 1.19.
@@ -2374,16 +2389,16 @@ type LinuxWebAppSiteConfigApplicationStackObservation struct {
 	// The Version of the java_server to use.
 	JavaServerVersion *string `json:"javaServerVersion,omitempty" tf:"java_server_version,omitempty"`
 
-	// The Version of Java to use. Possible values include 8, 11, and 17.
+	// The Version of Java to use. Possible values include 8, 11, 17, and 21.
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
-	// The version of Node to run. Possible values include 12-lts, 14-lts, 16-lts, 18-lts and 20-lts. This property conflicts with java_version.
+	// The version of Node to run. Possible values include 12-lts, 14-lts, 16-lts, 18-lts, 20-lts and 22-lts. This property conflicts with java_version.
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
-	// The version of PHP to run. Possible values are 7.4, 8.0, 8.1 and 8.2.
+	// The version of PHP to run. Possible values are 7.4, 8.0, 8.1, 8.2 and 8.3.
 	PHPVersion *string `json:"phpVersion,omitempty" tf:"php_version,omitempty"`
 
-	// The version of Python to run. Possible values include 3.7, 3.8, 3.9, 3.10, 3.11 and 3.12.
+	// The version of Python to run. Possible values include 3.13, 3.12, 3.11, 3.10, 3.9, 3.8 and 3.7.
 	PythonVersion *string `json:"pythonVersion,omitempty" tf:"python_version,omitempty"`
 
 	// The version of Ruby to run. Possible values include 2.6 and 2.7.
@@ -2392,15 +2407,9 @@ type LinuxWebAppSiteConfigApplicationStackObservation struct {
 
 type LinuxWebAppSiteConfigApplicationStackParameters struct {
 
-	// +kubebuilder:validation:Optional
-	DockerImage *string `json:"dockerImage,omitempty" tf:"docker_image,omitempty"`
-
 	// The docker image, including tag, to be used. e.g. appsvc/staticsite:latest.
 	// +kubebuilder:validation:Optional
 	DockerImageName *string `json:"dockerImageName,omitempty" tf:"docker_image_name,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	DockerImageTag *string `json:"dockerImageTag,omitempty" tf:"docker_image_tag,omitempty"`
 
 	// The User Name to use for authentication against the registry to pull the image.
 	// +kubebuilder:validation:Optional
@@ -2414,7 +2423,7 @@ type LinuxWebAppSiteConfigApplicationStackParameters struct {
 	// +kubebuilder:validation:Optional
 	DockerRegistryUsername *string `json:"dockerRegistryUsername,omitempty" tf:"docker_registry_username,omitempty"`
 
-	// The version of .NET to use. Possible values include 3.1, 5.0, 6.0, 7.0 and 8.0.
+	// The version of .NET to use. Possible values include 3.1, 5.0, 6.0, 7.0, 8.0 and 9.0.
 	// +kubebuilder:validation:Optional
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
@@ -2430,19 +2439,19 @@ type LinuxWebAppSiteConfigApplicationStackParameters struct {
 	// +kubebuilder:validation:Optional
 	JavaServerVersion *string `json:"javaServerVersion,omitempty" tf:"java_server_version,omitempty"`
 
-	// The Version of Java to use. Possible values include 8, 11, and 17.
+	// The Version of Java to use. Possible values include 8, 11, 17, and 21.
 	// +kubebuilder:validation:Optional
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
-	// The version of Node to run. Possible values include 12-lts, 14-lts, 16-lts, 18-lts and 20-lts. This property conflicts with java_version.
+	// The version of Node to run. Possible values include 12-lts, 14-lts, 16-lts, 18-lts, 20-lts and 22-lts. This property conflicts with java_version.
 	// +kubebuilder:validation:Optional
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
-	// The version of PHP to run. Possible values are 7.4, 8.0, 8.1 and 8.2.
+	// The version of PHP to run. Possible values are 7.4, 8.0, 8.1, 8.2 and 8.3.
 	// +kubebuilder:validation:Optional
 	PHPVersion *string `json:"phpVersion,omitempty" tf:"php_version,omitempty"`
 
-	// The version of Python to run. Possible values include 3.7, 3.8, 3.9, 3.10, 3.11 and 3.12.
+	// The version of Python to run. Possible values include 3.13, 3.12, 3.11, 3.10, 3.9, 3.8 and 3.7.
 	// +kubebuilder:validation:Optional
 	PythonVersion *string `json:"pythonVersion,omitempty" tf:"python_version,omitempty"`
 
@@ -2685,9 +2694,6 @@ type LinuxWebAppSiteConfigInitParameters struct {
 	// A application_stack block as defined above.
 	ApplicationStack []LinuxWebAppSiteConfigApplicationStackInitParameters `json:"applicationStack,omitempty" tf:"application_stack,omitempty"`
 
-	// Should Auto heal rules be enabled? Required with auto_heal_setting.
-	AutoHealEnabled *bool `json:"autoHealEnabled,omitempty" tf:"auto_heal_enabled,omitempty"`
-
 	// A auto_heal_setting block as defined above. Required with auto_heal.
 	AutoHealSetting []AutoHealSettingInitParameters `json:"autoHealSetting,omitempty" tf:"auto_heal_setting,omitempty"`
 
@@ -2707,7 +2713,7 @@ type LinuxWebAppSiteConfigInitParameters struct {
 	FtpsState *string `json:"ftpsState,omitempty" tf:"ftps_state,omitempty"`
 
 	// The amount of time in minutes that a node can be unhealthy before being removed from the load balancer. Possible values are between 2 and 10. Only valid in conjunction with health_check_path.
-	// The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Defaults to `10`. Only valid in conjunction with `health_check_path`
+	// The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Only valid in conjunction with `health_check_path`
 	HealthCheckEvictionTimeInMin *float64 `json:"healthCheckEvictionTimeInMin,omitempty" tf:"health_check_eviction_time_in_min,omitempty"`
 
 	// The path to the Health Check.
@@ -2731,13 +2737,13 @@ type LinuxWebAppSiteConfigInitParameters struct {
 	// Managed pipeline mode. Possible values include Integrated, and Classic. Defaults to Integrated.
 	ManagedPipelineMode *string `json:"managedPipelineMode,omitempty" tf:"managed_pipeline_mode,omitempty"`
 
-	// The configures the minimum version of TLS required for SSL requests. Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
+	// The configures the minimum version of TLS required for SSL requests. Possible values include: 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
 	// Should Remote Debugging be enabled? Defaults to false.
 	RemoteDebuggingEnabled *bool `json:"remoteDebuggingEnabled,omitempty" tf:"remote_debugging_enabled,omitempty"`
 
-	// The Remote Debugging Version. Possible values include VS2017, VS2019 and VS2022.
+	// The Remote Debugging Version. Currently only VS2022 is supported.
 	RemoteDebuggingVersion *string `json:"remoteDebuggingVersion,omitempty" tf:"remote_debugging_version,omitempty"`
 
 	// One or more scm_ip_restriction blocks as defined above.
@@ -2783,9 +2789,6 @@ type LinuxWebAppSiteConfigObservation struct {
 	// A application_stack block as defined above.
 	ApplicationStack []LinuxWebAppSiteConfigApplicationStackObservation `json:"applicationStack,omitempty" tf:"application_stack,omitempty"`
 
-	// Should Auto heal rules be enabled? Required with auto_heal_setting.
-	AutoHealEnabled *bool `json:"autoHealEnabled,omitempty" tf:"auto_heal_enabled,omitempty"`
-
 	// A auto_heal_setting block as defined above. Required with auto_heal.
 	AutoHealSetting []AutoHealSettingObservation `json:"autoHealSetting,omitempty" tf:"auto_heal_setting,omitempty"`
 
@@ -2808,7 +2811,7 @@ type LinuxWebAppSiteConfigObservation struct {
 	FtpsState *string `json:"ftpsState,omitempty" tf:"ftps_state,omitempty"`
 
 	// The amount of time in minutes that a node can be unhealthy before being removed from the load balancer. Possible values are between 2 and 10. Only valid in conjunction with health_check_path.
-	// The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Defaults to `10`. Only valid in conjunction with `health_check_path`
+	// The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Only valid in conjunction with `health_check_path`
 	HealthCheckEvictionTimeInMin *float64 `json:"healthCheckEvictionTimeInMin,omitempty" tf:"health_check_eviction_time_in_min,omitempty"`
 
 	// The path to the Health Check.
@@ -2834,13 +2837,13 @@ type LinuxWebAppSiteConfigObservation struct {
 	// Managed pipeline mode. Possible values include Integrated, and Classic. Defaults to Integrated.
 	ManagedPipelineMode *string `json:"managedPipelineMode,omitempty" tf:"managed_pipeline_mode,omitempty"`
 
-	// The configures the minimum version of TLS required for SSL requests. Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
+	// The configures the minimum version of TLS required for SSL requests. Possible values include: 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
 	// Should Remote Debugging be enabled? Defaults to false.
 	RemoteDebuggingEnabled *bool `json:"remoteDebuggingEnabled,omitempty" tf:"remote_debugging_enabled,omitempty"`
 
-	// The Remote Debugging Version. Possible values include VS2017, VS2019 and VS2022.
+	// The Remote Debugging Version. Currently only VS2022 is supported.
 	RemoteDebuggingVersion *string `json:"remoteDebuggingVersion,omitempty" tf:"remote_debugging_version,omitempty"`
 
 	// One or more scm_ip_restriction blocks as defined above.
@@ -2893,10 +2896,6 @@ type LinuxWebAppSiteConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	ApplicationStack []LinuxWebAppSiteConfigApplicationStackParameters `json:"applicationStack,omitempty" tf:"application_stack,omitempty"`
 
-	// Should Auto heal rules be enabled? Required with auto_heal_setting.
-	// +kubebuilder:validation:Optional
-	AutoHealEnabled *bool `json:"autoHealEnabled,omitempty" tf:"auto_heal_enabled,omitempty"`
-
 	// A auto_heal_setting block as defined above. Required with auto_heal.
 	// +kubebuilder:validation:Optional
 	AutoHealSetting []AutoHealSettingParameters `json:"autoHealSetting,omitempty" tf:"auto_heal_setting,omitempty"`
@@ -2922,7 +2921,7 @@ type LinuxWebAppSiteConfigParameters struct {
 	FtpsState *string `json:"ftpsState,omitempty" tf:"ftps_state,omitempty"`
 
 	// The amount of time in minutes that a node can be unhealthy before being removed from the load balancer. Possible values are between 2 and 10. Only valid in conjunction with health_check_path.
-	// The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Defaults to `10`. Only valid in conjunction with `health_check_path`
+	// The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Only valid in conjunction with `health_check_path`
 	// +kubebuilder:validation:Optional
 	HealthCheckEvictionTimeInMin *float64 `json:"healthCheckEvictionTimeInMin,omitempty" tf:"health_check_eviction_time_in_min,omitempty"`
 
@@ -2954,7 +2953,7 @@ type LinuxWebAppSiteConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	ManagedPipelineMode *string `json:"managedPipelineMode,omitempty" tf:"managed_pipeline_mode,omitempty"`
 
-	// The configures the minimum version of TLS required for SSL requests. Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
+	// The configures the minimum version of TLS required for SSL requests. Possible values include: 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
 	// +kubebuilder:validation:Optional
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
@@ -2962,7 +2961,7 @@ type LinuxWebAppSiteConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	RemoteDebuggingEnabled *bool `json:"remoteDebuggingEnabled,omitempty" tf:"remote_debugging_enabled,omitempty"`
 
-	// The Remote Debugging Version. Possible values include VS2017, VS2019 and VS2022.
+	// The Remote Debugging Version. Currently only VS2022 is supported.
 	// +kubebuilder:validation:Optional
 	RemoteDebuggingVersion *string `json:"remoteDebuggingVersion,omitempty" tf:"remote_debugging_version,omitempty"`
 
@@ -3225,6 +3224,9 @@ type LinuxWebAppStickySettingsParameters struct {
 
 type LinuxWebAppStorageAccountInitParameters struct {
 
+	// The Access key for the storage account.
+	AccessKeySecretRef v1.SecretKeySelector `json:"accessKeySecretRef" tf:"-"`
+
 	// The Name of the Storage Account.
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
@@ -3262,7 +3264,7 @@ type LinuxWebAppStorageAccountObservation struct {
 type LinuxWebAppStorageAccountParameters struct {
 
 	// The Access key for the storage account.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	AccessKeySecretRef v1.SecretKeySelector `json:"accessKeySecretRef" tf:"-"`
 
 	// The Name of the Storage Account.
@@ -3372,9 +3374,6 @@ type SlowRequestInitParameters struct {
 	// The time interval in the form hh:mm:ss.
 	Interval *string `json:"interval,omitempty" tf:"interval,omitempty"`
 
-	// The path to which this rule status code applies.
-	Path *string `json:"path,omitempty" tf:"path,omitempty"`
-
 	// The threshold of time passed to qualify as a Slow Request in hh:mm:ss.
 	TimeTaken *string `json:"timeTaken,omitempty" tf:"time_taken,omitempty"`
 }
@@ -3386,9 +3385,6 @@ type SlowRequestObservation struct {
 
 	// The time interval in the form hh:mm:ss.
 	Interval *string `json:"interval,omitempty" tf:"interval,omitempty"`
-
-	// The path to which this rule status code applies.
-	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
 	// The threshold of time passed to qualify as a Slow Request in hh:mm:ss.
 	TimeTaken *string `json:"timeTaken,omitempty" tf:"time_taken,omitempty"`
@@ -3403,10 +3399,6 @@ type SlowRequestParameters struct {
 	// The time interval in the form hh:mm:ss.
 	// +kubebuilder:validation:Optional
 	Interval *string `json:"interval" tf:"interval,omitempty"`
-
-	// The path to which this rule status code applies.
-	// +kubebuilder:validation:Optional
-	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
 	// The threshold of time passed to qualify as a Slow Request in hh:mm:ss.
 	// +kubebuilder:validation:Optional

@@ -108,6 +108,9 @@ type SharedImageInitParameters struct {
 	// A description of this Shared Image.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Specifies if the Shared Image supports NVMe disks. Changing this forces a new resource to be created.
+	DiskControllerTypeNvmeEnabled *bool `json:"diskControllerTypeNvmeEnabled,omitempty" tf:"disk_controller_type_nvme_enabled,omitempty"`
+
 	// One or more Disk Types not allowed for the Image. Possible values include Standard_LRS and Premium_LRS.
 	// +listType=set
 	DiskTypesNotAllowed []*string `json:"diskTypesNotAllowed,omitempty" tf:"disk_types_not_allowed,omitempty"`
@@ -117,6 +120,9 @@ type SharedImageInitParameters struct {
 
 	// The End User Licence Agreement for the Shared Image. Changing this forces a new resource to be created.
 	Eula *string `json:"eula,omitempty" tf:"eula,omitempty"`
+
+	// Specifies if the Shared Image supports hibernation. Changing this forces a new resource to be created.
+	HibernationEnabled *bool `json:"hibernationEnabled,omitempty" tf:"hibernation_enabled,omitempty"`
 
 	// The generation of HyperV that the Virtual Machine used to create the Shared Image is based on. Possible values are V1 and V2. Defaults to V1. Changing this forces a new resource to be created.
 	HyperVGeneration *string `json:"hyperVGeneration,omitempty" tf:"hyper_v_generation,omitempty"`
@@ -182,6 +188,9 @@ type SharedImageObservation struct {
 	// A description of this Shared Image.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Specifies if the Shared Image supports NVMe disks. Changing this forces a new resource to be created.
+	DiskControllerTypeNvmeEnabled *bool `json:"diskControllerTypeNvmeEnabled,omitempty" tf:"disk_controller_type_nvme_enabled,omitempty"`
+
 	// One or more Disk Types not allowed for the Image. Possible values include Standard_LRS and Premium_LRS.
 	// +listType=set
 	DiskTypesNotAllowed []*string `json:"diskTypesNotAllowed,omitempty" tf:"disk_types_not_allowed,omitempty"`
@@ -194,6 +203,9 @@ type SharedImageObservation struct {
 
 	// Specifies the name of the Shared Image Gallery in which this Shared Image should exist. Changing this forces a new resource to be created.
 	GalleryName *string `json:"galleryName,omitempty" tf:"gallery_name,omitempty"`
+
+	// Specifies if the Shared Image supports hibernation. Changing this forces a new resource to be created.
+	HibernationEnabled *bool `json:"hibernationEnabled,omitempty" tf:"hibernation_enabled,omitempty"`
 
 	// The generation of HyperV that the Virtual Machine used to create the Shared Image is based on. Possible values are V1 and V2. Defaults to V1. Changing this forces a new resource to be created.
 	HyperVGeneration *string `json:"hyperVGeneration,omitempty" tf:"hyper_v_generation,omitempty"`
@@ -270,6 +282,10 @@ type SharedImageParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Specifies if the Shared Image supports NVMe disks. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	DiskControllerTypeNvmeEnabled *bool `json:"diskControllerTypeNvmeEnabled,omitempty" tf:"disk_controller_type_nvme_enabled,omitempty"`
+
 	// One or more Disk Types not allowed for the Image. Possible values include Standard_LRS and Premium_LRS.
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -295,6 +311,10 @@ type SharedImageParameters struct {
 	// Selector for a SharedImageGallery in compute to populate galleryName.
 	// +kubebuilder:validation:Optional
 	GalleryNameSelector *v1.Selector `json:"galleryNameSelector,omitempty" tf:"-"`
+
+	// Specifies if the Shared Image supports hibernation. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	HibernationEnabled *bool `json:"hibernationEnabled,omitempty" tf:"hibernation_enabled,omitempty"`
 
 	// The generation of HyperV that the Virtual Machine used to create the Shared Image is based on. Possible values are V1 and V2. Defaults to V1. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional

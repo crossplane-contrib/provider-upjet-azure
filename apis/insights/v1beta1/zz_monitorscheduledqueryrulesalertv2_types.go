@@ -84,7 +84,7 @@ type FailingPeriodsParameters struct {
 type MonitorScheduledQueryRulesAlertV2ActionInitParameters struct {
 
 	// List of Action Group resource IDs to invoke when the alert fires.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta2.MonitorActionGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta1.MonitorActionGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	ActionGroups []*string `json:"actionGroups,omitempty" tf:"action_groups,omitempty"`
 
@@ -114,7 +114,7 @@ type MonitorScheduledQueryRulesAlertV2ActionObservation struct {
 type MonitorScheduledQueryRulesAlertV2ActionParameters struct {
 
 	// List of Action Group resource IDs to invoke when the alert fires.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta2.MonitorActionGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta1.MonitorActionGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ActionGroups []*string `json:"actionGroups,omitempty" tf:"action_groups,omitempty"`
@@ -274,6 +274,7 @@ type MonitorScheduledQueryRulesAlertV2IdentityParameters struct {
 	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
 	IdentityIdsSelector *v1.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
+
 	// Specifies the type of Managed Service Identity that should be configured on this Scheduled Query Rule. Possible values are SystemAssigned, UserAssigned.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
@@ -556,6 +557,7 @@ type MonitorScheduledQueryRulesAlertV2 struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.criteria) || (has(self.initProvider) && has(self.initProvider.criteria))",message="spec.forProvider.criteria is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.evaluationFrequency) || (has(self.initProvider) && has(self.initProvider.evaluationFrequency))",message="spec.forProvider.evaluationFrequency is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || (has(self.initProvider) && has(self.initProvider.location))",message="spec.forProvider.location is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.severity) || (has(self.initProvider) && has(self.initProvider.severity))",message="spec.forProvider.severity is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.windowDuration) || (has(self.initProvider) && has(self.initProvider.windowDuration))",message="spec.forProvider.windowDuration is a required parameter"

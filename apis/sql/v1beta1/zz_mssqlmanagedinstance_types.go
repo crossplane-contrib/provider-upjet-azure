@@ -13,19 +13,78 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AzureActiveDirectoryAdministratorInitParameters struct {
+
+	// Specifies whether only Azure AD authentication can be used to log in to this SQL Managed Instance. When true, the administrator_login and administrator_login_password properties can be omitted. Defaults to false.
+	AzureadAuthenticationOnlyEnabled *bool `json:"azureadAuthenticationOnlyEnabled,omitempty" tf:"azuread_authentication_only_enabled,omitempty"`
+
+	// The login username of the Azure AD Administrator of this SQL Managed Instance.
+	LoginUsername *string `json:"loginUsername,omitempty" tf:"login_username,omitempty"`
+
+	// The object id of the Azure AD Administrator of this SQL Managed Instance.
+	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
+
+	// The principal type of the Azure AD Administrator of this SQL Managed Instance. Possible values are Application, Group, User.
+	PrincipalType *string `json:"principalType,omitempty" tf:"principal_type,omitempty"`
+
+	// The tenant id of the Azure AD Administrator of this SQL Managed Instance. Should be specified if the Azure AD Administrator is homed in a different tenant to the SQL Managed Instance.
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+}
+
+type AzureActiveDirectoryAdministratorObservation struct {
+
+	// Specifies whether only Azure AD authentication can be used to log in to this SQL Managed Instance. When true, the administrator_login and administrator_login_password properties can be omitted. Defaults to false.
+	AzureadAuthenticationOnlyEnabled *bool `json:"azureadAuthenticationOnlyEnabled,omitempty" tf:"azuread_authentication_only_enabled,omitempty"`
+
+	// The login username of the Azure AD Administrator of this SQL Managed Instance.
+	LoginUsername *string `json:"loginUsername,omitempty" tf:"login_username,omitempty"`
+
+	// The object id of the Azure AD Administrator of this SQL Managed Instance.
+	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
+
+	// The principal type of the Azure AD Administrator of this SQL Managed Instance. Possible values are Application, Group, User.
+	PrincipalType *string `json:"principalType,omitempty" tf:"principal_type,omitempty"`
+
+	// The tenant id of the Azure AD Administrator of this SQL Managed Instance. Should be specified if the Azure AD Administrator is homed in a different tenant to the SQL Managed Instance.
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+}
+
+type AzureActiveDirectoryAdministratorParameters struct {
+
+	// Specifies whether only Azure AD authentication can be used to log in to this SQL Managed Instance. When true, the administrator_login and administrator_login_password properties can be omitted. Defaults to false.
+	// +kubebuilder:validation:Optional
+	AzureadAuthenticationOnlyEnabled *bool `json:"azureadAuthenticationOnlyEnabled,omitempty" tf:"azuread_authentication_only_enabled,omitempty"`
+
+	// The login username of the Azure AD Administrator of this SQL Managed Instance.
+	// +kubebuilder:validation:Optional
+	LoginUsername *string `json:"loginUsername" tf:"login_username,omitempty"`
+
+	// The object id of the Azure AD Administrator of this SQL Managed Instance.
+	// +kubebuilder:validation:Optional
+	ObjectID *string `json:"objectId" tf:"object_id,omitempty"`
+
+	// The principal type of the Azure AD Administrator of this SQL Managed Instance. Possible values are Application, Group, User.
+	// +kubebuilder:validation:Optional
+	PrincipalType *string `json:"principalType" tf:"principal_type,omitempty"`
+
+	// The tenant id of the Azure AD Administrator of this SQL Managed Instance. Should be specified if the Azure AD Administrator is homed in a different tenant to the SQL Managed Instance.
+	// +kubebuilder:validation:Optional
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+}
+
 type MSSQLManagedInstanceIdentityInitParameters struct {
 
-	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this SQL Managed Instance. Required when type is set to UserAssigned.
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this SQL Managed Instance. Required when type includes UserAssigned.
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
-	// Specifies the type of Managed Service Identity that should be configured on this SQL Managed Instance. Possible values are SystemAssigned, UserAssigned.
+	// Specifies the type of Managed Service Identity that should be configured on this SQL Managed Instance. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type MSSQLManagedInstanceIdentityObservation struct {
 
-	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this SQL Managed Instance. Required when type is set to UserAssigned.
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this SQL Managed Instance. Required when type includes UserAssigned.
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
@@ -35,18 +94,18 @@ type MSSQLManagedInstanceIdentityObservation struct {
 	// The Tenant ID for the Service Principal associated with the Identity of this SQL Managed Instance.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 
-	// Specifies the type of Managed Service Identity that should be configured on this SQL Managed Instance. Possible values are SystemAssigned, UserAssigned.
+	// Specifies the type of Managed Service Identity that should be configured on this SQL Managed Instance. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type MSSQLManagedInstanceIdentityParameters struct {
 
-	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this SQL Managed Instance. Required when type is set to UserAssigned.
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this SQL Managed Instance. Required when type includes UserAssigned.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
-	// Specifies the type of Managed Service Identity that should be configured on this SQL Managed Instance. Possible values are SystemAssigned, UserAssigned.
+	// Specifies the type of Managed Service Identity that should be configured on this SQL Managed Instance. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -55,6 +114,12 @@ type MSSQLManagedInstanceInitParameters struct {
 
 	// The administrator login name for the new SQL Managed Instance. Changing this forces a new resource to be created.
 	AdministratorLogin *string `json:"administratorLogin,omitempty" tf:"administrator_login,omitempty"`
+
+	// The password associated with the administrator_login user. Needs to comply with Azure's Password Policy
+	AdministratorLoginPasswordSecretRef *v1.SecretKeySelector `json:"administratorLoginPasswordSecretRef,omitempty" tf:"-"`
+
+	// An azure_active_directory_administrator block as defined below.
+	AzureActiveDirectoryAdministrator []AzureActiveDirectoryAdministratorInitParameters `json:"azureActiveDirectoryAdministrator,omitempty" tf:"azure_active_directory_administrator,omitempty"`
 
 	// Specifies how the SQL Managed Instance will be collated. Default value is SQL_Latin1_General_CP1_CI_AS. Changing this forces a new resource to be created.
 	Collation *string `json:"collation,omitempty" tf:"collation,omitempty"`
@@ -71,6 +136,12 @@ type MSSQLManagedInstanceInitParameters struct {
 	// Selector for a MSSQLManagedInstance in sql to populate dnsZonePartnerId.
 	// +kubebuilder:validation:Optional
 	DNSZonePartnerIDSelector *v1.Selector `json:"dnsZonePartnerIdSelector,omitempty" tf:"-"`
+
+	// Specifies the internal format of the SQL Managed Instance databases specific to the SQL engine version. Possible values are AlwaysUpToDate and SQLServer2022. Defaults to SQLServer2022.
+	DatabaseFormat *string `json:"databaseFormat,omitempty" tf:"database_format,omitempty"`
+
+	// Specifies the hybrid secondary usage for disaster recovery of the SQL Managed Instance. Possible values are Active and Passive. Defaults to Active.
+	HybridSecondaryUsage *string `json:"hybridSecondaryUsage,omitempty" tf:"hybrid_secondary_usage,omitempty"`
 
 	// An identity block as defined below.
 	Identity []MSSQLManagedInstanceIdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
@@ -93,16 +164,19 @@ type MSSQLManagedInstanceInitParameters struct {
 	// Is the public data endpoint enabled? Default value is false.
 	PublicDataEndpointEnabled *bool `json:"publicDataEndpointEnabled,omitempty" tf:"public_data_endpoint_enabled,omitempty"`
 
+	// The service principal type. The only possible value is SystemAssigned.
+	ServicePrincipalType *string `json:"servicePrincipalType,omitempty" tf:"service_principal_type,omitempty"`
+
 	// Specifies the SKU Name for the SQL Managed Instance. Valid values include GP_Gen4, GP_Gen5, GP_Gen8IM, GP_Gen8IH, BC_Gen4, BC_Gen5, BC_Gen8IM or BC_Gen8IH.
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
-	// Specifies the storage account type used to store backups for this database. Changing this forces a new resource to be created. Possible values are GRS, LRS and ZRS. Defaults to GRS.
+	// Specifies the storage account type used to store backups for this database. Possible values are GRS, GZRS, LRS, and ZRS. Defaults to GRS.
 	StorageAccountType *string `json:"storageAccountType,omitempty" tf:"storage_account_type,omitempty"`
 
 	// Maximum storage space for the SQL Managed instance. This should be a multiple of 32 (GB).
 	StorageSizeInGb *float64 `json:"storageSizeInGb,omitempty" tf:"storage_size_in_gb,omitempty"`
 
-	// The subnet resource id that the SQL Managed Instance will be associated with. Changing this forces a new resource to be created.
+	// The subnet resource id that the SQL Managed Instance will be associated with.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
@@ -134,6 +208,9 @@ type MSSQLManagedInstanceObservation struct {
 	// The administrator login name for the new SQL Managed Instance. Changing this forces a new resource to be created.
 	AdministratorLogin *string `json:"administratorLogin,omitempty" tf:"administrator_login,omitempty"`
 
+	// An azure_active_directory_administrator block as defined below.
+	AzureActiveDirectoryAdministrator []AzureActiveDirectoryAdministratorObservation `json:"azureActiveDirectoryAdministrator,omitempty" tf:"azure_active_directory_administrator,omitempty"`
+
 	// Specifies how the SQL Managed Instance will be collated. Default value is SQL_Latin1_General_CP1_CI_AS. Changing this forces a new resource to be created.
 	Collation *string `json:"collation,omitempty" tf:"collation,omitempty"`
 
@@ -143,8 +220,14 @@ type MSSQLManagedInstanceObservation struct {
 	// The ID of the SQL Managed Instance which will share the DNS zone. This is a prerequisite for creating an azurerm_sql_managed_instance_failover_group. Setting this after creation forces a new resource to be created.
 	DNSZonePartnerID *string `json:"dnsZonePartnerId,omitempty" tf:"dns_zone_partner_id,omitempty"`
 
+	// Specifies the internal format of the SQL Managed Instance databases specific to the SQL engine version. Possible values are AlwaysUpToDate and SQLServer2022. Defaults to SQLServer2022.
+	DatabaseFormat *string `json:"databaseFormat,omitempty" tf:"database_format,omitempty"`
+
 	// The fully qualified domain name of the Azure Managed SQL Instance
 	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
+
+	// Specifies the hybrid secondary usage for disaster recovery of the SQL Managed Instance. Possible values are Active and Passive. Defaults to Active.
+	HybridSecondaryUsage *string `json:"hybridSecondaryUsage,omitempty" tf:"hybrid_secondary_usage,omitempty"`
 
 	// The SQL Managed Instance ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -173,16 +256,19 @@ type MSSQLManagedInstanceObservation struct {
 	// The name of the resource group in which to create the SQL Managed Instance. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
+	// The service principal type. The only possible value is SystemAssigned.
+	ServicePrincipalType *string `json:"servicePrincipalType,omitempty" tf:"service_principal_type,omitempty"`
+
 	// Specifies the SKU Name for the SQL Managed Instance. Valid values include GP_Gen4, GP_Gen5, GP_Gen8IM, GP_Gen8IH, BC_Gen4, BC_Gen5, BC_Gen8IM or BC_Gen8IH.
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
-	// Specifies the storage account type used to store backups for this database. Changing this forces a new resource to be created. Possible values are GRS, LRS and ZRS. Defaults to GRS.
+	// Specifies the storage account type used to store backups for this database. Possible values are GRS, GZRS, LRS, and ZRS. Defaults to GRS.
 	StorageAccountType *string `json:"storageAccountType,omitempty" tf:"storage_account_type,omitempty"`
 
 	// Maximum storage space for the SQL Managed instance. This should be a multiple of 32 (GB).
 	StorageSizeInGb *float64 `json:"storageSizeInGb,omitempty" tf:"storage_size_in_gb,omitempty"`
 
-	// The subnet resource id that the SQL Managed Instance will be associated with. Changing this forces a new resource to be created.
+	// The subnet resource id that the SQL Managed Instance will be associated with.
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// A mapping of tags to assign to the resource.
@@ -207,7 +293,11 @@ type MSSQLManagedInstanceParameters struct {
 
 	// The password associated with the administrator_login user. Needs to comply with Azure's Password Policy
 	// +kubebuilder:validation:Optional
-	AdministratorLoginPasswordSecretRef v1.SecretKeySelector `json:"administratorLoginPasswordSecretRef" tf:"-"`
+	AdministratorLoginPasswordSecretRef *v1.SecretKeySelector `json:"administratorLoginPasswordSecretRef,omitempty" tf:"-"`
+
+	// An azure_active_directory_administrator block as defined below.
+	// +kubebuilder:validation:Optional
+	AzureActiveDirectoryAdministrator []AzureActiveDirectoryAdministratorParameters `json:"azureActiveDirectoryAdministrator,omitempty" tf:"azure_active_directory_administrator,omitempty"`
 
 	// Specifies how the SQL Managed Instance will be collated. Default value is SQL_Latin1_General_CP1_CI_AS. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -226,6 +316,14 @@ type MSSQLManagedInstanceParameters struct {
 	// Selector for a MSSQLManagedInstance in sql to populate dnsZonePartnerId.
 	// +kubebuilder:validation:Optional
 	DNSZonePartnerIDSelector *v1.Selector `json:"dnsZonePartnerIdSelector,omitempty" tf:"-"`
+
+	// Specifies the internal format of the SQL Managed Instance databases specific to the SQL engine version. Possible values are AlwaysUpToDate and SQLServer2022. Defaults to SQLServer2022.
+	// +kubebuilder:validation:Optional
+	DatabaseFormat *string `json:"databaseFormat,omitempty" tf:"database_format,omitempty"`
+
+	// Specifies the hybrid secondary usage for disaster recovery of the SQL Managed Instance. Possible values are Active and Passive. Defaults to Active.
+	// +kubebuilder:validation:Optional
+	HybridSecondaryUsage *string `json:"hybridSecondaryUsage,omitempty" tf:"hybrid_secondary_usage,omitempty"`
 
 	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
@@ -268,11 +366,15 @@ type MSSQLManagedInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// The service principal type. The only possible value is SystemAssigned.
+	// +kubebuilder:validation:Optional
+	ServicePrincipalType *string `json:"servicePrincipalType,omitempty" tf:"service_principal_type,omitempty"`
+
 	// Specifies the SKU Name for the SQL Managed Instance. Valid values include GP_Gen4, GP_Gen5, GP_Gen8IM, GP_Gen8IH, BC_Gen4, BC_Gen5, BC_Gen8IM or BC_Gen8IH.
 	// +kubebuilder:validation:Optional
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
-	// Specifies the storage account type used to store backups for this database. Changing this forces a new resource to be created. Possible values are GRS, LRS and ZRS. Defaults to GRS.
+	// Specifies the storage account type used to store backups for this database. Possible values are GRS, GZRS, LRS, and ZRS. Defaults to GRS.
 	// +kubebuilder:validation:Optional
 	StorageAccountType *string `json:"storageAccountType,omitempty" tf:"storage_account_type,omitempty"`
 
@@ -280,7 +382,7 @@ type MSSQLManagedInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	StorageSizeInGb *float64 `json:"storageSizeInGb,omitempty" tf:"storage_size_in_gb,omitempty"`
 
-	// The subnet resource id that the SQL Managed Instance will be associated with. Changing this forces a new resource to be created.
+	// The subnet resource id that the SQL Managed Instance will be associated with.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -348,8 +450,6 @@ type MSSQLManagedInstanceStatus struct {
 type MSSQLManagedInstance struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.administratorLogin) || (has(self.initProvider) && has(self.initProvider.administratorLogin))",message="spec.forProvider.administratorLogin is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.administratorLoginPasswordSecretRef)",message="spec.forProvider.administratorLoginPasswordSecretRef is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.licenseType) || (has(self.initProvider) && has(self.initProvider.licenseType))",message="spec.forProvider.licenseType is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || (has(self.initProvider) && has(self.initProvider.location))",message="spec.forProvider.location is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.skuName) || (has(self.initProvider) && has(self.initProvider.skuName))",message="spec.forProvider.skuName is a required parameter"

@@ -18,10 +18,10 @@ type CustomParametersInitParameters struct {
 	// The ID of a Azure Machine Learning workspace to link with Databricks workspace. Changing this forces a new resource to be created.
 	MachineLearningWorkspaceID *string `json:"machineLearningWorkspaceId,omitempty" tf:"machine_learning_workspace_id,omitempty"`
 
-	// Name of the NAT gateway for Secure Cluster Connectivity (No Public IP) workspace subnets. Defaults to nat-gateway. Changing this forces a new resource to be created.
+	// Name of the NAT gateway for Secure Cluster Connectivity (No Public IP) workspace subnets (only for workspace with managed virtual network). Defaults to nat-gateway. Changing this forces a new resource to be created.
 	NATGatewayName *string `json:"natGatewayName,omitempty" tf:"nat_gateway_name,omitempty"`
 
-	// Are public IP Addresses not allowed? Possible values are true or false. Defaults to false.
+	// Are public IP Addresses not allowed? Possible values are true or false. Defaults to true.
 	NoPublicIP *bool `json:"noPublicIp,omitempty" tf:"no_public_ip,omitempty"`
 
 	// The name of the Private Subnet within the Virtual Network. Required if virtual_network_id is set. Changing this forces a new resource to be created.
@@ -39,7 +39,7 @@ type CustomParametersInitParameters struct {
 	// The resource ID of the azurerm_subnet_network_security_group_association resource which is referred to by the private_subnet_name field. This is the same as the ID of the subnet referred to by the private_subnet_name field. Required if virtual_network_id is set.
 	PrivateSubnetNetworkSecurityGroupAssociationID *string `json:"privateSubnetNetworkSecurityGroupAssociationId,omitempty" tf:"private_subnet_network_security_group_association_id,omitempty"`
 
-	// Name of the Public IP for No Public IP workspace with managed vNet. Defaults to nat-gw-public-ip. Changing this forces a new resource to be created.
+	// Name of the Public IP for No Public IP workspace with managed virtual network. Defaults to nat-gw-public-ip. Changing this forces a new resource to be created.
 	PublicIPName *string `json:"publicIpName,omitempty" tf:"public_ip_name,omitempty"`
 
 	// The name of the Public Subnet within the Virtual Network. Required if virtual_network_id is set. Changing this forces a new resource to be created.
@@ -60,7 +60,7 @@ type CustomParametersInitParameters struct {
 	// Default Databricks File Storage account name. Defaults to a randomized name(e.g. dbstoragel6mfeghoe5kxu). Changing this forces a new resource to be created.
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 
-	// Storage account SKU name. Possible values include Standard_LRS, Standard_GRS, Standard_RAGRS, Standard_GZRS, Standard_RAGZRS, Standard_ZRS, Premium_LRS or Premium_ZRS. Defaults to Standard_GRS. Changing this forces a new resource to be created.
+	// Storage account SKU name. Possible values include Standard_LRS, Standard_GRS, Standard_RAGRS, Standard_GZRS, Standard_RAGZRS, Standard_ZRS, Premium_LRS or Premium_ZRS. Defaults to Standard_GRS.
 	StorageAccountSkuName *string `json:"storageAccountSkuName,omitempty" tf:"storage_account_sku_name,omitempty"`
 
 	// The ID of a Virtual Network where this Databricks Cluster should be created. Changing this forces a new resource to be created.
@@ -75,10 +75,10 @@ type CustomParametersObservation struct {
 	// The ID of a Azure Machine Learning workspace to link with Databricks workspace. Changing this forces a new resource to be created.
 	MachineLearningWorkspaceID *string `json:"machineLearningWorkspaceId,omitempty" tf:"machine_learning_workspace_id,omitempty"`
 
-	// Name of the NAT gateway for Secure Cluster Connectivity (No Public IP) workspace subnets. Defaults to nat-gateway. Changing this forces a new resource to be created.
+	// Name of the NAT gateway for Secure Cluster Connectivity (No Public IP) workspace subnets (only for workspace with managed virtual network). Defaults to nat-gateway. Changing this forces a new resource to be created.
 	NATGatewayName *string `json:"natGatewayName,omitempty" tf:"nat_gateway_name,omitempty"`
 
-	// Are public IP Addresses not allowed? Possible values are true or false. Defaults to false.
+	// Are public IP Addresses not allowed? Possible values are true or false. Defaults to true.
 	NoPublicIP *bool `json:"noPublicIp,omitempty" tf:"no_public_ip,omitempty"`
 
 	// The name of the Private Subnet within the Virtual Network. Required if virtual_network_id is set. Changing this forces a new resource to be created.
@@ -87,7 +87,7 @@ type CustomParametersObservation struct {
 	// The resource ID of the azurerm_subnet_network_security_group_association resource which is referred to by the private_subnet_name field. This is the same as the ID of the subnet referred to by the private_subnet_name field. Required if virtual_network_id is set.
 	PrivateSubnetNetworkSecurityGroupAssociationID *string `json:"privateSubnetNetworkSecurityGroupAssociationId,omitempty" tf:"private_subnet_network_security_group_association_id,omitempty"`
 
-	// Name of the Public IP for No Public IP workspace with managed vNet. Defaults to nat-gw-public-ip. Changing this forces a new resource to be created.
+	// Name of the Public IP for No Public IP workspace with managed virtual network. Defaults to nat-gw-public-ip. Changing this forces a new resource to be created.
 	PublicIPName *string `json:"publicIpName,omitempty" tf:"public_ip_name,omitempty"`
 
 	// The name of the Public Subnet within the Virtual Network. Required if virtual_network_id is set. Changing this forces a new resource to be created.
@@ -99,7 +99,7 @@ type CustomParametersObservation struct {
 	// Default Databricks File Storage account name. Defaults to a randomized name(e.g. dbstoragel6mfeghoe5kxu). Changing this forces a new resource to be created.
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 
-	// Storage account SKU name. Possible values include Standard_LRS, Standard_GRS, Standard_RAGRS, Standard_GZRS, Standard_RAGZRS, Standard_ZRS, Premium_LRS or Premium_ZRS. Defaults to Standard_GRS. Changing this forces a new resource to be created.
+	// Storage account SKU name. Possible values include Standard_LRS, Standard_GRS, Standard_RAGRS, Standard_GZRS, Standard_RAGZRS, Standard_ZRS, Premium_LRS or Premium_ZRS. Defaults to Standard_GRS.
 	StorageAccountSkuName *string `json:"storageAccountSkuName,omitempty" tf:"storage_account_sku_name,omitempty"`
 
 	// The ID of a Virtual Network where this Databricks Cluster should be created. Changing this forces a new resource to be created.
@@ -115,11 +115,11 @@ type CustomParametersParameters struct {
 	// +kubebuilder:validation:Optional
 	MachineLearningWorkspaceID *string `json:"machineLearningWorkspaceId,omitempty" tf:"machine_learning_workspace_id,omitempty"`
 
-	// Name of the NAT gateway for Secure Cluster Connectivity (No Public IP) workspace subnets. Defaults to nat-gateway. Changing this forces a new resource to be created.
+	// Name of the NAT gateway for Secure Cluster Connectivity (No Public IP) workspace subnets (only for workspace with managed virtual network). Defaults to nat-gateway. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	NATGatewayName *string `json:"natGatewayName,omitempty" tf:"nat_gateway_name,omitempty"`
 
-	// Are public IP Addresses not allowed? Possible values are true or false. Defaults to false.
+	// Are public IP Addresses not allowed? Possible values are true or false. Defaults to true.
 	// +kubebuilder:validation:Optional
 	NoPublicIP *bool `json:"noPublicIp,omitempty" tf:"no_public_ip,omitempty"`
 
@@ -140,7 +140,7 @@ type CustomParametersParameters struct {
 	// +kubebuilder:validation:Optional
 	PrivateSubnetNetworkSecurityGroupAssociationID *string `json:"privateSubnetNetworkSecurityGroupAssociationId,omitempty" tf:"private_subnet_network_security_group_association_id,omitempty"`
 
-	// Name of the Public IP for No Public IP workspace with managed vNet. Defaults to nat-gw-public-ip. Changing this forces a new resource to be created.
+	// Name of the Public IP for No Public IP workspace with managed virtual network. Defaults to nat-gw-public-ip. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	PublicIPName *string `json:"publicIpName,omitempty" tf:"public_ip_name,omitempty"`
 
@@ -165,7 +165,7 @@ type CustomParametersParameters struct {
 	// +kubebuilder:validation:Optional
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 
-	// Storage account SKU name. Possible values include Standard_LRS, Standard_GRS, Standard_RAGRS, Standard_GZRS, Standard_RAGZRS, Standard_ZRS, Premium_LRS or Premium_ZRS. Defaults to Standard_GRS. Changing this forces a new resource to be created.
+	// Storage account SKU name. Possible values include Standard_LRS, Standard_GRS, Standard_RAGRS, Standard_GZRS, Standard_RAGZRS, Standard_ZRS, Premium_LRS or Premium_ZRS. Defaults to Standard_GRS.
 	// +kubebuilder:validation:Optional
 	StorageAccountSkuName *string `json:"storageAccountSkuName,omitempty" tf:"storage_account_sku_name,omitempty"`
 
@@ -176,6 +176,58 @@ type CustomParametersParameters struct {
 	// Address prefix for Managed virtual network. Defaults to 10.139. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	VnetAddressPrefix *string `json:"vnetAddressPrefix,omitempty" tf:"vnet_address_prefix,omitempty"`
+}
+
+type EnhancedSecurityComplianceInitParameters struct {
+
+	// Enables automatic cluster updates for this workspace. Defaults to false.
+	AutomaticClusterUpdateEnabled *bool `json:"automaticClusterUpdateEnabled,omitempty" tf:"automatic_cluster_update_enabled,omitempty"`
+
+	// Enables compliance security profile for this workspace. Defaults to false.
+	ComplianceSecurityProfileEnabled *bool `json:"complianceSecurityProfileEnabled,omitempty" tf:"compliance_security_profile_enabled,omitempty"`
+
+	// A list of standards to enforce on this workspace. Possible values include HIPAA and PCI_DSS.
+	// +listType=set
+	ComplianceSecurityProfileStandards []*string `json:"complianceSecurityProfileStandards,omitempty" tf:"compliance_security_profile_standards,omitempty"`
+
+	// Enables enhanced security monitoring for this workspace. Defaults to false.
+	EnhancedSecurityMonitoringEnabled *bool `json:"enhancedSecurityMonitoringEnabled,omitempty" tf:"enhanced_security_monitoring_enabled,omitempty"`
+}
+
+type EnhancedSecurityComplianceObservation struct {
+
+	// Enables automatic cluster updates for this workspace. Defaults to false.
+	AutomaticClusterUpdateEnabled *bool `json:"automaticClusterUpdateEnabled,omitempty" tf:"automatic_cluster_update_enabled,omitempty"`
+
+	// Enables compliance security profile for this workspace. Defaults to false.
+	ComplianceSecurityProfileEnabled *bool `json:"complianceSecurityProfileEnabled,omitempty" tf:"compliance_security_profile_enabled,omitempty"`
+
+	// A list of standards to enforce on this workspace. Possible values include HIPAA and PCI_DSS.
+	// +listType=set
+	ComplianceSecurityProfileStandards []*string `json:"complianceSecurityProfileStandards,omitempty" tf:"compliance_security_profile_standards,omitempty"`
+
+	// Enables enhanced security monitoring for this workspace. Defaults to false.
+	EnhancedSecurityMonitoringEnabled *bool `json:"enhancedSecurityMonitoringEnabled,omitempty" tf:"enhanced_security_monitoring_enabled,omitempty"`
+}
+
+type EnhancedSecurityComplianceParameters struct {
+
+	// Enables automatic cluster updates for this workspace. Defaults to false.
+	// +kubebuilder:validation:Optional
+	AutomaticClusterUpdateEnabled *bool `json:"automaticClusterUpdateEnabled,omitempty" tf:"automatic_cluster_update_enabled,omitempty"`
+
+	// Enables compliance security profile for this workspace. Defaults to false.
+	// +kubebuilder:validation:Optional
+	ComplianceSecurityProfileEnabled *bool `json:"complianceSecurityProfileEnabled,omitempty" tf:"compliance_security_profile_enabled,omitempty"`
+
+	// A list of standards to enforce on this workspace. Possible values include HIPAA and PCI_DSS.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	ComplianceSecurityProfileStandards []*string `json:"complianceSecurityProfileStandards,omitempty" tf:"compliance_security_profile_standards,omitempty"`
+
+	// Enables enhanced security monitoring for this workspace. Defaults to false.
+	// +kubebuilder:validation:Optional
+	EnhancedSecurityMonitoringEnabled *bool `json:"enhancedSecurityMonitoringEnabled,omitempty" tf:"enhanced_security_monitoring_enabled,omitempty"`
 }
 
 type ManagedDiskIdentityInitParameters struct {
@@ -228,10 +280,13 @@ type WorkspaceInitParameters struct {
 	// Disallow public access to default storage account. Defaults to false.
 	DefaultStorageFirewallEnabled *bool `json:"defaultStorageFirewallEnabled,omitempty" tf:"default_storage_firewall_enabled,omitempty"`
 
+	// An enhanced_security_compliance block as documented below. This feature is only valid if sku is set to premium.
+	EnhancedSecurityCompliance []EnhancedSecurityComplianceInitParameters `json:"enhancedSecurityCompliance,omitempty" tf:"enhanced_security_compliance,omitempty"`
+
 	// Is the Databricks File System root file system enabled with a secondary layer of encryption with platform managed keys? Possible values are true or false. Defaults to false. This field is only valid if the Databricks Workspace sku is set to premium. Changing this forces a new resource to be created.
 	InfrastructureEncryptionEnabled *bool `json:"infrastructureEncryptionEnabled,omitempty" tf:"infrastructure_encryption_enabled,omitempty"`
 
-	// Resource ID of the Outbound Load balancer Backend Address Pool for Secure Cluster Connectivity (No Public IP) workspace. Changing this forces a new resource to be created.
+	// Resource ID of the Outbound Load balancer Backend Address Pool for Secure Cluster Connectivity (No Public IP) workspace with managed virtual network. Changing this forces a new resource to be created.
 	LoadBalancerBackendAddressPoolID *string `json:"loadBalancerBackendAddressPoolId,omitempty" tf:"load_balancer_backend_address_pool_id,omitempty"`
 
 	// Specifies the supported Azure location where the resource has to be created. Changing this forces a new resource to be created.
@@ -295,13 +350,16 @@ type WorkspaceObservation struct {
 	// The ID of Managed Disk Encryption Set created by the Databricks Workspace.
 	DiskEncryptionSetID *string `json:"diskEncryptionSetId,omitempty" tf:"disk_encryption_set_id,omitempty"`
 
+	// An enhanced_security_compliance block as documented below. This feature is only valid if sku is set to premium.
+	EnhancedSecurityCompliance []EnhancedSecurityComplianceObservation `json:"enhancedSecurityCompliance,omitempty" tf:"enhanced_security_compliance,omitempty"`
+
 	// The ID of the Databricks Workspace in the Azure management plane.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Is the Databricks File System root file system enabled with a secondary layer of encryption with platform managed keys? Possible values are true or false. Defaults to false. This field is only valid if the Databricks Workspace sku is set to premium. Changing this forces a new resource to be created.
 	InfrastructureEncryptionEnabled *bool `json:"infrastructureEncryptionEnabled,omitempty" tf:"infrastructure_encryption_enabled,omitempty"`
 
-	// Resource ID of the Outbound Load balancer Backend Address Pool for Secure Cluster Connectivity (No Public IP) workspace. Changing this forces a new resource to be created.
+	// Resource ID of the Outbound Load balancer Backend Address Pool for Secure Cluster Connectivity (No Public IP) workspace with managed virtual network. Changing this forces a new resource to be created.
 	LoadBalancerBackendAddressPoolID *string `json:"loadBalancerBackendAddressPoolId,omitempty" tf:"load_balancer_backend_address_pool_id,omitempty"`
 
 	// Specifies the supported Azure location where the resource has to be created. Changing this forces a new resource to be created.
@@ -375,11 +433,15 @@ type WorkspaceParameters struct {
 	// +kubebuilder:validation:Optional
 	DefaultStorageFirewallEnabled *bool `json:"defaultStorageFirewallEnabled,omitempty" tf:"default_storage_firewall_enabled,omitempty"`
 
+	// An enhanced_security_compliance block as documented below. This feature is only valid if sku is set to premium.
+	// +kubebuilder:validation:Optional
+	EnhancedSecurityCompliance []EnhancedSecurityComplianceParameters `json:"enhancedSecurityCompliance,omitempty" tf:"enhanced_security_compliance,omitempty"`
+
 	// Is the Databricks File System root file system enabled with a secondary layer of encryption with platform managed keys? Possible values are true or false. Defaults to false. This field is only valid if the Databricks Workspace sku is set to premium. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	InfrastructureEncryptionEnabled *bool `json:"infrastructureEncryptionEnabled,omitempty" tf:"infrastructure_encryption_enabled,omitempty"`
 
-	// Resource ID of the Outbound Load balancer Backend Address Pool for Secure Cluster Connectivity (No Public IP) workspace. Changing this forces a new resource to be created.
+	// Resource ID of the Outbound Load balancer Backend Address Pool for Secure Cluster Connectivity (No Public IP) workspace with managed virtual network. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	LoadBalancerBackendAddressPoolID *string `json:"loadBalancerBackendAddressPoolId,omitempty" tf:"load_balancer_backend_address_pool_id,omitempty"`
 

@@ -635,7 +635,7 @@ type LogFileInitParameters struct {
 	// Specifies a list of file patterns where the log files are located. For example, C:\\JavaLogs\\*.log.
 	FilePatterns []*string `json:"filePatterns,omitempty" tf:"file_patterns,omitempty"`
 
-	// The data format of the log files. possible value is text.
+	// The data format of the log files. Possible values are text and json.
 	Format *string `json:"format,omitempty" tf:"format,omitempty"`
 
 	// The name which should be used for this data source. This name should be unique across all data sources regardless of type within the Data Collection Rule.
@@ -653,7 +653,7 @@ type LogFileObservation struct {
 	// Specifies a list of file patterns where the log files are located. For example, C:\\JavaLogs\\*.log.
 	FilePatterns []*string `json:"filePatterns,omitempty" tf:"file_patterns,omitempty"`
 
-	// The data format of the log files. possible value is text.
+	// The data format of the log files. Possible values are text and json.
 	Format *string `json:"format,omitempty" tf:"format,omitempty"`
 
 	// The name which should be used for this data source. This name should be unique across all data sources regardless of type within the Data Collection Rule.
@@ -672,7 +672,7 @@ type LogFileParameters struct {
 	// +kubebuilder:validation:Optional
 	FilePatterns []*string `json:"filePatterns" tf:"file_patterns,omitempty"`
 
-	// The data format of the log files. possible value is text.
+	// The data format of the log files. Possible values are text and json.
 	// +kubebuilder:validation:Optional
 	Format *string `json:"format" tf:"format,omitempty"`
 
@@ -938,7 +938,7 @@ type PerformanceCounterInitParameters struct {
 	// The name which should be used for this data source. This name should be unique across all data sources regardless of type within the Data Collection Rule.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The number of seconds between consecutive counter measurements (samples). The value should be integer between 1 and 300 inclusive. sampling_frequency_in_seconds must be equal to 60 seconds for counters collected with Microsoft-InsightsMetrics stream.
+	// The number of seconds between consecutive counter measurements (samples). The value should be integer between 1 and 1800 inclusive. sampling_frequency_in_seconds must be equal to 60 seconds for counters collected with Microsoft-InsightsMetrics stream.
 	SamplingFrequencyInSeconds *float64 `json:"samplingFrequencyInSeconds,omitempty" tf:"sampling_frequency_in_seconds,omitempty"`
 
 	// Specifies a list of streams that this data source will be sent to. A stream indicates what schema will be used for this data and usually what table in Log Analytics the data will be sent to.
@@ -953,7 +953,7 @@ type PerformanceCounterObservation struct {
 	// The name which should be used for this data source. This name should be unique across all data sources regardless of type within the Data Collection Rule.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The number of seconds between consecutive counter measurements (samples). The value should be integer between 1 and 300 inclusive. sampling_frequency_in_seconds must be equal to 60 seconds for counters collected with Microsoft-InsightsMetrics stream.
+	// The number of seconds between consecutive counter measurements (samples). The value should be integer between 1 and 1800 inclusive. sampling_frequency_in_seconds must be equal to 60 seconds for counters collected with Microsoft-InsightsMetrics stream.
 	SamplingFrequencyInSeconds *float64 `json:"samplingFrequencyInSeconds,omitempty" tf:"sampling_frequency_in_seconds,omitempty"`
 
 	// Specifies a list of streams that this data source will be sent to. A stream indicates what schema will be used for this data and usually what table in Log Analytics the data will be sent to.
@@ -970,7 +970,7 @@ type PerformanceCounterParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The number of seconds between consecutive counter measurements (samples). The value should be integer between 1 and 300 inclusive. sampling_frequency_in_seconds must be equal to 60 seconds for counters collected with Microsoft-InsightsMetrics stream.
+	// The number of seconds between consecutive counter measurements (samples). The value should be integer between 1 and 1800 inclusive. sampling_frequency_in_seconds must be equal to 60 seconds for counters collected with Microsoft-InsightsMetrics stream.
 	// +kubebuilder:validation:Optional
 	SamplingFrequencyInSeconds *float64 `json:"samplingFrequencyInSeconds" tf:"sampling_frequency_in_seconds,omitempty"`
 
@@ -1226,7 +1226,7 @@ type StreamDeclarationInitParameters struct {
 	// One or more column blocks as defined above.
 	Column []ColumnInitParameters `json:"column,omitempty" tf:"column,omitempty"`
 
-	// The name of the custom stream. This name should be unique across all stream_declaration blocks.
+	// The name of the custom stream. This name should be unique across all stream_declaration blocks and must begin with a prefix of Custom-.
 	StreamName *string `json:"streamName,omitempty" tf:"stream_name,omitempty"`
 }
 
@@ -1235,7 +1235,7 @@ type StreamDeclarationObservation struct {
 	// One or more column blocks as defined above.
 	Column []ColumnObservation `json:"column,omitempty" tf:"column,omitempty"`
 
-	// The name of the custom stream. This name should be unique across all stream_declaration blocks.
+	// The name of the custom stream. This name should be unique across all stream_declaration blocks and must begin with a prefix of Custom-.
 	StreamName *string `json:"streamName,omitempty" tf:"stream_name,omitempty"`
 }
 
@@ -1245,7 +1245,7 @@ type StreamDeclarationParameters struct {
 	// +kubebuilder:validation:Optional
 	Column []ColumnParameters `json:"column" tf:"column,omitempty"`
 
-	// The name of the custom stream. This name should be unique across all stream_declaration blocks.
+	// The name of the custom stream. This name should be unique across all stream_declaration blocks and must begin with a prefix of Custom-.
 	// +kubebuilder:validation:Optional
 	StreamName *string `json:"streamName" tf:"stream_name,omitempty"`
 }
@@ -1296,7 +1296,7 @@ type SyslogParameters struct {
 
 	// Specifies a list of streams that this data source will be sent to. A stream indicates what schema will be used for this data and usually what table in Log Analytics the data will be sent to.
 	// +kubebuilder:validation:Optional
-	Streams []*string `json:"streams,omitempty" tf:"streams,omitempty"`
+	Streams []*string `json:"streams" tf:"streams,omitempty"`
 }
 
 type TextInitParameters struct {

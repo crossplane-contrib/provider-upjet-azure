@@ -15,50 +15,41 @@ import (
 
 type KubernetesClusterNodePoolInitParameters struct {
 
+	// Whether to enable auto-scaler.
+	AutoScalingEnabled *bool `json:"autoScalingEnabled,omitempty" tf:"auto_scaling_enabled,omitempty"`
+
 	// Specifies the ID of the Capacity Reservation Group where this Node Pool should exist. Changing this forces a new resource to be created.
 	CapacityReservationGroupID *string `json:"capacityReservationGroupId,omitempty" tf:"capacity_reservation_group_id,omitempty"`
-
-	// Specifies whether to trust a Custom CA.
-	CustomCATrustEnabled *bool `json:"customCaTrustEnabled,omitempty" tf:"custom_ca_trust_enabled,omitempty"`
-
-	// Whether to enable auto-scaler.
-	EnableAutoScaling *bool `json:"enableAutoScaling,omitempty" tf:"enable_auto_scaling,omitempty"`
-
-	// Should the nodes in this Node Pool have host encryption enabled? Changing this forces a new resource to be created.
-	EnableHostEncryption *bool `json:"enableHostEncryption,omitempty" tf:"enable_host_encryption,omitempty"`
-
-	// Should each node have a Public IP Address? Changing this forces a new resource to be created.
-	EnableNodePublicIP *bool `json:"enableNodePublicIp,omitempty" tf:"enable_node_public_ip,omitempty"`
 
 	// The Eviction Policy which should be used for Virtual Machines within the Virtual Machine Scale Set powering this Node Pool. Possible values are Deallocate and Delete. Changing this forces a new resource to be created.
 	EvictionPolicy *string `json:"evictionPolicy,omitempty" tf:"eviction_policy,omitempty"`
 
-	// Should the nodes in this Node Pool have Federal Information Processing Standard enabled? Changing this forces a new resource to be created.
+	// Should the nodes in this Node Pool have Federal Information Processing Standard enabled? Changing this property requires specifying temporary_name_for_rotation.
 	FipsEnabled *bool `json:"fipsEnabled,omitempty" tf:"fips_enabled,omitempty"`
 
 	// Specifies the GPU MIG instance profile for supported GPU VM SKU. The allowed values are MIG1g, MIG2g, MIG3g, MIG4g and MIG7g. Changing this forces a new resource to be created.
 	GpuInstance *string `json:"gpuInstance,omitempty" tf:"gpu_instance,omitempty"`
 
+	// Should the nodes in this Node Pool have host encryption enabled? Changing this property requires specifying temporary_name_for_rotation.
+	HostEncryptionEnabled *bool `json:"hostEncryptionEnabled,omitempty" tf:"host_encryption_enabled,omitempty"`
+
 	// The fully qualified resource ID of the Dedicated Host Group to provision virtual machines from. Changing this forces a new resource to be created.
 	HostGroupID *string `json:"hostGroupId,omitempty" tf:"host_group_id,omitempty"`
 
-	// A kubelet_config block as defined below. Changing this forces a new resource to be created.
+	// A kubelet_config block as defined below. Changing this requires specifying temporary_name_for_rotation.
 	KubeletConfig []KubernetesClusterNodePoolKubeletConfigInitParameters `json:"kubeletConfig,omitempty" tf:"kubelet_config,omitempty"`
 
-	// The type of disk used by kubelet. Possible values are OS and Temporary.
+	// The type of disk used by kubelet. Possible values are OS and Temporary. Changing this property requires specifying temporary_name_for_rotation.
 	KubeletDiskType *string `json:"kubeletDiskType,omitempty" tf:"kubelet_disk_type,omitempty"`
 
-	// A linux_os_config block as defined below. Changing this forces a new resource to be created.
+	// A linux_os_config block as defined below. Changing this requires specifying temporary_name_for_rotation.
 	LinuxOsConfig []KubernetesClusterNodePoolLinuxOsConfigInitParameters `json:"linuxOsConfig,omitempty" tf:"linux_os_config,omitempty"`
 
 	// The maximum number of nodes which should exist within this Node Pool. Valid values are between 0 and 1000 and must be greater than or equal to min_count.
 	MaxCount *float64 `json:"maxCount,omitempty" tf:"max_count,omitempty"`
 
-	// The maximum number of pods that can run on each agent. Changing this forces a new resource to be created.
+	// The maximum number of pods that can run on each agent. Changing this property requires specifying temporary_name_for_rotation.
 	MaxPods *float64 `json:"maxPods,omitempty" tf:"max_pods,omitempty"`
-
-	// A base64-encoded string which will be written to /etc/motd after decoding. This allows customization of the message of the day for Linux nodes. It cannot be specified for Windows nodes and must be a static string (i.e. will be printed raw and not executed as a script). Changing this forces a new resource to be created.
-	MessageOfTheDay *string `json:"messageOfTheDay,omitempty" tf:"message_of_the_day,omitempty"`
 
 	// The minimum number of nodes which should exist within this Node Pool. Valid values are between 0 and 1000 and must be less than or equal to max_count.
 	MinCount *float64 `json:"minCount,omitempty" tf:"min_count,omitempty"`
@@ -76,7 +67,10 @@ type KubernetesClusterNodePoolInitParameters struct {
 	// A node_network_profile block as documented below.
 	NodeNetworkProfile []KubernetesClusterNodePoolNodeNetworkProfileInitParameters `json:"nodeNetworkProfile,omitempty" tf:"node_network_profile,omitempty"`
 
-	// Resource ID for the Public IP Addresses Prefix for the nodes in this Node Pool. enable_node_public_ip should be true. Changing this forces a new resource to be created.
+	// Should each node have a Public IP Address? Changing this property requires specifying temporary_name_for_rotation.
+	NodePublicIPEnabled *bool `json:"nodePublicIpEnabled,omitempty" tf:"node_public_ip_enabled,omitempty"`
+
+	// Resource ID for the Public IP Addresses Prefix for the nodes in this Node Pool. node_public_ip_enabled should be true. Changing this forces a new resource to be created.
 	NodePublicIPPrefixID *string `json:"nodePublicIpPrefixId,omitempty" tf:"node_public_ip_prefix_id,omitempty"`
 
 	// A list of Kubernetes taints which should be applied to nodes in the agent pool (e.g key=value:NoSchedule).
@@ -85,19 +79,19 @@ type KubernetesClusterNodePoolInitParameters struct {
 	// Version of Kubernetes used for the Agents. If not specified, the latest recommended version will be used at provisioning time (but won't auto-upgrade). AKS does not require an exact patch version to be specified, minor version aliases such as 1.22 are also supported. - The minor version's latest GA patch is automatically chosen in that case. More details can be found in the documentation.
 	OrchestratorVersion *string `json:"orchestratorVersion,omitempty" tf:"orchestrator_version,omitempty"`
 
-	// The Agent Operating System disk size in GB. Changing this forces a new resource to be created.
+	// The Agent Operating System disk size in GB. Changing this property requires specifying temporary_name_for_rotation.
 	OsDiskSizeGb *float64 `json:"osDiskSizeGb,omitempty" tf:"os_disk_size_gb,omitempty"`
 
-	// The type of disk which should be used for the Operating System. Possible values are Ephemeral and Managed. Defaults to Managed. Changing this forces a new resource to be created.
+	// The type of disk which should be used for the Operating System. Possible values are Ephemeral and Managed. Defaults to Managed. Changing this property requires specifying temporary_name_for_rotation.
 	OsDiskType *string `json:"osDiskType,omitempty" tf:"os_disk_type,omitempty"`
 
-	// Specifies the OS SKU used by the agent pool. Possible values are AzureLinux, Ubuntu, Windows2019 and Windows2022. If not specified, the default is Ubuntu if OSType=Linux or Windows2019 if OSType=Windows. And the default Windows OSSKU will be changed to Windows2022 after Windows2019 is deprecated. Changing this forces a new resource to be created.
+	// Specifies the OS SKU used by the agent pool. Possible values are AzureLinux, Ubuntu, Windows2019 and Windows2022. If not specified, the default is Ubuntu if OSType=Linux or Windows2019 if OSType=Windows. And the default Windows OSSKU will be changed to Windows2022 after Windows2019 is deprecated. Changing this from AzureLinux or Ubuntu to AzureLinux or Ubuntu will not replace the resource, otherwise it forces a new resource to be created.
 	OsSku *string `json:"osSku,omitempty" tf:"os_sku,omitempty"`
 
 	// The Operating System which should be used for this Node Pool. Changing this forces a new resource to be created. Possible values are Linux and Windows. Defaults to Linux.
 	OsType *string `json:"osType,omitempty" tf:"os_type,omitempty"`
 
-	// The ID of the Subnet where the pods in the Node Pool should exist. Changing this forces a new resource to be created.
+	// The ID of the Subnet where the pods in the Node Pool should exist. Changing this property requires specifying temporary_name_for_rotation.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	PodSubnetID *string `json:"podSubnetId,omitempty" tf:"pod_subnet_id,omitempty"`
@@ -119,7 +113,7 @@ type KubernetesClusterNodePoolInitParameters struct {
 	// Specifies how the node pool should deal with scaled-down nodes. Allowed values are Delete and Deallocate. Defaults to Delete.
 	ScaleDownMode *string `json:"scaleDownMode,omitempty" tf:"scale_down_mode,omitempty"`
 
-	// The ID of the Snapshot which should be used to create this Node Pool. Changing this forces a new resource to be created.
+	// The ID of the Snapshot which should be used to create this Node Pool. Changing this property requires specifying temporary_name_for_rotation.
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
 	// The maximum price you're willing to pay in USD per Virtual Machine. Valid values are -1 (the current on-demand price for a Virtual Machine) or a positive value with up to five decimal places. Changing this forces a new resource to be created.
@@ -129,16 +123,19 @@ type KubernetesClusterNodePoolInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Used to specify whether the UltraSSD is enabled in the Node Pool. Defaults to false. See the documentation for more information. Changing this forces a new resource to be created.
+	// Specifies the name of the temporary node pool used to cycle the node pool when one of the relevant properties are updated.
+	TemporaryNameForRotation *string `json:"temporaryNameForRotation,omitempty" tf:"temporary_name_for_rotation,omitempty"`
+
+	// Used to specify whether the UltraSSD is enabled in the Node Pool. Defaults to false. See the documentation for more information. Changing this property requires specifying temporary_name_for_rotation.
 	UltraSsdEnabled *bool `json:"ultraSsdEnabled,omitempty" tf:"ultra_ssd_enabled,omitempty"`
 
 	// A upgrade_settings block as documented below.
 	UpgradeSettings []KubernetesClusterNodePoolUpgradeSettingsInitParameters `json:"upgradeSettings,omitempty" tf:"upgrade_settings,omitempty"`
 
-	// The SKU which should be used for the Virtual Machines used in this Node Pool. Changing this forces a new resource to be created.
+	// The SKU which should be used for the Virtual Machines used in this Node Pool. Changing this property requires specifying temporary_name_for_rotation.
 	VMSize *string `json:"vmSize,omitempty" tf:"vm_size,omitempty"`
 
-	// The ID of the Subnet where this Node Pool should exist. Changing this forces a new resource to be created.
+	// The ID of the Subnet where this Node Pool should exist. Changing this property requires specifying temporary_name_for_rotation.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	VnetSubnetID *string `json:"vnetSubnetId,omitempty" tf:"vnet_subnet_id,omitempty"`
@@ -154,171 +151,171 @@ type KubernetesClusterNodePoolInitParameters struct {
 	// A windows_profile block as documented below. Changing this forces a new resource to be created.
 	WindowsProfile []KubernetesClusterNodePoolWindowsProfileInitParameters `json:"windowsProfile,omitempty" tf:"windows_profile,omitempty"`
 
-	// Used to specify the workload runtime. Allowed values are OCIContainer, WasmWasi and KataMshvVmIsolation.
+	// Used to specify the workload runtime. Allowed values are OCIContainer and WasmWasi.
 	WorkloadRuntime *string `json:"workloadRuntime,omitempty" tf:"workload_runtime,omitempty"`
 
-	// Specifies a list of Availability Zones in which this Kubernetes Cluster Node Pool should be located. Changing this forces a new Kubernetes Cluster Node Pool to be created.
+	// Specifies a list of Availability Zones in which this Kubernetes Cluster Node Pool should be located. Changing this property requires specifying temporary_name_for_rotation.
 	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
 type KubernetesClusterNodePoolKubeletConfigInitParameters struct {
 
-	// Specifies the allow list of unsafe sysctls command or patterns (ending in *). Changing this forces a new resource to be created.
+	// Specifies the allow list of unsafe sysctls command or patterns (ending in *).
 	// +listType=set
 	AllowedUnsafeSysctls []*string `json:"allowedUnsafeSysctls,omitempty" tf:"allowed_unsafe_sysctls,omitempty"`
 
-	// Is CPU CFS quota enforcement for containers enabled? Changing this forces a new resource to be created.
+	// Is CPU CFS quota enforcement for containers enabled? Defaults to true.
 	CPUCfsQuotaEnabled *bool `json:"cpuCfsQuotaEnabled,omitempty" tf:"cpu_cfs_quota_enabled,omitempty"`
 
-	// Specifies the CPU CFS quota period value. Changing this forces a new resource to be created.
+	// Specifies the CPU CFS quota period value.
 	CPUCfsQuotaPeriod *string `json:"cpuCfsQuotaPeriod,omitempty" tf:"cpu_cfs_quota_period,omitempty"`
 
-	// Specifies the CPU Manager policy to use. Possible values are none and static, Changing this forces a new resource to be created.
+	// Specifies the CPU Manager policy to use. Possible values are none and static,
 	CPUManagerPolicy *string `json:"cpuManagerPolicy,omitempty" tf:"cpu_manager_policy,omitempty"`
 
-	// Specifies the maximum number of container log files that can be present for a container. must be at least 2. Changing this forces a new resource to be created.
+	// Specifies the maximum number of container log files that can be present for a container. must be at least 2.
 	ContainerLogMaxLine *float64 `json:"containerLogMaxLine,omitempty" tf:"container_log_max_line,omitempty"`
 
-	// Specifies the maximum size (e.g. 10MB) of container log file before it is rotated. Changing this forces a new resource to be created.
+	// Specifies the maximum size (e.g. 10MB) of container log file before it is rotated.
 	ContainerLogMaxSizeMb *float64 `json:"containerLogMaxSizeMb,omitempty" tf:"container_log_max_size_mb,omitempty"`
 
-	// Specifies the percent of disk usage above which image garbage collection is always run. Must be between 0 and 100. Changing this forces a new resource to be created.
+	// Specifies the percent of disk usage above which image garbage collection is always run. Must be between 0 and 100.
 	ImageGcHighThreshold *float64 `json:"imageGcHighThreshold,omitempty" tf:"image_gc_high_threshold,omitempty"`
 
-	// Specifies the percent of disk usage lower than which image garbage collection is never run. Must be between 0 and 100. Changing this forces a new resource to be created.
+	// Specifies the percent of disk usage lower than which image garbage collection is never run. Must be between 0 and 100.
 	ImageGcLowThreshold *float64 `json:"imageGcLowThreshold,omitempty" tf:"image_gc_low_threshold,omitempty"`
 
-	// Specifies the maximum number of processes per pod. Changing this forces a new resource to be created.
+	// Specifies the maximum number of processes per pod.
 	PodMaxPid *float64 `json:"podMaxPid,omitempty" tf:"pod_max_pid,omitempty"`
 
-	// Specifies the Topology Manager policy to use. Possible values are none, best-effort, restricted or single-numa-node. Changing this forces a new resource to be created.
+	// Specifies the Topology Manager policy to use. Possible values are none, best-effort, restricted or single-numa-node.
 	TopologyManagerPolicy *string `json:"topologyManagerPolicy,omitempty" tf:"topology_manager_policy,omitempty"`
 }
 
 type KubernetesClusterNodePoolKubeletConfigObservation struct {
 
-	// Specifies the allow list of unsafe sysctls command or patterns (ending in *). Changing this forces a new resource to be created.
+	// Specifies the allow list of unsafe sysctls command or patterns (ending in *).
 	// +listType=set
 	AllowedUnsafeSysctls []*string `json:"allowedUnsafeSysctls,omitempty" tf:"allowed_unsafe_sysctls,omitempty"`
 
-	// Is CPU CFS quota enforcement for containers enabled? Changing this forces a new resource to be created.
+	// Is CPU CFS quota enforcement for containers enabled? Defaults to true.
 	CPUCfsQuotaEnabled *bool `json:"cpuCfsQuotaEnabled,omitempty" tf:"cpu_cfs_quota_enabled,omitempty"`
 
-	// Specifies the CPU CFS quota period value. Changing this forces a new resource to be created.
+	// Specifies the CPU CFS quota period value.
 	CPUCfsQuotaPeriod *string `json:"cpuCfsQuotaPeriod,omitempty" tf:"cpu_cfs_quota_period,omitempty"`
 
-	// Specifies the CPU Manager policy to use. Possible values are none and static, Changing this forces a new resource to be created.
+	// Specifies the CPU Manager policy to use. Possible values are none and static,
 	CPUManagerPolicy *string `json:"cpuManagerPolicy,omitempty" tf:"cpu_manager_policy,omitempty"`
 
-	// Specifies the maximum number of container log files that can be present for a container. must be at least 2. Changing this forces a new resource to be created.
+	// Specifies the maximum number of container log files that can be present for a container. must be at least 2.
 	ContainerLogMaxLine *float64 `json:"containerLogMaxLine,omitempty" tf:"container_log_max_line,omitempty"`
 
-	// Specifies the maximum size (e.g. 10MB) of container log file before it is rotated. Changing this forces a new resource to be created.
+	// Specifies the maximum size (e.g. 10MB) of container log file before it is rotated.
 	ContainerLogMaxSizeMb *float64 `json:"containerLogMaxSizeMb,omitempty" tf:"container_log_max_size_mb,omitempty"`
 
-	// Specifies the percent of disk usage above which image garbage collection is always run. Must be between 0 and 100. Changing this forces a new resource to be created.
+	// Specifies the percent of disk usage above which image garbage collection is always run. Must be between 0 and 100.
 	ImageGcHighThreshold *float64 `json:"imageGcHighThreshold,omitempty" tf:"image_gc_high_threshold,omitempty"`
 
-	// Specifies the percent of disk usage lower than which image garbage collection is never run. Must be between 0 and 100. Changing this forces a new resource to be created.
+	// Specifies the percent of disk usage lower than which image garbage collection is never run. Must be between 0 and 100.
 	ImageGcLowThreshold *float64 `json:"imageGcLowThreshold,omitempty" tf:"image_gc_low_threshold,omitempty"`
 
-	// Specifies the maximum number of processes per pod. Changing this forces a new resource to be created.
+	// Specifies the maximum number of processes per pod.
 	PodMaxPid *float64 `json:"podMaxPid,omitempty" tf:"pod_max_pid,omitempty"`
 
-	// Specifies the Topology Manager policy to use. Possible values are none, best-effort, restricted or single-numa-node. Changing this forces a new resource to be created.
+	// Specifies the Topology Manager policy to use. Possible values are none, best-effort, restricted or single-numa-node.
 	TopologyManagerPolicy *string `json:"topologyManagerPolicy,omitempty" tf:"topology_manager_policy,omitempty"`
 }
 
 type KubernetesClusterNodePoolKubeletConfigParameters struct {
 
-	// Specifies the allow list of unsafe sysctls command or patterns (ending in *). Changing this forces a new resource to be created.
+	// Specifies the allow list of unsafe sysctls command or patterns (ending in *).
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	AllowedUnsafeSysctls []*string `json:"allowedUnsafeSysctls,omitempty" tf:"allowed_unsafe_sysctls,omitempty"`
 
-	// Is CPU CFS quota enforcement for containers enabled? Changing this forces a new resource to be created.
+	// Is CPU CFS quota enforcement for containers enabled? Defaults to true.
 	// +kubebuilder:validation:Optional
 	CPUCfsQuotaEnabled *bool `json:"cpuCfsQuotaEnabled,omitempty" tf:"cpu_cfs_quota_enabled,omitempty"`
 
-	// Specifies the CPU CFS quota period value. Changing this forces a new resource to be created.
+	// Specifies the CPU CFS quota period value.
 	// +kubebuilder:validation:Optional
 	CPUCfsQuotaPeriod *string `json:"cpuCfsQuotaPeriod,omitempty" tf:"cpu_cfs_quota_period,omitempty"`
 
-	// Specifies the CPU Manager policy to use. Possible values are none and static, Changing this forces a new resource to be created.
+	// Specifies the CPU Manager policy to use. Possible values are none and static,
 	// +kubebuilder:validation:Optional
 	CPUManagerPolicy *string `json:"cpuManagerPolicy,omitempty" tf:"cpu_manager_policy,omitempty"`
 
-	// Specifies the maximum number of container log files that can be present for a container. must be at least 2. Changing this forces a new resource to be created.
+	// Specifies the maximum number of container log files that can be present for a container. must be at least 2.
 	// +kubebuilder:validation:Optional
 	ContainerLogMaxLine *float64 `json:"containerLogMaxLine,omitempty" tf:"container_log_max_line,omitempty"`
 
-	// Specifies the maximum size (e.g. 10MB) of container log file before it is rotated. Changing this forces a new resource to be created.
+	// Specifies the maximum size (e.g. 10MB) of container log file before it is rotated.
 	// +kubebuilder:validation:Optional
 	ContainerLogMaxSizeMb *float64 `json:"containerLogMaxSizeMb,omitempty" tf:"container_log_max_size_mb,omitempty"`
 
-	// Specifies the percent of disk usage above which image garbage collection is always run. Must be between 0 and 100. Changing this forces a new resource to be created.
+	// Specifies the percent of disk usage above which image garbage collection is always run. Must be between 0 and 100.
 	// +kubebuilder:validation:Optional
 	ImageGcHighThreshold *float64 `json:"imageGcHighThreshold,omitempty" tf:"image_gc_high_threshold,omitempty"`
 
-	// Specifies the percent of disk usage lower than which image garbage collection is never run. Must be between 0 and 100. Changing this forces a new resource to be created.
+	// Specifies the percent of disk usage lower than which image garbage collection is never run. Must be between 0 and 100.
 	// +kubebuilder:validation:Optional
 	ImageGcLowThreshold *float64 `json:"imageGcLowThreshold,omitempty" tf:"image_gc_low_threshold,omitempty"`
 
-	// Specifies the maximum number of processes per pod. Changing this forces a new resource to be created.
+	// Specifies the maximum number of processes per pod.
 	// +kubebuilder:validation:Optional
 	PodMaxPid *float64 `json:"podMaxPid,omitempty" tf:"pod_max_pid,omitempty"`
 
-	// Specifies the Topology Manager policy to use. Possible values are none, best-effort, restricted or single-numa-node. Changing this forces a new resource to be created.
+	// Specifies the Topology Manager policy to use. Possible values are none, best-effort, restricted or single-numa-node.
 	// +kubebuilder:validation:Optional
 	TopologyManagerPolicy *string `json:"topologyManagerPolicy,omitempty" tf:"topology_manager_policy,omitempty"`
 }
 
 type KubernetesClusterNodePoolLinuxOsConfigInitParameters struct {
 
-	// Specifies the size of swap file on each node in MB. Changing this forces a new resource to be created.
+	// Specifies the size of swap file on each node in MB.
 	SwapFileSizeMb *float64 `json:"swapFileSizeMb,omitempty" tf:"swap_file_size_mb,omitempty"`
 
-	// A sysctl_config block as defined below. Changing this forces a new resource to be created.
+	// A sysctl_config block as defined below.
 	SysctlConfig []LinuxOsConfigSysctlConfigInitParameters `json:"sysctlConfig,omitempty" tf:"sysctl_config,omitempty"`
 
-	// specifies the defrag configuration for Transparent Huge Page. Possible values are always, defer, defer+madvise, madvise and never. Changing this forces a new resource to be created.
+	// specifies the defrag configuration for Transparent Huge Page. Possible values are always, defer, defer+madvise, madvise and never.
 	TransparentHugePageDefrag *string `json:"transparentHugePageDefrag,omitempty" tf:"transparent_huge_page_defrag,omitempty"`
 
-	// Specifies the Transparent Huge Page enabled configuration. Possible values are always, madvise and never. Changing this forces a new resource to be created.
+	// Specifies the Transparent Huge Page enabled configuration. Possible values are always, madvise and never.
 	TransparentHugePageEnabled *string `json:"transparentHugePageEnabled,omitempty" tf:"transparent_huge_page_enabled,omitempty"`
 }
 
 type KubernetesClusterNodePoolLinuxOsConfigObservation struct {
 
-	// Specifies the size of swap file on each node in MB. Changing this forces a new resource to be created.
+	// Specifies the size of swap file on each node in MB.
 	SwapFileSizeMb *float64 `json:"swapFileSizeMb,omitempty" tf:"swap_file_size_mb,omitempty"`
 
-	// A sysctl_config block as defined below. Changing this forces a new resource to be created.
+	// A sysctl_config block as defined below.
 	SysctlConfig []LinuxOsConfigSysctlConfigObservation `json:"sysctlConfig,omitempty" tf:"sysctl_config,omitempty"`
 
-	// specifies the defrag configuration for Transparent Huge Page. Possible values are always, defer, defer+madvise, madvise and never. Changing this forces a new resource to be created.
+	// specifies the defrag configuration for Transparent Huge Page. Possible values are always, defer, defer+madvise, madvise and never.
 	TransparentHugePageDefrag *string `json:"transparentHugePageDefrag,omitempty" tf:"transparent_huge_page_defrag,omitempty"`
 
-	// Specifies the Transparent Huge Page enabled configuration. Possible values are always, madvise and never. Changing this forces a new resource to be created.
+	// Specifies the Transparent Huge Page enabled configuration. Possible values are always, madvise and never.
 	TransparentHugePageEnabled *string `json:"transparentHugePageEnabled,omitempty" tf:"transparent_huge_page_enabled,omitempty"`
 }
 
 type KubernetesClusterNodePoolLinuxOsConfigParameters struct {
 
-	// Specifies the size of swap file on each node in MB. Changing this forces a new resource to be created.
+	// Specifies the size of swap file on each node in MB.
 	// +kubebuilder:validation:Optional
 	SwapFileSizeMb *float64 `json:"swapFileSizeMb,omitempty" tf:"swap_file_size_mb,omitempty"`
 
-	// A sysctl_config block as defined below. Changing this forces a new resource to be created.
+	// A sysctl_config block as defined below.
 	// +kubebuilder:validation:Optional
 	SysctlConfig []LinuxOsConfigSysctlConfigParameters `json:"sysctlConfig,omitempty" tf:"sysctl_config,omitempty"`
 
-	// specifies the defrag configuration for Transparent Huge Page. Possible values are always, defer, defer+madvise, madvise and never. Changing this forces a new resource to be created.
+	// specifies the defrag configuration for Transparent Huge Page. Possible values are always, defer, defer+madvise, madvise and never.
 	// +kubebuilder:validation:Optional
 	TransparentHugePageDefrag *string `json:"transparentHugePageDefrag,omitempty" tf:"transparent_huge_page_defrag,omitempty"`
 
-	// Specifies the Transparent Huge Page enabled configuration. Possible values are always, madvise and never. Changing this forces a new resource to be created.
+	// Specifies the Transparent Huge Page enabled configuration. Possible values are always, madvise and never.
 	// +kubebuilder:validation:Optional
 	TransparentHugePageEnabled *string `json:"transparentHugePageEnabled,omitempty" tf:"transparent_huge_page_enabled,omitempty"`
 }
@@ -367,29 +364,23 @@ type KubernetesClusterNodePoolNodeNetworkProfileParameters struct {
 
 type KubernetesClusterNodePoolObservation struct {
 
+	// Whether to enable auto-scaler.
+	AutoScalingEnabled *bool `json:"autoScalingEnabled,omitempty" tf:"auto_scaling_enabled,omitempty"`
+
 	// Specifies the ID of the Capacity Reservation Group where this Node Pool should exist. Changing this forces a new resource to be created.
 	CapacityReservationGroupID *string `json:"capacityReservationGroupId,omitempty" tf:"capacity_reservation_group_id,omitempty"`
-
-	// Specifies whether to trust a Custom CA.
-	CustomCATrustEnabled *bool `json:"customCaTrustEnabled,omitempty" tf:"custom_ca_trust_enabled,omitempty"`
-
-	// Whether to enable auto-scaler.
-	EnableAutoScaling *bool `json:"enableAutoScaling,omitempty" tf:"enable_auto_scaling,omitempty"`
-
-	// Should the nodes in this Node Pool have host encryption enabled? Changing this forces a new resource to be created.
-	EnableHostEncryption *bool `json:"enableHostEncryption,omitempty" tf:"enable_host_encryption,omitempty"`
-
-	// Should each node have a Public IP Address? Changing this forces a new resource to be created.
-	EnableNodePublicIP *bool `json:"enableNodePublicIp,omitempty" tf:"enable_node_public_ip,omitempty"`
 
 	// The Eviction Policy which should be used for Virtual Machines within the Virtual Machine Scale Set powering this Node Pool. Possible values are Deallocate and Delete. Changing this forces a new resource to be created.
 	EvictionPolicy *string `json:"evictionPolicy,omitempty" tf:"eviction_policy,omitempty"`
 
-	// Should the nodes in this Node Pool have Federal Information Processing Standard enabled? Changing this forces a new resource to be created.
+	// Should the nodes in this Node Pool have Federal Information Processing Standard enabled? Changing this property requires specifying temporary_name_for_rotation.
 	FipsEnabled *bool `json:"fipsEnabled,omitempty" tf:"fips_enabled,omitempty"`
 
 	// Specifies the GPU MIG instance profile for supported GPU VM SKU. The allowed values are MIG1g, MIG2g, MIG3g, MIG4g and MIG7g. Changing this forces a new resource to be created.
 	GpuInstance *string `json:"gpuInstance,omitempty" tf:"gpu_instance,omitempty"`
+
+	// Should the nodes in this Node Pool have host encryption enabled? Changing this property requires specifying temporary_name_for_rotation.
+	HostEncryptionEnabled *bool `json:"hostEncryptionEnabled,omitempty" tf:"host_encryption_enabled,omitempty"`
 
 	// The fully qualified resource ID of the Dedicated Host Group to provision virtual machines from. Changing this forces a new resource to be created.
 	HostGroupID *string `json:"hostGroupId,omitempty" tf:"host_group_id,omitempty"`
@@ -397,26 +388,23 @@ type KubernetesClusterNodePoolObservation struct {
 	// The ID of the Kubernetes Cluster Node Pool.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A kubelet_config block as defined below. Changing this forces a new resource to be created.
+	// A kubelet_config block as defined below. Changing this requires specifying temporary_name_for_rotation.
 	KubeletConfig []KubernetesClusterNodePoolKubeletConfigObservation `json:"kubeletConfig,omitempty" tf:"kubelet_config,omitempty"`
 
-	// The type of disk used by kubelet. Possible values are OS and Temporary.
+	// The type of disk used by kubelet. Possible values are OS and Temporary. Changing this property requires specifying temporary_name_for_rotation.
 	KubeletDiskType *string `json:"kubeletDiskType,omitempty" tf:"kubelet_disk_type,omitempty"`
 
 	// The ID of the Kubernetes Cluster where this Node Pool should exist. Changing this forces a new resource to be created.
 	KubernetesClusterID *string `json:"kubernetesClusterId,omitempty" tf:"kubernetes_cluster_id,omitempty"`
 
-	// A linux_os_config block as defined below. Changing this forces a new resource to be created.
+	// A linux_os_config block as defined below. Changing this requires specifying temporary_name_for_rotation.
 	LinuxOsConfig []KubernetesClusterNodePoolLinuxOsConfigObservation `json:"linuxOsConfig,omitempty" tf:"linux_os_config,omitempty"`
 
 	// The maximum number of nodes which should exist within this Node Pool. Valid values are between 0 and 1000 and must be greater than or equal to min_count.
 	MaxCount *float64 `json:"maxCount,omitempty" tf:"max_count,omitempty"`
 
-	// The maximum number of pods that can run on each agent. Changing this forces a new resource to be created.
+	// The maximum number of pods that can run on each agent. Changing this property requires specifying temporary_name_for_rotation.
 	MaxPods *float64 `json:"maxPods,omitempty" tf:"max_pods,omitempty"`
-
-	// A base64-encoded string which will be written to /etc/motd after decoding. This allows customization of the message of the day for Linux nodes. It cannot be specified for Windows nodes and must be a static string (i.e. will be printed raw and not executed as a script). Changing this forces a new resource to be created.
-	MessageOfTheDay *string `json:"messageOfTheDay,omitempty" tf:"message_of_the_day,omitempty"`
 
 	// The minimum number of nodes which should exist within this Node Pool. Valid values are between 0 and 1000 and must be less than or equal to max_count.
 	MinCount *float64 `json:"minCount,omitempty" tf:"min_count,omitempty"`
@@ -434,7 +422,10 @@ type KubernetesClusterNodePoolObservation struct {
 	// A node_network_profile block as documented below.
 	NodeNetworkProfile []KubernetesClusterNodePoolNodeNetworkProfileObservation `json:"nodeNetworkProfile,omitempty" tf:"node_network_profile,omitempty"`
 
-	// Resource ID for the Public IP Addresses Prefix for the nodes in this Node Pool. enable_node_public_ip should be true. Changing this forces a new resource to be created.
+	// Should each node have a Public IP Address? Changing this property requires specifying temporary_name_for_rotation.
+	NodePublicIPEnabled *bool `json:"nodePublicIpEnabled,omitempty" tf:"node_public_ip_enabled,omitempty"`
+
+	// Resource ID for the Public IP Addresses Prefix for the nodes in this Node Pool. node_public_ip_enabled should be true. Changing this forces a new resource to be created.
 	NodePublicIPPrefixID *string `json:"nodePublicIpPrefixId,omitempty" tf:"node_public_ip_prefix_id,omitempty"`
 
 	// A list of Kubernetes taints which should be applied to nodes in the agent pool (e.g key=value:NoSchedule).
@@ -443,19 +434,19 @@ type KubernetesClusterNodePoolObservation struct {
 	// Version of Kubernetes used for the Agents. If not specified, the latest recommended version will be used at provisioning time (but won't auto-upgrade). AKS does not require an exact patch version to be specified, minor version aliases such as 1.22 are also supported. - The minor version's latest GA patch is automatically chosen in that case. More details can be found in the documentation.
 	OrchestratorVersion *string `json:"orchestratorVersion,omitempty" tf:"orchestrator_version,omitempty"`
 
-	// The Agent Operating System disk size in GB. Changing this forces a new resource to be created.
+	// The Agent Operating System disk size in GB. Changing this property requires specifying temporary_name_for_rotation.
 	OsDiskSizeGb *float64 `json:"osDiskSizeGb,omitempty" tf:"os_disk_size_gb,omitempty"`
 
-	// The type of disk which should be used for the Operating System. Possible values are Ephemeral and Managed. Defaults to Managed. Changing this forces a new resource to be created.
+	// The type of disk which should be used for the Operating System. Possible values are Ephemeral and Managed. Defaults to Managed. Changing this property requires specifying temporary_name_for_rotation.
 	OsDiskType *string `json:"osDiskType,omitempty" tf:"os_disk_type,omitempty"`
 
-	// Specifies the OS SKU used by the agent pool. Possible values are AzureLinux, Ubuntu, Windows2019 and Windows2022. If not specified, the default is Ubuntu if OSType=Linux or Windows2019 if OSType=Windows. And the default Windows OSSKU will be changed to Windows2022 after Windows2019 is deprecated. Changing this forces a new resource to be created.
+	// Specifies the OS SKU used by the agent pool. Possible values are AzureLinux, Ubuntu, Windows2019 and Windows2022. If not specified, the default is Ubuntu if OSType=Linux or Windows2019 if OSType=Windows. And the default Windows OSSKU will be changed to Windows2022 after Windows2019 is deprecated. Changing this from AzureLinux or Ubuntu to AzureLinux or Ubuntu will not replace the resource, otherwise it forces a new resource to be created.
 	OsSku *string `json:"osSku,omitempty" tf:"os_sku,omitempty"`
 
 	// The Operating System which should be used for this Node Pool. Changing this forces a new resource to be created. Possible values are Linux and Windows. Defaults to Linux.
 	OsType *string `json:"osType,omitempty" tf:"os_type,omitempty"`
 
-	// The ID of the Subnet where the pods in the Node Pool should exist. Changing this forces a new resource to be created.
+	// The ID of the Subnet where the pods in the Node Pool should exist. Changing this property requires specifying temporary_name_for_rotation.
 	PodSubnetID *string `json:"podSubnetId,omitempty" tf:"pod_subnet_id,omitempty"`
 
 	// The Priority for Virtual Machines within the Virtual Machine Scale Set that powers this Node Pool. Possible values are Regular and Spot. Defaults to Regular. Changing this forces a new resource to be created.
@@ -467,7 +458,7 @@ type KubernetesClusterNodePoolObservation struct {
 	// Specifies how the node pool should deal with scaled-down nodes. Allowed values are Delete and Deallocate. Defaults to Delete.
 	ScaleDownMode *string `json:"scaleDownMode,omitempty" tf:"scale_down_mode,omitempty"`
 
-	// The ID of the Snapshot which should be used to create this Node Pool. Changing this forces a new resource to be created.
+	// The ID of the Snapshot which should be used to create this Node Pool. Changing this property requires specifying temporary_name_for_rotation.
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
 	// The maximum price you're willing to pay in USD per Virtual Machine. Valid values are -1 (the current on-demand price for a Virtual Machine) or a positive value with up to five decimal places. Changing this forces a new resource to be created.
@@ -477,56 +468,47 @@ type KubernetesClusterNodePoolObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Used to specify whether the UltraSSD is enabled in the Node Pool. Defaults to false. See the documentation for more information. Changing this forces a new resource to be created.
+	// Specifies the name of the temporary node pool used to cycle the node pool when one of the relevant properties are updated.
+	TemporaryNameForRotation *string `json:"temporaryNameForRotation,omitempty" tf:"temporary_name_for_rotation,omitempty"`
+
+	// Used to specify whether the UltraSSD is enabled in the Node Pool. Defaults to false. See the documentation for more information. Changing this property requires specifying temporary_name_for_rotation.
 	UltraSsdEnabled *bool `json:"ultraSsdEnabled,omitempty" tf:"ultra_ssd_enabled,omitempty"`
 
 	// A upgrade_settings block as documented below.
 	UpgradeSettings []KubernetesClusterNodePoolUpgradeSettingsObservation `json:"upgradeSettings,omitempty" tf:"upgrade_settings,omitempty"`
 
-	// The SKU which should be used for the Virtual Machines used in this Node Pool. Changing this forces a new resource to be created.
+	// The SKU which should be used for the Virtual Machines used in this Node Pool. Changing this property requires specifying temporary_name_for_rotation.
 	VMSize *string `json:"vmSize,omitempty" tf:"vm_size,omitempty"`
 
-	// The ID of the Subnet where this Node Pool should exist. Changing this forces a new resource to be created.
+	// The ID of the Subnet where this Node Pool should exist. Changing this property requires specifying temporary_name_for_rotation.
 	VnetSubnetID *string `json:"vnetSubnetId,omitempty" tf:"vnet_subnet_id,omitempty"`
 
 	// A windows_profile block as documented below. Changing this forces a new resource to be created.
 	WindowsProfile []KubernetesClusterNodePoolWindowsProfileObservation `json:"windowsProfile,omitempty" tf:"windows_profile,omitempty"`
 
-	// Used to specify the workload runtime. Allowed values are OCIContainer, WasmWasi and KataMshvVmIsolation.
+	// Used to specify the workload runtime. Allowed values are OCIContainer and WasmWasi.
 	WorkloadRuntime *string `json:"workloadRuntime,omitempty" tf:"workload_runtime,omitempty"`
 
-	// Specifies a list of Availability Zones in which this Kubernetes Cluster Node Pool should be located. Changing this forces a new Kubernetes Cluster Node Pool to be created.
+	// Specifies a list of Availability Zones in which this Kubernetes Cluster Node Pool should be located. Changing this property requires specifying temporary_name_for_rotation.
 	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
 type KubernetesClusterNodePoolParameters struct {
 
+	// Whether to enable auto-scaler.
+	// +kubebuilder:validation:Optional
+	AutoScalingEnabled *bool `json:"autoScalingEnabled,omitempty" tf:"auto_scaling_enabled,omitempty"`
+
 	// Specifies the ID of the Capacity Reservation Group where this Node Pool should exist. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	CapacityReservationGroupID *string `json:"capacityReservationGroupId,omitempty" tf:"capacity_reservation_group_id,omitempty"`
-
-	// Specifies whether to trust a Custom CA.
-	// +kubebuilder:validation:Optional
-	CustomCATrustEnabled *bool `json:"customCaTrustEnabled,omitempty" tf:"custom_ca_trust_enabled,omitempty"`
-
-	// Whether to enable auto-scaler.
-	// +kubebuilder:validation:Optional
-	EnableAutoScaling *bool `json:"enableAutoScaling,omitempty" tf:"enable_auto_scaling,omitempty"`
-
-	// Should the nodes in this Node Pool have host encryption enabled? Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	EnableHostEncryption *bool `json:"enableHostEncryption,omitempty" tf:"enable_host_encryption,omitempty"`
-
-	// Should each node have a Public IP Address? Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	EnableNodePublicIP *bool `json:"enableNodePublicIp,omitempty" tf:"enable_node_public_ip,omitempty"`
 
 	// The Eviction Policy which should be used for Virtual Machines within the Virtual Machine Scale Set powering this Node Pool. Possible values are Deallocate and Delete. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	EvictionPolicy *string `json:"evictionPolicy,omitempty" tf:"eviction_policy,omitempty"`
 
-	// Should the nodes in this Node Pool have Federal Information Processing Standard enabled? Changing this forces a new resource to be created.
+	// Should the nodes in this Node Pool have Federal Information Processing Standard enabled? Changing this property requires specifying temporary_name_for_rotation.
 	// +kubebuilder:validation:Optional
 	FipsEnabled *bool `json:"fipsEnabled,omitempty" tf:"fips_enabled,omitempty"`
 
@@ -534,15 +516,19 @@ type KubernetesClusterNodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	GpuInstance *string `json:"gpuInstance,omitempty" tf:"gpu_instance,omitempty"`
 
+	// Should the nodes in this Node Pool have host encryption enabled? Changing this property requires specifying temporary_name_for_rotation.
+	// +kubebuilder:validation:Optional
+	HostEncryptionEnabled *bool `json:"hostEncryptionEnabled,omitempty" tf:"host_encryption_enabled,omitempty"`
+
 	// The fully qualified resource ID of the Dedicated Host Group to provision virtual machines from. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	HostGroupID *string `json:"hostGroupId,omitempty" tf:"host_group_id,omitempty"`
 
-	// A kubelet_config block as defined below. Changing this forces a new resource to be created.
+	// A kubelet_config block as defined below. Changing this requires specifying temporary_name_for_rotation.
 	// +kubebuilder:validation:Optional
 	KubeletConfig []KubernetesClusterNodePoolKubeletConfigParameters `json:"kubeletConfig,omitempty" tf:"kubelet_config,omitempty"`
 
-	// The type of disk used by kubelet. Possible values are OS and Temporary.
+	// The type of disk used by kubelet. Possible values are OS and Temporary. Changing this property requires specifying temporary_name_for_rotation.
 	// +kubebuilder:validation:Optional
 	KubeletDiskType *string `json:"kubeletDiskType,omitempty" tf:"kubelet_disk_type,omitempty"`
 
@@ -560,7 +546,7 @@ type KubernetesClusterNodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	KubernetesClusterIDSelector *v1.Selector `json:"kubernetesClusterIdSelector,omitempty" tf:"-"`
 
-	// A linux_os_config block as defined below. Changing this forces a new resource to be created.
+	// A linux_os_config block as defined below. Changing this requires specifying temporary_name_for_rotation.
 	// +kubebuilder:validation:Optional
 	LinuxOsConfig []KubernetesClusterNodePoolLinuxOsConfigParameters `json:"linuxOsConfig,omitempty" tf:"linux_os_config,omitempty"`
 
@@ -568,13 +554,9 @@ type KubernetesClusterNodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	MaxCount *float64 `json:"maxCount,omitempty" tf:"max_count,omitempty"`
 
-	// The maximum number of pods that can run on each agent. Changing this forces a new resource to be created.
+	// The maximum number of pods that can run on each agent. Changing this property requires specifying temporary_name_for_rotation.
 	// +kubebuilder:validation:Optional
 	MaxPods *float64 `json:"maxPods,omitempty" tf:"max_pods,omitempty"`
-
-	// A base64-encoded string which will be written to /etc/motd after decoding. This allows customization of the message of the day for Linux nodes. It cannot be specified for Windows nodes and must be a static string (i.e. will be printed raw and not executed as a script). Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	MessageOfTheDay *string `json:"messageOfTheDay,omitempty" tf:"message_of_the_day,omitempty"`
 
 	// The minimum number of nodes which should exist within this Node Pool. Valid values are between 0 and 1000 and must be less than or equal to max_count.
 	// +kubebuilder:validation:Optional
@@ -597,7 +579,11 @@ type KubernetesClusterNodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	NodeNetworkProfile []KubernetesClusterNodePoolNodeNetworkProfileParameters `json:"nodeNetworkProfile,omitempty" tf:"node_network_profile,omitempty"`
 
-	// Resource ID for the Public IP Addresses Prefix for the nodes in this Node Pool. enable_node_public_ip should be true. Changing this forces a new resource to be created.
+	// Should each node have a Public IP Address? Changing this property requires specifying temporary_name_for_rotation.
+	// +kubebuilder:validation:Optional
+	NodePublicIPEnabled *bool `json:"nodePublicIpEnabled,omitempty" tf:"node_public_ip_enabled,omitempty"`
+
+	// Resource ID for the Public IP Addresses Prefix for the nodes in this Node Pool. node_public_ip_enabled should be true. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	NodePublicIPPrefixID *string `json:"nodePublicIpPrefixId,omitempty" tf:"node_public_ip_prefix_id,omitempty"`
 
@@ -609,15 +595,15 @@ type KubernetesClusterNodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	OrchestratorVersion *string `json:"orchestratorVersion,omitempty" tf:"orchestrator_version,omitempty"`
 
-	// The Agent Operating System disk size in GB. Changing this forces a new resource to be created.
+	// The Agent Operating System disk size in GB. Changing this property requires specifying temporary_name_for_rotation.
 	// +kubebuilder:validation:Optional
 	OsDiskSizeGb *float64 `json:"osDiskSizeGb,omitempty" tf:"os_disk_size_gb,omitempty"`
 
-	// The type of disk which should be used for the Operating System. Possible values are Ephemeral and Managed. Defaults to Managed. Changing this forces a new resource to be created.
+	// The type of disk which should be used for the Operating System. Possible values are Ephemeral and Managed. Defaults to Managed. Changing this property requires specifying temporary_name_for_rotation.
 	// +kubebuilder:validation:Optional
 	OsDiskType *string `json:"osDiskType,omitempty" tf:"os_disk_type,omitempty"`
 
-	// Specifies the OS SKU used by the agent pool. Possible values are AzureLinux, Ubuntu, Windows2019 and Windows2022. If not specified, the default is Ubuntu if OSType=Linux or Windows2019 if OSType=Windows. And the default Windows OSSKU will be changed to Windows2022 after Windows2019 is deprecated. Changing this forces a new resource to be created.
+	// Specifies the OS SKU used by the agent pool. Possible values are AzureLinux, Ubuntu, Windows2019 and Windows2022. If not specified, the default is Ubuntu if OSType=Linux or Windows2019 if OSType=Windows. And the default Windows OSSKU will be changed to Windows2022 after Windows2019 is deprecated. Changing this from AzureLinux or Ubuntu to AzureLinux or Ubuntu will not replace the resource, otherwise it forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	OsSku *string `json:"osSku,omitempty" tf:"os_sku,omitempty"`
 
@@ -625,7 +611,7 @@ type KubernetesClusterNodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	OsType *string `json:"osType,omitempty" tf:"os_type,omitempty"`
 
-	// The ID of the Subnet where the pods in the Node Pool should exist. Changing this forces a new resource to be created.
+	// The ID of the Subnet where the pods in the Node Pool should exist. Changing this property requires specifying temporary_name_for_rotation.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -651,7 +637,7 @@ type KubernetesClusterNodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	ScaleDownMode *string `json:"scaleDownMode,omitempty" tf:"scale_down_mode,omitempty"`
 
-	// The ID of the Snapshot which should be used to create this Node Pool. Changing this forces a new resource to be created.
+	// The ID of the Snapshot which should be used to create this Node Pool. Changing this property requires specifying temporary_name_for_rotation.
 	// +kubebuilder:validation:Optional
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
@@ -664,7 +650,11 @@ type KubernetesClusterNodePoolParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Used to specify whether the UltraSSD is enabled in the Node Pool. Defaults to false. See the documentation for more information. Changing this forces a new resource to be created.
+	// Specifies the name of the temporary node pool used to cycle the node pool when one of the relevant properties are updated.
+	// +kubebuilder:validation:Optional
+	TemporaryNameForRotation *string `json:"temporaryNameForRotation,omitempty" tf:"temporary_name_for_rotation,omitempty"`
+
+	// Used to specify whether the UltraSSD is enabled in the Node Pool. Defaults to false. See the documentation for more information. Changing this property requires specifying temporary_name_for_rotation.
 	// +kubebuilder:validation:Optional
 	UltraSsdEnabled *bool `json:"ultraSsdEnabled,omitempty" tf:"ultra_ssd_enabled,omitempty"`
 
@@ -672,11 +662,11 @@ type KubernetesClusterNodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	UpgradeSettings []KubernetesClusterNodePoolUpgradeSettingsParameters `json:"upgradeSettings,omitempty" tf:"upgrade_settings,omitempty"`
 
-	// The SKU which should be used for the Virtual Machines used in this Node Pool. Changing this forces a new resource to be created.
+	// The SKU which should be used for the Virtual Machines used in this Node Pool. Changing this property requires specifying temporary_name_for_rotation.
 	// +kubebuilder:validation:Optional
 	VMSize *string `json:"vmSize,omitempty" tf:"vm_size,omitempty"`
 
-	// The ID of the Subnet where this Node Pool should exist. Changing this forces a new resource to be created.
+	// The ID of the Subnet where this Node Pool should exist. Changing this property requires specifying temporary_name_for_rotation.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -694,11 +684,11 @@ type KubernetesClusterNodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	WindowsProfile []KubernetesClusterNodePoolWindowsProfileParameters `json:"windowsProfile,omitempty" tf:"windows_profile,omitempty"`
 
-	// Used to specify the workload runtime. Allowed values are OCIContainer, WasmWasi and KataMshvVmIsolation.
+	// Used to specify the workload runtime. Allowed values are OCIContainer and WasmWasi.
 	// +kubebuilder:validation:Optional
 	WorkloadRuntime *string `json:"workloadRuntime,omitempty" tf:"workload_runtime,omitempty"`
 
-	// Specifies a list of Availability Zones in which this Kubernetes Cluster Node Pool should be located. Changing this forces a new Kubernetes Cluster Node Pool to be created.
+	// Specifies a list of Availability Zones in which this Kubernetes Cluster Node Pool should be located. Changing this property requires specifying temporary_name_for_rotation.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
@@ -712,7 +702,7 @@ type KubernetesClusterNodePoolUpgradeSettingsInitParameters struct {
 	// The maximum number or percentage of nodes which will be added to the Node Pool size during an upgrade.
 	MaxSurge *string `json:"maxSurge,omitempty" tf:"max_surge,omitempty"`
 
-	// The amount of time in minutes to wait after draining a node and before reimaging and moving on to next node. Defaults to 0.
+	// The amount of time in minutes to wait after draining a node and before reimaging and moving on to next node.
 	NodeSoakDurationInMinutes *float64 `json:"nodeSoakDurationInMinutes,omitempty" tf:"node_soak_duration_in_minutes,omitempty"`
 }
 
@@ -724,7 +714,7 @@ type KubernetesClusterNodePoolUpgradeSettingsObservation struct {
 	// The maximum number or percentage of nodes which will be added to the Node Pool size during an upgrade.
 	MaxSurge *string `json:"maxSurge,omitempty" tf:"max_surge,omitempty"`
 
-	// The amount of time in minutes to wait after draining a node and before reimaging and moving on to next node. Defaults to 0.
+	// The amount of time in minutes to wait after draining a node and before reimaging and moving on to next node.
 	NodeSoakDurationInMinutes *float64 `json:"nodeSoakDurationInMinutes,omitempty" tf:"node_soak_duration_in_minutes,omitempty"`
 }
 
@@ -738,7 +728,7 @@ type KubernetesClusterNodePoolUpgradeSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	MaxSurge *string `json:"maxSurge" tf:"max_surge,omitempty"`
 
-	// The amount of time in minutes to wait after draining a node and before reimaging and moving on to next node. Defaults to 0.
+	// The amount of time in minutes to wait after draining a node and before reimaging and moving on to next node.
 	// +kubebuilder:validation:Optional
 	NodeSoakDurationInMinutes *float64 `json:"nodeSoakDurationInMinutes,omitempty" tf:"node_soak_duration_in_minutes,omitempty"`
 }
@@ -764,299 +754,299 @@ type KubernetesClusterNodePoolWindowsProfileParameters struct {
 
 type LinuxOsConfigSysctlConfigInitParameters struct {
 
-	// The sysctl setting fs.aio-max-nr. Must be between 65536 and 6553500. Changing this forces a new resource to be created.
+	// The sysctl setting fs.aio-max-nr. Must be between 65536 and 6553500.
 	FsAioMaxNr *float64 `json:"fsAioMaxNr,omitempty" tf:"fs_aio_max_nr,omitempty"`
 
-	// The sysctl setting fs.file-max. Must be between 8192 and 12000500. Changing this forces a new resource to be created.
+	// The sysctl setting fs.file-max. Must be between 8192 and 12000500.
 	FsFileMax *float64 `json:"fsFileMax,omitempty" tf:"fs_file_max,omitempty"`
 
-	// The sysctl setting fs.inotify.max_user_watches. Must be between 781250 and 2097152. Changing this forces a new resource to be created.
+	// The sysctl setting fs.inotify.max_user_watches. Must be between 781250 and 2097152.
 	FsInotifyMaxUserWatches *float64 `json:"fsInotifyMaxUserWatches,omitempty" tf:"fs_inotify_max_user_watches,omitempty"`
 
-	// The sysctl setting fs.nr_open. Must be between 8192 and 20000500. Changing this forces a new resource to be created.
+	// The sysctl setting fs.nr_open. Must be between 8192 and 20000500.
 	FsNrOpen *float64 `json:"fsNrOpen,omitempty" tf:"fs_nr_open,omitempty"`
 
-	// The sysctl setting kernel.threads-max. Must be between 20 and 513785. Changing this forces a new resource to be created.
+	// The sysctl setting kernel.threads-max. Must be between 20 and 513785.
 	KernelThreadsMax *float64 `json:"kernelThreadsMax,omitempty" tf:"kernel_threads_max,omitempty"`
 
-	// The sysctl setting net.core.netdev_max_backlog. Must be between 1000 and 3240000. Changing this forces a new resource to be created.
+	// The sysctl setting net.core.netdev_max_backlog. Must be between 1000 and 3240000.
 	NetCoreNetdevMaxBacklog *float64 `json:"netCoreNetdevMaxBacklog,omitempty" tf:"net_core_netdev_max_backlog,omitempty"`
 
-	// The sysctl setting net.core.optmem_max. Must be between 20480 and 4194304. Changing this forces a new resource to be created.
+	// The sysctl setting net.core.optmem_max. Must be between 20480 and 4194304.
 	NetCoreOptmemMax *float64 `json:"netCoreOptmemMax,omitempty" tf:"net_core_optmem_max,omitempty"`
 
-	// The sysctl setting net.core.rmem_default. Must be between 212992 and 134217728. Changing this forces a new resource to be created.
+	// The sysctl setting net.core.rmem_default. Must be between 212992 and 134217728.
 	NetCoreRmemDefault *float64 `json:"netCoreRmemDefault,omitempty" tf:"net_core_rmem_default,omitempty"`
 
-	// The sysctl setting net.core.rmem_max. Must be between 212992 and 134217728. Changing this forces a new resource to be created.
+	// The sysctl setting net.core.rmem_max. Must be between 212992 and 134217728.
 	NetCoreRmemMax *float64 `json:"netCoreRmemMax,omitempty" tf:"net_core_rmem_max,omitempty"`
 
-	// The sysctl setting net.core.somaxconn. Must be between 4096 and 3240000. Changing this forces a new resource to be created.
+	// The sysctl setting net.core.somaxconn. Must be between 4096 and 3240000.
 	NetCoreSomaxconn *float64 `json:"netCoreSomaxconn,omitempty" tf:"net_core_somaxconn,omitempty"`
 
-	// The sysctl setting net.core.wmem_default. Must be between 212992 and 134217728. Changing this forces a new resource to be created.
+	// The sysctl setting net.core.wmem_default. Must be between 212992 and 134217728.
 	NetCoreWmemDefault *float64 `json:"netCoreWmemDefault,omitempty" tf:"net_core_wmem_default,omitempty"`
 
-	// The sysctl setting net.core.wmem_max. Must be between 212992 and 134217728. Changing this forces a new resource to be created.
+	// The sysctl setting net.core.wmem_max. Must be between 212992 and 134217728.
 	NetCoreWmemMax *float64 `json:"netCoreWmemMax,omitempty" tf:"net_core_wmem_max,omitempty"`
 
-	// The sysctl setting net.ipv4.ip_local_port_range max value. Must be between 32768 and 65535. Changing this forces a new resource to be created.
+	// The sysctl setting net.ipv4.ip_local_port_range max value. Must be between 32768 and 65535.
 	NetIPv4IPLocalPortRangeMax *float64 `json:"netIpv4IpLocalPortRangeMax,omitempty" tf:"net_ipv4_ip_local_port_range_max,omitempty"`
 
-	// The sysctl setting net.ipv4.ip_local_port_range min value. Must be between 1024 and 60999. Changing this forces a new resource to be created.
+	// The sysctl setting net.ipv4.ip_local_port_range min value. Must be between 1024 and 60999.
 	NetIPv4IPLocalPortRangeMin *float64 `json:"netIpv4IpLocalPortRangeMin,omitempty" tf:"net_ipv4_ip_local_port_range_min,omitempty"`
 
-	// The sysctl setting net.ipv4.neigh.default.gc_thresh1. Must be between 128 and 80000. Changing this forces a new resource to be created.
+	// The sysctl setting net.ipv4.neigh.default.gc_thresh1. Must be between 128 and 80000.
 	NetIPv4NeighDefaultGcThresh1 *float64 `json:"netIpv4NeighDefaultGcThresh1,omitempty" tf:"net_ipv4_neigh_default_gc_thresh1,omitempty"`
 
-	// The sysctl setting net.ipv4.neigh.default.gc_thresh2. Must be between 512 and 90000. Changing this forces a new resource to be created.
+	// The sysctl setting net.ipv4.neigh.default.gc_thresh2. Must be between 512 and 90000.
 	NetIPv4NeighDefaultGcThresh2 *float64 `json:"netIpv4NeighDefaultGcThresh2,omitempty" tf:"net_ipv4_neigh_default_gc_thresh2,omitempty"`
 
-	// The sysctl setting net.ipv4.neigh.default.gc_thresh3. Must be between 1024 and 100000. Changing this forces a new resource to be created.
+	// The sysctl setting net.ipv4.neigh.default.gc_thresh3. Must be between 1024 and 100000.
 	NetIPv4NeighDefaultGcThresh3 *float64 `json:"netIpv4NeighDefaultGcThresh3,omitempty" tf:"net_ipv4_neigh_default_gc_thresh3,omitempty"`
 
-	// The sysctl setting net.ipv4.tcp_fin_timeout. Must be between 5 and 120. Changing this forces a new resource to be created.
+	// The sysctl setting net.ipv4.tcp_fin_timeout. Must be between 5 and 120.
 	NetIPv4TCPFinTimeout *float64 `json:"netIpv4TcpFinTimeout,omitempty" tf:"net_ipv4_tcp_fin_timeout,omitempty"`
 
-	// The sysctl setting net.ipv4.tcp_keepalive_intvl. Must be between 10 and 90. Changing this forces a new resource to be created.
+	// The sysctl setting net.ipv4.tcp_keepalive_intvl. Must be between 10 and 90.
 	NetIPv4TCPKeepaliveIntvl *float64 `json:"netIpv4TcpKeepaliveIntvl,omitempty" tf:"net_ipv4_tcp_keepalive_intvl,omitempty"`
 
-	// The sysctl setting net.ipv4.tcp_keepalive_probes. Must be between 1 and 15. Changing this forces a new resource to be created.
+	// The sysctl setting net.ipv4.tcp_keepalive_probes. Must be between 1 and 15.
 	NetIPv4TCPKeepaliveProbes *float64 `json:"netIpv4TcpKeepaliveProbes,omitempty" tf:"net_ipv4_tcp_keepalive_probes,omitempty"`
 
-	// The sysctl setting net.ipv4.tcp_keepalive_time. Must be between 30 and 432000. Changing this forces a new resource to be created.
+	// The sysctl setting net.ipv4.tcp_keepalive_time. Must be between 30 and 432000.
 	NetIPv4TCPKeepaliveTime *float64 `json:"netIpv4TcpKeepaliveTime,omitempty" tf:"net_ipv4_tcp_keepalive_time,omitempty"`
 
-	// The sysctl setting net.ipv4.tcp_max_syn_backlog. Must be between 128 and 3240000. Changing this forces a new resource to be created.
+	// The sysctl setting net.ipv4.tcp_max_syn_backlog. Must be between 128 and 3240000.
 	NetIPv4TCPMaxSynBacklog *float64 `json:"netIpv4TcpMaxSynBacklog,omitempty" tf:"net_ipv4_tcp_max_syn_backlog,omitempty"`
 
-	// The sysctl setting net.ipv4.tcp_max_tw_buckets. Must be between 8000 and 1440000. Changing this forces a new resource to be created.
+	// The sysctl setting net.ipv4.tcp_max_tw_buckets. Must be between 8000 and 1440000.
 	NetIPv4TCPMaxTwBuckets *float64 `json:"netIpv4TcpMaxTwBuckets,omitempty" tf:"net_ipv4_tcp_max_tw_buckets,omitempty"`
 
-	// Is sysctl setting net.ipv4.tcp_tw_reuse enabled? Changing this forces a new resource to be created.
+	// Is sysctl setting net.ipv4.tcp_tw_reuse enabled?
 	NetIPv4TCPTwReuse *bool `json:"netIpv4TcpTwReuse,omitempty" tf:"net_ipv4_tcp_tw_reuse,omitempty"`
 
-	// The sysctl setting net.netfilter.nf_conntrack_buckets. Must be between 65536 and 524288. Changing this forces a new resource to be created.
+	// The sysctl setting net.netfilter.nf_conntrack_buckets. Must be between 65536 and 524288.
 	NetNetfilterNfConntrackBuckets *float64 `json:"netNetfilterNfConntrackBuckets,omitempty" tf:"net_netfilter_nf_conntrack_buckets,omitempty"`
 
-	// The sysctl setting net.netfilter.nf_conntrack_max. Must be between 131072 and 2097152. Changing this forces a new resource to be created.
+	// The sysctl setting net.netfilter.nf_conntrack_max. Must be between 131072 and 2097152.
 	NetNetfilterNfConntrackMax *float64 `json:"netNetfilterNfConntrackMax,omitempty" tf:"net_netfilter_nf_conntrack_max,omitempty"`
 
-	// The sysctl setting vm.max_map_count. Must be between 65530 and 262144. Changing this forces a new resource to be created.
+	// The sysctl setting vm.max_map_count. Must be between 65530 and 262144.
 	VMMaxMapCount *float64 `json:"vmMaxMapCount,omitempty" tf:"vm_max_map_count,omitempty"`
 
-	// The sysctl setting vm.swappiness. Must be between 0 and 100. Changing this forces a new resource to be created.
+	// The sysctl setting vm.swappiness. Must be between 0 and 100.
 	VMSwappiness *float64 `json:"vmSwappiness,omitempty" tf:"vm_swappiness,omitempty"`
 
-	// The sysctl setting vm.vfs_cache_pressure. Must be between 0 and 100. Changing this forces a new resource to be created.
+	// The sysctl setting vm.vfs_cache_pressure. Must be between 0 and 100.
 	VMVfsCachePressure *float64 `json:"vmVfsCachePressure,omitempty" tf:"vm_vfs_cache_pressure,omitempty"`
 }
 
 type LinuxOsConfigSysctlConfigObservation struct {
 
-	// The sysctl setting fs.aio-max-nr. Must be between 65536 and 6553500. Changing this forces a new resource to be created.
+	// The sysctl setting fs.aio-max-nr. Must be between 65536 and 6553500.
 	FsAioMaxNr *float64 `json:"fsAioMaxNr,omitempty" tf:"fs_aio_max_nr,omitempty"`
 
-	// The sysctl setting fs.file-max. Must be between 8192 and 12000500. Changing this forces a new resource to be created.
+	// The sysctl setting fs.file-max. Must be between 8192 and 12000500.
 	FsFileMax *float64 `json:"fsFileMax,omitempty" tf:"fs_file_max,omitempty"`
 
-	// The sysctl setting fs.inotify.max_user_watches. Must be between 781250 and 2097152. Changing this forces a new resource to be created.
+	// The sysctl setting fs.inotify.max_user_watches. Must be between 781250 and 2097152.
 	FsInotifyMaxUserWatches *float64 `json:"fsInotifyMaxUserWatches,omitempty" tf:"fs_inotify_max_user_watches,omitempty"`
 
-	// The sysctl setting fs.nr_open. Must be between 8192 and 20000500. Changing this forces a new resource to be created.
+	// The sysctl setting fs.nr_open. Must be between 8192 and 20000500.
 	FsNrOpen *float64 `json:"fsNrOpen,omitempty" tf:"fs_nr_open,omitempty"`
 
-	// The sysctl setting kernel.threads-max. Must be between 20 and 513785. Changing this forces a new resource to be created.
+	// The sysctl setting kernel.threads-max. Must be between 20 and 513785.
 	KernelThreadsMax *float64 `json:"kernelThreadsMax,omitempty" tf:"kernel_threads_max,omitempty"`
 
-	// The sysctl setting net.core.netdev_max_backlog. Must be between 1000 and 3240000. Changing this forces a new resource to be created.
+	// The sysctl setting net.core.netdev_max_backlog. Must be between 1000 and 3240000.
 	NetCoreNetdevMaxBacklog *float64 `json:"netCoreNetdevMaxBacklog,omitempty" tf:"net_core_netdev_max_backlog,omitempty"`
 
-	// The sysctl setting net.core.optmem_max. Must be between 20480 and 4194304. Changing this forces a new resource to be created.
+	// The sysctl setting net.core.optmem_max. Must be between 20480 and 4194304.
 	NetCoreOptmemMax *float64 `json:"netCoreOptmemMax,omitempty" tf:"net_core_optmem_max,omitempty"`
 
-	// The sysctl setting net.core.rmem_default. Must be between 212992 and 134217728. Changing this forces a new resource to be created.
+	// The sysctl setting net.core.rmem_default. Must be between 212992 and 134217728.
 	NetCoreRmemDefault *float64 `json:"netCoreRmemDefault,omitempty" tf:"net_core_rmem_default,omitempty"`
 
-	// The sysctl setting net.core.rmem_max. Must be between 212992 and 134217728. Changing this forces a new resource to be created.
+	// The sysctl setting net.core.rmem_max. Must be between 212992 and 134217728.
 	NetCoreRmemMax *float64 `json:"netCoreRmemMax,omitempty" tf:"net_core_rmem_max,omitempty"`
 
-	// The sysctl setting net.core.somaxconn. Must be between 4096 and 3240000. Changing this forces a new resource to be created.
+	// The sysctl setting net.core.somaxconn. Must be between 4096 and 3240000.
 	NetCoreSomaxconn *float64 `json:"netCoreSomaxconn,omitempty" tf:"net_core_somaxconn,omitempty"`
 
-	// The sysctl setting net.core.wmem_default. Must be between 212992 and 134217728. Changing this forces a new resource to be created.
+	// The sysctl setting net.core.wmem_default. Must be between 212992 and 134217728.
 	NetCoreWmemDefault *float64 `json:"netCoreWmemDefault,omitempty" tf:"net_core_wmem_default,omitempty"`
 
-	// The sysctl setting net.core.wmem_max. Must be between 212992 and 134217728. Changing this forces a new resource to be created.
+	// The sysctl setting net.core.wmem_max. Must be between 212992 and 134217728.
 	NetCoreWmemMax *float64 `json:"netCoreWmemMax,omitempty" tf:"net_core_wmem_max,omitempty"`
 
-	// The sysctl setting net.ipv4.ip_local_port_range max value. Must be between 32768 and 65535. Changing this forces a new resource to be created.
+	// The sysctl setting net.ipv4.ip_local_port_range max value. Must be between 32768 and 65535.
 	NetIPv4IPLocalPortRangeMax *float64 `json:"netIpv4IpLocalPortRangeMax,omitempty" tf:"net_ipv4_ip_local_port_range_max,omitempty"`
 
-	// The sysctl setting net.ipv4.ip_local_port_range min value. Must be between 1024 and 60999. Changing this forces a new resource to be created.
+	// The sysctl setting net.ipv4.ip_local_port_range min value. Must be between 1024 and 60999.
 	NetIPv4IPLocalPortRangeMin *float64 `json:"netIpv4IpLocalPortRangeMin,omitempty" tf:"net_ipv4_ip_local_port_range_min,omitempty"`
 
-	// The sysctl setting net.ipv4.neigh.default.gc_thresh1. Must be between 128 and 80000. Changing this forces a new resource to be created.
+	// The sysctl setting net.ipv4.neigh.default.gc_thresh1. Must be between 128 and 80000.
 	NetIPv4NeighDefaultGcThresh1 *float64 `json:"netIpv4NeighDefaultGcThresh1,omitempty" tf:"net_ipv4_neigh_default_gc_thresh1,omitempty"`
 
-	// The sysctl setting net.ipv4.neigh.default.gc_thresh2. Must be between 512 and 90000. Changing this forces a new resource to be created.
+	// The sysctl setting net.ipv4.neigh.default.gc_thresh2. Must be between 512 and 90000.
 	NetIPv4NeighDefaultGcThresh2 *float64 `json:"netIpv4NeighDefaultGcThresh2,omitempty" tf:"net_ipv4_neigh_default_gc_thresh2,omitempty"`
 
-	// The sysctl setting net.ipv4.neigh.default.gc_thresh3. Must be between 1024 and 100000. Changing this forces a new resource to be created.
+	// The sysctl setting net.ipv4.neigh.default.gc_thresh3. Must be between 1024 and 100000.
 	NetIPv4NeighDefaultGcThresh3 *float64 `json:"netIpv4NeighDefaultGcThresh3,omitempty" tf:"net_ipv4_neigh_default_gc_thresh3,omitempty"`
 
-	// The sysctl setting net.ipv4.tcp_fin_timeout. Must be between 5 and 120. Changing this forces a new resource to be created.
+	// The sysctl setting net.ipv4.tcp_fin_timeout. Must be between 5 and 120.
 	NetIPv4TCPFinTimeout *float64 `json:"netIpv4TcpFinTimeout,omitempty" tf:"net_ipv4_tcp_fin_timeout,omitempty"`
 
-	// The sysctl setting net.ipv4.tcp_keepalive_intvl. Must be between 10 and 90. Changing this forces a new resource to be created.
+	// The sysctl setting net.ipv4.tcp_keepalive_intvl. Must be between 10 and 90.
 	NetIPv4TCPKeepaliveIntvl *float64 `json:"netIpv4TcpKeepaliveIntvl,omitempty" tf:"net_ipv4_tcp_keepalive_intvl,omitempty"`
 
-	// The sysctl setting net.ipv4.tcp_keepalive_probes. Must be between 1 and 15. Changing this forces a new resource to be created.
+	// The sysctl setting net.ipv4.tcp_keepalive_probes. Must be between 1 and 15.
 	NetIPv4TCPKeepaliveProbes *float64 `json:"netIpv4TcpKeepaliveProbes,omitempty" tf:"net_ipv4_tcp_keepalive_probes,omitempty"`
 
-	// The sysctl setting net.ipv4.tcp_keepalive_time. Must be between 30 and 432000. Changing this forces a new resource to be created.
+	// The sysctl setting net.ipv4.tcp_keepalive_time. Must be between 30 and 432000.
 	NetIPv4TCPKeepaliveTime *float64 `json:"netIpv4TcpKeepaliveTime,omitempty" tf:"net_ipv4_tcp_keepalive_time,omitempty"`
 
-	// The sysctl setting net.ipv4.tcp_max_syn_backlog. Must be between 128 and 3240000. Changing this forces a new resource to be created.
+	// The sysctl setting net.ipv4.tcp_max_syn_backlog. Must be between 128 and 3240000.
 	NetIPv4TCPMaxSynBacklog *float64 `json:"netIpv4TcpMaxSynBacklog,omitempty" tf:"net_ipv4_tcp_max_syn_backlog,omitempty"`
 
-	// The sysctl setting net.ipv4.tcp_max_tw_buckets. Must be between 8000 and 1440000. Changing this forces a new resource to be created.
+	// The sysctl setting net.ipv4.tcp_max_tw_buckets. Must be between 8000 and 1440000.
 	NetIPv4TCPMaxTwBuckets *float64 `json:"netIpv4TcpMaxTwBuckets,omitempty" tf:"net_ipv4_tcp_max_tw_buckets,omitempty"`
 
-	// Is sysctl setting net.ipv4.tcp_tw_reuse enabled? Changing this forces a new resource to be created.
+	// Is sysctl setting net.ipv4.tcp_tw_reuse enabled?
 	NetIPv4TCPTwReuse *bool `json:"netIpv4TcpTwReuse,omitempty" tf:"net_ipv4_tcp_tw_reuse,omitempty"`
 
-	// The sysctl setting net.netfilter.nf_conntrack_buckets. Must be between 65536 and 524288. Changing this forces a new resource to be created.
+	// The sysctl setting net.netfilter.nf_conntrack_buckets. Must be between 65536 and 524288.
 	NetNetfilterNfConntrackBuckets *float64 `json:"netNetfilterNfConntrackBuckets,omitempty" tf:"net_netfilter_nf_conntrack_buckets,omitempty"`
 
-	// The sysctl setting net.netfilter.nf_conntrack_max. Must be between 131072 and 2097152. Changing this forces a new resource to be created.
+	// The sysctl setting net.netfilter.nf_conntrack_max. Must be between 131072 and 2097152.
 	NetNetfilterNfConntrackMax *float64 `json:"netNetfilterNfConntrackMax,omitempty" tf:"net_netfilter_nf_conntrack_max,omitempty"`
 
-	// The sysctl setting vm.max_map_count. Must be between 65530 and 262144. Changing this forces a new resource to be created.
+	// The sysctl setting vm.max_map_count. Must be between 65530 and 262144.
 	VMMaxMapCount *float64 `json:"vmMaxMapCount,omitempty" tf:"vm_max_map_count,omitempty"`
 
-	// The sysctl setting vm.swappiness. Must be between 0 and 100. Changing this forces a new resource to be created.
+	// The sysctl setting vm.swappiness. Must be between 0 and 100.
 	VMSwappiness *float64 `json:"vmSwappiness,omitempty" tf:"vm_swappiness,omitempty"`
 
-	// The sysctl setting vm.vfs_cache_pressure. Must be between 0 and 100. Changing this forces a new resource to be created.
+	// The sysctl setting vm.vfs_cache_pressure. Must be between 0 and 100.
 	VMVfsCachePressure *float64 `json:"vmVfsCachePressure,omitempty" tf:"vm_vfs_cache_pressure,omitempty"`
 }
 
 type LinuxOsConfigSysctlConfigParameters struct {
 
-	// The sysctl setting fs.aio-max-nr. Must be between 65536 and 6553500. Changing this forces a new resource to be created.
+	// The sysctl setting fs.aio-max-nr. Must be between 65536 and 6553500.
 	// +kubebuilder:validation:Optional
 	FsAioMaxNr *float64 `json:"fsAioMaxNr,omitempty" tf:"fs_aio_max_nr,omitempty"`
 
-	// The sysctl setting fs.file-max. Must be between 8192 and 12000500. Changing this forces a new resource to be created.
+	// The sysctl setting fs.file-max. Must be between 8192 and 12000500.
 	// +kubebuilder:validation:Optional
 	FsFileMax *float64 `json:"fsFileMax,omitempty" tf:"fs_file_max,omitempty"`
 
-	// The sysctl setting fs.inotify.max_user_watches. Must be between 781250 and 2097152. Changing this forces a new resource to be created.
+	// The sysctl setting fs.inotify.max_user_watches. Must be between 781250 and 2097152.
 	// +kubebuilder:validation:Optional
 	FsInotifyMaxUserWatches *float64 `json:"fsInotifyMaxUserWatches,omitempty" tf:"fs_inotify_max_user_watches,omitempty"`
 
-	// The sysctl setting fs.nr_open. Must be between 8192 and 20000500. Changing this forces a new resource to be created.
+	// The sysctl setting fs.nr_open. Must be between 8192 and 20000500.
 	// +kubebuilder:validation:Optional
 	FsNrOpen *float64 `json:"fsNrOpen,omitempty" tf:"fs_nr_open,omitempty"`
 
-	// The sysctl setting kernel.threads-max. Must be between 20 and 513785. Changing this forces a new resource to be created.
+	// The sysctl setting kernel.threads-max. Must be between 20 and 513785.
 	// +kubebuilder:validation:Optional
 	KernelThreadsMax *float64 `json:"kernelThreadsMax,omitempty" tf:"kernel_threads_max,omitempty"`
 
-	// The sysctl setting net.core.netdev_max_backlog. Must be between 1000 and 3240000. Changing this forces a new resource to be created.
+	// The sysctl setting net.core.netdev_max_backlog. Must be between 1000 and 3240000.
 	// +kubebuilder:validation:Optional
 	NetCoreNetdevMaxBacklog *float64 `json:"netCoreNetdevMaxBacklog,omitempty" tf:"net_core_netdev_max_backlog,omitempty"`
 
-	// The sysctl setting net.core.optmem_max. Must be between 20480 and 4194304. Changing this forces a new resource to be created.
+	// The sysctl setting net.core.optmem_max. Must be between 20480 and 4194304.
 	// +kubebuilder:validation:Optional
 	NetCoreOptmemMax *float64 `json:"netCoreOptmemMax,omitempty" tf:"net_core_optmem_max,omitempty"`
 
-	// The sysctl setting net.core.rmem_default. Must be between 212992 and 134217728. Changing this forces a new resource to be created.
+	// The sysctl setting net.core.rmem_default. Must be between 212992 and 134217728.
 	// +kubebuilder:validation:Optional
 	NetCoreRmemDefault *float64 `json:"netCoreRmemDefault,omitempty" tf:"net_core_rmem_default,omitempty"`
 
-	// The sysctl setting net.core.rmem_max. Must be between 212992 and 134217728. Changing this forces a new resource to be created.
+	// The sysctl setting net.core.rmem_max. Must be between 212992 and 134217728.
 	// +kubebuilder:validation:Optional
 	NetCoreRmemMax *float64 `json:"netCoreRmemMax,omitempty" tf:"net_core_rmem_max,omitempty"`
 
-	// The sysctl setting net.core.somaxconn. Must be between 4096 and 3240000. Changing this forces a new resource to be created.
+	// The sysctl setting net.core.somaxconn. Must be between 4096 and 3240000.
 	// +kubebuilder:validation:Optional
 	NetCoreSomaxconn *float64 `json:"netCoreSomaxconn,omitempty" tf:"net_core_somaxconn,omitempty"`
 
-	// The sysctl setting net.core.wmem_default. Must be between 212992 and 134217728. Changing this forces a new resource to be created.
+	// The sysctl setting net.core.wmem_default. Must be between 212992 and 134217728.
 	// +kubebuilder:validation:Optional
 	NetCoreWmemDefault *float64 `json:"netCoreWmemDefault,omitempty" tf:"net_core_wmem_default,omitempty"`
 
-	// The sysctl setting net.core.wmem_max. Must be between 212992 and 134217728. Changing this forces a new resource to be created.
+	// The sysctl setting net.core.wmem_max. Must be between 212992 and 134217728.
 	// +kubebuilder:validation:Optional
 	NetCoreWmemMax *float64 `json:"netCoreWmemMax,omitempty" tf:"net_core_wmem_max,omitempty"`
 
-	// The sysctl setting net.ipv4.ip_local_port_range max value. Must be between 32768 and 65535. Changing this forces a new resource to be created.
+	// The sysctl setting net.ipv4.ip_local_port_range max value. Must be between 32768 and 65535.
 	// +kubebuilder:validation:Optional
 	NetIPv4IPLocalPortRangeMax *float64 `json:"netIpv4IpLocalPortRangeMax,omitempty" tf:"net_ipv4_ip_local_port_range_max,omitempty"`
 
-	// The sysctl setting net.ipv4.ip_local_port_range min value. Must be between 1024 and 60999. Changing this forces a new resource to be created.
+	// The sysctl setting net.ipv4.ip_local_port_range min value. Must be between 1024 and 60999.
 	// +kubebuilder:validation:Optional
 	NetIPv4IPLocalPortRangeMin *float64 `json:"netIpv4IpLocalPortRangeMin,omitempty" tf:"net_ipv4_ip_local_port_range_min,omitempty"`
 
-	// The sysctl setting net.ipv4.neigh.default.gc_thresh1. Must be between 128 and 80000. Changing this forces a new resource to be created.
+	// The sysctl setting net.ipv4.neigh.default.gc_thresh1. Must be between 128 and 80000.
 	// +kubebuilder:validation:Optional
 	NetIPv4NeighDefaultGcThresh1 *float64 `json:"netIpv4NeighDefaultGcThresh1,omitempty" tf:"net_ipv4_neigh_default_gc_thresh1,omitempty"`
 
-	// The sysctl setting net.ipv4.neigh.default.gc_thresh2. Must be between 512 and 90000. Changing this forces a new resource to be created.
+	// The sysctl setting net.ipv4.neigh.default.gc_thresh2. Must be between 512 and 90000.
 	// +kubebuilder:validation:Optional
 	NetIPv4NeighDefaultGcThresh2 *float64 `json:"netIpv4NeighDefaultGcThresh2,omitempty" tf:"net_ipv4_neigh_default_gc_thresh2,omitempty"`
 
-	// The sysctl setting net.ipv4.neigh.default.gc_thresh3. Must be between 1024 and 100000. Changing this forces a new resource to be created.
+	// The sysctl setting net.ipv4.neigh.default.gc_thresh3. Must be between 1024 and 100000.
 	// +kubebuilder:validation:Optional
 	NetIPv4NeighDefaultGcThresh3 *float64 `json:"netIpv4NeighDefaultGcThresh3,omitempty" tf:"net_ipv4_neigh_default_gc_thresh3,omitempty"`
 
-	// The sysctl setting net.ipv4.tcp_fin_timeout. Must be between 5 and 120. Changing this forces a new resource to be created.
+	// The sysctl setting net.ipv4.tcp_fin_timeout. Must be between 5 and 120.
 	// +kubebuilder:validation:Optional
 	NetIPv4TCPFinTimeout *float64 `json:"netIpv4TcpFinTimeout,omitempty" tf:"net_ipv4_tcp_fin_timeout,omitempty"`
 
-	// The sysctl setting net.ipv4.tcp_keepalive_intvl. Must be between 10 and 90. Changing this forces a new resource to be created.
+	// The sysctl setting net.ipv4.tcp_keepalive_intvl. Must be between 10 and 90.
 	// +kubebuilder:validation:Optional
 	NetIPv4TCPKeepaliveIntvl *float64 `json:"netIpv4TcpKeepaliveIntvl,omitempty" tf:"net_ipv4_tcp_keepalive_intvl,omitempty"`
 
-	// The sysctl setting net.ipv4.tcp_keepalive_probes. Must be between 1 and 15. Changing this forces a new resource to be created.
+	// The sysctl setting net.ipv4.tcp_keepalive_probes. Must be between 1 and 15.
 	// +kubebuilder:validation:Optional
 	NetIPv4TCPKeepaliveProbes *float64 `json:"netIpv4TcpKeepaliveProbes,omitempty" tf:"net_ipv4_tcp_keepalive_probes,omitempty"`
 
-	// The sysctl setting net.ipv4.tcp_keepalive_time. Must be between 30 and 432000. Changing this forces a new resource to be created.
+	// The sysctl setting net.ipv4.tcp_keepalive_time. Must be between 30 and 432000.
 	// +kubebuilder:validation:Optional
 	NetIPv4TCPKeepaliveTime *float64 `json:"netIpv4TcpKeepaliveTime,omitempty" tf:"net_ipv4_tcp_keepalive_time,omitempty"`
 
-	// The sysctl setting net.ipv4.tcp_max_syn_backlog. Must be between 128 and 3240000. Changing this forces a new resource to be created.
+	// The sysctl setting net.ipv4.tcp_max_syn_backlog. Must be between 128 and 3240000.
 	// +kubebuilder:validation:Optional
 	NetIPv4TCPMaxSynBacklog *float64 `json:"netIpv4TcpMaxSynBacklog,omitempty" tf:"net_ipv4_tcp_max_syn_backlog,omitempty"`
 
-	// The sysctl setting net.ipv4.tcp_max_tw_buckets. Must be between 8000 and 1440000. Changing this forces a new resource to be created.
+	// The sysctl setting net.ipv4.tcp_max_tw_buckets. Must be between 8000 and 1440000.
 	// +kubebuilder:validation:Optional
 	NetIPv4TCPMaxTwBuckets *float64 `json:"netIpv4TcpMaxTwBuckets,omitempty" tf:"net_ipv4_tcp_max_tw_buckets,omitempty"`
 
-	// Is sysctl setting net.ipv4.tcp_tw_reuse enabled? Changing this forces a new resource to be created.
+	// Is sysctl setting net.ipv4.tcp_tw_reuse enabled?
 	// +kubebuilder:validation:Optional
 	NetIPv4TCPTwReuse *bool `json:"netIpv4TcpTwReuse,omitempty" tf:"net_ipv4_tcp_tw_reuse,omitempty"`
 
-	// The sysctl setting net.netfilter.nf_conntrack_buckets. Must be between 65536 and 524288. Changing this forces a new resource to be created.
+	// The sysctl setting net.netfilter.nf_conntrack_buckets. Must be between 65536 and 524288.
 	// +kubebuilder:validation:Optional
 	NetNetfilterNfConntrackBuckets *float64 `json:"netNetfilterNfConntrackBuckets,omitempty" tf:"net_netfilter_nf_conntrack_buckets,omitempty"`
 
-	// The sysctl setting net.netfilter.nf_conntrack_max. Must be between 131072 and 2097152. Changing this forces a new resource to be created.
+	// The sysctl setting net.netfilter.nf_conntrack_max. Must be between 131072 and 2097152.
 	// +kubebuilder:validation:Optional
 	NetNetfilterNfConntrackMax *float64 `json:"netNetfilterNfConntrackMax,omitempty" tf:"net_netfilter_nf_conntrack_max,omitempty"`
 
-	// The sysctl setting vm.max_map_count. Must be between 65530 and 262144. Changing this forces a new resource to be created.
+	// The sysctl setting vm.max_map_count. Must be between 65530 and 262144.
 	// +kubebuilder:validation:Optional
 	VMMaxMapCount *float64 `json:"vmMaxMapCount,omitempty" tf:"vm_max_map_count,omitempty"`
 
-	// The sysctl setting vm.swappiness. Must be between 0 and 100. Changing this forces a new resource to be created.
+	// The sysctl setting vm.swappiness. Must be between 0 and 100.
 	// +kubebuilder:validation:Optional
 	VMSwappiness *float64 `json:"vmSwappiness,omitempty" tf:"vm_swappiness,omitempty"`
 
-	// The sysctl setting vm.vfs_cache_pressure. Must be between 0 and 100. Changing this forces a new resource to be created.
+	// The sysctl setting vm.vfs_cache_pressure. Must be between 0 and 100.
 	// +kubebuilder:validation:Optional
 	VMVfsCachePressure *float64 `json:"vmVfsCachePressure,omitempty" tf:"vm_vfs_cache_pressure,omitempty"`
 }
@@ -1136,9 +1126,8 @@ type KubernetesClusterNodePoolStatus struct {
 type KubernetesClusterNodePool struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.vmSize) || (has(self.initProvider) && has(self.initProvider.vmSize))",message="spec.forProvider.vmSize is a required parameter"
-	Spec   KubernetesClusterNodePoolSpec   `json:"spec"`
-	Status KubernetesClusterNodePoolStatus `json:"status,omitempty"`
+	Spec              KubernetesClusterNodePoolSpec   `json:"spec"`
+	Status            KubernetesClusterNodePoolStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

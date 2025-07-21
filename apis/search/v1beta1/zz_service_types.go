@@ -15,11 +15,19 @@ import (
 
 type IdentityInitParameters struct {
 
-	// Specifies the type of Managed Service Identity that should be configured on this Search Service. The only possible value is SystemAssigned.
+	// Specifies the list of User Assigned Managed Service Identity IDs which should be assigned to this Search Service.
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Search Service. Possible values are SystemAssigned, UserAssigned, and SystemAssigned, UserAssigned.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type IdentityObservation struct {
+
+	// Specifies the list of User Assigned Managed Service Identity IDs which should be assigned to this Search Service.
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Principal ID associated with this Managed Service Identity.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
@@ -27,13 +35,18 @@ type IdentityObservation struct {
 	// The Tenant ID associated with this Managed Service Identity.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 
-	// Specifies the type of Managed Service Identity that should be configured on this Search Service. The only possible value is SystemAssigned.
+	// Specifies the type of Managed Service Identity that should be configured on this Search Service. Possible values are SystemAssigned, UserAssigned, and SystemAssigned, UserAssigned.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type IdentityParameters struct {
 
-	// Specifies the type of Managed Service Identity that should be configured on this Search Service. The only possible value is SystemAssigned.
+	// Specifies the list of User Assigned Managed Service Identity IDs which should be assigned to this Search Service.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Search Service. Possible values are SystemAssigned, UserAssigned, and SystemAssigned, UserAssigned.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -77,7 +90,10 @@ type ServiceInitParameters struct {
 	// The Azure Region where the Search Service should exist. Changing this forces a new Search Service to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// Specifies the number of partitions which should be created. This field cannot be set when using a free or basic sku (see the Microsoft documentation). Possible values include 1, 2, 3, 4, 6, or 12. Defaults to 1.
+	// Whether to allow trusted Azure services to access a network restricted Container Registry? Possible values are None and AzureServices. Defaults to None.
+	NetworkRuleBypassOption *string `json:"networkRuleBypassOption,omitempty" tf:"network_rule_bypass_option,omitempty"`
+
+	// Specifies the number of partitions which should be created. This field cannot be set when using a free sku (see the Microsoft documentation). Possible values include 1, 2, 3, 4, 6, or 12. Defaults to 1.
 	PartitionCount *float64 `json:"partitionCount,omitempty" tf:"partition_count,omitempty"`
 
 	// Specifies whether Public Network Access is allowed for this resource. Defaults to true.
@@ -106,6 +122,9 @@ type ServiceObservation struct {
 	// Specifies the response that the Search Service should return for requests that fail authentication. Possible values include http401WithBearerChallenge or http403.
 	AuthenticationFailureMode *string `json:"authenticationFailureMode,omitempty" tf:"authentication_failure_mode,omitempty"`
 
+	// Describes whether the search service is compliant or not with respect to having non-customer encrypted resources. If a service has more than one non-customer encrypted resource and Enforcement is enabled then the service will be marked as NonCompliant. If all the resources are customer encrypted, then the service will be marked as Compliant.
+	CustomerManagedKeyEncryptionComplianceStatus *string `json:"customerManagedKeyEncryptionComplianceStatus,omitempty" tf:"customer_managed_key_encryption_compliance_status,omitempty"`
+
 	// Specifies whether the Search Service should enforce that non-customer resources are encrypted. Defaults to false.
 	CustomerManagedKeyEnforcementEnabled *bool `json:"customerManagedKeyEnforcementEnabled,omitempty" tf:"customer_managed_key_enforcement_enabled,omitempty"`
 
@@ -124,7 +143,10 @@ type ServiceObservation struct {
 	// The Azure Region where the Search Service should exist. Changing this forces a new Search Service to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// Specifies the number of partitions which should be created. This field cannot be set when using a free or basic sku (see the Microsoft documentation). Possible values include 1, 2, 3, 4, 6, or 12. Defaults to 1.
+	// Whether to allow trusted Azure services to access a network restricted Container Registry? Possible values are None and AzureServices. Defaults to None.
+	NetworkRuleBypassOption *string `json:"networkRuleBypassOption,omitempty" tf:"network_rule_bypass_option,omitempty"`
+
+	// Specifies the number of partitions which should be created. This field cannot be set when using a free sku (see the Microsoft documentation). Possible values include 1, 2, 3, 4, 6, or 12. Defaults to 1.
 	PartitionCount *float64 `json:"partitionCount,omitempty" tf:"partition_count,omitempty"`
 
 	// Specifies whether Public Network Access is allowed for this resource. Defaults to true.
@@ -181,7 +203,11 @@ type ServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// Specifies the number of partitions which should be created. This field cannot be set when using a free or basic sku (see the Microsoft documentation). Possible values include 1, 2, 3, 4, 6, or 12. Defaults to 1.
+	// Whether to allow trusted Azure services to access a network restricted Container Registry? Possible values are None and AzureServices. Defaults to None.
+	// +kubebuilder:validation:Optional
+	NetworkRuleBypassOption *string `json:"networkRuleBypassOption,omitempty" tf:"network_rule_bypass_option,omitempty"`
+
+	// Specifies the number of partitions which should be created. This field cannot be set when using a free sku (see the Microsoft documentation). Possible values include 1, 2, 3, 4, 6, or 12. Defaults to 1.
 	// +kubebuilder:validation:Optional
 	PartitionCount *float64 `json:"partitionCount,omitempty" tf:"partition_count,omitempty"`
 

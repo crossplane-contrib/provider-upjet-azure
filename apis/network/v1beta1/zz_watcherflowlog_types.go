@@ -149,7 +149,7 @@ type WatcherFlowLogInitParameters struct {
 	// The location where the Network Watcher Flow Log resides. Changing this forces a new resource to be created. Defaults to the location of the Network Watcher.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The ID of the Network Security Group for which to enable flow logs for. Changing this forces a new resource to be created.
+	// The ID of the Network Watcher.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	NetworkSecurityGroupID *string `json:"networkSecurityGroupId,omitempty" tf:"network_security_group_id,omitempty"`
@@ -182,10 +182,23 @@ type WatcherFlowLogInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// The ID of the Resource for which to enable flow logs for. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
+
+	// Reference to a SecurityGroup in network to populate targetResourceId.
+	// +kubebuilder:validation:Optional
+	TargetResourceIDRef *v1.Reference `json:"targetResourceIdRef,omitempty" tf:"-"`
+
+	// Selector for a SecurityGroup in network to populate targetResourceId.
+	// +kubebuilder:validation:Optional
+	TargetResourceIDSelector *v1.Selector `json:"targetResourceIdSelector,omitempty" tf:"-"`
+
 	// A traffic_analytics block as documented below.
 	TrafficAnalytics []TrafficAnalyticsInitParameters `json:"trafficAnalytics,omitempty" tf:"traffic_analytics,omitempty"`
 
-	// The version (revision) of the flow log. Possible values are 1 and 2.
+	// The version (revision) of the flow log. Possible values are 1 and 2. Defaults to 1.
 	Version *float64 `json:"version,omitempty" tf:"version,omitempty"`
 }
 
@@ -200,7 +213,7 @@ type WatcherFlowLogObservation struct {
 	// The location where the Network Watcher Flow Log resides. Changing this forces a new resource to be created. Defaults to the location of the Network Watcher.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The ID of the Network Security Group for which to enable flow logs for. Changing this forces a new resource to be created.
+	// The ID of the Network Watcher.
 	NetworkSecurityGroupID *string `json:"networkSecurityGroupId,omitempty" tf:"network_security_group_id,omitempty"`
 
 	// The name of the Network Watcher. Changing this forces a new resource to be created.
@@ -219,10 +232,13 @@ type WatcherFlowLogObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// The ID of the Resource for which to enable flow logs for. Changing this forces a new resource to be created.
+	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
+
 	// A traffic_analytics block as documented below.
 	TrafficAnalytics []TrafficAnalyticsObservation `json:"trafficAnalytics,omitempty" tf:"traffic_analytics,omitempty"`
 
-	// The version (revision) of the flow log. Possible values are 1 and 2.
+	// The version (revision) of the flow log. Possible values are 1 and 2. Defaults to 1.
 	Version *float64 `json:"version,omitempty" tf:"version,omitempty"`
 }
 
@@ -236,7 +252,7 @@ type WatcherFlowLogParameters struct {
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The ID of the Network Security Group for which to enable flow logs for. Changing this forces a new resource to be created.
+	// The ID of the Network Watcher.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -299,11 +315,25 @@ type WatcherFlowLogParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// The ID of the Resource for which to enable flow logs for. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
+
+	// Reference to a SecurityGroup in network to populate targetResourceId.
+	// +kubebuilder:validation:Optional
+	TargetResourceIDRef *v1.Reference `json:"targetResourceIdRef,omitempty" tf:"-"`
+
+	// Selector for a SecurityGroup in network to populate targetResourceId.
+	// +kubebuilder:validation:Optional
+	TargetResourceIDSelector *v1.Selector `json:"targetResourceIdSelector,omitempty" tf:"-"`
+
 	// A traffic_analytics block as documented below.
 	// +kubebuilder:validation:Optional
 	TrafficAnalytics []TrafficAnalyticsParameters `json:"trafficAnalytics,omitempty" tf:"traffic_analytics,omitempty"`
 
-	// The version (revision) of the flow log. Possible values are 1 and 2.
+	// The version (revision) of the flow log. Possible values are 1 and 2. Defaults to 1.
 	// +kubebuilder:validation:Optional
 	Version *float64 `json:"version,omitempty" tf:"version,omitempty"`
 }

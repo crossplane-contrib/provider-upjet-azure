@@ -13,6 +13,64 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ConditionAlertContextInitParameters struct {
+
+	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type ConditionAlertContextObservation struct {
+
+	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type ConditionAlertContextParameters struct {
+
+	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
+	// +kubebuilder:validation:Optional
+	Operator *string `json:"operator" tf:"operator,omitempty"`
+
+	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values" tf:"values,omitempty"`
+}
+
+type ConditionAlertRuleIDInitParameters struct {
+
+	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type ConditionAlertRuleIDObservation struct {
+
+	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type ConditionAlertRuleIDParameters struct {
+
+	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
+	// +kubebuilder:validation:Optional
+	Operator *string `json:"operator" tf:"operator,omitempty"`
+
+	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values" tf:"values,omitempty"`
+}
+
 type ConditionAlertRuleNameInitParameters struct {
 
 	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
@@ -42,6 +100,35 @@ type ConditionAlertRuleNameParameters struct {
 	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
+type ConditionDescriptionInitParameters struct {
+
+	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type ConditionDescriptionObservation struct {
+
+	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type ConditionDescriptionParameters struct {
+
+	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
+	// +kubebuilder:validation:Optional
+	Operator *string `json:"operator" tf:"operator,omitempty"`
+
+	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values" tf:"values,omitempty"`
+}
+
 type ConditionMonitorConditionInitParameters struct {
 
 	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
@@ -61,6 +148,64 @@ type ConditionMonitorConditionObservation struct {
 }
 
 type ConditionMonitorConditionParameters struct {
+
+	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
+	// +kubebuilder:validation:Optional
+	Operator *string `json:"operator" tf:"operator,omitempty"`
+
+	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values" tf:"values,omitempty"`
+}
+
+type ConditionMonitorServiceInitParameters struct {
+
+	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type ConditionMonitorServiceObservation struct {
+
+	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type ConditionMonitorServiceParameters struct {
+
+	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
+	// +kubebuilder:validation:Optional
+	Operator *string `json:"operator" tf:"operator,omitempty"`
+
+	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values" tf:"values,omitempty"`
+}
+
+type ConditionSeverityInitParameters struct {
+
+	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type ConditionSeverityObservation struct {
+
+	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type ConditionSeverityParameters struct {
 
 	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
 	// +kubebuilder:validation:Optional
@@ -158,7 +303,7 @@ type ConditionTargetResourceParameters struct {
 	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
-type MonitorAlertProcessingRuleSuppressionConditionAlertContextInitParameters struct {
+type ConditionTargetResourceTypeInitParameters struct {
 
 	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
@@ -167,7 +312,7 @@ type MonitorAlertProcessingRuleSuppressionConditionAlertContextInitParameters st
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
-type MonitorAlertProcessingRuleSuppressionConditionAlertContextObservation struct {
+type ConditionTargetResourceTypeObservation struct {
 
 	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
@@ -176,65 +321,7 @@ type MonitorAlertProcessingRuleSuppressionConditionAlertContextObservation struc
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
-type MonitorAlertProcessingRuleSuppressionConditionAlertContextParameters struct {
-
-	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
-	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator" tf:"operator,omitempty"`
-
-	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
-	// +kubebuilder:validation:Optional
-	Values []*string `json:"values" tf:"values,omitempty"`
-}
-
-type MonitorAlertProcessingRuleSuppressionConditionAlertRuleIDInitParameters struct {
-
-	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
-
-	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
-}
-
-type MonitorAlertProcessingRuleSuppressionConditionAlertRuleIDObservation struct {
-
-	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
-
-	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
-}
-
-type MonitorAlertProcessingRuleSuppressionConditionAlertRuleIDParameters struct {
-
-	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
-	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator" tf:"operator,omitempty"`
-
-	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
-	// +kubebuilder:validation:Optional
-	Values []*string `json:"values" tf:"values,omitempty"`
-}
-
-type MonitorAlertProcessingRuleSuppressionConditionDescriptionInitParameters struct {
-
-	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
-
-	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
-}
-
-type MonitorAlertProcessingRuleSuppressionConditionDescriptionObservation struct {
-
-	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
-
-	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
-}
-
-type MonitorAlertProcessingRuleSuppressionConditionDescriptionParameters struct {
+type ConditionTargetResourceTypeParameters struct {
 
 	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
 	// +kubebuilder:validation:Optional
@@ -248,25 +335,25 @@ type MonitorAlertProcessingRuleSuppressionConditionDescriptionParameters struct 
 type MonitorAlertProcessingRuleSuppressionConditionInitParameters struct {
 
 	// A alert_context block as defined above.
-	AlertContext []MonitorAlertProcessingRuleSuppressionConditionAlertContextInitParameters `json:"alertContext,omitempty" tf:"alert_context,omitempty"`
+	AlertContext []ConditionAlertContextInitParameters `json:"alertContext,omitempty" tf:"alert_context,omitempty"`
 
 	// A alert_rule_id block as defined above.
-	AlertRuleID []MonitorAlertProcessingRuleSuppressionConditionAlertRuleIDInitParameters `json:"alertRuleId,omitempty" tf:"alert_rule_id,omitempty"`
+	AlertRuleID []ConditionAlertRuleIDInitParameters `json:"alertRuleId,omitempty" tf:"alert_rule_id,omitempty"`
 
 	// A alert_rule_name block as defined above.
 	AlertRuleName []ConditionAlertRuleNameInitParameters `json:"alertRuleName,omitempty" tf:"alert_rule_name,omitempty"`
 
 	// A description block as defined below.
-	Description []MonitorAlertProcessingRuleSuppressionConditionDescriptionInitParameters `json:"description,omitempty" tf:"description,omitempty"`
+	Description []ConditionDescriptionInitParameters `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A monitor_condition block as defined below.
 	MonitorCondition []ConditionMonitorConditionInitParameters `json:"monitorCondition,omitempty" tf:"monitor_condition,omitempty"`
 
 	// A monitor_service block as defined below.
-	MonitorService []MonitorAlertProcessingRuleSuppressionConditionMonitorServiceInitParameters `json:"monitorService,omitempty" tf:"monitor_service,omitempty"`
+	MonitorService []ConditionMonitorServiceInitParameters `json:"monitorService,omitempty" tf:"monitor_service,omitempty"`
 
 	// A severity block as defined below.
-	Severity []MonitorAlertProcessingRuleSuppressionConditionSeverityInitParameters `json:"severity,omitempty" tf:"severity,omitempty"`
+	Severity []ConditionSeverityInitParameters `json:"severity,omitempty" tf:"severity,omitempty"`
 
 	// A signal_type block as defined below.
 	SignalType []ConditionSignalTypeInitParameters `json:"signalType,omitempty" tf:"signal_type,omitempty"`
@@ -278,60 +365,31 @@ type MonitorAlertProcessingRuleSuppressionConditionInitParameters struct {
 	TargetResourceGroup []ConditionTargetResourceGroupInitParameters `json:"targetResourceGroup,omitempty" tf:"target_resource_group,omitempty"`
 
 	// A target_resource_type block as defined below.
-	TargetResourceType []MonitorAlertProcessingRuleSuppressionConditionTargetResourceTypeInitParameters `json:"targetResourceType,omitempty" tf:"target_resource_type,omitempty"`
-}
-
-type MonitorAlertProcessingRuleSuppressionConditionMonitorServiceInitParameters struct {
-
-	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
-
-	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
-}
-
-type MonitorAlertProcessingRuleSuppressionConditionMonitorServiceObservation struct {
-
-	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
-
-	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
-}
-
-type MonitorAlertProcessingRuleSuppressionConditionMonitorServiceParameters struct {
-
-	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
-	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator" tf:"operator,omitempty"`
-
-	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
-	// +kubebuilder:validation:Optional
-	Values []*string `json:"values" tf:"values,omitempty"`
+	TargetResourceType []ConditionTargetResourceTypeInitParameters `json:"targetResourceType,omitempty" tf:"target_resource_type,omitempty"`
 }
 
 type MonitorAlertProcessingRuleSuppressionConditionObservation struct {
 
 	// A alert_context block as defined above.
-	AlertContext []MonitorAlertProcessingRuleSuppressionConditionAlertContextObservation `json:"alertContext,omitempty" tf:"alert_context,omitempty"`
+	AlertContext []ConditionAlertContextObservation `json:"alertContext,omitempty" tf:"alert_context,omitempty"`
 
 	// A alert_rule_id block as defined above.
-	AlertRuleID []MonitorAlertProcessingRuleSuppressionConditionAlertRuleIDObservation `json:"alertRuleId,omitempty" tf:"alert_rule_id,omitempty"`
+	AlertRuleID []ConditionAlertRuleIDObservation `json:"alertRuleId,omitempty" tf:"alert_rule_id,omitempty"`
 
 	// A alert_rule_name block as defined above.
 	AlertRuleName []ConditionAlertRuleNameObservation `json:"alertRuleName,omitempty" tf:"alert_rule_name,omitempty"`
 
 	// A description block as defined below.
-	Description []MonitorAlertProcessingRuleSuppressionConditionDescriptionObservation `json:"description,omitempty" tf:"description,omitempty"`
+	Description []ConditionDescriptionObservation `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A monitor_condition block as defined below.
 	MonitorCondition []ConditionMonitorConditionObservation `json:"monitorCondition,omitempty" tf:"monitor_condition,omitempty"`
 
 	// A monitor_service block as defined below.
-	MonitorService []MonitorAlertProcessingRuleSuppressionConditionMonitorServiceObservation `json:"monitorService,omitempty" tf:"monitor_service,omitempty"`
+	MonitorService []ConditionMonitorServiceObservation `json:"monitorService,omitempty" tf:"monitor_service,omitempty"`
 
 	// A severity block as defined below.
-	Severity []MonitorAlertProcessingRuleSuppressionConditionSeverityObservation `json:"severity,omitempty" tf:"severity,omitempty"`
+	Severity []ConditionSeverityObservation `json:"severity,omitempty" tf:"severity,omitempty"`
 
 	// A signal_type block as defined below.
 	SignalType []ConditionSignalTypeObservation `json:"signalType,omitempty" tf:"signal_type,omitempty"`
@@ -343,18 +401,18 @@ type MonitorAlertProcessingRuleSuppressionConditionObservation struct {
 	TargetResourceGroup []ConditionTargetResourceGroupObservation `json:"targetResourceGroup,omitempty" tf:"target_resource_group,omitempty"`
 
 	// A target_resource_type block as defined below.
-	TargetResourceType []MonitorAlertProcessingRuleSuppressionConditionTargetResourceTypeObservation `json:"targetResourceType,omitempty" tf:"target_resource_type,omitempty"`
+	TargetResourceType []ConditionTargetResourceTypeObservation `json:"targetResourceType,omitempty" tf:"target_resource_type,omitempty"`
 }
 
 type MonitorAlertProcessingRuleSuppressionConditionParameters struct {
 
 	// A alert_context block as defined above.
 	// +kubebuilder:validation:Optional
-	AlertContext []MonitorAlertProcessingRuleSuppressionConditionAlertContextParameters `json:"alertContext,omitempty" tf:"alert_context,omitempty"`
+	AlertContext []ConditionAlertContextParameters `json:"alertContext,omitempty" tf:"alert_context,omitempty"`
 
 	// A alert_rule_id block as defined above.
 	// +kubebuilder:validation:Optional
-	AlertRuleID []MonitorAlertProcessingRuleSuppressionConditionAlertRuleIDParameters `json:"alertRuleId,omitempty" tf:"alert_rule_id,omitempty"`
+	AlertRuleID []ConditionAlertRuleIDParameters `json:"alertRuleId,omitempty" tf:"alert_rule_id,omitempty"`
 
 	// A alert_rule_name block as defined above.
 	// +kubebuilder:validation:Optional
@@ -362,7 +420,7 @@ type MonitorAlertProcessingRuleSuppressionConditionParameters struct {
 
 	// A description block as defined below.
 	// +kubebuilder:validation:Optional
-	Description []MonitorAlertProcessingRuleSuppressionConditionDescriptionParameters `json:"description,omitempty" tf:"description,omitempty"`
+	Description []ConditionDescriptionParameters `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A monitor_condition block as defined below.
 	// +kubebuilder:validation:Optional
@@ -370,11 +428,11 @@ type MonitorAlertProcessingRuleSuppressionConditionParameters struct {
 
 	// A monitor_service block as defined below.
 	// +kubebuilder:validation:Optional
-	MonitorService []MonitorAlertProcessingRuleSuppressionConditionMonitorServiceParameters `json:"monitorService,omitempty" tf:"monitor_service,omitempty"`
+	MonitorService []ConditionMonitorServiceParameters `json:"monitorService,omitempty" tf:"monitor_service,omitempty"`
 
 	// A severity block as defined below.
 	// +kubebuilder:validation:Optional
-	Severity []MonitorAlertProcessingRuleSuppressionConditionSeverityParameters `json:"severity,omitempty" tf:"severity,omitempty"`
+	Severity []ConditionSeverityParameters `json:"severity,omitempty" tf:"severity,omitempty"`
 
 	// A signal_type block as defined below.
 	// +kubebuilder:validation:Optional
@@ -390,65 +448,7 @@ type MonitorAlertProcessingRuleSuppressionConditionParameters struct {
 
 	// A target_resource_type block as defined below.
 	// +kubebuilder:validation:Optional
-	TargetResourceType []MonitorAlertProcessingRuleSuppressionConditionTargetResourceTypeParameters `json:"targetResourceType,omitempty" tf:"target_resource_type,omitempty"`
-}
-
-type MonitorAlertProcessingRuleSuppressionConditionSeverityInitParameters struct {
-
-	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
-
-	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
-}
-
-type MonitorAlertProcessingRuleSuppressionConditionSeverityObservation struct {
-
-	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
-
-	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
-}
-
-type MonitorAlertProcessingRuleSuppressionConditionSeverityParameters struct {
-
-	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
-	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator" tf:"operator,omitempty"`
-
-	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
-	// +kubebuilder:validation:Optional
-	Values []*string `json:"values" tf:"values,omitempty"`
-}
-
-type MonitorAlertProcessingRuleSuppressionConditionTargetResourceTypeInitParameters struct {
-
-	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
-
-	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
-}
-
-type MonitorAlertProcessingRuleSuppressionConditionTargetResourceTypeObservation struct {
-
-	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
-
-	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
-}
-
-type MonitorAlertProcessingRuleSuppressionConditionTargetResourceTypeParameters struct {
-
-	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
-	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator" tf:"operator,omitempty"`
-
-	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
-	// +kubebuilder:validation:Optional
-	Values []*string `json:"values" tf:"values,omitempty"`
+	TargetResourceType []ConditionTargetResourceTypeParameters `json:"targetResourceType,omitempty" tf:"target_resource_type,omitempty"`
 }
 
 type MonitorAlertProcessingRuleSuppressionInitParameters struct {

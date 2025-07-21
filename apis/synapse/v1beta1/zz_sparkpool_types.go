@@ -166,7 +166,7 @@ type SparkPoolInitParameters struct {
 	// The default folder where Spark logs will be written. Defaults to /logs.
 	SparkLogFolder *string `json:"sparkLogFolder,omitempty" tf:"spark_log_folder,omitempty"`
 
-	// The Apache Spark version. Possible values are 2.4 , 3.1 , 3.2 and 3.3. Defaults to 2.4.
+	// The Apache Spark version. Possible values are 3.2, 3.3, and 3.4.
 	SparkVersion *string `json:"sparkVersion,omitempty" tf:"spark_version,omitempty"`
 
 	// A mapping of tags which should be assigned to the Synapse Spark Pool.
@@ -224,7 +224,7 @@ type SparkPoolObservation struct {
 	// The default folder where Spark logs will be written. Defaults to /logs.
 	SparkLogFolder *string `json:"sparkLogFolder,omitempty" tf:"spark_log_folder,omitempty"`
 
-	// The Apache Spark version. Possible values are 2.4 , 3.1 , 3.2 and 3.3. Defaults to 2.4.
+	// The Apache Spark version. Possible values are 3.2, 3.3, and 3.4.
 	SparkVersion *string `json:"sparkVersion,omitempty" tf:"spark_version,omitempty"`
 
 	// The ID of the Synapse Workspace where the Synapse Spark Pool should exist. Changing this forces a new Synapse Spark Pool to be created.
@@ -297,7 +297,7 @@ type SparkPoolParameters struct {
 	// +kubebuilder:validation:Optional
 	SparkLogFolder *string `json:"sparkLogFolder,omitempty" tf:"spark_log_folder,omitempty"`
 
-	// The Apache Spark version. Possible values are 2.4 , 3.1 , 3.2 and 3.3. Defaults to 2.4.
+	// The Apache Spark version. Possible values are 3.2, 3.3, and 3.4.
 	// +kubebuilder:validation:Optional
 	SparkVersion *string `json:"sparkVersion,omitempty" tf:"spark_version,omitempty"`
 
@@ -359,6 +359,7 @@ type SparkPool struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.nodeSize) || (has(self.initProvider) && has(self.initProvider.nodeSize))",message="spec.forProvider.nodeSize is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.nodeSizeFamily) || (has(self.initProvider) && has(self.initProvider.nodeSizeFamily))",message="spec.forProvider.nodeSizeFamily is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sparkVersion) || (has(self.initProvider) && has(self.initProvider.sparkVersion))",message="spec.forProvider.sparkVersion is a required parameter"
 	Spec   SparkPoolSpec   `json:"spec"`
 	Status SparkPoolStatus `json:"status,omitempty"`
 }

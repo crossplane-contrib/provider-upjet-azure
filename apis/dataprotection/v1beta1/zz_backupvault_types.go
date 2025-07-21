@@ -15,11 +15,17 @@ import (
 
 type BackupVaultInitParameters struct {
 
+	// Whether to enable cross-region restore for the Backup Vault.
+	CrossRegionRestoreEnabled *bool `json:"crossRegionRestoreEnabled,omitempty" tf:"cross_region_restore_enabled,omitempty"`
+
 	// Specifies the type of the data store. Possible values are ArchiveStore, OperationalStore, SnapshotStore and VaultStore. Changing this forces a new resource to be created.
 	DatastoreType *string `json:"datastoreType,omitempty" tf:"datastore_type,omitempty"`
 
 	// An identity block as defined below.
 	Identity []IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// The state of immutability for this Backup Vault. Possible values are Disabled, Locked, and Unlocked. Defaults to Disabled. Changing this from Locked to anything else forces a new Backup Vault to be created.
+	Immutability *string `json:"immutability,omitempty" tf:"immutability,omitempty"`
 
 	// The Azure Region where the Backup Vault should exist. Changing this forces a new Backup Vault to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -30,7 +36,7 @@ type BackupVaultInitParameters struct {
 	// The soft delete retention duration for this Backup Vault. Possible values are between 14 and 180. Defaults to 14.
 	RetentionDurationInDays *float64 `json:"retentionDurationInDays,omitempty" tf:"retention_duration_in_days,omitempty"`
 
-	// The state of soft delete for this Backup Vault. Possible values are AlwaysOn, Off and On. Defaults to On.
+	// The state of soft delete for this Backup Vault. Possible values are AlwaysOn, Off, and On. Defaults to On.
 	SoftDelete *string `json:"softDelete,omitempty" tf:"soft_delete,omitempty"`
 
 	// A mapping of tags which should be assigned to the Backup Vault.
@@ -40,6 +46,9 @@ type BackupVaultInitParameters struct {
 
 type BackupVaultObservation struct {
 
+	// Whether to enable cross-region restore for the Backup Vault.
+	CrossRegionRestoreEnabled *bool `json:"crossRegionRestoreEnabled,omitempty" tf:"cross_region_restore_enabled,omitempty"`
+
 	// Specifies the type of the data store. Possible values are ArchiveStore, OperationalStore, SnapshotStore and VaultStore. Changing this forces a new resource to be created.
 	DatastoreType *string `json:"datastoreType,omitempty" tf:"datastore_type,omitempty"`
 
@@ -48,6 +57,9 @@ type BackupVaultObservation struct {
 
 	// An identity block as defined below.
 	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// The state of immutability for this Backup Vault. Possible values are Disabled, Locked, and Unlocked. Defaults to Disabled. Changing this from Locked to anything else forces a new Backup Vault to be created.
+	Immutability *string `json:"immutability,omitempty" tf:"immutability,omitempty"`
 
 	// The Azure Region where the Backup Vault should exist. Changing this forces a new Backup Vault to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -61,7 +73,7 @@ type BackupVaultObservation struct {
 	// The soft delete retention duration for this Backup Vault. Possible values are between 14 and 180. Defaults to 14.
 	RetentionDurationInDays *float64 `json:"retentionDurationInDays,omitempty" tf:"retention_duration_in_days,omitempty"`
 
-	// The state of soft delete for this Backup Vault. Possible values are AlwaysOn, Off and On. Defaults to On.
+	// The state of soft delete for this Backup Vault. Possible values are AlwaysOn, Off, and On. Defaults to On.
 	SoftDelete *string `json:"softDelete,omitempty" tf:"soft_delete,omitempty"`
 
 	// A mapping of tags which should be assigned to the Backup Vault.
@@ -71,6 +83,10 @@ type BackupVaultObservation struct {
 
 type BackupVaultParameters struct {
 
+	// Whether to enable cross-region restore for the Backup Vault.
+	// +kubebuilder:validation:Optional
+	CrossRegionRestoreEnabled *bool `json:"crossRegionRestoreEnabled,omitempty" tf:"cross_region_restore_enabled,omitempty"`
+
 	// Specifies the type of the data store. Possible values are ArchiveStore, OperationalStore, SnapshotStore and VaultStore. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	DatastoreType *string `json:"datastoreType,omitempty" tf:"datastore_type,omitempty"`
@@ -78,6 +94,10 @@ type BackupVaultParameters struct {
 	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// The state of immutability for this Backup Vault. Possible values are Disabled, Locked, and Unlocked. Defaults to Disabled. Changing this from Locked to anything else forces a new Backup Vault to be created.
+	// +kubebuilder:validation:Optional
+	Immutability *string `json:"immutability,omitempty" tf:"immutability,omitempty"`
 
 	// The Azure Region where the Backup Vault should exist. Changing this forces a new Backup Vault to be created.
 	// +kubebuilder:validation:Optional
@@ -104,7 +124,7 @@ type BackupVaultParameters struct {
 	// +kubebuilder:validation:Optional
 	RetentionDurationInDays *float64 `json:"retentionDurationInDays,omitempty" tf:"retention_duration_in_days,omitempty"`
 
-	// The state of soft delete for this Backup Vault. Possible values are AlwaysOn, Off and On. Defaults to On.
+	// The state of soft delete for this Backup Vault. Possible values are AlwaysOn, Off, and On. Defaults to On.
 	// +kubebuilder:validation:Optional
 	SoftDelete *string `json:"softDelete,omitempty" tf:"soft_delete,omitempty"`
 

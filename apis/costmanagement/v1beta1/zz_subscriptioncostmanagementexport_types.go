@@ -102,6 +102,9 @@ type SubscriptionCostManagementExportInitParameters struct {
 	// A export_data_storage_location block as defined below.
 	ExportDataStorageLocation []SubscriptionCostManagementExportExportDataStorageLocationInitParameters `json:"exportDataStorageLocation,omitempty" tf:"export_data_storage_location,omitempty"`
 
+	// Format for export. Valid values are Csv only. Default is Csv.
+	FileFormat *string `json:"fileFormat,omitempty" tf:"file_format,omitempty"`
+
 	// Specifies the name of the Cost Management Export. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -139,6 +142,9 @@ type SubscriptionCostManagementExportObservation struct {
 	// A export_data_storage_location block as defined below.
 	ExportDataStorageLocation []SubscriptionCostManagementExportExportDataStorageLocationObservation `json:"exportDataStorageLocation,omitempty" tf:"export_data_storage_location,omitempty"`
 
+	// Format for export. Valid values are Csv only. Default is Csv.
+	FileFormat *string `json:"fileFormat,omitempty" tf:"file_format,omitempty"`
+
 	// The ID of the Cost Management Export for this Subscription.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -171,6 +177,10 @@ type SubscriptionCostManagementExportParameters struct {
 	// A export_data_storage_location block as defined below.
 	// +kubebuilder:validation:Optional
 	ExportDataStorageLocation []SubscriptionCostManagementExportExportDataStorageLocationParameters `json:"exportDataStorageLocation,omitempty" tf:"export_data_storage_location,omitempty"`
+
+	// Format for export. Valid values are Csv only. Default is Csv.
+	// +kubebuilder:validation:Optional
+	FileFormat *string `json:"fileFormat,omitempty" tf:"file_format,omitempty"`
 
 	// Specifies the name of the Cost Management Export. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional

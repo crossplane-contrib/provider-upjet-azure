@@ -299,9 +299,6 @@ type EmailReceiverParameters struct {
 
 type EventHubReceiverInitParameters struct {
 
-	// The resource ID of the respective Event Hub.
-	EventHubID *string `json:"eventHubId,omitempty" tf:"event_hub_id,omitempty"`
-
 	// The name of the specific Event Hub queue.
 	EventHubName *string `json:"eventHubName,omitempty" tf:"event_hub_name,omitempty"`
 
@@ -322,9 +319,6 @@ type EventHubReceiverInitParameters struct {
 }
 
 type EventHubReceiverObservation struct {
-
-	// The resource ID of the respective Event Hub.
-	EventHubID *string `json:"eventHubId,omitempty" tf:"event_hub_id,omitempty"`
 
 	// The name of the specific Event Hub queue.
 	EventHubName *string `json:"eventHubName,omitempty" tf:"event_hub_name,omitempty"`
@@ -347,17 +341,13 @@ type EventHubReceiverObservation struct {
 
 type EventHubReceiverParameters struct {
 
-	// The resource ID of the respective Event Hub.
-	// +kubebuilder:validation:Optional
-	EventHubID *string `json:"eventHubId,omitempty" tf:"event_hub_id,omitempty"`
-
 	// The name of the specific Event Hub queue.
 	// +kubebuilder:validation:Optional
-	EventHubName *string `json:"eventHubName,omitempty" tf:"event_hub_name,omitempty"`
+	EventHubName *string `json:"eventHubName" tf:"event_hub_name,omitempty"`
 
 	// The namespace name of the Event Hub.
 	// +kubebuilder:validation:Optional
-	EventHubNamespace *string `json:"eventHubNamespace,omitempty" tf:"event_hub_namespace,omitempty"`
+	EventHubNamespace *string `json:"eventHubNamespace" tf:"event_hub_namespace,omitempty"`
 
 	// The name of the EventHub Receiver, must be unique within action group.
 	// +kubebuilder:validation:Optional
