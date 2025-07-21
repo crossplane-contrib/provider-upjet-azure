@@ -78,13 +78,11 @@ spec:
                     items:
                       properties:
                         immutableBackupsEnabled:
-                          description: Specifies if the backups are immutable. Defaults
-                            to false.
                           type: boolean
                         monthlyRetention:
                           description: The monthly retention policy for an LTR backup
                             in an ISO 8601 format. Valid value is between 1 to 120
-                            months. e.g. P1Y, P1M, P4W or P30D.
+                            months. e.g. P1Y, P1M, P4W or P30D. Defaults to PT0S.
                           type: string
                         weekOfYear:
                           description: The week of year to take the yearly backup.
@@ -93,12 +91,12 @@ spec:
                         weeklyRetention:
                           description: The weekly retention policy for an LTR backup
                             in an ISO 8601 format. Valid value is between 1 to 520
-                            weeks. e.g. P1Y, P1M, P1W or P7D.
+                            weeks. e.g. P1Y, P1M, P1W or P7D. Defaults to PT0S.
                           type: string
                         yearlyRetention:
                           description: The yearly retention policy for an LTR backup
                             in an ISO 8601 format. Valid value is between 1 to 10
-                            years. e.g. P1Y, P12M, P52W or P365D.
+                            years. e.g. P1Y, P12M, P52W or P365D. Defaults to PT0S.
                           type: string
                       type: object
                     type: array
@@ -203,6 +201,12 @@ spec:
                     description: The backup retention period in days. This is how
                       many days Point-in-Time Restore will be supported.
                     type: number
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
+                    x-kubernetes-map-type: granular
                 type: object
               initProvider:
                 description: |-
@@ -222,13 +226,11 @@ spec:
                     items:
                       properties:
                         immutableBackupsEnabled:
-                          description: Specifies if the backups are immutable. Defaults
-                            to false.
                           type: boolean
                         monthlyRetention:
                           description: The monthly retention policy for an LTR backup
                             in an ISO 8601 format. Valid value is between 1 to 120
-                            months. e.g. P1Y, P1M, P4W or P30D.
+                            months. e.g. P1Y, P1M, P4W or P30D. Defaults to PT0S.
                           type: string
                         weekOfYear:
                           description: The week of year to take the yearly backup.
@@ -237,12 +239,12 @@ spec:
                         weeklyRetention:
                           description: The weekly retention policy for an LTR backup
                             in an ISO 8601 format. Valid value is between 1 to 520
-                            weeks. e.g. P1Y, P1M, P1W or P7D.
+                            weeks. e.g. P1Y, P1M, P1W or P7D. Defaults to PT0S.
                           type: string
                         yearlyRetention:
                           description: The yearly retention policy for an LTR backup
                             in an ISO 8601 format. Valid value is between 1 to 10
-                            years. e.g. P1Y, P12M, P52W or P365D.
+                            years. e.g. P1Y, P12M, P52W or P365D. Defaults to PT0S.
                           type: string
                       type: object
                     type: array
@@ -266,6 +268,12 @@ spec:
                     description: The backup retention period in days. This is how
                       many days Point-in-Time Restore will be supported.
                     type: number
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -448,13 +456,11 @@ spec:
                     items:
                       properties:
                         immutableBackupsEnabled:
-                          description: Specifies if the backups are immutable. Defaults
-                            to false.
                           type: boolean
                         monthlyRetention:
                           description: The monthly retention policy for an LTR backup
                             in an ISO 8601 format. Valid value is between 1 to 120
-                            months. e.g. P1Y, P1M, P4W or P30D.
+                            months. e.g. P1Y, P1M, P4W or P30D. Defaults to PT0S.
                           type: string
                         weekOfYear:
                           description: The week of year to take the yearly backup.
@@ -463,12 +469,12 @@ spec:
                         weeklyRetention:
                           description: The weekly retention policy for an LTR backup
                             in an ISO 8601 format. Valid value is between 1 to 520
-                            weeks. e.g. P1Y, P1M, P1W or P7D.
+                            weeks. e.g. P1Y, P1M, P1W or P7D. Defaults to PT0S.
                           type: string
                         yearlyRetention:
                           description: The yearly retention policy for an LTR backup
                             in an ISO 8601 format. Valid value is between 1 to 10
-                            years. e.g. P1Y, P12M, P52W or P365D.
+                            years. e.g. P1Y, P12M, P52W or P365D. Defaults to PT0S.
                           type: string
                       type: object
                     type: array
@@ -497,6 +503,12 @@ spec:
                     description: The backup retention period in days. This is how
                       many days Point-in-Time Restore will be supported.
                     type: number
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
+                    x-kubernetes-map-type: granular
                 type: object
               conditions:
                 description: Conditions of the resource.

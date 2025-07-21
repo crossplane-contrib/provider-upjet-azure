@@ -124,11 +124,6 @@ spec:
                       Defaults to true. Changing this forces a new Machine Learning
                       Compute Instance to be created.
                     type: boolean
-                  location:
-                    description: The Azure Region where the Machine Learning Compute
-                      Instance should exist. Changing this forces a new Machine Learning
-                      Compute Instance to be created.
-                    type: string
                   machineLearningWorkspaceId:
                     description: The ID of the Machine Learning Workspace. Changing
                       this forces a new Machine Learning Compute Instance to be created.
@@ -384,11 +379,6 @@ spec:
                       Defaults to true. Changing this forces a new Machine Learning
                       Compute Instance to be created.
                     type: boolean
-                  location:
-                    description: The Azure Region where the Machine Learning Compute
-                      Instance should exist. Changing this forces a new Machine Learning
-                      Compute Instance to be created.
-                    type: string
                   nodePublicIpEnabled:
                     description: Whether the compute instance will have a public ip.
                       To set this to false a subnet_resource_id needs to be set. Defaults
@@ -741,11 +731,6 @@ spec:
                       Defaults to true. Changing this forces a new Machine Learning
                       Compute Instance to be created.
                     type: boolean
-                  location:
-                    description: The Azure Region where the Machine Learning Compute
-                      Instance should exist. Changing this forces a new Machine Learning
-                      Compute Instance to be created.
-                    type: string
                   machineLearningWorkspaceId:
                     description: The ID of the Machine Learning Workspace. Changing
                       this forces a new Machine Learning Compute Instance to be created.

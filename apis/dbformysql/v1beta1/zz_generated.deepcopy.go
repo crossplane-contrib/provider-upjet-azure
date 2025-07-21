@@ -780,6 +780,21 @@ func (in *FlexibleServerInitParameters) DeepCopyInto(out *FlexibleServerInitPara
 		*out = new(string)
 		**out = **in
 	}
+	if in.AdministratorPasswordSecretRef != nil {
+		in, out := &in.AdministratorPasswordSecretRef, &out.AdministratorPasswordSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.AdministratorPasswordWo != nil {
+		in, out := &in.AdministratorPasswordWo, &out.AdministratorPasswordWo
+		*out = new(string)
+		**out = **in
+	}
+	if in.AdministratorPasswordWoVersion != nil {
+		in, out := &in.AdministratorPasswordWoVersion, &out.AdministratorPasswordWoVersion
+		*out = new(float64)
+		**out = **in
+	}
 	if in.BackupRetentionDays != nil {
 		in, out := &in.BackupRetentionDays, &out.BackupRetentionDays
 		*out = new(float64)
@@ -862,6 +877,11 @@ func (in *FlexibleServerInitParameters) DeepCopyInto(out *FlexibleServerInitPara
 		in, out := &in.PrivateDNSZoneIDSelector, &out.PrivateDNSZoneIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.PublicNetworkAccess != nil {
+		in, out := &in.PublicNetworkAccess, &out.PublicNetworkAccess
+		*out = new(string)
+		**out = **in
 	}
 	if in.ReplicationRole != nil {
 		in, out := &in.ReplicationRole, &out.ReplicationRole
@@ -963,6 +983,16 @@ func (in *FlexibleServerObservation) DeepCopyInto(out *FlexibleServerObservation
 		*out = new(string)
 		**out = **in
 	}
+	if in.AdministratorPasswordWo != nil {
+		in, out := &in.AdministratorPasswordWo, &out.AdministratorPasswordWo
+		*out = new(string)
+		**out = **in
+	}
+	if in.AdministratorPasswordWoVersion != nil {
+		in, out := &in.AdministratorPasswordWoVersion, &out.AdministratorPasswordWoVersion
+		*out = new(float64)
+		**out = **in
+	}
 	if in.BackupRetentionDays != nil {
 		in, out := &in.BackupRetentionDays, &out.BackupRetentionDays
 		*out = new(float64)
@@ -1033,6 +1063,11 @@ func (in *FlexibleServerObservation) DeepCopyInto(out *FlexibleServerObservation
 	}
 	if in.PrivateDNSZoneID != nil {
 		in, out := &in.PrivateDNSZoneID, &out.PrivateDNSZoneID
+		*out = new(string)
+		**out = **in
+	}
+	if in.PublicNetworkAccess != nil {
+		in, out := &in.PublicNetworkAccess, &out.PublicNetworkAccess
 		*out = new(string)
 		**out = **in
 	}
@@ -1124,6 +1159,16 @@ func (in *FlexibleServerParameters) DeepCopyInto(out *FlexibleServerParameters) 
 		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
+	if in.AdministratorPasswordWo != nil {
+		in, out := &in.AdministratorPasswordWo, &out.AdministratorPasswordWo
+		*out = new(string)
+		**out = **in
+	}
+	if in.AdministratorPasswordWoVersion != nil {
+		in, out := &in.AdministratorPasswordWoVersion, &out.AdministratorPasswordWoVersion
+		*out = new(float64)
+		**out = **in
+	}
 	if in.BackupRetentionDays != nil {
 		in, out := &in.BackupRetentionDays, &out.BackupRetentionDays
 		*out = new(float64)
@@ -1206,6 +1251,11 @@ func (in *FlexibleServerParameters) DeepCopyInto(out *FlexibleServerParameters) 
 		in, out := &in.PrivateDNSZoneIDSelector, &out.PrivateDNSZoneIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.PublicNetworkAccess != nil {
+		in, out := &in.PublicNetworkAccess, &out.PublicNetworkAccess
+		*out = new(string)
+		**out = **in
 	}
 	if in.ReplicationRole != nil {
 		in, out := &in.ReplicationRole, &out.ReplicationRole
@@ -1593,6 +1643,11 @@ func (in *StorageInitParameters) DeepCopyInto(out *StorageInitParameters) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.LogOnDiskEnabled != nil {
+		in, out := &in.LogOnDiskEnabled, &out.LogOnDiskEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.SizeGb != nil {
 		in, out := &in.SizeGb, &out.SizeGb
 		*out = new(float64)
@@ -1628,6 +1683,11 @@ func (in *StorageObservation) DeepCopyInto(out *StorageObservation) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.LogOnDiskEnabled != nil {
+		in, out := &in.LogOnDiskEnabled, &out.LogOnDiskEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.SizeGb != nil {
 		in, out := &in.SizeGb, &out.SizeGb
 		*out = new(float64)
@@ -1661,6 +1721,11 @@ func (in *StorageParameters) DeepCopyInto(out *StorageParameters) {
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
 		*out = new(float64)
+		**out = **in
+	}
+	if in.LogOnDiskEnabled != nil {
+		in, out := &in.LogOnDiskEnabled, &out.LogOnDiskEnabled
+		*out = new(bool)
 		**out = **in
 	}
 	if in.SizeGb != nil {

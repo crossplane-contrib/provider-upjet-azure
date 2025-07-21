@@ -13,7 +13,7 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type PolicyInitParameters_2 struct {
+type PolicyInitParameters struct {
 
 	// The XML Content for this Policy as a string. To integrate frontend and backend services in Azure API Management, utilize the set-backend-service policy, specifying the base-url value. Typically, this value corresponds to the url property defined in the azurerm_api_management_backend configuration.
 	XMLContent *string `json:"xmlContent,omitempty" tf:"xml_content,omitempty"`
@@ -22,7 +22,7 @@ type PolicyInitParameters_2 struct {
 	XMLLink *string `json:"xmlLink,omitempty" tf:"xml_link,omitempty"`
 }
 
-type PolicyObservation_2 struct {
+type PolicyObservation struct {
 
 	// The ID of the API Management service. Changing this forces a new API Management service Policy to be created.
 	APIManagementID *string `json:"apiManagementId,omitempty" tf:"api_management_id,omitempty"`
@@ -37,7 +37,7 @@ type PolicyObservation_2 struct {
 	XMLLink *string `json:"xmlLink,omitempty" tf:"xml_link,omitempty"`
 }
 
-type PolicyParameters_2 struct {
+type PolicyParameters struct {
 
 	// The ID of the API Management service. Changing this forces a new API Management service Policy to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/apimanagement/v1beta2.Management
@@ -65,7 +65,7 @@ type PolicyParameters_2 struct {
 // PolicySpec defines the desired state of Policy
 type PolicySpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     PolicyParameters_2 `json:"forProvider"`
+	ForProvider     PolicyParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -76,13 +76,13 @@ type PolicySpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider PolicyInitParameters_2 `json:"initProvider,omitempty"`
+	InitProvider PolicyInitParameters `json:"initProvider,omitempty"`
 }
 
 // PolicyStatus defines the observed state of Policy.
 type PolicyStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        PolicyObservation_2 `json:"atProvider,omitempty"`
+	AtProvider        PolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

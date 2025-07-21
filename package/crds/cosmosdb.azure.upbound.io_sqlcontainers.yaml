@@ -159,8 +159,7 @@ spec:
                       n seconds after their last modified time.
                     type: number
                   autoscaleSettings:
-                    description: An autoscale_settings block as defined below. Requires
-                      partition_key_path to be set.
+                    description: An autoscale_settings block as defined below.
                     items:
                       properties:
                         maxThroughput:
@@ -357,8 +356,6 @@ spec:
                       Hash and MultiHash. Defaults to Hash. Changing this forces a
                       new resource to be created.
                     type: string
-                  partitionKeyPath:
-                    type: string
                   partitionKeyPaths:
                     description: A list of partition key paths. Changing this forces
                       a new resource to be created.
@@ -366,9 +363,9 @@ spec:
                       type: string
                     type: array
                   partitionKeyVersion:
-                    description: Define a partition key version. Changing this forces
-                      a new resource to be created. Possible values are 1and 2. This
-                      should be set to 2 in order to use large partition keys.
+                    description: Define a partition key version. Possible values are
+                      1and 2. This should be set to 2 in order to use large partition
+                      keys.
                     type: number
                   resourceGroupName:
                     description: The name of the resource group in which the Cosmos
@@ -491,8 +488,7 @@ spec:
                       n seconds after their last modified time.
                     type: number
                   autoscaleSettings:
-                    description: An autoscale_settings block as defined below. Requires
-                      partition_key_path to be set.
+                    description: An autoscale_settings block as defined below.
                     items:
                       properties:
                         maxThroughput:
@@ -608,8 +604,6 @@ spec:
                       Hash and MultiHash. Defaults to Hash. Changing this forces a
                       new resource to be created.
                     type: string
-                  partitionKeyPath:
-                    type: string
                   partitionKeyPaths:
                     description: A list of partition key paths. Changing this forces
                       a new resource to be created.
@@ -617,9 +611,9 @@ spec:
                       type: string
                     type: array
                   partitionKeyVersion:
-                    description: Define a partition key version. Changing this forces
-                      a new resource to be created. Possible values are 1and 2. This
-                      should be set to 2 in order to use large partition keys.
+                    description: Define a partition key version. Possible values are
+                      1and 2. This should be set to 2 in order to use large partition
+                      keys.
                     type: number
                   throughput:
                     description: The throughput of SQL container (RU/s). Must be set
@@ -807,6 +801,11 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.partitionKeyPaths is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.partitionKeyPaths)
+                || (has(self.initProvider) && has(self.initProvider.partitionKeyPaths))'
           status:
             description: SQLContainerStatus defines the observed state of SQLContainer.
             properties:
@@ -824,8 +823,7 @@ spec:
                       n seconds after their last modified time.
                     type: number
                   autoscaleSettings:
-                    description: An autoscale_settings block as defined below. Requires
-                      partition_key_path to be set.
+                    description: An autoscale_settings block as defined below.
                     items:
                       properties:
                         maxThroughput:
@@ -955,8 +953,6 @@ spec:
                       Hash and MultiHash. Defaults to Hash. Changing this forces a
                       new resource to be created.
                     type: string
-                  partitionKeyPath:
-                    type: string
                   partitionKeyPaths:
                     description: A list of partition key paths. Changing this forces
                       a new resource to be created.
@@ -964,9 +960,9 @@ spec:
                       type: string
                     type: array
                   partitionKeyVersion:
-                    description: Define a partition key version. Changing this forces
-                      a new resource to be created. Possible values are 1and 2. This
-                      should be set to 2 in order to use large partition keys.
+                    description: Define a partition key version. Possible values are
+                      1and 2. This should be set to 2 in order to use large partition
+                      keys.
                     type: number
                   resourceGroupName:
                     description: The name of the resource group in which the Cosmos

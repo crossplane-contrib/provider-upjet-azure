@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: Manager is the Schema for the Managers API. Manages a Network
-          Managers.
+          Manager.
         properties:
           apiVersion:
             description: |-
@@ -74,16 +74,16 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: A description of the network manager.
+                    description: A description of the Network Manager.
                     type: string
                   location:
-                    description: Specifies the Azure Region where the Network Managers
+                    description: Specifies the Azure Region where the Network Manager
                       should exist. Changing this forces a new resource to be created.
                     type: string
                   resourceGroupName:
                     description: Specifies the name of the Resource Group where the
-                      Network Managers should exist. Changing this forces a new Network
-                      Managers to be created.
+                      Network Manager should exist. Changing this forces a new Network
+                      Manager to be created.
                     type: string
                   resourceGroupNameRef:
                     description: Reference to a ResourceGroup in azure to populate
@@ -178,10 +178,10 @@ spec:
                       type: object
                     type: array
                   scopeAccesses:
-                    description: A list of configuration deployment type. Possible
-                      values are Connectivity and SecurityAdmin, corresponds to if
-                      Connectivity Configuration and Security Admin Configuration
-                      is allowed for the Network Manager.
+                    description: A list of configuration deployment types. Possible
+                      values are Connectivity, SecurityAdmin and Routing, which specify
+                      whether Connectivity Configuration, Security Admin Configuration
+                      or Routing Configuration are allowed for the Network Manager.
                     items:
                       type: string
                     type: array
@@ -189,7 +189,7 @@ spec:
                     additionalProperties:
                       type: string
                     description: A mapping of tags which should be assigned to the
-                      Network Managers.
+                      Network Manager.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object
@@ -207,10 +207,10 @@ spec:
                   autoscaler.
                 properties:
                   description:
-                    description: A description of the network manager.
+                    description: A description of the Network Manager.
                     type: string
                   location:
-                    description: Specifies the Azure Region where the Network Managers
+                    description: Specifies the Azure Region where the Network Manager
                       should exist. Changing this forces a new resource to be created.
                     type: string
                   scope:
@@ -230,10 +230,10 @@ spec:
                       type: object
                     type: array
                   scopeAccesses:
-                    description: A list of configuration deployment type. Possible
-                      values are Connectivity and SecurityAdmin, corresponds to if
-                      Connectivity Configuration and Security Admin Configuration
-                      is allowed for the Network Manager.
+                    description: A list of configuration deployment types. Possible
+                      values are Connectivity, SecurityAdmin and Routing, which specify
+                      whether Connectivity Configuration, Security Admin Configuration
+                      or Routing Configuration are allowed for the Network Manager.
                     items:
                       type: string
                     type: array
@@ -241,7 +241,7 @@ spec:
                     additionalProperties:
                       type: string
                     description: A mapping of tags which should be assigned to the
-                      Network Managers.
+                      Network Manager.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object
@@ -421,10 +421,6 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.scope)
                 || (has(self.initProvider) && has(self.initProvider.scope))'
-            - message: spec.forProvider.scopeAccesses is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.scopeAccesses)
-                || (has(self.initProvider) && has(self.initProvider.scopeAccesses))'
           status:
             description: ManagerStatus defines the observed state of Manager.
             properties:
@@ -451,19 +447,19 @@ spec:
                       type: object
                     type: array
                   description:
-                    description: A description of the network manager.
+                    description: A description of the Network Manager.
                     type: string
                   id:
-                    description: The ID of the Network Managers.
+                    description: The ID of the Network Manager.
                     type: string
                   location:
-                    description: Specifies the Azure Region where the Network Managers
+                    description: Specifies the Azure Region where the Network Manager
                       should exist. Changing this forces a new resource to be created.
                     type: string
                   resourceGroupName:
                     description: Specifies the name of the Resource Group where the
-                      Network Managers should exist. Changing this forces a new Network
-                      Managers to be created.
+                      Network Manager should exist. Changing this forces a new Network
+                      Manager to be created.
                     type: string
                   scope:
                     description: A scope block as defined below.
@@ -482,10 +478,10 @@ spec:
                       type: object
                     type: array
                   scopeAccesses:
-                    description: A list of configuration deployment type. Possible
-                      values are Connectivity and SecurityAdmin, corresponds to if
-                      Connectivity Configuration and Security Admin Configuration
-                      is allowed for the Network Manager.
+                    description: A list of configuration deployment types. Possible
+                      values are Connectivity, SecurityAdmin and Routing, which specify
+                      whether Connectivity Configuration, Security Admin Configuration
+                      or Routing Configuration are allowed for the Network Manager.
                     items:
                       type: string
                     type: array
@@ -493,7 +489,7 @@ spec:
                     additionalProperties:
                       type: string
                     description: A mapping of tags which should be assigned to the
-                      Network Managers.
+                      Network Manager.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object

@@ -118,6 +118,10 @@ spec:
                       resource location. Changing this forces a new resource to be
                       created.
                     type: string
+                  rateLimitingEnabled:
+                    description: Enable rate limiting for the circuit. Only works
+                      with ExpressRoute Ports. Defaults to false.
+                    type: boolean
                   resourceGroupName:
                     description: The name of the resource group in which to create
                       the ExpressRoute circuit. Changing this forces a new resource
@@ -242,6 +246,25 @@ spec:
                     description: Allow the circuit to interact with classic (RDFE)
                       resources. Defaults to false.
                     type: boolean
+                  authorizationKeySecretRef:
+                    description: The authorization key. This can be used to set up
+                      an ExpressRoute Circuit with an ExpressRoute Port from another
+                      subscription.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   bandwidthInGbps:
                     description: The bandwidth in Gbps of the circuit being created
                       on the Express Route Port.
@@ -264,6 +287,10 @@ spec:
                       resource location. Changing this forces a new resource to be
                       created.
                     type: string
+                  rateLimitingEnabled:
+                    description: Enable rate limiting for the circuit. Only works
+                      with ExpressRoute Ports. Defaults to false.
+                    type: boolean
                   serviceProviderName:
                     description: The name of the ExpressRoute Service Provider. Changing
                       this forces a new resource to be created.
@@ -500,6 +527,10 @@ spec:
                       resource location. Changing this forces a new resource to be
                       created.
                     type: string
+                  rateLimitingEnabled:
+                    description: Enable rate limiting for the circuit. Only works
+                      with ExpressRoute Ports. Defaults to false.
+                    type: boolean
                   resourceGroupName:
                     description: The name of the resource group in which to create
                       the ExpressRoute circuit. Changing this forces a new resource

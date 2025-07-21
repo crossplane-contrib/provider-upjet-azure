@@ -2444,6 +2444,11 @@ func (in *WorkspaceInitParameters) DeepCopyInto(out *WorkspaceInitParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.LocalAuthenticationEnabled != nil {
+		in, out := &in.LocalAuthenticationEnabled, &out.LocalAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Location != nil {
 		in, out := &in.Location, &out.Location
 		*out = new(string)
@@ -2579,6 +2584,11 @@ func (in *WorkspaceObservation) DeepCopyInto(out *WorkspaceObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.LocalAuthenticationEnabled != nil {
+		in, out := &in.LocalAuthenticationEnabled, &out.LocalAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Location != nil {
 		in, out := &in.Location, &out.Location
 		*out = new(string)
@@ -2684,6 +2694,11 @@ func (in *WorkspaceParameters) DeepCopyInto(out *WorkspaceParameters) {
 	}
 	if in.LocalAuthenticationDisabled != nil {
 		in, out := &in.LocalAuthenticationDisabled, &out.LocalAuthenticationDisabled
+		*out = new(bool)
+		**out = **in
+	}
+	if in.LocalAuthenticationEnabled != nil {
+		in, out := &in.LocalAuthenticationEnabled, &out.LocalAuthenticationEnabled
 		*out = new(bool)
 		**out = **in
 	}

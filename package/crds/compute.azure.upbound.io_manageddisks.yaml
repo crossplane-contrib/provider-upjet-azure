@@ -147,8 +147,6 @@ spec:
                                 type: string
                             type: object
                           type: array
-                        enabled:
-                          type: boolean
                         keyEncryptionKey:
                           description: A key_encryption_key block as defined below.
                           items:
@@ -531,8 +529,6 @@ spec:
                                 type: string
                             type: object
                           type: array
-                        enabled:
-                          type: boolean
                         keyEncryptionKey:
                           description: A key_encryption_key block as defined below.
                           items:
@@ -1006,8 +1002,6 @@ spec:
                                 type: string
                             type: object
                           type: array
-                        enabled:
-                          type: boolean
                         keyEncryptionKey:
                           description: A key_encryption_key block as defined below.
                           items:

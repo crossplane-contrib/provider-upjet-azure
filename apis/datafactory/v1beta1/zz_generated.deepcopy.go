@@ -13531,6 +13531,11 @@ func (in *LinkedServiceAzureSQLDatabaseInitParameters) DeepCopyInto(out *LinkedS
 		*out = new(string)
 		**out = **in
 	}
+	if in.CredentialName != nil {
+		in, out := &in.CredentialName, &out.CredentialName
+		*out = new(string)
+		**out = **in
+	}
 	if in.Description != nil {
 		in, out := &in.Description, &out.Description
 		*out = new(string)
@@ -13745,6 +13750,11 @@ func (in *LinkedServiceAzureSQLDatabaseObservation) DeepCopyInto(out *LinkedServ
 		*out = new(string)
 		**out = **in
 	}
+	if in.CredentialName != nil {
+		in, out := &in.CredentialName, &out.CredentialName
+		*out = new(string)
+		**out = **in
+	}
 	if in.DataFactoryID != nil {
 		in, out := &in.DataFactoryID, &out.DataFactoryID
 		*out = new(string)
@@ -13859,6 +13869,11 @@ func (in *LinkedServiceAzureSQLDatabaseParameters) DeepCopyInto(out *LinkedServi
 	}
 	if in.ConnectionString != nil {
 		in, out := &in.ConnectionString, &out.ConnectionString
+		*out = new(string)
+		**out = **in
+	}
+	if in.CredentialName != nil {
+		in, out := &in.CredentialName, &out.CredentialName
 		*out = new(string)
 		**out = **in
 	}

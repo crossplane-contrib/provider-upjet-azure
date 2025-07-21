@@ -80,8 +80,7 @@ spec:
                     type: string
                   administratorPasswordSecretRef:
                     description: The Password associated with the administrator_login
-                      for the MySQL Flexible Server. Required when create_mode is
-                      Default.
+                      for the MySQL Flexible Server.
                     properties:
                       key:
                         description: The key to select.
@@ -97,6 +96,14 @@ spec:
                     - name
                     - namespace
                     type: object
+                  administratorPasswordWo:
+                    description: The Password associated with the administrator_login
+                      for the MySQL Flexible Server.
+                    type: string
+                  administratorPasswordWoVersion:
+                    description: An integer value used to trigger an update for administrator_password_wo.
+                      This property should be incremented when updating administrator_password_wo.
+                    type: number
                   backupRetentionDays:
                     description: The backup retention days for the MySQL Flexible
                       Server. Possible values are between 1 and 35 days. Defaults
@@ -358,6 +365,11 @@ spec:
                             type: string
                         type: object
                     type: object
+                  publicNetworkAccess:
+                    description: Whether approved public traffic is allowed through
+                      the firewall to this server. Possible values are Enabled and
+                      Disabled.
+                    type: string
                   replicationRole:
                     description: The replication role. Possible value is None.
                     type: string
@@ -467,6 +479,10 @@ spec:
                           description: The storage IOPS for the MySQL Flexible Server.
                             Possible values are between 360 and 20000.
                           type: number
+                        logOnDiskEnabled:
+                          description: Should Storage Log On Disk be enabled? Defaults
+                            to false.
+                          type: boolean
                         sizeGb:
                           description: The max storage allowed for the MySQL Flexible
                             Server. Possible values are between 20 and 16384.
@@ -482,8 +498,7 @@ spec:
                     x-kubernetes-map-type: granular
                   version:
                     description: The version of the MySQL Flexible Server to use.
-                      Possible values are 5.7, and 8.0.21. Changing this forces a
-                      new MySQL Flexible Server to be created.
+                      Possible values are 5.7, and 8.0.21.
                     type: string
                   zone:
                     description: Specifies the Availability Zone in which this MySQL
@@ -509,6 +524,32 @@ spec:
                       Required when create_mode is Default. Changing this forces a
                       new MySQL Flexible Server to be created.
                     type: string
+                  administratorPasswordSecretRef:
+                    description: The Password associated with the administrator_login
+                      for the MySQL Flexible Server.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  administratorPasswordWo:
+                    description: The Password associated with the administrator_login
+                      for the MySQL Flexible Server.
+                    type: string
+                  administratorPasswordWoVersion:
+                    description: An integer value used to trigger an update for administrator_password_wo.
+                      This property should be incremented when updating administrator_password_wo.
+                    type: number
                   backupRetentionDays:
                     description: The backup retention days for the MySQL Flexible
                       Server. Possible values are between 1 and 35 days. Defaults
@@ -770,6 +811,11 @@ spec:
                             type: string
                         type: object
                     type: object
+                  publicNetworkAccess:
+                    description: Whether approved public traffic is allowed through
+                      the firewall to this server. Possible values are Enabled and
+                      Disabled.
+                    type: string
                   replicationRole:
                     description: The replication role. Possible value is None.
                     type: string
@@ -798,6 +844,10 @@ spec:
                           description: The storage IOPS for the MySQL Flexible Server.
                             Possible values are between 360 and 20000.
                           type: number
+                        logOnDiskEnabled:
+                          description: Should Storage Log On Disk be enabled? Defaults
+                            to false.
+                          type: boolean
                         sizeGb:
                           description: The max storage allowed for the MySQL Flexible
                             Server. Possible values are between 20 and 16384.
@@ -813,8 +863,7 @@ spec:
                     x-kubernetes-map-type: granular
                   version:
                     description: The version of the MySQL Flexible Server to use.
-                      Possible values are 5.7, and 8.0.21. Changing this forces a
-                      new MySQL Flexible Server to be created.
+                      Possible values are 5.7, and 8.0.21.
                     type: string
                   zone:
                     description: Specifies the Availability Zone in which this MySQL
@@ -1004,6 +1053,14 @@ spec:
                       Required when create_mode is Default. Changing this forces a
                       new MySQL Flexible Server to be created.
                     type: string
+                  administratorPasswordWo:
+                    description: The Password associated with the administrator_login
+                      for the MySQL Flexible Server.
+                    type: string
+                  administratorPasswordWoVersion:
+                    description: An integer value used to trigger an update for administrator_password_wo.
+                      This property should be incremented when updating administrator_password_wo.
+                    type: number
                   backupRetentionDays:
                     description: The backup retention days for the MySQL Flexible
                       Server. Possible values are between 1 and 35 days. Defaults
@@ -1122,8 +1179,12 @@ spec:
                       Flexible Server. Changing this forces a new MySQL Flexible Server
                       to be created.
                     type: string
+                  publicNetworkAccess:
+                    description: Whether approved public traffic is allowed through
+                      the firewall to this server. Possible values are Enabled and
+                      Disabled.
+                    type: string
                   publicNetworkAccessEnabled:
-                    description: Is the public network access enabled?
                     type: boolean
                   replicaCapacity:
                     description: The maximum number of replicas that a primary MySQL
@@ -1162,6 +1223,10 @@ spec:
                           description: The storage IOPS for the MySQL Flexible Server.
                             Possible values are between 360 and 20000.
                           type: number
+                        logOnDiskEnabled:
+                          description: Should Storage Log On Disk be enabled? Defaults
+                            to false.
+                          type: boolean
                         sizeGb:
                           description: The max storage allowed for the MySQL Flexible
                             Server. Possible values are between 20 and 16384.
@@ -1177,8 +1242,7 @@ spec:
                     x-kubernetes-map-type: granular
                   version:
                     description: The version of the MySQL Flexible Server to use.
-                      Possible values are 5.7, and 8.0.21. Changing this forces a
-                      new MySQL Flexible Server to be created.
+                      Possible values are 5.7, and 8.0.21.
                     type: string
                   zone:
                     description: Specifies the Availability Zone in which this MySQL

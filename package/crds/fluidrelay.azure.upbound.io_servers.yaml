@@ -73,6 +73,21 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  customerManagedKey:
+                    description: A customer_managed_key block as defined below. Changing
+                      this forces a new resource to be created.
+                    items:
+                      properties:
+                        keyVaultKeyId:
+                          description: The Key Vault Key Id that will be used to encrypt
+                            the Fluid Relay Server.
+                          type: string
+                        userAssignedIdentityId:
+                          description: The User Assigned Managed Identity ID to be
+                            used for accessing the Customer Managed Key for encryption.
+                          type: string
+                      type: object
+                    type: array
                   identity:
                     description: An identity block as defined below.
                     items:
@@ -208,6 +223,21 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  customerManagedKey:
+                    description: A customer_managed_key block as defined below. Changing
+                      this forces a new resource to be created.
+                    items:
+                      properties:
+                        keyVaultKeyId:
+                          description: The Key Vault Key Id that will be used to encrypt
+                            the Fluid Relay Server.
+                          type: string
+                        userAssignedIdentityId:
+                          description: The User Assigned Managed Identity ID to be
+                            used for accessing the Customer Managed Key for encryption.
+                          type: string
+                      type: object
+                    type: array
                   identity:
                     description: An identity block as defined below.
                     items:
@@ -511,6 +541,21 @@ spec:
             properties:
               atProvider:
                 properties:
+                  customerManagedKey:
+                    description: A customer_managed_key block as defined below. Changing
+                      this forces a new resource to be created.
+                    items:
+                      properties:
+                        keyVaultKeyId:
+                          description: The Key Vault Key Id that will be used to encrypt
+                            the Fluid Relay Server.
+                          type: string
+                        userAssignedIdentityId:
+                          description: The User Assigned Managed Identity ID to be
+                            used for accessing the Customer Managed Key for encryption.
+                          type: string
+                      type: object
+                    type: array
                   frsTenantId:
                     description: The Fluid tenantId for this server.
                     type: string

@@ -260,6 +260,10 @@ spec:
                     description: Failover policy for the read-only endpoint. Defaults
                       to true.
                     type: boolean
+                  secondaryType:
+                    description: The type of the secondary Managed Instance. Possible
+                      values are Geo, Standby. Defaults to Geo.
+                    type: string
                 required:
                 - location
                 type: object
@@ -457,6 +461,10 @@ spec:
                     description: Failover policy for the read-only endpoint. Defaults
                       to true.
                     type: boolean
+                  secondaryType:
+                    description: The type of the secondary Managed Instance. Possible
+                      values are Geo, Standby. Defaults to Geo.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -691,6 +699,10 @@ spec:
                   role:
                     description: The local replication role of the Managed Instance
                       Failover Group.
+                    type: string
+                  secondaryType:
+                    description: The type of the secondary Managed Instance. Possible
+                      values are Geo, Standby. Defaults to Geo.
                     type: string
                 type: object
               conditions:

@@ -130,8 +130,88 @@ spec:
                     description: Specifies the number of days to retain the events
                       for this Event Hub.
                     type: number
+                  namespaceId:
+                    description: Specifies the ID of the EventHub Namespace. Changing
+                      this forces a new resource to be created.
+                    type: string
+                  namespaceIdRef:
+                    description: Reference to a EventHubNamespace in eventhub to populate
+                      namespaceId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  namespaceIdSelector:
+                    description: Selector for a EventHubNamespace in eventhub to populate
+                      namespaceId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   namespaceName:
-                    description: Specifies the name of the EventHub Namespace. Changing
+                    description: Specifies the name of the EventHub resource. Changing
                       this forces a new resource to be created.
                     type: string
                   namespaceNameRef:
@@ -215,9 +295,8 @@ spec:
                       Hub.
                     type: number
                   resourceGroupName:
-                    description: The name of the resource group in which the EventHub's
-                      parent Namespace exists. Changing this forces a new resource
-                      to be created.
+                    description: Specifies the name of the EventHub resource. Changing
+                      this forces a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: Reference to a ResourceGroup in azure to populate
@@ -370,6 +449,86 @@ spec:
                     description: Specifies the number of days to retain the events
                       for this Event Hub.
                     type: number
+                  namespaceId:
+                    description: Specifies the ID of the EventHub Namespace. Changing
+                      this forces a new resource to be created.
+                    type: string
+                  namespaceIdRef:
+                    description: Reference to a EventHubNamespace in eventhub to populate
+                      namespaceId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  namespaceIdSelector:
+                    description: Selector for a EventHubNamespace in eventhub to populate
+                      namespaceId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   partitionCount:
                     description: Specifies the current number of shards on the Event
                       Hub.
@@ -620,8 +779,12 @@ spec:
                     description: Specifies the number of days to retain the events
                       for this Event Hub.
                     type: number
+                  namespaceId:
+                    description: Specifies the ID of the EventHub Namespace. Changing
+                      this forces a new resource to be created.
+                    type: string
                   namespaceName:
-                    description: Specifies the name of the EventHub Namespace. Changing
+                    description: Specifies the name of the EventHub resource. Changing
                       this forces a new resource to be created.
                     type: string
                   partitionCount:
@@ -636,9 +799,8 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   resourceGroupName:
-                    description: The name of the resource group in which the EventHub's
-                      parent Namespace exists. Changing this forces a new resource
-                      to be created.
+                    description: Specifies the name of the EventHub resource. Changing
+                      this forces a new resource to be created.
                     type: string
                   status:
                     description: Specifies the status of the Event Hub resource. Possible

@@ -95,6 +95,10 @@ spec:
                     description: The Azure Region where the Purview Account should
                       exist. Changing this forces a new Purview Account to be created.
                     type: string
+                  managedEventHubEnabled:
+                    description: Whether the Purview Account should create a managed
+                      Event Hub Namespace. Defaults to true.
+                    type: boolean
                   managedResourceGroupName:
                     description: The name which should be used for the new Resource
                       Group where Purview Account creates the managed resources. Changing
@@ -304,6 +308,10 @@ spec:
                     description: The Azure Region where the Purview Account should
                       exist. Changing this forces a new Purview Account to be created.
                     type: string
+                  managedEventHubEnabled:
+                    description: Whether the Purview Account should create a managed
+                      Event Hub Namespace. Defaults to true.
+                    type: boolean
                   managedResourceGroupName:
                     description: The name which should be used for the new Resource
                       Group where Purview Account creates the managed resources. Changing
@@ -578,6 +586,10 @@ spec:
             properties:
               atProvider:
                 properties:
+                  awsExternalId:
+                    description: Configured in AWS to allow use of the role arn used
+                      for scanning
+                    type: string
                   catalogEndpoint:
                     description: Catalog endpoint.
                     type: string
@@ -617,6 +629,10 @@ spec:
                     description: The Azure Region where the Purview Account should
                       exist. Changing this forces a new Purview Account to be created.
                     type: string
+                  managedEventHubEnabled:
+                    description: Whether the Purview Account should create a managed
+                      Event Hub Namespace. Defaults to true.
+                    type: boolean
                   managedResourceGroupName:
                     description: The name which should be used for the new Resource
                       Group where Purview Account creates the managed resources. Changing

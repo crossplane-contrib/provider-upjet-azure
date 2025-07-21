@@ -74,6 +74,45 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  cors:
+                    description: A cors block as defined below.
+                    items:
+                      properties:
+                        allowCredentials:
+                          description: Whether to allow credentials in CORS. Defaults
+                            to false.
+                          type: boolean
+                        allowedHeaders:
+                          description: A list of allowed headers for CORS.
+                          items:
+                            type: string
+                          type: array
+                        allowedMethods:
+                          description: A list of allowed methods for CORS.
+                          items:
+                            type: string
+                          type: array
+                        allowedOrigins:
+                          description: A list of allowed origins for CORS.
+                          items:
+                            type: string
+                          type: array
+                        maxAgeInSeconds:
+                          description: The maximum age in seconds for the CORS configuration
+                            (must be between 0 and 99998 inclusive).
+                          type: number
+                      type: object
+                    type: array
+                  dataPartitionsEnabled:
+                    description: If data partitions are enabled or not. Defaults to
+                      false. Changing this forces a new Healthcare DICOM Service to
+                      be created.
+                    type: boolean
+                  encryptionKeyUrl:
+                    description: The URL of the key to use for encryption as part
+                      of the customer-managed key encryption settings. For more details,
+                      refer to the Azure Customer-Managed Keys Overview.
+                    type: string
                   identity:
                     description: An identity block as defined below.
                     items:
@@ -103,6 +142,22 @@ spec:
                       traffic coming from public networks while private endpoint is
                       enabled. Defaults to true.
                     type: boolean
+                  storage:
+                    description: A storage block as defined below.
+                    items:
+                      properties:
+                        fileSystemName:
+                          description: The filesystem name of connected storage account.
+                            Changing this forces a new Healthcare DICOM Service to
+                            be created.
+                          type: string
+                        storageAccountId:
+                          description: The resource ID of connected storage account.
+                            Changing this forces a new Healthcare DICOM Service to
+                            be created.
+                          type: string
+                      type: object
+                    type: array
                   tags:
                     additionalProperties:
                       type: string
@@ -111,7 +166,7 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   workspaceId:
-                    description: Specifies the id of the Healthcare Workspace where
+                    description: Specifies the ID of the Healthcare Workspace where
                       the Healthcare DICOM Service should exist. Changing this forces
                       a new Healthcare DICOM Service to be created.
                     type: string
@@ -205,6 +260,45 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  cors:
+                    description: A cors block as defined below.
+                    items:
+                      properties:
+                        allowCredentials:
+                          description: Whether to allow credentials in CORS. Defaults
+                            to false.
+                          type: boolean
+                        allowedHeaders:
+                          description: A list of allowed headers for CORS.
+                          items:
+                            type: string
+                          type: array
+                        allowedMethods:
+                          description: A list of allowed methods for CORS.
+                          items:
+                            type: string
+                          type: array
+                        allowedOrigins:
+                          description: A list of allowed origins for CORS.
+                          items:
+                            type: string
+                          type: array
+                        maxAgeInSeconds:
+                          description: The maximum age in seconds for the CORS configuration
+                            (must be between 0 and 99998 inclusive).
+                          type: number
+                      type: object
+                    type: array
+                  dataPartitionsEnabled:
+                    description: If data partitions are enabled or not. Defaults to
+                      false. Changing this forces a new Healthcare DICOM Service to
+                      be created.
+                    type: boolean
+                  encryptionKeyUrl:
+                    description: The URL of the key to use for encryption as part
+                      of the customer-managed key encryption settings. For more details,
+                      refer to the Azure Customer-Managed Keys Overview.
+                    type: string
                   identity:
                     description: An identity block as defined below.
                     items:
@@ -234,6 +328,22 @@ spec:
                       traffic coming from public networks while private endpoint is
                       enabled. Defaults to true.
                     type: boolean
+                  storage:
+                    description: A storage block as defined below.
+                    items:
+                      properties:
+                        fileSystemName:
+                          description: The filesystem name of connected storage account.
+                            Changing this forces a new Healthcare DICOM Service to
+                            be created.
+                          type: string
+                        storageAccountId:
+                          description: The resource ID of connected storage account.
+                            Changing this forces a new Healthcare DICOM Service to
+                            be created.
+                          type: string
+                      type: object
+                    type: array
                   tags:
                     additionalProperties:
                       type: string
@@ -437,6 +547,45 @@ spec:
                           type: string
                       type: object
                     type: array
+                  cors:
+                    description: A cors block as defined below.
+                    items:
+                      properties:
+                        allowCredentials:
+                          description: Whether to allow credentials in CORS. Defaults
+                            to false.
+                          type: boolean
+                        allowedHeaders:
+                          description: A list of allowed headers for CORS.
+                          items:
+                            type: string
+                          type: array
+                        allowedMethods:
+                          description: A list of allowed methods for CORS.
+                          items:
+                            type: string
+                          type: array
+                        allowedOrigins:
+                          description: A list of allowed origins for CORS.
+                          items:
+                            type: string
+                          type: array
+                        maxAgeInSeconds:
+                          description: The maximum age in seconds for the CORS configuration
+                            (must be between 0 and 99998 inclusive).
+                          type: number
+                      type: object
+                    type: array
+                  dataPartitionsEnabled:
+                    description: If data partitions are enabled or not. Defaults to
+                      false. Changing this forces a new Healthcare DICOM Service to
+                      be created.
+                    type: boolean
+                  encryptionKeyUrl:
+                    description: The URL of the key to use for encryption as part
+                      of the customer-managed key encryption settings. For more details,
+                      refer to the Azure Customer-Managed Keys Overview.
+                    type: string
                   id:
                     description: The ID of the Healthcare DICOM Service.
                     type: string
@@ -491,6 +640,22 @@ spec:
                   serviceUrl:
                     description: The url of the Healthcare DICOM Services.
                     type: string
+                  storage:
+                    description: A storage block as defined below.
+                    items:
+                      properties:
+                        fileSystemName:
+                          description: The filesystem name of connected storage account.
+                            Changing this forces a new Healthcare DICOM Service to
+                            be created.
+                          type: string
+                        storageAccountId:
+                          description: The resource ID of connected storage account.
+                            Changing this forces a new Healthcare DICOM Service to
+                            be created.
+                          type: string
+                      type: object
+                    type: array
                   tags:
                     additionalProperties:
                       type: string
@@ -499,7 +664,7 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   workspaceId:
-                    description: Specifies the id of the Healthcare Workspace where
+                    description: Specifies the ID of the Healthcare Workspace where
                       the Healthcare DICOM Service should exist. Changing this forces
                       a new Healthcare DICOM Service to be created.
                     type: string

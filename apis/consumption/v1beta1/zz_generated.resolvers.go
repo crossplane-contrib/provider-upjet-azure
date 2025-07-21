@@ -128,7 +128,7 @@ func (mg *BudgetResourceGroup) ResolveReferences(ctx context.Context, c client.R
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.Filter); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.Filter[i3].Dimension); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta2", "MonitorActionGroup", "MonitorActionGroupList")
+				m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta1", "MonitorActionGroup", "MonitorActionGroupList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -150,7 +150,7 @@ func (mg *BudgetResourceGroup) ResolveReferences(ctx context.Context, c client.R
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.Notification); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta2", "MonitorActionGroup", "MonitorActionGroupList")
+			m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta1", "MonitorActionGroup", "MonitorActionGroupList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -191,7 +191,7 @@ func (mg *BudgetResourceGroup) ResolveReferences(ctx context.Context, c client.R
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.Filter); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.InitProvider.Filter[i3].Dimension); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta2", "MonitorActionGroup", "MonitorActionGroupList")
+				m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta1", "MonitorActionGroup", "MonitorActionGroupList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -213,7 +213,7 @@ func (mg *BudgetResourceGroup) ResolveReferences(ctx context.Context, c client.R
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.Notification); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta2", "MonitorActionGroup", "MonitorActionGroupList")
+			m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta1", "MonitorActionGroup", "MonitorActionGroupList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}

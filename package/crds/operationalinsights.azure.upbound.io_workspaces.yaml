@@ -74,8 +74,8 @@ spec:
               forProvider:
                 properties:
                   allowResourceOnlyPermissions:
-                    description: Specifies if the log Analytics Workspace allow users
-                      accessing to data associated with resources they have permission
+                    description: Specifies if the log Analytics Workspace allows users
+                      accessing to data associated with the resources they have permission
                       to view, without permission to workspace. Defaults to true.
                     type: boolean
                   cmkForQueryForced:
@@ -122,8 +122,11 @@ spec:
                       over the Public Internet? Defaults to true.
                     type: boolean
                   localAuthenticationDisabled:
-                    description: Specifies if the log Analytics workspace should enforce
-                      authentication using Azure AD. Defaults to false.
+                    type: boolean
+                  localAuthenticationEnabled:
+                    description: Specifies if the log Analytics workspace should allow
+                      local authentication methods in addition to Microsoft Entra
+                      (Azure AD). Defaults to true.
                     type: boolean
                   location:
                     description: Specifies the supported Azure location where the
@@ -217,13 +220,13 @@ spec:
                     type: object
                   retentionInDays:
                     description: The workspace data retention in days. Possible values
-                      are either 7 (Free Tier only) or range between 30 and 730.
+                      are between 30 and 730.
                     type: number
                   sku:
                     description: Specifies the SKU of the Log Analytics Workspace.
-                      Possible values are Free, PerNode, Premium, Standard, Standalone,
-                      Unlimited, CapacityReservation, and PerGB2018 (new SKU as of
-                      2018-04-03). Defaults to PerGB2018.
+                      Possible values are PerNode, Premium, Standard, Standalone,
+                      Unlimited, CapacityReservation, PerGB2018, and LACluster. Defaults
+                      to PerGB2018.
                     type: string
                   tags:
                     additionalProperties:
@@ -246,8 +249,8 @@ spec:
                   autoscaler.
                 properties:
                   allowResourceOnlyPermissions:
-                    description: Specifies if the log Analytics Workspace allow users
-                      accessing to data associated with resources they have permission
+                    description: Specifies if the log Analytics Workspace allows users
+                      accessing to data associated with the resources they have permission
                       to view, without permission to workspace. Defaults to true.
                     type: boolean
                   cmkForQueryForced:
@@ -294,8 +297,11 @@ spec:
                       over the Public Internet? Defaults to true.
                     type: boolean
                   localAuthenticationDisabled:
-                    description: Specifies if the log Analytics workspace should enforce
-                      authentication using Azure AD. Defaults to false.
+                    type: boolean
+                  localAuthenticationEnabled:
+                    description: Specifies if the log Analytics workspace should allow
+                      local authentication methods in addition to Microsoft Entra
+                      (Azure AD). Defaults to true.
                     type: boolean
                   location:
                     description: Specifies the supported Azure location where the
@@ -308,13 +314,13 @@ spec:
                     type: number
                   retentionInDays:
                     description: The workspace data retention in days. Possible values
-                      are either 7 (Free Tier only) or range between 30 and 730.
+                      are between 30 and 730.
                     type: number
                   sku:
                     description: Specifies the SKU of the Log Analytics Workspace.
-                      Possible values are Free, PerNode, Premium, Standard, Standalone,
-                      Unlimited, CapacityReservation, and PerGB2018 (new SKU as of
-                      2018-04-03). Defaults to PerGB2018.
+                      Possible values are PerNode, Premium, Standard, Standalone,
+                      Unlimited, CapacityReservation, PerGB2018, and LACluster. Defaults
+                      to PerGB2018.
                     type: string
                   tags:
                     additionalProperties:
@@ -501,8 +507,8 @@ spec:
               atProvider:
                 properties:
                   allowResourceOnlyPermissions:
-                    description: Specifies if the log Analytics Workspace allow users
-                      accessing to data associated with resources they have permission
+                    description: Specifies if the log Analytics Workspace allows users
+                      accessing to data associated with the resources they have permission
                       to view, without permission to workspace. Defaults to true.
                     type: boolean
                   cmkForQueryForced:
@@ -558,8 +564,11 @@ spec:
                       over the Public Internet? Defaults to true.
                     type: boolean
                   localAuthenticationDisabled:
-                    description: Specifies if the log Analytics workspace should enforce
-                      authentication using Azure AD. Defaults to false.
+                    type: boolean
+                  localAuthenticationEnabled:
+                    description: Specifies if the log Analytics workspace should allow
+                      local authentication methods in addition to Microsoft Entra
+                      (Azure AD). Defaults to true.
                     type: boolean
                   location:
                     description: Specifies the supported Azure location where the
@@ -577,13 +586,13 @@ spec:
                     type: string
                   retentionInDays:
                     description: The workspace data retention in days. Possible values
-                      are either 7 (Free Tier only) or range between 30 and 730.
+                      are between 30 and 730.
                     type: number
                   sku:
                     description: Specifies the SKU of the Log Analytics Workspace.
-                      Possible values are Free, PerNode, Premium, Standard, Standalone,
-                      Unlimited, CapacityReservation, and PerGB2018 (new SKU as of
-                      2018-04-03). Defaults to PerGB2018.
+                      Possible values are PerNode, Premium, Standard, Standalone,
+                      Unlimited, CapacityReservation, PerGB2018, and LACluster. Defaults
+                      to PerGB2018.
                     type: string
                   tags:
                     additionalProperties:

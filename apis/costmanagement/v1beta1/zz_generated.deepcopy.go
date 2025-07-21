@@ -484,6 +484,11 @@ func (in *ResourceGroupCostManagementExportInitParameters) DeepCopyInto(out *Res
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.FileFormat != nil {
+		in, out := &in.FileFormat, &out.FileFormat
+		*out = new(string)
+		**out = **in
+	}
 	if in.RecurrencePeriodEndDate != nil {
 		in, out := &in.RecurrencePeriodEndDate, &out.RecurrencePeriodEndDate
 		*out = new(string)
@@ -580,6 +585,11 @@ func (in *ResourceGroupCostManagementExportObservation) DeepCopyInto(out *Resour
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.FileFormat != nil {
+		in, out := &in.FileFormat, &out.FileFormat
+		*out = new(string)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
@@ -638,6 +648,11 @@ func (in *ResourceGroupCostManagementExportParameters) DeepCopyInto(out *Resourc
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.FileFormat != nil {
+		in, out := &in.FileFormat, &out.FileFormat
+		*out = new(string)
+		**out = **in
 	}
 	if in.RecurrencePeriodEndDate != nil {
 		in, out := &in.RecurrencePeriodEndDate, &out.RecurrencePeriodEndDate
@@ -935,6 +950,11 @@ func (in *SubscriptionCostManagementExportInitParameters) DeepCopyInto(out *Subs
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.FileFormat != nil {
+		in, out := &in.FileFormat, &out.FileFormat
+		*out = new(string)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -1036,6 +1056,11 @@ func (in *SubscriptionCostManagementExportObservation) DeepCopyInto(out *Subscri
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.FileFormat != nil {
+		in, out := &in.FileFormat, &out.FileFormat
+		*out = new(string)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
@@ -1099,6 +1124,11 @@ func (in *SubscriptionCostManagementExportParameters) DeepCopyInto(out *Subscrip
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.FileFormat != nil {
+		in, out := &in.FileFormat, &out.FileFormat
+		*out = new(string)
+		**out = **in
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name

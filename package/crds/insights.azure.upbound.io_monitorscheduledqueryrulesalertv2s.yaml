@@ -1207,6 +1207,10 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.criteria)
                 || (has(self.initProvider) && has(self.initProvider.criteria))'
+            - message: spec.forProvider.evaluationFrequency is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.evaluationFrequency)
+                || (has(self.initProvider) && has(self.initProvider.evaluationFrequency))'
             - message: spec.forProvider.location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.location)

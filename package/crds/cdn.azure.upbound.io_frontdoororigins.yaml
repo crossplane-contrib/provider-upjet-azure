@@ -162,10 +162,6 @@ spec:
                     description: Should the origin be enabled? Possible values are
                       true or false. Defaults to true.
                     type: boolean
-                  healthProbesEnabled:
-                    description: Should the origin be enabled? Possible values are
-                      true or false. Defaults to true.
-                    type: boolean
                   hostName:
                     description: The IPv4 address, IPv6 address or Domain name of
                       the Origin.
@@ -512,7 +508,7 @@ spec:
                         targetType:
                           description: Specifies the type of target for this Private
                             Link Endpoint. Possible values are blob, blob_secondary,
-                            web and sites.
+                            Gateway, managedEnvironments, sites, web and web_secondary.
                           type: string
                       type: object
                     type: array
@@ -543,10 +539,6 @@ spec:
                     description: Should the origin be enabled? Possible values are
                       true or false. Defaults to true.
                     type: boolean
-                  healthProbesEnabled:
-                    description: Should the origin be enabled? Possible values are
-                      true or false. Defaults to true.
-                    type: boolean
                   hostName:
                     description: The IPv4 address, IPv6 address or Domain name of
                       the Origin.
@@ -893,7 +885,7 @@ spec:
                         targetType:
                           description: Specifies the type of target for this Private
                             Link Endpoint. Possible values are blob, blob_secondary,
-                            web and sites.
+                            Gateway, managedEnvironments, sites, web and web_secondary.
                           type: string
                       type: object
                     type: array
@@ -1094,10 +1086,6 @@ spec:
                     description: Should the origin be enabled? Possible values are
                       true or false. Defaults to true.
                     type: boolean
-                  healthProbesEnabled:
-                    description: Should the origin be enabled? Possible values are
-                      true or false. Defaults to true.
-                    type: boolean
                   hostName:
                     description: The IPv4 address, IPv6 address or Domain name of
                       the Origin.
@@ -1147,7 +1135,7 @@ spec:
                         targetType:
                           description: Specifies the type of target for this Private
                             Link Endpoint. Possible values are blob, blob_secondary,
-                            web and sites.
+                            Gateway, managedEnvironments, sites, web and web_secondary.
                           type: string
                       type: object
                     type: array

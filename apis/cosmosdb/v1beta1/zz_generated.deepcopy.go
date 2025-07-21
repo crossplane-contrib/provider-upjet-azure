@@ -115,21 +115,6 @@ func (in *AccountInitParameters) DeepCopyInto(out *AccountInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.EnableAutomaticFailover != nil {
-		in, out := &in.EnableAutomaticFailover, &out.EnableAutomaticFailover
-		*out = new(bool)
-		**out = **in
-	}
-	if in.EnableFreeTier != nil {
-		in, out := &in.EnableFreeTier, &out.EnableFreeTier
-		*out = new(bool)
-		**out = **in
-	}
-	if in.EnableMultipleWriteLocations != nil {
-		in, out := &in.EnableMultipleWriteLocations, &out.EnableMultipleWriteLocations
-		*out = new(bool)
-		**out = **in
-	}
 	if in.FreeTierEnabled != nil {
 		in, out := &in.FreeTierEnabled, &out.FreeTierEnabled
 		*out = new(bool)
@@ -144,8 +129,14 @@ func (in *AccountInitParameters) DeepCopyInto(out *AccountInitParameters) {
 	}
 	if in.IPRangeFilter != nil {
 		in, out := &in.IPRangeFilter, &out.IPRangeFilter
-		*out = new(string)
-		**out = **in
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
 	}
 	if in.Identity != nil {
 		in, out := &in.Identity, &out.Identity
@@ -176,6 +167,11 @@ func (in *AccountInitParameters) DeepCopyInto(out *AccountInitParameters) {
 	}
 	if in.Location != nil {
 		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
+	if in.ManagedHSMKeyID != nil {
+		in, out := &in.ManagedHSMKeyID, &out.ManagedHSMKeyID
 		*out = new(string)
 		**out = **in
 	}
@@ -374,21 +370,6 @@ func (in *AccountObservation) DeepCopyInto(out *AccountObservation) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.EnableAutomaticFailover != nil {
-		in, out := &in.EnableAutomaticFailover, &out.EnableAutomaticFailover
-		*out = new(bool)
-		**out = **in
-	}
-	if in.EnableFreeTier != nil {
-		in, out := &in.EnableFreeTier, &out.EnableFreeTier
-		*out = new(bool)
-		**out = **in
-	}
-	if in.EnableMultipleWriteLocations != nil {
-		in, out := &in.EnableMultipleWriteLocations, &out.EnableMultipleWriteLocations
-		*out = new(bool)
-		**out = **in
-	}
 	if in.Endpoint != nil {
 		in, out := &in.Endpoint, &out.Endpoint
 		*out = new(string)
@@ -413,8 +394,14 @@ func (in *AccountObservation) DeepCopyInto(out *AccountObservation) {
 	}
 	if in.IPRangeFilter != nil {
 		in, out := &in.IPRangeFilter, &out.IPRangeFilter
-		*out = new(string)
-		**out = **in
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
 	}
 	if in.Identity != nil {
 		in, out := &in.Identity, &out.Identity
@@ -445,6 +432,11 @@ func (in *AccountObservation) DeepCopyInto(out *AccountObservation) {
 	}
 	if in.Location != nil {
 		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
+	if in.ManagedHSMKeyID != nil {
+		in, out := &in.ManagedHSMKeyID, &out.ManagedHSMKeyID
 		*out = new(string)
 		**out = **in
 	}
@@ -638,21 +630,6 @@ func (in *AccountParameters) DeepCopyInto(out *AccountParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.EnableAutomaticFailover != nil {
-		in, out := &in.EnableAutomaticFailover, &out.EnableAutomaticFailover
-		*out = new(bool)
-		**out = **in
-	}
-	if in.EnableFreeTier != nil {
-		in, out := &in.EnableFreeTier, &out.EnableFreeTier
-		*out = new(bool)
-		**out = **in
-	}
-	if in.EnableMultipleWriteLocations != nil {
-		in, out := &in.EnableMultipleWriteLocations, &out.EnableMultipleWriteLocations
-		*out = new(bool)
-		**out = **in
-	}
 	if in.FreeTierEnabled != nil {
 		in, out := &in.FreeTierEnabled, &out.FreeTierEnabled
 		*out = new(bool)
@@ -667,8 +644,14 @@ func (in *AccountParameters) DeepCopyInto(out *AccountParameters) {
 	}
 	if in.IPRangeFilter != nil {
 		in, out := &in.IPRangeFilter, &out.IPRangeFilter
-		*out = new(string)
-		**out = **in
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
 	}
 	if in.Identity != nil {
 		in, out := &in.Identity, &out.Identity
@@ -699,6 +682,11 @@ func (in *AccountParameters) DeepCopyInto(out *AccountParameters) {
 	}
 	if in.Location != nil {
 		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
+	if in.ManagedHSMKeyID != nil {
+		in, out := &in.ManagedHSMKeyID, &out.ManagedHSMKeyID
 		*out = new(string)
 		**out = **in
 	}
@@ -6907,11 +6895,6 @@ func (in *SQLContainerInitParameters) DeepCopyInto(out *SQLContainerInitParamete
 		*out = new(string)
 		**out = **in
 	}
-	if in.PartitionKeyPath != nil {
-		in, out := &in.PartitionKeyPath, &out.PartitionKeyPath
-		*out = new(string)
-		**out = **in
-	}
 	if in.PartitionKeyPaths != nil {
 		in, out := &in.PartitionKeyPaths, &out.PartitionKeyPaths
 		*out = make([]*string, len(*in))
@@ -7038,11 +7021,6 @@ func (in *SQLContainerObservation) DeepCopyInto(out *SQLContainerObservation) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.PartitionKeyPath != nil {
-		in, out := &in.PartitionKeyPath, &out.PartitionKeyPath
-		*out = new(string)
-		**out = **in
-	}
 	if in.PartitionKeyPaths != nil {
 		in, out := &in.PartitionKeyPaths, &out.PartitionKeyPaths
 		*out = make([]*string, len(*in))
@@ -7154,11 +7132,6 @@ func (in *SQLContainerParameters) DeepCopyInto(out *SQLContainerParameters) {
 	}
 	if in.PartitionKeyKind != nil {
 		in, out := &in.PartitionKeyKind, &out.PartitionKeyKind
-		*out = new(string)
-		**out = **in
-	}
-	if in.PartitionKeyPath != nil {
-		in, out := &in.PartitionKeyPath, &out.PartitionKeyPath
 		*out = new(string)
 		**out = **in
 	}

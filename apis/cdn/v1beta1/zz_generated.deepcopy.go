@@ -5893,11 +5893,6 @@ func (in *FrontdoorOriginInitParameters) DeepCopyInto(out *FrontdoorOriginInitPa
 		*out = new(float64)
 		**out = **in
 	}
-	if in.HealthProbesEnabled != nil {
-		in, out := &in.HealthProbesEnabled, &out.HealthProbesEnabled
-		*out = new(bool)
-		**out = **in
-	}
 	if in.HostName != nil {
 		in, out := &in.HostName, &out.HostName
 		*out = new(string)
@@ -6017,11 +6012,6 @@ func (in *FrontdoorOriginObservation) DeepCopyInto(out *FrontdoorOriginObservati
 		*out = new(float64)
 		**out = **in
 	}
-	if in.HealthProbesEnabled != nil {
-		in, out := &in.HealthProbesEnabled, &out.HealthProbesEnabled
-		*out = new(bool)
-		**out = **in
-	}
 	if in.HostName != nil {
 		in, out := &in.HostName, &out.HostName
 		*out = new(string)
@@ -6102,11 +6092,6 @@ func (in *FrontdoorOriginParameters) DeepCopyInto(out *FrontdoorOriginParameters
 	if in.HTTPSPort != nil {
 		in, out := &in.HTTPSPort, &out.HTTPSPort
 		*out = new(float64)
-		**out = **in
-	}
-	if in.HealthProbesEnabled != nil {
-		in, out := &in.HealthProbesEnabled, &out.HealthProbesEnabled
-		*out = new(bool)
 		**out = **in
 	}
 	if in.HostName != nil {

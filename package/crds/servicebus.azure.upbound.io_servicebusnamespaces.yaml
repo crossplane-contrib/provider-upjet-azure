@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: ServiceBusNamespace is the Schema for the ServiceBusNamespaces
-          API. Manages a ServiceBus Namespace.
+          API. Manages a Service Bus Namespace Customer Managed Key.
         properties:
           apiVersion:
             description: |-
@@ -74,90 +74,59 @@ spec:
               forProvider:
                 properties:
                   capacity:
-                    description: Specifies the capacity. When sku is Premium, capacity
-                      can be 1, 2, 4, 8 or 16. When sku is Basic or Standard, capacity
-                      can be 0 only.
                     type: number
                   customerManagedKey:
-                    description: An customer_managed_key block as defined below.
                     items:
                       properties:
                         identityId:
-                          description: The ID of the User Assigned Identity that has
-                            access to the key.
+                          description: The Service Bus Namespace ID.
                           type: string
                         infrastructureEncryptionEnabled:
                           description: Used to specify whether enable Infrastructure
-                            Encryption (Double Encryption). Changing this forces a
-                            new resource to be created.
+                            Encryption. Changing this forces a new resource to be
+                            created.
                           type: boolean
                         keyVaultKeyId:
                           description: The ID of the Key Vault Key which should be
-                            used to Encrypt the data in this ServiceBus Namespace.
+                            used to Encrypt the data in this Service Bus Namespace.
                           type: string
                       type: object
                     type: array
                   identity:
-                    description: An identity block as defined below.
                     items:
                       properties:
                         identityIds:
-                          description: Specifies a list of User Assigned Managed Identity
-                            IDs to be assigned to this ServiceBus namespace.
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                         type:
-                          description: Specifies the type of Managed Service Identity
-                            that should be configured on this ServiceBus Namespace.
-                            Possible values are SystemAssigned, UserAssigned, SystemAssigned,
-                            UserAssigned (to enable both).
                           type: string
                       type: object
                     type: array
                   localAuthEnabled:
-                    description: Whether or not SAS authentication is enabled for
-                      the Service Bus namespace. Defaults to true.
                     type: boolean
                   location:
-                    description: Specifies the supported Azure location where the
-                      resource exists. Changing this forces a new resource to be created.
                     type: string
                   minimumTlsVersion:
-                    description: 'The minimum supported TLS version for this Service
-                      Bus Namespace. Valid values are: 1.0, 1.1 and 1.2. The current
-                      default minimum TLS version is 1.2.'
                     type: string
                   networkRuleSet:
-                    description: An network_rule_set block as defined below.
                     items:
                       properties:
                         defaultAction:
-                          description: Specifies the default action for the Network
-                            Rule Set. Possible values are Allow and Deny. Defaults
-                            to Allow.
                           type: string
                         ipRules:
-                          description: One or more IP Addresses, or CIDR Blocks which
-                            should be able to access the ServiceBus Namespace.
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                         networkRules:
-                          description: One or more network_rules blocks as defined
-                            below.
                           items:
                             properties:
                               ignoreMissingVnetServiceEndpoint:
-                                description: Should the ServiceBus Namespace Network
-                                  Rule Set ignore missing Virtual Network Service
-                                  Endpoint option in the Subnet? Defaults to false.
                                 type: boolean
                               subnetId:
-                                description: The Subnet ID which should be able to
-                                  access this ServiceBus Namespace.
+                                description: The Service Bus Namespace ID.
                                 type: string
                               subnetIdRef:
                                 description: Reference to a Subnet in network to populate
@@ -238,30 +207,16 @@ spec:
                             type: object
                           type: array
                         publicNetworkAccessEnabled:
-                          description: Whether to allow traffic over public network.
-                            Possible values are true and false. Defaults to true.
                           type: boolean
                         trustedServicesAllowed:
-                          description: Are Azure Services that are known and trusted
-                            for this resource type are allowed to bypass firewall
-                            configuration? See Trusted Microsoft Services
                           type: boolean
                       type: object
                     type: array
                   premiumMessagingPartitions:
-                    description: Specifies the number messaging partitions. Only valid
-                      when sku is Premium and the minimum number is 1. Possible values
-                      include 0, 1, 2, and 4. Defaults to 0 for Standard, Basic namespace.
-                      Changing this forces a new resource to be created.
                     type: number
                   publicNetworkAccessEnabled:
-                    description: Is public network access enabled for the Service
-                      Bus Namespace? Defaults to true.
                     type: boolean
                   resourceGroupName:
-                    description: |-
-                      The name of the resource group in which to Changing this forces a new resource to be created.
-                      create the namespace.
                     type: string
                   resourceGroupNameRef:
                     description: Reference to a ResourceGroup in azure to populate
@@ -340,21 +295,12 @@ spec:
                         type: object
                     type: object
                   sku:
-                    description: Defines which tier to use. Options are Basic, Standard
-                      or Premium. Please note that setting this field to Premium will
-                      force the creation of a new resource.
                     type: string
                   tags:
                     additionalProperties:
                       type: string
-                    description: A mapping of tags to assign to the resource.
                     type: object
                     x-kubernetes-map-type: granular
-                  zoneRedundant:
-                    description: Whether or not this resource is zone redundant. sku
-                      needs to be Premium. Changing this forces a new resource to
-                      be created.
-                    type: boolean
                 type: object
               initProvider:
                 description: |-
@@ -370,90 +316,59 @@ spec:
                   autoscaler.
                 properties:
                   capacity:
-                    description: Specifies the capacity. When sku is Premium, capacity
-                      can be 1, 2, 4, 8 or 16. When sku is Basic or Standard, capacity
-                      can be 0 only.
                     type: number
                   customerManagedKey:
-                    description: An customer_managed_key block as defined below.
                     items:
                       properties:
                         identityId:
-                          description: The ID of the User Assigned Identity that has
-                            access to the key.
+                          description: The Service Bus Namespace ID.
                           type: string
                         infrastructureEncryptionEnabled:
                           description: Used to specify whether enable Infrastructure
-                            Encryption (Double Encryption). Changing this forces a
-                            new resource to be created.
+                            Encryption. Changing this forces a new resource to be
+                            created.
                           type: boolean
                         keyVaultKeyId:
                           description: The ID of the Key Vault Key which should be
-                            used to Encrypt the data in this ServiceBus Namespace.
+                            used to Encrypt the data in this Service Bus Namespace.
                           type: string
                       type: object
                     type: array
                   identity:
-                    description: An identity block as defined below.
                     items:
                       properties:
                         identityIds:
-                          description: Specifies a list of User Assigned Managed Identity
-                            IDs to be assigned to this ServiceBus namespace.
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                         type:
-                          description: Specifies the type of Managed Service Identity
-                            that should be configured on this ServiceBus Namespace.
-                            Possible values are SystemAssigned, UserAssigned, SystemAssigned,
-                            UserAssigned (to enable both).
                           type: string
                       type: object
                     type: array
                   localAuthEnabled:
-                    description: Whether or not SAS authentication is enabled for
-                      the Service Bus namespace. Defaults to true.
                     type: boolean
                   location:
-                    description: Specifies the supported Azure location where the
-                      resource exists. Changing this forces a new resource to be created.
                     type: string
                   minimumTlsVersion:
-                    description: 'The minimum supported TLS version for this Service
-                      Bus Namespace. Valid values are: 1.0, 1.1 and 1.2. The current
-                      default minimum TLS version is 1.2.'
                     type: string
                   networkRuleSet:
-                    description: An network_rule_set block as defined below.
                     items:
                       properties:
                         defaultAction:
-                          description: Specifies the default action for the Network
-                            Rule Set. Possible values are Allow and Deny. Defaults
-                            to Allow.
                           type: string
                         ipRules:
-                          description: One or more IP Addresses, or CIDR Blocks which
-                            should be able to access the ServiceBus Namespace.
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                         networkRules:
-                          description: One or more network_rules blocks as defined
-                            below.
                           items:
                             properties:
                               ignoreMissingVnetServiceEndpoint:
-                                description: Should the ServiceBus Namespace Network
-                                  Rule Set ignore missing Virtual Network Service
-                                  Endpoint option in the Subnet? Defaults to false.
                                 type: boolean
                               subnetId:
-                                description: The Subnet ID which should be able to
-                                  access this ServiceBus Namespace.
+                                description: The Service Bus Namespace ID.
                                 type: string
                               subnetIdRef:
                                 description: Reference to a Subnet in network to populate
@@ -534,42 +449,22 @@ spec:
                             type: object
                           type: array
                         publicNetworkAccessEnabled:
-                          description: Whether to allow traffic over public network.
-                            Possible values are true and false. Defaults to true.
                           type: boolean
                         trustedServicesAllowed:
-                          description: Are Azure Services that are known and trusted
-                            for this resource type are allowed to bypass firewall
-                            configuration? See Trusted Microsoft Services
                           type: boolean
                       type: object
                     type: array
                   premiumMessagingPartitions:
-                    description: Specifies the number messaging partitions. Only valid
-                      when sku is Premium and the minimum number is 1. Possible values
-                      include 0, 1, 2, and 4. Defaults to 0 for Standard, Basic namespace.
-                      Changing this forces a new resource to be created.
                     type: number
                   publicNetworkAccessEnabled:
-                    description: Is public network access enabled for the Service
-                      Bus Namespace? Defaults to true.
                     type: boolean
                   sku:
-                    description: Defines which tier to use. Options are Basic, Standard
-                      or Premium. Please note that setting this field to Premium will
-                      force the creation of a new resource.
                     type: string
                   tags:
                     additionalProperties:
                       type: string
-                    description: A mapping of tags to assign to the resource.
                     type: object
                     x-kubernetes-map-type: granular
-                  zoneRedundant:
-                    description: Whether or not this resource is zone redundant. sku
-                      needs to be Premium. Changing this forces a new resource to
-                      be created.
-                    type: boolean
                 type: object
               managementPolicies:
                 default:
@@ -753,150 +648,92 @@ spec:
               atProvider:
                 properties:
                   capacity:
-                    description: Specifies the capacity. When sku is Premium, capacity
-                      can be 1, 2, 4, 8 or 16. When sku is Basic or Standard, capacity
-                      can be 0 only.
                     type: number
                   customerManagedKey:
-                    description: An customer_managed_key block as defined below.
                     items:
                       properties:
                         identityId:
-                          description: The ID of the User Assigned Identity that has
-                            access to the key.
+                          description: The Service Bus Namespace ID.
                           type: string
                         infrastructureEncryptionEnabled:
                           description: Used to specify whether enable Infrastructure
-                            Encryption (Double Encryption). Changing this forces a
-                            new resource to be created.
+                            Encryption. Changing this forces a new resource to be
+                            created.
                           type: boolean
                         keyVaultKeyId:
                           description: The ID of the Key Vault Key which should be
-                            used to Encrypt the data in this ServiceBus Namespace.
+                            used to Encrypt the data in this Service Bus Namespace.
                           type: string
                       type: object
                     type: array
                   endpoint:
-                    description: The URL to access the ServiceBus Namespace.
                     type: string
                   id:
-                    description: The ServiceBus Namespace ID.
+                    description: The Service Bus Namespace ID.
                     type: string
                   identity:
-                    description: An identity block as defined below.
                     items:
                       properties:
                         identityIds:
-                          description: Specifies a list of User Assigned Managed Identity
-                            IDs to be assigned to this ServiceBus namespace.
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                         principalId:
-                          description: The Principal ID for the Service Principal
-                            associated with the Managed Service Identity of this ServiceBus
-                            Namespace.
+                          description: The Service Bus Namespace ID.
                           type: string
                         tenantId:
-                          description: The Tenant ID for the Service Principal associated
-                            with the Managed Service Identity of this ServiceBus Namespace.
+                          description: The Service Bus Namespace ID.
                           type: string
                         type:
-                          description: Specifies the type of Managed Service Identity
-                            that should be configured on this ServiceBus Namespace.
-                            Possible values are SystemAssigned, UserAssigned, SystemAssigned,
-                            UserAssigned (to enable both).
                           type: string
                       type: object
                     type: array
                   localAuthEnabled:
-                    description: Whether or not SAS authentication is enabled for
-                      the Service Bus namespace. Defaults to true.
                     type: boolean
                   location:
-                    description: Specifies the supported Azure location where the
-                      resource exists. Changing this forces a new resource to be created.
                     type: string
                   minimumTlsVersion:
-                    description: 'The minimum supported TLS version for this Service
-                      Bus Namespace. Valid values are: 1.0, 1.1 and 1.2. The current
-                      default minimum TLS version is 1.2.'
                     type: string
                   networkRuleSet:
-                    description: An network_rule_set block as defined below.
                     items:
                       properties:
                         defaultAction:
-                          description: Specifies the default action for the Network
-                            Rule Set. Possible values are Allow and Deny. Defaults
-                            to Allow.
                           type: string
                         ipRules:
-                          description: One or more IP Addresses, or CIDR Blocks which
-                            should be able to access the ServiceBus Namespace.
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                         networkRules:
-                          description: One or more network_rules blocks as defined
-                            below.
                           items:
                             properties:
                               ignoreMissingVnetServiceEndpoint:
-                                description: Should the ServiceBus Namespace Network
-                                  Rule Set ignore missing Virtual Network Service
-                                  Endpoint option in the Subnet? Defaults to false.
                                 type: boolean
                               subnetId:
-                                description: The Subnet ID which should be able to
-                                  access this ServiceBus Namespace.
+                                description: The Service Bus Namespace ID.
                                 type: string
                             type: object
                           type: array
                         publicNetworkAccessEnabled:
-                          description: Whether to allow traffic over public network.
-                            Possible values are true and false. Defaults to true.
                           type: boolean
                         trustedServicesAllowed:
-                          description: Are Azure Services that are known and trusted
-                            for this resource type are allowed to bypass firewall
-                            configuration? See Trusted Microsoft Services
                           type: boolean
                       type: object
                     type: array
                   premiumMessagingPartitions:
-                    description: Specifies the number messaging partitions. Only valid
-                      when sku is Premium and the minimum number is 1. Possible values
-                      include 0, 1, 2, and 4. Defaults to 0 for Standard, Basic namespace.
-                      Changing this forces a new resource to be created.
                     type: number
                   publicNetworkAccessEnabled:
-                    description: Is public network access enabled for the Service
-                      Bus Namespace? Defaults to true.
                     type: boolean
                   resourceGroupName:
-                    description: |-
-                      The name of the resource group in which to Changing this forces a new resource to be created.
-                      create the namespace.
                     type: string
                   sku:
-                    description: Defines which tier to use. Options are Basic, Standard
-                      or Premium. Please note that setting this field to Premium will
-                      force the creation of a new resource.
                     type: string
                   tags:
                     additionalProperties:
                       type: string
-                    description: A mapping of tags to assign to the resource.
                     type: object
                     x-kubernetes-map-type: granular
-                  zoneRedundant:
-                    description: Whether or not this resource is zone redundant. sku
-                      needs to be Premium. Changing this forces a new resource to
-                      be created.
-                    type: boolean
                 type: object
               conditions:
                 description: Conditions of the resource.

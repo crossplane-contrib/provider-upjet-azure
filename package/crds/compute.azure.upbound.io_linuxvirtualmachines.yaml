@@ -114,8 +114,9 @@ spec:
                       properties:
                         publicKey:
                           description: The Public Key which should be used for authentication,
-                            which needs to be at least 2048-bit and in ssh-rsa format.
-                            Changing this forces a new resource to be created.
+                            which needs to be in ssh-rsa format with at least 2048-bit
+                            or in ssh-ed25519 format. Changing this forces a new resource
+                            to be created.
                           type: string
                         username:
                           description: The Username for which this Public SSH Key
@@ -239,7 +240,8 @@ spec:
                           type: string
                         order:
                           description: Specifies the order in which the packages have
-                            to be installed. Possible values are between 0 and 2,147,483,647.
+                            to be installed. Possible values are between 0 and 2147483647.
+                            Defaults to 0.
                           type: number
                         tag:
                           description: Specifies a passthrough value for more generic
@@ -257,7 +259,7 @@ spec:
                       type: object
                     type: array
                   identity:
-                    description: An identity block as defined below.
+                    description: An identity block as documented below.
                     items:
                       properties:
                         identityIds:
@@ -276,8 +278,10 @@ spec:
                       type: object
                     type: array
                   licenseType:
-                    description: Specifies the BYOL Type for this Virtual Machine.
-                      Possible values are RHEL_BYOS and SLES_BYOS.
+                    description: Specifies the License Type for this Virtual Machine.
+                      Possible values are RHEL_BYOS, RHEL_BASE, RHEL_EUS, RHEL_SAPAPPS,
+                      RHEL_SAPHA, RHEL_BASESAPAPPS, RHEL_BASESAPHA, SLES_BYOS, SLES_SAP,
+                      SLES_HPC, UBUNTU_PRO.
                     type: string
                   location:
                     description: The Azure location where the Linux Virtual Machine
@@ -689,8 +693,8 @@ spec:
                       Set that this Virtual Machine should be created within.
                     type: string
                   vmAgentPlatformUpdatesEnabled:
-                    description: Specifies whether VMAgent Platform Updates is enabled.
-                      Defaults to false.
+                    description: Are Virtual Machine Agent Platform Updates enabled
+                      on this Virtual Machine?
                     type: boolean
                   vtpmEnabled:
                     description: Specifies whether vTPM should be enabled on the virtual
@@ -756,8 +760,9 @@ spec:
                       properties:
                         publicKey:
                           description: The Public Key which should be used for authentication,
-                            which needs to be at least 2048-bit and in ssh-rsa format.
-                            Changing this forces a new resource to be created.
+                            which needs to be in ssh-rsa format with at least 2048-bit
+                            or in ssh-ed25519 format. Changing this forces a new resource
+                            to be created.
                           type: string
                         username:
                           description: The Username for which this Public SSH Key
@@ -881,7 +886,8 @@ spec:
                           type: string
                         order:
                           description: Specifies the order in which the packages have
-                            to be installed. Possible values are between 0 and 2,147,483,647.
+                            to be installed. Possible values are between 0 and 2147483647.
+                            Defaults to 0.
                           type: number
                         tag:
                           description: Specifies a passthrough value for more generic
@@ -899,7 +905,7 @@ spec:
                       type: object
                     type: array
                   identity:
-                    description: An identity block as defined below.
+                    description: An identity block as documented below.
                     items:
                       properties:
                         identityIds:
@@ -918,8 +924,10 @@ spec:
                       type: object
                     type: array
                   licenseType:
-                    description: Specifies the BYOL Type for this Virtual Machine.
-                      Possible values are RHEL_BYOS and SLES_BYOS.
+                    description: Specifies the License Type for this Virtual Machine.
+                      Possible values are RHEL_BYOS, RHEL_BASE, RHEL_EUS, RHEL_SAPAPPS,
+                      RHEL_SAPHA, RHEL_BASESAPAPPS, RHEL_BASESAPHA, SLES_BYOS, SLES_SAP,
+                      SLES_HPC, UBUNTU_PRO.
                     type: string
                   location:
                     description: The Azure location where the Linux Virtual Machine
@@ -1250,8 +1258,8 @@ spec:
                       Set that this Virtual Machine should be created within.
                     type: string
                   vmAgentPlatformUpdatesEnabled:
-                    description: Specifies whether VMAgent Platform Updates is enabled.
-                      Defaults to false.
+                    description: Are Virtual Machine Agent Platform Updates enabled
+                      on this Virtual Machine?
                     type: boolean
                   vtpmEnabled:
                     description: Specifies whether vTPM should be enabled on the virtual
@@ -1474,8 +1482,9 @@ spec:
                       properties:
                         publicKey:
                           description: The Public Key which should be used for authentication,
-                            which needs to be at least 2048-bit and in ssh-rsa format.
-                            Changing this forces a new resource to be created.
+                            which needs to be in ssh-rsa format with at least 2048-bit
+                            or in ssh-ed25519 format. Changing this forces a new resource
+                            to be created.
                           type: string
                         username:
                           description: The Username for which this Public SSH Key
@@ -1580,7 +1589,8 @@ spec:
                           type: string
                         order:
                           description: Specifies the order in which the packages have
-                            to be installed. Possible values are between 0 and 2,147,483,647.
+                            to be installed. Possible values are between 0 and 2147483647.
+                            Defaults to 0.
                           type: number
                         tag:
                           description: Specifies a passthrough value for more generic
@@ -1601,7 +1611,7 @@ spec:
                     description: The ID of the Linux Virtual Machine.
                     type: string
                   identity:
-                    description: An identity block as defined below.
+                    description: An identity block as documented below.
                     items:
                       properties:
                         identityIds:
@@ -1628,8 +1638,10 @@ spec:
                       type: object
                     type: array
                   licenseType:
-                    description: Specifies the BYOL Type for this Virtual Machine.
-                      Possible values are RHEL_BYOS and SLES_BYOS.
+                    description: Specifies the License Type for this Virtual Machine.
+                      Possible values are RHEL_BYOS, RHEL_BASE, RHEL_EUS, RHEL_SAPAPPS,
+                      RHEL_SAPHA, RHEL_BASESAPAPPS, RHEL_BASESAPHA, SLES_BYOS, SLES_SAP,
+                      SLES_HPC, UBUNTU_PRO.
                     type: string
                   location:
                     description: The Azure location where the Linux Virtual Machine
@@ -1688,6 +1700,9 @@ spec:
                             you wish to vary from the size used in the image this
                             Virtual Machine is sourced from.
                           type: number
+                        id:
+                          description: The ID of the OS disk.
+                          type: string
                         name:
                           description: The name which should be used for the Internal
                             OS Disk. Changing this forces a new resource to be created.
@@ -1910,8 +1925,8 @@ spec:
                       Set that this Virtual Machine should be created within.
                     type: string
                   vmAgentPlatformUpdatesEnabled:
-                    description: Specifies whether VMAgent Platform Updates is enabled.
-                      Defaults to false.
+                    description: Are Virtual Machine Agent Platform Updates enabled
+                      on this Virtual Machine?
                     type: boolean
                   vtpmEnabled:
                     description: Specifies whether vTPM should be enabled on the virtual

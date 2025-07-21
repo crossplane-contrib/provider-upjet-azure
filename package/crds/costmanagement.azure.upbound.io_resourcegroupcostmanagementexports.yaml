@@ -186,6 +186,10 @@ spec:
                           type: string
                       type: object
                     type: array
+                  fileFormat:
+                    description: Format for export. Valid values are Csv only. Default
+                      is Csv.
+                    type: string
                   recurrencePeriodEndDate:
                     description: The date the export will stop capturing information.
                     type: string
@@ -402,6 +406,10 @@ spec:
                           type: string
                       type: object
                     type: array
+                  fileFormat:
+                    description: Format for export. Valid values are Csv only. Default
+                      is Csv.
+                    type: string
                   recurrencePeriodEndDate:
                     description: The date the export will stop capturing information.
                     type: string
@@ -723,6 +731,10 @@ spec:
                           type: string
                       type: object
                     type: array
+                  fileFormat:
+                    description: Format for export. Valid values are Csv only. Default
+                      is Csv.
+                    type: string
                   id:
                     description: The ID of the Cost Management Export for this Resource
                       Group.
