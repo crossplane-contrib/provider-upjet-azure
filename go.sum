@@ -65,8 +65,6 @@ github.com/crossplane/crossplane-runtime v1.16.0 h1:lz+l0wEB3qowdTmN7t0PZkfuNSvf
 github.com/crossplane/crossplane-runtime v1.16.0/go.mod h1:Pz2tdGVMF6KDGzHZOkvKro0nKc8EzK0sb/nSA7pH4Dc=
 github.com/crossplane/crossplane-tools v0.0.0-20240522174801-1ad3d4c87f21 h1:8wb7/zCbVPkeX68WbVESWJmSWQE5SZKzz0g9X4FlXRw=
 github.com/crossplane/crossplane-tools v0.0.0-20240522174801-1ad3d4c87f21/go.mod h1:cN0Y7PFGQMM8mcagXVCbeQoKtipmFWQTPZYyziCPBUI=
-github.com/crossplane/upjet v1.4.1-0.20241115110640-be5e03679440 h1:yPeR17+DG6HdgW6F6m1OJGvVgQAhUAY+SVuzpbdRs+Y=
-github.com/crossplane/upjet v1.4.1-0.20241115110640-be5e03679440/go.mod h1:wkdZf/Cvhr6PI30VdHIOjg4dX39Z5uijqnLWFk5PbGM=
 github.com/cyphar/filepath-securejoin v0.4.1 h1:JyxxyPEaktOD+GAnqIqTf9A8tHyAG22rowi7HkoSU1s=
 github.com/cyphar/filepath-securejoin v0.4.1/go.mod h1:Sdj7gXlvMcPZsbhwhQ33GguGLDGQL7h7bg04C/+u9jI=
 github.com/dave/jennifer v1.7.0 h1:uRbSBH9UTS64yXbh4FrMHfgfY762RD+C7bUPKODpSJE=
@@ -338,6 +336,8 @@ github.com/stretchr/testify v1.8.4 h1:CcVxjf3Q8PM0mHUKJCdn+eZZtm5yQwehR5yeSVQQcU
 github.com/stretchr/testify v1.8.4/go.mod h1:sz/lmYIOXD/1dqDmKjjqLyZ2RngseejIcXlSw2iwfAo=
 github.com/tmccombs/hcl2json v0.3.3 h1:+DLNYqpWE0CsOQiEZu+OZm5ZBImake3wtITYxQ8uLFQ=
 github.com/tmccombs/hcl2json v0.3.3/go.mod h1:Y2chtz2x9bAeRTvSibVRVgbLJhLJXKlUeIvjeVdnm4w=
+github.com/turkenf/upjet v0.0.0-20250721172704-7c9b575b62b3 h1:Fs6xd5R7mRCTsRKLzZWAMKEEqNt/470WNsPdBlWcdAA=
+github.com/turkenf/upjet v0.0.0-20250721172704-7c9b575b62b3/go.mod h1:HMowtczmqrWa8JeN0vh737uUwlolplDF8+c88+qFc5Q=
 github.com/upbound/terraform-provider-azurerm v0.0.0-20250710182911-ef60e3a2ac36 h1:vdB+LxHvRipVAMnmMASe4DBpmE3bNFkEDIwl2VAiFHA=
 github.com/upbound/terraform-provider-azurerm v0.0.0-20250710182911-ef60e3a2ac36/go.mod h1:DYjAf5fSWOQTxPdpNBg33z6kgMx7U8/8VE8qnIJoEuI=
 github.com/vmihailenco/msgpack v3.3.3+incompatible/go.mod h1:fy3FlTQTDXWkZ7Bh6AcGMlsjHatGryHQYUTf1ShIgkk=
