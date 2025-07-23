@@ -19,8 +19,8 @@ spec:
       format: OpenAI
       name: text-embedding-ada-002
       version: "2"
-    scale:
-      type: Standard
+    sku:
+      name: Standard
 
 ---
 
