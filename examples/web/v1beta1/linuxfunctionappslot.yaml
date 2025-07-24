@@ -20,6 +20,10 @@ spec:
     storageAccountNameSelector:
       matchLabels:
         testing.upbound.io/example-name: linuxfuncnappslotacc
+    storageAccountAccessKeySecretRef:
+      key: attribute.primary_access_key
+      name: example-storage-account
+      namespace: upbound-system
 
 ---
 

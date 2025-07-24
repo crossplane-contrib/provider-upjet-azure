@@ -10,7 +10,7 @@ metadata:
     meta.upbound.io/example-id: apimanagement/v1beta1/management
   labels:
     testing.upbound.io/example-name: example
-  name: upbound-example
+  name: uptest-mn-t
 spec:
   forProvider:
     location: West Europe

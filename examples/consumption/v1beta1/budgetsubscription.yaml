@@ -34,8 +34,8 @@ spec:
     subscriptionId: "${data.azurerm_client_config.current.subscription_resource_id}"
     timeGrain: Monthly
     timePeriod:
-    - endDate: "2023-07-01T00:00:00Z"
-      startDate: "2023-06-01T00:00:00Z"
+    - endDate: "2026-07-01T00:00:00Z"
+      startDate: "2025-07-01T00:00:00Z"
 
 ---
 

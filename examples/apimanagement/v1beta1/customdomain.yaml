@@ -19,12 +19,12 @@ spec:
         testing.upbound.io/example-name: custom-domain-example
     developerPortal:
     - hostName: portal.example.com
-      keyVaultIdSelector:
+      keyVaultCertificateIdSelector:
         matchLabels:
           testing.upbound.io/example-name: custom-domain-example
     gateway:
     - hostName: api.example.com
-      keyVaultIdSelector:
+      keyVaultCertificateIdSelector:
         matchLabels:
           testing.upbound.io/example-name: custom-domain-example
 

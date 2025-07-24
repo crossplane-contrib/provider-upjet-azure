@@ -13,7 +13,7 @@ metadata:
 spec:
   forProvider:
     ipConfigurations:
-    - privateIpAllocationMethod: Dynamic
+      privateIpAllocationMethod: Dynamic
       subnetIdSelector:
         matchLabels:
           testing.upbound.io/example-name: example

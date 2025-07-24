@@ -12,7 +12,6 @@ metadata:
   name: example
 spec:
   forProvider:
-    maxMessageSizeInKilobytes: 1024
     namespaceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: servicebus-topic-namespace
@@ -47,7 +46,6 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: servicebus-topic-rg
-    capacity: 1
-    sku: Premium
+    sku: Standard
     tags:
       source: test

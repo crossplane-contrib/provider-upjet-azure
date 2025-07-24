@@ -35,7 +35,8 @@ spec:
     databaseNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    partitionKeyPath: /id
+    partitionKeyPaths:
+    - /id
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: rg1

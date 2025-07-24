@@ -19,9 +19,9 @@ spec:
     location: West Europe
     minimumTlsVersion: "1.2"
     redisConfiguration:
-    - maxmemoryDelta: 2
+    - maxmemoryDelta: 456
       maxmemoryPolicy: allkeys-lru
-      maxmemoryReserved: 2
+      maxmemoryReserved: 456
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example

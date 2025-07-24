@@ -13,10 +13,7 @@ metadata:
 spec:
   forProvider:
     name: example
-    shareNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    storageAccountNameSelector:
+    storageShareIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
 
@@ -43,7 +40,7 @@ metadata:
     meta.upbound.io/example-id: storage/v1beta1/sharedirectory
   labels:
     testing.upbound.io/example-name: example
-  name: sdexample
+  name: sdexamplebumptest55
 spec:
   forProvider:
     accountReplicationType: LRS
@@ -66,6 +63,6 @@ metadata:
 spec:
   forProvider:
     quota: 50
-    storageAccountNameSelector:
+    storageAccountIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
