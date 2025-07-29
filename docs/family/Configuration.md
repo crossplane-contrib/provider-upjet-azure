@@ -137,3 +137,50 @@ spec:
 ```
 
 **Note:** the `spec.credentials.secretRef.name` must match the `name` in the `kubectl create secret generic <name>` command.
+
+## Bind provider ports to hostPort in environments where controlplane is separated from the workload cluster like AKS with custom CNI
+In environments where the control plane is separated from the workload network, such as AKS with custom CNI e.g Cilium, you need to bind the provider ports to hostPort. This allows the provider webhook to be reachable from the controlplane. Make sure to use different hostPorts for each provider to avoid conflicts.
+
+### Create DeploymentRuntimeConfig object for each installed provider
+
+```yaml
+apiVersion: pkg.crossplane.io/v1beta1
+kind: DeploymentRuntimeConfig
+metadata:
+  name: provider-azure-management
+spec:
+  deploymentTemplate:
+    spec:
+      selector: {}
+      template:
+        spec:
+          hostNetwork: true
+          containers:
+            - name: package-runtime
+              env:
+                - name: WEBHOOK_PORT
+                  value: "12001"
+                - name: METRICS_BIND_ADDRESS
+                  value: ":13001"
+              ports:
+              - containerPort: 12001
+                name: webhook
+              - containerPort: 13001
+                name: metrics
+              args:
+                - --enable-external-secret-stores
+                - --enable-management-policies
+```
+
+### Install the Provider with the DeploymentRuntimeConfig
+
+```yaml
+apiVersion: pkg.crossplane.io/v1
+kind: Provider
+metadata:
+  name: provider-azure-management
+spec:
+  package: xpkg.upbound.io/upbound/provider-azure-management:<version>
+  runtimeConfigRef:
+	name: provider-azure-management
+```
