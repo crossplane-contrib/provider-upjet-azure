@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.14.0
+    controller-gen.kubebuilder.io/version: v0.16.5
   name: iothubdps.devices.azure.upbound.io
 spec:
   group: devices.azure.upbound.io
@@ -744,8 +744,9 @@ spec:
                     type: string
                   dataResidencyEnabled:
                     description: Specifies if the IoT Device Provisioning Service
-                      has data residency and disaster recovery enabled. Defaults to
-                      false. Changing this forces a new resource to be created.
+                      has data residency enabled, removing the cross geo-pair disaster
+                      recovery. Defaults to false. Changing this forces a new resource
+                      to be created.
                     type: boolean
                   ipFilterRule:
                     description: An ip_filter_rule block as defined below.
@@ -931,8 +932,9 @@ spec:
                     type: string
                   dataResidencyEnabled:
                     description: Specifies if the IoT Device Provisioning Service
-                      has data residency and disaster recovery enabled. Defaults to
-                      false. Changing this forces a new resource to be created.
+                      has data residency enabled, removing the cross geo-pair disaster
+                      recovery. Defaults to false. Changing this forces a new resource
+                      to be created.
                     type: boolean
                   ipFilterRule:
                     description: An ip_filter_rule block as defined below.
@@ -1207,8 +1209,9 @@ spec:
                     type: string
                   dataResidencyEnabled:
                     description: Specifies if the IoT Device Provisioning Service
-                      has data residency and disaster recovery enabled. Defaults to
-                      false. Changing this forces a new resource to be created.
+                      has data residency enabled, removing the cross geo-pair disaster
+                      recovery. Defaults to false. Changing this forces a new resource
+                      to be created.
                     type: boolean
                   deviceProvisioningHostName:
                     description: The device endpoint of the IoT Device Provisioning

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.14.0
+    controller-gen.kubebuilder.io/version: v0.16.5
   name: resourcepolicyremediations.policyinsights.azure.upbound.io
 spec:
   group: policyinsights.azure.upbound.io
@@ -174,12 +174,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  policyDefinitionId:
-                    description: The unique ID for the policy definition within the
-                      policy set definition that should be remediated. Required when
-                      the policy assignment being remediated assigns a policy set
-                      definition.
-                    type: string
                   policyDefinitionReferenceId:
                     description: The unique ID for the policy definition reference
                       within the policy set definition that should be remediated.
@@ -390,12 +384,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  policyDefinitionId:
-                    description: The unique ID for the policy definition within the
-                      policy set definition that should be remediated. Required when
-                      the policy assignment being remediated assigns a policy set
-                      definition.
-                    type: string
                   policyDefinitionReferenceId:
                     description: The unique ID for the policy definition reference
                       within the policy set definition that should be remediated.
@@ -697,12 +685,6 @@ spec:
                     type: number
                   policyAssignmentId:
                     description: The ID of the Policy Assignment that should be remediated.
-                    type: string
-                  policyDefinitionId:
-                    description: The unique ID for the policy definition within the
-                      policy set definition that should be remediated. Required when
-                      the policy assignment being remediated assigns a policy set
-                      definition.
                     type: string
                   policyDefinitionReferenceId:
                     description: The unique ID for the policy definition reference

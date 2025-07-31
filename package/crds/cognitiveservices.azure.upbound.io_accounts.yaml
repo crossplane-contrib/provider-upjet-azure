@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.14.0
+    controller-gen.kubebuilder.io/version: v0.16.5
   name: accounts.cognitiveservices.azure.upbound.io
 spec:
   group: cognitiveservices.azure.upbound.io
@@ -97,7 +97,10 @@ spec:
                     type: object
                   customSubdomainName:
                     description: The subdomain name used for token-based authentication.
-                      This property is required when network_acls is specified. Changing
+                      This property is required when network_acls is specified. This
+                      property is also required when using the OpenAI service with
+                      libraries which assume the Azure OpenAI endpoint is a subdomain
+                      on https://openai.azure.com/, eg. https://<custom_subdomain_name>.openai.azure.com/.  Changing
                       this forces a new resource to be created.
                     type: string
                   customerManagedKey:
@@ -191,6 +194,10 @@ spec:
                       to be set.
                     items:
                       properties:
+                        bypass:
+                          description: Whether to allow trusted Azure Services to
+                            access the service. Possible values are None and AzureServices.
+                          type: string
                         defaultAction:
                           description: The Default Action to use when no rules match
                             from ip_rules / virtual_network_rules. Possible values
@@ -450,7 +457,10 @@ spec:
                     type: object
                   customSubdomainName:
                     description: The subdomain name used for token-based authentication.
-                      This property is required when network_acls is specified. Changing
+                      This property is required when network_acls is specified. This
+                      property is also required when using the OpenAI service with
+                      libraries which assume the Azure OpenAI endpoint is a subdomain
+                      on https://openai.azure.com/, eg. https://<custom_subdomain_name>.openai.azure.com/.  Changing
                       this forces a new resource to be created.
                     type: string
                   customerManagedKey:
@@ -544,6 +554,10 @@ spec:
                       to be set.
                     items:
                       properties:
+                        bypass:
+                          description: Whether to allow trusted Azure Services to
+                            access the service. Possible values are None and AzureServices.
+                          type: string
                         defaultAction:
                           description: The Default Action to use when no rules match
                             from ip_rules / virtual_network_rules. Possible values
@@ -876,7 +890,10 @@ spec:
                     type: string
                   customSubdomainName:
                     description: The subdomain name used for token-based authentication.
-                      This property is required when network_acls is specified. Changing
+                      This property is required when network_acls is specified. This
+                      property is also required when using the OpenAI service with
+                      libraries which assume the Azure OpenAI endpoint is a subdomain
+                      on https://openai.azure.com/, eg. https://<custom_subdomain_name>.openai.azure.com/.  Changing
                       this forces a new resource to be created.
                     type: string
                   customerManagedKey:
@@ -985,6 +1002,10 @@ spec:
                       to be set.
                     items:
                       properties:
+                        bypass:
+                          description: Whether to allow trusted Azure Services to
+                            access the service. Possible values are None and AzureServices.
+                          type: string
                         defaultAction:
                           description: The Default Action to use when no rules match
                             from ip_rules / virtual_network_rules. Possible values
@@ -1287,6 +1308,10 @@ spec:
                       property is specified, custom_subdomain_name is also required
                       to be set.
                     properties:
+                      bypass:
+                        description: Whether to allow trusted Azure Services to access
+                          the service. Possible values are None and AzureServices.
+                        type: string
                       defaultAction:
                         description: The Default Action to use when no rules match
                           from ip_rules / virtual_network_rules. Possible values are
@@ -1637,6 +1662,10 @@ spec:
                       property is specified, custom_subdomain_name is also required
                       to be set.
                     properties:
+                      bypass:
+                        description: Whether to allow trusted Azure Services to access
+                          the service. Possible values are None and AzureServices.
+                        type: string
                       defaultAction:
                         description: The Default Action to use when no rules match
                           from ip_rules / virtual_network_rules. Possible values are
@@ -2075,6 +2104,10 @@ spec:
                       property is specified, custom_subdomain_name is also required
                       to be set.
                     properties:
+                      bypass:
+                        description: Whether to allow trusted Azure Services to access
+                          the service. Possible values are None and AzureServices.
+                        type: string
                       defaultAction:
                         description: The Default Action to use when no rules match
                           from ip_rules / virtual_network_rules. Possible values are

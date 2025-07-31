@@ -17,7 +17,7 @@ metadata:
     meta.upbound.io/example-id: storage/v1beta1/account
   labels:
     testing.upbound.io/example-name: example-storage
-  name: examplesa539891
+  name: examplesabumptest55
 spec:
   forProvider:
     accountReplicationType: LRS

@@ -19,23 +19,23 @@ type MSSQLServerSecurityAlertPolicyInitParameters struct {
 	// +listType=set
 	DisabledAlerts []*string `json:"disabledAlerts,omitempty" tf:"disabled_alerts,omitempty"`
 
-	// Boolean flag which specifies if the alert is sent to the account administrators or not. Defaults to false.
+	// Are the alerts sent to the account administrators? Possible values are true or false. Defaults to false.
 	EmailAccountAdmins *bool `json:"emailAccountAdmins,omitempty" tf:"email_account_admins,omitempty"`
 
 	// Specifies an array of email addresses to which the alert is sent.
 	// +listType=set
 	EmailAddresses []*string `json:"emailAddresses,omitempty" tf:"email_addresses,omitempty"`
 
-	// Specifies the number of days to keep in the Threat Detection audit logs. Defaults to 0.
+	// Specifies the number of days to keep the Threat Detection audit logs. Defaults to 0.
 	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
 
-	// Specifies the state of the policy, whether it is enabled or disabled or a policy has not been applied yet on the specific database server. Possible values are Disabled, Enabled and New.
+	// Specifies the state of the policy. Possible values are Disabled or Enabled.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
-	// Specifies the identifier key of the Threat Detection audit storage account. This is mandatory when you use storage_endpoint to specify a storage account blob endpoint.
+	// Specifies the primary access key of the Threat Detection audit logs blob storage endpoint.
 	StorageAccountAccessKeySecretRef *v1.SecretKeySelector `json:"storageAccountAccessKeySecretRef,omitempty" tf:"-"`
 
-	// Specifies the blob storage endpoint (e.g. https://example.blob.core.windows.net). This blob storage will hold all Threat Detection audit logs.
+	// Specifies the blob storage endpoint that will hold all Threat Detection audit logs (e.g., https://example.blob.core.windows.net).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("primary_blob_endpoint",true)
 	StorageEndpoint *string `json:"storageEndpoint,omitempty" tf:"storage_endpoint,omitempty"`
@@ -55,7 +55,7 @@ type MSSQLServerSecurityAlertPolicyObservation struct {
 	// +listType=set
 	DisabledAlerts []*string `json:"disabledAlerts,omitempty" tf:"disabled_alerts,omitempty"`
 
-	// Boolean flag which specifies if the alert is sent to the account administrators or not. Defaults to false.
+	// Are the alerts sent to the account administrators? Possible values are true or false. Defaults to false.
 	EmailAccountAdmins *bool `json:"emailAccountAdmins,omitempty" tf:"email_account_admins,omitempty"`
 
 	// Specifies an array of email addresses to which the alert is sent.
@@ -68,16 +68,16 @@ type MSSQLServerSecurityAlertPolicyObservation struct {
 	// The name of the resource group that contains the MS SQL Server. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// Specifies the number of days to keep in the Threat Detection audit logs. Defaults to 0.
+	// Specifies the number of days to keep the Threat Detection audit logs. Defaults to 0.
 	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
 
 	// Specifies the name of the MS SQL Server. Changing this forces a new resource to be created.
 	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
 
-	// Specifies the state of the policy, whether it is enabled or disabled or a policy has not been applied yet on the specific database server. Possible values are Disabled, Enabled and New.
+	// Specifies the state of the policy. Possible values are Disabled or Enabled.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
-	// Specifies the blob storage endpoint (e.g. https://example.blob.core.windows.net). This blob storage will hold all Threat Detection audit logs.
+	// Specifies the blob storage endpoint that will hold all Threat Detection audit logs (e.g., https://example.blob.core.windows.net).
 	StorageEndpoint *string `json:"storageEndpoint,omitempty" tf:"storage_endpoint,omitempty"`
 }
 
@@ -88,7 +88,7 @@ type MSSQLServerSecurityAlertPolicyParameters struct {
 	// +listType=set
 	DisabledAlerts []*string `json:"disabledAlerts,omitempty" tf:"disabled_alerts,omitempty"`
 
-	// Boolean flag which specifies if the alert is sent to the account administrators or not. Defaults to false.
+	// Are the alerts sent to the account administrators? Possible values are true or false. Defaults to false.
 	// +kubebuilder:validation:Optional
 	EmailAccountAdmins *bool `json:"emailAccountAdmins,omitempty" tf:"email_account_admins,omitempty"`
 
@@ -110,7 +110,7 @@ type MSSQLServerSecurityAlertPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// Specifies the number of days to keep in the Threat Detection audit logs. Defaults to 0.
+	// Specifies the number of days to keep the Threat Detection audit logs. Defaults to 0.
 	// +kubebuilder:validation:Optional
 	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
 
@@ -127,15 +127,15 @@ type MSSQLServerSecurityAlertPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	ServerNameSelector *v1.Selector `json:"serverNameSelector,omitempty" tf:"-"`
 
-	// Specifies the state of the policy, whether it is enabled or disabled or a policy has not been applied yet on the specific database server. Possible values are Disabled, Enabled and New.
+	// Specifies the state of the policy. Possible values are Disabled or Enabled.
 	// +kubebuilder:validation:Optional
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
-	// Specifies the identifier key of the Threat Detection audit storage account. This is mandatory when you use storage_endpoint to specify a storage account blob endpoint.
+	// Specifies the primary access key of the Threat Detection audit logs blob storage endpoint.
 	// +kubebuilder:validation:Optional
 	StorageAccountAccessKeySecretRef *v1.SecretKeySelector `json:"storageAccountAccessKeySecretRef,omitempty" tf:"-"`
 
-	// Specifies the blob storage endpoint (e.g. https://example.blob.core.windows.net). This blob storage will hold all Threat Detection audit logs.
+	// Specifies the blob storage endpoint that will hold all Threat Detection audit logs (e.g., https://example.blob.core.windows.net).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("primary_blob_endpoint",true)
 	// +kubebuilder:validation:Optional

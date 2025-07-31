@@ -127,66 +127,6 @@ func (mg *NamespaceDisasterRecoveryConfig) SetWriteConnectionSecretToReference(r
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
-// GetCondition of this NamespaceNetworkRuleSet.
-func (mg *NamespaceNetworkRuleSet) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
-	return mg.Status.GetCondition(ct)
-}
-
-// GetDeletionPolicy of this NamespaceNetworkRuleSet.
-func (mg *NamespaceNetworkRuleSet) GetDeletionPolicy() xpv1.DeletionPolicy {
-	return mg.Spec.DeletionPolicy
-}
-
-// GetManagementPolicies of this NamespaceNetworkRuleSet.
-func (mg *NamespaceNetworkRuleSet) GetManagementPolicies() xpv1.ManagementPolicies {
-	return mg.Spec.ManagementPolicies
-}
-
-// GetProviderConfigReference of this NamespaceNetworkRuleSet.
-func (mg *NamespaceNetworkRuleSet) GetProviderConfigReference() *xpv1.Reference {
-	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this NamespaceNetworkRuleSet.
-func (mg *NamespaceNetworkRuleSet) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
-// GetWriteConnectionSecretToReference of this NamespaceNetworkRuleSet.
-func (mg *NamespaceNetworkRuleSet) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
-	return mg.Spec.WriteConnectionSecretToReference
-}
-
-// SetConditions of this NamespaceNetworkRuleSet.
-func (mg *NamespaceNetworkRuleSet) SetConditions(c ...xpv1.Condition) {
-	mg.Status.SetConditions(c...)
-}
-
-// SetDeletionPolicy of this NamespaceNetworkRuleSet.
-func (mg *NamespaceNetworkRuleSet) SetDeletionPolicy(r xpv1.DeletionPolicy) {
-	mg.Spec.DeletionPolicy = r
-}
-
-// SetManagementPolicies of this NamespaceNetworkRuleSet.
-func (mg *NamespaceNetworkRuleSet) SetManagementPolicies(r xpv1.ManagementPolicies) {
-	mg.Spec.ManagementPolicies = r
-}
-
-// SetProviderConfigReference of this NamespaceNetworkRuleSet.
-func (mg *NamespaceNetworkRuleSet) SetProviderConfigReference(r *xpv1.Reference) {
-	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this NamespaceNetworkRuleSet.
-func (mg *NamespaceNetworkRuleSet) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
-// SetWriteConnectionSecretToReference of this NamespaceNetworkRuleSet.
-func (mg *NamespaceNetworkRuleSet) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
-	mg.Spec.WriteConnectionSecretToReference = r
-}
-
 // GetCondition of this Queue.
 func (mg *Queue) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)

@@ -11,7 +11,7 @@ spec:
     clusterNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    principalId: ${data.azurerm_client_config.current.client_id}
+    principalId: ${data.azurerm_client_config.current.principal_id}
     principalType: App
     resourceGroupNameSelector:
       matchLabels:

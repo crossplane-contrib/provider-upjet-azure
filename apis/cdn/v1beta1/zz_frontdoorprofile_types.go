@@ -15,6 +15,9 @@ import (
 
 type FrontdoorProfileInitParameters struct {
 
+	// An identity block as defined below.
+	Identity *IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+
 	// Specifies the maximum response timeout in seconds. Possible values are between 16 and 240 seconds (inclusive). Defaults to 120 seconds.
 	ResponseTimeoutSeconds *float64 `json:"responseTimeoutSeconds,omitempty" tf:"response_timeout_seconds,omitempty"`
 
@@ -30,6 +33,9 @@ type FrontdoorProfileObservation struct {
 
 	// The ID of this Front Door Profile.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// An identity block as defined below.
+	Identity *IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The UUID of this Front Door Profile which will be sent in the HTTP Header as the X-Azure-FDID attribute.
 	ResourceGUID *string `json:"resourceGuid,omitempty" tf:"resource_guid,omitempty"`
@@ -49,6 +55,10 @@ type FrontdoorProfileObservation struct {
 }
 
 type FrontdoorProfileParameters struct {
+
+	// An identity block as defined below.
+	// +kubebuilder:validation:Optional
+	Identity *IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The name of the Resource Group where this Front Door Profile should exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -75,6 +85,44 @@ type FrontdoorProfileParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type IdentityInitParameters struct {
+
+	// - A list of one or more Resource IDs for User Assigned Managed identities to assign. Required when type is set to UserAssigned or SystemAssigned, UserAssigned.
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// The type of managed identity to assign. Possible values are SystemAssigned, UserAssigned or SystemAssigned, UserAssigned.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type IdentityObservation struct {
+
+	// - A list of one or more Resource IDs for User Assigned Managed identities to assign. Required when type is set to UserAssigned or SystemAssigned, UserAssigned.
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// The ID of this Front Door Profile.
+	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
+
+	// The ID of this Front Door Profile.
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// The type of managed identity to assign. Possible values are SystemAssigned, UserAssigned or SystemAssigned, UserAssigned.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type IdentityParameters struct {
+
+	// - A list of one or more Resource IDs for User Assigned Managed identities to assign. Required when type is set to UserAssigned or SystemAssigned, UserAssigned.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// The type of managed identity to assign. Possible values are SystemAssigned, UserAssigned or SystemAssigned, UserAssigned.
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 // FrontdoorProfileSpec defines the desired state of FrontdoorProfile

@@ -13,6 +13,35 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CustomerManagedKeyInitParameters struct {
+
+	// The Key Vault Key Id that will be used to encrypt the Fluid Relay Server.
+	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
+
+	// The User Assigned Managed Identity ID to be used for accessing the Customer Managed Key for encryption.
+	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
+}
+
+type CustomerManagedKeyObservation struct {
+
+	// The Key Vault Key Id that will be used to encrypt the Fluid Relay Server.
+	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
+
+	// The User Assigned Managed Identity ID to be used for accessing the Customer Managed Key for encryption.
+	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
+}
+
+type CustomerManagedKeyParameters struct {
+
+	// The Key Vault Key Id that will be used to encrypt the Fluid Relay Server.
+	// +kubebuilder:validation:Optional
+	KeyVaultKeyID *string `json:"keyVaultKeyId" tf:"key_vault_key_id,omitempty"`
+
+	// The User Assigned Managed Identity ID to be used for accessing the Customer Managed Key for encryption.
+	// +kubebuilder:validation:Optional
+	UserAssignedIdentityID *string `json:"userAssignedIdentityId" tf:"user_assigned_identity_id,omitempty"`
+}
+
 type IdentityInitParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Fluid Relay Service.
@@ -53,6 +82,9 @@ type IdentityParameters struct {
 
 type ServerInitParameters struct {
 
+	// A customer_managed_key block as defined below. Changing this forces a new resource to be created.
+	CustomerManagedKey *CustomerManagedKeyInitParameters `json:"customerManagedKey,omitempty" tf:"customer_managed_key,omitempty"`
+
 	// An identity block as defined below.
 	Identity *IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
@@ -83,6 +115,9 @@ type ServerInitParameters struct {
 }
 
 type ServerObservation struct {
+
+	// A customer_managed_key block as defined below. Changing this forces a new resource to be created.
+	CustomerManagedKey *CustomerManagedKeyObservation `json:"customerManagedKey,omitempty" tf:"customer_managed_key,omitempty"`
 
 	// The Fluid tenantId for this server.
 	FrsTenantID *string `json:"frsTenantId,omitempty" tf:"frs_tenant_id,omitempty"`
@@ -120,6 +155,10 @@ type ServerObservation struct {
 }
 
 type ServerParameters struct {
+
+	// A customer_managed_key block as defined below. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	CustomerManagedKey *CustomerManagedKeyParameters `json:"customerManagedKey,omitempty" tf:"customer_managed_key,omitempty"`
 
 	// An identity block as defined below.
 	// +kubebuilder:validation:Optional

@@ -10,13 +10,13 @@ metadata:
     meta.upbound.io/example-id: servicebus/v1beta1/queue
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: example-queue
 spec:
   forProvider:
-    maxMessageSizeInKilobytes: 1024
     namespaceIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: queue-namespace
+        testing.upbound.io/example-name: example
+    partitioningEnabled: true
 
 ---
 
@@ -26,29 +26,28 @@ metadata:
   annotations:
     meta.upbound.io/example-id: servicebus/v1beta1/queue
   labels:
-    testing.upbound.io/example-name: queue-rg
-  name: queue-rg
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     location: West Europe
 
 ---
 
-apiVersion: servicebus.azure.upbound.io/v1beta1
+apiVersion: servicebus.azure.upbound.io/v1beta2
 kind: ServiceBusNamespace
 metadata:
   annotations:
     meta.upbound.io/example-id: servicebus/v1beta1/queue
   labels:
-    testing.upbound.io/example-name: queue-namespace
-  name: queue-namespace
+    testing.upbound.io/example-name: example
+  name: example-queue-up
 spec:
   forProvider:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: queue-rg
-    capacity: 1
-    sku: Premium
+        testing.upbound.io/example-name: example
+    sku: Standard
     tags:
-      source: test
+      source: upbound

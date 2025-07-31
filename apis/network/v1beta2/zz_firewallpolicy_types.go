@@ -181,7 +181,7 @@ type FirewallPolicyInitParameters struct {
 	// Whether SQL Redirect traffic filtering is allowed. Enabling this flag requires no rule using ports between 11000-11999.
 	SQLRedirectAllowed *bool `json:"sqlRedirectAllowed,omitempty" tf:"sql_redirect_allowed,omitempty"`
 
-	// The SKU Tier of the Firewall Policy. Possible values are Standard, Premium and Basic. Changing this forces a new Firewall Policy to be created.
+	// The SKU Tier of the Firewall Policy. Possible values are Standard, Premium and Basic. Defaults to Standard. Changing this forces a new Firewall Policy to be created.
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A tls_certificate block as defined below.
@@ -245,7 +245,7 @@ type FirewallPolicyObservation struct {
 	// Whether SQL Redirect traffic filtering is allowed. Enabling this flag requires no rule using ports between 11000-11999.
 	SQLRedirectAllowed *bool `json:"sqlRedirectAllowed,omitempty" tf:"sql_redirect_allowed,omitempty"`
 
-	// The SKU Tier of the Firewall Policy. Possible values are Standard, Premium and Basic. Changing this forces a new Firewall Policy to be created.
+	// The SKU Tier of the Firewall Policy. Possible values are Standard, Premium and Basic. Defaults to Standard. Changing this forces a new Firewall Policy to be created.
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A tls_certificate block as defined below.
@@ -317,7 +317,7 @@ type FirewallPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	SQLRedirectAllowed *bool `json:"sqlRedirectAllowed,omitempty" tf:"sql_redirect_allowed,omitempty"`
 
-	// The SKU Tier of the Firewall Policy. Possible values are Standard, Premium and Basic. Changing this forces a new Firewall Policy to be created.
+	// The SKU Tier of the Firewall Policy. Possible values are Standard, Premium and Basic. Defaults to Standard. Changing this forces a new Firewall Policy to be created.
 	// +kubebuilder:validation:Optional
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
@@ -497,7 +497,7 @@ type SignatureOverridesParameters struct {
 
 type TLSCertificateInitParameters struct {
 
-	// The ID of the Key Vault, where the secret or certificate is stored.
+	// The Secret Identifier (URI) of the certificate stored in Azure Key Vault, either as a secret or certificate.
 	KeyVaultSecretID *string `json:"keyVaultSecretId,omitempty" tf:"key_vault_secret_id,omitempty"`
 
 	// The name of the certificate.
@@ -506,7 +506,7 @@ type TLSCertificateInitParameters struct {
 
 type TLSCertificateObservation struct {
 
-	// The ID of the Key Vault, where the secret or certificate is stored.
+	// The Secret Identifier (URI) of the certificate stored in Azure Key Vault, either as a secret or certificate.
 	KeyVaultSecretID *string `json:"keyVaultSecretId,omitempty" tf:"key_vault_secret_id,omitempty"`
 
 	// The name of the certificate.
@@ -515,7 +515,7 @@ type TLSCertificateObservation struct {
 
 type TLSCertificateParameters struct {
 
-	// The ID of the Key Vault, where the secret or certificate is stored.
+	// The Secret Identifier (URI) of the certificate stored in Azure Key Vault, either as a secret or certificate.
 	// +kubebuilder:validation:Optional
 	KeyVaultSecretID *string `json:"keyVaultSecretId" tf:"key_vault_secret_id,omitempty"`
 

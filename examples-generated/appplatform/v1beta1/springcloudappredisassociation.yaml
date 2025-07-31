@@ -32,7 +32,7 @@ metadata:
 spec:
   forProvider:
     capacity: 0
-    enableNonSslPort: true
+    enable_non_ssl_port: true
     family: C
     location: West Europe
     resourceGroupNameSelector:

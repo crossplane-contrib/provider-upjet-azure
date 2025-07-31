@@ -12,6 +12,7 @@ metadata:
   name: sqlpool
 spec:
   forProvider:
+    storageAccountType: GRS
     createMode: Default
     skuName: DW100c
     synapseWorkspaceIdSelector:
@@ -41,7 +42,7 @@ metadata:
     meta.upbound.io/example-id: synapse/v1beta1/sqlpool
   labels:
     testing.upbound.io/example-name: account-label
-  name: accountnameabcdef
+  name: accountnamessqbump
 spec:
   forProvider:
     accountKind: StorageV2
@@ -78,7 +79,7 @@ metadata:
     meta.upbound.io/example-id: synapse/v1beta1/sqlpool
   labels:
     testing.upbound.io/example-name: sqlkpool-synapse-ws-label
-  name: sqlpool-synapse-ws-12345
+  name: ws-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     identity:

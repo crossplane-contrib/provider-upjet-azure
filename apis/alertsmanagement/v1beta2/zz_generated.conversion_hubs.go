@@ -7,12 +7,6 @@
 package v1beta2
 
 // Hub marks this type as a conversion hub.
-func (tr *MonitorActionRuleActionGroup) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *MonitorActionRuleSuppression) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *MonitorAlertProcessingRuleActionGroup) Hub() {}
 
 // Hub marks this type as a conversion hub.

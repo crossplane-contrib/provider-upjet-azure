@@ -18,6 +18,9 @@ type ExpressRouteCircuitInitParameters struct {
 	// Allow the circuit to interact with classic (RDFE) resources. Defaults to false.
 	AllowClassicOperations *bool `json:"allowClassicOperations,omitempty" tf:"allow_classic_operations,omitempty"`
 
+	// The authorization key. This can be used to set up an ExpressRoute Circuit with an ExpressRoute Port from another subscription.
+	AuthorizationKeySecretRef *v1.SecretKeySelector `json:"authorizationKeySecretRef,omitempty" tf:"-"`
+
 	// The bandwidth in Gbps of the circuit being created on the Express Route Port.
 	BandwidthInGbps *float64 `json:"bandwidthInGbps,omitempty" tf:"bandwidth_in_gbps,omitempty"`
 
@@ -32,6 +35,9 @@ type ExpressRouteCircuitInitParameters struct {
 
 	// The name of the peering location and not the Azure resource location. Changing this forces a new resource to be created.
 	PeeringLocation *string `json:"peeringLocation,omitempty" tf:"peering_location,omitempty"`
+
+	// Enable rate limiting for the circuit. Only works with ExpressRoute Ports. Defaults to false.
+	RateLimitingEnabled *bool `json:"rateLimitingEnabled,omitempty" tf:"rate_limiting_enabled,omitempty"`
 
 	// The name of the ExpressRoute Service Provider. Changing this forces a new resource to be created.
 	ServiceProviderName *string `json:"serviceProviderName,omitempty" tf:"service_provider_name,omitempty"`
@@ -66,6 +72,9 @@ type ExpressRouteCircuitObservation struct {
 
 	// The name of the peering location and not the Azure resource location. Changing this forces a new resource to be created.
 	PeeringLocation *string `json:"peeringLocation,omitempty" tf:"peering_location,omitempty"`
+
+	// Enable rate limiting for the circuit. Only works with ExpressRoute Ports. Defaults to false.
+	RateLimitingEnabled *bool `json:"rateLimitingEnabled,omitempty" tf:"rate_limiting_enabled,omitempty"`
 
 	// The name of the resource group in which to create the ExpressRoute circuit. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -113,6 +122,10 @@ type ExpressRouteCircuitParameters struct {
 	// The name of the peering location and not the Azure resource location. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	PeeringLocation *string `json:"peeringLocation,omitempty" tf:"peering_location,omitempty"`
+
+	// Enable rate limiting for the circuit. Only works with ExpressRoute Ports. Defaults to false.
+	// +kubebuilder:validation:Optional
+	RateLimitingEnabled *bool `json:"rateLimitingEnabled,omitempty" tf:"rate_limiting_enabled,omitempty"`
 
 	// The name of the resource group in which to create the ExpressRoute circuit. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup

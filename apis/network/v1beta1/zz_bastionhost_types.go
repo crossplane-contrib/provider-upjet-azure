@@ -115,10 +115,13 @@ type BastionHostInitParameters struct {
 	// The number of scale units with which to provision the Bastion Host. Possible values are between 2 and 50. Defaults to 2.
 	ScaleUnits *float64 `json:"scaleUnits,omitempty" tf:"scale_units,omitempty"`
 
+	// Is Session Recording feature enabled for the Bastion Host. Defaults to false.
+	SessionRecordingEnabled *bool `json:"sessionRecordingEnabled,omitempty" tf:"session_recording_enabled,omitempty"`
+
 	// Is Shareable Link feature enabled for the Bastion Host. Defaults to false.
 	ShareableLinkEnabled *bool `json:"shareableLinkEnabled,omitempty" tf:"shareable_link_enabled,omitempty"`
 
-	// The SKU of the Bastion Host. Accepted values are Developer, Basic and Standard. Defaults to Basic.
+	// The SKU of the Bastion Host. Accepted values are Developer, Basic, Standard and Premium. Defaults to Basic.
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags to assign to the resource.
@@ -130,6 +133,10 @@ type BastionHostInitParameters struct {
 
 	// The ID of the Virtual Network for the Developer Bastion Host. Changing this forces a new resource to be created.
 	VirtualNetworkID *string `json:"virtualNetworkId,omitempty" tf:"virtual_network_id,omitempty"`
+
+	// Specifies a list of Availability Zones in which this Public Bastion Host should be located. Changing this forces a new resource to be created.
+	// +listType=set
+	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
 type BastionHostObservation struct {
@@ -164,10 +171,13 @@ type BastionHostObservation struct {
 	// The number of scale units with which to provision the Bastion Host. Possible values are between 2 and 50. Defaults to 2.
 	ScaleUnits *float64 `json:"scaleUnits,omitempty" tf:"scale_units,omitempty"`
 
+	// Is Session Recording feature enabled for the Bastion Host. Defaults to false.
+	SessionRecordingEnabled *bool `json:"sessionRecordingEnabled,omitempty" tf:"session_recording_enabled,omitempty"`
+
 	// Is Shareable Link feature enabled for the Bastion Host. Defaults to false.
 	ShareableLinkEnabled *bool `json:"shareableLinkEnabled,omitempty" tf:"shareable_link_enabled,omitempty"`
 
-	// The SKU of the Bastion Host. Accepted values are Developer, Basic and Standard. Defaults to Basic.
+	// The SKU of the Bastion Host. Accepted values are Developer, Basic, Standard and Premium. Defaults to Basic.
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags to assign to the resource.
@@ -179,6 +189,10 @@ type BastionHostObservation struct {
 
 	// The ID of the Virtual Network for the Developer Bastion Host. Changing this forces a new resource to be created.
 	VirtualNetworkID *string `json:"virtualNetworkId,omitempty" tf:"virtual_network_id,omitempty"`
+
+	// Specifies a list of Availability Zones in which this Public Bastion Host should be located. Changing this forces a new resource to be created.
+	// +listType=set
+	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
 type BastionHostParameters struct {
@@ -224,11 +238,15 @@ type BastionHostParameters struct {
 	// +kubebuilder:validation:Optional
 	ScaleUnits *float64 `json:"scaleUnits,omitempty" tf:"scale_units,omitempty"`
 
+	// Is Session Recording feature enabled for the Bastion Host. Defaults to false.
+	// +kubebuilder:validation:Optional
+	SessionRecordingEnabled *bool `json:"sessionRecordingEnabled,omitempty" tf:"session_recording_enabled,omitempty"`
+
 	// Is Shareable Link feature enabled for the Bastion Host. Defaults to false.
 	// +kubebuilder:validation:Optional
 	ShareableLinkEnabled *bool `json:"shareableLinkEnabled,omitempty" tf:"shareable_link_enabled,omitempty"`
 
-	// The SKU of the Bastion Host. Accepted values are Developer, Basic and Standard. Defaults to Basic.
+	// The SKU of the Bastion Host. Accepted values are Developer, Basic, Standard and Premium. Defaults to Basic.
 	// +kubebuilder:validation:Optional
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
@@ -244,6 +262,11 @@ type BastionHostParameters struct {
 	// The ID of the Virtual Network for the Developer Bastion Host. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	VirtualNetworkID *string `json:"virtualNetworkId,omitempty" tf:"virtual_network_id,omitempty"`
+
+	// Specifies a list of Availability Zones in which this Public Bastion Host should be located. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
 // BastionHostSpec defines the desired state of BastionHost

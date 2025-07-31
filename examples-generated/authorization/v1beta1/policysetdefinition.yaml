@@ -8,7 +8,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    displayName: Test Policy Set
+    displayName: Example
     parameters: |2
           {
               "allowedLocations": {
@@ -26,4 +26,5 @@ spec:
               "listOfAllowedLocations": {"value": "[parameters('allowedLocations')]"}
             }
       policyDefinitionId: /providers/Microsoft.Authorization/policyDefinitions/e765b5de-1225-4ba3-bd56-1ac6695af988
+      version: 1.0.*
     policyType: Custom

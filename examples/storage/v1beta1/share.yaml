@@ -1,18 +1,50 @@
 # SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
 #
 # SPDX-License-Identifier: CC0-1.0
-
 apiVersion: storage.azure.upbound.io/v1beta1
 kind: Share
 metadata:
-  name: example
+  annotations:
+    meta.upbound.io/example-id: storage/v1beta1/share
+  labels:
+    testing.upbound.io/example-name: example
+  name: sdexamplebumptest5sd
 spec:
   forProvider:
-    acl:
-    - accessPolicy:
-      - expiry: "2019-07-02T10:38:21.0000000Z"
-        permissions: rwdl
-        start: "2019-07-02T09:38:21.0000000Z"
-      id: MTIzNDU2Nzg5MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTI
     quota: 50
-    storageAccountName: storageaccountname777
+    storageAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: storage/v1beta1/share
+  labels:
+    testing.upbound.io/example-name: example
+  name: sdexamplebumptest5sd
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: storage/v1beta1/share
+  labels:
+    testing.upbound.io/example-name: example
+  name: sdexamplebumptest5sd
+spec:
+  forProvider:
+    location: West Europe

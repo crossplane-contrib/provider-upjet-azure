@@ -228,6 +228,11 @@ func (in *ResourceGroupCostManagementExportInitParameters) DeepCopyInto(out *Res
 		*out = new(ExportDataStorageLocationInitParameters)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.FileFormat != nil {
+		in, out := &in.FileFormat, &out.FileFormat
+		*out = new(string)
+		**out = **in
+	}
 	if in.RecurrencePeriodEndDate != nil {
 		in, out := &in.RecurrencePeriodEndDate, &out.RecurrencePeriodEndDate
 		*out = new(string)
@@ -320,6 +325,11 @@ func (in *ResourceGroupCostManagementExportObservation) DeepCopyInto(out *Resour
 		*out = new(ExportDataStorageLocationObservation)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.FileFormat != nil {
+		in, out := &in.FileFormat, &out.FileFormat
+		*out = new(string)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
@@ -374,6 +384,11 @@ func (in *ResourceGroupCostManagementExportParameters) DeepCopyInto(out *Resourc
 		in, out := &in.ExportDataStorageLocation, &out.ExportDataStorageLocation
 		*out = new(ExportDataStorageLocationParameters)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.FileFormat != nil {
+		in, out := &in.FileFormat, &out.FileFormat
+		*out = new(string)
+		**out = **in
 	}
 	if in.RecurrencePeriodEndDate != nil {
 		in, out := &in.RecurrencePeriodEndDate, &out.RecurrencePeriodEndDate
@@ -667,6 +682,11 @@ func (in *SubscriptionCostManagementExportInitParameters) DeepCopyInto(out *Subs
 		*out = new(SubscriptionCostManagementExportExportDataStorageLocationInitParameters)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.FileFormat != nil {
+		in, out := &in.FileFormat, &out.FileFormat
+		*out = new(string)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -764,6 +784,11 @@ func (in *SubscriptionCostManagementExportObservation) DeepCopyInto(out *Subscri
 		*out = new(SubscriptionCostManagementExportExportDataStorageLocationObservation)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.FileFormat != nil {
+		in, out := &in.FileFormat, &out.FileFormat
+		*out = new(string)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
@@ -823,6 +848,11 @@ func (in *SubscriptionCostManagementExportParameters) DeepCopyInto(out *Subscrip
 		in, out := &in.ExportDataStorageLocation, &out.ExportDataStorageLocation
 		*out = new(SubscriptionCostManagementExportExportDataStorageLocationParameters)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.FileFormat != nil {
+		in, out := &in.FileFormat, &out.FileFormat
+		*out = new(string)
+		**out = **in
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name

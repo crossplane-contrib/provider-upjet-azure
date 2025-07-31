@@ -98,7 +98,7 @@ type RecordInitParameters struct {
 	// Extensible CAA flags, currently only 1 is implemented to set the issuer critical flag.
 	Flags *float64 `json:"flags,omitempty" tf:"flags,omitempty"`
 
-	// A property tag, options are issue, issuewild and iodef.
+	// A property tag, options are issue, issuewild, iodef, and contactemail.
 	Tag *string `json:"tag,omitempty" tf:"tag,omitempty"`
 
 	// A property value such as a registrar domain.
@@ -110,7 +110,7 @@ type RecordObservation struct {
 	// Extensible CAA flags, currently only 1 is implemented to set the issuer critical flag.
 	Flags *float64 `json:"flags,omitempty" tf:"flags,omitempty"`
 
-	// A property tag, options are issue, issuewild and iodef.
+	// A property tag, options are issue, issuewild, iodef, and contactemail.
 	Tag *string `json:"tag,omitempty" tf:"tag,omitempty"`
 
 	// A property value such as a registrar domain.
@@ -123,7 +123,7 @@ type RecordParameters struct {
 	// +kubebuilder:validation:Optional
 	Flags *float64 `json:"flags" tf:"flags,omitempty"`
 
-	// A property tag, options are issue, issuewild and iodef.
+	// A property tag, options are issue, issuewild, iodef, and contactemail.
 	// +kubebuilder:validation:Optional
 	Tag *string `json:"tag" tf:"tag,omitempty"`
 

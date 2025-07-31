@@ -15,7 +15,7 @@ import (
 
 type AutomaticUpdateInitParameters struct {
 
-	// The authentication type used for automation account. Possible values are RunAsAccount and SystemAssignedIdentity.
+	// The authentication type used for automation account. Possible values are RunAsAccount and SystemAssignedIdentity. Defaults to SystemAssignedIdentity.
 	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
 
 	// The automation account ID which holds the automatic update runbook and authenticates to Azure resources.
@@ -27,7 +27,7 @@ type AutomaticUpdateInitParameters struct {
 
 type AutomaticUpdateObservation struct {
 
-	// The authentication type used for automation account. Possible values are RunAsAccount and SystemAssignedIdentity.
+	// The authentication type used for automation account. Possible values are RunAsAccount and SystemAssignedIdentity. Defaults to SystemAssignedIdentity.
 	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
 
 	// The automation account ID which holds the automatic update runbook and authenticates to Azure resources.
@@ -39,7 +39,7 @@ type AutomaticUpdateObservation struct {
 
 type AutomaticUpdateParameters struct {
 
-	// The authentication type used for automation account. Possible values are RunAsAccount and SystemAssignedIdentity.
+	// The authentication type used for automation account. Possible values are RunAsAccount and SystemAssignedIdentity. Defaults to SystemAssignedIdentity.
 	// +kubebuilder:validation:Optional
 	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
 

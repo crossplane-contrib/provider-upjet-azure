@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.14.0
+    controller-gen.kubebuilder.io/version: v0.16.5
   name: workspaces.synapse.azure.upbound.io
 spec:
   group: synapse.azure.upbound.io
@@ -73,24 +73,6 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  aadAdmin:
-                    description: An aad_admin block as defined below.
-                    items:
-                      properties:
-                        login:
-                          description: The login name of the Azure AD Administrator
-                            of this Synapse Workspace.
-                          type: string
-                        objectId:
-                          description: The object id of the Azure AD Administrator
-                            of this Synapse Workspace.
-                          type: string
-                        tenantId:
-                          description: The tenant id of the Azure AD Administrator
-                            of this Synapse Workspace.
-                          type: string
-                      type: object
-                    type: array
                   azureDevopsRepo:
                     description: An azure_devops_repo block as defined below.
                     items:
@@ -531,33 +513,15 @@ spec:
                             type: string
                         type: object
                     type: object
-                  sqlAadAdmin:
-                    description: An sql_aad_admin block as defined below.
-                    items:
-                      properties:
-                        login:
-                          description: The login name of the Azure AD Administrator
-                            of this Synapse Workspace SQL.
-                          type: string
-                        objectId:
-                          description: The object id of the Azure AD Administrator
-                            of this Synapse Workspace SQL.
-                          type: string
-                        tenantId:
-                          description: The tenant id of the Azure AD Administrator
-                            of this Synapse Workspace SQL.
-                          type: string
-                      type: object
-                    type: array
                   sqlAdministratorLogin:
                     description: Specifies The login name of the SQL administrator.
                       Changing this forces a new resource to be created. If this is
-                      not provided aad_admin or customer_managed_key must be provided.
+                      not provided customer_managed_key must be provided.
                     type: string
                   sqlAdministratorLoginPasswordSecretRef:
                     description: The Password associated with the sql_administrator_login
-                      for the SQL administrator. If this is not provided aad_admin
-                      or customer_managed_key must be provided.
+                      for the SQL administrator. If this is not provided customer_managed_key
+                      must be provided.
                     properties:
                       key:
                         description: The key to select.
@@ -678,24 +642,6 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
-                  aadAdmin:
-                    description: An aad_admin block as defined below.
-                    items:
-                      properties:
-                        login:
-                          description: The login name of the Azure AD Administrator
-                            of this Synapse Workspace.
-                          type: string
-                        objectId:
-                          description: The object id of the Azure AD Administrator
-                            of this Synapse Workspace.
-                          type: string
-                        tenantId:
-                          description: The tenant id of the Azure AD Administrator
-                            of this Synapse Workspace.
-                          type: string
-                      type: object
-                    type: array
                   azureDevopsRepo:
                     description: An azure_devops_repo block as defined below.
                     items:
@@ -1055,33 +1001,15 @@ spec:
                   purviewId:
                     description: The ID of purview account.
                     type: string
-                  sqlAadAdmin:
-                    description: An sql_aad_admin block as defined below.
-                    items:
-                      properties:
-                        login:
-                          description: The login name of the Azure AD Administrator
-                            of this Synapse Workspace SQL.
-                          type: string
-                        objectId:
-                          description: The object id of the Azure AD Administrator
-                            of this Synapse Workspace SQL.
-                          type: string
-                        tenantId:
-                          description: The tenant id of the Azure AD Administrator
-                            of this Synapse Workspace SQL.
-                          type: string
-                      type: object
-                    type: array
                   sqlAdministratorLogin:
                     description: Specifies The login name of the SQL administrator.
                       Changing this forces a new resource to be created. If this is
-                      not provided aad_admin or customer_managed_key must be provided.
+                      not provided customer_managed_key must be provided.
                     type: string
                   sqlAdministratorLoginPasswordSecretRef:
                     description: The Password associated with the sql_administrator_login
-                      for the SQL administrator. If this is not provided aad_admin
-                      or customer_managed_key must be provided.
+                      for the SQL administrator. If this is not provided customer_managed_key
+                      must be provided.
                     properties:
                       key:
                         description: The key to select.
@@ -1366,24 +1294,6 @@ spec:
             properties:
               atProvider:
                 properties:
-                  aadAdmin:
-                    description: An aad_admin block as defined below.
-                    items:
-                      properties:
-                        login:
-                          description: The login name of the Azure AD Administrator
-                            of this Synapse Workspace.
-                          type: string
-                        objectId:
-                          description: The object id of the Azure AD Administrator
-                            of this Synapse Workspace.
-                          type: string
-                        tenantId:
-                          description: The tenant id of the Azure AD Administrator
-                            of this Synapse Workspace.
-                          type: string
-                      type: object
-                    type: array
                   azureDevopsRepo:
                     description: An azure_devops_repo block as defined below.
                     items:
@@ -1425,8 +1335,9 @@ spec:
                   connectivityEndpoints:
                     additionalProperties:
                       type: string
-                    description: A list of Connectivity endpoints for this Synapse
-                      Workspace.
+                    description: A map of Connectivity endpoints for this Synapse
+                      Workspace. Possible key values are dev, sql, sqlOnDemand, and
+                      web.
                     type: object
                     x-kubernetes-map-type: granular
                   customerManagedKey:
@@ -1541,28 +1452,10 @@ spec:
                       synapse Workspace should exist. Changing this forces a new resource
                       to be created.
                     type: string
-                  sqlAadAdmin:
-                    description: An sql_aad_admin block as defined below.
-                    items:
-                      properties:
-                        login:
-                          description: The login name of the Azure AD Administrator
-                            of this Synapse Workspace SQL.
-                          type: string
-                        objectId:
-                          description: The object id of the Azure AD Administrator
-                            of this Synapse Workspace SQL.
-                          type: string
-                        tenantId:
-                          description: The tenant id of the Azure AD Administrator
-                            of this Synapse Workspace SQL.
-                          type: string
-                      type: object
-                    type: array
                   sqlAdministratorLogin:
                     description: Specifies The login name of the SQL administrator.
                       Changing this forces a new resource to be created. If this is
-                      not provided aad_admin or customer_managed_key must be provided.
+                      not provided customer_managed_key must be provided.
                     type: string
                   sqlIdentityControlEnabled:
                     description: Are pipelines (running as workspace's system assigned
@@ -1696,18 +1589,6 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  aadAdmin:
-                    properties:
-                      login:
-                        type: string
-                      objectId:
-                        description: The ID of the synapse Workspace.
-                        type: string
-                      tenantId:
-                        description: The Tenant ID for the Service Principal associated
-                          with the Managed Service Identity of this Synapse Workspace.
-                        type: string
-                    type: object
                   azureDevopsRepo:
                     description: An azure_devops_repo block as defined below.
                     properties:
@@ -2138,27 +2019,15 @@ spec:
                             type: string
                         type: object
                     type: object
-                  sqlAadAdmin:
-                    properties:
-                      login:
-                        type: string
-                      objectId:
-                        description: The ID of the synapse Workspace.
-                        type: string
-                      tenantId:
-                        description: The Tenant ID for the Service Principal associated
-                          with the Managed Service Identity of this Synapse Workspace.
-                        type: string
-                    type: object
                   sqlAdministratorLogin:
                     description: Specifies The login name of the SQL administrator.
                       Changing this forces a new resource to be created. If this is
-                      not provided aad_admin or customer_managed_key must be provided.
+                      not provided customer_managed_key must be provided.
                     type: string
                   sqlAdministratorLoginPasswordSecretRef:
                     description: The Password associated with the sql_administrator_login
-                      for the SQL administrator. If this is not provided aad_admin
-                      or customer_managed_key must be provided.
+                      for the SQL administrator. If this is not provided customer_managed_key
+                      must be provided.
                     properties:
                       key:
                         description: The key to select.
@@ -2279,18 +2148,6 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
-                  aadAdmin:
-                    properties:
-                      login:
-                        type: string
-                      objectId:
-                        description: The ID of the synapse Workspace.
-                        type: string
-                      tenantId:
-                        description: The Tenant ID for the Service Principal associated
-                          with the Managed Service Identity of this Synapse Workspace.
-                        type: string
-                    type: object
                   azureDevopsRepo:
                     description: An azure_devops_repo block as defined below.
                     properties:
@@ -2640,27 +2497,15 @@ spec:
                   purviewId:
                     description: The ID of purview account.
                     type: string
-                  sqlAadAdmin:
-                    properties:
-                      login:
-                        type: string
-                      objectId:
-                        description: The ID of the synapse Workspace.
-                        type: string
-                      tenantId:
-                        description: The Tenant ID for the Service Principal associated
-                          with the Managed Service Identity of this Synapse Workspace.
-                        type: string
-                    type: object
                   sqlAdministratorLogin:
                     description: Specifies The login name of the SQL administrator.
                       Changing this forces a new resource to be created. If this is
-                      not provided aad_admin or customer_managed_key must be provided.
+                      not provided customer_managed_key must be provided.
                     type: string
                   sqlAdministratorLoginPasswordSecretRef:
                     description: The Password associated with the sql_administrator_login
-                      for the SQL administrator. If this is not provided aad_admin
-                      or customer_managed_key must be provided.
+                      for the SQL administrator. If this is not provided customer_managed_key
+                      must be provided.
                     properties:
                       key:
                         description: The key to select.
@@ -2945,18 +2790,6 @@ spec:
             properties:
               atProvider:
                 properties:
-                  aadAdmin:
-                    properties:
-                      login:
-                        type: string
-                      objectId:
-                        description: The ID of the synapse Workspace.
-                        type: string
-                      tenantId:
-                        description: The Tenant ID for the Service Principal associated
-                          with the Managed Service Identity of this Synapse Workspace.
-                        type: string
-                    type: object
                   azureDevopsRepo:
                     description: An azure_devops_repo block as defined below.
                     properties:
@@ -2996,8 +2829,9 @@ spec:
                   connectivityEndpoints:
                     additionalProperties:
                       type: string
-                    description: A list of Connectivity endpoints for this Synapse
-                      Workspace.
+                    description: A map of Connectivity endpoints for this Synapse
+                      Workspace. Possible key values are dev, sql, sqlOnDemand, and
+                      web.
                     type: object
                     x-kubernetes-map-type: granular
                   customerManagedKey:
@@ -3105,22 +2939,10 @@ spec:
                       synapse Workspace should exist. Changing this forces a new resource
                       to be created.
                     type: string
-                  sqlAadAdmin:
-                    properties:
-                      login:
-                        type: string
-                      objectId:
-                        description: The ID of the synapse Workspace.
-                        type: string
-                      tenantId:
-                        description: The Tenant ID for the Service Principal associated
-                          with the Managed Service Identity of this Synapse Workspace.
-                        type: string
-                    type: object
                   sqlAdministratorLogin:
                     description: Specifies The login name of the SQL administrator.
                       Changing this forces a new resource to be created. If this is
-                      not provided aad_admin or customer_managed_key must be provided.
+                      not provided customer_managed_key must be provided.
                     type: string
                   sqlIdentityControlEnabled:
                     description: Are pipelines (running as workspace's system assigned

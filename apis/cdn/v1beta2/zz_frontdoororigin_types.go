@@ -27,9 +27,6 @@ type FrontdoorOriginInitParameters struct {
 	// The value of the HTTPS port. Must be between 1 and 65535. Defaults to 443.
 	HTTPSPort *float64 `json:"httpsPort,omitempty" tf:"https_port,omitempty"`
 
-	// Should the origin be enabled? Possible values are true or false. Defaults to true.
-	HealthProbesEnabled *bool `json:"healthProbesEnabled,omitempty" tf:"health_probes_enabled,omitempty"`
-
 	// The IPv4 address, IPv6 address or Domain name of the Origin.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("primary_blob_host",true)
@@ -83,9 +80,6 @@ type FrontdoorOriginObservation struct {
 	// The value of the HTTPS port. Must be between 1 and 65535. Defaults to 443.
 	HTTPSPort *float64 `json:"httpsPort,omitempty" tf:"https_port,omitempty"`
 
-	// Should the origin be enabled? Possible values are true or false. Defaults to true.
-	HealthProbesEnabled *bool `json:"healthProbesEnabled,omitempty" tf:"health_probes_enabled,omitempty"`
-
 	// The IPv4 address, IPv6 address or Domain name of the Origin.
 	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
 
@@ -136,10 +130,6 @@ type FrontdoorOriginParameters struct {
 	// The value of the HTTPS port. Must be between 1 and 65535. Defaults to 443.
 	// +kubebuilder:validation:Optional
 	HTTPSPort *float64 `json:"httpsPort,omitempty" tf:"https_port,omitempty"`
-
-	// Should the origin be enabled? Possible values are true or false. Defaults to true.
-	// +kubebuilder:validation:Optional
-	HealthProbesEnabled *bool `json:"healthProbesEnabled,omitempty" tf:"health_probes_enabled,omitempty"`
 
 	// The IPv4 address, IPv6 address or Domain name of the Origin.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta2.Account
@@ -213,7 +203,7 @@ type PrivateLinkInitParameters struct {
 	// Specifies the request message that will be submitted to the private_link_target_id when requesting the private link endpoint connection. Values must be between 1 and 140 characters in length. Defaults to Access request for CDN FrontDoor Private Link Origin.
 	RequestMessage *string `json:"requestMessage,omitempty" tf:"request_message,omitempty"`
 
-	// Specifies the type of target for this Private Link Endpoint. Possible values are blob, blob_secondary, web and sites.
+	// Specifies the type of target for this Private Link Endpoint. Possible values are blob, blob_secondary, Gateway, managedEnvironments, sites, web and web_secondary.
 	TargetType *string `json:"targetType,omitempty" tf:"target_type,omitempty"`
 }
 
@@ -228,7 +218,7 @@ type PrivateLinkObservation struct {
 	// Specifies the request message that will be submitted to the private_link_target_id when requesting the private link endpoint connection. Values must be between 1 and 140 characters in length. Defaults to Access request for CDN FrontDoor Private Link Origin.
 	RequestMessage *string `json:"requestMessage,omitempty" tf:"request_message,omitempty"`
 
-	// Specifies the type of target for this Private Link Endpoint. Possible values are blob, blob_secondary, web and sites.
+	// Specifies the type of target for this Private Link Endpoint. Possible values are blob, blob_secondary, Gateway, managedEnvironments, sites, web and web_secondary.
 	TargetType *string `json:"targetType,omitempty" tf:"target_type,omitempty"`
 }
 
@@ -266,7 +256,7 @@ type PrivateLinkParameters struct {
 	// +kubebuilder:validation:Optional
 	RequestMessage *string `json:"requestMessage,omitempty" tf:"request_message,omitempty"`
 
-	// Specifies the type of target for this Private Link Endpoint. Possible values are blob, blob_secondary, web and sites.
+	// Specifies the type of target for this Private Link Endpoint. Possible values are blob, blob_secondary, Gateway, managedEnvironments, sites, web and web_secondary.
 	// +kubebuilder:validation:Optional
 	TargetType *string `json:"targetType,omitempty" tf:"target_type,omitempty"`
 }

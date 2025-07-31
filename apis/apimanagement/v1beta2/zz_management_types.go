@@ -199,7 +199,10 @@ type DeveloperPortalObservation struct {
 	// The Hostname to use for the Management API.
 	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
 
-	// The ID of the Key Vault Secret containing the SSL Certificate, which must be should be of the type application/x-pkcs12.
+	// The ID of the Key Vault Secret containing the SSL Certificate, which must be of the type application/x-pkcs12.
+	KeyVaultCertificateID *string `json:"keyVaultCertificateId,omitempty" tf:"key_vault_certificate_id,omitempty"`
+
+	// The ID of the API Management Service.
 	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
 
 	// Should Client Certificate Negotiation be enabled for this Hostname? Defaults to false.
@@ -238,7 +241,10 @@ type HostNameConfigurationManagementObservation struct {
 	// The Hostname to use for the Management API.
 	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
 
-	// The ID of the Key Vault Secret containing the SSL Certificate, which must be should be of the type application/x-pkcs12.
+	// The ID of the Key Vault Secret containing the SSL Certificate, which must be of the type application/x-pkcs12.
+	KeyVaultCertificateID *string `json:"keyVaultCertificateId,omitempty" tf:"key_vault_certificate_id,omitempty"`
+
+	// The ID of the API Management Service.
 	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
 
 	// Should Client Certificate Negotiation be enabled for this Hostname? Defaults to false.
@@ -345,8 +351,6 @@ type ManagementInitParameters struct {
 	// Email address from which the notification will be sent.
 	NotificationSenderEmail *string `json:"notificationSenderEmail,omitempty" tf:"notification_sender_email,omitempty"`
 
-	Policy *PolicyInitParameters `json:"policy,omitempty" tf:"policy,omitempty"`
-
 	// A protocols block as defined below.
 	Protocols *ProtocolsInitParameters `json:"protocols,omitempty" tf:"protocols,omitempty"`
 
@@ -439,8 +443,6 @@ type ManagementObservation struct {
 	// Email address from which the notification will be sent.
 	NotificationSenderEmail *string `json:"notificationSenderEmail,omitempty" tf:"notification_sender_email,omitempty"`
 
-	Policy *PolicyObservation `json:"policy,omitempty" tf:"policy,omitempty"`
-
 	// The URL for the Publisher Portal associated with this API Management service.
 	PortalURL *string `json:"portalUrl,omitempty" tf:"portal_url,omitempty"`
 
@@ -465,7 +467,7 @@ type ManagementObservation struct {
 	// The name of publisher/company.
 	PublisherName *string `json:"publisherName,omitempty" tf:"publisher_name,omitempty"`
 
-	// The name of the Resource Group in which the API Management Service should be exist. Changing this forces a new resource to be created.
+	// The name of the Resource Group in which the API Management Service should exist. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// The URL for the SCM (Source Code Management) Endpoint associated with this API Management service.
@@ -539,9 +541,6 @@ type ManagementParameters struct {
 	// +kubebuilder:validation:Optional
 	NotificationSenderEmail *string `json:"notificationSenderEmail,omitempty" tf:"notification_sender_email,omitempty"`
 
-	// +kubebuilder:validation:Optional
-	Policy *PolicyParameters `json:"policy,omitempty" tf:"policy,omitempty"`
-
 	// A protocols block as defined below.
 	// +kubebuilder:validation:Optional
 	Protocols *ProtocolsParameters `json:"protocols,omitempty" tf:"protocols,omitempty"`
@@ -562,7 +561,7 @@ type ManagementParameters struct {
 	// +kubebuilder:validation:Optional
 	PublisherName *string `json:"publisherName,omitempty" tf:"publisher_name,omitempty"`
 
-	// The name of the Resource Group in which the API Management Service should be exist. Changing this forces a new resource to be created.
+	// The name of the Resource Group in which the API Management Service should exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -653,27 +652,6 @@ type ManagementVirtualNetworkConfigurationParameters struct {
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
-type PolicyInitParameters struct {
-	XMLContent *string `json:"xmlContent,omitempty" tf:"xml_content"`
-
-	XMLLink *string `json:"xmlLink,omitempty" tf:"xml_link"`
-}
-
-type PolicyObservation struct {
-	XMLContent *string `json:"xmlContent,omitempty" tf:"xml_content,omitempty"`
-
-	XMLLink *string `json:"xmlLink,omitempty" tf:"xml_link,omitempty"`
-}
-
-type PolicyParameters struct {
-
-	// +kubebuilder:validation:Optional
-	XMLContent *string `json:"xmlContent,omitempty" tf:"xml_content"`
-
-	// +kubebuilder:validation:Optional
-	XMLLink *string `json:"xmlLink,omitempty" tf:"xml_link"`
-}
-
 type PortalInitParameters struct {
 }
 
@@ -691,7 +669,10 @@ type PortalObservation struct {
 	// The Hostname to use for the Management API.
 	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
 
-	// The ID of the Key Vault Secret containing the SSL Certificate, which must be should be of the type application/x-pkcs12.
+	// The ID of the Key Vault Secret containing the SSL Certificate, which must be of the type application/x-pkcs12.
+	KeyVaultCertificateID *string `json:"keyVaultCertificateId,omitempty" tf:"key_vault_certificate_id,omitempty"`
+
+	// The ID of the API Management Service.
 	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
 
 	// Should Client Certificate Negotiation be enabled for this Hostname? Defaults to false.
@@ -711,22 +692,27 @@ type PortalParameters struct {
 }
 
 type ProtocolsInitParameters struct {
+	EnableHttp2 *bool `json:"enableHttp2,omitempty" tf:"enable_http2,omitempty"`
 
 	// Should HTTP/2 be supported by the API Management Service? Defaults to false.
-	EnableHttp2 *bool `json:"enableHttp2,omitempty" tf:"enable_http2,omitempty"`
+	Http2Enabled *bool `json:"http2Enabled,omitempty" tf:"http2_enabled,omitempty"`
 }
 
 type ProtocolsObservation struct {
+	EnableHttp2 *bool `json:"enableHttp2,omitempty" tf:"enable_http2,omitempty"`
 
 	// Should HTTP/2 be supported by the API Management Service? Defaults to false.
-	EnableHttp2 *bool `json:"enableHttp2,omitempty" tf:"enable_http2,omitempty"`
+	Http2Enabled *bool `json:"http2Enabled,omitempty" tf:"http2_enabled,omitempty"`
 }
 
 type ProtocolsParameters struct {
 
-	// Should HTTP/2 be supported by the API Management Service? Defaults to false.
 	// +kubebuilder:validation:Optional
 	EnableHttp2 *bool `json:"enableHttp2,omitempty" tf:"enable_http2,omitempty"`
+
+	// Should HTTP/2 be supported by the API Management Service? Defaults to false.
+	// +kubebuilder:validation:Optional
+	Http2Enabled *bool `json:"http2Enabled,omitempty" tf:"http2_enabled,omitempty"`
 }
 
 type ProxyInitParameters struct {
@@ -749,7 +735,10 @@ type ProxyObservation struct {
 	// The Hostname to use for the Management API.
 	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
 
-	// The ID of the Key Vault Secret containing the SSL Certificate, which must be should be of the type application/x-pkcs12.
+	// The ID of the Key Vault Secret containing the SSL Certificate, which must be of the type application/x-pkcs12.
+	KeyVaultCertificateID *string `json:"keyVaultCertificateId,omitempty" tf:"key_vault_certificate_id,omitempty"`
+
+	// The ID of the API Management Service.
 	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
 
 	// Should Client Certificate Negotiation be enabled for this Hostname? Defaults to false.
@@ -785,7 +774,10 @@ type ScmObservation struct {
 	// The Hostname to use for the Management API.
 	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
 
-	// The ID of the Key Vault Secret containing the SSL Certificate, which must be should be of the type application/x-pkcs12.
+	// The ID of the Key Vault Secret containing the SSL Certificate, which must be of the type application/x-pkcs12.
+	KeyVaultCertificateID *string `json:"keyVaultCertificateId,omitempty" tf:"key_vault_certificate_id,omitempty"`
+
+	// The ID of the API Management Service.
 	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
 
 	// Should Client Certificate Negotiation be enabled for this Hostname? Defaults to false.
@@ -807,22 +799,34 @@ type ScmParameters struct {
 type SecurityInitParameters struct {
 
 	// Should SSL 3.0 be enabled on the backend of the gateway? Defaults to false.
-	EnableBackendSsl30 *bool `json:"enableBackendSsl30,omitempty" tf:"enable_backend_ssl30,omitempty"`
+	BackendSsl30Enabled *bool `json:"backendSsl30Enabled,omitempty" tf:"backend_ssl30_enabled,omitempty"`
 
 	// Should TLS 1.0 be enabled on the backend of the gateway? Defaults to false.
-	EnableBackendTls10 *bool `json:"enableBackendTls10,omitempty" tf:"enable_backend_tls10,omitempty"`
+	BackendTls10Enabled *bool `json:"backendTls10Enabled,omitempty" tf:"backend_tls10_enabled,omitempty"`
 
 	// Should TLS 1.1 be enabled on the backend of the gateway? Defaults to false.
+	BackendTls11Enabled *bool `json:"backendTls11Enabled,omitempty" tf:"backend_tls11_enabled,omitempty"`
+
+	EnableBackendSsl30 *bool `json:"enableBackendSsl30,omitempty" tf:"enable_backend_ssl30,omitempty"`
+
+	EnableBackendTls10 *bool `json:"enableBackendTls10,omitempty" tf:"enable_backend_tls10,omitempty"`
+
 	EnableBackendTls11 *bool `json:"enableBackendTls11,omitempty" tf:"enable_backend_tls11,omitempty"`
 
-	// Should SSL 3.0 be enabled on the frontend of the gateway? Defaults to false.
 	EnableFrontendSsl30 *bool `json:"enableFrontendSsl30,omitempty" tf:"enable_frontend_ssl30,omitempty"`
 
-	// Should TLS 1.0 be enabled on the frontend of the gateway? Defaults to false.
 	EnableFrontendTls10 *bool `json:"enableFrontendTls10,omitempty" tf:"enable_frontend_tls10,omitempty"`
 
-	// Should TLS 1.1 be enabled on the frontend of the gateway? Defaults to false.
 	EnableFrontendTls11 *bool `json:"enableFrontendTls11,omitempty" tf:"enable_frontend_tls11,omitempty"`
+
+	// Should SSL 3.0 be enabled on the frontend of the gateway? Defaults to false.
+	FrontendSsl30Enabled *bool `json:"frontendSsl30Enabled,omitempty" tf:"frontend_ssl30_enabled,omitempty"`
+
+	// Should TLS 1.0 be enabled on the frontend of the gateway? Defaults to false.
+	FrontendTls10Enabled *bool `json:"frontendTls10Enabled,omitempty" tf:"frontend_tls10_enabled,omitempty"`
+
+	// Should TLS 1.1 be enabled on the frontend of the gateway? Defaults to false.
+	FrontendTls11Enabled *bool `json:"frontendTls11Enabled,omitempty" tf:"frontend_tls11_enabled,omitempty"`
 
 	// Should the TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA cipher be enabled? Defaults to false.
 	TLSEcdheEcdsaWithAes128CbcShaCiphersEnabled *bool `json:"tlsEcdheEcdsaWithAes128CbcShaCiphersEnabled,omitempty" tf:"tls_ecdhe_ecdsa_with_aes128_cbc_sha_ciphers_enabled,omitempty"`
@@ -861,22 +865,34 @@ type SecurityInitParameters struct {
 type SecurityObservation struct {
 
 	// Should SSL 3.0 be enabled on the backend of the gateway? Defaults to false.
-	EnableBackendSsl30 *bool `json:"enableBackendSsl30,omitempty" tf:"enable_backend_ssl30,omitempty"`
+	BackendSsl30Enabled *bool `json:"backendSsl30Enabled,omitempty" tf:"backend_ssl30_enabled,omitempty"`
 
 	// Should TLS 1.0 be enabled on the backend of the gateway? Defaults to false.
-	EnableBackendTls10 *bool `json:"enableBackendTls10,omitempty" tf:"enable_backend_tls10,omitempty"`
+	BackendTls10Enabled *bool `json:"backendTls10Enabled,omitempty" tf:"backend_tls10_enabled,omitempty"`
 
 	// Should TLS 1.1 be enabled on the backend of the gateway? Defaults to false.
+	BackendTls11Enabled *bool `json:"backendTls11Enabled,omitempty" tf:"backend_tls11_enabled,omitempty"`
+
+	EnableBackendSsl30 *bool `json:"enableBackendSsl30,omitempty" tf:"enable_backend_ssl30,omitempty"`
+
+	EnableBackendTls10 *bool `json:"enableBackendTls10,omitempty" tf:"enable_backend_tls10,omitempty"`
+
 	EnableBackendTls11 *bool `json:"enableBackendTls11,omitempty" tf:"enable_backend_tls11,omitempty"`
 
-	// Should SSL 3.0 be enabled on the frontend of the gateway? Defaults to false.
 	EnableFrontendSsl30 *bool `json:"enableFrontendSsl30,omitempty" tf:"enable_frontend_ssl30,omitempty"`
 
-	// Should TLS 1.0 be enabled on the frontend of the gateway? Defaults to false.
 	EnableFrontendTls10 *bool `json:"enableFrontendTls10,omitempty" tf:"enable_frontend_tls10,omitempty"`
 
-	// Should TLS 1.1 be enabled on the frontend of the gateway? Defaults to false.
 	EnableFrontendTls11 *bool `json:"enableFrontendTls11,omitempty" tf:"enable_frontend_tls11,omitempty"`
+
+	// Should SSL 3.0 be enabled on the frontend of the gateway? Defaults to false.
+	FrontendSsl30Enabled *bool `json:"frontendSsl30Enabled,omitempty" tf:"frontend_ssl30_enabled,omitempty"`
+
+	// Should TLS 1.0 be enabled on the frontend of the gateway? Defaults to false.
+	FrontendTls10Enabled *bool `json:"frontendTls10Enabled,omitempty" tf:"frontend_tls10_enabled,omitempty"`
+
+	// Should TLS 1.1 be enabled on the frontend of the gateway? Defaults to false.
+	FrontendTls11Enabled *bool `json:"frontendTls11Enabled,omitempty" tf:"frontend_tls11_enabled,omitempty"`
 
 	// Should the TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA cipher be enabled? Defaults to false.
 	TLSEcdheEcdsaWithAes128CbcShaCiphersEnabled *bool `json:"tlsEcdheEcdsaWithAes128CbcShaCiphersEnabled,omitempty" tf:"tls_ecdhe_ecdsa_with_aes128_cbc_sha_ciphers_enabled,omitempty"`
@@ -916,27 +932,45 @@ type SecurityParameters struct {
 
 	// Should SSL 3.0 be enabled on the backend of the gateway? Defaults to false.
 	// +kubebuilder:validation:Optional
-	EnableBackendSsl30 *bool `json:"enableBackendSsl30,omitempty" tf:"enable_backend_ssl30,omitempty"`
+	BackendSsl30Enabled *bool `json:"backendSsl30Enabled,omitempty" tf:"backend_ssl30_enabled,omitempty"`
 
 	// Should TLS 1.0 be enabled on the backend of the gateway? Defaults to false.
 	// +kubebuilder:validation:Optional
-	EnableBackendTls10 *bool `json:"enableBackendTls10,omitempty" tf:"enable_backend_tls10,omitempty"`
+	BackendTls10Enabled *bool `json:"backendTls10Enabled,omitempty" tf:"backend_tls10_enabled,omitempty"`
 
 	// Should TLS 1.1 be enabled on the backend of the gateway? Defaults to false.
 	// +kubebuilder:validation:Optional
+	BackendTls11Enabled *bool `json:"backendTls11Enabled,omitempty" tf:"backend_tls11_enabled,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	EnableBackendSsl30 *bool `json:"enableBackendSsl30,omitempty" tf:"enable_backend_ssl30,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	EnableBackendTls10 *bool `json:"enableBackendTls10,omitempty" tf:"enable_backend_tls10,omitempty"`
+
+	// +kubebuilder:validation:Optional
 	EnableBackendTls11 *bool `json:"enableBackendTls11,omitempty" tf:"enable_backend_tls11,omitempty"`
 
-	// Should SSL 3.0 be enabled on the frontend of the gateway? Defaults to false.
 	// +kubebuilder:validation:Optional
 	EnableFrontendSsl30 *bool `json:"enableFrontendSsl30,omitempty" tf:"enable_frontend_ssl30,omitempty"`
 
-	// Should TLS 1.0 be enabled on the frontend of the gateway? Defaults to false.
 	// +kubebuilder:validation:Optional
 	EnableFrontendTls10 *bool `json:"enableFrontendTls10,omitempty" tf:"enable_frontend_tls10,omitempty"`
 
-	// Should TLS 1.1 be enabled on the frontend of the gateway? Defaults to false.
 	// +kubebuilder:validation:Optional
 	EnableFrontendTls11 *bool `json:"enableFrontendTls11,omitempty" tf:"enable_frontend_tls11,omitempty"`
+
+	// Should SSL 3.0 be enabled on the frontend of the gateway? Defaults to false.
+	// +kubebuilder:validation:Optional
+	FrontendSsl30Enabled *bool `json:"frontendSsl30Enabled,omitempty" tf:"frontend_ssl30_enabled,omitempty"`
+
+	// Should TLS 1.0 be enabled on the frontend of the gateway? Defaults to false.
+	// +kubebuilder:validation:Optional
+	FrontendTls10Enabled *bool `json:"frontendTls10Enabled,omitempty" tf:"frontend_tls10_enabled,omitempty"`
+
+	// Should TLS 1.1 be enabled on the frontend of the gateway? Defaults to false.
+	// +kubebuilder:validation:Optional
+	FrontendTls11Enabled *bool `json:"frontendTls11Enabled,omitempty" tf:"frontend_tls11_enabled,omitempty"`
 
 	// Should the TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA cipher be enabled? Defaults to false.
 	// +kubebuilder:validation:Optional

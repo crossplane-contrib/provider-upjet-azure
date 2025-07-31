@@ -15,7 +15,7 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    url: https://backend
+    url: https://backend.com/api
 
 ---
 

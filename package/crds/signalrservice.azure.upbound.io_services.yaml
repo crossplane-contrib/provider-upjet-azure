@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.14.0
+    controller-gen.kubebuilder.io/version: v0.16.5
   name: services.signalrservice.azure.upbound.io
 spec:
   group: signalrservice.azure.upbound.io
@@ -1009,8 +1009,6 @@ spec:
                         type: boolean
                     type: object
                   liveTraceEnabled:
-                    description: Specifies if Live Trace is enabled or not. Defaults
-                      to false.
                     type: boolean
                   localAuthEnabled:
                     description: Whether to enable local auth? Defaults to true.
@@ -1250,8 +1248,6 @@ spec:
                         type: boolean
                     type: object
                   liveTraceEnabled:
-                    description: Specifies if Live Trace is enabled or not. Defaults
-                      to false.
                     type: boolean
                   localAuthEnabled:
                     description: Whether to enable local auth? Defaults to true.
@@ -1593,8 +1589,6 @@ spec:
                         type: boolean
                     type: object
                   liveTraceEnabled:
-                    description: Specifies if Live Trace is enabled or not. Defaults
-                      to false.
                     type: boolean
                   localAuthEnabled:
                     description: Whether to enable local auth? Defaults to true.

@@ -8,7 +8,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    retentionDuration: P30D
+    operationalDefaultRetentionDuration: P30D
     vaultIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example

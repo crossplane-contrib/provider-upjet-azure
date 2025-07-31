@@ -131,6 +131,24 @@ type VPNGatewayBGPSettingsParameters struct {
 	PeerWeight *float64 `json:"peerWeight" tf:"peer_weight,omitempty"`
 }
 
+type VPNGatewayIPConfigurationInitParameters struct {
+}
+
+type VPNGatewayIPConfigurationObservation struct {
+
+	// The identifier of the IP configuration for the VPN Gateway.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The private IP address of this IP configuration.
+	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
+
+	// The public IP address of this IP configuration.
+	PublicIPAddress *string `json:"publicIpAddress,omitempty" tf:"public_ip_address,omitempty"`
+}
+
+type VPNGatewayIPConfigurationParameters struct {
+}
+
 type VPNGatewayInitParameters struct {
 
 	// Is BGP route translation for NAT on this VPN Gateway enabled? Defaults to false.
@@ -142,7 +160,7 @@ type VPNGatewayInitParameters struct {
 	// The Azure location where this VPN Gateway should be created. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// Azure routing preference lets you to choose how your traffic routes between Azure and the internet. You can choose to route traffic either via the Microsoft network (default value, Microsoft Network), or via the ISP network (public internet, set to Internet). More context of the configuration can be found in the Microsoft Docs to create a VPN Gateway. Changing this forces a new resource to be created.
+	// Azure routing preference lets you to choose how your traffic routes between Azure and the internet. You can choose to route traffic either via the Microsoft network (default value, Microsoft Network), or via the ISP network (public internet, set to Internet). More context of the configuration can be found in the Microsoft Docs to create a VPN Gateway. Defaults to Microsoft Network. Changing this forces a new resource to be created.
 	RoutingPreference *string `json:"routingPreference,omitempty" tf:"routing_preference,omitempty"`
 
 	// The Scale Unit for this VPN Gateway. Defaults to 1.
@@ -177,13 +195,16 @@ type VPNGatewayObservation struct {
 	// The ID of the VPN Gateway.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// An ip_configuration block as defined below.
+	IPConfiguration []VPNGatewayIPConfigurationObservation `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
+
 	// The Azure location where this VPN Gateway should be created. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The Name of the Resource Group in which this VPN Gateway should be created. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// Azure routing preference lets you to choose how your traffic routes between Azure and the internet. You can choose to route traffic either via the Microsoft network (default value, Microsoft Network), or via the ISP network (public internet, set to Internet). More context of the configuration can be found in the Microsoft Docs to create a VPN Gateway. Changing this forces a new resource to be created.
+	// Azure routing preference lets you to choose how your traffic routes between Azure and the internet. You can choose to route traffic either via the Microsoft network (default value, Microsoft Network), or via the ISP network (public internet, set to Internet). More context of the configuration can be found in the Microsoft Docs to create a VPN Gateway. Defaults to Microsoft Network. Changing this forces a new resource to be created.
 	RoutingPreference *string `json:"routingPreference,omitempty" tf:"routing_preference,omitempty"`
 
 	// The Scale Unit for this VPN Gateway. Defaults to 1.
@@ -224,7 +245,7 @@ type VPNGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// Azure routing preference lets you to choose how your traffic routes between Azure and the internet. You can choose to route traffic either via the Microsoft network (default value, Microsoft Network), or via the ISP network (public internet, set to Internet). More context of the configuration can be found in the Microsoft Docs to create a VPN Gateway. Changing this forces a new resource to be created.
+	// Azure routing preference lets you to choose how your traffic routes between Azure and the internet. You can choose to route traffic either via the Microsoft network (default value, Microsoft Network), or via the ISP network (public internet, set to Internet). More context of the configuration can be found in the Microsoft Docs to create a VPN Gateway. Defaults to Microsoft Network. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	RoutingPreference *string `json:"routingPreference,omitempty" tf:"routing_preference,omitempty"`
 

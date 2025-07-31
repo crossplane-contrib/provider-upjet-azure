@@ -8,7 +8,6 @@ metadata:
   name: example
 spec:
   forProvider:
-    disableBgpRoutePropagation: false
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:

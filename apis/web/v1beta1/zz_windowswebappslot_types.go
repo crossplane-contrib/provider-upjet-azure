@@ -79,9 +79,6 @@ type SiteConfigAutoHealSettingTriggerSlowRequestInitParameters struct {
 	// The time interval in the form hh:mm:ss.
 	Interval *string `json:"interval,omitempty" tf:"interval,omitempty"`
 
-	// The path to which this rule status code applies.
-	Path *string `json:"path,omitempty" tf:"path,omitempty"`
-
 	// The threshold of time passed to qualify as a Slow Request in hh:mm:ss.
 	TimeTaken *string `json:"timeTaken,omitempty" tf:"time_taken,omitempty"`
 }
@@ -93,9 +90,6 @@ type SiteConfigAutoHealSettingTriggerSlowRequestObservation struct {
 
 	// The time interval in the form hh:mm:ss.
 	Interval *string `json:"interval,omitempty" tf:"interval,omitempty"`
-
-	// The path to which this rule status code applies.
-	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
 	// The threshold of time passed to qualify as a Slow Request in hh:mm:ss.
 	TimeTaken *string `json:"timeTaken,omitempty" tf:"time_taken,omitempty"`
@@ -110,10 +104,6 @@ type SiteConfigAutoHealSettingTriggerSlowRequestParameters struct {
 	// The time interval in the form hh:mm:ss.
 	// +kubebuilder:validation:Optional
 	Interval *string `json:"interval" tf:"interval,omitempty"`
-
-	// The path to which this rule status code applies.
-	// +kubebuilder:validation:Optional
-	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
 	// The threshold of time passed to qualify as a Slow Request in hh:mm:ss.
 	// +kubebuilder:validation:Optional
@@ -916,7 +906,7 @@ type WindowsWebAppSlotAuthSettingsV2ActiveDirectoryV2InitParameters struct {
 	// +mapType=granular
 	LoginParameters map[string]*string `json:"loginParameters,omitempty" tf:"login_parameters,omitempty"`
 
-	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/v2.0/{tenant-guid}/
+	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/{tenant-guid}/v2.0/
 	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. `https://login.microsoftonline.com/v2.0/{tenant-guid}/`.
 	TenantAuthEndpoint *string `json:"tenantAuthEndpoint,omitempty" tf:"tenant_auth_endpoint,omitempty"`
 
@@ -968,7 +958,7 @@ type WindowsWebAppSlotAuthSettingsV2ActiveDirectoryV2Observation struct {
 	// +mapType=granular
 	LoginParameters map[string]*string `json:"loginParameters,omitempty" tf:"login_parameters,omitempty"`
 
-	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/v2.0/{tenant-guid}/
+	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/{tenant-guid}/v2.0/
 	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. `https://login.microsoftonline.com/v2.0/{tenant-guid}/`.
 	TenantAuthEndpoint *string `json:"tenantAuthEndpoint,omitempty" tf:"tenant_auth_endpoint,omitempty"`
 
@@ -1030,7 +1020,7 @@ type WindowsWebAppSlotAuthSettingsV2ActiveDirectoryV2Parameters struct {
 	// +mapType=granular
 	LoginParameters map[string]*string `json:"loginParameters,omitempty" tf:"login_parameters,omitempty"`
 
-	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/v2.0/{tenant-guid}/
+	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/{tenant-guid}/v2.0/
 	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. `https://login.microsoftonline.com/v2.0/{tenant-guid}/`.
 	// +kubebuilder:validation:Optional
 	TenantAuthEndpoint *string `json:"tenantAuthEndpoint" tf:"tenant_auth_endpoint,omitempty"`
@@ -1894,6 +1884,10 @@ type WindowsWebAppSlotBackupInitParameters struct {
 
 	// A schedule block as defined below.
 	Schedule []WindowsWebAppSlotBackupScheduleInitParameters `json:"schedule,omitempty" tf:"schedule,omitempty"`
+
+	// The SAS URL to the container.
+	// The SAS URL to the container.
+	StorageAccountURLSecretRef v1.SecretKeySelector `json:"storageAccountUrlSecretRef" tf:"-"`
 }
 
 type WindowsWebAppSlotBackupObservation struct {
@@ -1928,7 +1922,7 @@ type WindowsWebAppSlotBackupParameters struct {
 
 	// The SAS URL to the container.
 	// The SAS URL to the container.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	StorageAccountURLSecretRef v1.SecretKeySelector `json:"storageAccountUrlSecretRef" tf:"-"`
 }
 
@@ -2018,6 +2012,10 @@ type WindowsWebAppSlotConnectionStringInitParameters struct {
 	// Type of database. Possible values include: APIHub, Custom, DocDb, EventHub, MySQL, NotificationHub, PostgreSQL, RedisCache, ServiceBus, SQLAzure, and SQLServer.
 	// Type of database. Possible values include: `MySQL`, `SQLServer`, `SQLAzure`, `Custom`, `NotificationHub`, `ServiceBus`, `EventHub`, `APIHub`, `DocDb`, `RedisCache`, and `PostgreSQL`.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// The connection string value.
+	// The connection string value.
+	ValueSecretRef v1.SecretKeySelector `json:"valueSecretRef" tf:"-"`
 }
 
 type WindowsWebAppSlotConnectionStringObservation struct {
@@ -2045,7 +2043,7 @@ type WindowsWebAppSlotConnectionStringParameters struct {
 
 	// The connection string value.
 	// The connection string value.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	ValueSecretRef v1.SecretKeySelector `json:"valueSecretRef" tf:"-"`
 }
 
@@ -2152,6 +2150,9 @@ type WindowsWebAppSlotInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Whether backup and restore operations over the linked virtual network are enabled. Defaults to false.
+	VirtualNetworkBackupRestoreEnabled *bool `json:"virtualNetworkBackupRestoreEnabled,omitempty" tf:"virtual_network_backup_restore_enabled,omitempty"`
+
 	// The subnet id which will be used by this Web App Slot for regional virtual network integration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
@@ -2245,6 +2246,9 @@ type WindowsWebAppSlotLogsHTTPLogsAzureBlobStorageInitParameters struct {
 
 	// The retention period in days. A values of 0 means no retention.
 	RetentionInDays *float64 `json:"retentionInDays,omitempty" tf:"retention_in_days,omitempty"`
+
+	// SAS url to an Azure blob container with read/write/list/delete permissions.
+	SASURLSecretRef v1.SecretKeySelector `json:"sasurlSecretRef" tf:"-"`
 }
 
 type WindowsWebAppSlotLogsHTTPLogsAzureBlobStorageObservation struct {
@@ -2260,7 +2264,7 @@ type WindowsWebAppSlotLogsHTTPLogsAzureBlobStorageParameters struct {
 	RetentionInDays *float64 `json:"retentionInDays,omitempty" tf:"retention_in_days,omitempty"`
 
 	// SAS url to an Azure blob container with read/write/list/delete permissions.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	SASURLSecretRef v1.SecretKeySelector `json:"sasurlSecretRef" tf:"-"`
 }
 
@@ -2463,6 +2467,9 @@ type WindowsWebAppSlotObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Whether backup and restore operations over the linked virtual network are enabled. Defaults to false.
+	VirtualNetworkBackupRestoreEnabled *bool `json:"virtualNetworkBackupRestoreEnabled,omitempty" tf:"virtual_network_backup_restore_enabled,omitempty"`
+
 	// The subnet id which will be used by this Web App Slot for regional virtual network integration.
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
@@ -2573,6 +2580,10 @@ type WindowsWebAppSlotParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Whether backup and restore operations over the linked virtual network are enabled. Defaults to false.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkBackupRestoreEnabled *bool `json:"virtualNetworkBackupRestoreEnabled,omitempty" tf:"virtual_network_backup_restore_enabled,omitempty"`
+
 	// The subnet id which will be used by this Web App Slot for regional virtual network integration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
@@ -2602,14 +2613,6 @@ type WindowsWebAppSlotSiteConfigApplicationStackInitParameters struct {
 	// The Application Stack for the Windows Web App. Possible values include dotnet, dotnetcore, node, python, php, and java.
 	CurrentStack *string `json:"currentStack,omitempty" tf:"current_stack,omitempty"`
 
-	// The name of the container to be used. This value is required with docker_container_tag.
-	DockerContainerName *string `json:"dockerContainerName,omitempty" tf:"docker_container_name,omitempty"`
-
-	DockerContainerRegistry *string `json:"dockerContainerRegistry,omitempty" tf:"docker_container_registry,omitempty"`
-
-	// The tag of the container to be used. This value is required with docker_container_name.
-	DockerContainerTag *string `json:"dockerContainerTag,omitempty" tf:"docker_container_tag,omitempty"`
-
 	// The docker image, including tag, to be used. e.g. azure-app-service/windows/parkingpage:latest.
 	DockerImageName *string `json:"dockerImageName,omitempty" tf:"docker_image_name,omitempty"`
 
@@ -2626,7 +2629,7 @@ type WindowsWebAppSlotSiteConfigApplicationStackInitParameters struct {
 	// The version of DotNetCore to use.
 	DotnetCoreVersion *string `json:"dotnetCoreVersion,omitempty" tf:"dotnet_core_version,omitempty"`
 
-	// The version of .NET to use when current_stack is set to dotnet. Possible values include v2.0,v3.0, v4.0, v5.0, v6.0, v7.0 and v8.0.
+	// The version of .NET to use when current_stack is set to dotnet. Possible values include v2.0,v3.0, v4.0, v5.0, v6.0, v7.0, v8.0 and v9.0.
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
 	JavaContainer *string `json:"javaContainer,omitempty" tf:"java_container,omitempty"`
@@ -2640,7 +2643,7 @@ type WindowsWebAppSlotSiteConfigApplicationStackInitParameters struct {
 	// The version of Java to use when current_stack is set to java. Possible values include 1.7, 1.8, 11 and 17. Required with java_container and java_container_version.
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
-	// The version of node to use when current_stack is set to node. Possible values include ~12, ~14, ~16, and ~18.
+	// The version of node to use when current_stack is set to node. Possible values include ~12, ~14, ~16, ~18, ~20 and ~22.
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
 	// The version of PHP to use when current_stack is set to php. Possible values are 7.1, 7.4 and Off.
@@ -2648,8 +2651,6 @@ type WindowsWebAppSlotSiteConfigApplicationStackInitParameters struct {
 
 	// The app is a Python app. Defaults to false.
 	Python *bool `json:"python,omitempty" tf:"python,omitempty"`
-
-	PythonVersion *string `json:"pythonVersion,omitempty" tf:"python_version,omitempty"`
 
 	// The version of Tomcat the Java App should use.
 	TomcatVersion *string `json:"tomcatVersion,omitempty" tf:"tomcat_version,omitempty"`
@@ -2659,14 +2660,6 @@ type WindowsWebAppSlotSiteConfigApplicationStackObservation struct {
 
 	// The Application Stack for the Windows Web App. Possible values include dotnet, dotnetcore, node, python, php, and java.
 	CurrentStack *string `json:"currentStack,omitempty" tf:"current_stack,omitempty"`
-
-	// The name of the container to be used. This value is required with docker_container_tag.
-	DockerContainerName *string `json:"dockerContainerName,omitempty" tf:"docker_container_name,omitempty"`
-
-	DockerContainerRegistry *string `json:"dockerContainerRegistry,omitempty" tf:"docker_container_registry,omitempty"`
-
-	// The tag of the container to be used. This value is required with docker_container_name.
-	DockerContainerTag *string `json:"dockerContainerTag,omitempty" tf:"docker_container_tag,omitempty"`
 
 	// The docker image, including tag, to be used. e.g. azure-app-service/windows/parkingpage:latest.
 	DockerImageName *string `json:"dockerImageName,omitempty" tf:"docker_image_name,omitempty"`
@@ -2681,7 +2674,7 @@ type WindowsWebAppSlotSiteConfigApplicationStackObservation struct {
 	// The version of DotNetCore to use.
 	DotnetCoreVersion *string `json:"dotnetCoreVersion,omitempty" tf:"dotnet_core_version,omitempty"`
 
-	// The version of .NET to use when current_stack is set to dotnet. Possible values include v2.0,v3.0, v4.0, v5.0, v6.0, v7.0 and v8.0.
+	// The version of .NET to use when current_stack is set to dotnet. Possible values include v2.0,v3.0, v4.0, v5.0, v6.0, v7.0, v8.0 and v9.0.
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
 	JavaContainer *string `json:"javaContainer,omitempty" tf:"java_container,omitempty"`
@@ -2695,7 +2688,7 @@ type WindowsWebAppSlotSiteConfigApplicationStackObservation struct {
 	// The version of Java to use when current_stack is set to java. Possible values include 1.7, 1.8, 11 and 17. Required with java_container and java_container_version.
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
-	// The version of node to use when current_stack is set to node. Possible values include ~12, ~14, ~16, and ~18.
+	// The version of node to use when current_stack is set to node. Possible values include ~12, ~14, ~16, ~18, ~20 and ~22.
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
 	// The version of PHP to use when current_stack is set to php. Possible values are 7.1, 7.4 and Off.
@@ -2703,8 +2696,6 @@ type WindowsWebAppSlotSiteConfigApplicationStackObservation struct {
 
 	// The app is a Python app. Defaults to false.
 	Python *bool `json:"python,omitempty" tf:"python,omitempty"`
-
-	PythonVersion *string `json:"pythonVersion,omitempty" tf:"python_version,omitempty"`
 
 	// The version of Tomcat the Java App should use.
 	TomcatVersion *string `json:"tomcatVersion,omitempty" tf:"tomcat_version,omitempty"`
@@ -2716,17 +2707,6 @@ type WindowsWebAppSlotSiteConfigApplicationStackParameters struct {
 	// +kubebuilder:validation:Optional
 	CurrentStack *string `json:"currentStack,omitempty" tf:"current_stack,omitempty"`
 
-	// The name of the container to be used. This value is required with docker_container_tag.
-	// +kubebuilder:validation:Optional
-	DockerContainerName *string `json:"dockerContainerName,omitempty" tf:"docker_container_name,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	DockerContainerRegistry *string `json:"dockerContainerRegistry,omitempty" tf:"docker_container_registry,omitempty"`
-
-	// The tag of the container to be used. This value is required with docker_container_name.
-	// +kubebuilder:validation:Optional
-	DockerContainerTag *string `json:"dockerContainerTag,omitempty" tf:"docker_container_tag,omitempty"`
-
 	// The docker image, including tag, to be used. e.g. azure-app-service/windows/parkingpage:latest.
 	// +kubebuilder:validation:Optional
 	DockerImageName *string `json:"dockerImageName,omitempty" tf:"docker_image_name,omitempty"`
@@ -2748,7 +2728,7 @@ type WindowsWebAppSlotSiteConfigApplicationStackParameters struct {
 	// +kubebuilder:validation:Optional
 	DotnetCoreVersion *string `json:"dotnetCoreVersion,omitempty" tf:"dotnet_core_version,omitempty"`
 
-	// The version of .NET to use when current_stack is set to dotnet. Possible values include v2.0,v3.0, v4.0, v5.0, v6.0, v7.0 and v8.0.
+	// The version of .NET to use when current_stack is set to dotnet. Possible values include v2.0,v3.0, v4.0, v5.0, v6.0, v7.0, v8.0 and v9.0.
 	// +kubebuilder:validation:Optional
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
@@ -2767,7 +2747,7 @@ type WindowsWebAppSlotSiteConfigApplicationStackParameters struct {
 	// +kubebuilder:validation:Optional
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
-	// The version of node to use when current_stack is set to node. Possible values include ~12, ~14, ~16, and ~18.
+	// The version of node to use when current_stack is set to node. Possible values include ~12, ~14, ~16, ~18, ~20 and ~22.
 	// +kubebuilder:validation:Optional
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
@@ -2778,9 +2758,6 @@ type WindowsWebAppSlotSiteConfigApplicationStackParameters struct {
 	// The app is a Python app. Defaults to false.
 	// +kubebuilder:validation:Optional
 	Python *bool `json:"python,omitempty" tf:"python,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	PythonVersion *string `json:"pythonVersion,omitempty" tf:"python_version,omitempty"`
 
 	// The version of Tomcat the Java App should use.
 	// +kubebuilder:validation:Optional
@@ -3148,9 +3125,6 @@ type WindowsWebAppSlotSiteConfigInitParameters struct {
 	// A application_stack block as defined above.
 	ApplicationStack []WindowsWebAppSlotSiteConfigApplicationStackInitParameters `json:"applicationStack,omitempty" tf:"application_stack,omitempty"`
 
-	// Should Auto heal rules be enabled. Required with auto_heal_setting.
-	AutoHealEnabled *bool `json:"autoHealEnabled,omitempty" tf:"auto_heal_enabled,omitempty"`
-
 	// A auto_heal_setting block as defined above. Required with auto_heal.
 	AutoHealSetting []WindowsWebAppSlotSiteConfigAutoHealSettingInitParameters `json:"autoHealSetting,omitempty" tf:"auto_heal_setting,omitempty"`
 
@@ -3176,7 +3150,7 @@ type WindowsWebAppSlotSiteConfigInitParameters struct {
 	HandlerMapping []SiteConfigHandlerMappingInitParameters `json:"handlerMapping,omitempty" tf:"handler_mapping,omitempty"`
 
 	// The amount of time in minutes that a node can be unhealthy before being removed from the load balancer. Possible values are between 2 and 10. Only valid in conjunction with health_check_path.
-	// The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Defaults to `10`. Only valid in conjunction with `health_check_path`
+	// The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Only valid in conjunction with `health_check_path`
 	HealthCheckEvictionTimeInMin *float64 `json:"healthCheckEvictionTimeInMin,omitempty" tf:"health_check_eviction_time_in_min,omitempty"`
 
 	// The path to the Health Check.
@@ -3206,7 +3180,7 @@ type WindowsWebAppSlotSiteConfigInitParameters struct {
 	// Should Remote Debugging be enabled. Defaults to false.
 	RemoteDebuggingEnabled *bool `json:"remoteDebuggingEnabled,omitempty" tf:"remote_debugging_enabled,omitempty"`
 
-	// The Remote Debugging Version. Possible values include VS2017 and VS2019
+	// The Remote Debugging Version. Currently only VS2022 is supported.
 	RemoteDebuggingVersion *string `json:"remoteDebuggingVersion,omitempty" tf:"remote_debugging_version,omitempty"`
 
 	// One or more scm_ip_restriction blocks as defined above.
@@ -3221,7 +3195,7 @@ type WindowsWebAppSlotSiteConfigInitParameters struct {
 	// Should the Windows Web App Slot ip_restriction configuration be used for the SCM also.
 	ScmUseMainIPRestriction *bool `json:"scmUseMainIpRestriction,omitempty" tf:"scm_use_main_ip_restriction,omitempty"`
 
-	// Should the Windows Web App Slotuse a 32-bit worker. Defaults to true.
+	// Should the Windows Web App Slot use a 32-bit worker. The default value varies from different service plans.
 	Use32BitWorker *bool `json:"use32BitWorker,omitempty" tf:"use_32_bit_worker,omitempty"`
 
 	// One or more virtual_application blocks as defined below.
@@ -3255,9 +3229,6 @@ type WindowsWebAppSlotSiteConfigObservation struct {
 	// A application_stack block as defined above.
 	ApplicationStack []WindowsWebAppSlotSiteConfigApplicationStackObservation `json:"applicationStack,omitempty" tf:"application_stack,omitempty"`
 
-	// Should Auto heal rules be enabled. Required with auto_heal_setting.
-	AutoHealEnabled *bool `json:"autoHealEnabled,omitempty" tf:"auto_heal_enabled,omitempty"`
-
 	// A auto_heal_setting block as defined above. Required with auto_heal.
 	AutoHealSetting []WindowsWebAppSlotSiteConfigAutoHealSettingObservation `json:"autoHealSetting,omitempty" tf:"auto_heal_setting,omitempty"`
 
@@ -3286,7 +3257,7 @@ type WindowsWebAppSlotSiteConfigObservation struct {
 	HandlerMapping []SiteConfigHandlerMappingObservation `json:"handlerMapping,omitempty" tf:"handler_mapping,omitempty"`
 
 	// The amount of time in minutes that a node can be unhealthy before being removed from the load balancer. Possible values are between 2 and 10. Only valid in conjunction with health_check_path.
-	// The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Defaults to `10`. Only valid in conjunction with `health_check_path`
+	// The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Only valid in conjunction with `health_check_path`
 	HealthCheckEvictionTimeInMin *float64 `json:"healthCheckEvictionTimeInMin,omitempty" tf:"health_check_eviction_time_in_min,omitempty"`
 
 	// The path to the Health Check.
@@ -3316,7 +3287,7 @@ type WindowsWebAppSlotSiteConfigObservation struct {
 	// Should Remote Debugging be enabled. Defaults to false.
 	RemoteDebuggingEnabled *bool `json:"remoteDebuggingEnabled,omitempty" tf:"remote_debugging_enabled,omitempty"`
 
-	// The Remote Debugging Version. Possible values include VS2017 and VS2019
+	// The Remote Debugging Version. Currently only VS2022 is supported.
 	RemoteDebuggingVersion *string `json:"remoteDebuggingVersion,omitempty" tf:"remote_debugging_version,omitempty"`
 
 	// One or more scm_ip_restriction blocks as defined above.
@@ -3333,7 +3304,7 @@ type WindowsWebAppSlotSiteConfigObservation struct {
 	// Should the Windows Web App Slot ip_restriction configuration be used for the SCM also.
 	ScmUseMainIPRestriction *bool `json:"scmUseMainIpRestriction,omitempty" tf:"scm_use_main_ip_restriction,omitempty"`
 
-	// Should the Windows Web App Slotuse a 32-bit worker. Defaults to true.
+	// Should the Windows Web App Slot use a 32-bit worker. The default value varies from different service plans.
 	Use32BitWorker *bool `json:"use32BitWorker,omitempty" tf:"use_32_bit_worker,omitempty"`
 
 	// One or more virtual_application blocks as defined below.
@@ -3374,10 +3345,6 @@ type WindowsWebAppSlotSiteConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	ApplicationStack []WindowsWebAppSlotSiteConfigApplicationStackParameters `json:"applicationStack,omitempty" tf:"application_stack,omitempty"`
 
-	// Should Auto heal rules be enabled. Required with auto_heal_setting.
-	// +kubebuilder:validation:Optional
-	AutoHealEnabled *bool `json:"autoHealEnabled,omitempty" tf:"auto_heal_enabled,omitempty"`
-
 	// A auto_heal_setting block as defined above. Required with auto_heal.
 	// +kubebuilder:validation:Optional
 	AutoHealSetting []WindowsWebAppSlotSiteConfigAutoHealSettingParameters `json:"autoHealSetting,omitempty" tf:"auto_heal_setting,omitempty"`
@@ -3411,7 +3378,7 @@ type WindowsWebAppSlotSiteConfigParameters struct {
 	HandlerMapping []SiteConfigHandlerMappingParameters `json:"handlerMapping,omitempty" tf:"handler_mapping,omitempty"`
 
 	// The amount of time in minutes that a node can be unhealthy before being removed from the load balancer. Possible values are between 2 and 10. Only valid in conjunction with health_check_path.
-	// The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Defaults to `10`. Only valid in conjunction with `health_check_path`
+	// The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Only valid in conjunction with `health_check_path`
 	// +kubebuilder:validation:Optional
 	HealthCheckEvictionTimeInMin *float64 `json:"healthCheckEvictionTimeInMin,omitempty" tf:"health_check_eviction_time_in_min,omitempty"`
 
@@ -3451,7 +3418,7 @@ type WindowsWebAppSlotSiteConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	RemoteDebuggingEnabled *bool `json:"remoteDebuggingEnabled,omitempty" tf:"remote_debugging_enabled,omitempty"`
 
-	// The Remote Debugging Version. Possible values include VS2017 and VS2019
+	// The Remote Debugging Version. Currently only VS2022 is supported.
 	// +kubebuilder:validation:Optional
 	RemoteDebuggingVersion *string `json:"remoteDebuggingVersion,omitempty" tf:"remote_debugging_version,omitempty"`
 
@@ -3471,7 +3438,7 @@ type WindowsWebAppSlotSiteConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	ScmUseMainIPRestriction *bool `json:"scmUseMainIpRestriction,omitempty" tf:"scm_use_main_ip_restriction,omitempty"`
 
-	// Should the Windows Web App Slotuse a 32-bit worker. Defaults to true.
+	// Should the Windows Web App Slot use a 32-bit worker. The default value varies from different service plans.
 	// +kubebuilder:validation:Optional
 	Use32BitWorker *bool `json:"use32BitWorker,omitempty" tf:"use_32_bit_worker,omitempty"`
 
@@ -3689,6 +3656,9 @@ type WindowsWebAppSlotSiteCredentialParameters struct {
 
 type WindowsWebAppSlotStorageAccountInitParameters struct {
 
+	// The Access key for the storage account.
+	AccessKeySecretRef v1.SecretKeySelector `json:"accessKeySecretRef" tf:"-"`
+
 	// The Name of the Storage Account.
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
@@ -3726,7 +3696,7 @@ type WindowsWebAppSlotStorageAccountObservation struct {
 type WindowsWebAppSlotStorageAccountParameters struct {
 
 	// The Access key for the storage account.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	AccessKeySecretRef v1.SecretKeySelector `json:"accessKeySecretRef" tf:"-"`
 
 	// The Name of the Storage Account.

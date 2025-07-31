@@ -44,31 +44,31 @@ type ACLParameters struct {
 
 type AccessPolicyInitParameters struct {
 
-	// The time at which this Access Policy should be valid until, in ISO8601 format.
+	// The time at which this Access Policy should be valid untilWhen using storage_account_id this should be in RFC3339 format. If using the deprecated storage_account_name property, this uses the ISO8601 format.
 	Expiry *string `json:"expiry,omitempty" tf:"expiry,omitempty"`
 
 	// The permissions which should be associated with this Shared Identifier. Possible value is combination of r (read), w (write), d (delete), and l (list).
 	Permissions *string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
-	// The time at which this Access Policy should be valid from, in ISO8601 format.
+	// The time at which this Access Policy should be valid from. When using storage_account_id this should be in RFC3339 format. If using the deprecated storage_account_name property, this uses the ISO8601 format.
 	Start *string `json:"start,omitempty" tf:"start,omitempty"`
 }
 
 type AccessPolicyObservation struct {
 
-	// The time at which this Access Policy should be valid until, in ISO8601 format.
+	// The time at which this Access Policy should be valid untilWhen using storage_account_id this should be in RFC3339 format. If using the deprecated storage_account_name property, this uses the ISO8601 format.
 	Expiry *string `json:"expiry,omitempty" tf:"expiry,omitempty"`
 
 	// The permissions which should be associated with this Shared Identifier. Possible value is combination of r (read), w (write), d (delete), and l (list).
 	Permissions *string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
-	// The time at which this Access Policy should be valid from, in ISO8601 format.
+	// The time at which this Access Policy should be valid from. When using storage_account_id this should be in RFC3339 format. If using the deprecated storage_account_name property, this uses the ISO8601 format.
 	Start *string `json:"start,omitempty" tf:"start,omitempty"`
 }
 
 type AccessPolicyParameters struct {
 
-	// The time at which this Access Policy should be valid until, in ISO8601 format.
+	// The time at which this Access Policy should be valid untilWhen using storage_account_id this should be in RFC3339 format. If using the deprecated storage_account_name property, this uses the ISO8601 format.
 	// +kubebuilder:validation:Optional
 	Expiry *string `json:"expiry,omitempty" tf:"expiry,omitempty"`
 
@@ -76,7 +76,7 @@ type AccessPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	Permissions *string `json:"permissions" tf:"permissions,omitempty"`
 
-	// The time at which this Access Policy should be valid from, in ISO8601 format.
+	// The time at which this Access Policy should be valid from. When using storage_account_id this should be in RFC3339 format. If using the deprecated storage_account_name property, this uses the ISO8601 format.
 	// +kubebuilder:validation:Optional
 	Start *string `json:"start,omitempty" tf:"start,omitempty"`
 }
@@ -98,6 +98,19 @@ type ShareInitParameters struct {
 
 	// The maximum size of the share, in gigabytes.
 	Quota *float64 `json:"quota,omitempty" tf:"quota,omitempty"`
+
+	// Specifies the storage account in which to create the share. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta2.Account
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+
+	// Reference to a Account in storage to populate storageAccountId.
+	// +kubebuilder:validation:Optional
+	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+
+	// Selector for a Account in storage to populate storageAccountId.
+	// +kubebuilder:validation:Optional
+	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }
 
 type ShareObservation struct {
@@ -125,6 +138,9 @@ type ShareObservation struct {
 	ResourceManagerID *string `json:"resourceManagerId,omitempty" tf:"resource_manager_id,omitempty"`
 
 	// Specifies the storage account in which to create the share. Changing this forces a new resource to be created.
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+
+	// Specifies the storage account in which to create the share. Changing this forces a new resource to be created. This property is deprecated in favour of storage_account_id.
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 
 	// The URL of the File Share
@@ -156,16 +172,21 @@ type ShareParameters struct {
 
 	// Specifies the storage account in which to create the share. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta2.Account
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+
+	// Reference to a Account in storage to populate storageAccountId.
+	// +kubebuilder:validation:Optional
+	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+
+	// Selector for a Account in storage to populate storageAccountId.
+	// +kubebuilder:validation:Optional
+	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+
+	// Specifies the storage account in which to create the share. Changing this forces a new resource to be created. This property is deprecated in favour of storage_account_id.
 	// +kubebuilder:validation:Optional
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
-
-	// Reference to a Account in storage to populate storageAccountName.
-	// +kubebuilder:validation:Optional
-	StorageAccountNameRef *v1.Reference `json:"storageAccountNameRef,omitempty" tf:"-"`
-
-	// Selector for a Account in storage to populate storageAccountName.
-	// +kubebuilder:validation:Optional
-	StorageAccountNameSelector *v1.Selector `json:"storageAccountNameSelector,omitempty" tf:"-"`
 }
 
 // ShareSpec defines the desired state of Share

@@ -22,7 +22,6 @@ import (
 	"github.com/upbound/provider-azure/config/containerservice"
 	"github.com/upbound/provider-azure/config/cosmosdb"
 	"github.com/upbound/provider-azure/config/costmanagement"
-	"github.com/upbound/provider-azure/config/databricks"
 	"github.com/upbound/provider-azure/config/datafactory"
 	"github.com/upbound/provider-azure/config/dataprotection"
 	"github.com/upbound/provider-azure/config/datashare"
@@ -33,10 +32,7 @@ import (
 	"github.com/upbound/provider-azure/config/insights"
 	"github.com/upbound/provider-azure/config/keyvault"
 	"github.com/upbound/provider-azure/config/kusto"
-	"github.com/upbound/provider-azure/config/logic"
 	"github.com/upbound/provider-azure/config/management"
-	"github.com/upbound/provider-azure/config/mariadb"
-	"github.com/upbound/provider-azure/config/media"
 	"github.com/upbound/provider-azure/config/netapp"
 	"github.com/upbound/provider-azure/config/network"
 	"github.com/upbound/provider-azure/config/notificationhubs"
@@ -62,7 +58,6 @@ func init() {
 	ProviderConfiguration.AddConfig(alertsmanagement.Configure)
 	ProviderConfiguration.AddConfig(network.Configure)
 	ProviderConfiguration.AddConfig(management.Configure)
-	ProviderConfiguration.AddConfig(media.Configure)
 	ProviderConfiguration.AddConfig(cache.Configure)
 	ProviderConfiguration.AddConfig(resource.Configure)
 	ProviderConfiguration.AddConfig(resources.Configure)
@@ -78,7 +73,6 @@ func init() {
 	ProviderConfiguration.AddConfig(datafactory.Configure)
 	ProviderConfiguration.AddConfig(apimanagement.Configure)
 	ProviderConfiguration.AddConfig(healthcareapis.Configure)
-	ProviderConfiguration.AddConfig(logic.Configure)
 	ProviderConfiguration.AddConfig(security.Configure)
 	ProviderConfiguration.AddConfig(securityinsights.Configure)
 	ProviderConfiguration.AddConfig(base.Configure)
@@ -88,7 +82,6 @@ func init() {
 	ProviderConfiguration.AddConfig(storagesync.Configure)
 	ProviderConfiguration.AddConfig(keyvault.Configure)
 	ProviderConfiguration.AddConfig(eventhub.Configure)
-	ProviderConfiguration.AddConfig(mariadb.Configure)
 	ProviderConfiguration.AddConfig(compute.Configure)
 	ProviderConfiguration.AddConfig(containerregistry.Configure)
 	ProviderConfiguration.AddConfig(dbformysql.Configure)
@@ -107,5 +100,4 @@ func init() {
 	ProviderConfiguration.AddConfig(certificateregistration.Configure)
 	ProviderConfiguration.AddConfig(orbital.Configure)
 	ProviderConfiguration.AddConfig(appplatform.Configure)
-	ProviderConfiguration.AddConfig(databricks.Configure)
 }

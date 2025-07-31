@@ -149,7 +149,7 @@ type IPConfigurationPublicIPAddressParameters struct {
 
 type LinuxConfigurationAdminSSHKeyInitParameters struct {
 
-	// The Public Key which should be used for authentication, which needs to be at least 2048-bit and in ssh-rsa format.
+	// The Public Key which should be used for authentication, which needs to be in ssh-rsa format with at least 2048-bit or in ssh-ed25519 format.
 	PublicKey *string `json:"publicKey,omitempty" tf:"public_key,omitempty"`
 
 	// The Username for which this Public SSH Key should be configured.
@@ -158,7 +158,7 @@ type LinuxConfigurationAdminSSHKeyInitParameters struct {
 
 type LinuxConfigurationAdminSSHKeyObservation struct {
 
-	// The Public Key which should be used for authentication, which needs to be at least 2048-bit and in ssh-rsa format.
+	// The Public Key which should be used for authentication, which needs to be in ssh-rsa format with at least 2048-bit or in ssh-ed25519 format.
 	PublicKey *string `json:"publicKey,omitempty" tf:"public_key,omitempty"`
 
 	// The Username for which this Public SSH Key should be configured.
@@ -167,7 +167,7 @@ type LinuxConfigurationAdminSSHKeyObservation struct {
 
 type LinuxConfigurationAdminSSHKeyParameters struct {
 
-	// The Public Key which should be used for authentication, which needs to be at least 2048-bit and in ssh-rsa format.
+	// The Public Key which should be used for authentication, which needs to be in ssh-rsa format with at least 2048-bit or in ssh-ed25519 format.
 	// +kubebuilder:validation:Optional
 	PublicKey *string `json:"publicKey" tf:"public_key,omitempty"`
 
@@ -833,11 +833,17 @@ type OrchestratedVirtualMachineScaleSetInitParameters struct {
 	// The ID of the Proximity Placement Group which the Virtual Machine should be assigned to. Changing this forces a new resource to be created.
 	ProximityPlacementGroupID *string `json:"proximityPlacementGroupId,omitempty" tf:"proximity_placement_group_id,omitempty"`
 
+	// A rolling_upgrade_policy block as defined below. This is Required when upgrade_mode is set to Rolling and cannot be specified when upgrade_mode is set to Manual. Changing this forces a new resource to be created.
+	RollingUpgradePolicy *OrchestratedVirtualMachineScaleSetRollingUpgradePolicyInitParameters `json:"rollingUpgradePolicy,omitempty" tf:"rolling_upgrade_policy,omitempty"`
+
 	// Should this Virtual Machine Scale Set be limited to a Single Placement Group, which means the number of instances will be capped at 100 Virtual Machines. Possible values are true or false.
 	SinglePlacementGroup *bool `json:"singlePlacementGroup,omitempty" tf:"single_placement_group,omitempty"`
 
 	// The name of the SKU to be used by this Virtual Machine Scale Set. Valid values include: any of the General purpose, Compute optimized, Memory optimized, Storage optimized, GPU optimized, FPGA optimized, High performance, or Previous generation virtual machine SKUs.
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
+
+	// An sku_profile block as defined below. Changing this forces a new resource to be created.
+	SkuProfile *SkuProfileInitParameters `json:"skuProfile,omitempty" tf:"sku_profile,omitempty"`
 
 	// The ID of an Image which each Virtual Machine in this Scale Set should be based on. Possible Image ID types include Image IDs, Shared Image IDs, Shared Image Version IDs, Community Gallery Image IDs, Community Gallery Image Version IDs, Shared Gallery Image IDs and Shared Gallery Image Version IDs.
 	SourceImageID *string `json:"sourceImageId,omitempty" tf:"source_image_id,omitempty"`
@@ -852,13 +858,16 @@ type OrchestratedVirtualMachineScaleSetInitParameters struct {
 	// A termination_notification block as defined below.
 	TerminationNotification *OrchestratedVirtualMachineScaleSetTerminationNotificationInitParameters `json:"terminationNotification,omitempty" tf:"termination_notification,omitempty"`
 
+	// Specifies how upgrades (e.g. changing the Image/SKU) should be performed to Virtual Machine Instances. Possible values are Automatic, Manual and Rolling. Defaults to Manual. Changing this forces a new resource to be created.
+	UpgradeMode *string `json:"upgradeMode,omitempty" tf:"upgrade_mode,omitempty"`
+
 	// The Base64-Encoded User Data which should be used for this Virtual Machine Scale Set.
 	UserDataBase64SecretRef *v1.SecretKeySelector `json:"userDataBase64SecretRef,omitempty" tf:"-"`
 
 	// Should the Virtual Machines in this Scale Set be strictly evenly distributed across Availability Zones? Defaults to false. Changing this forces a new resource to be created.
 	ZoneBalance *bool `json:"zoneBalance,omitempty" tf:"zone_balance,omitempty"`
 
-	// Specifies a list of Availability Zones across which the Virtual Machine Scale Set will create instances. Changing this forces a new Virtual Machine Scale Set to be created.
+	// Specifies a list of Availability Zones across which the Virtual Machine Scale Set will create instances.
 	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
@@ -1019,11 +1028,17 @@ type OrchestratedVirtualMachineScaleSetObservation struct {
 	// The name of the Resource Group in which the Virtual Machine Scale Set should exist. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
+	// A rolling_upgrade_policy block as defined below. This is Required when upgrade_mode is set to Rolling and cannot be specified when upgrade_mode is set to Manual. Changing this forces a new resource to be created.
+	RollingUpgradePolicy *OrchestratedVirtualMachineScaleSetRollingUpgradePolicyObservation `json:"rollingUpgradePolicy,omitempty" tf:"rolling_upgrade_policy,omitempty"`
+
 	// Should this Virtual Machine Scale Set be limited to a Single Placement Group, which means the number of instances will be capped at 100 Virtual Machines. Possible values are true or false.
 	SinglePlacementGroup *bool `json:"singlePlacementGroup,omitempty" tf:"single_placement_group,omitempty"`
 
 	// The name of the SKU to be used by this Virtual Machine Scale Set. Valid values include: any of the General purpose, Compute optimized, Memory optimized, Storage optimized, GPU optimized, FPGA optimized, High performance, or Previous generation virtual machine SKUs.
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
+
+	// An sku_profile block as defined below. Changing this forces a new resource to be created.
+	SkuProfile *SkuProfileObservation `json:"skuProfile,omitempty" tf:"sku_profile,omitempty"`
 
 	// The ID of an Image which each Virtual Machine in this Scale Set should be based on. Possible Image ID types include Image IDs, Shared Image IDs, Shared Image Version IDs, Community Gallery Image IDs, Community Gallery Image Version IDs, Shared Gallery Image IDs and Shared Gallery Image Version IDs.
 	SourceImageID *string `json:"sourceImageId,omitempty" tf:"source_image_id,omitempty"`
@@ -1041,10 +1056,13 @@ type OrchestratedVirtualMachineScaleSetObservation struct {
 	// The Unique ID for the Virtual Machine Scale Set.
 	UniqueID *string `json:"uniqueId,omitempty" tf:"unique_id,omitempty"`
 
+	// Specifies how upgrades (e.g. changing the Image/SKU) should be performed to Virtual Machine Instances. Possible values are Automatic, Manual and Rolling. Defaults to Manual. Changing this forces a new resource to be created.
+	UpgradeMode *string `json:"upgradeMode,omitempty" tf:"upgrade_mode,omitempty"`
+
 	// Should the Virtual Machines in this Scale Set be strictly evenly distributed across Availability Zones? Defaults to false. Changing this forces a new resource to be created.
 	ZoneBalance *bool `json:"zoneBalance,omitempty" tf:"zone_balance,omitempty"`
 
-	// Specifies a list of Availability Zones across which the Virtual Machine Scale Set will create instances. Changing this forces a new Virtual Machine Scale Set to be created.
+	// Specifies a list of Availability Zones across which the Virtual Machine Scale Set will create instances.
 	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
@@ -1254,6 +1272,10 @@ type OrchestratedVirtualMachineScaleSetParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// A rolling_upgrade_policy block as defined below. This is Required when upgrade_mode is set to Rolling and cannot be specified when upgrade_mode is set to Manual. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	RollingUpgradePolicy *OrchestratedVirtualMachineScaleSetRollingUpgradePolicyParameters `json:"rollingUpgradePolicy,omitempty" tf:"rolling_upgrade_policy,omitempty"`
+
 	// Should this Virtual Machine Scale Set be limited to a Single Placement Group, which means the number of instances will be capped at 100 Virtual Machines. Possible values are true or false.
 	// +kubebuilder:validation:Optional
 	SinglePlacementGroup *bool `json:"singlePlacementGroup,omitempty" tf:"single_placement_group,omitempty"`
@@ -1261,6 +1283,10 @@ type OrchestratedVirtualMachineScaleSetParameters struct {
 	// The name of the SKU to be used by this Virtual Machine Scale Set. Valid values include: any of the General purpose, Compute optimized, Memory optimized, Storage optimized, GPU optimized, FPGA optimized, High performance, or Previous generation virtual machine SKUs.
 	// +kubebuilder:validation:Optional
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
+
+	// An sku_profile block as defined below. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	SkuProfile *SkuProfileParameters `json:"skuProfile,omitempty" tf:"sku_profile,omitempty"`
 
 	// The ID of an Image which each Virtual Machine in this Scale Set should be based on. Possible Image ID types include Image IDs, Shared Image IDs, Shared Image Version IDs, Community Gallery Image IDs, Community Gallery Image Version IDs, Shared Gallery Image IDs and Shared Gallery Image Version IDs.
 	// +kubebuilder:validation:Optional
@@ -1279,6 +1305,10 @@ type OrchestratedVirtualMachineScaleSetParameters struct {
 	// +kubebuilder:validation:Optional
 	TerminationNotification *OrchestratedVirtualMachineScaleSetTerminationNotificationParameters `json:"terminationNotification,omitempty" tf:"termination_notification,omitempty"`
 
+	// Specifies how upgrades (e.g. changing the Image/SKU) should be performed to Virtual Machine Instances. Possible values are Automatic, Manual and Rolling. Defaults to Manual. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	UpgradeMode *string `json:"upgradeMode,omitempty" tf:"upgrade_mode,omitempty"`
+
 	// The Base64-Encoded User Data which should be used for this Virtual Machine Scale Set.
 	// +kubebuilder:validation:Optional
 	UserDataBase64SecretRef *v1.SecretKeySelector `json:"userDataBase64SecretRef,omitempty" tf:"-"`
@@ -1287,7 +1317,7 @@ type OrchestratedVirtualMachineScaleSetParameters struct {
 	// +kubebuilder:validation:Optional
 	ZoneBalance *bool `json:"zoneBalance,omitempty" tf:"zone_balance,omitempty"`
 
-	// Specifies a list of Availability Zones across which the Virtual Machine Scale Set will create instances. Changing this forces a new Virtual Machine Scale Set to be created.
+	// Specifies a list of Availability Zones across which the Virtual Machine Scale Set will create instances.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
@@ -1330,6 +1360,85 @@ type OrchestratedVirtualMachineScaleSetPlanParameters struct {
 	// Specifies the publisher of the image. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Publisher *string `json:"publisher" tf:"publisher,omitempty"`
+}
+
+type OrchestratedVirtualMachineScaleSetRollingUpgradePolicyInitParameters struct {
+
+	// Should the Virtual Machine Scale Set ignore the Azure Zone boundaries when constructing upgrade batches? Possible values are true or false.
+	CrossZoneUpgradesEnabled *bool `json:"crossZoneUpgradesEnabled,omitempty" tf:"cross_zone_upgrades_enabled,omitempty"`
+
+	// The maximum percent of total virtual machine instances that will be upgraded simultaneously by the rolling upgrade in one batch. As this is a maximum, unhealthy instances in previous or future batches can cause the percentage of instances in a batch to decrease to ensure higher reliability.
+	MaxBatchInstancePercent *float64 `json:"maxBatchInstancePercent,omitempty" tf:"max_batch_instance_percent,omitempty"`
+
+	// The maximum percentage of the total virtual machine instances in the scale set that can be simultaneously unhealthy, either as a result of being upgraded, or by being found in an unhealthy state by the virtual machine health checks before the rolling upgrade aborts. This constraint will be checked prior to starting any batch.
+	MaxUnhealthyInstancePercent *float64 `json:"maxUnhealthyInstancePercent,omitempty" tf:"max_unhealthy_instance_percent,omitempty"`
+
+	// The maximum percentage of upgraded virtual machine instances that can be found to be in an unhealthy state. This check will happen after each batch is upgraded. If this percentage is ever exceeded, the rolling update aborts.
+	MaxUnhealthyUpgradedInstancePercent *float64 `json:"maxUnhealthyUpgradedInstancePercent,omitempty" tf:"max_unhealthy_upgraded_instance_percent,omitempty"`
+
+	// Create new virtual machines to upgrade the scale set, rather than updating the existing virtual machines. Existing virtual machines will be deleted once the new virtual machines are created for each batch. Possible values are true or false.
+	MaximumSurgeInstancesEnabled *bool `json:"maximumSurgeInstancesEnabled,omitempty" tf:"maximum_surge_instances_enabled,omitempty"`
+
+	// The wait time between completing the update for all virtual machines in one batch and starting the next batch. The time duration should be specified in ISO 8601 duration format.
+	PauseTimeBetweenBatches *string `json:"pauseTimeBetweenBatches,omitempty" tf:"pause_time_between_batches,omitempty"`
+
+	// Upgrade all unhealthy instances in a scale set before any healthy instances. Possible values are true or false.
+	PrioritizeUnhealthyInstancesEnabled *bool `json:"prioritizeUnhealthyInstancesEnabled,omitempty" tf:"prioritize_unhealthy_instances_enabled,omitempty"`
+}
+
+type OrchestratedVirtualMachineScaleSetRollingUpgradePolicyObservation struct {
+
+	// Should the Virtual Machine Scale Set ignore the Azure Zone boundaries when constructing upgrade batches? Possible values are true or false.
+	CrossZoneUpgradesEnabled *bool `json:"crossZoneUpgradesEnabled,omitempty" tf:"cross_zone_upgrades_enabled,omitempty"`
+
+	// The maximum percent of total virtual machine instances that will be upgraded simultaneously by the rolling upgrade in one batch. As this is a maximum, unhealthy instances in previous or future batches can cause the percentage of instances in a batch to decrease to ensure higher reliability.
+	MaxBatchInstancePercent *float64 `json:"maxBatchInstancePercent,omitempty" tf:"max_batch_instance_percent,omitempty"`
+
+	// The maximum percentage of the total virtual machine instances in the scale set that can be simultaneously unhealthy, either as a result of being upgraded, or by being found in an unhealthy state by the virtual machine health checks before the rolling upgrade aborts. This constraint will be checked prior to starting any batch.
+	MaxUnhealthyInstancePercent *float64 `json:"maxUnhealthyInstancePercent,omitempty" tf:"max_unhealthy_instance_percent,omitempty"`
+
+	// The maximum percentage of upgraded virtual machine instances that can be found to be in an unhealthy state. This check will happen after each batch is upgraded. If this percentage is ever exceeded, the rolling update aborts.
+	MaxUnhealthyUpgradedInstancePercent *float64 `json:"maxUnhealthyUpgradedInstancePercent,omitempty" tf:"max_unhealthy_upgraded_instance_percent,omitempty"`
+
+	// Create new virtual machines to upgrade the scale set, rather than updating the existing virtual machines. Existing virtual machines will be deleted once the new virtual machines are created for each batch. Possible values are true or false.
+	MaximumSurgeInstancesEnabled *bool `json:"maximumSurgeInstancesEnabled,omitempty" tf:"maximum_surge_instances_enabled,omitempty"`
+
+	// The wait time between completing the update for all virtual machines in one batch and starting the next batch. The time duration should be specified in ISO 8601 duration format.
+	PauseTimeBetweenBatches *string `json:"pauseTimeBetweenBatches,omitempty" tf:"pause_time_between_batches,omitempty"`
+
+	// Upgrade all unhealthy instances in a scale set before any healthy instances. Possible values are true or false.
+	PrioritizeUnhealthyInstancesEnabled *bool `json:"prioritizeUnhealthyInstancesEnabled,omitempty" tf:"prioritize_unhealthy_instances_enabled,omitempty"`
+}
+
+type OrchestratedVirtualMachineScaleSetRollingUpgradePolicyParameters struct {
+
+	// Should the Virtual Machine Scale Set ignore the Azure Zone boundaries when constructing upgrade batches? Possible values are true or false.
+	// +kubebuilder:validation:Optional
+	CrossZoneUpgradesEnabled *bool `json:"crossZoneUpgradesEnabled,omitempty" tf:"cross_zone_upgrades_enabled,omitempty"`
+
+	// The maximum percent of total virtual machine instances that will be upgraded simultaneously by the rolling upgrade in one batch. As this is a maximum, unhealthy instances in previous or future batches can cause the percentage of instances in a batch to decrease to ensure higher reliability.
+	// +kubebuilder:validation:Optional
+	MaxBatchInstancePercent *float64 `json:"maxBatchInstancePercent" tf:"max_batch_instance_percent,omitempty"`
+
+	// The maximum percentage of the total virtual machine instances in the scale set that can be simultaneously unhealthy, either as a result of being upgraded, or by being found in an unhealthy state by the virtual machine health checks before the rolling upgrade aborts. This constraint will be checked prior to starting any batch.
+	// +kubebuilder:validation:Optional
+	MaxUnhealthyInstancePercent *float64 `json:"maxUnhealthyInstancePercent" tf:"max_unhealthy_instance_percent,omitempty"`
+
+	// The maximum percentage of upgraded virtual machine instances that can be found to be in an unhealthy state. This check will happen after each batch is upgraded. If this percentage is ever exceeded, the rolling update aborts.
+	// +kubebuilder:validation:Optional
+	MaxUnhealthyUpgradedInstancePercent *float64 `json:"maxUnhealthyUpgradedInstancePercent" tf:"max_unhealthy_upgraded_instance_percent,omitempty"`
+
+	// Create new virtual machines to upgrade the scale set, rather than updating the existing virtual machines. Existing virtual machines will be deleted once the new virtual machines are created for each batch. Possible values are true or false.
+	// +kubebuilder:validation:Optional
+	MaximumSurgeInstancesEnabled *bool `json:"maximumSurgeInstancesEnabled,omitempty" tf:"maximum_surge_instances_enabled,omitempty"`
+
+	// The wait time between completing the update for all virtual machines in one batch and starting the next batch. The time duration should be specified in ISO 8601 duration format.
+	// +kubebuilder:validation:Optional
+	PauseTimeBetweenBatches *string `json:"pauseTimeBetweenBatches" tf:"pause_time_between_batches,omitempty"`
+
+	// Upgrade all unhealthy instances in a scale set before any healthy instances. Possible values are true or false.
+	// +kubebuilder:validation:Optional
+	PrioritizeUnhealthyInstancesEnabled *bool `json:"prioritizeUnhealthyInstancesEnabled,omitempty" tf:"prioritize_unhealthy_instances_enabled,omitempty"`
 }
 
 type OrchestratedVirtualMachineScaleSetSourceImageReferenceInitParameters struct {
@@ -1502,6 +1611,38 @@ type PublicIPAddressIPTagParameters struct {
 	// The Type of IP Tag, such as FirstPartyUsage. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
+}
+
+type SkuProfileInitParameters struct {
+
+	// Specifies the allocation strategy for the virtual machine scale set based on which the VMs will be allocated. Possible values are LowestPrice and CapacityOptimized.
+	AllocationStrategy *string `json:"allocationStrategy,omitempty" tf:"allocation_strategy,omitempty"`
+
+	// Specifies the VM sizes for the virtual machine scale set.
+	// +listType=set
+	VMSizes []*string `json:"vmSizes,omitempty" tf:"vm_sizes,omitempty"`
+}
+
+type SkuProfileObservation struct {
+
+	// Specifies the allocation strategy for the virtual machine scale set based on which the VMs will be allocated. Possible values are LowestPrice and CapacityOptimized.
+	AllocationStrategy *string `json:"allocationStrategy,omitempty" tf:"allocation_strategy,omitempty"`
+
+	// Specifies the VM sizes for the virtual machine scale set.
+	// +listType=set
+	VMSizes []*string `json:"vmSizes,omitempty" tf:"vm_sizes,omitempty"`
+}
+
+type SkuProfileParameters struct {
+
+	// Specifies the allocation strategy for the virtual machine scale set based on which the VMs will be allocated. Possible values are LowestPrice and CapacityOptimized.
+	// +kubebuilder:validation:Optional
+	AllocationStrategy *string `json:"allocationStrategy" tf:"allocation_strategy,omitempty"`
+
+	// Specifies the VM sizes for the virtual machine scale set.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	VMSizes []*string `json:"vmSizes" tf:"vm_sizes,omitempty"`
 }
 
 type WindowsConfigurationInitParameters struct {

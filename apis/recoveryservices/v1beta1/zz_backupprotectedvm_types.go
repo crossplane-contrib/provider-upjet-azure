@@ -15,7 +15,7 @@ import (
 
 type BackupProtectedVMInitParameters struct {
 
-	// Specifies the id of the backup policy to use. Required in creation or when protection_stopped is not specified.
+	// Specifies the ID of the backup policy to use.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/recoveryservices/v1beta2.BackupPolicyVM
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	BackupPolicyID *string `json:"backupPolicyId,omitempty" tf:"backup_policy_id,omitempty"`
@@ -28,15 +28,15 @@ type BackupProtectedVMInitParameters struct {
 	// +kubebuilder:validation:Optional
 	BackupPolicyIDSelector *v1.Selector `json:"backupPolicyIdSelector,omitempty" tf:"-"`
 
-	// A list of Disks' Logical Unit Numbers(LUN) to be excluded for VM Protection.
+	// A list of Disks' Logical Unit Numbers (LUN) to be excluded for VM Protection.
 	// +listType=set
 	ExcludeDiskLuns []*float64 `json:"excludeDiskLuns,omitempty" tf:"exclude_disk_luns,omitempty"`
 
-	// A list of Disks' Logical Unit Numbers(LUN) to be included for VM Protection.
+	// A list of Disks' Logical Unit Numbers (LUN) to be included for VM Protection.
 	// +listType=set
 	IncludeDiskLuns []*float64 `json:"includeDiskLuns,omitempty" tf:"include_disk_luns,omitempty"`
 
-	// Specifies Protection state of the backup. Possible values are Invalid, IRPending, Protected, ProtectionStopped, ProtectionError and ProtectionPaused.
+	// Specifies Protection state of the backup. Possible values are Protected, BackupsSuspended, and ProtectionStopped.
 	ProtectionState *string `json:"protectionState,omitempty" tf:"protection_state,omitempty"`
 
 	// Specifies the name of the Recovery Services Vault to use. Changing this forces a new resource to be created.
@@ -63,27 +63,27 @@ type BackupProtectedVMInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// Specifies the ID of the VM to backup. Changing this forces a new resource to be created.
+	// Specifies the ID of the virtual machine to back up. Changing this forces a new resource to be created.
 	SourceVMID *string `json:"sourceVmId,omitempty" tf:"source_vm_id,omitempty"`
 }
 
 type BackupProtectedVMObservation struct {
 
-	// Specifies the id of the backup policy to use. Required in creation or when protection_stopped is not specified.
+	// Specifies the ID of the backup policy to use.
 	BackupPolicyID *string `json:"backupPolicyId,omitempty" tf:"backup_policy_id,omitempty"`
 
-	// A list of Disks' Logical Unit Numbers(LUN) to be excluded for VM Protection.
+	// A list of Disks' Logical Unit Numbers (LUN) to be excluded for VM Protection.
 	// +listType=set
 	ExcludeDiskLuns []*float64 `json:"excludeDiskLuns,omitempty" tf:"exclude_disk_luns,omitempty"`
 
 	// The ID of the Backup Protected Virtual Machine.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A list of Disks' Logical Unit Numbers(LUN) to be included for VM Protection.
+	// A list of Disks' Logical Unit Numbers (LUN) to be included for VM Protection.
 	// +listType=set
 	IncludeDiskLuns []*float64 `json:"includeDiskLuns,omitempty" tf:"include_disk_luns,omitempty"`
 
-	// Specifies Protection state of the backup. Possible values are Invalid, IRPending, Protected, ProtectionStopped, ProtectionError and ProtectionPaused.
+	// Specifies Protection state of the backup. Possible values are Protected, BackupsSuspended, and ProtectionStopped.
 	ProtectionState *string `json:"protectionState,omitempty" tf:"protection_state,omitempty"`
 
 	// Specifies the name of the Recovery Services Vault to use. Changing this forces a new resource to be created.
@@ -92,13 +92,13 @@ type BackupProtectedVMObservation struct {
 	// Specifies the name of the Resource Group associated with the Recovery Services Vault to use. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// Specifies the ID of the VM to backup. Changing this forces a new resource to be created.
+	// Specifies the ID of the virtual machine to back up. Changing this forces a new resource to be created.
 	SourceVMID *string `json:"sourceVmId,omitempty" tf:"source_vm_id,omitempty"`
 }
 
 type BackupProtectedVMParameters struct {
 
-	// Specifies the id of the backup policy to use. Required in creation or when protection_stopped is not specified.
+	// Specifies the ID of the backup policy to use.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/recoveryservices/v1beta2.BackupPolicyVM
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -112,17 +112,17 @@ type BackupProtectedVMParameters struct {
 	// +kubebuilder:validation:Optional
 	BackupPolicyIDSelector *v1.Selector `json:"backupPolicyIdSelector,omitempty" tf:"-"`
 
-	// A list of Disks' Logical Unit Numbers(LUN) to be excluded for VM Protection.
+	// A list of Disks' Logical Unit Numbers (LUN) to be excluded for VM Protection.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	ExcludeDiskLuns []*float64 `json:"excludeDiskLuns,omitempty" tf:"exclude_disk_luns,omitempty"`
 
-	// A list of Disks' Logical Unit Numbers(LUN) to be included for VM Protection.
+	// A list of Disks' Logical Unit Numbers (LUN) to be included for VM Protection.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	IncludeDiskLuns []*float64 `json:"includeDiskLuns,omitempty" tf:"include_disk_luns,omitempty"`
 
-	// Specifies Protection state of the backup. Possible values are Invalid, IRPending, Protected, ProtectionStopped, ProtectionError and ProtectionPaused.
+	// Specifies Protection state of the backup. Possible values are Protected, BackupsSuspended, and ProtectionStopped.
 	// +kubebuilder:validation:Optional
 	ProtectionState *string `json:"protectionState,omitempty" tf:"protection_state,omitempty"`
 
@@ -152,7 +152,7 @@ type BackupProtectedVMParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// Specifies the ID of the VM to backup. Changing this forces a new resource to be created.
+	// Specifies the ID of the virtual machine to back up. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	SourceVMID *string `json:"sourceVmId,omitempty" tf:"source_vm_id,omitempty"`
 }
@@ -184,7 +184,7 @@ type BackupProtectedVMStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// BackupProtectedVM is the Schema for the BackupProtectedVMs API. Manages an Azure Backup Protected VM.
+// BackupProtectedVM is the Schema for the BackupProtectedVMs API. Manages an Azure Backup Protected Virtual Machine.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -323,6 +323,9 @@ type IdentityParameters struct {
 
 type NetworkAclsInitParameters struct {
 
+	// Whether to allow trusted Azure Services to access the service. Possible values are None and AzureServices.
+	Bypass *string `json:"bypass,omitempty" tf:"bypass,omitempty"`
+
 	// The Default Action to use when no rules match from ip_rules / virtual_network_rules. Possible values are Allow and Deny.
 	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
@@ -336,6 +339,9 @@ type NetworkAclsInitParameters struct {
 
 type NetworkAclsObservation struct {
 
+	// Whether to allow trusted Azure Services to access the service. Possible values are None and AzureServices.
+	Bypass *string `json:"bypass,omitempty" tf:"bypass,omitempty"`
+
 	// The Default Action to use when no rules match from ip_rules / virtual_network_rules. Possible values are Allow and Deny.
 	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
@@ -348,6 +354,10 @@ type NetworkAclsObservation struct {
 }
 
 type NetworkAclsParameters struct {
+
+	// Whether to allow trusted Azure Services to access the service. Possible values are None and AzureServices.
+	// +kubebuilder:validation:Optional
+	Bypass *string `json:"bypass,omitempty" tf:"bypass,omitempty"`
 
 	// The Default Action to use when no rules match from ip_rules / virtual_network_rules. Possible values are Allow and Deny.
 	// +kubebuilder:validation:Optional

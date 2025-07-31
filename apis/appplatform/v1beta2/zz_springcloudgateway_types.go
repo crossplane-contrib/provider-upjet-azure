@@ -270,7 +270,7 @@ type SpringCloudGatewayInitParameters struct {
 	// A cors block as defined below.
 	Cors *CorsInitParameters `json:"cors,omitempty" tf:"cors,omitempty"`
 
-	// Specifies the environment variables of the Spring Cloud Gateway as a map of key-value pairs. Changing this forces a new resource to be created.
+	// Specifies the environment variables of the Spring Cloud Gateway as a map of key-value pairs.
 	// +mapType=granular
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
@@ -315,7 +315,7 @@ type SpringCloudGatewayObservation struct {
 	// A cors block as defined below.
 	Cors *CorsObservation `json:"cors,omitempty" tf:"cors,omitempty"`
 
-	// Specifies the environment variables of the Spring Cloud Gateway as a map of key-value pairs. Changing this forces a new resource to be created.
+	// Specifies the environment variables of the Spring Cloud Gateway as a map of key-value pairs.
 	// +mapType=granular
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
@@ -372,7 +372,7 @@ type SpringCloudGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	Cors *CorsParameters `json:"cors,omitempty" tf:"cors,omitempty"`
 
-	// Specifies the environment variables of the Spring Cloud Gateway as a map of key-value pairs. Changing this forces a new resource to be created.
+	// Specifies the environment variables of the Spring Cloud Gateway as a map of key-value pairs.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
@@ -401,7 +401,7 @@ type SpringCloudGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	Quota *SpringCloudGatewayQuotaParameters `json:"quota,omitempty" tf:"quota,omitempty"`
 
-	// Specifies the sensitive environment variables of the Spring Cloud Gateway as a map of key-value pairs. Changing this forces a new resource to be created.
+	// Specifies the sensitive environment variables of the Spring Cloud Gateway as a map of key-value pairs.
 	// +kubebuilder:validation:Optional
 	SensitiveEnvironmentVariablesSecretRef *v1.SecretReference `json:"sensitiveEnvironmentVariablesSecretRef,omitempty" tf:"-"`
 

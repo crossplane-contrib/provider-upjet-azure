@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.14.0
+    controller-gen.kubebuilder.io/version: v0.16.5
   name: springcloudappmysqlassociations.appplatform.azure.upbound.io
 spec:
   group: appplatform.azure.upbound.io
@@ -79,8 +79,8 @@ spec:
                       Spring Cloud App should be associated with.
                     type: string
                   databaseNameRef:
-                    description: Reference to a Database in dbformysql to populate
-                      databaseName.
+                    description: Reference to a FlexibleDatabase in dbformysql to
+                      populate databaseName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -114,8 +114,8 @@ spec:
                     - name
                     type: object
                   databaseNameSelector:
-                    description: Selector for a Database in dbformysql to populate
-                      databaseName.
+                    description: Selector for a FlexibleDatabase in dbformysql to
+                      populate databaseName.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -159,7 +159,8 @@ spec:
                       forces a new resource to be created.
                     type: string
                   mysqlServerIdRef:
-                    description: Reference to a Server in dbformysql to populate mysqlServerId.
+                    description: Reference to a FlexibleServer in dbformysql to populate
+                      mysqlServerId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -193,7 +194,8 @@ spec:
                     - name
                     type: object
                   mysqlServerIdSelector:
-                    description: Selector for a Server in dbformysql to populate mysqlServerId.
+                    description: Selector for a FlexibleServer in dbformysql to populate
+                      mysqlServerId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -336,7 +338,8 @@ spec:
                       connecting to the MySQL Database from the Spring Cloud App.
                     type: string
                   usernameRef:
-                    description: Reference to a Server in dbformysql to populate username.
+                    description: Reference to a FlexibleServer in dbformysql to populate
+                      username.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -370,7 +373,8 @@ spec:
                     - name
                     type: object
                   usernameSelector:
-                    description: Selector for a Server in dbformysql to populate username.
+                    description: Selector for a FlexibleServer in dbformysql to populate
+                      username.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -428,8 +432,8 @@ spec:
                       Spring Cloud App should be associated with.
                     type: string
                   databaseNameRef:
-                    description: Reference to a Database in dbformysql to populate
-                      databaseName.
+                    description: Reference to a FlexibleDatabase in dbformysql to
+                      populate databaseName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -463,8 +467,8 @@ spec:
                     - name
                     type: object
                   databaseNameSelector:
-                    description: Selector for a Database in dbformysql to populate
-                      databaseName.
+                    description: Selector for a FlexibleDatabase in dbformysql to
+                      populate databaseName.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -508,7 +512,8 @@ spec:
                       forces a new resource to be created.
                     type: string
                   mysqlServerIdRef:
-                    description: Reference to a Server in dbformysql to populate mysqlServerId.
+                    description: Reference to a FlexibleServer in dbformysql to populate
+                      mysqlServerId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -542,7 +547,8 @@ spec:
                     - name
                     type: object
                   mysqlServerIdSelector:
-                    description: Selector for a Server in dbformysql to populate mysqlServerId.
+                    description: Selector for a FlexibleServer in dbformysql to populate
+                      mysqlServerId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -604,7 +610,8 @@ spec:
                       connecting to the MySQL Database from the Spring Cloud App.
                     type: string
                   usernameRef:
-                    description: Reference to a Server in dbformysql to populate username.
+                    description: Reference to a FlexibleServer in dbformysql to populate
+                      username.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -638,7 +645,8 @@ spec:
                     - name
                     type: object
                   usernameSelector:
-                    description: Selector for a Server in dbformysql to populate username.
+                    description: Selector for a FlexibleServer in dbformysql to populate
+                      username.
                     properties:
                       matchControllerRef:
                         description: |-

@@ -21,6 +21,9 @@ type DataDiskInitParameters struct {
 	// Specifies the caching mode as ReadWrite, ReadOnly, or None. Defaults to None.
 	Caching *string `json:"caching,omitempty" tf:"caching,omitempty"`
 
+	// The ID of the Disk Encryption Set which should be used to encrypt this disk. Changing this forces a new resource to be created.
+	DiskEncryptionSetID *string `json:"diskEncryptionSetId,omitempty" tf:"disk_encryption_set_id,omitempty"`
+
 	// Specifies the logical unit number of the data disk.
 	Lun *float64 `json:"lun,omitempty" tf:"lun,omitempty"`
 
@@ -29,6 +32,10 @@ type DataDiskInitParameters struct {
 
 	// Specifies the size of the image to be created. The target size can't be smaller than the source size.
 	SizeGb *float64 `json:"sizeGb,omitempty" tf:"size_gb,omitempty"`
+
+	// The type of Storage Disk to use. Possible values are Premium_LRS, PremiumV2_LRS, Premium_ZRS, Standard_LRS, StandardSSD_LRS, StandardSSD_ZRS and UltraSSD_LRS. Changing this forces a new resource to be created.
+	// The type of storage disk
+	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 }
 
 type DataDiskObservation struct {
@@ -39,6 +46,9 @@ type DataDiskObservation struct {
 	// Specifies the caching mode as ReadWrite, ReadOnly, or None. Defaults to None.
 	Caching *string `json:"caching,omitempty" tf:"caching,omitempty"`
 
+	// The ID of the Disk Encryption Set which should be used to encrypt this disk. Changing this forces a new resource to be created.
+	DiskEncryptionSetID *string `json:"diskEncryptionSetId,omitempty" tf:"disk_encryption_set_id,omitempty"`
+
 	// Specifies the logical unit number of the data disk.
 	Lun *float64 `json:"lun,omitempty" tf:"lun,omitempty"`
 
@@ -47,6 +57,10 @@ type DataDiskObservation struct {
 
 	// Specifies the size of the image to be created. The target size can't be smaller than the source size.
 	SizeGb *float64 `json:"sizeGb,omitempty" tf:"size_gb,omitempty"`
+
+	// The type of Storage Disk to use. Possible values are Premium_LRS, PremiumV2_LRS, Premium_ZRS, Standard_LRS, StandardSSD_LRS, StandardSSD_ZRS and UltraSSD_LRS. Changing this forces a new resource to be created.
+	// The type of storage disk
+	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 }
 
 type DataDiskParameters struct {
@@ -59,6 +73,10 @@ type DataDiskParameters struct {
 	// +kubebuilder:validation:Optional
 	Caching *string `json:"caching,omitempty" tf:"caching,omitempty"`
 
+	// The ID of the Disk Encryption Set which should be used to encrypt this disk. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	DiskEncryptionSetID *string `json:"diskEncryptionSetId,omitempty" tf:"disk_encryption_set_id,omitempty"`
+
 	// Specifies the logical unit number of the data disk.
 	// +kubebuilder:validation:Optional
 	Lun *float64 `json:"lun,omitempty" tf:"lun,omitempty"`
@@ -70,6 +88,11 @@ type DataDiskParameters struct {
 	// Specifies the size of the image to be created. The target size can't be smaller than the source size.
 	// +kubebuilder:validation:Optional
 	SizeGb *float64 `json:"sizeGb,omitempty" tf:"size_gb,omitempty"`
+
+	// The type of Storage Disk to use. Possible values are Premium_LRS, PremiumV2_LRS, Premium_ZRS, Standard_LRS, StandardSSD_LRS, StandardSSD_ZRS and UltraSSD_LRS. Changing this forces a new resource to be created.
+	// The type of storage disk
+	// +kubebuilder:validation:Optional
+	StorageType *string `json:"storageType" tf:"storage_type,omitempty"`
 }
 
 type ImageInitParameters struct {
@@ -181,7 +204,7 @@ type OsDiskInitParameters struct {
 	// Specifies the caching mode as ReadWrite, ReadOnly, or None. The default is None.
 	Caching *string `json:"caching,omitempty" tf:"caching,omitempty"`
 
-	// The ID of the Disk Encryption Set which should be used to encrypt this image. Changing this forces a new resource to be created.
+	// The ID of the Disk Encryption Set which should be used to encrypt this disk. Changing this forces a new resource to be created.
 	DiskEncryptionSetID *string `json:"diskEncryptionSetId,omitempty" tf:"disk_encryption_set_id,omitempty"`
 
 	// Specifies the ID of the managed disk resource that you want to use to create the image.
@@ -195,6 +218,10 @@ type OsDiskInitParameters struct {
 
 	// Specifies the size of the image to be created. Changing this forces a new resource to be created.
 	SizeGb *float64 `json:"sizeGb,omitempty" tf:"size_gb,omitempty"`
+
+	// The type of Storage Disk to use. Possible values are Premium_LRS, PremiumV2_LRS, Premium_ZRS, Standard_LRS, StandardSSD_LRS, StandardSSD_ZRS and UltraSSD_LRS. Changing this forces a new resource to be created.
+	// The type of storage disk
+	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 }
 
 type OsDiskObservation struct {
@@ -205,7 +232,7 @@ type OsDiskObservation struct {
 	// Specifies the caching mode as ReadWrite, ReadOnly, or None. The default is None.
 	Caching *string `json:"caching,omitempty" tf:"caching,omitempty"`
 
-	// The ID of the Disk Encryption Set which should be used to encrypt this image. Changing this forces a new resource to be created.
+	// The ID of the Disk Encryption Set which should be used to encrypt this disk. Changing this forces a new resource to be created.
 	DiskEncryptionSetID *string `json:"diskEncryptionSetId,omitempty" tf:"disk_encryption_set_id,omitempty"`
 
 	// Specifies the ID of the managed disk resource that you want to use to create the image.
@@ -219,6 +246,10 @@ type OsDiskObservation struct {
 
 	// Specifies the size of the image to be created. Changing this forces a new resource to be created.
 	SizeGb *float64 `json:"sizeGb,omitempty" tf:"size_gb,omitempty"`
+
+	// The type of Storage Disk to use. Possible values are Premium_LRS, PremiumV2_LRS, Premium_ZRS, Standard_LRS, StandardSSD_LRS, StandardSSD_ZRS and UltraSSD_LRS. Changing this forces a new resource to be created.
+	// The type of storage disk
+	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 }
 
 type OsDiskParameters struct {
@@ -231,7 +262,7 @@ type OsDiskParameters struct {
 	// +kubebuilder:validation:Optional
 	Caching *string `json:"caching,omitempty" tf:"caching,omitempty"`
 
-	// The ID of the Disk Encryption Set which should be used to encrypt this image. Changing this forces a new resource to be created.
+	// The ID of the Disk Encryption Set which should be used to encrypt this disk. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	DiskEncryptionSetID *string `json:"diskEncryptionSetId,omitempty" tf:"disk_encryption_set_id,omitempty"`
 
@@ -250,6 +281,11 @@ type OsDiskParameters struct {
 	// Specifies the size of the image to be created. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	SizeGb *float64 `json:"sizeGb,omitempty" tf:"size_gb,omitempty"`
+
+	// The type of Storage Disk to use. Possible values are Premium_LRS, PremiumV2_LRS, Premium_ZRS, Standard_LRS, StandardSSD_LRS, StandardSSD_ZRS and UltraSSD_LRS. Changing this forces a new resource to be created.
+	// The type of storage disk
+	// +kubebuilder:validation:Optional
+	StorageType *string `json:"storageType" tf:"storage_type,omitempty"`
 }
 
 // ImageSpec defines the desired state of Image

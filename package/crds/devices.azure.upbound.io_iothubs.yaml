@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.14.0
+    controller-gen.kubebuilder.io/version: v0.16.5
   name: iothubs.devices.azure.upbound.io
 spec:
   group: devices.azure.upbound.io
@@ -1284,11 +1284,11 @@ spec:
                     type: object
                   eventHubPartitionCount:
                     description: The number of device-to-cloud partitions used by
-                      backing event hubs. Must be between 2 and 128.
+                      backing event hubs. Must be between 2 and 128. Defaults to 4.
                     type: number
                   eventHubRetentionInDays:
                     description: The event hub retention to use in days. Must be between
-                      1 and 7.
+                      1 and 7. Defaults to 1.
                     type: number
                   fileUpload:
                     description: A file_upload block as defined below.
@@ -1571,11 +1571,11 @@ spec:
                     type: object
                   eventHubPartitionCount:
                     description: The number of device-to-cloud partitions used by
-                      backing event hubs. Must be between 2 and 128.
+                      backing event hubs. Must be between 2 and 128. Defaults to 4.
                     type: number
                   eventHubRetentionInDays:
                     description: The event hub retention to use in days. Must be between
-                      1 and 7.
+                      1 and 7. Defaults to 1.
                     type: number
                   fileUpload:
                     description: A file_upload block as defined below.
@@ -2057,11 +2057,11 @@ spec:
                     type: string
                   eventHubPartitionCount:
                     description: The number of device-to-cloud partitions used by
-                      backing event hubs. Must be between 2 and 128.
+                      backing event hubs. Must be between 2 and 128. Defaults to 4.
                     type: number
                   eventHubRetentionInDays:
                     description: The event hub retention to use in days. Must be between
-                      1 and 7.
+                      1 and 7. Defaults to 1.
                     type: number
                   fallbackRoute:
                     description: A fallback_route block as defined below. If the fallback
@@ -2074,7 +2074,7 @@ spec:
                         type: string
                       enabled:
                         description: Used to specify whether the fallback route is
-                          enabled.
+                          enabled. Defaults to true.
                         type: boolean
                       endpointNames:
                         description: The endpoints to which messages that satisfy

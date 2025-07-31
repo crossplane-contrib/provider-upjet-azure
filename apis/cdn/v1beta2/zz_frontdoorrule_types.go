@@ -188,7 +188,7 @@ type ClientPortConditionInitParameters struct {
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
 
@@ -200,7 +200,7 @@ type ClientPortConditionObservation struct {
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
 
@@ -214,7 +214,7 @@ type ClientPortConditionParameters struct {
 	// +kubebuilder:validation:Optional
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator" tf:"operator,omitempty"`
 }
@@ -230,7 +230,7 @@ type ConditionsCookiesConditionInitParameters struct {
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
@@ -249,7 +249,7 @@ type ConditionsCookiesConditionObservation struct {
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
@@ -271,7 +271,7 @@ type ConditionsCookiesConditionParameters struct {
 	// +kubebuilder:validation:Optional
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator" tf:"operator,omitempty"`
 
@@ -290,7 +290,7 @@ type ConditionsHTTPVersionConditionInitParameters struct {
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
 
@@ -303,7 +303,7 @@ type ConditionsHTTPVersionConditionObservation struct {
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
 
@@ -318,7 +318,7 @@ type ConditionsHTTPVersionConditionParameters struct {
 	// +kubebuilder:validation:Optional
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
@@ -530,7 +530,7 @@ type ConditionsQueryStringConditionInitParameters struct {
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
@@ -546,7 +546,7 @@ type ConditionsQueryStringConditionObservation struct {
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
@@ -564,7 +564,7 @@ type ConditionsQueryStringConditionParameters struct {
 	// +kubebuilder:validation:Optional
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator" tf:"operator,omitempty"`
 
@@ -582,7 +582,7 @@ type ConditionsRemoteAddressConditionInitParameters struct {
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
 
@@ -594,7 +594,7 @@ type ConditionsRemoteAddressConditionObservation struct {
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
 
@@ -608,7 +608,7 @@ type ConditionsRemoteAddressConditionParameters struct {
 	// +kubebuilder:validation:Optional
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
@@ -621,7 +621,7 @@ type ConditionsRequestBodyConditionInitParameters struct {
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
@@ -637,7 +637,7 @@ type ConditionsRequestBodyConditionObservation struct {
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
@@ -655,7 +655,7 @@ type ConditionsRequestBodyConditionParameters struct {
 	// +kubebuilder:validation:Optional
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator" tf:"operator,omitempty"`
 
@@ -676,7 +676,7 @@ type ConditionsRequestHeaderConditionInitParameters struct {
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
@@ -695,7 +695,7 @@ type ConditionsRequestHeaderConditionObservation struct {
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
@@ -717,7 +717,7 @@ type ConditionsRequestHeaderConditionParameters struct {
 	// +kubebuilder:validation:Optional
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator" tf:"operator,omitempty"`
 
@@ -736,7 +736,7 @@ type ConditionsRequestMethodConditionInitParameters struct {
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
 
@@ -749,7 +749,7 @@ type ConditionsRequestMethodConditionObservation struct {
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
 
@@ -764,7 +764,7 @@ type ConditionsRequestMethodConditionParameters struct {
 	// +kubebuilder:validation:Optional
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
@@ -777,7 +777,7 @@ type ConditionsRequestSchemeConditionInitParameters struct {
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
 
@@ -789,7 +789,7 @@ type ConditionsRequestSchemeConditionObservation struct {
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
 
@@ -803,7 +803,7 @@ type ConditionsRequestSchemeConditionParameters struct {
 	// +kubebuilder:validation:Optional
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
@@ -816,7 +816,7 @@ type ConditionsRequestURIConditionInitParameters struct {
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
@@ -832,7 +832,7 @@ type ConditionsRequestURIConditionObservation struct {
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
@@ -850,7 +850,7 @@ type ConditionsRequestURIConditionParameters struct {
 	// +kubebuilder:validation:Optional
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator" tf:"operator,omitempty"`
 
@@ -868,7 +868,7 @@ type ConditionsURLFileExtensionConditionInitParameters struct {
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
@@ -884,7 +884,7 @@ type ConditionsURLFileExtensionConditionObservation struct {
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
@@ -902,7 +902,7 @@ type ConditionsURLFileExtensionConditionParameters struct {
 	// +kubebuilder:validation:Optional
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator" tf:"operator,omitempty"`
 
@@ -920,7 +920,7 @@ type ConditionsURLPathConditionInitParameters struct {
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
@@ -936,7 +936,7 @@ type ConditionsURLPathConditionObservation struct {
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
@@ -954,7 +954,7 @@ type ConditionsURLPathConditionParameters struct {
 	// +kubebuilder:validation:Optional
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator" tf:"operator,omitempty"`
 
@@ -1044,7 +1044,7 @@ type HostNameConditionInitParameters struct {
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
@@ -1060,7 +1060,7 @@ type HostNameConditionObservation struct {
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
@@ -1078,7 +1078,7 @@ type HostNameConditionParameters struct {
 	// +kubebuilder:validation:Optional
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator" tf:"operator,omitempty"`
 
@@ -1096,7 +1096,7 @@ type IsDeviceConditionInitParameters struct {
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
 
@@ -1108,7 +1108,7 @@ type IsDeviceConditionObservation struct {
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
 
@@ -1122,7 +1122,7 @@ type IsDeviceConditionParameters struct {
 	// +kubebuilder:validation:Optional
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
@@ -1135,7 +1135,7 @@ type PostArgsConditionInitParameters struct {
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A string value representing the name of the POST argument.
@@ -1154,7 +1154,7 @@ type PostArgsConditionObservation struct {
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A string value representing the name of the POST argument.
@@ -1175,7 +1175,7 @@ type PostArgsConditionParameters struct {
 	// +kubebuilder:validation:Optional
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator" tf:"operator,omitempty"`
 
@@ -1375,7 +1375,7 @@ type SSLProtocolConditionInitParameters struct {
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
 
@@ -1388,7 +1388,7 @@ type SSLProtocolConditionObservation struct {
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
 
@@ -1403,7 +1403,7 @@ type SSLProtocolConditionParameters struct {
 	// +kubebuilder:validation:Optional
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
@@ -1417,7 +1417,7 @@ type ServerPortConditionInitParameters struct {
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
 
@@ -1430,7 +1430,7 @@ type ServerPortConditionObservation struct {
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
 
@@ -1445,7 +1445,7 @@ type ServerPortConditionParameters struct {
 	// +kubebuilder:validation:Optional
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator" tf:"operator,omitempty"`
 }
@@ -1458,7 +1458,7 @@ type SocketAddressConditionInitParameters struct {
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
 
@@ -1470,7 +1470,7 @@ type SocketAddressConditionObservation struct {
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
 
@@ -1484,7 +1484,7 @@ type SocketAddressConditionParameters struct {
 	// +kubebuilder:validation:Optional
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
@@ -1497,7 +1497,7 @@ type URLFilenameConditionInitParameters struct {
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
@@ -1513,7 +1513,7 @@ type URLFilenameConditionObservation struct {
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
@@ -1531,7 +1531,7 @@ type URLFilenameConditionParameters struct {
 	// +kubebuilder:validation:Optional
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
-	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx or Wildcard. Details can be found in the Condition Operator List below.
 	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator" tf:"operator,omitempty"`
 

@@ -13,7 +13,7 @@ metadata:
   name: windowsfunctionappnameaa
 spec:
   forProvider:
-    location: East US
+    location: West Europe
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: winfunctionapp-rg
@@ -54,7 +54,7 @@ metadata:
   name: winfunctionapp-rg
 spec:
   forProvider:
-    location: East US
+    location: West Europe
 
 ---
 
@@ -69,7 +69,7 @@ metadata:
   name: winfunctionapp-rg
 spec:
   forProvider:
-    location: East US
+    location: West Europe
     osType: Windows
     resourceGroupNameSelector:
       matchLabels:
@@ -91,7 +91,7 @@ spec:
   forProvider:
     accountReplicationType: LRS
     accountTier: Standard
-    location: East US
+    location: West Europe
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: winfunctionapp-rg

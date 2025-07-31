@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.14.0
+    controller-gen.kubebuilder.io/version: v0.16.5
   name: certificatecontacts.keyvault.azure.upbound.io
 spec:
   group: keyvault.azure.upbound.io
@@ -441,11 +441,6 @@ spec:
             required:
             - forProvider
             type: object
-            x-kubernetes-validations:
-            - message: spec.forProvider.contact is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.contact)
-                || (has(self.initProvider) && has(self.initProvider.contact))'
           status:
             description: CertificateContactsStatus defines the observed state of CertificateContacts.
             properties:

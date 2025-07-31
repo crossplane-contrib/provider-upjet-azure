@@ -54,6 +54,9 @@ type LinkedServiceAzureSQLDatabaseInitParameters struct {
 	// The connection string in which to authenticate with Azure SQL Database. Exactly one of either connection_string or key_vault_connection_string is required.
 	ConnectionString *string `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
 
+	// The name of a User-assigned Managed Identity. Use this argument to authenticate against the linked resource using a User-assigned Managed Identity.
+	CredentialName *string `json:"credentialName,omitempty" tf:"credential_name,omitempty"`
+
 	// The description for the Data Factory Linked Service Azure SQL Database.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -124,6 +127,9 @@ type LinkedServiceAzureSQLDatabaseObservation struct {
 	// The connection string in which to authenticate with Azure SQL Database. Exactly one of either connection_string or key_vault_connection_string is required.
 	ConnectionString *string `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
 
+	// The name of a User-assigned Managed Identity. Use this argument to authenticate against the linked resource using a User-assigned Managed Identity.
+	CredentialName *string `json:"credentialName,omitempty" tf:"credential_name,omitempty"`
+
 	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
 	DataFactoryID *string `json:"dataFactoryId,omitempty" tf:"data_factory_id,omitempty"`
 
@@ -173,6 +179,10 @@ type LinkedServiceAzureSQLDatabaseParameters struct {
 	// The connection string in which to authenticate with Azure SQL Database. Exactly one of either connection_string or key_vault_connection_string is required.
 	// +kubebuilder:validation:Optional
 	ConnectionString *string `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
+
+	// The name of a User-assigned Managed Identity. Use this argument to authenticate against the linked resource using a User-assigned Managed Identity.
+	// +kubebuilder:validation:Optional
+	CredentialName *string `json:"credentialName,omitempty" tf:"credential_name,omitempty"`
 
 	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/datafactory/v1beta2.Factory

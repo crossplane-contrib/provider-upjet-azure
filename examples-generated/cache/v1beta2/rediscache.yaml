@@ -9,10 +9,10 @@ metadata:
 spec:
   forProvider:
     capacity: 2
-    enableNonSslPort: false
     family: C
     location: West Europe
     minimumTlsVersion: "1.2"
+    nonSslPortEnabled: false
     redisConfiguration:
     - {}
     resourceGroupNameSelector:

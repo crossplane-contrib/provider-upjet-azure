@@ -34,7 +34,7 @@ spec:
   forProvider:
     redisVersion: "6"
     capacity: 1
-    enableNonSslPort: false
+    nonSslPortEnabled: false
     family: P
     location: West Europe
     skuName: Premium

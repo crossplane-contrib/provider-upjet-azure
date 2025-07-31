@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.14.0
+    controller-gen.kubebuilder.io/version: v0.16.5
   name: providers.attestation.azure.upbound.io
 spec:
   group: attestation.azure.upbound.io
@@ -81,15 +81,6 @@ spec:
                     description: Specifies the base64 URI Encoded RFC 7519 JWT that
                       should be used for the Attestation Policy.
                     type: string
-                  policy:
-                    items:
-                      properties:
-                        data:
-                          type: string
-                        environmentType:
-                          type: string
-                      type: object
-                    type: array
                   policySigningCertificateData:
                     description: A valid X.509 certificate (Section 4 of RFC4648).
                       Changing this forces a new resource to be created.
@@ -216,15 +207,6 @@ spec:
                     description: Specifies the base64 URI Encoded RFC 7519 JWT that
                       should be used for the Attestation Policy.
                     type: string
-                  policy:
-                    items:
-                      properties:
-                        data:
-                          type: string
-                        environmentType:
-                          type: string
-                      type: object
-                    type: array
                   policySigningCertificateData:
                     description: A valid X.509 certificate (Section 4 of RFC4648).
                       Changing this forces a new resource to be created.
@@ -440,15 +422,6 @@ spec:
                     description: Specifies the base64 URI Encoded RFC 7519 JWT that
                       should be used for the Attestation Policy.
                     type: string
-                  policy:
-                    items:
-                      properties:
-                        data:
-                          type: string
-                        environmentType:
-                          type: string
-                      type: object
-                    type: array
                   policySigningCertificateData:
                     description: A valid X.509 certificate (Section 4 of RFC4648).
                       Changing this forces a new resource to be created.

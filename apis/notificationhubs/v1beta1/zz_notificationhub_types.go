@@ -26,6 +26,9 @@ type APNSCredentialInitParameters struct {
 
 	// The ID of the team the Token.
 	TeamID *string `json:"teamId,omitempty" tf:"team_id,omitempty"`
+
+	// The Push Token associated with the Apple Developer Account. This is the contents of the key downloaded from the Apple Developer Portal between the -----BEGIN PRIVATE KEY----- and -----END PRIVATE KEY----- blocks.
+	TokenSecretRef v1.SecretKeySelector `json:"tokenSecretRef" tf:"-"`
 }
 
 type APNSCredentialObservation struct {
@@ -62,11 +65,50 @@ type APNSCredentialParameters struct {
 	TeamID *string `json:"teamId" tf:"team_id,omitempty"`
 
 	// The Push Token associated with the Apple Developer Account. This is the contents of the key downloaded from the Apple Developer Portal between the -----BEGIN PRIVATE KEY----- and -----END PRIVATE KEY----- blocks.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	TokenSecretRef v1.SecretKeySelector `json:"tokenSecretRef" tf:"-"`
 }
 
+type BrowserCredentialInitParameters struct {
+
+	// The subject name of web push.
+	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
+
+	// The Voluntary Application Server Identification (VAPID) private key.
+	VapidPrivateKeySecretRef v1.SecretKeySelector `json:"vapidPrivateKeySecretRef" tf:"-"`
+
+	// The Voluntary Application Server Identification (VAPID) public key.
+	VapidPublicKey *string `json:"vapidPublicKey,omitempty" tf:"vapid_public_key,omitempty"`
+}
+
+type BrowserCredentialObservation struct {
+
+	// The subject name of web push.
+	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
+
+	// The Voluntary Application Server Identification (VAPID) public key.
+	VapidPublicKey *string `json:"vapidPublicKey,omitempty" tf:"vapid_public_key,omitempty"`
+}
+
+type BrowserCredentialParameters struct {
+
+	// The subject name of web push.
+	// +kubebuilder:validation:Optional
+	Subject *string `json:"subject" tf:"subject,omitempty"`
+
+	// The Voluntary Application Server Identification (VAPID) private key.
+	// +kubebuilder:validation:Optional
+	VapidPrivateKeySecretRef v1.SecretKeySelector `json:"vapidPrivateKeySecretRef" tf:"-"`
+
+	// The Voluntary Application Server Identification (VAPID) public key.
+	// +kubebuilder:validation:Optional
+	VapidPublicKey *string `json:"vapidPublicKey" tf:"vapid_public_key,omitempty"`
+}
+
 type GCMCredentialInitParameters struct {
+
+	// The API Key associated with the Google Cloud Messaging service.
+	APIKeySecretRef v1.SecretKeySelector `json:"apiKeySecretRef" tf:"-"`
 }
 
 type GCMCredentialObservation struct {
@@ -75,7 +117,7 @@ type GCMCredentialObservation struct {
 type GCMCredentialParameters struct {
 
 	// The API Key associated with the Google Cloud Messaging service.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	APIKeySecretRef v1.SecretKeySelector `json:"apiKeySecretRef" tf:"-"`
 }
 
@@ -83,6 +125,9 @@ type NotificationHubInitParameters struct {
 
 	// A apns_credential block as defined below.
 	APNSCredential []APNSCredentialInitParameters `json:"apnsCredential,omitempty" tf:"apns_credential,omitempty"`
+
+	// A browser_credential block as defined below.
+	BrowserCredential []BrowserCredentialInitParameters `json:"browserCredential,omitempty" tf:"browser_credential,omitempty"`
 
 	// A gcm_credential block as defined below.
 	GCMCredential []GCMCredentialInitParameters `json:"gcmCredential,omitempty" tf:"gcm_credential,omitempty"`
@@ -99,6 +144,9 @@ type NotificationHubObservation struct {
 
 	// A apns_credential block as defined below.
 	APNSCredential []APNSCredentialObservation `json:"apnsCredential,omitempty" tf:"apns_credential,omitempty"`
+
+	// A browser_credential block as defined below.
+	BrowserCredential []BrowserCredentialObservation `json:"browserCredential,omitempty" tf:"browser_credential,omitempty"`
 
 	// A gcm_credential block as defined below.
 	GCMCredential []GCMCredentialParameters `json:"gcmCredential,omitempty" tf:"gcm_credential,omitempty"`
@@ -125,6 +173,10 @@ type NotificationHubParameters struct {
 	// A apns_credential block as defined below.
 	// +kubebuilder:validation:Optional
 	APNSCredential []APNSCredentialParameters `json:"apnsCredential,omitempty" tf:"apns_credential,omitempty"`
+
+	// A browser_credential block as defined below.
+	// +kubebuilder:validation:Optional
+	BrowserCredential []BrowserCredentialParameters `json:"browserCredential,omitempty" tf:"browser_credential,omitempty"`
 
 	// A gcm_credential block as defined below.
 	// +kubebuilder:validation:Optional

@@ -14,7 +14,7 @@ spec:
         testing.upbound.io/example-name: example
     storageAccountIdsRefs:
     - name: example
-    workspaceResourceIdSelector:
+    workspaceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
 

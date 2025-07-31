@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.14.0
+    controller-gen.kubebuilder.io/version: v0.16.5
   name: mssqlservertransparentdataencryptions.sql.azure.upbound.io
 spec:
   group: sql.azure.upbound.io
@@ -161,7 +161,9 @@ spec:
                         type: object
                     type: object
                   managedHsmKeyId:
-                    description: The ID of the MSSQL encryption protector
+                    description: To use customer managed keys from a managed HSM,
+                      provide the Managed HSM Key ID. To use service managed keys,
+                      omit this field.
                     type: string
                   serverId:
                     description: Specifies the name of the MS SQL Server. Changing
@@ -342,7 +344,9 @@ spec:
                         type: object
                     type: object
                   managedHsmKeyId:
-                    description: The ID of the MSSQL encryption protector
+                    description: To use customer managed keys from a managed HSM,
+                      provide the Managed HSM Key ID. To use service managed keys,
+                      omit this field.
                     type: string
                 type: object
               managementPolicies:
@@ -534,7 +538,9 @@ spec:
                       field.
                     type: string
                   managedHsmKeyId:
-                    description: The ID of the MSSQL encryption protector
+                    description: To use customer managed keys from a managed HSM,
+                      provide the Managed HSM Key ID. To use service managed keys,
+                      omit this field.
                     type: string
                   serverId:
                     description: Specifies the name of the MS SQL Server. Changing

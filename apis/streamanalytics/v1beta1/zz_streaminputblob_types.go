@@ -15,6 +15,9 @@ import (
 
 type StreamInputBlobInitParameters struct {
 
+	// The authentication mode for the Stream Analytics Input. Possible values are Msi and ConnectionString. Defaults to ConnectionString.
+	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
+
 	// The date format. Wherever {date} appears in path_pattern, the value of this property is used as the date format instead.
 	DateFormat *string `json:"dateFormat,omitempty" tf:"date_format,omitempty"`
 
@@ -38,6 +41,9 @@ type StreamInputBlobInitParameters struct {
 
 	// A serialization block as defined below.
 	Serialization []StreamInputBlobSerializationInitParameters `json:"serialization,omitempty" tf:"serialization,omitempty"`
+
+	// The Access Key which should be used to connect to this Storage Account.
+	StorageAccountKeySecretRef v1.SecretKeySelector `json:"storageAccountKeySecretRef" tf:"-"`
 
 	// The name of the Storage Account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
@@ -81,6 +87,9 @@ type StreamInputBlobInitParameters struct {
 
 type StreamInputBlobObservation struct {
 
+	// The authentication mode for the Stream Analytics Input. Possible values are Msi and ConnectionString. Defaults to ConnectionString.
+	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
+
 	// The date format. Wherever {date} appears in path_pattern, the value of this property is used as the date format instead.
 	DateFormat *string `json:"dateFormat,omitempty" tf:"date_format,omitempty"`
 
@@ -113,6 +122,10 @@ type StreamInputBlobObservation struct {
 }
 
 type StreamInputBlobParameters struct {
+
+	// The authentication mode for the Stream Analytics Input. Possible values are Msi and ConnectionString. Defaults to ConnectionString.
+	// +kubebuilder:validation:Optional
+	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
 
 	// The date format. Wherever {date} appears in path_pattern, the value of this property is used as the date format instead.
 	// +kubebuilder:validation:Optional

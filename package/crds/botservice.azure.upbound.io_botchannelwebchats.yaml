@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.14.0
+    controller-gen.kubebuilder.io/version: v0.16.5
   name: botchannelwebchats.botservice.azure.upbound.io
 spec:
   group: botservice.azure.upbound.io
@@ -260,13 +260,6 @@ spec:
                           type: boolean
                       type: object
                     type: array
-                  siteNames:
-                    description: 'Deprecated: siteNames will be removed in favour
-                      of the site code block.'
-                    items:
-                      type: string
-                    type: array
-                    x-kubernetes-list-type: set
                 type: object
               initProvider:
                 description: |-
@@ -307,13 +300,6 @@ spec:
                           type: boolean
                       type: object
                     type: array
-                  siteNames:
-                    description: 'Deprecated: siteNames will be removed in favour
-                      of the site code block.'
-                    items:
-                      type: string
-                    type: array
-                    x-kubernetes-list-type: set
                 type: object
               managementPolicies:
                 default:
@@ -530,13 +516,6 @@ spec:
                           type: boolean
                       type: object
                     type: array
-                  siteNames:
-                    description: 'Deprecated: siteNames will be removed in favour
-                      of the site code block.'
-                    items:
-                      type: string
-                    type: array
-                    x-kubernetes-list-type: set
                 type: object
               conditions:
                 description: Conditions of the resource.

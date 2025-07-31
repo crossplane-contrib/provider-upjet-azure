@@ -546,50 +546,6 @@ type WindowsVirtualMachineScaleSetGalleryApplicationParameters struct {
 	VersionID *string `json:"versionId" tf:"version_id,omitempty"`
 }
 
-type WindowsVirtualMachineScaleSetGalleryApplicationsInitParameters struct {
-	ConfigurationReferenceBlobURI *string `json:"configurationReferenceBlobUri,omitempty" tf:"configuration_reference_blob_uri,omitempty"`
-
-	// Specifies the order in which the packages have to be installed. Possible values are between 0 and 2147483647. Defaults to 0. Changing this forces a new resource to be created.
-	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
-
-	// The ID of the Windows Virtual Machine Scale Set.
-	PackageReferenceID *string `json:"packageReferenceId,omitempty" tf:"package_reference_id,omitempty"`
-
-	// The IP Tag associated with the Public IP, such as SQL or Storage. Changing this forces a new resource to be created.
-	Tag *string `json:"tag,omitempty" tf:"tag,omitempty"`
-}
-
-type WindowsVirtualMachineScaleSetGalleryApplicationsObservation struct {
-	ConfigurationReferenceBlobURI *string `json:"configurationReferenceBlobUri,omitempty" tf:"configuration_reference_blob_uri,omitempty"`
-
-	// Specifies the order in which the packages have to be installed. Possible values are between 0 and 2147483647. Defaults to 0. Changing this forces a new resource to be created.
-	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
-
-	// The ID of the Windows Virtual Machine Scale Set.
-	PackageReferenceID *string `json:"packageReferenceId,omitempty" tf:"package_reference_id,omitempty"`
-
-	// The IP Tag associated with the Public IP, such as SQL or Storage. Changing this forces a new resource to be created.
-	Tag *string `json:"tag,omitempty" tf:"tag,omitempty"`
-}
-
-type WindowsVirtualMachineScaleSetGalleryApplicationsParameters struct {
-
-	// +kubebuilder:validation:Optional
-	ConfigurationReferenceBlobURI *string `json:"configurationReferenceBlobUri,omitempty" tf:"configuration_reference_blob_uri,omitempty"`
-
-	// Specifies the order in which the packages have to be installed. Possible values are between 0 and 2147483647. Defaults to 0. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
-
-	// The ID of the Windows Virtual Machine Scale Set.
-	// +kubebuilder:validation:Optional
-	PackageReferenceID *string `json:"packageReferenceId" tf:"package_reference_id,omitempty"`
-
-	// The IP Tag associated with the Public IP, such as SQL or Storage. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Tag *string `json:"tag,omitempty" tf:"tag,omitempty"`
-}
-
 type WindowsVirtualMachineScaleSetIdentityInitParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Windows Virtual Machine Scale Set.
@@ -690,8 +646,6 @@ type WindowsVirtualMachineScaleSetInitParameters struct {
 	// One or more gallery_application blocks as defined below.
 	GalleryApplication []WindowsVirtualMachineScaleSetGalleryApplicationInitParameters `json:"galleryApplication,omitempty" tf:"gallery_application,omitempty"`
 
-	GalleryApplications []WindowsVirtualMachineScaleSetGalleryApplicationsInitParameters `json:"galleryApplications,omitempty" tf:"gallery_applications,omitempty"`
-
 	// The ID of a Load Balancer Probe which should be used to determine the health of an instance. This is Required and can only be specified when upgrade_mode is set to Automatic or Rolling.
 	HealthProbeID *string `json:"healthProbeId,omitempty" tf:"health_probe_id,omitempty"`
 
@@ -743,9 +697,6 @@ type WindowsVirtualMachineScaleSetInitParameters struct {
 	// A scale_in block as defined below.
 	ScaleIn *WindowsVirtualMachineScaleSetScaleInInitParameters `json:"scaleIn,omitempty" tf:"scale_in,omitempty"`
 
-	// Deprecated: scaleInPolicy will be removed in favour of the scaleIn code block.
-	ScaleInPolicy *string `json:"scaleInPolicy,omitempty" tf:"scale_in_policy,omitempty"`
-
 	// One or more secret blocks as defined below.
 	Secret []WindowsVirtualMachineScaleSetSecretInitParameters `json:"secret,omitempty" tf:"secret,omitempty"`
 
@@ -771,9 +722,6 @@ type WindowsVirtualMachineScaleSetInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A terminate_notification block as defined below.
-	TerminateNotification *WindowsVirtualMachineScaleSetTerminateNotificationInitParameters `json:"terminateNotification,omitempty" tf:"terminate_notification,omitempty"`
-
 	// A termination_notification block as defined below.
 	TerminationNotification *WindowsVirtualMachineScaleSetTerminationNotificationInitParameters `json:"terminationNotification,omitempty" tf:"termination_notification,omitempty"`
 
@@ -795,7 +743,7 @@ type WindowsVirtualMachineScaleSetInitParameters struct {
 	// Should the Virtual Machines in this Scale Set be strictly evenly distributed across Availability Zones? Defaults to false. Changing this forces a new resource to be created.
 	ZoneBalance *bool `json:"zoneBalance,omitempty" tf:"zone_balance,omitempty"`
 
-	// Specifies a list of Availability Zones in which this Windows Virtual Machine Scale Set should be located. Changing this forces a new Windows Virtual Machine Scale Set to be created.
+	// Specifies a list of Availability Zones in which this Windows Virtual Machine Scale Set should be located.
 	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
@@ -1066,8 +1014,6 @@ type WindowsVirtualMachineScaleSetObservation struct {
 	// One or more gallery_application blocks as defined below.
 	GalleryApplication []WindowsVirtualMachineScaleSetGalleryApplicationObservation `json:"galleryApplication,omitempty" tf:"gallery_application,omitempty"`
 
-	GalleryApplications []WindowsVirtualMachineScaleSetGalleryApplicationsObservation `json:"galleryApplications,omitempty" tf:"gallery_applications,omitempty"`
-
 	// The ID of a Load Balancer Probe which should be used to determine the health of an instance. This is Required and can only be specified when upgrade_mode is set to Automatic or Rolling.
 	HealthProbeID *string `json:"healthProbeId,omitempty" tf:"health_probe_id,omitempty"`
 
@@ -1125,9 +1071,6 @@ type WindowsVirtualMachineScaleSetObservation struct {
 	// A scale_in block as defined below.
 	ScaleIn *WindowsVirtualMachineScaleSetScaleInObservation `json:"scaleIn,omitempty" tf:"scale_in,omitempty"`
 
-	// Deprecated: scaleInPolicy will be removed in favour of the scaleIn code block.
-	ScaleInPolicy *string `json:"scaleInPolicy,omitempty" tf:"scale_in_policy,omitempty"`
-
 	// One or more secret blocks as defined below.
 	Secret []WindowsVirtualMachineScaleSetSecretObservation `json:"secret,omitempty" tf:"secret,omitempty"`
 
@@ -1153,9 +1096,6 @@ type WindowsVirtualMachineScaleSetObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A terminate_notification block as defined below.
-	TerminateNotification *WindowsVirtualMachineScaleSetTerminateNotificationObservation `json:"terminateNotification,omitempty" tf:"terminate_notification,omitempty"`
-
 	// A termination_notification block as defined below.
 	TerminationNotification *WindowsVirtualMachineScaleSetTerminationNotificationObservation `json:"terminationNotification,omitempty" tf:"termination_notification,omitempty"`
 
@@ -1180,7 +1120,7 @@ type WindowsVirtualMachineScaleSetObservation struct {
 	// Should the Virtual Machines in this Scale Set be strictly evenly distributed across Availability Zones? Defaults to false. Changing this forces a new resource to be created.
 	ZoneBalance *bool `json:"zoneBalance,omitempty" tf:"zone_balance,omitempty"`
 
-	// Specifies a list of Availability Zones in which this Windows Virtual Machine Scale Set should be located. Changing this forces a new Windows Virtual Machine Scale Set to be created.
+	// Specifies a list of Availability Zones in which this Windows Virtual Machine Scale Set should be located.
 	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
@@ -1385,9 +1325,6 @@ type WindowsVirtualMachineScaleSetParameters struct {
 	// +kubebuilder:validation:Optional
 	GalleryApplication []WindowsVirtualMachineScaleSetGalleryApplicationParameters `json:"galleryApplication,omitempty" tf:"gallery_application,omitempty"`
 
-	// +kubebuilder:validation:Optional
-	GalleryApplications []WindowsVirtualMachineScaleSetGalleryApplicationsParameters `json:"galleryApplications,omitempty" tf:"gallery_applications,omitempty"`
-
 	// The ID of a Load Balancer Probe which should be used to determine the health of an instance. This is Required and can only be specified when upgrade_mode is set to Automatic or Rolling.
 	// +kubebuilder:validation:Optional
 	HealthProbeID *string `json:"healthProbeId,omitempty" tf:"health_probe_id,omitempty"`
@@ -1469,10 +1406,6 @@ type WindowsVirtualMachineScaleSetParameters struct {
 	// +kubebuilder:validation:Optional
 	ScaleIn *WindowsVirtualMachineScaleSetScaleInParameters `json:"scaleIn,omitempty" tf:"scale_in,omitempty"`
 
-	// Deprecated: scaleInPolicy will be removed in favour of the scaleIn code block.
-	// +kubebuilder:validation:Optional
-	ScaleInPolicy *string `json:"scaleInPolicy,omitempty" tf:"scale_in_policy,omitempty"`
-
 	// One or more secret blocks as defined below.
 	// +kubebuilder:validation:Optional
 	Secret []WindowsVirtualMachineScaleSetSecretParameters `json:"secret,omitempty" tf:"secret,omitempty"`
@@ -1506,10 +1439,6 @@ type WindowsVirtualMachineScaleSetParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A terminate_notification block as defined below.
-	// +kubebuilder:validation:Optional
-	TerminateNotification *WindowsVirtualMachineScaleSetTerminateNotificationParameters `json:"terminateNotification,omitempty" tf:"terminate_notification,omitempty"`
-
 	// A termination_notification block as defined below.
 	// +kubebuilder:validation:Optional
 	TerminationNotification *WindowsVirtualMachineScaleSetTerminationNotificationParameters `json:"terminationNotification,omitempty" tf:"termination_notification,omitempty"`
@@ -1538,7 +1467,7 @@ type WindowsVirtualMachineScaleSetParameters struct {
 	// +kubebuilder:validation:Optional
 	ZoneBalance *bool `json:"zoneBalance,omitempty" tf:"zone_balance,omitempty"`
 
-	// Specifies a list of Availability Zones in which this Windows Virtual Machine Scale Set should be located. Changing this forces a new Windows Virtual Machine Scale Set to be created.
+	// Specifies a list of Availability Zones in which this Windows Virtual Machine Scale Set should be located.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
@@ -1823,35 +1752,6 @@ type WindowsVirtualMachineScaleSetSpotRestoreParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The length of time that the Virtual Machine Scale Set should attempt to restore the Spot VM instances which have been evicted. The time duration should be between 15 minutes and 120 minutes (inclusive). The time duration should be specified in the ISO 8601 format. Defaults to PT1H. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Timeout *string `json:"timeout,omitempty" tf:"timeout,omitempty"`
-}
-
-type WindowsVirtualMachineScaleSetTerminateNotificationInitParameters struct {
-
-	// Should the terminate notification be enabled on this Virtual Machine Scale Set?
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-
-	// Length of time (in minutes, between 5 and 15) a notification to be sent to the VM on the instance metadata server till the VM gets deleted. The time duration should be specified in ISO 8601 format. Defaults to PT5M.
-	Timeout *string `json:"timeout,omitempty" tf:"timeout,omitempty"`
-}
-
-type WindowsVirtualMachineScaleSetTerminateNotificationObservation struct {
-
-	// Should the terminate notification be enabled on this Virtual Machine Scale Set?
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-
-	// Length of time (in minutes, between 5 and 15) a notification to be sent to the VM on the instance metadata server till the VM gets deleted. The time duration should be specified in ISO 8601 format. Defaults to PT5M.
-	Timeout *string `json:"timeout,omitempty" tf:"timeout,omitempty"`
-}
-
-type WindowsVirtualMachineScaleSetTerminateNotificationParameters struct {
-
-	// Should the terminate notification be enabled on this Virtual Machine Scale Set?
-	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
-
-	// Length of time (in minutes, between 5 and 15) a notification to be sent to the VM on the instance metadata server till the VM gets deleted. The time duration should be specified in ISO 8601 format. Defaults to PT5M.
 	// +kubebuilder:validation:Optional
 	Timeout *string `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }

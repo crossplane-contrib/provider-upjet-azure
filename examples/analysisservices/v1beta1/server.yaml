@@ -12,7 +12,7 @@ metadata:
   name: analysisservicesserver
 spec:
   forProvider:
-    enablePowerBiService: true
+    powerBiServiceEnabled: true
     ipv4FirewallRule:
     - name: myRule1
       rangeEnd: 210.117.252.255

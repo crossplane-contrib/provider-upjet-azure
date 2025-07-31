@@ -12,10 +12,11 @@ metadata:
   name: examplemapsacc
 spec:
   forProvider:
+    location: West Europe
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: maps-rg
-    skuName: S1
+    skuName: G2
     tags:
       environment: Test
 

@@ -84,7 +84,7 @@ type FrontdoorOriginGroupParameters struct {
 
 type HealthProbeInitParameters struct {
 
-	// Specifies the number of seconds between health probes. Possible values are between 5 and 31536000 seconds (inclusive).
+	// Specifies the number of seconds between health probes. Possible values are between 1 and 255 seconds (inclusive).
 	IntervalInSeconds *float64 `json:"intervalInSeconds,omitempty" tf:"interval_in_seconds,omitempty"`
 
 	// Specifies the path relative to the origin that is used to determine the health of the origin. Defaults to /.
@@ -99,7 +99,7 @@ type HealthProbeInitParameters struct {
 
 type HealthProbeObservation struct {
 
-	// Specifies the number of seconds between health probes. Possible values are between 5 and 31536000 seconds (inclusive).
+	// Specifies the number of seconds between health probes. Possible values are between 1 and 255 seconds (inclusive).
 	IntervalInSeconds *float64 `json:"intervalInSeconds,omitempty" tf:"interval_in_seconds,omitempty"`
 
 	// Specifies the path relative to the origin that is used to determine the health of the origin. Defaults to /.
@@ -114,7 +114,7 @@ type HealthProbeObservation struct {
 
 type HealthProbeParameters struct {
 
-	// Specifies the number of seconds between health probes. Possible values are between 5 and 31536000 seconds (inclusive).
+	// Specifies the number of seconds between health probes. Possible values are between 1 and 255 seconds (inclusive).
 	// +kubebuilder:validation:Optional
 	IntervalInSeconds *float64 `json:"intervalInSeconds" tf:"interval_in_seconds,omitempty"`
 

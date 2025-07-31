@@ -76,8 +76,6 @@ type SnapshotEncryptionSettingsInitParameters struct {
 	// A disk_encryption_key block as defined below.
 	DiskEncryptionKey *EncryptionSettingsDiskEncryptionKeyInitParameters `json:"diskEncryptionKey,omitempty" tf:"disk_encryption_key,omitempty"`
 
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-
 	// A key_encryption_key block as defined below.
 	KeyEncryptionKey *EncryptionSettingsKeyEncryptionKeyInitParameters `json:"keyEncryptionKey,omitempty" tf:"key_encryption_key,omitempty"`
 }
@@ -87,8 +85,6 @@ type SnapshotEncryptionSettingsObservation struct {
 	// A disk_encryption_key block as defined below.
 	DiskEncryptionKey *EncryptionSettingsDiskEncryptionKeyObservation `json:"diskEncryptionKey,omitempty" tf:"disk_encryption_key,omitempty"`
 
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-
 	// A key_encryption_key block as defined below.
 	KeyEncryptionKey *EncryptionSettingsKeyEncryptionKeyObservation `json:"keyEncryptionKey,omitempty" tf:"key_encryption_key,omitempty"`
 }
@@ -97,10 +93,7 @@ type SnapshotEncryptionSettingsParameters struct {
 
 	// A disk_encryption_key block as defined below.
 	// +kubebuilder:validation:Optional
-	DiskEncryptionKey *EncryptionSettingsDiskEncryptionKeyParameters `json:"diskEncryptionKey,omitempty" tf:"disk_encryption_key,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	DiskEncryptionKey *EncryptionSettingsDiskEncryptionKeyParameters `json:"diskEncryptionKey" tf:"disk_encryption_key,omitempty"`
 
 	// A key_encryption_key block as defined below.
 	// +kubebuilder:validation:Optional

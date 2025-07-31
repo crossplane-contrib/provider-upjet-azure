@@ -1734,7 +1734,7 @@ func (mg *MonitorScheduledQueryRulesAlertV2) ResolveReferences(ctx context.Conte
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.Action); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta2", "MonitorActionGroup", "MonitorActionGroupList")
+			m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta1", "MonitorActionGroup", "MonitorActionGroupList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -1814,7 +1814,7 @@ func (mg *MonitorScheduledQueryRulesAlertV2) ResolveReferences(ctx context.Conte
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.Action); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta2", "MonitorActionGroup", "MonitorActionGroupList")
+			m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta1", "MonitorActionGroup", "MonitorActionGroupList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}

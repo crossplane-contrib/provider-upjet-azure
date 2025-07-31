@@ -179,7 +179,7 @@ type AuthSettingsV2ActiveDirectoryV2InitParameters struct {
 	// +mapType=granular
 	LoginParameters map[string]*string `json:"loginParameters,omitempty" tf:"login_parameters,omitempty"`
 
-	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/v2.0/{tenant-guid}/
+	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/{tenant-guid}/v2.0/
 	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. `https://login.microsoftonline.com/v2.0/{tenant-guid}/`.
 	TenantAuthEndpoint *string `json:"tenantAuthEndpoint,omitempty" tf:"tenant_auth_endpoint,omitempty"`
 
@@ -231,7 +231,7 @@ type AuthSettingsV2ActiveDirectoryV2Observation struct {
 	// +mapType=granular
 	LoginParameters map[string]*string `json:"loginParameters,omitempty" tf:"login_parameters,omitempty"`
 
-	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/v2.0/{tenant-guid}/
+	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/{tenant-guid}/v2.0/
 	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. `https://login.microsoftonline.com/v2.0/{tenant-guid}/`.
 	TenantAuthEndpoint *string `json:"tenantAuthEndpoint,omitempty" tf:"tenant_auth_endpoint,omitempty"`
 
@@ -293,7 +293,7 @@ type AuthSettingsV2ActiveDirectoryV2Parameters struct {
 	// +mapType=granular
 	LoginParameters map[string]*string `json:"loginParameters,omitempty" tf:"login_parameters,omitempty"`
 
-	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/v2.0/{tenant-guid}/
+	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/{tenant-guid}/v2.0/
 	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. `https://login.microsoftonline.com/v2.0/{tenant-guid}/`.
 	// +kubebuilder:validation:Optional
 	TenantAuthEndpoint *string `json:"tenantAuthEndpoint" tf:"tenant_auth_endpoint,omitempty"`
@@ -1696,6 +1696,10 @@ type LinuxFunctionAppSlotBackupInitParameters struct {
 
 	// a schedule block as detailed below.
 	Schedule []BackupScheduleInitParameters `json:"schedule,omitempty" tf:"schedule,omitempty"`
+
+	// The SAS URL to the container.
+	// The SAS URL to the container.
+	StorageAccountURLSecretRef v1.SecretKeySelector `json:"storageAccountUrlSecretRef" tf:"-"`
 }
 
 type LinuxFunctionAppSlotBackupObservation struct {
@@ -1730,7 +1734,7 @@ type LinuxFunctionAppSlotBackupParameters struct {
 
 	// The SAS URL to the container.
 	// The SAS URL to the container.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	StorageAccountURLSecretRef v1.SecretKeySelector `json:"storageAccountUrlSecretRef" tf:"-"`
 }
 
@@ -1743,6 +1747,10 @@ type LinuxFunctionAppSlotConnectionStringInitParameters struct {
 	// Type of database. Possible values include: APIHub, Custom, DocDb, EventHub, MySQL, NotificationHub, PostgreSQL, RedisCache, ServiceBus, SQLAzure, and SQLServer.
 	// Type of database. Possible values include: `MySQL`, `SQLServer`, `SQLAzure`, `Custom`, `NotificationHub`, `ServiceBus`, `EventHub`, `APIHub`, `DocDb`, `RedisCache`, and `PostgreSQL`.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// The connection string value.
+	// The connection string value.
+	ValueSecretRef v1.SecretKeySelector `json:"valueSecretRef" tf:"-"`
 }
 
 type LinuxFunctionAppSlotConnectionStringObservation struct {
@@ -1770,7 +1778,7 @@ type LinuxFunctionAppSlotConnectionStringParameters struct {
 
 	// The connection string value.
 	// The connection string value.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	ValueSecretRef v1.SecretKeySelector `json:"valueSecretRef" tf:"-"`
 }
 
@@ -1918,6 +1926,9 @@ type LinuxFunctionAppSlotInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Whether backup and restore operations over the linked virtual network are enabled. Defaults to false.
+	VirtualNetworkBackupRestoreEnabled *bool `json:"virtualNetworkBackupRestoreEnabled,omitempty" tf:"virtual_network_backup_restore_enabled,omitempty"`
+
 	// The subnet id which will be used by this Function App Slot for regional virtual network integration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
@@ -1930,6 +1941,10 @@ type LinuxFunctionAppSlotInitParameters struct {
 	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetIDSelector *v1.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
+
+	// Specifies whether traffic for the image pull should be routed over virtual network. Defaults to false.
+	// Is container image pull over virtual network enabled? Defaults to `false`.
+	VnetImagePullEnabled *bool `json:"vnetImagePullEnabled,omitempty" tf:"vnet_image_pull_enabled,omitempty"`
 
 	// Should the default WebDeploy Basic Authentication publishing credentials enabled. Defaults to true.
 	WebdeployPublishBasicAuthenticationEnabled *bool `json:"webdeployPublishBasicAuthenticationEnabled,omitempty" tf:"webdeploy_publish_basic_authentication_enabled,omitempty"`
@@ -2056,8 +2071,15 @@ type LinuxFunctionAppSlotObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Whether backup and restore operations over the linked virtual network are enabled. Defaults to false.
+	VirtualNetworkBackupRestoreEnabled *bool `json:"virtualNetworkBackupRestoreEnabled,omitempty" tf:"virtual_network_backup_restore_enabled,omitempty"`
+
 	// The subnet id which will be used by this Function App Slot for regional virtual network integration.
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
+
+	// Specifies whether traffic for the image pull should be routed over virtual network. Defaults to false.
+	// Is container image pull over virtual network enabled? Defaults to `false`.
+	VnetImagePullEnabled *bool `json:"vnetImagePullEnabled,omitempty" tf:"vnet_image_pull_enabled,omitempty"`
 
 	// Should the default WebDeploy Basic Authentication publishing credentials enabled. Defaults to true.
 	WebdeployPublishBasicAuthenticationEnabled *bool `json:"webdeployPublishBasicAuthenticationEnabled,omitempty" tf:"webdeploy_publish_basic_authentication_enabled,omitempty"`
@@ -2210,6 +2232,10 @@ type LinuxFunctionAppSlotParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Whether backup and restore operations over the linked virtual network are enabled. Defaults to false.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkBackupRestoreEnabled *bool `json:"virtualNetworkBackupRestoreEnabled,omitempty" tf:"virtual_network_backup_restore_enabled,omitempty"`
+
 	// The subnet id which will be used by this Function App Slot for regional virtual network integration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
@@ -2223,6 +2249,11 @@ type LinuxFunctionAppSlotParameters struct {
 	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetIDSelector *v1.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
+
+	// Specifies whether traffic for the image pull should be routed over virtual network. Defaults to false.
+	// Is container image pull over virtual network enabled? Defaults to `false`.
+	// +kubebuilder:validation:Optional
+	VnetImagePullEnabled *bool `json:"vnetImagePullEnabled,omitempty" tf:"vnet_image_pull_enabled,omitempty"`
 
 	// Should the default WebDeploy Basic Authentication publishing credentials enabled. Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -2534,8 +2565,8 @@ type LinuxFunctionAppSlotSiteConfigInitParameters struct {
 	// The Managed Pipeline mode. Possible values include: `Integrated`, `Classic`. Defaults to `Integrated`.
 	ManagedPipelineMode *string `json:"managedPipelineMode,omitempty" tf:"managed_pipeline_mode,omitempty"`
 
-	// The configures the minimum version of TLS required for SSL requests. Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
-	// The configures the minimum version of TLS required for SSL requests. Possible values include: `1.0`, `1.1`, and  `1.2`. Defaults to `1.2`.
+	// The configures the minimum version of TLS required for SSL requests. Possible values include: 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
+	// The configures the minimum version of TLS required for SSL requests. Possible values include: `1.0`, `1.1`, `1.2` and `1.3`. Defaults to `1.2`.
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
 	// The number of pre-warmed instances for this function app. Only affects apps on an Elastic Premium plan.
@@ -2546,8 +2577,8 @@ type LinuxFunctionAppSlotSiteConfigInitParameters struct {
 	// Should Remote Debugging be enabled. Defaults to `false`.
 	RemoteDebuggingEnabled *bool `json:"remoteDebuggingEnabled,omitempty" tf:"remote_debugging_enabled,omitempty"`
 
-	// The Remote Debugging Version. Possible values include VS2017, VS2019, and VS2022
-	// The Remote Debugging Version. Possible values include `VS2017`, `VS2019`, and `VS2022`
+	// The Remote Debugging Version. Currently only VS2022 is supported.
+	// The Remote Debugging Version. Currently only `VS2022` is supported.
 	RemoteDebuggingVersion *string `json:"remoteDebuggingVersion,omitempty" tf:"remote_debugging_version,omitempty"`
 
 	// Should Functions Runtime Scale Monitoring be enabled.
@@ -2560,8 +2591,8 @@ type LinuxFunctionAppSlotSiteConfigInitParameters struct {
 	// The Default action for traffic that does not match any scm_ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
 	ScmIPRestrictionDefaultAction *string `json:"scmIpRestrictionDefaultAction,omitempty" tf:"scm_ip_restriction_default_action,omitempty"`
 
-	// Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
-	// Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: `1.0`, `1.1`, and  `1.2`. Defaults to `1.2`.
+	// Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
+	// Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: `1.0`, `1.1`, `1.2` and `1.3`. Defaults to `1.2`.
 	ScmMinimumTLSVersion *string `json:"scmMinimumTlsVersion,omitempty" tf:"scm_minimum_tls_version,omitempty"`
 
 	// Should the Linux Function App ip_restriction configuration be used for the SCM also.
@@ -2673,8 +2704,8 @@ type LinuxFunctionAppSlotSiteConfigObservation struct {
 	// The Managed Pipeline mode. Possible values include: `Integrated`, `Classic`. Defaults to `Integrated`.
 	ManagedPipelineMode *string `json:"managedPipelineMode,omitempty" tf:"managed_pipeline_mode,omitempty"`
 
-	// The configures the minimum version of TLS required for SSL requests. Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
-	// The configures the minimum version of TLS required for SSL requests. Possible values include: `1.0`, `1.1`, and  `1.2`. Defaults to `1.2`.
+	// The configures the minimum version of TLS required for SSL requests. Possible values include: 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
+	// The configures the minimum version of TLS required for SSL requests. Possible values include: `1.0`, `1.1`, `1.2` and `1.3`. Defaults to `1.2`.
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
 	// The number of pre-warmed instances for this function app. Only affects apps on an Elastic Premium plan.
@@ -2685,8 +2716,8 @@ type LinuxFunctionAppSlotSiteConfigObservation struct {
 	// Should Remote Debugging be enabled. Defaults to `false`.
 	RemoteDebuggingEnabled *bool `json:"remoteDebuggingEnabled,omitempty" tf:"remote_debugging_enabled,omitempty"`
 
-	// The Remote Debugging Version. Possible values include VS2017, VS2019, and VS2022
-	// The Remote Debugging Version. Possible values include `VS2017`, `VS2019`, and `VS2022`
+	// The Remote Debugging Version. Currently only VS2022 is supported.
+	// The Remote Debugging Version. Currently only `VS2022` is supported.
 	RemoteDebuggingVersion *string `json:"remoteDebuggingVersion,omitempty" tf:"remote_debugging_version,omitempty"`
 
 	// Should Functions Runtime Scale Monitoring be enabled.
@@ -2699,8 +2730,8 @@ type LinuxFunctionAppSlotSiteConfigObservation struct {
 	// The Default action for traffic that does not match any scm_ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
 	ScmIPRestrictionDefaultAction *string `json:"scmIpRestrictionDefaultAction,omitempty" tf:"scm_ip_restriction_default_action,omitempty"`
 
-	// Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
-	// Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: `1.0`, `1.1`, and  `1.2`. Defaults to `1.2`.
+	// Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
+	// Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: `1.0`, `1.1`, `1.2` and `1.3`. Defaults to `1.2`.
 	ScmMinimumTLSVersion *string `json:"scmMinimumTlsVersion,omitempty" tf:"scm_minimum_tls_version,omitempty"`
 
 	// The SCM Type in use by the Linux Function App.
@@ -2839,8 +2870,8 @@ type LinuxFunctionAppSlotSiteConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	ManagedPipelineMode *string `json:"managedPipelineMode,omitempty" tf:"managed_pipeline_mode,omitempty"`
 
-	// The configures the minimum version of TLS required for SSL requests. Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
-	// The configures the minimum version of TLS required for SSL requests. Possible values include: `1.0`, `1.1`, and  `1.2`. Defaults to `1.2`.
+	// The configures the minimum version of TLS required for SSL requests. Possible values include: 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
+	// The configures the minimum version of TLS required for SSL requests. Possible values include: `1.0`, `1.1`, `1.2` and `1.3`. Defaults to `1.2`.
 	// +kubebuilder:validation:Optional
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
@@ -2854,8 +2885,8 @@ type LinuxFunctionAppSlotSiteConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	RemoteDebuggingEnabled *bool `json:"remoteDebuggingEnabled,omitempty" tf:"remote_debugging_enabled,omitempty"`
 
-	// The Remote Debugging Version. Possible values include VS2017, VS2019, and VS2022
-	// The Remote Debugging Version. Possible values include `VS2017`, `VS2019`, and `VS2022`
+	// The Remote Debugging Version. Currently only VS2022 is supported.
+	// The Remote Debugging Version. Currently only `VS2022` is supported.
 	// +kubebuilder:validation:Optional
 	RemoteDebuggingVersion *string `json:"remoteDebuggingVersion,omitempty" tf:"remote_debugging_version,omitempty"`
 
@@ -2872,8 +2903,8 @@ type LinuxFunctionAppSlotSiteConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	ScmIPRestrictionDefaultAction *string `json:"scmIpRestrictionDefaultAction,omitempty" tf:"scm_ip_restriction_default_action,omitempty"`
 
-	// Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
-	// Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: `1.0`, `1.1`, and  `1.2`. Defaults to `1.2`.
+	// Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
+	// Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: `1.0`, `1.1`, `1.2` and `1.3`. Defaults to `1.2`.
 	// +kubebuilder:validation:Optional
 	ScmMinimumTLSVersion *string `json:"scmMinimumTlsVersion,omitempty" tf:"scm_minimum_tls_version,omitempty"`
 
@@ -3099,6 +3130,9 @@ type LinuxFunctionAppSlotSiteCredentialParameters struct {
 
 type LinuxFunctionAppSlotStorageAccountInitParameters struct {
 
+	// The Access key for the storage account.
+	AccessKeySecretRef v1.SecretKeySelector `json:"accessKeySecretRef" tf:"-"`
+
 	// The Name of the Storage Account.
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
@@ -3136,7 +3170,7 @@ type LinuxFunctionAppSlotStorageAccountObservation struct {
 type LinuxFunctionAppSlotStorageAccountParameters struct {
 
 	// The Access key for the storage account.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	AccessKeySecretRef v1.SecretKeySelector `json:"accessKeySecretRef" tf:"-"`
 
 	// The Name of the Storage Account.
@@ -3201,24 +3235,24 @@ type SiteConfigApplicationStackInitParameters struct {
 	// A docker block
 	Docker []ApplicationStackDockerInitParameters `json:"docker,omitempty" tf:"docker,omitempty"`
 
-	// The version of .Net. Possible values are 3.1, 6.0, 7.0 and 8.0.
-	// The version of .Net. Possible values are `3.1`, `6.0` and `7.0`
+	// The version of .Net. Possible values are 3.1, 6.0, 7.0, 8.0 and 9.0.
+	// The version of .Net. Possible values are `3.1`, `6.0`, `7.0`, `8.0` and `9.0`
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
 	// The version of Java to use. Possible values are 8, 11 & 17 (In-Preview).
-	// The version of Java to use. Possible values are `8`, `11`, and `17`
+	// The version of Java to use. Possible values are `8`, `11`, `17`, and `21`
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
-	// The version of Node to use. Possible values include 12, 14, 16 and 18
-	// The version of Node to use. Possible values include `12`, `14`, `16` and `18`
+	// The version of Node to use. Possible values include 12, 14, 16, 18, 20 and 22.
+	// The version of Node to use. Possible values include `12`, `14`, `16`, `18`, `20` and `22`
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
-	// The version of PowerShell Core to use. Possibles values are 7 , and 7.2.
-	// The version of PowerShell Core to use. Possibles values are `7`, and `7.2`
+	// The version of PowerShell Core to use. Possibles values are 7 , 7.2, and 7.4.
+	// The version of PowerShell Core to use. Possibles values are `7`, `7.2`, and `7.4`
 	PowershellCoreVersion *string `json:"powershellCoreVersion,omitempty" tf:"powershell_core_version,omitempty"`
 
-	// The version of Python to use. Possible values are 3.12, 3.11, 3.10, 3.9, 3.8 and 3.7.
-	// The version of Python to use. Possible values include `3.12`, `3.11`, `3.10`, `3.9`, `3.8`, and `3.7`.
+	// The version of Python to use. Possible values are 3.13, 3.12, 3.11, 3.10, 3.9, 3.8 and 3.7.
+	// The version of Python to use. Possible values include `3.13`, `3.12`, `3.11`, `3.10`, `3.9`, `3.8`, and `3.7`.
 	PythonVersion *string `json:"pythonVersion,omitempty" tf:"python_version,omitempty"`
 
 	// Should the Linux Function App use a custom runtime?
@@ -3235,24 +3269,24 @@ type SiteConfigApplicationStackObservation struct {
 	// A docker block
 	Docker []ApplicationStackDockerObservation `json:"docker,omitempty" tf:"docker,omitempty"`
 
-	// The version of .Net. Possible values are 3.1, 6.0, 7.0 and 8.0.
-	// The version of .Net. Possible values are `3.1`, `6.0` and `7.0`
+	// The version of .Net. Possible values are 3.1, 6.0, 7.0, 8.0 and 9.0.
+	// The version of .Net. Possible values are `3.1`, `6.0`, `7.0`, `8.0` and `9.0`
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
 	// The version of Java to use. Possible values are 8, 11 & 17 (In-Preview).
-	// The version of Java to use. Possible values are `8`, `11`, and `17`
+	// The version of Java to use. Possible values are `8`, `11`, `17`, and `21`
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
-	// The version of Node to use. Possible values include 12, 14, 16 and 18
-	// The version of Node to use. Possible values include `12`, `14`, `16` and `18`
+	// The version of Node to use. Possible values include 12, 14, 16, 18, 20 and 22.
+	// The version of Node to use. Possible values include `12`, `14`, `16`, `18`, `20` and `22`
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
-	// The version of PowerShell Core to use. Possibles values are 7 , and 7.2.
-	// The version of PowerShell Core to use. Possibles values are `7`, and `7.2`
+	// The version of PowerShell Core to use. Possibles values are 7 , 7.2, and 7.4.
+	// The version of PowerShell Core to use. Possibles values are `7`, `7.2`, and `7.4`
 	PowershellCoreVersion *string `json:"powershellCoreVersion,omitempty" tf:"powershell_core_version,omitempty"`
 
-	// The version of Python to use. Possible values are 3.12, 3.11, 3.10, 3.9, 3.8 and 3.7.
-	// The version of Python to use. Possible values include `3.12`, `3.11`, `3.10`, `3.9`, `3.8`, and `3.7`.
+	// The version of Python to use. Possible values are 3.13, 3.12, 3.11, 3.10, 3.9, 3.8 and 3.7.
+	// The version of Python to use. Possible values include `3.13`, `3.12`, `3.11`, `3.10`, `3.9`, `3.8`, and `3.7`.
 	PythonVersion *string `json:"pythonVersion,omitempty" tf:"python_version,omitempty"`
 
 	// Should the Linux Function App use a custom runtime?
@@ -3270,28 +3304,28 @@ type SiteConfigApplicationStackParameters struct {
 	// +kubebuilder:validation:Optional
 	Docker []ApplicationStackDockerParameters `json:"docker,omitempty" tf:"docker,omitempty"`
 
-	// The version of .Net. Possible values are 3.1, 6.0, 7.0 and 8.0.
-	// The version of .Net. Possible values are `3.1`, `6.0` and `7.0`
+	// The version of .Net. Possible values are 3.1, 6.0, 7.0, 8.0 and 9.0.
+	// The version of .Net. Possible values are `3.1`, `6.0`, `7.0`, `8.0` and `9.0`
 	// +kubebuilder:validation:Optional
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
 	// The version of Java to use. Possible values are 8, 11 & 17 (In-Preview).
-	// The version of Java to use. Possible values are `8`, `11`, and `17`
+	// The version of Java to use. Possible values are `8`, `11`, `17`, and `21`
 	// +kubebuilder:validation:Optional
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
-	// The version of Node to use. Possible values include 12, 14, 16 and 18
-	// The version of Node to use. Possible values include `12`, `14`, `16` and `18`
+	// The version of Node to use. Possible values include 12, 14, 16, 18, 20 and 22.
+	// The version of Node to use. Possible values include `12`, `14`, `16`, `18`, `20` and `22`
 	// +kubebuilder:validation:Optional
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
-	// The version of PowerShell Core to use. Possibles values are 7 , and 7.2.
-	// The version of PowerShell Core to use. Possibles values are `7`, and `7.2`
+	// The version of PowerShell Core to use. Possibles values are 7 , 7.2, and 7.4.
+	// The version of PowerShell Core to use. Possibles values are `7`, `7.2`, and `7.4`
 	// +kubebuilder:validation:Optional
 	PowershellCoreVersion *string `json:"powershellCoreVersion,omitempty" tf:"powershell_core_version,omitempty"`
 
-	// The version of Python to use. Possible values are 3.12, 3.11, 3.10, 3.9, 3.8 and 3.7.
-	// The version of Python to use. Possible values include `3.12`, `3.11`, `3.10`, `3.9`, `3.8`, and `3.7`.
+	// The version of Python to use. Possible values are 3.13, 3.12, 3.11, 3.10, 3.9, 3.8 and 3.7.
+	// The version of Python to use. Possible values include `3.13`, `3.12`, `3.11`, `3.10`, `3.9`, `3.8`, and `3.7`.
 	// +kubebuilder:validation:Optional
 	PythonVersion *string `json:"pythonVersion,omitempty" tf:"python_version,omitempty"`
 

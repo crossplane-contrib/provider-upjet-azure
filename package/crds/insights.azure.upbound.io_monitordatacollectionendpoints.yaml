@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.14.0
+    controller-gen.kubebuilder.io/version: v0.16.5
   name: monitordatacollectionendpoints.insights.azure.upbound.io
 spec:
   group: insights.azure.upbound.io
@@ -420,6 +420,9 @@ spec:
                     type: string
                   logsIngestionEndpoint:
                     description: The endpoint used for ingesting logs, e.g., https://mydce-abcd.eastus-1.ingest.monitor.azure.com.
+                    type: string
+                  metricsIngestionEndpoint:
+                    description: The endpoint used for ingesting metrics, e.g., https://mydce-abcd.eastus-1.metrics.ingest.monitor.azure.com.
                     type: string
                   publicNetworkAccessEnabled:
                     description: Whether network access from public internet to the

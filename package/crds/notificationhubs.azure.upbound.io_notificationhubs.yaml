@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.14.0
+    controller-gen.kubebuilder.io/version: v0.16.5
   name: notificationhubs.notificationhubs.azure.upbound.io
 spec:
   group: notificationhubs.azure.upbound.io
@@ -113,8 +113,37 @@ spec:
                           - name
                           - namespace
                           type: object
-                      required:
-                      - tokenSecretRef
+                      type: object
+                    type: array
+                  browserCredential:
+                    description: A browser_credential block as defined below.
+                    items:
+                      properties:
+                        subject:
+                          description: The subject name of web push.
+                          type: string
+                        vapidPrivateKeySecretRef:
+                          description: The Voluntary Application Server Identification
+                            (VAPID) private key.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        vapidPublicKey:
+                          description: The Voluntary Application Server Identification
+                            (VAPID) public key.
+                          type: string
                       type: object
                     type: array
                   gcmCredential:
@@ -139,8 +168,6 @@ spec:
                           - name
                           - namespace
                           type: object
-                      required:
-                      - apiKeySecretRef
                       type: object
                     type: array
                   location:
@@ -349,11 +376,87 @@ spec:
                         teamId:
                           description: The ID of the team the Token.
                           type: string
+                        tokenSecretRef:
+                          description: The Push Token associated with the Apple Developer
+                            Account. This is the contents of the key downloaded from
+                            the Apple Developer Portal between the -----BEGIN PRIVATE
+                            KEY----- and -----END PRIVATE KEY----- blocks.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                      required:
+                      - tokenSecretRef
+                      type: object
+                    type: array
+                  browserCredential:
+                    description: A browser_credential block as defined below.
+                    items:
+                      properties:
+                        subject:
+                          description: The subject name of web push.
+                          type: string
+                        vapidPrivateKeySecretRef:
+                          description: The Voluntary Application Server Identification
+                            (VAPID) private key.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        vapidPublicKey:
+                          description: The Voluntary Application Server Identification
+                            (VAPID) public key.
+                          type: string
+                      required:
+                      - vapidPrivateKeySecretRef
                       type: object
                     type: array
                   gcmCredential:
                     description: A gcm_credential block as defined below.
                     items:
+                      properties:
+                        apiKeySecretRef:
+                          description: The API Key associated with the Google Cloud
+                            Messaging service.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                      required:
+                      - apiKeySecretRef
                       type: object
                     type: array
                   location:
@@ -566,6 +669,19 @@ spec:
                           type: string
                       type: object
                     type: array
+                  browserCredential:
+                    description: A browser_credential block as defined below.
+                    items:
+                      properties:
+                        subject:
+                          description: The subject name of web push.
+                          type: string
+                        vapidPublicKey:
+                          description: The Voluntary Application Server Identification
+                            (VAPID) public key.
+                          type: string
+                      type: object
+                    type: array
                   gcmCredential:
                     description: A gcm_credential block as defined below.
                     items:
@@ -588,8 +704,6 @@ spec:
                           - name
                           - namespace
                           type: object
-                      required:
-                      - apiKeySecretRef
                       type: object
                     type: array
                   id:
@@ -770,6 +884,35 @@ spec:
                         - name
                         - namespace
                         type: object
+                    type: object
+                  browserCredential:
+                    description: A browser_credential block as defined below.
+                    properties:
+                      subject:
+                        description: The subject name of web push.
+                        type: string
+                      vapidPrivateKeySecretRef:
+                        description: The Voluntary Application Server Identification
+                          (VAPID) private key.
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
+                      vapidPublicKey:
+                        description: The Voluntary Application Server Identification
+                          (VAPID) public key.
+                        type: string
                     type: object
                   gcmCredential:
                     description: A gcm_credential block as defined below.
@@ -1020,6 +1163,37 @@ spec:
                     required:
                     - tokenSecretRef
                     type: object
+                  browserCredential:
+                    description: A browser_credential block as defined below.
+                    properties:
+                      subject:
+                        description: The subject name of web push.
+                        type: string
+                      vapidPrivateKeySecretRef:
+                        description: The Voluntary Application Server Identification
+                          (VAPID) private key.
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
+                      vapidPublicKey:
+                        description: The Voluntary Application Server Identification
+                          (VAPID) public key.
+                        type: string
+                    required:
+                    - vapidPrivateKeySecretRef
+                    type: object
                   gcmCredential:
                     description: A gcm_credential block as defined below.
                     properties:
@@ -1249,6 +1423,17 @@ spec:
                         type: string
                       teamId:
                         description: The ID of the team the Token.
+                        type: string
+                    type: object
+                  browserCredential:
+                    description: A browser_credential block as defined below.
+                    properties:
+                      subject:
+                        description: The subject name of web push.
+                        type: string
+                      vapidPublicKey:
+                        description: The Voluntary Application Server Identification
+                          (VAPID) public key.
                         type: string
                     type: object
                   gcmCredential:

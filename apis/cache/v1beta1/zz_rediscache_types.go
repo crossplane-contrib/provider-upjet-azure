@@ -92,11 +92,11 @@ type PatchScheduleParameters struct {
 
 type RedisCacheInitParameters struct {
 
+	// Whether access key authentication is enabled? Defaults to true. active_directory_authentication_enabled must be set to true to disable access key authentication.
+	AccessKeysAuthenticationEnabled *bool `json:"accessKeysAuthenticationEnabled,omitempty" tf:"access_keys_authentication_enabled,omitempty"`
+
 	// The size of the Redis cache to deploy. Valid values for a SKU family of C (Basic/Standard) are 0, 1, 2, 3, 4, 5, 6, and for P (Premium) family are 1, 2, 3, 4, 5.
 	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
-
-	// Enable the non-SSL port (6379) - disabled by default.
-	EnableNonSSLPort *bool `json:"enableNonSslPort,omitempty" tf:"enable_non_ssl_port,omitempty"`
 
 	// The SKU family/pricing group to use. Valid values are C (for Basic/Standard SKU family) and P (for Premium)
 	Family *string `json:"family,omitempty" tf:"family,omitempty"`
@@ -110,6 +110,7 @@ type RedisCacheInitParameters struct {
 	// The minimum TLS version. Possible values are 1.0, 1.1 and 1.2. Defaults to 1.0.
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
+	// Enable the non-SSL port (6379) - disabled by default.
 	NonSSLPortEnabled *bool `json:"nonSslPortEnabled,omitempty" tf:"non_ssl_port_enabled,omitempty"`
 
 	// A list of patch_schedule blocks as defined below.
@@ -124,7 +125,7 @@ type RedisCacheInitParameters struct {
 	// A redis_configuration block as defined below - with some limitations by SKU - defaults/details are shown below.
 	RedisConfiguration []RedisConfigurationInitParameters `json:"redisConfiguration,omitempty" tf:"redis_configuration,omitempty"`
 
-	// Redis version. Only major version needed. Valid values: 4, 6.
+	// Redis version. Only major version needed. Possible values are 4 and 6. Defaults to 6.
 	RedisVersion *string `json:"redisVersion,omitempty" tf:"redis_version,omitempty"`
 
 	// Amount of replicas to create per master for this Redis Cache.
@@ -167,11 +168,11 @@ type RedisCacheInitParameters struct {
 
 type RedisCacheObservation struct {
 
+	// Whether access key authentication is enabled? Defaults to true. active_directory_authentication_enabled must be set to true to disable access key authentication.
+	AccessKeysAuthenticationEnabled *bool `json:"accessKeysAuthenticationEnabled,omitempty" tf:"access_keys_authentication_enabled,omitempty"`
+
 	// The size of the Redis cache to deploy. Valid values for a SKU family of C (Basic/Standard) are 0, 1, 2, 3, 4, 5, 6, and for P (Premium) family are 1, 2, 3, 4, 5.
 	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
-
-	// Enable the non-SSL port (6379) - disabled by default.
-	EnableNonSSLPort *bool `json:"enableNonSslPort,omitempty" tf:"enable_non_ssl_port,omitempty"`
 
 	// The SKU family/pricing group to use. Valid values are C (for Basic/Standard SKU family) and P (for Premium)
 	Family *string `json:"family,omitempty" tf:"family,omitempty"`
@@ -191,6 +192,7 @@ type RedisCacheObservation struct {
 	// The minimum TLS version. Possible values are 1.0, 1.1 and 1.2. Defaults to 1.0.
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
+	// Enable the non-SSL port (6379) - disabled by default.
 	NonSSLPortEnabled *bool `json:"nonSslPortEnabled,omitempty" tf:"non_ssl_port_enabled,omitempty"`
 
 	// A list of patch_schedule blocks as defined below.
@@ -208,7 +210,7 @@ type RedisCacheObservation struct {
 	// A redis_configuration block as defined below - with some limitations by SKU - defaults/details are shown below.
 	RedisConfiguration []RedisConfigurationObservation `json:"redisConfiguration,omitempty" tf:"redis_configuration,omitempty"`
 
-	// Redis version. Only major version needed. Valid values: 4, 6.
+	// Redis version. Only major version needed. Possible values are 4 and 6. Defaults to 6.
 	RedisVersion *string `json:"redisVersion,omitempty" tf:"redis_version,omitempty"`
 
 	// Amount of replicas to create per master for this Redis Cache.
@@ -247,13 +249,13 @@ type RedisCacheObservation struct {
 
 type RedisCacheParameters struct {
 
+	// Whether access key authentication is enabled? Defaults to true. active_directory_authentication_enabled must be set to true to disable access key authentication.
+	// +kubebuilder:validation:Optional
+	AccessKeysAuthenticationEnabled *bool `json:"accessKeysAuthenticationEnabled,omitempty" tf:"access_keys_authentication_enabled,omitempty"`
+
 	// The size of the Redis cache to deploy. Valid values for a SKU family of C (Basic/Standard) are 0, 1, 2, 3, 4, 5, 6, and for P (Premium) family are 1, 2, 3, 4, 5.
 	// +kubebuilder:validation:Optional
 	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
-
-	// Enable the non-SSL port (6379) - disabled by default.
-	// +kubebuilder:validation:Optional
-	EnableNonSSLPort *bool `json:"enableNonSslPort,omitempty" tf:"enable_non_ssl_port,omitempty"`
 
 	// The SKU family/pricing group to use. Valid values are C (for Basic/Standard SKU family) and P (for Premium)
 	// +kubebuilder:validation:Optional
@@ -271,6 +273,7 @@ type RedisCacheParameters struct {
 	// +kubebuilder:validation:Optional
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
+	// Enable the non-SSL port (6379) - disabled by default.
 	// +kubebuilder:validation:Optional
 	NonSSLPortEnabled *bool `json:"nonSslPortEnabled,omitempty" tf:"non_ssl_port_enabled,omitempty"`
 
@@ -290,7 +293,7 @@ type RedisCacheParameters struct {
 	// +kubebuilder:validation:Optional
 	RedisConfiguration []RedisConfigurationParameters `json:"redisConfiguration,omitempty" tf:"redis_configuration,omitempty"`
 
-	// Redis version. Only major version needed. Valid values: 4, 6.
+	// Redis version. Only major version needed. Possible values are 4 and 6. Defaults to 6.
 	// +kubebuilder:validation:Optional
 	RedisVersion *string `json:"redisVersion,omitempty" tf:"redis_version,omitempty"`
 
@@ -367,13 +370,11 @@ type RedisConfigurationInitParameters struct {
 	// Second Storage Account connection string for AOF persistence.
 	AofStorageConnectionString1SecretRef *v1.SecretKeySelector `json:"aofStorageConnectionString1SecretRef,omitempty" tf:"-"`
 
+	// If set to false, the Redis instance will be accessible without authentication. Defaults to true.
 	AuthenticationEnabled *bool `json:"authenticationEnabled,omitempty" tf:"authentication_enabled,omitempty"`
 
-	// Preferred auth method to communicate to storage account used for data persistence. Possible values are SAS and ManagedIdentity. Defaults to SAS.
+	// Preferred auth method to communicate to storage account used for data persistence. Possible values are SAS and ManagedIdentity.
 	DataPersistenceAuthenticationMethod *string `json:"dataPersistenceAuthenticationMethod,omitempty" tf:"data_persistence_authentication_method,omitempty"`
-
-	// If set to false, the Redis instance will be accessible without authentication. Defaults to true.
-	EnableAuthentication *bool `json:"enableAuthentication,omitempty" tf:"enable_authentication,omitempty"`
 
 	// Value in megabytes reserved to accommodate for memory fragmentation. Defaults are shown below.
 	MaxfragmentationmemoryReserved *float64 `json:"maxfragmentationmemoryReserved,omitempty" tf:"maxfragmentationmemory_reserved,omitempty"`
@@ -414,13 +415,11 @@ type RedisConfigurationObservation struct {
 	// Enable or disable AOF persistence for this Redis Cache. Defaults to false.
 	AofBackupEnabled *bool `json:"aofBackupEnabled,omitempty" tf:"aof_backup_enabled,omitempty"`
 
+	// If set to false, the Redis instance will be accessible without authentication. Defaults to true.
 	AuthenticationEnabled *bool `json:"authenticationEnabled,omitempty" tf:"authentication_enabled,omitempty"`
 
-	// Preferred auth method to communicate to storage account used for data persistence. Possible values are SAS and ManagedIdentity. Defaults to SAS.
+	// Preferred auth method to communicate to storage account used for data persistence. Possible values are SAS and ManagedIdentity.
 	DataPersistenceAuthenticationMethod *string `json:"dataPersistenceAuthenticationMethod,omitempty" tf:"data_persistence_authentication_method,omitempty"`
-
-	// If set to false, the Redis instance will be accessible without authentication. Defaults to true.
-	EnableAuthentication *bool `json:"enableAuthentication,omitempty" tf:"enable_authentication,omitempty"`
 
 	// Returns the max number of connected clients at the same time.
 	Maxclients *float64 `json:"maxclients,omitempty" tf:"maxclients,omitempty"`
@@ -471,16 +470,13 @@ type RedisConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	AofStorageConnectionString1SecretRef *v1.SecretKeySelector `json:"aofStorageConnectionString1SecretRef,omitempty" tf:"-"`
 
+	// If set to false, the Redis instance will be accessible without authentication. Defaults to true.
 	// +kubebuilder:validation:Optional
 	AuthenticationEnabled *bool `json:"authenticationEnabled,omitempty" tf:"authentication_enabled,omitempty"`
 
-	// Preferred auth method to communicate to storage account used for data persistence. Possible values are SAS and ManagedIdentity. Defaults to SAS.
+	// Preferred auth method to communicate to storage account used for data persistence. Possible values are SAS and ManagedIdentity.
 	// +kubebuilder:validation:Optional
 	DataPersistenceAuthenticationMethod *string `json:"dataPersistenceAuthenticationMethod,omitempty" tf:"data_persistence_authentication_method,omitempty"`
-
-	// If set to false, the Redis instance will be accessible without authentication. Defaults to true.
-	// +kubebuilder:validation:Optional
-	EnableAuthentication *bool `json:"enableAuthentication,omitempty" tf:"enable_authentication,omitempty"`
 
 	// Value in megabytes reserved to accommodate for memory fragmentation. Defaults are shown below.
 	// +kubebuilder:validation:Optional

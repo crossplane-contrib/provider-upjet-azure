@@ -106,7 +106,7 @@ type ObjectReplicationRulesInitParameters struct {
 	// The time after which the Block Blobs created will be copies to the destination. Possible values are OnlyNewObjects, Everything and time in RFC3339 format: 2006-01-02T15:04:00Z. Defaults to OnlyNewObjects.
 	CopyBlobsCreatedAfter *string `json:"copyBlobsCreatedAfter,omitempty" tf:"copy_blobs_created_after,omitempty"`
 
-	// The destination storage container name. Changing this forces a new Storage Object Replication to be created.
+	// The destination storage container name.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Container
 	DestinationContainerName *string `json:"destinationContainerName,omitempty" tf:"destination_container_name,omitempty"`
 
@@ -122,7 +122,7 @@ type ObjectReplicationRulesInitParameters struct {
 	// +listType=set
 	FilterOutBlobsWithPrefix []*string `json:"filterOutBlobsWithPrefix,omitempty" tf:"filter_out_blobs_with_prefix,omitempty"`
 
-	// The source storage container name. Changing this forces a new Storage Object Replication to be created.
+	// The source storage container name.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Container
 	SourceContainerName *string `json:"sourceContainerName,omitempty" tf:"source_container_name,omitempty"`
 
@@ -140,7 +140,7 @@ type ObjectReplicationRulesObservation struct {
 	// The time after which the Block Blobs created will be copies to the destination. Possible values are OnlyNewObjects, Everything and time in RFC3339 format: 2006-01-02T15:04:00Z. Defaults to OnlyNewObjects.
 	CopyBlobsCreatedAfter *string `json:"copyBlobsCreatedAfter,omitempty" tf:"copy_blobs_created_after,omitempty"`
 
-	// The destination storage container name. Changing this forces a new Storage Object Replication to be created.
+	// The destination storage container name.
 	DestinationContainerName *string `json:"destinationContainerName,omitempty" tf:"destination_container_name,omitempty"`
 
 	// Specifies a list of filters prefixes, the blobs whose names begin with which will be replicated.
@@ -149,7 +149,7 @@ type ObjectReplicationRulesObservation struct {
 
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The source storage container name. Changing this forces a new Storage Object Replication to be created.
+	// The source storage container name.
 	SourceContainerName *string `json:"sourceContainerName,omitempty" tf:"source_container_name,omitempty"`
 }
 
@@ -159,7 +159,7 @@ type ObjectReplicationRulesParameters struct {
 	// +kubebuilder:validation:Optional
 	CopyBlobsCreatedAfter *string `json:"copyBlobsCreatedAfter,omitempty" tf:"copy_blobs_created_after,omitempty"`
 
-	// The destination storage container name. Changing this forces a new Storage Object Replication to be created.
+	// The destination storage container name.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Container
 	// +kubebuilder:validation:Optional
 	DestinationContainerName *string `json:"destinationContainerName,omitempty" tf:"destination_container_name,omitempty"`
@@ -177,7 +177,7 @@ type ObjectReplicationRulesParameters struct {
 	// +listType=set
 	FilterOutBlobsWithPrefix []*string `json:"filterOutBlobsWithPrefix,omitempty" tf:"filter_out_blobs_with_prefix,omitempty"`
 
-	// The source storage container name. Changing this forces a new Storage Object Replication to be created.
+	// The source storage container name.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Container
 	// +kubebuilder:validation:Optional
 	SourceContainerName *string `json:"sourceContainerName,omitempty" tf:"source_container_name,omitempty"`

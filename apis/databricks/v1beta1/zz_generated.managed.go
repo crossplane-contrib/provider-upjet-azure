@@ -127,66 +127,6 @@ func (mg *Workspace) SetWriteConnectionSecretToReference(r *xpv1.SecretReference
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
-// GetCondition of this WorkspaceCustomerManagedKey.
-func (mg *WorkspaceCustomerManagedKey) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
-	return mg.Status.GetCondition(ct)
-}
-
-// GetDeletionPolicy of this WorkspaceCustomerManagedKey.
-func (mg *WorkspaceCustomerManagedKey) GetDeletionPolicy() xpv1.DeletionPolicy {
-	return mg.Spec.DeletionPolicy
-}
-
-// GetManagementPolicies of this WorkspaceCustomerManagedKey.
-func (mg *WorkspaceCustomerManagedKey) GetManagementPolicies() xpv1.ManagementPolicies {
-	return mg.Spec.ManagementPolicies
-}
-
-// GetProviderConfigReference of this WorkspaceCustomerManagedKey.
-func (mg *WorkspaceCustomerManagedKey) GetProviderConfigReference() *xpv1.Reference {
-	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this WorkspaceCustomerManagedKey.
-func (mg *WorkspaceCustomerManagedKey) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
-// GetWriteConnectionSecretToReference of this WorkspaceCustomerManagedKey.
-func (mg *WorkspaceCustomerManagedKey) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
-	return mg.Spec.WriteConnectionSecretToReference
-}
-
-// SetConditions of this WorkspaceCustomerManagedKey.
-func (mg *WorkspaceCustomerManagedKey) SetConditions(c ...xpv1.Condition) {
-	mg.Status.SetConditions(c...)
-}
-
-// SetDeletionPolicy of this WorkspaceCustomerManagedKey.
-func (mg *WorkspaceCustomerManagedKey) SetDeletionPolicy(r xpv1.DeletionPolicy) {
-	mg.Spec.DeletionPolicy = r
-}
-
-// SetManagementPolicies of this WorkspaceCustomerManagedKey.
-func (mg *WorkspaceCustomerManagedKey) SetManagementPolicies(r xpv1.ManagementPolicies) {
-	mg.Spec.ManagementPolicies = r
-}
-
-// SetProviderConfigReference of this WorkspaceCustomerManagedKey.
-func (mg *WorkspaceCustomerManagedKey) SetProviderConfigReference(r *xpv1.Reference) {
-	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this WorkspaceCustomerManagedKey.
-func (mg *WorkspaceCustomerManagedKey) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
-// SetWriteConnectionSecretToReference of this WorkspaceCustomerManagedKey.
-func (mg *WorkspaceCustomerManagedKey) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
-	mg.Spec.WriteConnectionSecretToReference = r
-}
-
 // GetCondition of this WorkspaceRootDbfsCustomerManagedKey.
 func (mg *WorkspaceRootDbfsCustomerManagedKey) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)

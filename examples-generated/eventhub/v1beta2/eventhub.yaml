@@ -9,13 +9,10 @@ metadata:
 spec:
   forProvider:
     messageRetention: 1
-    namespaceNameSelector:
+    namespaceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
     partitionCount: 2
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
 
 ---
 

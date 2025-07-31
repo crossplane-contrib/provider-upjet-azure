@@ -13,27 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type PolicyInitParameters struct {
-	Data *string `json:"data,omitempty" tf:"data,omitempty"`
-
-	EnvironmentType *string `json:"environmentType,omitempty" tf:"environment_type,omitempty"`
-}
-
-type PolicyObservation struct {
-	Data *string `json:"data,omitempty" tf:"data,omitempty"`
-
-	EnvironmentType *string `json:"environmentType,omitempty" tf:"environment_type,omitempty"`
-}
-
-type PolicyParameters struct {
-
-	// +kubebuilder:validation:Optional
-	Data *string `json:"data,omitempty" tf:"data,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	EnvironmentType *string `json:"environmentType,omitempty" tf:"environment_type,omitempty"`
-}
-
 type ProviderInitParameters struct {
 
 	// The Azure Region where the Attestation Provider should exist. Changing this forces a new resource to be created.
@@ -41,8 +20,6 @@ type ProviderInitParameters struct {
 
 	// Specifies the base64 URI Encoded RFC 7519 JWT that should be used for the Attestation Policy.
 	OpenEnclavePolicyBase64 *string `json:"openEnclavePolicyBase64,omitempty" tf:"open_enclave_policy_base64,omitempty"`
-
-	Policy []PolicyInitParameters `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// A valid X.509 certificate (Section 4 of RFC4648). Changing this forces a new resource to be created.
 	PolicySigningCertificateData *string `json:"policySigningCertificateData,omitempty" tf:"policy_signing_certificate_data,omitempty"`
@@ -74,8 +51,6 @@ type ProviderObservation struct {
 
 	// Specifies the base64 URI Encoded RFC 7519 JWT that should be used for the Attestation Policy.
 	OpenEnclavePolicyBase64 *string `json:"openEnclavePolicyBase64,omitempty" tf:"open_enclave_policy_base64,omitempty"`
-
-	Policy []PolicyObservation `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// A valid X.509 certificate (Section 4 of RFC4648). Changing this forces a new resource to be created.
 	PolicySigningCertificateData *string `json:"policySigningCertificateData,omitempty" tf:"policy_signing_certificate_data,omitempty"`
@@ -109,9 +84,6 @@ type ProviderParameters struct {
 	// Specifies the base64 URI Encoded RFC 7519 JWT that should be used for the Attestation Policy.
 	// +kubebuilder:validation:Optional
 	OpenEnclavePolicyBase64 *string `json:"openEnclavePolicyBase64,omitempty" tf:"open_enclave_policy_base64,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	Policy []PolicyParameters `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// A valid X.509 certificate (Section 4 of RFC4648). Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional

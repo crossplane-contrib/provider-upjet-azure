@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.14.0
+    controller-gen.kubebuilder.io/version: v0.16.5
   name: diagnostics.apimanagement.azure.upbound.io
 spec:
   group: apimanagement.azure.upbound.io
@@ -1763,8 +1763,7 @@ spec:
                     type: boolean
                   operationNameFormat:
                     description: The format of the Operation Name for Application
-                      Insights telemetries. Possible values are Name, and Url. Defaults
-                      to Name.
+                      Insights telemetries. Possible values are Name, and Url.
                     type: string
                   resourceGroupName:
                     description: The Name of the Resource Group where the API Management
@@ -2150,8 +2149,7 @@ spec:
                     type: boolean
                   operationNameFormat:
                     description: The format of the Operation Name for Application
-                      Insights telemetries. Possible values are Name, and Url. Defaults
-                      to Name.
+                      Insights telemetries. Possible values are Name, and Url.
                     type: string
                   samplingPercentage:
                     description: Sampling (%). For high traffic APIs, please read
@@ -2548,8 +2546,7 @@ spec:
                     type: boolean
                   operationNameFormat:
                     description: The format of the Operation Name for Application
-                      Insights telemetries. Possible values are Name, and Url. Defaults
-                      to Name.
+                      Insights telemetries. Possible values are Name, and Url.
                     type: string
                   resourceGroupName:
                     description: The Name of the Resource Group where the API Management

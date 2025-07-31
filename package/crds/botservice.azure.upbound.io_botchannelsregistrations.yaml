@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.14.0
+    controller-gen.kubebuilder.io/version: v0.16.5
   name: botchannelsregistrations.botservice.azure.upbound.io
 spec:
   group: botservice.azure.upbound.io
@@ -116,11 +116,8 @@ spec:
                     type: string
                   iconUrl:
                     description: The icon URL to visually identify the Bot Channels
-                      Registration.
+                      Registration. Defaults to https://docs.botframework.com/static/devportal/client/images/bot-framework-default.png.
                     type: string
-                  isolatedNetworkEnabled:
-                    description: Is the Bot Channels Registration in an isolated network?
-                    type: boolean
                   location:
                     description: The supported Azure location where the resource exists.
                       Changing this forces a new resource to be created.
@@ -289,11 +286,8 @@ spec:
                     type: string
                   iconUrl:
                     description: The icon URL to visually identify the Bot Channels
-                      Registration.
+                      Registration. Defaults to https://docs.botframework.com/static/devportal/client/images/bot-framework-default.png.
                     type: string
-                  isolatedNetworkEnabled:
-                    description: Is the Bot Channels Registration in an isolated network?
-                    type: boolean
                   location:
                     description: The supported Azure location where the resource exists.
                       Changing this forces a new resource to be created.
@@ -621,14 +615,11 @@ spec:
                     type: string
                   iconUrl:
                     description: The icon URL to visually identify the Bot Channels
-                      Registration.
+                      Registration. Defaults to https://docs.botframework.com/static/devportal/client/images/bot-framework-default.png.
                     type: string
                   id:
                     description: The ID of the Bot Channels Registration.
                     type: string
-                  isolatedNetworkEnabled:
-                    description: Is the Bot Channels Registration in an isolated network?
-                    type: boolean
                   location:
                     description: The supported Azure location where the resource exists.
                       Changing this forces a new resource to be created.

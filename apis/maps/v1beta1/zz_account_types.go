@@ -27,7 +27,7 @@ type AccountInitParameters struct {
 	// Is local authentication enabled for this Azure Maps Account? When false, all authentication to the Azure Maps data-plane REST API is disabled, except Azure AD authentication. Defaults to true.
 	LocalAuthenticationEnabled *bool `json:"localAuthenticationEnabled,omitempty" tf:"local_authentication_enabled,omitempty"`
 
-	// The Location in which the Azure Maps Account should be provisioned. Changing this forces a new resource to be created. Defaults to global.
+	// The Location in which the Azure Maps Account should be provisioned. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The SKU of the Azure Maps Account. Possible values are S0, S1 and G2. Changing this forces a new resource to be created.
@@ -55,7 +55,7 @@ type AccountObservation struct {
 	// Is local authentication enabled for this Azure Maps Account? When false, all authentication to the Azure Maps data-plane REST API is disabled, except Azure AD authentication. Defaults to true.
 	LocalAuthenticationEnabled *bool `json:"localAuthenticationEnabled,omitempty" tf:"local_authentication_enabled,omitempty"`
 
-	// The Location in which the Azure Maps Account should be provisioned. Changing this forces a new resource to be created. Defaults to global.
+	// The Location in which the Azure Maps Account should be provisioned. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Resource Group in which the Azure Maps Account should exist. Changing this forces a new resource to be created.
@@ -90,7 +90,7 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	LocalAuthenticationEnabled *bool `json:"localAuthenticationEnabled,omitempty" tf:"local_authentication_enabled,omitempty"`
 
-	// The Location in which the Azure Maps Account should be provisioned. Changing this forces a new resource to be created. Defaults to global.
+	// The Location in which the Azure Maps Account should be provisioned. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -239,6 +239,7 @@ type AccountStatus struct {
 type Account struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || (has(self.initProvider) && has(self.initProvider.location))",message="spec.forProvider.location is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.skuName) || (has(self.initProvider) && has(self.initProvider.skuName))",message="spec.forProvider.skuName is a required parameter"
 	Spec   AccountSpec   `json:"spec"`
 	Status AccountStatus `json:"status,omitempty"`

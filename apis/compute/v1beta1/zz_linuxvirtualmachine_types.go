@@ -44,7 +44,7 @@ type AdditionalCapabilitiesParameters struct {
 
 type AdminSSHKeyInitParameters struct {
 
-	// The Public Key which should be used for authentication, which needs to be at least 2048-bit and in ssh-rsa format. Changing this forces a new resource to be created.
+	// The Public Key which should be used for authentication, which needs to be in ssh-rsa format with at least 2048-bit or in ssh-ed25519 format. Changing this forces a new resource to be created.
 	PublicKey *string `json:"publicKey,omitempty" tf:"public_key,omitempty"`
 
 	// The Username for which this Public SSH Key should be configured. Changing this forces a new resource to be created.
@@ -53,7 +53,7 @@ type AdminSSHKeyInitParameters struct {
 
 type AdminSSHKeyObservation struct {
 
-	// The Public Key which should be used for authentication, which needs to be at least 2048-bit and in ssh-rsa format. Changing this forces a new resource to be created.
+	// The Public Key which should be used for authentication, which needs to be in ssh-rsa format with at least 2048-bit or in ssh-ed25519 format. Changing this forces a new resource to be created.
 	PublicKey *string `json:"publicKey,omitempty" tf:"public_key,omitempty"`
 
 	// The Username for which this Public SSH Key should be configured. Changing this forces a new resource to be created.
@@ -62,7 +62,7 @@ type AdminSSHKeyObservation struct {
 
 type AdminSSHKeyParameters struct {
 
-	// The Public Key which should be used for authentication, which needs to be at least 2048-bit and in ssh-rsa format. Changing this forces a new resource to be created.
+	// The Public Key which should be used for authentication, which needs to be in ssh-rsa format with at least 2048-bit or in ssh-ed25519 format. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	PublicKey *string `json:"publicKey" tf:"public_key,omitempty"`
 
@@ -146,7 +146,7 @@ type LinuxVirtualMachineGalleryApplicationInitParameters struct {
 	// Specifies the URI to an Azure Blob that will replace the default configuration for the package if provided.
 	ConfigurationBlobURI *string `json:"configurationBlobUri,omitempty" tf:"configuration_blob_uri,omitempty"`
 
-	// Specifies the order in which the packages have to be installed. Possible values are between 0 and 2,147,483,647.
+	// Specifies the order in which the packages have to be installed. Possible values are between 0 and 2147483647. Defaults to 0.
 	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
 
 	// Specifies a passthrough value for more generic context. This field can be any valid string value.
@@ -167,7 +167,7 @@ type LinuxVirtualMachineGalleryApplicationObservation struct {
 	// Specifies the URI to an Azure Blob that will replace the default configuration for the package if provided.
 	ConfigurationBlobURI *string `json:"configurationBlobUri,omitempty" tf:"configuration_blob_uri,omitempty"`
 
-	// Specifies the order in which the packages have to be installed. Possible values are between 0 and 2,147,483,647.
+	// Specifies the order in which the packages have to be installed. Possible values are between 0 and 2147483647. Defaults to 0.
 	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
 
 	// Specifies a passthrough value for more generic context. This field can be any valid string value.
@@ -190,7 +190,7 @@ type LinuxVirtualMachineGalleryApplicationParameters struct {
 	// +kubebuilder:validation:Optional
 	ConfigurationBlobURI *string `json:"configurationBlobUri,omitempty" tf:"configuration_blob_uri,omitempty"`
 
-	// Specifies the order in which the packages have to be installed. Possible values are between 0 and 2,147,483,647.
+	// Specifies the order in which the packages have to be installed. Possible values are between 0 and 2147483647. Defaults to 0.
 	// +kubebuilder:validation:Optional
 	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
 
@@ -307,10 +307,10 @@ type LinuxVirtualMachineInitParameters struct {
 	// One or more gallery_application blocks as defined below.
 	GalleryApplication []LinuxVirtualMachineGalleryApplicationInitParameters `json:"galleryApplication,omitempty" tf:"gallery_application,omitempty"`
 
-	// An identity block as defined below.
+	// An identity block as documented below.
 	Identity []LinuxVirtualMachineIdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
-	// Specifies the BYOL Type for this Virtual Machine. Possible values are RHEL_BYOS and SLES_BYOS.
+	// Specifies the License Type for this Virtual Machine. Possible values are RHEL_BYOS, RHEL_BASE, RHEL_EUS, RHEL_SAPAPPS, RHEL_SAPHA, RHEL_BASESAPAPPS, RHEL_BASESAPHA, SLES_BYOS, SLES_SAP, SLES_HPC, UBUNTU_PRO.
 	LicenseType *string `json:"licenseType,omitempty" tf:"license_type,omitempty"`
 
 	// The Azure location where the Linux Virtual Machine should exist. Changing this forces a new resource to be created.
@@ -387,7 +387,7 @@ type LinuxVirtualMachineInitParameters struct {
 	// The Base64-Encoded User Data which should be used for this Virtual Machine.
 	UserData *string `json:"userData,omitempty" tf:"user_data,omitempty"`
 
-	// Specifies whether VMAgent Platform Updates is enabled. Defaults to false.
+	// Are Virtual Machine Agent Platform Updates enabled on this Virtual Machine?
 	VMAgentPlatformUpdatesEnabled *bool `json:"vmAgentPlatformUpdatesEnabled,omitempty" tf:"vm_agent_platform_updates_enabled,omitempty"`
 
 	// Specifies the Orchestrated Virtual Machine Scale Set that this Virtual Machine should be created within.
@@ -459,10 +459,10 @@ type LinuxVirtualMachineObservation struct {
 	// The ID of the Linux Virtual Machine.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// An identity block as defined below.
+	// An identity block as documented below.
 	Identity []LinuxVirtualMachineIdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
-	// Specifies the BYOL Type for this Virtual Machine. Possible values are RHEL_BYOS and SLES_BYOS.
+	// Specifies the License Type for this Virtual Machine. Possible values are RHEL_BYOS, RHEL_BASE, RHEL_EUS, RHEL_SAPAPPS, RHEL_SAPHA, RHEL_BASESAPAPPS, RHEL_BASESAPHA, SLES_BYOS, SLES_SAP, SLES_HPC, UBUNTU_PRO.
 	LicenseType *string `json:"licenseType,omitempty" tf:"license_type,omitempty"`
 
 	// The Azure location where the Linux Virtual Machine should exist. Changing this forces a new resource to be created.
@@ -544,7 +544,7 @@ type LinuxVirtualMachineObservation struct {
 	// The Base64-Encoded User Data which should be used for this Virtual Machine.
 	UserData *string `json:"userData,omitempty" tf:"user_data,omitempty"`
 
-	// Specifies whether VMAgent Platform Updates is enabled. Defaults to false.
+	// Are Virtual Machine Agent Platform Updates enabled on this Virtual Machine?
 	VMAgentPlatformUpdatesEnabled *bool `json:"vmAgentPlatformUpdatesEnabled,omitempty" tf:"vm_agent_platform_updates_enabled,omitempty"`
 
 	// A 128-bit identifier which uniquely identifies this Virtual Machine.
@@ -603,6 +603,9 @@ type LinuxVirtualMachineOsDiskObservation struct {
 
 	// The Size of the Internal OS Disk in GB, if you wish to vary from the size used in the image this Virtual Machine is sourced from.
 	DiskSizeGb *float64 `json:"diskSizeGb,omitempty" tf:"disk_size_gb,omitempty"`
+
+	// The ID of the OS disk.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The name which should be used for the Internal OS Disk. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -741,11 +744,11 @@ type LinuxVirtualMachineParameters struct {
 	// +kubebuilder:validation:Optional
 	GalleryApplication []LinuxVirtualMachineGalleryApplicationParameters `json:"galleryApplication,omitempty" tf:"gallery_application,omitempty"`
 
-	// An identity block as defined below.
+	// An identity block as documented below.
 	// +kubebuilder:validation:Optional
 	Identity []LinuxVirtualMachineIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
-	// Specifies the BYOL Type for this Virtual Machine. Possible values are RHEL_BYOS and SLES_BYOS.
+	// Specifies the License Type for this Virtual Machine. Possible values are RHEL_BYOS, RHEL_BASE, RHEL_EUS, RHEL_SAPAPPS, RHEL_SAPHA, RHEL_BASESAPAPPS, RHEL_BASESAPHA, SLES_BYOS, SLES_SAP, SLES_HPC, UBUNTU_PRO.
 	// +kubebuilder:validation:Optional
 	LicenseType *string `json:"licenseType,omitempty" tf:"license_type,omitempty"`
 
@@ -857,7 +860,7 @@ type LinuxVirtualMachineParameters struct {
 	// +kubebuilder:validation:Optional
 	UserData *string `json:"userData,omitempty" tf:"user_data,omitempty"`
 
-	// Specifies whether VMAgent Platform Updates is enabled. Defaults to false.
+	// Are Virtual Machine Agent Platform Updates enabled on this Virtual Machine?
 	// +kubebuilder:validation:Optional
 	VMAgentPlatformUpdatesEnabled *bool `json:"vmAgentPlatformUpdatesEnabled,omitempty" tf:"vm_agent_platform_updates_enabled,omitempty"`
 

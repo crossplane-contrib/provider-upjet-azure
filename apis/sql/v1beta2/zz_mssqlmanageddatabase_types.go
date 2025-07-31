@@ -23,51 +23,50 @@ type MSSQLManagedDatabaseInitParameters struct {
 
 	// The backup retention period in days. This is how many days Point-in-Time Restore will be supported.
 	ShortTermRetentionDays *float64 `json:"shortTermRetentionDays,omitempty" tf:"short_term_retention_days,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type MSSQLManagedDatabaseLongTermRetentionPolicyInitParameters struct {
-
-	// Specifies if the backups are immutable. Defaults to false.
 	ImmutableBackupsEnabled *bool `json:"immutableBackupsEnabled,omitempty" tf:"immutable_backups_enabled,omitempty"`
 
-	// The monthly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 120 months. e.g. P1Y, P1M, P4W or P30D.
+	// The monthly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 120 months. e.g. P1Y, P1M, P4W or P30D. Defaults to PT0S.
 	MonthlyRetention *string `json:"monthlyRetention,omitempty" tf:"monthly_retention,omitempty"`
 
 	// The week of year to take the yearly backup. Value has to be between 1 and 52.
 	WeekOfYear *float64 `json:"weekOfYear,omitempty" tf:"week_of_year,omitempty"`
 
-	// The weekly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 520 weeks. e.g. P1Y, P1M, P1W or P7D.
+	// The weekly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 520 weeks. e.g. P1Y, P1M, P1W or P7D. Defaults to PT0S.
 	WeeklyRetention *string `json:"weeklyRetention,omitempty" tf:"weekly_retention,omitempty"`
 
-	// The yearly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 10 years. e.g. P1Y, P12M, P52W or P365D.
+	// The yearly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 10 years. e.g. P1Y, P12M, P52W or P365D. Defaults to PT0S.
 	YearlyRetention *string `json:"yearlyRetention,omitempty" tf:"yearly_retention,omitempty"`
 }
 
 type MSSQLManagedDatabaseLongTermRetentionPolicyObservation struct {
-
-	// Specifies if the backups are immutable. Defaults to false.
 	ImmutableBackupsEnabled *bool `json:"immutableBackupsEnabled,omitempty" tf:"immutable_backups_enabled,omitempty"`
 
-	// The monthly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 120 months. e.g. P1Y, P1M, P4W or P30D.
+	// The monthly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 120 months. e.g. P1Y, P1M, P4W or P30D. Defaults to PT0S.
 	MonthlyRetention *string `json:"monthlyRetention,omitempty" tf:"monthly_retention,omitempty"`
 
 	// The week of year to take the yearly backup. Value has to be between 1 and 52.
 	WeekOfYear *float64 `json:"weekOfYear,omitempty" tf:"week_of_year,omitempty"`
 
-	// The weekly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 520 weeks. e.g. P1Y, P1M, P1W or P7D.
+	// The weekly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 520 weeks. e.g. P1Y, P1M, P1W or P7D. Defaults to PT0S.
 	WeeklyRetention *string `json:"weeklyRetention,omitempty" tf:"weekly_retention,omitempty"`
 
-	// The yearly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 10 years. e.g. P1Y, P12M, P52W or P365D.
+	// The yearly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 10 years. e.g. P1Y, P12M, P52W or P365D. Defaults to PT0S.
 	YearlyRetention *string `json:"yearlyRetention,omitempty" tf:"yearly_retention,omitempty"`
 }
 
 type MSSQLManagedDatabaseLongTermRetentionPolicyParameters struct {
 
-	// Specifies if the backups are immutable. Defaults to false.
 	// +kubebuilder:validation:Optional
 	ImmutableBackupsEnabled *bool `json:"immutableBackupsEnabled,omitempty" tf:"immutable_backups_enabled,omitempty"`
 
-	// The monthly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 120 months. e.g. P1Y, P1M, P4W or P30D.
+	// The monthly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 120 months. e.g. P1Y, P1M, P4W or P30D. Defaults to PT0S.
 	// +kubebuilder:validation:Optional
 	MonthlyRetention *string `json:"monthlyRetention,omitempty" tf:"monthly_retention,omitempty"`
 
@@ -75,11 +74,11 @@ type MSSQLManagedDatabaseLongTermRetentionPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	WeekOfYear *float64 `json:"weekOfYear,omitempty" tf:"week_of_year,omitempty"`
 
-	// The weekly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 520 weeks. e.g. P1Y, P1M, P1W or P7D.
+	// The weekly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 520 weeks. e.g. P1Y, P1M, P1W or P7D. Defaults to PT0S.
 	// +kubebuilder:validation:Optional
 	WeeklyRetention *string `json:"weeklyRetention,omitempty" tf:"weekly_retention,omitempty"`
 
-	// The yearly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 10 years. e.g. P1Y, P12M, P52W or P365D.
+	// The yearly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 10 years. e.g. P1Y, P12M, P52W or P365D. Defaults to PT0S.
 	// +kubebuilder:validation:Optional
 	YearlyRetention *string `json:"yearlyRetention,omitempty" tf:"yearly_retention,omitempty"`
 }
@@ -100,6 +99,10 @@ type MSSQLManagedDatabaseObservation struct {
 
 	// The backup retention period in days. This is how many days Point-in-Time Restore will be supported.
 	ShortTermRetentionDays *float64 `json:"shortTermRetentionDays,omitempty" tf:"short_term_retention_days,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type MSSQLManagedDatabaseParameters struct {
@@ -129,6 +132,11 @@ type MSSQLManagedDatabaseParameters struct {
 	// The backup retention period in days. This is how many days Point-in-Time Restore will be supported.
 	// +kubebuilder:validation:Optional
 	ShortTermRetentionDays *float64 `json:"shortTermRetentionDays,omitempty" tf:"short_term_retention_days,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type PointInTimeRestoreInitParameters struct {

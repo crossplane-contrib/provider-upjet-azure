@@ -12,6 +12,7 @@ metadata:
   name: sparkpool
 spec:
   forProvider:
+    sparkVersion: "3.4"
     autoPause:
     - delayInMinutes: 15
     autoScale:
@@ -35,7 +36,7 @@ metadata:
     meta.upbound.io/example-id: synapse/v1beta1/sparkpool
   labels:
     testing.upbound.io/example-name: account-label
-  name: accountqwertynameabcde
+  name: accountqwertybt
 spec:
   forProvider:
     accountKind: StorageV2
@@ -72,7 +73,7 @@ metadata:
     meta.upbound.io/example-id: synapse/v1beta1/sparkpool
   labels:
     testing.upbound.io/example-name: sparkpool-synapse-ws-label
-  name: sparkpool-synapse-ws-1234
+  name: ws-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     identity:

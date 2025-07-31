@@ -24,7 +24,7 @@ type SecurityCenterContactInitParameters struct {
 	// The email of the Security Center Contact.
 	Email *string `json:"email,omitempty" tf:"email,omitempty"`
 
-	// The name of the Security Center Contact. Defaults to default1.
+	// The name of the Security Center Contact. Changing this forces a new Security Center Contact to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The phone number of the Security Center Contact.
@@ -42,10 +42,10 @@ type SecurityCenterContactObservation struct {
 	// The email of the Security Center Contact.
 	Email *string `json:"email,omitempty" tf:"email,omitempty"`
 
-	// The Security Center Contact ID.
+	// The ID of the Security Center Contact.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The name of the Security Center Contact. Defaults to default1.
+	// The name of the Security Center Contact. Changing this forces a new Security Center Contact to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The phone number of the Security Center Contact.
@@ -66,7 +66,7 @@ type SecurityCenterContactParameters struct {
 	// +kubebuilder:validation:Optional
 	Email *string `json:"email,omitempty" tf:"email,omitempty"`
 
-	// The name of the Security Center Contact. Defaults to default1.
+	// The name of the Security Center Contact. Changing this forces a new Security Center Contact to be created.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -114,6 +114,7 @@ type SecurityCenterContact struct {
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.alertNotifications) || (has(self.initProvider) && has(self.initProvider.alertNotifications))",message="spec.forProvider.alertNotifications is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.alertsToAdmins) || (has(self.initProvider) && has(self.initProvider.alertsToAdmins))",message="spec.forProvider.alertsToAdmins is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.email) || (has(self.initProvider) && has(self.initProvider.email))",message="spec.forProvider.email is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
 	Spec   SecurityCenterContactSpec   `json:"spec"`
 	Status SecurityCenterContactStatus `json:"status,omitempty"`
 }

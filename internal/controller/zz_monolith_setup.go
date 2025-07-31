@@ -9,8 +9,6 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	monitoractionruleactiongroup "github.com/upbound/provider-azure/internal/controller/alertsmanagement/monitoractionruleactiongroup"
-	monitoractionrulesuppression "github.com/upbound/provider-azure/internal/controller/alertsmanagement/monitoractionrulesuppression"
 	monitoralertprocessingruleactiongroup "github.com/upbound/provider-azure/internal/controller/alertsmanagement/monitoralertprocessingruleactiongroup"
 	monitoralertprocessingrulesuppression "github.com/upbound/provider-azure/internal/controller/alertsmanagement/monitoralertprocessingrulesuppression"
 	monitorsmartdetectoralertrule "github.com/upbound/provider-azure/internal/controller/alertsmanagement/monitorsmartdetectoralertrule"
@@ -219,7 +217,6 @@ import (
 	device "github.com/upbound/provider-azure/internal/controller/databoxedge/device"
 	accessconnector "github.com/upbound/provider-azure/internal/controller/databricks/accessconnector"
 	workspace "github.com/upbound/provider-azure/internal/controller/databricks/workspace"
-	workspacecustomermanagedkey "github.com/upbound/provider-azure/internal/controller/databricks/workspacecustomermanagedkey"
 	workspacerootdbfscustomermanagedkey "github.com/upbound/provider-azure/internal/controller/databricks/workspacerootdbfscustomermanagedkey"
 	customdataset "github.com/upbound/provider-azure/internal/controller/datafactory/customdataset"
 	dataflow "github.com/upbound/provider-azure/internal/controller/datafactory/dataflow"
@@ -237,7 +234,6 @@ import (
 	factory "github.com/upbound/provider-azure/internal/controller/datafactory/factory"
 	integrationruntimeazure "github.com/upbound/provider-azure/internal/controller/datafactory/integrationruntimeazure"
 	integrationruntimeazuressis "github.com/upbound/provider-azure/internal/controller/datafactory/integrationruntimeazuressis"
-	integrationruntimemanaged "github.com/upbound/provider-azure/internal/controller/datafactory/integrationruntimemanaged"
 	integrationruntimeselfhosted "github.com/upbound/provider-azure/internal/controller/datafactory/integrationruntimeselfhosted"
 	linkedcustomservice "github.com/upbound/provider-azure/internal/controller/datafactory/linkedcustomservice"
 	linkedserviceazureblobstorage "github.com/upbound/provider-azure/internal/controller/datafactory/linkedserviceazureblobstorage"
@@ -284,25 +280,14 @@ import (
 	datasetkustocluster "github.com/upbound/provider-azure/internal/controller/datashare/datasetkustocluster"
 	datasetkustodatabase "github.com/upbound/provider-azure/internal/controller/datashare/datasetkustodatabase"
 	datashare "github.com/upbound/provider-azure/internal/controller/datashare/datashare"
-	configurationdbformariadb "github.com/upbound/provider-azure/internal/controller/dbformariadb/configuration"
-	database "github.com/upbound/provider-azure/internal/controller/dbformariadb/database"
-	firewallrule "github.com/upbound/provider-azure/internal/controller/dbformariadb/firewallrule"
-	serverdbformariadb "github.com/upbound/provider-azure/internal/controller/dbformariadb/server"
-	virtualnetworkrule "github.com/upbound/provider-azure/internal/controller/dbformariadb/virtualnetworkrule"
-	activedirectoryadministrator "github.com/upbound/provider-azure/internal/controller/dbformysql/activedirectoryadministrator"
-	configurationdbformysql "github.com/upbound/provider-azure/internal/controller/dbformysql/configuration"
-	databasedbformysql "github.com/upbound/provider-azure/internal/controller/dbformysql/database"
-	firewallruledbformysql "github.com/upbound/provider-azure/internal/controller/dbformysql/firewallrule"
 	flexibledatabase "github.com/upbound/provider-azure/internal/controller/dbformysql/flexibledatabase"
 	flexibleserver "github.com/upbound/provider-azure/internal/controller/dbformysql/flexibleserver"
 	flexibleserverconfiguration "github.com/upbound/provider-azure/internal/controller/dbformysql/flexibleserverconfiguration"
 	flexibleserverfirewallrule "github.com/upbound/provider-azure/internal/controller/dbformysql/flexibleserverfirewallrule"
-	serverdbformysql "github.com/upbound/provider-azure/internal/controller/dbformysql/server"
-	virtualnetworkruledbformysql "github.com/upbound/provider-azure/internal/controller/dbformysql/virtualnetworkrule"
-	activedirectoryadministratordbforpostgresql "github.com/upbound/provider-azure/internal/controller/dbforpostgresql/activedirectoryadministrator"
+	activedirectoryadministrator "github.com/upbound/provider-azure/internal/controller/dbforpostgresql/activedirectoryadministrator"
 	configurationdbforpostgresql "github.com/upbound/provider-azure/internal/controller/dbforpostgresql/configuration"
-	databasedbforpostgresql "github.com/upbound/provider-azure/internal/controller/dbforpostgresql/database"
-	firewallruledbforpostgresql "github.com/upbound/provider-azure/internal/controller/dbforpostgresql/firewallrule"
+	database "github.com/upbound/provider-azure/internal/controller/dbforpostgresql/database"
+	firewallrule "github.com/upbound/provider-azure/internal/controller/dbforpostgresql/firewallrule"
 	flexibleserverdbforpostgresql "github.com/upbound/provider-azure/internal/controller/dbforpostgresql/flexibleserver"
 	flexibleserveractivedirectoryadministrator "github.com/upbound/provider-azure/internal/controller/dbforpostgresql/flexibleserveractivedirectoryadministrator"
 	flexibleserverconfigurationdbforpostgresql "github.com/upbound/provider-azure/internal/controller/dbforpostgresql/flexibleserverconfiguration"
@@ -310,7 +295,7 @@ import (
 	flexibleserverfirewallruledbforpostgresql "github.com/upbound/provider-azure/internal/controller/dbforpostgresql/flexibleserverfirewallrule"
 	serverdbforpostgresql "github.com/upbound/provider-azure/internal/controller/dbforpostgresql/server"
 	serverkey "github.com/upbound/provider-azure/internal/controller/dbforpostgresql/serverkey"
-	virtualnetworkruledbforpostgresql "github.com/upbound/provider-azure/internal/controller/dbforpostgresql/virtualnetworkrule"
+	virtualnetworkrule "github.com/upbound/provider-azure/internal/controller/dbforpostgresql/virtualnetworkrule"
 	iothub "github.com/upbound/provider-azure/internal/controller/devices/iothub"
 	iothubcertificate "github.com/upbound/provider-azure/internal/controller/devices/iothubcertificate"
 	iothubconsumergroup "github.com/upbound/provider-azure/internal/controller/devices/iothubconsumergroup"
@@ -404,8 +389,6 @@ import (
 	eventgriddataconnection "github.com/upbound/provider-azure/internal/controller/kusto/eventgriddataconnection"
 	eventhubdataconnection "github.com/upbound/provider-azure/internal/controller/kusto/eventhubdataconnection"
 	iothubdataconnection "github.com/upbound/provider-azure/internal/controller/kusto/iothubdataconnection"
-	labservicelab "github.com/upbound/provider-azure/internal/controller/labservices/labservicelab"
-	labserviceplan "github.com/upbound/provider-azure/internal/controller/labservices/labserviceplan"
 	loadtest "github.com/upbound/provider-azure/internal/controller/loadtestservice/loadtest"
 	appactioncustom "github.com/upbound/provider-azure/internal/controller/logic/appactioncustom"
 	appactionhttp "github.com/upbound/provider-azure/internal/controller/logic/appactionhttp"
@@ -418,11 +401,6 @@ import (
 	apptriggerhttprequest "github.com/upbound/provider-azure/internal/controller/logic/apptriggerhttprequest"
 	apptriggerrecurrence "github.com/upbound/provider-azure/internal/controller/logic/apptriggerrecurrence"
 	appworkflow "github.com/upbound/provider-azure/internal/controller/logic/appworkflow"
-	integrationserviceenvironment "github.com/upbound/provider-azure/internal/controller/logic/integrationserviceenvironment"
-	monitor "github.com/upbound/provider-azure/internal/controller/logz/monitor"
-	subaccount "github.com/upbound/provider-azure/internal/controller/logz/subaccount"
-	subaccounttagrule "github.com/upbound/provider-azure/internal/controller/logz/subaccounttagrule"
-	tagrule "github.com/upbound/provider-azure/internal/controller/logz/tagrule"
 	computecluster "github.com/upbound/provider-azure/internal/controller/machinelearningservices/computecluster"
 	computeinstance "github.com/upbound/provider-azure/internal/controller/machinelearningservices/computeinstance"
 	synapsespark "github.com/upbound/provider-azure/internal/controller/machinelearningservices/synapsespark"
@@ -437,18 +415,6 @@ import (
 	accountmaps "github.com/upbound/provider-azure/internal/controller/maps/account"
 	creator "github.com/upbound/provider-azure/internal/controller/maps/creator"
 	marketplaceagreement "github.com/upbound/provider-azure/internal/controller/marketplaceordering/marketplaceagreement"
-	asset "github.com/upbound/provider-azure/internal/controller/media/asset"
-	assetfilter "github.com/upbound/provider-azure/internal/controller/media/assetfilter"
-	contentkeypolicy "github.com/upbound/provider-azure/internal/controller/media/contentkeypolicy"
-	job "github.com/upbound/provider-azure/internal/controller/media/job"
-	liveevent "github.com/upbound/provider-azure/internal/controller/media/liveevent"
-	liveeventoutput "github.com/upbound/provider-azure/internal/controller/media/liveeventoutput"
-	servicesaccount "github.com/upbound/provider-azure/internal/controller/media/servicesaccount"
-	servicesaccountfilter "github.com/upbound/provider-azure/internal/controller/media/servicesaccountfilter"
-	streamingendpoint "github.com/upbound/provider-azure/internal/controller/media/streamingendpoint"
-	streaminglocator "github.com/upbound/provider-azure/internal/controller/media/streaminglocator"
-	streamingpolicy "github.com/upbound/provider-azure/internal/controller/media/streamingpolicy"
-	transform "github.com/upbound/provider-azure/internal/controller/media/transform"
 	spatialanchorsaccount "github.com/upbound/provider-azure/internal/controller/mixedreality/spatialanchorsaccount"
 	accountnetapp "github.com/upbound/provider-azure/internal/controller/netapp/account"
 	pool "github.com/upbound/provider-azure/internal/controller/netapp/pool"
@@ -618,7 +584,6 @@ import (
 	securitycenterassessmentpolicy "github.com/upbound/provider-azure/internal/controller/security/securitycenterassessmentpolicy"
 	securitycenterautoprovisioning "github.com/upbound/provider-azure/internal/controller/security/securitycenterautoprovisioning"
 	securitycentercontact "github.com/upbound/provider-azure/internal/controller/security/securitycentercontact"
-	securitycenterservervulnerabilityassessment "github.com/upbound/provider-azure/internal/controller/security/securitycenterservervulnerabilityassessment"
 	securitycenterservervulnerabilityassessmentvirtualmachine "github.com/upbound/provider-azure/internal/controller/security/securitycenterservervulnerabilityassessmentvirtualmachine"
 	securitycentersetting "github.com/upbound/provider-azure/internal/controller/security/securitycentersetting"
 	securitycentersubscriptionpricing "github.com/upbound/provider-azure/internal/controller/security/securitycentersubscriptionpricing"
@@ -633,7 +598,6 @@ import (
 	sentinelwatchlist "github.com/upbound/provider-azure/internal/controller/securityinsights/sentinelwatchlist"
 	namespaceauthorizationruleservicebus "github.com/upbound/provider-azure/internal/controller/servicebus/namespaceauthorizationrule"
 	namespacedisasterrecoveryconfigservicebus "github.com/upbound/provider-azure/internal/controller/servicebus/namespacedisasterrecoveryconfig"
-	namespacenetworkruleset "github.com/upbound/provider-azure/internal/controller/servicebus/namespacenetworkruleset"
 	queue "github.com/upbound/provider-azure/internal/controller/servicebus/queue"
 	queueauthorizationrule "github.com/upbound/provider-azure/internal/controller/servicebus/queueauthorizationrule"
 	servicebusnamespace "github.com/upbound/provider-azure/internal/controller/servicebus/servicebusnamespace"
@@ -696,11 +660,10 @@ import (
 	hpccacheblobnfstarget "github.com/upbound/provider-azure/internal/controller/storagecache/hpccacheblobnfstarget"
 	hpccacheblobtarget "github.com/upbound/provider-azure/internal/controller/storagecache/hpccacheblobtarget"
 	hpccachenfstarget "github.com/upbound/provider-azure/internal/controller/storagecache/hpccachenfstarget"
-	diskpool "github.com/upbound/provider-azure/internal/controller/storagepool/diskpool"
 	storagesync "github.com/upbound/provider-azure/internal/controller/storagesync/storagesync"
 	clusterstreamanalytics "github.com/upbound/provider-azure/internal/controller/streamanalytics/cluster"
 	functionjavascriptuda "github.com/upbound/provider-azure/internal/controller/streamanalytics/functionjavascriptuda"
-	jobstreamanalytics "github.com/upbound/provider-azure/internal/controller/streamanalytics/job"
+	job "github.com/upbound/provider-azure/internal/controller/streamanalytics/job"
 	managedprivateendpointstreamanalytics "github.com/upbound/provider-azure/internal/controller/streamanalytics/managedprivateendpoint"
 	outputblob "github.com/upbound/provider-azure/internal/controller/streamanalytics/outputblob"
 	outputeventhub "github.com/upbound/provider-azure/internal/controller/streamanalytics/outputeventhub"
@@ -735,11 +698,6 @@ import (
 	workspacesecurityalertpolicy "github.com/upbound/provider-azure/internal/controller/synapse/workspacesecurityalertpolicy"
 	workspacesqlaadadmin "github.com/upbound/provider-azure/internal/controller/synapse/workspacesqlaadadmin"
 	workspacevulnerabilityassessment "github.com/upbound/provider-azure/internal/controller/synapse/workspacevulnerabilityassessment"
-	eventsourceeventhub "github.com/upbound/provider-azure/internal/controller/timeseriesinsights/eventsourceeventhub"
-	eventsourceiothub "github.com/upbound/provider-azure/internal/controller/timeseriesinsights/eventsourceiothub"
-	gen2environment "github.com/upbound/provider-azure/internal/controller/timeseriesinsights/gen2environment"
-	referencedataset "github.com/upbound/provider-azure/internal/controller/timeseriesinsights/referencedataset"
-	standardenvironment "github.com/upbound/provider-azure/internal/controller/timeseriesinsights/standardenvironment"
 	appactiveslot "github.com/upbound/provider-azure/internal/controller/web/appactiveslot"
 	apphybridconnection "github.com/upbound/provider-azure/internal/controller/web/apphybridconnection"
 	appserviceplan "github.com/upbound/provider-azure/internal/controller/web/appserviceplan"
@@ -765,8 +723,6 @@ import (
 // the supplied manager.
 func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
-		monitoractionruleactiongroup.Setup,
-		monitoractionrulesuppression.Setup,
 		monitoralertprocessingruleactiongroup.Setup,
 		monitoralertprocessingrulesuppression.Setup,
 		monitorsmartdetectoralertrule.Setup,
@@ -978,7 +934,6 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		device.Setup,
 		accessconnector.Setup,
 		workspace.Setup,
-		workspacecustomermanagedkey.Setup,
 		workspacerootdbfscustomermanagedkey.Setup,
 		customdataset.Setup,
 		dataflow.Setup,
@@ -996,7 +951,6 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		factory.Setup,
 		integrationruntimeazure.Setup,
 		integrationruntimeazuressis.Setup,
-		integrationruntimemanaged.Setup,
 		integrationruntimeselfhosted.Setup,
 		linkedcustomservice.Setup,
 		linkedserviceazureblobstorage.Setup,
@@ -1043,25 +997,14 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		datasetkustocluster.Setup,
 		datasetkustodatabase.Setup,
 		datashare.Setup,
-		configurationdbformariadb.Setup,
-		database.Setup,
-		firewallrule.Setup,
-		serverdbformariadb.Setup,
-		virtualnetworkrule.Setup,
-		activedirectoryadministrator.Setup,
-		configurationdbformysql.Setup,
-		databasedbformysql.Setup,
-		firewallruledbformysql.Setup,
 		flexibledatabase.Setup,
 		flexibleserver.Setup,
 		flexibleserverconfiguration.Setup,
 		flexibleserverfirewallrule.Setup,
-		serverdbformysql.Setup,
-		virtualnetworkruledbformysql.Setup,
-		activedirectoryadministratordbforpostgresql.Setup,
+		activedirectoryadministrator.Setup,
 		configurationdbforpostgresql.Setup,
-		databasedbforpostgresql.Setup,
-		firewallruledbforpostgresql.Setup,
+		database.Setup,
+		firewallrule.Setup,
 		flexibleserverdbforpostgresql.Setup,
 		flexibleserveractivedirectoryadministrator.Setup,
 		flexibleserverconfigurationdbforpostgresql.Setup,
@@ -1069,7 +1012,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		flexibleserverfirewallruledbforpostgresql.Setup,
 		serverdbforpostgresql.Setup,
 		serverkey.Setup,
-		virtualnetworkruledbforpostgresql.Setup,
+		virtualnetworkrule.Setup,
 		iothub.Setup,
 		iothubcertificate.Setup,
 		iothubconsumergroup.Setup,
@@ -1163,8 +1106,6 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		eventgriddataconnection.Setup,
 		eventhubdataconnection.Setup,
 		iothubdataconnection.Setup,
-		labservicelab.Setup,
-		labserviceplan.Setup,
 		loadtest.Setup,
 		appactioncustom.Setup,
 		appactionhttp.Setup,
@@ -1177,11 +1118,6 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		apptriggerhttprequest.Setup,
 		apptriggerrecurrence.Setup,
 		appworkflow.Setup,
-		integrationserviceenvironment.Setup,
-		monitor.Setup,
-		subaccount.Setup,
-		subaccounttagrule.Setup,
-		tagrule.Setup,
 		computecluster.Setup,
 		computeinstance.Setup,
 		synapsespark.Setup,
@@ -1196,18 +1132,6 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		accountmaps.Setup,
 		creator.Setup,
 		marketplaceagreement.Setup,
-		asset.Setup,
-		assetfilter.Setup,
-		contentkeypolicy.Setup,
-		job.Setup,
-		liveevent.Setup,
-		liveeventoutput.Setup,
-		servicesaccount.Setup,
-		servicesaccountfilter.Setup,
-		streamingendpoint.Setup,
-		streaminglocator.Setup,
-		streamingpolicy.Setup,
-		transform.Setup,
 		spatialanchorsaccount.Setup,
 		accountnetapp.Setup,
 		pool.Setup,
@@ -1377,7 +1301,6 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		securitycenterassessmentpolicy.Setup,
 		securitycenterautoprovisioning.Setup,
 		securitycentercontact.Setup,
-		securitycenterservervulnerabilityassessment.Setup,
 		securitycenterservervulnerabilityassessmentvirtualmachine.Setup,
 		securitycentersetting.Setup,
 		securitycentersubscriptionpricing.Setup,
@@ -1392,7 +1315,6 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		sentinelwatchlist.Setup,
 		namespaceauthorizationruleservicebus.Setup,
 		namespacedisasterrecoveryconfigservicebus.Setup,
-		namespacenetworkruleset.Setup,
 		queue.Setup,
 		queueauthorizationrule.Setup,
 		servicebusnamespace.Setup,
@@ -1455,11 +1377,10 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		hpccacheblobnfstarget.Setup,
 		hpccacheblobtarget.Setup,
 		hpccachenfstarget.Setup,
-		diskpool.Setup,
 		storagesync.Setup,
 		clusterstreamanalytics.Setup,
 		functionjavascriptuda.Setup,
-		jobstreamanalytics.Setup,
+		job.Setup,
 		managedprivateendpointstreamanalytics.Setup,
 		outputblob.Setup,
 		outputeventhub.Setup,
@@ -1494,11 +1415,6 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		workspacesecurityalertpolicy.Setup,
 		workspacesqlaadadmin.Setup,
 		workspacevulnerabilityassessment.Setup,
-		eventsourceeventhub.Setup,
-		eventsourceiothub.Setup,
-		gen2environment.Setup,
-		referencedataset.Setup,
-		standardenvironment.Setup,
 		appactiveslot.Setup,
 		apphybridconnection.Setup,
 		appserviceplan.Setup,

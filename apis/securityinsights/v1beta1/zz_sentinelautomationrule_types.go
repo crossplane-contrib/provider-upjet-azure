@@ -131,45 +131,6 @@ type ActionPlaybookParameters struct {
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
-type ConditionInitParameters struct {
-
-	// The operator to use for evaluate the condition. Possible values include: Equals, NotEquals, Contains, NotContains, StartsWith, NotStartsWith, EndsWith, NotEndsWith.
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
-
-	// The property to use for evaluate the condition. Possible values are AccountAadTenantId, AccountAadUserId, AccountNTDomain, AccountName, AccountObjectGuid, AccountPUID, AccountSid, AccountUPNSuffix, AlertAnalyticRuleIds, AlertProductNames, AzureResourceResourceId, AzureResourceSubscriptionId, CloudApplicationAppId, CloudApplicationAppName, DNSDomainName, FileDirectory, FileHashValue, FileName, HostAzureID, HostNTDomain, HostName, HostNetBiosName, HostOSVersion, IPAddress, IncidentCustomDetailsKey, IncidentCustomDetailsValue, IncidentDescription, IncidentLabel, IncidentProviderName, IncidentRelatedAnalyticRuleIds, IncidentSeverity, IncidentStatus, IncidentTactics, IncidentTitle, IncidentUpdatedBySource, IoTDeviceId, IoTDeviceModel, IoTDeviceName, IoTDeviceOperatingSystem, IoTDeviceType, IoTDeviceVendor, MailMessageDeliveryAction, MailMessageDeliveryLocation, MailMessageP1Sender, MailMessageP2Sender, MailMessageRecipient, MailMessageSenderIP, MailMessageSubject, MailboxDisplayName, MailboxPrimaryAddress, MailboxUPN, MalwareCategory, MalwareName, ProcessCommandLine, ProcessId, RegistryKey, RegistryValueData and Url.
-	Property *string `json:"property,omitempty" tf:"property,omitempty"`
-
-	// Specifies a list of values to use for evaluate the condition.
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
-}
-
-type ConditionObservation struct {
-
-	// The operator to use for evaluate the condition. Possible values include: Equals, NotEquals, Contains, NotContains, StartsWith, NotStartsWith, EndsWith, NotEndsWith.
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
-
-	// The property to use for evaluate the condition. Possible values are AccountAadTenantId, AccountAadUserId, AccountNTDomain, AccountName, AccountObjectGuid, AccountPUID, AccountSid, AccountUPNSuffix, AlertAnalyticRuleIds, AlertProductNames, AzureResourceResourceId, AzureResourceSubscriptionId, CloudApplicationAppId, CloudApplicationAppName, DNSDomainName, FileDirectory, FileHashValue, FileName, HostAzureID, HostNTDomain, HostName, HostNetBiosName, HostOSVersion, IPAddress, IncidentCustomDetailsKey, IncidentCustomDetailsValue, IncidentDescription, IncidentLabel, IncidentProviderName, IncidentRelatedAnalyticRuleIds, IncidentSeverity, IncidentStatus, IncidentTactics, IncidentTitle, IncidentUpdatedBySource, IoTDeviceId, IoTDeviceModel, IoTDeviceName, IoTDeviceOperatingSystem, IoTDeviceType, IoTDeviceVendor, MailMessageDeliveryAction, MailMessageDeliveryLocation, MailMessageP1Sender, MailMessageP2Sender, MailMessageRecipient, MailMessageSenderIP, MailMessageSubject, MailboxDisplayName, MailboxPrimaryAddress, MailboxUPN, MalwareCategory, MalwareName, ProcessCommandLine, ProcessId, RegistryKey, RegistryValueData and Url.
-	Property *string `json:"property,omitempty" tf:"property,omitempty"`
-
-	// Specifies a list of values to use for evaluate the condition.
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
-}
-
-type ConditionParameters struct {
-
-	// The operator to use for evaluate the condition. Possible values include: Equals, NotEquals, Contains, NotContains, StartsWith, NotStartsWith, EndsWith, NotEndsWith.
-	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator" tf:"operator,omitempty"`
-
-	// The property to use for evaluate the condition. Possible values are AccountAadTenantId, AccountAadUserId, AccountNTDomain, AccountName, AccountObjectGuid, AccountPUID, AccountSid, AccountUPNSuffix, AlertAnalyticRuleIds, AlertProductNames, AzureResourceResourceId, AzureResourceSubscriptionId, CloudApplicationAppId, CloudApplicationAppName, DNSDomainName, FileDirectory, FileHashValue, FileName, HostAzureID, HostNTDomain, HostName, HostNetBiosName, HostOSVersion, IPAddress, IncidentCustomDetailsKey, IncidentCustomDetailsValue, IncidentDescription, IncidentLabel, IncidentProviderName, IncidentRelatedAnalyticRuleIds, IncidentSeverity, IncidentStatus, IncidentTactics, IncidentTitle, IncidentUpdatedBySource, IoTDeviceId, IoTDeviceModel, IoTDeviceName, IoTDeviceOperatingSystem, IoTDeviceType, IoTDeviceVendor, MailMessageDeliveryAction, MailMessageDeliveryLocation, MailMessageP1Sender, MailMessageP2Sender, MailMessageRecipient, MailMessageSenderIP, MailMessageSubject, MailboxDisplayName, MailboxPrimaryAddress, MailboxUPN, MalwareCategory, MalwareName, ProcessCommandLine, ProcessId, RegistryKey, RegistryValueData and Url.
-	// +kubebuilder:validation:Optional
-	Property *string `json:"property" tf:"property,omitempty"`
-
-	// Specifies a list of values to use for evaluate the condition.
-	// +kubebuilder:validation:Optional
-	Values []*string `json:"values" tf:"values,omitempty"`
-}
-
 type SentinelAutomationRuleInitParameters struct {
 
 	// One or more action_incident blocks as defined below.
@@ -177,9 +138,6 @@ type SentinelAutomationRuleInitParameters struct {
 
 	// One or more action_playbook blocks as defined below.
 	ActionPlaybook []ActionPlaybookInitParameters `json:"actionPlaybook,omitempty" tf:"action_playbook,omitempty"`
-
-	// One or more condition blocks as defined below.
-	Condition []ConditionInitParameters `json:"condition,omitempty" tf:"condition,omitempty"`
 
 	// A JSON array of one or more condition JSON objects as is defined here.
 	ConditionJSON *string `json:"conditionJson,omitempty" tf:"condition_json,omitempty"`
@@ -227,9 +185,6 @@ type SentinelAutomationRuleObservation struct {
 	// One or more action_playbook blocks as defined below.
 	ActionPlaybook []ActionPlaybookObservation `json:"actionPlaybook,omitempty" tf:"action_playbook,omitempty"`
 
-	// One or more condition blocks as defined below.
-	Condition []ConditionObservation `json:"condition,omitempty" tf:"condition,omitempty"`
-
 	// A JSON array of one or more condition JSON objects as is defined here.
 	ConditionJSON *string `json:"conditionJson,omitempty" tf:"condition_json,omitempty"`
 
@@ -270,10 +225,6 @@ type SentinelAutomationRuleParameters struct {
 	// One or more action_playbook blocks as defined below.
 	// +kubebuilder:validation:Optional
 	ActionPlaybook []ActionPlaybookParameters `json:"actionPlaybook,omitempty" tf:"action_playbook,omitempty"`
-
-	// One or more condition blocks as defined below.
-	// +kubebuilder:validation:Optional
-	Condition []ConditionParameters `json:"condition,omitempty" tf:"condition,omitempty"`
 
 	// A JSON array of one or more condition JSON objects as is defined here.
 	// +kubebuilder:validation:Optional

@@ -33,10 +33,10 @@ type EventHubNamespaceInitParameters struct {
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// Specifies the maximum number of throughput units when Auto Inflate is Enabled. Valid values range from 1 - 20.
+	// Specifies the maximum number of throughput units when Auto Inflate is Enabled. Valid values range from 1 - 40.
 	MaximumThroughputUnits *float64 `json:"maximumThroughputUnits,omitempty" tf:"maximum_throughput_units,omitempty"`
 
-	// The minimum supported TLS version for this EventHub Namespace. Valid values are: 1.0, 1.1 and 1.2. The current default minimum TLS version is 1.2.
+	// The minimum supported TLS version for this EventHub Namespace. Valid values are: 1.0, 1.1 and 1.2. Defaults to 1.2.
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
 	// A network_rulesets block as defined below.
@@ -51,9 +51,6 @@ type EventHubNamespaceInitParameters struct {
 	// A mapping of tags to assign to the resource.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
-
-	// Specifies if the EventHub Namespace should be Zone Redundant (created across Availability Zones). Changing this forces a new resource to be created. Defaults to false.
-	ZoneRedundant *bool `json:"zoneRedundant,omitempty" tf:"zone_redundant,omitempty"`
 }
 
 type EventHubNamespaceObservation struct {
@@ -79,10 +76,10 @@ type EventHubNamespaceObservation struct {
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// Specifies the maximum number of throughput units when Auto Inflate is Enabled. Valid values range from 1 - 20.
+	// Specifies the maximum number of throughput units when Auto Inflate is Enabled. Valid values range from 1 - 40.
 	MaximumThroughputUnits *float64 `json:"maximumThroughputUnits,omitempty" tf:"maximum_throughput_units,omitempty"`
 
-	// The minimum supported TLS version for this EventHub Namespace. Valid values are: 1.0, 1.1 and 1.2. The current default minimum TLS version is 1.2.
+	// The minimum supported TLS version for this EventHub Namespace. Valid values are: 1.0, 1.1 and 1.2. Defaults to 1.2.
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
 	// A network_rulesets block as defined below.
@@ -100,9 +97,6 @@ type EventHubNamespaceObservation struct {
 	// A mapping of tags to assign to the resource.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
-
-	// Specifies if the EventHub Namespace should be Zone Redundant (created across Availability Zones). Changing this forces a new resource to be created. Defaults to false.
-	ZoneRedundant *bool `json:"zoneRedundant,omitempty" tf:"zone_redundant,omitempty"`
 }
 
 type EventHubNamespaceParameters struct {
@@ -131,11 +125,11 @@ type EventHubNamespaceParameters struct {
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// Specifies the maximum number of throughput units when Auto Inflate is Enabled. Valid values range from 1 - 20.
+	// Specifies the maximum number of throughput units when Auto Inflate is Enabled. Valid values range from 1 - 40.
 	// +kubebuilder:validation:Optional
 	MaximumThroughputUnits *float64 `json:"maximumThroughputUnits,omitempty" tf:"maximum_throughput_units,omitempty"`
 
-	// The minimum supported TLS version for this EventHub Namespace. Valid values are: 1.0, 1.1 and 1.2. The current default minimum TLS version is 1.2.
+	// The minimum supported TLS version for this EventHub Namespace. Valid values are: 1.0, 1.1 and 1.2. Defaults to 1.2.
 	// +kubebuilder:validation:Optional
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
@@ -168,10 +162,6 @@ type EventHubNamespaceParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
-
-	// Specifies if the EventHub Namespace should be Zone Redundant (created across Availability Zones). Changing this forces a new resource to be created. Defaults to false.
-	// +kubebuilder:validation:Optional
-	ZoneRedundant *bool `json:"zoneRedundant,omitempty" tf:"zone_redundant,omitempty"`
 }
 
 type IPRuleInitParameters struct {

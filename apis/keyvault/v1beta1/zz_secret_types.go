@@ -45,7 +45,13 @@ type SecretInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the value of the Key Vault Secret. Changing this will create a new version of the Key Vault Secret.
-	ValueSecretRef v1.SecretKeySelector `json:"valueSecretRef" tf:"-"`
+	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
+
+	// Specifies the value of the Key Vault Secret. Changing this will create a new version of the Key Vault Secret.
+	ValueWo *string `json:"valueWo,omitempty" tf:"value_wo,omitempty"`
+
+	// An integer value used to trigger an update for value_wo. This property should be incremented when updating value_wo.
+	ValueWoVersion *float64 `json:"valueWoVersion,omitempty" tf:"value_wo_version,omitempty"`
 }
 
 type SecretObservation struct {
@@ -77,6 +83,12 @@ type SecretObservation struct {
 	// A mapping of tags to assign to the resource.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Specifies the value of the Key Vault Secret. Changing this will create a new version of the Key Vault Secret.
+	ValueWo *string `json:"valueWo,omitempty" tf:"value_wo,omitempty"`
+
+	// An integer value used to trigger an update for value_wo. This property should be incremented when updating value_wo.
+	ValueWoVersion *float64 `json:"valueWoVersion,omitempty" tf:"value_wo_version,omitempty"`
 
 	// The current version of the Key Vault Secret.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
@@ -124,7 +136,15 @@ type SecretParameters struct {
 
 	// Specifies the value of the Key Vault Secret. Changing this will create a new version of the Key Vault Secret.
 	// +kubebuilder:validation:Optional
-	ValueSecretRef v1.SecretKeySelector `json:"valueSecretRef" tf:"-"`
+	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
+
+	// Specifies the value of the Key Vault Secret. Changing this will create a new version of the Key Vault Secret.
+	// +kubebuilder:validation:Optional
+	ValueWo *string `json:"valueWo,omitempty" tf:"value_wo,omitempty"`
+
+	// An integer value used to trigger an update for value_wo. This property should be incremented when updating value_wo.
+	// +kubebuilder:validation:Optional
+	ValueWoVersion *float64 `json:"valueWoVersion,omitempty" tf:"value_wo_version,omitempty"`
 }
 
 // SecretSpec defines the desired state of Secret
@@ -164,7 +184,6 @@ type Secret struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.valueSecretRef)",message="spec.forProvider.valueSecretRef is a required parameter"
 	Spec   SecretSpec   `json:"spec"`
 	Status SecretStatus `json:"status,omitempty"`
 }

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.14.0
+    controller-gen.kubebuilder.io/version: v0.16.5
   name: windowsvirtualmachines.compute.azure.upbound.io
 spec:
   group: compute.azure.upbound.io
@@ -117,8 +117,6 @@ spec:
                             applies. Possible values are AutoLogon and FirstLogonCommands.
                             Changing this forces a new resource to be created.
                           type: string
-                      required:
-                      - contentSecretRef
                       type: object
                     type: array
                   adminPasswordSecretRef:
@@ -255,7 +253,8 @@ spec:
                           type: string
                         order:
                           description: Specifies the order in which the packages have
-                            to be installed. Possible values are between 0 and 2,147,483,647.
+                            to be installed. Possible values are between 0 and 2147483647.
+                            Defaults to 0.
                           type: number
                         tag:
                           description: Specifies a passthrough value for more generic
@@ -278,7 +277,7 @@ spec:
                       information about hot patching please see the product documentation.
                     type: boolean
                   identity:
-                    description: An identity block as defined below.
+                    description: An identity block as documented below.
                     items:
                       properties:
                         identityIds:
@@ -401,7 +400,7 @@ spec:
                         type: object
                     type: object
                   osDisk:
-                    description: A os_disk block as defined below.
+                    description: An os_disk block as defined below.
                     items:
                       properties:
                         caching:
@@ -422,9 +421,9 @@ spec:
                                 type: string
                               placement:
                                 description: Specifies where to store the Ephemeral
-                                  Disk. Possible values are CacheDisk and ResourceDisk.
-                                  Defaults to CacheDisk. Changing this forces a new
-                                  resource to be created.
+                                  Disk. Possible values are CacheDisk, ResourceDisk
+                                  and NvmeDisk. Defaults to CacheDisk. Changing this
+                                  forces a new resource to be created.
                                 type: string
                             type: object
                           type: array
@@ -720,8 +719,8 @@ spec:
                       Set that this Virtual Machine should be created within.
                     type: string
                   vmAgentPlatformUpdatesEnabled:
-                    description: Specifies whether VMAgent Platform Updates is enabled.
-                      Defaults to false.
+                    description: Are Virtual Machine Agent Platform Updates enabled
+                      on this Virtual Machine?
                     type: boolean
                   vtpmEnabled:
                     description: Specifies if vTPM (virtual Trusted Platform Module)
@@ -784,13 +783,53 @@ spec:
                       defined below. Changing this forces a new resource to be created.
                     items:
                       properties:
+                        contentSecretRef:
+                          description: The XML formatted content that is added to
+                            the unattend.xml file for the specified path and component.
+                            Changing this forces a new resource to be created.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         setting:
                           description: The name of the setting to which the content
                             applies. Possible values are AutoLogon and FirstLogonCommands.
                             Changing this forces a new resource to be created.
                           type: string
+                      required:
+                      - contentSecretRef
                       type: object
                     type: array
+                  adminPasswordSecretRef:
+                    description: The Password which should be used for the local-administrator
+                      on this Virtual Machine. Changing this forces a new resource
+                      to be created.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   adminUsername:
                     description: The username of the local administrator used for
                       the Virtual Machine. Changing this forces a new resource to
@@ -906,7 +945,8 @@ spec:
                           type: string
                         order:
                           description: Specifies the order in which the packages have
-                            to be installed. Possible values are between 0 and 2,147,483,647.
+                            to be installed. Possible values are between 0 and 2147483647.
+                            Defaults to 0.
                           type: number
                         tag:
                           description: Specifies a passthrough value for more generic
@@ -929,7 +969,7 @@ spec:
                       information about hot patching please see the product documentation.
                     type: boolean
                   identity:
-                    description: An identity block as defined below.
+                    description: An identity block as documented below.
                     items:
                       properties:
                         identityIds:
@@ -1052,7 +1092,7 @@ spec:
                         type: object
                     type: object
                   osDisk:
-                    description: A os_disk block as defined below.
+                    description: An os_disk block as defined below.
                     items:
                       properties:
                         caching:
@@ -1073,9 +1113,9 @@ spec:
                                 type: string
                               placement:
                                 description: Specifies where to store the Ephemeral
-                                  Disk. Possible values are CacheDisk and ResourceDisk.
-                                  Defaults to CacheDisk. Changing this forces a new
-                                  resource to be created.
+                                  Disk. Possible values are CacheDisk, ResourceDisk
+                                  and NvmeDisk. Defaults to CacheDisk. Changing this
+                                  forces a new resource to be created.
                                 type: string
                             type: object
                           type: array
@@ -1290,8 +1330,8 @@ spec:
                       Set that this Virtual Machine should be created within.
                     type: string
                   vmAgentPlatformUpdatesEnabled:
-                    description: Specifies whether VMAgent Platform Updates is enabled.
-                      Defaults to false.
+                    description: Are Virtual Machine Agent Platform Updates enabled
+                      on this Virtual Machine?
                     type: boolean
                   vtpmEnabled:
                     description: Specifies if vTPM (virtual Trusted Platform Module)
@@ -1320,6 +1360,8 @@ spec:
                       this Windows Virtual Machine should be located. Changing this
                       forces a new Windows Virtual Machine to be created.'
                     type: string
+                required:
+                - adminPasswordSecretRef
                 type: object
               managementPolicies:
                 default:
@@ -1637,7 +1679,8 @@ spec:
                           type: string
                         order:
                           description: Specifies the order in which the packages have
-                            to be installed. Possible values are between 0 and 2,147,483,647.
+                            to be installed. Possible values are between 0 and 2147483647.
+                            Defaults to 0.
                           type: number
                         tag:
                           description: Specifies a passthrough value for more generic
@@ -1663,7 +1706,7 @@ spec:
                     description: The ID of the Windows Virtual Machine.
                     type: string
                   identity:
-                    description: An identity block as defined below.
+                    description: An identity block as documented below.
                     items:
                       properties:
                         identityIds:
@@ -1715,7 +1758,7 @@ spec:
                       type: string
                     type: array
                   osDisk:
-                    description: A os_disk block as defined below.
+                    description: An os_disk block as defined below.
                     items:
                       properties:
                         caching:
@@ -1736,9 +1779,9 @@ spec:
                                 type: string
                               placement:
                                 description: Specifies where to store the Ephemeral
-                                  Disk. Possible values are CacheDisk and ResourceDisk.
-                                  Defaults to CacheDisk. Changing this forces a new
-                                  resource to be created.
+                                  Disk. Possible values are CacheDisk, ResourceDisk
+                                  and NvmeDisk. Defaults to CacheDisk. Changing this
+                                  forces a new resource to be created.
                                 type: string
                             type: object
                           type: array
@@ -1751,6 +1794,9 @@ spec:
                             you wish to vary from the size used in the image this
                             Virtual Machine is sourced from.
                           type: number
+                        id:
+                          description: The ID of the OS disk.
+                          type: string
                         name:
                           description: The name which should be used for the Internal
                             OS Disk. Changing this forces a new resource to be created.
@@ -1982,8 +2028,8 @@ spec:
                       Set that this Virtual Machine should be created within.
                     type: string
                   vmAgentPlatformUpdatesEnabled:
-                    description: Specifies whether VMAgent Platform Updates is enabled.
-                      Defaults to false.
+                    description: Are Virtual Machine Agent Platform Updates enabled
+                      on this Virtual Machine?
                     type: boolean
                   vtpmEnabled:
                     description: Specifies if vTPM (virtual Trusted Platform Module)
@@ -2450,7 +2496,7 @@ spec:
                         type: object
                     type: object
                   osDisk:
-                    description: A os_disk block as defined below.
+                    description: An os_disk block as defined below.
                     properties:
                       caching:
                         description: The Type of Caching which should be used for
@@ -2468,9 +2514,9 @@ spec:
                             type: string
                           placement:
                             description: Specifies where to store the Ephemeral Disk.
-                              Possible values are CacheDisk and ResourceDisk. Defaults
-                              to CacheDisk. Changing this forces a new resource to
-                              be created.
+                              Possible values are CacheDisk, ResourceDisk and NvmeDisk.
+                              Defaults to CacheDisk. Changing this forces a new resource
+                              to be created.
                             type: string
                         type: object
                       diskEncryptionSetId:
@@ -2755,8 +2801,8 @@ spec:
                       Set that this Virtual Machine should be created within.
                     type: string
                   vmAgentPlatformUpdatesEnabled:
-                    description: Specifies whether VMAgent Platform Updates is enabled.
-                      Defaults to false.
+                    description: Are Virtual Machine Agent Platform Updates enabled
+                      on this Virtual Machine?
                     type: boolean
                   vtpmEnabled:
                     description: Specifies if vTPM (virtual Trusted Platform Module)
@@ -3122,7 +3168,7 @@ spec:
                         type: object
                     type: object
                   osDisk:
-                    description: A os_disk block as defined below.
+                    description: An os_disk block as defined below.
                     properties:
                       caching:
                         description: The Type of Caching which should be used for
@@ -3140,9 +3186,9 @@ spec:
                             type: string
                           placement:
                             description: Specifies where to store the Ephemeral Disk.
-                              Possible values are CacheDisk and ResourceDisk. Defaults
-                              to CacheDisk. Changing this forces a new resource to
-                              be created.
+                              Possible values are CacheDisk, ResourceDisk and NvmeDisk.
+                              Defaults to CacheDisk. Changing this forces a new resource
+                              to be created.
                             type: string
                         type: object
                       diskEncryptionSetId:
@@ -3346,8 +3392,8 @@ spec:
                       Set that this Virtual Machine should be created within.
                     type: string
                   vmAgentPlatformUpdatesEnabled:
-                    description: Specifies whether VMAgent Platform Updates is enabled.
-                      Defaults to false.
+                    description: Are Virtual Machine Agent Platform Updates enabled
+                      on this Virtual Machine?
                     type: boolean
                   vtpmEnabled:
                     description: Specifies if vTPM (virtual Trusted Platform Module)
@@ -3768,7 +3814,7 @@ spec:
                       type: string
                     type: array
                   osDisk:
-                    description: A os_disk block as defined below.
+                    description: An os_disk block as defined below.
                     properties:
                       caching:
                         description: The Type of Caching which should be used for
@@ -3786,9 +3832,9 @@ spec:
                             type: string
                           placement:
                             description: Specifies where to store the Ephemeral Disk.
-                              Possible values are CacheDisk and ResourceDisk. Defaults
-                              to CacheDisk. Changing this forces a new resource to
-                              be created.
+                              Possible values are CacheDisk, ResourceDisk and NvmeDisk.
+                              Defaults to CacheDisk. Changing this forces a new resource
+                              to be created.
                             type: string
                         type: object
                       diskEncryptionSetId:
@@ -3800,6 +3846,9 @@ spec:
                           wish to vary from the size used in the image this Virtual
                           Machine is sourced from.
                         type: number
+                      id:
+                        description: The ID of the OS disk.
+                        type: string
                       name:
                         description: The name which should be used for the Internal
                           OS Disk. Changing this forces a new resource to be created.
@@ -4021,8 +4070,8 @@ spec:
                       Set that this Virtual Machine should be created within.
                     type: string
                   vmAgentPlatformUpdatesEnabled:
-                    description: Specifies whether VMAgent Platform Updates is enabled.
-                      Defaults to false.
+                    description: Are Virtual Machine Agent Platform Updates enabled
+                      on this Virtual Machine?
                     type: boolean
                   vtpmEnabled:
                     description: Specifies if vTPM (virtual Trusted Platform Module)

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.14.0
+    controller-gen.kubebuilder.io/version: v0.16.5
   name: frontdoororigins.cdn.azure.upbound.io
 spec:
   group: cdn.azure.upbound.io
@@ -162,10 +162,6 @@ spec:
                     description: Should the origin be enabled? Possible values are
                       true or false. Defaults to true.
                     type: boolean
-                  healthProbesEnabled:
-                    description: Should the origin be enabled? Possible values are
-                      true or false. Defaults to true.
-                    type: boolean
                   hostName:
                     description: The IPv4 address, IPv6 address or Domain name of
                       the Origin.
@@ -512,7 +508,7 @@ spec:
                         targetType:
                           description: Specifies the type of target for this Private
                             Link Endpoint. Possible values are blob, blob_secondary,
-                            web and sites.
+                            Gateway, managedEnvironments, sites, web and web_secondary.
                           type: string
                       type: object
                     type: array
@@ -543,10 +539,6 @@ spec:
                     description: Should the origin be enabled? Possible values are
                       true or false. Defaults to true.
                     type: boolean
-                  healthProbesEnabled:
-                    description: Should the origin be enabled? Possible values are
-                      true or false. Defaults to true.
-                    type: boolean
                   hostName:
                     description: The IPv4 address, IPv6 address or Domain name of
                       the Origin.
@@ -893,7 +885,7 @@ spec:
                         targetType:
                           description: Specifies the type of target for this Private
                             Link Endpoint. Possible values are blob, blob_secondary,
-                            web and sites.
+                            Gateway, managedEnvironments, sites, web and web_secondary.
                           type: string
                       type: object
                     type: array
@@ -1094,10 +1086,6 @@ spec:
                     description: Should the origin be enabled? Possible values are
                       true or false. Defaults to true.
                     type: boolean
-                  healthProbesEnabled:
-                    description: Should the origin be enabled? Possible values are
-                      true or false. Defaults to true.
-                    type: boolean
                   hostName:
                     description: The IPv4 address, IPv6 address or Domain name of
                       the Origin.
@@ -1147,7 +1135,7 @@ spec:
                         targetType:
                           description: Specifies the type of target for this Private
                             Link Endpoint. Possible values are blob, blob_secondary,
-                            web and sites.
+                            Gateway, managedEnvironments, sites, web and web_secondary.
                           type: string
                       type: object
                     type: array
@@ -1362,10 +1350,6 @@ spec:
                     description: Should the origin be enabled? Possible values are
                       true or false. Defaults to true.
                     type: boolean
-                  healthProbesEnabled:
-                    description: Should the origin be enabled? Possible values are
-                      true or false. Defaults to true.
-                    type: boolean
                   hostName:
                     description: The IPv4 address, IPv6 address or Domain name of
                       the Origin.
@@ -1711,7 +1695,7 @@ spec:
                       targetType:
                         description: Specifies the type of target for this Private
                           Link Endpoint. Possible values are blob, blob_secondary,
-                          web and sites.
+                          Gateway, managedEnvironments, sites, web and web_secondary.
                         type: string
                     type: object
                   weight:
@@ -1741,10 +1725,6 @@ spec:
                     description: Should the origin be enabled? Possible values are
                       true or false. Defaults to true.
                     type: boolean
-                  healthProbesEnabled:
-                    description: Should the origin be enabled? Possible values are
-                      true or false. Defaults to true.
-                    type: boolean
                   hostName:
                     description: The IPv4 address, IPv6 address or Domain name of
                       the Origin.
@@ -2090,7 +2070,7 @@ spec:
                       targetType:
                         description: Specifies the type of target for this Private
                           Link Endpoint. Possible values are blob, blob_secondary,
-                          web and sites.
+                          Gateway, managedEnvironments, sites, web and web_secondary.
                         type: string
                     type: object
                   weight:
@@ -2290,10 +2270,6 @@ spec:
                     description: Should the origin be enabled? Possible values are
                       true or false. Defaults to true.
                     type: boolean
-                  healthProbesEnabled:
-                    description: Should the origin be enabled? Possible values are
-                      true or false. Defaults to true.
-                    type: boolean
                   hostName:
                     description: The IPv4 address, IPv6 address or Domain name of
                       the Origin.
@@ -2342,7 +2318,7 @@ spec:
                       targetType:
                         description: Specifies the type of target for this Private
                           Link Endpoint. Possible values are blob, blob_secondary,
-                          web and sites.
+                          Gateway, managedEnvironments, sites, web and web_secondary.
                         type: string
                     type: object
                   weight:

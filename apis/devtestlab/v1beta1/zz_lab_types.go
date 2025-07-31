@@ -18,9 +18,6 @@ type LabInitParameters struct {
 	// Specifies the supported Azure location where the Dev Test Lab should exist. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The type of storage used by the Dev Test Lab. Possible values are Standard and Premium. Defaults to Premium.
-	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
-
 	// A mapping of tags to assign to the resource.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -52,9 +49,6 @@ type LabObservation struct {
 	// The name of the resource group under which the Dev Test Lab resource has to be created. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// The type of storage used by the Dev Test Lab. Possible values are Standard and Premium. Defaults to Premium.
-	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
-
 	// A mapping of tags to assign to the resource.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -81,10 +75,6 @@ type LabParameters struct {
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
-
-	// The type of storage used by the Dev Test Lab. Possible values are Standard and Premium. Defaults to Premium.
-	// +kubebuilder:validation:Optional
-	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional

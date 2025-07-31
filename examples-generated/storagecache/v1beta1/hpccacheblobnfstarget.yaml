@@ -179,7 +179,7 @@ spec:
     accountKind: StorageV2
     accountReplicationType: LRS
     accountTier: Standard
-    enableHttpsTrafficOnly: false
+    enable_https_traffic_only: false
     isHnsEnabled: true
     location: west europe
     networkRules:

@@ -565,7 +565,7 @@ type DiagnosticInitParameters struct {
 	// Log client IP address.
 	LogClientIP *bool `json:"logClientIp,omitempty" tf:"log_client_ip,omitempty"`
 
-	// The format of the Operation Name for Application Insights telemetries. Possible values are Name, and Url. Defaults to Name.
+	// The format of the Operation Name for Application Insights telemetries. Possible values are Name, and Url.
 	OperationNameFormat *string `json:"operationNameFormat,omitempty" tf:"operation_name_format,omitempty"`
 
 	// Sampling (%). For high traffic APIs, please read this documentation to understand performance implications and log sampling. Valid values are between 0.0 and 100.0.
@@ -607,7 +607,7 @@ type DiagnosticObservation struct {
 	// Log client IP address.
 	LogClientIP *bool `json:"logClientIp,omitempty" tf:"log_client_ip,omitempty"`
 
-	// The format of the Operation Name for Application Insights telemetries. Possible values are Name, and Url. Defaults to Name.
+	// The format of the Operation Name for Application Insights telemetries. Possible values are Name, and Url.
 	OperationNameFormat *string `json:"operationNameFormat,omitempty" tf:"operation_name_format,omitempty"`
 
 	// The Name of the Resource Group where the API Management Service exists. Changing this forces a new resource to be created.
@@ -677,7 +677,7 @@ type DiagnosticParameters struct {
 	// +kubebuilder:validation:Optional
 	LogClientIP *bool `json:"logClientIp,omitempty" tf:"log_client_ip,omitempty"`
 
-	// The format of the Operation Name for Application Insights telemetries. Possible values are Name, and Url. Defaults to Name.
+	// The format of the Operation Name for Application Insights telemetries. Possible values are Name, and Url.
 	// +kubebuilder:validation:Optional
 	OperationNameFormat *string `json:"operationNameFormat,omitempty" tf:"operation_name_format,omitempty"`
 

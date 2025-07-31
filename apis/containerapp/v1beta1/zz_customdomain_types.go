@@ -42,6 +42,9 @@ type CustomDomainObservation_2 struct {
 	// The ID of the Container App Environment Certificate to use. Changing this forces a new resource to be created.
 	ContainerAppEnvironmentCertificateID *string `json:"containerAppEnvironmentCertificateId,omitempty" tf:"container_app_environment_certificate_id,omitempty"`
 
+	// The ID of the Container App Environment Managed Certificate to use.
+	ContainerAppEnvironmentManagedCertificateID *string `json:"containerAppEnvironmentManagedCertificateId,omitempty" tf:"container_app_environment_managed_certificate_id,omitempty"`
+
 	// The ID of the Container App to which this Custom Domain should be bound. Changing this forces a new resource to be created.
 	ContainerAppID *string `json:"containerAppId,omitempty" tf:"container_app_id,omitempty"`
 

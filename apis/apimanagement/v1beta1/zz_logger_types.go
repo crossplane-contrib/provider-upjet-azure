@@ -14,6 +14,12 @@ import (
 )
 
 type ApplicationInsightsInitParameters struct {
+
+	// The connection string of Application Insights.
+	ConnectionStringSecretRef *v1.SecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
+
+	// The instrumentation key used to push data to Application Insights.
+	InstrumentationKeySecretRef *v1.SecretKeySelector `json:"instrumentationKeySecretRef,omitempty" tf:"-"`
 }
 
 type ApplicationInsightsObservation struct {
@@ -21,12 +27,19 @@ type ApplicationInsightsObservation struct {
 
 type ApplicationInsightsParameters struct {
 
+	// The connection string of Application Insights.
+	// +kubebuilder:validation:Optional
+	ConnectionStringSecretRef *v1.SecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
+
 	// The instrumentation key used to push data to Application Insights.
-	// +kubebuilder:validation:Required
-	InstrumentationKeySecretRef v1.SecretKeySelector `json:"instrumentationKeySecretRef" tf:"-"`
+	// +kubebuilder:validation:Optional
+	InstrumentationKeySecretRef *v1.SecretKeySelector `json:"instrumentationKeySecretRef,omitempty" tf:"-"`
 }
 
 type EventHubInitParameters struct {
+
+	// The connection string of an EventHub Namespace.
+	ConnectionStringSecretRef *v1.SecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
 
 	// The endpoint address of an EventHub Namespace. Required when client_id is set.
 	EndpointURI *string `json:"endpointUri,omitempty" tf:"endpoint_uri,omitempty"`

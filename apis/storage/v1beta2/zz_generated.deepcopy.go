@@ -113,11 +113,6 @@ func (in *AccountInitParameters) DeepCopyInto(out *AccountInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.EnableHTTPSTrafficOnly != nil {
-		in, out := &in.EnableHTTPSTrafficOnly, &out.EnableHTTPSTrafficOnly
-		*out = new(bool)
-		**out = **in
-	}
 	if in.HTTPSTrafficOnlyEnabled != nil {
 		in, out := &in.HTTPSTrafficOnlyEnabled, &out.HTTPSTrafficOnlyEnabled
 		*out = new(bool)
@@ -605,11 +600,6 @@ func (in *AccountObservation) DeepCopyInto(out *AccountObservation) {
 	if in.EdgeZone != nil {
 		in, out := &in.EdgeZone, &out.EdgeZone
 		*out = new(string)
-		**out = **in
-	}
-	if in.EnableHTTPSTrafficOnly != nil {
-		in, out := &in.EnableHTTPSTrafficOnly, &out.EnableHTTPSTrafficOnly
-		*out = new(bool)
 		**out = **in
 	}
 	if in.HTTPSTrafficOnlyEnabled != nil {
@@ -1156,11 +1146,6 @@ func (in *AccountParameters) DeepCopyInto(out *AccountParameters) {
 	if in.EdgeZone != nil {
 		in, out := &in.EdgeZone, &out.EdgeZone
 		*out = new(string)
-		**out = **in
-	}
-	if in.EnableHTTPSTrafficOnly != nil {
-		in, out := &in.EnableHTTPSTrafficOnly, &out.EnableHTTPSTrafficOnly
-		*out = new(bool)
 		**out = **in
 	}
 	if in.HTTPSTrafficOnlyEnabled != nil {

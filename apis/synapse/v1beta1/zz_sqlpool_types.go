@@ -53,7 +53,7 @@ type SQLPoolInitParameters struct {
 	// Is transparent data encryption enabled?
 	DataEncrypted *bool `json:"dataEncrypted,omitempty" tf:"data_encrypted,omitempty"`
 
-	// Is geo-backup policy enabled? Possible values include true or false. Defaults to true.
+	// Is geo-backup policy enabled? Defaults to true.
 	GeoBackupPolicyEnabled *bool `json:"geoBackupPolicyEnabled,omitempty" tf:"geo_backup_policy_enabled,omitempty"`
 
 	// The ID of the Synapse SQL Pool or SQL Database which is to back up, only applicable when create_mode is set to Recovery. Changing this forces a new Synapse SQL Pool to be created.
@@ -65,7 +65,7 @@ type SQLPoolInitParameters struct {
 	// Specifies the SKU Name for this Synapse SQL Pool. Possible values are DW100c, DW200c, DW300c, DW400c, DW500c, DW1000c, DW1500c, DW2000c, DW2500c, DW3000c, DW5000c, DW6000c, DW7500c, DW10000c, DW15000c or DW30000c.
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
-	// The storage account type that will be used to store backups for this Synapse SQL Pool. Possible values are LRS or GRS. Changing this forces a new Synapse SQL Pool to be created. Defaults to GRS.
+	// The storage account type that will be used to store backups for this Synapse SQL Pool. Possible values are LRS or GRS. Changing this forces a new Synapse SQL Pool to be created.
 	StorageAccountType *string `json:"storageAccountType,omitempty" tf:"storage_account_type,omitempty"`
 
 	// A mapping of tags which should be assigned to the Synapse SQL Pool.
@@ -84,7 +84,7 @@ type SQLPoolObservation struct {
 	// Is transparent data encryption enabled?
 	DataEncrypted *bool `json:"dataEncrypted,omitempty" tf:"data_encrypted,omitempty"`
 
-	// Is geo-backup policy enabled? Possible values include true or false. Defaults to true.
+	// Is geo-backup policy enabled? Defaults to true.
 	GeoBackupPolicyEnabled *bool `json:"geoBackupPolicyEnabled,omitempty" tf:"geo_backup_policy_enabled,omitempty"`
 
 	// The ID of the Synapse SQL Pool.
@@ -99,7 +99,7 @@ type SQLPoolObservation struct {
 	// Specifies the SKU Name for this Synapse SQL Pool. Possible values are DW100c, DW200c, DW300c, DW400c, DW500c, DW1000c, DW1500c, DW2000c, DW2500c, DW3000c, DW5000c, DW6000c, DW7500c, DW10000c, DW15000c or DW30000c.
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
-	// The storage account type that will be used to store backups for this Synapse SQL Pool. Possible values are LRS or GRS. Changing this forces a new Synapse SQL Pool to be created. Defaults to GRS.
+	// The storage account type that will be used to store backups for this Synapse SQL Pool. Possible values are LRS or GRS. Changing this forces a new Synapse SQL Pool to be created.
 	StorageAccountType *string `json:"storageAccountType,omitempty" tf:"storage_account_type,omitempty"`
 
 	// The ID of Synapse Workspace within which this SQL Pool should be created. Changing this forces a new Synapse SQL Pool to be created.
@@ -124,7 +124,7 @@ type SQLPoolParameters struct {
 	// +kubebuilder:validation:Optional
 	DataEncrypted *bool `json:"dataEncrypted,omitempty" tf:"data_encrypted,omitempty"`
 
-	// Is geo-backup policy enabled? Possible values include true or false. Defaults to true.
+	// Is geo-backup policy enabled? Defaults to true.
 	// +kubebuilder:validation:Optional
 	GeoBackupPolicyEnabled *bool `json:"geoBackupPolicyEnabled,omitempty" tf:"geo_backup_policy_enabled,omitempty"`
 
@@ -140,7 +140,7 @@ type SQLPoolParameters struct {
 	// +kubebuilder:validation:Optional
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
-	// The storage account type that will be used to store backups for this Synapse SQL Pool. Possible values are LRS or GRS. Changing this forces a new Synapse SQL Pool to be created. Defaults to GRS.
+	// The storage account type that will be used to store backups for this Synapse SQL Pool. Possible values are LRS or GRS. Changing this forces a new Synapse SQL Pool to be created.
 	// +kubebuilder:validation:Optional
 	StorageAccountType *string `json:"storageAccountType,omitempty" tf:"storage_account_type,omitempty"`
 
@@ -201,6 +201,7 @@ type SQLPool struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.skuName) || (has(self.initProvider) && has(self.initProvider.skuName))",message="spec.forProvider.skuName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.storageAccountType) || (has(self.initProvider) && has(self.initProvider.storageAccountType))",message="spec.forProvider.storageAccountType is a required parameter"
 	Spec   SQLPoolSpec   `json:"spec"`
 	Status SQLPoolStatus `json:"status,omitempty"`
 }

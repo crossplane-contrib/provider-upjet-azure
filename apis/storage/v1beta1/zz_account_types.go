@@ -15,7 +15,7 @@ import (
 
 type AccountInitParameters struct {
 
-	// Defines the access tier for BlobStorage, FileStorage and StorageV2 accounts. Valid options are Hot and Cool, defaults to Hot.
+	// Defines the access tier for BlobStorage, FileStorage and StorageV2 accounts. Valid options are Hot, Cool, Cold and Premium. Defaults to Hot.
 	AccessTier *string `json:"accessTier,omitempty" tf:"access_tier,omitempty"`
 
 	// Defines the Kind of account. Valid options are BlobStorage, BlockBlobStorage, FileStorage, Storage and StorageV2. Defaults to StorageV2.
@@ -39,7 +39,7 @@ type AccountInitParameters struct {
 	// A blob_properties block as defined below.
 	BlobProperties []BlobPropertiesInitParameters `json:"blobProperties,omitempty" tf:"blob_properties,omitempty"`
 
-	// Should cross Tenant replication be enabled? Defaults to true.
+	// Should cross Tenant replication be enabled? Defaults to false.
 	CrossTenantReplicationEnabled *bool `json:"crossTenantReplicationEnabled,omitempty" tf:"cross_tenant_replication_enabled,omitempty"`
 
 	// A custom_domain block as documented below.
@@ -58,9 +58,6 @@ type AccountInitParameters struct {
 	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
 
 	// Boolean flag which forces HTTPS if enabled, see here for more information. Defaults to true.
-	EnableHTTPSTrafficOnly *bool `json:"enableHttpsTrafficOnly,omitempty" tf:"enable_https_traffic_only,omitempty"`
-
-	// Boolean flag which forces HTTPS if enabled, see here for more information. Defaults to true.
 	HTTPSTrafficOnlyEnabled *bool `json:"httpsTrafficOnlyEnabled,omitempty" tf:"https_traffic_only_enabled,omitempty"`
 
 	// An identity block as defined below.
@@ -75,7 +72,7 @@ type AccountInitParameters struct {
 	// Is Hierarchical Namespace enabled? This can be used with Azure Data Lake Storage Gen 2 (see here for more information). Changing this forces a new resource to be created.
 	IsHnsEnabled *bool `json:"isHnsEnabled,omitempty" tf:"is_hns_enabled,omitempty"`
 
-	// Is Large File Share Enabled?
+	// Are Large File Shares Enabled? Defaults to false.
 	LargeFileShareEnabled *bool `json:"largeFileShareEnabled,omitempty" tf:"large_file_share_enabled,omitempty"`
 
 	// Is Local User Enabled? Defaults to true.
@@ -130,7 +127,7 @@ type AccountInitParameters struct {
 
 type AccountObservation struct {
 
-	// Defines the access tier for BlobStorage, FileStorage and StorageV2 accounts. Valid options are Hot and Cool, defaults to Hot.
+	// Defines the access tier for BlobStorage, FileStorage and StorageV2 accounts. Valid options are Hot, Cool, Cold and Premium. Defaults to Hot.
 	AccessTier *string `json:"accessTier,omitempty" tf:"access_tier,omitempty"`
 
 	// Defines the Kind of account. Valid options are BlobStorage, BlockBlobStorage, FileStorage, Storage and StorageV2. Defaults to StorageV2.
@@ -154,7 +151,7 @@ type AccountObservation struct {
 	// A blob_properties block as defined below.
 	BlobProperties []BlobPropertiesObservation `json:"blobProperties,omitempty" tf:"blob_properties,omitempty"`
 
-	// Should cross Tenant replication be enabled? Defaults to true.
+	// Should cross Tenant replication be enabled? Defaults to false.
 	CrossTenantReplicationEnabled *bool `json:"crossTenantReplicationEnabled,omitempty" tf:"cross_tenant_replication_enabled,omitempty"`
 
 	// A custom_domain block as documented below.
@@ -171,9 +168,6 @@ type AccountObservation struct {
 
 	// Specifies the Edge Zone within the Azure Region where this Storage Account should exist. Changing this forces a new Storage Account to be created.
 	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
-
-	// Boolean flag which forces HTTPS if enabled, see here for more information. Defaults to true.
-	EnableHTTPSTrafficOnly *bool `json:"enableHttpsTrafficOnly,omitempty" tf:"enable_https_traffic_only,omitempty"`
 
 	// Boolean flag which forces HTTPS if enabled, see here for more information. Defaults to true.
 	HTTPSTrafficOnlyEnabled *bool `json:"httpsTrafficOnlyEnabled,omitempty" tf:"https_traffic_only_enabled,omitempty"`
@@ -193,7 +187,7 @@ type AccountObservation struct {
 	// Is Hierarchical Namespace enabled? This can be used with Azure Data Lake Storage Gen 2 (see here for more information). Changing this forces a new resource to be created.
 	IsHnsEnabled *bool `json:"isHnsEnabled,omitempty" tf:"is_hns_enabled,omitempty"`
 
-	// Is Large File Share Enabled?
+	// Are Large File Shares Enabled? Defaults to false.
 	LargeFileShareEnabled *bool `json:"largeFileShareEnabled,omitempty" tf:"large_file_share_enabled,omitempty"`
 
 	// Is Local User Enabled? Defaults to true.
@@ -449,7 +443,7 @@ type AccountObservation struct {
 
 type AccountParameters struct {
 
-	// Defines the access tier for BlobStorage, FileStorage and StorageV2 accounts. Valid options are Hot and Cool, defaults to Hot.
+	// Defines the access tier for BlobStorage, FileStorage and StorageV2 accounts. Valid options are Hot, Cool, Cold and Premium. Defaults to Hot.
 	// +kubebuilder:validation:Optional
 	AccessTier *string `json:"accessTier,omitempty" tf:"access_tier,omitempty"`
 
@@ -481,7 +475,7 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	BlobProperties []BlobPropertiesParameters `json:"blobProperties,omitempty" tf:"blob_properties,omitempty"`
 
-	// Should cross Tenant replication be enabled? Defaults to true.
+	// Should cross Tenant replication be enabled? Defaults to false.
 	// +kubebuilder:validation:Optional
 	CrossTenantReplicationEnabled *bool `json:"crossTenantReplicationEnabled,omitempty" tf:"cross_tenant_replication_enabled,omitempty"`
 
@@ -507,10 +501,6 @@ type AccountParameters struct {
 
 	// Boolean flag which forces HTTPS if enabled, see here for more information. Defaults to true.
 	// +kubebuilder:validation:Optional
-	EnableHTTPSTrafficOnly *bool `json:"enableHttpsTrafficOnly,omitempty" tf:"enable_https_traffic_only,omitempty"`
-
-	// Boolean flag which forces HTTPS if enabled, see here for more information. Defaults to true.
-	// +kubebuilder:validation:Optional
 	HTTPSTrafficOnlyEnabled *bool `json:"httpsTrafficOnlyEnabled,omitempty" tf:"https_traffic_only_enabled,omitempty"`
 
 	// An identity block as defined below.
@@ -529,7 +519,7 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	IsHnsEnabled *bool `json:"isHnsEnabled,omitempty" tf:"is_hns_enabled,omitempty"`
 
-	// Is Large File Share Enabled?
+	// Are Large File Shares Enabled? Defaults to false.
 	// +kubebuilder:validation:Optional
 	LargeFileShareEnabled *bool `json:"largeFileShareEnabled,omitempty" tf:"large_file_share_enabled,omitempty"`
 
@@ -1092,7 +1082,7 @@ type ImmutabilityPolicyInitParameters struct {
 	// The immutability period for the blobs in the container since the policy creation, in days.
 	PeriodSinceCreationInDays *float64 `json:"periodSinceCreationInDays,omitempty" tf:"period_since_creation_in_days,omitempty"`
 
-	// Defines the mode of the policy. Disabled state disables the policy, Unlocked state allows increase and decrease of immutability retention time and also allows toggling allowProtectedAppendWrites property, Locked state only allows the increase of the immutability retention time. A policy can only be created in a Disabled or Unlocked state and can be toggled between the two states. Only a policy in an Unlocked state can transition to a Locked state which cannot be reverted.
+	// Defines the mode of the policy. Disabled state disables the policy, Unlocked state allows increase and decrease of immutability retention time and also allows toggling allowProtectedAppendWrites property, Locked state only allows the increase of the immutability retention time. A policy can only be created in a Disabled or Unlocked state and can be toggled between the two states. Only a policy in an Unlocked state can transition to a Locked state which cannot be reverted. Changing from Locked forces a new resource to be created.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 }
 
@@ -1104,7 +1094,7 @@ type ImmutabilityPolicyObservation struct {
 	// The immutability period for the blobs in the container since the policy creation, in days.
 	PeriodSinceCreationInDays *float64 `json:"periodSinceCreationInDays,omitempty" tf:"period_since_creation_in_days,omitempty"`
 
-	// Defines the mode of the policy. Disabled state disables the policy, Unlocked state allows increase and decrease of immutability retention time and also allows toggling allowProtectedAppendWrites property, Locked state only allows the increase of the immutability retention time. A policy can only be created in a Disabled or Unlocked state and can be toggled between the two states. Only a policy in an Unlocked state can transition to a Locked state which cannot be reverted.
+	// Defines the mode of the policy. Disabled state disables the policy, Unlocked state allows increase and decrease of immutability retention time and also allows toggling allowProtectedAppendWrites property, Locked state only allows the increase of the immutability retention time. A policy can only be created in a Disabled or Unlocked state and can be toggled between the two states. Only a policy in an Unlocked state can transition to a Locked state which cannot be reverted. Changing from Locked forces a new resource to be created.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 }
 
@@ -1118,14 +1108,14 @@ type ImmutabilityPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	PeriodSinceCreationInDays *float64 `json:"periodSinceCreationInDays" tf:"period_since_creation_in_days,omitempty"`
 
-	// Defines the mode of the policy. Disabled state disables the policy, Unlocked state allows increase and decrease of immutability retention time and also allows toggling allowProtectedAppendWrites property, Locked state only allows the increase of the immutability retention time. A policy can only be created in a Disabled or Unlocked state and can be toggled between the two states. Only a policy in an Unlocked state can transition to a Locked state which cannot be reverted.
+	// Defines the mode of the policy. Disabled state disables the policy, Unlocked state allows increase and decrease of immutability retention time and also allows toggling allowProtectedAppendWrites property, Locked state only allows the increase of the immutability retention time. A policy can only be created in a Disabled or Unlocked state and can be toggled between the two states. Only a policy in an Unlocked state can transition to a Locked state which cannot be reverted. Changing from Locked forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	State *string `json:"state" tf:"state,omitempty"`
 }
 
 type LoggingInitParameters struct {
 
-	// (Defaults to 60 minutes) Used when deleting the Storage Account.
+	// (Defaults to 1 hour) Used when deleting the Storage Account.
 	Delete *bool `json:"delete,omitempty" tf:"delete,omitempty"`
 
 	// (Defaults to 5 minutes) Used when retrieving the Storage Account.
@@ -1143,7 +1133,7 @@ type LoggingInitParameters struct {
 
 type LoggingObservation struct {
 
-	// (Defaults to 60 minutes) Used when deleting the Storage Account.
+	// (Defaults to 1 hour) Used when deleting the Storage Account.
 	Delete *bool `json:"delete,omitempty" tf:"delete,omitempty"`
 
 	// (Defaults to 5 minutes) Used when retrieving the Storage Account.
@@ -1161,7 +1151,7 @@ type LoggingObservation struct {
 
 type LoggingParameters struct {
 
-	// (Defaults to 60 minutes) Used when deleting the Storage Account.
+	// (Defaults to 1 hour) Used when deleting the Storage Account.
 	// +kubebuilder:validation:Optional
 	Delete *bool `json:"delete" tf:"delete,omitempty"`
 
@@ -1248,7 +1238,7 @@ type NetworkRulesInitParameters struct {
 	PrivateLinkAccess []PrivateLinkAccessInitParameters `json:"privateLinkAccess,omitempty" tf:"private_link_access,omitempty"`
 
 	// A list of resource ids for subnets.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +listType=set
 	VirtualNetworkSubnetIds []*string `json:"virtualNetworkSubnetIds,omitempty" tf:"virtual_network_subnet_ids,omitempty"`
@@ -1304,7 +1294,7 @@ type NetworkRulesParameters struct {
 	PrivateLinkAccess []PrivateLinkAccessParameters `json:"privateLinkAccess,omitempty" tf:"private_link_access,omitempty"`
 
 	// A list of resource ids for subnets.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set

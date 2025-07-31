@@ -197,50 +197,6 @@ type ExtensionParameters struct {
 	TypeHandlerVersion *string `json:"typeHandlerVersion" tf:"type_handler_version,omitempty"`
 }
 
-type GalleryApplicationsInitParameters struct {
-	ConfigurationReferenceBlobURI *string `json:"configurationReferenceBlobUri,omitempty" tf:"configuration_reference_blob_uri,omitempty"`
-
-	// Specifies the order in which the packages have to be installed. Possible values are between 0 and 2147483647. Defaults to 0. Changing this forces a new resource to be created.
-	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
-
-	// The ID of the Linux Virtual Machine Scale Set.
-	PackageReferenceID *string `json:"packageReferenceId,omitempty" tf:"package_reference_id,omitempty"`
-
-	// The IP Tag associated with the Public IP, such as SQL or Storage. Changing this forces a new resource to be created.
-	Tag *string `json:"tag,omitempty" tf:"tag,omitempty"`
-}
-
-type GalleryApplicationsObservation struct {
-	ConfigurationReferenceBlobURI *string `json:"configurationReferenceBlobUri,omitempty" tf:"configuration_reference_blob_uri,omitempty"`
-
-	// Specifies the order in which the packages have to be installed. Possible values are between 0 and 2147483647. Defaults to 0. Changing this forces a new resource to be created.
-	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
-
-	// The ID of the Linux Virtual Machine Scale Set.
-	PackageReferenceID *string `json:"packageReferenceId,omitempty" tf:"package_reference_id,omitempty"`
-
-	// The IP Tag associated with the Public IP, such as SQL or Storage. Changing this forces a new resource to be created.
-	Tag *string `json:"tag,omitempty" tf:"tag,omitempty"`
-}
-
-type GalleryApplicationsParameters struct {
-
-	// +kubebuilder:validation:Optional
-	ConfigurationReferenceBlobURI *string `json:"configurationReferenceBlobUri,omitempty" tf:"configuration_reference_blob_uri,omitempty"`
-
-	// Specifies the order in which the packages have to be installed. Possible values are between 0 and 2147483647. Defaults to 0. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
-
-	// The ID of the Linux Virtual Machine Scale Set.
-	// +kubebuilder:validation:Optional
-	PackageReferenceID *string `json:"packageReferenceId" tf:"package_reference_id,omitempty"`
-
-	// The IP Tag associated with the Public IP, such as SQL or Storage. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Tag *string `json:"tag,omitempty" tf:"tag,omitempty"`
-}
-
 type IPConfigurationInitParameters struct {
 
 	// A list of Backend Address Pools ID's from a Application Gateway which this Virtual Machine Scale Set should be connected to.
@@ -422,7 +378,7 @@ type LinuxVirtualMachineScaleSetAdditionalCapabilitiesParameters struct {
 
 type LinuxVirtualMachineScaleSetAdminSSHKeyInitParameters struct {
 
-	// The Public Key which should be used for authentication, which needs to be at least 2048-bit and in ssh-rsa format.
+	// The Public Key which should be used for authentication, which needs to be in ssh-rsa format with at least 2048-bit or in ssh-ed25519 format.
 	PublicKey *string `json:"publicKey,omitempty" tf:"public_key,omitempty"`
 
 	// The Username for which this Public SSH Key should be configured.
@@ -431,7 +387,7 @@ type LinuxVirtualMachineScaleSetAdminSSHKeyInitParameters struct {
 
 type LinuxVirtualMachineScaleSetAdminSSHKeyObservation struct {
 
-	// The Public Key which should be used for authentication, which needs to be at least 2048-bit and in ssh-rsa format.
+	// The Public Key which should be used for authentication, which needs to be in ssh-rsa format with at least 2048-bit or in ssh-ed25519 format.
 	PublicKey *string `json:"publicKey,omitempty" tf:"public_key,omitempty"`
 
 	// The Username for which this Public SSH Key should be configured.
@@ -440,7 +396,7 @@ type LinuxVirtualMachineScaleSetAdminSSHKeyObservation struct {
 
 type LinuxVirtualMachineScaleSetAdminSSHKeyParameters struct {
 
-	// The Public Key which should be used for authentication, which needs to be at least 2048-bit and in ssh-rsa format.
+	// The Public Key which should be used for authentication, which needs to be in ssh-rsa format with at least 2048-bit or in ssh-ed25519 format.
 	// +kubebuilder:validation:Optional
 	PublicKey *string `json:"publicKey" tf:"public_key,omitempty"`
 
@@ -726,8 +682,6 @@ type LinuxVirtualMachineScaleSetInitParameters struct {
 	// One or more gallery_application blocks as defined below.
 	GalleryApplication []LinuxVirtualMachineScaleSetGalleryApplicationInitParameters `json:"galleryApplication,omitempty" tf:"gallery_application,omitempty"`
 
-	GalleryApplications []GalleryApplicationsInitParameters `json:"galleryApplications,omitempty" tf:"gallery_applications,omitempty"`
-
 	// The ID of a Load Balancer Probe which should be used to determine the health of an instance. This is Required and can only be specified when upgrade_mode is set to Automatic or Rolling.
 	HealthProbeID *string `json:"healthProbeId,omitempty" tf:"health_probe_id,omitempty"`
 
@@ -801,9 +755,6 @@ type LinuxVirtualMachineScaleSetInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A terminate_notification block as defined below.
-	TerminateNotification *TerminateNotificationInitParameters `json:"terminateNotification,omitempty" tf:"terminate_notification,omitempty"`
-
 	// A termination_notification block as defined below.
 	TerminationNotification *LinuxVirtualMachineScaleSetTerminationNotificationInitParameters `json:"terminationNotification,omitempty" tf:"termination_notification,omitempty"`
 
@@ -819,7 +770,7 @@ type LinuxVirtualMachineScaleSetInitParameters struct {
 	// Should the Virtual Machines in this Scale Set be strictly evenly distributed across Availability Zones? Defaults to false. Changing this forces a new resource to be created.
 	ZoneBalance *bool `json:"zoneBalance,omitempty" tf:"zone_balance,omitempty"`
 
-	// Specifies a list of Availability Zones in which this Linux Virtual Machine Scale Set should be located. Changing this forces a new Linux Virtual Machine Scale Set to be created.
+	// Specifies a list of Availability Zones in which this Linux Virtual Machine Scale Set should be located.
 	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
@@ -880,8 +831,6 @@ type LinuxVirtualMachineScaleSetObservation struct {
 	// One or more gallery_application blocks as defined below.
 	GalleryApplication []LinuxVirtualMachineScaleSetGalleryApplicationObservation `json:"galleryApplication,omitempty" tf:"gallery_application,omitempty"`
 
-	GalleryApplications []GalleryApplicationsObservation `json:"galleryApplications,omitempty" tf:"gallery_applications,omitempty"`
-
 	// The ID of a Load Balancer Probe which should be used to determine the health of an instance. This is Required and can only be specified when upgrade_mode is set to Automatic or Rolling.
 	HealthProbeID *string `json:"healthProbeId,omitempty" tf:"health_probe_id,omitempty"`
 
@@ -936,8 +885,6 @@ type LinuxVirtualMachineScaleSetObservation struct {
 	// A scale_in block as defined below.
 	ScaleIn *ScaleInObservation `json:"scaleIn,omitempty" tf:"scale_in,omitempty"`
 
-	ScaleInPolicy *string `json:"scaleInPolicy,omitempty" tf:"scale_in_policy,omitempty"`
-
 	// One or more secret blocks as defined below.
 	Secret []LinuxVirtualMachineScaleSetSecretObservation `json:"secret,omitempty" tf:"secret,omitempty"`
 
@@ -963,9 +910,6 @@ type LinuxVirtualMachineScaleSetObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A terminate_notification block as defined below.
-	TerminateNotification *TerminateNotificationObservation `json:"terminateNotification,omitempty" tf:"terminate_notification,omitempty"`
-
 	// A termination_notification block as defined below.
 	TerminationNotification *LinuxVirtualMachineScaleSetTerminationNotificationObservation `json:"terminationNotification,omitempty" tf:"termination_notification,omitempty"`
 
@@ -984,7 +928,7 @@ type LinuxVirtualMachineScaleSetObservation struct {
 	// Should the Virtual Machines in this Scale Set be strictly evenly distributed across Availability Zones? Defaults to false. Changing this forces a new resource to be created.
 	ZoneBalance *bool `json:"zoneBalance,omitempty" tf:"zone_balance,omitempty"`
 
-	// Specifies a list of Availability Zones in which this Linux Virtual Machine Scale Set should be located. Changing this forces a new Linux Virtual Machine Scale Set to be created.
+	// Specifies a list of Availability Zones in which this Linux Virtual Machine Scale Set should be located.
 	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
@@ -1160,9 +1104,6 @@ type LinuxVirtualMachineScaleSetParameters struct {
 	// +kubebuilder:validation:Optional
 	GalleryApplication []LinuxVirtualMachineScaleSetGalleryApplicationParameters `json:"galleryApplication,omitempty" tf:"gallery_application,omitempty"`
 
-	// +kubebuilder:validation:Optional
-	GalleryApplications []GalleryApplicationsParameters `json:"galleryApplications,omitempty" tf:"gallery_applications,omitempty"`
-
 	// The ID of a Load Balancer Probe which should be used to determine the health of an instance. This is Required and can only be specified when upgrade_mode is set to Automatic or Rolling.
 	// +kubebuilder:validation:Optional
 	HealthProbeID *string `json:"healthProbeId,omitempty" tf:"health_probe_id,omitempty"`
@@ -1273,10 +1214,6 @@ type LinuxVirtualMachineScaleSetParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A terminate_notification block as defined below.
-	// +kubebuilder:validation:Optional
-	TerminateNotification *TerminateNotificationParameters `json:"terminateNotification,omitempty" tf:"terminate_notification,omitempty"`
-
 	// A termination_notification block as defined below.
 	// +kubebuilder:validation:Optional
 	TerminationNotification *LinuxVirtualMachineScaleSetTerminationNotificationParameters `json:"terminationNotification,omitempty" tf:"termination_notification,omitempty"`
@@ -1297,7 +1234,7 @@ type LinuxVirtualMachineScaleSetParameters struct {
 	// +kubebuilder:validation:Optional
 	ZoneBalance *bool `json:"zoneBalance,omitempty" tf:"zone_balance,omitempty"`
 
-	// Specifies a list of Availability Zones in which this Linux Virtual Machine Scale Set should be located. Changing this forces a new Linux Virtual Machine Scale Set to be created.
+	// Specifies a list of Availability Zones in which this Linux Virtual Machine Scale Set should be located.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
@@ -1807,35 +1744,6 @@ type SpotRestoreParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The length of time that the Virtual Machine Scale Set should attempt to restore the Spot VM instances which have been evicted. The time duration should be between 15 minutes and 120 minutes (inclusive). The time duration should be specified in the ISO 8601 format. Defaults to PT1H. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Timeout *string `json:"timeout,omitempty" tf:"timeout,omitempty"`
-}
-
-type TerminateNotificationInitParameters struct {
-
-	// Should the terminate notification be enabled on this Virtual Machine Scale Set?
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-
-	// Length of time (in minutes, between 5 and 15) a notification to be sent to the VM on the instance metadata server till the VM gets deleted. The time duration should be specified in ISO 8601 format. Defaults to PT5M.
-	Timeout *string `json:"timeout,omitempty" tf:"timeout,omitempty"`
-}
-
-type TerminateNotificationObservation struct {
-
-	// Should the terminate notification be enabled on this Virtual Machine Scale Set?
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-
-	// Length of time (in minutes, between 5 and 15) a notification to be sent to the VM on the instance metadata server till the VM gets deleted. The time duration should be specified in ISO 8601 format. Defaults to PT5M.
-	Timeout *string `json:"timeout,omitempty" tf:"timeout,omitempty"`
-}
-
-type TerminateNotificationParameters struct {
-
-	// Should the terminate notification be enabled on this Virtual Machine Scale Set?
-	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
-
-	// Length of time (in minutes, between 5 and 15) a notification to be sent to the VM on the instance metadata server till the VM gets deleted. The time duration should be specified in ISO 8601 format. Defaults to PT5M.
 	// +kubebuilder:validation:Optional
 	Timeout *string `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }

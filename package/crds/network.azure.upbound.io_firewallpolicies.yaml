@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.14.0
+    controller-gen.kubebuilder.io/version: v0.16.5
   name: firewallpolicies.network.azure.upbound.io
 spec:
   group: network.azure.upbound.io
@@ -1514,8 +1514,8 @@ spec:
                     type: object
                   sku:
                     description: The SKU Tier of the Firewall Policy. Possible values
-                      are Standard, Premium and Basic. Changing this forces a new
-                      Firewall Policy to be created.
+                      are Standard, Premium and Basic. Defaults to Standard. Changing
+                      this forces a new Firewall Policy to be created.
                     type: string
                   sqlRedirectAllowed:
                     description: Whether SQL Redirect traffic filtering is allowed.
@@ -1555,8 +1555,8 @@ spec:
                     description: A tls_certificate block as defined below.
                     properties:
                       keyVaultSecretId:
-                        description: The ID of the Key Vault, where the secret or
-                          certificate is stored.
+                        description: The Secret Identifier (URI) of the certificate
+                          stored in Azure Key Vault, either as a secret or certificate.
                         type: string
                       name:
                         description: The name of the certificate.
@@ -1764,8 +1764,8 @@ spec:
                     type: array
                   sku:
                     description: The SKU Tier of the Firewall Policy. Possible values
-                      are Standard, Premium and Basic. Changing this forces a new
-                      Firewall Policy to be created.
+                      are Standard, Premium and Basic. Defaults to Standard. Changing
+                      this forces a new Firewall Policy to be created.
                     type: string
                   sqlRedirectAllowed:
                     description: Whether SQL Redirect traffic filtering is allowed.
@@ -1805,8 +1805,8 @@ spec:
                     description: A tls_certificate block as defined below.
                     properties:
                       keyVaultSecretId:
-                        description: The ID of the Key Vault, where the secret or
-                          certificate is stored.
+                        description: The Secret Identifier (URI) of the certificate
+                          stored in Azure Key Vault, either as a secret or certificate.
                         type: string
                       name:
                         description: The name of the certificate.
@@ -2210,8 +2210,8 @@ spec:
                     type: array
                   sku:
                     description: The SKU Tier of the Firewall Policy. Possible values
-                      are Standard, Premium and Basic. Changing this forces a new
-                      Firewall Policy to be created.
+                      are Standard, Premium and Basic. Defaults to Standard. Changing
+                      this forces a new Firewall Policy to be created.
                     type: string
                   sqlRedirectAllowed:
                     description: Whether SQL Redirect traffic filtering is allowed.
@@ -2251,8 +2251,8 @@ spec:
                     description: A tls_certificate block as defined below.
                     properties:
                       keyVaultSecretId:
-                        description: The ID of the Key Vault, where the secret or
-                          certificate is stored.
+                        description: The Secret Identifier (URI) of the certificate
+                          stored in Azure Key Vault, either as a secret or certificate.
                         type: string
                       name:
                         description: The name of the certificate.

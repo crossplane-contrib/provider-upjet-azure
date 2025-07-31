@@ -13,6 +13,64 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type KeyVaultPrivateKeyContentBase64InitParameters struct {
+
+	// Specifies the name of an existing Key Vault Data Factory Linked Service.
+	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
+
+	// Specifies the name of the secret containing the Base64 encoded SSH private key.
+	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
+}
+
+type KeyVaultPrivateKeyContentBase64Observation struct {
+
+	// Specifies the name of an existing Key Vault Data Factory Linked Service.
+	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
+
+	// Specifies the name of the secret containing the Base64 encoded SSH private key.
+	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
+}
+
+type KeyVaultPrivateKeyContentBase64Parameters struct {
+
+	// Specifies the name of an existing Key Vault Data Factory Linked Service.
+	// +kubebuilder:validation:Optional
+	LinkedServiceName *string `json:"linkedServiceName" tf:"linked_service_name,omitempty"`
+
+	// Specifies the name of the secret containing the Base64 encoded SSH private key.
+	// +kubebuilder:validation:Optional
+	SecretName *string `json:"secretName" tf:"secret_name,omitempty"`
+}
+
+type KeyVaultPrivateKeyPassphraseInitParameters struct {
+
+	// Specifies the name of an existing Key Vault Data Factory Linked Service.
+	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
+
+	// Specifies the name of the secret containing the SSH private key passphrase.
+	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
+}
+
+type KeyVaultPrivateKeyPassphraseObservation struct {
+
+	// Specifies the name of an existing Key Vault Data Factory Linked Service.
+	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
+
+	// Specifies the name of the secret containing the SSH private key passphrase.
+	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
+}
+
+type KeyVaultPrivateKeyPassphraseParameters struct {
+
+	// Specifies the name of an existing Key Vault Data Factory Linked Service.
+	// +kubebuilder:validation:Optional
+	LinkedServiceName *string `json:"linkedServiceName" tf:"linked_service_name,omitempty"`
+
+	// Specifies the name of the secret containing the SSH private key passphrase.
+	// +kubebuilder:validation:Optional
+	SecretName *string `json:"secretName" tf:"secret_name,omitempty"`
+}
+
 type LinkedServiceSFTPInitParameters struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service.
@@ -22,7 +80,7 @@ type LinkedServiceSFTPInitParameters struct {
 	// List of tags that can be used for describing the Data Factory Linked Service.
 	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
-	// The type of authentication used to connect to the web table source. Valid options are Anonymous, Basic and ClientCertificate.
+	// The type of authentication used to connect to the SFTP server. Valid options are MultiFactor, Basic and SshPublicKey.
 	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
 
 	// The description for the Data Factory Linked Service.
@@ -34,24 +92,71 @@ type LinkedServiceSFTPInitParameters struct {
 	// The host key fingerprint of the SFTP server.
 	HostKeyFingerprint *string `json:"hostKeyFingerprint,omitempty" tf:"host_key_fingerprint,omitempty"`
 
-	// The integration runtime reference to associate with the Data Factory Linked Service.
+	// The name of the integration runtime to associate with the Data Factory Linked Service.
 	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
+
+	// A key_vault_password block as defined below.
+	KeyVaultPassword []LinkedServiceSFTPKeyVaultPasswordInitParameters `json:"keyVaultPassword,omitempty" tf:"key_vault_password,omitempty"`
+
+	// A key_vault_private_key_content_base64 block as defined below.
+	KeyVaultPrivateKeyContentBase64 *KeyVaultPrivateKeyContentBase64InitParameters `json:"keyVaultPrivateKeyContentBase64,omitempty" tf:"key_vault_private_key_content_base64,omitempty"`
+
+	// A key_vault_private_key_passphrase block as defined below.
+	KeyVaultPrivateKeyPassphrase *KeyVaultPrivateKeyPassphraseInitParameters `json:"keyVaultPrivateKeyPassphrase,omitempty" tf:"key_vault_private_key_passphrase,omitempty"`
 
 	// A map of parameters to associate with the Data Factory Linked Service.
 	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// Password to logon to the SFTP Server for Basic Authentication.
-	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	// Password to log on to the SFTP Server for Basic Authentication.
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// The TCP port number that the SFTP server uses to listen for client connection. Default value is 22.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// The Base64 encoded private key content in OpenSSH format used to log on to the SFTP server.
+	PrivateKeyContentBase64SecretRef *v1.SecretKeySelector `json:"privateKeyContentBase64SecretRef,omitempty" tf:"-"`
+
+	// The passphrase for the private key if the key is encrypted.
+	PrivateKeyPassphraseSecretRef *v1.SecretKeySelector `json:"privateKeyPassphraseSecretRef,omitempty" tf:"-"`
+
+	// The absolute path to the private key file that the self-hosted integration runtime can access.
+	PrivateKeyPath *string `json:"privateKeyPath,omitempty" tf:"private_key_path,omitempty"`
 
 	// Whether to validate host key fingerprint while connecting. If set to false, host_key_fingerprint must also be set.
 	SkipHostKeyValidation *bool `json:"skipHostKeyValidation,omitempty" tf:"skip_host_key_validation,omitempty"`
 
 	// The username used to log on to the SFTP server.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+}
+
+type LinkedServiceSFTPKeyVaultPasswordInitParameters struct {
+
+	// Specifies the name of an existing Key Vault Data Factory Linked Service.
+	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
+
+	// Specifies the name of the secret containing the password.
+	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
+}
+
+type LinkedServiceSFTPKeyVaultPasswordObservation struct {
+
+	// Specifies the name of an existing Key Vault Data Factory Linked Service.
+	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
+
+	// Specifies the name of the secret containing the password.
+	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
+}
+
+type LinkedServiceSFTPKeyVaultPasswordParameters struct {
+
+	// Specifies the name of an existing Key Vault Data Factory Linked Service.
+	// +kubebuilder:validation:Optional
+	LinkedServiceName *string `json:"linkedServiceName" tf:"linked_service_name,omitempty"`
+
+	// Specifies the name of the secret containing the password.
+	// +kubebuilder:validation:Optional
+	SecretName *string `json:"secretName" tf:"secret_name,omitempty"`
 }
 
 type LinkedServiceSFTPObservation struct {
@@ -63,7 +168,7 @@ type LinkedServiceSFTPObservation struct {
 	// List of tags that can be used for describing the Data Factory Linked Service.
 	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
-	// The type of authentication used to connect to the web table source. Valid options are Anonymous, Basic and ClientCertificate.
+	// The type of authentication used to connect to the SFTP server. Valid options are MultiFactor, Basic and SshPublicKey.
 	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
 
 	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
@@ -81,8 +186,17 @@ type LinkedServiceSFTPObservation struct {
 	// The ID of the Data Factory Linked Service.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The integration runtime reference to associate with the Data Factory Linked Service.
+	// The name of the integration runtime to associate with the Data Factory Linked Service.
 	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
+
+	// A key_vault_password block as defined below.
+	KeyVaultPassword []LinkedServiceSFTPKeyVaultPasswordObservation `json:"keyVaultPassword,omitempty" tf:"key_vault_password,omitempty"`
+
+	// A key_vault_private_key_content_base64 block as defined below.
+	KeyVaultPrivateKeyContentBase64 *KeyVaultPrivateKeyContentBase64Observation `json:"keyVaultPrivateKeyContentBase64,omitempty" tf:"key_vault_private_key_content_base64,omitempty"`
+
+	// A key_vault_private_key_passphrase block as defined below.
+	KeyVaultPrivateKeyPassphrase *KeyVaultPrivateKeyPassphraseObservation `json:"keyVaultPrivateKeyPassphrase,omitempty" tf:"key_vault_private_key_passphrase,omitempty"`
 
 	// A map of parameters to associate with the Data Factory Linked Service.
 	// +mapType=granular
@@ -90,6 +204,9 @@ type LinkedServiceSFTPObservation struct {
 
 	// The TCP port number that the SFTP server uses to listen for client connection. Default value is 22.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// The absolute path to the private key file that the self-hosted integration runtime can access.
+	PrivateKeyPath *string `json:"privateKeyPath,omitempty" tf:"private_key_path,omitempty"`
 
 	// Whether to validate host key fingerprint while connecting. If set to false, host_key_fingerprint must also be set.
 	SkipHostKeyValidation *bool `json:"skipHostKeyValidation,omitempty" tf:"skip_host_key_validation,omitempty"`
@@ -109,7 +226,7 @@ type LinkedServiceSFTPParameters struct {
 	// +kubebuilder:validation:Optional
 	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
-	// The type of authentication used to connect to the web table source. Valid options are Anonymous, Basic and ClientCertificate.
+	// The type of authentication used to connect to the SFTP server. Valid options are MultiFactor, Basic and SshPublicKey.
 	// +kubebuilder:validation:Optional
 	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
 
@@ -139,22 +256,46 @@ type LinkedServiceSFTPParameters struct {
 	// +kubebuilder:validation:Optional
 	HostKeyFingerprint *string `json:"hostKeyFingerprint,omitempty" tf:"host_key_fingerprint,omitempty"`
 
-	// The integration runtime reference to associate with the Data Factory Linked Service.
+	// The name of the integration runtime to associate with the Data Factory Linked Service.
 	// +kubebuilder:validation:Optional
 	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
+
+	// A key_vault_password block as defined below.
+	// +kubebuilder:validation:Optional
+	KeyVaultPassword []LinkedServiceSFTPKeyVaultPasswordParameters `json:"keyVaultPassword,omitempty" tf:"key_vault_password,omitempty"`
+
+	// A key_vault_private_key_content_base64 block as defined below.
+	// +kubebuilder:validation:Optional
+	KeyVaultPrivateKeyContentBase64 *KeyVaultPrivateKeyContentBase64Parameters `json:"keyVaultPrivateKeyContentBase64,omitempty" tf:"key_vault_private_key_content_base64,omitempty"`
+
+	// A key_vault_private_key_passphrase block as defined below.
+	// +kubebuilder:validation:Optional
+	KeyVaultPrivateKeyPassphrase *KeyVaultPrivateKeyPassphraseParameters `json:"keyVaultPrivateKeyPassphrase,omitempty" tf:"key_vault_private_key_passphrase,omitempty"`
 
 	// A map of parameters to associate with the Data Factory Linked Service.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// Password to logon to the SFTP Server for Basic Authentication.
+	// Password to log on to the SFTP Server for Basic Authentication.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// The TCP port number that the SFTP server uses to listen for client connection. Default value is 22.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// The Base64 encoded private key content in OpenSSH format used to log on to the SFTP server.
+	// +kubebuilder:validation:Optional
+	PrivateKeyContentBase64SecretRef *v1.SecretKeySelector `json:"privateKeyContentBase64SecretRef,omitempty" tf:"-"`
+
+	// The passphrase for the private key if the key is encrypted.
+	// +kubebuilder:validation:Optional
+	PrivateKeyPassphraseSecretRef *v1.SecretKeySelector `json:"privateKeyPassphraseSecretRef,omitempty" tf:"-"`
+
+	// The absolute path to the private key file that the self-hosted integration runtime can access.
+	// +kubebuilder:validation:Optional
+	PrivateKeyPath *string `json:"privateKeyPath,omitempty" tf:"private_key_path,omitempty"`
 
 	// Whether to validate host key fingerprint while connecting. If set to false, host_key_fingerprint must also be set.
 	// +kubebuilder:validation:Optional
@@ -203,7 +344,6 @@ type LinkedServiceSFTP struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.authenticationType) || (has(self.initProvider) && has(self.initProvider.authenticationType))",message="spec.forProvider.authenticationType is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.host) || (has(self.initProvider) && has(self.initProvider.host))",message="spec.forProvider.host is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.passwordSecretRef)",message="spec.forProvider.passwordSecretRef is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.port) || (has(self.initProvider) && has(self.initProvider.port))",message="spec.forProvider.port is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.username) || (has(self.initProvider) && has(self.initProvider.username))",message="spec.forProvider.username is a required parameter"
 	Spec   LinkedServiceSFTPSpec   `json:"spec"`

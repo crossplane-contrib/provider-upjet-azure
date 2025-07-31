@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.14.0
+    controller-gen.kubebuilder.io/version: v0.16.5
   name: accessconnectors.databricks.azure.upbound.io
 spec:
   group: databricks.azure.upbound.io
@@ -588,7 +588,8 @@ spec:
                       type:
                         description: Specifies the type of Managed Service Identity
                           that should be configured on the Databricks Access Connector.
-                          Possible values include SystemAssigned or UserAssigned.
+                          Possible values are SystemAssigned, UserAssigned, SystemAssigned,
+                          UserAssigned.
                         type: string
                     type: object
                   location:
@@ -712,7 +713,8 @@ spec:
                       type:
                         description: Specifies the type of Managed Service Identity
                           that should be configured on the Databricks Access Connector.
-                          Possible values include SystemAssigned or UserAssigned.
+                          Possible values are SystemAssigned, UserAssigned, SystemAssigned,
+                          UserAssigned.
                         type: string
                     type: object
                   location:
@@ -931,7 +933,8 @@ spec:
                       type:
                         description: Specifies the type of Managed Service Identity
                           that should be configured on the Databricks Access Connector.
-                          Possible values include SystemAssigned or UserAssigned.
+                          Possible values are SystemAssigned, UserAssigned, SystemAssigned,
+                          UserAssigned.
                         type: string
                     type: object
                   location:

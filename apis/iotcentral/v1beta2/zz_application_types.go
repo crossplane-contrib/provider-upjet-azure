@@ -52,7 +52,7 @@ type ApplicationInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A template name. IoT Central application template name. Default is a custom application. Changing this forces a new resource to be created.
+	// A template name. IoT Central application template name. Defaults to iotc-pnp-preview@1.0.0. Changing this forces a new resource to be created.
 	Template *string `json:"template,omitempty" tf:"template,omitempty"`
 }
 
@@ -89,7 +89,7 @@ type ApplicationObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A template name. IoT Central application template name. Default is a custom application. Changing this forces a new resource to be created.
+	// A template name. IoT Central application template name. Defaults to iotc-pnp-preview@1.0.0. Changing this forces a new resource to be created.
 	Template *string `json:"template,omitempty" tf:"template,omitempty"`
 }
 
@@ -141,7 +141,7 @@ type ApplicationParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A template name. IoT Central application template name. Default is a custom application. Changing this forces a new resource to be created.
+	// A template name. IoT Central application template name. Defaults to iotc-pnp-preview@1.0.0. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Template *string `json:"template,omitempty" tf:"template,omitempty"`
 }

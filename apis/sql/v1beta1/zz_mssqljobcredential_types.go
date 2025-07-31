@@ -15,10 +15,16 @@ import (
 
 type MSSQLJobCredentialInitParameters struct {
 
-	// The password part of the credential.
-	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	// The password to use for this Elastic Job credential.
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
-	// The username part of the credential.
+	// The password to use for this Elastic Job credential.
+	PasswordWo *string `json:"passwordWo,omitempty" tf:"password_wo,omitempty"`
+
+	// An integer value used to trigger an update for password_wo. This property should be incremented when updating password_wo.
+	PasswordWoVersion *float64 `json:"passwordWoVersion,omitempty" tf:"password_wo_version,omitempty"`
+
+	// The username to use for this Elastic Job credential.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
@@ -30,7 +36,13 @@ type MSSQLJobCredentialObservation struct {
 	// The ID of the Elastic Job Agent. Changing this forces a new Elastic Job Credential to be created.
 	JobAgentID *string `json:"jobAgentId,omitempty" tf:"job_agent_id,omitempty"`
 
-	// The username part of the credential.
+	// The password to use for this Elastic Job credential.
+	PasswordWo *string `json:"passwordWo,omitempty" tf:"password_wo,omitempty"`
+
+	// An integer value used to trigger an update for password_wo. This property should be incremented when updating password_wo.
+	PasswordWoVersion *float64 `json:"passwordWoVersion,omitempty" tf:"password_wo_version,omitempty"`
+
+	// The username to use for this Elastic Job credential.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
@@ -50,11 +62,19 @@ type MSSQLJobCredentialParameters struct {
 	// +kubebuilder:validation:Optional
 	JobAgentIDSelector *v1.Selector `json:"jobAgentIdSelector,omitempty" tf:"-"`
 
-	// The password part of the credential.
+	// The password to use for this Elastic Job credential.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
-	// The username part of the credential.
+	// The password to use for this Elastic Job credential.
+	// +kubebuilder:validation:Optional
+	PasswordWo *string `json:"passwordWo,omitempty" tf:"password_wo,omitempty"`
+
+	// An integer value used to trigger an update for password_wo. This property should be incremented when updating password_wo.
+	// +kubebuilder:validation:Optional
+	PasswordWoVersion *float64 `json:"passwordWoVersion,omitempty" tf:"password_wo_version,omitempty"`
+
+	// The username to use for this Elastic Job credential.
 	// +kubebuilder:validation:Optional
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
@@ -95,7 +115,6 @@ type MSSQLJobCredentialStatus struct {
 type MSSQLJobCredential struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.passwordSecretRef)",message="spec.forProvider.passwordSecretRef is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.username) || (has(self.initProvider) && has(self.initProvider.username))",message="spec.forProvider.username is a required parameter"
 	Spec   MSSQLJobCredentialSpec   `json:"spec"`
 	Status MSSQLJobCredentialStatus `json:"status,omitempty"`

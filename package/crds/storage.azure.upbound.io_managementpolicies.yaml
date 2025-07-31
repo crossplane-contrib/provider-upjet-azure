@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.14.0
+    controller-gen.kubebuilder.io/version: v0.16.5
   name: managementpolicies.storage.azure.upbound.io
 spec:
   group: storage.azure.upbound.io
@@ -1210,18 +1210,18 @@ spec:
                                 tierToArchiveAfterDaysSinceCreationGreaterThan:
                                   description: The age in days after creation to archive
                                     storage. Supports blob currently at Hot or Cool
-                                    tier. Must be between 0 and99999. Defaults to
+                                    tier. Must be between 0 and 99999. Defaults to
                                     -1.
                                   type: number
                                 tierToArchiveAfterDaysSinceLastAccessTimeGreaterThan:
                                   description: The age in days after last access time
                                     to tier blobs to archive storage. Supports blob
                                     currently at Hot or Cool tier. Must be between
-                                    0 and99999. Defaults to -1.
+                                    0 and 99999. Defaults to -1.
                                   type: number
                                 tierToArchiveAfterDaysSinceLastTierChangeGreaterThan:
                                   description: The age in days after last tier change
-                                    to the blobs to skip to be archved. Must be between
+                                    to the blobs to skip to be archived. Must be between
                                     0 and 99999. Defaults to -1.
                                   type: number
                                 tierToArchiveAfterDaysSinceModificationGreaterThan:
@@ -1285,7 +1285,7 @@ spec:
                                   type: number
                                 tierToArchiveAfterDaysSinceLastTierChangeGreaterThan:
                                   description: The age in days after last tier change
-                                    to the blobs to skip to be archved. Must be between
+                                    to the blobs to skip to be archived. Must be between
                                     0 and 99999. Defaults to -1.
                                   type: number
                                 tierToColdAfterDaysSinceCreationGreaterThan:
@@ -1314,7 +1314,7 @@ spec:
                                   type: number
                                 tierToArchiveAfterDaysSinceLastTierChangeGreaterThan:
                                   description: The age in days after last tier change
-                                    to the blobs to skip to be archved. Must be between
+                                    to the blobs to skip to be archived. Must be between
                                     0 and 99999. Defaults to -1.
                                   type: number
                                 tierToColdAfterDaysSinceCreationGreaterThan:
@@ -1499,18 +1499,18 @@ spec:
                                 tierToArchiveAfterDaysSinceCreationGreaterThan:
                                   description: The age in days after creation to archive
                                     storage. Supports blob currently at Hot or Cool
-                                    tier. Must be between 0 and99999. Defaults to
+                                    tier. Must be between 0 and 99999. Defaults to
                                     -1.
                                   type: number
                                 tierToArchiveAfterDaysSinceLastAccessTimeGreaterThan:
                                   description: The age in days after last access time
                                     to tier blobs to archive storage. Supports blob
                                     currently at Hot or Cool tier. Must be between
-                                    0 and99999. Defaults to -1.
+                                    0 and 99999. Defaults to -1.
                                   type: number
                                 tierToArchiveAfterDaysSinceLastTierChangeGreaterThan:
                                   description: The age in days after last tier change
-                                    to the blobs to skip to be archved. Must be between
+                                    to the blobs to skip to be archived. Must be between
                                     0 and 99999. Defaults to -1.
                                   type: number
                                 tierToArchiveAfterDaysSinceModificationGreaterThan:
@@ -1574,7 +1574,7 @@ spec:
                                   type: number
                                 tierToArchiveAfterDaysSinceLastTierChangeGreaterThan:
                                   description: The age in days after last tier change
-                                    to the blobs to skip to be archved. Must be between
+                                    to the blobs to skip to be archived. Must be between
                                     0 and 99999. Defaults to -1.
                                   type: number
                                 tierToColdAfterDaysSinceCreationGreaterThan:
@@ -1603,7 +1603,7 @@ spec:
                                   type: number
                                 tierToArchiveAfterDaysSinceLastTierChangeGreaterThan:
                                   description: The age in days after last tier change
-                                    to the blobs to skip to be archved. Must be between
+                                    to the blobs to skip to be archived. Must be between
                                     0 and 99999. Defaults to -1.
                                   type: number
                                 tierToColdAfterDaysSinceCreationGreaterThan:
@@ -1950,18 +1950,18 @@ spec:
                                 tierToArchiveAfterDaysSinceCreationGreaterThan:
                                   description: The age in days after creation to archive
                                     storage. Supports blob currently at Hot or Cool
-                                    tier. Must be between 0 and99999. Defaults to
+                                    tier. Must be between 0 and 99999. Defaults to
                                     -1.
                                   type: number
                                 tierToArchiveAfterDaysSinceLastAccessTimeGreaterThan:
                                   description: The age in days after last access time
                                     to tier blobs to archive storage. Supports blob
                                     currently at Hot or Cool tier. Must be between
-                                    0 and99999. Defaults to -1.
+                                    0 and 99999. Defaults to -1.
                                   type: number
                                 tierToArchiveAfterDaysSinceLastTierChangeGreaterThan:
                                   description: The age in days after last tier change
-                                    to the blobs to skip to be archved. Must be between
+                                    to the blobs to skip to be archived. Must be between
                                     0 and 99999. Defaults to -1.
                                   type: number
                                 tierToArchiveAfterDaysSinceModificationGreaterThan:
@@ -2025,7 +2025,7 @@ spec:
                                   type: number
                                 tierToArchiveAfterDaysSinceLastTierChangeGreaterThan:
                                   description: The age in days after last tier change
-                                    to the blobs to skip to be archved. Must be between
+                                    to the blobs to skip to be archived. Must be between
                                     0 and 99999. Defaults to -1.
                                   type: number
                                 tierToColdAfterDaysSinceCreationGreaterThan:
@@ -2054,7 +2054,7 @@ spec:
                                   type: number
                                 tierToArchiveAfterDaysSinceLastTierChangeGreaterThan:
                                   description: The age in days after last tier change
-                                    to the blobs to skip to be archved. Must be between
+                                    to the blobs to skip to be archived. Must be between
                                     0 and 99999. Defaults to -1.
                                   type: number
                                 tierToColdAfterDaysSinceCreationGreaterThan:

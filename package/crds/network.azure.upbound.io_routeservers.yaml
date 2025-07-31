@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.14.0
+    controller-gen.kubebuilder.io/version: v0.16.5
   name: routeservers.network.azure.upbound.io
 spec:
   group: network.azure.upbound.io
@@ -75,8 +75,12 @@ spec:
                 properties:
                   branchToBranchTrafficEnabled:
                     description: Whether to enable route exchange between Azure Route
-                      Server and the gateway(s)
+                      Server and the gateway(s).
                     type: boolean
+                  hubRoutingPreference:
+                    description: The hub routing preference. Valid values are ASPath,
+                      ExpressRoute or VpnGateway. Defaults to ExpressRoute.
+                    type: string
                   location:
                     description: Specifies the supported Azure location where the
                       Route Server should exist. Changing this forces a new resource
@@ -346,8 +350,12 @@ spec:
                 properties:
                   branchToBranchTrafficEnabled:
                     description: Whether to enable route exchange between Azure Route
-                      Server and the gateway(s)
+                      Server and the gateway(s).
                     type: boolean
+                  hubRoutingPreference:
+                    description: The hub routing preference. Valid values are ASPath,
+                      ExpressRoute or VpnGateway. Defaults to ExpressRoute.
+                    type: string
                   location:
                     description: Specifies the supported Azure location where the
                       Route Server should exist. Changing this forces a new resource
@@ -704,10 +712,14 @@ spec:
                 properties:
                   branchToBranchTrafficEnabled:
                     description: Whether to enable route exchange between Azure Route
-                      Server and the gateway(s)
+                      Server and the gateway(s).
                     type: boolean
+                  hubRoutingPreference:
+                    description: The hub routing preference. Valid values are ASPath,
+                      ExpressRoute or VpnGateway. Defaults to ExpressRoute.
+                    type: string
                   id:
-                    description: The ID of the Route Server .
+                    description: The ID of the Route Server.
                     type: string
                   location:
                     description: Specifies the supported Azure location where the

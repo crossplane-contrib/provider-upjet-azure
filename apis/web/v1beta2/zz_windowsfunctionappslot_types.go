@@ -1860,6 +1860,9 @@ type WindowsFunctionAppSlotInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Whether backup and restore operations over the linked virtual network are enabled. Defaults to false.
+	VirtualNetworkBackupRestoreEnabled *bool `json:"virtualNetworkBackupRestoreEnabled,omitempty" tf:"virtual_network_backup_restore_enabled,omitempty"`
+
 	// The subnet id which will be used by this Function App Slot for regional virtual network integration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
@@ -1872,6 +1875,10 @@ type WindowsFunctionAppSlotInitParameters struct {
 	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetIDSelector *v1.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
+
+	// Specifies whether traffic for the image pull should be routed over virtual network. Defaults to false.
+	// Is container image pull over virtual network enabled? Defaults to `false`.
+	VnetImagePullEnabled *bool `json:"vnetImagePullEnabled,omitempty" tf:"vnet_image_pull_enabled,omitempty"`
 
 	// Should the default WebDeploy Basic Authentication publishing credentials enabled. Defaults to true.
 	WebdeployPublishBasicAuthenticationEnabled *bool `json:"webdeployPublishBasicAuthenticationEnabled,omitempty" tf:"webdeploy_publish_basic_authentication_enabled,omitempty"`
@@ -2004,8 +2011,15 @@ type WindowsFunctionAppSlotObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Whether backup and restore operations over the linked virtual network are enabled. Defaults to false.
+	VirtualNetworkBackupRestoreEnabled *bool `json:"virtualNetworkBackupRestoreEnabled,omitempty" tf:"virtual_network_backup_restore_enabled,omitempty"`
+
 	// The subnet id which will be used by this Function App Slot for regional virtual network integration.
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
+
+	// Specifies whether traffic for the image pull should be routed over virtual network. Defaults to false.
+	// Is container image pull over virtual network enabled? Defaults to `false`.
+	VnetImagePullEnabled *bool `json:"vnetImagePullEnabled,omitempty" tf:"vnet_image_pull_enabled,omitempty"`
 
 	// Should the default WebDeploy Basic Authentication publishing credentials enabled. Defaults to true.
 	WebdeployPublishBasicAuthenticationEnabled *bool `json:"webdeployPublishBasicAuthenticationEnabled,omitempty" tf:"webdeploy_publish_basic_authentication_enabled,omitempty"`
@@ -2158,6 +2172,10 @@ type WindowsFunctionAppSlotParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Whether backup and restore operations over the linked virtual network are enabled. Defaults to false.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkBackupRestoreEnabled *bool `json:"virtualNetworkBackupRestoreEnabled,omitempty" tf:"virtual_network_backup_restore_enabled,omitempty"`
+
 	// The subnet id which will be used by this Function App Slot for regional virtual network integration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
@@ -2171,6 +2189,11 @@ type WindowsFunctionAppSlotParameters struct {
 	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetIDSelector *v1.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
+
+	// Specifies whether traffic for the image pull should be routed over virtual network. Defaults to false.
+	// Is container image pull over virtual network enabled? Defaults to `false`.
+	// +kubebuilder:validation:Optional
+	VnetImagePullEnabled *bool `json:"vnetImagePullEnabled,omitempty" tf:"vnet_image_pull_enabled,omitempty"`
 
 	// Should the default WebDeploy Basic Authentication publishing credentials enabled. Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -2214,16 +2237,16 @@ type WindowsFunctionAppSlotSiteConfigAppServiceLogsParameters struct {
 
 type WindowsFunctionAppSlotSiteConfigApplicationStackInitParameters struct {
 
-	// The version of .Net. Possible values are v3.0, v4.0, v6.0, v7.0 and v8.0. Defaults to v4.0.
-	// The version of .Net. Possible values are `v3.0`, `v4.0`, `v6.0` and `v7.0`
+	// The version of .Net. Possible values are v3.0, v4.0, v6.0, v7.0, v8.0 and v9.0. Defaults to v4.0.
+	// The version of .Net. Possible values are `v3.0`, `v4.0`, `v6.0`, `v7.0`, `v8.0` and `v9.0`
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
 	// The version of Java to use. Possible values are 1.8, 11 and 17 (In-Preview).
-	// The version of Java to use. Possible values are `1.8`, `11` and `17`
+	// The version of Java to use. Possible values are `1.8`, `11`, `17`, and `21`
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
-	// The version of Node to use. Possible values are ~12, ~14, ~16, ~18 and ~20.
-	// The version of Node to use. Possible values include `12`, `14`, `16` and `18`
+	// The version of Node to use. Possible values are ~12, ~14, ~16, ~18, ~20, and ~22.
+	// The version of Node to use. Possible values include `~12`, `~14`, `~16`, `~18`, `~20` and `~22`
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
 	// The PowerShell Core version to use. Possible values are 7, 7.2, and 7.4.
@@ -2241,16 +2264,16 @@ type WindowsFunctionAppSlotSiteConfigApplicationStackInitParameters struct {
 
 type WindowsFunctionAppSlotSiteConfigApplicationStackObservation struct {
 
-	// The version of .Net. Possible values are v3.0, v4.0, v6.0, v7.0 and v8.0. Defaults to v4.0.
-	// The version of .Net. Possible values are `v3.0`, `v4.0`, `v6.0` and `v7.0`
+	// The version of .Net. Possible values are v3.0, v4.0, v6.0, v7.0, v8.0 and v9.0. Defaults to v4.0.
+	// The version of .Net. Possible values are `v3.0`, `v4.0`, `v6.0`, `v7.0`, `v8.0` and `v9.0`
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
 	// The version of Java to use. Possible values are 1.8, 11 and 17 (In-Preview).
-	// The version of Java to use. Possible values are `1.8`, `11` and `17`
+	// The version of Java to use. Possible values are `1.8`, `11`, `17`, and `21`
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
-	// The version of Node to use. Possible values are ~12, ~14, ~16, ~18 and ~20.
-	// The version of Node to use. Possible values include `12`, `14`, `16` and `18`
+	// The version of Node to use. Possible values are ~12, ~14, ~16, ~18, ~20, and ~22.
+	// The version of Node to use. Possible values include `~12`, `~14`, `~16`, `~18`, `~20` and `~22`
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
 	// The PowerShell Core version to use. Possible values are 7, 7.2, and 7.4.
@@ -2268,18 +2291,18 @@ type WindowsFunctionAppSlotSiteConfigApplicationStackObservation struct {
 
 type WindowsFunctionAppSlotSiteConfigApplicationStackParameters struct {
 
-	// The version of .Net. Possible values are v3.0, v4.0, v6.0, v7.0 and v8.0. Defaults to v4.0.
-	// The version of .Net. Possible values are `v3.0`, `v4.0`, `v6.0` and `v7.0`
+	// The version of .Net. Possible values are v3.0, v4.0, v6.0, v7.0, v8.0 and v9.0. Defaults to v4.0.
+	// The version of .Net. Possible values are `v3.0`, `v4.0`, `v6.0`, `v7.0`, `v8.0` and `v9.0`
 	// +kubebuilder:validation:Optional
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
 	// The version of Java to use. Possible values are 1.8, 11 and 17 (In-Preview).
-	// The version of Java to use. Possible values are `1.8`, `11` and `17`
+	// The version of Java to use. Possible values are `1.8`, `11`, `17`, and `21`
 	// +kubebuilder:validation:Optional
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
-	// The version of Node to use. Possible values are ~12, ~14, ~16, ~18 and ~20.
-	// The version of Node to use. Possible values include `12`, `14`, `16` and `18`
+	// The version of Node to use. Possible values are ~12, ~14, ~16, ~18, ~20, and ~22.
+	// The version of Node to use. Possible values include `~12`, `~14`, `~16`, `~18`, `~20` and `~22`
 	// +kubebuilder:validation:Optional
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
@@ -2596,8 +2619,8 @@ type WindowsFunctionAppSlotSiteConfigInitParameters struct {
 	// The Managed Pipeline mode. Possible values include: `Integrated`, `Classic`. Defaults to `Integrated`.
 	ManagedPipelineMode *string `json:"managedPipelineMode,omitempty" tf:"managed_pipeline_mode,omitempty"`
 
-	// The configures the minimum version of TLS required for SSL requests. Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
-	// The configures the minimum version of TLS required for SSL requests. Possible values include: `1.0`, `1.1`, and  `1.2`. Defaults to `1.2`.
+	// The configures the minimum version of TLS required for SSL requests. Possible values include: 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
+	// The configures the minimum version of TLS required for SSL requests. Possible values include: `1.0`, `1.1`, `1.2` and `1.3`. Defaults to `1.2`.
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
 	// The number of pre-warmed instances for this function app. Only affects apps on an Elastic Premium plan.
@@ -2608,8 +2631,8 @@ type WindowsFunctionAppSlotSiteConfigInitParameters struct {
 	// Should Remote Debugging be enabled. Defaults to `false`.
 	RemoteDebuggingEnabled *bool `json:"remoteDebuggingEnabled,omitempty" tf:"remote_debugging_enabled,omitempty"`
 
-	// The Remote Debugging Version. Possible values include VS2017, VS2019, and VS2022
-	// The Remote Debugging Version. Possible values include `VS2017`, `VS2019`, and `VS2022`
+	// The Remote Debugging Version. Currently only VS2022 is supported.
+	// The Remote Debugging Version. Currently only `VS2022` is supported.
 	RemoteDebuggingVersion *string `json:"remoteDebuggingVersion,omitempty" tf:"remote_debugging_version,omitempty"`
 
 	// Should Scale Monitoring of the Functions Runtime be enabled?
@@ -2622,8 +2645,8 @@ type WindowsFunctionAppSlotSiteConfigInitParameters struct {
 	// The Default action for traffic that does not match any scm_ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
 	ScmIPRestrictionDefaultAction *string `json:"scmIpRestrictionDefaultAction,omitempty" tf:"scm_ip_restriction_default_action,omitempty"`
 
-	// Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
-	// Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: `1.0`, `1.1`, and  `1.2`. Defaults to `1.2`.
+	// Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
+	// Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: `1.0`, `1.1`, `1.2` and `1.3`. Defaults to `1.2`.
 	ScmMinimumTLSVersion *string `json:"scmMinimumTlsVersion,omitempty" tf:"scm_minimum_tls_version,omitempty"`
 
 	// Should the Windows Function App ip_restriction configuration be used for the SCM also.
@@ -2723,8 +2746,8 @@ type WindowsFunctionAppSlotSiteConfigObservation struct {
 	// The Managed Pipeline mode. Possible values include: `Integrated`, `Classic`. Defaults to `Integrated`.
 	ManagedPipelineMode *string `json:"managedPipelineMode,omitempty" tf:"managed_pipeline_mode,omitempty"`
 
-	// The configures the minimum version of TLS required for SSL requests. Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
-	// The configures the minimum version of TLS required for SSL requests. Possible values include: `1.0`, `1.1`, and  `1.2`. Defaults to `1.2`.
+	// The configures the minimum version of TLS required for SSL requests. Possible values include: 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
+	// The configures the minimum version of TLS required for SSL requests. Possible values include: `1.0`, `1.1`, `1.2` and `1.3`. Defaults to `1.2`.
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
 	// The number of pre-warmed instances for this function app. Only affects apps on an Elastic Premium plan.
@@ -2735,8 +2758,8 @@ type WindowsFunctionAppSlotSiteConfigObservation struct {
 	// Should Remote Debugging be enabled. Defaults to `false`.
 	RemoteDebuggingEnabled *bool `json:"remoteDebuggingEnabled,omitempty" tf:"remote_debugging_enabled,omitempty"`
 
-	// The Remote Debugging Version. Possible values include VS2017, VS2019, and VS2022
-	// The Remote Debugging Version. Possible values include `VS2017`, `VS2019`, and `VS2022`
+	// The Remote Debugging Version. Currently only VS2022 is supported.
+	// The Remote Debugging Version. Currently only `VS2022` is supported.
 	RemoteDebuggingVersion *string `json:"remoteDebuggingVersion,omitempty" tf:"remote_debugging_version,omitempty"`
 
 	// Should Scale Monitoring of the Functions Runtime be enabled?
@@ -2749,8 +2772,8 @@ type WindowsFunctionAppSlotSiteConfigObservation struct {
 	// The Default action for traffic that does not match any scm_ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
 	ScmIPRestrictionDefaultAction *string `json:"scmIpRestrictionDefaultAction,omitempty" tf:"scm_ip_restriction_default_action,omitempty"`
 
-	// Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
-	// Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: `1.0`, `1.1`, and  `1.2`. Defaults to `1.2`.
+	// Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
+	// Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: `1.0`, `1.1`, `1.2` and `1.3`. Defaults to `1.2`.
 	ScmMinimumTLSVersion *string `json:"scmMinimumTlsVersion,omitempty" tf:"scm_minimum_tls_version,omitempty"`
 
 	// The SCM Type in use by the Windows Function App.
@@ -2883,8 +2906,8 @@ type WindowsFunctionAppSlotSiteConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	ManagedPipelineMode *string `json:"managedPipelineMode,omitempty" tf:"managed_pipeline_mode,omitempty"`
 
-	// The configures the minimum version of TLS required for SSL requests. Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
-	// The configures the minimum version of TLS required for SSL requests. Possible values include: `1.0`, `1.1`, and  `1.2`. Defaults to `1.2`.
+	// The configures the minimum version of TLS required for SSL requests. Possible values include: 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
+	// The configures the minimum version of TLS required for SSL requests. Possible values include: `1.0`, `1.1`, `1.2` and `1.3`. Defaults to `1.2`.
 	// +kubebuilder:validation:Optional
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
@@ -2898,8 +2921,8 @@ type WindowsFunctionAppSlotSiteConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	RemoteDebuggingEnabled *bool `json:"remoteDebuggingEnabled,omitempty" tf:"remote_debugging_enabled,omitempty"`
 
-	// The Remote Debugging Version. Possible values include VS2017, VS2019, and VS2022
-	// The Remote Debugging Version. Possible values include `VS2017`, `VS2019`, and `VS2022`
+	// The Remote Debugging Version. Currently only VS2022 is supported.
+	// The Remote Debugging Version. Currently only `VS2022` is supported.
 	// +kubebuilder:validation:Optional
 	RemoteDebuggingVersion *string `json:"remoteDebuggingVersion,omitempty" tf:"remote_debugging_version,omitempty"`
 
@@ -2916,8 +2939,8 @@ type WindowsFunctionAppSlotSiteConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	ScmIPRestrictionDefaultAction *string `json:"scmIpRestrictionDefaultAction,omitempty" tf:"scm_ip_restriction_default_action,omitempty"`
 
-	// Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
-	// Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: `1.0`, `1.1`, and  `1.2`. Defaults to `1.2`.
+	// Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
+	// Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: `1.0`, `1.1`, `1.2` and `1.3`. Defaults to `1.2`.
 	// +kubebuilder:validation:Optional
 	ScmMinimumTLSVersion *string `json:"scmMinimumTlsVersion,omitempty" tf:"scm_minimum_tls_version,omitempty"`
 

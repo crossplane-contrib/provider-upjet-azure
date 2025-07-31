@@ -15,19 +15,22 @@ import (
 
 type PoolInitParameters struct {
 
+	// Whether the NetApp Pool can hold cool access enabled volumes. Defaults to false.
+	CoolAccessEnabled *bool `json:"coolAccessEnabled,omitempty" tf:"cool_access_enabled,omitempty"`
+
 	// The encryption type of the pool. Valid values include Single, and Double. Defaults to Single. Changing this forces a new resource to be created.
 	EncryptionType *string `json:"encryptionType,omitempty" tf:"encryption_type,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// QoS Type of the pool. Valid values include Auto or Manual.
+	// QoS Type of the pool. Valid values include Auto or Manual. Defaults to Auto.
 	QosType *string `json:"qosType,omitempty" tf:"qos_type,omitempty"`
 
 	// The service level of the file system. Valid values include Premium, Standard, and Ultra. Changing this forces a new resource to be created.
 	ServiceLevel *string `json:"serviceLevel,omitempty" tf:"service_level,omitempty"`
 
-	// Provisioned size of the pool in TB. Value must be between 2 and 2048.
+	// Provisioned size of the pool in TB. Value must be between 1 and 2048.
 	SizeInTb *float64 `json:"sizeInTb,omitempty" tf:"size_in_tb,omitempty"`
 
 	// A mapping of tags to assign to the resource.
@@ -40,6 +43,9 @@ type PoolObservation struct {
 	// The name of the NetApp account in which the NetApp Pool should be created. Changing this forces a new resource to be created.
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
+	// Whether the NetApp Pool can hold cool access enabled volumes. Defaults to false.
+	CoolAccessEnabled *bool `json:"coolAccessEnabled,omitempty" tf:"cool_access_enabled,omitempty"`
+
 	// The encryption type of the pool. Valid values include Single, and Double. Defaults to Single. Changing this forces a new resource to be created.
 	EncryptionType *string `json:"encryptionType,omitempty" tf:"encryption_type,omitempty"`
 
@@ -49,7 +55,7 @@ type PoolObservation struct {
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// QoS Type of the pool. Valid values include Auto or Manual.
+	// QoS Type of the pool. Valid values include Auto or Manual. Defaults to Auto.
 	QosType *string `json:"qosType,omitempty" tf:"qos_type,omitempty"`
 
 	// The name of the resource group where the NetApp Pool should be created. Changing this forces a new resource to be created.
@@ -58,7 +64,7 @@ type PoolObservation struct {
 	// The service level of the file system. Valid values include Premium, Standard, and Ultra. Changing this forces a new resource to be created.
 	ServiceLevel *string `json:"serviceLevel,omitempty" tf:"service_level,omitempty"`
 
-	// Provisioned size of the pool in TB. Value must be between 2 and 2048.
+	// Provisioned size of the pool in TB. Value must be between 1 and 2048.
 	SizeInTb *float64 `json:"sizeInTb,omitempty" tf:"size_in_tb,omitempty"`
 
 	// A mapping of tags to assign to the resource.
@@ -81,6 +87,10 @@ type PoolParameters struct {
 	// +kubebuilder:validation:Optional
 	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
+	// Whether the NetApp Pool can hold cool access enabled volumes. Defaults to false.
+	// +kubebuilder:validation:Optional
+	CoolAccessEnabled *bool `json:"coolAccessEnabled,omitempty" tf:"cool_access_enabled,omitempty"`
+
 	// The encryption type of the pool. Valid values include Single, and Double. Defaults to Single. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	EncryptionType *string `json:"encryptionType,omitempty" tf:"encryption_type,omitempty"`
@@ -89,7 +99,7 @@ type PoolParameters struct {
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// QoS Type of the pool. Valid values include Auto or Manual.
+	// QoS Type of the pool. Valid values include Auto or Manual. Defaults to Auto.
 	// +kubebuilder:validation:Optional
 	QosType *string `json:"qosType,omitempty" tf:"qos_type,omitempty"`
 
@@ -110,7 +120,7 @@ type PoolParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceLevel *string `json:"serviceLevel,omitempty" tf:"service_level,omitempty"`
 
-	// Provisioned size of the pool in TB. Value must be between 2 and 2048.
+	// Provisioned size of the pool in TB. Value must be between 1 and 2048.
 	// +kubebuilder:validation:Optional
 	SizeInTb *float64 `json:"sizeInTb,omitempty" tf:"size_in_tb,omitempty"`
 

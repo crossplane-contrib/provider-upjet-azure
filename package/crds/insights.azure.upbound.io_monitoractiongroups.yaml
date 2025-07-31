@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.14.0
+    controller-gen.kubebuilder.io/version: v0.16.5
   name: monitoractiongroups.insights.azure.upbound.io
 spec:
   group: insights.azure.upbound.io
@@ -183,9 +183,6 @@ spec:
                       below.
                     items:
                       properties:
-                        eventHubId:
-                          description: The resource ID of the respective Event Hub.
-                          type: string
                         eventHubName:
                           description: The name of the specific Event Hub queue.
                           type: string
@@ -540,9 +537,6 @@ spec:
                       below.
                     items:
                       properties:
-                        eventHubId:
-                          description: The resource ID of the respective Event Hub.
-                          type: string
                         eventHubName:
                           description: The name of the specific Event Hub queue.
                           type: string
@@ -980,9 +974,6 @@ spec:
                       below.
                     items:
                       properties:
-                        eventHubId:
-                          description: The resource ID of the respective Event Hub.
-                          type: string
                         eventHubName:
                           description: The name of the specific Event Hub queue.
                           type: string
@@ -1367,9 +1358,6 @@ spec:
                       below.
                     items:
                       properties:
-                        eventHubId:
-                          description: The resource ID of the respective Event Hub.
-                          type: string
                         eventHubName:
                           description: The name of the specific Event Hub queue.
                           type: string
@@ -1722,9 +1710,6 @@ spec:
                       below.
                     items:
                       properties:
-                        eventHubId:
-                          description: The resource ID of the respective Event Hub.
-                          type: string
                         eventHubName:
                           description: The name of the specific Event Hub queue.
                           type: string
@@ -2160,9 +2145,6 @@ spec:
                       below.
                     items:
                       properties:
-                        eventHubId:
-                          description: The resource ID of the respective Event Hub.
-                          type: string
                         eventHubName:
                           description: The name of the specific Event Hub queue.
                           type: string

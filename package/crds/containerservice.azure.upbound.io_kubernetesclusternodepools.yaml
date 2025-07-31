@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.14.0
+    controller-gen.kubebuilder.io/version: v0.16.5
   name: kubernetesclusternodepools.containerservice.azure.upbound.io
 spec:
   group: containerservice.azure.upbound.io
@@ -74,25 +74,14 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  autoScalingEnabled:
+                    description: Whether to enable auto-scaler.
+                    type: boolean
                   capacityReservationGroupId:
                     description: Specifies the ID of the Capacity Reservation Group
                       where this Node Pool should exist. Changing this forces a new
                       resource to be created.
                     type: string
-                  customCaTrustEnabled:
-                    description: Specifies whether to trust a Custom CA.
-                    type: boolean
-                  enableAutoScaling:
-                    description: Whether to enable auto-scaler.
-                    type: boolean
-                  enableHostEncryption:
-                    description: Should the nodes in this Node Pool have host encryption
-                      enabled? Changing this forces a new resource to be created.
-                    type: boolean
-                  enableNodePublicIp:
-                    description: Should each node have a Public IP Address? Changing
-                      this forces a new resource to be created.
-                    type: boolean
                   evictionPolicy:
                     description: The Eviction Policy which should be used for Virtual
                       Machines within the Virtual Machine Scale Set powering this
@@ -101,14 +90,18 @@ spec:
                     type: string
                   fipsEnabled:
                     description: Should the nodes in this Node Pool have Federal Information
-                      Processing Standard enabled? Changing this forces a new resource
-                      to be created.
+                      Processing Standard enabled? Changing this property requires
+                      specifying temporary_name_for_rotation.
                     type: boolean
                   gpuInstance:
                     description: Specifies the GPU MIG instance profile for supported
                       GPU VM SKU. The allowed values are MIG1g, MIG2g, MIG3g, MIG4g
                       and MIG7g. Changing this forces a new resource to be created.
                     type: string
+                  hostEncryptionEnabled:
+                    description: Should the nodes in this Node Pool have host encryption
+                      enabled? Changing this property requires specifying temporary_name_for_rotation.
+                    type: boolean
                   hostGroupId:
                     description: The fully qualified resource ID of the Dedicated
                       Host Group to provision virtual machines from. Changing this
@@ -116,13 +109,12 @@ spec:
                     type: string
                   kubeletConfig:
                     description: A kubelet_config block as defined below. Changing
-                      this forces a new resource to be created.
+                      this requires specifying temporary_name_for_rotation.
                     items:
                       properties:
                         allowedUnsafeSysctls:
                           description: Specifies the allow list of unsafe sysctls
-                            command or patterns (ending in *). Changing this forces
-                            a new resource to be created.
+                            command or patterns (ending in *).
                           items:
                             type: string
                           type: array
@@ -130,50 +122,47 @@ spec:
                         containerLogMaxLine:
                           description: Specifies the maximum number of container log
                             files that can be present for a container. must be at
-                            least 2. Changing this forces a new resource to be created.
+                            least 2.
                           type: number
                         containerLogMaxSizeMb:
                           description: Specifies the maximum size (e.g. 10MB) of container
-                            log file before it is rotated. Changing this forces a
-                            new resource to be created.
+                            log file before it is rotated.
                           type: number
                         cpuCfsQuotaEnabled:
                           description: Is CPU CFS quota enforcement for containers
-                            enabled? Changing this forces a new resource to be created.
+                            enabled? Defaults to true.
                           type: boolean
                         cpuCfsQuotaPeriod:
-                          description: Specifies the CPU CFS quota period value. Changing
-                            this forces a new resource to be created.
+                          description: Specifies the CPU CFS quota period value.
                           type: string
                         cpuManagerPolicy:
                           description: Specifies the CPU Manager policy to use. Possible
-                            values are none and static, Changing this forces a new
-                            resource to be created.
+                            values are none and static,
                           type: string
                         imageGcHighThreshold:
                           description: Specifies the percent of disk usage above which
                             image garbage collection is always run. Must be between
-                            0 and 100. Changing this forces a new resource to be created.
+                            0 and 100.
                           type: number
                         imageGcLowThreshold:
                           description: Specifies the percent of disk usage lower than
                             which image garbage collection is never run. Must be between
-                            0 and 100. Changing this forces a new resource to be created.
+                            0 and 100.
                           type: number
                         podMaxPid:
                           description: Specifies the maximum number of processes per
-                            pod. Changing this forces a new resource to be created.
+                            pod.
                           type: number
                         topologyManagerPolicy:
                           description: Specifies the Topology Manager policy to use.
                             Possible values are none, best-effort, restricted or single-numa-node.
-                            Changing this forces a new resource to be created.
                           type: string
                       type: object
                     type: array
                   kubeletDiskType:
                     description: The type of disk used by kubelet. Possible values
-                      are OS and Temporary.
+                      are OS and Temporary. Changing this property requires specifying
+                      temporary_name_for_rotation.
                     type: string
                   kubernetesClusterId:
                     description: The ID of the Kubernetes Cluster where this Node
@@ -258,175 +247,144 @@ spec:
                     type: object
                   linuxOsConfig:
                     description: A linux_os_config block as defined below. Changing
-                      this forces a new resource to be created.
+                      this requires specifying temporary_name_for_rotation.
                     items:
                       properties:
                         swapFileSizeMb:
                           description: Specifies the size of swap file on each node
-                            in MB. Changing this forces a new resource to be created.
+                            in MB.
                           type: number
                         sysctlConfig:
-                          description: A sysctl_config block as defined below. Changing
-                            this forces a new resource to be created.
+                          description: A sysctl_config block as defined below.
                           items:
                             properties:
                               fsAioMaxNr:
                                 description: The sysctl setting fs.aio-max-nr. Must
-                                  be between 65536 and 6553500. Changing this forces
-                                  a new resource to be created.
+                                  be between 65536 and 6553500.
                                 type: number
                               fsFileMax:
                                 description: The sysctl setting fs.file-max. Must
-                                  be between 8192 and 12000500. Changing this forces
-                                  a new resource to be created.
+                                  be between 8192 and 12000500.
                                 type: number
                               fsInotifyMaxUserWatches:
                                 description: The sysctl setting fs.inotify.max_user_watches.
-                                  Must be between 781250 and 2097152. Changing this
-                                  forces a new resource to be created.
+                                  Must be between 781250 and 2097152.
                                 type: number
                               fsNrOpen:
                                 description: The sysctl setting fs.nr_open. Must be
-                                  between 8192 and 20000500. Changing this forces
-                                  a new resource to be created.
+                                  between 8192 and 20000500.
                                 type: number
                               kernelThreadsMax:
                                 description: The sysctl setting kernel.threads-max.
-                                  Must be between 20 and 513785. Changing this forces
-                                  a new resource to be created.
+                                  Must be between 20 and 513785.
                                 type: number
                               netCoreNetdevMaxBacklog:
                                 description: The sysctl setting net.core.netdev_max_backlog.
-                                  Must be between 1000 and 3240000. Changing this
-                                  forces a new resource to be created.
+                                  Must be between 1000 and 3240000.
                                 type: number
                               netCoreOptmemMax:
                                 description: The sysctl setting net.core.optmem_max.
-                                  Must be between 20480 and 4194304. Changing this
-                                  forces a new resource to be created.
+                                  Must be between 20480 and 4194304.
                                 type: number
                               netCoreRmemDefault:
                                 description: The sysctl setting net.core.rmem_default.
-                                  Must be between 212992 and 134217728. Changing this
-                                  forces a new resource to be created.
+                                  Must be between 212992 and 134217728.
                                 type: number
                               netCoreRmemMax:
                                 description: The sysctl setting net.core.rmem_max.
-                                  Must be between 212992 and 134217728. Changing this
-                                  forces a new resource to be created.
+                                  Must be between 212992 and 134217728.
                                 type: number
                               netCoreSomaxconn:
                                 description: The sysctl setting net.core.somaxconn.
-                                  Must be between 4096 and 3240000. Changing this
-                                  forces a new resource to be created.
+                                  Must be between 4096 and 3240000.
                                 type: number
                               netCoreWmemDefault:
                                 description: The sysctl setting net.core.wmem_default.
-                                  Must be between 212992 and 134217728. Changing this
-                                  forces a new resource to be created.
+                                  Must be between 212992 and 134217728.
                                 type: number
                               netCoreWmemMax:
                                 description: The sysctl setting net.core.wmem_max.
-                                  Must be between 212992 and 134217728. Changing this
-                                  forces a new resource to be created.
+                                  Must be between 212992 and 134217728.
                                 type: number
                               netIpv4IpLocalPortRangeMax:
                                 description: The sysctl setting net.ipv4.ip_local_port_range
-                                  max value. Must be between 32768 and 65535. Changing
-                                  this forces a new resource to be created.
+                                  max value. Must be between 32768 and 65535.
                                 type: number
                               netIpv4IpLocalPortRangeMin:
                                 description: The sysctl setting net.ipv4.ip_local_port_range
-                                  min value. Must be between 1024 and 60999. Changing
-                                  this forces a new resource to be created.
+                                  min value. Must be between 1024 and 60999.
                                 type: number
                               netIpv4NeighDefaultGcThresh1:
                                 description: The sysctl setting net.ipv4.neigh.default.gc_thresh1.
-                                  Must be between 128 and 80000. Changing this forces
-                                  a new resource to be created.
+                                  Must be between 128 and 80000.
                                 type: number
                               netIpv4NeighDefaultGcThresh2:
                                 description: The sysctl setting net.ipv4.neigh.default.gc_thresh2.
-                                  Must be between 512 and 90000. Changing this forces
-                                  a new resource to be created.
+                                  Must be between 512 and 90000.
                                 type: number
                               netIpv4NeighDefaultGcThresh3:
                                 description: The sysctl setting net.ipv4.neigh.default.gc_thresh3.
-                                  Must be between 1024 and 100000. Changing this forces
-                                  a new resource to be created.
+                                  Must be between 1024 and 100000.
                                 type: number
                               netIpv4TcpFinTimeout:
                                 description: The sysctl setting net.ipv4.tcp_fin_timeout.
-                                  Must be between 5 and 120. Changing this forces
-                                  a new resource to be created.
+                                  Must be between 5 and 120.
                                 type: number
                               netIpv4TcpKeepaliveIntvl:
                                 description: The sysctl setting net.ipv4.tcp_keepalive_intvl.
-                                  Must be between 10 and 90. Changing this forces
-                                  a new resource to be created.
+                                  Must be between 10 and 90.
                                 type: number
                               netIpv4TcpKeepaliveProbes:
                                 description: The sysctl setting net.ipv4.tcp_keepalive_probes.
-                                  Must be between 1 and 15. Changing this forces a
-                                  new resource to be created.
+                                  Must be between 1 and 15.
                                 type: number
                               netIpv4TcpKeepaliveTime:
                                 description: The sysctl setting net.ipv4.tcp_keepalive_time.
-                                  Must be between 30 and 432000. Changing this forces
-                                  a new resource to be created.
+                                  Must be between 30 and 432000.
                                 type: number
                               netIpv4TcpMaxSynBacklog:
                                 description: The sysctl setting net.ipv4.tcp_max_syn_backlog.
-                                  Must be between 128 and 3240000. Changing this forces
-                                  a new resource to be created.
+                                  Must be between 128 and 3240000.
                                 type: number
                               netIpv4TcpMaxTwBuckets:
                                 description: The sysctl setting net.ipv4.tcp_max_tw_buckets.
-                                  Must be between 8000 and 1440000. Changing this
-                                  forces a new resource to be created.
+                                  Must be between 8000 and 1440000.
                                 type: number
                               netIpv4TcpTwReuse:
                                 description: Is sysctl setting net.ipv4.tcp_tw_reuse
-                                  enabled? Changing this forces a new resource to
-                                  be created.
+                                  enabled?
                                 type: boolean
                               netNetfilterNfConntrackBuckets:
                                 description: The sysctl setting net.netfilter.nf_conntrack_buckets.
-                                  Must be between 65536 and 524288. Changing this
-                                  forces a new resource to be created.
+                                  Must be between 65536 and 524288.
                                 type: number
                               netNetfilterNfConntrackMax:
                                 description: The sysctl setting net.netfilter.nf_conntrack_max.
-                                  Must be between 131072 and 2097152. Changing this
-                                  forces a new resource to be created.
+                                  Must be between 131072 and 2097152.
                                 type: number
                               vmMaxMapCount:
                                 description: The sysctl setting vm.max_map_count.
-                                  Must be between 65530 and 262144. Changing this
-                                  forces a new resource to be created.
+                                  Must be between 65530 and 262144.
                                 type: number
                               vmSwappiness:
                                 description: The sysctl setting vm.swappiness. Must
-                                  be between 0 and 100. Changing this forces a new
-                                  resource to be created.
+                                  be between 0 and 100.
                                 type: number
                               vmVfsCachePressure:
                                 description: The sysctl setting vm.vfs_cache_pressure.
-                                  Must be between 0 and 100. Changing this forces
-                                  a new resource to be created.
+                                  Must be between 0 and 100.
                                 type: number
                             type: object
                           type: array
                         transparentHugePageDefrag:
                           description: specifies the defrag configuration for Transparent
                             Huge Page. Possible values are always, defer, defer+madvise,
-                            madvise and never. Changing this forces a new resource
-                            to be created.
+                            madvise and never.
                           type: string
                         transparentHugePageEnabled:
                           description: Specifies the Transparent Huge Page enabled
                             configuration. Possible values are always, madvise and
-                            never. Changing this forces a new resource to be created.
+                            never.
                           type: string
                       type: object
                     type: array
@@ -437,16 +395,8 @@ spec:
                     type: number
                   maxPods:
                     description: The maximum number of pods that can run on each agent.
-                      Changing this forces a new resource to be created.
+                      Changing this property requires specifying temporary_name_for_rotation.
                     type: number
-                  messageOfTheDay:
-                    description: A base64-encoded string which will be written to
-                      /etc/motd after decoding. This allows customization of the message
-                      of the day for Linux nodes. It cannot be specified for Windows
-                      nodes and must be a static string (i.e. will be printed raw
-                      and not executed as a script). Changing this forces a new resource
-                      to be created.
-                    type: string
                   minCount:
                     description: The minimum number of nodes which should exist within
                       this Node Pool. Valid values are between 0 and 1000 and must
@@ -507,9 +457,13 @@ spec:
                           x-kubernetes-map-type: granular
                       type: object
                     type: array
+                  nodePublicIpEnabled:
+                    description: Should each node have a Public IP Address? Changing
+                      this property requires specifying temporary_name_for_rotation.
+                    type: boolean
                   nodePublicIpPrefixId:
                     description: Resource ID for the Public IP Addresses Prefix for
-                      the nodes in this Node Pool. enable_node_public_ip should be
+                      the nodes in this Node Pool. node_public_ip_enabled should be
                       true. Changing this forces a new resource to be created.
                     type: string
                   nodeTaints:
@@ -529,12 +483,12 @@ spec:
                     type: string
                   osDiskSizeGb:
                     description: The Agent Operating System disk size in GB. Changing
-                      this forces a new resource to be created.
+                      this property requires specifying temporary_name_for_rotation.
                     type: number
                   osDiskType:
                     description: The type of disk which should be used for the Operating
                       System. Possible values are Ephemeral and Managed. Defaults
-                      to Managed. Changing this forces a new resource to be created.
+                      to Managed. Changing this property requires specifying temporary_name_for_rotation.
                     type: string
                   osSku:
                     description: Specifies the OS SKU used by the agent pool. Possible
@@ -542,7 +496,8 @@ spec:
                       If not specified, the default is Ubuntu if OSType=Linux or Windows2019
                       if OSType=Windows. And the default Windows OSSKU will be changed
                       to Windows2022 after Windows2019 is deprecated. Changing this
-                      forces a new resource to be created.
+                      from AzureLinux or Ubuntu to AzureLinux or Ubuntu will not replace
+                      the resource, otherwise it forces a new resource to be created.
                     type: string
                   osType:
                     description: The Operating System which should be used for this
@@ -551,7 +506,7 @@ spec:
                     type: string
                   podSubnetId:
                     description: The ID of the Subnet where the pods in the Node Pool
-                      should exist. Changing this forces a new resource to be created.
+                      should exist. Changing this property requires specifying temporary_name_for_rotation.
                     type: string
                   podSubnetIdRef:
                     description: Reference to a Subnet in network to populate podSubnetId.
@@ -645,7 +600,7 @@ spec:
                     type: string
                   snapshotId:
                     description: The ID of the Snapshot which should be used to create
-                      this Node Pool. Changing this forces a new resource to be created.
+                      this Node Pool. Changing this property requires specifying temporary_name_for_rotation.
                     type: string
                   spotMaxPrice:
                     description: The maximum price you're willing to pay in USD per
@@ -660,11 +615,16 @@ spec:
                     description: A mapping of tags to assign to the resource.
                     type: object
                     x-kubernetes-map-type: granular
+                  temporaryNameForRotation:
+                    description: Specifies the name of the temporary node pool used
+                      to cycle the node pool when one of the relevant properties are
+                      updated.
+                    type: string
                   ultraSsdEnabled:
                     description: Used to specify whether the UltraSSD is enabled in
                       the Node Pool. Defaults to false. See the documentation for
-                      more information. Changing this forces a new resource to be
-                      created.
+                      more information. Changing this property requires specifying
+                      temporary_name_for_rotation.
                     type: boolean
                   upgradeSettings:
                     description: A upgrade_settings block as documented below.
@@ -684,18 +644,18 @@ spec:
                         nodeSoakDurationInMinutes:
                           description: The amount of time in minutes to wait after
                             draining a node and before reimaging and moving on to
-                            next node. Defaults to 0.
+                            next node.
                           type: number
                       type: object
                     type: array
                   vmSize:
                     description: The SKU which should be used for the Virtual Machines
-                      used in this Node Pool. Changing this forces a new resource
-                      to be created.
+                      used in this Node Pool. Changing this property requires specifying
+                      temporary_name_for_rotation.
                     type: string
                   vnetSubnetId:
                     description: The ID of the Subnet where this Node Pool should
-                      exist. Changing this forces a new resource to be created.
+                      exist. Changing this property requires specifying temporary_name_for_rotation.
                     type: string
                   vnetSubnetIdRef:
                     description: Reference to a Subnet in network to populate vnetSubnetId.
@@ -785,12 +745,12 @@ spec:
                     type: array
                   workloadRuntime:
                     description: Used to specify the workload runtime. Allowed values
-                      are OCIContainer, WasmWasi and KataMshvVmIsolation.
+                      are OCIContainer and WasmWasi.
                     type: string
                   zones:
                     description: Specifies a list of Availability Zones in which this
                       Kubernetes Cluster Node Pool should be located. Changing this
-                      forces a new Kubernetes Cluster Node Pool to be created.
+                      property requires specifying temporary_name_for_rotation.
                     items:
                       type: string
                     type: array
@@ -809,25 +769,14 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  autoScalingEnabled:
+                    description: Whether to enable auto-scaler.
+                    type: boolean
                   capacityReservationGroupId:
                     description: Specifies the ID of the Capacity Reservation Group
                       where this Node Pool should exist. Changing this forces a new
                       resource to be created.
                     type: string
-                  customCaTrustEnabled:
-                    description: Specifies whether to trust a Custom CA.
-                    type: boolean
-                  enableAutoScaling:
-                    description: Whether to enable auto-scaler.
-                    type: boolean
-                  enableHostEncryption:
-                    description: Should the nodes in this Node Pool have host encryption
-                      enabled? Changing this forces a new resource to be created.
-                    type: boolean
-                  enableNodePublicIp:
-                    description: Should each node have a Public IP Address? Changing
-                      this forces a new resource to be created.
-                    type: boolean
                   evictionPolicy:
                     description: The Eviction Policy which should be used for Virtual
                       Machines within the Virtual Machine Scale Set powering this
@@ -836,14 +785,18 @@ spec:
                     type: string
                   fipsEnabled:
                     description: Should the nodes in this Node Pool have Federal Information
-                      Processing Standard enabled? Changing this forces a new resource
-                      to be created.
+                      Processing Standard enabled? Changing this property requires
+                      specifying temporary_name_for_rotation.
                     type: boolean
                   gpuInstance:
                     description: Specifies the GPU MIG instance profile for supported
                       GPU VM SKU. The allowed values are MIG1g, MIG2g, MIG3g, MIG4g
                       and MIG7g. Changing this forces a new resource to be created.
                     type: string
+                  hostEncryptionEnabled:
+                    description: Should the nodes in this Node Pool have host encryption
+                      enabled? Changing this property requires specifying temporary_name_for_rotation.
+                    type: boolean
                   hostGroupId:
                     description: The fully qualified resource ID of the Dedicated
                       Host Group to provision virtual machines from. Changing this
@@ -851,13 +804,12 @@ spec:
                     type: string
                   kubeletConfig:
                     description: A kubelet_config block as defined below. Changing
-                      this forces a new resource to be created.
+                      this requires specifying temporary_name_for_rotation.
                     items:
                       properties:
                         allowedUnsafeSysctls:
                           description: Specifies the allow list of unsafe sysctls
-                            command or patterns (ending in *). Changing this forces
-                            a new resource to be created.
+                            command or patterns (ending in *).
                           items:
                             type: string
                           type: array
@@ -865,222 +817,188 @@ spec:
                         containerLogMaxLine:
                           description: Specifies the maximum number of container log
                             files that can be present for a container. must be at
-                            least 2. Changing this forces a new resource to be created.
+                            least 2.
                           type: number
                         containerLogMaxSizeMb:
                           description: Specifies the maximum size (e.g. 10MB) of container
-                            log file before it is rotated. Changing this forces a
-                            new resource to be created.
+                            log file before it is rotated.
                           type: number
                         cpuCfsQuotaEnabled:
                           description: Is CPU CFS quota enforcement for containers
-                            enabled? Changing this forces a new resource to be created.
+                            enabled? Defaults to true.
                           type: boolean
                         cpuCfsQuotaPeriod:
-                          description: Specifies the CPU CFS quota period value. Changing
-                            this forces a new resource to be created.
+                          description: Specifies the CPU CFS quota period value.
                           type: string
                         cpuManagerPolicy:
                           description: Specifies the CPU Manager policy to use. Possible
-                            values are none and static, Changing this forces a new
-                            resource to be created.
+                            values are none and static,
                           type: string
                         imageGcHighThreshold:
                           description: Specifies the percent of disk usage above which
                             image garbage collection is always run. Must be between
-                            0 and 100. Changing this forces a new resource to be created.
+                            0 and 100.
                           type: number
                         imageGcLowThreshold:
                           description: Specifies the percent of disk usage lower than
                             which image garbage collection is never run. Must be between
-                            0 and 100. Changing this forces a new resource to be created.
+                            0 and 100.
                           type: number
                         podMaxPid:
                           description: Specifies the maximum number of processes per
-                            pod. Changing this forces a new resource to be created.
+                            pod.
                           type: number
                         topologyManagerPolicy:
                           description: Specifies the Topology Manager policy to use.
                             Possible values are none, best-effort, restricted or single-numa-node.
-                            Changing this forces a new resource to be created.
                           type: string
                       type: object
                     type: array
                   kubeletDiskType:
                     description: The type of disk used by kubelet. Possible values
-                      are OS and Temporary.
+                      are OS and Temporary. Changing this property requires specifying
+                      temporary_name_for_rotation.
                     type: string
                   linuxOsConfig:
                     description: A linux_os_config block as defined below. Changing
-                      this forces a new resource to be created.
+                      this requires specifying temporary_name_for_rotation.
                     items:
                       properties:
                         swapFileSizeMb:
                           description: Specifies the size of swap file on each node
-                            in MB. Changing this forces a new resource to be created.
+                            in MB.
                           type: number
                         sysctlConfig:
-                          description: A sysctl_config block as defined below. Changing
-                            this forces a new resource to be created.
+                          description: A sysctl_config block as defined below.
                           items:
                             properties:
                               fsAioMaxNr:
                                 description: The sysctl setting fs.aio-max-nr. Must
-                                  be between 65536 and 6553500. Changing this forces
-                                  a new resource to be created.
+                                  be between 65536 and 6553500.
                                 type: number
                               fsFileMax:
                                 description: The sysctl setting fs.file-max. Must
-                                  be between 8192 and 12000500. Changing this forces
-                                  a new resource to be created.
+                                  be between 8192 and 12000500.
                                 type: number
                               fsInotifyMaxUserWatches:
                                 description: The sysctl setting fs.inotify.max_user_watches.
-                                  Must be between 781250 and 2097152. Changing this
-                                  forces a new resource to be created.
+                                  Must be between 781250 and 2097152.
                                 type: number
                               fsNrOpen:
                                 description: The sysctl setting fs.nr_open. Must be
-                                  between 8192 and 20000500. Changing this forces
-                                  a new resource to be created.
+                                  between 8192 and 20000500.
                                 type: number
                               kernelThreadsMax:
                                 description: The sysctl setting kernel.threads-max.
-                                  Must be between 20 and 513785. Changing this forces
-                                  a new resource to be created.
+                                  Must be between 20 and 513785.
                                 type: number
                               netCoreNetdevMaxBacklog:
                                 description: The sysctl setting net.core.netdev_max_backlog.
-                                  Must be between 1000 and 3240000. Changing this
-                                  forces a new resource to be created.
+                                  Must be between 1000 and 3240000.
                                 type: number
                               netCoreOptmemMax:
                                 description: The sysctl setting net.core.optmem_max.
-                                  Must be between 20480 and 4194304. Changing this
-                                  forces a new resource to be created.
+                                  Must be between 20480 and 4194304.
                                 type: number
                               netCoreRmemDefault:
                                 description: The sysctl setting net.core.rmem_default.
-                                  Must be between 212992 and 134217728. Changing this
-                                  forces a new resource to be created.
+                                  Must be between 212992 and 134217728.
                                 type: number
                               netCoreRmemMax:
                                 description: The sysctl setting net.core.rmem_max.
-                                  Must be between 212992 and 134217728. Changing this
-                                  forces a new resource to be created.
+                                  Must be between 212992 and 134217728.
                                 type: number
                               netCoreSomaxconn:
                                 description: The sysctl setting net.core.somaxconn.
-                                  Must be between 4096 and 3240000. Changing this
-                                  forces a new resource to be created.
+                                  Must be between 4096 and 3240000.
                                 type: number
                               netCoreWmemDefault:
                                 description: The sysctl setting net.core.wmem_default.
-                                  Must be between 212992 and 134217728. Changing this
-                                  forces a new resource to be created.
+                                  Must be between 212992 and 134217728.
                                 type: number
                               netCoreWmemMax:
                                 description: The sysctl setting net.core.wmem_max.
-                                  Must be between 212992 and 134217728. Changing this
-                                  forces a new resource to be created.
+                                  Must be between 212992 and 134217728.
                                 type: number
                               netIpv4IpLocalPortRangeMax:
                                 description: The sysctl setting net.ipv4.ip_local_port_range
-                                  max value. Must be between 32768 and 65535. Changing
-                                  this forces a new resource to be created.
+                                  max value. Must be between 32768 and 65535.
                                 type: number
                               netIpv4IpLocalPortRangeMin:
                                 description: The sysctl setting net.ipv4.ip_local_port_range
-                                  min value. Must be between 1024 and 60999. Changing
-                                  this forces a new resource to be created.
+                                  min value. Must be between 1024 and 60999.
                                 type: number
                               netIpv4NeighDefaultGcThresh1:
                                 description: The sysctl setting net.ipv4.neigh.default.gc_thresh1.
-                                  Must be between 128 and 80000. Changing this forces
-                                  a new resource to be created.
+                                  Must be between 128 and 80000.
                                 type: number
                               netIpv4NeighDefaultGcThresh2:
                                 description: The sysctl setting net.ipv4.neigh.default.gc_thresh2.
-                                  Must be between 512 and 90000. Changing this forces
-                                  a new resource to be created.
+                                  Must be between 512 and 90000.
                                 type: number
                               netIpv4NeighDefaultGcThresh3:
                                 description: The sysctl setting net.ipv4.neigh.default.gc_thresh3.
-                                  Must be between 1024 and 100000. Changing this forces
-                                  a new resource to be created.
+                                  Must be between 1024 and 100000.
                                 type: number
                               netIpv4TcpFinTimeout:
                                 description: The sysctl setting net.ipv4.tcp_fin_timeout.
-                                  Must be between 5 and 120. Changing this forces
-                                  a new resource to be created.
+                                  Must be between 5 and 120.
                                 type: number
                               netIpv4TcpKeepaliveIntvl:
                                 description: The sysctl setting net.ipv4.tcp_keepalive_intvl.
-                                  Must be between 10 and 90. Changing this forces
-                                  a new resource to be created.
+                                  Must be between 10 and 90.
                                 type: number
                               netIpv4TcpKeepaliveProbes:
                                 description: The sysctl setting net.ipv4.tcp_keepalive_probes.
-                                  Must be between 1 and 15. Changing this forces a
-                                  new resource to be created.
+                                  Must be between 1 and 15.
                                 type: number
                               netIpv4TcpKeepaliveTime:
                                 description: The sysctl setting net.ipv4.tcp_keepalive_time.
-                                  Must be between 30 and 432000. Changing this forces
-                                  a new resource to be created.
+                                  Must be between 30 and 432000.
                                 type: number
                               netIpv4TcpMaxSynBacklog:
                                 description: The sysctl setting net.ipv4.tcp_max_syn_backlog.
-                                  Must be between 128 and 3240000. Changing this forces
-                                  a new resource to be created.
+                                  Must be between 128 and 3240000.
                                 type: number
                               netIpv4TcpMaxTwBuckets:
                                 description: The sysctl setting net.ipv4.tcp_max_tw_buckets.
-                                  Must be between 8000 and 1440000. Changing this
-                                  forces a new resource to be created.
+                                  Must be between 8000 and 1440000.
                                 type: number
                               netIpv4TcpTwReuse:
                                 description: Is sysctl setting net.ipv4.tcp_tw_reuse
-                                  enabled? Changing this forces a new resource to
-                                  be created.
+                                  enabled?
                                 type: boolean
                               netNetfilterNfConntrackBuckets:
                                 description: The sysctl setting net.netfilter.nf_conntrack_buckets.
-                                  Must be between 65536 and 524288. Changing this
-                                  forces a new resource to be created.
+                                  Must be between 65536 and 524288.
                                 type: number
                               netNetfilterNfConntrackMax:
                                 description: The sysctl setting net.netfilter.nf_conntrack_max.
-                                  Must be between 131072 and 2097152. Changing this
-                                  forces a new resource to be created.
+                                  Must be between 131072 and 2097152.
                                 type: number
                               vmMaxMapCount:
                                 description: The sysctl setting vm.max_map_count.
-                                  Must be between 65530 and 262144. Changing this
-                                  forces a new resource to be created.
+                                  Must be between 65530 and 262144.
                                 type: number
                               vmSwappiness:
                                 description: The sysctl setting vm.swappiness. Must
-                                  be between 0 and 100. Changing this forces a new
-                                  resource to be created.
+                                  be between 0 and 100.
                                 type: number
                               vmVfsCachePressure:
                                 description: The sysctl setting vm.vfs_cache_pressure.
-                                  Must be between 0 and 100. Changing this forces
-                                  a new resource to be created.
+                                  Must be between 0 and 100.
                                 type: number
                             type: object
                           type: array
                         transparentHugePageDefrag:
                           description: specifies the defrag configuration for Transparent
                             Huge Page. Possible values are always, defer, defer+madvise,
-                            madvise and never. Changing this forces a new resource
-                            to be created.
+                            madvise and never.
                           type: string
                         transparentHugePageEnabled:
                           description: Specifies the Transparent Huge Page enabled
                             configuration. Possible values are always, madvise and
-                            never. Changing this forces a new resource to be created.
+                            never.
                           type: string
                       type: object
                     type: array
@@ -1091,16 +1009,8 @@ spec:
                     type: number
                   maxPods:
                     description: The maximum number of pods that can run on each agent.
-                      Changing this forces a new resource to be created.
+                      Changing this property requires specifying temporary_name_for_rotation.
                     type: number
-                  messageOfTheDay:
-                    description: A base64-encoded string which will be written to
-                      /etc/motd after decoding. This allows customization of the message
-                      of the day for Linux nodes. It cannot be specified for Windows
-                      nodes and must be a static string (i.e. will be printed raw
-                      and not executed as a script). Changing this forces a new resource
-                      to be created.
-                    type: string
                   minCount:
                     description: The minimum number of nodes which should exist within
                       this Node Pool. Valid values are between 0 and 1000 and must
@@ -1161,9 +1071,13 @@ spec:
                           x-kubernetes-map-type: granular
                       type: object
                     type: array
+                  nodePublicIpEnabled:
+                    description: Should each node have a Public IP Address? Changing
+                      this property requires specifying temporary_name_for_rotation.
+                    type: boolean
                   nodePublicIpPrefixId:
                     description: Resource ID for the Public IP Addresses Prefix for
-                      the nodes in this Node Pool. enable_node_public_ip should be
+                      the nodes in this Node Pool. node_public_ip_enabled should be
                       true. Changing this forces a new resource to be created.
                     type: string
                   nodeTaints:
@@ -1183,12 +1097,12 @@ spec:
                     type: string
                   osDiskSizeGb:
                     description: The Agent Operating System disk size in GB. Changing
-                      this forces a new resource to be created.
+                      this property requires specifying temporary_name_for_rotation.
                     type: number
                   osDiskType:
                     description: The type of disk which should be used for the Operating
                       System. Possible values are Ephemeral and Managed. Defaults
-                      to Managed. Changing this forces a new resource to be created.
+                      to Managed. Changing this property requires specifying temporary_name_for_rotation.
                     type: string
                   osSku:
                     description: Specifies the OS SKU used by the agent pool. Possible
@@ -1196,7 +1110,8 @@ spec:
                       If not specified, the default is Ubuntu if OSType=Linux or Windows2019
                       if OSType=Windows. And the default Windows OSSKU will be changed
                       to Windows2022 after Windows2019 is deprecated. Changing this
-                      forces a new resource to be created.
+                      from AzureLinux or Ubuntu to AzureLinux or Ubuntu will not replace
+                      the resource, otherwise it forces a new resource to be created.
                     type: string
                   osType:
                     description: The Operating System which should be used for this
@@ -1205,7 +1120,7 @@ spec:
                     type: string
                   podSubnetId:
                     description: The ID of the Subnet where the pods in the Node Pool
-                      should exist. Changing this forces a new resource to be created.
+                      should exist. Changing this property requires specifying temporary_name_for_rotation.
                     type: string
                   podSubnetIdRef:
                     description: Reference to a Subnet in network to populate podSubnetId.
@@ -1299,7 +1214,7 @@ spec:
                     type: string
                   snapshotId:
                     description: The ID of the Snapshot which should be used to create
-                      this Node Pool. Changing this forces a new resource to be created.
+                      this Node Pool. Changing this property requires specifying temporary_name_for_rotation.
                     type: string
                   spotMaxPrice:
                     description: The maximum price you're willing to pay in USD per
@@ -1314,11 +1229,16 @@ spec:
                     description: A mapping of tags to assign to the resource.
                     type: object
                     x-kubernetes-map-type: granular
+                  temporaryNameForRotation:
+                    description: Specifies the name of the temporary node pool used
+                      to cycle the node pool when one of the relevant properties are
+                      updated.
+                    type: string
                   ultraSsdEnabled:
                     description: Used to specify whether the UltraSSD is enabled in
                       the Node Pool. Defaults to false. See the documentation for
-                      more information. Changing this forces a new resource to be
-                      created.
+                      more information. Changing this property requires specifying
+                      temporary_name_for_rotation.
                     type: boolean
                   upgradeSettings:
                     description: A upgrade_settings block as documented below.
@@ -1338,18 +1258,18 @@ spec:
                         nodeSoakDurationInMinutes:
                           description: The amount of time in minutes to wait after
                             draining a node and before reimaging and moving on to
-                            next node. Defaults to 0.
+                            next node.
                           type: number
                       type: object
                     type: array
                   vmSize:
                     description: The SKU which should be used for the Virtual Machines
-                      used in this Node Pool. Changing this forces a new resource
-                      to be created.
+                      used in this Node Pool. Changing this property requires specifying
+                      temporary_name_for_rotation.
                     type: string
                   vnetSubnetId:
                     description: The ID of the Subnet where this Node Pool should
-                      exist. Changing this forces a new resource to be created.
+                      exist. Changing this property requires specifying temporary_name_for_rotation.
                     type: string
                   vnetSubnetIdRef:
                     description: Reference to a Subnet in network to populate vnetSubnetId.
@@ -1439,12 +1359,12 @@ spec:
                     type: array
                   workloadRuntime:
                     description: Used to specify the workload runtime. Allowed values
-                      are OCIContainer, WasmWasi and KataMshvVmIsolation.
+                      are OCIContainer and WasmWasi.
                     type: string
                   zones:
                     description: Specifies a list of Availability Zones in which this
                       Kubernetes Cluster Node Pool should be located. Changing this
-                      forces a new Kubernetes Cluster Node Pool to be created.
+                      property requires specifying temporary_name_for_rotation.
                     items:
                       type: string
                     type: array
@@ -1617,36 +1537,20 @@ spec:
             required:
             - forProvider
             type: object
-            x-kubernetes-validations:
-            - message: spec.forProvider.vmSize is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.vmSize)
-                || (has(self.initProvider) && has(self.initProvider.vmSize))'
           status:
             description: KubernetesClusterNodePoolStatus defines the observed state
               of KubernetesClusterNodePool.
             properties:
               atProvider:
                 properties:
+                  autoScalingEnabled:
+                    description: Whether to enable auto-scaler.
+                    type: boolean
                   capacityReservationGroupId:
                     description: Specifies the ID of the Capacity Reservation Group
                       where this Node Pool should exist. Changing this forces a new
                       resource to be created.
                     type: string
-                  customCaTrustEnabled:
-                    description: Specifies whether to trust a Custom CA.
-                    type: boolean
-                  enableAutoScaling:
-                    description: Whether to enable auto-scaler.
-                    type: boolean
-                  enableHostEncryption:
-                    description: Should the nodes in this Node Pool have host encryption
-                      enabled? Changing this forces a new resource to be created.
-                    type: boolean
-                  enableNodePublicIp:
-                    description: Should each node have a Public IP Address? Changing
-                      this forces a new resource to be created.
-                    type: boolean
                   evictionPolicy:
                     description: The Eviction Policy which should be used for Virtual
                       Machines within the Virtual Machine Scale Set powering this
@@ -1655,14 +1559,18 @@ spec:
                     type: string
                   fipsEnabled:
                     description: Should the nodes in this Node Pool have Federal Information
-                      Processing Standard enabled? Changing this forces a new resource
-                      to be created.
+                      Processing Standard enabled? Changing this property requires
+                      specifying temporary_name_for_rotation.
                     type: boolean
                   gpuInstance:
                     description: Specifies the GPU MIG instance profile for supported
                       GPU VM SKU. The allowed values are MIG1g, MIG2g, MIG3g, MIG4g
                       and MIG7g. Changing this forces a new resource to be created.
                     type: string
+                  hostEncryptionEnabled:
+                    description: Should the nodes in this Node Pool have host encryption
+                      enabled? Changing this property requires specifying temporary_name_for_rotation.
+                    type: boolean
                   hostGroupId:
                     description: The fully qualified resource ID of the Dedicated
                       Host Group to provision virtual machines from. Changing this
@@ -1673,13 +1581,12 @@ spec:
                     type: string
                   kubeletConfig:
                     description: A kubelet_config block as defined below. Changing
-                      this forces a new resource to be created.
+                      this requires specifying temporary_name_for_rotation.
                     items:
                       properties:
                         allowedUnsafeSysctls:
                           description: Specifies the allow list of unsafe sysctls
-                            command or patterns (ending in *). Changing this forces
-                            a new resource to be created.
+                            command or patterns (ending in *).
                           items:
                             type: string
                           type: array
@@ -1687,50 +1594,47 @@ spec:
                         containerLogMaxLine:
                           description: Specifies the maximum number of container log
                             files that can be present for a container. must be at
-                            least 2. Changing this forces a new resource to be created.
+                            least 2.
                           type: number
                         containerLogMaxSizeMb:
                           description: Specifies the maximum size (e.g. 10MB) of container
-                            log file before it is rotated. Changing this forces a
-                            new resource to be created.
+                            log file before it is rotated.
                           type: number
                         cpuCfsQuotaEnabled:
                           description: Is CPU CFS quota enforcement for containers
-                            enabled? Changing this forces a new resource to be created.
+                            enabled? Defaults to true.
                           type: boolean
                         cpuCfsQuotaPeriod:
-                          description: Specifies the CPU CFS quota period value. Changing
-                            this forces a new resource to be created.
+                          description: Specifies the CPU CFS quota period value.
                           type: string
                         cpuManagerPolicy:
                           description: Specifies the CPU Manager policy to use. Possible
-                            values are none and static, Changing this forces a new
-                            resource to be created.
+                            values are none and static,
                           type: string
                         imageGcHighThreshold:
                           description: Specifies the percent of disk usage above which
                             image garbage collection is always run. Must be between
-                            0 and 100. Changing this forces a new resource to be created.
+                            0 and 100.
                           type: number
                         imageGcLowThreshold:
                           description: Specifies the percent of disk usage lower than
                             which image garbage collection is never run. Must be between
-                            0 and 100. Changing this forces a new resource to be created.
+                            0 and 100.
                           type: number
                         podMaxPid:
                           description: Specifies the maximum number of processes per
-                            pod. Changing this forces a new resource to be created.
+                            pod.
                           type: number
                         topologyManagerPolicy:
                           description: Specifies the Topology Manager policy to use.
                             Possible values are none, best-effort, restricted or single-numa-node.
-                            Changing this forces a new resource to be created.
                           type: string
                       type: object
                     type: array
                   kubeletDiskType:
                     description: The type of disk used by kubelet. Possible values
-                      are OS and Temporary.
+                      are OS and Temporary. Changing this property requires specifying
+                      temporary_name_for_rotation.
                     type: string
                   kubernetesClusterId:
                     description: The ID of the Kubernetes Cluster where this Node
@@ -1739,175 +1643,144 @@ spec:
                     type: string
                   linuxOsConfig:
                     description: A linux_os_config block as defined below. Changing
-                      this forces a new resource to be created.
+                      this requires specifying temporary_name_for_rotation.
                     items:
                       properties:
                         swapFileSizeMb:
                           description: Specifies the size of swap file on each node
-                            in MB. Changing this forces a new resource to be created.
+                            in MB.
                           type: number
                         sysctlConfig:
-                          description: A sysctl_config block as defined below. Changing
-                            this forces a new resource to be created.
+                          description: A sysctl_config block as defined below.
                           items:
                             properties:
                               fsAioMaxNr:
                                 description: The sysctl setting fs.aio-max-nr. Must
-                                  be between 65536 and 6553500. Changing this forces
-                                  a new resource to be created.
+                                  be between 65536 and 6553500.
                                 type: number
                               fsFileMax:
                                 description: The sysctl setting fs.file-max. Must
-                                  be between 8192 and 12000500. Changing this forces
-                                  a new resource to be created.
+                                  be between 8192 and 12000500.
                                 type: number
                               fsInotifyMaxUserWatches:
                                 description: The sysctl setting fs.inotify.max_user_watches.
-                                  Must be between 781250 and 2097152. Changing this
-                                  forces a new resource to be created.
+                                  Must be between 781250 and 2097152.
                                 type: number
                               fsNrOpen:
                                 description: The sysctl setting fs.nr_open. Must be
-                                  between 8192 and 20000500. Changing this forces
-                                  a new resource to be created.
+                                  between 8192 and 20000500.
                                 type: number
                               kernelThreadsMax:
                                 description: The sysctl setting kernel.threads-max.
-                                  Must be between 20 and 513785. Changing this forces
-                                  a new resource to be created.
+                                  Must be between 20 and 513785.
                                 type: number
                               netCoreNetdevMaxBacklog:
                                 description: The sysctl setting net.core.netdev_max_backlog.
-                                  Must be between 1000 and 3240000. Changing this
-                                  forces a new resource to be created.
+                                  Must be between 1000 and 3240000.
                                 type: number
                               netCoreOptmemMax:
                                 description: The sysctl setting net.core.optmem_max.
-                                  Must be between 20480 and 4194304. Changing this
-                                  forces a new resource to be created.
+                                  Must be between 20480 and 4194304.
                                 type: number
                               netCoreRmemDefault:
                                 description: The sysctl setting net.core.rmem_default.
-                                  Must be between 212992 and 134217728. Changing this
-                                  forces a new resource to be created.
+                                  Must be between 212992 and 134217728.
                                 type: number
                               netCoreRmemMax:
                                 description: The sysctl setting net.core.rmem_max.
-                                  Must be between 212992 and 134217728. Changing this
-                                  forces a new resource to be created.
+                                  Must be between 212992 and 134217728.
                                 type: number
                               netCoreSomaxconn:
                                 description: The sysctl setting net.core.somaxconn.
-                                  Must be between 4096 and 3240000. Changing this
-                                  forces a new resource to be created.
+                                  Must be between 4096 and 3240000.
                                 type: number
                               netCoreWmemDefault:
                                 description: The sysctl setting net.core.wmem_default.
-                                  Must be between 212992 and 134217728. Changing this
-                                  forces a new resource to be created.
+                                  Must be between 212992 and 134217728.
                                 type: number
                               netCoreWmemMax:
                                 description: The sysctl setting net.core.wmem_max.
-                                  Must be between 212992 and 134217728. Changing this
-                                  forces a new resource to be created.
+                                  Must be between 212992 and 134217728.
                                 type: number
                               netIpv4IpLocalPortRangeMax:
                                 description: The sysctl setting net.ipv4.ip_local_port_range
-                                  max value. Must be between 32768 and 65535. Changing
-                                  this forces a new resource to be created.
+                                  max value. Must be between 32768 and 65535.
                                 type: number
                               netIpv4IpLocalPortRangeMin:
                                 description: The sysctl setting net.ipv4.ip_local_port_range
-                                  min value. Must be between 1024 and 60999. Changing
-                                  this forces a new resource to be created.
+                                  min value. Must be between 1024 and 60999.
                                 type: number
                               netIpv4NeighDefaultGcThresh1:
                                 description: The sysctl setting net.ipv4.neigh.default.gc_thresh1.
-                                  Must be between 128 and 80000. Changing this forces
-                                  a new resource to be created.
+                                  Must be between 128 and 80000.
                                 type: number
                               netIpv4NeighDefaultGcThresh2:
                                 description: The sysctl setting net.ipv4.neigh.default.gc_thresh2.
-                                  Must be between 512 and 90000. Changing this forces
-                                  a new resource to be created.
+                                  Must be between 512 and 90000.
                                 type: number
                               netIpv4NeighDefaultGcThresh3:
                                 description: The sysctl setting net.ipv4.neigh.default.gc_thresh3.
-                                  Must be between 1024 and 100000. Changing this forces
-                                  a new resource to be created.
+                                  Must be between 1024 and 100000.
                                 type: number
                               netIpv4TcpFinTimeout:
                                 description: The sysctl setting net.ipv4.tcp_fin_timeout.
-                                  Must be between 5 and 120. Changing this forces
-                                  a new resource to be created.
+                                  Must be between 5 and 120.
                                 type: number
                               netIpv4TcpKeepaliveIntvl:
                                 description: The sysctl setting net.ipv4.tcp_keepalive_intvl.
-                                  Must be between 10 and 90. Changing this forces
-                                  a new resource to be created.
+                                  Must be between 10 and 90.
                                 type: number
                               netIpv4TcpKeepaliveProbes:
                                 description: The sysctl setting net.ipv4.tcp_keepalive_probes.
-                                  Must be between 1 and 15. Changing this forces a
-                                  new resource to be created.
+                                  Must be between 1 and 15.
                                 type: number
                               netIpv4TcpKeepaliveTime:
                                 description: The sysctl setting net.ipv4.tcp_keepalive_time.
-                                  Must be between 30 and 432000. Changing this forces
-                                  a new resource to be created.
+                                  Must be between 30 and 432000.
                                 type: number
                               netIpv4TcpMaxSynBacklog:
                                 description: The sysctl setting net.ipv4.tcp_max_syn_backlog.
-                                  Must be between 128 and 3240000. Changing this forces
-                                  a new resource to be created.
+                                  Must be between 128 and 3240000.
                                 type: number
                               netIpv4TcpMaxTwBuckets:
                                 description: The sysctl setting net.ipv4.tcp_max_tw_buckets.
-                                  Must be between 8000 and 1440000. Changing this
-                                  forces a new resource to be created.
+                                  Must be between 8000 and 1440000.
                                 type: number
                               netIpv4TcpTwReuse:
                                 description: Is sysctl setting net.ipv4.tcp_tw_reuse
-                                  enabled? Changing this forces a new resource to
-                                  be created.
+                                  enabled?
                                 type: boolean
                               netNetfilterNfConntrackBuckets:
                                 description: The sysctl setting net.netfilter.nf_conntrack_buckets.
-                                  Must be between 65536 and 524288. Changing this
-                                  forces a new resource to be created.
+                                  Must be between 65536 and 524288.
                                 type: number
                               netNetfilterNfConntrackMax:
                                 description: The sysctl setting net.netfilter.nf_conntrack_max.
-                                  Must be between 131072 and 2097152. Changing this
-                                  forces a new resource to be created.
+                                  Must be between 131072 and 2097152.
                                 type: number
                               vmMaxMapCount:
                                 description: The sysctl setting vm.max_map_count.
-                                  Must be between 65530 and 262144. Changing this
-                                  forces a new resource to be created.
+                                  Must be between 65530 and 262144.
                                 type: number
                               vmSwappiness:
                                 description: The sysctl setting vm.swappiness. Must
-                                  be between 0 and 100. Changing this forces a new
-                                  resource to be created.
+                                  be between 0 and 100.
                                 type: number
                               vmVfsCachePressure:
                                 description: The sysctl setting vm.vfs_cache_pressure.
-                                  Must be between 0 and 100. Changing this forces
-                                  a new resource to be created.
+                                  Must be between 0 and 100.
                                 type: number
                             type: object
                           type: array
                         transparentHugePageDefrag:
                           description: specifies the defrag configuration for Transparent
                             Huge Page. Possible values are always, defer, defer+madvise,
-                            madvise and never. Changing this forces a new resource
-                            to be created.
+                            madvise and never.
                           type: string
                         transparentHugePageEnabled:
                           description: Specifies the Transparent Huge Page enabled
                             configuration. Possible values are always, madvise and
-                            never. Changing this forces a new resource to be created.
+                            never.
                           type: string
                       type: object
                     type: array
@@ -1918,16 +1791,8 @@ spec:
                     type: number
                   maxPods:
                     description: The maximum number of pods that can run on each agent.
-                      Changing this forces a new resource to be created.
+                      Changing this property requires specifying temporary_name_for_rotation.
                     type: number
-                  messageOfTheDay:
-                    description: A base64-encoded string which will be written to
-                      /etc/motd after decoding. This allows customization of the message
-                      of the day for Linux nodes. It cannot be specified for Windows
-                      nodes and must be a static string (i.e. will be printed raw
-                      and not executed as a script). Changing this forces a new resource
-                      to be created.
-                    type: string
                   minCount:
                     description: The minimum number of nodes which should exist within
                       this Node Pool. Valid values are between 0 and 1000 and must
@@ -1988,9 +1853,13 @@ spec:
                           x-kubernetes-map-type: granular
                       type: object
                     type: array
+                  nodePublicIpEnabled:
+                    description: Should each node have a Public IP Address? Changing
+                      this property requires specifying temporary_name_for_rotation.
+                    type: boolean
                   nodePublicIpPrefixId:
                     description: Resource ID for the Public IP Addresses Prefix for
-                      the nodes in this Node Pool. enable_node_public_ip should be
+                      the nodes in this Node Pool. node_public_ip_enabled should be
                       true. Changing this forces a new resource to be created.
                     type: string
                   nodeTaints:
@@ -2010,12 +1879,12 @@ spec:
                     type: string
                   osDiskSizeGb:
                     description: The Agent Operating System disk size in GB. Changing
-                      this forces a new resource to be created.
+                      this property requires specifying temporary_name_for_rotation.
                     type: number
                   osDiskType:
                     description: The type of disk which should be used for the Operating
                       System. Possible values are Ephemeral and Managed. Defaults
-                      to Managed. Changing this forces a new resource to be created.
+                      to Managed. Changing this property requires specifying temporary_name_for_rotation.
                     type: string
                   osSku:
                     description: Specifies the OS SKU used by the agent pool. Possible
@@ -2023,7 +1892,8 @@ spec:
                       If not specified, the default is Ubuntu if OSType=Linux or Windows2019
                       if OSType=Windows. And the default Windows OSSKU will be changed
                       to Windows2022 after Windows2019 is deprecated. Changing this
-                      forces a new resource to be created.
+                      from AzureLinux or Ubuntu to AzureLinux or Ubuntu will not replace
+                      the resource, otherwise it forces a new resource to be created.
                     type: string
                   osType:
                     description: The Operating System which should be used for this
@@ -2032,7 +1902,7 @@ spec:
                     type: string
                   podSubnetId:
                     description: The ID of the Subnet where the pods in the Node Pool
-                      should exist. Changing this forces a new resource to be created.
+                      should exist. Changing this property requires specifying temporary_name_for_rotation.
                     type: string
                   priority:
                     description: The Priority for Virtual Machines within the Virtual
@@ -2052,7 +1922,7 @@ spec:
                     type: string
                   snapshotId:
                     description: The ID of the Snapshot which should be used to create
-                      this Node Pool. Changing this forces a new resource to be created.
+                      this Node Pool. Changing this property requires specifying temporary_name_for_rotation.
                     type: string
                   spotMaxPrice:
                     description: The maximum price you're willing to pay in USD per
@@ -2067,11 +1937,16 @@ spec:
                     description: A mapping of tags to assign to the resource.
                     type: object
                     x-kubernetes-map-type: granular
+                  temporaryNameForRotation:
+                    description: Specifies the name of the temporary node pool used
+                      to cycle the node pool when one of the relevant properties are
+                      updated.
+                    type: string
                   ultraSsdEnabled:
                     description: Used to specify whether the UltraSSD is enabled in
                       the Node Pool. Defaults to false. See the documentation for
-                      more information. Changing this forces a new resource to be
-                      created.
+                      more information. Changing this property requires specifying
+                      temporary_name_for_rotation.
                     type: boolean
                   upgradeSettings:
                     description: A upgrade_settings block as documented below.
@@ -2091,18 +1966,18 @@ spec:
                         nodeSoakDurationInMinutes:
                           description: The amount of time in minutes to wait after
                             draining a node and before reimaging and moving on to
-                            next node. Defaults to 0.
+                            next node.
                           type: number
                       type: object
                     type: array
                   vmSize:
                     description: The SKU which should be used for the Virtual Machines
-                      used in this Node Pool. Changing this forces a new resource
-                      to be created.
+                      used in this Node Pool. Changing this property requires specifying
+                      temporary_name_for_rotation.
                     type: string
                   vnetSubnetId:
                     description: The ID of the Subnet where this Node Pool should
-                      exist. Changing this forces a new resource to be created.
+                      exist. Changing this property requires specifying temporary_name_for_rotation.
                     type: string
                   windowsProfile:
                     description: A windows_profile block as documented below. Changing
@@ -2118,12 +1993,12 @@ spec:
                     type: array
                   workloadRuntime:
                     description: Used to specify the workload runtime. Allowed values
-                      are OCIContainer, WasmWasi and KataMshvVmIsolation.
+                      are OCIContainer and WasmWasi.
                     type: string
                   zones:
                     description: Specifies a list of Availability Zones in which this
                       Kubernetes Cluster Node Pool should be located. Changing this
-                      forces a new Kubernetes Cluster Node Pool to be created.
+                      property requires specifying temporary_name_for_rotation.
                     items:
                       type: string
                     type: array
@@ -2246,24 +2121,14 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  autoScalingEnabled:
+                    description: Whether to enable auto-scaler.
+                    type: boolean
                   capacityReservationGroupId:
                     description: Specifies the ID of the Capacity Reservation Group
                       where this Node Pool should exist. Changing this forces a new
                       resource to be created.
                     type: string
-                  customCaTrustEnabled:
-                    type: boolean
-                  enableAutoScaling:
-                    description: Whether to enable auto-scaler.
-                    type: boolean
-                  enableHostEncryption:
-                    description: Should the nodes in this Node Pool have host encryption
-                      enabled? Changing this forces a new resource to be created.
-                    type: boolean
-                  enableNodePublicIp:
-                    description: Should each node have a Public IP Address? Changing
-                      this forces a new resource to be created.
-                    type: boolean
                   evictionPolicy:
                     description: The Eviction Policy which should be used for Virtual
                       Machines within the Virtual Machine Scale Set powering this
@@ -2272,14 +2137,18 @@ spec:
                     type: string
                   fipsEnabled:
                     description: Should the nodes in this Node Pool have Federal Information
-                      Processing Standard enabled? Changing this forces a new resource
-                      to be created.
+                      Processing Standard enabled? Changing this property requires
+                      specifying temporary_name_for_rotation.
                     type: boolean
                   gpuInstance:
                     description: Specifies the GPU MIG instance profile for supported
                       GPU VM SKU. The allowed values are MIG1g, MIG2g, MIG3g, MIG4g
                       and MIG7g. Changing this forces a new resource to be created.
                     type: string
+                  hostEncryptionEnabled:
+                    description: Should the nodes in this Node Pool have host encryption
+                      enabled? Changing this property requires specifying temporary_name_for_rotation.
+                    type: boolean
                   hostGroupId:
                     description: The fully qualified resource ID of the Dedicated
                       Host Group to provision virtual machines from. Changing this
@@ -2287,12 +2156,11 @@ spec:
                     type: string
                   kubeletConfig:
                     description: A kubelet_config block as defined below. Changing
-                      this forces a new resource to be created.
+                      this requires specifying temporary_name_for_rotation.
                     properties:
                       allowedUnsafeSysctls:
                         description: Specifies the allow list of unsafe sysctls command
-                          or patterns (ending in *). Changing this forces a new resource
-                          to be created.
+                          or patterns (ending in *).
                         items:
                           type: string
                         type: array
@@ -2300,49 +2168,46 @@ spec:
                       containerLogMaxLine:
                         description: Specifies the maximum number of container log
                           files that can be present for a container. must be at least
-                          2. Changing this forces a new resource to be created.
+                          2.
                         type: number
                       containerLogMaxSizeMb:
                         description: Specifies the maximum size (e.g. 10MB) of container
-                          log file before it is rotated. Changing this forces a new
-                          resource to be created.
+                          log file before it is rotated.
                         type: number
                       cpuCfsQuotaEnabled:
                         description: Is CPU CFS quota enforcement for containers enabled?
-                          Changing this forces a new resource to be created.
+                          Defaults to true.
                         type: boolean
                       cpuCfsQuotaPeriod:
-                        description: Specifies the CPU CFS quota period value. Changing
-                          this forces a new resource to be created.
+                        description: Specifies the CPU CFS quota period value.
                         type: string
                       cpuManagerPolicy:
                         description: Specifies the CPU Manager policy to use. Possible
-                          values are none and static, Changing this forces a new resource
-                          to be created.
+                          values are none and static,
                         type: string
                       imageGcHighThreshold:
                         description: Specifies the percent of disk usage above which
                           image garbage collection is always run. Must be between
-                          0 and 100. Changing this forces a new resource to be created.
+                          0 and 100.
                         type: number
                       imageGcLowThreshold:
                         description: Specifies the percent of disk usage lower than
                           which image garbage collection is never run. Must be between
-                          0 and 100. Changing this forces a new resource to be created.
+                          0 and 100.
                         type: number
                       podMaxPid:
                         description: Specifies the maximum number of processes per
-                          pod. Changing this forces a new resource to be created.
+                          pod.
                         type: number
                       topologyManagerPolicy:
                         description: Specifies the Topology Manager policy to use.
                           Possible values are none, best-effort, restricted or single-numa-node.
-                          Changing this forces a new resource to be created.
                         type: string
                     type: object
                   kubeletDiskType:
                     description: The type of disk used by kubelet. Possible values
-                      are OS and Temporary.
+                      are OS and Temporary. Changing this property requires specifying
+                      temporary_name_for_rotation.
                     type: string
                   kubernetesClusterId:
                     description: The ID of the Kubernetes Cluster where this Node
@@ -2427,171 +2292,139 @@ spec:
                     type: object
                   linuxOsConfig:
                     description: A linux_os_config block as defined below. Changing
-                      this forces a new resource to be created.
+                      this requires specifying temporary_name_for_rotation.
                     properties:
                       swapFileSizeMb:
                         description: Specifies the size of swap file on each node
-                          in MB. Changing this forces a new resource to be created.
+                          in MB.
                         type: number
                       sysctlConfig:
-                        description: A sysctl_config block as defined below. Changing
-                          this forces a new resource to be created.
+                        description: A sysctl_config block as defined below.
                         properties:
                           fsAioMaxNr:
                             description: The sysctl setting fs.aio-max-nr. Must be
-                              between 65536 and 6553500. Changing this forces a new
-                              resource to be created.
+                              between 65536 and 6553500.
                             type: number
                           fsFileMax:
                             description: The sysctl setting fs.file-max. Must be between
-                              8192 and 12000500. Changing this forces a new resource
-                              to be created.
+                              8192 and 12000500.
                             type: number
                           fsInotifyMaxUserWatches:
                             description: The sysctl setting fs.inotify.max_user_watches.
-                              Must be between 781250 and 2097152. Changing this forces
-                              a new resource to be created.
+                              Must be between 781250 and 2097152.
                             type: number
                           fsNrOpen:
                             description: The sysctl setting fs.nr_open. Must be between
-                              8192 and 20000500. Changing this forces a new resource
-                              to be created.
+                              8192 and 20000500.
                             type: number
                           kernelThreadsMax:
                             description: The sysctl setting kernel.threads-max. Must
-                              be between 20 and 513785. Changing this forces a new
-                              resource to be created.
+                              be between 20 and 513785.
                             type: number
                           netCoreNetdevMaxBacklog:
                             description: The sysctl setting net.core.netdev_max_backlog.
-                              Must be between 1000 and 3240000. Changing this forces
-                              a new resource to be created.
+                              Must be between 1000 and 3240000.
                             type: number
                           netCoreOptmemMax:
                             description: The sysctl setting net.core.optmem_max. Must
-                              be between 20480 and 4194304. Changing this forces a
-                              new resource to be created.
+                              be between 20480 and 4194304.
                             type: number
                           netCoreRmemDefault:
                             description: The sysctl setting net.core.rmem_default.
-                              Must be between 212992 and 134217728. Changing this
-                              forces a new resource to be created.
+                              Must be between 212992 and 134217728.
                             type: number
                           netCoreRmemMax:
                             description: The sysctl setting net.core.rmem_max. Must
-                              be between 212992 and 134217728. Changing this forces
-                              a new resource to be created.
+                              be between 212992 and 134217728.
                             type: number
                           netCoreSomaxconn:
                             description: The sysctl setting net.core.somaxconn. Must
-                              be between 4096 and 3240000. Changing this forces a
-                              new resource to be created.
+                              be between 4096 and 3240000.
                             type: number
                           netCoreWmemDefault:
                             description: The sysctl setting net.core.wmem_default.
-                              Must be between 212992 and 134217728. Changing this
-                              forces a new resource to be created.
+                              Must be between 212992 and 134217728.
                             type: number
                           netCoreWmemMax:
                             description: The sysctl setting net.core.wmem_max. Must
-                              be between 212992 and 134217728. Changing this forces
-                              a new resource to be created.
+                              be between 212992 and 134217728.
                             type: number
                           netIpv4IpLocalPortRangeMax:
                             description: The sysctl setting net.ipv4.ip_local_port_range
-                              max value. Must be between 32768 and 65535. Changing
-                              this forces a new resource to be created.
+                              max value. Must be between 32768 and 65535.
                             type: number
                           netIpv4IpLocalPortRangeMin:
                             description: The sysctl setting net.ipv4.ip_local_port_range
-                              min value. Must be between 1024 and 60999. Changing
-                              this forces a new resource to be created.
+                              min value. Must be between 1024 and 60999.
                             type: number
                           netIpv4NeighDefaultGcThresh1:
                             description: The sysctl setting net.ipv4.neigh.default.gc_thresh1.
-                              Must be between 128 and 80000. Changing this forces
-                              a new resource to be created.
+                              Must be between 128 and 80000.
                             type: number
                           netIpv4NeighDefaultGcThresh2:
                             description: The sysctl setting net.ipv4.neigh.default.gc_thresh2.
-                              Must be between 512 and 90000. Changing this forces
-                              a new resource to be created.
+                              Must be between 512 and 90000.
                             type: number
                           netIpv4NeighDefaultGcThresh3:
                             description: The sysctl setting net.ipv4.neigh.default.gc_thresh3.
-                              Must be between 1024 and 100000. Changing this forces
-                              a new resource to be created.
+                              Must be between 1024 and 100000.
                             type: number
                           netIpv4TcpFinTimeout:
                             description: The sysctl setting net.ipv4.tcp_fin_timeout.
-                              Must be between 5 and 120. Changing this forces a new
-                              resource to be created.
+                              Must be between 5 and 120.
                             type: number
                           netIpv4TcpKeepaliveIntvl:
                             description: The sysctl setting net.ipv4.tcp_keepalive_intvl.
-                              Must be between 10 and 90. Changing this forces a new
-                              resource to be created.
+                              Must be between 10 and 90.
                             type: number
                           netIpv4TcpKeepaliveProbes:
                             description: The sysctl setting net.ipv4.tcp_keepalive_probes.
-                              Must be between 1 and 15. Changing this forces a new
-                              resource to be created.
+                              Must be between 1 and 15.
                             type: number
                           netIpv4TcpKeepaliveTime:
                             description: The sysctl setting net.ipv4.tcp_keepalive_time.
-                              Must be between 30 and 432000. Changing this forces
-                              a new resource to be created.
+                              Must be between 30 and 432000.
                             type: number
                           netIpv4TcpMaxSynBacklog:
                             description: The sysctl setting net.ipv4.tcp_max_syn_backlog.
-                              Must be between 128 and 3240000. Changing this forces
-                              a new resource to be created.
+                              Must be between 128 and 3240000.
                             type: number
                           netIpv4TcpMaxTwBuckets:
                             description: The sysctl setting net.ipv4.tcp_max_tw_buckets.
-                              Must be between 8000 and 1440000. Changing this forces
-                              a new resource to be created.
+                              Must be between 8000 and 1440000.
                             type: number
                           netIpv4TcpTwReuse:
                             description: Is sysctl setting net.ipv4.tcp_tw_reuse enabled?
-                              Changing this forces a new resource to be created.
                             type: boolean
                           netNetfilterNfConntrackBuckets:
                             description: The sysctl setting net.netfilter.nf_conntrack_buckets.
-                              Must be between 65536 and 524288. Changing this forces
-                              a new resource to be created.
+                              Must be between 65536 and 524288.
                             type: number
                           netNetfilterNfConntrackMax:
                             description: The sysctl setting net.netfilter.nf_conntrack_max.
-                              Must be between 131072 and 2097152. Changing this forces
-                              a new resource to be created.
+                              Must be between 131072 and 2097152.
                             type: number
                           vmMaxMapCount:
                             description: The sysctl setting vm.max_map_count. Must
-                              be between 65530 and 262144. Changing this forces a
-                              new resource to be created.
+                              be between 65530 and 262144.
                             type: number
                           vmSwappiness:
                             description: The sysctl setting vm.swappiness. Must be
-                              between 0 and 100. Changing this forces a new resource
-                              to be created.
+                              between 0 and 100.
                             type: number
                           vmVfsCachePressure:
                             description: The sysctl setting vm.vfs_cache_pressure.
-                              Must be between 0 and 100. Changing this forces a new
-                              resource to be created.
+                              Must be between 0 and 100.
                             type: number
                         type: object
                       transparentHugePageDefrag:
                         description: specifies the defrag configuration for Transparent
                           Huge Page. Possible values are always, defer, defer+madvise,
-                          madvise and never. Changing this forces a new resource to
-                          be created.
+                          madvise and never.
                         type: string
                       transparentHugePageEnabled:
                         description: Specifies the Transparent Huge Page enabled configuration.
-                          Possible values are always, madvise and never. Changing
-                          this forces a new resource to be created.
+                          Possible values are always, madvise and never.
                         type: string
                     type: object
                   maxCount:
@@ -2601,10 +2434,8 @@ spec:
                     type: number
                   maxPods:
                     description: The maximum number of pods that can run on each agent.
-                      Changing this forces a new resource to be created.
+                      Changing this property requires specifying temporary_name_for_rotation.
                     type: number
-                  messageOfTheDay:
-                    type: string
                   minCount:
                     description: The minimum number of nodes which should exist within
                       this Node Pool. Valid values are between 0 and 1000 and must
@@ -2662,9 +2493,13 @@ spec:
                         type: object
                         x-kubernetes-map-type: granular
                     type: object
+                  nodePublicIpEnabled:
+                    description: Should each node have a Public IP Address? Changing
+                      this property requires specifying temporary_name_for_rotation.
+                    type: boolean
                   nodePublicIpPrefixId:
                     description: Resource ID for the Public IP Addresses Prefix for
-                      the nodes in this Node Pool. enable_node_public_ip should be
+                      the nodes in this Node Pool. node_public_ip_enabled should be
                       true. Changing this forces a new resource to be created.
                     type: string
                   nodeTaints:
@@ -2684,12 +2519,12 @@ spec:
                     type: string
                   osDiskSizeGb:
                     description: The Agent Operating System disk size in GB. Changing
-                      this forces a new resource to be created.
+                      this property requires specifying temporary_name_for_rotation.
                     type: number
                   osDiskType:
                     description: The type of disk which should be used for the Operating
                       System. Possible values are Ephemeral and Managed. Defaults
-                      to Managed. Changing this forces a new resource to be created.
+                      to Managed. Changing this property requires specifying temporary_name_for_rotation.
                     type: string
                   osSku:
                     description: Specifies the OS SKU used by the agent pool. Possible
@@ -2707,7 +2542,7 @@ spec:
                     type: string
                   podSubnetId:
                     description: The ID of the Subnet where the pods in the Node Pool
-                      should exist. Changing this forces a new resource to be created.
+                      should exist. Changing this property requires specifying temporary_name_for_rotation.
                     type: string
                   podSubnetIdRef:
                     description: Reference to a Subnet in network to populate podSubnetId.
@@ -2801,7 +2636,7 @@ spec:
                     type: string
                   snapshotId:
                     description: The ID of the Snapshot which should be used to create
-                      this Node Pool. Changing this forces a new resource to be created.
+                      this Node Pool. Changing this property requires specifying temporary_name_for_rotation.
                     type: string
                   spotMaxPrice:
                     description: The maximum price you're willing to pay in USD per
@@ -2816,11 +2651,16 @@ spec:
                     description: A mapping of tags to assign to the resource.
                     type: object
                     x-kubernetes-map-type: granular
+                  temporaryNameForRotation:
+                    description: Specifies the name of the temporary node pool used
+                      to cycle the node pool when one of the relevant properties are
+                      updated.
+                    type: string
                   ultraSsdEnabled:
                     description: Used to specify whether the UltraSSD is enabled in
                       the Node Pool. Defaults to false. See the documentation for
-                      more information. Changing this forces a new resource to be
-                      created.
+                      more information. Changing this property requires specifying
+                      temporary_name_for_rotation.
                     type: boolean
                   upgradeSettings:
                     description: A upgrade_settings block as documented below.
@@ -2839,17 +2679,16 @@ spec:
                       nodeSoakDurationInMinutes:
                         description: The amount of time in minutes to wait after draining
                           a node and before reimaging and moving on to next node.
-                          Defaults to 0.
                         type: number
                     type: object
                   vmSize:
                     description: The SKU which should be used for the Virtual Machines
-                      used in this Node Pool. Changing this forces a new resource
-                      to be created.
+                      used in this Node Pool. Changing this property requires specifying
+                      temporary_name_for_rotation.
                     type: string
                   vnetSubnetId:
                     description: The ID of the Subnet where this Node Pool should
-                      exist. Changing this forces a new resource to be created.
+                      exist. Changing this property requires specifying temporary_name_for_rotation.
                     type: string
                   vnetSubnetIdRef:
                     description: Reference to a Subnet in network to populate vnetSubnetId.
@@ -2942,7 +2781,7 @@ spec:
                   zones:
                     description: Specifies a list of Availability Zones in which this
                       Kubernetes Cluster Node Pool should be located. Changing this
-                      forces a new Kubernetes Cluster Node Pool to be created.
+                      property requires specifying temporary_name_for_rotation.
                     items:
                       type: string
                     type: array
@@ -2961,24 +2800,14 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  autoScalingEnabled:
+                    description: Whether to enable auto-scaler.
+                    type: boolean
                   capacityReservationGroupId:
                     description: Specifies the ID of the Capacity Reservation Group
                       where this Node Pool should exist. Changing this forces a new
                       resource to be created.
                     type: string
-                  customCaTrustEnabled:
-                    type: boolean
-                  enableAutoScaling:
-                    description: Whether to enable auto-scaler.
-                    type: boolean
-                  enableHostEncryption:
-                    description: Should the nodes in this Node Pool have host encryption
-                      enabled? Changing this forces a new resource to be created.
-                    type: boolean
-                  enableNodePublicIp:
-                    description: Should each node have a Public IP Address? Changing
-                      this forces a new resource to be created.
-                    type: boolean
                   evictionPolicy:
                     description: The Eviction Policy which should be used for Virtual
                       Machines within the Virtual Machine Scale Set powering this
@@ -2987,14 +2816,18 @@ spec:
                     type: string
                   fipsEnabled:
                     description: Should the nodes in this Node Pool have Federal Information
-                      Processing Standard enabled? Changing this forces a new resource
-                      to be created.
+                      Processing Standard enabled? Changing this property requires
+                      specifying temporary_name_for_rotation.
                     type: boolean
                   gpuInstance:
                     description: Specifies the GPU MIG instance profile for supported
                       GPU VM SKU. The allowed values are MIG1g, MIG2g, MIG3g, MIG4g
                       and MIG7g. Changing this forces a new resource to be created.
                     type: string
+                  hostEncryptionEnabled:
+                    description: Should the nodes in this Node Pool have host encryption
+                      enabled? Changing this property requires specifying temporary_name_for_rotation.
+                    type: boolean
                   hostGroupId:
                     description: The fully qualified resource ID of the Dedicated
                       Host Group to provision virtual machines from. Changing this
@@ -3002,12 +2835,11 @@ spec:
                     type: string
                   kubeletConfig:
                     description: A kubelet_config block as defined below. Changing
-                      this forces a new resource to be created.
+                      this requires specifying temporary_name_for_rotation.
                     properties:
                       allowedUnsafeSysctls:
                         description: Specifies the allow list of unsafe sysctls command
-                          or patterns (ending in *). Changing this forces a new resource
-                          to be created.
+                          or patterns (ending in *).
                         items:
                           type: string
                         type: array
@@ -3015,217 +2847,182 @@ spec:
                       containerLogMaxLine:
                         description: Specifies the maximum number of container log
                           files that can be present for a container. must be at least
-                          2. Changing this forces a new resource to be created.
+                          2.
                         type: number
                       containerLogMaxSizeMb:
                         description: Specifies the maximum size (e.g. 10MB) of container
-                          log file before it is rotated. Changing this forces a new
-                          resource to be created.
+                          log file before it is rotated.
                         type: number
                       cpuCfsQuotaEnabled:
                         description: Is CPU CFS quota enforcement for containers enabled?
-                          Changing this forces a new resource to be created.
+                          Defaults to true.
                         type: boolean
                       cpuCfsQuotaPeriod:
-                        description: Specifies the CPU CFS quota period value. Changing
-                          this forces a new resource to be created.
+                        description: Specifies the CPU CFS quota period value.
                         type: string
                       cpuManagerPolicy:
                         description: Specifies the CPU Manager policy to use. Possible
-                          values are none and static, Changing this forces a new resource
-                          to be created.
+                          values are none and static,
                         type: string
                       imageGcHighThreshold:
                         description: Specifies the percent of disk usage above which
                           image garbage collection is always run. Must be between
-                          0 and 100. Changing this forces a new resource to be created.
+                          0 and 100.
                         type: number
                       imageGcLowThreshold:
                         description: Specifies the percent of disk usage lower than
                           which image garbage collection is never run. Must be between
-                          0 and 100. Changing this forces a new resource to be created.
+                          0 and 100.
                         type: number
                       podMaxPid:
                         description: Specifies the maximum number of processes per
-                          pod. Changing this forces a new resource to be created.
+                          pod.
                         type: number
                       topologyManagerPolicy:
                         description: Specifies the Topology Manager policy to use.
                           Possible values are none, best-effort, restricted or single-numa-node.
-                          Changing this forces a new resource to be created.
                         type: string
                     type: object
                   kubeletDiskType:
                     description: The type of disk used by kubelet. Possible values
-                      are OS and Temporary.
+                      are OS and Temporary. Changing this property requires specifying
+                      temporary_name_for_rotation.
                     type: string
                   linuxOsConfig:
                     description: A linux_os_config block as defined below. Changing
-                      this forces a new resource to be created.
+                      this requires specifying temporary_name_for_rotation.
                     properties:
                       swapFileSizeMb:
                         description: Specifies the size of swap file on each node
-                          in MB. Changing this forces a new resource to be created.
+                          in MB.
                         type: number
                       sysctlConfig:
-                        description: A sysctl_config block as defined below. Changing
-                          this forces a new resource to be created.
+                        description: A sysctl_config block as defined below.
                         properties:
                           fsAioMaxNr:
                             description: The sysctl setting fs.aio-max-nr. Must be
-                              between 65536 and 6553500. Changing this forces a new
-                              resource to be created.
+                              between 65536 and 6553500.
                             type: number
                           fsFileMax:
                             description: The sysctl setting fs.file-max. Must be between
-                              8192 and 12000500. Changing this forces a new resource
-                              to be created.
+                              8192 and 12000500.
                             type: number
                           fsInotifyMaxUserWatches:
                             description: The sysctl setting fs.inotify.max_user_watches.
-                              Must be between 781250 and 2097152. Changing this forces
-                              a new resource to be created.
+                              Must be between 781250 and 2097152.
                             type: number
                           fsNrOpen:
                             description: The sysctl setting fs.nr_open. Must be between
-                              8192 and 20000500. Changing this forces a new resource
-                              to be created.
+                              8192 and 20000500.
                             type: number
                           kernelThreadsMax:
                             description: The sysctl setting kernel.threads-max. Must
-                              be between 20 and 513785. Changing this forces a new
-                              resource to be created.
+                              be between 20 and 513785.
                             type: number
                           netCoreNetdevMaxBacklog:
                             description: The sysctl setting net.core.netdev_max_backlog.
-                              Must be between 1000 and 3240000. Changing this forces
-                              a new resource to be created.
+                              Must be between 1000 and 3240000.
                             type: number
                           netCoreOptmemMax:
                             description: The sysctl setting net.core.optmem_max. Must
-                              be between 20480 and 4194304. Changing this forces a
-                              new resource to be created.
+                              be between 20480 and 4194304.
                             type: number
                           netCoreRmemDefault:
                             description: The sysctl setting net.core.rmem_default.
-                              Must be between 212992 and 134217728. Changing this
-                              forces a new resource to be created.
+                              Must be between 212992 and 134217728.
                             type: number
                           netCoreRmemMax:
                             description: The sysctl setting net.core.rmem_max. Must
-                              be between 212992 and 134217728. Changing this forces
-                              a new resource to be created.
+                              be between 212992 and 134217728.
                             type: number
                           netCoreSomaxconn:
                             description: The sysctl setting net.core.somaxconn. Must
-                              be between 4096 and 3240000. Changing this forces a
-                              new resource to be created.
+                              be between 4096 and 3240000.
                             type: number
                           netCoreWmemDefault:
                             description: The sysctl setting net.core.wmem_default.
-                              Must be between 212992 and 134217728. Changing this
-                              forces a new resource to be created.
+                              Must be between 212992 and 134217728.
                             type: number
                           netCoreWmemMax:
                             description: The sysctl setting net.core.wmem_max. Must
-                              be between 212992 and 134217728. Changing this forces
-                              a new resource to be created.
+                              be between 212992 and 134217728.
                             type: number
                           netIpv4IpLocalPortRangeMax:
                             description: The sysctl setting net.ipv4.ip_local_port_range
-                              max value. Must be between 32768 and 65535. Changing
-                              this forces a new resource to be created.
+                              max value. Must be between 32768 and 65535.
                             type: number
                           netIpv4IpLocalPortRangeMin:
                             description: The sysctl setting net.ipv4.ip_local_port_range
-                              min value. Must be between 1024 and 60999. Changing
-                              this forces a new resource to be created.
+                              min value. Must be between 1024 and 60999.
                             type: number
                           netIpv4NeighDefaultGcThresh1:
                             description: The sysctl setting net.ipv4.neigh.default.gc_thresh1.
-                              Must be between 128 and 80000. Changing this forces
-                              a new resource to be created.
+                              Must be between 128 and 80000.
                             type: number
                           netIpv4NeighDefaultGcThresh2:
                             description: The sysctl setting net.ipv4.neigh.default.gc_thresh2.
-                              Must be between 512 and 90000. Changing this forces
-                              a new resource to be created.
+                              Must be between 512 and 90000.
                             type: number
                           netIpv4NeighDefaultGcThresh3:
                             description: The sysctl setting net.ipv4.neigh.default.gc_thresh3.
-                              Must be between 1024 and 100000. Changing this forces
-                              a new resource to be created.
+                              Must be between 1024 and 100000.
                             type: number
                           netIpv4TcpFinTimeout:
                             description: The sysctl setting net.ipv4.tcp_fin_timeout.
-                              Must be between 5 and 120. Changing this forces a new
-                              resource to be created.
+                              Must be between 5 and 120.
                             type: number
                           netIpv4TcpKeepaliveIntvl:
                             description: The sysctl setting net.ipv4.tcp_keepalive_intvl.
-                              Must be between 10 and 90. Changing this forces a new
-                              resource to be created.
+                              Must be between 10 and 90.
                             type: number
                           netIpv4TcpKeepaliveProbes:
                             description: The sysctl setting net.ipv4.tcp_keepalive_probes.
-                              Must be between 1 and 15. Changing this forces a new
-                              resource to be created.
+                              Must be between 1 and 15.
                             type: number
                           netIpv4TcpKeepaliveTime:
                             description: The sysctl setting net.ipv4.tcp_keepalive_time.
-                              Must be between 30 and 432000. Changing this forces
-                              a new resource to be created.
+                              Must be between 30 and 432000.
                             type: number
                           netIpv4TcpMaxSynBacklog:
                             description: The sysctl setting net.ipv4.tcp_max_syn_backlog.
-                              Must be between 128 and 3240000. Changing this forces
-                              a new resource to be created.
+                              Must be between 128 and 3240000.
                             type: number
                           netIpv4TcpMaxTwBuckets:
                             description: The sysctl setting net.ipv4.tcp_max_tw_buckets.
-                              Must be between 8000 and 1440000. Changing this forces
-                              a new resource to be created.
+                              Must be between 8000 and 1440000.
                             type: number
                           netIpv4TcpTwReuse:
                             description: Is sysctl setting net.ipv4.tcp_tw_reuse enabled?
-                              Changing this forces a new resource to be created.
                             type: boolean
                           netNetfilterNfConntrackBuckets:
                             description: The sysctl setting net.netfilter.nf_conntrack_buckets.
-                              Must be between 65536 and 524288. Changing this forces
-                              a new resource to be created.
+                              Must be between 65536 and 524288.
                             type: number
                           netNetfilterNfConntrackMax:
                             description: The sysctl setting net.netfilter.nf_conntrack_max.
-                              Must be between 131072 and 2097152. Changing this forces
-                              a new resource to be created.
+                              Must be between 131072 and 2097152.
                             type: number
                           vmMaxMapCount:
                             description: The sysctl setting vm.max_map_count. Must
-                              be between 65530 and 262144. Changing this forces a
-                              new resource to be created.
+                              be between 65530 and 262144.
                             type: number
                           vmSwappiness:
                             description: The sysctl setting vm.swappiness. Must be
-                              between 0 and 100. Changing this forces a new resource
-                              to be created.
+                              between 0 and 100.
                             type: number
                           vmVfsCachePressure:
                             description: The sysctl setting vm.vfs_cache_pressure.
-                              Must be between 0 and 100. Changing this forces a new
-                              resource to be created.
+                              Must be between 0 and 100.
                             type: number
                         type: object
                       transparentHugePageDefrag:
                         description: specifies the defrag configuration for Transparent
                           Huge Page. Possible values are always, defer, defer+madvise,
-                          madvise and never. Changing this forces a new resource to
-                          be created.
+                          madvise and never.
                         type: string
                       transparentHugePageEnabled:
                         description: Specifies the Transparent Huge Page enabled configuration.
-                          Possible values are always, madvise and never. Changing
-                          this forces a new resource to be created.
+                          Possible values are always, madvise and never.
                         type: string
                     type: object
                   maxCount:
@@ -3235,10 +3032,8 @@ spec:
                     type: number
                   maxPods:
                     description: The maximum number of pods that can run on each agent.
-                      Changing this forces a new resource to be created.
+                      Changing this property requires specifying temporary_name_for_rotation.
                     type: number
-                  messageOfTheDay:
-                    type: string
                   minCount:
                     description: The minimum number of nodes which should exist within
                       this Node Pool. Valid values are between 0 and 1000 and must
@@ -3296,9 +3091,13 @@ spec:
                         type: object
                         x-kubernetes-map-type: granular
                     type: object
+                  nodePublicIpEnabled:
+                    description: Should each node have a Public IP Address? Changing
+                      this property requires specifying temporary_name_for_rotation.
+                    type: boolean
                   nodePublicIpPrefixId:
                     description: Resource ID for the Public IP Addresses Prefix for
-                      the nodes in this Node Pool. enable_node_public_ip should be
+                      the nodes in this Node Pool. node_public_ip_enabled should be
                       true. Changing this forces a new resource to be created.
                     type: string
                   nodeTaints:
@@ -3318,12 +3117,12 @@ spec:
                     type: string
                   osDiskSizeGb:
                     description: The Agent Operating System disk size in GB. Changing
-                      this forces a new resource to be created.
+                      this property requires specifying temporary_name_for_rotation.
                     type: number
                   osDiskType:
                     description: The type of disk which should be used for the Operating
                       System. Possible values are Ephemeral and Managed. Defaults
-                      to Managed. Changing this forces a new resource to be created.
+                      to Managed. Changing this property requires specifying temporary_name_for_rotation.
                     type: string
                   osSku:
                     description: Specifies the OS SKU used by the agent pool. Possible
@@ -3341,7 +3140,7 @@ spec:
                     type: string
                   podSubnetId:
                     description: The ID of the Subnet where the pods in the Node Pool
-                      should exist. Changing this forces a new resource to be created.
+                      should exist. Changing this property requires specifying temporary_name_for_rotation.
                     type: string
                   podSubnetIdRef:
                     description: Reference to a Subnet in network to populate podSubnetId.
@@ -3435,7 +3234,7 @@ spec:
                     type: string
                   snapshotId:
                     description: The ID of the Snapshot which should be used to create
-                      this Node Pool. Changing this forces a new resource to be created.
+                      this Node Pool. Changing this property requires specifying temporary_name_for_rotation.
                     type: string
                   spotMaxPrice:
                     description: The maximum price you're willing to pay in USD per
@@ -3450,11 +3249,16 @@ spec:
                     description: A mapping of tags to assign to the resource.
                     type: object
                     x-kubernetes-map-type: granular
+                  temporaryNameForRotation:
+                    description: Specifies the name of the temporary node pool used
+                      to cycle the node pool when one of the relevant properties are
+                      updated.
+                    type: string
                   ultraSsdEnabled:
                     description: Used to specify whether the UltraSSD is enabled in
                       the Node Pool. Defaults to false. See the documentation for
-                      more information. Changing this forces a new resource to be
-                      created.
+                      more information. Changing this property requires specifying
+                      temporary_name_for_rotation.
                     type: boolean
                   upgradeSettings:
                     description: A upgrade_settings block as documented below.
@@ -3473,17 +3277,16 @@ spec:
                       nodeSoakDurationInMinutes:
                         description: The amount of time in minutes to wait after draining
                           a node and before reimaging and moving on to next node.
-                          Defaults to 0.
                         type: number
                     type: object
                   vmSize:
                     description: The SKU which should be used for the Virtual Machines
-                      used in this Node Pool. Changing this forces a new resource
-                      to be created.
+                      used in this Node Pool. Changing this property requires specifying
+                      temporary_name_for_rotation.
                     type: string
                   vnetSubnetId:
                     description: The ID of the Subnet where this Node Pool should
-                      exist. Changing this forces a new resource to be created.
+                      exist. Changing this property requires specifying temporary_name_for_rotation.
                     type: string
                   vnetSubnetIdRef:
                     description: Reference to a Subnet in network to populate vnetSubnetId.
@@ -3576,7 +3379,7 @@ spec:
                   zones:
                     description: Specifies a list of Availability Zones in which this
                       Kubernetes Cluster Node Pool should be located. Changing this
-                      forces a new Kubernetes Cluster Node Pool to be created.
+                      property requires specifying temporary_name_for_rotation.
                     items:
                       type: string
                     type: array
@@ -3749,35 +3552,20 @@ spec:
             required:
             - forProvider
             type: object
-            x-kubernetes-validations:
-            - message: spec.forProvider.vmSize is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.vmSize)
-                || (has(self.initProvider) && has(self.initProvider.vmSize))'
           status:
             description: KubernetesClusterNodePoolStatus defines the observed state
               of KubernetesClusterNodePool.
             properties:
               atProvider:
                 properties:
+                  autoScalingEnabled:
+                    description: Whether to enable auto-scaler.
+                    type: boolean
                   capacityReservationGroupId:
                     description: Specifies the ID of the Capacity Reservation Group
                       where this Node Pool should exist. Changing this forces a new
                       resource to be created.
                     type: string
-                  customCaTrustEnabled:
-                    type: boolean
-                  enableAutoScaling:
-                    description: Whether to enable auto-scaler.
-                    type: boolean
-                  enableHostEncryption:
-                    description: Should the nodes in this Node Pool have host encryption
-                      enabled? Changing this forces a new resource to be created.
-                    type: boolean
-                  enableNodePublicIp:
-                    description: Should each node have a Public IP Address? Changing
-                      this forces a new resource to be created.
-                    type: boolean
                   evictionPolicy:
                     description: The Eviction Policy which should be used for Virtual
                       Machines within the Virtual Machine Scale Set powering this
@@ -3786,14 +3574,18 @@ spec:
                     type: string
                   fipsEnabled:
                     description: Should the nodes in this Node Pool have Federal Information
-                      Processing Standard enabled? Changing this forces a new resource
-                      to be created.
+                      Processing Standard enabled? Changing this property requires
+                      specifying temporary_name_for_rotation.
                     type: boolean
                   gpuInstance:
                     description: Specifies the GPU MIG instance profile for supported
                       GPU VM SKU. The allowed values are MIG1g, MIG2g, MIG3g, MIG4g
                       and MIG7g. Changing this forces a new resource to be created.
                     type: string
+                  hostEncryptionEnabled:
+                    description: Should the nodes in this Node Pool have host encryption
+                      enabled? Changing this property requires specifying temporary_name_for_rotation.
+                    type: boolean
                   hostGroupId:
                     description: The fully qualified resource ID of the Dedicated
                       Host Group to provision virtual machines from. Changing this
@@ -3804,12 +3596,11 @@ spec:
                     type: string
                   kubeletConfig:
                     description: A kubelet_config block as defined below. Changing
-                      this forces a new resource to be created.
+                      this requires specifying temporary_name_for_rotation.
                     properties:
                       allowedUnsafeSysctls:
                         description: Specifies the allow list of unsafe sysctls command
-                          or patterns (ending in *). Changing this forces a new resource
-                          to be created.
+                          or patterns (ending in *).
                         items:
                           type: string
                         type: array
@@ -3817,49 +3608,46 @@ spec:
                       containerLogMaxLine:
                         description: Specifies the maximum number of container log
                           files that can be present for a container. must be at least
-                          2. Changing this forces a new resource to be created.
+                          2.
                         type: number
                       containerLogMaxSizeMb:
                         description: Specifies the maximum size (e.g. 10MB) of container
-                          log file before it is rotated. Changing this forces a new
-                          resource to be created.
+                          log file before it is rotated.
                         type: number
                       cpuCfsQuotaEnabled:
                         description: Is CPU CFS quota enforcement for containers enabled?
-                          Changing this forces a new resource to be created.
+                          Defaults to true.
                         type: boolean
                       cpuCfsQuotaPeriod:
-                        description: Specifies the CPU CFS quota period value. Changing
-                          this forces a new resource to be created.
+                        description: Specifies the CPU CFS quota period value.
                         type: string
                       cpuManagerPolicy:
                         description: Specifies the CPU Manager policy to use. Possible
-                          values are none and static, Changing this forces a new resource
-                          to be created.
+                          values are none and static,
                         type: string
                       imageGcHighThreshold:
                         description: Specifies the percent of disk usage above which
                           image garbage collection is always run. Must be between
-                          0 and 100. Changing this forces a new resource to be created.
+                          0 and 100.
                         type: number
                       imageGcLowThreshold:
                         description: Specifies the percent of disk usage lower than
                           which image garbage collection is never run. Must be between
-                          0 and 100. Changing this forces a new resource to be created.
+                          0 and 100.
                         type: number
                       podMaxPid:
                         description: Specifies the maximum number of processes per
-                          pod. Changing this forces a new resource to be created.
+                          pod.
                         type: number
                       topologyManagerPolicy:
                         description: Specifies the Topology Manager policy to use.
                           Possible values are none, best-effort, restricted or single-numa-node.
-                          Changing this forces a new resource to be created.
                         type: string
                     type: object
                   kubeletDiskType:
                     description: The type of disk used by kubelet. Possible values
-                      are OS and Temporary.
+                      are OS and Temporary. Changing this property requires specifying
+                      temporary_name_for_rotation.
                     type: string
                   kubernetesClusterId:
                     description: The ID of the Kubernetes Cluster where this Node
@@ -3868,171 +3656,139 @@ spec:
                     type: string
                   linuxOsConfig:
                     description: A linux_os_config block as defined below. Changing
-                      this forces a new resource to be created.
+                      this requires specifying temporary_name_for_rotation.
                     properties:
                       swapFileSizeMb:
                         description: Specifies the size of swap file on each node
-                          in MB. Changing this forces a new resource to be created.
+                          in MB.
                         type: number
                       sysctlConfig:
-                        description: A sysctl_config block as defined below. Changing
-                          this forces a new resource to be created.
+                        description: A sysctl_config block as defined below.
                         properties:
                           fsAioMaxNr:
                             description: The sysctl setting fs.aio-max-nr. Must be
-                              between 65536 and 6553500. Changing this forces a new
-                              resource to be created.
+                              between 65536 and 6553500.
                             type: number
                           fsFileMax:
                             description: The sysctl setting fs.file-max. Must be between
-                              8192 and 12000500. Changing this forces a new resource
-                              to be created.
+                              8192 and 12000500.
                             type: number
                           fsInotifyMaxUserWatches:
                             description: The sysctl setting fs.inotify.max_user_watches.
-                              Must be between 781250 and 2097152. Changing this forces
-                              a new resource to be created.
+                              Must be between 781250 and 2097152.
                             type: number
                           fsNrOpen:
                             description: The sysctl setting fs.nr_open. Must be between
-                              8192 and 20000500. Changing this forces a new resource
-                              to be created.
+                              8192 and 20000500.
                             type: number
                           kernelThreadsMax:
                             description: The sysctl setting kernel.threads-max. Must
-                              be between 20 and 513785. Changing this forces a new
-                              resource to be created.
+                              be between 20 and 513785.
                             type: number
                           netCoreNetdevMaxBacklog:
                             description: The sysctl setting net.core.netdev_max_backlog.
-                              Must be between 1000 and 3240000. Changing this forces
-                              a new resource to be created.
+                              Must be between 1000 and 3240000.
                             type: number
                           netCoreOptmemMax:
                             description: The sysctl setting net.core.optmem_max. Must
-                              be between 20480 and 4194304. Changing this forces a
-                              new resource to be created.
+                              be between 20480 and 4194304.
                             type: number
                           netCoreRmemDefault:
                             description: The sysctl setting net.core.rmem_default.
-                              Must be between 212992 and 134217728. Changing this
-                              forces a new resource to be created.
+                              Must be between 212992 and 134217728.
                             type: number
                           netCoreRmemMax:
                             description: The sysctl setting net.core.rmem_max. Must
-                              be between 212992 and 134217728. Changing this forces
-                              a new resource to be created.
+                              be between 212992 and 134217728.
                             type: number
                           netCoreSomaxconn:
                             description: The sysctl setting net.core.somaxconn. Must
-                              be between 4096 and 3240000. Changing this forces a
-                              new resource to be created.
+                              be between 4096 and 3240000.
                             type: number
                           netCoreWmemDefault:
                             description: The sysctl setting net.core.wmem_default.
-                              Must be between 212992 and 134217728. Changing this
-                              forces a new resource to be created.
+                              Must be between 212992 and 134217728.
                             type: number
                           netCoreWmemMax:
                             description: The sysctl setting net.core.wmem_max. Must
-                              be between 212992 and 134217728. Changing this forces
-                              a new resource to be created.
+                              be between 212992 and 134217728.
                             type: number
                           netIpv4IpLocalPortRangeMax:
                             description: The sysctl setting net.ipv4.ip_local_port_range
-                              max value. Must be between 32768 and 65535. Changing
-                              this forces a new resource to be created.
+                              max value. Must be between 32768 and 65535.
                             type: number
                           netIpv4IpLocalPortRangeMin:
                             description: The sysctl setting net.ipv4.ip_local_port_range
-                              min value. Must be between 1024 and 60999. Changing
-                              this forces a new resource to be created.
+                              min value. Must be between 1024 and 60999.
                             type: number
                           netIpv4NeighDefaultGcThresh1:
                             description: The sysctl setting net.ipv4.neigh.default.gc_thresh1.
-                              Must be between 128 and 80000. Changing this forces
-                              a new resource to be created.
+                              Must be between 128 and 80000.
                             type: number
                           netIpv4NeighDefaultGcThresh2:
                             description: The sysctl setting net.ipv4.neigh.default.gc_thresh2.
-                              Must be between 512 and 90000. Changing this forces
-                              a new resource to be created.
+                              Must be between 512 and 90000.
                             type: number
                           netIpv4NeighDefaultGcThresh3:
                             description: The sysctl setting net.ipv4.neigh.default.gc_thresh3.
-                              Must be between 1024 and 100000. Changing this forces
-                              a new resource to be created.
+                              Must be between 1024 and 100000.
                             type: number
                           netIpv4TcpFinTimeout:
                             description: The sysctl setting net.ipv4.tcp_fin_timeout.
-                              Must be between 5 and 120. Changing this forces a new
-                              resource to be created.
+                              Must be between 5 and 120.
                             type: number
                           netIpv4TcpKeepaliveIntvl:
                             description: The sysctl setting net.ipv4.tcp_keepalive_intvl.
-                              Must be between 10 and 90. Changing this forces a new
-                              resource to be created.
+                              Must be between 10 and 90.
                             type: number
                           netIpv4TcpKeepaliveProbes:
                             description: The sysctl setting net.ipv4.tcp_keepalive_probes.
-                              Must be between 1 and 15. Changing this forces a new
-                              resource to be created.
+                              Must be between 1 and 15.
                             type: number
                           netIpv4TcpKeepaliveTime:
                             description: The sysctl setting net.ipv4.tcp_keepalive_time.
-                              Must be between 30 and 432000. Changing this forces
-                              a new resource to be created.
+                              Must be between 30 and 432000.
                             type: number
                           netIpv4TcpMaxSynBacklog:
                             description: The sysctl setting net.ipv4.tcp_max_syn_backlog.
-                              Must be between 128 and 3240000. Changing this forces
-                              a new resource to be created.
+                              Must be between 128 and 3240000.
                             type: number
                           netIpv4TcpMaxTwBuckets:
                             description: The sysctl setting net.ipv4.tcp_max_tw_buckets.
-                              Must be between 8000 and 1440000. Changing this forces
-                              a new resource to be created.
+                              Must be between 8000 and 1440000.
                             type: number
                           netIpv4TcpTwReuse:
                             description: Is sysctl setting net.ipv4.tcp_tw_reuse enabled?
-                              Changing this forces a new resource to be created.
                             type: boolean
                           netNetfilterNfConntrackBuckets:
                             description: The sysctl setting net.netfilter.nf_conntrack_buckets.
-                              Must be between 65536 and 524288. Changing this forces
-                              a new resource to be created.
+                              Must be between 65536 and 524288.
                             type: number
                           netNetfilterNfConntrackMax:
                             description: The sysctl setting net.netfilter.nf_conntrack_max.
-                              Must be between 131072 and 2097152. Changing this forces
-                              a new resource to be created.
+                              Must be between 131072 and 2097152.
                             type: number
                           vmMaxMapCount:
                             description: The sysctl setting vm.max_map_count. Must
-                              be between 65530 and 262144. Changing this forces a
-                              new resource to be created.
+                              be between 65530 and 262144.
                             type: number
                           vmSwappiness:
                             description: The sysctl setting vm.swappiness. Must be
-                              between 0 and 100. Changing this forces a new resource
-                              to be created.
+                              between 0 and 100.
                             type: number
                           vmVfsCachePressure:
                             description: The sysctl setting vm.vfs_cache_pressure.
-                              Must be between 0 and 100. Changing this forces a new
-                              resource to be created.
+                              Must be between 0 and 100.
                             type: number
                         type: object
                       transparentHugePageDefrag:
                         description: specifies the defrag configuration for Transparent
                           Huge Page. Possible values are always, defer, defer+madvise,
-                          madvise and never. Changing this forces a new resource to
-                          be created.
+                          madvise and never.
                         type: string
                       transparentHugePageEnabled:
                         description: Specifies the Transparent Huge Page enabled configuration.
-                          Possible values are always, madvise and never. Changing
-                          this forces a new resource to be created.
+                          Possible values are always, madvise and never.
                         type: string
                     type: object
                   maxCount:
@@ -4042,10 +3798,8 @@ spec:
                     type: number
                   maxPods:
                     description: The maximum number of pods that can run on each agent.
-                      Changing this forces a new resource to be created.
+                      Changing this property requires specifying temporary_name_for_rotation.
                     type: number
-                  messageOfTheDay:
-                    type: string
                   minCount:
                     description: The minimum number of nodes which should exist within
                       this Node Pool. Valid values are between 0 and 1000 and must
@@ -4103,9 +3857,13 @@ spec:
                         type: object
                         x-kubernetes-map-type: granular
                     type: object
+                  nodePublicIpEnabled:
+                    description: Should each node have a Public IP Address? Changing
+                      this property requires specifying temporary_name_for_rotation.
+                    type: boolean
                   nodePublicIpPrefixId:
                     description: Resource ID for the Public IP Addresses Prefix for
-                      the nodes in this Node Pool. enable_node_public_ip should be
+                      the nodes in this Node Pool. node_public_ip_enabled should be
                       true. Changing this forces a new resource to be created.
                     type: string
                   nodeTaints:
@@ -4125,12 +3883,12 @@ spec:
                     type: string
                   osDiskSizeGb:
                     description: The Agent Operating System disk size in GB. Changing
-                      this forces a new resource to be created.
+                      this property requires specifying temporary_name_for_rotation.
                     type: number
                   osDiskType:
                     description: The type of disk which should be used for the Operating
                       System. Possible values are Ephemeral and Managed. Defaults
-                      to Managed. Changing this forces a new resource to be created.
+                      to Managed. Changing this property requires specifying temporary_name_for_rotation.
                     type: string
                   osSku:
                     description: Specifies the OS SKU used by the agent pool. Possible
@@ -4148,7 +3906,7 @@ spec:
                     type: string
                   podSubnetId:
                     description: The ID of the Subnet where the pods in the Node Pool
-                      should exist. Changing this forces a new resource to be created.
+                      should exist. Changing this property requires specifying temporary_name_for_rotation.
                     type: string
                   priority:
                     description: The Priority for Virtual Machines within the Virtual
@@ -4168,7 +3926,7 @@ spec:
                     type: string
                   snapshotId:
                     description: The ID of the Snapshot which should be used to create
-                      this Node Pool. Changing this forces a new resource to be created.
+                      this Node Pool. Changing this property requires specifying temporary_name_for_rotation.
                     type: string
                   spotMaxPrice:
                     description: The maximum price you're willing to pay in USD per
@@ -4183,11 +3941,16 @@ spec:
                     description: A mapping of tags to assign to the resource.
                     type: object
                     x-kubernetes-map-type: granular
+                  temporaryNameForRotation:
+                    description: Specifies the name of the temporary node pool used
+                      to cycle the node pool when one of the relevant properties are
+                      updated.
+                    type: string
                   ultraSsdEnabled:
                     description: Used to specify whether the UltraSSD is enabled in
                       the Node Pool. Defaults to false. See the documentation for
-                      more information. Changing this forces a new resource to be
-                      created.
+                      more information. Changing this property requires specifying
+                      temporary_name_for_rotation.
                     type: boolean
                   upgradeSettings:
                     description: A upgrade_settings block as documented below.
@@ -4206,17 +3969,16 @@ spec:
                       nodeSoakDurationInMinutes:
                         description: The amount of time in minutes to wait after draining
                           a node and before reimaging and moving on to next node.
-                          Defaults to 0.
                         type: number
                     type: object
                   vmSize:
                     description: The SKU which should be used for the Virtual Machines
-                      used in this Node Pool. Changing this forces a new resource
-                      to be created.
+                      used in this Node Pool. Changing this property requires specifying
+                      temporary_name_for_rotation.
                     type: string
                   vnetSubnetId:
                     description: The ID of the Subnet where this Node Pool should
-                      exist. Changing this forces a new resource to be created.
+                      exist. Changing this property requires specifying temporary_name_for_rotation.
                     type: string
                   windowsProfile:
                     description: A windows_profile block as documented below. Changing
@@ -4235,7 +3997,7 @@ spec:
                   zones:
                     description: Specifies a list of Availability Zones in which this
                       Kubernetes Cluster Node Pool should be located. Changing this
-                      forces a new Kubernetes Cluster Node Pool to be created.
+                      property requires specifying temporary_name_for_rotation.
                     items:
                       type: string
                     type: array

@@ -13,9 +13,6 @@ func (tr *NamespaceAuthorizationRule) Hub() {}
 func (tr *NamespaceDisasterRecoveryConfig) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *NamespaceNetworkRuleSet) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *Queue) Hub() {}
 
 // Hub marks this type as a conversion hub.

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.14.0
+    controller-gen.kubebuilder.io/version: v0.16.5
   name: volumes.netapp.azure.upbound.io
 spec:
   group: netapp.azure.upbound.io
@@ -159,9 +159,9 @@ spec:
                   createFromSnapshotResourceId:
                     description: 'Creates volume from snapshot. Following properties
                       must be the same as the original volume where the snapshot was
-                      taken from: protocols, subnet_id, location, service_level, resource_group_name,
-                      account_name and pool_name. Changing this forces a new resource
-                      to be created.'
+                      taken from: protocols, subnet_id, location, service_level, resource_group_name
+                      and account_name. Changing this forces a new resource to be
+                      created.'
                     type: string
                   createFromSnapshotResourceIdRef:
                     description: Reference to a Snapshot in netapp to populate createFromSnapshotResourceId.
@@ -237,6 +237,28 @@ spec:
                             type: string
                         type: object
                     type: object
+                  dataProtectionBackupPolicy:
+                    description: A data_protection_backup_policy block as defined
+                      below.
+                    items:
+                      properties:
+                        backupPolicyId:
+                          description: |-
+                            Resource ID of the backup policy to apply to the volume.
+                            The ID of the backup policy to associate with this volume.
+                          type: string
+                        backupVaultId:
+                          description: |-
+                            Resource ID of the backup backup vault to associate this volume to.
+                            The ID of the backup vault to associate with this volume.
+                          type: string
+                        policyEnabled:
+                          description: |-
+                            Enables the backup policy on the volume, defaults to true.
+                            If set to false, the backup policy will not be enabled on this volume, thus disabling scheduled backups.
+                          type: boolean
+                      type: object
+                    type: array
                   dataProtectionReplication:
                     description: A data_protection_replication block as defined below.
                       Changing this forces a new resource to be created.
@@ -486,7 +508,7 @@ spec:
                     type: array
                   kerberosEnabled:
                     description: |-
-                      Enable to allow Kerberos secured volumes. Requires appropriate export rules.
+                      Enable to allow Kerberos secured volumes. Requires appropriate export rules. Changing this forces a new resource to be created.
                       Enable to allow Kerberos secured volumes. Requires appropriate export rules as well as the parent `azurerm_netapp_account` having a defined AD connection.
                     type: boolean
                   keyVaultPrivateEndpointId:
@@ -494,6 +516,11 @@ spec:
                       when using customer-managed keys. This is required with encryption_key_source.
                       Changing this forces a new resource to be created.
                     type: string
+                  largeVolumeEnabled:
+                    description: |-
+                      A boolean specifying if the volume is a large volume. Defaults to false.
+                      Indicates whether the volume is a large volume.
+                    type: boolean
                   location:
                     description: Specifies the supported Azure location where the
                       resource exists. Changing this forces a new resource to be created.
@@ -507,8 +534,7 @@ spec:
                     type: string
                   poolName:
                     description: The name of the NetApp pool in which the NetApp Volume
-                      should be created. Changing this forces a new resource to be
-                      created.
+                      should be created.
                     type: string
                   poolNameRef:
                     description: Reference to a Pool in netapp to populate poolName.
@@ -686,35 +712,32 @@ spec:
                     type: string
                   serviceLevel:
                     description: The target performance of the file system. Valid
-                      values include Premium, Standard, or Ultra. Changing this forces
-                      a new resource to be created.
+                      values include Premium, Standard, or Ultra.
                     type: string
+                  smb3ProtocolEncryptionEnabled:
+                    description: |-
+                      Enable SMB encryption. Changing this forces a new resource to be created.
+                      SMB3 encryption option should be used only for SMB/DualProtocol volumes. Using it for any other workloads is not supported.
+                    type: boolean
                   smbAccessBasedEnumerationEnabled:
-                    description: Limits enumeration of files and folders (that is,
-                      listing the contents) in SMB only to users with allowed access
-                      on the share. For instance, if a user doesn't have access to
-                      read a file or folder in a share with access-based enumeration
-                      enabled, then the file or folder doesn't show up in directory
-                      listings. Defaults to false. For more information, please refer
-                      to Understand NAS share permissions in Azure NetApp Files
+                    description: |-
+                      Limits enumeration of files and folders (that is, listing the contents) in SMB only to users with allowed access on the share. For instance, if a user doesn't have access to read a file or folder in a share with access-based enumeration enabled, then the file or folder doesn't show up in directory listings. Defaults to false. For more information, please refer to Understand NAS share permissions in Azure NetApp Files
+                      Enable access based enumeration setting for SMB/Dual Protocol volume. When enabled, users who do not have permission to access a shared folder or file underneath it, do not see that shared resource displayed in their environment.
                     type: boolean
                   smbContinuousAvailabilityEnabled:
                     description: |-
-                      Enable SMB Continuous Availability.
+                      Enable SMB Continuous Availability. Changing this forces a new resource to be created.
                       Continuous availability option should be used only for SQL and FSLogix workloads. Using it for any other SMB workloads is not supported.
                     type: boolean
                   smbNonBrowsableEnabled:
-                    description: Limits clients from browsing for an SMB share by
-                      hiding the share from view in Windows Explorer or when listing
-                      shares in "net view." Only end users that know the absolute
-                      paths to the share are able to find the share. Defaults to false.
-                      For more information, please refer to Understand NAS share permissions
-                      in Azure NetApp Files
+                    description: |-
+                      Limits clients from browsing for an SMB share by hiding the share from view in Windows Explorer or when listing shares in "net view." Only end users that know the absolute paths to the share are able to find the share. Defaults to false. For more information, please refer to Understand NAS share permissions in Azure NetApp Files
+                      Enable non browsable share setting for SMB/Dual Protocol volume. When enabled, it restricts windows clients to browse the share
                     type: boolean
                   snapshotDirectoryVisible:
                     description: Specifies whether the .snapshot (NFS clients) or
-                      ~snapshot (SMB clients) path of a volume is visible, default
-                      value is true.
+                      ~snapshot (SMB clients) path of a volume is visible. Defaults
+                      to true.
                     type: boolean
                   storageQuotaInGb:
                     description: The maximum Storage Quota allowed for a file system
@@ -842,9 +865,9 @@ spec:
                   createFromSnapshotResourceId:
                     description: 'Creates volume from snapshot. Following properties
                       must be the same as the original volume where the snapshot was
-                      taken from: protocols, subnet_id, location, service_level, resource_group_name,
-                      account_name and pool_name. Changing this forces a new resource
-                      to be created.'
+                      taken from: protocols, subnet_id, location, service_level, resource_group_name
+                      and account_name. Changing this forces a new resource to be
+                      created.'
                     type: string
                   createFromSnapshotResourceIdRef:
                     description: Reference to a Snapshot in netapp to populate createFromSnapshotResourceId.
@@ -920,6 +943,28 @@ spec:
                             type: string
                         type: object
                     type: object
+                  dataProtectionBackupPolicy:
+                    description: A data_protection_backup_policy block as defined
+                      below.
+                    items:
+                      properties:
+                        backupPolicyId:
+                          description: |-
+                            Resource ID of the backup policy to apply to the volume.
+                            The ID of the backup policy to associate with this volume.
+                          type: string
+                        backupVaultId:
+                          description: |-
+                            Resource ID of the backup backup vault to associate this volume to.
+                            The ID of the backup vault to associate with this volume.
+                          type: string
+                        policyEnabled:
+                          description: |-
+                            Enables the backup policy on the volume, defaults to true.
+                            If set to false, the backup policy will not be enabled on this volume, thus disabling scheduled backups.
+                          type: boolean
+                      type: object
+                    type: array
                   dataProtectionReplication:
                     description: A data_protection_replication block as defined below.
                       Changing this forces a new resource to be created.
@@ -1169,7 +1214,7 @@ spec:
                     type: array
                   kerberosEnabled:
                     description: |-
-                      Enable to allow Kerberos secured volumes. Requires appropriate export rules.
+                      Enable to allow Kerberos secured volumes. Requires appropriate export rules. Changing this forces a new resource to be created.
                       Enable to allow Kerberos secured volumes. Requires appropriate export rules as well as the parent `azurerm_netapp_account` having a defined AD connection.
                     type: boolean
                   keyVaultPrivateEndpointId:
@@ -1177,6 +1222,11 @@ spec:
                       when using customer-managed keys. This is required with encryption_key_source.
                       Changing this forces a new resource to be created.
                     type: string
+                  largeVolumeEnabled:
+                    description: |-
+                      A boolean specifying if the volume is a large volume. Defaults to false.
+                      Indicates whether the volume is a large volume.
+                    type: boolean
                   location:
                     description: Specifies the supported Azure location where the
                       resource exists. Changing this forces a new resource to be created.
@@ -1209,35 +1259,32 @@ spec:
                     type: string
                   serviceLevel:
                     description: The target performance of the file system. Valid
-                      values include Premium, Standard, or Ultra. Changing this forces
-                      a new resource to be created.
+                      values include Premium, Standard, or Ultra.
                     type: string
+                  smb3ProtocolEncryptionEnabled:
+                    description: |-
+                      Enable SMB encryption. Changing this forces a new resource to be created.
+                      SMB3 encryption option should be used only for SMB/DualProtocol volumes. Using it for any other workloads is not supported.
+                    type: boolean
                   smbAccessBasedEnumerationEnabled:
-                    description: Limits enumeration of files and folders (that is,
-                      listing the contents) in SMB only to users with allowed access
-                      on the share. For instance, if a user doesn't have access to
-                      read a file or folder in a share with access-based enumeration
-                      enabled, then the file or folder doesn't show up in directory
-                      listings. Defaults to false. For more information, please refer
-                      to Understand NAS share permissions in Azure NetApp Files
+                    description: |-
+                      Limits enumeration of files and folders (that is, listing the contents) in SMB only to users with allowed access on the share. For instance, if a user doesn't have access to read a file or folder in a share with access-based enumeration enabled, then the file or folder doesn't show up in directory listings. Defaults to false. For more information, please refer to Understand NAS share permissions in Azure NetApp Files
+                      Enable access based enumeration setting for SMB/Dual Protocol volume. When enabled, users who do not have permission to access a shared folder or file underneath it, do not see that shared resource displayed in their environment.
                     type: boolean
                   smbContinuousAvailabilityEnabled:
                     description: |-
-                      Enable SMB Continuous Availability.
+                      Enable SMB Continuous Availability. Changing this forces a new resource to be created.
                       Continuous availability option should be used only for SQL and FSLogix workloads. Using it for any other SMB workloads is not supported.
                     type: boolean
                   smbNonBrowsableEnabled:
-                    description: Limits clients from browsing for an SMB share by
-                      hiding the share from view in Windows Explorer or when listing
-                      shares in "net view." Only end users that know the absolute
-                      paths to the share are able to find the share. Defaults to false.
-                      For more information, please refer to Understand NAS share permissions
-                      in Azure NetApp Files
+                    description: |-
+                      Limits clients from browsing for an SMB share by hiding the share from view in Windows Explorer or when listing shares in "net view." Only end users that know the absolute paths to the share are able to find the share. Defaults to false. For more information, please refer to Understand NAS share permissions in Azure NetApp Files
+                      Enable non browsable share setting for SMB/Dual Protocol volume. When enabled, it restricts windows clients to browse the share
                     type: boolean
                   snapshotDirectoryVisible:
                     description: Specifies whether the .snapshot (NFS clients) or
-                      ~snapshot (SMB clients) path of a volume is visible, default
-                      value is true.
+                      ~snapshot (SMB clients) path of a volume is visible. Defaults
+                      to true.
                     type: boolean
                   storageQuotaInGb:
                     description: The maximum Storage Quota allowed for a file system
@@ -1546,10 +1593,32 @@ spec:
                   createFromSnapshotResourceId:
                     description: 'Creates volume from snapshot. Following properties
                       must be the same as the original volume where the snapshot was
-                      taken from: protocols, subnet_id, location, service_level, resource_group_name,
-                      account_name and pool_name. Changing this forces a new resource
-                      to be created.'
+                      taken from: protocols, subnet_id, location, service_level, resource_group_name
+                      and account_name. Changing this forces a new resource to be
+                      created.'
                     type: string
+                  dataProtectionBackupPolicy:
+                    description: A data_protection_backup_policy block as defined
+                      below.
+                    items:
+                      properties:
+                        backupPolicyId:
+                          description: |-
+                            Resource ID of the backup policy to apply to the volume.
+                            The ID of the backup policy to associate with this volume.
+                          type: string
+                        backupVaultId:
+                          description: |-
+                            Resource ID of the backup backup vault to associate this volume to.
+                            The ID of the backup vault to associate with this volume.
+                          type: string
+                        policyEnabled:
+                          description: |-
+                            Enables the backup policy on the volume, defaults to true.
+                            If set to false, the backup policy will not be enabled on this volume, thus disabling scheduled backups.
+                          type: boolean
+                      type: object
+                    type: array
                   dataProtectionReplication:
                     description: A data_protection_replication block as defined below.
                       Changing this forces a new resource to be created.
@@ -1650,7 +1719,7 @@ spec:
                     type: string
                   kerberosEnabled:
                     description: |-
-                      Enable to allow Kerberos secured volumes. Requires appropriate export rules.
+                      Enable to allow Kerberos secured volumes. Requires appropriate export rules. Changing this forces a new resource to be created.
                       Enable to allow Kerberos secured volumes. Requires appropriate export rules as well as the parent `azurerm_netapp_account` having a defined AD connection.
                     type: boolean
                   keyVaultPrivateEndpointId:
@@ -1658,6 +1727,11 @@ spec:
                       when using customer-managed keys. This is required with encryption_key_source.
                       Changing this forces a new resource to be created.
                     type: string
+                  largeVolumeEnabled:
+                    description: |-
+                      A boolean specifying if the volume is a large volume. Defaults to false.
+                      Indicates whether the volume is a large volume.
+                    type: boolean
                   location:
                     description: Specifies the supported Azure location where the
                       resource exists. Changing this forces a new resource to be created.
@@ -1677,8 +1751,7 @@ spec:
                     type: string
                   poolName:
                     description: The name of the NetApp pool in which the NetApp Volume
-                      should be created. Changing this forces a new resource to be
-                      created.
+                      should be created.
                     type: string
                   protocols:
                     description: The target volume protocol expressed as a list. Supported
@@ -1706,35 +1779,32 @@ spec:
                     type: string
                   serviceLevel:
                     description: The target performance of the file system. Valid
-                      values include Premium, Standard, or Ultra. Changing this forces
-                      a new resource to be created.
+                      values include Premium, Standard, or Ultra.
                     type: string
+                  smb3ProtocolEncryptionEnabled:
+                    description: |-
+                      Enable SMB encryption. Changing this forces a new resource to be created.
+                      SMB3 encryption option should be used only for SMB/DualProtocol volumes. Using it for any other workloads is not supported.
+                    type: boolean
                   smbAccessBasedEnumerationEnabled:
-                    description: Limits enumeration of files and folders (that is,
-                      listing the contents) in SMB only to users with allowed access
-                      on the share. For instance, if a user doesn't have access to
-                      read a file or folder in a share with access-based enumeration
-                      enabled, then the file or folder doesn't show up in directory
-                      listings. Defaults to false. For more information, please refer
-                      to Understand NAS share permissions in Azure NetApp Files
+                    description: |-
+                      Limits enumeration of files and folders (that is, listing the contents) in SMB only to users with allowed access on the share. For instance, if a user doesn't have access to read a file or folder in a share with access-based enumeration enabled, then the file or folder doesn't show up in directory listings. Defaults to false. For more information, please refer to Understand NAS share permissions in Azure NetApp Files
+                      Enable access based enumeration setting for SMB/Dual Protocol volume. When enabled, users who do not have permission to access a shared folder or file underneath it, do not see that shared resource displayed in their environment.
                     type: boolean
                   smbContinuousAvailabilityEnabled:
                     description: |-
-                      Enable SMB Continuous Availability.
+                      Enable SMB Continuous Availability. Changing this forces a new resource to be created.
                       Continuous availability option should be used only for SQL and FSLogix workloads. Using it for any other SMB workloads is not supported.
                     type: boolean
                   smbNonBrowsableEnabled:
-                    description: Limits clients from browsing for an SMB share by
-                      hiding the share from view in Windows Explorer or when listing
-                      shares in "net view." Only end users that know the absolute
-                      paths to the share are able to find the share. Defaults to false.
-                      For more information, please refer to Understand NAS share permissions
-                      in Azure NetApp Files
+                    description: |-
+                      Limits clients from browsing for an SMB share by hiding the share from view in Windows Explorer or when listing shares in "net view." Only end users that know the absolute paths to the share are able to find the share. Defaults to false. For more information, please refer to Understand NAS share permissions in Azure NetApp Files
+                      Enable non browsable share setting for SMB/Dual Protocol volume. When enabled, it restricts windows clients to browse the share
                     type: boolean
                   snapshotDirectoryVisible:
                     description: Specifies whether the .snapshot (NFS clients) or
-                      ~snapshot (SMB clients) path of a volume is visible, default
-                      value is true.
+                      ~snapshot (SMB clients) path of a volume is visible. Defaults
+                      to true.
                     type: boolean
                   storageQuotaInGb:
                     description: The maximum Storage Quota allowed for a file system
@@ -1969,9 +2039,9 @@ spec:
                   createFromSnapshotResourceId:
                     description: 'Creates volume from snapshot. Following properties
                       must be the same as the original volume where the snapshot was
-                      taken from: protocols, subnet_id, location, service_level, resource_group_name,
-                      account_name and pool_name. Changing this forces a new resource
-                      to be created.'
+                      taken from: protocols, subnet_id, location, service_level, resource_group_name
+                      and account_name. Changing this forces a new resource to be
+                      created.'
                     type: string
                   createFromSnapshotResourceIdRef:
                     description: Reference to a Snapshot in netapp to populate createFromSnapshotResourceId.
@@ -2046,6 +2116,26 @@ spec:
                             - IfNotPresent
                             type: string
                         type: object
+                    type: object
+                  dataProtectionBackupPolicy:
+                    description: A data_protection_backup_policy block as defined
+                      below.
+                    properties:
+                      backupPolicyId:
+                        description: |-
+                          Resource ID of the backup policy to apply to the volume.
+                          The ID of the backup policy to associate with this volume.
+                        type: string
+                      backupVaultId:
+                        description: |-
+                          Resource ID of the backup backup vault to associate this volume to.
+                          The ID of the backup vault to associate with this volume.
+                        type: string
+                      policyEnabled:
+                        description: |-
+                          Enables the backup policy on the volume, defaults to true.
+                          If set to false, the backup policy will not be enabled on this volume, thus disabling scheduled backups.
+                        type: boolean
                     type: object
                   dataProtectionReplication:
                     description: A data_protection_replication block as defined below.
@@ -2289,7 +2379,7 @@ spec:
                     type: array
                   kerberosEnabled:
                     description: |-
-                      Enable to allow Kerberos secured volumes. Requires appropriate export rules.
+                      Enable to allow Kerberos secured volumes. Requires appropriate export rules. Changing this forces a new resource to be created.
                       Enable to allow Kerberos secured volumes. Requires appropriate export rules as well as the parent `azurerm_netapp_account` having a defined AD connection.
                     type: boolean
                   keyVaultPrivateEndpointId:
@@ -2297,6 +2387,11 @@ spec:
                       when using customer-managed keys. This is required with encryption_key_source.
                       Changing this forces a new resource to be created.
                     type: string
+                  largeVolumeEnabled:
+                    description: |-
+                      A boolean specifying if the volume is a large volume. Defaults to false.
+                      Indicates whether the volume is a large volume.
+                    type: boolean
                   location:
                     description: Specifies the supported Azure location where the
                       resource exists. Changing this forces a new resource to be created.
@@ -2310,8 +2405,7 @@ spec:
                     type: string
                   poolName:
                     description: The name of the NetApp pool in which the NetApp Volume
-                      should be created. Changing this forces a new resource to be
-                      created.
+                      should be created.
                     type: string
                   poolNameRef:
                     description: Reference to a Pool in netapp to populate poolName.
@@ -2489,9 +2583,13 @@ spec:
                     type: string
                   serviceLevel:
                     description: The target performance of the file system. Valid
-                      values include Premium, Standard, or Ultra. Changing this forces
-                      a new resource to be created.
+                      values include Premium, Standard, or Ultra.
                     type: string
+                  smb3ProtocolEncryptionEnabled:
+                    description: |-
+                      Enable SMB encryption. Changing this forces a new resource to be created.
+                      SMB3 encryption option should be used only for SMB/DualProtocol volumes. Using it for any other workloads is not supported.
+                    type: boolean
                   smbAccessBasedEnumerationEnabled:
                     description: |-
                       Limits enumeration of files and folders (that is, listing the contents) in SMB only to users with allowed access on the share. For instance, if a user doesn't have access to read a file or folder in a share with access-based enumeration enabled, then the file or folder doesn't show up in directory listings. Defaults to false. For more information, please refer to Understand NAS share permissions in Azure NetApp Files
@@ -2499,7 +2597,7 @@ spec:
                     type: boolean
                   smbContinuousAvailabilityEnabled:
                     description: |-
-                      Enable SMB Continuous Availability.
+                      Enable SMB Continuous Availability. Changing this forces a new resource to be created.
                       Continuous availability option should be used only for SQL and FSLogix workloads. Using it for any other SMB workloads is not supported.
                     type: boolean
                   smbNonBrowsableEnabled:
@@ -2509,8 +2607,8 @@ spec:
                     type: boolean
                   snapshotDirectoryVisible:
                     description: Specifies whether the .snapshot (NFS clients) or
-                      ~snapshot (SMB clients) path of a volume is visible, default
-                      value is true.
+                      ~snapshot (SMB clients) path of a volume is visible. Defaults
+                      to true.
                     type: boolean
                   storageQuotaInGb:
                     description: The maximum Storage Quota allowed for a file system
@@ -2638,9 +2736,9 @@ spec:
                   createFromSnapshotResourceId:
                     description: 'Creates volume from snapshot. Following properties
                       must be the same as the original volume where the snapshot was
-                      taken from: protocols, subnet_id, location, service_level, resource_group_name,
-                      account_name and pool_name. Changing this forces a new resource
-                      to be created.'
+                      taken from: protocols, subnet_id, location, service_level, resource_group_name
+                      and account_name. Changing this forces a new resource to be
+                      created.'
                     type: string
                   createFromSnapshotResourceIdRef:
                     description: Reference to a Snapshot in netapp to populate createFromSnapshotResourceId.
@@ -2715,6 +2813,26 @@ spec:
                             - IfNotPresent
                             type: string
                         type: object
+                    type: object
+                  dataProtectionBackupPolicy:
+                    description: A data_protection_backup_policy block as defined
+                      below.
+                    properties:
+                      backupPolicyId:
+                        description: |-
+                          Resource ID of the backup policy to apply to the volume.
+                          The ID of the backup policy to associate with this volume.
+                        type: string
+                      backupVaultId:
+                        description: |-
+                          Resource ID of the backup backup vault to associate this volume to.
+                          The ID of the backup vault to associate with this volume.
+                        type: string
+                      policyEnabled:
+                        description: |-
+                          Enables the backup policy on the volume, defaults to true.
+                          If set to false, the backup policy will not be enabled on this volume, thus disabling scheduled backups.
+                        type: boolean
                     type: object
                   dataProtectionReplication:
                     description: A data_protection_replication block as defined below.
@@ -2958,7 +3076,7 @@ spec:
                     type: array
                   kerberosEnabled:
                     description: |-
-                      Enable to allow Kerberos secured volumes. Requires appropriate export rules.
+                      Enable to allow Kerberos secured volumes. Requires appropriate export rules. Changing this forces a new resource to be created.
                       Enable to allow Kerberos secured volumes. Requires appropriate export rules as well as the parent `azurerm_netapp_account` having a defined AD connection.
                     type: boolean
                   keyVaultPrivateEndpointId:
@@ -2966,6 +3084,11 @@ spec:
                       when using customer-managed keys. This is required with encryption_key_source.
                       Changing this forces a new resource to be created.
                     type: string
+                  largeVolumeEnabled:
+                    description: |-
+                      A boolean specifying if the volume is a large volume. Defaults to false.
+                      Indicates whether the volume is a large volume.
+                    type: boolean
                   location:
                     description: Specifies the supported Azure location where the
                       resource exists. Changing this forces a new resource to be created.
@@ -2998,9 +3121,13 @@ spec:
                     type: string
                   serviceLevel:
                     description: The target performance of the file system. Valid
-                      values include Premium, Standard, or Ultra. Changing this forces
-                      a new resource to be created.
+                      values include Premium, Standard, or Ultra.
                     type: string
+                  smb3ProtocolEncryptionEnabled:
+                    description: |-
+                      Enable SMB encryption. Changing this forces a new resource to be created.
+                      SMB3 encryption option should be used only for SMB/DualProtocol volumes. Using it for any other workloads is not supported.
+                    type: boolean
                   smbAccessBasedEnumerationEnabled:
                     description: |-
                       Limits enumeration of files and folders (that is, listing the contents) in SMB only to users with allowed access on the share. For instance, if a user doesn't have access to read a file or folder in a share with access-based enumeration enabled, then the file or folder doesn't show up in directory listings. Defaults to false. For more information, please refer to Understand NAS share permissions in Azure NetApp Files
@@ -3008,7 +3135,7 @@ spec:
                     type: boolean
                   smbContinuousAvailabilityEnabled:
                     description: |-
-                      Enable SMB Continuous Availability.
+                      Enable SMB Continuous Availability. Changing this forces a new resource to be created.
                       Continuous availability option should be used only for SQL and FSLogix workloads. Using it for any other SMB workloads is not supported.
                     type: boolean
                   smbNonBrowsableEnabled:
@@ -3018,8 +3145,8 @@ spec:
                     type: boolean
                   snapshotDirectoryVisible:
                     description: Specifies whether the .snapshot (NFS clients) or
-                      ~snapshot (SMB clients) path of a volume is visible, default
-                      value is true.
+                      ~snapshot (SMB clients) path of a volume is visible. Defaults
+                      to true.
                     type: boolean
                   storageQuotaInGb:
                     description: The maximum Storage Quota allowed for a file system
@@ -3328,10 +3455,30 @@ spec:
                   createFromSnapshotResourceId:
                     description: 'Creates volume from snapshot. Following properties
                       must be the same as the original volume where the snapshot was
-                      taken from: protocols, subnet_id, location, service_level, resource_group_name,
-                      account_name and pool_name. Changing this forces a new resource
-                      to be created.'
+                      taken from: protocols, subnet_id, location, service_level, resource_group_name
+                      and account_name. Changing this forces a new resource to be
+                      created.'
                     type: string
+                  dataProtectionBackupPolicy:
+                    description: A data_protection_backup_policy block as defined
+                      below.
+                    properties:
+                      backupPolicyId:
+                        description: |-
+                          Resource ID of the backup policy to apply to the volume.
+                          The ID of the backup policy to associate with this volume.
+                        type: string
+                      backupVaultId:
+                        description: |-
+                          Resource ID of the backup backup vault to associate this volume to.
+                          The ID of the backup vault to associate with this volume.
+                        type: string
+                      policyEnabled:
+                        description: |-
+                          Enables the backup policy on the volume, defaults to true.
+                          If set to false, the backup policy will not be enabled on this volume, thus disabling scheduled backups.
+                        type: boolean
+                    type: object
                   dataProtectionReplication:
                     description: A data_protection_replication block as defined below.
                       Changing this forces a new resource to be created.
@@ -3427,7 +3574,7 @@ spec:
                     type: string
                   kerberosEnabled:
                     description: |-
-                      Enable to allow Kerberos secured volumes. Requires appropriate export rules.
+                      Enable to allow Kerberos secured volumes. Requires appropriate export rules. Changing this forces a new resource to be created.
                       Enable to allow Kerberos secured volumes. Requires appropriate export rules as well as the parent `azurerm_netapp_account` having a defined AD connection.
                     type: boolean
                   keyVaultPrivateEndpointId:
@@ -3435,6 +3582,11 @@ spec:
                       when using customer-managed keys. This is required with encryption_key_source.
                       Changing this forces a new resource to be created.
                     type: string
+                  largeVolumeEnabled:
+                    description: |-
+                      A boolean specifying if the volume is a large volume. Defaults to false.
+                      Indicates whether the volume is a large volume.
+                    type: boolean
                   location:
                     description: Specifies the supported Azure location where the
                       resource exists. Changing this forces a new resource to be created.
@@ -3454,8 +3606,7 @@ spec:
                     type: string
                   poolName:
                     description: The name of the NetApp pool in which the NetApp Volume
-                      should be created. Changing this forces a new resource to be
-                      created.
+                      should be created.
                     type: string
                   protocols:
                     description: The target volume protocol expressed as a list. Supported
@@ -3483,9 +3634,13 @@ spec:
                     type: string
                   serviceLevel:
                     description: The target performance of the file system. Valid
-                      values include Premium, Standard, or Ultra. Changing this forces
-                      a new resource to be created.
+                      values include Premium, Standard, or Ultra.
                     type: string
+                  smb3ProtocolEncryptionEnabled:
+                    description: |-
+                      Enable SMB encryption. Changing this forces a new resource to be created.
+                      SMB3 encryption option should be used only for SMB/DualProtocol volumes. Using it for any other workloads is not supported.
+                    type: boolean
                   smbAccessBasedEnumerationEnabled:
                     description: |-
                       Limits enumeration of files and folders (that is, listing the contents) in SMB only to users with allowed access on the share. For instance, if a user doesn't have access to read a file or folder in a share with access-based enumeration enabled, then the file or folder doesn't show up in directory listings. Defaults to false. For more information, please refer to Understand NAS share permissions in Azure NetApp Files
@@ -3493,7 +3648,7 @@ spec:
                     type: boolean
                   smbContinuousAvailabilityEnabled:
                     description: |-
-                      Enable SMB Continuous Availability.
+                      Enable SMB Continuous Availability. Changing this forces a new resource to be created.
                       Continuous availability option should be used only for SQL and FSLogix workloads. Using it for any other SMB workloads is not supported.
                     type: boolean
                   smbNonBrowsableEnabled:
@@ -3503,8 +3658,8 @@ spec:
                     type: boolean
                   snapshotDirectoryVisible:
                     description: Specifies whether the .snapshot (NFS clients) or
-                      ~snapshot (SMB clients) path of a volume is visible, default
-                      value is true.
+                      ~snapshot (SMB clients) path of a volume is visible. Defaults
+                      to true.
                     type: boolean
                   storageQuotaInGb:
                     description: The maximum Storage Quota allowed for a file system

@@ -16,7 +16,7 @@ spec:
         testing.upbound.io/example-name: example
     passwordSecretRef:
       key: attribute.administrator_login_password
-      name: example-mysql-server
+      name: example-mysql-flexible-server
       namespace: upbound-system
     springCloudAppIdSelector:
       matchLabels:
@@ -28,7 +28,7 @@ spec:
 ---
 
 apiVersion: dbformysql.azure.upbound.io/v1beta1
-kind: Database
+kind: FlexibleDatabase
 metadata:
   annotations:
     meta.upbound.io/example-id: appplatform/v1beta1/springcloudappmysqlassociation
@@ -49,18 +49,17 @@ spec:
 ---
 
 apiVersion: dbformysql.azure.upbound.io/v1beta2
-kind: Server
+kind: FlexibleServer
 metadata:
   annotations:
-    crossplane.io/external-name: ${Rand.RFC1123Subdomain}
     meta.upbound.io/example-id: appplatform/v1beta1/springcloudappmysqlassociation
   labels:
     testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    administratorLogin: mysqladminun
-    administratorLoginPasswordSecretRef:
+    administratorLogin: adminTerraform
+    administratorPasswordSecretRef:
       key: example-key
       name: example-secret
       namespace: upbound-system
@@ -68,11 +67,8 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    skuName: B_Gen5_2
-    sslEnforcementEnabled: true
-    sslMinimalTlsVersionEnforced: TLS1_2
-    storageMb: 5120
-    version: "5.7"
+    skuName: B_Standard_B1ms
+    zone: "2"
 
 ---
 

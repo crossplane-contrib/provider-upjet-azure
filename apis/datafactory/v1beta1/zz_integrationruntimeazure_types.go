@@ -15,7 +15,7 @@ import (
 
 type IntegrationRuntimeAzureInitParameters struct {
 
-	// Cluster will not be recycled and it will be used in next data flow activity run until TTL (time to live) is reached if this is set as false. Default is true.
+	// Cluster will not be recycled and it will be used in next data flow activity run until TTL (time to live) is reached if this is set as false. Defaults to true.
 	CleanupEnabled *bool `json:"cleanupEnabled,omitempty" tf:"cleanup_enabled,omitempty"`
 
 	// Compute type of the cluster which will execute data flow job. Valid values are General, ComputeOptimized and MemoryOptimized. Defaults to General.
@@ -39,7 +39,7 @@ type IntegrationRuntimeAzureInitParameters struct {
 
 type IntegrationRuntimeAzureObservation struct {
 
-	// Cluster will not be recycled and it will be used in next data flow activity run until TTL (time to live) is reached if this is set as false. Default is true.
+	// Cluster will not be recycled and it will be used in next data flow activity run until TTL (time to live) is reached if this is set as false. Defaults to true.
 	CleanupEnabled *bool `json:"cleanupEnabled,omitempty" tf:"cleanup_enabled,omitempty"`
 
 	// Compute type of the cluster which will execute data flow job. Valid values are General, ComputeOptimized and MemoryOptimized. Defaults to General.
@@ -68,7 +68,7 @@ type IntegrationRuntimeAzureObservation struct {
 
 type IntegrationRuntimeAzureParameters struct {
 
-	// Cluster will not be recycled and it will be used in next data flow activity run until TTL (time to live) is reached if this is set as false. Default is true.
+	// Cluster will not be recycled and it will be used in next data flow activity run until TTL (time to live) is reached if this is set as false. Defaults to true.
 	// +kubebuilder:validation:Optional
 	CleanupEnabled *bool `json:"cleanupEnabled,omitempty" tf:"cleanup_enabled,omitempty"`
 

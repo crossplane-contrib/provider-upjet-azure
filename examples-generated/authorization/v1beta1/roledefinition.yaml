@@ -8,12 +8,14 @@ metadata:
   name: example
 spec:
   forProvider:
-    assignableScopes:
-    - ${data.azurerm_subscription.primary.id}
+    assignableScopesRefs:
+    - name: azurerm_subscription
     description: This is a custom role created via Terraform
     name: my-custom-role
     permissions:
     - actions:
       - '*'
       notActions: []
-    scope: ${data.azurerm_subscription.primary.id}
+    scopeSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_subscription

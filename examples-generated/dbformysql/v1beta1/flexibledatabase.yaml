@@ -38,7 +38,7 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    skuName: B_Standard_B1s
+    skuName: B_Standard_B1ms
 
 ---
 

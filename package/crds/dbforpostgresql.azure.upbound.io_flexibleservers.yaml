@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.14.0
+    controller-gen.kubebuilder.io/version: v0.16.5
   name: flexibleservers.dbforpostgresql.azure.upbound.io
 spec:
   group: dbforpostgresql.azure.upbound.io
@@ -80,7 +80,7 @@ spec:
                     type: string
                   administratorPasswordSecretRef:
                     description: |-
-                      The Password associated with the administrator_login for the PostgreSQL Flexible Server. Required when create_mode is Default and authentication.password_auth_enabled is true.
+                      The Password associated with the administrator_login for the PostgreSQL Flexible Server.
                       Password for the master DB user. If you set autoGeneratePassword to true, the Secret referenced here will be created or updated with generated password if it does not already contain one.
                     properties:
                       key:
@@ -97,17 +97,25 @@ spec:
                     - name
                     - namespace
                     type: object
+                  administratorPasswordWo:
+                    description: The Password associated with the administrator_login
+                      for the PostgreSQL Flexible Server.
+                    type: string
+                  administratorPasswordWoVersion:
+                    description: An integer value used to trigger an update for administrator_password_wo.
+                      This property should be incremented when updating administrator_password_wo.
+                    type: number
                   authentication:
                     description: An authentication block as defined below.
                     items:
                       properties:
                         activeDirectoryAuthEnabled:
-                          description: Whether or not Active Directory authentication
-                            is allowed to access the PostgreSQL Flexible Server. Defaults
+                          description: Whether Active Directory authentication is
+                            allowed to access the PostgreSQL Flexible Server. Defaults
                             to false.
                           type: boolean
                         passwordAuthEnabled:
-                          description: Whether or not password authentication is allowed
+                          description: Whether password authentication is allowed
                             to access the PostgreSQL Flexible Server. Defaults to
                             true.
                           type: boolean
@@ -133,8 +141,8 @@ spec:
                     type: number
                   createMode:
                     description: The creation mode which can be used to restore or
-                      replicate existing servers. Possible values are Default, PointInTimeRestore,
-                      Replica and Update.
+                      replicate existing servers. Possible values are Default, GeoRestore,
+                      PointInTimeRestore, Replica, ReviveDropped and Update.
                     type: string
                   customerManagedKey:
                     description: A customer_managed_key block as defined below. Changing
@@ -142,22 +150,20 @@ spec:
                     items:
                       properties:
                         geoBackupKeyVaultKeyId:
-                          description: The ID of the geo backup Key Vault Key. It
-                            can't cross region and need Customer Managed Key in same
-                            region as geo backup.
+                          description: The versioned ID of the geo backup Key Vault
+                            Key.
                           type: string
                         geoBackupUserAssignedIdentityId:
                           description: The geo backup user managed identity id for
-                            a Customer Managed Key. Should be added with identity_ids.
-                            It can't cross region and need identity in same region
-                            as geo backup.
+                            a Customer Managed Key. Must be added to identity.identity_ids.
                           type: string
                         keyVaultKeyId:
-                          description: The ID of the Key Vault Key.
+                          description: The versioned/versionless ID of the Key Vault
+                            Key.
                           type: string
                         primaryUserAssignedIdentityId:
                           description: Specifies the primary user managed identity
-                            id for a Customer Managed Key. Should be added with identity_ids.
+                            id for a Customer Managed Key. Must be added to identity.identity_ids.
                           type: string
                       type: object
                     type: array
@@ -277,7 +283,8 @@ spec:
                         type:
                           description: Specifies the type of Managed Service Identity
                             that should be configured on this PostgreSQL Flexible
-                            Server. The only possible value is UserAssigned.
+                            Server. Possible values are UserAssigned, SystemAssigned
+                            and SystemAssigned, UserAssigned.
                           type: string
                       type: object
                     type: array
@@ -307,8 +314,8 @@ spec:
                     type: array
                   pointInTimeRestoreTimeInUtc:
                     description: The point in time to restore from source_server_id
-                      when create_mode is PointInTimeRestore. Changing this forces
-                      a new PostgreSQL Flexible Server to be created.
+                      when create_mode is GeoRestore, PointInTimeRestore. Changing
+                      this forces a new PostgreSQL Flexible Server to be created.
                     type: string
                   privateDnsZoneId:
                     description: The ID of the private DNS zone to create the PostgreSQL
@@ -486,9 +493,9 @@ spec:
                     type: string
                   sourceServerId:
                     description: The resource ID of the source PostgreSQL Flexible
-                      Server to be restored. Required when create_mode is PointInTimeRestore
-                      or Replica. Changing this forces a new PostgreSQL Flexible Server
-                      to be created.
+                      Server to be restored. Required when create_mode is GeoRestore,
+                      PointInTimeRestore or Replica. Changing this forces a new PostgreSQL
+                      Flexible Server to be created.
                     type: string
                   storageMb:
                     description: The max storage allowed for the PostgreSQL Flexible
@@ -539,7 +546,7 @@ spec:
                     type: string
                   administratorPasswordSecretRef:
                     description: |-
-                      The Password associated with the administrator_login for the PostgreSQL Flexible Server. Required when create_mode is Default and authentication.password_auth_enabled is true.
+                      The Password associated with the administrator_login for the PostgreSQL Flexible Server.
                       Password for the master DB user. If you set autoGeneratePassword to true, the Secret referenced here will be created or updated with generated password if it does not already contain one.
                     properties:
                       key:
@@ -556,17 +563,25 @@ spec:
                     - name
                     - namespace
                     type: object
+                  administratorPasswordWo:
+                    description: The Password associated with the administrator_login
+                      for the PostgreSQL Flexible Server.
+                    type: string
+                  administratorPasswordWoVersion:
+                    description: An integer value used to trigger an update for administrator_password_wo.
+                      This property should be incremented when updating administrator_password_wo.
+                    type: number
                   authentication:
                     description: An authentication block as defined below.
                     items:
                       properties:
                         activeDirectoryAuthEnabled:
-                          description: Whether or not Active Directory authentication
-                            is allowed to access the PostgreSQL Flexible Server. Defaults
+                          description: Whether Active Directory authentication is
+                            allowed to access the PostgreSQL Flexible Server. Defaults
                             to false.
                           type: boolean
                         passwordAuthEnabled:
-                          description: Whether or not password authentication is allowed
+                          description: Whether password authentication is allowed
                             to access the PostgreSQL Flexible Server. Defaults to
                             true.
                           type: boolean
@@ -587,8 +602,8 @@ spec:
                     type: number
                   createMode:
                     description: The creation mode which can be used to restore or
-                      replicate existing servers. Possible values are Default, PointInTimeRestore,
-                      Replica and Update.
+                      replicate existing servers. Possible values are Default, GeoRestore,
+                      PointInTimeRestore, Replica, ReviveDropped and Update.
                     type: string
                   customerManagedKey:
                     description: A customer_managed_key block as defined below. Changing
@@ -596,22 +611,20 @@ spec:
                     items:
                       properties:
                         geoBackupKeyVaultKeyId:
-                          description: The ID of the geo backup Key Vault Key. It
-                            can't cross region and need Customer Managed Key in same
-                            region as geo backup.
+                          description: The versioned ID of the geo backup Key Vault
+                            Key.
                           type: string
                         geoBackupUserAssignedIdentityId:
                           description: The geo backup user managed identity id for
-                            a Customer Managed Key. Should be added with identity_ids.
-                            It can't cross region and need identity in same region
-                            as geo backup.
+                            a Customer Managed Key. Must be added to identity.identity_ids.
                           type: string
                         keyVaultKeyId:
-                          description: The ID of the Key Vault Key.
+                          description: The versioned/versionless ID of the Key Vault
+                            Key.
                           type: string
                         primaryUserAssignedIdentityId:
                           description: Specifies the primary user managed identity
-                            id for a Customer Managed Key. Should be added with identity_ids.
+                            id for a Customer Managed Key. Must be added to identity.identity_ids.
                           type: string
                       type: object
                     type: array
@@ -731,7 +744,8 @@ spec:
                         type:
                           description: Specifies the type of Managed Service Identity
                             that should be configured on this PostgreSQL Flexible
-                            Server. The only possible value is UserAssigned.
+                            Server. Possible values are UserAssigned, SystemAssigned
+                            and SystemAssigned, UserAssigned.
                           type: string
                       type: object
                     type: array
@@ -761,8 +775,8 @@ spec:
                     type: array
                   pointInTimeRestoreTimeInUtc:
                     description: The point in time to restore from source_server_id
-                      when create_mode is PointInTimeRestore. Changing this forces
-                      a new PostgreSQL Flexible Server to be created.
+                      when create_mode is GeoRestore, PointInTimeRestore. Changing
+                      this forces a new PostgreSQL Flexible Server to be created.
                     type: string
                   privateDnsZoneId:
                     description: The ID of the private DNS zone to create the PostgreSQL
@@ -859,9 +873,9 @@ spec:
                     type: string
                   sourceServerId:
                     description: The resource ID of the source PostgreSQL Flexible
-                      Server to be restored. Required when create_mode is PointInTimeRestore
-                      or Replica. Changing this forces a new PostgreSQL Flexible Server
-                      to be created.
+                      Server to be restored. Required when create_mode is GeoRestore,
+                      PointInTimeRestore or Replica. Changing this forces a new PostgreSQL
+                      Flexible Server to be created.
                     type: string
                   storageMb:
                     description: The max storage allowed for the PostgreSQL Flexible
@@ -1074,17 +1088,25 @@ spec:
                       Server. Required when create_mode is Default and authentication.password_auth_enabled
                       is true.
                     type: string
+                  administratorPasswordWo:
+                    description: The Password associated with the administrator_login
+                      for the PostgreSQL Flexible Server.
+                    type: string
+                  administratorPasswordWoVersion:
+                    description: An integer value used to trigger an update for administrator_password_wo.
+                      This property should be incremented when updating administrator_password_wo.
+                    type: number
                   authentication:
                     description: An authentication block as defined below.
                     items:
                       properties:
                         activeDirectoryAuthEnabled:
-                          description: Whether or not Active Directory authentication
-                            is allowed to access the PostgreSQL Flexible Server. Defaults
+                          description: Whether Active Directory authentication is
+                            allowed to access the PostgreSQL Flexible Server. Defaults
                             to false.
                           type: boolean
                         passwordAuthEnabled:
-                          description: Whether or not password authentication is allowed
+                          description: Whether password authentication is allowed
                             to access the PostgreSQL Flexible Server. Defaults to
                             true.
                           type: boolean
@@ -1105,8 +1127,8 @@ spec:
                     type: number
                   createMode:
                     description: The creation mode which can be used to restore or
-                      replicate existing servers. Possible values are Default, PointInTimeRestore,
-                      Replica and Update.
+                      replicate existing servers. Possible values are Default, GeoRestore,
+                      PointInTimeRestore, Replica, ReviveDropped and Update.
                     type: string
                   customerManagedKey:
                     description: A customer_managed_key block as defined below. Changing
@@ -1114,22 +1136,20 @@ spec:
                     items:
                       properties:
                         geoBackupKeyVaultKeyId:
-                          description: The ID of the geo backup Key Vault Key. It
-                            can't cross region and need Customer Managed Key in same
-                            region as geo backup.
+                          description: The versioned ID of the geo backup Key Vault
+                            Key.
                           type: string
                         geoBackupUserAssignedIdentityId:
                           description: The geo backup user managed identity id for
-                            a Customer Managed Key. Should be added with identity_ids.
-                            It can't cross region and need identity in same region
-                            as geo backup.
+                            a Customer Managed Key. Must be added to identity.identity_ids.
                           type: string
                         keyVaultKeyId:
-                          description: The ID of the Key Vault Key.
+                          description: The versioned/versionless ID of the Key Vault
+                            Key.
                           type: string
                         primaryUserAssignedIdentityId:
                           description: Specifies the primary user managed identity
-                            id for a Customer Managed Key. Should be added with identity_ids.
+                            id for a Customer Managed Key. Must be added to identity.identity_ids.
                           type: string
                       type: object
                     type: array
@@ -1178,10 +1198,19 @@ spec:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
+                        principalId:
+                          description: The Principal ID associated with this Managed
+                            Service Identity.
+                          type: string
+                        tenantId:
+                          description: The Tenant ID associated with this Managed
+                            Service Identity.
+                          type: string
                         type:
                           description: Specifies the type of Managed Service Identity
                             that should be configured on this PostgreSQL Flexible
-                            Server. The only possible value is UserAssigned.
+                            Server. Possible values are UserAssigned, SystemAssigned
+                            and SystemAssigned, UserAssigned.
                           type: string
                       type: object
                     type: array
@@ -1211,15 +1240,16 @@ spec:
                     type: array
                   pointInTimeRestoreTimeInUtc:
                     description: The point in time to restore from source_server_id
-                      when create_mode is PointInTimeRestore. Changing this forces
-                      a new PostgreSQL Flexible Server to be created.
+                      when create_mode is GeoRestore, PointInTimeRestore. Changing
+                      this forces a new PostgreSQL Flexible Server to be created.
                     type: string
                   privateDnsZoneId:
                     description: The ID of the private DNS zone to create the PostgreSQL
                       Flexible Server.
                     type: string
                   publicNetworkAccessEnabled:
-                    description: Is public network access enabled?
+                    description: Specifies whether this PostgreSQL Flexible Server
+                      is publicly accessible. Defaults to true.
                     type: boolean
                   replicationRole:
                     description: The replication role for the PostgreSQL Flexible
@@ -1237,9 +1267,9 @@ spec:
                     type: string
                   sourceServerId:
                     description: The resource ID of the source PostgreSQL Flexible
-                      Server to be restored. Required when create_mode is PointInTimeRestore
-                      or Replica. Changing this forces a new PostgreSQL Flexible Server
-                      to be created.
+                      Server to be restored. Required when create_mode is GeoRestore,
+                      PointInTimeRestore or Replica. Changing this forces a new PostgreSQL
+                      Flexible Server to be created.
                     type: string
                   storageMb:
                     description: The max storage allowed for the PostgreSQL Flexible
@@ -1393,7 +1423,7 @@ spec:
                     type: string
                   administratorPasswordSecretRef:
                     description: |-
-                      The Password associated with the administrator_login for the PostgreSQL Flexible Server. Required when create_mode is Default and authentication.password_auth_enabled is true.
+                      The Password associated with the administrator_login for the PostgreSQL Flexible Server.
                       Password for the master DB user. If you set autoGeneratePassword to true, the Secret referenced here will be created or updated with generated password if it does not already contain one.
                     properties:
                       key:
@@ -1410,17 +1440,24 @@ spec:
                     - name
                     - namespace
                     type: object
+                  administratorPasswordWo:
+                    description: The Password associated with the administrator_login
+                      for the PostgreSQL Flexible Server.
+                    type: string
+                  administratorPasswordWoVersion:
+                    description: An integer value used to trigger an update for administrator_password_wo.
+                      This property should be incremented when updating administrator_password_wo.
+                    type: number
                   authentication:
                     description: An authentication block as defined below.
                     properties:
                       activeDirectoryAuthEnabled:
-                        description: Whether or not Active Directory authentication
-                          is allowed to access the PostgreSQL Flexible Server. Defaults
-                          to false.
+                        description: Whether Active Directory authentication is allowed
+                          to access the PostgreSQL Flexible Server. Defaults to false.
                         type: boolean
                       passwordAuthEnabled:
-                        description: Whether or not password authentication is allowed
-                          to access the PostgreSQL Flexible Server. Defaults to true.
+                        description: Whether password authentication is allowed to
+                          access the PostgreSQL Flexible Server. Defaults to true.
                         type: boolean
                       tenantId:
                         description: The Tenant ID of the Azure Active Directory which
@@ -1444,30 +1481,27 @@ spec:
                   createMode:
                     description: The creation mode which can be used to restore or
                       replicate existing servers. Possible values are Default, GeoRestore,
-                      PointInTimeRestore, Replica and Update. Changing this forces
-                      a new PostgreSQL Flexible Server to be created.
+                      PointInTimeRestore, Replica, ReviveDropped and Update.
                     type: string
                   customerManagedKey:
                     description: A customer_managed_key block as defined below. Changing
                       this forces a new resource to be created.
                     properties:
                       geoBackupKeyVaultKeyId:
-                        description: The ID of the geo backup Key Vault Key. It can't
-                          cross region and need Customer Managed Key in same region
-                          as geo backup.
+                        description: The versioned ID of the geo backup Key Vault
+                          Key.
                         type: string
                       geoBackupUserAssignedIdentityId:
                         description: The geo backup user managed identity id for a
-                          Customer Managed Key. Should be added with identity_ids.
-                          It can't cross region and need identity in same region as
-                          geo backup.
+                          Customer Managed Key. Must be added to identity.identity_ids.
                         type: string
                       keyVaultKeyId:
-                        description: The ID of the Key Vault Key.
+                        description: The versioned/versionless ID of the Key Vault
+                          Key.
                         type: string
                       primaryUserAssignedIdentityId:
                         description: Specifies the primary user managed identity id
-                          for a Customer Managed Key. Should be added with identity_ids.
+                          for a Customer Managed Key. Must be added to identity.identity_ids.
                         type: string
                     type: object
                   delegatedSubnetId:
@@ -1583,7 +1617,8 @@ spec:
                       type:
                         description: Specifies the type of Managed Service Identity
                           that should be configured on this PostgreSQL Flexible Server.
-                          The only possible value is UserAssigned.
+                          Possible values are UserAssigned, SystemAssigned and SystemAssigned,
+                          UserAssigned.
                         type: string
                     type: object
                   location:
@@ -1842,7 +1877,7 @@ spec:
                     type: string
                   administratorPasswordSecretRef:
                     description: |-
-                      The Password associated with the administrator_login for the PostgreSQL Flexible Server. Required when create_mode is Default and authentication.password_auth_enabled is true.
+                      The Password associated with the administrator_login for the PostgreSQL Flexible Server.
                       Password for the master DB user. If you set autoGeneratePassword to true, the Secret referenced here will be created or updated with generated password if it does not already contain one.
                     properties:
                       key:
@@ -1859,17 +1894,24 @@ spec:
                     - name
                     - namespace
                     type: object
+                  administratorPasswordWo:
+                    description: The Password associated with the administrator_login
+                      for the PostgreSQL Flexible Server.
+                    type: string
+                  administratorPasswordWoVersion:
+                    description: An integer value used to trigger an update for administrator_password_wo.
+                      This property should be incremented when updating administrator_password_wo.
+                    type: number
                   authentication:
                     description: An authentication block as defined below.
                     properties:
                       activeDirectoryAuthEnabled:
-                        description: Whether or not Active Directory authentication
-                          is allowed to access the PostgreSQL Flexible Server. Defaults
-                          to false.
+                        description: Whether Active Directory authentication is allowed
+                          to access the PostgreSQL Flexible Server. Defaults to false.
                         type: boolean
                       passwordAuthEnabled:
-                        description: Whether or not password authentication is allowed
-                          to access the PostgreSQL Flexible Server. Defaults to true.
+                        description: Whether password authentication is allowed to
+                          access the PostgreSQL Flexible Server. Defaults to true.
                         type: boolean
                       tenantId:
                         description: The Tenant ID of the Azure Active Directory which
@@ -1888,30 +1930,27 @@ spec:
                   createMode:
                     description: The creation mode which can be used to restore or
                       replicate existing servers. Possible values are Default, GeoRestore,
-                      PointInTimeRestore, Replica and Update. Changing this forces
-                      a new PostgreSQL Flexible Server to be created.
+                      PointInTimeRestore, Replica, ReviveDropped and Update.
                     type: string
                   customerManagedKey:
                     description: A customer_managed_key block as defined below. Changing
                       this forces a new resource to be created.
                     properties:
                       geoBackupKeyVaultKeyId:
-                        description: The ID of the geo backup Key Vault Key. It can't
-                          cross region and need Customer Managed Key in same region
-                          as geo backup.
+                        description: The versioned ID of the geo backup Key Vault
+                          Key.
                         type: string
                       geoBackupUserAssignedIdentityId:
                         description: The geo backup user managed identity id for a
-                          Customer Managed Key. Should be added with identity_ids.
-                          It can't cross region and need identity in same region as
-                          geo backup.
+                          Customer Managed Key. Must be added to identity.identity_ids.
                         type: string
                       keyVaultKeyId:
-                        description: The ID of the Key Vault Key.
+                        description: The versioned/versionless ID of the Key Vault
+                          Key.
                         type: string
                       primaryUserAssignedIdentityId:
                         description: Specifies the primary user managed identity id
-                          for a Customer Managed Key. Should be added with identity_ids.
+                          for a Customer Managed Key. Must be added to identity.identity_ids.
                         type: string
                     type: object
                   delegatedSubnetId:
@@ -2027,7 +2066,8 @@ spec:
                       type:
                         description: Specifies the type of Managed Service Identity
                           that should be configured on this PostgreSQL Flexible Server.
-                          The only possible value is UserAssigned.
+                          Possible values are UserAssigned, SystemAssigned and SystemAssigned,
+                          UserAssigned.
                         type: string
                     type: object
                   location:
@@ -2367,17 +2407,24 @@ spec:
                       Server. Required when create_mode is Default and authentication.password_auth_enabled
                       is true.
                     type: string
+                  administratorPasswordWo:
+                    description: The Password associated with the administrator_login
+                      for the PostgreSQL Flexible Server.
+                    type: string
+                  administratorPasswordWoVersion:
+                    description: An integer value used to trigger an update for administrator_password_wo.
+                      This property should be incremented when updating administrator_password_wo.
+                    type: number
                   authentication:
                     description: An authentication block as defined below.
                     properties:
                       activeDirectoryAuthEnabled:
-                        description: Whether or not Active Directory authentication
-                          is allowed to access the PostgreSQL Flexible Server. Defaults
-                          to false.
+                        description: Whether Active Directory authentication is allowed
+                          to access the PostgreSQL Flexible Server. Defaults to false.
                         type: boolean
                       passwordAuthEnabled:
-                        description: Whether or not password authentication is allowed
-                          to access the PostgreSQL Flexible Server. Defaults to true.
+                        description: Whether password authentication is allowed to
+                          access the PostgreSQL Flexible Server. Defaults to true.
                         type: boolean
                       tenantId:
                         description: The Tenant ID of the Azure Active Directory which
@@ -2396,30 +2443,27 @@ spec:
                   createMode:
                     description: The creation mode which can be used to restore or
                       replicate existing servers. Possible values are Default, GeoRestore,
-                      PointInTimeRestore, Replica and Update. Changing this forces
-                      a new PostgreSQL Flexible Server to be created.
+                      PointInTimeRestore, Replica, ReviveDropped and Update.
                     type: string
                   customerManagedKey:
                     description: A customer_managed_key block as defined below. Changing
                       this forces a new resource to be created.
                     properties:
                       geoBackupKeyVaultKeyId:
-                        description: The ID of the geo backup Key Vault Key. It can't
-                          cross region and need Customer Managed Key in same region
-                          as geo backup.
+                        description: The versioned ID of the geo backup Key Vault
+                          Key.
                         type: string
                       geoBackupUserAssignedIdentityId:
                         description: The geo backup user managed identity id for a
-                          Customer Managed Key. Should be added with identity_ids.
-                          It can't cross region and need identity in same region as
-                          geo backup.
+                          Customer Managed Key. Must be added to identity.identity_ids.
                         type: string
                       keyVaultKeyId:
-                        description: The ID of the Key Vault Key.
+                        description: The versioned/versionless ID of the Key Vault
+                          Key.
                         type: string
                       primaryUserAssignedIdentityId:
                         description: Specifies the primary user managed identity id
-                          for a Customer Managed Key. Should be added with identity_ids.
+                          for a Customer Managed Key. Must be added to identity.identity_ids.
                         type: string
                     type: object
                   delegatedSubnetId:
@@ -2464,10 +2508,19 @@ spec:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
+                      principalId:
+                        description: The Principal ID associated with this Managed
+                          Service Identity.
+                        type: string
+                      tenantId:
+                        description: The Tenant ID associated with this Managed Service
+                          Identity.
+                        type: string
                       type:
                         description: Specifies the type of Managed Service Identity
                           that should be configured on this PostgreSQL Flexible Server.
-                          The only possible value is UserAssigned.
+                          Possible values are UserAssigned, SystemAssigned and SystemAssigned,
+                          UserAssigned.
                         type: string
                     type: object
                   location:

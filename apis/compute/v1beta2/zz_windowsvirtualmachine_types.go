@@ -284,7 +284,7 @@ type WindowsVirtualMachineInitParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceIdsSelector *v1.Selector `json:"networkInterfaceIdsSelector,omitempty" tf:"-"`
 
-	// A os_disk block as defined below.
+	// An os_disk block as defined below.
 	OsDisk *WindowsVirtualMachineOsDiskInitParameters `json:"osDisk,omitempty" tf:"os_disk,omitempty"`
 
 	// A os_image_notification block as defined below.
@@ -342,7 +342,7 @@ type WindowsVirtualMachineInitParameters struct {
 	// The Base64-Encoded User Data which should be used for this Virtual Machine.
 	UserData *string `json:"userData,omitempty" tf:"user_data,omitempty"`
 
-	// Specifies whether VMAgent Platform Updates is enabled. Defaults to false.
+	// Are Virtual Machine Agent Platform Updates enabled on this Virtual Machine?
 	VMAgentPlatformUpdatesEnabled *bool `json:"vmAgentPlatformUpdatesEnabled,omitempty" tf:"vm_agent_platform_updates_enabled,omitempty"`
 
 	// Specifies the Orchestrated Virtual Machine Scale Set that this Virtual Machine should be created within.
@@ -435,7 +435,7 @@ type WindowsVirtualMachineObservation struct {
 	// . A list of Network Interface IDs which should be attached to this Virtual Machine. The first Network Interface ID in this list will be the Primary Network Interface on the Virtual Machine.
 	NetworkInterfaceIds []*string `json:"networkInterfaceIds,omitempty" tf:"network_interface_ids,omitempty"`
 
-	// A os_disk block as defined below.
+	// An os_disk block as defined below.
 	OsDisk *WindowsVirtualMachineOsDiskObservation `json:"osDisk,omitempty" tf:"os_disk,omitempty"`
 
 	// A os_image_notification block as defined below.
@@ -508,7 +508,7 @@ type WindowsVirtualMachineObservation struct {
 	// The Base64-Encoded User Data which should be used for this Virtual Machine.
 	UserData *string `json:"userData,omitempty" tf:"user_data,omitempty"`
 
-	// Specifies whether VMAgent Platform Updates is enabled. Defaults to false.
+	// Are Virtual Machine Agent Platform Updates enabled on this Virtual Machine?
 	VMAgentPlatformUpdatesEnabled *bool `json:"vmAgentPlatformUpdatesEnabled,omitempty" tf:"vm_agent_platform_updates_enabled,omitempty"`
 
 	// A 128-bit identifier which uniquely identifies this Virtual Machine.
@@ -532,7 +532,7 @@ type WindowsVirtualMachineOsDiskDiffDiskSettingsInitParameters struct {
 	// Specifies the Ephemeral Disk Settings for the OS Disk. At this time the only possible value is Local. Changing this forces a new resource to be created.
 	Option *string `json:"option,omitempty" tf:"option,omitempty"`
 
-	// Specifies where to store the Ephemeral Disk. Possible values are CacheDisk and ResourceDisk. Defaults to CacheDisk. Changing this forces a new resource to be created.
+	// Specifies where to store the Ephemeral Disk. Possible values are CacheDisk, ResourceDisk and NvmeDisk. Defaults to CacheDisk. Changing this forces a new resource to be created.
 	Placement *string `json:"placement,omitempty" tf:"placement,omitempty"`
 }
 
@@ -541,7 +541,7 @@ type WindowsVirtualMachineOsDiskDiffDiskSettingsObservation struct {
 	// Specifies the Ephemeral Disk Settings for the OS Disk. At this time the only possible value is Local. Changing this forces a new resource to be created.
 	Option *string `json:"option,omitempty" tf:"option,omitempty"`
 
-	// Specifies where to store the Ephemeral Disk. Possible values are CacheDisk and ResourceDisk. Defaults to CacheDisk. Changing this forces a new resource to be created.
+	// Specifies where to store the Ephemeral Disk. Possible values are CacheDisk, ResourceDisk and NvmeDisk. Defaults to CacheDisk. Changing this forces a new resource to be created.
 	Placement *string `json:"placement,omitempty" tf:"placement,omitempty"`
 }
 
@@ -551,7 +551,7 @@ type WindowsVirtualMachineOsDiskDiffDiskSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	Option *string `json:"option" tf:"option,omitempty"`
 
-	// Specifies where to store the Ephemeral Disk. Possible values are CacheDisk and ResourceDisk. Defaults to CacheDisk. Changing this forces a new resource to be created.
+	// Specifies where to store the Ephemeral Disk. Possible values are CacheDisk, ResourceDisk and NvmeDisk. Defaults to CacheDisk. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Placement *string `json:"placement,omitempty" tf:"placement,omitempty"`
 }
@@ -599,6 +599,9 @@ type WindowsVirtualMachineOsDiskObservation struct {
 
 	// The Size of the Internal OS Disk in GB, if you wish to vary from the size used in the image this Virtual Machine is sourced from.
 	DiskSizeGb *float64 `json:"diskSizeGb,omitempty" tf:"disk_size_gb,omitempty"`
+
+	// The ID of the OS disk.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The name which should be used for the Internal OS Disk. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -790,7 +793,7 @@ type WindowsVirtualMachineParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceIdsSelector *v1.Selector `json:"networkInterfaceIdsSelector,omitempty" tf:"-"`
 
-	// A os_disk block as defined below.
+	// An os_disk block as defined below.
 	// +kubebuilder:validation:Optional
 	OsDisk *WindowsVirtualMachineOsDiskParameters `json:"osDisk,omitempty" tf:"os_disk,omitempty"`
 
@@ -880,7 +883,7 @@ type WindowsVirtualMachineParameters struct {
 	// +kubebuilder:validation:Optional
 	UserData *string `json:"userData,omitempty" tf:"user_data,omitempty"`
 
-	// Specifies whether VMAgent Platform Updates is enabled. Defaults to false.
+	// Are Virtual Machine Agent Platform Updates enabled on this Virtual Machine?
 	// +kubebuilder:validation:Optional
 	VMAgentPlatformUpdatesEnabled *bool `json:"vmAgentPlatformUpdatesEnabled,omitempty" tf:"vm_agent_platform_updates_enabled,omitempty"`
 

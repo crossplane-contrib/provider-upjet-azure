@@ -47,9 +47,10 @@ type ClientScopedSubscriptionParameters struct {
 
 type SubscriptionInitParameters struct {
 
-	// The idle interval after which the topic is automatically deleted as an ISO 8601 duration. The minimum duration is 5 minutes or PT5M.
+	// The idle interval after which the topic is automatically deleted as an ISO 8601 duration. The minimum duration is 5 minutes or PT5M. Defaults to P10675199DT2H48M5.4775807S.
 	AutoDeleteOnIdle *string `json:"autoDeleteOnIdle,omitempty" tf:"auto_delete_on_idle,omitempty"`
 
+	// Boolean flag which controls whether the Subscription supports batched operations.
 	BatchedOperationsEnabled *bool `json:"batchedOperationsEnabled,omitempty" tf:"batched_operations_enabled,omitempty"`
 
 	// A client_scoped_subscription block as defined below.
@@ -64,11 +65,8 @@ type SubscriptionInitParameters struct {
 	// Boolean flag which controls whether the Subscription has dead letter support when a message expires.
 	DeadLetteringOnMessageExpiration *bool `json:"deadLetteringOnMessageExpiration,omitempty" tf:"dead_lettering_on_message_expiration,omitempty"`
 
-	// The Default message timespan to live as an ISO 8601 duration. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself.
+	// The Default message timespan to live as an ISO 8601 duration. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the value used when TimeToLive is not set on a message itself. Defaults to P10675199DT2H48M5.4775807S.
 	DefaultMessageTTL *string `json:"defaultMessageTtl,omitempty" tf:"default_message_ttl,omitempty"`
-
-	// Boolean flag which controls whether the Subscription supports batched operations.
-	EnableBatchedOperations *bool `json:"enableBatchedOperations,omitempty" tf:"enable_batched_operations,omitempty"`
 
 	// The name of a Queue or Topic to automatically forward Dead Letter messages to.
 	ForwardDeadLetteredMessagesTo *string `json:"forwardDeadLetteredMessagesTo,omitempty" tf:"forward_dead_lettered_messages_to,omitempty"`
@@ -76,7 +74,7 @@ type SubscriptionInitParameters struct {
 	// The name of a Queue or Topic to automatically forward messages to.
 	ForwardTo *string `json:"forwardTo,omitempty" tf:"forward_to,omitempty"`
 
-	// The lock duration for the subscription as an ISO 8601 duration. The default value is 1 minute or P0DT0H1M0S . The maximum value is 5 minutes or P0DT0H5M0S .
+	// The lock duration for the subscription as an ISO 8601 duration. The default value is 1 minute or P0DT0H1M0S . The maximum value is 5 minutes or P0DT0H5M0S . Defaults to PT1M.
 	LockDuration *string `json:"lockDuration,omitempty" tf:"lock_duration,omitempty"`
 
 	// The maximum number of deliveries.
@@ -91,9 +89,10 @@ type SubscriptionInitParameters struct {
 
 type SubscriptionObservation struct {
 
-	// The idle interval after which the topic is automatically deleted as an ISO 8601 duration. The minimum duration is 5 minutes or PT5M.
+	// The idle interval after which the topic is automatically deleted as an ISO 8601 duration. The minimum duration is 5 minutes or PT5M. Defaults to P10675199DT2H48M5.4775807S.
 	AutoDeleteOnIdle *string `json:"autoDeleteOnIdle,omitempty" tf:"auto_delete_on_idle,omitempty"`
 
+	// Boolean flag which controls whether the Subscription supports batched operations.
 	BatchedOperationsEnabled *bool `json:"batchedOperationsEnabled,omitempty" tf:"batched_operations_enabled,omitempty"`
 
 	// A client_scoped_subscription block as defined below.
@@ -108,11 +107,8 @@ type SubscriptionObservation struct {
 	// Boolean flag which controls whether the Subscription has dead letter support when a message expires.
 	DeadLetteringOnMessageExpiration *bool `json:"deadLetteringOnMessageExpiration,omitempty" tf:"dead_lettering_on_message_expiration,omitempty"`
 
-	// The Default message timespan to live as an ISO 8601 duration. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself.
+	// The Default message timespan to live as an ISO 8601 duration. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the value used when TimeToLive is not set on a message itself. Defaults to P10675199DT2H48M5.4775807S.
 	DefaultMessageTTL *string `json:"defaultMessageTtl,omitempty" tf:"default_message_ttl,omitempty"`
-
-	// Boolean flag which controls whether the Subscription supports batched operations.
-	EnableBatchedOperations *bool `json:"enableBatchedOperations,omitempty" tf:"enable_batched_operations,omitempty"`
 
 	// The name of a Queue or Topic to automatically forward Dead Letter messages to.
 	ForwardDeadLetteredMessagesTo *string `json:"forwardDeadLetteredMessagesTo,omitempty" tf:"forward_dead_lettered_messages_to,omitempty"`
@@ -123,7 +119,7 @@ type SubscriptionObservation struct {
 	// The ServiceBus Subscription ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The lock duration for the subscription as an ISO 8601 duration. The default value is 1 minute or P0DT0H1M0S . The maximum value is 5 minutes or P0DT0H5M0S .
+	// The lock duration for the subscription as an ISO 8601 duration. The default value is 1 minute or P0DT0H1M0S . The maximum value is 5 minutes or P0DT0H5M0S . Defaults to PT1M.
 	LockDuration *string `json:"lockDuration,omitempty" tf:"lock_duration,omitempty"`
 
 	// The maximum number of deliveries.
@@ -141,10 +137,11 @@ type SubscriptionObservation struct {
 
 type SubscriptionParameters struct {
 
-	// The idle interval after which the topic is automatically deleted as an ISO 8601 duration. The minimum duration is 5 minutes or PT5M.
+	// The idle interval after which the topic is automatically deleted as an ISO 8601 duration. The minimum duration is 5 minutes or PT5M. Defaults to P10675199DT2H48M5.4775807S.
 	// +kubebuilder:validation:Optional
 	AutoDeleteOnIdle *string `json:"autoDeleteOnIdle,omitempty" tf:"auto_delete_on_idle,omitempty"`
 
+	// Boolean flag which controls whether the Subscription supports batched operations.
 	// +kubebuilder:validation:Optional
 	BatchedOperationsEnabled *bool `json:"batchedOperationsEnabled,omitempty" tf:"batched_operations_enabled,omitempty"`
 
@@ -164,13 +161,9 @@ type SubscriptionParameters struct {
 	// +kubebuilder:validation:Optional
 	DeadLetteringOnMessageExpiration *bool `json:"deadLetteringOnMessageExpiration,omitempty" tf:"dead_lettering_on_message_expiration,omitempty"`
 
-	// The Default message timespan to live as an ISO 8601 duration. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself.
+	// The Default message timespan to live as an ISO 8601 duration. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the value used when TimeToLive is not set on a message itself. Defaults to P10675199DT2H48M5.4775807S.
 	// +kubebuilder:validation:Optional
 	DefaultMessageTTL *string `json:"defaultMessageTtl,omitempty" tf:"default_message_ttl,omitempty"`
-
-	// Boolean flag which controls whether the Subscription supports batched operations.
-	// +kubebuilder:validation:Optional
-	EnableBatchedOperations *bool `json:"enableBatchedOperations,omitempty" tf:"enable_batched_operations,omitempty"`
 
 	// The name of a Queue or Topic to automatically forward Dead Letter messages to.
 	// +kubebuilder:validation:Optional
@@ -180,7 +173,7 @@ type SubscriptionParameters struct {
 	// +kubebuilder:validation:Optional
 	ForwardTo *string `json:"forwardTo,omitempty" tf:"forward_to,omitempty"`
 
-	// The lock duration for the subscription as an ISO 8601 duration. The default value is 1 minute or P0DT0H1M0S . The maximum value is 5 minutes or P0DT0H5M0S .
+	// The lock duration for the subscription as an ISO 8601 duration. The default value is 1 minute or P0DT0H1M0S . The maximum value is 5 minutes or P0DT0H5M0S . Defaults to PT1M.
 	// +kubebuilder:validation:Optional
 	LockDuration *string `json:"lockDuration,omitempty" tf:"lock_duration,omitempty"`
 

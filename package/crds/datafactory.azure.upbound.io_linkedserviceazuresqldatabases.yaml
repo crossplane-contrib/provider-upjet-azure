@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.14.0
+    controller-gen.kubebuilder.io/version: v0.16.5
   name: linkedserviceazuresqldatabases.datafactory.azure.upbound.io
 spec:
   group: datafactory.azure.upbound.io
@@ -92,6 +92,11 @@ spec:
                     description: The connection string in which to authenticate with
                       Azure SQL Database. Exactly one of either connection_string
                       or key_vault_connection_string is required.
+                    type: string
+                  credentialName:
+                    description: The name of a User-assigned Managed Identity. Use
+                      this argument to authenticate against the linked resource using
+                      a User-assigned Managed Identity.
                     type: string
                   dataFactoryId:
                     description: The Data Factory ID in which to associate the Linked
@@ -272,6 +277,11 @@ spec:
                     description: The connection string in which to authenticate with
                       Azure SQL Database. Exactly one of either connection_string
                       or key_vault_connection_string is required.
+                    type: string
+                  credentialName:
+                    description: The name of a User-assigned Managed Identity. Use
+                      this argument to authenticate against the linked resource using
+                      a User-assigned Managed Identity.
                     type: string
                   description:
                     description: The description for the Data Factory Linked Service
@@ -532,6 +542,11 @@ spec:
                     description: The connection string in which to authenticate with
                       Azure SQL Database. Exactly one of either connection_string
                       or key_vault_connection_string is required.
+                    type: string
+                  credentialName:
+                    description: The name of a User-assigned Managed Identity. Use
+                      this argument to authenticate against the linked resource using
+                      a User-assigned Managed Identity.
                     type: string
                   dataFactoryId:
                     description: The Data Factory ID in which to associate the Linked
@@ -746,6 +761,11 @@ spec:
                       Azure SQL Database. Exactly one of either connection_string
                       or key_vault_connection_string is required.
                     type: string
+                  credentialName:
+                    description: The name of a User-assigned Managed Identity. Use
+                      this argument to authenticate against the linked resource using
+                      a User-assigned Managed Identity.
+                    type: string
                   dataFactoryId:
                     description: The Data Factory ID in which to associate the Linked
                       Service with. Changing this forces a new resource.
@@ -921,6 +941,11 @@ spec:
                     description: The connection string in which to authenticate with
                       Azure SQL Database. Exactly one of either connection_string
                       or key_vault_connection_string is required.
+                    type: string
+                  credentialName:
+                    description: The name of a User-assigned Managed Identity. Use
+                      this argument to authenticate against the linked resource using
+                      a User-assigned Managed Identity.
                     type: string
                   description:
                     description: The description for the Data Factory Linked Service
@@ -1177,6 +1202,11 @@ spec:
                     description: The connection string in which to authenticate with
                       Azure SQL Database. Exactly one of either connection_string
                       or key_vault_connection_string is required.
+                    type: string
+                  credentialName:
+                    description: The name of a User-assigned Managed Identity. Use
+                      this argument to authenticate against the linked resource using
+                      a User-assigned Managed Identity.
                     type: string
                   dataFactoryId:
                     description: The Data Factory ID in which to associate the Linked

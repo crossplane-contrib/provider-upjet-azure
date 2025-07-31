@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.14.0
+    controller-gen.kubebuilder.io/version: v0.16.5
   name: eventgriddataconnections.kusto.azure.upbound.io
 spec:
   group: kusto.azure.upbound.io
@@ -249,9 +249,12 @@ spec:
                       is allowed. Allowed values: Single, Multi. Changing this forces
                       a new resource to be created. Defaults to Single.'
                     type: string
-                  eventgridResourceId:
+                  eventgridEventSubscriptionId:
                     description: The resource ID of the event grid that is subscribed
                       to the storage account events.
+                    type: string
+                  eventgridResourceId:
+                    description: The ID of the Kusto Event Grid Data Connection.
                     type: string
                   eventhubConsumerGroupName:
                     description: Specifies the Event Hub consumer group this data
@@ -417,10 +420,13 @@ spec:
                     description: The location where the Kusto Database should be created.
                       Changing this forces a new resource to be created.
                     type: string
-                  managedIdentityResourceId:
+                  managedIdentityId:
                     description: Empty for non-managed identity based data connection.
                       For system assigned identity, provide cluster resource Id. For
                       user assigned identity (UAI) provide the UAI resource Id.
+                    type: string
+                  managedIdentityResourceId:
+                    description: The ID of the Kusto Event Grid Data Connection.
                     type: string
                   mappingRuleName:
                     description: Specifies the mapping rule used for the message ingestion.
@@ -624,9 +630,12 @@ spec:
                       is allowed. Allowed values: Single, Multi. Changing this forces
                       a new resource to be created. Defaults to Single.'
                     type: string
-                  eventgridResourceId:
+                  eventgridEventSubscriptionId:
                     description: The resource ID of the event grid that is subscribed
                       to the storage account events.
+                    type: string
+                  eventgridResourceId:
+                    description: The ID of the Kusto Event Grid Data Connection.
                     type: string
                   eventhubConsumerGroupName:
                     description: Specifies the Event Hub consumer group this data
@@ -792,10 +801,13 @@ spec:
                     description: The location where the Kusto Database should be created.
                       Changing this forces a new resource to be created.
                     type: string
-                  managedIdentityResourceId:
+                  managedIdentityId:
                     description: Empty for non-managed identity based data connection.
                       For system assigned identity, provide cluster resource Id. For
                       user assigned identity (UAI) provide the UAI resource Id.
+                    type: string
+                  managedIdentityResourceId:
+                    description: The ID of the Kusto Event Grid Data Connection.
                     type: string
                   mappingRuleName:
                     description: Specifies the mapping rule used for the message ingestion.
@@ -1094,9 +1106,12 @@ spec:
                       is allowed. Allowed values: Single, Multi. Changing this forces
                       a new resource to be created. Defaults to Single.'
                     type: string
-                  eventgridResourceId:
+                  eventgridEventSubscriptionId:
                     description: The resource ID of the event grid that is subscribed
                       to the storage account events.
+                    type: string
+                  eventgridResourceId:
+                    description: The ID of the Kusto Event Grid Data Connection.
                     type: string
                   eventhubConsumerGroupName:
                     description: Specifies the Event Hub consumer group this data
@@ -1115,10 +1130,13 @@ spec:
                     description: The location where the Kusto Database should be created.
                       Changing this forces a new resource to be created.
                     type: string
-                  managedIdentityResourceId:
+                  managedIdentityId:
                     description: Empty for non-managed identity based data connection.
                       For system assigned identity, provide cluster resource Id. For
                       user assigned identity (UAI) provide the UAI resource Id.
+                    type: string
+                  managedIdentityResourceId:
+                    description: The ID of the Kusto Event Grid Data Connection.
                     type: string
                   mappingRuleName:
                     description: Specifies the mapping rule used for the message ingestion.

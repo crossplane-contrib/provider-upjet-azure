@@ -21,7 +21,7 @@ func (mg *IOTHub) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this IOTHub
 func (tr *IOTHub) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"endpoint[*].connection_string": "status.atProvider.endpoint[*].connectionString", "file_upload[*].connection_string": "fileUpload[*].connectionStringSecretRef", "shared_access_policy[*].primary_key": "status.atProvider.sharedAccessPolicy[*].primaryKey", "shared_access_policy[*].secondary_key": "status.atProvider.sharedAccessPolicy[*].secondaryKey"}
+	return map[string]string{"endpoint[*].connection_string": "status.atProvider.endpoint[*].connectionString", "file_upload[*].connection_string": "fileUpload.connectionStringSecretRef", "shared_access_policy[*].primary_key": "status.atProvider.sharedAccessPolicy[*].primaryKey", "shared_access_policy[*].secondary_key": "status.atProvider.sharedAccessPolicy[*].secondaryKey"}
 }
 
 // GetObservation of this IOTHub

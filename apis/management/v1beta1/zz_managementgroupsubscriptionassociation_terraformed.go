@@ -125,5 +125,5 @@ func (tr *ManagementGroupSubscriptionAssociation) LateInitialize(attrs []byte) (
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *ManagementGroupSubscriptionAssociation) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }

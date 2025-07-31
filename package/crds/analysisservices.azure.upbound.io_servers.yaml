@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.14.0
+    controller-gen.kubebuilder.io/version: v0.16.5
   name: servers.analysisservices.azure.upbound.io
 spec:
   group: analysisservices.azure.upbound.io
@@ -96,10 +96,6 @@ spec:
                     - name
                     - namespace
                     type: object
-                  enablePowerBiService:
-                    description: Indicates if the Power BI service is allowed to access
-                      or not.
-                    type: boolean
                   ipv4FirewallRule:
                     description: One or more ipv4_firewall_rule block(s) as defined
                       below.
@@ -126,12 +122,14 @@ spec:
                       this forces a new resource to be created.
                     type: string
                   powerBiServiceEnabled:
+                    description: Indicates if the Power BI service is allowed to access
+                      or not.
                     type: boolean
                   querypoolConnectionMode:
                     description: Controls how the read-write server is used in the
                       query pool. If this value is set to All then read-write servers
                       are also used for queries. Otherwise with ReadOnly these servers
-                      do not participate in query operations.
+                      do not participate in query operations. Defaults to All.
                     type: string
                   resourceGroupName:
                     description: The name of the Resource Group in which the Analysis
@@ -261,10 +259,6 @@ spec:
                     - name
                     - namespace
                     type: object
-                  enablePowerBiService:
-                    description: Indicates if the Power BI service is allowed to access
-                      or not.
-                    type: boolean
                   ipv4FirewallRule:
                     description: One or more ipv4_firewall_rule block(s) as defined
                       below.
@@ -291,12 +285,14 @@ spec:
                       this forces a new resource to be created.
                     type: string
                   powerBiServiceEnabled:
+                    description: Indicates if the Power BI service is allowed to access
+                      or not.
                     type: boolean
                   querypoolConnectionMode:
                     description: Controls how the read-write server is used in the
                       query pool. If this value is set to All then read-write servers
                       are also used for queries. Otherwise with ReadOnly these servers
-                      do not participate in query operations.
+                      do not participate in query operations. Defaults to All.
                     type: string
                   resourceGroupName:
                     description: The name of the Resource Group in which the Analysis
@@ -581,10 +577,6 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
-                  enablePowerBiService:
-                    description: Indicates if the Power BI service is allowed to access
-                      or not.
-                    type: boolean
                   id:
                     description: The ID of the Analysis Services Server.
                     type: string
@@ -614,12 +606,14 @@ spec:
                       this forces a new resource to be created.
                     type: string
                   powerBiServiceEnabled:
+                    description: Indicates if the Power BI service is allowed to access
+                      or not.
                     type: boolean
                   querypoolConnectionMode:
                     description: Controls how the read-write server is used in the
                       query pool. If this value is set to All then read-write servers
                       are also used for queries. Otherwise with ReadOnly these servers
-                      do not participate in query operations.
+                      do not participate in query operations. Defaults to All.
                     type: string
                   resourceGroupName:
                     description: The name of the Resource Group in which the Analysis

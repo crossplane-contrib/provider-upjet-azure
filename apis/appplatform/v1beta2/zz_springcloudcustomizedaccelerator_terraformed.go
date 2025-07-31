@@ -21,7 +21,7 @@ func (mg *SpringCloudCustomizedAccelerator) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this SpringCloudCustomizedAccelerator
 func (tr *SpringCloudCustomizedAccelerator) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"git_repository[*].basic_auth[*].password": "gitRepository[*].basicAuth[*].passwordSecretRef", "git_repository[*].ssh_auth[*].host_key": "gitRepository[*].sshAuth[*].hostKeySecretRef", "git_repository[*].ssh_auth[*].private_key": "gitRepository[*].sshAuth[*].privateKeySecretRef"}
+	return map[string]string{"git_repository[*].basic_auth[*].password": "gitRepository.basicAuth.passwordSecretRef", "git_repository[*].ssh_auth[*].host_key": "gitRepository.sshAuth.hostKeySecretRef", "git_repository[*].ssh_auth[*].private_key": "gitRepository.sshAuth.privateKeySecretRef"}
 }
 
 // GetObservation of this SpringCloudCustomizedAccelerator

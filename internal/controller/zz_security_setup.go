@@ -16,7 +16,6 @@ import (
 	securitycenterassessmentpolicy "github.com/upbound/provider-azure/internal/controller/security/securitycenterassessmentpolicy"
 	securitycenterautoprovisioning "github.com/upbound/provider-azure/internal/controller/security/securitycenterautoprovisioning"
 	securitycentercontact "github.com/upbound/provider-azure/internal/controller/security/securitycentercontact"
-	securitycenterservervulnerabilityassessment "github.com/upbound/provider-azure/internal/controller/security/securitycenterservervulnerabilityassessment"
 	securitycenterservervulnerabilityassessmentvirtualmachine "github.com/upbound/provider-azure/internal/controller/security/securitycenterservervulnerabilityassessmentvirtualmachine"
 	securitycentersetting "github.com/upbound/provider-azure/internal/controller/security/securitycentersetting"
 	securitycentersubscriptionpricing "github.com/upbound/provider-azure/internal/controller/security/securitycentersubscriptionpricing"
@@ -35,7 +34,6 @@ func Setup_security(mgr ctrl.Manager, o controller.Options) error {
 		securitycenterassessmentpolicy.Setup,
 		securitycenterautoprovisioning.Setup,
 		securitycentercontact.Setup,
-		securitycenterservervulnerabilityassessment.Setup,
 		securitycenterservervulnerabilityassessmentvirtualmachine.Setup,
 		securitycentersetting.Setup,
 		securitycentersubscriptionpricing.Setup,

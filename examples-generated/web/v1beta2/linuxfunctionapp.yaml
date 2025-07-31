@@ -57,7 +57,7 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    skuName: Y1
+    skuName: B1
 
 ---
 

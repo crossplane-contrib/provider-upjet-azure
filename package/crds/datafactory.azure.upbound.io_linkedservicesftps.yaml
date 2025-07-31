@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.14.0
+    controller-gen.kubebuilder.io/version: v0.16.5
   name: linkedservicesftps.datafactory.azure.upbound.io
 spec:
   group: datafactory.azure.upbound.io
@@ -89,7 +89,7 @@ spec:
                     type: array
                   authenticationType:
                     description: The type of authentication used to connect to the
-                      web table source. Valid options are Anonymous, Basic and ClientCertificate.
+                      SFTP server. Valid options are MultiFactor, Basic and SshPublicKey.
                     type: string
                   dataFactoryId:
                     description: The Data Factory ID in which to associate the Linked
@@ -181,9 +181,49 @@ spec:
                     description: The host key fingerprint of the SFTP server.
                     type: string
                   integrationRuntimeName:
-                    description: The integration runtime reference to associate with
-                      the Data Factory Linked Service.
+                    description: The name of the integration runtime to associate
+                      with the Data Factory Linked Service.
                     type: string
+                  keyVaultPassword:
+                    description: A key_vault_password block as defined below.
+                    items:
+                      properties:
+                        linkedServiceName:
+                          description: Specifies the name of an existing Key Vault
+                            Data Factory Linked Service.
+                          type: string
+                        secretName:
+                          description: Specifies the name of the secret containing
+                            the password.
+                          type: string
+                      type: object
+                    type: array
+                  keyVaultPrivateKeyContentBase64:
+                    description: A key_vault_private_key_content_base64 block as defined
+                      below.
+                    properties:
+                      linkedServiceName:
+                        description: Specifies the name of an existing Key Vault Data
+                          Factory Linked Service.
+                        type: string
+                      secretName:
+                        description: Specifies the name of the secret containing the
+                          Base64 encoded SSH private key.
+                        type: string
+                    type: object
+                  keyVaultPrivateKeyPassphrase:
+                    description: A key_vault_private_key_passphrase block as defined
+                      below.
+                    properties:
+                      linkedServiceName:
+                        description: Specifies the name of an existing Key Vault Data
+                          Factory Linked Service.
+                        type: string
+                      secretName:
+                        description: Specifies the name of the secret containing the
+                          SSH private key passphrase.
+                        type: string
+                    type: object
                   parameters:
                     additionalProperties:
                       type: string
@@ -192,7 +232,7 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   passwordSecretRef:
-                    description: Password to logon to the SFTP Server for Basic Authentication.
+                    description: Password to log on to the SFTP Server for Basic Authentication.
                     properties:
                       key:
                         description: The key to select.
@@ -212,6 +252,46 @@ spec:
                     description: The TCP port number that the SFTP server uses to
                       listen for client connection. Default value is 22.
                     type: number
+                  privateKeyContentBase64SecretRef:
+                    description: The Base64 encoded private key content in OpenSSH
+                      format used to log on to the SFTP server.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  privateKeyPassphraseSecretRef:
+                    description: The passphrase for the private key if the key is
+                      encrypted.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  privateKeyPath:
+                    description: The absolute path to the private key file that the
+                      self-hosted integration runtime can access.
+                    type: string
                   skipHostKeyValidation:
                     description: Whether to validate host key fingerprint while connecting.
                       If set to false, host_key_fingerprint must also be set.
@@ -248,7 +328,7 @@ spec:
                     type: array
                   authenticationType:
                     description: The type of authentication used to connect to the
-                      web table source. Valid options are Anonymous, Basic and ClientCertificate.
+                      SFTP server. Valid options are MultiFactor, Basic and SshPublicKey.
                     type: string
                   description:
                     description: The description for the Data Factory Linked Service.
@@ -260,9 +340,49 @@ spec:
                     description: The host key fingerprint of the SFTP server.
                     type: string
                   integrationRuntimeName:
-                    description: The integration runtime reference to associate with
-                      the Data Factory Linked Service.
+                    description: The name of the integration runtime to associate
+                      with the Data Factory Linked Service.
                     type: string
+                  keyVaultPassword:
+                    description: A key_vault_password block as defined below.
+                    items:
+                      properties:
+                        linkedServiceName:
+                          description: Specifies the name of an existing Key Vault
+                            Data Factory Linked Service.
+                          type: string
+                        secretName:
+                          description: Specifies the name of the secret containing
+                            the password.
+                          type: string
+                      type: object
+                    type: array
+                  keyVaultPrivateKeyContentBase64:
+                    description: A key_vault_private_key_content_base64 block as defined
+                      below.
+                    properties:
+                      linkedServiceName:
+                        description: Specifies the name of an existing Key Vault Data
+                          Factory Linked Service.
+                        type: string
+                      secretName:
+                        description: Specifies the name of the secret containing the
+                          Base64 encoded SSH private key.
+                        type: string
+                    type: object
+                  keyVaultPrivateKeyPassphrase:
+                    description: A key_vault_private_key_passphrase block as defined
+                      below.
+                    properties:
+                      linkedServiceName:
+                        description: Specifies the name of an existing Key Vault Data
+                          Factory Linked Service.
+                        type: string
+                      secretName:
+                        description: Specifies the name of the secret containing the
+                          SSH private key passphrase.
+                        type: string
+                    type: object
                   parameters:
                     additionalProperties:
                       type: string
@@ -271,7 +391,7 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   passwordSecretRef:
-                    description: Password to logon to the SFTP Server for Basic Authentication.
+                    description: Password to log on to the SFTP Server for Basic Authentication.
                     properties:
                       key:
                         description: The key to select.
@@ -291,6 +411,46 @@ spec:
                     description: The TCP port number that the SFTP server uses to
                       listen for client connection. Default value is 22.
                     type: number
+                  privateKeyContentBase64SecretRef:
+                    description: The Base64 encoded private key content in OpenSSH
+                      format used to log on to the SFTP server.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  privateKeyPassphraseSecretRef:
+                    description: The passphrase for the private key if the key is
+                      encrypted.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  privateKeyPath:
+                    description: The absolute path to the private key file that the
+                      self-hosted integration runtime can access.
+                    type: string
                   skipHostKeyValidation:
                     description: Whether to validate host key fingerprint while connecting.
                       If set to false, host_key_fingerprint must also be set.
@@ -298,8 +458,6 @@ spec:
                   username:
                     description: The username used to log on to the SFTP server.
                     type: string
-                required:
-                - passwordSecretRef
                 type: object
               managementPolicies:
                 default:
@@ -477,9 +635,6 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.host)
                 || (has(self.initProvider) && has(self.initProvider.host))'
-            - message: spec.forProvider.passwordSecretRef is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.passwordSecretRef)'
             - message: spec.forProvider.port is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.port)
@@ -508,7 +663,7 @@ spec:
                     type: array
                   authenticationType:
                     description: The type of authentication used to connect to the
-                      web table source. Valid options are Anonymous, Basic and ClientCertificate.
+                      SFTP server. Valid options are MultiFactor, Basic and SshPublicKey.
                     type: string
                   dataFactoryId:
                     description: The Data Factory ID in which to associate the Linked
@@ -527,9 +682,49 @@ spec:
                     description: The ID of the Data Factory Linked Service.
                     type: string
                   integrationRuntimeName:
-                    description: The integration runtime reference to associate with
-                      the Data Factory Linked Service.
+                    description: The name of the integration runtime to associate
+                      with the Data Factory Linked Service.
                     type: string
+                  keyVaultPassword:
+                    description: A key_vault_password block as defined below.
+                    items:
+                      properties:
+                        linkedServiceName:
+                          description: Specifies the name of an existing Key Vault
+                            Data Factory Linked Service.
+                          type: string
+                        secretName:
+                          description: Specifies the name of the secret containing
+                            the password.
+                          type: string
+                      type: object
+                    type: array
+                  keyVaultPrivateKeyContentBase64:
+                    description: A key_vault_private_key_content_base64 block as defined
+                      below.
+                    properties:
+                      linkedServiceName:
+                        description: Specifies the name of an existing Key Vault Data
+                          Factory Linked Service.
+                        type: string
+                      secretName:
+                        description: Specifies the name of the secret containing the
+                          Base64 encoded SSH private key.
+                        type: string
+                    type: object
+                  keyVaultPrivateKeyPassphrase:
+                    description: A key_vault_private_key_passphrase block as defined
+                      below.
+                    properties:
+                      linkedServiceName:
+                        description: Specifies the name of an existing Key Vault Data
+                          Factory Linked Service.
+                        type: string
+                      secretName:
+                        description: Specifies the name of the secret containing the
+                          SSH private key passphrase.
+                        type: string
+                    type: object
                   parameters:
                     additionalProperties:
                       type: string
@@ -541,6 +736,10 @@ spec:
                     description: The TCP port number that the SFTP server uses to
                       listen for client connection. Default value is 22.
                     type: number
+                  privateKeyPath:
+                    description: The absolute path to the private key file that the
+                      self-hosted integration runtime can access.
+                    type: string
                   skipHostKeyValidation:
                     description: Whether to validate host key fingerprint while connecting.
                       If set to false, host_key_fingerprint must also be set.

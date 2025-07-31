@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.14.0
+    controller-gen.kubebuilder.io/version: v0.16.5
   name: mssqljobagents.sql.azure.upbound.io
 spec:
   group: sql.azure.upbound.io
@@ -74,7 +74,7 @@ spec:
               forProvider:
                 properties:
                   databaseId:
-                    description: The ID of the database to store metadata for the
+                    description: The ID of the database to store metadata for this
                       Elastic Job Agent. Changing this forces a new Elastic Job Agent
                       to be created.
                     type: string
@@ -152,19 +152,40 @@ spec:
                             type: string
                         type: object
                     type: object
+                  identity:
+                    description: An identity block as defined below.
+                    properties:
+                      identityIds:
+                        description: Specifies a list of User Assigned Managed Identity
+                          IDs to assign to this Elastic Job Agent.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      type:
+                        description: Specifies the type of Managed Service Identity
+                          that should be configured on this Elastic Job Agent. Currently
+                          only UserAssigned is supported.
+                        type: string
+                    type: object
                   location:
-                    description: The Azure Region where the Elastic Job Agent should
+                    description: The Azure Region where this Elastic Job Agent should
                       exist. Changing this forces a new Elastic Job Agent to be created.
                     type: string
                   name:
                     description: The name which should be used for this Elastic Job
                       Agent. Changing this forces a new Elastic Job Agent to be created.
                     type: string
+                  sku:
+                    description: The name of the SKU to use for this Elastic Job Agent.
+                      Possible values are JA100, JA200, JA400, and JA800. Defaults
+                      to JA100.
+                    type: string
                   tags:
                     additionalProperties:
                       type: string
-                    description: A mapping of tags which should be assigned to the
-                      Database.
+                    description: A mapping of tags which should be assigned to this
+                      Elastic Job Agent.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object
@@ -182,7 +203,7 @@ spec:
                   autoscaler.
                 properties:
                   databaseId:
-                    description: The ID of the database to store metadata for the
+                    description: The ID of the database to store metadata for this
                       Elastic Job Agent. Changing this forces a new Elastic Job Agent
                       to be created.
                     type: string
@@ -260,19 +281,40 @@ spec:
                             type: string
                         type: object
                     type: object
+                  identity:
+                    description: An identity block as defined below.
+                    properties:
+                      identityIds:
+                        description: Specifies a list of User Assigned Managed Identity
+                          IDs to assign to this Elastic Job Agent.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      type:
+                        description: Specifies the type of Managed Service Identity
+                          that should be configured on this Elastic Job Agent. Currently
+                          only UserAssigned is supported.
+                        type: string
+                    type: object
                   location:
-                    description: The Azure Region where the Elastic Job Agent should
+                    description: The Azure Region where this Elastic Job Agent should
                       exist. Changing this forces a new Elastic Job Agent to be created.
                     type: string
                   name:
                     description: The name which should be used for this Elastic Job
                       Agent. Changing this forces a new Elastic Job Agent to be created.
                     type: string
+                  sku:
+                    description: The name of the SKU to use for this Elastic Job Agent.
+                      Possible values are JA100, JA200, JA400, and JA800. Defaults
+                      to JA100.
+                    type: string
                   tags:
                     additionalProperties:
                       type: string
-                    description: A mapping of tags which should be assigned to the
-                      Database.
+                    description: A mapping of tags which should be assigned to this
+                      Elastic Job Agent.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object
@@ -458,26 +500,47 @@ spec:
               atProvider:
                 properties:
                   databaseId:
-                    description: The ID of the database to store metadata for the
+                    description: The ID of the database to store metadata for this
                       Elastic Job Agent. Changing this forces a new Elastic Job Agent
                       to be created.
                     type: string
                   id:
                     description: The ID of the Elastic Job Agent.
                     type: string
+                  identity:
+                    description: An identity block as defined below.
+                    properties:
+                      identityIds:
+                        description: Specifies a list of User Assigned Managed Identity
+                          IDs to assign to this Elastic Job Agent.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      type:
+                        description: Specifies the type of Managed Service Identity
+                          that should be configured on this Elastic Job Agent. Currently
+                          only UserAssigned is supported.
+                        type: string
+                    type: object
                   location:
-                    description: The Azure Region where the Elastic Job Agent should
+                    description: The Azure Region where this Elastic Job Agent should
                       exist. Changing this forces a new Elastic Job Agent to be created.
                     type: string
                   name:
                     description: The name which should be used for this Elastic Job
                       Agent. Changing this forces a new Elastic Job Agent to be created.
                     type: string
+                  sku:
+                    description: The name of the SKU to use for this Elastic Job Agent.
+                      Possible values are JA100, JA200, JA400, and JA800. Defaults
+                      to JA100.
+                    type: string
                   tags:
                     additionalProperties:
                       type: string
-                    description: A mapping of tags which should be assigned to the
-                      Database.
+                    description: A mapping of tags which should be assigned to this
+                      Elastic Job Agent.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object

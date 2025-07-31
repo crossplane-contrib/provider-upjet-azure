@@ -80,7 +80,7 @@ type IdentityInitParameters struct {
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
-	// Specifies the type of Managed Service Identity that should be configured on the Databricks Access Connector. Possible values include SystemAssigned or UserAssigned.
+	// Specifies the type of Managed Service Identity that should be configured on the Databricks Access Connector. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -96,7 +96,7 @@ type IdentityObservation struct {
 	// The Tenant ID of the System Assigned Managed Service Identity that is configured on this Access Connector.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 
-	// Specifies the type of Managed Service Identity that should be configured on the Databricks Access Connector. Possible values include SystemAssigned or UserAssigned.
+	// Specifies the type of Managed Service Identity that should be configured on the Databricks Access Connector. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -107,7 +107,7 @@ type IdentityParameters struct {
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
-	// Specifies the type of Managed Service Identity that should be configured on the Databricks Access Connector. Possible values include SystemAssigned or UserAssigned.
+	// Specifies the type of Managed Service Identity that should be configured on the Databricks Access Connector. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }

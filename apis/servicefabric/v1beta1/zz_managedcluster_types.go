@@ -279,8 +279,24 @@ type ManagedClusterInitParameters struct {
 	// One or more node_type blocks as defined below.
 	NodeType []ManagedClusterNodeTypeInitParameters `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
+	// Administrator password for the VMs that will be created as part of this cluster.
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+
 	// SKU for this cluster. Changing this forces a new resource to be created. Default is Basic, allowed values are either Basic or Standard.
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
+
+	// The resource ID of the Subnet. Changing this forces a new Resource Group to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Resource Group.
 	// +mapType=granular
@@ -522,6 +538,9 @@ type ManagedClusterObservation struct {
 	// SKU for this cluster. Changing this forces a new resource to be created. Default is Basic, allowed values are either Basic or Standard.
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
+	// The resource ID of the Subnet. Changing this forces a new Resource Group to be created.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
 	// A mapping of tags which should be assigned to the Resource Group.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -595,6 +614,20 @@ type ManagedClusterParameters struct {
 	// SKU for this cluster. Changing this forces a new resource to be created. Default is Basic, allowed values are either Basic or Standard.
 	// +kubebuilder:validation:Optional
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
+
+	// The resource ID of the Subnet. Changing this forces a new Resource Group to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Resource Group.
 	// +kubebuilder:validation:Optional

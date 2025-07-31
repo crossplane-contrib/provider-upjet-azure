@@ -116,6 +116,9 @@ type ContainerAppInitParameters struct {
 	// An ingress block as detailed below.
 	Ingress *IngressInitParameters `json:"ingress,omitempty" tf:"ingress,omitempty"`
 
+	// The maximum of inactive revisions allowed for this Container App.
+	MaxInactiveRevisions *float64 `json:"maxInactiveRevisions,omitempty" tf:"max_inactive_revisions,omitempty"`
+
 	// A registry block as detailed below.
 	Registry []RegistryInitParameters `json:"registry,omitempty" tf:"registry,omitempty"`
 
@@ -164,6 +167,9 @@ type ContainerAppObservation struct {
 
 	// The location this Container App is deployed in. This is the same as the Environment in which it is deployed.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The maximum of inactive revisions allowed for this Container App.
+	MaxInactiveRevisions *float64 `json:"maxInactiveRevisions,omitempty" tf:"max_inactive_revisions,omitempty"`
 
 	// A list of the Public IP Addresses which the Container App uses for outbound network access.
 	OutboundIPAddresses []*string `json:"outboundIpAddresses,omitempty" tf:"outbound_ip_addresses,omitempty"`
@@ -219,6 +225,10 @@ type ContainerAppParameters struct {
 	// An ingress block as detailed below.
 	// +kubebuilder:validation:Optional
 	Ingress *IngressParameters `json:"ingress,omitempty" tf:"ingress,omitempty"`
+
+	// The maximum of inactive revisions allowed for this Container App.
+	// +kubebuilder:validation:Optional
+	MaxInactiveRevisions *float64 `json:"maxInactiveRevisions,omitempty" tf:"max_inactive_revisions,omitempty"`
 
 	// A registry block as detailed below.
 	// +kubebuilder:validation:Optional
@@ -400,49 +410,91 @@ type ContainerParameters struct {
 	VolumeMounts []VolumeMountsParameters `json:"volumeMounts,omitempty" tf:"volume_mounts,omitempty"`
 }
 
+type CorsInitParameters struct {
+
+	// Whether user credentials are allowed in the cross-origin request is enabled. Defaults to false.
+	AllowCredentialsEnabled *bool `json:"allowCredentialsEnabled,omitempty" tf:"allow_credentials_enabled,omitempty"`
+
+	// Specifies the list of request headers that are permitted in the actual request.
+	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
+
+	// Specifies the list of HTTP methods are allowed when accessing the resource in a cross-origin request.
+	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
+
+	// Specifies the list of origins that are allowed to make cross-origin calls.
+	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
+
+	// Specifies the list of headers exposed to the browser in the response to a cross-origin request.
+	ExposedHeaders []*string `json:"exposedHeaders,omitempty" tf:"exposed_headers,omitempty"`
+
+	// Specifies the number of seconds that the browser can cache the results of a preflight request.
+	MaxAgeInSeconds *float64 `json:"maxAgeInSeconds,omitempty" tf:"max_age_in_seconds,omitempty"`
+}
+
+type CorsObservation struct {
+
+	// Whether user credentials are allowed in the cross-origin request is enabled. Defaults to false.
+	AllowCredentialsEnabled *bool `json:"allowCredentialsEnabled,omitempty" tf:"allow_credentials_enabled,omitempty"`
+
+	// Specifies the list of request headers that are permitted in the actual request.
+	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
+
+	// Specifies the list of HTTP methods are allowed when accessing the resource in a cross-origin request.
+	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
+
+	// Specifies the list of origins that are allowed to make cross-origin calls.
+	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
+
+	// Specifies the list of headers exposed to the browser in the response to a cross-origin request.
+	ExposedHeaders []*string `json:"exposedHeaders,omitempty" tf:"exposed_headers,omitempty"`
+
+	// Specifies the number of seconds that the browser can cache the results of a preflight request.
+	MaxAgeInSeconds *float64 `json:"maxAgeInSeconds,omitempty" tf:"max_age_in_seconds,omitempty"`
+}
+
+type CorsParameters struct {
+
+	// Whether user credentials are allowed in the cross-origin request is enabled. Defaults to false.
+	// +kubebuilder:validation:Optional
+	AllowCredentialsEnabled *bool `json:"allowCredentialsEnabled,omitempty" tf:"allow_credentials_enabled,omitempty"`
+
+	// Specifies the list of request headers that are permitted in the actual request.
+	// +kubebuilder:validation:Optional
+	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
+
+	// Specifies the list of HTTP methods are allowed when accessing the resource in a cross-origin request.
+	// +kubebuilder:validation:Optional
+	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
+
+	// Specifies the list of origins that are allowed to make cross-origin calls.
+	// +kubebuilder:validation:Optional
+	AllowedOrigins []*string `json:"allowedOrigins" tf:"allowed_origins,omitempty"`
+
+	// Specifies the list of headers exposed to the browser in the response to a cross-origin request.
+	// +kubebuilder:validation:Optional
+	ExposedHeaders []*string `json:"exposedHeaders,omitempty" tf:"exposed_headers,omitempty"`
+
+	// Specifies the number of seconds that the browser can cache the results of a preflight request.
+	// +kubebuilder:validation:Optional
+	MaxAgeInSeconds *float64 `json:"maxAgeInSeconds,omitempty" tf:"max_age_in_seconds,omitempty"`
+}
+
 type CustomDomainInitParameters struct {
-
-	// The Binding type. Possible values include Disabled and SniEnabled. Defaults to Disabled.
-	// The Binding type. Possible values include `Disabled` and `SniEnabled`. Defaults to `Disabled`
-	CertificateBindingType *string `json:"certificateBindingType,omitempty" tf:"certificate_binding_type,omitempty"`
-
-	// The ID of the Container App Environment Certificate.
-	CertificateID *string `json:"certificateId,omitempty" tf:"certificate_id,omitempty"`
-
-	// The name of the Volume to be mounted in the container.
-	// The hostname of the Certificate. Must be the CN or a named SAN in the certificate.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type CustomDomainObservation struct {
 
-	// The Binding type. Possible values include Disabled and SniEnabled. Defaults to Disabled.
-	// The Binding type. Possible values include `Disabled` and `SniEnabled`. Defaults to `Disabled`
+	// The Binding type.
 	CertificateBindingType *string `json:"certificateBindingType,omitempty" tf:"certificate_binding_type,omitempty"`
 
 	// The ID of the Container App Environment Certificate.
 	CertificateID *string `json:"certificateId,omitempty" tf:"certificate_id,omitempty"`
 
-	// The name of the Volume to be mounted in the container.
-	// The hostname of the Certificate. Must be the CN or a named SAN in the certificate.
+	// The hostname of the Certificate.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type CustomDomainParameters struct {
-
-	// The Binding type. Possible values include Disabled and SniEnabled. Defaults to Disabled.
-	// The Binding type. Possible values include `Disabled` and `SniEnabled`. Defaults to `Disabled`
-	// +kubebuilder:validation:Optional
-	CertificateBindingType *string `json:"certificateBindingType,omitempty" tf:"certificate_binding_type,omitempty"`
-
-	// The ID of the Container App Environment Certificate.
-	// +kubebuilder:validation:Optional
-	CertificateID *string `json:"certificateId" tf:"certificate_id,omitempty"`
-
-	// The name of the Volume to be mounted in the container.
-	// The hostname of the Certificate. Must be the CN or a named SAN in the certificate.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type CustomScaleRuleAuthenticationInitParameters struct {
@@ -830,8 +882,12 @@ type IngressInitParameters struct {
 	// Should this ingress allow insecure connections?
 	AllowInsecureConnections *bool `json:"allowInsecureConnections,omitempty" tf:"allow_insecure_connections,omitempty"`
 
-	// One or more custom_domain block as detailed below.
-	CustomDomain *CustomDomainInitParameters `json:"customDomain,omitempty" tf:"custom_domain,omitempty"`
+	// The client certificate mode for the Ingress. Possible values are require, accept, and ignore.
+	// Client certificate mode for mTLS authentication. Ignore indicates server drops client certificate on forwarding. Accept indicates server forwards client certificate but does not require a client certificate. Require indicates server requires a client certificate.
+	ClientCertificateMode *string `json:"clientCertificateMode,omitempty" tf:"client_certificate_mode,omitempty"`
+
+	// A cors block as defined below.
+	Cors *CorsInitParameters `json:"cors,omitempty" tf:"cors,omitempty"`
 
 	// The exposed port on the container for the Ingress traffic.
 	// The exposed port on the container for the Ingress traffic.
@@ -862,8 +918,15 @@ type IngressObservation struct {
 	// Should this ingress allow insecure connections?
 	AllowInsecureConnections *bool `json:"allowInsecureConnections,omitempty" tf:"allow_insecure_connections,omitempty"`
 
+	// The client certificate mode for the Ingress. Possible values are require, accept, and ignore.
+	// Client certificate mode for mTLS authentication. Ignore indicates server drops client certificate on forwarding. Accept indicates server forwards client certificate but does not require a client certificate. Require indicates server requires a client certificate.
+	ClientCertificateMode *string `json:"clientCertificateMode,omitempty" tf:"client_certificate_mode,omitempty"`
+
+	// A cors block as defined below.
+	Cors *CorsObservation `json:"cors,omitempty" tf:"cors,omitempty"`
+
 	// One or more custom_domain block as detailed below.
-	CustomDomain *CustomDomainObservation `json:"customDomain,omitempty" tf:"custom_domain,omitempty"`
+	CustomDomain []CustomDomainObservation `json:"customDomain,omitempty" tf:"custom_domain,omitempty"`
 
 	// The exposed port on the container for the Ingress traffic.
 	// The exposed port on the container for the Ingress traffic.
@@ -899,9 +962,14 @@ type IngressParameters struct {
 	// +kubebuilder:validation:Optional
 	AllowInsecureConnections *bool `json:"allowInsecureConnections,omitempty" tf:"allow_insecure_connections,omitempty"`
 
-	// One or more custom_domain block as detailed below.
+	// The client certificate mode for the Ingress. Possible values are require, accept, and ignore.
+	// Client certificate mode for mTLS authentication. Ignore indicates server drops client certificate on forwarding. Accept indicates server forwards client certificate but does not require a client certificate. Require indicates server requires a client certificate.
 	// +kubebuilder:validation:Optional
-	CustomDomain *CustomDomainParameters `json:"customDomain,omitempty" tf:"custom_domain,omitempty"`
+	ClientCertificateMode *string `json:"clientCertificateMode,omitempty" tf:"client_certificate_mode,omitempty"`
+
+	// A cors block as defined below.
+	// +kubebuilder:validation:Optional
+	Cors *CorsParameters `json:"cors,omitempty" tf:"cors,omitempty"`
 
 	// The exposed port on the container for the Ingress traffic.
 	// The exposed port on the container for the Ingress traffic.
@@ -1100,6 +1168,10 @@ type InitContainerVolumeMountsInitParameters struct {
 	// The path in the container at which to mount this volume.
 	// The path in the container at which to mount this volume.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// The sub path of the volume to be mounted in the container.
+	// The sub path of the volume to be mounted in the container.
+	SubPath *string `json:"subPath,omitempty" tf:"sub_path,omitempty"`
 }
 
 type InitContainerVolumeMountsObservation struct {
@@ -1111,6 +1183,10 @@ type InitContainerVolumeMountsObservation struct {
 	// The path in the container at which to mount this volume.
 	// The path in the container at which to mount this volume.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// The sub path of the volume to be mounted in the container.
+	// The sub path of the volume to be mounted in the container.
+	SubPath *string `json:"subPath,omitempty" tf:"sub_path,omitempty"`
 }
 
 type InitContainerVolumeMountsParameters struct {
@@ -1124,12 +1200,17 @@ type InitContainerVolumeMountsParameters struct {
 	// The path in the container at which to mount this volume.
 	// +kubebuilder:validation:Optional
 	Path *string `json:"path" tf:"path,omitempty"`
+
+	// The sub path of the volume to be mounted in the container.
+	// The sub path of the volume to be mounted in the container.
+	// +kubebuilder:validation:Optional
+	SubPath *string `json:"subPath,omitempty" tf:"sub_path,omitempty"`
 }
 
 type LivenessProbeInitParameters struct {
 
-	// The number of consecutive failures required to consider this probe as failed. Possible values are between 1 and 10. Defaults to 3.
-	// The number of consecutive failures required to consider this probe as failed. Possible values are between `1` and `10`. Defaults to `3`.
+	// The number of consecutive failures required to consider this probe as failed. Possible values are between 1 and 30. Defaults to 3.
+	// The number of consecutive failures required to consider this probe as failed. Possible values are between `1` and `30`. Defaults to `3`.
 	FailureCountThreshold *float64 `json:"failureCountThreshold,omitempty" tf:"failure_count_threshold,omitempty"`
 
 	// A header block as detailed below.
@@ -1139,8 +1220,8 @@ type LivenessProbeInitParameters struct {
 	// The probe hostname. Defaults to the pod IP address. Setting a value for `Host` in `headers` can be used to override this for `http` and `https` type probes.
 	Host *string `json:"host,omitempty" tf:"host,omitempty"`
 
-	// The time in seconds to wait after the container has started before the probe is started.
-	// The time in seconds to wait after the container has started before the probe is started.
+	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between 0 and 60. Defaults to 0 seconds.
+	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between `0` and `60`. Defaults to `1` seconds.
 	InitialDelay *float64 `json:"initialDelay,omitempty" tf:"initial_delay,omitempty"`
 
 	// How often, in seconds, the probe should run. Possible values are between 1 and 240. Defaults to 10
@@ -1166,8 +1247,8 @@ type LivenessProbeInitParameters struct {
 
 type LivenessProbeObservation struct {
 
-	// The number of consecutive failures required to consider this probe as failed. Possible values are between 1 and 10. Defaults to 3.
-	// The number of consecutive failures required to consider this probe as failed. Possible values are between `1` and `10`. Defaults to `3`.
+	// The number of consecutive failures required to consider this probe as failed. Possible values are between 1 and 30. Defaults to 3.
+	// The number of consecutive failures required to consider this probe as failed. Possible values are between `1` and `30`. Defaults to `3`.
 	FailureCountThreshold *float64 `json:"failureCountThreshold,omitempty" tf:"failure_count_threshold,omitempty"`
 
 	// A header block as detailed below.
@@ -1177,8 +1258,8 @@ type LivenessProbeObservation struct {
 	// The probe hostname. Defaults to the pod IP address. Setting a value for `Host` in `headers` can be used to override this for `http` and `https` type probes.
 	Host *string `json:"host,omitempty" tf:"host,omitempty"`
 
-	// The time in seconds to wait after the container has started before the probe is started.
-	// The time in seconds to wait after the container has started before the probe is started.
+	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between 0 and 60. Defaults to 0 seconds.
+	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between `0` and `60`. Defaults to `1` seconds.
 	InitialDelay *float64 `json:"initialDelay,omitempty" tf:"initial_delay,omitempty"`
 
 	// How often, in seconds, the probe should run. Possible values are between 1 and 240. Defaults to 10
@@ -1208,8 +1289,8 @@ type LivenessProbeObservation struct {
 
 type LivenessProbeParameters struct {
 
-	// The number of consecutive failures required to consider this probe as failed. Possible values are between 1 and 10. Defaults to 3.
-	// The number of consecutive failures required to consider this probe as failed. Possible values are between `1` and `10`. Defaults to `3`.
+	// The number of consecutive failures required to consider this probe as failed. Possible values are between 1 and 30. Defaults to 3.
+	// The number of consecutive failures required to consider this probe as failed. Possible values are between `1` and `30`. Defaults to `3`.
 	// +kubebuilder:validation:Optional
 	FailureCountThreshold *float64 `json:"failureCountThreshold,omitempty" tf:"failure_count_threshold,omitempty"`
 
@@ -1222,8 +1303,8 @@ type LivenessProbeParameters struct {
 	// +kubebuilder:validation:Optional
 	Host *string `json:"host,omitempty" tf:"host,omitempty"`
 
-	// The time in seconds to wait after the container has started before the probe is started.
-	// The time in seconds to wait after the container has started before the probe is started.
+	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between 0 and 60. Defaults to 0 seconds.
+	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between `0` and `60`. Defaults to `1` seconds.
 	// +kubebuilder:validation:Optional
 	InitialDelay *float64 `json:"initialDelay,omitempty" tf:"initial_delay,omitempty"`
 
@@ -1290,8 +1371,8 @@ type ReadinessProbeHeaderParameters struct {
 
 type ReadinessProbeInitParameters struct {
 
-	// The number of consecutive failures required to consider this probe as failed. Possible values are between 1 and 10. Defaults to 3.
-	// The number of consecutive failures required to consider this probe as failed. Possible values are between `1` and `10`. Defaults to `3`.
+	// The number of consecutive failures required to consider this probe as failed. Possible values are between 1 and 30. Defaults to 3.
+	// The number of consecutive failures required to consider this probe as failed. Possible values are between `1` and `30`. Defaults to `3`.
 	FailureCountThreshold *float64 `json:"failureCountThreshold,omitempty" tf:"failure_count_threshold,omitempty"`
 
 	// A header block as detailed below.
@@ -1300,6 +1381,10 @@ type ReadinessProbeInitParameters struct {
 	// The value for the host header which should be sent with this probe. If unspecified, the IP Address of the Pod is used as the host header. Setting a value for Host in headers can be used to override this for HTTP and HTTPS type probes.
 	// The probe hostname. Defaults to the pod IP address. Setting a value for `Host` in `headers` can be used to override this for `http` and `https` type probes.
 	Host *string `json:"host,omitempty" tf:"host,omitempty"`
+
+	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between 0 and 60. Defaults to 0 seconds.
+	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between `0` and `60`. Defaults to `0` seconds.
+	InitialDelay *float64 `json:"initialDelay,omitempty" tf:"initial_delay,omitempty"`
 
 	// How often, in seconds, the probe should run. Possible values are between 1 and 240. Defaults to 10
 	// How often, in seconds, the probe should run. Possible values are between `1` and `240`. Defaults to `10`
@@ -1328,8 +1413,8 @@ type ReadinessProbeInitParameters struct {
 
 type ReadinessProbeObservation struct {
 
-	// The number of consecutive failures required to consider this probe as failed. Possible values are between 1 and 10. Defaults to 3.
-	// The number of consecutive failures required to consider this probe as failed. Possible values are between `1` and `10`. Defaults to `3`.
+	// The number of consecutive failures required to consider this probe as failed. Possible values are between 1 and 30. Defaults to 3.
+	// The number of consecutive failures required to consider this probe as failed. Possible values are between `1` and `30`. Defaults to `3`.
 	FailureCountThreshold *float64 `json:"failureCountThreshold,omitempty" tf:"failure_count_threshold,omitempty"`
 
 	// A header block as detailed below.
@@ -1338,6 +1423,10 @@ type ReadinessProbeObservation struct {
 	// The value for the host header which should be sent with this probe. If unspecified, the IP Address of the Pod is used as the host header. Setting a value for Host in headers can be used to override this for HTTP and HTTPS type probes.
 	// The probe hostname. Defaults to the pod IP address. Setting a value for `Host` in `headers` can be used to override this for `http` and `https` type probes.
 	Host *string `json:"host,omitempty" tf:"host,omitempty"`
+
+	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between 0 and 60. Defaults to 0 seconds.
+	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between `0` and `60`. Defaults to `0` seconds.
+	InitialDelay *float64 `json:"initialDelay,omitempty" tf:"initial_delay,omitempty"`
 
 	// How often, in seconds, the probe should run. Possible values are between 1 and 240. Defaults to 10
 	// How often, in seconds, the probe should run. Possible values are between `1` and `240`. Defaults to `10`
@@ -1366,8 +1455,8 @@ type ReadinessProbeObservation struct {
 
 type ReadinessProbeParameters struct {
 
-	// The number of consecutive failures required to consider this probe as failed. Possible values are between 1 and 10. Defaults to 3.
-	// The number of consecutive failures required to consider this probe as failed. Possible values are between `1` and `10`. Defaults to `3`.
+	// The number of consecutive failures required to consider this probe as failed. Possible values are between 1 and 30. Defaults to 3.
+	// The number of consecutive failures required to consider this probe as failed. Possible values are between `1` and `30`. Defaults to `3`.
 	// +kubebuilder:validation:Optional
 	FailureCountThreshold *float64 `json:"failureCountThreshold,omitempty" tf:"failure_count_threshold,omitempty"`
 
@@ -1379,6 +1468,11 @@ type ReadinessProbeParameters struct {
 	// The probe hostname. Defaults to the pod IP address. Setting a value for `Host` in `headers` can be used to override this for `http` and `https` type probes.
 	// +kubebuilder:validation:Optional
 	Host *string `json:"host,omitempty" tf:"host,omitempty"`
+
+	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between 0 and 60. Defaults to 0 seconds.
+	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between `0` and `60`. Defaults to `0` seconds.
+	// +kubebuilder:validation:Optional
+	InitialDelay *float64 `json:"initialDelay,omitempty" tf:"initial_delay,omitempty"`
 
 	// How often, in seconds, the probe should run. Possible values are between 1 and 240. Defaults to 10
 	// How often, in seconds, the probe should run. Possible values are between `1` and `240`. Defaults to `10`
@@ -1562,8 +1656,8 @@ type StartupProbeHeaderParameters struct {
 
 type StartupProbeInitParameters struct {
 
-	// The number of consecutive failures required to consider this probe as failed. Possible values are between 1 and 10. Defaults to 3.
-	// The number of consecutive failures required to consider this probe as failed. Possible values are between `1` and `10`. Defaults to `3`.
+	// The number of consecutive failures required to consider this probe as failed. Possible values are between 1 and 30. Defaults to 3.
+	// The number of consecutive failures required to consider this probe as failed. Possible values are between `1` and `30`. Defaults to `3`.
 	FailureCountThreshold *float64 `json:"failureCountThreshold,omitempty" tf:"failure_count_threshold,omitempty"`
 
 	// A header block as detailed below.
@@ -1572,6 +1666,10 @@ type StartupProbeInitParameters struct {
 	// The value for the host header which should be sent with this probe. If unspecified, the IP Address of the Pod is used as the host header. Setting a value for Host in headers can be used to override this for HTTP and HTTPS type probes.
 	// The probe hostname. Defaults to the pod IP address. Setting a value for `Host` in `headers` can be used to override this for `http` and `https` type probes.
 	Host *string `json:"host,omitempty" tf:"host,omitempty"`
+
+	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between 0 and 60. Defaults to 0 seconds.
+	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between `0` and `60`. Defaults to `0` seconds.
+	InitialDelay *float64 `json:"initialDelay,omitempty" tf:"initial_delay,omitempty"`
 
 	// How often, in seconds, the probe should run. Possible values are between 1 and 240. Defaults to 10
 	// How often, in seconds, the probe should run. Possible values are between `1` and `240`. Defaults to `10`
@@ -1596,8 +1694,8 @@ type StartupProbeInitParameters struct {
 
 type StartupProbeObservation struct {
 
-	// The number of consecutive failures required to consider this probe as failed. Possible values are between 1 and 10. Defaults to 3.
-	// The number of consecutive failures required to consider this probe as failed. Possible values are between `1` and `10`. Defaults to `3`.
+	// The number of consecutive failures required to consider this probe as failed. Possible values are between 1 and 30. Defaults to 3.
+	// The number of consecutive failures required to consider this probe as failed. Possible values are between `1` and `30`. Defaults to `3`.
 	FailureCountThreshold *float64 `json:"failureCountThreshold,omitempty" tf:"failure_count_threshold,omitempty"`
 
 	// A header block as detailed below.
@@ -1606,6 +1704,10 @@ type StartupProbeObservation struct {
 	// The value for the host header which should be sent with this probe. If unspecified, the IP Address of the Pod is used as the host header. Setting a value for Host in headers can be used to override this for HTTP and HTTPS type probes.
 	// The probe hostname. Defaults to the pod IP address. Setting a value for `Host` in `headers` can be used to override this for `http` and `https` type probes.
 	Host *string `json:"host,omitempty" tf:"host,omitempty"`
+
+	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between 0 and 60. Defaults to 0 seconds.
+	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between `0` and `60`. Defaults to `0` seconds.
+	InitialDelay *float64 `json:"initialDelay,omitempty" tf:"initial_delay,omitempty"`
 
 	// How often, in seconds, the probe should run. Possible values are between 1 and 240. Defaults to 10
 	// How often, in seconds, the probe should run. Possible values are between `1` and `240`. Defaults to `10`
@@ -1634,8 +1736,8 @@ type StartupProbeObservation struct {
 
 type StartupProbeParameters struct {
 
-	// The number of consecutive failures required to consider this probe as failed. Possible values are between 1 and 10. Defaults to 3.
-	// The number of consecutive failures required to consider this probe as failed. Possible values are between `1` and `10`. Defaults to `3`.
+	// The number of consecutive failures required to consider this probe as failed. Possible values are between 1 and 30. Defaults to 3.
+	// The number of consecutive failures required to consider this probe as failed. Possible values are between `1` and `30`. Defaults to `3`.
 	// +kubebuilder:validation:Optional
 	FailureCountThreshold *float64 `json:"failureCountThreshold,omitempty" tf:"failure_count_threshold,omitempty"`
 
@@ -1647,6 +1749,11 @@ type StartupProbeParameters struct {
 	// The probe hostname. Defaults to the pod IP address. Setting a value for `Host` in `headers` can be used to override this for `http` and `https` type probes.
 	// +kubebuilder:validation:Optional
 	Host *string `json:"host,omitempty" tf:"host,omitempty"`
+
+	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between 0 and 60. Defaults to 0 seconds.
+	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between `0` and `60`. Defaults to `0` seconds.
+	// +kubebuilder:validation:Optional
+	InitialDelay *float64 `json:"initialDelay,omitempty" tf:"initial_delay,omitempty"`
 
 	// How often, in seconds, the probe should run. Possible values are between 1 and 240. Defaults to 10
 	// How often, in seconds, the probe should run. Possible values are between `1` and `240`. Defaults to `10`
@@ -1774,6 +1881,10 @@ type TemplateInitParameters struct {
 	// One or more tcp_scale_rule blocks as defined below.
 	TCPScaleRule []TCPScaleRuleInitParameters `json:"tcpScaleRule,omitempty" tf:"tcp_scale_rule,omitempty"`
 
+	// The time in seconds after the container is sent the termination signal before the process if forcibly killed.
+	// The time in seconds after the container is sent the termination signal before the process if forcibly killed.
+	TerminationGracePeriodSeconds *float64 `json:"terminationGracePeriodSeconds,omitempty" tf:"termination_grace_period_seconds,omitempty"`
+
 	// A volume block as detailed below.
 	Volume []VolumeInitParameters `json:"volume,omitempty" tf:"volume,omitempty"`
 }
@@ -1809,6 +1920,10 @@ type TemplateObservation struct {
 
 	// One or more tcp_scale_rule blocks as defined below.
 	TCPScaleRule []TCPScaleRuleObservation `json:"tcpScaleRule,omitempty" tf:"tcp_scale_rule,omitempty"`
+
+	// The time in seconds after the container is sent the termination signal before the process if forcibly killed.
+	// The time in seconds after the container is sent the termination signal before the process if forcibly killed.
+	TerminationGracePeriodSeconds *float64 `json:"terminationGracePeriodSeconds,omitempty" tf:"termination_grace_period_seconds,omitempty"`
 
 	// A volume block as detailed below.
 	Volume []VolumeObservation `json:"volume,omitempty" tf:"volume,omitempty"`
@@ -1854,6 +1969,11 @@ type TemplateParameters struct {
 	// One or more tcp_scale_rule blocks as defined below.
 	// +kubebuilder:validation:Optional
 	TCPScaleRule []TCPScaleRuleParameters `json:"tcpScaleRule,omitempty" tf:"tcp_scale_rule,omitempty"`
+
+	// The time in seconds after the container is sent the termination signal before the process if forcibly killed.
+	// The time in seconds after the container is sent the termination signal before the process if forcibly killed.
+	// +kubebuilder:validation:Optional
+	TerminationGracePeriodSeconds *float64 `json:"terminationGracePeriodSeconds,omitempty" tf:"termination_grace_period_seconds,omitempty"`
 
 	// A volume block as detailed below.
 	// +kubebuilder:validation:Optional
@@ -1923,6 +2043,10 @@ type TrafficWeightParameters struct {
 
 type VolumeInitParameters struct {
 
+	// Mount options used while mounting the AzureFile. Must be a comma-separated string e.g. dir_mode=0751,file_mode=0751.
+	// Mount options used while mounting the AzureFile. Must be a comma-separated string.
+	MountOptions *string `json:"mountOptions,omitempty" tf:"mount_options,omitempty"`
+
 	// The name of the Volume to be mounted in the container.
 	// The name of the volume.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -1945,6 +2069,10 @@ type VolumeMountsInitParameters struct {
 	// The path in the container at which to mount this volume.
 	// The path in the container at which to mount this volume.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// The sub path of the volume to be mounted in the container.
+	// The sub path of the volume to be mounted in the container.
+	SubPath *string `json:"subPath,omitempty" tf:"sub_path,omitempty"`
 }
 
 type VolumeMountsObservation struct {
@@ -1956,6 +2084,10 @@ type VolumeMountsObservation struct {
 	// The path in the container at which to mount this volume.
 	// The path in the container at which to mount this volume.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// The sub path of the volume to be mounted in the container.
+	// The sub path of the volume to be mounted in the container.
+	SubPath *string `json:"subPath,omitempty" tf:"sub_path,omitempty"`
 }
 
 type VolumeMountsParameters struct {
@@ -1969,9 +2101,18 @@ type VolumeMountsParameters struct {
 	// The path in the container at which to mount this volume.
 	// +kubebuilder:validation:Optional
 	Path *string `json:"path" tf:"path,omitempty"`
+
+	// The sub path of the volume to be mounted in the container.
+	// The sub path of the volume to be mounted in the container.
+	// +kubebuilder:validation:Optional
+	SubPath *string `json:"subPath,omitempty" tf:"sub_path,omitempty"`
 }
 
 type VolumeObservation struct {
+
+	// Mount options used while mounting the AzureFile. Must be a comma-separated string e.g. dir_mode=0751,file_mode=0751.
+	// Mount options used while mounting the AzureFile. Must be a comma-separated string.
+	MountOptions *string `json:"mountOptions,omitempty" tf:"mount_options,omitempty"`
 
 	// The name of the Volume to be mounted in the container.
 	// The name of the volume.
@@ -1987,6 +2128,11 @@ type VolumeObservation struct {
 }
 
 type VolumeParameters struct {
+
+	// Mount options used while mounting the AzureFile. Must be a comma-separated string e.g. dir_mode=0751,file_mode=0751.
+	// Mount options used while mounting the AzureFile. Must be a comma-separated string.
+	// +kubebuilder:validation:Optional
+	MountOptions *string `json:"mountOptions,omitempty" tf:"mount_options,omitempty"`
 
 	// The name of the Volume to be mounted in the container.
 	// The name of the volume.

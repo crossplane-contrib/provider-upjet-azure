@@ -1051,7 +1051,7 @@ type SiteConfigInitParameters struct {
 	// The version of the .NET framework's CLR used in this function app. Possible values are v4.0 (including .NET Core 2.1 and 3.1), v5.0 and v6.0. For more information on which .NET Framework version to use based on the runtime version you're targeting - please see this table. Defaults to v4.0.
 	DotnetFrameworkVersion *string `json:"dotnetFrameworkVersion,omitempty" tf:"dotnet_framework_version,omitempty"`
 
-	// The number of minimum instances for this function app. Only affects apps on the Premium plan.
+	// The number of minimum instances for this function app. Only affects apps on the Premium plan. Possible values are between 1 and 20.
 	ElasticInstanceMinimum *float64 `json:"elasticInstanceMinimum,omitempty" tf:"elastic_instance_minimum,omitempty"`
 
 	// State of FTP / FTPS service for this function app. Possible values include: AllAllowed, FtpsOnly and Disabled. Defaults to AllAllowed.
@@ -1117,7 +1117,7 @@ type SiteConfigObservation struct {
 	// The version of the .NET framework's CLR used in this function app. Possible values are v4.0 (including .NET Core 2.1 and 3.1), v5.0 and v6.0. For more information on which .NET Framework version to use based on the runtime version you're targeting - please see this table. Defaults to v4.0.
 	DotnetFrameworkVersion *string `json:"dotnetFrameworkVersion,omitempty" tf:"dotnet_framework_version,omitempty"`
 
-	// The number of minimum instances for this function app. Only affects apps on the Premium plan.
+	// The number of minimum instances for this function app. Only affects apps on the Premium plan. Possible values are between 1 and 20.
 	ElasticInstanceMinimum *float64 `json:"elasticInstanceMinimum,omitempty" tf:"elastic_instance_minimum,omitempty"`
 
 	// State of FTP / FTPS service for this function app. Possible values include: AllAllowed, FtpsOnly and Disabled. Defaults to AllAllowed.
@@ -1188,7 +1188,7 @@ type SiteConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	DotnetFrameworkVersion *string `json:"dotnetFrameworkVersion,omitempty" tf:"dotnet_framework_version,omitempty"`
 
-	// The number of minimum instances for this function app. Only affects apps on the Premium plan.
+	// The number of minimum instances for this function app. Only affects apps on the Premium plan. Possible values are between 1 and 20.
 	// +kubebuilder:validation:Optional
 	ElasticInstanceMinimum *float64 `json:"elasticInstanceMinimum,omitempty" tf:"elastic_instance_minimum,omitempty"`
 

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.14.0
+    controller-gen.kubebuilder.io/version: v0.16.5
   name: frontdoorfirewallpolicies.cdn.azure.upbound.io
 spec:
   group: cdn.azure.upbound.io
@@ -89,7 +89,7 @@ spec:
                       properties:
                         action:
                           description: The action to perform when the rule is matched.
-                            Possible values are Allow, Block, Log, or Redirect.
+                            Possible values are Allow, Block, Log, Redirect, or JSChallenge.
                           type: string
                         enabled:
                           description: Is the rule is enabled or disabled? Defaults
@@ -109,30 +109,32 @@ spec:
                                   type: string
                                 type: array
                               matchVariable:
-                                description: The request variable to compare with.
-                                  Possible values are Cookies, PostArgs, QueryString,
-                                  RemoteAddr, RequestBody, RequestHeader, RequestMethod,
-                                  RequestUri, or SocketAddr.
+                                description: The variable to be scrubbed from the
+                                  logs. Possible values include QueryStringArgNames,
+                                  RequestBodyJsonArgNames, RequestBodyPostArgNames,
+                                  RequestCookieNames, RequestHeaderNames, RequestIPAddress,
+                                  or RequestUri.
                                 type: string
                               negationCondition:
                                 description: Should the result of the condition be
                                   negated.
                                 type: boolean
                               operator:
-                                description: Comparison type to use for matching with
-                                  the variable value. Possible values are Any, BeginsWith,
-                                  Contains, EndsWith, Equal, GeoMatch, GreaterThan,
-                                  GreaterThanOrEqual, IPMatch, LessThan, LessThanOrEqual
-                                  or RegEx.
+                                description: When the match_variable is a collection,
+                                  operate on the selector to specify which elements
+                                  in the collection this scrubbing_rule applies to.
+                                  Possible values are Equals or EqualsAny. Defaults
+                                  to Equals.
                                 type: string
                               selector:
-                                description: Match against a specific key if the match_variable
-                                  is QueryString, PostArgs, RequestHeader or Cookies.
+                                description: When the match_variable is a collection,
+                                  the operator is used to specify which elements in
+                                  the collection this scrubbing_rule applies to.
                                 type: string
                               transforms:
                                 description: Up to 5 transforms to apply. Possible
                                   values are Lowercase, RemoveNulls, Trim, Uppercase,
-                                  URLDecode or URLEncode.
+                                  URLDecode, or URLEncode.
                                 items:
                                   type: string
                                 type: array
@@ -164,37 +166,81 @@ spec:
                     description: Is the Front Door Firewall Policy enabled? Defaults
                       to true.
                     type: boolean
+                  jsChallengeCookieExpirationInMinutes:
+                    description: Specifies the JavaScript challenge cookie lifetime
+                      in minutes, after which the user will be revalidated. Possible
+                      values are between 5 to 1440 minutes. Defaults to 30 minutes.
+                    type: number
+                  logScrubbing:
+                    description: A log_scrubbing block as defined below.
+                    properties:
+                      enabled:
+                        description: Is log scrubbing enabled? Possible values are
+                          true or false. Defaults to true.
+                        type: boolean
+                      scrubbingRule:
+                        description: One or more scrubbing_rule blocks as defined
+                          below.
+                        items:
+                          properties:
+                            enabled:
+                              description: Is this scrubbing_rule enabled? Defaults
+                                to true.
+                              type: boolean
+                            matchVariable:
+                              description: The variable to be scrubbed from the logs.
+                                Possible values include QueryStringArgNames, RequestBodyJsonArgNames,
+                                RequestBodyPostArgNames, RequestCookieNames, RequestHeaderNames,
+                                RequestIPAddress, or RequestUri.
+                              type: string
+                            operator:
+                              description: When the match_variable is a collection,
+                                operate on the selector to specify which elements
+                                in the collection this scrubbing_rule applies to.
+                                Possible values are Equals or EqualsAny. Defaults
+                                to Equals.
+                              type: string
+                            selector:
+                              description: When the match_variable is a collection,
+                                the operator is used to specify which elements in
+                                the collection this scrubbing_rule applies to.
+                              type: string
+                          type: object
+                        type: array
+                    type: object
                   managedRule:
                     description: One or more managed_rule blocks as defined below.
                     items:
                       properties:
                         action:
-                          description: The action to perform for all DRS rules when
-                            the managed rule is matched or when the anomaly score
-                            is 5 or greater depending on which version of the DRS
-                            you are using. Possible values include Allow, Log, Block,
-                            and Redirect.
+                          description: The action to perform for all default rule
+                            set rules when the managed rule is matched or when the
+                            anomaly score is 5 or greater depending on which version
+                            of the default rule set you are using. Possible values
+                            include Allow, Log, Block, or Redirect.
                           type: string
                         exclusion:
                           description: One or more exclusion blocks as defined below.
                           items:
                             properties:
                               matchVariable:
-                                description: The request variable to compare with.
-                                  Possible values are Cookies, PostArgs, QueryString,
-                                  RemoteAddr, RequestBody, RequestHeader, RequestMethod,
-                                  RequestUri, or SocketAddr.
+                                description: The variable to be scrubbed from the
+                                  logs. Possible values include QueryStringArgNames,
+                                  RequestBodyJsonArgNames, RequestBodyPostArgNames,
+                                  RequestCookieNames, RequestHeaderNames, RequestIPAddress,
+                                  or RequestUri.
                                 type: string
                               operator:
-                                description: Comparison type to use for matching with
-                                  the variable value. Possible values are Any, BeginsWith,
-                                  Contains, EndsWith, Equal, GeoMatch, GreaterThan,
-                                  GreaterThanOrEqual, IPMatch, LessThan, LessThanOrEqual
-                                  or RegEx.
+                                description: When the match_variable is a collection,
+                                  operate on the selector to specify which elements
+                                  in the collection this scrubbing_rule applies to.
+                                  Possible values are Equals or EqualsAny. Defaults
+                                  to Equals.
                                 type: string
                               selector:
-                                description: Match against a specific key if the match_variable
-                                  is QueryString, PostArgs, RequestHeader or Cookies.
+                                description: When the match_variable is a collection,
+                                  the operator is used to specify which elements in
+                                  the collection this scrubbing_rule applies to.
                                 type: string
                             type: object
                           type: array
@@ -208,22 +254,24 @@ spec:
                                 items:
                                   properties:
                                     matchVariable:
-                                      description: The request variable to compare
-                                        with. Possible values are Cookies, PostArgs,
-                                        QueryString, RemoteAddr, RequestBody, RequestHeader,
-                                        RequestMethod, RequestUri, or SocketAddr.
+                                      description: The variable to be scrubbed from
+                                        the logs. Possible values include QueryStringArgNames,
+                                        RequestBodyJsonArgNames, RequestBodyPostArgNames,
+                                        RequestCookieNames, RequestHeaderNames, RequestIPAddress,
+                                        or RequestUri.
                                       type: string
                                     operator:
-                                      description: Comparison type to use for matching
-                                        with the variable value. Possible values are
-                                        Any, BeginsWith, Contains, EndsWith, Equal,
-                                        GeoMatch, GreaterThan, GreaterThanOrEqual,
-                                        IPMatch, LessThan, LessThanOrEqual or RegEx.
+                                      description: When the match_variable is a collection,
+                                        operate on the selector to specify which elements
+                                        in the collection this scrubbing_rule applies
+                                        to. Possible values are Equals or EqualsAny.
+                                        Defaults to Equals.
                                       type: string
                                     selector:
-                                      description: Match against a specific key if
-                                        the match_variable is QueryString, PostArgs,
-                                        RequestHeader or Cookies.
+                                      description: When the match_variable is a collection,
+                                        the operator is used to specify which elements
+                                        in the collection this scrubbing_rule applies
+                                        to.
                                       type: string
                                   type: object
                                 type: array
@@ -236,14 +284,16 @@ spec:
                                     action:
                                       description: The action to be applied when the
                                         managed rule matches or when the anomaly score
-                                        is 5 or greater. Possible values for DRS 1.1
-                                        and below are Allow, Log, Block, and Redirect.
-                                        For DRS 2.0 and above the possible values
-                                        are Log or AnomalyScoring.
+                                        is 5 or greater. Possible values for DefaultRuleSet
+                                        1.1 and below are Allow, Log, Block, or Redirect.
+                                        Possible values for DefaultRuleSet 2.0 and
+                                        above are Log or AnomalyScoring. Possible
+                                        values for Microsoft_BotManagerRuleSet are
+                                        Allow, Log, Block, Redirect, or JSChallenge.
                                       type: string
                                     enabled:
-                                      description: Is the managed rule override enabled
-                                        or disabled. Defaults to false
+                                      description: Is this scrubbing_rule enabled?
+                                        Defaults to true.
                                       type: boolean
                                     exclusion:
                                       description: One or more exclusion blocks as
@@ -251,24 +301,26 @@ spec:
                                       items:
                                         properties:
                                           matchVariable:
-                                            description: The request variable to compare
-                                              with. Possible values are Cookies, PostArgs,
-                                              QueryString, RemoteAddr, RequestBody,
-                                              RequestHeader, RequestMethod, RequestUri,
-                                              or SocketAddr.
+                                            description: The variable to be scrubbed
+                                              from the logs. Possible values include
+                                              QueryStringArgNames, RequestBodyJsonArgNames,
+                                              RequestBodyPostArgNames, RequestCookieNames,
+                                              RequestHeaderNames, RequestIPAddress,
+                                              or RequestUri.
                                             type: string
                                           operator:
-                                            description: Comparison type to use for
-                                              matching with the variable value. Possible
-                                              values are Any, BeginsWith, Contains,
-                                              EndsWith, Equal, GeoMatch, GreaterThan,
-                                              GreaterThanOrEqual, IPMatch, LessThan,
-                                              LessThanOrEqual or RegEx.
+                                            description: When the match_variable is
+                                              a collection, operate on the selector
+                                              to specify which elements in the collection
+                                              this scrubbing_rule applies to. Possible
+                                              values are Equals or EqualsAny. Defaults
+                                              to Equals.
                                             type: string
                                           selector:
-                                            description: Match against a specific
-                                              key if the match_variable is QueryString,
-                                              PostArgs, RequestHeader or Cookies.
+                                            description: When the match_variable is
+                                              a collection, the operator is used to
+                                              specify which elements in the collection
+                                              this scrubbing_rule applies to.
                                             type: string
                                         type: object
                                       type: array
@@ -285,16 +337,16 @@ spec:
                         type:
                           description: The name of the managed rule to use with this
                             resource. Possible values include DefaultRuleSet, Microsoft_DefaultRuleSet,
-                            BotProtection or Microsoft_BotManagerRuleSet.
+                            BotProtection, or Microsoft_BotManagerRuleSet.
                           type: string
                         version:
                           description: The version of the managed rule to use with
-                            this resource. Possible values depends on which DRS type
-                            you are using, for the DefaultRuleSet type the possible
-                            values include 1.0 or preview-0.1. For Microsoft_DefaultRuleSet
-                            the possible values include 1.1, 2.0 or 2.1. For BotProtection
+                            this resource. Possible values depends on which default
+                            rule set type you are using, for the DefaultRuleSet type
+                            the possible values include 1.0 or preview-0.1. For Microsoft_DefaultRuleSet
+                            the possible values include 1.1, 2.0, or 2.1. For BotProtection
                             the value must be preview-0.1 and for Microsoft_BotManagerRuleSet
-                            the value must be 1.0.
+                            the possible values include 1.0 and 1.1.
                           type: string
                       type: object
                     type: array
@@ -507,7 +559,7 @@ spec:
                       properties:
                         action:
                           description: The action to perform when the rule is matched.
-                            Possible values are Allow, Block, Log, or Redirect.
+                            Possible values are Allow, Block, Log, Redirect, or JSChallenge.
                           type: string
                         enabled:
                           description: Is the rule is enabled or disabled? Defaults
@@ -527,30 +579,32 @@ spec:
                                   type: string
                                 type: array
                               matchVariable:
-                                description: The request variable to compare with.
-                                  Possible values are Cookies, PostArgs, QueryString,
-                                  RemoteAddr, RequestBody, RequestHeader, RequestMethod,
-                                  RequestUri, or SocketAddr.
+                                description: The variable to be scrubbed from the
+                                  logs. Possible values include QueryStringArgNames,
+                                  RequestBodyJsonArgNames, RequestBodyPostArgNames,
+                                  RequestCookieNames, RequestHeaderNames, RequestIPAddress,
+                                  or RequestUri.
                                 type: string
                               negationCondition:
                                 description: Should the result of the condition be
                                   negated.
                                 type: boolean
                               operator:
-                                description: Comparison type to use for matching with
-                                  the variable value. Possible values are Any, BeginsWith,
-                                  Contains, EndsWith, Equal, GeoMatch, GreaterThan,
-                                  GreaterThanOrEqual, IPMatch, LessThan, LessThanOrEqual
-                                  or RegEx.
+                                description: When the match_variable is a collection,
+                                  operate on the selector to specify which elements
+                                  in the collection this scrubbing_rule applies to.
+                                  Possible values are Equals or EqualsAny. Defaults
+                                  to Equals.
                                 type: string
                               selector:
-                                description: Match against a specific key if the match_variable
-                                  is QueryString, PostArgs, RequestHeader or Cookies.
+                                description: When the match_variable is a collection,
+                                  the operator is used to specify which elements in
+                                  the collection this scrubbing_rule applies to.
                                 type: string
                               transforms:
                                 description: Up to 5 transforms to apply. Possible
                                   values are Lowercase, RemoveNulls, Trim, Uppercase,
-                                  URLDecode or URLEncode.
+                                  URLDecode, or URLEncode.
                                 items:
                                   type: string
                                 type: array
@@ -582,37 +636,81 @@ spec:
                     description: Is the Front Door Firewall Policy enabled? Defaults
                       to true.
                     type: boolean
+                  jsChallengeCookieExpirationInMinutes:
+                    description: Specifies the JavaScript challenge cookie lifetime
+                      in minutes, after which the user will be revalidated. Possible
+                      values are between 5 to 1440 minutes. Defaults to 30 minutes.
+                    type: number
+                  logScrubbing:
+                    description: A log_scrubbing block as defined below.
+                    properties:
+                      enabled:
+                        description: Is log scrubbing enabled? Possible values are
+                          true or false. Defaults to true.
+                        type: boolean
+                      scrubbingRule:
+                        description: One or more scrubbing_rule blocks as defined
+                          below.
+                        items:
+                          properties:
+                            enabled:
+                              description: Is this scrubbing_rule enabled? Defaults
+                                to true.
+                              type: boolean
+                            matchVariable:
+                              description: The variable to be scrubbed from the logs.
+                                Possible values include QueryStringArgNames, RequestBodyJsonArgNames,
+                                RequestBodyPostArgNames, RequestCookieNames, RequestHeaderNames,
+                                RequestIPAddress, or RequestUri.
+                              type: string
+                            operator:
+                              description: When the match_variable is a collection,
+                                operate on the selector to specify which elements
+                                in the collection this scrubbing_rule applies to.
+                                Possible values are Equals or EqualsAny. Defaults
+                                to Equals.
+                              type: string
+                            selector:
+                              description: When the match_variable is a collection,
+                                the operator is used to specify which elements in
+                                the collection this scrubbing_rule applies to.
+                              type: string
+                          type: object
+                        type: array
+                    type: object
                   managedRule:
                     description: One or more managed_rule blocks as defined below.
                     items:
                       properties:
                         action:
-                          description: The action to perform for all DRS rules when
-                            the managed rule is matched or when the anomaly score
-                            is 5 or greater depending on which version of the DRS
-                            you are using. Possible values include Allow, Log, Block,
-                            and Redirect.
+                          description: The action to perform for all default rule
+                            set rules when the managed rule is matched or when the
+                            anomaly score is 5 or greater depending on which version
+                            of the default rule set you are using. Possible values
+                            include Allow, Log, Block, or Redirect.
                           type: string
                         exclusion:
                           description: One or more exclusion blocks as defined below.
                           items:
                             properties:
                               matchVariable:
-                                description: The request variable to compare with.
-                                  Possible values are Cookies, PostArgs, QueryString,
-                                  RemoteAddr, RequestBody, RequestHeader, RequestMethod,
-                                  RequestUri, or SocketAddr.
+                                description: The variable to be scrubbed from the
+                                  logs. Possible values include QueryStringArgNames,
+                                  RequestBodyJsonArgNames, RequestBodyPostArgNames,
+                                  RequestCookieNames, RequestHeaderNames, RequestIPAddress,
+                                  or RequestUri.
                                 type: string
                               operator:
-                                description: Comparison type to use for matching with
-                                  the variable value. Possible values are Any, BeginsWith,
-                                  Contains, EndsWith, Equal, GeoMatch, GreaterThan,
-                                  GreaterThanOrEqual, IPMatch, LessThan, LessThanOrEqual
-                                  or RegEx.
+                                description: When the match_variable is a collection,
+                                  operate on the selector to specify which elements
+                                  in the collection this scrubbing_rule applies to.
+                                  Possible values are Equals or EqualsAny. Defaults
+                                  to Equals.
                                 type: string
                               selector:
-                                description: Match against a specific key if the match_variable
-                                  is QueryString, PostArgs, RequestHeader or Cookies.
+                                description: When the match_variable is a collection,
+                                  the operator is used to specify which elements in
+                                  the collection this scrubbing_rule applies to.
                                 type: string
                             type: object
                           type: array
@@ -626,22 +724,24 @@ spec:
                                 items:
                                   properties:
                                     matchVariable:
-                                      description: The request variable to compare
-                                        with. Possible values are Cookies, PostArgs,
-                                        QueryString, RemoteAddr, RequestBody, RequestHeader,
-                                        RequestMethod, RequestUri, or SocketAddr.
+                                      description: The variable to be scrubbed from
+                                        the logs. Possible values include QueryStringArgNames,
+                                        RequestBodyJsonArgNames, RequestBodyPostArgNames,
+                                        RequestCookieNames, RequestHeaderNames, RequestIPAddress,
+                                        or RequestUri.
                                       type: string
                                     operator:
-                                      description: Comparison type to use for matching
-                                        with the variable value. Possible values are
-                                        Any, BeginsWith, Contains, EndsWith, Equal,
-                                        GeoMatch, GreaterThan, GreaterThanOrEqual,
-                                        IPMatch, LessThan, LessThanOrEqual or RegEx.
+                                      description: When the match_variable is a collection,
+                                        operate on the selector to specify which elements
+                                        in the collection this scrubbing_rule applies
+                                        to. Possible values are Equals or EqualsAny.
+                                        Defaults to Equals.
                                       type: string
                                     selector:
-                                      description: Match against a specific key if
-                                        the match_variable is QueryString, PostArgs,
-                                        RequestHeader or Cookies.
+                                      description: When the match_variable is a collection,
+                                        the operator is used to specify which elements
+                                        in the collection this scrubbing_rule applies
+                                        to.
                                       type: string
                                   type: object
                                 type: array
@@ -654,14 +754,16 @@ spec:
                                     action:
                                       description: The action to be applied when the
                                         managed rule matches or when the anomaly score
-                                        is 5 or greater. Possible values for DRS 1.1
-                                        and below are Allow, Log, Block, and Redirect.
-                                        For DRS 2.0 and above the possible values
-                                        are Log or AnomalyScoring.
+                                        is 5 or greater. Possible values for DefaultRuleSet
+                                        1.1 and below are Allow, Log, Block, or Redirect.
+                                        Possible values for DefaultRuleSet 2.0 and
+                                        above are Log or AnomalyScoring. Possible
+                                        values for Microsoft_BotManagerRuleSet are
+                                        Allow, Log, Block, Redirect, or JSChallenge.
                                       type: string
                                     enabled:
-                                      description: Is the managed rule override enabled
-                                        or disabled. Defaults to false
+                                      description: Is this scrubbing_rule enabled?
+                                        Defaults to true.
                                       type: boolean
                                     exclusion:
                                       description: One or more exclusion blocks as
@@ -669,24 +771,26 @@ spec:
                                       items:
                                         properties:
                                           matchVariable:
-                                            description: The request variable to compare
-                                              with. Possible values are Cookies, PostArgs,
-                                              QueryString, RemoteAddr, RequestBody,
-                                              RequestHeader, RequestMethod, RequestUri,
-                                              or SocketAddr.
+                                            description: The variable to be scrubbed
+                                              from the logs. Possible values include
+                                              QueryStringArgNames, RequestBodyJsonArgNames,
+                                              RequestBodyPostArgNames, RequestCookieNames,
+                                              RequestHeaderNames, RequestIPAddress,
+                                              or RequestUri.
                                             type: string
                                           operator:
-                                            description: Comparison type to use for
-                                              matching with the variable value. Possible
-                                              values are Any, BeginsWith, Contains,
-                                              EndsWith, Equal, GeoMatch, GreaterThan,
-                                              GreaterThanOrEqual, IPMatch, LessThan,
-                                              LessThanOrEqual or RegEx.
+                                            description: When the match_variable is
+                                              a collection, operate on the selector
+                                              to specify which elements in the collection
+                                              this scrubbing_rule applies to. Possible
+                                              values are Equals or EqualsAny. Defaults
+                                              to Equals.
                                             type: string
                                           selector:
-                                            description: Match against a specific
-                                              key if the match_variable is QueryString,
-                                              PostArgs, RequestHeader or Cookies.
+                                            description: When the match_variable is
+                                              a collection, the operator is used to
+                                              specify which elements in the collection
+                                              this scrubbing_rule applies to.
                                             type: string
                                         type: object
                                       type: array
@@ -703,16 +807,16 @@ spec:
                         type:
                           description: The name of the managed rule to use with this
                             resource. Possible values include DefaultRuleSet, Microsoft_DefaultRuleSet,
-                            BotProtection or Microsoft_BotManagerRuleSet.
+                            BotProtection, or Microsoft_BotManagerRuleSet.
                           type: string
                         version:
                           description: The version of the managed rule to use with
-                            this resource. Possible values depends on which DRS type
-                            you are using, for the DefaultRuleSet type the possible
-                            values include 1.0 or preview-0.1. For Microsoft_DefaultRuleSet
-                            the possible values include 1.1, 2.0 or 2.1. For BotProtection
+                            this resource. Possible values depends on which default
+                            rule set type you are using, for the DefaultRuleSet type
+                            the possible values include 1.0 or preview-0.1. For Microsoft_DefaultRuleSet
+                            the possible values include 1.1, 2.0, or 2.1. For BotProtection
                             the value must be preview-0.1 and for Microsoft_BotManagerRuleSet
-                            the value must be 1.0.
+                            the possible values include 1.0 and 1.1.
                           type: string
                       type: object
                     type: array
@@ -1010,7 +1114,7 @@ spec:
                       properties:
                         action:
                           description: The action to perform when the rule is matched.
-                            Possible values are Allow, Block, Log, or Redirect.
+                            Possible values are Allow, Block, Log, Redirect, or JSChallenge.
                           type: string
                         enabled:
                           description: Is the rule is enabled or disabled? Defaults
@@ -1030,30 +1134,32 @@ spec:
                                   type: string
                                 type: array
                               matchVariable:
-                                description: The request variable to compare with.
-                                  Possible values are Cookies, PostArgs, QueryString,
-                                  RemoteAddr, RequestBody, RequestHeader, RequestMethod,
-                                  RequestUri, or SocketAddr.
+                                description: The variable to be scrubbed from the
+                                  logs. Possible values include QueryStringArgNames,
+                                  RequestBodyJsonArgNames, RequestBodyPostArgNames,
+                                  RequestCookieNames, RequestHeaderNames, RequestIPAddress,
+                                  or RequestUri.
                                 type: string
                               negationCondition:
                                 description: Should the result of the condition be
                                   negated.
                                 type: boolean
                               operator:
-                                description: Comparison type to use for matching with
-                                  the variable value. Possible values are Any, BeginsWith,
-                                  Contains, EndsWith, Equal, GeoMatch, GreaterThan,
-                                  GreaterThanOrEqual, IPMatch, LessThan, LessThanOrEqual
-                                  or RegEx.
+                                description: When the match_variable is a collection,
+                                  operate on the selector to specify which elements
+                                  in the collection this scrubbing_rule applies to.
+                                  Possible values are Equals or EqualsAny. Defaults
+                                  to Equals.
                                 type: string
                               selector:
-                                description: Match against a specific key if the match_variable
-                                  is QueryString, PostArgs, RequestHeader or Cookies.
+                                description: When the match_variable is a collection,
+                                  the operator is used to specify which elements in
+                                  the collection this scrubbing_rule applies to.
                                 type: string
                               transforms:
                                 description: Up to 5 transforms to apply. Possible
                                   values are Lowercase, RemoveNulls, Trim, Uppercase,
-                                  URLDecode or URLEncode.
+                                  URLDecode, or URLEncode.
                                 items:
                                   type: string
                                 type: array
@@ -1094,37 +1200,81 @@ spec:
                   id:
                     description: The ID of the Front Door Firewall Policy.
                     type: string
+                  jsChallengeCookieExpirationInMinutes:
+                    description: Specifies the JavaScript challenge cookie lifetime
+                      in minutes, after which the user will be revalidated. Possible
+                      values are between 5 to 1440 minutes. Defaults to 30 minutes.
+                    type: number
+                  logScrubbing:
+                    description: A log_scrubbing block as defined below.
+                    properties:
+                      enabled:
+                        description: Is log scrubbing enabled? Possible values are
+                          true or false. Defaults to true.
+                        type: boolean
+                      scrubbingRule:
+                        description: One or more scrubbing_rule blocks as defined
+                          below.
+                        items:
+                          properties:
+                            enabled:
+                              description: Is this scrubbing_rule enabled? Defaults
+                                to true.
+                              type: boolean
+                            matchVariable:
+                              description: The variable to be scrubbed from the logs.
+                                Possible values include QueryStringArgNames, RequestBodyJsonArgNames,
+                                RequestBodyPostArgNames, RequestCookieNames, RequestHeaderNames,
+                                RequestIPAddress, or RequestUri.
+                              type: string
+                            operator:
+                              description: When the match_variable is a collection,
+                                operate on the selector to specify which elements
+                                in the collection this scrubbing_rule applies to.
+                                Possible values are Equals or EqualsAny. Defaults
+                                to Equals.
+                              type: string
+                            selector:
+                              description: When the match_variable is a collection,
+                                the operator is used to specify which elements in
+                                the collection this scrubbing_rule applies to.
+                              type: string
+                          type: object
+                        type: array
+                    type: object
                   managedRule:
                     description: One or more managed_rule blocks as defined below.
                     items:
                       properties:
                         action:
-                          description: The action to perform for all DRS rules when
-                            the managed rule is matched or when the anomaly score
-                            is 5 or greater depending on which version of the DRS
-                            you are using. Possible values include Allow, Log, Block,
-                            and Redirect.
+                          description: The action to perform for all default rule
+                            set rules when the managed rule is matched or when the
+                            anomaly score is 5 or greater depending on which version
+                            of the default rule set you are using. Possible values
+                            include Allow, Log, Block, or Redirect.
                           type: string
                         exclusion:
                           description: One or more exclusion blocks as defined below.
                           items:
                             properties:
                               matchVariable:
-                                description: The request variable to compare with.
-                                  Possible values are Cookies, PostArgs, QueryString,
-                                  RemoteAddr, RequestBody, RequestHeader, RequestMethod,
-                                  RequestUri, or SocketAddr.
+                                description: The variable to be scrubbed from the
+                                  logs. Possible values include QueryStringArgNames,
+                                  RequestBodyJsonArgNames, RequestBodyPostArgNames,
+                                  RequestCookieNames, RequestHeaderNames, RequestIPAddress,
+                                  or RequestUri.
                                 type: string
                               operator:
-                                description: Comparison type to use for matching with
-                                  the variable value. Possible values are Any, BeginsWith,
-                                  Contains, EndsWith, Equal, GeoMatch, GreaterThan,
-                                  GreaterThanOrEqual, IPMatch, LessThan, LessThanOrEqual
-                                  or RegEx.
+                                description: When the match_variable is a collection,
+                                  operate on the selector to specify which elements
+                                  in the collection this scrubbing_rule applies to.
+                                  Possible values are Equals or EqualsAny. Defaults
+                                  to Equals.
                                 type: string
                               selector:
-                                description: Match against a specific key if the match_variable
-                                  is QueryString, PostArgs, RequestHeader or Cookies.
+                                description: When the match_variable is a collection,
+                                  the operator is used to specify which elements in
+                                  the collection this scrubbing_rule applies to.
                                 type: string
                             type: object
                           type: array
@@ -1138,22 +1288,24 @@ spec:
                                 items:
                                   properties:
                                     matchVariable:
-                                      description: The request variable to compare
-                                        with. Possible values are Cookies, PostArgs,
-                                        QueryString, RemoteAddr, RequestBody, RequestHeader,
-                                        RequestMethod, RequestUri, or SocketAddr.
+                                      description: The variable to be scrubbed from
+                                        the logs. Possible values include QueryStringArgNames,
+                                        RequestBodyJsonArgNames, RequestBodyPostArgNames,
+                                        RequestCookieNames, RequestHeaderNames, RequestIPAddress,
+                                        or RequestUri.
                                       type: string
                                     operator:
-                                      description: Comparison type to use for matching
-                                        with the variable value. Possible values are
-                                        Any, BeginsWith, Contains, EndsWith, Equal,
-                                        GeoMatch, GreaterThan, GreaterThanOrEqual,
-                                        IPMatch, LessThan, LessThanOrEqual or RegEx.
+                                      description: When the match_variable is a collection,
+                                        operate on the selector to specify which elements
+                                        in the collection this scrubbing_rule applies
+                                        to. Possible values are Equals or EqualsAny.
+                                        Defaults to Equals.
                                       type: string
                                     selector:
-                                      description: Match against a specific key if
-                                        the match_variable is QueryString, PostArgs,
-                                        RequestHeader or Cookies.
+                                      description: When the match_variable is a collection,
+                                        the operator is used to specify which elements
+                                        in the collection this scrubbing_rule applies
+                                        to.
                                       type: string
                                   type: object
                                 type: array
@@ -1166,14 +1318,16 @@ spec:
                                     action:
                                       description: The action to be applied when the
                                         managed rule matches or when the anomaly score
-                                        is 5 or greater. Possible values for DRS 1.1
-                                        and below are Allow, Log, Block, and Redirect.
-                                        For DRS 2.0 and above the possible values
-                                        are Log or AnomalyScoring.
+                                        is 5 or greater. Possible values for DefaultRuleSet
+                                        1.1 and below are Allow, Log, Block, or Redirect.
+                                        Possible values for DefaultRuleSet 2.0 and
+                                        above are Log or AnomalyScoring. Possible
+                                        values for Microsoft_BotManagerRuleSet are
+                                        Allow, Log, Block, Redirect, or JSChallenge.
                                       type: string
                                     enabled:
-                                      description: Is the managed rule override enabled
-                                        or disabled. Defaults to false
+                                      description: Is this scrubbing_rule enabled?
+                                        Defaults to true.
                                       type: boolean
                                     exclusion:
                                       description: One or more exclusion blocks as
@@ -1181,24 +1335,26 @@ spec:
                                       items:
                                         properties:
                                           matchVariable:
-                                            description: The request variable to compare
-                                              with. Possible values are Cookies, PostArgs,
-                                              QueryString, RemoteAddr, RequestBody,
-                                              RequestHeader, RequestMethod, RequestUri,
-                                              or SocketAddr.
+                                            description: The variable to be scrubbed
+                                              from the logs. Possible values include
+                                              QueryStringArgNames, RequestBodyJsonArgNames,
+                                              RequestBodyPostArgNames, RequestCookieNames,
+                                              RequestHeaderNames, RequestIPAddress,
+                                              or RequestUri.
                                             type: string
                                           operator:
-                                            description: Comparison type to use for
-                                              matching with the variable value. Possible
-                                              values are Any, BeginsWith, Contains,
-                                              EndsWith, Equal, GeoMatch, GreaterThan,
-                                              GreaterThanOrEqual, IPMatch, LessThan,
-                                              LessThanOrEqual or RegEx.
+                                            description: When the match_variable is
+                                              a collection, operate on the selector
+                                              to specify which elements in the collection
+                                              this scrubbing_rule applies to. Possible
+                                              values are Equals or EqualsAny. Defaults
+                                              to Equals.
                                             type: string
                                           selector:
-                                            description: Match against a specific
-                                              key if the match_variable is QueryString,
-                                              PostArgs, RequestHeader or Cookies.
+                                            description: When the match_variable is
+                                              a collection, the operator is used to
+                                              specify which elements in the collection
+                                              this scrubbing_rule applies to.
                                             type: string
                                         type: object
                                       type: array
@@ -1215,16 +1371,16 @@ spec:
                         type:
                           description: The name of the managed rule to use with this
                             resource. Possible values include DefaultRuleSet, Microsoft_DefaultRuleSet,
-                            BotProtection or Microsoft_BotManagerRuleSet.
+                            BotProtection, or Microsoft_BotManagerRuleSet.
                           type: string
                         version:
                           description: The version of the managed rule to use with
-                            this resource. Possible values depends on which DRS type
-                            you are using, for the DefaultRuleSet type the possible
-                            values include 1.0 or preview-0.1. For Microsoft_DefaultRuleSet
-                            the possible values include 1.1, 2.0 or 2.1. For BotProtection
+                            this resource. Possible values depends on which default
+                            rule set type you are using, for the DefaultRuleSet type
+                            the possible values include 1.0 or preview-0.1. For Microsoft_DefaultRuleSet
+                            the possible values include 1.1, 2.0, or 2.1. For BotProtection
                             the value must be preview-0.1 and for Microsoft_BotManagerRuleSet
-                            the value must be 1.0.
+                            the possible values include 1.0 and 1.1.
                           type: string
                       type: object
                     type: array

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.14.0
+    controller-gen.kubebuilder.io/version: v0.16.5
   name: environments.containerapp.azure.upbound.io
 spec:
   group: containerapp.azure.upbound.io
@@ -264,7 +264,7 @@ spec:
                     type: string
                   logAnalyticsWorkspaceId:
                     description: |-
-                      The ID for the Log Analytics Workspace to link this Container Apps Managed Environment to. Changing this forces a new resource to be created.
+                      The ID for the Log Analytics Workspace to link this Container Apps Managed Environment to.
                       The ID for the Log Analytics Workspace to link this Container Apps Managed Environment to.
                     type: string
                   logAnalyticsWorkspaceIdRef:
@@ -343,6 +343,12 @@ spec:
                             type: string
                         type: object
                     type: object
+                  logsDestination:
+                    description: Where the application logs will be saved for this
+                      Container Apps Managed Environment. Possible values include
+                      log-analytics and azure-monitor. Omitting this value will result
+                      in logs being streamed only.
+                    type: string
                   mutualTlsEnabled:
                     description: |-
                       Should mutual transport layer security (mTLS) be enabled? Defaults to false.
@@ -436,8 +442,7 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   workloadProfile:
-                    description: The profile of the workload to scope the container
-                      app execution. A workload_profile block as defined below.
+                    description: One or more workload_profile blocks as defined below.
                     items:
                       properties:
                         maximumCount:
@@ -668,7 +673,7 @@ spec:
                     type: string
                   logAnalyticsWorkspaceId:
                     description: |-
-                      The ID for the Log Analytics Workspace to link this Container Apps Managed Environment to. Changing this forces a new resource to be created.
+                      The ID for the Log Analytics Workspace to link this Container Apps Managed Environment to.
                       The ID for the Log Analytics Workspace to link this Container Apps Managed Environment to.
                     type: string
                   logAnalyticsWorkspaceIdRef:
@@ -747,6 +752,12 @@ spec:
                             type: string
                         type: object
                     type: object
+                  logsDestination:
+                    description: Where the application logs will be saved for this
+                      Container Apps Managed Environment. Possible values include
+                      log-analytics and azure-monitor. Omitting this value will result
+                      in logs being streamed only.
+                    type: string
                   mutualTlsEnabled:
                     description: |-
                       Should mutual transport layer security (mTLS) be enabled? Defaults to false.
@@ -759,8 +770,7 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   workloadProfile:
-                    description: The profile of the workload to scope the container
-                      app execution. A workload_profile block as defined below.
+                    description: One or more workload_profile blocks as defined below.
                     items:
                       properties:
                         maximumCount:
@@ -1004,8 +1014,14 @@ spec:
                     type: string
                   logAnalyticsWorkspaceId:
                     description: |-
-                      The ID for the Log Analytics Workspace to link this Container Apps Managed Environment to. Changing this forces a new resource to be created.
                       The ID for the Log Analytics Workspace to link this Container Apps Managed Environment to.
+                      The ID for the Log Analytics Workspace to link this Container Apps Managed Environment to.
+                    type: string
+                  logsDestination:
+                    description: Where the application logs will be saved for this
+                      Container Apps Managed Environment. Possible values include
+                      log-analytics and azure-monitor. Omitting this value will result
+                      in logs being streamed only.
                     type: string
                   mutualTlsEnabled:
                     description: |-
@@ -1039,8 +1055,7 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   workloadProfile:
-                    description: The profile of the workload to scope the container
-                      app execution. A workload_profile block as defined below.
+                    description: One or more workload_profile blocks as defined below.
                     items:
                       properties:
                         maximumCount:

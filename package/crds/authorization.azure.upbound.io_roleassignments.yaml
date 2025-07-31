@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.14.0
+    controller-gen.kubebuilder.io/version: v0.16.5
   name: roleassignments.authorization.azure.upbound.io
 spec:
   group: authorization.azure.upbound.io
@@ -111,7 +111,7 @@ spec:
                     type: string
                   roleDefinitionId:
                     description: The Scoped-ID of the Role Definition. Changing this
-                      forces a new resource to be created. Conflicts with role_definition_name.
+                      forces a new resource to be created.
                     type: string
                   roleDefinitionIdRef:
                     description: Reference to a RoleDefinition in authorization to
@@ -191,7 +191,7 @@ spec:
                     type: object
                   roleDefinitionName:
                     description: The name of a built-in Role. Changing this forces
-                      a new resource to be created. Conflicts with role_definition_id.
+                      a new resource to be created.
                     type: string
                   scope:
                     description: The scope at which the Role Assignment applies to,
@@ -260,7 +260,7 @@ spec:
                     type: string
                   roleDefinitionId:
                     description: The Scoped-ID of the Role Definition. Changing this
-                      forces a new resource to be created. Conflicts with role_definition_name.
+                      forces a new resource to be created.
                     type: string
                   roleDefinitionIdRef:
                     description: Reference to a RoleDefinition in authorization to
@@ -340,7 +340,7 @@ spec:
                     type: object
                   roleDefinitionName:
                     description: The name of a built-in Role. Changing this forces
-                      a new resource to be created. Conflicts with role_definition_id.
+                      a new resource to be created.
                     type: string
                   scope:
                     description: The scope at which the Role Assignment applies to,
@@ -580,11 +580,11 @@ spec:
                     type: string
                   roleDefinitionId:
                     description: The Scoped-ID of the Role Definition. Changing this
-                      forces a new resource to be created. Conflicts with role_definition_name.
+                      forces a new resource to be created.
                     type: string
                   roleDefinitionName:
                     description: The name of a built-in Role. Changing this forces
-                      a new resource to be created. Conflicts with role_definition_id.
+                      a new resource to be created.
                     type: string
                   scope:
                     description: The scope at which the Role Assignment applies to,

@@ -21,6 +21,9 @@ type AccountInitParameters struct {
 	// The Azure Region where the Purview Account should exist. Changing this forces a new Purview Account to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// Whether the Purview Account should create a managed Event Hub Namespace. Defaults to true.
+	ManagedEventHubEnabled *bool `json:"managedEventHubEnabled,omitempty" tf:"managed_event_hub_enabled,omitempty"`
+
 	// The name which should be used for the new Resource Group where Purview Account creates the managed resources. Changing this forces a new Purview Account to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	ManagedResourceGroupName *string `json:"managedResourceGroupName,omitempty" tf:"managed_resource_group_name,omitempty"`
@@ -43,6 +46,9 @@ type AccountInitParameters struct {
 
 type AccountObservation struct {
 
+	// Configured in AWS to allow use of the role arn used for scanning
+	AWSExternalID *string `json:"awsExternalId,omitempty" tf:"aws_external_id,omitempty"`
+
 	// Catalog endpoint.
 	CatalogEndpoint *string `json:"catalogEndpoint,omitempty" tf:"catalog_endpoint,omitempty"`
 
@@ -57,6 +63,9 @@ type AccountObservation struct {
 
 	// The Azure Region where the Purview Account should exist. Changing this forces a new Purview Account to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Whether the Purview Account should create a managed Event Hub Namespace. Defaults to true.
+	ManagedEventHubEnabled *bool `json:"managedEventHubEnabled,omitempty" tf:"managed_event_hub_enabled,omitempty"`
 
 	// The name which should be used for the new Resource Group where Purview Account creates the managed resources. Changing this forces a new Purview Account to be created.
 	ManagedResourceGroupName *string `json:"managedResourceGroupName,omitempty" tf:"managed_resource_group_name,omitempty"`
@@ -87,6 +96,10 @@ type AccountParameters struct {
 	// The Azure Region where the Purview Account should exist. Changing this forces a new Purview Account to be created.
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Whether the Purview Account should create a managed Event Hub Namespace. Defaults to true.
+	// +kubebuilder:validation:Optional
+	ManagedEventHubEnabled *bool `json:"managedEventHubEnabled,omitempty" tf:"managed_event_hub_enabled,omitempty"`
 
 	// The name which should be used for the new Resource Group where Purview Account creates the managed resources. Changing this forces a new Purview Account to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup

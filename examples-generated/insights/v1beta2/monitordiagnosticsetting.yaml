@@ -10,12 +10,8 @@ spec:
   forProvider:
     enabledLog:
     - category: AuditEvent
-      retentionPolicy:
-      - enabled: false
-    metric:
+    enabledMetric:
     - category: AllMetrics
-      retentionPolicy:
-      - enabled: false
     name: example
     storageAccountIdSelector:
       matchLabels:

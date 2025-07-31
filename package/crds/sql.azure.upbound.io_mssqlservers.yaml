@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.14.0
+    controller-gen.kubebuilder.io/version: v0.16.5
   name: mssqlservers.sql.azure.upbound.io
 spec:
   group: sql.azure.upbound.io
@@ -82,9 +82,7 @@ spec:
                     type: string
                   administratorLoginPasswordSecretRef:
                     description: The password associated with the administrator_login
-                      user. Needs to comply with Azure's Password Policy. Required
-                      unless azuread_authentication_only in the azuread_administrator
-                      block is true.
+                      user. Needs to comply with Azure's Password Policy.
                     properties:
                       key:
                         description: The key to select.
@@ -100,6 +98,28 @@ spec:
                     - name
                     - namespace
                     type: object
+                  administratorLoginPasswordWoSecretRef:
+                    description: The Password associated with the administrator_login
+                      user. Needs to comply with Azure's Password Policy.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  administratorLoginPasswordWoVersion:
+                    description: An integer value used to trigger an update for administrator_login_password_wo.
+                      This property should be incremented when updating administrator_login_password_wo.
+                    type: number
                   azureadAdministrator:
                     description: An azuread_administrator block as defined below.
                     items:
@@ -281,6 +301,10 @@ spec:
                     description: The connection policy the server will use. Possible
                       values are Default, Proxy, and Redirect. Defaults to Default.
                     type: string
+                  expressVulnerabilityAssessmentEnabled:
+                    description: Whether to enable the Express Vulnerability Assessment
+                      Configuration. Defaults to false.
+                    type: boolean
                   identity:
                     description: An identity block as defined below.
                     items:
@@ -394,7 +418,9 @@ spec:
                     type: boolean
                   primaryUserAssignedIdentityId:
                     description: Specifies the primary user managed identity id. Required
-                      if type is UserAssigned and should be combined with identity_ids.
+                      if type within the identity block is set to either SystemAssigned,
+                      UserAssigned or UserAssigned and should be set at same time
+                      as setting identity_ids.
                     type: string
                   primaryUserAssignedIdentityIdRef:
                     description: Reference to a UserAssignedIdentity in managedidentity
@@ -670,9 +696,7 @@ spec:
                     type: string
                   administratorLoginPasswordSecretRef:
                     description: The password associated with the administrator_login
-                      user. Needs to comply with Azure's Password Policy. Required
-                      unless azuread_authentication_only in the azuread_administrator
-                      block is true.
+                      user. Needs to comply with Azure's Password Policy.
                     properties:
                       key:
                         description: The key to select.
@@ -688,6 +712,28 @@ spec:
                     - name
                     - namespace
                     type: object
+                  administratorLoginPasswordWoSecretRef:
+                    description: The Password associated with the administrator_login
+                      user. Needs to comply with Azure's Password Policy.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  administratorLoginPasswordWoVersion:
+                    description: An integer value used to trigger an update for administrator_login_password_wo.
+                      This property should be incremented when updating administrator_login_password_wo.
+                    type: number
                   azureadAdministrator:
                     description: An azuread_administrator block as defined below.
                     items:
@@ -869,6 +915,10 @@ spec:
                     description: The connection policy the server will use. Possible
                       values are Default, Proxy, and Redirect. Defaults to Default.
                     type: string
+                  expressVulnerabilityAssessmentEnabled:
+                    description: Whether to enable the Express Vulnerability Assessment
+                      Configuration. Defaults to false.
+                    type: boolean
                   identity:
                     description: An identity block as defined below.
                     items:
@@ -982,7 +1032,9 @@ spec:
                     type: boolean
                   primaryUserAssignedIdentityId:
                     description: Specifies the primary user managed identity id. Required
-                      if type is UserAssigned and should be combined with identity_ids.
+                      if type within the identity block is set to either SystemAssigned,
+                      UserAssigned or UserAssigned and should be set at same time
+                      as setting identity_ids.
                     type: string
                   primaryUserAssignedIdentityIdRef:
                     description: Reference to a UserAssignedIdentity in managedidentity
@@ -1343,6 +1395,10 @@ spec:
                       which cannot be subsequently changed. Changing this forces a
                       new resource to be created.
                     type: string
+                  administratorLoginPasswordWoVersion:
+                    description: An integer value used to trigger an update for administrator_login_password_wo.
+                      This property should be incremented when updating administrator_login_password_wo.
+                    type: number
                   azureadAdministrator:
                     description: An azuread_administrator block as defined below.
                     items:
@@ -1372,6 +1428,10 @@ spec:
                     description: The connection policy the server will use. Possible
                       values are Default, Proxy, and Redirect. Defaults to Default.
                     type: string
+                  expressVulnerabilityAssessmentEnabled:
+                    description: Whether to enable the Express Vulnerability Assessment
+                      Configuration. Defaults to false.
+                    type: boolean
                   fullyQualifiedDomainName:
                     description: The fully qualified domain name of the Azure SQL
                       Server (e.g. myServerName.database.windows.net)
@@ -1421,7 +1481,9 @@ spec:
                     type: boolean
                   primaryUserAssignedIdentityId:
                     description: Specifies the primary user managed identity id. Required
-                      if type is UserAssigned and should be combined with identity_ids.
+                      if type within the identity block is set to either SystemAssigned,
+                      UserAssigned or UserAssigned and should be set at same time
+                      as setting identity_ids.
                     type: string
                   publicNetworkAccessEnabled:
                     description: Whether public network access is allowed for this
@@ -1580,9 +1642,7 @@ spec:
                     type: string
                   administratorLoginPasswordSecretRef:
                     description: The password associated with the administrator_login
-                      user. Needs to comply with Azure's Password Policy. Required
-                      unless azuread_authentication_only in the azuread_administrator
-                      block is true.
+                      user. Needs to comply with Azure's Password Policy.
                     properties:
                       key:
                         description: The key to select.
@@ -1598,6 +1658,28 @@ spec:
                     - name
                     - namespace
                     type: object
+                  administratorLoginPasswordWoSecretRef:
+                    description: The Password associated with the administrator_login
+                      user. Needs to comply with Azure's Password Policy.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  administratorLoginPasswordWoVersion:
+                    description: An integer value used to trigger an update for administrator_login_password_wo.
+                      This property should be incremented when updating administrator_login_password_wo.
+                    type: number
                   azureadAdministrator:
                     description: An azuread_administrator block as defined below.
                     properties:
@@ -1777,6 +1859,10 @@ spec:
                     description: The connection policy the server will use. Possible
                       values are Default, Proxy, and Redirect. Defaults to Default.
                     type: string
+                  expressVulnerabilityAssessmentEnabled:
+                    description: Whether to enable the Express Vulnerability Assessment
+                      Configuration. Defaults to false.
+                    type: boolean
                   identity:
                     description: An identity block as defined below.
                     properties:
@@ -2166,9 +2252,7 @@ spec:
                     type: string
                   administratorLoginPasswordSecretRef:
                     description: The password associated with the administrator_login
-                      user. Needs to comply with Azure's Password Policy. Required
-                      unless azuread_authentication_only in the azuread_administrator
-                      block is true.
+                      user. Needs to comply with Azure's Password Policy.
                     properties:
                       key:
                         description: The key to select.
@@ -2184,6 +2268,28 @@ spec:
                     - name
                     - namespace
                     type: object
+                  administratorLoginPasswordWoSecretRef:
+                    description: The Password associated with the administrator_login
+                      user. Needs to comply with Azure's Password Policy.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  administratorLoginPasswordWoVersion:
+                    description: An integer value used to trigger an update for administrator_login_password_wo.
+                      This property should be incremented when updating administrator_login_password_wo.
+                    type: number
                   azureadAdministrator:
                     description: An azuread_administrator block as defined below.
                     properties:
@@ -2363,6 +2469,10 @@ spec:
                     description: The connection policy the server will use. Possible
                       values are Default, Proxy, and Redirect. Defaults to Default.
                     type: string
+                  expressVulnerabilityAssessmentEnabled:
+                    description: Whether to enable the Express Vulnerability Assessment
+                      Configuration. Defaults to false.
+                    type: boolean
                   identity:
                     description: An identity block as defined below.
                     properties:
@@ -2837,6 +2947,10 @@ spec:
                       which cannot be subsequently changed. Changing this forces a
                       new resource to be created.
                     type: string
+                  administratorLoginPasswordWoVersion:
+                    description: An integer value used to trigger an update for administrator_login_password_wo.
+                      This property should be incremented when updating administrator_login_password_wo.
+                    type: number
                   azureadAdministrator:
                     description: An azuread_administrator block as defined below.
                     properties:
@@ -2864,6 +2978,10 @@ spec:
                     description: The connection policy the server will use. Possible
                       values are Default, Proxy, and Redirect. Defaults to Default.
                     type: string
+                  expressVulnerabilityAssessmentEnabled:
+                    description: Whether to enable the Express Vulnerability Assessment
+                      Configuration. Defaults to false.
+                    type: boolean
                   fullyQualifiedDomainName:
                     description: The fully qualified domain name of the Azure SQL
                       Server (e.g. myServerName.database.windows.net)

@@ -15,6 +15,12 @@ import (
 
 type ConfigurationInitParameters struct {
 
+	// The data plane proxy authentication mode. Possible values are Local and Pass-through. Defaults to Local.
+	DataPlaneProxyAuthenticationMode *string `json:"dataPlaneProxyAuthenticationMode,omitempty" tf:"data_plane_proxy_authentication_mode,omitempty"`
+
+	// Whether data plane proxy private link delegation is enabled. Defaults to false.
+	DataPlaneProxyPrivateLinkDelegationEnabled *bool `json:"dataPlaneProxyPrivateLinkDelegationEnabled,omitempty" tf:"data_plane_proxy_private_link_delegation_enabled,omitempty"`
+
 	// An encryption block as defined below.
 	Encryption *EncryptionInitParameters `json:"encryption,omitempty" tf:"encryption,omitempty"`
 
@@ -36,7 +42,7 @@ type ConfigurationInitParameters struct {
 	// One or more replica blocks as defined below.
 	Replica []ReplicaInitParameters `json:"replica,omitempty" tf:"replica,omitempty"`
 
-	// The SKU name of the App Configuration. Possible values are free and standard. Defaults to free.
+	// The SKU name of the App Configuration. Possible values are free, developer, standard and premium. Defaults to free.
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// The number of days that items should be retained for once soft-deleted. This field only works for standard sku. This value can be between 1 and 7 days. Defaults to 7. Changing this forces a new resource to be created.
@@ -48,6 +54,12 @@ type ConfigurationInitParameters struct {
 }
 
 type ConfigurationObservation struct {
+
+	// The data plane proxy authentication mode. Possible values are Local and Pass-through. Defaults to Local.
+	DataPlaneProxyAuthenticationMode *string `json:"dataPlaneProxyAuthenticationMode,omitempty" tf:"data_plane_proxy_authentication_mode,omitempty"`
+
+	// Whether data plane proxy private link delegation is enabled. Defaults to false.
+	DataPlaneProxyPrivateLinkDelegationEnabled *bool `json:"dataPlaneProxyPrivateLinkDelegationEnabled,omitempty" tf:"data_plane_proxy_private_link_delegation_enabled,omitempty"`
 
 	// An encryption block as defined below.
 	Encryption *EncryptionObservation `json:"encryption,omitempty" tf:"encryption,omitempty"`
@@ -91,7 +103,7 @@ type ConfigurationObservation struct {
 	// A secondary_write_key block as defined below containing the secondary write access key.
 	SecondaryWriteKey []SecondaryWriteKeyObservation `json:"secondaryWriteKey,omitempty" tf:"secondary_write_key,omitempty"`
 
-	// The SKU name of the App Configuration. Possible values are free and standard. Defaults to free.
+	// The SKU name of the App Configuration. Possible values are free, developer, standard and premium. Defaults to free.
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// The number of days that items should be retained for once soft-deleted. This field only works for standard sku. This value can be between 1 and 7 days. Defaults to 7. Changing this forces a new resource to be created.
@@ -103,6 +115,14 @@ type ConfigurationObservation struct {
 }
 
 type ConfigurationParameters struct {
+
+	// The data plane proxy authentication mode. Possible values are Local and Pass-through. Defaults to Local.
+	// +kubebuilder:validation:Optional
+	DataPlaneProxyAuthenticationMode *string `json:"dataPlaneProxyAuthenticationMode,omitempty" tf:"data_plane_proxy_authentication_mode,omitempty"`
+
+	// Whether data plane proxy private link delegation is enabled. Defaults to false.
+	// +kubebuilder:validation:Optional
+	DataPlaneProxyPrivateLinkDelegationEnabled *bool `json:"dataPlaneProxyPrivateLinkDelegationEnabled,omitempty" tf:"data_plane_proxy_private_link_delegation_enabled,omitempty"`
 
 	// An encryption block as defined below.
 	// +kubebuilder:validation:Optional
@@ -145,7 +165,7 @@ type ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// The SKU name of the App Configuration. Possible values are free and standard. Defaults to free.
+	// The SKU name of the App Configuration. Possible values are free, developer, standard and premium. Defaults to free.
 	// +kubebuilder:validation:Optional
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
@@ -161,7 +181,7 @@ type ConfigurationParameters struct {
 
 type EncryptionInitParameters struct {
 
-	// Specifies the client id of the identity which will be used to access key vault.
+	// Specifies the client ID of the identity which will be used to access key vault.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/managedidentity/v1beta1.UserAssignedIdentity
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("client_id",true)
 	IdentityClientID *string `json:"identityClientId,omitempty" tf:"identity_client_id,omitempty"`
@@ -190,7 +210,7 @@ type EncryptionInitParameters struct {
 
 type EncryptionObservation struct {
 
-	// Specifies the client id of the identity which will be used to access key vault.
+	// Specifies the client ID of the identity which will be used to access key vault.
 	IdentityClientID *string `json:"identityClientId,omitempty" tf:"identity_client_id,omitempty"`
 
 	// Specifies the URI of the key vault key used to encrypt data.
@@ -199,7 +219,7 @@ type EncryptionObservation struct {
 
 type EncryptionParameters struct {
 
-	// Specifies the client id of the identity which will be used to access key vault.
+	// Specifies the client ID of the identity which will be used to access key vault.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/managedidentity/v1beta1.UserAssignedIdentity
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("client_id",true)
 	// +kubebuilder:validation:Optional
@@ -244,7 +264,7 @@ type IdentityInitParameters struct {
 	// +kubebuilder:validation:Optional
 	IdentityIdsSelector *v1.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
 
-	// Specifies the type of Managed Service Identity that should be configured on this App Configuration. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	// Specifies the type of Managed Service Identity that should be configured on this App Configuration. Possible values are SystemAssigned, UserAssigned, and SystemAssigned, UserAssigned (to enable both).
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -260,7 +280,7 @@ type IdentityObservation struct {
 	// The Tenant ID associated with this Managed Service Identity.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 
-	// Specifies the type of Managed Service Identity that should be configured on this App Configuration. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	// Specifies the type of Managed Service Identity that should be configured on this App Configuration. Possible values are SystemAssigned, UserAssigned, and SystemAssigned, UserAssigned (to enable both).
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -281,7 +301,7 @@ type IdentityParameters struct {
 	// +kubebuilder:validation:Optional
 	IdentityIdsSelector *v1.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
 
-	// Specifies the type of Managed Service Identity that should be configured on this App Configuration. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	// Specifies the type of Managed Service Identity that should be configured on this App Configuration. Possible values are SystemAssigned, UserAssigned, and SystemAssigned, UserAssigned (to enable both).
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -291,7 +311,7 @@ type PrimaryReadKeyInitParameters struct {
 
 type PrimaryReadKeyObservation struct {
 
-	// The Connection String for this Access Key - comprising of the Endpoint, ID and Secret.
+	// The Connection String for this Access Key - consisting of the Endpoint, ID, and Secret.
 	ConnectionString *string `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
 
 	// The ID of the Access Key.
@@ -309,7 +329,7 @@ type PrimaryWriteKeyInitParameters struct {
 
 type PrimaryWriteKeyObservation struct {
 
-	// The Connection String for this Access Key - comprising of the Endpoint, ID and Secret.
+	// The Connection String for this Access Key - consisting of the Endpoint, ID, and Secret.
 	ConnectionString *string `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
 
 	// The ID of the Access Key.
@@ -362,7 +382,7 @@ type SecondaryReadKeyInitParameters struct {
 
 type SecondaryReadKeyObservation struct {
 
-	// The Connection String for this Access Key - comprising of the Endpoint, ID and Secret.
+	// The Connection String for this Access Key - consisting of the Endpoint, ID, and Secret.
 	ConnectionString *string `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
 
 	// The ID of the Access Key.
@@ -380,7 +400,7 @@ type SecondaryWriteKeyInitParameters struct {
 
 type SecondaryWriteKeyObservation struct {
 
-	// The Connection String for this Access Key - comprising of the Endpoint, ID and Secret.
+	// The Connection String for this Access Key - consisting of the Endpoint, ID, and Secret.
 	ConnectionString *string `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
 
 	// The ID of the Access Key.

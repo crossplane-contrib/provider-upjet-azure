@@ -142,7 +142,6 @@ type ServiceInitParameters struct {
 	// A live_trace block as defined below.
 	LiveTrace *LiveTraceInitParameters `json:"liveTrace,omitempty" tf:"live_trace,omitempty"`
 
-	// Specifies if Live Trace is enabled or not. Defaults to false.
 	LiveTraceEnabled *bool `json:"liveTraceEnabled,omitempty" tf:"live_trace_enabled,omitempty"`
 
 	// Whether to enable local auth? Defaults to true.
@@ -206,7 +205,6 @@ type ServiceObservation struct {
 	// A live_trace block as defined below.
 	LiveTrace *LiveTraceObservation `json:"liveTrace,omitempty" tf:"live_trace,omitempty"`
 
-	// Specifies if Live Trace is enabled or not. Defaults to false.
 	LiveTraceEnabled *bool `json:"liveTraceEnabled,omitempty" tf:"live_trace_enabled,omitempty"`
 
 	// Whether to enable local auth? Defaults to true.
@@ -276,7 +274,6 @@ type ServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	LiveTrace *LiveTraceParameters `json:"liveTrace,omitempty" tf:"live_trace,omitempty"`
 
-	// Specifies if Live Trace is enabled or not. Defaults to false.
 	// +kubebuilder:validation:Optional
 	LiveTraceEnabled *bool `json:"liveTraceEnabled,omitempty" tf:"live_trace_enabled,omitempty"`
 

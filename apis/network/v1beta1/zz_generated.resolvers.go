@@ -4155,25 +4155,25 @@ func (mg *PrivateDNSResolverInboundEndpoint) ResolveReferences(ctx context.Conte
 	var rsp reference.ResolutionResponse
 	var err error
 
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.IPConfigurations); i3++ {
+	if mg.Spec.ForProvider.IPConfigurations != nil {
 		{
 			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IPConfigurations[i3].SubnetID),
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IPConfigurations.SubnetID),
 				Extract:      resource.ExtractResourceID(),
-				Reference:    mg.Spec.ForProvider.IPConfigurations[i3].SubnetIDRef,
-				Selector:     mg.Spec.ForProvider.IPConfigurations[i3].SubnetIDSelector,
+				Reference:    mg.Spec.ForProvider.IPConfigurations.SubnetIDRef,
+				Selector:     mg.Spec.ForProvider.IPConfigurations.SubnetIDSelector,
 				To:           reference.To{List: l, Managed: m},
 			})
 		}
 		if err != nil {
-			return errors.Wrap(err, "mg.Spec.ForProvider.IPConfigurations[i3].SubnetID")
+			return errors.Wrap(err, "mg.Spec.ForProvider.IPConfigurations.SubnetID")
 		}
-		mg.Spec.ForProvider.IPConfigurations[i3].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
-		mg.Spec.ForProvider.IPConfigurations[i3].SubnetIDRef = rsp.ResolvedReference
+		mg.Spec.ForProvider.IPConfigurations.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.IPConfigurations.SubnetIDRef = rsp.ResolvedReference
 
 	}
 	{
@@ -4195,25 +4195,25 @@ func (mg *PrivateDNSResolverInboundEndpoint) ResolveReferences(ctx context.Conte
 	mg.Spec.ForProvider.PrivateDNSResolverID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PrivateDNSResolverIDRef = rsp.ResolvedReference
 
-	for i3 := 0; i3 < len(mg.Spec.InitProvider.IPConfigurations); i3++ {
+	if mg.Spec.InitProvider.IPConfigurations != nil {
 		{
 			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IPConfigurations[i3].SubnetID),
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IPConfigurations.SubnetID),
 				Extract:      resource.ExtractResourceID(),
-				Reference:    mg.Spec.InitProvider.IPConfigurations[i3].SubnetIDRef,
-				Selector:     mg.Spec.InitProvider.IPConfigurations[i3].SubnetIDSelector,
+				Reference:    mg.Spec.InitProvider.IPConfigurations.SubnetIDRef,
+				Selector:     mg.Spec.InitProvider.IPConfigurations.SubnetIDSelector,
 				To:           reference.To{List: l, Managed: m},
 			})
 		}
 		if err != nil {
-			return errors.Wrap(err, "mg.Spec.InitProvider.IPConfigurations[i3].SubnetID")
+			return errors.Wrap(err, "mg.Spec.InitProvider.IPConfigurations.SubnetID")
 		}
-		mg.Spec.InitProvider.IPConfigurations[i3].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
-		mg.Spec.InitProvider.IPConfigurations[i3].SubnetIDRef = rsp.ResolvedReference
+		mg.Spec.InitProvider.IPConfigurations.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.IPConfigurations.SubnetIDRef = rsp.ResolvedReference
 
 	}
 
@@ -7168,6 +7168,25 @@ func (mg *WatcherFlowLog) ResolveReferences(ctx context.Context, c client.Reader
 	}
 	mg.Spec.ForProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageAccountIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TargetResourceID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.TargetResourceIDRef,
+			Selector:     mg.Spec.ForProvider.TargetResourceIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.TargetResourceID")
+	}
+	mg.Spec.ForProvider.TargetResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.TargetResourceIDRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.TrafficAnalytics); i3++ {
 		{
@@ -7248,6 +7267,25 @@ func (mg *WatcherFlowLog) ResolveReferences(ctx context.Context, c client.Reader
 	}
 	mg.Spec.InitProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.StorageAccountIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TargetResourceID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.TargetResourceIDRef,
+			Selector:     mg.Spec.InitProvider.TargetResourceIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.TargetResourceID")
+	}
+	mg.Spec.InitProvider.TargetResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.TargetResourceIDRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.TrafficAnalytics); i3++ {
 		{

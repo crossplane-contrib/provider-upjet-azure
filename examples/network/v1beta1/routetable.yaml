@@ -8,13 +8,23 @@ metadata:
   name: example
 spec:
   forProvider:
-    disableBgpRoutePropagation: false
+    bgpRoutePropagationEnabled: false
     location: West Europe
     resourceGroupNameRef:
-      name: example
+      name: example-rt
     route:
     - addressPrefix: 10.1.0.0/16
       name: route1
       nextHopType: VnetLocal
     tags:
       environment: Production
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  name: example-rt
+spec:
+  forProvider:
+    location: West Europe

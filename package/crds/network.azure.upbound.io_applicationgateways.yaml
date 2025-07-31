@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.14.0
+    controller-gen.kubebuilder.io/version: v0.16.5
   name: applicationgateways.network.azure.upbound.io
 spec:
   group: network.azure.upbound.io
@@ -4424,7 +4424,9 @@ spec:
                           type: string
                         statusCode:
                           description: Status code of the application gateway customer
-                            error. Possible values are HttpStatus403 and HttpStatus502
+                            error. Possible values are HttpStatus400, HttpStatus403,
+                            HttpStatus404, HttpStatus405, HttpStatus408, HttpStatus500,
+                            HttpStatus502, HttpStatus503 and HttpStatus504
                           type: string
                       type: object
                     type: array
@@ -4983,8 +4985,8 @@ spec:
                           description: Custom port which will be used for probing
                             the backend servers. The valid value ranges from 1 to
                             65535. In case not set, port from HTTP settings will be
-                            used. This property is valid for Standard_v2 and WAF_v2
-                            only.
+                            used. This property is valid for Basic, Standard_v2 and
+                            WAF_v2 only.
                           type: number
                         protocol:
                           description: The Protocol used for this Probe. Possible
@@ -5163,7 +5165,7 @@ spec:
                     type: object
                   rewriteRuleSet:
                     description: One or more rewrite_rule_set blocks as defined below.
-                      Only valid for v2 SKUs.
+                      Only valid for v2 WAF and Standard SKUs.
                     items:
                       properties:
                         name:
@@ -5265,19 +5267,17 @@ spec:
                       capacity:
                         description: The Capacity of the SKU to use for this Application
                           Gateway. When using a V1 SKU this value must be between
-                          1 and 32, and 1 to 125 for a V2 SKU. This property is optional
-                          if autoscale_configuration is set.
+                          1 and 32, and 1 to 125 for a V2 SKU. When using a Basic
+                          SKU this property must be between 1 and 2. This property
+                          is optional if autoscale_configuration is set.
                         type: number
                       name:
                         description: The Name of the SKU to use for this Application
-                          Gateway. Possible values are Standard_Small, Standard_Medium,
-                          Standard_Large, Standard_v2, WAF_Medium, WAF_Large, and
-                          WAF_v2.
+                          Gateway. Possible values are Basic, Standard_v2, and WAF_v2.
                         type: string
                       tier:
                         description: The Tier of the SKU to use for this Application
-                          Gateway. Possible values are Standard, Standard_v2, WAF
-                          and WAF_v2.
+                          Gateway. Possible values are Basic, Standard_v2, and WAF_v2.
                         type: string
                     type: object
                   sslCertificate:
@@ -5303,10 +5303,10 @@ spec:
                           - namespace
                           type: object
                         keyVaultSecretId:
-                          description: The Secret ID of (base-64 encoded unencrypted
-                            pfx) the Secret or Certificate object stored in Azure
-                            KeyVault. You need to enable soft delete for Key Vault
-                            to use this feature. Required if data is not set.
+                          description: The Secret ID of the (base-64 encoded unencrypted
+                            pfx) Secret or Certificate object stored in Azure KeyVault.
+                            You need to enable soft delete for Key Vault to use this
+                            feature. Required if data is not set.
                           type: string
                         name:
                           description: The Name of the SSL certificate that is unique
@@ -5504,7 +5504,7 @@ spec:
                           - namespace
                           type: object
                         keyVaultSecretId:
-                          description: The Secret ID of (base-64 encoded unencrypted
+                          description: The Secret ID of the (base-64 encoded unencrypted
                             pfx) Secret or Certificate object stored in Azure KeyVault.
                             You need to enable soft delete for the Key Vault to use
                             this feature. Required if data is not set.
@@ -5673,8 +5673,8 @@ spec:
                         type: string
                       ruleSetVersion:
                         description: The Version of the Rule Set used for this Web
-                          Application Firewall. Possible values are 0.1, 1.0, 2.1,
-                          2.2.9, 3.0, 3.1 and 3.2.
+                          Application Firewall. Possible values are 0.1, 1.0, 1.1,
+                          2.1, 2.2.9, 3.0, 3.1 and 3.2.
                         type: string
                     type: object
                   zones:
@@ -5849,7 +5849,9 @@ spec:
                           type: string
                         statusCode:
                           description: Status code of the application gateway customer
-                            error. Possible values are HttpStatus403 and HttpStatus502
+                            error. Possible values are HttpStatus400, HttpStatus403,
+                            HttpStatus404, HttpStatus405, HttpStatus408, HttpStatus500,
+                            HttpStatus502, HttpStatus503 and HttpStatus504
                           type: string
                       type: object
                     type: array
@@ -6408,8 +6410,8 @@ spec:
                           description: Custom port which will be used for probing
                             the backend servers. The valid value ranges from 1 to
                             65535. In case not set, port from HTTP settings will be
-                            used. This property is valid for Standard_v2 and WAF_v2
-                            only.
+                            used. This property is valid for Basic, Standard_v2 and
+                            WAF_v2 only.
                           type: number
                         protocol:
                           description: The Protocol used for this Probe. Possible
@@ -6507,7 +6509,7 @@ spec:
                     type: array
                   rewriteRuleSet:
                     description: One or more rewrite_rule_set blocks as defined below.
-                      Only valid for v2 SKUs.
+                      Only valid for v2 WAF and Standard SKUs.
                     items:
                       properties:
                         name:
@@ -6609,19 +6611,17 @@ spec:
                       capacity:
                         description: The Capacity of the SKU to use for this Application
                           Gateway. When using a V1 SKU this value must be between
-                          1 and 32, and 1 to 125 for a V2 SKU. This property is optional
-                          if autoscale_configuration is set.
+                          1 and 32, and 1 to 125 for a V2 SKU. When using a Basic
+                          SKU this property must be between 1 and 2. This property
+                          is optional if autoscale_configuration is set.
                         type: number
                       name:
                         description: The Name of the SKU to use for this Application
-                          Gateway. Possible values are Standard_Small, Standard_Medium,
-                          Standard_Large, Standard_v2, WAF_Medium, WAF_Large, and
-                          WAF_v2.
+                          Gateway. Possible values are Basic, Standard_v2, and WAF_v2.
                         type: string
                       tier:
                         description: The Tier of the SKU to use for this Application
-                          Gateway. Possible values are Standard, Standard_v2, WAF
-                          and WAF_v2.
+                          Gateway. Possible values are Basic, Standard_v2, and WAF_v2.
                         type: string
                     type: object
                   sslCertificate:
@@ -6647,10 +6647,10 @@ spec:
                           - namespace
                           type: object
                         keyVaultSecretId:
-                          description: The Secret ID of (base-64 encoded unencrypted
-                            pfx) the Secret or Certificate object stored in Azure
-                            KeyVault. You need to enable soft delete for Key Vault
-                            to use this feature. Required if data is not set.
+                          description: The Secret ID of the (base-64 encoded unencrypted
+                            pfx) Secret or Certificate object stored in Azure KeyVault.
+                            You need to enable soft delete for Key Vault to use this
+                            feature. Required if data is not set.
                           type: string
                         name:
                           description: The Name of the SSL certificate that is unique
@@ -6850,7 +6850,7 @@ spec:
                           - namespace
                           type: object
                         keyVaultSecretId:
-                          description: The Secret ID of (base-64 encoded unencrypted
+                          description: The Secret ID of the (base-64 encoded unencrypted
                             pfx) Secret or Certificate object stored in Azure KeyVault.
                             You need to enable soft delete for the Key Vault to use
                             this feature. Required if data is not set.
@@ -7019,8 +7019,8 @@ spec:
                         type: string
                       ruleSetVersion:
                         description: The Version of the Rule Set used for this Web
-                          Application Firewall. Possible values are 0.1, 1.0, 2.1,
-                          2.2.9, 3.0, 3.1 and 3.2.
+                          Application Firewall. Possible values are 0.1, 1.0, 1.1,
+                          2.1, 2.2.9, 3.0, 3.1 and 3.2.
                         type: string
                     type: object
                   zones:
@@ -7389,7 +7389,9 @@ spec:
                           type: string
                         statusCode:
                           description: Status code of the application gateway customer
-                            error. Possible values are HttpStatus403 and HttpStatus502
+                            error. Possible values are HttpStatus400, HttpStatus403,
+                            HttpStatus404, HttpStatus405, HttpStatus408, HttpStatus500,
+                            HttpStatus502, HttpStatus503 and HttpStatus504
                           type: string
                       type: object
                     type: array
@@ -7702,8 +7704,8 @@ spec:
                           description: Custom port which will be used for probing
                             the backend servers. The valid value ranges from 1 to
                             65535. In case not set, port from HTTP settings will be
-                            used. This property is valid for Standard_v2 and WAF_v2
-                            only.
+                            used. This property is valid for Basic, Standard_v2 and
+                            WAF_v2 only.
                           type: number
                         protocol:
                           description: The Protocol used for this Probe. Possible
@@ -7834,7 +7836,7 @@ spec:
                     type: string
                   rewriteRuleSet:
                     description: One or more rewrite_rule_set blocks as defined below.
-                      Only valid for v2 SKUs.
+                      Only valid for v2 WAF and Standard SKUs.
                     items:
                       properties:
                         id:
@@ -7939,19 +7941,17 @@ spec:
                       capacity:
                         description: The Capacity of the SKU to use for this Application
                           Gateway. When using a V1 SKU this value must be between
-                          1 and 32, and 1 to 125 for a V2 SKU. This property is optional
-                          if autoscale_configuration is set.
+                          1 and 32, and 1 to 125 for a V2 SKU. When using a Basic
+                          SKU this property must be between 1 and 2. This property
+                          is optional if autoscale_configuration is set.
                         type: number
                       name:
                         description: The Name of the SKU to use for this Application
-                          Gateway. Possible values are Standard_Small, Standard_Medium,
-                          Standard_Large, Standard_v2, WAF_Medium, WAF_Large, and
-                          WAF_v2.
+                          Gateway. Possible values are Basic, Standard_v2, and WAF_v2.
                         type: string
                       tier:
                         description: The Tier of the SKU to use for this Application
-                          Gateway. Possible values are Standard, Standard_v2, WAF
-                          and WAF_v2.
+                          Gateway. Possible values are Basic, Standard_v2, and WAF_v2.
                         type: string
                     type: object
                   sslCertificate:
@@ -7962,10 +7962,10 @@ spec:
                           description: The ID of the SSL Certificate.
                           type: string
                         keyVaultSecretId:
-                          description: The Secret ID of (base-64 encoded unencrypted
-                            pfx) the Secret or Certificate object stored in Azure
-                            KeyVault. You need to enable soft delete for Key Vault
-                            to use this feature. Required if data is not set.
+                          description: The Secret ID of the (base-64 encoded unencrypted
+                            pfx) Secret or Certificate object stored in Azure KeyVault.
+                            You need to enable soft delete for Key Vault to use this
+                            feature. Required if data is not set.
                           type: string
                         name:
                           description: The Name of the SSL certificate that is unique
@@ -8122,7 +8122,7 @@ spec:
                           description: The ID of the URL Path Map.
                           type: string
                         keyVaultSecretId:
-                          description: The Secret ID of (base-64 encoded unencrypted
+                          description: The Secret ID of the (base-64 encoded unencrypted
                             pfx) Secret or Certificate object stored in Azure KeyVault.
                             You need to enable soft delete for the Key Vault to use
                             this feature. Required if data is not set.
@@ -8325,8 +8325,8 @@ spec:
                         type: string
                       ruleSetVersion:
                         description: The Version of the Rule Set used for this Web
-                          Application Firewall. Possible values are 0.1, 1.0, 2.1,
-                          2.2.9, 3.0, 3.1 and 3.2.
+                          Application Firewall. Possible values are 0.1, 1.0, 1.1,
+                          2.1, 2.2.9, 3.0, 3.1 and 3.2.
                         type: string
                     type: object
                   zones:

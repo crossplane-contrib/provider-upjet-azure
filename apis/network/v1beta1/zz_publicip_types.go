@@ -27,6 +27,9 @@ type PublicIPInitParameters struct {
 	// Label for the Domain Name. Will be used to make up the FQDN. If a domain name label is specified, an A DNS record is created for the public IP in the Microsoft Azure DNS system.
 	DomainNameLabel *string `json:"domainNameLabel,omitempty" tf:"domain_name_label,omitempty"`
 
+	// Scope for the domain name label. If a domain name label scope is specified, an A DNS record is created for the public IP in the Microsoft Azure DNS system with a hashed value includes in FQDN. Possible values are NoReuse, ResourceGroupReuse, SubscriptionReuse and TenantReuse. Changing this forces a new Public IP to be created.
+	DomainNameLabelScope *string `json:"domainNameLabelScope,omitempty" tf:"domain_name_label_scope,omitempty"`
+
 	// Specifies the Edge Zone within the Azure Region where this Public IP should exist. Changing this forces a new Public IP to be created.
 	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
 
@@ -49,7 +52,7 @@ type PublicIPInitParameters struct {
 	// A fully qualified domain name that resolves to this public IP address. If the reverseFqdn is specified, then a PTR DNS record is created pointing from the IP address in the in-addr.arpa domain to the reverse FQDN.
 	ReverseFqdn *string `json:"reverseFqdn,omitempty" tf:"reverse_fqdn,omitempty"`
 
-	// The SKU of the Public IP. Accepted values are Basic and Standard. Defaults to Basic. Changing this forces a new resource to be created.
+	// The SKU of the Public IP. Accepted values are Basic and Standard. Defaults to Standard. Changing this forces a new resource to be created.
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// The SKU Tier that should be used for the Public IP. Possible values are Regional and Global. Defaults to Regional. Changing this forces a new resource to be created.
@@ -77,6 +80,9 @@ type PublicIPObservation struct {
 
 	// Label for the Domain Name. Will be used to make up the FQDN. If a domain name label is specified, an A DNS record is created for the public IP in the Microsoft Azure DNS system.
 	DomainNameLabel *string `json:"domainNameLabel,omitempty" tf:"domain_name_label,omitempty"`
+
+	// Scope for the domain name label. If a domain name label scope is specified, an A DNS record is created for the public IP in the Microsoft Azure DNS system with a hashed value includes in FQDN. Possible values are NoReuse, ResourceGroupReuse, SubscriptionReuse and TenantReuse. Changing this forces a new Public IP to be created.
+	DomainNameLabelScope *string `json:"domainNameLabelScope,omitempty" tf:"domain_name_label_scope,omitempty"`
 
 	// Specifies the Edge Zone within the Azure Region where this Public IP should exist. Changing this forces a new Public IP to be created.
 	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
@@ -112,7 +118,7 @@ type PublicIPObservation struct {
 	// A fully qualified domain name that resolves to this public IP address. If the reverseFqdn is specified, then a PTR DNS record is created pointing from the IP address in the in-addr.arpa domain to the reverse FQDN.
 	ReverseFqdn *string `json:"reverseFqdn,omitempty" tf:"reverse_fqdn,omitempty"`
 
-	// The SKU of the Public IP. Accepted values are Basic and Standard. Defaults to Basic. Changing this forces a new resource to be created.
+	// The SKU of the Public IP. Accepted values are Basic and Standard. Defaults to Standard. Changing this forces a new resource to be created.
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// The SKU Tier that should be used for the Public IP. Possible values are Regional and Global. Defaults to Regional. Changing this forces a new resource to be created.
@@ -144,6 +150,10 @@ type PublicIPParameters struct {
 	// Label for the Domain Name. Will be used to make up the FQDN. If a domain name label is specified, an A DNS record is created for the public IP in the Microsoft Azure DNS system.
 	// +kubebuilder:validation:Optional
 	DomainNameLabel *string `json:"domainNameLabel,omitempty" tf:"domain_name_label,omitempty"`
+
+	// Scope for the domain name label. If a domain name label scope is specified, an A DNS record is created for the public IP in the Microsoft Azure DNS system with a hashed value includes in FQDN. Possible values are NoReuse, ResourceGroupReuse, SubscriptionReuse and TenantReuse. Changing this forces a new Public IP to be created.
+	// +kubebuilder:validation:Optional
+	DomainNameLabelScope *string `json:"domainNameLabelScope,omitempty" tf:"domain_name_label_scope,omitempty"`
 
 	// Specifies the Edge Zone within the Azure Region where this Public IP should exist. Changing this forces a new Public IP to be created.
 	// +kubebuilder:validation:Optional
@@ -187,7 +197,7 @@ type PublicIPParameters struct {
 	// +kubebuilder:validation:Optional
 	ReverseFqdn *string `json:"reverseFqdn,omitempty" tf:"reverse_fqdn,omitempty"`
 
-	// The SKU of the Public IP. Accepted values are Basic and Standard. Defaults to Basic. Changing this forces a new resource to be created.
+	// The SKU of the Public IP. Accepted values are Basic and Standard. Defaults to Standard. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 

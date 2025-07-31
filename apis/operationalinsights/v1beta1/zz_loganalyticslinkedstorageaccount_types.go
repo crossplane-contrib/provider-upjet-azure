@@ -47,15 +47,18 @@ type LogAnalyticsLinkedStorageAccountInitParameters struct {
 	// The resource ID of the Log Analytics Workspace. Changing this forces a new Log Analytics Linked Storage Account to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/operationalinsights/v1beta2.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
+
+	// Reference to a Workspace in operationalinsights to populate workspaceId.
+	// +kubebuilder:validation:Optional
+	WorkspaceIDRef *v1.Reference `json:"workspaceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Workspace in operationalinsights to populate workspaceId.
+	// +kubebuilder:validation:Optional
+	WorkspaceIDSelector *v1.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
+
+	// The ID of the Log Analytics Linked Storage Account.
 	WorkspaceResourceID *string `json:"workspaceResourceId,omitempty" tf:"workspace_resource_id,omitempty"`
-
-	// Reference to a Workspace in operationalinsights to populate workspaceResourceId.
-	// +kubebuilder:validation:Optional
-	WorkspaceResourceIDRef *v1.Reference `json:"workspaceResourceIdRef,omitempty" tf:"-"`
-
-	// Selector for a Workspace in operationalinsights to populate workspaceResourceId.
-	// +kubebuilder:validation:Optional
-	WorkspaceResourceIDSelector *v1.Selector `json:"workspaceResourceIdSelector,omitempty" tf:"-"`
 }
 
 type LogAnalyticsLinkedStorageAccountObservation struct {
@@ -74,6 +77,9 @@ type LogAnalyticsLinkedStorageAccountObservation struct {
 	StorageAccountIds []*string `json:"storageAccountIds,omitempty" tf:"storage_account_ids,omitempty"`
 
 	// The resource ID of the Log Analytics Workspace. Changing this forces a new Log Analytics Linked Storage Account to be created.
+	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
+
+	// The ID of the Log Analytics Linked Storage Account.
 	WorkspaceResourceID *string `json:"workspaceResourceId,omitempty" tf:"workspace_resource_id,omitempty"`
 }
 
@@ -115,15 +121,19 @@ type LogAnalyticsLinkedStorageAccountParameters struct {
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/operationalinsights/v1beta2.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
+	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
+
+	// Reference to a Workspace in operationalinsights to populate workspaceId.
+	// +kubebuilder:validation:Optional
+	WorkspaceIDRef *v1.Reference `json:"workspaceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Workspace in operationalinsights to populate workspaceId.
+	// +kubebuilder:validation:Optional
+	WorkspaceIDSelector *v1.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
+
+	// The ID of the Log Analytics Linked Storage Account.
+	// +kubebuilder:validation:Optional
 	WorkspaceResourceID *string `json:"workspaceResourceId,omitempty" tf:"workspace_resource_id,omitempty"`
-
-	// Reference to a Workspace in operationalinsights to populate workspaceResourceId.
-	// +kubebuilder:validation:Optional
-	WorkspaceResourceIDRef *v1.Reference `json:"workspaceResourceIdRef,omitempty" tf:"-"`
-
-	// Selector for a Workspace in operationalinsights to populate workspaceResourceId.
-	// +kubebuilder:validation:Optional
-	WorkspaceResourceIDSelector *v1.Selector `json:"workspaceResourceIdSelector,omitempty" tf:"-"`
 }
 
 // LogAnalyticsLinkedStorageAccountSpec defines the desired state of LogAnalyticsLinkedStorageAccount

@@ -15,7 +15,7 @@ import (
 
 type CustomRulesInitParameters struct {
 
-	// Type of action. Possible values are Allow, Block and Log.
+	// Type of action. Possible values are Allow, Block, JSChallenge and Log.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// Describes if the policy is in enabled state or disabled state. Defaults to true.
@@ -45,7 +45,7 @@ type CustomRulesInitParameters struct {
 
 type CustomRulesObservation struct {
 
-	// Type of action. Possible values are Allow, Block and Log.
+	// Type of action. Possible values are Allow, Block, JSChallenge and Log.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// Describes if the policy is in enabled state or disabled state. Defaults to true.
@@ -75,7 +75,7 @@ type CustomRulesObservation struct {
 
 type CustomRulesParameters struct {
 
-	// Type of action. Possible values are Allow, Block and Log.
+	// Type of action. Possible values are Allow, Block, JSChallenge and Log.
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action" tf:"action,omitempty"`
 
@@ -120,7 +120,7 @@ type ExcludedRuleSetInitParameters struct {
 	// The rule set type. Possible values: Microsoft_BotManagerRuleSet, Microsoft_DefaultRuleSet and OWASP. Defaults to OWASP.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// The rule set version. Possible values: 0.1, 1.0, 2.1, 2.2.9, 3.0, 3.1 and 3.2.
+	// The rule set version. Possible values: 0.1, 1.0, 1.1, 2.1, 2.2.9, 3.0, 3.1 and 3.2.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
@@ -132,7 +132,7 @@ type ExcludedRuleSetObservation struct {
 	// The rule set type. Possible values: Microsoft_BotManagerRuleSet, Microsoft_DefaultRuleSet and OWASP. Defaults to OWASP.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// The rule set version. Possible values: 0.1, 1.0, 2.1, 2.2.9, 3.0, 3.1 and 3.2.
+	// The rule set version. Possible values: 0.1, 1.0, 1.1, 2.1, 2.2.9, 3.0, 3.1 and 3.2.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
@@ -146,7 +146,7 @@ type ExcludedRuleSetParameters struct {
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// The rule set version. Possible values: 0.1, 1.0, 2.1, 2.2.9, 3.0, 3.1 and 3.2.
+	// The rule set version. Possible values: 0.1, 1.0, 1.1, 2.1, 2.2.9, 3.0, 3.1 and 3.2.
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
@@ -240,7 +240,7 @@ type ManagedRuleSetInitParameters struct {
 	// The rule set type. Possible values: Microsoft_BotManagerRuleSet, Microsoft_DefaultRuleSet and OWASP. Defaults to OWASP.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// The rule set version. Possible values: 0.1, 1.0, 2.1, 2.2.9, 3.0, 3.1 and 3.2.
+	// The rule set version. Possible values: 0.1, 1.0, 1.1, 2.1, 2.2.9, 3.0, 3.1 and 3.2.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
@@ -252,7 +252,7 @@ type ManagedRuleSetObservation struct {
 	// The rule set type. Possible values: Microsoft_BotManagerRuleSet, Microsoft_DefaultRuleSet and OWASP. Defaults to OWASP.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// The rule set version. Possible values: 0.1, 1.0, 2.1, 2.2.9, 3.0, 3.1 and 3.2.
+	// The rule set version. Possible values: 0.1, 1.0, 1.1, 2.1, 2.2.9, 3.0, 3.1 and 3.2.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
@@ -266,7 +266,7 @@ type ManagedRuleSetParameters struct {
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// The rule set version. Possible values: 0.1, 1.0, 2.1, 2.2.9, 3.0, 3.1 and 3.2.
+	// The rule set version. Possible values: 0.1, 1.0, 1.1, 2.1, 2.2.9, 3.0, 3.1 and 3.2.
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version" tf:"version,omitempty"`
 }
@@ -363,7 +363,7 @@ type MatchConditionsInitParameters struct {
 	// Describes operator to be matched. Possible values are Any, IPMatch, GeoMatch, Equal, Contains, LessThan, GreaterThan, LessThanOrEqual, GreaterThanOrEqual, BeginsWith, EndsWith and Regex.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
-	// A list of transformations to do before the match is attempted. Possible values are HtmlEntityDecode, Lowercase, RemoveNulls, Trim, UrlDecode and UrlEncode.
+	// A list of transformations to do before the match is attempted. Possible values are HtmlEntityDecode, Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode and UrlEncode.
 	// +listType=set
 	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
@@ -382,7 +382,7 @@ type MatchConditionsObservation struct {
 	// Describes operator to be matched. Possible values are Any, IPMatch, GeoMatch, Equal, Contains, LessThan, GreaterThan, LessThanOrEqual, GreaterThanOrEqual, BeginsWith, EndsWith and Regex.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
-	// A list of transformations to do before the match is attempted. Possible values are HtmlEntityDecode, Lowercase, RemoveNulls, Trim, UrlDecode and UrlEncode.
+	// A list of transformations to do before the match is attempted. Possible values are HtmlEntityDecode, Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode and UrlEncode.
 	// +listType=set
 	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
@@ -405,7 +405,7 @@ type MatchConditionsParameters struct {
 	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator" tf:"operator,omitempty"`
 
-	// A list of transformations to do before the match is attempted. Possible values are HtmlEntityDecode, Lowercase, RemoveNulls, Trim, UrlDecode and UrlEncode.
+	// A list of transformations to do before the match is attempted. Possible values are HtmlEntityDecode, Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode and UrlEncode.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
@@ -445,6 +445,9 @@ type PolicySettingsInitParameters struct {
 	// Describes if the policy is in enabled state or disabled state. Defaults to true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// - Whether the firewall should block a request with upload size greater then file_upload_limit_in_mb.
+	FileUploadEnforcement *bool `json:"fileUploadEnforcement,omitempty" tf:"file_upload_enforcement,omitempty"`
+
 	// The File Upload Limit in MB. Accepted values are in the range 1 to 4000. Defaults to 100.
 	FileUploadLimitInMb *float64 `json:"fileUploadLimitInMb,omitempty" tf:"file_upload_limit_in_mb,omitempty"`
 
@@ -463,6 +466,9 @@ type PolicySettingsInitParameters struct {
 	// Is Request Body Inspection enabled? Defaults to true.
 	RequestBodyCheck *bool `json:"requestBodyCheck,omitempty" tf:"request_body_check,omitempty"`
 
+	// Whether the firewall should block a request with body size greater then max_request_body_size_in_kb. Defaults to true.
+	RequestBodyEnforcement *bool `json:"requestBodyEnforcement,omitempty" tf:"request_body_enforcement,omitempty"`
+
 	// Specifies the maximum request body inspection limit in KB for the Web Application Firewall. Defaults to 128.
 	RequestBodyInspectLimitInKb *float64 `json:"requestBodyInspectLimitInKb,omitempty" tf:"request_body_inspect_limit_in_kb,omitempty"`
 }
@@ -471,6 +477,9 @@ type PolicySettingsObservation struct {
 
 	// Describes if the policy is in enabled state or disabled state. Defaults to true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// - Whether the firewall should block a request with upload size greater then file_upload_limit_in_mb.
+	FileUploadEnforcement *bool `json:"fileUploadEnforcement,omitempty" tf:"file_upload_enforcement,omitempty"`
 
 	// The File Upload Limit in MB. Accepted values are in the range 1 to 4000. Defaults to 100.
 	FileUploadLimitInMb *float64 `json:"fileUploadLimitInMb,omitempty" tf:"file_upload_limit_in_mb,omitempty"`
@@ -490,6 +499,9 @@ type PolicySettingsObservation struct {
 	// Is Request Body Inspection enabled? Defaults to true.
 	RequestBodyCheck *bool `json:"requestBodyCheck,omitempty" tf:"request_body_check,omitempty"`
 
+	// Whether the firewall should block a request with body size greater then max_request_body_size_in_kb. Defaults to true.
+	RequestBodyEnforcement *bool `json:"requestBodyEnforcement,omitempty" tf:"request_body_enforcement,omitempty"`
+
 	// Specifies the maximum request body inspection limit in KB for the Web Application Firewall. Defaults to 128.
 	RequestBodyInspectLimitInKb *float64 `json:"requestBodyInspectLimitInKb,omitempty" tf:"request_body_inspect_limit_in_kb,omitempty"`
 }
@@ -499,6 +511,10 @@ type PolicySettingsParameters struct {
 	// Describes if the policy is in enabled state or disabled state. Defaults to true.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// - Whether the firewall should block a request with upload size greater then file_upload_limit_in_mb.
+	// +kubebuilder:validation:Optional
+	FileUploadEnforcement *bool `json:"fileUploadEnforcement,omitempty" tf:"file_upload_enforcement,omitempty"`
 
 	// The File Upload Limit in MB. Accepted values are in the range 1 to 4000. Defaults to 100.
 	// +kubebuilder:validation:Optional
@@ -524,6 +540,10 @@ type PolicySettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	RequestBodyCheck *bool `json:"requestBodyCheck,omitempty" tf:"request_body_check,omitempty"`
 
+	// Whether the firewall should block a request with body size greater then max_request_body_size_in_kb. Defaults to true.
+	// +kubebuilder:validation:Optional
+	RequestBodyEnforcement *bool `json:"requestBodyEnforcement,omitempty" tf:"request_body_enforcement,omitempty"`
+
 	// Specifies the maximum request body inspection limit in KB for the Web Application Firewall. Defaults to 128.
 	// +kubebuilder:validation:Optional
 	RequestBodyInspectLimitInKb *float64 `json:"requestBodyInspectLimitInKb,omitempty" tf:"request_body_inspect_limit_in_kb,omitempty"`
@@ -548,7 +568,6 @@ type RuleGroupObservation struct {
 }
 
 type RuleGroupOverrideInitParameters struct {
-	DisabledRules []*string `json:"disabledRules,omitempty" tf:"disabled_rules,omitempty"`
 
 	// One or more rule block defined below.
 	Rule []RuleGroupOverrideRuleInitParameters `json:"rule,omitempty" tf:"rule,omitempty"`
@@ -558,7 +577,6 @@ type RuleGroupOverrideInitParameters struct {
 }
 
 type RuleGroupOverrideObservation struct {
-	DisabledRules []*string `json:"disabledRules,omitempty" tf:"disabled_rules,omitempty"`
 
 	// One or more rule block defined below.
 	Rule []RuleGroupOverrideRuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
@@ -568,9 +586,6 @@ type RuleGroupOverrideObservation struct {
 }
 
 type RuleGroupOverrideParameters struct {
-
-	// +kubebuilder:validation:Optional
-	DisabledRules []*string `json:"disabledRules,omitempty" tf:"disabled_rules,omitempty"`
 
 	// One or more rule block defined below.
 	// +kubebuilder:validation:Optional
@@ -583,7 +598,7 @@ type RuleGroupOverrideParameters struct {
 
 type RuleGroupOverrideRuleInitParameters struct {
 
-	// Describes the override action to be applied when rule matches. Possible values are Allow, AnomalyScoring, Block and Log.
+	// Describes the override action to be applied when rule matches. Possible values are Allow, AnomalyScoring, Block, JSChallenge and Log. JSChallenge is only valid for rulesets of type Microsoft_BotManagerRuleSet.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// Whether this rule is enabled. Defaults to true.
@@ -595,7 +610,7 @@ type RuleGroupOverrideRuleInitParameters struct {
 
 type RuleGroupOverrideRuleObservation struct {
 
-	// Describes the override action to be applied when rule matches. Possible values are Allow, AnomalyScoring, Block and Log.
+	// Describes the override action to be applied when rule matches. Possible values are Allow, AnomalyScoring, Block, JSChallenge and Log. JSChallenge is only valid for rulesets of type Microsoft_BotManagerRuleSet.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// Whether this rule is enabled. Defaults to true.
@@ -607,7 +622,7 @@ type RuleGroupOverrideRuleObservation struct {
 
 type RuleGroupOverrideRuleParameters struct {
 
-	// Describes the override action to be applied when rule matches. Possible values are Allow, AnomalyScoring, Block and Log.
+	// Describes the override action to be applied when rule matches. Possible values are Allow, AnomalyScoring, Block, JSChallenge and Log. JSChallenge is only valid for rulesets of type Microsoft_BotManagerRuleSet.
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 

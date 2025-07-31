@@ -79,15 +79,6 @@ func (l *IntegrationRuntimeAzureSSISList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this IntegrationRuntimeManagedList.
-func (l *IntegrationRuntimeManagedList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this LinkedCustomServiceList.
 func (l *LinkedCustomServiceList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))

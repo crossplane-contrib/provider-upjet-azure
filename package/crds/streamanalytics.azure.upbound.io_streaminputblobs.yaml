@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.14.0
+    controller-gen.kubebuilder.io/version: v0.16.5
   name: streaminputblobs.streamanalytics.azure.upbound.io
 spec:
   group: streamanalytics.azure.upbound.io
@@ -73,6 +73,11 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  authenticationMode:
+                    description: The authentication mode for the Stream Analytics
+                      Input. Possible values are Msi and ConnectionString. Defaults
+                      to ConnectionString.
+                    type: string
                   dateFormat:
                     description: The date format. Wherever {date} appears in path_pattern,
                       the value of this property is used as the date format instead.
@@ -457,6 +462,11 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  authenticationMode:
+                    description: The authentication mode for the Stream Analytics
+                      Input. Possible values are Msi and ConnectionString. Defaults
+                      to ConnectionString.
+                    type: string
                   dateFormat:
                     description: The date format. Wherever {date} appears in path_pattern,
                       the value of this property is used as the date format instead.
@@ -571,6 +581,24 @@ spec:
                           type: string
                       type: object
                     type: array
+                  storageAccountKeySecretRef:
+                    description: The Access Key which should be used to connect to
+                      this Storage Account.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   storageAccountName:
                     description: The name of the Storage Account.
                     type: string
@@ -809,6 +837,8 @@ spec:
                     description: The time format. Wherever {time} appears in path_pattern,
                       the value of this property is used as the time format instead.
                     type: string
+                required:
+                - storageAccountKeySecretRef
                 type: object
               managementPolicies:
                 default:
@@ -1006,6 +1036,11 @@ spec:
             properties:
               atProvider:
                 properties:
+                  authenticationMode:
+                    description: The authentication mode for the Stream Analytics
+                      Input. Possible values are Msi and ConnectionString. Defaults
+                      to ConnectionString.
+                    type: string
                   dateFormat:
                     description: The date format. Wherever {date} appears in path_pattern,
                       the value of this property is used as the date format instead.
@@ -1178,6 +1213,11 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  authenticationMode:
+                    description: The authentication mode for the Stream Analytics
+                      Input. Possible values are Msi and ConnectionString. Defaults
+                      to ConnectionString.
+                    type: string
                   dateFormat:
                     description: The date format. Wherever {date} appears in path_pattern,
                       the value of this property is used as the date format instead.
@@ -1560,6 +1600,11 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  authenticationMode:
+                    description: The authentication mode for the Stream Analytics
+                      Input. Possible values are Msi and ConnectionString. Defaults
+                      to ConnectionString.
+                    type: string
                   dateFormat:
                     description: The date format. Wherever {date} appears in path_pattern,
                       the value of this property is used as the date format instead.
@@ -2127,6 +2172,11 @@ spec:
             properties:
               atProvider:
                 properties:
+                  authenticationMode:
+                    description: The authentication mode for the Stream Analytics
+                      Input. Possible values are Msi and ConnectionString. Defaults
+                      to ConnectionString.
+                    type: string
                   dateFormat:
                     description: The date format. Wherever {date} appears in path_pattern,
                       the value of this property is used as the date format instead.

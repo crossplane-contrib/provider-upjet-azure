@@ -47,7 +47,7 @@ type KeyInitParameters struct {
 	// Specifies the curve to use when creating an EC key. Possible values are P-256, P-256K, P-384, and P-521. This field will be required in a future release if key_type is EC or EC-HSM. The API will default to P-256 if nothing is specified. Changing this forces a new resource to be created.
 	Curve *string `json:"curve,omitempty" tf:"curve,omitempty"`
 
-	// Expiration UTC datetime (Y-m-d'T'H:M:S'Z'). When this parameter gets changed on reruns, if newer date is ahead of current date, an update is performed. If the newer date is before the current date, resource will be force created.
+	// Expiration UTC datetime (Y-m-d'T'H:M:S'Z').
 	ExpirationDate *string `json:"expirationDate,omitempty" tf:"expiration_date,omitempty"`
 
 	// A list of JSON web key operations. Possible values include: decrypt, encrypt, sign, unwrapKey, verify and wrapKey. Please note these values are case sensitive.
@@ -94,7 +94,7 @@ type KeyObservation struct {
 	// The RSA public exponent of this Key Vault Key.
 	E *string `json:"e,omitempty" tf:"e,omitempty"`
 
-	// Expiration UTC datetime (Y-m-d'T'H:M:S'Z'). When this parameter gets changed on reruns, if newer date is ahead of current date, an update is performed. If the newer date is before the current date, resource will be force created.
+	// Expiration UTC datetime (Y-m-d'T'H:M:S'Z').
 	ExpirationDate *string `json:"expirationDate,omitempty" tf:"expiration_date,omitempty"`
 
 	// The Key Vault Key ID.
@@ -159,7 +159,7 @@ type KeyParameters struct {
 	// +kubebuilder:validation:Optional
 	Curve *string `json:"curve,omitempty" tf:"curve,omitempty"`
 
-	// Expiration UTC datetime (Y-m-d'T'H:M:S'Z'). When this parameter gets changed on reruns, if newer date is ahead of current date, an update is performed. If the newer date is before the current date, resource will be force created.
+	// Expiration UTC datetime (Y-m-d'T'H:M:S'Z').
 	// +kubebuilder:validation:Optional
 	ExpirationDate *string `json:"expirationDate,omitempty" tf:"expiration_date,omitempty"`
 

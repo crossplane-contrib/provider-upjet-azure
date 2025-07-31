@@ -35,7 +35,7 @@ metadata:
   name: winfuncappslot-wapp
 spec:
   forProvider:
-    location: East US
+    location: West Europe
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: winfuncappslot-rg
@@ -76,7 +76,7 @@ metadata:
   name: winfuncappslot-rg
 spec:
   forProvider:
-    location: East US
+    location: West Europe
 
 ---
 
@@ -91,7 +91,7 @@ metadata:
   name: winfuncappslot-sp
 spec:
   forProvider:
-    location: East US
+    location: West Europe
     osType: Windows
     resourceGroupNameSelector:
       matchLabels:
@@ -113,7 +113,7 @@ spec:
   forProvider:
     accountReplicationType: LRS
     accountTier: Standard
-    location: East US
+    location: West Europe
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: winfuncappslot-rg

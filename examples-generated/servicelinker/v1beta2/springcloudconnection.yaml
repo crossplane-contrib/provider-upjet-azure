@@ -62,7 +62,7 @@ spec:
     databaseNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    partitionKeyPath: /definition
+    partition_key_path: /definition
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example

@@ -13,74 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type CorsInitParameters struct {
-
-	// A set of headers to be allowed via CORS.
-	// +listType=set
-	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
-
-	// The methods to be allowed via CORS. Possible values are DELETE, GET, HEAD, MERGE, POST, OPTIONS, PATCH and PUT.
-	// +listType=set
-	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
-
-	// A set of origins to be allowed via CORS.
-	// +listType=set
-	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
-
-	// If credentials are allowed via CORS.
-	CredentialsAllowed *bool `json:"credentialsAllowed,omitempty" tf:"credentials_allowed,omitempty"`
-
-	// The max age to be allowed via CORS.
-	MaxAgeInSeconds *float64 `json:"maxAgeInSeconds,omitempty" tf:"max_age_in_seconds,omitempty"`
-}
-
-type CorsObservation struct {
-
-	// A set of headers to be allowed via CORS.
-	// +listType=set
-	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
-
-	// The methods to be allowed via CORS. Possible values are DELETE, GET, HEAD, MERGE, POST, OPTIONS, PATCH and PUT.
-	// +listType=set
-	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
-
-	// A set of origins to be allowed via CORS.
-	// +listType=set
-	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
-
-	// If credentials are allowed via CORS.
-	CredentialsAllowed *bool `json:"credentialsAllowed,omitempty" tf:"credentials_allowed,omitempty"`
-
-	// The max age to be allowed via CORS.
-	MaxAgeInSeconds *float64 `json:"maxAgeInSeconds,omitempty" tf:"max_age_in_seconds,omitempty"`
-}
-
-type CorsParameters struct {
-
-	// A set of headers to be allowed via CORS.
-	// +kubebuilder:validation:Optional
-	// +listType=set
-	AllowedHeaders []*string `json:"allowedHeaders" tf:"allowed_headers,omitempty"`
-
-	// The methods to be allowed via CORS. Possible values are DELETE, GET, HEAD, MERGE, POST, OPTIONS, PATCH and PUT.
-	// +kubebuilder:validation:Optional
-	// +listType=set
-	AllowedMethods []*string `json:"allowedMethods" tf:"allowed_methods,omitempty"`
-
-	// A set of origins to be allowed via CORS.
-	// +kubebuilder:validation:Optional
-	// +listType=set
-	AllowedOrigins []*string `json:"allowedOrigins" tf:"allowed_origins,omitempty"`
-
-	// If credentials are allowed via CORS.
-	// +kubebuilder:validation:Optional
-	CredentialsAllowed *bool `json:"credentialsAllowed,omitempty" tf:"credentials_allowed,omitempty"`
-
-	// The max age to be allowed via CORS.
-	// +kubebuilder:validation:Optional
-	MaxAgeInSeconds *float64 `json:"maxAgeInSeconds,omitempty" tf:"max_age_in_seconds,omitempty"`
-}
-
 type HealthcareFHIRServiceAuthenticationInitParameters struct {
 
 	// The intended audience to receive authentication tokens for the service.
@@ -121,6 +53,74 @@ type HealthcareFHIRServiceAuthenticationParameters struct {
 	// Whether smart proxy is enabled.
 	// +kubebuilder:validation:Optional
 	SmartProxyEnabled *bool `json:"smartProxyEnabled,omitempty" tf:"smart_proxy_enabled,omitempty"`
+}
+
+type HealthcareFHIRServiceCorsInitParameters struct {
+
+	// A set of headers to be allowed via CORS.
+	// +listType=set
+	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
+
+	// The methods to be allowed via CORS. Possible values are DELETE, GET, HEAD, MERGE, POST, OPTIONS, PATCH and PUT.
+	// +listType=set
+	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
+
+	// A set of origins to be allowed via CORS.
+	// +listType=set
+	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
+
+	// If credentials are allowed via CORS.
+	CredentialsAllowed *bool `json:"credentialsAllowed,omitempty" tf:"credentials_allowed,omitempty"`
+
+	// The max age to be allowed via CORS.
+	MaxAgeInSeconds *float64 `json:"maxAgeInSeconds,omitempty" tf:"max_age_in_seconds,omitempty"`
+}
+
+type HealthcareFHIRServiceCorsObservation struct {
+
+	// A set of headers to be allowed via CORS.
+	// +listType=set
+	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
+
+	// The methods to be allowed via CORS. Possible values are DELETE, GET, HEAD, MERGE, POST, OPTIONS, PATCH and PUT.
+	// +listType=set
+	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
+
+	// A set of origins to be allowed via CORS.
+	// +listType=set
+	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
+
+	// If credentials are allowed via CORS.
+	CredentialsAllowed *bool `json:"credentialsAllowed,omitempty" tf:"credentials_allowed,omitempty"`
+
+	// The max age to be allowed via CORS.
+	MaxAgeInSeconds *float64 `json:"maxAgeInSeconds,omitempty" tf:"max_age_in_seconds,omitempty"`
+}
+
+type HealthcareFHIRServiceCorsParameters struct {
+
+	// A set of headers to be allowed via CORS.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	AllowedHeaders []*string `json:"allowedHeaders" tf:"allowed_headers,omitempty"`
+
+	// The methods to be allowed via CORS. Possible values are DELETE, GET, HEAD, MERGE, POST, OPTIONS, PATCH and PUT.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	AllowedMethods []*string `json:"allowedMethods" tf:"allowed_methods,omitempty"`
+
+	// A set of origins to be allowed via CORS.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	AllowedOrigins []*string `json:"allowedOrigins" tf:"allowed_origins,omitempty"`
+
+	// If credentials are allowed via CORS.
+	// +kubebuilder:validation:Optional
+	CredentialsAllowed *bool `json:"credentialsAllowed,omitempty" tf:"credentials_allowed,omitempty"`
+
+	// The max age to be allowed via CORS.
+	// +kubebuilder:validation:Optional
+	MaxAgeInSeconds *float64 `json:"maxAgeInSeconds,omitempty" tf:"max_age_in_seconds,omitempty"`
 }
 
 type HealthcareFHIRServiceIdentityInitParameters struct {
@@ -178,7 +178,7 @@ type HealthcareFHIRServiceInitParameters struct {
 	ContainerRegistryLoginServerURL []*string `json:"containerRegistryLoginServerUrl,omitempty" tf:"container_registry_login_server_url,omitempty"`
 
 	// A cors block as defined below.
-	Cors []CorsInitParameters `json:"cors,omitempty" tf:"cors,omitempty"`
+	Cors []HealthcareFHIRServiceCorsInitParameters `json:"cors,omitempty" tf:"cors,omitempty"`
 
 	// An identity block as defined below.
 	Identity []HealthcareFHIRServiceIdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
@@ -226,7 +226,7 @@ type HealthcareFHIRServiceObservation struct {
 	ContainerRegistryLoginServerURL []*string `json:"containerRegistryLoginServerUrl,omitempty" tf:"container_registry_login_server_url,omitempty"`
 
 	// A cors block as defined below.
-	Cors []CorsObservation `json:"cors,omitempty" tf:"cors,omitempty"`
+	Cors []HealthcareFHIRServiceCorsObservation `json:"cors,omitempty" tf:"cors,omitempty"`
 
 	// The ID of the Healthcare FHIR Service.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -279,7 +279,7 @@ type HealthcareFHIRServiceParameters struct {
 
 	// A cors block as defined below.
 	// +kubebuilder:validation:Optional
-	Cors []CorsParameters `json:"cors,omitempty" tf:"cors,omitempty"`
+	Cors []HealthcareFHIRServiceCorsParameters `json:"cors,omitempty" tf:"cors,omitempty"`
 
 	// An identity block as defined below.
 	// +kubebuilder:validation:Optional

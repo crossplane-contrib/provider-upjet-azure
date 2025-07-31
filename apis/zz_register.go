@@ -61,7 +61,6 @@ import (
 	v1beta2dataprotection "github.com/upbound/provider-azure/apis/dataprotection/v1beta2"
 	v1beta1datashare "github.com/upbound/provider-azure/apis/datashare/v1beta1"
 	v1beta2datashare "github.com/upbound/provider-azure/apis/datashare/v1beta2"
-	v1beta1dbformariadb "github.com/upbound/provider-azure/apis/dbformariadb/v1beta1"
 	v1beta1dbformysql "github.com/upbound/provider-azure/apis/dbformysql/v1beta1"
 	v1beta2dbformysql "github.com/upbound/provider-azure/apis/dbformysql/v1beta2"
 	v1beta1dbforpostgresql "github.com/upbound/provider-azure/apis/dbforpostgresql/v1beta1"
@@ -97,14 +96,10 @@ import (
 	v1beta2keyvault "github.com/upbound/provider-azure/apis/keyvault/v1beta2"
 	v1beta1kusto "github.com/upbound/provider-azure/apis/kusto/v1beta1"
 	v1beta2kusto "github.com/upbound/provider-azure/apis/kusto/v1beta2"
-	v1beta1labservices "github.com/upbound/provider-azure/apis/labservices/v1beta1"
-	v1beta2labservices "github.com/upbound/provider-azure/apis/labservices/v1beta2"
 	v1beta1loadtestservice "github.com/upbound/provider-azure/apis/loadtestservice/v1beta1"
 	v1beta2loadtestservice "github.com/upbound/provider-azure/apis/loadtestservice/v1beta2"
 	v1beta1logic "github.com/upbound/provider-azure/apis/logic/v1beta1"
 	v1beta2logic "github.com/upbound/provider-azure/apis/logic/v1beta2"
-	v1beta1logz "github.com/upbound/provider-azure/apis/logz/v1beta1"
-	v1beta2logz "github.com/upbound/provider-azure/apis/logz/v1beta2"
 	v1beta1machinelearningservices "github.com/upbound/provider-azure/apis/machinelearningservices/v1beta1"
 	v1beta2machinelearningservices "github.com/upbound/provider-azure/apis/machinelearningservices/v1beta2"
 	v1beta1maintenance "github.com/upbound/provider-azure/apis/maintenance/v1beta1"
@@ -113,8 +108,6 @@ import (
 	v1beta1management "github.com/upbound/provider-azure/apis/management/v1beta1"
 	v1beta1maps "github.com/upbound/provider-azure/apis/maps/v1beta1"
 	v1beta1marketplaceordering "github.com/upbound/provider-azure/apis/marketplaceordering/v1beta1"
-	v1beta1media "github.com/upbound/provider-azure/apis/media/v1beta1"
-	v1beta2media "github.com/upbound/provider-azure/apis/media/v1beta2"
 	v1beta1mixedreality "github.com/upbound/provider-azure/apis/mixedreality/v1beta1"
 	v1beta1netapp "github.com/upbound/provider-azure/apis/netapp/v1beta1"
 	v1beta2netapp "github.com/upbound/provider-azure/apis/netapp/v1beta2"
@@ -158,14 +151,11 @@ import (
 	v1beta2storage "github.com/upbound/provider-azure/apis/storage/v1beta2"
 	v1beta1storagecache "github.com/upbound/provider-azure/apis/storagecache/v1beta1"
 	v1beta2storagecache "github.com/upbound/provider-azure/apis/storagecache/v1beta2"
-	v1beta1storagepool "github.com/upbound/provider-azure/apis/storagepool/v1beta1"
 	v1beta1storagesync "github.com/upbound/provider-azure/apis/storagesync/v1beta1"
 	v1beta1streamanalytics "github.com/upbound/provider-azure/apis/streamanalytics/v1beta1"
 	v1beta2streamanalytics "github.com/upbound/provider-azure/apis/streamanalytics/v1beta2"
 	v1beta1synapse "github.com/upbound/provider-azure/apis/synapse/v1beta1"
 	v1beta2synapse "github.com/upbound/provider-azure/apis/synapse/v1beta2"
-	v1beta1timeseriesinsights "github.com/upbound/provider-azure/apis/timeseriesinsights/v1beta1"
-	v1beta2timeseriesinsights "github.com/upbound/provider-azure/apis/timeseriesinsights/v1beta2"
 	v1alpha1 "github.com/upbound/provider-azure/apis/v1alpha1"
 	v1beta1apis "github.com/upbound/provider-azure/apis/v1beta1"
 	v1beta1web "github.com/upbound/provider-azure/apis/web/v1beta1"
@@ -226,7 +216,6 @@ func init() {
 		v1beta2dataprotection.SchemeBuilder.AddToScheme,
 		v1beta1datashare.SchemeBuilder.AddToScheme,
 		v1beta2datashare.SchemeBuilder.AddToScheme,
-		v1beta1dbformariadb.SchemeBuilder.AddToScheme,
 		v1beta1dbformysql.SchemeBuilder.AddToScheme,
 		v1beta2dbformysql.SchemeBuilder.AddToScheme,
 		v1beta1dbforpostgresql.SchemeBuilder.AddToScheme,
@@ -262,14 +251,10 @@ func init() {
 		v1beta2keyvault.SchemeBuilder.AddToScheme,
 		v1beta1kusto.SchemeBuilder.AddToScheme,
 		v1beta2kusto.SchemeBuilder.AddToScheme,
-		v1beta1labservices.SchemeBuilder.AddToScheme,
-		v1beta2labservices.SchemeBuilder.AddToScheme,
 		v1beta1loadtestservice.SchemeBuilder.AddToScheme,
 		v1beta2loadtestservice.SchemeBuilder.AddToScheme,
 		v1beta1logic.SchemeBuilder.AddToScheme,
 		v1beta2logic.SchemeBuilder.AddToScheme,
-		v1beta1logz.SchemeBuilder.AddToScheme,
-		v1beta2logz.SchemeBuilder.AddToScheme,
 		v1beta1machinelearningservices.SchemeBuilder.AddToScheme,
 		v1beta2machinelearningservices.SchemeBuilder.AddToScheme,
 		v1beta1maintenance.SchemeBuilder.AddToScheme,
@@ -278,8 +263,6 @@ func init() {
 		v1beta1management.SchemeBuilder.AddToScheme,
 		v1beta1maps.SchemeBuilder.AddToScheme,
 		v1beta1marketplaceordering.SchemeBuilder.AddToScheme,
-		v1beta1media.SchemeBuilder.AddToScheme,
-		v1beta2media.SchemeBuilder.AddToScheme,
 		v1beta1mixedreality.SchemeBuilder.AddToScheme,
 		v1beta1netapp.SchemeBuilder.AddToScheme,
 		v1beta2netapp.SchemeBuilder.AddToScheme,
@@ -323,14 +306,11 @@ func init() {
 		v1beta2storage.SchemeBuilder.AddToScheme,
 		v1beta1storagecache.SchemeBuilder.AddToScheme,
 		v1beta2storagecache.SchemeBuilder.AddToScheme,
-		v1beta1storagepool.SchemeBuilder.AddToScheme,
 		v1beta1storagesync.SchemeBuilder.AddToScheme,
 		v1beta1streamanalytics.SchemeBuilder.AddToScheme,
 		v1beta2streamanalytics.SchemeBuilder.AddToScheme,
 		v1beta1synapse.SchemeBuilder.AddToScheme,
 		v1beta2synapse.SchemeBuilder.AddToScheme,
-		v1beta1timeseriesinsights.SchemeBuilder.AddToScheme,
-		v1beta2timeseriesinsights.SchemeBuilder.AddToScheme,
 		v1alpha1.SchemeBuilder.AddToScheme,
 		v1beta1apis.SchemeBuilder.AddToScheme,
 		v1beta1web.SchemeBuilder.AddToScheme,

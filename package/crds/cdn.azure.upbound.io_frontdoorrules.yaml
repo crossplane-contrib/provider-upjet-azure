@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.14.0
+    controller-gen.kubebuilder.io/version: v0.16.5
   name: frontdoorrules.cdn.azure.upbound.io
 spec:
   group: cdn.azure.upbound.io
@@ -3484,9 +3484,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                           type: object
                         type: array
@@ -3515,9 +3515,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                             transforms:
                               description: A Conditional operator. Possible values
@@ -3551,9 +3551,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                             transforms:
                               description: A Conditional operator. Possible values
@@ -3588,9 +3588,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                           type: object
                         type: array
@@ -3615,9 +3615,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                           type: object
                         type: array
@@ -3642,9 +3642,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                             postArgsName:
                               description: A string value representing the name of
@@ -3682,9 +3682,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                             transforms:
                               description: A Conditional operator. Possible values
@@ -3718,9 +3718,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                           type: object
                         type: array
@@ -3745,9 +3745,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                             transforms:
                               description: A Conditional operator. Possible values
@@ -3784,9 +3784,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                             transforms:
                               description: A Conditional operator. Possible values
@@ -3821,9 +3821,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                           type: object
                         type: array
@@ -3848,9 +3848,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                           type: object
                         type: array
@@ -3875,9 +3875,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                             transforms:
                               description: A Conditional operator. Possible values
@@ -3912,9 +3912,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                           type: object
                         type: array
@@ -3939,9 +3939,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                           type: object
                         type: array
@@ -3967,9 +3967,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                           type: object
                         type: array
@@ -3995,9 +3995,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                             transforms:
                               description: A Conditional operator. Possible values
@@ -4031,9 +4031,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                             transforms:
                               description: A Conditional operator. Possible values
@@ -4067,9 +4067,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                             transforms:
                               description: A Conditional operator. Possible values
@@ -4371,9 +4371,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                           type: object
                         type: array
@@ -4402,9 +4402,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                             transforms:
                               description: A Conditional operator. Possible values
@@ -4438,9 +4438,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                             transforms:
                               description: A Conditional operator. Possible values
@@ -4475,9 +4475,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                           type: object
                         type: array
@@ -4502,9 +4502,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                           type: object
                         type: array
@@ -4529,9 +4529,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                             postArgsName:
                               description: A string value representing the name of
@@ -4569,9 +4569,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                             transforms:
                               description: A Conditional operator. Possible values
@@ -4605,9 +4605,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                           type: object
                         type: array
@@ -4632,9 +4632,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                             transforms:
                               description: A Conditional operator. Possible values
@@ -4671,9 +4671,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                             transforms:
                               description: A Conditional operator. Possible values
@@ -4708,9 +4708,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                           type: object
                         type: array
@@ -4735,9 +4735,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                           type: object
                         type: array
@@ -4762,9 +4762,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                             transforms:
                               description: A Conditional operator. Possible values
@@ -4799,9 +4799,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                           type: object
                         type: array
@@ -4826,9 +4826,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                           type: object
                         type: array
@@ -4854,9 +4854,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                           type: object
                         type: array
@@ -4882,9 +4882,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                             transforms:
                               description: A Conditional operator. Possible values
@@ -4918,9 +4918,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                             transforms:
                               description: A Conditional operator. Possible values
@@ -4954,9 +4954,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                             transforms:
                               description: A Conditional operator. Possible values
@@ -5359,9 +5359,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                           type: object
                         type: array
@@ -5390,9 +5390,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                             transforms:
                               description: A Conditional operator. Possible values
@@ -5426,9 +5426,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                             transforms:
                               description: A Conditional operator. Possible values
@@ -5463,9 +5463,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                           type: object
                         type: array
@@ -5490,9 +5490,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                           type: object
                         type: array
@@ -5517,9 +5517,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                             postArgsName:
                               description: A string value representing the name of
@@ -5557,9 +5557,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                             transforms:
                               description: A Conditional operator. Possible values
@@ -5593,9 +5593,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                           type: object
                         type: array
@@ -5620,9 +5620,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                             transforms:
                               description: A Conditional operator. Possible values
@@ -5659,9 +5659,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                             transforms:
                               description: A Conditional operator. Possible values
@@ -5696,9 +5696,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                           type: object
                         type: array
@@ -5723,9 +5723,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                           type: object
                         type: array
@@ -5750,9 +5750,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                             transforms:
                               description: A Conditional operator. Possible values
@@ -5787,9 +5787,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                           type: object
                         type: array
@@ -5814,9 +5814,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                           type: object
                         type: array
@@ -5842,9 +5842,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                           type: object
                         type: array
@@ -5870,9 +5870,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                             transforms:
                               description: A Conditional operator. Possible values
@@ -5906,9 +5906,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                             transforms:
                               description: A Conditional operator. Possible values
@@ -5942,9 +5942,9 @@ spec:
                             operator:
                               description: A Conditional operator. Possible values
                                 include Any, Equal, Contains, BeginsWith, EndsWith,
-                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
-                                or RegEx. Details can be found in the Condition Operator
-                                List below.
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual,
+                                RegEx or Wildcard. Details can be found in the Condition
+                                Operator List below.
                               type: string
                             transforms:
                               description: A Conditional operator. Possible values

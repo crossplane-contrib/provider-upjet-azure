@@ -36,6 +36,9 @@ type ExpressRouteCircuitInitParameters struct {
 	// The name of the peering location and not the Azure resource location. Changing this forces a new resource to be created.
 	PeeringLocation *string `json:"peeringLocation,omitempty" tf:"peering_location,omitempty"`
 
+	// Enable rate limiting for the circuit. Only works with ExpressRoute Ports. Defaults to false.
+	RateLimitingEnabled *bool `json:"rateLimitingEnabled,omitempty" tf:"rate_limiting_enabled,omitempty"`
+
 	// The name of the ExpressRoute Service Provider. Changing this forces a new resource to be created.
 	ServiceProviderName *string `json:"serviceProviderName,omitempty" tf:"service_provider_name,omitempty"`
 
@@ -69,6 +72,9 @@ type ExpressRouteCircuitObservation struct {
 
 	// The name of the peering location and not the Azure resource location. Changing this forces a new resource to be created.
 	PeeringLocation *string `json:"peeringLocation,omitempty" tf:"peering_location,omitempty"`
+
+	// Enable rate limiting for the circuit. Only works with ExpressRoute Ports. Defaults to false.
+	RateLimitingEnabled *bool `json:"rateLimitingEnabled,omitempty" tf:"rate_limiting_enabled,omitempty"`
 
 	// The name of the resource group in which to create the ExpressRoute circuit. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -116,6 +122,10 @@ type ExpressRouteCircuitParameters struct {
 	// The name of the peering location and not the Azure resource location. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	PeeringLocation *string `json:"peeringLocation,omitempty" tf:"peering_location,omitempty"`
+
+	// Enable rate limiting for the circuit. Only works with ExpressRoute Ports. Defaults to false.
+	// +kubebuilder:validation:Optional
+	RateLimitingEnabled *bool `json:"rateLimitingEnabled,omitempty" tf:"rate_limiting_enabled,omitempty"`
 
 	// The name of the resource group in which to create the ExpressRoute circuit. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup

@@ -47,8 +47,7 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: servicebus-subscription-rg
-    capacity: 1
-    sku: Premium
+    sku: Standard
     tags:
       source: test
 
@@ -64,7 +63,6 @@ metadata:
   name: subscription-topic
 spec:
   forProvider:
-    maxMessageSizeInKilobytes: 1024
     namespaceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: subscriptionnamespace

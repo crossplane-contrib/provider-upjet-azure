@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.14.0
+    controller-gen.kubebuilder.io/version: v0.16.5
   name: pimeligibleroleassignments.authorization.azure.upbound.io
 spec:
   group: authorization.azure.upbound.io
@@ -74,6 +74,15 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  condition:
+                    description: The condition that limits the resources that the
+                      role can be assigned to. See the official conditions documentation
+                      for details. Changing this forces a new resource to be created.
+                    type: string
+                  conditionVersion:
+                    description: The version of the condition. Supported values include
+                      2.0. Changing this forces a new resource to be created.
+                    type: string
                   justification:
                     description: |-
                       The justification of the role assignment. Changing this forces a new resource to be created.
@@ -230,6 +239,15 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  condition:
+                    description: The condition that limits the resources that the
+                      role can be assigned to. See the official conditions documentation
+                      for details. Changing this forces a new resource to be created.
+                    type: string
+                  conditionVersion:
+                    description: The version of the condition. Supported values include
+                      2.0. Changing this forces a new resource to be created.
+                    type: string
                   justification:
                     description: |-
                       The justification of the role assignment. Changing this forces a new resource to be created.
@@ -555,6 +573,15 @@ spec:
             properties:
               atProvider:
                 properties:
+                  condition:
+                    description: The condition that limits the resources that the
+                      role can be assigned to. See the official conditions documentation
+                      for details. Changing this forces a new resource to be created.
+                    type: string
+                  conditionVersion:
+                    description: The version of the condition. Supported values include
+                      2.0. Changing this forces a new resource to be created.
+                    type: string
                   id:
                     description: The ID of the PIM Eligible Role Assignment.
                     type: string

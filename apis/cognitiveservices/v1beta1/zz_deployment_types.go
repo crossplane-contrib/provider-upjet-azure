@@ -15,14 +15,17 @@ import (
 
 type DeploymentInitParameters struct {
 
+	// Whether dynamic throttling is enabled.
+	DynamicThrottlingEnabled *bool `json:"dynamicThrottlingEnabled,omitempty" tf:"dynamic_throttling_enabled,omitempty"`
+
 	// A model block as defined below. Changing this forces a new resource to be created.
 	Model []ModelInitParameters `json:"model,omitempty" tf:"model,omitempty"`
 
 	// The name of RAI policy.
 	RaiPolicyName *string `json:"raiPolicyName,omitempty" tf:"rai_policy_name,omitempty"`
 
-	// A scale block as defined below.
-	Scale []ScaleInitParameters `json:"scale,omitempty" tf:"scale,omitempty"`
+	// A sku block as defined below.
+	Sku []SkuInitParameters `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// Deployment model version upgrade option. Possible values are OnceNewDefaultVersionAvailable, OnceCurrentVersionExpired, and NoAutoUpgrade. Defaults to OnceNewDefaultVersionAvailable.
 	VersionUpgradeOption *string `json:"versionUpgradeOption,omitempty" tf:"version_upgrade_option,omitempty"`
@@ -33,6 +36,9 @@ type DeploymentObservation struct {
 	// The ID of the Cognitive Services Account. Changing this forces a new resource to be created.
 	CognitiveAccountID *string `json:"cognitiveAccountId,omitempty" tf:"cognitive_account_id,omitempty"`
 
+	// Whether dynamic throttling is enabled.
+	DynamicThrottlingEnabled *bool `json:"dynamicThrottlingEnabled,omitempty" tf:"dynamic_throttling_enabled,omitempty"`
+
 	// The ID of the Deployment for Azure Cognitive Services Account.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -42,8 +48,8 @@ type DeploymentObservation struct {
 	// The name of RAI policy.
 	RaiPolicyName *string `json:"raiPolicyName,omitempty" tf:"rai_policy_name,omitempty"`
 
-	// A scale block as defined below.
-	Scale []ScaleObservation `json:"scale,omitempty" tf:"scale,omitempty"`
+	// A sku block as defined below.
+	Sku []SkuObservation `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// Deployment model version upgrade option. Possible values are OnceNewDefaultVersionAvailable, OnceCurrentVersionExpired, and NoAutoUpgrade. Defaults to OnceNewDefaultVersionAvailable.
 	VersionUpgradeOption *string `json:"versionUpgradeOption,omitempty" tf:"version_upgrade_option,omitempty"`
@@ -65,6 +71,10 @@ type DeploymentParameters struct {
 	// +kubebuilder:validation:Optional
 	CognitiveAccountIDSelector *v1.Selector `json:"cognitiveAccountIdSelector,omitempty" tf:"-"`
 
+	// Whether dynamic throttling is enabled.
+	// +kubebuilder:validation:Optional
+	DynamicThrottlingEnabled *bool `json:"dynamicThrottlingEnabled,omitempty" tf:"dynamic_throttling_enabled,omitempty"`
+
 	// A model block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Model []ModelParameters `json:"model,omitempty" tf:"model,omitempty"`
@@ -73,9 +83,9 @@ type DeploymentParameters struct {
 	// +kubebuilder:validation:Optional
 	RaiPolicyName *string `json:"raiPolicyName,omitempty" tf:"rai_policy_name,omitempty"`
 
-	// A scale block as defined below.
+	// A sku block as defined below.
 	// +kubebuilder:validation:Optional
-	Scale []ScaleParameters `json:"scale,omitempty" tf:"scale,omitempty"`
+	Sku []SkuParameters `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// Deployment model version upgrade option. Possible values are OnceNewDefaultVersionAvailable, OnceCurrentVersionExpired, and NoAutoUpgrade. Defaults to OnceNewDefaultVersionAvailable.
 	// +kubebuilder:validation:Optional
@@ -84,7 +94,7 @@ type DeploymentParameters struct {
 
 type ModelInitParameters struct {
 
-	// The format of the Cognitive Services Account Deployment model. Changing this forces a new resource to be created. Possible value is OpenAI.
+	// The format of the Cognitive Services Account Deployment model. Possible values are OpenAI and Cohere. Changing this forces a new resource to be created.
 	Format *string `json:"format,omitempty" tf:"format,omitempty"`
 
 	// The name of the Cognitive Services Account Deployment model. Changing this forces a new resource to be created.
@@ -96,7 +106,7 @@ type ModelInitParameters struct {
 
 type ModelObservation struct {
 
-	// The format of the Cognitive Services Account Deployment model. Changing this forces a new resource to be created. Possible value is OpenAI.
+	// The format of the Cognitive Services Account Deployment model. Possible values are OpenAI and Cohere. Changing this forces a new resource to be created.
 	Format *string `json:"format,omitempty" tf:"format,omitempty"`
 
 	// The name of the Cognitive Services Account Deployment model. Changing this forces a new resource to be created.
@@ -108,7 +118,7 @@ type ModelObservation struct {
 
 type ModelParameters struct {
 
-	// The format of the Cognitive Services Account Deployment model. Changing this forces a new resource to be created. Possible value is OpenAI.
+	// The format of the Cognitive Services Account Deployment model. Possible values are OpenAI and Cohere. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Format *string `json:"format" tf:"format,omitempty"`
 
@@ -121,7 +131,7 @@ type ModelParameters struct {
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
-type ScaleInitParameters struct {
+type SkuInitParameters struct {
 
 	// Tokens-per-Minute (TPM). The unit of measure for this field is in the thousands of Tokens-per-Minute. Defaults to 1 which means that the limitation is 1000 tokens per minute. If the resources SKU supports scale in/out then the capacity field should be included in the resources' configuration. If the scale in/out is not supported by the resources SKU then this field can be safely omitted. For more information about TPM please see the product documentation.
 	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
@@ -129,17 +139,17 @@ type ScaleInitParameters struct {
 	// If the service has different generations of hardware, for the same SKU, then that can be captured here. Changing this forces a new resource to be created.
 	Family *string `json:"family,omitempty" tf:"family,omitempty"`
 
+	// The name of the SKU. Possible values include Standard, DataZoneBatch, DataZoneStandard, DataZoneProvisionedManaged, GlobalBatch, GlobalProvisionedManaged, GlobalStandard, and ProvisionedManaged.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code. Changing this forces a new resource to be created.
 	Size *string `json:"size,omitempty" tf:"size,omitempty"`
 
-	// Possible values are Free, Basic, Standard, Premium, Enterprise. Changing this forces a new resource to be created.
+	// Possible values are Free, Basic, Standard, Premium, Enterprise. This property is required only when multiple tiers are available with the SKU name. Changing this forces a new resource to be created.
 	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
-
-	// The name of the SKU. Ex - Standard or P3. It is typically a letter+number code. Changing this forces a new resource to be created.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
-type ScaleObservation struct {
+type SkuObservation struct {
 
 	// Tokens-per-Minute (TPM). The unit of measure for this field is in the thousands of Tokens-per-Minute. Defaults to 1 which means that the limitation is 1000 tokens per minute. If the resources SKU supports scale in/out then the capacity field should be included in the resources' configuration. If the scale in/out is not supported by the resources SKU then this field can be safely omitted. For more information about TPM please see the product documentation.
 	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
@@ -147,17 +157,17 @@ type ScaleObservation struct {
 	// If the service has different generations of hardware, for the same SKU, then that can be captured here. Changing this forces a new resource to be created.
 	Family *string `json:"family,omitempty" tf:"family,omitempty"`
 
+	// The name of the SKU. Possible values include Standard, DataZoneBatch, DataZoneStandard, DataZoneProvisionedManaged, GlobalBatch, GlobalProvisionedManaged, GlobalStandard, and ProvisionedManaged.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code. Changing this forces a new resource to be created.
 	Size *string `json:"size,omitempty" tf:"size,omitempty"`
 
-	// Possible values are Free, Basic, Standard, Premium, Enterprise. Changing this forces a new resource to be created.
+	// Possible values are Free, Basic, Standard, Premium, Enterprise. This property is required only when multiple tiers are available with the SKU name. Changing this forces a new resource to be created.
 	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
-
-	// The name of the SKU. Ex - Standard or P3. It is typically a letter+number code. Changing this forces a new resource to be created.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
-type ScaleParameters struct {
+type SkuParameters struct {
 
 	// Tokens-per-Minute (TPM). The unit of measure for this field is in the thousands of Tokens-per-Minute. Defaults to 1 which means that the limitation is 1000 tokens per minute. If the resources SKU supports scale in/out then the capacity field should be included in the resources' configuration. If the scale in/out is not supported by the resources SKU then this field can be safely omitted. For more information about TPM please see the product documentation.
 	// +kubebuilder:validation:Optional
@@ -167,17 +177,17 @@ type ScaleParameters struct {
 	// +kubebuilder:validation:Optional
 	Family *string `json:"family,omitempty" tf:"family,omitempty"`
 
+	// The name of the SKU. Possible values include Standard, DataZoneBatch, DataZoneStandard, DataZoneProvisionedManaged, GlobalBatch, GlobalProvisionedManaged, GlobalStandard, and ProvisionedManaged.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+
 	// The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Size *string `json:"size,omitempty" tf:"size,omitempty"`
 
-	// Possible values are Free, Basic, Standard, Premium, Enterprise. Changing this forces a new resource to be created.
+	// Possible values are Free, Basic, Standard, Premium, Enterprise. This property is required only when multiple tiers are available with the SKU name. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
-
-	// The name of the SKU. Ex - Standard or P3. It is typically a letter+number code. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 // DeploymentSpec defines the desired state of Deployment
@@ -217,7 +227,7 @@ type Deployment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.model) || (has(self.initProvider) && has(self.initProvider.model))",message="spec.forProvider.model is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.scale) || (has(self.initProvider) && has(self.initProvider.scale))",message="spec.forProvider.scale is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sku) || (has(self.initProvider) && has(self.initProvider.sku))",message="spec.forProvider.sku is a required parameter"
 	Spec   DeploymentSpec   `json:"spec"`
 	Status DeploymentStatus `json:"status,omitempty"`
 }

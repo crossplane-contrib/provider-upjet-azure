@@ -61,9 +61,6 @@ type ServerInitParameters struct {
 	// URI and SAS token for a blob container to store backups.
 	BackupBlobContainerURISecretRef *v1.SecretKeySelector `json:"backupBlobContainerUriSecretRef,omitempty" tf:"-"`
 
-	// Indicates if the Power BI service is allowed to access or not.
-	EnablePowerBiService *bool `json:"enablePowerBiService,omitempty" tf:"enable_power_bi_service,omitempty"`
-
 	// One or more ipv4_firewall_rule block(s) as defined below.
 	IPv4FirewallRule []IPv4FirewallRuleInitParameters `json:"ipv4FirewallRule,omitempty" tf:"ipv4_firewall_rule,omitempty"`
 
@@ -73,9 +70,10 @@ type ServerInitParameters struct {
 	// The name of the Analysis Services Server. Only lowercase Alphanumeric characters allowed, starting with a letter. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Indicates if the Power BI service is allowed to access or not.
 	PowerBiServiceEnabled *bool `json:"powerBiServiceEnabled,omitempty" tf:"power_bi_service_enabled,omitempty"`
 
-	// Controls how the read-write server is used in the query pool. If this value is set to All then read-write servers are also used for queries. Otherwise with ReadOnly these servers do not participate in query operations.
+	// Controls how the read-write server is used in the query pool. If this value is set to All then read-write servers are also used for queries. Otherwise with ReadOnly these servers do not participate in query operations. Defaults to All.
 	QuerypoolConnectionMode *string `json:"querypoolConnectionMode,omitempty" tf:"querypool_connection_mode,omitempty"`
 
 	// The name of the Resource Group in which the Analysis Services Server should be exist. Changing this forces a new resource to be created.
@@ -104,9 +102,6 @@ type ServerObservation struct {
 	// +listType=set
 	AdminUsers []*string `json:"adminUsers,omitempty" tf:"admin_users,omitempty"`
 
-	// Indicates if the Power BI service is allowed to access or not.
-	EnablePowerBiService *bool `json:"enablePowerBiService,omitempty" tf:"enable_power_bi_service,omitempty"`
-
 	// The ID of the Analysis Services Server.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -119,9 +114,10 @@ type ServerObservation struct {
 	// The name of the Analysis Services Server. Only lowercase Alphanumeric characters allowed, starting with a letter. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Indicates if the Power BI service is allowed to access or not.
 	PowerBiServiceEnabled *bool `json:"powerBiServiceEnabled,omitempty" tf:"power_bi_service_enabled,omitempty"`
 
-	// Controls how the read-write server is used in the query pool. If this value is set to All then read-write servers are also used for queries. Otherwise with ReadOnly these servers do not participate in query operations.
+	// Controls how the read-write server is used in the query pool. If this value is set to All then read-write servers are also used for queries. Otherwise with ReadOnly these servers do not participate in query operations. Defaults to All.
 	QuerypoolConnectionMode *string `json:"querypoolConnectionMode,omitempty" tf:"querypool_connection_mode,omitempty"`
 
 	// The name of the Resource Group in which the Analysis Services Server should be exist. Changing this forces a new resource to be created.
@@ -149,10 +145,6 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Optional
 	BackupBlobContainerURISecretRef *v1.SecretKeySelector `json:"backupBlobContainerUriSecretRef,omitempty" tf:"-"`
 
-	// Indicates if the Power BI service is allowed to access or not.
-	// +kubebuilder:validation:Optional
-	EnablePowerBiService *bool `json:"enablePowerBiService,omitempty" tf:"enable_power_bi_service,omitempty"`
-
 	// One or more ipv4_firewall_rule block(s) as defined below.
 	// +kubebuilder:validation:Optional
 	IPv4FirewallRule []IPv4FirewallRuleParameters `json:"ipv4FirewallRule,omitempty" tf:"ipv4_firewall_rule,omitempty"`
@@ -165,10 +157,11 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Indicates if the Power BI service is allowed to access or not.
 	// +kubebuilder:validation:Optional
 	PowerBiServiceEnabled *bool `json:"powerBiServiceEnabled,omitempty" tf:"power_bi_service_enabled,omitempty"`
 
-	// Controls how the read-write server is used in the query pool. If this value is set to All then read-write servers are also used for queries. Otherwise with ReadOnly these servers do not participate in query operations.
+	// Controls how the read-write server is used in the query pool. If this value is set to All then read-write servers are also used for queries. Otherwise with ReadOnly these servers do not participate in query operations. Defaults to All.
 	// +kubebuilder:validation:Optional
 	QuerypoolConnectionMode *string `json:"querypoolConnectionMode,omitempty" tf:"querypool_connection_mode,omitempty"`
 

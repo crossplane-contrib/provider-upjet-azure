@@ -9,6 +9,7 @@ metadata:
 spec:
   forProvider:
     branchToBranchTrafficEnabled: true
+    hubRoutingPreference: ASPath
     location: West Europe
     publicIpAddressIdSelector:
       matchLabels:

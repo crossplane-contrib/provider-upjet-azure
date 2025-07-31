@@ -18,7 +18,7 @@ type IOTHubDPSInitParameters struct {
 	// The allocation policy of the IoT Device Provisioning Service (Hashed, GeoLatency or Static). Defaults to Hashed.
 	AllocationPolicy *string `json:"allocationPolicy,omitempty" tf:"allocation_policy,omitempty"`
 
-	// Specifies if the IoT Device Provisioning Service has data residency and disaster recovery enabled. Defaults to false. Changing this forces a new resource to be created.
+	// Specifies if the IoT Device Provisioning Service has data residency enabled, removing the cross geo-pair disaster recovery. Defaults to false. Changing this forces a new resource to be created.
 	DataResidencyEnabled *bool `json:"dataResidencyEnabled,omitempty" tf:"data_residency_enabled,omitempty"`
 
 	// An ip_filter_rule block as defined below.
@@ -46,7 +46,7 @@ type IOTHubDPSObservation struct {
 	// The allocation policy of the IoT Device Provisioning Service (Hashed, GeoLatency or Static). Defaults to Hashed.
 	AllocationPolicy *string `json:"allocationPolicy,omitempty" tf:"allocation_policy,omitempty"`
 
-	// Specifies if the IoT Device Provisioning Service has data residency and disaster recovery enabled. Defaults to false. Changing this forces a new resource to be created.
+	// Specifies if the IoT Device Provisioning Service has data residency enabled, removing the cross geo-pair disaster recovery. Defaults to false. Changing this forces a new resource to be created.
 	DataResidencyEnabled *bool `json:"dataResidencyEnabled,omitempty" tf:"data_residency_enabled,omitempty"`
 
 	// The device endpoint of the IoT Device Provisioning Service.
@@ -90,7 +90,7 @@ type IOTHubDPSParameters struct {
 	// +kubebuilder:validation:Optional
 	AllocationPolicy *string `json:"allocationPolicy,omitempty" tf:"allocation_policy,omitempty"`
 
-	// Specifies if the IoT Device Provisioning Service has data residency and disaster recovery enabled. Defaults to false. Changing this forces a new resource to be created.
+	// Specifies if the IoT Device Provisioning Service has data residency enabled, removing the cross geo-pair disaster recovery. Defaults to false. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	DataResidencyEnabled *bool `json:"dataResidencyEnabled,omitempty" tf:"data_residency_enabled,omitempty"`
 

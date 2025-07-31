@@ -1,0 +1,42 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: cache.azure.upbound.io/v1beta1
+kind: RedisCache
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cache/v1beta1/rediscache
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    capacity: 2
+    nonSslPortEnabled: false
+    family: C
+    redisVersion: "6"
+    location: West Europe
+    minimumTlsVersion: "1.2"
+    redisConfiguration:
+    - maxmemoryDelta: 456
+      maxmemoryPolicy: allkeys-lru
+      maxmemoryReserved: 456
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Standard
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cache/v1beta1/rediscache
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    location: West Europe

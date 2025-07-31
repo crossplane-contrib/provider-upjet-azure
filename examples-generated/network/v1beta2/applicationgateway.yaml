@@ -63,7 +63,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    allocationMethod: Dynamic
+    allocationMethod: Static
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:

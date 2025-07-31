@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.14.0
+    controller-gen.kubebuilder.io/version: v0.16.5
   name: kubernetesclusters.containerservice.azure.upbound.io
 spec:
   group: containerservice.azure.upbound.io
@@ -172,98 +172,8 @@ spec:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
-                        subnetId:
-                          description: The ID of the Subnet where the API server endpoint
-                            is delegated to.
-                          type: string
-                        subnetIdRef:
-                          description: Reference to a Subnet in network to populate
-                            subnetId.
-                          properties:
-                            name:
-                              description: Name of the referenced object.
-                              type: string
-                            policy:
-                              description: Policies for referencing.
-                              properties:
-                                resolution:
-                                  default: Required
-                                  description: |-
-                                    Resolution specifies whether resolution of this reference is required.
-                                    The default is 'Required', which means the reconcile will fail if the
-                                    reference cannot be resolved. 'Optional' means this reference will be
-                                    a no-op if it cannot be resolved.
-                                  enum:
-                                  - Required
-                                  - Optional
-                                  type: string
-                                resolve:
-                                  description: |-
-                                    Resolve specifies when this reference should be resolved. The default
-                                    is 'IfNotPresent', which will attempt to resolve the reference only when
-                                    the corresponding field is not present. Use 'Always' to resolve the
-                                    reference on every reconcile.
-                                  enum:
-                                  - Always
-                                  - IfNotPresent
-                                  type: string
-                              type: object
-                          required:
-                          - name
-                          type: object
-                        subnetIdSelector:
-                          description: Selector for a Subnet in network to populate
-                            subnetId.
-                          properties:
-                            matchControllerRef:
-                              description: |-
-                                MatchControllerRef ensures an object with the same controller reference
-                                as the selecting object is selected.
-                              type: boolean
-                            matchLabels:
-                              additionalProperties:
-                                type: string
-                              description: MatchLabels ensures an object with matching
-                                labels is selected.
-                              type: object
-                            policy:
-                              description: Policies for selection.
-                              properties:
-                                resolution:
-                                  default: Required
-                                  description: |-
-                                    Resolution specifies whether resolution of this reference is required.
-                                    The default is 'Required', which means the reconcile will fail if the
-                                    reference cannot be resolved. 'Optional' means this reference will be
-                                    a no-op if it cannot be resolved.
-                                  enum:
-                                  - Required
-                                  - Optional
-                                  type: string
-                                resolve:
-                                  description: |-
-                                    Resolve specifies when this reference should be resolved. The default
-                                    is 'IfNotPresent', which will attempt to resolve the reference only when
-                                    the corresponding field is not present. Use 'Always' to resolve the
-                                    reference on every reconcile.
-                                  enum:
-                                  - Always
-                                  - IfNotPresent
-                                  type: string
-                              type: object
-                          type: object
-                        vnetIntegrationEnabled:
-                          description: Should API Server VNet Integration be enabled?
-                            For more details please visit Use API Server VNet Integration.
-                          type: boolean
                       type: object
                     type: array
-                  apiServerAuthorizedIpRanges:
-                    description: Deprecated in favor of `spec.forProvider.apiServerAccessProfile[0].authorizedIpRanges`
-                    items:
-                      type: string
-                    type: array
-                    x-kubernetes-list-type: set
                   autoScalerProfile:
                     description: A auto_scaler_profile block as defined below.
                     items:
@@ -271,6 +181,14 @@ spec:
                         balanceSimilarNodeGroups:
                           description: Detect similar node groups and balance the
                             number of nodes between them. Defaults to false.
+                          type: boolean
+                        daemonsetEvictionForEmptyNodesEnabled:
+                          description: Whether DaemonSet pods will be gracefully terminated
+                            from empty nodes. Defaults to false.
+                          type: boolean
+                        daemonsetEvictionForOccupiedNodesEnabled:
+                          description: Whether DaemonSet pods will be gracefully terminated
+                            from non-empty nodes. Defaults to true.
                           type: boolean
                         emptyBulkDeleteMax:
                           description: Maximum number of empty nodes that can be deleted
@@ -280,6 +198,11 @@ spec:
                           description: Expander to use. Possible values are least-waste,
                             priority, most-pods and random. Defaults to random.
                           type: string
+                        ignoreDaemonsetsUtilizationEnabled:
+                          description: Whether DaemonSet pods will be ignored when
+                            calculating resource utilization for scale down. Defaults
+                            to false.
+                          type: boolean
                         maxGracefulTerminationSec:
                           description: Maximum number of seconds the cluster autoscaler
                             waits for pod termination when trying to scale down a
@@ -346,7 +269,7 @@ spec:
                           type: boolean
                       type: object
                     type: array
-                  automaticChannelUpgrade:
+                  automaticUpgradeChannel:
                     description: The upgrade channel for this Kubernetes Cluster.
                       Possible values are patch, rapid, node-image and stable. Omitting
                       this field sets this value to none.
@@ -366,37 +289,6 @@ spec:
                           description: Is Role Based Access Control based on Azure
                             AD enabled?
                           type: boolean
-                        clientAppId:
-                          description: The Client ID of an Azure Active Directory
-                            Application.
-                          type: string
-                        managed:
-                          description: Is the Azure Active Directory integration Managed,
-                            meaning that Azure will create/manage the Service Principal
-                            used for integration.
-                          type: boolean
-                        serverAppId:
-                          description: The Server ID of an Azure Active Directory
-                            Application.
-                          type: string
-                        serverAppSecretSecretRef:
-                          description: The Server Secret of an Azure Active Directory
-                            Application.
-                          properties:
-                            key:
-                              description: The key to select.
-                              type: string
-                            name:
-                              description: Name of the secret.
-                              type: string
-                            namespace:
-                              description: Namespace of the secret.
-                              type: string
-                          required:
-                          - key
-                          - name
-                          - namespace
-                          type: object
                         tenantId:
                           description: The Tenant ID used for Azure Active Directory
                             Application. If this isn't specified the Tenant ID of
@@ -426,39 +318,20 @@ spec:
                       Namespace and Deployment details to the Cost Analysis views
                       in the Azure portal.
                     type: boolean
-                  customCaTrustCertificatesBase64:
-                    description: A list of up to 10 base64 encoded CAs that will be
-                      added to the trust store on nodes with the custom_ca_trust_enabled
-                      feature enabled.
-                    items:
-                      type: string
-                    type: array
                   defaultNodePool:
-                    description: A default_node_pool block as defined below.
+                    description: Specifies configuration for "System" mode node pool.
+                      A default_node_pool block as defined below.
                     items:
                       properties:
+                        autoScalingEnabled:
+                          description: Should the Kubernetes Auto Scaler be enabled
+                            for this Node Pool?
+                          type: boolean
                         capacityReservationGroupId:
                           description: Specifies the ID of the Capacity Reservation
                             Group within which this AKS Cluster should be created.
                             Changing this forces a new resource to be created.
                           type: string
-                        customCaTrustEnabled:
-                          description: Specifies whether to trust a Custom CA.
-                          type: boolean
-                        enableAutoScaling:
-                          description: Should the Kubernetes Auto Scaler be enabled
-                            for this Node Pool?
-                          type: boolean
-                        enableHostEncryption:
-                          description: Should the nodes in the Default Node Pool have
-                            host encryption enabled? temporary_name_for_rotation must
-                            be specified when changing this property.
-                          type: boolean
-                        enableNodePublicIp:
-                          description: Should nodes in this Node Pool have a Public
-                            IP Address? temporary_name_for_rotation must be specified
-                            when changing this property.
-                          type: boolean
                         fipsEnabled:
                           description: Should the nodes in this Node Pool have Federal
                             Information Processing Standard enabled? temporary_name_for_rotation
@@ -471,6 +344,11 @@ spec:
                             MIG3g, MIG4g and MIG7g. Changing this forces a new resource
                             to be created.
                           type: string
+                        hostEncryptionEnabled:
+                          description: Should the nodes in the Default Node Pool have
+                            host encryption enabled? temporary_name_for_rotation must
+                            be specified when changing this property.
+                          type: boolean
                         hostGroupId:
                           description: Specifies the ID of the Host Group within which
                             this AKS Cluster should be created. Changing this forces
@@ -499,7 +377,7 @@ spec:
                                 type: number
                               cpuCfsQuotaEnabled:
                                 description: Is CPU CFS quota enforcement for containers
-                                  enabled?
+                                  enabled? Defaults to true.
                                 type: boolean
                               cpuCfsQuotaPeriod:
                                 description: Specifies the CPU CFS quota period value.
@@ -531,7 +409,8 @@ spec:
                           type: array
                         kubeletDiskType:
                           description: The type of disk used by kubelet. Possible
-                            values are OS and Temporary.
+                            values are OS and Temporary. temporary_name_for_rotation
+                            must be specified when changing this block.
                           type: string
                         linuxOsConfig:
                           description: A linux_os_config block as defined below. temporary_name_for_rotation
@@ -685,14 +564,6 @@ spec:
                             each agent. temporary_name_for_rotation must be specified
                             when changing this property.
                           type: number
-                        messageOfTheDay:
-                          description: A base64-encoded string which will be written
-                            to /etc/motd after decoding. This allows customization
-                            of the message of the day for Linux nodes. It cannot be
-                            specified for Windows nodes and must be a static string
-                            (i.e. will be printed raw and not executed as a script).
-                            Changing this forces a new resource to be created.
-                          type: string
                         minCount:
                           description: The minimum number of nodes which should exist
                             in this Node Pool. If specified this must be between 1
@@ -753,16 +624,17 @@ spec:
                                 x-kubernetes-map-type: granular
                             type: object
                           type: array
+                        nodePublicIpEnabled:
+                          description: Should nodes in this Node Pool have a Public
+                            IP Address? temporary_name_for_rotation must be specified
+                            when changing this property.
+                          type: boolean
                         nodePublicIpPrefixId:
                           description: Resource ID for the Public IP Addresses Prefix
-                            for the nodes in this Node Pool. enable_node_public_ip
+                            for the nodes in this Node Pool. node_public_ip_enabled
                             should be true. Changing this forces a new resource to
                             be created.
                           type: string
-                        nodeTaints:
-                          items:
-                            type: string
-                          type: array
                         onlyCriticalAddonsEnabled:
                           description: Enabling this option will taint default node
                             pool with CriticalAddonsOnly=true:NoSchedule taint. temporary_name_for_rotation
@@ -797,8 +669,10 @@ spec:
                             Windows2022. If not specified, the default is Ubuntu if
                             OSType=Linux or Windows2019 if OSType=Windows. And the
                             default Windows OSSKU will be changed to Windows2022 after
-                            Windows2019 is deprecated. temporary_name_for_rotation
-                            must be specified when attempting a change.
+                            Windows2019 is deprecated. Changing this from AzureLinux
+                            or Ubuntu to AzureLinux or Ubuntu will not replace the
+                            resource, otherwise temporary_name_for_rotation must be
+                            specified when attempting a change.
                           type: string
                         podSubnetId:
                           description: The ID of the Subnet where the pods in the
@@ -906,9 +780,9 @@ spec:
                           type: string
                         type:
                           description: The type of Node Pool which should be created.
-                            Possible values are AvailabilitySet and VirtualMachineScaleSets.
-                            Defaults to VirtualMachineScaleSets. Changing this forces
-                            a new resource to be created.
+                            Possible values are VirtualMachineScaleSets. Defaults
+                            to VirtualMachineScaleSets. Changing this forces a new
+                            resource to be created.
                           type: string
                         ultraSsdEnabled:
                           description: Used to specify whether the UltraSSD is enabled
@@ -1027,7 +901,7 @@ spec:
                           type: object
                         workloadRuntime:
                           description: Specifies the workload runtime used by the
-                            node pool. Possible values are OCIContainer and KataMshvVmIsolation.
+                            node pool. Possible value is OCIContainer.
                           type: string
                         zones:
                           description: Specifies a list of Availability Zones in which
@@ -1057,12 +931,11 @@ spec:
                       Changing this forces a new resource to be created.
                     type: string
                   edgeZone:
-                    description: Specifies the Edge Zone within the Azure Region where
-                      this Managed Kubernetes Cluster should exist. Changing this
-                      forces a new resource to be created.
+                    description: Specifies the Extended Zone (formerly called Edge
+                      Zone) within the Azure Region where this Managed Kubernetes
+                      Cluster should exist. Changing this forces a new resource to
+                      be created.
                     type: string
-                  enablePodSecurityPolicy:
-                    type: boolean
                   httpApplicationRoutingEnabled:
                     description: Should HTTP Application Routing be enabled?
                     type: boolean
@@ -1208,7 +1081,7 @@ spec:
                     type: boolean
                   imageCleanerIntervalHours:
                     description: Specifies the interval in hours when images should
-                      be cleaned up. Defaults to 48.
+                      be cleaned up. Defaults to 0.
                     type: number
                   ingressApplicationGateway:
                     description: An ingress_application_gateway block as defined below.
@@ -1344,8 +1217,8 @@ spec:
                           type: boolean
                         secretRotationInterval:
                           description: The interval to poll for secret rotation. This
-                            attribute is only set when secret_rotation is true. Defaults
-                            to 2m.
+                            attribute is only set when secret_rotation_enabled is
+                            true. Defaults to 2m.
                           type: string
                       type: object
                     type: array
@@ -1399,7 +1272,8 @@ spec:
                             properties:
                               keyData:
                                 description: The Public SSH Key used to access the
-                                  cluster.
+                                  cluster. Changing this forces a new resource to
+                                  be created.
                                 type: string
                             type: object
                           type: array
@@ -1462,7 +1336,7 @@ spec:
                       properties:
                         dayOfMonth:
                           description: The day of the month for the maintenance run.
-                            Required in combination with RelativeMonthly frequency.
+                            Required in combination with AbsoluteMonthly frequency.
                             Value between 0 and 31 (inclusive).
                           type: number
                         dayOfWeek:
@@ -1473,7 +1347,7 @@ spec:
                           type: string
                         duration:
                           description: The duration of the window for maintenance
-                            to run in hours.
+                            to run in hours. Possible options are between 4 to 24.
                           type: number
                         frequency:
                           description: Frequency of maintenance. Possible options
@@ -1522,7 +1396,7 @@ spec:
                       properties:
                         dayOfMonth:
                           description: The day of the month for the maintenance run.
-                            Required in combination with RelativeMonthly frequency.
+                            Required in combination with AbsoluteMonthly frequency.
                             Value between 0 and 31 (inclusive).
                           type: number
                         dayOfWeek:
@@ -1533,7 +1407,7 @@ spec:
                           type: string
                         duration:
                           description: The duration of the window for maintenance
-                            to run in hours.
+                            to run in hours. Possible options are between 4 to 24.
                           type: number
                         frequency:
                           description: Frequency of maintenance. Possible options
@@ -1612,16 +1486,6 @@ spec:
                             range that will be used by cluster service discovery (kube-dns).
                             Changing this forces a new resource to be created.
                           type: string
-                        dockerBridgeCidr:
-                          description: IP address (in CIDR notation) used as the Docker
-                            bridge IP address on nodes. Changing this forces a new
-                            resource to be created.
-                          type: string
-                        ebpfDataPlane:
-                          description: Specifies the eBPF data plane used for building
-                            the Kubernetes network. Possible value is cilium. Disabling
-                            this forces a new resource to be created.
-                          type: string
                         ipVersions:
                           description: Specifies a list of IP versions the Kubernetes
                             Cluster will use to assign IP addresses to its nodes and
@@ -1638,15 +1502,21 @@ spec:
                             created.
                           items:
                             properties:
+                              backendPoolType:
+                                description: The type of the managed inbound Load
+                                  Balancer Backend Pool. Possible values are NodeIP
+                                  and NodeIPConfiguration. Defaults to NodeIPConfiguration.
+                                  See the documentation for more information.
+                                type: string
                               idleTimeoutInMinutes:
                                 description: Desired outbound flow idle timeout in
-                                  minutes for the cluster load balancer. Must be between
+                                  minutes for the managed nat gateway. Must be between
                                   4 and 120 inclusive. Defaults to 4.
                                 type: number
                               managedOutboundIpCount:
                                 description: Count of desired managed outbound IPs
-                                  for the cluster load balancer. Must be between 1
-                                  and 100 inclusive.
+                                  for the managed nat gateway. Must be between 1 and
+                                  16 inclusive.
                                 type: number
                               managedOutboundIpv6Count:
                                 description: The desired number of IPv6 outbound IPs
@@ -1694,13 +1564,13 @@ spec:
                             properties:
                               idleTimeoutInMinutes:
                                 description: Desired outbound flow idle timeout in
-                                  minutes for the cluster load balancer. Must be between
+                                  minutes for the managed nat gateway. Must be between
                                   4 and 120 inclusive. Defaults to 4.
                                 type: number
                               managedOutboundIpCount:
                                 description: Count of desired managed outbound IPs
-                                  for the cluster load balancer. Must be between 1
-                                  and 100 inclusive.
+                                  for the managed nat gateway. Must be between 1 and
+                                  16 inclusive.
                                 type: number
                             type: object
                           type: array
@@ -1730,21 +1600,6 @@ spec:
                             between pods. Currently supported values are calico, azure
                             and cilium.
                           type: string
-                        outboundIpAddressIds:
-                          description: The ID of the Public IP Addresses which should
-                            be used for outbound communication for the cluster load
-                            balancer.
-                          items:
-                            type: string
-                          type: array
-                          x-kubernetes-list-type: set
-                        outboundIpPrefixIds:
-                          description: The ID of the outbound Public IP Address Prefixes
-                            which should be used for the cluster load balancer.
-                          items:
-                            type: string
-                          type: array
-                          x-kubernetes-list-type: set
                         outboundType:
                           description: The outbound (egress) routing method which
                             should be used for this Kubernetes Cluster. Possible values
@@ -1755,8 +1610,9 @@ spec:
                           type: string
                         podCidr:
                           description: The CIDR to use for pod IP addresses. This
-                            field can only be set when network_plugin is set to kubenet.
-                            Changing this forces a new resource to be created.
+                            field can only be set when network_plugin is set to kubenet
+                            or network_plugin_mode is set to overlay. Changing this
+                            forces a new resource to be created.
                           type: string
                         podCidrs:
                           description: A list of CIDRs to use for pod IP addresses.
@@ -1780,10 +1636,10 @@ spec:
                           type: array
                       type: object
                     type: array
-                  nodeOsChannelUpgrade:
+                  nodeOsUpgradeChannel:
                     description: The upgrade channel for this Kubernetes Cluster Nodes'
                       OS Image. Possible values are Unmanaged, SecurityPatch, NodeImage
-                      and None.
+                      and None. Defaults to NodeImage.
                     type: string
                   nodeResourceGroup:
                     description: The auto-generated Resource Group which contains
@@ -1905,10 +1761,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  publicNetworkAccessEnabled:
-                    description: Whether public network access is allowed for this
-                      Kubernetes Cluster. Defaults to true.
-                    type: boolean
                   resourceGroupName:
                     description: Specifies the Resource Group where the Managed Kubernetes
                       Cluster should exist. Changing this forces a new resource to
@@ -2043,6 +1895,18 @@ spec:
                           description: The mode of the service mesh. Possible value
                             is Istio.
                           type: string
+                        revisions:
+                          description: Specify 1 or 2 Istio control plane revisions
+                            for managing minor upgrades using the canary upgrade process.
+                            For example, create the resource with revisions set to
+                            ["asm-1-20"], or leave it empty (the revisions will only
+                            be known after apply). To start the canary upgrade, change
+                            revisions to ["asm-1-20", "asm-1-21"]. To roll back the
+                            canary upgrade, revert to ["asm-1-20"]. To confirm the
+                            upgrade, change to ["asm-1-21"].
+                          items:
+                            type: string
+                          type: array
                       type: object
                     type: array
                   servicePrincipal:
@@ -2070,8 +1934,6 @@ spec:
                           - name
                           - namespace
                           type: object
-                      required:
-                      - clientSecretSecretRef
                       type: object
                     type: array
                   skuTier:
@@ -2091,10 +1953,6 @@ spec:
                           description: Is the Disk CSI driver enabled? Defaults to
                             true.
                           type: boolean
-                        diskDriverVersion:
-                          description: Disk CSI Driver version to be used. Possible
-                            values are v1 and v2. Defaults to v1.
-                          type: string
                         fileDriverEnabled:
                           description: Is the File CSI driver enabled? Defaults to
                             true.
@@ -2116,13 +1974,27 @@ spec:
                     description: A mapping of tags to assign to the resource.
                     type: object
                     x-kubernetes-map-type: granular
+                  upgradeOverride:
+                    description: A upgrade_override block as defined below.
+                    items:
+                      properties:
+                        effectiveUntil:
+                          description: Specifies the duration, in RFC 3339 format
+                            (e.g., 2025-10-01T13:00:00Z), the upgrade_override values
+                            are effective. This field must be set for the upgrade_override
+                            values to take effect. The date-time must be within the
+                            next 30 days.
+                          type: string
+                        forceUpgradeEnabled:
+                          description: Whether to force upgrade the cluster. Possible
+                            values are true or false.
+                          type: boolean
+                      type: object
+                    type: array
                   webAppRouting:
                     description: A web_app_routing block as defined below.
                     items:
                       properties:
-                        dnsZoneId:
-                          description: The Kubernetes Managed Cluster ID.
-                          type: string
                         dnsZoneIds:
                           description: Specifies the list of the DNS Zone IDs in which
                             DNS entries are created for applications deployed to the
@@ -2315,98 +2187,8 @@ spec:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
-                        subnetId:
-                          description: The ID of the Subnet where the API server endpoint
-                            is delegated to.
-                          type: string
-                        subnetIdRef:
-                          description: Reference to a Subnet in network to populate
-                            subnetId.
-                          properties:
-                            name:
-                              description: Name of the referenced object.
-                              type: string
-                            policy:
-                              description: Policies for referencing.
-                              properties:
-                                resolution:
-                                  default: Required
-                                  description: |-
-                                    Resolution specifies whether resolution of this reference is required.
-                                    The default is 'Required', which means the reconcile will fail if the
-                                    reference cannot be resolved. 'Optional' means this reference will be
-                                    a no-op if it cannot be resolved.
-                                  enum:
-                                  - Required
-                                  - Optional
-                                  type: string
-                                resolve:
-                                  description: |-
-                                    Resolve specifies when this reference should be resolved. The default
-                                    is 'IfNotPresent', which will attempt to resolve the reference only when
-                                    the corresponding field is not present. Use 'Always' to resolve the
-                                    reference on every reconcile.
-                                  enum:
-                                  - Always
-                                  - IfNotPresent
-                                  type: string
-                              type: object
-                          required:
-                          - name
-                          type: object
-                        subnetIdSelector:
-                          description: Selector for a Subnet in network to populate
-                            subnetId.
-                          properties:
-                            matchControllerRef:
-                              description: |-
-                                MatchControllerRef ensures an object with the same controller reference
-                                as the selecting object is selected.
-                              type: boolean
-                            matchLabels:
-                              additionalProperties:
-                                type: string
-                              description: MatchLabels ensures an object with matching
-                                labels is selected.
-                              type: object
-                            policy:
-                              description: Policies for selection.
-                              properties:
-                                resolution:
-                                  default: Required
-                                  description: |-
-                                    Resolution specifies whether resolution of this reference is required.
-                                    The default is 'Required', which means the reconcile will fail if the
-                                    reference cannot be resolved. 'Optional' means this reference will be
-                                    a no-op if it cannot be resolved.
-                                  enum:
-                                  - Required
-                                  - Optional
-                                  type: string
-                                resolve:
-                                  description: |-
-                                    Resolve specifies when this reference should be resolved. The default
-                                    is 'IfNotPresent', which will attempt to resolve the reference only when
-                                    the corresponding field is not present. Use 'Always' to resolve the
-                                    reference on every reconcile.
-                                  enum:
-                                  - Always
-                                  - IfNotPresent
-                                  type: string
-                              type: object
-                          type: object
-                        vnetIntegrationEnabled:
-                          description: Should API Server VNet Integration be enabled?
-                            For more details please visit Use API Server VNet Integration.
-                          type: boolean
                       type: object
                     type: array
-                  apiServerAuthorizedIpRanges:
-                    description: Deprecated in favor of `spec.forProvider.apiServerAccessProfile[0].authorizedIpRanges`
-                    items:
-                      type: string
-                    type: array
-                    x-kubernetes-list-type: set
                   autoScalerProfile:
                     description: A auto_scaler_profile block as defined below.
                     items:
@@ -2414,6 +2196,14 @@ spec:
                         balanceSimilarNodeGroups:
                           description: Detect similar node groups and balance the
                             number of nodes between them. Defaults to false.
+                          type: boolean
+                        daemonsetEvictionForEmptyNodesEnabled:
+                          description: Whether DaemonSet pods will be gracefully terminated
+                            from empty nodes. Defaults to false.
+                          type: boolean
+                        daemonsetEvictionForOccupiedNodesEnabled:
+                          description: Whether DaemonSet pods will be gracefully terminated
+                            from non-empty nodes. Defaults to true.
                           type: boolean
                         emptyBulkDeleteMax:
                           description: Maximum number of empty nodes that can be deleted
@@ -2423,6 +2213,11 @@ spec:
                           description: Expander to use. Possible values are least-waste,
                             priority, most-pods and random. Defaults to random.
                           type: string
+                        ignoreDaemonsetsUtilizationEnabled:
+                          description: Whether DaemonSet pods will be ignored when
+                            calculating resource utilization for scale down. Defaults
+                            to false.
+                          type: boolean
                         maxGracefulTerminationSec:
                           description: Maximum number of seconds the cluster autoscaler
                             waits for pod termination when trying to scale down a
@@ -2489,7 +2284,7 @@ spec:
                           type: boolean
                       type: object
                     type: array
-                  automaticChannelUpgrade:
+                  automaticUpgradeChannel:
                     description: The upgrade channel for this Kubernetes Cluster.
                       Possible values are patch, rapid, node-image and stable. Omitting
                       this field sets this value to none.
@@ -2509,37 +2304,6 @@ spec:
                           description: Is Role Based Access Control based on Azure
                             AD enabled?
                           type: boolean
-                        clientAppId:
-                          description: The Client ID of an Azure Active Directory
-                            Application.
-                          type: string
-                        managed:
-                          description: Is the Azure Active Directory integration Managed,
-                            meaning that Azure will create/manage the Service Principal
-                            used for integration.
-                          type: boolean
-                        serverAppId:
-                          description: The Server ID of an Azure Active Directory
-                            Application.
-                          type: string
-                        serverAppSecretSecretRef:
-                          description: A SecretKeySelector is a reference to a secret
-                            key in an arbitrary namespace.
-                          properties:
-                            key:
-                              description: The key to select.
-                              type: string
-                            name:
-                              description: Name of the secret.
-                              type: string
-                            namespace:
-                              description: Namespace of the secret.
-                              type: string
-                          required:
-                          - key
-                          - name
-                          - namespace
-                          type: object
                         tenantId:
                           description: The Tenant ID used for Azure Active Directory
                             Application. If this isn't specified the Tenant ID of
@@ -2569,39 +2333,20 @@ spec:
                       Namespace and Deployment details to the Cost Analysis views
                       in the Azure portal.
                     type: boolean
-                  customCaTrustCertificatesBase64:
-                    description: A list of up to 10 base64 encoded CAs that will be
-                      added to the trust store on nodes with the custom_ca_trust_enabled
-                      feature enabled.
-                    items:
-                      type: string
-                    type: array
                   defaultNodePool:
-                    description: A default_node_pool block as defined below.
+                    description: Specifies configuration for "System" mode node pool.
+                      A default_node_pool block as defined below.
                     items:
                       properties:
+                        autoScalingEnabled:
+                          description: Should the Kubernetes Auto Scaler be enabled
+                            for this Node Pool?
+                          type: boolean
                         capacityReservationGroupId:
                           description: Specifies the ID of the Capacity Reservation
                             Group within which this AKS Cluster should be created.
                             Changing this forces a new resource to be created.
                           type: string
-                        customCaTrustEnabled:
-                          description: Specifies whether to trust a Custom CA.
-                          type: boolean
-                        enableAutoScaling:
-                          description: Should the Kubernetes Auto Scaler be enabled
-                            for this Node Pool?
-                          type: boolean
-                        enableHostEncryption:
-                          description: Should the nodes in the Default Node Pool have
-                            host encryption enabled? temporary_name_for_rotation must
-                            be specified when changing this property.
-                          type: boolean
-                        enableNodePublicIp:
-                          description: Should nodes in this Node Pool have a Public
-                            IP Address? temporary_name_for_rotation must be specified
-                            when changing this property.
-                          type: boolean
                         fipsEnabled:
                           description: Should the nodes in this Node Pool have Federal
                             Information Processing Standard enabled? temporary_name_for_rotation
@@ -2614,6 +2359,11 @@ spec:
                             MIG3g, MIG4g and MIG7g. Changing this forces a new resource
                             to be created.
                           type: string
+                        hostEncryptionEnabled:
+                          description: Should the nodes in the Default Node Pool have
+                            host encryption enabled? temporary_name_for_rotation must
+                            be specified when changing this property.
+                          type: boolean
                         hostGroupId:
                           description: Specifies the ID of the Host Group within which
                             this AKS Cluster should be created. Changing this forces
@@ -2642,7 +2392,7 @@ spec:
                                 type: number
                               cpuCfsQuotaEnabled:
                                 description: Is CPU CFS quota enforcement for containers
-                                  enabled?
+                                  enabled? Defaults to true.
                                 type: boolean
                               cpuCfsQuotaPeriod:
                                 description: Specifies the CPU CFS quota period value.
@@ -2674,7 +2424,8 @@ spec:
                           type: array
                         kubeletDiskType:
                           description: The type of disk used by kubelet. Possible
-                            values are OS and Temporary.
+                            values are OS and Temporary. temporary_name_for_rotation
+                            must be specified when changing this block.
                           type: string
                         linuxOsConfig:
                           description: A linux_os_config block as defined below. temporary_name_for_rotation
@@ -2828,14 +2579,6 @@ spec:
                             each agent. temporary_name_for_rotation must be specified
                             when changing this property.
                           type: number
-                        messageOfTheDay:
-                          description: A base64-encoded string which will be written
-                            to /etc/motd after decoding. This allows customization
-                            of the message of the day for Linux nodes. It cannot be
-                            specified for Windows nodes and must be a static string
-                            (i.e. will be printed raw and not executed as a script).
-                            Changing this forces a new resource to be created.
-                          type: string
                         minCount:
                           description: The minimum number of nodes which should exist
                             in this Node Pool. If specified this must be between 1
@@ -2896,16 +2639,17 @@ spec:
                                 x-kubernetes-map-type: granular
                             type: object
                           type: array
+                        nodePublicIpEnabled:
+                          description: Should nodes in this Node Pool have a Public
+                            IP Address? temporary_name_for_rotation must be specified
+                            when changing this property.
+                          type: boolean
                         nodePublicIpPrefixId:
                           description: Resource ID for the Public IP Addresses Prefix
-                            for the nodes in this Node Pool. enable_node_public_ip
+                            for the nodes in this Node Pool. node_public_ip_enabled
                             should be true. Changing this forces a new resource to
                             be created.
                           type: string
-                        nodeTaints:
-                          items:
-                            type: string
-                          type: array
                         onlyCriticalAddonsEnabled:
                           description: Enabling this option will taint default node
                             pool with CriticalAddonsOnly=true:NoSchedule taint. temporary_name_for_rotation
@@ -2940,8 +2684,10 @@ spec:
                             Windows2022. If not specified, the default is Ubuntu if
                             OSType=Linux or Windows2019 if OSType=Windows. And the
                             default Windows OSSKU will be changed to Windows2022 after
-                            Windows2019 is deprecated. temporary_name_for_rotation
-                            must be specified when attempting a change.
+                            Windows2019 is deprecated. Changing this from AzureLinux
+                            or Ubuntu to AzureLinux or Ubuntu will not replace the
+                            resource, otherwise temporary_name_for_rotation must be
+                            specified when attempting a change.
                           type: string
                         podSubnetId:
                           description: The ID of the Subnet where the pods in the
@@ -3049,9 +2795,9 @@ spec:
                           type: string
                         type:
                           description: The type of Node Pool which should be created.
-                            Possible values are AvailabilitySet and VirtualMachineScaleSets.
-                            Defaults to VirtualMachineScaleSets. Changing this forces
-                            a new resource to be created.
+                            Possible values are VirtualMachineScaleSets. Defaults
+                            to VirtualMachineScaleSets. Changing this forces a new
+                            resource to be created.
                           type: string
                         ultraSsdEnabled:
                           description: Used to specify whether the UltraSSD is enabled
@@ -3170,7 +2916,7 @@ spec:
                           type: object
                         workloadRuntime:
                           description: Specifies the workload runtime used by the
-                            node pool. Possible values are OCIContainer and KataMshvVmIsolation.
+                            node pool. Possible value is OCIContainer.
                           type: string
                         zones:
                           description: Specifies a list of Availability Zones in which
@@ -3200,12 +2946,11 @@ spec:
                       Changing this forces a new resource to be created.
                     type: string
                   edgeZone:
-                    description: Specifies the Edge Zone within the Azure Region where
-                      this Managed Kubernetes Cluster should exist. Changing this
-                      forces a new resource to be created.
+                    description: Specifies the Extended Zone (formerly called Edge
+                      Zone) within the Azure Region where this Managed Kubernetes
+                      Cluster should exist. Changing this forces a new resource to
+                      be created.
                     type: string
-                  enablePodSecurityPolicy:
-                    type: boolean
                   httpApplicationRoutingEnabled:
                     description: Should HTTP Application Routing be enabled?
                     type: boolean
@@ -3351,7 +3096,7 @@ spec:
                     type: boolean
                   imageCleanerIntervalHours:
                     description: Specifies the interval in hours when images should
-                      be cleaned up. Defaults to 48.
+                      be cleaned up. Defaults to 0.
                     type: number
                   ingressApplicationGateway:
                     description: An ingress_application_gateway block as defined below.
@@ -3487,8 +3232,8 @@ spec:
                           type: boolean
                         secretRotationInterval:
                           description: The interval to poll for secret rotation. This
-                            attribute is only set when secret_rotation is true. Defaults
-                            to 2m.
+                            attribute is only set when secret_rotation_enabled is
+                            true. Defaults to 2m.
                           type: string
                       type: object
                     type: array
@@ -3542,7 +3287,8 @@ spec:
                             properties:
                               keyData:
                                 description: The Public SSH Key used to access the
-                                  cluster.
+                                  cluster. Changing this forces a new resource to
+                                  be created.
                                 type: string
                             type: object
                           type: array
@@ -3605,7 +3351,7 @@ spec:
                       properties:
                         dayOfMonth:
                           description: The day of the month for the maintenance run.
-                            Required in combination with RelativeMonthly frequency.
+                            Required in combination with AbsoluteMonthly frequency.
                             Value between 0 and 31 (inclusive).
                           type: number
                         dayOfWeek:
@@ -3616,7 +3362,7 @@ spec:
                           type: string
                         duration:
                           description: The duration of the window for maintenance
-                            to run in hours.
+                            to run in hours. Possible options are between 4 to 24.
                           type: number
                         frequency:
                           description: Frequency of maintenance. Possible options
@@ -3665,7 +3411,7 @@ spec:
                       properties:
                         dayOfMonth:
                           description: The day of the month for the maintenance run.
-                            Required in combination with RelativeMonthly frequency.
+                            Required in combination with AbsoluteMonthly frequency.
                             Value between 0 and 31 (inclusive).
                           type: number
                         dayOfWeek:
@@ -3676,7 +3422,7 @@ spec:
                           type: string
                         duration:
                           description: The duration of the window for maintenance
-                            to run in hours.
+                            to run in hours. Possible options are between 4 to 24.
                           type: number
                         frequency:
                           description: Frequency of maintenance. Possible options
@@ -3755,16 +3501,6 @@ spec:
                             range that will be used by cluster service discovery (kube-dns).
                             Changing this forces a new resource to be created.
                           type: string
-                        dockerBridgeCidr:
-                          description: IP address (in CIDR notation) used as the Docker
-                            bridge IP address on nodes. Changing this forces a new
-                            resource to be created.
-                          type: string
-                        ebpfDataPlane:
-                          description: Specifies the eBPF data plane used for building
-                            the Kubernetes network. Possible value is cilium. Disabling
-                            this forces a new resource to be created.
-                          type: string
                         ipVersions:
                           description: Specifies a list of IP versions the Kubernetes
                             Cluster will use to assign IP addresses to its nodes and
@@ -3781,15 +3517,21 @@ spec:
                             created.
                           items:
                             properties:
+                              backendPoolType:
+                                description: The type of the managed inbound Load
+                                  Balancer Backend Pool. Possible values are NodeIP
+                                  and NodeIPConfiguration. Defaults to NodeIPConfiguration.
+                                  See the documentation for more information.
+                                type: string
                               idleTimeoutInMinutes:
                                 description: Desired outbound flow idle timeout in
-                                  minutes for the cluster load balancer. Must be between
+                                  minutes for the managed nat gateway. Must be between
                                   4 and 120 inclusive. Defaults to 4.
                                 type: number
                               managedOutboundIpCount:
                                 description: Count of desired managed outbound IPs
-                                  for the cluster load balancer. Must be between 1
-                                  and 100 inclusive.
+                                  for the managed nat gateway. Must be between 1 and
+                                  16 inclusive.
                                 type: number
                               managedOutboundIpv6Count:
                                 description: The desired number of IPv6 outbound IPs
@@ -3837,13 +3579,13 @@ spec:
                             properties:
                               idleTimeoutInMinutes:
                                 description: Desired outbound flow idle timeout in
-                                  minutes for the cluster load balancer. Must be between
+                                  minutes for the managed nat gateway. Must be between
                                   4 and 120 inclusive. Defaults to 4.
                                 type: number
                               managedOutboundIpCount:
                                 description: Count of desired managed outbound IPs
-                                  for the cluster load balancer. Must be between 1
-                                  and 100 inclusive.
+                                  for the managed nat gateway. Must be between 1 and
+                                  16 inclusive.
                                 type: number
                             type: object
                           type: array
@@ -3873,21 +3615,6 @@ spec:
                             between pods. Currently supported values are calico, azure
                             and cilium.
                           type: string
-                        outboundIpAddressIds:
-                          description: The ID of the Public IP Addresses which should
-                            be used for outbound communication for the cluster load
-                            balancer.
-                          items:
-                            type: string
-                          type: array
-                          x-kubernetes-list-type: set
-                        outboundIpPrefixIds:
-                          description: The ID of the outbound Public IP Address Prefixes
-                            which should be used for the cluster load balancer.
-                          items:
-                            type: string
-                          type: array
-                          x-kubernetes-list-type: set
                         outboundType:
                           description: The outbound (egress) routing method which
                             should be used for this Kubernetes Cluster. Possible values
@@ -3898,8 +3625,9 @@ spec:
                           type: string
                         podCidr:
                           description: The CIDR to use for pod IP addresses. This
-                            field can only be set when network_plugin is set to kubenet.
-                            Changing this forces a new resource to be created.
+                            field can only be set when network_plugin is set to kubenet
+                            or network_plugin_mode is set to overlay. Changing this
+                            forces a new resource to be created.
                           type: string
                         podCidrs:
                           description: A list of CIDRs to use for pod IP addresses.
@@ -3923,10 +3651,10 @@ spec:
                           type: array
                       type: object
                     type: array
-                  nodeOsChannelUpgrade:
+                  nodeOsUpgradeChannel:
                     description: The upgrade channel for this Kubernetes Cluster Nodes'
                       OS Image. Possible values are Unmanaged, SecurityPatch, NodeImage
-                      and None.
+                      and None. Defaults to NodeImage.
                     type: string
                   nodeResourceGroup:
                     description: The auto-generated Resource Group which contains
@@ -4048,10 +3776,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  publicNetworkAccessEnabled:
-                    description: Whether public network access is allowed for this
-                      Kubernetes Cluster. Defaults to true.
-                    type: boolean
                   roleBasedAccessControlEnabled:
                     description: Whether Role Based Access Control for the Kubernetes
                       Cluster should be enabled. Defaults to true. Changing this forces
@@ -4105,6 +3829,18 @@ spec:
                           description: The mode of the service mesh. Possible value
                             is Istio.
                           type: string
+                        revisions:
+                          description: Specify 1 or 2 Istio control plane revisions
+                            for managing minor upgrades using the canary upgrade process.
+                            For example, create the resource with revisions set to
+                            ["asm-1-20"], or leave it empty (the revisions will only
+                            be known after apply). To start the canary upgrade, change
+                            revisions to ["asm-1-20", "asm-1-21"]. To roll back the
+                            canary upgrade, revert to ["asm-1-20"]. To confirm the
+                            upgrade, change to ["asm-1-21"].
+                          items:
+                            type: string
+                          type: array
                       type: object
                     type: array
                   servicePrincipal:
@@ -4115,6 +3851,25 @@ spec:
                         clientId:
                           description: The Client ID for the Service Principal.
                           type: string
+                        clientSecretSecretRef:
+                          description: The Client Secret for the Service Principal.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                      required:
+                      - clientSecretSecretRef
                       type: object
                     type: array
                   skuTier:
@@ -4134,10 +3889,6 @@ spec:
                           description: Is the Disk CSI driver enabled? Defaults to
                             true.
                           type: boolean
-                        diskDriverVersion:
-                          description: Disk CSI Driver version to be used. Possible
-                            values are v1 and v2. Defaults to v1.
-                          type: string
                         fileDriverEnabled:
                           description: Is the File CSI driver enabled? Defaults to
                             true.
@@ -4159,13 +3910,27 @@ spec:
                     description: A mapping of tags to assign to the resource.
                     type: object
                     x-kubernetes-map-type: granular
+                  upgradeOverride:
+                    description: A upgrade_override block as defined below.
+                    items:
+                      properties:
+                        effectiveUntil:
+                          description: Specifies the duration, in RFC 3339 format
+                            (e.g., 2025-10-01T13:00:00Z), the upgrade_override values
+                            are effective. This field must be set for the upgrade_override
+                            values to take effect. The date-time must be within the
+                            next 30 days.
+                          type: string
+                        forceUpgradeEnabled:
+                          description: Whether to force upgrade the cluster. Possible
+                            values are true or false.
+                          type: boolean
+                      type: object
+                    type: array
                   webAppRouting:
                     description: A web_app_routing block as defined below.
                     items:
                       properties:
-                        dnsZoneId:
-                          description: The Kubernetes Managed Cluster ID.
-                          type: string
                         dnsZoneIds:
                           description: Specifies the list of the DNS Zone IDs in which
                             DNS entries are created for applications deployed to the
@@ -4226,6 +3991,8 @@ spec:
                             should be used for Node Pool Windows Virtual Machine.
                             At this time the only possible value is Windows_Server.
                           type: string
+                      required:
+                      - adminPasswordSecretRef
                       type: object
                     type: array
                   workloadAutoscalerProfile:
@@ -4469,22 +4236,8 @@ spec:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
-                        subnetId:
-                          description: The ID of the Subnet where the API server endpoint
-                            is delegated to.
-                          type: string
-                        vnetIntegrationEnabled:
-                          description: Should API Server VNet Integration be enabled?
-                            For more details please visit Use API Server VNet Integration.
-                          type: boolean
                       type: object
                     type: array
-                  apiServerAuthorizedIpRanges:
-                    description: Deprecated in favor of `spec.forProvider.apiServerAccessProfile[0].authorizedIpRanges`
-                    items:
-                      type: string
-                    type: array
-                    x-kubernetes-list-type: set
                   autoScalerProfile:
                     description: A auto_scaler_profile block as defined below.
                     items:
@@ -4492,6 +4245,14 @@ spec:
                         balanceSimilarNodeGroups:
                           description: Detect similar node groups and balance the
                             number of nodes between them. Defaults to false.
+                          type: boolean
+                        daemonsetEvictionForEmptyNodesEnabled:
+                          description: Whether DaemonSet pods will be gracefully terminated
+                            from empty nodes. Defaults to false.
+                          type: boolean
+                        daemonsetEvictionForOccupiedNodesEnabled:
+                          description: Whether DaemonSet pods will be gracefully terminated
+                            from non-empty nodes. Defaults to true.
                           type: boolean
                         emptyBulkDeleteMax:
                           description: Maximum number of empty nodes that can be deleted
@@ -4501,6 +4262,11 @@ spec:
                           description: Expander to use. Possible values are least-waste,
                             priority, most-pods and random. Defaults to random.
                           type: string
+                        ignoreDaemonsetsUtilizationEnabled:
+                          description: Whether DaemonSet pods will be ignored when
+                            calculating resource utilization for scale down. Defaults
+                            to false.
+                          type: boolean
                         maxGracefulTerminationSec:
                           description: Maximum number of seconds the cluster autoscaler
                             waits for pod termination when trying to scale down a
@@ -4567,7 +4333,7 @@ spec:
                           type: boolean
                       type: object
                     type: array
-                  automaticChannelUpgrade:
+                  automaticUpgradeChannel:
                     description: The upgrade channel for this Kubernetes Cluster.
                       Possible values are patch, rapid, node-image and stable. Omitting
                       this field sets this value to none.
@@ -4587,19 +4353,6 @@ spec:
                           description: Is Role Based Access Control based on Azure
                             AD enabled?
                           type: boolean
-                        clientAppId:
-                          description: The Client ID of an Azure Active Directory
-                            Application.
-                          type: string
-                        managed:
-                          description: Is the Azure Active Directory integration Managed,
-                            meaning that Azure will create/manage the Service Principal
-                            used for integration.
-                          type: boolean
-                        serverAppId:
-                          description: The Server ID of an Azure Active Directory
-                            Application.
-                          type: string
                         tenantId:
                           description: The Tenant ID used for Azure Active Directory
                             Application. If this isn't specified the Tenant ID of
@@ -4633,39 +4386,20 @@ spec:
                     description: The current version running on the Azure Kubernetes
                       Managed Cluster.
                     type: string
-                  customCaTrustCertificatesBase64:
-                    description: A list of up to 10 base64 encoded CAs that will be
-                      added to the trust store on nodes with the custom_ca_trust_enabled
-                      feature enabled.
-                    items:
-                      type: string
-                    type: array
                   defaultNodePool:
-                    description: A default_node_pool block as defined below.
+                    description: Specifies configuration for "System" mode node pool.
+                      A default_node_pool block as defined below.
                     items:
                       properties:
+                        autoScalingEnabled:
+                          description: Should the Kubernetes Auto Scaler be enabled
+                            for this Node Pool?
+                          type: boolean
                         capacityReservationGroupId:
                           description: Specifies the ID of the Capacity Reservation
                             Group within which this AKS Cluster should be created.
                             Changing this forces a new resource to be created.
                           type: string
-                        customCaTrustEnabled:
-                          description: Specifies whether to trust a Custom CA.
-                          type: boolean
-                        enableAutoScaling:
-                          description: Should the Kubernetes Auto Scaler be enabled
-                            for this Node Pool?
-                          type: boolean
-                        enableHostEncryption:
-                          description: Should the nodes in the Default Node Pool have
-                            host encryption enabled? temporary_name_for_rotation must
-                            be specified when changing this property.
-                          type: boolean
-                        enableNodePublicIp:
-                          description: Should nodes in this Node Pool have a Public
-                            IP Address? temporary_name_for_rotation must be specified
-                            when changing this property.
-                          type: boolean
                         fipsEnabled:
                           description: Should the nodes in this Node Pool have Federal
                             Information Processing Standard enabled? temporary_name_for_rotation
@@ -4678,6 +4412,11 @@ spec:
                             MIG3g, MIG4g and MIG7g. Changing this forces a new resource
                             to be created.
                           type: string
+                        hostEncryptionEnabled:
+                          description: Should the nodes in the Default Node Pool have
+                            host encryption enabled? temporary_name_for_rotation must
+                            be specified when changing this property.
+                          type: boolean
                         hostGroupId:
                           description: Specifies the ID of the Host Group within which
                             this AKS Cluster should be created. Changing this forces
@@ -4706,7 +4445,7 @@ spec:
                                 type: number
                               cpuCfsQuotaEnabled:
                                 description: Is CPU CFS quota enforcement for containers
-                                  enabled?
+                                  enabled? Defaults to true.
                                 type: boolean
                               cpuCfsQuotaPeriod:
                                 description: Specifies the CPU CFS quota period value.
@@ -4738,7 +4477,8 @@ spec:
                           type: array
                         kubeletDiskType:
                           description: The type of disk used by kubelet. Possible
-                            values are OS and Temporary.
+                            values are OS and Temporary. temporary_name_for_rotation
+                            must be specified when changing this block.
                           type: string
                         linuxOsConfig:
                           description: A linux_os_config block as defined below. temporary_name_for_rotation
@@ -4892,14 +4632,6 @@ spec:
                             each agent. temporary_name_for_rotation must be specified
                             when changing this property.
                           type: number
-                        messageOfTheDay:
-                          description: A base64-encoded string which will be written
-                            to /etc/motd after decoding. This allows customization
-                            of the message of the day for Linux nodes. It cannot be
-                            specified for Windows nodes and must be a static string
-                            (i.e. will be printed raw and not executed as a script).
-                            Changing this forces a new resource to be created.
-                          type: string
                         minCount:
                           description: The minimum number of nodes which should exist
                             in this Node Pool. If specified this must be between 1
@@ -4960,16 +4692,17 @@ spec:
                                 x-kubernetes-map-type: granular
                             type: object
                           type: array
+                        nodePublicIpEnabled:
+                          description: Should nodes in this Node Pool have a Public
+                            IP Address? temporary_name_for_rotation must be specified
+                            when changing this property.
+                          type: boolean
                         nodePublicIpPrefixId:
                           description: Resource ID for the Public IP Addresses Prefix
-                            for the nodes in this Node Pool. enable_node_public_ip
+                            for the nodes in this Node Pool. node_public_ip_enabled
                             should be true. Changing this forces a new resource to
                             be created.
                           type: string
-                        nodeTaints:
-                          items:
-                            type: string
-                          type: array
                         onlyCriticalAddonsEnabled:
                           description: Enabling this option will taint default node
                             pool with CriticalAddonsOnly=true:NoSchedule taint. temporary_name_for_rotation
@@ -5004,8 +4737,10 @@ spec:
                             Windows2022. If not specified, the default is Ubuntu if
                             OSType=Linux or Windows2019 if OSType=Windows. And the
                             default Windows OSSKU will be changed to Windows2022 after
-                            Windows2019 is deprecated. temporary_name_for_rotation
-                            must be specified when attempting a change.
+                            Windows2019 is deprecated. Changing this from AzureLinux
+                            or Ubuntu to AzureLinux or Ubuntu will not replace the
+                            resource, otherwise temporary_name_for_rotation must be
+                            specified when attempting a change.
                           type: string
                         podSubnetId:
                           description: The ID of the Subnet where the pods in the
@@ -5037,9 +4772,9 @@ spec:
                           type: string
                         type:
                           description: The type of Node Pool which should be created.
-                            Possible values are AvailabilitySet and VirtualMachineScaleSets.
-                            Defaults to VirtualMachineScaleSets. Changing this forces
-                            a new resource to be created.
+                            Possible values are VirtualMachineScaleSets. Defaults
+                            to VirtualMachineScaleSets. Changing this forces a new
+                            resource to be created.
                           type: string
                         ultraSsdEnabled:
                           description: Used to specify whether the UltraSSD is enabled
@@ -5082,7 +4817,7 @@ spec:
                           type: string
                         workloadRuntime:
                           description: Specifies the workload runtime used by the
-                            node pool. Possible values are OCIContainer and KataMshvVmIsolation.
+                            node pool. Possible value is OCIContainer.
                           type: string
                         zones:
                           description: Specifies a list of Availability Zones in which
@@ -5112,12 +4847,11 @@ spec:
                       Changing this forces a new resource to be created.
                     type: string
                   edgeZone:
-                    description: Specifies the Edge Zone within the Azure Region where
-                      this Managed Kubernetes Cluster should exist. Changing this
-                      forces a new resource to be created.
+                    description: Specifies the Extended Zone (formerly called Edge
+                      Zone) within the Azure Region where this Managed Kubernetes
+                      Cluster should exist. Changing this forces a new resource to
+                      be created.
                     type: string
-                  enablePodSecurityPolicy:
-                    type: boolean
                   fqdn:
                     description: The FQDN of the Azure Kubernetes Managed Cluster.
                     type: string
@@ -5183,7 +4917,7 @@ spec:
                     type: boolean
                   imageCleanerIntervalHours:
                     description: Specifies the interval in hours when images should
-                      be cleaned up. Defaults to 48.
+                      be cleaned up. Defaults to 0.
                     type: number
                   ingressApplicationGateway:
                     description: An ingress_application_gateway block as defined below.
@@ -5286,8 +5020,8 @@ spec:
                           type: boolean
                         secretRotationInterval:
                           description: The interval to poll for secret rotation. This
-                            attribute is only set when secret_rotation is true. Defaults
-                            to 2m.
+                            attribute is only set when secret_rotation_enabled is
+                            true. Defaults to 2m.
                           type: string
                       type: object
                     type: array
@@ -5341,7 +5075,8 @@ spec:
                             properties:
                               keyData:
                                 description: The Public SSH Key used to access the
-                                  cluster.
+                                  cluster. Changing this forces a new resource to
+                                  be created.
                                 type: string
                             type: object
                           type: array
@@ -5404,7 +5139,7 @@ spec:
                       properties:
                         dayOfMonth:
                           description: The day of the month for the maintenance run.
-                            Required in combination with RelativeMonthly frequency.
+                            Required in combination with AbsoluteMonthly frequency.
                             Value between 0 and 31 (inclusive).
                           type: number
                         dayOfWeek:
@@ -5415,7 +5150,7 @@ spec:
                           type: string
                         duration:
                           description: The duration of the window for maintenance
-                            to run in hours.
+                            to run in hours. Possible options are between 4 to 24.
                           type: number
                         frequency:
                           description: Frequency of maintenance. Possible options
@@ -5464,7 +5199,7 @@ spec:
                       properties:
                         dayOfMonth:
                           description: The day of the month for the maintenance run.
-                            Required in combination with RelativeMonthly frequency.
+                            Required in combination with AbsoluteMonthly frequency.
                             Value between 0 and 31 (inclusive).
                           type: number
                         dayOfWeek:
@@ -5475,7 +5210,7 @@ spec:
                           type: string
                         duration:
                           description: The duration of the window for maintenance
-                            to run in hours.
+                            to run in hours. Possible options are between 4 to 24.
                           type: number
                         frequency:
                           description: Frequency of maintenance. Possible options
@@ -5554,16 +5289,6 @@ spec:
                             range that will be used by cluster service discovery (kube-dns).
                             Changing this forces a new resource to be created.
                           type: string
-                        dockerBridgeCidr:
-                          description: IP address (in CIDR notation) used as the Docker
-                            bridge IP address on nodes. Changing this forces a new
-                            resource to be created.
-                          type: string
-                        ebpfDataPlane:
-                          description: Specifies the eBPF data plane used for building
-                            the Kubernetes network. Possible value is cilium. Disabling
-                            this forces a new resource to be created.
-                          type: string
                         ipVersions:
                           description: Specifies a list of IP versions the Kubernetes
                             Cluster will use to assign IP addresses to its nodes and
@@ -5580,6 +5305,12 @@ spec:
                             created.
                           items:
                             properties:
+                              backendPoolType:
+                                description: The type of the managed inbound Load
+                                  Balancer Backend Pool. Possible values are NodeIP
+                                  and NodeIPConfiguration. Defaults to NodeIPConfiguration.
+                                  See the documentation for more information.
+                                type: string
                               effectiveOutboundIps:
                                 description: The outcome (resource IDs) of the specified
                                   arguments.
@@ -5589,13 +5320,13 @@ spec:
                                 x-kubernetes-list-type: set
                               idleTimeoutInMinutes:
                                 description: Desired outbound flow idle timeout in
-                                  minutes for the cluster load balancer. Must be between
+                                  minutes for the managed nat gateway. Must be between
                                   4 and 120 inclusive. Defaults to 4.
                                 type: number
                               managedOutboundIpCount:
                                 description: Count of desired managed outbound IPs
-                                  for the cluster load balancer. Must be between 1
-                                  and 100 inclusive.
+                                  for the managed nat gateway. Must be between 1 and
+                                  16 inclusive.
                                 type: number
                               managedOutboundIpv6Count:
                                 description: The desired number of IPv6 outbound IPs
@@ -5650,13 +5381,13 @@ spec:
                                 x-kubernetes-list-type: set
                               idleTimeoutInMinutes:
                                 description: Desired outbound flow idle timeout in
-                                  minutes for the cluster load balancer. Must be between
+                                  minutes for the managed nat gateway. Must be between
                                   4 and 120 inclusive. Defaults to 4.
                                 type: number
                               managedOutboundIpCount:
                                 description: Count of desired managed outbound IPs
-                                  for the cluster load balancer. Must be between 1
-                                  and 100 inclusive.
+                                  for the managed nat gateway. Must be between 1 and
+                                  16 inclusive.
                                 type: number
                             type: object
                           type: array
@@ -5686,21 +5417,6 @@ spec:
                             between pods. Currently supported values are calico, azure
                             and cilium.
                           type: string
-                        outboundIpAddressIds:
-                          description: The ID of the Public IP Addresses which should
-                            be used for outbound communication for the cluster load
-                            balancer.
-                          items:
-                            type: string
-                          type: array
-                          x-kubernetes-list-type: set
-                        outboundIpPrefixIds:
-                          description: The ID of the outbound Public IP Address Prefixes
-                            which should be used for the cluster load balancer.
-                          items:
-                            type: string
-                          type: array
-                          x-kubernetes-list-type: set
                         outboundType:
                           description: The outbound (egress) routing method which
                             should be used for this Kubernetes Cluster. Possible values
@@ -5711,8 +5427,9 @@ spec:
                           type: string
                         podCidr:
                           description: The CIDR to use for pod IP addresses. This
-                            field can only be set when network_plugin is set to kubenet.
-                            Changing this forces a new resource to be created.
+                            field can only be set when network_plugin is set to kubenet
+                            or network_plugin_mode is set to overlay. Changing this
+                            forces a new resource to be created.
                           type: string
                         podCidrs:
                           description: A list of CIDRs to use for pod IP addresses.
@@ -5736,10 +5453,10 @@ spec:
                           type: array
                       type: object
                     type: array
-                  nodeOsChannelUpgrade:
+                  nodeOsUpgradeChannel:
                     description: The upgrade channel for this Kubernetes Cluster Nodes'
                       OS Image. Possible values are Unmanaged, SecurityPatch, NodeImage
-                      and None.
+                      and None. Defaults to NodeImage.
                     type: string
                   nodeResourceGroup:
                     description: The auto-generated Resource Group which contains
@@ -5821,10 +5538,6 @@ spec:
                       link has been enabled, which is only resolvable inside the Virtual
                       Network used by the Kubernetes Cluster.
                     type: string
-                  publicNetworkAccessEnabled:
-                    description: Whether public network access is allowed for this
-                      Kubernetes Cluster. Defaults to true.
-                    type: boolean
                   resourceGroupName:
                     description: Specifies the Resource Group where the Managed Kubernetes
                       Cluster should exist. Changing this forces a new resource to
@@ -5883,6 +5596,18 @@ spec:
                           description: The mode of the service mesh. Possible value
                             is Istio.
                           type: string
+                        revisions:
+                          description: Specify 1 or 2 Istio control plane revisions
+                            for managing minor upgrades using the canary upgrade process.
+                            For example, create the resource with revisions set to
+                            ["asm-1-20"], or leave it empty (the revisions will only
+                            be known after apply). To start the canary upgrade, change
+                            revisions to ["asm-1-20", "asm-1-21"]. To roll back the
+                            canary upgrade, revert to ["asm-1-20"]. To confirm the
+                            upgrade, change to ["asm-1-21"].
+                          items:
+                            type: string
+                          type: array
                       type: object
                     type: array
                   servicePrincipal:
@@ -5912,10 +5637,6 @@ spec:
                           description: Is the Disk CSI driver enabled? Defaults to
                             true.
                           type: boolean
-                        diskDriverVersion:
-                          description: Disk CSI Driver version to be used. Possible
-                            values are v1 and v2. Defaults to v1.
-                          type: string
                         fileDriverEnabled:
                           description: Is the File CSI driver enabled? Defaults to
                             true.
@@ -5937,13 +5658,27 @@ spec:
                     description: A mapping of tags to assign to the resource.
                     type: object
                     x-kubernetes-map-type: granular
+                  upgradeOverride:
+                    description: A upgrade_override block as defined below.
+                    items:
+                      properties:
+                        effectiveUntil:
+                          description: Specifies the duration, in RFC 3339 format
+                            (e.g., 2025-10-01T13:00:00Z), the upgrade_override values
+                            are effective. This field must be set for the upgrade_override
+                            values to take effect. The date-time must be within the
+                            next 30 days.
+                          type: string
+                        forceUpgradeEnabled:
+                          description: Whether to force upgrade the cluster. Possible
+                            values are true or false.
+                          type: boolean
+                      type: object
+                    type: array
                   webAppRouting:
                     description: A web_app_routing block as defined below.
                     items:
                       properties:
-                        dnsZoneId:
-                          description: The Kubernetes Managed Cluster ID.
-                          type: string
                         dnsZoneIds:
                           description: Specifies the list of the DNS Zone IDs in which
                             DNS entries are created for applications deployed to the
@@ -6015,16 +5750,10 @@ spec:
                           description: Specifies whether KEDA Autoscaler can be used
                             for workloads.
                           type: boolean
-                        verticalPodAutoscalerControlledValues:
-                          description: Which resources values should be controlled.
-                          type: string
                         verticalPodAutoscalerEnabled:
                           description: Specifies whether Vertical Pod Autoscaler should
                             be enabled.
                           type: boolean
-                        verticalPodAutoscalerUpdateMode:
-                          description: How the autoscaler applies changes to pod resources.
-                          type: string
                       type: object
                     type: array
                   workloadIdentityEnabled:
@@ -6244,103 +5973,21 @@ spec:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
-                      subnetId:
-                        description: The ID of the subnet on which to create an Application
-                          Gateway, which in turn will be integrated with the ingress
-                          controller of this Kubernetes Cluster. See this page for
-                          further details.
-                        type: string
-                      subnetIdRef:
-                        description: Reference to a Subnet in network to populate
-                          subnetId.
-                        properties:
-                          name:
-                            description: Name of the referenced object.
-                            type: string
-                          policy:
-                            description: Policies for referencing.
-                            properties:
-                              resolution:
-                                default: Required
-                                description: |-
-                                  Resolution specifies whether resolution of this reference is required.
-                                  The default is 'Required', which means the reconcile will fail if the
-                                  reference cannot be resolved. 'Optional' means this reference will be
-                                  a no-op if it cannot be resolved.
-                                enum:
-                                - Required
-                                - Optional
-                                type: string
-                              resolve:
-                                description: |-
-                                  Resolve specifies when this reference should be resolved. The default
-                                  is 'IfNotPresent', which will attempt to resolve the reference only when
-                                  the corresponding field is not present. Use 'Always' to resolve the
-                                  reference on every reconcile.
-                                enum:
-                                - Always
-                                - IfNotPresent
-                                type: string
-                            type: object
-                        required:
-                        - name
-                        type: object
-                      subnetIdSelector:
-                        description: Selector for a Subnet in network to populate
-                          subnetId.
-                        properties:
-                          matchControllerRef:
-                            description: |-
-                              MatchControllerRef ensures an object with the same controller reference
-                              as the selecting object is selected.
-                            type: boolean
-                          matchLabels:
-                            additionalProperties:
-                              type: string
-                            description: MatchLabels ensures an object with matching
-                              labels is selected.
-                            type: object
-                          policy:
-                            description: Policies for selection.
-                            properties:
-                              resolution:
-                                default: Required
-                                description: |-
-                                  Resolution specifies whether resolution of this reference is required.
-                                  The default is 'Required', which means the reconcile will fail if the
-                                  reference cannot be resolved. 'Optional' means this reference will be
-                                  a no-op if it cannot be resolved.
-                                enum:
-                                - Required
-                                - Optional
-                                type: string
-                              resolve:
-                                description: |-
-                                  Resolve specifies when this reference should be resolved. The default
-                                  is 'IfNotPresent', which will attempt to resolve the reference only when
-                                  the corresponding field is not present. Use 'Always' to resolve the
-                                  reference on every reconcile.
-                                enum:
-                                - Always
-                                - IfNotPresent
-                                type: string
-                            type: object
-                        type: object
-                      vnetIntegrationEnabled:
-                        type: boolean
                     type: object
-                  apiServerAuthorizedIpRanges:
-                    description: Deprecated in favor of `spec.forProvider.apiServerAccessProfile[0].authorizedIpRanges`
-                    items:
-                      type: string
-                    type: array
-                    x-kubernetes-list-type: set
                   autoScalerProfile:
                     description: A auto_scaler_profile block as defined below.
                     properties:
                       balanceSimilarNodeGroups:
                         description: Detect similar node groups and balance the number
                           of nodes between them. Defaults to false.
+                        type: boolean
+                      daemonsetEvictionForEmptyNodesEnabled:
+                        description: Whether DaemonSet pods will be gracefully terminated
+                          from empty nodes. Defaults to false.
+                        type: boolean
+                      daemonsetEvictionForOccupiedNodesEnabled:
+                        description: Whether DaemonSet pods will be gracefully terminated
+                          from non-empty nodes. Defaults to true.
                         type: boolean
                       emptyBulkDeleteMax:
                         description: Maximum number of empty nodes that can be deleted
@@ -6350,6 +5997,10 @@ spec:
                         description: Expander to use. Possible values are least-waste,
                           priority, most-pods and random. Defaults to random.
                         type: string
+                      ignoreDaemonsetsUtilizationEnabled:
+                        description: Whether DaemonSet pods will be ignored when calculating
+                          resource utilization for scale down. Defaults to false.
+                        type: boolean
                       maxGracefulTerminationSec:
                         description: Maximum number of seconds the cluster autoscaler
                           waits for pod termination when trying to scale down a node.
@@ -6414,7 +6065,7 @@ spec:
                           mirror pods). Defaults to true.
                         type: boolean
                     type: object
-                  automaticChannelUpgrade:
+                  automaticUpgradeChannel:
                     description: The upgrade channel for this Kubernetes Cluster.
                       Possible values are patch, rapid, node-image and stable. Omitting
                       this field sets this value to none.
@@ -6433,35 +6084,6 @@ spec:
                         description: Is Role Based Access Control based on Azure AD
                           enabled?
                         type: boolean
-                      clientAppId:
-                        description: The Kubernetes Managed Cluster ID.
-                        type: string
-                      managed:
-                        description: Is the Azure Active Directory integration Managed,
-                          meaning that Azure will create/manage the Service Principal
-                          used for integration. Defaults to false.
-                        type: boolean
-                      serverAppId:
-                        description: The Kubernetes Managed Cluster ID.
-                        type: string
-                      serverAppSecretSecretRef:
-                        description: A SecretKeySelector is a reference to a secret
-                          key in an arbitrary namespace.
-                        properties:
-                          key:
-                            description: The key to select.
-                            type: string
-                          name:
-                            description: Name of the secret.
-                            type: string
-                          namespace:
-                            description: Namespace of the secret.
-                            type: string
-                        required:
-                        - key
-                        - name
-                        - namespace
-                        type: object
                       tenantId:
                         description: The Tenant ID used for Azure Active Directory
                           Application. If this isn't specified the Tenant ID of the
@@ -6488,34 +6110,19 @@ spec:
                       Namespace and Deployment details to the Cost Analysis views
                       in the Azure portal.
                     type: boolean
-                  customCaTrustCertificatesBase64:
-                    items:
-                      type: string
-                    type: array
                   defaultNodePool:
-                    description: A default_node_pool block as defined below.
+                    description: Specifies configuration for "System" mode node pool.
+                      A default_node_pool block as defined below.
                     properties:
+                      autoScalingEnabled:
+                        description: Should the Kubernetes Auto Scaler be enabled
+                          for this Node Pool?
+                        type: boolean
                       capacityReservationGroupId:
                         description: Specifies the ID of the Capacity Reservation
                           Group within which this AKS Cluster should be created. Changing
                           this forces a new resource to be created.
                         type: string
-                      customCaTrustEnabled:
-                        type: boolean
-                      enableAutoScaling:
-                        description: Should the Kubernetes Auto Scaler be enabled
-                          for this Node Pool?
-                        type: boolean
-                      enableHostEncryption:
-                        description: Should the nodes in the Default Node Pool have
-                          host encryption enabled? temporary_name_for_rotation must
-                          be specified when changing this property.
-                        type: boolean
-                      enableNodePublicIp:
-                        description: Should nodes in this Node Pool have a Public
-                          IP Address? temporary_name_for_rotation must be specified
-                          when changing this property.
-                        type: boolean
                       fipsEnabled:
                         description: Should the nodes in this Node Pool have Federal
                           Information Processing Standard enabled? temporary_name_for_rotation
@@ -6528,6 +6135,11 @@ spec:
                           MIG4g and MIG7g. Changing this forces a new resource to
                           be created.
                         type: string
+                      hostEncryptionEnabled:
+                        description: Should the nodes in the Default Node Pool have
+                          host encryption enabled? temporary_name_for_rotation must
+                          be specified when changing this property.
+                        type: boolean
                       hostGroupId:
                         description: Specifies the ID of the Host Group within which
                           this AKS Cluster should be created. Changing this forces
@@ -6555,7 +6167,7 @@ spec:
                             type: number
                           cpuCfsQuotaEnabled:
                             description: Is CPU CFS quota enforcement for containers
-                              enabled?
+                              enabled? Defaults to true.
                             type: boolean
                           cpuCfsQuotaPeriod:
                             description: Specifies the CPU CFS quota period value.
@@ -6586,7 +6198,8 @@ spec:
                         type: object
                       kubeletDiskType:
                         description: The type of disk used by kubelet. Possible values
-                          are OS and Temporary.
+                          are OS and Temporary. temporary_name_for_rotation must be
+                          specified when changing this block.
                         type: string
                       linuxOsConfig:
                         description: A linux_os_config block as defined below. temporary_name_for_rotation
@@ -6736,8 +6349,6 @@ spec:
                           agent. temporary_name_for_rotation must be specified when
                           changing this property.
                         type: number
-                      messageOfTheDay:
-                        type: string
                       minCount:
                         description: The minimum number of nodes which should exist
                           in this Node Pool. If specified this must be between 1 and
@@ -6794,15 +6405,17 @@ spec:
                             type: object
                             x-kubernetes-map-type: granular
                         type: object
+                      nodePublicIpEnabled:
+                        description: Should nodes in this Node Pool have a Public
+                          IP Address? temporary_name_for_rotation must be specified
+                          when changing this property.
+                        type: boolean
                       nodePublicIpPrefixId:
                         description: Resource ID for the Public IP Addresses Prefix
-                          for the nodes in this Node Pool. enable_node_public_ip should
-                          be true. Changing this forces a new resource to be created.
+                          for the nodes in this Node Pool. node_public_ip_enabled
+                          should be true. Changing this forces a new resource to be
+                          created.
                         type: string
-                      nodeTaints:
-                        items:
-                          type: string
-                        type: array
                       onlyCriticalAddonsEnabled:
                         description: Enabling this option will taint default node
                           pool with CriticalAddonsOnly=true:NoSchedule taint. temporary_name_for_rotation
@@ -6947,9 +6560,9 @@ spec:
                         type: string
                       type:
                         description: The type of Node Pool which should be created.
-                          Possible values are AvailabilitySet and VirtualMachineScaleSets.
-                          Defaults to VirtualMachineScaleSets. Changing this forces
-                          a new resource to be created.
+                          Possible values are VirtualMachineScaleSets. Defaults to
+                          VirtualMachineScaleSets. Changing this forces a new resource
+                          to be created.
                         type: string
                       ultraSsdEnabled:
                         description: Used to specify whether the UltraSSD is enabled
@@ -7095,12 +6708,11 @@ spec:
                       Changing this forces a new resource to be created.
                     type: string
                   edgeZone:
-                    description: Specifies the Edge Zone within the Azure Region where
-                      this Managed Kubernetes Cluster should exist. Changing this
-                      forces a new resource to be created.
+                    description: Specifies the Extended Zone (formerly called Edge
+                      Zone) within the Azure Region where this Managed Kubernetes
+                      Cluster should exist. Changing this forces a new resource to
+                      be created.
                     type: string
-                  enablePodSecurityPolicy:
-                    type: boolean
                   httpApplicationRoutingEnabled:
                     description: Should HTTP Application Routing be enabled?
                     type: boolean
@@ -7242,7 +6854,7 @@ spec:
                     type: boolean
                   imageCleanerIntervalHours:
                     description: Specifies the interval in hours when images should
-                      be cleaned up. Defaults to 48.
+                      be cleaned up. Defaults to 0.
                     type: number
                   ingressApplicationGateway:
                     description: An ingress_application_gateway block as defined below.
@@ -7373,8 +6985,8 @@ spec:
                         type: boolean
                       secretRotationInterval:
                         description: The interval to poll for secret rotation. This
-                          attribute is only set when secret_rotation is true. Defaults
-                          to 2m.
+                          attribute is only set when secret_rotation_enabled is true.
+                          Defaults to 2m.
                         type: string
                     type: object
                   kubeletIdentity:
@@ -7422,6 +7034,7 @@ spec:
                         properties:
                           keyData:
                             description: The Public SSH Key used to access the cluster.
+                              Changing this forces a new resource to be created.
                             type: string
                         type: object
                     type: object
@@ -7618,13 +7231,6 @@ spec:
                           range that will be used by cluster service discovery (kube-dns).
                           Changing this forces a new resource to be created.
                         type: string
-                      dockerBridgeCidr:
-                        description: IP address (in CIDR notation) used as the Docker
-                          bridge IP address on nodes. Changing this forces a new resource
-                          to be created.
-                        type: string
-                      ebpfDataPlane:
-                        type: string
                       ipVersions:
                         description: Specifies a list of IP versions the Kubernetes
                           Cluster will use to assign IP addresses to its nodes and
@@ -7639,15 +7245,20 @@ spec:
                           This can only be specified when load_balancer_sku is set
                           to standard. Changing this forces a new resource to be created.
                         properties:
+                          backendPoolType:
+                            description: The type of the managed inbound Load Balancer
+                              Backend Pool. Possible values are NodeIP and NodeIPConfiguration.
+                              Defaults to NodeIPConfiguration. See the documentation
+                              for more information.
+                            type: string
                           idleTimeoutInMinutes:
                             description: Desired outbound flow idle timeout in minutes
-                              for the cluster load balancer. Must be between 4 and
-                              120 inclusive. Defaults to 4.
+                              for the managed nat gateway. Must be between 4 and 120
+                              inclusive. Defaults to 4.
                             type: number
                           managedOutboundIpCount:
                             description: Count of desired managed outbound IPs for
-                              the cluster load balancer. Must be between 1 and 100
-                              inclusive.
+                              the managed nat gateway. Must be between 1 and 16 inclusive.
                             type: number
                           managedOutboundIpv6Count:
                             description: The desired number of IPv6 outbound IPs created
@@ -7691,13 +7302,12 @@ spec:
                         properties:
                           idleTimeoutInMinutes:
                             description: Desired outbound flow idle timeout in minutes
-                              for the cluster load balancer. Must be between 4 and
-                              120 inclusive. Defaults to 4.
+                              for the managed nat gateway. Must be between 4 and 120
+                              inclusive. Defaults to 4.
                             type: number
                           managedOutboundIpCount:
                             description: Count of desired managed outbound IPs for
-                              the cluster load balancer. Must be between 1 and 100
-                              inclusive.
+                              the managed nat gateway. Must be between 1 and 16 inclusive.
                             type: number
                         type: object
                       networkDataPlane:
@@ -7726,21 +7336,6 @@ spec:
                           between pods. Currently supported values are calico, azure
                           and cilium.
                         type: string
-                      outboundIpAddressIds:
-                        description: The ID of the Public IP Addresses which should
-                          be used for outbound communication for the cluster load
-                          balancer.
-                        items:
-                          type: string
-                        type: array
-                        x-kubernetes-list-type: set
-                      outboundIpPrefixIds:
-                        description: The ID of the outbound Public IP Address Prefixes
-                          which should be used for the cluster load balancer.
-                        items:
-                          type: string
-                        type: array
-                        x-kubernetes-list-type: set
                       outboundType:
                         description: The outbound (egress) routing method which should
                           be used for this Kubernetes Cluster. Possible values are
@@ -7776,10 +7371,10 @@ spec:
                           type: string
                         type: array
                     type: object
-                  nodeOsChannelUpgrade:
+                  nodeOsUpgradeChannel:
                     description: The upgrade channel for this Kubernetes Cluster Nodes'
                       OS Image. Possible values are Unmanaged, SecurityPatch, NodeImage
-                      and None.
+                      and None. Defaults to NodeImage.
                     type: string
                   nodeResourceGroup:
                     description: The auto-generated Resource Group which contains
@@ -7899,8 +7494,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  publicNetworkAccessEnabled:
-                    type: boolean
                   resourceGroupName:
                     description: Specifies the Resource Group where the Managed Kubernetes
                       Cluster should exist. Changing this forces a new resource to
@@ -8032,6 +7625,18 @@ spec:
                         description: The mode of the service mesh. Possible value
                           is Istio.
                         type: string
+                      revisions:
+                        description: Specify 1 or 2 Istio control plane revisions
+                          for managing minor upgrades using the canary upgrade process.
+                          For example, create the resource with revisions set to ["asm-1-20"],
+                          or leave it empty (the revisions will only be known after
+                          apply). To start the canary upgrade, change revisions to
+                          ["asm-1-20", "asm-1-21"]. To roll back the canary upgrade,
+                          revert to ["asm-1-20"]. To confirm the upgrade, change to
+                          ["asm-1-21"].
+                        items:
+                          type: string
+                        type: array
                     type: object
                   servicePrincipal:
                     description: A service_principal block as documented below. One
@@ -8072,8 +7677,6 @@ spec:
                       diskDriverEnabled:
                         description: Is the Disk CSI driver enabled? Defaults to true.
                         type: boolean
-                      diskDriverVersion:
-                        type: string
                       fileDriverEnabled:
                         description: Is the File CSI driver enabled? Defaults to true.
                         type: boolean
@@ -8093,12 +7696,23 @@ spec:
                     description: A mapping of tags to assign to the resource.
                     type: object
                     x-kubernetes-map-type: granular
+                  upgradeOverride:
+                    description: A upgrade_override block as defined below.
+                    properties:
+                      effectiveUntil:
+                        description: Specifies the duration, in RFC 3339 format (e.g.,
+                          2025-10-01T13:00:00Z), the upgrade_override values are effective.
+                          This field must be set for the upgrade_override values to
+                          take effect. The date-time must be within the next 30 days.
+                        type: string
+                      forceUpgradeEnabled:
+                        description: Whether to force upgrade the cluster. Possible
+                          values are true or false.
+                        type: boolean
+                    type: object
                   webAppRouting:
                     description: A web_app_routing block as defined below.
                     properties:
-                      dnsZoneId:
-                        description: The Kubernetes Managed Cluster ID.
-                        type: string
                       dnsZoneIds:
                         description: Specifies the list of the DNS Zone IDs in which
                           DNS entries are created for applications deployed to the
@@ -8280,103 +7894,21 @@ spec:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
-                      subnetId:
-                        description: The ID of the subnet on which to create an Application
-                          Gateway, which in turn will be integrated with the ingress
-                          controller of this Kubernetes Cluster. See this page for
-                          further details.
-                        type: string
-                      subnetIdRef:
-                        description: Reference to a Subnet in network to populate
-                          subnetId.
-                        properties:
-                          name:
-                            description: Name of the referenced object.
-                            type: string
-                          policy:
-                            description: Policies for referencing.
-                            properties:
-                              resolution:
-                                default: Required
-                                description: |-
-                                  Resolution specifies whether resolution of this reference is required.
-                                  The default is 'Required', which means the reconcile will fail if the
-                                  reference cannot be resolved. 'Optional' means this reference will be
-                                  a no-op if it cannot be resolved.
-                                enum:
-                                - Required
-                                - Optional
-                                type: string
-                              resolve:
-                                description: |-
-                                  Resolve specifies when this reference should be resolved. The default
-                                  is 'IfNotPresent', which will attempt to resolve the reference only when
-                                  the corresponding field is not present. Use 'Always' to resolve the
-                                  reference on every reconcile.
-                                enum:
-                                - Always
-                                - IfNotPresent
-                                type: string
-                            type: object
-                        required:
-                        - name
-                        type: object
-                      subnetIdSelector:
-                        description: Selector for a Subnet in network to populate
-                          subnetId.
-                        properties:
-                          matchControllerRef:
-                            description: |-
-                              MatchControllerRef ensures an object with the same controller reference
-                              as the selecting object is selected.
-                            type: boolean
-                          matchLabels:
-                            additionalProperties:
-                              type: string
-                            description: MatchLabels ensures an object with matching
-                              labels is selected.
-                            type: object
-                          policy:
-                            description: Policies for selection.
-                            properties:
-                              resolution:
-                                default: Required
-                                description: |-
-                                  Resolution specifies whether resolution of this reference is required.
-                                  The default is 'Required', which means the reconcile will fail if the
-                                  reference cannot be resolved. 'Optional' means this reference will be
-                                  a no-op if it cannot be resolved.
-                                enum:
-                                - Required
-                                - Optional
-                                type: string
-                              resolve:
-                                description: |-
-                                  Resolve specifies when this reference should be resolved. The default
-                                  is 'IfNotPresent', which will attempt to resolve the reference only when
-                                  the corresponding field is not present. Use 'Always' to resolve the
-                                  reference on every reconcile.
-                                enum:
-                                - Always
-                                - IfNotPresent
-                                type: string
-                            type: object
-                        type: object
-                      vnetIntegrationEnabled:
-                        type: boolean
                     type: object
-                  apiServerAuthorizedIpRanges:
-                    description: Deprecated in favor of `spec.forProvider.apiServerAccessProfile[0].authorizedIpRanges`
-                    items:
-                      type: string
-                    type: array
-                    x-kubernetes-list-type: set
                   autoScalerProfile:
                     description: A auto_scaler_profile block as defined below.
                     properties:
                       balanceSimilarNodeGroups:
                         description: Detect similar node groups and balance the number
                           of nodes between them. Defaults to false.
+                        type: boolean
+                      daemonsetEvictionForEmptyNodesEnabled:
+                        description: Whether DaemonSet pods will be gracefully terminated
+                          from empty nodes. Defaults to false.
+                        type: boolean
+                      daemonsetEvictionForOccupiedNodesEnabled:
+                        description: Whether DaemonSet pods will be gracefully terminated
+                          from non-empty nodes. Defaults to true.
                         type: boolean
                       emptyBulkDeleteMax:
                         description: Maximum number of empty nodes that can be deleted
@@ -8386,6 +7918,10 @@ spec:
                         description: Expander to use. Possible values are least-waste,
                           priority, most-pods and random. Defaults to random.
                         type: string
+                      ignoreDaemonsetsUtilizationEnabled:
+                        description: Whether DaemonSet pods will be ignored when calculating
+                          resource utilization for scale down. Defaults to false.
+                        type: boolean
                       maxGracefulTerminationSec:
                         description: Maximum number of seconds the cluster autoscaler
                           waits for pod termination when trying to scale down a node.
@@ -8450,7 +7986,7 @@ spec:
                           mirror pods). Defaults to true.
                         type: boolean
                     type: object
-                  automaticChannelUpgrade:
+                  automaticUpgradeChannel:
                     description: The upgrade channel for this Kubernetes Cluster.
                       Possible values are patch, rapid, node-image and stable. Omitting
                       this field sets this value to none.
@@ -8469,35 +8005,6 @@ spec:
                         description: Is Role Based Access Control based on Azure AD
                           enabled?
                         type: boolean
-                      clientAppId:
-                        description: The Kubernetes Managed Cluster ID.
-                        type: string
-                      managed:
-                        description: Is the Azure Active Directory integration Managed,
-                          meaning that Azure will create/manage the Service Principal
-                          used for integration. Defaults to false.
-                        type: boolean
-                      serverAppId:
-                        description: The Kubernetes Managed Cluster ID.
-                        type: string
-                      serverAppSecretSecretRef:
-                        description: A SecretKeySelector is a reference to a secret
-                          key in an arbitrary namespace.
-                        properties:
-                          key:
-                            description: The key to select.
-                            type: string
-                          name:
-                            description: Name of the secret.
-                            type: string
-                          namespace:
-                            description: Namespace of the secret.
-                            type: string
-                        required:
-                        - key
-                        - name
-                        - namespace
-                        type: object
                       tenantId:
                         description: The Tenant ID used for Azure Active Directory
                           Application. If this isn't specified the Tenant ID of the
@@ -8524,34 +8031,19 @@ spec:
                       Namespace and Deployment details to the Cost Analysis views
                       in the Azure portal.
                     type: boolean
-                  customCaTrustCertificatesBase64:
-                    items:
-                      type: string
-                    type: array
                   defaultNodePool:
-                    description: A default_node_pool block as defined below.
+                    description: Specifies configuration for "System" mode node pool.
+                      A default_node_pool block as defined below.
                     properties:
+                      autoScalingEnabled:
+                        description: Should the Kubernetes Auto Scaler be enabled
+                          for this Node Pool?
+                        type: boolean
                       capacityReservationGroupId:
                         description: Specifies the ID of the Capacity Reservation
                           Group within which this AKS Cluster should be created. Changing
                           this forces a new resource to be created.
                         type: string
-                      customCaTrustEnabled:
-                        type: boolean
-                      enableAutoScaling:
-                        description: Should the Kubernetes Auto Scaler be enabled
-                          for this Node Pool?
-                        type: boolean
-                      enableHostEncryption:
-                        description: Should the nodes in the Default Node Pool have
-                          host encryption enabled? temporary_name_for_rotation must
-                          be specified when changing this property.
-                        type: boolean
-                      enableNodePublicIp:
-                        description: Should nodes in this Node Pool have a Public
-                          IP Address? temporary_name_for_rotation must be specified
-                          when changing this property.
-                        type: boolean
                       fipsEnabled:
                         description: Should the nodes in this Node Pool have Federal
                           Information Processing Standard enabled? temporary_name_for_rotation
@@ -8564,6 +8056,11 @@ spec:
                           MIG4g and MIG7g. Changing this forces a new resource to
                           be created.
                         type: string
+                      hostEncryptionEnabled:
+                        description: Should the nodes in the Default Node Pool have
+                          host encryption enabled? temporary_name_for_rotation must
+                          be specified when changing this property.
+                        type: boolean
                       hostGroupId:
                         description: Specifies the ID of the Host Group within which
                           this AKS Cluster should be created. Changing this forces
@@ -8591,7 +8088,7 @@ spec:
                             type: number
                           cpuCfsQuotaEnabled:
                             description: Is CPU CFS quota enforcement for containers
-                              enabled?
+                              enabled? Defaults to true.
                             type: boolean
                           cpuCfsQuotaPeriod:
                             description: Specifies the CPU CFS quota period value.
@@ -8622,7 +8119,8 @@ spec:
                         type: object
                       kubeletDiskType:
                         description: The type of disk used by kubelet. Possible values
-                          are OS and Temporary.
+                          are OS and Temporary. temporary_name_for_rotation must be
+                          specified when changing this block.
                         type: string
                       linuxOsConfig:
                         description: A linux_os_config block as defined below. temporary_name_for_rotation
@@ -8772,8 +8270,6 @@ spec:
                           agent. temporary_name_for_rotation must be specified when
                           changing this property.
                         type: number
-                      messageOfTheDay:
-                        type: string
                       minCount:
                         description: The minimum number of nodes which should exist
                           in this Node Pool. If specified this must be between 1 and
@@ -8830,15 +8326,17 @@ spec:
                             type: object
                             x-kubernetes-map-type: granular
                         type: object
+                      nodePublicIpEnabled:
+                        description: Should nodes in this Node Pool have a Public
+                          IP Address? temporary_name_for_rotation must be specified
+                          when changing this property.
+                        type: boolean
                       nodePublicIpPrefixId:
                         description: Resource ID for the Public IP Addresses Prefix
-                          for the nodes in this Node Pool. enable_node_public_ip should
-                          be true. Changing this forces a new resource to be created.
+                          for the nodes in this Node Pool. node_public_ip_enabled
+                          should be true. Changing this forces a new resource to be
+                          created.
                         type: string
-                      nodeTaints:
-                        items:
-                          type: string
-                        type: array
                       onlyCriticalAddonsEnabled:
                         description: Enabling this option will taint default node
                           pool with CriticalAddonsOnly=true:NoSchedule taint. temporary_name_for_rotation
@@ -8983,9 +8481,9 @@ spec:
                         type: string
                       type:
                         description: The type of Node Pool which should be created.
-                          Possible values are AvailabilitySet and VirtualMachineScaleSets.
-                          Defaults to VirtualMachineScaleSets. Changing this forces
-                          a new resource to be created.
+                          Possible values are VirtualMachineScaleSets. Defaults to
+                          VirtualMachineScaleSets. Changing this forces a new resource
+                          to be created.
                         type: string
                       ultraSsdEnabled:
                         description: Used to specify whether the UltraSSD is enabled
@@ -9131,12 +8629,11 @@ spec:
                       Changing this forces a new resource to be created.
                     type: string
                   edgeZone:
-                    description: Specifies the Edge Zone within the Azure Region where
-                      this Managed Kubernetes Cluster should exist. Changing this
-                      forces a new resource to be created.
+                    description: Specifies the Extended Zone (formerly called Edge
+                      Zone) within the Azure Region where this Managed Kubernetes
+                      Cluster should exist. Changing this forces a new resource to
+                      be created.
                     type: string
-                  enablePodSecurityPolicy:
-                    type: boolean
                   httpApplicationRoutingEnabled:
                     description: Should HTTP Application Routing be enabled?
                     type: boolean
@@ -9278,7 +8775,7 @@ spec:
                     type: boolean
                   imageCleanerIntervalHours:
                     description: Specifies the interval in hours when images should
-                      be cleaned up. Defaults to 48.
+                      be cleaned up. Defaults to 0.
                     type: number
                   ingressApplicationGateway:
                     description: An ingress_application_gateway block as defined below.
@@ -9409,8 +8906,8 @@ spec:
                         type: boolean
                       secretRotationInterval:
                         description: The interval to poll for secret rotation. This
-                          attribute is only set when secret_rotation is true. Defaults
-                          to 2m.
+                          attribute is only set when secret_rotation_enabled is true.
+                          Defaults to 2m.
                         type: string
                     type: object
                   kubeletIdentity:
@@ -9458,6 +8955,7 @@ spec:
                         properties:
                           keyData:
                             description: The Public SSH Key used to access the cluster.
+                              Changing this forces a new resource to be created.
                             type: string
                         type: object
                     type: object
@@ -9654,13 +9152,6 @@ spec:
                           range that will be used by cluster service discovery (kube-dns).
                           Changing this forces a new resource to be created.
                         type: string
-                      dockerBridgeCidr:
-                        description: IP address (in CIDR notation) used as the Docker
-                          bridge IP address on nodes. Changing this forces a new resource
-                          to be created.
-                        type: string
-                      ebpfDataPlane:
-                        type: string
                       ipVersions:
                         description: Specifies a list of IP versions the Kubernetes
                           Cluster will use to assign IP addresses to its nodes and
@@ -9675,15 +9166,20 @@ spec:
                           This can only be specified when load_balancer_sku is set
                           to standard. Changing this forces a new resource to be created.
                         properties:
+                          backendPoolType:
+                            description: The type of the managed inbound Load Balancer
+                              Backend Pool. Possible values are NodeIP and NodeIPConfiguration.
+                              Defaults to NodeIPConfiguration. See the documentation
+                              for more information.
+                            type: string
                           idleTimeoutInMinutes:
                             description: Desired outbound flow idle timeout in minutes
-                              for the cluster load balancer. Must be between 4 and
-                              120 inclusive. Defaults to 4.
+                              for the managed nat gateway. Must be between 4 and 120
+                              inclusive. Defaults to 4.
                             type: number
                           managedOutboundIpCount:
                             description: Count of desired managed outbound IPs for
-                              the cluster load balancer. Must be between 1 and 100
-                              inclusive.
+                              the managed nat gateway. Must be between 1 and 16 inclusive.
                             type: number
                           managedOutboundIpv6Count:
                             description: The desired number of IPv6 outbound IPs created
@@ -9727,13 +9223,12 @@ spec:
                         properties:
                           idleTimeoutInMinutes:
                             description: Desired outbound flow idle timeout in minutes
-                              for the cluster load balancer. Must be between 4 and
-                              120 inclusive. Defaults to 4.
+                              for the managed nat gateway. Must be between 4 and 120
+                              inclusive. Defaults to 4.
                             type: number
                           managedOutboundIpCount:
                             description: Count of desired managed outbound IPs for
-                              the cluster load balancer. Must be between 1 and 100
-                              inclusive.
+                              the managed nat gateway. Must be between 1 and 16 inclusive.
                             type: number
                         type: object
                       networkDataPlane:
@@ -9762,21 +9257,6 @@ spec:
                           between pods. Currently supported values are calico, azure
                           and cilium.
                         type: string
-                      outboundIpAddressIds:
-                        description: The ID of the Public IP Addresses which should
-                          be used for outbound communication for the cluster load
-                          balancer.
-                        items:
-                          type: string
-                        type: array
-                        x-kubernetes-list-type: set
-                      outboundIpPrefixIds:
-                        description: The ID of the outbound Public IP Address Prefixes
-                          which should be used for the cluster load balancer.
-                        items:
-                          type: string
-                        type: array
-                        x-kubernetes-list-type: set
                       outboundType:
                         description: The outbound (egress) routing method which should
                           be used for this Kubernetes Cluster. Possible values are
@@ -9812,10 +9292,10 @@ spec:
                           type: string
                         type: array
                     type: object
-                  nodeOsChannelUpgrade:
+                  nodeOsUpgradeChannel:
                     description: The upgrade channel for this Kubernetes Cluster Nodes'
                       OS Image. Possible values are Unmanaged, SecurityPatch, NodeImage
-                      and None.
+                      and None. Defaults to NodeImage.
                     type: string
                   nodeResourceGroup:
                     description: The auto-generated Resource Group which contains
@@ -9935,8 +9415,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  publicNetworkAccessEnabled:
-                    type: boolean
                   roleBasedAccessControlEnabled:
                     description: Whether Role Based Access Control for the Kubernetes
                       Cluster should be enabled. Defaults to true. Changing this forces
@@ -9987,6 +9465,18 @@ spec:
                         description: The mode of the service mesh. Possible value
                           is Istio.
                         type: string
+                      revisions:
+                        description: Specify 1 or 2 Istio control plane revisions
+                          for managing minor upgrades using the canary upgrade process.
+                          For example, create the resource with revisions set to ["asm-1-20"],
+                          or leave it empty (the revisions will only be known after
+                          apply). To start the canary upgrade, change revisions to
+                          ["asm-1-20", "asm-1-21"]. To roll back the canary upgrade,
+                          revert to ["asm-1-20"]. To confirm the upgrade, change to
+                          ["asm-1-21"].
+                        items:
+                          type: string
+                        type: array
                     type: object
                   servicePrincipal:
                     description: A service_principal block as documented below. One
@@ -10029,8 +9519,6 @@ spec:
                       diskDriverEnabled:
                         description: Is the Disk CSI driver enabled? Defaults to true.
                         type: boolean
-                      diskDriverVersion:
-                        type: string
                       fileDriverEnabled:
                         description: Is the File CSI driver enabled? Defaults to true.
                         type: boolean
@@ -10050,12 +9538,23 @@ spec:
                     description: A mapping of tags to assign to the resource.
                     type: object
                     x-kubernetes-map-type: granular
+                  upgradeOverride:
+                    description: A upgrade_override block as defined below.
+                    properties:
+                      effectiveUntil:
+                        description: Specifies the duration, in RFC 3339 format (e.g.,
+                          2025-10-01T13:00:00Z), the upgrade_override values are effective.
+                          This field must be set for the upgrade_override values to
+                          take effect. The date-time must be within the next 30 days.
+                        type: string
+                      forceUpgradeEnabled:
+                        description: Whether to force upgrade the cluster. Possible
+                          values are true or false.
+                        type: boolean
+                    type: object
                   webAppRouting:
                     description: A web_app_routing block as defined below.
                     properties:
-                      dnsZoneId:
-                        description: The Kubernetes Managed Cluster ID.
-                        type: string
                       dnsZoneIds:
                         description: Specifies the list of the DNS Zone IDs in which
                           DNS entries are created for applications deployed to the
@@ -10111,6 +9610,8 @@ spec:
                           should be used for Node Pool Windows Virtual Machine. At
                           this time the only possible value is Windows_Server.
                         type: string
+                    required:
+                    - adminPasswordSecretRef
                     type: object
                   workloadAutoscalerProfile:
                     description: A workload_autoscaler_profile block defined below.
@@ -10348,27 +9849,21 @@ spec:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
-                      subnetId:
-                        description: The ID of the subnet on which to create an Application
-                          Gateway, which in turn will be integrated with the ingress
-                          controller of this Kubernetes Cluster. See this page for
-                          further details.
-                        type: string
-                      vnetIntegrationEnabled:
-                        type: boolean
                     type: object
-                  apiServerAuthorizedIpRanges:
-                    description: Deprecated in favor of `spec.forProvider.apiServerAccessProfile[0].authorizedIpRanges`
-                    items:
-                      type: string
-                    type: array
-                    x-kubernetes-list-type: set
                   autoScalerProfile:
                     description: A auto_scaler_profile block as defined below.
                     properties:
                       balanceSimilarNodeGroups:
                         description: Detect similar node groups and balance the number
                           of nodes between them. Defaults to false.
+                        type: boolean
+                      daemonsetEvictionForEmptyNodesEnabled:
+                        description: Whether DaemonSet pods will be gracefully terminated
+                          from empty nodes. Defaults to false.
+                        type: boolean
+                      daemonsetEvictionForOccupiedNodesEnabled:
+                        description: Whether DaemonSet pods will be gracefully terminated
+                          from non-empty nodes. Defaults to true.
                         type: boolean
                       emptyBulkDeleteMax:
                         description: Maximum number of empty nodes that can be deleted
@@ -10378,6 +9873,10 @@ spec:
                         description: Expander to use. Possible values are least-waste,
                           priority, most-pods and random. Defaults to random.
                         type: string
+                      ignoreDaemonsetsUtilizationEnabled:
+                        description: Whether DaemonSet pods will be ignored when calculating
+                          resource utilization for scale down. Defaults to false.
+                        type: boolean
                       maxGracefulTerminationSec:
                         description: Maximum number of seconds the cluster autoscaler
                           waits for pod termination when trying to scale down a node.
@@ -10442,7 +9941,7 @@ spec:
                           mirror pods). Defaults to true.
                         type: boolean
                     type: object
-                  automaticChannelUpgrade:
+                  automaticUpgradeChannel:
                     description: The upgrade channel for this Kubernetes Cluster.
                       Possible values are patch, rapid, node-image and stable. Omitting
                       this field sets this value to none.
@@ -10461,17 +9960,6 @@ spec:
                         description: Is Role Based Access Control based on Azure AD
                           enabled?
                         type: boolean
-                      clientAppId:
-                        description: The Kubernetes Managed Cluster ID.
-                        type: string
-                      managed:
-                        description: Is the Azure Active Directory integration Managed,
-                          meaning that Azure will create/manage the Service Principal
-                          used for integration. Defaults to false.
-                        type: boolean
-                      serverAppId:
-                        description: The Kubernetes Managed Cluster ID.
-                        type: string
                       tenantId:
                         description: The Tenant ID used for Azure Active Directory
                           Application. If this isn't specified the Tenant ID of the
@@ -10502,34 +9990,19 @@ spec:
                     description: The current version running on the Azure Kubernetes
                       Managed Cluster.
                     type: string
-                  customCaTrustCertificatesBase64:
-                    items:
-                      type: string
-                    type: array
                   defaultNodePool:
-                    description: A default_node_pool block as defined below.
+                    description: Specifies configuration for "System" mode node pool.
+                      A default_node_pool block as defined below.
                     properties:
+                      autoScalingEnabled:
+                        description: Should the Kubernetes Auto Scaler be enabled
+                          for this Node Pool?
+                        type: boolean
                       capacityReservationGroupId:
                         description: Specifies the ID of the Capacity Reservation
                           Group within which this AKS Cluster should be created. Changing
                           this forces a new resource to be created.
                         type: string
-                      customCaTrustEnabled:
-                        type: boolean
-                      enableAutoScaling:
-                        description: Should the Kubernetes Auto Scaler be enabled
-                          for this Node Pool?
-                        type: boolean
-                      enableHostEncryption:
-                        description: Should the nodes in the Default Node Pool have
-                          host encryption enabled? temporary_name_for_rotation must
-                          be specified when changing this property.
-                        type: boolean
-                      enableNodePublicIp:
-                        description: Should nodes in this Node Pool have a Public
-                          IP Address? temporary_name_for_rotation must be specified
-                          when changing this property.
-                        type: boolean
                       fipsEnabled:
                         description: Should the nodes in this Node Pool have Federal
                           Information Processing Standard enabled? temporary_name_for_rotation
@@ -10542,6 +10015,11 @@ spec:
                           MIG4g and MIG7g. Changing this forces a new resource to
                           be created.
                         type: string
+                      hostEncryptionEnabled:
+                        description: Should the nodes in the Default Node Pool have
+                          host encryption enabled? temporary_name_for_rotation must
+                          be specified when changing this property.
+                        type: boolean
                       hostGroupId:
                         description: Specifies the ID of the Host Group within which
                           this AKS Cluster should be created. Changing this forces
@@ -10569,7 +10047,7 @@ spec:
                             type: number
                           cpuCfsQuotaEnabled:
                             description: Is CPU CFS quota enforcement for containers
-                              enabled?
+                              enabled? Defaults to true.
                             type: boolean
                           cpuCfsQuotaPeriod:
                             description: Specifies the CPU CFS quota period value.
@@ -10600,7 +10078,8 @@ spec:
                         type: object
                       kubeletDiskType:
                         description: The type of disk used by kubelet. Possible values
-                          are OS and Temporary.
+                          are OS and Temporary. temporary_name_for_rotation must be
+                          specified when changing this block.
                         type: string
                       linuxOsConfig:
                         description: A linux_os_config block as defined below. temporary_name_for_rotation
@@ -10750,8 +10229,6 @@ spec:
                           agent. temporary_name_for_rotation must be specified when
                           changing this property.
                         type: number
-                      messageOfTheDay:
-                        type: string
                       minCount:
                         description: The minimum number of nodes which should exist
                           in this Node Pool. If specified this must be between 1 and
@@ -10808,15 +10285,17 @@ spec:
                             type: object
                             x-kubernetes-map-type: granular
                         type: object
+                      nodePublicIpEnabled:
+                        description: Should nodes in this Node Pool have a Public
+                          IP Address? temporary_name_for_rotation must be specified
+                          when changing this property.
+                        type: boolean
                       nodePublicIpPrefixId:
                         description: Resource ID for the Public IP Addresses Prefix
-                          for the nodes in this Node Pool. enable_node_public_ip should
-                          be true. Changing this forces a new resource to be created.
+                          for the nodes in this Node Pool. node_public_ip_enabled
+                          should be true. Changing this forces a new resource to be
+                          created.
                         type: string
-                      nodeTaints:
-                        items:
-                          type: string
-                        type: array
                       onlyCriticalAddonsEnabled:
                         description: Enabling this option will taint default node
                           pool with CriticalAddonsOnly=true:NoSchedule taint. temporary_name_for_rotation
@@ -10885,9 +10364,9 @@ spec:
                         type: string
                       type:
                         description: The type of Node Pool which should be created.
-                          Possible values are AvailabilitySet and VirtualMachineScaleSets.
-                          Defaults to VirtualMachineScaleSets. Changing this forces
-                          a new resource to be created.
+                          Possible values are VirtualMachineScaleSets. Defaults to
+                          VirtualMachineScaleSets. Changing this forces a new resource
+                          to be created.
                         type: string
                       ultraSsdEnabled:
                         description: Used to specify whether the UltraSSD is enabled
@@ -10957,12 +10436,11 @@ spec:
                       Changing this forces a new resource to be created.
                     type: string
                   edgeZone:
-                    description: Specifies the Edge Zone within the Azure Region where
-                      this Managed Kubernetes Cluster should exist. Changing this
-                      forces a new resource to be created.
+                    description: Specifies the Extended Zone (formerly called Edge
+                      Zone) within the Azure Region where this Managed Kubernetes
+                      Cluster should exist. Changing this forces a new resource to
+                      be created.
                     type: string
-                  enablePodSecurityPolicy:
-                    type: boolean
                   fqdn:
                     description: The FQDN of the Azure Kubernetes Managed Cluster.
                     type: string
@@ -11024,7 +10502,7 @@ spec:
                     type: boolean
                   imageCleanerIntervalHours:
                     description: Specifies the interval in hours when images should
-                      be cleaned up. Defaults to 48.
+                      be cleaned up. Defaults to 0.
                     type: number
                   ingressApplicationGateway:
                     description: An ingress_application_gateway block as defined below.
@@ -11122,8 +10600,8 @@ spec:
                         type: boolean
                       secretRotationInterval:
                         description: The interval to poll for secret rotation. This
-                          attribute is only set when secret_rotation is true. Defaults
-                          to 2m.
+                          attribute is only set when secret_rotation_enabled is true.
+                          Defaults to 2m.
                         type: string
                     type: object
                   kubeletIdentity:
@@ -11171,6 +10649,7 @@ spec:
                         properties:
                           keyData:
                             description: The Public SSH Key used to access the cluster.
+                              Changing this forces a new resource to be created.
                             type: string
                         type: object
                     type: object
@@ -11367,13 +10846,6 @@ spec:
                           range that will be used by cluster service discovery (kube-dns).
                           Changing this forces a new resource to be created.
                         type: string
-                      dockerBridgeCidr:
-                        description: IP address (in CIDR notation) used as the Docker
-                          bridge IP address on nodes. Changing this forces a new resource
-                          to be created.
-                        type: string
-                      ebpfDataPlane:
-                        type: string
                       ipVersions:
                         description: Specifies a list of IP versions the Kubernetes
                           Cluster will use to assign IP addresses to its nodes and
@@ -11388,6 +10860,12 @@ spec:
                           This can only be specified when load_balancer_sku is set
                           to standard. Changing this forces a new resource to be created.
                         properties:
+                          backendPoolType:
+                            description: The type of the managed inbound Load Balancer
+                              Backend Pool. Possible values are NodeIP and NodeIPConfiguration.
+                              Defaults to NodeIPConfiguration. See the documentation
+                              for more information.
+                            type: string
                           effectiveOutboundIps:
                             description: The outcome (resource IDs) of the specified
                               arguments.
@@ -11397,13 +10875,12 @@ spec:
                             x-kubernetes-list-type: set
                           idleTimeoutInMinutes:
                             description: Desired outbound flow idle timeout in minutes
-                              for the cluster load balancer. Must be between 4 and
-                              120 inclusive. Defaults to 4.
+                              for the managed nat gateway. Must be between 4 and 120
+                              inclusive. Defaults to 4.
                             type: number
                           managedOutboundIpCount:
                             description: Count of desired managed outbound IPs for
-                              the cluster load balancer. Must be between 1 and 100
-                              inclusive.
+                              the managed nat gateway. Must be between 1 and 16 inclusive.
                             type: number
                           managedOutboundIpv6Count:
                             description: The desired number of IPv6 outbound IPs created
@@ -11454,13 +10931,12 @@ spec:
                             x-kubernetes-list-type: set
                           idleTimeoutInMinutes:
                             description: Desired outbound flow idle timeout in minutes
-                              for the cluster load balancer. Must be between 4 and
-                              120 inclusive. Defaults to 4.
+                              for the managed nat gateway. Must be between 4 and 120
+                              inclusive. Defaults to 4.
                             type: number
                           managedOutboundIpCount:
                             description: Count of desired managed outbound IPs for
-                              the cluster load balancer. Must be between 1 and 100
-                              inclusive.
+                              the managed nat gateway. Must be between 1 and 16 inclusive.
                             type: number
                         type: object
                       networkDataPlane:
@@ -11489,21 +10965,6 @@ spec:
                           between pods. Currently supported values are calico, azure
                           and cilium.
                         type: string
-                      outboundIpAddressIds:
-                        description: The ID of the Public IP Addresses which should
-                          be used for outbound communication for the cluster load
-                          balancer.
-                        items:
-                          type: string
-                        type: array
-                        x-kubernetes-list-type: set
-                      outboundIpPrefixIds:
-                        description: The ID of the outbound Public IP Address Prefixes
-                          which should be used for the cluster load balancer.
-                        items:
-                          type: string
-                        type: array
-                        x-kubernetes-list-type: set
                       outboundType:
                         description: The outbound (egress) routing method which should
                           be used for this Kubernetes Cluster. Possible values are
@@ -11539,10 +11000,10 @@ spec:
                           type: string
                         type: array
                     type: object
-                  nodeOsChannelUpgrade:
+                  nodeOsUpgradeChannel:
                     description: The upgrade channel for this Kubernetes Cluster Nodes'
                       OS Image. Possible values are Unmanaged, SecurityPatch, NodeImage
-                      and None.
+                      and None. Defaults to NodeImage.
                     type: string
                   nodeResourceGroup:
                     description: The auto-generated Resource Group which contains
@@ -11622,8 +11083,6 @@ spec:
                       link has been enabled, which is only resolvable inside the Virtual
                       Network used by the Kubernetes Cluster.
                     type: string
-                  publicNetworkAccessEnabled:
-                    type: boolean
                   resourceGroupName:
                     description: Specifies the Resource Group where the Managed Kubernetes
                       Cluster should exist. Changing this forces a new resource to
@@ -11679,6 +11138,18 @@ spec:
                         description: The mode of the service mesh. Possible value
                           is Istio.
                         type: string
+                      revisions:
+                        description: Specify 1 or 2 Istio control plane revisions
+                          for managing minor upgrades using the canary upgrade process.
+                          For example, create the resource with revisions set to ["asm-1-20"],
+                          or leave it empty (the revisions will only be known after
+                          apply). To start the canary upgrade, change revisions to
+                          ["asm-1-20", "asm-1-21"]. To roll back the canary upgrade,
+                          revert to ["asm-1-20"]. To confirm the upgrade, change to
+                          ["asm-1-21"].
+                        items:
+                          type: string
+                        type: array
                     type: object
                   servicePrincipal:
                     description: A service_principal block as documented below. One
@@ -11702,8 +11173,6 @@ spec:
                       diskDriverEnabled:
                         description: Is the Disk CSI driver enabled? Defaults to true.
                         type: boolean
-                      diskDriverVersion:
-                        type: string
                       fileDriverEnabled:
                         description: Is the File CSI driver enabled? Defaults to true.
                         type: boolean
@@ -11723,12 +11192,23 @@ spec:
                     description: A mapping of tags to assign to the resource.
                     type: object
                     x-kubernetes-map-type: granular
+                  upgradeOverride:
+                    description: A upgrade_override block as defined below.
+                    properties:
+                      effectiveUntil:
+                        description: Specifies the duration, in RFC 3339 format (e.g.,
+                          2025-10-01T13:00:00Z), the upgrade_override values are effective.
+                          This field must be set for the upgrade_override values to
+                          take effect. The date-time must be within the next 30 days.
+                        type: string
+                      forceUpgradeEnabled:
+                        description: Whether to force upgrade the cluster. Possible
+                          values are true or false.
+                        type: boolean
+                    type: object
                   webAppRouting:
                     description: A web_app_routing block as defined below.
                     properties:
-                      dnsZoneId:
-                        description: The Kubernetes Managed Cluster ID.
-                        type: string
                       dnsZoneIds:
                         description: Specifies the list of the DNS Zone IDs in which
                           DNS entries are created for applications deployed to the
@@ -11793,14 +11273,10 @@ spec:
                         description: Specifies whether KEDA Autoscaler can be used
                           for workloads.
                         type: boolean
-                      verticalPodAutoscalerControlledValues:
-                        type: string
                       verticalPodAutoscalerEnabled:
                         description: Specifies whether Vertical Pod Autoscaler should
                           be enabled.
                         type: boolean
-                      verticalPodAutoscalerUpdateMode:
-                        type: string
                     type: object
                   workloadIdentityEnabled:
                     description: Specifies whether Azure AD Workload Identity should

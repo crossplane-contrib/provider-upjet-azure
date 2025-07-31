@@ -74,7 +74,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    enablePartitioning: true
+    enable_partitioning: true
     namespaceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example

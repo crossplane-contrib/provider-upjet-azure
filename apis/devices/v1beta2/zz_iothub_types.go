@@ -123,7 +123,7 @@ type FallbackRouteObservation struct {
 	// The condition that is evaluated to apply the routing rule. Defaults to true. For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language.
 	Condition *string `json:"condition,omitempty" tf:"condition,omitempty"`
 
-	// Used to specify whether the fallback route is enabled.
+	// Used to specify whether the fallback route is enabled. Defaults to true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The endpoints to which messages that satisfy the condition are routed. Currently only 1 endpoint is allowed.
@@ -276,10 +276,10 @@ type IOTHubInitParameters struct {
 	// A cloud_to_device block as defined below.
 	CloudToDevice *CloudToDeviceInitParameters `json:"cloudToDevice,omitempty" tf:"cloud_to_device,omitempty"`
 
-	// The number of device-to-cloud partitions used by backing event hubs. Must be between 2 and 128.
+	// The number of device-to-cloud partitions used by backing event hubs. Must be between 2 and 128. Defaults to 4.
 	EventHubPartitionCount *float64 `json:"eventHubPartitionCount,omitempty" tf:"event_hub_partition_count,omitempty"`
 
-	// The event hub retention to use in days. Must be between 1 and 7.
+	// The event hub retention to use in days. Must be between 1 and 7. Defaults to 1.
 	EventHubRetentionInDays *float64 `json:"eventHubRetentionInDays,omitempty" tf:"event_hub_retention_in_days,omitempty"`
 
 	// A file_upload block as defined below.
@@ -337,10 +337,10 @@ type IOTHubObservation struct {
 	// The EventHub compatible path for operational data
 	EventHubOperationsPath *string `json:"eventHubOperationsPath,omitempty" tf:"event_hub_operations_path,omitempty"`
 
-	// The number of device-to-cloud partitions used by backing event hubs. Must be between 2 and 128.
+	// The number of device-to-cloud partitions used by backing event hubs. Must be between 2 and 128. Defaults to 4.
 	EventHubPartitionCount *float64 `json:"eventHubPartitionCount,omitempty" tf:"event_hub_partition_count,omitempty"`
 
-	// The event hub retention to use in days. Must be between 1 and 7.
+	// The event hub retention to use in days. Must be between 1 and 7. Defaults to 1.
 	EventHubRetentionInDays *float64 `json:"eventHubRetentionInDays,omitempty" tf:"event_hub_retention_in_days,omitempty"`
 
 	// A fallback_route block as defined below. If the fallback route is enabled, messages that don't match any of the supplied routes are automatically sent to this route. Defaults to messages/events.
@@ -399,11 +399,11 @@ type IOTHubParameters struct {
 	// +kubebuilder:validation:Optional
 	CloudToDevice *CloudToDeviceParameters `json:"cloudToDevice,omitempty" tf:"cloud_to_device,omitempty"`
 
-	// The number of device-to-cloud partitions used by backing event hubs. Must be between 2 and 128.
+	// The number of device-to-cloud partitions used by backing event hubs. Must be between 2 and 128. Defaults to 4.
 	// +kubebuilder:validation:Optional
 	EventHubPartitionCount *float64 `json:"eventHubPartitionCount,omitempty" tf:"event_hub_partition_count,omitempty"`
 
-	// The event hub retention to use in days. Must be between 1 and 7.
+	// The event hub retention to use in days. Must be between 1 and 7. Defaults to 1.
 	// +kubebuilder:validation:Optional
 	EventHubRetentionInDays *float64 `json:"eventHubRetentionInDays,omitempty" tf:"event_hub_retention_in_days,omitempty"`
 

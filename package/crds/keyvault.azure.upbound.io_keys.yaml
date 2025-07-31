@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.14.0
+    controller-gen.kubebuilder.io/version: v0.16.5
   name: keys.keyvault.azure.upbound.io
 spec:
   group: keyvault.azure.upbound.io
@@ -810,10 +810,7 @@ spec:
                       this forces a new resource to be created.
                     type: string
                   expirationDate:
-                    description: Expiration UTC datetime (Y-m-d'T'H:M:S'Z'). When
-                      this parameter gets changed on reruns, if newer date is ahead
-                      of current date, an update is performed. If the newer date is
-                      before the current date, resource will be force created.
+                    description: Expiration UTC datetime (Y-m-d'T'H:M:S'Z').
                     type: string
                   keyOpts:
                     description: 'A list of JSON web key operations. Possible values
@@ -970,10 +967,7 @@ spec:
                       this forces a new resource to be created.
                     type: string
                   expirationDate:
-                    description: Expiration UTC datetime (Y-m-d'T'H:M:S'Z'). When
-                      this parameter gets changed on reruns, if newer date is ahead
-                      of current date, an update is performed. If the newer date is
-                      before the current date, resource will be force created.
+                    description: Expiration UTC datetime (Y-m-d'T'H:M:S'Z').
                     type: string
                   keyOpts:
                     description: 'A list of JSON web key operations. Possible values
@@ -1305,10 +1299,7 @@ spec:
                     description: The RSA public exponent of this Key Vault Key.
                     type: string
                   expirationDate:
-                    description: Expiration UTC datetime (Y-m-d'T'H:M:S'Z'). When
-                      this parameter gets changed on reruns, if newer date is ahead
-                      of current date, an update is performed. If the newer date is
-                      before the current date, resource will be force created.
+                    description: Expiration UTC datetime (Y-m-d'T'H:M:S'Z').
                     type: string
                   id:
                     description: The Key Vault Key ID.

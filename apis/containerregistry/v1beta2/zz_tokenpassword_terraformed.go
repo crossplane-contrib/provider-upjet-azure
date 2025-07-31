@@ -21,7 +21,7 @@ func (mg *TokenPassword) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this TokenPassword
 func (tr *TokenPassword) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"password1[*].value": "status.atProvider.password1[*].value", "password2[*].value": "status.atProvider.password2[*].value"}
+	return map[string]string{"password1[*].value": "status.atProvider.password1.value", "password2[*].value": "status.atProvider.password2.value"}
 }
 
 // GetObservation of this TokenPassword

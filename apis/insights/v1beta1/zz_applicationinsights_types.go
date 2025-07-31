@@ -18,10 +18,10 @@ type ApplicationInsightsInitParameters struct {
 	// Specifies the type of Application Insights to create. Valid values are ios for iOS, java for Java web, MobileCenter for App Center, Node.JS for Node.js, other for General, phone for Windows Phone, store for Windows Store and web for ASP.NET. Please note these values are case sensitive; unmatched values are treated as ASP.NET by Azure. Changing this forces a new resource to be created.
 	ApplicationType *string `json:"applicationType,omitempty" tf:"application_type,omitempty"`
 
-	// Specifies the Application Insights component daily data volume cap in GB.
+	// Specifies the Application Insights component daily data volume cap in GB. Defaults to 100.
 	DailyDataCapInGb *float64 `json:"dailyDataCapInGb,omitempty" tf:"daily_data_cap_in_gb,omitempty"`
 
-	// Specifies if a notification email will be send when the daily data volume cap is met.
+	// Specifies if a notification email will be sent when the daily data volume cap is met. Defaults to false.
 	DailyDataCapNotificationsDisabled *bool `json:"dailyDataCapNotificationsDisabled,omitempty" tf:"daily_data_cap_notifications_disabled,omitempty"`
 
 	// By default the real client IP is masked as 0.0.0.0 in the logs. Use this argument to disable masking and log the real client IP. Defaults to false.
@@ -74,10 +74,10 @@ type ApplicationInsightsObservation struct {
 	// Specifies the type of Application Insights to create. Valid values are ios for iOS, java for Java web, MobileCenter for App Center, Node.JS for Node.js, other for General, phone for Windows Phone, store for Windows Store and web for ASP.NET. Please note these values are case sensitive; unmatched values are treated as ASP.NET by Azure. Changing this forces a new resource to be created.
 	ApplicationType *string `json:"applicationType,omitempty" tf:"application_type,omitempty"`
 
-	// Specifies the Application Insights component daily data volume cap in GB.
+	// Specifies the Application Insights component daily data volume cap in GB. Defaults to 100.
 	DailyDataCapInGb *float64 `json:"dailyDataCapInGb,omitempty" tf:"daily_data_cap_in_gb,omitempty"`
 
-	// Specifies if a notification email will be send when the daily data volume cap is met.
+	// Specifies if a notification email will be sent when the daily data volume cap is met. Defaults to false.
 	DailyDataCapNotificationsDisabled *bool `json:"dailyDataCapNotificationsDisabled,omitempty" tf:"daily_data_cap_notifications_disabled,omitempty"`
 
 	// By default the real client IP is masked as 0.0.0.0 in the logs. Use this argument to disable masking and log the real client IP. Defaults to false.
@@ -124,11 +124,11 @@ type ApplicationInsightsParameters struct {
 	// +kubebuilder:validation:Optional
 	ApplicationType *string `json:"applicationType,omitempty" tf:"application_type,omitempty"`
 
-	// Specifies the Application Insights component daily data volume cap in GB.
+	// Specifies the Application Insights component daily data volume cap in GB. Defaults to 100.
 	// +kubebuilder:validation:Optional
 	DailyDataCapInGb *float64 `json:"dailyDataCapInGb,omitempty" tf:"daily_data_cap_in_gb,omitempty"`
 
-	// Specifies if a notification email will be send when the daily data volume cap is met.
+	// Specifies if a notification email will be sent when the daily data volume cap is met. Defaults to false.
 	// +kubebuilder:validation:Optional
 	DailyDataCapNotificationsDisabled *bool `json:"dailyDataCapNotificationsDisabled,omitempty" tf:"daily_data_cap_notifications_disabled,omitempty"`
 

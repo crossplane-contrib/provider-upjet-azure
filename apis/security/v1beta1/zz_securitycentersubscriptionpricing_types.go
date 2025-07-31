@@ -50,10 +50,10 @@ type SecurityCenterSubscriptionPricingInitParameters struct {
 	// One or more extension blocks as defined below.
 	Extension []ExtensionInitParameters `json:"extension,omitempty" tf:"extension,omitempty"`
 
-	// The resource type this setting affects. Possible values are Api, AppServices, ContainerRegistry, KeyVaults, KubernetesService, SqlServers, SqlServerVirtualMachines, StorageAccounts, VirtualMachines, Arm, Dns, OpenSourceRelationalDatabases, Containers, CosmosDbs and CloudPosture. Defaults to VirtualMachines
+	// The resource type this setting affects. Possible values are AI, Api, AppServices, ContainerRegistry, KeyVaults, KubernetesService, SqlServers, SqlServerVirtualMachines, StorageAccounts, VirtualMachines, Arm, Dns, OpenSourceRelationalDatabases, Containers, CosmosDbs and CloudPosture. Defaults to VirtualMachines
 	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
 
-	// Resource type pricing subplan. Contact your MSFT representative for possible values.
+	// Resource type pricing subplan. Contact your MSFT representative for possible values. Changing this forces a new resource to be created.
 	Subplan *string `json:"subplan,omitempty" tf:"subplan,omitempty"`
 
 	// The pricing tier to use. Possible values are Free and Standard.
@@ -68,10 +68,10 @@ type SecurityCenterSubscriptionPricingObservation struct {
 	// The subscription pricing ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The resource type this setting affects. Possible values are Api, AppServices, ContainerRegistry, KeyVaults, KubernetesService, SqlServers, SqlServerVirtualMachines, StorageAccounts, VirtualMachines, Arm, Dns, OpenSourceRelationalDatabases, Containers, CosmosDbs and CloudPosture. Defaults to VirtualMachines
+	// The resource type this setting affects. Possible values are AI, Api, AppServices, ContainerRegistry, KeyVaults, KubernetesService, SqlServers, SqlServerVirtualMachines, StorageAccounts, VirtualMachines, Arm, Dns, OpenSourceRelationalDatabases, Containers, CosmosDbs and CloudPosture. Defaults to VirtualMachines
 	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
 
-	// Resource type pricing subplan. Contact your MSFT representative for possible values.
+	// Resource type pricing subplan. Contact your MSFT representative for possible values. Changing this forces a new resource to be created.
 	Subplan *string `json:"subplan,omitempty" tf:"subplan,omitempty"`
 
 	// The pricing tier to use. Possible values are Free and Standard.
@@ -84,11 +84,11 @@ type SecurityCenterSubscriptionPricingParameters struct {
 	// +kubebuilder:validation:Optional
 	Extension []ExtensionParameters `json:"extension,omitempty" tf:"extension,omitempty"`
 
-	// The resource type this setting affects. Possible values are Api, AppServices, ContainerRegistry, KeyVaults, KubernetesService, SqlServers, SqlServerVirtualMachines, StorageAccounts, VirtualMachines, Arm, Dns, OpenSourceRelationalDatabases, Containers, CosmosDbs and CloudPosture. Defaults to VirtualMachines
+	// The resource type this setting affects. Possible values are AI, Api, AppServices, ContainerRegistry, KeyVaults, KubernetesService, SqlServers, SqlServerVirtualMachines, StorageAccounts, VirtualMachines, Arm, Dns, OpenSourceRelationalDatabases, Containers, CosmosDbs and CloudPosture. Defaults to VirtualMachines
 	// +kubebuilder:validation:Optional
 	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
 
-	// Resource type pricing subplan. Contact your MSFT representative for possible values.
+	// Resource type pricing subplan. Contact your MSFT representative for possible values. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Subplan *string `json:"subplan,omitempty" tf:"subplan,omitempty"`
 

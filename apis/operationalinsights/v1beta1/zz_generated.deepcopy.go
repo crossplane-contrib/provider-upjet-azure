@@ -1206,20 +1206,25 @@ func (in *LogAnalyticsLinkedStorageAccountInitParameters) DeepCopyInto(out *LogA
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.WorkspaceID != nil {
+		in, out := &in.WorkspaceID, &out.WorkspaceID
+		*out = new(string)
+		**out = **in
+	}
+	if in.WorkspaceIDRef != nil {
+		in, out := &in.WorkspaceIDRef, &out.WorkspaceIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.WorkspaceIDSelector != nil {
+		in, out := &in.WorkspaceIDSelector, &out.WorkspaceIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.WorkspaceResourceID != nil {
 		in, out := &in.WorkspaceResourceID, &out.WorkspaceResourceID
 		*out = new(string)
 		**out = **in
-	}
-	if in.WorkspaceResourceIDRef != nil {
-		in, out := &in.WorkspaceResourceIDRef, &out.WorkspaceResourceIDRef
-		*out = new(v1.Reference)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.WorkspaceResourceIDSelector != nil {
-		in, out := &in.WorkspaceResourceIDSelector, &out.WorkspaceResourceIDSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -1294,6 +1299,11 @@ func (in *LogAnalyticsLinkedStorageAccountObservation) DeepCopyInto(out *LogAnal
 			}
 		}
 	}
+	if in.WorkspaceID != nil {
+		in, out := &in.WorkspaceID, &out.WorkspaceID
+		*out = new(string)
+		**out = **in
+	}
 	if in.WorkspaceResourceID != nil {
 		in, out := &in.WorkspaceResourceID, &out.WorkspaceResourceID
 		*out = new(string)
@@ -1357,20 +1367,25 @@ func (in *LogAnalyticsLinkedStorageAccountParameters) DeepCopyInto(out *LogAnaly
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.WorkspaceID != nil {
+		in, out := &in.WorkspaceID, &out.WorkspaceID
+		*out = new(string)
+		**out = **in
+	}
+	if in.WorkspaceIDRef != nil {
+		in, out := &in.WorkspaceIDRef, &out.WorkspaceIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.WorkspaceIDSelector != nil {
+		in, out := &in.WorkspaceIDSelector, &out.WorkspaceIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.WorkspaceResourceID != nil {
 		in, out := &in.WorkspaceResourceID, &out.WorkspaceResourceID
 		*out = new(string)
 		**out = **in
-	}
-	if in.WorkspaceResourceIDRef != nil {
-		in, out := &in.WorkspaceResourceIDRef, &out.WorkspaceResourceIDRef
-		*out = new(v1.Reference)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.WorkspaceResourceIDSelector != nil {
-		in, out := &in.WorkspaceResourceIDSelector, &out.WorkspaceResourceIDSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -2429,6 +2444,11 @@ func (in *WorkspaceInitParameters) DeepCopyInto(out *WorkspaceInitParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.LocalAuthenticationEnabled != nil {
+		in, out := &in.LocalAuthenticationEnabled, &out.LocalAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Location != nil {
 		in, out := &in.Location, &out.Location
 		*out = new(string)
@@ -2564,6 +2584,11 @@ func (in *WorkspaceObservation) DeepCopyInto(out *WorkspaceObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.LocalAuthenticationEnabled != nil {
+		in, out := &in.LocalAuthenticationEnabled, &out.LocalAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Location != nil {
 		in, out := &in.Location, &out.Location
 		*out = new(string)
@@ -2669,6 +2694,11 @@ func (in *WorkspaceParameters) DeepCopyInto(out *WorkspaceParameters) {
 	}
 	if in.LocalAuthenticationDisabled != nil {
 		in, out := &in.LocalAuthenticationDisabled, &out.LocalAuthenticationDisabled
+		*out = new(bool)
+		**out = **in
+	}
+	if in.LocalAuthenticationEnabled != nil {
+		in, out := &in.LocalAuthenticationEnabled, &out.LocalAuthenticationEnabled
 		*out = new(bool)
 		**out = **in
 	}

@@ -14,6 +14,10 @@ spec:
     createFromSnapshotResourceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+    dataProtectionBackupPolicy:
+    - backupPolicyId: ${azurerm_netapp_backup_policy.example.id}
+      backupVaultId: ${azurerm_netapp_backup_vault.example.id}
+      policyEnabled: true
     dataProtectionReplication:
     - endpointType: dst
       remoteVolumeLocation: West Europe
@@ -25,8 +29,8 @@ spec:
     - snapshotPolicyIdSelector:
         matchLabels:
           testing.upbound.io/example-name: example
+    largeVolumeEnabled: false
     location: West Europe
-    networkFeatures: Basic
     poolNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example

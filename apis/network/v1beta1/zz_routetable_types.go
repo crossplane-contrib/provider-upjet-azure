@@ -14,10 +14,9 @@ import (
 )
 
 type RouteTableInitParameters struct {
-	BGPRoutePropagationEnabled *bool `json:"bgpRoutePropagationEnabled,omitempty" tf:"bgp_route_propagation_enabled,omitempty"`
 
-	// Boolean flag which controls propagation of routes learned by BGP on that route table. True means disable.
-	DisableBGPRoutePropagation *bool `json:"disableBgpRoutePropagation,omitempty" tf:"disable_bgp_route_propagation,omitempty"`
+	// Boolean flag which controls propagation of routes learned by BGP on that route table. Defaults to true.
+	BGPRoutePropagationEnabled *bool `json:"bgpRoutePropagationEnabled,omitempty" tf:"bgp_route_propagation_enabled,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -31,10 +30,9 @@ type RouteTableInitParameters struct {
 }
 
 type RouteTableObservation struct {
-	BGPRoutePropagationEnabled *bool `json:"bgpRoutePropagationEnabled,omitempty" tf:"bgp_route_propagation_enabled,omitempty"`
 
-	// Boolean flag which controls propagation of routes learned by BGP on that route table. True means disable.
-	DisableBGPRoutePropagation *bool `json:"disableBgpRoutePropagation,omitempty" tf:"disable_bgp_route_propagation,omitempty"`
+	// Boolean flag which controls propagation of routes learned by BGP on that route table. Defaults to true.
+	BGPRoutePropagationEnabled *bool `json:"bgpRoutePropagationEnabled,omitempty" tf:"bgp_route_propagation_enabled,omitempty"`
 
 	// The Route Table ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -59,12 +57,9 @@ type RouteTableObservation struct {
 
 type RouteTableParameters struct {
 
+	// Boolean flag which controls propagation of routes learned by BGP on that route table. Defaults to true.
 	// +kubebuilder:validation:Optional
 	BGPRoutePropagationEnabled *bool `json:"bgpRoutePropagationEnabled,omitempty" tf:"bgp_route_propagation_enabled,omitempty"`
-
-	// Boolean flag which controls propagation of routes learned by BGP on that route table. True means disable.
-	// +kubebuilder:validation:Optional
-	DisableBGPRoutePropagation *bool `json:"disableBgpRoutePropagation,omitempty" tf:"disable_bgp_route_propagation,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional

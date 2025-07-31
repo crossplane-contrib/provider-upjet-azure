@@ -33,10 +33,6 @@ type BotConnectionInitParameters struct {
 
 	// The name of the service provider that will be associated with this connection. Changing this forces a new resource to be created.
 	ServiceProviderName *string `json:"serviceProviderName,omitempty" tf:"service_provider_name,omitempty"`
-
-	// A mapping of tags to assign to the resource.
-	// +mapType=granular
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type BotConnectionObservation struct {
@@ -65,10 +61,6 @@ type BotConnectionObservation struct {
 
 	// The name of the service provider that will be associated with this connection. Changing this forces a new resource to be created.
 	ServiceProviderName *string `json:"serviceProviderName,omitempty" tf:"service_provider_name,omitempty"`
-
-	// A mapping of tags to assign to the resource.
-	// +mapType=granular
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type BotConnectionParameters struct {
@@ -124,11 +116,6 @@ type BotConnectionParameters struct {
 	// The name of the service provider that will be associated with this connection. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	ServiceProviderName *string `json:"serviceProviderName,omitempty" tf:"service_provider_name,omitempty"`
-
-	// A mapping of tags to assign to the resource.
-	// +kubebuilder:validation:Optional
-	// +mapType=granular
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 // BotConnectionSpec defines the desired state of BotConnection

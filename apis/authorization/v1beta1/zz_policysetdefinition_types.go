@@ -15,124 +15,134 @@ import (
 
 type PolicyDefinitionGroupInitParameters struct {
 
-	// The ID of a resource that contains additional metadata about this policy definition group.
+	// The ID of a resource that contains additional metadata for this Policy Definition Group.
 	AdditionalMetadataResourceID *string `json:"additionalMetadataResourceId,omitempty" tf:"additional_metadata_resource_id,omitempty"`
 
-	// The category of this policy definition group.
+	// The category of this Policy Definition Group.
 	Category *string `json:"category,omitempty" tf:"category,omitempty"`
 
-	// The description of this policy definition group.
+	// The description of this Policy Definition Group.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The display name of this policy definition group.
+	// The display name of this Policy Definition Group.
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
-	// The name of this policy definition group.
+	// The name which should be used for this Policy Definition Group.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type PolicyDefinitionGroupObservation struct {
 
-	// The ID of a resource that contains additional metadata about this policy definition group.
+	// The ID of a resource that contains additional metadata for this Policy Definition Group.
 	AdditionalMetadataResourceID *string `json:"additionalMetadataResourceId,omitempty" tf:"additional_metadata_resource_id,omitempty"`
 
-	// The category of this policy definition group.
+	// The category of this Policy Definition Group.
 	Category *string `json:"category,omitempty" tf:"category,omitempty"`
 
-	// The description of this policy definition group.
+	// The description of this Policy Definition Group.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The display name of this policy definition group.
+	// The display name of this Policy Definition Group.
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
-	// The name of this policy definition group.
+	// The name which should be used for this Policy Definition Group.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type PolicyDefinitionGroupParameters struct {
 
-	// The ID of a resource that contains additional metadata about this policy definition group.
+	// The ID of a resource that contains additional metadata for this Policy Definition Group.
 	// +kubebuilder:validation:Optional
 	AdditionalMetadataResourceID *string `json:"additionalMetadataResourceId,omitempty" tf:"additional_metadata_resource_id,omitempty"`
 
-	// The category of this policy definition group.
+	// The category of this Policy Definition Group.
 	// +kubebuilder:validation:Optional
 	Category *string `json:"category,omitempty" tf:"category,omitempty"`
 
-	// The description of this policy definition group.
+	// The description of this Policy Definition Group.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The display name of this policy definition group.
+	// The display name of this Policy Definition Group.
 	// +kubebuilder:validation:Optional
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
-	// The name of this policy definition group.
+	// The name which should be used for this Policy Definition Group.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type PolicyDefinitionReferenceInitParameters struct {
 
-	// Parameter values for the referenced policy rule. This field is a JSON string that allows you to assign parameters to this policy rule.
+	// Parameter values for the references Policy Definition in JSON format.
 	ParameterValues *string `json:"parameterValues,omitempty" tf:"parameter_values,omitempty"`
 
-	// The ID of the policy definition that will be included in this policy set definition.
+	// The ID of the Policy Definition to include in this Policy Set Definition.
 	PolicyDefinitionID *string `json:"policyDefinitionId,omitempty" tf:"policy_definition_id,omitempty"`
 
-	// A list of names of the policy definition groups that this policy definition reference belongs to.
+	// Specifies a list of Policy Definition Groups names that this Policy Definition Reference belongs to.
 	// +listType=set
 	PolicyGroupNames []*string `json:"policyGroupNames,omitempty" tf:"policy_group_names,omitempty"`
 
-	// A unique ID within this policy set definition for this policy definition reference.
+	// A unique ID within this Policy Set Definition for this Policy Definition Reference.
 	ReferenceID *string `json:"referenceId,omitempty" tf:"reference_id,omitempty"`
+
+	// The version of the Policy Definition to use.
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type PolicyDefinitionReferenceObservation struct {
 
-	// Parameter values for the referenced policy rule. This field is a JSON string that allows you to assign parameters to this policy rule.
+	// Parameter values for the references Policy Definition in JSON format.
 	ParameterValues *string `json:"parameterValues,omitempty" tf:"parameter_values,omitempty"`
 
-	// The ID of the policy definition that will be included in this policy set definition.
+	// The ID of the Policy Definition to include in this Policy Set Definition.
 	PolicyDefinitionID *string `json:"policyDefinitionId,omitempty" tf:"policy_definition_id,omitempty"`
 
-	// A list of names of the policy definition groups that this policy definition reference belongs to.
+	// Specifies a list of Policy Definition Groups names that this Policy Definition Reference belongs to.
 	// +listType=set
 	PolicyGroupNames []*string `json:"policyGroupNames,omitempty" tf:"policy_group_names,omitempty"`
 
-	// A unique ID within this policy set definition for this policy definition reference.
+	// A unique ID within this Policy Set Definition for this Policy Definition Reference.
 	ReferenceID *string `json:"referenceId,omitempty" tf:"reference_id,omitempty"`
+
+	// The version of the Policy Definition to use.
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type PolicyDefinitionReferenceParameters struct {
 
-	// Parameter values for the referenced policy rule. This field is a JSON string that allows you to assign parameters to this policy rule.
+	// Parameter values for the references Policy Definition in JSON format.
 	// +kubebuilder:validation:Optional
 	ParameterValues *string `json:"parameterValues,omitempty" tf:"parameter_values,omitempty"`
 
-	// The ID of the policy definition that will be included in this policy set definition.
+	// The ID of the Policy Definition to include in this Policy Set Definition.
 	// +kubebuilder:validation:Optional
 	PolicyDefinitionID *string `json:"policyDefinitionId" tf:"policy_definition_id,omitempty"`
 
-	// A list of names of the policy definition groups that this policy definition reference belongs to.
+	// Specifies a list of Policy Definition Groups names that this Policy Definition Reference belongs to.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	PolicyGroupNames []*string `json:"policyGroupNames,omitempty" tf:"policy_group_names,omitempty"`
 
-	// A unique ID within this policy set definition for this policy definition reference.
+	// A unique ID within this Policy Set Definition for this Policy Definition Reference.
 	// +kubebuilder:validation:Optional
 	ReferenceID *string `json:"referenceId,omitempty" tf:"reference_id,omitempty"`
+
+	// The version of the Policy Definition to use.
+	// +kubebuilder:validation:Optional
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type PolicySetDefinitionInitParameters struct {
 
-	// The description of the policy set definition.
+	// The description of this Policy Set Definition.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The display name of the policy set definition.
+	// The display name of this Policy Set Definition.
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
-	// The id of the Management Group where this policy set definition should be defined. Changing this forces a new resource to be created.
+	// The ID of the Policy Set Definition.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/management/v1beta1.ManagementGroup
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	ManagementGroupID *string `json:"managementGroupId,omitempty" tf:"management_group_id,omitempty"`
@@ -145,10 +155,10 @@ type PolicySetDefinitionInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ManagementGroupIDSelector *v1.Selector `json:"managementGroupIdSelector,omitempty" tf:"-"`
 
-	// The metadata for the policy set definition. This is a JSON object representing additional metadata that should be stored with the policy definition.
+	// The metadata for the Policy Set Definition in JSON format.
 	Metadata *string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
-	// Parameters for the policy set definition. This field is a JSON object that allows you to parameterize your policy definition.
+	// The parameters for the Policy Set Definition in JSON format.
 	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// One or more policy_definition_group blocks as defined below.
@@ -157,28 +167,28 @@ type PolicySetDefinitionInitParameters struct {
 	// One or more policy_definition_reference blocks as defined below.
 	PolicyDefinitionReference []PolicyDefinitionReferenceInitParameters `json:"policyDefinitionReference,omitempty" tf:"policy_definition_reference,omitempty"`
 
-	// The policy set type. Possible values are BuiltIn, Custom, NotSpecified and Static. Changing this forces a new resource to be created.
+	// The Policy Set Definition type. Possible values are BuiltIn, Custom, NotSpecified, and Static. Changing this forces a new Policy Set Definition to be created.
 	PolicyType *string `json:"policyType,omitempty" tf:"policy_type,omitempty"`
 }
 
 type PolicySetDefinitionObservation struct {
 
-	// The description of the policy set definition.
+	// The description of this Policy Set Definition.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The display name of the policy set definition.
+	// The display name of this Policy Set Definition.
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// The ID of the Policy Set Definition.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The id of the Management Group where this policy set definition should be defined. Changing this forces a new resource to be created.
+	// The ID of the Policy Set Definition.
 	ManagementGroupID *string `json:"managementGroupId,omitempty" tf:"management_group_id,omitempty"`
 
-	// The metadata for the policy set definition. This is a JSON object representing additional metadata that should be stored with the policy definition.
+	// The metadata for the Policy Set Definition in JSON format.
 	Metadata *string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
-	// Parameters for the policy set definition. This field is a JSON object that allows you to parameterize your policy definition.
+	// The parameters for the Policy Set Definition in JSON format.
 	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// One or more policy_definition_group blocks as defined below.
@@ -187,21 +197,21 @@ type PolicySetDefinitionObservation struct {
 	// One or more policy_definition_reference blocks as defined below.
 	PolicyDefinitionReference []PolicyDefinitionReferenceObservation `json:"policyDefinitionReference,omitempty" tf:"policy_definition_reference,omitempty"`
 
-	// The policy set type. Possible values are BuiltIn, Custom, NotSpecified and Static. Changing this forces a new resource to be created.
+	// The Policy Set Definition type. Possible values are BuiltIn, Custom, NotSpecified, and Static. Changing this forces a new Policy Set Definition to be created.
 	PolicyType *string `json:"policyType,omitempty" tf:"policy_type,omitempty"`
 }
 
 type PolicySetDefinitionParameters struct {
 
-	// The description of the policy set definition.
+	// The description of this Policy Set Definition.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The display name of the policy set definition.
+	// The display name of this Policy Set Definition.
 	// +kubebuilder:validation:Optional
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
-	// The id of the Management Group where this policy set definition should be defined. Changing this forces a new resource to be created.
+	// The ID of the Policy Set Definition.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/management/v1beta1.ManagementGroup
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -215,11 +225,11 @@ type PolicySetDefinitionParameters struct {
 	// +kubebuilder:validation:Optional
 	ManagementGroupIDSelector *v1.Selector `json:"managementGroupIdSelector,omitempty" tf:"-"`
 
-	// The metadata for the policy set definition. This is a JSON object representing additional metadata that should be stored with the policy definition.
+	// The metadata for the Policy Set Definition in JSON format.
 	// +kubebuilder:validation:Optional
 	Metadata *string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
-	// Parameters for the policy set definition. This field is a JSON object that allows you to parameterize your policy definition.
+	// The parameters for the Policy Set Definition in JSON format.
 	// +kubebuilder:validation:Optional
 	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
@@ -231,7 +241,7 @@ type PolicySetDefinitionParameters struct {
 	// +kubebuilder:validation:Optional
 	PolicyDefinitionReference []PolicyDefinitionReferenceParameters `json:"policyDefinitionReference,omitempty" tf:"policy_definition_reference,omitempty"`
 
-	// The policy set type. Possible values are BuiltIn, Custom, NotSpecified and Static. Changing this forces a new resource to be created.
+	// The Policy Set Definition type. Possible values are BuiltIn, Custom, NotSpecified, and Static. Changing this forces a new Policy Set Definition to be created.
 	// +kubebuilder:validation:Optional
 	PolicyType *string `json:"policyType,omitempty" tf:"policy_type,omitempty"`
 }

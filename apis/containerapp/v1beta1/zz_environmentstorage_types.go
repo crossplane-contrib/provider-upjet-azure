@@ -17,7 +17,7 @@ type EnvironmentStorageInitParameters struct {
 
 	// The Storage Account Access Key.
 	// The Storage Account Access Key.
-	AccessKeySecretRef v1.SecretKeySelector `json:"accessKeySecretRef" tf:"-"`
+	AccessKeySecretRef *v1.SecretKeySelector `json:"accessKeySecretRef,omitempty" tf:"-"`
 
 	// The access mode to connect this storage to the Container App. Possible values include ReadOnly and ReadWrite. Changing this forces a new resource to be created.
 	// The access mode to connect this storage to the Container App. Possible values include `ReadOnly` and `ReadWrite`.
@@ -35,6 +35,9 @@ type EnvironmentStorageInitParameters struct {
 	// Selector for a Account in storage to populate accountName.
 	// +kubebuilder:validation:Optional
 	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
+
+	// The NFS server to use for the Azure File Share, the format will be yourstorageaccountname.file.core.windows.net. Changing this forces a new resource to be created.
+	NFSServerURL *string `json:"nfsServerUrl,omitempty" tf:"nfs_server_url,omitempty"`
 
 	// The name of the Azure Storage Share to use. Changing this forces a new resource to be created.
 	// The name of the Azure Storage Share to use.
@@ -67,6 +70,9 @@ type EnvironmentStorageObservation struct {
 	// The ID of the Container App Environment Storage
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The NFS server to use for the Azure File Share, the format will be yourstorageaccountname.file.core.windows.net. Changing this forces a new resource to be created.
+	NFSServerURL *string `json:"nfsServerUrl,omitempty" tf:"nfs_server_url,omitempty"`
+
 	// The name of the Azure Storage Share to use. Changing this forces a new resource to be created.
 	// The name of the Azure Storage Share to use.
 	ShareName *string `json:"shareName,omitempty" tf:"share_name,omitempty"`
@@ -77,7 +83,7 @@ type EnvironmentStorageParameters struct {
 	// The Storage Account Access Key.
 	// The Storage Account Access Key.
 	// +kubebuilder:validation:Optional
-	AccessKeySecretRef v1.SecretKeySelector `json:"accessKeySecretRef" tf:"-"`
+	AccessKeySecretRef *v1.SecretKeySelector `json:"accessKeySecretRef,omitempty" tf:"-"`
 
 	// The access mode to connect this storage to the Container App. Possible values include ReadOnly and ReadWrite. Changing this forces a new resource to be created.
 	// The access mode to connect this storage to the Container App. Possible values include `ReadOnly` and `ReadWrite`.
@@ -112,6 +118,10 @@ type EnvironmentStorageParameters struct {
 	// Selector for a Environment in containerapp to populate containerAppEnvironmentId.
 	// +kubebuilder:validation:Optional
 	ContainerAppEnvironmentIDSelector *v1.Selector `json:"containerAppEnvironmentIdSelector,omitempty" tf:"-"`
+
+	// The NFS server to use for the Azure File Share, the format will be yourstorageaccountname.file.core.windows.net. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	NFSServerURL *string `json:"nfsServerUrl,omitempty" tf:"nfs_server_url,omitempty"`
 
 	// The name of the Azure Storage Share to use. Changing this forces a new resource to be created.
 	// The name of the Azure Storage Share to use.
@@ -164,7 +174,6 @@ type EnvironmentStorageStatus struct {
 type EnvironmentStorage struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.accessKeySecretRef)",message="spec.forProvider.accessKeySecretRef is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.accessMode) || (has(self.initProvider) && has(self.initProvider.accessMode))",message="spec.forProvider.accessMode is a required parameter"
 	Spec   EnvironmentStorageSpec   `json:"spec"`
 	Status EnvironmentStorageStatus `json:"status,omitempty"`

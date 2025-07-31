@@ -4715,11 +4715,6 @@ func (in *AutoHealSettingTriggerSlowRequestInitParameters) DeepCopyInto(out *Aut
 		*out = new(string)
 		**out = **in
 	}
-	if in.Path != nil {
-		in, out := &in.Path, &out.Path
-		*out = new(string)
-		**out = **in
-	}
 	if in.TimeTaken != nil {
 		in, out := &in.TimeTaken, &out.TimeTaken
 		*out = new(string)
@@ -4750,11 +4745,6 @@ func (in *AutoHealSettingTriggerSlowRequestObservation) DeepCopyInto(out *AutoHe
 		*out = new(string)
 		**out = **in
 	}
-	if in.Path != nil {
-		in, out := &in.Path, &out.Path
-		*out = new(string)
-		**out = **in
-	}
 	if in.TimeTaken != nil {
 		in, out := &in.TimeTaken, &out.TimeTaken
 		*out = new(string)
@@ -4782,11 +4772,6 @@ func (in *AutoHealSettingTriggerSlowRequestParameters) DeepCopyInto(out *AutoHea
 	}
 	if in.Interval != nil {
 		in, out := &in.Interval, &out.Interval
-		*out = new(string)
-		**out = **in
-	}
-	if in.Path != nil {
-		in, out := &in.Path, &out.Path
 		*out = new(string)
 		**out = **in
 	}
@@ -10988,6 +10973,11 @@ func (in *LinuxFunctionAppInitParameters) DeepCopyInto(out *LinuxFunctionAppInit
 			(*out)[key] = outVal
 		}
 	}
+	if in.VirtualNetworkBackupRestoreEnabled != nil {
+		in, out := &in.VirtualNetworkBackupRestoreEnabled, &out.VirtualNetworkBackupRestoreEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.VirtualNetworkSubnetID != nil {
 		in, out := &in.VirtualNetworkSubnetID, &out.VirtualNetworkSubnetID
 		*out = new(string)
@@ -11002,6 +10992,11 @@ func (in *LinuxFunctionAppInitParameters) DeepCopyInto(out *LinuxFunctionAppInit
 		in, out := &in.VirtualNetworkSubnetIDSelector, &out.VirtualNetworkSubnetIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.VnetImagePullEnabled != nil {
+		in, out := &in.VnetImagePullEnabled, &out.VnetImagePullEnabled
+		*out = new(bool)
+		**out = **in
 	}
 	if in.WebdeployPublishBasicAuthenticationEnabled != nil {
 		in, out := &in.WebdeployPublishBasicAuthenticationEnabled, &out.WebdeployPublishBasicAuthenticationEnabled
@@ -11283,9 +11278,19 @@ func (in *LinuxFunctionAppObservation) DeepCopyInto(out *LinuxFunctionAppObserva
 			(*out)[key] = outVal
 		}
 	}
+	if in.VirtualNetworkBackupRestoreEnabled != nil {
+		in, out := &in.VirtualNetworkBackupRestoreEnabled, &out.VirtualNetworkBackupRestoreEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.VirtualNetworkSubnetID != nil {
 		in, out := &in.VirtualNetworkSubnetID, &out.VirtualNetworkSubnetID
 		*out = new(string)
+		**out = **in
+	}
+	if in.VnetImagePullEnabled != nil {
+		in, out := &in.VnetImagePullEnabled, &out.VnetImagePullEnabled
+		*out = new(bool)
 		**out = **in
 	}
 	if in.WebdeployPublishBasicAuthenticationEnabled != nil {
@@ -11519,6 +11524,11 @@ func (in *LinuxFunctionAppParameters) DeepCopyInto(out *LinuxFunctionAppParamete
 			(*out)[key] = outVal
 		}
 	}
+	if in.VirtualNetworkBackupRestoreEnabled != nil {
+		in, out := &in.VirtualNetworkBackupRestoreEnabled, &out.VirtualNetworkBackupRestoreEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.VirtualNetworkSubnetID != nil {
 		in, out := &in.VirtualNetworkSubnetID, &out.VirtualNetworkSubnetID
 		*out = new(string)
@@ -11533,6 +11543,11 @@ func (in *LinuxFunctionAppParameters) DeepCopyInto(out *LinuxFunctionAppParamete
 		in, out := &in.VirtualNetworkSubnetIDSelector, &out.VirtualNetworkSubnetIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.VnetImagePullEnabled != nil {
+		in, out := &in.VnetImagePullEnabled, &out.VnetImagePullEnabled
+		*out = new(bool)
+		**out = **in
 	}
 	if in.WebdeployPublishBasicAuthenticationEnabled != nil {
 		in, out := &in.WebdeployPublishBasicAuthenticationEnabled, &out.WebdeployPublishBasicAuthenticationEnabled
@@ -14601,6 +14616,11 @@ func (in *LinuxFunctionAppSlotInitParameters) DeepCopyInto(out *LinuxFunctionApp
 			(*out)[key] = outVal
 		}
 	}
+	if in.VirtualNetworkBackupRestoreEnabled != nil {
+		in, out := &in.VirtualNetworkBackupRestoreEnabled, &out.VirtualNetworkBackupRestoreEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.VirtualNetworkSubnetID != nil {
 		in, out := &in.VirtualNetworkSubnetID, &out.VirtualNetworkSubnetID
 		*out = new(string)
@@ -14615,6 +14635,11 @@ func (in *LinuxFunctionAppSlotInitParameters) DeepCopyInto(out *LinuxFunctionApp
 		in, out := &in.VirtualNetworkSubnetIDSelector, &out.VirtualNetworkSubnetIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.VnetImagePullEnabled != nil {
+		in, out := &in.VnetImagePullEnabled, &out.VnetImagePullEnabled
+		*out = new(bool)
+		**out = **in
 	}
 	if in.WebdeployPublishBasicAuthenticationEnabled != nil {
 		in, out := &in.WebdeployPublishBasicAuthenticationEnabled, &out.WebdeployPublishBasicAuthenticationEnabled
@@ -14876,9 +14901,19 @@ func (in *LinuxFunctionAppSlotObservation) DeepCopyInto(out *LinuxFunctionAppSlo
 			(*out)[key] = outVal
 		}
 	}
+	if in.VirtualNetworkBackupRestoreEnabled != nil {
+		in, out := &in.VirtualNetworkBackupRestoreEnabled, &out.VirtualNetworkBackupRestoreEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.VirtualNetworkSubnetID != nil {
 		in, out := &in.VirtualNetworkSubnetID, &out.VirtualNetworkSubnetID
 		*out = new(string)
+		**out = **in
+	}
+	if in.VnetImagePullEnabled != nil {
+		in, out := &in.VnetImagePullEnabled, &out.VnetImagePullEnabled
+		*out = new(bool)
 		**out = **in
 	}
 	if in.WebdeployPublishBasicAuthenticationEnabled != nil {
@@ -15082,6 +15117,11 @@ func (in *LinuxFunctionAppSlotParameters) DeepCopyInto(out *LinuxFunctionAppSlot
 			(*out)[key] = outVal
 		}
 	}
+	if in.VirtualNetworkBackupRestoreEnabled != nil {
+		in, out := &in.VirtualNetworkBackupRestoreEnabled, &out.VirtualNetworkBackupRestoreEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.VirtualNetworkSubnetID != nil {
 		in, out := &in.VirtualNetworkSubnetID, &out.VirtualNetworkSubnetID
 		*out = new(string)
@@ -15096,6 +15136,11 @@ func (in *LinuxFunctionAppSlotParameters) DeepCopyInto(out *LinuxFunctionAppSlot
 		in, out := &in.VirtualNetworkSubnetIDSelector, &out.VirtualNetworkSubnetIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.VnetImagePullEnabled != nil {
+		in, out := &in.VnetImagePullEnabled, &out.VnetImagePullEnabled
+		*out = new(bool)
+		**out = **in
 	}
 	if in.WebdeployPublishBasicAuthenticationEnabled != nil {
 		in, out := &in.WebdeployPublishBasicAuthenticationEnabled, &out.WebdeployPublishBasicAuthenticationEnabled
@@ -20262,6 +20307,11 @@ func (in *LinuxWebAppInitParameters) DeepCopyInto(out *LinuxWebAppInitParameters
 			(*out)[key] = outVal
 		}
 	}
+	if in.VirtualNetworkBackupRestoreEnabled != nil {
+		in, out := &in.VirtualNetworkBackupRestoreEnabled, &out.VirtualNetworkBackupRestoreEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.VirtualNetworkSubnetID != nil {
 		in, out := &in.VirtualNetworkSubnetID, &out.VirtualNetworkSubnetID
 		*out = new(string)
@@ -20527,6 +20577,11 @@ func (in *LinuxWebAppObservation) DeepCopyInto(out *LinuxWebAppObservation) {
 			(*out)[key] = outVal
 		}
 	}
+	if in.VirtualNetworkBackupRestoreEnabled != nil {
+		in, out := &in.VirtualNetworkBackupRestoreEnabled, &out.VirtualNetworkBackupRestoreEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.VirtualNetworkSubnetID != nil {
 		in, out := &in.VirtualNetworkSubnetID, &out.VirtualNetworkSubnetID
 		*out = new(string)
@@ -20718,6 +20773,11 @@ func (in *LinuxWebAppParameters) DeepCopyInto(out *LinuxWebAppParameters) {
 			(*out)[key] = outVal
 		}
 	}
+	if in.VirtualNetworkBackupRestoreEnabled != nil {
+		in, out := &in.VirtualNetworkBackupRestoreEnabled, &out.VirtualNetworkBackupRestoreEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.VirtualNetworkSubnetID != nil {
 		in, out := &in.VirtualNetworkSubnetID, &out.VirtualNetworkSubnetID
 		*out = new(string)
@@ -20758,18 +20818,8 @@ func (in *LinuxWebAppParameters) DeepCopy() *LinuxWebAppParameters {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *LinuxWebAppSiteConfigApplicationStackInitParameters) DeepCopyInto(out *LinuxWebAppSiteConfigApplicationStackInitParameters) {
 	*out = *in
-	if in.DockerImage != nil {
-		in, out := &in.DockerImage, &out.DockerImage
-		*out = new(string)
-		**out = **in
-	}
 	if in.DockerImageName != nil {
 		in, out := &in.DockerImageName, &out.DockerImageName
-		*out = new(string)
-		**out = **in
-	}
-	if in.DockerImageTag != nil {
-		in, out := &in.DockerImageTag, &out.DockerImageTag
 		*out = new(string)
 		**out = **in
 	}
@@ -20848,18 +20898,8 @@ func (in *LinuxWebAppSiteConfigApplicationStackInitParameters) DeepCopy() *Linux
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *LinuxWebAppSiteConfigApplicationStackObservation) DeepCopyInto(out *LinuxWebAppSiteConfigApplicationStackObservation) {
 	*out = *in
-	if in.DockerImage != nil {
-		in, out := &in.DockerImage, &out.DockerImage
-		*out = new(string)
-		**out = **in
-	}
 	if in.DockerImageName != nil {
 		in, out := &in.DockerImageName, &out.DockerImageName
-		*out = new(string)
-		**out = **in
-	}
-	if in.DockerImageTag != nil {
-		in, out := &in.DockerImageTag, &out.DockerImageTag
 		*out = new(string)
 		**out = **in
 	}
@@ -20933,18 +20973,8 @@ func (in *LinuxWebAppSiteConfigApplicationStackObservation) DeepCopy() *LinuxWeb
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *LinuxWebAppSiteConfigApplicationStackParameters) DeepCopyInto(out *LinuxWebAppSiteConfigApplicationStackParameters) {
 	*out = *in
-	if in.DockerImage != nil {
-		in, out := &in.DockerImage, &out.DockerImage
-		*out = new(string)
-		**out = **in
-	}
 	if in.DockerImageName != nil {
 		in, out := &in.DockerImageName, &out.DockerImageName
-		*out = new(string)
-		**out = **in
-	}
-	if in.DockerImageTag != nil {
-		in, out := &in.DockerImageTag, &out.DockerImageTag
 		*out = new(string)
 		**out = **in
 	}
@@ -21503,11 +21533,6 @@ func (in *LinuxWebAppSiteConfigInitParameters) DeepCopyInto(out *LinuxWebAppSite
 		*out = new(LinuxWebAppSiteConfigApplicationStackInitParameters)
 		(*in).DeepCopyInto(*out)
 	}
-	if in.AutoHealEnabled != nil {
-		in, out := &in.AutoHealEnabled, &out.AutoHealEnabled
-		*out = new(bool)
-		**out = **in
-	}
 	if in.AutoHealSetting != nil {
 		in, out := &in.AutoHealSetting, &out.AutoHealSetting
 		*out = new(AutoHealSettingInitParameters)
@@ -21682,11 +21707,6 @@ func (in *LinuxWebAppSiteConfigObservation) DeepCopyInto(out *LinuxWebAppSiteCon
 		in, out := &in.ApplicationStack, &out.ApplicationStack
 		*out = new(LinuxWebAppSiteConfigApplicationStackObservation)
 		(*in).DeepCopyInto(*out)
-	}
-	if in.AutoHealEnabled != nil {
-		in, out := &in.AutoHealEnabled, &out.AutoHealEnabled
-		*out = new(bool)
-		**out = **in
 	}
 	if in.AutoHealSetting != nil {
 		in, out := &in.AutoHealSetting, &out.AutoHealSetting
@@ -21877,11 +21897,6 @@ func (in *LinuxWebAppSiteConfigParameters) DeepCopyInto(out *LinuxWebAppSiteConf
 		in, out := &in.ApplicationStack, &out.ApplicationStack
 		*out = new(LinuxWebAppSiteConfigApplicationStackParameters)
 		(*in).DeepCopyInto(*out)
-	}
-	if in.AutoHealEnabled != nil {
-		in, out := &in.AutoHealEnabled, &out.AutoHealEnabled
-		*out = new(bool)
-		**out = **in
 	}
 	if in.AutoHealSetting != nil {
 		in, out := &in.AutoHealSetting, &out.AutoHealSetting
@@ -25911,6 +25926,11 @@ func (in *LinuxWebAppSlotInitParameters) DeepCopyInto(out *LinuxWebAppSlotInitPa
 			(*out)[key] = outVal
 		}
 	}
+	if in.VirtualNetworkBackupRestoreEnabled != nil {
+		in, out := &in.VirtualNetworkBackupRestoreEnabled, &out.VirtualNetworkBackupRestoreEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.VirtualNetworkSubnetID != nil {
 		in, out := &in.VirtualNetworkSubnetID, &out.VirtualNetworkSubnetID
 		*out = new(string)
@@ -26292,6 +26312,11 @@ func (in *LinuxWebAppSlotObservation) DeepCopyInto(out *LinuxWebAppSlotObservati
 			(*out)[key] = outVal
 		}
 	}
+	if in.VirtualNetworkBackupRestoreEnabled != nil {
+		in, out := &in.VirtualNetworkBackupRestoreEnabled, &out.VirtualNetworkBackupRestoreEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.VirtualNetworkSubnetID != nil {
 		in, out := &in.VirtualNetworkSubnetID, &out.VirtualNetworkSubnetID
 		*out = new(string)
@@ -26468,6 +26493,11 @@ func (in *LinuxWebAppSlotParameters) DeepCopyInto(out *LinuxWebAppSlotParameters
 			(*out)[key] = outVal
 		}
 	}
+	if in.VirtualNetworkBackupRestoreEnabled != nil {
+		in, out := &in.VirtualNetworkBackupRestoreEnabled, &out.VirtualNetworkBackupRestoreEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.VirtualNetworkSubnetID != nil {
 		in, out := &in.VirtualNetworkSubnetID, &out.VirtualNetworkSubnetID
 		*out = new(string)
@@ -26508,18 +26538,8 @@ func (in *LinuxWebAppSlotParameters) DeepCopy() *LinuxWebAppSlotParameters {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *LinuxWebAppSlotSiteConfigApplicationStackInitParameters) DeepCopyInto(out *LinuxWebAppSlotSiteConfigApplicationStackInitParameters) {
 	*out = *in
-	if in.DockerImage != nil {
-		in, out := &in.DockerImage, &out.DockerImage
-		*out = new(string)
-		**out = **in
-	}
 	if in.DockerImageName != nil {
 		in, out := &in.DockerImageName, &out.DockerImageName
-		*out = new(string)
-		**out = **in
-	}
-	if in.DockerImageTag != nil {
-		in, out := &in.DockerImageTag, &out.DockerImageTag
 		*out = new(string)
 		**out = **in
 	}
@@ -26598,18 +26618,8 @@ func (in *LinuxWebAppSlotSiteConfigApplicationStackInitParameters) DeepCopy() *L
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *LinuxWebAppSlotSiteConfigApplicationStackObservation) DeepCopyInto(out *LinuxWebAppSlotSiteConfigApplicationStackObservation) {
 	*out = *in
-	if in.DockerImage != nil {
-		in, out := &in.DockerImage, &out.DockerImage
-		*out = new(string)
-		**out = **in
-	}
 	if in.DockerImageName != nil {
 		in, out := &in.DockerImageName, &out.DockerImageName
-		*out = new(string)
-		**out = **in
-	}
-	if in.DockerImageTag != nil {
-		in, out := &in.DockerImageTag, &out.DockerImageTag
 		*out = new(string)
 		**out = **in
 	}
@@ -26683,18 +26693,8 @@ func (in *LinuxWebAppSlotSiteConfigApplicationStackObservation) DeepCopy() *Linu
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *LinuxWebAppSlotSiteConfigApplicationStackParameters) DeepCopyInto(out *LinuxWebAppSlotSiteConfigApplicationStackParameters) {
 	*out = *in
-	if in.DockerImage != nil {
-		in, out := &in.DockerImage, &out.DockerImage
-		*out = new(string)
-		**out = **in
-	}
 	if in.DockerImageName != nil {
 		in, out := &in.DockerImageName, &out.DockerImageName
-		*out = new(string)
-		**out = **in
-	}
-	if in.DockerImageTag != nil {
-		in, out := &in.DockerImageTag, &out.DockerImageTag
 		*out = new(string)
 		**out = **in
 	}
@@ -27253,11 +27253,6 @@ func (in *LinuxWebAppSlotSiteConfigInitParameters) DeepCopyInto(out *LinuxWebApp
 		*out = new(LinuxWebAppSlotSiteConfigApplicationStackInitParameters)
 		(*in).DeepCopyInto(*out)
 	}
-	if in.AutoHealEnabled != nil {
-		in, out := &in.AutoHealEnabled, &out.AutoHealEnabled
-		*out = new(bool)
-		**out = **in
-	}
 	if in.AutoHealSetting != nil {
 		in, out := &in.AutoHealSetting, &out.AutoHealSetting
 		*out = new(SiteConfigAutoHealSettingInitParameters)
@@ -27437,11 +27432,6 @@ func (in *LinuxWebAppSlotSiteConfigObservation) DeepCopyInto(out *LinuxWebAppSlo
 		in, out := &in.ApplicationStack, &out.ApplicationStack
 		*out = new(LinuxWebAppSlotSiteConfigApplicationStackObservation)
 		(*in).DeepCopyInto(*out)
-	}
-	if in.AutoHealEnabled != nil {
-		in, out := &in.AutoHealEnabled, &out.AutoHealEnabled
-		*out = new(bool)
-		**out = **in
 	}
 	if in.AutoHealSetting != nil {
 		in, out := &in.AutoHealSetting, &out.AutoHealSetting
@@ -27637,11 +27627,6 @@ func (in *LinuxWebAppSlotSiteConfigParameters) DeepCopyInto(out *LinuxWebAppSlot
 		in, out := &in.ApplicationStack, &out.ApplicationStack
 		*out = new(LinuxWebAppSlotSiteConfigApplicationStackParameters)
 		(*in).DeepCopyInto(*out)
-	}
-	if in.AutoHealEnabled != nil {
-		in, out := &in.AutoHealEnabled, &out.AutoHealEnabled
-		*out = new(bool)
-		**out = **in
 	}
 	if in.AutoHealSetting != nil {
 		in, out := &in.AutoHealSetting, &out.AutoHealSetting
@@ -30761,11 +30746,6 @@ func (in *SiteConfigAutoHealSettingTriggerSlowRequestInitParameters) DeepCopyInt
 		*out = new(string)
 		**out = **in
 	}
-	if in.Path != nil {
-		in, out := &in.Path, &out.Path
-		*out = new(string)
-		**out = **in
-	}
 	if in.TimeTaken != nil {
 		in, out := &in.TimeTaken, &out.TimeTaken
 		*out = new(string)
@@ -30796,11 +30776,6 @@ func (in *SiteConfigAutoHealSettingTriggerSlowRequestObservation) DeepCopyInto(o
 		*out = new(string)
 		**out = **in
 	}
-	if in.Path != nil {
-		in, out := &in.Path, &out.Path
-		*out = new(string)
-		**out = **in
-	}
 	if in.TimeTaken != nil {
 		in, out := &in.TimeTaken, &out.TimeTaken
 		*out = new(string)
@@ -30828,11 +30803,6 @@ func (in *SiteConfigAutoHealSettingTriggerSlowRequestParameters) DeepCopyInto(ou
 	}
 	if in.Interval != nil {
 		in, out := &in.Interval, &out.Interval
-		*out = new(string)
-		**out = **in
-	}
-	if in.Path != nil {
-		in, out := &in.Path, &out.Path
 		*out = new(string)
 		**out = **in
 	}
@@ -32611,11 +32581,6 @@ func (in *SlowRequestInitParameters) DeepCopyInto(out *SlowRequestInitParameters
 		*out = new(string)
 		**out = **in
 	}
-	if in.Path != nil {
-		in, out := &in.Path, &out.Path
-		*out = new(string)
-		**out = **in
-	}
 	if in.TimeTaken != nil {
 		in, out := &in.TimeTaken, &out.TimeTaken
 		*out = new(string)
@@ -32646,11 +32611,6 @@ func (in *SlowRequestObservation) DeepCopyInto(out *SlowRequestObservation) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.Path != nil {
-		in, out := &in.Path, &out.Path
-		*out = new(string)
-		**out = **in
-	}
 	if in.TimeTaken != nil {
 		in, out := &in.TimeTaken, &out.TimeTaken
 		*out = new(string)
@@ -32678,11 +32638,6 @@ func (in *SlowRequestParameters) DeepCopyInto(out *SlowRequestParameters) {
 	}
 	if in.Interval != nil {
 		in, out := &in.Interval, &out.Interval
-		*out = new(string)
-		**out = **in
-	}
-	if in.Path != nil {
-		in, out := &in.Path, &out.Path
 		*out = new(string)
 		**out = **in
 	}
@@ -33929,11 +33884,6 @@ func (in *TriggerSlowRequestInitParameters) DeepCopyInto(out *TriggerSlowRequest
 		*out = new(string)
 		**out = **in
 	}
-	if in.Path != nil {
-		in, out := &in.Path, &out.Path
-		*out = new(string)
-		**out = **in
-	}
 	if in.TimeTaken != nil {
 		in, out := &in.TimeTaken, &out.TimeTaken
 		*out = new(string)
@@ -33964,11 +33914,6 @@ func (in *TriggerSlowRequestObservation) DeepCopyInto(out *TriggerSlowRequestObs
 		*out = new(string)
 		**out = **in
 	}
-	if in.Path != nil {
-		in, out := &in.Path, &out.Path
-		*out = new(string)
-		**out = **in
-	}
 	if in.TimeTaken != nil {
 		in, out := &in.TimeTaken, &out.TimeTaken
 		*out = new(string)
@@ -33996,11 +33941,6 @@ func (in *TriggerSlowRequestParameters) DeepCopyInto(out *TriggerSlowRequestPara
 	}
 	if in.Interval != nil {
 		in, out := &in.Interval, &out.Interval
-		*out = new(string)
-		**out = **in
-	}
-	if in.Path != nil {
-		in, out := &in.Path, &out.Path
 		*out = new(string)
 		**out = **in
 	}
@@ -38163,6 +38103,11 @@ func (in *WindowsFunctionAppInitParameters) DeepCopyInto(out *WindowsFunctionApp
 			(*out)[key] = outVal
 		}
 	}
+	if in.VirtualNetworkBackupRestoreEnabled != nil {
+		in, out := &in.VirtualNetworkBackupRestoreEnabled, &out.VirtualNetworkBackupRestoreEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.VirtualNetworkSubnetID != nil {
 		in, out := &in.VirtualNetworkSubnetID, &out.VirtualNetworkSubnetID
 		*out = new(string)
@@ -38177,6 +38122,11 @@ func (in *WindowsFunctionAppInitParameters) DeepCopyInto(out *WindowsFunctionApp
 		in, out := &in.VirtualNetworkSubnetIDSelector, &out.VirtualNetworkSubnetIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.VnetImagePullEnabled != nil {
+		in, out := &in.VnetImagePullEnabled, &out.VnetImagePullEnabled
+		*out = new(bool)
+		**out = **in
 	}
 	if in.WebdeployPublishBasicAuthenticationEnabled != nil {
 		in, out := &in.WebdeployPublishBasicAuthenticationEnabled, &out.WebdeployPublishBasicAuthenticationEnabled
@@ -38453,9 +38403,19 @@ func (in *WindowsFunctionAppObservation) DeepCopyInto(out *WindowsFunctionAppObs
 			(*out)[key] = outVal
 		}
 	}
+	if in.VirtualNetworkBackupRestoreEnabled != nil {
+		in, out := &in.VirtualNetworkBackupRestoreEnabled, &out.VirtualNetworkBackupRestoreEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.VirtualNetworkSubnetID != nil {
 		in, out := &in.VirtualNetworkSubnetID, &out.VirtualNetworkSubnetID
 		*out = new(string)
+		**out = **in
+	}
+	if in.VnetImagePullEnabled != nil {
+		in, out := &in.VnetImagePullEnabled, &out.VnetImagePullEnabled
+		*out = new(bool)
 		**out = **in
 	}
 	if in.WebdeployPublishBasicAuthenticationEnabled != nil {
@@ -38684,6 +38644,11 @@ func (in *WindowsFunctionAppParameters) DeepCopyInto(out *WindowsFunctionAppPara
 			(*out)[key] = outVal
 		}
 	}
+	if in.VirtualNetworkBackupRestoreEnabled != nil {
+		in, out := &in.VirtualNetworkBackupRestoreEnabled, &out.VirtualNetworkBackupRestoreEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.VirtualNetworkSubnetID != nil {
 		in, out := &in.VirtualNetworkSubnetID, &out.VirtualNetworkSubnetID
 		*out = new(string)
@@ -38698,6 +38663,11 @@ func (in *WindowsFunctionAppParameters) DeepCopyInto(out *WindowsFunctionAppPara
 		in, out := &in.VirtualNetworkSubnetIDSelector, &out.VirtualNetworkSubnetIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.VnetImagePullEnabled != nil {
+		in, out := &in.VnetImagePullEnabled, &out.VnetImagePullEnabled
+		*out = new(bool)
+		**out = **in
 	}
 	if in.WebdeployPublishBasicAuthenticationEnabled != nil {
 		in, out := &in.WebdeployPublishBasicAuthenticationEnabled, &out.WebdeployPublishBasicAuthenticationEnabled
@@ -43862,6 +43832,11 @@ func (in *WindowsFunctionAppSlotInitParameters) DeepCopyInto(out *WindowsFunctio
 			(*out)[key] = outVal
 		}
 	}
+	if in.VirtualNetworkBackupRestoreEnabled != nil {
+		in, out := &in.VirtualNetworkBackupRestoreEnabled, &out.VirtualNetworkBackupRestoreEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.VirtualNetworkSubnetID != nil {
 		in, out := &in.VirtualNetworkSubnetID, &out.VirtualNetworkSubnetID
 		*out = new(string)
@@ -43876,6 +43851,11 @@ func (in *WindowsFunctionAppSlotInitParameters) DeepCopyInto(out *WindowsFunctio
 		in, out := &in.VirtualNetworkSubnetIDSelector, &out.VirtualNetworkSubnetIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.VnetImagePullEnabled != nil {
+		in, out := &in.VnetImagePullEnabled, &out.VnetImagePullEnabled
+		*out = new(bool)
+		**out = **in
 	}
 	if in.WebdeployPublishBasicAuthenticationEnabled != nil {
 		in, out := &in.WebdeployPublishBasicAuthenticationEnabled, &out.WebdeployPublishBasicAuthenticationEnabled
@@ -44137,9 +44117,19 @@ func (in *WindowsFunctionAppSlotObservation) DeepCopyInto(out *WindowsFunctionAp
 			(*out)[key] = outVal
 		}
 	}
+	if in.VirtualNetworkBackupRestoreEnabled != nil {
+		in, out := &in.VirtualNetworkBackupRestoreEnabled, &out.VirtualNetworkBackupRestoreEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.VirtualNetworkSubnetID != nil {
 		in, out := &in.VirtualNetworkSubnetID, &out.VirtualNetworkSubnetID
 		*out = new(string)
+		**out = **in
+	}
+	if in.VnetImagePullEnabled != nil {
+		in, out := &in.VnetImagePullEnabled, &out.VnetImagePullEnabled
+		*out = new(bool)
 		**out = **in
 	}
 	if in.WebdeployPublishBasicAuthenticationEnabled != nil {
@@ -44343,6 +44333,11 @@ func (in *WindowsFunctionAppSlotParameters) DeepCopyInto(out *WindowsFunctionApp
 			(*out)[key] = outVal
 		}
 	}
+	if in.VirtualNetworkBackupRestoreEnabled != nil {
+		in, out := &in.VirtualNetworkBackupRestoreEnabled, &out.VirtualNetworkBackupRestoreEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.VirtualNetworkSubnetID != nil {
 		in, out := &in.VirtualNetworkSubnetID, &out.VirtualNetworkSubnetID
 		*out = new(string)
@@ -44357,6 +44352,11 @@ func (in *WindowsFunctionAppSlotParameters) DeepCopyInto(out *WindowsFunctionApp
 		in, out := &in.VirtualNetworkSubnetIDSelector, &out.VirtualNetworkSubnetIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.VnetImagePullEnabled != nil {
+		in, out := &in.VnetImagePullEnabled, &out.VnetImagePullEnabled
+		*out = new(bool)
+		**out = **in
 	}
 	if in.WebdeployPublishBasicAuthenticationEnabled != nil {
 		in, out := &in.WebdeployPublishBasicAuthenticationEnabled, &out.WebdeployPublishBasicAuthenticationEnabled
@@ -49936,6 +49936,11 @@ func (in *WindowsWebAppInitParameters) DeepCopyInto(out *WindowsWebAppInitParame
 			(*out)[key] = outVal
 		}
 	}
+	if in.VirtualNetworkBackupRestoreEnabled != nil {
+		in, out := &in.VirtualNetworkBackupRestoreEnabled, &out.VirtualNetworkBackupRestoreEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.VirtualNetworkSubnetID != nil {
 		in, out := &in.VirtualNetworkSubnetID, &out.VirtualNetworkSubnetID
 		*out = new(string)
@@ -50518,6 +50523,11 @@ func (in *WindowsWebAppObservation) DeepCopyInto(out *WindowsWebAppObservation) 
 			(*out)[key] = outVal
 		}
 	}
+	if in.VirtualNetworkBackupRestoreEnabled != nil {
+		in, out := &in.VirtualNetworkBackupRestoreEnabled, &out.VirtualNetworkBackupRestoreEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.VirtualNetworkSubnetID != nil {
 		in, out := &in.VirtualNetworkSubnetID, &out.VirtualNetworkSubnetID
 		*out = new(string)
@@ -50709,6 +50719,11 @@ func (in *WindowsWebAppParameters) DeepCopyInto(out *WindowsWebAppParameters) {
 			(*out)[key] = outVal
 		}
 	}
+	if in.VirtualNetworkBackupRestoreEnabled != nil {
+		in, out := &in.VirtualNetworkBackupRestoreEnabled, &out.VirtualNetworkBackupRestoreEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.VirtualNetworkSubnetID != nil {
 		in, out := &in.VirtualNetworkSubnetID, &out.VirtualNetworkSubnetID
 		*out = new(string)
@@ -50754,21 +50769,6 @@ func (in *WindowsWebAppSiteConfigApplicationStackInitParameters) DeepCopyInto(ou
 		*out = new(string)
 		**out = **in
 	}
-	if in.DockerContainerName != nil {
-		in, out := &in.DockerContainerName, &out.DockerContainerName
-		*out = new(string)
-		**out = **in
-	}
-	if in.DockerContainerRegistry != nil {
-		in, out := &in.DockerContainerRegistry, &out.DockerContainerRegistry
-		*out = new(string)
-		**out = **in
-	}
-	if in.DockerContainerTag != nil {
-		in, out := &in.DockerContainerTag, &out.DockerContainerTag
-		*out = new(string)
-		**out = **in
-	}
 	if in.DockerImageName != nil {
 		in, out := &in.DockerImageName, &out.DockerImageName
 		*out = new(string)
@@ -50832,11 +50832,6 @@ func (in *WindowsWebAppSiteConfigApplicationStackInitParameters) DeepCopyInto(ou
 	if in.Python != nil {
 		in, out := &in.Python, &out.Python
 		*out = new(bool)
-		**out = **in
-	}
-	if in.PythonVersion != nil {
-		in, out := &in.PythonVersion, &out.PythonVersion
-		*out = new(string)
 		**out = **in
 	}
 	if in.TomcatVersion != nil {
@@ -50864,21 +50859,6 @@ func (in *WindowsWebAppSiteConfigApplicationStackObservation) DeepCopyInto(out *
 		*out = new(string)
 		**out = **in
 	}
-	if in.DockerContainerName != nil {
-		in, out := &in.DockerContainerName, &out.DockerContainerName
-		*out = new(string)
-		**out = **in
-	}
-	if in.DockerContainerRegistry != nil {
-		in, out := &in.DockerContainerRegistry, &out.DockerContainerRegistry
-		*out = new(string)
-		**out = **in
-	}
-	if in.DockerContainerTag != nil {
-		in, out := &in.DockerContainerTag, &out.DockerContainerTag
-		*out = new(string)
-		**out = **in
-	}
 	if in.DockerImageName != nil {
 		in, out := &in.DockerImageName, &out.DockerImageName
 		*out = new(string)
@@ -50939,11 +50919,6 @@ func (in *WindowsWebAppSiteConfigApplicationStackObservation) DeepCopyInto(out *
 		*out = new(bool)
 		**out = **in
 	}
-	if in.PythonVersion != nil {
-		in, out := &in.PythonVersion, &out.PythonVersion
-		*out = new(string)
-		**out = **in
-	}
 	if in.TomcatVersion != nil {
 		in, out := &in.TomcatVersion, &out.TomcatVersion
 		*out = new(string)
@@ -50966,21 +50941,6 @@ func (in *WindowsWebAppSiteConfigApplicationStackParameters) DeepCopyInto(out *W
 	*out = *in
 	if in.CurrentStack != nil {
 		in, out := &in.CurrentStack, &out.CurrentStack
-		*out = new(string)
-		**out = **in
-	}
-	if in.DockerContainerName != nil {
-		in, out := &in.DockerContainerName, &out.DockerContainerName
-		*out = new(string)
-		**out = **in
-	}
-	if in.DockerContainerRegistry != nil {
-		in, out := &in.DockerContainerRegistry, &out.DockerContainerRegistry
-		*out = new(string)
-		**out = **in
-	}
-	if in.DockerContainerTag != nil {
-		in, out := &in.DockerContainerTag, &out.DockerContainerTag
 		*out = new(string)
 		**out = **in
 	}
@@ -51047,11 +51007,6 @@ func (in *WindowsWebAppSiteConfigApplicationStackParameters) DeepCopyInto(out *W
 	if in.Python != nil {
 		in, out := &in.Python, &out.Python
 		*out = new(bool)
-		**out = **in
-	}
-	if in.PythonVersion != nil {
-		in, out := &in.PythonVersion, &out.PythonVersion
-		*out = new(string)
 		**out = **in
 	}
 	if in.TomcatVersion != nil {
@@ -51629,11 +51584,6 @@ func (in *WindowsWebAppSiteConfigInitParameters) DeepCopyInto(out *WindowsWebApp
 		*out = new(WindowsWebAppSiteConfigApplicationStackInitParameters)
 		(*in).DeepCopyInto(*out)
 	}
-	if in.AutoHealEnabled != nil {
-		in, out := &in.AutoHealEnabled, &out.AutoHealEnabled
-		*out = new(bool)
-		**out = **in
-	}
 	if in.AutoHealSetting != nil {
 		in, out := &in.AutoHealSetting, &out.AutoHealSetting
 		*out = new(WindowsWebAppSiteConfigAutoHealSettingInitParameters)
@@ -51822,11 +51772,6 @@ func (in *WindowsWebAppSiteConfigObservation) DeepCopyInto(out *WindowsWebAppSit
 		in, out := &in.ApplicationStack, &out.ApplicationStack
 		*out = new(WindowsWebAppSiteConfigApplicationStackObservation)
 		(*in).DeepCopyInto(*out)
-	}
-	if in.AutoHealEnabled != nil {
-		in, out := &in.AutoHealEnabled, &out.AutoHealEnabled
-		*out = new(bool)
-		**out = **in
 	}
 	if in.AutoHealSetting != nil {
 		in, out := &in.AutoHealSetting, &out.AutoHealSetting
@@ -52036,11 +51981,6 @@ func (in *WindowsWebAppSiteConfigParameters) DeepCopyInto(out *WindowsWebAppSite
 		in, out := &in.ApplicationStack, &out.ApplicationStack
 		*out = new(WindowsWebAppSiteConfigApplicationStackParameters)
 		(*in).DeepCopyInto(*out)
-	}
-	if in.AutoHealEnabled != nil {
-		in, out := &in.AutoHealEnabled, &out.AutoHealEnabled
-		*out = new(bool)
-		**out = **in
 	}
 	if in.AutoHealSetting != nil {
 		in, out := &in.AutoHealSetting, &out.AutoHealSetting
@@ -56064,6 +56004,11 @@ func (in *WindowsWebAppSlotInitParameters) DeepCopyInto(out *WindowsWebAppSlotIn
 			(*out)[key] = outVal
 		}
 	}
+	if in.VirtualNetworkBackupRestoreEnabled != nil {
+		in, out := &in.VirtualNetworkBackupRestoreEnabled, &out.VirtualNetworkBackupRestoreEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.VirtualNetworkSubnetID != nil {
 		in, out := &in.VirtualNetworkSubnetID, &out.VirtualNetworkSubnetID
 		*out = new(string)
@@ -56801,6 +56746,11 @@ func (in *WindowsWebAppSlotObservation) DeepCopyInto(out *WindowsWebAppSlotObser
 			(*out)[key] = outVal
 		}
 	}
+	if in.VirtualNetworkBackupRestoreEnabled != nil {
+		in, out := &in.VirtualNetworkBackupRestoreEnabled, &out.VirtualNetworkBackupRestoreEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.VirtualNetworkSubnetID != nil {
 		in, out := &in.VirtualNetworkSubnetID, &out.VirtualNetworkSubnetID
 		*out = new(string)
@@ -56972,6 +56922,11 @@ func (in *WindowsWebAppSlotParameters) DeepCopyInto(out *WindowsWebAppSlotParame
 			(*out)[key] = outVal
 		}
 	}
+	if in.VirtualNetworkBackupRestoreEnabled != nil {
+		in, out := &in.VirtualNetworkBackupRestoreEnabled, &out.VirtualNetworkBackupRestoreEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.VirtualNetworkSubnetID != nil {
 		in, out := &in.VirtualNetworkSubnetID, &out.VirtualNetworkSubnetID
 		*out = new(string)
@@ -57017,21 +56972,6 @@ func (in *WindowsWebAppSlotSiteConfigApplicationStackInitParameters) DeepCopyInt
 		*out = new(string)
 		**out = **in
 	}
-	if in.DockerContainerName != nil {
-		in, out := &in.DockerContainerName, &out.DockerContainerName
-		*out = new(string)
-		**out = **in
-	}
-	if in.DockerContainerRegistry != nil {
-		in, out := &in.DockerContainerRegistry, &out.DockerContainerRegistry
-		*out = new(string)
-		**out = **in
-	}
-	if in.DockerContainerTag != nil {
-		in, out := &in.DockerContainerTag, &out.DockerContainerTag
-		*out = new(string)
-		**out = **in
-	}
 	if in.DockerImageName != nil {
 		in, out := &in.DockerImageName, &out.DockerImageName
 		*out = new(string)
@@ -57095,11 +57035,6 @@ func (in *WindowsWebAppSlotSiteConfigApplicationStackInitParameters) DeepCopyInt
 	if in.Python != nil {
 		in, out := &in.Python, &out.Python
 		*out = new(bool)
-		**out = **in
-	}
-	if in.PythonVersion != nil {
-		in, out := &in.PythonVersion, &out.PythonVersion
-		*out = new(string)
 		**out = **in
 	}
 	if in.TomcatVersion != nil {
@@ -57127,21 +57062,6 @@ func (in *WindowsWebAppSlotSiteConfigApplicationStackObservation) DeepCopyInto(o
 		*out = new(string)
 		**out = **in
 	}
-	if in.DockerContainerName != nil {
-		in, out := &in.DockerContainerName, &out.DockerContainerName
-		*out = new(string)
-		**out = **in
-	}
-	if in.DockerContainerRegistry != nil {
-		in, out := &in.DockerContainerRegistry, &out.DockerContainerRegistry
-		*out = new(string)
-		**out = **in
-	}
-	if in.DockerContainerTag != nil {
-		in, out := &in.DockerContainerTag, &out.DockerContainerTag
-		*out = new(string)
-		**out = **in
-	}
 	if in.DockerImageName != nil {
 		in, out := &in.DockerImageName, &out.DockerImageName
 		*out = new(string)
@@ -57202,11 +57122,6 @@ func (in *WindowsWebAppSlotSiteConfigApplicationStackObservation) DeepCopyInto(o
 		*out = new(bool)
 		**out = **in
 	}
-	if in.PythonVersion != nil {
-		in, out := &in.PythonVersion, &out.PythonVersion
-		*out = new(string)
-		**out = **in
-	}
 	if in.TomcatVersion != nil {
 		in, out := &in.TomcatVersion, &out.TomcatVersion
 		*out = new(string)
@@ -57229,21 +57144,6 @@ func (in *WindowsWebAppSlotSiteConfigApplicationStackParameters) DeepCopyInto(ou
 	*out = *in
 	if in.CurrentStack != nil {
 		in, out := &in.CurrentStack, &out.CurrentStack
-		*out = new(string)
-		**out = **in
-	}
-	if in.DockerContainerName != nil {
-		in, out := &in.DockerContainerName, &out.DockerContainerName
-		*out = new(string)
-		**out = **in
-	}
-	if in.DockerContainerRegistry != nil {
-		in, out := &in.DockerContainerRegistry, &out.DockerContainerRegistry
-		*out = new(string)
-		**out = **in
-	}
-	if in.DockerContainerTag != nil {
-		in, out := &in.DockerContainerTag, &out.DockerContainerTag
 		*out = new(string)
 		**out = **in
 	}
@@ -57310,11 +57210,6 @@ func (in *WindowsWebAppSlotSiteConfigApplicationStackParameters) DeepCopyInto(ou
 	if in.Python != nil {
 		in, out := &in.Python, &out.Python
 		*out = new(bool)
-		**out = **in
-	}
-	if in.PythonVersion != nil {
-		in, out := &in.PythonVersion, &out.PythonVersion
-		*out = new(string)
 		**out = **in
 	}
 	if in.TomcatVersion != nil {
@@ -58114,11 +58009,6 @@ func (in *WindowsWebAppSlotSiteConfigInitParameters) DeepCopyInto(out *WindowsWe
 		*out = new(WindowsWebAppSlotSiteConfigApplicationStackInitParameters)
 		(*in).DeepCopyInto(*out)
 	}
-	if in.AutoHealEnabled != nil {
-		in, out := &in.AutoHealEnabled, &out.AutoHealEnabled
-		*out = new(bool)
-		**out = **in
-	}
 	if in.AutoHealSetting != nil {
 		in, out := &in.AutoHealSetting, &out.AutoHealSetting
 		*out = new(WindowsWebAppSlotSiteConfigAutoHealSettingInitParameters)
@@ -58312,11 +58202,6 @@ func (in *WindowsWebAppSlotSiteConfigObservation) DeepCopyInto(out *WindowsWebAp
 		in, out := &in.ApplicationStack, &out.ApplicationStack
 		*out = new(WindowsWebAppSlotSiteConfigApplicationStackObservation)
 		(*in).DeepCopyInto(*out)
-	}
-	if in.AutoHealEnabled != nil {
-		in, out := &in.AutoHealEnabled, &out.AutoHealEnabled
-		*out = new(bool)
-		**out = **in
 	}
 	if in.AutoHealSetting != nil {
 		in, out := &in.AutoHealSetting, &out.AutoHealSetting
@@ -58526,11 +58411,6 @@ func (in *WindowsWebAppSlotSiteConfigParameters) DeepCopyInto(out *WindowsWebApp
 		in, out := &in.ApplicationStack, &out.ApplicationStack
 		*out = new(WindowsWebAppSlotSiteConfigApplicationStackParameters)
 		(*in).DeepCopyInto(*out)
-	}
-	if in.AutoHealEnabled != nil {
-		in, out := &in.AutoHealEnabled, &out.AutoHealEnabled
-		*out = new(bool)
-		**out = **in
 	}
 	if in.AutoHealSetting != nil {
 		in, out := &in.AutoHealSetting, &out.AutoHealSetting

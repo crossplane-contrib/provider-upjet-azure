@@ -31,9 +31,6 @@ func (tr *Factory) Hub() {}
 func (tr *IntegrationRuntimeAzureSSIS) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *IntegrationRuntimeManaged) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *LinkedCustomService) Hub() {}
 
 // Hub marks this type as a conversion hub.
