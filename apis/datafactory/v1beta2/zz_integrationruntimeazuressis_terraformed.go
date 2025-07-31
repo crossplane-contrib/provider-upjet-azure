@@ -21,7 +21,7 @@ func (mg *IntegrationRuntimeAzureSSIS) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this IntegrationRuntimeAzureSSIS
 func (tr *IntegrationRuntimeAzureSSIS) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"catalog_info[*].administrator_password": "catalogInfo[*].administratorPasswordSecretRef", "custom_setup_script[*].sas_token": "customSetupScript[*].sasTokenSecretRef", "express_custom_setup[*].command_key[*].password": "expressCustomSetup[*].commandKey[*].passwordSecretRef", "express_custom_setup[*].component[*].license": "expressCustomSetup[*].component[*].licenseSecretRef"}
+	return map[string]string{"catalog_info[*].administrator_password": "catalogInfo.administratorPasswordSecretRef", "custom_setup_script[*].sas_token": "customSetupScript.sasTokenSecretRef", "express_custom_setup[*].command_key[*].password": "expressCustomSetup.commandKey[*].passwordSecretRef", "express_custom_setup[*].component[*].license": "expressCustomSetup.component[*].licenseSecretRef"}
 }
 
 // GetObservation of this IntegrationRuntimeAzureSSIS

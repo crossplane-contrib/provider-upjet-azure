@@ -21,7 +21,7 @@ func (mg *LinkedServiceOData) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this LinkedServiceOData
 func (tr *LinkedServiceOData) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"basic_authentication[*].password": "basicAuthentication[*].passwordSecretRef"}
+	return map[string]string{"basic_authentication[*].password": "basicAuthentication.passwordSecretRef"}
 }
 
 // GetObservation of this LinkedServiceOData

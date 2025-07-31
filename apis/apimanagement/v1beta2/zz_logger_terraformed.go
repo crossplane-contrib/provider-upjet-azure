@@ -21,7 +21,7 @@ func (mg *Logger) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Logger
 func (tr *Logger) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"application_insights[*].connection_string": "applicationInsights[*].connectionStringSecretRef", "application_insights[*].instrumentation_key": "applicationInsights[*].instrumentationKeySecretRef", "eventhub[*].connection_string": "eventhub[*].connectionStringSecretRef"}
+	return map[string]string{"application_insights[*].connection_string": "applicationInsights.connectionStringSecretRef", "application_insights[*].instrumentation_key": "applicationInsights.instrumentationKeySecretRef", "eventhub[*].connection_string": "eventhub.connectionStringSecretRef"}
 }
 
 // GetObservation of this Logger

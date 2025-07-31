@@ -21,7 +21,7 @@ func (mg *FunctionAppSlot) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this FunctionAppSlot
 func (tr *FunctionAppSlot) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"auth_settings[*].active_directory[*].client_secret": "authSettings[*].activeDirectory[*].clientSecretSecretRef", "auth_settings[*].facebook[*].app_secret": "authSettings[*].facebook[*].appSecretSecretRef", "auth_settings[*].google[*].client_secret": "authSettings[*].google[*].clientSecretSecretRef", "auth_settings[*].microsoft[*].client_secret": "authSettings[*].microsoft[*].clientSecretSecretRef", "auth_settings[*].twitter[*].consumer_secret": "authSettings[*].twitter[*].consumerSecretSecretRef", "connection_string[*].value": "connectionString[*].valueSecretRef", "storage_account_access_key": "storageAccountAccessKeySecretRef"}
+	return map[string]string{"auth_settings[*].active_directory[*].client_secret": "authSettings.activeDirectory.clientSecretSecretRef", "auth_settings[*].facebook[*].app_secret": "authSettings.facebook.appSecretSecretRef", "auth_settings[*].google[*].client_secret": "authSettings.google.clientSecretSecretRef", "auth_settings[*].microsoft[*].client_secret": "authSettings.microsoft.clientSecretSecretRef", "auth_settings[*].twitter[*].consumer_secret": "authSettings.twitter.consumerSecretSecretRef", "connection_string[*].value": "connectionString[*].valueSecretRef", "storage_account_access_key": "storageAccountAccessKeySecretRef"}
 }
 
 // GetObservation of this FunctionAppSlot

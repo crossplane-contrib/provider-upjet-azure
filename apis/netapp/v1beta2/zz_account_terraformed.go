@@ -21,7 +21,7 @@ func (mg *Account) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Account
 func (tr *Account) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"active_directory[*].password": "activeDirectory[*].passwordSecretRef", "active_directory[*].server_root_ca_certificate": "activeDirectory[*].serverRootCaCertificateSecretRef"}
+	return map[string]string{"active_directory[*].password": "activeDirectory.passwordSecretRef", "active_directory[*].server_root_ca_certificate": "activeDirectory.serverRootCaCertificateSecretRef"}
 }
 
 // GetObservation of this Account

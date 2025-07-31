@@ -21,7 +21,7 @@ func (mg *OrchestratedVirtualMachineScaleSet) GetTerraformResourceType() string 
 
 // GetConnectionDetailsMapping for this OrchestratedVirtualMachineScaleSet
 func (tr *OrchestratedVirtualMachineScaleSet) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"extension[*].protected_settings": "extension[*].protectedSettingsSecretRef", "os_profile[*].custom_data": "osProfile[*].customDataSecretRef", "os_profile[*].linux_configuration[*].admin_password": "osProfile[*].linuxConfiguration[*].adminPasswordSecretRef", "os_profile[*].windows_configuration[*].additional_unattend_content[*].content": "osProfile[*].windowsConfiguration[*].additionalUnattendContent[*].contentSecretRef", "os_profile[*].windows_configuration[*].admin_password": "osProfile[*].windowsConfiguration[*].adminPasswordSecretRef", "user_data_base64": "userDataBase64SecretRef"}
+	return map[string]string{"extension[*].protected_settings": "extension[*].protectedSettingsSecretRef", "os_profile[*].custom_data": "osProfile.customDataSecretRef", "os_profile[*].linux_configuration[*].admin_password": "osProfile.linuxConfiguration.adminPasswordSecretRef", "os_profile[*].windows_configuration[*].additional_unattend_content[*].content": "osProfile.windowsConfiguration.additionalUnattendContent[*].contentSecretRef", "os_profile[*].windows_configuration[*].admin_password": "osProfile.windowsConfiguration.adminPasswordSecretRef", "user_data_base64": "userDataBase64SecretRef"}
 }
 
 // GetObservation of this OrchestratedVirtualMachineScaleSet

@@ -21,7 +21,7 @@ func (mg *IOTHubDeviceUpdateInstance) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this IOTHubDeviceUpdateInstance
 func (tr *IOTHubDeviceUpdateInstance) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"diagnostic_storage_account[*].connection_string": "diagnosticStorageAccount[*].connectionStringSecretRef"}
+	return map[string]string{"diagnostic_storage_account[*].connection_string": "diagnosticStorageAccount.connectionStringSecretRef"}
 }
 
 // GetObservation of this IOTHubDeviceUpdateInstance

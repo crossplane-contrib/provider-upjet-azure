@@ -21,7 +21,7 @@ func (mg *NotificationHub) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this NotificationHub
 func (tr *NotificationHub) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"apns_credential[*].token": "apnsCredential[*].tokenSecretRef", "browser_credential[*].vapid_private_key": "browserCredential[*].vapidPrivateKeySecretRef", "gcm_credential[*].api_key": "gcmCredential[*].apiKeySecretRef"}
+	return map[string]string{"apns_credential[*].token": "apnsCredential.tokenSecretRef", "browser_credential[*].vapid_private_key": "browserCredential.vapidPrivateKeySecretRef", "gcm_credential[*].api_key": "gcmCredential.apiKeySecretRef"}
 }
 
 // GetObservation of this NotificationHub
