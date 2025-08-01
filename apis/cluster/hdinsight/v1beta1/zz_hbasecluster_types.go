@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AutoscaleRecurrenceInitParameters struct {
@@ -703,7 +703,7 @@ type HBaseClusterStorageAccountInitParameters struct {
 
 	// The ID of the Storage Container. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta1.Container
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	StorageContainerID *string `json:"storageContainerId,omitempty" tf:"storage_container_id,omitempty"`
 
 	// Reference to a Container in storage to populate storageContainerId.
@@ -742,7 +742,7 @@ type HBaseClusterStorageAccountParameters struct {
 
 	// The ID of the Storage Container. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta1.Container
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StorageContainerID *string `json:"storageContainerId,omitempty" tf:"storage_container_id,omitempty"`
 

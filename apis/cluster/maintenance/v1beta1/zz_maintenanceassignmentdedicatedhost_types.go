@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type MaintenanceAssignmentDedicatedHostInitParameters struct {
 
 	// Specifies the Dedicated Host ID to which the Maintenance Configuration will be assigned. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/compute/v1beta1.DedicatedHost
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DedicatedHostID *string `json:"dedicatedHostId,omitempty" tf:"dedicated_host_id,omitempty"`
 
 	// Reference to a DedicatedHost in compute to populate dedicatedHostId.
@@ -33,7 +33,7 @@ type MaintenanceAssignmentDedicatedHostInitParameters struct {
 
 	// Specifies the ID of the Maintenance Configuration Resource. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/maintenance/v1beta2.MaintenanceConfiguration
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	MaintenanceConfigurationID *string `json:"maintenanceConfigurationId,omitempty" tf:"maintenance_configuration_id,omitempty"`
 
 	// Reference to a MaintenanceConfiguration in maintenance to populate maintenanceConfigurationId.
@@ -64,7 +64,7 @@ type MaintenanceAssignmentDedicatedHostParameters struct {
 
 	// Specifies the Dedicated Host ID to which the Maintenance Configuration will be assigned. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/compute/v1beta1.DedicatedHost
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DedicatedHostID *string `json:"dedicatedHostId,omitempty" tf:"dedicated_host_id,omitempty"`
 
@@ -82,7 +82,7 @@ type MaintenanceAssignmentDedicatedHostParameters struct {
 
 	// Specifies the ID of the Maintenance Configuration Resource. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/maintenance/v1beta2.MaintenanceConfiguration
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	MaintenanceConfigurationID *string `json:"maintenanceConfigurationId,omitempty" tf:"maintenance_configuration_id,omitempty"`
 

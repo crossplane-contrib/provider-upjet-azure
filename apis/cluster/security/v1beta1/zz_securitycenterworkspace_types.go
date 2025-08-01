@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type SecurityCenterWorkspaceInitParameters struct {
@@ -20,7 +20,7 @@ type SecurityCenterWorkspaceInitParameters struct {
 
 	// The ID of the Log Analytics Workspace to save the data in.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/operationalinsights/v1beta2.Workspace
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 
 	// Reference to a Workspace in operationalinsights to populate workspaceId.
@@ -52,7 +52,7 @@ type SecurityCenterWorkspaceParameters struct {
 
 	// The ID of the Log Analytics Workspace to save the data in.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/operationalinsights/v1beta2.Workspace
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 

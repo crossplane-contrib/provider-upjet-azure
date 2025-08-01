@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type DefinitionInitParameters struct {
@@ -26,7 +26,7 @@ type DefinitionInitParameters struct {
 
 	// Specifies a list of resources or aliases that this Subnet Service Endpoint Storage Policy Definition applies to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +listType=set
 	ServiceResources []*string `json:"serviceResources,omitempty" tf:"service_resources,omitempty"`
 
@@ -71,7 +71,7 @@ type DefinitionParameters struct {
 
 	// Specifies a list of resources or aliases that this Subnet Service Endpoint Storage Policy Definition applies to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	ServiceResources []*string `json:"serviceResources,omitempty" tf:"service_resources,omitempty"`

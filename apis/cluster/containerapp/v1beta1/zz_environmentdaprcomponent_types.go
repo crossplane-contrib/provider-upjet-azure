@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type EnvironmentDaprComponentInitParameters struct {
@@ -88,7 +88,7 @@ type EnvironmentDaprComponentParameters struct {
 	// The ID of the Container App Managed Environment for this Dapr Component. Changing this forces a new resource to be created.
 	// The Container App Managed Environment ID to configure this Dapr component on.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/containerapp/v1beta1.Environment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ContainerAppEnvironmentID *string `json:"containerAppEnvironmentId,omitempty" tf:"container_app_environment_id,omitempty"`
 

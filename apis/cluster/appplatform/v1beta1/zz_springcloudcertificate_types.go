@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type SpringCloudCertificateInitParameters struct {
@@ -23,7 +23,7 @@ type SpringCloudCertificateInitParameters struct {
 
 	// Specifies the ID of the Key Vault Certificate resource. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/keyvault/v1beta2.Certificate
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	KeyVaultCertificateID *string `json:"keyVaultCertificateId,omitempty" tf:"key_vault_certificate_id,omitempty"`
 
 	// Reference to a Certificate in keyvault to populate keyVaultCertificateId.
@@ -71,7 +71,7 @@ type SpringCloudCertificateParameters struct {
 
 	// Specifies the ID of the Key Vault Certificate resource. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/keyvault/v1beta2.Certificate
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KeyVaultCertificateID *string `json:"keyVaultCertificateId,omitempty" tf:"key_vault_certificate_id,omitempty"`
 

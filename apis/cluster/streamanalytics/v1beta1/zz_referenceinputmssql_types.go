@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ReferenceInputMSSQLInitParameters struct {
@@ -44,7 +44,7 @@ type ReferenceInputMSSQLInitParameters struct {
 
 	// The fully qualified domain name of the MS SQL server.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/sql/v1beta2.MSSQLServer
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("fully_qualified_domain_name",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("fully_qualified_domain_name",true)
 	Server *string `json:"server,omitempty" tf:"server,omitempty"`
 
 	// Reference to a MSSQLServer in sql to populate server.
@@ -148,7 +148,7 @@ type ReferenceInputMSSQLParameters struct {
 
 	// The fully qualified domain name of the MS SQL server.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/sql/v1beta2.MSSQLServer
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("fully_qualified_domain_name",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("fully_qualified_domain_name",true)
 	// +kubebuilder:validation:Optional
 	Server *string `json:"server,omitempty" tf:"server,omitempty"`
 

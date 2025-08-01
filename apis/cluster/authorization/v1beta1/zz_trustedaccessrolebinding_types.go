@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type TrustedAccessRoleBindingInitParameters struct {
@@ -20,7 +20,7 @@ type TrustedAccessRoleBindingInitParameters struct {
 
 	// The ARM resource ID of source resource that trusted access is configured for. Changing this forces a new Kubernetes Cluster Trusted Access Role Binding to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/machinelearningservices/v1beta2.Workspace
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SourceResourceID *string `json:"sourceResourceId,omitempty" tf:"source_resource_id,omitempty"`
 
 	// Reference to a Workspace in machinelearningservices to populate sourceResourceId.
@@ -69,7 +69,7 @@ type TrustedAccessRoleBindingParameters struct {
 
 	// The ARM resource ID of source resource that trusted access is configured for. Changing this forces a new Kubernetes Cluster Trusted Access Role Binding to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/machinelearningservices/v1beta2.Workspace
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourceResourceID *string `json:"sourceResourceId,omitempty" tf:"source_resource_id,omitempty"`
 

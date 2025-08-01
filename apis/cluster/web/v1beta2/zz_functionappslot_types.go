@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AuthSettingsActiveDirectoryInitParameters struct {
@@ -413,7 +413,7 @@ type FunctionAppSlotInitParameters struct {
 
 	// The ID of the App Service Plan within which to create this Function App Slot. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/web/v1beta2.AppServicePlan
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	AppServicePlanID *string `json:"appServicePlanId,omitempty" tf:"app_service_plan_id,omitempty"`
 
 	// Reference to a AppServicePlan in web to populate appServicePlanId.
@@ -559,7 +559,7 @@ type FunctionAppSlotParameters struct {
 
 	// The ID of the App Service Plan within which to create this Function App Slot. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/web/v1beta2.AppServicePlan
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AppServicePlanID *string `json:"appServicePlanId,omitempty" tf:"app_service_plan_id,omitempty"`
 
@@ -598,7 +598,7 @@ type FunctionAppSlotParameters struct {
 
 	// The name of the Function App within which to create the Function App Slot. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/web/v1beta2.FunctionApp
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	FunctionAppName *string `json:"functionAppName,omitempty" tf:"function_app_name,omitempty"`
 

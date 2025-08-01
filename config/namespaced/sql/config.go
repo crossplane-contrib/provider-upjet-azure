@@ -7,10 +7,10 @@ package sql
 import (
 	"fmt"
 
-	"github.com/crossplane/upjet/pkg/config"
+	"github.com/crossplane/upjet/v2/pkg/config"
 	"github.com/pkg/errors"
 
-	xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 
 	"github.com/upbound/provider-azure/apis/namespaced/rconfig"
 )

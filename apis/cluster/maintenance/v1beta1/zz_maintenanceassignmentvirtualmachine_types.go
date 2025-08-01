@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type MaintenanceAssignmentVirtualMachineInitParameters struct {
@@ -20,7 +20,7 @@ type MaintenanceAssignmentVirtualMachineInitParameters struct {
 
 	// Specifies the ID of the Maintenance Configuration Resource. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/maintenance/v1beta2.MaintenanceConfiguration
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	MaintenanceConfigurationID *string `json:"maintenanceConfigurationId,omitempty" tf:"maintenance_configuration_id,omitempty"`
 
 	// Reference to a MaintenanceConfiguration in maintenance to populate maintenanceConfigurationId.
@@ -55,7 +55,7 @@ type MaintenanceAssignmentVirtualMachineParameters struct {
 
 	// Specifies the ID of the Maintenance Configuration Resource. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/maintenance/v1beta2.MaintenanceConfiguration
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	MaintenanceConfigurationID *string `json:"maintenanceConfigurationId,omitempty" tf:"maintenance_configuration_id,omitempty"`
 
@@ -69,7 +69,7 @@ type MaintenanceAssignmentVirtualMachineParameters struct {
 
 	// Specifies the Virtual Machine ID to which the Maintenance Configuration will be assigned. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/compute/v1beta2.LinuxVirtualMachine
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualMachineID *string `json:"virtualMachineId,omitempty" tf:"virtual_machine_id,omitempty"`
 

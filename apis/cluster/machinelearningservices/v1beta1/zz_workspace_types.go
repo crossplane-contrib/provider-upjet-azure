@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type EncryptionInitParameters struct {
 
 	// The Key Vault URI to access the encryption key.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/keyvault/v1beta1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
 	// Reference to a Key in keyvault to populate keyId.
@@ -30,7 +30,7 @@ type EncryptionInitParameters struct {
 
 	// The ID of the keyVault where the customer owned encryption key is present.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/keyvault/v1beta1.Vault
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
 
 	// Reference to a Vault in keyvault to populate keyVaultId.
@@ -43,7 +43,7 @@ type EncryptionInitParameters struct {
 
 	// The Key Vault URI to access the encryption key.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
 
 	// Reference to a UserAssignedIdentity in managedidentity to populate userAssignedIdentityId.
@@ -71,7 +71,7 @@ type EncryptionParameters struct {
 
 	// The Key Vault URI to access the encryption key.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/keyvault/v1beta1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
@@ -85,7 +85,7 @@ type EncryptionParameters struct {
 
 	// The ID of the keyVault where the customer owned encryption key is present.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/keyvault/v1beta1.Vault
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
 
@@ -99,7 +99,7 @@ type EncryptionParameters struct {
 
 	// The Key Vault URI to access the encryption key.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
 
@@ -223,7 +223,7 @@ type WorkspaceIdentityInitParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Machine Learning Workspace.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
@@ -259,7 +259,7 @@ type WorkspaceIdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Machine Learning Workspace.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
@@ -281,7 +281,7 @@ type WorkspaceInitParameters struct {
 
 	// The ID of the Application Insights associated with this Machine Learning Workspace. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/insights/v1beta1.ApplicationInsights
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ApplicationInsightsID *string `json:"applicationInsightsId,omitempty" tf:"application_insights_id,omitempty"`
 
 	// Reference to a ApplicationInsights in insights to populate applicationInsightsId.
@@ -318,7 +318,7 @@ type WorkspaceInitParameters struct {
 
 	// The ID of key vault associated with this Machine Learning Workspace. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/keyvault/v1beta1.Vault
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
 
 	// Reference to a Vault in keyvault to populate keyVaultId.
@@ -340,7 +340,7 @@ type WorkspaceInitParameters struct {
 
 	// The user assigned identity id that represents the workspace identity.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PrimaryUserAssignedIdentity *string `json:"primaryUserAssignedIdentity,omitempty" tf:"primary_user_assigned_identity,omitempty"`
 
 	// Reference to a UserAssignedIdentity in managedidentity to populate primaryUserAssignedIdentity.
@@ -362,7 +362,7 @@ type WorkspaceInitParameters struct {
 
 	// The ID of the Storage Account associated with this Machine Learning Workspace. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta1.Account
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 
 	// Reference to a Account in storage to populate storageAccountId.
@@ -461,7 +461,7 @@ type WorkspaceParameters struct {
 
 	// The ID of the Application Insights associated with this Machine Learning Workspace. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/insights/v1beta1.ApplicationInsights
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ApplicationInsightsID *string `json:"applicationInsightsId,omitempty" tf:"application_insights_id,omitempty"`
 
@@ -507,7 +507,7 @@ type WorkspaceParameters struct {
 
 	// The ID of key vault associated with this Machine Learning Workspace. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/keyvault/v1beta1.Vault
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
 
@@ -533,7 +533,7 @@ type WorkspaceParameters struct {
 
 	// The user assigned identity id that represents the workspace identity.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PrimaryUserAssignedIdentity *string `json:"primaryUserAssignedIdentity,omitempty" tf:"primary_user_assigned_identity,omitempty"`
 
@@ -572,7 +572,7 @@ type WorkspaceParameters struct {
 
 	// The ID of the Storage Account associated with this Machine Learning Workspace. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta1.Account
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 

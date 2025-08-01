@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type SpringCloudAppCosmosDBAssociationInitParameters struct {
@@ -20,7 +20,7 @@ type SpringCloudAppCosmosDBAssociationInitParameters struct {
 
 	// Specifies the CosmosDB Account access key.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/cosmosdb/v1beta2.Account
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("primary_key",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("primary_key",true)
 	CosmosDBAccessKey *string `json:"cosmosdbAccessKey,omitempty" tf:"cosmosdb_access_key,omitempty"`
 
 	// Reference to a Account in cosmosdb to populate cosmosdbAccessKey.
@@ -33,7 +33,7 @@ type SpringCloudAppCosmosDBAssociationInitParameters struct {
 
 	// Specifies the ID of the CosmosDB Account. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/cosmosdb/v1beta2.Account
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	CosmosDBAccountID *string `json:"cosmosdbAccountId,omitempty" tf:"cosmosdb_account_id,omitempty"`
 
 	// Reference to a Account in cosmosdb to populate cosmosdbAccountId.
@@ -101,7 +101,7 @@ type SpringCloudAppCosmosDBAssociationParameters struct {
 
 	// Specifies the CosmosDB Account access key.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/cosmosdb/v1beta2.Account
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("primary_key",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("primary_key",true)
 	// +kubebuilder:validation:Optional
 	CosmosDBAccessKey *string `json:"cosmosdbAccessKey,omitempty" tf:"cosmosdb_access_key,omitempty"`
 
@@ -115,7 +115,7 @@ type SpringCloudAppCosmosDBAssociationParameters struct {
 
 	// Specifies the ID of the CosmosDB Account. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/cosmosdb/v1beta2.Account
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CosmosDBAccountID *string `json:"cosmosdbAccountId,omitempty" tf:"cosmosdb_account_id,omitempty"`
 
@@ -149,7 +149,7 @@ type SpringCloudAppCosmosDBAssociationParameters struct {
 
 	// Specifies the ID of the Spring Cloud Application where this Association is created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/appplatform/v1beta2.SpringCloudApp
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SpringCloudAppID *string `json:"springCloudAppId,omitempty" tf:"spring_cloud_app_id,omitempty"`
 

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type LinkedServiceKustoInitParameters struct {
@@ -42,7 +42,7 @@ type LinkedServiceKustoInitParameters struct {
 
 	// The URI of the Kusto Cluster endpoint.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/kusto/v1beta2.Cluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("uri",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("uri",true)
 	KustoEndpoint *string `json:"kustoEndpoint,omitempty" tf:"kusto_endpoint,omitempty"`
 
 	// Reference to a Cluster in kusto to populate kustoEndpoint.
@@ -124,7 +124,7 @@ type LinkedServiceKustoParameters struct {
 
 	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/datafactory/v1beta2.Factory
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DataFactoryID *string `json:"dataFactoryId,omitempty" tf:"data_factory_id,omitempty"`
 
@@ -159,7 +159,7 @@ type LinkedServiceKustoParameters struct {
 
 	// The URI of the Kusto Cluster endpoint.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/kusto/v1beta2.Cluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("uri",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("uri",true)
 	// +kubebuilder:validation:Optional
 	KustoEndpoint *string `json:"kustoEndpoint,omitempty" tf:"kusto_endpoint,omitempty"`
 

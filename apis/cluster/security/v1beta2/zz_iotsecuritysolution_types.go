@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AdditionalWorkspaceInitParameters struct {
@@ -66,7 +66,7 @@ type IOTSecuritySolutionInitParameters struct {
 
 	// Specifies the IoT Hub resource IDs to which this Iot Security Solution is applied.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/devices/v1beta2.IOTHub
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("id",true)
 	// +listType=set
 	IOTHubIds []*string `json:"iothubIds,omitempty" tf:"iothub_ids,omitempty"`
 
@@ -187,7 +187,7 @@ type IOTSecuritySolutionParameters struct {
 
 	// Specifies the IoT Hub resource IDs to which this Iot Security Solution is applied.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/devices/v1beta2.IOTHub
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("id",true)
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	IOTHubIds []*string `json:"iothubIds,omitempty" tf:"iothub_ids,omitempty"`

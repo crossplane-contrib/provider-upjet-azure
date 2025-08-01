@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type OutputMSSQLInitParameters struct {
@@ -92,7 +92,7 @@ type OutputMSSQLInitParameters struct {
 
 	// Username used to login to the Microsoft SQL Server. Changing this forces a new resource to be created. Required if authentication_mode is ConnectionString.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/sql/v1beta2.MSSQLServer
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("administrator_login",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("administrator_login",false)
 	User *string `json:"user,omitempty" tf:"user,omitempty"`
 
 	// Reference to a MSSQLServer in sql to populate user.
@@ -229,7 +229,7 @@ type OutputMSSQLParameters struct {
 
 	// Username used to login to the Microsoft SQL Server. Changing this forces a new resource to be created. Required if authentication_mode is ConnectionString.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/sql/v1beta2.MSSQLServer
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("administrator_login",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("administrator_login",false)
 	// +kubebuilder:validation:Optional
 	User *string `json:"user,omitempty" tf:"user,omitempty"`
 

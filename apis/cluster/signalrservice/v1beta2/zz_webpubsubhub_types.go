@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AuthInitParameters struct {
 
 	// Specify the identity ID of the target resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ManagedIdentityID *string `json:"managedIdentityId,omitempty" tf:"managed_identity_id,omitempty"`
 
 	// Reference to a UserAssignedIdentity in managedidentity to populate managedIdentityId.
@@ -39,7 +39,7 @@ type AuthParameters struct {
 
 	// Specify the identity ID of the target resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ManagedIdentityID *string `json:"managedIdentityId,omitempty" tf:"managed_identity_id,omitempty"`
 
@@ -206,7 +206,7 @@ type WebPubsubHubInitParameters struct {
 
 	// Specifies the id of the Web Pubsub. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/signalrservice/v1beta2.WebPubsub
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	WebPubsubID *string `json:"webPubsubId,omitempty" tf:"web_pubsub_id,omitempty"`
 
 	// Reference to a WebPubsub in signalrservice to populate webPubsubId.
@@ -261,7 +261,7 @@ type WebPubsubHubParameters struct {
 
 	// Specifies the id of the Web Pubsub. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/signalrservice/v1beta2.WebPubsub
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	WebPubsubID *string `json:"webPubsubId,omitempty" tf:"web_pubsub_id,omitempty"`
 

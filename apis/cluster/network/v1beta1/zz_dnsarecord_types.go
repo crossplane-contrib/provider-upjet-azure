@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type DNSARecordInitParameters struct {
@@ -28,7 +28,7 @@ type DNSARecordInitParameters struct {
 
 	// The Azure resource id of the target object. Conflicts with records.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta1.PublicIP
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
 
 	// Reference to a PublicIP in network to populate targetResourceId.
@@ -100,7 +100,7 @@ type DNSARecordParameters struct {
 
 	// The Azure resource id of the target object. Conflicts with records.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta1.PublicIP
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
 

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ApplicationLogsAzureBlobStorageInitParameters struct {
@@ -1903,7 +1903,7 @@ type LinuxWebAppSlotInitParameters struct {
 
 	// The ID of the Linux Web App this Deployment Slot will be part of.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/web/v1beta1.LinuxWebApp
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	AppServiceID *string `json:"appServiceId,omitempty" tf:"app_service_id,omitempty"`
 
 	// Reference to a LinuxWebApp in web to populate appServiceId.
@@ -2170,7 +2170,7 @@ type LinuxWebAppSlotParameters struct {
 
 	// The ID of the Linux Web App this Deployment Slot will be part of.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/web/v1beta1.LinuxWebApp
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AppServiceID *string `json:"appServiceId,omitempty" tf:"app_service_id,omitempty"`
 

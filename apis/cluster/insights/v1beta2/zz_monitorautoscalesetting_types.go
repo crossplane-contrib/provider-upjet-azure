@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type CapacityInitParameters struct {
@@ -185,7 +185,7 @@ type MetricTriggerInitParameters struct {
 
 	// The ID of the Resource which the Rule monitors.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/compute/v1beta2.LinuxVirtualMachineScaleSet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	MetricResourceID *string `json:"metricResourceId,omitempty" tf:"metric_resource_id,omitempty"`
 
 	// Reference to a LinuxVirtualMachineScaleSet in compute to populate metricResourceId.
@@ -271,7 +271,7 @@ type MetricTriggerParameters struct {
 
 	// The ID of the Resource which the Rule monitors.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/compute/v1beta2.LinuxVirtualMachineScaleSet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	MetricResourceID *string `json:"metricResourceId,omitempty" tf:"metric_resource_id,omitempty"`
 
@@ -346,7 +346,7 @@ type MonitorAutoscaleSettingInitParameters struct {
 
 	// Specifies the resource ID of the resource that the autoscale setting should be added to. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/compute/v1beta2.LinuxVirtualMachineScaleSet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
 
 	// Reference to a LinuxVirtualMachineScaleSet in compute to populate targetResourceId.
@@ -438,7 +438,7 @@ type MonitorAutoscaleSettingParameters struct {
 
 	// Specifies the resource ID of the resource that the autoscale setting should be added to. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/compute/v1beta2.LinuxVirtualMachineScaleSet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
 

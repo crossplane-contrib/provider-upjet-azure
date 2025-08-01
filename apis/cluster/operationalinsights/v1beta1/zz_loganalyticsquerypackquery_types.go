@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type LogAnalyticsQueryPackQueryInitParameters struct {
@@ -35,7 +35,7 @@ type LogAnalyticsQueryPackQueryInitParameters struct {
 
 	// The ID of the Log Analytics Query Pack. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/operationalinsights/v1beta1.LogAnalyticsQueryPack
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	QueryPackID *string `json:"queryPackId,omitempty" tf:"query_pack_id,omitempty"`
 
 	// Reference to a LogAnalyticsQueryPack in operationalinsights to populate queryPackId.
@@ -122,7 +122,7 @@ type LogAnalyticsQueryPackQueryParameters struct {
 
 	// The ID of the Log Analytics Query Pack. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/operationalinsights/v1beta1.LogAnalyticsQueryPack
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	QueryPackID *string `json:"queryPackId,omitempty" tf:"query_pack_id,omitempty"`
 

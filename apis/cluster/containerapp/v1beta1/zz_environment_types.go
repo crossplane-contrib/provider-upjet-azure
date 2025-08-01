@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type EnvironmentInitParameters struct {
@@ -56,7 +56,7 @@ type EnvironmentInitParameters struct {
 	// The ID for the Log Analytics Workspace to link this Container Apps Managed Environment to.
 	// The ID for the Log Analytics Workspace to link this Container Apps Managed Environment to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/operationalinsights/v1beta2.Workspace
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId,omitempty" tf:"log_analytics_workspace_id,omitempty"`
 
 	// Reference to a Workspace in operationalinsights to populate logAnalyticsWorkspaceId.
@@ -202,7 +202,7 @@ type EnvironmentParameters struct {
 	// The ID for the Log Analytics Workspace to link this Container Apps Managed Environment to.
 	// The ID for the Log Analytics Workspace to link this Container Apps Managed Environment to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/operationalinsights/v1beta2.Workspace
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId,omitempty" tf:"log_analytics_workspace_id,omitempty"`
 

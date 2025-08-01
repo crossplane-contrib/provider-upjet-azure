@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ContainerImmutabilityPolicyInitParameters struct {
@@ -67,7 +67,7 @@ type ContainerImmutabilityPolicyParameters struct {
 
 	// The Resource Manager ID of the Storage Container where this Immutability Policy should be applied. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta1.Container
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("resource_manager_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("resource_manager_id",true)
 	// +kubebuilder:validation:Optional
 	StorageContainerResourceManagerID *string `json:"storageContainerResourceManagerId,omitempty" tf:"storage_container_resource_manager_id,omitempty"`
 

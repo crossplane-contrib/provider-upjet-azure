@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type BGPInitParameters struct {
@@ -199,7 +199,7 @@ type VPNSiteInitParameters struct {
 
 	// The ID of the Virtual Wan where this VPN site resides in. Changing this forces a new VPN Site to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta1.VirtualWAN
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VirtualWanID *string `json:"virtualWanId,omitempty" tf:"virtual_wan_id,omitempty"`
 
 	// Reference to a VirtualWAN in network to populate virtualWanId.
@@ -293,7 +293,7 @@ type VPNSiteParameters struct {
 
 	// The ID of the Virtual Wan where this VPN site resides in. Changing this forces a new VPN Site to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta1.VirtualWAN
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualWanID *string `json:"virtualWanId,omitempty" tf:"virtual_wan_id,omitempty"`
 

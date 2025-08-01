@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type LogAnalyticsLinkedServiceInitParameters struct {
 
 	// The ID of the readable Resource that will be linked to the workspace. This should be used for linking to an Automation Account resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/automation/v1beta2.Account
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ReadAccessID *string `json:"readAccessId,omitempty" tf:"read_access_id,omitempty"`
 
 	// Reference to a Account in automation to populate readAccessId.
@@ -69,7 +69,7 @@ type LogAnalyticsLinkedServiceParameters struct {
 
 	// The ID of the readable Resource that will be linked to the workspace. This should be used for linking to an Automation Account resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/automation/v1beta2.Account
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ReadAccessID *string `json:"readAccessId,omitempty" tf:"read_access_id,omitempty"`
 
@@ -96,7 +96,7 @@ type LogAnalyticsLinkedServiceParameters struct {
 
 	// The ID of the Log Analytics Workspace that will contain the Log Analytics Linked Service resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/operationalinsights/v1beta2.Workspace
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 

@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type MonitorDataCollectionRuleAssociationInitParameters struct {
 
 	// The ID of the Data Collection Endpoint which will be associated to the target resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/insights/v1beta1.MonitorDataCollectionEndpoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DataCollectionEndpointID *string `json:"dataCollectionEndpointId,omitempty" tf:"data_collection_endpoint_id,omitempty"`
 
 	// Reference to a MonitorDataCollectionEndpoint in insights to populate dataCollectionEndpointId.
@@ -30,7 +30,7 @@ type MonitorDataCollectionRuleAssociationInitParameters struct {
 
 	// The ID of the Data Collection Rule which will be associated to the target resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/insights/v1beta2.MonitorDataCollectionRule
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DataCollectionRuleID *string `json:"dataCollectionRuleId,omitempty" tf:"data_collection_rule_id,omitempty"`
 
 	// Reference to a MonitorDataCollectionRule in insights to populate dataCollectionRuleId.
@@ -67,7 +67,7 @@ type MonitorDataCollectionRuleAssociationParameters struct {
 
 	// The ID of the Data Collection Endpoint which will be associated to the target resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/insights/v1beta1.MonitorDataCollectionEndpoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DataCollectionEndpointID *string `json:"dataCollectionEndpointId,omitempty" tf:"data_collection_endpoint_id,omitempty"`
 
@@ -81,7 +81,7 @@ type MonitorDataCollectionRuleAssociationParameters struct {
 
 	// The ID of the Data Collection Rule which will be associated to the target resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/insights/v1beta2.MonitorDataCollectionRule
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DataCollectionRuleID *string `json:"dataCollectionRuleId,omitempty" tf:"data_collection_rule_id,omitempty"`
 
@@ -99,7 +99,7 @@ type MonitorDataCollectionRuleAssociationParameters struct {
 
 	// The ID of the Azure Resource which to associate to a Data Collection Rule or a Data Collection Endpoint. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/compute/v1beta2.LinuxVirtualMachine
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
 

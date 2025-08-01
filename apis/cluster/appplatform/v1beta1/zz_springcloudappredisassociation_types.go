@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type SpringCloudAppRedisAssociationInitParameters struct {
 
 	// Specifies the Redis Cache access key.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/cache/v1beta2.RedisCache
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("primary_access_key",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("primary_access_key",true)
 	RedisAccessKey *string `json:"redisAccessKey,omitempty" tf:"redis_access_key,omitempty"`
 
 	// Reference to a RedisCache in cache to populate redisAccessKey.
@@ -30,7 +30,7 @@ type SpringCloudAppRedisAssociationInitParameters struct {
 
 	// Specifies the Redis Cache resource ID. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/cache/v1beta2.RedisCache
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	RedisCacheID *string `json:"redisCacheId,omitempty" tf:"redis_cache_id,omitempty"`
 
 	// Reference to a RedisCache in cache to populate redisCacheId.
@@ -67,7 +67,7 @@ type SpringCloudAppRedisAssociationParameters struct {
 
 	// Specifies the Redis Cache access key.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/cache/v1beta2.RedisCache
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("primary_access_key",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("primary_access_key",true)
 	// +kubebuilder:validation:Optional
 	RedisAccessKey *string `json:"redisAccessKey,omitempty" tf:"redis_access_key,omitempty"`
 
@@ -81,7 +81,7 @@ type SpringCloudAppRedisAssociationParameters struct {
 
 	// Specifies the Redis Cache resource ID. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/cache/v1beta2.RedisCache
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RedisCacheID *string `json:"redisCacheId,omitempty" tf:"redis_cache_id,omitempty"`
 
@@ -99,7 +99,7 @@ type SpringCloudAppRedisAssociationParameters struct {
 
 	// Specifies the Spring Cloud Application resource ID in which the Association is created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/appplatform/v1beta2.SpringCloudApp
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SpringCloudAppID *string `json:"springCloudAppId,omitempty" tf:"spring_cloud_app_id,omitempty"`
 

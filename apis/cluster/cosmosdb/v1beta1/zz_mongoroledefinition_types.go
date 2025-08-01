@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type MongoRoleDefinitionInitParameters struct {
 
 	// The resource ID of the Mongo DB. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/cosmosdb/v1beta2.MongoDatabase
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	CosmosMongoDatabaseID *string `json:"cosmosMongoDatabaseId,omitempty" tf:"cosmos_mongo_database_id,omitempty"`
 
 	// Reference to a MongoDatabase in cosmosdb to populate cosmosMongoDatabaseId.
@@ -54,7 +54,7 @@ type MongoRoleDefinitionParameters struct {
 
 	// The resource ID of the Mongo DB. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/cosmosdb/v1beta2.MongoDatabase
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CosmosMongoDatabaseID *string `json:"cosmosMongoDatabaseId,omitempty" tf:"cosmos_mongo_database_id,omitempty"`
 

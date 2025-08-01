@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type EventHubDataConnectionInitParameters struct {
@@ -38,7 +38,7 @@ type EventHubDataConnectionInitParameters struct {
 
 	// Specifies the resource id of the EventHub this data connection will use for ingestion. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/eventhub/v1beta2.EventHub
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	EventHubID *string `json:"eventhubId,omitempty" tf:"eventhub_id,omitempty"`
 
 	// Reference to a EventHub in eventhub to populate eventhubId.
@@ -165,7 +165,7 @@ type EventHubDataConnectionParameters struct {
 
 	// Specifies the resource id of the EventHub this data connection will use for ingestion. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/eventhub/v1beta2.EventHub
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	EventHubID *string `json:"eventhubId,omitempty" tf:"eventhub_id,omitempty"`
 

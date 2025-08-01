@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type GatewayInitParameters_2 struct {
 
 	// The ID of the API Management Resource in which the gateway will be created. Changing this forces a new API Management Gateway resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/apimanagement/v1beta1.Management
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	APIManagementID *string `json:"apiManagementId,omitempty" tf:"api_management_id,omitempty"`
 
 	// Reference to a Management in apimanagement to populate apiManagementId.
@@ -54,7 +54,7 @@ type GatewayParameters_2 struct {
 
 	// The ID of the API Management Resource in which the gateway will be created. Changing this forces a new API Management Gateway resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/apimanagement/v1beta1.Management
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	APIManagementID *string `json:"apiManagementId,omitempty" tf:"api_management_id,omitempty"`
 

@@ -5,7 +5,7 @@
 package appplatform
 
 import (
-	"github.com/crossplane/upjet/pkg/config"
+	"github.com/crossplane/upjet/v2/pkg/config"
 )
 
 // Configure configures appplatform group
@@ -13,7 +13,7 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_spring_cloud_api_portal", func(r *config.Resource) {
 		r.References["gateway_ids"] = config.Reference{
 			TerraformName: "azurerm_spring_cloud_gateway",
-			Extractor:     "github.com/crossplane/upjet/pkg/resource.ExtractResourceID()",
+			Extractor:     "github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()",
 		}
 	})
 }

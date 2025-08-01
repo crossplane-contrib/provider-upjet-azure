@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type CustomDomainInitParameters_2 struct {
@@ -21,7 +21,7 @@ type CustomDomainInitParameters_2 struct {
 
 	// The ID of the Container App Environment Certificate to use. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/containerapp/v1beta1.EnvironmentCertificate
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ContainerAppEnvironmentCertificateID *string `json:"containerAppEnvironmentCertificateId,omitempty" tf:"container_app_environment_certificate_id,omitempty"`
 
 	// Reference to a EnvironmentCertificate in containerapp to populate containerAppEnvironmentCertificateId.
@@ -60,7 +60,7 @@ type CustomDomainParameters_2 struct {
 
 	// The ID of the Container App Environment Certificate to use. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/containerapp/v1beta1.EnvironmentCertificate
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ContainerAppEnvironmentCertificateID *string `json:"containerAppEnvironmentCertificateId,omitempty" tf:"container_app_environment_certificate_id,omitempty"`
 
@@ -74,7 +74,7 @@ type CustomDomainParameters_2 struct {
 
 	// The ID of the Container App to which this Custom Domain should be bound. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/containerapp/v1beta2.ContainerApp
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ContainerAppID *string `json:"containerAppId,omitempty" tf:"container_app_id,omitempty"`
 

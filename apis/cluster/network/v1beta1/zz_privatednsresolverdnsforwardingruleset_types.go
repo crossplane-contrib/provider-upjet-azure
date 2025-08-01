@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type PrivateDNSResolverDNSForwardingRulesetInitParameters struct {
@@ -20,7 +20,7 @@ type PrivateDNSResolverDNSForwardingRulesetInitParameters struct {
 
 	// The list of IDs of the Private DNS Resolver Outbound Endpoint that is linked to the Private DNS Resolver Dns Forwarding Ruleset.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta1.PrivateDNSResolverOutboundEndpoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PrivateDNSResolverOutboundEndpointIds []*string `json:"privateDnsResolverOutboundEndpointIds,omitempty" tf:"private_dns_resolver_outbound_endpoint_ids,omitempty"`
 
 	// References to PrivateDNSResolverOutboundEndpoint in network to populate privateDnsResolverOutboundEndpointIds.
@@ -63,7 +63,7 @@ type PrivateDNSResolverDNSForwardingRulesetParameters struct {
 
 	// The list of IDs of the Private DNS Resolver Outbound Endpoint that is linked to the Private DNS Resolver Dns Forwarding Ruleset.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta1.PrivateDNSResolverOutboundEndpoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PrivateDNSResolverOutboundEndpointIds []*string `json:"privateDnsResolverOutboundEndpointIds,omitempty" tf:"private_dns_resolver_outbound_endpoint_ids,omitempty"`
 

@@ -7,7 +7,7 @@ package orbital
 import (
 	"github.com/upbound/provider-azure/apis/cluster/rconfig"
 
-	"github.com/crossplane/upjet/pkg/config"
+	"github.com/crossplane/upjet/v2/pkg/config"
 )
 
 // Configure configures orbital group

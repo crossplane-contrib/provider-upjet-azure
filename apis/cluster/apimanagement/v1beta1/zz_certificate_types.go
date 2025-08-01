@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type CertificateInitParameters_2 struct {
@@ -23,7 +23,7 @@ type CertificateInitParameters_2 struct {
 
 	// The ID of the Key Vault Secret containing the SSL Certificate, which must be of the type application/x-pkcs12.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/keyvault/v1beta2.Certificate
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("secret_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("secret_id",true)
 	KeyVaultSecretID *string `json:"keyVaultSecretId,omitempty" tf:"key_vault_secret_id,omitempty"`
 
 	// Reference to a Certificate in keyvault to populate keyVaultSecretId.
@@ -90,7 +90,7 @@ type CertificateParameters_2 struct {
 
 	// The ID of the Key Vault Secret containing the SSL Certificate, which must be of the type application/x-pkcs12.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/keyvault/v1beta2.Certificate
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("secret_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("secret_id",true)
 	// +kubebuilder:validation:Optional
 	KeyVaultSecretID *string `json:"keyVaultSecretId,omitempty" tf:"key_vault_secret_id,omitempty"`
 

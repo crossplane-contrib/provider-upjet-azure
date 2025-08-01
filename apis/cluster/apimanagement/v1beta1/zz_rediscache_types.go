@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type RedisCacheInitParameters struct {
@@ -26,7 +26,7 @@ type RedisCacheInitParameters struct {
 
 	// The resource ID of the Cache for Redis.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/cache/v1beta2.RedisCache
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	RedisCacheID *string `json:"redisCacheId,omitempty" tf:"redis_cache_id,omitempty"`
 
 	// Reference to a RedisCache in cache to populate redisCacheId.
@@ -60,7 +60,7 @@ type RedisCacheParameters struct {
 
 	// The resource ID of the API Management Service from which to create this external cache. Changing this forces a new API Management Redis Cache to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/apimanagement/v1beta2.Management
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	APIManagementID *string `json:"apiManagementId,omitempty" tf:"api_management_id,omitempty"`
 
@@ -86,7 +86,7 @@ type RedisCacheParameters struct {
 
 	// The resource ID of the Cache for Redis.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/cache/v1beta2.RedisCache
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RedisCacheID *string `json:"redisCacheId,omitempty" tf:"redis_cache_id,omitempty"`
 

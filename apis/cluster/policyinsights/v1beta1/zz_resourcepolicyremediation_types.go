@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ResourcePolicyRemediationInitParameters struct {
@@ -29,7 +29,7 @@ type ResourcePolicyRemediationInitParameters struct {
 
 	// The ID of the Policy Assignment that should be remediated.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/authorization/v1beta2.ResourceGroupPolicyAssignment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PolicyAssignmentID *string `json:"policyAssignmentId,omitempty" tf:"policy_assignment_id,omitempty"`
 
 	// Reference to a ResourceGroupPolicyAssignment in authorization to populate policyAssignmentId.
@@ -51,7 +51,7 @@ type ResourcePolicyRemediationInitParameters struct {
 
 	// The Resource ID at which the Policy Remediation should be applied. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.VirtualNetwork
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
 	// Reference to a VirtualNetwork in network to populate resourceId.
@@ -116,7 +116,7 @@ type ResourcePolicyRemediationParameters struct {
 
 	// The ID of the Policy Assignment that should be remediated.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/authorization/v1beta2.ResourceGroupPolicyAssignment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PolicyAssignmentID *string `json:"policyAssignmentId,omitempty" tf:"policy_assignment_id,omitempty"`
 
@@ -142,7 +142,7 @@ type ResourcePolicyRemediationParameters struct {
 
 	// The Resource ID at which the Policy Remediation should be applied. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.VirtualNetwork
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 

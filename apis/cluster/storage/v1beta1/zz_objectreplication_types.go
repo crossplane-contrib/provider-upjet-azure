@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ObjectReplicationInitParameters struct {
 
 	// The ID of the destination storage account. Changing this forces a new Storage Object Replication to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta2.Account
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DestinationStorageAccountID *string `json:"destinationStorageAccountId,omitempty" tf:"destination_storage_account_id,omitempty"`
 
 	// Reference to a Account in storage to populate destinationStorageAccountId.
@@ -33,7 +33,7 @@ type ObjectReplicationInitParameters struct {
 
 	// The ID of the source storage account. Changing this forces a new Storage Object Replication to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta2.Account
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SourceStorageAccountID *string `json:"sourceStorageAccountId,omitempty" tf:"source_storage_account_id,omitempty"`
 
 	// Reference to a Account in storage to populate sourceStorageAccountId.
@@ -70,7 +70,7 @@ type ObjectReplicationParameters struct {
 
 	// The ID of the destination storage account. Changing this forces a new Storage Object Replication to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta2.Account
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DestinationStorageAccountID *string `json:"destinationStorageAccountId,omitempty" tf:"destination_storage_account_id,omitempty"`
 
@@ -88,7 +88,7 @@ type ObjectReplicationParameters struct {
 
 	// The ID of the source storage account. Changing this forces a new Storage Object Replication to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta2.Account
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourceStorageAccountID *string `json:"sourceStorageAccountId,omitempty" tf:"source_storage_account_id,omitempty"`
 

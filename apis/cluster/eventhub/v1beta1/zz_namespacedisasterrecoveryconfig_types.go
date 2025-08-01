@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type NamespaceDisasterRecoveryConfigInitParameters struct {
 
 	// The ID of the EventHub Namespace to replicate to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/eventhub/v1beta2.EventHubNamespace
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PartnerNamespaceID *string `json:"partnerNamespaceId,omitempty" tf:"partner_namespace_id,omitempty"`
 
 	// Reference to a EventHubNamespace in eventhub to populate partnerNamespaceId.
@@ -61,7 +61,7 @@ type NamespaceDisasterRecoveryConfigParameters struct {
 
 	// The ID of the EventHub Namespace to replicate to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/eventhub/v1beta2.EventHubNamespace
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PartnerNamespaceID *string `json:"partnerNamespaceId,omitempty" tf:"partner_namespace_id,omitempty"`
 

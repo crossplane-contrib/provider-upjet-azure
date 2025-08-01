@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type RedisCacheAccessPolicyAssignmentInitParameters struct {
@@ -59,7 +59,7 @@ type RedisCacheAccessPolicyAssignmentParameters struct {
 
 	// The ID of the Redis Cache. Changing this forces a new Redis Cache Access Policy Assignment to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/cache/v1beta2.RedisCache
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RedisCacheID *string `json:"redisCacheId,omitempty" tf:"redis_cache_id,omitempty"`
 

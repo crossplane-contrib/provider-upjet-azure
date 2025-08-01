@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type BackupProtectedVMInitParameters struct {
 
 	// Specifies the ID of the backup policy to use.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/recoveryservices/v1beta2.BackupPolicyVM
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	BackupPolicyID *string `json:"backupPolicyId,omitempty" tf:"backup_policy_id,omitempty"`
 
 	// Reference to a BackupPolicyVM in recoveryservices to populate backupPolicyId.
@@ -100,7 +100,7 @@ type BackupProtectedVMParameters struct {
 
 	// Specifies the ID of the backup policy to use.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/recoveryservices/v1beta2.BackupPolicyVM
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	BackupPolicyID *string `json:"backupPolicyId,omitempty" tf:"backup_policy_id,omitempty"`
 

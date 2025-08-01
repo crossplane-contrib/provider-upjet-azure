@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type FileInitParameters struct {
@@ -64,7 +64,7 @@ type FunctionAppFunctionInitParameters struct {
 	// The ID of the Function App in which this function should reside. Changing this forces a new resource to be created.
 	// The ID of the Function App in which this function should reside.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/web/v1beta2.LinuxFunctionApp
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	FunctionAppID *string `json:"functionAppId,omitempty" tf:"function_app_id,omitempty"`
 
 	// Reference to a LinuxFunctionApp in web to populate functionAppId.
@@ -168,7 +168,7 @@ type FunctionAppFunctionParameters struct {
 	// The ID of the Function App in which this function should reside. Changing this forces a new resource to be created.
 	// The ID of the Function App in which this function should reside.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/web/v1beta2.LinuxFunctionApp
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	FunctionAppID *string `json:"functionAppId,omitempty" tf:"function_app_id,omitempty"`
 

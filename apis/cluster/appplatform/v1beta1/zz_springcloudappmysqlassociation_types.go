@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type SpringCloudAppMySQLAssociationInitParameters struct {
@@ -29,7 +29,7 @@ type SpringCloudAppMySQLAssociationInitParameters struct {
 
 	// Specifies the ID of the MySQL Server. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/dbformysql/v1beta2.FlexibleServer
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	MySQLServerID *string `json:"mysqlServerId,omitempty" tf:"mysql_server_id,omitempty"`
 
 	// Reference to a FlexibleServer in dbformysql to populate mysqlServerId.
@@ -45,7 +45,7 @@ type SpringCloudAppMySQLAssociationInitParameters struct {
 
 	// Specifies the username which should be used when connecting to the MySQL Database from the Spring Cloud App.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/dbformysql/v1beta2.FlexibleServer
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("administrator_login",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("administrator_login",false)
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 
 	// Reference to a FlexibleServer in dbformysql to populate username.
@@ -92,7 +92,7 @@ type SpringCloudAppMySQLAssociationParameters struct {
 
 	// Specifies the ID of the MySQL Server. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/dbformysql/v1beta2.FlexibleServer
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	MySQLServerID *string `json:"mysqlServerId,omitempty" tf:"mysql_server_id,omitempty"`
 
@@ -110,7 +110,7 @@ type SpringCloudAppMySQLAssociationParameters struct {
 
 	// Specifies the ID of the Spring Cloud Application where this Association is created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/appplatform/v1beta2.SpringCloudApp
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SpringCloudAppID *string `json:"springCloudAppId,omitempty" tf:"spring_cloud_app_id,omitempty"`
 
@@ -124,7 +124,7 @@ type SpringCloudAppMySQLAssociationParameters struct {
 
 	// Specifies the username which should be used when connecting to the MySQL Database from the Spring Cloud App.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/dbformysql/v1beta2.FlexibleServer
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("administrator_login",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("administrator_login",false)
 	// +kubebuilder:validation:Optional
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 

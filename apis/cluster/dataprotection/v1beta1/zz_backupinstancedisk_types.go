@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type BackupInstanceDiskInitParameters struct {
 
 	// The ID of the Backup Policy.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/dataprotection/v1beta2.BackupPolicyDisk
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	BackupPolicyID *string `json:"backupPolicyId,omitempty" tf:"backup_policy_id,omitempty"`
 
 	// Reference to a BackupPolicyDisk in dataprotection to populate backupPolicyId.
@@ -30,7 +30,7 @@ type BackupInstanceDiskInitParameters struct {
 
 	// The ID of the source Disk. Changing this forces a new Backup Instance Disk to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/compute/v1beta2.ManagedDisk
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DiskID *string `json:"diskId,omitempty" tf:"disk_id,omitempty"`
 
 	// Reference to a ManagedDisk in compute to populate diskId.
@@ -82,7 +82,7 @@ type BackupInstanceDiskParameters struct {
 
 	// The ID of the Backup Policy.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/dataprotection/v1beta2.BackupPolicyDisk
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	BackupPolicyID *string `json:"backupPolicyId,omitempty" tf:"backup_policy_id,omitempty"`
 
@@ -96,7 +96,7 @@ type BackupInstanceDiskParameters struct {
 
 	// The ID of the source Disk. Changing this forces a new Backup Instance Disk to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/compute/v1beta2.ManagedDisk
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DiskID *string `json:"diskId,omitempty" tf:"disk_id,omitempty"`
 
@@ -127,7 +127,7 @@ type BackupInstanceDiskParameters struct {
 
 	// The ID of the Backup Vault within which the Backup Instance Disk should exist. Changing this forces a new Backup Instance Disk to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/dataprotection/v1beta2.BackupVault
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VaultID *string `json:"vaultId,omitempty" tf:"vault_id,omitempty"`
 

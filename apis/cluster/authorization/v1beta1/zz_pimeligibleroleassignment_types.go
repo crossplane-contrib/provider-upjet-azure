@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type PimEligibleRoleAssignmentInitParameters struct {
@@ -40,7 +40,7 @@ type PimEligibleRoleAssignmentInitParameters struct {
 	// The scope for this eligible role assignment, should be a valid resource ID. Changing this forces a new resource to be created.
 	// Scope for this eligible role assignment, should be a valid resource ID
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/management/v1beta1.ManagementGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
 	// Reference to a ManagementGroup in management to populate scope.
@@ -129,7 +129,7 @@ type PimEligibleRoleAssignmentParameters struct {
 	// The scope for this eligible role assignment, should be a valid resource ID. Changing this forces a new resource to be created.
 	// Scope for this eligible role assignment, should be a valid resource ID
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/management/v1beta1.ManagementGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 

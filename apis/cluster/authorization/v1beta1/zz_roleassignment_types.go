@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type RoleAssignmentInitParameters struct {
@@ -38,7 +38,7 @@ type RoleAssignmentInitParameters struct {
 
 	// The Scoped-ID of the Role Definition. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/authorization/v1beta1.RoleDefinition
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("role_definition_resource_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("role_definition_resource_id",true)
 	RoleDefinitionID *string `json:"roleDefinitionId,omitempty" tf:"role_definition_id,omitempty"`
 
 	// Reference to a RoleDefinition in authorization to populate roleDefinitionId.
@@ -130,7 +130,7 @@ type RoleAssignmentParameters struct {
 
 	// The Scoped-ID of the Role Definition. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/authorization/v1beta1.RoleDefinition
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("role_definition_resource_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("role_definition_resource_id",true)
 	// +kubebuilder:validation:Optional
 	RoleDefinitionID *string `json:"roleDefinitionId,omitempty" tf:"role_definition_id,omitempty"`
 

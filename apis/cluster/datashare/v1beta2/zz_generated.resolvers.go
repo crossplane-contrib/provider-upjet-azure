@@ -8,12 +8,12 @@ package v1beta2
 
 import (
 	"context"
-	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
+	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
 	errors "github.com/pkg/errors"
 
 	rconfig "github.com/upbound/provider-azure/apis/cluster/rconfig"
 
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 
 	// ResolveReferences of this Account.

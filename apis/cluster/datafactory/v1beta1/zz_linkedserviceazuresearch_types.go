@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type LinkedServiceAzureSearchInitParameters struct {
@@ -34,7 +34,7 @@ type LinkedServiceAzureSearchInitParameters struct {
 
 	// The key of the Azure Search Service.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/search/v1beta2.Service
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("primary_key",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("primary_key",true)
 	SearchServiceKey *string `json:"searchServiceKey,omitempty" tf:"search_service_key,omitempty"`
 
 	// Reference to a Service in search to populate searchServiceKey.
@@ -97,7 +97,7 @@ type LinkedServiceAzureSearchParameters struct {
 
 	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/datafactory/v1beta2.Factory
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DataFactoryID *string `json:"dataFactoryId,omitempty" tf:"data_factory_id,omitempty"`
 
@@ -124,7 +124,7 @@ type LinkedServiceAzureSearchParameters struct {
 
 	// The key of the Azure Search Service.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/search/v1beta2.Service
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("primary_key",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("primary_key",true)
 	// +kubebuilder:validation:Optional
 	SearchServiceKey *string `json:"searchServiceKey,omitempty" tf:"search_service_key,omitempty"`
 

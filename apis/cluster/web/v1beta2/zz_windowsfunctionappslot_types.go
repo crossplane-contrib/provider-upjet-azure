@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type WindowsFunctionAppSlotAuthSettingsActiveDirectoryInitParameters struct {
@@ -2091,7 +2091,7 @@ type WindowsFunctionAppSlotParameters struct {
 	// The name of the Windows Function App this Slot is a member of. Changing this forces a new resource to be created.
 	// The ID of the Windows Function App this Slot is a member of.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/web/v1beta2.WindowsFunctionApp
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	FunctionAppID *string `json:"functionAppId,omitempty" tf:"function_app_id,omitempty"`
 

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ConfigServerGitSettingInitParameters struct {
@@ -740,7 +740,7 @@ type TraceInitParameters struct {
 
 	// The connection string used for Application Insights.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/insights/v1beta1.ApplicationInsights
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("connection_string",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("connection_string",true)
 	ConnectionString *string `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
 
 	// Reference to a ApplicationInsights in insights to populate connectionString.
@@ -768,7 +768,7 @@ type TraceParameters struct {
 
 	// The connection string used for Application Insights.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/insights/v1beta1.ApplicationInsights
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("connection_string",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("connection_string",true)
 	// +kubebuilder:validation:Optional
 	ConnectionString *string `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
 

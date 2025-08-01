@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ActionInitParameters struct {
 
 	// The ID of the Action Group can be sourced from the .
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/insights/v1beta2.MonitorActionGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ActionGroupID *string `json:"actionGroupId,omitempty" tf:"action_group_id,omitempty"`
 
 	// Reference to a MonitorActionGroup in insights to populate actionGroupId.
@@ -47,7 +47,7 @@ type ActionParameters struct {
 
 	// The ID of the Action Group can be sourced from the .
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/insights/v1beta2.MonitorActionGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ActionGroupID *string `json:"actionGroupId,omitempty" tf:"action_group_id,omitempty"`
 
@@ -102,7 +102,7 @@ type CriteriaInitParameters struct {
 
 	// The specific resource monitored by the activity log alert. It should be within one of the scopes.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta2.Account
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
 	// Reference to a Account in storage to populate resourceId.
@@ -261,7 +261,7 @@ type CriteriaParameters struct {
 
 	// The specific resource monitored by the activity log alert. It should be within one of the scopes.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta2.Account
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 

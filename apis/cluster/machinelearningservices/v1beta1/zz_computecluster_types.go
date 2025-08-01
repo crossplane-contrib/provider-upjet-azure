@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ComputeClusterInitParameters struct {
@@ -29,7 +29,7 @@ type ComputeClusterInitParameters struct {
 
 	// The ID of the Machine Learning Workspace. Changing this forces a new Machine Learning Compute Cluster to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/machinelearningservices/v1beta1.Workspace
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	MachineLearningWorkspaceID *string `json:"machineLearningWorkspaceId,omitempty" tf:"machine_learning_workspace_id,omitempty"`
 
 	// Reference to a Workspace in machinelearningservices to populate machineLearningWorkspaceId.
@@ -57,7 +57,7 @@ type ComputeClusterInitParameters struct {
 
 	// The ID of the Subnet that the Compute Cluster should reside in. Changing this forces a new Machine Learning Compute Cluster to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetResourceID *string `json:"subnetResourceId,omitempty" tf:"subnet_resource_id,omitempty"`
 
 	// Reference to a Subnet in network to populate subnetResourceId.
@@ -148,7 +148,7 @@ type ComputeClusterParameters struct {
 
 	// The ID of the Machine Learning Workspace. Changing this forces a new Machine Learning Compute Cluster to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/machinelearningservices/v1beta1.Workspace
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	MachineLearningWorkspaceID *string `json:"machineLearningWorkspaceId,omitempty" tf:"machine_learning_workspace_id,omitempty"`
 
@@ -182,7 +182,7 @@ type ComputeClusterParameters struct {
 
 	// The ID of the Subnet that the Compute Cluster should reside in. Changing this forces a new Machine Learning Compute Cluster to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetResourceID *string `json:"subnetResourceId,omitempty" tf:"subnet_resource_id,omitempty"`
 

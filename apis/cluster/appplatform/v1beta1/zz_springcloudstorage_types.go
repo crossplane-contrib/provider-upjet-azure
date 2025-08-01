@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type SpringCloudStorageInitParameters struct {
 
 	// The access key of the Azure Storage Account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta2.Account
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("primary_access_key",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("primary_access_key",true)
 	StorageAccountKey *string `json:"storageAccountKey,omitempty" tf:"storage_account_key,omitempty"`
 
 	// Reference to a Account in storage to populate storageAccountKey.
@@ -60,7 +60,7 @@ type SpringCloudStorageParameters struct {
 
 	// The ID of the Spring Cloud Service where the Spring Cloud Storage should exist. Changing this forces a new Spring Cloud Storage to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/appplatform/v1beta2.SpringCloudService
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SpringCloudServiceID *string `json:"springCloudServiceId,omitempty" tf:"spring_cloud_service_id,omitempty"`
 
@@ -74,7 +74,7 @@ type SpringCloudStorageParameters struct {
 
 	// The access key of the Azure Storage Account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta2.Account
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("primary_access_key",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("primary_access_key",true)
 	// +kubebuilder:validation:Optional
 	StorageAccountKey *string `json:"storageAccountKey,omitempty" tf:"storage_account_key,omitempty"`
 

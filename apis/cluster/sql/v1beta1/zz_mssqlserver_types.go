@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AzureadAdministratorInitParameters struct {
@@ -20,7 +20,7 @@ type AzureadAdministratorInitParameters struct {
 
 	// The login username of the Azure AD Administrator of this SQL Server.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	LoginUsername *string `json:"loginUsername,omitempty" tf:"login_username,omitempty"`
 
 	// Reference to a UserAssignedIdentity in managedidentity to populate loginUsername.
@@ -33,7 +33,7 @@ type AzureadAdministratorInitParameters struct {
 
 	// The object id of the Azure AD Administrator of this SQL Server.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("principal_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("principal_id",true)
 	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
 
 	// Reference to a UserAssignedIdentity in managedidentity to populate objectId.
@@ -71,7 +71,7 @@ type AzureadAdministratorParameters struct {
 
 	// The login username of the Azure AD Administrator of this SQL Server.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	LoginUsername *string `json:"loginUsername,omitempty" tf:"login_username,omitempty"`
 
@@ -85,7 +85,7 @@ type AzureadAdministratorParameters struct {
 
 	// The object id of the Azure AD Administrator of this SQL Server.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("principal_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("principal_id",true)
 	// +kubebuilder:validation:Optional
 	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
 
@@ -106,7 +106,7 @@ type MSSQLServerIdentityInitParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this SQL Server.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
@@ -142,7 +142,7 @@ type MSSQLServerIdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this SQL Server.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
@@ -197,7 +197,7 @@ type MSSQLServerInitParameters struct {
 
 	// Specifies the primary user managed identity id. Required if type within the identity block is set to either SystemAssigned, UserAssigned or UserAssigned and should be set at same time as setting identity_ids.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PrimaryUserAssignedIdentityID *string `json:"primaryUserAssignedIdentityId,omitempty" tf:"primary_user_assigned_identity_id,omitempty"`
 
 	// Reference to a UserAssignedIdentity in managedidentity to populate primaryUserAssignedIdentityId.
@@ -217,7 +217,7 @@ type MSSQLServerInitParameters struct {
 
 	// The fully versioned Key Vault Key URL (e.g. 'https://<YourVaultName>.vault.azure.net/keys/<YourKeyName>/<YourKeyVersion>) to be used as the Customer Managed Key(CMK/BYOK) for the Transparent Data Encryption(TDE) layer.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/keyvault/v1beta1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TransparentDataEncryptionKeyVaultKeyID *string `json:"transparentDataEncryptionKeyVaultKeyId,omitempty" tf:"transparent_data_encryption_key_vault_key_id,omitempty"`
 
 	// Reference to a Key in keyvault to populate transparentDataEncryptionKeyVaultKeyId.
@@ -338,7 +338,7 @@ type MSSQLServerParameters struct {
 
 	// Specifies the primary user managed identity id. Required if type within the identity block is set to either SystemAssigned, UserAssigned or UserAssigned and should be set at same time as setting identity_ids.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PrimaryUserAssignedIdentityID *string `json:"primaryUserAssignedIdentityId,omitempty" tf:"primary_user_assigned_identity_id,omitempty"`
 
@@ -374,7 +374,7 @@ type MSSQLServerParameters struct {
 
 	// The fully versioned Key Vault Key URL (e.g. 'https://<YourVaultName>.vault.azure.net/keys/<YourKeyName>/<YourKeyVersion>) to be used as the Customer Managed Key(CMK/BYOK) for the Transparent Data Encryption(TDE) layer.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/keyvault/v1beta1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TransparentDataEncryptionKeyVaultKeyID *string `json:"transparentDataEncryptionKeyVaultKeyId,omitempty" tf:"transparent_data_encryption_key_vault_key_id,omitempty"`
 

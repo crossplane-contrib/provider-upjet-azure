@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type APIMetadataInitParameters struct {
@@ -405,7 +405,7 @@ type SpringCloudGatewayParameters struct {
 
 	// The ID of the Spring Cloud Service. Changing this forces a new Spring Cloud Gateway to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/appplatform/v1beta1.SpringCloudService
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SpringCloudServiceID *string `json:"springCloudServiceId,omitempty" tf:"spring_cloud_service_id,omitempty"`
 

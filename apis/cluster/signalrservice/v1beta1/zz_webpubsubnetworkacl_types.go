@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type WebPubsubNetworkACLInitParameters struct {
@@ -26,7 +26,7 @@ type WebPubsubNetworkACLInitParameters struct {
 
 	// The ID of the Web Pubsub service. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/signalrservice/v1beta1.WebPubsub
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	WebPubsubID *string `json:"webPubsubId,omitempty" tf:"web_pubsub_id,omitempty"`
 
 	// Reference to a WebPubsub in signalrservice to populate webPubsubId.
@@ -72,7 +72,7 @@ type WebPubsubNetworkACLParameters struct {
 
 	// The ID of the Web Pubsub service. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/signalrservice/v1beta1.WebPubsub
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	WebPubsubID *string `json:"webPubsubId,omitempty" tf:"web_pubsub_id,omitempty"`
 
@@ -97,7 +97,7 @@ type WebPubsubNetworkACLPrivateEndpointInitParameters struct {
 
 	// The ID of the Private Endpoint which is based on the Web Pubsub service.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta1.PrivateEndpoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Reference to a PrivateEndpoint in network to populate id.
@@ -137,7 +137,7 @@ type WebPubsubNetworkACLPrivateEndpointParameters struct {
 
 	// The ID of the Private Endpoint which is based on the Web Pubsub service.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta1.PrivateEndpoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 

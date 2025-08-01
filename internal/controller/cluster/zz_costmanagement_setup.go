@@ -7,7 +7,7 @@ package controller
 import (
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	costanomalyalert "github.com/upbound/provider-azure/internal/controller/cluster/costmanagement/costanomalyalert"
 	resourcegroupcostmanagementexport "github.com/upbound/provider-azure/internal/controller/cluster/costmanagement/resourcegroupcostmanagementexport"

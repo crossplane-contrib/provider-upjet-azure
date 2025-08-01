@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type Password1InitParameters struct {
@@ -55,7 +55,7 @@ type TokenPasswordInitParameters struct {
 
 	// The ID of the Container Registry Token that this Container Registry Token Password resides in. Changing this forces a new Container Registry Token Password to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/containerregistry/v1beta1.Token
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ContainerRegistryTokenID *string `json:"containerRegistryTokenId,omitempty" tf:"container_registry_token_id,omitempty"`
 
 	// Reference to a Token in containerregistry to populate containerRegistryTokenId.
@@ -92,7 +92,7 @@ type TokenPasswordParameters struct {
 
 	// The ID of the Container Registry Token that this Container Registry Token Password resides in. Changing this forces a new Container Registry Token Password to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/containerregistry/v1beta1.Token
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ContainerRegistryTokenID *string `json:"containerRegistryTokenId,omitempty" tf:"container_registry_token_id,omitempty"`
 

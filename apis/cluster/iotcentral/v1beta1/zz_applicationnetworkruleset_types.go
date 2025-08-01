@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ApplicationNetworkRuleSetInitParameters struct {
@@ -26,7 +26,7 @@ type ApplicationNetworkRuleSetInitParameters struct {
 
 	// The ID of the IoT Central Application. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/iotcentral/v1beta2.Application
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	IotcentralApplicationID *string `json:"iotcentralApplicationId,omitempty" tf:"iotcentral_application_id,omitempty"`
 
 	// Reference to a Application in iotcentral to populate iotcentralApplicationId.
@@ -72,7 +72,7 @@ type ApplicationNetworkRuleSetParameters struct {
 
 	// The ID of the IoT Central Application. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/iotcentral/v1beta2.Application
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	IotcentralApplicationID *string `json:"iotcentralApplicationId,omitempty" tf:"iotcentral_application_id,omitempty"`
 

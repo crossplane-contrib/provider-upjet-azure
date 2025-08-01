@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type FunctionAppHybridConnectionInitParameters struct {
@@ -40,7 +40,7 @@ type FunctionAppHybridConnectionInitParameters struct {
 	// The ID of the Relay Hybrid Connection to use. Changing this forces a new resource to be created.
 	// The ID of the Relay Hybrid Connection to use.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/relay/v1beta1.HybridConnection
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	RelayID *string `json:"relayId,omitempty" tf:"relay_id,omitempty"`
 
 	// Reference to a HybridConnection in relay to populate relayId.
@@ -128,7 +128,7 @@ type FunctionAppHybridConnectionParameters struct {
 	// The ID of the Relay Hybrid Connection to use. Changing this forces a new resource to be created.
 	// The ID of the Relay Hybrid Connection to use.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/relay/v1beta1.HybridConnection
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RelayID *string `json:"relayId,omitempty" tf:"relay_id,omitempty"`
 

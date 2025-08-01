@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type APIOperationTagInitParameters struct {
@@ -35,7 +35,7 @@ type APIOperationTagParameters struct {
 
 	// The ID of the API Management API Operation. Changing this forces a new API Management API Operation Tag to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/apimanagement/v1beta2.APIOperation
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	APIOperationID *string `json:"apiOperationId,omitempty" tf:"api_operation_id,omitempty"`
 

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type CustomDomainDeveloperPortalInitParameters struct {
@@ -26,7 +26,7 @@ type CustomDomainDeveloperPortalInitParameters struct {
 
 	// The ID of the Key Vault Secret containing the SSL Certificate, which must be of the type application/x-pkcs12.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/keyvault/v1beta2.Certificate
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("versionless_secret_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("versionless_secret_id",true)
 	KeyVaultCertificateID *string `json:"keyVaultCertificateId,omitempty" tf:"key_vault_certificate_id,omitempty"`
 
 	// Reference to a Certificate in keyvault to populate keyVaultCertificateId.
@@ -90,7 +90,7 @@ type CustomDomainDeveloperPortalParameters struct {
 
 	// The ID of the Key Vault Secret containing the SSL Certificate, which must be of the type application/x-pkcs12.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/keyvault/v1beta2.Certificate
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("versionless_secret_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("versionless_secret_id",true)
 	// +kubebuilder:validation:Optional
 	KeyVaultCertificateID *string `json:"keyVaultCertificateId,omitempty" tf:"key_vault_certificate_id,omitempty"`
 
@@ -243,7 +243,7 @@ type CustomDomainParameters struct {
 
 	// The ID of the API Management service for which to configure Custom Domains. Changing this forces a new API Management Custom Domain resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/apimanagement/v1beta2.Management
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	APIManagementID *string `json:"apiManagementId,omitempty" tf:"api_management_id,omitempty"`
 
@@ -456,7 +456,7 @@ type GatewayInitParameters struct {
 
 	// The ID of the Key Vault Secret containing the SSL Certificate, which must be of the type application/x-pkcs12.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/keyvault/v1beta2.Certificate
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("versionless_secret_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("versionless_secret_id",true)
 	KeyVaultCertificateID *string `json:"keyVaultCertificateId,omitempty" tf:"key_vault_certificate_id,omitempty"`
 
 	// Reference to a Certificate in keyvault to populate keyVaultCertificateId.
@@ -527,7 +527,7 @@ type GatewayParameters struct {
 
 	// The ID of the Key Vault Secret containing the SSL Certificate, which must be of the type application/x-pkcs12.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/keyvault/v1beta2.Certificate
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("versionless_secret_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("versionless_secret_id",true)
 	// +kubebuilder:validation:Optional
 	KeyVaultCertificateID *string `json:"keyVaultCertificateId,omitempty" tf:"key_vault_certificate_id,omitempty"`
 

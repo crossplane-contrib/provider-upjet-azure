@@ -19,7 +19,7 @@
 //go:generate bash -c "find ../cmd/provider -type d -maxdepth 1 -mindepth 1 -empty -delete"
 
 // Scrape metadata from Terraform registry
-//go:generate go run github.com/crossplane/upjet/cmd/scraper -n hashicorp/terraform-provider-azurerm -r ../.work/terraform-provider-azurerm/website/docs/r -o ../config/provider-metadata.yaml
+//go:generate go run github.com/crossplane/upjet/v2/cmd/scraper -n hashicorp/terraform-provider-azurerm -r ../.work/terraform-provider-azurerm/website/docs/r -o ../config/provider-metadata.yaml
 
 // Run Upjet generator
 //go:generate go run ../cmd/generator/main.go ..
@@ -32,8 +32,8 @@
 
 // Run upjet's transformer for the generated resolvers to get rid of the cross
 // API-group imports and to prevent import cycles
-//go:generate go run github.com/crossplane/upjet/cmd/resolver -g azure.upbound.io -a github.com/upbound/provider-azure/internal/apis -o azure.azure.upbound.io=azure.upbound.io -s -p ../apis/cluster/...
-//go:generate go run github.com/crossplane/upjet/cmd/resolver -g azure.upbound.io -a github.com/upbound/provider-azure/internal/apis -o azure.azure.upbound.io=azure.upbound.io -s -p ../apis/namespaced/...
+//go:generate go run github.com/crossplane/upjet/v2/cmd/resolver -g azure.upbound.io -a github.com/upbound/provider-azure/internal/apis -o azure.azure.upbound.io=azure.upbound.io -s -p ../apis/cluster/...
+//go:generate go run github.com/crossplane/upjet/v2/cmd/resolver -g azure.upbound.io -a github.com/upbound/provider-azure/internal/apis -o azure.azure.upbound.io=azure.upbound.io -s -p ../apis/namespaced/...
 
 package generate
 
@@ -42,5 +42,5 @@ import (
 
 	_ "github.com/crossplane/crossplane-tools/cmd/angryjet" //nolint:typecheck
 
-	_ "github.com/crossplane/upjet/cmd/scraper"
+	_ "github.com/crossplane/upjet/v2/cmd/scraper"
 )

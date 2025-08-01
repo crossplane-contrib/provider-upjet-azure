@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type WebhookInitParameters struct {
@@ -54,7 +54,7 @@ type WebhookInitParameters struct {
 
 	// Name of the Automation Runbook to execute by Webhook.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/automation/v1beta2.RunBook
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	RunBookName *string `json:"runbookName,omitempty" tf:"runbook_name,omitempty"`
 
 	// Reference to a RunBook in automation to populate runbookName.
@@ -150,7 +150,7 @@ type WebhookParameters struct {
 
 	// Name of the Automation Runbook to execute by Webhook.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/automation/v1beta2.RunBook
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	RunBookName *string `json:"runbookName,omitempty" tf:"runbook_name,omitempty"`
 

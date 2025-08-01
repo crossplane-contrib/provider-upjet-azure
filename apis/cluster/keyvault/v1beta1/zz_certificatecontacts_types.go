@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type CertificateContactsContactInitParameters struct {
@@ -59,7 +59,7 @@ type CertificateContactsInitParameters struct {
 
 	// The ID of the Key Vault. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/keyvault/v1beta2.Vault
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
 
 	// Reference to a Vault in keyvault to populate keyVaultId.
@@ -91,7 +91,7 @@ type CertificateContactsParameters struct {
 
 	// The ID of the Key Vault. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/keyvault/v1beta2.Vault
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
 

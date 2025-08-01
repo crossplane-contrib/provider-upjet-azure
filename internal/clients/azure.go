@@ -12,9 +12,9 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	tfsdk "github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 
-	xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
-	"github.com/crossplane/upjet/pkg/terraform"
+	xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+	"github.com/crossplane/upjet/v2/pkg/terraform"
 	"github.com/pkg/errors"
 	"k8s.io/apimachinery/pkg/types"
 	"sigs.k8s.io/controller-runtime/pkg/client"

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type MSSQLJobAgentIdentityInitParameters struct {
@@ -49,7 +49,7 @@ type MSSQLJobAgentInitParameters struct {
 
 	// The ID of the database to store metadata for this Elastic Job Agent. Changing this forces a new Elastic Job Agent to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/sql/v1beta2.MSSQLDatabase
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DatabaseID *string `json:"databaseId,omitempty" tf:"database_id,omitempty"`
 
 	// Reference to a MSSQLDatabase in sql to populate databaseId.
@@ -106,7 +106,7 @@ type MSSQLJobAgentParameters struct {
 
 	// The ID of the database to store metadata for this Elastic Job Agent. Changing this forces a new Elastic Job Agent to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/sql/v1beta2.MSSQLDatabase
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DatabaseID *string `json:"databaseId,omitempty" tf:"database_id,omitempty"`
 

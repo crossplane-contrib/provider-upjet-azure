@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type EventGridDataConnectionInitParameters struct {
@@ -44,7 +44,7 @@ type EventGridDataConnectionInitParameters struct {
 
 	// Specifies the resource id of the Event Hub this data connection will use for ingestion. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/eventhub/v1beta2.EventHub
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	EventHubID *string `json:"eventhubId,omitempty" tf:"eventhub_id,omitempty"`
 
 	// Reference to a EventHub in eventhub to populate eventhubId.
@@ -72,7 +72,7 @@ type EventGridDataConnectionInitParameters struct {
 
 	// Specifies the resource id of the Storage Account this data connection will use for ingestion. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta2.Account
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 
 	// Reference to a Account in storage to populate storageAccountId.
@@ -207,7 +207,7 @@ type EventGridDataConnectionParameters struct {
 
 	// Specifies the resource id of the Event Hub this data connection will use for ingestion. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/eventhub/v1beta2.EventHub
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	EventHubID *string `json:"eventhubId,omitempty" tf:"eventhub_id,omitempty"`
 
@@ -254,7 +254,7 @@ type EventGridDataConnectionParameters struct {
 
 	// Specifies the resource id of the Storage Account this data connection will use for ingestion. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta2.Account
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 

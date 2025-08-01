@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type CriteriaDimensionInitParameters struct {
@@ -85,7 +85,7 @@ type MonitorScheduledQueryRulesAlertV2ActionInitParameters struct {
 
 	// List of Action Group resource IDs to invoke when the alert fires.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/insights/v1beta1.MonitorActionGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ActionGroups []*string `json:"actionGroups,omitempty" tf:"action_groups,omitempty"`
 
 	// References to MonitorActionGroup in insights to populate actionGroups.
@@ -115,7 +115,7 @@ type MonitorScheduledQueryRulesAlertV2ActionParameters struct {
 
 	// List of Action Group resource IDs to invoke when the alert fires.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/insights/v1beta1.MonitorActionGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ActionGroups []*string `json:"actionGroups,omitempty" tf:"action_groups,omitempty"`
 
@@ -226,7 +226,7 @@ type MonitorScheduledQueryRulesAlertV2IdentityInitParameters struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this Scheduled Query Rule.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
@@ -262,7 +262,7 @@ type MonitorScheduledQueryRulesAlertV2IdentityParameters struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this Scheduled Query Rule.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`

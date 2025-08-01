@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type LinkedServiceKeyVaultInitParameters struct {
@@ -30,7 +30,7 @@ type LinkedServiceKeyVaultInitParameters struct {
 
 	// The ID the Azure Key Vault resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/keyvault/v1beta2.Vault
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
 
 	// Reference to a Vault in keyvault to populate keyVaultId.
@@ -88,7 +88,7 @@ type LinkedServiceKeyVaultParameters struct {
 
 	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/datafactory/v1beta2.Factory
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DataFactoryID *string `json:"dataFactoryId,omitempty" tf:"data_factory_id,omitempty"`
 
@@ -110,7 +110,7 @@ type LinkedServiceKeyVaultParameters struct {
 
 	// The ID the Azure Key Vault resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/keyvault/v1beta2.Vault
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
 

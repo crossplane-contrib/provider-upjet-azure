@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type BudgetResourceGroupFilterInitParameters struct {
@@ -61,7 +61,7 @@ type BudgetResourceGroupInitParameters struct {
 
 	// The ID of the Resource Group to create the consumption budget for in the form of /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1. Changing this forces a new Resource Group Consumption Budget to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ResourceGroupID *string `json:"resourceGroupId,omitempty" tf:"resource_group_id,omitempty"`
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupId.
@@ -86,7 +86,7 @@ type BudgetResourceGroupNotificationInitParameters struct {
 
 	// Specifies a list of Action Group IDs to send the budget notification to when the threshold is exceeded.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/insights/v1beta1.MonitorActionGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ContactGroups []*string `json:"contactGroups,omitempty" tf:"contact_groups,omitempty"`
 
 	// References to MonitorActionGroup in insights to populate contactGroups.
@@ -145,7 +145,7 @@ type BudgetResourceGroupNotificationParameters struct {
 
 	// Specifies a list of Action Group IDs to send the budget notification to when the threshold is exceeded.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/insights/v1beta1.MonitorActionGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ContactGroups []*string `json:"contactGroups,omitempty" tf:"contact_groups,omitempty"`
 
@@ -232,7 +232,7 @@ type BudgetResourceGroupParameters struct {
 
 	// The ID of the Resource Group to create the consumption budget for in the form of /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1. Changing this forces a new Resource Group Consumption Budget to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ResourceGroupID *string `json:"resourceGroupId,omitempty" tf:"resource_group_id,omitempty"`
 
@@ -292,7 +292,7 @@ type FilterDimensionInitParameters struct {
 
 	// Specifies a list of values for the tag.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/insights/v1beta1.MonitorActionGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 
 	// References to MonitorActionGroup in insights to populate values.
@@ -328,7 +328,7 @@ type FilterDimensionParameters struct {
 
 	// Specifies a list of values for the tag.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/insights/v1beta1.MonitorActionGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 

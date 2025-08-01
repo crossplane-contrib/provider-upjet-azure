@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AzureMonitorMetricsInitParameters struct {
@@ -409,7 +409,7 @@ type EventHubInitParameters struct {
 
 	// The resource ID of the Event Hub.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/eventhub/v1beta2.EventHub
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	EventHubID *string `json:"eventHubId,omitempty" tf:"event_hub_id,omitempty"`
 
 	// Reference to a EventHub in eventhub to populate eventHubId.
@@ -437,7 +437,7 @@ type EventHubParameters struct {
 
 	// The resource ID of the Event Hub.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/eventhub/v1beta2.EventHub
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	EventHubID *string `json:"eventHubId,omitempty" tf:"event_hub_id,omitempty"`
 
@@ -588,7 +588,7 @@ type LogAnalyticsInitParameters struct {
 
 	// The ID of a Log Analytic Workspace resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/operationalinsights/v1beta2.Workspace
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	WorkspaceResourceID *string `json:"workspaceResourceId,omitempty" tf:"workspace_resource_id,omitempty"`
 
 	// Reference to a Workspace in operationalinsights to populate workspaceResourceId.
@@ -617,7 +617,7 @@ type LogAnalyticsParameters struct {
 
 	// The ID of a Log Analytic Workspace resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/operationalinsights/v1beta2.Workspace
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	WorkspaceResourceID *string `json:"workspaceResourceId,omitempty" tf:"workspace_resource_id,omitempty"`
 
@@ -722,7 +722,7 @@ type MonitorDataCollectionRuleIdentityInitParameters struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this Data Collection Rule. Currently, up to 1 identity is supported.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
@@ -758,7 +758,7 @@ type MonitorDataCollectionRuleIdentityParameters struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this Data Collection Rule. Currently, up to 1 identity is supported.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
@@ -780,7 +780,7 @@ type MonitorDataCollectionRuleInitParameters struct {
 
 	// The resource ID of the Data Collection Endpoint that this rule can be used with.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/insights/v1beta1.MonitorDataCollectionEndpoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DataCollectionEndpointID *string `json:"dataCollectionEndpointId,omitempty" tf:"data_collection_endpoint_id,omitempty"`
 
 	// Reference to a MonitorDataCollectionEndpoint in insights to populate dataCollectionEndpointId.
@@ -867,7 +867,7 @@ type MonitorDataCollectionRuleParameters struct {
 
 	// The resource ID of the Data Collection Endpoint that this rule can be used with.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/insights/v1beta1.MonitorDataCollectionEndpoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DataCollectionEndpointID *string `json:"dataCollectionEndpointId,omitempty" tf:"data_collection_endpoint_id,omitempty"`
 
@@ -1124,7 +1124,7 @@ type StorageBlobInitParameters struct {
 
 	// The resource ID of the Storage Account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta2.Account
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 
 	// Reference to a Account in storage to populate storageAccountId.
@@ -1169,7 +1169,7 @@ type StorageBlobParameters struct {
 
 	// The resource ID of the Storage Account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta2.Account
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 

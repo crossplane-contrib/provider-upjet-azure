@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type MSSQLServerSecurityAlertPolicyInitParameters struct {
@@ -37,7 +37,7 @@ type MSSQLServerSecurityAlertPolicyInitParameters struct {
 
 	// Specifies the blob storage endpoint that will hold all Threat Detection audit logs (e.g., https://example.blob.core.windows.net).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta2.Account
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("primary_blob_endpoint",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("primary_blob_endpoint",true)
 	StorageEndpoint *string `json:"storageEndpoint,omitempty" tf:"storage_endpoint,omitempty"`
 
 	// Reference to a Account in storage to populate storageEndpoint.
@@ -137,7 +137,7 @@ type MSSQLServerSecurityAlertPolicyParameters struct {
 
 	// Specifies the blob storage endpoint that will hold all Threat Detection audit logs (e.g., https://example.blob.core.windows.net).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta2.Account
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("primary_blob_endpoint",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("primary_blob_endpoint",true)
 	// +kubebuilder:validation:Optional
 	StorageEndpoint *string `json:"storageEndpoint,omitempty" tf:"storage_endpoint,omitempty"`
 

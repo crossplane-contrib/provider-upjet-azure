@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type MonitorScheduledQueryRulesAlertActionInitParameters struct {
@@ -82,7 +82,7 @@ type MonitorScheduledQueryRulesAlertInitParameters struct {
 
 	// List of Resource IDs referred into query.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/insights/v1beta1.ApplicationInsights
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +listType=set
 	AuthorizedResourceIds []*string `json:"authorizedResourceIds,omitempty" tf:"authorized_resource_ids,omitempty"`
 
@@ -100,7 +100,7 @@ type MonitorScheduledQueryRulesAlertInitParameters struct {
 
 	// The resource URI over which log search query is to be run. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/insights/v1beta1.ApplicationInsights
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DataSourceID *string `json:"dataSourceId,omitempty" tf:"data_source_id,omitempty"`
 
 	// Reference to a ApplicationInsights in insights to populate dataSourceId.
@@ -229,7 +229,7 @@ type MonitorScheduledQueryRulesAlertParameters struct {
 
 	// List of Resource IDs referred into query.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/insights/v1beta1.ApplicationInsights
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	AuthorizedResourceIds []*string `json:"authorizedResourceIds,omitempty" tf:"authorized_resource_ids,omitempty"`
@@ -249,7 +249,7 @@ type MonitorScheduledQueryRulesAlertParameters struct {
 
 	// The resource URI over which log search query is to be run. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/insights/v1beta1.ApplicationInsights
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DataSourceID *string `json:"dataSourceId,omitempty" tf:"data_source_id,omitempty"`
 

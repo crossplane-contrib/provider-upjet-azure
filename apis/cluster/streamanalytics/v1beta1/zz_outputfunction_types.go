@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type OutputFunctionInitParameters struct {
@@ -26,7 +26,7 @@ type OutputFunctionInitParameters struct {
 
 	// The name of the Function App.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/web/v1beta2.FunctionApp
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	FunctionApp *string `json:"functionApp,omitempty" tf:"function_app,omitempty"`
 
 	// Reference to a FunctionApp in web to populate functionApp.
@@ -93,7 +93,7 @@ type OutputFunctionParameters struct {
 
 	// The name of the Function App.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/web/v1beta2.FunctionApp
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	FunctionApp *string `json:"functionApp,omitempty" tf:"function_app,omitempty"`
 

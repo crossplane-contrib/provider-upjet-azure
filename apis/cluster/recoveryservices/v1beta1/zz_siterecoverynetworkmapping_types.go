@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type SiteRecoveryNetworkMappingInitParameters struct {
@@ -44,7 +44,7 @@ type SiteRecoveryNetworkMappingInitParameters struct {
 
 	// The id of the primary network. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.VirtualNetwork
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SourceNetworkID *string `json:"sourceNetworkId,omitempty" tf:"source_network_id,omitempty"`
 
 	// Reference to a VirtualNetwork in network to populate sourceNetworkId.
@@ -60,7 +60,7 @@ type SiteRecoveryNetworkMappingInitParameters struct {
 
 	// The id of the recovery network. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.VirtualNetwork
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TargetNetworkID *string `json:"targetNetworkId,omitempty" tf:"target_network_id,omitempty"`
 
 	// Reference to a VirtualNetwork in network to populate targetNetworkId.
@@ -136,7 +136,7 @@ type SiteRecoveryNetworkMappingParameters struct {
 
 	// The id of the primary network. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.VirtualNetwork
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourceNetworkID *string `json:"sourceNetworkId,omitempty" tf:"source_network_id,omitempty"`
 
@@ -154,7 +154,7 @@ type SiteRecoveryNetworkMappingParameters struct {
 
 	// The id of the recovery network. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.VirtualNetwork
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TargetNetworkID *string `json:"targetNetworkId,omitempty" tf:"target_network_id,omitempty"`
 

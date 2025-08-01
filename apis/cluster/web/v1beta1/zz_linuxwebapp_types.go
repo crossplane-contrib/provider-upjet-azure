@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ActionInitParameters struct {
@@ -2020,7 +2020,7 @@ type LinuxWebAppInitParameters struct {
 
 	// The ID of the Service Plan that this Linux App Service will be created in.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/web/v1beta1.ServicePlan
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ServicePlanID *string `json:"servicePlanId,omitempty" tf:"service_plan_id,omitempty"`
 
 	// Reference to a ServicePlan in web to populate servicePlanId.
@@ -2267,7 +2267,7 @@ type LinuxWebAppParameters struct {
 
 	// The ID of the Service Plan that this Linux App Service will be created in.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/web/v1beta1.ServicePlan
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ServicePlanID *string `json:"servicePlanId,omitempty" tf:"service_plan_id,omitempty"`
 

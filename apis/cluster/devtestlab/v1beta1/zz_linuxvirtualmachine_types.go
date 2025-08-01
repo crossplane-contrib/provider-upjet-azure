@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type GalleryImageReferenceInitParameters struct {
@@ -134,7 +134,7 @@ type LinuxVirtualMachineInitParameters struct {
 
 	// The ID of the Dev Test Virtual Network where this Virtual Machine should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/devtestlab/v1beta1.VirtualNetwork
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	LabVirtualNetworkID *string `json:"labVirtualNetworkId,omitempty" tf:"lab_virtual_network_id,omitempty"`
 
 	// Reference to a VirtualNetwork in devtestlab to populate labVirtualNetworkId.
@@ -290,7 +290,7 @@ type LinuxVirtualMachineParameters struct {
 
 	// The ID of the Dev Test Virtual Network where this Virtual Machine should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/devtestlab/v1beta1.VirtualNetwork
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LabVirtualNetworkID *string `json:"labVirtualNetworkId,omitempty" tf:"lab_virtual_network_id,omitempty"`
 

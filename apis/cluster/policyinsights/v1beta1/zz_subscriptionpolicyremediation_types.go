@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type SubscriptionPolicyRemediationInitParameters struct {
@@ -26,7 +26,7 @@ type SubscriptionPolicyRemediationInitParameters struct {
 
 	// The ID of the Policy Assignment that should be remediated.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/authorization/v1beta2.SubscriptionPolicyAssignment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PolicyAssignmentID *string `json:"policyAssignmentId,omitempty" tf:"policy_assignment_id,omitempty"`
 
 	// Reference to a SubscriptionPolicyAssignment in authorization to populate policyAssignmentId.
@@ -96,7 +96,7 @@ type SubscriptionPolicyRemediationParameters struct {
 
 	// The ID of the Policy Assignment that should be remediated.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/authorization/v1beta2.SubscriptionPolicyAssignment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PolicyAssignmentID *string `json:"policyAssignmentId,omitempty" tf:"policy_assignment_id,omitempty"`
 

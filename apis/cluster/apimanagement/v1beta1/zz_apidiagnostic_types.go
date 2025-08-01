@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type APIDiagnosticInitParameters struct {
 
 	// The ID (name) of the Diagnostics Logger.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/apimanagement/v1beta1.Logger
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	APIManagementLoggerID *string `json:"apiManagementLoggerId,omitempty" tf:"api_management_logger_id,omitempty"`
 
 	// Reference to a Logger in apimanagement to populate apiManagementLoggerId.
@@ -111,7 +111,7 @@ type APIDiagnosticParameters struct {
 
 	// The ID (name) of the Diagnostics Logger.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/apimanagement/v1beta1.Logger
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	APIManagementLoggerID *string `json:"apiManagementLoggerId,omitempty" tf:"api_management_logger_id,omitempty"`
 

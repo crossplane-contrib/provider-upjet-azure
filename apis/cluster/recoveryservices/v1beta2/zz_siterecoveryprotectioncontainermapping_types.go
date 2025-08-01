@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AutomaticUpdateInitParameters struct {
@@ -59,7 +59,7 @@ type SiteRecoveryProtectionContainerMappingInitParameters struct {
 
 	// Id of the policy to use for this mapping. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/recoveryservices/v1beta1.SiteRecoveryReplicationPolicy
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	RecoveryReplicationPolicyID *string `json:"recoveryReplicationPolicyId,omitempty" tf:"recovery_replication_policy_id,omitempty"`
 
 	// Reference to a SiteRecoveryReplicationPolicy in recoveryservices to populate recoveryReplicationPolicyId.
@@ -72,7 +72,7 @@ type SiteRecoveryProtectionContainerMappingInitParameters struct {
 
 	// Id of target protection container to map to. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/recoveryservices/v1beta1.SiteRecoveryProtectionContainer
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	RecoveryTargetProtectionContainerID *string `json:"recoveryTargetProtectionContainerId,omitempty" tf:"recovery_target_protection_container_id,omitempty"`
 
 	// Reference to a SiteRecoveryProtectionContainer in recoveryservices to populate recoveryTargetProtectionContainerId.
@@ -132,7 +132,7 @@ type SiteRecoveryProtectionContainerMappingParameters struct {
 
 	// Id of the policy to use for this mapping. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/recoveryservices/v1beta1.SiteRecoveryReplicationPolicy
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RecoveryReplicationPolicyID *string `json:"recoveryReplicationPolicyId,omitempty" tf:"recovery_replication_policy_id,omitempty"`
 
@@ -159,7 +159,7 @@ type SiteRecoveryProtectionContainerMappingParameters struct {
 
 	// Id of target protection container to map to. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/recoveryservices/v1beta1.SiteRecoveryProtectionContainer
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RecoveryTargetProtectionContainerID *string `json:"recoveryTargetProtectionContainerId,omitempty" tf:"recovery_target_protection_container_id,omitempty"`
 

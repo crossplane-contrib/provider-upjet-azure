@@ -5,7 +5,7 @@
 package security
 
 import (
-	"github.com/crossplane/upjet/pkg/config"
+	"github.com/crossplane/upjet/v2/pkg/config"
 )
 
 // Configure configures security group
@@ -24,7 +24,7 @@ func Configure(p *config.Provider) {
 
 		r.References["iothub_ids"] = config.Reference{
 			TerraformName: "azurerm_iothub",
-			Extractor:     `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("id",true)`,
+			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("id",true)`,
 		}
 	})
 

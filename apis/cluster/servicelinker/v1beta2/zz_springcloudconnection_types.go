@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AuthenticationInitParameters struct {
@@ -121,7 +121,7 @@ type SpringCloudConnectionInitParameters struct {
 
 	// The ID of the data source spring cloud. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/appplatform/v1beta2.SpringCloudJavaDeployment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SpringCloudID *string `json:"springCloudId,omitempty" tf:"spring_cloud_id,omitempty"`
 
 	// Reference to a SpringCloudJavaDeployment in appplatform to populate springCloudId.
@@ -134,7 +134,7 @@ type SpringCloudConnectionInitParameters struct {
 
 	// The ID of the target resource. Changing this forces a new resource to be created. Possible target resources are Postgres, PostgresFlexible, Mysql, Sql, Redis, RedisEnterprise, CosmosCassandra, CosmosGremlin, CosmosMongo, CosmosSql, CosmosTable, StorageBlob, StorageQueue, StorageFile, StorageTable, AppConfig, EventHub, ServiceBus, SignalR, WebPubSub, ConfluentKafka. The integration guide can be found here.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/cosmosdb/v1beta2.SQLDatabase
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
 
 	// Reference to a SQLDatabase in cosmosdb to populate targetResourceId.
@@ -196,7 +196,7 @@ type SpringCloudConnectionParameters struct {
 
 	// The ID of the data source spring cloud. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/appplatform/v1beta2.SpringCloudJavaDeployment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SpringCloudID *string `json:"springCloudId,omitempty" tf:"spring_cloud_id,omitempty"`
 
@@ -210,7 +210,7 @@ type SpringCloudConnectionParameters struct {
 
 	// The ID of the target resource. Changing this forces a new resource to be created. Possible target resources are Postgres, PostgresFlexible, Mysql, Sql, Redis, RedisEnterprise, CosmosCassandra, CosmosGremlin, CosmosMongo, CosmosSql, CosmosTable, StorageBlob, StorageQueue, StorageFile, StorageTable, AppConfig, EventHub, ServiceBus, SignalR, WebPubSub, ConfluentKafka. The integration guide can be found here.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/cosmosdb/v1beta2.SQLDatabase
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
 

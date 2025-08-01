@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type BackupProtectedFileShareInitParameters struct {
 
 	// Specifies the ID of the backup policy to use. The policy must be an Azure File Share backup policy. Other types are not supported.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/recoveryservices/v1beta2.BackupPolicyFileShare
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	BackupPolicyID *string `json:"backupPolicyId,omitempty" tf:"backup_policy_id,omitempty"`
 
 	// Reference to a BackupPolicyFileShare in recoveryservices to populate backupPolicyId.
@@ -66,7 +66,7 @@ type BackupProtectedFileShareInitParameters struct {
 
 	// Specifies the ID of the storage account of the file share to backup. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/recoveryservices/v1beta1.BackupContainerStorageAccount
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("storage_account_id",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("storage_account_id",false)
 	SourceStorageAccountID *string `json:"sourceStorageAccountId,omitempty" tf:"source_storage_account_id,omitempty"`
 
 	// Reference to a BackupContainerStorageAccount in recoveryservices to populate sourceStorageAccountId.
@@ -103,7 +103,7 @@ type BackupProtectedFileShareParameters struct {
 
 	// Specifies the ID of the backup policy to use. The policy must be an Azure File Share backup policy. Other types are not supported.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/recoveryservices/v1beta2.BackupPolicyFileShare
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	BackupPolicyID *string `json:"backupPolicyId,omitempty" tf:"backup_policy_id,omitempty"`
 
@@ -156,7 +156,7 @@ type BackupProtectedFileShareParameters struct {
 
 	// Specifies the ID of the storage account of the file share to backup. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/recoveryservices/v1beta1.BackupContainerStorageAccount
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("storage_account_id",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("storage_account_id",false)
 	// +kubebuilder:validation:Optional
 	SourceStorageAccountID *string `json:"sourceStorageAccountId,omitempty" tf:"source_storage_account_id,omitempty"`
 

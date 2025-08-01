@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ErrorBlobManagedIdentityInitParameters struct {
@@ -139,7 +139,7 @@ type VirtualMachineRunCommandInitParameters struct {
 
 	// Specifies the Azure storage blob where script error stream will be uploaded.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta1.Blob
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ErrorBlobURI *string `json:"errorBlobUri,omitempty" tf:"error_blob_uri,omitempty"`
 
 	// Reference to a Blob in storage to populate errorBlobUri.
@@ -158,7 +158,7 @@ type VirtualMachineRunCommandInitParameters struct {
 
 	// Specifies the Azure storage blob where script output stream will be uploaded. It can be basic blob URI with SAS token.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta1.Blob
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	OutputBlobURI *string `json:"outputBlobUri,omitempty" tf:"output_blob_uri,omitempty"`
 
 	// Reference to a Blob in storage to populate outputBlobUri.
@@ -236,7 +236,7 @@ type VirtualMachineRunCommandParameters struct {
 
 	// Specifies the Azure storage blob where script error stream will be uploaded.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta1.Blob
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ErrorBlobURI *string `json:"errorBlobUri,omitempty" tf:"error_blob_uri,omitempty"`
 
@@ -258,7 +258,7 @@ type VirtualMachineRunCommandParameters struct {
 
 	// Specifies the Azure storage blob where script output stream will be uploaded. It can be basic blob URI with SAS token.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta1.Blob
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	OutputBlobURI *string `json:"outputBlobUri,omitempty" tf:"output_blob_uri,omitempty"`
 
@@ -316,7 +316,7 @@ type VirtualMachineRunCommandSourceInitParameters struct {
 	Script *string `json:"script,omitempty" tf:"script,omitempty"`
 
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta1.Blob
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ScriptURI *string `json:"scriptUri,omitempty" tf:"script_uri,omitempty"`
 
 	// A script_uri_managed_identity block as defined above.
@@ -351,7 +351,7 @@ type VirtualMachineRunCommandSourceParameters struct {
 	Script *string `json:"script,omitempty" tf:"script,omitempty"`
 
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta1.Blob
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ScriptURI *string `json:"scriptUri,omitempty" tf:"script_uri,omitempty"`
 

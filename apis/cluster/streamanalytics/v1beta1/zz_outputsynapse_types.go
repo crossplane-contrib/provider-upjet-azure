@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type OutputSynapseInitParameters struct {
@@ -29,7 +29,7 @@ type OutputSynapseInitParameters struct {
 
 	// The user name that will be used to connect to the Azure SQL database. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/synapse/v1beta2.Workspace
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("sql_administrator_login",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("sql_administrator_login",false)
 	User *string `json:"user,omitempty" tf:"user,omitempty"`
 
 	// Reference to a Workspace in synapse to populate user.
@@ -111,7 +111,7 @@ type OutputSynapseParameters struct {
 
 	// The user name that will be used to connect to the Azure SQL database. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/synapse/v1beta2.Workspace
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("sql_administrator_login",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("sql_administrator_login",false)
 	// +kubebuilder:validation:Optional
 	User *string `json:"user,omitempty" tf:"user,omitempty"`
 

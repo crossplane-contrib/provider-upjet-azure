@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AssociationInitParameters struct {
@@ -46,7 +46,7 @@ type DomainInitParameters struct {
 
 	// The Resource Id of the Front Door Custom Domain or Front Door Endpoint that should be bound to this Front Door Security Policy. Changing this forces a new Front Door Security Policy to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/cdn/v1beta1.FrontdoorCustomDomain
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	CdnFrontdoorDomainID *string `json:"cdnFrontdoorDomainId,omitempty" tf:"cdn_frontdoor_domain_id,omitempty"`
 
 	// Reference to a FrontdoorCustomDomain in cdn to populate cdnFrontdoorDomainId.
@@ -71,7 +71,7 @@ type DomainParameters struct {
 
 	// The Resource Id of the Front Door Custom Domain or Front Door Endpoint that should be bound to this Front Door Security Policy. Changing this forces a new Front Door Security Policy to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/cdn/v1beta1.FrontdoorCustomDomain
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CdnFrontdoorDomainID *string `json:"cdnFrontdoorDomainId,omitempty" tf:"cdn_frontdoor_domain_id,omitempty"`
 
@@ -91,7 +91,7 @@ type FirewallInitParameters struct {
 
 	// The Resource Id of the Front Door Firewall Policy that should be linked to this Front Door Security Policy. Changing this forces a new Front Door Security Policy to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/cdn/v1beta1.FrontdoorFirewallPolicy
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	CdnFrontdoorFirewallPolicyID *string `json:"cdnFrontdoorFirewallPolicyId,omitempty" tf:"cdn_frontdoor_firewall_policy_id,omitempty"`
 
 	// Reference to a FrontdoorFirewallPolicy in cdn to populate cdnFrontdoorFirewallPolicyId.
@@ -120,7 +120,7 @@ type FirewallParameters struct {
 
 	// The Resource Id of the Front Door Firewall Policy that should be linked to this Front Door Security Policy. Changing this forces a new Front Door Security Policy to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/cdn/v1beta1.FrontdoorFirewallPolicy
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CdnFrontdoorFirewallPolicyID *string `json:"cdnFrontdoorFirewallPolicyId,omitempty" tf:"cdn_frontdoor_firewall_policy_id,omitempty"`
 
@@ -155,7 +155,7 @@ type FrontdoorSecurityPolicyParameters struct {
 
 	// The Front Door Profile Resource Id that is linked to this Front Door Security Policy. Changing this forces a new Front Door Security Policy to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/cdn/v1beta1.FrontdoorProfile
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CdnFrontdoorProfileID *string `json:"cdnFrontdoorProfileId,omitempty" tf:"cdn_frontdoor_profile_id,omitempty"`
 

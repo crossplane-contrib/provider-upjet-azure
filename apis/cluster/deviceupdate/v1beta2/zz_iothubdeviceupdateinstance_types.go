@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type DiagnosticStorageAccountInitParameters struct {
@@ -20,7 +20,7 @@ type DiagnosticStorageAccountInitParameters struct {
 
 	// Resource ID of the Diagnostic Storage Account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta2.Account
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Reference to a Account in storage to populate id.
@@ -46,7 +46,7 @@ type DiagnosticStorageAccountParameters struct {
 
 	// Resource ID of the Diagnostic Storage Account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta2.Account
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -69,7 +69,7 @@ type IOTHubDeviceUpdateInstanceInitParameters struct {
 
 	// Specifies the ID of the IoT Hub associated with the IoT Hub Device Update Instance. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/devices/v1beta2.IOTHub
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	IOTHubID *string `json:"iothubId,omitempty" tf:"iothub_id,omitempty"`
 
 	// Reference to a IOTHub in devices to populate iothubId.
@@ -111,7 +111,7 @@ type IOTHubDeviceUpdateInstanceParameters struct {
 
 	// Specifies the ID of the IoT Hub Device Update Account where the IoT Hub Device Update Instance exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/deviceupdate/v1beta2.IOTHubDeviceUpdateAccount
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DeviceUpdateAccountID *string `json:"deviceUpdateAccountId,omitempty" tf:"device_update_account_id,omitempty"`
 
@@ -133,7 +133,7 @@ type IOTHubDeviceUpdateInstanceParameters struct {
 
 	// Specifies the ID of the IoT Hub associated with the IoT Hub Device Update Instance. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/devices/v1beta2.IOTHub
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	IOTHubID *string `json:"iothubId,omitempty" tf:"iothub_id,omitempty"`
 

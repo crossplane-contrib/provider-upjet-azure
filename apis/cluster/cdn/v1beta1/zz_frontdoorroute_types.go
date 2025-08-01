@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type CacheInitParameters struct {
@@ -69,7 +69,7 @@ type FrontdoorRouteInitParameters struct {
 
 	// The IDs of the Front Door Custom Domains which are associated with this Front Door Route.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/cdn/v1beta1.FrontdoorCustomDomain
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +listType=set
 	CdnFrontdoorCustomDomainIds []*string `json:"cdnFrontdoorCustomDomainIds,omitempty" tf:"cdn_frontdoor_custom_domain_ids,omitempty"`
 
@@ -83,7 +83,7 @@ type FrontdoorRouteInitParameters struct {
 
 	// The resource ID of the Front Door Origin Group where this Front Door Route should be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/cdn/v1beta1.FrontdoorOriginGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	CdnFrontdoorOriginGroupID *string `json:"cdnFrontdoorOriginGroupId,omitempty" tf:"cdn_frontdoor_origin_group_id,omitempty"`
 
 	// Reference to a FrontdoorOriginGroup in cdn to populate cdnFrontdoorOriginGroupId.
@@ -96,7 +96,7 @@ type FrontdoorRouteInitParameters struct {
 
 	// One or more Front Door Origin resource IDs that this Front Door Route will link to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/cdn/v1beta1.FrontdoorOrigin
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	CdnFrontdoorOriginIds []*string `json:"cdnFrontdoorOriginIds,omitempty" tf:"cdn_frontdoor_origin_ids,omitempty"`
 
 	// References to FrontdoorOrigin in cdn to populate cdnFrontdoorOriginIds.
@@ -112,7 +112,7 @@ type FrontdoorRouteInitParameters struct {
 
 	// A list of the Front Door Rule Set IDs which should be assigned to this Front Door Route.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/cdn/v1beta1.FrontdoorRuleSet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +listType=set
 	CdnFrontdoorRuleSetIds []*string `json:"cdnFrontdoorRuleSetIds,omitempty" tf:"cdn_frontdoor_rule_set_ids,omitempty"`
 
@@ -200,7 +200,7 @@ type FrontdoorRouteParameters struct {
 
 	// The IDs of the Front Door Custom Domains which are associated with this Front Door Route.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/cdn/v1beta1.FrontdoorCustomDomain
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	CdnFrontdoorCustomDomainIds []*string `json:"cdnFrontdoorCustomDomainIds,omitempty" tf:"cdn_frontdoor_custom_domain_ids,omitempty"`
@@ -215,7 +215,7 @@ type FrontdoorRouteParameters struct {
 
 	// The resource ID of the Front Door Endpoint where this Front Door Route should exist. Changing this forces a new Front Door Route to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/cdn/v1beta1.FrontdoorEndpoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CdnFrontdoorEndpointID *string `json:"cdnFrontdoorEndpointId,omitempty" tf:"cdn_frontdoor_endpoint_id,omitempty"`
 
@@ -229,7 +229,7 @@ type FrontdoorRouteParameters struct {
 
 	// The resource ID of the Front Door Origin Group where this Front Door Route should be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/cdn/v1beta1.FrontdoorOriginGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CdnFrontdoorOriginGroupID *string `json:"cdnFrontdoorOriginGroupId,omitempty" tf:"cdn_frontdoor_origin_group_id,omitempty"`
 
@@ -243,7 +243,7 @@ type FrontdoorRouteParameters struct {
 
 	// One or more Front Door Origin resource IDs that this Front Door Route will link to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/cdn/v1beta1.FrontdoorOrigin
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CdnFrontdoorOriginIds []*string `json:"cdnFrontdoorOriginIds,omitempty" tf:"cdn_frontdoor_origin_ids,omitempty"`
 
@@ -261,7 +261,7 @@ type FrontdoorRouteParameters struct {
 
 	// A list of the Front Door Rule Set IDs which should be assigned to this Front Door Route.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/cdn/v1beta1.FrontdoorRuleSet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	CdnFrontdoorRuleSetIds []*string `json:"cdnFrontdoorRuleSetIds,omitempty" tf:"cdn_frontdoor_rule_set_ids,omitempty"`

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type HPCCacheAccessPolicyAccessRuleInitParameters struct {
@@ -109,7 +109,7 @@ type HPCCacheAccessPolicyInitParameters struct {
 
 	// The ID of the HPC Cache that this HPC Cache Access Policy resides in. Changing this forces a new HPC Cache Access Policy to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storagecache/v1beta2.HPCCache
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	HPCCacheID *string `json:"hpcCacheId,omitempty" tf:"hpc_cache_id,omitempty"`
 
 	// Reference to a HPCCache in storagecache to populate hpcCacheId.
@@ -141,7 +141,7 @@ type HPCCacheAccessPolicyParameters struct {
 
 	// The ID of the HPC Cache that this HPC Cache Access Policy resides in. Changing this forces a new HPC Cache Access Policy to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storagecache/v1beta2.HPCCache
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	HPCCacheID *string `json:"hpcCacheId,omitempty" tf:"hpc_cache_id,omitempty"`
 

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type NetworkACLInitParameters struct {
@@ -26,7 +26,7 @@ type NetworkACLInitParameters struct {
 
 	// The ID of the SignalR service. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/signalrservice/v1beta1.Service
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SignalrServiceID *string `json:"signalrServiceId,omitempty" tf:"signalr_service_id,omitempty"`
 
 	// Reference to a Service in signalrservice to populate signalrServiceId.
@@ -72,7 +72,7 @@ type NetworkACLParameters struct {
 
 	// The ID of the SignalR service. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/signalrservice/v1beta1.Service
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SignalrServiceID *string `json:"signalrServiceId,omitempty" tf:"signalr_service_id,omitempty"`
 
@@ -97,7 +97,7 @@ type PrivateEndpointInitParameters struct {
 
 	// The ID of the Private Endpoint which is based on the SignalR service.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta1.PrivateEndpoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Reference to a PrivateEndpoint in network to populate id.
@@ -137,7 +137,7 @@ type PrivateEndpointParameters struct {
 
 	// The ID of the Private Endpoint which is based on the SignalR service.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta1.PrivateEndpoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ActiveDirectoryInitParameters struct {
@@ -300,7 +300,7 @@ type FunctionAppInitParameters struct {
 
 	// The ID of the App Service Plan within which to create this Function App.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/web/v1beta1.AppServicePlan
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	AppServicePlanID *string `json:"appServicePlanId,omitempty" tf:"app_service_plan_id,omitempty"`
 
 	// Reference to a AppServicePlan in web to populate appServicePlanId.
@@ -479,7 +479,7 @@ type FunctionAppParameters struct {
 
 	// The ID of the App Service Plan within which to create this Function App.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/web/v1beta1.AppServicePlan
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AppServicePlanID *string `json:"appServicePlanId,omitempty" tf:"app_service_plan_id,omitempty"`
 

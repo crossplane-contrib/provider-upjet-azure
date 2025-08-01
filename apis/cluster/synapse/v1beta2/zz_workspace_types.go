@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AzureDevopsRepoInitParameters struct {
@@ -99,7 +99,7 @@ type CustomerManagedKeyInitParameters struct {
 
 	// The Azure Key Vault Key Versionless ID to be used as the Customer Managed Key (CMK) for double encryption (e.g. https://example-keyvault.vault.azure.net/type/cmk/).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/keyvault/v1beta2.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("versionless_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("versionless_id",true)
 	KeyVersionlessID *string `json:"keyVersionlessId,omitempty" tf:"key_versionless_id,omitempty"`
 
 	// Reference to a Key in keyvault to populate keyVersionlessId.
@@ -134,7 +134,7 @@ type CustomerManagedKeyParameters struct {
 
 	// The Azure Key Vault Key Versionless ID to be used as the Customer Managed Key (CMK) for double encryption (e.g. https://example-keyvault.vault.azure.net/type/cmk/).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/keyvault/v1beta2.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("versionless_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("versionless_id",true)
 	// +kubebuilder:validation:Optional
 	KeyVersionlessID *string `json:"keyVersionlessId,omitempty" tf:"key_versionless_id,omitempty"`
 
@@ -329,7 +329,7 @@ type WorkspaceInitParameters struct {
 
 	// Specifies the ID of storage data lake gen2 filesystem resource. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta1.DataLakeGen2FileSystem
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	StorageDataLakeGen2FileSystemID *string `json:"storageDataLakeGen2FilesystemId,omitempty" tf:"storage_data_lake_gen2_filesystem_id,omitempty"`
 
 	// Reference to a DataLakeGen2FileSystem in storage to populate storageDataLakeGen2FilesystemId.
@@ -510,7 +510,7 @@ type WorkspaceParameters struct {
 
 	// Specifies the ID of storage data lake gen2 filesystem resource. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta1.DataLakeGen2FileSystem
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StorageDataLakeGen2FileSystemID *string `json:"storageDataLakeGen2FilesystemId,omitempty" tf:"storage_data_lake_gen2_filesystem_id,omitempty"`
 

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AppIntegrationAccountBatchConfigurationInitParameters struct {
@@ -20,7 +20,7 @@ type AppIntegrationAccountBatchConfigurationInitParameters struct {
 
 	// The name of the Logic App Integration Account. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/logic/v1beta1.AppIntegrationAccount
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	IntegrationAccountName *string `json:"integrationAccountName,omitempty" tf:"integration_account_name,omitempty"`
 
 	// Reference to a AppIntegrationAccount in logic to populate integrationAccountName.
@@ -87,7 +87,7 @@ type AppIntegrationAccountBatchConfigurationParameters struct {
 
 	// The name of the Logic App Integration Account. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/logic/v1beta1.AppIntegrationAccount
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	IntegrationAccountName *string `json:"integrationAccountName,omitempty" tf:"integration_account_name,omitempty"`
 

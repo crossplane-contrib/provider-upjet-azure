@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type FrontdoorRuleSetInitParameters struct {
@@ -29,7 +29,7 @@ type FrontdoorRuleSetParameters struct {
 
 	// The ID of the Front Door Profile. Changing this forces a new Front Door Rule Set to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/cdn/v1beta1.FrontdoorProfile
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CdnFrontdoorProfileID *string `json:"cdnFrontdoorProfileId,omitempty" tf:"cdn_frontdoor_profile_id,omitempty"`
 

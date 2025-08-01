@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type HybridConnectionAuthorizationRuleInitParameters struct {
@@ -65,7 +65,7 @@ type HybridConnectionAuthorizationRuleParameters struct {
 
 	// Name of the Azure Relay Hybrid Connection for which this Azure Relay Hybrid Connection Authorization Rule will be created. Changing this forces a new Azure Relay Hybrid Connection Authorization Rule to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/relay/v1beta1.HybridConnection
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	HybridConnectionName *string `json:"hybridConnectionName,omitempty" tf:"hybrid_connection_name,omitempty"`
 

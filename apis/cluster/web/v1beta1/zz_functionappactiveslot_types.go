@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type FunctionAppActiveSlotInitParameters struct {
@@ -22,7 +22,7 @@ type FunctionAppActiveSlotInitParameters struct {
 	// The ID of the Slot to swap with Production.
 	// The ID of the Slot to swap with `Production`.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/web/v1beta2.WindowsFunctionAppSlot
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SlotID *string `json:"slotId,omitempty" tf:"slot_id,omitempty"`
 
 	// Reference to a WindowsFunctionAppSlot in web to populate slotId.
@@ -62,7 +62,7 @@ type FunctionAppActiveSlotParameters struct {
 	// The ID of the Slot to swap with Production.
 	// The ID of the Slot to swap with `Production`.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/web/v1beta2.WindowsFunctionAppSlot
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SlotID *string `json:"slotId,omitempty" tf:"slot_id,omitempty"`
 

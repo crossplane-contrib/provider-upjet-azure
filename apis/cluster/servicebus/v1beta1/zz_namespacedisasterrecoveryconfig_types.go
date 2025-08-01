@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type NamespaceDisasterRecoveryConfigInitParameters struct {
 
 	// The Shared access policies used to access the connection string for the alias.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/servicebus/v1beta1.NamespaceAuthorizationRule
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	AliasAuthorizationRuleID *string `json:"aliasAuthorizationRuleId,omitempty" tf:"alias_authorization_rule_id,omitempty"`
 
 	// Reference to a NamespaceAuthorizationRule in servicebus to populate aliasAuthorizationRuleId.
@@ -30,7 +30,7 @@ type NamespaceDisasterRecoveryConfigInitParameters struct {
 
 	// The ID of the Service Bus Namespace to replicate to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/servicebus/v1beta2.ServiceBusNamespace
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PartnerNamespaceID *string `json:"partnerNamespaceId,omitempty" tf:"partner_namespace_id,omitempty"`
 
 	// Reference to a ServiceBusNamespace in servicebus to populate partnerNamespaceId.
@@ -61,7 +61,7 @@ type NamespaceDisasterRecoveryConfigParameters struct {
 
 	// The Shared access policies used to access the connection string for the alias.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/servicebus/v1beta1.NamespaceAuthorizationRule
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AliasAuthorizationRuleID *string `json:"aliasAuthorizationRuleId,omitempty" tf:"alias_authorization_rule_id,omitempty"`
 
@@ -75,7 +75,7 @@ type NamespaceDisasterRecoveryConfigParameters struct {
 
 	// The ID of the Service Bus Namespace to replicate to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/servicebus/v1beta2.ServiceBusNamespace
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PartnerNamespaceID *string `json:"partnerNamespaceId,omitempty" tf:"partner_namespace_id,omitempty"`
 
@@ -89,7 +89,7 @@ type NamespaceDisasterRecoveryConfigParameters struct {
 
 	// The ID of the primary Service Bus Namespace to replicate. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/servicebus/v1beta2.ServiceBusNamespace
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PrimaryNamespaceID *string `json:"primaryNamespaceId,omitempty" tf:"primary_namespace_id,omitempty"`
 

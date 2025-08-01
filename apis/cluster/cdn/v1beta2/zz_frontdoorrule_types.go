@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ActionsInitParameters struct {
@@ -1015,7 +1015,7 @@ type FrontdoorRuleParameters struct {
 
 	// The resource ID of the Front Door Rule Set for this Front Door Rule. Changing this forces a new Front Door Rule to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/cdn/v1beta1.FrontdoorRuleSet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CdnFrontdoorRuleSetID *string `json:"cdnFrontdoorRuleSetId,omitempty" tf:"cdn_frontdoor_rule_set_id,omitempty"`
 
@@ -1277,7 +1277,7 @@ type RouteConfigurationOverrideActionInitParameters struct {
 
 	// The Front Door Origin Group resource ID that the request should be routed to. This overrides the configuration specified in the Front Door Endpoint route.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/cdn/v1beta2.FrontdoorOriginGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	CdnFrontdoorOriginGroupID *string `json:"cdnFrontdoorOriginGroupId,omitempty" tf:"cdn_frontdoor_origin_group_id,omitempty"`
 
 	// Reference to a FrontdoorOriginGroup in cdn to populate cdnFrontdoorOriginGroupId.
@@ -1337,7 +1337,7 @@ type RouteConfigurationOverrideActionParameters struct {
 
 	// The Front Door Origin Group resource ID that the request should be routed to. This overrides the configuration specified in the Front Door Endpoint route.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/cdn/v1beta2.FrontdoorOriginGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CdnFrontdoorOriginGroupID *string `json:"cdnFrontdoorOriginGroupId,omitempty" tf:"cdn_frontdoor_origin_group_id,omitempty"`
 

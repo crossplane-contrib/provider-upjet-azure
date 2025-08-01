@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type EncryptionSettingsDiskEncryptionKeyInitParameters struct {
@@ -131,7 +131,7 @@ type SnapshotInitParameters struct {
 
 	// Specifies the URI to a Managed or Unmanaged Disk. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/compute/v1beta1.ManagedDisk
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SourceURI *string `json:"sourceUri,omitempty" tf:"source_uri,omitempty"`
 
 	// Reference to a ManagedDisk in compute to populate sourceUri.
@@ -252,7 +252,7 @@ type SnapshotParameters struct {
 
 	// Specifies the URI to a Managed or Unmanaged Disk. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/compute/v1beta1.ManagedDisk
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourceURI *string `json:"sourceUri,omitempty" tf:"source_uri,omitempty"`
 

@@ -7,7 +7,7 @@ package controller
 import (
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	monitoralertprocessingruleactiongroup "github.com/upbound/provider-azure/internal/controller/cluster/alertsmanagement/monitoralertprocessingruleactiongroup"
 	monitoralertprocessingrulesuppression "github.com/upbound/provider-azure/internal/controller/cluster/alertsmanagement/monitoralertprocessingrulesuppression"

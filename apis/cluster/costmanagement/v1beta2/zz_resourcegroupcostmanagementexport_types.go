@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ExportDataOptionsInitParameters struct {
@@ -46,7 +46,7 @@ type ExportDataStorageLocationInitParameters struct {
 
 	// The Resource Manager ID of the container where exports will be uploaded. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta1.Container
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("resource_manager_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("resource_manager_id",true)
 	ContainerID *string `json:"containerId,omitempty" tf:"container_id,omitempty"`
 
 	// Reference to a Container in storage to populate containerId.
@@ -74,7 +74,7 @@ type ExportDataStorageLocationParameters struct {
 
 	// The Resource Manager ID of the container where exports will be uploaded. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta1.Container
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("resource_manager_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("resource_manager_id",true)
 	// +kubebuilder:validation:Optional
 	ContainerID *string `json:"containerId,omitempty" tf:"container_id,omitempty"`
 
@@ -116,7 +116,7 @@ type ResourceGroupCostManagementExportInitParameters struct {
 
 	// The id of the resource group on which to create an export. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ResourceGroupID *string `json:"resourceGroupId,omitempty" tf:"resource_group_id,omitempty"`
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupId.
@@ -190,7 +190,7 @@ type ResourceGroupCostManagementExportParameters struct {
 
 	// The id of the resource group on which to create an export. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ResourceGroupID *string `json:"resourceGroupId,omitempty" tf:"resource_group_id,omitempty"`
 

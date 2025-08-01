@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ManagerSubscriptionConnectionInitParameters struct {
@@ -20,7 +20,7 @@ type ManagerSubscriptionConnectionInitParameters struct {
 
 	// Specifies the ID of the Network Manager which the Subscription is connected to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.Manager
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	NetworkManagerID *string `json:"networkManagerId,omitempty" tf:"network_manager_id,omitempty"`
 
 	// Reference to a Manager in network to populate networkManagerId.
@@ -61,7 +61,7 @@ type ManagerSubscriptionConnectionParameters struct {
 
 	// Specifies the ID of the Network Manager which the Subscription is connected to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.Manager
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	NetworkManagerID *string `json:"networkManagerId,omitempty" tf:"network_manager_id,omitempty"`
 

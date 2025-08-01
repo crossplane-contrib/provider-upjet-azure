@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AttachedDatabaseConfigurationInitParameters struct {
@@ -32,7 +32,7 @@ type AttachedDatabaseConfigurationInitParameters struct {
 
 	// The Kusto Attached Database Configuration ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/kusto/v1beta2.Cluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ClusterResourceID *string `json:"clusterResourceId,omitempty" tf:"cluster_resource_id,omitempty"`
 
 	// Reference to a Cluster in kusto to populate clusterResourceId.
@@ -137,7 +137,7 @@ type AttachedDatabaseConfigurationParameters struct {
 
 	// The Kusto Attached Database Configuration ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/kusto/v1beta2.Cluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ClusterResourceID *string `json:"clusterResourceId,omitempty" tf:"cluster_resource_id,omitempty"`
 

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type MSSQLJobCredentialInitParameters struct {
@@ -50,7 +50,7 @@ type MSSQLJobCredentialParameters struct {
 
 	// The ID of the Elastic Job Agent. Changing this forces a new Elastic Job Credential to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/sql/v1beta1.MSSQLJobAgent
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	JobAgentID *string `json:"jobAgentId,omitempty" tf:"job_agent_id,omitempty"`
 

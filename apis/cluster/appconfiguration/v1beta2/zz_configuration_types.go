@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ConfigurationInitParameters struct {
@@ -183,7 +183,7 @@ type EncryptionInitParameters struct {
 
 	// Specifies the client ID of the identity which will be used to access key vault.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("client_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("client_id",true)
 	IdentityClientID *string `json:"identityClientId,omitempty" tf:"identity_client_id,omitempty"`
 
 	// Reference to a UserAssignedIdentity in managedidentity to populate identityClientId.
@@ -196,7 +196,7 @@ type EncryptionInitParameters struct {
 
 	// Specifies the URI of the key vault key used to encrypt data.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/keyvault/v1beta2.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	KeyVaultKeyIdentifier *string `json:"keyVaultKeyIdentifier,omitempty" tf:"key_vault_key_identifier,omitempty"`
 
 	// Reference to a Key in keyvault to populate keyVaultKeyIdentifier.
@@ -221,7 +221,7 @@ type EncryptionParameters struct {
 
 	// Specifies the client ID of the identity which will be used to access key vault.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("client_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("client_id",true)
 	// +kubebuilder:validation:Optional
 	IdentityClientID *string `json:"identityClientId,omitempty" tf:"identity_client_id,omitempty"`
 
@@ -235,7 +235,7 @@ type EncryptionParameters struct {
 
 	// Specifies the URI of the key vault key used to encrypt data.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/keyvault/v1beta2.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KeyVaultKeyIdentifier *string `json:"keyVaultKeyIdentifier,omitempty" tf:"key_vault_key_identifier,omitempty"`
 
@@ -252,7 +252,7 @@ type IdentityInitParameters struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this App Configuration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
@@ -288,7 +288,7 @@ type IdentityParameters struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this App Configuration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`

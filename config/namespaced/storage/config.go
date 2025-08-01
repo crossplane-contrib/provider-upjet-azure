@@ -7,7 +7,7 @@ package storage
 import (
 	"errors"
 
-	"github.com/crossplane/upjet/pkg/config"
+	"github.com/crossplane/upjet/v2/pkg/config"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 
 	"github.com/upbound/provider-azure/apis/namespaced/rconfig"
@@ -83,22 +83,22 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("azurerm_storage_share_directory", func(r *config.Resource) {
 		r.References["share_name"] = config.Reference{
 			TerraformName: "azurerm_storage_share",
-			Extractor:     `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",true)`,
+			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",true)`,
 		}
 		r.References["storage_account_name"] = config.Reference{
 			TerraformName: "azurerm_storage_account",
-			Extractor:     `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",true)`,
+			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",true)`,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_storage_table_entity", func(r *config.Resource) {
 		r.References["table_name"] = config.Reference{
 			TerraformName: "azurerm_storage_table",
-			Extractor:     `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",true)`,
+			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",true)`,
 		}
 		r.References["storage_account_name"] = config.Reference{
 			TerraformName: "azurerm_storage_account",
-			Extractor:     `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",true)`,
+			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",true)`,
 		}
 	})
 }

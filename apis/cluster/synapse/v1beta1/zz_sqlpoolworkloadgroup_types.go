@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type SQLPoolWorkloadGroupInitParameters struct {
@@ -89,7 +89,7 @@ type SQLPoolWorkloadGroupParameters struct {
 
 	// The ID of the Synapse SQL Pool. Changing this forces a new Synapse SQL Pool Workload Group to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/synapse/v1beta2.SQLPool
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SQLPoolID *string `json:"sqlPoolId,omitempty" tf:"sql_pool_id,omitempty"`
 

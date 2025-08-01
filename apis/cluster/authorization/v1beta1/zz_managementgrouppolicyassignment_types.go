@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ManagementGroupPolicyAssignmentIdentityInitParameters struct {
@@ -85,7 +85,7 @@ type ManagementGroupPolicyAssignmentInitParameters struct {
 
 	// The ID of the Policy Definition or Policy Definition Set. Changing this forces a new Policy Assignment to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/authorization/v1beta1.PolicyDefinition
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PolicyDefinitionID *string `json:"policyDefinitionId,omitempty" tf:"policy_definition_id,omitempty"`
 
 	// Reference to a PolicyDefinition in authorization to populate policyDefinitionId.
@@ -259,7 +259,7 @@ type ManagementGroupPolicyAssignmentParameters struct {
 
 	// The ID of the Management Group. Changing this forces a new Policy Assignment to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/management/v1beta1.ManagementGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ManagementGroupID *string `json:"managementGroupId,omitempty" tf:"management_group_id,omitempty"`
 
@@ -293,7 +293,7 @@ type ManagementGroupPolicyAssignmentParameters struct {
 
 	// The ID of the Policy Definition or Policy Definition Set. Changing this forces a new Policy Assignment to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/authorization/v1beta1.PolicyDefinition
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PolicyDefinitionID *string `json:"policyDefinitionId,omitempty" tf:"policy_definition_id,omitempty"`
 

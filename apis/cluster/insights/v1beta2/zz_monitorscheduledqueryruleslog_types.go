@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type MonitorScheduledQueryRulesLogCriteriaDimensionInitParameters struct {
@@ -92,7 +92,7 @@ type MonitorScheduledQueryRulesLogInitParameters struct {
 
 	// The resource URI over which log search query is to be run. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/operationalinsights/v1beta2.Workspace
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DataSourceID *string `json:"dataSourceId,omitempty" tf:"data_source_id,omitempty"`
 
 	// Reference to a Workspace in operationalinsights to populate dataSourceId.
@@ -180,7 +180,7 @@ type MonitorScheduledQueryRulesLogParameters struct {
 
 	// The resource URI over which log search query is to be run. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/operationalinsights/v1beta2.Workspace
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DataSourceID *string `json:"dataSourceId,omitempty" tf:"data_source_id,omitempty"`
 

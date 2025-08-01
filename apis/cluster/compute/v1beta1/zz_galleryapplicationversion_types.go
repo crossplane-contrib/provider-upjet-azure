@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type GalleryApplicationVersionInitParameters struct {
@@ -29,7 +29,7 @@ type GalleryApplicationVersionInitParameters struct {
 
 	// The ID of the Gallery Application. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/compute/v1beta1.GalleryApplication
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	GalleryApplicationID *string `json:"galleryApplicationId,omitempty" tf:"gallery_application_id,omitempty"`
 
 	// Reference to a GalleryApplication in compute to populate galleryApplicationId.
@@ -126,7 +126,7 @@ type GalleryApplicationVersionParameters struct {
 
 	// The ID of the Gallery Application. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/compute/v1beta1.GalleryApplication
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	GalleryApplicationID *string `json:"galleryApplicationId,omitempty" tf:"gallery_application_id,omitempty"`
 
@@ -214,7 +214,7 @@ type SourceInitParameters struct {
 
 	// The Storage Blob URI of the source application package. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta1.Blob
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	MediaLink *string `json:"mediaLink,omitempty" tf:"media_link,omitempty"`
 
 	// Reference to a Blob in storage to populate mediaLink.
@@ -243,7 +243,7 @@ type SourceParameters struct {
 
 	// The Storage Blob URI of the source application package. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta1.Blob
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	MediaLink *string `json:"mediaLink,omitempty" tf:"media_link,omitempty"`
 
@@ -263,7 +263,7 @@ type TargetRegionInitParameters struct {
 
 	// The Azure Region in which the Gallery Application Version exists.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/compute/v1beta1.GalleryApplication
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("location",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("location",false)
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Reference to a GalleryApplication in compute to populate name.
@@ -304,7 +304,7 @@ type TargetRegionParameters struct {
 
 	// The Azure Region in which the Gallery Application Version exists.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/compute/v1beta1.GalleryApplication
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("location",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("location",false)
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
