@@ -1,0 +1,28 @@
+apiVersion: dataprotection.azure.upbound.io/v1beta1
+kind: ResourceGuard
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/resourceguard
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/resourceguard
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

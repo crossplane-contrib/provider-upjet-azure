@@ -27,11 +27,6 @@ func (mg *RedisCache) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this RedisCache.
-func (mg *RedisCache) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this RedisCache.
 func (mg *RedisCache) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -55,11 +50,6 @@ func (mg *RedisCache) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this RedisCache.
 func (mg *RedisCache) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this RedisCache.
-func (mg *RedisCache) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this RedisCache.
@@ -87,11 +77,6 @@ func (mg *RedisCacheAccessPolicy) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this RedisCacheAccessPolicy.
-func (mg *RedisCacheAccessPolicy) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this RedisCacheAccessPolicy.
 func (mg *RedisCacheAccessPolicy) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -115,11 +100,6 @@ func (mg *RedisCacheAccessPolicy) SetManagementPolicies(r xpv1.ManagementPolicie
 // SetProviderConfigReference of this RedisCacheAccessPolicy.
 func (mg *RedisCacheAccessPolicy) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this RedisCacheAccessPolicy.
-func (mg *RedisCacheAccessPolicy) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this RedisCacheAccessPolicy.
@@ -147,11 +127,6 @@ func (mg *RedisCacheAccessPolicyAssignment) GetProviderConfigReference() *xpv1.R
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this RedisCacheAccessPolicyAssignment.
-func (mg *RedisCacheAccessPolicyAssignment) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this RedisCacheAccessPolicyAssignment.
 func (mg *RedisCacheAccessPolicyAssignment) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -175,11 +150,6 @@ func (mg *RedisCacheAccessPolicyAssignment) SetManagementPolicies(r xpv1.Managem
 // SetProviderConfigReference of this RedisCacheAccessPolicyAssignment.
 func (mg *RedisCacheAccessPolicyAssignment) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this RedisCacheAccessPolicyAssignment.
-func (mg *RedisCacheAccessPolicyAssignment) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this RedisCacheAccessPolicyAssignment.
@@ -207,11 +177,6 @@ func (mg *RedisEnterpriseCluster) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this RedisEnterpriseCluster.
-func (mg *RedisEnterpriseCluster) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this RedisEnterpriseCluster.
 func (mg *RedisEnterpriseCluster) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -235,11 +200,6 @@ func (mg *RedisEnterpriseCluster) SetManagementPolicies(r xpv1.ManagementPolicie
 // SetProviderConfigReference of this RedisEnterpriseCluster.
 func (mg *RedisEnterpriseCluster) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this RedisEnterpriseCluster.
-func (mg *RedisEnterpriseCluster) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this RedisEnterpriseCluster.
@@ -267,11 +227,6 @@ func (mg *RedisEnterpriseDatabase) GetProviderConfigReference() *xpv1.Reference 
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this RedisEnterpriseDatabase.
-func (mg *RedisEnterpriseDatabase) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this RedisEnterpriseDatabase.
 func (mg *RedisEnterpriseDatabase) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -295,11 +250,6 @@ func (mg *RedisEnterpriseDatabase) SetManagementPolicies(r xpv1.ManagementPolici
 // SetProviderConfigReference of this RedisEnterpriseDatabase.
 func (mg *RedisEnterpriseDatabase) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this RedisEnterpriseDatabase.
-func (mg *RedisEnterpriseDatabase) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this RedisEnterpriseDatabase.
@@ -327,11 +277,6 @@ func (mg *RedisFirewallRule) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this RedisFirewallRule.
-func (mg *RedisFirewallRule) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this RedisFirewallRule.
 func (mg *RedisFirewallRule) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -355,11 +300,6 @@ func (mg *RedisFirewallRule) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this RedisFirewallRule.
 func (mg *RedisFirewallRule) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this RedisFirewallRule.
-func (mg *RedisFirewallRule) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this RedisFirewallRule.
@@ -387,11 +327,6 @@ func (mg *RedisLinkedServer) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this RedisLinkedServer.
-func (mg *RedisLinkedServer) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this RedisLinkedServer.
 func (mg *RedisLinkedServer) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -415,11 +350,6 @@ func (mg *RedisLinkedServer) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this RedisLinkedServer.
 func (mg *RedisLinkedServer) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this RedisLinkedServer.
-func (mg *RedisLinkedServer) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this RedisLinkedServer.

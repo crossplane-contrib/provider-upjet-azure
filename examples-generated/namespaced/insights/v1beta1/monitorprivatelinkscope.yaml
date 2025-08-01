@@ -1,0 +1,31 @@
+apiVersion: insights.azure.m.upbound.io/v1beta1
+kind: MonitorPrivateLinkScope
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta1/monitorprivatelinkscope
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    ingestionAccessMode: PrivateOnly
+    queryAccessMode: Open
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta1/monitorprivatelinkscope
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

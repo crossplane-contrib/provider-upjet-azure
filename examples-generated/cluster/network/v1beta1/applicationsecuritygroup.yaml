@@ -1,0 +1,30 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: ApplicationSecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/applicationsecuritygroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tags:
+      Hello: World
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/applicationsecuritygroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

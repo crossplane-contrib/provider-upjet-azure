@@ -46,3 +46,27 @@ func Setup_security(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_security creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_security(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		advancedthreatprotection.SetupGated,
+		iotsecuritydevicegroup.SetupGated,
+		iotsecuritysolution.SetupGated,
+		securitycenterassessment.SetupGated,
+		securitycenterassessmentpolicy.SetupGated,
+		securitycenterautoprovisioning.SetupGated,
+		securitycentercontact.SetupGated,
+		securitycenterservervulnerabilityassessmentvirtualmachine.SetupGated,
+		securitycentersetting.SetupGated,
+		securitycentersubscriptionpricing.SetupGated,
+		securitycenterworkspace.SetupGated,
+		storagedefender.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

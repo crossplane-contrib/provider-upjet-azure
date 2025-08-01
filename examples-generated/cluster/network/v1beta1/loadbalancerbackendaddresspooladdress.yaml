@@ -1,0 +1,17 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: LoadBalancerBackendAddressPoolAddress
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/loadbalancerbackendaddresspooladdress
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    backendAddressPoolIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_lb_backend_address_pool
+    ipAddress: 10.0.0.1
+    virtualNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_virtual_network

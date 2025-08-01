@@ -1,0 +1,66 @@
+apiVersion: datafactory.azure.upbound.io/v1beta1
+kind: DataSetSnowflake
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/datasetsnowflake
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    linkedServiceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    schemaName: foo_schema
+    tableName: foo_table
+
+---
+
+apiVersion: datafactory.azure.upbound.io/v1beta2
+kind: Factory
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/datasetsnowflake
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: datafactory.azure.upbound.io/v1beta2
+kind: LinkedServiceSnowflake
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/datasetsnowflake
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    connectionString: jdbc:snowflake://account.region.snowflakecomputing.com/?user=user&db=db&warehouse=wh
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/datasetsnowflake
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

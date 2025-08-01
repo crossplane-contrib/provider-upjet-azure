@@ -44,3 +44,26 @@ func Setup_logic(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_logic creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_logic(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		appactioncustom.SetupGated,
+		appactionhttp.SetupGated,
+		appintegrationaccount.SetupGated,
+		appintegrationaccountbatchconfiguration.SetupGated,
+		appintegrationaccountpartner.SetupGated,
+		appintegrationaccountschema.SetupGated,
+		appintegrationaccountsession.SetupGated,
+		apptriggercustom.SetupGated,
+		apptriggerhttprequest.SetupGated,
+		apptriggerrecurrence.SetupGated,
+		appworkflow.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

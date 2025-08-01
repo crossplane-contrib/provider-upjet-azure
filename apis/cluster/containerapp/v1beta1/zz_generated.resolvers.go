@@ -9,12 +9,10 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
 	rconfig "github.com/upbound/provider-azure/apis/cluster/rconfig"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -36,6 +34,7 @@ func (mg *ContainerApp) ResolveReferences( // ResolveReferences of this Containe
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerAppEnvironmentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ContainerAppEnvironmentIDRef,
 			Selector:     mg.Spec.ForProvider.ContainerAppEnvironmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -55,6 +54,7 @@ func (mg *ContainerApp) ResolveReferences( // ResolveReferences of this Containe
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -74,6 +74,7 @@ func (mg *ContainerApp) ResolveReferences( // ResolveReferences of this Containe
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ContainerAppEnvironmentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ContainerAppEnvironmentIDRef,
 			Selector:     mg.Spec.InitProvider.ContainerAppEnvironmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -105,6 +106,7 @@ func (mg *CustomDomain) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerAppEnvironmentCertificateID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ContainerAppEnvironmentCertificateIDRef,
 			Selector:     mg.Spec.ForProvider.ContainerAppEnvironmentCertificateIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -124,6 +126,7 @@ func (mg *CustomDomain) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerAppID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ContainerAppIDRef,
 			Selector:     mg.Spec.ForProvider.ContainerAppIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -143,6 +146,7 @@ func (mg *CustomDomain) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ContainerAppEnvironmentCertificateID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ContainerAppEnvironmentCertificateIDRef,
 			Selector:     mg.Spec.InitProvider.ContainerAppEnvironmentCertificateIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -174,6 +178,7 @@ func (mg *Environment) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.InfrastructureResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.InfrastructureResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.InfrastructureResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -193,6 +198,7 @@ func (mg *Environment) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.InfrastructureSubnetID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.InfrastructureSubnetIDRef,
 			Selector:     mg.Spec.ForProvider.InfrastructureSubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -212,6 +218,7 @@ func (mg *Environment) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogAnalyticsWorkspaceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.LogAnalyticsWorkspaceIDRef,
 			Selector:     mg.Spec.ForProvider.LogAnalyticsWorkspaceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -231,6 +238,7 @@ func (mg *Environment) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -250,6 +258,7 @@ func (mg *Environment) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InfrastructureResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.InfrastructureResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.InfrastructureResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -269,6 +278,7 @@ func (mg *Environment) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InfrastructureSubnetID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.InfrastructureSubnetIDRef,
 			Selector:     mg.Spec.InitProvider.InfrastructureSubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -288,6 +298,7 @@ func (mg *Environment) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LogAnalyticsWorkspaceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.LogAnalyticsWorkspaceIDRef,
 			Selector:     mg.Spec.InitProvider.LogAnalyticsWorkspaceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -319,6 +330,7 @@ func (mg *EnvironmentCertificate) ResolveReferences(ctx context.Context, c clien
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerAppEnvironmentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ContainerAppEnvironmentIDRef,
 			Selector:     mg.Spec.ForProvider.ContainerAppEnvironmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -350,6 +362,7 @@ func (mg *EnvironmentCustomDomain) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerAppEnvironmentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ContainerAppEnvironmentIDRef,
 			Selector:     mg.Spec.ForProvider.ContainerAppEnvironmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -369,6 +382,7 @@ func (mg *EnvironmentCustomDomain) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ContainerAppEnvironmentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ContainerAppEnvironmentIDRef,
 			Selector:     mg.Spec.InitProvider.ContainerAppEnvironmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -400,6 +414,7 @@ func (mg *EnvironmentDaprComponent) ResolveReferences(ctx context.Context, c cli
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerAppEnvironmentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ContainerAppEnvironmentIDRef,
 			Selector:     mg.Spec.ForProvider.ContainerAppEnvironmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -431,6 +446,7 @@ func (mg *EnvironmentStorage) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AccountNameRef,
 			Selector:     mg.Spec.ForProvider.AccountNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -450,6 +466,7 @@ func (mg *EnvironmentStorage) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerAppEnvironmentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ContainerAppEnvironmentIDRef,
 			Selector:     mg.Spec.ForProvider.ContainerAppEnvironmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -469,6 +486,7 @@ func (mg *EnvironmentStorage) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ShareName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ShareNameRef,
 			Selector:     mg.Spec.ForProvider.ShareNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -488,6 +506,7 @@ func (mg *EnvironmentStorage) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AccountName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.AccountNameRef,
 			Selector:     mg.Spec.InitProvider.AccountNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -507,6 +526,7 @@ func (mg *EnvironmentStorage) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ShareName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ShareNameRef,
 			Selector:     mg.Spec.InitProvider.ShareNameSelector,
 			To:           reference.To{List: l, Managed: m},

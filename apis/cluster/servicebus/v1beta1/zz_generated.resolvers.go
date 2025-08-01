@@ -9,12 +9,10 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
 	rconfig "github.com/upbound/provider-azure/apis/cluster/rconfig"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -36,6 +34,7 @@ func (mg *NamespaceAuthorizationRule) ResolveReferences( // ResolveReferences of
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NamespaceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.NamespaceIDRef,
 			Selector:     mg.Spec.ForProvider.NamespaceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -67,6 +66,7 @@ func (mg *NamespaceDisasterRecoveryConfig) ResolveReferences(ctx context.Context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AliasAuthorizationRuleID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AliasAuthorizationRuleIDRef,
 			Selector:     mg.Spec.ForProvider.AliasAuthorizationRuleIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -86,6 +86,7 @@ func (mg *NamespaceDisasterRecoveryConfig) ResolveReferences(ctx context.Context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PartnerNamespaceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PartnerNamespaceIDRef,
 			Selector:     mg.Spec.ForProvider.PartnerNamespaceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -105,6 +106,7 @@ func (mg *NamespaceDisasterRecoveryConfig) ResolveReferences(ctx context.Context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrimaryNamespaceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PrimaryNamespaceIDRef,
 			Selector:     mg.Spec.ForProvider.PrimaryNamespaceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -124,6 +126,7 @@ func (mg *NamespaceDisasterRecoveryConfig) ResolveReferences(ctx context.Context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AliasAuthorizationRuleID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.AliasAuthorizationRuleIDRef,
 			Selector:     mg.Spec.InitProvider.AliasAuthorizationRuleIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -143,6 +146,7 @@ func (mg *NamespaceDisasterRecoveryConfig) ResolveReferences(ctx context.Context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PartnerNamespaceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PartnerNamespaceIDRef,
 			Selector:     mg.Spec.InitProvider.PartnerNamespaceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -174,6 +178,7 @@ func (mg *Queue) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NamespaceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.NamespaceIDRef,
 			Selector:     mg.Spec.ForProvider.NamespaceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -205,6 +210,7 @@ func (mg *QueueAuthorizationRule) ResolveReferences(ctx context.Context, c clien
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.QueueID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.QueueIDRef,
 			Selector:     mg.Spec.ForProvider.QueueIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -238,6 +244,7 @@ func (mg *ServiceBusNamespace) ResolveReferences(ctx context.Context, c client.R
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkRuleSet[i3].NetworkRules[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.NetworkRuleSet[i3].NetworkRules[i4].SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.NetworkRuleSet[i3].NetworkRules[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -259,6 +266,7 @@ func (mg *ServiceBusNamespace) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -280,6 +288,7 @@ func (mg *ServiceBusNamespace) ResolveReferences(ctx context.Context, c client.R
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkRuleSet[i3].NetworkRules[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.NetworkRuleSet[i3].NetworkRules[i4].SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.NetworkRuleSet[i3].NetworkRules[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -314,6 +323,7 @@ func (mg *Subscription) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TopicID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.TopicIDRef,
 			Selector:     mg.Spec.ForProvider.TopicIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -345,6 +355,7 @@ func (mg *SubscriptionRule) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubscriptionID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SubscriptionIDRef,
 			Selector:     mg.Spec.ForProvider.SubscriptionIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -376,6 +387,7 @@ func (mg *Topic) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NamespaceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.NamespaceIDRef,
 			Selector:     mg.Spec.ForProvider.NamespaceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -407,6 +419,7 @@ func (mg *TopicAuthorizationRule) ResolveReferences(ctx context.Context, c clien
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TopicID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.TopicIDRef,
 			Selector:     mg.Spec.ForProvider.TopicIDSelector,
 			To:           reference.To{List: l, Managed: m},

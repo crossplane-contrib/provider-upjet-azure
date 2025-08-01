@@ -1,0 +1,105 @@
+apiVersion: containerregistry.azure.m.upbound.io/v1beta1
+kind: ContainerConnectedRegistry
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerregistry/v1beta1/containerconnectedregistry
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    containerRegistryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    syncTokenIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: containerregistry.azure.m.upbound.io/v1beta1
+kind: Registry
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerregistry/v1beta1/containerconnectedregistry
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    dataEndpointEnabled: true
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: Premium
+
+---
+
+apiVersion: containerregistry.azure.m.upbound.io/v1beta1
+kind: ScopeMap
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerregistry/v1beta1/containerconnectedregistry
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    actions:
+    - repositories/hello-world/content/delete
+    - repositories/hello-world/content/read
+    - repositories/hello-world/content/write
+    - repositories/hello-world/metadata/read
+    - repositories/hello-world/metadata/write
+    - gateway/examplecr/config/read
+    - gateway/examplecr/config/write
+    - gateway/examplecr/message/read
+    - gateway/examplecr/message/write
+    containerRegistryNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: containerregistry.azure.m.upbound.io/v1beta1
+kind: Token
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerregistry/v1beta1/containerconnectedregistry
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    containerRegistryNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    scopeMapIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerregistry/v1beta1/containerconnectedregistry
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

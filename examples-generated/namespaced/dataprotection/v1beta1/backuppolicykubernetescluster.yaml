@@ -1,0 +1,68 @@
+apiVersion: dataprotection.azure.m.upbound.io/v1beta1
+kind: BackupPolicyKubernetesCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backuppolicykubernetescluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    backupRepeatingTimeIntervals:
+    - R/2021-05-23T02:30:00+00:00/P1W
+    default_retention_duration: P4M
+    defaultRetentionRule:
+    - lifeCycle:
+      - dataStoreType: OperationalStore
+        duration: P7D
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    retentionRule:
+    - criteria:
+      - absoluteCriteria: FirstOfDay
+      lifeCycle:
+      - dataStoreType: OperationalStore
+        duration: P84D
+      name: Daily
+      priority: 25
+    timeZone: India Standard Time
+    vaultNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: dataprotection.azure.m.upbound.io/v1beta1
+kind: BackupVault
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backuppolicykubernetescluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    datastoreType: VaultStore
+    location: West Europe
+    redundancy: LocallyRedundant
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backuppolicykubernetescluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

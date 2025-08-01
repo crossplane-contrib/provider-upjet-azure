@@ -1,0 +1,102 @@
+apiVersion: datashare.azure.upbound.io/v1beta1
+kind: DataSetKustoCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datashare/v1beta1/datasetkustocluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    kustoClusterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    shareIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: datashare.azure.upbound.io/v1beta2
+kind: DataShare
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datashare/v1beta1/datasetkustocluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    kind: InPlace
+
+---
+
+apiVersion: datashare.azure.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datashare/v1beta1/datasetkustocluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    identity:
+    - type: SystemAssigned
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: kusto.azure.upbound.io/v1beta2
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datashare/v1beta1/datasetkustocluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku:
+    - capacity: 1
+      name: Dev(No SLA)_Standard_D11_v2
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datashare/v1beta1/datasetkustocluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: authorization.azure.upbound.io/v1beta1
+kind: RoleAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datashare/v1beta1/datasetkustocluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    principalId: ${azurerm_data_share_account.example.identity[0].principal_id}
+    roleDefinitionName: Contributor
+    scope: ${azurerm_kusto_cluster.example.id}

@@ -27,11 +27,6 @@ func (mg *IOTHub) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this IOTHub.
-func (mg *IOTHub) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this IOTHub.
 func (mg *IOTHub) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -55,11 +50,6 @@ func (mg *IOTHub) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this IOTHub.
 func (mg *IOTHub) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this IOTHub.
-func (mg *IOTHub) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this IOTHub.
@@ -87,11 +77,6 @@ func (mg *IOTHubCertificate) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this IOTHubCertificate.
-func (mg *IOTHubCertificate) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this IOTHubCertificate.
 func (mg *IOTHubCertificate) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -115,11 +100,6 @@ func (mg *IOTHubCertificate) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this IOTHubCertificate.
 func (mg *IOTHubCertificate) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this IOTHubCertificate.
-func (mg *IOTHubCertificate) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this IOTHubCertificate.
@@ -147,11 +127,6 @@ func (mg *IOTHubConsumerGroup) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this IOTHubConsumerGroup.
-func (mg *IOTHubConsumerGroup) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this IOTHubConsumerGroup.
 func (mg *IOTHubConsumerGroup) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -175,11 +150,6 @@ func (mg *IOTHubConsumerGroup) SetManagementPolicies(r xpv1.ManagementPolicies) 
 // SetProviderConfigReference of this IOTHubConsumerGroup.
 func (mg *IOTHubConsumerGroup) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this IOTHubConsumerGroup.
-func (mg *IOTHubConsumerGroup) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this IOTHubConsumerGroup.
@@ -207,11 +177,6 @@ func (mg *IOTHubDPS) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this IOTHubDPS.
-func (mg *IOTHubDPS) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this IOTHubDPS.
 func (mg *IOTHubDPS) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -235,11 +200,6 @@ func (mg *IOTHubDPS) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this IOTHubDPS.
 func (mg *IOTHubDPS) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this IOTHubDPS.
-func (mg *IOTHubDPS) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this IOTHubDPS.
@@ -267,11 +227,6 @@ func (mg *IOTHubDPSCertificate) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this IOTHubDPSCertificate.
-func (mg *IOTHubDPSCertificate) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this IOTHubDPSCertificate.
 func (mg *IOTHubDPSCertificate) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -295,11 +250,6 @@ func (mg *IOTHubDPSCertificate) SetManagementPolicies(r xpv1.ManagementPolicies)
 // SetProviderConfigReference of this IOTHubDPSCertificate.
 func (mg *IOTHubDPSCertificate) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this IOTHubDPSCertificate.
-func (mg *IOTHubDPSCertificate) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this IOTHubDPSCertificate.
@@ -327,11 +277,6 @@ func (mg *IOTHubDPSSharedAccessPolicy) GetProviderConfigReference() *xpv1.Refere
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this IOTHubDPSSharedAccessPolicy.
-func (mg *IOTHubDPSSharedAccessPolicy) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this IOTHubDPSSharedAccessPolicy.
 func (mg *IOTHubDPSSharedAccessPolicy) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -355,11 +300,6 @@ func (mg *IOTHubDPSSharedAccessPolicy) SetManagementPolicies(r xpv1.ManagementPo
 // SetProviderConfigReference of this IOTHubDPSSharedAccessPolicy.
 func (mg *IOTHubDPSSharedAccessPolicy) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this IOTHubDPSSharedAccessPolicy.
-func (mg *IOTHubDPSSharedAccessPolicy) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this IOTHubDPSSharedAccessPolicy.
@@ -387,11 +327,6 @@ func (mg *IOTHubEndpointEventHub) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this IOTHubEndpointEventHub.
-func (mg *IOTHubEndpointEventHub) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this IOTHubEndpointEventHub.
 func (mg *IOTHubEndpointEventHub) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -415,11 +350,6 @@ func (mg *IOTHubEndpointEventHub) SetManagementPolicies(r xpv1.ManagementPolicie
 // SetProviderConfigReference of this IOTHubEndpointEventHub.
 func (mg *IOTHubEndpointEventHub) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this IOTHubEndpointEventHub.
-func (mg *IOTHubEndpointEventHub) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this IOTHubEndpointEventHub.
@@ -447,11 +377,6 @@ func (mg *IOTHubEndpointServiceBusQueue) GetProviderConfigReference() *xpv1.Refe
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this IOTHubEndpointServiceBusQueue.
-func (mg *IOTHubEndpointServiceBusQueue) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this IOTHubEndpointServiceBusQueue.
 func (mg *IOTHubEndpointServiceBusQueue) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -475,11 +400,6 @@ func (mg *IOTHubEndpointServiceBusQueue) SetManagementPolicies(r xpv1.Management
 // SetProviderConfigReference of this IOTHubEndpointServiceBusQueue.
 func (mg *IOTHubEndpointServiceBusQueue) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this IOTHubEndpointServiceBusQueue.
-func (mg *IOTHubEndpointServiceBusQueue) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this IOTHubEndpointServiceBusQueue.
@@ -507,11 +427,6 @@ func (mg *IOTHubEndpointServiceBusTopic) GetProviderConfigReference() *xpv1.Refe
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this IOTHubEndpointServiceBusTopic.
-func (mg *IOTHubEndpointServiceBusTopic) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this IOTHubEndpointServiceBusTopic.
 func (mg *IOTHubEndpointServiceBusTopic) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -535,11 +450,6 @@ func (mg *IOTHubEndpointServiceBusTopic) SetManagementPolicies(r xpv1.Management
 // SetProviderConfigReference of this IOTHubEndpointServiceBusTopic.
 func (mg *IOTHubEndpointServiceBusTopic) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this IOTHubEndpointServiceBusTopic.
-func (mg *IOTHubEndpointServiceBusTopic) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this IOTHubEndpointServiceBusTopic.
@@ -567,11 +477,6 @@ func (mg *IOTHubEndpointStorageContainer) GetProviderConfigReference() *xpv1.Ref
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this IOTHubEndpointStorageContainer.
-func (mg *IOTHubEndpointStorageContainer) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this IOTHubEndpointStorageContainer.
 func (mg *IOTHubEndpointStorageContainer) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -595,11 +500,6 @@ func (mg *IOTHubEndpointStorageContainer) SetManagementPolicies(r xpv1.Managemen
 // SetProviderConfigReference of this IOTHubEndpointStorageContainer.
 func (mg *IOTHubEndpointStorageContainer) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this IOTHubEndpointStorageContainer.
-func (mg *IOTHubEndpointStorageContainer) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this IOTHubEndpointStorageContainer.
@@ -627,11 +527,6 @@ func (mg *IOTHubEnrichment) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this IOTHubEnrichment.
-func (mg *IOTHubEnrichment) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this IOTHubEnrichment.
 func (mg *IOTHubEnrichment) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -655,11 +550,6 @@ func (mg *IOTHubEnrichment) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this IOTHubEnrichment.
 func (mg *IOTHubEnrichment) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this IOTHubEnrichment.
-func (mg *IOTHubEnrichment) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this IOTHubEnrichment.
@@ -687,11 +577,6 @@ func (mg *IOTHubFallbackRoute) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this IOTHubFallbackRoute.
-func (mg *IOTHubFallbackRoute) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this IOTHubFallbackRoute.
 func (mg *IOTHubFallbackRoute) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -715,11 +600,6 @@ func (mg *IOTHubFallbackRoute) SetManagementPolicies(r xpv1.ManagementPolicies) 
 // SetProviderConfigReference of this IOTHubFallbackRoute.
 func (mg *IOTHubFallbackRoute) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this IOTHubFallbackRoute.
-func (mg *IOTHubFallbackRoute) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this IOTHubFallbackRoute.
@@ -747,11 +627,6 @@ func (mg *IOTHubRoute) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this IOTHubRoute.
-func (mg *IOTHubRoute) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this IOTHubRoute.
 func (mg *IOTHubRoute) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -775,11 +650,6 @@ func (mg *IOTHubRoute) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this IOTHubRoute.
 func (mg *IOTHubRoute) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this IOTHubRoute.
-func (mg *IOTHubRoute) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this IOTHubRoute.
@@ -807,11 +677,6 @@ func (mg *IOTHubSharedAccessPolicy) GetProviderConfigReference() *xpv1.Reference
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this IOTHubSharedAccessPolicy.
-func (mg *IOTHubSharedAccessPolicy) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this IOTHubSharedAccessPolicy.
 func (mg *IOTHubSharedAccessPolicy) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -835,11 +700,6 @@ func (mg *IOTHubSharedAccessPolicy) SetManagementPolicies(r xpv1.ManagementPolic
 // SetProviderConfigReference of this IOTHubSharedAccessPolicy.
 func (mg *IOTHubSharedAccessPolicy) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this IOTHubSharedAccessPolicy.
-func (mg *IOTHubSharedAccessPolicy) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this IOTHubSharedAccessPolicy.

@@ -1,0 +1,14 @@
+apiVersion: management.azure.m.upbound.io/v1beta1
+kind: ManagementGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: management/v1beta1/managementgroup
+  labels:
+    testing.upbound.io/example-name: example_parent
+  name: example-parent
+  namespace: upbound-system
+spec:
+  forProvider:
+    displayName: ParentGroup
+    subscriptionIds:
+    - ${data.azurerm_subscription.current.subscription_id}

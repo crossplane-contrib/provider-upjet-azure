@@ -1,0 +1,21 @@
+apiVersion: apimanagement.azure.upbound.io/v1beta1
+kind: APISchema
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/apischema
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    apiManagementNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_api_management_api
+    apiNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_api_management_api
+    contentType: application/vnd.ms-azure-apim.xsd+xml
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_api_management_api
+    value: ${file("api_management_api_schema.xml")}

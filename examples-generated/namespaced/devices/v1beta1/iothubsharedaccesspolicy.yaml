@@ -1,0 +1,55 @@
+apiVersion: devices.azure.m.upbound.io/v1beta1
+kind: IOTHubSharedAccessPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devices/v1beta1/iothubsharedaccesspolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    iothubNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    registryRead: true
+    registryWrite: true
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: devices.azure.m.upbound.io/v1beta1
+kind: IOTHub
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devices/v1beta1/iothubsharedaccesspolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku:
+    - capacity: "1"
+      name: S1
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devices/v1beta1/iothubsharedaccesspolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

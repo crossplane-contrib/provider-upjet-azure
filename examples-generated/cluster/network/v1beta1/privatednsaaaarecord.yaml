@@ -1,0 +1,50 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: PrivateDNSAAAARecord
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/privatednsaaaarecord
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    records:
+    - fd5d:70bc:930e:d008:0000:0000:0000:7334
+    - fd5d:70bc:930e:d008::7335
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    ttl: 300
+    zoneNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: PrivateDNSZone
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/privatednsaaaarecord
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/privatednsaaaarecord
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

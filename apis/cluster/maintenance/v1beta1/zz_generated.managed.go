@@ -27,11 +27,6 @@ func (mg *MaintenanceAssignmentDedicatedHost) GetProviderConfigReference() *xpv1
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this MaintenanceAssignmentDedicatedHost.
-func (mg *MaintenanceAssignmentDedicatedHost) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this MaintenanceAssignmentDedicatedHost.
 func (mg *MaintenanceAssignmentDedicatedHost) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -55,11 +50,6 @@ func (mg *MaintenanceAssignmentDedicatedHost) SetManagementPolicies(r xpv1.Manag
 // SetProviderConfigReference of this MaintenanceAssignmentDedicatedHost.
 func (mg *MaintenanceAssignmentDedicatedHost) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this MaintenanceAssignmentDedicatedHost.
-func (mg *MaintenanceAssignmentDedicatedHost) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this MaintenanceAssignmentDedicatedHost.
@@ -87,11 +77,6 @@ func (mg *MaintenanceAssignmentVirtualMachine) GetProviderConfigReference() *xpv
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this MaintenanceAssignmentVirtualMachine.
-func (mg *MaintenanceAssignmentVirtualMachine) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this MaintenanceAssignmentVirtualMachine.
 func (mg *MaintenanceAssignmentVirtualMachine) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -115,11 +100,6 @@ func (mg *MaintenanceAssignmentVirtualMachine) SetManagementPolicies(r xpv1.Mana
 // SetProviderConfigReference of this MaintenanceAssignmentVirtualMachine.
 func (mg *MaintenanceAssignmentVirtualMachine) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this MaintenanceAssignmentVirtualMachine.
-func (mg *MaintenanceAssignmentVirtualMachine) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this MaintenanceAssignmentVirtualMachine.
@@ -147,11 +127,6 @@ func (mg *MaintenanceConfiguration) GetProviderConfigReference() *xpv1.Reference
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this MaintenanceConfiguration.
-func (mg *MaintenanceConfiguration) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this MaintenanceConfiguration.
 func (mg *MaintenanceConfiguration) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -175,11 +150,6 @@ func (mg *MaintenanceConfiguration) SetManagementPolicies(r xpv1.ManagementPolic
 // SetProviderConfigReference of this MaintenanceConfiguration.
 func (mg *MaintenanceConfiguration) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this MaintenanceConfiguration.
-func (mg *MaintenanceConfiguration) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this MaintenanceConfiguration.

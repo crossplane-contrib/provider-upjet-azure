@@ -30,3 +30,19 @@ func Setup_resources(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_resources creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_resources(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		resourcedeploymentscriptazurecli.SetupGated,
+		resourcedeploymentscriptazurepowershell.SetupGated,
+		resourcegrouptemplatedeployment.SetupGated,
+		subscriptiontemplatedeployment.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

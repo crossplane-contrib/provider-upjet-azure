@@ -32,3 +32,20 @@ func Setup_hdinsight(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_hdinsight creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_hdinsight(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		hadoopcluster.SetupGated,
+		hbasecluster.SetupGated,
+		interactivequerycluster.SetupGated,
+		kafkacluster.SetupGated,
+		sparkcluster.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

@@ -27,11 +27,6 @@ func (mg *CloudElasticsearch) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this CloudElasticsearch.
-func (mg *CloudElasticsearch) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this CloudElasticsearch.
 func (mg *CloudElasticsearch) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -55,11 +50,6 @@ func (mg *CloudElasticsearch) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this CloudElasticsearch.
 func (mg *CloudElasticsearch) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this CloudElasticsearch.
-func (mg *CloudElasticsearch) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this CloudElasticsearch.

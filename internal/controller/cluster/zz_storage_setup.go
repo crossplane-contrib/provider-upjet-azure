@@ -56,3 +56,32 @@ func Setup_storage(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_storage creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_storage(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		account.SetupGated,
+		accountlocaluser.SetupGated,
+		accountnetworkrules.SetupGated,
+		blob.SetupGated,
+		blobinventorypolicy.SetupGated,
+		container.SetupGated,
+		containerimmutabilitypolicy.SetupGated,
+		datalakegen2filesystem.SetupGated,
+		datalakegen2path.SetupGated,
+		encryptionscope.SetupGated,
+		managementpolicy.SetupGated,
+		objectreplication.SetupGated,
+		queue.SetupGated,
+		share.SetupGated,
+		sharedirectory.SetupGated,
+		table.SetupGated,
+		tableentity.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

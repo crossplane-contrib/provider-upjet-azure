@@ -1,0 +1,114 @@
+apiVersion: devices.azure.m.upbound.io/v1beta1
+kind: IOTHubEndpointServiceBusTopic
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devices/v1beta1/iothubendpointservicebustopic
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    connectionStringSecretRef:
+      key: attribute.primary_connection_string
+      name: example-servicebus-topic-authorization-rule
+    iothubIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: devices.azure.m.upbound.io/v1beta1
+kind: IOTHub
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devices/v1beta1/iothubendpointservicebustopic
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku:
+    - capacity: "1"
+      name: B1
+    tags:
+      purpose: example
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devices/v1beta1/iothubendpointservicebustopic
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: servicebus.azure.m.upbound.io/v1beta1
+kind: ServiceBusNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devices/v1beta1/iothubendpointservicebustopic
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: Standard
+
+---
+
+apiVersion: servicebus.azure.m.upbound.io/v1beta1
+kind: Topic
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devices/v1beta1/iothubendpointservicebustopic
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    namespaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: servicebus.azure.m.upbound.io/v1beta1
+kind: TopicAuthorizationRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devices/v1beta1/iothubendpointservicebustopic
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    listen: false
+    manage: false
+    send: true
+    topicIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

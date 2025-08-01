@@ -24,3 +24,16 @@ func Setup_servicelinker(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_servicelinker creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_servicelinker(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		springcloudconnection.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

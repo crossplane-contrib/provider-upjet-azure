@@ -1,0 +1,34 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: IPGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/ipgroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    cidrs:
+    - 192.168.0.1
+    - 172.16.240.0/20
+    - 10.48.0.0/12
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tags:
+      environment: Production
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/ipgroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

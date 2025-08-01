@@ -2652,7 +2652,7 @@ func (in *CertificateInitParameters) DeepCopyInto(out *CertificateInitParameters
 		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
-	out.EncodedCertificateSecretRef = in.EncodedCertificateSecretRef
+	in.EncodedCertificateSecretRef.DeepCopyInto(&out.EncodedCertificateSecretRef)
 	if in.StoreName != nil {
 		in, out := &in.StoreName, &out.StoreName
 		*out = new(string)
@@ -2713,7 +2713,7 @@ func (in *CertificateParameters) DeepCopyInto(out *CertificateParameters) {
 		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
-	out.EncodedCertificateSecretRef = in.EncodedCertificateSecretRef
+	in.EncodedCertificateSecretRef.DeepCopyInto(&out.EncodedCertificateSecretRef)
 	if in.StoreName != nil {
 		in, out := &in.StoreName, &out.StoreName
 		*out = new(string)

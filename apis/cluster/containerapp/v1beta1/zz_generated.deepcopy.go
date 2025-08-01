@@ -1871,7 +1871,7 @@ func (in *EnvironmentCertificateInitParameters) DeepCopyInto(out *EnvironmentCer
 		*out = new(string)
 		**out = **in
 	}
-	out.CertificatePasswordSecretRef = in.CertificatePasswordSecretRef
+	in.CertificatePasswordSecretRef.DeepCopyInto(&out.CertificatePasswordSecretRef)
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -2011,7 +2011,7 @@ func (in *EnvironmentCertificateParameters) DeepCopyInto(out *EnvironmentCertifi
 		*out = new(string)
 		**out = **in
 	}
-	out.CertificatePasswordSecretRef = in.CertificatePasswordSecretRef
+	in.CertificatePasswordSecretRef.DeepCopyInto(&out.CertificatePasswordSecretRef)
 	if in.ContainerAppEnvironmentID != nil {
 		in, out := &in.ContainerAppEnvironmentID, &out.ContainerAppEnvironmentID
 		*out = new(string)
@@ -2125,7 +2125,7 @@ func (in *EnvironmentCustomDomainInitParameters) DeepCopyInto(out *EnvironmentCu
 		*out = new(string)
 		**out = **in
 	}
-	out.CertificatePasswordSecretRef = in.CertificatePasswordSecretRef
+	in.CertificatePasswordSecretRef.DeepCopyInto(&out.CertificatePasswordSecretRef)
 	if in.ContainerAppEnvironmentID != nil {
 		in, out := &in.ContainerAppEnvironmentID, &out.ContainerAppEnvironmentID
 		*out = new(string)
@@ -2233,7 +2233,7 @@ func (in *EnvironmentCustomDomainParameters) DeepCopyInto(out *EnvironmentCustom
 		*out = new(string)
 		**out = **in
 	}
-	out.CertificatePasswordSecretRef = in.CertificatePasswordSecretRef
+	in.CertificatePasswordSecretRef.DeepCopyInto(&out.CertificatePasswordSecretRef)
 	if in.ContainerAppEnvironmentID != nil {
 		in, out := &in.ContainerAppEnvironmentID, &out.ContainerAppEnvironmentID
 		*out = new(string)
@@ -5137,7 +5137,7 @@ func (in *SecretInitParameters) DeepCopyInto(out *SecretInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	out.NameSecretRef = in.NameSecretRef
+	in.NameSecretRef.DeepCopyInto(&out.NameSecretRef)
 	if in.ValueSecretRef != nil {
 		in, out := &in.ValueSecretRef, &out.ValueSecretRef
 		*out = new(v1.SecretKeySelector)
@@ -5193,7 +5193,7 @@ func (in *SecretParameters) DeepCopyInto(out *SecretParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	out.NameSecretRef = in.NameSecretRef
+	in.NameSecretRef.DeepCopyInto(&out.NameSecretRef)
 	if in.ValueSecretRef != nil {
 		in, out := &in.ValueSecretRef, &out.ValueSecretRef
 		*out = new(v1.SecretKeySelector)

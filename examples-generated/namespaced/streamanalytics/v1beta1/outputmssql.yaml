@@ -1,0 +1,88 @@
+apiVersion: streamanalytics.azure.m.upbound.io/v1beta1
+kind: OutputMSSQL
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta1/outputmssql
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    databaseSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: example-output-sql
+    passwordSecretRef:
+      key: attribute.administrator_login_password
+      name: example-mssql-server
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_stream_analytics_job
+    serverSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    streamAnalyticsJobNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_stream_analytics_job
+    tableSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    userSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: sql.azure.m.upbound.io/v1beta1
+kind: MSSQLDatabase
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta1/outputmssql
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    serverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+
+---
+
+apiVersion: sql.azure.m.upbound.io/v1beta1
+kind: MSSQLServer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta1/outputmssql
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    administratorLogin: dbadmin
+    administratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    version: "12.0"
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta1/outputmssql
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

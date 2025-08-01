@@ -3207,7 +3207,7 @@ func (in *SecretInitParameters) DeepCopyInto(out *SecretInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	out.NameSecretRef = in.NameSecretRef
+	in.NameSecretRef.DeepCopyInto(&out.NameSecretRef)
 	if in.ValueSecretRef != nil {
 		in, out := &in.ValueSecretRef, &out.ValueSecretRef
 		*out = new(v1.SecretKeySelector)
@@ -3263,7 +3263,7 @@ func (in *SecretParameters) DeepCopyInto(out *SecretParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	out.NameSecretRef = in.NameSecretRef
+	in.NameSecretRef.DeepCopyInto(&out.NameSecretRef)
 	if in.ValueSecretRef != nil {
 		in, out := &in.ValueSecretRef, &out.ValueSecretRef
 		*out = new(v1.SecretKeySelector)

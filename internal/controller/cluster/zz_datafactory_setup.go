@@ -110,3 +110,59 @@ func Setup_datafactory(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_datafactory creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_datafactory(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		customdataset.SetupGated,
+		dataflow.SetupGated,
+		datasetazureblob.SetupGated,
+		datasetbinary.SetupGated,
+		datasetcosmosdbsqlapi.SetupGated,
+		datasetdelimitedtext.SetupGated,
+		datasethttp.SetupGated,
+		datasetjson.SetupGated,
+		datasetmysql.SetupGated,
+		datasetparquet.SetupGated,
+		datasetpostgresql.SetupGated,
+		datasetsnowflake.SetupGated,
+		datasetsqlservertable.SetupGated,
+		factory.SetupGated,
+		integrationruntimeazure.SetupGated,
+		integrationruntimeazuressis.SetupGated,
+		integrationruntimeselfhosted.SetupGated,
+		linkedcustomservice.SetupGated,
+		linkedserviceazureblobstorage.SetupGated,
+		linkedserviceazuredatabricks.SetupGated,
+		linkedserviceazurefilestorage.SetupGated,
+		linkedserviceazurefunction.SetupGated,
+		linkedserviceazuresearch.SetupGated,
+		linkedserviceazuresqldatabase.SetupGated,
+		linkedserviceazuretablestorage.SetupGated,
+		linkedservicecosmosdb.SetupGated,
+		linkedservicecosmosdbmongoapi.SetupGated,
+		linkedservicedatalakestoragegen2.SetupGated,
+		linkedservicekeyvault.SetupGated,
+		linkedservicekusto.SetupGated,
+		linkedservicemysql.SetupGated,
+		linkedserviceodata.SetupGated,
+		linkedserviceodbc.SetupGated,
+		linkedservicepostgresql.SetupGated,
+		linkedservicesftp.SetupGated,
+		linkedservicesnowflake.SetupGated,
+		linkedservicesqlserver.SetupGated,
+		linkedservicesynapse.SetupGated,
+		linkedserviceweb.SetupGated,
+		managedprivateendpoint.SetupGated,
+		pipeline.SetupGated,
+		triggerblobevent.SetupGated,
+		triggercustomevent.SetupGated,
+		triggerschedule.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

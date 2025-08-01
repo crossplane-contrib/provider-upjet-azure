@@ -34,3 +34,21 @@ func Setup_datashare(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_datashare creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_datashare(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		account.SetupGated,
+		datasetblobstorage.SetupGated,
+		datasetdatalakegen2.SetupGated,
+		datasetkustocluster.SetupGated,
+		datasetkustodatabase.SetupGated,
+		datashare.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

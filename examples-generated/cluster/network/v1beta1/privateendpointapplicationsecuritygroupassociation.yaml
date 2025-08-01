@@ -1,0 +1,205 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: PrivateEndpointApplicationSecurityGroupAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/privateendpointapplicationsecuritygroupassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    applicationSecurityGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    privateEndpointIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: ApplicationSecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/privateendpointapplicationsecuritygroupassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: LoadBalancer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/privateendpointapplicationsecuritygroupassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    frontendIpConfiguration:
+    - name: examplepip
+      publicIpAddressIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: Standard
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: PrivateEndpoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/privateendpointapplicationsecuritygroupassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    privateServiceConnection:
+    - isManualConnection: false
+      name: examplePLS
+      privateConnectionResourceId: ${azurerm_private_link_service.example.id}
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: endpoint
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: PrivateLinkService
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/privateendpointapplicationsecuritygroupassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    autoApprovalSubscriptionIds:
+    - ${data.azurerm_subscription.current.subscription_id}
+    loadBalancerFrontendIpConfigurationIds:
+    - ${azurerm_lb.example.frontend_ip_configuration[0].id}
+    location: West Europe
+    natIpConfiguration:
+    - name: primaryIpConfiguration
+      primary: true
+      subnetIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: service
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    visibilitySubscriptionIds:
+    - ${data.azurerm_subscription.current.subscription_id}
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: PublicIP
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/privateendpointapplicationsecuritygroupassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    allocationMethod: Static
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: Standard
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/privateendpointapplicationsecuritygroupassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/privateendpointapplicationsecuritygroupassociation
+  labels:
+    testing.upbound.io/example-name: endpoint
+  name: endpoint
+spec:
+  forProvider:
+    addressPrefixes:
+    - 10.5.2.0/24
+    enforce_private_link_endpoint_network_policies: true
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/privateendpointapplicationsecuritygroupassociation
+  labels:
+    testing.upbound.io/example-name: service
+  name: service
+spec:
+  forProvider:
+    addressPrefixes:
+    - 10.5.1.0/24
+    enforce_private_link_service_network_policies: true
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/privateendpointapplicationsecuritygroupassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    addressSpace:
+    - 10.5.0.0/16
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

@@ -1,0 +1,90 @@
+apiVersion: servicebus.azure.upbound.io/v1beta1
+kind: NamespaceDisasterRecoveryConfig
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicebus/v1beta1/namespacedisasterrecoveryconfig
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    aliasAuthorizationRuleIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    partnerNamespaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: secondary
+    primaryNamespaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: primary
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicebus/v1beta1/namespacedisasterrecoveryconfig
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: servicebus.azure.upbound.io/v1beta2
+kind: ServiceBusNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicebus/v1beta1/namespacedisasterrecoveryconfig
+  labels:
+    testing.upbound.io/example-name: primary
+  name: primary
+spec:
+  forProvider:
+    capacity: "1"
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: Premium
+
+---
+
+apiVersion: servicebus.azure.upbound.io/v1beta2
+kind: ServiceBusNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicebus/v1beta1/namespacedisasterrecoveryconfig
+  labels:
+    testing.upbound.io/example-name: secondary
+  name: secondary
+spec:
+  forProvider:
+    capacity: "1"
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: Premium
+
+---
+
+apiVersion: servicebus.azure.upbound.io/v1beta1
+kind: NamespaceAuthorizationRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicebus/v1beta1/namespacedisasterrecoveryconfig
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    listen: true
+    manage: false
+    namespaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    send: true

@@ -40,3 +40,24 @@ func Setup_operationalinsights(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_operationalinsights creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_operationalinsights(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		loganalyticsdataexportrule.SetupGated,
+		loganalyticsdatasourcewindowsevent.SetupGated,
+		loganalyticsdatasourcewindowsperformancecounter.SetupGated,
+		loganalyticslinkedservice.SetupGated,
+		loganalyticslinkedstorageaccount.SetupGated,
+		loganalyticsquerypack.SetupGated,
+		loganalyticsquerypackquery.SetupGated,
+		loganalyticssavedsearch.SetupGated,
+		workspace.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

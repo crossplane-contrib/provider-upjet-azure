@@ -1,0 +1,57 @@
+apiVersion: botservice.azure.upbound.io/v1beta1
+kind: BotChannelSMS
+metadata:
+  annotations:
+    meta.upbound.io/example-id: botservice/v1beta1/botchannelsms
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    botNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    location: global
+    phoneNumber: "+12313803556"
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    smsChannelAccountSecurityId: BG61f7cf5157f439b084e98256409c2815
+    smsChannelAuthTokenSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+
+---
+
+apiVersion: botservice.azure.upbound.io/v1beta1
+kind: BotChannelsRegistration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: botservice/v1beta1/botchannelsms
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: global
+    microsoftAppId: ${data.azurerm_client_config.current.client_id}
+    name: example-bcr
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: F0
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: botservice/v1beta1/botchannelsms
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

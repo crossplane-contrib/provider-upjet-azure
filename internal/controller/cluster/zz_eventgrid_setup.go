@@ -32,3 +32,20 @@ func Setup_eventgrid(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_eventgrid creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_eventgrid(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		domain.SetupGated,
+		domaintopic.SetupGated,
+		eventsubscription.SetupGated,
+		systemtopic.SetupGated,
+		topic.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

@@ -30,3 +30,19 @@ func Setup_dbformysql(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_dbformysql creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_dbformysql(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		flexibledatabase.SetupGated,
+		flexibleserver.SetupGated,
+		flexibleserverconfiguration.SetupGated,
+		flexibleserverfirewallrule.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

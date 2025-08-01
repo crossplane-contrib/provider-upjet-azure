@@ -30,3 +30,19 @@ func Setup_relay(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_relay creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_relay(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		eventrelaynamespace.SetupGated,
+		hybridconnection.SetupGated,
+		hybridconnectionauthorizationrule.SetupGated,
+		namespaceauthorizationrule.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

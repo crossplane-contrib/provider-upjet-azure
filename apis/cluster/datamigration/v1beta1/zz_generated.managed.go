@@ -27,11 +27,6 @@ func (mg *DatabaseMigrationProject) GetProviderConfigReference() *xpv1.Reference
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this DatabaseMigrationProject.
-func (mg *DatabaseMigrationProject) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this DatabaseMigrationProject.
 func (mg *DatabaseMigrationProject) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -55,11 +50,6 @@ func (mg *DatabaseMigrationProject) SetManagementPolicies(r xpv1.ManagementPolic
 // SetProviderConfigReference of this DatabaseMigrationProject.
 func (mg *DatabaseMigrationProject) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this DatabaseMigrationProject.
-func (mg *DatabaseMigrationProject) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this DatabaseMigrationProject.
@@ -87,11 +77,6 @@ func (mg *DatabaseMigrationService) GetProviderConfigReference() *xpv1.Reference
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this DatabaseMigrationService.
-func (mg *DatabaseMigrationService) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this DatabaseMigrationService.
 func (mg *DatabaseMigrationService) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -115,11 +100,6 @@ func (mg *DatabaseMigrationService) SetManagementPolicies(r xpv1.ManagementPolic
 // SetProviderConfigReference of this DatabaseMigrationService.
 func (mg *DatabaseMigrationService) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this DatabaseMigrationService.
-func (mg *DatabaseMigrationService) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this DatabaseMigrationService.

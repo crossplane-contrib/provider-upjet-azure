@@ -27,11 +27,6 @@ func (mg *MSSQLDatabase) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this MSSQLDatabase.
-func (mg *MSSQLDatabase) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this MSSQLDatabase.
 func (mg *MSSQLDatabase) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -55,11 +50,6 @@ func (mg *MSSQLDatabase) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this MSSQLDatabase.
 func (mg *MSSQLDatabase) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this MSSQLDatabase.
-func (mg *MSSQLDatabase) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this MSSQLDatabase.
@@ -87,11 +77,6 @@ func (mg *MSSQLElasticPool) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this MSSQLElasticPool.
-func (mg *MSSQLElasticPool) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this MSSQLElasticPool.
 func (mg *MSSQLElasticPool) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -115,11 +100,6 @@ func (mg *MSSQLElasticPool) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this MSSQLElasticPool.
 func (mg *MSSQLElasticPool) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this MSSQLElasticPool.
-func (mg *MSSQLElasticPool) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this MSSQLElasticPool.
@@ -147,11 +127,6 @@ func (mg *MSSQLFailoverGroup) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this MSSQLFailoverGroup.
-func (mg *MSSQLFailoverGroup) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this MSSQLFailoverGroup.
 func (mg *MSSQLFailoverGroup) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -175,11 +150,6 @@ func (mg *MSSQLFailoverGroup) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this MSSQLFailoverGroup.
 func (mg *MSSQLFailoverGroup) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this MSSQLFailoverGroup.
-func (mg *MSSQLFailoverGroup) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this MSSQLFailoverGroup.
@@ -207,11 +177,6 @@ func (mg *MSSQLManagedDatabase) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this MSSQLManagedDatabase.
-func (mg *MSSQLManagedDatabase) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this MSSQLManagedDatabase.
 func (mg *MSSQLManagedDatabase) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -235,11 +200,6 @@ func (mg *MSSQLManagedDatabase) SetManagementPolicies(r xpv1.ManagementPolicies)
 // SetProviderConfigReference of this MSSQLManagedDatabase.
 func (mg *MSSQLManagedDatabase) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this MSSQLManagedDatabase.
-func (mg *MSSQLManagedDatabase) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this MSSQLManagedDatabase.
@@ -267,11 +227,6 @@ func (mg *MSSQLManagedInstance) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this MSSQLManagedInstance.
-func (mg *MSSQLManagedInstance) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this MSSQLManagedInstance.
 func (mg *MSSQLManagedInstance) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -295,11 +250,6 @@ func (mg *MSSQLManagedInstance) SetManagementPolicies(r xpv1.ManagementPolicies)
 // SetProviderConfigReference of this MSSQLManagedInstance.
 func (mg *MSSQLManagedInstance) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this MSSQLManagedInstance.
-func (mg *MSSQLManagedInstance) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this MSSQLManagedInstance.
@@ -327,11 +277,6 @@ func (mg *MSSQLManagedInstanceFailoverGroup) GetProviderConfigReference() *xpv1.
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this MSSQLManagedInstanceFailoverGroup.
-func (mg *MSSQLManagedInstanceFailoverGroup) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this MSSQLManagedInstanceFailoverGroup.
 func (mg *MSSQLManagedInstanceFailoverGroup) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -355,11 +300,6 @@ func (mg *MSSQLManagedInstanceFailoverGroup) SetManagementPolicies(r xpv1.Manage
 // SetProviderConfigReference of this MSSQLManagedInstanceFailoverGroup.
 func (mg *MSSQLManagedInstanceFailoverGroup) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this MSSQLManagedInstanceFailoverGroup.
-func (mg *MSSQLManagedInstanceFailoverGroup) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this MSSQLManagedInstanceFailoverGroup.
@@ -387,11 +327,6 @@ func (mg *MSSQLManagedInstanceVulnerabilityAssessment) GetProviderConfigReferenc
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this MSSQLManagedInstanceVulnerabilityAssessment.
-func (mg *MSSQLManagedInstanceVulnerabilityAssessment) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this MSSQLManagedInstanceVulnerabilityAssessment.
 func (mg *MSSQLManagedInstanceVulnerabilityAssessment) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -415,11 +350,6 @@ func (mg *MSSQLManagedInstanceVulnerabilityAssessment) SetManagementPolicies(r x
 // SetProviderConfigReference of this MSSQLManagedInstanceVulnerabilityAssessment.
 func (mg *MSSQLManagedInstanceVulnerabilityAssessment) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this MSSQLManagedInstanceVulnerabilityAssessment.
-func (mg *MSSQLManagedInstanceVulnerabilityAssessment) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this MSSQLManagedInstanceVulnerabilityAssessment.
@@ -447,11 +377,6 @@ func (mg *MSSQLServer) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this MSSQLServer.
-func (mg *MSSQLServer) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this MSSQLServer.
 func (mg *MSSQLServer) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -475,11 +400,6 @@ func (mg *MSSQLServer) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this MSSQLServer.
 func (mg *MSSQLServer) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this MSSQLServer.
-func (mg *MSSQLServer) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this MSSQLServer.
@@ -507,11 +427,6 @@ func (mg *MSSQLServerVulnerabilityAssessment) GetProviderConfigReference() *xpv1
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this MSSQLServerVulnerabilityAssessment.
-func (mg *MSSQLServerVulnerabilityAssessment) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this MSSQLServerVulnerabilityAssessment.
 func (mg *MSSQLServerVulnerabilityAssessment) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -535,11 +450,6 @@ func (mg *MSSQLServerVulnerabilityAssessment) SetManagementPolicies(r xpv1.Manag
 // SetProviderConfigReference of this MSSQLServerVulnerabilityAssessment.
 func (mg *MSSQLServerVulnerabilityAssessment) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this MSSQLServerVulnerabilityAssessment.
-func (mg *MSSQLServerVulnerabilityAssessment) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this MSSQLServerVulnerabilityAssessment.

@@ -28,3 +28,18 @@ func Setup_maintenance(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_maintenance creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_maintenance(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		maintenanceassignmentdedicatedhost.SetupGated,
+		maintenanceassignmentvirtualmachine.SetupGated,
+		maintenanceconfiguration.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

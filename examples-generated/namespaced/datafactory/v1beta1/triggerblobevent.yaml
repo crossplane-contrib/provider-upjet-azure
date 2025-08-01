@@ -1,0 +1,107 @@
+apiVersion: datafactory.azure.m.upbound.io/v1beta1
+kind: TriggerBlobEvent
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/triggerblobevent
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    activated: true
+    additionalProperties:
+      bar: bar2
+      foo: foo1
+    annotations:
+    - test1
+    - test2
+    - test3
+    blobPathEndsWith: .txt
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    description: example description
+    events:
+    - Microsoft.Storage.BlobCreated
+    - Microsoft.Storage.BlobDeleted
+    ignoreEmptyBlobs: true
+    pipeline:
+    - nameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      parameters:
+        Env: Prod
+    storageAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: datafactory.azure.m.upbound.io/v1beta1
+kind: Factory
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/triggerblobevent
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: datafactory.azure.m.upbound.io/v1beta1
+kind: Pipeline
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/triggerblobevent
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/triggerblobevent
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: storage.azure.m.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/triggerblobevent
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

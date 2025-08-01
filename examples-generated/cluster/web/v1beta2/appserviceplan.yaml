@@ -1,0 +1,31 @@
+apiVersion: web.azure.upbound.io/v1beta2
+kind: AppServicePlan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta2/appserviceplan
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku:
+    - size: S1
+      tier: Standard
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta2/appserviceplan
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

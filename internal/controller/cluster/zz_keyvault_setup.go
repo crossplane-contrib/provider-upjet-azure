@@ -42,3 +42,25 @@ func Setup_keyvault(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_keyvault creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_keyvault(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		accesspolicy.SetupGated,
+		certificate.SetupGated,
+		certificatecontacts.SetupGated,
+		certificateissuer.SetupGated,
+		key.SetupGated,
+		managedhardwaresecuritymodule.SetupGated,
+		managedstorageaccount.SetupGated,
+		managedstorageaccountsastokendefinition.SetupGated,
+		secret.SetupGated,
+		vault.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

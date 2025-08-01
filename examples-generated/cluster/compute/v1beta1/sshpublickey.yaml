@@ -1,0 +1,15 @@
+apiVersion: compute.azure.upbound.io/v1beta1
+kind: SSHPublicKey
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/sshpublickey
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    publicKey: ${file("~/.ssh/id_rsa.pub")}
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

@@ -1,0 +1,234 @@
+apiVersion: storagecache.azure.upbound.io/v1beta1
+kind: HPCCacheBlobNFSTarget
+metadata:
+  annotations:
+    meta.upbound.io/example-id: storagecache/v1beta1/hpccacheblobnfstarget
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    cacheNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    namespacePath: /p1
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    storageContainerId: ${jsondecode(azurerm_resource_group_template_deployment.storage-containers.output_content).id.value}
+    usageModel: READ_HEAVY_INFREQ
+
+---
+
+apiVersion: storagecache.azure.upbound.io/v1beta2
+kind: HPCCache
+metadata:
+  annotations:
+    meta.upbound.io/example-id: storagecache/v1beta1/hpccacheblobnfstarget
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    cacheSizeInGb: 3072
+    location: west europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Standard_2G
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: storagecache/v1beta1/hpccacheblobnfstarget
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: west europe
+
+---
+
+apiVersion: resources.azure.upbound.io/v1beta1
+kind: ResourceGroupTemplateDeployment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: storagecache/v1beta1/hpccacheblobnfstarget
+  labels:
+    testing.upbound.io/example-name: storage-containers
+  name: storage-containers
+spec:
+  forProvider:
+    deploymentMode: Incremental
+    parametersContent: |-
+      ${jsonencode({
+          location = {
+            value = azurerm_storage_account.example.location
+          },
+          storageAccountName = {
+            value = azurerm_storage_account.example.name
+          },
+          containerName = {
+            value = "example-container"
+          }
+        })}
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    templateContent: |
+      {
+        "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+        "contentVersion": "1.0.0.0",
+        "parameters": {
+          "storageAccountName": {
+            "type": "String"
+          },
+          "containerName": {
+            "type": "String"
+          },
+          "location": {
+            "type": "String"
+          }
+        },
+        "resources": [
+          {
+            "type": "Microsoft.Storage/storageAccounts",
+            "apiVersion": "2019-06-01",
+            "name": "[parameters('storageAccountName')]",
+            "location": "[parameters('location')]",
+            "sku": {
+              "name": "Standard_LRS",
+              "tier": "Standard"
+            },
+            "kind": "StorageV2",
+            "properties": {
+              "accessTier": "Hot"
+            },
+            "resources": [
+              {
+                "type": "blobServices/containers",
+                "apiVersion": "2019-06-01",
+                "name": "[concat('default/', parameters('containerName'))]",
+                "dependsOn": [
+                  "[parameters('storageAccountName')]"
+                ]
+              }
+            ]
+          }
+        ],
+
+        "outputs": {
+          "id": {
+            "type": "String",
+            "value": "[resourceId('Microsoft.Storage/storageAccounts/blobServices/containers', parameters('storageAccountName'), 'default', parameters('containerName'))]"
+          }
+        }
+      }
+
+---
+
+apiVersion: authorization.azure.upbound.io/v1beta1
+kind: RoleAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: storagecache/v1beta1/hpccacheblobnfstarget
+  labels:
+    testing.upbound.io/example-name: example_storage_account_contrib
+  name: example-storage-account-contrib
+spec:
+  forProvider:
+    principalId: ${data.azuread_service_principal.example.object_id}
+    roleDefinitionName: Storage Account Contributor
+    scope: ${azurerm_storage_account.example.id}
+
+---
+
+apiVersion: authorization.azure.upbound.io/v1beta1
+kind: RoleAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: storagecache/v1beta1/hpccacheblobnfstarget
+  labels:
+    testing.upbound.io/example-name: example_storage_blob_data_contrib
+  name: example-storage-blob-data-contrib
+spec:
+  forProvider:
+    principalId: ${data.azuread_service_principal.example.object_id}
+    roleDefinitionName: Storage Blob Data Contributor
+    scope: ${azurerm_storage_account.example.id}
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: storagecache/v1beta1/hpccacheblobnfstarget
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountKind: StorageV2
+    accountReplicationType: LRS
+    accountTier: Standard
+    enable_https_traffic_only: false
+    isHnsEnabled: true
+    location: west europe
+    networkRules:
+    - defaultAction: Deny
+      virtualNetworkSubnetIdsRefs:
+      - name: example
+    nfsv3Enabled: true
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: storagecache/v1beta1/hpccacheblobnfstarget
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    addressPrefixes:
+    - 10.0.2.0/24
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    serviceEndpoints:
+    - Microsoft.Storage
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: storagecache/v1beta1/hpccacheblobnfstarget
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    addressSpace:
+    - 10.0.0.0/16
+    location: west europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

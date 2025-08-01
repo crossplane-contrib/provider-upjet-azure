@@ -1,0 +1,26 @@
+apiVersion: apimanagement.azure.m.upbound.io/v1beta1
+kind: ProductPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/productpolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    apiManagementNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_api_management_product
+    productIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_api_management_product
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_api_management_product
+    xmlContent: |
+      <policies>
+        <inbound>
+          <find-and-replace from="xyz" to="abc" />
+        </inbound>
+      </policies>

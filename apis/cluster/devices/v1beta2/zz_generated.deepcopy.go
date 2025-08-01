@@ -449,7 +449,7 @@ func (in *FileUploadInitParameters) DeepCopyInto(out *FileUploadInitParameters) 
 		*out = new(string)
 		**out = **in
 	}
-	out.ConnectionStringSecretRef = in.ConnectionStringSecretRef
+	in.ConnectionStringSecretRef.DeepCopyInto(&out.ConnectionStringSecretRef)
 	if in.ContainerName != nil {
 		in, out := &in.ContainerName, &out.ContainerName
 		*out = new(string)
@@ -560,7 +560,7 @@ func (in *FileUploadParameters) DeepCopyInto(out *FileUploadParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	out.ConnectionStringSecretRef = in.ConnectionStringSecretRef
+	in.ConnectionStringSecretRef.DeepCopyInto(&out.ConnectionStringSecretRef)
 	if in.ContainerName != nil {
 		in, out := &in.ContainerName, &out.ContainerName
 		*out = new(string)
@@ -1789,7 +1789,7 @@ func (in *LinkedHubInitParameters) DeepCopyInto(out *LinkedHubInitParameters) {
 		*out = new(bool)
 		**out = **in
 	}
-	out.ConnectionStringSecretRef = in.ConnectionStringSecretRef
+	in.ConnectionStringSecretRef.DeepCopyInto(&out.ConnectionStringSecretRef)
 	if in.Location != nil {
 		in, out := &in.Location, &out.Location
 		*out = new(string)
@@ -1855,7 +1855,7 @@ func (in *LinkedHubParameters) DeepCopyInto(out *LinkedHubParameters) {
 		*out = new(bool)
 		**out = **in
 	}
-	out.ConnectionStringSecretRef = in.ConnectionStringSecretRef
+	in.ConnectionStringSecretRef.DeepCopyInto(&out.ConnectionStringSecretRef)
 	if in.Location != nil {
 		in, out := &in.Location, &out.Location
 		*out = new(string)

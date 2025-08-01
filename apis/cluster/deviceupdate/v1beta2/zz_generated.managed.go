@@ -27,11 +27,6 @@ func (mg *IOTHubDeviceUpdateAccount) GetProviderConfigReference() *xpv1.Referenc
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this IOTHubDeviceUpdateAccount.
-func (mg *IOTHubDeviceUpdateAccount) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this IOTHubDeviceUpdateAccount.
 func (mg *IOTHubDeviceUpdateAccount) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -55,11 +50,6 @@ func (mg *IOTHubDeviceUpdateAccount) SetManagementPolicies(r xpv1.ManagementPoli
 // SetProviderConfigReference of this IOTHubDeviceUpdateAccount.
 func (mg *IOTHubDeviceUpdateAccount) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this IOTHubDeviceUpdateAccount.
-func (mg *IOTHubDeviceUpdateAccount) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this IOTHubDeviceUpdateAccount.
@@ -87,11 +77,6 @@ func (mg *IOTHubDeviceUpdateInstance) GetProviderConfigReference() *xpv1.Referen
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this IOTHubDeviceUpdateInstance.
-func (mg *IOTHubDeviceUpdateInstance) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this IOTHubDeviceUpdateInstance.
 func (mg *IOTHubDeviceUpdateInstance) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -115,11 +100,6 @@ func (mg *IOTHubDeviceUpdateInstance) SetManagementPolicies(r xpv1.ManagementPol
 // SetProviderConfigReference of this IOTHubDeviceUpdateInstance.
 func (mg *IOTHubDeviceUpdateInstance) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this IOTHubDeviceUpdateInstance.
-func (mg *IOTHubDeviceUpdateInstance) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this IOTHubDeviceUpdateInstance.

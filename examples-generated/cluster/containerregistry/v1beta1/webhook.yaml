@@ -1,0 +1,57 @@
+apiVersion: containerregistry.azure.upbound.io/v1beta1
+kind: Webhook
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerregistry/v1beta1/webhook
+  labels:
+    testing.upbound.io/example-name: webhook
+  name: webhook
+spec:
+  forProvider:
+    actions:
+    - push
+    customHeaders:
+      Content-Type: application/json
+    location: West Europe
+    registryNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: acr
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    scope: mytag:*
+    serviceUri: https://mywebhookreceiver.example/mytag
+    status: enabled
+
+---
+
+apiVersion: containerregistry.azure.upbound.io/v1beta2
+kind: Registry
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerregistry/v1beta1/webhook
+  labels:
+    testing.upbound.io/example-name: acr
+  name: acr
+spec:
+  forProvider:
+    adminEnabled: false
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: Standard
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerregistry/v1beta1/webhook
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

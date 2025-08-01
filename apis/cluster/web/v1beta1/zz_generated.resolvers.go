@@ -9,12 +9,10 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
 	rconfig "github.com/upbound/provider-azure/apis/cluster/rconfig"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -36,6 +34,7 @@ func (mg *AppActiveSlot) ResolveReferences( // ResolveReferences of this AppActi
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SlotID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SlotIDRef,
 			Selector:     mg.Spec.ForProvider.SlotIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -55,6 +54,7 @@ func (mg *AppActiveSlot) ResolveReferences( // ResolveReferences of this AppActi
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SlotID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SlotIDRef,
 			Selector:     mg.Spec.InitProvider.SlotIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -86,6 +86,7 @@ func (mg *AppHybridConnection) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RelayID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RelayIDRef,
 			Selector:     mg.Spec.ForProvider.RelayIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -105,6 +106,7 @@ func (mg *AppHybridConnection) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WebAppID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.WebAppIDRef,
 			Selector:     mg.Spec.ForProvider.WebAppIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -124,6 +126,7 @@ func (mg *AppHybridConnection) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RelayID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RelayIDRef,
 			Selector:     mg.Spec.InitProvider.RelayIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -143,6 +146,7 @@ func (mg *AppHybridConnection) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.WebAppID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.WebAppIDRef,
 			Selector:     mg.Spec.InitProvider.WebAppIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -174,6 +178,7 @@ func (mg *AppServicePlan) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -205,6 +210,7 @@ func (mg *FunctionApp) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AppServicePlanID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AppServicePlanIDRef,
 			Selector:     mg.Spec.ForProvider.AppServicePlanIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -224,6 +230,7 @@ func (mg *FunctionApp) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -245,6 +252,7 @@ func (mg *FunctionApp) ResolveReferences(ctx context.Context, c client.Reader) e
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef,
 					Selector:     mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -268,6 +276,7 @@ func (mg *FunctionApp) ResolveReferences(ctx context.Context, c client.Reader) e
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef,
 					Selector:     mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -289,6 +298,7 @@ func (mg *FunctionApp) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccountName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.StorageAccountNameRef,
 			Selector:     mg.Spec.ForProvider.StorageAccountNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -308,6 +318,7 @@ func (mg *FunctionApp) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AppServicePlanID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.AppServicePlanIDRef,
 			Selector:     mg.Spec.InitProvider.AppServicePlanIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -327,6 +338,7 @@ func (mg *FunctionApp) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -348,6 +360,7 @@ func (mg *FunctionApp) ResolveReferences(ctx context.Context, c client.Reader) e
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef,
 					Selector:     mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -371,6 +384,7 @@ func (mg *FunctionApp) ResolveReferences(ctx context.Context, c client.Reader) e
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef,
 					Selector:     mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -392,6 +406,7 @@ func (mg *FunctionApp) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccountName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.StorageAccountNameRef,
 			Selector:     mg.Spec.InitProvider.StorageAccountNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -423,6 +438,7 @@ func (mg *FunctionAppActiveSlot) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SlotID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SlotIDRef,
 			Selector:     mg.Spec.ForProvider.SlotIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -442,6 +458,7 @@ func (mg *FunctionAppActiveSlot) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SlotID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SlotIDRef,
 			Selector:     mg.Spec.InitProvider.SlotIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -473,6 +490,7 @@ func (mg *FunctionAppFunction) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FunctionAppID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.FunctionAppIDRef,
 			Selector:     mg.Spec.ForProvider.FunctionAppIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -492,6 +510,7 @@ func (mg *FunctionAppFunction) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FunctionAppID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.FunctionAppIDRef,
 			Selector:     mg.Spec.InitProvider.FunctionAppIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -523,6 +542,7 @@ func (mg *FunctionAppHybridConnection) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FunctionAppID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.FunctionAppIDRef,
 			Selector:     mg.Spec.ForProvider.FunctionAppIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -542,6 +562,7 @@ func (mg *FunctionAppHybridConnection) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RelayID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RelayIDRef,
 			Selector:     mg.Spec.ForProvider.RelayIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -561,6 +582,7 @@ func (mg *FunctionAppHybridConnection) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FunctionAppID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.FunctionAppIDRef,
 			Selector:     mg.Spec.InitProvider.FunctionAppIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -580,6 +602,7 @@ func (mg *FunctionAppHybridConnection) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RelayID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RelayIDRef,
 			Selector:     mg.Spec.InitProvider.RelayIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -611,6 +634,7 @@ func (mg *FunctionAppSlot) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AppServicePlanID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AppServicePlanIDRef,
 			Selector:     mg.Spec.ForProvider.AppServicePlanIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -630,6 +654,7 @@ func (mg *FunctionAppSlot) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FunctionAppName),
 			Extract:      resource.ExtractParamPath("name", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.FunctionAppNameRef,
 			Selector:     mg.Spec.ForProvider.FunctionAppNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -649,6 +674,7 @@ func (mg *FunctionAppSlot) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -670,6 +696,7 @@ func (mg *FunctionAppSlot) ResolveReferences(ctx context.Context, c client.Reade
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef,
 					Selector:     mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -693,6 +720,7 @@ func (mg *FunctionAppSlot) ResolveReferences(ctx context.Context, c client.Reade
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef,
 					Selector:     mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -714,6 +742,7 @@ func (mg *FunctionAppSlot) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccountName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.StorageAccountNameRef,
 			Selector:     mg.Spec.ForProvider.StorageAccountNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -733,6 +762,7 @@ func (mg *FunctionAppSlot) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AppServicePlanID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.AppServicePlanIDRef,
 			Selector:     mg.Spec.InitProvider.AppServicePlanIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -754,6 +784,7 @@ func (mg *FunctionAppSlot) ResolveReferences(ctx context.Context, c client.Reade
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef,
 					Selector:     mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -777,6 +808,7 @@ func (mg *FunctionAppSlot) ResolveReferences(ctx context.Context, c client.Reade
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef,
 					Selector:     mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -798,6 +830,7 @@ func (mg *FunctionAppSlot) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccountName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.StorageAccountNameRef,
 			Selector:     mg.Spec.InitProvider.StorageAccountNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -829,6 +862,7 @@ func (mg *LinuxFunctionApp) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -848,6 +882,7 @@ func (mg *LinuxFunctionApp) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServicePlanID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ServicePlanIDRef,
 			Selector:     mg.Spec.ForProvider.ServicePlanIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -869,6 +904,7 @@ func (mg *LinuxFunctionApp) ResolveReferences(ctx context.Context, c client.Read
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef,
 					Selector:     mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -892,6 +928,7 @@ func (mg *LinuxFunctionApp) ResolveReferences(ctx context.Context, c client.Read
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef,
 					Selector:     mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -913,6 +950,7 @@ func (mg *LinuxFunctionApp) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccountName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.StorageAccountNameRef,
 			Selector:     mg.Spec.ForProvider.StorageAccountNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -932,6 +970,7 @@ func (mg *LinuxFunctionApp) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VirtualNetworkSubnetID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.VirtualNetworkSubnetIDRef,
 			Selector:     mg.Spec.ForProvider.VirtualNetworkSubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -951,6 +990,7 @@ func (mg *LinuxFunctionApp) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -970,6 +1010,7 @@ func (mg *LinuxFunctionApp) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServicePlanID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ServicePlanIDRef,
 			Selector:     mg.Spec.InitProvider.ServicePlanIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -991,6 +1032,7 @@ func (mg *LinuxFunctionApp) ResolveReferences(ctx context.Context, c client.Read
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef,
 					Selector:     mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1014,6 +1056,7 @@ func (mg *LinuxFunctionApp) ResolveReferences(ctx context.Context, c client.Read
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef,
 					Selector:     mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1035,6 +1078,7 @@ func (mg *LinuxFunctionApp) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccountName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.StorageAccountNameRef,
 			Selector:     mg.Spec.InitProvider.StorageAccountNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1054,6 +1098,7 @@ func (mg *LinuxFunctionApp) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VirtualNetworkSubnetID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.VirtualNetworkSubnetIDRef,
 			Selector:     mg.Spec.InitProvider.VirtualNetworkSubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1085,6 +1130,7 @@ func (mg *LinuxFunctionAppSlot) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FunctionAppID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.FunctionAppIDRef,
 			Selector:     mg.Spec.ForProvider.FunctionAppIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1106,6 +1152,7 @@ func (mg *LinuxFunctionAppSlot) ResolveReferences(ctx context.Context, c client.
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef,
 					Selector:     mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1129,6 +1176,7 @@ func (mg *LinuxFunctionAppSlot) ResolveReferences(ctx context.Context, c client.
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef,
 					Selector:     mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1150,6 +1198,7 @@ func (mg *LinuxFunctionAppSlot) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccountName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.StorageAccountNameRef,
 			Selector:     mg.Spec.ForProvider.StorageAccountNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1169,6 +1218,7 @@ func (mg *LinuxFunctionAppSlot) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VirtualNetworkSubnetID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.VirtualNetworkSubnetIDRef,
 			Selector:     mg.Spec.ForProvider.VirtualNetworkSubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1190,6 +1240,7 @@ func (mg *LinuxFunctionAppSlot) ResolveReferences(ctx context.Context, c client.
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef,
 					Selector:     mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1213,6 +1264,7 @@ func (mg *LinuxFunctionAppSlot) ResolveReferences(ctx context.Context, c client.
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef,
 					Selector:     mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1234,6 +1286,7 @@ func (mg *LinuxFunctionAppSlot) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccountName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.StorageAccountNameRef,
 			Selector:     mg.Spec.InitProvider.StorageAccountNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1253,6 +1306,7 @@ func (mg *LinuxFunctionAppSlot) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VirtualNetworkSubnetID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.VirtualNetworkSubnetIDRef,
 			Selector:     mg.Spec.InitProvider.VirtualNetworkSubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1284,6 +1338,7 @@ func (mg *LinuxWebApp) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1303,6 +1358,7 @@ func (mg *LinuxWebApp) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServicePlanID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ServicePlanIDRef,
 			Selector:     mg.Spec.ForProvider.ServicePlanIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1324,6 +1380,7 @@ func (mg *LinuxWebApp) ResolveReferences(ctx context.Context, c client.Reader) e
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef,
 					Selector:     mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1347,6 +1404,7 @@ func (mg *LinuxWebApp) ResolveReferences(ctx context.Context, c client.Reader) e
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef,
 					Selector:     mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1368,6 +1426,7 @@ func (mg *LinuxWebApp) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VirtualNetworkSubnetID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.VirtualNetworkSubnetIDRef,
 			Selector:     mg.Spec.ForProvider.VirtualNetworkSubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1387,6 +1446,7 @@ func (mg *LinuxWebApp) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServicePlanID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ServicePlanIDRef,
 			Selector:     mg.Spec.InitProvider.ServicePlanIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1408,6 +1468,7 @@ func (mg *LinuxWebApp) ResolveReferences(ctx context.Context, c client.Reader) e
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef,
 					Selector:     mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1431,6 +1492,7 @@ func (mg *LinuxWebApp) ResolveReferences(ctx context.Context, c client.Reader) e
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef,
 					Selector:     mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1452,6 +1514,7 @@ func (mg *LinuxWebApp) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VirtualNetworkSubnetID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.VirtualNetworkSubnetIDRef,
 			Selector:     mg.Spec.InitProvider.VirtualNetworkSubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1483,6 +1546,7 @@ func (mg *LinuxWebAppSlot) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AppServiceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AppServiceIDRef,
 			Selector:     mg.Spec.ForProvider.AppServiceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1504,6 +1568,7 @@ func (mg *LinuxWebAppSlot) ResolveReferences(ctx context.Context, c client.Reade
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef,
 					Selector:     mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1527,6 +1592,7 @@ func (mg *LinuxWebAppSlot) ResolveReferences(ctx context.Context, c client.Reade
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef,
 					Selector:     mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1548,6 +1614,7 @@ func (mg *LinuxWebAppSlot) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VirtualNetworkSubnetID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.VirtualNetworkSubnetIDRef,
 			Selector:     mg.Spec.ForProvider.VirtualNetworkSubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1567,6 +1634,7 @@ func (mg *LinuxWebAppSlot) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AppServiceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.AppServiceIDRef,
 			Selector:     mg.Spec.InitProvider.AppServiceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1588,6 +1656,7 @@ func (mg *LinuxWebAppSlot) ResolveReferences(ctx context.Context, c client.Reade
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef,
 					Selector:     mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1611,6 +1680,7 @@ func (mg *LinuxWebAppSlot) ResolveReferences(ctx context.Context, c client.Reade
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef,
 					Selector:     mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1632,6 +1702,7 @@ func (mg *LinuxWebAppSlot) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VirtualNetworkSubnetID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.VirtualNetworkSubnetIDRef,
 			Selector:     mg.Spec.InitProvider.VirtualNetworkSubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1663,6 +1734,7 @@ func (mg *ServicePlan) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1694,6 +1766,7 @@ func (mg *StaticSite) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1725,6 +1798,7 @@ func (mg *WindowsFunctionApp) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1744,6 +1818,7 @@ func (mg *WindowsFunctionApp) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServicePlanID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ServicePlanIDRef,
 			Selector:     mg.Spec.ForProvider.ServicePlanIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1765,6 +1840,7 @@ func (mg *WindowsFunctionApp) ResolveReferences(ctx context.Context, c client.Re
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef,
 					Selector:     mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1788,6 +1864,7 @@ func (mg *WindowsFunctionApp) ResolveReferences(ctx context.Context, c client.Re
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef,
 					Selector:     mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1809,6 +1886,7 @@ func (mg *WindowsFunctionApp) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccountName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.StorageAccountNameRef,
 			Selector:     mg.Spec.ForProvider.StorageAccountNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1828,6 +1906,7 @@ func (mg *WindowsFunctionApp) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VirtualNetworkSubnetID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.VirtualNetworkSubnetIDRef,
 			Selector:     mg.Spec.ForProvider.VirtualNetworkSubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1847,6 +1926,7 @@ func (mg *WindowsFunctionApp) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServicePlanID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ServicePlanIDRef,
 			Selector:     mg.Spec.InitProvider.ServicePlanIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1868,6 +1948,7 @@ func (mg *WindowsFunctionApp) ResolveReferences(ctx context.Context, c client.Re
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef,
 					Selector:     mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1891,6 +1972,7 @@ func (mg *WindowsFunctionApp) ResolveReferences(ctx context.Context, c client.Re
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef,
 					Selector:     mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1912,6 +1994,7 @@ func (mg *WindowsFunctionApp) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccountName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.StorageAccountNameRef,
 			Selector:     mg.Spec.InitProvider.StorageAccountNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1931,6 +2014,7 @@ func (mg *WindowsFunctionApp) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VirtualNetworkSubnetID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.VirtualNetworkSubnetIDRef,
 			Selector:     mg.Spec.InitProvider.VirtualNetworkSubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1962,6 +2046,7 @@ func (mg *WindowsFunctionAppSlot) ResolveReferences(ctx context.Context, c clien
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FunctionAppID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.FunctionAppIDRef,
 			Selector:     mg.Spec.ForProvider.FunctionAppIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1983,6 +2068,7 @@ func (mg *WindowsFunctionAppSlot) ResolveReferences(ctx context.Context, c clien
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef,
 					Selector:     mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -2006,6 +2092,7 @@ func (mg *WindowsFunctionAppSlot) ResolveReferences(ctx context.Context, c clien
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef,
 					Selector:     mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -2027,6 +2114,7 @@ func (mg *WindowsFunctionAppSlot) ResolveReferences(ctx context.Context, c clien
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccountName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.StorageAccountNameRef,
 			Selector:     mg.Spec.ForProvider.StorageAccountNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2046,6 +2134,7 @@ func (mg *WindowsFunctionAppSlot) ResolveReferences(ctx context.Context, c clien
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VirtualNetworkSubnetID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.VirtualNetworkSubnetIDRef,
 			Selector:     mg.Spec.ForProvider.VirtualNetworkSubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2067,6 +2156,7 @@ func (mg *WindowsFunctionAppSlot) ResolveReferences(ctx context.Context, c clien
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef,
 					Selector:     mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -2090,6 +2180,7 @@ func (mg *WindowsFunctionAppSlot) ResolveReferences(ctx context.Context, c clien
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef,
 					Selector:     mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -2111,6 +2202,7 @@ func (mg *WindowsFunctionAppSlot) ResolveReferences(ctx context.Context, c clien
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccountName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.StorageAccountNameRef,
 			Selector:     mg.Spec.InitProvider.StorageAccountNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2130,6 +2222,7 @@ func (mg *WindowsFunctionAppSlot) ResolveReferences(ctx context.Context, c clien
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VirtualNetworkSubnetID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.VirtualNetworkSubnetIDRef,
 			Selector:     mg.Spec.InitProvider.VirtualNetworkSubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2161,6 +2254,7 @@ func (mg *WindowsWebApp) ResolveReferences(ctx context.Context, c client.Reader)
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2180,6 +2274,7 @@ func (mg *WindowsWebApp) ResolveReferences(ctx context.Context, c client.Reader)
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServicePlanID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ServicePlanIDRef,
 			Selector:     mg.Spec.ForProvider.ServicePlanIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2201,6 +2296,7 @@ func (mg *WindowsWebApp) ResolveReferences(ctx context.Context, c client.Reader)
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef,
 					Selector:     mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -2224,6 +2320,7 @@ func (mg *WindowsWebApp) ResolveReferences(ctx context.Context, c client.Reader)
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef,
 					Selector:     mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -2245,6 +2342,7 @@ func (mg *WindowsWebApp) ResolveReferences(ctx context.Context, c client.Reader)
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VirtualNetworkSubnetID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.VirtualNetworkSubnetIDRef,
 			Selector:     mg.Spec.ForProvider.VirtualNetworkSubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2264,6 +2362,7 @@ func (mg *WindowsWebApp) ResolveReferences(ctx context.Context, c client.Reader)
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServicePlanID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ServicePlanIDRef,
 			Selector:     mg.Spec.InitProvider.ServicePlanIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2285,6 +2384,7 @@ func (mg *WindowsWebApp) ResolveReferences(ctx context.Context, c client.Reader)
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef,
 					Selector:     mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -2308,6 +2408,7 @@ func (mg *WindowsWebApp) ResolveReferences(ctx context.Context, c client.Reader)
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef,
 					Selector:     mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -2329,6 +2430,7 @@ func (mg *WindowsWebApp) ResolveReferences(ctx context.Context, c client.Reader)
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VirtualNetworkSubnetID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.VirtualNetworkSubnetIDRef,
 			Selector:     mg.Spec.InitProvider.VirtualNetworkSubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2360,6 +2462,7 @@ func (mg *WindowsWebAppSlot) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AppServiceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AppServiceIDRef,
 			Selector:     mg.Spec.ForProvider.AppServiceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2381,6 +2484,7 @@ func (mg *WindowsWebAppSlot) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef,
 					Selector:     mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -2404,6 +2508,7 @@ func (mg *WindowsWebAppSlot) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef,
 					Selector:     mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -2425,6 +2530,7 @@ func (mg *WindowsWebAppSlot) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VirtualNetworkSubnetID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.VirtualNetworkSubnetIDRef,
 			Selector:     mg.Spec.ForProvider.VirtualNetworkSubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2446,6 +2552,7 @@ func (mg *WindowsWebAppSlot) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef,
 					Selector:     mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -2469,6 +2576,7 @@ func (mg *WindowsWebAppSlot) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID),
 					Extract:      rconfig.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef,
 					Selector:     mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -2490,6 +2598,7 @@ func (mg *WindowsWebAppSlot) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VirtualNetworkSubnetID),
 			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.VirtualNetworkSubnetIDRef,
 			Selector:     mg.Spec.InitProvider.VirtualNetworkSubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},

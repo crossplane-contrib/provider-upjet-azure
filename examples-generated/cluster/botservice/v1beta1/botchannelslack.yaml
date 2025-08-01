@@ -1,0 +1,60 @@
+apiVersion: botservice.azure.upbound.io/v1beta1
+kind: BotChannelSlack
+metadata:
+  annotations:
+    meta.upbound.io/example-id: botservice/v1beta1/botchannelslack
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    botNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    clientId: exampleId
+    clientSecretSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    location: global
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    verificationTokenSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+
+---
+
+apiVersion: botservice.azure.upbound.io/v1beta1
+kind: BotChannelsRegistration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: botservice/v1beta1/botchannelslack
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: global
+    microsoftAppId: ${data.azurerm_client_config.current.client_id}
+    name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: F0
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: botservice/v1beta1/botchannelslack
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

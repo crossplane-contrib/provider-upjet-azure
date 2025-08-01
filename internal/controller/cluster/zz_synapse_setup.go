@@ -60,3 +60,34 @@ func Setup_synapse(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_synapse creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_synapse(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		firewallrule.SetupGated,
+		integrationruntimeazure.SetupGated,
+		integrationruntimeselfhosted.SetupGated,
+		linkedservice.SetupGated,
+		managedprivateendpoint.SetupGated,
+		privatelinkhub.SetupGated,
+		roleassignment.SetupGated,
+		sparkpool.SetupGated,
+		sqlpool.SetupGated,
+		sqlpoolextendedauditingpolicy.SetupGated,
+		sqlpoolsecurityalertpolicy.SetupGated,
+		sqlpoolworkloadclassifier.SetupGated,
+		sqlpoolworkloadgroup.SetupGated,
+		workspace.SetupGated,
+		workspaceaadadmin.SetupGated,
+		workspaceextendedauditingpolicy.SetupGated,
+		workspacesecurityalertpolicy.SetupGated,
+		workspacesqlaadadmin.SetupGated,
+		workspacevulnerabilityassessment.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

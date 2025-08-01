@@ -1,0 +1,90 @@
+apiVersion: keyvault.azure.upbound.io/v1beta1
+kind: ManagedStorageAccountSASTokenDefinition
+metadata:
+  annotations:
+    meta.upbound.io/example-id: keyvault/v1beta1/managedstorageaccountsastokendefinition
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    managedStorageAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sasTemplateUri: ${data.azurerm_storage_account_sas.example.sas}
+    sasType: account
+    validityPeriod: P1D
+
+---
+
+apiVersion: keyvault.azure.upbound.io/v1beta2
+kind: Vault
+metadata:
+  annotations:
+    meta.upbound.io/example-id: keyvault/v1beta1/managedstorageaccountsastokendefinition
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: standard
+    tenantId: ${data.azurerm_client_config.example.tenant_id}
+
+---
+
+apiVersion: keyvault.azure.upbound.io/v1beta1
+kind: ManagedStorageAccount
+metadata:
+  annotations:
+    meta.upbound.io/example-id: keyvault/v1beta1/managedstorageaccountsastokendefinition
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    regenerateKeyAutomatically: false
+    regenerationPeriod: P1D
+    storageAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    storageAccountKey: key1
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: keyvault/v1beta1/managedstorageaccountsastokendefinition
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: keyvault/v1beta1/managedstorageaccountsastokendefinition
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

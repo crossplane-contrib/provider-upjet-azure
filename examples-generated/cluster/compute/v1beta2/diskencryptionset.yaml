@@ -1,0 +1,153 @@
+apiVersion: compute.azure.upbound.io/v1beta2
+kind: DiskEncryptionSet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta2/diskencryptionset
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    identity:
+    - type: SystemAssigned
+    keyVaultKeyIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: keyvault.azure.upbound.io/v1beta2
+kind: Vault
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta2/diskencryptionset
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    enabledForDiskEncryption: true
+    location: West Europe
+    purgeProtectionEnabled: true
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: premium
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+
+apiVersion: keyvault.azure.upbound.io/v1beta1
+kind: AccessPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta2/diskencryptionset
+  labels:
+    testing.upbound.io/example-name: example-disk
+  name: example-disk
+spec:
+  forProvider:
+    keyPermissions:
+    - Create
+    - Delete
+    - Get
+    - Purge
+    - Recover
+    - Update
+    - List
+    - Decrypt
+    - Sign
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    objectId: ${azurerm_disk_encryption_set.example.identity[0].principal_id}
+    tenantId: ${azurerm_disk_encryption_set.example.identity[0].tenant_id}
+
+---
+
+apiVersion: keyvault.azure.upbound.io/v1beta1
+kind: AccessPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta2/diskencryptionset
+  labels:
+    testing.upbound.io/example-name: example-user
+  name: example-user
+spec:
+  forProvider:
+    keyPermissions:
+    - Create
+    - Delete
+    - Get
+    - Purge
+    - Recover
+    - Update
+    - List
+    - Decrypt
+    - Sign
+    - GetRotationPolicy
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    objectId: ${data.azurerm_client_config.current.object_id}
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+
+apiVersion: keyvault.azure.upbound.io/v1beta2
+kind: Key
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta2/diskencryptionset
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    keyOpts:
+    - decrypt
+    - encrypt
+    - sign
+    - unwrapKey
+    - verify
+    - wrapKey
+    keySize: 2048
+    keyType: RSA
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: des-example-key
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta2/diskencryptionset
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: authorization.azure.upbound.io/v1beta1
+kind: RoleAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta2/diskencryptionset
+  labels:
+    testing.upbound.io/example-name: example-disk
+  name: example-disk
+spec:
+  forProvider:
+    principalId: ${azurerm_disk_encryption_set.example.identity[0].principal_id}
+    roleDefinitionName: Key Vault Crypto Service Encryption User
+    scope: ${azurerm_key_vault.example.id}

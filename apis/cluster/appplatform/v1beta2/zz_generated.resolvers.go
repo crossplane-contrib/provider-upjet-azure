@@ -9,10 +9,9 @@ package v1beta2
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	rconfig "github.com/upbound/provider-azure/apis/cluster/rconfig"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -36,6 +35,7 @@ func (mg *SpringCloudAPIPortal) ResolveReferences( // ResolveReferences of this 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.GatewayIds),
 			Extract:       resource.ExtractResourceID(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.ForProvider.GatewayIdsRefs,
 			Selector:      mg.Spec.ForProvider.GatewayIdsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -55,6 +55,7 @@ func (mg *SpringCloudAPIPortal) ResolveReferences( // ResolveReferences of this 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SpringCloudServiceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SpringCloudServiceIDRef,
 			Selector:     mg.Spec.ForProvider.SpringCloudServiceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -74,6 +75,7 @@ func (mg *SpringCloudAPIPortal) ResolveReferences( // ResolveReferences of this 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.GatewayIds),
 			Extract:       resource.ExtractResourceID(),
+			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.GatewayIdsRefs,
 			Selector:      mg.Spec.InitProvider.GatewayIdsSelector,
 			To:            reference.To{List: l, Managed: m},
@@ -105,6 +107,7 @@ func (mg *SpringCloudApp) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -124,6 +127,7 @@ func (mg *SpringCloudApp) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServiceName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ServiceNameRef,
 			Selector:     mg.Spec.ForProvider.ServiceNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -155,6 +159,7 @@ func (mg *SpringCloudBuildDeployment) ResolveReferences(ctx context.Context, c c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SpringCloudAppID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SpringCloudAppIDRef,
 			Selector:     mg.Spec.ForProvider.SpringCloudAppIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -186,6 +191,7 @@ func (mg *SpringCloudBuildPackBinding) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SpringCloudBuilderID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SpringCloudBuilderIDRef,
 			Selector:     mg.Spec.ForProvider.SpringCloudBuilderIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -217,6 +223,7 @@ func (mg *SpringCloudBuilder) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SpringCloudServiceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SpringCloudServiceIDRef,
 			Selector:     mg.Spec.ForProvider.SpringCloudServiceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -236,6 +243,7 @@ func (mg *SpringCloudBuilder) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SpringCloudServiceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SpringCloudServiceIDRef,
 			Selector:     mg.Spec.InitProvider.SpringCloudServiceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -267,6 +275,7 @@ func (mg *SpringCloudContainerDeployment) ResolveReferences(ctx context.Context,
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SpringCloudAppID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SpringCloudAppIDRef,
 			Selector:     mg.Spec.ForProvider.SpringCloudAppIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -298,6 +307,7 @@ func (mg *SpringCloudCustomizedAccelerator) ResolveReferences(ctx context.Contex
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SpringCloudAcceleratorID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SpringCloudAcceleratorIDRef,
 			Selector:     mg.Spec.ForProvider.SpringCloudAcceleratorIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -329,6 +339,7 @@ func (mg *SpringCloudDevToolPortal) ResolveReferences(ctx context.Context, c cli
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SpringCloudServiceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SpringCloudServiceIDRef,
 			Selector:     mg.Spec.ForProvider.SpringCloudServiceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -348,6 +359,7 @@ func (mg *SpringCloudDevToolPortal) ResolveReferences(ctx context.Context, c cli
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SpringCloudServiceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SpringCloudServiceIDRef,
 			Selector:     mg.Spec.InitProvider.SpringCloudServiceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -379,6 +391,7 @@ func (mg *SpringCloudGateway) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SpringCloudServiceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SpringCloudServiceIDRef,
 			Selector:     mg.Spec.ForProvider.SpringCloudServiceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -410,6 +423,7 @@ func (mg *SpringCloudJavaDeployment) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SpringCloudAppID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SpringCloudAppIDRef,
 			Selector:     mg.Spec.ForProvider.SpringCloudAppIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -442,6 +456,7 @@ func (mg *SpringCloudService) ResolveReferences(ctx context.Context, c client.Re
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Network.AppSubnetID),
 				Extract:      rconfig.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Network.AppSubnetIDRef,
 				Selector:     mg.Spec.ForProvider.Network.AppSubnetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -463,6 +478,7 @@ func (mg *SpringCloudService) ResolveReferences(ctx context.Context, c client.Re
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Network.ServiceRuntimeSubnetID),
 				Extract:      rconfig.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Network.ServiceRuntimeSubnetIDRef,
 				Selector:     mg.Spec.ForProvider.Network.ServiceRuntimeSubnetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -483,6 +499,7 @@ func (mg *SpringCloudService) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -503,6 +520,7 @@ func (mg *SpringCloudService) ResolveReferences(ctx context.Context, c client.Re
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Trace.ConnectionString),
 				Extract:      resource.ExtractParamPath("connection_string", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Trace.ConnectionStringRef,
 				Selector:     mg.Spec.ForProvider.Trace.ConnectionStringSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -524,6 +542,7 @@ func (mg *SpringCloudService) ResolveReferences(ctx context.Context, c client.Re
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Network.AppSubnetID),
 				Extract:      rconfig.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Network.AppSubnetIDRef,
 				Selector:     mg.Spec.InitProvider.Network.AppSubnetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -545,6 +564,7 @@ func (mg *SpringCloudService) ResolveReferences(ctx context.Context, c client.Re
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Network.ServiceRuntimeSubnetID),
 				Extract:      rconfig.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Network.ServiceRuntimeSubnetIDRef,
 				Selector:     mg.Spec.InitProvider.Network.ServiceRuntimeSubnetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -566,6 +586,7 @@ func (mg *SpringCloudService) ResolveReferences(ctx context.Context, c client.Re
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Trace.ConnectionString),
 				Extract:      resource.ExtractParamPath("connection_string", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Trace.ConnectionStringRef,
 				Selector:     mg.Spec.InitProvider.Trace.ConnectionStringSelector,
 				To:           reference.To{List: l, Managed: m},

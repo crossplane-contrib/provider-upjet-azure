@@ -70,3 +70,39 @@ func Setup_compute(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_compute creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_compute(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		availabilityset.SetupGated,
+		capacityreservation.SetupGated,
+		capacityreservationgroup.SetupGated,
+		dedicatedhost.SetupGated,
+		diskaccess.SetupGated,
+		diskencryptionset.SetupGated,
+		galleryapplication.SetupGated,
+		galleryapplicationversion.SetupGated,
+		image.SetupGated,
+		linuxvirtualmachine.SetupGated,
+		linuxvirtualmachinescaleset.SetupGated,
+		manageddisk.SetupGated,
+		manageddisksastoken.SetupGated,
+		orchestratedvirtualmachinescaleset.SetupGated,
+		proximityplacementgroup.SetupGated,
+		sharedimage.SetupGated,
+		sharedimagegallery.SetupGated,
+		snapshot.SetupGated,
+		sshpublickey.SetupGated,
+		virtualmachinedatadiskattachment.SetupGated,
+		virtualmachineextension.SetupGated,
+		virtualmachineruncommand.SetupGated,
+		windowsvirtualmachine.SetupGated,
+		windowsvirtualmachinescaleset.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

@@ -1,0 +1,101 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: ManagerManagementGroupConnection
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/managermanagementgroupconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    description: example
+    managementGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    networkManagerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: management.azure.upbound.io/v1beta1
+kind: ManagementGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/managermanagementgroupconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider: {}
+
+---
+
+apiVersion: management.azure.upbound.io/v1beta1
+kind: ManagementGroupSubscriptionAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/managermanagementgroupconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    managementGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    subscriptionIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_subscription
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: Manager
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/managermanagementgroupconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    scope:
+    - subscriptionIds:
+      - ${data.azurerm_subscription.current.id}
+    scopeAccesses:
+    - SecurityAdmin
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/managermanagementgroupconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: authorization.azure.upbound.io/v1beta1
+kind: RoleAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/managermanagementgroupconnection
+  labels:
+    testing.upbound.io/example-name: network_contributor
+  name: network-contributor
+spec:
+  forProvider:
+    principalId: ${data.azurerm_client_config.current.object_id}
+    roleDefinitionName: Network Contributor
+    scope: ${azurerm_management_group.example.id}

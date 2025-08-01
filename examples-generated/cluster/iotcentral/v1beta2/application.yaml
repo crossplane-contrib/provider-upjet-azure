@@ -1,0 +1,35 @@
+apiVersion: iotcentral.azure.upbound.io/v1beta2
+kind: Application
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iotcentral/v1beta2/application
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    displayName: example-iotcentral-app-display-name
+    location: West Europe
+    name: example-iotcentral-app
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: ST1
+    subDomain: example-iotcentral-app-subdomain
+    tags:
+      Foo: Bar
+    template: iotc-default@1.0.0
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iotcentral/v1beta2/application
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

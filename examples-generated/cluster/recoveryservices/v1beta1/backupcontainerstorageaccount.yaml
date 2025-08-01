@@ -1,0 +1,70 @@
+apiVersion: recoveryservices.azure.upbound.io/v1beta1
+kind: BackupContainerStorageAccount
+metadata:
+  annotations:
+    meta.upbound.io/example-id: recoveryservices/v1beta1/backupcontainerstorageaccount
+  labels:
+    testing.upbound.io/example-name: container
+  name: container
+spec:
+  forProvider:
+    recoveryVaultNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vault
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    storageAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sa
+
+---
+
+apiVersion: recoveryservices.azure.upbound.io/v1beta2
+kind: Vault
+metadata:
+  annotations:
+    meta.upbound.io/example-id: recoveryservices/v1beta1/backupcontainerstorageaccount
+  labels:
+    testing.upbound.io/example-name: vault
+  name: vault
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: Standard
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: recoveryservices/v1beta1/backupcontainerstorageaccount
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: recoveryservices/v1beta1/backupcontainerstorageaccount
+  labels:
+    testing.upbound.io/example-name: sa
+  name: sa
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

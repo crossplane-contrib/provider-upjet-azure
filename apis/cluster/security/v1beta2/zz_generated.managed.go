@@ -27,11 +27,6 @@ func (mg *IOTSecurityDeviceGroup) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this IOTSecurityDeviceGroup.
-func (mg *IOTSecurityDeviceGroup) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this IOTSecurityDeviceGroup.
 func (mg *IOTSecurityDeviceGroup) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -55,11 +50,6 @@ func (mg *IOTSecurityDeviceGroup) SetManagementPolicies(r xpv1.ManagementPolicie
 // SetProviderConfigReference of this IOTSecurityDeviceGroup.
 func (mg *IOTSecurityDeviceGroup) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this IOTSecurityDeviceGroup.
-func (mg *IOTSecurityDeviceGroup) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this IOTSecurityDeviceGroup.
@@ -87,11 +77,6 @@ func (mg *IOTSecuritySolution) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this IOTSecuritySolution.
-func (mg *IOTSecuritySolution) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this IOTSecuritySolution.
 func (mg *IOTSecuritySolution) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -115,11 +100,6 @@ func (mg *IOTSecuritySolution) SetManagementPolicies(r xpv1.ManagementPolicies) 
 // SetProviderConfigReference of this IOTSecuritySolution.
 func (mg *IOTSecuritySolution) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this IOTSecuritySolution.
-func (mg *IOTSecuritySolution) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this IOTSecuritySolution.
@@ -147,11 +127,6 @@ func (mg *SecurityCenterAssessment) GetProviderConfigReference() *xpv1.Reference
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this SecurityCenterAssessment.
-func (mg *SecurityCenterAssessment) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this SecurityCenterAssessment.
 func (mg *SecurityCenterAssessment) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -175,11 +150,6 @@ func (mg *SecurityCenterAssessment) SetManagementPolicies(r xpv1.ManagementPolic
 // SetProviderConfigReference of this SecurityCenterAssessment.
 func (mg *SecurityCenterAssessment) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this SecurityCenterAssessment.
-func (mg *SecurityCenterAssessment) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this SecurityCenterAssessment.

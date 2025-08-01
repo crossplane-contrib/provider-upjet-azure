@@ -27,11 +27,6 @@ func (mg *PowerBIEmbedded) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this PowerBIEmbedded.
-func (mg *PowerBIEmbedded) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this PowerBIEmbedded.
 func (mg *PowerBIEmbedded) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -55,11 +50,6 @@ func (mg *PowerBIEmbedded) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this PowerBIEmbedded.
 func (mg *PowerBIEmbedded) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this PowerBIEmbedded.
-func (mg *PowerBIEmbedded) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this PowerBIEmbedded.

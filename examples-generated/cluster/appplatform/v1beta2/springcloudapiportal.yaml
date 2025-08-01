@@ -1,0 +1,73 @@
+apiVersion: appplatform.azure.upbound.io/v1beta2
+kind: SpringCloudAPIPortal
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta2/springcloudapiportal
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    apiTryOutEnabled: true
+    gatewayIdsRefs:
+    - name: example
+    httpsOnlyEnabled: false
+    instanceCount: 1
+    publicNetworkAccessEnabled: true
+    springCloudServiceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sso:
+    - clientId: test
+      clientSecret: secret
+      issuerUri: https://www.example.com/issueToken
+      scope:
+      - read
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta2/springcloudapiportal
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: appplatform.azure.upbound.io/v1beta2
+kind: SpringCloudGateway
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta2/springcloudapiportal
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    springCloudServiceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: appplatform.azure.upbound.io/v1beta2
+kind: SpringCloudService
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta2/springcloudapiportal
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: E0

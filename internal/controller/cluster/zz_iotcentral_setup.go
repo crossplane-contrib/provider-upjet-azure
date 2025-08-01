@@ -26,3 +26,17 @@ func Setup_iotcentral(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_iotcentral creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_iotcentral(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		application.SetupGated,
+		applicationnetworkruleset.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

@@ -1,0 +1,57 @@
+apiVersion: compute.azure.upbound.io/v1beta2
+kind: SharedImage
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta2/sharedimage
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    galleryNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    identifier:
+    - offer: OfferName
+      publisher: PublisherName
+      sku: ExampleSku
+    location: West Europe
+    osType: Linux
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta2/sharedimage
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: compute.azure.upbound.io/v1beta2
+kind: SharedImageGallery
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta2/sharedimage
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    description: Shared images and things.
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tags:
+      Hello: There
+      World: Example

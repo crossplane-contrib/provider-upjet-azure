@@ -1,0 +1,53 @@
+apiVersion: devtestlab.azure.upbound.io/v1beta2
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devtestlab/v1beta2/virtualnetwork
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    labNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: example-network
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    subnet:
+    - useInVirtualMachineCreation: Allow
+      usePublicIpAddress: Allow
+
+---
+
+apiVersion: devtestlab.azure.upbound.io/v1beta1
+kind: Lab
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devtestlab/v1beta2/virtualnetwork
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tags:
+      Sydney: Australia
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devtestlab/v1beta2/virtualnetwork
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

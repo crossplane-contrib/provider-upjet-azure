@@ -40,3 +40,24 @@ func Setup_servicebus(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_servicebus creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_servicebus(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		namespaceauthorizationrule.SetupGated,
+		namespacedisasterrecoveryconfig.SetupGated,
+		queue.SetupGated,
+		queueauthorizationrule.SetupGated,
+		servicebusnamespace.SetupGated,
+		subscription.SetupGated,
+		subscriptionrule.SetupGated,
+		topic.SetupGated,
+		topicauthorizationrule.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

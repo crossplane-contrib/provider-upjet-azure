@@ -1,0 +1,126 @@
+apiVersion: web.azure.m.upbound.io/v1beta1
+kind: FunctionAppFunction
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/functionappfunction
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    configJson: |-
+      ${jsonencode({
+          "bindings" = [
+            {
+              "authLevel" = "function"
+              "direction" = "in"
+              "methods" = [
+                "get",
+                "post",
+              ]
+              "name" = "req"
+              "type" = "httpTrigger"
+            },
+            {
+              "direction" = "out"
+              "name"      = "$return"
+              "type"      = "http"
+            },
+          ]
+        })}
+    functionAppIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    language: Python
+    name: example-function-app-function
+    testData: |-
+      ${jsonencode({
+          "name" = "Azure"
+        })}
+
+---
+
+apiVersion: web.azure.m.upbound.io/v1beta1
+kind: LinuxFunctionApp
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/functionappfunction
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    name: example-function-app
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    servicePlanIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    siteConfig:
+    - applicationStack:
+      - pythonVersion: "3.9"
+    storageAccountAccessKeySecretRef:
+      key: attribute.primary_access_key
+      name: example-storage-account
+    storageAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/functionappfunction
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: web.azure.m.upbound.io/v1beta1
+kind: ServicePlan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/functionappfunction
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    osType: Linux
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: S1
+
+---
+
+apiVersion: storage.azure.m.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/functionappfunction
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

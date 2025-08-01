@@ -27,11 +27,6 @@ func (mg *CustomDataSet) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this CustomDataSet.
-func (mg *CustomDataSet) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this CustomDataSet.
 func (mg *CustomDataSet) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -55,11 +50,6 @@ func (mg *CustomDataSet) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this CustomDataSet.
 func (mg *CustomDataSet) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this CustomDataSet.
-func (mg *CustomDataSet) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this CustomDataSet.
@@ -87,11 +77,6 @@ func (mg *DataFlow) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this DataFlow.
-func (mg *DataFlow) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this DataFlow.
 func (mg *DataFlow) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -115,11 +100,6 @@ func (mg *DataFlow) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this DataFlow.
 func (mg *DataFlow) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this DataFlow.
-func (mg *DataFlow) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this DataFlow.
@@ -147,11 +127,6 @@ func (mg *DataSetBinary) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this DataSetBinary.
-func (mg *DataSetBinary) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this DataSetBinary.
 func (mg *DataSetBinary) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -175,11 +150,6 @@ func (mg *DataSetBinary) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this DataSetBinary.
 func (mg *DataSetBinary) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this DataSetBinary.
-func (mg *DataSetBinary) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this DataSetBinary.
@@ -207,11 +177,6 @@ func (mg *DataSetDelimitedText) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this DataSetDelimitedText.
-func (mg *DataSetDelimitedText) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this DataSetDelimitedText.
 func (mg *DataSetDelimitedText) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -235,11 +200,6 @@ func (mg *DataSetDelimitedText) SetManagementPolicies(r xpv1.ManagementPolicies)
 // SetProviderConfigReference of this DataSetDelimitedText.
 func (mg *DataSetDelimitedText) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this DataSetDelimitedText.
-func (mg *DataSetDelimitedText) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this DataSetDelimitedText.
@@ -267,11 +227,6 @@ func (mg *DataSetJSON) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this DataSetJSON.
-func (mg *DataSetJSON) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this DataSetJSON.
 func (mg *DataSetJSON) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -295,11 +250,6 @@ func (mg *DataSetJSON) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this DataSetJSON.
 func (mg *DataSetJSON) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this DataSetJSON.
-func (mg *DataSetJSON) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this DataSetJSON.
@@ -327,11 +277,6 @@ func (mg *DataSetParquet) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this DataSetParquet.
-func (mg *DataSetParquet) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this DataSetParquet.
 func (mg *DataSetParquet) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -355,11 +300,6 @@ func (mg *DataSetParquet) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this DataSetParquet.
 func (mg *DataSetParquet) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this DataSetParquet.
-func (mg *DataSetParquet) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this DataSetParquet.
@@ -387,11 +327,6 @@ func (mg *Factory) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this Factory.
-func (mg *Factory) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this Factory.
 func (mg *Factory) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -415,11 +350,6 @@ func (mg *Factory) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Factory.
 func (mg *Factory) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this Factory.
-func (mg *Factory) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this Factory.
@@ -447,11 +377,6 @@ func (mg *IntegrationRuntimeAzureSSIS) GetProviderConfigReference() *xpv1.Refere
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this IntegrationRuntimeAzureSSIS.
-func (mg *IntegrationRuntimeAzureSSIS) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this IntegrationRuntimeAzureSSIS.
 func (mg *IntegrationRuntimeAzureSSIS) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -475,11 +400,6 @@ func (mg *IntegrationRuntimeAzureSSIS) SetManagementPolicies(r xpv1.ManagementPo
 // SetProviderConfigReference of this IntegrationRuntimeAzureSSIS.
 func (mg *IntegrationRuntimeAzureSSIS) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this IntegrationRuntimeAzureSSIS.
-func (mg *IntegrationRuntimeAzureSSIS) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this IntegrationRuntimeAzureSSIS.
@@ -507,11 +427,6 @@ func (mg *LinkedCustomService) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this LinkedCustomService.
-func (mg *LinkedCustomService) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this LinkedCustomService.
 func (mg *LinkedCustomService) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -535,11 +450,6 @@ func (mg *LinkedCustomService) SetManagementPolicies(r xpv1.ManagementPolicies) 
 // SetProviderConfigReference of this LinkedCustomService.
 func (mg *LinkedCustomService) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this LinkedCustomService.
-func (mg *LinkedCustomService) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this LinkedCustomService.
@@ -567,11 +477,6 @@ func (mg *LinkedServiceAzureBlobStorage) GetProviderConfigReference() *xpv1.Refe
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this LinkedServiceAzureBlobStorage.
-func (mg *LinkedServiceAzureBlobStorage) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this LinkedServiceAzureBlobStorage.
 func (mg *LinkedServiceAzureBlobStorage) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -595,11 +500,6 @@ func (mg *LinkedServiceAzureBlobStorage) SetManagementPolicies(r xpv1.Management
 // SetProviderConfigReference of this LinkedServiceAzureBlobStorage.
 func (mg *LinkedServiceAzureBlobStorage) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this LinkedServiceAzureBlobStorage.
-func (mg *LinkedServiceAzureBlobStorage) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this LinkedServiceAzureBlobStorage.
@@ -627,11 +527,6 @@ func (mg *LinkedServiceAzureDatabricks) GetProviderConfigReference() *xpv1.Refer
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this LinkedServiceAzureDatabricks.
-func (mg *LinkedServiceAzureDatabricks) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this LinkedServiceAzureDatabricks.
 func (mg *LinkedServiceAzureDatabricks) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -655,11 +550,6 @@ func (mg *LinkedServiceAzureDatabricks) SetManagementPolicies(r xpv1.ManagementP
 // SetProviderConfigReference of this LinkedServiceAzureDatabricks.
 func (mg *LinkedServiceAzureDatabricks) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this LinkedServiceAzureDatabricks.
-func (mg *LinkedServiceAzureDatabricks) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this LinkedServiceAzureDatabricks.
@@ -687,11 +577,6 @@ func (mg *LinkedServiceAzureFileStorage) GetProviderConfigReference() *xpv1.Refe
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this LinkedServiceAzureFileStorage.
-func (mg *LinkedServiceAzureFileStorage) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this LinkedServiceAzureFileStorage.
 func (mg *LinkedServiceAzureFileStorage) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -715,11 +600,6 @@ func (mg *LinkedServiceAzureFileStorage) SetManagementPolicies(r xpv1.Management
 // SetProviderConfigReference of this LinkedServiceAzureFileStorage.
 func (mg *LinkedServiceAzureFileStorage) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this LinkedServiceAzureFileStorage.
-func (mg *LinkedServiceAzureFileStorage) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this LinkedServiceAzureFileStorage.
@@ -747,11 +627,6 @@ func (mg *LinkedServiceAzureFunction) GetProviderConfigReference() *xpv1.Referen
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this LinkedServiceAzureFunction.
-func (mg *LinkedServiceAzureFunction) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this LinkedServiceAzureFunction.
 func (mg *LinkedServiceAzureFunction) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -775,11 +650,6 @@ func (mg *LinkedServiceAzureFunction) SetManagementPolicies(r xpv1.ManagementPol
 // SetProviderConfigReference of this LinkedServiceAzureFunction.
 func (mg *LinkedServiceAzureFunction) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this LinkedServiceAzureFunction.
-func (mg *LinkedServiceAzureFunction) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this LinkedServiceAzureFunction.
@@ -807,11 +677,6 @@ func (mg *LinkedServiceAzureSQLDatabase) GetProviderConfigReference() *xpv1.Refe
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this LinkedServiceAzureSQLDatabase.
-func (mg *LinkedServiceAzureSQLDatabase) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this LinkedServiceAzureSQLDatabase.
 func (mg *LinkedServiceAzureSQLDatabase) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -835,11 +700,6 @@ func (mg *LinkedServiceAzureSQLDatabase) SetManagementPolicies(r xpv1.Management
 // SetProviderConfigReference of this LinkedServiceAzureSQLDatabase.
 func (mg *LinkedServiceAzureSQLDatabase) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this LinkedServiceAzureSQLDatabase.
-func (mg *LinkedServiceAzureSQLDatabase) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this LinkedServiceAzureSQLDatabase.
@@ -867,11 +727,6 @@ func (mg *LinkedServiceOData) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this LinkedServiceOData.
-func (mg *LinkedServiceOData) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this LinkedServiceOData.
 func (mg *LinkedServiceOData) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -895,11 +750,6 @@ func (mg *LinkedServiceOData) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this LinkedServiceOData.
 func (mg *LinkedServiceOData) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this LinkedServiceOData.
-func (mg *LinkedServiceOData) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this LinkedServiceOData.
@@ -927,11 +777,6 @@ func (mg *LinkedServiceOdbc) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this LinkedServiceOdbc.
-func (mg *LinkedServiceOdbc) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this LinkedServiceOdbc.
 func (mg *LinkedServiceOdbc) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -955,11 +800,6 @@ func (mg *LinkedServiceOdbc) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this LinkedServiceOdbc.
 func (mg *LinkedServiceOdbc) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this LinkedServiceOdbc.
-func (mg *LinkedServiceOdbc) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this LinkedServiceOdbc.
@@ -987,11 +827,6 @@ func (mg *LinkedServiceSQLServer) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this LinkedServiceSQLServer.
-func (mg *LinkedServiceSQLServer) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this LinkedServiceSQLServer.
 func (mg *LinkedServiceSQLServer) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -1015,11 +850,6 @@ func (mg *LinkedServiceSQLServer) SetManagementPolicies(r xpv1.ManagementPolicie
 // SetProviderConfigReference of this LinkedServiceSQLServer.
 func (mg *LinkedServiceSQLServer) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this LinkedServiceSQLServer.
-func (mg *LinkedServiceSQLServer) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this LinkedServiceSQLServer.
@@ -1047,11 +877,6 @@ func (mg *LinkedServiceSnowflake) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this LinkedServiceSnowflake.
-func (mg *LinkedServiceSnowflake) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this LinkedServiceSnowflake.
 func (mg *LinkedServiceSnowflake) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -1075,11 +900,6 @@ func (mg *LinkedServiceSnowflake) SetManagementPolicies(r xpv1.ManagementPolicie
 // SetProviderConfigReference of this LinkedServiceSnowflake.
 func (mg *LinkedServiceSnowflake) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this LinkedServiceSnowflake.
-func (mg *LinkedServiceSnowflake) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this LinkedServiceSnowflake.
@@ -1107,11 +927,6 @@ func (mg *LinkedServiceSynapse) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this LinkedServiceSynapse.
-func (mg *LinkedServiceSynapse) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this LinkedServiceSynapse.
 func (mg *LinkedServiceSynapse) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -1135,11 +950,6 @@ func (mg *LinkedServiceSynapse) SetManagementPolicies(r xpv1.ManagementPolicies)
 // SetProviderConfigReference of this LinkedServiceSynapse.
 func (mg *LinkedServiceSynapse) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this LinkedServiceSynapse.
-func (mg *LinkedServiceSynapse) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this LinkedServiceSynapse.
@@ -1167,11 +977,6 @@ func (mg *TriggerSchedule) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this TriggerSchedule.
-func (mg *TriggerSchedule) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this TriggerSchedule.
 func (mg *TriggerSchedule) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -1195,11 +1000,6 @@ func (mg *TriggerSchedule) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this TriggerSchedule.
 func (mg *TriggerSchedule) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this TriggerSchedule.
-func (mg *TriggerSchedule) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this TriggerSchedule.

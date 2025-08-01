@@ -1,0 +1,73 @@
+apiVersion: alertsmanagement.azure.upbound.io/v1beta2
+kind: MonitorAlertProcessingRuleActionGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: alertsmanagement/v1beta2/monitoralertprocessingruleactiongroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    addActionGroupIdsRefs:
+    - name: example
+    condition:
+    - severity:
+      - operator: Equals
+        values:
+        - Sev0
+        - Sev1
+        - Sev2
+      targetResourceType:
+      - operator: Equals
+        values:
+        - Microsoft.Compute/VirtualMachines
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    schedule:
+    - effectiveFrom: 2022-01-01T01:02:03
+      effectiveUntil: 2022-02-02T01:02:03
+      recurrence:
+      - daily:
+        - endTime: "09:00:00"
+          startTime: "17:00:00"
+        weekly:
+        - daysOfWeek:
+          - Saturday
+          - Sunday
+      timeZone: Pacific Standard Time
+    scopesRefs:
+    - name: example
+    tags:
+      foo: bar
+
+---
+
+apiVersion: insights.azure.upbound.io/v1beta2
+kind: MonitorActionGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: alertsmanagement/v1beta2/monitoralertprocessingruleactiongroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    shortName: action
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: alertsmanagement/v1beta2/monitoralertprocessingruleactiongroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

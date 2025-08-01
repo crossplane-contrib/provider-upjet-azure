@@ -36,3 +36,22 @@ func Setup_containerregistry(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_containerregistry creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_containerregistry(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		agentpool.SetupGated,
+		containerconnectedregistry.SetupGated,
+		registry.SetupGated,
+		scopemap.SetupGated,
+		token.SetupGated,
+		tokenpassword.SetupGated,
+		webhook.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

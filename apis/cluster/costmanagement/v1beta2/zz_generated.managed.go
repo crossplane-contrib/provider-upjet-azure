@@ -27,11 +27,6 @@ func (mg *ResourceGroupCostManagementExport) GetProviderConfigReference() *xpv1.
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this ResourceGroupCostManagementExport.
-func (mg *ResourceGroupCostManagementExport) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this ResourceGroupCostManagementExport.
 func (mg *ResourceGroupCostManagementExport) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -55,11 +50,6 @@ func (mg *ResourceGroupCostManagementExport) SetManagementPolicies(r xpv1.Manage
 // SetProviderConfigReference of this ResourceGroupCostManagementExport.
 func (mg *ResourceGroupCostManagementExport) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this ResourceGroupCostManagementExport.
-func (mg *ResourceGroupCostManagementExport) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this ResourceGroupCostManagementExport.
@@ -87,11 +77,6 @@ func (mg *SubscriptionCostManagementExport) GetProviderConfigReference() *xpv1.R
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this SubscriptionCostManagementExport.
-func (mg *SubscriptionCostManagementExport) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this SubscriptionCostManagementExport.
 func (mg *SubscriptionCostManagementExport) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -115,11 +100,6 @@ func (mg *SubscriptionCostManagementExport) SetManagementPolicies(r xpv1.Managem
 // SetProviderConfigReference of this SubscriptionCostManagementExport.
 func (mg *SubscriptionCostManagementExport) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this SubscriptionCostManagementExport.
-func (mg *SubscriptionCostManagementExport) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this SubscriptionCostManagementExport.

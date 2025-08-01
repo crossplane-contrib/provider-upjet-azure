@@ -1,0 +1,36 @@
+apiVersion: keyvault.azure.upbound.io/v1beta2
+kind: ManagedHardwareSecurityModule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: keyvault/v1beta2/managedhardwaresecuritymodule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    adminObjectIds:
+    - ${data.azurerm_client_config.current.object_id}
+    location: West Europe
+    purgeProtectionEnabled: false
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Standard_B1
+    softDeleteRetentionDays: 90
+    tags:
+      Env: Test
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: keyvault/v1beta2/managedhardwaresecuritymodule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

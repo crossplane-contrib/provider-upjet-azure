@@ -1,0 +1,93 @@
+// SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
+package controller
+
+import (
+	ctrl "sigs.k8s.io/controller-runtime"
+
+	"github.com/crossplane/upjet/v2/pkg/controller"
+
+	appactiveslot "github.com/upbound/provider-azure/internal/controller/namespaced/web/appactiveslot"
+	apphybridconnection "github.com/upbound/provider-azure/internal/controller/namespaced/web/apphybridconnection"
+	appserviceplan "github.com/upbound/provider-azure/internal/controller/namespaced/web/appserviceplan"
+	functionapp "github.com/upbound/provider-azure/internal/controller/namespaced/web/functionapp"
+	functionappactiveslot "github.com/upbound/provider-azure/internal/controller/namespaced/web/functionappactiveslot"
+	functionappfunction "github.com/upbound/provider-azure/internal/controller/namespaced/web/functionappfunction"
+	functionapphybridconnection "github.com/upbound/provider-azure/internal/controller/namespaced/web/functionapphybridconnection"
+	functionappslot "github.com/upbound/provider-azure/internal/controller/namespaced/web/functionappslot"
+	linuxfunctionapp "github.com/upbound/provider-azure/internal/controller/namespaced/web/linuxfunctionapp"
+	linuxfunctionappslot "github.com/upbound/provider-azure/internal/controller/namespaced/web/linuxfunctionappslot"
+	linuxwebapp "github.com/upbound/provider-azure/internal/controller/namespaced/web/linuxwebapp"
+	linuxwebappslot "github.com/upbound/provider-azure/internal/controller/namespaced/web/linuxwebappslot"
+	serviceplan "github.com/upbound/provider-azure/internal/controller/namespaced/web/serviceplan"
+	sourcecontroltoken "github.com/upbound/provider-azure/internal/controller/namespaced/web/sourcecontroltoken"
+	staticsite "github.com/upbound/provider-azure/internal/controller/namespaced/web/staticsite"
+	windowsfunctionapp "github.com/upbound/provider-azure/internal/controller/namespaced/web/windowsfunctionapp"
+	windowsfunctionappslot "github.com/upbound/provider-azure/internal/controller/namespaced/web/windowsfunctionappslot"
+	windowswebapp "github.com/upbound/provider-azure/internal/controller/namespaced/web/windowswebapp"
+	windowswebappslot "github.com/upbound/provider-azure/internal/controller/namespaced/web/windowswebappslot"
+)
+
+// Setup_web creates all controllers with the supplied logger and adds them to
+// the supplied manager.
+func Setup_web(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		appactiveslot.Setup,
+		apphybridconnection.Setup,
+		appserviceplan.Setup,
+		functionapp.Setup,
+		functionappactiveslot.Setup,
+		functionappfunction.Setup,
+		functionapphybridconnection.Setup,
+		functionappslot.Setup,
+		linuxfunctionapp.Setup,
+		linuxfunctionappslot.Setup,
+		linuxwebapp.Setup,
+		linuxwebappslot.Setup,
+		serviceplan.Setup,
+		sourcecontroltoken.Setup,
+		staticsite.Setup,
+		windowsfunctionapp.Setup,
+		windowsfunctionappslot.Setup,
+		windowswebapp.Setup,
+		windowswebappslot.Setup,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// SetupGated_web creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_web(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		appactiveslot.SetupGated,
+		apphybridconnection.SetupGated,
+		appserviceplan.SetupGated,
+		functionapp.SetupGated,
+		functionappactiveslot.SetupGated,
+		functionappfunction.SetupGated,
+		functionapphybridconnection.SetupGated,
+		functionappslot.SetupGated,
+		linuxfunctionapp.SetupGated,
+		linuxfunctionappslot.SetupGated,
+		linuxwebapp.SetupGated,
+		linuxwebappslot.SetupGated,
+		serviceplan.SetupGated,
+		sourcecontroltoken.SetupGated,
+		staticsite.SetupGated,
+		windowsfunctionapp.SetupGated,
+		windowsfunctionappslot.SetupGated,
+		windowswebapp.SetupGated,
+		windowswebappslot.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

@@ -1,0 +1,52 @@
+apiVersion: insights.azure.upbound.io/v1beta1
+kind: ApplicationInsightsAPIKey
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta1/applicationinsightsapikey
+  labels:
+    testing.upbound.io/example-name: read_telemetry
+  name: read-telemetry
+spec:
+  forProvider:
+    applicationInsightsIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: tf-test-appinsights-read-telemetry-api-key
+    readPermissions:
+    - aggregate
+    - api
+    - draft
+    - extendqueries
+    - search
+
+---
+
+apiVersion: insights.azure.upbound.io/v1beta1
+kind: ApplicationInsights
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta1/applicationinsightsapikey
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    applicationType: web
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta1/applicationinsightsapikey
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

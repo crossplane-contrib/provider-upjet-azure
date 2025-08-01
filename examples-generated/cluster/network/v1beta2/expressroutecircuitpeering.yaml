@@ -1,0 +1,71 @@
+apiVersion: network.azure.upbound.io/v1beta2
+kind: ExpressRouteCircuitPeering
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/expressroutecircuitpeering
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    expressRouteCircuitNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    ipv4Enabled: true
+    ipv6:
+    - enabled: true
+      microsoftPeering:
+      - advertisedPublicPrefixes:
+        - 2002:db01::/126
+      primaryPeerAddressPrefix: 2002:db01::/126
+      secondaryPeerAddressPrefix: 2003:db01::/126
+    microsoftPeeringConfig:
+    - advertisedPublicPrefixes:
+      - 123.1.0.0/24
+    peerAsn: 100
+    primaryPeerAddressPrefix: 123.0.0.0/30
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    secondaryPeerAddressPrefix: 123.0.0.4/30
+    vlanId: 300
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: ExpressRouteCircuit
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/expressroutecircuitpeering
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    allowClassicOperations: false
+    bandwidthInMbps: 50
+    location: West Europe
+    peeringLocation: Silicon Valley
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    serviceProviderName: Equinix
+    sku:
+    - family: MeteredData
+      tier: Standard
+    tags:
+      environment: Production
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/expressroutecircuitpeering
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

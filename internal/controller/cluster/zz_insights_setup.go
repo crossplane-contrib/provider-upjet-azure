@@ -64,3 +64,36 @@ func Setup_insights(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_insights creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_insights(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		applicationinsights.SetupGated,
+		applicationinsightsanalyticsitem.SetupGated,
+		applicationinsightsapikey.SetupGated,
+		applicationinsightssmartdetectionrule.SetupGated,
+		applicationinsightsstandardwebtest.SetupGated,
+		applicationinsightswebtest.SetupGated,
+		applicationinsightsworkbook.SetupGated,
+		applicationinsightsworkbooktemplate.SetupGated,
+		monitoractiongroup.SetupGated,
+		monitoractivitylogalert.SetupGated,
+		monitorautoscalesetting.SetupGated,
+		monitordatacollectionendpoint.SetupGated,
+		monitordatacollectionrule.SetupGated,
+		monitordatacollectionruleassociation.SetupGated,
+		monitordiagnosticsetting.SetupGated,
+		monitormetricalert.SetupGated,
+		monitorprivatelinkscope.SetupGated,
+		monitorprivatelinkscopedservice.SetupGated,
+		monitorscheduledqueryrulesalert.SetupGated,
+		monitorscheduledqueryrulesalertv2.SetupGated,
+		monitorscheduledqueryruleslog.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

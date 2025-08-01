@@ -1,0 +1,105 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: TrafficManagerNestedEndpoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/trafficmanagernestedendpoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    minimumChildEndpoints: 9
+    priority: 1
+    profileIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: parent
+    targetResourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: nested
+    weight: 5
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: PublicIP
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/trafficmanagernestedendpoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    allocationMethod: Static
+    domainNameLabel: example-pip
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/trafficmanagernestedendpoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: TrafficManagerProfile
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/trafficmanagernestedendpoint
+  labels:
+    testing.upbound.io/example-name: nested
+  name: nested
+spec:
+  forProvider:
+    dnsConfig:
+    - relativeName: nested-profile
+      ttl: 30
+    monitorConfig:
+    - path: /
+      port: 443
+      protocol: HTTP
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    trafficRoutingMethod: Priority
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: TrafficManagerProfile
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/trafficmanagernestedendpoint
+  labels:
+    testing.upbound.io/example-name: parent
+  name: parent
+spec:
+  forProvider:
+    dnsConfig:
+    - relativeName: parent-profile
+      ttl: 100
+    monitorConfig:
+    - intervalInSeconds: 30
+      path: /
+      port: 80
+      protocol: HTTP
+      timeoutInSeconds: 9
+      toleratedNumberOfFailures: 3
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tags:
+      environment: Production
+    trafficRoutingMethod: Weighted

@@ -1,0 +1,16 @@
+apiVersion: compute.azure.m.upbound.io/v1beta1
+kind: Image
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/image
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: ${data.azurerm_virtual_machine.example.location}
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_virtual_machine
+    sourceVirtualMachineId: ${data.azurerm_virtual_machine.example.id}

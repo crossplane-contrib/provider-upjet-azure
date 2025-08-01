@@ -27,11 +27,6 @@ func (mg *SentinelAlertRuleFusion) GetProviderConfigReference() *xpv1.Reference 
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this SentinelAlertRuleFusion.
-func (mg *SentinelAlertRuleFusion) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this SentinelAlertRuleFusion.
 func (mg *SentinelAlertRuleFusion) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -55,11 +50,6 @@ func (mg *SentinelAlertRuleFusion) SetManagementPolicies(r xpv1.ManagementPolici
 // SetProviderConfigReference of this SentinelAlertRuleFusion.
 func (mg *SentinelAlertRuleFusion) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this SentinelAlertRuleFusion.
-func (mg *SentinelAlertRuleFusion) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this SentinelAlertRuleFusion.
@@ -87,11 +77,6 @@ func (mg *SentinelAlertRuleMSSecurityIncident) GetProviderConfigReference() *xpv
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this SentinelAlertRuleMSSecurityIncident.
-func (mg *SentinelAlertRuleMSSecurityIncident) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this SentinelAlertRuleMSSecurityIncident.
 func (mg *SentinelAlertRuleMSSecurityIncident) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -115,11 +100,6 @@ func (mg *SentinelAlertRuleMSSecurityIncident) SetManagementPolicies(r xpv1.Mana
 // SetProviderConfigReference of this SentinelAlertRuleMSSecurityIncident.
 func (mg *SentinelAlertRuleMSSecurityIncident) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this SentinelAlertRuleMSSecurityIncident.
-func (mg *SentinelAlertRuleMSSecurityIncident) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this SentinelAlertRuleMSSecurityIncident.
@@ -147,11 +127,6 @@ func (mg *SentinelAlertRuleMachineLearningBehaviorAnalytics) GetProviderConfigRe
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this SentinelAlertRuleMachineLearningBehaviorAnalytics.
-func (mg *SentinelAlertRuleMachineLearningBehaviorAnalytics) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this SentinelAlertRuleMachineLearningBehaviorAnalytics.
 func (mg *SentinelAlertRuleMachineLearningBehaviorAnalytics) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -175,11 +150,6 @@ func (mg *SentinelAlertRuleMachineLearningBehaviorAnalytics) SetManagementPolici
 // SetProviderConfigReference of this SentinelAlertRuleMachineLearningBehaviorAnalytics.
 func (mg *SentinelAlertRuleMachineLearningBehaviorAnalytics) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this SentinelAlertRuleMachineLearningBehaviorAnalytics.
-func (mg *SentinelAlertRuleMachineLearningBehaviorAnalytics) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this SentinelAlertRuleMachineLearningBehaviorAnalytics.
@@ -207,11 +177,6 @@ func (mg *SentinelAutomationRule) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this SentinelAutomationRule.
-func (mg *SentinelAutomationRule) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this SentinelAutomationRule.
 func (mg *SentinelAutomationRule) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -235,11 +200,6 @@ func (mg *SentinelAutomationRule) SetManagementPolicies(r xpv1.ManagementPolicie
 // SetProviderConfigReference of this SentinelAutomationRule.
 func (mg *SentinelAutomationRule) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this SentinelAutomationRule.
-func (mg *SentinelAutomationRule) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this SentinelAutomationRule.
@@ -267,11 +227,6 @@ func (mg *SentinelDataConnectorIOT) GetProviderConfigReference() *xpv1.Reference
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this SentinelDataConnectorIOT.
-func (mg *SentinelDataConnectorIOT) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this SentinelDataConnectorIOT.
 func (mg *SentinelDataConnectorIOT) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -295,11 +250,6 @@ func (mg *SentinelDataConnectorIOT) SetManagementPolicies(r xpv1.ManagementPolic
 // SetProviderConfigReference of this SentinelDataConnectorIOT.
 func (mg *SentinelDataConnectorIOT) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this SentinelDataConnectorIOT.
-func (mg *SentinelDataConnectorIOT) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this SentinelDataConnectorIOT.
@@ -327,11 +277,6 @@ func (mg *SentinelLogAnalyticsWorkspaceOnboarding) GetProviderConfigReference() 
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this SentinelLogAnalyticsWorkspaceOnboarding.
-func (mg *SentinelLogAnalyticsWorkspaceOnboarding) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this SentinelLogAnalyticsWorkspaceOnboarding.
 func (mg *SentinelLogAnalyticsWorkspaceOnboarding) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -355,11 +300,6 @@ func (mg *SentinelLogAnalyticsWorkspaceOnboarding) SetManagementPolicies(r xpv1.
 // SetProviderConfigReference of this SentinelLogAnalyticsWorkspaceOnboarding.
 func (mg *SentinelLogAnalyticsWorkspaceOnboarding) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this SentinelLogAnalyticsWorkspaceOnboarding.
-func (mg *SentinelLogAnalyticsWorkspaceOnboarding) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this SentinelLogAnalyticsWorkspaceOnboarding.
@@ -387,11 +327,6 @@ func (mg *SentinelWatchlist) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this SentinelWatchlist.
-func (mg *SentinelWatchlist) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this SentinelWatchlist.
 func (mg *SentinelWatchlist) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -415,11 +350,6 @@ func (mg *SentinelWatchlist) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this SentinelWatchlist.
 func (mg *SentinelWatchlist) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this SentinelWatchlist.
-func (mg *SentinelWatchlist) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this SentinelWatchlist.

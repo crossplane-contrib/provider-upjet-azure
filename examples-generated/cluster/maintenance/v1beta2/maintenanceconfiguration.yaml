@@ -1,0 +1,31 @@
+apiVersion: maintenance.azure.upbound.io/v1beta2
+kind: MaintenanceConfiguration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: maintenance/v1beta2/maintenanceconfiguration
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    scope: SQLDB
+    tags:
+      Env: prod
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: maintenance/v1beta2/maintenanceconfiguration
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

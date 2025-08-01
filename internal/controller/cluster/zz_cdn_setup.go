@@ -48,3 +48,28 @@ func Setup_cdn(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_cdn creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_cdn(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		endpoint.SetupGated,
+		frontdoorcustomdomain.SetupGated,
+		frontdoorcustomdomainassociation.SetupGated,
+		frontdoorendpoint.SetupGated,
+		frontdoorfirewallpolicy.SetupGated,
+		frontdoororigin.SetupGated,
+		frontdoororigingroup.SetupGated,
+		frontdoorprofile.SetupGated,
+		frontdoorroute.SetupGated,
+		frontdoorrule.SetupGated,
+		frontdoorruleset.SetupGated,
+		frontdoorsecuritypolicy.SetupGated,
+		profile.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

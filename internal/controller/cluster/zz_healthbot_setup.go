@@ -24,3 +24,16 @@ func Setup_healthbot(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_healthbot creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_healthbot(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		healthbot.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

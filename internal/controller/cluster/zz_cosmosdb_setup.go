@@ -62,3 +62,35 @@ func Setup_cosmosdb(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_cosmosdb creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_cosmosdb(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		account.SetupGated,
+		cassandracluster.SetupGated,
+		cassandradatacenter.SetupGated,
+		cassandrakeyspace.SetupGated,
+		cassandratable.SetupGated,
+		gremlindatabase.SetupGated,
+		gremlingraph.SetupGated,
+		mongocollection.SetupGated,
+		mongodatabase.SetupGated,
+		mongoroledefinition.SetupGated,
+		mongouserdefinition.SetupGated,
+		sqlcontainer.SetupGated,
+		sqldatabase.SetupGated,
+		sqldedicatedgateway.SetupGated,
+		sqlfunction.SetupGated,
+		sqlroleassignment.SetupGated,
+		sqlroledefinition.SetupGated,
+		sqlstoredprocedure.SetupGated,
+		sqltrigger.SetupGated,
+		table.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

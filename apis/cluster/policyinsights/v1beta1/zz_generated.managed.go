@@ -27,11 +27,6 @@ func (mg *ResourcePolicyRemediation) GetProviderConfigReference() *xpv1.Referenc
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this ResourcePolicyRemediation.
-func (mg *ResourcePolicyRemediation) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this ResourcePolicyRemediation.
 func (mg *ResourcePolicyRemediation) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -55,11 +50,6 @@ func (mg *ResourcePolicyRemediation) SetManagementPolicies(r xpv1.ManagementPoli
 // SetProviderConfigReference of this ResourcePolicyRemediation.
 func (mg *ResourcePolicyRemediation) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this ResourcePolicyRemediation.
-func (mg *ResourcePolicyRemediation) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this ResourcePolicyRemediation.
@@ -87,11 +77,6 @@ func (mg *SubscriptionPolicyRemediation) GetProviderConfigReference() *xpv1.Refe
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this SubscriptionPolicyRemediation.
-func (mg *SubscriptionPolicyRemediation) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this SubscriptionPolicyRemediation.
 func (mg *SubscriptionPolicyRemediation) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -115,11 +100,6 @@ func (mg *SubscriptionPolicyRemediation) SetManagementPolicies(r xpv1.Management
 // SetProviderConfigReference of this SubscriptionPolicyRemediation.
 func (mg *SubscriptionPolicyRemediation) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this SubscriptionPolicyRemediation.
-func (mg *SubscriptionPolicyRemediation) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this SubscriptionPolicyRemediation.

@@ -1,0 +1,54 @@
+apiVersion: kusto.azure.upbound.io/v1beta1
+kind: ClusterPrincipalAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kusto/v1beta1/clusterprincipalassignment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    clusterNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    principalId: ${data.azurerm_client_config.current.principal_id}
+    principalType: App
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    role: AllDatabasesAdmin
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+
+apiVersion: kusto.azure.upbound.io/v1beta2
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kusto/v1beta1/clusterprincipalassignment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku:
+    - capacity: 2
+      name: Standard_D13_v2
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kusto/v1beta1/clusterprincipalassignment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

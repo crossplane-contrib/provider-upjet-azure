@@ -42,3 +42,25 @@ func Setup_botservice(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_botservice creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_botservice(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		botchannelalexa.SetupGated,
+		botchanneldirectline.SetupGated,
+		botchannelline.SetupGated,
+		botchannelmsteams.SetupGated,
+		botchannelslack.SetupGated,
+		botchannelsms.SetupGated,
+		botchannelsregistration.SetupGated,
+		botchannelwebchat.SetupGated,
+		botconnection.SetupGated,
+		botwebapp.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

@@ -36,3 +36,22 @@ func Setup_securityinsights(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_securityinsights creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_securityinsights(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		sentinelalertrulefusion.SetupGated,
+		sentinelalertrulemachinelearningbehavioranalytics.SetupGated,
+		sentinelalertrulemssecurityincident.SetupGated,
+		sentinelautomationrule.SetupGated,
+		sentineldataconnectoriot.SetupGated,
+		sentinelloganalyticsworkspaceonboarding.SetupGated,
+		sentinelwatchlist.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

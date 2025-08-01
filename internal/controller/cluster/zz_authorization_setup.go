@@ -54,3 +54,31 @@ func Setup_authorization(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_authorization creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_authorization(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		managementgrouppolicyassignment.SetupGated,
+		managementgrouppolicyexemption.SetupGated,
+		managementlock.SetupGated,
+		pimactiveroleassignment.SetupGated,
+		pimeligibleroleassignment.SetupGated,
+		policydefinition.SetupGated,
+		policysetdefinition.SetupGated,
+		resourcegrouppolicyassignment.SetupGated,
+		resourcegrouppolicyexemption.SetupGated,
+		resourcepolicyassignment.SetupGated,
+		resourcepolicyexemption.SetupGated,
+		roleassignment.SetupGated,
+		roledefinition.SetupGated,
+		subscriptionpolicyassignment.SetupGated,
+		subscriptionpolicyexemption.SetupGated,
+		trustedaccessrolebinding.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

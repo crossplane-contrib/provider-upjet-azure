@@ -27,11 +27,6 @@ func (mg *BotChannelAlexa) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this BotChannelAlexa.
-func (mg *BotChannelAlexa) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this BotChannelAlexa.
 func (mg *BotChannelAlexa) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -55,11 +50,6 @@ func (mg *BotChannelAlexa) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this BotChannelAlexa.
 func (mg *BotChannelAlexa) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this BotChannelAlexa.
-func (mg *BotChannelAlexa) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this BotChannelAlexa.
@@ -87,11 +77,6 @@ func (mg *BotChannelDirectLine) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this BotChannelDirectLine.
-func (mg *BotChannelDirectLine) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this BotChannelDirectLine.
 func (mg *BotChannelDirectLine) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -115,11 +100,6 @@ func (mg *BotChannelDirectLine) SetManagementPolicies(r xpv1.ManagementPolicies)
 // SetProviderConfigReference of this BotChannelDirectLine.
 func (mg *BotChannelDirectLine) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this BotChannelDirectLine.
-func (mg *BotChannelDirectLine) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this BotChannelDirectLine.
@@ -147,11 +127,6 @@ func (mg *BotChannelLine) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this BotChannelLine.
-func (mg *BotChannelLine) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this BotChannelLine.
 func (mg *BotChannelLine) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -175,11 +150,6 @@ func (mg *BotChannelLine) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this BotChannelLine.
 func (mg *BotChannelLine) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this BotChannelLine.
-func (mg *BotChannelLine) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this BotChannelLine.
@@ -207,11 +177,6 @@ func (mg *BotChannelMSTeams) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this BotChannelMSTeams.
-func (mg *BotChannelMSTeams) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this BotChannelMSTeams.
 func (mg *BotChannelMSTeams) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -235,11 +200,6 @@ func (mg *BotChannelMSTeams) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this BotChannelMSTeams.
 func (mg *BotChannelMSTeams) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this BotChannelMSTeams.
-func (mg *BotChannelMSTeams) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this BotChannelMSTeams.
@@ -267,11 +227,6 @@ func (mg *BotChannelSMS) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this BotChannelSMS.
-func (mg *BotChannelSMS) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this BotChannelSMS.
 func (mg *BotChannelSMS) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -295,11 +250,6 @@ func (mg *BotChannelSMS) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this BotChannelSMS.
 func (mg *BotChannelSMS) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this BotChannelSMS.
-func (mg *BotChannelSMS) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this BotChannelSMS.
@@ -327,11 +277,6 @@ func (mg *BotChannelSlack) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this BotChannelSlack.
-func (mg *BotChannelSlack) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this BotChannelSlack.
 func (mg *BotChannelSlack) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -355,11 +300,6 @@ func (mg *BotChannelSlack) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this BotChannelSlack.
 func (mg *BotChannelSlack) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this BotChannelSlack.
-func (mg *BotChannelSlack) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this BotChannelSlack.
@@ -387,11 +327,6 @@ func (mg *BotChannelWebChat) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this BotChannelWebChat.
-func (mg *BotChannelWebChat) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this BotChannelWebChat.
 func (mg *BotChannelWebChat) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -415,11 +350,6 @@ func (mg *BotChannelWebChat) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this BotChannelWebChat.
 func (mg *BotChannelWebChat) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this BotChannelWebChat.
-func (mg *BotChannelWebChat) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this BotChannelWebChat.
@@ -447,11 +377,6 @@ func (mg *BotChannelsRegistration) GetProviderConfigReference() *xpv1.Reference 
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this BotChannelsRegistration.
-func (mg *BotChannelsRegistration) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this BotChannelsRegistration.
 func (mg *BotChannelsRegistration) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -475,11 +400,6 @@ func (mg *BotChannelsRegistration) SetManagementPolicies(r xpv1.ManagementPolici
 // SetProviderConfigReference of this BotChannelsRegistration.
 func (mg *BotChannelsRegistration) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this BotChannelsRegistration.
-func (mg *BotChannelsRegistration) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this BotChannelsRegistration.
@@ -507,11 +427,6 @@ func (mg *BotConnection) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this BotConnection.
-func (mg *BotConnection) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this BotConnection.
 func (mg *BotConnection) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -535,11 +450,6 @@ func (mg *BotConnection) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this BotConnection.
 func (mg *BotConnection) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this BotConnection.
-func (mg *BotConnection) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this BotConnection.
@@ -567,11 +477,6 @@ func (mg *BotWebApp) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this BotWebApp.
-func (mg *BotWebApp) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this BotWebApp.
 func (mg *BotWebApp) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -595,11 +500,6 @@ func (mg *BotWebApp) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this BotWebApp.
 func (mg *BotWebApp) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this BotWebApp.
-func (mg *BotWebApp) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this BotWebApp.

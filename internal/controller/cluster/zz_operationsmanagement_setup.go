@@ -24,3 +24,16 @@ func Setup_operationsmanagement(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_operationsmanagement creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_operationsmanagement(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		loganalyticssolution.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

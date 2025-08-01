@@ -1,0 +1,15 @@
+apiVersion: synapse.azure.m.upbound.io/v1beta1
+kind: PrivateLinkHub
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/privatelinkhub
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

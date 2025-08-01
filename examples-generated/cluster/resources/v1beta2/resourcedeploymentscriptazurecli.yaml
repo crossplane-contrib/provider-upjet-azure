@@ -1,0 +1,61 @@
+apiVersion: resources.azure.upbound.io/v1beta2
+kind: ResourceDeploymentScriptAzureCli
+metadata:
+  annotations:
+    meta.upbound.io/example-id: resources/v1beta2/resourcedeploymentscriptazurecli
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    cleanupPreference: OnSuccess
+    commandLine: '''foo'' ''bar'''
+    forceUpdateTag: "1"
+    identity:
+    - identityIdsRefs:
+      - name: example
+      type: UserAssigned
+    location: West Europe
+    name: example-rdsac
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    retentionInterval: P1D
+    scriptContent: |2
+                  echo "{\"name\":{\"displayName\":\"$1 $2\"}}" > $AZ_SCRIPTS_OUTPUT_PATH
+    tags:
+      key: value
+    timeout: PT30M
+    version: 2.40.0
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: resources/v1beta2/resourcedeploymentscriptazurecli
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: managedidentity.azure.upbound.io/v1beta1
+kind: UserAssignedIdentity
+metadata:
+  annotations:
+    meta.upbound.io/example-id: resources/v1beta2/resourcedeploymentscriptazurecli
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    name: example-uai
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

@@ -27,11 +27,6 @@ func (mg *ResourceDeploymentScriptAzureCli) GetProviderConfigReference() *xpv1.R
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this ResourceDeploymentScriptAzureCli.
-func (mg *ResourceDeploymentScriptAzureCli) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this ResourceDeploymentScriptAzureCli.
 func (mg *ResourceDeploymentScriptAzureCli) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -55,11 +50,6 @@ func (mg *ResourceDeploymentScriptAzureCli) SetManagementPolicies(r xpv1.Managem
 // SetProviderConfigReference of this ResourceDeploymentScriptAzureCli.
 func (mg *ResourceDeploymentScriptAzureCli) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this ResourceDeploymentScriptAzureCli.
-func (mg *ResourceDeploymentScriptAzureCli) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this ResourceDeploymentScriptAzureCli.
@@ -87,11 +77,6 @@ func (mg *ResourceDeploymentScriptAzurePowerShell) GetProviderConfigReference() 
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this ResourceDeploymentScriptAzurePowerShell.
-func (mg *ResourceDeploymentScriptAzurePowerShell) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this ResourceDeploymentScriptAzurePowerShell.
 func (mg *ResourceDeploymentScriptAzurePowerShell) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -115,11 +100,6 @@ func (mg *ResourceDeploymentScriptAzurePowerShell) SetManagementPolicies(r xpv1.
 // SetProviderConfigReference of this ResourceDeploymentScriptAzurePowerShell.
 func (mg *ResourceDeploymentScriptAzurePowerShell) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this ResourceDeploymentScriptAzurePowerShell.
-func (mg *ResourceDeploymentScriptAzurePowerShell) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this ResourceDeploymentScriptAzurePowerShell.
@@ -147,11 +127,6 @@ func (mg *ResourceGroupTemplateDeployment) GetProviderConfigReference() *xpv1.Re
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this ResourceGroupTemplateDeployment.
-func (mg *ResourceGroupTemplateDeployment) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this ResourceGroupTemplateDeployment.
 func (mg *ResourceGroupTemplateDeployment) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -175,11 +150,6 @@ func (mg *ResourceGroupTemplateDeployment) SetManagementPolicies(r xpv1.Manageme
 // SetProviderConfigReference of this ResourceGroupTemplateDeployment.
 func (mg *ResourceGroupTemplateDeployment) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this ResourceGroupTemplateDeployment.
-func (mg *ResourceGroupTemplateDeployment) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this ResourceGroupTemplateDeployment.
@@ -207,11 +177,6 @@ func (mg *SubscriptionTemplateDeployment) GetProviderConfigReference() *xpv1.Ref
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this SubscriptionTemplateDeployment.
-func (mg *SubscriptionTemplateDeployment) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this SubscriptionTemplateDeployment.
 func (mg *SubscriptionTemplateDeployment) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -235,11 +200,6 @@ func (mg *SubscriptionTemplateDeployment) SetManagementPolicies(r xpv1.Managemen
 // SetProviderConfigReference of this SubscriptionTemplateDeployment.
 func (mg *SubscriptionTemplateDeployment) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this SubscriptionTemplateDeployment.
-func (mg *SubscriptionTemplateDeployment) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this SubscriptionTemplateDeployment.

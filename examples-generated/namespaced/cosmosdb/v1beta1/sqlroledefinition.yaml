@@ -1,0 +1,64 @@
+apiVersion: cosmosdb.azure.m.upbound.io/v1beta1
+kind: SQLRoleDefinition
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1beta1/sqlroledefinition
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    accountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    assignableScopes:
+    - ${azurerm_cosmosdb_account.example.id}/dbs/sales
+    name: acctestsqlrole
+    permissions:
+    - dataActions:
+      - Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers/items/read
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    roleDefinitionId: 84cf3a8b-4122-4448-bce2-fa423cfe0a15
+
+---
+
+apiVersion: cosmosdb.azure.m.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1beta1/sqlroledefinition
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    consistencyPolicy:
+    - consistencyLevel: Strong
+    geoLocation:
+    - failoverPriority: 0
+      location: West Europe
+    kind: GlobalDocumentDB
+    location: West Europe
+    offerType: Standard
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1beta1/sqlroledefinition
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

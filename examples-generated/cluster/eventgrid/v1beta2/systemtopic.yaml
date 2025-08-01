@@ -1,0 +1,53 @@
+apiVersion: eventgrid.azure.upbound.io/v1beta2
+kind: SystemTopic
+metadata:
+  annotations:
+    meta.upbound.io/example-id: eventgrid/v1beta2/systemtopic
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sourceArmResourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    topicType: Microsoft.Storage.StorageAccounts
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: eventgrid/v1beta2/systemtopic
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: eventgrid/v1beta2/systemtopic
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tags:
+      environment: staging

@@ -1,0 +1,60 @@
+apiVersion: cosmosdb.azure.m.upbound.io/v1beta1
+kind: SQLFunction
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1beta1/sqlfunction
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    body: function trigger(){}
+    containerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: cosmosdb.azure.m.upbound.io/v1beta1
+kind: SQLContainer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1beta1/sqlfunction
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    accountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_cosmosdb_account
+    databaseNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    partition_key_path: /id
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_cosmosdb_account
+
+---
+
+apiVersion: cosmosdb.azure.m.upbound.io/v1beta1
+kind: SQLDatabase
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1beta1/sqlfunction
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    accountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_cosmosdb_account
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_cosmosdb_account
+    throughput: 400

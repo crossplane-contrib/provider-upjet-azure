@@ -1,0 +1,72 @@
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: NATGatewayPublicIPPrefixAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/natgatewaypublicipprefixassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    natGatewayIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    publicIpPrefixIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: NATGateway
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/natgatewaypublicipprefixassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Standard
+
+---
+
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: PublicIPPrefix
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/natgatewaypublicipprefixassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    prefixLength: 30
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    zones:
+    - "1"
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/natgatewaypublicipprefixassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

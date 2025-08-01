@@ -100,3 +100,54 @@ func Setup_apimanagement(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_apimanagement creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_apimanagement(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		api.SetupGated,
+		apidiagnostic.SetupGated,
+		apioperation.SetupGated,
+		apioperationpolicy.SetupGated,
+		apioperationtag.SetupGated,
+		apipolicy.SetupGated,
+		apirelease.SetupGated,
+		apischema.SetupGated,
+		apitag.SetupGated,
+		apiversionset.SetupGated,
+		authorizationserver.SetupGated,
+		backend.SetupGated,
+		certificate.SetupGated,
+		customdomain.SetupGated,
+		diagnostic.SetupGated,
+		emailtemplate.SetupGated,
+		gateway.SetupGated,
+		gatewayapi.SetupGated,
+		globalschema.SetupGated,
+		identityprovideraad.SetupGated,
+		identityproviderfacebook.SetupGated,
+		identityprovidergoogle.SetupGated,
+		identityprovidermicrosoft.SetupGated,
+		identityprovidertwitter.SetupGated,
+		logger.SetupGated,
+		management.SetupGated,
+		namedvalue.SetupGated,
+		notificationrecipientemail.SetupGated,
+		notificationrecipientuser.SetupGated,
+		openidconnectprovider.SetupGated,
+		policy.SetupGated,
+		product.SetupGated,
+		productapi.SetupGated,
+		productpolicy.SetupGated,
+		producttag.SetupGated,
+		rediscache.SetupGated,
+		subscription.SetupGated,
+		tag.SetupGated,
+		user.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

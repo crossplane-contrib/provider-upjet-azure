@@ -1,0 +1,78 @@
+apiVersion: dataprotection.azure.upbound.io/v1beta2
+kind: BackupPolicyPostgreSQL
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta2/backuppolicypostgresql
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    backupRepeatingTimeIntervals:
+    - R/2021-05-23T02:30:00+00:00/P1W
+    defaultRetentionDuration: P4M
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    retentionRule:
+    - criteria:
+      - absoluteCriteria: FirstOfWeek
+      duration: P6M
+      name: weekly
+      priority: 20
+    - criteria:
+      - daysOfWeek:
+        - Thursday
+        scheduledBackupTimes:
+        - "2021-05-23T02:30:00Z"
+      duration: P1W
+      name: thursday
+      priority: 25
+    - criteria:
+      - daysOfWeek:
+        - Tuesday
+        scheduledBackupTimes:
+        - "2021-05-23T02:30:00Z"
+        weeksOfMonth:
+        - First
+        - Last
+      duration: P1D
+      name: monthly
+      priority: 15
+    timeZone: India Standard Time
+    vaultNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: dataprotection.azure.upbound.io/v1beta2
+kind: BackupVault
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta2/backuppolicypostgresql
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    datastoreType: VaultStore
+    location: West Europe
+    redundancy: LocallyRedundant
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta2/backuppolicypostgresql
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

@@ -1,0 +1,40 @@
+apiVersion: network.azure.upbound.io/v1beta2
+kind: TrafficManagerProfile
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/trafficmanagerprofile
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    dnsConfig:
+    - relativeName: ${random_id.server.hex}
+      ttl: 100
+    monitorConfig:
+    - intervalInSeconds: 30
+      path: /
+      port: 80
+      protocol: HTTP
+      timeoutInSeconds: 9
+      toleratedNumberOfFailures: 3
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tags:
+      environment: Production
+    trafficRoutingMethod: Weighted
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/trafficmanagerprofile
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

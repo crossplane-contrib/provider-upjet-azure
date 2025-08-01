@@ -1,0 +1,93 @@
+apiVersion: devtestlab.azure.upbound.io/v1beta2
+kind: WindowsVirtualMachine
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devtestlab/v1beta2/windowsvirtualmachine
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    galleryImageReference:
+    - offer: WindowsServer
+      publisher: MicrosoftWindowsServer
+      sku: 2019-Datacenter
+      version: latest
+    labNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    labSubnetNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    labVirtualNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    location: West Europe
+    name: example-vm03
+    notes: Some notes about this Virtual Machine.
+    passwordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    size: Standard_DS2
+    storageType: Premium
+    username: exampleuser99
+
+---
+
+apiVersion: devtestlab.azure.upbound.io/v1beta1
+kind: Lab
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devtestlab/v1beta2/windowsvirtualmachine
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tags:
+      Sydney: Australia
+
+---
+
+apiVersion: devtestlab.azure.upbound.io/v1beta2
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devtestlab/v1beta2/windowsvirtualmachine
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    labNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: example-network
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    subnet:
+    - useInVirtualMachineCreation: Allow
+      usePublicIpAddress: Allow
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devtestlab/v1beta2/windowsvirtualmachine
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

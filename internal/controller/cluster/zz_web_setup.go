@@ -60,3 +60,34 @@ func Setup_web(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_web creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_web(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		appactiveslot.SetupGated,
+		apphybridconnection.SetupGated,
+		appserviceplan.SetupGated,
+		functionapp.SetupGated,
+		functionappactiveslot.SetupGated,
+		functionappfunction.SetupGated,
+		functionapphybridconnection.SetupGated,
+		functionappslot.SetupGated,
+		linuxfunctionapp.SetupGated,
+		linuxfunctionappslot.SetupGated,
+		linuxwebapp.SetupGated,
+		linuxwebappslot.SetupGated,
+		serviceplan.SetupGated,
+		sourcecontroltoken.SetupGated,
+		staticsite.SetupGated,
+		windowsfunctionapp.SetupGated,
+		windowsfunctionappslot.SetupGated,
+		windowswebapp.SetupGated,
+		windowswebappslot.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

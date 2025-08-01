@@ -1,0 +1,67 @@
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: SubnetServiceEndpointStoragePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/subnetserviceendpointstoragepolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    definition:
+    - description: definition1
+      name: name1
+      service: Microsoft.Storage
+      serviceResourcesRefs:
+      - name: example
+      - name: example
+    - description: definition2
+      name: name2
+      service: Global
+      serviceResourcesRefs:
+      - name: example
+      - name: example
+      - name: example
+      - name: example
+      - name: example
+      - name: example
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/subnetserviceendpointstoragepolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: storage.azure.m.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/subnetserviceendpointstoragepolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    accountReplicationType: GRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

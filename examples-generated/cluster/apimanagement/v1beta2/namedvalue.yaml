@@ -1,0 +1,55 @@
+apiVersion: apimanagement.azure.upbound.io/v1beta2
+kind: NamedValue
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta2/namedvalue
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    apiManagementNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    displayName: ExampleProperty
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    valueSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+
+---
+
+apiVersion: apimanagement.azure.upbound.io/v1beta2
+kind: Management
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta2/namedvalue
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    publisherEmail: pub1@email.com
+    publisherName: pub1
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Developer_1
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta2/namedvalue
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

@@ -1,0 +1,72 @@
+apiVersion: appplatform.azure.upbound.io/v1beta2
+kind: SpringCloudCustomizedAccelerator
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta2/springcloudcustomizedaccelerator
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    acceleratorTags:
+    - tag-a
+    - tag-b
+    description: example description
+    displayName: example name
+    gitRepository:
+    - gitTag: spring.version.2.0.3
+      intervalInSeconds: 100
+      url: https://github.com/Azure-Samples/piggymetrics
+    iconUrl: https://images.freecreatives.com/wp-content/uploads/2015/05/smiley-559124_640.jpg
+    springCloudAcceleratorIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta2/springcloudcustomizedaccelerator
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: west europe
+
+---
+
+apiVersion: appplatform.azure.upbound.io/v1beta1
+kind: SpringCloudAccelerator
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta2/springcloudcustomizedaccelerator
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: default
+    springCloudServiceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: appplatform.azure.upbound.io/v1beta2
+kind: SpringCloudService
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta2/springcloudcustomizedaccelerator
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: west europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: E0

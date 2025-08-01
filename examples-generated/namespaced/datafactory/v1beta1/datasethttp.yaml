@@ -1,0 +1,72 @@
+apiVersion: datafactory.azure.m.upbound.io/v1beta1
+kind: DataSetHTTP
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/datasethttp
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    linkedServiceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    relativeUrl: http://www.bing.com
+    requestBody: foo=bar
+    requestMethod: POST
+
+---
+
+apiVersion: datafactory.azure.m.upbound.io/v1beta1
+kind: Factory
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/datasethttp
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: datafactory.azure.m.upbound.io/v1beta1
+kind: LinkedServiceWeb
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/datasethttp
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    authenticationType: Anonymous
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    url: https://www.bing.com
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/datasethttp
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

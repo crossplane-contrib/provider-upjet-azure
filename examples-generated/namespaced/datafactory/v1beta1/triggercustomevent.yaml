@@ -1,0 +1,104 @@
+apiVersion: datafactory.azure.m.upbound.io/v1beta1
+kind: TriggerCustomEvent
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/triggercustomevent
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    additionalProperties:
+      bar: bar2
+      foo: foo1
+    annotations:
+    - example1
+    - example2
+    - example3
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    description: example description
+    eventgridTopicIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    events:
+    - event1
+    - event2
+    pipeline:
+    - nameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      parameters:
+        Env: Prod
+    subjectBeginsWith: abc
+    subjectEndsWith: xyz
+
+---
+
+apiVersion: datafactory.azure.m.upbound.io/v1beta1
+kind: Factory
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/triggercustomevent
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: datafactory.azure.m.upbound.io/v1beta1
+kind: Pipeline
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/triggercustomevent
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: eventgrid.azure.m.upbound.io/v1beta1
+kind: Topic
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/triggercustomevent
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/triggercustomevent
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

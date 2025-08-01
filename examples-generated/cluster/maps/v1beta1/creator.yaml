@@ -1,0 +1,50 @@
+apiVersion: maps.azure.upbound.io/v1beta1
+kind: Creator
+metadata:
+  annotations:
+    meta.upbound.io/example-id: maps/v1beta1/creator
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    mapsAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    storageUnits: 1
+    tags:
+      environment: Test
+
+---
+
+apiVersion: maps.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: maps/v1beta1/creator
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: G2
+    tags:
+      environment: Test
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: maps/v1beta1/creator
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

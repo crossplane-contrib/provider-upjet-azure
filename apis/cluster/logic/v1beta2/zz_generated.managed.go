@@ -27,11 +27,6 @@ func (mg *AppIntegrationAccountBatchConfiguration) GetProviderConfigReference() 
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this AppIntegrationAccountBatchConfiguration.
-func (mg *AppIntegrationAccountBatchConfiguration) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this AppIntegrationAccountBatchConfiguration.
 func (mg *AppIntegrationAccountBatchConfiguration) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -55,11 +50,6 @@ func (mg *AppIntegrationAccountBatchConfiguration) SetManagementPolicies(r xpv1.
 // SetProviderConfigReference of this AppIntegrationAccountBatchConfiguration.
 func (mg *AppIntegrationAccountBatchConfiguration) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this AppIntegrationAccountBatchConfiguration.
-func (mg *AppIntegrationAccountBatchConfiguration) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this AppIntegrationAccountBatchConfiguration.
@@ -87,11 +77,6 @@ func (mg *AppTriggerRecurrence) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this AppTriggerRecurrence.
-func (mg *AppTriggerRecurrence) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this AppTriggerRecurrence.
 func (mg *AppTriggerRecurrence) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -115,11 +100,6 @@ func (mg *AppTriggerRecurrence) SetManagementPolicies(r xpv1.ManagementPolicies)
 // SetProviderConfigReference of this AppTriggerRecurrence.
 func (mg *AppTriggerRecurrence) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this AppTriggerRecurrence.
-func (mg *AppTriggerRecurrence) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this AppTriggerRecurrence.
@@ -147,11 +127,6 @@ func (mg *AppWorkflow) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this AppWorkflow.
-func (mg *AppWorkflow) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this AppWorkflow.
 func (mg *AppWorkflow) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -175,11 +150,6 @@ func (mg *AppWorkflow) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this AppWorkflow.
 func (mg *AppWorkflow) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this AppWorkflow.
-func (mg *AppWorkflow) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this AppWorkflow.

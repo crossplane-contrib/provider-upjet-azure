@@ -46,3 +46,27 @@ func Setup_dbforpostgresql(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_dbforpostgresql creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_dbforpostgresql(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		activedirectoryadministrator.SetupGated,
+		configuration.SetupGated,
+		database.SetupGated,
+		firewallrule.SetupGated,
+		flexibleserver.SetupGated,
+		flexibleserveractivedirectoryadministrator.SetupGated,
+		flexibleserverconfiguration.SetupGated,
+		flexibleserverdatabase.SetupGated,
+		flexibleserverfirewallrule.SetupGated,
+		server.SetupGated,
+		serverkey.SetupGated,
+		virtualnetworkrule.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

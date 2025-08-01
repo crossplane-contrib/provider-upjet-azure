@@ -27,11 +27,6 @@ func (mg *AppServiceCertificateOrder) GetProviderConfigReference() *xpv1.Referen
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this AppServiceCertificateOrder.
-func (mg *AppServiceCertificateOrder) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this AppServiceCertificateOrder.
 func (mg *AppServiceCertificateOrder) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -55,11 +50,6 @@ func (mg *AppServiceCertificateOrder) SetManagementPolicies(r xpv1.ManagementPol
 // SetProviderConfigReference of this AppServiceCertificateOrder.
 func (mg *AppServiceCertificateOrder) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this AppServiceCertificateOrder.
-func (mg *AppServiceCertificateOrder) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this AppServiceCertificateOrder.

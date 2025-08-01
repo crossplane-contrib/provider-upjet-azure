@@ -9,10 +9,9 @@ package v1beta2
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -35,6 +34,7 @@ func (mg *ResourceGroupCostManagementExport) ResolveReferences( // ResolveRefere
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExportDataStorageLocation.ContainerID),
 				Extract:      resource.ExtractParamPath("resource_manager_id", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.ExportDataStorageLocation.ContainerIDRef,
 				Selector:     mg.Spec.ForProvider.ExportDataStorageLocation.ContainerIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -55,6 +55,7 @@ func (mg *ResourceGroupCostManagementExport) ResolveReferences( // ResolveRefere
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupIDRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -75,6 +76,7 @@ func (mg *ResourceGroupCostManagementExport) ResolveReferences( // ResolveRefere
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExportDataStorageLocation.ContainerID),
 				Extract:      resource.ExtractParamPath("resource_manager_id", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.ExportDataStorageLocation.ContainerIDRef,
 				Selector:     mg.Spec.InitProvider.ExportDataStorageLocation.ContainerIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -95,6 +97,7 @@ func (mg *ResourceGroupCostManagementExport) ResolveReferences( // ResolveRefere
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupIDRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -127,6 +130,7 @@ func (mg *SubscriptionCostManagementExport) ResolveReferences(ctx context.Contex
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExportDataStorageLocation.ContainerID),
 				Extract:      resource.ExtractParamPath("resource_manager_id", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.ExportDataStorageLocation.ContainerIDRef,
 				Selector:     mg.Spec.ForProvider.ExportDataStorageLocation.ContainerIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -147,6 +151,7 @@ func (mg *SubscriptionCostManagementExport) ResolveReferences(ctx context.Contex
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubscriptionID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SubscriptionIDRef,
 			Selector:     mg.Spec.ForProvider.SubscriptionIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -167,6 +172,7 @@ func (mg *SubscriptionCostManagementExport) ResolveReferences(ctx context.Contex
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExportDataStorageLocation.ContainerID),
 				Extract:      resource.ExtractParamPath("resource_manager_id", true),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.ExportDataStorageLocation.ContainerIDRef,
 				Selector:     mg.Spec.InitProvider.ExportDataStorageLocation.ContainerIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -187,6 +193,7 @@ func (mg *SubscriptionCostManagementExport) ResolveReferences(ctx context.Contex
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubscriptionID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SubscriptionIDRef,
 			Selector:     mg.Spec.InitProvider.SubscriptionIDSelector,
 			To:           reference.To{List: l, Managed: m},

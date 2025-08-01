@@ -561,7 +561,7 @@ func (in *ImportParameters) DeepCopyInto(out *ImportParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	out.AdministratorLoginPasswordSecretRef = in.AdministratorLoginPasswordSecretRef
+	in.AdministratorLoginPasswordSecretRef.DeepCopyInto(&out.AdministratorLoginPasswordSecretRef)
 	if in.AuthenticationType != nil {
 		in, out := &in.AuthenticationType, &out.AuthenticationType
 		*out = new(string)
@@ -572,7 +572,7 @@ func (in *ImportParameters) DeepCopyInto(out *ImportParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	out.StorageKeySecretRef = in.StorageKeySecretRef
+	in.StorageKeySecretRef.DeepCopyInto(&out.StorageKeySecretRef)
 	if in.StorageKeyType != nil {
 		in, out := &in.StorageKeyType, &out.StorageKeyType
 		*out = new(string)

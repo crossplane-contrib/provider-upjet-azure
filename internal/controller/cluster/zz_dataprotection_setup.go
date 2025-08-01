@@ -42,3 +42,25 @@ func Setup_dataprotection(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_dataprotection creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_dataprotection(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		backupinstanceblobstorage.SetupGated,
+		backupinstancedisk.SetupGated,
+		backupinstancekubernetescluster.SetupGated,
+		backupinstancepostgresql.SetupGated,
+		backuppolicyblobstorage.SetupGated,
+		backuppolicydisk.SetupGated,
+		backuppolicykubernetescluster.SetupGated,
+		backuppolicypostgresql.SetupGated,
+		backupvault.SetupGated,
+		resourceguard.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

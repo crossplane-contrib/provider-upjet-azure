@@ -58,3 +58,33 @@ func Setup_streamanalytics(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_streamanalytics creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_streamanalytics(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		cluster.SetupGated,
+		functionjavascriptuda.SetupGated,
+		job.SetupGated,
+		managedprivateendpoint.SetupGated,
+		outputblob.SetupGated,
+		outputeventhub.SetupGated,
+		outputfunction.SetupGated,
+		outputmssql.SetupGated,
+		outputpowerbi.SetupGated,
+		outputservicebusqueue.SetupGated,
+		outputservicebustopic.SetupGated,
+		outputsynapse.SetupGated,
+		outputtable.SetupGated,
+		referenceinputblob.SetupGated,
+		referenceinputmssql.SetupGated,
+		streaminputblob.SetupGated,
+		streaminputeventhub.SetupGated,
+		streaminputiothub.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

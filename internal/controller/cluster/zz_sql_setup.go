@@ -66,3 +66,37 @@ func Setup_sql(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_sql creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_sql(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		mssqldatabase.SetupGated,
+		mssqldatabaseextendedauditingpolicy.SetupGated,
+		mssqldatabasevulnerabilityassessmentrulebaseline.SetupGated,
+		mssqlelasticpool.SetupGated,
+		mssqlfailovergroup.SetupGated,
+		mssqlfirewallrule.SetupGated,
+		mssqljobagent.SetupGated,
+		mssqljobcredential.SetupGated,
+		mssqlmanageddatabase.SetupGated,
+		mssqlmanagedinstance.SetupGated,
+		mssqlmanagedinstanceactivedirectoryadministrator.SetupGated,
+		mssqlmanagedinstancefailovergroup.SetupGated,
+		mssqlmanagedinstancetransparentdataencryption.SetupGated,
+		mssqlmanagedinstancevulnerabilityassessment.SetupGated,
+		mssqloutboundfirewallrule.SetupGated,
+		mssqlserver.SetupGated,
+		mssqlserverdnsalias.SetupGated,
+		mssqlservermicrosoftsupportauditingpolicy.SetupGated,
+		mssqlserversecurityalertpolicy.SetupGated,
+		mssqlservertransparentdataencryption.SetupGated,
+		mssqlservervulnerabilityassessment.SetupGated,
+		mssqlvirtualnetworkrule.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

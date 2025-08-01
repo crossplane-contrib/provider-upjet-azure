@@ -1,0 +1,58 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: PrivateDNSSRVRecord
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/privatednssrvrecord
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    record:
+    - port: 8080
+      priority: 1
+      target: target1.contoso.com
+      weight: 5
+    - port: 8080
+      priority: 10
+      target: target2.contoso.com
+      weight: 10
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tags:
+      Environment: Production
+    ttl: 300
+    zoneNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: PrivateDNSZone
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/privatednssrvrecord
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/privatednssrvrecord
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

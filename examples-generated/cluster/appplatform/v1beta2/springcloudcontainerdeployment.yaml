@@ -1,0 +1,77 @@
+apiVersion: appplatform.azure.upbound.io/v1beta2
+kind: SpringCloudContainerDeployment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta2/springcloudcontainerdeployment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    arguments:
+    - -cp
+    - /app/resources:/app/classes:/app/libs/*
+    - hello.Application
+    commands:
+    - java
+    environmentVariables:
+      Env: Staging
+      Foo: Bar
+    image: springio/gs-spring-boot-docker
+    instanceCount: 2
+    languageFramework: springboot
+    server: docker.io
+    springCloudAppIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta2/springcloudcontainerdeployment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: appplatform.azure.upbound.io/v1beta2
+kind: SpringCloudApp
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta2/springcloudcontainerdeployment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    serviceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: appplatform.azure.upbound.io/v1beta2
+kind: SpringCloudService
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta2/springcloudcontainerdeployment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: E0

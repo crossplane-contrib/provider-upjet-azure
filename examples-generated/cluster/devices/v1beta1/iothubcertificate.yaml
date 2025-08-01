@@ -1,0 +1,55 @@
+apiVersion: devices.azure.upbound.io/v1beta1
+kind: IOTHubCertificate
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devices/v1beta1/iothubcertificate
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    certificateContentSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    iothubNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    isVerified: true
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: devices.azure.upbound.io/v1beta2
+kind: IOTHub
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devices/v1beta1/iothubcertificate
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku:
+    - capacity: "1"
+      name: B1
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devices/v1beta1/iothubcertificate
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

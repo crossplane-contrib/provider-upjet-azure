@@ -1,0 +1,75 @@
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: VirtualNetworkPeering
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/virtualnetworkpeering
+  labels:
+    testing.upbound.io/example-name: example-1
+  name: example-1
+  namespace: upbound-system
+spec:
+  forProvider:
+    remoteVirtualNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-2
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-1
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/virtualnetworkpeering
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/virtualnetworkpeering
+  labels:
+    testing.upbound.io/example-name: example-1
+  name: example-1
+  namespace: upbound-system
+spec:
+  forProvider:
+    addressSpace:
+    - 10.0.1.0/24
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/virtualnetworkpeering
+  labels:
+    testing.upbound.io/example-name: example-2
+  name: example-2
+  namespace: upbound-system
+spec:
+  forProvider:
+    addressSpace:
+    - 10.0.2.0/24
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

@@ -27,11 +27,6 @@ func (mg *LogAnalyticsDataExportRule) GetProviderConfigReference() *xpv1.Referen
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this LogAnalyticsDataExportRule.
-func (mg *LogAnalyticsDataExportRule) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this LogAnalyticsDataExportRule.
 func (mg *LogAnalyticsDataExportRule) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -55,11 +50,6 @@ func (mg *LogAnalyticsDataExportRule) SetManagementPolicies(r xpv1.ManagementPol
 // SetProviderConfigReference of this LogAnalyticsDataExportRule.
 func (mg *LogAnalyticsDataExportRule) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this LogAnalyticsDataExportRule.
-func (mg *LogAnalyticsDataExportRule) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this LogAnalyticsDataExportRule.
@@ -87,11 +77,6 @@ func (mg *LogAnalyticsDataSourceWindowsEvent) GetProviderConfigReference() *xpv1
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this LogAnalyticsDataSourceWindowsEvent.
-func (mg *LogAnalyticsDataSourceWindowsEvent) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this LogAnalyticsDataSourceWindowsEvent.
 func (mg *LogAnalyticsDataSourceWindowsEvent) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -115,11 +100,6 @@ func (mg *LogAnalyticsDataSourceWindowsEvent) SetManagementPolicies(r xpv1.Manag
 // SetProviderConfigReference of this LogAnalyticsDataSourceWindowsEvent.
 func (mg *LogAnalyticsDataSourceWindowsEvent) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this LogAnalyticsDataSourceWindowsEvent.
-func (mg *LogAnalyticsDataSourceWindowsEvent) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this LogAnalyticsDataSourceWindowsEvent.
@@ -147,11 +127,6 @@ func (mg *LogAnalyticsDataSourceWindowsPerformanceCounter) GetProviderConfigRefe
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this LogAnalyticsDataSourceWindowsPerformanceCounter.
-func (mg *LogAnalyticsDataSourceWindowsPerformanceCounter) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this LogAnalyticsDataSourceWindowsPerformanceCounter.
 func (mg *LogAnalyticsDataSourceWindowsPerformanceCounter) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -175,11 +150,6 @@ func (mg *LogAnalyticsDataSourceWindowsPerformanceCounter) SetManagementPolicies
 // SetProviderConfigReference of this LogAnalyticsDataSourceWindowsPerformanceCounter.
 func (mg *LogAnalyticsDataSourceWindowsPerformanceCounter) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this LogAnalyticsDataSourceWindowsPerformanceCounter.
-func (mg *LogAnalyticsDataSourceWindowsPerformanceCounter) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this LogAnalyticsDataSourceWindowsPerformanceCounter.
@@ -207,11 +177,6 @@ func (mg *LogAnalyticsLinkedService) GetProviderConfigReference() *xpv1.Referenc
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this LogAnalyticsLinkedService.
-func (mg *LogAnalyticsLinkedService) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this LogAnalyticsLinkedService.
 func (mg *LogAnalyticsLinkedService) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -235,11 +200,6 @@ func (mg *LogAnalyticsLinkedService) SetManagementPolicies(r xpv1.ManagementPoli
 // SetProviderConfigReference of this LogAnalyticsLinkedService.
 func (mg *LogAnalyticsLinkedService) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this LogAnalyticsLinkedService.
-func (mg *LogAnalyticsLinkedService) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this LogAnalyticsLinkedService.
@@ -267,11 +227,6 @@ func (mg *LogAnalyticsLinkedStorageAccount) GetProviderConfigReference() *xpv1.R
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this LogAnalyticsLinkedStorageAccount.
-func (mg *LogAnalyticsLinkedStorageAccount) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this LogAnalyticsLinkedStorageAccount.
 func (mg *LogAnalyticsLinkedStorageAccount) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -295,11 +250,6 @@ func (mg *LogAnalyticsLinkedStorageAccount) SetManagementPolicies(r xpv1.Managem
 // SetProviderConfigReference of this LogAnalyticsLinkedStorageAccount.
 func (mg *LogAnalyticsLinkedStorageAccount) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this LogAnalyticsLinkedStorageAccount.
-func (mg *LogAnalyticsLinkedStorageAccount) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this LogAnalyticsLinkedStorageAccount.
@@ -327,11 +277,6 @@ func (mg *LogAnalyticsQueryPack) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this LogAnalyticsQueryPack.
-func (mg *LogAnalyticsQueryPack) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this LogAnalyticsQueryPack.
 func (mg *LogAnalyticsQueryPack) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -355,11 +300,6 @@ func (mg *LogAnalyticsQueryPack) SetManagementPolicies(r xpv1.ManagementPolicies
 // SetProviderConfigReference of this LogAnalyticsQueryPack.
 func (mg *LogAnalyticsQueryPack) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this LogAnalyticsQueryPack.
-func (mg *LogAnalyticsQueryPack) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this LogAnalyticsQueryPack.
@@ -387,11 +327,6 @@ func (mg *LogAnalyticsQueryPackQuery) GetProviderConfigReference() *xpv1.Referen
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this LogAnalyticsQueryPackQuery.
-func (mg *LogAnalyticsQueryPackQuery) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this LogAnalyticsQueryPackQuery.
 func (mg *LogAnalyticsQueryPackQuery) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -415,11 +350,6 @@ func (mg *LogAnalyticsQueryPackQuery) SetManagementPolicies(r xpv1.ManagementPol
 // SetProviderConfigReference of this LogAnalyticsQueryPackQuery.
 func (mg *LogAnalyticsQueryPackQuery) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this LogAnalyticsQueryPackQuery.
-func (mg *LogAnalyticsQueryPackQuery) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this LogAnalyticsQueryPackQuery.
@@ -447,11 +377,6 @@ func (mg *LogAnalyticsSavedSearch) GetProviderConfigReference() *xpv1.Reference 
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this LogAnalyticsSavedSearch.
-func (mg *LogAnalyticsSavedSearch) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this LogAnalyticsSavedSearch.
 func (mg *LogAnalyticsSavedSearch) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -475,11 +400,6 @@ func (mg *LogAnalyticsSavedSearch) SetManagementPolicies(r xpv1.ManagementPolici
 // SetProviderConfigReference of this LogAnalyticsSavedSearch.
 func (mg *LogAnalyticsSavedSearch) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this LogAnalyticsSavedSearch.
-func (mg *LogAnalyticsSavedSearch) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this LogAnalyticsSavedSearch.
@@ -507,11 +427,6 @@ func (mg *Workspace) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this Workspace.
-func (mg *Workspace) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this Workspace.
 func (mg *Workspace) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -535,11 +450,6 @@ func (mg *Workspace) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Workspace.
 func (mg *Workspace) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this Workspace.
-func (mg *Workspace) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this Workspace.

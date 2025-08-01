@@ -46,3 +46,27 @@ func Setup_recoveryservices(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_recoveryservices creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_recoveryservices(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		backupcontainerstorageaccount.SetupGated,
+		backuppolicyfileshare.SetupGated,
+		backuppolicyvm.SetupGated,
+		backuppolicyvmworkload.SetupGated,
+		backupprotectedfileshare.SetupGated,
+		backupprotectedvm.SetupGated,
+		siterecoveryfabric.SetupGated,
+		siterecoverynetworkmapping.SetupGated,
+		siterecoveryprotectioncontainer.SetupGated,
+		siterecoveryprotectioncontainermapping.SetupGated,
+		siterecoveryreplicationpolicy.SetupGated,
+		vault.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

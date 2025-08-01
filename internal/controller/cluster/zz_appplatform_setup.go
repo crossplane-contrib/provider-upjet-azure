@@ -66,3 +66,37 @@ func Setup_appplatform(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_appplatform creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_appplatform(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		springcloudaccelerator.SetupGated,
+		springcloudactivedeployment.SetupGated,
+		springcloudapiportal.SetupGated,
+		springcloudapiportalcustomdomain.SetupGated,
+		springcloudapp.SetupGated,
+		springcloudappcosmosdbassociation.SetupGated,
+		springcloudappmysqlassociation.SetupGated,
+		springcloudappredisassociation.SetupGated,
+		springcloudbuilddeployment.SetupGated,
+		springcloudbuilder.SetupGated,
+		springcloudbuildpackbinding.SetupGated,
+		springcloudcertificate.SetupGated,
+		springcloudconfigurationservice.SetupGated,
+		springcloudcontainerdeployment.SetupGated,
+		springcloudcustomdomain.SetupGated,
+		springcloudcustomizedaccelerator.SetupGated,
+		springclouddevtoolportal.SetupGated,
+		springcloudgateway.SetupGated,
+		springcloudgatewaycustomdomain.SetupGated,
+		springcloudjavadeployment.SetupGated,
+		springcloudservice.SetupGated,
+		springcloudstorage.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

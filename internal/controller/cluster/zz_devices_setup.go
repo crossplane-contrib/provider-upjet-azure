@@ -50,3 +50,29 @@ func Setup_devices(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupGated_devices creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_devices(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		iothub.SetupGated,
+		iothubcertificate.SetupGated,
+		iothubconsumergroup.SetupGated,
+		iothubdps.SetupGated,
+		iothubdpscertificate.SetupGated,
+		iothubdpssharedaccesspolicy.SetupGated,
+		iothubendpointeventhub.SetupGated,
+		iothubendpointservicebusqueue.SetupGated,
+		iothubendpointservicebustopic.SetupGated,
+		iothubendpointstoragecontainer.SetupGated,
+		iothubenrichment.SetupGated,
+		iothubfallbackroute.SetupGated,
+		iothubroute.SetupGated,
+		iothubsharedaccesspolicy.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}

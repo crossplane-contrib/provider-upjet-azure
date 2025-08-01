@@ -1,0 +1,37 @@
+apiVersion: policyinsights.azure.upbound.io/v1beta1
+kind: SubscriptionPolicyRemediation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: policyinsights/v1beta1/subscriptionpolicyremediation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    policyAssignmentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    subscriptionId: ${data.azurerm_subscription.example.id}
+
+---
+
+apiVersion: authorization.azure.upbound.io/v1beta2
+kind: SubscriptionPolicyAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: policyinsights/v1beta1/subscriptionpolicyremediation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    parameters: |-
+      ${jsonencode({
+          "listOfAllowedLocations" = {
+            "value" = ["West Europe", "East US"]
+          }
+        })}
+    policyDefinitionIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_policy_definition
+    subscriptionId: ${data.azurerm_subscription.example.id}

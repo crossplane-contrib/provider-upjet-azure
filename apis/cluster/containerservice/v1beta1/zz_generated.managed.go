@@ -27,11 +27,6 @@ func (mg *KubernetesCluster) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this KubernetesCluster.
-func (mg *KubernetesCluster) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this KubernetesCluster.
 func (mg *KubernetesCluster) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -55,11 +50,6 @@ func (mg *KubernetesCluster) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this KubernetesCluster.
 func (mg *KubernetesCluster) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this KubernetesCluster.
-func (mg *KubernetesCluster) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this KubernetesCluster.
@@ -87,11 +77,6 @@ func (mg *KubernetesClusterExtension) GetProviderConfigReference() *xpv1.Referen
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this KubernetesClusterExtension.
-func (mg *KubernetesClusterExtension) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this KubernetesClusterExtension.
 func (mg *KubernetesClusterExtension) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -115,11 +100,6 @@ func (mg *KubernetesClusterExtension) SetManagementPolicies(r xpv1.ManagementPol
 // SetProviderConfigReference of this KubernetesClusterExtension.
 func (mg *KubernetesClusterExtension) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this KubernetesClusterExtension.
-func (mg *KubernetesClusterExtension) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this KubernetesClusterExtension.
@@ -147,11 +127,6 @@ func (mg *KubernetesClusterNodePool) GetProviderConfigReference() *xpv1.Referenc
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this KubernetesClusterNodePool.
-func (mg *KubernetesClusterNodePool) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this KubernetesClusterNodePool.
 func (mg *KubernetesClusterNodePool) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -175,11 +150,6 @@ func (mg *KubernetesClusterNodePool) SetManagementPolicies(r xpv1.ManagementPoli
 // SetProviderConfigReference of this KubernetesClusterNodePool.
 func (mg *KubernetesClusterNodePool) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this KubernetesClusterNodePool.
-func (mg *KubernetesClusterNodePool) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this KubernetesClusterNodePool.
@@ -207,11 +177,6 @@ func (mg *KubernetesFleetManager) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this KubernetesFleetManager.
-func (mg *KubernetesFleetManager) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this KubernetesFleetManager.
 func (mg *KubernetesFleetManager) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -235,11 +200,6 @@ func (mg *KubernetesFleetManager) SetManagementPolicies(r xpv1.ManagementPolicie
 // SetProviderConfigReference of this KubernetesFleetManager.
 func (mg *KubernetesFleetManager) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this KubernetesFleetManager.
-func (mg *KubernetesFleetManager) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this KubernetesFleetManager.

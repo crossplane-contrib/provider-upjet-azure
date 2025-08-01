@@ -1,0 +1,62 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: DNSCAARecord
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/dnscaarecord
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    record:
+    - flags: 0
+      tag: issue
+      value: example.com
+    - flags: 0
+      tag: issue
+      value: example.net
+    - flags: 0
+      tag: issuewild
+      value: ;
+    - flags: 0
+      tag: iodef
+      value: mailto:terraform@nonexisting.tld
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tags:
+      Environment: Production
+    ttl: 300
+    zoneNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: DNSZone
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/dnscaarecord
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/dnscaarecord
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

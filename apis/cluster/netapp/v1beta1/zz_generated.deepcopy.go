@@ -503,7 +503,7 @@ func (in *ActiveDirectoryParameters) DeepCopyInto(out *ActiveDirectoryParameters
 		*out = new(string)
 		**out = **in
 	}
-	out.PasswordSecretRef = in.PasswordSecretRef
+	in.PasswordSecretRef.DeepCopyInto(&out.PasswordSecretRef)
 	if in.SMBServerName != nil {
 		in, out := &in.SMBServerName, &out.SMBServerName
 		*out = new(string)

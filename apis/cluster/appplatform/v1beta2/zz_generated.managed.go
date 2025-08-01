@@ -27,11 +27,6 @@ func (mg *SpringCloudAPIPortal) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this SpringCloudAPIPortal.
-func (mg *SpringCloudAPIPortal) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this SpringCloudAPIPortal.
 func (mg *SpringCloudAPIPortal) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -55,11 +50,6 @@ func (mg *SpringCloudAPIPortal) SetManagementPolicies(r xpv1.ManagementPolicies)
 // SetProviderConfigReference of this SpringCloudAPIPortal.
 func (mg *SpringCloudAPIPortal) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this SpringCloudAPIPortal.
-func (mg *SpringCloudAPIPortal) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this SpringCloudAPIPortal.
@@ -87,11 +77,6 @@ func (mg *SpringCloudApp) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this SpringCloudApp.
-func (mg *SpringCloudApp) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this SpringCloudApp.
 func (mg *SpringCloudApp) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -115,11 +100,6 @@ func (mg *SpringCloudApp) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this SpringCloudApp.
 func (mg *SpringCloudApp) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this SpringCloudApp.
-func (mg *SpringCloudApp) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this SpringCloudApp.
@@ -147,11 +127,6 @@ func (mg *SpringCloudBuildDeployment) GetProviderConfigReference() *xpv1.Referen
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this SpringCloudBuildDeployment.
-func (mg *SpringCloudBuildDeployment) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this SpringCloudBuildDeployment.
 func (mg *SpringCloudBuildDeployment) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -175,11 +150,6 @@ func (mg *SpringCloudBuildDeployment) SetManagementPolicies(r xpv1.ManagementPol
 // SetProviderConfigReference of this SpringCloudBuildDeployment.
 func (mg *SpringCloudBuildDeployment) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this SpringCloudBuildDeployment.
-func (mg *SpringCloudBuildDeployment) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this SpringCloudBuildDeployment.
@@ -207,11 +177,6 @@ func (mg *SpringCloudBuildPackBinding) GetProviderConfigReference() *xpv1.Refere
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this SpringCloudBuildPackBinding.
-func (mg *SpringCloudBuildPackBinding) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this SpringCloudBuildPackBinding.
 func (mg *SpringCloudBuildPackBinding) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -235,11 +200,6 @@ func (mg *SpringCloudBuildPackBinding) SetManagementPolicies(r xpv1.ManagementPo
 // SetProviderConfigReference of this SpringCloudBuildPackBinding.
 func (mg *SpringCloudBuildPackBinding) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this SpringCloudBuildPackBinding.
-func (mg *SpringCloudBuildPackBinding) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this SpringCloudBuildPackBinding.
@@ -267,11 +227,6 @@ func (mg *SpringCloudBuilder) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this SpringCloudBuilder.
-func (mg *SpringCloudBuilder) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this SpringCloudBuilder.
 func (mg *SpringCloudBuilder) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -295,11 +250,6 @@ func (mg *SpringCloudBuilder) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this SpringCloudBuilder.
 func (mg *SpringCloudBuilder) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this SpringCloudBuilder.
-func (mg *SpringCloudBuilder) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this SpringCloudBuilder.
@@ -327,11 +277,6 @@ func (mg *SpringCloudContainerDeployment) GetProviderConfigReference() *xpv1.Ref
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this SpringCloudContainerDeployment.
-func (mg *SpringCloudContainerDeployment) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this SpringCloudContainerDeployment.
 func (mg *SpringCloudContainerDeployment) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -355,11 +300,6 @@ func (mg *SpringCloudContainerDeployment) SetManagementPolicies(r xpv1.Managemen
 // SetProviderConfigReference of this SpringCloudContainerDeployment.
 func (mg *SpringCloudContainerDeployment) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this SpringCloudContainerDeployment.
-func (mg *SpringCloudContainerDeployment) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this SpringCloudContainerDeployment.
@@ -387,11 +327,6 @@ func (mg *SpringCloudCustomizedAccelerator) GetProviderConfigReference() *xpv1.R
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this SpringCloudCustomizedAccelerator.
-func (mg *SpringCloudCustomizedAccelerator) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this SpringCloudCustomizedAccelerator.
 func (mg *SpringCloudCustomizedAccelerator) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -415,11 +350,6 @@ func (mg *SpringCloudCustomizedAccelerator) SetManagementPolicies(r xpv1.Managem
 // SetProviderConfigReference of this SpringCloudCustomizedAccelerator.
 func (mg *SpringCloudCustomizedAccelerator) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this SpringCloudCustomizedAccelerator.
-func (mg *SpringCloudCustomizedAccelerator) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this SpringCloudCustomizedAccelerator.
@@ -447,11 +377,6 @@ func (mg *SpringCloudDevToolPortal) GetProviderConfigReference() *xpv1.Reference
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this SpringCloudDevToolPortal.
-func (mg *SpringCloudDevToolPortal) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this SpringCloudDevToolPortal.
 func (mg *SpringCloudDevToolPortal) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -475,11 +400,6 @@ func (mg *SpringCloudDevToolPortal) SetManagementPolicies(r xpv1.ManagementPolic
 // SetProviderConfigReference of this SpringCloudDevToolPortal.
 func (mg *SpringCloudDevToolPortal) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this SpringCloudDevToolPortal.
-func (mg *SpringCloudDevToolPortal) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this SpringCloudDevToolPortal.
@@ -507,11 +427,6 @@ func (mg *SpringCloudGateway) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this SpringCloudGateway.
-func (mg *SpringCloudGateway) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this SpringCloudGateway.
 func (mg *SpringCloudGateway) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -535,11 +450,6 @@ func (mg *SpringCloudGateway) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this SpringCloudGateway.
 func (mg *SpringCloudGateway) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this SpringCloudGateway.
-func (mg *SpringCloudGateway) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this SpringCloudGateway.
@@ -567,11 +477,6 @@ func (mg *SpringCloudJavaDeployment) GetProviderConfigReference() *xpv1.Referenc
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this SpringCloudJavaDeployment.
-func (mg *SpringCloudJavaDeployment) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this SpringCloudJavaDeployment.
 func (mg *SpringCloudJavaDeployment) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -595,11 +500,6 @@ func (mg *SpringCloudJavaDeployment) SetManagementPolicies(r xpv1.ManagementPoli
 // SetProviderConfigReference of this SpringCloudJavaDeployment.
 func (mg *SpringCloudJavaDeployment) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this SpringCloudJavaDeployment.
-func (mg *SpringCloudJavaDeployment) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this SpringCloudJavaDeployment.
@@ -627,11 +527,6 @@ func (mg *SpringCloudService) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this SpringCloudService.
-func (mg *SpringCloudService) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this SpringCloudService.
 func (mg *SpringCloudService) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -655,11 +550,6 @@ func (mg *SpringCloudService) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this SpringCloudService.
 func (mg *SpringCloudService) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this SpringCloudService.
-func (mg *SpringCloudService) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this SpringCloudService.
