@@ -18,8 +18,7 @@ import (
 	"github.com/crossplane/upjet/v2/pkg/pipeline"
 	"github.com/hashicorp/terraform-provider-azurerm/xpprovider"
 
-	configCluster "github.com/upbound/provider-azure/config/cluster"
-	configNamespaced "github.com/upbound/provider-azure/config/namespaced"
+	"github.com/upbound/provider-azure/config"
 )
 
 func main() {
@@ -39,10 +38,10 @@ func main() {
 	sdkProvider, err := xpprovider.GetProviderSchema(context.Background())
 	kingpin.FatalIfError(err, "Cannot get the Terraform provider")
 
-	pc, err := configCluster.GetProvider(context.Background(), sdkProvider, true)
+	pc, err := config.GetProvider(context.Background(), sdkProvider, true)
 	kingpin.FatalIfError(err, "Cannot initialize the cluster-scoped provider configuration")
 
-	pns, err := configNamespaced.GetProvider(context.Background(), sdkProvider, true)
+	pns, err := config.GetProviderNamespaced(context.Background(), sdkProvider, true)
 	kingpin.FatalIfError(err, "Cannot initialize the namespace-scoped provider configuration")
 
 	dumpGeneratedResourceList(pc, generatedResourceList)
