@@ -30,6 +30,7 @@ def load_crd_type(t):
 
 exception_set = {
     'ProviderConfigUsage.azure.upbound.io/v1beta1',
+    'ProviderConfigUsage.azure.m.upbound.io/v1beta1',
 }
 
 # Example usage: check-examples.py <CRD dir> <example manifests dir>
