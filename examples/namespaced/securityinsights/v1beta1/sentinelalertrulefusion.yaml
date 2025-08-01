@@ -1,0 +1,76 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: securityinsights.azure.m.upbound.io/v1beta1
+kind: SentinelAlertRuleFusion
+metadata:
+  annotations:
+    meta.upbound.io/example-id: securityinsights/v1beta1/sentinelalertrulefusion
+  labels:
+    testing.upbound.io/example-name: examplesentertrulefusion
+  name: examplesentertrulefusion
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: examplesentertrulefusion
+    alertRuleTemplateGuid: f71aba3d-28fb-450b-b192-4e76a83015c8
+    logAnalyticsWorkspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sentertrulefusion-ls
+---
+apiVersion: operationsmanagement.azure.m.upbound.io/v1beta1
+kind: LogAnalyticsSolution
+metadata:
+  annotations:
+    meta.upbound.io/example-id: securityinsights/v1beta1/sentinelalertrulefusion
+  labels:
+    testing.upbound.io/example-name: sentertrulefusion-ls
+  name: sentertrulefusion-ls
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    plan:
+      - product: OMSGallery/SecurityInsights
+        publisher: Microsoft
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sentertrulefusion-rg
+    solutionName: SecurityInsights
+    workspaceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sentertrulefusion-ws
+    workspaceResourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sentertrulefusion-ws
+---
+apiVersion: operationalinsights.azure.m.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: securityinsights/v1beta1/sentinelalertrulefusion
+  labels:
+    testing.upbound.io/example-name: sentertrulefusion-ws
+  name: sentertrulefusion-ws
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sentertrulefusion-rg
+    sku: PerGB2018
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: securityinsights/v1beta1/sentinelalertrulefusion
+  labels:
+    testing.upbound.io/example-name: sentertrulefusion-rg
+  name: sentertrulefusion-rg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

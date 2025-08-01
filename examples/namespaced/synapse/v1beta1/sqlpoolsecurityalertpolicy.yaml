@@ -1,0 +1,112 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: synapse.azure.m.upbound.io/v1beta1
+kind: SQLPoolSecurityAlertPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/sqlpoolsecurityalertpolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: sqlpoolsecurityalertpolicy
+  namespace: upbound-system
+spec:
+  forProvider:
+    disabledAlerts:
+      - Sql_Injection
+      - Data_Exfiltration
+    policyState: Enabled
+    retentionDays: 0
+    sqlPoolIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sqlpool-label
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/sqlpoolsecurityalertpolicy
+  labels:
+    testing.upbound.io/example-name: sqlpool-security-alert-rg-label
+  name: sqlpool-security-alert-rg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West US 3
+---
+apiVersion: storage.azure.m.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/sqlpoolsecurityalertpolicy
+  labels:
+    testing.upbound.io/example-name: account-label
+  name: accountnameabcdefg
+  namespace: upbound-system
+spec:
+  forProvider:
+    accountKind: StorageV2
+    accountReplicationType: LRS
+    accountTier: Standard
+    isHnsEnabled: true
+    location: West US 3
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sqlpool-security-alert-rg-label
+---
+apiVersion: storage.azure.m.upbound.io/v1beta1
+kind: DataLakeGen2FileSystem
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/sqlpoolsecurityalertpolicy
+  labels:
+    testing.upbound.io/example-name: file-system-label
+  name: file-system
+  namespace: upbound-system
+spec:
+  forProvider:
+    storageAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: account-label
+---
+apiVersion: synapse.azure.m.upbound.io/v1beta1
+kind: SQLPool
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/sqlpoolsecurityalertpolicy
+  labels:
+    testing.upbound.io/example-name: sqlpool-label
+  name: sqlpool
+  namespace: upbound-system
+spec:
+  forProvider:
+    createMode: Default
+    skuName: DW100c
+    synapseWorkspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sqlpool-securityalert-ws-label
+---
+apiVersion: synapse.azure.m.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/sqlpoolsecurityalertpolicy
+  labels:
+    testing.upbound.io/example-name: sqlpool-securityalert-ws-label
+  name: sqlpool-securityalert-ws
+  namespace: upbound-system
+spec:
+  forProvider:
+    identity:
+      - type: SystemAssigned
+    location: West US 3
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sqlpool-security-alert-rg-label
+    sqlAdministratorLogin: sqladminuser
+    storageDataLakeGen2FilesystemIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: file-system-label
+    tags:
+      Env: production

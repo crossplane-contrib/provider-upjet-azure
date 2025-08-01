@@ -1,0 +1,91 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: apimanagement.azure.m.upbound.io/v1beta1
+kind: ProductTag
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "14400"
+    meta.upbound.io/example-id: apimanagement/v1beta1/producttag
+  labels:
+    testing.upbound.io/example-name: example
+  name: ptexample
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: ptexample
+    apiManagementName: ptexample
+    apiManagementProductIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: apimanagement.azure.m.upbound.io/v1beta1
+kind: Management
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/producttag
+  labels:
+    testing.upbound.io/example-name: example
+  name: ptexample
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    publisherEmail: company@terraform.io
+    publisherName: My Company
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Developer_1
+---
+apiVersion: apimanagement.azure.m.upbound.io/v1beta1
+kind: Product
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/producttag
+  labels:
+    testing.upbound.io/example-name: example
+  name: ptexample
+  namespace: upbound-system
+spec:
+  forProvider:
+    apiManagementNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    displayName: Test Product
+    published: true
+---
+apiVersion: apimanagement.azure.m.upbound.io/v1beta1
+kind: Tag
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/producttag
+  labels:
+    testing.upbound.io/example-name: example
+  name: ptexample
+  namespace: upbound-system
+spec:
+  forProvider:
+    apiManagementIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/producttag
+  labels:
+    testing.upbound.io/example-name: example
+  name: ptexample
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

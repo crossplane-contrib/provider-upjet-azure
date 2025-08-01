@@ -1,0 +1,104 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: sql.azure.m.upbound.io/v1beta1
+kind: MSSQLVirtualNetworkRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlvirtualnetworkrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    serverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-vn-rule
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: sql.azure.m.upbound.io/v1beta1
+kind: MSSQLServer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlvirtualnetworkrule
+  labels:
+    testing.upbound.io/example-name: example-vn-rule
+  name: example-vn-rule
+  namespace: upbound-system
+spec:
+  forProvider:
+    administratorLogin: 4dm1n157r470r
+    administratorLoginPasswordSecretRef:
+      key: password
+      name: example-secret
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-sql-vn-rule
+    version: "12.0"
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlvirtualnetworkrule
+  labels:
+    testing.upbound.io/example-name: example-sql-vn-rule
+  name: example-sql-vn-rule-${Rand.RFC1123Subdomain}
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+---
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlvirtualnetworkrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    addressPrefixes:
+      - 10.7.29.0/29
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-sql-vn-rule
+    serviceEndpoints:
+      - Microsoft.Sql
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlvirtualnetworkrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    addressSpace:
+      - 10.7.29.0/29
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-sql-vn-rule
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+type: Opaque
+data:
+  password: dGVzdFBhc3N3b3JkITEyMw== # testPassword!123

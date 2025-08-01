@@ -1,0 +1,34 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: web.azure.m.upbound.io/v1beta1
+kind: ServicePlan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/serviceplan
+  labels:
+    testing.upbound.io/example-name: example
+  name: exampleserviceplan
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    osType: Linux
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: B1
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/serviceplan
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-rg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

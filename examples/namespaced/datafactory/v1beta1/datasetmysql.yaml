@@ -1,0 +1,64 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: datafactory.azure.m.upbound.io/v1beta1
+kind: DataSetMySQL
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/datasetmysql
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: datasetmysql-factory
+    linkedServiceName: anonymous
+---
+apiVersion: datafactory.azure.m.upbound.io/v1beta1
+kind: Factory
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/datasetmysql
+  labels:
+    testing.upbound.io/example-name: datasetmysql-factory
+  name: datasetmysql-factory
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: datasetmysql-rg
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/datasetmysql
+  labels:
+    testing.upbound.io/example-name: datasetmysql-rg
+  name: datasetmysql-rg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+---
+apiVersion: datafactory.azure.m.upbound.io/v1beta1
+kind: LinkedServiceOdbc
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/datasetmysql
+  labels:
+    testing.upbound.io/example-name: anonymous
+  name: anonymous
+  namespace: upbound-system
+spec:
+  forProvider:
+    connectionString: Driver={SQL Server};Server=test;Database=test;Uid=test;Pwd=test;
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: datasetmysql-factory

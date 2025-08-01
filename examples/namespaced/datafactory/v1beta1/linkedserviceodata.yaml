@@ -1,0 +1,48 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: datafactory.azure.m.upbound.io/v1beta1
+kind: LinkedServiceOData
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta2/linkedserviceodata
+  labels:
+    testing.upbound.io/example-name: linkedserviceodata-xmpl
+  name: linkedserviceodata-xmpl
+  namespace: upbound-system
+spec:
+  forProvider:
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: linkedserviceodata-fct
+    url: https://services.odata.org/v4/TripPinServiceRW/People
+---
+apiVersion: datafactory.azure.m.upbound.io/v1beta1
+kind: Factory
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta2/linkedserviceodata
+  labels:
+    testing.upbound.io/example-name: linkedserviceodata-fct
+  name: linkedserviceodata-fct
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: linkedserviceodata-rg
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedserviceodata
+  labels:
+    testing.upbound.io/example-name: linkedserviceodata-rg
+  name: linkedserviceodata-rg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

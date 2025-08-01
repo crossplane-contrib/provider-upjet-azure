@@ -1,0 +1,65 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: devices.azure.m.upbound.io/v1beta1
+kind: IOTHubDPSSharedAccessPolicy
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "https://github.com/upbound/official-providers/issues/789"
+    meta.upbound.io/example-id: devices/v1beta1/iothubdpssharedaccesspolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    enrollmentRead: true
+    iothubDpsNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-iothub
+---
+apiVersion: devices.azure.m.upbound.io/v1beta1
+kind: IOTHubDPSCertificate
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "https://github.com/upbound/official-providers/issues/789"
+    meta.upbound.io/example-id: devices/v1beta1/iothubdpscertificate
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    certificateContentSecretRef:
+      key: example-key
+      name: example-secret
+    iotDpsNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-iothub
+---
+apiVersion: devices.azure.m.upbound.io/v1beta1
+kind: IOTHubDPS
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "https://github.com/upbound/official-providers/issues/789"
+    meta.upbound.io/example-id: devices/v1beta1/iothubdpscertificate
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-${Rand.RFC1123Subdomain}
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-iothub
+    sku:
+      - capacity: 1
+        name: S1

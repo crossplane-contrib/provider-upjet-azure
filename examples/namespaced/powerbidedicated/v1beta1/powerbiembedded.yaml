@@ -1,0 +1,37 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: powerbidedicated.azure.m.upbound.io/v1beta1
+kind: PowerBIEmbedded
+metadata:
+  annotations:
+    meta.upbound.io/example-id: powerbidedicated/v1beta1/powerbiembedded
+    upjet.upbound.io/manual-intervention: "This resource needs valid administrator email"
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    administrators:
+      - "azsdktestadmin@example.com"
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: A1
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: powerbidedicated/v1beta1/powerbiembedded
+    upjet.upbound.io/manual-intervention: "This resource needs valid administrator email"
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

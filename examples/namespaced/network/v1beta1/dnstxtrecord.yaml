@@ -1,0 +1,21 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: DNSTXTRecord
+metadata:
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    record:
+      - value: google-site-authenticator
+      - value: more site information here
+    resourceGroupNameRef:
+      name: example
+    tags:
+      Environment: Production
+    ttl: 300
+    zoneNameRef:
+      name: example

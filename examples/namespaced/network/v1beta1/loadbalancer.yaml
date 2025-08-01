@@ -1,0 +1,48 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: LoadBalancer
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    frontendIpConfiguration:
+      - name: PublicIPAddress
+        publicIpAddressIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-network-loadbalancer
+---
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: PublicIP
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    allocationMethod: Static
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-network-loadbalancer
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example-network-loadbalancer
+  name: example-network-loadbalancer-${Rand.RFC1123Subdomain}
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

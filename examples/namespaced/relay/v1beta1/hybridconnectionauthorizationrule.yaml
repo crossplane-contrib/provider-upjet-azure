@@ -1,0 +1,78 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: relay.azure.m.upbound.io/v1beta1
+kind: HybridConnectionAuthorizationRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: relay/v1beta1/hybridconnectionauthorizationrule
+  labels:
+    testing.upbound.io/example-name: examplehybridconnauthrule
+  name: examplehybridconnauthrule
+  namespace: upbound-system
+spec:
+  forProvider:
+    hybridConnectionNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: hybridconnauthrulehc
+    listen: true
+    manage: false
+    namespaceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: hybridconnauthrule-rn
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: hybridconnauthrule-rg
+    send: true
+---
+apiVersion: relay.azure.m.upbound.io/v1beta1
+kind: HybridConnection
+metadata:
+  annotations:
+    meta.upbound.io/example-id: relay/v1beta1/hybridconnectionauthorizationrule
+  labels:
+    testing.upbound.io/example-name: hybridconnauthrulehc
+  name: hybridconnauthrulehc
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: hybridconnauthrulehc
+    relayNamespaceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: hybridconnauthrule-rn
+    requiresClientAuthorization: false
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: hybridconnauthrule-rg
+    userMetadata: testmetadata
+---
+apiVersion: relay.azure.m.upbound.io/v1beta1
+kind: EventRelayNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: relay/v1beta1/hybridconnectionauthorizationrule
+  labels:
+    testing.upbound.io/example-name: hybridconnauthrule-rn
+  name: hybridconnauthrule-rn
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: hybridconnauthrule-rg
+    skuName: Standard
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: relay/v1beta1/hybridconnectionauthorizationrule
+  labels:
+    testing.upbound.io/example-name: hybridconnauthrule-rg
+  name: hybridconnauthrule-rg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

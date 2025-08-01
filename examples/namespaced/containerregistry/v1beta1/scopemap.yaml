@@ -1,0 +1,24 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: containerregistry.azure.m.upbound.io/v1beta1
+kind: ScopeMap
+metadata:
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    actions:
+      - repositories/repo1/content/read
+      - repositories/repo1/content/delete
+      - repositories/repo1/content/write
+      - repositories/repo1/metadata/read
+      - repositories/repo1/metadata/write
+      - gateway/examplecr/config/read
+      - gateway/examplecr/config/write
+      - gateway/examplecr/message/read
+      - gateway/examplecr/message/write
+    containerRegistryName: upbound
+    resourceGroupNameRef:
+      name: example-containerreg

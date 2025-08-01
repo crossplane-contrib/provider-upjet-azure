@@ -1,0 +1,44 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+# Note that this resource is not _properly_ Uptestable, because Uptest
+# cannot generate a random string that conforms to Azure Storage
+# Account naming criteria:
+# https://learn.microsoft.com/en-us/azure/storage/common/storage-account-overview#storage-account-name
+#
+# Uptest should succeed, as long as the hardcoded `metadata.name`
+# below is available.
+
+apiVersion: storage.azure.m.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: storage/v1beta1/account
+  labels:
+    testing.upbound.io/example-name: example-storage
+  name: examplesabumptest55
+  namespace: upbound-system
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: "West Europe"
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-storage
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: storage/v1beta1/account
+  labels:
+    testing.upbound.io/example-name: example-storage
+  name: example-storage-${Rand.RFC1123Subdomain}
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: "West Europe"
+    tags:
+      provisioner: crossplane

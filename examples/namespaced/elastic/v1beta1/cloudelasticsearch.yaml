@@ -1,0 +1,34 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: elastic.azure.m.upbound.io/v1beta1
+kind: CloudElasticsearch
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elastic/v1beta2/cloudelasticsearch
+  labels:
+    testing.upbound.io/example-name: example
+  name: ceexample
+  namespace: upbound-system
+spec:
+  forProvider:
+    elasticCloudEmailAddress: user@example.com
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: ess-monthly-consumption_Monthly
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elastic/v1beta1/cloudelasticsearch
+  labels:
+    testing.upbound.io/example-name: example
+  name: ceexample
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

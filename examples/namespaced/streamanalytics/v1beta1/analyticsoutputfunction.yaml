@@ -1,0 +1,80 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: streamanalytics.azure.m.upbound.io/v1beta1
+kind: OutputFunction
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta1/outputfunction
+    upjet.upbound.io/manual-intervention: "This resource requires a valid functionapp resource name"
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    apiKeySecretRef:
+      key: example-key
+      name: example-secret2
+    functionApp: upboundfunctionname
+    functionName: examplefunctionname
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    streamAnalyticsJobNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-secret2
+  namespace: upbound-system
+type: Opaque
+stringData:
+  example-key: dXBib3VuZHJvY2tz
+---
+apiVersion: streamanalytics.azure.m.upbound.io/v1beta1
+kind: Job
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta1/outputfunction
+    upjet.upbound.io/manual-intervention: "This resource is dependency of OutputFunction. This resource is skipping because parent resource was skipped."
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-job
+  namespace: upbound-system
+spec:
+  forProvider:
+    compatibilityLevel: "1.2"
+    dataLocale: en-GB
+    eventsLateArrivalMaxDelayInSeconds: 60
+    eventsOutOfOrderMaxDelayInSeconds: 50
+    eventsOutOfOrderPolicy: Adjust
+    location: West Europe
+    outputErrorPolicy: Drop
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    streamingUnits: 3
+    tags:
+      environment: example
+    transformationQuery: |2
+          SELECT *
+          INTO [YourOutputAlias]
+          FROM [YourInputAlias]
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta1/outputfunction
+    upjet.upbound.io/manual-intervention: "This resource is dependency of OutputFunction. This resource is skipping because parent resource was skipped."
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

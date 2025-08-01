@@ -1,0 +1,184 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: dbforpostgresql.azure.m.upbound.io/v1beta1
+kind: ActiveDirectoryAdministrator
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    login: anotheradmin
+    objectId: ${data.azurerm_client_config.current.object_id}
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-dbforpostgresql
+    serverNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+---
+apiVersion: dbforpostgresql.azure.m.upbound.io/v1beta1
+kind: FirewallRule
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    endIpAddress: 40.112.8.12
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-dbforpostgresql
+    serverNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    startIpAddress: 40.112.8.12
+---
+apiVersion: dbforpostgresql.azure.m.upbound.io/v1beta1
+kind: Configuration
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: backslash_quote
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-dbforpostgresql
+    serverNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    value: "on"
+---
+apiVersion: dbforpostgresql.azure.m.upbound.io/v1beta1
+kind: Database
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    charset: UTF8
+    collation: English_United States.1252
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-dbforpostgresql
+    serverNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: dbforpostgresql.azure.m.upbound.io/v1beta1
+kind: VirtualNetworkRule
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    ignoreMissingVnetServiceEndpoint: true
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-dbforpostgresql
+    serverNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: internal
+---
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  labels:
+    testing.upbound.io/example-name: internal
+  name: internal
+  namespace: upbound-system
+spec:
+  forProvider:
+    addressPrefixes:
+      - 10.7.29.0/29
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-dbforpostgresql
+    serviceEndpoints:
+      - Microsoft.Sql
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    addressSpace:
+      - 10.7.29.0/29
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-dbforpostgresql
+---
+apiVersion: dbforpostgresql.azure.m.upbound.io/v1beta1
+kind: Server
+metadata:
+  annotations:
+    crossplane.io/external-name: example-server-${Rand.RFC1123Subdomain}
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-upbound-pg-single-server
+  namespace: upbound-system
+spec:
+  forProvider:
+    administratorLogin: psqladmin
+    administratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-dbforpostgresql
+    skuName: GP_Gen5_2
+    sslEnforcementEnabled: true
+    storageMb: 5120
+    geoRedundantBackupEnabled: false
+    version: "11"
+    identity:
+      - type: SystemAssigned
+    # due to: https://github.com/Azure/azure-rest-api-specs/issues/9571
+    infrastructureEncryptionEnabled: false
+  writeConnectionSecretToRef:
+    name: example-connection-postgresqlserver
+    namespace: upbound-system
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example-dbforpostgresql
+  name: example-dbforpostgresql-${Rand.RFC1123Subdomain}
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+---
+apiVersion: v1
+data:
+  example-key: dXBiMHVuZHIwY2s1ITMxMzM3
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+type: Opaque

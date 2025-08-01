@@ -1,0 +1,22 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: storagecache.azure.m.upbound.io/v1beta1
+kind: HPCCacheNFSTarget
+metadata:
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    cacheName: examplehpccache
+    namespaceJunction:
+      - namespacePath: /nfs/a1
+        nfsExport: /export/a
+        targetPath: "1"
+      - namespacePath: /nfs/b
+        nfsExport: /export/b
+    resourceGroupNameRef:
+      name: example-resources
+    targetHostName: 10.0.2.4
+    usageModel: READ_HEAVY_INFREQ

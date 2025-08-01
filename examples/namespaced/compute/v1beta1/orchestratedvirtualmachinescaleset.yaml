@@ -1,0 +1,19 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: compute.azure.m.upbound.io/v1beta1
+kind: OrchestratedVirtualMachineScaleSet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta2/orchestratedvirtualmachinescaleset
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    platformFaultDomainCount: 1
+    resourceGroupNameRef:
+      name: example-compute
+    zones:
+      - "1"

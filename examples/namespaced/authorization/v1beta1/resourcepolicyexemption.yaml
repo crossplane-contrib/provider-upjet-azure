@@ -1,0 +1,93 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: authorization.azure.m.upbound.io/v1beta1
+kind: ResourcePolicyExemption
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "ResourcePolicyAssignment and ResourcePolicyExemption depends on existing resource id (Virutal Network in this example)"
+    meta.upbound.io/example-id: authorization/v1beta1/resourcepolicyexemption
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    exemptionCategory: Mitigated
+    name: exemption1
+    policyAssignmentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: exampleassignment
+    resourceId: ${azurerm_virtual_network.example.id}
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "ResourcePolicyAssignment and ResourcePolicyExemption depends on existing resource id (Virutal Network in this example)"
+    meta.upbound.io/example-id: authorization/v1beta1/resourcepolicyexemption
+  labels:
+    testing.upbound.io/example-name: examplepolicgyrg
+  name: examplepolicgyrg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+---
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "ResourcePolicyAssignment and ResourcePolicyExemption depends on existing resource id (Virutal Network in this example)"
+    meta.upbound.io/example-id: authorization/v1beta1/resourcepolicyexemption
+  labels:
+    testing.upbound.io/example-name: examplevn
+  name: examplevn
+  namespace: upbound-system
+spec:
+  forProvider:
+    addressSpace:
+      - 10.0.0.0/16
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: examplepolicgyrg
+---
+apiVersion: authorization.azure.m.upbound.io/v1beta1
+kind: ResourcePolicyAssignment
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "ResourcePolicyAssignment and ResourcePolicyExemption depends on existing resource id (Virutal Network in this example)"
+    meta.upbound.io/example-id: authorization/v1beta1/resourcepolicyexemption
+  labels:
+    testing.upbound.io/example-name: exampleassignment
+  name: exampleassignment
+  namespace: upbound-system
+spec:
+  forProvider:
+    identity:
+      - type: SystemAssigned
+    location: westus
+    name: assignment1
+    policyDefinitionIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: examplepolicy
+    resourceId: ${azurerm_virtual_network.example.id}
+---
+apiVersion: authorization.azure.m.upbound.io/v1beta1
+kind: PolicyDefinition
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "ResourcePolicyAssignment and ResourcePolicyExemption depends on existing resource id (Virutal Network in this example)"
+    meta.upbound.io/example-id: authorization/v1beta1/resourcepolicyexemption
+  labels:
+    testing.upbound.io/example-name: examplepolicy
+  name: examplepolicy
+  namespace: upbound-system
+spec:
+  forProvider:
+    displayName: somename
+    mode: All
+    policyRule: "\t{\n    \"if\": {\n      \"not\": {\n        \"field\": \"location\",\n        \"equals\": \"westeurope\"\n      }\n    },\n    \"then\": {\n      \"effect\": \"Deny\"\n    }\n  }\n"
+    policyType: Custom

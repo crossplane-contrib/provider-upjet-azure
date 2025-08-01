@@ -1,0 +1,36 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: deviceupdate.azure.m.upbound.io/v1beta1
+kind: IOTHubDeviceUpdateAccount
+metadata:
+  annotations:
+    meta.upbound.io/example-id: deviceupdate/v1beta2/iothubdeviceupdateaccount
+  labels:
+    testing.upbound.io/example-name: example
+  name: iothuaex
+  namespace: upbound-system
+spec:
+  forProvider:
+    identity:
+      type: SystemAssigned
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tags:
+      key: value
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: deviceupdate/v1beta1/iothubdeviceupdateaccount
+  labels:
+    testing.upbound.io/example-name: example
+  name: iothuaex
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: East US

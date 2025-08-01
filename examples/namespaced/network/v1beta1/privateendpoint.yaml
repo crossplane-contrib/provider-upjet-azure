@@ -1,0 +1,150 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: PrivateEndpoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/privateendpoint
+    upjet.upbound.io/manual-intervention: This resource needs manual patching for the private_service_connection.private_connection_resource_id field.
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    privateServiceConnection:
+      isManualConnection: false
+      name: example-privateserviceconnection
+      privateConnectionResourceId: <resource ID>
+    resourceGroupNameRef:
+      name: loadbalancerrg
+    subnetIdRef:
+      name: service
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/privateendpoint
+    upjet.upbound.io/manual-intervention: The dependent resource PrivateEndpoint needs a manual patching and is thus skipped.
+  name: loadbalancerrg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    tags:
+      provisioner: crossplane
+---
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/privateendpoint
+    upjet.upbound.io/manual-intervention: The dependent resource PrivateEndpoint needs a manual patching and is thus skipped.
+  name: example-vn-for-lb
+  namespace: upbound-system
+spec:
+  forProvider:
+    addressSpace:
+      - 10.0.0.0/16
+    dnsServers:
+      - 10.0.0.4
+      - 10.0.0.5
+    location: West Europe
+    resourceGroupNameRef:
+      name: loadbalancerrg
+---
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/privateendpoint
+    upjet.upbound.io/manual-intervention: The dependent resource PrivateEndpoint needs a manual patching and is thus skipped.
+  name: service
+  namespace: upbound-system
+spec:
+  forProvider:
+    addressPrefixes:
+      - 10.0.1.0/24
+    enforcePrivateLinkServiceNetworkPolicies: true
+    resourceGroupNameRef:
+      name: loadbalancerrg
+    virtualNetworkNameRef:
+      name: example-vn-for-lb
+---
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/privateendpoint
+    upjet.upbound.io/manual-intervention: The dependent resource PrivateEndpoint needs a manual patching and is thus skipped.
+  name: endpoint
+  namespace: upbound-system
+spec:
+  forProvider:
+    addressPrefixes:
+      - 10.0.2.0/24
+    enforcePrivateLinkEndpointNetworkPolicies: true
+    resourceGroupNameRef:
+      name: loadbalancerrg
+    virtualNetworkNameRef:
+      name: example-vn-for-lb
+---
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: PublicIP
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/privateendpoint
+    upjet.upbound.io/manual-intervention: The dependent resource PrivateEndpoint needs a manual patching and is thus skipped.
+  name: publicipforlb
+  namespace: upbound-system
+spec:
+  forProvider:
+    allocationMethod: Static
+    location: West Europe
+    resourceGroupNameRef:
+      name: loadbalancerrg
+    sku: Standard
+    tags:
+      environment: Production
+---
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: LoadBalancer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/privateendpoint
+    upjet.upbound.io/manual-intervention: The dependent resource PrivateEndpoint needs a manual patching and is thus skipped.
+  name: testloadbalancer
+  namespace: upbound-system
+spec:
+  forProvider:
+    frontendIpConfiguration:
+      - name: publicipaddress
+        publicIpAddressIdRef:
+          name: publicipforlb
+    location: West Europe
+    resourceGroupNameRef:
+      name: loadbalancerrg
+    sku: Standard
+---
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: PrivateLinkService
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/privateendpoint
+    upjet.upbound.io/manual-intervention: The dependent resource PrivateEndpoint needs a manual patching and is thus skipped.
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    loadBalancerFrontendIpConfigurationIds:
+      - /subscriptions/038f2b7c-3265-43b8-8624-c9ad5da610a8/resourceGroups/loadbalancerrg/providers/Microsoft.Network/loadBalancers/testloadbalancer/frontendIPConfigurations/publicipaddress
+    location: West Europe
+    natIpConfiguration:
+      - name: primary
+        primary: true
+        subnetIdRef:
+          name: service
+    resourceGroupNameRef:
+      name: loadbalancerrg

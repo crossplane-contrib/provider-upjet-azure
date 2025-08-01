@@ -1,0 +1,38 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: signalrservice.azure.m.upbound.io/v1beta1
+kind: WebPubsub
+metadata:
+  annotations:
+    meta.upbound.io/example-id: signalrservice/v1beta2/webpubsub
+  labels:
+    testing.upbound.io/example-name: examplewebpubsub
+  name: examplewebpubsub
+  namespace: upbound-system
+spec:
+  forProvider:
+    capacity: 1
+    identity:
+      type: SystemAssigned
+    location: West Europe
+    name: examplewebpubsub
+    publicNetworkAccessEnabled: false
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: webpubsub-rg
+    sku: Standard_S1
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: signalrservice/v1beta1/webpubsub
+  labels:
+    testing.upbound.io/example-name: webpubsub-rg
+  name: webpubsub-rg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

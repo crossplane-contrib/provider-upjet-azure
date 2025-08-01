@@ -1,0 +1,84 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: insights.azure.m.upbound.io/v1beta1
+kind: MonitorActivityLogAlert
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitoractivitylogalert
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+  namespace: upbound-system
+spec:
+  forProvider:
+    action:
+      - actionGroupIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: main
+        webhookProperties:
+          from: terraform
+    criteria:
+      category: Recommendation
+      operationName: Microsoft.Storage/storageAccounts/write
+      resourceIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: tomonitor0001
+    description: This alert will monitor a specific storage account updates.
+    name: example-activitylogalert
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rg-monitoractivitylogalert
+    scopesRefs:
+      - name: rg-monitoractivitylogalert
+---
+apiVersion: insights.azure.m.upbound.io/v1beta1
+kind: MonitorActionGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitoractivitylogalert
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+  namespace: upbound-system
+spec:
+  forProvider:
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rg-monitoractivitylogalert
+    shortName: p0action
+    webhookReceiver:
+      - name: callmyapi
+        serviceUri: http://example.com/alert
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta1/monitoractivitylogalert
+  labels:
+    testing.upbound.io/example-name: rg-monitoractivitylogalert
+  name: rg-monitoractivitylogalert
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+---
+apiVersion: storage.azure.m.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitoractivitylogalert
+  labels:
+    testing.upbound.io/example-name: tomonitor0001
+  name: tomonitor0001
+  namespace: upbound-system
+spec:
+  forProvider:
+    accountReplicationType: GRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rg-monitoractivitylogalert

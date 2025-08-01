@@ -1,0 +1,52 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: compute.azure.m.upbound.io/v1beta1
+kind: ManagedDiskSASToken
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/manageddisksastoken
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: upbound-system
+spec:
+  forProvider:
+    accessLevel: Read
+    durationInSeconds: 300
+    managedDiskIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+---
+apiVersion: compute.azure.m.upbound.io/v1beta1
+kind: ManagedDisk
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/manageddisksastoken
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: upbound-system
+spec:
+  forProvider:
+    createOption: Empty
+    diskSizeGb: 1
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: manageddisk
+    storageAccountType: Standard_LRS
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/manageddisksastoken
+  labels:
+    testing.upbound.io/example-name: manageddisk
+  name: manageddisk
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

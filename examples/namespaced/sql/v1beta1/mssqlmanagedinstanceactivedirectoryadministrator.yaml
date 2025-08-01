@@ -1,0 +1,21 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: sql.azure.m.upbound.io/v1beta1
+kind: MSSQLManagedInstanceActiveDirectoryAdministrator
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Creation of MSSQLManagedInstance takes 4 hours, see https://docs.microsoft.com/en-us/azure/azure-sql/managed-instance/management-operations-overview?view=azuresql#duration"
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    loginUsername: msadmin
+    managedInstanceIdRef:
+      name: example-sql
+    # For own user Ids below can be conveniently retrieved by the following commands
+    # for objectId: $ az ad signed-in-user show| grep id\":
+    # for tenantId: $ az account tenant list | grep tenantId
+    objectId: <object-id>
+    tenantId: <tenant-id>

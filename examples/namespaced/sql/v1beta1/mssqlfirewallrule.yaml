@@ -1,0 +1,63 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: sql.azure.m.upbound.io/v1beta1
+kind: MSSQLFirewallRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlfirewallrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    endIpAddress: 10.0.17.62
+    serverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: mssqlserv
+    startIpAddress: 10.0.17.62
+---
+apiVersion: sql.azure.m.upbound.io/v1beta1
+kind: MSSQLServer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlfirewallrule
+  labels:
+    testing.upbound.io/example-name: mssqlserv
+  name: mssqlserv
+  namespace: upbound-system
+spec:
+  forProvider:
+    administratorLogin: 4dm1n157r470r
+    administratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: mssqlrg
+    version: "12.0"
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlfirewallrule
+  labels:
+    testing.upbound.io/example-name: mssqlrg
+  name: mssqlrg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+type: Opaque
+data:
+  example-key: dGVzdFBhc3N3b3JkITEyMw== # testPassword!123

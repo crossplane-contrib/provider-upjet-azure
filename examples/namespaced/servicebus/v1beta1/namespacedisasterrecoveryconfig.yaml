@@ -1,0 +1,94 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: servicebus.azure.m.upbound.io/v1beta1
+kind: NamespaceDisasterRecoveryConfig
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "3600"
+    meta.upbound.io/example-id: servicebus/v1beta1/namespacedisasterrecoveryconfig
+  labels:
+    testing.upbound.io/example-name: examplerecoveryconfig
+  name: examplerecoveryconfig
+  namespace: upbound-system
+spec:
+  forProvider:
+    aliasAuthorizationRuleIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: recoveryconfig-rule
+    partnerNamespaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: secondary-ns
+    primaryNamespaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: primary-ns
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "3600"
+    meta.upbound.io/example-id: servicebus/v1beta1/namespacedisasterrecoveryconfig
+  labels:
+    testing.upbound.io/example-name: recoveryconfigrgroup
+  name: recoveryconfigrgroup
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+---
+apiVersion: servicebus.azure.m.upbound.io/v1beta1
+kind: ServiceBusNamespace
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "3600"
+    meta.upbound.io/example-id: servicebus/v1beta1/namespacedisasterrecoveryconfig
+  labels:
+    testing.upbound.io/example-name: primary-ns
+  name: primary-ns
+  namespace: upbound-system
+spec:
+  forProvider:
+    capacity: 1
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: recoveryconfigrgroup
+    sku: Premium
+---
+apiVersion: servicebus.azure.m.upbound.io/v1beta1
+kind: ServiceBusNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicebus/v1beta1/namespacedisasterrecoveryconfig
+  labels:
+    testing.upbound.io/example-name: secondary-ns
+  name: secondary-ns
+  namespace: upbound-system
+spec:
+  forProvider:
+    capacity: 1
+    location: West US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: recoveryconfigrgroup
+    sku: Premium
+---
+apiVersion: servicebus.azure.m.upbound.io/v1beta1
+kind: NamespaceAuthorizationRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicebus/v1beta1/namespacedisasterrecoveryconfig
+  labels:
+    testing.upbound.io/example-name: recoveryconfig-rule
+  name: recoveryconfig-rule
+  namespace: upbound-system
+spec:
+  forProvider:
+    listen: true
+    manage: false
+    namespaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: primary-ns
+    send: true

@@ -1,0 +1,79 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: insights.azure.m.upbound.io/v1beta1
+kind: MonitorDiagnosticSetting
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitordiagnosticsetting
+  labels:
+    testing.upbound.io/example-name: insightsmds
+  name: insightsmds
+  namespace: upbound-system
+spec:
+  forProvider:
+    enabledLog:
+      - category: AuditEvent
+        retentionPolicy:
+          enabled: false
+    metric:
+      - category: AllMetrics
+        retentionPolicy:
+          enabled: false
+    name: insightsmds
+    storageAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: insightsmds
+    targetResourceId: ${data.azurerm_client_config.current.subscription_resource_id}/resourceGroups/insightsmds/providers/Microsoft.KeyVault/vaults/insightsmds
+---
+apiVersion: keyvault.azure.m.upbound.io/v1beta1
+kind: Vault
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitordiagnosticsetting
+  labels:
+    testing.upbound.io/example-name: insightsmds
+  name: insightsmds
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    purgeProtectionEnabled: false
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: insightsmds
+    skuName: standard
+    softDeleteRetentionDays: 7
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta1/monitordiagnosticsetting
+  labels:
+    testing.upbound.io/example-name: insightsmds
+  name: insightsmds
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+---
+apiVersion: storage.azure.m.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitordiagnosticsetting
+  labels:
+    testing.upbound.io/example-name: insightsmds
+  name: insightsmds
+  namespace: upbound-system
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: insightsmds

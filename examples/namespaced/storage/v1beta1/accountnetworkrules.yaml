@@ -1,0 +1,19 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: storage.azure.m.upbound.io/v1beta1
+kind: AccountNetworkRules
+metadata:
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    bypass:
+      - Metrics
+    defaultAction: Allow
+    ipRules:
+      - 127.0.0.1
+    storageAccountId: /subscriptions/.../resourceGroups/example-resources/providers/Microsoft.Storage/storageAccounts/storageaccountname777
+    virtualNetworkSubnetIds:
+      - /subscriptions/.../resourceGroups/example-resources/providers/Microsoft.Network/virtualNetworks/example-vnet/subnets/example-subnet

@@ -1,0 +1,80 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: security.azure.m.upbound.io/v1beta1
+kind: IOTSecurityDeviceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: security/v1beta2/iotsecuritydevicegroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    allowRule:
+      connectionToIpsNotAllowed:
+        - 10.0.0.0/24
+    iothubIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: example-device-security-group
+    rangeRule:
+      - duration: PT5M
+        max: 30
+        min: 0
+        type: ActiveConnectionsNotInAllowedRange
+---
+apiVersion: security.azure.m.upbound.io/v1beta1
+kind: IOTSecuritySolution
+metadata:
+  annotations:
+    meta.upbound.io/example-id: security/v1beta2/iotsecuritydevicegroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    displayName: Iot Security Solution
+    iothubIdsSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    location: West Europe
+    name: example-Iot-Security-Solution
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: device
+---
+apiVersion: devices.azure.m.upbound.io/v1beta1
+kind: IOTHub
+metadata:
+  annotations:
+    meta.upbound.io/example-id: security/v1beta2/iotsecuritydevicegroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-security-iot-${Rand.RFC1123Subdomain}
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: device
+    sku:
+      capacity: 1
+      name: S1
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: security/v1beta1/iotsecuritydevicegroup
+  labels:
+    testing.upbound.io/example-name: device
+  name: example-security-device-${Rand.RFC1123Subdomain}
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

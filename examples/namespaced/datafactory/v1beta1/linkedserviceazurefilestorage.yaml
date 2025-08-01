@@ -1,0 +1,59 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: datafactory.azure.m.upbound.io/v1beta1
+kind: LinkedServiceAzureFileStorage
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta2/linkedserviceazurefilestorage
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    connectionStringSecretRef:
+      key: example-key
+      name: example-name
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: linkedserviceazurefilestorage-fct
+---
+apiVersion: datafactory.azure.m.upbound.io/v1beta1
+kind: Factory
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta2/linkedserviceazurefilestorage
+  labels:
+    testing.upbound.io/example-name: linkedserviceazurefilestorage-fct
+  name: linkedserviceazurefilestorage-fct
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: linkedserviceazurefilestorage-rg
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedserviceazurefilestorage
+  labels:
+    testing.upbound.io/example-name: linkedserviceazurefilestorage-rg
+  name: linkedserviceazurefilestorage-rg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+---
+apiVersion: v1
+data:
+  example-key: RGVmYXVsdEVuZHBvaW50c1Byb3RvY29sPWh0dHBzO0FjY291bnROYW1lPXN0b3JhZ2U7QWNjb3VudEtleT1rZXk7RW5kcG9pbnRTdWZmaXg9Y29yZS53aW5kb3dzLm5ldA==
+kind: Secret
+metadata:
+  name: example-name
+  namespace: upbound-system
+type: Opaque

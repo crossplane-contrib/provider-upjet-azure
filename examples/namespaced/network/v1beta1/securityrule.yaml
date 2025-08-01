@@ -1,0 +1,23 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: SecurityRule
+metadata:
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    access: Allow
+    destinationAddressPrefix: '*'
+    destinationPortRange: '*'
+    direction: Outbound
+    networkSecurityGroupNameRef:
+      name: example
+    priority: 100
+    protocol: Tcp
+    resourceGroupNameRef:
+      name: example
+    sourceAddressPrefix: '*'
+    sourcePortRange: '*'

@@ -1,0 +1,71 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: authorization.azure.m.upbound.io/v1beta1
+kind: ResourcePolicyAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta2/resourcepolicyassignment
+    upjet.upbound.io/manual-intervention: ResourcePolicyAssignment depends on existing resource id (Virutal Network in this example)
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: example-policy-assignment
+    policyDefinitionIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: examplepolicy
+    resourceId: ${azurerm_virtual_network.example.id}
+---
+apiVersion: authorization.azure.m.upbound.io/v1beta1
+kind: PolicyDefinition
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta2/resourcepolicyassignment
+    upjet.upbound.io/manual-intervention: ResourcePolicyAssignment depends on existing resource id (Virutal Network in this example)
+  labels:
+    testing.upbound.io/example-name: examplepolicy
+  name: examplepolicy
+  namespace: upbound-system
+spec:
+  forProvider:
+    displayName: somename
+    mode: All
+    policyRule: "\t{\n    \"if\": {\n      \"not\": {\n        \"field\": \"location\",\n        \"equals\": \"westeurope\"\n      }\n    },\n    \"then\": {\n      \"effect\": \"Deny\"\n    }\n  }\n"
+    policyType: Custom
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta1/resourcepolicyassignment
+    upjet.upbound.io/manual-intervention: ResourcePolicyAssignment depends on existing resource id (Virutal Network in this example)
+  labels:
+    testing.upbound.io/example-name: examplepolicgyrg
+  name: examplepolicgyrg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+---
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta2/resourcepolicyassignment
+    upjet.upbound.io/manual-intervention: ResourcePolicyAssignment depends on existing resource id (Virutal Network in this example)
+  labels:
+    testing.upbound.io/example-name: examplevn
+  name: examplevn
+  namespace: upbound-system
+spec:
+  forProvider:
+    addressSpace:
+      - 10.0.0.0/16
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: examplepolicgyrg

@@ -1,0 +1,58 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: cosmosdb.azure.m.upbound.io/v1beta1
+kind: SQLDedicatedGateway
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "3600"
+    meta.upbound.io/example-id: cosmosdb/v1beta1/sqldedicatedgateway
+  labels:
+    testing.upbound.io/example-name: examplecosmogw
+  name: examplecosmogw
+  namespace: upbound-system
+spec:
+  forProvider:
+    cosmosdbAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sqldedicatedgw-cdb
+    instanceCount: 1
+    instanceSize: Cosmos.D4s
+---
+apiVersion: cosmosdb.azure.m.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "3600"
+    meta.upbound.io/example-id: cosmosdb/v1beta1/sqldedicatedgateway
+  labels:
+    testing.upbound.io/example-name: sqldedicatedgw-cdb
+  name: sqldedicatedgw-cdb
+  namespace: upbound-system
+spec:
+  forProvider:
+    consistencyPolicy:
+      - consistencyLevel: BoundedStaleness
+    geoLocation:
+      - failoverPriority: 0
+        location: West Europe
+    kind: GlobalDocumentDB
+    location: West Europe
+    offerType: Standard
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sqldedicatedgw-rg
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1beta1/sqldedicatedgateway
+  labels:
+    testing.upbound.io/example-name: sqldedicatedgw-rg
+  name: sqldedicatedgw-rg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

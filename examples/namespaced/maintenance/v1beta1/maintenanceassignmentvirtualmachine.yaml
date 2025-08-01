@@ -1,0 +1,152 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: maintenance.azure.m.upbound.io/v1beta1
+kind: MaintenanceAssignmentVirtualMachine
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Unstable resource."
+    meta.upbound.io/example-id: maintenance/v1beta1/maintenanceassignmentvirtualmachine
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    maintenanceConfigurationIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    virtualMachineIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: compute.azure.m.upbound.io/v1beta1
+kind: LinuxVirtualMachine
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Unstable resource."
+    meta.upbound.io/example-id: maintenance/v1beta1/maintenanceassignmentvirtualmachine
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    adminSshKey:
+      - publicKey: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC+wWK73dCr+jgQOAxNsHAnNNNMEMWOHYEccp6wJm2gotpr9katuF/ZAdou5AaW1C61slRkHRkpRRX9FA9CYBiitZgvCCz+3nWNN7l/Up54Zps/pHWGZLHNJZRYyAB6j5yVLMVHIHriY49d/GZTZVNB8GoJv9Gakwc/fuEZYYl4YDFiGMBP///TzlI4jhiJzjKnEvqPFki5p2ZRJqcbCiF4pJrxUQR/RXqVFQdbRLZgYfJ8xGB878RENq3yQ39d8dVOkq4edbkzwcUmwwwkYVPIoDGsYLaRHnG+To7FvMeyO7xDVQkMKzopTQV8AuKpyvpqu0a9pWOMaiCyDytO7GGN you@me.com
+        username: adminuser
+    adminUsername: adminuser
+    location: West Europe
+    networkInterfaceIdsRefs:
+      - name: example
+    osDisk:
+      - caching: ReadWrite
+        storageAccountType: Standard_LRS
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rgmaintenance
+    size: Standard_F2
+    sourceImageReference:
+      - offer: UbuntuServer
+        publisher: Canonical
+        sku: 16.04-LTS
+        version: latest
+---
+apiVersion: maintenance.azure.m.upbound.io/v1beta1
+kind: MaintenanceConfiguration
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Unstable resource."
+    meta.upbound.io/example-id: maintenance/v1beta1/maintenanceassignmentvirtualmachine
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rgmaintenance
+    scope: SQLDB
+    tags:
+      Env: prod
+---
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: NetworkInterface
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Unstable resource."
+    meta.upbound.io/example-id: maintenance/v1beta1/maintenanceassignmentvirtualmachine
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    ipConfiguration:
+      - name: internal
+        privateIpAddressAllocation: Dynamic
+        subnetIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rgmaintenance
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Unstable resource."
+    meta.upbound.io/example-id: maintenance/v1beta1/maintenanceassignmentvirtualmachine
+  labels:
+    testing.upbound.io/example-name: rgmaintenance
+  name: rgmaintenance
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+---
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Unstable resource."
+    meta.upbound.io/example-id: maintenance/v1beta1/maintenanceassignmentvirtualmachine
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    addressPrefixes:
+      - 10.0.2.0/24
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rgmaintenance
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Unstable resource."
+    meta.upbound.io/example-id: maintenance/v1beta1/maintenanceassignmentvirtualmachine
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    addressSpace:
+      - 10.0.0.0/16
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rgmaintenance

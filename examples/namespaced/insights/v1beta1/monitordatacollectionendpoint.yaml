@@ -1,0 +1,37 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: insights.azure.m.upbound.io/v1beta1
+kind: MonitorDataCollectionEndpoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta1/monitordatacollectionendpoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: mdceexample
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: monitor_data_collection_endpoint example
+    kind: Windows
+    location: West Europe
+    publicNetworkAccessEnabled: true
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tags:
+      foo: bar
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta1/monitordatacollectionendpoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: mdceexample
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

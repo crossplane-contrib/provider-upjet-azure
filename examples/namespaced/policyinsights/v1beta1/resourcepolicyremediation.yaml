@@ -1,0 +1,105 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: policyinsights.azure.m.upbound.io/v1beta1
+kind: ResourcePolicyRemediation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: policyinsights/v1beta1/resourcepolicyremediation
+  labels:
+    testing.upbound.io/example-name: example
+  name: remediation
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: remediation
+    policyAssignmentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rgpolicyassignment
+    resourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: virtualnetwork
+---
+apiVersion: authorization.azure.m.upbound.io/v1beta1
+kind: ResourceGroupPolicyAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: policyinsights/v1beta1/resourcepolicyremediation
+  labels:
+    testing.upbound.io/example-name: rgpolicyassignment
+  name: rgpolicyassignment
+  namespace: upbound-system
+spec:
+  forProvider:
+    policyDefinitionIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: examplepolicy
+    resourceGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: authorization.azure.m.upbound.io/v1beta1
+kind: PolicyDefinition
+metadata:
+  annotations:
+    meta.upbound.io/example-id: policyinsights/v1beta1/resourcepolicyremediation
+  labels:
+    testing.upbound.io/example-name: examplepolicy
+  name: policydefinition
+  namespace: upbound-system
+spec:
+  forProvider:
+    displayName: policydefinitionqw
+    mode: All
+    policyRule: "\t{\n    \"if\": {\n      \"not\": {\n        \"field\": \"location\",\n        \"equals\": \"westeurope\"\n      }\n    },\n    \"then\": {\n      \"effect\": \"Deny\"\n    }\n  }\n"
+    policyType: Custom
+---
+apiVersion: authorization.azure.m.upbound.io/v1beta1
+kind: ResourcePolicyAssignment
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "ResourcePolicyAssignment depends on existing resource id (Virutal Network in this example)"
+    meta.upbound.io/example-id: policyinsights/v1beta1/resourcepolicyremediation
+  labels:
+    testing.upbound.io/example-name: example
+  name: rpolicyassignment
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: rpolicyassignmentqw
+    policyDefinitionIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: examplepolicy
+    resourceId: ${azurerm_virtual_network.example.id}
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: policyinsights/v1beta1/resourcepolicyremediation
+  labels:
+    testing.upbound.io/example-name: example
+  name: remediation-rg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+---
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: policyinsights/v1beta1/resourcepolicyremediation
+  labels:
+    testing.upbound.io/example-name: virtualnetwork
+  name: virtualnetwork
+  namespace: upbound-system
+spec:
+  forProvider:
+    addressSpace:
+      - 10.0.0.0/16
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

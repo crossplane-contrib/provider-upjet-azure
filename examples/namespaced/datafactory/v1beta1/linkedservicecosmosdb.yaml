@@ -1,0 +1,60 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: datafactory.azure.m.upbound.io/v1beta1
+kind: LinkedServiceCosmosDB
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedservicecosmosdb
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    accountKeySecretRef:
+      key: example-key
+      name: example-name
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: cosmosdb-factory
+    database: foo
+---
+apiVersion: datafactory.azure.m.upbound.io/v1beta1
+kind: Factory
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedservicecosmosdb
+  labels:
+    testing.upbound.io/example-name: cosmosdb-factory
+  name: cosmosdb-factory
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: cosmosdb-rg
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedservicecosmosdb
+  labels:
+    testing.upbound.io/example-name: cosmosdb-rg
+  name: cosmosdb-rg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-name
+  namespace: upbound-system
+type: Opaque
+data:
+  example-key: dGVzdFBhc3N3b3JkMTIzIQ==

@@ -1,0 +1,22 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: netapp.azure.m.upbound.io/v1beta1
+kind: Snapshot
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    accountNameRef:
+      name: example
+    location: West Europe
+    poolNameRef:
+      name: example
+    resourceGroupNameRef:
+      name: example-rg-netapp
+    volumeNameRef:
+      name: example

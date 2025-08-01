@@ -1,0 +1,164 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: kusto.azure.m.upbound.io/v1beta1
+kind: EventGridDataConnection
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "7200"
+    meta.upbound.io/example-id: kusto/v1beta1/eventgriddataconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    clusterNameRef:
+      name: kcluster
+    dataFormat: JSON
+    databaseNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    eventhubConsumerGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    eventhubIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    location: West Europe
+    mappingRuleName: my-table-mapping
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    storageAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: eventhub.azure.m.upbound.io/v1beta1
+kind: EventHub
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kusto/v1beta1/eventgriddataconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: kustoexample
+  namespace: upbound-system
+spec:
+  forProvider:
+    messageRetention: 1
+    namespaceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    partitionCount: 1
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: eventhub.azure.m.upbound.io/v1beta1
+kind: ConsumerGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kusto/v1beta1/eventgriddataconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: kexample
+  namespace: upbound-system
+spec:
+  forProvider:
+    eventhubNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    namespaceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: eventhub.azure.m.upbound.io/v1beta1
+kind: EventHubNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kusto/v1beta1/eventgriddataconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: kustoexample
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: Standard
+---
+apiVersion: kusto.azure.m.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kusto/v1beta1/eventgriddataconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: kcluster
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku:
+      - capacity: 2
+        name: Standard_D13_v2
+---
+apiVersion: kusto.azure.m.upbound.io/v1beta1
+kind: Database
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kusto/v1beta1/eventgriddataconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    clusterNameRef:
+      name: kcluster
+    hotCachePeriod: P7D
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    softDeletePeriod: P31D
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kusto/v1beta1/eventgriddataconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: kusto-example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+---
+apiVersion: storage.azure.m.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kusto/v1beta1/eventgriddataconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: kexample
+  namespace: upbound-system
+spec:
+  forProvider:
+    accountReplicationType: GRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

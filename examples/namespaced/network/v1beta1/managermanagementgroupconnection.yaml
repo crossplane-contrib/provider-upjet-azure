@@ -1,0 +1,69 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: ManagerManagementGroupConnection
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Leads to flaky Uptest results"
+    meta.upbound.io/example-id: network/v1beta1/managermanagementgroupconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: mmgcexample
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: example
+    managementGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    networkManagerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: management.azure.m.upbound.io/v1beta1
+kind: ManagementGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/managermanagementgroupconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: mmgcexample
+  namespace: upbound-system
+spec:
+  forProvider: {}
+---
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: Manager
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/managermanagementgroupconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: mmgcexample
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    scope:
+      - subscriptionIds:
+          - ${data.azurerm_client_config.current.subscription_resource_id}
+    scopeAccesses:
+      - SecurityAdmin
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/managermanagementgroupconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: mmgcexample
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

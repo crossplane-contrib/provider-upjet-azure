@@ -1,0 +1,80 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: recoveryservices.azure.m.upbound.io/v1beta1
+kind: BackupPolicyVM
+metadata:
+  annotations:
+    meta.upbound.io/example-id: recoveryservices/v1beta2/backuppolicyvm
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    backup:
+      frequency: Daily
+      time: "23:00"
+    recoveryVaultNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    retentionDaily:
+      count: 10
+    retentionMonthly:
+      count: 7
+      weekdays:
+        - Sunday
+        - Wednesday
+      weeks:
+        - First
+        - Last
+    retentionWeekly:
+      count: 42
+      weekdays:
+        - Sunday
+        - Wednesday
+        - Friday
+        - Saturday
+    retentionYearly:
+      count: 77
+      months:
+        - January
+      weekdays:
+        - Sunday
+      weeks:
+        - Last
+    timezone: UTC
+---
+apiVersion: recoveryservices.azure.m.upbound.io/v1beta1
+kind: Vault
+metadata:
+  annotations:
+    meta.upbound.io/example-id: recoveryservices/v1beta2/backuppolicyvm
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: Standard
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: recoveryservices/v1beta1/backuppolicyvm
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

@@ -1,0 +1,86 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: apimanagement.azure.m.upbound.io/v1beta1
+kind: RedisCache
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/rediscache
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    apiManagementIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    redisCacheIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    cacheLocation: East Us
+    connectionStringSecretRef:
+      key: attribute.primary_connection_string
+      name: example-redis-cache
+    description: Redis cache instances
+---
+apiVersion: cache.azure.m.upbound.io/v1beta1
+kind: RedisCache
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/rediscache
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-redis-cache-${Rand.RFC1123Subdomain}
+  namespace: upbound-system
+spec:
+  writeConnectionSecretToRef:
+    namespace: upbound-system
+    name: example-redis-cache
+  forProvider:
+    redisVersion: "6"
+    capacity: 1
+    enableNonSslPort: false
+    family: C
+    location: West Europe
+    minimumTlsVersion: "1.2"
+    redisConfiguration:
+      - {}
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Basic
+---
+apiVersion: apimanagement.azure.m.upbound.io/v1beta1
+kind: Management
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "7200"
+    meta.upbound.io/example-id: apimanagement/v1beta1/rediscache
+  labels:
+    testing.upbound.io/example-name: example
+  name: uptest-management-example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    publisherEmail: company@terraform.io
+    publisherName: My Company
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Developer_1
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/rediscache
+  labels:
+    testing.upbound.io/example-name: example
+  name: uptest-resourcegroup-example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

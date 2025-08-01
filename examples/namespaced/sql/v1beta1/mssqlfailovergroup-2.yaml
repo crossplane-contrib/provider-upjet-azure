@@ -1,0 +1,172 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: sql.azure.m.upbound.io/v1beta1
+kind: MSSQLOutboundFirewallRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqloutboundfirewallrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    serverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: primary
+
+---
+
+
+apiVersion: sql.azure.m.upbound.io/v1beta1
+kind: MSSQLServerDNSAlias
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlfailovergroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: ${Rand.RFC1123Subdomain}
+  namespace: upbound-system
+spec:
+  forProvider:
+    mssqlServerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: primary
+
+---
+
+apiVersion: sql.azure.m.upbound.io/v1beta1
+kind: MSSQLFailoverGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlfailovergroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: ${Rand.RFC1123Subdomain}
+  namespace: upbound-system
+spec:
+  forProvider:
+    databasesRefs:
+      - name: example-failover
+    partnerServer:
+      - idSelector:
+          matchLabels:
+            testing.upbound.io/example-name: secondary
+    readWriteEndpointFailoverPolicy:
+      - graceMinutes: 80
+        mode: Automatic
+    serverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: primary
+    tags:
+      database: example
+      environment: prod
+
+---
+
+apiVersion: sql.azure.m.upbound.io/v1beta1
+kind: MSSQLDatabase
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlfailovergroup
+  labels:
+    testing.upbound.io/example-name: example-failover
+  name: example-failover
+  namespace: upbound-system
+spec:
+  forProvider:
+    collation: SQL_Latin1_General_CP1_CI_AS
+    maxSizeGb: 200
+    serverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: primary
+    skuName: S1
+
+---
+
+apiVersion: sql.azure.m.upbound.io/v1beta1
+kind: MSSQLServer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlfailovergroup
+  labels:
+    testing.upbound.io/example-name: primary
+  name: ${Rand.RFC1123Subdomain}-primary
+  namespace: upbound-system
+spec:
+  forProvider:
+    administratorLogin: missadministrator
+    administratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-sql-failover-primary
+    version: "12.0"
+
+---
+
+apiVersion: sql.azure.m.upbound.io/v1beta1
+kind: MSSQLServer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlfailovergroup
+  labels:
+    testing.upbound.io/example-name: secondary
+  name: ${Rand.RFC1123Subdomain}-secondary
+  namespace: upbound-system
+spec:
+  forProvider:
+    administratorLogin: missadministrator
+    administratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+    location: North Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-sql-failover-secondary
+    version: "12.0"
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlfailovergroup
+  labels:
+    testing.upbound.io/example-name: example-sql-failover-secondary
+  name: example-sql-failover-secondary-${Rand.RFC1123Subdomain}
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: North Europe
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlfailovergroup
+  labels:
+    testing.upbound.io/example-name: example-sql-failover-primary
+  name: example-sql-failover-primary-${Rand.RFC1123Subdomain}
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: v1
+data:
+  example-key: dXBiMHVuZHIwY2s1ITMxMzM3Cg==
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+type: Opaque

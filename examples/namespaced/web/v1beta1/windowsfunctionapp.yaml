@@ -1,0 +1,91 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: web.azure.m.upbound.io/v1beta1
+kind: WindowsFunctionApp
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta2/windowsfunctionapp
+    uptest.upbound.io/timeout: "3600"
+  labels:
+    testing.upbound.io/example-name: example
+  name: windowsfunctionappnameaa
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: East US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: winfunctionapp-rg
+    servicePlanIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: winfunctionapp-sp
+    siteConfig: {}
+    storageAccountAccessKeySecretRef:
+      key: example-key
+      name: example-name
+    storageAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: winfunctionappacc
+---
+apiVersion: v1
+data:
+  example-key: bXJ06E6nNnr/j4kemUlz2B/n4MqILTG9MwQdIuXY4gQmillkI7nt5heqaYEDXH2JV2DG4lwwpK86+ASt2+ta+Q==
+kind: Secret
+metadata:
+  name: example-name
+  namespace: upbound-system
+type: Opaque
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/windowsfunctionapp
+    uptest.upbound.io/timeout: "3600"
+  labels:
+    testing.upbound.io/example-name: winfunctionapp-rg
+  name: winfunctionapp-rg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: East US
+---
+apiVersion: web.azure.m.upbound.io/v1beta1
+kind: ServicePlan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta2/windowsfunctionapp
+    uptest.upbound.io/timeout: "3600"
+  labels:
+    testing.upbound.io/example-name: winfunctionapp-sp
+  name: winfunctionapp-rg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: East US
+    osType: Windows
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: winfunctionapp-rg
+    skuName: S1
+---
+apiVersion: storage.azure.m.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta2/windowsfunctionapp
+    uptest.upbound.io/timeout: "3600"
+  labels:
+    testing.upbound.io/example-name: winfunctionappacc
+  name: winfunctionappacc
+  namespace: upbound-system
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: East US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: winfunctionapp-rg

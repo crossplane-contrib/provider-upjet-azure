@@ -1,0 +1,53 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: recoveryservices.azure.m.upbound.io/v1beta1
+kind: SiteRecoveryReplicationPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: recoveryservices/v1beta1/siterecoveryreplicationpolicy
+  labels:
+    testing.upbound.io/example-name: policy
+  name: policy
+  namespace: upbound-system
+spec:
+  forProvider:
+    applicationConsistentSnapshotFrequencyInMinutes: 120
+    recoveryPointRetentionInMinutes: 240
+    recoveryVaultNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vault
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: recoveryservices.azure.m.upbound.io/v1beta1
+kind: Vault
+metadata:
+  annotations:
+    meta.upbound.io/example-id: recoveryservices/v1beta1/siterecoveryreplicationpolicy
+  labels:
+    testing.upbound.io/example-name: vault
+  name: vault
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: East US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: Standard
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: recoveryservices/v1beta1/siterecoveryprotectioncontainermapping
+  labels:
+    testing.upbound.io/example-name: example
+  name: rg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: East US

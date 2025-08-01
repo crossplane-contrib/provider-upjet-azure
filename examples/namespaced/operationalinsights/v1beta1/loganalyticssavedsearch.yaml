@@ -1,0 +1,52 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: operationalinsights.azure.m.upbound.io/v1beta1
+kind: LogAnalyticsSavedSearch
+metadata:
+  annotations:
+    meta.upbound.io/example-id: operationalinsights/v1beta1/loganalyticssavedsearch
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    category: exampleCategory
+    displayName: exampleDisplayName
+    logAnalyticsWorkspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    query: exampleQuery
+---
+apiVersion: operationalinsights.azure.m.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: operationalinsights/v1beta1/loganalyticssavedsearch
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rg-operationalinsights
+    retentionInDays: 30
+    sku: PerGB2018
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: operationalinsights/v1beta1/loganalyticssavedsearch
+  labels:
+    testing.upbound.io/example-name: rg-operationalinsights
+  name: rg-operationalinsights
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

@@ -1,0 +1,29 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: NATGateway
+metadata:
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    idleTimeoutInMinutes: 10
+    location: West Europe
+    resourceGroupNameRef:
+      name: nat-gateway-example-rg
+    skuName: Standard
+    zones:
+      - "1"
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  name: nat-gateway-example-rg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    tags:
+      provisioner: crossplane

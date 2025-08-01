@@ -1,0 +1,80 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: botservice.azure.m.upbound.io/v1beta1
+kind: BotChannelLine
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "microsoftAppId is a part of application which we cannot obtain and need to be hardcoded"
+    meta.upbound.io/example-id: botservice/v1beta1/botchannelline
+  labels:
+    testing.upbound.io/example-name: example
+  name: channel-line
+  namespace: upbound-system
+spec:
+  forProvider:
+    botNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: bot-channels-registration-label
+    lineChannel:
+      - accessTokenSecretRef:
+          key: example-key
+          name: access-token
+        secretSecretRef:
+          key: example-key
+          name: secret
+    location: global
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azure-bot-r-group-label
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: access-token
+  namespace: upbound-system
+type: Opaque
+stringData:
+  example-key: asdfdsdfTYUIOIoj1231hkjhk
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: secret
+  namespace: upbound-system
+type: Opaque
+stringData:
+  example-key: aagfdgfd123567
+---
+apiVersion: botservice.azure.m.upbound.io/v1beta1
+kind: BotChannelsRegistration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: botservice/v1beta1/botchannelline
+  labels:
+    testing.upbound.io/example-name: bot-channels-registration-label
+  name: botchannelsregistrationname
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: global
+    microsoftAppId: 2c909958-d48c-4ae8-8d7a-399177cfb3e4
+    name: bottChannelsRegistrationName
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azure-bot-r-group-label
+    sku: S1
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: botservice/v1beta1/botchannelline
+  labels:
+    testing.upbound.io/example-name: azure-bot-r-group-label
+  name: bot-resource-group-thu-t
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

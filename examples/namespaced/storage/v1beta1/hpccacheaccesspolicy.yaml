@@ -1,0 +1,15 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: storagecache.azure.m.upbound.io/v1beta1
+kind: HPCCacheAccessPolicy
+metadata:
+  name: example2
+  namespace: upbound-system
+spec:
+  forProvider:
+    accessRule:
+      - access: rw
+        scope: default
+    hpcCacheId: /subscriptions/038f2b7c-3265-43b8-8624-c9ad5da610a8/resourceGroups/example-resources/providers/Microsoft.StorageCache/caches/example2

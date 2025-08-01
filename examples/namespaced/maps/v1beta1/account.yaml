@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: maps.azure.m.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: maps/v1beta1/account
+  labels:
+    testing.upbound.io/example-name: examplemapsacc
+  name: examplemapsacc
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: maps-rg
+    skuName: G2
+    tags:
+      environment: Test
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: maps/v1beta1/account
+  labels:
+    testing.upbound.io/example-name: maps-rg
+  name: maps-rg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

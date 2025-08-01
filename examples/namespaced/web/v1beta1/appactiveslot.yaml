@@ -1,0 +1,87 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: web.azure.m.upbound.io/v1beta1
+kind: AppActiveSlot
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/appactiveslot
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    slotIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/appactiveslot
+  labels:
+    testing.upbound.io/example-name: example
+  name: appactiveslot-rg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+---
+apiVersion: web.azure.m.upbound.io/v1beta1
+kind: ServicePlan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/appactiveslot
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-appactive
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    osType: Windows
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: P1v2
+---
+apiVersion: web.azure.m.upbound.io/v1beta1
+kind: WindowsWebApp
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/appactiveslot
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-appactive
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    servicePlanIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    siteConfig:
+      - {}
+---
+apiVersion: web.azure.m.upbound.io/v1beta1
+kind: WindowsWebAppSlot
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/appactiveslot
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-appactive
+  namespace: upbound-system
+spec:
+  forProvider:
+    appServiceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    siteConfig:
+      - {}

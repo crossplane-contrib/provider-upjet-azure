@@ -1,0 +1,72 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: web.azure.m.upbound.io/v1beta1
+kind: LinuxWebAppSlot
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta2/linuxwebappslot
+  labels:
+    testing.upbound.io/example-name: lnxappslotexample
+  name: lnxappslotexample
+  namespace: upbound-system
+spec:
+  forProvider:
+    appServiceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: linuxwebappslot-lwa
+    name: lnxappslotexample
+    siteConfig: {}
+---
+apiVersion: web.azure.m.upbound.io/v1beta1
+kind: LinuxWebApp
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta2/linuxwebappslot
+  labels:
+    testing.upbound.io/example-name: linuxwebappslot-lwa
+  name: linuxwebappslot-lwa
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: linuxwebappslot-rg
+    servicePlanIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: linuxwebappslot-sp
+    siteConfig: {}
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/linuxwebappslot
+  labels:
+    testing.upbound.io/example-name: linuxwebappslot-rg
+  name: linuxwebappslot-rg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+---
+apiVersion: web.azure.m.upbound.io/v1beta1
+kind: ServicePlan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta2/linuxwebappslot
+    uptest.upbound.io/pre-delete-hook: ../testhooks/delete-linux-app.sh
+  labels:
+    testing.upbound.io/example-name: linuxwebappslot-sp
+  name: linuxwebappslot-sp
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    osType: Linux
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: linuxwebappslot-rg
+    skuName: P1v2

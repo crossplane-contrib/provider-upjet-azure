@@ -1,0 +1,51 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: datafactory.azure.m.upbound.io/v1beta1
+kind: LinkedServiceDataLakeStorageGen2
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedservicedatalakestoragegen2
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: datalakestorage-factory
+    servicePrincipalId: ${data.azurerm_client_config.current.object_id}
+    servicePrincipalKey: exampleKey
+    tenant: 11111111-1111-1111-1111-111111111111
+    url: https://datalakestoragegen2
+---
+apiVersion: datafactory.azure.m.upbound.io/v1beta1
+kind: Factory
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedservicedatalakestoragegen2
+  labels:
+    testing.upbound.io/example-name: datalakestorage-factory
+  name: datalakestorage-factory
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: datalakestorage-rg
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedservicedatalakestoragegen2
+  labels:
+    testing.upbound.io/example-name: datalakestorage-rg
+  name: datalakestorage-rg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

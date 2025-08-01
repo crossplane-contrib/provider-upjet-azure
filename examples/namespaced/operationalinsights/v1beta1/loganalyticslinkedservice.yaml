@@ -1,0 +1,74 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: operationalinsights.azure.m.upbound.io/v1beta1
+kind: LogAnalyticsLinkedService
+metadata:
+  annotations:
+    meta.upbound.io/example-id: operationalinsights/v1beta1/loganalyticslinkedservice
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    readAccessIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sampleacc0001
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rg-operationalinsights
+    workspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: automation.azure.m.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: operationalinsights/v1beta1/loganalyticslinkedservice
+  labels:
+    testing.upbound.io/example-name: sampleacc0001
+  name: sampleacc0001
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rg-operationalinsights
+    skuName: Basic
+    tags:
+      environment: development
+---
+apiVersion: operationalinsights.azure.m.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: operationalinsights/v1beta1/loganalyticslinkedservice
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rg-operationalinsights
+    retentionInDays: 30
+    sku: PerGB2018
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: operationalinsights/v1beta1/loganalyticslinkedservice
+  labels:
+    testing.upbound.io/example-name: rg-operationalinsights
+  name: rg-operationalinsights
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

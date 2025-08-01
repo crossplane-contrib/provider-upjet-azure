@@ -1,0 +1,178 @@
+apiVersion: authorization.azure.m.upbound.io/v1beta1
+kind: TrustedAccessRoleBinding
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta1/trustedaccessrolebinding
+  labels:
+    testing.upbound.io/example-name: example-ta-rb
+  name: example-ta-rb
+  namespace: upbound-system
+spec:
+  forProvider:
+    kubernetesClusterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-ta-rb
+    roles:
+      - "Microsoft.MachineLearningServices/workspaces/mlworkload"
+    sourceResourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-ta-rb
+---
+apiVersion: insights.azure.m.upbound.io/v1beta1
+kind: ApplicationInsights
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta1/trustedaccessrolebinding
+  labels:
+    testing.upbound.io/example-name: example-ta-rb
+  name: example-ai-tarb
+  namespace: upbound-system
+spec:
+  forProvider:
+    applicationType: web
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-ta-rb
+---
+apiVersion: insights.azure.m.upbound.io/v1beta1
+kind: MonitorActionGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta1/trustedaccessrolebinding
+  labels:
+    testing.upbound.io/example-name: example-ta-rb
+  name: example-ta-rb-ai-mag
+  namespace: upbound-system
+spec:
+  forProvider:
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-ta-rb
+    shortName: examplegroup
+---
+apiVersion: alertsmanagement.azure.m.upbound.io/v1beta1
+kind: MonitorSmartDetectorAlertRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta1/trustedaccessrolebinding
+  labels:
+    testing.upbound.io/example-name: example-ta-rb
+  name: example-ta-rb-ai-msdar
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: myrule
+    actionGroup:
+      - idsRefs:
+          - name: example-ta-rb-ai-mag
+    detectorType: FailureAnomaliesDetector
+    frequency: PT1M
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-ta-rb
+    scopeResourceIdsRefs:
+      - name: example-ai-tarb
+    severity: Sev0
+---
+apiVersion: keyvault.azure.m.upbound.io/v1beta1
+kind: Vault
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta1/trustedaccessrolebinding
+  labels:
+    testing.upbound.io/example-name: example-ta-rb
+  name: example-ai-v
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-ta-rb
+    skuName: premium
+    softDeleteRetentionDays: 8
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+---
+apiVersion: containerservice.azure.m.upbound.io/v1beta1
+kind: KubernetesCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta1/trustedaccessrolebinding
+  labels:
+    testing.upbound.io/example-name: example-ta-rb
+  name: example-ta-rb-kc
+  namespace: upbound-system
+spec:
+  forProvider:
+    defaultNodePool:
+      - name: default
+        nodeCount: 1
+        vmSize: Standard_D2_v2
+        upgradeSettings:
+          - maxSurge: '10%'
+    dnsPrefix: exampleaks1
+    identity:
+      - type: SystemAssigned
+    location: North Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-ta-rb
+---
+apiVersion: machinelearningservices.azure.m.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta1/trustedaccessrolebinding
+  labels:
+    testing.upbound.io/example-name: example-ta-rb
+  name: example-${Rand.RFC1123Subdomain}
+  namespace: upbound-system
+spec:
+  forProvider:
+    applicationInsightsIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-ta-rb
+    identity:
+      type: SystemAssigned
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-ta-rb
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-ta-rb
+    storageAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-ta-rb
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta1/trustedaccessrolebinding
+  labels:
+    testing.upbound.io/example-name: example-ta-rb
+  name: example-ta-rb-rg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+---
+apiVersion: storage.azure.m.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta1/trustedaccessrolebinding
+  labels:
+    testing.upbound.io/example-name: example-ta-rb
+  name: exampletarbac
+  namespace: upbound-system
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-ta-rb

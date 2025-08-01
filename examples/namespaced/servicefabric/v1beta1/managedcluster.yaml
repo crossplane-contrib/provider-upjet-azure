@@ -1,0 +1,53 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: servicefabric.azure.m.upbound.io/v1beta1
+kind: ManagedCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicefabric/v1beta2/managedcluster
+  labels:
+    testing.upbound.io/example-name: sfexamplemc
+  name: sfexamplemc
+  namespace: upbound-system
+spec:
+  forProvider:
+    clientConnectionPort: 12345
+    httpGatewayPort: 4567
+    lbRule:
+      - backendPort: 38080
+        frontendPort: 80
+        probeProtocol: http
+        probeRequestPath: /test
+        protocol: tcp
+    location: West Europe
+    passwordSecretRef:
+      key: example-key
+      name: example-secret
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rg-servicefabric
+    username: UserName123
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+stringData:
+  example-key: UserName123
+type: Opaque
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicefabric/v1beta1/managedcluster
+  labels:
+    testing.upbound.io/example-name: rg-servicefabric
+  name: rg-servicefabric
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

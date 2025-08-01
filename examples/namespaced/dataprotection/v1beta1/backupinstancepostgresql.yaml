@@ -1,0 +1,230 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: dataprotection.azure.m.upbound.io/v1beta1
+kind: BackupInstancePostgreSQL
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancepostgresql
+    upjet.upbound.io/manual-intervention: "This resource depends on RoleAssignment resource."
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    backupPolicyIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    databaseCredentialKeyVaultSecretIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    databaseIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    location: West Europe
+    vaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: dataprotection.azure.m.upbound.io/v1beta1
+kind: BackupPolicyPostgreSQL
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancepostgresql
+    upjet.upbound.io/manual-intervention: "This resource is skipping because the parent resource was skipped."
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    backupRepeatingTimeIntervals:
+      - R/2021-05-23T02:30:00+00:00/P1W
+    defaultRetentionDuration: P4M
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    vaultNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: dataprotection.azure.m.upbound.io/v1beta1
+kind: BackupVault
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancepostgresql
+    upjet.upbound.io/manual-intervention: "This resource is skipping because the parent resource was skipped."
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    datastoreType: VaultStore
+    identity:
+      - type: SystemAssigned
+    location: West Europe
+    redundancy: LocallyRedundant
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: keyvault.azure.m.upbound.io/v1beta1
+kind: Vault
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancepostgresql
+    upjet.upbound.io/manual-intervention: "This resource is skipping because the parent resource was skipped."
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-backup
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: premium
+    softDeleteRetentionDays: 7
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+---
+apiVersion: keyvault.azure.m.upbound.io/v1beta1
+kind: Secret
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancepostgresql
+    upjet.upbound.io/manual-intervention: "This resource is skipping because the parent resource was skipped."
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-backupinstancepostgresql
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: exampleBackupInstancePostgresql
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    valueSecretRef:
+      key: value
+      name: example-postgresql-server
+---
+apiVersion: v1
+data:
+  value: dXBib3VuZHJvY2tz
+kind: Secret
+metadata:
+  name: example-postgresql-server
+  namespace: upbound-system
+type: Opaque
+---
+apiVersion: dbforpostgresql.azure.m.upbound.io/v1beta1
+kind: Database
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancepostgresql
+    upjet.upbound.io/manual-intervention: "This resource is skipping because the parent resource was skipped."
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    charset: UTF8
+    collation: English_United States.1252
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    serverNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: dbforpostgresql.azure.m.upbound.io/v1beta1
+kind: FirewallRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancepostgresql
+    upjet.upbound.io/manual-intervention: "This resource is skipping because the parent resource was skipped."
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    endIpAddress: 0.0.0.0
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    serverNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    startIpAddress: 0.0.0.0
+---
+apiVersion: dbforpostgresql.azure.m.upbound.io/v1beta1
+kind: Server
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancepostgresql
+    upjet.upbound.io/manual-intervention: "This resource is skipping because the parent resource was skipped."
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-backupinstancepostgresql
+  namespace: upbound-system
+spec:
+  forProvider:
+    administratorLogin: psqladmin
+    administratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+    autoGrowEnabled: true
+    backupRetentionDays: 7
+    geoRedundantBackupEnabled: false
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: B_Gen5_2
+    sslEnforcementEnabled: true
+    storageMb: 5120
+    version: "9.5"
+---
+apiVersion: v1
+data:
+  example-key: dXBiMHVuZHIwY2s1ITMxMzM3
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+type: Opaque
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancepostgresql
+    upjet.upbound.io/manual-intervention: "This resource is skipping because the parent resource was skipped."
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+---
+apiVersion: authorization.azure.m.upbound.io/v1beta1
+kind: RoleAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancepostgresql
+    upjet.upbound.io/manual-intervention: "The scope is generic and context-specific."
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    principalId: ${azurerm_data_protection_backup_vault.example.identity.0.principal_id}
+    roleDefinitionName: Reader
+    scope: ${azurerm_postgresql_server.example.id}
