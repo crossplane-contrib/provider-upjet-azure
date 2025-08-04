@@ -5,7 +5,6 @@
 package cluster
 
 import (
-	_ "embed"
 	"github.com/crossplane/upjet/v2/pkg/config"
 )
 

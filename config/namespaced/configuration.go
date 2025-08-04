@@ -5,7 +5,6 @@
 package namespaced
 
 import (
-	_ "embed"
 	"github.com/crossplane/upjet/v2/pkg/config"
 )
 
