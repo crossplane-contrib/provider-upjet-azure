@@ -14,6 +14,7 @@ import (
 	"time"
 
 	"github.com/alecthomas/kingpin/v2"
+	changelogsv1alpha1 "github.com/crossplane/crossplane-runtime/v2/apis/changelogs/proto/v1alpha1"
 	xpcontroller "github.com/crossplane/crossplane-runtime/v2/pkg/controller"
 	"github.com/crossplane/crossplane-runtime/v2/pkg/errors"
 	"github.com/crossplane/crossplane-runtime/v2/pkg/feature"
@@ -26,6 +27,8 @@ import (
 	tjcontroller "github.com/crossplane/upjet/v2/pkg/controller"
 	"github.com/crossplane/upjet/v2/pkg/controller/conversion"
 	"github.com/hashicorp/terraform-provider-azurerm/xpprovider"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 	authv1 "k8s.io/api/authorization/v1"
 	apiextensionsv1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
@@ -35,6 +38,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 	"sigs.k8s.io/controller-runtime/pkg/manager"
 	"sigs.k8s.io/controller-runtime/pkg/metrics"
+	metricsserver "sigs.k8s.io/controller-runtime/pkg/metrics/server"
 	"sigs.k8s.io/controller-runtime/pkg/webhook"
 
 	clusterapis "github.com/upbound/provider-azure/apis/cluster"
@@ -46,6 +50,7 @@ import (
 	clustercontroller "github.com/upbound/provider-azure/internal/controller/cluster"
 	namespacedcontroller "github.com/upbound/provider-azure/internal/controller/namespaced"
 	"github.com/upbound/provider-azure/internal/features"
+	"github.com/upbound/provider-azure/internal/version"
 )
 
 const (
@@ -54,14 +59,6 @@ const (
 	certsDirEnvVar          = "CERTS_DIR"
 	tlsServerCertDir        = "/tls/server"
 )
-
-func deprecationAction(flagName string) kingpin.Action {
-	return func(c *kingpin.ParseContext) error {
-		_, err := fmt.Fprintf(os.Stderr, "warning: Command-line flag %q is deprecated and no longer used. It will be removed in a future release. Please remove it from all of your configurations (ControllerConfigs, etc.).\n", flagName)
-		kingpin.FatalIfError(err, "Failed to print the deprecation notice.")
-		return nil
-	}
-}
 
 func init() {
 	err := bootcheck.CheckEnv()
@@ -79,8 +76,12 @@ func main() {
 		pollStateMetricInterval = app.Flag("poll-state-metric", "State metric recording interval").Default("5s").Duration()
 		leaderElection          = app.Flag("leader-election", "Use leader election for the controller manager.").Short('l').Default("false").OverrideDefaultFromEnvar("LEADER_ELECTION").Bool()
 		maxReconcileRate        = app.Flag("max-reconcile-rate", "The global maximum rate per second at which resources may checked for drift from the desired state.").Default("100").Int()
+		webhookPort             = app.Flag("webhook-port", "The port the webhook listens on").Default("9443").Envar("WEBHOOK_PORT").Int()
+		metricsBindAddress      = app.Flag("metrics-bind-address", "The address the metrics server listens on").Default(":8080").Envar("METRICS_BIND_ADDRESS").String()
+		changelogsSocketPath    = app.Flag("changelogs-socket-path", "Path for changelogs socket (if enabled)").Default("/var/run/changelogs/changelogs.sock").Envar("CHANGELOGS_SOCKET_PATH").String()
 
-		enableManagementPolicies   = app.Flag("enable-management-policies", "Enable support for Management Policies.").Default("true").Envar("ENABLE_MANAGEMENT_POLICIES").Bool()
+		enableManagementPolicies = app.Flag("enable-management-policies", "Enable support for Management Policies.").Default("true").Envar("ENABLE_MANAGEMENT_POLICIES").Bool()
+		enableChangeLogs         = app.Flag("enable-changelogs", "Enable support for capturing change logs during reconciliation.").Default("false").Envar("ENABLE_CHANGE_LOGS").Bool()
 
 		certsDirSet = false
 		// we record whether the command-line option "--certs-dir" was supplied
@@ -141,9 +142,13 @@ func main() {
 		Cache: cache.Options{
 			SyncPeriod: syncInterval,
 		},
+		Metrics: metricsserver.Options{
+			BindAddress: *metricsBindAddress,
+		},
 		WebhookServer: webhook.NewServer(
 			webhook.Options{
 				CertDir: *certsDir,
+				Port:    *webhookPort,
 			}),
 		LeaderElectionResourceLock: resourcelock.LeasesResourceLock,
 		LeaseDuration:              func() *time.Duration { d := 60 * time.Second; return &d }(),
@@ -213,6 +218,23 @@ func main() {
 		clusterOpts.Features.Enable(features.EnableBetaManagementPolicies)
 		namespacedOpts.Features.Enable(features.EnableBetaManagementPolicies)
 		logr.Info("Beta feature enabled", "flag", features.EnableBetaManagementPolicies)
+	}
+
+	if *enableChangeLogs {
+		clusterOpts.Features.Enable(feature.EnableAlphaChangeLogs)
+		namespacedOpts.Features.Enable(feature.EnableAlphaChangeLogs)
+		logr.Info("Alpha feature enabled", "flag", feature.EnableAlphaChangeLogs)
+
+		conn, err := grpc.NewClient("unix://"+*changelogsSocketPath, grpc.WithTransportCredentials(insecure.NewCredentials()))
+		kingpin.FatalIfError(err, "failed to create change logs client connection at %s", *changelogsSocketPath)
+
+		clo := xpcontroller.ChangeLogOptions{
+			ChangeLogger: managed.NewGRPCChangeLogger(
+				changelogsv1alpha1.NewChangeLogServiceClient(conn),
+				managed.WithProviderVersion(fmt.Sprintf("provider-upjet-aws:%s", version.Version))),
+		}
+		clusterOpts.ChangeLogOptions = &clo
+		namespacedOpts.ChangeLogOptions = &clo
 	}
 
 	canSafeStart, err := canWatchCRD(ctx, mgr)
