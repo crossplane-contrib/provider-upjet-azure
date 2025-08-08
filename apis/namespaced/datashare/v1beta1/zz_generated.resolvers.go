@@ -25,7 +25,7 @@ func (mg *Account) ResolveReferences( // ResolveReferences of this Account.
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -57,7 +57,7 @@ func (mg *DataSetBlobStorage) ResolveReferences(ctx context.Context, c client.Re
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Container", "ContainerList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta1", "Container", "ContainerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -77,7 +77,7 @@ func (mg *DataSetBlobStorage) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.ContainerName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ContainerNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("datashare.azure.upbound.io", "v1beta1", "DataShare", "DataShareList")
+		m, l, err = apisresolver.GetManagedResource("datashare.azure.m.upbound.io", "v1beta1", "DataShare", "DataShareList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -99,7 +99,7 @@ func (mg *DataSetBlobStorage) ResolveReferences(ctx context.Context, c client.Re
 
 	if mg.Spec.ForProvider.StorageAccount != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Account", "AccountList")
+			m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta1", "Account", "AccountList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -121,7 +121,7 @@ func (mg *DataSetBlobStorage) ResolveReferences(ctx context.Context, c client.Re
 	}
 	if mg.Spec.ForProvider.StorageAccount != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+			m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -142,7 +142,7 @@ func (mg *DataSetBlobStorage) ResolveReferences(ctx context.Context, c client.Re
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Container", "ContainerList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta1", "Container", "ContainerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -163,7 +163,7 @@ func (mg *DataSetBlobStorage) ResolveReferences(ctx context.Context, c client.Re
 
 	if mg.Spec.InitProvider.StorageAccount != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Account", "AccountList")
+			m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta1", "Account", "AccountList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -185,7 +185,7 @@ func (mg *DataSetBlobStorage) ResolveReferences(ctx context.Context, c client.Re
 	}
 	if mg.Spec.InitProvider.StorageAccount != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+			m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -218,7 +218,7 @@ func (mg *DataSetDataLakeGen2) ResolveReferences(ctx context.Context, c client.R
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "DataLakeGen2FileSystem", "DataLakeGen2FileSystemList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta1", "DataLakeGen2FileSystem", "DataLakeGen2FileSystemList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -238,7 +238,7 @@ func (mg *DataSetDataLakeGen2) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.FileSystemName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.FileSystemNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("datashare.azure.upbound.io", "v1beta1", "DataShare", "DataShareList")
+		m, l, err = apisresolver.GetManagedResource("datashare.azure.m.upbound.io", "v1beta1", "DataShare", "DataShareList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -258,7 +258,7 @@ func (mg *DataSetDataLakeGen2) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.ShareID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ShareIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta1", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -278,7 +278,7 @@ func (mg *DataSetDataLakeGen2) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageAccountIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "DataLakeGen2FileSystem", "DataLakeGen2FileSystemList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta1", "DataLakeGen2FileSystem", "DataLakeGen2FileSystemList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -298,7 +298,7 @@ func (mg *DataSetDataLakeGen2) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.InitProvider.FileSystemName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.FileSystemNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta1", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -330,7 +330,7 @@ func (mg *DataSetKustoCluster) ResolveReferences(ctx context.Context, c client.R
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("kusto.azure.upbound.io", "v1beta1", "Cluster", "ClusterList")
+		m, l, err = apisresolver.GetManagedResource("kusto.azure.m.upbound.io", "v1beta1", "Cluster", "ClusterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -350,7 +350,7 @@ func (mg *DataSetKustoCluster) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.KustoClusterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KustoClusterIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("datashare.azure.upbound.io", "v1beta1", "DataShare", "DataShareList")
+		m, l, err = apisresolver.GetManagedResource("datashare.azure.m.upbound.io", "v1beta1", "DataShare", "DataShareList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -370,7 +370,7 @@ func (mg *DataSetKustoCluster) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.ShareID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ShareIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("kusto.azure.upbound.io", "v1beta1", "Cluster", "ClusterList")
+		m, l, err = apisresolver.GetManagedResource("kusto.azure.m.upbound.io", "v1beta1", "Cluster", "ClusterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -402,7 +402,7 @@ func (mg *DataSetKustoDatabase) ResolveReferences(ctx context.Context, c client.
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("kusto.azure.upbound.io", "v1beta1", "Database", "DatabaseList")
+		m, l, err = apisresolver.GetManagedResource("kusto.azure.m.upbound.io", "v1beta1", "Database", "DatabaseList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -422,7 +422,7 @@ func (mg *DataSetKustoDatabase) ResolveReferences(ctx context.Context, c client.
 	mg.Spec.ForProvider.KustoDatabaseID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KustoDatabaseIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("datashare.azure.upbound.io", "v1beta1", "DataShare", "DataShareList")
+		m, l, err = apisresolver.GetManagedResource("datashare.azure.m.upbound.io", "v1beta1", "DataShare", "DataShareList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -442,7 +442,7 @@ func (mg *DataSetKustoDatabase) ResolveReferences(ctx context.Context, c client.
 	mg.Spec.ForProvider.ShareID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ShareIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("kusto.azure.upbound.io", "v1beta1", "Database", "DatabaseList")
+		m, l, err = apisresolver.GetManagedResource("kusto.azure.m.upbound.io", "v1beta1", "Database", "DatabaseList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -474,7 +474,7 @@ func (mg *DataShare) ResolveReferences(ctx context.Context, c client.Reader) err
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("datashare.azure.upbound.io", "v1beta1", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("datashare.azure.m.upbound.io", "v1beta1", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

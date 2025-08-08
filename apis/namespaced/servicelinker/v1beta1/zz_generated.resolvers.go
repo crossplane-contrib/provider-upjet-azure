@@ -25,7 +25,7 @@ func (mg *SpringCloudConnection) ResolveReferences( // ResolveReferences of this
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta1", "SpringCloudJavaDeployment", "SpringCloudJavaDeploymentList")
+		m, l, err = apisresolver.GetManagedResource("appplatform.azure.m.upbound.io", "v1beta1", "SpringCloudJavaDeployment", "SpringCloudJavaDeploymentList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -45,7 +45,7 @@ func (mg *SpringCloudConnection) ResolveReferences( // ResolveReferences of this
 	mg.Spec.ForProvider.SpringCloudID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SpringCloudIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta1", "SQLDatabase", "SQLDatabaseList")
+		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.m.upbound.io", "v1beta1", "SQLDatabase", "SQLDatabaseList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -65,7 +65,7 @@ func (mg *SpringCloudConnection) ResolveReferences( // ResolveReferences of this
 	mg.Spec.ForProvider.TargetResourceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TargetResourceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta1", "SpringCloudJavaDeployment", "SpringCloudJavaDeploymentList")
+		m, l, err = apisresolver.GetManagedResource("appplatform.azure.m.upbound.io", "v1beta1", "SpringCloudJavaDeployment", "SpringCloudJavaDeploymentList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -85,7 +85,7 @@ func (mg *SpringCloudConnection) ResolveReferences( // ResolveReferences of this
 	mg.Spec.InitProvider.SpringCloudID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.SpringCloudIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta1", "SQLDatabase", "SQLDatabaseList")
+		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.m.upbound.io", "v1beta1", "SQLDatabase", "SQLDatabaseList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

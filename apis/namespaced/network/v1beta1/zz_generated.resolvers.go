@@ -28,7 +28,7 @@ func (mg *ApplicationGateway) ResolveReferences( // ResolveReferences of this Ap
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.FrontendIPConfiguration); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -50,7 +50,7 @@ func (mg *ApplicationGateway) ResolveReferences( // ResolveReferences of this Ap
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.FrontendIPConfiguration); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -72,7 +72,7 @@ func (mg *ApplicationGateway) ResolveReferences( // ResolveReferences of this Ap
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.GatewayIPConfiguration); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -95,7 +95,7 @@ func (mg *ApplicationGateway) ResolveReferences( // ResolveReferences of this Ap
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.PrivateLinkConfiguration); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -117,7 +117,7 @@ func (mg *ApplicationGateway) ResolveReferences( // ResolveReferences of this Ap
 		}
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -138,7 +138,7 @@ func (mg *ApplicationGateway) ResolveReferences( // ResolveReferences of this Ap
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.FrontendIPConfiguration); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -160,7 +160,7 @@ func (mg *ApplicationGateway) ResolveReferences( // ResolveReferences of this Ap
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.FrontendIPConfiguration); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -182,7 +182,7 @@ func (mg *ApplicationGateway) ResolveReferences( // ResolveReferences of this Ap
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.GatewayIPConfiguration); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -205,7 +205,7 @@ func (mg *ApplicationGateway) ResolveReferences( // ResolveReferences of this Ap
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.PrivateLinkConfiguration); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -239,7 +239,7 @@ func (mg *ApplicationSecurityGroup) ResolveReferences(ctx context.Context, c cli
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -273,7 +273,7 @@ func (mg *BastionHost) ResolveReferences(ctx context.Context, c client.Reader) e
 
 	if mg.Spec.ForProvider.IPConfiguration != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -295,7 +295,7 @@ func (mg *BastionHost) ResolveReferences(ctx context.Context, c client.Reader) e
 	}
 	if mg.Spec.ForProvider.IPConfiguration != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -316,7 +316,7 @@ func (mg *BastionHost) ResolveReferences(ctx context.Context, c client.Reader) e
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -337,7 +337,7 @@ func (mg *BastionHost) ResolveReferences(ctx context.Context, c client.Reader) e
 
 	if mg.Spec.InitProvider.IPConfiguration != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -359,7 +359,7 @@ func (mg *BastionHost) ResolveReferences(ctx context.Context, c client.Reader) e
 	}
 	if mg.Spec.InitProvider.IPConfiguration != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -393,7 +393,7 @@ func (mg *ConnectionMonitor) ResolveReferences(ctx context.Context, c client.Rea
 	var mrsp reference.MultiNamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Watcher", "WatcherList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Watcher", "WatcherList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -413,7 +413,7 @@ func (mg *ConnectionMonitor) ResolveReferences(ctx context.Context, c client.Rea
 	mg.Spec.ForProvider.NetworkWatcherID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NetworkWatcherIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("operationalinsights.azure.upbound.io", "v1beta1", "Workspace", "WorkspaceList")
+		m, l, err = apisresolver.GetManagedResource("operationalinsights.azure.m.upbound.io", "v1beta1", "Workspace", "WorkspaceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -433,7 +433,7 @@ func (mg *ConnectionMonitor) ResolveReferences(ctx context.Context, c client.Rea
 	mg.Spec.ForProvider.OutputWorkspaceResourceIds = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.OutputWorkspaceResourceIdsRefs = mrsp.ResolvedReferences
 	{
-		m, l, err = apisresolver.GetManagedResource("operationalinsights.azure.upbound.io", "v1beta1", "Workspace", "WorkspaceList")
+		m, l, err = apisresolver.GetManagedResource("operationalinsights.azure.m.upbound.io", "v1beta1", "Workspace", "WorkspaceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -465,7 +465,7 @@ func (mg *DDoSProtectionPlan) ResolveReferences(ctx context.Context, c client.Re
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -497,7 +497,7 @@ func (mg *DNSAAAARecord) ResolveReferences(ctx context.Context, c client.Reader)
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -517,7 +517,7 @@ func (mg *DNSAAAARecord) ResolveReferences(ctx context.Context, c client.Reader)
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -537,7 +537,7 @@ func (mg *DNSAAAARecord) ResolveReferences(ctx context.Context, c client.Reader)
 	mg.Spec.ForProvider.TargetResourceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TargetResourceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "DNSZone", "DNSZoneList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "DNSZone", "DNSZoneList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -557,7 +557,7 @@ func (mg *DNSAAAARecord) ResolveReferences(ctx context.Context, c client.Reader)
 	mg.Spec.ForProvider.ZoneName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ZoneNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -589,7 +589,7 @@ func (mg *DNSARecord) ResolveReferences(ctx context.Context, c client.Reader) er
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -609,7 +609,7 @@ func (mg *DNSARecord) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -629,7 +629,7 @@ func (mg *DNSARecord) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.TargetResourceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TargetResourceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "DNSZone", "DNSZoneList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "DNSZone", "DNSZoneList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -649,7 +649,7 @@ func (mg *DNSARecord) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.ZoneName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ZoneNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -681,7 +681,7 @@ func (mg *DNSCAARecord) ResolveReferences(ctx context.Context, c client.Reader) 
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -701,7 +701,7 @@ func (mg *DNSCAARecord) ResolveReferences(ctx context.Context, c client.Reader) 
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "DNSZone", "DNSZoneList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "DNSZone", "DNSZoneList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -733,7 +733,7 @@ func (mg *DNSCNAMERecord) ResolveReferences(ctx context.Context, c client.Reader
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -753,7 +753,7 @@ func (mg *DNSCNAMERecord) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "DNSCNAMERecord", "DNSCNAMERecordList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "DNSCNAMERecord", "DNSCNAMERecordList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -773,7 +773,7 @@ func (mg *DNSCNAMERecord) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.ForProvider.TargetResourceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TargetResourceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "DNSZone", "DNSZoneList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "DNSZone", "DNSZoneList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -793,7 +793,7 @@ func (mg *DNSCNAMERecord) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.ForProvider.ZoneName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ZoneNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "DNSCNAMERecord", "DNSCNAMERecordList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "DNSCNAMERecord", "DNSCNAMERecordList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -825,7 +825,7 @@ func (mg *DNSMXRecord) ResolveReferences(ctx context.Context, c client.Reader) e
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -845,7 +845,7 @@ func (mg *DNSMXRecord) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "DNSZone", "DNSZoneList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "DNSZone", "DNSZoneList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -877,7 +877,7 @@ func (mg *DNSNSRecord) ResolveReferences(ctx context.Context, c client.Reader) e
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -897,7 +897,7 @@ func (mg *DNSNSRecord) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "DNSZone", "DNSZoneList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "DNSZone", "DNSZoneList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -929,7 +929,7 @@ func (mg *DNSPTRRecord) ResolveReferences(ctx context.Context, c client.Reader) 
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -949,7 +949,7 @@ func (mg *DNSPTRRecord) ResolveReferences(ctx context.Context, c client.Reader) 
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "DNSZone", "DNSZoneList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "DNSZone", "DNSZoneList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -981,7 +981,7 @@ func (mg *DNSSRVRecord) ResolveReferences(ctx context.Context, c client.Reader) 
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1001,7 +1001,7 @@ func (mg *DNSSRVRecord) ResolveReferences(ctx context.Context, c client.Reader) 
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "DNSZone", "DNSZoneList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "DNSZone", "DNSZoneList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1033,7 +1033,7 @@ func (mg *DNSTXTRecord) ResolveReferences(ctx context.Context, c client.Reader) 
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1053,7 +1053,7 @@ func (mg *DNSTXTRecord) ResolveReferences(ctx context.Context, c client.Reader) 
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "DNSZone", "DNSZoneList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "DNSZone", "DNSZoneList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1085,7 +1085,7 @@ func (mg *DNSZone) ResolveReferences(ctx context.Context, c client.Reader) error
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1117,7 +1117,7 @@ func (mg *ExpressRouteCircuit) ResolveReferences(ctx context.Context, c client.R
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1149,7 +1149,7 @@ func (mg *ExpressRouteCircuitAuthorization) ResolveReferences(ctx context.Contex
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "ExpressRouteCircuit", "ExpressRouteCircuitList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "ExpressRouteCircuit", "ExpressRouteCircuitList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1169,7 +1169,7 @@ func (mg *ExpressRouteCircuitAuthorization) ResolveReferences(ctx context.Contex
 	mg.Spec.ForProvider.ExpressRouteCircuitName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ExpressRouteCircuitNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1201,7 +1201,7 @@ func (mg *ExpressRouteCircuitConnection) ResolveReferences(ctx context.Context, 
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "ExpressRouteCircuitPeering", "ExpressRouteCircuitPeeringList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "ExpressRouteCircuitPeering", "ExpressRouteCircuitPeeringList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1221,7 +1221,7 @@ func (mg *ExpressRouteCircuitConnection) ResolveReferences(ctx context.Context, 
 	mg.Spec.ForProvider.PeerPeeringID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PeerPeeringIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "ExpressRouteCircuitPeering", "ExpressRouteCircuitPeeringList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "ExpressRouteCircuitPeering", "ExpressRouteCircuitPeeringList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1241,7 +1241,7 @@ func (mg *ExpressRouteCircuitConnection) ResolveReferences(ctx context.Context, 
 	mg.Spec.ForProvider.PeeringID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PeeringIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "ExpressRouteCircuitPeering", "ExpressRouteCircuitPeeringList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "ExpressRouteCircuitPeering", "ExpressRouteCircuitPeeringList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1273,7 +1273,7 @@ func (mg *ExpressRouteCircuitPeering) ResolveReferences(ctx context.Context, c c
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "ExpressRouteCircuit", "ExpressRouteCircuitList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "ExpressRouteCircuit", "ExpressRouteCircuitList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1293,7 +1293,7 @@ func (mg *ExpressRouteCircuitPeering) ResolveReferences(ctx context.Context, c c
 	mg.Spec.ForProvider.ExpressRouteCircuitName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ExpressRouteCircuitNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1325,7 +1325,7 @@ func (mg *ExpressRouteConnection) ResolveReferences(ctx context.Context, c clien
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "ExpressRouteCircuitPeering", "ExpressRouteCircuitPeeringList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "ExpressRouteCircuitPeering", "ExpressRouteCircuitPeeringList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1345,7 +1345,7 @@ func (mg *ExpressRouteConnection) ResolveReferences(ctx context.Context, c clien
 	mg.Spec.ForProvider.ExpressRouteCircuitPeeringID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ExpressRouteCircuitPeeringIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "ExpressRouteGateway", "ExpressRouteGatewayList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "ExpressRouteGateway", "ExpressRouteGatewayList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1365,7 +1365,7 @@ func (mg *ExpressRouteConnection) ResolveReferences(ctx context.Context, c clien
 	mg.Spec.ForProvider.ExpressRouteGatewayID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ExpressRouteGatewayIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "ExpressRouteCircuitPeering", "ExpressRouteCircuitPeeringList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "ExpressRouteCircuitPeering", "ExpressRouteCircuitPeeringList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1397,7 +1397,7 @@ func (mg *ExpressRouteGateway) ResolveReferences(ctx context.Context, c client.R
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1417,7 +1417,7 @@ func (mg *ExpressRouteGateway) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VirtualHub", "VirtualHubList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualHub", "VirtualHubList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1437,7 +1437,7 @@ func (mg *ExpressRouteGateway) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.VirtualHubID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VirtualHubIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VirtualHub", "VirtualHubList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualHub", "VirtualHubList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1469,7 +1469,7 @@ func (mg *ExpressRoutePort) ResolveReferences(ctx context.Context, c client.Read
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1503,7 +1503,7 @@ func (mg *Firewall) ResolveReferences(ctx context.Context, c client.Reader) erro
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.IPConfiguration); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -1525,7 +1525,7 @@ func (mg *Firewall) ResolveReferences(ctx context.Context, c client.Reader) erro
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.IPConfiguration); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -1547,7 +1547,7 @@ func (mg *Firewall) ResolveReferences(ctx context.Context, c client.Reader) erro
 	}
 	if mg.Spec.ForProvider.ManagementIPConfiguration != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -1568,7 +1568,7 @@ func (mg *Firewall) ResolveReferences(ctx context.Context, c client.Reader) erro
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1589,7 +1589,7 @@ func (mg *Firewall) ResolveReferences(ctx context.Context, c client.Reader) erro
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.IPConfiguration); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -1611,7 +1611,7 @@ func (mg *Firewall) ResolveReferences(ctx context.Context, c client.Reader) erro
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.IPConfiguration); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -1633,7 +1633,7 @@ func (mg *Firewall) ResolveReferences(ctx context.Context, c client.Reader) erro
 	}
 	if mg.Spec.InitProvider.ManagementIPConfiguration != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -1666,7 +1666,7 @@ func (mg *FirewallApplicationRuleCollection) ResolveReferences(ctx context.Conte
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Firewall", "FirewallList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Firewall", "FirewallList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1686,7 +1686,7 @@ func (mg *FirewallApplicationRuleCollection) ResolveReferences(ctx context.Conte
 	mg.Spec.ForProvider.AzureFirewallName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AzureFirewallNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1719,7 +1719,7 @@ func (mg *FirewallNATRuleCollection) ResolveReferences(ctx context.Context, c cl
 	var mrsp reference.MultiNamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Firewall", "FirewallList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Firewall", "FirewallList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1739,7 +1739,7 @@ func (mg *FirewallNATRuleCollection) ResolveReferences(ctx context.Context, c cl
 	mg.Spec.ForProvider.AzureFirewallName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AzureFirewallNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1761,7 +1761,7 @@ func (mg *FirewallNATRuleCollection) ResolveReferences(ctx context.Context, c cl
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.Rule); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -1783,7 +1783,7 @@ func (mg *FirewallNATRuleCollection) ResolveReferences(ctx context.Context, c cl
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.Rule); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -1816,7 +1816,7 @@ func (mg *FirewallNetworkRuleCollection) ResolveReferences(ctx context.Context, 
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Firewall", "FirewallList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Firewall", "FirewallList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1836,7 +1836,7 @@ func (mg *FirewallNetworkRuleCollection) ResolveReferences(ctx context.Context, 
 	mg.Spec.ForProvider.AzureFirewallName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AzureFirewallNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1868,7 +1868,7 @@ func (mg *FirewallPolicy) ResolveReferences(ctx context.Context, c client.Reader
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1900,7 +1900,7 @@ func (mg *FirewallPolicyRuleCollectionGroup) ResolveReferences(ctx context.Conte
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "FirewallPolicy", "FirewallPolicyList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "FirewallPolicy", "FirewallPolicyList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1932,7 +1932,7 @@ func (mg *FrontDoor) ResolveReferences(ctx context.Context, c client.Reader) err
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1966,7 +1966,7 @@ func (mg *FrontdoorCustomHTTPSConfiguration) ResolveReferences(ctx context.Conte
 
 	if mg.Spec.ForProvider.CustomHTTPSConfiguration != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta1", "Key", "KeyList")
+			m, l, err = apisresolver.GetManagedResource("keyvault.azure.m.upbound.io", "v1beta1", "Key", "KeyList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -1988,7 +1988,7 @@ func (mg *FrontdoorCustomHTTPSConfiguration) ResolveReferences(ctx context.Conte
 	}
 	if mg.Spec.InitProvider.CustomHTTPSConfiguration != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta1", "Key", "KeyList")
+			m, l, err = apisresolver.GetManagedResource("keyvault.azure.m.upbound.io", "v1beta1", "Key", "KeyList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -2021,7 +2021,7 @@ func (mg *FrontdoorFirewallPolicy) ResolveReferences(ctx context.Context, c clie
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2053,7 +2053,7 @@ func (mg *FrontdoorRulesEngine) ResolveReferences(ctx context.Context, c client.
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "FrontDoor", "FrontDoorList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "FrontDoor", "FrontDoorList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2073,7 +2073,7 @@ func (mg *FrontdoorRulesEngine) ResolveReferences(ctx context.Context, c client.
 	mg.Spec.ForProvider.FrontdoorName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.FrontdoorNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2105,7 +2105,7 @@ func (mg *IPGroup) ResolveReferences(ctx context.Context, c client.Reader) error
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2139,7 +2139,7 @@ func (mg *LoadBalancer) ResolveReferences(ctx context.Context, c client.Reader) 
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.FrontendIPConfiguration); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -2161,7 +2161,7 @@ func (mg *LoadBalancer) ResolveReferences(ctx context.Context, c client.Reader) 
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.FrontendIPConfiguration); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -2182,7 +2182,7 @@ func (mg *LoadBalancer) ResolveReferences(ctx context.Context, c client.Reader) 
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2203,7 +2203,7 @@ func (mg *LoadBalancer) ResolveReferences(ctx context.Context, c client.Reader) 
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.FrontendIPConfiguration); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -2225,7 +2225,7 @@ func (mg *LoadBalancer) ResolveReferences(ctx context.Context, c client.Reader) 
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.FrontendIPConfiguration); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -2258,7 +2258,7 @@ func (mg *LoadBalancerBackendAddressPool) ResolveReferences(ctx context.Context,
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "LoadBalancer", "LoadBalancerList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "LoadBalancer", "LoadBalancerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2290,7 +2290,7 @@ func (mg *LoadBalancerBackendAddressPoolAddress) ResolveReferences(ctx context.C
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "LoadBalancerBackendAddressPool", "LoadBalancerBackendAddressPoolList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "LoadBalancerBackendAddressPool", "LoadBalancerBackendAddressPoolList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2310,7 +2310,7 @@ func (mg *LoadBalancerBackendAddressPoolAddress) ResolveReferences(ctx context.C
 	mg.Spec.ForProvider.BackendAddressPoolID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.BackendAddressPoolIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VirtualNetwork", "VirtualNetworkList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualNetwork", "VirtualNetworkList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2330,7 +2330,7 @@ func (mg *LoadBalancerBackendAddressPoolAddress) ResolveReferences(ctx context.C
 	mg.Spec.ForProvider.VirtualNetworkID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VirtualNetworkIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VirtualNetwork", "VirtualNetworkList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualNetwork", "VirtualNetworkList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2362,7 +2362,7 @@ func (mg *LoadBalancerNatPool) ResolveReferences(ctx context.Context, c client.R
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "LoadBalancer", "LoadBalancerList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "LoadBalancer", "LoadBalancerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2382,7 +2382,7 @@ func (mg *LoadBalancerNatPool) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.LoadbalancerID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LoadbalancerIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2402,7 +2402,7 @@ func (mg *LoadBalancerNatPool) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2434,7 +2434,7 @@ func (mg *LoadBalancerNatRule) ResolveReferences(ctx context.Context, c client.R
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "LoadBalancerBackendAddressPool", "LoadBalancerBackendAddressPoolList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "LoadBalancerBackendAddressPool", "LoadBalancerBackendAddressPoolList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2454,7 +2454,7 @@ func (mg *LoadBalancerNatRule) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.BackendAddressPoolID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.BackendAddressPoolIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "LoadBalancer", "LoadBalancerList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "LoadBalancer", "LoadBalancerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2474,7 +2474,7 @@ func (mg *LoadBalancerNatRule) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.LoadbalancerID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LoadbalancerIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2494,7 +2494,7 @@ func (mg *LoadBalancerNatRule) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "LoadBalancerBackendAddressPool", "LoadBalancerBackendAddressPoolList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "LoadBalancerBackendAddressPool", "LoadBalancerBackendAddressPoolList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2514,7 +2514,7 @@ func (mg *LoadBalancerNatRule) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.InitProvider.BackendAddressPoolID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.BackendAddressPoolIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2546,7 +2546,7 @@ func (mg *LoadBalancerOutboundRule) ResolveReferences(ctx context.Context, c cli
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "LoadBalancerBackendAddressPool", "LoadBalancerBackendAddressPoolList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "LoadBalancerBackendAddressPool", "LoadBalancerBackendAddressPoolList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2566,7 +2566,7 @@ func (mg *LoadBalancerOutboundRule) ResolveReferences(ctx context.Context, c cli
 	mg.Spec.ForProvider.BackendAddressPoolID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.BackendAddressPoolIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "LoadBalancer", "LoadBalancerList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "LoadBalancer", "LoadBalancerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2586,7 +2586,7 @@ func (mg *LoadBalancerOutboundRule) ResolveReferences(ctx context.Context, c cli
 	mg.Spec.ForProvider.LoadbalancerID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LoadbalancerIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "LoadBalancerBackendAddressPool", "LoadBalancerBackendAddressPoolList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "LoadBalancerBackendAddressPool", "LoadBalancerBackendAddressPoolList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2618,7 +2618,7 @@ func (mg *LoadBalancerProbe) ResolveReferences(ctx context.Context, c client.Rea
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "LoadBalancer", "LoadBalancerList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "LoadBalancer", "LoadBalancerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2650,7 +2650,7 @@ func (mg *LoadBalancerRule) ResolveReferences(ctx context.Context, c client.Read
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "LoadBalancer", "LoadBalancerList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "LoadBalancer", "LoadBalancerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2682,7 +2682,7 @@ func (mg *LocalNetworkGateway) ResolveReferences(ctx context.Context, c client.R
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2714,7 +2714,7 @@ func (mg *Manager) ResolveReferences(ctx context.Context, c client.Reader) error
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2746,7 +2746,7 @@ func (mg *ManagerManagementGroupConnection) ResolveReferences(ctx context.Contex
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("management.azure.upbound.io", "v1beta1", "ManagementGroup", "ManagementGroupList")
+		m, l, err = apisresolver.GetManagedResource("management.azure.m.upbound.io", "v1beta1", "ManagementGroup", "ManagementGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2766,7 +2766,7 @@ func (mg *ManagerManagementGroupConnection) ResolveReferences(ctx context.Contex
 	mg.Spec.ForProvider.ManagementGroupID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ManagementGroupIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Manager", "ManagerList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Manager", "ManagerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2786,7 +2786,7 @@ func (mg *ManagerManagementGroupConnection) ResolveReferences(ctx context.Contex
 	mg.Spec.ForProvider.NetworkManagerID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NetworkManagerIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Manager", "ManagerList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Manager", "ManagerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2818,7 +2818,7 @@ func (mg *ManagerNetworkGroup) ResolveReferences(ctx context.Context, c client.R
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Manager", "ManagerList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Manager", "ManagerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2850,7 +2850,7 @@ func (mg *ManagerStaticMember) ResolveReferences(ctx context.Context, c client.R
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "ManagerNetworkGroup", "ManagerNetworkGroupList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "ManagerNetworkGroup", "ManagerNetworkGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2870,7 +2870,7 @@ func (mg *ManagerStaticMember) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.NetworkGroupID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NetworkGroupIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VirtualNetwork", "VirtualNetworkList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualNetwork", "VirtualNetworkList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2890,7 +2890,7 @@ func (mg *ManagerStaticMember) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.TargetVirtualNetworkID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TargetVirtualNetworkIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VirtualNetwork", "VirtualNetworkList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualNetwork", "VirtualNetworkList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2922,7 +2922,7 @@ func (mg *ManagerSubscriptionConnection) ResolveReferences(ctx context.Context, 
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Manager", "ManagerList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Manager", "ManagerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2942,7 +2942,7 @@ func (mg *ManagerSubscriptionConnection) ResolveReferences(ctx context.Context, 
 	mg.Spec.ForProvider.NetworkManagerID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NetworkManagerIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Manager", "ManagerList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Manager", "ManagerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2974,7 +2974,7 @@ func (mg *NATGateway) ResolveReferences(ctx context.Context, c client.Reader) er
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -3006,7 +3006,7 @@ func (mg *NATGatewayPublicIPAssociation) ResolveReferences(ctx context.Context, 
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "NATGateway", "NATGatewayList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "NATGateway", "NATGatewayList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -3026,7 +3026,7 @@ func (mg *NATGatewayPublicIPAssociation) ResolveReferences(ctx context.Context, 
 	mg.Spec.ForProvider.NATGatewayID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NATGatewayIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -3046,7 +3046,7 @@ func (mg *NATGatewayPublicIPAssociation) ResolveReferences(ctx context.Context, 
 	mg.Spec.ForProvider.PublicIPAddressID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PublicIPAddressIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "NATGateway", "NATGatewayList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "NATGateway", "NATGatewayList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -3066,7 +3066,7 @@ func (mg *NATGatewayPublicIPAssociation) ResolveReferences(ctx context.Context, 
 	mg.Spec.InitProvider.NATGatewayID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.NATGatewayIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -3098,7 +3098,7 @@ func (mg *NATGatewayPublicIPPrefixAssociation) ResolveReferences(ctx context.Con
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "NATGateway", "NATGatewayList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "NATGateway", "NATGatewayList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -3118,7 +3118,7 @@ func (mg *NATGatewayPublicIPPrefixAssociation) ResolveReferences(ctx context.Con
 	mg.Spec.ForProvider.NATGatewayID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NATGatewayIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PublicIPPrefix", "PublicIPPrefixList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PublicIPPrefix", "PublicIPPrefixList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -3138,7 +3138,7 @@ func (mg *NATGatewayPublicIPPrefixAssociation) ResolveReferences(ctx context.Con
 	mg.Spec.ForProvider.PublicIPPrefixID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PublicIPPrefixIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "NATGateway", "NATGatewayList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "NATGateway", "NATGatewayList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -3158,7 +3158,7 @@ func (mg *NATGatewayPublicIPPrefixAssociation) ResolveReferences(ctx context.Con
 	mg.Spec.InitProvider.NATGatewayID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.NATGatewayIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PublicIPPrefix", "PublicIPPrefixList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PublicIPPrefix", "PublicIPPrefixList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -3192,7 +3192,7 @@ func (mg *NetworkInterface) ResolveReferences(ctx context.Context, c client.Read
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.IPConfiguration); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -3214,7 +3214,7 @@ func (mg *NetworkInterface) ResolveReferences(ctx context.Context, c client.Read
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.IPConfiguration); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -3235,7 +3235,7 @@ func (mg *NetworkInterface) ResolveReferences(ctx context.Context, c client.Read
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -3256,7 +3256,7 @@ func (mg *NetworkInterface) ResolveReferences(ctx context.Context, c client.Read
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.IPConfiguration); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -3278,7 +3278,7 @@ func (mg *NetworkInterface) ResolveReferences(ctx context.Context, c client.Read
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.IPConfiguration); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -3311,7 +3311,7 @@ func (mg *NetworkInterfaceApplicationSecurityGroupAssociation) ResolveReferences
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "ApplicationSecurityGroup", "ApplicationSecurityGroupList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "ApplicationSecurityGroup", "ApplicationSecurityGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -3331,7 +3331,7 @@ func (mg *NetworkInterfaceApplicationSecurityGroupAssociation) ResolveReferences
 	mg.Spec.ForProvider.ApplicationSecurityGroupID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ApplicationSecurityGroupIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "NetworkInterface", "NetworkInterfaceList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "NetworkInterface", "NetworkInterfaceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -3351,7 +3351,7 @@ func (mg *NetworkInterfaceApplicationSecurityGroupAssociation) ResolveReferences
 	mg.Spec.ForProvider.NetworkInterfaceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NetworkInterfaceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "ApplicationSecurityGroup", "ApplicationSecurityGroupList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "ApplicationSecurityGroup", "ApplicationSecurityGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -3371,7 +3371,7 @@ func (mg *NetworkInterfaceApplicationSecurityGroupAssociation) ResolveReferences
 	mg.Spec.InitProvider.ApplicationSecurityGroupID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ApplicationSecurityGroupIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "NetworkInterface", "NetworkInterfaceList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "NetworkInterface", "NetworkInterfaceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -3403,7 +3403,7 @@ func (mg *NetworkInterfaceBackendAddressPoolAssociation) ResolveReferences(ctx c
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "LoadBalancerBackendAddressPool", "LoadBalancerBackendAddressPoolList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "LoadBalancerBackendAddressPool", "LoadBalancerBackendAddressPoolList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -3423,7 +3423,7 @@ func (mg *NetworkInterfaceBackendAddressPoolAssociation) ResolveReferences(ctx c
 	mg.Spec.ForProvider.BackendAddressPoolID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.BackendAddressPoolIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "NetworkInterface", "NetworkInterfaceList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "NetworkInterface", "NetworkInterfaceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -3443,7 +3443,7 @@ func (mg *NetworkInterfaceBackendAddressPoolAssociation) ResolveReferences(ctx c
 	mg.Spec.ForProvider.NetworkInterfaceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NetworkInterfaceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "LoadBalancerBackendAddressPool", "LoadBalancerBackendAddressPoolList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "LoadBalancerBackendAddressPool", "LoadBalancerBackendAddressPoolList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -3463,7 +3463,7 @@ func (mg *NetworkInterfaceBackendAddressPoolAssociation) ResolveReferences(ctx c
 	mg.Spec.InitProvider.BackendAddressPoolID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.BackendAddressPoolIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "NetworkInterface", "NetworkInterfaceList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "NetworkInterface", "NetworkInterfaceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -3495,7 +3495,7 @@ func (mg *NetworkInterfaceNatRuleAssociation) ResolveReferences(ctx context.Cont
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "LoadBalancerNatRule", "LoadBalancerNatRuleList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "LoadBalancerNatRule", "LoadBalancerNatRuleList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -3515,7 +3515,7 @@ func (mg *NetworkInterfaceNatRuleAssociation) ResolveReferences(ctx context.Cont
 	mg.Spec.ForProvider.NATRuleID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NATRuleIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "NetworkInterface", "NetworkInterfaceList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "NetworkInterface", "NetworkInterfaceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -3535,7 +3535,7 @@ func (mg *NetworkInterfaceNatRuleAssociation) ResolveReferences(ctx context.Cont
 	mg.Spec.ForProvider.NetworkInterfaceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NetworkInterfaceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "LoadBalancerNatRule", "LoadBalancerNatRuleList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "LoadBalancerNatRule", "LoadBalancerNatRuleList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -3555,7 +3555,7 @@ func (mg *NetworkInterfaceNatRuleAssociation) ResolveReferences(ctx context.Cont
 	mg.Spec.InitProvider.NATRuleID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.NATRuleIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "NetworkInterface", "NetworkInterfaceList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "NetworkInterface", "NetworkInterfaceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -3587,7 +3587,7 @@ func (mg *NetworkInterfaceSecurityGroupAssociation) ResolveReferences(ctx contex
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "NetworkInterface", "NetworkInterfaceList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "NetworkInterface", "NetworkInterfaceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -3607,7 +3607,7 @@ func (mg *NetworkInterfaceSecurityGroupAssociation) ResolveReferences(ctx contex
 	mg.Spec.ForProvider.NetworkInterfaceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NetworkInterfaceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -3627,7 +3627,7 @@ func (mg *NetworkInterfaceSecurityGroupAssociation) ResolveReferences(ctx contex
 	mg.Spec.ForProvider.NetworkSecurityGroupID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NetworkSecurityGroupIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "NetworkInterface", "NetworkInterfaceList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "NetworkInterface", "NetworkInterfaceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -3647,7 +3647,7 @@ func (mg *NetworkInterfaceSecurityGroupAssociation) ResolveReferences(ctx contex
 	mg.Spec.InitProvider.NetworkInterfaceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.NetworkInterfaceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -3679,7 +3679,7 @@ func (mg *PacketCapture) ResolveReferences(ctx context.Context, c client.Reader)
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Watcher", "WatcherList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Watcher", "WatcherList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -3699,7 +3699,7 @@ func (mg *PacketCapture) ResolveReferences(ctx context.Context, c client.Reader)
 	mg.Spec.ForProvider.NetworkWatcherName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NetworkWatcherNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -3721,7 +3721,7 @@ func (mg *PacketCapture) ResolveReferences(ctx context.Context, c client.Reader)
 
 	if mg.Spec.ForProvider.StorageLocation != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Account", "AccountList")
+			m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta1", "Account", "AccountList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -3743,7 +3743,7 @@ func (mg *PacketCapture) ResolveReferences(ctx context.Context, c client.Reader)
 	}
 	if mg.Spec.InitProvider.StorageLocation != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Account", "AccountList")
+			m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta1", "Account", "AccountList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -3776,7 +3776,7 @@ func (mg *PointToSiteVPNGateway) ResolveReferences(ctx context.Context, c client
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -3796,7 +3796,7 @@ func (mg *PointToSiteVPNGateway) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VPNServerConfiguration", "VPNServerConfigurationList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VPNServerConfiguration", "VPNServerConfigurationList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -3816,7 +3816,7 @@ func (mg *PointToSiteVPNGateway) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.VPNServerConfigurationID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VPNServerConfigurationIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VirtualHub", "VirtualHubList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualHub", "VirtualHubList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -3836,7 +3836,7 @@ func (mg *PointToSiteVPNGateway) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.VirtualHubID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VirtualHubIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VPNServerConfiguration", "VPNServerConfigurationList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VPNServerConfiguration", "VPNServerConfigurationList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -3856,7 +3856,7 @@ func (mg *PointToSiteVPNGateway) ResolveReferences(ctx context.Context, c client
 	mg.Spec.InitProvider.VPNServerConfigurationID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.VPNServerConfigurationIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VirtualHub", "VirtualHubList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualHub", "VirtualHubList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -3888,7 +3888,7 @@ func (mg *PrivateDNSAAAARecord) ResolveReferences(ctx context.Context, c client.
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -3908,7 +3908,7 @@ func (mg *PrivateDNSAAAARecord) ResolveReferences(ctx context.Context, c client.
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PrivateDNSZone", "PrivateDNSZoneList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PrivateDNSZone", "PrivateDNSZoneList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -3940,7 +3940,7 @@ func (mg *PrivateDNSARecord) ResolveReferences(ctx context.Context, c client.Rea
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -3960,7 +3960,7 @@ func (mg *PrivateDNSARecord) ResolveReferences(ctx context.Context, c client.Rea
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PrivateDNSZone", "PrivateDNSZoneList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PrivateDNSZone", "PrivateDNSZoneList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -3992,7 +3992,7 @@ func (mg *PrivateDNSCNAMERecord) ResolveReferences(ctx context.Context, c client
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -4012,7 +4012,7 @@ func (mg *PrivateDNSCNAMERecord) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PrivateDNSZone", "PrivateDNSZoneList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PrivateDNSZone", "PrivateDNSZoneList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -4044,7 +4044,7 @@ func (mg *PrivateDNSMXRecord) ResolveReferences(ctx context.Context, c client.Re
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -4064,7 +4064,7 @@ func (mg *PrivateDNSMXRecord) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PrivateDNSZone", "PrivateDNSZoneList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PrivateDNSZone", "PrivateDNSZoneList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -4096,7 +4096,7 @@ func (mg *PrivateDNSPTRRecord) ResolveReferences(ctx context.Context, c client.R
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -4116,7 +4116,7 @@ func (mg *PrivateDNSPTRRecord) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PrivateDNSZone", "PrivateDNSZoneList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PrivateDNSZone", "PrivateDNSZoneList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -4148,7 +4148,7 @@ func (mg *PrivateDNSResolver) ResolveReferences(ctx context.Context, c client.Re
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -4168,7 +4168,7 @@ func (mg *PrivateDNSResolver) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VirtualNetwork", "VirtualNetworkList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualNetwork", "VirtualNetworkList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -4188,7 +4188,7 @@ func (mg *PrivateDNSResolver) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.VirtualNetworkID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VirtualNetworkIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VirtualNetwork", "VirtualNetworkList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualNetwork", "VirtualNetworkList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -4221,7 +4221,7 @@ func (mg *PrivateDNSResolverDNSForwardingRuleset) ResolveReferences(ctx context.
 	var mrsp reference.MultiNamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PrivateDNSResolverOutboundEndpoint", "PrivateDNSResolverOutboundEndpointList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PrivateDNSResolverOutboundEndpoint", "PrivateDNSResolverOutboundEndpointList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -4241,7 +4241,7 @@ func (mg *PrivateDNSResolverDNSForwardingRuleset) ResolveReferences(ctx context.
 	mg.Spec.ForProvider.PrivateDNSResolverOutboundEndpointIds = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.PrivateDNSResolverOutboundEndpointIdsRefs = mrsp.ResolvedReferences
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -4261,7 +4261,7 @@ func (mg *PrivateDNSResolverDNSForwardingRuleset) ResolveReferences(ctx context.
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PrivateDNSResolverOutboundEndpoint", "PrivateDNSResolverOutboundEndpointList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PrivateDNSResolverOutboundEndpoint", "PrivateDNSResolverOutboundEndpointList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -4293,7 +4293,7 @@ func (mg *PrivateDNSResolverForwardingRule) ResolveReferences(ctx context.Contex
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PrivateDNSResolverDNSForwardingRuleset", "PrivateDNSResolverDNSForwardingRulesetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PrivateDNSResolverDNSForwardingRuleset", "PrivateDNSResolverDNSForwardingRulesetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -4327,7 +4327,7 @@ func (mg *PrivateDNSResolverInboundEndpoint) ResolveReferences(ctx context.Conte
 
 	if mg.Spec.ForProvider.IPConfigurations != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -4348,7 +4348,7 @@ func (mg *PrivateDNSResolverInboundEndpoint) ResolveReferences(ctx context.Conte
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PrivateDNSResolver", "PrivateDNSResolverList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PrivateDNSResolver", "PrivateDNSResolverList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -4369,7 +4369,7 @@ func (mg *PrivateDNSResolverInboundEndpoint) ResolveReferences(ctx context.Conte
 
 	if mg.Spec.InitProvider.IPConfigurations != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -4402,7 +4402,7 @@ func (mg *PrivateDNSResolverOutboundEndpoint) ResolveReferences(ctx context.Cont
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PrivateDNSResolver", "PrivateDNSResolverList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PrivateDNSResolver", "PrivateDNSResolverList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -4422,7 +4422,7 @@ func (mg *PrivateDNSResolverOutboundEndpoint) ResolveReferences(ctx context.Cont
 	mg.Spec.ForProvider.PrivateDNSResolverID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PrivateDNSResolverIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -4442,7 +4442,7 @@ func (mg *PrivateDNSResolverOutboundEndpoint) ResolveReferences(ctx context.Cont
 	mg.Spec.ForProvider.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SubnetIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -4474,7 +4474,7 @@ func (mg *PrivateDNSSRVRecord) ResolveReferences(ctx context.Context, c client.R
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -4494,7 +4494,7 @@ func (mg *PrivateDNSSRVRecord) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PrivateDNSZone", "PrivateDNSZoneList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PrivateDNSZone", "PrivateDNSZoneList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -4526,7 +4526,7 @@ func (mg *PrivateDNSTXTRecord) ResolveReferences(ctx context.Context, c client.R
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -4546,7 +4546,7 @@ func (mg *PrivateDNSTXTRecord) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PrivateDNSZone", "PrivateDNSZoneList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PrivateDNSZone", "PrivateDNSZoneList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -4578,7 +4578,7 @@ func (mg *PrivateDNSZone) ResolveReferences(ctx context.Context, c client.Reader
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -4610,7 +4610,7 @@ func (mg *PrivateDNSZoneVirtualNetworkLink) ResolveReferences(ctx context.Contex
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PrivateDNSZone", "PrivateDNSZoneList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PrivateDNSZone", "PrivateDNSZoneList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -4630,7 +4630,7 @@ func (mg *PrivateDNSZoneVirtualNetworkLink) ResolveReferences(ctx context.Contex
 	mg.Spec.ForProvider.PrivateDNSZoneName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PrivateDNSZoneNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -4650,7 +4650,7 @@ func (mg *PrivateDNSZoneVirtualNetworkLink) ResolveReferences(ctx context.Contex
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VirtualNetwork", "VirtualNetworkList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualNetwork", "VirtualNetworkList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -4670,7 +4670,7 @@ func (mg *PrivateDNSZoneVirtualNetworkLink) ResolveReferences(ctx context.Contex
 	mg.Spec.ForProvider.VirtualNetworkID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VirtualNetworkIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VirtualNetwork", "VirtualNetworkList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualNetwork", "VirtualNetworkList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -4705,7 +4705,7 @@ func (mg *PrivateEndpoint) ResolveReferences(ctx context.Context, c client.Reade
 
 	if mg.Spec.ForProvider.PrivateDNSZoneGroup != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PrivateDNSZone", "PrivateDNSZoneList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PrivateDNSZone", "PrivateDNSZoneList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -4726,7 +4726,7 @@ func (mg *PrivateEndpoint) ResolveReferences(ctx context.Context, c client.Reade
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -4745,7 +4745,7 @@ func (mg *PrivateEndpoint) ResolveReferences(ctx context.Context, c client.Reade
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -4767,7 +4767,7 @@ func (mg *PrivateEndpoint) ResolveReferences(ctx context.Context, c client.Reade
 
 	if mg.Spec.InitProvider.PrivateDNSZoneGroup != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PrivateDNSZone", "PrivateDNSZoneList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PrivateDNSZone", "PrivateDNSZoneList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -4788,7 +4788,7 @@ func (mg *PrivateEndpoint) ResolveReferences(ctx context.Context, c client.Reade
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -4819,7 +4819,7 @@ func (mg *PrivateEndpointApplicationSecurityGroupAssociation) ResolveReferences(
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "ApplicationSecurityGroup", "ApplicationSecurityGroupList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "ApplicationSecurityGroup", "ApplicationSecurityGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -4839,7 +4839,7 @@ func (mg *PrivateEndpointApplicationSecurityGroupAssociation) ResolveReferences(
 	mg.Spec.ForProvider.ApplicationSecurityGroupID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ApplicationSecurityGroupIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PrivateEndpoint", "PrivateEndpointList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PrivateEndpoint", "PrivateEndpointList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -4859,7 +4859,7 @@ func (mg *PrivateEndpointApplicationSecurityGroupAssociation) ResolveReferences(
 	mg.Spec.ForProvider.PrivateEndpointID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PrivateEndpointIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "ApplicationSecurityGroup", "ApplicationSecurityGroupList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "ApplicationSecurityGroup", "ApplicationSecurityGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -4879,7 +4879,7 @@ func (mg *PrivateEndpointApplicationSecurityGroupAssociation) ResolveReferences(
 	mg.Spec.InitProvider.ApplicationSecurityGroupID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ApplicationSecurityGroupIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PrivateEndpoint", "PrivateEndpointList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PrivateEndpoint", "PrivateEndpointList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -4913,7 +4913,7 @@ func (mg *PrivateLinkService) ResolveReferences(ctx context.Context, c client.Re
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.NATIPConfiguration); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -4934,7 +4934,7 @@ func (mg *PrivateLinkService) ResolveReferences(ctx context.Context, c client.Re
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -4955,7 +4955,7 @@ func (mg *PrivateLinkService) ResolveReferences(ctx context.Context, c client.Re
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.NATIPConfiguration); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -4991,7 +4991,7 @@ func (mg *Profile) ResolveReferences(ctx context.Context, c client.Reader) error
 	if mg.Spec.ForProvider.ContainerNetworkInterface != nil {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.ContainerNetworkInterface.IPConfiguration); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -5013,7 +5013,7 @@ func (mg *Profile) ResolveReferences(ctx context.Context, c client.Reader) error
 		}
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -5035,7 +5035,7 @@ func (mg *Profile) ResolveReferences(ctx context.Context, c client.Reader) error
 	if mg.Spec.InitProvider.ContainerNetworkInterface != nil {
 		for i4 := 0; i4 < len(mg.Spec.InitProvider.ContainerNetworkInterface.IPConfiguration); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -5069,7 +5069,7 @@ func (mg *PublicIP) ResolveReferences(ctx context.Context, c client.Reader) erro
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -5101,7 +5101,7 @@ func (mg *PublicIPPrefix) ResolveReferences(ctx context.Context, c client.Reader
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -5133,7 +5133,7 @@ func (mg *Route) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -5153,7 +5153,7 @@ func (mg *Route) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "RouteTable", "RouteTableList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "RouteTable", "RouteTableList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -5185,7 +5185,7 @@ func (mg *RouteFilter) ResolveReferences(ctx context.Context, c client.Reader) e
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -5217,7 +5217,7 @@ func (mg *RouteMap) ResolveReferences(ctx context.Context, c client.Reader) erro
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VirtualHub", "VirtualHubList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualHub", "VirtualHubList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -5249,7 +5249,7 @@ func (mg *RouteServer) ResolveReferences(ctx context.Context, c client.Reader) e
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -5269,7 +5269,7 @@ func (mg *RouteServer) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.PublicIPAddressID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PublicIPAddressIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -5289,7 +5289,7 @@ func (mg *RouteServer) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -5309,7 +5309,7 @@ func (mg *RouteServer) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SubnetIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -5329,7 +5329,7 @@ func (mg *RouteServer) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.InitProvider.PublicIPAddressID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.PublicIPAddressIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -5361,7 +5361,7 @@ func (mg *RouteServerBGPConnection) ResolveReferences(ctx context.Context, c cli
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "RouteServer", "RouteServerList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "RouteServer", "RouteServerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -5393,7 +5393,7 @@ func (mg *RouteTable) ResolveReferences(ctx context.Context, c client.Reader) er
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -5425,7 +5425,7 @@ func (mg *SecurityGroup) ResolveReferences(ctx context.Context, c client.Reader)
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -5457,7 +5457,7 @@ func (mg *SecurityRule) ResolveReferences(ctx context.Context, c client.Reader) 
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -5477,7 +5477,7 @@ func (mg *SecurityRule) ResolveReferences(ctx context.Context, c client.Reader) 
 	mg.Spec.ForProvider.NetworkSecurityGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NetworkSecurityGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -5509,7 +5509,7 @@ func (mg *Subnet) ResolveReferences(ctx context.Context, c client.Reader) error 
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -5529,7 +5529,7 @@ func (mg *Subnet) ResolveReferences(ctx context.Context, c client.Reader) error 
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VirtualNetwork", "VirtualNetworkList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualNetwork", "VirtualNetworkList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -5561,7 +5561,7 @@ func (mg *SubnetNATGatewayAssociation) ResolveReferences(ctx context.Context, c 
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "NATGateway", "NATGatewayList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "NATGateway", "NATGatewayList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -5581,7 +5581,7 @@ func (mg *SubnetNATGatewayAssociation) ResolveReferences(ctx context.Context, c 
 	mg.Spec.ForProvider.NATGatewayID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NATGatewayIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -5601,7 +5601,7 @@ func (mg *SubnetNATGatewayAssociation) ResolveReferences(ctx context.Context, c 
 	mg.Spec.ForProvider.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SubnetIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "NATGateway", "NATGatewayList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "NATGateway", "NATGatewayList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -5621,7 +5621,7 @@ func (mg *SubnetNATGatewayAssociation) ResolveReferences(ctx context.Context, c 
 	mg.Spec.InitProvider.NATGatewayID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.NATGatewayIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -5653,7 +5653,7 @@ func (mg *SubnetNetworkSecurityGroupAssociation) ResolveReferences(ctx context.C
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -5673,7 +5673,7 @@ func (mg *SubnetNetworkSecurityGroupAssociation) ResolveReferences(ctx context.C
 	mg.Spec.ForProvider.NetworkSecurityGroupID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NetworkSecurityGroupIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -5693,7 +5693,7 @@ func (mg *SubnetNetworkSecurityGroupAssociation) ResolveReferences(ctx context.C
 	mg.Spec.ForProvider.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SubnetIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -5713,7 +5713,7 @@ func (mg *SubnetNetworkSecurityGroupAssociation) ResolveReferences(ctx context.C
 	mg.Spec.InitProvider.NetworkSecurityGroupID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.NetworkSecurityGroupIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -5745,7 +5745,7 @@ func (mg *SubnetRouteTableAssociation) ResolveReferences(ctx context.Context, c 
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "RouteTable", "RouteTableList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "RouteTable", "RouteTableList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -5765,7 +5765,7 @@ func (mg *SubnetRouteTableAssociation) ResolveReferences(ctx context.Context, c 
 	mg.Spec.ForProvider.RouteTableID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RouteTableIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -5785,7 +5785,7 @@ func (mg *SubnetRouteTableAssociation) ResolveReferences(ctx context.Context, c 
 	mg.Spec.ForProvider.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SubnetIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "RouteTable", "RouteTableList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "RouteTable", "RouteTableList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -5805,7 +5805,7 @@ func (mg *SubnetRouteTableAssociation) ResolveReferences(ctx context.Context, c 
 	mg.Spec.InitProvider.RouteTableID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.RouteTableIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -5840,7 +5840,7 @@ func (mg *SubnetServiceEndpointStoragePolicy) ResolveReferences(ctx context.Cont
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.Definition); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+			m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -5861,7 +5861,7 @@ func (mg *SubnetServiceEndpointStoragePolicy) ResolveReferences(ctx context.Cont
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -5882,7 +5882,7 @@ func (mg *SubnetServiceEndpointStoragePolicy) ResolveReferences(ctx context.Cont
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.Definition); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+			m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -5915,7 +5915,7 @@ func (mg *TrafficManagerAzureEndpoint) ResolveReferences(ctx context.Context, c 
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "TrafficManagerProfile", "TrafficManagerProfileList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "TrafficManagerProfile", "TrafficManagerProfileList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -5935,7 +5935,7 @@ func (mg *TrafficManagerAzureEndpoint) ResolveReferences(ctx context.Context, c 
 	mg.Spec.ForProvider.ProfileID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ProfileIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -5955,7 +5955,7 @@ func (mg *TrafficManagerAzureEndpoint) ResolveReferences(ctx context.Context, c 
 	mg.Spec.ForProvider.TargetResourceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TargetResourceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -5987,7 +5987,7 @@ func (mg *TrafficManagerExternalEndpoint) ResolveReferences(ctx context.Context,
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "TrafficManagerProfile", "TrafficManagerProfileList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "TrafficManagerProfile", "TrafficManagerProfileList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -6019,7 +6019,7 @@ func (mg *TrafficManagerNestedEndpoint) ResolveReferences(ctx context.Context, c
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "TrafficManagerProfile", "TrafficManagerProfileList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "TrafficManagerProfile", "TrafficManagerProfileList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -6039,7 +6039,7 @@ func (mg *TrafficManagerNestedEndpoint) ResolveReferences(ctx context.Context, c
 	mg.Spec.ForProvider.ProfileID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ProfileIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "TrafficManagerProfile", "TrafficManagerProfileList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "TrafficManagerProfile", "TrafficManagerProfileList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -6059,7 +6059,7 @@ func (mg *TrafficManagerNestedEndpoint) ResolveReferences(ctx context.Context, c
 	mg.Spec.ForProvider.TargetResourceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TargetResourceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "TrafficManagerProfile", "TrafficManagerProfileList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "TrafficManagerProfile", "TrafficManagerProfileList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -6091,7 +6091,7 @@ func (mg *TrafficManagerProfile) ResolveReferences(ctx context.Context, c client
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -6123,7 +6123,7 @@ func (mg *VPNGateway) ResolveReferences(ctx context.Context, c client.Reader) er
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -6143,7 +6143,7 @@ func (mg *VPNGateway) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VirtualHub", "VirtualHubList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualHub", "VirtualHubList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -6163,7 +6163,7 @@ func (mg *VPNGateway) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.VirtualHubID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VirtualHubIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VirtualHub", "VirtualHubList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualHub", "VirtualHubList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -6195,7 +6195,7 @@ func (mg *VPNGatewayConnection) ResolveReferences(ctx context.Context, c client.
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VPNSite", "VPNSiteList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VPNSite", "VPNSiteList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -6215,7 +6215,7 @@ func (mg *VPNGatewayConnection) ResolveReferences(ctx context.Context, c client.
 	mg.Spec.ForProvider.RemoteVPNSiteID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RemoteVPNSiteIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VPNGateway", "VPNGatewayList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VPNGateway", "VPNGatewayList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -6235,7 +6235,7 @@ func (mg *VPNGatewayConnection) ResolveReferences(ctx context.Context, c client.
 	mg.Spec.ForProvider.VPNGatewayID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VPNGatewayIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VPNSite", "VPNSiteList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VPNSite", "VPNSiteList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -6267,7 +6267,7 @@ func (mg *VPNServerConfiguration) ResolveReferences(ctx context.Context, c clien
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -6299,7 +6299,7 @@ func (mg *VPNServerConfigurationPolicyGroup) ResolveReferences(ctx context.Conte
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VPNServerConfiguration", "VPNServerConfigurationList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VPNServerConfiguration", "VPNServerConfigurationList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -6331,7 +6331,7 @@ func (mg *VPNSite) ResolveReferences(ctx context.Context, c client.Reader) error
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -6351,7 +6351,7 @@ func (mg *VPNSite) ResolveReferences(ctx context.Context, c client.Reader) error
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VirtualWAN", "VirtualWANList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualWAN", "VirtualWANList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -6371,7 +6371,7 @@ func (mg *VPNSite) ResolveReferences(ctx context.Context, c client.Reader) error
 	mg.Spec.ForProvider.VirtualWanID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VirtualWanIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VirtualWAN", "VirtualWANList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualWAN", "VirtualWANList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -6403,7 +6403,7 @@ func (mg *VirtualHub) ResolveReferences(ctx context.Context, c client.Reader) er
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -6423,7 +6423,7 @@ func (mg *VirtualHub) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VirtualWAN", "VirtualWANList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualWAN", "VirtualWANList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -6443,7 +6443,7 @@ func (mg *VirtualHub) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.VirtualWanID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VirtualWanIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VirtualWAN", "VirtualWANList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualWAN", "VirtualWANList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -6475,7 +6475,7 @@ func (mg *VirtualHubConnection) ResolveReferences(ctx context.Context, c client.
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VirtualNetwork", "VirtualNetworkList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualNetwork", "VirtualNetworkList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -6497,7 +6497,7 @@ func (mg *VirtualHubConnection) ResolveReferences(ctx context.Context, c client.
 
 	if mg.Spec.ForProvider.Routing != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VirtualHubRouteTable", "VirtualHubRouteTableList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualHubRouteTable", "VirtualHubRouteTableList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -6518,7 +6518,7 @@ func (mg *VirtualHubConnection) ResolveReferences(ctx context.Context, c client.
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VirtualHub", "VirtualHubList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualHub", "VirtualHubList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -6537,7 +6537,7 @@ func (mg *VirtualHubConnection) ResolveReferences(ctx context.Context, c client.
 	mg.Spec.ForProvider.VirtualHubID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VirtualHubIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VirtualNetwork", "VirtualNetworkList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualNetwork", "VirtualNetworkList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -6559,7 +6559,7 @@ func (mg *VirtualHubConnection) ResolveReferences(ctx context.Context, c client.
 
 	if mg.Spec.InitProvider.Routing != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VirtualHubRouteTable", "VirtualHubRouteTableList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualHubRouteTable", "VirtualHubRouteTableList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -6592,7 +6592,7 @@ func (mg *VirtualHubIP) ResolveReferences(ctx context.Context, c client.Reader) 
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -6612,7 +6612,7 @@ func (mg *VirtualHubIP) ResolveReferences(ctx context.Context, c client.Reader) 
 	mg.Spec.ForProvider.PublicIPAddressID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PublicIPAddressIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -6632,7 +6632,7 @@ func (mg *VirtualHubIP) ResolveReferences(ctx context.Context, c client.Reader) 
 	mg.Spec.ForProvider.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SubnetIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VirtualHub", "VirtualHubList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualHub", "VirtualHubList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -6652,7 +6652,7 @@ func (mg *VirtualHubIP) ResolveReferences(ctx context.Context, c client.Reader) 
 	mg.Spec.ForProvider.VirtualHubID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VirtualHubIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -6672,7 +6672,7 @@ func (mg *VirtualHubIP) ResolveReferences(ctx context.Context, c client.Reader) 
 	mg.Spec.InitProvider.PublicIPAddressID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.PublicIPAddressIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -6706,7 +6706,7 @@ func (mg *VirtualHubRouteTable) ResolveReferences(ctx context.Context, c client.
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.Route); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VirtualHubConnection", "VirtualHubConnectionList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualHubConnection", "VirtualHubConnectionList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -6727,7 +6727,7 @@ func (mg *VirtualHubRouteTable) ResolveReferences(ctx context.Context, c client.
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VirtualHub", "VirtualHubList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualHub", "VirtualHubList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -6748,7 +6748,7 @@ func (mg *VirtualHubRouteTable) ResolveReferences(ctx context.Context, c client.
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.Route); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VirtualHubConnection", "VirtualHubConnectionList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualHubConnection", "VirtualHubConnectionList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -6781,7 +6781,7 @@ func (mg *VirtualHubRouteTableRoute) ResolveReferences(ctx context.Context, c cl
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VirtualHubConnection", "VirtualHubConnectionList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualHubConnection", "VirtualHubConnectionList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -6801,7 +6801,7 @@ func (mg *VirtualHubRouteTableRoute) ResolveReferences(ctx context.Context, c cl
 	mg.Spec.ForProvider.NextHop = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NextHopRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VirtualHubRouteTable", "VirtualHubRouteTableList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualHubRouteTable", "VirtualHubRouteTableList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -6821,7 +6821,7 @@ func (mg *VirtualHubRouteTableRoute) ResolveReferences(ctx context.Context, c cl
 	mg.Spec.ForProvider.RouteTableID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RouteTableIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VirtualHubConnection", "VirtualHubConnectionList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualHubConnection", "VirtualHubConnectionList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -6853,7 +6853,7 @@ func (mg *VirtualHubSecurityPartnerProvider) ResolveReferences(ctx context.Conte
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -6873,7 +6873,7 @@ func (mg *VirtualHubSecurityPartnerProvider) ResolveReferences(ctx context.Conte
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VirtualHub", "VirtualHubList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualHub", "VirtualHubList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -6893,7 +6893,7 @@ func (mg *VirtualHubSecurityPartnerProvider) ResolveReferences(ctx context.Conte
 	mg.Spec.ForProvider.VirtualHubID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VirtualHubIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VirtualHub", "VirtualHubList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualHub", "VirtualHubList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -6925,7 +6925,7 @@ func (mg *VirtualNetwork) ResolveReferences(ctx context.Context, c client.Reader
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -6959,7 +6959,7 @@ func (mg *VirtualNetworkGateway) ResolveReferences(ctx context.Context, c client
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.IPConfiguration); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -6981,7 +6981,7 @@ func (mg *VirtualNetworkGateway) ResolveReferences(ctx context.Context, c client
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.IPConfiguration); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -7002,7 +7002,7 @@ func (mg *VirtualNetworkGateway) ResolveReferences(ctx context.Context, c client
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -7023,7 +7023,7 @@ func (mg *VirtualNetworkGateway) ResolveReferences(ctx context.Context, c client
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.IPConfiguration); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -7045,7 +7045,7 @@ func (mg *VirtualNetworkGateway) ResolveReferences(ctx context.Context, c client
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.IPConfiguration); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -7078,7 +7078,7 @@ func (mg *VirtualNetworkGatewayConnection) ResolveReferences(ctx context.Context
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "LocalNetworkGateway", "LocalNetworkGatewayList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "LocalNetworkGateway", "LocalNetworkGatewayList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -7098,7 +7098,7 @@ func (mg *VirtualNetworkGatewayConnection) ResolveReferences(ctx context.Context
 	mg.Spec.ForProvider.LocalNetworkGatewayID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LocalNetworkGatewayIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VirtualNetworkGateway", "VirtualNetworkGatewayList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualNetworkGateway", "VirtualNetworkGatewayList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -7118,7 +7118,7 @@ func (mg *VirtualNetworkGatewayConnection) ResolveReferences(ctx context.Context
 	mg.Spec.ForProvider.PeerVirtualNetworkGatewayID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PeerVirtualNetworkGatewayIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -7138,7 +7138,7 @@ func (mg *VirtualNetworkGatewayConnection) ResolveReferences(ctx context.Context
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VirtualNetworkGateway", "VirtualNetworkGatewayList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualNetworkGateway", "VirtualNetworkGatewayList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -7158,7 +7158,7 @@ func (mg *VirtualNetworkGatewayConnection) ResolveReferences(ctx context.Context
 	mg.Spec.ForProvider.VirtualNetworkGatewayID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VirtualNetworkGatewayIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "LocalNetworkGateway", "LocalNetworkGatewayList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "LocalNetworkGateway", "LocalNetworkGatewayList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -7178,7 +7178,7 @@ func (mg *VirtualNetworkGatewayConnection) ResolveReferences(ctx context.Context
 	mg.Spec.InitProvider.LocalNetworkGatewayID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.LocalNetworkGatewayIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VirtualNetworkGateway", "VirtualNetworkGatewayList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualNetworkGateway", "VirtualNetworkGatewayList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -7198,7 +7198,7 @@ func (mg *VirtualNetworkGatewayConnection) ResolveReferences(ctx context.Context
 	mg.Spec.InitProvider.PeerVirtualNetworkGatewayID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.PeerVirtualNetworkGatewayIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VirtualNetworkGateway", "VirtualNetworkGatewayList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualNetworkGateway", "VirtualNetworkGatewayList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -7230,7 +7230,7 @@ func (mg *VirtualNetworkPeering) ResolveReferences(ctx context.Context, c client
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VirtualNetwork", "VirtualNetworkList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualNetwork", "VirtualNetworkList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -7250,7 +7250,7 @@ func (mg *VirtualNetworkPeering) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.RemoteVirtualNetworkID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RemoteVirtualNetworkIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -7270,7 +7270,7 @@ func (mg *VirtualNetworkPeering) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VirtualNetwork", "VirtualNetworkList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualNetwork", "VirtualNetworkList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -7290,7 +7290,7 @@ func (mg *VirtualNetworkPeering) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.VirtualNetworkName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VirtualNetworkNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VirtualNetwork", "VirtualNetworkList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualNetwork", "VirtualNetworkList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -7322,7 +7322,7 @@ func (mg *VirtualWAN) ResolveReferences(ctx context.Context, c client.Reader) er
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -7354,7 +7354,7 @@ func (mg *Watcher) ResolveReferences(ctx context.Context, c client.Reader) error
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -7386,7 +7386,7 @@ func (mg *WatcherFlowLog) ResolveReferences(ctx context.Context, c client.Reader
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -7406,7 +7406,7 @@ func (mg *WatcherFlowLog) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.ForProvider.NetworkSecurityGroupID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NetworkSecurityGroupIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Watcher", "WatcherList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Watcher", "WatcherList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -7426,7 +7426,7 @@ func (mg *WatcherFlowLog) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.ForProvider.NetworkWatcherName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NetworkWatcherNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -7446,7 +7446,7 @@ func (mg *WatcherFlowLog) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta1", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -7466,7 +7466,7 @@ func (mg *WatcherFlowLog) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.ForProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageAccountIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -7488,7 +7488,7 @@ func (mg *WatcherFlowLog) ResolveReferences(ctx context.Context, c client.Reader
 
 	if mg.Spec.ForProvider.TrafficAnalytics != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("operationalinsights.azure.upbound.io", "v1beta1", "Workspace", "WorkspaceList")
+			m, l, err = apisresolver.GetManagedResource("operationalinsights.azure.m.upbound.io", "v1beta1", "Workspace", "WorkspaceList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -7510,7 +7510,7 @@ func (mg *WatcherFlowLog) ResolveReferences(ctx context.Context, c client.Reader
 	}
 	if mg.Spec.ForProvider.TrafficAnalytics != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("operationalinsights.azure.upbound.io", "v1beta1", "Workspace", "WorkspaceList")
+			m, l, err = apisresolver.GetManagedResource("operationalinsights.azure.m.upbound.io", "v1beta1", "Workspace", "WorkspaceList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -7531,7 +7531,7 @@ func (mg *WatcherFlowLog) ResolveReferences(ctx context.Context, c client.Reader
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -7550,7 +7550,7 @@ func (mg *WatcherFlowLog) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.InitProvider.NetworkSecurityGroupID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.NetworkSecurityGroupIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta1", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -7570,7 +7570,7 @@ func (mg *WatcherFlowLog) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.InitProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.StorageAccountIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -7592,7 +7592,7 @@ func (mg *WatcherFlowLog) ResolveReferences(ctx context.Context, c client.Reader
 
 	if mg.Spec.InitProvider.TrafficAnalytics != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("operationalinsights.azure.upbound.io", "v1beta1", "Workspace", "WorkspaceList")
+			m, l, err = apisresolver.GetManagedResource("operationalinsights.azure.m.upbound.io", "v1beta1", "Workspace", "WorkspaceList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -7614,7 +7614,7 @@ func (mg *WatcherFlowLog) ResolveReferences(ctx context.Context, c client.Reader
 	}
 	if mg.Spec.InitProvider.TrafficAnalytics != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("operationalinsights.azure.upbound.io", "v1beta1", "Workspace", "WorkspaceList")
+			m, l, err = apisresolver.GetManagedResource("operationalinsights.azure.m.upbound.io", "v1beta1", "Workspace", "WorkspaceList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -7647,7 +7647,7 @@ func (mg *WebApplicationFirewallPolicy) ResolveReferences(ctx context.Context, c
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

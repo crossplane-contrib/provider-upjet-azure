@@ -25,7 +25,7 @@ func (mg *IOTHubDeviceUpdateAccount) ResolveReferences( // ResolveReferences of 
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -57,7 +57,7 @@ func (mg *IOTHubDeviceUpdateInstance) ResolveReferences(ctx context.Context, c c
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("deviceupdate.azure.upbound.io", "v1beta1", "IOTHubDeviceUpdateAccount", "IOTHubDeviceUpdateAccountList")
+		m, l, err = apisresolver.GetManagedResource("deviceupdate.azure.m.upbound.io", "v1beta1", "IOTHubDeviceUpdateAccount", "IOTHubDeviceUpdateAccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -79,7 +79,7 @@ func (mg *IOTHubDeviceUpdateInstance) ResolveReferences(ctx context.Context, c c
 
 	if mg.Spec.ForProvider.DiagnosticStorageAccount != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Account", "AccountList")
+			m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta1", "Account", "AccountList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -100,7 +100,7 @@ func (mg *IOTHubDeviceUpdateInstance) ResolveReferences(ctx context.Context, c c
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("devices.azure.upbound.io", "v1beta1", "IOTHub", "IOTHubList")
+		m, l, err = apisresolver.GetManagedResource("devices.azure.m.upbound.io", "v1beta1", "IOTHub", "IOTHubList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -121,7 +121,7 @@ func (mg *IOTHubDeviceUpdateInstance) ResolveReferences(ctx context.Context, c c
 
 	if mg.Spec.InitProvider.DiagnosticStorageAccount != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Account", "AccountList")
+			m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta1", "Account", "AccountList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -142,7 +142,7 @@ func (mg *IOTHubDeviceUpdateInstance) ResolveReferences(ctx context.Context, c c
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("devices.azure.upbound.io", "v1beta1", "IOTHub", "IOTHubList")
+		m, l, err = apisresolver.GetManagedResource("devices.azure.m.upbound.io", "v1beta1", "IOTHub", "IOTHubList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

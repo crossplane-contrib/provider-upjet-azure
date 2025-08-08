@@ -25,7 +25,7 @@ func (mg *HPCCache) ResolveReferences( // ResolveReferences of this HPCCache.
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -45,7 +45,7 @@ func (mg *HPCCache) ResolveReferences( // ResolveReferences of this HPCCache.
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -65,7 +65,7 @@ func (mg *HPCCache) ResolveReferences( // ResolveReferences of this HPCCache.
 	mg.Spec.ForProvider.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SubnetIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -97,7 +97,7 @@ func (mg *HPCCacheAccessPolicy) ResolveReferences(ctx context.Context, c client.
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("storagecache.azure.upbound.io", "v1beta1", "HPCCache", "HPCCacheList")
+		m, l, err = apisresolver.GetManagedResource("storagecache.azure.m.upbound.io", "v1beta1", "HPCCache", "HPCCacheList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -117,7 +117,7 @@ func (mg *HPCCacheAccessPolicy) ResolveReferences(ctx context.Context, c client.
 	mg.Spec.ForProvider.HPCCacheID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.HPCCacheIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storagecache.azure.upbound.io", "v1beta1", "HPCCache", "HPCCacheList")
+		m, l, err = apisresolver.GetManagedResource("storagecache.azure.m.upbound.io", "v1beta1", "HPCCache", "HPCCacheList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -149,7 +149,7 @@ func (mg *HPCCacheBlobNFSTarget) ResolveReferences(ctx context.Context, c client
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("storagecache.azure.upbound.io", "v1beta1", "HPCCache", "HPCCacheList")
+		m, l, err = apisresolver.GetManagedResource("storagecache.azure.m.upbound.io", "v1beta1", "HPCCache", "HPCCacheList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -169,7 +169,7 @@ func (mg *HPCCacheBlobNFSTarget) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.CacheName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CacheNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -189,7 +189,7 @@ func (mg *HPCCacheBlobNFSTarget) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storagecache.azure.upbound.io", "v1beta1", "HPCCache", "HPCCacheList")
+		m, l, err = apisresolver.GetManagedResource("storagecache.azure.m.upbound.io", "v1beta1", "HPCCache", "HPCCacheList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -221,7 +221,7 @@ func (mg *HPCCacheBlobTarget) ResolveReferences(ctx context.Context, c client.Re
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("storagecache.azure.upbound.io", "v1beta1", "HPCCache", "HPCCacheList")
+		m, l, err = apisresolver.GetManagedResource("storagecache.azure.m.upbound.io", "v1beta1", "HPCCache", "HPCCacheList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -241,7 +241,7 @@ func (mg *HPCCacheBlobTarget) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.CacheName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CacheNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -261,7 +261,7 @@ func (mg *HPCCacheBlobTarget) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Container", "ContainerList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta1", "Container", "ContainerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -281,7 +281,7 @@ func (mg *HPCCacheBlobTarget) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.StorageContainerID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageContainerIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storagecache.azure.upbound.io", "v1beta1", "HPCCache", "HPCCacheList")
+		m, l, err = apisresolver.GetManagedResource("storagecache.azure.m.upbound.io", "v1beta1", "HPCCache", "HPCCacheList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -301,7 +301,7 @@ func (mg *HPCCacheBlobTarget) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.InitProvider.CacheName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.CacheNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Container", "ContainerList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta1", "Container", "ContainerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -333,7 +333,7 @@ func (mg *HPCCacheNFSTarget) ResolveReferences(ctx context.Context, c client.Rea
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("storagecache.azure.upbound.io", "v1beta1", "HPCCache", "HPCCacheList")
+		m, l, err = apisresolver.GetManagedResource("storagecache.azure.m.upbound.io", "v1beta1", "HPCCache", "HPCCacheList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -353,7 +353,7 @@ func (mg *HPCCacheNFSTarget) ResolveReferences(ctx context.Context, c client.Rea
 	mg.Spec.ForProvider.CacheName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CacheNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -373,7 +373,7 @@ func (mg *HPCCacheNFSTarget) ResolveReferences(ctx context.Context, c client.Rea
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storagecache.azure.upbound.io", "v1beta1", "HPCCache", "HPCCacheList")
+		m, l, err = apisresolver.GetManagedResource("storagecache.azure.m.upbound.io", "v1beta1", "HPCCache", "HPCCacheList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

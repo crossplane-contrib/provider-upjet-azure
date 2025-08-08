@@ -26,7 +26,7 @@ func (mg *CustomDataSet) ResolveReferences( // ResolveReferences of this CustomD
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Factory", "FactoryList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Factory", "FactoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -48,7 +48,7 @@ func (mg *CustomDataSet) ResolveReferences( // ResolveReferences of this CustomD
 
 	if mg.Spec.ForProvider.LinkedService != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "LinkedCustomService", "LinkedCustomServiceList")
+			m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "LinkedCustomService", "LinkedCustomServiceList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -70,7 +70,7 @@ func (mg *CustomDataSet) ResolveReferences( // ResolveReferences of this CustomD
 	}
 	if mg.Spec.InitProvider.LinkedService != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "LinkedCustomService", "LinkedCustomServiceList")
+			m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "LinkedCustomService", "LinkedCustomServiceList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -103,7 +103,7 @@ func (mg *DataFlow) ResolveReferences(ctx context.Context, c client.Reader) erro
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Factory", "FactoryList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Factory", "FactoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -126,7 +126,7 @@ func (mg *DataFlow) ResolveReferences(ctx context.Context, c client.Reader) erro
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.Sink); i3++ {
 		if mg.Spec.ForProvider.Sink[i3].DataSet != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "DataSetJSON", "DataSetJSONList")
+				m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "DataSetJSON", "DataSetJSONList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -150,7 +150,7 @@ func (mg *DataFlow) ResolveReferences(ctx context.Context, c client.Reader) erro
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.Source); i3++ {
 		if mg.Spec.ForProvider.Source[i3].DataSet != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "DataSetJSON", "DataSetJSONList")
+				m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "DataSetJSON", "DataSetJSONList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -174,7 +174,7 @@ func (mg *DataFlow) ResolveReferences(ctx context.Context, c client.Reader) erro
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.Sink); i3++ {
 		if mg.Spec.InitProvider.Sink[i3].DataSet != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "DataSetJSON", "DataSetJSONList")
+				m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "DataSetJSON", "DataSetJSONList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -198,7 +198,7 @@ func (mg *DataFlow) ResolveReferences(ctx context.Context, c client.Reader) erro
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.Source); i3++ {
 		if mg.Spec.InitProvider.Source[i3].DataSet != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "DataSetJSON", "DataSetJSONList")
+				m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "DataSetJSON", "DataSetJSONList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -232,7 +232,7 @@ func (mg *DataSetAzureBlob) ResolveReferences(ctx context.Context, c client.Read
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Factory", "FactoryList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Factory", "FactoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -252,7 +252,7 @@ func (mg *DataSetAzureBlob) ResolveReferences(ctx context.Context, c client.Read
 	mg.Spec.ForProvider.DataFactoryID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataFactoryIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "LinkedServiceAzureBlobStorage", "LinkedServiceAzureBlobStorageList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "LinkedServiceAzureBlobStorage", "LinkedServiceAzureBlobStorageList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -272,7 +272,7 @@ func (mg *DataSetAzureBlob) ResolveReferences(ctx context.Context, c client.Read
 	mg.Spec.ForProvider.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LinkedServiceNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "LinkedServiceAzureBlobStorage", "LinkedServiceAzureBlobStorageList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "LinkedServiceAzureBlobStorage", "LinkedServiceAzureBlobStorageList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -304,7 +304,7 @@ func (mg *DataSetBinary) ResolveReferences(ctx context.Context, c client.Reader)
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Factory", "FactoryList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Factory", "FactoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -324,7 +324,7 @@ func (mg *DataSetBinary) ResolveReferences(ctx context.Context, c client.Reader)
 	mg.Spec.ForProvider.DataFactoryID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataFactoryIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "LinkedServiceSFTP", "LinkedServiceSFTPList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "LinkedServiceSFTP", "LinkedServiceSFTPList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -344,7 +344,7 @@ func (mg *DataSetBinary) ResolveReferences(ctx context.Context, c client.Reader)
 	mg.Spec.ForProvider.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LinkedServiceNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "LinkedServiceSFTP", "LinkedServiceSFTPList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "LinkedServiceSFTP", "LinkedServiceSFTPList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -376,7 +376,7 @@ func (mg *DataSetCosmosDBSQLAPI) ResolveReferences(ctx context.Context, c client
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Factory", "FactoryList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Factory", "FactoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -396,7 +396,7 @@ func (mg *DataSetCosmosDBSQLAPI) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.DataFactoryID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataFactoryIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "LinkedServiceCosmosDB", "LinkedServiceCosmosDBList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "LinkedServiceCosmosDB", "LinkedServiceCosmosDBList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -416,7 +416,7 @@ func (mg *DataSetCosmosDBSQLAPI) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LinkedServiceNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "LinkedServiceCosmosDB", "LinkedServiceCosmosDBList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "LinkedServiceCosmosDB", "LinkedServiceCosmosDBList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -448,7 +448,7 @@ func (mg *DataSetDelimitedText) ResolveReferences(ctx context.Context, c client.
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Factory", "FactoryList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Factory", "FactoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -468,7 +468,7 @@ func (mg *DataSetDelimitedText) ResolveReferences(ctx context.Context, c client.
 	mg.Spec.ForProvider.DataFactoryID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataFactoryIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "LinkedServiceWeb", "LinkedServiceWebList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "LinkedServiceWeb", "LinkedServiceWebList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -488,7 +488,7 @@ func (mg *DataSetDelimitedText) ResolveReferences(ctx context.Context, c client.
 	mg.Spec.ForProvider.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LinkedServiceNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "LinkedServiceWeb", "LinkedServiceWebList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "LinkedServiceWeb", "LinkedServiceWebList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -520,7 +520,7 @@ func (mg *DataSetHTTP) ResolveReferences(ctx context.Context, c client.Reader) e
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Factory", "FactoryList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Factory", "FactoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -540,7 +540,7 @@ func (mg *DataSetHTTP) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.DataFactoryID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataFactoryIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "LinkedServiceWeb", "LinkedServiceWebList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "LinkedServiceWeb", "LinkedServiceWebList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -560,7 +560,7 @@ func (mg *DataSetHTTP) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LinkedServiceNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "LinkedServiceWeb", "LinkedServiceWebList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "LinkedServiceWeb", "LinkedServiceWebList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -592,7 +592,7 @@ func (mg *DataSetJSON) ResolveReferences(ctx context.Context, c client.Reader) e
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Factory", "FactoryList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Factory", "FactoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -612,7 +612,7 @@ func (mg *DataSetJSON) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.DataFactoryID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataFactoryIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "LinkedServiceWeb", "LinkedServiceWebList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "LinkedServiceWeb", "LinkedServiceWebList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -632,7 +632,7 @@ func (mg *DataSetJSON) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LinkedServiceNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "LinkedServiceWeb", "LinkedServiceWebList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "LinkedServiceWeb", "LinkedServiceWebList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -664,7 +664,7 @@ func (mg *DataSetMySQL) ResolveReferences(ctx context.Context, c client.Reader) 
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Factory", "FactoryList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Factory", "FactoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -684,7 +684,7 @@ func (mg *DataSetMySQL) ResolveReferences(ctx context.Context, c client.Reader) 
 	mg.Spec.ForProvider.DataFactoryID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataFactoryIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "LinkedServiceMySQL", "LinkedServiceMySQLList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "LinkedServiceMySQL", "LinkedServiceMySQLList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -704,7 +704,7 @@ func (mg *DataSetMySQL) ResolveReferences(ctx context.Context, c client.Reader) 
 	mg.Spec.ForProvider.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LinkedServiceNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "LinkedServiceMySQL", "LinkedServiceMySQLList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "LinkedServiceMySQL", "LinkedServiceMySQLList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -736,7 +736,7 @@ func (mg *DataSetParquet) ResolveReferences(ctx context.Context, c client.Reader
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Factory", "FactoryList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Factory", "FactoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -756,7 +756,7 @@ func (mg *DataSetParquet) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.ForProvider.DataFactoryID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataFactoryIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "LinkedServiceWeb", "LinkedServiceWebList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "LinkedServiceWeb", "LinkedServiceWebList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -776,7 +776,7 @@ func (mg *DataSetParquet) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.ForProvider.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LinkedServiceNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "LinkedServiceWeb", "LinkedServiceWebList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "LinkedServiceWeb", "LinkedServiceWebList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -808,7 +808,7 @@ func (mg *DataSetPostgreSQL) ResolveReferences(ctx context.Context, c client.Rea
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Factory", "FactoryList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Factory", "FactoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -828,7 +828,7 @@ func (mg *DataSetPostgreSQL) ResolveReferences(ctx context.Context, c client.Rea
 	mg.Spec.ForProvider.DataFactoryID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataFactoryIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "LinkedServicePostgreSQL", "LinkedServicePostgreSQLList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "LinkedServicePostgreSQL", "LinkedServicePostgreSQLList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -848,7 +848,7 @@ func (mg *DataSetPostgreSQL) ResolveReferences(ctx context.Context, c client.Rea
 	mg.Spec.ForProvider.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LinkedServiceNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "LinkedServicePostgreSQL", "LinkedServicePostgreSQLList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "LinkedServicePostgreSQL", "LinkedServicePostgreSQLList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -880,7 +880,7 @@ func (mg *DataSetSQLServerTable) ResolveReferences(ctx context.Context, c client
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Factory", "FactoryList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Factory", "FactoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -900,7 +900,7 @@ func (mg *DataSetSQLServerTable) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.DataFactoryID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataFactoryIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "LinkedServiceSQLServer", "LinkedServiceSQLServerList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "LinkedServiceSQLServer", "LinkedServiceSQLServerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -920,7 +920,7 @@ func (mg *DataSetSQLServerTable) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LinkedServiceNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "LinkedServiceSQLServer", "LinkedServiceSQLServerList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "LinkedServiceSQLServer", "LinkedServiceSQLServerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -952,7 +952,7 @@ func (mg *DataSetSnowflake) ResolveReferences(ctx context.Context, c client.Read
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Factory", "FactoryList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Factory", "FactoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -972,7 +972,7 @@ func (mg *DataSetSnowflake) ResolveReferences(ctx context.Context, c client.Read
 	mg.Spec.ForProvider.DataFactoryID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataFactoryIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "LinkedServiceSnowflake", "LinkedServiceSnowflakeList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "LinkedServiceSnowflake", "LinkedServiceSnowflakeList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -992,7 +992,7 @@ func (mg *DataSetSnowflake) ResolveReferences(ctx context.Context, c client.Read
 	mg.Spec.ForProvider.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LinkedServiceNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "LinkedServiceSnowflake", "LinkedServiceSnowflakeList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "LinkedServiceSnowflake", "LinkedServiceSnowflakeList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1024,7 +1024,7 @@ func (mg *Factory) ResolveReferences(ctx context.Context, c client.Reader) error
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1056,7 +1056,7 @@ func (mg *IntegrationRuntimeAzure) ResolveReferences(ctx context.Context, c clie
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Factory", "FactoryList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Factory", "FactoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1088,7 +1088,7 @@ func (mg *IntegrationRuntimeAzureSSIS) ResolveReferences(ctx context.Context, c 
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Factory", "FactoryList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Factory", "FactoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1110,7 +1110,7 @@ func (mg *IntegrationRuntimeAzureSSIS) ResolveReferences(ctx context.Context, c 
 
 	if mg.Spec.ForProvider.ExpressVnetIntegration != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -1132,7 +1132,7 @@ func (mg *IntegrationRuntimeAzureSSIS) ResolveReferences(ctx context.Context, c 
 	}
 	if mg.Spec.ForProvider.VnetIntegration != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -1154,7 +1154,7 @@ func (mg *IntegrationRuntimeAzureSSIS) ResolveReferences(ctx context.Context, c 
 	}
 	if mg.Spec.ForProvider.VnetIntegration != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -1176,7 +1176,7 @@ func (mg *IntegrationRuntimeAzureSSIS) ResolveReferences(ctx context.Context, c 
 	}
 	if mg.Spec.InitProvider.ExpressVnetIntegration != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -1198,7 +1198,7 @@ func (mg *IntegrationRuntimeAzureSSIS) ResolveReferences(ctx context.Context, c 
 	}
 	if mg.Spec.InitProvider.VnetIntegration != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -1220,7 +1220,7 @@ func (mg *IntegrationRuntimeAzureSSIS) ResolveReferences(ctx context.Context, c 
 	}
 	if mg.Spec.InitProvider.VnetIntegration != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -1253,7 +1253,7 @@ func (mg *IntegrationRuntimeSelfHosted) ResolveReferences(ctx context.Context, c
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Factory", "FactoryList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Factory", "FactoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1285,7 +1285,7 @@ func (mg *LinkedCustomService) ResolveReferences(ctx context.Context, c client.R
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Factory", "FactoryList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Factory", "FactoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1317,7 +1317,7 @@ func (mg *LinkedServiceAzureBlobStorage) ResolveReferences(ctx context.Context, 
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Factory", "FactoryList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Factory", "FactoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1339,7 +1339,7 @@ func (mg *LinkedServiceAzureBlobStorage) ResolveReferences(ctx context.Context, 
 
 	if mg.Spec.ForProvider.KeyVaultSASToken != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "LinkedServiceKeyVault", "LinkedServiceKeyVaultList")
+			m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "LinkedServiceKeyVault", "LinkedServiceKeyVaultList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -1361,7 +1361,7 @@ func (mg *LinkedServiceAzureBlobStorage) ResolveReferences(ctx context.Context, 
 	}
 	if mg.Spec.ForProvider.ServicePrincipalLinkedKeyVaultKey != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "LinkedServiceKeyVault", "LinkedServiceKeyVaultList")
+			m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "LinkedServiceKeyVault", "LinkedServiceKeyVaultList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -1383,7 +1383,7 @@ func (mg *LinkedServiceAzureBlobStorage) ResolveReferences(ctx context.Context, 
 	}
 	if mg.Spec.InitProvider.KeyVaultSASToken != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "LinkedServiceKeyVault", "LinkedServiceKeyVaultList")
+			m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "LinkedServiceKeyVault", "LinkedServiceKeyVaultList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -1405,7 +1405,7 @@ func (mg *LinkedServiceAzureBlobStorage) ResolveReferences(ctx context.Context, 
 	}
 	if mg.Spec.InitProvider.ServicePrincipalLinkedKeyVaultKey != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "LinkedServiceKeyVault", "LinkedServiceKeyVaultList")
+			m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "LinkedServiceKeyVault", "LinkedServiceKeyVaultList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -1438,7 +1438,7 @@ func (mg *LinkedServiceAzureDatabricks) ResolveReferences(ctx context.Context, c
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Factory", "FactoryList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Factory", "FactoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1458,7 +1458,7 @@ func (mg *LinkedServiceAzureDatabricks) ResolveReferences(ctx context.Context, c
 	mg.Spec.ForProvider.DataFactoryID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataFactoryIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("databricks.azure.upbound.io", "v1beta1", "Workspace", "WorkspaceList")
+		m, l, err = apisresolver.GetManagedResource("databricks.azure.m.upbound.io", "v1beta1", "Workspace", "WorkspaceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1478,7 +1478,7 @@ func (mg *LinkedServiceAzureDatabricks) ResolveReferences(ctx context.Context, c
 	mg.Spec.ForProvider.MsiWorkSpaceResourceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.MsiWorkSpaceResourceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("databricks.azure.upbound.io", "v1beta1", "Workspace", "WorkspaceList")
+		m, l, err = apisresolver.GetManagedResource("databricks.azure.m.upbound.io", "v1beta1", "Workspace", "WorkspaceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1510,7 +1510,7 @@ func (mg *LinkedServiceAzureFileStorage) ResolveReferences(ctx context.Context, 
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Factory", "FactoryList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Factory", "FactoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1542,7 +1542,7 @@ func (mg *LinkedServiceAzureFunction) ResolveReferences(ctx context.Context, c c
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Factory", "FactoryList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Factory", "FactoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1574,7 +1574,7 @@ func (mg *LinkedServiceAzureSQLDatabase) ResolveReferences(ctx context.Context, 
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Factory", "FactoryList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Factory", "FactoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1606,7 +1606,7 @@ func (mg *LinkedServiceAzureSearch) ResolveReferences(ctx context.Context, c cli
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Factory", "FactoryList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Factory", "FactoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1626,7 +1626,7 @@ func (mg *LinkedServiceAzureSearch) ResolveReferences(ctx context.Context, c cli
 	mg.Spec.ForProvider.DataFactoryID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataFactoryIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("search.azure.upbound.io", "v1beta1", "Service", "ServiceList")
+		m, l, err = apisresolver.GetManagedResource("search.azure.m.upbound.io", "v1beta1", "Service", "ServiceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1646,7 +1646,7 @@ func (mg *LinkedServiceAzureSearch) ResolveReferences(ctx context.Context, c cli
 	mg.Spec.ForProvider.SearchServiceKey = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SearchServiceKeyRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("search.azure.upbound.io", "v1beta1", "Service", "ServiceList")
+		m, l, err = apisresolver.GetManagedResource("search.azure.m.upbound.io", "v1beta1", "Service", "ServiceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1678,7 +1678,7 @@ func (mg *LinkedServiceAzureTableStorage) ResolveReferences(ctx context.Context,
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Factory", "FactoryList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Factory", "FactoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1710,7 +1710,7 @@ func (mg *LinkedServiceCosmosDB) ResolveReferences(ctx context.Context, c client
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Factory", "FactoryList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Factory", "FactoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1742,7 +1742,7 @@ func (mg *LinkedServiceCosmosDBMongoapi) ResolveReferences(ctx context.Context, 
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Factory", "FactoryList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Factory", "FactoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1774,7 +1774,7 @@ func (mg *LinkedServiceDataLakeStorageGen2) ResolveReferences(ctx context.Contex
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Factory", "FactoryList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Factory", "FactoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1806,7 +1806,7 @@ func (mg *LinkedServiceKeyVault) ResolveReferences(ctx context.Context, c client
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Factory", "FactoryList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Factory", "FactoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1826,7 +1826,7 @@ func (mg *LinkedServiceKeyVault) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.DataFactoryID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataFactoryIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta1", "Vault", "VaultList")
+		m, l, err = apisresolver.GetManagedResource("keyvault.azure.m.upbound.io", "v1beta1", "Vault", "VaultList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1846,7 +1846,7 @@ func (mg *LinkedServiceKeyVault) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.KeyVaultID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KeyVaultIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta1", "Vault", "VaultList")
+		m, l, err = apisresolver.GetManagedResource("keyvault.azure.m.upbound.io", "v1beta1", "Vault", "VaultList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1878,7 +1878,7 @@ func (mg *LinkedServiceKusto) ResolveReferences(ctx context.Context, c client.Re
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Factory", "FactoryList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Factory", "FactoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1898,7 +1898,7 @@ func (mg *LinkedServiceKusto) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.DataFactoryID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataFactoryIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("kusto.azure.upbound.io", "v1beta1", "Database", "DatabaseList")
+		m, l, err = apisresolver.GetManagedResource("kusto.azure.m.upbound.io", "v1beta1", "Database", "DatabaseList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1918,7 +1918,7 @@ func (mg *LinkedServiceKusto) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.KustoDatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KustoDatabaseNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("kusto.azure.upbound.io", "v1beta1", "Cluster", "ClusterList")
+		m, l, err = apisresolver.GetManagedResource("kusto.azure.m.upbound.io", "v1beta1", "Cluster", "ClusterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1938,7 +1938,7 @@ func (mg *LinkedServiceKusto) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.KustoEndpoint = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KustoEndpointRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("kusto.azure.upbound.io", "v1beta1", "Database", "DatabaseList")
+		m, l, err = apisresolver.GetManagedResource("kusto.azure.m.upbound.io", "v1beta1", "Database", "DatabaseList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1958,7 +1958,7 @@ func (mg *LinkedServiceKusto) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.InitProvider.KustoDatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.KustoDatabaseNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("kusto.azure.upbound.io", "v1beta1", "Cluster", "ClusterList")
+		m, l, err = apisresolver.GetManagedResource("kusto.azure.m.upbound.io", "v1beta1", "Cluster", "ClusterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1990,7 +1990,7 @@ func (mg *LinkedServiceMySQL) ResolveReferences(ctx context.Context, c client.Re
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Factory", "FactoryList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Factory", "FactoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2022,7 +2022,7 @@ func (mg *LinkedServiceOData) ResolveReferences(ctx context.Context, c client.Re
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Factory", "FactoryList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Factory", "FactoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2054,7 +2054,7 @@ func (mg *LinkedServiceOdbc) ResolveReferences(ctx context.Context, c client.Rea
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Factory", "FactoryList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Factory", "FactoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2086,7 +2086,7 @@ func (mg *LinkedServicePostgreSQL) ResolveReferences(ctx context.Context, c clie
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Factory", "FactoryList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Factory", "FactoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2118,7 +2118,7 @@ func (mg *LinkedServiceSFTP) ResolveReferences(ctx context.Context, c client.Rea
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Factory", "FactoryList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Factory", "FactoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2150,7 +2150,7 @@ func (mg *LinkedServiceSQLServer) ResolveReferences(ctx context.Context, c clien
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Factory", "FactoryList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Factory", "FactoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2172,7 +2172,7 @@ func (mg *LinkedServiceSQLServer) ResolveReferences(ctx context.Context, c clien
 
 	if mg.Spec.ForProvider.KeyVaultPassword != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "LinkedServiceKeyVault", "LinkedServiceKeyVaultList")
+			m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "LinkedServiceKeyVault", "LinkedServiceKeyVaultList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -2194,7 +2194,7 @@ func (mg *LinkedServiceSQLServer) ResolveReferences(ctx context.Context, c clien
 	}
 	if mg.Spec.InitProvider.KeyVaultPassword != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "LinkedServiceKeyVault", "LinkedServiceKeyVaultList")
+			m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "LinkedServiceKeyVault", "LinkedServiceKeyVaultList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -2227,7 +2227,7 @@ func (mg *LinkedServiceSnowflake) ResolveReferences(ctx context.Context, c clien
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Factory", "FactoryList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Factory", "FactoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2249,7 +2249,7 @@ func (mg *LinkedServiceSnowflake) ResolveReferences(ctx context.Context, c clien
 
 	if mg.Spec.ForProvider.KeyVaultPassword != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "LinkedServiceKeyVault", "LinkedServiceKeyVaultList")
+			m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "LinkedServiceKeyVault", "LinkedServiceKeyVaultList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -2271,7 +2271,7 @@ func (mg *LinkedServiceSnowflake) ResolveReferences(ctx context.Context, c clien
 	}
 	if mg.Spec.InitProvider.KeyVaultPassword != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "LinkedServiceKeyVault", "LinkedServiceKeyVaultList")
+			m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "LinkedServiceKeyVault", "LinkedServiceKeyVaultList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -2304,7 +2304,7 @@ func (mg *LinkedServiceSynapse) ResolveReferences(ctx context.Context, c client.
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Factory", "FactoryList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Factory", "FactoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2326,7 +2326,7 @@ func (mg *LinkedServiceSynapse) ResolveReferences(ctx context.Context, c client.
 
 	if mg.Spec.ForProvider.KeyVaultPassword != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "LinkedServiceKeyVault", "LinkedServiceKeyVaultList")
+			m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "LinkedServiceKeyVault", "LinkedServiceKeyVaultList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -2348,7 +2348,7 @@ func (mg *LinkedServiceSynapse) ResolveReferences(ctx context.Context, c client.
 	}
 	if mg.Spec.InitProvider.KeyVaultPassword != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "LinkedServiceKeyVault", "LinkedServiceKeyVaultList")
+			m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "LinkedServiceKeyVault", "LinkedServiceKeyVaultList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -2381,7 +2381,7 @@ func (mg *LinkedServiceWeb) ResolveReferences(ctx context.Context, c client.Read
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Factory", "FactoryList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Factory", "FactoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2413,7 +2413,7 @@ func (mg *ManagedPrivateEndpoint) ResolveReferences(ctx context.Context, c clien
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Factory", "FactoryList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Factory", "FactoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2433,7 +2433,7 @@ func (mg *ManagedPrivateEndpoint) ResolveReferences(ctx context.Context, c clien
 	mg.Spec.ForProvider.DataFactoryID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataFactoryIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta1", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2453,7 +2453,7 @@ func (mg *ManagedPrivateEndpoint) ResolveReferences(ctx context.Context, c clien
 	mg.Spec.ForProvider.TargetResourceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TargetResourceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Factory", "FactoryList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Factory", "FactoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2473,7 +2473,7 @@ func (mg *ManagedPrivateEndpoint) ResolveReferences(ctx context.Context, c clien
 	mg.Spec.InitProvider.DataFactoryID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DataFactoryIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta1", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2505,7 +2505,7 @@ func (mg *Pipeline) ResolveReferences(ctx context.Context, c client.Reader) erro
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Factory", "FactoryList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Factory", "FactoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2537,7 +2537,7 @@ func (mg *TriggerBlobEvent) ResolveReferences(ctx context.Context, c client.Read
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Factory", "FactoryList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Factory", "FactoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2559,7 +2559,7 @@ func (mg *TriggerBlobEvent) ResolveReferences(ctx context.Context, c client.Read
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.Pipeline); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Pipeline", "PipelineList")
+			m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Pipeline", "PipelineList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -2580,7 +2580,7 @@ func (mg *TriggerBlobEvent) ResolveReferences(ctx context.Context, c client.Read
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta1", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2601,7 +2601,7 @@ func (mg *TriggerBlobEvent) ResolveReferences(ctx context.Context, c client.Read
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.Pipeline); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Pipeline", "PipelineList")
+			m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Pipeline", "PipelineList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -2622,7 +2622,7 @@ func (mg *TriggerBlobEvent) ResolveReferences(ctx context.Context, c client.Read
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta1", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2653,7 +2653,7 @@ func (mg *TriggerCustomEvent) ResolveReferences(ctx context.Context, c client.Re
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Factory", "FactoryList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Factory", "FactoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2673,7 +2673,7 @@ func (mg *TriggerCustomEvent) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.DataFactoryID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataFactoryIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("eventgrid.azure.upbound.io", "v1beta1", "Topic", "TopicList")
+		m, l, err = apisresolver.GetManagedResource("eventgrid.azure.m.upbound.io", "v1beta1", "Topic", "TopicList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2695,7 +2695,7 @@ func (mg *TriggerCustomEvent) ResolveReferences(ctx context.Context, c client.Re
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.Pipeline); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Pipeline", "PipelineList")
+			m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Pipeline", "PipelineList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -2716,7 +2716,7 @@ func (mg *TriggerCustomEvent) ResolveReferences(ctx context.Context, c client.Re
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("eventgrid.azure.upbound.io", "v1beta1", "Topic", "TopicList")
+		m, l, err = apisresolver.GetManagedResource("eventgrid.azure.m.upbound.io", "v1beta1", "Topic", "TopicList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2737,7 +2737,7 @@ func (mg *TriggerCustomEvent) ResolveReferences(ctx context.Context, c client.Re
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.Pipeline); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Pipeline", "PipelineList")
+			m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Pipeline", "PipelineList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -2770,7 +2770,7 @@ func (mg *TriggerSchedule) ResolveReferences(ctx context.Context, c client.Reade
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Factory", "FactoryList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Factory", "FactoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2790,7 +2790,7 @@ func (mg *TriggerSchedule) ResolveReferences(ctx context.Context, c client.Reade
 	mg.Spec.ForProvider.DataFactoryID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataFactoryIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Pipeline", "PipelineList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Pipeline", "PipelineList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2810,7 +2810,7 @@ func (mg *TriggerSchedule) ResolveReferences(ctx context.Context, c client.Reade
 	mg.Spec.ForProvider.PipelineName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PipelineNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("datafactory.azure.upbound.io", "v1beta1", "Pipeline", "PipelineList")
+		m, l, err = apisresolver.GetManagedResource("datafactory.azure.m.upbound.io", "v1beta1", "Pipeline", "PipelineList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

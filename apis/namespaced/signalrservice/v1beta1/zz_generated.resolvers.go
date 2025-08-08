@@ -27,7 +27,7 @@ func (mg *NetworkACL) ResolveReferences( // ResolveReferences of this NetworkACL
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.PrivateEndpoint); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PrivateEndpoint", "PrivateEndpointList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PrivateEndpoint", "PrivateEndpointList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -48,7 +48,7 @@ func (mg *NetworkACL) ResolveReferences( // ResolveReferences of this NetworkACL
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("signalrservice.azure.upbound.io", "v1beta1", "Service", "ServiceList")
+		m, l, err = apisresolver.GetManagedResource("signalrservice.azure.m.upbound.io", "v1beta1", "Service", "ServiceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -69,7 +69,7 @@ func (mg *NetworkACL) ResolveReferences( // ResolveReferences of this NetworkACL
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.PrivateEndpoint); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PrivateEndpoint", "PrivateEndpointList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PrivateEndpoint", "PrivateEndpointList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -90,7 +90,7 @@ func (mg *NetworkACL) ResolveReferences( // ResolveReferences of this NetworkACL
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("signalrservice.azure.upbound.io", "v1beta1", "Service", "ServiceList")
+		m, l, err = apisresolver.GetManagedResource("signalrservice.azure.m.upbound.io", "v1beta1", "Service", "ServiceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -121,7 +121,7 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -153,7 +153,7 @@ func (mg *SignalrSharedPrivateLinkResource) ResolveReferences(ctx context.Contex
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("signalrservice.azure.upbound.io", "v1beta1", "Service", "ServiceList")
+		m, l, err = apisresolver.GetManagedResource("signalrservice.azure.m.upbound.io", "v1beta1", "Service", "ServiceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -173,7 +173,7 @@ func (mg *SignalrSharedPrivateLinkResource) ResolveReferences(ctx context.Contex
 	mg.Spec.ForProvider.SignalrServiceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SignalrServiceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta1", "Vault", "VaultList")
+		m, l, err = apisresolver.GetManagedResource("keyvault.azure.m.upbound.io", "v1beta1", "Vault", "VaultList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -193,7 +193,7 @@ func (mg *SignalrSharedPrivateLinkResource) ResolveReferences(ctx context.Contex
 	mg.Spec.ForProvider.TargetResourceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TargetResourceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("signalrservice.azure.upbound.io", "v1beta1", "Service", "ServiceList")
+		m, l, err = apisresolver.GetManagedResource("signalrservice.azure.m.upbound.io", "v1beta1", "Service", "ServiceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -213,7 +213,7 @@ func (mg *SignalrSharedPrivateLinkResource) ResolveReferences(ctx context.Contex
 	mg.Spec.InitProvider.SignalrServiceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.SignalrServiceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta1", "Vault", "VaultList")
+		m, l, err = apisresolver.GetManagedResource("keyvault.azure.m.upbound.io", "v1beta1", "Vault", "VaultList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -245,7 +245,7 @@ func (mg *WebPubsub) ResolveReferences(ctx context.Context, c client.Reader) err
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -265,7 +265,7 @@ func (mg *WebPubsub) ResolveReferences(ctx context.Context, c client.Reader) err
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -300,7 +300,7 @@ func (mg *WebPubsubHub) ResolveReferences(ctx context.Context, c client.Reader) 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.EventHandler); i3++ {
 		if mg.Spec.ForProvider.EventHandler[i3].Auth != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("managedidentity.azure.upbound.io", "v1beta1", "UserAssignedIdentity", "UserAssignedIdentityList")
+				m, l, err = apisresolver.GetManagedResource("managedidentity.azure.m.upbound.io", "v1beta1", "UserAssignedIdentity", "UserAssignedIdentityList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -323,7 +323,7 @@ func (mg *WebPubsubHub) ResolveReferences(ctx context.Context, c client.Reader) 
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.EventListener); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("eventhub.azure.upbound.io", "v1beta1", "EventHub", "EventHubList")
+			m, l, err = apisresolver.GetManagedResource("eventhub.azure.m.upbound.io", "v1beta1", "EventHub", "EventHubList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -345,7 +345,7 @@ func (mg *WebPubsubHub) ResolveReferences(ctx context.Context, c client.Reader) 
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.EventListener); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("eventhub.azure.upbound.io", "v1beta1", "EventHubNamespace", "EventHubNamespaceList")
+			m, l, err = apisresolver.GetManagedResource("eventhub.azure.m.upbound.io", "v1beta1", "EventHubNamespace", "EventHubNamespaceList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -366,7 +366,7 @@ func (mg *WebPubsubHub) ResolveReferences(ctx context.Context, c client.Reader) 
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("signalrservice.azure.upbound.io", "v1beta1", "WebPubsub", "WebPubsubList")
+		m, l, err = apisresolver.GetManagedResource("signalrservice.azure.m.upbound.io", "v1beta1", "WebPubsub", "WebPubsubList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -388,7 +388,7 @@ func (mg *WebPubsubHub) ResolveReferences(ctx context.Context, c client.Reader) 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.EventHandler); i3++ {
 		if mg.Spec.InitProvider.EventHandler[i3].Auth != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("managedidentity.azure.upbound.io", "v1beta1", "UserAssignedIdentity", "UserAssignedIdentityList")
+				m, l, err = apisresolver.GetManagedResource("managedidentity.azure.m.upbound.io", "v1beta1", "UserAssignedIdentity", "UserAssignedIdentityList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -411,7 +411,7 @@ func (mg *WebPubsubHub) ResolveReferences(ctx context.Context, c client.Reader) 
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.EventListener); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("eventhub.azure.upbound.io", "v1beta1", "EventHub", "EventHubList")
+			m, l, err = apisresolver.GetManagedResource("eventhub.azure.m.upbound.io", "v1beta1", "EventHub", "EventHubList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -433,7 +433,7 @@ func (mg *WebPubsubHub) ResolveReferences(ctx context.Context, c client.Reader) 
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.EventListener); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("eventhub.azure.upbound.io", "v1beta1", "EventHubNamespace", "EventHubNamespaceList")
+			m, l, err = apisresolver.GetManagedResource("eventhub.azure.m.upbound.io", "v1beta1", "EventHubNamespace", "EventHubNamespaceList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -454,7 +454,7 @@ func (mg *WebPubsubHub) ResolveReferences(ctx context.Context, c client.Reader) 
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("signalrservice.azure.upbound.io", "v1beta1", "WebPubsub", "WebPubsubList")
+		m, l, err = apisresolver.GetManagedResource("signalrservice.azure.m.upbound.io", "v1beta1", "WebPubsub", "WebPubsubList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -487,7 +487,7 @@ func (mg *WebPubsubNetworkACL) ResolveReferences(ctx context.Context, c client.R
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.PrivateEndpoint); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PrivateEndpoint", "PrivateEndpointList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PrivateEndpoint", "PrivateEndpointList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -508,7 +508,7 @@ func (mg *WebPubsubNetworkACL) ResolveReferences(ctx context.Context, c client.R
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("signalrservice.azure.upbound.io", "v1beta1", "WebPubsub", "WebPubsubList")
+		m, l, err = apisresolver.GetManagedResource("signalrservice.azure.m.upbound.io", "v1beta1", "WebPubsub", "WebPubsubList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -529,7 +529,7 @@ func (mg *WebPubsubNetworkACL) ResolveReferences(ctx context.Context, c client.R
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.PrivateEndpoint); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PrivateEndpoint", "PrivateEndpointList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PrivateEndpoint", "PrivateEndpointList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -550,7 +550,7 @@ func (mg *WebPubsubNetworkACL) ResolveReferences(ctx context.Context, c client.R
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("signalrservice.azure.upbound.io", "v1beta1", "WebPubsub", "WebPubsubList")
+		m, l, err = apisresolver.GetManagedResource("signalrservice.azure.m.upbound.io", "v1beta1", "WebPubsub", "WebPubsubList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

@@ -25,7 +25,7 @@ func (mg *BackupContainerStorageAccount) ResolveReferences( // ResolveReferences
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.upbound.io", "v1beta1", "Vault", "VaultList")
+		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.m.upbound.io", "v1beta1", "Vault", "VaultList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -45,7 +45,7 @@ func (mg *BackupContainerStorageAccount) ResolveReferences( // ResolveReferences
 	mg.Spec.ForProvider.RecoveryVaultName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RecoveryVaultNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -65,7 +65,7 @@ func (mg *BackupContainerStorageAccount) ResolveReferences( // ResolveReferences
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta1", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -85,7 +85,7 @@ func (mg *BackupContainerStorageAccount) ResolveReferences( // ResolveReferences
 	mg.Spec.ForProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageAccountIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.upbound.io", "v1beta1", "Vault", "VaultList")
+		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.m.upbound.io", "v1beta1", "Vault", "VaultList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -105,7 +105,7 @@ func (mg *BackupContainerStorageAccount) ResolveReferences( // ResolveReferences
 	mg.Spec.InitProvider.RecoveryVaultName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.RecoveryVaultNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -125,7 +125,7 @@ func (mg *BackupContainerStorageAccount) ResolveReferences( // ResolveReferences
 	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta1", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -157,7 +157,7 @@ func (mg *BackupPolicyFileShare) ResolveReferences(ctx context.Context, c client
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.upbound.io", "v1beta1", "Vault", "VaultList")
+		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.m.upbound.io", "v1beta1", "Vault", "VaultList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -177,7 +177,7 @@ func (mg *BackupPolicyFileShare) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.RecoveryVaultName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RecoveryVaultNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -209,7 +209,7 @@ func (mg *BackupPolicyVM) ResolveReferences(ctx context.Context, c client.Reader
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.upbound.io", "v1beta1", "Vault", "VaultList")
+		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.m.upbound.io", "v1beta1", "Vault", "VaultList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -229,7 +229,7 @@ func (mg *BackupPolicyVM) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.ForProvider.RecoveryVaultName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RecoveryVaultNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -261,7 +261,7 @@ func (mg *BackupPolicyVMWorkload) ResolveReferences(ctx context.Context, c clien
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.upbound.io", "v1beta1", "Vault", "VaultList")
+		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.m.upbound.io", "v1beta1", "Vault", "VaultList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -281,7 +281,7 @@ func (mg *BackupPolicyVMWorkload) ResolveReferences(ctx context.Context, c clien
 	mg.Spec.ForProvider.RecoveryVaultName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RecoveryVaultNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -313,7 +313,7 @@ func (mg *BackupProtectedFileShare) ResolveReferences(ctx context.Context, c cli
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.upbound.io", "v1beta1", "BackupPolicyFileShare", "BackupPolicyFileShareList")
+		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.m.upbound.io", "v1beta1", "BackupPolicyFileShare", "BackupPolicyFileShareList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -333,7 +333,7 @@ func (mg *BackupProtectedFileShare) ResolveReferences(ctx context.Context, c cli
 	mg.Spec.ForProvider.BackupPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.BackupPolicyIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.upbound.io", "v1beta1", "Vault", "VaultList")
+		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.m.upbound.io", "v1beta1", "Vault", "VaultList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -353,7 +353,7 @@ func (mg *BackupProtectedFileShare) ResolveReferences(ctx context.Context, c cli
 	mg.Spec.ForProvider.RecoveryVaultName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RecoveryVaultNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -373,7 +373,7 @@ func (mg *BackupProtectedFileShare) ResolveReferences(ctx context.Context, c cli
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Share", "ShareList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta1", "Share", "ShareList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -393,7 +393,7 @@ func (mg *BackupProtectedFileShare) ResolveReferences(ctx context.Context, c cli
 	mg.Spec.ForProvider.SourceFileShareName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SourceFileShareNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.upbound.io", "v1beta1", "BackupContainerStorageAccount", "BackupContainerStorageAccountList")
+		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.m.upbound.io", "v1beta1", "BackupContainerStorageAccount", "BackupContainerStorageAccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -413,7 +413,7 @@ func (mg *BackupProtectedFileShare) ResolveReferences(ctx context.Context, c cli
 	mg.Spec.ForProvider.SourceStorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SourceStorageAccountIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.upbound.io", "v1beta1", "BackupPolicyFileShare", "BackupPolicyFileShareList")
+		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.m.upbound.io", "v1beta1", "BackupPolicyFileShare", "BackupPolicyFileShareList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -433,7 +433,7 @@ func (mg *BackupProtectedFileShare) ResolveReferences(ctx context.Context, c cli
 	mg.Spec.InitProvider.BackupPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.BackupPolicyIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.upbound.io", "v1beta1", "Vault", "VaultList")
+		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.m.upbound.io", "v1beta1", "Vault", "VaultList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -453,7 +453,7 @@ func (mg *BackupProtectedFileShare) ResolveReferences(ctx context.Context, c cli
 	mg.Spec.InitProvider.RecoveryVaultName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.RecoveryVaultNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -473,7 +473,7 @@ func (mg *BackupProtectedFileShare) ResolveReferences(ctx context.Context, c cli
 	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Share", "ShareList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta1", "Share", "ShareList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -493,7 +493,7 @@ func (mg *BackupProtectedFileShare) ResolveReferences(ctx context.Context, c cli
 	mg.Spec.InitProvider.SourceFileShareName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.SourceFileShareNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.upbound.io", "v1beta1", "BackupContainerStorageAccount", "BackupContainerStorageAccountList")
+		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.m.upbound.io", "v1beta1", "BackupContainerStorageAccount", "BackupContainerStorageAccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -525,7 +525,7 @@ func (mg *BackupProtectedVM) ResolveReferences(ctx context.Context, c client.Rea
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.upbound.io", "v1beta1", "BackupPolicyVM", "BackupPolicyVMList")
+		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.m.upbound.io", "v1beta1", "BackupPolicyVM", "BackupPolicyVMList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -545,7 +545,7 @@ func (mg *BackupProtectedVM) ResolveReferences(ctx context.Context, c client.Rea
 	mg.Spec.ForProvider.BackupPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.BackupPolicyIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.upbound.io", "v1beta1", "Vault", "VaultList")
+		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.m.upbound.io", "v1beta1", "Vault", "VaultList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -565,7 +565,7 @@ func (mg *BackupProtectedVM) ResolveReferences(ctx context.Context, c client.Rea
 	mg.Spec.ForProvider.RecoveryVaultName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RecoveryVaultNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -585,7 +585,7 @@ func (mg *BackupProtectedVM) ResolveReferences(ctx context.Context, c client.Rea
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.upbound.io", "v1beta1", "BackupPolicyVM", "BackupPolicyVMList")
+		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.m.upbound.io", "v1beta1", "BackupPolicyVM", "BackupPolicyVMList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -605,7 +605,7 @@ func (mg *BackupProtectedVM) ResolveReferences(ctx context.Context, c client.Rea
 	mg.Spec.InitProvider.BackupPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.BackupPolicyIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.upbound.io", "v1beta1", "Vault", "VaultList")
+		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.m.upbound.io", "v1beta1", "Vault", "VaultList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -625,7 +625,7 @@ func (mg *BackupProtectedVM) ResolveReferences(ctx context.Context, c client.Rea
 	mg.Spec.InitProvider.RecoveryVaultName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.RecoveryVaultNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -657,7 +657,7 @@ func (mg *SiteRecoveryFabric) ResolveReferences(ctx context.Context, c client.Re
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.upbound.io", "v1beta1", "Vault", "VaultList")
+		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.m.upbound.io", "v1beta1", "Vault", "VaultList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -677,7 +677,7 @@ func (mg *SiteRecoveryFabric) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.RecoveryVaultName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RecoveryVaultNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -709,7 +709,7 @@ func (mg *SiteRecoveryNetworkMapping) ResolveReferences(ctx context.Context, c c
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.upbound.io", "v1beta1", "Vault", "VaultList")
+		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.m.upbound.io", "v1beta1", "Vault", "VaultList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -729,7 +729,7 @@ func (mg *SiteRecoveryNetworkMapping) ResolveReferences(ctx context.Context, c c
 	mg.Spec.ForProvider.RecoveryVaultName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RecoveryVaultNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -749,7 +749,7 @@ func (mg *SiteRecoveryNetworkMapping) ResolveReferences(ctx context.Context, c c
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VirtualNetwork", "VirtualNetworkList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualNetwork", "VirtualNetworkList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -769,7 +769,7 @@ func (mg *SiteRecoveryNetworkMapping) ResolveReferences(ctx context.Context, c c
 	mg.Spec.ForProvider.SourceNetworkID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SourceNetworkIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VirtualNetwork", "VirtualNetworkList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualNetwork", "VirtualNetworkList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -789,7 +789,7 @@ func (mg *SiteRecoveryNetworkMapping) ResolveReferences(ctx context.Context, c c
 	mg.Spec.ForProvider.TargetNetworkID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TargetNetworkIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.upbound.io", "v1beta1", "Vault", "VaultList")
+		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.m.upbound.io", "v1beta1", "Vault", "VaultList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -809,7 +809,7 @@ func (mg *SiteRecoveryNetworkMapping) ResolveReferences(ctx context.Context, c c
 	mg.Spec.InitProvider.RecoveryVaultName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.RecoveryVaultNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -829,7 +829,7 @@ func (mg *SiteRecoveryNetworkMapping) ResolveReferences(ctx context.Context, c c
 	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VirtualNetwork", "VirtualNetworkList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualNetwork", "VirtualNetworkList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -849,7 +849,7 @@ func (mg *SiteRecoveryNetworkMapping) ResolveReferences(ctx context.Context, c c
 	mg.Spec.InitProvider.SourceNetworkID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.SourceNetworkIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "VirtualNetwork", "VirtualNetworkList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualNetwork", "VirtualNetworkList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -881,7 +881,7 @@ func (mg *SiteRecoveryProtectionContainer) ResolveReferences(ctx context.Context
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.upbound.io", "v1beta1", "SiteRecoveryFabric", "SiteRecoveryFabricList")
+		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.m.upbound.io", "v1beta1", "SiteRecoveryFabric", "SiteRecoveryFabricList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -901,7 +901,7 @@ func (mg *SiteRecoveryProtectionContainer) ResolveReferences(ctx context.Context
 	mg.Spec.ForProvider.RecoveryFabricName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RecoveryFabricNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.upbound.io", "v1beta1", "Vault", "VaultList")
+		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.m.upbound.io", "v1beta1", "Vault", "VaultList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -921,7 +921,7 @@ func (mg *SiteRecoveryProtectionContainer) ResolveReferences(ctx context.Context
 	mg.Spec.ForProvider.RecoveryVaultName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RecoveryVaultNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -953,7 +953,7 @@ func (mg *SiteRecoveryProtectionContainerMapping) ResolveReferences(ctx context.
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.upbound.io", "v1beta1", "SiteRecoveryFabric", "SiteRecoveryFabricList")
+		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.m.upbound.io", "v1beta1", "SiteRecoveryFabric", "SiteRecoveryFabricList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -973,7 +973,7 @@ func (mg *SiteRecoveryProtectionContainerMapping) ResolveReferences(ctx context.
 	mg.Spec.ForProvider.RecoveryFabricName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RecoveryFabricNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.upbound.io", "v1beta1", "SiteRecoveryReplicationPolicy", "SiteRecoveryReplicationPolicyList")
+		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.m.upbound.io", "v1beta1", "SiteRecoveryReplicationPolicy", "SiteRecoveryReplicationPolicyList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -993,7 +993,7 @@ func (mg *SiteRecoveryProtectionContainerMapping) ResolveReferences(ctx context.
 	mg.Spec.ForProvider.RecoveryReplicationPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RecoveryReplicationPolicyIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.upbound.io", "v1beta1", "SiteRecoveryProtectionContainer", "SiteRecoveryProtectionContainerList")
+		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.m.upbound.io", "v1beta1", "SiteRecoveryProtectionContainer", "SiteRecoveryProtectionContainerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1013,7 +1013,7 @@ func (mg *SiteRecoveryProtectionContainerMapping) ResolveReferences(ctx context.
 	mg.Spec.ForProvider.RecoverySourceProtectionContainerName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RecoverySourceProtectionContainerNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.upbound.io", "v1beta1", "SiteRecoveryProtectionContainer", "SiteRecoveryProtectionContainerList")
+		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.m.upbound.io", "v1beta1", "SiteRecoveryProtectionContainer", "SiteRecoveryProtectionContainerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1033,7 +1033,7 @@ func (mg *SiteRecoveryProtectionContainerMapping) ResolveReferences(ctx context.
 	mg.Spec.ForProvider.RecoveryTargetProtectionContainerID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RecoveryTargetProtectionContainerIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.upbound.io", "v1beta1", "Vault", "VaultList")
+		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.m.upbound.io", "v1beta1", "Vault", "VaultList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1053,7 +1053,7 @@ func (mg *SiteRecoveryProtectionContainerMapping) ResolveReferences(ctx context.
 	mg.Spec.ForProvider.RecoveryVaultName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RecoveryVaultNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1073,7 +1073,7 @@ func (mg *SiteRecoveryProtectionContainerMapping) ResolveReferences(ctx context.
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.upbound.io", "v1beta1", "SiteRecoveryReplicationPolicy", "SiteRecoveryReplicationPolicyList")
+		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.m.upbound.io", "v1beta1", "SiteRecoveryReplicationPolicy", "SiteRecoveryReplicationPolicyList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1093,7 +1093,7 @@ func (mg *SiteRecoveryProtectionContainerMapping) ResolveReferences(ctx context.
 	mg.Spec.InitProvider.RecoveryReplicationPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.RecoveryReplicationPolicyIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.upbound.io", "v1beta1", "SiteRecoveryProtectionContainer", "SiteRecoveryProtectionContainerList")
+		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.m.upbound.io", "v1beta1", "SiteRecoveryProtectionContainer", "SiteRecoveryProtectionContainerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1125,7 +1125,7 @@ func (mg *SiteRecoveryReplicationPolicy) ResolveReferences(ctx context.Context, 
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.upbound.io", "v1beta1", "Vault", "VaultList")
+		m, l, err = apisresolver.GetManagedResource("recoveryservices.azure.m.upbound.io", "v1beta1", "Vault", "VaultList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1145,7 +1145,7 @@ func (mg *SiteRecoveryReplicationPolicy) ResolveReferences(ctx context.Context, 
 	mg.Spec.ForProvider.RecoveryVaultName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RecoveryVaultNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1177,7 +1177,7 @@ func (mg *Vault) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
