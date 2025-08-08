@@ -1,0 +1,51 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: consumption.azure.m.upbound.io/v1beta1
+kind: BudgetManagementGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: consumption/v1beta2/budgetmanagementgroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    amount: 1000
+    managementGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: example
+    notification:
+      - contactEmails:
+          - foo@example.com
+          - bar@example.com
+        enabled: true
+        operator: EqualTo
+        threshold: 90
+      - contactEmails:
+          - foo@example.com
+          - bar@example.com
+        enabled: false
+        operator: GreaterThan
+        threshold: 100
+        thresholdType: Forecasted
+    timeGrain: Monthly
+    timePeriod:
+      endDate: "2023-07-01T00:00:00Z"
+      startDate: "2023-06-01T00:00:00Z"
+---
+apiVersion: management.azure.m.upbound.io/v1beta1
+kind: ManagementGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: consumption/v1beta2/budgetmanagementgroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    displayName: example

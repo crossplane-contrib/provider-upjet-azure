@@ -1,0 +1,53 @@
+apiVersion: containerservice.azure.m.upbound.io/v1beta1
+kind: KubernetesClusterExtension
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerservice/v1beta1/kubernetesclusterextension
+    uptest.upbound.io/timeout: "3600"
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-kce
+  namespace: upbound-system
+spec:
+  forProvider:
+    clusterIdRef:
+      name: example-kc-kce
+    extensionType: microsoft.flux
+---
+apiVersion: containerservice.azure.m.upbound.io/v1beta1
+kind: KubernetesCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerservice/v1beta1/kubernetesclusterextension
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-kc-kce
+  namespace: upbound-system
+spec:
+  forProvider:
+    defaultNodePool:
+      - name: default
+        nodeCount: 1
+        vmSize: Standard_D2_v2
+        upgradeSettings:
+          - maxSurge: '10%'
+    dnsPrefix: exampleaks1
+    identity:
+      - type: SystemAssigned
+    location: North Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerservice/v1beta1/kubernetesclusterextension
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-rg-kce
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: North Europe

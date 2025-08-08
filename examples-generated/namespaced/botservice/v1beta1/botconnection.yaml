@@ -1,0 +1,59 @@
+apiVersion: botservice.azure.m.upbound.io/v1beta1
+kind: BotConnection
+metadata:
+  annotations:
+    meta.upbound.io/example-id: botservice/v1beta1/botconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    botNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    clientId: exampleId
+    clientSecretSecretRef:
+      key: example-key
+      name: example-secret
+    location: global
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    serviceProviderName: box
+
+---
+
+apiVersion: botservice.azure.m.upbound.io/v1beta1
+kind: BotChannelsRegistration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: botservice/v1beta1/botconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: global
+    microsoftAppId: ${data.azurerm_client_config.current.client_id}
+    name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: F0
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: botservice/v1beta1/botconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

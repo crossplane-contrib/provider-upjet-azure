@@ -1,0 +1,15 @@
+apiVersion: web.azure.m.upbound.io/v1beta1
+kind: SourceControlToken
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/sourcecontroltoken
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    tokenSecretRef:
+      key: example-key
+      name: example-secret
+    type: GitHub

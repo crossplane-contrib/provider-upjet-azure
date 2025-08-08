@@ -1,0 +1,55 @@
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: DNSTXTRecord
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/dnstxtrecord
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    record:
+    - value: google-site-authenticator
+    - value: more site information here
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tags:
+      Environment: Production
+    ttl: 300
+    zoneNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: DNSZone
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/dnstxtrecord
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/dnstxtrecord
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

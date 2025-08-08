@@ -1,0 +1,19 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: ExpressRoutePort
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/expressrouteport
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    bandwidthInGbps: 10
+    encapsulation: Dot1Q
+    location: West Europe
+    peeringLocation: VantageDC-Newport-NGD
+    resourceGroupNameRef:
+      name: example

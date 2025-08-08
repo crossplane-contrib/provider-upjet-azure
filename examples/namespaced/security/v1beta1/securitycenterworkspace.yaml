@@ -1,0 +1,49 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: security.azure.m.upbound.io/v1beta1
+kind: SecurityCenterWorkspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: security/v1beta1/securitycenterworkspace
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    scope: "${data.azurerm_client_config.current.subscription_resource_id}"
+    workspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: securitycenterworkspace-ws
+---
+apiVersion: operationalinsights.azure.m.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: security/v1beta1/securitycenterworkspace
+  labels:
+    testing.upbound.io/example-name: securitycenterworkspace-ws
+  name: securitycenterworkspace-ws
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: securitycenterworkspace-rg
+    sku: PerGB2018
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: security/v1beta1/securitycenterworkspace
+  labels:
+    testing.upbound.io/example-name: securitycenterworkspace-rg
+  name: securitycenterworkspace-rg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

@@ -1,0 +1,61 @@
+apiVersion: apimanagement.azure.m.upbound.io/v1beta1
+kind: API
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/api
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    apiManagementNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    displayName: Example API
+    import:
+    - contentFormat: swagger-link-json
+      contentValue: https://raw.githubusercontent.com/hashicorp/terraform-provider-azurerm/refs/heads/main/internal/services/apimanagement/testdata/api_management_api_schema_swagger.json
+    path: example
+    protocols:
+    - https
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    revision: "1"
+
+---
+
+apiVersion: apimanagement.azure.m.upbound.io/v1beta1
+kind: Management
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/api
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    publisherEmail: company@terraform.io
+    publisherName: My Company
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Developer_1
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/api
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

@@ -1,0 +1,26 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: authorization.azure.m.upbound.io/v1beta1
+kind: PimActiveRoleAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta1/pimactiveroleassignment
+    upjet.upbound.io/manual-intervention: "This resource needs a valid roleDefinitionId"
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    justification: Expiration Duration Set
+    principalId: ${data.azurerm_client_config.service_principal.object_id}
+    roleDefinitionId: ${data.azurerm_subscription.primary.id}${data.azurerm_role_definition.example.id}
+    schedule:
+      expiration:
+        durationHours: 8
+    scope: ${data.azurerm_client_config.current.subscription_resource_id}
+    ticket:
+      number: "1"
+      system: example ticket system

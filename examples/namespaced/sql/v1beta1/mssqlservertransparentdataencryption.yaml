@@ -1,0 +1,64 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: sql.azure.m.upbound.io/v1beta1
+kind: MSSQLServerTransparentDataEncryption
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlservertransparentdataencryption
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    serverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: sql.azure.m.upbound.io/v1beta1
+kind: MSSQLServer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlservertransparentdataencryption
+  labels:
+    testing.upbound.io/example-name: example
+  name: ${Rand.RFC1123Subdomain}-trans-enc
+  namespace: upbound-system
+spec:
+  forProvider:
+    administratorLogin: missadministrator
+    administratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+    location: EastUs
+    minimumTlsVersion: "1.2"
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-sql-trans-enc
+    tags:
+      environment: production
+    version: "12.0"
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlservertransparentdataencryption
+  labels:
+    testing.upbound.io/example-name: example-sql-trans-enc
+  name: example-sql-trans-enc-${Rand.RFC1123Subdomain}
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: EastUs
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+type: Opaque
+stringData:
+  example-key: dXBib3VuZHJvY2tz

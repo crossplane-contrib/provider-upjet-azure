@@ -1,0 +1,131 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: synapse.azure.m.upbound.io/v1beta1
+kind: SQLPoolWorkloadClassifier
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/sqlpoolworkloadclassifier
+  labels:
+    testing.upbound.io/example-name: workloadclassifier-label
+  name: workloadclassifier
+  namespace: upbound-system
+spec:
+  forProvider:
+    context: example_context
+    endTime: "14:00"
+    importance: high
+    label: example_label
+    memberName: dbo
+    startTime: "12:00"
+    workloadGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sqlpoolworkloadgroup-label
+---
+apiVersion: synapse.azure.m.upbound.io/v1beta1
+kind: SQLPoolWorkloadGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/sqlpoolworkloadclassifier
+  labels:
+    testing.upbound.io/example-name: sqlpoolworkloadgroup-label
+  name: sqlpoolworkloadgroup
+  namespace: upbound-system
+spec:
+  forProvider:
+    importance: normal
+    maxResourcePercent: 100
+    maxResourcePercentPerRequest: 3
+    minResourcePercent: 0
+    minResourcePercentPerRequest: 3
+    queryExecutionTimeoutInSeconds: 0
+    sqlPoolIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sqlpool-label
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/sqlpoolworkloadclassifier
+  labels:
+    testing.upbound.io/example-name: sqlpool-workload-group-rg-label
+  name: sqlpool-workload-group-rg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: Norway East
+---
+apiVersion: storage.azure.m.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/sqlpoolworkloadclassifier
+  labels:
+    testing.upbound.io/example-name: account-label
+  name: sqlpoolworkloadaccount
+  namespace: upbound-system
+spec:
+  forProvider:
+    accountKind: BlobStorage
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: Norway East
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sqlpool-workload-group-rg-label
+---
+apiVersion: storage.azure.m.upbound.io/v1beta1
+kind: DataLakeGen2FileSystem
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/sqlpoolworkloadclassifier
+  labels:
+    testing.upbound.io/example-name: file-system-label
+  name: file-system
+  namespace: upbound-system
+spec:
+  forProvider:
+    storageAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: account-label
+---
+apiVersion: synapse.azure.m.upbound.io/v1beta1
+kind: SQLPool
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/sqlpoolworkloadclassifier
+  labels:
+    testing.upbound.io/example-name: sqlpool-label
+  name: sqlpool
+  namespace: upbound-system
+spec:
+  forProvider:
+    createMode: Default
+    skuName: DW100c
+    synapseWorkspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sqlpool-workload-ws-label
+---
+apiVersion: synapse.azure.m.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/sqlpoolworkloadclassifier
+  labels:
+    testing.upbound.io/example-name: sqlpool-workload-ws-label
+  name: sqlpool-workload-ws-1
+  namespace: upbound-system
+spec:
+  forProvider:
+    identity:
+      - type: SystemAssigned
+    location: Norway East
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sqlpool-workload-group-rg-label
+    sqlAdministratorLogin: sqladminuser
+    storageDataLakeGen2FilesystemIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: file-system-label

@@ -1,0 +1,62 @@
+apiVersion: appplatform.azure.m.upbound.io/v1beta1
+kind: SpringCloudConfigurationService
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudconfigurationservice
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    repository:
+    - label: master
+      name: fake
+      passwordSecretRef:
+        key: example-key
+        name: example-secret
+      patterns:
+      - app/dev
+      searchPaths:
+      - dir1
+      - dir2
+      strictHostKeyChecking: false
+      uri: https://github.com/Azure-Samples/piggymetrics
+      username: adminuser
+    springCloudServiceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudconfigurationservice
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: appplatform.azure.m.upbound.io/v1beta1
+kind: SpringCloudService
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudconfigurationservice
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: E0

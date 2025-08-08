@@ -1,0 +1,62 @@
+apiVersion: logic.azure.m.upbound.io/v1beta1
+kind: AppActionCustom
+metadata:
+  annotations:
+    meta.upbound.io/example-id: logic/v1beta1/appactioncustom
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    body: |
+      {
+          "description": "A variable to configure the auto expiration age in days. Configured in negative number. Default is -30 (30 days old).",
+          "inputs": {
+              "variables": [
+                  {
+                      "name": "ExpirationAgeInDays",
+                      "type": "Integer",
+                      "value": -30
+                  }
+              ]
+          },
+          "runAfter": {},
+          "type": "InitializeVariable"
+      }
+    logicAppIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: logic.azure.m.upbound.io/v1beta1
+kind: AppWorkflow
+metadata:
+  annotations:
+    meta.upbound.io/example-id: logic/v1beta1/appactioncustom
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: logic/v1beta1/appactioncustom
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

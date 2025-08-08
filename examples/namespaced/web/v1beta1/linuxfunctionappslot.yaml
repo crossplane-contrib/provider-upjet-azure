@@ -1,0 +1,102 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: web.azure.m.upbound.io/v1beta1
+kind: LinuxFunctionAppSlot
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta2/linuxfunctionappslot
+  labels:
+    testing.upbound.io/example-name: examplelinslot
+  name: examplelinslot
+  namespace: upbound-system
+spec:
+  forProvider:
+    functionAppIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: linuxfuncnappslotapp
+    siteConfig: {}
+    storageAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: linuxfuncnappslotacc
+---
+apiVersion: web.azure.m.upbound.io/v1beta1
+kind: LinuxFunctionApp
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta2/linuxfunctionappslot
+  labels:
+    testing.upbound.io/example-name: linuxfuncnappslotapp
+  name: linuxfuncnappslotapp
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    name: linuxfuncnappslotapp
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: linuxfuncnappslot-rg
+    servicePlanIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: linuxfuncnappslot-sp
+    siteConfig: {}
+    storageAccountAccessKeySecretRef:
+      key: attribute.primary_access_key
+      name: example-storage-account
+    storageAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: linuxfuncnappslotacc
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/linuxfunctionappslot
+  labels:
+    testing.upbound.io/example-name: linuxfuncnappslot-rg
+  name: linuxfuncnappslot-rg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+---
+apiVersion: web.azure.m.upbound.io/v1beta1
+kind: ServicePlan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta2/linuxfunctionappslot
+    uptest.upbound.io/pre-delete-hook: ../testhooks/delete-linux-func-app.sh
+  labels:
+    testing.upbound.io/example-name: linuxfuncnappslot-sp
+  name: linuxfuncnappslot-sp
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    osType: Linux
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: linuxfuncnappslot-rg
+    skuName: Y1
+---
+apiVersion: storage.azure.m.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta2/linuxfunctionappslot
+  labels:
+    testing.upbound.io/example-name: linuxfuncnappslotacc
+  name: linuxfuncnappslotacc
+  namespace: upbound-system
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: linuxfuncnappslot-rg
+  writeConnectionSecretToRef:
+    name: example-storage-account
+    namespace: upbound-system

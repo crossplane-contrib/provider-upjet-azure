@@ -1,0 +1,71 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: eventhub.azure.m.upbound.io/v1beta1
+kind: NamespaceDisasterRecoveryConfig
+metadata:
+  annotations:
+    meta.upbound.io/example-id: eventhub/v1beta1/namespacedisasterrecoveryconfig
+  labels:
+    testing.upbound.io/example-name: recoveryconf
+  name: recoveryconf
+  namespace: upbound-system
+spec:
+  forProvider:
+    namespaceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: primary-ns
+    partnerNamespaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: secondary-ns
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: ns-recovery-rg
+---
+apiVersion: eventhub.azure.m.upbound.io/v1beta1
+kind: EventHubNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: eventhub/v1beta1/namespacedisasterrecoveryconfig
+  labels:
+    testing.upbound.io/example-name: primary-ns
+  name: primary-ns
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: ns-recovery-rg
+    sku: Standard
+---
+apiVersion: eventhub.azure.m.upbound.io/v1beta1
+kind: EventHubNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: eventhub/v1beta1/namespacedisasterrecoveryconfig
+  labels:
+    testing.upbound.io/example-name: secondary-ns
+  name: secondary-ns
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: ns-recovery-rg
+    sku: Standard
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: eventhub/v1beta1/namespacedisasterrecoveryconfig
+  labels:
+    testing.upbound.io/example-name: ns-recovery-rg
+  name: ns-recovery-rg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

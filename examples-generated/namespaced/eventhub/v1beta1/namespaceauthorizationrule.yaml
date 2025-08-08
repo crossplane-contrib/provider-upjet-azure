@@ -1,0 +1,57 @@
+apiVersion: eventhub.azure.m.upbound.io/v1beta1
+kind: NamespaceAuthorizationRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: eventhub/v1beta1/namespaceauthorizationrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    listen: true
+    manage: false
+    namespaceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    send: false
+
+---
+
+apiVersion: eventhub.azure.m.upbound.io/v1beta1
+kind: EventHubNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: eventhub/v1beta1/namespaceauthorizationrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    capacity: 2
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: Basic
+    tags:
+      environment: Production
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: eventhub/v1beta1/namespaceauthorizationrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

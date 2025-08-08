@@ -1,0 +1,82 @@
+apiVersion: relay.azure.m.upbound.io/v1beta1
+kind: HybridConnectionAuthorizationRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: relay/v1beta1/hybridconnectionauthorizationrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    hybridConnectionNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    listen: true
+    manage: false
+    namespaceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    send: true
+
+---
+
+apiVersion: relay.azure.m.upbound.io/v1beta1
+kind: HybridConnection
+metadata:
+  annotations:
+    meta.upbound.io/example-id: relay/v1beta1/hybridconnectionauthorizationrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: acctestrnhc-%d
+    relayNamespaceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    requiresClientAuthorization: false
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    userMetadata: testmetadata
+
+---
+
+apiVersion: relay.azure.m.upbound.io/v1beta1
+kind: EventRelayNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: relay/v1beta1/hybridconnectionauthorizationrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Standard
+    tags:
+      source: terraform
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: relay/v1beta1/hybridconnectionauthorizationrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

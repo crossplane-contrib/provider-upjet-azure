@@ -1,0 +1,68 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: datafactory.azure.m.upbound.io/v1beta1
+kind: DataSetParquet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta2/datasetparquet
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: datasetparquet-datafactory
+    httpServerLocation:
+      filename: foo.txt
+      path: foo/bar/
+      relativeUrl: /fizz/buzz/
+    linkedServiceName: anonymous
+---
+apiVersion: datafactory.azure.m.upbound.io/v1beta1
+kind: Factory
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta2/datasetparquet
+  labels:
+    testing.upbound.io/example-name: datasetparquet-datafactory
+  name: datasetparquet-datafactory
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: datasetparquet-rg
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/datasetparquet
+  labels:
+    testing.upbound.io/example-name: datasetparquet-rg
+  name: datasetparquet-rg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+---
+apiVersion: datafactory.azure.m.upbound.io/v1beta1
+kind: LinkedServiceOdbc
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta2/datasetparquet
+  labels:
+    testing.upbound.io/example-name: anonymous
+  name: anonymous
+  namespace: upbound-system
+spec:
+  forProvider:
+    connectionString: Driver={SQL Server};Server=test;Database=test;Uid=test;Pwd=test;
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: datasetparquet-datafactory

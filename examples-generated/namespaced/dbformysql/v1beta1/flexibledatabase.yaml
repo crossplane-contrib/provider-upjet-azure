@@ -1,0 +1,57 @@
+apiVersion: dbformysql.azure.m.upbound.io/v1beta1
+kind: FlexibleDatabase
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbformysql/v1beta1/flexibledatabase
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    charset: utf8
+    collation: utf8_unicode_ci
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    serverNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: dbformysql.azure.m.upbound.io/v1beta1
+kind: FlexibleServer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbformysql/v1beta1/flexibledatabase
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    administratorLogin: mysqladminun
+    administratorPasswordSecretRef:
+      key: example-key
+      name: example-secret
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: B_Standard_B1ms
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbformysql/v1beta1/flexibledatabase
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

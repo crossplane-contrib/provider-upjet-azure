@@ -1,0 +1,164 @@
+apiVersion: servicelinker.azure.m.upbound.io/v1beta1
+kind: SpringCloudConnection
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicelinker/v1beta1/springcloudconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    authentication:
+    - type: systemAssignedIdentity
+    name: example-serviceconnector
+    springCloudIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    targetResourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: cosmosdb.azure.m.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicelinker/v1beta1/springcloudconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    consistencyPolicy:
+    - consistencyLevel: BoundedStaleness
+      maxIntervalInSeconds: 10
+      maxStalenessPrefix: 200
+    geoLocation:
+    - failoverPriority: 0
+      location: West Europe
+    kind: GlobalDocumentDB
+    location: West Europe
+    offerType: Standard
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: cosmosdb.azure.m.upbound.io/v1beta1
+kind: SQLContainer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicelinker/v1beta1/springcloudconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    accountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    databaseNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    partition_key_path: /definition
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: cosmosdb.azure.m.upbound.io/v1beta1
+kind: SQLDatabase
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicelinker/v1beta1/springcloudconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    accountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    throughput: 400
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicelinker/v1beta1/springcloudconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: appplatform.azure.m.upbound.io/v1beta1
+kind: SpringCloudApp
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicelinker/v1beta1/springcloudconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    identity:
+    - type: SystemAssigned
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    serviceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: appplatform.azure.m.upbound.io/v1beta1
+kind: SpringCloudJavaDeployment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicelinker/v1beta1/springcloudconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    springCloudAppIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: appplatform.azure.m.upbound.io/v1beta1
+kind: SpringCloudService
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicelinker/v1beta1/springcloudconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

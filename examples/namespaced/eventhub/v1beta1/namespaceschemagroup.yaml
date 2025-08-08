@@ -1,0 +1,50 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: eventhub.azure.m.upbound.io/v1beta1
+kind: NamespaceSchemaGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: eventhub/v1beta1/namespaceschemagroup
+  labels:
+    testing.upbound.io/example-name: testschemagroup
+  name: testschemagroup
+  namespace: upbound-system
+spec:
+  forProvider:
+    namespaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: namespaceschemagroup-ns
+    schemaCompatibility: Forward
+    schemaType: Avro
+---
+apiVersion: eventhub.azure.m.upbound.io/v1beta1
+kind: EventHubNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: eventhub/v1beta1/namespaceschemagroup
+  labels:
+    testing.upbound.io/example-name: namespaceschemagroup-ns
+  name: namespaceschemagroup-ns
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: East US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: namespaceschemagroup-rg
+    sku: Standard
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: eventhub/v1beta1/namespaceschemagroup
+  labels:
+    testing.upbound.io/example-name: namespaceschemagroup-rg
+  name: namespaceschemagroup-rg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: East US

@@ -1,0 +1,169 @@
+apiVersion: dbforpostgresql.azure.m.upbound.io/v1beta1
+kind: ServerKey
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1beta1/serverkey
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    keyVaultKeyIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    serverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: keyvault.azure.m.upbound.io/v1beta1
+kind: Vault
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1beta1/serverkey
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    purgeProtectionEnabled: true
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: premium
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+
+apiVersion: keyvault.azure.m.upbound.io/v1beta1
+kind: AccessPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1beta1/serverkey
+  labels:
+    testing.upbound.io/example-name: client
+  name: client
+  namespace: upbound-system
+spec:
+  forProvider:
+    keyPermissions:
+    - Get
+    - Create
+    - Delete
+    - List
+    - Restore
+    - Recover
+    - UnwrapKey
+    - WrapKey
+    - Purge
+    - Encrypt
+    - Decrypt
+    - Sign
+    - Verify
+    - GetRotationPolicy
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    objectId: ${data.azurerm_client_config.current.object_id}
+    secretPermissions:
+    - Get
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+
+apiVersion: keyvault.azure.m.upbound.io/v1beta1
+kind: AccessPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1beta1/serverkey
+  labels:
+    testing.upbound.io/example-name: server
+  name: server
+  namespace: upbound-system
+spec:
+  forProvider:
+    keyPermissions:
+    - Get
+    - UnwrapKey
+    - WrapKey
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    objectId: ${azurerm_postgresql_server.example.identity[0].principal_id}
+    secretPermissions:
+    - Get
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+
+apiVersion: keyvault.azure.m.upbound.io/v1beta1
+kind: Key
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1beta1/serverkey
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    keyOpts:
+    - decrypt
+    - encrypt
+    - sign
+    - unwrapKey
+    - verify
+    - wrapKey
+    keySize: 2048
+    keyType: RSA
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: tfex-key
+
+---
+
+apiVersion: dbforpostgresql.azure.m.upbound.io/v1beta1
+kind: Server
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1beta1/serverkey
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    administratorLogin: psqladmin
+    administratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+    identity:
+    - type: SystemAssigned
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: GP_Gen5_2
+    sslEnforcementEnabled: true
+    storageMb: 51200
+    version: "11"
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1beta1/serverkey
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

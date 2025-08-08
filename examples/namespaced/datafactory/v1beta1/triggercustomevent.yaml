@@ -1,0 +1,100 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: datafactory.azure.m.upbound.io/v1beta1
+kind: TriggerCustomEvent
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/triggercustomevent
+  labels:
+    testing.upbound.io/example-name: custeventexample
+  name: custeventexample
+  namespace: upbound-system
+spec:
+  forProvider:
+    additionalProperties:
+      bar: bar2
+      foo: foo1
+    annotations:
+      - example1
+      - example2
+      - example3
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: triggercustomevent-fct
+    description: example description
+    eventgridTopicIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: triggertopic
+    events:
+      - event1
+      - event2
+    pipeline:
+      - nameSelector:
+          matchLabels:
+            testing.upbound.io/example-name: triggercustomevent-ppl
+        parameters:
+          Env: Prod
+    subjectBeginsWith: abc
+    subjectEndsWith: xyz
+---
+apiVersion: datafactory.azure.m.upbound.io/v1beta1
+kind: Factory
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/triggercustomevent
+  labels:
+    testing.upbound.io/example-name: triggercustomevent-fct
+  name: triggercustomevent-fct
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: triggercustomevent-rg
+---
+apiVersion: datafactory.azure.m.upbound.io/v1beta1
+kind: Pipeline
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/triggercustomevent
+  labels:
+    testing.upbound.io/example-name: triggercustomevent-ppl
+  name: triggercustomevent-ppl
+  namespace: upbound-system
+spec:
+  forProvider:
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: triggercustomevent-fct
+---
+apiVersion: eventgrid.azure.m.upbound.io/v1beta1
+kind: Topic
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/triggercustomevent
+  labels:
+    testing.upbound.io/example-name: triggertopic
+  name: triggertopic
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: triggercustomevent-rg
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/triggercustomevent
+  labels:
+    testing.upbound.io/example-name: triggercustomevent-rg
+  name: triggercustomevent-rg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

@@ -1,0 +1,14 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: storage.azure.m.upbound.io/v1beta1
+kind: AccountCustomerManagedKey
+metadata:
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    keyName: testkey
+    keyVaultId: /subscriptions/.../resourceGroups/example-resources/providers/Microsoft.KeyVault/vaults/keyvaultdeleteme
+    storageAccountId: /subscriptions/.../resourceGroups/example-resources/providers/Microsoft.Storage/storageAccounts/storagetestme2

@@ -1,0 +1,61 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: management.azure.m.upbound.io/v1beta1
+kind: ManagementGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta1/policydefinition-management-group
+  labels:
+    testing.upbound.io/example-name: policydefinition-management-group
+  name: policydefinition-management-group
+  namespace: upbound-system
+spec:
+  forProvider:
+    displayName: PolicyDefinitionManagementGroup
+---
+apiVersion: authorization.azure.m.upbound.io/v1beta1
+kind: PolicyDefinition
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta1/policydefinition-management-group
+  labels:
+    testing.upbound.io/example-name: policydefinition-management-group
+  name: policydefinition-management-group
+  namespace: upbound-system
+spec:
+  forProvider:
+    displayName: acceptance test policy definition management group
+    managementGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: policydefinition-management-group
+    metadata: |
+      {
+        "category": "General"
+      }
+    mode: Indexed
+    parameters: |
+      {
+        "allowedLocations": {
+          "type": "Array",
+          "metadata": {
+            "description": "The list of allowed locations for resources.",
+            "displayName": "Allowed locations",
+            "strongType": "location"
+          }
+        }
+      }
+    policyRule: |
+      {
+        "if": {
+          "not": {
+            "field": "location",
+            "in": "[parameters('allowedLocations')]"
+          }
+        },
+        "then": {
+          "effect": "audit"
+        }
+      }
+    policyType: Custom

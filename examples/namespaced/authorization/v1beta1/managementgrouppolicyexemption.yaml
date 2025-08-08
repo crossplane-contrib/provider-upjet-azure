@@ -1,0 +1,60 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: authorization.azure.m.upbound.io/v1beta1
+kind: ManagementGroupPolicyExemption
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta1/managementgrouppolicyexemption
+  labels:
+    testing.upbound.io/example-name: managementgrouppolicyexemption
+  name: mgmtgrouppolicyexempt
+  namespace: upbound-system
+spec:
+  forProvider:
+    exemptionCategory: Mitigated
+    managementGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: managementgrouppolicyexemption
+    policyAssignmentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: managementgrouppolicyexemption
+---
+apiVersion: management.azure.m.upbound.io/v1beta1
+kind: ManagementGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta1/managementgrouppolicyexemption
+    uptest.upbound.io/pre-delete-hook: testhooks/delete-management-group-policy-assignment-mgmtgrouppolicyexempt.sh
+  labels:
+    testing.upbound.io/example-name: managementgrouppolicyexemption
+  name: mgmtgrouppolicyexempt
+  namespace: upbound-system
+spec:
+  forProvider:
+    displayName: Example MgmtGroup
+---
+apiVersion: authorization.azure.m.upbound.io/v1beta1
+kind: ManagementGroupPolicyAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta1/managementgrouppolicyexemption
+  labels:
+    testing.upbound.io/example-name: managementgrouppolicyexemption
+  name: mgmtgrouppolicyexempt
+  namespace: upbound-system
+spec:
+  forProvider:
+    managementGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: managementgrouppolicyexemption
+    policyDefinitionId: "/providers/Microsoft.Authorization/policyDefinitions/e56962a6-4747-49cd-b67b-bf8b01975c4c"
+    parameters: |
+      {
+        "listOfAllowedLocations": {
+            "value": [
+                "westus"
+            ]
+        }
+      }

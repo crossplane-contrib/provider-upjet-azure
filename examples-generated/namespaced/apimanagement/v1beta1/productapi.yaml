@@ -1,0 +1,23 @@
+apiVersion: apimanagement.azure.m.upbound.io/v1beta1
+kind: ProductAPI
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/productapi
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    apiManagementNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_api_management
+    apiNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_api_management_api
+    productIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_api_management_product
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_api_management

@@ -1,0 +1,65 @@
+apiVersion: securityinsights.azure.m.upbound.io/v1beta1
+kind: SentinelDataConnectorIOT
+metadata:
+  annotations:
+    meta.upbound.io/example-id: securityinsights/v1beta1/sentineldataconnectoriot
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    logAnalyticsWorkspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: operationalinsights.azure.m.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: securityinsights/v1beta1/sentineldataconnectoriot
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: PerGB2018
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: securityinsights/v1beta1/sentineldataconnectoriot
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: securityinsights.azure.m.upbound.io/v1beta1
+kind: SentinelLogAnalyticsWorkspaceOnboarding
+metadata:
+  annotations:
+    meta.upbound.io/example-id: securityinsights/v1beta1/sentineldataconnectoriot
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    workspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

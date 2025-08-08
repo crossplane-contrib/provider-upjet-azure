@@ -1,0 +1,361 @@
+apiVersion: dataprotection.azure.m.upbound.io/v1beta1
+kind: BackupInstanceKubernetesCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancekubernetescluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    backupDatasourceParameters:
+    - clusterScopedResourcesEnabled: true
+      excludedNamespaces:
+      - test-excluded-namespaces
+      excludedResourceTypes:
+      - exvolumesnapshotcontents.snapshot.storage.k8s.io
+      includedNamespaces:
+      - test-included-namespaces
+      includedResourceTypes:
+      - involumesnapshotcontents.snapshot.storage.k8s.io
+      labelSelectors:
+      - kubernetes.io/metadata.name:test
+      volumeSnapshotEnabled: true
+    backupPolicyIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    kubernetesClusterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    location: West Europe
+    snapshotResourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: snap
+    vaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: dataprotection.azure.m.upbound.io/v1beta1
+kind: BackupPolicyKubernetesCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancekubernetescluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    backupRepeatingTimeIntervals:
+    - R/2023-05-23T02:30:00+00:00/P1W
+    defaultRetentionRule:
+    - lifeCycle:
+      - dataStoreType: OperationalStore
+        duration: P14D
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    retentionRule:
+    - criteria:
+      - daysOfWeek:
+        - Thursday
+        monthsOfYear:
+        - November
+        scheduledBackupTimes:
+        - "2023-05-23T02:30:00Z"
+        weeksOfMonth:
+        - First
+      lifeCycle:
+      - dataStoreType: OperationalStore
+        duration: P84D
+      name: Daily
+      priority: 25
+    vaultNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: dataprotection.azure.m.upbound.io/v1beta1
+kind: BackupVault
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancekubernetescluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    datastoreType: VaultStore
+    identity:
+    - type: SystemAssigned
+    location: West Europe
+    redundancy: LocallyRedundant
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: containerservice.azure.m.upbound.io/v1beta1
+kind: KubernetesCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancekubernetescluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    defaultNodePool:
+    - hostEncryptionEnabled: true
+      name: default
+      nodeCount: 1
+      vmSize: Standard_DS2_v2
+    dnsPrefix: dns
+    identity:
+    - type: SystemAssigned
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: containerservice.azure.m.upbound.io/v1beta1
+kind: KubernetesClusterExtension
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancekubernetescluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    clusterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    configurationSettings:
+      configuration.backupStorageLocation.bucket: example
+      configuration.backupStorageLocation.config.resourceGroup: example
+      configuration.backupStorageLocation.config.storageAccount: example
+      configuration.backupStorageLocation.config.subscriptionId: ${data.azurerm_client_config.current.subscription_id}
+      credentials.tenantId: ${data.azurerm_client_config.current.tenant_id}
+    extensionType: Microsoft.DataProtection.Kubernetes
+    releaseNamespace: dataprotection-microsoft
+    releaseTrain: stable
+
+---
+
+apiVersion: authorization.azure.m.upbound.io/v1beta1
+kind: TrustedAccessRoleBinding
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancekubernetescluster
+  labels:
+    testing.upbound.io/example-name: aks_cluster_trusted_access
+  name: aks-cluster-trusted-access
+  namespace: upbound-system
+spec:
+  forProvider:
+    kubernetesClusterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    roles:
+    - Microsoft.DataProtection/backupVaults/backup-operator
+    sourceResourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancekubernetescluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancekubernetescluster
+  labels:
+    testing.upbound.io/example-name: snap
+  name: snap
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: authorization.azure.m.upbound.io/v1beta1
+kind: RoleAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancekubernetescluster
+  labels:
+    testing.upbound.io/example-name: test_cluster_msi_contributor_on_snap_rg
+  name: test-cluster-msi-contributor-on-snap-rg
+  namespace: upbound-system
+spec:
+  forProvider:
+    principalId: ${azurerm_kubernetes_cluster.example.identity[0].principal_id}
+    roleDefinitionName: Contributor
+    scope: ${azurerm_resource_group.snap.id}
+
+---
+
+apiVersion: authorization.azure.m.upbound.io/v1beta1
+kind: RoleAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancekubernetescluster
+  labels:
+    testing.upbound.io/example-name: test_extension_and_storage_account_permission
+  name: test-extension-and-storage-account-permission
+  namespace: upbound-system
+spec:
+  forProvider:
+    principalId: ${azurerm_kubernetes_cluster_extension.example.aks_assigned_identity[0].principal_id}
+    roleDefinitionName: Storage Account Contributor
+    scope: ${azurerm_storage_account.example.id}
+
+---
+
+apiVersion: authorization.azure.m.upbound.io/v1beta1
+kind: RoleAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancekubernetescluster
+  labels:
+    testing.upbound.io/example-name: test_vault_data_contributor_on_storage
+  name: test-vault-data-contributor-on-storage
+  namespace: upbound-system
+spec:
+  forProvider:
+    principalId: ${azurerm_data_protection_backup_vault.example.identity[0].principal_id}
+    roleDefinitionName: Storage Blob Data Contributor
+    scope: ${azurerm_storage_account.example.id}
+
+---
+
+apiVersion: authorization.azure.m.upbound.io/v1beta1
+kind: RoleAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancekubernetescluster
+  labels:
+    testing.upbound.io/example-name: test_vault_data_operator_on_snap_rg
+  name: test-vault-data-operator-on-snap-rg
+  namespace: upbound-system
+spec:
+  forProvider:
+    principalId: ${azurerm_data_protection_backup_vault.example.identity[0].principal_id}
+    roleDefinitionName: Data Operator for Managed Disks
+    scope: ${azurerm_resource_group.snap.id}
+
+---
+
+apiVersion: authorization.azure.m.upbound.io/v1beta1
+kind: RoleAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancekubernetescluster
+  labels:
+    testing.upbound.io/example-name: test_vault_msi_read_on_cluster
+  name: test-vault-msi-read-on-cluster
+  namespace: upbound-system
+spec:
+  forProvider:
+    principalId: ${azurerm_data_protection_backup_vault.example.identity[0].principal_id}
+    roleDefinitionName: Reader
+    scope: ${azurerm_kubernetes_cluster.example.id}
+
+---
+
+apiVersion: authorization.azure.m.upbound.io/v1beta1
+kind: RoleAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancekubernetescluster
+  labels:
+    testing.upbound.io/example-name: test_vault_msi_read_on_snap_rg
+  name: test-vault-msi-read-on-snap-rg
+  namespace: upbound-system
+spec:
+  forProvider:
+    principalId: ${azurerm_data_protection_backup_vault.example.identity[0].principal_id}
+    roleDefinitionName: Reader
+    scope: ${azurerm_resource_group.snap.id}
+
+---
+
+apiVersion: authorization.azure.m.upbound.io/v1beta1
+kind: RoleAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancekubernetescluster
+  labels:
+    testing.upbound.io/example-name: test_vault_msi_snapshot_contributor_on_snap_rg
+  name: test-vault-msi-snapshot-contributor-on-snap-rg
+  namespace: upbound-system
+spec:
+  forProvider:
+    principalId: ${azurerm_data_protection_backup_vault.example.identity[0].principal_id}
+    roleDefinitionName: Disk Snapshot Contributor
+    scope: ${azurerm_resource_group.snap.id}
+
+---
+
+apiVersion: storage.azure.m.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancekubernetescluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: storage.azure.m.upbound.io/v1beta1
+kind: Container
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancekubernetescluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    containerAccessType: private
+    storageAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

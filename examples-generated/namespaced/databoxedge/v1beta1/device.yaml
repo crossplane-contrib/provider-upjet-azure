@@ -1,0 +1,31 @@
+apiVersion: databoxedge.azure.m.upbound.io/v1beta1
+kind: Device
+metadata:
+  annotations:
+    meta.upbound.io/example-id: databoxedge/v1beta1/device
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: EdgeP_Base-Standard
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: databoxedge/v1beta1/device
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

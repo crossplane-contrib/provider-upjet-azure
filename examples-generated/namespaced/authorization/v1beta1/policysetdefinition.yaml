@@ -1,0 +1,31 @@
+apiVersion: authorization.azure.m.upbound.io/v1beta1
+kind: PolicySetDefinition
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta1/policysetdefinition
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    displayName: Example
+    parameters: |2
+          {
+              "allowedLocations": {
+                  "type": "Array",
+                  "metadata": {
+                      "description": "The list of allowed locations for resources.",
+                      "displayName": "Allowed locations",
+                      "strongType": "location"
+                  }
+              }
+          }
+    policyDefinitionReference:
+    - parameterValues: |2
+            {
+              "listOfAllowedLocations": {"value": "[parameters('allowedLocations')]"}
+            }
+      policyDefinitionId: /providers/Microsoft.Authorization/policyDefinitions/e765b5de-1225-4ba3-bd56-1ac6695af988
+      version: 1.0.*
+    policyType: Custom

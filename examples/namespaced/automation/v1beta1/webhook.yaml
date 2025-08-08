@@ -1,0 +1,84 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: automation.azure.m.upbound.io/v1beta1
+kind: Webhook
+metadata:
+  annotations:
+    meta.upbound.io/example-id: automation/v1beta1/webhook
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    automationAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    enabled: true
+    expiryTime: "2023-12-31T00:00:00Z"
+    name: TestRunbook_webhook
+    parameters:
+      input: parameter
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rgwebhook
+    runbookNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: automation.azure.m.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: automation/v1beta1/webhook
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rgwebhook
+    skuName: Basic
+---
+apiVersion: automation.azure.m.upbound.io/v1beta1
+kind: RunBook
+metadata:
+  annotations:
+    meta.upbound.io/example-id: automation/v1beta1/webhook
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    automationAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    description: This is an example runbook
+    location: West Europe
+    logProgress: true
+    logVerbose: true
+    name: Get-AzureVMTutorial
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rgwebhook
+    runbookType: PowerShell
+    content: "workflow MyFirstRunbook-Workflow { $resourceGroup = \"resourceGroupName\" # Ensures you do not inherit an AzContext in your runbook Disable-AzContextAutosave -Scope Process # Connect to Azure with system-assigned managed identity Connect-AzAccount -Identity # set and store context $AzureContext = Set-AzContext –SubscriptionId \"<SubscriptionID>\" }"
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: automation/v1beta1/webhook
+  labels:
+    testing.upbound.io/example-name: rgwebhook
+  name: rgwebhook
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

@@ -1,0 +1,30 @@
+apiVersion: communication.azure.m.upbound.io/v1beta1
+kind: Service
+metadata:
+  annotations:
+    meta.upbound.io/example-id: communication/v1beta1/service
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    dataLocation: United States
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: communication/v1beta1/service
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

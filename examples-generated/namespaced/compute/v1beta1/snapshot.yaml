@@ -1,0 +1,55 @@
+apiVersion: compute.azure.m.upbound.io/v1beta1
+kind: Snapshot
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/snapshot
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    createOption: Copy
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sourceUriSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: compute.azure.m.upbound.io/v1beta1
+kind: ManagedDisk
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/snapshot
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    createOption: Empty
+    diskSizeGb: "10"
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    storageAccountType: Standard_LRS
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/snapshot
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

@@ -1,0 +1,137 @@
+apiVersion: kusto.azure.m.upbound.io/v1beta1
+kind: AttachedDatabaseConfiguration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kusto/v1beta1/attacheddatabaseconfiguration
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    clusterNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: follower_cluster
+    clusterResourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: followed_cluster
+    databaseNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    location: West Europe
+    name: configuration1
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sharing:
+    - externalTablesToExclude:
+      - ExternalTable2
+      externalTablesToInclude:
+      - ExternalTable1
+      materializedViewsToExclude:
+      - MaterializedViewTable2
+      materializedViewsToInclude:
+      - MaterializedViewTable1
+      tablesToExclude:
+      - Table2
+      tablesToInclude:
+      - Table1
+
+---
+
+apiVersion: kusto.azure.m.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kusto/v1beta1/attacheddatabaseconfiguration
+  labels:
+    testing.upbound.io/example-name: followed_cluster
+  name: followed-cluster
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku:
+    - capacity: 1
+      name: Dev(No SLA)_Standard_D11_v2
+
+---
+
+apiVersion: kusto.azure.m.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kusto/v1beta1/attacheddatabaseconfiguration
+  labels:
+    testing.upbound.io/example-name: follower_cluster
+  name: follower-cluster
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku:
+    - capacity: 1
+      name: Dev(No SLA)_Standard_D11_v2
+
+---
+
+apiVersion: kusto.azure.m.upbound.io/v1beta1
+kind: Database
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kusto/v1beta1/attacheddatabaseconfiguration
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    clusterNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: kusto.azure.m.upbound.io/v1beta1
+kind: Database
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kusto/v1beta1/attacheddatabaseconfiguration
+  labels:
+    testing.upbound.io/example-name: followed_database
+  name: followed-database
+  namespace: upbound-system
+spec:
+  forProvider:
+    clusterNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: follower_cluster
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kusto/v1beta1/attacheddatabaseconfiguration
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

@@ -1,0 +1,75 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: datashare.azure.m.upbound.io/v1beta1
+kind: DataSetBlobStorage
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datashare/v1beta2/datasetblobstorage
+    upjet.upbound.io/manual-intervention: This resource requires manual intervention.
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    containerNameRef:
+      name: example
+    dataShareIdRef:
+      name: example
+    filePath: myfile.txt
+    storageAccount:
+      nameRef:
+        name: example-storage-account
+      resourceGroupNameRef:
+        name: example-rg-datashare
+      subscriptionId: 038f2b7c-3265-43b8-8624-c9ad5da610a8
+---
+apiVersion: storage.azure.m.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    crossplane.io/external-name: opdatasharetest190722
+    meta.upbound.io/example-id: datashare/v1beta2/datasetblobstorage
+    upjet.upbound.io/manual-intervention: This resource requires manual intervention.
+  name: example-storage-account
+  namespace: upbound-system
+spec:
+  forProvider:
+    accountReplicationType: RAGRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameRef:
+      name: example-rg-datashare
+    tags:
+      provisioner: crossplane
+  writeConnectionSecretToRef:
+    name: example-storage-account
+    namespace: upbound-system
+---
+apiVersion: storage.azure.m.upbound.io/v1beta1
+kind: Container
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datashare/v1beta2/datasetblobstorage
+    upjet.upbound.io/manual-intervention: This resource requires manual intervention.
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    containerAccessType: container
+    storageAccountNameRef:
+      name: example-storage-account
+---
+apiVersion: authorization.azure.m.upbound.io/v1beta1
+kind: RoleAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datashare/v1beta2/datasetblobstorage
+    upjet.upbound.io/manual-intervention: This resource requires manual intervention.
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    principalId: ${azurerm_storage_account.example.id}
+    roleDefinitionName: Storage Blob Data Reader
+    scope: ${data.azuread_service_principal.example.object_id}

@@ -1,0 +1,108 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: devtestlab.azure.m.upbound.io/v1beta1
+kind: WindowsVirtualMachine
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devtestlab/v1beta2/windowsvirtualmachine
+    upjet.upbound.io/manual-intervention: Long running resource. Time to time updating status takes too long.
+  labels:
+    testing.upbound.io/example-name: example
+  name: stexample
+  namespace: upbound-system
+spec:
+  forProvider:
+    galleryImageReference:
+      offer: WindowsServer
+      publisher: MicrosoftWindowsServer
+      sku: 2019-Datacenter
+      version: latest
+    labNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    labSubnetName: stexampleSubnet
+    labVirtualNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    location: West Europe
+    name: stexample
+    notes: Some notes about this Virtual Machine.
+    passwordSecretRef:
+      key: example-key
+      name: example-secret
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    size: Standard_F2
+    storageType: Standard
+    username: exampleuser99
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: The dependent resource needs a manual patching and is thus skipped.
+  name: example-secret
+  namespace: upbound-system
+stringData:
+  example-key: Pa$w0rd1234!
+type: Opaque
+---
+apiVersion: devtestlab.azure.m.upbound.io/v1beta1
+kind: Lab
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devtestlab/v1beta2/windowsvirtualmachine
+    upjet.upbound.io/manual-intervention: The dependent resource needs a manual patching and is thus skipped.
+  labels:
+    testing.upbound.io/example-name: example
+  name: stexample
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tags:
+      Sydney: Australia
+---
+apiVersion: devtestlab.azure.m.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devtestlab/v1beta2/windowsvirtualmachine
+    upjet.upbound.io/manual-intervention: The dependent resource needs a manual patching and is thus skipped.
+  labels:
+    testing.upbound.io/example-name: example
+  name: stexample
+  namespace: upbound-system
+spec:
+  forProvider:
+    labNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: stexample
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    subnet:
+      useInVirtualMachineCreation: Allow
+      usePublicIpAddress: Allow
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devtestlab/v1beta1/windowsvirtualmachine
+    upjet.upbound.io/manual-intervention: The dependent resource needs a manual patching and is thus skipped.
+    uptest.upbound.io/pre-delete-hook: ../testhooks/delete-network.sh
+  labels:
+    testing.upbound.io/example-name: example
+  name: stexample
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

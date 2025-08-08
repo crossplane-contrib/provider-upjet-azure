@@ -1,0 +1,48 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: datafactory.azure.m.upbound.io/v1beta1
+kind: LinkedServiceMySQL
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedservicemysql
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    connectionString: Server=test;Port=3306;Database=test;User=test;SSLMode=1;UseSystemTrustStore=0;Password=test
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: linkedservicemysql-fct
+---
+apiVersion: datafactory.azure.m.upbound.io/v1beta1
+kind: Factory
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedservicemysql
+  labels:
+    testing.upbound.io/example-name: linkedservicemysql-fct
+  name: linkedservicemysql-fct
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: linkedservicemysql-rg
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedservicemysql
+  labels:
+    testing.upbound.io/example-name: linkedservicemysql-rg
+  name: linkedservicemysql-rg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

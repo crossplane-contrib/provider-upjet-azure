@@ -1,0 +1,91 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: insights.azure.m.upbound.io/v1beta1
+kind: MonitorScheduledQueryRulesAlert
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitorscheduledqueryrulesalert
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    action:
+      actionGroupRefs:
+        - name: example
+      customWebhookPayload: '{}'
+      emailSubject: Email Header
+    dataSourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    description: Alert when total results cross threshold
+    enabled: true
+    frequency: 5
+    location: West Europe
+    name: example
+    query: |
+      requests
+        | where tolong(resultCode) >= 500
+        | summarize count() by bin(timestamp, 5m)
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rg-monitor
+    severity: 1
+    tags:
+      foo: bar
+    timeWindow: 30
+    trigger:
+      operator: GreaterThan
+      threshold: 3
+---
+apiVersion: insights.azure.m.upbound.io/v1beta1
+kind: ApplicationInsights
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitorscheduledqueryrulesalert
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    applicationType: web
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rg-monitor
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta1/monitorscheduledqueryrulesalert
+  labels:
+    testing.upbound.io/example-name: rg-monitor
+  name: rg-monitor
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+---
+apiVersion: insights.azure.m.upbound.io/v1beta1
+kind: MonitorActionGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitorscheduledqueryrulesalert
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rg-monitor
+    shortName: exampleact
+    webhookReceiver:
+      - name: callmyapi
+        serviceUri: http://example.com/alert

@@ -1,0 +1,25 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: Watcher
+metadata:
+  name: norway-watcher
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: Norway East
+    resourceGroupNameRef:
+      name: norway-watcher-rg
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  name: norway-watcher-rg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: Norway East
+    tags:
+      provisioner: crossplane

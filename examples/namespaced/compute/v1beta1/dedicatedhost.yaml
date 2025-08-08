@@ -1,0 +1,18 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: compute.azure.m.upbound.io/v1beta1
+kind: DedicatedHost
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    dedicatedHostGroupId: <host-group-id>
+    location: West Europe
+    platformFaultDomain: 0
+    # This SKU has 8 vCPUs. We have only 10 available in our subscription
+    skuName: DCSv2-Type1

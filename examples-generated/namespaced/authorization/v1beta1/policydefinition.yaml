@@ -1,0 +1,42 @@
+apiVersion: authorization.azure.m.upbound.io/v1beta1
+kind: PolicyDefinition
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta1/policydefinition
+  labels:
+    testing.upbound.io/example-name: policy
+  name: policy
+  namespace: upbound-system
+spec:
+  forProvider:
+    displayName: acceptance test policy definition
+    metadata: |2+
+          {
+          "category": "General"
+          }
+
+    mode: Indexed
+    parameters: |2
+       {
+          "allowedLocations": {
+            "type": "Array",
+            "metadata": {
+              "description": "The list of allowed locations for resources.",
+              "displayName": "Allowed locations",
+              "strongType": "location"
+            }
+          }
+        }
+    policyRule: |2
+       {
+          "if": {
+            "not": {
+              "field": "location",
+              "in": "[parameters('allowedLocations')]"
+            }
+          },
+          "then": {
+            "effect": "audit"
+          }
+        }
+    policyType: Custom

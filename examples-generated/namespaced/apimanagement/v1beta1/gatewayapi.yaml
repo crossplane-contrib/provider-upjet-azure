@@ -1,0 +1,17 @@
+apiVersion: apimanagement.azure.m.upbound.io/v1beta1
+kind: GatewayAPI
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/gatewayapi
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    apiIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_api_management_api
+    gatewayIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_api_management_gateway

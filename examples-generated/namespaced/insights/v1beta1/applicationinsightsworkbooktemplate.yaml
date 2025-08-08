@@ -1,0 +1,86 @@
+apiVersion: insights.azure.m.upbound.io/v1beta1
+kind: ApplicationInsightsWorkbookTemplate
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta1/applicationinsightsworkbooktemplate
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    author: test author
+    galleries:
+    - category: workbook
+      name: test
+      order: 100
+      resourceType: microsoft.insights/components
+      type: tsg
+    localized: |-
+      ${jsonencode({
+          "ar" : [
+            {
+              "galleries" : [
+                {
+                  "name" : "test",
+                  "category" : "Failures",
+                  "type" : "tsg",
+                  "resourceType" : "microsoft.insights/components",
+                  "order" : 100
+                }
+              ],
+              "templateData" : {
+                "version" : "Notebook/1.0",
+                "items" : [
+                  {
+                    "type" : 1,
+                    "content" : {
+                      "json" : "## New workbook\n---\n\nWelcome to your new workbook."
+                    },
+                    "name" : "text - 2"
+                  }
+                ],
+                "styleSettings" : {},
+                "$schema" : "https://github.com/Microsoft/Application-Insights-Workbooks/blob/master/schema/workbook.json"
+              },
+            }
+          ]
+        })}
+    location: West Europe
+    name: example-aiwt
+    priority: 1
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tags:
+      key: value
+    templateData: |-
+      ${jsonencode({
+          "version" : "Notebook/1.0",
+          "items" : [
+            {
+              "type" : 1,
+              "content" : {
+                "json" : "## New workbook\n---\n\nWelcome to your new workbook."
+              },
+              "name" : "text - 2"
+            }
+          ],
+          "styleSettings" : {},
+          "$schema" : "https://github.com/Microsoft/Application-Insights-Workbooks/blob/master/schema/workbook.json"
+        })}
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta1/applicationinsightsworkbooktemplate
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

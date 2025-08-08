@@ -1,0 +1,18 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: security.azure.m.upbound.io/v1beta1
+kind: SecurityCenterAssessmentPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: security/v1beta1/securitycenterassessmentpolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: Test Description
+    displayName: Test Display Name
+    severity: Medium

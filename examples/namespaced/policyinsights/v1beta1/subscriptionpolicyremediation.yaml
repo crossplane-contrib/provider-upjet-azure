@@ -1,0 +1,51 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: policyinsights.azure.m.upbound.io/v1beta1
+kind: SubscriptionPolicyRemediation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: policyinsights/v1beta1/subscriptionpolicyremediation
+  labels:
+    testing.upbound.io/example-name: example
+  name: policy-example
+  namespace: upbound-system
+spec:
+  forProvider:
+    policyAssignmentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    subscriptionId: /subscriptions/038f2b7c-3265-43b8-8624-c9ad5da610a8
+---
+apiVersion: authorization.azure.m.upbound.io/v1beta1
+kind: SubscriptionPolicyAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: policyinsights/v1beta1/subscriptionpolicyremediation
+  labels:
+    testing.upbound.io/example-name: example
+  name: policy-example
+  namespace: upbound-system
+spec:
+  forProvider:
+    policyDefinitionIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    subscriptionId: /subscriptions/038f2b7c-3265-43b8-8624-c9ad5da610a8
+---
+apiVersion: authorization.azure.m.upbound.io/v1beta1
+kind: PolicyDefinition
+metadata:
+  annotations:
+    meta.upbound.io/example-id: policyinsights/v1beta1/subscriptionpolicyremediation
+  labels:
+    testing.upbound.io/example-name: example
+  name: policy-example
+  namespace: upbound-system
+spec:
+  forProvider:
+    displayName: my-policy-definition
+    mode: All
+    policyRule: "\t{\n    \"if\": {\n      \"not\": {\n        \"field\": \"location\",\n        \"equals\": \"westeurope\"\n      }\n    },\n    \"then\": {\n      \"effect\": \"Deny\"\n    }\n  }\n"
+    policyType: Custom

@@ -1,0 +1,24 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: authorization.azure.m.upbound.io/v1beta1
+kind: RoleDefinition
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta1/roledefinition
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    assignableScopes:
+      - ${data.azurerm_client_config.current.subscription_resource_id}
+    description: This is a custom role
+    name: my-custom-role
+    permissions:
+      - actions:
+          - '*'
+        notActions: []
+    scope: ${data.azurerm_client_config.current.subscription_resource_id}

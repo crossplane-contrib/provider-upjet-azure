@@ -1,0 +1,58 @@
+apiVersion: containerregistry.azure.m.upbound.io/v1beta1
+kind: ScopeMap
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerregistry/v1beta1/scopemap
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    actions:
+    - repositories/repo1/content/read
+    - repositories/repo1/content/write
+    containerRegistryNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: containerregistry.azure.m.upbound.io/v1beta1
+kind: Registry
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerregistry/v1beta1/scopemap
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    adminEnabled: false
+    georeplications:
+    - location: East US
+    - location: West Europe
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: Basic
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerregistry/v1beta1/scopemap
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

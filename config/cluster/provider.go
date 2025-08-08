@@ -1,0 +1,103 @@
+// SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: CC0-1.0
+
+package cluster
+
+import (
+	"github.com/upbound/provider-azure/config/cluster/alertsmanagement"
+	"github.com/upbound/provider-azure/config/cluster/apimanagement"
+	"github.com/upbound/provider-azure/config/cluster/appplatform"
+	"github.com/upbound/provider-azure/config/cluster/authorization"
+	"github.com/upbound/provider-azure/config/cluster/automation"
+	"github.com/upbound/provider-azure/config/cluster/base"
+	"github.com/upbound/provider-azure/config/cluster/botservice"
+	"github.com/upbound/provider-azure/config/cluster/cache"
+	"github.com/upbound/provider-azure/config/cluster/cdn"
+	"github.com/upbound/provider-azure/config/cluster/certificateregistration"
+	"github.com/upbound/provider-azure/config/cluster/compute"
+	"github.com/upbound/provider-azure/config/cluster/consumption"
+	"github.com/upbound/provider-azure/config/cluster/containerapp"
+	"github.com/upbound/provider-azure/config/cluster/containerregistry"
+	"github.com/upbound/provider-azure/config/cluster/containerservice"
+	"github.com/upbound/provider-azure/config/cluster/cosmosdb"
+	"github.com/upbound/provider-azure/config/cluster/costmanagement"
+	"github.com/upbound/provider-azure/config/cluster/datafactory"
+	"github.com/upbound/provider-azure/config/cluster/dataprotection"
+	"github.com/upbound/provider-azure/config/cluster/datashare"
+	"github.com/upbound/provider-azure/config/cluster/dbformysql"
+	"github.com/upbound/provider-azure/config/cluster/devices"
+	"github.com/upbound/provider-azure/config/cluster/eventhub"
+	"github.com/upbound/provider-azure/config/cluster/healthcareapis"
+	"github.com/upbound/provider-azure/config/cluster/insights"
+	"github.com/upbound/provider-azure/config/cluster/keyvault"
+	"github.com/upbound/provider-azure/config/cluster/kusto"
+	"github.com/upbound/provider-azure/config/cluster/management"
+	"github.com/upbound/provider-azure/config/cluster/netapp"
+	"github.com/upbound/provider-azure/config/cluster/network"
+	"github.com/upbound/provider-azure/config/cluster/notificationhubs"
+	"github.com/upbound/provider-azure/config/cluster/operationalinsights"
+	"github.com/upbound/provider-azure/config/cluster/orbital"
+	"github.com/upbound/provider-azure/config/cluster/postgresql"
+	"github.com/upbound/provider-azure/config/cluster/relay"
+	"github.com/upbound/provider-azure/config/cluster/resource"
+	"github.com/upbound/provider-azure/config/cluster/resources"
+	"github.com/upbound/provider-azure/config/cluster/security"
+	"github.com/upbound/provider-azure/config/cluster/securityinsights"
+	"github.com/upbound/provider-azure/config/cluster/servicebus"
+	"github.com/upbound/provider-azure/config/cluster/sql"
+	"github.com/upbound/provider-azure/config/cluster/storage"
+	"github.com/upbound/provider-azure/config/cluster/storagecache"
+	"github.com/upbound/provider-azure/config/cluster/storagesync"
+	"github.com/upbound/provider-azure/config/cluster/streamanalytics"
+	"github.com/upbound/provider-azure/config/cluster/web"
+)
+
+func init() {
+	ProviderConfiguration.AddConfig(authorization.Configure)
+	ProviderConfiguration.AddConfig(alertsmanagement.Configure)
+	ProviderConfiguration.AddConfig(network.Configure)
+	ProviderConfiguration.AddConfig(management.Configure)
+	ProviderConfiguration.AddConfig(cache.Configure)
+	ProviderConfiguration.AddConfig(resource.Configure)
+	ProviderConfiguration.AddConfig(resources.Configure)
+	ProviderConfiguration.AddConfig(containerapp.Configure)
+	ProviderConfiguration.AddConfig(containerservice.Configure)
+	ProviderConfiguration.AddConfig(postgresql.Configure)
+	ProviderConfiguration.AddConfig(cosmosdb.Configure)
+	ProviderConfiguration.AddConfig(sql.Configure)
+	ProviderConfiguration.AddConfig(storage.Configure)
+	ProviderConfiguration.AddConfig(operationalinsights.Configure)
+	ProviderConfiguration.AddConfig(insights.Configure)
+	ProviderConfiguration.AddConfig(devices.Configure)
+	ProviderConfiguration.AddConfig(datafactory.Configure)
+	ProviderConfiguration.AddConfig(apimanagement.Configure)
+	ProviderConfiguration.AddConfig(healthcareapis.Configure)
+	ProviderConfiguration.AddConfig(security.Configure)
+	ProviderConfiguration.AddConfig(securityinsights.Configure)
+	ProviderConfiguration.AddConfig(base.Configure)
+	ProviderConfiguration.AddConfig(botservice.Configure)
+	ProviderConfiguration.AddConfig(datashare.Configure)
+	ProviderConfiguration.AddConfig(notificationhubs.Configure)
+	ProviderConfiguration.AddConfig(storagesync.Configure)
+	ProviderConfiguration.AddConfig(keyvault.Configure)
+	ProviderConfiguration.AddConfig(eventhub.Configure)
+	ProviderConfiguration.AddConfig(compute.Configure)
+	ProviderConfiguration.AddConfig(containerregistry.Configure)
+	ProviderConfiguration.AddConfig(dbformysql.Configure)
+	ProviderConfiguration.AddConfig(netapp.Configure)
+	ProviderConfiguration.AddConfig(dataprotection.Configure)
+	ProviderConfiguration.AddConfig(kusto.Configure)
+	ProviderConfiguration.AddConfig(storagecache.Configure)
+	ProviderConfiguration.AddConfig(servicebus.Configure)
+	ProviderConfiguration.AddConfig(consumption.Configure)
+	ProviderConfiguration.AddConfig(streamanalytics.Configure)
+	ProviderConfiguration.AddConfig(costmanagement.Configure)
+	ProviderConfiguration.AddConfig(automation.Configure)
+	ProviderConfiguration.AddConfig(web.Configure)
+	ProviderConfiguration.AddConfig(relay.Configure)
+	ProviderConfiguration.AddConfig(cdn.Configure)
+	ProviderConfiguration.AddConfig(certificateregistration.Configure)
+	ProviderConfiguration.AddConfig(orbital.Configure)
+	ProviderConfiguration.AddConfig(appplatform.Configure)
+}

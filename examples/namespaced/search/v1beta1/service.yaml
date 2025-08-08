@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: search.azure.m.upbound.io/v1beta1
+kind: Service
+metadata:
+  annotations:
+    meta.upbound.io/example-id: search/v1beta2/service
+  labels:
+    testing.upbound.io/example-name: search-example
+  name: search-example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: search-rg
+    sku: standard
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: search/v1beta1/service
+  labels:
+    testing.upbound.io/example-name: search-rg
+  name: search-rg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

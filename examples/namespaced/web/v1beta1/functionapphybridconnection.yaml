@@ -1,0 +1,144 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: web.azure.m.upbound.io/v1beta1
+kind: FunctionAppHybridConnection
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/functionapphybridconnection
+  labels:
+    testing.upbound.io/example-name: examplefuncapphybrconn
+  name: examplefuncapphybrconn
+  namespace: upbound-system
+spec:
+  forProvider:
+    functionAppIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: funcapphybrconn-wfa
+    hostname: myhostname.example
+    port: 8081
+    relayIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: funcapphybrconn-hc
+---
+apiVersion: relay.azure.m.upbound.io/v1beta1
+kind: HybridConnection
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/functionapphybridconnection
+  labels:
+    testing.upbound.io/example-name: funcapphybrconn-hc
+  name: funcapphybrconn-hc
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: examplerhc1
+    relayNamespaceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: funcapphybrconn-ern
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: funcapphybrconn-rg
+---
+apiVersion: relay.azure.m.upbound.io/v1beta1
+kind: EventRelayNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/functionapphybridconnection
+  labels:
+    testing.upbound.io/example-name: funcapphybrconn-ern
+  name: funcapphybrconn-ern
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: funcapphybrconn-rg
+    skuName: Standard
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/functionapphybridconnection
+  labels:
+    testing.upbound.io/example-name: funcapphybrconn-rg
+  name: funcapphybrconn-rg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+---
+apiVersion: web.azure.m.upbound.io/v1beta1
+kind: ServicePlan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/functionapphybridconnection
+  labels:
+    testing.upbound.io/example-name: funcapphybrconn-sp
+  name: funcapphybrconn-sp
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    osType: Windows
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: funcapphybrconn-rg
+    skuName: S1
+---
+apiVersion: storage.azure.m.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/functionapphybridconnection
+  labels:
+    testing.upbound.io/example-name: funcapphybrconnacc
+  name: funcapphybrconnacc
+  namespace: upbound-system
+spec:
+  forProvider:
+    accountReplicationType: GRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: funcapphybrconn-rg
+---
+apiVersion: web.azure.m.upbound.io/v1beta1
+kind: WindowsFunctionApp
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/functionapphybridconnection
+  labels:
+    testing.upbound.io/example-name: funcapphybrconn-wfa
+  name: funcapphybrconn-wfa
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: funcapphybrconn-rg
+    servicePlanIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: funcapphybrconn-sp
+    siteConfig:
+      - {}
+    storageAccountAccessKeySecretRef:
+      key: example-key
+      name: example-name
+    storageAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: funcapphybrconnacc
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-name
+  namespace: upbound-system
+type: Opaque
+data:
+  example-key: dXBiMHVuZHIwY2s1ITMxMzM3Cg==

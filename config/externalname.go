@@ -9,12 +9,12 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/upbound/provider-azure/config/common"
+	"github.com/upbound/provider-azure/config/cluster/common"
 
 	"github.com/pkg/errors"
 
-	"github.com/crossplane/upjet/pkg/config"
-	"github.com/crossplane/upjet/pkg/terraform"
+	"github.com/crossplane/upjet/v2/pkg/config"
+	"github.com/crossplane/upjet/v2/pkg/terraform"
 )
 
 // TerraformPluginSDKExternalNameConfigs contains all external name configurations

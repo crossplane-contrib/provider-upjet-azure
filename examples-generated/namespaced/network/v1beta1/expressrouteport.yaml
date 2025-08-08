@@ -1,0 +1,33 @@
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: ExpressRoutePort
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/expressrouteport
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    bandwidthInGbps: 10
+    encapsulation: Dot1Q
+    location: West Europe
+    peeringLocation: Airtel-Chennai-CLS
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/expressrouteport
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West US

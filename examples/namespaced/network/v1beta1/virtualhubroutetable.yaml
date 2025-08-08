@@ -1,0 +1,169 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: VirtualHubRouteTable
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/virtualhubroutetable
+  labels:
+    testing.upbound.io/example-name: virthubrttableexample
+  name: virthubrttableexample
+  namespace: upbound-system
+spec:
+  forProvider:
+    labels:
+      - label1
+    route:
+      - destinations:
+          - 10.0.0.0/16
+        destinationsType: CIDR
+        name: example-route
+        nextHopSelector:
+          matchLabels:
+            testing.upbound.io/example-name: virthubrttable-vhc
+        nextHopType: ResourceId
+    virtualHubIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: virthubrttable-vh
+---
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/virtualhubroutetable
+  labels:
+    testing.upbound.io/example-name: virthubrttable-sg
+  name: virthubrttable-sg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: virthubrttable-rg
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/virtualhubroutetable
+  labels:
+    testing.upbound.io/example-name: virthubrttable-rg
+  name: virthubrttable-rg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+---
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/virtualhubroutetable
+  labels:
+    testing.upbound.io/example-name: virthubrttable-sn
+  name: virthubrttable-sn
+  namespace: upbound-system
+spec:
+  forProvider:
+    addressPrefixes:
+      - 10.5.1.0/24
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: virthubrttable-rg
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: virthubrttable-vn
+---
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: SubnetNetworkSecurityGroupAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/virtualhubroutetable
+  labels:
+    testing.upbound.io/example-name: virthubrttable-sga
+  name: virthubrttable-sga
+  namespace: upbound-system
+spec:
+  forProvider:
+    networkSecurityGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: virthubrttable-sg
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: virthubrttable-sn
+---
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: VirtualHub
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "7200"
+    meta.upbound.io/example-id: network/v1beta1/virtualhubroutetable
+  labels:
+    testing.upbound.io/example-name: virthubrttable-vh
+  name: virthubrttable-vh
+  namespace: upbound-system
+spec:
+  forProvider:
+    addressPrefix: 10.0.2.0/24
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: virthubrttable-rg
+    virtualWanIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: virthubrttable-vwan
+---
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: VirtualHubConnection
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/virtualhubroutetable
+  labels:
+    testing.upbound.io/example-name: virthubrttable-vhc
+  name: virthubrttable-vhc
+  namespace: upbound-system
+spec:
+  forProvider:
+    remoteVirtualNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: virthubrttable-vn
+    virtualHubIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: virthubrttable-vh
+---
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/virtualhubroutetable
+  labels:
+    testing.upbound.io/example-name: virthubrttable-vn
+  name: virthubrttable-vn
+  namespace: upbound-system
+spec:
+  forProvider:
+    addressSpace:
+      - 10.5.0.0/16
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: virthubrttable-rg
+---
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: VirtualWAN
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/virtualhubroutetable
+  labels:
+    testing.upbound.io/example-name: virthubrttable-vwan
+  name: virthubrttable-vwan
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: virthubrttable-rg

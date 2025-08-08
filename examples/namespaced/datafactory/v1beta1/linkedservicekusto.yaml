@@ -1,0 +1,124 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: datafactory.azure.m.upbound.io/v1beta1
+kind: LinkedServiceKusto
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Requires DatabasePrincipalAssignment principalId and tenantId to be specified."
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedservicekusto
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: linkedservicekusto-factory
+    kustoDatabaseNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: linkedkustodb
+    kustoEndpointSelector:
+      matchLabels:
+        testing.upbound.io/example-name: linkedkustocluster
+    useManagedIdentity: true
+---
+apiVersion: datafactory.azure.m.upbound.io/v1beta1
+kind: Factory
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Requires DatabasePrincipalAssignment principalId and tenantId to be specified."
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedservicekusto
+  labels:
+    testing.upbound.io/example-name: linkedservicekusto-factory
+  name: linkedservicekusto-factory
+  namespace: upbound-system
+spec:
+  forProvider:
+    identity:
+      - type: SystemAssigned
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: linkedservicekusto-rg
+---
+apiVersion: kusto.azure.m.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Requires DatabasePrincipalAssignment principalId and tenantId to be specified."
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedservicekusto
+  labels:
+    testing.upbound.io/example-name: linkedkustocluster
+  name: linkedkustocluster
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: linkedservicekusto-rg
+    sku:
+      - capacity: 2
+        name: Standard_D13_v2
+---
+apiVersion: kusto.azure.m.upbound.io/v1beta1
+kind: Database
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Requires DatabasePrincipalAssignment principalId and tenantId to be specified."
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedservicekusto
+  labels:
+    testing.upbound.io/example-name: linkedkustodb
+  name: linkedkustodb
+  namespace: upbound-system
+spec:
+  forProvider:
+    clusterNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: linkedkustocluster
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: linkedservicekusto-rg
+---
+apiVersion: kusto.azure.m.upbound.io/v1beta1
+kind: DatabasePrincipalAssignment
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Requires DatabasePrincipalAssignment principalId and tenantId to be specified."
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedservicekusto
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    clusterNameRef:
+      name: linkedkustocluster
+    databaseNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: linkedkustodb
+    principalId: ${azurerm_data_factory.example.identity.0.principal_id}
+    principalType: App
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: linkedservicekusto-rg
+    role: Viewer
+    tenantId: ${azurerm_data_factory.example.identity.0.principal_id}
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Requires DatabasePrincipalAssignment principalId and tenantId to be specified."
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedservicekusto
+  labels:
+    testing.upbound.io/example-name: linkedservicekusto-rg
+  name: linkedservicekusto-rg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

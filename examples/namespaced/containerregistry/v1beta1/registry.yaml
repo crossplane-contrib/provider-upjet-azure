@@ -1,0 +1,23 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: containerregistry.azure.m.upbound.io/v1beta1
+kind: Registry
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerregistry/v1beta2/registry
+  name: upbound
+  namespace: upbound-system
+spec:
+  forProvider:
+    adminEnabled: false
+    dataEndpointEnabled: true
+    georeplications:
+      - location: East US
+        tags: {}
+        zoneRedundancyEnabled: true
+    location: West Europe
+    resourceGroupNameRef:
+      name: example-containerreg
+    sku: Premium

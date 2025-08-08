@@ -1,0 +1,82 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
+apiVersion: sql.azure.m.upbound.io/v1beta1
+kind: MSSQLJobAgent
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqljobagent
+  labels:
+    testing.upbound.io/example-name: examplemssqljobagent
+  name: examplemssqljobagent
+  namespace: upbound-system
+spec:
+  forProvider:
+    databaseIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: mssqljobagent-db
+    location: northeurope
+    name: example-job-agent
+---
+apiVersion: sql.azure.m.upbound.io/v1beta1
+kind: MSSQLDatabase
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "3600"
+    meta.upbound.io/example-id: sql/v1beta1/mssqljobagent
+  labels:
+    testing.upbound.io/example-name: mssqljobagent-db
+  name: mssqljobagent-db
+  namespace: upbound-system
+spec:
+  forProvider:
+    collation: SQL_Latin1_General_CP1_CI_AS
+    serverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: mssqljobagent-srv
+    skuName: S1
+---
+apiVersion: sql.azure.m.upbound.io/v1beta1
+kind: MSSQLServer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqljobagent
+  labels:
+    testing.upbound.io/example-name: mssqljobagent-srv
+  name: mssqljobagent-srv
+  namespace: upbound-system
+spec:
+  forProvider:
+    administratorLogin: 4dm1n157r470r
+    administratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+    location: northeurope
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: mssqljobagent-rg
+    version: "12.0"
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqljobagent
+  labels:
+    testing.upbound.io/example-name: mssqljobagent-rg
+  name: mssqljobcred-rg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: northeurope
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+type: Opaque
+data:
+  example-key: dGVzdFBhc3N3b3JkITEyMw==

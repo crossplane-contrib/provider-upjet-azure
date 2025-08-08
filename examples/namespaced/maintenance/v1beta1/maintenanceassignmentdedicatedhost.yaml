@@ -1,0 +1,51 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: maintenance.azure.m.upbound.io/v1beta1
+kind: MaintenanceAssignmentDedicatedHost
+metadata:
+  annotations:
+    meta.upbound.io/example-id: maintenance/v1beta1/maintenanceassignmentdedicatedhost
+    upjet.upbound.io/manual-intervention: "This resource requires DedicatedHost resource which need manual intervention."
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    dedicatedHostId: <DedicatedHostId>
+    location: West Europe
+    maintenanceConfigurationIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: maintenance.azure.m.upbound.io/v1beta1
+kind: MaintenanceConfiguration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: maintenance/v1beta1/maintenanceassignmentdedicatedhost
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: maintenancehost
+    scope: Host
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: maintenance/v1beta1/maintenanceassignmentdedicatedhost
+  labels:
+    testing.upbound.io/example-name: maintenancehost
+  name: maintenancehost
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

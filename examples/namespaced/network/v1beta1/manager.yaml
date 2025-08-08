@@ -1,0 +1,41 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: Manager
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/manager
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: example network manager
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rgmanager
+    scope:
+      subscriptionIds:
+        - ${data.azurerm_client_config.current.subscription_resource_id}
+    scopeAccesses:
+      - Connectivity
+      - SecurityAdmin
+    tags:
+      foo: bar
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/manager
+  labels:
+    testing.upbound.io/example-name: rgmanager
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

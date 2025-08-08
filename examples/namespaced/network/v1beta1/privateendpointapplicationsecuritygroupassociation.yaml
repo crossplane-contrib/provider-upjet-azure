@@ -1,0 +1,191 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: PrivateEndpointApplicationSecurityGroupAssociation
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Depends on resource with manual intervention"
+    meta.upbound.io/example-id: network/v1beta1/privateendpointapplicationsecuritygroupassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: peascaex
+  namespace: upbound-system
+spec:
+  forProvider:
+    applicationSecurityGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    privateEndpointIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: ApplicationSecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/privateendpointapplicationsecuritygroupassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: peascaex
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: PrivateEndpoint
+metadata:
+  name: peascaex
+  labels:
+    testing.upbound.io/example-name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource needs manual patching for the private_service_connection.private_connection_resource_id field."
+    meta.upbound.io/example-id: network/v1beta1/privateendpointapplicationsecuritygroupassociation
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    privateServiceConnection:
+      - isManualConnection: false
+        name: example-privateserviceconnection
+        # ID of the PrivateLinkService below
+        privateConnectionResourceId: /subscriptions/038f2b7c-3265-43b8-8624-c9ad5da610a8/resourceGroups/loadbalancerrg/providers/Microsoft.Network/privateLinkServices/example
+    resourceGroupNameRef:
+      name: loadbalancerrg
+    subnetIdRef:
+      name: service
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: loadbalancerrg
+  annotations:
+    upjet.upbound.io/manual-intervention: "The dependent resource PrivateEndpoint needs a manual patching and is thus skipped."
+    meta.upbound.io/example-id: network/v1beta1/privateendpointapplicationsecuritygroupassociation
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: "West Europe"
+    tags:
+      provisioner: crossplane
+---
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  name: example-vn-for-lb
+  annotations:
+    upjet.upbound.io/manual-intervention: "The dependent resource PrivateEndpoint needs a manual patching and is thus skipped."
+    meta.upbound.io/example-id: network/v1beta1/privateendpointapplicationsecuritygroupassociation
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameRef:
+      name: loadbalancerrg
+    addressSpace:
+      - "10.0.0.0/16"
+    dnsServers:
+      - "10.0.0.4"
+      - "10.0.0.5"
+---
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  name: service
+  annotations:
+    upjet.upbound.io/manual-intervention: "The dependent resource PrivateEndpoint needs a manual patching and is thus skipped."
+    meta.upbound.io/example-id: network/v1beta1/privateendpointapplicationsecuritygroupassociation
+  namespace: upbound-system
+spec:
+  forProvider:
+    enforcePrivateLinkServiceNetworkPolicies: true
+    resourceGroupNameRef:
+      name: loadbalancerrg
+    virtualNetworkNameRef:
+      name: example-vn-for-lb
+    addressPrefixes:
+      - "10.0.1.0/24"
+---
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  name: endpoint
+  annotations:
+    upjet.upbound.io/manual-intervention: "The dependent resource PrivateEndpoint needs a manual patching and is thus skipped."
+    meta.upbound.io/example-id: network/v1beta1/privateendpointapplicationsecuritygroupassociation
+  namespace: upbound-system
+spec:
+  forProvider:
+    enforcePrivateLinkEndpointNetworkPolicies: true
+    resourceGroupNameRef:
+      name: loadbalancerrg
+    virtualNetworkNameRef:
+      name: example-vn-for-lb
+    addressPrefixes:
+      - "10.0.2.0/24"
+---
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: PublicIP
+metadata:
+  name: publicipforlb
+  annotations:
+    upjet.upbound.io/manual-intervention: "The dependent resource PrivateEndpoint needs a manual patching and is thus skipped."
+    meta.upbound.io/example-id: network/v1beta1/privateendpointapplicationsecuritygroupassociation
+  namespace: upbound-system
+spec:
+  forProvider:
+    sku: Standard
+    allocationMethod: Static
+    location: West Europe
+    resourceGroupNameRef:
+      name: loadbalancerrg
+    tags:
+      environment: Production
+---
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: LoadBalancer
+metadata:
+  name: testloadbalancer
+  annotations:
+    upjet.upbound.io/manual-intervention: "The dependent resource PrivateEndpoint needs a manual patching and is thus skipped."
+    meta.upbound.io/example-id: network/v1beta1/privateendpointapplicationsecuritygroupassociation
+  namespace: upbound-system
+spec:
+  forProvider:
+    sku: Standard
+    location: West Europe
+    resourceGroupNameRef:
+      name: loadbalancerrg
+    frontendIpConfiguration:
+      - name: publicipaddress
+        publicIpAddressIdRef:
+          name: publicipforlb
+---
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: PrivateLinkService
+metadata:
+  name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "The dependent resource PrivateEndpoint needs a manual patching and is thus skipped."
+    meta.upbound.io/example-id: network/v1beta1/privateendpointapplicationsecuritygroupassociation
+  namespace: upbound-system
+spec:
+  forProvider:
+    loadBalancerFrontendIpConfigurationIds:
+      # composition required for fully automated example
+      - /subscriptions/038f2b7c-3265-43b8-8624-c9ad5da610a8/resourceGroups/loadbalancerrg/providers/Microsoft.Network/loadBalancers/testloadbalancer/frontendIPConfigurations/publicipaddress
+    location: West Europe
+    natIpConfiguration:
+      - name: primary
+        primary: true
+        subnetIdRef:
+          name: service
+    resourceGroupNameRef:
+      name: loadbalancerrg

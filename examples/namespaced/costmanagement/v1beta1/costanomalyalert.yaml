@@ -1,0 +1,19 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: costmanagement.azure.m.upbound.io/v1beta1
+kind: CostAnomalyAlert
+metadata:
+  annotations:
+    meta.upbound.io/example-id: costmanagement/v1beta1/costanomalyalert
+  labels:
+    testing.upbound.io/example-name: examplecostanomalyalert
+  name: examplecostanomalyalert
+  namespace: upbound-system
+spec:
+  forProvider:
+    displayName: Alert DisplayName
+    emailAddresses:
+      - example@test.net
+    emailSubject: My Test Anomaly Alert

@@ -1,0 +1,111 @@
+apiVersion: compute.azure.m.upbound.io/v1beta1
+kind: WindowsVirtualMachine
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/windowsvirtualmachine
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    adminPasswordSecretRef:
+      key: example-key
+      name: example-secret
+    adminUsername: adminuser
+    location: West Europe
+    networkInterfaceIdsRefs:
+    - name: example
+    osDisk:
+    - caching: ReadWrite
+      storageAccountType: Standard_LRS
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    size: Standard_F2
+    sourceImageReference:
+    - offer: WindowsServer
+      publisher: MicrosoftWindowsServer
+      sku: 2016-Datacenter
+      version: latest
+
+---
+
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: NetworkInterface
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/windowsvirtualmachine
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    ipConfiguration:
+    - name: internal
+      privateIpAddressAllocation: Dynamic
+      subnetIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/windowsvirtualmachine
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/windowsvirtualmachine
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    addressPrefixes:
+    - 10.0.2.0/24
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/windowsvirtualmachine
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    addressSpace:
+    - 10.0.0.0/16
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

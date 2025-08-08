@@ -1,0 +1,49 @@
+apiVersion: datafactory.azure.m.upbound.io/v1beta1
+kind: LinkedServiceAzureSQLDatabase
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedserviceazuresqldatabase
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    connectionString: data source=serverhostname;initial catalog=master;user id=testUser;Password=test;integrated
+      security=False;encrypt=True;connection timeout=30
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: datafactory.azure.m.upbound.io/v1beta1
+kind: Factory
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedserviceazuresqldatabase
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedserviceazuresqldatabase
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

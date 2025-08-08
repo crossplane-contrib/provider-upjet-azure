@@ -1,0 +1,56 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: botservice.azure.m.upbound.io/v1beta1
+kind: BotChannelAlexa
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "microsoftAppId is a part of application which we cannot obtain and need to be hardcoded"
+    meta.upbound.io/example-id: botservice/v1beta1/botchannelalexa
+  labels:
+    testing.upbound.io/example-name: example
+  name: channel-alexa
+  namespace: upbound-system
+spec:
+  forProvider:
+    botNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: bot-channels-registration-label
+    location: global
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azure-bot-r-group-label
+    skillId: amzn1.ask.skill.00000000-0000-0000-0000-000000000000
+---
+apiVersion: botservice.azure.m.upbound.io/v1beta1
+kind: BotChannelsRegistration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: botservice/v1beta1/botchannelalexa
+  labels:
+    testing.upbound.io/example-name: bot-channels-registration-label
+  name: botchannelsregistrationname
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: global
+    microsoftAppId: 2c909958-d48c-4ae8-8d7a-399177cfb3e4
+    name: bottChannelsRegistrationName
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azure-bot-r-group-label
+    sku: S1
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: botservice/v1beta1/botchannelalexa
+  labels:
+    testing.upbound.io/example-name: azure-bot-r-group-label
+  name: bot-resource-group-thu-t
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

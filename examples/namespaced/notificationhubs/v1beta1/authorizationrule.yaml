@@ -1,0 +1,76 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: notificationhubs.azure.m.upbound.io/v1beta1
+kind: AuthorizationRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: notificationhubs/v1beta1/authorizationrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    listen: true
+    manage: true
+    namespaceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    notificationHubNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    send: true
+---
+apiVersion: notificationhubs.azure.m.upbound.io/v1beta1
+kind: NotificationHub
+metadata:
+  annotations:
+    meta.upbound.io/example-id: notificationhubs/v1beta1/authorizationrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    namespaceNameRef:
+      name: hubnamesapce
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: notificationhubs.azure.m.upbound.io/v1beta1
+kind: NotificationHubNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: notificationhubs/v1beta1/authorizationrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: hubnamesapce
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    namespaceType: Messaging
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Free
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: notificationhubs/v1beta1/authorizationrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: notif-example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

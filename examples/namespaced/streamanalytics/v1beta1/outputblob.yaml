@@ -1,0 +1,118 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: streamanalytics.azure.m.upbound.io/v1beta1
+kind: OutputBlob
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta2/outputblob
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    dateFormat: yyyy-MM-dd
+    pathPattern: some-pattern
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    serialization:
+      encoding: UTF8
+      fieldDelimiter: ','
+      type: Csv
+    storageAccountKeySecretRef:
+      key: attribute.primary_access_key
+      name: example-storage-account
+    storageAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    storageContainerNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    streamAnalyticsJobNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    timeFormat: HH
+---
+apiVersion: storage.azure.m.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta2/outputblob
+  labels:
+    testing.upbound.io/example-name: example
+  name: exampleupboundstblob
+  namespace: upbound-system
+spec:
+  forProvider:
+    accountKind: StorageV2
+    accountReplicationType: LRS
+    accountTier: Standard
+    isHnsEnabled: true
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+  writeConnectionSecretToRef:
+    name: example-storage-account
+    namespace: upbound-system
+---
+apiVersion: storage.azure.m.upbound.io/v1beta1
+kind: Container
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta2/outputblob
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    containerAccessType: private
+    storageAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: streamanalytics.azure.m.upbound.io/v1beta1
+kind: Job
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta2/outputblob
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-job
+  namespace: upbound-system
+spec:
+  forProvider:
+    compatibilityLevel: "1.2"
+    dataLocale: en-GB
+    eventsLateArrivalMaxDelayInSeconds: 60
+    eventsOutOfOrderMaxDelayInSeconds: 50
+    eventsOutOfOrderPolicy: Adjust
+    location: West Europe
+    outputErrorPolicy: Drop
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    streamingUnits: 3
+    tags:
+      environment: example
+    transformationQuery: |2
+          SELECT *
+          INTO [YourOutputAlias]
+          FROM [YourInputAlias]
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta1/outputblob
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

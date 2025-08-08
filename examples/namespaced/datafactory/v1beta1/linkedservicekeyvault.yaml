@@ -1,0 +1,68 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: datafactory.azure.m.upbound.io/v1beta1
+kind: LinkedServiceKeyVault
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedservicekeyvault
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: linkedservicekeyvault-df
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: lkservicekvltkvlt
+---
+apiVersion: datafactory.azure.m.upbound.io/v1beta1
+kind: Factory
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedservicekeyvault
+  labels:
+    testing.upbound.io/example-name: linkedservicekeyvault-df
+  name: linkedservicekeyvault-df
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: linkedservicekeyvault-rg
+---
+apiVersion: keyvault.azure.m.upbound.io/v1beta1
+kind: Vault
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedservicekeyvault
+  labels:
+    testing.upbound.io/example-name: lkservicekvltkvlt
+  name: lkservicekvltkvlt
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: linkedservicekeyvault-rg
+    skuName: standard
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedservicekeyvault
+  labels:
+    testing.upbound.io/example-name: linkedservicekeyvault-rg
+  name: linkedservicekeyvault-rg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

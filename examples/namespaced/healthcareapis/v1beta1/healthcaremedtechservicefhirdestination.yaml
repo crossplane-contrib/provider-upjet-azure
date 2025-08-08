@@ -1,0 +1,244 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: healthcareapis.azure.m.upbound.io/v1beta1
+kind: HealthcareMedtechServiceFHIRDestination
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "3600"
+    meta.upbound.io/example-id: healthcareapis/v1beta1/healthcaremedtechservicefhirdestination
+  labels:
+    testing.upbound.io/example-name: example
+  name: hmsfdex
+  namespace: upbound-system
+spec:
+  forProvider:
+    destinationFhirMappingJson: |2
+        {
+                  "templateType": "CollectionFhirTemplate",
+                  "template": [
+                    {
+                      "templateType": "CodeValueFhir",
+                      "template": {
+                        "codes": [
+                          {
+                            "code": "8867-4",
+                            "system": "http://loinc.org",
+                            "display": "Heart rate"
+                          }
+                        ],
+                        "periodInterval": 60,
+                        "typeName": "heartrate",
+                        "value": {
+                          "defaultPeriod": 5000,
+                          "unit": "count/min",
+                          "valueName": "hr",
+                          "valueType": "SampledData"
+                        }
+                      }
+                    }
+                  ]
+        }
+    destinationFhirServiceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    destinationIdentityResolutionType: Create
+    location: east us
+    medtechServiceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: healthcareapis.azure.m.upbound.io/v1beta1
+kind: HealthcareFHIRService
+metadata:
+  annotations:
+    meta.upbound.io/example-id: healthcareapis/v1beta1/healthcaremedtechservicefhirdestination
+  labels:
+    testing.upbound.io/example-name: example
+  name: hmsfdex
+  namespace: upbound-system
+spec:
+  forProvider:
+    accessPolicyObjectIds:
+      - d949679c-f7ed-4e18-a8ac-0f5560ed3fdc
+    authentication:
+      - audience: https://tfexfhir.fhir.azurehealthcareapis.com
+        authority: https://login.microsoftonline.com/b9925bc4-8383-4c37-b9d2-fa456d1bb1c7
+    configurationExportStorageAccountName: hmsfdex
+    cors:
+      - allowedHeaders:
+          - '*'
+        allowedMethods:
+          - GET
+          - DELETE
+          - PUT
+        allowedOrigins:
+          - https://tfex.com:123
+          - https://tfex1.com:3389
+        credentialsAllowed: true
+        maxAgeInSeconds: 3600
+    identity:
+      - type: SystemAssigned
+    kind: fhir-R4
+    location: East US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    workspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: healthcareapis.azure.m.upbound.io/v1beta1
+kind: HealthcareWorkspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: healthcareapis/v1beta1/healthcaremedtechservicefhirdestination
+  labels:
+    testing.upbound.io/example-name: example
+  name: hmsfdex
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: East US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: healthcareapis/v1beta1/healthcaremedtechservicefhirdestination
+  labels:
+    testing.upbound.io/example-name: example
+  name: hmsfdex
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: East US
+---
+apiVersion: storage.azure.m.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: healthcareapis/v1beta1/healthcaremedtechservicefhirdestination
+  labels:
+    testing.upbound.io/example-name: example
+  name: hmsfdex
+  namespace: upbound-system
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: East US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: healthcareapis.azure.m.upbound.io/v1beta1
+kind: HealthcareMedtechService
+metadata:
+  annotations:
+    meta.upbound.io/example-id: healthcareapis/v1beta1/healthcaremedtechservicefhirdestination
+  labels:
+    testing.upbound.io/example-name: example
+  name: hmsfdex
+  namespace: upbound-system
+spec:
+  forProvider:
+    deviceMappingJson: |
+      {
+          "templateType": "CollectionContent",
+          "template": [
+                      {
+                        "templateType": "JsonPathContent",
+                        "template": {
+                          "typeName": "heartrate",
+                          "typeMatchExpression": "$..[?(@heartrate)]",
+                          "deviceIdExpression": "$.deviceid",
+                          "timestampExpression": "$.measurementdatetime",
+                          "values": [
+                            {
+                              "required": "true",
+                              "valueExpression": "$.heartrate",
+                              "valueName": "hr"
+                            }
+                          ]
+                        }
+                      }
+                    ]
+      }
+    eventhubConsumerGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    eventhubNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    eventhubNamespaceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    identity:
+      - type: SystemAssigned
+    location: east us
+    workspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: eventhub.azure.m.upbound.io/v1beta1
+kind: EventHub
+metadata:
+  annotations:
+    meta.upbound.io/example-id: healthcareapis/v1beta1/healthcaremedtechservicefhirdestination
+  labels:
+    testing.upbound.io/example-name: example
+  name: hmsfdex
+  namespace: upbound-system
+spec:
+  forProvider:
+    messageRetention: 1
+    namespaceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    partitionCount: 1
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: eventhub.azure.m.upbound.io/v1beta1
+kind: ConsumerGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: healthcareapis/v1beta1/healthcaremedtechservicefhirdestination
+  labels:
+    testing.upbound.io/example-name: example
+  name: hmsfdex
+  namespace: upbound-system
+spec:
+  forProvider:
+    eventhubNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    namespaceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: eventhub.azure.m.upbound.io/v1beta1
+kind: EventHubNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: healthcareapis/v1beta1/healthcaremedtechservicefhirdestination
+  labels:
+    testing.upbound.io/example-name: example
+  name: hmsfdex
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: East US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: Standard

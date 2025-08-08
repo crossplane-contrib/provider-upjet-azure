@@ -1,0 +1,56 @@
+apiVersion: authorization.azure.m.upbound.io/v1beta1
+kind: ManagementGroupPolicyExemption
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta1/managementgrouppolicyexemption
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    exemptionCategory: Mitigated
+    managementGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    policyAssignmentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: management.azure.m.upbound.io/v1beta1
+kind: ManagementGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta1/managementgrouppolicyexemption
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    displayName: Example MgmtGroup
+
+---
+
+apiVersion: authorization.azure.m.upbound.io/v1beta1
+kind: ManagementGroupPolicyAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta1/managementgrouppolicyexemption
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    identity:
+    - type: SystemAssigned
+    location: westus
+    managementGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    policyDefinitionIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_policy_set_definition

@@ -1,0 +1,56 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: cache.azure.m.upbound.io/v1beta1
+kind: RedisCacheAccessPolicyAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cache/v1beta1/rediscacheaccesspolicyassignment
+    uptest.upbound.io/timeout: "10800"
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    accessPolicyName: Data Contributor
+    objectId: ${data.azurerm_client_config.current.object_id}
+    objectIdAlias: ServicePrincipal
+    redisCacheIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: cache.azure.m.upbound.io/v1beta1
+kind: RedisCache
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cache/v1beta1/rediscacheaccesspolicyassignment
+  labels:
+    testing.upbound.io/example-name: example
+  name: uptest-${Rand.RFC1123Subdomain}
+  namespace: upbound-system
+spec:
+  forProvider:
+    redisVersion: "6"
+    capacity: 1
+    nonSslPortEnabled: false
+    family: P
+    location: West Europe
+    skuName: Premium
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cache/v1beta1/rediscacheaccesspolicyassignment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-redis-${Rand.RFC1123Subdomain}
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

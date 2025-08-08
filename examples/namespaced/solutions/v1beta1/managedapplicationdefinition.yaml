@@ -1,0 +1,39 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: solutions.azure.m.upbound.io/v1beta1
+kind: ManagedApplicationDefinition
+metadata:
+  annotations:
+    meta.upbound.io/example-id: solutions/v1beta1/managedapplicationdefinition
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    authorization:
+      - roleDefinitionId: a094b430-dad3-424d-ae58-13f72fd72591
+        servicePrincipalId: d949679c-f7ed-4e18-a8ac-0f5560ed3fdc
+    description: Test Managed Application Definition
+    displayName: TestManagedApplicationDefinition
+    location: West Europe
+    lockLevel: ReadOnly
+    packageFileUri: https://github.com/Azure/azure-managedapp-samples/raw/master/Managed Application Sample Packages/201-managed-storage-account/managedstorage.zip
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rg-solutions
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: solutions/v1beta1/managedapplicationdefinition
+  labels:
+    testing.upbound.io/example-name: rg-solutions
+  name: rg-solutions
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

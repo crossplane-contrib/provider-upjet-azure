@@ -1,0 +1,57 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: apimanagement.azure.m.upbound.io/v1beta1
+kind: Gateway
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta2/gateway
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-gateway
+  namespace: upbound-system
+spec:
+  forProvider:
+    apiManagementIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    description: Example API Management gateway
+    locationData:
+      city: example city
+      district: example district
+      name: example name
+      region: example region
+---
+apiVersion: apimanagement.azure.m.upbound.io/v1beta1
+kind: Management
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta2/gateway
+    uptest.upbound.io/timeout: "7200"
+  labels:
+    testing.upbound.io/example-name: example
+  name: uptest-management-example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    publisherEmail: company@terraform.io
+    publisherName: My Company
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Developer_1
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/gateway
+  labels:
+    testing.upbound.io/example-name: example
+  name: uptest-resourcegroup-example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

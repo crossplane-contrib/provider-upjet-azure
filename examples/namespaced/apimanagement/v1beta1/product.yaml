@@ -1,0 +1,60 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: apimanagement.azure.m.upbound.io/v1beta1
+kind: Product
+metadata:
+  annotations:
+    crossplane.io/external-name: 00000000-0000-0000-0000-000000000000
+    meta.upbound.io/example-id: apimanagement/v1beta1/product
+  labels:
+    testing.upbound.io/example-name: example
+  # We can not use uid here, we faced the ıssue: "name must start with a letter or underscore and may
+  # contain only letters,\n\e[31m│\e[0m \e[0mdigits, underscores, and dashes."
+  # In such a case use externalname annotation.
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    apiManagementNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    displayName: Test Product
+    published: true
+---
+apiVersion: apimanagement.azure.m.upbound.io/v1beta1
+kind: Management
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "7200"
+    meta.upbound.io/example-id: apimanagement/v1beta1/product
+  labels:
+    testing.upbound.io/example-name: example
+  name: uptest-management-example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    publisherEmail: company@terraform.io
+    publisherName: My Company
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Developer_1
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/product
+  labels:
+    testing.upbound.io/example-name: example
+  name: uptest-resourcegroup-example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

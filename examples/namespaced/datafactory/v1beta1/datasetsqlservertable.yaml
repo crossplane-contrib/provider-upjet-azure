@@ -1,0 +1,66 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: datafactory.azure.m.upbound.io/v1beta1
+kind: DataSetSQLServerTable
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/datasetsqlservertable
+  labels:
+    testing.upbound.io/example-name: examplesqlservtbl
+  name: examplesqlservtbl
+  namespace: upbound-system
+spec:
+  forProvider:
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: datasetsqlservertable-fct
+    linkedServiceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: datasetsqlservertable-ls
+---
+apiVersion: datafactory.azure.m.upbound.io/v1beta1
+kind: Factory
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/datasetsqlservertable
+  labels:
+    testing.upbound.io/example-name: datasetsqlservertable-fct
+  name: datasetsqlservertable-fct
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: datasetsqlservertable-rg
+---
+apiVersion: datafactory.azure.m.upbound.io/v1beta1
+kind: LinkedServiceSQLServer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/datasetsqlservertable
+  labels:
+    testing.upbound.io/example-name: datasetsqlservertable-ls
+  name: datasetsqlservertable-ls
+  namespace: upbound-system
+spec:
+  forProvider:
+    connectionString: Integrated Security=False;Data Source=test;Initial Catalog=test;User ID=test;Password=test
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: datasetsqlservertable-fct
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/datasetsqlservertable
+  labels:
+    testing.upbound.io/example-name: datasetsqlservertable-rg
+  name: datasetsqlservertable-rg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

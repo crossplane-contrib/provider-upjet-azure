@@ -1,0 +1,66 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: portal.azure.m.upbound.io/v1beta1
+kind: Dashboard
+metadata:
+  annotations:
+    meta.upbound.io/example-id: portal/v1beta1/dashboard
+  labels:
+    testing.upbound.io/example-name: my-board
+  name: my-board
+  namespace: upbound-system
+spec:
+  forProvider:
+    dashboardProperties: |-
+      ${jsonencode({
+         "lenses": {
+              "0": {
+                  "order": 0,
+                  "parts": {
+                      "0": {
+                          "position": {
+                              "x": 0,
+                              "y": 0,
+                              "rowSpan": 2,
+                              "colSpan": 3
+                          },
+                          "metadata": {
+                              "inputs": [],
+                              "type": "Extension/HubsExtension/PartType/MarkdownPart",
+                              "settings": {
+                                  "content": {
+                                      "settings": {
+                                          "content": "https://portal.azure.com",
+                                          "subtitle": "",
+                                          "title": ""
+                                      }
+                                  }
+                              }
+                          }
+                      }
+                  }
+              }
+          }
+        })}
+    location: West Europe
+    name: my-cool-dashboard
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rg-portal
+    tags:
+      source: terraform
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: portal/v1beta1/dashboard
+  labels:
+    testing.upbound.io/example-name: rg-portal
+  name: rg-portal
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

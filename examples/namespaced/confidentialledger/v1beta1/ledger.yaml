@@ -1,0 +1,38 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: confidentialledger.azure.m.upbound.io/v1beta1
+kind: Ledger
+metadata:
+  annotations:
+    meta.upbound.io/example-id: confidentialledger/v1beta1/ledger
+    uptest.upbound.io/timeout: "5400"
+  labels:
+    testing.upbound.io/example-name: testledger
+  name: testledger
+  namespace: upbound-system
+spec:
+  forProvider:
+    azureadBasedServicePrincipal:
+      - ledgerRoleName: Administrator
+        principalId: ${data.azurerm_client_config.current.object_id}
+        tenantId: ${data.azurerm_client_config.current.tenant_id}
+    ledgerType: Private
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: ledgerrg
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: confidentialledger/v1beta1/ledger
+  labels:
+    testing.upbound.io/example-name: ledgerrg
+  name: ledgerrg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

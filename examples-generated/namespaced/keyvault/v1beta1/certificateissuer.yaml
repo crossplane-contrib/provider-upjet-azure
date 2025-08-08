@@ -1,0 +1,55 @@
+apiVersion: keyvault.azure.m.upbound.io/v1beta1
+kind: CertificateIssuer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: keyvault/v1beta1/certificateissuer
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    accountId: "0000"
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    orgId: ExampleOrgName
+    passwordSecretRef:
+      key: example-key
+      name: example-secret
+    providerName: DigiCert
+
+---
+
+apiVersion: keyvault.azure.m.upbound.io/v1beta1
+kind: Vault
+metadata:
+  annotations:
+    meta.upbound.io/example-id: keyvault/v1beta1/certificateissuer
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: standard
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: keyvault/v1beta1/certificateissuer
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

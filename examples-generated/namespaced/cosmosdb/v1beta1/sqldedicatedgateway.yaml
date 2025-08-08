@@ -1,0 +1,56 @@
+apiVersion: cosmosdb.azure.m.upbound.io/v1beta1
+kind: SQLDedicatedGateway
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1beta1/sqldedicatedgateway
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    cosmosdbAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    instanceCount: 1
+    instanceSize: Cosmos.D4s
+
+---
+
+apiVersion: cosmosdb.azure.m.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1beta1/sqldedicatedgateway
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    consistencyPolicy:
+    - consistencyLevel: BoundedStaleness
+    geoLocation:
+    - failoverPriority: 0
+      location: West Europe
+    kind: GlobalDocumentDB
+    location: West Europe
+    offerType: Standard
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1beta1/sqldedicatedgateway
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

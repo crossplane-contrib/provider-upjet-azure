@@ -1,0 +1,75 @@
+apiVersion: web.azure.m.upbound.io/v1beta1
+kind: LinuxWebAppSlot
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/linuxwebappslot
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    appServiceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: example-slot
+    siteConfig:
+    - {}
+
+---
+
+apiVersion: web.azure.m.upbound.io/v1beta1
+kind: LinuxWebApp
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/linuxwebappslot
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    servicePlanIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    siteConfig:
+    - {}
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/linuxwebappslot
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: web.azure.m.upbound.io/v1beta1
+kind: ServicePlan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/linuxwebappslot
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    osType: Linux
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: P1v2

@@ -1,0 +1,19 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: dbformysql.azure.m.upbound.io/v1beta1
+kind: FlexibleServerFirewallRule
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "The resource depends on a Server and it needs a manual intervention."
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    endIpAddress: 40.112.8.12
+    resourceGroupNameRef:
+      name: example-rg-dbformysql
+    serverNameRef:
+      name: example-upbound
+    startIpAddress: 40.112.8.12

@@ -1,0 +1,55 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: logic.azure.m.upbound.io/v1beta1
+kind: AppTriggerCustom
+metadata:
+  annotations:
+    meta.upbound.io/example-id: logic/v1beta1/apptriggercustom
+  labels:
+    testing.upbound.io/example-name: apptriggercustomexample
+  name: apptriggercustomexample
+  namespace: upbound-system
+spec:
+  forProvider:
+    body: |
+      {
+        "recurrence": {
+          "frequency": "Day",
+          "interval": 1
+        },
+        "type": "Recurrence"
+      }
+    logicAppIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: apptriggercustom-aw
+---
+apiVersion: logic.azure.m.upbound.io/v1beta1
+kind: AppWorkflow
+metadata:
+  annotations:
+    meta.upbound.io/example-id: logic/v1beta1/apptriggercustom
+  labels:
+    testing.upbound.io/example-name: apptriggercustom-aw
+  name: apptriggercustom-aw
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: apptriggercustom-rg
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: logic/v1beta1/apptriggercustom
+  labels:
+    testing.upbound.io/example-name: apptriggercustom-rg
+  name: apptriggercustom-rg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

@@ -1,0 +1,49 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: logic.azure.m.upbound.io/v1beta1
+kind: AppActionHTTP
+metadata:
+  annotations:
+    meta.upbound.io/example-id: logic/v1beta1/appactionhttp
+  labels:
+    testing.upbound.io/example-name: appactionhttpexample
+  name: appactionhttpexample
+  namespace: upbound-system
+spec:
+  forProvider:
+    logicAppIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: appactionhttp-aw
+    method: GET
+    uri: http://example.com/some-webhook
+---
+apiVersion: logic.azure.m.upbound.io/v1beta1
+kind: AppWorkflow
+metadata:
+  annotations:
+    meta.upbound.io/example-id: logic/v1beta1/appactionhttp
+  labels:
+    testing.upbound.io/example-name: appactionhttp-aw
+  name: appactionhttp-aw
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: appactionhttp-rg
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: logic/v1beta1/appactionhttp
+  labels:
+    testing.upbound.io/example-name: appactionhttp-rg
+  name: appactionhttp-rg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

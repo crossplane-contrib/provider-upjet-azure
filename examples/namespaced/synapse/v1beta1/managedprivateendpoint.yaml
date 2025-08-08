@@ -1,0 +1,130 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: synapse.azure.m.upbound.io/v1beta1
+kind: ManagedPrivateEndpoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/managedprivateendpoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: managedprivateendpoint
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: example-endpoint
+    subresourceName: blob
+    synapseWorkspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: privateendpoint-ws-label
+    targetResourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: accountconnect-label
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/managedprivateendpoint
+  labels:
+    testing.upbound.io/example-name: privateendpoint-rg-label
+  name: privateendpoint-rg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: Qatar Central
+---
+apiVersion: storage.azure.m.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/managedprivateendpoint
+  labels:
+    testing.upbound.io/example-name: account-label
+  name: privateendpointaccountab
+  namespace: upbound-system
+spec:
+  forProvider:
+    accountKind: StorageV2
+    accountReplicationType: LRS
+    accountTier: Standard
+    isHnsEnabled: true
+    location: Qatar Central
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: privateendpoint-rg-label
+---
+apiVersion: storage.azure.m.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/managedprivateendpoint
+  labels:
+    testing.upbound.io/example-name: accountconnect-label
+  name: endpointaccountconnectab
+  namespace: upbound-system
+spec:
+  forProvider:
+    accountKind: BlobStorage
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: Qatar Central
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: privateendpoint-rg-label
+---
+apiVersion: storage.azure.m.upbound.io/v1beta1
+kind: DataLakeGen2FileSystem
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/managedprivateendpoint
+  labels:
+    testing.upbound.io/example-name: file-system-label
+  name: file-system
+  namespace: upbound-system
+spec:
+  forProvider:
+    storageAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: account-label
+---
+apiVersion: synapse.azure.m.upbound.io/v1beta1
+kind: FirewallRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/managedprivateendpoint
+  labels:
+    testing.upbound.io/example-name: firewallrule-label
+  name: firewallrule
+  namespace: upbound-system
+spec:
+  forProvider:
+    endIpAddress: 255.255.255.255
+    startIpAddress: 0.0.0.0
+    synapseWorkspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: privateendpoint-ws-label
+---
+apiVersion: synapse.azure.m.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/managedprivateendpoint
+  labels:
+    testing.upbound.io/example-name: privateendpoint-ws-label
+  name: privateendpoint-ws
+  namespace: upbound-system
+spec:
+  forProvider:
+    identity:
+      - type: SystemAssigned
+    location: Qatar Central
+    managedVirtualNetworkEnabled: true
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: privateendpoint-rg-label
+    sqlAdministratorLogin: sqladminuser
+    storageDataLakeGen2FilesystemIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: file-system-label

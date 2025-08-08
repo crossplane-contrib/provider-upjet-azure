@@ -1,0 +1,188 @@
+apiVersion: recoveryservices.azure.m.upbound.io/v1beta1
+kind: SiteRecoveryProtectionContainerMapping
+metadata:
+  annotations:
+    meta.upbound.io/example-id: recoveryservices/v1beta1/siterecoveryprotectioncontainermapping
+  labels:
+    testing.upbound.io/example-name: container-mapping
+  name: container-mapping
+  namespace: upbound-system
+spec:
+  forProvider:
+    recoveryFabricNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: primary
+    recoveryReplicationPolicyIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: policy
+    recoverySourceProtectionContainerNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: primary
+    recoveryTargetProtectionContainerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: secondary
+    recoveryVaultNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vault
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: secondary
+
+---
+
+apiVersion: recoveryservices.azure.m.upbound.io/v1beta1
+kind: Vault
+metadata:
+  annotations:
+    meta.upbound.io/example-id: recoveryservices/v1beta1/siterecoveryprotectioncontainermapping
+  labels:
+    testing.upbound.io/example-name: vault
+  name: vault
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: East US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: Standard
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: recoveryservices/v1beta1/siterecoveryprotectioncontainermapping
+  labels:
+    testing.upbound.io/example-name: primary
+  name: primary
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West US
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: recoveryservices/v1beta1/siterecoveryprotectioncontainermapping
+  labels:
+    testing.upbound.io/example-name: secondary
+  name: secondary
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: East US
+
+---
+
+apiVersion: recoveryservices.azure.m.upbound.io/v1beta1
+kind: SiteRecoveryFabric
+metadata:
+  annotations:
+    meta.upbound.io/example-id: recoveryservices/v1beta1/siterecoveryprotectioncontainermapping
+  labels:
+    testing.upbound.io/example-name: primary
+  name: primary
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West US
+    recoveryVaultNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: recoveryservices.azure.m.upbound.io/v1beta1
+kind: SiteRecoveryFabric
+metadata:
+  annotations:
+    meta.upbound.io/example-id: recoveryservices/v1beta1/siterecoveryprotectioncontainermapping
+  labels:
+    testing.upbound.io/example-name: secondary
+  name: secondary
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: East US
+    recoveryVaultNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: recoveryservices.azure.m.upbound.io/v1beta1
+kind: SiteRecoveryProtectionContainer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: recoveryservices/v1beta1/siterecoveryprotectioncontainermapping
+  labels:
+    testing.upbound.io/example-name: primary
+  name: primary
+  namespace: upbound-system
+spec:
+  forProvider:
+    recoveryFabricNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    recoveryVaultNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: recoveryservices.azure.m.upbound.io/v1beta1
+kind: SiteRecoveryProtectionContainer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: recoveryservices/v1beta1/siterecoveryprotectioncontainermapping
+  labels:
+    testing.upbound.io/example-name: secondary
+  name: secondary
+  namespace: upbound-system
+spec:
+  forProvider:
+    recoveryFabricNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    recoveryVaultNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: recoveryservices.azure.m.upbound.io/v1beta1
+kind: SiteRecoveryReplicationPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: recoveryservices/v1beta1/siterecoveryprotectioncontainermapping
+  labels:
+    testing.upbound.io/example-name: policy
+  name: policy
+  namespace: upbound-system
+spec:
+  forProvider:
+    applicationConsistentSnapshotFrequencyInMinutes: ${4 * 60}
+    recoveryPointRetentionInMinutes: ${24 * 60}
+    recoveryVaultNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

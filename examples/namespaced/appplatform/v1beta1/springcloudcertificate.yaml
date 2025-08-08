@@ -1,0 +1,51 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: appplatform.azure.m.upbound.io/v1beta1
+kind: SpringCloudCertificate
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudcertificate
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    certificateContent: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURaakNDQWs0Q0NRRDBPMUNXTnc3UERUQU5CZ2txaGtpRzl3MEJBUVVGQURCMU1Rc3dDUVlEVlFRR0V3SlYKU3pFTE1Ba0dBMVVFQ0F3Q1ZVc3hEakFNQmdOVkJBY01CVTlrWlhOaE1RMHdDd1lEVlFRS0RBUjBaWE4wTVEwdwpDd1lEVlFRTERBUjBaWE4wTVEwd0N3WURWUVFEREFSMFpYTjBNUnd3R2dZSktvWklodmNOQVFrQkZnMTBaWE4wClFIUmxjM1F1WTI5dE1CNFhEVEl6TURFeE1URXdNamN4TUZvWERUSTBNREV4TVRFd01qY3hNRm93ZFRFTE1Ba0cKQTFVRUJoTUNWVXN4Q3pBSkJnTlZCQWdNQWxWTE1RNHdEQVlEVlFRSERBVlBaR1Z6WVRFTk1Bc0dBMVVFQ2d3RQpkR1Z6ZERFTk1Bc0dBMVVFQ3d3RWRHVnpkREVOTUFzR0ExVUVBd3dFZEdWemRERWNNQm9HQ1NxR1NJYjNEUUVKCkFSWU5kR1Z6ZEVCMFpYTjBMbU52YlRDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUIKQU5LU1l5UEtlZytxbmtkZ2U0czB6ek9NTC96b3g1VVNWUjVsbDFDeVhVWWpzNFd3VEtsU0xQYWh3bFBDb0xtMwprdlhKRVZRR1pvaU5VRUdiNHI3L3ZsUERtZEhycTlFUzRVRjJNNDY3dC9vK0ZXbFBRRkhwUmp4VjdWakRuMnFiCmRXbDhzOUVqUnM4MGtpVWxZRWhCN3ROYlhlSnBuNEF2WVJoMXRBT1A1bjdBVVIwYXMwMUMzVTBxYXVPQ29Wa0kKYXpGOFI0Z3V2V1FXeEFicWNWeU9Xd2tYN3E3M1ZWTHBXRG1kVVQ1NGRhODdtS2hpQzBDQWhPemUyM0RYT0JqZAo0eUt3czRxbHVaQncyNHZVdUpqNC9QallWRE9vc0FyN1ZZUnk0ZmNaU3Z5dUpwRGtocFpQdWsxejE5RktEKzU3ClZpbGdwSE43YUNoMnJvMSsrYUVHZGY4Q0F3RUFBVEFOQmdrcWhraUc5dzBCQVFVRkFBT0NBUUVBc1JGNElLNkQKWXV2Nk5XYk5YWmdtVWhON2NsaWZnRnd2cHRwRDFYZXl1bzBzaVJTS2ZUOHlRZ1NIaUdRZURFTk5WYUs4UlZpOQo1VkprL1k0TWdUY2FRZmRYZkNSeGtSVDBWNFJLV0xNcWcvRHNSenVsYjVseGI2VVVxZUI2SnppWFRqL3RRWHhZCmYwZ1UySjV5d0UrQUcrSG5sRU14Tk5QUzhGVVUzempvSlF6YlJoS3dRcFRMN1VsYktCYlEzalpxUitYZzkwY3IKcUVRTkRRQ0xXOEpXQmFIbUxKRExLd1dyMkJ5L2M5TWdEVzY0eGJTR3NSNDkvbmlUbEZ0YjhZK0tKeXNLZTRaSQpqNXRsZ0NYZlJ6bGJ1Rnp2TGRkWlVQSHVIYUxORzdPVTZtOWxIMFRxVmVPa3E1SStNUmNmZ05FWVd6WkxyZWdoCk5FWjk2MTVlMjlrK0tBPT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    serviceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudcertificate
+  labels:
+    testing.upbound.io/example-name: example
+  name: spring-group
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+---
+apiVersion: appplatform.azure.m.upbound.io/v1beta1
+kind: SpringCloudService
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudcertificate
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-service
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

@@ -1,0 +1,13 @@
+apiVersion: security.azure.m.upbound.io/v1beta1
+kind: SecurityCenterSubscriptionPricing
+metadata:
+  annotations:
+    meta.upbound.io/example-id: security/v1beta1/securitycentersubscriptionpricing
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    resourceType: VirtualMachines
+    tier: Standard

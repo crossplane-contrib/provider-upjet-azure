@@ -1,0 +1,62 @@
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: TrafficManagerExternalEndpoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/trafficmanagerexternalendpoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    alwaysServeEnabled: true
+    profileIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    target: www.example.com
+    weight: 100
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/trafficmanagerexternalendpoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: TrafficManagerProfile
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/trafficmanagerexternalendpoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    dnsConfig:
+    - relativeName: example-profile
+      ttl: 100
+    monitorConfig:
+    - intervalInSeconds: 30
+      path: /
+      port: 80
+      protocol: HTTP
+      timeoutInSeconds: 9
+      toleratedNumberOfFailures: 3
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tags:
+      environment: Production
+    trafficRoutingMethod: Weighted

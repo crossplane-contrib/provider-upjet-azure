@@ -1,0 +1,17 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: LoadBalancerRule
+metadata:
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    backendPort: 3389
+    frontendIpConfigurationName: PublicIPAddress
+    frontendPort: 3389
+    loadbalancerIdRef:
+      name: example
+    protocol: Tcp

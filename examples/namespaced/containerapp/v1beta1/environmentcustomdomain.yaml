@@ -1,0 +1,91 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: containerapp.azure.m.upbound.io/v1beta1
+kind: EnvironmentCustomDomain
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerapp/v1beta1/environmentcustomdomain
+    upjet.upbound.io/manual-intervention: "This resource requires a valid domain"
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-ecd
+  namespace: upbound-system
+spec:
+  forProvider:
+    certificateBlobBase64: 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
+    certificatePasswordSecretRef:
+      key: example-key
+      name: example-secret
+    containerAppEnvironmentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    dnsSuffix: example.upbound-example.comx
+---
+apiVersion: containerapp.azure.m.upbound.io/v1beta1
+kind: Environment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerapp/v1beta1/environmentcustomdomain
+    upjet.upbound.io/manual-intervention: "The parent resource requires a valid domain"
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-e-ecd
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    logAnalyticsWorkspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: operationalinsights.azure.m.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerapp/v1beta1/environmentcustomdomain
+    upjet.upbound.io/manual-intervention: "The parent resource requires a valid domain"
+  labels:
+    testing.upbound.io/example-name: example
+  name: acctest-01
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    retentionInDays: 30
+    sku: PerGB2018
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerapp/v1beta1/environmentcustomdomain
+    upjet.upbound.io/manual-intervention: "The parent resource requires a valid domain"
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-rg-ecd
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerapp/v1beta1/environmentcustomdomain
+    upjet.upbound.io/manual-intervention: "The parent resource requires a valid domain"
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-secret
+  namespace: upbound-system
+type: Opaque
+data:
+  example-key: MTIzMzIxNTU=

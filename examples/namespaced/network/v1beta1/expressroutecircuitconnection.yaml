@@ -1,0 +1,19 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: ExpressRouteCircuitConnection
+metadata:
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    addressPrefixIpv4: 192.169.9.0/29
+    authorizationKeySecretRef:
+      key: example-key
+      name: example-secret
+    peerPeeringIdRef:
+      name: example
+    peeringIdRef:
+      name: example

@@ -1,0 +1,64 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: datashare.azure.m.upbound.io/v1beta1
+kind: DataSetDataLakeGen2
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
+  name: example-gen2
+  namespace: upbound-system
+spec:
+  forProvider:
+    filePath: myfile.txt
+    fileSystemNameRef:
+      name: example
+    shareIdRef:
+      name: example
+    storageAccountIdRef:
+      name: example-storage-account-gen2
+---
+apiVersion: storage.azure.m.upbound.io/v1beta1
+kind: Account
+metadata:
+  name: example-storage-account-gen2
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
+    crossplane.io/external-name: optestdatagen2190722
+  namespace: upbound-system
+spec:
+  forProvider:
+    resourceGroupNameRef:
+      name: example-rg-datashare
+    location: "West Europe"
+    accountTier: "Standard"
+    accountReplicationType: "LRS"
+    accountKind: "BlobStorage"
+    tags:
+      provisioner: crossplane
+---
+apiVersion: storage.azure.m.upbound.io/v1beta1
+kind: DataLakeGen2FileSystem
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    storageAccountIdRef:
+      name: example-storage-account-gen2
+---
+apiVersion: authorization.azure.m.upbound.io/v1beta1
+kind: RoleAssignment
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
+  name: example-gen2
+  namespace: upbound-system
+spec:
+  forProvider:
+    principalId: ${azurerm_storage_account.example.id}
+    roleDefinitionName: Storage Blob Data Reader
+    scope: ${data.azuread_service_principal.example.object_id}

@@ -1,0 +1,125 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: signalrservice.azure.m.upbound.io/v1beta1
+kind: WebPubsubNetworkACL
+metadata:
+  annotations:
+    meta.upbound.io/example-id: signalrservice/v1beta2/webpubsubnetworkacl
+  labels:
+    testing.upbound.io/example-name: example
+  name: wpsnetworkaclname
+  namespace: upbound-system
+spec:
+  forProvider:
+    defaultAction: Allow
+    privateEndpoint:
+      - deniedRequestTypes:
+          - RESTAPI
+          - ClientConnection
+        idSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
+    publicNetwork:
+      deniedRequestTypes:
+        - ClientConnection
+    webPubsubIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: PrivateEndpoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: signalrservice/v1beta2/webpubsubnetworkacl
+    upjet.upbound.io/manual-intervention: privateConnectionResourceId depends on existing resource id (web_pubsub id in this example)
+  labels:
+    testing.upbound.io/example-name: example
+  name: privateendpoint
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: East US
+    privateServiceConnection:
+      isManualConnection: false
+      name: psc-sig-test
+      privateConnectionResourceId: ${azurerm_web_pubsub.example.id}
+      subresourceNames:
+        - webpubsub
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: signalrservice/v1beta1/webpubsubnetworkacl
+  labels:
+    testing.upbound.io/example-name: example
+  name: acl-rg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: East US
+---
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: signalrservice/v1beta2/webpubsubnetworkacl
+  labels:
+    testing.upbound.io/example-name: example
+  name: subnet
+  namespace: upbound-system
+spec:
+  forProvider:
+    addressPrefixes:
+      - 10.5.2.0/24
+    enforcePrivateLinkEndpointNetworkPolicies: true
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: signalrservice/v1beta2/webpubsubnetworkacl
+  labels:
+    testing.upbound.io/example-name: example
+  name: virtualnetwork
+  namespace: upbound-system
+spec:
+  forProvider:
+    addressSpace:
+      - 10.5.0.0/16
+    location: East US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: signalrservice.azure.m.upbound.io/v1beta1
+kind: WebPubsub
+metadata:
+  annotations:
+    meta.upbound.io/example-id: signalrservice/v1beta2/webpubsubnetworkacl
+  labels:
+    testing.upbound.io/example-name: example
+  name: webpubsubname
+  namespace: upbound-system
+spec:
+  forProvider:
+    capacity: 1
+    location: East US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: Standard_S1

@@ -1,0 +1,107 @@
+apiVersion: sql.azure.m.upbound.io/v1beta1
+kind: MSSQLFailoverGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlfailovergroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    databasesRefs:
+    - name: example
+    partnerServer:
+    - idSelector:
+        matchLabels:
+          testing.upbound.io/example-name: secondary
+    readWriteEndpointFailoverPolicy:
+    - graceMinutes: 80
+      mode: Automatic
+    serverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: primary
+    tags:
+      database: example
+      environment: prod
+
+---
+
+apiVersion: sql.azure.m.upbound.io/v1beta1
+kind: MSSQLDatabase
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlfailovergroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    collation: SQL_Latin1_General_CP1_CI_AS
+    maxSizeGb: "200"
+    serverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: primary
+    skuName: S1
+
+---
+
+apiVersion: sql.azure.m.upbound.io/v1beta1
+kind: MSSQLServer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlfailovergroup
+  labels:
+    testing.upbound.io/example-name: primary
+  name: primary
+  namespace: upbound-system
+spec:
+  forProvider:
+    administratorLogin: missadministrator
+    administratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    version: "12.0"
+
+---
+
+apiVersion: sql.azure.m.upbound.io/v1beta1
+kind: MSSQLServer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlfailovergroup
+  labels:
+    testing.upbound.io/example-name: secondary
+  name: secondary
+  namespace: upbound-system
+spec:
+  forProvider:
+    administratorLogin: missadministrator
+    administratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+    location: North Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    version: "12.0"
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlfailovergroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

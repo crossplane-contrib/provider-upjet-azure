@@ -1,0 +1,92 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: synapse.azure.m.upbound.io/v1beta1
+kind: WorkspaceAADAdmin
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource needs a valid objectId and tenantId."
+    meta.upbound.io/example-id: synapse/v1beta1/workspaceaadadmin
+  labels:
+    testing.upbound.io/example-name: sqladminuser-label
+  name: sqladminuser
+  namespace: upbound-system
+spec:
+  forProvider:
+    login: sqladminuser
+    objectId: ${data.azurerm_client_config.current.object_id}
+    synapseWorkspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: workspace-label
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/workspaceaadadmin
+  labels:
+    testing.upbound.io/example-name: synapse-resource-group-label
+  name: synapse-resource-group
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+---
+apiVersion: storage.azure.m.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/workspaceaadadmin
+  labels:
+    testing.upbound.io/example-name: account-label
+  name: synapseaccountname1234
+  namespace: upbound-system
+spec:
+  forProvider:
+    accountKind: StorageV2
+    accountReplicationType: LRS
+    accountTier: Standard
+    isHnsEnabled: true
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: synapse-resource-group-label
+---
+apiVersion: storage.azure.m.upbound.io/v1beta1
+kind: DataLakeGen2FileSystem
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/workspaceaadadmin
+  labels:
+    testing.upbound.io/example-name: file-system-label
+  name: file-system
+  namespace: upbound-system
+spec:
+  forProvider:
+    storageAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: account-label
+---
+apiVersion: synapse.azure.m.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/workspaceaadadmin
+  labels:
+    testing.upbound.io/example-name: workspace-label
+  name: synapse-workspace-123
+  namespace: upbound-system
+spec:
+  forProvider:
+    identity:
+      - type: SystemAssigned
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: synapse-resource-group-label
+    sqlAdministratorLogin: sqladminuser
+    storageDataLakeGen2FilesystemIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: file-system-label

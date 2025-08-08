@@ -1,0 +1,71 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: cdn.azure.m.upbound.io/v1beta1
+kind: FrontdoorOrigin
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta2/frontdoororigin
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    cdnFrontdoorOriginGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    certificateNameCheckEnabled: false
+    enabled: true
+    hostName: contoso.com
+    httpPort: 80
+    httpsPort: 443
+    originHostHeader: www.contoso.com
+    priority: 1
+    weight: 1
+---
+apiVersion: cdn.azure.m.upbound.io/v1beta1
+kind: FrontdoorOriginGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta2/frontdoororigin
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    cdnFrontdoorProfileIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    loadBalancing: {}
+---
+apiVersion: cdn.azure.m.upbound.io/v1beta1
+kind: FrontdoorProfile
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta2/frontdoororigin
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Premium_AzureFrontDoor
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta1/frontdoororigin
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

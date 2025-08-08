@@ -1,0 +1,49 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: logic.azure.m.upbound.io/v1beta1
+kind: AppTriggerRecurrence
+metadata:
+  annotations:
+    meta.upbound.io/example-id: logic/v1beta2/apptriggerrecurrence
+  labels:
+    testing.upbound.io/example-name: apptrgrecurrenceexample
+  name: apptrgrecurrenceexample
+  namespace: upbound-system
+spec:
+  forProvider:
+    frequency: Day
+    interval: 1
+    logicAppIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: apptrgrecurrence-aw
+---
+apiVersion: logic.azure.m.upbound.io/v1beta1
+kind: AppWorkflow
+metadata:
+  annotations:
+    meta.upbound.io/example-id: logic/v1beta2/apptriggerrecurrence
+  labels:
+    testing.upbound.io/example-name: apptrgrecurrence-aw
+  name: apptrgrecurrence-aw
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: apptrgrecurrence-rg
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: logic/v1beta1/apptriggerrecurrence
+  labels:
+    testing.upbound.io/example-name: apptrgrecurrence-rg
+  name: apptrgrecurrence-rg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

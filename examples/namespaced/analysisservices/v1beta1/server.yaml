@@ -1,0 +1,39 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: analysisservices.azure.m.upbound.io/v1beta1
+kind: Server
+metadata:
+  annotations:
+    meta.upbound.io/example-id: analysisservices/v1beta1/server
+  labels:
+    testing.upbound.io/example-name: analysisservicesserver
+  name: analysisservicesserver
+  namespace: upbound-system
+spec:
+  forProvider:
+    powerBiServiceEnabled: true
+    ipv4FirewallRule:
+      - name: myRule1
+        rangeEnd: 210.117.252.255
+        rangeStart: 210.117.252.0
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: analysisservicesserverrg
+    sku: S0
+    name: exampleserver
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: analysisservices/v1beta1/server
+  labels:
+    testing.upbound.io/example-name: analysisservicesserverrg
+  name: analysisservicesserverrg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

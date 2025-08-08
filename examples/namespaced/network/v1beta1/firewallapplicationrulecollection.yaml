@@ -1,0 +1,26 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: FirewallApplicationRuleCollection
+metadata:
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    action: Allow
+    azureFirewallNameRef:
+      name: example
+    priority: 100
+    resourceGroupNameRef:
+      name: example
+    rule:
+      - name: testrule
+        protocol:
+          - port: "443"
+            type: Https
+        sourceAddresses:
+          - 10.0.0.0/16
+        targetFqdns:
+          - '*.google.com'

@@ -1,0 +1,20 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: compute.azure.m.upbound.io/v1beta1
+kind: DiskEncryptionSet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta2/diskencryptionset
+    upjet.upbound.io/manual-intervention: This resource requires manual intervention.
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    identity:
+      type: SystemAssigned
+    keyVaultKeyId: https://yyy-example-keyvault.vault.azure.net/keys/yyppdd-example-key/0cdfea4ef85045b0a3a8ca539f6a311c
+    location: West Europe
+    resourceGroupNameRef:
+      name: example-compute

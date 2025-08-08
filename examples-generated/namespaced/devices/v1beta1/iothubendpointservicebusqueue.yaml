@@ -1,0 +1,115 @@
+apiVersion: devices.azure.m.upbound.io/v1beta1
+kind: IOTHubEndpointServiceBusQueue
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devices/v1beta1/iothubendpointservicebusqueue
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    connectionStringSecretRef:
+      key: attribute.primary_connection_string
+      name: example-servicebus-queue-authorization-rule
+    iothubIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: devices.azure.m.upbound.io/v1beta1
+kind: IOTHub
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devices/v1beta1/iothubendpointservicebusqueue
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku:
+    - capacity: "1"
+      name: B1
+    tags:
+      purpose: example
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devices/v1beta1/iothubendpointservicebusqueue
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: servicebus.azure.m.upbound.io/v1beta1
+kind: ServiceBusNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devices/v1beta1/iothubendpointservicebusqueue
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: Standard
+
+---
+
+apiVersion: servicebus.azure.m.upbound.io/v1beta1
+kind: Queue
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devices/v1beta1/iothubendpointservicebusqueue
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    enable_partitioning: true
+    namespaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: servicebus.azure.m.upbound.io/v1beta1
+kind: QueueAuthorizationRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devices/v1beta1/iothubendpointservicebusqueue
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    listen: false
+    manage: false
+    queueIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    send: true
