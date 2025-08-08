@@ -170,7 +170,7 @@ func (mg *ManagementLock) ResolveReferences(ctx context.Context, c client.Reader
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -190,7 +190,7 @@ func (mg *ManagementLock) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.ForProvider.Scope = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ScopeRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -450,7 +450,7 @@ func (mg *ResourceGroupPolicyAssignment) ResolveReferences(ctx context.Context, 
 	mg.Spec.ForProvider.PolicyDefinitionID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PolicyDefinitionIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -490,7 +490,7 @@ func (mg *ResourceGroupPolicyAssignment) ResolveReferences(ctx context.Context, 
 	mg.Spec.InitProvider.PolicyDefinitionID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.PolicyDefinitionIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -542,7 +542,7 @@ func (mg *ResourceGroupPolicyExemption) ResolveReferences(ctx context.Context, c
 	mg.Spec.ForProvider.PolicyAssignmentID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PolicyAssignmentIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

@@ -89,7 +89,7 @@ func (mg *AppIntegrationAccount) ResolveReferences(ctx context.Context, c client
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -109,7 +109,7 @@ func (mg *AppIntegrationAccount) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -161,7 +161,7 @@ func (mg *AppIntegrationAccountBatchConfiguration) ResolveReferences(ctx context
 	mg.Spec.ForProvider.IntegrationAccountName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.IntegrationAccountNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -201,7 +201,7 @@ func (mg *AppIntegrationAccountBatchConfiguration) ResolveReferences(ctx context
 	mg.Spec.InitProvider.IntegrationAccountName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.IntegrationAccountNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -253,7 +253,7 @@ func (mg *AppIntegrationAccountPartner) ResolveReferences(ctx context.Context, c
 	mg.Spec.ForProvider.IntegrationAccountName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.IntegrationAccountNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -305,7 +305,7 @@ func (mg *AppIntegrationAccountSchema) ResolveReferences(ctx context.Context, c 
 	mg.Spec.ForProvider.IntegrationAccountName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.IntegrationAccountNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -357,7 +357,7 @@ func (mg *AppIntegrationAccountSession) ResolveReferences(ctx context.Context, c
 	mg.Spec.ForProvider.IntegrationAccountName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.IntegrationAccountNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -485,7 +485,7 @@ func (mg *AppWorkflow) ResolveReferences(ctx context.Context, c client.Reader) e
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

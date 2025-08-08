@@ -48,7 +48,7 @@ func (mg *ResourceGroupCostManagementExport) ResolveReferences( // ResolveRefere
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -90,7 +90,7 @@ func (mg *ResourceGroupCostManagementExport) ResolveReferences( // ResolveRefere
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -144,7 +144,7 @@ func (mg *SubscriptionCostManagementExport) ResolveReferences(ctx context.Contex
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "Subscription", "SubscriptionList")
+		m, l, err = apisresolver.GetManagedResource("azure.m.upbound.io", "v1beta1", "Subscription", "SubscriptionList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -186,7 +186,7 @@ func (mg *SubscriptionCostManagementExport) ResolveReferences(ctx context.Contex
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.m.upbound.io", "v1beta1", "Subscription", "SubscriptionList")
+		m, l, err = apisresolver.GetManagedResource("azure.m.upbound.io", "v1beta1", "Subscription", "SubscriptionList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
