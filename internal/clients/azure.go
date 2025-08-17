@@ -97,8 +97,6 @@ func TerraformSetupBuilder(tfProvider *schema.Provider) terraform.SetupFn { //no
 			keySkipProviderRegistration: true,
 		}
 
-		fmt.Println(pcSpec.Credentials.Source)
-
 		switch pcSpec.Credentials.Source { //nolint:exhaustive
 		case credentialsSourceSystemAssignedManagedIdentity, credentialsSourceUserAssignedManagedIdentity:
 			err = msiAuth(pcSpec, &ps)
@@ -112,7 +110,6 @@ func TerraformSetupBuilder(tfProvider *schema.Provider) terraform.SetupFn { //no
 			err = spAuth(ctx, pcSpec, &ps, client)
 		}
 		if err != nil {
-			fmt.Println(err)
 			return terraform.Setup{}, errors.Wrap(err, "failed to prepare terraform.Setup")
 		}
 
@@ -229,14 +226,11 @@ func oidcTokenRequestAuth(ctx context.Context, pcSpec *namespacedv1beta1.Provide
 		return errors.New(errServiceAccountNamespaceNotSet)
 	}
 
-	fmt.Println("oidcTokenRequestAuth2")
 	saRef := client.ObjectKey{
 		Name:      pcSpec.ServiceAccountRef.Name,
 		Namespace: *pcSpec.ServiceAccountRef.Namespace,
 	}
 
-	fmt.Println(saRef.Name)
-	fmt.Println("oidcTokenRequestAuth3")
 	var sa corev1.ServiceAccount
 	if err := c.Get(ctx, saRef, &sa); err != nil {
 		return fmt.Errorf("failed to get service account '%s/%s': %w", pcSpec.ServiceAccountRef.Namespace, sa.Name, err)
