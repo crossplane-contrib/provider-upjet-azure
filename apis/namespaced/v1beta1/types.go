@@ -68,7 +68,7 @@ type ProviderServiceAccountReference struct {
 	Name string `json:"name"`
 
 	// Namespace of the service account.
-	Namespace string `json:"namespace"`
+	Namespace *string `json:"namespace,omitempty"`
 }
 
 // A ProviderConfigStatus reflects the observed state of a ProviderConfig.

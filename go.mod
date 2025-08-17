@@ -172,4 +172,5 @@ require (
 )
 
 replace github.com/hashicorp/terraform-provider-azurerm => github.com/upbound/terraform-provider-azurerm v0.0.0-20250710182911-ef60e3a2ac36
+
 replace github.com/crossplane/crossplane-runtime/v2 => /home/jhaltom/crossplane-runtime

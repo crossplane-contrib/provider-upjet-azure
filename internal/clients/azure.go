@@ -28,15 +28,16 @@ import (
 
 const (
 	// error messages
-	errNoProviderConfig         = "no providerConfigRef provided"
-	errGetProviderConfig        = "cannot get referenced ProviderConfig"
-	errTrackUsage               = "cannot track ProviderConfig usage"
-	errExtractCredentials       = "cannot extract credentials"
-	errUnmarshalCredentials     = "cannot unmarshal Azure credentials as JSON"
-	errSubscriptionIDNotSet     = "subscription ID must be set in ProviderConfig when credential source is InjectedIdentity, OIDCTokenFile, OIDCTokenRequest or Upbound"
-	errTenantIDNotSet           = "tenant ID must be set in ProviderConfig when credential source is InjectedIdentity, OIDCTokenFile, OIDCTokenRequest or Upbound"
-	errClientIDNotSet           = "client ID must be set in ProviderConfig when credential source is OIDCTokenFile, OIDCTokenRequest or Upbound"
-	errServiceAccountNameNotSet = "serviceAccount.name must be set in ProviderConfig when credential source is OIDCToken"
+	errNoProviderConfig              = "no providerConfigRef provided"
+	errGetProviderConfig             = "cannot get referenced ProviderConfig"
+	errTrackUsage                    = "cannot track ProviderConfig usage"
+	errExtractCredentials            = "cannot extract credentials"
+	errUnmarshalCredentials          = "cannot unmarshal Azure credentials as JSON"
+	errSubscriptionIDNotSet          = "subscription ID must be set in ProviderConfig when credential source is InjectedIdentity, OIDCTokenFile, OIDCTokenRequest or Upbound"
+	errTenantIDNotSet                = "tenant ID must be set in ProviderConfig when credential source is InjectedIdentity, OIDCTokenFile, OIDCTokenRequest or Upbound"
+	errClientIDNotSet                = "client ID must be set in ProviderConfig when credential source is OIDCTokenFile, OIDCTokenRequest or Upbound"
+	errServiceAccountNameNotSet      = "serviceAccount.name must be set in ProviderConfig when credential source is OIDCTokenRequest"
+	errServiceAccountNamespaceNotSet = "serviceAccount.namespace must be set in ProviderConfig when credential source is OIDCTokenRequest"
 	// Azure service principal credentials file JSON keys
 	keyAzureSubscriptionID = "subscriptionId"
 	keyAzureClientID       = "clientId"
@@ -96,6 +97,8 @@ func TerraformSetupBuilder(tfProvider *schema.Provider) terraform.SetupFn { //no
 			keySkipProviderRegistration: true,
 		}
 
+		fmt.Println(pcSpec.Credentials.Source)
+
 		switch pcSpec.Credentials.Source { //nolint:exhaustive
 		case credentialsSourceSystemAssignedManagedIdentity, credentialsSourceUserAssignedManagedIdentity:
 			err = msiAuth(pcSpec, &ps)
@@ -109,6 +112,7 @@ func TerraformSetupBuilder(tfProvider *schema.Provider) terraform.SetupFn { //no
 			err = spAuth(ctx, pcSpec, &ps, client)
 		}
 		if err != nil {
+			fmt.Println(err)
 			return terraform.Setup{}, errors.Wrap(err, "failed to prepare terraform.Setup")
 		}
 
@@ -218,18 +222,21 @@ func oidcTokenRequestAuth(ctx context.Context, pcSpec *namespacedv1beta1.Provide
 	if pcSpec.ClientID == nil || len(*pcSpec.ClientID) == 0 {
 		return errors.New(errClientIDNotSet)
 	}
-	if len(pcSpec.ServiceAccountRef.Name) == 0 {
+	if pcSpec.ServiceAccountRef == nil || len(pcSpec.ServiceAccountRef.Name) == 0 {
 		return errors.New(errServiceAccountNameNotSet)
 	}
-	if len(pcSpec.ServiceAccountRef.Namespace) == 0 {
-		return errors.New(errServiceAccountNameNotSet)
+	if len(*pcSpec.ServiceAccountRef.Namespace) == 0 {
+		return errors.New(errServiceAccountNamespaceNotSet)
 	}
 
+	fmt.Println("oidcTokenRequestAuth2")
 	saRef := client.ObjectKey{
 		Name:      pcSpec.ServiceAccountRef.Name,
-		Namespace: pcSpec.ServiceAccountRef.Namespace,
+		Namespace: *pcSpec.ServiceAccountRef.Namespace,
 	}
 
+	fmt.Println(saRef.Name)
+	fmt.Println("oidcTokenRequestAuth3")
 	var sa corev1.ServiceAccount
 	if err := c.Get(ctx, saRef, &sa); err != nil {
 		return fmt.Errorf("failed to get service account '%s/%s': %w", pcSpec.ServiceAccountRef.Namespace, sa.Name, err)
@@ -296,7 +303,8 @@ func enrichLocalSecretRefs(pc *namespacedv1beta1.ProviderConfig, mg xpresource.M
 
 func enrichLocalServiceAccountRefs(pc *namespacedv1beta1.ProviderConfig, mg xpresource.Managed) {
 	if pc != nil && pc.Spec.ServiceAccountRef != nil {
-		pc.Spec.ServiceAccountRef.Namespace = mg.GetNamespace()
+		var s = mg.GetNamespace()
+		pc.Spec.ServiceAccountRef.Namespace = &s
 	}
 }
 
