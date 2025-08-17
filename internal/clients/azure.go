@@ -7,10 +7,13 @@ package clients
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	tfsdk "github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
+	authnv1 "k8s.io/api/authentication/v1"
+	corev1 "k8s.io/api/core/v1"
 
 	xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
@@ -25,14 +28,15 @@ import (
 
 const (
 	// error messages
-	errNoProviderConfig     = "no providerConfigRef provided"
-	errGetProviderConfig    = "cannot get referenced ProviderConfig"
-	errTrackUsage           = "cannot track ProviderConfig usage"
-	errExtractCredentials   = "cannot extract credentials"
-	errUnmarshalCredentials = "cannot unmarshal Azure credentials as JSON"
-	errSubscriptionIDNotSet = "subscription ID must be set in ProviderConfig when credential source is InjectedIdentity, OIDCTokenFile or Upbound"
-	errTenantIDNotSet       = "tenant ID must be set in ProviderConfig when credential source is InjectedIdentity, OIDCTokenFile or Upbound"
-	errClientIDNotSet       = "client ID must be set in ProviderConfig when credential source is OIDCTokenFile or Upbound"
+	errNoProviderConfig         = "no providerConfigRef provided"
+	errGetProviderConfig        = "cannot get referenced ProviderConfig"
+	errTrackUsage               = "cannot track ProviderConfig usage"
+	errExtractCredentials       = "cannot extract credentials"
+	errUnmarshalCredentials     = "cannot unmarshal Azure credentials as JSON"
+	errSubscriptionIDNotSet     = "subscription ID must be set in ProviderConfig when credential source is InjectedIdentity, OIDCTokenFile, OIDCTokenRequest or Upbound"
+	errTenantIDNotSet           = "tenant ID must be set in ProviderConfig when credential source is InjectedIdentity, OIDCTokenFile, OIDCTokenRequest or Upbound"
+	errClientIDNotSet           = "client ID must be set in ProviderConfig when credential source is OIDCTokenFile, OIDCTokenRequest or Upbound"
+	errServiceAccountNameNotSet = "serviceAccount.name must be set in ProviderConfig when credential source is OIDCToken"
 	// Azure service principal credentials file JSON keys
 	keyAzureSubscriptionID = "subscriptionId"
 	keyAzureClientID       = "clientId"
@@ -53,6 +57,7 @@ const (
 	keyClientCertPassword       = "client_certificate_password"
 	keyEnvironment              = "environment"
 	keyOidcTokenFilePath        = "oidc_token_file_path"
+	keyOidcToken                = "oidc_token"
 	keyUseOIDC                  = "use_oidc"
 	// Default OidcTokenFilePath
 	defaultOidcTokenFilePath = "/var/run/secrets/azure/tokens/azure-identity-token"
@@ -61,6 +66,7 @@ const (
 var (
 	credentialsSourceUserAssignedManagedIdentity   xpv1.CredentialsSource = "UserAssignedManagedIdentity"
 	credentialsSourceSystemAssignedManagedIdentity xpv1.CredentialsSource = "SystemAssignedManagedIdentity"
+	credentialsSourceOIDCTokenRequest              xpv1.CredentialsSource = "OIDCTokenRequest"
 	credentialsSourceOIDCTokenFile                 xpv1.CredentialsSource = "OIDCTokenFile"
 	credentialsSourceUpbound                       xpv1.CredentialsSource = "Upbound"
 
@@ -95,6 +101,8 @@ func TerraformSetupBuilder(tfProvider *schema.Provider) terraform.SetupFn { //no
 			err = msiAuth(pcSpec, &ps)
 		case credentialsSourceOIDCTokenFile:
 			err = oidcAuth(pcSpec, &ps)
+		case credentialsSourceOIDCTokenRequest:
+			err = oidcTokenRequestAuth(ctx, pcSpec, &ps, client)
 		case credentialsSourceUpbound:
 			err = upboundAuth(pcSpec, &ps)
 		default:
@@ -200,6 +208,52 @@ func oidcAuth(pcSpec *namespacedv1beta1.ProviderConfigSpec, ps *terraform.Setup)
 
 }
 
+func oidcTokenRequestAuth(ctx context.Context, pcSpec *namespacedv1beta1.ProviderConfigSpec, ps *terraform.Setup, c client.Client) error {
+	if pcSpec.SubscriptionID == nil || len(*pcSpec.SubscriptionID) == 0 {
+		return errors.New(errSubscriptionIDNotSet)
+	}
+	if pcSpec.TenantID == nil || len(*pcSpec.TenantID) == 0 {
+		return errors.New(errTenantIDNotSet)
+	}
+	if pcSpec.ClientID == nil || len(*pcSpec.ClientID) == 0 {
+		return errors.New(errClientIDNotSet)
+	}
+	if len(pcSpec.ServiceAccountRef.Name) == 0 {
+		return errors.New(errServiceAccountNameNotSet)
+	}
+	if len(pcSpec.ServiceAccountRef.Namespace) == 0 {
+		return errors.New(errServiceAccountNameNotSet)
+	}
+
+	saRef := client.ObjectKey{
+		Name:      pcSpec.ServiceAccountRef.Name,
+		Namespace: pcSpec.ServiceAccountRef.Namespace,
+	}
+
+	var sa corev1.ServiceAccount
+	if err := c.Get(ctx, saRef, &sa); err != nil {
+		return fmt.Errorf("failed to get service account '%s/%s': %w", pcSpec.ServiceAccountRef.Namespace, sa.Name, err)
+	}
+
+	// Issue Kubernetes OIDC token for the service account.
+	tokenReq := &authnv1.TokenRequest{
+		Spec: authnv1.TokenRequestSpec{
+			Audiences: []string{"api://AzureADTokenExchange"},
+		},
+	}
+	if err := c.SubResource("token").Create(ctx, &sa, tokenReq); err != nil {
+		return fmt.Errorf("failed to create kubernetes token for service account '%s/%s': %w", sa.Namespace, sa.Name, err)
+	}
+
+	ps.Configuration[keyOidcToken] = tokenReq.Status.Token
+	ps.Configuration[keySubscriptionID] = *pcSpec.SubscriptionID
+	ps.Configuration[keyTenantID] = *pcSpec.TenantID
+	ps.Configuration[keyClientID] = *pcSpec.ClientID
+	ps.Configuration[keyUseOIDC] = "true"
+	return nil
+
+}
+
 func upboundAuth(pcSpec *namespacedv1beta1.ProviderConfigSpec, ps *terraform.Setup) error {
 	if pcSpec.SubscriptionID == nil || len(*pcSpec.SubscriptionID) == 0 {
 		return errors.New(errSubscriptionIDNotSet)
@@ -237,6 +291,12 @@ func legacyToModernProviderConfigSpec(pc *clusterv1beta1.ProviderConfig) (*names
 func enrichLocalSecretRefs(pc *namespacedv1beta1.ProviderConfig, mg xpresource.Managed) {
 	if pc != nil && pc.Spec.Credentials.SecretRef != nil {
 		pc.Spec.Credentials.SecretRef.Namespace = mg.GetNamespace()
+	}
+}
+
+func enrichLocalServiceAccountRefs(pc *namespacedv1beta1.ProviderConfig, mg xpresource.Managed) {
+	if pc != nil && pc.Spec.ServiceAccountRef != nil {
+		pc.Spec.ServiceAccountRef.Namespace = mg.GetNamespace()
 	}
 }
 
@@ -293,6 +353,7 @@ func resolveProviderConfigModern(ctx context.Context, crClient client.Client, mg
 	switch pc := pcObj.(type) {
 	case *namespacedv1beta1.ProviderConfig:
 		enrichLocalSecretRefs(pc, mg)
+		enrichLocalServiceAccountRefs(pc, mg)
 		pcSpec = pc.Spec
 	case *namespacedv1beta1.ClusterProviderConfig:
 		pcSpec = pc.Spec
