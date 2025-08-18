@@ -66,7 +66,7 @@ var (
 	credentialsSourceUpbound                       xpv1.CredentialsSource = "Upbound"
 
 	upboundProviderIdentityTokenFile = "/var/run/secrets/upbound.io/provider/token"
-	
+
 	// Round-robin counter for service principal selection
 	spCounter uint64
 )
@@ -129,7 +129,7 @@ func spAuth(ctx context.Context, pcSpec *namespacedv1beta1.ProviderConfigSpec, p
 		return errors.Wrap(err, errExtractCredentials)
 	}
 	data = []byte(strings.TrimSpace(string(data)))
-	
+
 	// Try to unmarshal as array of service principals first
 	var spArray []map[string]string
 	if err := json.Unmarshal(data, &spArray); err == nil && len(spArray) > 0 {
@@ -138,7 +138,7 @@ func spAuth(ctx context.Context, pcSpec *namespacedv1beta1.ProviderConfigSpec, p
 		azureCreds := spArray[index]
 		return configureSpCredentials(azureCreds, pcSpec, ps)
 	}
-	
+
 	// Fallback to single service principal format
 	azureCreds := map[string]string{}
 	if err := json.Unmarshal(data, &azureCreds); err != nil {
