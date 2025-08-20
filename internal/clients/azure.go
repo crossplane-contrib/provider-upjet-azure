@@ -10,7 +10,6 @@ import (
 	"strings"
 	"sync/atomic"
 
-	"github.com/go-logr/logr"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	tfsdk "github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 
@@ -137,10 +136,6 @@ func spAuth(ctx context.Context, pcSpec *namespacedv1beta1.ProviderConfigSpec, p
 		// Round-robin selection
 		index := atomic.AddUint64(&servicePrincipalCounter, 1) % uint64(len(servicePrincipals))
 		azureCreds := servicePrincipals[index]
-		// Log selected service principal with logr if available in context
-		log := logr.FromContextOrDiscard(ctx)
-		log.Info("Selected service principal", "index", index,
-			"clientId", azureCreds[keyAzureClientID])
 		return configureSpCredentials(azureCreds, pcSpec, ps)
 	}
 
