@@ -10,6 +10,7 @@ import (
 	"strings"
 	"sync/atomic"
 
+	"github.com/go-logr/logr"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	tfsdk "github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 
@@ -68,7 +69,7 @@ var (
 	upboundProviderIdentityTokenFile = "/var/run/secrets/upbound.io/provider/token"
 
 	// Round-robin counter for service principal selection
-	spCounter uint64
+	servicePrincipalCounter uint64
 )
 
 // TerraformSetupBuilder returns Terraform setup with provider specific
@@ -131,11 +132,15 @@ func spAuth(ctx context.Context, pcSpec *namespacedv1beta1.ProviderConfigSpec, p
 	data = []byte(strings.TrimSpace(string(data)))
 
 	// Try to unmarshal as array of service principals first
-	var spArray []map[string]string
-	if err := json.Unmarshal(data, &spArray); err == nil && len(spArray) > 0 {
+	var servicePrincipals []map[string]string
+	if err := json.Unmarshal(data, &servicePrincipals); err == nil && len(servicePrincipals) > 0 {
 		// Round-robin selection
-		index := atomic.AddUint64(&spCounter, 1) % uint64(len(spArray))
-		azureCreds := spArray[index]
+		index := atomic.AddUint64(&servicePrincipalCounter, 1) % uint64(len(servicePrincipals))
+		azureCreds := servicePrincipals[index]
+		// Log selected service principal with logr if available in context
+		log := logr.FromContextOrDiscard(ctx)
+		log.Info("Selected service principal", "index", index,
+			"clientId", azureCreds[keyAzureClientID])
 		return configureSpCredentials(azureCreds, pcSpec, ps)
 	}
 
