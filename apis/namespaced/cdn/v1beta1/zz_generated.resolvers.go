@@ -908,6 +908,87 @@ func (mg *FrontdoorRuleSet) ResolveReferences(ctx context.Context, c client.Read
 	return nil
 }
 
+// ResolveReferences of this FrontdoorSecret.
+func (mg *FrontdoorSecret) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("cdn.azure.m.upbound.io", "v1beta1", "FrontdoorProfile", "FrontdoorProfileList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CdnFrontdoorProfileID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.CdnFrontdoorProfileIDRef,
+			Selector:     mg.Spec.ForProvider.CdnFrontdoorProfileIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CdnFrontdoorProfileID")
+	}
+	mg.Spec.ForProvider.CdnFrontdoorProfileID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CdnFrontdoorProfileIDRef = rsp.ResolvedReference
+
+	if mg.Spec.ForProvider.Secret != nil {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.Secret.CustomerCertificate); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("keyvault.azure.m.upbound.io", "v1beta1", "Certificate", "CertificateList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Secret.CustomerCertificate[i4].KeyVaultCertificateID),
+					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.ForProvider.Secret.CustomerCertificate[i4].KeyVaultCertificateIDRef,
+					Selector:     mg.Spec.ForProvider.Secret.CustomerCertificate[i4].KeyVaultCertificateIDSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.Secret.CustomerCertificate[i4].KeyVaultCertificateID")
+			}
+			mg.Spec.ForProvider.Secret.CustomerCertificate[i4].KeyVaultCertificateID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Secret.CustomerCertificate[i4].KeyVaultCertificateIDRef = rsp.ResolvedReference
+
+		}
+	}
+	if mg.Spec.InitProvider.Secret != nil {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Secret.CustomerCertificate); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("keyvault.azure.m.upbound.io", "v1beta1", "Certificate", "CertificateList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Secret.CustomerCertificate[i4].KeyVaultCertificateID),
+					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.InitProvider.Secret.CustomerCertificate[i4].KeyVaultCertificateIDRef,
+					Selector:     mg.Spec.InitProvider.Secret.CustomerCertificate[i4].KeyVaultCertificateIDSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Secret.CustomerCertificate[i4].KeyVaultCertificateID")
+			}
+			mg.Spec.InitProvider.Secret.CustomerCertificate[i4].KeyVaultCertificateID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Secret.CustomerCertificate[i4].KeyVaultCertificateIDRef = rsp.ResolvedReference
+
+		}
+	}
+
+	return nil
+}
+
 // ResolveReferences of this FrontdoorSecurityPolicy.
 func (mg *FrontdoorSecurityPolicy) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed

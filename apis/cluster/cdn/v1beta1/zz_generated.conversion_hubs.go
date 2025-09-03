@@ -22,4 +22,7 @@ func (tr *FrontdoorProfile) Hub() {}
 func (tr *FrontdoorRuleSet) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *FrontdoorSecret) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *Profile) Hub() {}
