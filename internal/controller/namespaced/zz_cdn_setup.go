@@ -20,6 +20,7 @@ import (
 	frontdoorroute "github.com/upbound/provider-azure/internal/controller/namespaced/cdn/frontdoorroute"
 	frontdoorrule "github.com/upbound/provider-azure/internal/controller/namespaced/cdn/frontdoorrule"
 	frontdoorruleset "github.com/upbound/provider-azure/internal/controller/namespaced/cdn/frontdoorruleset"
+	frontdoorsecret "github.com/upbound/provider-azure/internal/controller/namespaced/cdn/frontdoorsecret"
 	frontdoorsecuritypolicy "github.com/upbound/provider-azure/internal/controller/namespaced/cdn/frontdoorsecuritypolicy"
 	profile "github.com/upbound/provider-azure/internal/controller/namespaced/cdn/profile"
 )
@@ -39,6 +40,7 @@ func Setup_cdn(mgr ctrl.Manager, o controller.Options) error {
 		frontdoorroute.Setup,
 		frontdoorrule.Setup,
 		frontdoorruleset.Setup,
+		frontdoorsecret.Setup,
 		frontdoorsecuritypolicy.Setup,
 		profile.Setup,
 	} {
@@ -64,6 +66,7 @@ func SetupGated_cdn(mgr ctrl.Manager, o controller.Options) error {
 		frontdoorroute.SetupGated,
 		frontdoorrule.SetupGated,
 		frontdoorruleset.SetupGated,
+		frontdoorsecret.SetupGated,
 		frontdoorsecuritypolicy.SetupGated,
 		profile.SetupGated,
 	} {
