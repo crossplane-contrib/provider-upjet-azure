@@ -93,6 +93,9 @@ func Configure(p *config.Provider) {
 			TerraformName: "azurerm_kubernetes_cluster",
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
+		r.LateInitializer = config.LateInitializer{
+			IgnoredFields: []string{"node_count"},
+		}
 	})
 
 	p.AddResourceConfigurator("azurerm_kubernetes_cluster_extension", func(r *config.Resource) {
