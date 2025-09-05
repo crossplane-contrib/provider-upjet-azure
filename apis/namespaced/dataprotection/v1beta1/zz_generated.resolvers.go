@@ -585,6 +585,118 @@ func (mg *BackupInstancePostgreSQL) ResolveReferences(ctx context.Context, c cli
 	return nil
 }
 
+// ResolveReferences of this BackupInstancePostgreSQLFlexibleServer.
+func (mg *BackupInstancePostgreSQLFlexibleServer) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("dataprotection.azure.m.upbound.io", "v1beta1", "BackupPolicyPostgreSQLFlexibleServer", "BackupPolicyPostgreSQLFlexibleServerList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BackupPolicyID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.BackupPolicyIDRef,
+			Selector:     mg.Spec.ForProvider.BackupPolicyIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.BackupPolicyID")
+	}
+	mg.Spec.ForProvider.BackupPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.BackupPolicyIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("dbforpostgresql.azure.m.upbound.io", "v1beta1", "FlexibleServer", "FlexibleServerList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServerID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.ServerIDRef,
+			Selector:     mg.Spec.ForProvider.ServerIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ServerID")
+	}
+	mg.Spec.ForProvider.ServerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ServerIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("dataprotection.azure.m.upbound.io", "v1beta1", "BackupVault", "BackupVaultList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VaultID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.VaultIDRef,
+			Selector:     mg.Spec.ForProvider.VaultIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.VaultID")
+	}
+	mg.Spec.ForProvider.VaultID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VaultIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("dataprotection.azure.m.upbound.io", "v1beta1", "BackupPolicyPostgreSQLFlexibleServer", "BackupPolicyPostgreSQLFlexibleServerList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BackupPolicyID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.BackupPolicyIDRef,
+			Selector:     mg.Spec.InitProvider.BackupPolicyIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.BackupPolicyID")
+	}
+	mg.Spec.InitProvider.BackupPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.BackupPolicyIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("dbforpostgresql.azure.m.upbound.io", "v1beta1", "FlexibleServer", "FlexibleServerList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServerID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.ServerIDRef,
+			Selector:     mg.Spec.InitProvider.ServerIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ServerID")
+	}
+	mg.Spec.InitProvider.ServerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ServerIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this BackupPolicyBlobStorage.
 func (mg *BackupPolicyBlobStorage) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
@@ -749,6 +861,38 @@ func (mg *BackupPolicyPostgreSQL) ResolveReferences(ctx context.Context, c clien
 	}
 	mg.Spec.ForProvider.VaultName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VaultNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this BackupPolicyPostgreSQLFlexibleServer.
+func (mg *BackupPolicyPostgreSQLFlexibleServer) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("dataprotection.azure.m.upbound.io", "v1beta1", "BackupVault", "BackupVaultList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VaultID),
+			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.VaultIDRef,
+			Selector:     mg.Spec.ForProvider.VaultIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.VaultID")
+	}
+	mg.Spec.ForProvider.VaultID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VaultIDRef = rsp.ResolvedReference
 
 	return nil
 }
