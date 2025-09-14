@@ -9,6 +9,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"strings"
+	"sync/atomic"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	tfsdk "github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
@@ -72,6 +73,9 @@ var (
 	credentialsSourceUpbound                       xpv1.CredentialsSource = "Upbound"
 
 	upboundProviderIdentityTokenFile = "/var/run/secrets/upbound.io/provider/token"
+
+	// Round-robin counter for service principal selection
+	servicePrincipalCounter uint64
 )
 
 // TerraformSetupBuilder returns Terraform setup with provider specific
@@ -134,11 +138,25 @@ func spAuth(ctx context.Context, pcSpec *namespacedv1beta1.ProviderConfigSpec, p
 		return errors.Wrap(err, errExtractCredentials)
 	}
 	data = []byte(strings.TrimSpace(string(data)))
+
+	// Try to unmarshal as array of service principals first
+	var servicePrincipals []map[string]string
+	if err := json.Unmarshal(data, &servicePrincipals); err == nil && len(servicePrincipals) > 0 {
+		// Round-robin selection
+		index := atomic.AddUint64(&servicePrincipalCounter, 1) % uint64(len(servicePrincipals))
+		azureCreds := servicePrincipals[index]
+		return configureSpCredentials(azureCreds, pcSpec, ps)
+	}
+
+	// Fallback to single service principal format
 	azureCreds := map[string]string{}
 	if err := json.Unmarshal(data, &azureCreds); err != nil {
 		return errors.Wrap(err, errUnmarshalCredentials)
 	}
-	// set credentials configuration
+	return configureSpCredentials(azureCreds, pcSpec, ps)
+}
+
+func configureSpCredentials(azureCreds map[string]string, pcSpec *namespacedv1beta1.ProviderConfigSpec, ps *terraform.Setup) error {
 	ps.Configuration[keySubscriptionID] = azureCreds[keyAzureSubscriptionID]
 	ps.Configuration[keyTenantID] = azureCreds[keyAzureTenantID]
 	ps.Configuration[keyClientID] = azureCreds[keyAzureClientID]
