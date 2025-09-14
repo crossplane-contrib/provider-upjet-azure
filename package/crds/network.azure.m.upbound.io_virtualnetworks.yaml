@@ -81,11 +81,6 @@ spec:
                         description: The ID of DDoS Protection Plan.
                         type: string
                     type: object
-                  dnsServers:
-                    description: List of IP addresses of DNS servers
-                    items:
-                      type: string
-                    type: array
                   edgeZone:
                     description: Specifies the Edge Zone within the Azure Region where
                       this Virtual Network should exist. Changing this forces a new
@@ -258,11 +253,6 @@ spec:
                         description: The ID of DDoS Protection Plan.
                         type: string
                     type: object
-                  dnsServers:
-                    description: List of IP addresses of DNS servers
-                    items:
-                      type: string
-                    type: array
                   edgeZone:
                     description: Specifies the Edge Zone within the Azure Region where
                       this Virtual Network should exist. Changing this forces a new

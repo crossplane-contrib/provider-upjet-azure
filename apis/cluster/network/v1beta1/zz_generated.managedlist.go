@@ -952,6 +952,15 @@ func (l *VirtualHubSecurityPartnerProviderList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this VirtualNetworkDNSServersList.
+func (l *VirtualNetworkDNSServersList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this VirtualNetworkGatewayConnectionList.
 func (l *VirtualNetworkGatewayConnectionList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))

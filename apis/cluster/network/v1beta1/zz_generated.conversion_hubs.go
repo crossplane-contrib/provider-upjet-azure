@@ -238,6 +238,9 @@ func (tr *VirtualHubRouteTableRoute) Hub() {}
 func (tr *VirtualHubSecurityPartnerProvider) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *VirtualNetworkDNSServers) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *VirtualNetworkPeering) Hub() {}
 
 // Hub marks this type as a conversion hub.

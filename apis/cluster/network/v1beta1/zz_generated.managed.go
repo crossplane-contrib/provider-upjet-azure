@@ -5307,6 +5307,56 @@ func (mg *VirtualNetwork) SetWriteConnectionSecretToReference(r *xpv1.SecretRefe
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this VirtualNetworkDNSServers.
+func (mg *VirtualNetworkDNSServers) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this VirtualNetworkDNSServers.
+func (mg *VirtualNetworkDNSServers) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this VirtualNetworkDNSServers.
+func (mg *VirtualNetworkDNSServers) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this VirtualNetworkDNSServers.
+func (mg *VirtualNetworkDNSServers) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this VirtualNetworkDNSServers.
+func (mg *VirtualNetworkDNSServers) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this VirtualNetworkDNSServers.
+func (mg *VirtualNetworkDNSServers) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this VirtualNetworkDNSServers.
+func (mg *VirtualNetworkDNSServers) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this VirtualNetworkDNSServers.
+func (mg *VirtualNetworkDNSServers) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this VirtualNetworkDNSServers.
+func (mg *VirtualNetworkDNSServers) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this VirtualNetworkDNSServers.
+func (mg *VirtualNetworkDNSServers) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this VirtualNetworkGateway.
 func (mg *VirtualNetworkGateway) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)

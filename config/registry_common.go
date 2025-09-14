@@ -89,8 +89,6 @@ var skipList = []string{
 	// other upjet issues
 	"azurerm_container_registry_task",
 	"azurerm_dashboard",
-	// doc not found in Terraform Azurerm provider
-	"azurerm_virtual_network_dns_servers",
 	// unsupported sensitive field type
 	"azurerm_security_center_automation",
 	"azurerm_data_factory_trigger_tumbling_window",

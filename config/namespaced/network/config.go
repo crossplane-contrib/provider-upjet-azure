@@ -212,7 +212,7 @@ func Configure(p *config.Provider) {
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"subnet"},
 		}
-		config.MoveToStatus(r.TerraformResource, "subnet")
+		config.MoveToStatus(r.TerraformResource, "subnet", "dns_servers")
 	})
 
 	p.AddResourceConfigurator("azurerm_virtual_network_gateway", func(r *config.Resource) {
@@ -610,6 +610,13 @@ func Configure(p *config.Provider) {
 				delete(diff.Attributes, "network_manager_id")
 			}
 			return diff, nil
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_virtual_network_dns_servers", func(r *config.Resource) {
+		r.References["virtual_network_id"] = config.Reference{
+			TerraformName: "azurerm_virtual_network",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 }
