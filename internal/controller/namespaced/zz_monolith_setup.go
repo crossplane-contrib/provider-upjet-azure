@@ -138,6 +138,7 @@ import (
 	frontdoorroute "github.com/upbound/provider-azure/internal/controller/namespaced/cdn/frontdoorroute"
 	frontdoorrule "github.com/upbound/provider-azure/internal/controller/namespaced/cdn/frontdoorrule"
 	frontdoorruleset "github.com/upbound/provider-azure/internal/controller/namespaced/cdn/frontdoorruleset"
+	frontdoorsecret "github.com/upbound/provider-azure/internal/controller/namespaced/cdn/frontdoorsecret"
 	frontdoorsecuritypolicy "github.com/upbound/provider-azure/internal/controller/namespaced/cdn/frontdoorsecuritypolicy"
 	profile "github.com/upbound/provider-azure/internal/controller/namespaced/cdn/profile"
 	appservicecertificateorder "github.com/upbound/provider-azure/internal/controller/namespaced/certificateregistration/appservicecertificateorder"
@@ -857,6 +858,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		frontdoorroute.Setup,
 		frontdoorrule.Setup,
 		frontdoorruleset.Setup,
+		frontdoorsecret.Setup,
 		frontdoorsecuritypolicy.Setup,
 		profile.Setup,
 		appservicecertificateorder.Setup,
@@ -1582,6 +1584,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		frontdoorroute.SetupGated,
 		frontdoorrule.SetupGated,
 		frontdoorruleset.SetupGated,
+		frontdoorsecret.SetupGated,
 		frontdoorsecuritypolicy.SetupGated,
 		profile.SetupGated,
 		appservicecertificateorder.SetupGated,
