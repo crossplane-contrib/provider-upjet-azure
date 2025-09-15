@@ -19,4 +19,7 @@ func (tr *EventSubscription) Hub() {}
 func (tr *SystemTopic) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *SystemTopicEventSubscription) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *Topic) Hub() {}

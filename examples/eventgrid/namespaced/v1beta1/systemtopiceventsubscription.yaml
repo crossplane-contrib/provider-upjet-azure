@@ -1,0 +1,101 @@
+apiVersion: eventgrid.azure.m.upbound.io/v1beta1
+kind: SystemTopicEventSubscription
+metadata:
+  annotations:
+    meta.upbound.io/example-id: eventgrid/v1beta1/systemtopiceventsubscription
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: example-event-subscription
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: systemtopiceventsub-rg
+    storageQueueEndpoint:
+      queueNameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: systemtopiceventsub-queue
+      storageAccountIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: systemtopiceventsubacc
+    systemTopicSelector:
+      matchLabels:
+        testing.upbound.io/example-name: systemtopiceventsub-systopic
+
+---
+
+apiVersion: eventgrid.azure.m.upbound.io/v1beta1
+kind: SystemTopic
+metadata:
+  annotations:
+    meta.upbound.io/example-id: eventgrid/v1beta1/systemtopiceventsubscription
+  labels:
+    testing.upbound.io/example-name: systemtopiceventsub-systopic
+  name: systemtopiceventsub-systopic
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: systemtopiceventsub-rg
+    sourceArmResourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: systemtopiceventsubacc
+    topicType: Microsoft.Storage.StorageAccounts
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: eventgrid/v1beta1/systemtopiceventsubscription
+  labels:
+    testing.upbound.io/example-name: systemtopiceventsub-rg
+  name: systemtopiceventsub-rg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: storage.azure.m.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: eventgrid/v1beta1/systemtopiceventsubscription
+  labels:
+    testing.upbound.io/example-name: systemtopiceventsubacc
+  name: systemtopiceventsubacc
+  namespace: upbound-system
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: systemtopiceventsub-rg
+    tags:
+      environment: staging
+
+---
+
+apiVersion: storage.azure.m.upbound.io/v1beta1
+kind: Queue
+metadata:
+  annotations:
+    meta.upbound.io/example-id: eventgrid/v1beta1/systemtopiceventsubscription
+  labels:
+    testing.upbound.io/example-name: systemtopiceventsub-queue
+  name: systemtopiceventsub-queue
+  namespace: upbound-system
+spec:
+  forProvider:
+    storageAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: systemtopiceventsubacc
