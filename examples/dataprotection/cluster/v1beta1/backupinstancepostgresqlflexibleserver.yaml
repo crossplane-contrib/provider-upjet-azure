@@ -1,0 +1,112 @@
+apiVersion: dataprotection.azure.upbound.io/v1beta1
+kind: BackupInstancePostgreSQLFlexibleServer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancepostgresqlflexibleserver
+  labels:
+    testing.upbound.io/example-name: testbiflexserver23
+  name: testbiflexserver23
+spec:
+  forProvider:
+    backupPolicyIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: testbiflexserver23
+    location: West Europe
+    serverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: testbiflexserver23
+    vaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: testbiflexserver23
+
+---
+
+apiVersion: dataprotection.azure.upbound.io/v1beta1
+kind: BackupPolicyPostgreSQLFlexibleServer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancepostgresqlflexibleserver
+  labels:
+    testing.upbound.io/example-name: testbiflexserver23
+  name: testbiflexserver23
+spec:
+  forProvider:
+    backupRepeatingTimeIntervals:
+      - R/2021-05-23T02:30:00+00:00/P1W
+    defaultRetentionRule:
+      lifeCycle:
+        - dataStoreType: VaultStore
+          duration: P1W
+    retentionRule:
+      - criteria:
+          absoluteCriteria: FirstOfWeek
+        lifeCycle:
+          - dataStoreType: VaultStore
+            duration: P1W
+        name: weekly
+        priority: 20
+    vaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: testbiflexserver23
+
+---
+
+apiVersion: dataprotection.azure.upbound.io/v1beta1
+kind: BackupVault
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancepostgresqlflexibleserver
+  labels:
+    testing.upbound.io/example-name: testbiflexserver23
+  name: testbiflexserver23
+spec:
+  forProvider:
+    datastoreType: VaultStore
+    identity:
+      - type: SystemAssigned
+    location: West Europe
+    redundancy: LocallyRedundant
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: testbiflexserver23
+    softDelete: "Off"
+
+---
+
+apiVersion: dbforpostgresql.azure.upbound.io/v1beta1
+kind: FlexibleServer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancepostgresqlflexibleserver
+  labels:
+    testing.upbound.io/example-name: testbiflexserver23
+  name: testbiflexserver23
+spec:
+  forProvider:
+    administratorLogin: adminTerraform
+    autoGeneratePassword: true
+    administratorPasswordSecretRef:
+      key: testbiflexserver23-key
+      name: testbiflexserver23-secret
+      namespace: upbound-system
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: testbiflexserver23
+    skuName: GP_Standard_D4s_v3
+    storageMb: 32768
+    version: "16"
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancepostgresqlflexibleserver
+  labels:
+    testing.upbound.io/example-name: testbiflexserver23
+  name: testbiflexserver23
+spec:
+  forProvider:
+    location: West Europe
