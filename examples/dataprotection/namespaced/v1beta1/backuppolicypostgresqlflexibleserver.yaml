@@ -65,7 +65,7 @@ spec:
   forProvider:
     datastoreType: VaultStore
     identity:
-      type: SystemAssigned
+      - type: SystemAssigned
     location: West Europe
     redundancy: LocallyRedundant
     resourceGroupNameSelector:

@@ -51,7 +51,7 @@ spec:
 
 ---
 
-apiVersion: dataprotection.azure.upbound.io/v1beta2
+apiVersion: dataprotection.azure.upbound.io/v1beta1
 kind: BackupVault
 metadata:
   annotations:
@@ -63,7 +63,7 @@ spec:
   forProvider:
     datastoreType: VaultStore
     identity:
-      type: SystemAssigned
+      - type: SystemAssigned
     location: West Europe
     redundancy: LocallyRedundant
     resourceGroupNameSelector:
