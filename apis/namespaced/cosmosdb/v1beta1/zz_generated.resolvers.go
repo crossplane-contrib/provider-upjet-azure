@@ -12,6 +12,7 @@ import (
 	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
+	rconfig1 "github.com/upbound/provider-azure/apis/cluster/rconfig"
 	rconfig "github.com/upbound/provider-azure/apis/namespaced/rconfig"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -351,7 +352,7 @@ func (mg *CassandraTable) ResolveReferences(ctx context.Context, c client.Reader
 
 		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CassandraKeySpaceID),
-			Extract:      rconfig.ExtractResourceID(),
+			Extract:      rconfig1.ExtractResourceID(),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CassandraKeySpaceIDRef,
 			Selector:     mg.Spec.ForProvider.CassandraKeySpaceIDSelector,
@@ -487,6 +488,118 @@ func (mg *GremlinGraph) ResolveReferences(ctx context.Context, c client.Reader) 
 	}
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this MongoCluster.
+func (mg *MongoCluster) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.m.upbound.io", "v1beta1", "MongoCluster", "MongoClusterList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceLocation),
+			Extract:      rconfig1.ExtractResourceLocation(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.SourceLocationRef,
+			Selector:     mg.Spec.ForProvider.SourceLocationSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SourceLocation")
+	}
+	mg.Spec.ForProvider.SourceLocation = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SourceLocationRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.m.upbound.io", "v1beta1", "MongoCluster", "MongoClusterList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceServerID),
+			Extract:      rconfig1.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.SourceServerIDRef,
+			Selector:     mg.Spec.ForProvider.SourceServerIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SourceServerID")
+	}
+	mg.Spec.ForProvider.SourceServerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SourceServerIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.m.upbound.io", "v1beta1", "MongoCluster", "MongoClusterList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceLocation),
+			Extract:      rconfig1.ExtractResourceLocation(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.SourceLocationRef,
+			Selector:     mg.Spec.InitProvider.SourceLocationSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SourceLocation")
+	}
+	mg.Spec.InitProvider.SourceLocation = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SourceLocationRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.m.upbound.io", "v1beta1", "MongoCluster", "MongoClusterList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceServerID),
+			Extract:      rconfig1.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.SourceServerIDRef,
+			Selector:     mg.Spec.InitProvider.SourceServerIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SourceServerID")
+	}
+	mg.Spec.InitProvider.SourceServerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SourceServerIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -891,7 +1004,7 @@ func (mg *SQLFunction) ResolveReferences(ctx context.Context, c client.Reader) e
 
 		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerID),
-			Extract:      rconfig.ExtractResourceID(),
+			Extract:      rconfig1.ExtractResourceID(),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ContainerIDRef,
 			Selector:     mg.Spec.ForProvider.ContainerIDSelector,
@@ -1279,7 +1392,7 @@ func (mg *SQLTrigger) ResolveReferences(ctx context.Context, c client.Reader) er
 
 		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerID),
-			Extract:      rconfig.ExtractResourceID(),
+			Extract:      rconfig1.ExtractResourceID(),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ContainerIDRef,
 			Selector:     mg.Spec.ForProvider.ContainerIDSelector,
