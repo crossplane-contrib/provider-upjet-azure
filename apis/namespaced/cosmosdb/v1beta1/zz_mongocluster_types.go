@@ -63,7 +63,7 @@ type MongoClusterInitParameters struct {
 
 	// The location of the source MongoDB Cluster. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/cosmosdb/v1beta1.MongoCluster
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceLocation()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceLocation()
 	SourceLocation *string `json:"sourceLocation,omitempty" tf:"source_location,omitempty"`
 
 	// Reference to a MongoCluster in cosmosdb to populate sourceLocation.
@@ -76,7 +76,7 @@ type MongoClusterInitParameters struct {
 
 	// The ID of the replication source MongoDB Cluster. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/cosmosdb/v1beta1.MongoCluster
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
 	SourceServerID *string `json:"sourceServerId,omitempty" tf:"source_server_id,omitempty"`
 
 	// Reference to a MongoCluster in cosmosdb to populate sourceServerId.
@@ -200,7 +200,7 @@ type MongoClusterParameters struct {
 
 	// The location of the source MongoDB Cluster. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/cosmosdb/v1beta1.MongoCluster
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceLocation()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceLocation()
 	// +kubebuilder:validation:Optional
 	SourceLocation *string `json:"sourceLocation,omitempty" tf:"source_location,omitempty"`
 
@@ -214,7 +214,7 @@ type MongoClusterParameters struct {
 
 	// The ID of the replication source MongoDB Cluster. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/cosmosdb/v1beta1.MongoCluster
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourceServerID *string `json:"sourceServerId,omitempty" tf:"source_server_id,omitempty"`
 

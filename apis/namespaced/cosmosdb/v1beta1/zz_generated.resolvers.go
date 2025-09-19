@@ -12,7 +12,6 @@ import (
 	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-	rconfig1 "github.com/upbound/provider-azure/apis/cluster/rconfig"
 	rconfig "github.com/upbound/provider-azure/apis/namespaced/rconfig"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -352,7 +351,7 @@ func (mg *CassandraTable) ResolveReferences(ctx context.Context, c client.Reader
 
 		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CassandraKeySpaceID),
-			Extract:      rconfig1.ExtractResourceID(),
+			Extract:      rconfig.ExtractResourceID(),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CassandraKeySpaceIDRef,
 			Selector:     mg.Spec.ForProvider.CassandraKeySpaceIDSelector,
@@ -528,7 +527,7 @@ func (mg *MongoCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 
 		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceLocation),
-			Extract:      rconfig1.ExtractResourceLocation(),
+			Extract:      rconfig.ExtractResourceLocation(),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SourceLocationRef,
 			Selector:     mg.Spec.ForProvider.SourceLocationSelector,
@@ -548,7 +547,7 @@ func (mg *MongoCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 
 		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceServerID),
-			Extract:      rconfig1.ExtractResourceID(),
+			Extract:      rconfig.ExtractResourceID(),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SourceServerIDRef,
 			Selector:     mg.Spec.ForProvider.SourceServerIDSelector,
@@ -568,7 +567,7 @@ func (mg *MongoCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 
 		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceLocation),
-			Extract:      rconfig1.ExtractResourceLocation(),
+			Extract:      rconfig.ExtractResourceLocation(),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SourceLocationRef,
 			Selector:     mg.Spec.InitProvider.SourceLocationSelector,
@@ -588,7 +587,7 @@ func (mg *MongoCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 
 		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceServerID),
-			Extract:      rconfig1.ExtractResourceID(),
+			Extract:      rconfig.ExtractResourceID(),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SourceServerIDRef,
 			Selector:     mg.Spec.InitProvider.SourceServerIDSelector,
@@ -1004,7 +1003,7 @@ func (mg *SQLFunction) ResolveReferences(ctx context.Context, c client.Reader) e
 
 		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerID),
-			Extract:      rconfig1.ExtractResourceID(),
+			Extract:      rconfig.ExtractResourceID(),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ContainerIDRef,
 			Selector:     mg.Spec.ForProvider.ContainerIDSelector,
@@ -1392,7 +1391,7 @@ func (mg *SQLTrigger) ResolveReferences(ctx context.Context, c client.Reader) er
 
 		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerID),
-			Extract:      rconfig1.ExtractResourceID(),
+			Extract:      rconfig.ExtractResourceID(),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ContainerIDRef,
 			Selector:     mg.Spec.ForProvider.ContainerIDSelector,
