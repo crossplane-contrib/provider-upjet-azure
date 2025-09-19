@@ -42,6 +42,9 @@ func Configure(p *config.Provider) {
 			}
 			return diff, nil
 		}
+		r.LateInitializer = config.LateInitializer{
+			IgnoredFields: []string{"instances"},
+		}
 	})
 	p.AddResourceConfigurator("azurerm_windows_virtual_machine", func(r *config.Resource) {
 		r.References["network_interface_ids"] = config.Reference{
