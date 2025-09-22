@@ -6,6 +6,8 @@ package cosmosdb
 
 import (
 	"github.com/crossplane/upjet/v2/pkg/config"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
+	"github.com/pkg/errors"
 
 	"github.com/upbound/provider-azure/apis/namespaced/rconfig"
 )
@@ -68,4 +70,43 @@ func Configure(p *config.Provider) {
 			},
 		}
 	})
+
+	p.AddResourceConfigurator("azurerm_mongo_cluster", func(r *config.Resource) {
+		r.References = config.References{
+			"source_server_id": config.Reference{
+				TerraformName: "azurerm_mongo_cluster",
+				Extractor:     rconfig.ExtractResourceIDFuncPath,
+			},
+			"source_location": config.Reference{
+				TerraformName: "azurerm_mongo_cluster",
+				Extractor:     rconfig.ExtractResourceLocationFuncPath,
+			},
+		}
+		r.TerraformCustomDiff = mongoClusterCustomDiff
+		r.UseAsync = true
+	})
+}
+
+// MongoCluster can be initialized as a GeoReplica, which has multiple fields that are kept in sync with source MongoCluster
+func mongoClusterCustomDiff(diff *terraform.InstanceDiff, state *terraform.InstanceState, resourceConfig *terraform.ResourceConfig) (*terraform.InstanceDiff, error) { //nolint:gocyclo
+	if state == nil || state.Empty() || diff == nil || diff.Empty() || diff.Destroy {
+		return diff, nil
+	}
+	if resourceConfig == nil {
+		return nil, errors.New("resource config cannot be nil")
+	}
+	createMode, ok := resourceConfig.Get("create_mode")
+	if !ok {
+		return diff, nil
+	}
+	if createMode == "GeoReplica" {
+		delete(diff.Attributes, "administrator_username")
+		delete(diff.Attributes, "compute_tier")
+		delete(diff.Attributes, "high_availability_mode")
+		delete(diff.Attributes, "shard_count")
+		delete(diff.Attributes, "storage_size_in_gb")
+		delete(diff.Attributes, "version")
+		delete(diff.Attributes, "preview_features")
+	}
+	return diff, nil
 }
