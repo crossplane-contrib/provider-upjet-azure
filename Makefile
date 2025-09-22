@@ -64,7 +64,7 @@ endif
 
 SUBPACKAGES ?= monolith
 ifeq ($(strip $(SUBPACKAGES)),*)
-override SUBPACKAGES := $(filter-out monolith,$(shell find cmd/provider -type d -maxdepth 1 -mindepth 1 | cut -d/ -f3))
+override SUBPACKAGES := $(filter-out monolith azure,$(shell find cmd/provider -type d -maxdepth 1 -mindepth 1 | cut -d/ -f3))
 endif
 GO_STATIC_PACKAGES ?= $(GO_PROJECT)/cmd/generator ${SUBPACKAGES:%=$(GO_PROJECT)/cmd/provider/%}
 GO_LDFLAGS += -X $(GO_PROJECT)/internal/version.Version=$(VERSION)
