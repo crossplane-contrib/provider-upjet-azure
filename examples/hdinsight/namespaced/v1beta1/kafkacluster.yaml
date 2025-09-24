@@ -90,7 +90,6 @@ spec:
         testing.upbound.io/example-name: rgkafkacluster
   writeConnectionSecretToRef:
     name: example-storage-account
-    namespace: upbound-system
 ---
 apiVersion: storage.azure.m.upbound.io/v1beta1
 kind: Container

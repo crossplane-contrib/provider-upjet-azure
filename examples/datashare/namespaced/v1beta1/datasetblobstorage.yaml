@@ -44,7 +44,6 @@ spec:
       provisioner: crossplane
   writeConnectionSecretToRef:
     name: example-storage-account
-    namespace: upbound-system
 ---
 apiVersion: storage.azure.m.upbound.io/v1beta1
 kind: Container

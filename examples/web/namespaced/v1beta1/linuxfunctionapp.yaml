@@ -80,4 +80,3 @@ spec:
         testing.upbound.io/example-name: linuxfuncapp-rg
   writeConnectionSecretToRef:
     name: example-storage-account
-    namespace: upbound-system

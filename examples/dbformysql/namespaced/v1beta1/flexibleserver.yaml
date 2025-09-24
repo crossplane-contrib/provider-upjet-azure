@@ -25,7 +25,6 @@ spec:
     skuName: GP_Standard_D2ds_v4
   writeConnectionSecretToRef:
     name: example-connection-flexiblemysqlserver
-    namespace: upbound-system
 ---
 apiVersion: v1
 data:

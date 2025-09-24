@@ -77,7 +77,6 @@ spec:
         testing.upbound.io/example-name: rgauditingpolicy
   writeConnectionSecretToRef:
     name: example-storage-account
-    namespace: upbound-system
 ---
 apiVersion: v1
 kind: Secret
