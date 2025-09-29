@@ -70,7 +70,7 @@ metadata:
     meta.upbound.io/example-id: eventgrid/v1beta1/systemtopiceventsubscription
   labels:
     testing.upbound.io/example-name: systemtopiceventsubacc
-  name: systemtopiceventsubacc
+  name: systopicevensubacc0012
   namespace: upbound-system
 spec:
   forProvider:
