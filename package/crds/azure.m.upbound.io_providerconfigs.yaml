@@ -109,6 +109,7 @@ spec:
                     - Secret
                     - UserAssignedManagedIdentity
                     - SystemAssignedManagedIdentity
+                    - OIDCTokenRequest
                     - OIDCTokenFile
                     - Upbound
                     - Filesystem
@@ -131,6 +132,19 @@ spec:
                   OIDCTokenFilePath is the optional path to a token file
                   that allows to access a managed identity.
                 type: string
+              serviceAccountRef:
+                description: ServiceAccount within the same namespace that should
+                  be used to derive the OIDC token.
+                properties:
+                  name:
+                    description: Name of the service account.
+                    type: string
+                  namespace:
+                    description: Namespace of the service account.
+                    type: string
+                required:
+                - name
+                type: object
               subscriptionID:
                 description: |-
                   SubscriptionID is the Azure subscription ID to be used.
