@@ -2191,6 +2191,38 @@ func (mg *Policy) ResolveReferences(ctx context.Context, c client.Reader) error 
 	return nil
 }
 
+// ResolveReferences of this PolicyFragment.
+func (mg *PolicyFragment) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("apimanagement.azure.m.upbound.io", "v1beta1", "Management", "ManagementList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.APIManagementID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.APIManagementIDRef,
+			Selector:     mg.Spec.ForProvider.APIManagementIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.APIManagementID")
+	}
+	mg.Spec.ForProvider.APIManagementID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.APIManagementIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this Product.
 func (mg *Product) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed

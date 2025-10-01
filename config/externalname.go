@@ -130,6 +130,9 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// API Management Custom Domains can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.ApiManagement/service/instance1/customDomains/default
 	"azurerm_api_management_custom_domain": config.TemplatedStringAsIdentifier("", "{{ .parameters.api_management_id }}/customDomains/{{ .external_name }}"),
+	// API Management Policy Fragments can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.ApiManagement/service/instance1/policyFragments/policyFragment1
+	"azurerm_api_management_policy_fragment": config.TemplatedStringAsIdentifier("", "{{ .parameters.api_management_id }}/policyFragments/{{ .external_name }}"),
 
 	// authorization
 	"azurerm_resource_group_policy_assignment": config.TemplatedStringAsIdentifier("name", "{{ .parameters.resource_group_id }}/providers/Microsoft.Authorization/policyAssignments/{{ .external_name }}"),
