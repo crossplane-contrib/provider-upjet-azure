@@ -78,7 +78,7 @@ spec:
                       this forces a new resource to be created.
                     type: string
                   apiManagementNameRef:
-                    description: Reference to a APIOperation in apimanagement to populate
+                    description: Reference to a Management in apimanagement to populate
                       apiManagementName.
                     properties:
                       name:
@@ -113,7 +113,7 @@ spec:
                     - name
                     type: object
                   apiManagementNameSelector:
-                    description: Selector for a APIOperation in apimanagement to populate
+                    description: Selector for a Management in apimanagement to populate
                       apiManagementName.
                     properties:
                       matchControllerRef:
@@ -159,8 +159,7 @@ spec:
                       to be created.
                     type: string
                   apiNameRef:
-                    description: Reference to a APIOperation in apimanagement to populate
-                      apiName.
+                    description: Reference to a API in apimanagement to populate apiName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -194,8 +193,7 @@ spec:
                     - name
                     type: object
                   apiNameSelector:
-                    description: Selector for a APIOperation in apimanagement to populate
-                      apiName.
+                    description: Selector for a API in apimanagement to populate apiName.
                     properties:
                       matchControllerRef:
                         description: |-
