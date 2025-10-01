@@ -25,4 +25,19 @@ spec:
       namespace: upbound-system
       key: credentials
 EOF
+
+  echo "Creating a default cluster provider config..."
+  cat <<EOF | ${KUBECTL} apply -f -
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ClusterProviderConfig
+metadata:
+  name: default
+spec:
+  credentials:
+    source: Secret
+    secretRef:
+      name: provider-secret
+      namespace: upbound-system
+      key: credentials
+EOF
 fi
