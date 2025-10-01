@@ -82,9 +82,7 @@ KIND_VERSION = v0.29.0
 # dependency for up
 UP_VERSION = v0.40.0-0.rc.3
 UP_CHANNEL = alpha
-UPTEST_VERSION = v0.11.1
-UPTEST_LOCAL_VERSION = v0.13.0
-UPTEST_LOCAL_CHANNEL = stable
+UPTEST_VERSION = v2.0.1
 KUSTOMIZE_VERSION = v5.3.0
 YQ_VERSION = v4.40.5
 CROSSPLANE_VERSION = 1.14.6
@@ -94,16 +92,6 @@ export UP_VERSION := $(UP_VERSION)
 export UP_CHANNEL := $(UP_CHANNEL)
 
 -include build/makelib/k8s_tools.mk
-
-# uptest download and install
-UPTEST_LOCAL := $(TOOLS_HOST_DIR)/uptest-$(UPTEST_LOCAL_VERSION)
-
-$(UPTEST_LOCAL):
-	@$(INFO) installing uptest $(UPTEST_LOCAL)
-	@mkdir -p $(TOOLS_HOST_DIR)
-	@curl -fsSLo $(UPTEST_LOCAL) https://s3.us-west-2.amazonaws.com/crossplane.uptest.releases/$(UPTEST_LOCAL_CHANNEL)/$(UPTEST_LOCAL_VERSION)/bin/$(SAFEHOST_PLATFORM)/uptest || $(FAIL)
-	@chmod +x $(UPTEST_LOCAL)
-	@$(OK) installing uptest $(UPTEST_LOCAL)
 
 # ====================================================================================
 # Setup Images
@@ -219,9 +207,9 @@ CROSSPLANE_NAMESPACE = upbound-system
 # - UPTEST_EXAMPLE_LIST, a comma-separated list of examples to test
 # - UPTEST_CLOUD_CREDENTIALS (optional), cloud credentials for the provider being tested, e.g. export UPTEST_CLOUD_CREDENTIALS=$(cat ~/azure.json)
 # - UPTEST_DATASOURCE_PATH (optional), see https://github.com/upbound/uptest#injecting-dynamic-values-and-datasource
-uptest: $(UPTEST_LOCAL) $(KUBECTL) $(KUTTL)
+uptest: $(UPTEST) $(KUBECTL) $(CHAINSAW) $(CROSSPLANE_CLI)
 	@$(INFO) running automated tests
-	@KUBECTL=$(KUBECTL) KUTTL=$(KUTTL) CROSSPLANE_NAMESPACE=$(CROSSPLANE_NAMESPACE) $(UPTEST_LOCAL) e2e "${UPTEST_EXAMPLE_LIST}" --data-source="${UPTEST_DATASOURCE_PATH}" --setup-script=cluster/test/setup.sh --default-conditions="Test" || $(FAIL)
+	@KUBECTL=$(KUBECTL) CHAINSAW=$(CHAINSAW) CROSSPLANE_CLI=$(CROSSPLANE_CLI) CROSSPLANE_NAMESPACE=$(CROSSPLANE_NAMESPACE) $(UPTEST) e2e "${UPTEST_EXAMPLE_LIST}" --data-source="${UPTEST_DATASOURCE_PATH}" --setup-script=cluster/test/setup.sh --default-conditions="Test" || $(FAIL)
 	@$(OK) running automated tests
 
 uptest-local:
