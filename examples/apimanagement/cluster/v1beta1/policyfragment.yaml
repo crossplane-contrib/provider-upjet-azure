@@ -31,7 +31,7 @@ metadata:
     uptest.upbound.io/timeout: "7200"
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: uptest-management-example
 spec:
   forProvider:
     location: West Europe
