@@ -113,6 +113,7 @@ kind: ResourceGroup
 metadata:
   annotations:
     meta.upbound.io/example-id: cdn/v1beta1/frontdoorfirewallpolicy
+    uptest.upbound.io/pre-delete-hook: ../testhooks/delete-frontdoorfirewallpolicy.sh
   labels:
     testing.upbound.io/example-name: frontdoorfirewallpolicy
   name: frontdoorfirewallpolicy

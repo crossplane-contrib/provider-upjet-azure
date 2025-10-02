@@ -38,5 +38,6 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_cdn_frontdoor_firewall_policy", func(r *config.Resource) {
 		r.ShortGroup = "cdn"
 		r.Kind = "FrontdoorFirewallPolicy"
+		r.UseAsync = true
 	})
 }
