@@ -73,6 +73,9 @@ func (tr *OpenIDConnectProvider) Hub() {}
 func (tr *Policy) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *PolicyFragment) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *Product) Hub() {}
 
 // Hub marks this type as a conversion hub.

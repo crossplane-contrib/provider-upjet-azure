@@ -40,6 +40,7 @@ import (
 	notificationrecipientuser "github.com/upbound/provider-azure/internal/controller/cluster/apimanagement/notificationrecipientuser"
 	openidconnectprovider "github.com/upbound/provider-azure/internal/controller/cluster/apimanagement/openidconnectprovider"
 	policy "github.com/upbound/provider-azure/internal/controller/cluster/apimanagement/policy"
+	policyfragment "github.com/upbound/provider-azure/internal/controller/cluster/apimanagement/policyfragment"
 	product "github.com/upbound/provider-azure/internal/controller/cluster/apimanagement/product"
 	productapi "github.com/upbound/provider-azure/internal/controller/cluster/apimanagement/productapi"
 	productpolicy "github.com/upbound/provider-azure/internal/controller/cluster/apimanagement/productpolicy"
@@ -85,6 +86,7 @@ func Setup_apimanagement(mgr ctrl.Manager, o controller.Options) error {
 		notificationrecipientuser.Setup,
 		openidconnectprovider.Setup,
 		policy.Setup,
+		policyfragment.Setup,
 		product.Setup,
 		productapi.Setup,
 		productpolicy.Setup,
@@ -136,6 +138,7 @@ func SetupGated_apimanagement(mgr ctrl.Manager, o controller.Options) error {
 		notificationrecipientuser.SetupGated,
 		openidconnectprovider.SetupGated,
 		policy.SetupGated,
+		policyfragment.SetupGated,
 		product.SetupGated,
 		productapi.SetupGated,
 		productpolicy.SetupGated,
