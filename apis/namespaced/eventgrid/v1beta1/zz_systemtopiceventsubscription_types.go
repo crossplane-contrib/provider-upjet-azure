@@ -935,21 +935,6 @@ type SystemTopicEventSubscriptionInitParameters struct {
 	// A list of labels to assign to the event subscription.
 	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// The name which should be used for this Event Subscription. Changing this forces a new Event Subscription to be created.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// The name of the Resource Group where the System Topic exists. Changing this forces a new Event Subscription to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
-	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
-
-	// Reference to a ResourceGroup in azure to populate resourceGroupName.
-	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
-
-	// Selector for a ResourceGroup in azure to populate resourceGroupName.
-	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
-
 	// A retry_policy block as defined below.
 	RetryPolicy *SystemTopicEventSubscriptionRetryPolicyInitParameters `json:"retryPolicy,omitempty" tf:"retry_policy,omitempty"`
 
@@ -967,18 +952,6 @@ type SystemTopicEventSubscriptionInitParameters struct {
 
 	// A subject_filter block as defined below.
 	SubjectFilter *SystemTopicEventSubscriptionSubjectFilterInitParameters `json:"subjectFilter,omitempty" tf:"subject_filter,omitempty"`
-
-	// The System Topic where the Event Subscription should be created in. Changing this forces a new Event Subscription to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/eventgrid/v1beta1.SystemTopic
-	SystemTopic *string `json:"systemTopic,omitempty" tf:"system_topic,omitempty"`
-
-	// Reference to a SystemTopic in eventgrid to populate systemTopic.
-	// +kubebuilder:validation:Optional
-	SystemTopicRef *v1.NamespacedReference `json:"systemTopicRef,omitempty" tf:"-"`
-
-	// Selector for a SystemTopic in eventgrid to populate systemTopic.
-	// +kubebuilder:validation:Optional
-	SystemTopicSelector *v1.NamespacedSelector `json:"systemTopicSelector,omitempty" tf:"-"`
 
 	// A webhook_endpoint block as defined below.
 	WebhookEndpoint *SystemTopicEventSubscriptionWebhookEndpointInitParameters `json:"webhookEndpoint,omitempty" tf:"webhook_endpoint,omitempty"`
@@ -1024,9 +997,6 @@ type SystemTopicEventSubscriptionObservation struct {
 
 	// A list of labels to assign to the event subscription.
 	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
-
-	// The name which should be used for this Event Subscription. Changing this forces a new Event Subscription to be created.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of the Resource Group where the System Topic exists. Changing this forces a new Event Subscription to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -1105,10 +1075,6 @@ type SystemTopicEventSubscriptionParameters struct {
 	// A list of labels to assign to the event subscription.
 	// +kubebuilder:validation:Optional
 	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
-
-	// The name which should be used for this Event Subscription. Changing this forces a new Event Subscription to be created.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of the Resource Group where the System Topic exists. Changing this forces a new Event Subscription to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
@@ -1437,9 +1403,8 @@ type SystemTopicEventSubscriptionStatus struct {
 type SystemTopicEventSubscription struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
-	Spec   SystemTopicEventSubscriptionSpec   `json:"spec"`
-	Status SystemTopicEventSubscriptionStatus `json:"status,omitempty"`
+	Spec              SystemTopicEventSubscriptionSpec   `json:"spec"`
+	Status            SystemTopicEventSubscriptionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

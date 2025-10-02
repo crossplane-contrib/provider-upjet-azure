@@ -405,26 +405,6 @@ func (mg *SystemTopicEventSubscription) ResolveReferences(ctx context.Context, c
 	}
 	mg.Spec.ForProvider.SystemTopic = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SystemTopicRef = rsp.ResolvedReference
-	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
-			Extract:      reference.ExternalName(),
-			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
-			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
-	}
-	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	if mg.Spec.InitProvider.StorageQueueEndpoint != nil {
 		{
@@ -470,25 +450,6 @@ func (mg *SystemTopicEventSubscription) ResolveReferences(ctx context.Context, c
 		mg.Spec.InitProvider.StorageQueueEndpoint.StorageAccountIDRef = rsp.ResolvedReference
 
 	}
-	{
-		m, l, err = apisresolver.GetManagedResource("eventgrid.azure.upbound.io", "v1beta2", "SystemTopic", "SystemTopicList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SystemTopic),
-			Extract:      reference.ExternalName(),
-			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.InitProvider.SystemTopicRef,
-			Selector:     mg.Spec.InitProvider.SystemTopicSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.SystemTopic")
-	}
-	mg.Spec.InitProvider.SystemTopic = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.SystemTopicRef = rsp.ResolvedReference
 
 	return nil
 }

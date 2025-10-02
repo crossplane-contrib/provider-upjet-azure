@@ -9,7 +9,6 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    name: example-event-subscription
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example

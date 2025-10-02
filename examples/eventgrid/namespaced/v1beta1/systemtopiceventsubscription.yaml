@@ -5,11 +5,10 @@ metadata:
     meta.upbound.io/example-id: eventgrid/v1beta1/systemtopiceventsubscription
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: example-event-subscription
   namespace: upbound-system
 spec:
   forProvider:
-    name: example-event-subscription
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: systemtopiceventsub-rg
@@ -70,7 +69,7 @@ metadata:
     meta.upbound.io/example-id: eventgrid/v1beta1/systemtopiceventsubscription
   labels:
     testing.upbound.io/example-name: systemtopiceventsubacc
-  name: systopicevensubacc0012
+  name: systopicevensubacc0x14
   namespace: upbound-system
 spec:
   forProvider:

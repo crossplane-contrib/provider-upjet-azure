@@ -6954,26 +6954,6 @@ func (in *SystemTopicEventSubscriptionInitParameters) DeepCopyInto(out *SystemTo
 			}
 		}
 	}
-	if in.Name != nil {
-		in, out := &in.Name, &out.Name
-		*out = new(string)
-		**out = **in
-	}
-	if in.ResourceGroupName != nil {
-		in, out := &in.ResourceGroupName, &out.ResourceGroupName
-		*out = new(string)
-		**out = **in
-	}
-	if in.ResourceGroupNameRef != nil {
-		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
-		*out = new(v1.Reference)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.ResourceGroupNameSelector != nil {
-		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
-	}
 	if in.RetryPolicy != nil {
 		in, out := &in.RetryPolicy, &out.RetryPolicy
 		*out = new(SystemTopicEventSubscriptionRetryPolicyInitParameters)
@@ -7002,21 +6982,6 @@ func (in *SystemTopicEventSubscriptionInitParameters) DeepCopyInto(out *SystemTo
 	if in.SubjectFilter != nil {
 		in, out := &in.SubjectFilter, &out.SubjectFilter
 		*out = new(SystemTopicEventSubscriptionSubjectFilterInitParameters)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.SystemTopic != nil {
-		in, out := &in.SystemTopic, &out.SystemTopic
-		*out = new(string)
-		**out = **in
-	}
-	if in.SystemTopicRef != nil {
-		in, out := &in.SystemTopicRef, &out.SystemTopicRef
-		*out = new(v1.Reference)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.SystemTopicSelector != nil {
-		in, out := &in.SystemTopicSelector, &out.SystemTopicSelector
-		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.WebhookEndpoint != nil {
@@ -7149,11 +7114,6 @@ func (in *SystemTopicEventSubscriptionObservation) DeepCopyInto(out *SystemTopic
 				**out = **in
 			}
 		}
-	}
-	if in.Name != nil {
-		in, out := &in.Name, &out.Name
-		*out = new(string)
-		**out = **in
 	}
 	if in.ResourceGroupName != nil {
 		in, out := &in.ResourceGroupName, &out.ResourceGroupName
@@ -7288,11 +7248,6 @@ func (in *SystemTopicEventSubscriptionParameters) DeepCopyInto(out *SystemTopicE
 				**out = **in
 			}
 		}
-	}
-	if in.Name != nil {
-		in, out := &in.Name, &out.Name
-		*out = new(string)
-		**out = **in
 	}
 	if in.ResourceGroupName != nil {
 		in, out := &in.ResourceGroupName, &out.ResourceGroupName
