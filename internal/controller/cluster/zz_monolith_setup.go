@@ -32,6 +32,7 @@ import (
 	gateway "github.com/upbound/provider-azure/internal/controller/cluster/apimanagement/gateway"
 	gatewayapi "github.com/upbound/provider-azure/internal/controller/cluster/apimanagement/gatewayapi"
 	globalschema "github.com/upbound/provider-azure/internal/controller/cluster/apimanagement/globalschema"
+	group "github.com/upbound/provider-azure/internal/controller/cluster/apimanagement/group"
 	identityprovideraad "github.com/upbound/provider-azure/internal/controller/cluster/apimanagement/identityprovideraad"
 	identityproviderfacebook "github.com/upbound/provider-azure/internal/controller/cluster/apimanagement/identityproviderfacebook"
 	identityprovidergoogle "github.com/upbound/provider-azure/internal/controller/cluster/apimanagement/identityprovidergoogle"
@@ -753,6 +754,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		gateway.Setup,
 		gatewayapi.Setup,
 		globalschema.Setup,
+		group.Setup,
 		identityprovideraad.Setup,
 		identityproviderfacebook.Setup,
 		identityprovidergoogle.Setup,
@@ -1483,6 +1485,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		gateway.SetupGated,
 		gatewayapi.SetupGated,
 		globalschema.SetupGated,
+		group.SetupGated,
 		identityprovideraad.SetupGated,
 		identityproviderfacebook.SetupGated,
 		identityprovidergoogle.SetupGated,

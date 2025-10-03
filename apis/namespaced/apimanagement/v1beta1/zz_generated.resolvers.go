@@ -1294,6 +1294,58 @@ func (mg *GlobalSchema) ResolveReferences(ctx context.Context, c client.Reader) 
 	return nil
 }
 
+// ResolveReferences of this Group.
+func (mg *Group) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("apimanagement.azure.m.upbound.io", "v1beta1", "Management", "ManagementList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.APIManagementName),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.APIManagementNameRef,
+			Selector:     mg.Spec.ForProvider.APIManagementNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.APIManagementName")
+	}
+	mg.Spec.ForProvider.APIManagementName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.APIManagementNameRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this IdentityProviderAAD.
 func (mg *IdentityProviderAAD) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
