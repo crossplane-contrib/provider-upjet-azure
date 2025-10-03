@@ -44,6 +44,7 @@ import (
 	policyfragment "github.com/upbound/provider-azure/internal/controller/namespaced/apimanagement/policyfragment"
 	product "github.com/upbound/provider-azure/internal/controller/namespaced/apimanagement/product"
 	productapi "github.com/upbound/provider-azure/internal/controller/namespaced/apimanagement/productapi"
+	productgroup "github.com/upbound/provider-azure/internal/controller/namespaced/apimanagement/productgroup"
 	productpolicy "github.com/upbound/provider-azure/internal/controller/namespaced/apimanagement/productpolicy"
 	producttag "github.com/upbound/provider-azure/internal/controller/namespaced/apimanagement/producttag"
 	rediscache "github.com/upbound/provider-azure/internal/controller/namespaced/apimanagement/rediscache"
@@ -91,6 +92,7 @@ func Setup_apimanagement(mgr ctrl.Manager, o controller.Options) error {
 		policyfragment.Setup,
 		product.Setup,
 		productapi.Setup,
+		productgroup.Setup,
 		productpolicy.Setup,
 		producttag.Setup,
 		rediscache.Setup,
@@ -144,6 +146,7 @@ func SetupGated_apimanagement(mgr ctrl.Manager, o controller.Options) error {
 		policyfragment.SetupGated,
 		product.SetupGated,
 		productapi.SetupGated,
+		productgroup.SetupGated,
 		productpolicy.SetupGated,
 		producttag.SetupGated,
 		rediscache.SetupGated,

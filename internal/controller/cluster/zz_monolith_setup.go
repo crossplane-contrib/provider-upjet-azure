@@ -48,6 +48,7 @@ import (
 	policyfragment "github.com/upbound/provider-azure/internal/controller/cluster/apimanagement/policyfragment"
 	product "github.com/upbound/provider-azure/internal/controller/cluster/apimanagement/product"
 	productapi "github.com/upbound/provider-azure/internal/controller/cluster/apimanagement/productapi"
+	productgroup "github.com/upbound/provider-azure/internal/controller/cluster/apimanagement/productgroup"
 	productpolicy "github.com/upbound/provider-azure/internal/controller/cluster/apimanagement/productpolicy"
 	producttag "github.com/upbound/provider-azure/internal/controller/cluster/apimanagement/producttag"
 	rediscache "github.com/upbound/provider-azure/internal/controller/cluster/apimanagement/rediscache"
@@ -770,6 +771,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		policyfragment.Setup,
 		product.Setup,
 		productapi.Setup,
+		productgroup.Setup,
 		productpolicy.Setup,
 		producttag.Setup,
 		rediscache.Setup,
@@ -1501,6 +1503,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		policyfragment.SetupGated,
 		product.SetupGated,
 		productapi.SetupGated,
+		productgroup.SetupGated,
 		productpolicy.SetupGated,
 		producttag.SetupGated,
 		rediscache.SetupGated,

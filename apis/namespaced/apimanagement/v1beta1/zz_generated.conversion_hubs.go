@@ -112,6 +112,9 @@ func (tr *Product) Hub() {}
 func (tr *ProductAPI) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *ProductGroup) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *ProductPolicy) Hub() {}
 
 // Hub marks this type as a conversion hub.
