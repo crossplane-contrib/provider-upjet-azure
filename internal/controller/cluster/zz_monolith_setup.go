@@ -528,6 +528,7 @@ import (
 	virtualhubroutetableroute "github.com/upbound/provider-azure/internal/controller/cluster/network/virtualhubroutetableroute"
 	virtualhubsecuritypartnerprovider "github.com/upbound/provider-azure/internal/controller/cluster/network/virtualhubsecuritypartnerprovider"
 	virtualnetworknetwork "github.com/upbound/provider-azure/internal/controller/cluster/network/virtualnetwork"
+	virtualnetworkdnsservers "github.com/upbound/provider-azure/internal/controller/cluster/network/virtualnetworkdnsservers"
 	virtualnetworkgateway "github.com/upbound/provider-azure/internal/controller/cluster/network/virtualnetworkgateway"
 	virtualnetworkgatewayconnection "github.com/upbound/provider-azure/internal/controller/cluster/network/virtualnetworkgatewayconnection"
 	virtualnetworkpeering "github.com/upbound/provider-azure/internal/controller/cluster/network/virtualnetworkpeering"
@@ -1251,6 +1252,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		virtualhubroutetableroute.Setup,
 		virtualhubsecuritypartnerprovider.Setup,
 		virtualnetworknetwork.Setup,
+		virtualnetworkdnsservers.Setup,
 		virtualnetworkgateway.Setup,
 		virtualnetworkgatewayconnection.Setup,
 		virtualnetworkpeering.Setup,
@@ -1980,6 +1982,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		virtualhubroutetableroute.SetupGated,
 		virtualhubsecuritypartnerprovider.SetupGated,
 		virtualnetworknetwork.SetupGated,
+		virtualnetworkdnsservers.SetupGated,
 		virtualnetworkgateway.SetupGated,
 		virtualnetworkgatewayconnection.SetupGated,
 		virtualnetworkpeering.SetupGated,

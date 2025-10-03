@@ -30046,17 +30046,6 @@ func (in *VirtualNetworkInitParameters) DeepCopyInto(out *VirtualNetworkInitPara
 		*out = new(DDOSProtectionPlanInitParameters)
 		(*in).DeepCopyInto(*out)
 	}
-	if in.DNSServers != nil {
-		in, out := &in.DNSServers, &out.DNSServers
-		*out = make([]*string, len(*in))
-		for i := range *in {
-			if (*in)[i] != nil {
-				in, out := &(*in)[i], &(*out)[i]
-				*out = new(string)
-				**out = **in
-			}
-		}
-	}
 	if in.EdgeZone != nil {
 		in, out := &in.EdgeZone, &out.EdgeZone
 		*out = new(string)
@@ -30289,17 +30278,6 @@ func (in *VirtualNetworkParameters) DeepCopyInto(out *VirtualNetworkParameters) 
 		in, out := &in.DDOSProtectionPlan, &out.DDOSProtectionPlan
 		*out = new(DDOSProtectionPlanParameters)
 		(*in).DeepCopyInto(*out)
-	}
-	if in.DNSServers != nil {
-		in, out := &in.DNSServers, &out.DNSServers
-		*out = make([]*string, len(*in))
-		for i := range *in {
-			if (*in)[i] != nil {
-				in, out := &(*in)[i], &(*out)[i]
-				*out = new(string)
-				**out = **in
-			}
-		}
 	}
 	if in.EdgeZone != nil {
 		in, out := &in.EdgeZone, &out.EdgeZone
