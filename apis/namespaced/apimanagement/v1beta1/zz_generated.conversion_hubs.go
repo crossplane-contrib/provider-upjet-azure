@@ -64,6 +64,9 @@ func (tr *GatewayAPI) Hub() {}
 func (tr *GlobalSchema) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *Group) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *IdentityProviderAAD) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -107,6 +110,9 @@ func (tr *Product) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *ProductAPI) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *ProductGroup) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *ProductPolicy) Hub() {}
