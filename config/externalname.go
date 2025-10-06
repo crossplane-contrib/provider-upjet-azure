@@ -511,7 +511,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Insights/webTests/appinsightswebtest
 	"azurerm_application_insights_standard_web_test": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Insights/webTests/{{ .external_name }}"),
 	// Monitor Workspaces can be importated using the resource id
-	// terraform import azurerm_monitor_workspace.example /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.Monitor/accounts/azureMonitorWorkspace1
+	// azurerm_monitor_workspace.example /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.Monitor/accounts/azureMonitorWorkspace1
 	"azurerm_monitor_workspace": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Monitor/accounts/{{ .external_name }}"),
 
 	// logic
@@ -870,6 +870,9 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// Monitor Smart Detector Alert Rule can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AlertsManagement/smartDetectorAlertRules/rule1
 	"azurerm_monitor_smart_detector_alert_rule": config.IdentifierFromProvider,
+	// Alert Management Prometheus Rule Group can be imported using the resource id
+	// azurerm_monitor_alert_prometheus_rule_group.example /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.AlertsManagement/prometheusRuleGroups/ruleGroup1
+	"azurerm_monitor_alert_prometheus_rule_group": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.AlertsManagement/prometheusRuleGroups/{{ .external_name }}"),
 
 	// appplatform
 	//

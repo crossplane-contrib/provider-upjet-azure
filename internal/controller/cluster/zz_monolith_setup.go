@@ -11,6 +11,7 @@ import (
 
 	monitoralertprocessingruleactiongroup "github.com/upbound/provider-azure/internal/controller/cluster/alertsmanagement/monitoralertprocessingruleactiongroup"
 	monitoralertprocessingrulesuppression "github.com/upbound/provider-azure/internal/controller/cluster/alertsmanagement/monitoralertprocessingrulesuppression"
+	monitoralertprometheusrulegroup "github.com/upbound/provider-azure/internal/controller/cluster/alertsmanagement/monitoralertprometheusrulegroup"
 	monitorsmartdetectoralertrule "github.com/upbound/provider-azure/internal/controller/cluster/alertsmanagement/monitorsmartdetectoralertrule"
 	server "github.com/upbound/provider-azure/internal/controller/cluster/analysisservices/server"
 	api "github.com/upbound/provider-azure/internal/controller/cluster/apimanagement/api"
@@ -735,6 +736,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		monitoralertprocessingruleactiongroup.Setup,
 		monitoralertprocessingrulesuppression.Setup,
+		monitoralertprometheusrulegroup.Setup,
 		monitorsmartdetectoralertrule.Setup,
 		server.Setup,
 		api.Setup,
@@ -1468,6 +1470,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		monitoralertprocessingruleactiongroup.SetupGated,
 		monitoralertprocessingrulesuppression.SetupGated,
+		monitoralertprometheusrulegroup.SetupGated,
 		monitorsmartdetectoralertrule.SetupGated,
 		server.SetupGated,
 		api.SetupGated,
