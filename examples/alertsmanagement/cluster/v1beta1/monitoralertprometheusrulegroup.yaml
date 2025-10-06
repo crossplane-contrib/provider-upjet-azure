@@ -30,7 +30,7 @@ spec:
             testing.upbound.io/example-name: example
       alert: Billing_Processing_Very_Slow
       alertResolution:
-      - autoResolved: true
+        autoResolved: true
         timeToResolve: PT10M
       annotations:
         annotationName: annotationValue
@@ -42,8 +42,9 @@ spec:
         team: prod
       severity: 2
     ruleGroupEnabled: false
-    scopesRefs:
-    - name: example
+    scopesSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
 
 ---
 
