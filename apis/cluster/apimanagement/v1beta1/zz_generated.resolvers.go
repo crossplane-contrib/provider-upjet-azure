@@ -262,14 +262,14 @@ func (mg *APIOperationPolicy) ResolveReferences(ctx context.Context, c client.Re
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("apimanagement.azure.upbound.io", "v1beta2", "APIOperation", "APIOperationList")
+		m, l, err = apisresolver.GetManagedResource("apimanagement.azure.upbound.io", "v1beta2", "Management", "ManagementList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.APIManagementName),
-			Extract:      resource.ExtractParamPath("api_management_name", false),
+			Extract:      reference.ExternalName(),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.APIManagementNameRef,
 			Selector:     mg.Spec.ForProvider.APIManagementNameSelector,
@@ -282,14 +282,14 @@ func (mg *APIOperationPolicy) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.APIManagementName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.APIManagementNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apimanagement.azure.upbound.io", "v1beta2", "APIOperation", "APIOperationList")
+		m, l, err = apisresolver.GetManagedResource("apimanagement.azure.upbound.io", "v1beta2", "API", "APIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.APIName),
-			Extract:      resource.ExtractParamPath("api_name", false),
+			Extract:      reference.ExternalName(),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.APINameRef,
 			Selector:     mg.Spec.ForProvider.APINameSelector,
