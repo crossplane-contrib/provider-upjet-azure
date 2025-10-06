@@ -28,6 +28,7 @@ import (
 	gateway "github.com/upbound/provider-azure/internal/controller/cluster/apimanagement/gateway"
 	gatewayapi "github.com/upbound/provider-azure/internal/controller/cluster/apimanagement/gatewayapi"
 	globalschema "github.com/upbound/provider-azure/internal/controller/cluster/apimanagement/globalschema"
+	group "github.com/upbound/provider-azure/internal/controller/cluster/apimanagement/group"
 	identityprovideraad "github.com/upbound/provider-azure/internal/controller/cluster/apimanagement/identityprovideraad"
 	identityproviderfacebook "github.com/upbound/provider-azure/internal/controller/cluster/apimanagement/identityproviderfacebook"
 	identityprovidergoogle "github.com/upbound/provider-azure/internal/controller/cluster/apimanagement/identityprovidergoogle"
@@ -43,6 +44,7 @@ import (
 	policyfragment "github.com/upbound/provider-azure/internal/controller/cluster/apimanagement/policyfragment"
 	product "github.com/upbound/provider-azure/internal/controller/cluster/apimanagement/product"
 	productapi "github.com/upbound/provider-azure/internal/controller/cluster/apimanagement/productapi"
+	productgroup "github.com/upbound/provider-azure/internal/controller/cluster/apimanagement/productgroup"
 	productpolicy "github.com/upbound/provider-azure/internal/controller/cluster/apimanagement/productpolicy"
 	producttag "github.com/upbound/provider-azure/internal/controller/cluster/apimanagement/producttag"
 	rediscache "github.com/upbound/provider-azure/internal/controller/cluster/apimanagement/rediscache"
@@ -74,6 +76,7 @@ func Setup_apimanagement(mgr ctrl.Manager, o controller.Options) error {
 		gateway.Setup,
 		gatewayapi.Setup,
 		globalschema.Setup,
+		group.Setup,
 		identityprovideraad.Setup,
 		identityproviderfacebook.Setup,
 		identityprovidergoogle.Setup,
@@ -89,6 +92,7 @@ func Setup_apimanagement(mgr ctrl.Manager, o controller.Options) error {
 		policyfragment.Setup,
 		product.Setup,
 		productapi.Setup,
+		productgroup.Setup,
 		productpolicy.Setup,
 		producttag.Setup,
 		rediscache.Setup,
@@ -126,6 +130,7 @@ func SetupGated_apimanagement(mgr ctrl.Manager, o controller.Options) error {
 		gateway.SetupGated,
 		gatewayapi.SetupGated,
 		globalschema.SetupGated,
+		group.SetupGated,
 		identityprovideraad.SetupGated,
 		identityproviderfacebook.SetupGated,
 		identityprovidergoogle.SetupGated,
@@ -141,6 +146,7 @@ func SetupGated_apimanagement(mgr ctrl.Manager, o controller.Options) error {
 		policyfragment.SetupGated,
 		product.SetupGated,
 		productapi.SetupGated,
+		productgroup.SetupGated,
 		productpolicy.SetupGated,
 		producttag.SetupGated,
 		rediscache.SetupGated,

@@ -32,6 +32,7 @@ import (
 	gateway "github.com/upbound/provider-azure/internal/controller/namespaced/apimanagement/gateway"
 	gatewayapi "github.com/upbound/provider-azure/internal/controller/namespaced/apimanagement/gatewayapi"
 	globalschema "github.com/upbound/provider-azure/internal/controller/namespaced/apimanagement/globalschema"
+	group "github.com/upbound/provider-azure/internal/controller/namespaced/apimanagement/group"
 	identityprovideraad "github.com/upbound/provider-azure/internal/controller/namespaced/apimanagement/identityprovideraad"
 	identityproviderfacebook "github.com/upbound/provider-azure/internal/controller/namespaced/apimanagement/identityproviderfacebook"
 	identityprovidergoogle "github.com/upbound/provider-azure/internal/controller/namespaced/apimanagement/identityprovidergoogle"
@@ -47,6 +48,7 @@ import (
 	policyfragment "github.com/upbound/provider-azure/internal/controller/namespaced/apimanagement/policyfragment"
 	product "github.com/upbound/provider-azure/internal/controller/namespaced/apimanagement/product"
 	productapi "github.com/upbound/provider-azure/internal/controller/namespaced/apimanagement/productapi"
+	productgroup "github.com/upbound/provider-azure/internal/controller/namespaced/apimanagement/productgroup"
 	productpolicy "github.com/upbound/provider-azure/internal/controller/namespaced/apimanagement/productpolicy"
 	producttag "github.com/upbound/provider-azure/internal/controller/namespaced/apimanagement/producttag"
 	rediscache "github.com/upbound/provider-azure/internal/controller/namespaced/apimanagement/rediscache"
@@ -753,6 +755,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		gateway.Setup,
 		gatewayapi.Setup,
 		globalschema.Setup,
+		group.Setup,
 		identityprovideraad.Setup,
 		identityproviderfacebook.Setup,
 		identityprovidergoogle.Setup,
@@ -768,6 +771,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		policyfragment.Setup,
 		product.Setup,
 		productapi.Setup,
+		productgroup.Setup,
 		productpolicy.Setup,
 		producttag.Setup,
 		rediscache.Setup,
@@ -1483,6 +1487,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		gateway.SetupGated,
 		gatewayapi.SetupGated,
 		globalschema.SetupGated,
+		group.SetupGated,
 		identityprovideraad.SetupGated,
 		identityproviderfacebook.SetupGated,
 		identityprovidergoogle.SetupGated,
@@ -1498,6 +1503,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		policyfragment.SetupGated,
 		product.SetupGated,
 		productapi.SetupGated,
+		productgroup.SetupGated,
 		productpolicy.SetupGated,
 		producttag.SetupGated,
 		rediscache.SetupGated,
