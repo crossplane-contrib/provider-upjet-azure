@@ -78,6 +78,7 @@ func main() {
 		maxReconcileRate        = app.Flag("max-reconcile-rate", "The global maximum rate per second at which resources may checked for drift from the desired state.").Default("100").Int()
 		webhookPort             = app.Flag("webhook-port", "The port the webhook listens on").Default("9443").Envar("WEBHOOK_PORT").Int()
 		metricsBindAddress      = app.Flag("metrics-bind-address", "The address the metrics server listens on").Default(":8080").Envar("METRICS_BIND_ADDRESS").String()
+		healthProbeBindAddress  = app.Flag("health-probe-bind-addr", "The address the health/readiness probe server listens on").Default(":8081").Envar("HEALTH_PROBE_BIND_ADDRESS").String()
 		changelogsSocketPath    = app.Flag("changelogs-socket-path", "Path for changelogs socket (if enabled)").Default("/var/run/changelogs/changelogs.sock").Envar("CHANGELOGS_SOCKET_PATH").String()
 
 		enableManagementPolicies = app.Flag("enable-management-policies", "Enable support for Management Policies.").Default("true").Envar("ENABLE_MANAGEMENT_POLICIES").Bool()
@@ -90,7 +91,6 @@ func main() {
 			certsDirSet = true
 			return nil
 		}).String()
-
 	)
 
 	kingpin.MustParse(app.Parse(os.Args[1:]))
@@ -150,11 +150,15 @@ func main() {
 				CertDir: *certsDir,
 				Port:    *webhookPort,
 			}),
+		HealthProbeBindAddress:     *healthProbeBindAddress,
 		LeaderElectionResourceLock: resourcelock.LeasesResourceLock,
 		LeaseDuration:              func() *time.Duration { d := 60 * time.Second; return &d }(),
 		RenewDeadline:              func() *time.Duration { d := 50 * time.Second; return &d }(),
 	})
 	kingpin.FatalIfError(err, "Cannot create controller manager")
+	if len(*certsDir) > 0 {
+		kingpin.FatalIfError(mgr.AddReadyzCheck("webhook", mgr.GetWebhookServer().StartedChecker()), "Cannot add webhook server readyz checker to controller manager")
+	}
 
 	kingpin.FatalIfError(clusterapis.AddToScheme(mgr.GetScheme()), "Cannot add cluster-scoped Azure APIs to scheme")
 	kingpin.FatalIfError(resolverapis.BuildScheme(clusterapis.AddToSchemes), "Cannot register the cluster-scoped Azure APIs with the API resolver's runtime scheme")
@@ -248,8 +252,8 @@ func main() {
 		kingpin.FatalIfError(namespacedcontroller.SetupGated_attestation(mgr, namespacedOpts), "Cannot setup namespaced Azure controllers")
 	} else {
 		logr.Info("Provider has missing RBAC permissions for watching CRDs, controller SafeStart capability will be disabled")
-		kingpin.FatalIfError(clustercontroller.Setup_attestation(mgr, clusterOpts), "Cannot setup cluster-scoped AzureAD controllers")
-		kingpin.FatalIfError(namespacedcontroller.Setup_attestation(mgr, namespacedOpts), "Cannot setup namespaced AzureAD controllers")
+		kingpin.FatalIfError(clustercontroller.Setup_attestation(mgr, clusterOpts), "Cannot setup cluster-scoped Azure controllers")
+		kingpin.FatalIfError(namespacedcontroller.Setup_attestation(mgr, namespacedOpts), "Cannot setup namespaced Azure controllers")
 	}
 	kingpin.FatalIfError(conversion.RegisterConversions(clusterOpts.Provider, namespacedOpts.Provider, mgr.GetScheme()), "Cannot initialize the webhook conversion registry")
 	kingpin.FatalIfError(mgr.Start(ctrl.SetupSignalHandler()), "Cannot start controller manager")
