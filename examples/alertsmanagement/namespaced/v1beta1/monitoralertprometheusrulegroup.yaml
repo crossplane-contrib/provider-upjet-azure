@@ -61,13 +61,16 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
+    apiServerAccessProfile:
+      authorizedIpRanges:
+      - 192.168.1.0/24
     defaultNodePool:
-    - name: default
+      name: default
       nodeCount: 1
-      vmSize: Standard_DS2_v2
-    dnsPrefix: promrulegroup01
+      vmSize: Standard_D2_v2
+    dnsPrefix: exampleaks1
     identity:
-    - type: SystemAssigned
+      type: SystemAssigned
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
