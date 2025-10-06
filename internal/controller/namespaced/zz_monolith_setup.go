@@ -376,6 +376,7 @@ import (
 	monitorscheduledqueryrulesalert "github.com/upbound/provider-azure/internal/controller/namespaced/insights/monitorscheduledqueryrulesalert"
 	monitorscheduledqueryrulesalertv2 "github.com/upbound/provider-azure/internal/controller/namespaced/insights/monitorscheduledqueryrulesalertv2"
 	monitorscheduledqueryruleslog "github.com/upbound/provider-azure/internal/controller/namespaced/insights/monitorscheduledqueryruleslog"
+	monitorworkspace "github.com/upbound/provider-azure/internal/controller/namespaced/insights/monitorworkspace"
 	application "github.com/upbound/provider-azure/internal/controller/namespaced/iotcentral/application"
 	applicationnetworkruleset "github.com/upbound/provider-azure/internal/controller/namespaced/iotcentral/applicationnetworkruleset"
 	accesspolicy "github.com/upbound/provider-azure/internal/controller/namespaced/keyvault/accesspolicy"
@@ -1102,6 +1103,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		monitorscheduledqueryrulesalert.Setup,
 		monitorscheduledqueryrulesalertv2.Setup,
 		monitorscheduledqueryruleslog.Setup,
+		monitorworkspace.Setup,
 		application.Setup,
 		applicationnetworkruleset.Setup,
 		accesspolicy.Setup,
@@ -1834,6 +1836,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		monitorscheduledqueryrulesalert.SetupGated,
 		monitorscheduledqueryrulesalertv2.SetupGated,
 		monitorscheduledqueryruleslog.SetupGated,
+		monitorworkspace.SetupGated,
 		application.SetupGated,
 		applicationnetworkruleset.SetupGated,
 		accesspolicy.SetupGated,

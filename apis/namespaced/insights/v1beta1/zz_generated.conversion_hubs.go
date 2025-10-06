@@ -68,3 +68,6 @@ func (tr *MonitorScheduledQueryRulesAlertV2) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *MonitorScheduledQueryRulesLog) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *MonitorWorkspace) Hub() {}
