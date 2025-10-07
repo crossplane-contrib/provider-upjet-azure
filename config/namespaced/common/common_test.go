@@ -50,10 +50,51 @@ func TestPasswordGenerator(t *testing.T) {
 				},
 				secretRefFieldPath: "",
 				toggleFieldPath:    "",
-				mg:                 &fake.Managed{},
+				mg: &fake.Managed{
+					ObjectMeta: metav1.ObjectMeta{
+						Name:      "foo-mgd",
+						Namespace: "bar",
+					},
+				},
 			},
 			want: want{
 				err: errors.Wrap(errBoom, ErrGetPasswordSecret),
+			},
+		},
+		"ClusterScopedMR": {
+			reason: "should return an error if the MR has no namespace (cluster-scoped)",
+			args: args{
+				kube: &test.MockClient{
+					MockGet: func(ctx context.Context, key client.ObjectKey, obj client.Object) error {
+						s, ok := obj.(*corev1.Secret)
+						if !ok {
+							return errors.New("needs to be secret")
+						}
+						s.Data = map[string][]byte{
+							"password": []byte("foo"),
+						}
+						return nil
+					},
+				},
+				secretRefFieldPath: "parameterizable.parameters.passwordSecretRef",
+				mg: &ujfake.Terraformed{
+					Managed: fake.Managed{
+						ObjectMeta: metav1.ObjectMeta{
+							Name: "foo-mgd",
+						},
+					},
+					Parameterizable: ujfake.Parameterizable{
+						Parameters: map[string]any{
+							"passwordSecretRef": map[string]any{
+								"name": "foo",
+								"key":  "password",
+							},
+						},
+					},
+				},
+			},
+			want: want{
+				err: errors.New(errManagedNotNamespaced),
 			},
 		},
 		"SecretAlreadyFull": {
@@ -73,12 +114,17 @@ func TestPasswordGenerator(t *testing.T) {
 				},
 				secretRefFieldPath: "parameterizable.parameters.passwordSecretRef",
 				mg: &ujfake.Terraformed{
+					Managed: fake.Managed{
+						ObjectMeta: metav1.ObjectMeta{
+							Name:      "foo-mgd",
+							Namespace: "bar",
+						},
+					},
 					Parameterizable: ujfake.Parameterizable{
 						Parameters: map[string]any{
 							"passwordSecretRef": map[string]any{
-								"name":      "foo",
-								"namespace": "bar",
-								"key":       "password",
+								"name": "foo",
+								"key":  "password",
 							},
 						},
 					},
@@ -90,6 +136,12 @@ func TestPasswordGenerator(t *testing.T) {
 			args: args{
 				secretRefFieldPath: "parameterizable.parameters.passwordSecretRef",
 				mg: &ujfake.Terraformed{
+					Managed: fake.Managed{
+						ObjectMeta: metav1.ObjectMeta{
+							Name:      "foo-mgd",
+							Namespace: "bar",
+						},
+					},
 					Parameterizable: ujfake.Parameterizable{
 						Parameters: map[string]any{
 							"another": "field",
@@ -107,12 +159,17 @@ func TestPasswordGenerator(t *testing.T) {
 				secretRefFieldPath: "parameterizable.parameters.passwordSecretRef",
 				toggleFieldPath:    "parameterizable.parameters.autoGeneratePassword",
 				mg: &ujfake.Terraformed{
+					Managed: fake.Managed{
+						ObjectMeta: metav1.ObjectMeta{
+							Name:      "foo-mgd",
+							Namespace: "bar",
+						},
+					},
 					Parameterizable: ujfake.Parameterizable{
 						Parameters: map[string]any{
 							"passwordSecretRef": map[string]any{
-								"name":      "foo",
-								"namespace": "bar",
-								"key":       "password",
+								"name": "foo",
+								"key":  "password",
 							},
 						},
 					},
@@ -128,12 +185,17 @@ func TestPasswordGenerator(t *testing.T) {
 				secretRefFieldPath: "parameterizable.parameters.passwordSecretRef",
 				toggleFieldPath:    "parameterizable.parameters.autoGeneratePassword",
 				mg: &ujfake.Terraformed{
+					Managed: fake.Managed{
+						ObjectMeta: metav1.ObjectMeta{
+							Name:      "foo-mgd",
+							Namespace: "bar",
+						},
+					},
 					Parameterizable: ujfake.Parameterizable{
 						Parameters: map[string]any{
 							"passwordSecretRef": map[string]any{
-								"name":      "foo",
-								"namespace": "bar",
-								"key":       "password",
+								"name": "foo",
+								"key":  "password",
 							},
 							"autoGeneratePassword": false,
 						},
@@ -170,12 +232,17 @@ func TestPasswordGenerator(t *testing.T) {
 				secretRefFieldPath: "parameterizable.parameters.passwordSecretRef",
 				toggleFieldPath:    "parameterizable.parameters.autoGeneratePassword",
 				mg: &ujfake.Terraformed{
+					Managed: fake.Managed{
+						ObjectMeta: metav1.ObjectMeta{
+							Name:      "foo-mgd",
+							Namespace: "bar",
+						},
+					},
 					Parameterizable: ujfake.Parameterizable{
 						Parameters: map[string]any{
 							"passwordSecretRef": map[string]any{
-								"name":      "foo",
-								"namespace": "bar",
-								"key":       "password",
+								"name": "foo",
+								"key":  "password",
 							},
 							"autoGeneratePassword": true,
 						},
@@ -208,15 +275,15 @@ func TestPasswordGenerator(t *testing.T) {
 				mg: &ujfake.Terraformed{
 					Managed: fake.Managed{
 						ObjectMeta: metav1.ObjectMeta{
-							Name: "foo-mgd",
+							Name:      "foo-mgd",
+							Namespace: "bar",
 						},
 					},
 					Parameterizable: ujfake.Parameterizable{
 						Parameters: map[string]any{
 							"passwordSecretRef": map[string]any{
-								"name":      "foo",
-								"namespace": "bar",
-								"key":       "password",
+								"name": "foo",
+								"key":  "password",
 							},
 							"autoGeneratePassword": true,
 						},

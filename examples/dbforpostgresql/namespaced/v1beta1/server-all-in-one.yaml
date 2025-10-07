@@ -161,7 +161,6 @@ spec:
     infrastructureEncryptionEnabled: false
   writeConnectionSecretToRef:
     name: example-connection-postgresqlserver
-    namespace: upbound-system
 ---
 apiVersion: azure.m.upbound.io/v1beta1
 kind: ResourceGroup

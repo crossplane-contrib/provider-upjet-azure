@@ -70,6 +70,15 @@ func (l *GremlinGraphList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this MongoClusterList.
+func (l *MongoClusterList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this MongoCollectionList.
 func (l *MongoCollectionList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))

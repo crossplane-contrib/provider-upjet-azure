@@ -28,6 +28,9 @@ func (tr *GremlinDatabase) Hub() {}
 func (tr *GremlinGraph) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *MongoCluster) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *MongoCollection) Hub() {}
 
 // Hub marks this type as a conversion hub.

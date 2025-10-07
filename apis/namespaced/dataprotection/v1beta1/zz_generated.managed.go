@@ -167,6 +167,46 @@ func (mg *BackupInstancePostgreSQL) SetWriteConnectionSecretToReference(r *xpv1.
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this BackupInstancePostgreSQLFlexibleServer.
+func (mg *BackupInstancePostgreSQLFlexibleServer) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetManagementPolicies of this BackupInstancePostgreSQLFlexibleServer.
+func (mg *BackupInstancePostgreSQLFlexibleServer) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this BackupInstancePostgreSQLFlexibleServer.
+func (mg *BackupInstancePostgreSQLFlexibleServer) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this BackupInstancePostgreSQLFlexibleServer.
+func (mg *BackupInstancePostgreSQLFlexibleServer) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this BackupInstancePostgreSQLFlexibleServer.
+func (mg *BackupInstancePostgreSQLFlexibleServer) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetManagementPolicies of this BackupInstancePostgreSQLFlexibleServer.
+func (mg *BackupInstancePostgreSQLFlexibleServer) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this BackupInstancePostgreSQLFlexibleServer.
+func (mg *BackupInstancePostgreSQLFlexibleServer) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this BackupInstancePostgreSQLFlexibleServer.
+func (mg *BackupInstancePostgreSQLFlexibleServer) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this BackupPolicyBlobStorage.
 func (mg *BackupPolicyBlobStorage) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
@@ -324,6 +364,46 @@ func (mg *BackupPolicyPostgreSQL) SetProviderConfigReference(r *xpv1.ProviderCon
 
 // SetWriteConnectionSecretToReference of this BackupPolicyPostgreSQL.
 func (mg *BackupPolicyPostgreSQL) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this BackupPolicyPostgreSQLFlexibleServer.
+func (mg *BackupPolicyPostgreSQLFlexibleServer) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetManagementPolicies of this BackupPolicyPostgreSQLFlexibleServer.
+func (mg *BackupPolicyPostgreSQLFlexibleServer) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this BackupPolicyPostgreSQLFlexibleServer.
+func (mg *BackupPolicyPostgreSQLFlexibleServer) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this BackupPolicyPostgreSQLFlexibleServer.
+func (mg *BackupPolicyPostgreSQLFlexibleServer) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this BackupPolicyPostgreSQLFlexibleServer.
+func (mg *BackupPolicyPostgreSQLFlexibleServer) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetManagementPolicies of this BackupPolicyPostgreSQLFlexibleServer.
+func (mg *BackupPolicyPostgreSQLFlexibleServer) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this BackupPolicyPostgreSQLFlexibleServer.
+func (mg *BackupPolicyPostgreSQLFlexibleServer) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this BackupPolicyPostgreSQLFlexibleServer.
+func (mg *BackupPolicyPostgreSQLFlexibleServer) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 

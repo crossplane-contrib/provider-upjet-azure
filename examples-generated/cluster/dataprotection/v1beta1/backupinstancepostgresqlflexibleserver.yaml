@@ -1,0 +1,136 @@
+apiVersion: dataprotection.azure.upbound.io/v1beta1
+kind: BackupInstancePostgreSQLFlexibleServer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancepostgresqlflexibleserver
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    backupPolicyIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    location: West Europe
+    serverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    vaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: dataprotection.azure.upbound.io/v1beta1
+kind: BackupPolicyPostgreSQLFlexibleServer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancepostgresqlflexibleserver
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    backupRepeatingTimeIntervals:
+    - R/2021-05-23T02:30:00+00:00/P1W
+    defaultRetentionRule:
+    - lifeCycle:
+      - dataStoreType: VaultStore
+        duration: P4M
+    vaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: dataprotection.azure.upbound.io/v1beta2
+kind: BackupVault
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancepostgresqlflexibleserver
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    datastoreType: VaultStore
+    identity:
+    - type: SystemAssigned
+    location: West Europe
+    redundancy: LocallyRedundant
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    softDelete: "Off"
+
+---
+
+apiVersion: dbforpostgresql.azure.upbound.io/v1beta2
+kind: FlexibleServer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancepostgresqlflexibleserver
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    administratorLogin: adminTerraform
+    administratorPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: GP_Standard_D4s_v3
+    storageMb: 32768
+    version: "12"
+    zone: "2"
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancepostgresqlflexibleserver
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: authorization.azure.upbound.io/v1beta1
+kind: RoleAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancepostgresqlflexibleserver
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    principalId: ${azurerm_data_protection_backup_vault.example.identity.0.principal_id}
+    roleDefinitionName: Reader
+    scope: ${azurerm_resource_group.example.id}
+
+---
+
+apiVersion: authorization.azure.upbound.io/v1beta1
+kind: RoleAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancepostgresqlflexibleserver
+  labels:
+    testing.upbound.io/example-name: example2
+  name: example2
+spec:
+  forProvider:
+    principalId: ${azurerm_data_protection_backup_vault.example.identity.0.principal_id}
+    roleDefinitionName: PostgreSQL Flexible Server Long Term Retention Backup Role
+    scope: ${azurerm_postgresql_flexible_server.example.id}

@@ -81,4 +81,3 @@ spec:
       provisioner: crossplane
   writeConnectionSecretToRef:
     name: example-storage-account
-    namespace: upbound-system

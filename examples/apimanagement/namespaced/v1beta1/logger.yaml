@@ -45,7 +45,6 @@ spec:
         testing.upbound.io/example-name: example
   writeConnectionSecretToRef:
     name: example-application-insights
-    namespace: upbound-system
 ---
 apiVersion: apimanagement.azure.m.upbound.io/v1beta1
 kind: Management

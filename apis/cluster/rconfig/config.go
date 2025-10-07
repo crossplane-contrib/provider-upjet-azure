@@ -16,6 +16,8 @@ const (
 	APISPackagePath = "github.com/upbound/provider-azure/apis/cluster"
 	// ExtractResourceIDFuncPath holds the Azure resource ID extractor func name
 	ExtractResourceIDFuncPath = APISPackagePath + "/rconfig.ExtractResourceID()"
+	// ExtractResourceLocationFuncPath holds the Azure resource location extractor func name
+	ExtractResourceLocationFuncPath = APISPackagePath + "/rconfig.ExtractResourceLocation()"
 )
 
 // ExtractResourceID extracts the value of `spec.atProvider.id`
@@ -28,5 +30,30 @@ func ExtractResourceID() xpref.ExtractValueFn {
 			return ""
 		}
 		return tr.GetID()
+	}
+}
+
+// ExtractResourceID extracts the value of `spec.atProvider.location`
+// from a Terraformed resource. If mr is not a Terraformed
+// resource or status.atProvider.location is not yet populated returns an empty string.
+func ExtractResourceLocation() xpref.ExtractValueFn {
+	return func(mr xpresource.Managed) string {
+		tr, ok := mr.(resource.Terraformed)
+		if !ok {
+			return ""
+		}
+		ob, err := tr.GetObservation()
+		if err != nil {
+			return ""
+		}
+		l, ok := ob["location"]
+		if !ok {
+			return ""
+		}
+		location, ok := l.(string)
+		if !ok {
+			return ""
+		}
+		return location
 	}
 }

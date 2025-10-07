@@ -1,0 +1,81 @@
+apiVersion: cosmosdb.azure.m.upbound.io/v1beta1
+kind: MongoCluster
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "7200"
+    meta.upbound.io/example-id: cosmosdb/v1beta1/mongocluster
+  labels:
+    testing.upbound.io/example-name: examplemcreplica
+  name: examplemcreplica
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: North Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    createMode: GeoReplica
+    sourceServerIdSelector:
+      matchLabels: 
+        testing.upbound.io/example-name: examplemcsource
+    sourceLocationSelector:
+      matchLabels: 
+        testing.upbound.io/example-name: examplemcsource
+
+---
+
+apiVersion: cosmosdb.azure.m.upbound.io/v1beta1
+kind: MongoCluster
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "7200"
+    uptest.upbound.io/pre-delete-hook: ../testhooks/delete-mongocluster-georeplica.sh
+    meta.upbound.io/example-id: cosmosdb/v1beta1/mongocluster
+  labels:
+    testing.upbound.io/example-name: examplemcsource
+  name: examplemcsource
+  namespace: upbound-system
+spec:
+  forProvider:
+    administratorPasswordSecretRef:
+      key: example-key
+      name: example-secret
+    administratorUsername: terraform
+    computeTier: M30
+    highAvailabilityMode: Disabled
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    shardCount: 1
+    storageSizeInGb: 32
+    version: '7.0'
+    previewFeatures:
+    - "GeoReplicas"
+
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1beta1/mongocluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: v1
+data:
+  example-key: UUFad3N4MTIz
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+type: Opaque

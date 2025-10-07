@@ -198,6 +198,7 @@ import (
 	cassandratable "github.com/upbound/provider-azure/internal/controller/cluster/cosmosdb/cassandratable"
 	gremlindatabase "github.com/upbound/provider-azure/internal/controller/cluster/cosmosdb/gremlindatabase"
 	gremlingraph "github.com/upbound/provider-azure/internal/controller/cluster/cosmosdb/gremlingraph"
+	mongocluster "github.com/upbound/provider-azure/internal/controller/cluster/cosmosdb/mongocluster"
 	mongocollection "github.com/upbound/provider-azure/internal/controller/cluster/cosmosdb/mongocollection"
 	mongodatabase "github.com/upbound/provider-azure/internal/controller/cluster/cosmosdb/mongodatabase"
 	mongoroledefinition "github.com/upbound/provider-azure/internal/controller/cluster/cosmosdb/mongoroledefinition"
@@ -269,10 +270,12 @@ import (
 	backupinstancedisk "github.com/upbound/provider-azure/internal/controller/cluster/dataprotection/backupinstancedisk"
 	backupinstancekubernetescluster "github.com/upbound/provider-azure/internal/controller/cluster/dataprotection/backupinstancekubernetescluster"
 	backupinstancepostgresql "github.com/upbound/provider-azure/internal/controller/cluster/dataprotection/backupinstancepostgresql"
+	backupinstancepostgresqlflexibleserver "github.com/upbound/provider-azure/internal/controller/cluster/dataprotection/backupinstancepostgresqlflexibleserver"
 	backuppolicyblobstorage "github.com/upbound/provider-azure/internal/controller/cluster/dataprotection/backuppolicyblobstorage"
 	backuppolicydisk "github.com/upbound/provider-azure/internal/controller/cluster/dataprotection/backuppolicydisk"
 	backuppolicykubernetescluster "github.com/upbound/provider-azure/internal/controller/cluster/dataprotection/backuppolicykubernetescluster"
 	backuppolicypostgresql "github.com/upbound/provider-azure/internal/controller/cluster/dataprotection/backuppolicypostgresql"
+	backuppolicypostgresqlflexibleserver "github.com/upbound/provider-azure/internal/controller/cluster/dataprotection/backuppolicypostgresqlflexibleserver"
 	backupvault "github.com/upbound/provider-azure/internal/controller/cluster/dataprotection/backupvault"
 	resourceguard "github.com/upbound/provider-azure/internal/controller/cluster/dataprotection/resourceguard"
 	accountdatashare "github.com/upbound/provider-azure/internal/controller/cluster/datashare/account"
@@ -916,6 +919,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		cassandratable.Setup,
 		gremlindatabase.Setup,
 		gremlingraph.Setup,
+		mongocluster.Setup,
 		mongocollection.Setup,
 		mongodatabase.Setup,
 		mongoroledefinition.Setup,
@@ -987,10 +991,12 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		backupinstancedisk.Setup,
 		backupinstancekubernetescluster.Setup,
 		backupinstancepostgresql.Setup,
+		backupinstancepostgresqlflexibleserver.Setup,
 		backuppolicyblobstorage.Setup,
 		backuppolicydisk.Setup,
 		backuppolicykubernetescluster.Setup,
 		backuppolicypostgresql.Setup,
+		backuppolicypostgresqlflexibleserver.Setup,
 		backupvault.Setup,
 		resourceguard.Setup,
 		accountdatashare.Setup,
@@ -1640,6 +1646,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		cassandratable.SetupGated,
 		gremlindatabase.SetupGated,
 		gremlingraph.SetupGated,
+		mongocluster.SetupGated,
 		mongocollection.SetupGated,
 		mongodatabase.SetupGated,
 		mongoroledefinition.SetupGated,
@@ -1711,10 +1718,12 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		backupinstancedisk.SetupGated,
 		backupinstancekubernetescluster.SetupGated,
 		backupinstancepostgresql.SetupGated,
+		backupinstancepostgresqlflexibleserver.SetupGated,
 		backuppolicyblobstorage.SetupGated,
 		backuppolicydisk.SetupGated,
 		backuppolicykubernetescluster.SetupGated,
 		backuppolicypostgresql.SetupGated,
+		backuppolicypostgresqlflexibleserver.SetupGated,
 		backupvault.SetupGated,
 		resourceguard.SetupGated,
 		accountdatashare.SetupGated,

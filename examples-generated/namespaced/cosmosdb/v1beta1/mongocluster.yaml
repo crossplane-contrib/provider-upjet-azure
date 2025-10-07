@@ -1,0 +1,38 @@
+apiVersion: cosmosdb.azure.m.upbound.io/v1beta1
+kind: MongoCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1beta1/mongocluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    administratorPasswordSecretRef:
+      key: example-key
+      name: example-secret
+    administratorUsername: adminTerraform
+    computeTier: Free
+    highAvailabilityMode: Disabled
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    shardCount: "1"
+    storageSizeInGb: "32"
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1beta1/mongocluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: East US

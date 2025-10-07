@@ -36,7 +36,6 @@ metadata:
   namespace: upbound-system
 spec:
   writeConnectionSecretToRef:
-    namespace: upbound-system
     name: example-redis-cache
   forProvider:
     redisVersion: "6"

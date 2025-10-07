@@ -16,6 +16,7 @@ import (
 	cassandratable "github.com/upbound/provider-azure/internal/controller/cluster/cosmosdb/cassandratable"
 	gremlindatabase "github.com/upbound/provider-azure/internal/controller/cluster/cosmosdb/gremlindatabase"
 	gremlingraph "github.com/upbound/provider-azure/internal/controller/cluster/cosmosdb/gremlingraph"
+	mongocluster "github.com/upbound/provider-azure/internal/controller/cluster/cosmosdb/mongocluster"
 	mongocollection "github.com/upbound/provider-azure/internal/controller/cluster/cosmosdb/mongocollection"
 	mongodatabase "github.com/upbound/provider-azure/internal/controller/cluster/cosmosdb/mongodatabase"
 	mongoroledefinition "github.com/upbound/provider-azure/internal/controller/cluster/cosmosdb/mongoroledefinition"
@@ -42,6 +43,7 @@ func Setup_cosmosdb(mgr ctrl.Manager, o controller.Options) error {
 		cassandratable.Setup,
 		gremlindatabase.Setup,
 		gremlingraph.Setup,
+		mongocluster.Setup,
 		mongocollection.Setup,
 		mongodatabase.Setup,
 		mongoroledefinition.Setup,
@@ -74,6 +76,7 @@ func SetupGated_cosmosdb(mgr ctrl.Manager, o controller.Options) error {
 		cassandratable.SetupGated,
 		gremlindatabase.SetupGated,
 		gremlingraph.SetupGated,
+		mongocluster.SetupGated,
 		mongocollection.SetupGated,
 		mongodatabase.SetupGated,
 		mongoroledefinition.SetupGated,

@@ -99,4 +99,3 @@ spec:
         testing.upbound.io/example-name: linuxfuncnappslot-rg
   writeConnectionSecretToRef:
     name: example-storage-account
-    namespace: upbound-system
