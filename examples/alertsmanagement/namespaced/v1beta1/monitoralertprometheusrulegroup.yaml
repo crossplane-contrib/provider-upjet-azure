@@ -53,7 +53,6 @@ apiVersion: containerservice.azure.m.upbound.io/v1beta1
 kind: KubernetesCluster
 metadata:
   annotations:
-    uptest.upbound.io/timeout: "3600"
     meta.upbound.io/example-id: alertsmanagement/v1beta1/monitoralertprometheusrulegroup
   labels:
     testing.upbound.io/example-name: example
