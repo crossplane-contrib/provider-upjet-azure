@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: alertsmanagement.azure.upbound.io/v1beta1
 kind: MonitorAlertPrometheusRuleGroup
 metadata:
@@ -48,26 +52,26 @@ spec:
 
 ---
 
-apiVersion: containerservice.azure.upbound.io/v1beta2
+apiVersion: containerservice.azure.upbound.io/v1beta1
 kind: KubernetesCluster
 metadata:
   annotations:
     meta.upbound.io/example-id: alertsmanagement/v1beta1/monitoralertprometheusrulegroup
   labels:
     testing.upbound.io/example-name: example
-  name: promrulegroup
+  name: example-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
-    apiServerAccessProfile:
-      authorizedIpRanges:
-      - 192.168.1.0/24
     defaultNodePool:
+    - enableHostEncryption: false
       name: default
       nodeCount: 1
       vmSize: Standard_D2_v2
-    dnsPrefix: exampleaks1
+      upgradeSettings:
+      - maxSurge: '10%'
+    dnsPrefix: dns
     identity:
-      type: SystemAssigned
+    - type: SystemAssigned
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
