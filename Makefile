@@ -237,12 +237,12 @@ local-deploy.%: controlplane.up $(YQ)
 		$(INFO) Patching DeploymentRuntimeConfig package-runtime container spec with a readiness probe using: $$container_patch && \
 		$(KUBECTL) patch deploymentruntimeconfigs.pkg.crossplane.io runtimeconfig-$(PROJECT_NAME)-$${api} --type=merge -p="{\"spec\": {\"deploymentTemplate\":{\"spec\":{\"template\":{\"spec\":{\"containers\":[$$container_patch]}}}}}}" && \
 		$(INFO) running locally built $(PROJECT_NAME)-$${api} && \
-		$(KUBECTL) wait provider.pkg $(PROJECT_NAME)-$${api} --for condition=Healthy --timeout 5m && \
+		$(KUBECTL) wait provider.pkg $(PROJECT_NAME)-$${api} --for condition=Healthy --timeout=5m && \
 		$(KUBECTL) -n upbound-system wait --for=condition=Available deployment --all --timeout=5m && \
 		$(OK) running locally built $(PROJECT_NAME)-$${api}; \
 	done || $(FAIL)
 
-local-deploy: build-provider.monolith local-deploy.monolith
+local-deploy: build-provider.config local-deploy.config
 
 # This target requires the following environment variables to be set:
 # - UPTEST_CLOUD_CREDENTIALS, cloud credentials for the provider being tested, e.g. export UPTEST_CLOUD_CREDENTIALS=$(cat ~/azure.json)
