@@ -1,0 +1,30 @@
+apiVersion: insights.azure.upbound.io/v1beta1
+kind: MonitorWorkspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta1/monitorworkspace
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tags:
+      key: value
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta1/monitorworkspace
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

@@ -35,3 +35,6 @@ func (tr *MonitorPrivateLinkScope) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *MonitorPrivateLinkScopedService) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *MonitorWorkspace) Hub() {}

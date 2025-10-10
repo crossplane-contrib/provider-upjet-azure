@@ -10,6 +10,7 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
 	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
 	rconfig "github.com/upbound/provider-azure/apis/cluster/rconfig"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
@@ -187,6 +188,167 @@ func (mg *MonitorAlertProcessingRuleSuppression) ResolveReferences(ctx context.C
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Scopes),
 			Extract:       rconfig.ExtractResourceID(),
+			Namespace:     mg.GetNamespace(),
+			References:    mg.Spec.InitProvider.ScopesRefs,
+			Selector:      mg.Spec.InitProvider.ScopesSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Scopes")
+	}
+	mg.Spec.InitProvider.Scopes = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.ScopesRefs = mrsp.ResolvedReferences
+
+	return nil
+}
+
+// ResolveReferences of this MonitorAlertPrometheusRuleGroup.
+func (mg *MonitorAlertPrometheusRuleGroup) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("containerservice.azure.upbound.io", "v1beta2", "KubernetesCluster", "KubernetesClusterList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ClusterName),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.ClusterNameRef,
+			Selector:     mg.Spec.ForProvider.ClusterNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ClusterName")
+	}
+	mg.Spec.ForProvider.ClusterName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ClusterNameRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Rule); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.Rule[i3].Action); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta2", "MonitorActionGroup", "MonitorActionGroupList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Rule[i3].Action[i4].ActionGroupID),
+					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.ForProvider.Rule[i3].Action[i4].ActionGroupIDRef,
+					Selector:     mg.Spec.ForProvider.Rule[i3].Action[i4].ActionGroupIDSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.Rule[i3].Action[i4].ActionGroupID")
+			}
+			mg.Spec.ForProvider.Rule[i3].Action[i4].ActionGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Rule[i3].Action[i4].ActionGroupIDRef = rsp.ResolvedReference
+
+		}
+	}
+	{
+		m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta1", "MonitorWorkspace", "MonitorWorkspaceList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Scopes),
+			Extract:       resource.ExtractResourceID(),
+			Namespace:     mg.GetNamespace(),
+			References:    mg.Spec.ForProvider.ScopesRefs,
+			Selector:      mg.Spec.ForProvider.ScopesSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.Scopes")
+	}
+	mg.Spec.ForProvider.Scopes = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.ScopesRefs = mrsp.ResolvedReferences
+	{
+		m, l, err = apisresolver.GetManagedResource("containerservice.azure.upbound.io", "v1beta2", "KubernetesCluster", "KubernetesClusterList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ClusterName),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.ClusterNameRef,
+			Selector:     mg.Spec.InitProvider.ClusterNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ClusterName")
+	}
+	mg.Spec.InitProvider.ClusterName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ClusterNameRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Rule); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Rule[i3].Action); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta2", "MonitorActionGroup", "MonitorActionGroupList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Rule[i3].Action[i4].ActionGroupID),
+					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.InitProvider.Rule[i3].Action[i4].ActionGroupIDRef,
+					Selector:     mg.Spec.InitProvider.Rule[i3].Action[i4].ActionGroupIDSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Rule[i3].Action[i4].ActionGroupID")
+			}
+			mg.Spec.InitProvider.Rule[i3].Action[i4].ActionGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Rule[i3].Action[i4].ActionGroupIDRef = rsp.ResolvedReference
+
+		}
+	}
+	{
+		m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta1", "MonitorWorkspace", "MonitorWorkspaceList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Scopes),
+			Extract:       resource.ExtractResourceID(),
 			Namespace:     mg.GetNamespace(),
 			References:    mg.Spec.InitProvider.ScopesRefs,
 			Selector:      mg.Spec.InitProvider.ScopesSelector,

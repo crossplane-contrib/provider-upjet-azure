@@ -30,6 +30,7 @@ import (
 	monitorscheduledqueryrulesalert "github.com/upbound/provider-azure/internal/controller/namespaced/insights/monitorscheduledqueryrulesalert"
 	monitorscheduledqueryrulesalertv2 "github.com/upbound/provider-azure/internal/controller/namespaced/insights/monitorscheduledqueryrulesalertv2"
 	monitorscheduledqueryruleslog "github.com/upbound/provider-azure/internal/controller/namespaced/insights/monitorscheduledqueryruleslog"
+	monitorworkspace "github.com/upbound/provider-azure/internal/controller/namespaced/insights/monitorworkspace"
 )
 
 // Setup_insights creates all controllers with the supplied logger and adds them to
@@ -57,6 +58,7 @@ func Setup_insights(mgr ctrl.Manager, o controller.Options) error {
 		monitorscheduledqueryrulesalert.Setup,
 		monitorscheduledqueryrulesalertv2.Setup,
 		monitorscheduledqueryruleslog.Setup,
+		monitorworkspace.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err
@@ -90,6 +92,7 @@ func SetupGated_insights(mgr ctrl.Manager, o controller.Options) error {
 		monitorscheduledqueryrulesalert.SetupGated,
 		monitorscheduledqueryrulesalertv2.SetupGated,
 		monitorscheduledqueryruleslog.SetupGated,
+		monitorworkspace.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

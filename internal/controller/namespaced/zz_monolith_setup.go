@@ -11,6 +11,7 @@ import (
 
 	monitoralertprocessingruleactiongroup "github.com/upbound/provider-azure/internal/controller/namespaced/alertsmanagement/monitoralertprocessingruleactiongroup"
 	monitoralertprocessingrulesuppression "github.com/upbound/provider-azure/internal/controller/namespaced/alertsmanagement/monitoralertprocessingrulesuppression"
+	monitoralertprometheusrulegroup "github.com/upbound/provider-azure/internal/controller/namespaced/alertsmanagement/monitoralertprometheusrulegroup"
 	monitorsmartdetectoralertrule "github.com/upbound/provider-azure/internal/controller/namespaced/alertsmanagement/monitorsmartdetectoralertrule"
 	server "github.com/upbound/provider-azure/internal/controller/namespaced/analysisservices/server"
 	api "github.com/upbound/provider-azure/internal/controller/namespaced/apimanagement/api"
@@ -376,6 +377,7 @@ import (
 	monitorscheduledqueryrulesalert "github.com/upbound/provider-azure/internal/controller/namespaced/insights/monitorscheduledqueryrulesalert"
 	monitorscheduledqueryrulesalertv2 "github.com/upbound/provider-azure/internal/controller/namespaced/insights/monitorscheduledqueryrulesalertv2"
 	monitorscheduledqueryruleslog "github.com/upbound/provider-azure/internal/controller/namespaced/insights/monitorscheduledqueryruleslog"
+	monitorworkspace "github.com/upbound/provider-azure/internal/controller/namespaced/insights/monitorworkspace"
 	application "github.com/upbound/provider-azure/internal/controller/namespaced/iotcentral/application"
 	applicationnetworkruleset "github.com/upbound/provider-azure/internal/controller/namespaced/iotcentral/applicationnetworkruleset"
 	accesspolicy "github.com/upbound/provider-azure/internal/controller/namespaced/keyvault/accesspolicy"
@@ -734,6 +736,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		monitoralertprocessingruleactiongroup.Setup,
 		monitoralertprocessingrulesuppression.Setup,
+		monitoralertprometheusrulegroup.Setup,
 		monitorsmartdetectoralertrule.Setup,
 		server.Setup,
 		api.Setup,
@@ -1099,6 +1102,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		monitorscheduledqueryrulesalert.Setup,
 		monitorscheduledqueryrulesalertv2.Setup,
 		monitorscheduledqueryruleslog.Setup,
+		monitorworkspace.Setup,
 		application.Setup,
 		applicationnetworkruleset.Setup,
 		accesspolicy.Setup,
@@ -1463,6 +1467,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		monitoralertprocessingruleactiongroup.SetupGated,
 		monitoralertprocessingrulesuppression.SetupGated,
+		monitoralertprometheusrulegroup.SetupGated,
 		monitorsmartdetectoralertrule.SetupGated,
 		server.SetupGated,
 		api.SetupGated,
@@ -1828,6 +1833,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		monitorscheduledqueryrulesalert.SetupGated,
 		monitorscheduledqueryrulesalertv2.SetupGated,
 		monitorscheduledqueryruleslog.SetupGated,
+		monitorworkspace.SetupGated,
 		application.SetupGated,
 		applicationnetworkruleset.SetupGated,
 		accesspolicy.SetupGated,

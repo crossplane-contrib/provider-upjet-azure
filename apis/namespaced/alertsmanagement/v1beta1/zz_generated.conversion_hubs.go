@@ -13,4 +13,7 @@ func (tr *MonitorAlertProcessingRuleActionGroup) Hub() {}
 func (tr *MonitorAlertProcessingRuleSuppression) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *MonitorAlertPrometheusRuleGroup) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *MonitorSmartDetectorAlertRule) Hub() {}

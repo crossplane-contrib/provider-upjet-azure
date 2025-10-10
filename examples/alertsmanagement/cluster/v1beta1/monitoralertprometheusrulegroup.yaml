@@ -1,0 +1,126 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: alertsmanagement.azure.upbound.io/v1beta1
+kind: MonitorAlertPrometheusRuleGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: alertsmanagement/v1beta1/monitoralertprometheusrulegroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    clusterNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    description: This is the description of the following rule group
+    interval: PT1M
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    rule:
+    - enabled: false
+      expression: |
+        histogram_quantile(0.99, sum(rate(jobs_duration_seconds_bucket{service="billing-processing"}[5m])) by (job_type))
+      labels:
+        team: prod
+      record: job_type:billing_jobs_duration_seconds:99p5m
+    - action:
+      - actionGroupIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
+      alert: Billing_Processing_Very_Slow
+      alertResolution:
+        autoResolved: true
+        timeToResolve: PT10M
+      annotations:
+        annotationName: annotationValue
+      enabled: true
+      expression: |
+        histogram_quantile(0.99, sum(rate(jobs_duration_seconds_bucket{service="billing-processing"}[5m])) by (job_type))
+      for: PT5M
+      labels:
+        team: prod
+      severity: 2
+    ruleGroupEnabled: false
+    scopesSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: containerservice.azure.upbound.io/v1beta1
+kind: KubernetesCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: alertsmanagement/v1beta1/monitoralertprometheusrulegroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    defaultNodePool:
+    - enableHostEncryption: false
+      name: default
+      nodeCount: 1
+      vmSize: Standard_D2_v2
+      upgradeSettings:
+      - maxSurge: '10%'
+    dnsPrefix: dns
+    identity:
+    - type: SystemAssigned
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: insights.azure.upbound.io/v1beta2
+kind: MonitorActionGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: alertsmanagement/v1beta1/monitoralertprometheusrulegroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: promrulegroup
+spec:
+  forProvider:
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    shortName: prgag
+
+---
+
+apiVersion: insights.azure.upbound.io/v1beta1
+kind: MonitorWorkspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: alertsmanagement/v1beta1/monitoralertprometheusrulegroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: promrulegroup
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: alertsmanagement/v1beta1/monitoralertprometheusrulegroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: examplemonitalertpromrulegroup
+spec:
+  forProvider:
+    location: West Europe
