@@ -394,7 +394,7 @@ spec:
                         items:
                           type: string
                         type: array
-                        x-kubernetes-list-type: set
+                        x-kubernetes-list-type: atomic
                       virtualNetworkSubnetIdsRefs:
                         description: References to Subnet in network to populate virtualNetworkSubnetIds.
                         items:
@@ -1177,7 +1177,7 @@ spec:
                         items:
                           type: string
                         type: array
-                        x-kubernetes-list-type: set
+                        x-kubernetes-list-type: atomic
                       virtualNetworkSubnetIdsRefs:
                         description: References to Subnet in network to populate virtualNetworkSubnetIds.
                         items:
@@ -1947,7 +1947,7 @@ spec:
                         items:
                           type: string
                         type: array
-                        x-kubernetes-list-type: set
+                        x-kubernetes-list-type: atomic
                     type: object
                   nfsv3Enabled:
                     description: Is NFSv3 protocol enabled? Changing this forces a

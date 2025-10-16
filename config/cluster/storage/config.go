@@ -48,6 +48,12 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 
 			return diff, nil
 		}
+
+		r.ServerSideApplyMergeStrategies["network_rules.virtual_network_subnet_ids"] = config.MergeStrategy{
+			ListMergeStrategy: config.ListMergeStrategy{
+				MergeStrategy: config.ListTypeAtomic,
+			},
+		}
 	})
 
 	p.AddResourceConfigurator("azurerm_storage_blob", func(r *config.Resource) {

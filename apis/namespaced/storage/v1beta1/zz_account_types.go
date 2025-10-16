@@ -1241,7 +1241,7 @@ type NetworkRulesInitParameters struct {
 	// A list of resource ids for subnets.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
-	// +listType=set
+	// +listType=atomic
 	VirtualNetworkSubnetIds []*string `json:"virtualNetworkSubnetIds,omitempty" tf:"virtual_network_subnet_ids,omitempty"`
 
 	// References to Subnet in network to populate virtualNetworkSubnetIds.
@@ -1270,7 +1270,7 @@ type NetworkRulesObservation struct {
 	PrivateLinkAccess []PrivateLinkAccessObservation `json:"privateLinkAccess,omitempty" tf:"private_link_access,omitempty"`
 
 	// A list of resource ids for subnets.
-	// +listType=set
+	// +listType=atomic
 	VirtualNetworkSubnetIds []*string `json:"virtualNetworkSubnetIds,omitempty" tf:"virtual_network_subnet_ids,omitempty"`
 }
 
@@ -1298,7 +1298,7 @@ type NetworkRulesParameters struct {
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
-	// +listType=set
+	// +listType=atomic
 	VirtualNetworkSubnetIds []*string `json:"virtualNetworkSubnetIds,omitempty" tf:"virtual_network_subnet_ids,omitempty"`
 
 	// References to Subnet in network to populate virtualNetworkSubnetIds.
