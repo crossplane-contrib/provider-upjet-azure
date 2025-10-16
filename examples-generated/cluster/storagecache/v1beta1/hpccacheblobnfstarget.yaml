@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: storagecache.azure.upbound.io/v1beta1
 kind: HPCCacheBlobNFSTarget
 metadata:
@@ -183,7 +187,7 @@ spec:
     isHnsEnabled: true
     location: west europe
     networkRules:
-    - defaultAction: Deny
+      defaultAction: Deny
       virtualNetworkSubnetIdsRefs:
       - name: example
     nfsv3Enabled: true

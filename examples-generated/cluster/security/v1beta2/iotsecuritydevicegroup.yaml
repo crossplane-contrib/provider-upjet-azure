@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: security.azure.upbound.io/v1beta2
 kind: IOTSecurityDeviceGroup
 metadata:
@@ -9,7 +13,7 @@ metadata:
 spec:
   forProvider:
     allowRule:
-    - connectionToIpsNotAllowed:
+      connectionToIpsNotAllowed:
       - 10.0.0.0/24
     iothubIdSelector:
       matchLabels:
@@ -59,7 +63,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     sku:
-    - capacity: "1"
+      capacity: "1"
       name: S1
 
 ---

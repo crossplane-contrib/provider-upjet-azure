@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: recoveryservices.azure.m.upbound.io/v1beta1
 kind: BackupProtectedVM
 metadata:
@@ -34,7 +38,7 @@ metadata:
 spec:
   forProvider:
     backup:
-    - frequency: Daily
+      frequency: Daily
       time: "23:00"
     recoveryVaultNameSelector:
       matchLabels:
@@ -43,7 +47,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     retentionDaily:
-    - count: 10
+      count: 10
 
 ---
 

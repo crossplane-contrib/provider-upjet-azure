@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: dataprotection.azure.upbound.io/v1beta1
 kind: BackupInstancePostgreSQLFlexibleServer
 metadata:
@@ -34,7 +38,7 @@ spec:
     backupRepeatingTimeIntervals:
     - R/2021-05-23T02:30:00+00:00/P1W
     defaultRetentionRule:
-    - lifeCycle:
+      lifeCycle:
       - dataStoreType: VaultStore
         duration: P4M
     vaultIdSelector:
@@ -55,7 +59,7 @@ spec:
   forProvider:
     datastoreType: VaultStore
     identity:
-    - type: SystemAssigned
+      type: SystemAssigned
     location: West Europe
     redundancy: LocallyRedundant
     resourceGroupNameSelector:

@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: appplatform.azure.m.upbound.io/v1beta1
 kind: SpringCloudCustomizedAccelerator
 metadata:
@@ -15,7 +19,7 @@ spec:
     description: example description
     displayName: example name
     gitRepository:
-    - gitTag: spring.version.2.0.3
+      gitTag: spring.version.2.0.3
       intervalInSeconds: 100
       url: https://github.com/Azure-Samples/piggymetrics
     iconUrl: https://images.freecreatives.com/wp-content/uploads/2015/05/smiley-559124_640.jpg

@@ -15,6 +15,7 @@ import (
 
 	"github.com/alecthomas/kingpin/v2"
 	ujconfig "github.com/crossplane/upjet/v2/pkg/config"
+	"github.com/crossplane/upjet/v2/pkg/examples/conversion"
 	"github.com/crossplane/upjet/v2/pkg/pipeline"
 	"github.com/hashicorp/terraform-provider-azurerm/xpprovider"
 
@@ -47,6 +48,9 @@ func main() {
 	dumpGeneratedResourceList(pc, generatedResourceList)
 	dumpSkippedResourcesCSV(pc, skippedResourcesCSV)
 	pipeline.Run(pc, pns, absRootDir)
+
+	kingpin.FatalIfError(conversion.ApplyAPIConverters(pc, "../examples-generated/cluster", "../hack/boilerplate.yaml.txt"), "Cannot convert singleton lists to embedded objects in example cluster-scoped resource manifests.")
+	kingpin.FatalIfError(conversion.ApplyAPIConverters(pns, "../examples-generated/namespaced", "../hack/boilerplate.yaml.txt"), "Cannot convert singleton lists to embedded objects in example namespace-scoped resource manifests.")
 }
 
 func dumpGeneratedResourceList(p *ujconfig.Provider, targetPath *string) {

@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: network.azure.upbound.io/v1beta2
 kind: ExpressRouteCircuitPeering
 metadata:
@@ -13,14 +17,14 @@ spec:
         testing.upbound.io/example-name: example
     ipv4Enabled: true
     ipv6:
-    - enabled: true
+      enabled: true
       microsoftPeering:
-      - advertisedPublicPrefixes:
+        advertisedPublicPrefixes:
         - 2002:db01::/126
       primaryPeerAddressPrefix: 2002:db01::/126
       secondaryPeerAddressPrefix: 2003:db01::/126
     microsoftPeeringConfig:
-    - advertisedPublicPrefixes:
+      advertisedPublicPrefixes:
       - 123.1.0.0/24
     peerAsn: 100
     primaryPeerAddressPrefix: 123.0.0.0/30
@@ -51,7 +55,7 @@ spec:
         testing.upbound.io/example-name: example
     serviceProviderName: Equinix
     sku:
-    - family: MeteredData
+      family: MeteredData
       tier: Standard
     tags:
       environment: Production

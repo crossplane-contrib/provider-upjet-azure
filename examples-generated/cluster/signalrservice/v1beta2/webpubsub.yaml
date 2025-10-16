@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: signalrservice.azure.upbound.io/v1beta2
 kind: WebPubsub
 metadata:
@@ -10,9 +14,9 @@ spec:
   forProvider:
     capacity: 1
     identity:
-    - type: SystemAssigned
+      type: SystemAssigned
     liveTrace:
-    - connectivityLogsEnabled: false
+      connectivityLogsEnabled: false
       enabled: true
       messagingLogsEnabled: true
     location: West Europe

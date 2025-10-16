@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: insights.azure.upbound.io/v1beta2
 kind: MonitorScheduledQueryRulesAlertV2
 metadata:
@@ -9,7 +13,7 @@ metadata:
 spec:
   forProvider:
     action:
-    - actionGroupsRefs:
+      actionGroupsRefs:
       - name: example
       customProperties:
         key: value
@@ -22,7 +26,7 @@ spec:
         values:
         - "123"
       failingPeriods:
-      - minimumFailingPeriodsToTriggerAlert: 1
+        minimumFailingPeriodsToTriggerAlert: 1
         numberOfEvaluationPeriods: 1
       metricMeasureColumn: CountByCountry
       operator: LessThan
@@ -37,7 +41,7 @@ spec:
     enabled: true
     evaluationFrequency: PT10M
     identity:
-    - identityIdsRefs:
+      identityIdsRefs:
       - name: example
       type: UserAssigned
     location: West Europe

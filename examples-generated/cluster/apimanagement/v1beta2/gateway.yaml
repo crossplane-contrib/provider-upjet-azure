@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: apimanagement.azure.upbound.io/v1beta2
 kind: Gateway
 metadata:
@@ -13,7 +17,7 @@ spec:
         testing.upbound.io/example-name: example
     description: Example API Management gateway
     locationData:
-    - city: example city
+      city: example city
       district: example district
       name: example name
       region: example region

@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: network.azure.m.upbound.io/v1beta1
 kind: PrivateDNSResolverForwardingRule
 metadata:
@@ -117,7 +121,7 @@ spec:
     delegation:
     - name: Microsoft.Network.dnsResolvers
       serviceDelegation:
-      - actions:
+        actions:
         - Microsoft.Network/virtualNetworks/subnets/join/action
         name: Microsoft.Network/dnsResolvers
     resourceGroupNameSelector:

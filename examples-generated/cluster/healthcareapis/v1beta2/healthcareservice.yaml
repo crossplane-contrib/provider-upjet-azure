@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: healthcareapis.azure.upbound.io/v1beta2
 kind: HealthcareService
 metadata:
@@ -10,12 +14,12 @@ spec:
   forProvider:
     accessPolicyObjectIds: ${data.azurerm_client_config.current.object_id}
     authenticationConfiguration:
-    - audience: https://azurehealthcareapis.com/
+      audience: https://azurehealthcareapis.com/
       authority: https://login.microsoftonline.com/$%7Bdata.azurerm_client_config.current.tenant_id%7D
       smartProxyEnabled: "true"
     configurationExportStorageAccountName: teststorage
     corsConfiguration:
-    - allowCredentials: "true"
+      allowCredentials: "true"
       allowedHeaders:
       - x-tempo-*
       - x-tempo2-*
@@ -28,7 +32,7 @@ spec:
       maxAgeInSeconds: "500"
     cosmosdbThroughput: "2000"
     identity:
-    - type: SystemAssigned
+      type: SystemAssigned
     kind: fhir-R4
     location: westus2
     resourceGroupNameSelector:

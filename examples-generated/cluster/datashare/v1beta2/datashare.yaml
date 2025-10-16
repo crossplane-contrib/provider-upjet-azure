@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: datashare.azure.upbound.io/v1beta2
 kind: DataShare
 metadata:
@@ -14,7 +18,7 @@ spec:
     description: example desc
     kind: CopyBased
     snapshotSchedule:
-    - name: example-ss
+      name: example-ss
       recurrence: Day
       startTime: "2020-04-17T04:47:52.9614956Z"
     terms: example terms
@@ -32,7 +36,7 @@ metadata:
 spec:
   forProvider:
     identity:
-    - type: SystemAssigned
+      type: SystemAssigned
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:

@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: kusto.azure.m.upbound.io/v1beta1
 kind: AttachedDatabaseConfiguration
 metadata:
@@ -24,7 +28,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     sharing:
-    - externalTablesToExclude:
+      externalTablesToExclude:
       - ExternalTable2
       externalTablesToInclude:
       - ExternalTable1
@@ -55,7 +59,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     sku:
-    - capacity: 1
+      capacity: 1
       name: Dev(No SLA)_Standard_D11_v2
 
 ---
@@ -76,7 +80,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     sku:
-    - capacity: 1
+      capacity: 1
       name: Dev(No SLA)_Standard_D11_v2
 
 ---

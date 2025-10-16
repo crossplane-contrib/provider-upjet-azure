@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: signalrservice.azure.upbound.io/v1beta2
 kind: WebPubsubHub
 metadata:
@@ -16,7 +20,7 @@ spec:
       urlTemplate: https://test.com/api/{hub}/{event}
       userEventPattern: '*'
     - auth:
-      - managedIdentityIdSelector:
+        managedIdentityIdSelector:
           matchLabels:
             testing.upbound.io/example-name: example
       systemEvents:

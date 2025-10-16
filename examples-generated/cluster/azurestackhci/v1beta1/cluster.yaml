@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: azurestackhci.azure.upbound.io/v1beta1
 kind: Cluster
 metadata:
@@ -10,7 +14,7 @@ spec:
   forProvider:
     clientId: ${data.azuread_application.example.application_id}
     identity:
-    - type: SystemAssigned
+      type: SystemAssigned
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:

@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: netapp.azure.upbound.io/v1beta2
 kind: Account
 metadata:
@@ -9,7 +13,7 @@ metadata:
 spec:
   forProvider:
     activeDirectory:
-    - dnsServers:
+      dnsServers:
       - 1.2.3.4
       domain: westcentralus.com
       organizationalUnit: OU=FirstLevel
@@ -20,7 +24,7 @@ spec:
       smbServerName: SMBSERVER
       username: aduser
     identity:
-    - identityIdsRefs:
+      identityIdsRefs:
       - name: example
       type: UserAssigned
     location: West Europe

@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: storage.azure.upbound.io/v1beta2
 kind: AccountLocalUser
 metadata:
@@ -11,7 +15,7 @@ spec:
     homeDirectory: example_path
     permissionScope:
     - permissions:
-      - create: true
+        create: true
         read: true
       resourceNameSelector:
         matchLabels:

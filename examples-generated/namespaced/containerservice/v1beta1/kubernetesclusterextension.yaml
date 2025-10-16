@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: containerservice.azure.m.upbound.io/v1beta1
 kind: KubernetesClusterExtension
 metadata:
@@ -28,12 +32,12 @@ metadata:
 spec:
   forProvider:
     defaultNodePool:
-    - name: default
+      name: default
       nodeCount: 1
       vmSize: Standard_DS2_v2
     dnsPrefix: example-aks
     identity:
-    - type: SystemAssigned
+      type: SystemAssigned
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:

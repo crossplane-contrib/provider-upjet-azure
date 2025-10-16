@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: cdn.azure.m.upbound.io/v1beta1
 kind: FrontdoorRule
 metadata:
@@ -10,8 +14,8 @@ metadata:
 spec:
   forProvider:
     actions:
-    - routeConfigurationOverrideAction:
-      - cacheBehavior: OverrideIfOriginMissing
+      routeConfigurationOverrideAction:
+        cacheBehavior: OverrideIfOriginMissing
         cacheDuration: 365.23:59:59
         cdnFrontdoorOriginGroupIdSelector:
           matchLabels:
@@ -23,7 +27,7 @@ spec:
         - foo
         - clientIp={client_ip}
       urlRedirectAction:
-      - destinationFragment: UrlRedirect
+        destinationFragment: UrlRedirect
         destinationHostname: contoso.com
         destinationPath: /exampleredirection
         queryString: clientIp={client_ip}
@@ -34,7 +38,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     conditions:
-    - hostNameCondition:
+      hostNameCondition:
       - matchValues:
         - www.contoso.com
         - images.contoso.com
@@ -138,12 +142,12 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     healthProbe:
-    - intervalInSeconds: 240
+      intervalInSeconds: 240
       path: /healthProbe
       protocol: Https
       requestType: GET
     loadBalancing:
-    - additionalLatencyInMilliseconds: 0
+      additionalLatencyInMilliseconds: 0
       sampleSize: 16
       successfulSamplesRequired: 3
     restoreTrafficTimeToHealedOrNewEndpointInMinutes: 10

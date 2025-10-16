@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: cdn.azure.m.upbound.io/v1beta1
 kind: FrontdoorCustomDomainAssociation
 metadata:
@@ -36,7 +40,7 @@ spec:
         testing.upbound.io/example-name: example
     hostName: ${join(".", ["contoso", azurerm_dns_zone.example.name])}
     tls:
-    - certificateType: ManagedCertificate
+      certificateType: ManagedCertificate
       minimumTlsVersion: TLS12
 
 ---
@@ -102,12 +106,12 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     healthProbe:
-    - intervalInSeconds: 240
+      intervalInSeconds: 240
       path: /healthProbe
       protocol: Https
       requestType: HEAD
     loadBalancing:
-    - additionalLatencyInMilliseconds: 0
+      additionalLatencyInMilliseconds: 0
       sampleSize: 16
       successfulSamplesRequired: 3
     restoreTrafficTimeToHealedOrNewEndpointInMinutes: 10

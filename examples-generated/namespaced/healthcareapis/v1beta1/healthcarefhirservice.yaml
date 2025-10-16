@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: healthcareapis.azure.m.upbound.io/v1beta1
 kind: HealthcareFHIRService
 metadata:
@@ -12,13 +16,13 @@ spec:
     accessPolicyObjectIds:
     - ${data.azurerm_client_config.current.object_id}
     authentication:
-    - audience: https://tfexfhir.fhir.azurehealthcareapis.com
+      audience: https://tfexfhir.fhir.azurehealthcareapis.com
       authority: https://login.microsoftonline.com/tenantId
     configurationExportStorageAccountName: storage_account_name
     containerRegistryLoginServerUrl:
     - tfex-container_registry_login_server
     cors:
-    - allowedHeaders:
+      allowedHeaders:
       - '*'
       allowedMethods:
       - GET
@@ -30,7 +34,7 @@ spec:
       credentialsAllowed: true
       maxAgeInSeconds: 3600
     identity:
-    - type: SystemAssigned
+      type: SystemAssigned
     kind: fhir-R4
     location: east us
     resourceGroupNameSelector:

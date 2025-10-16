@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: storage.azure.upbound.io/v1beta1
 kind: EncryptionScope
 metadata:
@@ -42,7 +46,7 @@ spec:
     accountReplicationType: LRS
     accountTier: Standard
     identity:
-    - type: SystemAssigned
+      type: SystemAssigned
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:

@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: kusto.azure.upbound.io/v1beta1
 kind: EventGridDataConnection
 metadata:
@@ -50,7 +54,7 @@ spec:
     - Microsoft.Storage.BlobRenamed
     name: eventgrid-example
     retryPolicy:
-    - eventTimeToLive: 144
+      eventTimeToLive: 144
       maxDeliveryAttempts: 10
     scopeSelector:
       matchLabels:
@@ -134,7 +138,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     sku:
-    - capacity: 2
+      capacity: 2
       name: Standard_D13_v2
 
 ---

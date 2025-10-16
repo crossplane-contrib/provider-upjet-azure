@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: authorization.azure.m.upbound.io/v1beta1
 kind: PimActiveRoleAssignment
 metadata:
@@ -13,12 +17,12 @@ spec:
     principalId: ${data.azurerm_client_config.example.object_id}
     roleDefinitionId: ${data.azurerm_subscription.primary.id}${data.azurerm_role_definition.example.id}
     schedule:
-    - expiration:
-      - durationHours: 8
+      expiration:
+        durationHours: 8
       startDateTime: ${time_static.example.rfc3339}
     scopeSelector:
       matchLabels:
         testing.upbound.io/example-name: azurerm_subscription
     ticket:
-    - number: "1"
+      number: "1"
       system: example ticket system

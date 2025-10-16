@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: dbforpostgresql.azure.m.upbound.io/v1beta1
 kind: FlexibleServerActiveDirectoryAdministrator
 metadata:
@@ -38,7 +42,7 @@ spec:
       key: example-key
       name: example-secret
     authentication:
-    - activeDirectoryAuthEnabled: true
+      activeDirectoryAuthEnabled: true
       tenantId: ${data.azurerm_client_config.current.tenant_id}
     location: West Europe
     resourceGroupNameSelector:
