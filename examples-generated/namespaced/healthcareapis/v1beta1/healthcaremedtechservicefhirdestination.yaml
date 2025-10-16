@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: healthcareapis.azure.m.upbound.io/v1beta1
 kind: HealthcareMedtechServiceFHIRDestination
 metadata:
@@ -122,7 +126,7 @@ metadata:
 spec:
   forProvider:
     authentication:
-    - audience: https://examplefhir.fhir.azurehealthcareapis.com
+      audience: https://examplefhir.fhir.azurehealthcareapis.com
       authority: https://login.microsoftonline.com/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
     kind: fhir-R4
     location: West Europe

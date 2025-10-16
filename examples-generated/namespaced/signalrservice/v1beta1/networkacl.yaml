@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: signalrservice.azure.m.upbound.io/v1beta1
 kind: NetworkACL
 metadata:
@@ -17,7 +21,7 @@ spec:
         matchLabels:
           testing.upbound.io/example-name: example
     publicNetwork:
-    - allowedRequestTypes:
+      allowedRequestTypes:
       - ClientConnection
     signalrServiceIdSelector:
       matchLabels:
@@ -38,7 +42,7 @@ spec:
   forProvider:
     location: West Europe
     privateServiceConnection:
-    - isManualConnection: false
+      isManualConnection: false
       name: psc-sig-test
       privateConnectionResourceId: ${azurerm_signalr_service.example.id}
       subresourceNames:
@@ -83,7 +87,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     sku:
-    - capacity: 1
+      capacity: 1
       name: Standard_S1
 
 ---

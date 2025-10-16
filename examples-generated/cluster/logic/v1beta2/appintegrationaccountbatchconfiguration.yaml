@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: logic.azure.upbound.io/v1beta2
 kind: AppIntegrationAccountBatchConfiguration
 metadata:
@@ -14,7 +18,7 @@ spec:
         testing.upbound.io/example-name: example
     name: exampleiabc
     releaseCriteria:
-    - messageCount: 80
+      messageCount: 80
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example

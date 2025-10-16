@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: resources.azure.upbound.io/v1beta2
 kind: ResourceDeploymentScriptAzurePowerShell
 metadata:
@@ -12,7 +16,7 @@ spec:
     commandLine: -name "John Dole"
     forceUpdateTag: "1"
     identity:
-    - identityIdsRefs:
+      identityIdsRefs:
       - name: example
       type: UserAssigned
     location: West Europe

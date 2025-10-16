@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: cosmosdb.azure.m.upbound.io/v1beta1
 kind: SQLDedicatedGateway
 metadata:
@@ -29,7 +33,7 @@ metadata:
 spec:
   forProvider:
     consistencyPolicy:
-    - consistencyLevel: BoundedStaleness
+      consistencyLevel: BoundedStaleness
     geoLocation:
     - failoverPriority: 0
       location: West Europe

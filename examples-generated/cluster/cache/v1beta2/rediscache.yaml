@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: cache.azure.upbound.io/v1beta2
 kind: RedisCache
 metadata:
@@ -13,8 +17,7 @@ spec:
     location: West Europe
     minimumTlsVersion: "1.2"
     nonSslPortEnabled: false
-    redisConfiguration:
-    - {}
+    redisConfiguration: {}
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example

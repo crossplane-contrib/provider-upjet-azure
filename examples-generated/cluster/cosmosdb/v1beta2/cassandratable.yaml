@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: cosmosdb.azure.upbound.io/v1beta2
 kind: CassandraTable
 metadata:
@@ -12,7 +16,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     schema:
-    - column:
+      column:
       - name: test1
         type: ascii
       - name: test2
@@ -35,7 +39,7 @@ spec:
     capabilities:
     - name: EnableCassandra
     consistencyPolicy:
-    - consistencyLevel: Strong
+      consistencyLevel: Strong
     geoLocation:
     - failoverPriority: 0
       location: West Europe

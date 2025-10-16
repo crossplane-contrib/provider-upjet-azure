@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: sql.azure.m.upbound.io/v1beta1
 kind: MSSQLElasticPool
 metadata:
@@ -13,7 +17,7 @@ spec:
     location: West Europe
     maxSizeGb: 756
     perDatabaseSettings:
-    - maxCapacity: 4
+      maxCapacity: 4
       minCapacity: 0.25
     resourceGroupNameSelector:
       matchLabels:
@@ -22,7 +26,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     sku:
-    - capacity: 4
+      capacity: 4
       family: Gen4
       name: BasicPool
       tier: Basic

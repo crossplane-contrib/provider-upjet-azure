@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: datafactory.azure.upbound.io/v1beta2
 kind: DataFlow
 metadata:
@@ -17,21 +21,21 @@ spec:
       \n  skipDuplicateMapInputs: true, \n  skipDuplicateMapOutputs: true) ~> sink1\n"
     sink:
     - dataset:
-      - nameSelector:
+        nameSelector:
           matchLabels:
             testing.upbound.io/example-name: example2
       flowlet:
-      - name: ${azurerm_data_factory_flowlet_data_flow.example2.name}
+        name: ${azurerm_data_factory_flowlet_data_flow.example2.name}
         parameters:
           Key1: value1
       name: sink1
     source:
     - dataset:
-      - nameSelector:
+        nameSelector:
           matchLabels:
             testing.upbound.io/example-name: example1
       flowlet:
-      - name: ${azurerm_data_factory_flowlet_data_flow.example1.name}
+        name: ${azurerm_data_factory_flowlet_data_flow.example1.name}
         parameters:
           Key1: value1
       name: source1
@@ -66,7 +70,7 @@ metadata:
 spec:
   forProvider:
     azureBlobStorageLocation:
-    - container: container
+      container: container
       filename: foo.txt
       path: foo/bar/
     dataFactoryIdSelector:
@@ -90,7 +94,7 @@ metadata:
 spec:
   forProvider:
     azureBlobStorageLocation:
-    - container: container
+      container: container
       filename: bar.txt
       path: foo/bar/
     dataFactoryIdSelector:

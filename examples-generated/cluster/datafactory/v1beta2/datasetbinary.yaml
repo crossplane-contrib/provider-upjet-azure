@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: datafactory.azure.upbound.io/v1beta2
 kind: DataSetBinary
 metadata:
@@ -15,7 +19,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     sftpServerLocation:
-    - filename: '**'
+      filename: '**'
       path: /test/
 
 ---

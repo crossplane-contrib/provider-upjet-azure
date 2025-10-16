@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: sql.azure.m.upbound.io/v1beta1
 kind: MSSQLManagedInstanceTransparentDataEncryption
 metadata:
@@ -31,7 +35,7 @@ spec:
       key: example-key
       name: example-secret
     identity:
-    - type: SystemAssigned
+      type: SystemAssigned
     licenseType: BasePrice
     location: EastUs
     resourceGroupNameSelector:
@@ -77,7 +81,7 @@ spec:
     delegation:
     - name: managedinstancedelegation
       serviceDelegation:
-      - actions:
+        actions:
         - Microsoft.Network/virtualNetworks/subnets/join/action
         - Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action
         - Microsoft.Network/virtualNetworks/subnets/unprepareNetworkPolicies/action

@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: containerapp.azure.m.upbound.io/v1beta1
 kind: CustomDomain
 metadata:
@@ -34,7 +38,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     ingress:
-    - allowInsecureConnections: false
+      allowInsecureConnections: false
       externalEnabled: true
       targetPort: 5000
       trafficWeight:
@@ -46,7 +50,7 @@ spec:
         testing.upbound.io/example-name: example
     revisionMode: Single
     template:
-    - container:
+      container:
       - cpu: 0.25
         image: mcr.microsoft.com/k8se/quickstart:latest
         memory: 0.5Gi

@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: cache.azure.upbound.io/v1beta1
 kind: RedisLinkedServer
 metadata:
@@ -37,7 +41,7 @@ spec:
     family: P
     location: East US
     redisConfiguration:
-    - maxmemoryDelta: 2
+      maxmemoryDelta: 2
       maxmemoryPolicy: allkeys-lru
       maxmemoryReserved: 2
     resourceGroupNameSelector:
@@ -62,7 +66,7 @@ spec:
     family: P
     location: West US
     redisConfiguration:
-    - maxmemoryDelta: 2
+      maxmemoryDelta: 2
       maxmemoryPolicy: allkeys-lru
       maxmemoryReserved: 2
     resourceGroupNameSelector:

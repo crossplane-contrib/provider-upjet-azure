@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: hdinsight.azure.m.upbound.io/v1beta1
 kind: KafkaCluster
 metadata:
@@ -11,9 +15,9 @@ spec:
   forProvider:
     clusterVersion: "4.0"
     componentVersion:
-    - kafka: "2.1"
+      kafka: "2.1"
     gateway:
-    - passwordSecretRef:
+      passwordSecretRef:
         key: example-key
         name: example-secret
       username: acctestusrgw
@@ -22,14 +26,14 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     roles:
-    - headNode:
-      - passwordSecretRef:
+      headNode:
+        passwordSecretRef:
           key: example-key
           name: example-secret
         username: acctestusrvm
         vmSize: Standard_D3_V2
       workerNode:
-      - numberOfDisksPerNode: 3
+        numberOfDisksPerNode: 3
         passwordSecretRef:
           key: example-key
           name: example-secret
@@ -37,7 +41,7 @@ spec:
         username: acctestusrvm
         vmSize: Standard_D3_V2
       zookeeperNode:
-      - passwordSecretRef:
+        passwordSecretRef:
           key: example-key
           name: example-secret
         username: acctestusrvm

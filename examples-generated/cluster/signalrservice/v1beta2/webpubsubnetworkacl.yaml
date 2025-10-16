@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: signalrservice.azure.upbound.io/v1beta2
 kind: WebPubsubNetworkACL
 metadata:
@@ -17,7 +21,7 @@ spec:
         matchLabels:
           testing.upbound.io/example-name: example
     publicNetwork:
-    - deniedRequestTypes:
+      deniedRequestTypes:
       - ClientConnection
     webPubsubIdSelector:
       matchLabels:
@@ -37,7 +41,7 @@ spec:
   forProvider:
     location: east us
     privateServiceConnection:
-    - isManualConnection: false
+      isManualConnection: false
       name: psc-sig-test
       privateConnectionResourceId: ${azurerm_web_pubsub.example.id}
       subresourceNames:

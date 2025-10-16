@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: appplatform.azure.m.upbound.io/v1beta1
 kind: SpringCloudGateway
 metadata:
@@ -10,13 +14,13 @@ metadata:
 spec:
   forProvider:
     apiMetadata:
-    - description: example description
+      description: example description
       documentationUrl: https://www.example.com/docs
       serverUrl: https://wwww.example.com
       title: example title
       version: "1.0"
     cors:
-    - allowedHeaders:
+      allowedHeaders:
       - '*'
       allowedMethods:
       - PUT
@@ -29,17 +33,17 @@ spec:
     httpsOnly: false
     instanceCount: 2
     localResponseCachePerInstance:
-    - size: 100MB
+      size: 100MB
       timeToLive: 30s
     publicNetworkAccessEnabled: true
     quota:
-    - cpu: "1"
+      cpu: "1"
       memory: 2Gi
     springCloudServiceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
     sso:
-    - clientId: example id
+      clientId: example id
       clientSecret: example secret
       issuerUri: https://www.test.com/issueToken
       scope:

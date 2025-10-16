@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: authorization.azure.m.upbound.io/v1beta1
 kind: SubscriptionPolicyExemption
 metadata:
@@ -29,7 +33,7 @@ metadata:
 spec:
   forProvider:
     identity:
-    - type: SystemAssigned
+      type: SystemAssigned
     location: westus
     policyDefinitionIdSelector:
       matchLabels:

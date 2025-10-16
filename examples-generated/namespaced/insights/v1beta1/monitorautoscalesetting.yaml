@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: insights.azure.m.upbound.io/v1beta1
 kind: MonitorAutoscaleSetting
 metadata:
@@ -12,23 +16,23 @@ spec:
     location: West Europe
     name: myAutoscaleSetting
     notification:
-    - email:
-      - customEmails:
+      email:
+        customEmails:
         - admin@contoso.com
         sendToSubscriptionAdministrator: true
         sendToSubscriptionCoAdministrator: true
     predictive:
-    - lookAheadTime: PT5M
+      lookAheadTime: PT5M
       scaleMode: Enabled
     profile:
     - capacity:
-      - default: 1
+        default: 1
         maximum: 10
         minimum: 1
       name: defaultProfile
       rule:
       - metricTrigger:
-        - dimensions:
+          dimensions:
           - name: AppName
             operator: Equals
             values:
@@ -45,12 +49,12 @@ spec:
           timeGrain: PT1M
           timeWindow: PT5M
         scaleAction:
-        - cooldown: PT1M
+          cooldown: PT1M
           direction: Increase
           type: ChangeCount
           value: "1"
       - metricTrigger:
-        - metricName: Percentage CPU
+          metricName: Percentage CPU
           metricResourceIdSelector:
             matchLabels:
               testing.upbound.io/example-name: example
@@ -61,7 +65,7 @@ spec:
           timeGrain: PT1M
           timeWindow: PT5M
         scaleAction:
-        - cooldown: PT1M
+          cooldown: PT1M
           direction: Decrease
           type: ChangeCount
           value: "1"
@@ -102,14 +106,14 @@ spec:
       name: TestNetworkProfile
       primary: true
     osDisk:
-    - caching: ReadWrite
+      caching: ReadWrite
       storageAccountType: StandardSSD_LRS
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
     sku: Standard_F2
     sourceImageReference:
-    - offer: 0001-com-ubuntu-server-jammy
+      offer: 0001-com-ubuntu-server-jammy
       publisher: Canonical
       sku: 22_04-lts
       version: latest

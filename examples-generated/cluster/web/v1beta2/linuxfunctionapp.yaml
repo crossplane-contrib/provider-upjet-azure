@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: web.azure.upbound.io/v1beta2
 kind: LinuxFunctionApp
 metadata:
@@ -16,8 +20,7 @@ spec:
     servicePlanIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    siteConfig:
-    - {}
+    siteConfig: {}
     storageAccountAccessKeySecretRef:
       key: attribute.primary_access_key
       name: example-storage-account

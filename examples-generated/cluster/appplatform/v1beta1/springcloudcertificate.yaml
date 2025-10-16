@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: appplatform.azure.upbound.io/v1beta1
 kind: SpringCloudCertificate
 metadata:
@@ -51,22 +55,22 @@ metadata:
 spec:
   forProvider:
     certificatePolicy:
-    - issuerParameters:
-      - name: Self
+      issuerParameters:
+        name: Self
       keyProperties:
-      - exportable: true
+        exportable: true
         keySize: 2048
         keyType: RSA
         reuseKey: true
       lifetimeAction:
       - action:
-        - actionType: AutoRenew
+          actionType: AutoRenew
         trigger:
-        - daysBeforeExpiry: 30
+          daysBeforeExpiry: 30
       secretProperties:
-      - contentType: application/x-pkcs12
+        contentType: application/x-pkcs12
       x509CertificateProperties:
-      - keyUsage:
+        keyUsage:
         - cRLSign
         - dataEncipherment
         - digitalSignature

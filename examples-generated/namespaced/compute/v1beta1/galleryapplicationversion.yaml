@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: compute.azure.m.upbound.io/v1beta1
 kind: GalleryApplicationVersion
 metadata:
@@ -14,11 +18,11 @@ spec:
         testing.upbound.io/example-name: example
     location: West Europe
     manageAction:
-    - install: '[install command]'
+      install: '[install command]'
       remove: '[remove command]'
     name: 0.0.1
     source:
-    - mediaLinkSelector:
+      mediaLinkSelector:
         matchLabels:
           testing.upbound.io/example-name: example
     targetRegion:

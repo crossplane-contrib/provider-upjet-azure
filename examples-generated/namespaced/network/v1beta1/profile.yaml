@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: network.azure.m.upbound.io/v1beta1
 kind: Profile
 metadata:
@@ -10,7 +14,7 @@ metadata:
 spec:
   forProvider:
     containerNetworkInterface:
-    - ipConfiguration:
+      ipConfiguration:
       - name: exampleipconfig
         subnetIdSelector:
           matchLabels:
@@ -54,7 +58,7 @@ spec:
     delegation:
     - name: delegation
       serviceDelegation:
-      - actions:
+        actions:
         - Microsoft.Network/virtualNetworks/subnets/action
         name: Microsoft.ContainerInstance/containerGroups
     resourceGroupNameSelector:

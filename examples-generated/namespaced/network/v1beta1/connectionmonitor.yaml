@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: network.azure.m.upbound.io/v1beta1
 kind: ConnectionMonitor
 metadata:
@@ -11,7 +15,7 @@ spec:
   forProvider:
     endpoint:
     - filter:
-      - item:
+        item:
         - address: ${azurerm_virtual_machine.example.id}
           type: AgentAddress
         type: Include
@@ -30,7 +34,7 @@ spec:
     - name: tcpName
       protocol: Tcp
       tcpConfiguration:
-      - port: 80
+        port: 80
       testFrequencyInSeconds: 60
     testGroup:
     - destinationEndpoints:

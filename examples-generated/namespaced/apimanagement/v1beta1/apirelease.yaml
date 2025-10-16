@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: apimanagement.azure.m.upbound.io/v1beta1
 kind: APIRelease
 metadata:
@@ -52,7 +56,7 @@ spec:
         testing.upbound.io/example-name: example
     displayName: Example API
     import:
-    - contentFormat: swagger-link-json
+      contentFormat: swagger-link-json
       contentValue: https://raw.githubusercontent.com/hashicorp/terraform-provider-azurerm/refs/heads/main/internal/services/apimanagement/testdata/api_management_api_swagger.json
     path: example
     protocols:

@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: alertsmanagement.azure.m.upbound.io/v1beta1
 kind: MonitorAlertPrometheusRuleGroup
 metadata:
@@ -31,7 +35,7 @@ spec:
             testing.upbound.io/example-name: example
       alert: Billing_Processing_Very_Slow
       alertResolution:
-      - autoResolved: true
+        autoResolved: true
         timeToResolve: PT10M
       annotations:
         annotationName: annotationValue
@@ -62,13 +66,13 @@ metadata:
 spec:
   forProvider:
     defaultNodePool:
-    - hostEncryptionEnabled: true
+      hostEncryptionEnabled: true
       name: default
       nodeCount: 1
       vmSize: Standard_DS2_v2
     dnsPrefix: example-aks
     identity:
-    - type: SystemAssigned
+      type: SystemAssigned
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:

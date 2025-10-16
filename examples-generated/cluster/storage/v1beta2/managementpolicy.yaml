@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: storage.azure.upbound.io/v1beta2
 kind: ManagementPolicy
 metadata:
@@ -10,15 +14,15 @@ spec:
   forProvider:
     rule:
     - actions:
-      - baseBlob:
-        - deleteAfterDaysSinceModificationGreaterThan: 100
+        baseBlob:
+          deleteAfterDaysSinceModificationGreaterThan: 100
           tierToArchiveAfterDaysSinceModificationGreaterThan: 50
           tierToCoolAfterDaysSinceModificationGreaterThan: 10
         snapshot:
-        - deleteAfterDaysSinceCreationGreaterThan: 30
+          deleteAfterDaysSinceCreationGreaterThan: 30
       enabled: true
       filters:
-      - blobTypes:
+        blobTypes:
         - blockBlob
         matchBlobIndexTag:
         - name: tag1
@@ -28,21 +32,21 @@ spec:
         - container1/prefix1
       name: rule1
     - actions:
-      - baseBlob:
-        - deleteAfterDaysSinceModificationGreaterThan: 101
+        baseBlob:
+          deleteAfterDaysSinceModificationGreaterThan: 101
           tierToArchiveAfterDaysSinceModificationGreaterThan: 51
           tierToCoolAfterDaysSinceModificationGreaterThan: 11
         snapshot:
-        - changeTierToArchiveAfterDaysSinceCreation: 90
+          changeTierToArchiveAfterDaysSinceCreation: 90
           changeTierToCoolAfterDaysSinceCreation: 23
           deleteAfterDaysSinceCreationGreaterThan: 31
         version:
-        - changeTierToArchiveAfterDaysSinceCreation: 9
+          changeTierToArchiveAfterDaysSinceCreation: 9
           changeTierToCoolAfterDaysSinceCreation: 90
           deleteAfterDaysSinceCreation: 3
       enabled: false
       filters:
-      - blobTypes:
+        blobTypes:
         - blockBlob
         prefixMatch:
         - container2/prefix1

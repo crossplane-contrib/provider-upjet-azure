@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: sql.azure.upbound.io/v1beta2
 kind: MSSQLManagedInstanceFailoverGroup
 metadata:
@@ -16,7 +20,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: failover
     readWriteEndpointFailoverPolicy:
-    - graceMinutes: 60
+      graceMinutes: 60
       mode: Automatic
     secondaryType: Geo
 
@@ -275,7 +279,7 @@ spec:
     delegation:
     - name: delegation
       serviceDelegation:
-      - actions:
+        actions:
         - Microsoft.Network/virtualNetworks/subnets/join/action
         - Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action
         - Microsoft.Network/virtualNetworks/subnets/unprepareNetworkPolicies/action
@@ -304,7 +308,7 @@ spec:
     delegation:
     - name: delegation
       serviceDelegation:
-      - actions:
+        actions:
         - Microsoft.Network/virtualNetworks/subnets/join/action
         - Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action
         - Microsoft.Network/virtualNetworks/subnets/unprepareNetworkPolicies/action

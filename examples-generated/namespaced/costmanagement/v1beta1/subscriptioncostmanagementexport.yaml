@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: costmanagement.azure.m.upbound.io/v1beta1
 kind: SubscriptionCostManagementExport
 metadata:
@@ -10,10 +14,10 @@ metadata:
 spec:
   forProvider:
     exportDataOptions:
-    - timeFrame: WeekToDate
+      timeFrame: WeekToDate
       type: Usage
     exportDataStorageLocation:
-    - containerIdSelector:
+      containerIdSelector:
         matchLabels:
           testing.upbound.io/example-name: example
       rootFolderPath: /root/updated

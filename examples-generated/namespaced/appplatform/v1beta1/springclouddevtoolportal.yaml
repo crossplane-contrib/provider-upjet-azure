@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: appplatform.azure.m.upbound.io/v1beta1
 kind: SpringCloudDevToolPortal
 metadata:
@@ -17,7 +21,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     sso:
-    - clientId: example id
+      clientId: example id
       clientSecret: example secret
       metadataUrl: https://login.microsoftonline.com/${data.azurerm_client_config.current.tenant_id}/v2.0/.well-known/openid-configuration
       scope:

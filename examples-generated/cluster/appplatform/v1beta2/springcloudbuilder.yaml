@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: appplatform.azure.upbound.io/v1beta2
 kind: SpringCloudBuilder
 metadata:
@@ -17,7 +21,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     stack:
-    - id: io.buildpacks.stacks.bionic
+      id: io.buildpacks.stacks.bionic
       version: base
 
 ---

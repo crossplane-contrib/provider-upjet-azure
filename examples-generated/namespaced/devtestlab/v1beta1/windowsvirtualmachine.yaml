@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: devtestlab.azure.m.upbound.io/v1beta1
 kind: WindowsVirtualMachine
 metadata:
@@ -10,7 +14,7 @@ metadata:
 spec:
   forProvider:
     galleryImageReference:
-    - offer: WindowsServer
+      offer: WindowsServer
       publisher: MicrosoftWindowsServer
       sku: 2019-Datacenter
       version: latest
@@ -77,7 +81,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     subnet:
-    - useInVirtualMachineCreation: Allow
+      useInVirtualMachineCreation: Allow
       usePublicIpAddress: Allow
 
 ---

@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: compute.azure.m.upbound.io/v1beta1
 kind: WindowsVirtualMachineScaleSet
 metadata:
@@ -26,14 +30,14 @@ spec:
       name: example
       primary: true
     osDisk:
-    - caching: ReadWrite
+      caching: ReadWrite
       storageAccountType: Standard_LRS
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
     sku: Standard_F2
     sourceImageReference:
-    - offer: WindowsServer
+      offer: WindowsServer
       publisher: MicrosoftWindowsServer
       sku: 2016-Datacenter-Server-Core
       version: latest

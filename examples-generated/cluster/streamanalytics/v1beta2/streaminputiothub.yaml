@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: streamanalytics.azure.upbound.io/v1beta2
 kind: StreamInputIOTHub
 metadata:
@@ -20,7 +24,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: azurerm_stream_analytics_job
     serialization:
-    - encoding: UTF8
+      encoding: UTF8
       type: Json
     sharedAccessPolicyKeySecretRef:
       key: attribute.shared_access_policy[0].primary_key
@@ -48,7 +52,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     sku:
-    - capacity: "1"
+      capacity: "1"
       name: S1
 
 ---

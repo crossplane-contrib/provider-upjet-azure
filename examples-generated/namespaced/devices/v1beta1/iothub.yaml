@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: devices.azure.m.upbound.io/v1beta1
 kind: IOTHub
 metadata:
@@ -10,7 +14,7 @@ metadata:
 spec:
   forProvider:
     cloudToDevice:
-    - defaultTtl: PT1H
+      defaultTtl: PT1H
       feedback:
       - lockDuration: PT30S
         maxDeliveryCount: 15
@@ -22,7 +26,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     sku:
-    - capacity: "1"
+      capacity: "1"
       name: S1
     tags:
       purpose: testing

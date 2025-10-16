@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: network.azure.upbound.io/v1beta2
 kind: FrontdoorCustomHTTPSConfiguration
 metadata:
@@ -49,7 +53,7 @@ spec:
       - Http
       - Https
       forwardingConfiguration:
-      - backendPoolName: exampleBackendBing
+        backendPoolName: exampleBackendBing
         forwardingProtocol: MatchRequest
       frontendEndpoints:
       - exampleFrontendEndpoint1

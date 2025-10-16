@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: machinelearningservices.azure.m.upbound.io/v1beta1
 kind: ComputeCluster
 metadata:
@@ -10,14 +14,14 @@ metadata:
 spec:
   forProvider:
     identity:
-    - type: SystemAssigned
+      type: SystemAssigned
     location: West Europe
     machineLearningWorkspaceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
     name: example
     scaleSettings:
-    - maxNodeCount: 1
+      maxNodeCount: 1
       minNodeCount: 0
       scaleDownNodesAfterIdleDuration: PT30S
     subnetResourceIdSelector:
@@ -83,7 +87,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     identity:
-    - type: SystemAssigned
+      type: SystemAssigned
     keyVaultIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example

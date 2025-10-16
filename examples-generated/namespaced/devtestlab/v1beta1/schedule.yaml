@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: devtestlab.azure.m.upbound.io/v1beta1
 kind: Schedule
 metadata:
@@ -13,8 +17,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     location: West Europe
-    notificationSettings:
-    - {}
+    notificationSettings: {}
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -24,7 +27,7 @@ spec:
     taskType: LabVmsStartupTask
     timeZoneId: Pacific Standard Time
     weeklyRecurrence:
-    - time: "1100"
+      time: "1100"
       weekDays:
       - Monday
       - Tuesday

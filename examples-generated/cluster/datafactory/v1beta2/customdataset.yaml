@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: datafactory.azure.upbound.io/v1beta2
 kind: CustomDataSet
 metadata:
@@ -21,7 +25,7 @@ spec:
     description: test description
     folder: testFolder
     linkedService:
-    - nameSelector:
+      nameSelector:
         matchLabels:
           testing.upbound.io/example-name: example
       parameters:
@@ -74,7 +78,7 @@ metadata:
 spec:
   forProvider:
     identity:
-    - type: SystemAssigned
+      type: SystemAssigned
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
