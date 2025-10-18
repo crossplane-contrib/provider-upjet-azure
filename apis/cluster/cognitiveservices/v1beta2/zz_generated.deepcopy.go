@@ -877,6 +877,18 @@ func (in *IdentityInitParameters) DeepCopyInto(out *IdentityInitParameters) {
 			}
 		}
 	}
+	if in.IdentityIdsRefs != nil {
+		in, out := &in.IdentityIdsRefs, &out.IdentityIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.IdentityIdsSelector != nil {
+		in, out := &in.IdentityIdsSelector, &out.IdentityIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Type != nil {
 		in, out := &in.Type, &out.Type
 		*out = new(string)
@@ -948,6 +960,18 @@ func (in *IdentityParameters) DeepCopyInto(out *IdentityParameters) {
 				**out = **in
 			}
 		}
+	}
+	if in.IdentityIdsRefs != nil {
+		in, out := &in.IdentityIdsRefs, &out.IdentityIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.IdentityIdsSelector != nil {
+		in, out := &in.IdentityIdsSelector, &out.IdentityIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Type != nil {
 		in, out := &in.Type, &out.Type
@@ -1313,10 +1337,30 @@ func (in *StorageInitParameters) DeepCopyInto(out *StorageInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.IdentityClientIDRef != nil {
+		in, out := &in.IdentityClientIDRef, &out.IdentityClientIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.IdentityClientIDSelector != nil {
+		in, out := &in.IdentityClientIDSelector, &out.IdentityClientIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.StorageAccountID != nil {
 		in, out := &in.StorageAccountID, &out.StorageAccountID
 		*out = new(string)
 		**out = **in
+	}
+	if in.StorageAccountIDRef != nil {
+		in, out := &in.StorageAccountIDRef, &out.StorageAccountIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.StorageAccountIDSelector != nil {
+		in, out := &in.StorageAccountIDSelector, &out.StorageAccountIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -1363,10 +1407,30 @@ func (in *StorageParameters) DeepCopyInto(out *StorageParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.IdentityClientIDRef != nil {
+		in, out := &in.IdentityClientIDRef, &out.IdentityClientIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.IdentityClientIDSelector != nil {
+		in, out := &in.IdentityClientIDSelector, &out.IdentityClientIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.StorageAccountID != nil {
 		in, out := &in.StorageAccountID, &out.StorageAccountID
 		*out = new(string)
 		**out = **in
+	}
+	if in.StorageAccountIDRef != nil {
+		in, out := &in.StorageAccountIDRef, &out.StorageAccountIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.StorageAccountIDSelector != nil {
+		in, out := &in.StorageAccountIDSelector, &out.StorageAccountIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
