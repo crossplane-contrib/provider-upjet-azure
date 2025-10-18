@@ -9,6 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
+	aifoundry "github.com/upbound/provider-azure/internal/controller/cluster/machinelearningservices/aifoundry"
 	computecluster "github.com/upbound/provider-azure/internal/controller/cluster/machinelearningservices/computecluster"
 	computeinstance "github.com/upbound/provider-azure/internal/controller/cluster/machinelearningservices/computeinstance"
 	synapsespark "github.com/upbound/provider-azure/internal/controller/cluster/machinelearningservices/synapsespark"
@@ -19,6 +20,7 @@ import (
 // the supplied manager.
 func Setup_machinelearningservices(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		aifoundry.Setup,
 		computecluster.Setup,
 		computeinstance.Setup,
 		synapsespark.Setup,
@@ -35,6 +37,7 @@ func Setup_machinelearningservices(mgr ctrl.Manager, o controller.Options) error
 // the supplied manager gated.
 func SetupGated_machinelearningservices(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		aifoundry.SetupGated,
 		computecluster.SetupGated,
 		computeinstance.SetupGated,
 		synapsespark.SetupGated,

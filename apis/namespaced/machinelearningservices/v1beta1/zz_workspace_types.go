@@ -14,105 +14,6 @@ import (
 	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
 )
 
-type EncryptionInitParameters struct {
-
-	// The Key Vault URI to access the encryption key.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/keyvault/v1beta1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
-	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
-
-	// Reference to a Key in keyvault to populate keyId.
-	// +kubebuilder:validation:Optional
-	KeyIDRef *v1.NamespacedReference `json:"keyIdRef,omitempty" tf:"-"`
-
-	// Selector for a Key in keyvault to populate keyId.
-	// +kubebuilder:validation:Optional
-	KeyIDSelector *v1.NamespacedSelector `json:"keyIdSelector,omitempty" tf:"-"`
-
-	// The ID of the keyVault where the customer owned encryption key is present.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/keyvault/v1beta1.Vault
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
-	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
-
-	// Reference to a Vault in keyvault to populate keyVaultId.
-	// +kubebuilder:validation:Optional
-	KeyVaultIDRef *v1.NamespacedReference `json:"keyVaultIdRef,omitempty" tf:"-"`
-
-	// Selector for a Vault in keyvault to populate keyVaultId.
-	// +kubebuilder:validation:Optional
-	KeyVaultIDSelector *v1.NamespacedSelector `json:"keyVaultIdSelector,omitempty" tf:"-"`
-
-	// The Key Vault URI to access the encryption key.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
-	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
-
-	// Reference to a UserAssignedIdentity in managedidentity to populate userAssignedIdentityId.
-	// +kubebuilder:validation:Optional
-	UserAssignedIdentityIDRef *v1.NamespacedReference `json:"userAssignedIdentityIdRef,omitempty" tf:"-"`
-
-	// Selector for a UserAssignedIdentity in managedidentity to populate userAssignedIdentityId.
-	// +kubebuilder:validation:Optional
-	UserAssignedIdentityIDSelector *v1.NamespacedSelector `json:"userAssignedIdentityIdSelector,omitempty" tf:"-"`
-}
-
-type EncryptionObservation struct {
-
-	// The Key Vault URI to access the encryption key.
-	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
-
-	// The ID of the keyVault where the customer owned encryption key is present.
-	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
-
-	// The Key Vault URI to access the encryption key.
-	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
-}
-
-type EncryptionParameters struct {
-
-	// The Key Vault URI to access the encryption key.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/keyvault/v1beta1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
-
-	// Reference to a Key in keyvault to populate keyId.
-	// +kubebuilder:validation:Optional
-	KeyIDRef *v1.NamespacedReference `json:"keyIdRef,omitempty" tf:"-"`
-
-	// Selector for a Key in keyvault to populate keyId.
-	// +kubebuilder:validation:Optional
-	KeyIDSelector *v1.NamespacedSelector `json:"keyIdSelector,omitempty" tf:"-"`
-
-	// The ID of the keyVault where the customer owned encryption key is present.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/keyvault/v1beta1.Vault
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
-
-	// Reference to a Vault in keyvault to populate keyVaultId.
-	// +kubebuilder:validation:Optional
-	KeyVaultIDRef *v1.NamespacedReference `json:"keyVaultIdRef,omitempty" tf:"-"`
-
-	// Selector for a Vault in keyvault to populate keyVaultId.
-	// +kubebuilder:validation:Optional
-	KeyVaultIDSelector *v1.NamespacedSelector `json:"keyVaultIdSelector,omitempty" tf:"-"`
-
-	// The Key Vault URI to access the encryption key.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
-
-	// Reference to a UserAssignedIdentity in managedidentity to populate userAssignedIdentityId.
-	// +kubebuilder:validation:Optional
-	UserAssignedIdentityIDRef *v1.NamespacedReference `json:"userAssignedIdentityIdRef,omitempty" tf:"-"`
-
-	// Selector for a UserAssignedIdentity in managedidentity to populate userAssignedIdentityId.
-	// +kubebuilder:validation:Optional
-	UserAssignedIdentityIDSelector *v1.NamespacedSelector `json:"userAssignedIdentityIdSelector,omitempty" tf:"-"`
-}
-
 type FeatureStoreInitParameters struct {
 
 	// The version of Spark runtime.
@@ -150,25 +51,6 @@ type FeatureStoreParameters struct {
 	// The name of online store connection.
 	// +kubebuilder:validation:Optional
 	OnlineConnectionName *string `json:"onlineConnectionName,omitempty" tf:"online_connection_name,omitempty"`
-}
-
-type ManagedNetworkInitParameters struct {
-
-	// The isolation mode of the Machine Learning Workspace. Possible values are Disabled, AllowOnlyApprovedOutbound, and AllowInternetOutbound
-	IsolationMode *string `json:"isolationMode,omitempty" tf:"isolation_mode,omitempty"`
-}
-
-type ManagedNetworkObservation struct {
-
-	// The isolation mode of the Machine Learning Workspace. Possible values are Disabled, AllowOnlyApprovedOutbound, and AllowInternetOutbound
-	IsolationMode *string `json:"isolationMode,omitempty" tf:"isolation_mode,omitempty"`
-}
-
-type ManagedNetworkParameters struct {
-
-	// The isolation mode of the Machine Learning Workspace. Possible values are Disabled, AllowOnlyApprovedOutbound, and AllowInternetOutbound
-	// +kubebuilder:validation:Optional
-	IsolationMode *string `json:"isolationMode,omitempty" tf:"isolation_mode,omitempty"`
 }
 
 type ServerlessComputeInitParameters struct {
@@ -218,6 +100,105 @@ type ServerlessComputeParameters struct {
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+}
+
+type WorkspaceEncryptionInitParameters struct {
+
+	// The Key Vault URI to access the encryption key.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/keyvault/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
+
+	// Reference to a Key in keyvault to populate keyId.
+	// +kubebuilder:validation:Optional
+	KeyIDRef *v1.NamespacedReference `json:"keyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in keyvault to populate keyId.
+	// +kubebuilder:validation:Optional
+	KeyIDSelector *v1.NamespacedSelector `json:"keyIdSelector,omitempty" tf:"-"`
+
+	// The ID of the keyVault where the customer owned encryption key is present.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/keyvault/v1beta1.Vault
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
+
+	// Reference to a Vault in keyvault to populate keyVaultId.
+	// +kubebuilder:validation:Optional
+	KeyVaultIDRef *v1.NamespacedReference `json:"keyVaultIdRef,omitempty" tf:"-"`
+
+	// Selector for a Vault in keyvault to populate keyVaultId.
+	// +kubebuilder:validation:Optional
+	KeyVaultIDSelector *v1.NamespacedSelector `json:"keyVaultIdSelector,omitempty" tf:"-"`
+
+	// The Key Vault URI to access the encryption key.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
+
+	// Reference to a UserAssignedIdentity in managedidentity to populate userAssignedIdentityId.
+	// +kubebuilder:validation:Optional
+	UserAssignedIdentityIDRef *v1.NamespacedReference `json:"userAssignedIdentityIdRef,omitempty" tf:"-"`
+
+	// Selector for a UserAssignedIdentity in managedidentity to populate userAssignedIdentityId.
+	// +kubebuilder:validation:Optional
+	UserAssignedIdentityIDSelector *v1.NamespacedSelector `json:"userAssignedIdentityIdSelector,omitempty" tf:"-"`
+}
+
+type WorkspaceEncryptionObservation struct {
+
+	// The Key Vault URI to access the encryption key.
+	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
+
+	// The ID of the keyVault where the customer owned encryption key is present.
+	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
+
+	// The Key Vault URI to access the encryption key.
+	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
+}
+
+type WorkspaceEncryptionParameters struct {
+
+	// The Key Vault URI to access the encryption key.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/keyvault/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
+
+	// Reference to a Key in keyvault to populate keyId.
+	// +kubebuilder:validation:Optional
+	KeyIDRef *v1.NamespacedReference `json:"keyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in keyvault to populate keyId.
+	// +kubebuilder:validation:Optional
+	KeyIDSelector *v1.NamespacedSelector `json:"keyIdSelector,omitempty" tf:"-"`
+
+	// The ID of the keyVault where the customer owned encryption key is present.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/keyvault/v1beta1.Vault
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
+
+	// Reference to a Vault in keyvault to populate keyVaultId.
+	// +kubebuilder:validation:Optional
+	KeyVaultIDRef *v1.NamespacedReference `json:"keyVaultIdRef,omitempty" tf:"-"`
+
+	// Selector for a Vault in keyvault to populate keyVaultId.
+	// +kubebuilder:validation:Optional
+	KeyVaultIDSelector *v1.NamespacedSelector `json:"keyVaultIdSelector,omitempty" tf:"-"`
+
+	// The Key Vault URI to access the encryption key.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
+
+	// Reference to a UserAssignedIdentity in managedidentity to populate userAssignedIdentityId.
+	// +kubebuilder:validation:Optional
+	UserAssignedIdentityIDRef *v1.NamespacedReference `json:"userAssignedIdentityIdRef,omitempty" tf:"-"`
+
+	// Selector for a UserAssignedIdentity in managedidentity to populate userAssignedIdentityId.
+	// +kubebuilder:validation:Optional
+	UserAssignedIdentityIDSelector *v1.NamespacedSelector `json:"userAssignedIdentityIdSelector,omitempty" tf:"-"`
 }
 
 type WorkspaceIdentityInitParameters struct {
@@ -300,7 +281,7 @@ type WorkspaceInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// An encryption block as defined below. Changing this forces a new resource to be created.
-	Encryption *EncryptionInitParameters `json:"encryption,omitempty" tf:"encryption,omitempty"`
+	Encryption *WorkspaceEncryptionInitParameters `json:"encryption,omitempty" tf:"encryption,omitempty"`
 
 	// A feature_store block as defined below.
 	FeatureStore *FeatureStoreInitParameters `json:"featureStore,omitempty" tf:"feature_store,omitempty"`
@@ -337,7 +318,7 @@ type WorkspaceInitParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A managed_network block as defined below.
-	ManagedNetwork *ManagedNetworkInitParameters `json:"managedNetwork,omitempty" tf:"managed_network,omitempty"`
+	ManagedNetwork *WorkspaceManagedNetworkInitParameters `json:"managedNetwork,omitempty" tf:"managed_network,omitempty"`
 
 	// The user assigned identity id that represents the workspace identity.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
@@ -382,6 +363,25 @@ type WorkspaceInitParameters struct {
 	V1LegacyModeEnabled *bool `json:"v1LegacyModeEnabled,omitempty" tf:"v1_legacy_mode_enabled,omitempty"`
 }
 
+type WorkspaceManagedNetworkInitParameters struct {
+
+	// The isolation mode of the Machine Learning Workspace. Possible values are Disabled, AllowOnlyApprovedOutbound, and AllowInternetOutbound
+	IsolationMode *string `json:"isolationMode,omitempty" tf:"isolation_mode,omitempty"`
+}
+
+type WorkspaceManagedNetworkObservation struct {
+
+	// The isolation mode of the Machine Learning Workspace. Possible values are Disabled, AllowOnlyApprovedOutbound, and AllowInternetOutbound
+	IsolationMode *string `json:"isolationMode,omitempty" tf:"isolation_mode,omitempty"`
+}
+
+type WorkspaceManagedNetworkParameters struct {
+
+	// The isolation mode of the Machine Learning Workspace. Possible values are Disabled, AllowOnlyApprovedOutbound, and AllowInternetOutbound
+	// +kubebuilder:validation:Optional
+	IsolationMode *string `json:"isolationMode,omitempty" tf:"isolation_mode,omitempty"`
+}
+
 type WorkspaceObservation struct {
 
 	// The ID of the Application Insights associated with this Machine Learning Workspace. Changing this forces a new resource to be created.
@@ -397,7 +397,7 @@ type WorkspaceObservation struct {
 	DiscoveryURL *string `json:"discoveryUrl,omitempty" tf:"discovery_url,omitempty"`
 
 	// An encryption block as defined below. Changing this forces a new resource to be created.
-	Encryption *EncryptionObservation `json:"encryption,omitempty" tf:"encryption,omitempty"`
+	Encryption *WorkspaceEncryptionObservation `json:"encryption,omitempty" tf:"encryption,omitempty"`
 
 	// A feature_store block as defined below.
 	FeatureStore *FeatureStoreObservation `json:"featureStore,omitempty" tf:"feature_store,omitempty"`
@@ -427,7 +427,7 @@ type WorkspaceObservation struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A managed_network block as defined below.
-	ManagedNetwork *ManagedNetworkObservation `json:"managedNetwork,omitempty" tf:"managed_network,omitempty"`
+	ManagedNetwork *WorkspaceManagedNetworkObservation `json:"managedNetwork,omitempty" tf:"managed_network,omitempty"`
 
 	// The user assigned identity id that represents the workspace identity.
 	PrimaryUserAssignedIdentity *string `json:"primaryUserAssignedIdentity,omitempty" tf:"primary_user_assigned_identity,omitempty"`
@@ -484,7 +484,7 @@ type WorkspaceParameters struct {
 
 	// An encryption block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Encryption *EncryptionParameters `json:"encryption,omitempty" tf:"encryption,omitempty"`
+	Encryption *WorkspaceEncryptionParameters `json:"encryption,omitempty" tf:"encryption,omitempty"`
 
 	// A feature_store block as defined below.
 	// +kubebuilder:validation:Optional
@@ -530,7 +530,7 @@ type WorkspaceParameters struct {
 
 	// A managed_network block as defined below.
 	// +kubebuilder:validation:Optional
-	ManagedNetwork *ManagedNetworkParameters `json:"managedNetwork,omitempty" tf:"managed_network,omitempty"`
+	ManagedNetwork *WorkspaceManagedNetworkParameters `json:"managedNetwork,omitempty" tf:"managed_network,omitempty"`
 
 	// The user assigned identity id that represents the workspace identity.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
