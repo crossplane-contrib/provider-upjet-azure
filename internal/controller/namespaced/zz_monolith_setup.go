@@ -413,6 +413,7 @@ import (
 	apptriggerrecurrence "github.com/upbound/provider-azure/internal/controller/namespaced/logic/apptriggerrecurrence"
 	appworkflow "github.com/upbound/provider-azure/internal/controller/namespaced/logic/appworkflow"
 	aifoundry "github.com/upbound/provider-azure/internal/controller/namespaced/machinelearningservices/aifoundry"
+	aifoundryproject "github.com/upbound/provider-azure/internal/controller/namespaced/machinelearningservices/aifoundryproject"
 	computecluster "github.com/upbound/provider-azure/internal/controller/namespaced/machinelearningservices/computecluster"
 	computeinstance "github.com/upbound/provider-azure/internal/controller/namespaced/machinelearningservices/computeinstance"
 	synapsespark "github.com/upbound/provider-azure/internal/controller/namespaced/machinelearningservices/synapsespark"
@@ -1140,6 +1141,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		apptriggerrecurrence.Setup,
 		appworkflow.Setup,
 		aifoundry.Setup,
+		aifoundryproject.Setup,
 		computecluster.Setup,
 		computeinstance.Setup,
 		synapsespark.Setup,
@@ -1873,6 +1875,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		apptriggerrecurrence.SetupGated,
 		appworkflow.SetupGated,
 		aifoundry.SetupGated,
+		aifoundryproject.SetupGated,
 		computecluster.SetupGated,
 		computeinstance.SetupGated,
 		synapsespark.SetupGated,

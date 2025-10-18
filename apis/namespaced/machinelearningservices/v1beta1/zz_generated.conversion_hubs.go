@@ -10,6 +10,9 @@ package v1beta1
 func (tr *AIFoundry) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *AIFoundryProject) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *ComputeCluster) Hub() {}
 
 // Hub marks this type as a conversion hub.
