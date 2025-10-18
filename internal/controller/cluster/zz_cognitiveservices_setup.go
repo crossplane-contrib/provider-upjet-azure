@@ -10,6 +10,7 @@ import (
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	account "github.com/upbound/provider-azure/internal/controller/cluster/cognitiveservices/account"
+	aiservices "github.com/upbound/provider-azure/internal/controller/cluster/cognitiveservices/aiservices"
 	deployment "github.com/upbound/provider-azure/internal/controller/cluster/cognitiveservices/deployment"
 )
 
@@ -18,6 +19,7 @@ import (
 func Setup_cognitiveservices(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		account.Setup,
+		aiservices.Setup,
 		deployment.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
@@ -32,6 +34,7 @@ func Setup_cognitiveservices(mgr ctrl.Manager, o controller.Options) error {
 func SetupGated_cognitiveservices(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		account.SetupGated,
+		aiservices.SetupGated,
 		deployment.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
