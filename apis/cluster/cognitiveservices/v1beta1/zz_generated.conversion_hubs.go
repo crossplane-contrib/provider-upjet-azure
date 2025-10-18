@@ -7,10 +7,4 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
-func (tr *Account) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *AIServices) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Deployment) Hub() {}
