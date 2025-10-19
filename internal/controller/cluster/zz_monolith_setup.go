@@ -147,6 +147,7 @@ import (
 	profile "github.com/upbound/provider-azure/internal/controller/cluster/cdn/profile"
 	appservicecertificateorder "github.com/upbound/provider-azure/internal/controller/cluster/certificateregistration/appservicecertificateorder"
 	accountcognitiveservices "github.com/upbound/provider-azure/internal/controller/cluster/cognitiveservices/account"
+	accountraiblocklist "github.com/upbound/provider-azure/internal/controller/cluster/cognitiveservices/accountraiblocklist"
 	aiservices "github.com/upbound/provider-azure/internal/controller/cluster/cognitiveservices/aiservices"
 	deployment "github.com/upbound/provider-azure/internal/controller/cluster/cognitiveservices/deployment"
 	service "github.com/upbound/provider-azure/internal/controller/cluster/communication/service"
@@ -877,6 +878,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		profile.Setup,
 		appservicecertificateorder.Setup,
 		accountcognitiveservices.Setup,
+		accountraiblocklist.Setup,
 		aiservices.Setup,
 		deployment.Setup,
 		service.Setup,
@@ -1613,6 +1615,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		profile.SetupGated,
 		appservicecertificateorder.SetupGated,
 		accountcognitiveservices.SetupGated,
+		accountraiblocklist.SetupGated,
 		aiservices.SetupGated,
 		deployment.SetupGated,
 		service.SetupGated,

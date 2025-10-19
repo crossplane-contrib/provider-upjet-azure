@@ -44,4 +44,11 @@ func Configure(p *config.Provider) {
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
+	p.AddResourceConfigurator("azurerm_cognitive_account_rai_blocklist", func(r *config.Resource) {
+		r.ShortGroup = group
+		r.References["cognitive_account_id"] = config.Reference{
+			TerraformName: "azurerm_cognitive_account",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+	})
 }

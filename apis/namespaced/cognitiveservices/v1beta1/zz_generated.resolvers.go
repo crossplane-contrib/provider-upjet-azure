@@ -445,6 +445,38 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 	return nil
 }
 
+// ResolveReferences of this AccountRaiBlocklist.
+func (mg *AccountRaiBlocklist) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("cognitiveservices.azure.m.upbound.io", "v1beta1", "Account", "AccountList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CognitiveAccountID),
+			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.CognitiveAccountIDRef,
+			Selector:     mg.Spec.ForProvider.CognitiveAccountIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CognitiveAccountID")
+	}
+	mg.Spec.ForProvider.CognitiveAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CognitiveAccountIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this Deployment.
 func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed

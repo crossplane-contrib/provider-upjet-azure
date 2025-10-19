@@ -10,6 +10,9 @@ package v1beta1
 func (tr *Account) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *AccountRaiBlocklist) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *AIServices) Hub() {}
 
 // Hub marks this type as a conversion hub.
