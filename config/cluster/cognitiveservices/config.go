@@ -6,6 +6,7 @@ package cognitiveservices
 
 import (
 	"github.com/crossplane/upjet/v2/pkg/config"
+
 	"github.com/upbound/provider-azure/apis/cluster/rconfig"
 )
 
@@ -45,6 +46,13 @@ func Configure(p *config.Provider) {
 		}
 	})
 	p.AddResourceConfigurator("azurerm_cognitive_account_rai_blocklist", func(r *config.Resource) {
+		r.ShortGroup = group
+		r.References["cognitive_account_id"] = config.Reference{
+			TerraformName: "azurerm_cognitive_account",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+	p.AddResourceConfigurator("azurerm_cognitive_account_rai_policy", func(r *config.Resource) {
 		r.ShortGroup = group
 		r.References["cognitive_account_id"] = config.Reference{
 			TerraformName: "azurerm_cognitive_account",

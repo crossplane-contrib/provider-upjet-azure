@@ -219,6 +219,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_ai_services": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.CognitiveServices/accounts/{{ .external_name }}"),
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.CognitiveServices/accounts/account1/raiBlocklists/raiblocklist
 	"azurerm_cognitive_account_rai_blocklist": config.TemplatedStringAsIdentifier("name", "{{ .parameters.cognitive_account_id }}/raiBlocklists/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.CognitiveServices/accounts/account1/raiPolicies/policy1
+	"azurerm_cognitive_account_rai_policy": config.TemplatedStringAsIdentifier("name", "{{ .parameters.cognitive_account_id }}/raiPolicies/{{ .external_name }}"),
 
 	// communication
 	//

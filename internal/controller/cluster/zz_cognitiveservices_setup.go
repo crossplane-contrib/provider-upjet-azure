@@ -11,6 +11,7 @@ import (
 
 	account "github.com/upbound/provider-azure/internal/controller/cluster/cognitiveservices/account"
 	accountraiblocklist "github.com/upbound/provider-azure/internal/controller/cluster/cognitiveservices/accountraiblocklist"
+	accountraipolicy "github.com/upbound/provider-azure/internal/controller/cluster/cognitiveservices/accountraipolicy"
 	aiservices "github.com/upbound/provider-azure/internal/controller/cluster/cognitiveservices/aiservices"
 	deployment "github.com/upbound/provider-azure/internal/controller/cluster/cognitiveservices/deployment"
 )
@@ -21,6 +22,7 @@ func Setup_cognitiveservices(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		account.Setup,
 		accountraiblocklist.Setup,
+		accountraipolicy.Setup,
 		aiservices.Setup,
 		deployment.Setup,
 	} {
@@ -37,6 +39,7 @@ func SetupGated_cognitiveservices(mgr ctrl.Manager, o controller.Options) error 
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		account.SetupGated,
 		accountraiblocklist.SetupGated,
+		accountraipolicy.SetupGated,
 		aiservices.SetupGated,
 		deployment.SetupGated,
 	} {

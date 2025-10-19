@@ -3,20 +3,26 @@
 # SPDX-License-Identifier: CC0-1.0
 
 apiVersion: cognitiveservices.azure.m.upbound.io/v1beta1
-kind: AccountRaiBlocklist
+kind: AccountRaiPolicy
 metadata:
   annotations:
-    meta.upbound.io/example-id: cognitiveservices/v1beta1/accountraiblocklist
+    meta.upbound.io/example-id: cognitiveservices/v1beta1/accountraipolicy
   labels:
     testing.upbound.io/example-name: example
   name: example
   namespace: upbound-system
 spec:
   forProvider:
+    basePolicyName: Microsoft.Default
     cognitiveAccountIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    description: Azure OpenAI Rai Blocklist
+    contentFilter:
+    - blockEnabled: true
+      filterEnabled: true
+      name: Hate
+      severityThreshold: High
+      source: Prompt
 
 ---
 
@@ -24,15 +30,15 @@ apiVersion: cognitiveservices.azure.m.upbound.io/v1beta1
 kind: Account
 metadata:
   annotations:
-    meta.upbound.io/example-id: cognitiveservices/v1beta1/accountraiblocklist
+    meta.upbound.io/example-id: cognitiveservices/v1beta1/accountraipolicy
   labels:
     testing.upbound.io/example-name: example
-  name: accountraiblocklist
+  name: example
   namespace: upbound-system
 spec:
   forProvider:
     kind: OpenAI
-    location: West Europe
+    location: East US
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -44,11 +50,11 @@ apiVersion: azure.m.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: cognitiveservices/v1beta1/accountraiblocklist
+    meta.upbound.io/example-id: cognitiveservices/v1beta1/accountraipolicy
   labels:
     testing.upbound.io/example-name: example
-  name: accountraiblocklist
+  name: example
   namespace: upbound-system
 spec:
   forProvider:
-    location: West Europe
+    location: East US
