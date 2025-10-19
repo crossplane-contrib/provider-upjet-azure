@@ -11,7 +11,9 @@ import (
 
 	domain "github.com/upbound/provider-azure/internal/controller/namespaced/eventgrid/domain"
 	domaintopic "github.com/upbound/provider-azure/internal/controller/namespaced/eventgrid/domaintopic"
+	eventgridnamespace "github.com/upbound/provider-azure/internal/controller/namespaced/eventgrid/eventgridnamespace"
 	eventsubscription "github.com/upbound/provider-azure/internal/controller/namespaced/eventgrid/eventsubscription"
+	partnerconfiguration "github.com/upbound/provider-azure/internal/controller/namespaced/eventgrid/partnerconfiguration"
 	systemtopic "github.com/upbound/provider-azure/internal/controller/namespaced/eventgrid/systemtopic"
 	systemtopiceventsubscription "github.com/upbound/provider-azure/internal/controller/namespaced/eventgrid/systemtopiceventsubscription"
 	topic "github.com/upbound/provider-azure/internal/controller/namespaced/eventgrid/topic"
@@ -23,7 +25,9 @@ func Setup_eventgrid(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		domain.Setup,
 		domaintopic.Setup,
+		eventgridnamespace.Setup,
 		eventsubscription.Setup,
+		partnerconfiguration.Setup,
 		systemtopic.Setup,
 		systemtopiceventsubscription.Setup,
 		topic.Setup,
@@ -41,7 +45,9 @@ func SetupGated_eventgrid(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		domain.SetupGated,
 		domaintopic.SetupGated,
+		eventgridnamespace.SetupGated,
 		eventsubscription.SetupGated,
+		partnerconfiguration.SetupGated,
 		systemtopic.SetupGated,
 		systemtopiceventsubscription.SetupGated,
 		topic.SetupGated,

@@ -28,6 +28,7 @@ import (
 	"github.com/upbound/provider-azure/config/cluster/datashare"
 	"github.com/upbound/provider-azure/config/cluster/dbformysql"
 	"github.com/upbound/provider-azure/config/cluster/devices"
+	"github.com/upbound/provider-azure/config/cluster/eventgrid"
 	"github.com/upbound/provider-azure/config/cluster/eventhub"
 	"github.com/upbound/provider-azure/config/cluster/healthcareapis"
 	"github.com/upbound/provider-azure/config/cluster/insights"
@@ -104,4 +105,5 @@ func init() {
 	ProviderConfiguration.AddConfig(appplatform.Configure)
 	ProviderConfiguration.AddConfig(cognitiveservices.Configure)
 	ProviderConfiguration.AddConfig(machinelearningservices.Configure)
+	ProviderConfiguration.AddConfig(eventgrid.Configure)
 }

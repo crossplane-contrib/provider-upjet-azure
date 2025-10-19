@@ -13,7 +13,13 @@ func (tr *Domain) Hub() {}
 func (tr *DomainTopic) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *EventGridNamespace) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *EventSubscription) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *PartnerConfiguration) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *SystemTopic) Hub() {}
