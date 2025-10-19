@@ -1742,6 +1742,12 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_network_manager": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/networkManagers/{{ .external_name }}"),
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.Network/networkManagers/networkManager1/networkGroups/networkGroup1
 	"azurerm_network_manager_network_group": config.TemplatedStringAsIdentifier("name", "{{ .parameters.network_manager_id }}/networkGroups/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/manager1/ipamPools/pool1
+	"azurerm_network_manager_ipam_pool": config.TemplatedStringAsIdentifier("name", "{{ .parameters.network_manager_id }}/ipamPools/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/manager1/routingConfigurations/conf1
+	"azurerm_network_manager_routing_configuration": config.TemplatedStringAsIdentifier("name", "{{ .parameters.network_manager_id }}/routingConfigurations/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/manager1/verifierWorkspaces/workspace1
+	"azurerm_network_manager_verifier_workspace": config.TemplatedStringAsIdentifier("name", "{{ .parameters.network_manager_id }}/verifierWorkspaces/{{ .external_name }}"),
 
 	// mssql
 	//
