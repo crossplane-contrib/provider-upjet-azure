@@ -40,7 +40,7 @@ spec:
         testing.upbound.io/example-name: example
     scope:
       subscriptionIds:
-      - ${data.azurerm_subscription.current.id}
+      - ${data.azurerm_client_config.current.subscription_resource_id}
     scopeAccesses:
     - Connectivity
     - SecurityAdmin
