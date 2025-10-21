@@ -238,8 +238,31 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Identity); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("managedidentity.azure.upbound.io", "v1beta1", "UserAssignedIdentity", "UserAssignedIdentityList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Identity[i3].IdentityIds),
+				Extract:       rconfig.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
+				References:    mg.Spec.ForProvider.Identity[i3].IdentityIdsRefs,
+				Selector:      mg.Spec.ForProvider.Identity[i3].IdentityIdsSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Identity[i3].IdentityIds")
+		}
+		mg.Spec.ForProvider.Identity[i3].IdentityIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.ForProvider.Identity[i3].IdentityIdsRefs = mrsp.ResolvedReferences
+
+	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.NetworkAcls); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.NetworkAcls[i3].VirtualNetworkRules); i4++ {
 			{
@@ -284,6 +307,72 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Storage); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("managedidentity.azure.upbound.io", "v1beta1", "UserAssignedIdentity", "UserAssignedIdentityList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Storage[i3].IdentityClientID),
+				Extract:      resource.ExtractParamPath("client_id", true),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.ForProvider.Storage[i3].IdentityClientIDRef,
+				Selector:     mg.Spec.ForProvider.Storage[i3].IdentityClientIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Storage[i3].IdentityClientID")
+		}
+		mg.Spec.ForProvider.Storage[i3].IdentityClientID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Storage[i3].IdentityClientIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Storage); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Storage[i3].StorageAccountID),
+				Extract:      rconfig.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.ForProvider.Storage[i3].StorageAccountIDRef,
+				Selector:     mg.Spec.ForProvider.Storage[i3].StorageAccountIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Storage[i3].StorageAccountID")
+		}
+		mg.Spec.ForProvider.Storage[i3].StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Storage[i3].StorageAccountIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Identity); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("managedidentity.azure.upbound.io", "v1beta1", "UserAssignedIdentity", "UserAssignedIdentityList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Identity[i3].IdentityIds),
+				Extract:       rconfig.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
+				References:    mg.Spec.InitProvider.Identity[i3].IdentityIdsRefs,
+				Selector:      mg.Spec.InitProvider.Identity[i3].IdentityIdsSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Identity[i3].IdentityIds")
+		}
+		mg.Spec.InitProvider.Identity[i3].IdentityIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.Identity[i3].IdentityIdsRefs = mrsp.ResolvedReferences
+
+	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.NetworkAcls); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.InitProvider.NetworkAcls[i3].VirtualNetworkRules); i4++ {
 			{
@@ -307,6 +396,50 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 			mg.Spec.InitProvider.NetworkAcls[i3].VirtualNetworkRules[i4].SubnetIDRef = rsp.ResolvedReference
 
 		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Storage); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("managedidentity.azure.upbound.io", "v1beta1", "UserAssignedIdentity", "UserAssignedIdentityList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Storage[i3].IdentityClientID),
+				Extract:      resource.ExtractParamPath("client_id", true),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.InitProvider.Storage[i3].IdentityClientIDRef,
+				Selector:     mg.Spec.InitProvider.Storage[i3].IdentityClientIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Storage[i3].IdentityClientID")
+		}
+		mg.Spec.InitProvider.Storage[i3].IdentityClientID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Storage[i3].IdentityClientIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Storage); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Storage[i3].StorageAccountID),
+				Extract:      rconfig.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.InitProvider.Storage[i3].StorageAccountIDRef,
+				Selector:     mg.Spec.InitProvider.Storage[i3].StorageAccountIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Storage[i3].StorageAccountID")
+		}
+		mg.Spec.InitProvider.Storage[i3].StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Storage[i3].StorageAccountIDRef = rsp.ResolvedReference
+
 	}
 
 	return nil
