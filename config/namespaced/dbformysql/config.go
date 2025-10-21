@@ -17,6 +17,9 @@ func Configure(p *config.Provider) {
 			TerraformName: "azurerm_private_dns_zone",
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
+		r.LateInitializer = config.LateInitializer{
+			IgnoredFields: []string{"zone"},
+		}
 	})
 
 	p.AddResourceConfigurator("azurerm_mysql_flexible_database", func(r *config.Resource) {

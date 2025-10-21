@@ -27,6 +27,7 @@ import (
 	"github.com/upbound/provider-azure/config/namespaced/dataprotection"
 	"github.com/upbound/provider-azure/config/namespaced/datashare"
 	"github.com/upbound/provider-azure/config/namespaced/dbformysql"
+	"github.com/upbound/provider-azure/config/namespaced/dbforpostgresql"
 	"github.com/upbound/provider-azure/config/namespaced/devices"
 	"github.com/upbound/provider-azure/config/namespaced/eventhub"
 	"github.com/upbound/provider-azure/config/namespaced/healthcareapis"
@@ -104,4 +105,5 @@ func init() {
 	ProviderConfiguration.AddConfig(appplatform.Configure)
 	ProviderConfiguration.AddConfig(cognitiveservices.Configure)
 	ProviderConfiguration.AddConfig(machinelearningservices.Configure)
+	ProviderConfiguration.AddConfig(dbforpostgresql.Configure)
 }
