@@ -474,10 +474,13 @@ import (
 	loadbalancerrule "github.com/upbound/provider-azure/internal/controller/namespaced/network/loadbalancerrule"
 	localnetworkgateway "github.com/upbound/provider-azure/internal/controller/namespaced/network/localnetworkgateway"
 	manager "github.com/upbound/provider-azure/internal/controller/namespaced/network/manager"
+	manageripampool "github.com/upbound/provider-azure/internal/controller/namespaced/network/manageripampool"
 	managermanagementgroupconnection "github.com/upbound/provider-azure/internal/controller/namespaced/network/managermanagementgroupconnection"
 	managernetworkgroup "github.com/upbound/provider-azure/internal/controller/namespaced/network/managernetworkgroup"
+	managerroutingconfiguration "github.com/upbound/provider-azure/internal/controller/namespaced/network/managerroutingconfiguration"
 	managerstaticmember "github.com/upbound/provider-azure/internal/controller/namespaced/network/managerstaticmember"
 	managersubscriptionconnection "github.com/upbound/provider-azure/internal/controller/namespaced/network/managersubscriptionconnection"
+	managerverifierworkspace "github.com/upbound/provider-azure/internal/controller/namespaced/network/managerverifierworkspace"
 	natgateway "github.com/upbound/provider-azure/internal/controller/namespaced/network/natgateway"
 	natgatewaypublicipassociation "github.com/upbound/provider-azure/internal/controller/namespaced/network/natgatewaypublicipassociation"
 	natgatewaypublicipprefixassociation "github.com/upbound/provider-azure/internal/controller/namespaced/network/natgatewaypublicipprefixassociation"
@@ -1199,10 +1202,13 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		loadbalancerrule.Setup,
 		localnetworkgateway.Setup,
 		manager.Setup,
+		manageripampool.Setup,
 		managermanagementgroupconnection.Setup,
 		managernetworkgroup.Setup,
+		managerroutingconfiguration.Setup,
 		managerstaticmember.Setup,
 		managersubscriptionconnection.Setup,
+		managerverifierworkspace.Setup,
 		natgateway.Setup,
 		natgatewaypublicipassociation.Setup,
 		natgatewaypublicipprefixassociation.Setup,
@@ -1930,10 +1936,13 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		loadbalancerrule.SetupGated,
 		localnetworkgateway.SetupGated,
 		manager.SetupGated,
+		manageripampool.SetupGated,
 		managermanagementgroupconnection.SetupGated,
 		managernetworkgroup.SetupGated,
+		managerroutingconfiguration.SetupGated,
 		managerstaticmember.SetupGated,
 		managersubscriptionconnection.SetupGated,
+		managerverifierworkspace.SetupGated,
 		natgateway.SetupGated,
 		natgatewaypublicipassociation.SetupGated,
 		natgatewaypublicipprefixassociation.SetupGated,

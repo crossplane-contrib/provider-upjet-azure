@@ -94,16 +94,25 @@ func (tr *LoadBalancerProbe) Hub() {}
 func (tr *LoadBalancerRule) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *ManagerIpamPool) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *ManagerManagementGroupConnection) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *ManagerNetworkGroup) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *ManagerRoutingConfiguration) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *ManagerStaticMember) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *ManagerSubscriptionConnection) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *ManagerVerifierWorkspace) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *NATGateway) Hub() {}

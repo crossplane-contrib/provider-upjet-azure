@@ -619,4 +619,28 @@ func Configure(p *config.Provider) {
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
+
+	p.AddResourceConfigurator("azurerm_network_manager_ipam_pool", func(r *config.Resource) {
+		r.References["network_manager_id"] = config.Reference{
+			TerraformName: "azurerm_network_manager",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["parent_pool_name"] = config.Reference{
+			TerraformName: "azurerm_network_manager_ipam_pool",
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_network_manager_routing_configuration", func(r *config.Resource) {
+		r.References["network_manager_id"] = config.Reference{
+			TerraformName: "azurerm_network_manager",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_network_manager_verifier_workspace", func(r *config.Resource) {
+		r.References["network_manager_id"] = config.Reference{
+			TerraformName: "azurerm_network_manager",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+	})
 }
