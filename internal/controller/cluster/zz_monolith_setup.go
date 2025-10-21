@@ -147,6 +147,9 @@ import (
 	profile "github.com/upbound/provider-azure/internal/controller/cluster/cdn/profile"
 	appservicecertificateorder "github.com/upbound/provider-azure/internal/controller/cluster/certificateregistration/appservicecertificateorder"
 	accountcognitiveservices "github.com/upbound/provider-azure/internal/controller/cluster/cognitiveservices/account"
+	accountraiblocklist "github.com/upbound/provider-azure/internal/controller/cluster/cognitiveservices/accountraiblocklist"
+	accountraipolicy "github.com/upbound/provider-azure/internal/controller/cluster/cognitiveservices/accountraipolicy"
+	aiservices "github.com/upbound/provider-azure/internal/controller/cluster/cognitiveservices/aiservices"
 	deployment "github.com/upbound/provider-azure/internal/controller/cluster/cognitiveservices/deployment"
 	service "github.com/upbound/provider-azure/internal/controller/cluster/communication/service"
 	availabilityset "github.com/upbound/provider-azure/internal/controller/cluster/compute/availabilityset"
@@ -411,6 +414,7 @@ import (
 	apptriggerhttprequest "github.com/upbound/provider-azure/internal/controller/cluster/logic/apptriggerhttprequest"
 	apptriggerrecurrence "github.com/upbound/provider-azure/internal/controller/cluster/logic/apptriggerrecurrence"
 	appworkflow "github.com/upbound/provider-azure/internal/controller/cluster/logic/appworkflow"
+	aifoundry "github.com/upbound/provider-azure/internal/controller/cluster/machinelearningservices/aifoundry"
 	computecluster "github.com/upbound/provider-azure/internal/controller/cluster/machinelearningservices/computecluster"
 	computeinstance "github.com/upbound/provider-azure/internal/controller/cluster/machinelearningservices/computeinstance"
 	synapsespark "github.com/upbound/provider-azure/internal/controller/cluster/machinelearningservices/synapsespark"
@@ -875,6 +879,9 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		profile.Setup,
 		appservicecertificateorder.Setup,
 		accountcognitiveservices.Setup,
+		accountraiblocklist.Setup,
+		accountraipolicy.Setup,
+		aiservices.Setup,
 		deployment.Setup,
 		service.Setup,
 		availabilityset.Setup,
@@ -1139,6 +1146,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		apptriggerhttprequest.Setup,
 		apptriggerrecurrence.Setup,
 		appworkflow.Setup,
+		aifoundry.Setup,
 		computecluster.Setup,
 		computeinstance.Setup,
 		synapsespark.Setup,
@@ -1609,6 +1617,9 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		profile.SetupGated,
 		appservicecertificateorder.SetupGated,
 		accountcognitiveservices.SetupGated,
+		accountraiblocklist.SetupGated,
+		accountraipolicy.SetupGated,
+		aiservices.SetupGated,
 		deployment.SetupGated,
 		service.SetupGated,
 		availabilityset.SetupGated,
@@ -1873,6 +1884,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		apptriggerhttprequest.SetupGated,
 		apptriggerrecurrence.SetupGated,
 		appworkflow.SetupGated,
+		aifoundry.SetupGated,
 		computecluster.SetupGated,
 		computeinstance.SetupGated,
 		synapsespark.SetupGated,

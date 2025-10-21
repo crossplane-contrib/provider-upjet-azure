@@ -15,6 +15,7 @@ import (
 	"github.com/upbound/provider-azure/config/cluster/cache"
 	"github.com/upbound/provider-azure/config/cluster/cdn"
 	"github.com/upbound/provider-azure/config/cluster/certificateregistration"
+	"github.com/upbound/provider-azure/config/cluster/cognitiveservices"
 	"github.com/upbound/provider-azure/config/cluster/compute"
 	"github.com/upbound/provider-azure/config/cluster/consumption"
 	"github.com/upbound/provider-azure/config/cluster/containerapp"
@@ -32,6 +33,7 @@ import (
 	"github.com/upbound/provider-azure/config/cluster/insights"
 	"github.com/upbound/provider-azure/config/cluster/keyvault"
 	"github.com/upbound/provider-azure/config/cluster/kusto"
+	"github.com/upbound/provider-azure/config/cluster/machinelearningservices"
 	"github.com/upbound/provider-azure/config/cluster/management"
 	"github.com/upbound/provider-azure/config/cluster/netapp"
 	"github.com/upbound/provider-azure/config/cluster/network"
@@ -100,4 +102,6 @@ func init() {
 	ProviderConfiguration.AddConfig(certificateregistration.Configure)
 	ProviderConfiguration.AddConfig(orbital.Configure)
 	ProviderConfiguration.AddConfig(appplatform.Configure)
+	ProviderConfiguration.AddConfig(cognitiveservices.Configure)
+	ProviderConfiguration.AddConfig(machinelearningservices.Configure)
 }
