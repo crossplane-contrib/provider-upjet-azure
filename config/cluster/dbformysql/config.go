@@ -18,7 +18,7 @@ func Configure(p *config.Provider) {
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		r.LateInitializer = config.LateInitializer{
-			IgnoredFields: []string{"zone"},
+			ConditionalIgnoredFields: []string{"zone"},
 		}
 	})
 
