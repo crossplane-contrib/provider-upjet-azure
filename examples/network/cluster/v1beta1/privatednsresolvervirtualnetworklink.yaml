@@ -38,7 +38,7 @@ spec:
   forProvider:
     location: west europe
     privateDnsResolverOutboundEndpointIdsRefs:
-    - name: example
+    - name: example-pdnsrvnl
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
