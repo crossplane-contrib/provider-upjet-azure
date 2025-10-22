@@ -665,4 +665,15 @@ func Configure(p *config.Provider) {
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
+
+	p.AddResourceConfigurator("azurerm_private_dns_resolver_virtual_network_link", func(r *config.Resource) {
+		r.References["virtual_network_id"] = config.Reference{
+			TerraformName: "azurerm_virtual_network",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["dns_forwarding_ruleset_id"] = config.Reference{
+			TerraformName: "azurerm_private_dns_resolver_dns_forwarding_ruleset",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+	})
 }

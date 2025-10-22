@@ -79,6 +79,7 @@ import (
 	privatednsresolverforwardingrule "github.com/upbound/provider-azure/internal/controller/namespaced/network/privatednsresolverforwardingrule"
 	privatednsresolverinboundendpoint "github.com/upbound/provider-azure/internal/controller/namespaced/network/privatednsresolverinboundendpoint"
 	privatednsresolveroutboundendpoint "github.com/upbound/provider-azure/internal/controller/namespaced/network/privatednsresolveroutboundendpoint"
+	privatednsresolvervirtualnetworklink "github.com/upbound/provider-azure/internal/controller/namespaced/network/privatednsresolvervirtualnetworklink"
 	privatednssrvrecord "github.com/upbound/provider-azure/internal/controller/namespaced/network/privatednssrvrecord"
 	privatednstxtrecord "github.com/upbound/provider-azure/internal/controller/namespaced/network/privatednstxtrecord"
 	privatednszone "github.com/upbound/provider-azure/internal/controller/namespaced/network/privatednszone"
@@ -202,6 +203,7 @@ func Setup_network(mgr ctrl.Manager, o controller.Options) error {
 		privatednsresolverforwardingrule.Setup,
 		privatednsresolverinboundendpoint.Setup,
 		privatednsresolveroutboundendpoint.Setup,
+		privatednsresolvervirtualnetworklink.Setup,
 		privatednssrvrecord.Setup,
 		privatednstxtrecord.Setup,
 		privatednszone.Setup,
@@ -331,6 +333,7 @@ func SetupGated_network(mgr ctrl.Manager, o controller.Options) error {
 		privatednsresolverforwardingrule.SetupGated,
 		privatednsresolverinboundendpoint.SetupGated,
 		privatednsresolveroutboundendpoint.SetupGated,
+		privatednsresolvervirtualnetworklink.SetupGated,
 		privatednssrvrecord.SetupGated,
 		privatednstxtrecord.SetupGated,
 		privatednszone.SetupGated,

@@ -3507,6 +3507,56 @@ func (mg *PrivateDNSResolverOutboundEndpoint) SetWriteConnectionSecretToReferenc
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this PrivateDNSResolverVirtualNetworkLink.
+func (mg *PrivateDNSResolverVirtualNetworkLink) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this PrivateDNSResolverVirtualNetworkLink.
+func (mg *PrivateDNSResolverVirtualNetworkLink) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this PrivateDNSResolverVirtualNetworkLink.
+func (mg *PrivateDNSResolverVirtualNetworkLink) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this PrivateDNSResolverVirtualNetworkLink.
+func (mg *PrivateDNSResolverVirtualNetworkLink) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this PrivateDNSResolverVirtualNetworkLink.
+func (mg *PrivateDNSResolverVirtualNetworkLink) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this PrivateDNSResolverVirtualNetworkLink.
+func (mg *PrivateDNSResolverVirtualNetworkLink) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this PrivateDNSResolverVirtualNetworkLink.
+func (mg *PrivateDNSResolverVirtualNetworkLink) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this PrivateDNSResolverVirtualNetworkLink.
+func (mg *PrivateDNSResolverVirtualNetworkLink) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this PrivateDNSResolverVirtualNetworkLink.
+func (mg *PrivateDNSResolverVirtualNetworkLink) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this PrivateDNSResolverVirtualNetworkLink.
+func (mg *PrivateDNSResolverVirtualNetworkLink) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this PrivateDNSSRVRecord.
 func (mg *PrivateDNSSRVRecord) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)

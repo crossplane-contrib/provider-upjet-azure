@@ -4601,6 +4601,78 @@ func (mg *PrivateDNSResolverOutboundEndpoint) ResolveReferences(ctx context.Cont
 	return nil
 }
 
+// ResolveReferences of this PrivateDNSResolverVirtualNetworkLink.
+func (mg *PrivateDNSResolverVirtualNetworkLink) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "PrivateDNSResolverDNSForwardingRuleset", "PrivateDNSResolverDNSForwardingRulesetList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DNSForwardingRulesetID),
+			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.DNSForwardingRulesetIDRef,
+			Selector:     mg.Spec.ForProvider.DNSForwardingRulesetIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DNSForwardingRulesetID")
+	}
+	mg.Spec.ForProvider.DNSForwardingRulesetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DNSForwardingRulesetIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualNetwork", "VirtualNetworkList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VirtualNetworkID),
+			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.VirtualNetworkIDRef,
+			Selector:     mg.Spec.ForProvider.VirtualNetworkIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.VirtualNetworkID")
+	}
+	mg.Spec.ForProvider.VirtualNetworkID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VirtualNetworkIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualNetwork", "VirtualNetworkList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VirtualNetworkID),
+			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.VirtualNetworkIDRef,
+			Selector:     mg.Spec.InitProvider.VirtualNetworkIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.VirtualNetworkID")
+	}
+	mg.Spec.InitProvider.VirtualNetworkID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.VirtualNetworkIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this PrivateDNSSRVRecord.
 func (mg *PrivateDNSSRVRecord) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
