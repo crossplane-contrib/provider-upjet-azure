@@ -10,6 +10,9 @@ package v1beta1
 func (tr *ContainerApp) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *ContainerJob) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *CustomDomain) Hub() {}
 
 // Hub marks this type as a conversion hub.

@@ -181,6 +181,7 @@ import (
 	budgetresourcegroup "github.com/upbound/provider-azure/internal/controller/cluster/consumption/budgetresourcegroup"
 	budgetsubscription "github.com/upbound/provider-azure/internal/controller/cluster/consumption/budgetsubscription"
 	containerapp "github.com/upbound/provider-azure/internal/controller/cluster/containerapp/containerapp"
+	containerjob "github.com/upbound/provider-azure/internal/controller/cluster/containerapp/containerjob"
 	customdomaincontainerapp "github.com/upbound/provider-azure/internal/controller/cluster/containerapp/customdomain"
 	environment "github.com/upbound/provider-azure/internal/controller/cluster/containerapp/environment"
 	environmentcertificate "github.com/upbound/provider-azure/internal/controller/cluster/containerapp/environmentcertificate"
@@ -914,6 +915,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		budgetresourcegroup.Setup,
 		budgetsubscription.Setup,
 		containerapp.Setup,
+		containerjob.Setup,
 		customdomaincontainerapp.Setup,
 		environment.Setup,
 		environmentcertificate.Setup,
@@ -1653,6 +1655,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		budgetresourcegroup.SetupGated,
 		budgetsubscription.SetupGated,
 		containerapp.SetupGated,
+		containerjob.SetupGated,
 		customdomaincontainerapp.SetupGated,
 		environment.SetupGated,
 		environmentcertificate.SetupGated,

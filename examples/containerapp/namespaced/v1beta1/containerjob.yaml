@@ -1,0 +1,89 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: containerapp.azure.m.upbound.io/v1beta1
+kind: ContainerJob
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerapp/v1beta1/containerjob
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    containerAppEnvironmentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    location: West Europe
+    manualTriggerConfig:
+      parallelism: 4
+      replicaCompletionCount: 1
+    replicaRetryLimit: 10
+    replicaTimeoutInSeconds: 10
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    template:
+      container:
+      - cpu: 0.25
+        image: mcr.microsoft.com/k8se/quickstart-jobs:latest
+        memory: 0.5Gi
+        name: examplecontainerjob
+
+---
+
+apiVersion: containerapp.azure.m.upbound.io/v1beta1
+kind: Environment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerapp/v1beta1/containerjob
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    logAnalyticsWorkspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: operationalinsights.azure.m.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerapp/v1beta1/containerjob
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    retentionInDays: 30
+    sku: PerGB2018
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerapp/v1beta1/containerjob
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
