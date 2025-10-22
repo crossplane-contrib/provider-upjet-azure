@@ -8,7 +8,7 @@ import (
 	"github.com/crossplane/upjet/v2/pkg/config"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
-	"github.com/upbound/provider-azure/apis/cluster/rconfig"
+	"github.com/upbound/provider-azure/apis/namespaced/rconfig"
 )
 
 const group = "containerapp"

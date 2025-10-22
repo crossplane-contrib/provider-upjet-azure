@@ -12,8 +12,7 @@ import (
 	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-	rconfig "github.com/upbound/provider-azure/apis/cluster/rconfig"
-	rconfig1 "github.com/upbound/provider-azure/apis/namespaced/rconfig"
+	rconfig "github.com/upbound/provider-azure/apis/namespaced/rconfig"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -360,7 +359,7 @@ func (mg *Environment) ResolveReferences(ctx context.Context, c client.Reader) e
 
 		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.InfrastructureSubnetID),
-			Extract:      rconfig1.ExtractResourceID(),
+			Extract:      rconfig.ExtractResourceID(),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.InfrastructureSubnetIDRef,
 			Selector:     mg.Spec.ForProvider.InfrastructureSubnetIDSelector,
@@ -440,7 +439,7 @@ func (mg *Environment) ResolveReferences(ctx context.Context, c client.Reader) e
 
 		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InfrastructureSubnetID),
-			Extract:      rconfig1.ExtractResourceID(),
+			Extract:      rconfig.ExtractResourceID(),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.InfrastructureSubnetIDRef,
 			Selector:     mg.Spec.InitProvider.InfrastructureSubnetIDSelector,
