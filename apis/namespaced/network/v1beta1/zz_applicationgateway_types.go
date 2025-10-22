@@ -45,7 +45,7 @@ type ApplicationGatewayInitParameters struct {
 
 	// One or more frontend_ip_configuration blocks as defined below.
 	// +listType=map
-	// +listMapKey=name
+	// +listMapKey=index
 	FrontendIPConfiguration []FrontendIPConfigurationInitParameters `json:"frontendIpConfiguration,omitempty" tf:"frontend_ip_configuration,omitempty"`
 
 	// One or more frontend_port blocks as defined below.
@@ -53,7 +53,7 @@ type ApplicationGatewayInitParameters struct {
 
 	// One or more gateway_ip_configuration blocks as defined below.
 	// +listType=map
-	// +listMapKey=name
+	// +listMapKey=index
 	GatewayIPConfiguration []GatewayIPConfigurationInitParameters `json:"gatewayIpConfiguration,omitempty" tf:"gateway_ip_configuration,omitempty"`
 
 	// A global block as defined below.
@@ -147,7 +147,7 @@ type ApplicationGatewayObservation struct {
 
 	// One or more frontend_ip_configuration blocks as defined below.
 	// +listType=map
-	// +listMapKey=name
+	// +listMapKey=index
 	FrontendIPConfiguration []FrontendIPConfigurationObservation `json:"frontendIpConfiguration,omitempty" tf:"frontend_ip_configuration,omitempty"`
 
 	// One or more frontend_port blocks as defined below.
@@ -155,7 +155,7 @@ type ApplicationGatewayObservation struct {
 
 	// One or more gateway_ip_configuration blocks as defined below.
 	// +listType=map
-	// +listMapKey=name
+	// +listMapKey=index
 	GatewayIPConfiguration []GatewayIPConfigurationObservation `json:"gatewayIpConfiguration,omitempty" tf:"gateway_ip_configuration,omitempty"`
 
 	// A global block as defined below.
@@ -268,7 +268,7 @@ type ApplicationGatewayParameters struct {
 	// One or more frontend_ip_configuration blocks as defined below.
 	// +kubebuilder:validation:Optional
 	// +listType=map
-	// +listMapKey=name
+	// +listMapKey=index
 	FrontendIPConfiguration []FrontendIPConfigurationParameters `json:"frontendIpConfiguration,omitempty" tf:"frontend_ip_configuration,omitempty"`
 
 	// One or more frontend_port blocks as defined below.
@@ -278,7 +278,7 @@ type ApplicationGatewayParameters struct {
 	// One or more gateway_ip_configuration blocks as defined below.
 	// +kubebuilder:validation:Optional
 	// +listType=map
-	// +listMapKey=name
+	// +listMapKey=index
 	GatewayIPConfiguration []GatewayIPConfigurationParameters `json:"gatewayIpConfiguration,omitempty" tf:"gateway_ip_configuration,omitempty"`
 
 	// A global block as defined below.
@@ -826,6 +826,10 @@ type ExclusionParameters struct {
 
 type FrontendIPConfigurationInitParameters struct {
 
+	// This is an injected field with a default value for being able to merge items of the parent object list.
+	// +kubebuilder:default:=default
+	Index *string `json:"index,omitempty" tf:"-"`
+
 	// The name of the Frontend IP Configuration.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -870,6 +874,10 @@ type FrontendIPConfigurationObservation struct {
 	// The ID of the Frontend IP Configuration.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// This is an injected field with a default value for being able to merge items of the parent object list.
+	// +kubebuilder:default:=default
+	Index *string `json:"index,omitempty" tf:"-"`
+
 	// The name of the Frontend IP Configuration.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -893,6 +901,11 @@ type FrontendIPConfigurationObservation struct {
 }
 
 type FrontendIPConfigurationParameters struct {
+
+	// This is an injected field with a default value for being able to merge items of the parent object list.
+	// +kubebuilder:validation:Optional
+	// +kubebuilder:default:=default
+	Index *string `json:"index" tf:"-"`
 
 	// The name of the Frontend IP Configuration.
 	// +kubebuilder:validation:Optional
@@ -973,6 +986,10 @@ type FrontendPortParameters struct {
 
 type GatewayIPConfigurationInitParameters struct {
 
+	// This is an injected field with a default value for being able to merge items of the parent object list.
+	// +kubebuilder:default:=default
+	Index *string `json:"index,omitempty" tf:"-"`
+
 	// The Name of this Gateway IP Configuration.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -995,6 +1012,10 @@ type GatewayIPConfigurationObservation struct {
 	// The ID of the Gateway IP Configuration.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// This is an injected field with a default value for being able to merge items of the parent object list.
+	// +kubebuilder:default:=default
+	Index *string `json:"index,omitempty" tf:"-"`
+
 	// The Name of this Gateway IP Configuration.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -1003,6 +1024,11 @@ type GatewayIPConfigurationObservation struct {
 }
 
 type GatewayIPConfigurationParameters struct {
+
+	// This is an injected field with a default value for being able to merge items of the parent object list.
+	// +kubebuilder:validation:Optional
+	// +kubebuilder:default:=default
+	Index *string `json:"index" tf:"-"`
 
 	// The Name of this Gateway IP Configuration.
 	// +kubebuilder:validation:Optional

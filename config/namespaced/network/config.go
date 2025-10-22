@@ -481,8 +481,9 @@ func Configure(p *config.Provider) {
 		r.ServerSideApplyMergeStrategies["frontend_ip_configuration"] = config.MergeStrategy{
 			ListMergeStrategy: config.ListMergeStrategy{
 				ListMapKeys: config.ListMapKeys{
-					Keys: []string{
-						"name",
+					InjectedKey: config.InjectedKey{
+						Key:          "index",
+						DefaultValue: "default",
 					},
 				},
 				MergeStrategy: config.ListTypeMap,
@@ -491,8 +492,9 @@ func Configure(p *config.Provider) {
 		r.ServerSideApplyMergeStrategies["gateway_ip_configuration"] = config.MergeStrategy{
 			ListMergeStrategy: config.ListMergeStrategy{
 				ListMapKeys: config.ListMapKeys{
-					Keys: []string{
-						"name",
+					InjectedKey: config.InjectedKey{
+						Key:          "index",
+						DefaultValue: "default",
 					},
 				},
 				MergeStrategy: config.ListTypeMap,
