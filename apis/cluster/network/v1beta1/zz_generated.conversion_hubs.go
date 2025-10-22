@@ -169,6 +169,9 @@ func (tr *PrivateDNSResolverInboundEndpoint) Hub() {}
 func (tr *PrivateDNSResolverOutboundEndpoint) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *PrivateDNSResolverVirtualNetworkLink) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *PrivateDNSSRVRecord) Hub() {}
 
 // Hub marks this type as a conversion hub.

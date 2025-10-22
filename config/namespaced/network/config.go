@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+// SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
 //
 // SPDX-License-Identifier: CC0-1.0
 
@@ -640,6 +640,17 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_network_manager_verifier_workspace", func(r *config.Resource) {
 		r.References["network_manager_id"] = config.Reference{
 			TerraformName: "azurerm_network_manager",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_private_dns_resolver_virtual_network_link", func(r *config.Resource) {
+		r.References["virtual_network_id"] = config.Reference{
+			TerraformName: "azurerm_virtual_network",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["dns_forwarding_ruleset_id"] = config.Reference{
+			TerraformName: "azurerm_private_dns_resolver_dns_forwarding_ruleset",
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})

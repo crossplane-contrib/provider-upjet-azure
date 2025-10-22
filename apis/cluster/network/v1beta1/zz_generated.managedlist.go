@@ -637,6 +637,15 @@ func (l *PrivateDNSResolverOutboundEndpointList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this PrivateDNSResolverVirtualNetworkLinkList.
+func (l *PrivateDNSResolverVirtualNetworkLinkList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this PrivateDNSSRVRecordList.
 func (l *PrivateDNSSRVRecordList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
