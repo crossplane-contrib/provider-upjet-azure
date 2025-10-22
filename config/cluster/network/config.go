@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+// SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
 //
 // SPDX-License-Identifier: CC0-1.0
 
@@ -477,6 +477,28 @@ func Configure(p *config.Provider) {
 		r.References["frontend_ip_configuration.public_ip_address_id"] = config.Reference{
 			TerraformName: "azurerm_public_ip",
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+		r.ServerSideApplyMergeStrategies["frontend_ip_configuration"] = config.MergeStrategy{
+			ListMergeStrategy: config.ListMergeStrategy{
+				ListMapKeys: config.ListMapKeys{
+					InjectedKey: config.InjectedKey{
+						Key:          "index",
+						DefaultValue: "default",
+					},
+				},
+				MergeStrategy: config.ListTypeMap,
+			},
+		}
+		r.ServerSideApplyMergeStrategies["gateway_ip_configuration"] = config.MergeStrategy{
+			ListMergeStrategy: config.ListMergeStrategy{
+				ListMapKeys: config.ListMapKeys{
+					InjectedKey: config.InjectedKey{
+						Key:          "index",
+						DefaultValue: "default",
+					},
+				},
+				MergeStrategy: config.ListTypeMap,
+			},
 		}
 	})
 
