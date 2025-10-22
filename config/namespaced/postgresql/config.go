@@ -85,7 +85,8 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_postgresql_flexible_server", func(r *config.Resource) {
 		r.LateInitializer = config.LateInitializer{
-			IgnoredFields: []string{"ssl_enforcement", "storage_profile"},
+			IgnoredFields:            []string{"ssl_enforcement", "storage_profile"},
+			ConditionalIgnoredFields: []string{"zone"},
 		}
 		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]interface{}) (map[string][]byte, error) {
 			conn := map[string][]byte{
