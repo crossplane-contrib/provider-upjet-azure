@@ -9,7 +9,7 @@ metadata:
     meta.upbound.io/example-id: containerapp/v1beta1/containerjob
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: examplecontainerjob
   namespace: upbound-system
 spec:
   forProvider:
@@ -38,10 +38,11 @@ apiVersion: containerapp.azure.m.upbound.io/v1beta1
 kind: Environment
 metadata:
   annotations:
+    uptest.upbound.io/pre-delete-hook: ../testhooks/delete-containerjob.sh
     meta.upbound.io/example-id: containerapp/v1beta1/containerjob
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: examplecontainerjob
   namespace: upbound-system
 spec:
   forProvider:
@@ -62,7 +63,7 @@ metadata:
     meta.upbound.io/example-id: containerapp/v1beta1/containerjob
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: examplecontainerjob
   namespace: upbound-system
 spec:
   forProvider:
@@ -82,7 +83,7 @@ metadata:
     meta.upbound.io/example-id: containerapp/v1beta1/containerjob
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: examplecontainerjob
   namespace: upbound-system
 spec:
   forProvider:

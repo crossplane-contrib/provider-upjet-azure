@@ -9,7 +9,7 @@ metadata:
     meta.upbound.io/example-id: containerapp/v1beta1/containerjob
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: examplecontainerjob
 spec:
   forProvider:
     containerAppEnvironmentIdSelector:
@@ -37,10 +37,11 @@ apiVersion: containerapp.azure.upbound.io/v1beta1
 kind: Environment
 metadata:
   annotations:
+    uptest.upbound.io/pre-delete-hook: ../testhooks/delete-containerjob.sh
     meta.upbound.io/example-id: containerapp/v1beta1/containerjob
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: examplecontainerjob
 spec:
   forProvider:
     location: West Europe
@@ -60,7 +61,7 @@ metadata:
     meta.upbound.io/example-id: containerapp/v1beta1/containerjob
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: examplecontainerjob
 spec:
   forProvider:
     location: West Europe
@@ -79,7 +80,7 @@ metadata:
     meta.upbound.io/example-id: containerapp/v1beta1/containerjob
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: examplecontainerjob
 spec:
   forProvider:
     location: West Europe
