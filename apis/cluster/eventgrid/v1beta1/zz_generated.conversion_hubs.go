@@ -10,4 +10,10 @@ package v1beta1
 func (tr *DomainTopic) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *EventGridNamespace) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *PartnerConfiguration) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *SystemTopicEventSubscription) Hub() {}
