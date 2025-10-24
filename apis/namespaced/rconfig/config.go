@@ -7,6 +7,7 @@ package rconfig
 import (
 	"fmt"
 	"path"
+	"strings"
 
 	"github.com/crossplane/upjet/v2/pkg/resource"
 
@@ -77,14 +78,6 @@ func ExtractAccountContainerEndpoint() xpref.ExtractValueFn {
 		if err != nil {
 			return ""
 		}
-		accountNameVal, ok := ob["storageAccountName"]
-		if !ok {
-			return ""
-		}
-		accountName, ok := accountNameVal.(string)
-		if !ok {
-			return ""
-		}
 		containerIdVal, ok := ob["id"]
 		if !ok {
 			return ""
@@ -94,6 +87,8 @@ func ExtractAccountContainerEndpoint() xpref.ExtractValueFn {
 			return ""
 		}
 		containerName := path.Base(containerId)
+		accountId := strings.TrimSuffix(containerId, "/blobServices/default/containers/"+containerName)
+		accountName := path.Base(accountId)
 
 		return fmt.Sprintf("https://%s.blob.core.windows.net/%s", accountName, containerName)
 	}

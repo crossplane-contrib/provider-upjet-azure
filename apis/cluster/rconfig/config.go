@@ -7,6 +7,7 @@ package rconfig
 import (
 	"fmt"
 	"path"
+	"strings"
 
 	"github.com/crossplane/upjet/v2/pkg/resource"
 
@@ -63,10 +64,10 @@ func ExtractResourceLocation() xpref.ExtractValueFn {
 	}
 }
 
-// ExtractAccountContainerEndpoint extracts the value of `spec.atProvider.storageAccountName` and `spec.atProvider.id`
+// ExtractAccountContainerEndpoint extracts the value of `spec.atProvider.storageAccountId` and `spec.atProvider.id`
 // and creates blob container endpoint based on well-known format - https://{accountName}.blob.core.windows.net/{containerName}
 // from a Terraformed resource. If mr is not a Terraformed
-// resource or status.atProvider.storageAccountName status.atProvider.id is not yet populated returns an empty string.
+// resource or status.atProvider.storageAccountId or status.atProvider.id are not yet populated returns an empty string.
 func ExtractAccountContainerEndpoint() xpref.ExtractValueFn {
 	return func(mr xpresource.Managed) string {
 		tr, ok := mr.(resource.Terraformed)
@@ -75,14 +76,6 @@ func ExtractAccountContainerEndpoint() xpref.ExtractValueFn {
 		}
 		ob, err := tr.GetObservation()
 		if err != nil {
-			return ""
-		}
-		accountNameVal, ok := ob["storageAccountName"]
-		if !ok {
-			return ""
-		}
-		accountName, ok := accountNameVal.(string)
-		if !ok {
 			return ""
 		}
 		containerIdVal, ok := ob["id"]
@@ -94,6 +87,8 @@ func ExtractAccountContainerEndpoint() xpref.ExtractValueFn {
 			return ""
 		}
 		containerName := path.Base(containerId)
+		accountId := strings.TrimSuffix(containerId, "/blobServices/default/containers/"+containerName)
+		accountName := path.Base(accountId)
 
 		return fmt.Sprintf("https://%s.blob.core.windows.net/%s", accountName, containerName)
 	}

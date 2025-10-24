@@ -24,10 +24,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     siteConfig: {}
-    storageAccessKeySecretRef:
-      key: example-key
-      name: example-secret-stor
-      namespace: upbound-system
+    storageAccessKey: key1
     storageAuthenticationType: StorageAccountConnectionString
     storageContainerEndpointSelector:
       matchLabels:
