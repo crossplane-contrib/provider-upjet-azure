@@ -5,7 +5,10 @@
 package network
 
 import (
+	"github.com/crossplane/upjet/v2/pkg/types/markers/kubebuilder"
+	"github.com/crossplane/upjet/v2/pkg/types/structtag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
+	"k8s.io/utils/ptr"
 
 	"github.com/crossplane/upjet/v2/pkg/config"
 
@@ -568,6 +571,32 @@ func Configure(p *config.Provider) {
 		r.References["virtual_network_name"] = config.Reference{
 			TerraformName: "azurerm_virtual_network",
 		}
+
+		// delegation schema element options.
+		r.SchemaElementOptions.SetInitProviderOverrides("delegation", &config.InitProviderOverrides{
+			// remove `,omitempty` from spec.initProvider.delegation struct tags.
+			TagOverrides: config.TagOverrides{
+				TFTag:   structtag.MustParseTF(``),
+				JSONTag: structtag.MustParseTF(``),
+			},
+			// mark spec.initProvider.delegation as optional.
+			KubebuilderOptions: &kubebuilder.Options{
+				Required: ptr.To(false),
+			},
+		})
+		// service_endpoints schema element options.
+		r.SchemaElementOptions.SetInitProviderOverrides("service_endpoints", &config.InitProviderOverrides{
+			// remove `,omitempty` from spec.initProvider.serviceEndpoints
+			// struct tags.
+			TagOverrides: config.TagOverrides{
+				TFTag:   structtag.MustParseTF(``),
+				JSONTag: structtag.MustParseTF(``),
+			},
+			// mark spec.initProvider.serviceEndpoints as optional.
+			KubebuilderOptions: &kubebuilder.Options{
+				Required: ptr.To(false),
+			},
+		})
 	})
 
 	p.AddResourceConfigurator("azurerm_subnet_nat_gateway_association", func(r *config.Resource) {
