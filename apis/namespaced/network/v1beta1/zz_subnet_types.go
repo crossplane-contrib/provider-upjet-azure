@@ -84,7 +84,8 @@ type SubnetInitParameters struct {
 	DefaultOutboundAccessEnabled *bool `json:"defaultOutboundAccessEnabled,omitempty" tf:"default_outbound_access_enabled,omitempty"`
 
 	// One or more delegation blocks as defined below.
-	Delegation []DelegationInitParameters `json:"delegation,omitempty" tf:"delegation,omitempty"`
+	// +kubebuilder:validation:Optional
+	Delegation []DelegationInitParameters `json:"delegation" tf:"delegation"`
 
 	// Enable or Disable network policies for the private endpoint on the subnet. Possible values are Disabled, Enabled, NetworkSecurityGroupEnabled and RouteTableEnabled. Defaults to Disabled.
 	PrivateEndpointNetworkPolicies *string `json:"privateEndpointNetworkPolicies,omitempty" tf:"private_endpoint_network_policies,omitempty"`
@@ -97,8 +98,9 @@ type SubnetInitParameters struct {
 	ServiceEndpointPolicyIds []*string `json:"serviceEndpointPolicyIds,omitempty" tf:"service_endpoint_policy_ids,omitempty"`
 
 	// The list of Service endpoints to associate with the subnet. Possible values include: Microsoft.AzureActiveDirectory, Microsoft.AzureCosmosDB, Microsoft.ContainerRegistry, Microsoft.EventHub, Microsoft.KeyVault, Microsoft.ServiceBus, Microsoft.Sql, Microsoft.Storage, Microsoft.Storage.Global and Microsoft.Web.
+	// +kubebuilder:validation:Optional
 	// +listType=set
-	ServiceEndpoints []*string `json:"serviceEndpoints,omitempty" tf:"service_endpoints,omitempty"`
+	ServiceEndpoints []*string `json:"serviceEndpoints" tf:"service_endpoints"`
 }
 
 type SubnetObservation struct {
