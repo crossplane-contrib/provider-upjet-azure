@@ -725,6 +725,7 @@ import (
 	appserviceplan "github.com/upbound/provider-azure/internal/controller/cluster/web/appserviceplan"
 	functionapp "github.com/upbound/provider-azure/internal/controller/cluster/web/functionapp"
 	functionappactiveslot "github.com/upbound/provider-azure/internal/controller/cluster/web/functionappactiveslot"
+	functionappflexconsumption "github.com/upbound/provider-azure/internal/controller/cluster/web/functionappflexconsumption"
 	functionappfunction "github.com/upbound/provider-azure/internal/controller/cluster/web/functionappfunction"
 	functionapphybridconnection "github.com/upbound/provider-azure/internal/controller/cluster/web/functionapphybridconnection"
 	functionappslot "github.com/upbound/provider-azure/internal/controller/cluster/web/functionappslot"
@@ -1461,6 +1462,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		appserviceplan.Setup,
 		functionapp.Setup,
 		functionappactiveslot.Setup,
+		functionappflexconsumption.Setup,
 		functionappfunction.Setup,
 		functionapphybridconnection.Setup,
 		functionappslot.Setup,
@@ -2203,6 +2205,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		appserviceplan.SetupGated,
 		functionapp.SetupGated,
 		functionappactiveslot.SetupGated,
+		functionappflexconsumption.SetupGated,
 		functionappfunction.SetupGated,
 		functionapphybridconnection.SetupGated,
 		functionappslot.SetupGated,
