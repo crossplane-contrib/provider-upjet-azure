@@ -7,10 +7,9 @@ kind: FunctionAppFlexConsumption
 metadata:
   annotations:
     meta.upbound.io/example-id: web/v1beta1/functionappflexconsumption
-    upjet.upbound.io/manual-intervention: "Requires existing blob storage key"
   labels:
     testing.upbound.io/example-name: example
-  name: functionappflexname
+  name: functionappflexnamen12a
   namespace: upbound-system
 spec:
   forProvider:
@@ -38,10 +37,9 @@ kind: ResourceGroup
 metadata:
   annotations:
     meta.upbound.io/example-id: web/v1beta1/functionappflexconsumption
-    upjet.upbound.io/manual-intervention: "Requires existing blob storage key"
   labels:
     testing.upbound.io/example-name: example
-  name: functionappflexname
+  name: functionappflexnamen12a
   namespace: upbound-system
 spec:
   forProvider:
@@ -54,10 +52,9 @@ kind: ServicePlan
 metadata:
   annotations:
     meta.upbound.io/example-id: web/v1beta1/functionappflexconsumption
-    upjet.upbound.io/manual-intervention: "Requires existing blob storage key"
   labels:
     testing.upbound.io/example-name: example
-  name: functionappflexname
+  name: functionappflexnamen12a
   namespace: upbound-system
 spec:
   forProvider:
@@ -75,10 +72,9 @@ kind: Account
 metadata:
   annotations:
     meta.upbound.io/example-id: web/v1beta1/functionappflexconsumption
-    upjet.upbound.io/manual-intervention: "Requires existing blob storage key"
   labels:
     testing.upbound.io/example-name: example
-  name: functionappflexname
+  name: functionappflexnamen12a
   namespace: upbound-system
 spec:
   forProvider:
@@ -96,10 +92,9 @@ kind: Container
 metadata:
   annotations:
     meta.upbound.io/example-id: web/v1beta1/functionappflexconsumption
-    upjet.upbound.io/manual-intervention: "Requires existing blob storage key"
   labels:
     testing.upbound.io/example-name: example
-  name: functionappflexname
+  name: functionappflexnamen12a
   namespace: upbound-system
 spec:
   forProvider:
@@ -107,14 +102,3 @@ spec:
     storageAccountIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-
----
-
-apiVersion: v1
-kind: Secret
-metadata:
-  name: example-secret-stor
-  namespace: upbound-system
-type: Opaque
-data:
-  example-key: dmwyOVpMeHgrQXF4TkJ4T3h1aUgwUGNwcjNYeWpLOXBmcmhLbmtoQkQrRzUrRUt3aWpiQzFJMVVYNitRenR3OG5MUEVqN1ZIYVJQTCtBU3REMzF2cHc9PQ==

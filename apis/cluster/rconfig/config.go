@@ -64,10 +64,10 @@ func ExtractResourceLocation() xpref.ExtractValueFn {
 	}
 }
 
-// ExtractAccountContainerEndpoint extracts the value of `spec.atProvider.storageAccountId` and `spec.atProvider.id`
+// ExtractAccountContainerEndpoint extracts the value of `spec.atProvider.id`
 // and creates blob container endpoint based on well-known format - https://{accountName}.blob.core.windows.net/{containerName}
 // from a Terraformed resource. If mr is not a Terraformed
-// resource or status.atProvider.storageAccountId or status.atProvider.id are not yet populated returns an empty string.
+// resource or status.atProvider.id are not yet populated returns an empty string.
 func ExtractAccountContainerEndpoint() xpref.ExtractValueFn {
 	return func(mr xpresource.Managed) string {
 		tr, ok := mr.(resource.Terraformed)
