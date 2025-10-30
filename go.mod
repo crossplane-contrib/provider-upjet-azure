@@ -13,7 +13,7 @@ require (
 	github.com/alecthomas/kingpin/v2 v2.4.0
 	github.com/crossplane/crossplane-runtime/v2 v2.0.0-20250730220209-c306b1c8b181
 	github.com/crossplane/crossplane-tools v0.0.0-20250731192036-00d407d8b7ec
-	github.com/crossplane/upjet/v2 v2.0.1-0.20251016125717-bc4227e2dc7a
+	github.com/crossplane/upjet/v2 v2.1.1-0.20251030162835-460b31292ae7
 	github.com/google/go-cmp v0.7.0
 	github.com/hashicorp/terraform-json v0.25.0
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.37.0
@@ -24,6 +24,7 @@ require (
 	k8s.io/apiextensions-apiserver v0.33.0
 	k8s.io/apimachinery v0.33.0
 	k8s.io/client-go v0.33.0
+	k8s.io/utils v0.0.0-20250321185631-1f6e0b77f77e
 	sigs.k8s.io/controller-runtime v0.19.0
 	sigs.k8s.io/controller-tools v0.18.0
 )
@@ -165,7 +166,6 @@ require (
 	k8s.io/gengo/v2 v2.0.0-20250207200755-1244d31929d7 // indirect
 	k8s.io/klog/v2 v2.130.1 // indirect
 	k8s.io/kube-openapi v0.0.0-20250318190949-c8a335a9a2ff // indirect
-	k8s.io/utils v0.0.0-20250321185631-1f6e0b77f77e // indirect
 	sigs.k8s.io/json v0.0.0-20241014173422-cfa47c3a1cc8 // indirect
 	sigs.k8s.io/randfill v1.0.0 // indirect
 	sigs.k8s.io/structured-merge-diff/v4 v4.6.0 // indirect
