@@ -16,6 +16,9 @@ func (tr *AppHybridConnection) Hub() {}
 func (tr *FunctionAppActiveSlot) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *FunctionAppFlexConsumption) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *FunctionAppFunction) Hub() {}
 
 // Hub marks this type as a conversion hub.
