@@ -191,6 +191,7 @@ import (
 	environmentstorage "github.com/upbound/provider-azure/internal/controller/cluster/containerapp/environmentstorage"
 	agentpool "github.com/upbound/provider-azure/internal/controller/cluster/containerregistry/agentpool"
 	containerconnectedregistry "github.com/upbound/provider-azure/internal/controller/cluster/containerregistry/containerconnectedregistry"
+	credentialset "github.com/upbound/provider-azure/internal/controller/cluster/containerregistry/credentialset"
 	registry "github.com/upbound/provider-azure/internal/controller/cluster/containerregistry/registry"
 	scopemap "github.com/upbound/provider-azure/internal/controller/cluster/containerregistry/scopemap"
 	token "github.com/upbound/provider-azure/internal/controller/cluster/containerregistry/token"
@@ -933,6 +934,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		environmentstorage.Setup,
 		agentpool.Setup,
 		containerconnectedregistry.Setup,
+		credentialset.Setup,
 		registry.Setup,
 		scopemap.Setup,
 		token.Setup,
@@ -1681,6 +1683,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		environmentstorage.SetupGated,
 		agentpool.SetupGated,
 		containerconnectedregistry.SetupGated,
+		credentialset.SetupGated,
 		registry.SetupGated,
 		scopemap.SetupGated,
 		token.SetupGated,

@@ -41,4 +41,19 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_container_registry_webhook", func(r *config.Resource) {
 		r.ExternalName.IdentifierFields = common.RemoveIndex(r.ExternalName.IdentifierFields, "registry_name")
 	})
+
+	p.AddResourceConfigurator("azurerm_container_registry_credential_set", func(r *config.Resource) {
+		r.References["container_registry_id"] = config.Reference{
+			TerraformName: "azurerm_container_registry",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["authentication_credentials.username_secret_id"] = config.Reference{
+			TerraformName: "azurerm_key_vault_secret",
+			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("versionless_id",true)`,
+		}
+		r.References["authentication_credentials.password_secret_id"] = config.Reference{
+			TerraformName: "azurerm_key_vault_secret",
+			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("versionless_id",true)`,
+		}
+	})
 }
