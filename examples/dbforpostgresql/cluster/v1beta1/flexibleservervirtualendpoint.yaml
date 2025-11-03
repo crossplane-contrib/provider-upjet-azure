@@ -6,13 +6,14 @@ apiVersion: dbforpostgresql.azure.upbound.io/v1beta1
 kind: FlexibleServerVirtualEndpoint
 metadata:
   annotations:
-    uptest.upbound.io/timeout: "7200"
+    uptest.upbound.io/timeout: "3600"
     meta.upbound.io/example-id: dbforpostgresql/v1beta1/flexibleservervirtualendpoint
   labels:
     testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
+    name: example
     replicaServerIdSelector:
       matchLabels:
         testing.upbound.io/example-name: replica
@@ -27,7 +28,7 @@ apiVersion: dbforpostgresql.azure.upbound.io/v1beta2
 kind: FlexibleServer
 metadata:
   annotations:
-    uptest.upbound.io/timeout: "7200"
+    uptest.upbound.io/timeout: "3600"
     uptest.upbound.io/pre-delete-hook: ../testhooks/delete-flexibleserver-replica.sh
     meta.upbound.io/example-id: dbforpostgresql/v1beta1/flexibleservervirtualendpoint
   labels:
@@ -46,7 +47,7 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    skuName: B_Standard_B1ms
+    skuName: GP_Standard_D4s_v3
     storageMb: 32768
     storageTier: P4
     version: "16"
@@ -57,7 +58,7 @@ apiVersion: dbforpostgresql.azure.upbound.io/v1beta2
 kind: FlexibleServer
 metadata:
   annotations:
-    uptest.upbound.io/timeout: "7200"
+    uptest.upbound.io/timeout: "3600"
     meta.upbound.io/example-id: dbforpostgresql/v1beta1/flexibleservervirtualendpoint
   labels:
     testing.upbound.io/example-name: replica
@@ -70,7 +71,7 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    skuName: B_Standard_B1ms
+    skuName: GP_Standard_D4s_v3
     sourceServerIdSelector:
       matchLabels:
         testing.upbound.io/example-name: source
@@ -84,7 +85,7 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   annotations:
-    uptest.upbound.io/timeout: "7200"
+    uptest.upbound.io/timeout: "3600"
     meta.upbound.io/example-id: dbforpostgresql/v1beta1/flexibleservervirtualendpoint
   labels:
     testing.upbound.io/example-name: example

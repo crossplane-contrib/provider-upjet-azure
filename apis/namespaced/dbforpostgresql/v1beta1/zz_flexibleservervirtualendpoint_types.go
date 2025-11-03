@@ -16,6 +16,38 @@ import (
 
 type FlexibleServerVirtualEndpointInitParameters struct {
 
+	// The name of the Virtual Endpoint
+	// The name of the Virtual Endpoint
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The Resource ID of the Replica Postgres Flexible Server this should be associated with
+	// The Resource ID of the *Replica* Postgres Flexible Server this should be associated with
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/dbforpostgresql/v1beta1.FlexibleServer
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	ReplicaServerID *string `json:"replicaServerId,omitempty" tf:"replica_server_id,omitempty"`
+
+	// Reference to a FlexibleServer in dbforpostgresql to populate replicaServerId.
+	// +kubebuilder:validation:Optional
+	ReplicaServerIDRef *v1.NamespacedReference `json:"replicaServerIdRef,omitempty" tf:"-"`
+
+	// Selector for a FlexibleServer in dbforpostgresql to populate replicaServerId.
+	// +kubebuilder:validation:Optional
+	ReplicaServerIDSelector *v1.NamespacedSelector `json:"replicaServerIdSelector,omitempty" tf:"-"`
+
+	// The Resource ID of the Source Postgres Flexible Server this should be associated with.
+	// The Resource ID of the *Source* Postgres Flexible Server this should be associated with
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/dbforpostgresql/v1beta1.FlexibleServer
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	SourceServerID *string `json:"sourceServerId,omitempty" tf:"source_server_id,omitempty"`
+
+	// Reference to a FlexibleServer in dbforpostgresql to populate sourceServerId.
+	// +kubebuilder:validation:Optional
+	SourceServerIDRef *v1.NamespacedReference `json:"sourceServerIdRef,omitempty" tf:"-"`
+
+	// Selector for a FlexibleServer in dbforpostgresql to populate sourceServerId.
+	// +kubebuilder:validation:Optional
+	SourceServerIDSelector *v1.NamespacedSelector `json:"sourceServerIdSelector,omitempty" tf:"-"`
+
 	// The type of Virtual Endpoint. Currently only ReadWrite is supported.
 	// The type of Virtual Endpoint
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -25,6 +57,10 @@ type FlexibleServerVirtualEndpointObservation struct {
 
 	// The ID of the PostgreSQL Flexible Virtual Endpoint.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the Virtual Endpoint
+	// The name of the Virtual Endpoint
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The Resource ID of the Replica Postgres Flexible Server this should be associated with
 	// The Resource ID of the *Replica* Postgres Flexible Server this should be associated with
@@ -40,6 +76,11 @@ type FlexibleServerVirtualEndpointObservation struct {
 }
 
 type FlexibleServerVirtualEndpointParameters struct {
+
+	// The name of the Virtual Endpoint
+	// The name of the Virtual Endpoint
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The Resource ID of the Replica Postgres Flexible Server this should be associated with
 	// The Resource ID of the *Replica* Postgres Flexible Server this should be associated with
@@ -113,6 +154,7 @@ type FlexibleServerVirtualEndpointStatus struct {
 type FlexibleServerVirtualEndpoint struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type) || (has(self.initProvider) && has(self.initProvider.type))",message="spec.forProvider.type is a required parameter"
 	Spec   FlexibleServerVirtualEndpointSpec   `json:"spec"`
 	Status FlexibleServerVirtualEndpointStatus `json:"status,omitempty"`

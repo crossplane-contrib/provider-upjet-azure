@@ -12,6 +12,7 @@ metadata:
   name: example
 spec:
   forProvider:
+    name: example-endpoint-1
     replicaServerIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example_replica
