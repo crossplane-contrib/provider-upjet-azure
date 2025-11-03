@@ -18,6 +18,7 @@ import (
 	flexibleserverconfiguration "github.com/upbound/provider-azure/internal/controller/namespaced/dbforpostgresql/flexibleserverconfiguration"
 	flexibleserverdatabase "github.com/upbound/provider-azure/internal/controller/namespaced/dbforpostgresql/flexibleserverdatabase"
 	flexibleserverfirewallrule "github.com/upbound/provider-azure/internal/controller/namespaced/dbforpostgresql/flexibleserverfirewallrule"
+	flexibleservervirtualendpoint "github.com/upbound/provider-azure/internal/controller/namespaced/dbforpostgresql/flexibleservervirtualendpoint"
 	server "github.com/upbound/provider-azure/internal/controller/namespaced/dbforpostgresql/server"
 	serverkey "github.com/upbound/provider-azure/internal/controller/namespaced/dbforpostgresql/serverkey"
 	virtualnetworkrule "github.com/upbound/provider-azure/internal/controller/namespaced/dbforpostgresql/virtualnetworkrule"
@@ -36,6 +37,7 @@ func Setup_dbforpostgresql(mgr ctrl.Manager, o controller.Options) error {
 		flexibleserverconfiguration.Setup,
 		flexibleserverdatabase.Setup,
 		flexibleserverfirewallrule.Setup,
+		flexibleservervirtualendpoint.Setup,
 		server.Setup,
 		serverkey.Setup,
 		virtualnetworkrule.Setup,
@@ -60,6 +62,7 @@ func SetupGated_dbforpostgresql(mgr ctrl.Manager, o controller.Options) error {
 		flexibleserverconfiguration.SetupGated,
 		flexibleserverdatabase.SetupGated,
 		flexibleserverfirewallrule.SetupGated,
+		flexibleservervirtualendpoint.SetupGated,
 		server.SetupGated,
 		serverkey.SetupGated,
 		virtualnetworkrule.SetupGated,

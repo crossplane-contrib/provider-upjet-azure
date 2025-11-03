@@ -88,6 +88,10 @@ func Configure(p *config.Provider) {
 			IgnoredFields:            []string{"ssl_enforcement", "storage_profile"},
 			ConditionalIgnoredFields: []string{"zone"},
 		}
+		r.References["source_server_id"] = config.Reference{
+			TerraformName: "azurerm_postgresql_flexible_server",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
 		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]interface{}) (map[string][]byte, error) {
 			conn := map[string][]byte{
 				xpv1.ResourceCredentialsSecretEndpointKey: []byte(attr["fqdn"].(string)),
@@ -142,6 +146,17 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_postgresql_configuration", func(r *config.Resource) {
 		r.References["server_name"] = config.Reference{
 			TerraformName: "azurerm_postgresql_server",
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_postgresql_flexible_server_virtual_endpoint", func(r *config.Resource) {
+		r.References["source_server_id"] = config.Reference{
+			TerraformName: "azurerm_postgresql_flexible_server",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["replica_server_id"] = config.Reference{
+			TerraformName: "azurerm_postgresql_flexible_server",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 }

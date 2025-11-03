@@ -1,0 +1,93 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: dbforpostgresql.azure.m.upbound.io/v1beta1
+kind: FlexibleServerVirtualEndpoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1beta1/flexibleservervirtualendpoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    replicaServerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example_replica
+    sourceServerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    type: ReadWrite
+
+---
+
+apiVersion: dbforpostgresql.azure.m.upbound.io/v1beta1
+kind: FlexibleServer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1beta1/flexibleservervirtualendpoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    administratorLogin: psqladmin
+    administratorPasswordSecretRef:
+      key: example-key
+      name: example-secret
+    location: East US
+    publicNetworkAccessEnabled: false
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: GP_Standard_D2ads_v5
+    storageMb: 32768
+    storageTier: P30
+    version: "16"
+    zone: "1"
+
+---
+
+apiVersion: dbforpostgresql.azure.m.upbound.io/v1beta1
+kind: FlexibleServer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1beta1/flexibleservervirtualendpoint
+  labels:
+    testing.upbound.io/example-name: example_replica
+  name: example-replica
+  namespace: upbound-system
+spec:
+  forProvider:
+    createMode: Replica
+    location: East US
+    publicNetworkAccessEnabled: false
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: GP_Standard_D2ads_v5
+    sourceServerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    storageMb: 32768
+    storageTier: P30
+    version: "16"
+    zone: "1"
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1beta1/flexibleservervirtualendpoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: East US

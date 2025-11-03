@@ -306,6 +306,7 @@ import (
 	flexibleserverconfigurationdbforpostgresql "github.com/upbound/provider-azure/internal/controller/cluster/dbforpostgresql/flexibleserverconfiguration"
 	flexibleserverdatabase "github.com/upbound/provider-azure/internal/controller/cluster/dbforpostgresql/flexibleserverdatabase"
 	flexibleserverfirewallruledbforpostgresql "github.com/upbound/provider-azure/internal/controller/cluster/dbforpostgresql/flexibleserverfirewallrule"
+	flexibleservervirtualendpoint "github.com/upbound/provider-azure/internal/controller/cluster/dbforpostgresql/flexibleservervirtualendpoint"
 	serverdbforpostgresql "github.com/upbound/provider-azure/internal/controller/cluster/dbforpostgresql/server"
 	serverkey "github.com/upbound/provider-azure/internal/controller/cluster/dbforpostgresql/serverkey"
 	virtualnetworkrule "github.com/upbound/provider-azure/internal/controller/cluster/dbforpostgresql/virtualnetworkrule"
@@ -1044,6 +1045,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		flexibleserverconfigurationdbforpostgresql.Setup,
 		flexibleserverdatabase.Setup,
 		flexibleserverfirewallruledbforpostgresql.Setup,
+		flexibleservervirtualendpoint.Setup,
 		serverdbforpostgresql.Setup,
 		serverkey.Setup,
 		virtualnetworkrule.Setup,
@@ -1788,6 +1790,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		flexibleserverconfigurationdbforpostgresql.SetupGated,
 		flexibleserverdatabase.SetupGated,
 		flexibleserverfirewallruledbforpostgresql.SetupGated,
+		flexibleservervirtualendpoint.SetupGated,
 		serverdbforpostgresql.SetupGated,
 		serverkey.SetupGated,
 		virtualnetworkrule.SetupGated,

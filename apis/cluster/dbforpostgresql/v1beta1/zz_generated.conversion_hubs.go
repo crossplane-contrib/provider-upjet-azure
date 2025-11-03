@@ -31,6 +31,9 @@ func (tr *FlexibleServerDatabase) Hub() {}
 func (tr *FlexibleServerFirewallRule) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *FlexibleServerVirtualEndpoint) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *ServerKey) Hub() {}
 
 // Hub marks this type as a conversion hub.
