@@ -7,6 +7,7 @@ kind: WorkspaceOutboundRulePrivateEndpoint
 metadata:
   annotations:
     meta.upbound.io/example-id: machinelearningservices/v1beta1/workspaceoutboundruleprivateendpoint
+    uptest.upbound.io/timeout: "3600"
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -28,9 +29,10 @@ kind: Account
 metadata:
   annotations:
     meta.upbound.io/example-id: machinelearningservices/v1beta1/workspaceoutboundruleprivateendpoint
+    uptest.upbound.io/timeout: "3600"
   labels:
     testing.upbound.io/example-name: example2
-  name: exampleoutrule2pepv1b1ns
+  name: exampleoutrul2pepv1b1ns
   namespace: upbound-system
 spec:
   forProvider:
@@ -48,9 +50,10 @@ kind: Workspace
 metadata:
   annotations:
     meta.upbound.io/example-id: machinelearningservices/v1beta1/workspaceoutboundruleprivateendpoint
+    uptest.upbound.io/timeout: "3600"
   labels:
     testing.upbound.io/example-name: example
-  name: exampleoutrulepepv1b1ns
+  name: exampleoutrulpepv1b1ns
   namespace: upbound-system
 spec:
   forProvider:
@@ -60,7 +63,7 @@ spec:
     managedNetwork:
       isolationMode: AllowOnlyApprovedOutbound
     identity:
-    - type: SystemAssigned
+      type: SystemAssigned
     keyVaultIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -79,9 +82,10 @@ kind: ApplicationInsights
 metadata:
   annotations:
     meta.upbound.io/example-id: machinelearningservices/v1beta1/workspaceoutboundruleprivateendpoint
+    uptest.upbound.io/timeout: "3600"
   labels:
     testing.upbound.io/example-name: example
-  name: exampleoutrulepepv1b1ns
+  name: exampleoutrulpepv1b1ns
   namespace: upbound-system
 spec:
   forProvider:
@@ -98,9 +102,10 @@ kind: Vault
 metadata:
   annotations:
     meta.upbound.io/example-id: machinelearningservices/v1beta1/workspaceoutboundruleprivateendpoint
+    uptest.upbound.io/timeout: "3600"
   labels:
     testing.upbound.io/example-name: example
-  name: exampleoutrulepepv1b1ns
+  name: exampleoutrulpepv1b1ns
   namespace: upbound-system
 spec:
   forProvider:
@@ -119,9 +124,10 @@ kind: ResourceGroup
 metadata:
   annotations:
     meta.upbound.io/example-id: machinelearningservices/v1beta1/workspaceoutboundruleprivateendpoint
+    uptest.upbound.io/timeout: "3600"
   labels:
     testing.upbound.io/example-name: example
-  name: exampleoutrulepepv1b1ns
+  name: exampleoutrulpepv1b1ns
   namespace: upbound-system
 spec:
   forProvider:
@@ -134,9 +140,10 @@ kind: Account
 metadata:
   annotations:
     meta.upbound.io/example-id: machinelearningservices/v1beta1/workspaceoutboundruleprivateendpoint
+    uptest.upbound.io/timeout: "3600"
   labels:
     testing.upbound.io/example-name: example
-  name: exampleoutrulepepv1b1ns
+  name: exampleoutrulpepv1b1ns
   namespace: upbound-system
 spec:
   forProvider:

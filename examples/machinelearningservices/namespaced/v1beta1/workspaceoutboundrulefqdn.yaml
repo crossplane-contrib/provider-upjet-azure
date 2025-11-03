@@ -7,6 +7,7 @@ kind: WorkspaceOutboundRuleFqdn
 metadata:
   annotations:
     meta.upbound.io/example-id: machinelearningservices/v1beta1/workspaceoutboundrulefqdn
+    uptest.upbound.io/timeout: "3600"
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -25,9 +26,10 @@ kind: Workspace
 metadata:
   annotations:
     meta.upbound.io/example-id: machinelearningservices/v1beta1/workspaceoutboundrulefqdn
+    uptest.upbound.io/timeout: "3600"
   labels:
     testing.upbound.io/example-name: example
-  name: exampleoutrulefqdnv1b1ns
+  name: exampleoutrulfqdnv1b1ns
   namespace: upbound-system
 spec:
   forProvider:
@@ -37,7 +39,7 @@ spec:
     managedNetwork:
       isolationMode: AllowOnlyApprovedOutbound
     identity:
-    - type: SystemAssigned
+      type: SystemAssigned
     keyVaultIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -56,9 +58,10 @@ kind: ApplicationInsights
 metadata:
   annotations:
     meta.upbound.io/example-id: machinelearningservices/v1beta1/workspaceoutboundrulefqdn
+    uptest.upbound.io/timeout: "3600"
   labels:
     testing.upbound.io/example-name: example
-  name: exampleoutrulefqdnv1b1ns
+  name: exampleoutrulfqdnv1b1ns
   namespace: upbound-system
 spec:
   forProvider:
@@ -75,9 +78,10 @@ kind: Vault
 metadata:
   annotations:
     meta.upbound.io/example-id: machinelearningservices/v1beta1/workspaceoutboundrulefqdn
+    uptest.upbound.io/timeout: "3600"
   labels:
     testing.upbound.io/example-name: example
-  name: exampleoutrulefqdnv1b1ns
+  name: exampleoutrulfqdnv1b1ns
   namespace: upbound-system
 spec:
   forProvider:
@@ -96,9 +100,10 @@ kind: ResourceGroup
 metadata:
   annotations:
     meta.upbound.io/example-id: machinelearningservices/v1beta1/workspaceoutboundrulefqdn
+    uptest.upbound.io/timeout: "3600"
   labels:
     testing.upbound.io/example-name: example
-  name: exampleoutrulefqdnv1b1ns
+  name: exampleoutrulfqdnv1b1ns
   namespace: upbound-system
 spec:
   forProvider:
@@ -111,9 +116,10 @@ kind: Account
 metadata:
   annotations:
     meta.upbound.io/example-id: machinelearningservices/v1beta1/workspaceoutboundrulefqdn
+    uptest.upbound.io/timeout: "3600"
   labels:
     testing.upbound.io/example-name: example
-  name: exampleoutrulefqdnv1b1ns
+  name: exampleoutrulfqdnv1b1ns
   namespace: upbound-system
 spec:
   forProvider:
