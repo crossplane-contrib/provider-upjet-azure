@@ -55,6 +55,7 @@ const (
 	keyEnvironment              = "environment"
 	keyOidcTokenFilePath        = "oidc_token_file_path"
 	keyUseOIDC                  = "use_oidc"
+	keyStorageUseAzureAD        = "storage_use_azuread"
 	// Default OidcTokenFilePath
 	defaultOidcTokenFilePath = "/var/run/secrets/azure/tokens/azure-identity-token"
 )
@@ -92,6 +93,10 @@ func TerraformSetupBuilder(tfProvider *schema.Provider) terraform.SetupFn { //no
 			// registration permissions which are irrelevant in most contexts.
 			// For details, see https://github.com/upbound/provider-azure/issues/104
 			keySkipProviderRegistration: true,
+		}
+
+		if pcSpec.StorageUseAzureAD != nil {
+			ps.Configuration[keyStorageUseAzureAD] = *pcSpec.StorageUseAzureAD
 		}
 
 		switch pcSpec.Credentials.Source { //nolint:exhaustive
