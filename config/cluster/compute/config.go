@@ -98,6 +98,9 @@ func Configure(p *config.Provider) {
 			}
 			return diff, nil
 		}
+		r.LateInitializer = config.LateInitializer{
+			IgnoredFields: []string{"instances"},
+		}
 	})
 	p.AddResourceConfigurator("azurerm_virtual_machine_scale_set_standby_pool", func(r *config.Resource) {
 		r.ShortGroup = group
