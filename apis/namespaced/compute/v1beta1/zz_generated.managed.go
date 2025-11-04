@@ -887,6 +887,46 @@ func (mg *VirtualMachineRunCommand) SetWriteConnectionSecretToReference(r *xpv1.
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this VirtualMachineScaleSetStandbyPool.
+func (mg *VirtualMachineScaleSetStandbyPool) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetManagementPolicies of this VirtualMachineScaleSetStandbyPool.
+func (mg *VirtualMachineScaleSetStandbyPool) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this VirtualMachineScaleSetStandbyPool.
+func (mg *VirtualMachineScaleSetStandbyPool) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this VirtualMachineScaleSetStandbyPool.
+func (mg *VirtualMachineScaleSetStandbyPool) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this VirtualMachineScaleSetStandbyPool.
+func (mg *VirtualMachineScaleSetStandbyPool) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetManagementPolicies of this VirtualMachineScaleSetStandbyPool.
+func (mg *VirtualMachineScaleSetStandbyPool) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this VirtualMachineScaleSetStandbyPool.
+func (mg *VirtualMachineScaleSetStandbyPool) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this VirtualMachineScaleSetStandbyPool.
+func (mg *VirtualMachineScaleSetStandbyPool) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this WindowsVirtualMachine.
 func (mg *WindowsVirtualMachine) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)

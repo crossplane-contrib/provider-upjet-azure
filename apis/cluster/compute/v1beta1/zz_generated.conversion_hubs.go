@@ -32,3 +32,6 @@ func (tr *SSHPublicKey) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *VirtualMachineDataDiskAttachment) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *VirtualMachineScaleSetStandbyPool) Hub() {}

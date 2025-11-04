@@ -174,6 +174,7 @@ import (
 	virtualmachinedatadiskattachment "github.com/upbound/provider-azure/internal/controller/namespaced/compute/virtualmachinedatadiskattachment"
 	virtualmachineextension "github.com/upbound/provider-azure/internal/controller/namespaced/compute/virtualmachineextension"
 	virtualmachineruncommand "github.com/upbound/provider-azure/internal/controller/namespaced/compute/virtualmachineruncommand"
+	virtualmachinescalesetstandbypool "github.com/upbound/provider-azure/internal/controller/namespaced/compute/virtualmachinescalesetstandbypool"
 	windowsvirtualmachine "github.com/upbound/provider-azure/internal/controller/namespaced/compute/windowsvirtualmachine"
 	windowsvirtualmachinescaleset "github.com/upbound/provider-azure/internal/controller/namespaced/compute/windowsvirtualmachinescaleset"
 	ledger "github.com/upbound/provider-azure/internal/controller/namespaced/confidentialledger/ledger"
@@ -911,6 +912,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		virtualmachinedatadiskattachment.Setup,
 		virtualmachineextension.Setup,
 		virtualmachineruncommand.Setup,
+		virtualmachinescalesetstandbypool.Setup,
 		windowsvirtualmachine.Setup,
 		windowsvirtualmachinescaleset.Setup,
 		ledger.Setup,
@@ -1654,6 +1656,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		virtualmachinedatadiskattachment.SetupGated,
 		virtualmachineextension.SetupGated,
 		virtualmachineruncommand.SetupGated,
+		virtualmachinescalesetstandbypool.SetupGated,
 		windowsvirtualmachine.SetupGated,
 		windowsvirtualmachinescaleset.SetupGated,
 		ledger.SetupGated,

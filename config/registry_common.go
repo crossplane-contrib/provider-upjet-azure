@@ -63,7 +63,7 @@ var skipList = []string{
 	"azurerm_network_interface_application_gateway_backend_address_pool_association",
 	"azurerm_sentinel_data_connector_microsoft_defender_advanced_threat_protection",
 	// deprecated
-	"azurerm_virtual_machine_scale_set",
+	"^azurerm_virtual_machine_scale_set$", // to match exactly azurerm_virtual_machine_scale_set not everything which starts from azurerm_virtual_machine_scale_set
 	"azurerm_virtual_machine_configuration_policy_assignment",
 	"azurerm_virtual_machine_scale_set_extension",
 	"azurerm_sql_server",

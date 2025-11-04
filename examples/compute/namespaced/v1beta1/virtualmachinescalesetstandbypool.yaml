@@ -1,0 +1,64 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: compute.azure.m.upbound.io/v1beta1
+kind: VirtualMachineScaleSetStandbyPool
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/virtualmachinescalesetstandbypool
+  labels:
+    testing.upbound.io/example-name: example
+  name: vmssstandbypool
+  namespace: upbound-system
+spec:
+  forProvider:
+    attachedVirtualMachineScaleSetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    elasticityProfile:
+      maxReadyCapacity: 20
+      minReadyCapacity: 5
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tags:
+      key: value
+    virtualMachineState: Running
+
+---
+
+apiVersion: compute.azure.m.upbound.io/v1beta1
+kind: OrchestratedVirtualMachineScaleSet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/virtualmachinescalesetstandbypool
+  labels:
+    testing.upbound.io/example-name: example
+  name: vmssstandbypool
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    platformFaultDomainCount: 1
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    zones:
+    - "1"
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/virtualmachinescalesetstandbypool
+  labels:
+    testing.upbound.io/example-name: example
+  name: vmssstandbypool
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
