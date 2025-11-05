@@ -6,6 +6,7 @@ apiVersion: compute.azure.upbound.io/v1beta1
 kind: VirtualMachineScaleSetStandbyPool
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "requires a registered provider with rbac configured"
     meta.upbound.io/example-id: compute/v1beta1/virtualmachinescalesetstandbypool
   labels:
     testing.upbound.io/example-name: example
@@ -32,6 +33,7 @@ apiVersion: compute.azure.upbound.io/v1beta2
 kind: OrchestratedVirtualMachineScaleSet
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "requires a registered provider with rbac configured"
     meta.upbound.io/example-id: compute/v1beta1/virtualmachinescalesetstandbypool
   labels:
     testing.upbound.io/example-name: example
@@ -52,6 +54,7 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "requires a registered provider with rbac configured"
     meta.upbound.io/example-id: compute/v1beta1/virtualmachinescalesetstandbypool
   labels:
     testing.upbound.io/example-name: example
