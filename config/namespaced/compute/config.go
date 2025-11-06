@@ -11,7 +11,9 @@ import (
 	"github.com/upbound/provider-azure/apis/namespaced/rconfig"
 )
 
-// Configure configures cosmodb group
+const group = "compute"
+
+// Configure configures compute group
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_linux_virtual_machine", func(r *config.Resource) {
 		r.References["network_interface_ids"] = config.Reference{
@@ -75,7 +77,7 @@ func Configure(p *config.Provider) {
 	})
 	p.AddResourceConfigurator("azurerm_virtual_machine_extension", func(r *config.Resource) {
 		r.Kind = "VirtualMachineExtension"
-		r.ShortGroup = "compute"
+		r.ShortGroup = group
 	})
 	p.AddResourceConfigurator("azurerm_virtual_machine_run_command", func(r *config.Resource) {
 		r.References["virtual_machine_id"] = config.Reference{
@@ -95,6 +97,16 @@ func Configure(p *config.Provider) {
 				delete(diff.Attributes, "termination_notification.#")
 			}
 			return diff, nil
+		}
+		r.LateInitializer = config.LateInitializer{
+			IgnoredFields: []string{"instances"},
+		}
+	})
+	p.AddResourceConfigurator("azurerm_virtual_machine_scale_set_standby_pool", func(r *config.Resource) {
+		r.ShortGroup = group
+		r.References["attached_virtual_machine_scale_set_id"] = config.Reference{
+			TerraformName: "azurerm_orchestrated_virtual_machine_scale_set",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 	/* Note on testing:
