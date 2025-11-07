@@ -1,0 +1,95 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: dbforpostgresql.azure.upbound.io/v1beta1
+kind: FlexibleServerVirtualEndpoint
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "3600"
+    meta.upbound.io/example-id: dbforpostgresql/v1beta1/flexibleservervirtualendpoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: example
+    replicaServerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: replica
+    sourceServerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: source
+    type: ReadWrite
+
+---
+
+apiVersion: dbforpostgresql.azure.upbound.io/v1beta2
+kind: FlexibleServer
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "3600"
+    uptest.upbound.io/pre-delete-hook: ../testhooks/delete-flexibleserver-replica.sh
+    meta.upbound.io/example-id: dbforpostgresql/v1beta1/flexibleservervirtualendpoint
+  labels:
+    testing.upbound.io/example-name: source
+  name: psqlsource
+spec:
+  forProvider:
+    administratorLogin: psqladmin
+    autoGeneratePassword: true
+    administratorPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    location: West Europe
+    publicNetworkAccessEnabled: true
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: GP_Standard_D4s_v3
+    storageMb: 32768
+    storageTier: P4
+    version: "16"
+
+---
+
+apiVersion: dbforpostgresql.azure.upbound.io/v1beta2
+kind: FlexibleServer
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "3600"
+    meta.upbound.io/example-id: dbforpostgresql/v1beta1/flexibleservervirtualendpoint
+  labels:
+    testing.upbound.io/example-name: replica
+  name: psqlreplica
+spec:
+  forProvider:
+    createMode: Replica
+    location: West Europe
+    publicNetworkAccessEnabled: true
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: GP_Standard_D4s_v3
+    sourceServerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: source
+    storageMb: 32768
+    storageTier: P4
+    version: "16"
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "3600"
+    meta.upbound.io/example-id: dbforpostgresql/v1beta1/flexibleservervirtualendpoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: flexibleservervirtualendpoint
+spec:
+  forProvider:
+    location: West Europe
