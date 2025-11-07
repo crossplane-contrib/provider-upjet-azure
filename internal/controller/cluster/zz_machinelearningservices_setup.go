@@ -14,6 +14,9 @@ import (
 	computeinstance "github.com/upbound/provider-azure/internal/controller/cluster/machinelearningservices/computeinstance"
 	synapsespark "github.com/upbound/provider-azure/internal/controller/cluster/machinelearningservices/synapsespark"
 	workspace "github.com/upbound/provider-azure/internal/controller/cluster/machinelearningservices/workspace"
+	workspaceoutboundrulefqdn "github.com/upbound/provider-azure/internal/controller/cluster/machinelearningservices/workspaceoutboundrulefqdn"
+	workspaceoutboundruleprivateendpoint "github.com/upbound/provider-azure/internal/controller/cluster/machinelearningservices/workspaceoutboundruleprivateendpoint"
+	workspaceoutboundruleservicetag "github.com/upbound/provider-azure/internal/controller/cluster/machinelearningservices/workspaceoutboundruleservicetag"
 )
 
 // Setup_machinelearningservices creates all controllers with the supplied logger and adds them to
@@ -25,6 +28,9 @@ func Setup_machinelearningservices(mgr ctrl.Manager, o controller.Options) error
 		computeinstance.Setup,
 		synapsespark.Setup,
 		workspace.Setup,
+		workspaceoutboundrulefqdn.Setup,
+		workspaceoutboundruleprivateendpoint.Setup,
+		workspaceoutboundruleservicetag.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err
@@ -42,6 +48,9 @@ func SetupGated_machinelearningservices(mgr ctrl.Manager, o controller.Options) 
 		computeinstance.SetupGated,
 		synapsespark.SetupGated,
 		workspace.SetupGated,
+		workspaceoutboundrulefqdn.SetupGated,
+		workspaceoutboundruleprivateendpoint.SetupGated,
+		workspaceoutboundruleservicetag.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

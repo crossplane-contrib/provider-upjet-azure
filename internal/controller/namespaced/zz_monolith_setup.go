@@ -191,6 +191,7 @@ import (
 	environmentstorage "github.com/upbound/provider-azure/internal/controller/namespaced/containerapp/environmentstorage"
 	agentpool "github.com/upbound/provider-azure/internal/controller/namespaced/containerregistry/agentpool"
 	containerconnectedregistry "github.com/upbound/provider-azure/internal/controller/namespaced/containerregistry/containerconnectedregistry"
+	credentialset "github.com/upbound/provider-azure/internal/controller/namespaced/containerregistry/credentialset"
 	registry "github.com/upbound/provider-azure/internal/controller/namespaced/containerregistry/registry"
 	scopemap "github.com/upbound/provider-azure/internal/controller/namespaced/containerregistry/scopemap"
 	token "github.com/upbound/provider-azure/internal/controller/namespaced/containerregistry/token"
@@ -424,6 +425,9 @@ import (
 	computeinstance "github.com/upbound/provider-azure/internal/controller/namespaced/machinelearningservices/computeinstance"
 	synapsespark "github.com/upbound/provider-azure/internal/controller/namespaced/machinelearningservices/synapsespark"
 	workspacemachinelearningservices "github.com/upbound/provider-azure/internal/controller/namespaced/machinelearningservices/workspace"
+	workspaceoutboundrulefqdn "github.com/upbound/provider-azure/internal/controller/namespaced/machinelearningservices/workspaceoutboundrulefqdn"
+	workspaceoutboundruleprivateendpoint "github.com/upbound/provider-azure/internal/controller/namespaced/machinelearningservices/workspaceoutboundruleprivateendpoint"
+	workspaceoutboundruleservicetag "github.com/upbound/provider-azure/internal/controller/namespaced/machinelearningservices/workspaceoutboundruleservicetag"
 	maintenanceassignmentdedicatedhost "github.com/upbound/provider-azure/internal/controller/namespaced/maintenance/maintenanceassignmentdedicatedhost"
 	maintenanceassignmentvirtualmachine "github.com/upbound/provider-azure/internal/controller/namespaced/maintenance/maintenanceassignmentvirtualmachine"
 	maintenanceconfiguration "github.com/upbound/provider-azure/internal/controller/namespaced/maintenance/maintenanceconfiguration"
@@ -930,6 +934,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		environmentstorage.Setup,
 		agentpool.Setup,
 		containerconnectedregistry.Setup,
+		credentialset.Setup,
 		registry.Setup,
 		scopemap.Setup,
 		token.Setup,
@@ -1163,6 +1168,9 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		computeinstance.Setup,
 		synapsespark.Setup,
 		workspacemachinelearningservices.Setup,
+		workspaceoutboundrulefqdn.Setup,
+		workspaceoutboundruleprivateendpoint.Setup,
+		workspaceoutboundruleservicetag.Setup,
 		maintenanceassignmentdedicatedhost.Setup,
 		maintenanceassignmentvirtualmachine.Setup,
 		maintenanceconfiguration.Setup,
@@ -1675,6 +1683,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		environmentstorage.SetupGated,
 		agentpool.SetupGated,
 		containerconnectedregistry.SetupGated,
+		credentialset.SetupGated,
 		registry.SetupGated,
 		scopemap.SetupGated,
 		token.SetupGated,
@@ -1908,6 +1917,9 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		computeinstance.SetupGated,
 		synapsespark.SetupGated,
 		workspacemachinelearningservices.SetupGated,
+		workspaceoutboundrulefqdn.SetupGated,
+		workspaceoutboundruleprivateendpoint.SetupGated,
+		workspaceoutboundruleservicetag.SetupGated,
 		maintenanceassignmentdedicatedhost.SetupGated,
 		maintenanceassignmentvirtualmachine.SetupGated,
 		maintenanceconfiguration.SetupGated,

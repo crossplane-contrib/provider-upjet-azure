@@ -458,6 +458,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_container_connected_registry":  config.TemplatedStringAsIdentifier("name", "{{ .parameters.container_registry_id }}/connectedRegistries/{{ .external_name }}"),
 	// /subscriptions/12345678-1234-9876-4563-123456789012/resourceGroups/group1/providers/Microsoft.ContainerRegistry/registries/registry1/tokens/token1/passwords/password
 	"azurerm_container_registry_token_password": config.IdentifierFromProvider,
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.ContainerRegistry/registries/registry1/credentialSets/credentialSet1
+	"azurerm_container_registry_credential_set": config.TemplatedStringAsIdentifier("name", "{{ .parameters.container_registry_id }}/credentialSets/{{ .external_name }}"),
 
 	// operationalinsights
 	"azurerm_log_analytics_workspace": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.OperationalInsights/workspaces/{{ .external_name }}"),
@@ -1870,6 +1872,15 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// AI Foundries can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.MachineLearningServices/workspaces/hub1
 	"azurerm_ai_foundry": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.MachineLearningServices/workspaces/{{ .external_name }}"),
+	// Machine Learning Workspace Network Outbound Rule FQDN can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.MachineLearningServices/workspaces/workspace1/outboundRules/rule1
+	"azurerm_machine_learning_workspace_network_outbound_rule_fqdn": config.TemplatedStringAsIdentifier("name", "{{ .parameters.workspace_id }}/outboundRules/{{ .external_name }}"),
+	// Machine Learning Workspace Network Outbound Rule Service Tag can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.MachineLearningServices/workspaces/workspace1/outboundRules/rule1
+	"azurerm_machine_learning_workspace_network_outbound_rule_service_tag": config.TemplatedStringAsIdentifier("name", "{{ .parameters.workspace_id }}/outboundRules/{{ .external_name }}"),
+	// Machine Learning Workspace Network Outbound Rule Private Endpoint can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.MachineLearningServices/workspaces/workspace1/outboundRules/rule1
+	"azurerm_machine_learning_workspace_network_outbound_rule_private_endpoint": config.TemplatedStringAsIdentifier("name", "{{ .parameters.workspace_id }}/outboundRules/{{ .external_name }}"),
 
 	// maintenance
 	//

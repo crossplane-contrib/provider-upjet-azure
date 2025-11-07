@@ -13,6 +13,9 @@ func (tr *AgentPool) Hub() {}
 func (tr *ContainerConnectedRegistry) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *CredentialSet) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *Registry) Hub() {}
 
 // Hub marks this type as a conversion hub.

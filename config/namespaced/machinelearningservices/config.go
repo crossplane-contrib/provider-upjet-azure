@@ -50,4 +50,31 @@ func Configure(p *config.Provider) {
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
+
+	p.AddResourceConfigurator("azurerm_machine_learning_workspace_network_outbound_rule_fqdn", func(r *config.Resource) {
+		r.ShortGroup = group
+		r.Kind = "WorkspaceOutboundRuleFqdn"
+		r.References["workspace_id"] = config.Reference{
+			TerraformName: "azurerm_machine_learning_workspace",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_machine_learning_workspace_network_outbound_rule_service_tag", func(r *config.Resource) {
+		r.ShortGroup = group
+		r.Kind = "WorkspaceOutboundRuleServiceTag"
+		r.References["workspace_id"] = config.Reference{
+			TerraformName: "azurerm_machine_learning_workspace",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_machine_learning_workspace_network_outbound_rule_private_endpoint", func(r *config.Resource) {
+		r.ShortGroup = group
+		r.Kind = "WorkspaceOutboundRulePrivateEndpoint"
+		r.References["service_resource_id"] = config.Reference{
+			TerraformName: "azurerm_storage_account",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+	})
 }
