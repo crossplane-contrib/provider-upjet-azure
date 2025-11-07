@@ -51,3 +51,30 @@ func (l *WorkspaceList) GetItems() []resource.Managed {
 	}
 	return items
 }
+
+// GetItems of this WorkspaceOutboundRuleFqdnList.
+func (l *WorkspaceOutboundRuleFqdnList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this WorkspaceOutboundRulePrivateEndpointList.
+func (l *WorkspaceOutboundRulePrivateEndpointList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this WorkspaceOutboundRuleServiceTagList.
+func (l *WorkspaceOutboundRuleServiceTagList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}

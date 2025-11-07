@@ -424,6 +424,9 @@ import (
 	computeinstance "github.com/upbound/provider-azure/internal/controller/namespaced/machinelearningservices/computeinstance"
 	synapsespark "github.com/upbound/provider-azure/internal/controller/namespaced/machinelearningservices/synapsespark"
 	workspacemachinelearningservices "github.com/upbound/provider-azure/internal/controller/namespaced/machinelearningservices/workspace"
+	workspaceoutboundrulefqdn "github.com/upbound/provider-azure/internal/controller/namespaced/machinelearningservices/workspaceoutboundrulefqdn"
+	workspaceoutboundruleprivateendpoint "github.com/upbound/provider-azure/internal/controller/namespaced/machinelearningservices/workspaceoutboundruleprivateendpoint"
+	workspaceoutboundruleservicetag "github.com/upbound/provider-azure/internal/controller/namespaced/machinelearningservices/workspaceoutboundruleservicetag"
 	maintenanceassignmentdedicatedhost "github.com/upbound/provider-azure/internal/controller/namespaced/maintenance/maintenanceassignmentdedicatedhost"
 	maintenanceassignmentvirtualmachine "github.com/upbound/provider-azure/internal/controller/namespaced/maintenance/maintenanceassignmentvirtualmachine"
 	maintenanceconfiguration "github.com/upbound/provider-azure/internal/controller/namespaced/maintenance/maintenanceconfiguration"
@@ -1163,6 +1166,9 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		computeinstance.Setup,
 		synapsespark.Setup,
 		workspacemachinelearningservices.Setup,
+		workspaceoutboundrulefqdn.Setup,
+		workspaceoutboundruleprivateendpoint.Setup,
+		workspaceoutboundruleservicetag.Setup,
 		maintenanceassignmentdedicatedhost.Setup,
 		maintenanceassignmentvirtualmachine.Setup,
 		maintenanceconfiguration.Setup,
@@ -1908,6 +1914,9 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		computeinstance.SetupGated,
 		synapsespark.SetupGated,
 		workspacemachinelearningservices.SetupGated,
+		workspaceoutboundrulefqdn.SetupGated,
+		workspaceoutboundruleprivateendpoint.SetupGated,
+		workspaceoutboundruleservicetag.SetupGated,
 		maintenanceassignmentdedicatedhost.SetupGated,
 		maintenanceassignmentvirtualmachine.SetupGated,
 		maintenanceconfiguration.SetupGated,

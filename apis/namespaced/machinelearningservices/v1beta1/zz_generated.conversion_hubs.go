@@ -20,3 +20,12 @@ func (tr *SynapseSpark) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *Workspace) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *WorkspaceOutboundRuleFqdn) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *WorkspaceOutboundRulePrivateEndpoint) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *WorkspaceOutboundRuleServiceTag) Hub() {}
