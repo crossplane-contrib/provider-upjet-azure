@@ -1881,6 +1881,9 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// Machine Learning Workspace Network Outbound Rule Private Endpoint can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.MachineLearningServices/workspaces/workspace1/outboundRules/rule1
 	"azurerm_machine_learning_workspace_network_outbound_rule_private_endpoint": config.TemplatedStringAsIdentifier("name", "{{ .parameters.workspace_id }}/outboundRules/{{ .external_name }}"),
+	// AI Foundry Projects can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.MachineLearningServices/workspaces/project1
+	"azurerm_ai_foundry_project": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.MachineLearningServices/workspaces/{{ .external_name }}"),
 
 	// maintenance
 	//
