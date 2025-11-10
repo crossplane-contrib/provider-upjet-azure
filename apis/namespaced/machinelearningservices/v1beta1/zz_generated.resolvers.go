@@ -382,6 +382,58 @@ func (mg *AIFoundry) ResolveReferences( // ResolveReferences of this AIFoundry.
 	return nil
 }
 
+// ResolveReferences of this AIFoundryProject.
+func (mg *AIFoundryProject) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("machinelearningservices.azure.m.upbound.io", "v1beta1", "AIFoundry", "AIFoundryList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AIServicesHubID),
+			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.AIServicesHubIDRef,
+			Selector:     mg.Spec.ForProvider.AIServicesHubIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.AIServicesHubID")
+	}
+	mg.Spec.ForProvider.AIServicesHubID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AIServicesHubIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("machinelearningservices.azure.m.upbound.io", "v1beta1", "AIFoundry", "AIFoundryList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AIServicesHubID),
+			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.AIServicesHubIDRef,
+			Selector:     mg.Spec.InitProvider.AIServicesHubIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.AIServicesHubID")
+	}
+	mg.Spec.InitProvider.AIServicesHubID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.AIServicesHubIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this ComputeCluster.
 func (mg *ComputeCluster) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed

@@ -16,6 +16,15 @@ func (l *AIFoundryList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this AIFoundryProjectList.
+func (l *AIFoundryProjectList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this ComputeClusterList.
 func (l *ComputeClusterList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
