@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: netapp.azure.m.upbound.io/v1beta1
 kind: Snapshot
 metadata:
@@ -127,7 +131,7 @@ spec:
     delegation:
     - name: netapp
       serviceDelegation:
-      - actions:
+        actions:
         - Microsoft.Network/networkinterfaces/*
         - Microsoft.Network/virtualNetworks/subnets/join/action
         name: Microsoft.Netapp/volumes

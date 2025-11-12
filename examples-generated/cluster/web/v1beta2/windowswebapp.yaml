@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: web.azure.upbound.io/v1beta2
 kind: WindowsWebApp
 metadata:
@@ -15,8 +19,7 @@ spec:
     servicePlanIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    siteConfig:
-    - {}
+    siteConfig: {}
 
 ---
 

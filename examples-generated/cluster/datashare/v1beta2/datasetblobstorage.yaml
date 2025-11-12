@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: datashare.azure.upbound.io/v1beta2
 kind: DataSetBlobStorage
 metadata:
@@ -16,7 +20,7 @@ spec:
         testing.upbound.io/example-name: example
     filePath: myfile.txt
     storageAccount:
-    - nameSelector:
+      nameSelector:
         matchLabels:
           testing.upbound.io/example-name: example
       resourceGroupNameSelector:
@@ -54,7 +58,7 @@ metadata:
 spec:
   forProvider:
     identity:
-    - type: SystemAssigned
+      type: SystemAssigned
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:

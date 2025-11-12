@@ -11,6 +11,7 @@ import (
 
 	monitoralertprocessingruleactiongroup "github.com/upbound/provider-azure/internal/controller/namespaced/alertsmanagement/monitoralertprocessingruleactiongroup"
 	monitoralertprocessingrulesuppression "github.com/upbound/provider-azure/internal/controller/namespaced/alertsmanagement/monitoralertprocessingrulesuppression"
+	monitoralertprometheusrulegroup "github.com/upbound/provider-azure/internal/controller/namespaced/alertsmanagement/monitoralertprometheusrulegroup"
 	monitorsmartdetectoralertrule "github.com/upbound/provider-azure/internal/controller/namespaced/alertsmanagement/monitorsmartdetectoralertrule"
 	server "github.com/upbound/provider-azure/internal/controller/namespaced/analysisservices/server"
 	api "github.com/upbound/provider-azure/internal/controller/namespaced/apimanagement/api"
@@ -32,6 +33,7 @@ import (
 	gateway "github.com/upbound/provider-azure/internal/controller/namespaced/apimanagement/gateway"
 	gatewayapi "github.com/upbound/provider-azure/internal/controller/namespaced/apimanagement/gatewayapi"
 	globalschema "github.com/upbound/provider-azure/internal/controller/namespaced/apimanagement/globalschema"
+	group "github.com/upbound/provider-azure/internal/controller/namespaced/apimanagement/group"
 	identityprovideraad "github.com/upbound/provider-azure/internal/controller/namespaced/apimanagement/identityprovideraad"
 	identityproviderfacebook "github.com/upbound/provider-azure/internal/controller/namespaced/apimanagement/identityproviderfacebook"
 	identityprovidergoogle "github.com/upbound/provider-azure/internal/controller/namespaced/apimanagement/identityprovidergoogle"
@@ -44,8 +46,10 @@ import (
 	notificationrecipientuser "github.com/upbound/provider-azure/internal/controller/namespaced/apimanagement/notificationrecipientuser"
 	openidconnectprovider "github.com/upbound/provider-azure/internal/controller/namespaced/apimanagement/openidconnectprovider"
 	policy "github.com/upbound/provider-azure/internal/controller/namespaced/apimanagement/policy"
+	policyfragment "github.com/upbound/provider-azure/internal/controller/namespaced/apimanagement/policyfragment"
 	product "github.com/upbound/provider-azure/internal/controller/namespaced/apimanagement/product"
 	productapi "github.com/upbound/provider-azure/internal/controller/namespaced/apimanagement/productapi"
+	productgroup "github.com/upbound/provider-azure/internal/controller/namespaced/apimanagement/productgroup"
 	productpolicy "github.com/upbound/provider-azure/internal/controller/namespaced/apimanagement/productpolicy"
 	producttag "github.com/upbound/provider-azure/internal/controller/namespaced/apimanagement/producttag"
 	rediscache "github.com/upbound/provider-azure/internal/controller/namespaced/apimanagement/rediscache"
@@ -143,6 +147,9 @@ import (
 	profile "github.com/upbound/provider-azure/internal/controller/namespaced/cdn/profile"
 	appservicecertificateorder "github.com/upbound/provider-azure/internal/controller/namespaced/certificateregistration/appservicecertificateorder"
 	accountcognitiveservices "github.com/upbound/provider-azure/internal/controller/namespaced/cognitiveservices/account"
+	accountraiblocklist "github.com/upbound/provider-azure/internal/controller/namespaced/cognitiveservices/accountraiblocklist"
+	accountraipolicy "github.com/upbound/provider-azure/internal/controller/namespaced/cognitiveservices/accountraipolicy"
+	aiservices "github.com/upbound/provider-azure/internal/controller/namespaced/cognitiveservices/aiservices"
 	deployment "github.com/upbound/provider-azure/internal/controller/namespaced/cognitiveservices/deployment"
 	service "github.com/upbound/provider-azure/internal/controller/namespaced/communication/service"
 	availabilityset "github.com/upbound/provider-azure/internal/controller/namespaced/compute/availabilityset"
@@ -167,6 +174,7 @@ import (
 	virtualmachinedatadiskattachment "github.com/upbound/provider-azure/internal/controller/namespaced/compute/virtualmachinedatadiskattachment"
 	virtualmachineextension "github.com/upbound/provider-azure/internal/controller/namespaced/compute/virtualmachineextension"
 	virtualmachineruncommand "github.com/upbound/provider-azure/internal/controller/namespaced/compute/virtualmachineruncommand"
+	virtualmachinescalesetstandbypool "github.com/upbound/provider-azure/internal/controller/namespaced/compute/virtualmachinescalesetstandbypool"
 	windowsvirtualmachine "github.com/upbound/provider-azure/internal/controller/namespaced/compute/windowsvirtualmachine"
 	windowsvirtualmachinescaleset "github.com/upbound/provider-azure/internal/controller/namespaced/compute/windowsvirtualmachinescaleset"
 	ledger "github.com/upbound/provider-azure/internal/controller/namespaced/confidentialledger/ledger"
@@ -174,6 +182,7 @@ import (
 	budgetresourcegroup "github.com/upbound/provider-azure/internal/controller/namespaced/consumption/budgetresourcegroup"
 	budgetsubscription "github.com/upbound/provider-azure/internal/controller/namespaced/consumption/budgetsubscription"
 	containerapp "github.com/upbound/provider-azure/internal/controller/namespaced/containerapp/containerapp"
+	containerjob "github.com/upbound/provider-azure/internal/controller/namespaced/containerapp/containerjob"
 	customdomaincontainerapp "github.com/upbound/provider-azure/internal/controller/namespaced/containerapp/customdomain"
 	environment "github.com/upbound/provider-azure/internal/controller/namespaced/containerapp/environment"
 	environmentcertificate "github.com/upbound/provider-azure/internal/controller/namespaced/containerapp/environmentcertificate"
@@ -182,6 +191,7 @@ import (
 	environmentstorage "github.com/upbound/provider-azure/internal/controller/namespaced/containerapp/environmentstorage"
 	agentpool "github.com/upbound/provider-azure/internal/controller/namespaced/containerregistry/agentpool"
 	containerconnectedregistry "github.com/upbound/provider-azure/internal/controller/namespaced/containerregistry/containerconnectedregistry"
+	credentialset "github.com/upbound/provider-azure/internal/controller/namespaced/containerregistry/credentialset"
 	registry "github.com/upbound/provider-azure/internal/controller/namespaced/containerregistry/registry"
 	scopemap "github.com/upbound/provider-azure/internal/controller/namespaced/containerregistry/scopemap"
 	token "github.com/upbound/provider-azure/internal/controller/namespaced/containerregistry/token"
@@ -297,6 +307,7 @@ import (
 	flexibleserverconfigurationdbforpostgresql "github.com/upbound/provider-azure/internal/controller/namespaced/dbforpostgresql/flexibleserverconfiguration"
 	flexibleserverdatabase "github.com/upbound/provider-azure/internal/controller/namespaced/dbforpostgresql/flexibleserverdatabase"
 	flexibleserverfirewallruledbforpostgresql "github.com/upbound/provider-azure/internal/controller/namespaced/dbforpostgresql/flexibleserverfirewallrule"
+	flexibleservervirtualendpoint "github.com/upbound/provider-azure/internal/controller/namespaced/dbforpostgresql/flexibleservervirtualendpoint"
 	serverdbforpostgresql "github.com/upbound/provider-azure/internal/controller/namespaced/dbforpostgresql/server"
 	serverkey "github.com/upbound/provider-azure/internal/controller/namespaced/dbforpostgresql/serverkey"
 	virtualnetworkrule "github.com/upbound/provider-azure/internal/controller/namespaced/dbforpostgresql/virtualnetworkrule"
@@ -327,8 +338,11 @@ import (
 	cloudelasticsearch "github.com/upbound/provider-azure/internal/controller/namespaced/elastic/cloudelasticsearch"
 	domain "github.com/upbound/provider-azure/internal/controller/namespaced/eventgrid/domain"
 	domaintopic "github.com/upbound/provider-azure/internal/controller/namespaced/eventgrid/domaintopic"
+	eventgridnamespace "github.com/upbound/provider-azure/internal/controller/namespaced/eventgrid/eventgridnamespace"
 	eventsubscription "github.com/upbound/provider-azure/internal/controller/namespaced/eventgrid/eventsubscription"
+	partnerconfiguration "github.com/upbound/provider-azure/internal/controller/namespaced/eventgrid/partnerconfiguration"
 	systemtopic "github.com/upbound/provider-azure/internal/controller/namespaced/eventgrid/systemtopic"
+	systemtopiceventsubscription "github.com/upbound/provider-azure/internal/controller/namespaced/eventgrid/systemtopiceventsubscription"
 	topic "github.com/upbound/provider-azure/internal/controller/namespaced/eventgrid/topic"
 	authorizationrule "github.com/upbound/provider-azure/internal/controller/namespaced/eventhub/authorizationrule"
 	consumergroup "github.com/upbound/provider-azure/internal/controller/namespaced/eventhub/consumergroup"
@@ -372,6 +386,7 @@ import (
 	monitorscheduledqueryrulesalert "github.com/upbound/provider-azure/internal/controller/namespaced/insights/monitorscheduledqueryrulesalert"
 	monitorscheduledqueryrulesalertv2 "github.com/upbound/provider-azure/internal/controller/namespaced/insights/monitorscheduledqueryrulesalertv2"
 	monitorscheduledqueryruleslog "github.com/upbound/provider-azure/internal/controller/namespaced/insights/monitorscheduledqueryruleslog"
+	monitorworkspace "github.com/upbound/provider-azure/internal/controller/namespaced/insights/monitorworkspace"
 	application "github.com/upbound/provider-azure/internal/controller/namespaced/iotcentral/application"
 	applicationnetworkruleset "github.com/upbound/provider-azure/internal/controller/namespaced/iotcentral/applicationnetworkruleset"
 	accesspolicy "github.com/upbound/provider-azure/internal/controller/namespaced/keyvault/accesspolicy"
@@ -405,10 +420,14 @@ import (
 	apptriggerhttprequest "github.com/upbound/provider-azure/internal/controller/namespaced/logic/apptriggerhttprequest"
 	apptriggerrecurrence "github.com/upbound/provider-azure/internal/controller/namespaced/logic/apptriggerrecurrence"
 	appworkflow "github.com/upbound/provider-azure/internal/controller/namespaced/logic/appworkflow"
+	aifoundry "github.com/upbound/provider-azure/internal/controller/namespaced/machinelearningservices/aifoundry"
 	computecluster "github.com/upbound/provider-azure/internal/controller/namespaced/machinelearningservices/computecluster"
 	computeinstance "github.com/upbound/provider-azure/internal/controller/namespaced/machinelearningservices/computeinstance"
 	synapsespark "github.com/upbound/provider-azure/internal/controller/namespaced/machinelearningservices/synapsespark"
 	workspacemachinelearningservices "github.com/upbound/provider-azure/internal/controller/namespaced/machinelearningservices/workspace"
+	workspaceoutboundrulefqdn "github.com/upbound/provider-azure/internal/controller/namespaced/machinelearningservices/workspaceoutboundrulefqdn"
+	workspaceoutboundruleprivateendpoint "github.com/upbound/provider-azure/internal/controller/namespaced/machinelearningservices/workspaceoutboundruleprivateendpoint"
+	workspaceoutboundruleservicetag "github.com/upbound/provider-azure/internal/controller/namespaced/machinelearningservices/workspaceoutboundruleservicetag"
 	maintenanceassignmentdedicatedhost "github.com/upbound/provider-azure/internal/controller/namespaced/maintenance/maintenanceassignmentdedicatedhost"
 	maintenanceassignmentvirtualmachine "github.com/upbound/provider-azure/internal/controller/namespaced/maintenance/maintenanceassignmentvirtualmachine"
 	maintenanceconfiguration "github.com/upbound/provider-azure/internal/controller/namespaced/maintenance/maintenanceconfiguration"
@@ -468,10 +487,13 @@ import (
 	loadbalancerrule "github.com/upbound/provider-azure/internal/controller/namespaced/network/loadbalancerrule"
 	localnetworkgateway "github.com/upbound/provider-azure/internal/controller/namespaced/network/localnetworkgateway"
 	manager "github.com/upbound/provider-azure/internal/controller/namespaced/network/manager"
+	manageripampool "github.com/upbound/provider-azure/internal/controller/namespaced/network/manageripampool"
 	managermanagementgroupconnection "github.com/upbound/provider-azure/internal/controller/namespaced/network/managermanagementgroupconnection"
 	managernetworkgroup "github.com/upbound/provider-azure/internal/controller/namespaced/network/managernetworkgroup"
+	managerroutingconfiguration "github.com/upbound/provider-azure/internal/controller/namespaced/network/managerroutingconfiguration"
 	managerstaticmember "github.com/upbound/provider-azure/internal/controller/namespaced/network/managerstaticmember"
 	managersubscriptionconnection "github.com/upbound/provider-azure/internal/controller/namespaced/network/managersubscriptionconnection"
+	managerverifierworkspace "github.com/upbound/provider-azure/internal/controller/namespaced/network/managerverifierworkspace"
 	natgateway "github.com/upbound/provider-azure/internal/controller/namespaced/network/natgateway"
 	natgatewaypublicipassociation "github.com/upbound/provider-azure/internal/controller/namespaced/network/natgatewaypublicipassociation"
 	natgatewaypublicipprefixassociation "github.com/upbound/provider-azure/internal/controller/namespaced/network/natgatewaypublicipprefixassociation"
@@ -492,6 +514,7 @@ import (
 	privatednsresolverforwardingrule "github.com/upbound/provider-azure/internal/controller/namespaced/network/privatednsresolverforwardingrule"
 	privatednsresolverinboundendpoint "github.com/upbound/provider-azure/internal/controller/namespaced/network/privatednsresolverinboundendpoint"
 	privatednsresolveroutboundendpoint "github.com/upbound/provider-azure/internal/controller/namespaced/network/privatednsresolveroutboundendpoint"
+	privatednsresolvervirtualnetworklink "github.com/upbound/provider-azure/internal/controller/namespaced/network/privatednsresolvervirtualnetworklink"
 	privatednssrvrecord "github.com/upbound/provider-azure/internal/controller/namespaced/network/privatednssrvrecord"
 	privatednstxtrecord "github.com/upbound/provider-azure/internal/controller/namespaced/network/privatednstxtrecord"
 	privatednszone "github.com/upbound/provider-azure/internal/controller/namespaced/network/privatednszone"
@@ -526,6 +549,7 @@ import (
 	virtualhubroutetableroute "github.com/upbound/provider-azure/internal/controller/namespaced/network/virtualhubroutetableroute"
 	virtualhubsecuritypartnerprovider "github.com/upbound/provider-azure/internal/controller/namespaced/network/virtualhubsecuritypartnerprovider"
 	virtualnetworknetwork "github.com/upbound/provider-azure/internal/controller/namespaced/network/virtualnetwork"
+	virtualnetworkdnsservers "github.com/upbound/provider-azure/internal/controller/namespaced/network/virtualnetworkdnsservers"
 	virtualnetworkgateway "github.com/upbound/provider-azure/internal/controller/namespaced/network/virtualnetworkgateway"
 	virtualnetworkgatewayconnection "github.com/upbound/provider-azure/internal/controller/namespaced/network/virtualnetworkgatewayconnection"
 	virtualnetworkpeering "github.com/upbound/provider-azure/internal/controller/namespaced/network/virtualnetworkpeering"
@@ -707,6 +731,7 @@ import (
 	appserviceplan "github.com/upbound/provider-azure/internal/controller/namespaced/web/appserviceplan"
 	functionapp "github.com/upbound/provider-azure/internal/controller/namespaced/web/functionapp"
 	functionappactiveslot "github.com/upbound/provider-azure/internal/controller/namespaced/web/functionappactiveslot"
+	functionappflexconsumption "github.com/upbound/provider-azure/internal/controller/namespaced/web/functionappflexconsumption"
 	functionappfunction "github.com/upbound/provider-azure/internal/controller/namespaced/web/functionappfunction"
 	functionapphybridconnection "github.com/upbound/provider-azure/internal/controller/namespaced/web/functionapphybridconnection"
 	functionappslot "github.com/upbound/provider-azure/internal/controller/namespaced/web/functionappslot"
@@ -729,6 +754,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		monitoralertprocessingruleactiongroup.Setup,
 		monitoralertprocessingrulesuppression.Setup,
+		monitoralertprometheusrulegroup.Setup,
 		monitorsmartdetectoralertrule.Setup,
 		server.Setup,
 		api.Setup,
@@ -750,6 +776,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		gateway.Setup,
 		gatewayapi.Setup,
 		globalschema.Setup,
+		group.Setup,
 		identityprovideraad.Setup,
 		identityproviderfacebook.Setup,
 		identityprovidergoogle.Setup,
@@ -762,8 +789,10 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		notificationrecipientuser.Setup,
 		openidconnectprovider.Setup,
 		policy.Setup,
+		policyfragment.Setup,
 		product.Setup,
 		productapi.Setup,
+		productgroup.Setup,
 		productpolicy.Setup,
 		producttag.Setup,
 		rediscache.Setup,
@@ -825,10 +854,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		variablestring.Setup,
 		webhook.Setup,
 		resourcegroup.Setup,
-		resourcegroup.Setup,
 		resourceproviderregistration.Setup,
-		resourceproviderregistration.Setup,
-		subscriptionazure.Setup,
 		subscriptionazure.Setup,
 		cluster.Setup,
 		botchannelalexa.Setup,
@@ -864,6 +890,9 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		profile.Setup,
 		appservicecertificateorder.Setup,
 		accountcognitiveservices.Setup,
+		accountraiblocklist.Setup,
+		accountraipolicy.Setup,
+		aiservices.Setup,
 		deployment.Setup,
 		service.Setup,
 		availabilityset.Setup,
@@ -888,6 +917,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		virtualmachinedatadiskattachment.Setup,
 		virtualmachineextension.Setup,
 		virtualmachineruncommand.Setup,
+		virtualmachinescalesetstandbypool.Setup,
 		windowsvirtualmachine.Setup,
 		windowsvirtualmachinescaleset.Setup,
 		ledger.Setup,
@@ -895,6 +925,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		budgetresourcegroup.Setup,
 		budgetsubscription.Setup,
 		containerapp.Setup,
+		containerjob.Setup,
 		customdomaincontainerapp.Setup,
 		environment.Setup,
 		environmentcertificate.Setup,
@@ -903,6 +934,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		environmentstorage.Setup,
 		agentpool.Setup,
 		containerconnectedregistry.Setup,
+		credentialset.Setup,
 		registry.Setup,
 		scopemap.Setup,
 		token.Setup,
@@ -1018,6 +1050,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		flexibleserverconfigurationdbforpostgresql.Setup,
 		flexibleserverdatabase.Setup,
 		flexibleserverfirewallruledbforpostgresql.Setup,
+		flexibleservervirtualendpoint.Setup,
 		serverdbforpostgresql.Setup,
 		serverkey.Setup,
 		virtualnetworkrule.Setup,
@@ -1048,8 +1081,11 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		cloudelasticsearch.Setup,
 		domain.Setup,
 		domaintopic.Setup,
+		eventgridnamespace.Setup,
 		eventsubscription.Setup,
+		partnerconfiguration.Setup,
 		systemtopic.Setup,
+		systemtopiceventsubscription.Setup,
 		topic.Setup,
 		authorizationrule.Setup,
 		consumergroup.Setup,
@@ -1093,6 +1129,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		monitorscheduledqueryrulesalert.Setup,
 		monitorscheduledqueryrulesalertv2.Setup,
 		monitorscheduledqueryruleslog.Setup,
+		monitorworkspace.Setup,
 		application.Setup,
 		applicationnetworkruleset.Setup,
 		accesspolicy.Setup,
@@ -1126,10 +1163,14 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		apptriggerhttprequest.Setup,
 		apptriggerrecurrence.Setup,
 		appworkflow.Setup,
+		aifoundry.Setup,
 		computecluster.Setup,
 		computeinstance.Setup,
 		synapsespark.Setup,
 		workspacemachinelearningservices.Setup,
+		workspaceoutboundrulefqdn.Setup,
+		workspaceoutboundruleprivateendpoint.Setup,
+		workspaceoutboundruleservicetag.Setup,
 		maintenanceassignmentdedicatedhost.Setup,
 		maintenanceassignmentvirtualmachine.Setup,
 		maintenanceconfiguration.Setup,
@@ -1189,10 +1230,13 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		loadbalancerrule.Setup,
 		localnetworkgateway.Setup,
 		manager.Setup,
+		manageripampool.Setup,
 		managermanagementgroupconnection.Setup,
 		managernetworkgroup.Setup,
+		managerroutingconfiguration.Setup,
 		managerstaticmember.Setup,
 		managersubscriptionconnection.Setup,
+		managerverifierworkspace.Setup,
 		natgateway.Setup,
 		natgatewaypublicipassociation.Setup,
 		natgatewaypublicipprefixassociation.Setup,
@@ -1213,6 +1257,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		privatednsresolverforwardingrule.Setup,
 		privatednsresolverinboundendpoint.Setup,
 		privatednsresolveroutboundendpoint.Setup,
+		privatednsresolvervirtualnetworklink.Setup,
 		privatednssrvrecord.Setup,
 		privatednstxtrecord.Setup,
 		privatednszone.Setup,
@@ -1247,6 +1292,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		virtualhubroutetableroute.Setup,
 		virtualhubsecuritypartnerprovider.Setup,
 		virtualnetworknetwork.Setup,
+		virtualnetworkdnsservers.Setup,
 		virtualnetworkgateway.Setup,
 		virtualnetworkgatewayconnection.Setup,
 		virtualnetworkpeering.Setup,
@@ -1428,6 +1474,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		appserviceplan.Setup,
 		functionapp.Setup,
 		functionappactiveslot.Setup,
+		functionappflexconsumption.Setup,
 		functionappfunction.Setup,
 		functionapphybridconnection.Setup,
 		functionappslot.Setup,
@@ -1456,6 +1503,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		monitoralertprocessingruleactiongroup.SetupGated,
 		monitoralertprocessingrulesuppression.SetupGated,
+		monitoralertprometheusrulegroup.SetupGated,
 		monitorsmartdetectoralertrule.SetupGated,
 		server.SetupGated,
 		api.SetupGated,
@@ -1477,6 +1525,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		gateway.SetupGated,
 		gatewayapi.SetupGated,
 		globalschema.SetupGated,
+		group.SetupGated,
 		identityprovideraad.SetupGated,
 		identityproviderfacebook.SetupGated,
 		identityprovidergoogle.SetupGated,
@@ -1489,8 +1538,10 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		notificationrecipientuser.SetupGated,
 		openidconnectprovider.SetupGated,
 		policy.SetupGated,
+		policyfragment.SetupGated,
 		product.SetupGated,
 		productapi.SetupGated,
+		productgroup.SetupGated,
 		productpolicy.SetupGated,
 		producttag.SetupGated,
 		rediscache.SetupGated,
@@ -1552,10 +1603,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		variablestring.SetupGated,
 		webhook.SetupGated,
 		resourcegroup.SetupGated,
-		resourcegroup.SetupGated,
 		resourceproviderregistration.SetupGated,
-		resourceproviderregistration.SetupGated,
-		subscriptionazure.SetupGated,
 		subscriptionazure.SetupGated,
 		cluster.SetupGated,
 		botchannelalexa.SetupGated,
@@ -1591,6 +1639,9 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		profile.SetupGated,
 		appservicecertificateorder.SetupGated,
 		accountcognitiveservices.SetupGated,
+		accountraiblocklist.SetupGated,
+		accountraipolicy.SetupGated,
+		aiservices.SetupGated,
 		deployment.SetupGated,
 		service.SetupGated,
 		availabilityset.SetupGated,
@@ -1615,6 +1666,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		virtualmachinedatadiskattachment.SetupGated,
 		virtualmachineextension.SetupGated,
 		virtualmachineruncommand.SetupGated,
+		virtualmachinescalesetstandbypool.SetupGated,
 		windowsvirtualmachine.SetupGated,
 		windowsvirtualmachinescaleset.SetupGated,
 		ledger.SetupGated,
@@ -1622,6 +1674,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		budgetresourcegroup.SetupGated,
 		budgetsubscription.SetupGated,
 		containerapp.SetupGated,
+		containerjob.SetupGated,
 		customdomaincontainerapp.SetupGated,
 		environment.SetupGated,
 		environmentcertificate.SetupGated,
@@ -1630,6 +1683,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		environmentstorage.SetupGated,
 		agentpool.SetupGated,
 		containerconnectedregistry.SetupGated,
+		credentialset.SetupGated,
 		registry.SetupGated,
 		scopemap.SetupGated,
 		token.SetupGated,
@@ -1745,6 +1799,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		flexibleserverconfigurationdbforpostgresql.SetupGated,
 		flexibleserverdatabase.SetupGated,
 		flexibleserverfirewallruledbforpostgresql.SetupGated,
+		flexibleservervirtualendpoint.SetupGated,
 		serverdbforpostgresql.SetupGated,
 		serverkey.SetupGated,
 		virtualnetworkrule.SetupGated,
@@ -1775,8 +1830,11 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		cloudelasticsearch.SetupGated,
 		domain.SetupGated,
 		domaintopic.SetupGated,
+		eventgridnamespace.SetupGated,
 		eventsubscription.SetupGated,
+		partnerconfiguration.SetupGated,
 		systemtopic.SetupGated,
+		systemtopiceventsubscription.SetupGated,
 		topic.SetupGated,
 		authorizationrule.SetupGated,
 		consumergroup.SetupGated,
@@ -1820,6 +1878,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		monitorscheduledqueryrulesalert.SetupGated,
 		monitorscheduledqueryrulesalertv2.SetupGated,
 		monitorscheduledqueryruleslog.SetupGated,
+		monitorworkspace.SetupGated,
 		application.SetupGated,
 		applicationnetworkruleset.SetupGated,
 		accesspolicy.SetupGated,
@@ -1853,10 +1912,14 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		apptriggerhttprequest.SetupGated,
 		apptriggerrecurrence.SetupGated,
 		appworkflow.SetupGated,
+		aifoundry.SetupGated,
 		computecluster.SetupGated,
 		computeinstance.SetupGated,
 		synapsespark.SetupGated,
 		workspacemachinelearningservices.SetupGated,
+		workspaceoutboundrulefqdn.SetupGated,
+		workspaceoutboundruleprivateendpoint.SetupGated,
+		workspaceoutboundruleservicetag.SetupGated,
 		maintenanceassignmentdedicatedhost.SetupGated,
 		maintenanceassignmentvirtualmachine.SetupGated,
 		maintenanceconfiguration.SetupGated,
@@ -1916,10 +1979,13 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		loadbalancerrule.SetupGated,
 		localnetworkgateway.SetupGated,
 		manager.SetupGated,
+		manageripampool.SetupGated,
 		managermanagementgroupconnection.SetupGated,
 		managernetworkgroup.SetupGated,
+		managerroutingconfiguration.SetupGated,
 		managerstaticmember.SetupGated,
 		managersubscriptionconnection.SetupGated,
+		managerverifierworkspace.SetupGated,
 		natgateway.SetupGated,
 		natgatewaypublicipassociation.SetupGated,
 		natgatewaypublicipprefixassociation.SetupGated,
@@ -1940,6 +2006,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		privatednsresolverforwardingrule.SetupGated,
 		privatednsresolverinboundendpoint.SetupGated,
 		privatednsresolveroutboundendpoint.SetupGated,
+		privatednsresolvervirtualnetworklink.SetupGated,
 		privatednssrvrecord.SetupGated,
 		privatednstxtrecord.SetupGated,
 		privatednszone.SetupGated,
@@ -1974,6 +2041,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		virtualhubroutetableroute.SetupGated,
 		virtualhubsecuritypartnerprovider.SetupGated,
 		virtualnetworknetwork.SetupGated,
+		virtualnetworkdnsservers.SetupGated,
 		virtualnetworkgateway.SetupGated,
 		virtualnetworkgatewayconnection.SetupGated,
 		virtualnetworkpeering.SetupGated,
@@ -2155,6 +2223,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		appserviceplan.SetupGated,
 		functionapp.SetupGated,
 		functionappactiveslot.SetupGated,
+		functionappflexconsumption.SetupGated,
 		functionappfunction.SetupGated,
 		functionapphybridconnection.SetupGated,
 		functionappslot.SetupGated,

@@ -1,11 +1,14 @@
-// SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+// SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
 //
 // SPDX-License-Identifier: CC0-1.0
 
 package network
 
 import (
+	"github.com/crossplane/upjet/v2/pkg/types/markers/kubebuilder"
+	"github.com/crossplane/upjet/v2/pkg/types/structtag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
+	"k8s.io/utils/ptr"
 
 	"github.com/crossplane/upjet/v2/pkg/config"
 
@@ -212,7 +215,7 @@ func Configure(p *config.Provider) {
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"subnet"},
 		}
-		config.MoveToStatus(r.TerraformResource, "subnet")
+		config.MoveToStatus(r.TerraformResource, "subnet", "dns_servers")
 	})
 
 	p.AddResourceConfigurator("azurerm_virtual_network_gateway", func(r *config.Resource) {
@@ -478,6 +481,28 @@ func Configure(p *config.Provider) {
 			TerraformName: "azurerm_public_ip",
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
+		r.ServerSideApplyMergeStrategies["frontend_ip_configuration"] = config.MergeStrategy{
+			ListMergeStrategy: config.ListMergeStrategy{
+				ListMapKeys: config.ListMapKeys{
+					InjectedKey: config.InjectedKey{
+						Key:          "index",
+						DefaultValue: "default",
+					},
+				},
+				MergeStrategy: config.ListTypeMap,
+			},
+		}
+		r.ServerSideApplyMergeStrategies["gateway_ip_configuration"] = config.MergeStrategy{
+			ListMergeStrategy: config.ListMergeStrategy{
+				ListMapKeys: config.ListMapKeys{
+					InjectedKey: config.InjectedKey{
+						Key:          "index",
+						DefaultValue: "default",
+					},
+				},
+				MergeStrategy: config.ListTypeMap,
+			},
+		}
 	})
 
 	/*p.AddResourceConfigurator("azurerm_virtual_desktop_application", func(r *config.Resource) {
@@ -546,6 +571,32 @@ func Configure(p *config.Provider) {
 		r.References["virtual_network_name"] = config.Reference{
 			TerraformName: "azurerm_virtual_network",
 		}
+
+		// delegation schema element options.
+		r.SchemaElementOptions.SetInitProviderOverrides("delegation", &config.InitProviderOverrides{
+			// remove `,omitempty` from spec.initProvider.delegation struct tags.
+			TagOverrides: config.TagOverrides{
+				TFTag:   structtag.MustParseTF(``),
+				JSONTag: structtag.MustParseTF(``),
+			},
+			// mark spec.initProvider.delegation as optional.
+			KubebuilderOptions: &kubebuilder.Options{
+				Required: ptr.To(false),
+			},
+		})
+		// service_endpoints schema element options.
+		r.SchemaElementOptions.SetInitProviderOverrides("service_endpoints", &config.InitProviderOverrides{
+			// remove `,omitempty` from spec.initProvider.serviceEndpoints
+			// struct tags.
+			TagOverrides: config.TagOverrides{
+				TFTag:   structtag.MustParseTF(``),
+				JSONTag: structtag.MustParseTF(``),
+			},
+			// mark spec.initProvider.serviceEndpoints as optional.
+			KubebuilderOptions: &kubebuilder.Options{
+				Required: ptr.To(false),
+			},
+		})
 	})
 
 	p.AddResourceConfigurator("azurerm_subnet_nat_gateway_association", func(r *config.Resource) {
@@ -610,6 +661,48 @@ func Configure(p *config.Provider) {
 				delete(diff.Attributes, "network_manager_id")
 			}
 			return diff, nil
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_virtual_network_dns_servers", func(r *config.Resource) {
+		r.References["virtual_network_id"] = config.Reference{
+			TerraformName: "azurerm_virtual_network",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_network_manager_ipam_pool", func(r *config.Resource) {
+		r.References["network_manager_id"] = config.Reference{
+			TerraformName: "azurerm_network_manager",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["parent_pool_name"] = config.Reference{
+			TerraformName: "azurerm_network_manager_ipam_pool",
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_network_manager_routing_configuration", func(r *config.Resource) {
+		r.References["network_manager_id"] = config.Reference{
+			TerraformName: "azurerm_network_manager",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_network_manager_verifier_workspace", func(r *config.Resource) {
+		r.References["network_manager_id"] = config.Reference{
+			TerraformName: "azurerm_network_manager",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_private_dns_resolver_virtual_network_link", func(r *config.Resource) {
+		r.References["virtual_network_id"] = config.Reference{
+			TerraformName: "azurerm_virtual_network",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["dns_forwarding_ruleset_id"] = config.Reference{
+			TerraformName: "azurerm_private_dns_resolver_dns_forwarding_ruleset",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 }

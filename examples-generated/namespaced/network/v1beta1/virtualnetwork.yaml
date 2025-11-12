@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: network.azure.m.upbound.io/v1beta1
 kind: VirtualNetwork
 metadata:
@@ -11,9 +15,6 @@ spec:
   forProvider:
     addressSpace:
     - 10.0.0.0/16
-    dnsServers:
-    - 10.0.0.4
-    - 10.0.0.5
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:

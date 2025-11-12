@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: web.azure.m.upbound.io/v1beta1
 kind: LinuxWebAppSlot
 metadata:
@@ -13,8 +17,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     name: example-slot
-    siteConfig:
-    - {}
+    siteConfig: {}
 
 ---
 
@@ -36,8 +39,7 @@ spec:
     servicePlanIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    siteConfig:
-    - {}
+    siteConfig: {}
 
 ---
 

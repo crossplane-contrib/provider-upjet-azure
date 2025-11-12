@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: netapp.azure.m.upbound.io/v1beta1
 kind: Volume
 metadata:
@@ -16,18 +20,18 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     dataProtectionBackupPolicy:
-    - backupPolicyId: ${azurerm_netapp_backup_policy.example.id}
+      backupPolicyId: ${azurerm_netapp_backup_policy.example.id}
       backupVaultId: ${azurerm_netapp_backup_vault.example.id}
       policyEnabled: true
     dataProtectionReplication:
-    - endpointType: dst
+      endpointType: dst
       remoteVolumeLocation: West Europe
       remoteVolumeResourceIdSelector:
         matchLabels:
           testing.upbound.io/example-name: example
       replicationFrequency: 10minutes
     dataProtectionSnapshotPolicy:
-    - snapshotPolicyIdSelector:
+      snapshotPolicyIdSelector:
         matchLabels:
           testing.upbound.io/example-name: example
     largeVolumeEnabled: false
@@ -124,7 +128,7 @@ spec:
     delegation:
     - name: netapp
       serviceDelegation:
-      - actions:
+        actions:
         - Microsoft.Network/networkinterfaces/*
         - Microsoft.Network/virtualNetworks/subnets/join/action
         name: Microsoft.Netapp/volumes

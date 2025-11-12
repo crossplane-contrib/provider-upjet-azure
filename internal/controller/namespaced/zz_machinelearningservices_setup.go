@@ -9,20 +9,28 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
+	aifoundry "github.com/upbound/provider-azure/internal/controller/namespaced/machinelearningservices/aifoundry"
 	computecluster "github.com/upbound/provider-azure/internal/controller/namespaced/machinelearningservices/computecluster"
 	computeinstance "github.com/upbound/provider-azure/internal/controller/namespaced/machinelearningservices/computeinstance"
 	synapsespark "github.com/upbound/provider-azure/internal/controller/namespaced/machinelearningservices/synapsespark"
 	workspace "github.com/upbound/provider-azure/internal/controller/namespaced/machinelearningservices/workspace"
+	workspaceoutboundrulefqdn "github.com/upbound/provider-azure/internal/controller/namespaced/machinelearningservices/workspaceoutboundrulefqdn"
+	workspaceoutboundruleprivateendpoint "github.com/upbound/provider-azure/internal/controller/namespaced/machinelearningservices/workspaceoutboundruleprivateendpoint"
+	workspaceoutboundruleservicetag "github.com/upbound/provider-azure/internal/controller/namespaced/machinelearningservices/workspaceoutboundruleservicetag"
 )
 
 // Setup_machinelearningservices creates all controllers with the supplied logger and adds them to
 // the supplied manager.
 func Setup_machinelearningservices(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		aifoundry.Setup,
 		computecluster.Setup,
 		computeinstance.Setup,
 		synapsespark.Setup,
 		workspace.Setup,
+		workspaceoutboundrulefqdn.Setup,
+		workspaceoutboundruleprivateendpoint.Setup,
+		workspaceoutboundruleservicetag.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err
@@ -35,10 +43,14 @@ func Setup_machinelearningservices(mgr ctrl.Manager, o controller.Options) error
 // the supplied manager gated.
 func SetupGated_machinelearningservices(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		aifoundry.SetupGated,
 		computecluster.SetupGated,
 		computeinstance.SetupGated,
 		synapsespark.SetupGated,
 		workspace.SetupGated,
+		workspaceoutboundrulefqdn.SetupGated,
+		workspaceoutboundruleprivateendpoint.SetupGated,
+		workspaceoutboundruleservicetag.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

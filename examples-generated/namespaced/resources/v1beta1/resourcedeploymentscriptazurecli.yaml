@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: resources.azure.m.upbound.io/v1beta1
 kind: ResourceDeploymentScriptAzureCli
 metadata:
@@ -13,7 +17,7 @@ spec:
     commandLine: '''foo'' ''bar'''
     forceUpdateTag: "1"
     identity:
-    - identityIdsRefs:
+      identityIdsRefs:
       - name: example
       type: UserAssigned
     location: West Europe

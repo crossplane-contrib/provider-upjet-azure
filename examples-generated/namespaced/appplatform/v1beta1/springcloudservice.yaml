@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: appplatform.azure.m.upbound.io/v1beta1
 kind: SpringCloudService
 metadata:
@@ -10,7 +14,7 @@ metadata:
 spec:
   forProvider:
     configServerGitSetting:
-    - label: config
+      label: config
       searchPaths:
       - dir1
       - dir2
@@ -23,7 +27,7 @@ spec:
     tags:
       Env: staging
     trace:
-    - connectionStringSelector:
+      connectionStringSelector:
         matchLabels:
           testing.upbound.io/example-name: example
       sampleRate: 10

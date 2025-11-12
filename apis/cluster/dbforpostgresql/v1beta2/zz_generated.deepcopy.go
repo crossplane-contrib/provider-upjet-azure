@@ -363,6 +363,16 @@ func (in *FlexibleServerInitParameters) DeepCopyInto(out *FlexibleServerInitPara
 		*out = new(string)
 		**out = **in
 	}
+	if in.SourceServerIDRef != nil {
+		in, out := &in.SourceServerIDRef, &out.SourceServerIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SourceServerIDSelector != nil {
+		in, out := &in.SourceServerIDSelector, &out.SourceServerIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.StorageMb != nil {
 		in, out := &in.StorageMb, &out.StorageMb
 		*out = new(float64)
@@ -756,6 +766,16 @@ func (in *FlexibleServerParameters) DeepCopyInto(out *FlexibleServerParameters) 
 		in, out := &in.SourceServerID, &out.SourceServerID
 		*out = new(string)
 		**out = **in
+	}
+	if in.SourceServerIDRef != nil {
+		in, out := &in.SourceServerIDRef, &out.SourceServerIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SourceServerIDSelector != nil {
+		in, out := &in.SourceServerIDSelector, &out.SourceServerIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.StorageMb != nil {
 		in, out := &in.StorageMb, &out.StorageMb

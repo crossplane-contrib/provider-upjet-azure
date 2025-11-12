@@ -201,6 +201,127 @@ func (mg *ContainerConnectedRegistry) ResolveReferences(ctx context.Context, c c
 	return nil
 }
 
+// ResolveReferences of this CredentialSet.
+func (mg *CredentialSet) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+
+	if mg.Spec.ForProvider.AuthenticationCredentials != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("keyvault.azure.m.upbound.io", "v1beta1", "Secret", "SecretList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AuthenticationCredentials.PasswordSecretID),
+				Extract:      resource.ExtractParamPath("versionless_id", true),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.ForProvider.AuthenticationCredentials.PasswordSecretIDRef,
+				Selector:     mg.Spec.ForProvider.AuthenticationCredentials.PasswordSecretIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.AuthenticationCredentials.PasswordSecretID")
+		}
+		mg.Spec.ForProvider.AuthenticationCredentials.PasswordSecretID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.AuthenticationCredentials.PasswordSecretIDRef = rsp.ResolvedReference
+
+	}
+	if mg.Spec.ForProvider.AuthenticationCredentials != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("keyvault.azure.m.upbound.io", "v1beta1", "Secret", "SecretList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AuthenticationCredentials.UsernameSecretID),
+				Extract:      resource.ExtractParamPath("versionless_id", true),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.ForProvider.AuthenticationCredentials.UsernameSecretIDRef,
+				Selector:     mg.Spec.ForProvider.AuthenticationCredentials.UsernameSecretIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.AuthenticationCredentials.UsernameSecretID")
+		}
+		mg.Spec.ForProvider.AuthenticationCredentials.UsernameSecretID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.AuthenticationCredentials.UsernameSecretIDRef = rsp.ResolvedReference
+
+	}
+	{
+		m, l, err = apisresolver.GetManagedResource("containerregistry.azure.m.upbound.io", "v1beta1", "Registry", "RegistryList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerRegistryID),
+			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.ContainerRegistryIDRef,
+			Selector:     mg.Spec.ForProvider.ContainerRegistryIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ContainerRegistryID")
+	}
+	mg.Spec.ForProvider.ContainerRegistryID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ContainerRegistryIDRef = rsp.ResolvedReference
+
+	if mg.Spec.InitProvider.AuthenticationCredentials != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("keyvault.azure.m.upbound.io", "v1beta1", "Secret", "SecretList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AuthenticationCredentials.PasswordSecretID),
+				Extract:      resource.ExtractParamPath("versionless_id", true),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.InitProvider.AuthenticationCredentials.PasswordSecretIDRef,
+				Selector:     mg.Spec.InitProvider.AuthenticationCredentials.PasswordSecretIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.AuthenticationCredentials.PasswordSecretID")
+		}
+		mg.Spec.InitProvider.AuthenticationCredentials.PasswordSecretID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.AuthenticationCredentials.PasswordSecretIDRef = rsp.ResolvedReference
+
+	}
+	if mg.Spec.InitProvider.AuthenticationCredentials != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("keyvault.azure.m.upbound.io", "v1beta1", "Secret", "SecretList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AuthenticationCredentials.UsernameSecretID),
+				Extract:      resource.ExtractParamPath("versionless_id", true),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.InitProvider.AuthenticationCredentials.UsernameSecretIDRef,
+				Selector:     mg.Spec.InitProvider.AuthenticationCredentials.UsernameSecretIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.AuthenticationCredentials.UsernameSecretID")
+		}
+		mg.Spec.InitProvider.AuthenticationCredentials.UsernameSecretID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.AuthenticationCredentials.UsernameSecretIDRef = rsp.ResolvedReference
+
+	}
+
+	return nil
+}
+
 // ResolveReferences of this Registry.
 func (mg *Registry) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed

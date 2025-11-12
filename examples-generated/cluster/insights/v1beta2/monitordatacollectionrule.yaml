@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: insights.azure.upbound.io/v1beta2
 kind: MonitorDataCollectionRule
 metadata:
@@ -29,7 +33,7 @@ spec:
       - Custom-MyTableRawData
       transformKql: source | project TimeGenerated = Time, Computer, Message = AdditionalContext
     dataSources:
-    - extension:
+      extension:
       - extensionJson: |-
           ${jsonencode({
                   a = 1
@@ -53,8 +57,8 @@ spec:
         format: text
         name: example-datasource-logfile
         settings:
-        - text:
-          - recordStartTimestampFormat: ISO 8601
+          text:
+            recordStartTimestampFormat: ISO 8601
         streams:
         - Custom-MyTableRawData
       performanceCounter:
@@ -81,10 +85,10 @@ spec:
         - '*![System/Level=1]'
     description: data collection rule example
     destinations:
-    - azureMonitorMetrics:
-      - name: example-destination-metrics
+      azureMonitorMetrics:
+        name: example-destination-metrics
       eventHub:
-      - eventHubIdSelector:
+        eventHubIdSelector:
           matchLabels:
             testing.upbound.io/example-name: example
         name: example-destination-eventhub
@@ -102,7 +106,7 @@ spec:
           matchLabels:
             testing.upbound.io/example-name: example
     identity:
-    - identityIdsRefs:
+      identityIdsRefs:
       - name: example
       type: UserAssigned
     location: West Europe
@@ -175,7 +179,7 @@ spec:
   forProvider:
     location: West Europe
     plan:
-    - product: OMSGallery/WindowsEventForwarding
+      product: OMSGallery/WindowsEventForwarding
       publisher: Microsoft
     resourceGroupNameSelector:
       matchLabels:

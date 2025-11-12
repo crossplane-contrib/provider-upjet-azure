@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: datafactory.azure.upbound.io/v1beta2
 kind: DataSetDelimitedText
 metadata:
@@ -16,7 +20,7 @@ spec:
     escapeCharacter: f
     firstRowAsHeader: true
     httpServerLocation:
-    - filename: fizz.txt
+      filename: fizz.txt
       path: foo/bar/
       relativeUrl: http://www.bing.com
     linkedServiceNameSelector:

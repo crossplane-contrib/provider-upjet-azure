@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: hdinsight.azure.m.upbound.io/v1beta1
 kind: HadoopCluster
 metadata:
@@ -11,9 +15,9 @@ spec:
   forProvider:
     clusterVersion: "3.6"
     componentVersion:
-    - hadoop: "2.7"
+      hadoop: "2.7"
     gateway:
-    - passwordSecretRef:
+      passwordSecretRef:
         key: example-key
         name: example-secret
       username: acctestusrgw
@@ -22,21 +26,21 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     roles:
-    - headNode:
-      - passwordSecretRef:
+      headNode:
+        passwordSecretRef:
           key: example-key
           name: example-secret
         username: acctestusrvm
         vmSize: Standard_D3_V2
       workerNode:
-      - passwordSecretRef:
+        passwordSecretRef:
           key: example-key
           name: example-secret
         targetInstanceCount: 3
         username: acctestusrvm
         vmSize: Standard_D4_V2
       zookeeperNode:
-      - passwordSecretRef:
+        passwordSecretRef:
           key: example-key
           name: example-secret
         username: acctestusrvm

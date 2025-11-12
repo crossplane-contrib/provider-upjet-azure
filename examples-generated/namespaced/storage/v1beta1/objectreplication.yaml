@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: storage.azure.m.upbound.io/v1beta1
 kind: ObjectReplication
 metadata:
@@ -69,7 +73,7 @@ spec:
     accountReplicationType: LRS
     accountTier: Standard
     blobProperties:
-    - changeFeedEnabled: true
+      changeFeedEnabled: true
       versioningEnabled: true
     location: East US
     resourceGroupNameSelector:
@@ -92,7 +96,7 @@ spec:
     accountReplicationType: LRS
     accountTier: Standard
     blobProperties:
-    - changeFeedEnabled: true
+      changeFeedEnabled: true
       versioningEnabled: true
     location: West Europe
     resourceGroupNameSelector:

@@ -52,10 +52,13 @@ import (
 	loadbalancerrule "github.com/upbound/provider-azure/internal/controller/cluster/network/loadbalancerrule"
 	localnetworkgateway "github.com/upbound/provider-azure/internal/controller/cluster/network/localnetworkgateway"
 	manager "github.com/upbound/provider-azure/internal/controller/cluster/network/manager"
+	manageripampool "github.com/upbound/provider-azure/internal/controller/cluster/network/manageripampool"
 	managermanagementgroupconnection "github.com/upbound/provider-azure/internal/controller/cluster/network/managermanagementgroupconnection"
 	managernetworkgroup "github.com/upbound/provider-azure/internal/controller/cluster/network/managernetworkgroup"
+	managerroutingconfiguration "github.com/upbound/provider-azure/internal/controller/cluster/network/managerroutingconfiguration"
 	managerstaticmember "github.com/upbound/provider-azure/internal/controller/cluster/network/managerstaticmember"
 	managersubscriptionconnection "github.com/upbound/provider-azure/internal/controller/cluster/network/managersubscriptionconnection"
+	managerverifierworkspace "github.com/upbound/provider-azure/internal/controller/cluster/network/managerverifierworkspace"
 	natgateway "github.com/upbound/provider-azure/internal/controller/cluster/network/natgateway"
 	natgatewaypublicipassociation "github.com/upbound/provider-azure/internal/controller/cluster/network/natgatewaypublicipassociation"
 	natgatewaypublicipprefixassociation "github.com/upbound/provider-azure/internal/controller/cluster/network/natgatewaypublicipprefixassociation"
@@ -76,6 +79,7 @@ import (
 	privatednsresolverforwardingrule "github.com/upbound/provider-azure/internal/controller/cluster/network/privatednsresolverforwardingrule"
 	privatednsresolverinboundendpoint "github.com/upbound/provider-azure/internal/controller/cluster/network/privatednsresolverinboundendpoint"
 	privatednsresolveroutboundendpoint "github.com/upbound/provider-azure/internal/controller/cluster/network/privatednsresolveroutboundendpoint"
+	privatednsresolvervirtualnetworklink "github.com/upbound/provider-azure/internal/controller/cluster/network/privatednsresolvervirtualnetworklink"
 	privatednssrvrecord "github.com/upbound/provider-azure/internal/controller/cluster/network/privatednssrvrecord"
 	privatednstxtrecord "github.com/upbound/provider-azure/internal/controller/cluster/network/privatednstxtrecord"
 	privatednszone "github.com/upbound/provider-azure/internal/controller/cluster/network/privatednszone"
@@ -110,6 +114,7 @@ import (
 	virtualhubroutetableroute "github.com/upbound/provider-azure/internal/controller/cluster/network/virtualhubroutetableroute"
 	virtualhubsecuritypartnerprovider "github.com/upbound/provider-azure/internal/controller/cluster/network/virtualhubsecuritypartnerprovider"
 	virtualnetwork "github.com/upbound/provider-azure/internal/controller/cluster/network/virtualnetwork"
+	virtualnetworkdnsservers "github.com/upbound/provider-azure/internal/controller/cluster/network/virtualnetworkdnsservers"
 	virtualnetworkgateway "github.com/upbound/provider-azure/internal/controller/cluster/network/virtualnetworkgateway"
 	virtualnetworkgatewayconnection "github.com/upbound/provider-azure/internal/controller/cluster/network/virtualnetworkgatewayconnection"
 	virtualnetworkpeering "github.com/upbound/provider-azure/internal/controller/cluster/network/virtualnetworkpeering"
@@ -171,10 +176,13 @@ func Setup_network(mgr ctrl.Manager, o controller.Options) error {
 		loadbalancerrule.Setup,
 		localnetworkgateway.Setup,
 		manager.Setup,
+		manageripampool.Setup,
 		managermanagementgroupconnection.Setup,
 		managernetworkgroup.Setup,
+		managerroutingconfiguration.Setup,
 		managerstaticmember.Setup,
 		managersubscriptionconnection.Setup,
+		managerverifierworkspace.Setup,
 		natgateway.Setup,
 		natgatewaypublicipassociation.Setup,
 		natgatewaypublicipprefixassociation.Setup,
@@ -195,6 +203,7 @@ func Setup_network(mgr ctrl.Manager, o controller.Options) error {
 		privatednsresolverforwardingrule.Setup,
 		privatednsresolverinboundendpoint.Setup,
 		privatednsresolveroutboundendpoint.Setup,
+		privatednsresolvervirtualnetworklink.Setup,
 		privatednssrvrecord.Setup,
 		privatednstxtrecord.Setup,
 		privatednszone.Setup,
@@ -229,6 +238,7 @@ func Setup_network(mgr ctrl.Manager, o controller.Options) error {
 		virtualhubroutetableroute.Setup,
 		virtualhubsecuritypartnerprovider.Setup,
 		virtualnetwork.Setup,
+		virtualnetworkdnsservers.Setup,
 		virtualnetworkgateway.Setup,
 		virtualnetworkgatewayconnection.Setup,
 		virtualnetworkpeering.Setup,
@@ -296,10 +306,13 @@ func SetupGated_network(mgr ctrl.Manager, o controller.Options) error {
 		loadbalancerrule.SetupGated,
 		localnetworkgateway.SetupGated,
 		manager.SetupGated,
+		manageripampool.SetupGated,
 		managermanagementgroupconnection.SetupGated,
 		managernetworkgroup.SetupGated,
+		managerroutingconfiguration.SetupGated,
 		managerstaticmember.SetupGated,
 		managersubscriptionconnection.SetupGated,
+		managerverifierworkspace.SetupGated,
 		natgateway.SetupGated,
 		natgatewaypublicipassociation.SetupGated,
 		natgatewaypublicipprefixassociation.SetupGated,
@@ -320,6 +333,7 @@ func SetupGated_network(mgr ctrl.Manager, o controller.Options) error {
 		privatednsresolverforwardingrule.SetupGated,
 		privatednsresolverinboundendpoint.SetupGated,
 		privatednsresolveroutboundendpoint.SetupGated,
+		privatednsresolvervirtualnetworklink.SetupGated,
 		privatednssrvrecord.SetupGated,
 		privatednstxtrecord.SetupGated,
 		privatednszone.SetupGated,
@@ -354,6 +368,7 @@ func SetupGated_network(mgr ctrl.Manager, o controller.Options) error {
 		virtualhubroutetableroute.SetupGated,
 		virtualhubsecuritypartnerprovider.SetupGated,
 		virtualnetwork.SetupGated,
+		virtualnetworkdnsservers.SetupGated,
 		virtualnetworkgateway.SetupGated,
 		virtualnetworkgatewayconnection.SetupGated,
 		virtualnetworkpeering.SetupGated,

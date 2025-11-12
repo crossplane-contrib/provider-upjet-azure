@@ -104,6 +104,28 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_api_management_api_release", func(r *config.Resource) {
 		r.TerraformCustomDiff = apiIdCustomDiff
 	})
+	p.AddResourceConfigurator("azurerm_api_management_product_group", func(r *config.Resource) {
+		r.References["product_id"] = config.Reference{
+			TerraformName: "azurerm_api_management_product",
+		}
+		r.References["api_management_name"] = config.Reference{
+			TerraformName: "azurerm_api_management",
+		}
+		r.References["group_name"] = config.Reference{
+			TerraformName: "azurerm_api_management_group",
+		}
+	})
+	p.AddResourceConfigurator("azurerm_api_management_api_operation_policy", func(r *config.Resource) {
+		r.References["api_name"] = config.Reference{
+			TerraformName: "azurerm_api_management_api",
+		}
+		r.References["api_management_name"] = config.Reference{
+			TerraformName: "azurerm_api_management",
+		}
+		r.References["operation_id"] = config.Reference{
+			TerraformName: "azurerm_api_management_api_operation",
+		}
+	})
 }
 
 func apiIdCustomDiff(diff *terraform.InstanceDiff, state *terraform.InstanceState, resourceConfig *terraform.ResourceConfig) (*terraform.InstanceDiff, error) { //nolint:gocyclo

@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: insights.azure.m.upbound.io/v1beta1
 kind: MonitorScheduledQueryRulesAlert
 metadata:
@@ -10,7 +14,7 @@ metadata:
 spec:
   forProvider:
     action:
-    - actionGroupRefs: []
+      actionGroupRefs: []
       customWebhookPayload: '{}'
       emailSubject: Email Header
     dataSourceIdSelector:
@@ -33,7 +37,7 @@ spec:
       foo: bar
     timeWindow: 30
     trigger:
-    - operator: GreaterThan
+      operator: GreaterThan
       threshold: 3
 
 ---

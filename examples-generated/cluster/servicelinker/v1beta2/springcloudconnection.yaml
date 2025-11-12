@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: servicelinker.azure.upbound.io/v1beta2
 kind: SpringCloudConnection
 metadata:
@@ -9,7 +13,7 @@ metadata:
 spec:
   forProvider:
     authentication:
-    - type: systemAssignedIdentity
+      type: systemAssignedIdentity
     name: example-serviceconnector
     springCloudIdSelector:
       matchLabels:
@@ -31,7 +35,7 @@ metadata:
 spec:
   forProvider:
     consistencyPolicy:
-    - consistencyLevel: BoundedStaleness
+      consistencyLevel: BoundedStaleness
       maxIntervalInSeconds: 10
       maxStalenessPrefix: 200
     geoLocation:
@@ -114,7 +118,7 @@ metadata:
 spec:
   forProvider:
     identity:
-    - type: SystemAssigned
+      type: SystemAssigned
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example

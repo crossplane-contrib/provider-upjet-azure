@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: appplatform.azure.upbound.io/v1beta1
 kind: SpringCloudAppCosmosDBAssociation
 metadata:
@@ -32,7 +36,7 @@ metadata:
 spec:
   forProvider:
     consistencyPolicy:
-    - consistencyLevel: Strong
+      consistencyLevel: Strong
     geoLocation:
     - failoverPriority: 0
       location: West Europe

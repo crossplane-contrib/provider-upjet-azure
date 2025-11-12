@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: consumption.azure.m.upbound.io/v1beta1
 kind: BudgetResourceGroup
 metadata:
@@ -11,7 +15,7 @@ spec:
   forProvider:
     amount: 1000
     filter:
-    - dimension:
+      dimension:
       - name: ResourceId
         valuesRefs:
         - name: example
@@ -44,7 +48,7 @@ spec:
         testing.upbound.io/example-name: example
     timeGrain: Monthly
     timePeriod:
-    - endDate: "2022-07-01T00:00:00Z"
+      endDate: "2022-07-01T00:00:00Z"
       startDate: "2022-06-01T00:00:00Z"
 
 ---

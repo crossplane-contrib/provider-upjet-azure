@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: machinelearningservices.azure.m.upbound.io/v1beta1
 kind: ComputeInstance
 metadata:
@@ -15,7 +19,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     ssh:
-    - publicKey: ${var.ssh_key}
+      publicKey: ${var.ssh_key}
     subnetResourceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -80,7 +84,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     identity:
-    - type: SystemAssigned
+      type: SystemAssigned
     keyVaultIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example

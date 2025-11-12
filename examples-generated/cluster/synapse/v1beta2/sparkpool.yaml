@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: synapse.azure.upbound.io/v1beta2
 kind: SparkPool
 metadata:
@@ -9,20 +13,20 @@ metadata:
 spec:
   forProvider:
     autoPause:
-    - delayInMinutes: 15
+      delayInMinutes: 15
     autoScale:
-    - maxNodeCount: 50
+      maxNodeCount: 50
       minNodeCount: 3
     cacheSize: 100
     libraryRequirement:
-    - content: |
+      content: |
         appnope==0.1.0
         beautifulsoup4==4.6.3
       filename: requirements.txt
     nodeSize: Small
     nodeSizeFamily: MemoryOptimized
     sparkConfig:
-    - content: |
+      content: |
         spark.shuffle.spill                true
       filename: config.txt
     sparkVersion: 3.2
@@ -96,7 +100,7 @@ metadata:
 spec:
   forProvider:
     identity:
-    - type: SystemAssigned
+      type: SystemAssigned
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:

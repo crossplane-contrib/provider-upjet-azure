@@ -185,7 +185,17 @@ type FlexibleServerInitParameters struct {
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// The resource ID of the source PostgreSQL Flexible Server to be restored. Required when create_mode is GeoRestore, PointInTimeRestore or Replica. Changing this forces a new PostgreSQL Flexible Server to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/dbforpostgresql/v1beta2.FlexibleServer
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
 	SourceServerID *string `json:"sourceServerId,omitempty" tf:"source_server_id,omitempty"`
+
+	// Reference to a FlexibleServer in dbforpostgresql to populate sourceServerId.
+	// +kubebuilder:validation:Optional
+	SourceServerIDRef *v1.Reference `json:"sourceServerIdRef,omitempty" tf:"-"`
+
+	// Selector for a FlexibleServer in dbforpostgresql to populate sourceServerId.
+	// +kubebuilder:validation:Optional
+	SourceServerIDSelector *v1.Selector `json:"sourceServerIdSelector,omitempty" tf:"-"`
 
 	// The max storage allowed for the PostgreSQL Flexible Server. Possible values are 32768, 65536, 131072, 262144, 524288, 1048576, 2097152, 4193280, 4194304, 8388608, 16777216 and 33553408.
 	StorageMb *float64 `json:"storageMb,omitempty" tf:"storage_mb,omitempty"`
@@ -414,8 +424,18 @@ type FlexibleServerParameters struct {
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// The resource ID of the source PostgreSQL Flexible Server to be restored. Required when create_mode is GeoRestore, PointInTimeRestore or Replica. Changing this forces a new PostgreSQL Flexible Server to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/dbforpostgresql/v1beta2.FlexibleServer
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourceServerID *string `json:"sourceServerId,omitempty" tf:"source_server_id,omitempty"`
+
+	// Reference to a FlexibleServer in dbforpostgresql to populate sourceServerId.
+	// +kubebuilder:validation:Optional
+	SourceServerIDRef *v1.Reference `json:"sourceServerIdRef,omitempty" tf:"-"`
+
+	// Selector for a FlexibleServer in dbforpostgresql to populate sourceServerId.
+	// +kubebuilder:validation:Optional
+	SourceServerIDSelector *v1.Selector `json:"sourceServerIdSelector,omitempty" tf:"-"`
 
 	// The max storage allowed for the PostgreSQL Flexible Server. Possible values are 32768, 65536, 131072, 262144, 524288, 1048576, 2097152, 4193280, 4194304, 8388608, 16777216 and 33553408.
 	// +kubebuilder:validation:Optional

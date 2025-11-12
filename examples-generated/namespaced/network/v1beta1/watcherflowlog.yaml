@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: network.azure.m.upbound.io/v1beta1
 kind: WatcherFlowLog
 metadata:
@@ -17,7 +21,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     retentionPolicy:
-    - days: 7
+      days: 7
       enabled: true
     storageAccountIdSelector:
       matchLabels:
@@ -26,7 +30,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: test
     trafficAnalytics:
-    - enabled: true
+      enabled: true
       intervalInMinutes: 10
       workspaceIdSelector:
         matchLabels:

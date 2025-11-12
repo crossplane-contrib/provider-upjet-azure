@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: recoveryservices.azure.m.upbound.io/v1beta1
 kind: BackupPolicyVMWorkload
 metadata:
@@ -11,16 +15,16 @@ spec:
   forProvider:
     protectionPolicy:
     - backup:
-      - frequency: Daily
+        frequency: Daily
         time: "15:00"
       policyType: Full
       retentionDaily:
-      - count: 8
+        count: 8
     - backup:
-      - frequencyInMinutes: 15
+        frequencyInMinutes: 15
       policyType: Log
       simpleRetention:
-      - count: 8
+        count: 8
     recoveryVaultNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -28,7 +32,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     settings:
-    - compressionEnabled: false
+      compressionEnabled: false
       timeZone: UTC
     workloadType: SQLDataBase
 

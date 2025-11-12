@@ -14,13 +14,51 @@ import (
 	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
 )
 
+type ComputeClusterIdentityInitParameters struct {
+
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Machine Learning Compute Cluster. Changing this forces a new resource to be created.
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Machine Learning Compute Cluster. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both). Changing this forces a new resource to be created.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type ComputeClusterIdentityObservation struct {
+
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Machine Learning Compute Cluster. Changing this forces a new resource to be created.
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// The Principal ID for the Service Principal associated with the Managed Service Identity of this Machine Learning Compute Cluster.
+	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
+
+	// The Tenant ID for the Service Principal associated with the Managed Service Identity of this Machine Learning Compute Cluster.
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Machine Learning Compute Cluster. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both). Changing this forces a new resource to be created.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type ComputeClusterIdentityParameters struct {
+
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Machine Learning Compute Cluster. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Machine Learning Compute Cluster. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both). Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type" tf:"type,omitempty"`
+}
+
 type ComputeClusterInitParameters struct {
 
 	// The description of the Machine Learning compute. Changing this forces a new Machine Learning Compute Cluster to be created.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// An identity block as defined below.
-	Identity *IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity *ComputeClusterIdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Whether local authentication methods is enabled. Defaults to true. Changing this forces a new Machine Learning Compute Cluster to be created.
 	LocalAuthEnabled *bool `json:"localAuthEnabled,omitempty" tf:"local_auth_enabled,omitempty"`
@@ -89,7 +127,7 @@ type ComputeClusterObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// An identity block as defined below.
-	Identity *IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity *ComputeClusterIdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Whether local authentication methods is enabled. Defaults to true. Changing this forces a new Machine Learning Compute Cluster to be created.
 	LocalAuthEnabled *bool `json:"localAuthEnabled,omitempty" tf:"local_auth_enabled,omitempty"`
@@ -137,7 +175,7 @@ type ComputeClusterParameters struct {
 
 	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
-	Identity *IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity *ComputeClusterIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Whether local authentication methods is enabled. Defaults to true. Changing this forces a new Machine Learning Compute Cluster to be created.
 	// +kubebuilder:validation:Optional
@@ -207,44 +245,6 @@ type ComputeClusterParameters struct {
 	// The size of the VM. Changing this forces a new Machine Learning Compute Cluster to be created.
 	// +kubebuilder:validation:Optional
 	VMSize *string `json:"vmSize,omitempty" tf:"vm_size,omitempty"`
-}
-
-type IdentityInitParameters struct {
-
-	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Machine Learning Compute Cluster. Changing this forces a new resource to be created.
-	// +listType=set
-	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
-
-	// Specifies the type of Managed Service Identity that should be configured on this Machine Learning Compute Cluster. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both). Changing this forces a new resource to be created.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type IdentityObservation struct {
-
-	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Machine Learning Compute Cluster. Changing this forces a new resource to be created.
-	// +listType=set
-	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
-
-	// The Principal ID for the Service Principal associated with the Managed Service Identity of this Machine Learning Compute Cluster.
-	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
-
-	// The Tenant ID for the Service Principal associated with the Managed Service Identity of this Machine Learning Compute Cluster.
-	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
-
-	// Specifies the type of Managed Service Identity that should be configured on this Machine Learning Compute Cluster. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both). Changing this forces a new resource to be created.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type IdentityParameters struct {
-
-	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Machine Learning Compute Cluster. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	// +listType=set
-	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
-
-	// Specifies the type of Managed Service Identity that should be configured on this Machine Learning Compute Cluster. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both). Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type SSHInitParameters struct {

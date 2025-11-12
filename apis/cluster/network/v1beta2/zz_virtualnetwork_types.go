@@ -136,9 +136,6 @@ type VirtualNetworkInitParameters struct {
 	// A ddos_protection_plan block as documented below.
 	DDOSProtectionPlan *DDOSProtectionPlanInitParameters `json:"ddosProtectionPlan,omitempty" tf:"ddos_protection_plan,omitempty"`
 
-	// List of IP addresses of DNS servers
-	DNSServers []*string `json:"dnsServers,omitempty" tf:"dns_servers,omitempty"`
-
 	// Specifies the Edge Zone within the Azure Region where this Virtual Network should exist. Changing this forces a new Virtual Network to be created.
 	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
 
@@ -226,10 +223,6 @@ type VirtualNetworkParameters struct {
 	// A ddos_protection_plan block as documented below.
 	// +kubebuilder:validation:Optional
 	DDOSProtectionPlan *DDOSProtectionPlanParameters `json:"ddosProtectionPlan,omitempty" tf:"ddos_protection_plan,omitempty"`
-
-	// List of IP addresses of DNS servers
-	// +kubebuilder:validation:Optional
-	DNSServers []*string `json:"dnsServers,omitempty" tf:"dns_servers,omitempty"`
 
 	// Specifies the Edge Zone within the Azure Region where this Virtual Network should exist. Changing this forces a new Virtual Network to be created.
 	// +kubebuilder:validation:Optional

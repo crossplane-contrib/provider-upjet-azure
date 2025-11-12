@@ -334,6 +334,26 @@ func (mg *FlexibleServer) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
+		m, l, err = apisresolver.GetManagedResource("dbforpostgresql.azure.upbound.io", "v1beta1", "FlexibleServer", "FlexibleServerList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceServerID),
+			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.SourceServerIDRef,
+			Selector:     mg.Spec.ForProvider.SourceServerIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SourceServerID")
+	}
+	mg.Spec.ForProvider.SourceServerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SourceServerIDRef = rsp.ResolvedReference
+	{
 		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
@@ -373,6 +393,26 @@ func (mg *FlexibleServer) ResolveReferences(ctx context.Context, c client.Reader
 	}
 	mg.Spec.InitProvider.PrivateDNSZoneID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.PrivateDNSZoneIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("dbforpostgresql.azure.upbound.io", "v1beta1", "FlexibleServer", "FlexibleServerList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceServerID),
+			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.SourceServerIDRef,
+			Selector:     mg.Spec.InitProvider.SourceServerIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SourceServerID")
+	}
+	mg.Spec.InitProvider.SourceServerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SourceServerIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -541,6 +581,98 @@ func (mg *FlexibleServerFirewallRule) ResolveReferences(ctx context.Context, c c
 	}
 	mg.Spec.ForProvider.ServerID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServerIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this FlexibleServerVirtualEndpoint.
+func (mg *FlexibleServerVirtualEndpoint) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("dbforpostgresql.azure.upbound.io", "v1beta2", "FlexibleServer", "FlexibleServerList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ReplicaServerID),
+			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.ReplicaServerIDRef,
+			Selector:     mg.Spec.ForProvider.ReplicaServerIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ReplicaServerID")
+	}
+	mg.Spec.ForProvider.ReplicaServerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ReplicaServerIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("dbforpostgresql.azure.upbound.io", "v1beta2", "FlexibleServer", "FlexibleServerList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceServerID),
+			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.SourceServerIDRef,
+			Selector:     mg.Spec.ForProvider.SourceServerIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SourceServerID")
+	}
+	mg.Spec.ForProvider.SourceServerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SourceServerIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("dbforpostgresql.azure.upbound.io", "v1beta2", "FlexibleServer", "FlexibleServerList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ReplicaServerID),
+			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.ReplicaServerIDRef,
+			Selector:     mg.Spec.InitProvider.ReplicaServerIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ReplicaServerID")
+	}
+	mg.Spec.InitProvider.ReplicaServerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ReplicaServerIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("dbforpostgresql.azure.upbound.io", "v1beta2", "FlexibleServer", "FlexibleServerList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceServerID),
+			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.SourceServerIDRef,
+			Selector:     mg.Spec.InitProvider.SourceServerIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SourceServerID")
+	}
+	mg.Spec.InitProvider.SourceServerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SourceServerIDRef = rsp.ResolvedReference
 
 	return nil
 }

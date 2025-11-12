@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: signalrservice.azure.upbound.io/v1beta2
 kind: Service
 metadata:
@@ -20,7 +24,7 @@ spec:
         testing.upbound.io/example-name: example
     serviceMode: Default
     sku:
-    - capacity: 1
+      capacity: 1
       name: Free_F1
     upstreamEndpoint:
     - categoryPattern:

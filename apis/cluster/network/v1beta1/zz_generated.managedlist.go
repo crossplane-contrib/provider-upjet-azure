@@ -385,6 +385,15 @@ func (l *LocalNetworkGatewayList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this ManagerIpamPoolList.
+func (l *ManagerIpamPoolList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this ManagerList.
 func (l *ManagerList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -412,6 +421,15 @@ func (l *ManagerNetworkGroupList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this ManagerRoutingConfigurationList.
+func (l *ManagerRoutingConfigurationList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this ManagerStaticMemberList.
 func (l *ManagerStaticMemberList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -423,6 +441,15 @@ func (l *ManagerStaticMemberList) GetItems() []resource.Managed {
 
 // GetItems of this ManagerSubscriptionConnectionList.
 func (l *ManagerSubscriptionConnectionList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this ManagerVerifierWorkspaceList.
+func (l *ManagerVerifierWorkspaceList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -603,6 +630,15 @@ func (l *PrivateDNSResolverList) GetItems() []resource.Managed {
 
 // GetItems of this PrivateDNSResolverOutboundEndpointList.
 func (l *PrivateDNSResolverOutboundEndpointList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this PrivateDNSResolverVirtualNetworkLinkList.
+func (l *PrivateDNSResolverVirtualNetworkLinkList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -945,6 +981,15 @@ func (l *VirtualHubRouteTableRouteList) GetItems() []resource.Managed {
 
 // GetItems of this VirtualHubSecurityPartnerProviderList.
 func (l *VirtualHubSecurityPartnerProviderList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this VirtualNetworkDNSServersList.
+func (l *VirtualNetworkDNSServersList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

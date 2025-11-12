@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: synapse.azure.m.upbound.io/v1beta1
 kind: SQLPoolSecurityAlertPolicy
 metadata:
@@ -135,7 +139,7 @@ spec:
       object_id: 00000000-0000-0000-0000-000000000000
       tenant_id: 00000000-0000-0000-0000-000000000000
     identity:
-    - type: SystemAssigned
+      type: SystemAssigned
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:

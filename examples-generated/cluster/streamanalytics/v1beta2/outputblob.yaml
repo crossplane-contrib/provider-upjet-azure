@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: streamanalytics.azure.upbound.io/v1beta2
 kind: OutputBlob
 metadata:
@@ -14,7 +18,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: azurerm_stream_analytics_job
     serialization:
-    - encoding: UTF8
+      encoding: UTF8
       fieldDelimiter: ','
       type: Csv
     storageAccountKeySecretRef:

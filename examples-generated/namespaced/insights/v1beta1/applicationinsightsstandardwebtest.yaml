@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: insights.azure.m.upbound.io/v1beta1
 kind: ApplicationInsightsStandardWebTest
 metadata:
@@ -16,7 +20,7 @@ spec:
     - example
     location: West Europe
     request:
-    - url: http://www.example.com
+      url: http://www.example.com
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example

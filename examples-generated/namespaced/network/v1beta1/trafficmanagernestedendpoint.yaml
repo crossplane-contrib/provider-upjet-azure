@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: network.azure.m.upbound.io/v1beta1
 kind: TrafficManagerNestedEndpoint
 metadata:
@@ -68,10 +72,10 @@ metadata:
 spec:
   forProvider:
     dnsConfig:
-    - relativeName: nested-profile
+      relativeName: nested-profile
       ttl: 30
     monitorConfig:
-    - path: /
+      path: /
       port: 443
       protocol: HTTP
     resourceGroupNameSelector:
@@ -93,10 +97,10 @@ metadata:
 spec:
   forProvider:
     dnsConfig:
-    - relativeName: parent-profile
+      relativeName: parent-profile
       ttl: 100
     monitorConfig:
-    - intervalInSeconds: 30
+      intervalInSeconds: 30
       path: /
       port: 80
       protocol: HTTP

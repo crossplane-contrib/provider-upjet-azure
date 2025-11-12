@@ -52,8 +52,6 @@ var (
 var skipList = []string{
 	"azurerm_mssql_server_extended_auditing_policy",
 	// group prefix collision
-	"azurerm_api_management_group",
-	"azurerm_api_management_product_group",
 	"azurerm_dedicated_host_group",
 	"azurerm_storage_disks_pool",
 	"azurerm_storage_sync_group",
@@ -65,7 +63,7 @@ var skipList = []string{
 	"azurerm_network_interface_application_gateway_backend_address_pool_association",
 	"azurerm_sentinel_data_connector_microsoft_defender_advanced_threat_protection",
 	// deprecated
-	"azurerm_virtual_machine_scale_set",
+	"^azurerm_virtual_machine_scale_set$", // to match exactly azurerm_virtual_machine_scale_set not everything which starts from azurerm_virtual_machine_scale_set
 	"azurerm_virtual_machine_configuration_policy_assignment",
 	"azurerm_virtual_machine_scale_set_extension",
 	"azurerm_sql_server",
@@ -89,8 +87,6 @@ var skipList = []string{
 	// other upjet issues
 	"azurerm_container_registry_task",
 	"azurerm_dashboard",
-	// doc not found in Terraform Azurerm provider
-	"azurerm_virtual_network_dns_servers",
 	// unsupported sensitive field type
 	"azurerm_security_center_automation",
 	"azurerm_data_factory_trigger_tumbling_window",

@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: cosmosdb.azure.m.upbound.io/v1beta1
 kind: GremlinGraph
 metadata:
@@ -13,13 +17,13 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: azurerm_cosmosdb_account
     conflictResolutionPolicy:
-    - conflictResolutionPath: /_ts
+      conflictResolutionPath: /_ts
       mode: LastWriterWins
     databaseNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
     indexPolicy:
-    - automatic: true
+      automatic: true
       excludedPaths:
       - /"_etag"/?
       includedPaths:

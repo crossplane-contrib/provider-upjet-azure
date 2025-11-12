@@ -130,6 +130,15 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// API Management Custom Domains can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.ApiManagement/service/instance1/customDomains/default
 	"azurerm_api_management_custom_domain": config.TemplatedStringAsIdentifier("", "{{ .parameters.api_management_id }}/customDomains/{{ .external_name }}"),
+	// API Management Policy Fragments can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.ApiManagement/service/instance1/policyFragments/policyFragment1
+	"azurerm_api_management_policy_fragment": config.TemplatedStringAsIdentifier("", "{{ .parameters.api_management_id }}/policyFragments/{{ .external_name }}"),
+	// API Management Groups can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-resources/providers/Microsoft.ApiManagement/service/example-apim/groups/example-apimg
+	"azurerm_api_management_group": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.ApiManagement/service/{{ .parameters.api_management_name }}/groups/{{ .external_name }}"),
+	// API Management Product Groups can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.ApiManagement/service/service1/products/exampleId/groups/groupId
+	"azurerm_api_management_product_group": config.TemplatedStringAsIdentifier("", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.ApiManagement/service/{{ .parameters.api_management_name }}/products/{{ .parameters.product_id }}/groups/{{ .parameters.group_name }}"),
 
 	// authorization
 	"azurerm_resource_group_policy_assignment": config.TemplatedStringAsIdentifier("name", "{{ .parameters.resource_group_id }}/providers/Microsoft.Authorization/policyAssignments/{{ .external_name }}"),
@@ -206,6 +215,12 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_cognitive_account": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.CognitiveServices/accounts/{{ .external_name }}"),
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.CognitiveServices/accounts/account1/deployments/deployment1
 	"azurerm_cognitive_deployment": config.TemplatedStringAsIdentifier("name", "{{ .parameters.cognitive_account_id }}/deployments/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.CognitiveServices/accounts/account1
+	"azurerm_ai_services": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.CognitiveServices/accounts/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.CognitiveServices/accounts/account1/raiBlocklists/raiblocklist
+	"azurerm_cognitive_account_rai_blocklist": config.TemplatedStringAsIdentifier("name", "{{ .parameters.cognitive_account_id }}/raiBlocklists/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.CognitiveServices/accounts/account1/raiPolicies/policy1
+	"azurerm_cognitive_account_rai_policy": config.TemplatedStringAsIdentifier("name", "{{ .parameters.cognitive_account_id }}/raiPolicies/{{ .external_name }}"),
 
 	// communication
 	//
@@ -249,6 +264,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_virtual_machine_data_disk_attachment": config.IdentifierFromProvider,
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.Compute/virtualMachines/vm1/runCommands/rc1
 	"azurerm_virtual_machine_run_command": config.TemplatedStringAsIdentifier("name", "{{ .parameters.virtual_machine_id }}/runCommands/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.StandbyPool/standbyVirtualMachinePools/standbyVirtualMachinePool1
+	"azurerm_virtual_machine_scale_set_standby_pool": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StandbyPool/standbyVirtualMachinePools/{{ .external_name }}"),
 
 	// cdn
 	//
@@ -423,8 +440,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_container_app_environment_dapr_component": config.TemplatedStringAsIdentifier("name", "{{ .parameters.container_app_environment_id }}/daprComponents/{{ .external_name }}"),
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resGroup1/providers/Microsoft.App/managedEnvironments/myEnvironment/storages/mystorage
 	"azurerm_container_app_environment_storage": config.TemplatedStringAsIdentifier("name", "{{ .parameters.container_app_environment_id }}/storages/{{ .external_name }}"),
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-resources/providers/Microsoft.App/jobs/example-container-app-job
-	// "azurerm_container_app_job": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.App/jobs/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resGroup1/providers/Microsoft.App/jobs/mycontainerappjob
+	"azurerm_container_app_job": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.App/jobs/{{ .external_name }}"),
 
 	// containerservice
 	"azurerm_kubernetes_cluster":           config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.ContainerService/managedClusters/{{ .external_name }}"),
@@ -441,6 +458,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_container_connected_registry":  config.TemplatedStringAsIdentifier("name", "{{ .parameters.container_registry_id }}/connectedRegistries/{{ .external_name }}"),
 	// /subscriptions/12345678-1234-9876-4563-123456789012/resourceGroups/group1/providers/Microsoft.ContainerRegistry/registries/registry1/tokens/token1/passwords/password
 	"azurerm_container_registry_token_password": config.IdentifierFromProvider,
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.ContainerRegistry/registries/registry1/credentialSets/credentialSet1
+	"azurerm_container_registry_credential_set": config.TemplatedStringAsIdentifier("name", "{{ .parameters.container_registry_id }}/credentialSets/{{ .external_name }}"),
 
 	// operationalinsights
 	"azurerm_log_analytics_workspace": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.OperationalInsights/workspaces/{{ .external_name }}"),
@@ -501,6 +520,9 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_application_insights_workbook_template": config.IdentifierFromProvider,
 	// /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Insights/webTests/appinsightswebtest
 	"azurerm_application_insights_standard_web_test": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Insights/webTests/{{ .external_name }}"),
+	// Monitor Workspaces can be importated using the resource id
+	// azurerm_monitor_workspace.example /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.Monitor/accounts/azureMonitorWorkspace1
+	"azurerm_monitor_workspace": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Monitor/accounts/{{ .external_name }}"),
 
 	// logic
 	// Diagnostic Settings can be imported using the resource id
@@ -565,6 +587,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_virtual_network_gateway":                     config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/virtualNetworkGateways/{{ .external_name }}"),
 	"azurerm_virtual_network_peering":                     config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/virtualNetworks/{{ .parameters.virtual_network_name }}/virtualNetworkPeerings/{{ .external_name }}"),
 	"azurerm_virtual_network_gateway_connection":          config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/connections/{{ .external_name }}"),
+	"azurerm_virtual_network_dns_servers":                 config.TemplatedStringAsIdentifier("", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/virtualNetworks/{{ .parameters.virtual_network_name }}/dnsServers/default"),
 	"azurerm_virtual_wan":                                 config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/virtualWans/{{ .external_name }}"),
 	"azurerm_virtual_hub":                                 config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/virtualHubs/{{ .external_name }}"),
 	"azurerm_public_ip":                                   config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/publicIPAddresses/{{ .external_name }}"),
@@ -595,6 +618,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_private_dns_resolver_outbound_endpoint":      config.TemplatedStringAsIdentifier("name", "{{ .parameters.private_dns_resolver_id}}/outboundEndpoints/{{ .external_name }}"),
 	"azurerm_private_dns_resolver_dns_forwarding_ruleset": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/dnsForwardingRulesets/{{ .external_name }}"),
 	"azurerm_private_dns_resolver_forwarding_rule":        config.TemplatedStringAsIdentifier("name", "{{ .parameters.dns_forwarding_ruleset_id }}/forwardingRules/{{ .external_name }}"),
+	"azurerm_private_dns_resolver_virtual_network_link":   config.TemplatedStringAsIdentifier("name", "{{ .parameters.dns_forwarding_ruleset_id }}/virtualNetworkLinks/{{ .external_name }}"),
 	"azurerm_network_packet_capture":                      config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/networkWatchers/{{ .parameters.network_watcher_name }}/packetCaptures/{{ .external_name }}"),
 	"azurerm_vpn_server_configuration":                    config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/vpnServerConfigurations/{{ .external_name }}"),
 	"azurerm_point_to_site_vpn_gateway":                   config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/p2sVpnGateways/{{ .external_name }}"),
@@ -678,6 +702,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_postgresql_server_key": config.IdentifierFromProvider,
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.DBforPostgreSQL/servers/server1/configurations/backslash_quote
 	"azurerm_postgresql_configuration": config.IdentifierFromProvider,
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.DBforPostgreSQL/flexibleServers/sourceServerName/virtualEndpoints/endpointName|/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.DBforPostgreSQL/flexibleServers/replicaServerName/virtualEndpoints/endpointName
+	"azurerm_postgresql_flexible_server_virtual_endpoint": config.IdentifierFromProvider,
 
 	// redis
 	"azurerm_redis_cache":                          config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Cache/redis/{{ .external_name }}"),
@@ -857,6 +883,9 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// Monitor Smart Detector Alert Rule can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AlertsManagement/smartDetectorAlertRules/rule1
 	"azurerm_monitor_smart_detector_alert_rule": config.IdentifierFromProvider,
+	// Alert Management Prometheus Rule Group can be imported using the resource id
+	// azurerm_monitor_alert_prometheus_rule_group.example /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.AlertsManagement/prometheusRuleGroups/ruleGroup1
+	"azurerm_monitor_alert_prometheus_rule_group": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.AlertsManagement/prometheusRuleGroups/{{ .external_name }}"),
 
 	// appplatform
 	//
@@ -1340,6 +1369,15 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// EventGrid Topic's can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.EventGrid/topics/topic1
 	"azurerm_eventgrid_topic": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.EventGrid/topics/{{ .external_name }}"),
+	// EventGrid System Topic Event Subscriptions can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.EventGrid/systemTopics/topic1/eventSubscriptions/subscription1
+	"azurerm_eventgrid_system_topic_event_subscription": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.EventGrid/systemTopics/{{ .parameters.system_topic }}/eventSubscriptions/{{ .external_name }}"),
+	// EventGrid Namespaces can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.EventGrid/namespaces/namespace1
+	"azurerm_eventgrid_namespace": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.EventGrid/namespaces/{{ .external_name }}"),
+	// EventGrid Partner Registrations can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1
+	"azurerm_eventgrid_partner_configuration": config.TemplatedStringAsIdentifier("", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}"),
 
 	// devtest
 	//
@@ -1459,6 +1497,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_windows_web_app": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Web/sites/{{ .external_name }}"),
 	// /subscriptions/12345678-1234-9876-4563-123456789012/resourceGroups/resGroup1/providers/Microsoft.Web/sites/site1/slots/slot1
 	"azurerm_windows_web_app_slot": config.TemplatedStringAsIdentifier("name", "{{ .parameters.app_service_id }}/slots/{{ .external_name }}"),
+	// /subscriptions/12345678-1234-9876-4563-123456789012/resourceGroups/resGroup1/providers/Microsoft.Web/sites/site1
+	"azurerm_function_app_flex_consumption": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Web/sites/{{ .external_name }}"),
 
 	// web_pubsub
 	//
@@ -1723,6 +1763,12 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_network_manager": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/networkManagers/{{ .external_name }}"),
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.Network/networkManagers/networkManager1/networkGroups/networkGroup1
 	"azurerm_network_manager_network_group": config.TemplatedStringAsIdentifier("name", "{{ .parameters.network_manager_id }}/networkGroups/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/manager1/ipamPools/pool1
+	"azurerm_network_manager_ipam_pool": config.TemplatedStringAsIdentifier("name", "{{ .parameters.network_manager_id }}/ipamPools/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/manager1/routingConfigurations/conf1
+	"azurerm_network_manager_routing_configuration": config.TemplatedStringAsIdentifier("name", "{{ .parameters.network_manager_id }}/routingConfigurations/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/manager1/verifierWorkspaces/workspace1
+	"azurerm_network_manager_verifier_workspace": config.TemplatedStringAsIdentifier("name", "{{ .parameters.network_manager_id }}/verifierWorkspaces/{{ .external_name }}"),
 
 	// mssql
 	//
@@ -1823,6 +1869,18 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// Machine Learning Compute Instances can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resGroup1/providers/Microsoft.MachineLearningServices/workspaces/workspace1/computes/compute1
 	"azurerm_machine_learning_compute_instance": config.TemplatedStringAsIdentifier("name", "{{ .parameters.machine_learning_workspace_id }}/computes/{{ .external_name }}"),
+	// AI Foundries can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.MachineLearningServices/workspaces/hub1
+	"azurerm_ai_foundry": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.MachineLearningServices/workspaces/{{ .external_name }}"),
+	// Machine Learning Workspace Network Outbound Rule FQDN can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.MachineLearningServices/workspaces/workspace1/outboundRules/rule1
+	"azurerm_machine_learning_workspace_network_outbound_rule_fqdn": config.TemplatedStringAsIdentifier("name", "{{ .parameters.workspace_id }}/outboundRules/{{ .external_name }}"),
+	// Machine Learning Workspace Network Outbound Rule Service Tag can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.MachineLearningServices/workspaces/workspace1/outboundRules/rule1
+	"azurerm_machine_learning_workspace_network_outbound_rule_service_tag": config.TemplatedStringAsIdentifier("name", "{{ .parameters.workspace_id }}/outboundRules/{{ .external_name }}"),
+	// Machine Learning Workspace Network Outbound Rule Private Endpoint can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.MachineLearningServices/workspaces/workspace1/outboundRules/rule1
+	"azurerm_machine_learning_workspace_network_outbound_rule_private_endpoint": config.TemplatedStringAsIdentifier("name", "{{ .parameters.workspace_id }}/outboundRules/{{ .external_name }}"),
 
 	// maintenance
 	//

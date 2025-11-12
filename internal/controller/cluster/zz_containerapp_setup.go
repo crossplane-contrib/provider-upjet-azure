@@ -10,6 +10,7 @@ import (
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	containerapp "github.com/upbound/provider-azure/internal/controller/cluster/containerapp/containerapp"
+	containerjob "github.com/upbound/provider-azure/internal/controller/cluster/containerapp/containerjob"
 	customdomain "github.com/upbound/provider-azure/internal/controller/cluster/containerapp/customdomain"
 	environment "github.com/upbound/provider-azure/internal/controller/cluster/containerapp/environment"
 	environmentcertificate "github.com/upbound/provider-azure/internal/controller/cluster/containerapp/environmentcertificate"
@@ -23,6 +24,7 @@ import (
 func Setup_containerapp(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		containerapp.Setup,
+		containerjob.Setup,
 		customdomain.Setup,
 		environment.Setup,
 		environmentcertificate.Setup,
@@ -42,6 +44,7 @@ func Setup_containerapp(mgr ctrl.Manager, o controller.Options) error {
 func SetupGated_containerapp(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		containerapp.SetupGated,
+		containerjob.SetupGated,
 		customdomain.SetupGated,
 		environment.SetupGated,
 		environmentcertificate.SetupGated,

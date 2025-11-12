@@ -7,6 +7,15 @@ package v1beta1
 
 import resource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 
+// GetItems of this AIFoundryList.
+func (l *AIFoundryList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this ComputeClusterList.
 func (l *ComputeClusterList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -36,6 +45,33 @@ func (l *SynapseSparkList) GetItems() []resource.Managed {
 
 // GetItems of this WorkspaceList.
 func (l *WorkspaceList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this WorkspaceOutboundRuleFqdnList.
+func (l *WorkspaceOutboundRuleFqdnList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this WorkspaceOutboundRulePrivateEndpointList.
+func (l *WorkspaceOutboundRulePrivateEndpointList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this WorkspaceOutboundRuleServiceTagList.
+func (l *WorkspaceOutboundRuleServiceTagList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

@@ -178,6 +178,15 @@ func (l *GlobalSchemaList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this GroupList.
+func (l *GroupList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this IdentityProviderAADList.
 func (l *IdentityProviderAADList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -277,6 +286,15 @@ func (l *OpenIDConnectProviderList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this PolicyFragmentList.
+func (l *PolicyFragmentList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this PolicyList.
 func (l *PolicyList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -288,6 +306,15 @@ func (l *PolicyList) GetItems() []resource.Managed {
 
 // GetItems of this ProductAPIList.
 func (l *ProductAPIList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this ProductGroupList.
+func (l *ProductGroupList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

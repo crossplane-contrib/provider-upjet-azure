@@ -73,6 +73,9 @@ func (tr *VirtualMachineExtension) Hub() {}
 func (tr *VirtualMachineRunCommand) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *VirtualMachineScaleSetStandbyPool) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *WindowsVirtualMachine) Hub() {}
 
 // Hub marks this type as a conversion hub.

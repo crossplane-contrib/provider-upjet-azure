@@ -17,8 +17,373 @@ import (
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-func (mg *ComputeCluster) ResolveReferences( // ResolveReferences of this ComputeCluster.
+func (mg *AIFoundry) ResolveReferences( // ResolveReferences of this AIFoundry.
 	ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta1", "ApplicationInsights", "ApplicationInsightsList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ApplicationInsightsID),
+			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.ApplicationInsightsIDRef,
+			Selector:     mg.Spec.ForProvider.ApplicationInsightsIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ApplicationInsightsID")
+	}
+	mg.Spec.ForProvider.ApplicationInsightsID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ApplicationInsightsIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("containerregistry.azure.upbound.io", "v1beta2", "Registry", "RegistryList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerRegistryID),
+			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.ContainerRegistryIDRef,
+			Selector:     mg.Spec.ForProvider.ContainerRegistryIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ContainerRegistryID")
+	}
+	mg.Spec.ForProvider.ContainerRegistryID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ContainerRegistryIDRef = rsp.ResolvedReference
+
+	if mg.Spec.ForProvider.Encryption != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta2", "Vault", "VaultList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Encryption.KeyVaultID),
+				Extract:      rconfig.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.ForProvider.Encryption.KeyVaultIDRef,
+				Selector:     mg.Spec.ForProvider.Encryption.KeyVaultIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Encryption.KeyVaultID")
+		}
+		mg.Spec.ForProvider.Encryption.KeyVaultID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Encryption.KeyVaultIDRef = rsp.ResolvedReference
+
+	}
+	if mg.Spec.ForProvider.Encryption != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("managedidentity.azure.upbound.io", "v1beta1", "UserAssignedIdentity", "UserAssignedIdentityList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Encryption.UserAssignedIdentityID),
+				Extract:      rconfig.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.ForProvider.Encryption.UserAssignedIdentityIDRef,
+				Selector:     mg.Spec.ForProvider.Encryption.UserAssignedIdentityIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Encryption.UserAssignedIdentityID")
+		}
+		mg.Spec.ForProvider.Encryption.UserAssignedIdentityID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Encryption.UserAssignedIdentityIDRef = rsp.ResolvedReference
+
+	}
+	if mg.Spec.ForProvider.Identity != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("managedidentity.azure.upbound.io", "v1beta1", "UserAssignedIdentity", "UserAssignedIdentityList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Identity.IdentityIds),
+				Extract:       rconfig.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
+				References:    mg.Spec.ForProvider.Identity.IdentityIdsRefs,
+				Selector:      mg.Spec.ForProvider.Identity.IdentityIdsSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Identity.IdentityIds")
+		}
+		mg.Spec.ForProvider.Identity.IdentityIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.ForProvider.Identity.IdentityIdsRefs = mrsp.ResolvedReferences
+
+	}
+	{
+		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta2", "Vault", "VaultList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KeyVaultID),
+			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.KeyVaultIDRef,
+			Selector:     mg.Spec.ForProvider.KeyVaultIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.KeyVaultID")
+	}
+	mg.Spec.ForProvider.KeyVaultID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.KeyVaultIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("managedidentity.azure.upbound.io", "v1beta1", "UserAssignedIdentity", "UserAssignedIdentityList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrimaryUserAssignedIdentity),
+			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.PrimaryUserAssignedIdentityRef,
+			Selector:     mg.Spec.ForProvider.PrimaryUserAssignedIdentitySelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.PrimaryUserAssignedIdentity")
+	}
+	mg.Spec.ForProvider.PrimaryUserAssignedIdentity = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.PrimaryUserAssignedIdentityRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccountID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.StorageAccountIDRef,
+			Selector:     mg.Spec.ForProvider.StorageAccountIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.StorageAccountID")
+	}
+	mg.Spec.ForProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StorageAccountIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta1", "ApplicationInsights", "ApplicationInsightsList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ApplicationInsightsID),
+			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.ApplicationInsightsIDRef,
+			Selector:     mg.Spec.InitProvider.ApplicationInsightsIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ApplicationInsightsID")
+	}
+	mg.Spec.InitProvider.ApplicationInsightsID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ApplicationInsightsIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("containerregistry.azure.upbound.io", "v1beta2", "Registry", "RegistryList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ContainerRegistryID),
+			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.ContainerRegistryIDRef,
+			Selector:     mg.Spec.InitProvider.ContainerRegistryIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ContainerRegistryID")
+	}
+	mg.Spec.InitProvider.ContainerRegistryID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ContainerRegistryIDRef = rsp.ResolvedReference
+
+	if mg.Spec.InitProvider.Encryption != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta2", "Vault", "VaultList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Encryption.KeyVaultID),
+				Extract:      rconfig.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.InitProvider.Encryption.KeyVaultIDRef,
+				Selector:     mg.Spec.InitProvider.Encryption.KeyVaultIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Encryption.KeyVaultID")
+		}
+		mg.Spec.InitProvider.Encryption.KeyVaultID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Encryption.KeyVaultIDRef = rsp.ResolvedReference
+
+	}
+	if mg.Spec.InitProvider.Encryption != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("managedidentity.azure.upbound.io", "v1beta1", "UserAssignedIdentity", "UserAssignedIdentityList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Encryption.UserAssignedIdentityID),
+				Extract:      rconfig.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.InitProvider.Encryption.UserAssignedIdentityIDRef,
+				Selector:     mg.Spec.InitProvider.Encryption.UserAssignedIdentityIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Encryption.UserAssignedIdentityID")
+		}
+		mg.Spec.InitProvider.Encryption.UserAssignedIdentityID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Encryption.UserAssignedIdentityIDRef = rsp.ResolvedReference
+
+	}
+	if mg.Spec.InitProvider.Identity != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("managedidentity.azure.upbound.io", "v1beta1", "UserAssignedIdentity", "UserAssignedIdentityList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Identity.IdentityIds),
+				Extract:       rconfig.ExtractResourceID(),
+				Namespace:     mg.GetNamespace(),
+				References:    mg.Spec.InitProvider.Identity.IdentityIdsRefs,
+				Selector:      mg.Spec.InitProvider.Identity.IdentityIdsSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Identity.IdentityIds")
+		}
+		mg.Spec.InitProvider.Identity.IdentityIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.Identity.IdentityIdsRefs = mrsp.ResolvedReferences
+
+	}
+	{
+		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta2", "Vault", "VaultList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyVaultID),
+			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.KeyVaultIDRef,
+			Selector:     mg.Spec.InitProvider.KeyVaultIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.KeyVaultID")
+	}
+	mg.Spec.InitProvider.KeyVaultID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KeyVaultIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("managedidentity.azure.upbound.io", "v1beta1", "UserAssignedIdentity", "UserAssignedIdentityList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrimaryUserAssignedIdentity),
+			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.PrimaryUserAssignedIdentityRef,
+			Selector:     mg.Spec.InitProvider.PrimaryUserAssignedIdentitySelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.PrimaryUserAssignedIdentity")
+	}
+	mg.Spec.InitProvider.PrimaryUserAssignedIdentity = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PrimaryUserAssignedIdentityRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccountID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.StorageAccountIDRef,
+			Selector:     mg.Spec.InitProvider.StorageAccountIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccountID")
+	}
+	mg.Spec.InitProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageAccountIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this ComputeCluster.
+func (mg *ComputeCluster) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList
 	r := reference.NewAPIResolver(c, mg)
@@ -662,6 +1027,142 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 	}
 	mg.Spec.InitProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.StorageAccountIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this WorkspaceOutboundRuleFqdn.
+func (mg *WorkspaceOutboundRuleFqdn) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("machinelearningservices.azure.upbound.io", "v1beta2", "Workspace", "WorkspaceList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WorkspaceID),
+			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.WorkspaceIDRef,
+			Selector:     mg.Spec.ForProvider.WorkspaceIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.WorkspaceID")
+	}
+	mg.Spec.ForProvider.WorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.WorkspaceIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this WorkspaceOutboundRulePrivateEndpoint.
+func (mg *WorkspaceOutboundRulePrivateEndpoint) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServiceResourceID),
+			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.ServiceResourceIDRef,
+			Selector:     mg.Spec.ForProvider.ServiceResourceIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ServiceResourceID")
+	}
+	mg.Spec.ForProvider.ServiceResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ServiceResourceIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("machinelearningservices.azure.upbound.io", "v1beta2", "Workspace", "WorkspaceList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WorkspaceID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.WorkspaceIDRef,
+			Selector:     mg.Spec.ForProvider.WorkspaceIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.WorkspaceID")
+	}
+	mg.Spec.ForProvider.WorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.WorkspaceIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServiceResourceID),
+			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.ServiceResourceIDRef,
+			Selector:     mg.Spec.InitProvider.ServiceResourceIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ServiceResourceID")
+	}
+	mg.Spec.InitProvider.ServiceResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ServiceResourceIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this WorkspaceOutboundRuleServiceTag.
+func (mg *WorkspaceOutboundRuleServiceTag) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("machinelearningservices.azure.upbound.io", "v1beta2", "Workspace", "WorkspaceList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WorkspaceID),
+			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.WorkspaceIDRef,
+			Selector:     mg.Spec.ForProvider.WorkspaceIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.WorkspaceID")
+	}
+	mg.Spec.ForProvider.WorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.WorkspaceIDRef = rsp.ResolvedReference
 
 	return nil
 }

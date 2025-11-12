@@ -11,8 +11,11 @@ import (
 
 	domain "github.com/upbound/provider-azure/internal/controller/cluster/eventgrid/domain"
 	domaintopic "github.com/upbound/provider-azure/internal/controller/cluster/eventgrid/domaintopic"
+	eventgridnamespace "github.com/upbound/provider-azure/internal/controller/cluster/eventgrid/eventgridnamespace"
 	eventsubscription "github.com/upbound/provider-azure/internal/controller/cluster/eventgrid/eventsubscription"
+	partnerconfiguration "github.com/upbound/provider-azure/internal/controller/cluster/eventgrid/partnerconfiguration"
 	systemtopic "github.com/upbound/provider-azure/internal/controller/cluster/eventgrid/systemtopic"
+	systemtopiceventsubscription "github.com/upbound/provider-azure/internal/controller/cluster/eventgrid/systemtopiceventsubscription"
 	topic "github.com/upbound/provider-azure/internal/controller/cluster/eventgrid/topic"
 )
 
@@ -22,8 +25,11 @@ func Setup_eventgrid(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		domain.Setup,
 		domaintopic.Setup,
+		eventgridnamespace.Setup,
 		eventsubscription.Setup,
+		partnerconfiguration.Setup,
 		systemtopic.Setup,
+		systemtopiceventsubscription.Setup,
 		topic.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
@@ -39,8 +45,11 @@ func SetupGated_eventgrid(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		domain.SetupGated,
 		domaintopic.SetupGated,
+		eventgridnamespace.SetupGated,
 		eventsubscription.SetupGated,
+		partnerconfiguration.SetupGated,
 		systemtopic.SetupGated,
+		systemtopiceventsubscription.SetupGated,
 		topic.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {

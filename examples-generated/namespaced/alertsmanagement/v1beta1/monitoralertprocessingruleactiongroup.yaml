@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: alertsmanagement.azure.m.upbound.io/v1beta1
 kind: MonitorAlertProcessingRuleActionGroup
 metadata:
@@ -12,24 +16,24 @@ spec:
     addActionGroupIdsRefs:
     - name: example
     condition:
-    - severity:
-      - operator: Equals
+      severity:
+        operator: Equals
         values:
         - Sev0
         - Sev1
         - Sev2
       targetResourceType:
-      - operator: Equals
+        operator: Equals
         values:
         - Microsoft.Compute/VirtualMachines
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
     schedule:
-    - effectiveFrom: 2022-01-01T01:02:03
+      effectiveFrom: 2022-01-01T01:02:03
       effectiveUntil: 2022-02-02T01:02:03
       recurrence:
-      - daily:
+        daily:
         - endTime: "09:00:00"
           startTime: "17:00:00"
         weekly:

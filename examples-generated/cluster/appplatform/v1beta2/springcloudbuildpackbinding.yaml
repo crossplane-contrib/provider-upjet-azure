@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: appplatform.azure.upbound.io/v1beta2
 kind: SpringCloudBuildPackBinding
 metadata:
@@ -10,7 +14,7 @@ spec:
   forProvider:
     bindingType: ApplicationInsights
     launch:
-    - properties:
+      properties:
         abc: def
         any-string: any-string
         sampling-rate: "12.0"
@@ -55,7 +59,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     stack:
-    - id: io.Build Packs.stacks.bionic
+      id: io.Build Packs.stacks.bionic
       version: base
 
 ---

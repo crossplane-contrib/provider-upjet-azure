@@ -11,6 +11,7 @@ import (
 
 	agentpool "github.com/upbound/provider-azure/internal/controller/cluster/containerregistry/agentpool"
 	containerconnectedregistry "github.com/upbound/provider-azure/internal/controller/cluster/containerregistry/containerconnectedregistry"
+	credentialset "github.com/upbound/provider-azure/internal/controller/cluster/containerregistry/credentialset"
 	registry "github.com/upbound/provider-azure/internal/controller/cluster/containerregistry/registry"
 	scopemap "github.com/upbound/provider-azure/internal/controller/cluster/containerregistry/scopemap"
 	token "github.com/upbound/provider-azure/internal/controller/cluster/containerregistry/token"
@@ -24,6 +25,7 @@ func Setup_containerregistry(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		agentpool.Setup,
 		containerconnectedregistry.Setup,
+		credentialset.Setup,
 		registry.Setup,
 		scopemap.Setup,
 		token.Setup,
@@ -43,6 +45,7 @@ func SetupGated_containerregistry(mgr ctrl.Manager, o controller.Options) error 
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		agentpool.SetupGated,
 		containerconnectedregistry.SetupGated,
+		credentialset.SetupGated,
 		registry.SetupGated,
 		scopemap.SetupGated,
 		token.SetupGated,

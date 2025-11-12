@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: dataprotection.azure.upbound.io/v1beta2
 kind: BackupPolicyDisk
 metadata:
@@ -13,12 +17,12 @@ spec:
     defaultRetentionDuration: P7D
     retentionRule:
     - criteria:
-      - absoluteCriteria: FirstOfDay
+        absoluteCriteria: FirstOfDay
       duration: P7D
       name: Daily
       priority: 25
     - criteria:
-      - absoluteCriteria: FirstOfWeek
+        absoluteCriteria: FirstOfWeek
       duration: P7D
       name: Weekly
       priority: 20

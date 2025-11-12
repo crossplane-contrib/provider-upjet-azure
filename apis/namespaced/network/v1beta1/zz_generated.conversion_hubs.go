@@ -136,16 +136,25 @@ func (tr *LocalNetworkGateway) Hub() {}
 func (tr *Manager) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *ManagerIpamPool) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *ManagerManagementGroupConnection) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *ManagerNetworkGroup) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *ManagerRoutingConfiguration) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *ManagerStaticMember) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *ManagerSubscriptionConnection) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *ManagerVerifierWorkspace) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *NATGateway) Hub() {}
@@ -206,6 +215,9 @@ func (tr *PrivateDNSResolverInboundEndpoint) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *PrivateDNSResolverOutboundEndpoint) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *PrivateDNSResolverVirtualNetworkLink) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *PrivateDNSSRVRecord) Hub() {}
@@ -308,6 +320,9 @@ func (tr *VirtualHubSecurityPartnerProvider) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *VirtualNetwork) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *VirtualNetworkDNSServers) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *VirtualNetworkGateway) Hub() {}

@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: cdn.azure.m.upbound.io/v1beta1
 kind: FrontdoorRoute
 metadata:
@@ -10,7 +14,7 @@ metadata:
 spec:
   forProvider:
     cache:
-    - compressionEnabled: true
+      compressionEnabled: true
       contentTypesToCompress:
       - text/html
       - text/javascript
@@ -63,7 +67,7 @@ spec:
         testing.upbound.io/example-name: example
     hostName: ${join(".", ["contoso", azurerm_dns_zone.example.name])}
     tls:
-    - certificateType: ManagedCertificate
+      certificateType: ManagedCertificate
       minimumTlsVersion: TLS12
 
 ---
@@ -87,7 +91,7 @@ spec:
         testing.upbound.io/example-name: example
     hostName: ${join(".", ["fabrikam", azurerm_dns_zone.example.name])}
     tls:
-    - certificateType: ManagedCertificate
+      certificateType: ManagedCertificate
       minimumTlsVersion: TLS12
 
 ---
@@ -191,7 +195,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     loadBalancing:
-    - additionalLatencyInMilliseconds: 0
+      additionalLatencyInMilliseconds: 0
       sampleSize: 16
       successfulSamplesRequired: 3
 

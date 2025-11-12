@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: healthcareapis.azure.upbound.io/v1beta2
 kind: HealthcareDICOMService
 metadata:
@@ -9,7 +13,7 @@ metadata:
 spec:
   forProvider:
     identity:
-    - type: SystemAssigned
+      type: SystemAssigned
     location: east us
     tags:
       environment: None

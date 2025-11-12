@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: authorization.azure.upbound.io/v1beta1
 kind: TrustedAccessRoleBinding
 metadata:
@@ -86,14 +90,14 @@ metadata:
 spec:
   forProvider:
     defaultNodePool:
-    - name: example-value
+      name: example-value
       nodeCount: example-value
       upgradeSettings:
-      - maxSurge: example-value
+        maxSurge: example-value
       vmSize: example-value
     dnsPrefix: acctestaksexample
     identity:
-    - type: example-value
+      type: example-value
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
@@ -115,7 +119,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     identity:
-    - type: example-value
+      type: example-value
     keyVaultIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example

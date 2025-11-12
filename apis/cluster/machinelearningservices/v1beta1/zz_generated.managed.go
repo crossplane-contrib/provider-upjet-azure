@@ -7,6 +7,56 @@ package v1beta1
 
 import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 
+// GetCondition of this AIFoundry.
+func (mg *AIFoundry) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this AIFoundry.
+func (mg *AIFoundry) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this AIFoundry.
+func (mg *AIFoundry) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this AIFoundry.
+func (mg *AIFoundry) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this AIFoundry.
+func (mg *AIFoundry) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this AIFoundry.
+func (mg *AIFoundry) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this AIFoundry.
+func (mg *AIFoundry) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this AIFoundry.
+func (mg *AIFoundry) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this AIFoundry.
+func (mg *AIFoundry) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this AIFoundry.
+func (mg *AIFoundry) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this ComputeCluster.
 func (mg *ComputeCluster) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
@@ -204,5 +254,155 @@ func (mg *Workspace) SetProviderConfigReference(r *xpv1.Reference) {
 
 // SetWriteConnectionSecretToReference of this Workspace.
 func (mg *Workspace) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this WorkspaceOutboundRuleFqdn.
+func (mg *WorkspaceOutboundRuleFqdn) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this WorkspaceOutboundRuleFqdn.
+func (mg *WorkspaceOutboundRuleFqdn) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this WorkspaceOutboundRuleFqdn.
+func (mg *WorkspaceOutboundRuleFqdn) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this WorkspaceOutboundRuleFqdn.
+func (mg *WorkspaceOutboundRuleFqdn) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this WorkspaceOutboundRuleFqdn.
+func (mg *WorkspaceOutboundRuleFqdn) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this WorkspaceOutboundRuleFqdn.
+func (mg *WorkspaceOutboundRuleFqdn) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this WorkspaceOutboundRuleFqdn.
+func (mg *WorkspaceOutboundRuleFqdn) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this WorkspaceOutboundRuleFqdn.
+func (mg *WorkspaceOutboundRuleFqdn) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this WorkspaceOutboundRuleFqdn.
+func (mg *WorkspaceOutboundRuleFqdn) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this WorkspaceOutboundRuleFqdn.
+func (mg *WorkspaceOutboundRuleFqdn) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this WorkspaceOutboundRulePrivateEndpoint.
+func (mg *WorkspaceOutboundRulePrivateEndpoint) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this WorkspaceOutboundRulePrivateEndpoint.
+func (mg *WorkspaceOutboundRulePrivateEndpoint) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this WorkspaceOutboundRulePrivateEndpoint.
+func (mg *WorkspaceOutboundRulePrivateEndpoint) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this WorkspaceOutboundRulePrivateEndpoint.
+func (mg *WorkspaceOutboundRulePrivateEndpoint) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this WorkspaceOutboundRulePrivateEndpoint.
+func (mg *WorkspaceOutboundRulePrivateEndpoint) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this WorkspaceOutboundRulePrivateEndpoint.
+func (mg *WorkspaceOutboundRulePrivateEndpoint) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this WorkspaceOutboundRulePrivateEndpoint.
+func (mg *WorkspaceOutboundRulePrivateEndpoint) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this WorkspaceOutboundRulePrivateEndpoint.
+func (mg *WorkspaceOutboundRulePrivateEndpoint) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this WorkspaceOutboundRulePrivateEndpoint.
+func (mg *WorkspaceOutboundRulePrivateEndpoint) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this WorkspaceOutboundRulePrivateEndpoint.
+func (mg *WorkspaceOutboundRulePrivateEndpoint) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this WorkspaceOutboundRuleServiceTag.
+func (mg *WorkspaceOutboundRuleServiceTag) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this WorkspaceOutboundRuleServiceTag.
+func (mg *WorkspaceOutboundRuleServiceTag) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this WorkspaceOutboundRuleServiceTag.
+func (mg *WorkspaceOutboundRuleServiceTag) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this WorkspaceOutboundRuleServiceTag.
+func (mg *WorkspaceOutboundRuleServiceTag) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this WorkspaceOutboundRuleServiceTag.
+func (mg *WorkspaceOutboundRuleServiceTag) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this WorkspaceOutboundRuleServiceTag.
+func (mg *WorkspaceOutboundRuleServiceTag) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this WorkspaceOutboundRuleServiceTag.
+func (mg *WorkspaceOutboundRuleServiceTag) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this WorkspaceOutboundRuleServiceTag.
+func (mg *WorkspaceOutboundRuleServiceTag) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this WorkspaceOutboundRuleServiceTag.
+func (mg *WorkspaceOutboundRuleServiceTag) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this WorkspaceOutboundRuleServiceTag.
+func (mg *WorkspaceOutboundRuleServiceTag) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: network.azure.m.upbound.io/v1beta1
 kind: FrontdoorRulesEngine
 metadata:
@@ -17,14 +21,14 @@ spec:
         testing.upbound.io/example-name: example
     rule:
     - action:
-      - responseHeader:
+        responseHeader:
         - headerActionType: Append
           headerName: X-TEST-HEADER
           value: Append Header Rule
       name: debuggingoutput
       priority: 1
     - action:
-      - responseHeader:
+        responseHeader:
         - headerActionType: Overwrite
           headerName: Access-Control-Allow-Origin
           value: '*'

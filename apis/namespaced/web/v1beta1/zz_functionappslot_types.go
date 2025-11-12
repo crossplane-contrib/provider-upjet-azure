@@ -14,7 +14,7 @@ import (
 	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
 )
 
-type AuthSettingsActiveDirectoryInitParameters struct {
+type FunctionAppSlotAuthSettingsActiveDirectoryInitParameters struct {
 
 	// Allowed audience values to consider when validating JWTs issued by Azure Active Directory.
 	AllowedAudiences []*string `json:"allowedAudiences,omitempty" tf:"allowed_audiences,omitempty"`
@@ -26,7 +26,7 @@ type AuthSettingsActiveDirectoryInitParameters struct {
 	ClientSecretSecretRef *v1.LocalSecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
 }
 
-type AuthSettingsActiveDirectoryObservation struct {
+type FunctionAppSlotAuthSettingsActiveDirectoryObservation struct {
 
 	// Allowed audience values to consider when validating JWTs issued by Azure Active Directory.
 	AllowedAudiences []*string `json:"allowedAudiences,omitempty" tf:"allowed_audiences,omitempty"`
@@ -35,7 +35,7 @@ type AuthSettingsActiveDirectoryObservation struct {
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 }
 
-type AuthSettingsActiveDirectoryParameters struct {
+type FunctionAppSlotAuthSettingsActiveDirectoryParameters struct {
 
 	// Allowed audience values to consider when validating JWTs issued by Azure Active Directory.
 	// +kubebuilder:validation:Optional
@@ -50,7 +50,7 @@ type AuthSettingsActiveDirectoryParameters struct {
 	ClientSecretSecretRef *v1.LocalSecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
 }
 
-type AuthSettingsFacebookInitParameters struct {
+type FunctionAppSlotAuthSettingsFacebookInitParameters struct {
 
 	// The App ID of the Facebook app used for login
 	AppID *string `json:"appId,omitempty" tf:"app_id,omitempty"`
@@ -62,7 +62,7 @@ type AuthSettingsFacebookInitParameters struct {
 	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
 }
 
-type AuthSettingsFacebookObservation struct {
+type FunctionAppSlotAuthSettingsFacebookObservation struct {
 
 	// The App ID of the Facebook app used for login
 	AppID *string `json:"appId,omitempty" tf:"app_id,omitempty"`
@@ -71,7 +71,7 @@ type AuthSettingsFacebookObservation struct {
 	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
 }
 
-type AuthSettingsFacebookParameters struct {
+type FunctionAppSlotAuthSettingsFacebookParameters struct {
 
 	// The App ID of the Facebook app used for login
 	// +kubebuilder:validation:Optional
@@ -86,7 +86,7 @@ type AuthSettingsFacebookParameters struct {
 	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
 }
 
-type AuthSettingsGoogleInitParameters struct {
+type FunctionAppSlotAuthSettingsGoogleInitParameters struct {
 
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
@@ -98,7 +98,7 @@ type AuthSettingsGoogleInitParameters struct {
 	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
 }
 
-type AuthSettingsGoogleObservation struct {
+type FunctionAppSlotAuthSettingsGoogleObservation struct {
 
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
@@ -107,7 +107,7 @@ type AuthSettingsGoogleObservation struct {
 	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
 }
 
-type AuthSettingsGoogleParameters struct {
+type FunctionAppSlotAuthSettingsGoogleParameters struct {
 
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// +kubebuilder:validation:Optional
@@ -120,74 +120,12 @@ type AuthSettingsGoogleParameters struct {
 	// The OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. https://msdn.microsoft.com/en-us/library/dn631845.aspx
 	// +kubebuilder:validation:Optional
 	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
-}
-
-type AuthSettingsMicrosoftInitParameters struct {
-
-	// The OAuth 2.0 client ID that was created for the app used for authentication.
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
-
-	// The OAuth 2.0 client secret that was created for the app used for authentication.
-	ClientSecretSecretRef v1.LocalSecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
-
-	// The OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. https://msdn.microsoft.com/en-us/library/dn631845.aspx
-	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
-}
-
-type AuthSettingsMicrosoftObservation struct {
-
-	// The OAuth 2.0 client ID that was created for the app used for authentication.
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
-
-	// The OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. https://msdn.microsoft.com/en-us/library/dn631845.aspx
-	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
-}
-
-type AuthSettingsMicrosoftParameters struct {
-
-	// The OAuth 2.0 client ID that was created for the app used for authentication.
-	// +kubebuilder:validation:Optional
-	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
-
-	// The OAuth 2.0 client secret that was created for the app used for authentication.
-	// +kubebuilder:validation:Optional
-	ClientSecretSecretRef v1.LocalSecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
-
-	// The OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. https://msdn.microsoft.com/en-us/library/dn631845.aspx
-	// +kubebuilder:validation:Optional
-	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
-}
-
-type AuthSettingsTwitterInitParameters struct {
-
-	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
-	ConsumerKey *string `json:"consumerKey,omitempty" tf:"consumer_key,omitempty"`
-
-	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in.
-	ConsumerSecretSecretRef v1.LocalSecretKeySelector `json:"consumerSecretSecretRef" tf:"-"`
-}
-
-type AuthSettingsTwitterObservation struct {
-
-	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
-	ConsumerKey *string `json:"consumerKey,omitempty" tf:"consumer_key,omitempty"`
-}
-
-type AuthSettingsTwitterParameters struct {
-
-	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
-	// +kubebuilder:validation:Optional
-	ConsumerKey *string `json:"consumerKey" tf:"consumer_key,omitempty"`
-
-	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in.
-	// +kubebuilder:validation:Optional
-	ConsumerSecretSecretRef v1.LocalSecretKeySelector `json:"consumerSecretSecretRef" tf:"-"`
 }
 
 type FunctionAppSlotAuthSettingsInitParameters struct {
 
 	// An active_directory block as defined below.
-	ActiveDirectory *AuthSettingsActiveDirectoryInitParameters `json:"activeDirectory,omitempty" tf:"active_directory,omitempty"`
+	ActiveDirectory *FunctionAppSlotAuthSettingsActiveDirectoryInitParameters `json:"activeDirectory,omitempty" tf:"active_directory,omitempty"`
 
 	// login parameters to send to the OpenID Connect authorization endpoint when a user logs in. Each parameter must be in the form "key=value".
 	// +mapType=granular
@@ -203,16 +141,16 @@ type FunctionAppSlotAuthSettingsInitParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// A facebook block as defined below.
-	Facebook *AuthSettingsFacebookInitParameters `json:"facebook,omitempty" tf:"facebook,omitempty"`
+	Facebook *FunctionAppSlotAuthSettingsFacebookInitParameters `json:"facebook,omitempty" tf:"facebook,omitempty"`
 
 	// A google block as defined below.
-	Google *AuthSettingsGoogleInitParameters `json:"google,omitempty" tf:"google,omitempty"`
+	Google *FunctionAppSlotAuthSettingsGoogleInitParameters `json:"google,omitempty" tf:"google,omitempty"`
 
 	// Issuer URI. When using Azure Active Directory, this value is the URI of the directory tenant, e.g. https://sts.windows.net/{tenant-guid}/.
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 
 	// A microsoft block as defined below.
-	Microsoft *AuthSettingsMicrosoftInitParameters `json:"microsoft,omitempty" tf:"microsoft,omitempty"`
+	Microsoft *FunctionAppSlotAuthSettingsMicrosoftInitParameters `json:"microsoft,omitempty" tf:"microsoft,omitempty"`
 
 	// The runtime version of the Authentication/Authorization module.
 	RuntimeVersion *string `json:"runtimeVersion,omitempty" tf:"runtime_version,omitempty"`
@@ -224,16 +162,52 @@ type FunctionAppSlotAuthSettingsInitParameters struct {
 	TokenStoreEnabled *bool `json:"tokenStoreEnabled,omitempty" tf:"token_store_enabled,omitempty"`
 
 	// A twitter block as defined below.
-	Twitter *AuthSettingsTwitterInitParameters `json:"twitter,omitempty" tf:"twitter,omitempty"`
+	Twitter *FunctionAppSlotAuthSettingsTwitterInitParameters `json:"twitter,omitempty" tf:"twitter,omitempty"`
 
 	// The action to take when an unauthenticated client attempts to access the app. Possible values are AllowAnonymous and RedirectToLoginPage.
 	UnauthenticatedClientAction *string `json:"unauthenticatedClientAction,omitempty" tf:"unauthenticated_client_action,omitempty"`
 }
 
+type FunctionAppSlotAuthSettingsMicrosoftInitParameters struct {
+
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The OAuth 2.0 client secret that was created for the app used for authentication.
+	ClientSecretSecretRef v1.LocalSecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
+
+	// The OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. https://msdn.microsoft.com/en-us/library/dn631845.aspx
+	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
+}
+
+type FunctionAppSlotAuthSettingsMicrosoftObservation struct {
+
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. https://msdn.microsoft.com/en-us/library/dn631845.aspx
+	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
+}
+
+type FunctionAppSlotAuthSettingsMicrosoftParameters struct {
+
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// +kubebuilder:validation:Optional
+	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
+
+	// The OAuth 2.0 client secret that was created for the app used for authentication.
+	// +kubebuilder:validation:Optional
+	ClientSecretSecretRef v1.LocalSecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
+
+	// The OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. https://msdn.microsoft.com/en-us/library/dn631845.aspx
+	// +kubebuilder:validation:Optional
+	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
+}
+
 type FunctionAppSlotAuthSettingsObservation struct {
 
 	// An active_directory block as defined below.
-	ActiveDirectory *AuthSettingsActiveDirectoryObservation `json:"activeDirectory,omitempty" tf:"active_directory,omitempty"`
+	ActiveDirectory *FunctionAppSlotAuthSettingsActiveDirectoryObservation `json:"activeDirectory,omitempty" tf:"active_directory,omitempty"`
 
 	// login parameters to send to the OpenID Connect authorization endpoint when a user logs in. Each parameter must be in the form "key=value".
 	// +mapType=granular
@@ -249,16 +223,16 @@ type FunctionAppSlotAuthSettingsObservation struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// A facebook block as defined below.
-	Facebook *AuthSettingsFacebookObservation `json:"facebook,omitempty" tf:"facebook,omitempty"`
+	Facebook *FunctionAppSlotAuthSettingsFacebookObservation `json:"facebook,omitempty" tf:"facebook,omitempty"`
 
 	// A google block as defined below.
-	Google *AuthSettingsGoogleObservation `json:"google,omitempty" tf:"google,omitempty"`
+	Google *FunctionAppSlotAuthSettingsGoogleObservation `json:"google,omitempty" tf:"google,omitempty"`
 
 	// Issuer URI. When using Azure Active Directory, this value is the URI of the directory tenant, e.g. https://sts.windows.net/{tenant-guid}/.
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 
 	// A microsoft block as defined below.
-	Microsoft *AuthSettingsMicrosoftObservation `json:"microsoft,omitempty" tf:"microsoft,omitempty"`
+	Microsoft *FunctionAppSlotAuthSettingsMicrosoftObservation `json:"microsoft,omitempty" tf:"microsoft,omitempty"`
 
 	// The runtime version of the Authentication/Authorization module.
 	RuntimeVersion *string `json:"runtimeVersion,omitempty" tf:"runtime_version,omitempty"`
@@ -270,7 +244,7 @@ type FunctionAppSlotAuthSettingsObservation struct {
 	TokenStoreEnabled *bool `json:"tokenStoreEnabled,omitempty" tf:"token_store_enabled,omitempty"`
 
 	// A twitter block as defined below.
-	Twitter *AuthSettingsTwitterObservation `json:"twitter,omitempty" tf:"twitter,omitempty"`
+	Twitter *FunctionAppSlotAuthSettingsTwitterObservation `json:"twitter,omitempty" tf:"twitter,omitempty"`
 
 	// The action to take when an unauthenticated client attempts to access the app. Possible values are AllowAnonymous and RedirectToLoginPage.
 	UnauthenticatedClientAction *string `json:"unauthenticatedClientAction,omitempty" tf:"unauthenticated_client_action,omitempty"`
@@ -280,7 +254,7 @@ type FunctionAppSlotAuthSettingsParameters struct {
 
 	// An active_directory block as defined below.
 	// +kubebuilder:validation:Optional
-	ActiveDirectory *AuthSettingsActiveDirectoryParameters `json:"activeDirectory,omitempty" tf:"active_directory,omitempty"`
+	ActiveDirectory *FunctionAppSlotAuthSettingsActiveDirectoryParameters `json:"activeDirectory,omitempty" tf:"active_directory,omitempty"`
 
 	// login parameters to send to the OpenID Connect authorization endpoint when a user logs in. Each parameter must be in the form "key=value".
 	// +kubebuilder:validation:Optional
@@ -301,11 +275,11 @@ type FunctionAppSlotAuthSettingsParameters struct {
 
 	// A facebook block as defined below.
 	// +kubebuilder:validation:Optional
-	Facebook *AuthSettingsFacebookParameters `json:"facebook,omitempty" tf:"facebook,omitempty"`
+	Facebook *FunctionAppSlotAuthSettingsFacebookParameters `json:"facebook,omitempty" tf:"facebook,omitempty"`
 
 	// A google block as defined below.
 	// +kubebuilder:validation:Optional
-	Google *AuthSettingsGoogleParameters `json:"google,omitempty" tf:"google,omitempty"`
+	Google *FunctionAppSlotAuthSettingsGoogleParameters `json:"google,omitempty" tf:"google,omitempty"`
 
 	// Issuer URI. When using Azure Active Directory, this value is the URI of the directory tenant, e.g. https://sts.windows.net/{tenant-guid}/.
 	// +kubebuilder:validation:Optional
@@ -313,7 +287,7 @@ type FunctionAppSlotAuthSettingsParameters struct {
 
 	// A microsoft block as defined below.
 	// +kubebuilder:validation:Optional
-	Microsoft *AuthSettingsMicrosoftParameters `json:"microsoft,omitempty" tf:"microsoft,omitempty"`
+	Microsoft *FunctionAppSlotAuthSettingsMicrosoftParameters `json:"microsoft,omitempty" tf:"microsoft,omitempty"`
 
 	// The runtime version of the Authentication/Authorization module.
 	// +kubebuilder:validation:Optional
@@ -329,11 +303,37 @@ type FunctionAppSlotAuthSettingsParameters struct {
 
 	// A twitter block as defined below.
 	// +kubebuilder:validation:Optional
-	Twitter *AuthSettingsTwitterParameters `json:"twitter,omitempty" tf:"twitter,omitempty"`
+	Twitter *FunctionAppSlotAuthSettingsTwitterParameters `json:"twitter,omitempty" tf:"twitter,omitempty"`
 
 	// The action to take when an unauthenticated client attempts to access the app. Possible values are AllowAnonymous and RedirectToLoginPage.
 	// +kubebuilder:validation:Optional
 	UnauthenticatedClientAction *string `json:"unauthenticatedClientAction,omitempty" tf:"unauthenticated_client_action,omitempty"`
+}
+
+type FunctionAppSlotAuthSettingsTwitterInitParameters struct {
+
+	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
+	ConsumerKey *string `json:"consumerKey,omitempty" tf:"consumer_key,omitempty"`
+
+	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in.
+	ConsumerSecretSecretRef v1.LocalSecretKeySelector `json:"consumerSecretSecretRef" tf:"-"`
+}
+
+type FunctionAppSlotAuthSettingsTwitterObservation struct {
+
+	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
+	ConsumerKey *string `json:"consumerKey,omitempty" tf:"consumer_key,omitempty"`
+}
+
+type FunctionAppSlotAuthSettingsTwitterParameters struct {
+
+	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
+	// +kubebuilder:validation:Optional
+	ConsumerKey *string `json:"consumerKey" tf:"consumer_key,omitempty"`
+
+	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in.
+	// +kubebuilder:validation:Optional
+	ConsumerSecretSecretRef v1.LocalSecretKeySelector `json:"consumerSecretSecretRef" tf:"-"`
 }
 
 type FunctionAppSlotConnectionStringInitParameters struct {
@@ -671,6 +671,137 @@ type FunctionAppSlotParameters struct {
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
+type FunctionAppSlotSiteConfigCorsInitParameters struct {
+
+	// A list of origins which should be able to make cross-origin calls. * can be used to allow all calls.
+	// +listType=set
+	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
+
+	// Are credentials supported?
+	SupportCredentials *bool `json:"supportCredentials,omitempty" tf:"support_credentials,omitempty"`
+}
+
+type FunctionAppSlotSiteConfigCorsObservation struct {
+
+	// A list of origins which should be able to make cross-origin calls. * can be used to allow all calls.
+	// +listType=set
+	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
+
+	// Are credentials supported?
+	SupportCredentials *bool `json:"supportCredentials,omitempty" tf:"support_credentials,omitempty"`
+}
+
+type FunctionAppSlotSiteConfigCorsParameters struct {
+
+	// A list of origins which should be able to make cross-origin calls. * can be used to allow all calls.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	AllowedOrigins []*string `json:"allowedOrigins" tf:"allowed_origins,omitempty"`
+
+	// Are credentials supported?
+	// +kubebuilder:validation:Optional
+	SupportCredentials *bool `json:"supportCredentials,omitempty" tf:"support_credentials,omitempty"`
+}
+
+type FunctionAppSlotSiteConfigIPRestrictionInitParameters struct {
+
+	// Allow or Deny access for this IP range. Defaults to Allow.
+	Action *string `json:"action,omitempty" tf:"action"`
+
+	// The headers block for this specific scm_ip_restriction as defined below.
+	Headers *SiteConfigIPRestrictionHeadersInitParameters `json:"headers,omitempty" tf:"headers"`
+
+	// The IP Address used for this IP Restriction in CIDR notation.
+	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address"`
+
+	// The name for this IP Restriction.
+	Name *string `json:"name,omitempty" tf:"name"`
+
+	// The priority for this IP Restriction. Restrictions are enforced in priority order. By default, priority is set to 65000 if not specified.
+	Priority *float64 `json:"priority,omitempty" tf:"priority"`
+
+	// The Service Tag used for this IP Restriction.
+	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag"`
+
+	// The Virtual Network Subnet ID used for this IP Restriction.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id"`
+
+	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetIDRef *v1.NamespacedReference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetIDSelector *v1.NamespacedSelector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
+}
+
+type FunctionAppSlotSiteConfigIPRestrictionObservation struct {
+
+	// Allow or Deny access for this IP range. Defaults to Allow.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The headers block for this specific scm_ip_restriction as defined below.
+	Headers *SiteConfigIPRestrictionHeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
+
+	// The IP Address used for this IP Restriction in CIDR notation.
+	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
+
+	// The name for this IP Restriction.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The priority for this IP Restriction. Restrictions are enforced in priority order. By default, priority is set to 65000 if not specified.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+
+	// The Service Tag used for this IP Restriction.
+	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag,omitempty"`
+
+	// The Virtual Network Subnet ID used for this IP Restriction.
+	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
+}
+
+type FunctionAppSlotSiteConfigIPRestrictionParameters struct {
+
+	// Allow or Deny access for this IP range. Defaults to Allow.
+	// +kubebuilder:validation:Optional
+	Action *string `json:"action,omitempty" tf:"action"`
+
+	// The headers block for this specific scm_ip_restriction as defined below.
+	// +kubebuilder:validation:Optional
+	Headers *SiteConfigIPRestrictionHeadersParameters `json:"headers,omitempty" tf:"headers"`
+
+	// The IP Address used for this IP Restriction in CIDR notation.
+	// +kubebuilder:validation:Optional
+	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address"`
+
+	// The name for this IP Restriction.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name"`
+
+	// The priority for this IP Restriction. Restrictions are enforced in priority order. By default, priority is set to 65000 if not specified.
+	// +kubebuilder:validation:Optional
+	Priority *float64 `json:"priority,omitempty" tf:"priority"`
+
+	// The Service Tag used for this IP Restriction.
+	// +kubebuilder:validation:Optional
+	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag"`
+
+	// The Virtual Network Subnet ID used for this IP Restriction.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id"`
+
+	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetIDRef *v1.NamespacedReference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetIDSelector *v1.NamespacedSelector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
+}
+
 type FunctionAppSlotSiteConfigInitParameters struct {
 
 	// Should the Function App be loaded at all times? Defaults to false.
@@ -683,7 +814,7 @@ type FunctionAppSlotSiteConfigInitParameters struct {
 	AutoSwapSlotName *string `json:"autoSwapSlotName,omitempty" tf:"auto_swap_slot_name,omitempty"`
 
 	// A cors block as defined below.
-	Cors *SiteConfigCorsInitParameters `json:"cors,omitempty" tf:"cors,omitempty"`
+	Cors *FunctionAppSlotSiteConfigCorsInitParameters `json:"cors,omitempty" tf:"cors,omitempty"`
 
 	// The version of the .NET framework's CLR used in this function app. Possible values are v4.0 (including .NET Core 2.1 and 3.1), v5.0 and v6.0. For more information on which .NET Framework version to use based on the runtime version you're targeting - please see this table. Defaults to v4.0.
 	DotnetFrameworkVersion *string `json:"dotnetFrameworkVersion,omitempty" tf:"dotnet_framework_version,omitempty"`
@@ -701,7 +832,7 @@ type FunctionAppSlotSiteConfigInitParameters struct {
 	Http2Enabled *bool `json:"http2Enabled,omitempty" tf:"http2_enabled,omitempty"`
 
 	// A list of ip_restriction objects representing IP restrictions as defined below.
-	IPRestriction []SiteConfigIPRestrictionInitParameters `json:"ipRestriction,omitempty" tf:"ip_restriction,omitempty"`
+	IPRestriction []FunctionAppSlotSiteConfigIPRestrictionInitParameters `json:"ipRestriction,omitempty" tf:"ip_restriction,omitempty"`
 
 	// Java version hosted by the function app in Azure. Possible values are 1.8, 11 & 17 (In-Preview).
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
@@ -719,7 +850,7 @@ type FunctionAppSlotSiteConfigInitParameters struct {
 	RuntimeScaleMonitoringEnabled *bool `json:"runtimeScaleMonitoringEnabled,omitempty" tf:"runtime_scale_monitoring_enabled,omitempty"`
 
 	// A list of scm_ip_restriction objects representing IP restrictions as defined below.
-	ScmIPRestriction []SiteConfigScmIPRestrictionInitParameters `json:"scmIpRestriction,omitempty" tf:"scm_ip_restriction,omitempty"`
+	ScmIPRestriction []FunctionAppSlotSiteConfigScmIPRestrictionInitParameters `json:"scmIpRestriction,omitempty" tf:"scm_ip_restriction,omitempty"`
 
 	// The type of Source Control used by this function App. Valid values include: BitBucketGit, BitBucketHg, CodePlexGit, CodePlexHg, Dropbox, ExternalGit, ExternalHg, GitHub, LocalGit, None (default), OneDrive, Tfs, VSO, and VSTSRM.
 	ScmType *string `json:"scmType,omitempty" tf:"scm_type,omitempty"`
@@ -749,7 +880,7 @@ type FunctionAppSlotSiteConfigObservation struct {
 	AutoSwapSlotName *string `json:"autoSwapSlotName,omitempty" tf:"auto_swap_slot_name,omitempty"`
 
 	// A cors block as defined below.
-	Cors *SiteConfigCorsObservation `json:"cors,omitempty" tf:"cors,omitempty"`
+	Cors *FunctionAppSlotSiteConfigCorsObservation `json:"cors,omitempty" tf:"cors,omitempty"`
 
 	// The version of the .NET framework's CLR used in this function app. Possible values are v4.0 (including .NET Core 2.1 and 3.1), v5.0 and v6.0. For more information on which .NET Framework version to use based on the runtime version you're targeting - please see this table. Defaults to v4.0.
 	DotnetFrameworkVersion *string `json:"dotnetFrameworkVersion,omitempty" tf:"dotnet_framework_version,omitempty"`
@@ -767,7 +898,7 @@ type FunctionAppSlotSiteConfigObservation struct {
 	Http2Enabled *bool `json:"http2Enabled,omitempty" tf:"http2_enabled,omitempty"`
 
 	// A list of ip_restriction objects representing IP restrictions as defined below.
-	IPRestriction []SiteConfigIPRestrictionObservation `json:"ipRestriction,omitempty" tf:"ip_restriction,omitempty"`
+	IPRestriction []FunctionAppSlotSiteConfigIPRestrictionObservation `json:"ipRestriction,omitempty" tf:"ip_restriction,omitempty"`
 
 	// Java version hosted by the function app in Azure. Possible values are 1.8, 11 & 17 (In-Preview).
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
@@ -785,7 +916,7 @@ type FunctionAppSlotSiteConfigObservation struct {
 	RuntimeScaleMonitoringEnabled *bool `json:"runtimeScaleMonitoringEnabled,omitempty" tf:"runtime_scale_monitoring_enabled,omitempty"`
 
 	// A list of scm_ip_restriction objects representing IP restrictions as defined below.
-	ScmIPRestriction []SiteConfigScmIPRestrictionObservation `json:"scmIpRestriction,omitempty" tf:"scm_ip_restriction,omitempty"`
+	ScmIPRestriction []FunctionAppSlotSiteConfigScmIPRestrictionObservation `json:"scmIpRestriction,omitempty" tf:"scm_ip_restriction,omitempty"`
 
 	// The type of Source Control used by this function App. Valid values include: BitBucketGit, BitBucketHg, CodePlexGit, CodePlexHg, Dropbox, ExternalGit, ExternalHg, GitHub, LocalGit, None (default), OneDrive, Tfs, VSO, and VSTSRM.
 	ScmType *string `json:"scmType,omitempty" tf:"scm_type,omitempty"`
@@ -819,7 +950,7 @@ type FunctionAppSlotSiteConfigParameters struct {
 
 	// A cors block as defined below.
 	// +kubebuilder:validation:Optional
-	Cors *SiteConfigCorsParameters `json:"cors,omitempty" tf:"cors,omitempty"`
+	Cors *FunctionAppSlotSiteConfigCorsParameters `json:"cors,omitempty" tf:"cors,omitempty"`
 
 	// The version of the .NET framework's CLR used in this function app. Possible values are v4.0 (including .NET Core 2.1 and 3.1), v5.0 and v6.0. For more information on which .NET Framework version to use based on the runtime version you're targeting - please see this table. Defaults to v4.0.
 	// +kubebuilder:validation:Optional
@@ -843,7 +974,7 @@ type FunctionAppSlotSiteConfigParameters struct {
 
 	// A list of ip_restriction objects representing IP restrictions as defined below.
 	// +kubebuilder:validation:Optional
-	IPRestriction []SiteConfigIPRestrictionParameters `json:"ipRestriction,omitempty" tf:"ip_restriction,omitempty"`
+	IPRestriction []FunctionAppSlotSiteConfigIPRestrictionParameters `json:"ipRestriction,omitempty" tf:"ip_restriction,omitempty"`
 
 	// Java version hosted by the function app in Azure. Possible values are 1.8, 11 & 17 (In-Preview).
 	// +kubebuilder:validation:Optional
@@ -867,7 +998,7 @@ type FunctionAppSlotSiteConfigParameters struct {
 
 	// A list of scm_ip_restriction objects representing IP restrictions as defined below.
 	// +kubebuilder:validation:Optional
-	ScmIPRestriction []SiteConfigScmIPRestrictionParameters `json:"scmIpRestriction,omitempty" tf:"scm_ip_restriction,omitempty"`
+	ScmIPRestriction []FunctionAppSlotSiteConfigScmIPRestrictionParameters `json:"scmIpRestriction,omitempty" tf:"scm_ip_restriction,omitempty"`
 
 	// The type of Source Control used by this function App. Valid values include: BitBucketGit, BitBucketHg, CodePlexGit, CodePlexHg, Dropbox, ExternalGit, ExternalHg, GitHub, LocalGit, None (default), OneDrive, Tfs, VSO, and VSTSRM.
 	// +kubebuilder:validation:Optional
@@ -890,6 +1021,166 @@ type FunctionAppSlotSiteConfigParameters struct {
 	WebsocketsEnabled *bool `json:"websocketsEnabled,omitempty" tf:"websockets_enabled,omitempty"`
 }
 
+type FunctionAppSlotSiteConfigScmIPRestrictionHeadersInitParameters struct {
+
+	// A list of allowed Azure FrontDoor IDs in UUID notation with a maximum of 8.
+	// +listType=set
+	XAzureFdid []*string `json:"xAzureFdid,omitempty" tf:"x_azure_fdid"`
+
+	// A list to allow the Azure FrontDoor health probe header. Only allowed value is "1".
+	// +listType=set
+	XFdHealthProbe []*string `json:"xFdHealthProbe,omitempty" tf:"x_fd_health_probe"`
+
+	// A list of allowed 'X-Forwarded-For' IPs in CIDR notation with a maximum of 8
+	// +listType=set
+	XForwardedFor []*string `json:"xForwardedFor,omitempty" tf:"x_forwarded_for"`
+
+	// A list of allowed 'X-Forwarded-Host' domains with a maximum of 8.
+	// +listType=set
+	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host"`
+}
+
+type FunctionAppSlotSiteConfigScmIPRestrictionHeadersObservation struct {
+
+	// A list of allowed Azure FrontDoor IDs in UUID notation with a maximum of 8.
+	// +listType=set
+	XAzureFdid []*string `json:"xAzureFdid,omitempty" tf:"x_azure_fdid,omitempty"`
+
+	// A list to allow the Azure FrontDoor health probe header. Only allowed value is "1".
+	// +listType=set
+	XFdHealthProbe []*string `json:"xFdHealthProbe,omitempty" tf:"x_fd_health_probe,omitempty"`
+
+	// A list of allowed 'X-Forwarded-For' IPs in CIDR notation with a maximum of 8
+	// +listType=set
+	XForwardedFor []*string `json:"xForwardedFor,omitempty" tf:"x_forwarded_for,omitempty"`
+
+	// A list of allowed 'X-Forwarded-Host' domains with a maximum of 8.
+	// +listType=set
+	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host,omitempty"`
+}
+
+type FunctionAppSlotSiteConfigScmIPRestrictionHeadersParameters struct {
+
+	// A list of allowed Azure FrontDoor IDs in UUID notation with a maximum of 8.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	XAzureFdid []*string `json:"xAzureFdid,omitempty" tf:"x_azure_fdid"`
+
+	// A list to allow the Azure FrontDoor health probe header. Only allowed value is "1".
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	XFdHealthProbe []*string `json:"xFdHealthProbe,omitempty" tf:"x_fd_health_probe"`
+
+	// A list of allowed 'X-Forwarded-For' IPs in CIDR notation with a maximum of 8
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	XForwardedFor []*string `json:"xForwardedFor,omitempty" tf:"x_forwarded_for"`
+
+	// A list of allowed 'X-Forwarded-Host' domains with a maximum of 8.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host"`
+}
+
+type FunctionAppSlotSiteConfigScmIPRestrictionInitParameters struct {
+
+	// Allow or Deny access for this IP range. Defaults to Allow.
+	Action *string `json:"action,omitempty" tf:"action"`
+
+	// The headers block for this specific scm_ip_restriction as defined below.
+	Headers *FunctionAppSlotSiteConfigScmIPRestrictionHeadersInitParameters `json:"headers,omitempty" tf:"headers"`
+
+	// The IP Address used for this IP Restriction in CIDR notation.
+	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address"`
+
+	// The name for this IP Restriction.
+	Name *string `json:"name,omitempty" tf:"name"`
+
+	// The priority for this IP Restriction. Restrictions are enforced in priority order. By default, priority is set to 65000 if not specified.
+	Priority *float64 `json:"priority,omitempty" tf:"priority"`
+
+	// The Service Tag used for this IP Restriction.
+	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag"`
+
+	// The Virtual Network Subnet ID used for this IP Restriction.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id"`
+
+	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetIDRef *v1.NamespacedReference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetIDSelector *v1.NamespacedSelector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
+}
+
+type FunctionAppSlotSiteConfigScmIPRestrictionObservation struct {
+
+	// Allow or Deny access for this IP range. Defaults to Allow.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The headers block for this specific scm_ip_restriction as defined below.
+	Headers *FunctionAppSlotSiteConfigScmIPRestrictionHeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
+
+	// The IP Address used for this IP Restriction in CIDR notation.
+	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
+
+	// The name for this IP Restriction.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The priority for this IP Restriction. Restrictions are enforced in priority order. By default, priority is set to 65000 if not specified.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+
+	// The Service Tag used for this IP Restriction.
+	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag,omitempty"`
+
+	// The Virtual Network Subnet ID used for this IP Restriction.
+	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
+}
+
+type FunctionAppSlotSiteConfigScmIPRestrictionParameters struct {
+
+	// Allow or Deny access for this IP range. Defaults to Allow.
+	// +kubebuilder:validation:Optional
+	Action *string `json:"action,omitempty" tf:"action"`
+
+	// The headers block for this specific scm_ip_restriction as defined below.
+	// +kubebuilder:validation:Optional
+	Headers *FunctionAppSlotSiteConfigScmIPRestrictionHeadersParameters `json:"headers,omitempty" tf:"headers"`
+
+	// The IP Address used for this IP Restriction in CIDR notation.
+	// +kubebuilder:validation:Optional
+	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address"`
+
+	// The name for this IP Restriction.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name"`
+
+	// The priority for this IP Restriction. Restrictions are enforced in priority order. By default, priority is set to 65000 if not specified.
+	// +kubebuilder:validation:Optional
+	Priority *float64 `json:"priority,omitempty" tf:"priority"`
+
+	// The Service Tag used for this IP Restriction.
+	// +kubebuilder:validation:Optional
+	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag"`
+
+	// The Virtual Network Subnet ID used for this IP Restriction.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id"`
+
+	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetIDRef *v1.NamespacedReference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetIDSelector *v1.NamespacedSelector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
+}
+
 type FunctionAppSlotSiteCredentialInitParameters struct {
 }
 
@@ -905,7 +1196,7 @@ type FunctionAppSlotSiteCredentialObservation struct {
 type FunctionAppSlotSiteCredentialParameters struct {
 }
 
-type IPRestrictionHeadersInitParameters struct {
+type SiteConfigIPRestrictionHeadersInitParameters struct {
 
 	// A list of allowed Azure FrontDoor IDs in UUID notation with a maximum of 8.
 	// +listType=set
@@ -924,7 +1215,7 @@ type IPRestrictionHeadersInitParameters struct {
 	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host"`
 }
 
-type IPRestrictionHeadersObservation struct {
+type SiteConfigIPRestrictionHeadersObservation struct {
 
 	// A list of allowed Azure FrontDoor IDs in UUID notation with a maximum of 8.
 	// +listType=set
@@ -943,7 +1234,7 @@ type IPRestrictionHeadersObservation struct {
 	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host,omitempty"`
 }
 
-type IPRestrictionHeadersParameters struct {
+type SiteConfigIPRestrictionHeadersParameters struct {
 
 	// A list of allowed Azure FrontDoor IDs in UUID notation with a maximum of 8.
 	// +kubebuilder:validation:Optional
@@ -964,297 +1255,6 @@ type IPRestrictionHeadersParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host"`
-}
-
-type SiteConfigCorsInitParameters struct {
-
-	// A list of origins which should be able to make cross-origin calls. * can be used to allow all calls.
-	// +listType=set
-	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
-
-	// Are credentials supported?
-	SupportCredentials *bool `json:"supportCredentials,omitempty" tf:"support_credentials,omitempty"`
-}
-
-type SiteConfigCorsObservation struct {
-
-	// A list of origins which should be able to make cross-origin calls. * can be used to allow all calls.
-	// +listType=set
-	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
-
-	// Are credentials supported?
-	SupportCredentials *bool `json:"supportCredentials,omitempty" tf:"support_credentials,omitempty"`
-}
-
-type SiteConfigCorsParameters struct {
-
-	// A list of origins which should be able to make cross-origin calls. * can be used to allow all calls.
-	// +kubebuilder:validation:Optional
-	// +listType=set
-	AllowedOrigins []*string `json:"allowedOrigins" tf:"allowed_origins,omitempty"`
-
-	// Are credentials supported?
-	// +kubebuilder:validation:Optional
-	SupportCredentials *bool `json:"supportCredentials,omitempty" tf:"support_credentials,omitempty"`
-}
-
-type SiteConfigIPRestrictionInitParameters struct {
-
-	// Allow or Deny access for this IP range. Defaults to Allow.
-	Action *string `json:"action,omitempty" tf:"action"`
-
-	// The headers block for this specific scm_ip_restriction as defined below.
-	Headers *IPRestrictionHeadersInitParameters `json:"headers,omitempty" tf:"headers"`
-
-	// The IP Address used for this IP Restriction in CIDR notation.
-	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address"`
-
-	// The name for this IP Restriction.
-	Name *string `json:"name,omitempty" tf:"name"`
-
-	// The priority for this IP Restriction. Restrictions are enforced in priority order. By default, priority is set to 65000 if not specified.
-	Priority *float64 `json:"priority,omitempty" tf:"priority"`
-
-	// The Service Tag used for this IP Restriction.
-	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag"`
-
-	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
-	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id"`
-
-	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
-	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDRef *v1.NamespacedReference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
-
-	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
-	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDSelector *v1.NamespacedSelector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
-}
-
-type SiteConfigIPRestrictionObservation struct {
-
-	// Allow or Deny access for this IP range. Defaults to Allow.
-	Action *string `json:"action,omitempty" tf:"action,omitempty"`
-
-	// The headers block for this specific scm_ip_restriction as defined below.
-	Headers *IPRestrictionHeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
-
-	// The IP Address used for this IP Restriction in CIDR notation.
-	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
-
-	// The name for this IP Restriction.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// The priority for this IP Restriction. Restrictions are enforced in priority order. By default, priority is set to 65000 if not specified.
-	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
-
-	// The Service Tag used for this IP Restriction.
-	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag,omitempty"`
-
-	// The Virtual Network Subnet ID used for this IP Restriction.
-	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
-}
-
-type SiteConfigIPRestrictionParameters struct {
-
-	// Allow or Deny access for this IP range. Defaults to Allow.
-	// +kubebuilder:validation:Optional
-	Action *string `json:"action,omitempty" tf:"action"`
-
-	// The headers block for this specific scm_ip_restriction as defined below.
-	// +kubebuilder:validation:Optional
-	Headers *IPRestrictionHeadersParameters `json:"headers,omitempty" tf:"headers"`
-
-	// The IP Address used for this IP Restriction in CIDR notation.
-	// +kubebuilder:validation:Optional
-	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address"`
-
-	// The name for this IP Restriction.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name"`
-
-	// The priority for this IP Restriction. Restrictions are enforced in priority order. By default, priority is set to 65000 if not specified.
-	// +kubebuilder:validation:Optional
-	Priority *float64 `json:"priority,omitempty" tf:"priority"`
-
-	// The Service Tag used for this IP Restriction.
-	// +kubebuilder:validation:Optional
-	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag"`
-
-	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id"`
-
-	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
-	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDRef *v1.NamespacedReference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
-
-	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
-	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDSelector *v1.NamespacedSelector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
-}
-
-type SiteConfigScmIPRestrictionHeadersInitParameters struct {
-
-	// A list of allowed Azure FrontDoor IDs in UUID notation with a maximum of 8.
-	// +listType=set
-	XAzureFdid []*string `json:"xAzureFdid,omitempty" tf:"x_azure_fdid"`
-
-	// A list to allow the Azure FrontDoor health probe header. Only allowed value is "1".
-	// +listType=set
-	XFdHealthProbe []*string `json:"xFdHealthProbe,omitempty" tf:"x_fd_health_probe"`
-
-	// A list of allowed 'X-Forwarded-For' IPs in CIDR notation with a maximum of 8
-	// +listType=set
-	XForwardedFor []*string `json:"xForwardedFor,omitempty" tf:"x_forwarded_for"`
-
-	// A list of allowed 'X-Forwarded-Host' domains with a maximum of 8.
-	// +listType=set
-	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host"`
-}
-
-type SiteConfigScmIPRestrictionHeadersObservation struct {
-
-	// A list of allowed Azure FrontDoor IDs in UUID notation with a maximum of 8.
-	// +listType=set
-	XAzureFdid []*string `json:"xAzureFdid,omitempty" tf:"x_azure_fdid,omitempty"`
-
-	// A list to allow the Azure FrontDoor health probe header. Only allowed value is "1".
-	// +listType=set
-	XFdHealthProbe []*string `json:"xFdHealthProbe,omitempty" tf:"x_fd_health_probe,omitempty"`
-
-	// A list of allowed 'X-Forwarded-For' IPs in CIDR notation with a maximum of 8
-	// +listType=set
-	XForwardedFor []*string `json:"xForwardedFor,omitempty" tf:"x_forwarded_for,omitempty"`
-
-	// A list of allowed 'X-Forwarded-Host' domains with a maximum of 8.
-	// +listType=set
-	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host,omitempty"`
-}
-
-type SiteConfigScmIPRestrictionHeadersParameters struct {
-
-	// A list of allowed Azure FrontDoor IDs in UUID notation with a maximum of 8.
-	// +kubebuilder:validation:Optional
-	// +listType=set
-	XAzureFdid []*string `json:"xAzureFdid,omitempty" tf:"x_azure_fdid"`
-
-	// A list to allow the Azure FrontDoor health probe header. Only allowed value is "1".
-	// +kubebuilder:validation:Optional
-	// +listType=set
-	XFdHealthProbe []*string `json:"xFdHealthProbe,omitempty" tf:"x_fd_health_probe"`
-
-	// A list of allowed 'X-Forwarded-For' IPs in CIDR notation with a maximum of 8
-	// +kubebuilder:validation:Optional
-	// +listType=set
-	XForwardedFor []*string `json:"xForwardedFor,omitempty" tf:"x_forwarded_for"`
-
-	// A list of allowed 'X-Forwarded-Host' domains with a maximum of 8.
-	// +kubebuilder:validation:Optional
-	// +listType=set
-	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host"`
-}
-
-type SiteConfigScmIPRestrictionInitParameters struct {
-
-	// Allow or Deny access for this IP range. Defaults to Allow.
-	Action *string `json:"action,omitempty" tf:"action"`
-
-	// The headers block for this specific scm_ip_restriction as defined below.
-	Headers *SiteConfigScmIPRestrictionHeadersInitParameters `json:"headers,omitempty" tf:"headers"`
-
-	// The IP Address used for this IP Restriction in CIDR notation.
-	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address"`
-
-	// The name for this IP Restriction.
-	Name *string `json:"name,omitempty" tf:"name"`
-
-	// The priority for this IP Restriction. Restrictions are enforced in priority order. By default, priority is set to 65000 if not specified.
-	Priority *float64 `json:"priority,omitempty" tf:"priority"`
-
-	// The Service Tag used for this IP Restriction.
-	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag"`
-
-	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
-	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id"`
-
-	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
-	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDRef *v1.NamespacedReference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
-
-	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
-	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDSelector *v1.NamespacedSelector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
-}
-
-type SiteConfigScmIPRestrictionObservation struct {
-
-	// Allow or Deny access for this IP range. Defaults to Allow.
-	Action *string `json:"action,omitempty" tf:"action,omitempty"`
-
-	// The headers block for this specific scm_ip_restriction as defined below.
-	Headers *SiteConfigScmIPRestrictionHeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
-
-	// The IP Address used for this IP Restriction in CIDR notation.
-	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
-
-	// The name for this IP Restriction.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// The priority for this IP Restriction. Restrictions are enforced in priority order. By default, priority is set to 65000 if not specified.
-	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
-
-	// The Service Tag used for this IP Restriction.
-	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag,omitempty"`
-
-	// The Virtual Network Subnet ID used for this IP Restriction.
-	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
-}
-
-type SiteConfigScmIPRestrictionParameters struct {
-
-	// Allow or Deny access for this IP range. Defaults to Allow.
-	// +kubebuilder:validation:Optional
-	Action *string `json:"action,omitempty" tf:"action"`
-
-	// The headers block for this specific scm_ip_restriction as defined below.
-	// +kubebuilder:validation:Optional
-	Headers *SiteConfigScmIPRestrictionHeadersParameters `json:"headers,omitempty" tf:"headers"`
-
-	// The IP Address used for this IP Restriction in CIDR notation.
-	// +kubebuilder:validation:Optional
-	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address"`
-
-	// The name for this IP Restriction.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name"`
-
-	// The priority for this IP Restriction. Restrictions are enforced in priority order. By default, priority is set to 65000 if not specified.
-	// +kubebuilder:validation:Optional
-	Priority *float64 `json:"priority,omitempty" tf:"priority"`
-
-	// The Service Tag used for this IP Restriction.
-	// +kubebuilder:validation:Optional
-	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag"`
-
-	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id"`
-
-	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
-	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDRef *v1.NamespacedReference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
-
-	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
-	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDSelector *v1.NamespacedSelector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
 }
 
 // FunctionAppSlotSpec defines the desired state of FunctionAppSlot

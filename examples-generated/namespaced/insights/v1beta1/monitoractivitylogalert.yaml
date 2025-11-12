@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: insights.azure.m.upbound.io/v1beta1
 kind: MonitorActivityLogAlert
 metadata:
@@ -16,7 +20,7 @@ spec:
       webhookProperties:
         from: terraform
     criteria:
-    - category: Recommendation
+      category: Recommendation
       operationName: Microsoft.Storage/storageAccounts/write
       resourceIdSelector:
         matchLabels:

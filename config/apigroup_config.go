@@ -26,6 +26,7 @@ var (
 		"azurerm_storage_share":                                          "storage",
 		"azurerm_storage_data_lake_gen2_filesystem":                      "storage",
 		"azurerm_monitor_diagnostic_setting":                             "insights",
+		"azurerm_monitor_workspace":                                      "insights",
 	}
 
 	// this table holds overrides of Microsoft provider API groups

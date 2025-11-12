@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: network.azure.m.upbound.io/v1beta1
 kind: TrafficManagerAzureEndpoint
 metadata:
@@ -67,10 +71,10 @@ metadata:
 spec:
   forProvider:
     dnsConfig:
-    - relativeName: example-profile
+      relativeName: example-profile
       ttl: 100
     monitorConfig:
-    - intervalInSeconds: 30
+      intervalInSeconds: 30
       path: /
       port: 80
       protocol: HTTP

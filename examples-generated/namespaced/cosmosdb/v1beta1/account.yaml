@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: cosmosdb.azure.m.upbound.io/v1beta1
 kind: Account
 metadata:
@@ -16,7 +20,7 @@ spec:
     - name: MongoDBv3.4
     - name: EnableMongo
     consistencyPolicy:
-    - consistencyLevel: BoundedStaleness
+      consistencyLevel: BoundedStaleness
       maxIntervalInSeconds: 300
       maxStalenessPrefix: 100000
     geoLocation:

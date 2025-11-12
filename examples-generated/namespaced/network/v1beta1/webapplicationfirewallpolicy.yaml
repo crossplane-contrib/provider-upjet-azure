@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: network.azure.m.upbound.io/v1beta1
 kind: WebApplicationFirewallPolicy
 metadata:
@@ -42,7 +46,7 @@ spec:
       ruleType: MatchRule
     location: West Europe
     managedRules:
-    - exclusion:
+      exclusion:
       - matchVariable: RequestHeaderNames
         selector: x-company-secret-header
         selectorMatchOperator: Equals
@@ -62,7 +66,7 @@ spec:
         type: OWASP
         version: "3.2"
     policySettings:
-    - enabled: true
+      enabled: true
       fileUploadLimitInMb: 100
       maxRequestBodySizeInKb: 128
       mode: Prevention
