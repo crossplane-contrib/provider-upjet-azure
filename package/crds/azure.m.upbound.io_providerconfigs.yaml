@@ -131,6 +131,12 @@ spec:
                   OIDCTokenFilePath is the optional path to a token file
                   that allows to access a managed identity.
                 type: string
+              storageUseAzureAD:
+                description: |-
+                  StorageUseAzureAD configures Provider to use AzureAD
+                  to connect to the Storage Blob & Queue APIs,
+                  rather than the SharedKey from the Storage Account.
+                type: boolean
               subscriptionID:
                 description: |-
                   SubscriptionID is the Azure subscription ID to be used.

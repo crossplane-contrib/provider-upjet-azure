@@ -49,6 +49,12 @@ type ProviderConfigSpec struct {
 	// that allows to access a managed identity.
 	// +kubebuilder:validation:Optional
 	OidcTokenFilePath *string `json:"oidcTokenFilePath,omitempty"`
+
+	// StorageUseAzureAD configures Provider to use AzureAD
+	// to connect to the Storage Blob & Queue APIs,
+	// rather than the SharedKey from the Storage Account.
+	// +kubebuilder:validation:Optional
+	StorageUseAzureAD *bool `json:"storageUseAzureAD,omitempty"`
 }
 
 // ProviderCredentials required to authenticate.
