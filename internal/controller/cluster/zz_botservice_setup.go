@@ -9,16 +9,16 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	botchannelalexa "github.com/upbound/provider-azure/internal/controller/cluster/botservice/botchannelalexa"
-	botchanneldirectline "github.com/upbound/provider-azure/internal/controller/cluster/botservice/botchanneldirectline"
-	botchannelline "github.com/upbound/provider-azure/internal/controller/cluster/botservice/botchannelline"
-	botchannelmsteams "github.com/upbound/provider-azure/internal/controller/cluster/botservice/botchannelmsteams"
-	botchannelslack "github.com/upbound/provider-azure/internal/controller/cluster/botservice/botchannelslack"
-	botchannelsms "github.com/upbound/provider-azure/internal/controller/cluster/botservice/botchannelsms"
-	botchannelsregistration "github.com/upbound/provider-azure/internal/controller/cluster/botservice/botchannelsregistration"
-	botchannelwebchat "github.com/upbound/provider-azure/internal/controller/cluster/botservice/botchannelwebchat"
-	botconnection "github.com/upbound/provider-azure/internal/controller/cluster/botservice/botconnection"
-	botwebapp "github.com/upbound/provider-azure/internal/controller/cluster/botservice/botwebapp"
+	botchannelalexa "github.com/upbound/provider-azure/v2/internal/controller/cluster/botservice/botchannelalexa"
+	botchanneldirectline "github.com/upbound/provider-azure/v2/internal/controller/cluster/botservice/botchanneldirectline"
+	botchannelline "github.com/upbound/provider-azure/v2/internal/controller/cluster/botservice/botchannelline"
+	botchannelmsteams "github.com/upbound/provider-azure/v2/internal/controller/cluster/botservice/botchannelmsteams"
+	botchannelslack "github.com/upbound/provider-azure/v2/internal/controller/cluster/botservice/botchannelslack"
+	botchannelsms "github.com/upbound/provider-azure/v2/internal/controller/cluster/botservice/botchannelsms"
+	botchannelsregistration "github.com/upbound/provider-azure/v2/internal/controller/cluster/botservice/botchannelsregistration"
+	botchannelwebchat "github.com/upbound/provider-azure/v2/internal/controller/cluster/botservice/botchannelwebchat"
+	botconnection "github.com/upbound/provider-azure/v2/internal/controller/cluster/botservice/botconnection"
+	botwebapp "github.com/upbound/provider-azure/v2/internal/controller/cluster/botservice/botwebapp"
 )
 
 // Setup_botservice creates all controllers with the supplied logger and adds them to

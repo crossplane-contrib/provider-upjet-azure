@@ -48,7 +48,7 @@ type FlexibleServerFirewallRuleParameters struct {
 	EndIPAddress *string `json:"endIpAddress,omitempty" tf:"end_ip_address,omitempty"`
 
 	// The name of the resource group in which the MySQL Flexible Server exists. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -61,7 +61,7 @@ type FlexibleServerFirewallRuleParameters struct {
 	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the MySQL Flexible Server. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/dbformysql/v1beta1.FlexibleServer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/dbformysql/v1beta1.FlexibleServer
 	// +kubebuilder:validation:Optional
 	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
 

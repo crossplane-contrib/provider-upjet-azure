@@ -226,7 +226,7 @@ type IPConfigurationInitParameters struct {
 	PublicIPAddress []PublicIPAddressInitParameters `json:"publicIpAddress,omitempty" tf:"public_ip_address,omitempty"`
 
 	// The ID of the Subnet which this IP Configuration should be connected to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -311,7 +311,7 @@ type IPConfigurationParameters struct {
 	PublicIPAddress []PublicIPAddressParameters `json:"publicIpAddress,omitempty" tf:"public_ip_address,omitempty"`
 
 	// The ID of the Subnet which this IP Configuration should be connected to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
@@ -1162,7 +1162,7 @@ type LinuxVirtualMachineScaleSetParameters struct {
 	ProximityPlacementGroupID *string `json:"proximityPlacementGroupId,omitempty" tf:"proximity_placement_group_id,omitempty"`
 
 	// The name of the Resource Group in which the Linux Virtual Machine Scale Set should be exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

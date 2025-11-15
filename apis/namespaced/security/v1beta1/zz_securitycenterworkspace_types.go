@@ -20,7 +20,7 @@ type SecurityCenterWorkspaceInitParameters struct {
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
 	// The ID of the Log Analytics Workspace to save the data in.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/operationalinsights/v1beta1.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/operationalinsights/v1beta1.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 
@@ -52,7 +52,7 @@ type SecurityCenterWorkspaceParameters struct {
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
 	// The ID of the Log Analytics Workspace to save the data in.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/operationalinsights/v1beta1.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/operationalinsights/v1beta1.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`

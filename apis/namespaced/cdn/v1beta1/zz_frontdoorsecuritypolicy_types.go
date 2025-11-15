@@ -46,7 +46,7 @@ type AssociationParameters struct {
 type DomainInitParameters struct {
 
 	// The Resource Id of the Front Door Custom Domain or Front Door Endpoint that should be bound to this Front Door Security Policy. Changing this forces a new Front Door Security Policy to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/cdn/v1beta1.FrontdoorCustomDomain
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cdn/v1beta1.FrontdoorCustomDomain
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	CdnFrontdoorDomainID *string `json:"cdnFrontdoorDomainId,omitempty" tf:"cdn_frontdoor_domain_id,omitempty"`
 
@@ -71,7 +71,7 @@ type DomainObservation struct {
 type DomainParameters struct {
 
 	// The Resource Id of the Front Door Custom Domain or Front Door Endpoint that should be bound to this Front Door Security Policy. Changing this forces a new Front Door Security Policy to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/cdn/v1beta1.FrontdoorCustomDomain
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cdn/v1beta1.FrontdoorCustomDomain
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CdnFrontdoorDomainID *string `json:"cdnFrontdoorDomainId,omitempty" tf:"cdn_frontdoor_domain_id,omitempty"`
@@ -91,7 +91,7 @@ type FirewallInitParameters struct {
 	Association *AssociationInitParameters `json:"association,omitempty" tf:"association,omitempty"`
 
 	// The Resource Id of the Front Door Firewall Policy that should be linked to this Front Door Security Policy. Changing this forces a new Front Door Security Policy to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/cdn/v1beta1.FrontdoorFirewallPolicy
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cdn/v1beta1.FrontdoorFirewallPolicy
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	CdnFrontdoorFirewallPolicyID *string `json:"cdnFrontdoorFirewallPolicyId,omitempty" tf:"cdn_frontdoor_firewall_policy_id,omitempty"`
 
@@ -120,7 +120,7 @@ type FirewallParameters struct {
 	Association *AssociationParameters `json:"association" tf:"association,omitempty"`
 
 	// The Resource Id of the Front Door Firewall Policy that should be linked to this Front Door Security Policy. Changing this forces a new Front Door Security Policy to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/cdn/v1beta1.FrontdoorFirewallPolicy
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cdn/v1beta1.FrontdoorFirewallPolicy
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CdnFrontdoorFirewallPolicyID *string `json:"cdnFrontdoorFirewallPolicyId,omitempty" tf:"cdn_frontdoor_firewall_policy_id,omitempty"`
@@ -155,7 +155,7 @@ type FrontdoorSecurityPolicyObservation struct {
 type FrontdoorSecurityPolicyParameters struct {
 
 	// The Front Door Profile Resource Id that is linked to this Front Door Security Policy. Changing this forces a new Front Door Security Policy to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/cdn/v1beta1.FrontdoorProfile
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cdn/v1beta1.FrontdoorProfile
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CdnFrontdoorProfileID *string `json:"cdnFrontdoorProfileId,omitempty" tf:"cdn_frontdoor_profile_id,omitempty"`

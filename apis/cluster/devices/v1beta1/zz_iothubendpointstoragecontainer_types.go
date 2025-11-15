@@ -25,7 +25,7 @@ type IOTHubEndpointStorageContainerInitParameters struct {
 	ConnectionStringSecretRef *v1.SecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
 
 	// The name of storage container in the storage account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta1.Container
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Container
 	ContainerName *string `json:"containerName,omitempty" tf:"container_name,omitempty"`
 
 	// Reference to a Container in storage to populate containerName.
@@ -52,7 +52,7 @@ type IOTHubEndpointStorageContainerInitParameters struct {
 	MaxChunkSizeInBytes *float64 `json:"maxChunkSizeInBytes,omitempty" tf:"max_chunk_size_in_bytes,omitempty"`
 
 	// The name of the resource group under which the Storage Container has been created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
@@ -115,7 +115,7 @@ type IOTHubEndpointStorageContainerParameters struct {
 	ConnectionStringSecretRef *v1.SecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
 
 	// The name of storage container in the storage account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta1.Container
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Container
 	// +kubebuilder:validation:Optional
 	ContainerName *string `json:"containerName,omitempty" tf:"container_name,omitempty"`
 
@@ -140,7 +140,7 @@ type IOTHubEndpointStorageContainerParameters struct {
 	FileNameFormat *string `json:"fileNameFormat,omitempty" tf:"file_name_format,omitempty"`
 
 	// The IoTHub ID for the endpoint. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/devices/v1beta2.IOTHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/devices/v1beta2.IOTHub
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	IOTHubID *string `json:"iothubId,omitempty" tf:"iothub_id,omitempty"`
@@ -162,7 +162,7 @@ type IOTHubEndpointStorageContainerParameters struct {
 	MaxChunkSizeInBytes *float64 `json:"maxChunkSizeInBytes,omitempty" tf:"max_chunk_size_in_bytes,omitempty"`
 
 	// The name of the resource group under which the Storage Container has been created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

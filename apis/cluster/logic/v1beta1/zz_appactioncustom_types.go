@@ -38,7 +38,7 @@ type AppActionCustomParameters struct {
 	Body *string `json:"body,omitempty" tf:"body,omitempty"`
 
 	// Specifies the ID of the Logic App Workflow. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/logic/v1beta2.AppWorkflow
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/logic/v1beta2.AppWorkflow
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LogicAppID *string `json:"logicAppId,omitempty" tf:"logic_app_id,omitempty"`

@@ -185,7 +185,7 @@ type MetricTriggerInitParameters struct {
 	MetricNamespace *string `json:"metricNamespace,omitempty" tf:"metric_namespace,omitempty"`
 
 	// The ID of the Resource which the Rule monitors.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/compute/v1beta1.LinuxVirtualMachineScaleSet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/compute/v1beta1.LinuxVirtualMachineScaleSet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	MetricResourceID *string `json:"metricResourceId,omitempty" tf:"metric_resource_id,omitempty"`
 
@@ -271,7 +271,7 @@ type MetricTriggerParameters struct {
 	MetricNamespace *string `json:"metricNamespace,omitempty" tf:"metric_namespace,omitempty"`
 
 	// The ID of the Resource which the Rule monitors.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/compute/v1beta1.LinuxVirtualMachineScaleSet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/compute/v1beta1.LinuxVirtualMachineScaleSet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	MetricResourceID *string `json:"metricResourceId,omitempty" tf:"metric_resource_id,omitempty"`
@@ -330,7 +330,7 @@ type MonitorAutoscaleSettingInitParameters struct {
 	Profile []ProfileInitParameters `json:"profile,omitempty" tf:"profile,omitempty"`
 
 	// The name of the Resource Group in the AutoScale Setting should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
@@ -346,7 +346,7 @@ type MonitorAutoscaleSettingInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the resource ID of the resource that the autoscale setting should be added to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/compute/v1beta1.LinuxVirtualMachineScaleSet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/compute/v1beta1.LinuxVirtualMachineScaleSet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
 
@@ -420,7 +420,7 @@ type MonitorAutoscaleSettingParameters struct {
 	Profile []ProfileParameters `json:"profile,omitempty" tf:"profile,omitempty"`
 
 	// The name of the Resource Group in the AutoScale Setting should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -438,7 +438,7 @@ type MonitorAutoscaleSettingParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the resource ID of the resource that the autoscale setting should be added to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/compute/v1beta1.LinuxVirtualMachineScaleSet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/compute/v1beta1.LinuxVirtualMachineScaleSet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`

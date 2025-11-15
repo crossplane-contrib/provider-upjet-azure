@@ -54,7 +54,7 @@ type LogAnalyticsDataSourceWindowsEventParameters struct {
 	EventTypes []*string `json:"eventTypes,omitempty" tf:"event_types,omitempty"`
 
 	// The name of the Resource Group where the Log Analytics Windows Event DataSource should exist. Changing this forces a new Log Analytics Windows Event DataSource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -67,7 +67,7 @@ type LogAnalyticsDataSourceWindowsEventParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The name of the Log Analytics Workspace where the Log Analytics Windows Event DataSource should exist. Changing this forces a new Log Analytics Windows Event DataSource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/operationalinsights/v1beta2.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/operationalinsights/v1beta2.Workspace
 	// +kubebuilder:validation:Optional
 	WorkspaceName *string `json:"workspaceName,omitempty" tf:"workspace_name,omitempty"`
 

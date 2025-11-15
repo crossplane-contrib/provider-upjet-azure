@@ -194,7 +194,7 @@ type HealthcareFHIRServiceInitParameters struct {
 	OciArtifact []OciArtifactInitParameters `json:"ociArtifact,omitempty" tf:"oci_artifact,omitempty"`
 
 	// Specifies the name of the Resource Group in which to create the Healthcare FHIR Service. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
@@ -299,7 +299,7 @@ type HealthcareFHIRServiceParameters struct {
 	OciArtifact []OciArtifactParameters `json:"ociArtifact,omitempty" tf:"oci_artifact,omitempty"`
 
 	// Specifies the name of the Resource Group in which to create the Healthcare FHIR Service. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -317,7 +317,7 @@ type HealthcareFHIRServiceParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the id of the Healthcare Workspace where the Healthcare FHIR Service should exist. Changing this forces a new Healthcare FHIR Service to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/healthcareapis/v1beta1.HealthcareWorkspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/healthcareapis/v1beta1.HealthcareWorkspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`

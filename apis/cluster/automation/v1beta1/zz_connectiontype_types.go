@@ -16,7 +16,7 @@ import (
 type ConnectionTypeInitParameters struct {
 
 	// The name of the automation account in which the Connection is created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/automation/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/automation/v1beta2.Account
 	AutomationAccountName *string `json:"automationAccountName,omitempty" tf:"automation_account_name,omitempty"`
 
 	// Reference to a Account in automation to populate automationAccountName.
@@ -37,7 +37,7 @@ type ConnectionTypeInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of the Resource Group where the Automation should exist. Changing this forces a new Automation to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
@@ -73,7 +73,7 @@ type ConnectionTypeObservation struct {
 type ConnectionTypeParameters struct {
 
 	// The name of the automation account in which the Connection is created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/automation/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/automation/v1beta2.Account
 	// +kubebuilder:validation:Optional
 	AutomationAccountName *string `json:"automationAccountName,omitempty" tf:"automation_account_name,omitempty"`
 
@@ -98,7 +98,7 @@ type ConnectionTypeParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of the Resource Group where the Automation should exist. Changing this forces a new Automation to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	springcloudconnection "github.com/upbound/provider-azure/internal/controller/cluster/servicelinker/springcloudconnection"
+	springcloudconnection "github.com/upbound/provider-azure/v2/internal/controller/cluster/servicelinker/springcloudconnection"
 )
 
 // Setup_servicelinker creates all controllers with the supplied logger and adds them to

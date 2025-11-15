@@ -45,7 +45,7 @@ type TriggerBlobEventInitParameters struct {
 	Pipeline []TriggerBlobEventPipelineInitParameters `json:"pipeline,omitempty" tf:"pipeline,omitempty"`
 
 	// The ID of Storage Account in which blob event will be listened. Changing this forces a new resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 
@@ -123,7 +123,7 @@ type TriggerBlobEventParameters struct {
 	BlobPathEndsWith *string `json:"blobPathEndsWith,omitempty" tf:"blob_path_ends_with,omitempty"`
 
 	// The ID of Data Factory in which to associate the Trigger with. Changing this forces a new resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/datafactory/v1beta2.Factory
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/datafactory/v1beta2.Factory
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DataFactoryID *string `json:"dataFactoryId,omitempty" tf:"data_factory_id,omitempty"`
@@ -154,7 +154,7 @@ type TriggerBlobEventParameters struct {
 	Pipeline []TriggerBlobEventPipelineParameters `json:"pipeline,omitempty" tf:"pipeline,omitempty"`
 
 	// The ID of Storage Account in which blob event will be listened. Changing this forces a new resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
@@ -171,7 +171,7 @@ type TriggerBlobEventParameters struct {
 type TriggerBlobEventPipelineInitParameters struct {
 
 	// The Data Factory Pipeline name that the trigger will act on.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/datafactory/v1beta1.Pipeline
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/datafactory/v1beta1.Pipeline
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Reference to a Pipeline in datafactory to populate name.
@@ -200,7 +200,7 @@ type TriggerBlobEventPipelineObservation struct {
 type TriggerBlobEventPipelineParameters struct {
 
 	// The Data Factory Pipeline name that the trigger will act on.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/datafactory/v1beta1.Pipeline
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/datafactory/v1beta1.Pipeline
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 

@@ -104,7 +104,7 @@ type ContactProfileInitParameters struct {
 	MinimumVariableContactDuration *string `json:"minimumVariableContactDuration,omitempty" tf:"minimum_variable_contact_duration,omitempty"`
 
 	// ARM resource identifier of the subnet delegated to the Microsoft.Orbital/orbitalGateways. Needs to be at least a class C subnet, and should not have any IP created in it. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	NetworkConfigurationSubnetID *string `json:"networkConfigurationSubnetId,omitempty" tf:"network_configuration_subnet_id,omitempty"`
 
@@ -182,7 +182,7 @@ type ContactProfileParameters struct {
 	MinimumVariableContactDuration *string `json:"minimumVariableContactDuration,omitempty" tf:"minimum_variable_contact_duration,omitempty"`
 
 	// ARM resource identifier of the subnet delegated to the Microsoft.Orbital/orbitalGateways. Needs to be at least a class C subnet, and should not have any IP created in it. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	NetworkConfigurationSubnetID *string `json:"networkConfigurationSubnetId,omitempty" tf:"network_configuration_subnet_id,omitempty"`
@@ -196,7 +196,7 @@ type ContactProfileParameters struct {
 	NetworkConfigurationSubnetIDSelector *v1.NamespacedSelector `json:"networkConfigurationSubnetIdSelector,omitempty" tf:"-"`
 
 	// The name of the Resource Group where the contact profile exists. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

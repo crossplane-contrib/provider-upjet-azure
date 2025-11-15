@@ -66,7 +66,7 @@ type ContainerImmutabilityPolicyParameters struct {
 	ProtectedAppendWritesEnabled *bool `json:"protectedAppendWritesEnabled,omitempty" tf:"protected_append_writes_enabled,omitempty"`
 
 	// The Resource Manager ID of the Storage Container where this Immutability Policy should be applied. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta1.Container
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Container
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("resource_manager_id",true)
 	// +kubebuilder:validation:Optional
 	StorageContainerResourceManagerID *string `json:"storageContainerResourceManagerId,omitempty" tf:"storage_container_resource_manager_id,omitempty"`

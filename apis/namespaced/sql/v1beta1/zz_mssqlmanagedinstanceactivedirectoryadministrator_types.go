@@ -61,8 +61,8 @@ type MSSQLManagedInstanceActiveDirectoryAdministratorParameters struct {
 	LoginUsername *string `json:"loginUsername,omitempty" tf:"login_username,omitempty"`
 
 	// The ID of the Azure SQL Managed Instance for which to set the administrator. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/sql/v1beta1.MSSQLManagedInstance
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/sql/v1beta1.MSSQLManagedInstance
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ManagedInstanceID *string `json:"managedInstanceId,omitempty" tf:"managed_instance_id,omitempty"`
 

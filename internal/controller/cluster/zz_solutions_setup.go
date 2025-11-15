@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	managedapplicationdefinition "github.com/upbound/provider-azure/internal/controller/cluster/solutions/managedapplicationdefinition"
+	managedapplicationdefinition "github.com/upbound/provider-azure/v2/internal/controller/cluster/solutions/managedapplicationdefinition"
 )
 
 // Setup_solutions creates all controllers with the supplied logger and adds them to

@@ -51,7 +51,7 @@ type DatabaseParameters struct {
 	Collation *string `json:"collation,omitempty" tf:"collation,omitempty"`
 
 	// The name of the resource group in which the PostgreSQL Server exists. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -64,7 +64,7 @@ type DatabaseParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the PostgreSQL Server. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/dbforpostgresql/v1beta2.Server
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/dbforpostgresql/v1beta2.Server
 	// +kubebuilder:validation:Optional
 	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
 

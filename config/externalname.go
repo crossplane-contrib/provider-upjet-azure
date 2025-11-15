@@ -9,7 +9,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/upbound/provider-azure/config/cluster/common"
+	"github.com/upbound/provider-azure/v2/config/cluster/common"
 
 	"github.com/pkg/errors"
 

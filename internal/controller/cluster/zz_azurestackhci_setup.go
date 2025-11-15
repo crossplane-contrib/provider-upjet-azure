@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	cluster "github.com/upbound/provider-azure/internal/controller/cluster/azurestackhci/cluster"
+	cluster "github.com/upbound/provider-azure/v2/internal/controller/cluster/azurestackhci/cluster"
 )
 
 // Setup_azurestackhci creates all controllers with the supplied logger and adds them to

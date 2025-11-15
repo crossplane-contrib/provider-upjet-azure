@@ -9,8 +9,8 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	cluster "github.com/upbound/provider-azure/internal/controller/namespaced/servicefabric/cluster"
-	managedcluster "github.com/upbound/provider-azure/internal/controller/namespaced/servicefabric/managedcluster"
+	cluster "github.com/upbound/provider-azure/v2/internal/controller/namespaced/servicefabric/cluster"
+	managedcluster "github.com/upbound/provider-azure/v2/internal/controller/namespaced/servicefabric/managedcluster"
 )
 
 // Setup_servicefabric creates all controllers with the supplied logger and adds them to

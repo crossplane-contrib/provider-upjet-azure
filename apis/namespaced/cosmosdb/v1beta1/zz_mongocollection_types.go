@@ -122,7 +122,7 @@ type MongoCollectionObservation struct {
 type MongoCollectionParameters struct {
 
 	// The name of the Cosmos DB Account in which the Cosmos DB Mongo Collection is created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/cosmosdb/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cosmosdb/v1beta1.Account
 	// +kubebuilder:validation:Optional
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
@@ -143,7 +143,7 @@ type MongoCollectionParameters struct {
 	AutoscaleSettings *MongoCollectionAutoscaleSettingsParameters `json:"autoscaleSettings,omitempty" tf:"autoscale_settings,omitempty"`
 
 	// The name of the Cosmos DB Mongo Database in which the Cosmos DB Mongo Collection is created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/cosmosdb/v1beta1.MongoDatabase
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cosmosdb/v1beta1.MongoDatabase
 	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
@@ -164,7 +164,7 @@ type MongoCollectionParameters struct {
 	Index []MongoCollectionIndexParameters `json:"index,omitempty" tf:"index,omitempty"`
 
 	// The name of the resource group in which the Cosmos DB Mongo Collection is created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

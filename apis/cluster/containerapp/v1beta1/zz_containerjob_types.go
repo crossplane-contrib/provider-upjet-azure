@@ -64,8 +64,8 @@ type ContainerEnvParameters struct {
 type ContainerJobIdentityInitParameters struct {
 
 	// A list of Managed Identity IDs to assign to the Container App Job.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
@@ -100,8 +100,8 @@ type ContainerJobIdentityObservation struct {
 type ContainerJobIdentityParameters struct {
 
 	// A list of Managed Identity IDs to assign to the Container App Job.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
@@ -122,8 +122,8 @@ type ContainerJobIdentityParameters struct {
 type ContainerJobInitParameters struct {
 
 	// The ID of the Container App Environment in which to create the Container App Job. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/containerapp/v1beta1.Environment
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/containerapp/v1beta1.Environment
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	ContainerAppEnvironmentID *string `json:"containerAppEnvironmentId,omitempty" tf:"container_app_environment_id,omitempty"`
 
 	// Reference to a Environment in containerapp to populate containerAppEnvironmentId.
@@ -230,8 +230,8 @@ type ContainerJobObservation struct {
 type ContainerJobParameters struct {
 
 	// The ID of the Container App Environment in which to create the Container App Job. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/containerapp/v1beta1.Environment
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/containerapp/v1beta1.Environment
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ContainerAppEnvironmentID *string `json:"containerAppEnvironmentId,omitempty" tf:"container_app_environment_id,omitempty"`
 
@@ -272,7 +272,7 @@ type ContainerJobParameters struct {
 	ReplicaTimeoutInSeconds *float64 `json:"replicaTimeoutInSeconds,omitempty" tf:"replica_timeout_in_seconds,omitempty"`
 
 	// The name of the resource group in which to create the Container App Job. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -375,8 +375,8 @@ type ContainerJobSecretInitParameters struct {
 
 	// The ID of a Key Vault secret. This can be a versioned or version-less ID.
 	// The Key Vault Secret ID. Could be either one of `id` or `versionless_id`.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/keyvault/v1beta1.Secret
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/keyvault/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	KeyVaultSecretID *string `json:"keyVaultSecretId,omitempty" tf:"key_vault_secret_id,omitempty"`
 
 	// Reference to a Secret in keyvault to populate keyVaultSecretId.
@@ -420,8 +420,8 @@ type ContainerJobSecretParameters struct {
 
 	// The ID of a Key Vault secret. This can be a versioned or version-less ID.
 	// The Key Vault Secret ID. Could be either one of `id` or `versionless_id`.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/keyvault/v1beta1.Secret
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/keyvault/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KeyVaultSecretID *string `json:"keyVaultSecretId,omitempty" tf:"key_vault_secret_id,omitempty"`
 

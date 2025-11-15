@@ -29,7 +29,7 @@ type DataSetSQLServerTableInitParameters struct {
 	Folder *string `json:"folder,omitempty" tf:"folder,omitempty"`
 
 	// The Data Factory Linked Service name in which to associate the Dataset with.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/datafactory/v1beta2.LinkedServiceSQLServer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/datafactory/v1beta2.LinkedServiceSQLServer
 	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
 
 	// Reference to a LinkedServiceSQLServer in datafactory to populate linkedServiceName.
@@ -98,7 +98,7 @@ type DataSetSQLServerTableParameters struct {
 	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/datafactory/v1beta2.Factory
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/datafactory/v1beta2.Factory
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DataFactoryID *string `json:"dataFactoryId,omitempty" tf:"data_factory_id,omitempty"`
@@ -120,7 +120,7 @@ type DataSetSQLServerTableParameters struct {
 	Folder *string `json:"folder,omitempty" tf:"folder,omitempty"`
 
 	// The Data Factory Linked Service name in which to associate the Dataset with.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/datafactory/v1beta2.LinkedServiceSQLServer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/datafactory/v1beta2.LinkedServiceSQLServer
 	// +kubebuilder:validation:Optional
 	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
 

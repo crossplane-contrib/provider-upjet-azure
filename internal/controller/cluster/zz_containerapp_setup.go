@@ -9,14 +9,14 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	containerapp "github.com/upbound/provider-azure/internal/controller/cluster/containerapp/containerapp"
-	containerjob "github.com/upbound/provider-azure/internal/controller/cluster/containerapp/containerjob"
-	customdomain "github.com/upbound/provider-azure/internal/controller/cluster/containerapp/customdomain"
-	environment "github.com/upbound/provider-azure/internal/controller/cluster/containerapp/environment"
-	environmentcertificate "github.com/upbound/provider-azure/internal/controller/cluster/containerapp/environmentcertificate"
-	environmentcustomdomain "github.com/upbound/provider-azure/internal/controller/cluster/containerapp/environmentcustomdomain"
-	environmentdaprcomponent "github.com/upbound/provider-azure/internal/controller/cluster/containerapp/environmentdaprcomponent"
-	environmentstorage "github.com/upbound/provider-azure/internal/controller/cluster/containerapp/environmentstorage"
+	containerapp "github.com/upbound/provider-azure/v2/internal/controller/cluster/containerapp/containerapp"
+	containerjob "github.com/upbound/provider-azure/v2/internal/controller/cluster/containerapp/containerjob"
+	customdomain "github.com/upbound/provider-azure/v2/internal/controller/cluster/containerapp/customdomain"
+	environment "github.com/upbound/provider-azure/v2/internal/controller/cluster/containerapp/environment"
+	environmentcertificate "github.com/upbound/provider-azure/v2/internal/controller/cluster/containerapp/environmentcertificate"
+	environmentcustomdomain "github.com/upbound/provider-azure/v2/internal/controller/cluster/containerapp/environmentcustomdomain"
+	environmentdaprcomponent "github.com/upbound/provider-azure/v2/internal/controller/cluster/containerapp/environmentdaprcomponent"
+	environmentstorage "github.com/upbound/provider-azure/v2/internal/controller/cluster/containerapp/environmentstorage"
 )
 
 // Setup_containerapp creates all controllers with the supplied logger and adds them to

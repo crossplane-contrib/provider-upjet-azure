@@ -59,7 +59,7 @@ type SiteRecoveryProtectionContainerMappingInitParameters struct {
 	AutomaticUpdate *AutomaticUpdateInitParameters `json:"automaticUpdate,omitempty" tf:"automatic_update,omitempty"`
 
 	// Id of the policy to use for this mapping. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/recoveryservices/v1beta1.SiteRecoveryReplicationPolicy
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/recoveryservices/v1beta1.SiteRecoveryReplicationPolicy
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	RecoveryReplicationPolicyID *string `json:"recoveryReplicationPolicyId,omitempty" tf:"recovery_replication_policy_id,omitempty"`
 
@@ -72,7 +72,7 @@ type SiteRecoveryProtectionContainerMappingInitParameters struct {
 	RecoveryReplicationPolicyIDSelector *v1.NamespacedSelector `json:"recoveryReplicationPolicyIdSelector,omitempty" tf:"-"`
 
 	// Id of target protection container to map to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/recoveryservices/v1beta1.SiteRecoveryProtectionContainer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/recoveryservices/v1beta1.SiteRecoveryProtectionContainer
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	RecoveryTargetProtectionContainerID *string `json:"recoveryTargetProtectionContainerId,omitempty" tf:"recovery_target_protection_container_id,omitempty"`
 
@@ -119,7 +119,7 @@ type SiteRecoveryProtectionContainerMappingParameters struct {
 	AutomaticUpdate *AutomaticUpdateParameters `json:"automaticUpdate,omitempty" tf:"automatic_update,omitempty"`
 
 	// Name of fabric that should contains the protection container to map. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/recoveryservices/v1beta1.SiteRecoveryFabric
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/recoveryservices/v1beta1.SiteRecoveryFabric
 	// +kubebuilder:validation:Optional
 	RecoveryFabricName *string `json:"recoveryFabricName,omitempty" tf:"recovery_fabric_name,omitempty"`
 
@@ -132,7 +132,7 @@ type SiteRecoveryProtectionContainerMappingParameters struct {
 	RecoveryFabricNameSelector *v1.NamespacedSelector `json:"recoveryFabricNameSelector,omitempty" tf:"-"`
 
 	// Id of the policy to use for this mapping. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/recoveryservices/v1beta1.SiteRecoveryReplicationPolicy
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/recoveryservices/v1beta1.SiteRecoveryReplicationPolicy
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RecoveryReplicationPolicyID *string `json:"recoveryReplicationPolicyId,omitempty" tf:"recovery_replication_policy_id,omitempty"`
@@ -146,7 +146,7 @@ type SiteRecoveryProtectionContainerMappingParameters struct {
 	RecoveryReplicationPolicyIDSelector *v1.NamespacedSelector `json:"recoveryReplicationPolicyIdSelector,omitempty" tf:"-"`
 
 	// Name of the source protection container to map. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/recoveryservices/v1beta1.SiteRecoveryProtectionContainer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/recoveryservices/v1beta1.SiteRecoveryProtectionContainer
 	// +kubebuilder:validation:Optional
 	RecoverySourceProtectionContainerName *string `json:"recoverySourceProtectionContainerName,omitempty" tf:"recovery_source_protection_container_name,omitempty"`
 
@@ -159,7 +159,7 @@ type SiteRecoveryProtectionContainerMappingParameters struct {
 	RecoverySourceProtectionContainerNameSelector *v1.NamespacedSelector `json:"recoverySourceProtectionContainerNameSelector,omitempty" tf:"-"`
 
 	// Id of target protection container to map to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/recoveryservices/v1beta1.SiteRecoveryProtectionContainer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/recoveryservices/v1beta1.SiteRecoveryProtectionContainer
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RecoveryTargetProtectionContainerID *string `json:"recoveryTargetProtectionContainerId,omitempty" tf:"recovery_target_protection_container_id,omitempty"`
@@ -173,7 +173,7 @@ type SiteRecoveryProtectionContainerMappingParameters struct {
 	RecoveryTargetProtectionContainerIDSelector *v1.NamespacedSelector `json:"recoveryTargetProtectionContainerIdSelector,omitempty" tf:"-"`
 
 	// The name of the vault that should be updated. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/recoveryservices/v1beta1.Vault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/recoveryservices/v1beta1.Vault
 	// +kubebuilder:validation:Optional
 	RecoveryVaultName *string `json:"recoveryVaultName,omitempty" tf:"recovery_vault_name,omitempty"`
 
@@ -186,7 +186,7 @@ type SiteRecoveryProtectionContainerMappingParameters struct {
 	RecoveryVaultNameSelector *v1.NamespacedSelector `json:"recoveryVaultNameSelector,omitempty" tf:"-"`
 
 	// Name of the resource group where the vault that should be updated is located. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

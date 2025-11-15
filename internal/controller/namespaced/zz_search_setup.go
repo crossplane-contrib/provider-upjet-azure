@@ -9,8 +9,8 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	service "github.com/upbound/provider-azure/internal/controller/namespaced/search/service"
-	sharedprivatelinkservice "github.com/upbound/provider-azure/internal/controller/namespaced/search/sharedprivatelinkservice"
+	service "github.com/upbound/provider-azure/v2/internal/controller/namespaced/search/service"
+	sharedprivatelinkservice "github.com/upbound/provider-azure/v2/internal/controller/namespaced/search/sharedprivatelinkservice"
 )
 
 // Setup_search creates all controllers with the supplied logger and adds them to

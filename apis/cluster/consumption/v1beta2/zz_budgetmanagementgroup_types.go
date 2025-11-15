@@ -25,7 +25,7 @@ type BudgetManagementGroupInitParameters struct {
 	Filter *FilterInitParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
 	// The ID of the Management Group. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/management/v1beta1.ManagementGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/management/v1beta1.ManagementGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ManagementGroupID *string `json:"managementGroupId,omitempty" tf:"management_group_id,omitempty"`
 
@@ -95,7 +95,7 @@ type BudgetManagementGroupParameters struct {
 	Filter *FilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
 	// The ID of the Management Group. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/management/v1beta1.ManagementGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/management/v1beta1.ManagementGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ManagementGroupID *string `json:"managementGroupId,omitempty" tf:"management_group_id,omitempty"`
@@ -134,7 +134,7 @@ type DimensionInitParameters struct {
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// Specifies a list of values for the tag.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 
 	// References to ResourceGroup in azure to populate values.
@@ -169,7 +169,7 @@ type DimensionParameters struct {
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// Specifies a list of values for the tag.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 

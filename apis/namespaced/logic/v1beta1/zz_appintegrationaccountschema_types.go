@@ -58,7 +58,7 @@ type AppIntegrationAccountSchemaParameters struct {
 	FileName *string `json:"fileName,omitempty" tf:"file_name,omitempty"`
 
 	// The name of the Logic App Integration Account. Changing this forces a new Logic App Integration Account Schema to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/logic/v1beta1.AppIntegrationAccount
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/logic/v1beta1.AppIntegrationAccount
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	IntegrationAccountName *string `json:"integrationAccountName,omitempty" tf:"integration_account_name,omitempty"`
@@ -76,7 +76,7 @@ type AppIntegrationAccountSchemaParameters struct {
 	Metadata *string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// The name of the Resource Group where the Logic App Integration Account Schema should exist. Changing this forces a new Logic App Integration Account Schema to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

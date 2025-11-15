@@ -38,7 +38,7 @@ type ProductGroupObservation struct {
 type ProductGroupParameters struct {
 
 	// The name of the API Management Service. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/apimanagement/v1beta1.Management
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta1.Management
 	// +kubebuilder:validation:Optional
 	APIManagementName *string `json:"apiManagementName,omitempty" tf:"api_management_name,omitempty"`
 
@@ -51,7 +51,7 @@ type ProductGroupParameters struct {
 	APIManagementNameSelector *v1.NamespacedSelector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// The Name of the API Management Group within the API Management Service. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/apimanagement/v1beta1.Group
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta1.Group
 	// +kubebuilder:validation:Optional
 	GroupName *string `json:"groupName,omitempty" tf:"group_name,omitempty"`
 
@@ -64,7 +64,7 @@ type ProductGroupParameters struct {
 	GroupNameSelector *v1.NamespacedSelector `json:"groupNameSelector,omitempty" tf:"-"`
 
 	// The ID of the API Management Product within the API Management Service. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/apimanagement/v1beta1.Product
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta1.Product
 	// +kubebuilder:validation:Optional
 	ProductID *string `json:"productId,omitempty" tf:"product_id,omitempty"`
 
@@ -77,7 +77,7 @@ type ProductGroupParameters struct {
 	ProductIDSelector *v1.NamespacedSelector `json:"productIdSelector,omitempty" tf:"-"`
 
 	// The name of the Resource Group in which the API Management Service exists. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

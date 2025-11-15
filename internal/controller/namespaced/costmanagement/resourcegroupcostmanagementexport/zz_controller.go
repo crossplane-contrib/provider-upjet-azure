@@ -21,8 +21,8 @@ import (
 	"github.com/pkg/errors"
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	v1beta1 "github.com/upbound/provider-azure/apis/namespaced/costmanagement/v1beta1"
-	features "github.com/upbound/provider-azure/internal/features"
+	v1beta1 "github.com/upbound/provider-azure/v2/apis/namespaced/costmanagement/v1beta1"
+	features "github.com/upbound/provider-azure/v2/internal/features"
 )
 
 // SetupGated adds a controller that reconciles ResourceGroupCostManagementExport managed resources.

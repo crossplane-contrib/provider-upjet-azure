@@ -38,7 +38,7 @@ type RedisCacheAccessPolicyParameters struct {
 	Permissions *string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
 	// The ID of the Redis Cache. Changing this forces a new Redis Cache Access Policy to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/cache/v1beta2.RedisCache
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/cache/v1beta2.RedisCache
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RedisCacheID *string `json:"redisCacheId,omitempty" tf:"redis_cache_id,omitempty"`

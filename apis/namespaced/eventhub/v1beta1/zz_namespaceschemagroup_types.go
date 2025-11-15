@@ -41,7 +41,7 @@ type NamespaceSchemaGroupObservation struct {
 type NamespaceSchemaGroupParameters struct {
 
 	// Specifies the ID of the EventHub Namespace. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/eventhub/v1beta1.EventHubNamespace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/eventhub/v1beta1.EventHubNamespace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`

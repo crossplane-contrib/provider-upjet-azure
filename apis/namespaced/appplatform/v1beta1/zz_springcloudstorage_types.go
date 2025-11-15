@@ -17,7 +17,7 @@ import (
 type SpringCloudStorageInitParameters struct {
 
 	// The access key of the Azure Storage Account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("primary_access_key",true)
 	StorageAccountKey *string `json:"storageAccountKey,omitempty" tf:"storage_account_key,omitempty"`
 
@@ -30,7 +30,7 @@ type SpringCloudStorageInitParameters struct {
 	StorageAccountKeySelector *v1.NamespacedSelector `json:"storageAccountKeySelector,omitempty" tf:"-"`
 
 	// The account name of the Azure Storage Account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 
 	// Reference to a Account in storage to populate storageAccountName.
@@ -60,7 +60,7 @@ type SpringCloudStorageObservation struct {
 type SpringCloudStorageParameters struct {
 
 	// The ID of the Spring Cloud Service where the Spring Cloud Storage should exist. Changing this forces a new Spring Cloud Storage to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/appplatform/v1beta1.SpringCloudService
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/appplatform/v1beta1.SpringCloudService
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SpringCloudServiceID *string `json:"springCloudServiceId,omitempty" tf:"spring_cloud_service_id,omitempty"`
@@ -74,7 +74,7 @@ type SpringCloudStorageParameters struct {
 	SpringCloudServiceIDSelector *v1.NamespacedSelector `json:"springCloudServiceIdSelector,omitempty" tf:"-"`
 
 	// The access key of the Azure Storage Account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("primary_access_key",true)
 	// +kubebuilder:validation:Optional
 	StorageAccountKey *string `json:"storageAccountKey,omitempty" tf:"storage_account_key,omitempty"`
@@ -88,7 +88,7 @@ type SpringCloudStorageParameters struct {
 	StorageAccountKeySelector *v1.NamespacedSelector `json:"storageAccountKeySelector,omitempty" tf:"-"`
 
 	// The account name of the Azure Storage Account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
 	// +kubebuilder:validation:Optional
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 

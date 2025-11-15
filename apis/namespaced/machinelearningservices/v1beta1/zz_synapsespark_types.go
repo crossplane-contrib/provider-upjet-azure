@@ -67,7 +67,7 @@ type SynapseSparkInitParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The ID of the linked Synapse Spark Pool. Changing this forces a new Machine Learning Synapse Spark to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/synapse/v1beta1.SparkPool
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/synapse/v1beta1.SparkPool
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SynapseSparkPoolID *string `json:"synapseSparkPoolId,omitempty" tf:"synapse_spark_pool_id,omitempty"`
 
@@ -131,7 +131,7 @@ type SynapseSparkParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The ID of the Machine Learning Workspace. Changing this forces a new Machine Learning Synapse Spark to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/machinelearningservices/v1beta1.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/machinelearningservices/v1beta1.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	MachineLearningWorkspaceID *string `json:"machineLearningWorkspaceId,omitempty" tf:"machine_learning_workspace_id,omitempty"`
@@ -145,7 +145,7 @@ type SynapseSparkParameters struct {
 	MachineLearningWorkspaceIDSelector *v1.NamespacedSelector `json:"machineLearningWorkspaceIdSelector,omitempty" tf:"-"`
 
 	// The ID of the linked Synapse Spark Pool. Changing this forces a new Machine Learning Synapse Spark to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/synapse/v1beta1.SparkPool
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/synapse/v1beta1.SparkPool
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SynapseSparkPoolID *string `json:"synapseSparkPoolId,omitempty" tf:"synapse_spark_pool_id,omitempty"`

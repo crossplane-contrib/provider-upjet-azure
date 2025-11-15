@@ -78,7 +78,7 @@ type AppActionHTTPParameters struct {
 	Headers map[string]*string `json:"headers,omitempty" tf:"headers,omitempty"`
 
 	// Specifies the ID of the Logic App Workflow. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/logic/v1beta1.AppWorkflow
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/logic/v1beta1.AppWorkflow
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LogicAppID *string `json:"logicAppId,omitempty" tf:"logic_app_id,omitempty"`

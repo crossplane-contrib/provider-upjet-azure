@@ -466,8 +466,8 @@ type MonitorAlertProcessingRuleSuppressionInitParameters struct {
 	Schedule *MonitorAlertProcessingRuleSuppressionScheduleInitParameters `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
 	// A list of resource IDs which will be the target of Alert Processing Rule.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	Scopes []*string `json:"scopes,omitempty" tf:"scopes,omitempty"`
 
 	// References to ResourceGroup in azure to populate scopes.
@@ -526,7 +526,7 @@ type MonitorAlertProcessingRuleSuppressionParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The name of the Resource Group where the Alert Processing Rule should exist. Changing this forces a new Alert Processing Rule to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -543,8 +543,8 @@ type MonitorAlertProcessingRuleSuppressionParameters struct {
 	Schedule *MonitorAlertProcessingRuleSuppressionScheduleParameters `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
 	// A list of resource IDs which will be the target of Alert Processing Rule.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Scopes []*string `json:"scopes,omitempty" tf:"scopes,omitempty"`
 

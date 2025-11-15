@@ -2155,8 +2155,8 @@ type WindowsWebAppSlotInitParameters struct {
 	VirtualNetworkBackupRestoreEnabled *bool `json:"virtualNetworkBackupRestoreEnabled,omitempty" tf:"virtual_network_backup_restore_enabled,omitempty"`
 
 	// The subnet id which will be used by this Web App Slot for regional virtual network integration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
 	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
@@ -2485,7 +2485,7 @@ type WindowsWebAppSlotObservation struct {
 type WindowsWebAppSlotParameters struct {
 
 	// The ID of the Windows Web App this Deployment Slot will be part of. Changing this forces a new Windows Web App to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/web/v1beta1.WindowsWebApp
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/web/v1beta1.WindowsWebApp
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AppServiceID *string `json:"appServiceId,omitempty" tf:"app_service_id,omitempty"`
@@ -2586,8 +2586,8 @@ type WindowsWebAppSlotParameters struct {
 	VirtualNetworkBackupRestoreEnabled *bool `json:"virtualNetworkBackupRestoreEnabled,omitempty" tf:"virtual_network_backup_restore_enabled,omitempty"`
 
 	// The subnet id which will be used by this Web App Slot for regional virtual network integration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
@@ -3010,8 +3010,8 @@ type WindowsWebAppSlotSiteConfigIPRestrictionInitParameters struct {
 
 	// The subnet id which will be used by this Web App Slot for regional virtual network integration.
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
 	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
@@ -3095,8 +3095,8 @@ type WindowsWebAppSlotSiteConfigIPRestrictionParameters struct {
 
 	// The subnet id which will be used by this Web App Slot for regional virtual network integration.
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
@@ -3541,8 +3541,8 @@ type WindowsWebAppSlotSiteConfigScmIPRestrictionInitParameters struct {
 
 	// The subnet id which will be used by this Web App Slot for regional virtual network integration.
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
 	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
@@ -3626,8 +3626,8 @@ type WindowsWebAppSlotSiteConfigScmIPRestrictionParameters struct {
 
 	// The subnet id which will be used by this Web App Slot for regional virtual network integration.
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 

@@ -194,7 +194,7 @@ type HealthcareDICOMServiceParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the ID of the Healthcare Workspace where the Healthcare DICOM Service should exist. Changing this forces a new Healthcare DICOM Service to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/healthcareapis/v1beta1.HealthcareWorkspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/healthcareapis/v1beta1.HealthcareWorkspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`

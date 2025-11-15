@@ -27,7 +27,7 @@ type WebhookInitParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The Name of Container registry this Webhook belongs to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/containerregistry/v1beta2.Registry
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/containerregistry/v1beta2.Registry
 	RegistryName *string `json:"registryName,omitempty" tf:"registry_name,omitempty"`
 
 	// Reference to a Registry in containerregistry to populate registryName.
@@ -105,7 +105,7 @@ type WebhookParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The Name of Container registry this Webhook belongs to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/containerregistry/v1beta2.Registry
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/containerregistry/v1beta2.Registry
 	// +kubebuilder:validation:Optional
 	RegistryName *string `json:"registryName,omitempty" tf:"registry_name,omitempty"`
 
@@ -118,7 +118,7 @@ type WebhookParameters struct {
 	RegistryNameSelector *v1.Selector `json:"registryNameSelector,omitempty" tf:"-"`
 
 	// The name of the resource group in which to create the Container Registry Webhook. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

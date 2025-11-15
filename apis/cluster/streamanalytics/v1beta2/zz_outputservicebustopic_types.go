@@ -25,7 +25,7 @@ type OutputServiceBusTopicInitParameters struct {
 	PropertyColumns []*string `json:"propertyColumns,omitempty" tf:"property_columns,omitempty"`
 
 	// The name of the Resource Group where the Stream Analytics Job exists. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
@@ -40,7 +40,7 @@ type OutputServiceBusTopicInitParameters struct {
 	Serialization *OutputServiceBusTopicSerializationInitParameters `json:"serialization,omitempty" tf:"serialization,omitempty"`
 
 	// The namespace that is associated with the desired Event Hub, Service Bus Topic, Service Bus Topic, etc.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/servicebus/v1beta2.ServiceBusNamespace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/servicebus/v1beta2.ServiceBusNamespace
 	ServiceBusNamespace *string `json:"servicebusNamespace,omitempty" tf:"servicebus_namespace,omitempty"`
 
 	// Reference to a ServiceBusNamespace in servicebus to populate servicebusNamespace.
@@ -58,7 +58,7 @@ type OutputServiceBusTopicInitParameters struct {
 	SharedAccessPolicyName *string `json:"sharedAccessPolicyName,omitempty" tf:"shared_access_policy_name,omitempty"`
 
 	// The name of the Stream Analytics Job. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/streamanalytics/v1beta2.Job
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/streamanalytics/v1beta2.Job
 	StreamAnalyticsJobName *string `json:"streamAnalyticsJobName,omitempty" tf:"stream_analytics_job_name,omitempty"`
 
 	// Reference to a Job in streamanalytics to populate streamAnalyticsJobName.
@@ -74,7 +74,7 @@ type OutputServiceBusTopicInitParameters struct {
 	SystemPropertyColumns map[string]*string `json:"systemPropertyColumns,omitempty" tf:"system_property_columns,omitempty"`
 
 	// The name of the Service Bus Topic.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/servicebus/v1beta1.Topic
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/servicebus/v1beta1.Topic
 	TopicName *string `json:"topicName,omitempty" tf:"topic_name,omitempty"`
 
 	// Reference to a Topic in servicebus to populate topicName.
@@ -138,7 +138,7 @@ type OutputServiceBusTopicParameters struct {
 	PropertyColumns []*string `json:"propertyColumns,omitempty" tf:"property_columns,omitempty"`
 
 	// The name of the Resource Group where the Stream Analytics Job exists. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -155,7 +155,7 @@ type OutputServiceBusTopicParameters struct {
 	Serialization *OutputServiceBusTopicSerializationParameters `json:"serialization,omitempty" tf:"serialization,omitempty"`
 
 	// The namespace that is associated with the desired Event Hub, Service Bus Topic, Service Bus Topic, etc.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/servicebus/v1beta2.ServiceBusNamespace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/servicebus/v1beta2.ServiceBusNamespace
 	// +kubebuilder:validation:Optional
 	ServiceBusNamespace *string `json:"servicebusNamespace,omitempty" tf:"servicebus_namespace,omitempty"`
 
@@ -176,7 +176,7 @@ type OutputServiceBusTopicParameters struct {
 	SharedAccessPolicyName *string `json:"sharedAccessPolicyName,omitempty" tf:"shared_access_policy_name,omitempty"`
 
 	// The name of the Stream Analytics Job. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/streamanalytics/v1beta2.Job
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/streamanalytics/v1beta2.Job
 	// +kubebuilder:validation:Optional
 	StreamAnalyticsJobName *string `json:"streamAnalyticsJobName,omitempty" tf:"stream_analytics_job_name,omitempty"`
 
@@ -194,7 +194,7 @@ type OutputServiceBusTopicParameters struct {
 	SystemPropertyColumns map[string]*string `json:"systemPropertyColumns,omitempty" tf:"system_property_columns,omitempty"`
 
 	// The name of the Service Bus Topic.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/servicebus/v1beta1.Topic
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/servicebus/v1beta1.Topic
 	// +kubebuilder:validation:Optional
 	TopicName *string `json:"topicName,omitempty" tf:"topic_name,omitempty"`
 

@@ -9,8 +9,8 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	federatedidentitycredential "github.com/upbound/provider-azure/internal/controller/cluster/managedidentity/federatedidentitycredential"
-	userassignedidentity "github.com/upbound/provider-azure/internal/controller/cluster/managedidentity/userassignedidentity"
+	federatedidentitycredential "github.com/upbound/provider-azure/v2/internal/controller/cluster/managedidentity/federatedidentitycredential"
+	userassignedidentity "github.com/upbound/provider-azure/v2/internal/controller/cluster/managedidentity/userassignedidentity"
 )
 
 // Setup_managedidentity creates all controllers with the supplied logger and adds them to

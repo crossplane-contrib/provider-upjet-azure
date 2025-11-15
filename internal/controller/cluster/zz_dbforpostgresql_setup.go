@@ -9,19 +9,19 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	activedirectoryadministrator "github.com/upbound/provider-azure/internal/controller/cluster/dbforpostgresql/activedirectoryadministrator"
-	configuration "github.com/upbound/provider-azure/internal/controller/cluster/dbforpostgresql/configuration"
-	database "github.com/upbound/provider-azure/internal/controller/cluster/dbforpostgresql/database"
-	firewallrule "github.com/upbound/provider-azure/internal/controller/cluster/dbforpostgresql/firewallrule"
-	flexibleserver "github.com/upbound/provider-azure/internal/controller/cluster/dbforpostgresql/flexibleserver"
-	flexibleserveractivedirectoryadministrator "github.com/upbound/provider-azure/internal/controller/cluster/dbforpostgresql/flexibleserveractivedirectoryadministrator"
-	flexibleserverconfiguration "github.com/upbound/provider-azure/internal/controller/cluster/dbforpostgresql/flexibleserverconfiguration"
-	flexibleserverdatabase "github.com/upbound/provider-azure/internal/controller/cluster/dbforpostgresql/flexibleserverdatabase"
-	flexibleserverfirewallrule "github.com/upbound/provider-azure/internal/controller/cluster/dbforpostgresql/flexibleserverfirewallrule"
-	flexibleservervirtualendpoint "github.com/upbound/provider-azure/internal/controller/cluster/dbforpostgresql/flexibleservervirtualendpoint"
-	server "github.com/upbound/provider-azure/internal/controller/cluster/dbforpostgresql/server"
-	serverkey "github.com/upbound/provider-azure/internal/controller/cluster/dbforpostgresql/serverkey"
-	virtualnetworkrule "github.com/upbound/provider-azure/internal/controller/cluster/dbforpostgresql/virtualnetworkrule"
+	activedirectoryadministrator "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbforpostgresql/activedirectoryadministrator"
+	configuration "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbforpostgresql/configuration"
+	database "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbforpostgresql/database"
+	firewallrule "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbforpostgresql/firewallrule"
+	flexibleserver "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbforpostgresql/flexibleserver"
+	flexibleserveractivedirectoryadministrator "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbforpostgresql/flexibleserveractivedirectoryadministrator"
+	flexibleserverconfiguration "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbforpostgresql/flexibleserverconfiguration"
+	flexibleserverdatabase "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbforpostgresql/flexibleserverdatabase"
+	flexibleserverfirewallrule "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbforpostgresql/flexibleserverfirewallrule"
+	flexibleservervirtualendpoint "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbforpostgresql/flexibleservervirtualendpoint"
+	server "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbforpostgresql/server"
+	serverkey "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbforpostgresql/serverkey"
+	virtualnetworkrule "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbforpostgresql/virtualnetworkrule"
 )
 
 // Setup_dbforpostgresql creates all controllers with the supplied logger and adds them to

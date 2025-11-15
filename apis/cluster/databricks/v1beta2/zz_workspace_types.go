@@ -25,7 +25,7 @@ type CustomParametersInitParameters struct {
 	NoPublicIP *bool `json:"noPublicIp,omitempty" tf:"no_public_ip,omitempty"`
 
 	// The name of the Private Subnet within the Virtual Network. Required if virtual_network_id is set. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
 	PrivateSubnetName *string `json:"privateSubnetName,omitempty" tf:"private_subnet_name,omitempty"`
 
 	// Reference to a Subnet in network to populate privateSubnetName.
@@ -43,7 +43,7 @@ type CustomParametersInitParameters struct {
 	PublicIPName *string `json:"publicIpName,omitempty" tf:"public_ip_name,omitempty"`
 
 	// The name of the Public Subnet within the Virtual Network. Required if virtual_network_id is set. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
 	PublicSubnetName *string `json:"publicSubnetName,omitempty" tf:"public_subnet_name,omitempty"`
 
 	// Reference to a Subnet in network to populate publicSubnetName.
@@ -124,7 +124,7 @@ type CustomParametersParameters struct {
 	NoPublicIP *bool `json:"noPublicIp,omitempty" tf:"no_public_ip,omitempty"`
 
 	// The name of the Private Subnet within the Virtual Network. Required if virtual_network_id is set. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
 	// +kubebuilder:validation:Optional
 	PrivateSubnetName *string `json:"privateSubnetName,omitempty" tf:"private_subnet_name,omitempty"`
 
@@ -145,7 +145,7 @@ type CustomParametersParameters struct {
 	PublicIPName *string `json:"publicIpName,omitempty" tf:"public_ip_name,omitempty"`
 
 	// The name of the Public Subnet within the Virtual Network. Required if virtual_network_id is set. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
 	// +kubebuilder:validation:Optional
 	PublicSubnetName *string `json:"publicSubnetName,omitempty" tf:"public_subnet_name,omitempty"`
 
@@ -302,7 +302,7 @@ type WorkspaceInitParameters struct {
 	ManagedDiskCmkRotationToLatestVersionEnabled *bool `json:"managedDiskCmkRotationToLatestVersionEnabled,omitempty" tf:"managed_disk_cmk_rotation_to_latest_version_enabled,omitempty"`
 
 	// The name of the resource group where Azure should place the managed Databricks resources. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	ManagedResourceGroupName *string `json:"managedResourceGroupName,omitempty" tf:"managed_resource_group_name,omitempty"`
 
 	// Reference to a ResourceGroup in azure to populate managedResourceGroupName.
@@ -462,7 +462,7 @@ type WorkspaceParameters struct {
 	ManagedDiskCmkRotationToLatestVersionEnabled *bool `json:"managedDiskCmkRotationToLatestVersionEnabled,omitempty" tf:"managed_disk_cmk_rotation_to_latest_version_enabled,omitempty"`
 
 	// The name of the resource group where Azure should place the managed Databricks resources. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ManagedResourceGroupName *string `json:"managedResourceGroupName,omitempty" tf:"managed_resource_group_name,omitempty"`
 
@@ -491,7 +491,7 @@ type WorkspaceParameters struct {
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The name of the Resource Group in which the Databricks Workspace should exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

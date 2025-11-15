@@ -126,8 +126,8 @@ type MSSQLManagedInstanceInitParameters struct {
 	Collation *string `json:"collation,omitempty" tf:"collation,omitempty"`
 
 	// The ID of the SQL Managed Instance which will share the DNS zone. This is a prerequisite for creating an azurerm_sql_managed_instance_failover_group. Setting this after creation forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/sql/v1beta1.MSSQLManagedInstance
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/sql/v1beta1.MSSQLManagedInstance
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	DNSZonePartnerID *string `json:"dnsZonePartnerId,omitempty" tf:"dns_zone_partner_id,omitempty"`
 
 	// Reference to a MSSQLManagedInstance in sql to populate dnsZonePartnerId.
@@ -178,7 +178,7 @@ type MSSQLManagedInstanceInitParameters struct {
 	StorageSizeInGb *float64 `json:"storageSizeInGb,omitempty" tf:"storage_size_in_gb,omitempty"`
 
 	// The subnet resource id that the SQL Managed Instance will be associated with.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -305,8 +305,8 @@ type MSSQLManagedInstanceParameters struct {
 	Collation *string `json:"collation,omitempty" tf:"collation,omitempty"`
 
 	// The ID of the SQL Managed Instance which will share the DNS zone. This is a prerequisite for creating an azurerm_sql_managed_instance_failover_group. Setting this after creation forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/sql/v1beta1.MSSQLManagedInstance
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/sql/v1beta1.MSSQLManagedInstance
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DNSZonePartnerID *string `json:"dnsZonePartnerId,omitempty" tf:"dns_zone_partner_id,omitempty"`
 
@@ -355,7 +355,7 @@ type MSSQLManagedInstanceParameters struct {
 	PublicDataEndpointEnabled *bool `json:"publicDataEndpointEnabled,omitempty" tf:"public_data_endpoint_enabled,omitempty"`
 
 	// The name of the resource group in which to create the SQL Managed Instance. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -384,7 +384,7 @@ type MSSQLManagedInstanceParameters struct {
 	StorageSizeInGb *float64 `json:"storageSizeInGb,omitempty" tf:"storage_size_in_gb,omitempty"`
 
 	// The subnet resource id that the SQL Managed Instance will be associated with.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`

@@ -9,8 +9,8 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	account "github.com/upbound/provider-azure/internal/controller/cluster/maps/account"
-	creator "github.com/upbound/provider-azure/internal/controller/cluster/maps/creator"
+	account "github.com/upbound/provider-azure/v2/internal/controller/cluster/maps/account"
+	creator "github.com/upbound/provider-azure/v2/internal/controller/cluster/maps/creator"
 )
 
 // Setup_maps creates all controllers with the supplied logger and adds them to

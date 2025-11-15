@@ -9,10 +9,10 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	eventrelaynamespace "github.com/upbound/provider-azure/internal/controller/namespaced/relay/eventrelaynamespace"
-	hybridconnection "github.com/upbound/provider-azure/internal/controller/namespaced/relay/hybridconnection"
-	hybridconnectionauthorizationrule "github.com/upbound/provider-azure/internal/controller/namespaced/relay/hybridconnectionauthorizationrule"
-	namespaceauthorizationrule "github.com/upbound/provider-azure/internal/controller/namespaced/relay/namespaceauthorizationrule"
+	eventrelaynamespace "github.com/upbound/provider-azure/v2/internal/controller/namespaced/relay/eventrelaynamespace"
+	hybridconnection "github.com/upbound/provider-azure/v2/internal/controller/namespaced/relay/hybridconnection"
+	hybridconnectionauthorizationrule "github.com/upbound/provider-azure/v2/internal/controller/namespaced/relay/hybridconnectionauthorizationrule"
+	namespaceauthorizationrule "github.com/upbound/provider-azure/v2/internal/controller/namespaced/relay/namespaceauthorizationrule"
 )
 
 // Setup_relay creates all controllers with the supplied logger and adds them to

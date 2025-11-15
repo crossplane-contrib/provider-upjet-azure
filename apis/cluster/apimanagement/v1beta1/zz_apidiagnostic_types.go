@@ -16,7 +16,7 @@ import (
 type APIDiagnosticInitParameters struct {
 
 	// The ID (name) of the Diagnostics Logger.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/apimanagement/v1beta1.Logger
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/apimanagement/v1beta1.Logger
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	APIManagementLoggerID *string `json:"apiManagementLoggerId,omitempty" tf:"api_management_logger_id,omitempty"`
 
@@ -110,7 +110,7 @@ type APIDiagnosticObservation struct {
 type APIDiagnosticParameters struct {
 
 	// The ID (name) of the Diagnostics Logger.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/apimanagement/v1beta1.Logger
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/apimanagement/v1beta1.Logger
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	APIManagementLoggerID *string `json:"apiManagementLoggerId,omitempty" tf:"api_management_logger_id,omitempty"`
@@ -124,7 +124,7 @@ type APIDiagnosticParameters struct {
 	APIManagementLoggerIDSelector *v1.Selector `json:"apiManagementLoggerIdSelector,omitempty" tf:"-"`
 
 	// The name of the API Management Service instance. Changing this forces a new API Management Service API Diagnostics Logs to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/apimanagement/v1beta1.Management
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/apimanagement/v1beta1.Management
 	// +kubebuilder:validation:Optional
 	APIManagementName *string `json:"apiManagementName,omitempty" tf:"api_management_name,omitempty"`
 
@@ -137,7 +137,7 @@ type APIDiagnosticParameters struct {
 	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// The name of the API on which to configure the Diagnostics Logs. Changing this forces a new API Management Service API Diagnostics Logs to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/apimanagement/v1beta1.API
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/apimanagement/v1beta1.API
 	// +kubebuilder:validation:Optional
 	APIName *string `json:"apiName,omitempty" tf:"api_name,omitempty"`
 
@@ -182,7 +182,7 @@ type APIDiagnosticParameters struct {
 	OperationNameFormat *string `json:"operationNameFormat,omitempty" tf:"operation_name_format,omitempty"`
 
 	// The name of the Resource Group where the API Management Service API Diagnostics Logs should exist. Changing this forces a new API Management Service API Diagnostics Logs to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

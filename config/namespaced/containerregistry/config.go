@@ -7,8 +7,8 @@ package containerregistry
 import (
 	"github.com/crossplane/upjet/v2/pkg/config"
 
-	"github.com/upbound/provider-azure/apis/namespaced/rconfig"
-	"github.com/upbound/provider-azure/config/namespaced/common"
+	"github.com/upbound/provider-azure/v2/apis/namespaced/rconfig"
+	"github.com/upbound/provider-azure/v2/config/namespaced/common"
 )
 
 // Configure configures containerregistry group

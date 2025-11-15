@@ -63,7 +63,7 @@ type BackupPolicyPostgreSQLParameters struct {
 	DefaultRetentionDuration *string `json:"defaultRetentionDuration,omitempty" tf:"default_retention_duration,omitempty"`
 
 	// The name of the Resource Group where the Backup Policy PostgreSQL should exist. Changing this forces a new Backup Policy PostgreSQL to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -84,7 +84,7 @@ type BackupPolicyPostgreSQLParameters struct {
 	TimeZone *string `json:"timeZone,omitempty" tf:"time_zone,omitempty"`
 
 	// The name of the Backup Vault where the Backup Policy PostgreSQL should exist. Changing this forces a new Backup Policy PostgreSQL to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/dataprotection/v1beta2.BackupVault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/dataprotection/v1beta2.BackupVault
 	// +kubebuilder:validation:Optional
 	VaultName *string `json:"vaultName,omitempty" tf:"vault_name,omitempty"`
 

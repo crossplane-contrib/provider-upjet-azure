@@ -313,7 +313,7 @@ type PublishContentLinkParameters struct {
 type RunBookInitParameters struct {
 
 	// The name of the automation account in which the Runbook is created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/automation/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/automation/v1beta1.Account
 	AutomationAccountName *string `json:"automationAccountName,omitempty" tf:"automation_account_name,omitempty"`
 
 	// Reference to a Account in automation to populate automationAccountName.
@@ -354,7 +354,7 @@ type RunBookInitParameters struct {
 	PublishContentLink []PublishContentLinkInitParameters `json:"publishContentLink,omitempty" tf:"publish_content_link,omitempty"`
 
 	// The name of the resource group in which the Runbook is created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
@@ -424,7 +424,7 @@ type RunBookObservation struct {
 type RunBookParameters struct {
 
 	// The name of the automation account in which the Runbook is created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/automation/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/automation/v1beta1.Account
 	// +kubebuilder:validation:Optional
 	AutomationAccountName *string `json:"automationAccountName,omitempty" tf:"automation_account_name,omitempty"`
 
@@ -476,7 +476,7 @@ type RunBookParameters struct {
 	PublishContentLink []PublishContentLinkParameters `json:"publishContentLink,omitempty" tf:"publish_content_link,omitempty"`
 
 	// The name of the resource group in which the Runbook is created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

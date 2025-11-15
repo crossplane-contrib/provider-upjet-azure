@@ -30,7 +30,7 @@ type LinkedServiceKustoInitParameters struct {
 	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
 
 	// The Kusto Database Name.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/kusto/v1beta1.Database
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/kusto/v1beta1.Database
 	KustoDatabaseName *string `json:"kustoDatabaseName,omitempty" tf:"kusto_database_name,omitempty"`
 
 	// Reference to a Database in kusto to populate kustoDatabaseName.
@@ -42,7 +42,7 @@ type LinkedServiceKustoInitParameters struct {
 	KustoDatabaseNameSelector *v1.NamespacedSelector `json:"kustoDatabaseNameSelector,omitempty" tf:"-"`
 
 	// The URI of the Kusto Cluster endpoint.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/kusto/v1beta1.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/kusto/v1beta1.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("uri",true)
 	KustoEndpoint *string `json:"kustoEndpoint,omitempty" tf:"kusto_endpoint,omitempty"`
 
@@ -124,7 +124,7 @@ type LinkedServiceKustoParameters struct {
 	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/datafactory/v1beta1.Factory
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/datafactory/v1beta1.Factory
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DataFactoryID *string `json:"dataFactoryId,omitempty" tf:"data_factory_id,omitempty"`
@@ -146,7 +146,7 @@ type LinkedServiceKustoParameters struct {
 	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
 
 	// The Kusto Database Name.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/kusto/v1beta1.Database
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/kusto/v1beta1.Database
 	// +kubebuilder:validation:Optional
 	KustoDatabaseName *string `json:"kustoDatabaseName,omitempty" tf:"kusto_database_name,omitempty"`
 
@@ -159,7 +159,7 @@ type LinkedServiceKustoParameters struct {
 	KustoDatabaseNameSelector *v1.NamespacedSelector `json:"kustoDatabaseNameSelector,omitempty" tf:"-"`
 
 	// The URI of the Kusto Cluster endpoint.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/kusto/v1beta1.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/kusto/v1beta1.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("uri",true)
 	// +kubebuilder:validation:Optional
 	KustoEndpoint *string `json:"kustoEndpoint,omitempty" tf:"kusto_endpoint,omitempty"`

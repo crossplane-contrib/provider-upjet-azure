@@ -21,7 +21,7 @@ type ApplicationInsightsSmartDetectionRuleInitParameters struct {
 	AdditionalEmailRecipients []*string `json:"additionalEmailRecipients,omitempty" tf:"additional_email_recipients,omitempty"`
 
 	// The ID of the Application Insights component on which the Smart Detection Rule operates. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/insights/v1beta1.ApplicationInsights
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/insights/v1beta1.ApplicationInsights
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ApplicationInsightsID *string `json:"applicationInsightsId,omitempty" tf:"application_insights_id,omitempty"`
 
@@ -73,7 +73,7 @@ type ApplicationInsightsSmartDetectionRuleParameters struct {
 	AdditionalEmailRecipients []*string `json:"additionalEmailRecipients,omitempty" tf:"additional_email_recipients,omitempty"`
 
 	// The ID of the Application Insights component on which the Smart Detection Rule operates. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/insights/v1beta1.ApplicationInsights
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/insights/v1beta1.ApplicationInsights
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ApplicationInsightsID *string `json:"applicationInsightsId,omitempty" tf:"application_insights_id,omitempty"`

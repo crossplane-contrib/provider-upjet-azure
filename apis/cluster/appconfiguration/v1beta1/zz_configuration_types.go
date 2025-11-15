@@ -153,7 +153,7 @@ type ConfigurationParameters struct {
 	Replica []ReplicaParameters `json:"replica,omitempty" tf:"replica,omitempty"`
 
 	// The name of the resource group in which to create the App Configuration. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -182,7 +182,7 @@ type ConfigurationParameters struct {
 type EncryptionInitParameters struct {
 
 	// Specifies the client ID of the identity which will be used to access key vault.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("client_id",true)
 	IdentityClientID *string `json:"identityClientId,omitempty" tf:"identity_client_id,omitempty"`
 
@@ -195,7 +195,7 @@ type EncryptionInitParameters struct {
 	IdentityClientIDSelector *v1.Selector `json:"identityClientIdSelector,omitempty" tf:"-"`
 
 	// Specifies the URI of the key vault key used to encrypt data.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/keyvault/v1beta1.Key
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/keyvault/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	KeyVaultKeyIdentifier *string `json:"keyVaultKeyIdentifier,omitempty" tf:"key_vault_key_identifier,omitempty"`
 
@@ -220,7 +220,7 @@ type EncryptionObservation struct {
 type EncryptionParameters struct {
 
 	// Specifies the client ID of the identity which will be used to access key vault.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("client_id",true)
 	// +kubebuilder:validation:Optional
 	IdentityClientID *string `json:"identityClientId,omitempty" tf:"identity_client_id,omitempty"`
@@ -234,7 +234,7 @@ type EncryptionParameters struct {
 	IdentityClientIDSelector *v1.Selector `json:"identityClientIdSelector,omitempty" tf:"-"`
 
 	// Specifies the URI of the key vault key used to encrypt data.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/keyvault/v1beta1.Key
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/keyvault/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KeyVaultKeyIdentifier *string `json:"keyVaultKeyIdentifier,omitempty" tf:"key_vault_key_identifier,omitempty"`
@@ -251,7 +251,7 @@ type EncryptionParameters struct {
 type IdentityInitParameters struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this App Configuration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
@@ -287,7 +287,7 @@ type IdentityObservation struct {
 type IdentityParameters struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this App Configuration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set

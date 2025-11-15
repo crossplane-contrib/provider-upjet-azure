@@ -176,7 +176,7 @@ type ManagedDiskInitParameters struct {
 	SecurityType *string `json:"securityType,omitempty" tf:"security_type,omitempty"`
 
 	// The ID of an existing Managed Disk or Snapshot to copy when create_option is Copy or the recovery point to restore when create_option is Restore. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/compute/v1beta1.ManagedDisk
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/compute/v1beta1.ManagedDisk
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SourceResourceID *string `json:"sourceResourceId,omitempty" tf:"source_resource_id,omitempty"`
 
@@ -414,7 +414,7 @@ type ManagedDiskParameters struct {
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The name of the Resource Group where the Managed Disk should exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -435,7 +435,7 @@ type ManagedDiskParameters struct {
 	SecurityType *string `json:"securityType,omitempty" tf:"security_type,omitempty"`
 
 	// The ID of an existing Managed Disk or Snapshot to copy when create_option is Copy or the recovery point to restore when create_option is Restore. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/compute/v1beta1.ManagedDisk
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/compute/v1beta1.ManagedDisk
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourceResourceID *string `json:"sourceResourceId,omitempty" tf:"source_resource_id,omitempty"`

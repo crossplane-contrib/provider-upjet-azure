@@ -140,7 +140,7 @@ type EventHubInitParameters struct {
 	MessageRetention *float64 `json:"messageRetention,omitempty" tf:"message_retention,omitempty"`
 
 	// Specifies the ID of the EventHub Namespace. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/eventhub/v1beta1.EventHubNamespace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/eventhub/v1beta1.EventHubNamespace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
 
@@ -201,7 +201,7 @@ type EventHubParameters struct {
 	MessageRetention *float64 `json:"messageRetention,omitempty" tf:"message_retention,omitempty"`
 
 	// Specifies the ID of the EventHub Namespace. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/eventhub/v1beta1.EventHubNamespace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/eventhub/v1beta1.EventHubNamespace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
@@ -215,7 +215,7 @@ type EventHubParameters struct {
 	NamespaceIDSelector *v1.Selector `json:"namespaceIdSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the EventHub resource. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/eventhub/v1beta1.EventHubNamespace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/eventhub/v1beta1.EventHubNamespace
 	// +kubebuilder:validation:Optional
 	NamespaceName *string `json:"namespaceName,omitempty" tf:"namespace_name,omitempty"`
 
@@ -232,7 +232,7 @@ type EventHubParameters struct {
 	PartitionCount *float64 `json:"partitionCount,omitempty" tf:"partition_count,omitempty"`
 
 	// Specifies the name of the EventHub resource. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

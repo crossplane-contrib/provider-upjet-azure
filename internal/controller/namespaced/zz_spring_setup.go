@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	cloudapplicationliveview "github.com/upbound/provider-azure/internal/controller/namespaced/spring/cloudapplicationliveview"
+	cloudapplicationliveview "github.com/upbound/provider-azure/v2/internal/controller/namespaced/spring/cloudapplicationliveview"
 )
 
 // Setup_spring creates all controllers with the supplied logger and adds them to

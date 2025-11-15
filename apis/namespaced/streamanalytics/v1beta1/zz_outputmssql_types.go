@@ -20,7 +20,7 @@ type OutputMSSQLInitParameters struct {
 	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
 
 	// The MS SQL database name where the reference table exists. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/sql/v1beta1.MSSQLDatabase
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/sql/v1beta1.MSSQLDatabase
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
 
 	// Reference to a MSSQLDatabase in sql to populate database.
@@ -44,7 +44,7 @@ type OutputMSSQLInitParameters struct {
 	PasswordSecretRef *v1.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// The name of the Resource Group where the Stream Analytics Job exists. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
@@ -56,7 +56,7 @@ type OutputMSSQLInitParameters struct {
 	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The SQL server url. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/sql/v1beta1.MSSQLServer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/sql/v1beta1.MSSQLServer
 	Server *string `json:"server,omitempty" tf:"server,omitempty"`
 
 	// Reference to a MSSQLServer in sql to populate server.
@@ -68,7 +68,7 @@ type OutputMSSQLInitParameters struct {
 	ServerSelector *v1.NamespacedSelector `json:"serverSelector,omitempty" tf:"-"`
 
 	// The name of the Stream Analytics Job. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/streamanalytics/v1beta1.Job
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/streamanalytics/v1beta1.Job
 	StreamAnalyticsJobName *string `json:"streamAnalyticsJobName,omitempty" tf:"stream_analytics_job_name,omitempty"`
 
 	// Reference to a Job in streamanalytics to populate streamAnalyticsJobName.
@@ -80,7 +80,7 @@ type OutputMSSQLInitParameters struct {
 	StreamAnalyticsJobNameSelector *v1.NamespacedSelector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
 
 	// Table in the database that the output points to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/storage/v1beta1.Table
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Table
 	Table *string `json:"table,omitempty" tf:"table,omitempty"`
 
 	// Reference to a Table in storage to populate table.
@@ -92,7 +92,7 @@ type OutputMSSQLInitParameters struct {
 	TableSelector *v1.NamespacedSelector `json:"tableSelector,omitempty" tf:"-"`
 
 	// Username used to login to the Microsoft SQL Server. Changing this forces a new resource to be created. Required if authentication_mode is ConnectionString.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/sql/v1beta1.MSSQLServer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/sql/v1beta1.MSSQLServer
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("administrator_login",false)
 	User *string `json:"user,omitempty" tf:"user,omitempty"`
 
@@ -148,7 +148,7 @@ type OutputMSSQLParameters struct {
 	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
 
 	// The MS SQL database name where the reference table exists. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/sql/v1beta1.MSSQLDatabase
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/sql/v1beta1.MSSQLDatabase
 	// +kubebuilder:validation:Optional
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
 
@@ -177,7 +177,7 @@ type OutputMSSQLParameters struct {
 	PasswordSecretRef *v1.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// The name of the Resource Group where the Stream Analytics Job exists. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -190,7 +190,7 @@ type OutputMSSQLParameters struct {
 	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The SQL server url. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/sql/v1beta1.MSSQLServer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/sql/v1beta1.MSSQLServer
 	// +kubebuilder:validation:Optional
 	Server *string `json:"server,omitempty" tf:"server,omitempty"`
 
@@ -203,7 +203,7 @@ type OutputMSSQLParameters struct {
 	ServerSelector *v1.NamespacedSelector `json:"serverSelector,omitempty" tf:"-"`
 
 	// The name of the Stream Analytics Job. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/streamanalytics/v1beta1.Job
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/streamanalytics/v1beta1.Job
 	// +kubebuilder:validation:Optional
 	StreamAnalyticsJobName *string `json:"streamAnalyticsJobName,omitempty" tf:"stream_analytics_job_name,omitempty"`
 
@@ -216,7 +216,7 @@ type OutputMSSQLParameters struct {
 	StreamAnalyticsJobNameSelector *v1.NamespacedSelector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
 
 	// Table in the database that the output points to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/storage/v1beta1.Table
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Table
 	// +kubebuilder:validation:Optional
 	Table *string `json:"table,omitempty" tf:"table,omitempty"`
 
@@ -229,7 +229,7 @@ type OutputMSSQLParameters struct {
 	TableSelector *v1.NamespacedSelector `json:"tableSelector,omitempty" tf:"-"`
 
 	// Username used to login to the Microsoft SQL Server. Changing this forces a new resource to be created. Required if authentication_mode is ConnectionString.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/sql/v1beta1.MSSQLServer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/sql/v1beta1.MSSQLServer
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("administrator_login",false)
 	// +kubebuilder:validation:Optional
 	User *string `json:"user,omitempty" tf:"user,omitempty"`

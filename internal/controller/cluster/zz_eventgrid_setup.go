@@ -9,14 +9,14 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	domain "github.com/upbound/provider-azure/internal/controller/cluster/eventgrid/domain"
-	domaintopic "github.com/upbound/provider-azure/internal/controller/cluster/eventgrid/domaintopic"
-	eventgridnamespace "github.com/upbound/provider-azure/internal/controller/cluster/eventgrid/eventgridnamespace"
-	eventsubscription "github.com/upbound/provider-azure/internal/controller/cluster/eventgrid/eventsubscription"
-	partnerconfiguration "github.com/upbound/provider-azure/internal/controller/cluster/eventgrid/partnerconfiguration"
-	systemtopic "github.com/upbound/provider-azure/internal/controller/cluster/eventgrid/systemtopic"
-	systemtopiceventsubscription "github.com/upbound/provider-azure/internal/controller/cluster/eventgrid/systemtopiceventsubscription"
-	topic "github.com/upbound/provider-azure/internal/controller/cluster/eventgrid/topic"
+	domain "github.com/upbound/provider-azure/v2/internal/controller/cluster/eventgrid/domain"
+	domaintopic "github.com/upbound/provider-azure/v2/internal/controller/cluster/eventgrid/domaintopic"
+	eventgridnamespace "github.com/upbound/provider-azure/v2/internal/controller/cluster/eventgrid/eventgridnamespace"
+	eventsubscription "github.com/upbound/provider-azure/v2/internal/controller/cluster/eventgrid/eventsubscription"
+	partnerconfiguration "github.com/upbound/provider-azure/v2/internal/controller/cluster/eventgrid/partnerconfiguration"
+	systemtopic "github.com/upbound/provider-azure/v2/internal/controller/cluster/eventgrid/systemtopic"
+	systemtopiceventsubscription "github.com/upbound/provider-azure/v2/internal/controller/cluster/eventgrid/systemtopiceventsubscription"
+	topic "github.com/upbound/provider-azure/v2/internal/controller/cluster/eventgrid/topic"
 )
 
 // Setup_eventgrid creates all controllers with the supplied logger and adds them to

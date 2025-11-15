@@ -44,7 +44,7 @@ type SnapshotObservation struct {
 type SnapshotParameters struct {
 
 	// The name of the NetApp account in which the NetApp Pool should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/netapp/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/netapp/v1beta1.Account
 	// +kubebuilder:validation:Optional
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
@@ -61,7 +61,7 @@ type SnapshotParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the NetApp pool in which the NetApp Volume should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/netapp/v1beta1.Pool
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/netapp/v1beta1.Pool
 	// +kubebuilder:validation:Optional
 	PoolName *string `json:"poolName,omitempty" tf:"pool_name,omitempty"`
 
@@ -74,7 +74,7 @@ type SnapshotParameters struct {
 	PoolNameSelector *v1.NamespacedSelector `json:"poolNameSelector,omitempty" tf:"-"`
 
 	// The name of the resource group where the NetApp Snapshot should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -87,7 +87,7 @@ type SnapshotParameters struct {
 	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The name of the NetApp volume in which the NetApp Snapshot should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/netapp/v1beta1.Volume
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/netapp/v1beta1.Volume
 	// +kubebuilder:validation:Optional
 	VolumeName *string `json:"volumeName,omitempty" tf:"volume_name,omitempty"`
 

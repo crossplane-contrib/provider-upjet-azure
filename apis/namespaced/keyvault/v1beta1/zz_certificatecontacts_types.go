@@ -59,7 +59,7 @@ type CertificateContactsInitParameters struct {
 	Contact []CertificateContactsContactInitParameters `json:"contact,omitempty" tf:"contact,omitempty"`
 
 	// The ID of the Key Vault. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/keyvault/v1beta1.Vault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/keyvault/v1beta1.Vault
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
 
@@ -91,7 +91,7 @@ type CertificateContactsParameters struct {
 	Contact []CertificateContactsContactParameters `json:"contact,omitempty" tf:"contact,omitempty"`
 
 	// The ID of the Key Vault. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/keyvault/v1beta1.Vault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/keyvault/v1beta1.Vault
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`

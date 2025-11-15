@@ -95,7 +95,7 @@ type ContainerAppInitParameters struct {
 
 	// The ID of the Container App Environment within which this Container App should exist. Changing this forces a new resource to be created.
 	// The ID of the Container App Environment to host this Container App.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/containerapp/v1beta1.Environment
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/containerapp/v1beta1.Environment
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ContainerAppEnvironmentID *string `json:"containerAppEnvironmentId,omitempty" tf:"container_app_environment_id,omitempty"`
 
@@ -201,7 +201,7 @@ type ContainerAppParameters struct {
 
 	// The ID of the Container App Environment within which this Container App should exist. Changing this forces a new resource to be created.
 	// The ID of the Container App Environment to host this Container App.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/containerapp/v1beta1.Environment
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/containerapp/v1beta1.Environment
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ContainerAppEnvironmentID *string `json:"containerAppEnvironmentId,omitempty" tf:"container_app_environment_id,omitempty"`
@@ -235,7 +235,7 @@ type ContainerAppParameters struct {
 	Registry []RegistryParameters `json:"registry,omitempty" tf:"registry,omitempty"`
 
 	// The name of the resource group in which the Container App Environment is to be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

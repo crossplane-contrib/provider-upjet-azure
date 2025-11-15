@@ -41,7 +41,7 @@ type ConsumerGroupObservation struct {
 type ConsumerGroupParameters struct {
 
 	// Specifies the name of the EventHub. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/eventhub/v1beta1.EventHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/eventhub/v1beta1.EventHub
 	// +kubebuilder:validation:Optional
 	EventHubName *string `json:"eventhubName,omitempty" tf:"eventhub_name,omitempty"`
 
@@ -54,7 +54,7 @@ type ConsumerGroupParameters struct {
 	EventHubNameSelector *v1.NamespacedSelector `json:"eventhubNameSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the grandparent EventHub Namespace. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/eventhub/v1beta1.EventHubNamespace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/eventhub/v1beta1.EventHubNamespace
 	// +kubebuilder:validation:Optional
 	NamespaceName *string `json:"namespaceName,omitempty" tf:"namespace_name,omitempty"`
 
@@ -67,7 +67,7 @@ type ConsumerGroupParameters struct {
 	NamespaceNameSelector *v1.NamespacedSelector `json:"namespaceNameSelector,omitempty" tf:"-"`
 
 	// The name of the resource group in which the EventHub Consumer Group's grandparent Namespace exists. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

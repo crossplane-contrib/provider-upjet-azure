@@ -51,7 +51,7 @@ type VirtualHubRouteTableParameters struct {
 	Route []VirtualHubRouteTableRouteParameters `json:"route,omitempty" tf:"route,omitempty"`
 
 	// The ID of the Virtual Hub within which this route table should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta1.VirtualHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta1.VirtualHub
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualHubID *string `json:"virtualHubId,omitempty" tf:"virtual_hub_id,omitempty"`
@@ -78,7 +78,7 @@ type VirtualHubRouteTableRouteInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The next hop's resource ID.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.VirtualHubConnection
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.VirtualHubConnection
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	NextHop *string `json:"nextHop,omitempty" tf:"next_hop,omitempty"`
 
@@ -129,7 +129,7 @@ type VirtualHubRouteTableRouteParameters struct {
 	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The next hop's resource ID.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.VirtualHubConnection
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.VirtualHubConnection
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	NextHop *string `json:"nextHop,omitempty" tf:"next_hop,omitempty"`

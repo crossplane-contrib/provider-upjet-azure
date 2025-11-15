@@ -109,7 +109,7 @@ type HPCCacheAccessPolicyInitParameters struct {
 	AccessRule []HPCCacheAccessPolicyAccessRuleInitParameters `json:"accessRule,omitempty" tf:"access_rule,omitempty"`
 
 	// The ID of the HPC Cache that this HPC Cache Access Policy resides in. Changing this forces a new HPC Cache Access Policy to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/storagecache/v1beta1.HPCCache
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storagecache/v1beta1.HPCCache
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	HPCCacheID *string `json:"hpcCacheId,omitempty" tf:"hpc_cache_id,omitempty"`
 
@@ -141,7 +141,7 @@ type HPCCacheAccessPolicyParameters struct {
 	AccessRule []HPCCacheAccessPolicyAccessRuleParameters `json:"accessRule,omitempty" tf:"access_rule,omitempty"`
 
 	// The ID of the HPC Cache that this HPC Cache Access Policy resides in. Changing this forces a new HPC Cache Access Policy to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/storagecache/v1beta1.HPCCache
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storagecache/v1beta1.HPCCache
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	HPCCacheID *string `json:"hpcCacheId,omitempty" tf:"hpc_cache_id,omitempty"`

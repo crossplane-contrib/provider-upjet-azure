@@ -44,7 +44,7 @@ type SQLStoredProcedureObservation struct {
 type SQLStoredProcedureParameters struct {
 
 	// The name of the Cosmos DB Account to create the stored procedure within. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/cosmosdb/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cosmosdb/v1beta1.Account
 	// +kubebuilder:validation:Optional
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
@@ -61,7 +61,7 @@ type SQLStoredProcedureParameters struct {
 	Body *string `json:"body,omitempty" tf:"body,omitempty"`
 
 	// The name of the Cosmos DB SQL Container to create the stored procedure within. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/cosmosdb/v1beta1.SQLContainer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cosmosdb/v1beta1.SQLContainer
 	// +kubebuilder:validation:Optional
 	ContainerName *string `json:"containerName,omitempty" tf:"container_name,omitempty"`
 
@@ -74,7 +74,7 @@ type SQLStoredProcedureParameters struct {
 	ContainerNameSelector *v1.NamespacedSelector `json:"containerNameSelector,omitempty" tf:"-"`
 
 	// The name of the Cosmos DB SQL Database to create the stored procedure within. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/cosmosdb/v1beta1.SQLDatabase
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cosmosdb/v1beta1.SQLDatabase
 	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
@@ -87,7 +87,7 @@ type SQLStoredProcedureParameters struct {
 	DatabaseNameSelector *v1.NamespacedSelector `json:"databaseNameSelector,omitempty" tf:"-"`
 
 	// The name of the resource group in which the Cosmos DB SQL Database is created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

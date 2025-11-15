@@ -64,7 +64,7 @@ type DatabasePrincipalAssignmentObservation struct {
 type DatabasePrincipalAssignmentParameters struct {
 
 	// The name of the cluster in which to create the resource. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/kusto/v1beta2.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/kusto/v1beta2.Cluster
 	// +kubebuilder:validation:Optional
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
@@ -77,7 +77,7 @@ type DatabasePrincipalAssignmentParameters struct {
 	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
 	// The name of the database in which to create the resource. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/kusto/v1beta1.Database
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/kusto/v1beta1.Database
 	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
@@ -98,7 +98,7 @@ type DatabasePrincipalAssignmentParameters struct {
 	PrincipalType *string `json:"principalType,omitempty" tf:"principal_type,omitempty"`
 
 	// The name of the resource group in which to create the resource. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

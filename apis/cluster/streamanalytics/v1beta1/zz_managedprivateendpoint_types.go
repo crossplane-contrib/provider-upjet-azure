@@ -19,7 +19,7 @@ type ManagedPrivateEndpointInitParameters struct {
 	SubresourceName *string `json:"subresourceName,omitempty" tf:"subresource_name,omitempty"`
 
 	// The ID of the Private Link Enabled Remote Resource which this Stream Analytics Private endpoint should be connected to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
 
@@ -53,7 +53,7 @@ type ManagedPrivateEndpointObservation struct {
 type ManagedPrivateEndpointParameters struct {
 
 	// The name of the Resource Group where the Stream Analytics Managed Private Endpoint should exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -66,7 +66,7 @@ type ManagedPrivateEndpointParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The name of the Stream Analytics Cluster where the Managed Private Endpoint should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/streamanalytics/v1beta1.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/streamanalytics/v1beta1.Cluster
 	// +kubebuilder:validation:Optional
 	StreamAnalyticsClusterName *string `json:"streamAnalyticsClusterName,omitempty" tf:"stream_analytics_cluster_name,omitempty"`
 
@@ -83,7 +83,7 @@ type ManagedPrivateEndpointParameters struct {
 	SubresourceName *string `json:"subresourceName,omitempty" tf:"subresource_name,omitempty"`
 
 	// The ID of the Private Link Enabled Remote Resource which this Stream Analytics Private endpoint should be connected to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`

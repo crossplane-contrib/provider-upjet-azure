@@ -57,7 +57,7 @@ type NamespaceAuthorizationRuleParameters struct {
 	Manage *bool `json:"manage,omitempty" tf:"manage,omitempty"`
 
 	// Name of the Azure Relay Namespace for which this Azure Relay Namespace Authorization Rule will be created. Changing this forces a new Azure Relay Namespace Authorization Rule to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/relay/v1beta1.EventRelayNamespace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/relay/v1beta1.EventRelayNamespace
 	// +kubebuilder:validation:Optional
 	NamespaceName *string `json:"namespaceName,omitempty" tf:"namespace_name,omitempty"`
 
@@ -70,7 +70,7 @@ type NamespaceAuthorizationRuleParameters struct {
 	NamespaceNameSelector *v1.Selector `json:"namespaceNameSelector,omitempty" tf:"-"`
 
 	// The name of the Resource Group where the Azure Relay Namespace Authorization Rule should exist. Changing this forces a new Azure Relay Namespace Authorization Rule to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

@@ -11,8 +11,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/pkg/errors"
 
-	"github.com/upbound/provider-azure/apis/cluster/rconfig"
-	"github.com/upbound/provider-azure/config/cluster/common"
+	"github.com/upbound/provider-azure/v2/apis/cluster/rconfig"
+	"github.com/upbound/provider-azure/v2/config/cluster/common"
 )
 
 // Configure configures kubernetes group

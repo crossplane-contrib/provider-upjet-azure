@@ -439,7 +439,7 @@ type EventSubscriptionInitParameters struct {
 	RetryPolicy *RetryPolicyInitParameters `json:"retryPolicy,omitempty" tf:"retry_policy,omitempty"`
 
 	// Specifies the scope at which the EventGrid Event Subscription should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
@@ -598,7 +598,7 @@ type EventSubscriptionParameters struct {
 	RetryPolicy *RetryPolicyParameters `json:"retryPolicy,omitempty" tf:"retry_policy,omitempty"`
 
 	// Specifies the scope at which the EventGrid Event Subscription should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
@@ -970,7 +970,7 @@ type StorageQueueEndpointInitParameters struct {
 	QueueMessageTimeToLiveInSeconds *float64 `json:"queueMessageTimeToLiveInSeconds,omitempty" tf:"queue_message_time_to_live_in_seconds,omitempty"`
 
 	// Specifies the name of the storage queue where the Event Subscription will receive events.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta1.Queue
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Queue
 	QueueName *string `json:"queueName,omitempty" tf:"queue_name,omitempty"`
 
 	// Reference to a Queue in storage to populate queueName.
@@ -982,7 +982,7 @@ type StorageQueueEndpointInitParameters struct {
 	QueueNameSelector *v1.Selector `json:"queueNameSelector,omitempty" tf:"-"`
 
 	// Specifies the id of the storage account id where the storage queue is located.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 
@@ -1014,7 +1014,7 @@ type StorageQueueEndpointParameters struct {
 	QueueMessageTimeToLiveInSeconds *float64 `json:"queueMessageTimeToLiveInSeconds,omitempty" tf:"queue_message_time_to_live_in_seconds,omitempty"`
 
 	// Specifies the name of the storage queue where the Event Subscription will receive events.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta1.Queue
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Queue
 	// +kubebuilder:validation:Optional
 	QueueName *string `json:"queueName,omitempty" tf:"queue_name,omitempty"`
 
@@ -1027,7 +1027,7 @@ type StorageQueueEndpointParameters struct {
 	QueueNameSelector *v1.Selector `json:"queueNameSelector,omitempty" tf:"-"`
 
 	// Specifies the id of the storage account id where the storage queue is located.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`

@@ -44,7 +44,7 @@ type BotChannelLineObservation struct {
 type BotChannelLineParameters struct {
 
 	// The name of the Bot Resource this channel will be associated with. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/botservice/v1beta1.BotChannelsRegistration
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/botservice/v1beta1.BotChannelsRegistration
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	BotName *string `json:"botName,omitempty" tf:"bot_name,omitempty"`
@@ -66,7 +66,7 @@ type BotChannelLineParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the resource group where the Line Channel should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

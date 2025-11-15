@@ -26,7 +26,7 @@ type CustomDomainDeveloperPortalInitParameters struct {
 	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
 
 	// The ID of the Key Vault Secret containing the SSL Certificate, which must be of the type application/x-pkcs12.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/keyvault/v1beta1.Certificate
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/keyvault/v1beta1.Certificate
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("versionless_secret_id",true)
 	KeyVaultCertificateID *string `json:"keyVaultCertificateId,omitempty" tf:"key_vault_certificate_id,omitempty"`
 
@@ -90,7 +90,7 @@ type CustomDomainDeveloperPortalParameters struct {
 	HostName *string `json:"hostName" tf:"host_name,omitempty"`
 
 	// The ID of the Key Vault Secret containing the SSL Certificate, which must be of the type application/x-pkcs12.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/keyvault/v1beta1.Certificate
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/keyvault/v1beta1.Certificate
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("versionless_secret_id",true)
 	// +kubebuilder:validation:Optional
 	KeyVaultCertificateID *string `json:"keyVaultCertificateId,omitempty" tf:"key_vault_certificate_id,omitempty"`
@@ -243,7 +243,7 @@ type CustomDomainObservation struct {
 type CustomDomainParameters struct {
 
 	// The ID of the API Management service for which to configure Custom Domains. Changing this forces a new API Management Custom Domain resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/apimanagement/v1beta1.Management
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta1.Management
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	APIManagementID *string `json:"apiManagementId,omitempty" tf:"api_management_id,omitempty"`
@@ -456,7 +456,7 @@ type GatewayInitParameters struct {
 	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
 
 	// The ID of the Key Vault Secret containing the SSL Certificate, which must be of the type application/x-pkcs12.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/keyvault/v1beta1.Certificate
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/keyvault/v1beta1.Certificate
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("versionless_secret_id",true)
 	KeyVaultCertificateID *string `json:"keyVaultCertificateId,omitempty" tf:"key_vault_certificate_id,omitempty"`
 
@@ -527,7 +527,7 @@ type GatewayParameters struct {
 	HostName *string `json:"hostName" tf:"host_name,omitempty"`
 
 	// The ID of the Key Vault Secret containing the SSL Certificate, which must be of the type application/x-pkcs12.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/keyvault/v1beta1.Certificate
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/keyvault/v1beta1.Certificate
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("versionless_secret_id",true)
 	// +kubebuilder:validation:Optional
 	KeyVaultCertificateID *string `json:"keyVaultCertificateId,omitempty" tf:"key_vault_certificate_id,omitempty"`

@@ -9,7 +9,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 	"github.com/pkg/errors"
 
-	"github.com/upbound/provider-azure/apis/namespaced/rconfig"
+	"github.com/upbound/provider-azure/v2/apis/namespaced/rconfig"
 )
 
 // Configure configures cosmodb group

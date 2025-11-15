@@ -96,7 +96,7 @@ type CustomDataSetParameters struct {
 	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// The Data Factory ID in which to associate the Dataset with. Changing this forces a new resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/datafactory/v1beta1.Factory
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/datafactory/v1beta1.Factory
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DataFactoryID *string `json:"dataFactoryId,omitempty" tf:"data_factory_id,omitempty"`
@@ -142,7 +142,7 @@ type CustomDataSetParameters struct {
 type LinkedServiceInitParameters struct {
 
 	// The name of the Data Factory Linked Service.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/datafactory/v1beta1.LinkedCustomService
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/datafactory/v1beta1.LinkedCustomService
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Reference to a LinkedCustomService in datafactory to populate name.
@@ -171,7 +171,7 @@ type LinkedServiceObservation struct {
 type LinkedServiceParameters struct {
 
 	// The name of the Data Factory Linked Service.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/datafactory/v1beta1.LinkedCustomService
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/datafactory/v1beta1.LinkedCustomService
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 

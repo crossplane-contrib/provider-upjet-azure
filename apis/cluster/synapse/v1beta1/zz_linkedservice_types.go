@@ -16,7 +16,7 @@ import (
 type IntegrationRuntimeInitParameters struct {
 
 	// The integration runtime reference to associate with the Synapse Linked Service.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/synapse/v1beta1.IntegrationRuntimeAzure
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/synapse/v1beta1.IntegrationRuntimeAzure
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Reference to a IntegrationRuntimeAzure in synapse to populate name.
@@ -45,7 +45,7 @@ type IntegrationRuntimeObservation struct {
 type IntegrationRuntimeParameters struct {
 
 	// The integration runtime reference to associate with the Synapse Linked Service.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/synapse/v1beta1.IntegrationRuntimeAzure
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/synapse/v1beta1.IntegrationRuntimeAzure
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -162,7 +162,7 @@ type LinkedServiceParameters struct {
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The Synapse Workspace ID in which to associate the Linked Service with. Changing this forces a new Synapse Linked Service to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/synapse/v1beta1.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/synapse/v1beta1.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SynapseWorkspaceID *string `json:"synapseWorkspaceId,omitempty" tf:"synapse_workspace_id,omitempty"`

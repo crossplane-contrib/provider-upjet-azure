@@ -20,7 +20,7 @@ type ManagementGroupInitParameters struct {
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// The ID of the Parent Management Group.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/management/v1beta1.ManagementGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/management/v1beta1.ManagementGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ParentManagementGroupID *string `json:"parentManagementGroupId,omitempty" tf:"parent_management_group_id,omitempty"`
 
@@ -63,7 +63,7 @@ type ManagementGroupParameters struct {
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// The ID of the Parent Management Group.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/management/v1beta1.ManagementGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/management/v1beta1.ManagementGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ParentManagementGroupID *string `json:"parentManagementGroupId,omitempty" tf:"parent_management_group_id,omitempty"`

@@ -9,11 +9,11 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	account "github.com/upbound/provider-azure/internal/controller/namespaced/cognitiveservices/account"
-	accountraiblocklist "github.com/upbound/provider-azure/internal/controller/namespaced/cognitiveservices/accountraiblocklist"
-	accountraipolicy "github.com/upbound/provider-azure/internal/controller/namespaced/cognitiveservices/accountraipolicy"
-	aiservices "github.com/upbound/provider-azure/internal/controller/namespaced/cognitiveservices/aiservices"
-	deployment "github.com/upbound/provider-azure/internal/controller/namespaced/cognitiveservices/deployment"
+	account "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cognitiveservices/account"
+	accountraiblocklist "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cognitiveservices/accountraiblocklist"
+	accountraipolicy "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cognitiveservices/accountraipolicy"
+	aiservices "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cognitiveservices/aiservices"
+	deployment "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cognitiveservices/deployment"
 )
 
 // Setup_cognitiveservices creates all controllers with the supplied logger and adds them to

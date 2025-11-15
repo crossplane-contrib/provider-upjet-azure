@@ -16,7 +16,7 @@ import (
 type DataSetBlobStorageInitParameters struct {
 
 	// The name of the storage account container to be shared with the receiver. Changing this forces a new Data Share Blob Storage Dataset to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta1.Container
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Container
 	ContainerName *string `json:"containerName,omitempty" tf:"container_name,omitempty"`
 
 	// Reference to a Container in storage to populate containerName.
@@ -64,7 +64,7 @@ type DataSetBlobStorageObservation struct {
 type DataSetBlobStorageParameters struct {
 
 	// The name of the storage account container to be shared with the receiver. Changing this forces a new Data Share Blob Storage Dataset to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta1.Container
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Container
 	// +kubebuilder:validation:Optional
 	ContainerName *string `json:"containerName,omitempty" tf:"container_name,omitempty"`
 
@@ -77,8 +77,8 @@ type DataSetBlobStorageParameters struct {
 	ContainerNameSelector *v1.Selector `json:"containerNameSelector,omitempty" tf:"-"`
 
 	// The ID of the Data Share in which this Data Share Blob Storage Dataset should be created. Changing this forces a new Data Share Blob Storage Dataset to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/datashare/v1beta2.DataShare
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/datashare/v1beta2.DataShare
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DataShareID *string `json:"dataShareId,omitempty" tf:"data_share_id,omitempty"`
 
@@ -106,7 +106,7 @@ type DataSetBlobStorageParameters struct {
 type StorageAccountInitParameters struct {
 
 	// The name of the storage account to be shared with the receiver. Changing this forces a new Data Share Blob Storage Dataset to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Reference to a Account in storage to populate name.
@@ -118,7 +118,7 @@ type StorageAccountInitParameters struct {
 	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
 
 	// The resource group name of the storage account to be shared with the receiver. Changing this forces a new Data Share Blob Storage Dataset to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
@@ -148,7 +148,7 @@ type StorageAccountObservation struct {
 type StorageAccountParameters struct {
 
 	// The name of the storage account to be shared with the receiver. Changing this forces a new Data Share Blob Storage Dataset to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -161,7 +161,7 @@ type StorageAccountParameters struct {
 	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
 
 	// The resource group name of the storage account to be shared with the receiver. Changing this forces a new Data Share Blob Storage Dataset to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

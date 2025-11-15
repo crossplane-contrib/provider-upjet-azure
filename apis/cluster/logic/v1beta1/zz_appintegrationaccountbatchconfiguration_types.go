@@ -19,7 +19,7 @@ type AppIntegrationAccountBatchConfigurationInitParameters struct {
 	BatchGroupName *string `json:"batchGroupName,omitempty" tf:"batch_group_name,omitempty"`
 
 	// The name of the Logic App Integration Account. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/logic/v1beta1.AppIntegrationAccount
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/logic/v1beta1.AppIntegrationAccount
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	IntegrationAccountName *string `json:"integrationAccountName,omitempty" tf:"integration_account_name,omitempty"`
 
@@ -42,7 +42,7 @@ type AppIntegrationAccountBatchConfigurationInitParameters struct {
 	ReleaseCriteria []ReleaseCriteriaInitParameters `json:"releaseCriteria,omitempty" tf:"release_criteria,omitempty"`
 
 	// The name of the Resource Group where the Logic App Integration Account Batch Configuration should exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
@@ -86,7 +86,7 @@ type AppIntegrationAccountBatchConfigurationParameters struct {
 	BatchGroupName *string `json:"batchGroupName,omitempty" tf:"batch_group_name,omitempty"`
 
 	// The name of the Logic App Integration Account. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/logic/v1beta1.AppIntegrationAccount
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/logic/v1beta1.AppIntegrationAccount
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	IntegrationAccountName *string `json:"integrationAccountName,omitempty" tf:"integration_account_name,omitempty"`
@@ -113,7 +113,7 @@ type AppIntegrationAccountBatchConfigurationParameters struct {
 	ReleaseCriteria []ReleaseCriteriaParameters `json:"releaseCriteria,omitempty" tf:"release_criteria,omitempty"`
 
 	// The name of the Resource Group where the Logic App Integration Account Batch Configuration should exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

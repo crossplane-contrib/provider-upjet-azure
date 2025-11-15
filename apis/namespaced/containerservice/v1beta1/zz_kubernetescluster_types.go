@@ -39,7 +39,7 @@ type APIServerAccessProfileParameters struct {
 type AciConnectorLinuxInitParameters struct {
 
 	// The subnet name for the virtual nodes to run.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
 	SubnetName *string `json:"subnetName,omitempty" tf:"subnet_name,omitempty"`
 
 	// Reference to a Subnet in network to populate subnetName.
@@ -63,7 +63,7 @@ type AciConnectorLinuxObservation struct {
 type AciConnectorLinuxParameters struct {
 
 	// The subnet name for the virtual nodes to run.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
 	SubnetName *string `json:"subnetName,omitempty" tf:"subnet_name,omitempty"`
 
@@ -564,8 +564,8 @@ type DefaultNodePoolInitParameters struct {
 	OsSku *string `json:"osSku,omitempty" tf:"os_sku,omitempty"`
 
 	// The ID of the Subnet where the pods in the default Node Pool should exist.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	PodSubnetID *string `json:"podSubnetId,omitempty" tf:"pod_subnet_id,omitempty"`
 
 	// Reference to a Subnet in network to populate podSubnetId.
@@ -605,8 +605,8 @@ type DefaultNodePoolInitParameters struct {
 	VMSize *string `json:"vmSize,omitempty" tf:"vm_size,omitempty"`
 
 	// The ID of a Subnet where the Kubernetes Node Pool should exist.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	VnetSubnetID *string `json:"vnetSubnetId,omitempty" tf:"vnet_subnet_id,omitempty"`
 
 	// Reference to a Subnet in network to populate vnetSubnetId.
@@ -835,8 +835,8 @@ type DefaultNodePoolParameters struct {
 	OsSku *string `json:"osSku,omitempty" tf:"os_sku,omitempty"`
 
 	// The ID of the Subnet where the pods in the default Node Pool should exist.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PodSubnetID *string `json:"podSubnetId,omitempty" tf:"pod_subnet_id,omitempty"`
 
@@ -886,8 +886,8 @@ type DefaultNodePoolParameters struct {
 	VMSize *string `json:"vmSize,omitempty" tf:"vm_size,omitempty"`
 
 	// The ID of a Subnet where the Kubernetes Node Pool should exist.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VnetSubnetID *string `json:"vnetSubnetId,omitempty" tf:"vnet_subnet_id,omitempty"`
 
@@ -990,8 +990,8 @@ type HTTPProxyConfigParameters struct {
 type IdentityInitParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Kubernetes Cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
@@ -1026,8 +1026,8 @@ type IdentityObservation struct {
 type IdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Kubernetes Cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
@@ -1075,8 +1075,8 @@ type IngressApplicationGatewayInitParameters struct {
 	SubnetCidr *string `json:"subnetCidr,omitempty" tf:"subnet_cidr,omitempty"`
 
 	// The ID of the subnet on which to create an Application Gateway, which in turn will be integrated with the ingress controller of this Kubernetes Cluster. See this page for further details.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Reference to a Subnet in network to populate subnetId.
@@ -1124,8 +1124,8 @@ type IngressApplicationGatewayParameters struct {
 	SubnetCidr *string `json:"subnetCidr,omitempty" tf:"subnet_cidr,omitempty"`
 
 	// The ID of the subnet on which to create an Application Gateway, which in turn will be integrated with the ingress controller of this Kubernetes Cluster. See this page for further details.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -1500,7 +1500,7 @@ type KubernetesClusterInitParameters struct {
 	PrivateClusterPublicFqdnEnabled *bool `json:"privateClusterPublicFqdnEnabled,omitempty" tf:"private_cluster_public_fqdn_enabled,omitempty"`
 
 	// Either the ID of Private DNS Zone which should be delegated to this Cluster, System to have AKS manage this or None. In case of None you will need to bring your own DNS server and set up resolving, otherwise, the cluster will have issues after provisioning. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.PrivateDNSZone
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.PrivateDNSZone
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PrivateDNSZoneID *string `json:"privateDnsZoneId,omitempty" tf:"private_dns_zone_id,omitempty"`
 
@@ -1902,7 +1902,7 @@ type KubernetesClusterParameters struct {
 	PrivateClusterPublicFqdnEnabled *bool `json:"privateClusterPublicFqdnEnabled,omitempty" tf:"private_cluster_public_fqdn_enabled,omitempty"`
 
 	// Either the ID of Private DNS Zone which should be delegated to this Cluster, System to have AKS manage this or None. In case of None you will need to bring your own DNS server and set up resolving, otherwise, the cluster will have issues after provisioning. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.PrivateDNSZone
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.PrivateDNSZone
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PrivateDNSZoneID *string `json:"privateDnsZoneId,omitempty" tf:"private_dns_zone_id,omitempty"`
@@ -1916,7 +1916,7 @@ type KubernetesClusterParameters struct {
 	PrivateDNSZoneIDSelector *v1.NamespacedSelector `json:"privateDnsZoneIdSelector,omitempty" tf:"-"`
 
 	// Specifies the Resource Group where the Managed Kubernetes Cluster should exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

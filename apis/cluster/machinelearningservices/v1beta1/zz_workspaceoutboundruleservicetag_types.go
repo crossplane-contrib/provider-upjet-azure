@@ -58,8 +58,8 @@ type WorkspaceOutboundRuleServiceTagParameters struct {
 	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag,omitempty"`
 
 	// Specifies the ID of the Machine Learning Workspace. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/machinelearningservices/v1beta2.Workspace
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/machinelearningservices/v1beta2.Workspace
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 

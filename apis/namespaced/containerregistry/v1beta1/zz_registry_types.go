@@ -17,7 +17,7 @@ import (
 type EncryptionInitParameters struct {
 
 	// The client ID of the managed identity associated with the encryption key.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("client_id",true)
 	IdentityClientID *string `json:"identityClientId,omitempty" tf:"identity_client_id"`
 
@@ -45,7 +45,7 @@ type EncryptionObservation struct {
 type EncryptionParameters struct {
 
 	// The client ID of the managed identity associated with the encryption key.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("client_id",true)
 	// +kubebuilder:validation:Optional
 	IdentityClientID *string `json:"identityClientId,omitempty" tf:"identity_client_id"`
@@ -147,7 +147,7 @@ type IPRuleParameters struct {
 type IdentityInitParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Container Registry.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
@@ -183,7 +183,7 @@ type IdentityObservation struct {
 type IdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Container Registry.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -404,7 +404,7 @@ type RegistryParameters struct {
 	QuarantinePolicyEnabled *bool `json:"quarantinePolicyEnabled,omitempty" tf:"quarantine_policy_enabled,omitempty"`
 
 	// The name of the resource group in which to create the Container Registry. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

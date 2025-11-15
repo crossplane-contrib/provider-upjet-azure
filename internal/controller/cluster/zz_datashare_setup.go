@@ -9,12 +9,12 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	account "github.com/upbound/provider-azure/internal/controller/cluster/datashare/account"
-	datasetblobstorage "github.com/upbound/provider-azure/internal/controller/cluster/datashare/datasetblobstorage"
-	datasetdatalakegen2 "github.com/upbound/provider-azure/internal/controller/cluster/datashare/datasetdatalakegen2"
-	datasetkustocluster "github.com/upbound/provider-azure/internal/controller/cluster/datashare/datasetkustocluster"
-	datasetkustodatabase "github.com/upbound/provider-azure/internal/controller/cluster/datashare/datasetkustodatabase"
-	datashare "github.com/upbound/provider-azure/internal/controller/cluster/datashare/datashare"
+	account "github.com/upbound/provider-azure/v2/internal/controller/cluster/datashare/account"
+	datasetblobstorage "github.com/upbound/provider-azure/v2/internal/controller/cluster/datashare/datasetblobstorage"
+	datasetdatalakegen2 "github.com/upbound/provider-azure/v2/internal/controller/cluster/datashare/datasetdatalakegen2"
+	datasetkustocluster "github.com/upbound/provider-azure/v2/internal/controller/cluster/datashare/datasetkustocluster"
+	datasetkustodatabase "github.com/upbound/provider-azure/v2/internal/controller/cluster/datashare/datasetkustodatabase"
+	datashare "github.com/upbound/provider-azure/v2/internal/controller/cluster/datashare/datashare"
 )
 
 // Setup_datashare creates all controllers with the supplied logger and adds them to

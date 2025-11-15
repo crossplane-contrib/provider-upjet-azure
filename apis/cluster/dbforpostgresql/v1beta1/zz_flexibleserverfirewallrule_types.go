@@ -44,8 +44,8 @@ type FlexibleServerFirewallRuleParameters struct {
 	EndIPAddress *string `json:"endIpAddress,omitempty" tf:"end_ip_address,omitempty"`
 
 	// The ID of the PostgreSQL Flexible Server from which to create this PostgreSQL Flexible Server Firewall Rule. Changing this forces a new PostgreSQL Flexible Server Firewall Rule to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/dbforpostgresql/v1beta2.FlexibleServer
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/dbforpostgresql/v1beta2.FlexibleServer
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 

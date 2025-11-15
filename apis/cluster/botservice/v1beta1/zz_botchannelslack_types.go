@@ -58,7 +58,7 @@ type BotChannelSlackObservation struct {
 type BotChannelSlackParameters struct {
 
 	// The name of the Bot Resource this channel will be associated with. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/botservice/v1beta1.BotChannelsRegistration
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/botservice/v1beta1.BotChannelsRegistration
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	BotName *string `json:"botName,omitempty" tf:"bot_name,omitempty"`
@@ -88,7 +88,7 @@ type BotChannelSlackParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the resource group in which to create the Bot Channel. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

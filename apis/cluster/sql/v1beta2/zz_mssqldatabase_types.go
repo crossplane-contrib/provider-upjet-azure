@@ -16,7 +16,7 @@ import (
 type IdentityInitParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this SQL Database.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
@@ -46,7 +46,7 @@ type IdentityObservation struct {
 type IdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this SQL Database.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -289,7 +289,7 @@ type MSSQLDatabaseInitParameters struct {
 	TransparentDataEncryptionKeyAutomaticRotationEnabled *bool `json:"transparentDataEncryptionKeyAutomaticRotationEnabled,omitempty" tf:"transparent_data_encryption_key_automatic_rotation_enabled,omitempty"`
 
 	// The fully versioned Key Vault Key URL (e.g. 'https://<YourVaultName>.vault.azure.net/keys/<YourKeyName>/<YourKeyVersion>) to be used as the Customer Managed Key(CMK/BYOK) for the Transparent Data Encryption(TDE) layer.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/keyvault/v1beta2.Key
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/keyvault/v1beta2.Key
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TransparentDataEncryptionKeyVaultKeyID *string `json:"transparentDataEncryptionKeyVaultKeyId,omitempty" tf:"transparent_data_encryption_key_vault_key_id,omitempty"`
 
@@ -513,8 +513,8 @@ type MSSQLDatabaseParameters struct {
 	SecondaryType *string `json:"secondaryType,omitempty" tf:"secondary_type,omitempty"`
 
 	// The id of the MS SQL Server on which to create the database. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/sql/v1beta2.MSSQLServer
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/sql/v1beta2.MSSQLServer
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 
@@ -556,7 +556,7 @@ type MSSQLDatabaseParameters struct {
 	TransparentDataEncryptionKeyAutomaticRotationEnabled *bool `json:"transparentDataEncryptionKeyAutomaticRotationEnabled,omitempty" tf:"transparent_data_encryption_key_automatic_rotation_enabled,omitempty"`
 
 	// The fully versioned Key Vault Key URL (e.g. 'https://<YourVaultName>.vault.azure.net/keys/<YourKeyName>/<YourKeyVersion>) to be used as the Customer Managed Key(CMK/BYOK) for the Transparent Data Encryption(TDE) layer.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/keyvault/v1beta2.Key
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/keyvault/v1beta2.Key
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TransparentDataEncryptionKeyVaultKeyID *string `json:"transparentDataEncryptionKeyVaultKeyId,omitempty" tf:"transparent_data_encryption_key_vault_key_id,omitempty"`

@@ -9,13 +9,13 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	sentinelalertrulefusion "github.com/upbound/provider-azure/internal/controller/namespaced/securityinsights/sentinelalertrulefusion"
-	sentinelalertrulemachinelearningbehavioranalytics "github.com/upbound/provider-azure/internal/controller/namespaced/securityinsights/sentinelalertrulemachinelearningbehavioranalytics"
-	sentinelalertrulemssecurityincident "github.com/upbound/provider-azure/internal/controller/namespaced/securityinsights/sentinelalertrulemssecurityincident"
-	sentinelautomationrule "github.com/upbound/provider-azure/internal/controller/namespaced/securityinsights/sentinelautomationrule"
-	sentineldataconnectoriot "github.com/upbound/provider-azure/internal/controller/namespaced/securityinsights/sentineldataconnectoriot"
-	sentinelloganalyticsworkspaceonboarding "github.com/upbound/provider-azure/internal/controller/namespaced/securityinsights/sentinelloganalyticsworkspaceonboarding"
-	sentinelwatchlist "github.com/upbound/provider-azure/internal/controller/namespaced/securityinsights/sentinelwatchlist"
+	sentinelalertrulefusion "github.com/upbound/provider-azure/v2/internal/controller/namespaced/securityinsights/sentinelalertrulefusion"
+	sentinelalertrulemachinelearningbehavioranalytics "github.com/upbound/provider-azure/v2/internal/controller/namespaced/securityinsights/sentinelalertrulemachinelearningbehavioranalytics"
+	sentinelalertrulemssecurityincident "github.com/upbound/provider-azure/v2/internal/controller/namespaced/securityinsights/sentinelalertrulemssecurityincident"
+	sentinelautomationrule "github.com/upbound/provider-azure/v2/internal/controller/namespaced/securityinsights/sentinelautomationrule"
+	sentineldataconnectoriot "github.com/upbound/provider-azure/v2/internal/controller/namespaced/securityinsights/sentineldataconnectoriot"
+	sentinelloganalyticsworkspaceonboarding "github.com/upbound/provider-azure/v2/internal/controller/namespaced/securityinsights/sentinelloganalyticsworkspaceonboarding"
+	sentinelwatchlist "github.com/upbound/provider-azure/v2/internal/controller/namespaced/securityinsights/sentinelwatchlist"
 )
 
 // Setup_securityinsights creates all controllers with the supplied logger and adds them to

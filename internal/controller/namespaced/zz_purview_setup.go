@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	account "github.com/upbound/provider-azure/internal/controller/namespaced/purview/account"
+	account "github.com/upbound/provider-azure/v2/internal/controller/namespaced/purview/account"
 )
 
 // Setup_purview creates all controllers with the supplied logger and adds them to

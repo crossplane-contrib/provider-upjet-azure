@@ -29,7 +29,7 @@ type TriggerCustomEventInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The ID of Event Grid Topic in which event will be listened. Changing this forces a new resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/eventgrid/v1beta2.Topic
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/eventgrid/v1beta2.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	EventGridTopicID *string `json:"eventgridTopicId,omitempty" tf:"eventgrid_topic_id,omitempty"`
 
@@ -109,7 +109,7 @@ type TriggerCustomEventParameters struct {
 	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// The ID of Data Factory in which to associate the Trigger with. Changing this forces a new resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/datafactory/v1beta2.Factory
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/datafactory/v1beta2.Factory
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DataFactoryID *string `json:"dataFactoryId,omitempty" tf:"data_factory_id,omitempty"`
@@ -127,7 +127,7 @@ type TriggerCustomEventParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The ID of Event Grid Topic in which event will be listened. Changing this forces a new resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/eventgrid/v1beta2.Topic
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/eventgrid/v1beta2.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	EventGridTopicID *string `json:"eventgridTopicId,omitempty" tf:"eventgrid_topic_id,omitempty"`
@@ -161,7 +161,7 @@ type TriggerCustomEventParameters struct {
 type TriggerCustomEventPipelineInitParameters struct {
 
 	// The Data Factory Pipeline name that the trigger will act on.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/datafactory/v1beta1.Pipeline
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/datafactory/v1beta1.Pipeline
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Reference to a Pipeline in datafactory to populate name.
@@ -190,7 +190,7 @@ type TriggerCustomEventPipelineObservation struct {
 type TriggerCustomEventPipelineParameters struct {
 
 	// The Data Factory Pipeline name that the trigger will act on.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/datafactory/v1beta1.Pipeline
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/datafactory/v1beta1.Pipeline
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 

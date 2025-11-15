@@ -23,8 +23,8 @@ type ContainerConnectedRegistryInitParameters struct {
 	ClientTokenIds []*string `json:"clientTokenIds,omitempty" tf:"client_token_ids,omitempty"`
 
 	// The ID of the Container Registry that this Connected Registry will reside in. Changing this forces a new Container Connected Registry to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/containerregistry/v1beta1.Registry
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/containerregistry/v1beta1.Registry
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	ContainerRegistryID *string `json:"containerRegistryId,omitempty" tf:"container_registry_id,omitempty"`
 
 	// Reference to a Registry in containerregistry to populate containerRegistryId.
@@ -54,8 +54,8 @@ type ContainerConnectedRegistryInitParameters struct {
 	SyncSchedule *string `json:"syncSchedule,omitempty" tf:"sync_schedule,omitempty"`
 
 	// The ID of the Container Registry Token which is used for synchronizing the Connected Registry. Changing this forces a new Container Connected Registry to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/containerregistry/v1beta1.Token
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/containerregistry/v1beta1.Token
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	SyncTokenID *string `json:"syncTokenId,omitempty" tf:"sync_token_id,omitempty"`
 
 	// Reference to a Token in containerregistry to populate syncTokenId.
@@ -120,8 +120,8 @@ type ContainerConnectedRegistryParameters struct {
 	ClientTokenIds []*string `json:"clientTokenIds,omitempty" tf:"client_token_ids,omitempty"`
 
 	// The ID of the Container Registry that this Connected Registry will reside in. Changing this forces a new Container Connected Registry to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/containerregistry/v1beta1.Registry
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/containerregistry/v1beta1.Registry
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ContainerRegistryID *string `json:"containerRegistryId,omitempty" tf:"container_registry_id,omitempty"`
 
@@ -158,8 +158,8 @@ type ContainerConnectedRegistryParameters struct {
 	SyncSchedule *string `json:"syncSchedule,omitempty" tf:"sync_schedule,omitempty"`
 
 	// The ID of the Container Registry Token which is used for synchronizing the Connected Registry. Changing this forces a new Container Connected Registry to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/containerregistry/v1beta1.Token
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/containerregistry/v1beta1.Token
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SyncTokenID *string `json:"syncTokenId,omitempty" tf:"sync_token_id,omitempty"`
 

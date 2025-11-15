@@ -17,8 +17,8 @@ import (
 type NetworkInterfaceApplicationSecurityGroupAssociationInitParameters struct {
 
 	// The ID of the Application Security Group which this Network Interface which should be connected to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.ApplicationSecurityGroup
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.ApplicationSecurityGroup
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	ApplicationSecurityGroupID *string `json:"applicationSecurityGroupId,omitempty" tf:"application_security_group_id,omitempty"`
 
 	// Reference to a ApplicationSecurityGroup in network to populate applicationSecurityGroupId.
@@ -30,8 +30,8 @@ type NetworkInterfaceApplicationSecurityGroupAssociationInitParameters struct {
 	ApplicationSecurityGroupIDSelector *v1.NamespacedSelector `json:"applicationSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Network Interface. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.NetworkInterface
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.NetworkInterface
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
 
 	// Reference to a NetworkInterface in network to populate networkInterfaceId.
@@ -57,8 +57,8 @@ type NetworkInterfaceApplicationSecurityGroupAssociationObservation struct {
 type NetworkInterfaceApplicationSecurityGroupAssociationParameters struct {
 
 	// The ID of the Application Security Group which this Network Interface which should be connected to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.ApplicationSecurityGroup
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.ApplicationSecurityGroup
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ApplicationSecurityGroupID *string `json:"applicationSecurityGroupId,omitempty" tf:"application_security_group_id,omitempty"`
 
@@ -71,8 +71,8 @@ type NetworkInterfaceApplicationSecurityGroupAssociationParameters struct {
 	ApplicationSecurityGroupIDSelector *v1.NamespacedSelector `json:"applicationSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Network Interface. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.NetworkInterface
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.NetworkInterface
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
 

@@ -1077,7 +1077,7 @@ type SystemTopicEventSubscriptionParameters struct {
 	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// The name of the Resource Group where the System Topic exists. Changing this forces a new Event Subscription to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -1114,7 +1114,7 @@ type SystemTopicEventSubscriptionParameters struct {
 	SubjectFilter *SystemTopicEventSubscriptionSubjectFilterParameters `json:"subjectFilter,omitempty" tf:"subject_filter,omitempty"`
 
 	// The System Topic where the Event Subscription should be created in. Changing this forces a new Event Subscription to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/eventgrid/v1beta1.SystemTopic
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/eventgrid/v1beta1.SystemTopic
 	// +kubebuilder:validation:Optional
 	SystemTopic *string `json:"systemTopic,omitempty" tf:"system_topic,omitempty"`
 
@@ -1195,7 +1195,7 @@ type SystemTopicEventSubscriptionStorageQueueEndpointInitParameters struct {
 	QueueMessageTimeToLiveInSeconds *float64 `json:"queueMessageTimeToLiveInSeconds,omitempty" tf:"queue_message_time_to_live_in_seconds,omitempty"`
 
 	// Specifies the name of the storage queue where the Event Subscription will receive events.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/storage/v1beta1.Queue
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Queue
 	QueueName *string `json:"queueName,omitempty" tf:"queue_name,omitempty"`
 
 	// Reference to a Queue in storage to populate queueName.
@@ -1207,7 +1207,7 @@ type SystemTopicEventSubscriptionStorageQueueEndpointInitParameters struct {
 	QueueNameSelector *v1.NamespacedSelector `json:"queueNameSelector,omitempty" tf:"-"`
 
 	// Specifies the id of the storage account id where the storage queue is located.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 
@@ -1239,7 +1239,7 @@ type SystemTopicEventSubscriptionStorageQueueEndpointParameters struct {
 	QueueMessageTimeToLiveInSeconds *float64 `json:"queueMessageTimeToLiveInSeconds,omitempty" tf:"queue_message_time_to_live_in_seconds,omitempty"`
 
 	// Specifies the name of the storage queue where the Event Subscription will receive events.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/storage/v1beta1.Queue
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Queue
 	// +kubebuilder:validation:Optional
 	QueueName *string `json:"queueName,omitempty" tf:"queue_name,omitempty"`
 
@@ -1252,7 +1252,7 @@ type SystemTopicEventSubscriptionStorageQueueEndpointParameters struct {
 	QueueNameSelector *v1.NamespacedSelector `json:"queueNameSelector,omitempty" tf:"-"`
 
 	// Specifies the id of the storage account id where the storage queue is located.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`

@@ -36,7 +36,7 @@ type GlobalVMShutdownScheduleInitParameters struct {
 	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
 
 	// The resource ID of the target ARM-based Virtual Machine. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/compute/v1beta1.LinuxVirtualMachine
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/compute/v1beta1.LinuxVirtualMachine
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VirtualMachineID *string `json:"virtualMachineId,omitempty" tf:"virtual_machine_id,omitempty"`
 
@@ -105,7 +105,7 @@ type GlobalVMShutdownScheduleParameters struct {
 	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
 
 	// The resource ID of the target ARM-based Virtual Machine. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/compute/v1beta1.LinuxVirtualMachine
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/compute/v1beta1.LinuxVirtualMachine
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualMachineID *string `json:"virtualMachineId,omitempty" tf:"virtual_machine_id,omitempty"`

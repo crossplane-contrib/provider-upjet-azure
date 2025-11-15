@@ -20,7 +20,7 @@ type ManagerManagementGroupConnectionInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Specifies the ID of the Network Manager which the Management Group is connected to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.Manager
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Manager
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	NetworkManagerID *string `json:"networkManagerId,omitempty" tf:"network_manager_id,omitempty"`
 
@@ -58,7 +58,7 @@ type ManagerManagementGroupConnectionParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Specifies the ID of the target Management Group. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/management/v1beta1.ManagementGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/management/v1beta1.ManagementGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ManagementGroupID *string `json:"managementGroupId,omitempty" tf:"management_group_id,omitempty"`
@@ -72,7 +72,7 @@ type ManagerManagementGroupConnectionParameters struct {
 	ManagementGroupIDSelector *v1.NamespacedSelector `json:"managementGroupIdSelector,omitempty" tf:"-"`
 
 	// Specifies the ID of the Network Manager which the Management Group is connected to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.Manager
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Manager
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	NetworkManagerID *string `json:"networkManagerId,omitempty" tf:"network_manager_id,omitempty"`

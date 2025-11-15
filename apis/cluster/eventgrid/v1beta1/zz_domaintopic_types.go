@@ -31,7 +31,7 @@ type DomainTopicObservation struct {
 type DomainTopicParameters struct {
 
 	// Specifies the name of the EventGrid Domain. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/eventgrid/v1beta2.Domain
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/eventgrid/v1beta2.Domain
 	// +kubebuilder:validation:Optional
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
@@ -44,7 +44,7 @@ type DomainTopicParameters struct {
 	DomainNameSelector *v1.Selector `json:"domainNameSelector,omitempty" tf:"-"`
 
 	// The name of the resource group in which the EventGrid Domain exists. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

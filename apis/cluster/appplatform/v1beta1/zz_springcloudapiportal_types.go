@@ -19,7 +19,7 @@ type SpringCloudAPIPortalInitParameters struct {
 	APITryOutEnabled *bool `json:"apiTryOutEnabled,omitempty" tf:"api_try_out_enabled,omitempty"`
 
 	// Specifies a list of Spring Cloud Gateway.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/appplatform/v1beta1.SpringCloudGateway
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/appplatform/v1beta1.SpringCloudGateway
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +listType=set
 	GatewayIds []*string `json:"gatewayIds,omitempty" tf:"gateway_ids,omitempty"`
@@ -83,7 +83,7 @@ type SpringCloudAPIPortalParameters struct {
 	APITryOutEnabled *bool `json:"apiTryOutEnabled,omitempty" tf:"api_try_out_enabled,omitempty"`
 
 	// Specifies a list of Spring Cloud Gateway.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/appplatform/v1beta1.SpringCloudGateway
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/appplatform/v1beta1.SpringCloudGateway
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -110,7 +110,7 @@ type SpringCloudAPIPortalParameters struct {
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The ID of the Spring Cloud Service. Changing this forces a new Spring Cloud API Portal to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/appplatform/v1beta1.SpringCloudService
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/appplatform/v1beta1.SpringCloudService
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SpringCloudServiceID *string `json:"springCloudServiceId,omitempty" tf:"spring_cloud_service_id,omitempty"`

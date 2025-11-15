@@ -26,7 +26,7 @@ type NetworkACLInitParameters struct {
 	PublicNetwork *PublicNetworkInitParameters `json:"publicNetwork,omitempty" tf:"public_network,omitempty"`
 
 	// The ID of the SignalR service. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/signalrservice/v1beta1.Service
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/signalrservice/v1beta1.Service
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SignalrServiceID *string `json:"signalrServiceId,omitempty" tf:"signalr_service_id,omitempty"`
 
@@ -72,7 +72,7 @@ type NetworkACLParameters struct {
 	PublicNetwork *PublicNetworkParameters `json:"publicNetwork,omitempty" tf:"public_network,omitempty"`
 
 	// The ID of the SignalR service. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/signalrservice/v1beta1.Service
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/signalrservice/v1beta1.Service
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SignalrServiceID *string `json:"signalrServiceId,omitempty" tf:"signalr_service_id,omitempty"`
@@ -97,7 +97,7 @@ type PrivateEndpointInitParameters struct {
 	DeniedRequestTypes []*string `json:"deniedRequestTypes,omitempty" tf:"denied_request_types,omitempty"`
 
 	// The ID of the Private Endpoint which is based on the SignalR service.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.PrivateEndpoint
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.PrivateEndpoint
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -137,7 +137,7 @@ type PrivateEndpointParameters struct {
 	DeniedRequestTypes []*string `json:"deniedRequestTypes,omitempty" tf:"denied_request_types,omitempty"`
 
 	// The ID of the Private Endpoint which is based on the SignalR service.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.PrivateEndpoint
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.PrivateEndpoint
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`

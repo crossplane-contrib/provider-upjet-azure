@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	powerbiembedded "github.com/upbound/provider-azure/internal/controller/namespaced/powerbidedicated/powerbiembedded"
+	powerbiembedded "github.com/upbound/provider-azure/v2/internal/controller/namespaced/powerbidedicated/powerbiembedded"
 )
 
 // Setup_powerbidedicated creates all controllers with the supplied logger and adds them to

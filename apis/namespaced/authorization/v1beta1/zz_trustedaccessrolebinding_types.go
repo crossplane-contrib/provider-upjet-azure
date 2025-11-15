@@ -20,7 +20,7 @@ type TrustedAccessRoleBindingInitParameters struct {
 	Roles []*string `json:"roles,omitempty" tf:"roles,omitempty"`
 
 	// The ARM resource ID of source resource that trusted access is configured for. Changing this forces a new Kubernetes Cluster Trusted Access Role Binding to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/machinelearningservices/v1beta1.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/machinelearningservices/v1beta1.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SourceResourceID *string `json:"sourceResourceId,omitempty" tf:"source_resource_id,omitempty"`
 
@@ -51,8 +51,8 @@ type TrustedAccessRoleBindingObservation struct {
 type TrustedAccessRoleBindingParameters struct {
 
 	// Specifies the Kubernetes Cluster Id within which this Kubernetes Cluster Trusted Access Role Binding should exist. Changing this forces a new Kubernetes Cluster Trusted Access Role Binding to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/containerservice/v1beta1.KubernetesCluster
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/containerservice/v1beta1.KubernetesCluster
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KubernetesClusterID *string `json:"kubernetesClusterId,omitempty" tf:"kubernetes_cluster_id,omitempty"`
 
@@ -69,7 +69,7 @@ type TrustedAccessRoleBindingParameters struct {
 	Roles []*string `json:"roles,omitempty" tf:"roles,omitempty"`
 
 	// The ARM resource ID of source resource that trusted access is configured for. Changing this forces a new Kubernetes Cluster Trusted Access Role Binding to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/machinelearningservices/v1beta1.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/machinelearningservices/v1beta1.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourceResourceID *string `json:"sourceResourceId,omitempty" tf:"source_resource_id,omitempty"`

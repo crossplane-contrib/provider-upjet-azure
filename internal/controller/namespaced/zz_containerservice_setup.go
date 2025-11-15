@@ -9,10 +9,10 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	kubernetescluster "github.com/upbound/provider-azure/internal/controller/namespaced/containerservice/kubernetescluster"
-	kubernetesclusterextension "github.com/upbound/provider-azure/internal/controller/namespaced/containerservice/kubernetesclusterextension"
-	kubernetesclusternodepool "github.com/upbound/provider-azure/internal/controller/namespaced/containerservice/kubernetesclusternodepool"
-	kubernetesfleetmanager "github.com/upbound/provider-azure/internal/controller/namespaced/containerservice/kubernetesfleetmanager"
+	kubernetescluster "github.com/upbound/provider-azure/v2/internal/controller/namespaced/containerservice/kubernetescluster"
+	kubernetesclusterextension "github.com/upbound/provider-azure/v2/internal/controller/namespaced/containerservice/kubernetesclusterextension"
+	kubernetesclusternodepool "github.com/upbound/provider-azure/v2/internal/controller/namespaced/containerservice/kubernetesclusternodepool"
+	kubernetesfleetmanager "github.com/upbound/provider-azure/v2/internal/controller/namespaced/containerservice/kubernetesfleetmanager"
 )
 
 // Setup_containerservice creates all controllers with the supplied logger and adds them to

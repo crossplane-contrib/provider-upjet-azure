@@ -22,7 +22,7 @@ type HybridConnectionAuthorizationRuleInitParameters struct {
 	Manage *bool `json:"manage,omitempty" tf:"manage,omitempty"`
 
 	// Name of the Azure Relay Namespace for which this Azure Relay Hybrid Connection Authorization Rule will be created. Changing this forces a new Azure Relay Hybrid Connection Authorization Rule to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/relay/v1beta1.EventRelayNamespace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/relay/v1beta1.EventRelayNamespace
 	NamespaceName *string `json:"namespaceName,omitempty" tf:"namespace_name,omitempty"`
 
 	// Reference to a EventRelayNamespace in relay to populate namespaceName.
@@ -64,7 +64,7 @@ type HybridConnectionAuthorizationRuleObservation struct {
 type HybridConnectionAuthorizationRuleParameters struct {
 
 	// Name of the Azure Relay Hybrid Connection for which this Azure Relay Hybrid Connection Authorization Rule will be created. Changing this forces a new Azure Relay Hybrid Connection Authorization Rule to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/relay/v1beta1.HybridConnection
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/relay/v1beta1.HybridConnection
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	HybridConnectionName *string `json:"hybridConnectionName,omitempty" tf:"hybrid_connection_name,omitempty"`
@@ -86,7 +86,7 @@ type HybridConnectionAuthorizationRuleParameters struct {
 	Manage *bool `json:"manage,omitempty" tf:"manage,omitempty"`
 
 	// Name of the Azure Relay Namespace for which this Azure Relay Hybrid Connection Authorization Rule will be created. Changing this forces a new Azure Relay Hybrid Connection Authorization Rule to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/relay/v1beta1.EventRelayNamespace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/relay/v1beta1.EventRelayNamespace
 	// +kubebuilder:validation:Optional
 	NamespaceName *string `json:"namespaceName,omitempty" tf:"namespace_name,omitempty"`
 
@@ -99,7 +99,7 @@ type HybridConnectionAuthorizationRuleParameters struct {
 	NamespaceNameSelector *v1.Selector `json:"namespaceNameSelector,omitempty" tf:"-"`
 
 	// The name of the Resource Group where the Azure Relay Hybrid Connection Authorization Rule should exist. Changing this forces a new Azure Relay Hybrid Connection Authorization Rule to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

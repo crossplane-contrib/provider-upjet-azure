@@ -23,7 +23,7 @@ type SignalrSharedPrivateLinkResourceInitParameters struct {
 	RequestMessage *string `json:"requestMessage,omitempty" tf:"request_message,omitempty"`
 
 	// The id of the Signalr Service. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/signalrservice/v1beta1.Service
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/signalrservice/v1beta1.Service
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SignalrServiceID *string `json:"signalrServiceId,omitempty" tf:"signalr_service_id,omitempty"`
 
@@ -39,7 +39,7 @@ type SignalrSharedPrivateLinkResourceInitParameters struct {
 	SubResourceName *string `json:"subResourceName,omitempty" tf:"sub_resource_name,omitempty"`
 
 	// The ID of the Shared Private Link Enabled Remote Resource which this Signalr Private Endpoint should be connected to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/keyvault/v1beta1.Vault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/keyvault/v1beta1.Vault
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
 
@@ -87,7 +87,7 @@ type SignalrSharedPrivateLinkResourceParameters struct {
 	RequestMessage *string `json:"requestMessage,omitempty" tf:"request_message,omitempty"`
 
 	// The id of the Signalr Service. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/signalrservice/v1beta1.Service
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/signalrservice/v1beta1.Service
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SignalrServiceID *string `json:"signalrServiceId,omitempty" tf:"signalr_service_id,omitempty"`
@@ -105,7 +105,7 @@ type SignalrSharedPrivateLinkResourceParameters struct {
 	SubResourceName *string `json:"subResourceName,omitempty" tf:"sub_resource_name,omitempty"`
 
 	// The ID of the Shared Private Link Enabled Remote Resource which this Signalr Private Endpoint should be connected to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/keyvault/v1beta1.Vault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/keyvault/v1beta1.Vault
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`

@@ -55,7 +55,7 @@ type Password2Parameters struct {
 type TokenPasswordInitParameters struct {
 
 	// The ID of the Container Registry Token that this Container Registry Token Password resides in. Changing this forces a new Container Registry Token Password to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/containerregistry/v1beta1.Token
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/containerregistry/v1beta1.Token
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ContainerRegistryTokenID *string `json:"containerRegistryTokenId,omitempty" tf:"container_registry_token_id,omitempty"`
 
@@ -92,7 +92,7 @@ type TokenPasswordObservation struct {
 type TokenPasswordParameters struct {
 
 	// The ID of the Container Registry Token that this Container Registry Token Password resides in. Changing this forces a new Container Registry Token Password to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/containerregistry/v1beta1.Token
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/containerregistry/v1beta1.Token
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ContainerRegistryTokenID *string `json:"containerRegistryTokenId,omitempty" tf:"container_registry_token_id,omitempty"`

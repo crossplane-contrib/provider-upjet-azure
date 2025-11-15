@@ -24,8 +24,8 @@ type PrivateDNSZoneVirtualNetworkLinkInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the Virtual Network that should be linked to the DNS Zone. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.VirtualNetwork
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.VirtualNetwork
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	VirtualNetworkID *string `json:"virtualNetworkId,omitempty" tf:"virtual_network_id,omitempty"`
 
 	// Reference to a VirtualNetwork in network to populate virtualNetworkId.
@@ -62,7 +62,7 @@ type PrivateDNSZoneVirtualNetworkLinkObservation struct {
 type PrivateDNSZoneVirtualNetworkLinkParameters struct {
 
 	// The name of the Private DNS zone (without a terminating dot). Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.PrivateDNSZone
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.PrivateDNSZone
 	// +kubebuilder:validation:Optional
 	PrivateDNSZoneName *string `json:"privateDnsZoneName,omitempty" tf:"private_dns_zone_name,omitempty"`
 
@@ -79,7 +79,7 @@ type PrivateDNSZoneVirtualNetworkLinkParameters struct {
 	RegistrationEnabled *bool `json:"registrationEnabled,omitempty" tf:"registration_enabled,omitempty"`
 
 	// Specifies the resource group where the Private DNS Zone exists. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -97,8 +97,8 @@ type PrivateDNSZoneVirtualNetworkLinkParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the Virtual Network that should be linked to the DNS Zone. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.VirtualNetwork
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.VirtualNetwork
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualNetworkID *string `json:"virtualNetworkId,omitempty" tf:"virtual_network_id,omitempty"`
 

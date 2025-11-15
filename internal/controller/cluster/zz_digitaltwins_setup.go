@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	instance "github.com/upbound/provider-azure/internal/controller/cluster/digitaltwins/instance"
+	instance "github.com/upbound/provider-azure/v2/internal/controller/cluster/digitaltwins/instance"
 )
 
 // Setup_digitaltwins creates all controllers with the supplied logger and adds them to

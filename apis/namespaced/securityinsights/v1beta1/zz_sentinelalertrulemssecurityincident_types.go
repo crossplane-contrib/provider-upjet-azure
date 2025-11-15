@@ -109,7 +109,7 @@ type SentinelAlertRuleMSSecurityIncidentParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The ID of the Log Analytics Workspace this Sentinel MS Security Incident Alert Rule belongs to. Changing this forces a new Sentinel MS Security Incident Alert Rule to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/securityinsights/v1beta1.SentinelLogAnalyticsWorkspaceOnboarding
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/securityinsights/v1beta1.SentinelLogAnalyticsWorkspaceOnboarding
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("workspace_id",false)
 	// +kubebuilder:validation:Optional
 	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId,omitempty" tf:"log_analytics_workspace_id,omitempty"`

@@ -17,8 +17,8 @@ type FunctionAppHybridConnectionInitParameters struct {
 
 	// The ID of the Function App for this Hybrid Connection. Changing this forces a new resource to be created.
 	// The ID of the Function App for this Hybrid Connection.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/web/v1beta2.WindowsFunctionApp
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/web/v1beta2.WindowsFunctionApp
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	FunctionAppID *string `json:"functionAppId,omitempty" tf:"function_app_id,omitempty"`
 
 	// Reference to a WindowsFunctionApp in web to populate functionAppId.
@@ -39,7 +39,7 @@ type FunctionAppHybridConnectionInitParameters struct {
 
 	// The ID of the Relay Hybrid Connection to use. Changing this forces a new resource to be created.
 	// The ID of the Relay Hybrid Connection to use.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/relay/v1beta1.HybridConnection
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/relay/v1beta1.HybridConnection
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	RelayID *string `json:"relayId,omitempty" tf:"relay_id,omitempty"`
 
@@ -102,8 +102,8 @@ type FunctionAppHybridConnectionParameters struct {
 
 	// The ID of the Function App for this Hybrid Connection. Changing this forces a new resource to be created.
 	// The ID of the Function App for this Hybrid Connection.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/web/v1beta2.WindowsFunctionApp
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/web/v1beta2.WindowsFunctionApp
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	FunctionAppID *string `json:"functionAppId,omitempty" tf:"function_app_id,omitempty"`
 
@@ -127,7 +127,7 @@ type FunctionAppHybridConnectionParameters struct {
 
 	// The ID of the Relay Hybrid Connection to use. Changing this forces a new resource to be created.
 	// The ID of the Relay Hybrid Connection to use.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/relay/v1beta1.HybridConnection
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/relay/v1beta1.HybridConnection
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RelayID *string `json:"relayId,omitempty" tf:"relay_id,omitempty"`

@@ -64,7 +64,7 @@ type BackupPolicyKubernetesClusterParameters struct {
 	DefaultRetentionRule *DefaultRetentionRuleParameters `json:"defaultRetentionRule,omitempty" tf:"default_retention_rule,omitempty"`
 
 	// The name of the Resource Group where the Backup Policy Kubernetes Cluster should exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -85,7 +85,7 @@ type BackupPolicyKubernetesClusterParameters struct {
 	TimeZone *string `json:"timeZone,omitempty" tf:"time_zone,omitempty"`
 
 	// The name of the Backup Vault where the Backup Policy Kubernetes Cluster should exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/dataprotection/v1beta1.BackupVault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/dataprotection/v1beta1.BackupVault
 	// +kubebuilder:validation:Optional
 	VaultName *string `json:"vaultName,omitempty" tf:"vault_name,omitempty"`
 

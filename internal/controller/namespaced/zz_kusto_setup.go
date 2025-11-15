@@ -9,15 +9,15 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	attacheddatabaseconfiguration "github.com/upbound/provider-azure/internal/controller/namespaced/kusto/attacheddatabaseconfiguration"
-	cluster "github.com/upbound/provider-azure/internal/controller/namespaced/kusto/cluster"
-	clustermanagedprivateendpoint "github.com/upbound/provider-azure/internal/controller/namespaced/kusto/clustermanagedprivateendpoint"
-	clusterprincipalassignment "github.com/upbound/provider-azure/internal/controller/namespaced/kusto/clusterprincipalassignment"
-	database "github.com/upbound/provider-azure/internal/controller/namespaced/kusto/database"
-	databaseprincipalassignment "github.com/upbound/provider-azure/internal/controller/namespaced/kusto/databaseprincipalassignment"
-	eventgriddataconnection "github.com/upbound/provider-azure/internal/controller/namespaced/kusto/eventgriddataconnection"
-	eventhubdataconnection "github.com/upbound/provider-azure/internal/controller/namespaced/kusto/eventhubdataconnection"
-	iothubdataconnection "github.com/upbound/provider-azure/internal/controller/namespaced/kusto/iothubdataconnection"
+	attacheddatabaseconfiguration "github.com/upbound/provider-azure/v2/internal/controller/namespaced/kusto/attacheddatabaseconfiguration"
+	cluster "github.com/upbound/provider-azure/v2/internal/controller/namespaced/kusto/cluster"
+	clustermanagedprivateendpoint "github.com/upbound/provider-azure/v2/internal/controller/namespaced/kusto/clustermanagedprivateendpoint"
+	clusterprincipalassignment "github.com/upbound/provider-azure/v2/internal/controller/namespaced/kusto/clusterprincipalassignment"
+	database "github.com/upbound/provider-azure/v2/internal/controller/namespaced/kusto/database"
+	databaseprincipalassignment "github.com/upbound/provider-azure/v2/internal/controller/namespaced/kusto/databaseprincipalassignment"
+	eventgriddataconnection "github.com/upbound/provider-azure/v2/internal/controller/namespaced/kusto/eventgriddataconnection"
+	eventhubdataconnection "github.com/upbound/provider-azure/v2/internal/controller/namespaced/kusto/eventhubdataconnection"
+	iothubdataconnection "github.com/upbound/provider-azure/v2/internal/controller/namespaced/kusto/iothubdataconnection"
 )
 
 // Setup_kusto creates all controllers with the supplied logger and adds them to

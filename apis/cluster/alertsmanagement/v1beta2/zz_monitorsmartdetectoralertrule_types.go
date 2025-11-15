@@ -19,8 +19,8 @@ type ActionGroupInitParameters struct {
 	EmailSubject *string `json:"emailSubject,omitempty" tf:"email_subject,omitempty"`
 
 	// Specifies the action group ids.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/insights/v1beta2.MonitorActionGroup
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/insights/v1beta2.MonitorActionGroup
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +listType=set
 	Ids []*string `json:"ids,omitempty" tf:"ids,omitempty"`
 
@@ -56,8 +56,8 @@ type ActionGroupParameters struct {
 	EmailSubject *string `json:"emailSubject,omitempty" tf:"email_subject,omitempty"`
 
 	// Specifies the action group ids.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/insights/v1beta2.MonitorActionGroup
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/insights/v1beta2.MonitorActionGroup
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Ids []*string `json:"ids,omitempty" tf:"ids,omitempty"`
@@ -96,7 +96,7 @@ type MonitorSmartDetectorAlertRuleInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the name of the resource group in which the Monitor Smart Detector Alert Rule should exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
@@ -108,8 +108,8 @@ type MonitorSmartDetectorAlertRuleInitParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the scopes of this Smart Detector Alert Rule.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/insights/v1beta1.ApplicationInsights
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/insights/v1beta1.ApplicationInsights
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +listType=set
 	ScopeResourceIds []*string `json:"scopeResourceIds,omitempty" tf:"scope_resource_ids,omitempty"`
 
@@ -200,7 +200,7 @@ type MonitorSmartDetectorAlertRuleParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the name of the resource group in which the Monitor Smart Detector Alert Rule should exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -213,8 +213,8 @@ type MonitorSmartDetectorAlertRuleParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the scopes of this Smart Detector Alert Rule.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/insights/v1beta1.ApplicationInsights
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/insights/v1beta1.ApplicationInsights
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	ScopeResourceIds []*string `json:"scopeResourceIds,omitempty" tf:"scope_resource_ids,omitempty"`

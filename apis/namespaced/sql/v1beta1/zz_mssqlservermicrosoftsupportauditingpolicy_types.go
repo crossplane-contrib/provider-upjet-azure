@@ -17,7 +17,7 @@ import (
 type MSSQLServerMicrosoftSupportAuditingPolicyInitParameters struct {
 
 	// The blob storage endpoint (e.g. https://example.blob.core.windows.net). This blob storage will hold all Microsoft support auditing logs.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("primary_blob_endpoint",true)
 	BlobStorageEndpoint *string `json:"blobStorageEndpoint,omitempty" tf:"blob_storage_endpoint,omitempty"`
 
@@ -63,7 +63,7 @@ type MSSQLServerMicrosoftSupportAuditingPolicyObservation struct {
 type MSSQLServerMicrosoftSupportAuditingPolicyParameters struct {
 
 	// The blob storage endpoint (e.g. https://example.blob.core.windows.net). This blob storage will hold all Microsoft support auditing logs.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("primary_blob_endpoint",true)
 	// +kubebuilder:validation:Optional
 	BlobStorageEndpoint *string `json:"blobStorageEndpoint,omitempty" tf:"blob_storage_endpoint,omitempty"`
@@ -85,7 +85,7 @@ type MSSQLServerMicrosoftSupportAuditingPolicyParameters struct {
 	LogMonitoringEnabled *bool `json:"logMonitoringEnabled,omitempty" tf:"log_monitoring_enabled,omitempty"`
 
 	// The ID of the SQL Server to set the extended auditing policy. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/sql/v1beta1.MSSQLServer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/sql/v1beta1.MSSQLServer
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`

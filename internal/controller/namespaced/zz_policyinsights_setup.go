@@ -9,8 +9,8 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	resourcepolicyremediation "github.com/upbound/provider-azure/internal/controller/namespaced/policyinsights/resourcepolicyremediation"
-	subscriptionpolicyremediation "github.com/upbound/provider-azure/internal/controller/namespaced/policyinsights/subscriptionpolicyremediation"
+	resourcepolicyremediation "github.com/upbound/provider-azure/v2/internal/controller/namespaced/policyinsights/resourcepolicyremediation"
+	subscriptionpolicyremediation "github.com/upbound/provider-azure/v2/internal/controller/namespaced/policyinsights/subscriptionpolicyremediation"
 )
 
 // Setup_policyinsights creates all controllers with the supplied logger and adds them to

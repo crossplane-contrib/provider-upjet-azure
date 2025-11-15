@@ -59,7 +59,7 @@ type TopicAuthorizationRuleParameters struct {
 	Send *bool `json:"send,omitempty" tf:"send,omitempty"`
 
 	// Specifies the ID of the ServiceBus Topic. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/servicebus/v1beta1.Topic
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/servicebus/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TopicID *string `json:"topicId,omitempty" tf:"topic_id,omitempty"`

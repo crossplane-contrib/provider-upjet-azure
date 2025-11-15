@@ -126,7 +126,7 @@ type RouteMapParameters struct {
 	Rule []RouteMapRuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 
 	// The resource ID of the Virtual Hub. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta1.VirtualHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta1.VirtualHub
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualHubID *string `json:"virtualHubId,omitempty" tf:"virtual_hub_id,omitempty"`

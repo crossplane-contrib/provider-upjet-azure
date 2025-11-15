@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	configuration "github.com/upbound/provider-azure/internal/controller/cluster/appconfiguration/configuration"
+	configuration "github.com/upbound/provider-azure/v2/internal/controller/cluster/appconfiguration/configuration"
 )
 
 // Setup_appconfiguration creates all controllers with the supplied logger and adds them to

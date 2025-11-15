@@ -16,8 +16,8 @@ import (
 type DataSetKustoDatabaseInitParameters struct {
 
 	// The resource ID of the Kusto Cluster Database to be shared with the receiver. Changing this forces a new Data Share Kusto Database Dataset to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/kusto/v1beta1.Database
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/kusto/v1beta1.Database
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	KustoDatabaseID *string `json:"kustoDatabaseId,omitempty" tf:"kusto_database_id,omitempty"`
 
 	// Reference to a Database in kusto to populate kustoDatabaseId.
@@ -50,8 +50,8 @@ type DataSetKustoDatabaseObservation struct {
 type DataSetKustoDatabaseParameters struct {
 
 	// The resource ID of the Kusto Cluster Database to be shared with the receiver. Changing this forces a new Data Share Kusto Database Dataset to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/kusto/v1beta1.Database
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/kusto/v1beta1.Database
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KustoDatabaseID *string `json:"kustoDatabaseId,omitempty" tf:"kusto_database_id,omitempty"`
 
@@ -64,8 +64,8 @@ type DataSetKustoDatabaseParameters struct {
 	KustoDatabaseIDSelector *v1.Selector `json:"kustoDatabaseIdSelector,omitempty" tf:"-"`
 
 	// The resource ID of the Data Share where this Data Share Kusto Database Dataset should be created. Changing this forces a new Data Share Kusto Database Dataset to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/datashare/v1beta2.DataShare
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/datashare/v1beta2.DataShare
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ShareID *string `json:"shareId,omitempty" tf:"share_id,omitempty"`
 

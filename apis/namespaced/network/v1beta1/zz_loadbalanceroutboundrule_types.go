@@ -42,8 +42,8 @@ type LoadBalancerOutboundRuleInitParameters struct {
 	AllocatedOutboundPorts *float64 `json:"allocatedOutboundPorts,omitempty" tf:"allocated_outbound_ports,omitempty"`
 
 	// The ID of the Backend Address Pool. Outbound traffic is randomly load balanced across IPs in the backend IPs.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.LoadBalancerBackendAddressPool
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.LoadBalancerBackendAddressPool
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	BackendAddressPoolID *string `json:"backendAddressPoolId,omitempty" tf:"backend_address_pool_id,omitempty"`
 
 	// Reference to a LoadBalancerBackendAddressPool in network to populate backendAddressPoolId.
@@ -101,8 +101,8 @@ type LoadBalancerOutboundRuleParameters struct {
 	AllocatedOutboundPorts *float64 `json:"allocatedOutboundPorts,omitempty" tf:"allocated_outbound_ports,omitempty"`
 
 	// The ID of the Backend Address Pool. Outbound traffic is randomly load balanced across IPs in the backend IPs.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.LoadBalancerBackendAddressPool
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.LoadBalancerBackendAddressPool
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	BackendAddressPoolID *string `json:"backendAddressPoolId,omitempty" tf:"backend_address_pool_id,omitempty"`
 
@@ -127,8 +127,8 @@ type LoadBalancerOutboundRuleParameters struct {
 	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
 
 	// The ID of the Load Balancer in which to create the Outbound Rule. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.LoadBalancer
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.LoadBalancer
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LoadbalancerID *string `json:"loadbalancerId,omitempty" tf:"loadbalancer_id,omitempty"`
 

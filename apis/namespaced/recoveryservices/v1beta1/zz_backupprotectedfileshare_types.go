@@ -17,7 +17,7 @@ import (
 type BackupProtectedFileShareInitParameters struct {
 
 	// Specifies the ID of the backup policy to use. The policy must be an Azure File Share backup policy. Other types are not supported.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/recoveryservices/v1beta1.BackupPolicyFileShare
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/recoveryservices/v1beta1.BackupPolicyFileShare
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	BackupPolicyID *string `json:"backupPolicyId,omitempty" tf:"backup_policy_id,omitempty"`
 
@@ -30,7 +30,7 @@ type BackupProtectedFileShareInitParameters struct {
 	BackupPolicyIDSelector *v1.NamespacedSelector `json:"backupPolicyIdSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the Recovery Services Vault to use. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/recoveryservices/v1beta1.Vault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/recoveryservices/v1beta1.Vault
 	RecoveryVaultName *string `json:"recoveryVaultName,omitempty" tf:"recovery_vault_name,omitempty"`
 
 	// Reference to a Vault in recoveryservices to populate recoveryVaultName.
@@ -42,7 +42,7 @@ type BackupProtectedFileShareInitParameters struct {
 	RecoveryVaultNameSelector *v1.NamespacedSelector `json:"recoveryVaultNameSelector,omitempty" tf:"-"`
 
 	// The name of the resource group in which to create the Azure Backup Protected File Share. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
@@ -54,7 +54,7 @@ type BackupProtectedFileShareInitParameters struct {
 	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the file share to backup. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/storage/v1beta1.Share
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Share
 	SourceFileShareName *string `json:"sourceFileShareName,omitempty" tf:"source_file_share_name,omitempty"`
 
 	// Reference to a Share in storage to populate sourceFileShareName.
@@ -66,7 +66,7 @@ type BackupProtectedFileShareInitParameters struct {
 	SourceFileShareNameSelector *v1.NamespacedSelector `json:"sourceFileShareNameSelector,omitempty" tf:"-"`
 
 	// Specifies the ID of the storage account of the file share to backup. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/recoveryservices/v1beta1.BackupContainerStorageAccount
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/recoveryservices/v1beta1.BackupContainerStorageAccount
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("storage_account_id",false)
 	SourceStorageAccountID *string `json:"sourceStorageAccountId,omitempty" tf:"source_storage_account_id,omitempty"`
 
@@ -103,7 +103,7 @@ type BackupProtectedFileShareObservation struct {
 type BackupProtectedFileShareParameters struct {
 
 	// Specifies the ID of the backup policy to use. The policy must be an Azure File Share backup policy. Other types are not supported.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/recoveryservices/v1beta1.BackupPolicyFileShare
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/recoveryservices/v1beta1.BackupPolicyFileShare
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	BackupPolicyID *string `json:"backupPolicyId,omitempty" tf:"backup_policy_id,omitempty"`
@@ -117,7 +117,7 @@ type BackupProtectedFileShareParameters struct {
 	BackupPolicyIDSelector *v1.NamespacedSelector `json:"backupPolicyIdSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the Recovery Services Vault to use. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/recoveryservices/v1beta1.Vault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/recoveryservices/v1beta1.Vault
 	// +kubebuilder:validation:Optional
 	RecoveryVaultName *string `json:"recoveryVaultName,omitempty" tf:"recovery_vault_name,omitempty"`
 
@@ -130,7 +130,7 @@ type BackupProtectedFileShareParameters struct {
 	RecoveryVaultNameSelector *v1.NamespacedSelector `json:"recoveryVaultNameSelector,omitempty" tf:"-"`
 
 	// The name of the resource group in which to create the Azure Backup Protected File Share. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -143,7 +143,7 @@ type BackupProtectedFileShareParameters struct {
 	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the file share to backup. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/storage/v1beta1.Share
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Share
 	// +kubebuilder:validation:Optional
 	SourceFileShareName *string `json:"sourceFileShareName,omitempty" tf:"source_file_share_name,omitempty"`
 
@@ -156,7 +156,7 @@ type BackupProtectedFileShareParameters struct {
 	SourceFileShareNameSelector *v1.NamespacedSelector `json:"sourceFileShareNameSelector,omitempty" tf:"-"`
 
 	// Specifies the ID of the storage account of the file share to backup. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/recoveryservices/v1beta1.BackupContainerStorageAccount
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/recoveryservices/v1beta1.BackupContainerStorageAccount
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("storage_account_id",false)
 	// +kubebuilder:validation:Optional
 	SourceStorageAccountID *string `json:"sourceStorageAccountId,omitempty" tf:"source_storage_account_id,omitempty"`

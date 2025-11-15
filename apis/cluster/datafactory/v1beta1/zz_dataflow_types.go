@@ -80,7 +80,7 @@ type DataFlowParameters struct {
 	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// The ID of Data Factory in which to associate the Data Flow with. Changing this forces a new resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/datafactory/v1beta1.Factory
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/datafactory/v1beta1.Factory
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DataFactoryID *string `json:"dataFactoryId,omitempty" tf:"data_factory_id,omitempty"`
@@ -125,7 +125,7 @@ type DataFlowParameters struct {
 type DataSetInitParameters struct {
 
 	// The name for the Data Flow transformation.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/datafactory/v1beta1.DataSetJSON
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/datafactory/v1beta1.DataSetJSON
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Reference to a DataSetJSON in datafactory to populate name.
@@ -154,7 +154,7 @@ type DataSetObservation struct {
 type DataSetParameters struct {
 
 	// The name for the Data Flow transformation.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/datafactory/v1beta1.DataSetJSON
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/datafactory/v1beta1.DataSetJSON
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -392,7 +392,7 @@ type SinkParameters struct {
 type SourceDataSetInitParameters struct {
 
 	// The name for the Data Flow transformation.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/datafactory/v1beta1.DataSetJSON
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/datafactory/v1beta1.DataSetJSON
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Reference to a DataSetJSON in datafactory to populate name.
@@ -421,7 +421,7 @@ type SourceDataSetObservation struct {
 type SourceDataSetParameters struct {
 
 	// The name for the Data Flow transformation.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/datafactory/v1beta1.DataSetJSON
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/datafactory/v1beta1.DataSetJSON
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 

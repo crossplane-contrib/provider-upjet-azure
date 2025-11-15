@@ -104,7 +104,7 @@ type ComputeInstanceInitParameters struct {
 	SSH *ComputeInstanceSSHInitParameters `json:"ssh,omitempty" tf:"ssh,omitempty"`
 
 	// Virtual network subnet resource ID the compute nodes belong to. Changing this forces a new Machine Learning Compute Instance to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetResourceID *string `json:"subnetResourceId,omitempty" tf:"subnet_resource_id,omitempty"`
 
@@ -187,7 +187,7 @@ type ComputeInstanceParameters struct {
 	LocalAuthEnabled *bool `json:"localAuthEnabled,omitempty" tf:"local_auth_enabled,omitempty"`
 
 	// The ID of the Machine Learning Workspace. Changing this forces a new Machine Learning Compute Instance to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/machinelearningservices/v1beta2.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/machinelearningservices/v1beta2.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	MachineLearningWorkspaceID *string `json:"machineLearningWorkspaceId,omitempty" tf:"machine_learning_workspace_id,omitempty"`
@@ -209,7 +209,7 @@ type ComputeInstanceParameters struct {
 	SSH *ComputeInstanceSSHParameters `json:"ssh,omitempty" tf:"ssh,omitempty"`
 
 	// Virtual network subnet resource ID the compute nodes belong to. Changing this forces a new Machine Learning Compute Instance to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetResourceID *string `json:"subnetResourceId,omitempty" tf:"subnet_resource_id,omitempty"`

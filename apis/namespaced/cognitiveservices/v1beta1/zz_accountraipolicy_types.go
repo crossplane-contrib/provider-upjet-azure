@@ -59,8 +59,8 @@ type AccountRaiPolicyParameters struct {
 	BasePolicyName *string `json:"basePolicyName,omitempty" tf:"base_policy_name,omitempty"`
 
 	// The ID of the Cognitive Service Account to which this RAI Policy should be associated. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/cognitiveservices/v1beta1.Account
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cognitiveservices/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CognitiveAccountID *string `json:"cognitiveAccountId,omitempty" tf:"cognitive_account_id,omitempty"`
 

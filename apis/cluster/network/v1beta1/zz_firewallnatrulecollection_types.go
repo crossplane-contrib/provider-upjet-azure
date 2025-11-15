@@ -52,7 +52,7 @@ type FirewallNATRuleCollectionParameters struct {
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// Specifies the name of the Firewall in which the NAT Rule Collection should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.Firewall
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Firewall
 	// +kubebuilder:validation:Optional
 	AzureFirewallName *string `json:"azureFirewallName,omitempty" tf:"azure_firewall_name,omitempty"`
 
@@ -69,7 +69,7 @@ type FirewallNATRuleCollectionParameters struct {
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// Specifies the name of the Resource Group in which the Firewall exists. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -92,7 +92,7 @@ type FirewallNATRuleCollectionRuleInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A list of destination IP addresses and/or IP ranges.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta1.PublicIP
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta1.PublicIP
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("ip_address",true)
 	DestinationAddresses []*string `json:"destinationAddresses,omitempty" tf:"destination_addresses,omitempty"`
 
@@ -163,7 +163,7 @@ type FirewallNATRuleCollectionRuleParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A list of destination IP addresses and/or IP ranges.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta1.PublicIP
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta1.PublicIP
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("ip_address",true)
 	// +kubebuilder:validation:Optional
 	DestinationAddresses []*string `json:"destinationAddresses,omitempty" tf:"destination_addresses,omitempty"`

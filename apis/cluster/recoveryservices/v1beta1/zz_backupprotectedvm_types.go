@@ -16,7 +16,7 @@ import (
 type BackupProtectedVMInitParameters struct {
 
 	// Specifies the ID of the backup policy to use.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/recoveryservices/v1beta2.BackupPolicyVM
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/recoveryservices/v1beta2.BackupPolicyVM
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	BackupPolicyID *string `json:"backupPolicyId,omitempty" tf:"backup_policy_id,omitempty"`
 
@@ -40,7 +40,7 @@ type BackupProtectedVMInitParameters struct {
 	ProtectionState *string `json:"protectionState,omitempty" tf:"protection_state,omitempty"`
 
 	// Specifies the name of the Recovery Services Vault to use. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/recoveryservices/v1beta2.Vault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/recoveryservices/v1beta2.Vault
 	RecoveryVaultName *string `json:"recoveryVaultName,omitempty" tf:"recovery_vault_name,omitempty"`
 
 	// Reference to a Vault in recoveryservices to populate recoveryVaultName.
@@ -52,7 +52,7 @@ type BackupProtectedVMInitParameters struct {
 	RecoveryVaultNameSelector *v1.Selector `json:"recoveryVaultNameSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the Resource Group associated with the Recovery Services Vault to use. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
@@ -99,7 +99,7 @@ type BackupProtectedVMObservation struct {
 type BackupProtectedVMParameters struct {
 
 	// Specifies the ID of the backup policy to use.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/recoveryservices/v1beta2.BackupPolicyVM
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/recoveryservices/v1beta2.BackupPolicyVM
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	BackupPolicyID *string `json:"backupPolicyId,omitempty" tf:"backup_policy_id,omitempty"`
@@ -127,7 +127,7 @@ type BackupProtectedVMParameters struct {
 	ProtectionState *string `json:"protectionState,omitempty" tf:"protection_state,omitempty"`
 
 	// Specifies the name of the Recovery Services Vault to use. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/recoveryservices/v1beta2.Vault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/recoveryservices/v1beta2.Vault
 	// +kubebuilder:validation:Optional
 	RecoveryVaultName *string `json:"recoveryVaultName,omitempty" tf:"recovery_vault_name,omitempty"`
 
@@ -140,7 +140,7 @@ type BackupProtectedVMParameters struct {
 	RecoveryVaultNameSelector *v1.Selector `json:"recoveryVaultNameSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the Resource Group associated with the Recovery Services Vault to use. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	spatialanchorsaccount "github.com/upbound/provider-azure/internal/controller/namespaced/mixedreality/spatialanchorsaccount"
+	spatialanchorsaccount "github.com/upbound/provider-azure/v2/internal/controller/namespaced/mixedreality/spatialanchorsaccount"
 )
 
 // Setup_mixedreality creates all controllers with the supplied logger and adds them to

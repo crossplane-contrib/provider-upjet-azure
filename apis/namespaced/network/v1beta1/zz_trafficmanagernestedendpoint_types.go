@@ -73,7 +73,7 @@ type TrafficManagerNestedEndpointInitParameters struct {
 	Subnet []TrafficManagerNestedEndpointSubnetInitParameters `json:"subnet,omitempty" tf:"subnet,omitempty"`
 
 	// The resource id of an Azure resource to target.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.TrafficManagerProfile
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.TrafficManagerProfile
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
 
@@ -166,7 +166,7 @@ type TrafficManagerNestedEndpointParameters struct {
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// The ID of the Traffic Manager Profile that this External Endpoint should be created within. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.TrafficManagerProfile
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.TrafficManagerProfile
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ProfileID *string `json:"profileId,omitempty" tf:"profile_id,omitempty"`
@@ -184,7 +184,7 @@ type TrafficManagerNestedEndpointParameters struct {
 	Subnet []TrafficManagerNestedEndpointSubnetParameters `json:"subnet,omitempty" tf:"subnet,omitempty"`
 
 	// The resource id of an Azure resource to target.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.TrafficManagerProfile
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.TrafficManagerProfile
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`

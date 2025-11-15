@@ -23,7 +23,7 @@ type ShareDirectoryInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The Storage Share ID in which this file will be placed into. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta1.Share
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Share
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	StorageShareID *string `json:"storageShareId,omitempty" tf:"storage_share_id,omitempty"`
 
@@ -64,7 +64,7 @@ type ShareDirectoryParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The Storage Share ID in which this file will be placed into. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta1.Share
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Share
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StorageShareID *string `json:"storageShareId,omitempty" tf:"storage_share_id,omitempty"`

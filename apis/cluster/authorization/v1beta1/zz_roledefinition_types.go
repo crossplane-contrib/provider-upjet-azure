@@ -71,7 +71,7 @@ type PermissionsParameters struct {
 type RoleDefinitionInitParameters struct {
 
 	// One or more assignable scopes for this Role Definition, such as /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333, /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup, /providers/Microsoft.Management/managementGroups/0b1f6471-1bf0-4dda-aec3-111122223333 , or /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup/providers/Microsoft.Compute/virtualMachines/myVM.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/management/v1beta1.ManagementGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/management/v1beta1.ManagementGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	AssignableScopes []*string `json:"assignableScopes,omitempty" tf:"assignable_scopes,omitempty"`
 
@@ -96,7 +96,7 @@ type RoleDefinitionInitParameters struct {
 	RoleDefinitionID *string `json:"roleDefinitionId,omitempty" tf:"role_definition_id,omitempty"`
 
 	// The scope at which the Role Definition applies to, such as /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333, /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup, /providers/Microsoft.Management/managementGroups/0b1f6471-1bf0-4dda-aec3-111122223333, or /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup/providers/Microsoft.Compute/virtualMachines/myVM. It is recommended to use the first entry of the assignable_scopes. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/management/v1beta1.ManagementGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/management/v1beta1.ManagementGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
@@ -138,7 +138,7 @@ type RoleDefinitionObservation struct {
 type RoleDefinitionParameters struct {
 
 	// One or more assignable scopes for this Role Definition, such as /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333, /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup, /providers/Microsoft.Management/managementGroups/0b1f6471-1bf0-4dda-aec3-111122223333 , or /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup/providers/Microsoft.Compute/virtualMachines/myVM.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/management/v1beta1.ManagementGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/management/v1beta1.ManagementGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AssignableScopes []*string `json:"assignableScopes,omitempty" tf:"assignable_scopes,omitempty"`
@@ -168,7 +168,7 @@ type RoleDefinitionParameters struct {
 	RoleDefinitionID *string `json:"roleDefinitionId,omitempty" tf:"role_definition_id,omitempty"`
 
 	// The scope at which the Role Definition applies to, such as /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333, /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup, /providers/Microsoft.Management/managementGroups/0b1f6471-1bf0-4dda-aec3-111122223333, or /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup/providers/Microsoft.Compute/virtualMachines/myVM. It is recommended to use the first entry of the assignable_scopes. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/management/v1beta1.ManagementGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/management/v1beta1.ManagementGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`

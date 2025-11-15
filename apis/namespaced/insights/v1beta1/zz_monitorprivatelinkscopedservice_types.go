@@ -17,8 +17,8 @@ import (
 type MonitorPrivateLinkScopedServiceInitParameters struct {
 
 	// The ID of the linked resource. It must be the Log Analytics workspace or the Application Insights component or the Data Collection endpoint. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/insights/v1beta1.ApplicationInsights
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/insights/v1beta1.ApplicationInsights
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	LinkedResourceID *string `json:"linkedResourceId,omitempty" tf:"linked_resource_id,omitempty"`
 
 	// Reference to a ApplicationInsights in insights to populate linkedResourceId.
@@ -48,8 +48,8 @@ type MonitorPrivateLinkScopedServiceObservation struct {
 type MonitorPrivateLinkScopedServiceParameters struct {
 
 	// The ID of the linked resource. It must be the Log Analytics workspace or the Application Insights component or the Data Collection endpoint. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/insights/v1beta1.ApplicationInsights
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/insights/v1beta1.ApplicationInsights
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LinkedResourceID *string `json:"linkedResourceId,omitempty" tf:"linked_resource_id,omitempty"`
 
@@ -62,7 +62,7 @@ type MonitorPrivateLinkScopedServiceParameters struct {
 	LinkedResourceIDSelector *v1.NamespacedSelector `json:"linkedResourceIdSelector,omitempty" tf:"-"`
 
 	// The name of the Resource Group where the Azure Monitor Private Link Scoped Service should exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -75,7 +75,7 @@ type MonitorPrivateLinkScopedServiceParameters struct {
 	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The name of the Azure Monitor Private Link Scope. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/insights/v1beta1.MonitorPrivateLinkScope
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/insights/v1beta1.MonitorPrivateLinkScope
 	// +kubebuilder:validation:Optional
 	ScopeName *string `json:"scopeName,omitempty" tf:"scope_name,omitempty"`
 

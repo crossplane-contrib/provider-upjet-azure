@@ -17,9 +17,9 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/pkg/errors"
 
-	"github.com/upbound/provider-azure/config/cluster"
-	"github.com/upbound/provider-azure/config/cluster/common"
-	"github.com/upbound/provider-azure/hack"
+	"github.com/upbound/provider-azure/v2/config/cluster"
+	"github.com/upbound/provider-azure/v2/config/cluster/common"
+	"github.com/upbound/provider-azure/v2/hack"
 )
 
 // GetProvider returns provider configuration

@@ -242,8 +242,8 @@ type DynamicCriteriaParameters struct {
 type MonitorMetricAlertActionInitParameters struct {
 
 	// The ID of the Action Group can be sourced from the
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/insights/v1beta2.MonitorActionGroup
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/insights/v1beta2.MonitorActionGroup
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	ActionGroupID *string `json:"actionGroupId,omitempty" tf:"action_group_id,omitempty"`
 
 	// Reference to a MonitorActionGroup in insights to populate actionGroupId.
@@ -272,8 +272,8 @@ type MonitorMetricAlertActionObservation struct {
 type MonitorMetricAlertActionParameters struct {
 
 	// The ID of the Action Group can be sourced from the
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/insights/v1beta2.MonitorActionGroup
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/insights/v1beta2.MonitorActionGroup
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ActionGroupID *string `json:"actionGroupId,omitempty" tf:"action_group_id,omitempty"`
 
@@ -397,8 +397,8 @@ type MonitorMetricAlertInitParameters struct {
 	Frequency *string `json:"frequency,omitempty" tf:"frequency,omitempty"`
 
 	// A set of strings of resource IDs at which the metric criteria should be applied.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta2.Account
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +listType=set
 	Scopes []*string `json:"scopes,omitempty" tf:"scopes,omitempty"`
 
@@ -519,7 +519,7 @@ type MonitorMetricAlertParameters struct {
 	Frequency *string `json:"frequency,omitempty" tf:"frequency,omitempty"`
 
 	// The name of the resource group in which to create the Metric Alert instance. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -532,8 +532,8 @@ type MonitorMetricAlertParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A set of strings of resource IDs at which the metric criteria should be applied.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta2.Account
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Scopes []*string `json:"scopes,omitempty" tf:"scopes,omitempty"`

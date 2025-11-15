@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	marketplaceagreement "github.com/upbound/provider-azure/internal/controller/cluster/marketplaceordering/marketplaceagreement"
+	marketplaceagreement "github.com/upbound/provider-azure/v2/internal/controller/cluster/marketplaceordering/marketplaceagreement"
 )
 
 // Setup_marketplaceordering creates all controllers with the supplied logger and adds them to

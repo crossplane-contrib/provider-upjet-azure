@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	loadtest "github.com/upbound/provider-azure/internal/controller/cluster/loadtestservice/loadtest"
+	loadtest "github.com/upbound/provider-azure/v2/internal/controller/cluster/loadtestservice/loadtest"
 )
 
 // Setup_loadtestservice creates all controllers with the supplied logger and adds them to

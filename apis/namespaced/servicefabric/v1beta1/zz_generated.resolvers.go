@@ -11,8 +11,8 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
 	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-	rconfig "github.com/upbound/provider-azure/apis/namespaced/rconfig"
-	apisresolver "github.com/upbound/provider-azure/internal/apis"
+	rconfig "github.com/upbound/provider-azure/v2/apis/namespaced/rconfig"
+	apisresolver "github.com/upbound/provider-azure/v2/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 

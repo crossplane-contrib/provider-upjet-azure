@@ -26,7 +26,7 @@ type RedisCacheInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The resource ID of the Cache for Redis.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/cache/v1beta1.RedisCache
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cache/v1beta1.RedisCache
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	RedisCacheID *string `json:"redisCacheId,omitempty" tf:"redis_cache_id,omitempty"`
 
@@ -60,7 +60,7 @@ type RedisCacheObservation struct {
 type RedisCacheParameters struct {
 
 	// The resource ID of the API Management Service from which to create this external cache. Changing this forces a new API Management Redis Cache to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/apimanagement/v1beta1.Management
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta1.Management
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	APIManagementID *string `json:"apiManagementId,omitempty" tf:"api_management_id,omitempty"`
@@ -86,7 +86,7 @@ type RedisCacheParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The resource ID of the Cache for Redis.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/cache/v1beta1.RedisCache
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cache/v1beta1.RedisCache
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RedisCacheID *string `json:"redisCacheId,omitempty" tf:"redis_cache_id,omitempty"`
