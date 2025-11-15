@@ -80,7 +80,7 @@ type IOTSecurityDeviceGroupInitParameters struct {
 	AllowRule *AllowRuleInitParameters `json:"allowRule,omitempty" tf:"allow_rule,omitempty"`
 
 	// The ID of the IoT Hub which to link the Security Device Group to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/devices/v1beta2.IOTHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/devices/v1beta2.IOTHub
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	IOTHubID *string `json:"iothubId,omitempty" tf:"iothub_id,omitempty"`
 
@@ -124,7 +124,7 @@ type IOTSecurityDeviceGroupParameters struct {
 	AllowRule *AllowRuleParameters `json:"allowRule,omitempty" tf:"allow_rule,omitempty"`
 
 	// The ID of the IoT Hub which to link the Security Device Group to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/devices/v1beta2.IOTHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/devices/v1beta2.IOTHub
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	IOTHubID *string `json:"iothubId,omitempty" tf:"iothub_id,omitempty"`

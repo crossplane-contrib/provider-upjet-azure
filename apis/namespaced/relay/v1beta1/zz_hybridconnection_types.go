@@ -20,7 +20,7 @@ type HybridConnectionInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of the Azure Relay in which to create the Azure Relay Hybrid Connection. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/relay/v1beta1.EventRelayNamespace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/relay/v1beta1.EventRelayNamespace
 	RelayNamespaceName *string `json:"relayNamespaceName,omitempty" tf:"relay_namespace_name,omitempty"`
 
 	// Reference to a EventRelayNamespace in relay to populate relayNamespaceName.
@@ -35,7 +35,7 @@ type HybridConnectionInitParameters struct {
 	RequiresClientAuthorization *bool `json:"requiresClientAuthorization,omitempty" tf:"requires_client_authorization,omitempty"`
 
 	// The name of the resource group in which to create the Azure Relay Hybrid Connection. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
@@ -78,7 +78,7 @@ type HybridConnectionParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of the Azure Relay in which to create the Azure Relay Hybrid Connection. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/relay/v1beta1.EventRelayNamespace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/relay/v1beta1.EventRelayNamespace
 	// +kubebuilder:validation:Optional
 	RelayNamespaceName *string `json:"relayNamespaceName,omitempty" tf:"relay_namespace_name,omitempty"`
 
@@ -95,7 +95,7 @@ type HybridConnectionParameters struct {
 	RequiresClientAuthorization *bool `json:"requiresClientAuthorization,omitempty" tf:"requires_client_authorization,omitempty"`
 
 	// The name of the resource group in which to create the Azure Relay Hybrid Connection. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

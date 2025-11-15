@@ -26,7 +26,7 @@ type EnvironmentStorageInitParameters struct {
 
 	// The Azure Storage Account in which the Share to be used is located. Changing this forces a new resource to be created.
 	// The Azure Storage Account in which the Share to be used is located.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
 	// Reference to a Account in storage to populate accountName.
@@ -42,7 +42,7 @@ type EnvironmentStorageInitParameters struct {
 
 	// The name of the Azure Storage Share to use. Changing this forces a new resource to be created.
 	// The name of the Azure Storage Share to use.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/storage/v1beta1.Share
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Share
 	ShareName *string `json:"shareName,omitempty" tf:"share_name,omitempty"`
 
 	// Reference to a Share in storage to populate shareName.
@@ -93,7 +93,7 @@ type EnvironmentStorageParameters struct {
 
 	// The Azure Storage Account in which the Share to be used is located. Changing this forces a new resource to be created.
 	// The Azure Storage Account in which the Share to be used is located.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
 	// +kubebuilder:validation:Optional
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
@@ -107,7 +107,7 @@ type EnvironmentStorageParameters struct {
 
 	// The ID of the Container App Environment to which this storage belongs. Changing this forces a new resource to be created.
 	// The ID of the Container App Environment to which this storage belongs.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/containerapp/v1beta1.Environment
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/containerapp/v1beta1.Environment
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ContainerAppEnvironmentID *string `json:"containerAppEnvironmentId,omitempty" tf:"container_app_environment_id,omitempty"`
@@ -126,7 +126,7 @@ type EnvironmentStorageParameters struct {
 
 	// The name of the Azure Storage Share to use. Changing this forces a new resource to be created.
 	// The name of the Azure Storage Share to use.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/storage/v1beta1.Share
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Share
 	// +kubebuilder:validation:Optional
 	ShareName *string `json:"shareName,omitempty" tf:"share_name,omitempty"`
 

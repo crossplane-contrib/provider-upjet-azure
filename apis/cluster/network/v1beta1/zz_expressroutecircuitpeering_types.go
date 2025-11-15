@@ -90,7 +90,7 @@ type ExpressRouteCircuitPeeringObservation struct {
 type ExpressRouteCircuitPeeringParameters struct {
 
 	// The name of the ExpressRoute Circuit in which to create the Peering. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta1.ExpressRouteCircuit
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta1.ExpressRouteCircuit
 	// +kubebuilder:validation:Optional
 	ExpressRouteCircuitName *string `json:"expressRouteCircuitName,omitempty" tf:"express_route_circuit_name,omitempty"`
 
@@ -123,7 +123,7 @@ type ExpressRouteCircuitPeeringParameters struct {
 	PrimaryPeerAddressPrefix *string `json:"primaryPeerAddressPrefix,omitempty" tf:"primary_peer_address_prefix,omitempty"`
 
 	// The name of the resource group in which to create the Express Route Circuit Peering. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

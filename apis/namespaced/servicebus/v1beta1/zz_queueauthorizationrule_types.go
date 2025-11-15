@@ -55,7 +55,7 @@ type QueueAuthorizationRuleParameters struct {
 	Manage *bool `json:"manage,omitempty" tf:"manage,omitempty"`
 
 	// Specifies the ID of the ServiceBus Queue. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/servicebus/v1beta1.Queue
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/servicebus/v1beta1.Queue
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	QueueID *string `json:"queueId,omitempty" tf:"queue_id,omitempty"`

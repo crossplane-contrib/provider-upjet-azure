@@ -17,7 +17,7 @@ import (
 type PrivateEndpointApplicationSecurityGroupAssociationInitParameters struct {
 
 	// The id of application security group to associate. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.ApplicationSecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.ApplicationSecurityGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ApplicationSecurityGroupID *string `json:"applicationSecurityGroupId,omitempty" tf:"application_security_group_id,omitempty"`
 
@@ -30,7 +30,7 @@ type PrivateEndpointApplicationSecurityGroupAssociationInitParameters struct {
 	ApplicationSecurityGroupIDSelector *v1.NamespacedSelector `json:"applicationSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// The id of private endpoint to associate. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.PrivateEndpoint
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.PrivateEndpoint
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PrivateEndpointID *string `json:"privateEndpointId,omitempty" tf:"private_endpoint_id,omitempty"`
 
@@ -57,7 +57,7 @@ type PrivateEndpointApplicationSecurityGroupAssociationObservation struct {
 type PrivateEndpointApplicationSecurityGroupAssociationParameters struct {
 
 	// The id of application security group to associate. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.ApplicationSecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.ApplicationSecurityGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ApplicationSecurityGroupID *string `json:"applicationSecurityGroupId,omitempty" tf:"application_security_group_id,omitempty"`
@@ -71,7 +71,7 @@ type PrivateEndpointApplicationSecurityGroupAssociationParameters struct {
 	ApplicationSecurityGroupIDSelector *v1.NamespacedSelector `json:"applicationSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// The id of private endpoint to associate. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.PrivateEndpoint
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.PrivateEndpoint
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PrivateEndpointID *string `json:"privateEndpointId,omitempty" tf:"private_endpoint_id,omitempty"`

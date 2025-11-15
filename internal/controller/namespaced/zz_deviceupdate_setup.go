@@ -9,8 +9,8 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	iothubdeviceupdateaccount "github.com/upbound/provider-azure/internal/controller/namespaced/deviceupdate/iothubdeviceupdateaccount"
-	iothubdeviceupdateinstance "github.com/upbound/provider-azure/internal/controller/namespaced/deviceupdate/iothubdeviceupdateinstance"
+	iothubdeviceupdateaccount "github.com/upbound/provider-azure/v2/internal/controller/namespaced/deviceupdate/iothubdeviceupdateaccount"
+	iothubdeviceupdateinstance "github.com/upbound/provider-azure/v2/internal/controller/namespaced/deviceupdate/iothubdeviceupdateinstance"
 )
 
 // Setup_deviceupdate creates all controllers with the supplied logger and adds them to

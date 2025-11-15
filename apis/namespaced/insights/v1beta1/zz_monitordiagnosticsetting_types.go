@@ -152,7 +152,7 @@ type MonitorDiagnosticSettingInitParameters struct {
 	PartnerSolutionID *string `json:"partnerSolutionId,omitempty" tf:"partner_solution_id,omitempty"`
 
 	// The ID of the Storage Account where logs should be sent.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 
@@ -244,7 +244,7 @@ type MonitorDiagnosticSettingParameters struct {
 	PartnerSolutionID *string `json:"partnerSolutionId,omitempty" tf:"partner_solution_id,omitempty"`
 
 	// The ID of the Storage Account where logs should be sent.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`

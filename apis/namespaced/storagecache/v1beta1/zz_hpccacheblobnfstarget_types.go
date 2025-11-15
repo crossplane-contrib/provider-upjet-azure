@@ -20,7 +20,7 @@ type HPCCacheBlobNFSTargetInitParameters struct {
 	AccessPolicyName *string `json:"accessPolicyName,omitempty" tf:"access_policy_name,omitempty"`
 
 	// The name of the HPC Cache, which the HPC Cache Blob NFS Target will be added to. Changing this forces a new HPC Cache Blob NFS Target to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/storagecache/v1beta1.HPCCache
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storagecache/v1beta1.HPCCache
 	CacheName *string `json:"cacheName,omitempty" tf:"cache_name,omitempty"`
 
 	// Reference to a HPCCache in storagecache to populate cacheName.
@@ -84,7 +84,7 @@ type HPCCacheBlobNFSTargetParameters struct {
 	AccessPolicyName *string `json:"accessPolicyName,omitempty" tf:"access_policy_name,omitempty"`
 
 	// The name of the HPC Cache, which the HPC Cache Blob NFS Target will be added to. Changing this forces a new HPC Cache Blob NFS Target to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/storagecache/v1beta1.HPCCache
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storagecache/v1beta1.HPCCache
 	// +kubebuilder:validation:Optional
 	CacheName *string `json:"cacheName,omitempty" tf:"cache_name,omitempty"`
 
@@ -101,7 +101,7 @@ type HPCCacheBlobNFSTargetParameters struct {
 	NamespacePath *string `json:"namespacePath,omitempty" tf:"namespace_path,omitempty"`
 
 	// The name of the Resource Group where the HPC Cache Blob NFS Target should exist. Changing this forces a new HPC Cache Blob NFS Target to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

@@ -78,7 +78,7 @@ type FrontdoorRulesEngineParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The name of the Front Door instance. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.FrontDoor
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.FrontDoor
 	// +kubebuilder:validation:Optional
 	FrontdoorName *string `json:"frontdoorName,omitempty" tf:"frontdoor_name,omitempty"`
 
@@ -91,7 +91,7 @@ type FrontdoorRulesEngineParameters struct {
 	FrontdoorNameSelector *v1.NamespacedSelector `json:"frontdoorNameSelector,omitempty" tf:"-"`
 
 	// The name of the resource group. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

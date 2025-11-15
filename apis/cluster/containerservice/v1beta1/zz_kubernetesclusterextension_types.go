@@ -104,7 +104,7 @@ type KubernetesClusterExtensionObservation struct {
 type KubernetesClusterExtensionParameters struct {
 
 	// Specifies the Cluster ID. Changing this forces a new Kubernetes Cluster Extension to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/containerservice/v1beta2.KubernetesCluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/containerservice/v1beta2.KubernetesCluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`

@@ -16,7 +16,7 @@ import (
 type MongoUserDefinitionInitParameters struct {
 
 	// The resource ID of the Mongo DB. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/cosmosdb/v1beta2.MongoDatabase
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/cosmosdb/v1beta2.MongoDatabase
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	CosmosMongoDatabaseID *string `json:"cosmosMongoDatabaseId,omitempty" tf:"cosmos_mongo_database_id,omitempty"`
 
@@ -50,7 +50,7 @@ type MongoUserDefinitionObservation struct {
 type MongoUserDefinitionParameters struct {
 
 	// The resource ID of the Mongo DB. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/cosmosdb/v1beta2.MongoDatabase
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/cosmosdb/v1beta2.MongoDatabase
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CosmosMongoDatabaseID *string `json:"cosmosMongoDatabaseId,omitempty" tf:"cosmos_mongo_database_id,omitempty"`

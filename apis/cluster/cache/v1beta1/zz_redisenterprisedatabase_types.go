@@ -107,7 +107,7 @@ type RedisEnterpriseDatabaseParameters struct {
 	ClientProtocol *string `json:"clientProtocol,omitempty" tf:"client_protocol,omitempty"`
 
 	// The resource id of the Redis Enterprise Cluster to deploy this Redis Enterprise Database. Changing this forces a new Redis Enterprise Database to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/cache/v1beta1.RedisEnterpriseCluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/cache/v1beta1.RedisEnterpriseCluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`

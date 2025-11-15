@@ -16,7 +16,7 @@ import (
 type ActionInitParameters struct {
 
 	// Specifies the resource id of the monitor action group.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/insights/v1beta2.MonitorActionGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/insights/v1beta2.MonitorActionGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ActionGroupID *string `json:"actionGroupId,omitempty" tf:"action_group_id,omitempty"`
 
@@ -46,7 +46,7 @@ type ActionObservation struct {
 type ActionParameters struct {
 
 	// Specifies the resource id of the monitor action group.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/insights/v1beta2.MonitorActionGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/insights/v1beta2.MonitorActionGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ActionGroupID *string `json:"actionGroupId,omitempty" tf:"action_group_id,omitempty"`
@@ -97,7 +97,7 @@ type AlertResolutionParameters struct {
 type MonitorAlertPrometheusRuleGroupInitParameters struct {
 
 	// Specifies the name of the Managed Kubernetes Cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/containerservice/v1beta2.KubernetesCluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/containerservice/v1beta2.KubernetesCluster
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
 	// Reference to a KubernetesCluster in containerservice to populate clusterName.
@@ -124,7 +124,7 @@ type MonitorAlertPrometheusRuleGroupInitParameters struct {
 	RuleGroupEnabled *bool `json:"ruleGroupEnabled,omitempty" tf:"rule_group_enabled,omitempty"`
 
 	// Specifies the resource ID of the Azure Monitor Workspace.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/insights/v1beta1.MonitorWorkspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/insights/v1beta1.MonitorWorkspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	Scopes []*string `json:"scopes,omitempty" tf:"scopes,omitempty"`
 
@@ -178,7 +178,7 @@ type MonitorAlertPrometheusRuleGroupObservation struct {
 type MonitorAlertPrometheusRuleGroupParameters struct {
 
 	// Specifies the name of the Managed Kubernetes Cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/containerservice/v1beta2.KubernetesCluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/containerservice/v1beta2.KubernetesCluster
 	// +kubebuilder:validation:Optional
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
@@ -203,7 +203,7 @@ type MonitorAlertPrometheusRuleGroupParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the name of the Resource Group where the Alert Management Prometheus Rule Group should exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -224,7 +224,7 @@ type MonitorAlertPrometheusRuleGroupParameters struct {
 	RuleGroupEnabled *bool `json:"ruleGroupEnabled,omitempty" tf:"rule_group_enabled,omitempty"`
 
 	// Specifies the resource ID of the Azure Monitor Workspace.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/insights/v1beta1.MonitorWorkspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/insights/v1beta1.MonitorWorkspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Scopes []*string `json:"scopes,omitempty" tf:"scopes,omitempty"`

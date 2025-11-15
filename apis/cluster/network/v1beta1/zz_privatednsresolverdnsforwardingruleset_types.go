@@ -19,7 +19,7 @@ type PrivateDNSResolverDNSForwardingRulesetInitParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The list of IDs of the Private DNS Resolver Outbound Endpoint that is linked to the Private DNS Resolver Dns Forwarding Ruleset.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta1.PrivateDNSResolverOutboundEndpoint
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta1.PrivateDNSResolverOutboundEndpoint
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PrivateDNSResolverOutboundEndpointIds []*string `json:"privateDnsResolverOutboundEndpointIds,omitempty" tf:"private_dns_resolver_outbound_endpoint_ids,omitempty"`
 
@@ -62,7 +62,7 @@ type PrivateDNSResolverDNSForwardingRulesetParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The list of IDs of the Private DNS Resolver Outbound Endpoint that is linked to the Private DNS Resolver Dns Forwarding Ruleset.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta1.PrivateDNSResolverOutboundEndpoint
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta1.PrivateDNSResolverOutboundEndpoint
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PrivateDNSResolverOutboundEndpointIds []*string `json:"privateDnsResolverOutboundEndpointIds,omitempty" tf:"private_dns_resolver_outbound_endpoint_ids,omitempty"`
@@ -76,7 +76,7 @@ type PrivateDNSResolverDNSForwardingRulesetParameters struct {
 	PrivateDNSResolverOutboundEndpointIdsSelector *v1.Selector `json:"privateDnsResolverOutboundEndpointIdsSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the Resource Group where the Private DNS Resolver Dns Forwarding Ruleset should exist. Changing this forces a new Private DNS Resolver Dns Forwarding Ruleset to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

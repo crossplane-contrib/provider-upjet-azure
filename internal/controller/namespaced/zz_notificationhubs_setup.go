@@ -9,9 +9,9 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	authorizationrule "github.com/upbound/provider-azure/internal/controller/namespaced/notificationhubs/authorizationrule"
-	notificationhub "github.com/upbound/provider-azure/internal/controller/namespaced/notificationhubs/notificationhub"
-	notificationhubnamespace "github.com/upbound/provider-azure/internal/controller/namespaced/notificationhubs/notificationhubnamespace"
+	authorizationrule "github.com/upbound/provider-azure/v2/internal/controller/namespaced/notificationhubs/authorizationrule"
+	notificationhub "github.com/upbound/provider-azure/v2/internal/controller/namespaced/notificationhubs/notificationhub"
+	notificationhubnamespace "github.com/upbound/provider-azure/v2/internal/controller/namespaced/notificationhubs/notificationhubnamespace"
 )
 
 // Setup_notificationhubs creates all controllers with the supplied logger and adds them to

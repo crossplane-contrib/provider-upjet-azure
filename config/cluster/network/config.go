@@ -12,7 +12,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/config"
 
-	"github.com/upbound/provider-azure/apis/cluster/rconfig"
+	"github.com/upbound/provider-azure/v2/apis/cluster/rconfig"
 )
 
 // Configure configures virtual group

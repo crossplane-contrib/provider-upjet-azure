@@ -32,7 +32,7 @@ type StorageDefenderInitParameters struct {
 	SensitiveDataDiscoveryEnabled *bool `json:"sensitiveDataDiscoveryEnabled,omitempty" tf:"sensitive_data_discovery_enabled,omitempty"`
 
 	// The ID of the storage account the defender applied to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 
@@ -92,7 +92,7 @@ type StorageDefenderParameters struct {
 	SensitiveDataDiscoveryEnabled *bool `json:"sensitiveDataDiscoveryEnabled,omitempty" tf:"sensitive_data_discovery_enabled,omitempty"`
 
 	// The ID of the storage account the defender applied to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`

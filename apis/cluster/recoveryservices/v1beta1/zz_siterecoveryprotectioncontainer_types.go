@@ -34,7 +34,7 @@ type SiteRecoveryProtectionContainerObservation struct {
 type SiteRecoveryProtectionContainerParameters struct {
 
 	// Name of fabric that should contain this protection container. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/recoveryservices/v1beta1.SiteRecoveryFabric
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/recoveryservices/v1beta1.SiteRecoveryFabric
 	// +kubebuilder:validation:Optional
 	RecoveryFabricName *string `json:"recoveryFabricName,omitempty" tf:"recovery_fabric_name,omitempty"`
 
@@ -47,7 +47,7 @@ type SiteRecoveryProtectionContainerParameters struct {
 	RecoveryFabricNameSelector *v1.Selector `json:"recoveryFabricNameSelector,omitempty" tf:"-"`
 
 	// The name of the vault that should be updated. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/recoveryservices/v1beta2.Vault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/recoveryservices/v1beta2.Vault
 	// +kubebuilder:validation:Optional
 	RecoveryVaultName *string `json:"recoveryVaultName,omitempty" tf:"recovery_vault_name,omitempty"`
 
@@ -60,7 +60,7 @@ type SiteRecoveryProtectionContainerParameters struct {
 	RecoveryVaultNameSelector *v1.Selector `json:"recoveryVaultNameSelector,omitempty" tf:"-"`
 
 	// Name of the resource group where the vault that should be updated is located. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

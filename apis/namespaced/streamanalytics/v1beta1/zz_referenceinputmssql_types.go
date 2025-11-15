@@ -17,7 +17,7 @@ import (
 type ReferenceInputMSSQLInitParameters struct {
 
 	// The MS SQL database name where the reference data exists.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/sql/v1beta1.MSSQLDatabase
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/sql/v1beta1.MSSQLDatabase
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
 
 	// Reference to a MSSQLDatabase in sql to populate database.
@@ -44,7 +44,7 @@ type ReferenceInputMSSQLInitParameters struct {
 	RefreshType *string `json:"refreshType,omitempty" tf:"refresh_type,omitempty"`
 
 	// The fully qualified domain name of the MS SQL server.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/sql/v1beta1.MSSQLServer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/sql/v1beta1.MSSQLServer
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("fully_qualified_domain_name",true)
 	Server *string `json:"server,omitempty" tf:"server,omitempty"`
 
@@ -102,7 +102,7 @@ type ReferenceInputMSSQLObservation struct {
 type ReferenceInputMSSQLParameters struct {
 
 	// The MS SQL database name where the reference data exists.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/sql/v1beta1.MSSQLDatabase
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/sql/v1beta1.MSSQLDatabase
 	// +kubebuilder:validation:Optional
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
 
@@ -135,7 +135,7 @@ type ReferenceInputMSSQLParameters struct {
 	RefreshType *string `json:"refreshType,omitempty" tf:"refresh_type,omitempty"`
 
 	// The name of the Resource Group where the Stream Analytics Job should exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -148,7 +148,7 @@ type ReferenceInputMSSQLParameters struct {
 	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The fully qualified domain name of the MS SQL server.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/sql/v1beta1.MSSQLServer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/sql/v1beta1.MSSQLServer
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("fully_qualified_domain_name",true)
 	// +kubebuilder:validation:Optional
 	Server *string `json:"server,omitempty" tf:"server,omitempty"`

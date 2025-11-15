@@ -17,8 +17,8 @@ import (
 type ManagementGroupSubscriptionAssociationInitParameters struct {
 
 	// The ID of the Management Group to associate the Subscription with. Changing this forces a new Management to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/management/v1beta1.ManagementGroup
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/management/v1beta1.ManagementGroup
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	ManagementGroupID *string `json:"managementGroupId,omitempty" tf:"management_group_id,omitempty"`
 
 	// Reference to a ManagementGroup in management to populate managementGroupId.
@@ -30,8 +30,8 @@ type ManagementGroupSubscriptionAssociationInitParameters struct {
 	ManagementGroupIDSelector *v1.NamespacedSelector `json:"managementGroupIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Subscription to be associated with the Management Group. Changing this forces a new Management to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.Subscription
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.Subscription
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
 
 	// Reference to a Subscription in azure to populate subscriptionId.
@@ -58,8 +58,8 @@ type ManagementGroupSubscriptionAssociationObservation struct {
 type ManagementGroupSubscriptionAssociationParameters struct {
 
 	// The ID of the Management Group to associate the Subscription with. Changing this forces a new Management to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/management/v1beta1.ManagementGroup
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/management/v1beta1.ManagementGroup
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ManagementGroupID *string `json:"managementGroupId,omitempty" tf:"management_group_id,omitempty"`
 
@@ -72,8 +72,8 @@ type ManagementGroupSubscriptionAssociationParameters struct {
 	ManagementGroupIDSelector *v1.NamespacedSelector `json:"managementGroupIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Subscription to be associated with the Management Group. Changing this forces a new Management to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.Subscription
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.Subscription
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
 

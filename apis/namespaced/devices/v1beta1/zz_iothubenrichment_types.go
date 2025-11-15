@@ -17,7 +17,7 @@ import (
 type IOTHubEnrichmentInitParameters struct {
 
 	// The list of endpoints which will be enriched.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/devices/v1beta1.IOTHubEndpointStorageContainer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/devices/v1beta1.IOTHubEndpointStorageContainer
 	EndpointNames []*string `json:"endpointNames,omitempty" tf:"endpoint_names,omitempty"`
 
 	// References to IOTHubEndpointStorageContainer in devices to populate endpointNames.
@@ -29,7 +29,7 @@ type IOTHubEnrichmentInitParameters struct {
 	EndpointNamesSelector *v1.NamespacedSelector `json:"endpointNamesSelector,omitempty" tf:"-"`
 
 	// The IoTHub name of the enrichment. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/devices/v1beta1.IOTHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/devices/v1beta1.IOTHub
 	IOTHubName *string `json:"iothubName,omitempty" tf:"iothub_name,omitempty"`
 
 	// Reference to a IOTHub in devices to populate iothubName.
@@ -44,7 +44,7 @@ type IOTHubEnrichmentInitParameters struct {
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// The name of the resource group under which the IoTHub resource is created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
@@ -83,7 +83,7 @@ type IOTHubEnrichmentObservation struct {
 type IOTHubEnrichmentParameters struct {
 
 	// The list of endpoints which will be enriched.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/devices/v1beta1.IOTHubEndpointStorageContainer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/devices/v1beta1.IOTHubEndpointStorageContainer
 	// +kubebuilder:validation:Optional
 	EndpointNames []*string `json:"endpointNames,omitempty" tf:"endpoint_names,omitempty"`
 
@@ -96,7 +96,7 @@ type IOTHubEnrichmentParameters struct {
 	EndpointNamesSelector *v1.NamespacedSelector `json:"endpointNamesSelector,omitempty" tf:"-"`
 
 	// The IoTHub name of the enrichment. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/devices/v1beta1.IOTHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/devices/v1beta1.IOTHub
 	// +kubebuilder:validation:Optional
 	IOTHubName *string `json:"iothubName,omitempty" tf:"iothub_name,omitempty"`
 
@@ -113,7 +113,7 @@ type IOTHubEnrichmentParameters struct {
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// The name of the resource group under which the IoTHub resource is created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

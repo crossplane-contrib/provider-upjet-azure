@@ -28,7 +28,7 @@ type FrontdoorOriginInitParameters struct {
 	HTTPSPort *float64 `json:"httpsPort,omitempty" tf:"https_port,omitempty"`
 
 	// The IPv4 address, IPv6 address or Domain name of the Origin.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("primary_blob_host",true)
 	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
 
@@ -41,7 +41,7 @@ type FrontdoorOriginInitParameters struct {
 	HostNameSelector *v1.Selector `json:"hostNameSelector,omitempty" tf:"-"`
 
 	// The host header value (an IPv4 address, IPv6 address or Domain name) which is sent to the origin with each request. If unspecified the hostname from the request will be used.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("primary_blob_host",true)
 	OriginHostHeader *string `json:"originHostHeader,omitempty" tf:"origin_host_header,omitempty"`
 
@@ -102,7 +102,7 @@ type FrontdoorOriginObservation struct {
 type FrontdoorOriginParameters struct {
 
 	// The ID of the Front Door Origin Group within which this Front Door Origin should exist. Changing this forces a new Front Door Origin to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/cdn/v1beta1.FrontdoorOriginGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/cdn/v1beta1.FrontdoorOriginGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CdnFrontdoorOriginGroupID *string `json:"cdnFrontdoorOriginGroupId,omitempty" tf:"cdn_frontdoor_origin_group_id,omitempty"`
@@ -132,7 +132,7 @@ type FrontdoorOriginParameters struct {
 	HTTPSPort *float64 `json:"httpsPort,omitempty" tf:"https_port,omitempty"`
 
 	// The IPv4 address, IPv6 address or Domain name of the Origin.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("primary_blob_host",true)
 	// +kubebuilder:validation:Optional
 	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
@@ -146,7 +146,7 @@ type FrontdoorOriginParameters struct {
 	HostNameSelector *v1.Selector `json:"hostNameSelector,omitempty" tf:"-"`
 
 	// The host header value (an IPv4 address, IPv6 address or Domain name) which is sent to the origin with each request. If unspecified the hostname from the request will be used.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("primary_blob_host",true)
 	// +kubebuilder:validation:Optional
 	OriginHostHeader *string `json:"originHostHeader,omitempty" tf:"origin_host_header,omitempty"`
@@ -175,7 +175,7 @@ type FrontdoorOriginParameters struct {
 type PrivateLinkInitParameters struct {
 
 	// Specifies the location where the Private Link resource should exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("location",false)
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -188,7 +188,7 @@ type PrivateLinkInitParameters struct {
 	LocationSelector *v1.Selector `json:"locationSelector,omitempty" tf:"-"`
 
 	// The ID of the Azure Resource to connect to via the Private Link.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PrivateLinkTargetID *string `json:"privateLinkTargetId,omitempty" tf:"private_link_target_id,omitempty"`
 
@@ -225,7 +225,7 @@ type PrivateLinkObservation struct {
 type PrivateLinkParameters struct {
 
 	// Specifies the location where the Private Link resource should exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("location",false)
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -239,7 +239,7 @@ type PrivateLinkParameters struct {
 	LocationSelector *v1.Selector `json:"locationSelector,omitempty" tf:"-"`
 
 	// The ID of the Azure Resource to connect to via the Private Link.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PrivateLinkTargetID *string `json:"privateLinkTargetId,omitempty" tf:"private_link_target_id,omitempty"`

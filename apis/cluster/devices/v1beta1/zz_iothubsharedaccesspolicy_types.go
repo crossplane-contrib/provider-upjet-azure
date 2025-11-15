@@ -59,7 +59,7 @@ type IOTHubSharedAccessPolicyParameters struct {
 	DeviceConnect *bool `json:"deviceConnect,omitempty" tf:"device_connect,omitempty"`
 
 	// The name of the IoTHub to which this Shared Access Policy belongs. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/devices/v1beta2.IOTHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/devices/v1beta2.IOTHub
 	// +kubebuilder:validation:Optional
 	IOTHubName *string `json:"iothubName,omitempty" tf:"iothub_name,omitempty"`
 
@@ -80,7 +80,7 @@ type IOTHubSharedAccessPolicyParameters struct {
 	RegistryWrite *bool `json:"registryWrite,omitempty" tf:"registry_write,omitempty"`
 
 	// The name of the resource group under which the IotHub Shared Access Policy resource has to be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

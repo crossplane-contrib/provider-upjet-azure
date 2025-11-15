@@ -20,7 +20,7 @@ type IOTHubDPSCertificateInitParameters struct {
 	CertificateContentSecretRef v1.LocalSecretKeySelector `json:"certificateContentSecretRef" tf:"-"`
 
 	// The name of the IoT Device Provisioning Service that this certificate will be attached to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/devices/v1beta1.IOTHubDPS
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/devices/v1beta1.IOTHubDPS
 	IOTDPSName *string `json:"iotDpsName,omitempty" tf:"iot_dps_name,omitempty"`
 
 	// Reference to a IOTHubDPS in devices to populate iotDpsName.
@@ -57,7 +57,7 @@ type IOTHubDPSCertificateParameters struct {
 	CertificateContentSecretRef v1.LocalSecretKeySelector `json:"certificateContentSecretRef" tf:"-"`
 
 	// The name of the IoT Device Provisioning Service that this certificate will be attached to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/devices/v1beta1.IOTHubDPS
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/devices/v1beta1.IOTHubDPS
 	// +kubebuilder:validation:Optional
 	IOTDPSName *string `json:"iotDpsName,omitempty" tf:"iot_dps_name,omitempty"`
 
@@ -74,7 +74,7 @@ type IOTHubDPSCertificateParameters struct {
 	IsVerified *bool `json:"isVerified,omitempty" tf:"is_verified,omitempty"`
 
 	// The name of the resource group under which the Iot Device Provisioning Service Certificate resource has to be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

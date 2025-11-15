@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	dashboard "github.com/upbound/provider-azure/internal/controller/cluster/portal/dashboard"
+	dashboard "github.com/upbound/provider-azure/v2/internal/controller/cluster/portal/dashboard"
 )
 
 // Setup_portal creates all controllers with the supplied logger and adds them to

@@ -281,8 +281,8 @@ type DescriptionParameters struct {
 type MonitorAlertProcessingRuleActionGroupInitParameters struct {
 
 	// Specifies a list of Action Group IDs.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/insights/v1beta1.MonitorActionGroup
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/insights/v1beta1.MonitorActionGroup
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	AddActionGroupIds []*string `json:"addActionGroupIds,omitempty" tf:"add_action_group_ids,omitempty"`
 
 	// References to MonitorActionGroup in insights to populate addActionGroupIds.
@@ -306,8 +306,8 @@ type MonitorAlertProcessingRuleActionGroupInitParameters struct {
 	Schedule *ScheduleInitParameters `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
 	// A list of resource IDs which will be the target of alert processing rule.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	Scopes []*string `json:"scopes,omitempty" tf:"scopes,omitempty"`
 
 	// References to ResourceGroup in azure to populate scopes.
@@ -357,8 +357,8 @@ type MonitorAlertProcessingRuleActionGroupObservation struct {
 type MonitorAlertProcessingRuleActionGroupParameters struct {
 
 	// Specifies a list of Action Group IDs.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/insights/v1beta1.MonitorActionGroup
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/insights/v1beta1.MonitorActionGroup
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AddActionGroupIds []*string `json:"addActionGroupIds,omitempty" tf:"add_action_group_ids,omitempty"`
 
@@ -383,7 +383,7 @@ type MonitorAlertProcessingRuleActionGroupParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The name of the Resource Group where the Alert Processing Rule should exist. Changing this forces a new Alert Processing Rule to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -400,8 +400,8 @@ type MonitorAlertProcessingRuleActionGroupParameters struct {
 	Schedule *ScheduleParameters `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
 	// A list of resource IDs which will be the target of alert processing rule.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Scopes []*string `json:"scopes,omitempty" tf:"scopes,omitempty"`
 

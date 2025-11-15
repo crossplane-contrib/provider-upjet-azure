@@ -81,7 +81,7 @@ type PimActiveRoleAssignmentInitParameters struct {
 
 	// The scope for this role assignment, should be a valid resource ID. Changing this forces a new resource to be created.
 	// Scope for this role assignment, should be a valid resource ID
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/management/v1beta1.ManagementGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/management/v1beta1.ManagementGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
@@ -156,7 +156,7 @@ type PimActiveRoleAssignmentParameters struct {
 
 	// The scope for this role assignment, should be a valid resource ID. Changing this forces a new resource to be created.
 	// Scope for this role assignment, should be a valid resource ID
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/management/v1beta1.ManagementGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/management/v1beta1.ManagementGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`

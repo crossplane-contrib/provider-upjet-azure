@@ -20,7 +20,7 @@ type DataSetDataLakeGen2InitParameters struct {
 	FilePath *string `json:"filePath,omitempty" tf:"file_path,omitempty"`
 
 	// The name of the data lake file system to be shared with the receiver. Changing this forces a new Data Share Data Lake Gen2 Dataset to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/storage/v1beta1.DataLakeGen2FileSystem
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.DataLakeGen2FileSystem
 	FileSystemName *string `json:"fileSystemName,omitempty" tf:"file_system_name,omitempty"`
 
 	// Reference to a DataLakeGen2FileSystem in storage to populate fileSystemName.
@@ -35,8 +35,8 @@ type DataSetDataLakeGen2InitParameters struct {
 	FolderPath *string `json:"folderPath,omitempty" tf:"folder_path,omitempty"`
 
 	// The resource id of the storage account of the data lake file system to be shared with the receiver. Changing this forces a new Data Share Data Lake Gen2 Dataset to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/storage/v1beta1.Account
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 
 	// Reference to a Account in storage to populate storageAccountId.
@@ -79,7 +79,7 @@ type DataSetDataLakeGen2Parameters struct {
 	FilePath *string `json:"filePath,omitempty" tf:"file_path,omitempty"`
 
 	// The name of the data lake file system to be shared with the receiver. Changing this forces a new Data Share Data Lake Gen2 Dataset to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/storage/v1beta1.DataLakeGen2FileSystem
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.DataLakeGen2FileSystem
 	// +kubebuilder:validation:Optional
 	FileSystemName *string `json:"fileSystemName,omitempty" tf:"file_system_name,omitempty"`
 
@@ -96,8 +96,8 @@ type DataSetDataLakeGen2Parameters struct {
 	FolderPath *string `json:"folderPath,omitempty" tf:"folder_path,omitempty"`
 
 	// The resource ID of the Data Share where this Data Share Data Lake Gen2 Dataset should be created. Changing this forces a new Data Share Data Lake Gen2 Dataset to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/datashare/v1beta1.DataShare
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/datashare/v1beta1.DataShare
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ShareID *string `json:"shareId,omitempty" tf:"share_id,omitempty"`
 
@@ -110,8 +110,8 @@ type DataSetDataLakeGen2Parameters struct {
 	ShareIDSelector *v1.NamespacedSelector `json:"shareIdSelector,omitempty" tf:"-"`
 
 	// The resource id of the storage account of the data lake file system to be shared with the receiver. Changing this forces a new Data Share Data Lake Gen2 Dataset to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/storage/v1beta1.Account
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 

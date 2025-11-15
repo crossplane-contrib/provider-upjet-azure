@@ -85,7 +85,7 @@ type FailingPeriodsParameters struct {
 type MonitorScheduledQueryRulesAlertV2ActionInitParameters struct {
 
 	// List of Action Group resource IDs to invoke when the alert fires.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/insights/v1beta1.MonitorActionGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/insights/v1beta1.MonitorActionGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ActionGroups []*string `json:"actionGroups,omitempty" tf:"action_groups,omitempty"`
 
@@ -115,7 +115,7 @@ type MonitorScheduledQueryRulesAlertV2ActionObservation struct {
 type MonitorScheduledQueryRulesAlertV2ActionParameters struct {
 
 	// List of Action Group resource IDs to invoke when the alert fires.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/insights/v1beta1.MonitorActionGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/insights/v1beta1.MonitorActionGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ActionGroups []*string `json:"actionGroups,omitempty" tf:"action_groups,omitempty"`
@@ -226,7 +226,7 @@ type MonitorScheduledQueryRulesAlertV2CriteriaParameters struct {
 type MonitorScheduledQueryRulesAlertV2IdentityInitParameters struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this Scheduled Query Rule.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
@@ -262,7 +262,7 @@ type MonitorScheduledQueryRulesAlertV2IdentityObservation struct {
 type MonitorScheduledQueryRulesAlertV2IdentityParameters struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this Scheduled Query Rule.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -317,8 +317,8 @@ type MonitorScheduledQueryRulesAlertV2InitParameters struct {
 	QueryTimeRangeOverride *string `json:"queryTimeRangeOverride,omitempty" tf:"query_time_range_override,omitempty"`
 
 	// Specifies the list of resource IDs that this scheduled query rule is scoped to. Changing this forces a new resource to be created. Currently, the API supports exactly 1 resource ID in the scopes list.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/insights/v1beta1.ApplicationInsights
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/insights/v1beta1.ApplicationInsights
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	Scopes []*string `json:"scopes,omitempty" tf:"scopes,omitempty"`
 
 	// References to ApplicationInsights in insights to populate scopes.
@@ -469,7 +469,7 @@ type MonitorScheduledQueryRulesAlertV2Parameters struct {
 	QueryTimeRangeOverride *string `json:"queryTimeRangeOverride,omitempty" tf:"query_time_range_override,omitempty"`
 
 	// Specifies the name of the Resource Group where the Monitor Scheduled Query Rule should exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -482,8 +482,8 @@ type MonitorScheduledQueryRulesAlertV2Parameters struct {
 	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the list of resource IDs that this scheduled query rule is scoped to. Changing this forces a new resource to be created. Currently, the API supports exactly 1 resource ID in the scopes list.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/insights/v1beta1.ApplicationInsights
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/insights/v1beta1.ApplicationInsights
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Scopes []*string `json:"scopes,omitempty" tf:"scopes,omitempty"`
 

@@ -9,12 +9,12 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	networkacl "github.com/upbound/provider-azure/internal/controller/cluster/signalrservice/networkacl"
-	service "github.com/upbound/provider-azure/internal/controller/cluster/signalrservice/service"
-	signalrsharedprivatelinkresource "github.com/upbound/provider-azure/internal/controller/cluster/signalrservice/signalrsharedprivatelinkresource"
-	webpubsub "github.com/upbound/provider-azure/internal/controller/cluster/signalrservice/webpubsub"
-	webpubsubhub "github.com/upbound/provider-azure/internal/controller/cluster/signalrservice/webpubsubhub"
-	webpubsubnetworkacl "github.com/upbound/provider-azure/internal/controller/cluster/signalrservice/webpubsubnetworkacl"
+	networkacl "github.com/upbound/provider-azure/v2/internal/controller/cluster/signalrservice/networkacl"
+	service "github.com/upbound/provider-azure/v2/internal/controller/cluster/signalrservice/service"
+	signalrsharedprivatelinkresource "github.com/upbound/provider-azure/v2/internal/controller/cluster/signalrservice/signalrsharedprivatelinkresource"
+	webpubsub "github.com/upbound/provider-azure/v2/internal/controller/cluster/signalrservice/webpubsub"
+	webpubsubhub "github.com/upbound/provider-azure/v2/internal/controller/cluster/signalrservice/webpubsubhub"
+	webpubsubnetworkacl "github.com/upbound/provider-azure/v2/internal/controller/cluster/signalrservice/webpubsubnetworkacl"
 )
 
 // Setup_signalrservice creates all controllers with the supplied logger and adds them to

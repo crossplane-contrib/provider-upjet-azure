@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	healthbot "github.com/upbound/provider-azure/internal/controller/cluster/healthbot/healthbot"
+	healthbot "github.com/upbound/provider-azure/v2/internal/controller/cluster/healthbot/healthbot"
 )
 
 // Setup_healthbot creates all controllers with the supplied logger and adds them to

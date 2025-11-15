@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	storagesync "github.com/upbound/provider-azure/internal/controller/cluster/storagesync/storagesync"
+	storagesync "github.com/upbound/provider-azure/v2/internal/controller/cluster/storagesync/storagesync"
 )
 
 // Setup_storagesync creates all controllers with the supplied logger and adds them to

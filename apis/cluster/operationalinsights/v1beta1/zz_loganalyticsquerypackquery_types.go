@@ -34,7 +34,7 @@ type LogAnalyticsQueryPackQueryInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The ID of the Log Analytics Query Pack. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/operationalinsights/v1beta1.LogAnalyticsQueryPack
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/operationalinsights/v1beta1.LogAnalyticsQueryPack
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	QueryPackID *string `json:"queryPackId,omitempty" tf:"query_pack_id,omitempty"`
 
@@ -121,7 +121,7 @@ type LogAnalyticsQueryPackQueryParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The ID of the Log Analytics Query Pack. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/operationalinsights/v1beta1.LogAnalyticsQueryPack
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/operationalinsights/v1beta1.LogAnalyticsQueryPack
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	QueryPackID *string `json:"queryPackId,omitempty" tf:"query_pack_id,omitempty"`

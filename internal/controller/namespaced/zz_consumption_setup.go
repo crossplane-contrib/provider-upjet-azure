@@ -9,9 +9,9 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	budgetmanagementgroup "github.com/upbound/provider-azure/internal/controller/namespaced/consumption/budgetmanagementgroup"
-	budgetresourcegroup "github.com/upbound/provider-azure/internal/controller/namespaced/consumption/budgetresourcegroup"
-	budgetsubscription "github.com/upbound/provider-azure/internal/controller/namespaced/consumption/budgetsubscription"
+	budgetmanagementgroup "github.com/upbound/provider-azure/v2/internal/controller/namespaced/consumption/budgetmanagementgroup"
+	budgetresourcegroup "github.com/upbound/provider-azure/v2/internal/controller/namespaced/consumption/budgetresourcegroup"
+	budgetsubscription "github.com/upbound/provider-azure/v2/internal/controller/namespaced/consumption/budgetsubscription"
 )
 
 // Setup_consumption creates all controllers with the supplied logger and adds them to

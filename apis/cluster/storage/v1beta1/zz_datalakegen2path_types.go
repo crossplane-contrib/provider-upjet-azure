@@ -68,7 +68,7 @@ type DataLakeGen2PathInitParameters struct {
 	Ace []DataLakeGen2PathAceInitParameters `json:"ace,omitempty" tf:"ace,omitempty"`
 
 	// The name of the Data Lake Gen2 File System which should be created within the Storage Account. Must be unique within the storage account the queue is located. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta1.DataLakeGen2FileSystem
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.DataLakeGen2FileSystem
 	FileSystemName *string `json:"filesystemName,omitempty" tf:"filesystem_name,omitempty"`
 
 	// Reference to a DataLakeGen2FileSystem in storage to populate filesystemName.
@@ -92,7 +92,7 @@ type DataLakeGen2PathInitParameters struct {
 	Resource *string `json:"resource,omitempty" tf:"resource,omitempty"`
 
 	// Specifies the ID of the Storage Account in which the Data Lake Gen2 File System should exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 
@@ -139,7 +139,7 @@ type DataLakeGen2PathParameters struct {
 	Ace []DataLakeGen2PathAceParameters `json:"ace,omitempty" tf:"ace,omitempty"`
 
 	// The name of the Data Lake Gen2 File System which should be created within the Storage Account. Must be unique within the storage account the queue is located. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta1.DataLakeGen2FileSystem
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.DataLakeGen2FileSystem
 	// +kubebuilder:validation:Optional
 	FileSystemName *string `json:"filesystemName,omitempty" tf:"filesystem_name,omitempty"`
 
@@ -168,7 +168,7 @@ type DataLakeGen2PathParameters struct {
 	Resource *string `json:"resource,omitempty" tf:"resource,omitempty"`
 
 	// Specifies the ID of the Storage Account in which the Data Lake Gen2 File System should exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`

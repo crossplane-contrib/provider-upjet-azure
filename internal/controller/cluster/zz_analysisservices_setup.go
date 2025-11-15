@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	server "github.com/upbound/provider-azure/internal/controller/cluster/analysisservices/server"
+	server "github.com/upbound/provider-azure/v2/internal/controller/cluster/analysisservices/server"
 )
 
 // Setup_analysisservices creates all controllers with the supplied logger and adds them to

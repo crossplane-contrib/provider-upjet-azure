@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	customprovider "github.com/upbound/provider-azure/internal/controller/cluster/customproviders/customprovider"
+	customprovider "github.com/upbound/provider-azure/v2/internal/controller/cluster/customproviders/customprovider"
 )
 
 // Setup_customproviders creates all controllers with the supplied logger and adds them to

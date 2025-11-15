@@ -132,7 +132,7 @@ type SpringCloudContainerDeploymentParameters struct {
 	Server *string `json:"server,omitempty" tf:"server,omitempty"`
 
 	// The ID of the Spring Cloud Service. Changing this forces a new Spring Cloud Container Deployment to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/appplatform/v1beta1.SpringCloudApp
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/appplatform/v1beta1.SpringCloudApp
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SpringCloudAppID *string `json:"springCloudAppId,omitempty" tf:"spring_cloud_app_id,omitempty"`

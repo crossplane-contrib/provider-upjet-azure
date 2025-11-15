@@ -31,7 +31,7 @@ type ResourceGroupPolicyExemptionInitParameters struct {
 	Metadata *string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// The ID of the Policy Assignment to be exempted at the specified Scope. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/authorization/v1beta2.ResourceGroupPolicyAssignment
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/authorization/v1beta2.ResourceGroupPolicyAssignment
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PolicyAssignmentID *string `json:"policyAssignmentId,omitempty" tf:"policy_assignment_id,omitempty"`
 
@@ -100,7 +100,7 @@ type ResourceGroupPolicyExemptionParameters struct {
 	Metadata *string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// The ID of the Policy Assignment to be exempted at the specified Scope. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/authorization/v1beta2.ResourceGroupPolicyAssignment
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/authorization/v1beta2.ResourceGroupPolicyAssignment
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PolicyAssignmentID *string `json:"policyAssignmentId,omitempty" tf:"policy_assignment_id,omitempty"`
@@ -118,7 +118,7 @@ type ResourceGroupPolicyExemptionParameters struct {
 	PolicyDefinitionReferenceIds []*string `json:"policyDefinitionReferenceIds,omitempty" tf:"policy_definition_reference_ids,omitempty"`
 
 	// The Resource Group ID where the Policy Exemption should be applied. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ResourceGroupID *string `json:"resourceGroupId,omitempty" tf:"resource_group_id,omitempty"`

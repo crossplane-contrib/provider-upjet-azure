@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	provider "github.com/upbound/provider-azure/internal/controller/namespaced/attestation/provider"
+	provider "github.com/upbound/provider-azure/v2/internal/controller/namespaced/attestation/provider"
 )
 
 // Setup_attestation creates all controllers with the supplied logger and adds them to

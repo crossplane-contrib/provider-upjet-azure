@@ -17,8 +17,8 @@ import (
 type GatewayAPIInitParameters struct {
 
 	// The Identifier of the API Management API within the API Management Service. Changing this forces a new API Management Gateway API to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/apimanagement/v1beta1.API
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta1.API
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
 
 	// Reference to a API in apimanagement to populate apiId.
@@ -30,8 +30,8 @@ type GatewayAPIInitParameters struct {
 	APIIDSelector *v1.NamespacedSelector `json:"apiIdSelector,omitempty" tf:"-"`
 
 	// The Identifier for the API Management Gateway. Changing this forces a new API Management Gateway API to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/apimanagement/v1beta1.Gateway
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta1.Gateway
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	GatewayID *string `json:"gatewayId,omitempty" tf:"gateway_id,omitempty"`
 
 	// Reference to a Gateway in apimanagement to populate gatewayId.
@@ -58,8 +58,8 @@ type GatewayAPIObservation struct {
 type GatewayAPIParameters struct {
 
 	// The Identifier of the API Management API within the API Management Service. Changing this forces a new API Management Gateway API to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/apimanagement/v1beta1.API
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta1.API
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
 
@@ -72,8 +72,8 @@ type GatewayAPIParameters struct {
 	APIIDSelector *v1.NamespacedSelector `json:"apiIdSelector,omitempty" tf:"-"`
 
 	// The Identifier for the API Management Gateway. Changing this forces a new API Management Gateway API to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/apimanagement/v1beta1.Gateway
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta1.Gateway
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	GatewayID *string `json:"gatewayId,omitempty" tf:"gateway_id,omitempty"`
 

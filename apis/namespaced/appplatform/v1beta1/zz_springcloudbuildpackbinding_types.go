@@ -84,7 +84,7 @@ type SpringCloudBuildPackBindingParameters struct {
 	Launch *LaunchParameters `json:"launch,omitempty" tf:"launch,omitempty"`
 
 	// The ID of the Spring Cloud Builder. Changing this forces a new Spring Cloud Build Pack Binding to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/appplatform/v1beta1.SpringCloudBuilder
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/appplatform/v1beta1.SpringCloudBuilder
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SpringCloudBuilderID *string `json:"springCloudBuilderId,omitempty" tf:"spring_cloud_builder_id,omitempty"`

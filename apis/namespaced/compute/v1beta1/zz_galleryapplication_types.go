@@ -91,7 +91,7 @@ type GalleryApplicationParameters struct {
 	Eula *string `json:"eula,omitempty" tf:"eula,omitempty"`
 
 	// The ID of the Shared Image Gallery. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/compute/v1beta1.SharedImageGallery
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/compute/v1beta1.SharedImageGallery
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	GalleryID *string `json:"galleryId,omitempty" tf:"gallery_id,omitempty"`

@@ -17,7 +17,7 @@ import (
 type LogAnalyticsLinkedServiceInitParameters struct {
 
 	// The ID of the readable Resource that will be linked to the workspace. This should be used for linking to an Automation Account resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/automation/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/automation/v1beta1.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ReadAccessID *string `json:"readAccessId,omitempty" tf:"read_access_id,omitempty"`
 
@@ -30,7 +30,7 @@ type LogAnalyticsLinkedServiceInitParameters struct {
 	ReadAccessIDSelector *v1.NamespacedSelector `json:"readAccessIdSelector,omitempty" tf:"-"`
 
 	// The name of the resource group in which the Log Analytics Linked Service is created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
@@ -69,7 +69,7 @@ type LogAnalyticsLinkedServiceObservation struct {
 type LogAnalyticsLinkedServiceParameters struct {
 
 	// The ID of the readable Resource that will be linked to the workspace. This should be used for linking to an Automation Account resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/automation/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/automation/v1beta1.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ReadAccessID *string `json:"readAccessId,omitempty" tf:"read_access_id,omitempty"`
@@ -83,7 +83,7 @@ type LogAnalyticsLinkedServiceParameters struct {
 	ReadAccessIDSelector *v1.NamespacedSelector `json:"readAccessIdSelector,omitempty" tf:"-"`
 
 	// The name of the resource group in which the Log Analytics Linked Service is created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -96,7 +96,7 @@ type LogAnalyticsLinkedServiceParameters struct {
 	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The ID of the Log Analytics Workspace that will contain the Log Analytics Linked Service resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/operationalinsights/v1beta1.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/operationalinsights/v1beta1.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`

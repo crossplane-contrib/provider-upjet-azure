@@ -78,7 +78,7 @@ type AccountLocalUserParameters struct {
 	SSHPasswordEnabled *bool `json:"sshPasswordEnabled,omitempty" tf:"ssh_password_enabled,omitempty"`
 
 	// The ID of the Storage Account that this Storage Account Local User resides in. Changing this forces a new Storage Account Local User to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
@@ -98,7 +98,7 @@ type PermissionScopeInitParameters struct {
 	Permissions *PermissionsInitParameters `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
 	// The container name (when service is set to blob) or the file share name (when service is set to file), used by the Storage Account Local User.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta1.Container
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Container
 	ResourceName *string `json:"resourceName,omitempty" tf:"resource_name,omitempty"`
 
 	// Reference to a Container in storage to populate resourceName.
@@ -132,7 +132,7 @@ type PermissionScopeParameters struct {
 	Permissions *PermissionsParameters `json:"permissions" tf:"permissions,omitempty"`
 
 	// The container name (when service is set to blob) or the file share name (when service is set to file), used by the Storage Account Local User.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta1.Container
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Container
 	// +kubebuilder:validation:Optional
 	ResourceName *string `json:"resourceName,omitempty" tf:"resource_name,omitempty"`
 

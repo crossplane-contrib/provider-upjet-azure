@@ -9,8 +9,8 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	databasemigrationproject "github.com/upbound/provider-azure/internal/controller/namespaced/datamigration/databasemigrationproject"
-	databasemigrationservice "github.com/upbound/provider-azure/internal/controller/namespaced/datamigration/databasemigrationservice"
+	databasemigrationproject "github.com/upbound/provider-azure/v2/internal/controller/namespaced/datamigration/databasemigrationproject"
+	databasemigrationservice "github.com/upbound/provider-azure/v2/internal/controller/namespaced/datamigration/databasemigrationservice"
 )
 
 // Setup_datamigration creates all controllers with the supplied logger and adds them to

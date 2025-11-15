@@ -253,7 +253,7 @@ type DataSetDelimitedTextInitParameters struct {
 	HTTPServerLocation []DataSetDelimitedTextHTTPServerLocationInitParameters `json:"httpServerLocation,omitempty" tf:"http_server_location,omitempty"`
 
 	// The Data Factory Linked Service name in which to associate the Dataset with.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/datafactory/v1beta1.LinkedServiceWeb
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/datafactory/v1beta1.LinkedServiceWeb
 	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
 
 	// Reference to a LinkedServiceWeb in datafactory to populate linkedServiceName.
@@ -381,7 +381,7 @@ type DataSetDelimitedTextParameters struct {
 	CompressionLevel *string `json:"compressionLevel,omitempty" tf:"compression_level,omitempty"`
 
 	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/datafactory/v1beta1.Factory
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/datafactory/v1beta1.Factory
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DataFactoryID *string `json:"dataFactoryId,omitempty" tf:"data_factory_id,omitempty"`
@@ -419,7 +419,7 @@ type DataSetDelimitedTextParameters struct {
 	HTTPServerLocation []DataSetDelimitedTextHTTPServerLocationParameters `json:"httpServerLocation,omitempty" tf:"http_server_location,omitempty"`
 
 	// The Data Factory Linked Service name in which to associate the Dataset with.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/datafactory/v1beta1.LinkedServiceWeb
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/datafactory/v1beta1.LinkedServiceWeb
 	// +kubebuilder:validation:Optional
 	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
 

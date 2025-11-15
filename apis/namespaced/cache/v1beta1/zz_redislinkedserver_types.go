@@ -17,8 +17,8 @@ import (
 type RedisLinkedServerInitParameters struct {
 
 	// The ID of the linked Redis cache. Changing this forces a new Redis to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/cache/v1beta1.RedisCache
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cache/v1beta1.RedisCache
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	LinkedRedisCacheID *string `json:"linkedRedisCacheId,omitempty" tf:"linked_redis_cache_id,omitempty"`
 
 	// Reference to a RedisCache in cache to populate linkedRedisCacheId.
@@ -66,8 +66,8 @@ type RedisLinkedServerObservation struct {
 type RedisLinkedServerParameters struct {
 
 	// The ID of the linked Redis cache. Changing this forces a new Redis to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/cache/v1beta1.RedisCache
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cache/v1beta1.RedisCache
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LinkedRedisCacheID *string `json:"linkedRedisCacheId,omitempty" tf:"linked_redis_cache_id,omitempty"`
 
@@ -84,7 +84,7 @@ type RedisLinkedServerParameters struct {
 	LinkedRedisCacheLocation *string `json:"linkedRedisCacheLocation,omitempty" tf:"linked_redis_cache_location,omitempty"`
 
 	// The name of the Resource Group where the Redis caches exists. Changing this forces a new Redis to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -101,7 +101,7 @@ type RedisLinkedServerParameters struct {
 	ServerRole *string `json:"serverRole,omitempty" tf:"server_role,omitempty"`
 
 	// The name of Redis cache to link with. Changing this forces a new Redis to be created. (eg The primary role)
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/cache/v1beta1.RedisCache
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cache/v1beta1.RedisCache
 	// +kubebuilder:validation:Optional
 	TargetRedisCacheName *string `json:"targetRedisCacheName,omitempty" tf:"target_redis_cache_name,omitempty"`
 

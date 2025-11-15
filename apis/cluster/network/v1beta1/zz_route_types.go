@@ -61,7 +61,7 @@ type RouteParameters_2 struct {
 	NextHopType *string `json:"nextHopType,omitempty" tf:"next_hop_type,omitempty"`
 
 	// The name of the resource group in which to create the route. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -74,7 +74,7 @@ type RouteParameters_2 struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The name of the route table within which create the route. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta1.RouteTable
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta1.RouteTable
 	// +kubebuilder:validation:Optional
 	RouteTableName *string `json:"routeTableName,omitempty" tf:"route_table_name,omitempty"`
 
