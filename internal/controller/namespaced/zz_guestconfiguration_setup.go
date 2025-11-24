@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	policyvirtualmachineconfigurationassignment "github.com/upbound/provider-azure/internal/controller/namespaced/guestconfiguration/policyvirtualmachineconfigurationassignment"
+	policyvirtualmachineconfigurationassignment "github.com/upbound/provider-azure/v2/internal/controller/namespaced/guestconfiguration/policyvirtualmachineconfigurationassignment"
 )
 
 // Setup_guestconfiguration creates all controllers with the supplied logger and adds them to

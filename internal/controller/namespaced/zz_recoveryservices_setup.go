@@ -9,18 +9,18 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	backupcontainerstorageaccount "github.com/upbound/provider-azure/internal/controller/namespaced/recoveryservices/backupcontainerstorageaccount"
-	backuppolicyfileshare "github.com/upbound/provider-azure/internal/controller/namespaced/recoveryservices/backuppolicyfileshare"
-	backuppolicyvm "github.com/upbound/provider-azure/internal/controller/namespaced/recoveryservices/backuppolicyvm"
-	backuppolicyvmworkload "github.com/upbound/provider-azure/internal/controller/namespaced/recoveryservices/backuppolicyvmworkload"
-	backupprotectedfileshare "github.com/upbound/provider-azure/internal/controller/namespaced/recoveryservices/backupprotectedfileshare"
-	backupprotectedvm "github.com/upbound/provider-azure/internal/controller/namespaced/recoveryservices/backupprotectedvm"
-	siterecoveryfabric "github.com/upbound/provider-azure/internal/controller/namespaced/recoveryservices/siterecoveryfabric"
-	siterecoverynetworkmapping "github.com/upbound/provider-azure/internal/controller/namespaced/recoveryservices/siterecoverynetworkmapping"
-	siterecoveryprotectioncontainer "github.com/upbound/provider-azure/internal/controller/namespaced/recoveryservices/siterecoveryprotectioncontainer"
-	siterecoveryprotectioncontainermapping "github.com/upbound/provider-azure/internal/controller/namespaced/recoveryservices/siterecoveryprotectioncontainermapping"
-	siterecoveryreplicationpolicy "github.com/upbound/provider-azure/internal/controller/namespaced/recoveryservices/siterecoveryreplicationpolicy"
-	vault "github.com/upbound/provider-azure/internal/controller/namespaced/recoveryservices/vault"
+	backupcontainerstorageaccount "github.com/upbound/provider-azure/v2/internal/controller/namespaced/recoveryservices/backupcontainerstorageaccount"
+	backuppolicyfileshare "github.com/upbound/provider-azure/v2/internal/controller/namespaced/recoveryservices/backuppolicyfileshare"
+	backuppolicyvm "github.com/upbound/provider-azure/v2/internal/controller/namespaced/recoveryservices/backuppolicyvm"
+	backuppolicyvmworkload "github.com/upbound/provider-azure/v2/internal/controller/namespaced/recoveryservices/backuppolicyvmworkload"
+	backupprotectedfileshare "github.com/upbound/provider-azure/v2/internal/controller/namespaced/recoveryservices/backupprotectedfileshare"
+	backupprotectedvm "github.com/upbound/provider-azure/v2/internal/controller/namespaced/recoveryservices/backupprotectedvm"
+	siterecoveryfabric "github.com/upbound/provider-azure/v2/internal/controller/namespaced/recoveryservices/siterecoveryfabric"
+	siterecoverynetworkmapping "github.com/upbound/provider-azure/v2/internal/controller/namespaced/recoveryservices/siterecoverynetworkmapping"
+	siterecoveryprotectioncontainer "github.com/upbound/provider-azure/v2/internal/controller/namespaced/recoveryservices/siterecoveryprotectioncontainer"
+	siterecoveryprotectioncontainermapping "github.com/upbound/provider-azure/v2/internal/controller/namespaced/recoveryservices/siterecoveryprotectioncontainermapping"
+	siterecoveryreplicationpolicy "github.com/upbound/provider-azure/v2/internal/controller/namespaced/recoveryservices/siterecoveryreplicationpolicy"
+	vault "github.com/upbound/provider-azure/v2/internal/controller/namespaced/recoveryservices/vault"
 )
 
 // Setup_recoveryservices creates all controllers with the supplied logger and adds them to

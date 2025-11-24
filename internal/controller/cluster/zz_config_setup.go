@@ -9,10 +9,10 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	resourcegroup "github.com/upbound/provider-azure/internal/controller/cluster/azure/resourcegroup"
-	resourceproviderregistration "github.com/upbound/provider-azure/internal/controller/cluster/azure/resourceproviderregistration"
-	subscription "github.com/upbound/provider-azure/internal/controller/cluster/azure/subscription"
-	providerconfig "github.com/upbound/provider-azure/internal/controller/cluster/providerconfig"
+	resourcegroup "github.com/upbound/provider-azure/v2/internal/controller/cluster/azure/resourcegroup"
+	resourceproviderregistration "github.com/upbound/provider-azure/v2/internal/controller/cluster/azure/resourceproviderregistration"
+	subscription "github.com/upbound/provider-azure/v2/internal/controller/cluster/azure/subscription"
+	providerconfig "github.com/upbound/provider-azure/v2/internal/controller/cluster/providerconfig"
 )
 
 // Setup_config creates all controllers with the supplied logger and adds them to

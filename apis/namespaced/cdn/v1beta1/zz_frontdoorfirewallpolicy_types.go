@@ -175,7 +175,7 @@ type FrontdoorFirewallPolicyInitParameters struct {
 	RequestBodyCheckEnabled *bool `json:"requestBodyCheckEnabled,omitempty" tf:"request_body_check_enabled,omitempty"`
 
 	// The sku's pricing tier for this Front Door Firewall Policy. Possible values include Standard_AzureFrontDoor or Premium_AzureFrontDoor. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/cdn/v1beta1.FrontdoorProfile
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cdn/v1beta1.FrontdoorProfile
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("sku_name",false)
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
@@ -284,7 +284,7 @@ type FrontdoorFirewallPolicyParameters struct {
 	RequestBodyCheckEnabled *bool `json:"requestBodyCheckEnabled,omitempty" tf:"request_body_check_enabled,omitempty"`
 
 	// The name of the resource group. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -297,7 +297,7 @@ type FrontdoorFirewallPolicyParameters struct {
 	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The sku's pricing tier for this Front Door Firewall Policy. Possible values include Standard_AzureFrontDoor or Premium_AzureFrontDoor. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/cdn/v1beta1.FrontdoorProfile
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cdn/v1beta1.FrontdoorProfile
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("sku_name",false)
 	// +kubebuilder:validation:Optional
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`

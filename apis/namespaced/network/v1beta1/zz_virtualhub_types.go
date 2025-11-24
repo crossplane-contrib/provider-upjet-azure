@@ -39,8 +39,8 @@ type VirtualHubInitParameters_2 struct {
 	VirtualRouterAutoScaleMinCapacity *float64 `json:"virtualRouterAutoScaleMinCapacity,omitempty" tf:"virtual_router_auto_scale_min_capacity,omitempty"`
 
 	// The ID of a Virtual WAN within which the Virtual Hub should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.VirtualWAN
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.VirtualWAN
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	VirtualWanID *string `json:"virtualWanId,omitempty" tf:"virtual_wan_id,omitempty"`
 
 	// Reference to a VirtualWAN in network to populate virtualWanId.
@@ -110,7 +110,7 @@ type VirtualHubParameters_2 struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the name of the Resource Group where the Virtual Hub should exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -140,8 +140,8 @@ type VirtualHubParameters_2 struct {
 	VirtualRouterAutoScaleMinCapacity *float64 `json:"virtualRouterAutoScaleMinCapacity,omitempty" tf:"virtual_router_auto_scale_min_capacity,omitempty"`
 
 	// The ID of a Virtual WAN within which the Virtual Hub should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.VirtualWAN
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.VirtualWAN
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualWanID *string `json:"virtualWanId,omitempty" tf:"virtual_wan_id,omitempty"`
 

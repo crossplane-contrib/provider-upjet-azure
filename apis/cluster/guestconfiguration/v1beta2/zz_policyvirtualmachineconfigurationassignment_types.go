@@ -136,7 +136,7 @@ type PolicyVirtualMachineConfigurationAssignmentParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The resource ID of the Policy Virtual Machine which this Guest Configuration Assignment should apply to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/compute/v1beta2.WindowsVirtualMachine
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/compute/v1beta2.WindowsVirtualMachine
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualMachineID *string `json:"virtualMachineId,omitempty" tf:"virtual_machine_id,omitempty"`

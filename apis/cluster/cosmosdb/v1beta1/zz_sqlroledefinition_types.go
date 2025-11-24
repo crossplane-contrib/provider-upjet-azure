@@ -38,7 +38,7 @@ type PermissionsParameters struct {
 type SQLRoleDefinitionInitParameters struct {
 
 	// The name of the Cosmos DB Account. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/cosmosdb/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/cosmosdb/v1beta2.Account
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
 	// Reference to a Account in cosmosdb to populate accountName.
@@ -60,7 +60,7 @@ type SQLRoleDefinitionInitParameters struct {
 	Permissions []PermissionsInitParameters `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
 	// The name of the Resource Group in which the Cosmos DB SQL Role Definition is created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
@@ -109,7 +109,7 @@ type SQLRoleDefinitionObservation struct {
 type SQLRoleDefinitionParameters struct {
 
 	// The name of the Cosmos DB Account. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/cosmosdb/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/cosmosdb/v1beta2.Account
 	// +kubebuilder:validation:Optional
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
@@ -135,7 +135,7 @@ type SQLRoleDefinitionParameters struct {
 	Permissions []PermissionsParameters `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
 	// The name of the Resource Group in which the Cosmos DB SQL Role Definition is created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

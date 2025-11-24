@@ -9,11 +9,11 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	hadoopcluster "github.com/upbound/provider-azure/internal/controller/cluster/hdinsight/hadoopcluster"
-	hbasecluster "github.com/upbound/provider-azure/internal/controller/cluster/hdinsight/hbasecluster"
-	interactivequerycluster "github.com/upbound/provider-azure/internal/controller/cluster/hdinsight/interactivequerycluster"
-	kafkacluster "github.com/upbound/provider-azure/internal/controller/cluster/hdinsight/kafkacluster"
-	sparkcluster "github.com/upbound/provider-azure/internal/controller/cluster/hdinsight/sparkcluster"
+	hadoopcluster "github.com/upbound/provider-azure/v2/internal/controller/cluster/hdinsight/hadoopcluster"
+	hbasecluster "github.com/upbound/provider-azure/v2/internal/controller/cluster/hdinsight/hbasecluster"
+	interactivequerycluster "github.com/upbound/provider-azure/v2/internal/controller/cluster/hdinsight/interactivequerycluster"
+	kafkacluster "github.com/upbound/provider-azure/v2/internal/controller/cluster/hdinsight/kafkacluster"
+	sparkcluster "github.com/upbound/provider-azure/v2/internal/controller/cluster/hdinsight/sparkcluster"
 )
 
 // Setup_hdinsight creates all controllers with the supplied logger and adds them to

@@ -15,7 +15,7 @@ import (
 
 const (
 	resourcePrefix = "azure"
-	modulePath     = "github.com/upbound/provider-azure"
+	modulePath     = "github.com/upbound/provider-azure/v2"
 )
 
 var (

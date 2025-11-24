@@ -169,7 +169,7 @@ type SecurityRuleParameters_2 struct {
 	Direction *string `json:"direction,omitempty" tf:"direction,omitempty"`
 
 	// The name of the Network Security Group that we want to attach the rule to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.SecurityGroup
 	// +kubebuilder:validation:Optional
 	NetworkSecurityGroupName *string `json:"networkSecurityGroupName,omitempty" tf:"network_security_group_name,omitempty"`
 
@@ -190,7 +190,7 @@ type SecurityRuleParameters_2 struct {
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// The name of the resource group in which to create the Network Security Rule. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

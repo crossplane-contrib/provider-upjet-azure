@@ -153,7 +153,7 @@ type SentinelAutomationRuleInitParameters struct {
 	Expiration *string `json:"expiration,omitempty" tf:"expiration,omitempty"`
 
 	// The ID of the Log Analytics Workspace where this Sentinel applies to. Changing this forces a new Sentinel Automation Rule to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/securityinsights/v1beta1.SentinelLogAnalyticsWorkspaceOnboarding
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/securityinsights/v1beta1.SentinelLogAnalyticsWorkspaceOnboarding
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("workspace_id",false)
 	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId,omitempty" tf:"log_analytics_workspace_id,omitempty"`
 
@@ -244,7 +244,7 @@ type SentinelAutomationRuleParameters struct {
 	Expiration *string `json:"expiration,omitempty" tf:"expiration,omitempty"`
 
 	// The ID of the Log Analytics Workspace where this Sentinel applies to. Changing this forces a new Sentinel Automation Rule to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/securityinsights/v1beta1.SentinelLogAnalyticsWorkspaceOnboarding
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/securityinsights/v1beta1.SentinelLogAnalyticsWorkspaceOnboarding
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("workspace_id",false)
 	// +kubebuilder:validation:Optional
 	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId,omitempty" tf:"log_analytics_workspace_id,omitempty"`

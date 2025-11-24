@@ -23,7 +23,7 @@ type IOTHubFallbackRouteInitParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The endpoints to which messages that satisfy the condition are routed. Currently only 1 endpoint is allowed.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/devices/v1beta1.IOTHubEndpointStorageContainer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/devices/v1beta1.IOTHubEndpointStorageContainer
 	EndpointNames []*string `json:"endpointNames,omitempty" tf:"endpoint_names,omitempty"`
 
 	// References to IOTHubEndpointStorageContainer in devices to populate endpointNames.
@@ -73,7 +73,7 @@ type IOTHubFallbackRouteParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The endpoints to which messages that satisfy the condition are routed. Currently only 1 endpoint is allowed.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/devices/v1beta1.IOTHubEndpointStorageContainer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/devices/v1beta1.IOTHubEndpointStorageContainer
 	// +kubebuilder:validation:Optional
 	EndpointNames []*string `json:"endpointNames,omitempty" tf:"endpoint_names,omitempty"`
 
@@ -86,7 +86,7 @@ type IOTHubFallbackRouteParameters struct {
 	EndpointNamesSelector *v1.NamespacedSelector `json:"endpointNamesSelector,omitempty" tf:"-"`
 
 	// The name of the IoTHub to which this Fallback Route belongs. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/devices/v1beta1.IOTHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/devices/v1beta1.IOTHub
 	// +kubebuilder:validation:Optional
 	IOTHubName *string `json:"iothubName,omitempty" tf:"iothub_name,omitempty"`
 
@@ -99,7 +99,7 @@ type IOTHubFallbackRouteParameters struct {
 	IOTHubNameSelector *v1.NamespacedSelector `json:"iothubNameSelector,omitempty" tf:"-"`
 
 	// The name of the resource group under which the IotHub Storage Container Endpoint resource has to be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

@@ -49,7 +49,7 @@ type RouteServerBGPConnectionParameters struct {
 	PeerIP *string `json:"peerIp,omitempty" tf:"peer_ip,omitempty"`
 
 	// The ID of the Route Server within which this Bgp connection should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.RouteServer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.RouteServer
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RouteServerID *string `json:"routeServerId,omitempty" tf:"route_server_id,omitempty"`

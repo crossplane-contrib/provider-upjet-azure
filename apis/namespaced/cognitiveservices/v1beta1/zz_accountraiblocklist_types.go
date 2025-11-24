@@ -35,8 +35,8 @@ type AccountRaiBlocklistObservation struct {
 type AccountRaiBlocklistParameters struct {
 
 	// The ID of the Cognitive Services Account. Changing this forces a new Cognitive Account Rai Blocklist to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/cognitiveservices/v1beta1.Account
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cognitiveservices/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CognitiveAccountID *string `json:"cognitiveAccountId,omitempty" tf:"cognitive_account_id,omitempty"`
 

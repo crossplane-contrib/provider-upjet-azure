@@ -9,11 +9,11 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	hpccache "github.com/upbound/provider-azure/internal/controller/cluster/storagecache/hpccache"
-	hpccacheaccesspolicy "github.com/upbound/provider-azure/internal/controller/cluster/storagecache/hpccacheaccesspolicy"
-	hpccacheblobnfstarget "github.com/upbound/provider-azure/internal/controller/cluster/storagecache/hpccacheblobnfstarget"
-	hpccacheblobtarget "github.com/upbound/provider-azure/internal/controller/cluster/storagecache/hpccacheblobtarget"
-	hpccachenfstarget "github.com/upbound/provider-azure/internal/controller/cluster/storagecache/hpccachenfstarget"
+	hpccache "github.com/upbound/provider-azure/v2/internal/controller/cluster/storagecache/hpccache"
+	hpccacheaccesspolicy "github.com/upbound/provider-azure/v2/internal/controller/cluster/storagecache/hpccacheaccesspolicy"
+	hpccacheblobnfstarget "github.com/upbound/provider-azure/v2/internal/controller/cluster/storagecache/hpccacheblobnfstarget"
+	hpccacheblobtarget "github.com/upbound/provider-azure/v2/internal/controller/cluster/storagecache/hpccacheblobtarget"
+	hpccachenfstarget "github.com/upbound/provider-azure/v2/internal/controller/cluster/storagecache/hpccachenfstarget"
 )
 
 // Setup_storagecache creates all controllers with the supplied logger and adds them to

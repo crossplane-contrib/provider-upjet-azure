@@ -51,7 +51,7 @@ type SpringCloudBuilderInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The ID of the Spring Cloud Service. Changing this forces a new Spring Cloud Builder to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/appplatform/v1beta1.SpringCloudService
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/appplatform/v1beta1.SpringCloudService
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SpringCloudServiceID *string `json:"springCloudServiceId,omitempty" tf:"spring_cloud_service_id,omitempty"`
 
@@ -96,7 +96,7 @@ type SpringCloudBuilderParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The ID of the Spring Cloud Service. Changing this forces a new Spring Cloud Builder to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/appplatform/v1beta1.SpringCloudService
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/appplatform/v1beta1.SpringCloudService
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SpringCloudServiceID *string `json:"springCloudServiceId,omitempty" tf:"spring_cloud_service_id,omitempty"`

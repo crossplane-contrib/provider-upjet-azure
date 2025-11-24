@@ -109,7 +109,7 @@ type LinuxVirtualMachineInitParameters struct {
 	InboundNATRule []InboundNATRuleInitParameters `json:"inboundNatRule,omitempty" tf:"inbound_nat_rule,omitempty"`
 
 	// Specifies the name of the Dev Test Lab in which the Virtual Machine should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/devtestlab/v1beta1.Lab
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/devtestlab/v1beta1.Lab
 	LabName *string `json:"labName,omitempty" tf:"lab_name,omitempty"`
 
 	// Reference to a Lab in devtestlab to populate labName.
@@ -121,7 +121,7 @@ type LinuxVirtualMachineInitParameters struct {
 	LabNameSelector *v1.Selector `json:"labNameSelector,omitempty" tf:"-"`
 
 	// The name of a Subnet within the Dev Test Virtual Network where this machine should exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta1.Subnet
 	LabSubnetName *string `json:"labSubnetName,omitempty" tf:"lab_subnet_name,omitempty"`
 
 	// Reference to a Subnet in network to populate labSubnetName.
@@ -133,7 +133,7 @@ type LinuxVirtualMachineInitParameters struct {
 	LabSubnetNameSelector *v1.Selector `json:"labSubnetNameSelector,omitempty" tf:"-"`
 
 	// The ID of the Dev Test Virtual Network where this Virtual Machine should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/devtestlab/v1beta1.VirtualNetwork
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/devtestlab/v1beta1.VirtualNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	LabVirtualNetworkID *string `json:"labVirtualNetworkId,omitempty" tf:"lab_virtual_network_id,omitempty"`
 
@@ -155,7 +155,7 @@ type LinuxVirtualMachineInitParameters struct {
 	Notes *string `json:"notes,omitempty" tf:"notes,omitempty"`
 
 	// The name of the resource group in which the Dev Test Lab resource exists. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
@@ -263,7 +263,7 @@ type LinuxVirtualMachineParameters struct {
 	InboundNATRule []InboundNATRuleParameters `json:"inboundNatRule,omitempty" tf:"inbound_nat_rule,omitempty"`
 
 	// Specifies the name of the Dev Test Lab in which the Virtual Machine should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/devtestlab/v1beta1.Lab
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/devtestlab/v1beta1.Lab
 	// +kubebuilder:validation:Optional
 	LabName *string `json:"labName,omitempty" tf:"lab_name,omitempty"`
 
@@ -276,7 +276,7 @@ type LinuxVirtualMachineParameters struct {
 	LabNameSelector *v1.Selector `json:"labNameSelector,omitempty" tf:"-"`
 
 	// The name of a Subnet within the Dev Test Virtual Network where this machine should exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
 	LabSubnetName *string `json:"labSubnetName,omitempty" tf:"lab_subnet_name,omitempty"`
 
@@ -289,7 +289,7 @@ type LinuxVirtualMachineParameters struct {
 	LabSubnetNameSelector *v1.Selector `json:"labSubnetNameSelector,omitempty" tf:"-"`
 
 	// The ID of the Dev Test Virtual Network where this Virtual Machine should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/devtestlab/v1beta1.VirtualNetwork
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/devtestlab/v1beta1.VirtualNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LabVirtualNetworkID *string `json:"labVirtualNetworkId,omitempty" tf:"lab_virtual_network_id,omitempty"`
@@ -319,7 +319,7 @@ type LinuxVirtualMachineParameters struct {
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// The name of the resource group in which the Dev Test Lab resource exists. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

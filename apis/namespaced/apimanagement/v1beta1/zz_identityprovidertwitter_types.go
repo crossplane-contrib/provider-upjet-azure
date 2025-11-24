@@ -20,7 +20,7 @@ type IdentityProviderTwitterInitParameters struct {
 	APIKeySecretRef v1.LocalSecretKeySelector `json:"apiKeySecretRef" tf:"-"`
 
 	// The Name of the API Management Service where this Twitter Identity Provider should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/apimanagement/v1beta1.Management
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta1.Management
 	APIManagementName *string `json:"apiManagementName,omitempty" tf:"api_management_name,omitempty"`
 
 	// Reference to a Management in apimanagement to populate apiManagementName.
@@ -35,7 +35,7 @@ type IdentityProviderTwitterInitParameters struct {
 	APISecretKeySecretRef v1.LocalSecretKeySelector `json:"apiSecretKeySecretRef" tf:"-"`
 
 	// The Name of the Resource Group where the API Management Service exists. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
@@ -66,7 +66,7 @@ type IdentityProviderTwitterParameters struct {
 	APIKeySecretRef v1.LocalSecretKeySelector `json:"apiKeySecretRef" tf:"-"`
 
 	// The Name of the API Management Service where this Twitter Identity Provider should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/apimanagement/v1beta1.Management
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta1.Management
 	// +kubebuilder:validation:Optional
 	APIManagementName *string `json:"apiManagementName,omitempty" tf:"api_management_name,omitempty"`
 
@@ -83,7 +83,7 @@ type IdentityProviderTwitterParameters struct {
 	APISecretKeySecretRef v1.LocalSecretKeySelector `json:"apiSecretKeySecretRef" tf:"-"`
 
 	// The Name of the Resource Group where the API Management Service exists. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

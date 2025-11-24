@@ -9,9 +9,9 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	costanomalyalert "github.com/upbound/provider-azure/internal/controller/namespaced/costmanagement/costanomalyalert"
-	resourcegroupcostmanagementexport "github.com/upbound/provider-azure/internal/controller/namespaced/costmanagement/resourcegroupcostmanagementexport"
-	subscriptioncostmanagementexport "github.com/upbound/provider-azure/internal/controller/namespaced/costmanagement/subscriptioncostmanagementexport"
+	costanomalyalert "github.com/upbound/provider-azure/v2/internal/controller/namespaced/costmanagement/costanomalyalert"
+	resourcegroupcostmanagementexport "github.com/upbound/provider-azure/v2/internal/controller/namespaced/costmanagement/resourcegroupcostmanagementexport"
+	subscriptioncostmanagementexport "github.com/upbound/provider-azure/v2/internal/controller/namespaced/costmanagement/subscriptioncostmanagementexport"
 )
 
 // Setup_costmanagement creates all controllers with the supplied logger and adds them to

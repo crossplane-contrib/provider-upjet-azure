@@ -89,7 +89,7 @@ type SQLPoolWorkloadClassifierParameters struct {
 	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
 
 	// The ID of the Synapse SQL Pool Workload Group. Changing this forces a new Synapse SQL Pool Workload Classifier to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/synapse/v1beta1.SQLPoolWorkloadGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/synapse/v1beta1.SQLPoolWorkloadGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	WorkloadGroupID *string `json:"workloadGroupId,omitempty" tf:"workload_group_id,omitempty"`

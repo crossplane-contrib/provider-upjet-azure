@@ -25,7 +25,7 @@ type ApplicationNetworkRuleSetInitParameters struct {
 	IPRule []IPRuleInitParameters `json:"ipRule,omitempty" tf:"ip_rule,omitempty"`
 
 	// The ID of the IoT Central Application. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/iotcentral/v1beta2.Application
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/iotcentral/v1beta2.Application
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	IotcentralApplicationID *string `json:"iotcentralApplicationId,omitempty" tf:"iotcentral_application_id,omitempty"`
 
@@ -71,7 +71,7 @@ type ApplicationNetworkRuleSetParameters struct {
 	IPRule []IPRuleParameters `json:"ipRule,omitempty" tf:"ip_rule,omitempty"`
 
 	// The ID of the IoT Central Application. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/iotcentral/v1beta2.Application
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/iotcentral/v1beta2.Application
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	IotcentralApplicationID *string `json:"iotcentralApplicationId,omitempty" tf:"iotcentral_application_id,omitempty"`

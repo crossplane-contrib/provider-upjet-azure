@@ -23,7 +23,7 @@ type SpringCloudCertificateInitParameters struct {
 	ExcludePrivateKey *bool `json:"excludePrivateKey,omitempty" tf:"exclude_private_key,omitempty"`
 
 	// Specifies the ID of the Key Vault Certificate resource. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/keyvault/v1beta1.Certificate
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/keyvault/v1beta1.Certificate
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	KeyVaultCertificateID *string `json:"keyVaultCertificateId,omitempty" tf:"key_vault_certificate_id,omitempty"`
 
@@ -71,7 +71,7 @@ type SpringCloudCertificateParameters struct {
 	ExcludePrivateKey *bool `json:"excludePrivateKey,omitempty" tf:"exclude_private_key,omitempty"`
 
 	// Specifies the ID of the Key Vault Certificate resource. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/keyvault/v1beta1.Certificate
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/keyvault/v1beta1.Certificate
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KeyVaultCertificateID *string `json:"keyVaultCertificateId,omitempty" tf:"key_vault_certificate_id,omitempty"`
@@ -85,7 +85,7 @@ type SpringCloudCertificateParameters struct {
 	KeyVaultCertificateIDSelector *v1.NamespacedSelector `json:"keyVaultCertificateIdSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the resource group in which to create the Spring Cloud Certificate. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -98,7 +98,7 @@ type SpringCloudCertificateParameters struct {
 	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the Spring Cloud Service resource. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/appplatform/v1beta1.SpringCloudService
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/appplatform/v1beta1.SpringCloudService
 	// +kubebuilder:validation:Optional
 	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
 

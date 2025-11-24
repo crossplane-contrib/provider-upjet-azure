@@ -9,10 +9,10 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	monitoralertprocessingruleactiongroup "github.com/upbound/provider-azure/internal/controller/cluster/alertsmanagement/monitoralertprocessingruleactiongroup"
-	monitoralertprocessingrulesuppression "github.com/upbound/provider-azure/internal/controller/cluster/alertsmanagement/monitoralertprocessingrulesuppression"
-	monitoralertprometheusrulegroup "github.com/upbound/provider-azure/internal/controller/cluster/alertsmanagement/monitoralertprometheusrulegroup"
-	monitorsmartdetectoralertrule "github.com/upbound/provider-azure/internal/controller/cluster/alertsmanagement/monitorsmartdetectoralertrule"
+	monitoralertprocessingruleactiongroup "github.com/upbound/provider-azure/v2/internal/controller/cluster/alertsmanagement/monitoralertprocessingruleactiongroup"
+	monitoralertprocessingrulesuppression "github.com/upbound/provider-azure/v2/internal/controller/cluster/alertsmanagement/monitoralertprocessingrulesuppression"
+	monitoralertprometheusrulegroup "github.com/upbound/provider-azure/v2/internal/controller/cluster/alertsmanagement/monitoralertprometheusrulegroup"
+	monitorsmartdetectoralertrule "github.com/upbound/provider-azure/v2/internal/controller/cluster/alertsmanagement/monitorsmartdetectoralertrule"
 )
 
 // Setup_alertsmanagement creates all controllers with the supplied logger and adds them to

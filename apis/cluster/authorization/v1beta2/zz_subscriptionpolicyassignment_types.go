@@ -84,7 +84,7 @@ type SubscriptionPolicyAssignmentInitParameters struct {
 	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The ID of the Policy Definition or Policy Definition Set. Changing this forces a new Policy Assignment to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/authorization/v1beta1.PolicyDefinition
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/authorization/v1beta1.PolicyDefinition
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PolicyDefinitionID *string `json:"policyDefinitionId,omitempty" tf:"policy_definition_id,omitempty"`
 
@@ -281,7 +281,7 @@ type SubscriptionPolicyAssignmentParameters struct {
 	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The ID of the Policy Definition or Policy Definition Set. Changing this forces a new Policy Assignment to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/authorization/v1beta1.PolicyDefinition
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/authorization/v1beta1.PolicyDefinition
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PolicyDefinitionID *string `json:"policyDefinitionId,omitempty" tf:"policy_definition_id,omitempty"`

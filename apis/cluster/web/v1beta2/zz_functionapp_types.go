@@ -308,7 +308,7 @@ type FacebookParameters struct {
 type FunctionAppInitParameters struct {
 
 	// The ID of the App Service Plan within which to create this Function App.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/web/v1beta2.AppServicePlan
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/web/v1beta2.AppServicePlan
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	AppServicePlanID *string `json:"appServicePlanId,omitempty" tf:"app_service_plan_id,omitempty"`
 
@@ -361,7 +361,7 @@ type FunctionAppInitParameters struct {
 	OsType *string `json:"osType,omitempty" tf:"os_type,omitempty"`
 
 	// The name of the resource group in which to create the Function App. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
@@ -382,7 +382,7 @@ type FunctionAppInitParameters struct {
 	StorageAccountAccessKeySecretRef v1.SecretKeySelector `json:"storageAccountAccessKeySecretRef" tf:"-"`
 
 	// The backend storage account name which will be used by this Function App (such as the dashboard, logs). Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 
 	// Reference to a Account in storage to populate storageAccountName.
@@ -490,7 +490,7 @@ type FunctionAppObservation struct {
 type FunctionAppParameters struct {
 
 	// The ID of the App Service Plan within which to create this Function App.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/web/v1beta2.AppServicePlan
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/web/v1beta2.AppServicePlan
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AppServicePlanID *string `json:"appServicePlanId,omitempty" tf:"app_service_plan_id,omitempty"`
@@ -557,7 +557,7 @@ type FunctionAppParameters struct {
 	OsType *string `json:"osType,omitempty" tf:"os_type,omitempty"`
 
 	// The name of the resource group in which to create the Function App. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -582,7 +582,7 @@ type FunctionAppParameters struct {
 	StorageAccountAccessKeySecretRef v1.SecretKeySelector `json:"storageAccountAccessKeySecretRef" tf:"-"`
 
 	// The backend storage account name which will be used by this Function App (such as the dashboard, logs). Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
 	// +kubebuilder:validation:Optional
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 
@@ -722,8 +722,8 @@ type IPRestrictionInitParameters struct {
 	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag"`
 
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id"`
 
 	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
@@ -786,8 +786,8 @@ type IPRestrictionParameters struct {
 	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag"`
 
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id"`
 
@@ -956,8 +956,8 @@ type ScmIPRestrictionInitParameters struct {
 	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag"`
 
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id"`
 
 	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
@@ -1020,8 +1020,8 @@ type ScmIPRestrictionParameters struct {
 	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag"`
 
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id"`
 

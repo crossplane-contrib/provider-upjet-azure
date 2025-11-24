@@ -196,7 +196,7 @@ type SnapshotPolicyObservation struct {
 type SnapshotPolicyParameters struct {
 
 	// The name of the NetApp Account in which the NetApp Snapshot Policy should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/netapp/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/netapp/v1beta1.Account
 	// +kubebuilder:validation:Optional
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
@@ -229,7 +229,7 @@ type SnapshotPolicyParameters struct {
 	MonthlySchedule *MonthlyScheduleParameters `json:"monthlySchedule,omitempty" tf:"monthly_schedule,omitempty"`
 
 	// The name of the resource group where the NetApp Snapshot Policy should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

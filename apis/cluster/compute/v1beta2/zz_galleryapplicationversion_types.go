@@ -28,7 +28,7 @@ type GalleryApplicationVersionInitParameters struct {
 	ExcludeFromLatest *bool `json:"excludeFromLatest,omitempty" tf:"exclude_from_latest,omitempty"`
 
 	// The ID of the Gallery Application. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/compute/v1beta1.GalleryApplication
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/compute/v1beta1.GalleryApplication
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	GalleryApplicationID *string `json:"galleryApplicationId,omitempty" tf:"gallery_application_id,omitempty"`
 
@@ -125,7 +125,7 @@ type GalleryApplicationVersionParameters struct {
 	ExcludeFromLatest *bool `json:"excludeFromLatest,omitempty" tf:"exclude_from_latest,omitempty"`
 
 	// The ID of the Gallery Application. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/compute/v1beta1.GalleryApplication
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/compute/v1beta1.GalleryApplication
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	GalleryApplicationID *string `json:"galleryApplicationId,omitempty" tf:"gallery_application_id,omitempty"`
@@ -213,7 +213,7 @@ type SourceInitParameters struct {
 	DefaultConfigurationLink *string `json:"defaultConfigurationLink,omitempty" tf:"default_configuration_link,omitempty"`
 
 	// The Storage Blob URI of the source application package. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta1.Blob
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Blob
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	MediaLink *string `json:"mediaLink,omitempty" tf:"media_link,omitempty"`
 
@@ -242,7 +242,7 @@ type SourceParameters struct {
 	DefaultConfigurationLink *string `json:"defaultConfigurationLink,omitempty" tf:"default_configuration_link,omitempty"`
 
 	// The Storage Blob URI of the source application package. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta1.Blob
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Blob
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	MediaLink *string `json:"mediaLink,omitempty" tf:"media_link,omitempty"`
@@ -262,7 +262,7 @@ type TargetRegionInitParameters struct {
 	ExcludeFromLatest *bool `json:"excludeFromLatest,omitempty" tf:"exclude_from_latest,omitempty"`
 
 	// The Azure Region in which the Gallery Application Version exists.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/compute/v1beta1.GalleryApplication
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/compute/v1beta1.GalleryApplication
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("location",false)
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -303,7 +303,7 @@ type TargetRegionParameters struct {
 	ExcludeFromLatest *bool `json:"excludeFromLatest,omitempty" tf:"exclude_from_latest,omitempty"`
 
 	// The Azure Region in which the Gallery Application Version exists.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/compute/v1beta1.GalleryApplication
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/compute/v1beta1.GalleryApplication
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("location",false)
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`

@@ -29,7 +29,7 @@ type ManagerIpamPoolInitParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the parent IPAM Pool. Changing this forces a new Network Manager IPAM Pool to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.ManagerIpamPool
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.ManagerIpamPool
 	ParentPoolName *string `json:"parentPoolName,omitempty" tf:"parent_pool_name,omitempty"`
 
 	// Reference to a ManagerIpamPool in network to populate parentPoolName.
@@ -92,8 +92,8 @@ type ManagerIpamPoolParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The ID of the parent Network Manager. Changing this forces a new Network Manager IPAM Pool to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.Manager
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Manager
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	NetworkManagerID *string `json:"networkManagerId,omitempty" tf:"network_manager_id,omitempty"`
 
@@ -106,7 +106,7 @@ type ManagerIpamPoolParameters struct {
 	NetworkManagerIDSelector *v1.NamespacedSelector `json:"networkManagerIdSelector,omitempty" tf:"-"`
 
 	// The name of the parent IPAM Pool. Changing this forces a new Network Manager IPAM Pool to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.ManagerIpamPool
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.ManagerIpamPool
 	// +kubebuilder:validation:Optional
 	ParentPoolName *string `json:"parentPoolName,omitempty" tf:"parent_pool_name,omitempty"`
 

@@ -9,10 +9,10 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	resourcedeploymentscriptazurecli "github.com/upbound/provider-azure/internal/controller/cluster/resources/resourcedeploymentscriptazurecli"
-	resourcedeploymentscriptazurepowershell "github.com/upbound/provider-azure/internal/controller/cluster/resources/resourcedeploymentscriptazurepowershell"
-	resourcegrouptemplatedeployment "github.com/upbound/provider-azure/internal/controller/cluster/resources/resourcegrouptemplatedeployment"
-	subscriptiontemplatedeployment "github.com/upbound/provider-azure/internal/controller/cluster/resources/subscriptiontemplatedeployment"
+	resourcedeploymentscriptazurecli "github.com/upbound/provider-azure/v2/internal/controller/cluster/resources/resourcedeploymentscriptazurecli"
+	resourcedeploymentscriptazurepowershell "github.com/upbound/provider-azure/v2/internal/controller/cluster/resources/resourcedeploymentscriptazurepowershell"
+	resourcegrouptemplatedeployment "github.com/upbound/provider-azure/v2/internal/controller/cluster/resources/resourcegrouptemplatedeployment"
+	subscriptiontemplatedeployment "github.com/upbound/provider-azure/v2/internal/controller/cluster/resources/subscriptiontemplatedeployment"
 )
 
 // Setup_resources creates all controllers with the supplied logger and adds them to

@@ -9,9 +9,9 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	accessconnector "github.com/upbound/provider-azure/internal/controller/namespaced/databricks/accessconnector"
-	workspace "github.com/upbound/provider-azure/internal/controller/namespaced/databricks/workspace"
-	workspacerootdbfscustomermanagedkey "github.com/upbound/provider-azure/internal/controller/namespaced/databricks/workspacerootdbfscustomermanagedkey"
+	accessconnector "github.com/upbound/provider-azure/v2/internal/controller/namespaced/databricks/accessconnector"
+	workspace "github.com/upbound/provider-azure/v2/internal/controller/namespaced/databricks/workspace"
+	workspacerootdbfscustomermanagedkey "github.com/upbound/provider-azure/v2/internal/controller/namespaced/databricks/workspacerootdbfscustomermanagedkey"
 )
 
 // Setup_databricks creates all controllers with the supplied logger and adds them to

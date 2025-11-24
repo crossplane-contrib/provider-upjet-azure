@@ -14,9 +14,9 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/pkg/errors"
 
-	"github.com/upbound/provider-azure/config/namespaced"
-	"github.com/upbound/provider-azure/config/namespaced/common"
-	"github.com/upbound/provider-azure/hack"
+	"github.com/upbound/provider-azure/v2/config/namespaced"
+	"github.com/upbound/provider-azure/v2/config/namespaced/common"
+	"github.com/upbound/provider-azure/v2/hack"
 )
 
 // GetProviderNamespaced returns the namespaced provider configuration

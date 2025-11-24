@@ -60,7 +60,7 @@ type AuthorizationRuleParameters struct {
 	Manage *bool `json:"manage,omitempty" tf:"manage,omitempty"`
 
 	// The name of the Notification Hub Namespace in which the Notification Hub exists. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/notificationhubs/v1beta1.NotificationHubNamespace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/notificationhubs/v1beta1.NotificationHubNamespace
 	// +kubebuilder:validation:Optional
 	NamespaceName *string `json:"namespaceName,omitempty" tf:"namespace_name,omitempty"`
 
@@ -73,7 +73,7 @@ type AuthorizationRuleParameters struct {
 	NamespaceNameSelector *v1.Selector `json:"namespaceNameSelector,omitempty" tf:"-"`
 
 	// The name of the Notification Hub for which the Authorization Rule should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/notificationhubs/v1beta2.NotificationHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/notificationhubs/v1beta2.NotificationHub
 	// +kubebuilder:validation:Optional
 	NotificationHubName *string `json:"notificationHubName,omitempty" tf:"notification_hub_name,omitempty"`
 
@@ -86,7 +86,7 @@ type AuthorizationRuleParameters struct {
 	NotificationHubNameSelector *v1.Selector `json:"notificationHubNameSelector,omitempty" tf:"-"`
 
 	// The name of the Resource Group in which the Notification Hub Namespace exists. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

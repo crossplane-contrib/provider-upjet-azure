@@ -17,8 +17,8 @@ import (
 type WorkspaceOutboundRulePrivateEndpointInitParameters struct {
 
 	// Specifies the Service Resource ID to connect. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/storage/v1beta1.Account
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	ServiceResourceID *string `json:"serviceResourceId,omitempty" tf:"service_resource_id,omitempty"`
 
 	// Reference to a Account in storage to populate serviceResourceId.
@@ -57,8 +57,8 @@ type WorkspaceOutboundRulePrivateEndpointObservation struct {
 type WorkspaceOutboundRulePrivateEndpointParameters struct {
 
 	// Specifies the Service Resource ID to connect. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/storage/v1beta1.Account
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ServiceResourceID *string `json:"serviceResourceId,omitempty" tf:"service_resource_id,omitempty"`
 
@@ -79,7 +79,7 @@ type WorkspaceOutboundRulePrivateEndpointParameters struct {
 	SubResourceTarget *string `json:"subResourceTarget,omitempty" tf:"sub_resource_target,omitempty"`
 
 	// Specifies the ID of the Machine Learning Workspace. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/machinelearningservices/v1beta1.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/machinelearningservices/v1beta1.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`

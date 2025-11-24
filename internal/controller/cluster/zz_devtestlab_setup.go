@@ -9,13 +9,13 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	globalvmshutdownschedule "github.com/upbound/provider-azure/internal/controller/cluster/devtestlab/globalvmshutdownschedule"
-	lab "github.com/upbound/provider-azure/internal/controller/cluster/devtestlab/lab"
-	linuxvirtualmachine "github.com/upbound/provider-azure/internal/controller/cluster/devtestlab/linuxvirtualmachine"
-	policy "github.com/upbound/provider-azure/internal/controller/cluster/devtestlab/policy"
-	schedule "github.com/upbound/provider-azure/internal/controller/cluster/devtestlab/schedule"
-	virtualnetwork "github.com/upbound/provider-azure/internal/controller/cluster/devtestlab/virtualnetwork"
-	windowsvirtualmachine "github.com/upbound/provider-azure/internal/controller/cluster/devtestlab/windowsvirtualmachine"
+	globalvmshutdownschedule "github.com/upbound/provider-azure/v2/internal/controller/cluster/devtestlab/globalvmshutdownschedule"
+	lab "github.com/upbound/provider-azure/v2/internal/controller/cluster/devtestlab/lab"
+	linuxvirtualmachine "github.com/upbound/provider-azure/v2/internal/controller/cluster/devtestlab/linuxvirtualmachine"
+	policy "github.com/upbound/provider-azure/v2/internal/controller/cluster/devtestlab/policy"
+	schedule "github.com/upbound/provider-azure/v2/internal/controller/cluster/devtestlab/schedule"
+	virtualnetwork "github.com/upbound/provider-azure/v2/internal/controller/cluster/devtestlab/virtualnetwork"
+	windowsvirtualmachine "github.com/upbound/provider-azure/v2/internal/controller/cluster/devtestlab/windowsvirtualmachine"
 )
 
 // Setup_devtestlab creates all controllers with the supplied logger and adds them to

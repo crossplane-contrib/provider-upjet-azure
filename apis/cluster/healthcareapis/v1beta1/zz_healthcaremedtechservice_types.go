@@ -57,7 +57,7 @@ type HealthcareMedtechServiceInitParameters struct {
 	DeviceMappingJSON *string `json:"deviceMappingJson,omitempty" tf:"device_mapping_json,omitempty"`
 
 	// Specifies the Consumer Group of the Event Hub to connect to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/eventhub/v1beta1.ConsumerGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/eventhub/v1beta1.ConsumerGroup
 	EventHubConsumerGroupName *string `json:"eventhubConsumerGroupName,omitempty" tf:"eventhub_consumer_group_name,omitempty"`
 
 	// Reference to a ConsumerGroup in eventhub to populate eventhubConsumerGroupName.
@@ -69,7 +69,7 @@ type HealthcareMedtechServiceInitParameters struct {
 	EventHubConsumerGroupNameSelector *v1.Selector `json:"eventhubConsumerGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the Event Hub to connect to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/eventhub/v1beta1.EventHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/eventhub/v1beta1.EventHub
 	EventHubName *string `json:"eventhubName,omitempty" tf:"eventhub_name,omitempty"`
 
 	// Reference to a EventHub in eventhub to populate eventhubName.
@@ -81,7 +81,7 @@ type HealthcareMedtechServiceInitParameters struct {
 	EventHubNameSelector *v1.Selector `json:"eventhubNameSelector,omitempty" tf:"-"`
 
 	// Specifies the namespace name of the Event Hub to connect to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/eventhub/v1beta1.EventHubNamespace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/eventhub/v1beta1.EventHubNamespace
 	EventHubNamespaceName *string `json:"eventhubNamespaceName,omitempty" tf:"eventhub_namespace_name,omitempty"`
 
 	// Reference to a EventHubNamespace in eventhub to populate eventhubNamespaceName.
@@ -141,7 +141,7 @@ type HealthcareMedtechServiceParameters struct {
 	DeviceMappingJSON *string `json:"deviceMappingJson,omitempty" tf:"device_mapping_json,omitempty"`
 
 	// Specifies the Consumer Group of the Event Hub to connect to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/eventhub/v1beta1.ConsumerGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/eventhub/v1beta1.ConsumerGroup
 	// +kubebuilder:validation:Optional
 	EventHubConsumerGroupName *string `json:"eventhubConsumerGroupName,omitempty" tf:"eventhub_consumer_group_name,omitempty"`
 
@@ -154,7 +154,7 @@ type HealthcareMedtechServiceParameters struct {
 	EventHubConsumerGroupNameSelector *v1.Selector `json:"eventhubConsumerGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the Event Hub to connect to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/eventhub/v1beta1.EventHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/eventhub/v1beta1.EventHub
 	// +kubebuilder:validation:Optional
 	EventHubName *string `json:"eventhubName,omitempty" tf:"eventhub_name,omitempty"`
 
@@ -167,7 +167,7 @@ type HealthcareMedtechServiceParameters struct {
 	EventHubNameSelector *v1.Selector `json:"eventhubNameSelector,omitempty" tf:"-"`
 
 	// Specifies the namespace name of the Event Hub to connect to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/eventhub/v1beta1.EventHubNamespace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/eventhub/v1beta1.EventHubNamespace
 	// +kubebuilder:validation:Optional
 	EventHubNamespaceName *string `json:"eventhubNamespaceName,omitempty" tf:"eventhub_namespace_name,omitempty"`
 
@@ -193,8 +193,8 @@ type HealthcareMedtechServiceParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the id of the Healthcare Workspace where the Healthcare Med Tech Service should exist. Changing this forces a new Healthcare Med Tech Service to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/healthcareapis/v1beta1.HealthcareWorkspace
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/healthcareapis/v1beta1.HealthcareWorkspace
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 

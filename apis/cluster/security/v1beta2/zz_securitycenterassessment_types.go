@@ -20,7 +20,7 @@ type SecurityCenterAssessmentInitParameters struct {
 	AdditionalData map[string]*string `json:"additionalData,omitempty" tf:"additional_data,omitempty"`
 
 	// The ID of the security Assessment policy to apply to this resource. Changing this forces a new security Assessment to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/security/v1beta1.SecurityCenterAssessmentPolicy
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/security/v1beta1.SecurityCenterAssessmentPolicy
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	AssessmentPolicyID *string `json:"assessmentPolicyId,omitempty" tf:"assessment_policy_id,omitempty"`
 
@@ -36,7 +36,7 @@ type SecurityCenterAssessmentInitParameters struct {
 	Status *StatusInitParameters `json:"status,omitempty" tf:"status,omitempty"`
 
 	// The ID of the target resource. Changing this forces a new security Assessment to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/compute/v1beta2.LinuxVirtualMachineScaleSet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/compute/v1beta2.LinuxVirtualMachineScaleSet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
 
@@ -76,7 +76,7 @@ type SecurityCenterAssessmentParameters struct {
 	AdditionalData map[string]*string `json:"additionalData,omitempty" tf:"additional_data,omitempty"`
 
 	// The ID of the security Assessment policy to apply to this resource. Changing this forces a new security Assessment to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/security/v1beta1.SecurityCenterAssessmentPolicy
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/security/v1beta1.SecurityCenterAssessmentPolicy
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AssessmentPolicyID *string `json:"assessmentPolicyId,omitempty" tf:"assessment_policy_id,omitempty"`
@@ -94,7 +94,7 @@ type SecurityCenterAssessmentParameters struct {
 	Status *StatusParameters `json:"status,omitempty" tf:"status,omitempty"`
 
 	// The ID of the target resource. Changing this forces a new security Assessment to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/compute/v1beta2.LinuxVirtualMachineScaleSet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/compute/v1beta2.LinuxVirtualMachineScaleSet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`

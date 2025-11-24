@@ -69,8 +69,8 @@ type BackupPolicyDiskParameters struct {
 	TimeZone *string `json:"timeZone,omitempty" tf:"time_zone,omitempty"`
 
 	// The ID of the Backup Vault within which the Backup Policy Disk should exist. Changing this forces a new Backup Policy Disk to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/dataprotection/v1beta1.BackupVault
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/dataprotection/v1beta1.BackupVault
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VaultID *string `json:"vaultId,omitempty" tf:"vault_id,omitempty"`
 

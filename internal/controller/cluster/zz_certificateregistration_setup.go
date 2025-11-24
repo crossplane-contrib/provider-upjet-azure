@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	appservicecertificateorder "github.com/upbound/provider-azure/internal/controller/cluster/certificateregistration/appservicecertificateorder"
+	appservicecertificateorder "github.com/upbound/provider-azure/v2/internal/controller/cluster/certificateregistration/appservicecertificateorder"
 )
 
 // Setup_certificateregistration creates all controllers with the supplied logger and adds them to

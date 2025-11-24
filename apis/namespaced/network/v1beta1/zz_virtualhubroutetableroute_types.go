@@ -24,7 +24,7 @@ type VirtualHubRouteTableRouteInitParameters_2 struct {
 	DestinationsType *string `json:"destinationsType,omitempty" tf:"destinations_type,omitempty"`
 
 	// The next hop's resource ID.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.VirtualHubConnection
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.VirtualHubConnection
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	NextHop *string `json:"nextHop,omitempty" tf:"next_hop,omitempty"`
 
@@ -74,7 +74,7 @@ type VirtualHubRouteTableRouteParameters_2 struct {
 	DestinationsType *string `json:"destinationsType,omitempty" tf:"destinations_type,omitempty"`
 
 	// The next hop's resource ID.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.VirtualHubConnection
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.VirtualHubConnection
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	NextHop *string `json:"nextHop,omitempty" tf:"next_hop,omitempty"`
@@ -92,7 +92,7 @@ type VirtualHubRouteTableRouteParameters_2 struct {
 	NextHopType *string `json:"nextHopType,omitempty" tf:"next_hop_type,omitempty"`
 
 	// The ID of the Virtual Hub Route Table to link this route to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.VirtualHubRouteTable
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.VirtualHubRouteTable
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RouteTableID *string `json:"routeTableId,omitempty" tf:"route_table_id,omitempty"`

@@ -26,7 +26,7 @@ type AppHybridConnectionInitParameters struct {
 
 	// The ID of the Relay Hybrid Connection to use. Changing this forces a new resource to be created.
 	// The ID of the Relay Hybrid Connection to use.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/relay/v1beta1.HybridConnection
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/relay/v1beta1.HybridConnection
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	RelayID *string `json:"relayId,omitempty" tf:"relay_id,omitempty"`
 
@@ -44,7 +44,7 @@ type AppHybridConnectionInitParameters struct {
 
 	// The ID of the Web App for this Hybrid Connection. Changing this forces a new resource to be created.
 	// The ID of the Web App for this Hybrid Connection.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/web/v1beta1.WindowsWebApp
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/web/v1beta1.WindowsWebApp
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	WebAppID *string `json:"webAppId,omitempty" tf:"web_app_id,omitempty"`
 
@@ -113,7 +113,7 @@ type AppHybridConnectionParameters struct {
 
 	// The ID of the Relay Hybrid Connection to use. Changing this forces a new resource to be created.
 	// The ID of the Relay Hybrid Connection to use.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/relay/v1beta1.HybridConnection
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/relay/v1beta1.HybridConnection
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RelayID *string `json:"relayId,omitempty" tf:"relay_id,omitempty"`
@@ -133,7 +133,7 @@ type AppHybridConnectionParameters struct {
 
 	// The ID of the Web App for this Hybrid Connection. Changing this forces a new resource to be created.
 	// The ID of the Web App for this Hybrid Connection.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/web/v1beta1.WindowsWebApp
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/web/v1beta1.WindowsWebApp
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	WebAppID *string `json:"webAppId,omitempty" tf:"web_app_id,omitempty"`

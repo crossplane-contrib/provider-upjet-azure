@@ -71,7 +71,7 @@ type DatabaseMigrationProjectParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Name of the resource group in which to create the database migration project. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -84,7 +84,7 @@ type DatabaseMigrationProjectParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Name of the database migration service where resource belongs to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/datamigration/v1beta1.DatabaseMigrationService
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/datamigration/v1beta1.DatabaseMigrationService
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`

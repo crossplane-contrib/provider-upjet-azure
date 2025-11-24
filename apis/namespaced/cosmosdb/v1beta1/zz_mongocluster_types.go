@@ -62,8 +62,8 @@ type MongoClusterInitParameters struct {
 	ShardCount *float64 `json:"shardCount,omitempty" tf:"shard_count,omitempty"`
 
 	// The location of the source MongoDB Cluster. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/cosmosdb/v1beta1.MongoCluster
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceLocation()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cosmosdb/v1beta1.MongoCluster
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceLocation()
 	SourceLocation *string `json:"sourceLocation,omitempty" tf:"source_location,omitempty"`
 
 	// Reference to a MongoCluster in cosmosdb to populate sourceLocation.
@@ -75,8 +75,8 @@ type MongoClusterInitParameters struct {
 	SourceLocationSelector *v1.NamespacedSelector `json:"sourceLocationSelector,omitempty" tf:"-"`
 
 	// The ID of the replication source MongoDB Cluster. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/cosmosdb/v1beta1.MongoCluster
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cosmosdb/v1beta1.MongoCluster
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	SourceServerID *string `json:"sourceServerId,omitempty" tf:"source_server_id,omitempty"`
 
 	// Reference to a MongoCluster in cosmosdb to populate sourceServerId.
@@ -182,7 +182,7 @@ type MongoClusterParameters struct {
 	PublicNetworkAccess *string `json:"publicNetworkAccess,omitempty" tf:"public_network_access,omitempty"`
 
 	// The name of the resource group in which to create the MongoDB Cluster. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -199,8 +199,8 @@ type MongoClusterParameters struct {
 	ShardCount *float64 `json:"shardCount,omitempty" tf:"shard_count,omitempty"`
 
 	// The location of the source MongoDB Cluster. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/cosmosdb/v1beta1.MongoCluster
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceLocation()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cosmosdb/v1beta1.MongoCluster
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceLocation()
 	// +kubebuilder:validation:Optional
 	SourceLocation *string `json:"sourceLocation,omitempty" tf:"source_location,omitempty"`
 
@@ -213,8 +213,8 @@ type MongoClusterParameters struct {
 	SourceLocationSelector *v1.NamespacedSelector `json:"sourceLocationSelector,omitempty" tf:"-"`
 
 	// The ID of the replication source MongoDB Cluster. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/cosmosdb/v1beta1.MongoCluster
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cosmosdb/v1beta1.MongoCluster
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourceServerID *string `json:"sourceServerId,omitempty" tf:"source_server_id,omitempty"`
 

@@ -16,7 +16,7 @@ import (
 type WebhookInitParameters struct {
 
 	// The name of the automation account in which the Webhook is created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/automation/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/automation/v1beta2.Account
 	AutomationAccountName *string `json:"automationAccountName,omitempty" tf:"automation_account_name,omitempty"`
 
 	// Reference to a Account in automation to populate automationAccountName.
@@ -41,7 +41,7 @@ type WebhookInitParameters struct {
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The name of the resource group in which the Webhook is created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
@@ -53,7 +53,7 @@ type WebhookInitParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Name of the Automation Runbook to execute by Webhook.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/automation/v1beta2.RunBook
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/automation/v1beta2.RunBook
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	RunBookName *string `json:"runbookName,omitempty" tf:"runbook_name,omitempty"`
 
@@ -106,7 +106,7 @@ type WebhookObservation struct {
 type WebhookParameters struct {
 
 	// The name of the automation account in which the Webhook is created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/automation/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/automation/v1beta2.Account
 	// +kubebuilder:validation:Optional
 	AutomationAccountName *string `json:"automationAccountName,omitempty" tf:"automation_account_name,omitempty"`
 
@@ -136,7 +136,7 @@ type WebhookParameters struct {
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The name of the resource group in which the Webhook is created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -149,7 +149,7 @@ type WebhookParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Name of the Automation Runbook to execute by Webhook.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/automation/v1beta2.RunBook
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/automation/v1beta2.RunBook
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	RunBookName *string `json:"runbookName,omitempty" tf:"runbook_name,omitempty"`

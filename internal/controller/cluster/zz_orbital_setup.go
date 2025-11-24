@@ -9,8 +9,8 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	contactprofile "github.com/upbound/provider-azure/internal/controller/cluster/orbital/contactprofile"
-	spacecraft "github.com/upbound/provider-azure/internal/controller/cluster/orbital/spacecraft"
+	contactprofile "github.com/upbound/provider-azure/v2/internal/controller/cluster/orbital/contactprofile"
+	spacecraft "github.com/upbound/provider-azure/v2/internal/controller/cluster/orbital/spacecraft"
 )
 
 // Setup_orbital creates all controllers with the supplied logger and adds them to

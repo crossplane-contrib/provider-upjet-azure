@@ -25,7 +25,7 @@ type PolicyInitParameters struct {
 	FactData *string `json:"factData,omitempty" tf:"fact_data,omitempty"`
 
 	// Specifies the name of the Dev Test Lab in which the Policy should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/devtestlab/v1beta1.Lab
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/devtestlab/v1beta1.Lab
 	LabName *string `json:"labName,omitempty" tf:"lab_name,omitempty"`
 
 	// Reference to a Lab in devtestlab to populate labName.
@@ -43,7 +43,7 @@ type PolicyInitParameters struct {
 	PolicySetName *string `json:"policySetName,omitempty" tf:"policy_set_name,omitempty"`
 
 	// The name of the resource group in which the Dev Test Lab resource exists. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
@@ -111,7 +111,7 @@ type PolicyParameters struct {
 	FactData *string `json:"factData,omitempty" tf:"fact_data,omitempty"`
 
 	// Specifies the name of the Dev Test Lab in which the Policy should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/devtestlab/v1beta1.Lab
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/devtestlab/v1beta1.Lab
 	// +kubebuilder:validation:Optional
 	LabName *string `json:"labName,omitempty" tf:"lab_name,omitempty"`
 
@@ -132,7 +132,7 @@ type PolicyParameters struct {
 	PolicySetName *string `json:"policySetName,omitempty" tf:"policy_set_name,omitempty"`
 
 	// The name of the resource group in which the Dev Test Lab resource exists. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

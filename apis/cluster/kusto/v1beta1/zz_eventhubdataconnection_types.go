@@ -19,7 +19,7 @@ type EventHubDataConnectionInitParameters struct {
 	Compression *string `json:"compression,omitempty" tf:"compression,omitempty"`
 
 	// Specifies the EventHub consumer group this data connection will use for ingestion. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/eventhub/v1beta1.ConsumerGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/eventhub/v1beta1.ConsumerGroup
 	ConsumerGroup *string `json:"consumerGroup,omitempty" tf:"consumer_group,omitempty"`
 
 	// Reference to a ConsumerGroup in eventhub to populate consumerGroup.
@@ -37,7 +37,7 @@ type EventHubDataConnectionInitParameters struct {
 	DatabaseRoutingType *string `json:"databaseRoutingType,omitempty" tf:"database_routing_type,omitempty"`
 
 	// Specifies the resource id of the EventHub this data connection will use for ingestion. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/eventhub/v1beta2.EventHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/eventhub/v1beta2.EventHub
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	EventHubID *string `json:"eventhubId,omitempty" tf:"eventhub_id,omitempty"`
 
@@ -113,7 +113,7 @@ type EventHubDataConnectionObservation struct {
 type EventHubDataConnectionParameters struct {
 
 	// Specifies the name of the Kusto Cluster this data connection will be added to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/kusto/v1beta2.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/kusto/v1beta2.Cluster
 	// +kubebuilder:validation:Optional
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
@@ -130,7 +130,7 @@ type EventHubDataConnectionParameters struct {
 	Compression *string `json:"compression,omitempty" tf:"compression,omitempty"`
 
 	// Specifies the EventHub consumer group this data connection will use for ingestion. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/eventhub/v1beta1.ConsumerGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/eventhub/v1beta1.ConsumerGroup
 	// +kubebuilder:validation:Optional
 	ConsumerGroup *string `json:"consumerGroup,omitempty" tf:"consumer_group,omitempty"`
 
@@ -147,7 +147,7 @@ type EventHubDataConnectionParameters struct {
 	DataFormat *string `json:"dataFormat,omitempty" tf:"data_format,omitempty"`
 
 	// Specifies the name of the Kusto Database this data connection will be added to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/kusto/v1beta1.Database
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/kusto/v1beta1.Database
 	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
@@ -164,7 +164,7 @@ type EventHubDataConnectionParameters struct {
 	DatabaseRoutingType *string `json:"databaseRoutingType,omitempty" tf:"database_routing_type,omitempty"`
 
 	// Specifies the resource id of the EventHub this data connection will use for ingestion. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/eventhub/v1beta2.EventHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/eventhub/v1beta2.EventHub
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	EventHubID *string `json:"eventhubId,omitempty" tf:"eventhub_id,omitempty"`
@@ -194,7 +194,7 @@ type EventHubDataConnectionParameters struct {
 	MappingRuleName *string `json:"mappingRuleName,omitempty" tf:"mapping_rule_name,omitempty"`
 
 	// Specifies the Resource Group where the Kusto Database should exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

@@ -42,7 +42,7 @@ type LinkedServiceSnowflakeInitParameters struct {
 type LinkedServiceSnowflakeKeyVaultPasswordInitParameters struct {
 
 	// Specifies the name of an existing Key Vault Data Factory Linked Service.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/datafactory/v1beta1.LinkedServiceKeyVault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/datafactory/v1beta1.LinkedServiceKeyVault
 	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
 
 	// Reference to a LinkedServiceKeyVault in datafactory to populate linkedServiceName.
@@ -69,7 +69,7 @@ type LinkedServiceSnowflakeKeyVaultPasswordObservation struct {
 type LinkedServiceSnowflakeKeyVaultPasswordParameters struct {
 
 	// Specifies the name of an existing Key Vault Data Factory Linked Service.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/datafactory/v1beta1.LinkedServiceKeyVault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/datafactory/v1beta1.LinkedServiceKeyVault
 	// +kubebuilder:validation:Optional
 	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
 
@@ -134,7 +134,7 @@ type LinkedServiceSnowflakeParameters struct {
 	ConnectionString *string `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
 
 	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/datafactory/v1beta1.Factory
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/datafactory/v1beta1.Factory
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DataFactoryID *string `json:"dataFactoryId,omitempty" tf:"data_factory_id,omitempty"`

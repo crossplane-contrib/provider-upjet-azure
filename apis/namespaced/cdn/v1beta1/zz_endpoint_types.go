@@ -573,7 +573,7 @@ type EndpointParameters struct {
 	ProbePath *string `json:"probePath,omitempty" tf:"probe_path,omitempty"`
 
 	// The CDN Profile to which to attach the CDN Endpoint. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/cdn/v1beta1.Profile
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cdn/v1beta1.Profile
 	// +kubebuilder:validation:Optional
 	ProfileName *string `json:"profileName,omitempty" tf:"profile_name,omitempty"`
 
@@ -590,7 +590,7 @@ type EndpointParameters struct {
 	QuerystringCachingBehaviour *string `json:"querystringCachingBehaviour,omitempty" tf:"querystring_caching_behaviour,omitempty"`
 
 	// The name of the resource group in which to create the CDN Endpoint. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

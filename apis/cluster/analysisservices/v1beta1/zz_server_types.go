@@ -77,7 +77,7 @@ type ServerInitParameters struct {
 	QuerypoolConnectionMode *string `json:"querypoolConnectionMode,omitempty" tf:"querypool_connection_mode,omitempty"`
 
 	// The name of the Resource Group in which the Analysis Services Server should be exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
@@ -166,7 +166,7 @@ type ServerParameters struct {
 	QuerypoolConnectionMode *string `json:"querypoolConnectionMode,omitempty" tf:"querypool_connection_mode,omitempty"`
 
 	// The name of the Resource Group in which the Analysis Services Server should be exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

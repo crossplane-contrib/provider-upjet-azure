@@ -9,17 +9,17 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	appactioncustom "github.com/upbound/provider-azure/internal/controller/namespaced/logic/appactioncustom"
-	appactionhttp "github.com/upbound/provider-azure/internal/controller/namespaced/logic/appactionhttp"
-	appintegrationaccount "github.com/upbound/provider-azure/internal/controller/namespaced/logic/appintegrationaccount"
-	appintegrationaccountbatchconfiguration "github.com/upbound/provider-azure/internal/controller/namespaced/logic/appintegrationaccountbatchconfiguration"
-	appintegrationaccountpartner "github.com/upbound/provider-azure/internal/controller/namespaced/logic/appintegrationaccountpartner"
-	appintegrationaccountschema "github.com/upbound/provider-azure/internal/controller/namespaced/logic/appintegrationaccountschema"
-	appintegrationaccountsession "github.com/upbound/provider-azure/internal/controller/namespaced/logic/appintegrationaccountsession"
-	apptriggercustom "github.com/upbound/provider-azure/internal/controller/namespaced/logic/apptriggercustom"
-	apptriggerhttprequest "github.com/upbound/provider-azure/internal/controller/namespaced/logic/apptriggerhttprequest"
-	apptriggerrecurrence "github.com/upbound/provider-azure/internal/controller/namespaced/logic/apptriggerrecurrence"
-	appworkflow "github.com/upbound/provider-azure/internal/controller/namespaced/logic/appworkflow"
+	appactioncustom "github.com/upbound/provider-azure/v2/internal/controller/namespaced/logic/appactioncustom"
+	appactionhttp "github.com/upbound/provider-azure/v2/internal/controller/namespaced/logic/appactionhttp"
+	appintegrationaccount "github.com/upbound/provider-azure/v2/internal/controller/namespaced/logic/appintegrationaccount"
+	appintegrationaccountbatchconfiguration "github.com/upbound/provider-azure/v2/internal/controller/namespaced/logic/appintegrationaccountbatchconfiguration"
+	appintegrationaccountpartner "github.com/upbound/provider-azure/v2/internal/controller/namespaced/logic/appintegrationaccountpartner"
+	appintegrationaccountschema "github.com/upbound/provider-azure/v2/internal/controller/namespaced/logic/appintegrationaccountschema"
+	appintegrationaccountsession "github.com/upbound/provider-azure/v2/internal/controller/namespaced/logic/appintegrationaccountsession"
+	apptriggercustom "github.com/upbound/provider-azure/v2/internal/controller/namespaced/logic/apptriggercustom"
+	apptriggerhttprequest "github.com/upbound/provider-azure/v2/internal/controller/namespaced/logic/apptriggerhttprequest"
+	apptriggerrecurrence "github.com/upbound/provider-azure/v2/internal/controller/namespaced/logic/apptriggerrecurrence"
+	appworkflow "github.com/upbound/provider-azure/v2/internal/controller/namespaced/logic/appworkflow"
 )
 
 // Setup_logic creates all controllers with the supplied logger and adds them to

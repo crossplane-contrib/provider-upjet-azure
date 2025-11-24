@@ -1238,8 +1238,8 @@ type FunctionAppFlexConsumptionConnectionStringParameters struct {
 type FunctionAppFlexConsumptionIdentityInitParameters struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this Linux Function App.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
@@ -1274,8 +1274,8 @@ type FunctionAppFlexConsumptionIdentityObservation struct {
 type FunctionAppFlexConsumptionIdentityParameters struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this Linux Function App.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
@@ -1355,8 +1355,8 @@ type FunctionAppFlexConsumptionInitParameters struct {
 
 	// The ID of the App Service Plan within which to create this Function App. Changing this forces a new Linux Function App to be created.
 	// The ID of the App Service Plan within which to create this Function App
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/web/v1beta1.ServicePlan
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/web/v1beta1.ServicePlan
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	ServicePlanID *string `json:"servicePlanId,omitempty" tf:"service_plan_id,omitempty"`
 
 	// Reference to a ServicePlan in web to populate servicePlanId.
@@ -1374,7 +1374,7 @@ type FunctionAppFlexConsumptionInitParameters struct {
 	StickySettings *StickySettingsInitParameters `json:"stickySettings,omitempty" tf:"sticky_settings,omitempty"`
 
 	// The access key which will be used to access the backend storage account for the Function App.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("primary_access_key",true)
 	StorageAccessKey *string `json:"storageAccessKey,omitempty" tf:"storage_access_key,omitempty"`
 
@@ -1391,8 +1391,8 @@ type FunctionAppFlexConsumptionInitParameters struct {
 
 	// The backend storage container endpoint which will be used by this Function App.
 	// The endpoint of the storage container where the function app's code is hosted.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/storage/v1beta1.Container
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractAccountContainerEndpoint()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Container
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractAccountContainerEndpoint()
 	StorageContainerEndpoint *string `json:"storageContainerEndpoint,omitempty" tf:"storage_container_endpoint,omitempty"`
 
 	// Reference to a Container in storage to populate storageContainerEndpoint.
@@ -1408,8 +1408,8 @@ type FunctionAppFlexConsumptionInitParameters struct {
 	StorageContainerType *string `json:"storageContainerType,omitempty" tf:"storage_container_type,omitempty"`
 
 	// The user assigned Managed Identity to access the storage account. Conflicts with storage_access_key.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	StorageUserAssignedIdentityID *string `json:"storageUserAssignedIdentityId,omitempty" tf:"storage_user_assigned_identity_id,omitempty"`
 
 	// Reference to a UserAssignedIdentity in managedidentity to populate storageUserAssignedIdentityId.
@@ -1425,8 +1425,8 @@ type FunctionAppFlexConsumptionInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The subnet id which will be used by this Function App for regional virtual network integration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
 	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
@@ -1644,7 +1644,7 @@ type FunctionAppFlexConsumptionParameters struct {
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The name of the Resource Group where the Function App should exist. Changing this forces a new Linux Function App to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -1666,8 +1666,8 @@ type FunctionAppFlexConsumptionParameters struct {
 
 	// The ID of the App Service Plan within which to create this Function App. Changing this forces a new Linux Function App to be created.
 	// The ID of the App Service Plan within which to create this Function App
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/web/v1beta1.ServicePlan
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/web/v1beta1.ServicePlan
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ServicePlanID *string `json:"servicePlanId,omitempty" tf:"service_plan_id,omitempty"`
 
@@ -1688,7 +1688,7 @@ type FunctionAppFlexConsumptionParameters struct {
 	StickySettings *StickySettingsParameters `json:"stickySettings,omitempty" tf:"sticky_settings,omitempty"`
 
 	// The access key which will be used to access the backend storage account for the Function App.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("primary_access_key",true)
 	// +kubebuilder:validation:Optional
 	StorageAccessKey *string `json:"storageAccessKey,omitempty" tf:"storage_access_key,omitempty"`
@@ -1707,8 +1707,8 @@ type FunctionAppFlexConsumptionParameters struct {
 
 	// The backend storage container endpoint which will be used by this Function App.
 	// The endpoint of the storage container where the function app's code is hosted.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/storage/v1beta1.Container
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractAccountContainerEndpoint()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Container
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractAccountContainerEndpoint()
 	// +kubebuilder:validation:Optional
 	StorageContainerEndpoint *string `json:"storageContainerEndpoint,omitempty" tf:"storage_container_endpoint,omitempty"`
 
@@ -1726,8 +1726,8 @@ type FunctionAppFlexConsumptionParameters struct {
 	StorageContainerType *string `json:"storageContainerType,omitempty" tf:"storage_container_type,omitempty"`
 
 	// The user assigned Managed Identity to access the storage account. Conflicts with storage_access_key.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StorageUserAssignedIdentityID *string `json:"storageUserAssignedIdentityId,omitempty" tf:"storage_user_assigned_identity_id,omitempty"`
 
@@ -1745,8 +1745,8 @@ type FunctionAppFlexConsumptionParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The subnet id which will be used by this Function App for regional virtual network integration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
@@ -1776,8 +1776,8 @@ type FunctionAppFlexConsumptionSiteConfigInitParameters struct {
 
 	// The ID of the API Management API for this Linux Function App.
 	// The ID of the API Management API for this Linux Function App.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/apimanagement/v1beta1.API
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta1.API
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	APIManagementAPIID *string `json:"apiManagementApiId,omitempty" tf:"api_management_api_id,omitempty"`
 
 	// Reference to a API in apimanagement to populate apiManagementApiId.
@@ -1805,8 +1805,8 @@ type FunctionAppFlexConsumptionSiteConfigInitParameters struct {
 
 	// The Client ID of the Managed Service Identity to use for connections to the Azure Container Registry.
 	// The Client ID of the Managed Service Identity to use for connections to the Azure Container Registry.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	ContainerRegistryManagedIdentityClientID *string `json:"containerRegistryManagedIdentityClientId,omitempty" tf:"container_registry_managed_identity_client_id,omitempty"`
 
 	// Reference to a UserAssignedIdentity in managedidentity to populate containerRegistryManagedIdentityClientId.
@@ -2028,8 +2028,8 @@ type FunctionAppFlexConsumptionSiteConfigParameters struct {
 
 	// The ID of the API Management API for this Linux Function App.
 	// The ID of the API Management API for this Linux Function App.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/apimanagement/v1beta1.API
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta1.API
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	APIManagementAPIID *string `json:"apiManagementApiId,omitempty" tf:"api_management_api_id,omitempty"`
 
@@ -2062,8 +2062,8 @@ type FunctionAppFlexConsumptionSiteConfigParameters struct {
 
 	// The Client ID of the Managed Service Identity to use for connections to the Azure Container Registry.
 	// The Client ID of the Managed Service Identity to use for connections to the Azure Container Registry.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ContainerRegistryManagedIdentityClientID *string `json:"containerRegistryManagedIdentityClientId,omitempty" tf:"container_registry_managed_identity_client_id,omitempty"`
 
@@ -2697,8 +2697,8 @@ type SiteConfigIPRestrictionInitParameters struct {
 
 	// The subnet id which will be used by this Function App for regional virtual network integration.
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
 	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
@@ -2782,8 +2782,8 @@ type SiteConfigIPRestrictionParameters struct {
 
 	// The subnet id which will be used by this Function App for regional virtual network integration.
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
@@ -2876,8 +2876,8 @@ type SiteConfigScmIPRestrictionInitParameters struct {
 
 	// The subnet id which will be used by this Function App for regional virtual network integration.
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
 	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
@@ -2961,8 +2961,8 @@ type SiteConfigScmIPRestrictionParameters struct {
 
 	// The subnet id which will be used by this Function App for regional virtual network integration.
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 

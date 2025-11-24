@@ -237,7 +237,7 @@ type SpringCloudCustomizedAcceleratorParameters struct {
 	IconURL *string `json:"iconUrl,omitempty" tf:"icon_url,omitempty"`
 
 	// The ID of the Spring Cloud Accelerator. Changing this forces a new Spring Cloud Customized Accelerator to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/appplatform/v1beta1.SpringCloudAccelerator
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/appplatform/v1beta1.SpringCloudAccelerator
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SpringCloudAcceleratorID *string `json:"springCloudAcceleratorId,omitempty" tf:"spring_cloud_accelerator_id,omitempty"`

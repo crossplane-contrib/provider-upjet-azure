@@ -21,8 +21,8 @@ type FlexibleServerVirtualEndpointInitParameters struct {
 
 	// The Resource ID of the Replica Postgres Flexible Server this should be associated with
 	// The Resource ID of the *Replica* Postgres Flexible Server this should be associated with
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/dbforpostgresql/v1beta2.FlexibleServer
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/dbforpostgresql/v1beta2.FlexibleServer
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	ReplicaServerID *string `json:"replicaServerId,omitempty" tf:"replica_server_id,omitempty"`
 
 	// Reference to a FlexibleServer in dbforpostgresql to populate replicaServerId.
@@ -35,8 +35,8 @@ type FlexibleServerVirtualEndpointInitParameters struct {
 
 	// The Resource ID of the Source Postgres Flexible Server this should be associated with.
 	// The Resource ID of the *Source* Postgres Flexible Server this should be associated with
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/dbforpostgresql/v1beta2.FlexibleServer
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/dbforpostgresql/v1beta2.FlexibleServer
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	SourceServerID *string `json:"sourceServerId,omitempty" tf:"source_server_id,omitempty"`
 
 	// Reference to a FlexibleServer in dbforpostgresql to populate sourceServerId.
@@ -83,8 +83,8 @@ type FlexibleServerVirtualEndpointParameters struct {
 
 	// The Resource ID of the Replica Postgres Flexible Server this should be associated with
 	// The Resource ID of the *Replica* Postgres Flexible Server this should be associated with
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/dbforpostgresql/v1beta2.FlexibleServer
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/dbforpostgresql/v1beta2.FlexibleServer
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ReplicaServerID *string `json:"replicaServerId,omitempty" tf:"replica_server_id,omitempty"`
 
@@ -98,8 +98,8 @@ type FlexibleServerVirtualEndpointParameters struct {
 
 	// The Resource ID of the Source Postgres Flexible Server this should be associated with.
 	// The Resource ID of the *Source* Postgres Flexible Server this should be associated with
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/dbforpostgresql/v1beta2.FlexibleServer
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/dbforpostgresql/v1beta2.FlexibleServer
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourceServerID *string `json:"sourceServerId,omitempty" tf:"source_server_id,omitempty"`
 

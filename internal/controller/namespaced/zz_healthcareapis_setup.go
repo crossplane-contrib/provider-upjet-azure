@@ -9,12 +9,12 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	healthcaredicomservice "github.com/upbound/provider-azure/internal/controller/namespaced/healthcareapis/healthcaredicomservice"
-	healthcarefhirservice "github.com/upbound/provider-azure/internal/controller/namespaced/healthcareapis/healthcarefhirservice"
-	healthcaremedtechservice "github.com/upbound/provider-azure/internal/controller/namespaced/healthcareapis/healthcaremedtechservice"
-	healthcaremedtechservicefhirdestination "github.com/upbound/provider-azure/internal/controller/namespaced/healthcareapis/healthcaremedtechservicefhirdestination"
-	healthcareservice "github.com/upbound/provider-azure/internal/controller/namespaced/healthcareapis/healthcareservice"
-	healthcareworkspace "github.com/upbound/provider-azure/internal/controller/namespaced/healthcareapis/healthcareworkspace"
+	healthcaredicomservice "github.com/upbound/provider-azure/v2/internal/controller/namespaced/healthcareapis/healthcaredicomservice"
+	healthcarefhirservice "github.com/upbound/provider-azure/v2/internal/controller/namespaced/healthcareapis/healthcarefhirservice"
+	healthcaremedtechservice "github.com/upbound/provider-azure/v2/internal/controller/namespaced/healthcareapis/healthcaremedtechservice"
+	healthcaremedtechservicefhirdestination "github.com/upbound/provider-azure/v2/internal/controller/namespaced/healthcareapis/healthcaremedtechservicefhirdestination"
+	healthcareservice "github.com/upbound/provider-azure/v2/internal/controller/namespaced/healthcareapis/healthcareservice"
+	healthcareworkspace "github.com/upbound/provider-azure/v2/internal/controller/namespaced/healthcareapis/healthcareworkspace"
 )
 
 // Setup_healthcareapis creates all controllers with the supplied logger and adds them to

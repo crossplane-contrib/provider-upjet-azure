@@ -9,8 +9,8 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	application "github.com/upbound/provider-azure/internal/controller/cluster/iotcentral/application"
-	applicationnetworkruleset "github.com/upbound/provider-azure/internal/controller/cluster/iotcentral/applicationnetworkruleset"
+	application "github.com/upbound/provider-azure/v2/internal/controller/cluster/iotcentral/application"
+	applicationnetworkruleset "github.com/upbound/provider-azure/v2/internal/controller/cluster/iotcentral/applicationnetworkruleset"
 )
 
 // Setup_iotcentral creates all controllers with the supplied logger and adds them to

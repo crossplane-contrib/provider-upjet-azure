@@ -9,9 +9,9 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	maintenanceassignmentdedicatedhost "github.com/upbound/provider-azure/internal/controller/cluster/maintenance/maintenanceassignmentdedicatedhost"
-	maintenanceassignmentvirtualmachine "github.com/upbound/provider-azure/internal/controller/cluster/maintenance/maintenanceassignmentvirtualmachine"
-	maintenanceconfiguration "github.com/upbound/provider-azure/internal/controller/cluster/maintenance/maintenanceconfiguration"
+	maintenanceassignmentdedicatedhost "github.com/upbound/provider-azure/v2/internal/controller/cluster/maintenance/maintenanceassignmentdedicatedhost"
+	maintenanceassignmentvirtualmachine "github.com/upbound/provider-azure/v2/internal/controller/cluster/maintenance/maintenanceassignmentvirtualmachine"
+	maintenanceconfiguration "github.com/upbound/provider-azure/v2/internal/controller/cluster/maintenance/maintenanceconfiguration"
 )
 
 // Setup_maintenance creates all controllers with the supplied logger and adds them to

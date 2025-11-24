@@ -9,14 +9,14 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	agentpool "github.com/upbound/provider-azure/internal/controller/cluster/containerregistry/agentpool"
-	containerconnectedregistry "github.com/upbound/provider-azure/internal/controller/cluster/containerregistry/containerconnectedregistry"
-	credentialset "github.com/upbound/provider-azure/internal/controller/cluster/containerregistry/credentialset"
-	registry "github.com/upbound/provider-azure/internal/controller/cluster/containerregistry/registry"
-	scopemap "github.com/upbound/provider-azure/internal/controller/cluster/containerregistry/scopemap"
-	token "github.com/upbound/provider-azure/internal/controller/cluster/containerregistry/token"
-	tokenpassword "github.com/upbound/provider-azure/internal/controller/cluster/containerregistry/tokenpassword"
-	webhook "github.com/upbound/provider-azure/internal/controller/cluster/containerregistry/webhook"
+	agentpool "github.com/upbound/provider-azure/v2/internal/controller/cluster/containerregistry/agentpool"
+	containerconnectedregistry "github.com/upbound/provider-azure/v2/internal/controller/cluster/containerregistry/containerconnectedregistry"
+	credentialset "github.com/upbound/provider-azure/v2/internal/controller/cluster/containerregistry/credentialset"
+	registry "github.com/upbound/provider-azure/v2/internal/controller/cluster/containerregistry/registry"
+	scopemap "github.com/upbound/provider-azure/v2/internal/controller/cluster/containerregistry/scopemap"
+	token "github.com/upbound/provider-azure/v2/internal/controller/cluster/containerregistry/token"
+	tokenpassword "github.com/upbound/provider-azure/v2/internal/controller/cluster/containerregistry/tokenpassword"
+	webhook "github.com/upbound/provider-azure/v2/internal/controller/cluster/containerregistry/webhook"
 )
 
 // Setup_containerregistry creates all controllers with the supplied logger and adds them to

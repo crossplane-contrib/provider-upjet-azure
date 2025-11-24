@@ -16,8 +16,8 @@ import (
 type ManagerStaticMemberInitParameters struct {
 
 	// Specifies the Resource ID of the Virtual Network using as the Static Member. Changing this forces a new Network Manager Static Member to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.VirtualNetwork
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.VirtualNetwork
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	TargetVirtualNetworkID *string `json:"targetVirtualNetworkId,omitempty" tf:"target_virtual_network_id,omitempty"`
 
 	// Reference to a VirtualNetwork in network to populate targetVirtualNetworkId.
@@ -47,7 +47,7 @@ type ManagerStaticMemberObservation struct {
 type ManagerStaticMemberParameters struct {
 
 	// Specifies the ID of the Network Manager Group. Changing this forces a new Network Manager Static Member to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta1.ManagerNetworkGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta1.ManagerNetworkGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	NetworkGroupID *string `json:"networkGroupId,omitempty" tf:"network_group_id,omitempty"`
@@ -61,8 +61,8 @@ type ManagerStaticMemberParameters struct {
 	NetworkGroupIDSelector *v1.Selector `json:"networkGroupIdSelector,omitempty" tf:"-"`
 
 	// Specifies the Resource ID of the Virtual Network using as the Static Member. Changing this forces a new Network Manager Static Member to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.VirtualNetwork
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.VirtualNetwork
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TargetVirtualNetworkID *string `json:"targetVirtualNetworkId,omitempty" tf:"target_virtual_network_id,omitempty"`
 

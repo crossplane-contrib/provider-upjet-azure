@@ -17,7 +17,7 @@ import (
 type AuthInitParameters struct {
 
 	// Specify the identity ID of the target resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ManagedIdentityID *string `json:"managedIdentityId,omitempty" tf:"managed_identity_id,omitempty"`
 
@@ -39,7 +39,7 @@ type AuthObservation struct {
 type AuthParameters struct {
 
 	// Specify the identity ID of the target resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ManagedIdentityID *string `json:"managedIdentityId,omitempty" tf:"managed_identity_id,omitempty"`
@@ -108,7 +108,7 @@ type EventHandlerParameters struct {
 type EventListenerInitParameters struct {
 
 	// Specifies the event hub name to receive the events.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/eventhub/v1beta1.EventHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/eventhub/v1beta1.EventHub
 	EventHubName *string `json:"eventhubName,omitempty" tf:"eventhub_name,omitempty"`
 
 	// Reference to a EventHub in eventhub to populate eventhubName.
@@ -120,7 +120,7 @@ type EventListenerInitParameters struct {
 	EventHubNameSelector *v1.NamespacedSelector `json:"eventhubNameSelector,omitempty" tf:"-"`
 
 	// Specifies the event hub namespace name to receive the events.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/eventhub/v1beta1.EventHubNamespace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/eventhub/v1beta1.EventHubNamespace
 	EventHubNamespaceName *string `json:"eventhubNamespaceName,omitempty" tf:"eventhub_namespace_name,omitempty"`
 
 	// Reference to a EventHubNamespace in eventhub to populate eventhubNamespaceName.
@@ -156,7 +156,7 @@ type EventListenerObservation struct {
 type EventListenerParameters struct {
 
 	// Specifies the event hub name to receive the events.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/eventhub/v1beta1.EventHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/eventhub/v1beta1.EventHub
 	// +kubebuilder:validation:Optional
 	EventHubName *string `json:"eventhubName,omitempty" tf:"eventhub_name,omitempty"`
 
@@ -169,7 +169,7 @@ type EventListenerParameters struct {
 	EventHubNameSelector *v1.NamespacedSelector `json:"eventhubNameSelector,omitempty" tf:"-"`
 
 	// Specifies the event hub namespace name to receive the events.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/eventhub/v1beta1.EventHubNamespace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/eventhub/v1beta1.EventHubNamespace
 	// +kubebuilder:validation:Optional
 	EventHubNamespaceName *string `json:"eventhubNamespaceName,omitempty" tf:"eventhub_namespace_name,omitempty"`
 
@@ -206,7 +206,7 @@ type WebPubsubHubInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the id of the Web Pubsub. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/signalrservice/v1beta1.WebPubsub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/signalrservice/v1beta1.WebPubsub
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	WebPubsubID *string `json:"webPubsubId,omitempty" tf:"web_pubsub_id,omitempty"`
 
@@ -261,7 +261,7 @@ type WebPubsubHubParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the id of the Web Pubsub. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/signalrservice/v1beta1.WebPubsub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/signalrservice/v1beta1.WebPubsub
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	WebPubsubID *string `json:"webPubsubId,omitempty" tf:"web_pubsub_id,omitempty"`

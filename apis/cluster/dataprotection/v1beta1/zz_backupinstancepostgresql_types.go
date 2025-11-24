@@ -16,7 +16,7 @@ import (
 type BackupInstancePostgreSQLInitParameters struct {
 
 	// The ID of the Backup Policy.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/dataprotection/v1beta2.BackupPolicyPostgreSQL
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/dataprotection/v1beta2.BackupPolicyPostgreSQL
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	BackupPolicyID *string `json:"backupPolicyId,omitempty" tf:"backup_policy_id,omitempty"`
 
@@ -29,7 +29,7 @@ type BackupInstancePostgreSQLInitParameters struct {
 	BackupPolicyIDSelector *v1.Selector `json:"backupPolicyIdSelector,omitempty" tf:"-"`
 
 	// The ID or versionless ID of the key vault secret which stores the connection string of the database.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/keyvault/v1beta1.Secret
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/keyvault/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("versionless_id",true)
 	DatabaseCredentialKeyVaultSecretID *string `json:"databaseCredentialKeyVaultSecretId,omitempty" tf:"database_credential_key_vault_secret_id,omitempty"`
 
@@ -42,7 +42,7 @@ type BackupInstancePostgreSQLInitParameters struct {
 	DatabaseCredentialKeyVaultSecretIDSelector *v1.Selector `json:"databaseCredentialKeyVaultSecretIdSelector,omitempty" tf:"-"`
 
 	// The ID of the source database. Changing this forces a new Backup Instance PostgreSQL to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/dbforpostgresql/v1beta1.Database
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/dbforpostgresql/v1beta1.Database
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DatabaseID *string `json:"databaseId,omitempty" tf:"database_id,omitempty"`
 
@@ -82,7 +82,7 @@ type BackupInstancePostgreSQLObservation struct {
 type BackupInstancePostgreSQLParameters struct {
 
 	// The ID of the Backup Policy.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/dataprotection/v1beta2.BackupPolicyPostgreSQL
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/dataprotection/v1beta2.BackupPolicyPostgreSQL
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	BackupPolicyID *string `json:"backupPolicyId,omitempty" tf:"backup_policy_id,omitempty"`
@@ -96,7 +96,7 @@ type BackupInstancePostgreSQLParameters struct {
 	BackupPolicyIDSelector *v1.Selector `json:"backupPolicyIdSelector,omitempty" tf:"-"`
 
 	// The ID or versionless ID of the key vault secret which stores the connection string of the database.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/keyvault/v1beta1.Secret
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/keyvault/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("versionless_id",true)
 	// +kubebuilder:validation:Optional
 	DatabaseCredentialKeyVaultSecretID *string `json:"databaseCredentialKeyVaultSecretId,omitempty" tf:"database_credential_key_vault_secret_id,omitempty"`
@@ -110,7 +110,7 @@ type BackupInstancePostgreSQLParameters struct {
 	DatabaseCredentialKeyVaultSecretIDSelector *v1.Selector `json:"databaseCredentialKeyVaultSecretIdSelector,omitempty" tf:"-"`
 
 	// The ID of the source database. Changing this forces a new Backup Instance PostgreSQL to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/dbforpostgresql/v1beta1.Database
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/dbforpostgresql/v1beta1.Database
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DatabaseID *string `json:"databaseId,omitempty" tf:"database_id,omitempty"`
@@ -128,7 +128,7 @@ type BackupInstancePostgreSQLParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The ID of the Backup Vault within which the PostgreSQL Backup Instance should exist. Changing this forces a new Backup Instance PostgreSQL to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/dataprotection/v1beta2.BackupVault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/dataprotection/v1beta2.BackupVault
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VaultID *string `json:"vaultId,omitempty" tf:"vault_id,omitempty"`

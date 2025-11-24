@@ -28,7 +28,7 @@ type ManagerIpamPoolInitParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the parent IPAM Pool. Changing this forces a new Network Manager IPAM Pool to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta1.ManagerIpamPool
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta1.ManagerIpamPool
 	ParentPoolName *string `json:"parentPoolName,omitempty" tf:"parent_pool_name,omitempty"`
 
 	// Reference to a ManagerIpamPool in network to populate parentPoolName.
@@ -91,8 +91,8 @@ type ManagerIpamPoolParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The ID of the parent Network Manager. Changing this forces a new Network Manager IPAM Pool to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.Manager
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Manager
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	NetworkManagerID *string `json:"networkManagerId,omitempty" tf:"network_manager_id,omitempty"`
 
@@ -105,7 +105,7 @@ type ManagerIpamPoolParameters struct {
 	NetworkManagerIDSelector *v1.Selector `json:"networkManagerIdSelector,omitempty" tf:"-"`
 
 	// The name of the parent IPAM Pool. Changing this forces a new Network Manager IPAM Pool to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta1.ManagerIpamPool
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta1.ManagerIpamPool
 	// +kubebuilder:validation:Optional
 	ParentPoolName *string `json:"parentPoolName,omitempty" tf:"parent_pool_name,omitempty"`
 

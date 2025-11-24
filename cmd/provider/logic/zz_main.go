@@ -41,16 +41,16 @@ import (
 	metricsserver "sigs.k8s.io/controller-runtime/pkg/metrics/server"
 	"sigs.k8s.io/controller-runtime/pkg/webhook"
 
-	clusterapis "github.com/upbound/provider-azure/apis/cluster"
-	namespacedapis "github.com/upbound/provider-azure/apis/namespaced"
-	"github.com/upbound/provider-azure/config"
-	resolverapis "github.com/upbound/provider-azure/internal/apis"
-	"github.com/upbound/provider-azure/internal/bootcheck"
-	"github.com/upbound/provider-azure/internal/clients"
-	clustercontroller "github.com/upbound/provider-azure/internal/controller/cluster"
-	namespacedcontroller "github.com/upbound/provider-azure/internal/controller/namespaced"
-	"github.com/upbound/provider-azure/internal/features"
-	"github.com/upbound/provider-azure/internal/version"
+	clusterapis "github.com/upbound/provider-azure/v2/apis/cluster"
+	namespacedapis "github.com/upbound/provider-azure/v2/apis/namespaced"
+	"github.com/upbound/provider-azure/v2/config"
+	resolverapis "github.com/upbound/provider-azure/v2/internal/apis"
+	"github.com/upbound/provider-azure/v2/internal/bootcheck"
+	"github.com/upbound/provider-azure/v2/internal/clients"
+	clustercontroller "github.com/upbound/provider-azure/v2/internal/controller/cluster"
+	namespacedcontroller "github.com/upbound/provider-azure/v2/internal/controller/namespaced"
+	"github.com/upbound/provider-azure/v2/internal/features"
+	"github.com/upbound/provider-azure/v2/internal/version"
 )
 
 const (

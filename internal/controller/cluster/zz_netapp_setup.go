@@ -9,11 +9,11 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	account "github.com/upbound/provider-azure/internal/controller/cluster/netapp/account"
-	pool "github.com/upbound/provider-azure/internal/controller/cluster/netapp/pool"
-	snapshot "github.com/upbound/provider-azure/internal/controller/cluster/netapp/snapshot"
-	snapshotpolicy "github.com/upbound/provider-azure/internal/controller/cluster/netapp/snapshotpolicy"
-	volume "github.com/upbound/provider-azure/internal/controller/cluster/netapp/volume"
+	account "github.com/upbound/provider-azure/v2/internal/controller/cluster/netapp/account"
+	pool "github.com/upbound/provider-azure/v2/internal/controller/cluster/netapp/pool"
+	snapshot "github.com/upbound/provider-azure/v2/internal/controller/cluster/netapp/snapshot"
+	snapshotpolicy "github.com/upbound/provider-azure/v2/internal/controller/cluster/netapp/snapshotpolicy"
+	volume "github.com/upbound/provider-azure/v2/internal/controller/cluster/netapp/volume"
 )
 
 // Setup_netapp creates all controllers with the supplied logger and adds them to

@@ -9,8 +9,8 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	managementgroup "github.com/upbound/provider-azure/internal/controller/namespaced/management/managementgroup"
-	managementgroupsubscriptionassociation "github.com/upbound/provider-azure/internal/controller/namespaced/management/managementgroupsubscriptionassociation"
+	managementgroup "github.com/upbound/provider-azure/v2/internal/controller/namespaced/management/managementgroup"
+	managementgroupsubscriptionassociation "github.com/upbound/provider-azure/v2/internal/controller/namespaced/management/managementgroupsubscriptionassociation"
 )
 
 // Setup_management creates all controllers with the supplied logger and adds them to

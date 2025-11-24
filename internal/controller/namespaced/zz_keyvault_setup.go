@@ -9,16 +9,16 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	accesspolicy "github.com/upbound/provider-azure/internal/controller/namespaced/keyvault/accesspolicy"
-	certificate "github.com/upbound/provider-azure/internal/controller/namespaced/keyvault/certificate"
-	certificatecontacts "github.com/upbound/provider-azure/internal/controller/namespaced/keyvault/certificatecontacts"
-	certificateissuer "github.com/upbound/provider-azure/internal/controller/namespaced/keyvault/certificateissuer"
-	key "github.com/upbound/provider-azure/internal/controller/namespaced/keyvault/key"
-	managedhardwaresecuritymodule "github.com/upbound/provider-azure/internal/controller/namespaced/keyvault/managedhardwaresecuritymodule"
-	managedstorageaccount "github.com/upbound/provider-azure/internal/controller/namespaced/keyvault/managedstorageaccount"
-	managedstorageaccountsastokendefinition "github.com/upbound/provider-azure/internal/controller/namespaced/keyvault/managedstorageaccountsastokendefinition"
-	secret "github.com/upbound/provider-azure/internal/controller/namespaced/keyvault/secret"
-	vault "github.com/upbound/provider-azure/internal/controller/namespaced/keyvault/vault"
+	accesspolicy "github.com/upbound/provider-azure/v2/internal/controller/namespaced/keyvault/accesspolicy"
+	certificate "github.com/upbound/provider-azure/v2/internal/controller/namespaced/keyvault/certificate"
+	certificatecontacts "github.com/upbound/provider-azure/v2/internal/controller/namespaced/keyvault/certificatecontacts"
+	certificateissuer "github.com/upbound/provider-azure/v2/internal/controller/namespaced/keyvault/certificateissuer"
+	key "github.com/upbound/provider-azure/v2/internal/controller/namespaced/keyvault/key"
+	managedhardwaresecuritymodule "github.com/upbound/provider-azure/v2/internal/controller/namespaced/keyvault/managedhardwaresecuritymodule"
+	managedstorageaccount "github.com/upbound/provider-azure/v2/internal/controller/namespaced/keyvault/managedstorageaccount"
+	managedstorageaccountsastokendefinition "github.com/upbound/provider-azure/v2/internal/controller/namespaced/keyvault/managedstorageaccountsastokendefinition"
+	secret "github.com/upbound/provider-azure/v2/internal/controller/namespaced/keyvault/secret"
+	vault "github.com/upbound/provider-azure/v2/internal/controller/namespaced/keyvault/vault"
 )
 
 // Setup_keyvault creates all controllers with the supplied logger and adds them to

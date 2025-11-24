@@ -17,7 +17,7 @@ import (
 type AuthenticationCredentialsInitParameters struct {
 
 	// The URI of the secret containing the password in a Key Vault.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/keyvault/v1beta1.Secret
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/keyvault/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("versionless_id",true)
 	PasswordSecretID *string `json:"passwordSecretId,omitempty" tf:"password_secret_id,omitempty"`
 
@@ -30,7 +30,7 @@ type AuthenticationCredentialsInitParameters struct {
 	PasswordSecretIDSelector *v1.NamespacedSelector `json:"passwordSecretIdSelector,omitempty" tf:"-"`
 
 	// The URI of the secret containing the username in a Key Vault.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/keyvault/v1beta1.Secret
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/keyvault/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("versionless_id",true)
 	UsernameSecretID *string `json:"usernameSecretId,omitempty" tf:"username_secret_id,omitempty"`
 
@@ -55,7 +55,7 @@ type AuthenticationCredentialsObservation struct {
 type AuthenticationCredentialsParameters struct {
 
 	// The URI of the secret containing the password in a Key Vault.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/keyvault/v1beta1.Secret
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/keyvault/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("versionless_id",true)
 	// +kubebuilder:validation:Optional
 	PasswordSecretID *string `json:"passwordSecretId,omitempty" tf:"password_secret_id,omitempty"`
@@ -69,7 +69,7 @@ type AuthenticationCredentialsParameters struct {
 	PasswordSecretIDSelector *v1.NamespacedSelector `json:"passwordSecretIdSelector,omitempty" tf:"-"`
 
 	// The URI of the secret containing the username in a Key Vault.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/keyvault/v1beta1.Secret
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/keyvault/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("versionless_id",true)
 	// +kubebuilder:validation:Optional
 	UsernameSecretID *string `json:"usernameSecretId,omitempty" tf:"username_secret_id,omitempty"`
@@ -145,8 +145,8 @@ type CredentialSetParameters struct {
 	AuthenticationCredentials *AuthenticationCredentialsParameters `json:"authenticationCredentials,omitempty" tf:"authentication_credentials,omitempty"`
 
 	// The ID of the Container Registry. Changing this forces a new Container Registry Credential Set to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/containerregistry/v1beta1.Registry
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/containerregistry/v1beta1.Registry
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ContainerRegistryID *string `json:"containerRegistryId,omitempty" tf:"container_registry_id,omitempty"`
 

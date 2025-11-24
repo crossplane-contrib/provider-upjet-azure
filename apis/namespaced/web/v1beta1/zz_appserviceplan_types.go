@@ -122,7 +122,7 @@ type AppServicePlanParameters struct {
 	Reserved *bool `json:"reserved,omitempty" tf:"reserved,omitempty"`
 
 	// The name of the resource group in which to create the App Service Plan component. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

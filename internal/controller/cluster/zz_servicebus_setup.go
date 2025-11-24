@@ -9,15 +9,15 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	namespaceauthorizationrule "github.com/upbound/provider-azure/internal/controller/cluster/servicebus/namespaceauthorizationrule"
-	namespacedisasterrecoveryconfig "github.com/upbound/provider-azure/internal/controller/cluster/servicebus/namespacedisasterrecoveryconfig"
-	queue "github.com/upbound/provider-azure/internal/controller/cluster/servicebus/queue"
-	queueauthorizationrule "github.com/upbound/provider-azure/internal/controller/cluster/servicebus/queueauthorizationrule"
-	servicebusnamespace "github.com/upbound/provider-azure/internal/controller/cluster/servicebus/servicebusnamespace"
-	subscription "github.com/upbound/provider-azure/internal/controller/cluster/servicebus/subscription"
-	subscriptionrule "github.com/upbound/provider-azure/internal/controller/cluster/servicebus/subscriptionrule"
-	topic "github.com/upbound/provider-azure/internal/controller/cluster/servicebus/topic"
-	topicauthorizationrule "github.com/upbound/provider-azure/internal/controller/cluster/servicebus/topicauthorizationrule"
+	namespaceauthorizationrule "github.com/upbound/provider-azure/v2/internal/controller/cluster/servicebus/namespaceauthorizationrule"
+	namespacedisasterrecoveryconfig "github.com/upbound/provider-azure/v2/internal/controller/cluster/servicebus/namespacedisasterrecoveryconfig"
+	queue "github.com/upbound/provider-azure/v2/internal/controller/cluster/servicebus/queue"
+	queueauthorizationrule "github.com/upbound/provider-azure/v2/internal/controller/cluster/servicebus/queueauthorizationrule"
+	servicebusnamespace "github.com/upbound/provider-azure/v2/internal/controller/cluster/servicebus/servicebusnamespace"
+	subscription "github.com/upbound/provider-azure/v2/internal/controller/cluster/servicebus/subscription"
+	subscriptionrule "github.com/upbound/provider-azure/v2/internal/controller/cluster/servicebus/subscriptionrule"
+	topic "github.com/upbound/provider-azure/v2/internal/controller/cluster/servicebus/topic"
+	topicauthorizationrule "github.com/upbound/provider-azure/v2/internal/controller/cluster/servicebus/topicauthorizationrule"
 )
 
 // Setup_servicebus creates all controllers with the supplied logger and adds them to

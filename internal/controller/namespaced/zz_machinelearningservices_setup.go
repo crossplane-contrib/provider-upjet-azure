@@ -9,14 +9,14 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	aifoundry "github.com/upbound/provider-azure/internal/controller/namespaced/machinelearningservices/aifoundry"
-	computecluster "github.com/upbound/provider-azure/internal/controller/namespaced/machinelearningservices/computecluster"
-	computeinstance "github.com/upbound/provider-azure/internal/controller/namespaced/machinelearningservices/computeinstance"
-	synapsespark "github.com/upbound/provider-azure/internal/controller/namespaced/machinelearningservices/synapsespark"
-	workspace "github.com/upbound/provider-azure/internal/controller/namespaced/machinelearningservices/workspace"
-	workspaceoutboundrulefqdn "github.com/upbound/provider-azure/internal/controller/namespaced/machinelearningservices/workspaceoutboundrulefqdn"
-	workspaceoutboundruleprivateendpoint "github.com/upbound/provider-azure/internal/controller/namespaced/machinelearningservices/workspaceoutboundruleprivateendpoint"
-	workspaceoutboundruleservicetag "github.com/upbound/provider-azure/internal/controller/namespaced/machinelearningservices/workspaceoutboundruleservicetag"
+	aifoundry "github.com/upbound/provider-azure/v2/internal/controller/namespaced/machinelearningservices/aifoundry"
+	computecluster "github.com/upbound/provider-azure/v2/internal/controller/namespaced/machinelearningservices/computecluster"
+	computeinstance "github.com/upbound/provider-azure/v2/internal/controller/namespaced/machinelearningservices/computeinstance"
+	synapsespark "github.com/upbound/provider-azure/v2/internal/controller/namespaced/machinelearningservices/synapsespark"
+	workspace "github.com/upbound/provider-azure/v2/internal/controller/namespaced/machinelearningservices/workspace"
+	workspaceoutboundrulefqdn "github.com/upbound/provider-azure/v2/internal/controller/namespaced/machinelearningservices/workspaceoutboundrulefqdn"
+	workspaceoutboundruleprivateendpoint "github.com/upbound/provider-azure/v2/internal/controller/namespaced/machinelearningservices/workspaceoutboundruleprivateendpoint"
+	workspaceoutboundruleservicetag "github.com/upbound/provider-azure/v2/internal/controller/namespaced/machinelearningservices/workspaceoutboundruleservicetag"
 )
 
 // Setup_machinelearningservices creates all controllers with the supplied logger and adds them to
