@@ -49,15 +49,26 @@ type ProviderConfigSpec struct {
 	// that allows to access a managed identity.
 	// +kubebuilder:validation:Optional
 	OidcTokenFilePath *string `json:"oidcTokenFilePath,omitempty"`
+
+	// ServiceAccount within the same namespace that should be used to derive the OIDC token.
+	ServiceAccountRef *ProviderServiceAccountReference `json:"serviceAccountRef,omitempty"`
 }
 
 // ProviderCredentials required to authenticate.
 type ProviderCredentials struct {
 	// Source of the provider credentials.
-	// +kubebuilder:validation:Enum=None;Secret;UserAssignedManagedIdentity;SystemAssignedManagedIdentity;OIDCTokenFile;Upbound;Filesystem
+	// +kubebuilder:validation:Enum=None;Secret;UserAssignedManagedIdentity;SystemAssignedManagedIdentity;OIDCTokenRequest;OIDCTokenFile;Upbound;Filesystem
 	Source xpv1.CredentialsSource `json:"source"`
 
 	xpv1.CommonCredentialSelectors `json:",inline"`
+}
+
+type ProviderServiceAccountReference struct {
+	// Name of the service account.
+	Name string `json:"name"`
+
+	// Namespace of the service account.
+	Namespace *string `json:"namespace,omitempty"`
 }
 
 // A ProviderConfigStatus reflects the observed state of a ProviderConfig.
