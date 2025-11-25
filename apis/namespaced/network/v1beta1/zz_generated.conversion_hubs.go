@@ -316,6 +316,9 @@ func (tr *VirtualHubRouteTable) Hub() {}
 func (tr *VirtualHubRouteTableRoute) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *VirtualHubRoutingIntent) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *VirtualHubSecurityPartnerProvider) Hub() {}
 
 // Hub marks this type as a conversion hub.

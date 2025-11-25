@@ -7052,6 +7052,83 @@ func (mg *VirtualHubRouteTableRoute) ResolveReferences(ctx context.Context, c cl
 	return nil
 }
 
+// ResolveReferences of this VirtualHubRoutingIntent.
+func (mg *VirtualHubRoutingIntent) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.RoutingPolicy); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Firewall", "FirewallList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoutingPolicy[i3].NextHop),
+				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.ForProvider.RoutingPolicy[i3].NextHopRef,
+				Selector:     mg.Spec.ForProvider.RoutingPolicy[i3].NextHopSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.RoutingPolicy[i3].NextHop")
+		}
+		mg.Spec.ForProvider.RoutingPolicy[i3].NextHop = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.RoutingPolicy[i3].NextHopRef = rsp.ResolvedReference
+
+	}
+	{
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "VirtualHub", "VirtualHubList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VirtualHubID),
+			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.VirtualHubIDRef,
+			Selector:     mg.Spec.ForProvider.VirtualHubIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.VirtualHubID")
+	}
+	mg.Spec.ForProvider.VirtualHubID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VirtualHubIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.RoutingPolicy); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Firewall", "FirewallList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoutingPolicy[i3].NextHop),
+				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.InitProvider.RoutingPolicy[i3].NextHopRef,
+				Selector:     mg.Spec.InitProvider.RoutingPolicy[i3].NextHopSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.RoutingPolicy[i3].NextHop")
+		}
+		mg.Spec.InitProvider.RoutingPolicy[i3].NextHop = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.RoutingPolicy[i3].NextHopRef = rsp.ResolvedReference
+
+	}
+
+	return nil
+}
+
 // ResolveReferences of this VirtualHubSecurityPartnerProvider.
 func (mg *VirtualHubSecurityPartnerProvider) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed

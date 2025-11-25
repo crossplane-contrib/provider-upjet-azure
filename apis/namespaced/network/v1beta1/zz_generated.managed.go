@@ -4327,6 +4327,46 @@ func (mg *VirtualHubRouteTableRoute) SetWriteConnectionSecretToReference(r *xpv1
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this VirtualHubRoutingIntent.
+func (mg *VirtualHubRoutingIntent) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetManagementPolicies of this VirtualHubRoutingIntent.
+func (mg *VirtualHubRoutingIntent) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this VirtualHubRoutingIntent.
+func (mg *VirtualHubRoutingIntent) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this VirtualHubRoutingIntent.
+func (mg *VirtualHubRoutingIntent) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this VirtualHubRoutingIntent.
+func (mg *VirtualHubRoutingIntent) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetManagementPolicies of this VirtualHubRoutingIntent.
+func (mg *VirtualHubRoutingIntent) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this VirtualHubRoutingIntent.
+func (mg *VirtualHubRoutingIntent) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this VirtualHubRoutingIntent.
+func (mg *VirtualHubRoutingIntent) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this VirtualHubSecurityPartnerProvider.
 func (mg *VirtualHubSecurityPartnerProvider) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
