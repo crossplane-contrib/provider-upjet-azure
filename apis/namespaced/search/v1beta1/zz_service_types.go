@@ -79,7 +79,7 @@ type ServiceInitParameters struct {
 	// Specifies whether the Search Service should enforce that non-customer resources are encrypted. Defaults to false.
 	CustomerManagedKeyEnforcementEnabled *bool `json:"customerManagedKeyEnforcementEnabled,omitempty" tf:"customer_managed_key_enforcement_enabled,omitempty"`
 
-	// Specifies the Hosting Mode, which allows for High Density partitions (that allow for up to 1000 indexes) should be supported. Possible values are highDensity or default. Defaults to default. Changing this forces a new Search Service to be created.
+	// Specifies the Hosting Mode, which allows for High Density partitions (that allow for up to 1000 indexes) should be supported. Possible values are HighDensity or Default. Defaults to Default. Changing this forces a new Search Service to be created.
 	HostingMode *string `json:"hostingMode,omitempty" tf:"hosting_mode,omitempty"`
 
 	// An identity block as defined below.
@@ -91,7 +91,7 @@ type ServiceInitParameters struct {
 	// The Azure Region where the Search Service should exist. Changing this forces a new Search Service to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// Whether to allow trusted Azure services to access a network restricted Container Registry? Possible values are None and AzureServices. Defaults to None.
+	// Whether to allow trusted Azure services to access a network restricted Search Service? Possible values are None and AzureServices. Defaults to None.
 	NetworkRuleBypassOption *string `json:"networkRuleBypassOption,omitempty" tf:"network_rule_bypass_option,omitempty"`
 
 	// Specifies the number of partitions which should be created. This field cannot be set when using a free sku (see the Microsoft documentation). Possible values include 1, 2, 3, 4, 6, or 12. Defaults to 1.
@@ -106,7 +106,7 @@ type ServiceInitParameters struct {
 	// Specifies the Semantic Search SKU which should be used for this Search Service. Possible values include free and standard.
 	SemanticSearchSku *string `json:"semanticSearchSku,omitempty" tf:"semantic_search_sku,omitempty"`
 
-	// The SKU which should be used for this Search Service. Possible values include basic, free, standard, standard2, standard3, storage_optimized_l1 and storage_optimized_l2. Changing this forces a new Search Service to be created.
+	// The SKU which should be used for this Search Service. Possible values include basic, free, standard, standard2, standard3, storage_optimized_l1 and storage_optimized_l2.
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// Specifies a mapping of tags which should be assigned to this Search Service.
@@ -129,7 +129,7 @@ type ServiceObservation struct {
 	// Specifies whether the Search Service should enforce that non-customer resources are encrypted. Defaults to false.
 	CustomerManagedKeyEnforcementEnabled *bool `json:"customerManagedKeyEnforcementEnabled,omitempty" tf:"customer_managed_key_enforcement_enabled,omitempty"`
 
-	// Specifies the Hosting Mode, which allows for High Density partitions (that allow for up to 1000 indexes) should be supported. Possible values are highDensity or default. Defaults to default. Changing this forces a new Search Service to be created.
+	// Specifies the Hosting Mode, which allows for High Density partitions (that allow for up to 1000 indexes) should be supported. Possible values are HighDensity or Default. Defaults to Default. Changing this forces a new Search Service to be created.
 	HostingMode *string `json:"hostingMode,omitempty" tf:"hosting_mode,omitempty"`
 
 	// The ID of the Search Service.
@@ -144,7 +144,7 @@ type ServiceObservation struct {
 	// The Azure Region where the Search Service should exist. Changing this forces a new Search Service to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// Whether to allow trusted Azure services to access a network restricted Container Registry? Possible values are None and AzureServices. Defaults to None.
+	// Whether to allow trusted Azure services to access a network restricted Search Service? Possible values are None and AzureServices. Defaults to None.
 	NetworkRuleBypassOption *string `json:"networkRuleBypassOption,omitempty" tf:"network_rule_bypass_option,omitempty"`
 
 	// Specifies the number of partitions which should be created. This field cannot be set when using a free sku (see the Microsoft documentation). Possible values include 1, 2, 3, 4, 6, or 12. Defaults to 1.
@@ -165,7 +165,7 @@ type ServiceObservation struct {
 	// Specifies the Semantic Search SKU which should be used for this Search Service. Possible values include free and standard.
 	SemanticSearchSku *string `json:"semanticSearchSku,omitempty" tf:"semantic_search_sku,omitempty"`
 
-	// The SKU which should be used for this Search Service. Possible values include basic, free, standard, standard2, standard3, storage_optimized_l1 and storage_optimized_l2. Changing this forces a new Search Service to be created.
+	// The SKU which should be used for this Search Service. Possible values include basic, free, standard, standard2, standard3, storage_optimized_l1 and storage_optimized_l2.
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// Specifies a mapping of tags which should be assigned to this Search Service.
@@ -188,7 +188,7 @@ type ServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	CustomerManagedKeyEnforcementEnabled *bool `json:"customerManagedKeyEnforcementEnabled,omitempty" tf:"customer_managed_key_enforcement_enabled,omitempty"`
 
-	// Specifies the Hosting Mode, which allows for High Density partitions (that allow for up to 1000 indexes) should be supported. Possible values are highDensity or default. Defaults to default. Changing this forces a new Search Service to be created.
+	// Specifies the Hosting Mode, which allows for High Density partitions (that allow for up to 1000 indexes) should be supported. Possible values are HighDensity or Default. Defaults to Default. Changing this forces a new Search Service to be created.
 	// +kubebuilder:validation:Optional
 	HostingMode *string `json:"hostingMode,omitempty" tf:"hosting_mode,omitempty"`
 
@@ -204,7 +204,7 @@ type ServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// Whether to allow trusted Azure services to access a network restricted Container Registry? Possible values are None and AzureServices. Defaults to None.
+	// Whether to allow trusted Azure services to access a network restricted Search Service? Possible values are None and AzureServices. Defaults to None.
 	// +kubebuilder:validation:Optional
 	NetworkRuleBypassOption *string `json:"networkRuleBypassOption,omitempty" tf:"network_rule_bypass_option,omitempty"`
 
@@ -237,7 +237,7 @@ type ServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	SemanticSearchSku *string `json:"semanticSearchSku,omitempty" tf:"semantic_search_sku,omitempty"`
 
-	// The SKU which should be used for this Search Service. Possible values include basic, free, standard, standard2, standard3, storage_optimized_l1 and storage_optimized_l2. Changing this forces a new Search Service to be created.
+	// The SKU which should be used for this Search Service. Possible values include basic, free, standard, standard2, standard3, storage_optimized_l1 and storage_optimized_l2.
 	// +kubebuilder:validation:Optional
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 

@@ -387,19 +387,19 @@ func (mg *SystemTopic) ResolveReferences(ctx context.Context, c client.Reader) e
 		}
 
 		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceArmResourceID),
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceResourceID),
 			Extract:      resource.ExtractResourceID(),
 			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.ForProvider.SourceArmResourceIDRef,
-			Selector:     mg.Spec.ForProvider.SourceArmResourceIDSelector,
+			Reference:    mg.Spec.ForProvider.SourceResourceIDRef,
+			Selector:     mg.Spec.ForProvider.SourceResourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
 		})
 	}
 	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.SourceArmResourceID")
+		return errors.Wrap(err, "mg.Spec.ForProvider.SourceResourceID")
 	}
-	mg.Spec.ForProvider.SourceArmResourceID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.SourceArmResourceIDRef = rsp.ResolvedReference
+	mg.Spec.ForProvider.SourceResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SourceResourceIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta1", "Account", "AccountList")
 		if err != nil {
@@ -407,19 +407,19 @@ func (mg *SystemTopic) ResolveReferences(ctx context.Context, c client.Reader) e
 		}
 
 		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceArmResourceID),
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceResourceID),
 			Extract:      resource.ExtractResourceID(),
 			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.InitProvider.SourceArmResourceIDRef,
-			Selector:     mg.Spec.InitProvider.SourceArmResourceIDSelector,
+			Reference:    mg.Spec.InitProvider.SourceResourceIDRef,
+			Selector:     mg.Spec.InitProvider.SourceResourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
 		})
 	}
 	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.SourceArmResourceID")
+		return errors.Wrap(err, "mg.Spec.InitProvider.SourceResourceID")
 	}
-	mg.Spec.InitProvider.SourceArmResourceID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.SourceArmResourceIDRef = rsp.ResolvedReference
+	mg.Spec.InitProvider.SourceResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SourceResourceIDRef = rsp.ResolvedReference
 
 	return nil
 }

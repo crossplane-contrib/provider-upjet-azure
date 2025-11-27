@@ -1823,6 +1823,8 @@ spec:
                     description: A long_term_retention_policy block as defined below.
                     properties:
                       immutableBackupsEnabled:
+                        description: Specifies if the backups are immutable. Defaults
+                          to false.
                         type: boolean
                       monthlyRetention:
                         description: The monthly retention policy for an LTR backup
@@ -1919,8 +1921,8 @@ spec:
                     type: string
                   secondaryType:
                     description: How do you want your replica to be made? Valid values
-                      include Geo and Named. Defaults to Geo. Changing this forces
-                      a new resource to be created.
+                      include Geo, Named and Standby. Defaults to Geo. Changing this
+                      forces a new resource to be created.
                     type: string
                   serverId:
                     description: The id of the MS SQL Server on which to create the
@@ -2403,6 +2405,8 @@ spec:
                     description: A long_term_retention_policy block as defined below.
                     properties:
                       immutableBackupsEnabled:
+                        description: Specifies if the backups are immutable. Defaults
+                          to false.
                         type: boolean
                       monthlyRetention:
                         description: The monthly retention policy for an LTR backup
@@ -2499,8 +2503,8 @@ spec:
                     type: string
                   secondaryType:
                     description: How do you want your replica to be made? Valid values
-                      include Geo and Named. Defaults to Geo. Changing this forces
-                      a new resource to be created.
+                      include Geo, Named and Standby. Defaults to Geo. Changing this
+                      forces a new resource to be created.
                     type: string
                   shortTermRetentionPolicy:
                     description: A short_term_retention_policy block as defined below.
@@ -2870,6 +2874,8 @@ spec:
                     description: A long_term_retention_policy block as defined below.
                     properties:
                       immutableBackupsEnabled:
+                        description: Specifies if the backups are immutable. Defaults
+                          to false.
                         type: boolean
                       monthlyRetention:
                         description: The monthly retention policy for an LTR backup
@@ -2966,8 +2972,8 @@ spec:
                     type: string
                   secondaryType:
                     description: How do you want your replica to be made? Valid values
-                      include Geo and Named. Defaults to Geo. Changing this forces
-                      a new resource to be created.
+                      include Geo, Named and Standby. Defaults to Geo. Changing this
+                      forces a new resource to be created.
                     type: string
                   serverId:
                     description: The id of the MS SQL Server on which to create the

@@ -116,7 +116,7 @@ spec:
                     type: number
                   storageAccountId:
                     description: Specifies the storage account in which to create
-                      the share. Changing this forces a new resource to be created.
+                      the share.
                     type: string
                   storageAccountIdRef:
                     description: Reference to a Account in storage to populate storageAccountId.
@@ -200,8 +200,7 @@ spec:
                     type: object
                   storageAccountName:
                     description: Specifies the storage account in which to create
-                      the share. Changing this forces a new resource to be created.
-                      This property is deprecated in favour of storage_account_id.
+                      the share. This property is deprecated in favour of storage_account_id.
                     type: string
                 type: object
               initProvider:
@@ -274,7 +273,7 @@ spec:
                     type: number
                   storageAccountId:
                     description: Specifies the storage account in which to create
-                      the share. Changing this forces a new resource to be created.
+                      the share.
                     type: string
                   storageAccountIdRef:
                     description: Reference to a Account in storage to populate storageAccountId.
@@ -488,12 +487,11 @@ spec:
                     type: string
                   storageAccountId:
                     description: Specifies the storage account in which to create
-                      the share. Changing this forces a new resource to be created.
+                      the share.
                     type: string
                   storageAccountName:
                     description: Specifies the storage account in which to create
-                      the share. Changing this forces a new resource to be created.
-                      This property is deprecated in favour of storage_account_id.
+                      the share. This property is deprecated in favour of storage_account_id.
                     type: string
                   url:
                     description: The URL of the File Share

@@ -649,8 +649,7 @@ spec:
                     type: object
                   publicNetworkAccessEnabled:
                     description: Whether traffic from public networks is permitted.
-                      Defaults to true. Changing this forces a new resource to be
-                      created.
+                      Defaults to true.
                     type: boolean
                   purgeProtectionEnabled:
                     description: Is Purge Protection enabled for this Key Vault Managed
@@ -813,8 +812,7 @@ spec:
                     type: object
                   publicNetworkAccessEnabled:
                     description: Whether traffic from public networks is permitted.
-                      Defaults to true. Changing this forces a new resource to be
-                      created.
+                      Defaults to true.
                     type: boolean
                   purgeProtectionEnabled:
                     description: Is Purge Protection enabled for this Key Vault Managed
@@ -1000,8 +998,7 @@ spec:
                     type: object
                   publicNetworkAccessEnabled:
                     description: Whether traffic from public networks is permitted.
-                      Defaults to true. Changing this forces a new resource to be
-                      created.
+                      Defaults to true.
                     type: boolean
                   purgeProtectionEnabled:
                     description: Is Purge Protection enabled for this Key Vault Managed

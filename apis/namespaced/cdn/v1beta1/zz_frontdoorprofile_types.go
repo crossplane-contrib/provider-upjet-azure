@@ -19,6 +19,9 @@ type FrontdoorProfileInitParameters struct {
 	// An identity block as defined below.
 	Identity *IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
+	// One or more log_scrubbing_rule blocks as defined below.
+	LogScrubbingRule []LogScrubbingRuleInitParameters `json:"logScrubbingRule,omitempty" tf:"log_scrubbing_rule,omitempty"`
+
 	// Specifies the maximum response timeout in seconds. Possible values are between 16 and 240 seconds (inclusive). Defaults to 120 seconds.
 	ResponseTimeoutSeconds *float64 `json:"responseTimeoutSeconds,omitempty" tf:"response_timeout_seconds,omitempty"`
 
@@ -37,6 +40,9 @@ type FrontdoorProfileObservation struct {
 
 	// An identity block as defined below.
 	Identity *IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// One or more log_scrubbing_rule blocks as defined below.
+	LogScrubbingRule []LogScrubbingRuleObservation `json:"logScrubbingRule,omitempty" tf:"log_scrubbing_rule,omitempty"`
 
 	// The UUID of this Front Door Profile which will be sent in the HTTP Header as the X-Azure-FDID attribute.
 	ResourceGUID *string `json:"resourceGuid,omitempty" tf:"resource_guid,omitempty"`
@@ -60,6 +66,10 @@ type FrontdoorProfileParameters struct {
 	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
 	Identity *IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// One or more log_scrubbing_rule blocks as defined below.
+	// +kubebuilder:validation:Optional
+	LogScrubbingRule []LogScrubbingRuleParameters `json:"logScrubbingRule,omitempty" tf:"log_scrubbing_rule,omitempty"`
 
 	// The name of the Resource Group where this Front Door Profile should exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
@@ -91,8 +101,18 @@ type FrontdoorProfileParameters struct {
 type IdentityInitParameters struct {
 
 	// - A list of one or more Resource IDs for User Assigned Managed identities to assign. Required when type is set to UserAssigned or SystemAssigned, UserAssigned.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// References to UserAssignedIdentity in managedidentity to populate identityIds.
+	// +kubebuilder:validation:Optional
+	IdentityIdsRefs []v1.NamespacedReference `json:"identityIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
+	// +kubebuilder:validation:Optional
+	IdentityIdsSelector *v1.NamespacedSelector `json:"identityIdsSelector,omitempty" tf:"-"`
 
 	// The type of managed identity to assign. Possible values are SystemAssigned, UserAssigned or SystemAssigned, UserAssigned.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -117,13 +137,42 @@ type IdentityObservation struct {
 type IdentityParameters struct {
 
 	// - A list of one or more Resource IDs for User Assigned Managed identities to assign. Required when type is set to UserAssigned or SystemAssigned, UserAssigned.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
+	// References to UserAssignedIdentity in managedidentity to populate identityIds.
+	// +kubebuilder:validation:Optional
+	IdentityIdsRefs []v1.NamespacedReference `json:"identityIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
+	// +kubebuilder:validation:Optional
+	IdentityIdsSelector *v1.NamespacedSelector `json:"identityIdsSelector,omitempty" tf:"-"`
+
 	// The type of managed identity to assign. Possible values are SystemAssigned, UserAssigned or SystemAssigned, UserAssigned.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
+}
+
+type LogScrubbingRuleInitParameters struct {
+
+	// The variable to be scrubbed from the logs. Possible values are QueryStringArgNames, RequestIPAddress, and RequestUri.
+	MatchVariable *string `json:"matchVariable,omitempty" tf:"match_variable,omitempty"`
+}
+
+type LogScrubbingRuleObservation struct {
+
+	// The variable to be scrubbed from the logs. Possible values are QueryStringArgNames, RequestIPAddress, and RequestUri.
+	MatchVariable *string `json:"matchVariable,omitempty" tf:"match_variable,omitempty"`
+}
+
+type LogScrubbingRuleParameters struct {
+
+	// The variable to be scrubbed from the logs. Possible values are QueryStringArgNames, RequestIPAddress, and RequestUri.
+	// +kubebuilder:validation:Optional
+	MatchVariable *string `json:"matchVariable" tf:"match_variable,omitempty"`
 }
 
 // FrontdoorProfileSpec defines the desired state of FrontdoorProfile

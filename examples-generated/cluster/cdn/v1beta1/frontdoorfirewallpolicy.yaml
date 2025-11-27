@@ -51,28 +51,7 @@ spec:
       rateLimitDurationInMinutes: 1
       rateLimitThreshold: 10
       type: MatchRule
-    - action: JSChallenge
-      enabled: true
-      matchCondition:
-      - matchValues:
-        - 192.168.1.0/24
-        matchVariable: RemoteAddr
-        negationCondition: false
-        operator: IPMatch
-      name: CustomJSChallenge
-      priority: 100
-      rateLimitDurationInMinutes: 1
-      rateLimitThreshold: 10
-      type: MatchRule
     enabled: true
-    jsChallengeCookieExpirationInMinutes: 45
-    logScrubbing:
-      enabled: true
-      scrubbingRule:
-      - enabled: true
-        matchVariable: RequestCookieNames
-        operator: Equals
-        selector: ChocolateChip
     managedRule:
     - action: Log
       exclusion:
@@ -100,12 +79,6 @@ spec:
       type: DefaultRuleSet
       version: "1.0"
     - action: Log
-      override:
-      - rule:
-        - action: JSChallenge
-          enabled: true
-          ruleId: Bot100200
-        ruleGroupName: BadBots
       type: Microsoft_BotManagerRuleSet
       version: "1.1"
     mode: Prevention

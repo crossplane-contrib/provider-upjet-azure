@@ -33,7 +33,7 @@ func (mg *ResourceGroupCostManagementExport) ResolveReferences( // ResolveRefere
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExportDataStorageLocation.ContainerID),
-				Extract:      resource.ExtractParamPath("resource_manager_id", true),
+				Extract:      resource.ExtractResourceID(),
 				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.ExportDataStorageLocation.ContainerIDRef,
 				Selector:     mg.Spec.ForProvider.ExportDataStorageLocation.ContainerIDSelector,
@@ -75,7 +75,7 @@ func (mg *ResourceGroupCostManagementExport) ResolveReferences( // ResolveRefere
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExportDataStorageLocation.ContainerID),
-				Extract:      resource.ExtractParamPath("resource_manager_id", true),
+				Extract:      resource.ExtractResourceID(),
 				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.ExportDataStorageLocation.ContainerIDRef,
 				Selector:     mg.Spec.InitProvider.ExportDataStorageLocation.ContainerIDSelector,
@@ -129,7 +129,7 @@ func (mg *SubscriptionCostManagementExport) ResolveReferences(ctx context.Contex
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExportDataStorageLocation.ContainerID),
-				Extract:      resource.ExtractParamPath("resource_manager_id", true),
+				Extract:      resource.ExtractResourceID(),
 				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.ExportDataStorageLocation.ContainerIDRef,
 				Selector:     mg.Spec.ForProvider.ExportDataStorageLocation.ContainerIDSelector,
@@ -171,7 +171,7 @@ func (mg *SubscriptionCostManagementExport) ResolveReferences(ctx context.Contex
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExportDataStorageLocation.ContainerID),
-				Extract:      resource.ExtractParamPath("resource_manager_id", true),
+				Extract:      resource.ExtractResourceID(),
 				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.ExportDataStorageLocation.ContainerIDRef,
 				Selector:     mg.Spec.InitProvider.ExportDataStorageLocation.ContainerIDSelector,

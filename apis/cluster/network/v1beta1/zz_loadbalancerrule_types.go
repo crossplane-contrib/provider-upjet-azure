@@ -24,11 +24,12 @@ type LoadBalancerRuleInitParameters struct {
 	// Is snat enabled for this Load Balancer Rule? Default false.
 	DisableOutboundSnat *bool `json:"disableOutboundSnat,omitempty" tf:"disable_outbound_snat,omitempty"`
 
-	// Are the Floating IPs enabled for this Load Balancer Rule? A "floating” IP is reassigned to a secondary server in case the primary server fails. Required to configure a SQL AlwaysOn Availability Group. Defaults to false.
 	EnableFloatingIP *bool `json:"enableFloatingIp,omitempty" tf:"enable_floating_ip,omitempty"`
 
-	// Is TCP Reset enabled for this Load Balancer Rule?
 	EnableTCPReset *bool `json:"enableTcpReset,omitempty" tf:"enable_tcp_reset,omitempty"`
+
+	// Are the Floating IPs enabled for this Load Balancer Rule? A "floating" IP is reassigned to a secondary server in case the primary server fails. Required to configure a SQL AlwaysOn Availability Group. Defaults to false.
+	FloatingIPEnabled *bool `json:"floatingIpEnabled,omitempty" tf:"floating_ip_enabled,omitempty"`
 
 	// The name of the frontend IP configuration to which the rule is associated.
 	FrontendIPConfigurationName *string `json:"frontendIpConfigurationName,omitempty" tf:"frontend_ip_configuration_name,omitempty"`
@@ -47,6 +48,9 @@ type LoadBalancerRuleInitParameters struct {
 
 	// The transport protocol for the external endpoint. Possible values are Tcp, Udp or All.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// Is TCP Reset enabled for this Load Balancer Rule?
+	TCPResetEnabled *bool `json:"tcpResetEnabled,omitempty" tf:"tcp_reset_enabled,omitempty"`
 }
 
 type LoadBalancerRuleObservation struct {
@@ -60,11 +64,12 @@ type LoadBalancerRuleObservation struct {
 	// Is snat enabled for this Load Balancer Rule? Default false.
 	DisableOutboundSnat *bool `json:"disableOutboundSnat,omitempty" tf:"disable_outbound_snat,omitempty"`
 
-	// Are the Floating IPs enabled for this Load Balancer Rule? A "floating” IP is reassigned to a secondary server in case the primary server fails. Required to configure a SQL AlwaysOn Availability Group. Defaults to false.
 	EnableFloatingIP *bool `json:"enableFloatingIp,omitempty" tf:"enable_floating_ip,omitempty"`
 
-	// Is TCP Reset enabled for this Load Balancer Rule?
 	EnableTCPReset *bool `json:"enableTcpReset,omitempty" tf:"enable_tcp_reset,omitempty"`
+
+	// Are the Floating IPs enabled for this Load Balancer Rule? A "floating" IP is reassigned to a secondary server in case the primary server fails. Required to configure a SQL AlwaysOn Availability Group. Defaults to false.
+	FloatingIPEnabled *bool `json:"floatingIpEnabled,omitempty" tf:"floating_ip_enabled,omitempty"`
 
 	// The ID of the Load Balancer Rule.
 	FrontendIPConfigurationID *string `json:"frontendIpConfigurationId,omitempty" tf:"frontend_ip_configuration_id,omitempty"`
@@ -92,6 +97,9 @@ type LoadBalancerRuleObservation struct {
 
 	// The transport protocol for the external endpoint. Possible values are Tcp, Udp or All.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// Is TCP Reset enabled for this Load Balancer Rule?
+	TCPResetEnabled *bool `json:"tcpResetEnabled,omitempty" tf:"tcp_reset_enabled,omitempty"`
 }
 
 type LoadBalancerRuleParameters struct {
@@ -108,13 +116,15 @@ type LoadBalancerRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	DisableOutboundSnat *bool `json:"disableOutboundSnat,omitempty" tf:"disable_outbound_snat,omitempty"`
 
-	// Are the Floating IPs enabled for this Load Balancer Rule? A "floating” IP is reassigned to a secondary server in case the primary server fails. Required to configure a SQL AlwaysOn Availability Group. Defaults to false.
 	// +kubebuilder:validation:Optional
 	EnableFloatingIP *bool `json:"enableFloatingIp,omitempty" tf:"enable_floating_ip,omitempty"`
 
-	// Is TCP Reset enabled for this Load Balancer Rule?
 	// +kubebuilder:validation:Optional
 	EnableTCPReset *bool `json:"enableTcpReset,omitempty" tf:"enable_tcp_reset,omitempty"`
+
+	// Are the Floating IPs enabled for this Load Balancer Rule? A "floating" IP is reassigned to a secondary server in case the primary server fails. Required to configure a SQL AlwaysOn Availability Group. Defaults to false.
+	// +kubebuilder:validation:Optional
+	FloatingIPEnabled *bool `json:"floatingIpEnabled,omitempty" tf:"floating_ip_enabled,omitempty"`
 
 	// The name of the frontend IP configuration to which the rule is associated.
 	// +kubebuilder:validation:Optional
@@ -153,6 +163,10 @@ type LoadBalancerRuleParameters struct {
 	// The transport protocol for the external endpoint. Possible values are Tcp, Udp or All.
 	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// Is TCP Reset enabled for this Load Balancer Rule?
+	// +kubebuilder:validation:Optional
+	TCPResetEnabled *bool `json:"tcpResetEnabled,omitempty" tf:"tcp_reset_enabled,omitempty"`
 }
 
 // LoadBalancerRuleSpec defines the desired state of LoadBalancerRule

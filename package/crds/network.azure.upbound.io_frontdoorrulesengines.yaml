@@ -1209,8 +1209,11 @@ spec:
                       forces a new resource to be created.
                     type: string
                   id:
+                    description: The ID of the Front Door Rules Engine.
                     type: string
                   location:
+                    description: The location in which the Front Door Rules Engine
+                      exists.
                     type: string
                   resourceGroupName:
                     description: The name of the resource group. Changing this forces

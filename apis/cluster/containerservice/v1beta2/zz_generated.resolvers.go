@@ -27,6 +27,28 @@ func (mg *KubernetesCluster) ResolveReferences( // ResolveReferences of this Kub
 	var mrsp reference.MultiResolutionResponse
 	var err error
 
+	if mg.Spec.ForProvider.APIServerAccessProfile != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.APIServerAccessProfile.SubnetID),
+				Extract:      rconfig.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.ForProvider.APIServerAccessProfile.SubnetIDRef,
+				Selector:     mg.Spec.ForProvider.APIServerAccessProfile.SubnetIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.APIServerAccessProfile.SubnetID")
+		}
+		mg.Spec.ForProvider.APIServerAccessProfile.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.APIServerAccessProfile.SubnetIDRef = rsp.ResolvedReference
+
+	}
 	if mg.Spec.ForProvider.AciConnectorLinux != nil {
 		{
 			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
@@ -177,6 +199,28 @@ func (mg *KubernetesCluster) ResolveReferences( // ResolveReferences of this Kub
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
+	if mg.Spec.InitProvider.APIServerAccessProfile != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.APIServerAccessProfile.SubnetID),
+				Extract:      rconfig.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.InitProvider.APIServerAccessProfile.SubnetIDRef,
+				Selector:     mg.Spec.InitProvider.APIServerAccessProfile.SubnetIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.APIServerAccessProfile.SubnetID")
+		}
+		mg.Spec.InitProvider.APIServerAccessProfile.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.APIServerAccessProfile.SubnetIDRef = rsp.ResolvedReference
+
+	}
 	if mg.Spec.InitProvider.AciConnectorLinux != nil {
 		{
 			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")

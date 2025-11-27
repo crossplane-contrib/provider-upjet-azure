@@ -57,6 +57,7 @@ type EnvironmentCustomDomainObservation struct {
 	// The Custom Domain DNS suffix for this Container App Environment.
 	DNSSuffix *string `json:"dnsSuffix,omitempty" tf:"dns_suffix,omitempty"`
 
+	// The ID of the Container App Environment Custom Domain Suffix.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 

@@ -29,6 +29,7 @@ spec:
       - name: example
       - name: example
       - name: example
+      - name: example
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:

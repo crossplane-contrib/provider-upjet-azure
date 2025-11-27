@@ -59,6 +59,7 @@ type OutputPowerBIObservation struct {
 	// The name of the Power BI group. Use this property to help remember which specific Power BI group id was used.
 	GroupName *string `json:"groupName,omitempty" tf:"group_name,omitempty"`
 
+	// The ID of the Stream Analytics Output to Power BI resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The ID of the Stream Analytics Job. Changing this forces a new resource to be created.

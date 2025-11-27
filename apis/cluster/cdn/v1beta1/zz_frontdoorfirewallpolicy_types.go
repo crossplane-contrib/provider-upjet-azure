@@ -15,7 +15,7 @@ import (
 
 type CustomRuleInitParameters struct {
 
-	// The action to perform when the rule is matched. Possible values are Allow, Block, Log, Redirect, or JSChallenge.
+	// The action to perform when the rule is matched. Possible values are Allow, Block, Log, Redirect, JSChallenge, or CAPTCHA.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// Is the rule is enabled or disabled? Defaults to true.
@@ -42,7 +42,7 @@ type CustomRuleInitParameters struct {
 
 type CustomRuleObservation struct {
 
-	// The action to perform when the rule is matched. Possible values are Allow, Block, Log, Redirect, or JSChallenge.
+	// The action to perform when the rule is matched. Possible values are Allow, Block, Log, Redirect, JSChallenge, or CAPTCHA.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// Is the rule is enabled or disabled? Defaults to true.
@@ -69,7 +69,7 @@ type CustomRuleObservation struct {
 
 type CustomRuleParameters struct {
 
-	// The action to perform when the rule is matched. Possible values are Allow, Block, Log, Redirect, or JSChallenge.
+	// The action to perform when the rule is matched. Possible values are Allow, Block, Log, Redirect, JSChallenge, or CAPTCHA.
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action" tf:"action,omitempty"`
 
@@ -143,6 +143,9 @@ type ExclusionParameters struct {
 
 type FrontdoorFirewallPolicyInitParameters struct {
 
+	// Specifies the Captcha cookie lifetime in minutes. Possible values are between 5 and 1440. Defaults to30 minutes.
+	CaptchaCookieExpirationInMinutes *float64 `json:"captchaCookieExpirationInMinutes,omitempty" tf:"captcha_cookie_expiration_in_minutes,omitempty"`
+
 	// If a custom_rule block's action type is block, this is the response body. The body must be specified in base64 encoding.
 	CustomBlockResponseBody *string `json:"customBlockResponseBody,omitempty" tf:"custom_block_response_body,omitempty"`
 
@@ -193,6 +196,9 @@ type FrontdoorFirewallPolicyInitParameters struct {
 
 type FrontdoorFirewallPolicyObservation struct {
 
+	// Specifies the Captcha cookie lifetime in minutes. Possible values are between 5 and 1440. Defaults to30 minutes.
+	CaptchaCookieExpirationInMinutes *float64 `json:"captchaCookieExpirationInMinutes,omitempty" tf:"captcha_cookie_expiration_in_minutes,omitempty"`
+
 	// If a custom_rule block's action type is block, this is the response body. The body must be specified in base64 encoding.
 	CustomBlockResponseBody *string `json:"customBlockResponseBody,omitempty" tf:"custom_block_response_body,omitempty"`
 
@@ -241,6 +247,10 @@ type FrontdoorFirewallPolicyObservation struct {
 }
 
 type FrontdoorFirewallPolicyParameters struct {
+
+	// Specifies the Captcha cookie lifetime in minutes. Possible values are between 5 and 1440. Defaults to30 minutes.
+	// +kubebuilder:validation:Optional
+	CaptchaCookieExpirationInMinutes *float64 `json:"captchaCookieExpirationInMinutes,omitempty" tf:"captcha_cookie_expiration_in_minutes,omitempty"`
 
 	// If a custom_rule block's action type is block, this is the response body. The body must be specified in base64 encoding.
 	// +kubebuilder:validation:Optional
@@ -591,7 +601,7 @@ type RuleExclusionParameters struct {
 
 type RuleInitParameters struct {
 
-	// The action to be applied when the managed rule matches or when the anomaly score is 5 or greater. Possible values for DefaultRuleSet 1.1 and below are Allow, Log, Block, or Redirect. Possible values for DefaultRuleSet 2.0 and above are Log or AnomalyScoring. Possible values for Microsoft_BotManagerRuleSet are Allow, Log, Block, Redirect, or JSChallenge.
+	// The action to be applied when the managed rule matches or when the anomaly score is 5 or greater. Possible values are Allow, CAPTCHA, Log, Block, Redirect, AnomalyScoring and JSChallenge.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// Is this scrubbing_rule enabled? Defaults to true.
@@ -606,7 +616,7 @@ type RuleInitParameters struct {
 
 type RuleObservation struct {
 
-	// The action to be applied when the managed rule matches or when the anomaly score is 5 or greater. Possible values for DefaultRuleSet 1.1 and below are Allow, Log, Block, or Redirect. Possible values for DefaultRuleSet 2.0 and above are Log or AnomalyScoring. Possible values for Microsoft_BotManagerRuleSet are Allow, Log, Block, Redirect, or JSChallenge.
+	// The action to be applied when the managed rule matches or when the anomaly score is 5 or greater. Possible values are Allow, CAPTCHA, Log, Block, Redirect, AnomalyScoring and JSChallenge.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// Is this scrubbing_rule enabled? Defaults to true.
@@ -621,7 +631,7 @@ type RuleObservation struct {
 
 type RuleParameters struct {
 
-	// The action to be applied when the managed rule matches or when the anomaly score is 5 or greater. Possible values for DefaultRuleSet 1.1 and below are Allow, Log, Block, or Redirect. Possible values for DefaultRuleSet 2.0 and above are Log or AnomalyScoring. Possible values for Microsoft_BotManagerRuleSet are Allow, Log, Block, Redirect, or JSChallenge.
+	// The action to be applied when the managed rule matches or when the anomaly score is 5 or greater. Possible values are Allow, CAPTCHA, Log, Block, Redirect, AnomalyScoring and JSChallenge.
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action" tf:"action,omitempty"`
 

@@ -72,7 +72,8 @@ spec:
                       type:
                         description: Specifies the type of Managed Service Identity
                           that should be configured on this Event Grid System Topic.
-                          Possible values are SystemAssigned, UserAssigned.
+                          Possible values are SystemAssigned, UserAssigned, and SystemAssigned,
+                          UserAssigned.
                         type: string
                     type: object
                   location:
@@ -168,11 +169,14 @@ spec:
                         type: object
                     type: object
                   sourceArmResourceId:
+                    description: The ID of the Event Grid System Topic.
+                    type: string
+                  sourceResourceId:
                     description: The ID of the Event Grid System Topic ARM Source.
                       Changing this forces a new Event Grid System Topic to be created.
                     type: string
-                  sourceArmResourceIdRef:
-                    description: Reference to a Account in storage to populate sourceArmResourceId.
+                  sourceResourceIdRef:
+                    description: Reference to a Account in storage to populate sourceResourceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -208,8 +212,8 @@ spec:
                     required:
                     - name
                     type: object
-                  sourceArmResourceIdSelector:
-                    description: Selector for a Account in storage to populate sourceArmResourceId.
+                  sourceResourceIdSelector:
+                    description: Selector for a Account in storage to populate sourceResourceId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -298,7 +302,8 @@ spec:
                       type:
                         description: Specifies the type of Managed Service Identity
                           that should be configured on this Event Grid System Topic.
-                          Possible values are SystemAssigned, UserAssigned.
+                          Possible values are SystemAssigned, UserAssigned, and SystemAssigned,
+                          UserAssigned.
                         type: string
                     type: object
                   location:
@@ -307,11 +312,14 @@ spec:
                       to be created.
                     type: string
                   sourceArmResourceId:
+                    description: The ID of the Event Grid System Topic.
+                    type: string
+                  sourceResourceId:
                     description: The ID of the Event Grid System Topic ARM Source.
                       Changing this forces a new Event Grid System Topic to be created.
                     type: string
-                  sourceArmResourceIdRef:
-                    description: Reference to a Account in storage to populate sourceArmResourceId.
+                  sourceResourceIdRef:
+                    description: Reference to a Account in storage to populate sourceResourceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -347,8 +355,8 @@ spec:
                     required:
                     - name
                     type: object
-                  sourceArmResourceIdSelector:
-                    description: Selector for a Account in storage to populate sourceArmResourceId.
+                  sourceResourceIdSelector:
+                    description: Selector for a Account in storage to populate sourceResourceId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -507,7 +515,8 @@ spec:
                       type:
                         description: Specifies the type of Managed Service Identity
                           that should be configured on this Event Grid System Topic.
-                          Possible values are SystemAssigned, UserAssigned.
+                          Possible values are SystemAssigned, UserAssigned, and SystemAssigned,
+                          UserAssigned.
                         type: string
                     type: object
                   location:
@@ -516,8 +525,10 @@ spec:
                       to be created.
                     type: string
                   metricArmResourceId:
-                    description: The Metric ARM Resource ID of the Event Grid System
-                      Topic.
+                    description: The ID of the Event Grid System Topic.
+                    type: string
+                  metricResourceId:
+                    description: The Metric Resource ID of the Event Grid System Topic.
                     type: string
                   resourceGroupName:
                     description: The name of the Resource Group where the Event Grid
@@ -525,6 +536,9 @@ spec:
                       Grid System Topic to be created.
                     type: string
                   sourceArmResourceId:
+                    description: The ID of the Event Grid System Topic.
+                    type: string
+                  sourceResourceId:
                     description: The ID of the Event Grid System Topic ARM Source.
                       Changing this forces a new Event Grid System Topic to be created.
                     type: string

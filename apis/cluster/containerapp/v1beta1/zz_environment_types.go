@@ -13,11 +13,52 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
+type EnvironmentIdentityInitParameters struct {
+
+	// - A list of one or more Resource IDs for User Assigned Managed identities to assign. Required when type is set to UserAssigned or SystemAssigned, UserAssigned.
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// The type of managed identity to assign. Possible values are SystemAssigned, UserAssigned, and SystemAssigned, UserAssigned (to enable both).
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type EnvironmentIdentityObservation struct {
+
+	// - A list of one or more Resource IDs for User Assigned Managed identities to assign. Required when type is set to UserAssigned or SystemAssigned, UserAssigned.
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// The ID of the Container App Environment
+	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
+
+	// The ID of the Container App Environment
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// The type of managed identity to assign. Possible values are SystemAssigned, UserAssigned, and SystemAssigned, UserAssigned (to enable both).
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type EnvironmentIdentityParameters struct {
+
+	// - A list of one or more Resource IDs for User Assigned Managed identities to assign. Required when type is set to UserAssigned or SystemAssigned, UserAssigned.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// The type of managed identity to assign. Possible values are SystemAssigned, UserAssigned, and SystemAssigned, UserAssigned (to enable both).
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type" tf:"type,omitempty"`
+}
+
 type EnvironmentInitParameters struct {
 
 	// Application Insights connection string used by Dapr to export Service to Service communication telemetry. Changing this forces a new resource to be created.
 	// Application Insights connection string used by Dapr to export Service to Service communication telemetry.
 	DaprApplicationInsightsConnectionStringSecretRef *v1.SecretKeySelector `json:"daprApplicationInsightsConnectionStringSecretRef,omitempty" tf:"-"`
+
+	// An identity block as defined below.
+	Identity *EnvironmentIdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Name of the platform-managed resource group created for the Managed Environment to host infrastructure resources. Changing this forces a new resource to be created.
 	// Name of the platform-managed resource group created for the Managed Environment to host infrastructure resources. **Note:** Only valid if a `workload_profile` is specified. If `infrastructure_subnet_id` is specified, this resource group will be created in the same subscription as `infrastructure_subnet_id`.
@@ -74,6 +115,10 @@ type EnvironmentInitParameters struct {
 	// Should mutual transport layer security (mTLS) be enabled? Defaults to `false`. **Note:** This feature is in public preview. Enabling mTLS for your applications may increase response latency and reduce maximum throughput in high-load scenarios.
 	MutualTLSEnabled *bool `json:"mutualTlsEnabled,omitempty" tf:"mutual_tls_enabled,omitempty"`
 
+	// The public network access setting for the Container App Environment. Possible values are Enabled and Disabled.
+	// The public network access setting for the Container App Environment.
+	PublicNetworkAccess *string `json:"publicNetworkAccess,omitempty" tf:"public_network_access,omitempty"`
+
 	// A mapping of tags to assign to the resource.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -101,6 +146,9 @@ type EnvironmentObservation struct {
 
 	// The ID of the Container App Environment
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// An identity block as defined below.
+	Identity *EnvironmentIdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Name of the platform-managed resource group created for the Managed Environment to host infrastructure resources. Changing this forces a new resource to be created.
 	// Name of the platform-managed resource group created for the Managed Environment to host infrastructure resources. **Note:** Only valid if a `workload_profile` is specified. If `infrastructure_subnet_id` is specified, this resource group will be created in the same subscription as `infrastructure_subnet_id`.
@@ -136,6 +184,10 @@ type EnvironmentObservation struct {
 	// The IP address from the IP range defined by `platform_reserved_cidr` that is reserved for the internal DNS server.
 	PlatformReservedDNSIPAddress *string `json:"platformReservedDnsIpAddress,omitempty" tf:"platform_reserved_dns_ip_address,omitempty"`
 
+	// The public network access setting for the Container App Environment. Possible values are Enabled and Disabled.
+	// The public network access setting for the Container App Environment.
+	PublicNetworkAccess *string `json:"publicNetworkAccess,omitempty" tf:"public_network_access,omitempty"`
+
 	// The name of the resource group in which the Container App Environment is to be created. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -160,6 +212,10 @@ type EnvironmentParameters struct {
 	// Application Insights connection string used by Dapr to export Service to Service communication telemetry.
 	// +kubebuilder:validation:Optional
 	DaprApplicationInsightsConnectionStringSecretRef *v1.SecretKeySelector `json:"daprApplicationInsightsConnectionStringSecretRef,omitempty" tf:"-"`
+
+	// An identity block as defined below.
+	// +kubebuilder:validation:Optional
+	Identity *EnvironmentIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Name of the platform-managed resource group created for the Managed Environment to host infrastructure resources. Changing this forces a new resource to be created.
 	// Name of the platform-managed resource group created for the Managed Environment to host infrastructure resources. **Note:** Only valid if a `workload_profile` is specified. If `infrastructure_subnet_id` is specified, this resource group will be created in the same subscription as `infrastructure_subnet_id`.
@@ -222,6 +278,11 @@ type EnvironmentParameters struct {
 	// Should mutual transport layer security (mTLS) be enabled? Defaults to `false`. **Note:** This feature is in public preview. Enabling mTLS for your applications may increase response latency and reduce maximum throughput in high-load scenarios.
 	// +kubebuilder:validation:Optional
 	MutualTLSEnabled *bool `json:"mutualTlsEnabled,omitempty" tf:"mutual_tls_enabled,omitempty"`
+
+	// The public network access setting for the Container App Environment. Possible values are Enabled and Disabled.
+	// The public network access setting for the Container App Environment.
+	// +kubebuilder:validation:Optional
+	PublicNetworkAccess *string `json:"publicNetworkAccess,omitempty" tf:"public_network_access,omitempty"`
 
 	// The name of the resource group in which the Container App Environment is to be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup

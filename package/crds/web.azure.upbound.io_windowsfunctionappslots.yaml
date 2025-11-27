@@ -6058,12 +6058,12 @@ spec:
                         properties:
                           dotnetVersion:
                             description: |-
-                              The version of .Net. Possible values are v3.0, v4.0, v6.0, v7.0, v8.0 and v9.0. Defaults to v4.0.
-                              The version of .Net. Possible values are `v3.0`, `v4.0`, `v6.0`, `v7.0`, `v8.0` and `v9.0`
+                              The version of .Net. Possible values are v3.0, v4.0, v6.0, v7.0, v8.0, v9.0 and v10.0. Defaults to v4.0.
+                              The version of .Net. Possible values are `v3.0`, `v4.0`, `v6.0`, `v7.0`, `v8.0`, `v9.0` and `v10.0`
                             type: string
                           javaVersion:
                             description: |-
-                              The version of Java to use. Possible values are 1.8, 11 and 17 (In-Preview).
+                              The version of Java to use. Possible values are 1.8, 11, 17 and 21.
                               The version of Java to use. Possible values are `1.8`, `11`, `17`, and `21`
                             type: string
                           nodeVersion:
@@ -7712,12 +7712,12 @@ spec:
                         properties:
                           dotnetVersion:
                             description: |-
-                              The version of .Net. Possible values are v3.0, v4.0, v6.0, v7.0, v8.0 and v9.0. Defaults to v4.0.
-                              The version of .Net. Possible values are `v3.0`, `v4.0`, `v6.0`, `v7.0`, `v8.0` and `v9.0`
+                              The version of .Net. Possible values are v3.0, v4.0, v6.0, v7.0, v8.0, v9.0 and v10.0. Defaults to v4.0.
+                              The version of .Net. Possible values are `v3.0`, `v4.0`, `v6.0`, `v7.0`, `v8.0`, `v9.0` and `v10.0`
                             type: string
                           javaVersion:
                             description: |-
-                              The version of Java to use. Possible values are 1.8, 11 and 17 (In-Preview).
+                              The version of Java to use. Possible values are 1.8, 11, 17 and 21.
                               The version of Java to use. Possible values are `1.8`, `11`, `17`, and `21`
                             type: string
                           nodeVersion:
@@ -9353,12 +9353,12 @@ spec:
                         properties:
                           dotnetVersion:
                             description: |-
-                              The version of .Net. Possible values are v3.0, v4.0, v6.0, v7.0, v8.0 and v9.0. Defaults to v4.0.
-                              The version of .Net. Possible values are `v3.0`, `v4.0`, `v6.0`, `v7.0`, `v8.0` and `v9.0`
+                              The version of .Net. Possible values are v3.0, v4.0, v6.0, v7.0, v8.0, v9.0 and v10.0. Defaults to v4.0.
+                              The version of .Net. Possible values are `v3.0`, `v4.0`, `v6.0`, `v7.0`, `v8.0`, `v9.0` and `v10.0`
                             type: string
                           javaVersion:
                             description: |-
-                              The version of Java to use. Possible values are 1.8, 11 and 17 (In-Preview).
+                              The version of Java to use. Possible values are 1.8, 11, 17 and 21.
                               The version of Java to use. Possible values are `1.8`, `11`, `17`, and `21`
                             type: string
                           nodeVersion:

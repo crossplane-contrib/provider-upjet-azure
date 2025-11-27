@@ -54,7 +54,7 @@ type AuthenticationParameters struct {
 
 type CustomerManagedKeyInitParameters struct {
 
-	// The versioned ID of the geo backup Key Vault Key.
+	// The versioned/versionless ID of the geo backup Key Vault Key.
 	GeoBackupKeyVaultKeyID *string `json:"geoBackupKeyVaultKeyId,omitempty" tf:"geo_backup_key_vault_key_id,omitempty"`
 
 	// The geo backup user managed identity id for a Customer Managed Key. Must be added to identity.identity_ids.
@@ -69,7 +69,7 @@ type CustomerManagedKeyInitParameters struct {
 
 type CustomerManagedKeyObservation struct {
 
-	// The versioned ID of the geo backup Key Vault Key.
+	// The versioned/versionless ID of the geo backup Key Vault Key.
 	GeoBackupKeyVaultKeyID *string `json:"geoBackupKeyVaultKeyId,omitempty" tf:"geo_backup_key_vault_key_id,omitempty"`
 
 	// The geo backup user managed identity id for a Customer Managed Key. Must be added to identity.identity_ids.
@@ -84,7 +84,7 @@ type CustomerManagedKeyObservation struct {
 
 type CustomerManagedKeyParameters struct {
 
-	// The versioned ID of the geo backup Key Vault Key.
+	// The versioned/versionless ID of the geo backup Key Vault Key.
 	// +kubebuilder:validation:Optional
 	GeoBackupKeyVaultKeyID *string `json:"geoBackupKeyVaultKeyId,omitempty" tf:"geo_backup_key_vault_key_id,omitempty"`
 
@@ -207,7 +207,7 @@ type FlexibleServerInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The version of PostgreSQL Flexible Server to use. Possible values are 11,12, 13, 14, 15 and 16. Required when create_mode is Default.
+	// The version of PostgreSQL Flexible Server to use. Possible values are 11,12, 13, 14, 15, 16 and 17. Required when create_mode is Default.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
 	// Specifies the Availability Zone in which the PostgreSQL Flexible Server should be located.
@@ -295,7 +295,7 @@ type FlexibleServerObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The version of PostgreSQL Flexible Server to use. Possible values are 11,12, 13, 14, 15 and 16. Required when create_mode is Default.
+	// The version of PostgreSQL Flexible Server to use. Possible values are 11,12, 13, 14, 15, 16 and 17. Required when create_mode is Default.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
 	// Specifies the Availability Zone in which the PostgreSQL Flexible Server should be located.
@@ -450,7 +450,7 @@ type FlexibleServerParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The version of PostgreSQL Flexible Server to use. Possible values are 11,12, 13, 14, 15 and 16. Required when create_mode is Default.
+	// The version of PostgreSQL Flexible Server to use. Possible values are 11,12, 13, 14, 15, 16 and 17. Required when create_mode is Default.
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 

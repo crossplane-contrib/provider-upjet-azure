@@ -16,7 +16,7 @@ import (
 
 type ClusterInitParameters struct {
 
-	// List of allowed FQDNs(Fully Qualified Domain Name) for egress from Cluster.
+	// List of allowed FQDNs (Fully Qualified Domain Name) for egress from Cluster.
 	AllowedFqdns []*string `json:"allowedFqdns,omitempty" tf:"allowed_fqdns,omitempty"`
 
 	// The list of ips in the format of CIDR allowed to connect to the cluster.
@@ -25,7 +25,7 @@ type ClusterInitParameters struct {
 	// Specifies if the cluster could be automatically stopped (due to lack of data or no activity for many days). Defaults to true.
 	AutoStopEnabled *bool `json:"autoStopEnabled,omitempty" tf:"auto_stop_enabled,omitempty"`
 
-	// Specifies if the cluster's disks are encrypted.
+	// Specifies if the cluster's disks are encrypted. Defaults to false.
 	DiskEncryptionEnabled *bool `json:"diskEncryptionEnabled,omitempty" tf:"disk_encryption_enabled,omitempty"`
 
 	// Is the cluster's double encryption enabled? Changing this forces a new resource to be created.
@@ -34,7 +34,9 @@ type ClusterInitParameters struct {
 	// An identity block as defined below.
 	Identity *IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
-	// An list of language_extensions to enable. Valid values are: PYTHON, PYTHON_3.10.8 and R. PYTHON is used to specify Python 3.6.5 image and PYTHON_3.10.8 is used to specify Python 3.10.8 image. Note that PYTHON_3.10.8 is only available in skus which support nested virtualization.
+	// A language_extension block as defined below.
+	LanguageExtension []LanguageExtensionInitParameters `json:"languageExtension,omitempty" tf:"language_extension,omitempty"`
+
 	LanguageExtensions []LanguageExtensionsInitParameters `json:"languageExtensions,omitempty" tf:"language_extensions,omitempty"`
 
 	// The location where the Kusto Cluster should be created. Changing this forces a new resource to be created.
@@ -43,7 +45,7 @@ type ClusterInitParameters struct {
 	// An optimized_auto_scale block as defined below.
 	OptimizedAutoScale *OptimizedAutoScaleInitParameters `json:"optimizedAutoScale,omitempty" tf:"optimized_auto_scale,omitempty"`
 
-	// Whether to restrict outbound network access. Value is optional but if passed in, must be true or false, default is false.
+	// Whether to restrict outbound network access. Defaults to false.
 	OutboundNetworkAccessRestricted *bool `json:"outboundNetworkAccessRestricted,omitempty" tf:"outbound_network_access_restricted,omitempty"`
 
 	// Indicates what public IP type to create - IPv4 (default), or DualStack (both IPv4 and IPv6). Defaults to IPv4.
@@ -52,13 +54,13 @@ type ClusterInitParameters struct {
 	// Is the public network access enabled? Defaults to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
-	// Specifies if the purge operations are enabled.
+	// Specifies if the purge operations are enabled. Defaults to false.
 	PurgeEnabled *bool `json:"purgeEnabled,omitempty" tf:"purge_enabled,omitempty"`
 
 	// A sku block as defined below.
 	Sku *SkuInitParameters `json:"sku,omitempty" tf:"sku,omitempty"`
 
-	// Specifies if the streaming ingest is enabled.
+	// Specifies if the streaming ingest is enabled. Defaults to false.
 	StreamingIngestionEnabled *bool `json:"streamingIngestionEnabled,omitempty" tf:"streaming_ingestion_enabled,omitempty"`
 
 	// A mapping of tags to assign to the resource.
@@ -68,7 +70,6 @@ type ClusterInitParameters struct {
 	// Specifies a list of tenant IDs that are trusted by the cluster. Default setting trusts all other tenants. Use trusted_external_tenants = ["*"] to explicitly allow all other tenants, trusted_external_tenants = ["MyTenantOnly"] for only your tenant or trusted_external_tenants = ["<tenantId1>", "<tenantIdx>"] to allow specific other tenants.
 	TrustedExternalTenants []*string `json:"trustedExternalTenants,omitempty" tf:"trusted_external_tenants,omitempty"`
 
-	// A virtual_network_configuration block as defined below.
 	VirtualNetworkConfiguration *VirtualNetworkConfigurationInitParameters `json:"virtualNetworkConfiguration,omitempty" tf:"virtual_network_configuration,omitempty"`
 
 	// Specifies a list of Availability Zones in which this Kusto Cluster should be located. Changing this forces a new Kusto Cluster to be created.
@@ -78,7 +79,7 @@ type ClusterInitParameters struct {
 
 type ClusterObservation struct {
 
-	// List of allowed FQDNs(Fully Qualified Domain Name) for egress from Cluster.
+	// List of allowed FQDNs (Fully Qualified Domain Name) for egress from Cluster.
 	AllowedFqdns []*string `json:"allowedFqdns,omitempty" tf:"allowed_fqdns,omitempty"`
 
 	// The list of ips in the format of CIDR allowed to connect to the cluster.
@@ -90,7 +91,7 @@ type ClusterObservation struct {
 	// The Kusto Cluster URI to be used for data ingestion.
 	DataIngestionURI *string `json:"dataIngestionUri,omitempty" tf:"data_ingestion_uri,omitempty"`
 
-	// Specifies if the cluster's disks are encrypted.
+	// Specifies if the cluster's disks are encrypted. Defaults to false.
 	DiskEncryptionEnabled *bool `json:"diskEncryptionEnabled,omitempty" tf:"disk_encryption_enabled,omitempty"`
 
 	// Is the cluster's double encryption enabled? Changing this forces a new resource to be created.
@@ -102,7 +103,9 @@ type ClusterObservation struct {
 	// An identity block as defined below.
 	Identity *IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
-	// An list of language_extensions to enable. Valid values are: PYTHON, PYTHON_3.10.8 and R. PYTHON is used to specify Python 3.6.5 image and PYTHON_3.10.8 is used to specify Python 3.10.8 image. Note that PYTHON_3.10.8 is only available in skus which support nested virtualization.
+	// A language_extension block as defined below.
+	LanguageExtension []LanguageExtensionObservation `json:"languageExtension,omitempty" tf:"language_extension,omitempty"`
+
 	LanguageExtensions []LanguageExtensionsObservation `json:"languageExtensions,omitempty" tf:"language_extensions,omitempty"`
 
 	// The location where the Kusto Cluster should be created. Changing this forces a new resource to be created.
@@ -111,7 +114,7 @@ type ClusterObservation struct {
 	// An optimized_auto_scale block as defined below.
 	OptimizedAutoScale *OptimizedAutoScaleObservation `json:"optimizedAutoScale,omitempty" tf:"optimized_auto_scale,omitempty"`
 
-	// Whether to restrict outbound network access. Value is optional but if passed in, must be true or false, default is false.
+	// Whether to restrict outbound network access. Defaults to false.
 	OutboundNetworkAccessRestricted *bool `json:"outboundNetworkAccessRestricted,omitempty" tf:"outbound_network_access_restricted,omitempty"`
 
 	// Indicates what public IP type to create - IPv4 (default), or DualStack (both IPv4 and IPv6). Defaults to IPv4.
@@ -120,7 +123,7 @@ type ClusterObservation struct {
 	// Is the public network access enabled? Defaults to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
-	// Specifies if the purge operations are enabled.
+	// Specifies if the purge operations are enabled. Defaults to false.
 	PurgeEnabled *bool `json:"purgeEnabled,omitempty" tf:"purge_enabled,omitempty"`
 
 	// Specifies the Resource Group where the Kusto Cluster should exist. Changing this forces a new resource to be created.
@@ -129,7 +132,7 @@ type ClusterObservation struct {
 	// A sku block as defined below.
 	Sku *SkuObservation `json:"sku,omitempty" tf:"sku,omitempty"`
 
-	// Specifies if the streaming ingest is enabled.
+	// Specifies if the streaming ingest is enabled. Defaults to false.
 	StreamingIngestionEnabled *bool `json:"streamingIngestionEnabled,omitempty" tf:"streaming_ingestion_enabled,omitempty"`
 
 	// A mapping of tags to assign to the resource.
@@ -142,7 +145,6 @@ type ClusterObservation struct {
 	// The FQDN of the Azure Kusto Cluster.
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 
-	// A virtual_network_configuration block as defined below.
 	VirtualNetworkConfiguration *VirtualNetworkConfigurationObservation `json:"virtualNetworkConfiguration,omitempty" tf:"virtual_network_configuration,omitempty"`
 
 	// Specifies a list of Availability Zones in which this Kusto Cluster should be located. Changing this forces a new Kusto Cluster to be created.
@@ -152,7 +154,7 @@ type ClusterObservation struct {
 
 type ClusterParameters struct {
 
-	// List of allowed FQDNs(Fully Qualified Domain Name) for egress from Cluster.
+	// List of allowed FQDNs (Fully Qualified Domain Name) for egress from Cluster.
 	// +kubebuilder:validation:Optional
 	AllowedFqdns []*string `json:"allowedFqdns,omitempty" tf:"allowed_fqdns,omitempty"`
 
@@ -164,7 +166,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	AutoStopEnabled *bool `json:"autoStopEnabled,omitempty" tf:"auto_stop_enabled,omitempty"`
 
-	// Specifies if the cluster's disks are encrypted.
+	// Specifies if the cluster's disks are encrypted. Defaults to false.
 	// +kubebuilder:validation:Optional
 	DiskEncryptionEnabled *bool `json:"diskEncryptionEnabled,omitempty" tf:"disk_encryption_enabled,omitempty"`
 
@@ -176,7 +178,10 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	Identity *IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
-	// An list of language_extensions to enable. Valid values are: PYTHON, PYTHON_3.10.8 and R. PYTHON is used to specify Python 3.6.5 image and PYTHON_3.10.8 is used to specify Python 3.10.8 image. Note that PYTHON_3.10.8 is only available in skus which support nested virtualization.
+	// A language_extension block as defined below.
+	// +kubebuilder:validation:Optional
+	LanguageExtension []LanguageExtensionParameters `json:"languageExtension,omitempty" tf:"language_extension,omitempty"`
+
 	// +kubebuilder:validation:Optional
 	LanguageExtensions []LanguageExtensionsParameters `json:"languageExtensions,omitempty" tf:"language_extensions,omitempty"`
 
@@ -188,7 +193,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	OptimizedAutoScale *OptimizedAutoScaleParameters `json:"optimizedAutoScale,omitempty" tf:"optimized_auto_scale,omitempty"`
 
-	// Whether to restrict outbound network access. Value is optional but if passed in, must be true or false, default is false.
+	// Whether to restrict outbound network access. Defaults to false.
 	// +kubebuilder:validation:Optional
 	OutboundNetworkAccessRestricted *bool `json:"outboundNetworkAccessRestricted,omitempty" tf:"outbound_network_access_restricted,omitempty"`
 
@@ -200,7 +205,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
-	// Specifies if the purge operations are enabled.
+	// Specifies if the purge operations are enabled. Defaults to false.
 	// +kubebuilder:validation:Optional
 	PurgeEnabled *bool `json:"purgeEnabled,omitempty" tf:"purge_enabled,omitempty"`
 
@@ -221,7 +226,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	Sku *SkuParameters `json:"sku,omitempty" tf:"sku,omitempty"`
 
-	// Specifies if the streaming ingest is enabled.
+	// Specifies if the streaming ingest is enabled. Defaults to false.
 	// +kubebuilder:validation:Optional
 	StreamingIngestionEnabled *bool `json:"streamingIngestionEnabled,omitempty" tf:"streaming_ingestion_enabled,omitempty"`
 
@@ -234,7 +239,6 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	TrustedExternalTenants []*string `json:"trustedExternalTenants,omitempty" tf:"trusted_external_tenants,omitempty"`
 
-	// A virtual_network_configuration block as defined below.
 	// +kubebuilder:validation:Optional
 	VirtualNetworkConfiguration *VirtualNetworkConfigurationParameters `json:"virtualNetworkConfiguration,omitempty" tf:"virtual_network_configuration,omitempty"`
 
@@ -282,7 +286,38 @@ type IdentityParameters struct {
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
+type LanguageExtensionInitParameters struct {
+
+	// The language extension image. Possible values are Python3_11_7, Python3_11_7_DL, Python3_10_8, Python3_10_8_DL, Python3_6_5, PythonCustomImage, and R.
+	Image *string `json:"image,omitempty" tf:"image,omitempty"`
+
+	// The name of the language extension. Possible values are PYTHON and R.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type LanguageExtensionObservation struct {
+
+	// The language extension image. Possible values are Python3_11_7, Python3_11_7_DL, Python3_10_8, Python3_10_8_DL, Python3_6_5, PythonCustomImage, and R.
+	Image *string `json:"image,omitempty" tf:"image,omitempty"`
+
+	// The name of the language extension. Possible values are PYTHON and R.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type LanguageExtensionParameters struct {
+
+	// The language extension image. Possible values are Python3_11_7, Python3_11_7_DL, Python3_10_8, Python3_10_8_DL, Python3_6_5, PythonCustomImage, and R.
+	// +kubebuilder:validation:Optional
+	Image *string `json:"image" tf:"image,omitempty"`
+
+	// The name of the language extension. Possible values are PYTHON and R.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+}
+
 type LanguageExtensionsInitParameters struct {
+
+	// The language extension image. Possible values are Python3_11_7, Python3_11_7_DL, Python3_10_8, Python3_10_8_DL, Python3_6_5, PythonCustomImage, and R.
 	Image *string `json:"image,omitempty" tf:"image,omitempty"`
 
 	// The name of the SKU. Possible values are Dev(No SLA)_Standard_D11_v2, Dev(No SLA)_Standard_E2a_v4, Standard_D14_v2, Standard_D11_v2, Standard_D16d_v5, Standard_D13_v2, Standard_D12_v2, Standard_DS14_v2+4TB_PS, Standard_DS14_v2+3TB_PS, Standard_DS13_v2+1TB_PS, Standard_DS13_v2+2TB_PS, Standard_D32d_v5, Standard_D32d_v4, Standard_EC8ads_v5, Standard_EC8as_v5+1TB_PS, Standard_EC8as_v5+2TB_PS, Standard_EC16ads_v5, Standard_EC16as_v5+4TB_PS, Standard_EC16as_v5+3TB_PS, Standard_E80ids_v4, Standard_E8a_v4, Standard_E8ads_v5, Standard_E8as_v5+1TB_PS, Standard_E8as_v5+2TB_PS, Standard_E8as_v4+1TB_PS, Standard_E8as_v4+2TB_PS, Standard_E8d_v5, Standard_E8d_v4, Standard_E8s_v5+1TB_PS, Standard_E8s_v5+2TB_PS, Standard_E8s_v4+1TB_PS, Standard_E8s_v4+2TB_PS, Standard_E4a_v4, Standard_E4ads_v5, Standard_E4d_v5, Standard_E4d_v4, Standard_E16a_v4, Standard_E16ads_v5, Standard_E16as_v5+4TB_PS, Standard_E16as_v5+3TB_PS, Standard_E16as_v4+4TB_PS, Standard_E16as_v4+3TB_PS, Standard_E16d_v5, Standard_E16d_v4, Standard_E16s_v5+4TB_PS, Standard_E16s_v5+3TB_PS, Standard_E16s_v4+4TB_PS, Standard_E16s_v4+3TB_PS, Standard_E64i_v3, Standard_E2a_v4, Standard_E2ads_v5, Standard_E2d_v5, Standard_E2d_v4, Standard_L8as_v3, Standard_L8s, Standard_L8s_v3, Standard_L8s_v2, Standard_L4s, Standard_L16as_v3, Standard_L16s, Standard_L16s_v3, Standard_L16s_v2, Standard_L32as_v3 and Standard_L32s_v3.
@@ -290,6 +325,8 @@ type LanguageExtensionsInitParameters struct {
 }
 
 type LanguageExtensionsObservation struct {
+
+	// The language extension image. Possible values are Python3_11_7, Python3_11_7_DL, Python3_10_8, Python3_10_8_DL, Python3_6_5, PythonCustomImage, and R.
 	Image *string `json:"image,omitempty" tf:"image,omitempty"`
 
 	// The name of the SKU. Possible values are Dev(No SLA)_Standard_D11_v2, Dev(No SLA)_Standard_E2a_v4, Standard_D14_v2, Standard_D11_v2, Standard_D16d_v5, Standard_D13_v2, Standard_D12_v2, Standard_DS14_v2+4TB_PS, Standard_DS14_v2+3TB_PS, Standard_DS13_v2+1TB_PS, Standard_DS13_v2+2TB_PS, Standard_D32d_v5, Standard_D32d_v4, Standard_EC8ads_v5, Standard_EC8as_v5+1TB_PS, Standard_EC8as_v5+2TB_PS, Standard_EC16ads_v5, Standard_EC16as_v5+4TB_PS, Standard_EC16as_v5+3TB_PS, Standard_E80ids_v4, Standard_E8a_v4, Standard_E8ads_v5, Standard_E8as_v5+1TB_PS, Standard_E8as_v5+2TB_PS, Standard_E8as_v4+1TB_PS, Standard_E8as_v4+2TB_PS, Standard_E8d_v5, Standard_E8d_v4, Standard_E8s_v5+1TB_PS, Standard_E8s_v5+2TB_PS, Standard_E8s_v4+1TB_PS, Standard_E8s_v4+2TB_PS, Standard_E4a_v4, Standard_E4ads_v5, Standard_E4d_v5, Standard_E4d_v4, Standard_E16a_v4, Standard_E16ads_v5, Standard_E16as_v5+4TB_PS, Standard_E16as_v5+3TB_PS, Standard_E16as_v4+4TB_PS, Standard_E16as_v4+3TB_PS, Standard_E16d_v5, Standard_E16d_v4, Standard_E16s_v5+4TB_PS, Standard_E16s_v5+3TB_PS, Standard_E16s_v4+4TB_PS, Standard_E16s_v4+3TB_PS, Standard_E64i_v3, Standard_E2a_v4, Standard_E2ads_v5, Standard_E2d_v5, Standard_E2d_v4, Standard_L8as_v3, Standard_L8s, Standard_L8s_v3, Standard_L8s_v2, Standard_L4s, Standard_L16as_v3, Standard_L16s, Standard_L16s_v3, Standard_L16s_v2, Standard_L32as_v3 and Standard_L32s_v3.
@@ -298,6 +335,7 @@ type LanguageExtensionsObservation struct {
 
 type LanguageExtensionsParameters struct {
 
+	// The language extension image. Possible values are Python3_11_7, Python3_11_7_DL, Python3_10_8, Python3_10_8_DL, Python3_6_5, PythonCustomImage, and R.
 	// +kubebuilder:validation:Optional
 	Image *string `json:"image" tf:"image,omitempty"`
 
@@ -308,29 +346,29 @@ type LanguageExtensionsParameters struct {
 
 type OptimizedAutoScaleInitParameters struct {
 
-	// The maximum number of allowed instances. Must between 0 and 1000.
+	// The maximum number of allowed instances. Possible values range between 0 and 1000.
 	MaximumInstances *float64 `json:"maximumInstances,omitempty" tf:"maximum_instances,omitempty"`
 
-	// The minimum number of allowed instances. Must between 0 and 1000.
+	// The minimum number of allowed instances. Possible values range between 0 and 1000.
 	MinimumInstances *float64 `json:"minimumInstances,omitempty" tf:"minimum_instances,omitempty"`
 }
 
 type OptimizedAutoScaleObservation struct {
 
-	// The maximum number of allowed instances. Must between 0 and 1000.
+	// The maximum number of allowed instances. Possible values range between 0 and 1000.
 	MaximumInstances *float64 `json:"maximumInstances,omitempty" tf:"maximum_instances,omitempty"`
 
-	// The minimum number of allowed instances. Must between 0 and 1000.
+	// The minimum number of allowed instances. Possible values range between 0 and 1000.
 	MinimumInstances *float64 `json:"minimumInstances,omitempty" tf:"minimum_instances,omitempty"`
 }
 
 type OptimizedAutoScaleParameters struct {
 
-	// The maximum number of allowed instances. Must between 0 and 1000.
+	// The maximum number of allowed instances. Possible values range between 0 and 1000.
 	// +kubebuilder:validation:Optional
 	MaximumInstances *float64 `json:"maximumInstances" tf:"maximum_instances,omitempty"`
 
-	// The minimum number of allowed instances. Must between 0 and 1000.
+	// The minimum number of allowed instances. Possible values range between 0 and 1000.
 	// +kubebuilder:validation:Optional
 	MinimumInstances *float64 `json:"minimumInstances" tf:"minimum_instances,omitempty"`
 }
@@ -366,13 +404,13 @@ type SkuParameters struct {
 
 type VirtualNetworkConfigurationInitParameters struct {
 
-	// Data management's service public IP address resource id.
+	// The Kusto Cluster ID.
 	DataManagementPublicIPID *string `json:"dataManagementPublicIpId,omitempty" tf:"data_management_public_ip_id,omitempty"`
 
-	// Engine service's public IP address resource id.
+	// The Kusto Cluster ID.
 	EnginePublicIPID *string `json:"enginePublicIpId,omitempty" tf:"engine_public_ip_id,omitempty"`
 
-	// The subnet resource id.
+	// The Kusto Cluster ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
@@ -388,27 +426,27 @@ type VirtualNetworkConfigurationInitParameters struct {
 
 type VirtualNetworkConfigurationObservation struct {
 
-	// Data management's service public IP address resource id.
+	// The Kusto Cluster ID.
 	DataManagementPublicIPID *string `json:"dataManagementPublicIpId,omitempty" tf:"data_management_public_ip_id,omitempty"`
 
-	// Engine service's public IP address resource id.
+	// The Kusto Cluster ID.
 	EnginePublicIPID *string `json:"enginePublicIpId,omitempty" tf:"engine_public_ip_id,omitempty"`
 
-	// The subnet resource id.
+	// The Kusto Cluster ID.
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 }
 
 type VirtualNetworkConfigurationParameters struct {
 
-	// Data management's service public IP address resource id.
+	// The Kusto Cluster ID.
 	// +kubebuilder:validation:Optional
 	DataManagementPublicIPID *string `json:"dataManagementPublicIpId" tf:"data_management_public_ip_id,omitempty"`
 
-	// Engine service's public IP address resource id.
+	// The Kusto Cluster ID.
 	// +kubebuilder:validation:Optional
 	EnginePublicIPID *string `json:"enginePublicIpId" tf:"engine_public_ip_id,omitempty"`
 
-	// The subnet resource id.
+	// The Kusto Cluster ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional

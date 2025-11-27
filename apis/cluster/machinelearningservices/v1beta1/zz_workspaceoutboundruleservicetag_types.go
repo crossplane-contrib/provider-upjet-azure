@@ -15,7 +15,7 @@ import (
 
 type WorkspaceOutboundRuleServiceTagInitParameters struct {
 
-	// Specifies which ports traffic will be allowed by this rule. You can specify a single port (e.g.  80) ,  a port range  (e.g. 1024-655535) or a comma-separated list of single ports and/or port ranges(e.g. 80,1024-655535). * can be used to allow traffic on any port.
+	// Specifies which ports traffic will be allowed by this rule. You can specify a single port (e.g.  80) , a port range (e.g. 1024-655535) or a comma-separated list of single ports and/or port ranges(e.g. 80,1024-655535). * can be used to allow traffic on any port.
 	PortRanges *string `json:"portRanges,omitempty" tf:"port_ranges,omitempty"`
 
 	// Specifies the network protocol. Possible values are *, TCP, UDP and ICMP
@@ -30,7 +30,7 @@ type WorkspaceOutboundRuleServiceTagObservation struct {
 	// The ID of the Machine Learning Workspace Network Outbound Rule Service Tag .
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Specifies which ports traffic will be allowed by this rule. You can specify a single port (e.g.  80) ,  a port range  (e.g. 1024-655535) or a comma-separated list of single ports and/or port ranges(e.g. 80,1024-655535). * can be used to allow traffic on any port.
+	// Specifies which ports traffic will be allowed by this rule. You can specify a single port (e.g.  80) , a port range (e.g. 1024-655535) or a comma-separated list of single ports and/or port ranges(e.g. 80,1024-655535). * can be used to allow traffic on any port.
 	PortRanges *string `json:"portRanges,omitempty" tf:"port_ranges,omitempty"`
 
 	// Specifies the network protocol. Possible values are *, TCP, UDP and ICMP
@@ -45,7 +45,7 @@ type WorkspaceOutboundRuleServiceTagObservation struct {
 
 type WorkspaceOutboundRuleServiceTagParameters struct {
 
-	// Specifies which ports traffic will be allowed by this rule. You can specify a single port (e.g.  80) ,  a port range  (e.g. 1024-655535) or a comma-separated list of single ports and/or port ranges(e.g. 80,1024-655535). * can be used to allow traffic on any port.
+	// Specifies which ports traffic will be allowed by this rule. You can specify a single port (e.g.  80) , a port range (e.g. 1024-655535) or a comma-separated list of single ports and/or port ranges(e.g. 80,1024-655535). * can be used to allow traffic on any port.
 	// +kubebuilder:validation:Optional
 	PortRanges *string `json:"portRanges,omitempty" tf:"port_ranges,omitempty"`
 

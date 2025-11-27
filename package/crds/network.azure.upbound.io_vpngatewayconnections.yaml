@@ -1376,6 +1376,10 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        dpdTimeoutSeconds:
+                          description: The dead peer detection timeout of this connection
+                            in seconds. Possible values are between 9 and 3600.
+                          type: number
                         egressNatRuleIds:
                           description: A list of the egress NAT Rule Ids.
                           items:
@@ -1654,6 +1658,10 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        dpdTimeoutSeconds:
+                          description: The dead peer detection timeout of this connection
+                            in seconds. Possible values are between 9 and 3600.
+                          type: number
                         egressNatRuleIds:
                           description: A list of the egress NAT Rule Ids.
                           items:
@@ -1950,6 +1958,10 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        dpdTimeoutSeconds:
+                          description: The dead peer detection timeout of this connection
+                            in seconds. Possible values are between 9 and 3600.
+                          type: number
                         egressNatRuleIds:
                           description: A list of the egress NAT Rule Ids.
                           items:

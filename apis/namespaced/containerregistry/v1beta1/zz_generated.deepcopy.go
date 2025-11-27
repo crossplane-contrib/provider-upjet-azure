@@ -2028,6 +2028,17 @@ func (in *RegistryObservation) DeepCopyInto(out *RegistryObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.DataEndpointHostNames != nil {
+		in, out := &in.DataEndpointHostNames, &out.DataEndpointHostNames
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.Encryption != nil {
 		in, out := &in.Encryption, &out.Encryption
 		*out = new(EncryptionObservation)

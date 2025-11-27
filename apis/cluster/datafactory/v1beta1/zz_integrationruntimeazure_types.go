@@ -54,6 +54,7 @@ type IntegrationRuntimeAzureObservation struct {
 	// Integration runtime description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The ID of the Data Factory Integration Runtime.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Use AutoResolve to create an auto-resolve integration runtime. Changing this forces a new resource to be created.

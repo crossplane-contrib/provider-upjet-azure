@@ -139,6 +139,8 @@ type ImportParameters struct {
 }
 
 type LongTermRetentionPolicyInitParameters struct {
+
+	// Specifies if the backups are immutable. Defaults to false.
 	ImmutableBackupsEnabled *bool `json:"immutableBackupsEnabled,omitempty" tf:"immutable_backups_enabled,omitempty"`
 
 	// The monthly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 120 months. e.g. P1Y, P1M, P4W or P30D. Defaults to PT0S.
@@ -155,6 +157,8 @@ type LongTermRetentionPolicyInitParameters struct {
 }
 
 type LongTermRetentionPolicyObservation struct {
+
+	// Specifies if the backups are immutable. Defaults to false.
 	ImmutableBackupsEnabled *bool `json:"immutableBackupsEnabled,omitempty" tf:"immutable_backups_enabled,omitempty"`
 
 	// The monthly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 120 months. e.g. P1Y, P1M, P4W or P30D. Defaults to PT0S.
@@ -172,6 +176,7 @@ type LongTermRetentionPolicyObservation struct {
 
 type LongTermRetentionPolicyParameters struct {
 
+	// Specifies if the backups are immutable. Defaults to false.
 	// +kubebuilder:validation:Optional
 	ImmutableBackupsEnabled *bool `json:"immutableBackupsEnabled,omitempty" tf:"immutable_backups_enabled,omitempty"`
 
@@ -263,7 +268,7 @@ type MSSQLDatabaseInitParameters struct {
 	// Specifies the name of the sample schema to apply when creating this database. Possible value is AdventureWorksLT.
 	SampleName *string `json:"sampleName,omitempty" tf:"sample_name,omitempty"`
 
-	// How do you want your replica to be made? Valid values include Geo and Named. Defaults to Geo. Changing this forces a new resource to be created.
+	// How do you want your replica to be made? Valid values include Geo, Named and Standby. Defaults to Geo. Changing this forces a new resource to be created.
 	SecondaryType *string `json:"secondaryType,omitempty" tf:"secondary_type,omitempty"`
 
 	// A short_term_retention_policy block as defined below.
@@ -379,7 +384,7 @@ type MSSQLDatabaseObservation struct {
 	// Specifies the name of the sample schema to apply when creating this database. Possible value is AdventureWorksLT.
 	SampleName *string `json:"sampleName,omitempty" tf:"sample_name,omitempty"`
 
-	// How do you want your replica to be made? Valid values include Geo and Named. Defaults to Geo. Changing this forces a new resource to be created.
+	// How do you want your replica to be made? Valid values include Geo, Named and Standby. Defaults to Geo. Changing this forces a new resource to be created.
 	SecondaryType *string `json:"secondaryType,omitempty" tf:"secondary_type,omitempty"`
 
 	// The id of the MS SQL Server on which to create the database. Changing this forces a new resource to be created.
@@ -508,7 +513,7 @@ type MSSQLDatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	SampleName *string `json:"sampleName,omitempty" tf:"sample_name,omitempty"`
 
-	// How do you want your replica to be made? Valid values include Geo and Named. Defaults to Geo. Changing this forces a new resource to be created.
+	// How do you want your replica to be made? Valid values include Geo, Named and Standby. Defaults to Geo. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	SecondaryType *string `json:"secondaryType,omitempty" tf:"secondary_type,omitempty"`
 

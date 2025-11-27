@@ -83,13 +83,13 @@ type CriteriaInitParameters struct {
 	// The Resource Manager Role-Based Access Control operation name. Supported operation should be of the form: <resourceProvider>/<resourceType>/<operation>.
 	OperationName *string `json:"operationName,omitempty" tf:"operation_name,omitempty"`
 
-	// The recommendation category of the event. Possible values are Cost, Reliability, OperationalExcellence, HighAvailability and Performance. It is only allowed when category is Recommendation.
+	// The recommendation category of the event. Possible values are Cost, Reliability, OperationalExcellence, HighAvailability, Performance and Security.
 	RecommendationCategory *string `json:"recommendationCategory,omitempty" tf:"recommendation_category,omitempty"`
 
-	// The recommendation impact of the event. Possible values are High, Medium and Low. It is only allowed when category is Recommendation.
+	// The recommendation impact of the event. Possible values are High, Medium and Low.
 	RecommendationImpact *string `json:"recommendationImpact,omitempty" tf:"recommendation_impact,omitempty"`
 
-	// The recommendation type of the event. It is only allowed when category is Recommendation.
+	// The recommendation type of the event.
 	RecommendationType *string `json:"recommendationType,omitempty" tf:"recommendation_type,omitempty"`
 
 	// The name of resource group monitored by the activity log alert.
@@ -162,13 +162,13 @@ type CriteriaObservation struct {
 	// The Resource Manager Role-Based Access Control operation name. Supported operation should be of the form: <resourceProvider>/<resourceType>/<operation>.
 	OperationName *string `json:"operationName,omitempty" tf:"operation_name,omitempty"`
 
-	// The recommendation category of the event. Possible values are Cost, Reliability, OperationalExcellence, HighAvailability and Performance. It is only allowed when category is Recommendation.
+	// The recommendation category of the event. Possible values are Cost, Reliability, OperationalExcellence, HighAvailability, Performance and Security.
 	RecommendationCategory *string `json:"recommendationCategory,omitempty" tf:"recommendation_category,omitempty"`
 
-	// The recommendation impact of the event. Possible values are High, Medium and Low. It is only allowed when category is Recommendation.
+	// The recommendation impact of the event. Possible values are High, Medium and Low.
 	RecommendationImpact *string `json:"recommendationImpact,omitempty" tf:"recommendation_impact,omitempty"`
 
-	// The recommendation type of the event. It is only allowed when category is Recommendation.
+	// The recommendation type of the event.
 	RecommendationType *string `json:"recommendationType,omitempty" tf:"recommendation_type,omitempty"`
 
 	// The name of resource group monitored by the activity log alert.
@@ -236,15 +236,15 @@ type CriteriaParameters struct {
 	// +kubebuilder:validation:Optional
 	OperationName *string `json:"operationName,omitempty" tf:"operation_name,omitempty"`
 
-	// The recommendation category of the event. Possible values are Cost, Reliability, OperationalExcellence, HighAvailability and Performance. It is only allowed when category is Recommendation.
+	// The recommendation category of the event. Possible values are Cost, Reliability, OperationalExcellence, HighAvailability, Performance and Security.
 	// +kubebuilder:validation:Optional
 	RecommendationCategory *string `json:"recommendationCategory,omitempty" tf:"recommendation_category,omitempty"`
 
-	// The recommendation impact of the event. Possible values are High, Medium and Low. It is only allowed when category is Recommendation.
+	// The recommendation impact of the event. Possible values are High, Medium and Low.
 	// +kubebuilder:validation:Optional
 	RecommendationImpact *string `json:"recommendationImpact,omitempty" tf:"recommendation_impact,omitempty"`
 
-	// The recommendation type of the event. It is only allowed when category is Recommendation.
+	// The recommendation type of the event.
 	// +kubebuilder:validation:Optional
 	RecommendationType *string `json:"recommendationType,omitempty" tf:"recommendation_type,omitempty"`
 
@@ -329,7 +329,7 @@ type MonitorActivityLogAlertInitParameters struct {
 	// Should this Activity Log Alert be enabled? Defaults to true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The Azure Region where the activity log alert rule should exist. Changing this forces a new resource to be created.
+	// The Azure Region where the activity log alert rule should exist. Possible values are global, westeurope, northeurope, and eastus2euap. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the activity log alert. Changing this forces a new resource to be created.
@@ -383,7 +383,7 @@ type MonitorActivityLogAlertObservation struct {
 	// The ID of the activity log alert.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The Azure Region where the activity log alert rule should exist. Changing this forces a new resource to be created.
+	// The Azure Region where the activity log alert rule should exist. Possible values are global, westeurope, northeurope, and eastus2euap. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the activity log alert. Changing this forces a new resource to be created.
@@ -419,7 +419,7 @@ type MonitorActivityLogAlertParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The Azure Region where the activity log alert rule should exist. Changing this forces a new resource to be created.
+	// The Azure Region where the activity log alert rule should exist. Possible values are global, westeurope, northeurope, and eastus2euap. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 

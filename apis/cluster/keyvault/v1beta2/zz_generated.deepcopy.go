@@ -2659,6 +2659,11 @@ func (in *VaultInitParameters) DeepCopyInto(out *VaultInitParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.RbacAuthorizationEnabled != nil {
+		in, out := &in.RbacAuthorizationEnabled, &out.RbacAuthorizationEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.SkuName != nil {
 		in, out := &in.SkuName, &out.SkuName
 		*out = new(string)
@@ -2796,6 +2801,11 @@ func (in *VaultObservation) DeepCopyInto(out *VaultObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.RbacAuthorizationEnabled != nil {
+		in, out := &in.RbacAuthorizationEnabled, &out.RbacAuthorizationEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ResourceGroupName != nil {
 		in, out := &in.ResourceGroupName, &out.ResourceGroupName
 		*out = new(string)
@@ -2896,6 +2906,11 @@ func (in *VaultParameters) DeepCopyInto(out *VaultParameters) {
 	}
 	if in.PurgeProtectionEnabled != nil {
 		in, out := &in.PurgeProtectionEnabled, &out.PurgeProtectionEnabled
+		*out = new(bool)
+		**out = **in
+	}
+	if in.RbacAuthorizationEnabled != nil {
+		in, out := &in.RbacAuthorizationEnabled, &out.RbacAuthorizationEnabled
 		*out = new(bool)
 		**out = **in
 	}

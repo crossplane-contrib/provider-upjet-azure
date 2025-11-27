@@ -18,6 +18,9 @@ type PrivateDNSZoneVirtualNetworkLinkInitParameters struct {
 	// Is auto-registration of virtual machine records in the virtual network in the Private DNS zone enabled? Defaults to false.
 	RegistrationEnabled *bool `json:"registrationEnabled,omitempty" tf:"registration_enabled,omitempty"`
 
+	// Specifies the resolution policy of the Private DNS Zone Virtual Network Link. Possible values are Default and NxDomainRedirect.
+	ResolutionPolicy *string `json:"resolutionPolicy,omitempty" tf:"resolution_policy,omitempty"`
+
 	// A mapping of tags to assign to the resource.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -46,6 +49,9 @@ type PrivateDNSZoneVirtualNetworkLinkObservation struct {
 
 	// Is auto-registration of virtual machine records in the virtual network in the Private DNS zone enabled? Defaults to false.
 	RegistrationEnabled *bool `json:"registrationEnabled,omitempty" tf:"registration_enabled,omitempty"`
+
+	// Specifies the resolution policy of the Private DNS Zone Virtual Network Link. Possible values are Default and NxDomainRedirect.
+	ResolutionPolicy *string `json:"resolutionPolicy,omitempty" tf:"resolution_policy,omitempty"`
 
 	// Specifies the resource group where the Private DNS Zone exists. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -76,6 +82,10 @@ type PrivateDNSZoneVirtualNetworkLinkParameters struct {
 	// Is auto-registration of virtual machine records in the virtual network in the Private DNS zone enabled? Defaults to false.
 	// +kubebuilder:validation:Optional
 	RegistrationEnabled *bool `json:"registrationEnabled,omitempty" tf:"registration_enabled,omitempty"`
+
+	// Specifies the resolution policy of the Private DNS Zone Virtual Network Link. Possible values are Default and NxDomainRedirect.
+	// +kubebuilder:validation:Optional
+	ResolutionPolicy *string `json:"resolutionPolicy,omitempty" tf:"resolution_policy,omitempty"`
 
 	// Specifies the resource group where the Private DNS Zone exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup

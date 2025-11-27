@@ -31,11 +31,12 @@ type LoadBalancerNatRuleInitParameters struct {
 	// The port used for internal connections on the endpoint. Possible values range between 1 and 65535, inclusive.
 	BackendPort *float64 `json:"backendPort,omitempty" tf:"backend_port,omitempty"`
 
-	// Are the Floating IPs enabled for this Load Balancer Rule? A "floating” IP is reassigned to a secondary server in case the primary server fails. Required to configure a SQL AlwaysOn Availability Group. Defaults to false.
 	EnableFloatingIP *bool `json:"enableFloatingIp,omitempty" tf:"enable_floating_ip,omitempty"`
 
-	// Is TCP Reset enabled for this Load Balancer Rule?
 	EnableTCPReset *bool `json:"enableTcpReset,omitempty" tf:"enable_tcp_reset,omitempty"`
+
+	// Are the Floating IPs enabled for this Load Balancer Rule? A "floating" IP is reassigned to a secondary server in case the primary server fails. Required to configure a SQL AlwaysOn Availability Group. Defaults to false.
+	FloatingIPEnabled *bool `json:"floatingIpEnabled,omitempty" tf:"floating_ip_enabled,omitempty"`
 
 	// The name of the frontend IP configuration exposing this rule.
 	FrontendIPConfigurationName *string `json:"frontendIpConfigurationName,omitempty" tf:"frontend_ip_configuration_name,omitempty"`
@@ -66,6 +67,9 @@ type LoadBalancerNatRuleInitParameters struct {
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
+	// Is TCP Reset enabled for this Load Balancer Rule?
+	TCPResetEnabled *bool `json:"tcpResetEnabled,omitempty" tf:"tcp_reset_enabled,omitempty"`
 }
 
 type LoadBalancerNatRuleObservation struct {
@@ -79,11 +83,12 @@ type LoadBalancerNatRuleObservation struct {
 	// The port used for internal connections on the endpoint. Possible values range between 1 and 65535, inclusive.
 	BackendPort *float64 `json:"backendPort,omitempty" tf:"backend_port,omitempty"`
 
-	// Are the Floating IPs enabled for this Load Balancer Rule? A "floating” IP is reassigned to a secondary server in case the primary server fails. Required to configure a SQL AlwaysOn Availability Group. Defaults to false.
 	EnableFloatingIP *bool `json:"enableFloatingIp,omitempty" tf:"enable_floating_ip,omitempty"`
 
-	// Is TCP Reset enabled for this Load Balancer Rule?
 	EnableTCPReset *bool `json:"enableTcpReset,omitempty" tf:"enable_tcp_reset,omitempty"`
+
+	// Are the Floating IPs enabled for this Load Balancer Rule? A "floating" IP is reassigned to a secondary server in case the primary server fails. Required to configure a SQL AlwaysOn Availability Group. Defaults to false.
+	FloatingIPEnabled *bool `json:"floatingIpEnabled,omitempty" tf:"floating_ip_enabled,omitempty"`
 
 	// The ID of the Load Balancer NAT Rule.
 	FrontendIPConfigurationID *string `json:"frontendIpConfigurationId,omitempty" tf:"frontend_ip_configuration_id,omitempty"`
@@ -114,6 +119,9 @@ type LoadBalancerNatRuleObservation struct {
 
 	// The name of the resource group in which to create the resource. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Is TCP Reset enabled for this Load Balancer Rule?
+	TCPResetEnabled *bool `json:"tcpResetEnabled,omitempty" tf:"tcp_reset_enabled,omitempty"`
 }
 
 type LoadBalancerNatRuleParameters struct {
@@ -136,13 +144,15 @@ type LoadBalancerNatRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	BackendPort *float64 `json:"backendPort,omitempty" tf:"backend_port,omitempty"`
 
-	// Are the Floating IPs enabled for this Load Balancer Rule? A "floating” IP is reassigned to a secondary server in case the primary server fails. Required to configure a SQL AlwaysOn Availability Group. Defaults to false.
 	// +kubebuilder:validation:Optional
 	EnableFloatingIP *bool `json:"enableFloatingIp,omitempty" tf:"enable_floating_ip,omitempty"`
 
-	// Is TCP Reset enabled for this Load Balancer Rule?
 	// +kubebuilder:validation:Optional
 	EnableTCPReset *bool `json:"enableTcpReset,omitempty" tf:"enable_tcp_reset,omitempty"`
+
+	// Are the Floating IPs enabled for this Load Balancer Rule? A "floating" IP is reassigned to a secondary server in case the primary server fails. Required to configure a SQL AlwaysOn Availability Group. Defaults to false.
+	// +kubebuilder:validation:Optional
+	FloatingIPEnabled *bool `json:"floatingIpEnabled,omitempty" tf:"floating_ip_enabled,omitempty"`
 
 	// The name of the frontend IP configuration exposing this rule.
 	// +kubebuilder:validation:Optional
@@ -194,6 +204,10 @@ type LoadBalancerNatRuleParameters struct {
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
+	// Is TCP Reset enabled for this Load Balancer Rule?
+	// +kubebuilder:validation:Optional
+	TCPResetEnabled *bool `json:"tcpResetEnabled,omitempty" tf:"tcp_reset_enabled,omitempty"`
 }
 
 // LoadBalancerNatRuleSpec defines the desired state of LoadBalancerNatRule

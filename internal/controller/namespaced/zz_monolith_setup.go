@@ -438,7 +438,6 @@ import (
 	accountmaps "github.com/upbound/provider-azure/v2/internal/controller/namespaced/maps/account"
 	creator "github.com/upbound/provider-azure/v2/internal/controller/namespaced/maps/creator"
 	marketplaceagreement "github.com/upbound/provider-azure/v2/internal/controller/namespaced/marketplaceordering/marketplaceagreement"
-	spatialanchorsaccount "github.com/upbound/provider-azure/v2/internal/controller/namespaced/mixedreality/spatialanchorsaccount"
 	accountnetapp "github.com/upbound/provider-azure/v2/internal/controller/namespaced/netapp/account"
 	pool "github.com/upbound/provider-azure/v2/internal/controller/namespaced/netapp/pool"
 	snapshotnetapp "github.com/upbound/provider-azure/v2/internal/controller/namespaced/netapp/snapshot"
@@ -1182,7 +1181,6 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		accountmaps.Setup,
 		creator.Setup,
 		marketplaceagreement.Setup,
-		spatialanchorsaccount.Setup,
 		accountnetapp.Setup,
 		pool.Setup,
 		snapshotnetapp.Setup,
@@ -1932,7 +1930,6 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		accountmaps.SetupGated,
 		creator.SetupGated,
 		marketplaceagreement.SetupGated,
-		spatialanchorsaccount.SetupGated,
 		accountnetapp.SetupGated,
 		pool.SetupGated,
 		snapshotnetapp.SetupGated,

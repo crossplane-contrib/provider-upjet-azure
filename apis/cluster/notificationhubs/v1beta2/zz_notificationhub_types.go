@@ -126,7 +126,7 @@ type NotificationHubInitParameters struct {
 	// A apns_credential block as defined below.
 	APNSCredential *APNSCredentialInitParameters `json:"apnsCredential,omitempty" tf:"apns_credential,omitempty"`
 
-	// A browser_credential block as defined below.
+	// A browser_credential block as defined below. Changing this forces a new resource to be created.
 	BrowserCredential *BrowserCredentialInitParameters `json:"browserCredential,omitempty" tf:"browser_credential,omitempty"`
 
 	// A gcm_credential block as defined below.
@@ -145,7 +145,7 @@ type NotificationHubObservation struct {
 	// A apns_credential block as defined below.
 	APNSCredential *APNSCredentialObservation `json:"apnsCredential,omitempty" tf:"apns_credential,omitempty"`
 
-	// A browser_credential block as defined below.
+	// A browser_credential block as defined below. Changing this forces a new resource to be created.
 	BrowserCredential *BrowserCredentialObservation `json:"browserCredential,omitempty" tf:"browser_credential,omitempty"`
 
 	// A gcm_credential block as defined below.
@@ -174,7 +174,7 @@ type NotificationHubParameters struct {
 	// +kubebuilder:validation:Optional
 	APNSCredential *APNSCredentialParameters `json:"apnsCredential,omitempty" tf:"apns_credential,omitempty"`
 
-	// A browser_credential block as defined below.
+	// A browser_credential block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	BrowserCredential *BrowserCredentialParameters `json:"browserCredential,omitempty" tf:"browser_credential,omitempty"`
 

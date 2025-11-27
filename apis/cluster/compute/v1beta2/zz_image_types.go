@@ -100,7 +100,7 @@ type ImageInitParameters struct {
 	// One or more data_disk blocks as defined below.
 	DataDisk []DataDiskInitParameters `json:"dataDisk,omitempty" tf:"data_disk,omitempty"`
 
-	// The HyperVGenerationType of the VirtualMachine created from the image as V1, V2. Defaults to V1. Changing this forces a new resource to be created.
+	// The Hyper-V Generation Type of the Virtual Machine created from the image as V1, V2. Defaults to V1. Changing this forces a new resource to be created.
 	HyperVGeneration *string `json:"hyperVGeneration,omitempty" tf:"hyper_v_generation,omitempty"`
 
 	// Specified the supported Azure location where the resource exists. Changing this forces a new resource to be created.
@@ -125,7 +125,7 @@ type ImageObservation struct {
 	// One or more data_disk blocks as defined below.
 	DataDisk []DataDiskObservation `json:"dataDisk,omitempty" tf:"data_disk,omitempty"`
 
-	// The HyperVGenerationType of the VirtualMachine created from the image as V1, V2. Defaults to V1. Changing this forces a new resource to be created.
+	// The Hyper-V Generation Type of the Virtual Machine created from the image as V1, V2. Defaults to V1. Changing this forces a new resource to be created.
 	HyperVGeneration *string `json:"hyperVGeneration,omitempty" tf:"hyper_v_generation,omitempty"`
 
 	// The ID of the Image.
@@ -157,7 +157,7 @@ type ImageParameters struct {
 	// +kubebuilder:validation:Optional
 	DataDisk []DataDiskParameters `json:"dataDisk,omitempty" tf:"data_disk,omitempty"`
 
-	// The HyperVGenerationType of the VirtualMachine created from the image as V1, V2. Defaults to V1. Changing this forces a new resource to be created.
+	// The Hyper-V Generation Type of the Virtual Machine created from the image as V1, V2. Defaults to V1. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	HyperVGeneration *string `json:"hyperVGeneration,omitempty" tf:"hyper_v_generation,omitempty"`
 

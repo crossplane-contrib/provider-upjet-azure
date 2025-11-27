@@ -136,7 +136,7 @@ type BackupPolicyPostgreSQLFlexibleServerRetentionRuleCriteriaInitParameters str
 	// Possible values are AllBackup, FirstOfDay, FirstOfWeek, FirstOfMonth and FirstOfYear. These values mean the first successful backup of the day/week/month/year. Changing this forces a new resource to be created.
 	AbsoluteCriteria *string `json:"absoluteCriteria,omitempty" tf:"absolute_criteria,omitempty"`
 
-	// Possible values are Monday, Tuesday, Thursday, Friday, Saturday and Sunday. Changing this forces a new resource to be created.
+	// Possible values are Monday, Tuesday, Wednesday, Thursday, Friday, Saturday and Sunday. Changing this forces a new resource to be created.
 	// +listType=set
 	DaysOfWeek []*string `json:"daysOfWeek,omitempty" tf:"days_of_week,omitempty"`
 
@@ -158,7 +158,7 @@ type BackupPolicyPostgreSQLFlexibleServerRetentionRuleCriteriaObservation struct
 	// Possible values are AllBackup, FirstOfDay, FirstOfWeek, FirstOfMonth and FirstOfYear. These values mean the first successful backup of the day/week/month/year. Changing this forces a new resource to be created.
 	AbsoluteCriteria *string `json:"absoluteCriteria,omitempty" tf:"absolute_criteria,omitempty"`
 
-	// Possible values are Monday, Tuesday, Thursday, Friday, Saturday and Sunday. Changing this forces a new resource to be created.
+	// Possible values are Monday, Tuesday, Wednesday, Thursday, Friday, Saturday and Sunday. Changing this forces a new resource to be created.
 	// +listType=set
 	DaysOfWeek []*string `json:"daysOfWeek,omitempty" tf:"days_of_week,omitempty"`
 
@@ -181,7 +181,7 @@ type BackupPolicyPostgreSQLFlexibleServerRetentionRuleCriteriaParameters struct 
 	// +kubebuilder:validation:Optional
 	AbsoluteCriteria *string `json:"absoluteCriteria,omitempty" tf:"absolute_criteria,omitempty"`
 
-	// Possible values are Monday, Tuesday, Thursday, Friday, Saturday and Sunday. Changing this forces a new resource to be created.
+	// Possible values are Monday, Tuesday, Wednesday, Thursday, Friday, Saturday and Sunday. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	DaysOfWeek []*string `json:"daysOfWeek,omitempty" tf:"days_of_week,omitempty"`

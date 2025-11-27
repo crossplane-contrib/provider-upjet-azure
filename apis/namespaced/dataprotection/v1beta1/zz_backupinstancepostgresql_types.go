@@ -76,6 +76,9 @@ type BackupInstancePostgreSQLObservation struct {
 	// The location of the source database. Changing this forces a new Backup Instance PostgreSQL to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// The protection state of the Backup Instance PostgreSQL.
+	ProtectionState *string `json:"protectionState,omitempty" tf:"protection_state,omitempty"`
+
 	// The ID of the Backup Vault within which the PostgreSQL Backup Instance should exist. Changing this forces a new Backup Instance PostgreSQL to be created.
 	VaultID *string `json:"vaultId,omitempty" tf:"vault_id,omitempty"`
 }

@@ -78,7 +78,7 @@ type ContainerJobIdentityInitParameters struct {
 	// +kubebuilder:validation:Optional
 	IdentityIdsSelector *v1.NamespacedSelector `json:"identityIdsSelector,omitempty" tf:"-"`
 
-	// The type of identity used for the Container App Job. Possible values are SystemAssigned, UserAssigned and None. Defaults to None.
+	// The type of identity used for the Container App Job. Possible values are SystemAssigned, UserAssigned and None.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -94,7 +94,7 @@ type ContainerJobIdentityObservation struct {
 	// The Tenant ID associated with this Managed Service Identity.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 
-	// The type of identity used for the Container App Job. Possible values are SystemAssigned, UserAssigned and None. Defaults to None.
+	// The type of identity used for the Container App Job. Possible values are SystemAssigned, UserAssigned and None.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -115,7 +115,7 @@ type ContainerJobIdentityParameters struct {
 	// +kubebuilder:validation:Optional
 	IdentityIdsSelector *v1.NamespacedSelector `json:"identityIdsSelector,omitempty" tf:"-"`
 
-	// The type of identity used for the Container App Job. Possible values are SystemAssigned, UserAssigned and None. Defaults to None.
+	// The type of identity used for the Container App Job. Possible values are SystemAssigned, UserAssigned and None.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -135,7 +135,7 @@ type ContainerJobInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ContainerAppEnvironmentIDSelector *v1.NamespacedSelector `json:"containerAppEnvironmentIdSelector,omitempty" tf:"-"`
 
-	// A event_trigger_config block as defined below.
+	// A event_trigger_config block as defined below. Changing this forces a new resource to be created.
 	EventTriggerConfig *EventTriggerConfigInitParameters `json:"eventTriggerConfig,omitempty" tf:"event_trigger_config,omitempty"`
 
 	// A identity block as defined below.
@@ -144,7 +144,7 @@ type ContainerJobInitParameters struct {
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// A manual_trigger_config block as defined below.
+	// A manual_trigger_config block as defined below. Changing this forces a new resource to be created.
 	ManualTriggerConfig *ManualTriggerConfigInitParameters `json:"manualTriggerConfig,omitempty" tf:"manual_trigger_config,omitempty"`
 
 	// One or more registry blocks as defined below.
@@ -156,7 +156,7 @@ type ContainerJobInitParameters struct {
 	// The maximum number of seconds a replica is allowed to run.
 	ReplicaTimeoutInSeconds *float64 `json:"replicaTimeoutInSeconds,omitempty" tf:"replica_timeout_in_seconds,omitempty"`
 
-	// A schedule_trigger_config block as defined below.
+	// A schedule_trigger_config block as defined below. Changing this forces a new resource to be created.
 	ScheduleTriggerConfig *ScheduleTriggerConfigInitParameters `json:"scheduleTriggerConfig,omitempty" tf:"schedule_trigger_config,omitempty"`
 
 	// One or more secret blocks as defined below.
@@ -181,7 +181,7 @@ type ContainerJobObservation struct {
 	// The endpoint for the Container App Job event stream.
 	EventStreamEndpoint *string `json:"eventStreamEndpoint,omitempty" tf:"event_stream_endpoint,omitempty"`
 
-	// A event_trigger_config block as defined below.
+	// A event_trigger_config block as defined below. Changing this forces a new resource to be created.
 	EventTriggerConfig *EventTriggerConfigObservation `json:"eventTriggerConfig,omitempty" tf:"event_trigger_config,omitempty"`
 
 	// The ID of the Container App Job.
@@ -193,7 +193,7 @@ type ContainerJobObservation struct {
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// A manual_trigger_config block as defined below.
+	// A manual_trigger_config block as defined below. Changing this forces a new resource to be created.
 	ManualTriggerConfig *ManualTriggerConfigObservation `json:"manualTriggerConfig,omitempty" tf:"manual_trigger_config,omitempty"`
 
 	// A list of the Public IP Addresses which the Container App uses for outbound network access.
@@ -211,7 +211,7 @@ type ContainerJobObservation struct {
 	// The name of the resource group in which to create the Container App Job. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// A schedule_trigger_config block as defined below.
+	// A schedule_trigger_config block as defined below. Changing this forces a new resource to be created.
 	ScheduleTriggerConfig *ScheduleTriggerConfigObservation `json:"scheduleTriggerConfig,omitempty" tf:"schedule_trigger_config,omitempty"`
 
 	// One or more secret blocks as defined below.
@@ -244,7 +244,7 @@ type ContainerJobParameters struct {
 	// +kubebuilder:validation:Optional
 	ContainerAppEnvironmentIDSelector *v1.NamespacedSelector `json:"containerAppEnvironmentIdSelector,omitempty" tf:"-"`
 
-	// A event_trigger_config block as defined below.
+	// A event_trigger_config block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	EventTriggerConfig *EventTriggerConfigParameters `json:"eventTriggerConfig,omitempty" tf:"event_trigger_config,omitempty"`
 
@@ -256,7 +256,7 @@ type ContainerJobParameters struct {
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// A manual_trigger_config block as defined below.
+	// A manual_trigger_config block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	ManualTriggerConfig *ManualTriggerConfigParameters `json:"manualTriggerConfig,omitempty" tf:"manual_trigger_config,omitempty"`
 
@@ -285,7 +285,7 @@ type ContainerJobParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// A schedule_trigger_config block as defined below.
+	// A schedule_trigger_config block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	ScheduleTriggerConfig *ScheduleTriggerConfigParameters `json:"scheduleTriggerConfig,omitempty" tf:"schedule_trigger_config,omitempty"`
 
@@ -497,7 +497,7 @@ type ContainerLivenessProbeInitParameters struct {
 	// The probe hostname. Defaults to the pod IP address. Setting a value for `Host` in `headers` can be used to override this for `http` and `https` type probes.
 	Host *string `json:"host,omitempty" tf:"host,omitempty"`
 
-	// The time in seconds to wait after the container has started before the probe is started.
+	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between 0 and 60. Defaults to 0 seconds.
 	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between `0` and `60`. Defaults to `1` seconds.
 	InitialDelay *float64 `json:"initialDelay,omitempty" tf:"initial_delay,omitempty"`
 
@@ -535,7 +535,7 @@ type ContainerLivenessProbeObservation struct {
 	// The probe hostname. Defaults to the pod IP address. Setting a value for `Host` in `headers` can be used to override this for `http` and `https` type probes.
 	Host *string `json:"host,omitempty" tf:"host,omitempty"`
 
-	// The time in seconds to wait after the container has started before the probe is started.
+	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between 0 and 60. Defaults to 0 seconds.
 	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between `0` and `60`. Defaults to `1` seconds.
 	InitialDelay *float64 `json:"initialDelay,omitempty" tf:"initial_delay,omitempty"`
 
@@ -579,7 +579,7 @@ type ContainerLivenessProbeParameters struct {
 	// +kubebuilder:validation:Optional
 	Host *string `json:"host,omitempty" tf:"host,omitempty"`
 
-	// The time in seconds to wait after the container has started before the probe is started.
+	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between 0 and 60. Defaults to 0 seconds.
 	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between `0` and `60`. Defaults to `1` seconds.
 	// +kubebuilder:validation:Optional
 	InitialDelay *float64 `json:"initialDelay,omitempty" tf:"initial_delay,omitempty"`
@@ -658,7 +658,7 @@ type ContainerReadinessProbeInitParameters struct {
 	// The probe hostname. Defaults to the pod IP address. Setting a value for `Host` in `headers` can be used to override this for `http` and `https` type probes.
 	Host *string `json:"host,omitempty" tf:"host,omitempty"`
 
-	// The time in seconds to wait after the container has started before the probe is started.
+	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between 0 and 60. Defaults to 0 seconds.
 	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between `0` and `60`. Defaults to `0` seconds.
 	InitialDelay *float64 `json:"initialDelay,omitempty" tf:"initial_delay,omitempty"`
 
@@ -700,7 +700,7 @@ type ContainerReadinessProbeObservation struct {
 	// The probe hostname. Defaults to the pod IP address. Setting a value for `Host` in `headers` can be used to override this for `http` and `https` type probes.
 	Host *string `json:"host,omitempty" tf:"host,omitempty"`
 
-	// The time in seconds to wait after the container has started before the probe is started.
+	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between 0 and 60. Defaults to 0 seconds.
 	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between `0` and `60`. Defaults to `0` seconds.
 	InitialDelay *float64 `json:"initialDelay,omitempty" tf:"initial_delay,omitempty"`
 
@@ -745,7 +745,7 @@ type ContainerReadinessProbeParameters struct {
 	// +kubebuilder:validation:Optional
 	Host *string `json:"host,omitempty" tf:"host,omitempty"`
 
-	// The time in seconds to wait after the container has started before the probe is started.
+	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between 0 and 60. Defaults to 0 seconds.
 	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between `0` and `60`. Defaults to `0` seconds.
 	// +kubebuilder:validation:Optional
 	InitialDelay *float64 `json:"initialDelay,omitempty" tf:"initial_delay,omitempty"`
@@ -829,7 +829,7 @@ type ContainerStartupProbeInitParameters struct {
 	// The probe hostname. Defaults to the pod IP address. Setting a value for `Host` in `headers` can be used to override this for `http` and `https` type probes.
 	Host *string `json:"host,omitempty" tf:"host,omitempty"`
 
-	// The time in seconds to wait after the container has started before the probe is started.
+	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between 0 and 60. Defaults to 0 seconds.
 	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between `0` and `60`. Defaults to `0` seconds.
 	InitialDelay *float64 `json:"initialDelay,omitempty" tf:"initial_delay,omitempty"`
 
@@ -867,7 +867,7 @@ type ContainerStartupProbeObservation struct {
 	// The probe hostname. Defaults to the pod IP address. Setting a value for `Host` in `headers` can be used to override this for `http` and `https` type probes.
 	Host *string `json:"host,omitempty" tf:"host,omitempty"`
 
-	// The time in seconds to wait after the container has started before the probe is started.
+	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between 0 and 60. Defaults to 0 seconds.
 	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between `0` and `60`. Defaults to `0` seconds.
 	InitialDelay *float64 `json:"initialDelay,omitempty" tf:"initial_delay,omitempty"`
 
@@ -911,7 +911,7 @@ type ContainerStartupProbeParameters struct {
 	// +kubebuilder:validation:Optional
 	Host *string `json:"host,omitempty" tf:"host,omitempty"`
 
-	// The time in seconds to wait after the container has started before the probe is started.
+	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between 0 and 60. Defaults to 0 seconds.
 	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between `0` and `60`. Defaults to `0` seconds.
 	// +kubebuilder:validation:Optional
 	InitialDelay *float64 `json:"initialDelay,omitempty" tf:"initial_delay,omitempty"`
@@ -1127,7 +1127,7 @@ type RulesInitParameters struct {
 	// A authentication block as defined below.
 	Authentication []RulesAuthenticationInitParameters `json:"authentication,omitempty" tf:"authentication,omitempty"`
 
-	// Type of the scale rule.
+	// Type of the scale rule. Possible values are activemq, artemis-queue, kafka, pulsar, aws-cloudwatch, aws-dynamodb, aws-dynamodb-streams, aws-kinesis-stream, aws-sqs-queue, azure-app-insights, azure-blob, azure-data-explorer, azure-eventhub, azure-log-analytics, azure-monitor, azure-pipelines, azure-servicebus, azure-queue, cassandra, cpu, cron, datadog, elasticsearch, external, external-push, gcp-stackdriver, gcp-storage, gcp-pubsub, graphite, http, huawei-cloudeye, ibmmq, influxdb, kubernetes-workload, liiklus, memory, metrics-api, mongodb, mssql, mysql, nats-jetstream, stan, tcp, new-relic, openstack-metric, openstack-swift, postgresql, predictkube, prometheus, rabbitmq, redis, redis-cluster, redis-sentinel, redis-streams, redis-cluster-streams, redis-sentinel-streams, selenium-grid, solace-event-queue and github-runner.
 	CustomRuleType *string `json:"customRuleType,omitempty" tf:"custom_rule_type,omitempty"`
 
 	// Metadata properties to describe the scale rule.
@@ -1143,7 +1143,7 @@ type RulesObservation struct {
 	// A authentication block as defined below.
 	Authentication []RulesAuthenticationObservation `json:"authentication,omitempty" tf:"authentication,omitempty"`
 
-	// Type of the scale rule.
+	// Type of the scale rule. Possible values are activemq, artemis-queue, kafka, pulsar, aws-cloudwatch, aws-dynamodb, aws-dynamodb-streams, aws-kinesis-stream, aws-sqs-queue, azure-app-insights, azure-blob, azure-data-explorer, azure-eventhub, azure-log-analytics, azure-monitor, azure-pipelines, azure-servicebus, azure-queue, cassandra, cpu, cron, datadog, elasticsearch, external, external-push, gcp-stackdriver, gcp-storage, gcp-pubsub, graphite, http, huawei-cloudeye, ibmmq, influxdb, kubernetes-workload, liiklus, memory, metrics-api, mongodb, mssql, mysql, nats-jetstream, stan, tcp, new-relic, openstack-metric, openstack-swift, postgresql, predictkube, prometheus, rabbitmq, redis, redis-cluster, redis-sentinel, redis-streams, redis-cluster-streams, redis-sentinel-streams, selenium-grid, solace-event-queue and github-runner.
 	CustomRuleType *string `json:"customRuleType,omitempty" tf:"custom_rule_type,omitempty"`
 
 	// Metadata properties to describe the scale rule.
@@ -1160,7 +1160,7 @@ type RulesParameters struct {
 	// +kubebuilder:validation:Optional
 	Authentication []RulesAuthenticationParameters `json:"authentication,omitempty" tf:"authentication,omitempty"`
 
-	// Type of the scale rule.
+	// Type of the scale rule. Possible values are activemq, artemis-queue, kafka, pulsar, aws-cloudwatch, aws-dynamodb, aws-dynamodb-streams, aws-kinesis-stream, aws-sqs-queue, azure-app-insights, azure-blob, azure-data-explorer, azure-eventhub, azure-log-analytics, azure-monitor, azure-pipelines, azure-servicebus, azure-queue, cassandra, cpu, cron, datadog, elasticsearch, external, external-push, gcp-stackdriver, gcp-storage, gcp-pubsub, graphite, http, huawei-cloudeye, ibmmq, influxdb, kubernetes-workload, liiklus, memory, metrics-api, mongodb, mssql, mysql, nats-jetstream, stan, tcp, new-relic, openstack-metric, openstack-swift, postgresql, predictkube, prometheus, rabbitmq, redis, redis-cluster, redis-sentinel, redis-streams, redis-cluster-streams, redis-sentinel-streams, selenium-grid, solace-event-queue and github-runner.
 	// +kubebuilder:validation:Optional
 	CustomRuleType *string `json:"customRuleType" tf:"custom_rule_type,omitempty"`
 
@@ -1268,8 +1268,8 @@ type TemplateContainerInitParameters struct {
 	// A list of args to pass to the container.
 	Args []*string `json:"args,omitempty" tf:"args,omitempty"`
 
-	// The amount of vCPU to allocate to the container. Possible values include 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, and 2.0.
-	// The amount of vCPU to allocate to the container. Possible values include `0.25`, `0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `1.75`, and `2.0`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.0` / `2.0` or `0.5` / `1.0`. When there's a workload profile specified, there's no such constraint.
+	// The amount of vCPU to allocate to the container.
+	// The amount of vCPU to allocate to the container.
 	CPU *float64 `json:"cpu,omitempty" tf:"cpu,omitempty"`
 
 	// A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
@@ -1286,8 +1286,8 @@ type TemplateContainerInitParameters struct {
 	// A liveness_probe block as detailed below.
 	LivenessProbe []ContainerLivenessProbeInitParameters `json:"livenessProbe,omitempty" tf:"liveness_probe,omitempty"`
 
-	// The amount of memory to allocate to the container. Possible values are 0.5Gi, 1Gi, 1.5Gi, 2Gi, 2.5Gi, 3Gi, 3.5Gi and 4Gi.
-	// The amount of memory to allocate to the container. Possible values include `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`, `2.5Gi`, `3.0Gi`, `3.5Gi`, and `4.0Gi`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.25` / `2.5Gi` or `0.75` / `1.5Gi`. When there's a workload profile specified, there's no such constraint.
+	// The amount of memory to allocate to the container.
+	// The amount of memory to allocate to the container.
 	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
 
 	// The name of the volume to mount. This must match the name of a volume defined in the volume block.
@@ -1310,8 +1310,8 @@ type TemplateContainerObservation struct {
 	// A list of args to pass to the container.
 	Args []*string `json:"args,omitempty" tf:"args,omitempty"`
 
-	// The amount of vCPU to allocate to the container. Possible values include 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, and 2.0.
-	// The amount of vCPU to allocate to the container. Possible values include `0.25`, `0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `1.75`, and `2.0`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.0` / `2.0` or `0.5` / `1.0`. When there's a workload profile specified, there's no such constraint.
+	// The amount of vCPU to allocate to the container.
+	// The amount of vCPU to allocate to the container.
 	CPU *float64 `json:"cpu,omitempty" tf:"cpu,omitempty"`
 
 	// A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
@@ -1332,8 +1332,8 @@ type TemplateContainerObservation struct {
 	// A liveness_probe block as detailed below.
 	LivenessProbe []ContainerLivenessProbeObservation `json:"livenessProbe,omitempty" tf:"liveness_probe,omitempty"`
 
-	// The amount of memory to allocate to the container. Possible values are 0.5Gi, 1Gi, 1.5Gi, 2Gi, 2.5Gi, 3Gi, 3.5Gi and 4Gi.
-	// The amount of memory to allocate to the container. Possible values include `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`, `2.5Gi`, `3.0Gi`, `3.5Gi`, and `4.0Gi`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.25` / `2.5Gi` or `0.75` / `1.5Gi`. When there's a workload profile specified, there's no such constraint.
+	// The amount of memory to allocate to the container.
+	// The amount of memory to allocate to the container.
 	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
 
 	// The name of the volume to mount. This must match the name of a volume defined in the volume block.
@@ -1357,8 +1357,8 @@ type TemplateContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	Args []*string `json:"args,omitempty" tf:"args,omitempty"`
 
-	// The amount of vCPU to allocate to the container. Possible values include 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, and 2.0.
-	// The amount of vCPU to allocate to the container. Possible values include `0.25`, `0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `1.75`, and `2.0`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.0` / `2.0` or `0.5` / `1.0`. When there's a workload profile specified, there's no such constraint.
+	// The amount of vCPU to allocate to the container.
+	// The amount of vCPU to allocate to the container.
 	// +kubebuilder:validation:Optional
 	CPU *float64 `json:"cpu" tf:"cpu,omitempty"`
 
@@ -1380,8 +1380,8 @@ type TemplateContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	LivenessProbe []ContainerLivenessProbeParameters `json:"livenessProbe,omitempty" tf:"liveness_probe,omitempty"`
 
-	// The amount of memory to allocate to the container. Possible values are 0.5Gi, 1Gi, 1.5Gi, 2Gi, 2.5Gi, 3Gi, 3.5Gi and 4Gi.
-	// The amount of memory to allocate to the container. Possible values include `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`, `2.5Gi`, `3.0Gi`, `3.5Gi`, and `4.0Gi`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.25` / `2.5Gi` or `0.75` / `1.5Gi`. When there's a workload profile specified, there's no such constraint.
+	// The amount of memory to allocate to the container.
+	// The amount of memory to allocate to the container.
 	// +kubebuilder:validation:Optional
 	Memory *string `json:"memory" tf:"memory,omitempty"`
 
@@ -1457,8 +1457,8 @@ type TemplateInitContainerInitParameters struct {
 	// A list of args to pass to the container.
 	Args []*string `json:"args,omitempty" tf:"args,omitempty"`
 
-	// The amount of vCPU to allocate to the container. Possible values include 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, and 2.0.
-	// The amount of vCPU to allocate to the container. Possible values include `0.25`, `0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `1.75`, and `2.0`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.0` / `2.0` or `0.5` / `1.0`. When there's a workload profile specified, there's no such constraint.
+	// The amount of vCPU to allocate to the container.
+	// The amount of vCPU to allocate to the container.
 	CPU *float64 `json:"cpu,omitempty" tf:"cpu,omitempty"`
 
 	// A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
@@ -1472,8 +1472,8 @@ type TemplateInitContainerInitParameters struct {
 	// The image to use to create the container.
 	Image *string `json:"image,omitempty" tf:"image,omitempty"`
 
-	// The amount of memory to allocate to the container. Possible values are 0.5Gi, 1Gi, 1.5Gi, 2Gi, 2.5Gi, 3Gi, 3.5Gi and 4Gi.
-	// The amount of memory to allocate to the container. Possible values include `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`, `2.5Gi`, `3.0Gi`, `3.5Gi`, and `4.0Gi`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.25` / `2.5Gi` or `0.75` / `1.5Gi`. When there's a workload profile specified, there's no such constraint.
+	// The amount of memory to allocate to the container.
+	// The amount of memory to allocate to the container.
 	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
 
 	// The name of the volume to mount. This must match the name of a volume defined in the volume block.
@@ -1490,8 +1490,8 @@ type TemplateInitContainerObservation struct {
 	// A list of args to pass to the container.
 	Args []*string `json:"args,omitempty" tf:"args,omitempty"`
 
-	// The amount of vCPU to allocate to the container. Possible values include 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, and 2.0.
-	// The amount of vCPU to allocate to the container. Possible values include `0.25`, `0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `1.75`, and `2.0`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.0` / `2.0` or `0.5` / `1.0`. When there's a workload profile specified, there's no such constraint.
+	// The amount of vCPU to allocate to the container.
+	// The amount of vCPU to allocate to the container.
 	CPU *float64 `json:"cpu,omitempty" tf:"cpu,omitempty"`
 
 	// A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
@@ -1509,8 +1509,8 @@ type TemplateInitContainerObservation struct {
 	// The image to use to create the container.
 	Image *string `json:"image,omitempty" tf:"image,omitempty"`
 
-	// The amount of memory to allocate to the container. Possible values are 0.5Gi, 1Gi, 1.5Gi, 2Gi, 2.5Gi, 3Gi, 3.5Gi and 4Gi.
-	// The amount of memory to allocate to the container. Possible values include `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`, `2.5Gi`, `3.0Gi`, `3.5Gi`, and `4.0Gi`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.25` / `2.5Gi` or `0.75` / `1.5Gi`. When there's a workload profile specified, there's no such constraint.
+	// The amount of memory to allocate to the container.
+	// The amount of memory to allocate to the container.
 	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
 
 	// The name of the volume to mount. This must match the name of a volume defined in the volume block.
@@ -1528,8 +1528,8 @@ type TemplateInitContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	Args []*string `json:"args,omitempty" tf:"args,omitempty"`
 
-	// The amount of vCPU to allocate to the container. Possible values include 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, and 2.0.
-	// The amount of vCPU to allocate to the container. Possible values include `0.25`, `0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `1.75`, and `2.0`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.0` / `2.0` or `0.5` / `1.0`. When there's a workload profile specified, there's no such constraint.
+	// The amount of vCPU to allocate to the container.
+	// The amount of vCPU to allocate to the container.
 	// +kubebuilder:validation:Optional
 	CPU *float64 `json:"cpu,omitempty" tf:"cpu,omitempty"`
 
@@ -1547,8 +1547,8 @@ type TemplateInitContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	Image *string `json:"image" tf:"image,omitempty"`
 
-	// The amount of memory to allocate to the container. Possible values are 0.5Gi, 1Gi, 1.5Gi, 2Gi, 2.5Gi, 3Gi, 3.5Gi and 4Gi.
-	// The amount of memory to allocate to the container. Possible values include `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`, `2.5Gi`, `3.0Gi`, `3.5Gi`, and `4.0Gi`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.25` / `2.5Gi` or `0.75` / `1.5Gi`. When there's a workload profile specified, there's no such constraint.
+	// The amount of memory to allocate to the container.
+	// The amount of memory to allocate to the container.
 	// +kubebuilder:validation:Optional
 	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
 
@@ -1624,7 +1624,7 @@ type TemplateVolumeInitParameters struct {
 	// The name of the `AzureFile` storage. Required when `storage_type` is `AzureFile`
 	StorageName *string `json:"storageName,omitempty" tf:"storage_name,omitempty"`
 
-	// The type of storage to use for the volume. Possible values are AzureFile, EmptyDir and Secret.
+	// The type of storage to use for the volume. Possible values are AzureFile, EmptyDir, NfsAzureFile and Secret. Defaults to EmptyDir.
 	// The type of storage volume. Possible values include `AzureFile` and `EmptyDir`. Defaults to `EmptyDir`.
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 }
@@ -1643,7 +1643,7 @@ type TemplateVolumeObservation struct {
 	// The name of the `AzureFile` storage. Required when `storage_type` is `AzureFile`
 	StorageName *string `json:"storageName,omitempty" tf:"storage_name,omitempty"`
 
-	// The type of storage to use for the volume. Possible values are AzureFile, EmptyDir and Secret.
+	// The type of storage to use for the volume. Possible values are AzureFile, EmptyDir, NfsAzureFile and Secret. Defaults to EmptyDir.
 	// The type of storage volume. Possible values include `AzureFile` and `EmptyDir`. Defaults to `EmptyDir`.
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 }
@@ -1665,7 +1665,7 @@ type TemplateVolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	StorageName *string `json:"storageName,omitempty" tf:"storage_name,omitempty"`
 
-	// The type of storage to use for the volume. Possible values are AzureFile, EmptyDir and Secret.
+	// The type of storage to use for the volume. Possible values are AzureFile, EmptyDir, NfsAzureFile and Secret. Defaults to EmptyDir.
 	// The type of storage volume. Possible values include `AzureFile` and `EmptyDir`. Defaults to `EmptyDir`.
 	// +kubebuilder:validation:Optional
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`

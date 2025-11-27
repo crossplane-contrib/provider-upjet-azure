@@ -15,7 +15,7 @@ import (
 
 type AttachedDatabaseConfigurationInitParameters struct {
 
-	// The resource id of the cluster where the databases you would like to attach reside. Changing this forces a new resource to be created.
+	// The resource id of the cluster where the databases you would like to attach reside.
 	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
 
 	// Specifies the name of the Kusto Cluster for which the configuration will be created. Changing this forces a new resource to be created.
@@ -85,7 +85,7 @@ type AttachedDatabaseConfigurationObservation struct {
 	// The list of databases from the cluster_resource_id which are currently attached to the cluster.
 	AttachedDatabaseNames []*string `json:"attachedDatabaseNames,omitempty" tf:"attached_database_names,omitempty"`
 
-	// The resource id of the cluster where the databases you would like to attach reside. Changing this forces a new resource to be created.
+	// The resource id of the cluster where the databases you would like to attach reside.
 	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
 
 	// Specifies the name of the Kusto Cluster for which the configuration will be created. Changing this forces a new resource to be created.
@@ -118,7 +118,7 @@ type AttachedDatabaseConfigurationObservation struct {
 
 type AttachedDatabaseConfigurationParameters struct {
 
-	// The resource id of the cluster where the databases you would like to attach reside. Changing this forces a new resource to be created.
+	// The resource id of the cluster where the databases you would like to attach reside.
 	// +kubebuilder:validation:Optional
 	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
 

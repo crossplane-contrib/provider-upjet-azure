@@ -363,6 +363,9 @@ spec:
                             type: string
                         type: object
                     type: object
+                  subscriptionId:
+                    description: The subscription ID for the endpoint.
+                    type: string
                 type: object
               initProvider:
                 description: |-
@@ -588,6 +591,9 @@ spec:
                             type: string
                         type: object
                     type: object
+                  subscriptionId:
+                    description: The subscription ID for the endpoint.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -729,6 +735,9 @@ spec:
                     description: The name of the resource group under which the Storage
                       Container has been created. Changing this forces a new resource
                       to be created.
+                    type: string
+                  subscriptionId:
+                    description: The subscription ID for the endpoint.
                     type: string
                 type: object
               conditions:

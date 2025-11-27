@@ -3235,11 +3235,11 @@ type SiteConfigApplicationStackInitParameters struct {
 	// A docker block
 	Docker []ApplicationStackDockerInitParameters `json:"docker,omitempty" tf:"docker,omitempty"`
 
-	// The version of .Net. Possible values are 3.1, 6.0, 7.0, 8.0 and 9.0.
+	// The version of .Net. Possible values are 3.1, 6.0, 7.0, 8.0, 9.0 and 10.0.
 	// The version of .Net. Possible values are `3.1`, `6.0`, `7.0`, `8.0` and `9.0`
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
-	// The version of Java to use. Possible values are 8, 11 & 17 (In-Preview).
+	// The version of Java to use. Possible values are 8, 11, 17 and 21.
 	// The version of Java to use. Possible values are `8`, `11`, `17`, and `21`
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
@@ -3269,11 +3269,11 @@ type SiteConfigApplicationStackObservation struct {
 	// A docker block
 	Docker []ApplicationStackDockerObservation `json:"docker,omitempty" tf:"docker,omitempty"`
 
-	// The version of .Net. Possible values are 3.1, 6.0, 7.0, 8.0 and 9.0.
+	// The version of .Net. Possible values are 3.1, 6.0, 7.0, 8.0, 9.0 and 10.0.
 	// The version of .Net. Possible values are `3.1`, `6.0`, `7.0`, `8.0` and `9.0`
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
-	// The version of Java to use. Possible values are 8, 11 & 17 (In-Preview).
+	// The version of Java to use. Possible values are 8, 11, 17 and 21.
 	// The version of Java to use. Possible values are `8`, `11`, `17`, and `21`
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
@@ -3304,12 +3304,12 @@ type SiteConfigApplicationStackParameters struct {
 	// +kubebuilder:validation:Optional
 	Docker []ApplicationStackDockerParameters `json:"docker,omitempty" tf:"docker,omitempty"`
 
-	// The version of .Net. Possible values are 3.1, 6.0, 7.0, 8.0 and 9.0.
+	// The version of .Net. Possible values are 3.1, 6.0, 7.0, 8.0, 9.0 and 10.0.
 	// The version of .Net. Possible values are `3.1`, `6.0`, `7.0`, `8.0` and `9.0`
 	// +kubebuilder:validation:Optional
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
-	// The version of Java to use. Possible values are 8, 11 & 17 (In-Preview).
+	// The version of Java to use. Possible values are 8, 11, 17 and 21.
 	// The version of Java to use. Possible values are `8`, `11`, `17`, and `21`
 	// +kubebuilder:validation:Optional
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`

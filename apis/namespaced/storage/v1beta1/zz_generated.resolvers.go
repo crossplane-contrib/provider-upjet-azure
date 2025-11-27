@@ -501,7 +501,7 @@ func (mg *ContainerImmutabilityPolicy) ResolveReferences(ctx context.Context, c 
 
 		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageContainerResourceManagerID),
-			Extract:      resource.ExtractParamPath("resource_manager_id", true),
+			Extract:      resource.ExtractResourceID(),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.StorageContainerResourceManagerIDRef,
 			Selector:     mg.Spec.ForProvider.StorageContainerResourceManagerIDSelector,
@@ -1044,19 +1044,19 @@ func (mg *ShareDirectory) ResolveReferences(ctx context.Context, c client.Reader
 		}
 
 		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageShareID),
-			Extract:      resource.ExtractResourceID(),
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageShareURL),
+			Extract:      resource.ExtractParamPath("url", true),
 			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.ForProvider.StorageShareIDRef,
-			Selector:     mg.Spec.ForProvider.StorageShareIDSelector,
+			Reference:    mg.Spec.ForProvider.StorageShareURLRef,
+			Selector:     mg.Spec.ForProvider.StorageShareURLSelector,
 			To:           reference.To{List: l, Managed: m},
 		})
 	}
 	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.StorageShareID")
+		return errors.Wrap(err, "mg.Spec.ForProvider.StorageShareURL")
 	}
-	mg.Spec.ForProvider.StorageShareID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.StorageShareIDRef = rsp.ResolvedReference
+	mg.Spec.ForProvider.StorageShareURL = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StorageShareURLRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta1", "Share", "ShareList")
 		if err != nil {
@@ -1064,19 +1064,19 @@ func (mg *ShareDirectory) ResolveReferences(ctx context.Context, c client.Reader
 		}
 
 		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageShareID),
-			Extract:      resource.ExtractResourceID(),
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageShareURL),
+			Extract:      resource.ExtractParamPath("url", true),
 			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.InitProvider.StorageShareIDRef,
-			Selector:     mg.Spec.InitProvider.StorageShareIDSelector,
+			Reference:    mg.Spec.InitProvider.StorageShareURLRef,
+			Selector:     mg.Spec.InitProvider.StorageShareURLSelector,
 			To:           reference.To{List: l, Managed: m},
 		})
 	}
 	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.StorageShareID")
+		return errors.Wrap(err, "mg.Spec.InitProvider.StorageShareURL")
 	}
-	mg.Spec.InitProvider.StorageShareID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.StorageShareIDRef = rsp.ResolvedReference
+	mg.Spec.InitProvider.StorageShareURL = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageShareURLRef = rsp.ResolvedReference
 
 	return nil
 }

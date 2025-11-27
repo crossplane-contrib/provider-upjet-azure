@@ -151,7 +151,7 @@ type ManagedDiskInitParameters struct {
 	// The maximum number of VMs that can attach to the disk at the same time. Value greater than one indicates a disk that can be mounted on multiple VMs at the same time.
 	MaxShares *float64 `json:"maxShares,omitempty" tf:"max_shares,omitempty"`
 
-	// Policy for accessing the disk via network. Allowed values are AllowAll, AllowPrivate, and DenyAll.
+	// Policy for accessing the disk via network. Allowed values are AllowAll, AllowPrivate, and DenyAll. Defaults to AllowAll.
 	NetworkAccessPolicy *string `json:"networkAccessPolicy,omitempty" tf:"network_access_policy,omitempty"`
 
 	// Specifies if On-Demand Bursting is enabled for the Managed Disk.
@@ -267,7 +267,7 @@ type ManagedDiskObservation struct {
 	// The maximum number of VMs that can attach to the disk at the same time. Value greater than one indicates a disk that can be mounted on multiple VMs at the same time.
 	MaxShares *float64 `json:"maxShares,omitempty" tf:"max_shares,omitempty"`
 
-	// Policy for accessing the disk via network. Allowed values are AllowAll, AllowPrivate, and DenyAll.
+	// Policy for accessing the disk via network. Allowed values are AllowAll, AllowPrivate, and DenyAll. Defaults to AllowAll.
 	NetworkAccessPolicy *string `json:"networkAccessPolicy,omitempty" tf:"network_access_policy,omitempty"`
 
 	// Specifies if On-Demand Bursting is enabled for the Managed Disk.
@@ -389,7 +389,7 @@ type ManagedDiskParameters struct {
 	// +kubebuilder:validation:Optional
 	MaxShares *float64 `json:"maxShares,omitempty" tf:"max_shares,omitempty"`
 
-	// Policy for accessing the disk via network. Allowed values are AllowAll, AllowPrivate, and DenyAll.
+	// Policy for accessing the disk via network. Allowed values are AllowAll, AllowPrivate, and DenyAll. Defaults to AllowAll.
 	// +kubebuilder:validation:Optional
 	NetworkAccessPolicy *string `json:"networkAccessPolicy,omitempty" tf:"network_access_policy,omitempty"`
 

@@ -2061,6 +2061,9 @@ type LinuxWebAppInitParameters struct {
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetIDSelector *v1.NamespacedSelector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
 
+	// Should the traffic for the image pull be routed over virtual network enabled. Defaults to false.
+	VnetImagePullEnabled *bool `json:"vnetImagePullEnabled,omitempty" tf:"vnet_image_pull_enabled,omitempty"`
+
 	// Should the default WebDeploy Basic Authentication publishing credentials enabled. Defaults to true.
 	WebdeployPublishBasicAuthenticationEnabled *bool `json:"webdeployPublishBasicAuthenticationEnabled,omitempty" tf:"webdeploy_publish_basic_authentication_enabled,omitempty"`
 
@@ -2172,6 +2175,9 @@ type LinuxWebAppObservation struct {
 
 	// The subnet id which will be used by this Web App for regional virtual network integration.
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
+
+	// Should the traffic for the image pull be routed over virtual network enabled. Defaults to false.
+	VnetImagePullEnabled *bool `json:"vnetImagePullEnabled,omitempty" tf:"vnet_image_pull_enabled,omitempty"`
 
 	// Should the default WebDeploy Basic Authentication publishing credentials enabled. Defaults to true.
 	WebdeployPublishBasicAuthenticationEnabled *bool `json:"webdeployPublishBasicAuthenticationEnabled,omitempty" tf:"webdeploy_publish_basic_authentication_enabled,omitempty"`
@@ -2315,6 +2321,10 @@ type LinuxWebAppParameters struct {
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetIDSelector *v1.NamespacedSelector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
 
+	// Should the traffic for the image pull be routed over virtual network enabled. Defaults to false.
+	// +kubebuilder:validation:Optional
+	VnetImagePullEnabled *bool `json:"vnetImagePullEnabled,omitempty" tf:"vnet_image_pull_enabled,omitempty"`
+
 	// Should the default WebDeploy Basic Authentication publishing credentials enabled. Defaults to true.
 	// +kubebuilder:validation:Optional
 	WebdeployPublishBasicAuthenticationEnabled *bool `json:"webdeployPublishBasicAuthenticationEnabled,omitempty" tf:"webdeploy_publish_basic_authentication_enabled,omitempty"`
@@ -2339,7 +2349,7 @@ type LinuxWebAppSiteConfigApplicationStackInitParameters struct {
 	// The User Name to use for authentication against the registry to pull the image.
 	DockerRegistryUsername *string `json:"dockerRegistryUsername,omitempty" tf:"docker_registry_username,omitempty"`
 
-	// The version of .NET to use. Possible values include 3.1, 5.0, 6.0, 7.0, 8.0 and 9.0.
+	// The version of .NET to use. Possible values include 3.1, 5.0, 6.0, 7.0, 8.0, 9.0and 10.0.
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
 	// The version of Go to use. Possible values include 1.18, and 1.19.
@@ -2357,7 +2367,7 @@ type LinuxWebAppSiteConfigApplicationStackInitParameters struct {
 	// The version of Node to run. Possible values include 12-lts, 14-lts, 16-lts, 18-lts, 20-lts and 22-lts. This property conflicts with java_version.
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
-	// The version of PHP to run. Possible values are 7.4, 8.0, 8.1, 8.2 and 8.3.
+	// The version of PHP to run. Possible values are 7.4, 8.0, 8.1, 8.2, 8.3 and 8.4.
 	PHPVersion *string `json:"phpVersion,omitempty" tf:"php_version,omitempty"`
 
 	// The version of Python to run. Possible values include 3.13, 3.12, 3.11, 3.10, 3.9, 3.8 and 3.7.
@@ -2378,7 +2388,7 @@ type LinuxWebAppSiteConfigApplicationStackObservation struct {
 	// The User Name to use for authentication against the registry to pull the image.
 	DockerRegistryUsername *string `json:"dockerRegistryUsername,omitempty" tf:"docker_registry_username,omitempty"`
 
-	// The version of .NET to use. Possible values include 3.1, 5.0, 6.0, 7.0, 8.0 and 9.0.
+	// The version of .NET to use. Possible values include 3.1, 5.0, 6.0, 7.0, 8.0, 9.0and 10.0.
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
 	// The version of Go to use. Possible values include 1.18, and 1.19.
@@ -2396,7 +2406,7 @@ type LinuxWebAppSiteConfigApplicationStackObservation struct {
 	// The version of Node to run. Possible values include 12-lts, 14-lts, 16-lts, 18-lts, 20-lts and 22-lts. This property conflicts with java_version.
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
-	// The version of PHP to run. Possible values are 7.4, 8.0, 8.1, 8.2 and 8.3.
+	// The version of PHP to run. Possible values are 7.4, 8.0, 8.1, 8.2, 8.3 and 8.4.
 	PHPVersion *string `json:"phpVersion,omitempty" tf:"php_version,omitempty"`
 
 	// The version of Python to run. Possible values include 3.13, 3.12, 3.11, 3.10, 3.9, 3.8 and 3.7.
@@ -2424,7 +2434,7 @@ type LinuxWebAppSiteConfigApplicationStackParameters struct {
 	// +kubebuilder:validation:Optional
 	DockerRegistryUsername *string `json:"dockerRegistryUsername,omitempty" tf:"docker_registry_username,omitempty"`
 
-	// The version of .NET to use. Possible values include 3.1, 5.0, 6.0, 7.0, 8.0 and 9.0.
+	// The version of .NET to use. Possible values include 3.1, 5.0, 6.0, 7.0, 8.0, 9.0and 10.0.
 	// +kubebuilder:validation:Optional
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
@@ -2448,7 +2458,7 @@ type LinuxWebAppSiteConfigApplicationStackParameters struct {
 	// +kubebuilder:validation:Optional
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
-	// The version of PHP to run. Possible values are 7.4, 8.0, 8.1, 8.2 and 8.3.
+	// The version of PHP to run. Possible values are 7.4, 8.0, 8.1, 8.2, 8.3 and 8.4.
 	// +kubebuilder:validation:Optional
 	PHPVersion *string `json:"phpVersion,omitempty" tf:"php_version,omitempty"`
 
@@ -2753,7 +2763,7 @@ type LinuxWebAppSiteConfigInitParameters struct {
 	// The Default action for traffic that does not match any scm_ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
 	ScmIPRestrictionDefaultAction *string `json:"scmIpRestrictionDefaultAction,omitempty" tf:"scm_ip_restriction_default_action,omitempty"`
 
-	// The configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
+	// The configures the minimum version of TLS required for SSL requests to the SCM site Possible values are 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
 	ScmMinimumTLSVersion *string `json:"scmMinimumTlsVersion,omitempty" tf:"scm_minimum_tls_version,omitempty"`
 
 	// Should the Linux Web App ip_restriction configuration be used for the SCM also.
@@ -2853,7 +2863,7 @@ type LinuxWebAppSiteConfigObservation struct {
 	// The Default action for traffic that does not match any scm_ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
 	ScmIPRestrictionDefaultAction *string `json:"scmIpRestrictionDefaultAction,omitempty" tf:"scm_ip_restriction_default_action,omitempty"`
 
-	// The configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
+	// The configures the minimum version of TLS required for SSL requests to the SCM site Possible values are 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
 	ScmMinimumTLSVersion *string `json:"scmMinimumTlsVersion,omitempty" tf:"scm_minimum_tls_version,omitempty"`
 
 	ScmType *string `json:"scmType,omitempty" tf:"scm_type,omitempty"`
@@ -2974,7 +2984,7 @@ type LinuxWebAppSiteConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	ScmIPRestrictionDefaultAction *string `json:"scmIpRestrictionDefaultAction,omitempty" tf:"scm_ip_restriction_default_action,omitempty"`
 
-	// The configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
+	// The configures the minimum version of TLS required for SSL requests to the SCM site Possible values are 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
 	// +kubebuilder:validation:Optional
 	ScmMinimumTLSVersion *string `json:"scmMinimumTlsVersion,omitempty" tf:"scm_minimum_tls_version,omitempty"`
 

@@ -1542,6 +1542,11 @@ func (in *PoolInitParameters) DeepCopyInto(out *PoolInitParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.CustomThroughputMibps != nil {
+		in, out := &in.CustomThroughputMibps, &out.CustomThroughputMibps
+		*out = new(float64)
+		**out = **in
+	}
 	if in.EncryptionType != nil {
 		in, out := &in.EncryptionType, &out.EncryptionType
 		*out = new(string)
@@ -1640,6 +1645,11 @@ func (in *PoolObservation) DeepCopyInto(out *PoolObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.CustomThroughputMibps != nil {
+		in, out := &in.CustomThroughputMibps, &out.CustomThroughputMibps
+		*out = new(float64)
+		**out = **in
+	}
 	if in.EncryptionType != nil {
 		in, out := &in.EncryptionType, &out.EncryptionType
 		*out = new(string)
@@ -1724,6 +1734,11 @@ func (in *PoolParameters) DeepCopyInto(out *PoolParameters) {
 	if in.CoolAccessEnabled != nil {
 		in, out := &in.CoolAccessEnabled, &out.CoolAccessEnabled
 		*out = new(bool)
+		**out = **in
+	}
+	if in.CustomThroughputMibps != nil {
+		in, out := &in.CustomThroughputMibps, &out.CustomThroughputMibps
+		*out = new(float64)
 		**out = **in
 	}
 	if in.EncryptionType != nil {

@@ -18,6 +18,9 @@ type QueueInitParameters struct {
 	// A mapping of MetaData which should be assigned to this Storage Queue.
 	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
+
+	// The name of the Storage Account where the Storage Queue should be created.
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 }
 
 type QueueObservation struct {
@@ -32,8 +35,14 @@ type QueueObservation struct {
 	// The Resource Manager ID of this Storage Queue.
 	ResourceManagerID *string `json:"resourceManagerId,omitempty" tf:"resource_manager_id,omitempty"`
 
-	// Specifies the Storage Account in which the Storage Queue should exist. Changing this forces a new resource to be created.
+	// The name of the Storage Account where the Storage Queue should be created.
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+
+	// The name of the Storage Account where the Storage Queue should be created. This property is deprecated in favour of storage_account_id.
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
+
+	// The data plane URL of the Storage Queue in the format of <storage queue endpoint>/<queue name>. E.g. https://example.queue.core.windows.net/queue1.
+	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
 type QueueParameters struct {
@@ -43,7 +52,11 @@ type QueueParameters struct {
 	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
-	// Specifies the Storage Account in which the Storage Queue should exist. Changing this forces a new resource to be created.
+	// The name of the Storage Account where the Storage Queue should be created.
+	// +kubebuilder:validation:Optional
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+
+	// The name of the Storage Account where the Storage Queue should be created. This property is deprecated in favour of storage_account_id.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
 	// +kubebuilder:validation:Optional
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`

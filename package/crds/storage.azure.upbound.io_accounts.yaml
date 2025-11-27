@@ -2821,7 +2821,7 @@ spec:
                         description: Specifies the default share level permissions
                           applied to all users. Possible values are StorageFileDataSmbShareReader,
                           StorageFileDataSmbShareContributor, StorageFileDataSmbShareElevatedContributor,
-                          or None.
+                          or None. Defaults to None.
                         type: string
                       directoryType:
                         description: Specifies the directory service used. Possible
@@ -3015,8 +3015,7 @@ spec:
                           A policy can only be created in a Disabled or Unlocked state
                           and can be toggled between the two states. Only a policy
                           in an Unlocked state can transition to a Locked state which
-                          cannot be reverted. Changing from Locked forces a new resource
-                          to be created.
+                          cannot be reverted.
                         type: string
                     type: object
                   infrastructureEncryptionEnabled:
@@ -3040,8 +3039,8 @@ spec:
                     type: string
                   minTlsVersion:
                     description: The minimum supported TLS version for the storage
-                      account. Possible values are TLS1_0, TLS1_1, and TLS1_2. Defaults
-                      to TLS1_2 for new storage accounts.
+                      account. Possible values are TLS1_0, TLS1_1, TLS1_2 and TLS1_3.
+                      Defaults to TLS1_2 for new storage accounts.
                     type: string
                   networkRules:
                     description: A network_rules block as documented below.
@@ -3172,6 +3171,12 @@ spec:
                     description: Is NFSv3 protocol enabled? Changing this forces a
                       new resource to be created. Defaults to false.
                     type: boolean
+                  provisionedBillingModelVersion:
+                    description: Specifies the version of the provisioned billing
+                      model (e.g. when account_kind = "FileStorage" for Storage File).
+                      Possible value is V2. Changing this forces a new resource to
+                      be created.
+                    type: string
                   publicNetworkAccessEnabled:
                     description: Whether the public network access is enabled? Defaults
                       to true.
@@ -3383,8 +3388,8 @@ spec:
                     description: A sas_policy block as defined below.
                     properties:
                       expirationAction:
-                        description: The SAS expiration action. The only possible
-                          value is Log at this moment. Defaults to Log.
+                        description: The SAS expiration action. Possible values are
+                          Log and Block. Defaults to Log.
                         type: string
                       expirationPeriod:
                         description: The SAS expiration period in format of DD.HH:MM:SS.
@@ -3592,7 +3597,7 @@ spec:
                         description: Specifies the default share level permissions
                           applied to all users. Possible values are StorageFileDataSmbShareReader,
                           StorageFileDataSmbShareContributor, StorageFileDataSmbShareElevatedContributor,
-                          or None.
+                          or None. Defaults to None.
                         type: string
                       directoryType:
                         description: Specifies the directory service used. Possible
@@ -3786,8 +3791,7 @@ spec:
                           A policy can only be created in a Disabled or Unlocked state
                           and can be toggled between the two states. Only a policy
                           in an Unlocked state can transition to a Locked state which
-                          cannot be reverted. Changing from Locked forces a new resource
-                          to be created.
+                          cannot be reverted.
                         type: string
                     type: object
                   infrastructureEncryptionEnabled:
@@ -3811,8 +3815,8 @@ spec:
                     type: string
                   minTlsVersion:
                     description: The minimum supported TLS version for the storage
-                      account. Possible values are TLS1_0, TLS1_1, and TLS1_2. Defaults
-                      to TLS1_2 for new storage accounts.
+                      account. Possible values are TLS1_0, TLS1_1, TLS1_2 and TLS1_3.
+                      Defaults to TLS1_2 for new storage accounts.
                     type: string
                   networkRules:
                     description: A network_rules block as documented below.
@@ -3943,6 +3947,12 @@ spec:
                     description: Is NFSv3 protocol enabled? Changing this forces a
                       new resource to be created. Defaults to false.
                     type: boolean
+                  provisionedBillingModelVersion:
+                    description: Specifies the version of the provisioned billing
+                      model (e.g. when account_kind = "FileStorage" for Storage File).
+                      Possible value is V2. Changing this forces a new resource to
+                      be created.
+                    type: string
                   publicNetworkAccessEnabled:
                     description: Whether the public network access is enabled? Defaults
                       to true.
@@ -4073,8 +4083,8 @@ spec:
                     description: A sas_policy block as defined below.
                     properties:
                       expirationAction:
-                        description: The SAS expiration action. The only possible
-                          value is Log at this moment. Defaults to Log.
+                        description: The SAS expiration action. Possible values are
+                          Log and Block. Defaults to Log.
                         type: string
                       expirationPeriod:
                         description: The SAS expiration period in format of DD.HH:MM:SS.
@@ -4373,7 +4383,7 @@ spec:
                         description: Specifies the default share level permissions
                           applied to all users. Possible values are StorageFileDataSmbShareReader,
                           StorageFileDataSmbShareContributor, StorageFileDataSmbShareElevatedContributor,
-                          or None.
+                          or None. Defaults to None.
                         type: string
                       directoryType:
                         description: Specifies the directory service used. Possible
@@ -4578,8 +4588,7 @@ spec:
                           A policy can only be created in a Disabled or Unlocked state
                           and can be toggled between the two states. Only a policy
                           in an Unlocked state can transition to a Locked state which
-                          cannot be reverted. Changing from Locked forces a new resource
-                          to be created.
+                          cannot be reverted.
                         type: string
                     type: object
                   infrastructureEncryptionEnabled:
@@ -4603,8 +4612,8 @@ spec:
                     type: string
                   minTlsVersion:
                     description: The minimum supported TLS version for the storage
-                      account. Possible values are TLS1_0, TLS1_1, and TLS1_2. Defaults
-                      to TLS1_2 for new storage accounts.
+                      account. Possible values are TLS1_0, TLS1_1, TLS1_2 and TLS1_3.
+                      Defaults to TLS1_2 for new storage accounts.
                     type: string
                   networkRules:
                     description: A network_rules block as documented below.
@@ -4786,6 +4795,12 @@ spec:
                     description: The microsoft routing hostname with port if applicable
                       for web storage in the primary location.
                     type: string
+                  provisionedBillingModelVersion:
+                    description: Specifies the version of the provisioned billing
+                      model (e.g. when account_kind = "FileStorage" for Storage File).
+                      Possible value is V2. Changing this forces a new resource to
+                      be created.
+                    type: string
                   publicNetworkAccessEnabled:
                     description: Whether the public network access is enabled? Defaults
                       to true.
@@ -4921,8 +4936,8 @@ spec:
                     description: A sas_policy block as defined below.
                     properties:
                       expirationAction:
-                        description: The SAS expiration action. The only possible
-                          value is Log at this moment. Defaults to Log.
+                        description: The SAS expiration action. Possible values are
+                          Log and Block. Defaults to Log.
                         type: string
                       expirationPeriod:
                         description: The SAS expiration period in format of DD.HH:MM:SS.

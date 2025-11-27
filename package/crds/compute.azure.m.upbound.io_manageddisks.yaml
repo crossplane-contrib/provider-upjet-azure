@@ -178,7 +178,8 @@ spec:
                     type: number
                   networkAccessPolicy:
                     description: Policy for accessing the disk via network. Allowed
-                      values are AllowAll, AllowPrivate, and DenyAll.
+                      values are AllowAll, AllowPrivate, and DenyAll. Defaults to
+                      AllowAll.
                     type: string
                   onDemandBurstingEnabled:
                     description: Specifies if On-Demand Bursting is enabled for the
@@ -566,7 +567,8 @@ spec:
                     type: number
                   networkAccessPolicy:
                     description: Policy for accessing the disk via network. Allowed
-                      values are AllowAll, AllowPrivate, and DenyAll.
+                      values are AllowAll, AllowPrivate, and DenyAll. Defaults to
+                      AllowAll.
                     type: string
                   onDemandBurstingEnabled:
                     description: Specifies if On-Demand Bursting is enabled for the
@@ -933,7 +935,8 @@ spec:
                     type: number
                   networkAccessPolicy:
                     description: Policy for accessing the disk via network. Allowed
-                      values are AllowAll, AllowPrivate, and DenyAll.
+                      values are AllowAll, AllowPrivate, and DenyAll. Defaults to
+                      AllowAll.
                     type: string
                   onDemandBurstingEnabled:
                     description: Specifies if On-Demand Bursting is enabled for the

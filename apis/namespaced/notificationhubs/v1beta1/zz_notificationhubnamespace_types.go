@@ -16,14 +16,17 @@ import (
 
 type NotificationHubNamespaceInitParameters struct {
 
-	// Is this Notification Hub Namespace enabled? Defaults to true.
+	// Is this Notification Hub Namespace enabled? Defaults to true. Changing this forces a new resource to be created.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The Azure Region in which this Notification Hub Namespace should be created. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The Type of Namespace - possible values are Messaging or NotificationHub.
+	// The Type of Namespace - possible values are Messaging or NotificationHub. Changing this forces a new resource to be created.
 	NamespaceType *string `json:"namespaceType,omitempty" tf:"namespace_type,omitempty"`
+
+	// The allowed Replication Region for the Notification Hub Namespace. Possible values are Default, None, AustraliaEast, BrazilSouth, NorthEurope, SouthAfricaNorth, SouthEastAsia, WestUs2. Changing this forces a new resource to be created. Defaults to Default.
+	ReplicationRegion *string `json:"replicationRegion,omitempty" tf:"replication_region,omitempty"`
 
 	// The name of the SKU to use for this Notification Hub Namespace. Possible values are Free, Basic or Standard.
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
@@ -31,11 +34,14 @@ type NotificationHubNamespaceInitParameters struct {
 	// A mapping of tags to assign to the resource.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Is Zone Redundancy Enabled for the Notification Hub Namespace. Defaults to false. Changing this forces a new resource to be created.
+	ZoneRedundancyEnabled *bool `json:"zoneRedundancyEnabled,omitempty" tf:"zone_redundancy_enabled,omitempty"`
 }
 
 type NotificationHubNamespaceObservation struct {
 
-	// Is this Notification Hub Namespace enabled? Defaults to true.
+	// Is this Notification Hub Namespace enabled? Defaults to true. Changing this forces a new resource to be created.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The ID of the Notification Hub Namespace.
@@ -44,8 +50,11 @@ type NotificationHubNamespaceObservation struct {
 	// The Azure Region in which this Notification Hub Namespace should be created. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The Type of Namespace - possible values are Messaging or NotificationHub.
+	// The Type of Namespace - possible values are Messaging or NotificationHub. Changing this forces a new resource to be created.
 	NamespaceType *string `json:"namespaceType,omitempty" tf:"namespace_type,omitempty"`
+
+	// The allowed Replication Region for the Notification Hub Namespace. Possible values are Default, None, AustraliaEast, BrazilSouth, NorthEurope, SouthAfricaNorth, SouthEastAsia, WestUs2. Changing this forces a new resource to be created. Defaults to Default.
+	ReplicationRegion *string `json:"replicationRegion,omitempty" tf:"replication_region,omitempty"`
 
 	// The name of the Resource Group in which the Notification Hub Namespace should exist. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -59,11 +68,14 @@ type NotificationHubNamespaceObservation struct {
 	// A mapping of tags to assign to the resource.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Is Zone Redundancy Enabled for the Notification Hub Namespace. Defaults to false. Changing this forces a new resource to be created.
+	ZoneRedundancyEnabled *bool `json:"zoneRedundancyEnabled,omitempty" tf:"zone_redundancy_enabled,omitempty"`
 }
 
 type NotificationHubNamespaceParameters struct {
 
-	// Is this Notification Hub Namespace enabled? Defaults to true.
+	// Is this Notification Hub Namespace enabled? Defaults to true. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
@@ -71,9 +83,13 @@ type NotificationHubNamespaceParameters struct {
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The Type of Namespace - possible values are Messaging or NotificationHub.
+	// The Type of Namespace - possible values are Messaging or NotificationHub. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	NamespaceType *string `json:"namespaceType,omitempty" tf:"namespace_type,omitempty"`
+
+	// The allowed Replication Region for the Notification Hub Namespace. Possible values are Default, None, AustraliaEast, BrazilSouth, NorthEurope, SouthAfricaNorth, SouthEastAsia, WestUs2. Changing this forces a new resource to be created. Defaults to Default.
+	// +kubebuilder:validation:Optional
+	ReplicationRegion *string `json:"replicationRegion,omitempty" tf:"replication_region,omitempty"`
 
 	// The name of the Resource Group in which the Notification Hub Namespace should exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
@@ -96,6 +112,10 @@ type NotificationHubNamespaceParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Is Zone Redundancy Enabled for the Notification Hub Namespace. Defaults to false. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	ZoneRedundancyEnabled *bool `json:"zoneRedundancyEnabled,omitempty" tf:"zone_redundancy_enabled,omitempty"`
 }
 
 // NotificationHubNamespaceSpec defines the desired state of NotificationHubNamespace

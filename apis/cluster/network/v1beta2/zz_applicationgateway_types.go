@@ -514,6 +514,9 @@ type BackendHTTPSettingsInitParameters struct {
 	// Is Cookie-Based Affinity enabled? Possible values are Enabled and Disabled.
 	CookieBasedAffinity *string `json:"cookieBasedAffinity,omitempty" tf:"cookie_based_affinity,omitempty"`
 
+	// Whether to use a dedicated backend connection. Defaults to false.
+	DedicatedBackendConnectionEnabled *bool `json:"dedicatedBackendConnectionEnabled,omitempty" tf:"dedicated_backend_connection_enabled,omitempty"`
+
 	// Host header to be sent to the backend servers. Cannot be set if pick_host_name_from_backend_address is set to true.
 	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
 
@@ -555,6 +558,9 @@ type BackendHTTPSettingsObservation struct {
 
 	// Is Cookie-Based Affinity enabled? Possible values are Enabled and Disabled.
 	CookieBasedAffinity *string `json:"cookieBasedAffinity,omitempty" tf:"cookie_based_affinity,omitempty"`
+
+	// Whether to use a dedicated backend connection. Defaults to false.
+	DedicatedBackendConnectionEnabled *bool `json:"dedicatedBackendConnectionEnabled,omitempty" tf:"dedicated_backend_connection_enabled,omitempty"`
 
 	// Host header to be sent to the backend servers. Cannot be set if pick_host_name_from_backend_address is set to true.
 	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
@@ -607,6 +613,10 @@ type BackendHTTPSettingsParameters struct {
 	// Is Cookie-Based Affinity enabled? Possible values are Enabled and Disabled.
 	// +kubebuilder:validation:Optional
 	CookieBasedAffinity *string `json:"cookieBasedAffinity" tf:"cookie_based_affinity,omitempty"`
+
+	// Whether to use a dedicated backend connection. Defaults to false.
+	// +kubebuilder:validation:Optional
+	DedicatedBackendConnectionEnabled *bool `json:"dedicatedBackendConnectionEnabled,omitempty" tf:"dedicated_backend_connection_enabled,omitempty"`
 
 	// Host header to be sent to the backend servers. Cannot be set if pick_host_name_from_backend_address is set to true.
 	// +kubebuilder:validation:Optional
@@ -2243,7 +2253,7 @@ type SkuInitParameters struct {
 	// The Capacity of the SKU to use for this Application Gateway. When using a V1 SKU this value must be between 1 and 32, and 1 to 125 for a V2 SKU. When using a Basic SKU this property must be between 1 and 2. This property is optional if autoscale_configuration is set.
 	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
 
-	// The Name of the SKU to use for this Application Gateway. Possible values are Basic, Standard_v2, and WAF_v2.
+	// The Name of the SKU to use for this Application Gateway. Possible values are Basic, Standard_Small, Standard_Medium, Standard_Large, Standard_v2, WAF_Large, WAF_Medium and WAF_v2.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The Tier of the SKU to use for this Application Gateway. Possible values are Basic, Standard_v2, and WAF_v2.
@@ -2255,7 +2265,7 @@ type SkuObservation struct {
 	// The Capacity of the SKU to use for this Application Gateway. When using a V1 SKU this value must be between 1 and 32, and 1 to 125 for a V2 SKU. When using a Basic SKU this property must be between 1 and 2. This property is optional if autoscale_configuration is set.
 	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
 
-	// The Name of the SKU to use for this Application Gateway. Possible values are Basic, Standard_v2, and WAF_v2.
+	// The Name of the SKU to use for this Application Gateway. Possible values are Basic, Standard_Small, Standard_Medium, Standard_Large, Standard_v2, WAF_Large, WAF_Medium and WAF_v2.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The Tier of the SKU to use for this Application Gateway. Possible values are Basic, Standard_v2, and WAF_v2.
@@ -2268,7 +2278,7 @@ type SkuParameters struct {
 	// +kubebuilder:validation:Optional
 	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
 
-	// The Name of the SKU to use for this Application Gateway. Possible values are Basic, Standard_v2, and WAF_v2.
+	// The Name of the SKU to use for this Application Gateway. Possible values are Basic, Standard_Small, Standard_Medium, Standard_Large, Standard_v2, WAF_Large, WAF_Medium and WAF_v2.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 

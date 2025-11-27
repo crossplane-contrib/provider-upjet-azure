@@ -105,7 +105,7 @@ type BackupPolicyBlobStorageRetentionRuleCriteriaInitParameters struct {
 	// +listType=set
 	DaysOfWeek []*string `json:"daysOfWeek,omitempty" tf:"days_of_week,omitempty"`
 
-	// Possible values are January, February, March, April, May, June, July, August, September, October, November and December. Changing this forces a new Backup Policy Blob Storage to be created.
+	// Possible values are January, February, March, April, May, June, July, August, September, October, November and December. Changing this forces a new Backup Policy Blob Storage to be created. When this property is specified, exactly one of the following must also be set: days_of_month, days_of_week
 	// +listType=set
 	MonthsOfYear []*string `json:"monthsOfYear,omitempty" tf:"months_of_year,omitempty"`
 
@@ -113,7 +113,7 @@ type BackupPolicyBlobStorageRetentionRuleCriteriaInitParameters struct {
 	// +listType=set
 	ScheduledBackupTimes []*string `json:"scheduledBackupTimes,omitempty" tf:"scheduled_backup_times,omitempty"`
 
-	// Possible values are First, Second, Third, Fourth and Last. Changing this forces a new Backup Policy Blob Storage to be created.
+	// Possible values are First, Second, Third, Fourth and Last. Changing this forces a new Backup Policy Blob Storage to be created. When this property is specified, exactly one of the following must also be set: days_of_month, days_of_week
 	// +listType=set
 	WeeksOfMonth []*string `json:"weeksOfMonth,omitempty" tf:"weeks_of_month,omitempty"`
 }
@@ -131,7 +131,7 @@ type BackupPolicyBlobStorageRetentionRuleCriteriaObservation struct {
 	// +listType=set
 	DaysOfWeek []*string `json:"daysOfWeek,omitempty" tf:"days_of_week,omitempty"`
 
-	// Possible values are January, February, March, April, May, June, July, August, September, October, November and December. Changing this forces a new Backup Policy Blob Storage to be created.
+	// Possible values are January, February, March, April, May, June, July, August, September, October, November and December. Changing this forces a new Backup Policy Blob Storage to be created. When this property is specified, exactly one of the following must also be set: days_of_month, days_of_week
 	// +listType=set
 	MonthsOfYear []*string `json:"monthsOfYear,omitempty" tf:"months_of_year,omitempty"`
 
@@ -139,7 +139,7 @@ type BackupPolicyBlobStorageRetentionRuleCriteriaObservation struct {
 	// +listType=set
 	ScheduledBackupTimes []*string `json:"scheduledBackupTimes,omitempty" tf:"scheduled_backup_times,omitempty"`
 
-	// Possible values are First, Second, Third, Fourth and Last. Changing this forces a new Backup Policy Blob Storage to be created.
+	// Possible values are First, Second, Third, Fourth and Last. Changing this forces a new Backup Policy Blob Storage to be created. When this property is specified, exactly one of the following must also be set: days_of_month, days_of_week
 	// +listType=set
 	WeeksOfMonth []*string `json:"weeksOfMonth,omitempty" tf:"weeks_of_month,omitempty"`
 }
@@ -160,7 +160,7 @@ type BackupPolicyBlobStorageRetentionRuleCriteriaParameters struct {
 	// +listType=set
 	DaysOfWeek []*string `json:"daysOfWeek,omitempty" tf:"days_of_week,omitempty"`
 
-	// Possible values are January, February, March, April, May, June, July, August, September, October, November and December. Changing this forces a new Backup Policy Blob Storage to be created.
+	// Possible values are January, February, March, April, May, June, July, August, September, October, November and December. Changing this forces a new Backup Policy Blob Storage to be created. When this property is specified, exactly one of the following must also be set: days_of_month, days_of_week
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	MonthsOfYear []*string `json:"monthsOfYear,omitempty" tf:"months_of_year,omitempty"`
@@ -170,7 +170,7 @@ type BackupPolicyBlobStorageRetentionRuleCriteriaParameters struct {
 	// +listType=set
 	ScheduledBackupTimes []*string `json:"scheduledBackupTimes,omitempty" tf:"scheduled_backup_times,omitempty"`
 
-	// Possible values are First, Second, Third, Fourth and Last. Changing this forces a new Backup Policy Blob Storage to be created.
+	// Possible values are First, Second, Third, Fourth and Last. Changing this forces a new Backup Policy Blob Storage to be created. When this property is specified, exactly one of the following must also be set: days_of_month, days_of_week
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	WeeksOfMonth []*string `json:"weeksOfMonth,omitempty" tf:"weeks_of_month,omitempty"`

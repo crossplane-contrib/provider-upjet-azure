@@ -73,6 +73,23 @@ spec:
                     - key
                     - name
                     type: object
+                  identity:
+                    description: An identity block as defined below.
+                    properties:
+                      identityIds:
+                        description: '- A list of one or more Resource IDs for User
+                          Assigned Managed identities to assign. Required when type
+                          is set to UserAssigned or SystemAssigned, UserAssigned.'
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      type:
+                        description: The type of managed identity to assign. Possible
+                          values are SystemAssigned, UserAssigned, and SystemAssigned,
+                          UserAssigned (to enable both).
+                        type: string
+                    type: object
                   infrastructureResourceGroupName:
                     description: |-
                       Name of the platform-managed resource group created for the Managed Environment to host infrastructure resources. Changing this forces a new resource to be created.
@@ -353,6 +370,11 @@ spec:
                       Should mutual transport layer security (mTLS) be enabled? Defaults to false.
                       Should mutual transport layer security (mTLS) be enabled? Defaults to `false`. **Note:** This feature is in public preview. Enabling mTLS for your applications may increase response latency and reduce maximum throughput in high-load scenarios.
                     type: boolean
+                  publicNetworkAccess:
+                    description: |-
+                      The public network access setting for the Container App Environment. Possible values are Enabled and Disabled.
+                      The public network access setting for the Container App Environment.
+                    type: string
                   resourceGroupName:
                     description: The name of the resource group in which the Container
                       App Environment is to be created. Changing this forces a new
@@ -501,6 +523,23 @@ spec:
                     - key
                     - name
                     type: object
+                  identity:
+                    description: An identity block as defined below.
+                    properties:
+                      identityIds:
+                        description: '- A list of one or more Resource IDs for User
+                          Assigned Managed identities to assign. Required when type
+                          is set to UserAssigned or SystemAssigned, UserAssigned.'
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      type:
+                        description: The type of managed identity to assign. Possible
+                          values are SystemAssigned, UserAssigned, and SystemAssigned,
+                          UserAssigned (to enable both).
+                        type: string
+                    type: object
                   infrastructureResourceGroupName:
                     description: |-
                       Name of the platform-managed resource group created for the Managed Environment to host infrastructure resources. Changing this forces a new resource to be created.
@@ -781,6 +820,11 @@ spec:
                       Should mutual transport layer security (mTLS) be enabled? Defaults to false.
                       Should mutual transport layer security (mTLS) be enabled? Defaults to `false`. **Note:** This feature is in public preview. Enabling mTLS for your applications may increase response latency and reduce maximum throughput in high-load scenarios.
                     type: boolean
+                  publicNetworkAccess:
+                    description: |-
+                      The public network access setting for the Container App Environment. Possible values are Enabled and Disabled.
+                      The public network access setting for the Container App Environment.
+                    type: string
                   tags:
                     additionalProperties:
                       type: string
@@ -901,6 +945,29 @@ spec:
                   id:
                     description: The ID of the Container App Environment
                     type: string
+                  identity:
+                    description: An identity block as defined below.
+                    properties:
+                      identityIds:
+                        description: '- A list of one or more Resource IDs for User
+                          Assigned Managed identities to assign. Required when type
+                          is set to UserAssigned or SystemAssigned, UserAssigned.'
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      principalId:
+                        description: The ID of the Container App Environment
+                        type: string
+                      tenantId:
+                        description: The ID of the Container App Environment
+                        type: string
+                      type:
+                        description: The type of managed identity to assign. Possible
+                          values are SystemAssigned, UserAssigned, and SystemAssigned,
+                          UserAssigned (to enable both).
+                        type: string
+                    type: object
                   infrastructureResourceGroupName:
                     description: |-
                       Name of the platform-managed resource group created for the Managed Environment to host infrastructure resources. Changing this forces a new resource to be created.
@@ -946,6 +1013,11 @@ spec:
                     description: |-
                       The IP address from the IP range defined by platform_reserved_cidr that is reserved for the internal DNS server.
                       The IP address from the IP range defined by `platform_reserved_cidr` that is reserved for the internal DNS server.
+                    type: string
+                  publicNetworkAccess:
+                    description: |-
+                      The public network access setting for the Container App Environment. Possible values are Enabled and Disabled.
+                      The public network access setting for the Container App Environment.
                     type: string
                   resourceGroupName:
                     description: The name of the resource group in which the Container

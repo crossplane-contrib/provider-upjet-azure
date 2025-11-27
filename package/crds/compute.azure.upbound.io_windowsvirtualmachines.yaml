@@ -2166,6 +2166,11 @@ spec:
                     description: Should Extension Operations be allowed on this Virtual
                       Machine? Defaults to true.
                     type: boolean
+                  automaticUpdatesEnabled:
+                    description: Specifies if Automatic Updates are Enabled for the
+                      Windows Virtual Machine. Changing this forces a new resource
+                      to be created. Defaults to true.
+                    type: boolean
                   availabilitySetId:
                     description: Specifies the ID of the Availability Set in which
                       the Virtual Machine should exist. Changing this forces a new
@@ -2233,9 +2238,6 @@ spec:
                       a new Windows Virtual Machine to be created.
                     type: string
                   enableAutomaticUpdates:
-                    description: Specifies if Automatic Updates are Enabled for the
-                      Windows Virtual Machine. Changing this forces a new resource
-                      to be created. Defaults to true.
                     type: boolean
                   encryptionAtHostEnabled:
                     description: Should all of the disks (including the temp disk)
@@ -2483,6 +2485,11 @@ spec:
                           The only possible value is PT15M. Defaults to PT15M.
                         type: string
                     type: object
+                  osManagedDiskId:
+                    description: The ID of an existing Managed Disk to use as the
+                      OS Disk for this Windows Virtual Machine. Changing this forces
+                      a new resource to be created.
+                    type: string
                   patchAssessmentMode:
                     description: Specifies the mode of VM Guest Patching for the Virtual
                       Machine. Possible values are AutomaticByPlatform or ImageDefault.
@@ -2838,6 +2845,11 @@ spec:
                     description: Should Extension Operations be allowed on this Virtual
                       Machine? Defaults to true.
                     type: boolean
+                  automaticUpdatesEnabled:
+                    description: Specifies if Automatic Updates are Enabled for the
+                      Windows Virtual Machine. Changing this forces a new resource
+                      to be created. Defaults to true.
+                    type: boolean
                   availabilitySetId:
                     description: Specifies the ID of the Availability Set in which
                       the Virtual Machine should exist. Changing this forces a new
@@ -2905,9 +2917,6 @@ spec:
                       a new Windows Virtual Machine to be created.
                     type: string
                   enableAutomaticUpdates:
-                    description: Specifies if Automatic Updates are Enabled for the
-                      Windows Virtual Machine. Changing this forces a new resource
-                      to be created. Defaults to true.
                     type: boolean
                   encryptionAtHostEnabled:
                     description: Should all of the disks (including the temp disk)
@@ -3155,6 +3164,11 @@ spec:
                           The only possible value is PT15M. Defaults to PT15M.
                         type: string
                     type: object
+                  osManagedDiskId:
+                    description: The ID of an existing Managed Disk to use as the
+                      OS Disk for this Windows Virtual Machine. Changing this forces
+                      a new resource to be created.
+                    type: string
                   patchAssessmentMode:
                     description: Specifies the mode of VM Guest Patching for the Virtual
                       Machine. Possible values are AutomaticByPlatform or ImageDefault.
@@ -3341,8 +3355,6 @@ spec:
                       this Windows Virtual Machine should be located. Changing this
                       forces a new Windows Virtual Machine to be created.'
                     type: string
-                required:
-                - adminPasswordSecretRef
                 type: object
               managementPolicies:
                 default:
@@ -3431,13 +3443,6 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.adminPasswordSecretRef is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.adminPasswordSecretRef)'
-            - message: spec.forProvider.adminUsername is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.adminUsername)
-                || (has(self.initProvider) && has(self.initProvider.adminUsername))'
             - message: spec.forProvider.location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
@@ -3490,6 +3495,11 @@ spec:
                     description: Should Extension Operations be allowed on this Virtual
                       Machine? Defaults to true.
                     type: boolean
+                  automaticUpdatesEnabled:
+                    description: Specifies if Automatic Updates are Enabled for the
+                      Windows Virtual Machine. Changing this forces a new resource
+                      to be created. Defaults to true.
+                    type: boolean
                   availabilitySetId:
                     description: Specifies the ID of the Availability Set in which
                       the Virtual Machine should exist. Changing this forces a new
@@ -3538,9 +3548,6 @@ spec:
                       a new Windows Virtual Machine to be created.
                     type: string
                   enableAutomaticUpdates:
-                    description: Specifies if Automatic Updates are Enabled for the
-                      Windows Virtual Machine. Changing this forces a new resource
-                      to be created. Defaults to true.
                     type: boolean
                   encryptionAtHostEnabled:
                     description: Should all of the disks (including the temp disk)
@@ -3723,6 +3730,11 @@ spec:
                           The only possible value is PT15M. Defaults to PT15M.
                         type: string
                     type: object
+                  osManagedDiskId:
+                    description: The ID of an existing Managed Disk to use as the
+                      OS Disk for this Windows Virtual Machine. Changing this forces
+                      a new resource to be created.
+                    type: string
                   patchAssessmentMode:
                     description: Specifies the mode of VM Guest Patching for the Virtual
                       Machine. Possible values are AutomaticByPlatform or ImageDefault.

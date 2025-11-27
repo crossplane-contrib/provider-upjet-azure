@@ -779,35 +779,33 @@ spec:
                   jobStorageAccount:
                     description: The details of the job storage account. A job_storage_account
                       block as defined below.
-                    items:
-                      properties:
-                        accountKeySecretRef:
-                          description: The account key for the Azure storage account.
-                          properties:
-                            key:
-                              description: The key to select.
-                              type: string
-                            name:
-                              description: Name of the secret.
-                              type: string
-                            namespace:
-                              description: Namespace of the secret.
-                              type: string
-                          required:
-                          - key
-                          - name
-                          - namespace
-                          type: object
-                        accountName:
-                          description: The name of the Azure storage account.
-                          type: string
-                        authenticationMode:
-                          description: The authentication mode of the storage account.
-                            The only supported value is ConnectionString. Defaults
-                            to ConnectionString.
-                          type: string
-                      type: object
-                    type: array
+                    properties:
+                      accountKeySecretRef:
+                        description: The account key for the Azure storage account.
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
+                      accountName:
+                        description: The name of the Azure storage account.
+                        type: string
+                      authenticationMode:
+                        description: The authentication mode of the storage account.
+                          Possible values are ConnectionString and Msi. Defaults to
+                          ConnectionString.
+                        type: string
+                    type: object
                   location:
                     description: The Azure Region in which the Resource Group exists.
                       Changing this forces a new resource to be created.
@@ -992,37 +990,33 @@ spec:
                   jobStorageAccount:
                     description: The details of the job storage account. A job_storage_account
                       block as defined below.
-                    items:
-                      properties:
-                        accountKeySecretRef:
-                          description: The account key for the Azure storage account.
-                          properties:
-                            key:
-                              description: The key to select.
-                              type: string
-                            name:
-                              description: Name of the secret.
-                              type: string
-                            namespace:
-                              description: Namespace of the secret.
-                              type: string
-                          required:
-                          - key
-                          - name
-                          - namespace
-                          type: object
-                        accountName:
-                          description: The name of the Azure storage account.
-                          type: string
-                        authenticationMode:
-                          description: The authentication mode of the storage account.
-                            The only supported value is ConnectionString. Defaults
-                            to ConnectionString.
-                          type: string
-                      required:
-                      - accountKeySecretRef
-                      type: object
-                    type: array
+                    properties:
+                      accountKeySecretRef:
+                        description: The account key for the Azure storage account.
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
+                      accountName:
+                        description: The name of the Azure storage account.
+                        type: string
+                      authenticationMode:
+                        description: The authentication mode of the storage account.
+                          Possible values are ConnectionString and Msi. Defaults to
+                          ConnectionString.
+                        type: string
+                    type: object
                   location:
                     description: The Azure Region in which the Resource Group exists.
                       Changing this forces a new resource to be created.
@@ -1227,18 +1221,16 @@ spec:
                   jobStorageAccount:
                     description: The details of the job storage account. A job_storage_account
                       block as defined below.
-                    items:
-                      properties:
-                        accountName:
-                          description: The name of the Azure storage account.
-                          type: string
-                        authenticationMode:
-                          description: The authentication mode of the storage account.
-                            The only supported value is ConnectionString. Defaults
-                            to ConnectionString.
-                          type: string
-                      type: object
-                    type: array
+                    properties:
+                      accountName:
+                        description: The name of the Azure storage account.
+                        type: string
+                      authenticationMode:
+                        description: The authentication mode of the storage account.
+                          Possible values are ConnectionString and Msi. Defaults to
+                          ConnectionString.
+                        type: string
+                    type: object
                   location:
                     description: The Azure Region in which the Resource Group exists.
                       Changing this forces a new resource to be created.

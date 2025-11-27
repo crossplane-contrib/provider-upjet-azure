@@ -22,14 +22,14 @@ type DatabaseMigrationProjectInitParameters struct {
 	// Specify the name of the database migration project. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The platform type of the migration source. Possible values are SQL, PostgreSQL, MySQL and MongoDb. Changing this forces a new resource to be created.
+	// The platform type of the migration source. Possible values are MongoDb, MySQL, PostgreSql, SQL and Unknown. Changing this forces a new resource to be created.
 	SourcePlatform *string `json:"sourcePlatform,omitempty" tf:"source_platform,omitempty"`
 
 	// A mapping of tags to assigned to the resource.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The platform type of the migration target. Possible values are SQLDB, AzureDbForPostgreSql, AzureDbForMySql and MongoDb. Changing this forces a new resource to be created.
+	// The platform type of the migration target. Possible values are AzureDbForMySql, AzureDbForPostgreSql, MongoDb, SQLDB, SQLMI and Unknown. Changing this forces a new resource to be created.
 	TargetPlatform *string `json:"targetPlatform,omitempty" tf:"target_platform,omitempty"`
 }
 
@@ -50,14 +50,14 @@ type DatabaseMigrationProjectObservation struct {
 	// Name of the database migration service where resource belongs to. Changing this forces a new resource to be created.
 	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
 
-	// The platform type of the migration source. Possible values are SQL, PostgreSQL, MySQL and MongoDb. Changing this forces a new resource to be created.
+	// The platform type of the migration source. Possible values are MongoDb, MySQL, PostgreSql, SQL and Unknown. Changing this forces a new resource to be created.
 	SourcePlatform *string `json:"sourcePlatform,omitempty" tf:"source_platform,omitempty"`
 
 	// A mapping of tags to assigned to the resource.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The platform type of the migration target. Possible values are SQLDB, AzureDbForPostgreSql, AzureDbForMySql and MongoDb. Changing this forces a new resource to be created.
+	// The platform type of the migration target. Possible values are AzureDbForMySql, AzureDbForPostgreSql, MongoDb, SQLDB, SQLMI and Unknown. Changing this forces a new resource to be created.
 	TargetPlatform *string `json:"targetPlatform,omitempty" tf:"target_platform,omitempty"`
 }
 
@@ -98,7 +98,7 @@ type DatabaseMigrationProjectParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceNameSelector *v1.NamespacedSelector `json:"serviceNameSelector,omitempty" tf:"-"`
 
-	// The platform type of the migration source. Possible values are SQL, PostgreSQL, MySQL and MongoDb. Changing this forces a new resource to be created.
+	// The platform type of the migration source. Possible values are MongoDb, MySQL, PostgreSql, SQL and Unknown. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	SourcePlatform *string `json:"sourcePlatform,omitempty" tf:"source_platform,omitempty"`
 
@@ -107,7 +107,7 @@ type DatabaseMigrationProjectParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The platform type of the migration target. Possible values are SQLDB, AzureDbForPostgreSql, AzureDbForMySql and MongoDb. Changing this forces a new resource to be created.
+	// The platform type of the migration target. Possible values are AzureDbForMySql, AzureDbForPostgreSql, MongoDb, SQLDB, SQLMI and Unknown. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	TargetPlatform *string `json:"targetPlatform,omitempty" tf:"target_platform,omitempty"`
 }

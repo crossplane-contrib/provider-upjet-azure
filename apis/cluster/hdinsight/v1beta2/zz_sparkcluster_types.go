@@ -280,7 +280,7 @@ type SparkClusterInitParameters struct {
 	// Specifies the Tier which should be used for this HDInsight Spark Cluster. Possible values are Standard or Premium. Changing this forces a new resource to be created.
 	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
 
-	// A list of Availability Zones which should be used for this HDInsight Spark Cluster. Chaning this forces a new resource to be created.
+	// A list of Availability Zones which should be used for this HDInsight Spark Cluster. Changing this forces a new resource to be created.
 	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
@@ -589,7 +589,7 @@ type SparkClusterObservation struct {
 	// Specifies the Tier which should be used for this HDInsight Spark Cluster. Possible values are Standard or Premium. Changing this forces a new resource to be created.
 	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
 
-	// A list of Availability Zones which should be used for this HDInsight Spark Cluster. Chaning this forces a new resource to be created.
+	// A list of Availability Zones which should be used for this HDInsight Spark Cluster. Changing this forces a new resource to be created.
 	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
@@ -686,7 +686,7 @@ type SparkClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
 
-	// A list of Availability Zones which should be used for this HDInsight Spark Cluster. Chaning this forces a new resource to be created.
+	// A list of Availability Zones which should be used for this HDInsight Spark Cluster. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
@@ -703,7 +703,7 @@ type SparkClusterPrivateLinkConfigurationIPConfigurationInitParameters struct {
 	// The private IP address of the IP configuration.
 	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
 
-	// The private IP allocation method. The only possible value now is Dynamic.
+	// The private IP allocation method. Possible values are Dynamic and Static.
 	PrivateIPAllocationMethod *string `json:"privateIpAllocationMethod,omitempty" tf:"private_ip_allocation_method,omitempty"`
 
 	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
@@ -731,7 +731,7 @@ type SparkClusterPrivateLinkConfigurationIPConfigurationObservation struct {
 	// The private IP address of the IP configuration.
 	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
 
-	// The private IP allocation method. The only possible value now is Dynamic.
+	// The private IP allocation method. Possible values are Dynamic and Static.
 	PrivateIPAllocationMethod *string `json:"privateIpAllocationMethod,omitempty" tf:"private_ip_allocation_method,omitempty"`
 
 	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
@@ -752,7 +752,7 @@ type SparkClusterPrivateLinkConfigurationIPConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
 
-	// The private IP allocation method. The only possible value now is Dynamic.
+	// The private IP allocation method. Possible values are Dynamic and Static.
 	// +kubebuilder:validation:Optional
 	PrivateIPAllocationMethod *string `json:"privateIpAllocationMethod,omitempty" tf:"private_ip_allocation_method,omitempty"`
 
@@ -776,6 +776,7 @@ type SparkClusterPrivateLinkConfigurationInitParameters struct {
 	// The ID of the private link service group.
 	GroupID *string `json:"groupId,omitempty" tf:"group_id,omitempty"`
 
+	// An ip_configuration block as defined below.
 	IPConfiguration *SparkClusterPrivateLinkConfigurationIPConfigurationInitParameters `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
 
 	// The name of the private link configuration.
@@ -787,6 +788,7 @@ type SparkClusterPrivateLinkConfigurationObservation struct {
 	// The ID of the private link service group.
 	GroupID *string `json:"groupId,omitempty" tf:"group_id,omitempty"`
 
+	// An ip_configuration block as defined below.
 	IPConfiguration *SparkClusterPrivateLinkConfigurationIPConfigurationObservation `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
 
 	// The name of the private link configuration.
@@ -799,6 +801,7 @@ type SparkClusterPrivateLinkConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	GroupID *string `json:"groupId" tf:"group_id,omitempty"`
 
+	// An ip_configuration block as defined below.
 	// +kubebuilder:validation:Optional
 	IPConfiguration *SparkClusterPrivateLinkConfigurationIPConfigurationParameters `json:"ipConfiguration" tf:"ip_configuration,omitempty"`
 

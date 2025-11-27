@@ -267,7 +267,7 @@ spec:
                       to 3.
                     type: number
                   skuName:
-                    description: Determines the selected sku.
+                    description: Determines the selected sku. Defaults to Standard_E16s_v5.
                     type: string
                 type: object
               initProvider:
@@ -405,7 +405,7 @@ spec:
                       to 3.
                     type: number
                   skuName:
-                    description: Determines the selected sku.
+                    description: Determines the selected sku. Defaults to Standard_E16s_v5.
                     type: string
                 type: object
               managementPolicies:
@@ -531,7 +531,7 @@ spec:
                       type: string
                     type: array
                   skuName:
-                    description: Determines the selected sku.
+                    description: Determines the selected sku. Defaults to Standard_E16s_v5.
                     type: string
                 type: object
               conditions:

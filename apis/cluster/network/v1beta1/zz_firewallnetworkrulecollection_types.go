@@ -33,6 +33,7 @@ type FirewallNetworkRuleCollectionObservation struct {
 	// Specifies the name of the Firewall in which the Network Rule Collection should be created. Changing this forces a new resource to be created.
 	AzureFirewallName *string `json:"azureFirewallName,omitempty" tf:"azure_firewall_name,omitempty"`
 
+	// The ID of the Firewall Network Rule Collection.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Specifies the priority of the rule collection. Possible values are between 100 - 65000.

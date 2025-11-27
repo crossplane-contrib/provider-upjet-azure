@@ -91,6 +91,9 @@ type EndpointObservation struct {
 	// The resource group in which the endpoint will be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
+	// The subscription ID for the endpoint.
+	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
+
 	// The type of the endpoint. Possible values are AzureIotHub.StorageContainer, AzureIotHub.ServiceBusQueue, AzureIotHub.ServiceBusTopic or AzureIotHub.EventHub.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }

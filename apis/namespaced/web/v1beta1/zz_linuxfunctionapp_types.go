@@ -20,7 +20,7 @@ type ApplicationStackInitParameters struct {
 	// A docker block
 	Docker []DockerInitParameters `json:"docker,omitempty" tf:"docker,omitempty"`
 
-	// The version of .NET to use. Possible values include 3.1, 6.0, 7.0, 8.0 and 9.0.
+	// The version of .NET to use. Possible values include 3.1, 6.0, 7.0, 8.0, 9.0 and 10.0.
 	// The version of .Net. Possible values are `3.1`, `6.0`, `7.0`, `8.0` and `9.0`
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
@@ -54,7 +54,7 @@ type ApplicationStackObservation struct {
 	// A docker block
 	Docker []DockerObservation `json:"docker,omitempty" tf:"docker,omitempty"`
 
-	// The version of .NET to use. Possible values include 3.1, 6.0, 7.0, 8.0 and 9.0.
+	// The version of .NET to use. Possible values include 3.1, 6.0, 7.0, 8.0, 9.0 and 10.0.
 	// The version of .Net. Possible values are `3.1`, `6.0`, `7.0`, `8.0` and `9.0`
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
@@ -89,7 +89,7 @@ type ApplicationStackParameters struct {
 	// +kubebuilder:validation:Optional
 	Docker []DockerParameters `json:"docker,omitempty" tf:"docker,omitempty"`
 
-	// The version of .NET to use. Possible values include 3.1, 6.0, 7.0, 8.0 and 9.0.
+	// The version of .NET to use. Possible values include 3.1, 6.0, 7.0, 8.0, 9.0 and 10.0.
 	// The version of .Net. Possible values are `3.1`, `6.0`, `7.0`, `8.0` and `9.0`
 	// +kubebuilder:validation:Optional
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`

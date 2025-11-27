@@ -85,11 +85,14 @@ spec:
                       to be created.
                     type: string
                   storageShareId:
-                    description: The Storage Share ID in which this file will be placed
-                      into. Changing this forces a new resource to be created.
+                    description: The ID of the Directory within the File Share.
                     type: string
-                  storageShareIdRef:
-                    description: Reference to a Share in storage to populate storageShareId.
+                  storageShareUrl:
+                    description: The Storage Share URL in which this file will be
+                      placed into. Changing this forces a new resource to be created.
+                    type: string
+                  storageShareUrlRef:
+                    description: Reference to a Share in storage to populate storageShareUrl.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -122,8 +125,8 @@ spec:
                     required:
                     - name
                     type: object
-                  storageShareIdSelector:
-                    description: Selector for a Share in storage to populate storageShareId.
+                  storageShareUrlSelector:
+                    description: Selector for a Share in storage to populate storageShareUrl.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -188,11 +191,14 @@ spec:
                       to be created.
                     type: string
                   storageShareId:
-                    description: The Storage Share ID in which this file will be placed
-                      into. Changing this forces a new resource to be created.
+                    description: The ID of the Directory within the File Share.
                     type: string
-                  storageShareIdRef:
-                    description: Reference to a Share in storage to populate storageShareId.
+                  storageShareUrl:
+                    description: The Storage Share URL in which this file will be
+                      placed into. Changing this forces a new resource to be created.
+                    type: string
+                  storageShareUrlRef:
+                    description: Reference to a Share in storage to populate storageShareUrl.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -225,8 +231,8 @@ spec:
                     required:
                     - name
                     type: object
-                  storageShareIdSelector:
-                    description: Selector for a Share in storage to populate storageShareId.
+                  storageShareUrlSelector:
+                    description: Selector for a Share in storage to populate storageShareUrl.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -377,8 +383,11 @@ spec:
                       to be created.
                     type: string
                   storageShareId:
-                    description: The Storage Share ID in which this file will be placed
-                      into. Changing this forces a new resource to be created.
+                    description: The ID of the Directory within the File Share.
+                    type: string
+                  storageShareUrl:
+                    description: The Storage Share URL in which this file will be
+                      placed into. Changing this forces a new resource to be created.
                     type: string
                 type: object
               conditions:

@@ -94,7 +94,8 @@ spec:
                         type: object
                     type: object
                   browserCredential:
-                    description: A browser_credential block as defined below.
+                    description: A browser_credential block as defined below. Changing
+                      this forces a new resource to be created.
                     properties:
                       subject:
                         description: The subject name of web push.
@@ -369,7 +370,8 @@ spec:
                     - tokenSecretRef
                     type: object
                   browserCredential:
-                    description: A browser_credential block as defined below.
+                    description: A browser_credential block as defined below. Changing
+                      this forces a new resource to be created.
                     properties:
                       subject:
                         description: The subject name of web push.
@@ -512,7 +514,8 @@ spec:
                         type: string
                     type: object
                   browserCredential:
-                    description: A browser_credential block as defined below.
+                    description: A browser_credential block as defined below. Changing
+                      this forces a new resource to be created.
                     properties:
                       subject:
                         description: The subject name of web push.

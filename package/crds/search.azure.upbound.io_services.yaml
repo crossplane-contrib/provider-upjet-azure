@@ -716,8 +716,8 @@ spec:
                   hostingMode:
                     description: Specifies the Hosting Mode, which allows for High
                       Density partitions (that allow for up to 1000 indexes) should
-                      be supported. Possible values are highDensity or default. Defaults
-                      to default. Changing this forces a new Search Service to be
+                      be supported. Possible values are HighDensity or Default. Defaults
+                      to Default. Changing this forces a new Search Service to be
                       created.
                     type: string
                   identity:
@@ -747,8 +747,8 @@ spec:
                     type: string
                   networkRuleBypassOption:
                     description: Whether to allow trusted Azure services to access
-                      a network restricted Container Registry? Possible values are
-                      None and AzureServices. Defaults to None.
+                      a network restricted Search Service? Possible values are None
+                      and AzureServices. Defaults to None.
                     type: string
                   partitionCount:
                     description: Specifies the number of partitions which should be
@@ -854,8 +854,7 @@ spec:
                   sku:
                     description: The SKU which should be used for this Search Service.
                       Possible values include basic, free, standard, standard2, standard3,
-                      storage_optimized_l1 and storage_optimized_l2. Changing this
-                      forces a new Search Service to be created.
+                      storage_optimized_l1 and storage_optimized_l2.
                     type: string
                   tags:
                     additionalProperties:
@@ -899,8 +898,8 @@ spec:
                   hostingMode:
                     description: Specifies the Hosting Mode, which allows for High
                       Density partitions (that allow for up to 1000 indexes) should
-                      be supported. Possible values are highDensity or default. Defaults
-                      to default. Changing this forces a new Search Service to be
+                      be supported. Possible values are HighDensity or Default. Defaults
+                      to Default. Changing this forces a new Search Service to be
                       created.
                     type: string
                   identity:
@@ -930,8 +929,8 @@ spec:
                     type: string
                   networkRuleBypassOption:
                     description: Whether to allow trusted Azure services to access
-                      a network restricted Container Registry? Possible values are
-                      None and AzureServices. Defaults to None.
+                      a network restricted Search Service? Possible values are None
+                      and AzureServices. Defaults to None.
                     type: string
                   partitionCount:
                     description: Specifies the number of partitions which should be
@@ -956,8 +955,7 @@ spec:
                   sku:
                     description: The SKU which should be used for this Search Service.
                       Possible values include basic, free, standard, standard2, standard3,
-                      storage_optimized_l1 and storage_optimized_l2. Changing this
-                      forces a new Search Service to be created.
+                      storage_optimized_l1 and storage_optimized_l2.
                     type: string
                   tags:
                     additionalProperties:
@@ -1096,8 +1094,8 @@ spec:
                   hostingMode:
                     description: Specifies the Hosting Mode, which allows for High
                       Density partitions (that allow for up to 1000 indexes) should
-                      be supported. Possible values are highDensity or default. Defaults
-                      to default. Changing this forces a new Search Service to be
+                      be supported. Possible values are HighDensity or Default. Defaults
+                      to Default. Changing this forces a new Search Service to be
                       created.
                     type: string
                   id:
@@ -1138,8 +1136,8 @@ spec:
                     type: string
                   networkRuleBypassOption:
                     description: Whether to allow trusted Azure services to access
-                      a network restricted Container Registry? Possible values are
-                      None and AzureServices. Defaults to None.
+                      a network restricted Search Service? Possible values are None
+                      and AzureServices. Defaults to None.
                     type: string
                   partitionCount:
                     description: Specifies the number of partitions which should be
@@ -1181,8 +1179,7 @@ spec:
                   sku:
                     description: The SKU which should be used for this Search Service.
                       Possible values include basic, free, standard, standard2, standard3,
-                      storage_optimized_l1 and storage_optimized_l2. Changing this
-                      forces a new Search Service to be created.
+                      storage_optimized_l1 and storage_optimized_l2.
                     type: string
                   tags:
                     additionalProperties:

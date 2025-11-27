@@ -269,7 +269,7 @@ type RegistryInitParameters struct {
 	// Boolean value that indicates whether quarantine policy is enabled.
 	QuarantinePolicyEnabled *bool `json:"quarantinePolicyEnabled,omitempty" tf:"quarantine_policy_enabled,omitempty"`
 
-	// The number of days to retain and untagged manifest after which it gets purged. Defaults to 7.
+	// The number of days to retain and untagged manifest after which it gets purged.
 	RetentionPolicyInDays *float64 `json:"retentionPolicyInDays,omitempty" tf:"retention_policy_in_days,omitempty"`
 
 	// The SKU name of the container registry. Possible values are Basic, Standard and Premium.
@@ -299,6 +299,10 @@ type RegistryObservation struct {
 
 	// Whether to enable dedicated data endpoints for this Container Registry? This is only supported on resources with the Premium SKU.
 	DataEndpointEnabled *bool `json:"dataEndpointEnabled,omitempty" tf:"data_endpoint_enabled,omitempty"`
+
+	// A set of data endpoint hostnames associated with the container registry if data endpoints are enabled.
+	// +listType=set
+	DataEndpointHostNames []*string `json:"dataEndpointHostNames,omitempty" tf:"data_endpoint_host_names,omitempty"`
 
 	// An encryption block as documented below.
 	Encryption *EncryptionObservation `json:"encryption,omitempty" tf:"encryption,omitempty"`
@@ -336,7 +340,7 @@ type RegistryObservation struct {
 	// The name of the resource group in which to create the Container Registry. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// The number of days to retain and untagged manifest after which it gets purged. Defaults to 7.
+	// The number of days to retain and untagged manifest after which it gets purged.
 	RetentionPolicyInDays *float64 `json:"retentionPolicyInDays,omitempty" tf:"retention_policy_in_days,omitempty"`
 
 	// The SKU name of the container registry. Possible values are Basic, Standard and Premium.
@@ -416,7 +420,7 @@ type RegistryParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// The number of days to retain and untagged manifest after which it gets purged. Defaults to 7.
+	// The number of days to retain and untagged manifest after which it gets purged.
 	// +kubebuilder:validation:Optional
 	RetentionPolicyInDays *float64 `json:"retentionPolicyInDays,omitempty" tf:"retention_policy_in_days,omitempty"`
 

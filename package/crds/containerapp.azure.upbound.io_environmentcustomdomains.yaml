@@ -432,6 +432,8 @@ spec:
                       The Custom Domain DNS suffix for this Container App Environment.
                     type: string
                   id:
+                    description: The ID of the Container App Environment Custom Domain
+                      Suffix.
                     type: string
                 type: object
               conditions:

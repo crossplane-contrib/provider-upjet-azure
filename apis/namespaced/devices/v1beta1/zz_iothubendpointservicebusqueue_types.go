@@ -42,6 +42,9 @@ type IOTHubEndpointServiceBusQueueInitParameters struct {
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
+	// The subscription ID for the endpoint.
+	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
 }
 
 type IOTHubEndpointServiceBusQueueObservation struct {
@@ -66,6 +69,9 @@ type IOTHubEndpointServiceBusQueueObservation struct {
 
 	// The name of the resource group under which the Service Bus Queue has been created. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The subscription ID for the endpoint.
+	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
 }
 
 type IOTHubEndpointServiceBusQueueParameters struct {
@@ -116,6 +122,10 @@ type IOTHubEndpointServiceBusQueueParameters struct {
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
+	// The subscription ID for the endpoint.
+	// +kubebuilder:validation:Optional
+	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
 }
 
 // IOTHubEndpointServiceBusQueueSpec defines the desired state of IOTHubEndpointServiceBusQueue

@@ -59,8 +59,10 @@ type FrontdoorRulesEngineObservation struct {
 	// The name of the Front Door instance. Changing this forces a new resource to be created.
 	FrontdoorName *string `json:"frontdoorName,omitempty" tf:"frontdoor_name,omitempty"`
 
+	// The ID of the Front Door Rules Engine.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The location in which the Front Door Rules Engine exists.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the resource group. Changing this forces a new resource to be created.

@@ -767,6 +767,9 @@ spec:
                     description: The location of the source database. Changing this
                       forces a new Backup Instance PostgreSQL to be created.
                     type: string
+                  protectionState:
+                    description: The protection state of the Backup Instance PostgreSQL.
+                    type: string
                   vaultId:
                     description: The ID of the Backup Vault within which the PostgreSQL
                       Backup Instance should exist. Changing this forces a new Backup

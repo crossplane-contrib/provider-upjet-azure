@@ -507,6 +507,7 @@ type HBaseClusterPrivateLinkConfigurationInitParameters struct {
 	// The ID of the private link service group.
 	GroupID *string `json:"groupId,omitempty" tf:"group_id,omitempty"`
 
+	// An ip_configuration block as defined below.
 	IPConfiguration *PrivateLinkConfigurationIPConfigurationInitParameters `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
 
 	// The name of the private link configuration.
@@ -518,6 +519,7 @@ type HBaseClusterPrivateLinkConfigurationObservation struct {
 	// The ID of the private link service group.
 	GroupID *string `json:"groupId,omitempty" tf:"group_id,omitempty"`
 
+	// An ip_configuration block as defined below.
 	IPConfiguration *PrivateLinkConfigurationIPConfigurationObservation `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
 
 	// The name of the private link configuration.
@@ -530,6 +532,7 @@ type HBaseClusterPrivateLinkConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	GroupID *string `json:"groupId" tf:"group_id,omitempty"`
 
+	// An ip_configuration block as defined below.
 	// +kubebuilder:validation:Optional
 	IPConfiguration *PrivateLinkConfigurationIPConfigurationParameters `json:"ipConfiguration" tf:"ip_configuration,omitempty"`
 
@@ -962,7 +965,7 @@ type PrivateLinkConfigurationIPConfigurationInitParameters struct {
 	// The private IP address of the IP configuration.
 	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
 
-	// The private IP allocation method. The only possible value now is Dynamic.
+	// The private IP allocation method. Possible values are Dynamic and Static.
 	PrivateIPAllocationMethod *string `json:"privateIpAllocationMethod,omitempty" tf:"private_ip_allocation_method,omitempty"`
 
 	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
@@ -990,7 +993,7 @@ type PrivateLinkConfigurationIPConfigurationObservation struct {
 	// The private IP address of the IP configuration.
 	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
 
-	// The private IP allocation method. The only possible value now is Dynamic.
+	// The private IP allocation method. Possible values are Dynamic and Static.
 	PrivateIPAllocationMethod *string `json:"privateIpAllocationMethod,omitempty" tf:"private_ip_allocation_method,omitempty"`
 
 	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
@@ -1011,7 +1014,7 @@ type PrivateLinkConfigurationIPConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
 
-	// The private IP allocation method. The only possible value now is Dynamic.
+	// The private IP allocation method. Possible values are Dynamic and Static.
 	// +kubebuilder:validation:Optional
 	PrivateIPAllocationMethod *string `json:"privateIpAllocationMethod,omitempty" tf:"private_ip_allocation_method,omitempty"`
 

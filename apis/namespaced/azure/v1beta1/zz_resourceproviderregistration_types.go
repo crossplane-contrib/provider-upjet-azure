@@ -57,6 +57,7 @@ type ResourceProviderRegistrationObservation struct {
 	// A list of feature blocks as defined below.
 	Feature []FeatureObservation `json:"feature,omitempty" tf:"feature,omitempty"`
 
+	// The ID of the Resource Provider.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The namespace of the Resource Provider which should be registered. Changing this forces a new resource to be created.

@@ -70,7 +70,6 @@ spec:
                       identityIds:
                         description: Specifies a list of User Assigned Managed Identity
                           IDs to be assigned to this Machine Learning Compute Cluster.
-                          Changing this forces a new resource to be created.
                         items:
                           type: string
                         type: array
@@ -79,8 +78,7 @@ spec:
                         description: Specifies the type of Managed Service Identity
                           that should be configured on this Machine Learning Compute
                           Cluster. Possible values are SystemAssigned, UserAssigned,
-                          SystemAssigned, UserAssigned (to enable both). Changing
-                          this forces a new resource to be created.
+                          SystemAssigned, UserAssigned (to enable both).
                         type: string
                     type: object
                   localAuthEnabled:
@@ -358,7 +356,6 @@ spec:
                       identityIds:
                         description: Specifies a list of User Assigned Managed Identity
                           IDs to be assigned to this Machine Learning Compute Cluster.
-                          Changing this forces a new resource to be created.
                         items:
                           type: string
                         type: array
@@ -367,8 +364,7 @@ spec:
                         description: Specifies the type of Managed Service Identity
                           that should be configured on this Machine Learning Compute
                           Cluster. Possible values are SystemAssigned, UserAssigned,
-                          SystemAssigned, UserAssigned (to enable both). Changing
-                          this forces a new resource to be created.
+                          SystemAssigned, UserAssigned (to enable both).
                         type: string
                     type: object
                   localAuthEnabled:
@@ -720,7 +716,6 @@ spec:
                       identityIds:
                         description: Specifies a list of User Assigned Managed Identity
                           IDs to be assigned to this Machine Learning Compute Cluster.
-                          Changing this forces a new resource to be created.
                         items:
                           type: string
                         type: array
@@ -739,8 +734,7 @@ spec:
                         description: Specifies the type of Managed Service Identity
                           that should be configured on this Machine Learning Compute
                           Cluster. Possible values are SystemAssigned, UserAssigned,
-                          SystemAssigned, UserAssigned (to enable both). Changing
-                          this forces a new resource to be created.
+                          SystemAssigned, UserAssigned (to enable both).
                         type: string
                     type: object
                   localAuthEnabled:

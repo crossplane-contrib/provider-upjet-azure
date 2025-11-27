@@ -57,6 +57,7 @@ type ClusterManagedPrivateEndpointObservation struct {
 	// The group id in which the managed private endpoint is created. Changing this forces a new resource to be created.
 	GroupID *string `json:"groupId,omitempty" tf:"group_id,omitempty"`
 
+	// The ID of the Managed Private Endpoint for a Kusto Cluster.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The ARM resource ID of the resource for which the managed private endpoint is created. Changing this forces a new resource to be created.

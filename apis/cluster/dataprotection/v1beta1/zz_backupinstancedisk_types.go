@@ -55,6 +55,9 @@ type BackupInstanceDiskInitParameters struct {
 	// Selector for a ResourceGroup in azure to populate snapshotResourceGroupName.
 	// +kubebuilder:validation:Optional
 	SnapshotResourceGroupNameSelector *v1.Selector `json:"snapshotResourceGroupNameSelector,omitempty" tf:"-"`
+
+	// The subscription ID of the Resource Group where snapshots are stored. The default value is the subscription ID of the Backup Vault. Changing this forces a new Backup Instance Disk to be created.
+	SnapshotSubscriptionID *string `json:"snapshotSubscriptionId,omitempty" tf:"snapshot_subscription_id,omitempty"`
 }
 
 type BackupInstanceDiskObservation struct {
@@ -71,8 +74,14 @@ type BackupInstanceDiskObservation struct {
 	// The Azure Region where the Backup Instance Disk should exist. Changing this forces a new Backup Instance Disk to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// The protection state of the Backup Instance Disk.
+	ProtectionState *string `json:"protectionState,omitempty" tf:"protection_state,omitempty"`
+
 	// The name of the Resource Group where snapshots are stored. Changing this forces a new Backup Instance Disk to be created.
 	SnapshotResourceGroupName *string `json:"snapshotResourceGroupName,omitempty" tf:"snapshot_resource_group_name,omitempty"`
+
+	// The subscription ID of the Resource Group where snapshots are stored. The default value is the subscription ID of the Backup Vault. Changing this forces a new Backup Instance Disk to be created.
+	SnapshotSubscriptionID *string `json:"snapshotSubscriptionId,omitempty" tf:"snapshot_subscription_id,omitempty"`
 
 	// The ID of the Backup Vault within which the Backup Instance Disk should exist. Changing this forces a new Backup Instance Disk to be created.
 	VaultID *string `json:"vaultId,omitempty" tf:"vault_id,omitempty"`
@@ -124,6 +133,10 @@ type BackupInstanceDiskParameters struct {
 	// Selector for a ResourceGroup in azure to populate snapshotResourceGroupName.
 	// +kubebuilder:validation:Optional
 	SnapshotResourceGroupNameSelector *v1.Selector `json:"snapshotResourceGroupNameSelector,omitempty" tf:"-"`
+
+	// The subscription ID of the Resource Group where snapshots are stored. The default value is the subscription ID of the Backup Vault. Changing this forces a new Backup Instance Disk to be created.
+	// +kubebuilder:validation:Optional
+	SnapshotSubscriptionID *string `json:"snapshotSubscriptionId,omitempty" tf:"snapshot_subscription_id,omitempty"`
 
 	// The ID of the Backup Vault within which the Backup Instance Disk should exist. Changing this forces a new Backup Instance Disk to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/dataprotection/v1beta2.BackupVault

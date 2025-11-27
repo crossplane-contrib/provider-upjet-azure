@@ -76,7 +76,7 @@ type JobInitParameters struct {
 	Identity *IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The details of the job storage account. A job_storage_account block as defined below.
-	JobStorageAccount []JobStorageAccountInitParameters `json:"jobStorageAccount,omitempty" tf:"job_storage_account,omitempty"`
+	JobStorageAccount *JobStorageAccountInitParameters `json:"jobStorageAccount,omitempty" tf:"job_storage_account,omitempty"`
 
 	// The Azure Region in which the Resource Group exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -134,7 +134,7 @@ type JobObservation struct {
 	JobID *string `json:"jobId,omitempty" tf:"job_id,omitempty"`
 
 	// The details of the job storage account. A job_storage_account block as defined below.
-	JobStorageAccount []JobStorageAccountObservation `json:"jobStorageAccount,omitempty" tf:"job_storage_account,omitempty"`
+	JobStorageAccount *JobStorageAccountObservation `json:"jobStorageAccount,omitempty" tf:"job_storage_account,omitempty"`
 
 	// The Azure Region in which the Resource Group exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -197,7 +197,7 @@ type JobParameters struct {
 
 	// The details of the job storage account. A job_storage_account block as defined below.
 	// +kubebuilder:validation:Optional
-	JobStorageAccount []JobStorageAccountParameters `json:"jobStorageAccount,omitempty" tf:"job_storage_account,omitempty"`
+	JobStorageAccount *JobStorageAccountParameters `json:"jobStorageAccount,omitempty" tf:"job_storage_account,omitempty"`
 
 	// The Azure Region in which the Resource Group exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -249,12 +249,12 @@ type JobParameters struct {
 type JobStorageAccountInitParameters struct {
 
 	// The account key for the Azure storage account.
-	AccountKeySecretRef v1.LocalSecretKeySelector `json:"accountKeySecretRef" tf:"-"`
+	AccountKeySecretRef *v1.LocalSecretKeySelector `json:"accountKeySecretRef,omitempty" tf:"-"`
 
 	// The name of the Azure storage account.
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
-	// The authentication mode of the storage account. The only supported value is ConnectionString. Defaults to ConnectionString.
+	// The authentication mode of the storage account. Possible values are ConnectionString and Msi. Defaults to ConnectionString.
 	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
 }
 
@@ -263,7 +263,7 @@ type JobStorageAccountObservation struct {
 	// The name of the Azure storage account.
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
-	// The authentication mode of the storage account. The only supported value is ConnectionString. Defaults to ConnectionString.
+	// The authentication mode of the storage account. Possible values are ConnectionString and Msi. Defaults to ConnectionString.
 	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
 }
 
@@ -271,13 +271,13 @@ type JobStorageAccountParameters struct {
 
 	// The account key for the Azure storage account.
 	// +kubebuilder:validation:Optional
-	AccountKeySecretRef v1.LocalSecretKeySelector `json:"accountKeySecretRef" tf:"-"`
+	AccountKeySecretRef *v1.LocalSecretKeySelector `json:"accountKeySecretRef,omitempty" tf:"-"`
 
 	// The name of the Azure storage account.
 	// +kubebuilder:validation:Optional
 	AccountName *string `json:"accountName" tf:"account_name,omitempty"`
 
-	// The authentication mode of the storage account. The only supported value is ConnectionString. Defaults to ConnectionString.
+	// The authentication mode of the storage account. Possible values are ConnectionString and Msi. Defaults to ConnectionString.
 	// +kubebuilder:validation:Optional
 	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
 }

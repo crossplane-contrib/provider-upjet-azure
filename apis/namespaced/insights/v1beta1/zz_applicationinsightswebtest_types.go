@@ -96,6 +96,7 @@ type ApplicationInsightsWebTestObservation struct {
 	// A list of where to physically run the tests from to give global coverage for accessibility of your application.
 	GeoLocations []*string `json:"geoLocations,omitempty" tf:"geo_locations,omitempty"`
 
+	// The ID of the Application Insights Web Test.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The kind of web test that this web test watches. Choices are ping and multistep. Changing this forces a new resource to be created.
@@ -113,6 +114,7 @@ type ApplicationInsightsWebTestObservation struct {
 	// Allow for retries should this WebTest fail.
 	RetryEnabled *bool `json:"retryEnabled,omitempty" tf:"retry_enabled,omitempty"`
 
+	// The ID of the Application Insights Web Test.
 	SyntheticMonitorID *string `json:"syntheticMonitorId,omitempty" tf:"synthetic_monitor_id,omitempty"`
 
 	// A mapping of tags to assign to the resource.

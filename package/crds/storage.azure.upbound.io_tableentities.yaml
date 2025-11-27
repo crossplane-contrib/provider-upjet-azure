@@ -90,7 +90,7 @@ spec:
                     type: string
                   storageTableId:
                     description: The Storage Share ID in which this file will be placed
-                      into. Changing this forces a new resource to be created.
+                      into.
                     type: string
                   storageTableIdRef:
                     description: Reference to a Table in storage to populate storageTableId.
@@ -197,7 +197,7 @@ spec:
                     type: string
                   storageTableId:
                     description: The Storage Share ID in which this file will be placed
-                      into. Changing this forces a new resource to be created.
+                      into.
                     type: string
                   storageTableIdRef:
                     description: Reference to a Table in storage to populate storageTableId.
@@ -399,7 +399,7 @@ spec:
                     type: string
                   storageTableId:
                     description: The Storage Share ID in which this file will be placed
-                      into. Changing this forces a new resource to be created.
+                      into.
                     type: string
                 type: object
               conditions:

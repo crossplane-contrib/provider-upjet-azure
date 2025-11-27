@@ -941,29 +941,24 @@ spec:
                         type: object
                     type: object
                   securityPolicies:
-                    description: An security_policies block as defined below. Changing
-                      this forces a new Front Door Security Policy to be created.
+                    description: An security_policies block as defined below.
                     properties:
                       firewall:
-                        description: An firewall block as defined below. Changing
-                          this forces a new Front Door Security Policy to be created.
+                        description: An firewall block as defined below.
                         properties:
                           association:
-                            description: An association block as defined below. Changing
-                              this forces a new Front Door Security Policy to be created.
+                            description: An association block as defined below.
                             properties:
                               domain:
                                 description: One or more domain blocks as defined
-                                  below. Changing this forces a new Front Door Security
-                                  Policy to be created.
+                                  below.
                                 items:
                                   properties:
                                     cdnFrontdoorDomainId:
                                       description: The Resource Id of the Front Door
                                         Custom Domain or Front Door Endpoint that
                                         should be bound to this Front Door Security
-                                        Policy. Changing this forces a new Front Door
-                                        Security Policy to be created.
+                                        Policy.
                                       type: string
                                     cdnFrontdoorDomainIdRef:
                                       description: Reference to a FrontdoorCustomDomain
@@ -1150,29 +1145,24 @@ spec:
                   autoscaler.
                 properties:
                   securityPolicies:
-                    description: An security_policies block as defined below. Changing
-                      this forces a new Front Door Security Policy to be created.
+                    description: An security_policies block as defined below.
                     properties:
                       firewall:
-                        description: An firewall block as defined below. Changing
-                          this forces a new Front Door Security Policy to be created.
+                        description: An firewall block as defined below.
                         properties:
                           association:
-                            description: An association block as defined below. Changing
-                              this forces a new Front Door Security Policy to be created.
+                            description: An association block as defined below.
                             properties:
                               domain:
                                 description: One or more domain blocks as defined
-                                  below. Changing this forces a new Front Door Security
-                                  Policy to be created.
+                                  below.
                                 items:
                                   properties:
                                     cdnFrontdoorDomainId:
                                       description: The Resource Id of the Front Door
                                         Custom Domain or Front Door Endpoint that
                                         should be bound to this Front Door Security
-                                        Policy. Changing this forces a new Front Door
-                                        Security Policy to be created.
+                                        Policy.
                                       type: string
                                     cdnFrontdoorDomainIdRef:
                                       description: Reference to a FrontdoorCustomDomain
@@ -1451,21 +1441,17 @@ spec:
                     description: The ID of the Front Door Security Policy.
                     type: string
                   securityPolicies:
-                    description: An security_policies block as defined below. Changing
-                      this forces a new Front Door Security Policy to be created.
+                    description: An security_policies block as defined below.
                     properties:
                       firewall:
-                        description: An firewall block as defined below. Changing
-                          this forces a new Front Door Security Policy to be created.
+                        description: An firewall block as defined below.
                         properties:
                           association:
-                            description: An association block as defined below. Changing
-                              this forces a new Front Door Security Policy to be created.
+                            description: An association block as defined below.
                             properties:
                               domain:
                                 description: One or more domain blocks as defined
-                                  below. Changing this forces a new Front Door Security
-                                  Policy to be created.
+                                  below.
                                 items:
                                   properties:
                                     active:
@@ -1476,8 +1462,7 @@ spec:
                                       description: The Resource Id of the Front Door
                                         Custom Domain or Front Door Endpoint that
                                         should be bound to this Front Door Security
-                                        Policy. Changing this forces a new Front Door
-                                        Security Policy to be created.
+                                        Policy.
                                       type: string
                                   type: object
                                 type: array

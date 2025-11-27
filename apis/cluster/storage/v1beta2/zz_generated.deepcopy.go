@@ -168,6 +168,11 @@ func (in *AccountInitParameters) DeepCopyInto(out *AccountInitParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.ProvisionedBillingModelVersion != nil {
+		in, out := &in.ProvisionedBillingModelVersion, &out.ProvisionedBillingModelVersion
+		*out = new(string)
+		**out = **in
+	}
 	if in.PublicNetworkAccessEnabled != nil {
 		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
 		*out = new(bool)
@@ -827,6 +832,11 @@ func (in *AccountObservation) DeepCopyInto(out *AccountObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ProvisionedBillingModelVersion != nil {
+		in, out := &in.ProvisionedBillingModelVersion, &out.ProvisionedBillingModelVersion
+		*out = new(string)
+		**out = **in
+	}
 	if in.PublicNetworkAccessEnabled != nil {
 		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
 		*out = new(bool)
@@ -1201,6 +1211,11 @@ func (in *AccountParameters) DeepCopyInto(out *AccountParameters) {
 	if in.Nfsv3Enabled != nil {
 		in, out := &in.Nfsv3Enabled, &out.Nfsv3Enabled
 		*out = new(bool)
+		**out = **in
+	}
+	if in.ProvisionedBillingModelVersion != nil {
+		in, out := &in.ProvisionedBillingModelVersion, &out.ProvisionedBillingModelVersion
+		*out = new(string)
 		**out = **in
 	}
 	if in.PublicNetworkAccessEnabled != nil {

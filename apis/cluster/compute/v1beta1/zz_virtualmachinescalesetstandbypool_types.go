@@ -67,7 +67,7 @@ type VirtualMachineScaleSetStandbyPoolInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Specifies the desired state of virtual machines in the pool. Possible values are Running and Deallocated.
+	// Specifies the desired state of virtual machines in the pool. Possible values are Deallocated, Hibernated and Running.
 	VirtualMachineState *string `json:"virtualMachineState,omitempty" tf:"virtual_machine_state,omitempty"`
 }
 
@@ -92,7 +92,7 @@ type VirtualMachineScaleSetStandbyPoolObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Specifies the desired state of virtual machines in the pool. Possible values are Running and Deallocated.
+	// Specifies the desired state of virtual machines in the pool. Possible values are Deallocated, Hibernated and Running.
 	VirtualMachineState *string `json:"virtualMachineState,omitempty" tf:"virtual_machine_state,omitempty"`
 }
 
@@ -138,7 +138,7 @@ type VirtualMachineScaleSetStandbyPoolParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Specifies the desired state of virtual machines in the pool. Possible values are Running and Deallocated.
+	// Specifies the desired state of virtual machines in the pool. Possible values are Deallocated, Hibernated and Running.
 	// +kubebuilder:validation:Optional
 	VirtualMachineState *string `json:"virtualMachineState,omitempty" tf:"virtual_machine_state,omitempty"`
 }

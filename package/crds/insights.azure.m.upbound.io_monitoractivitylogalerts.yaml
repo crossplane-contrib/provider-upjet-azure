@@ -189,17 +189,15 @@ spec:
                         type: string
                       recommendationCategory:
                         description: The recommendation category of the event. Possible
-                          values are Cost, Reliability, OperationalExcellence, HighAvailability
-                          and Performance. It is only allowed when category is Recommendation.
+                          values are Cost, Reliability, OperationalExcellence, HighAvailability,
+                          Performance and Security.
                         type: string
                       recommendationImpact:
                         description: The recommendation impact of the event. Possible
-                          values are High, Medium and Low. It is only allowed when
-                          category is Recommendation.
+                          values are High, Medium and Low.
                         type: string
                       recommendationType:
-                        description: The recommendation type of the event. It is only
-                          allowed when category is Recommendation.
+                        description: The recommendation type of the event.
                         type: string
                       resourceGroup:
                         description: The name of resource group monitored by the activity
@@ -409,7 +407,8 @@ spec:
                     type: boolean
                   location:
                     description: The Azure Region where the activity log alert rule
-                      should exist. Changing this forces a new resource to be created.
+                      should exist. Possible values are global, westeurope, northeurope,
+                      and eastus2euap. Changing this forces a new resource to be created.
                     type: string
                   name:
                     description: The name of the activity log alert. Changing this
@@ -744,17 +743,15 @@ spec:
                         type: string
                       recommendationCategory:
                         description: The recommendation category of the event. Possible
-                          values are Cost, Reliability, OperationalExcellence, HighAvailability
-                          and Performance. It is only allowed when category is Recommendation.
+                          values are Cost, Reliability, OperationalExcellence, HighAvailability,
+                          Performance and Security.
                         type: string
                       recommendationImpact:
                         description: The recommendation impact of the event. Possible
-                          values are High, Medium and Low. It is only allowed when
-                          category is Recommendation.
+                          values are High, Medium and Low.
                         type: string
                       recommendationType:
-                        description: The recommendation type of the event. It is only
-                          allowed when category is Recommendation.
+                        description: The recommendation type of the event.
                         type: string
                       resourceGroup:
                         description: The name of resource group monitored by the activity
@@ -964,7 +961,8 @@ spec:
                     type: boolean
                   location:
                     description: The Azure Region where the activity log alert rule
-                      should exist. Changing this forces a new resource to be created.
+                      should exist. Possible values are global, westeurope, northeurope,
+                      and eastus2euap. Changing this forces a new resource to be created.
                     type: string
                   name:
                     description: The name of the activity log alert. Changing this
@@ -1281,17 +1279,15 @@ spec:
                         type: string
                       recommendationCategory:
                         description: The recommendation category of the event. Possible
-                          values are Cost, Reliability, OperationalExcellence, HighAvailability
-                          and Performance. It is only allowed when category is Recommendation.
+                          values are Cost, Reliability, OperationalExcellence, HighAvailability,
+                          Performance and Security.
                         type: string
                       recommendationImpact:
                         description: The recommendation impact of the event. Possible
-                          values are High, Medium and Low. It is only allowed when
-                          category is Recommendation.
+                          values are High, Medium and Low.
                         type: string
                       recommendationType:
-                        description: The recommendation type of the event. It is only
-                          allowed when category is Recommendation.
+                        description: The recommendation type of the event.
                         type: string
                       resourceGroup:
                         description: The name of resource group monitored by the activity
@@ -1422,7 +1418,8 @@ spec:
                     type: string
                   location:
                     description: The Azure Region where the activity log alert rule
-                      should exist. Changing this forces a new resource to be created.
+                      should exist. Possible values are global, westeurope, northeurope,
+                      and eastus2euap. Changing this forces a new resource to be created.
                     type: string
                   name:
                     description: The name of the activity log alert. Changing this

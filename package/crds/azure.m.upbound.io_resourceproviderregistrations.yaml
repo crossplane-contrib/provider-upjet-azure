@@ -189,6 +189,7 @@ spec:
                       type: object
                     type: array
                   id:
+                    description: The ID of the Resource Provider.
                     type: string
                   name:
                     description: The namespace of the Resource Provider which should

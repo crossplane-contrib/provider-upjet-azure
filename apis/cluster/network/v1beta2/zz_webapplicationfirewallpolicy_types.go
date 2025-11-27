@@ -21,7 +21,7 @@ type CustomRulesInitParameters struct {
 	// Describes if the policy is in enabled state or disabled state. Defaults to true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Specifies what grouping the rate limit will count requests by. Possible values are GeoLocation, ClientAddr and None.
+	// Specifies what grouping the rate limit will count requests by. Possible values are ClientAddr, ClientAddrXFFHeader, GeoLocation, GeoLocationXFFHeader and None.
 	GroupRateLimitBy *string `json:"groupRateLimitBy,omitempty" tf:"group_rate_limit_by,omitempty"`
 
 	// One or more match_conditions blocks as defined below.
@@ -51,7 +51,7 @@ type CustomRulesObservation struct {
 	// Describes if the policy is in enabled state or disabled state. Defaults to true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Specifies what grouping the rate limit will count requests by. Possible values are GeoLocation, ClientAddr and None.
+	// Specifies what grouping the rate limit will count requests by. Possible values are ClientAddr, ClientAddrXFFHeader, GeoLocation, GeoLocationXFFHeader and None.
 	GroupRateLimitBy *string `json:"groupRateLimitBy,omitempty" tf:"group_rate_limit_by,omitempty"`
 
 	// One or more match_conditions blocks as defined below.
@@ -83,7 +83,7 @@ type CustomRulesParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Specifies what grouping the rate limit will count requests by. Possible values are GeoLocation, ClientAddr and None.
+	// Specifies what grouping the rate limit will count requests by. Possible values are ClientAddr, ClientAddrXFFHeader, GeoLocation, GeoLocationXFFHeader and None.
 	// +kubebuilder:validation:Optional
 	GroupRateLimitBy *string `json:"groupRateLimitBy,omitempty" tf:"group_rate_limit_by,omitempty"`
 

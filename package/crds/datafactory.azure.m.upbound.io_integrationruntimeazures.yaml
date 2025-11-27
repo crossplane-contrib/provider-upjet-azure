@@ -317,6 +317,7 @@ spec:
                     description: Integration runtime description.
                     type: string
                   id:
+                    description: The ID of the Data Factory Integration Runtime.
                     type: string
                   location:
                     description: Specifies the supported Azure location where the

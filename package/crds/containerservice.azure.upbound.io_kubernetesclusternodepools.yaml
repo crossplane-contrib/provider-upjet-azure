@@ -2059,6 +2059,11 @@ spec:
                       Processing Standard enabled? Changing this property requires
                       specifying temporary_name_for_rotation.
                     type: boolean
+                  gpuDriver:
+                    description: Specifies whether to install the GPU Driver for the
+                      nodes. Possible values are Install and None. Changing this forces
+                      a new resource to be created.
+                    type: string
                   gpuInstance:
                     description: Specifies the GPU MIG instance profile for supported
                       GPU VM SKU. The allowed values are MIG1g, MIG2g, MIG3g, MIG4g
@@ -2336,14 +2341,16 @@ spec:
                               Must be between 0 and 100.
                             type: number
                         type: object
+                      transparentHugePage:
+                        description: Specifies the Transparent Huge Page configuration.
+                          Possible values are always, madvise and never.
+                        type: string
                       transparentHugePageDefrag:
                         description: specifies the defrag configuration for Transparent
                           Huge Page. Possible values are always, defer, defer+madvise,
                           madvise and never.
                         type: string
                       transparentHugePageEnabled:
-                        description: Specifies the Transparent Huge Page enabled configuration.
-                          Possible values are always, madvise and never.
                         type: string
                     type: object
                   maxCount:
@@ -2447,12 +2454,13 @@ spec:
                     type: string
                   osSku:
                     description: Specifies the OS SKU used by the agent pool. Possible
-                      values are AzureLinux, Ubuntu, Windows2019 and Windows2022.
-                      If not specified, the default is Ubuntu if OSType=Linux or Windows2019
-                      if OSType=Windows. And the default Windows OSSKU will be changed
-                      to Windows2022 after Windows2019 is deprecated. Changing this
-                      from AzureLinux or Ubuntu to AzureLinux or Ubuntu will not replace
-                      the resource, otherwise it forces a new resource to be created.
+                      values are AzureLinux, AzureLinux3, Ubuntu, Ubuntu2204, Windows2019
+                      and Windows2022. If not specified, the default is Ubuntu if
+                      OSType=Linux or Windows2019 if OSType=Windows. And the default
+                      Windows OSSKU will be changed to Windows2022 after Windows2019
+                      is deprecated. Changing this from AzureLinux or Ubuntu to AzureLinux
+                      or Ubuntu will not replace the resource, otherwise it forces
+                      a new resource to be created.
                     type: string
                   osType:
                     description: The Operating System which should be used for this
@@ -2595,10 +2603,20 @@ spec:
                         description: The maximum number or percentage of nodes which
                           will be added to the Node Pool size during an upgrade.
                         type: string
+                      maxUnavailable:
+                        description: The maximum number or percentage of nodes which
+                          can be unavailable during the upgrade.
+                        type: string
                       nodeSoakDurationInMinutes:
                         description: The amount of time in minutes to wait after draining
                           a node and before reimaging and moving on to next node.
                         type: number
+                      undrainableNodeBehavior:
+                        description: Specifies the action when a node is undrainable
+                          during upgrade. Possible values are Cordon and Schedule.
+                          Unsetting this after configuring it will force a new resource
+                          to be created.
+                        type: string
                     type: object
                   vmSize:
                     description: The SKU which should be used for the Virtual Machines
@@ -2738,6 +2756,11 @@ spec:
                       Processing Standard enabled? Changing this property requires
                       specifying temporary_name_for_rotation.
                     type: boolean
+                  gpuDriver:
+                    description: Specifies whether to install the GPU Driver for the
+                      nodes. Possible values are Install and None. Changing this forces
+                      a new resource to be created.
+                    type: string
                   gpuInstance:
                     description: Specifies the GPU MIG instance profile for supported
                       GPU VM SKU. The allowed values are MIG1g, MIG2g, MIG3g, MIG4g
@@ -2934,14 +2957,16 @@ spec:
                               Must be between 0 and 100.
                             type: number
                         type: object
+                      transparentHugePage:
+                        description: Specifies the Transparent Huge Page configuration.
+                          Possible values are always, madvise and never.
+                        type: string
                       transparentHugePageDefrag:
                         description: specifies the defrag configuration for Transparent
                           Huge Page. Possible values are always, defer, defer+madvise,
                           madvise and never.
                         type: string
                       transparentHugePageEnabled:
-                        description: Specifies the Transparent Huge Page enabled configuration.
-                          Possible values are always, madvise and never.
                         type: string
                     type: object
                   maxCount:
@@ -3045,12 +3070,13 @@ spec:
                     type: string
                   osSku:
                     description: Specifies the OS SKU used by the agent pool. Possible
-                      values are AzureLinux, Ubuntu, Windows2019 and Windows2022.
-                      If not specified, the default is Ubuntu if OSType=Linux or Windows2019
-                      if OSType=Windows. And the default Windows OSSKU will be changed
-                      to Windows2022 after Windows2019 is deprecated. Changing this
-                      from AzureLinux or Ubuntu to AzureLinux or Ubuntu will not replace
-                      the resource, otherwise it forces a new resource to be created.
+                      values are AzureLinux, AzureLinux3, Ubuntu, Ubuntu2204, Windows2019
+                      and Windows2022. If not specified, the default is Ubuntu if
+                      OSType=Linux or Windows2019 if OSType=Windows. And the default
+                      Windows OSSKU will be changed to Windows2022 after Windows2019
+                      is deprecated. Changing this from AzureLinux or Ubuntu to AzureLinux
+                      or Ubuntu will not replace the resource, otherwise it forces
+                      a new resource to be created.
                     type: string
                   osType:
                     description: The Operating System which should be used for this
@@ -3193,10 +3219,20 @@ spec:
                         description: The maximum number or percentage of nodes which
                           will be added to the Node Pool size during an upgrade.
                         type: string
+                      maxUnavailable:
+                        description: The maximum number or percentage of nodes which
+                          can be unavailable during the upgrade.
+                        type: string
                       nodeSoakDurationInMinutes:
                         description: The amount of time in minutes to wait after draining
                           a node and before reimaging and moving on to next node.
                         type: number
+                      undrainableNodeBehavior:
+                        description: Specifies the action when a node is undrainable
+                          during upgrade. Possible values are Cordon and Schedule.
+                          Unsetting this after configuring it will force a new resource
+                          to be created.
+                        type: string
                     type: object
                   vmSize:
                     description: The SKU which should be used for the Virtual Machines
@@ -3415,6 +3451,11 @@ spec:
                       Processing Standard enabled? Changing this property requires
                       specifying temporary_name_for_rotation.
                     type: boolean
+                  gpuDriver:
+                    description: Specifies whether to install the GPU Driver for the
+                      nodes. Possible values are Install and None. Changing this forces
+                      a new resource to be created.
+                    type: string
                   gpuInstance:
                     description: Specifies the GPU MIG instance profile for supported
                       GPU VM SKU. The allowed values are MIG1g, MIG2g, MIG3g, MIG4g
@@ -3619,14 +3660,16 @@ spec:
                               Must be between 0 and 100.
                             type: number
                         type: object
+                      transparentHugePage:
+                        description: Specifies the Transparent Huge Page configuration.
+                          Possible values are always, madvise and never.
+                        type: string
                       transparentHugePageDefrag:
                         description: specifies the defrag configuration for Transparent
                           Huge Page. Possible values are always, defer, defer+madvise,
                           madvise and never.
                         type: string
                       transparentHugePageEnabled:
-                        description: Specifies the Transparent Huge Page enabled configuration.
-                          Possible values are always, madvise and never.
                         type: string
                     type: object
                   maxCount:
@@ -3730,12 +3773,13 @@ spec:
                     type: string
                   osSku:
                     description: Specifies the OS SKU used by the agent pool. Possible
-                      values are AzureLinux, Ubuntu, Windows2019 and Windows2022.
-                      If not specified, the default is Ubuntu if OSType=Linux or Windows2019
-                      if OSType=Windows. And the default Windows OSSKU will be changed
-                      to Windows2022 after Windows2019 is deprecated. Changing this
-                      from AzureLinux or Ubuntu to AzureLinux or Ubuntu will not replace
-                      the resource, otherwise it forces a new resource to be created.
+                      values are AzureLinux, AzureLinux3, Ubuntu, Ubuntu2204, Windows2019
+                      and Windows2022. If not specified, the default is Ubuntu if
+                      OSType=Linux or Windows2019 if OSType=Windows. And the default
+                      Windows OSSKU will be changed to Windows2022 after Windows2019
+                      is deprecated. Changing this from AzureLinux or Ubuntu to AzureLinux
+                      or Ubuntu will not replace the resource, otherwise it forces
+                      a new resource to be created.
                     type: string
                   osType:
                     description: The Operating System which should be used for this
@@ -3804,10 +3848,20 @@ spec:
                         description: The maximum number or percentage of nodes which
                           will be added to the Node Pool size during an upgrade.
                         type: string
+                      maxUnavailable:
+                        description: The maximum number or percentage of nodes which
+                          can be unavailable during the upgrade.
+                        type: string
                       nodeSoakDurationInMinutes:
                         description: The amount of time in minutes to wait after draining
                           a node and before reimaging and moving on to next node.
                         type: number
+                      undrainableNodeBehavior:
+                        description: Specifies the action when a node is undrainable
+                          during upgrade. Possible values are Cordon and Schedule.
+                          Unsetting this after configuring it will force a new resource
+                          to be created.
+                        type: string
                     type: object
                   vmSize:
                     description: The SKU which should be used for the Virtual Machines

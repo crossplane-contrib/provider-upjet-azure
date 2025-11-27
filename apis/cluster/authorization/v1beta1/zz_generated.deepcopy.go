@@ -732,6 +732,11 @@ func (in *ManagementGroupPolicyAssignmentOverridesSelectorsInitParameters) DeepC
 			}
 		}
 	}
+	if in.Kind != nil {
+		in, out := &in.Kind, &out.Kind
+		*out = new(string)
+		**out = **in
+	}
 	if in.NotIn != nil {
 		in, out := &in.NotIn, &out.NotIn
 		*out = make([]*string, len(*in))
@@ -810,6 +815,11 @@ func (in *ManagementGroupPolicyAssignmentOverridesSelectorsParameters) DeepCopyI
 				**out = **in
 			}
 		}
+	}
+	if in.Kind != nil {
+		in, out := &in.Kind, &out.Kind
+		*out = new(string)
+		**out = **in
 	}
 	if in.NotIn != nil {
 		in, out := &in.NotIn, &out.NotIn

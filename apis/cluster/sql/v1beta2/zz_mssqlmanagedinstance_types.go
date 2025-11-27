@@ -121,7 +121,7 @@ type MSSQLManagedInstanceInitParameters struct {
 	// An azure_active_directory_administrator block as defined below.
 	AzureActiveDirectoryAdministrator *AzureActiveDirectoryAdministratorInitParameters `json:"azureActiveDirectoryAdministrator,omitempty" tf:"azure_active_directory_administrator,omitempty"`
 
-	// Specifies how the SQL Managed Instance will be collated. Default value is SQL_Latin1_General_CP1_CI_AS. Changing this forces a new resource to be created.
+	// Specifies how the SQL Managed Instance will be collated. Defaults to SQL_Latin1_General_CP1_CI_AS. Changing this forces a new resource to be created.
 	Collation *string `json:"collation,omitempty" tf:"collation,omitempty"`
 
 	// The ID of the SQL Managed Instance which will share the DNS zone. This is a prerequisite for creating an azurerm_sql_managed_instance_failover_group. Setting this after creation forces a new resource to be created.
@@ -152,22 +152,22 @@ type MSSQLManagedInstanceInitParameters struct {
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The name of the Public Maintenance Configuration window to apply to the SQL Managed Instance. Valid values include SQL_Default or an Azure Location in the format SQL_{Location}_MI_{Size}(for example SQL_EastUS_MI_1). Defaults to SQL_Default.
+	// The name of the Public Maintenance Configuration window to apply to the SQL Managed Instance. Possible values are SQL_Default or an Azure Location in the format SQL_{Location}_MI_{Size}(for example SQL_EastUS_MI_1). Defaults to SQL_Default.
 	MaintenanceConfigurationName *string `json:"maintenanceConfigurationName,omitempty" tf:"maintenance_configuration_name,omitempty"`
 
 	// The Minimum TLS Version. Default value is 1.2 Valid values include 1.0, 1.1, 1.2.
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
-	// Specifies how the SQL Managed Instance will be accessed. Default value is Default. Valid values include Default, Proxy, and Redirect.
+	// Specifies how the SQL Managed Instance will be accessed. Defaults to Default. Possible values are Default, Proxy, and Redirect.
 	ProxyOverride *string `json:"proxyOverride,omitempty" tf:"proxy_override,omitempty"`
 
-	// Is the public data endpoint enabled? Default value is false.
+	// Is the public data endpoint enabled? Defaults to false.
 	PublicDataEndpointEnabled *bool `json:"publicDataEndpointEnabled,omitempty" tf:"public_data_endpoint_enabled,omitempty"`
 
 	// The service principal type. The only possible value is SystemAssigned.
 	ServicePrincipalType *string `json:"servicePrincipalType,omitempty" tf:"service_principal_type,omitempty"`
 
-	// Specifies the SKU Name for the SQL Managed Instance. Valid values include GP_Gen4, GP_Gen5, GP_Gen8IM, GP_Gen8IH, BC_Gen4, BC_Gen5, BC_Gen8IM or BC_Gen8IH.
+	// Specifies the SKU Name for the SQL Managed Instance. Possible values are GP_Gen4, GP_Gen5, GP_Gen8IM, GP_Gen8IH, BC_Gen4, BC_Gen5, BC_Gen8IM or BC_Gen8IH.
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// Specifies the storage account type used to store backups for this database. Possible values are GRS, GZRS, LRS, and ZRS. Defaults to GRS.
@@ -193,13 +193,13 @@ type MSSQLManagedInstanceInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The TimeZone ID that the SQL Managed Instance will be operating in. Default value is UTC. Changing this forces a new resource to be created.
+	// The TimeZone ID that the SQL Managed Instance will be operating in. Defaults to UTC. Changing this forces a new resource to be created.
 	TimezoneID *string `json:"timezoneId,omitempty" tf:"timezone_id,omitempty"`
 
 	// Number of cores that should be assigned to the SQL Managed Instance. Values can be 8, 16, or 24 for Gen4 SKUs, or 4, 6, 8, 10, 12, 16, 20, 24, 32, 40, 48, 56, 64, 80, 96 or 128 for Gen5 SKUs.
 	Vcores *float64 `json:"vcores,omitempty" tf:"vcores,omitempty"`
 
-	// Specifies whether or not the SQL Managed Instance is zone redundant. Defaults to false.
+	// Specifies whether the SQL Managed Instance is zone redundant. Defaults to false.
 	ZoneRedundantEnabled *bool `json:"zoneRedundantEnabled,omitempty" tf:"zone_redundant_enabled,omitempty"`
 }
 
@@ -211,7 +211,7 @@ type MSSQLManagedInstanceObservation struct {
 	// An azure_active_directory_administrator block as defined below.
 	AzureActiveDirectoryAdministrator *AzureActiveDirectoryAdministratorObservation `json:"azureActiveDirectoryAdministrator,omitempty" tf:"azure_active_directory_administrator,omitempty"`
 
-	// Specifies how the SQL Managed Instance will be collated. Default value is SQL_Latin1_General_CP1_CI_AS. Changing this forces a new resource to be created.
+	// Specifies how the SQL Managed Instance will be collated. Defaults to SQL_Latin1_General_CP1_CI_AS. Changing this forces a new resource to be created.
 	Collation *string `json:"collation,omitempty" tf:"collation,omitempty"`
 
 	// The Dns Zone where the SQL Managed Instance is located.
@@ -241,16 +241,16 @@ type MSSQLManagedInstanceObservation struct {
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The name of the Public Maintenance Configuration window to apply to the SQL Managed Instance. Valid values include SQL_Default or an Azure Location in the format SQL_{Location}_MI_{Size}(for example SQL_EastUS_MI_1). Defaults to SQL_Default.
+	// The name of the Public Maintenance Configuration window to apply to the SQL Managed Instance. Possible values are SQL_Default or an Azure Location in the format SQL_{Location}_MI_{Size}(for example SQL_EastUS_MI_1). Defaults to SQL_Default.
 	MaintenanceConfigurationName *string `json:"maintenanceConfigurationName,omitempty" tf:"maintenance_configuration_name,omitempty"`
 
 	// The Minimum TLS Version. Default value is 1.2 Valid values include 1.0, 1.1, 1.2.
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
-	// Specifies how the SQL Managed Instance will be accessed. Default value is Default. Valid values include Default, Proxy, and Redirect.
+	// Specifies how the SQL Managed Instance will be accessed. Defaults to Default. Possible values are Default, Proxy, and Redirect.
 	ProxyOverride *string `json:"proxyOverride,omitempty" tf:"proxy_override,omitempty"`
 
-	// Is the public data endpoint enabled? Default value is false.
+	// Is the public data endpoint enabled? Defaults to false.
 	PublicDataEndpointEnabled *bool `json:"publicDataEndpointEnabled,omitempty" tf:"public_data_endpoint_enabled,omitempty"`
 
 	// The name of the resource group in which to create the SQL Managed Instance. Changing this forces a new resource to be created.
@@ -259,7 +259,7 @@ type MSSQLManagedInstanceObservation struct {
 	// The service principal type. The only possible value is SystemAssigned.
 	ServicePrincipalType *string `json:"servicePrincipalType,omitempty" tf:"service_principal_type,omitempty"`
 
-	// Specifies the SKU Name for the SQL Managed Instance. Valid values include GP_Gen4, GP_Gen5, GP_Gen8IM, GP_Gen8IH, BC_Gen4, BC_Gen5, BC_Gen8IM or BC_Gen8IH.
+	// Specifies the SKU Name for the SQL Managed Instance. Possible values are GP_Gen4, GP_Gen5, GP_Gen8IM, GP_Gen8IH, BC_Gen4, BC_Gen5, BC_Gen8IM or BC_Gen8IH.
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// Specifies the storage account type used to store backups for this database. Possible values are GRS, GZRS, LRS, and ZRS. Defaults to GRS.
@@ -275,13 +275,13 @@ type MSSQLManagedInstanceObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The TimeZone ID that the SQL Managed Instance will be operating in. Default value is UTC. Changing this forces a new resource to be created.
+	// The TimeZone ID that the SQL Managed Instance will be operating in. Defaults to UTC. Changing this forces a new resource to be created.
 	TimezoneID *string `json:"timezoneId,omitempty" tf:"timezone_id,omitempty"`
 
 	// Number of cores that should be assigned to the SQL Managed Instance. Values can be 8, 16, or 24 for Gen4 SKUs, or 4, 6, 8, 10, 12, 16, 20, 24, 32, 40, 48, 56, 64, 80, 96 or 128 for Gen5 SKUs.
 	Vcores *float64 `json:"vcores,omitempty" tf:"vcores,omitempty"`
 
-	// Specifies whether or not the SQL Managed Instance is zone redundant. Defaults to false.
+	// Specifies whether the SQL Managed Instance is zone redundant. Defaults to false.
 	ZoneRedundantEnabled *bool `json:"zoneRedundantEnabled,omitempty" tf:"zone_redundant_enabled,omitempty"`
 }
 
@@ -299,7 +299,7 @@ type MSSQLManagedInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	AzureActiveDirectoryAdministrator *AzureActiveDirectoryAdministratorParameters `json:"azureActiveDirectoryAdministrator,omitempty" tf:"azure_active_directory_administrator,omitempty"`
 
-	// Specifies how the SQL Managed Instance will be collated. Default value is SQL_Latin1_General_CP1_CI_AS. Changing this forces a new resource to be created.
+	// Specifies how the SQL Managed Instance will be collated. Defaults to SQL_Latin1_General_CP1_CI_AS. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Collation *string `json:"collation,omitempty" tf:"collation,omitempty"`
 
@@ -337,7 +337,7 @@ type MSSQLManagedInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The name of the Public Maintenance Configuration window to apply to the SQL Managed Instance. Valid values include SQL_Default or an Azure Location in the format SQL_{Location}_MI_{Size}(for example SQL_EastUS_MI_1). Defaults to SQL_Default.
+	// The name of the Public Maintenance Configuration window to apply to the SQL Managed Instance. Possible values are SQL_Default or an Azure Location in the format SQL_{Location}_MI_{Size}(for example SQL_EastUS_MI_1). Defaults to SQL_Default.
 	// +kubebuilder:validation:Optional
 	MaintenanceConfigurationName *string `json:"maintenanceConfigurationName,omitempty" tf:"maintenance_configuration_name,omitempty"`
 
@@ -345,11 +345,11 @@ type MSSQLManagedInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
-	// Specifies how the SQL Managed Instance will be accessed. Default value is Default. Valid values include Default, Proxy, and Redirect.
+	// Specifies how the SQL Managed Instance will be accessed. Defaults to Default. Possible values are Default, Proxy, and Redirect.
 	// +kubebuilder:validation:Optional
 	ProxyOverride *string `json:"proxyOverride,omitempty" tf:"proxy_override,omitempty"`
 
-	// Is the public data endpoint enabled? Default value is false.
+	// Is the public data endpoint enabled? Defaults to false.
 	// +kubebuilder:validation:Optional
 	PublicDataEndpointEnabled *bool `json:"publicDataEndpointEnabled,omitempty" tf:"public_data_endpoint_enabled,omitempty"`
 
@@ -370,7 +370,7 @@ type MSSQLManagedInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	ServicePrincipalType *string `json:"servicePrincipalType,omitempty" tf:"service_principal_type,omitempty"`
 
-	// Specifies the SKU Name for the SQL Managed Instance. Valid values include GP_Gen4, GP_Gen5, GP_Gen8IM, GP_Gen8IH, BC_Gen4, BC_Gen5, BC_Gen8IM or BC_Gen8IH.
+	// Specifies the SKU Name for the SQL Managed Instance. Possible values are GP_Gen4, GP_Gen5, GP_Gen8IM, GP_Gen8IH, BC_Gen4, BC_Gen5, BC_Gen8IM or BC_Gen8IH.
 	// +kubebuilder:validation:Optional
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
@@ -401,7 +401,7 @@ type MSSQLManagedInstanceParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The TimeZone ID that the SQL Managed Instance will be operating in. Default value is UTC. Changing this forces a new resource to be created.
+	// The TimeZone ID that the SQL Managed Instance will be operating in. Defaults to UTC. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	TimezoneID *string `json:"timezoneId,omitempty" tf:"timezone_id,omitempty"`
 
@@ -409,7 +409,7 @@ type MSSQLManagedInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	Vcores *float64 `json:"vcores,omitempty" tf:"vcores,omitempty"`
 
-	// Specifies whether or not the SQL Managed Instance is zone redundant. Defaults to false.
+	// Specifies whether the SQL Managed Instance is zone redundant. Defaults to false.
 	// +kubebuilder:validation:Optional
 	ZoneRedundantEnabled *bool `json:"zoneRedundantEnabled,omitempty" tf:"zone_redundant_enabled,omitempty"`
 }

@@ -122,9 +122,9 @@ spec:
                             DisableRateLimitingResponses, EnableAggregationPipeline,
                             EnableCassandra, EnableGremlin, EnableMongo, EnableMongo16MBDocumentSupport,
                             EnableMongoRetryableWrites, EnableMongoRoleBasedAccessControl,
-                            EnableNoSQLVectorSearch, EnableNoSQLFullTextSearch, EnablePartialUniqueIndex,  EnableServerless,
-                            EnableTable, EnableTtlOnCustomPath, EnableUniqueCompoundNestedDocs,
-                            MongoDBv3.4 and mongoEnableDocLevelTTL.
+                            EnableNoSQLVectorSearch, EnableNoSQLFullTextSearch, EnablePartialUniqueIndex,
+                            EnableServerless, EnableTable, EnableTtlOnCustomPath,
+                            EnableUniqueCompoundNestedDocs, MongoDBv3.4 and mongoEnableDocLevelTTL.
                           type: string
                       type: object
                     type: array
@@ -733,9 +733,9 @@ spec:
                             DisableRateLimitingResponses, EnableAggregationPipeline,
                             EnableCassandra, EnableGremlin, EnableMongo, EnableMongo16MBDocumentSupport,
                             EnableMongoRetryableWrites, EnableMongoRoleBasedAccessControl,
-                            EnableNoSQLVectorSearch, EnableNoSQLFullTextSearch, EnablePartialUniqueIndex,  EnableServerless,
-                            EnableTable, EnableTtlOnCustomPath, EnableUniqueCompoundNestedDocs,
-                            MongoDBv3.4 and mongoEnableDocLevelTTL.
+                            EnableNoSQLVectorSearch, EnableNoSQLFullTextSearch, EnablePartialUniqueIndex,
+                            EnableServerless, EnableTable, EnableTtlOnCustomPath,
+                            EnableUniqueCompoundNestedDocs, MongoDBv3.4 and mongoEnableDocLevelTTL.
                           type: string
                       type: object
                     type: array
@@ -1324,9 +1324,9 @@ spec:
                             DisableRateLimitingResponses, EnableAggregationPipeline,
                             EnableCassandra, EnableGremlin, EnableMongo, EnableMongo16MBDocumentSupport,
                             EnableMongoRetryableWrites, EnableMongoRoleBasedAccessControl,
-                            EnableNoSQLVectorSearch, EnableNoSQLFullTextSearch, EnablePartialUniqueIndex,  EnableServerless,
-                            EnableTable, EnableTtlOnCustomPath, EnableUniqueCompoundNestedDocs,
-                            MongoDBv3.4 and mongoEnableDocLevelTTL.
+                            EnableNoSQLVectorSearch, EnableNoSQLFullTextSearch, EnablePartialUniqueIndex,
+                            EnableServerless, EnableTable, EnableTtlOnCustomPath,
+                            EnableUniqueCompoundNestedDocs, MongoDBv3.4 and mongoEnableDocLevelTTL.
                           type: string
                       type: object
                     type: array

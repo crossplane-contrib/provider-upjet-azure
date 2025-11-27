@@ -15,13 +15,15 @@ import (
 
 type BotChannelMSTeamsInitParameters struct {
 
+	// Specifies whether to enable Microsoft Teams channel calls. This defaults to false.
+	CallingEnabled *bool `json:"callingEnabled,omitempty" tf:"calling_enabled,omitempty"`
+
 	// Specifies the webhook for Microsoft Teams channel calls.
 	CallingWebHook *string `json:"callingWebHook,omitempty" tf:"calling_web_hook,omitempty"`
 
 	// The deployment environment for Microsoft Teams channel calls. Possible values are CommercialDeployment and GCCModerateDeployment. Defaults to CommercialDeployment.
 	DeploymentEnvironment *string `json:"deploymentEnvironment,omitempty" tf:"deployment_environment,omitempty"`
 
-	// Specifies whether to enable Microsoft Teams channel calls. This defaults to false.
 	EnableCalling *bool `json:"enableCalling,omitempty" tf:"enable_calling,omitempty"`
 
 	// The supported Azure location where the resource exists. Changing this forces a new resource to be created.
@@ -33,13 +35,15 @@ type BotChannelMSTeamsObservation struct {
 	// The name of the Bot Resource this channel will be associated with. Changing this forces a new resource to be created.
 	BotName *string `json:"botName,omitempty" tf:"bot_name,omitempty"`
 
+	// Specifies whether to enable Microsoft Teams channel calls. This defaults to false.
+	CallingEnabled *bool `json:"callingEnabled,omitempty" tf:"calling_enabled,omitempty"`
+
 	// Specifies the webhook for Microsoft Teams channel calls.
 	CallingWebHook *string `json:"callingWebHook,omitempty" tf:"calling_web_hook,omitempty"`
 
 	// The deployment environment for Microsoft Teams channel calls. Possible values are CommercialDeployment and GCCModerateDeployment. Defaults to CommercialDeployment.
 	DeploymentEnvironment *string `json:"deploymentEnvironment,omitempty" tf:"deployment_environment,omitempty"`
 
-	// Specifies whether to enable Microsoft Teams channel calls. This defaults to false.
 	EnableCalling *bool `json:"enableCalling,omitempty" tf:"enable_calling,omitempty"`
 
 	// The ID of the Microsoft Teams Integration for a Bot Channel.
@@ -68,6 +72,10 @@ type BotChannelMSTeamsParameters struct {
 	// +kubebuilder:validation:Optional
 	BotNameSelector *v1.Selector `json:"botNameSelector,omitempty" tf:"-"`
 
+	// Specifies whether to enable Microsoft Teams channel calls. This defaults to false.
+	// +kubebuilder:validation:Optional
+	CallingEnabled *bool `json:"callingEnabled,omitempty" tf:"calling_enabled,omitempty"`
+
 	// Specifies the webhook for Microsoft Teams channel calls.
 	// +kubebuilder:validation:Optional
 	CallingWebHook *string `json:"callingWebHook,omitempty" tf:"calling_web_hook,omitempty"`
@@ -76,7 +84,6 @@ type BotChannelMSTeamsParameters struct {
 	// +kubebuilder:validation:Optional
 	DeploymentEnvironment *string `json:"deploymentEnvironment,omitempty" tf:"deployment_environment,omitempty"`
 
-	// Specifies whether to enable Microsoft Teams channel calls. This defaults to false.
 	// +kubebuilder:validation:Optional
 	EnableCalling *bool `json:"enableCalling,omitempty" tf:"enable_calling,omitempty"`
 

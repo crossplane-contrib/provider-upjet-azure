@@ -12,7 +12,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    certificate_blob: ${filebase64("path/to/certificate_file.pfx")}
+    certificateBlobBase64: ${filebase64("path/to/certificate_file.pfx")}
     certificatePasswordSecretRef:
       key: example-key
       name: example-secret

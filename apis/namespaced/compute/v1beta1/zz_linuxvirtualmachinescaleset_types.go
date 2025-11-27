@@ -725,6 +725,12 @@ type LinuxVirtualMachineScaleSetInitParameters struct {
 	// The ID of the Proximity Placement Group in which the Virtual Machine Scale Set should be assigned to. Changing this forces a new resource to be created.
 	ProximityPlacementGroupID *string `json:"proximityPlacementGroupId,omitempty" tf:"proximity_placement_group_id,omitempty"`
 
+	// Should resilient VM creation be enabled? When enabled, the service will attempt to create VMs in alternative fault domains or zones if the primary location fails during creation. Defaults to false.
+	ResilientVMCreationEnabled *bool `json:"resilientVmCreationEnabled,omitempty" tf:"resilient_vm_creation_enabled,omitempty"`
+
+	// Should resilient VM deletion be enabled? When enabled, the service will use a more resilient deletion process that attempts to gracefully handle failures during VM termination. Defaults to false.
+	ResilientVMDeletionEnabled *bool `json:"resilientVmDeletionEnabled,omitempty" tf:"resilient_vm_deletion_enabled,omitempty"`
+
 	// A rolling_upgrade_policy block as defined below. This is Required and can only be specified when upgrade_mode is set to Automatic or Rolling. Changing this forces a new resource to be created.
 	RollingUpgradePolicy *RollingUpgradePolicyInitParameters `json:"rollingUpgradePolicy,omitempty" tf:"rolling_upgrade_policy,omitempty"`
 
@@ -876,6 +882,12 @@ type LinuxVirtualMachineScaleSetObservation struct {
 
 	// The ID of the Proximity Placement Group in which the Virtual Machine Scale Set should be assigned to. Changing this forces a new resource to be created.
 	ProximityPlacementGroupID *string `json:"proximityPlacementGroupId,omitempty" tf:"proximity_placement_group_id,omitempty"`
+
+	// Should resilient VM creation be enabled? When enabled, the service will attempt to create VMs in alternative fault domains or zones if the primary location fails during creation. Defaults to false.
+	ResilientVMCreationEnabled *bool `json:"resilientVmCreationEnabled,omitempty" tf:"resilient_vm_creation_enabled,omitempty"`
+
+	// Should resilient VM deletion be enabled? When enabled, the service will use a more resilient deletion process that attempts to gracefully handle failures during VM termination. Defaults to false.
+	ResilientVMDeletionEnabled *bool `json:"resilientVmDeletionEnabled,omitempty" tf:"resilient_vm_deletion_enabled,omitempty"`
 
 	// The name of the Resource Group in which the Linux Virtual Machine Scale Set should be exist. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -1161,6 +1173,14 @@ type LinuxVirtualMachineScaleSetParameters struct {
 	// +kubebuilder:validation:Optional
 	ProximityPlacementGroupID *string `json:"proximityPlacementGroupId,omitempty" tf:"proximity_placement_group_id,omitempty"`
 
+	// Should resilient VM creation be enabled? When enabled, the service will attempt to create VMs in alternative fault domains or zones if the primary location fails during creation. Defaults to false.
+	// +kubebuilder:validation:Optional
+	ResilientVMCreationEnabled *bool `json:"resilientVmCreationEnabled,omitempty" tf:"resilient_vm_creation_enabled,omitempty"`
+
+	// Should resilient VM deletion be enabled? When enabled, the service will use a more resilient deletion process that attempts to gracefully handle failures during VM termination. Defaults to false.
+	// +kubebuilder:validation:Optional
+	ResilientVMDeletionEnabled *bool `json:"resilientVmDeletionEnabled,omitempty" tf:"resilient_vm_deletion_enabled,omitempty"`
+
 	// The name of the Resource Group in which the Linux Virtual Machine Scale Set should be exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
@@ -1389,6 +1409,12 @@ type LinuxVirtualMachineScaleSetTerminationNotificationParameters struct {
 
 type NetworkInterfaceInitParameters struct {
 
+	// Specifies the auxiliary mode used to enable network high-performance feature on Network Virtual Appliances (NVAs). This feature offers competitive performance in Connections Per Second (CPS) optimization, along with improvements to handling large amounts of simultaneous connections. Possible values are AcceleratedConnections and Floating.
+	AuxiliaryMode *string `json:"auxiliaryMode,omitempty" tf:"auxiliary_mode,omitempty"`
+
+	// Specifies the SKU used for the network high-performance feature on Network Virtual Appliances (NVAs). Possible values are A1, A2, A4 and A8.
+	AuxiliarySku *string `json:"auxiliarySku,omitempty" tf:"auxiliary_sku,omitempty"`
+
 	// A list of IP Addresses of DNS Servers which should be assigned to the Network Interface.
 	DNSServers []*string `json:"dnsServers,omitempty" tf:"dns_servers,omitempty"`
 
@@ -1413,6 +1439,12 @@ type NetworkInterfaceInitParameters struct {
 
 type NetworkInterfaceObservation struct {
 
+	// Specifies the auxiliary mode used to enable network high-performance feature on Network Virtual Appliances (NVAs). This feature offers competitive performance in Connections Per Second (CPS) optimization, along with improvements to handling large amounts of simultaneous connections. Possible values are AcceleratedConnections and Floating.
+	AuxiliaryMode *string `json:"auxiliaryMode,omitempty" tf:"auxiliary_mode,omitempty"`
+
+	// Specifies the SKU used for the network high-performance feature on Network Virtual Appliances (NVAs). Possible values are A1, A2, A4 and A8.
+	AuxiliarySku *string `json:"auxiliarySku,omitempty" tf:"auxiliary_sku,omitempty"`
+
 	// A list of IP Addresses of DNS Servers which should be assigned to the Network Interface.
 	DNSServers []*string `json:"dnsServers,omitempty" tf:"dns_servers,omitempty"`
 
@@ -1436,6 +1468,14 @@ type NetworkInterfaceObservation struct {
 }
 
 type NetworkInterfaceParameters struct {
+
+	// Specifies the auxiliary mode used to enable network high-performance feature on Network Virtual Appliances (NVAs). This feature offers competitive performance in Connections Per Second (CPS) optimization, along with improvements to handling large amounts of simultaneous connections. Possible values are AcceleratedConnections and Floating.
+	// +kubebuilder:validation:Optional
+	AuxiliaryMode *string `json:"auxiliaryMode,omitempty" tf:"auxiliary_mode,omitempty"`
+
+	// Specifies the SKU used for the network high-performance feature on Network Virtual Appliances (NVAs). Possible values are A1, A2, A4 and A8.
+	// +kubebuilder:validation:Optional
+	AuxiliarySku *string `json:"auxiliarySku,omitempty" tf:"auxiliary_sku,omitempty"`
 
 	// A list of IP Addresses of DNS Servers which should be assigned to the Network Interface.
 	// +kubebuilder:validation:Optional

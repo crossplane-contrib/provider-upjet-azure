@@ -713,6 +713,9 @@ spec:
                           description: The resource group in which the endpoint will
                             be created.
                           type: string
+                        subscriptionId:
+                          description: The subscription ID for the endpoint.
+                          type: string
                         type:
                           description: The type of the endpoint. Possible values are
                             AzureIotHub.StorageContainer, AzureIotHub.ServiceBusQueue,

@@ -92,7 +92,7 @@ type WorkspaceInitParameters struct {
 	// The workspace data retention in days. Possible values are between 30 and 730.
 	RetentionInDays *float64 `json:"retentionInDays,omitempty" tf:"retention_in_days,omitempty"`
 
-	// Specifies the SKU of the Log Analytics Workspace. Possible values are PerNode, Premium, Standard, Standalone, Unlimited, CapacityReservation, PerGB2018, and LACluster. Defaults to PerGB2018.
+	// Specifies the SKU of the Log Analytics Workspace. Possible values are PerGB2018, PerNode, Premium, Standalone, Standard, CapacityReservation, LACluster and Unlimited. Defaults to PerGB2018.
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags to assign to the resource.
@@ -146,7 +146,7 @@ type WorkspaceObservation struct {
 	// The workspace data retention in days. Possible values are between 30 and 730.
 	RetentionInDays *float64 `json:"retentionInDays,omitempty" tf:"retention_in_days,omitempty"`
 
-	// Specifies the SKU of the Log Analytics Workspace. Possible values are PerNode, Premium, Standard, Standalone, Unlimited, CapacityReservation, PerGB2018, and LACluster. Defaults to PerGB2018.
+	// Specifies the SKU of the Log Analytics Workspace. Possible values are PerGB2018, PerNode, Premium, Standalone, Standard, CapacityReservation, LACluster and Unlimited. Defaults to PerGB2018.
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags to assign to the resource.
@@ -223,7 +223,7 @@ type WorkspaceParameters struct {
 	// +kubebuilder:validation:Optional
 	RetentionInDays *float64 `json:"retentionInDays,omitempty" tf:"retention_in_days,omitempty"`
 
-	// Specifies the SKU of the Log Analytics Workspace. Possible values are PerNode, Premium, Standard, Standalone, Unlimited, CapacityReservation, PerGB2018, and LACluster. Defaults to PerGB2018.
+	// Specifies the SKU of the Log Analytics Workspace. Possible values are PerGB2018, PerNode, Premium, Standalone, Standard, CapacityReservation, LACluster and Unlimited. Defaults to PerGB2018.
 	// +kubebuilder:validation:Optional
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 

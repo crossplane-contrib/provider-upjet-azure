@@ -295,6 +295,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Synapse Workspace Azure AD Administrator.
                     type: string
                   login:
                     description: The login name of the Azure AD Administrator of this

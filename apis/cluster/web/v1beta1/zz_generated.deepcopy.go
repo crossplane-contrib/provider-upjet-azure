@@ -10364,6 +10364,11 @@ func (in *FunctionAppFlexConsumptionInitParameters) DeepCopyInto(out *FunctionAp
 		*out = new(bool)
 		**out = **in
 	}
+	if in.HTTPConcurrency != nil {
+		in, out := &in.HTTPConcurrency, &out.HTTPConcurrency
+		*out = new(float64)
+		**out = **in
+	}
 	if in.HTTPSOnly != nil {
 		in, out := &in.HTTPSOnly, &out.HTTPSOnly
 		*out = new(bool)
@@ -10637,6 +10642,11 @@ func (in *FunctionAppFlexConsumptionObservation) DeepCopyInto(out *FunctionAppFl
 		*out = new(bool)
 		**out = **in
 	}
+	if in.HTTPConcurrency != nil {
+		in, out := &in.HTTPConcurrency, &out.HTTPConcurrency
+		*out = new(float64)
+		**out = **in
+	}
 	if in.HTTPSOnly != nil {
 		in, out := &in.HTTPSOnly, &out.HTTPSOnly
 		*out = new(bool)
@@ -10873,6 +10883,11 @@ func (in *FunctionAppFlexConsumptionParameters) DeepCopyInto(out *FunctionAppFle
 	if in.Enabled != nil {
 		in, out := &in.Enabled, &out.Enabled
 		*out = new(bool)
+		**out = **in
+	}
+	if in.HTTPConcurrency != nil {
+		in, out := &in.HTTPConcurrency, &out.HTTPConcurrency
+		*out = new(float64)
 		**out = **in
 	}
 	if in.HTTPSOnly != nil {

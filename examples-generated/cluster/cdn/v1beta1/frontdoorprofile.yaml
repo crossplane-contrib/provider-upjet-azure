@@ -12,10 +12,17 @@ metadata:
   name: example
 spec:
   forProvider:
+    identity:
+      identityIdsRefs:
+      - name: example
+      type: SystemAssigned, UserAssigned
+    logScrubbingRule:
+    - matchVariable: RequestIPAddress
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    skuName: Standard_AzureFrontDoor
+    responseTimeoutSeconds: 120
+    skuName: Premium_AzureFrontDoor
     tags:
       environment: Production
 
@@ -32,3 +39,21 @@ metadata:
 spec:
   forProvider:
     location: West Europe
+
+---
+
+apiVersion: managedidentity.azure.upbound.io/v1beta1
+kind: UserAssignedIdentity
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta1/frontdoorprofile
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    name: example-identity
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

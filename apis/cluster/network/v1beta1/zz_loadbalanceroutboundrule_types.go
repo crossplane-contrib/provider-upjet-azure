@@ -53,7 +53,6 @@ type LoadBalancerOutboundRuleInitParameters struct {
 	// +kubebuilder:validation:Optional
 	BackendAddressPoolIDSelector *v1.Selector `json:"backendAddressPoolIdSelector,omitempty" tf:"-"`
 
-	// Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP.
 	EnableTCPReset *bool `json:"enableTcpReset,omitempty" tf:"enable_tcp_reset,omitempty"`
 
 	// One or more frontend_ip_configuration blocks as defined below.
@@ -64,6 +63,9 @@ type LoadBalancerOutboundRuleInitParameters struct {
 
 	// The transport protocol for the external endpoint. Possible values are Udp, Tcp or All.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP.
+	TCPResetEnabled *bool `json:"tcpResetEnabled,omitempty" tf:"tcp_reset_enabled,omitempty"`
 }
 
 type LoadBalancerOutboundRuleObservation struct {
@@ -74,7 +76,6 @@ type LoadBalancerOutboundRuleObservation struct {
 	// The ID of the Backend Address Pool. Outbound traffic is randomly load balanced across IPs in the backend IPs.
 	BackendAddressPoolID *string `json:"backendAddressPoolId,omitempty" tf:"backend_address_pool_id,omitempty"`
 
-	// Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP.
 	EnableTCPReset *bool `json:"enableTcpReset,omitempty" tf:"enable_tcp_reset,omitempty"`
 
 	// One or more frontend_ip_configuration blocks as defined below.
@@ -91,6 +92,9 @@ type LoadBalancerOutboundRuleObservation struct {
 
 	// The transport protocol for the external endpoint. Possible values are Udp, Tcp or All.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP.
+	TCPResetEnabled *bool `json:"tcpResetEnabled,omitempty" tf:"tcp_reset_enabled,omitempty"`
 }
 
 type LoadBalancerOutboundRuleParameters struct {
@@ -113,7 +117,6 @@ type LoadBalancerOutboundRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	BackendAddressPoolIDSelector *v1.Selector `json:"backendAddressPoolIdSelector,omitempty" tf:"-"`
 
-	// Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP.
 	// +kubebuilder:validation:Optional
 	EnableTCPReset *bool `json:"enableTcpReset,omitempty" tf:"enable_tcp_reset,omitempty"`
 
@@ -142,6 +145,10 @@ type LoadBalancerOutboundRuleParameters struct {
 	// The transport protocol for the external endpoint. Possible values are Udp, Tcp or All.
 	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP.
+	// +kubebuilder:validation:Optional
+	TCPResetEnabled *bool `json:"tcpResetEnabled,omitempty" tf:"tcp_reset_enabled,omitempty"`
 }
 
 // LoadBalancerOutboundRuleSpec defines the desired state of LoadBalancerOutboundRule

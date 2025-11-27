@@ -120,10 +120,12 @@ spec:
                               type: array
                               x-kubernetes-list-type: set
                             monthsOfYear:
-                              description: Possible values are January, February,
+                              description: 'Possible values are January, February,
                                 March, April, May, June, July, August, September,
                                 October, November and December. Changing this forces
-                                a new Backup Policy Blob Storage to be created.
+                                a new Backup Policy Blob Storage to be created. When
+                                this property is specified, exactly one of the following
+                                must also be set: days_of_month, days_of_week'
                               items:
                                 type: string
                               type: array
@@ -137,9 +139,11 @@ spec:
                               type: array
                               x-kubernetes-list-type: set
                             weeksOfMonth:
-                              description: Possible values are First, Second, Third,
+                              description: 'Possible values are First, Second, Third,
                                 Fourth and Last. Changing this forces a new Backup
-                                Policy Blob Storage to be created.
+                                Policy Blob Storage to be created. When this property
+                                is specified, exactly one of the following must also
+                                be set: days_of_month, days_of_week'
                               items:
                                 type: string
                               type: array
@@ -325,10 +329,12 @@ spec:
                               type: array
                               x-kubernetes-list-type: set
                             monthsOfYear:
-                              description: Possible values are January, February,
+                              description: 'Possible values are January, February,
                                 March, April, May, June, July, August, September,
                                 October, November and December. Changing this forces
-                                a new Backup Policy Blob Storage to be created.
+                                a new Backup Policy Blob Storage to be created. When
+                                this property is specified, exactly one of the following
+                                must also be set: days_of_month, days_of_week'
                               items:
                                 type: string
                               type: array
@@ -342,9 +348,11 @@ spec:
                               type: array
                               x-kubernetes-list-type: set
                             weeksOfMonth:
-                              description: Possible values are First, Second, Third,
+                              description: 'Possible values are First, Second, Third,
                                 Fourth and Last. Changing this forces a new Backup
-                                Policy Blob Storage to be created.
+                                Policy Blob Storage to be created. When this property
+                                is specified, exactly one of the following must also
+                                be set: days_of_month, days_of_week'
                               items:
                                 type: string
                               type: array
@@ -531,10 +539,12 @@ spec:
                               type: array
                               x-kubernetes-list-type: set
                             monthsOfYear:
-                              description: Possible values are January, February,
+                              description: 'Possible values are January, February,
                                 March, April, May, June, July, August, September,
                                 October, November and December. Changing this forces
-                                a new Backup Policy Blob Storage to be created.
+                                a new Backup Policy Blob Storage to be created. When
+                                this property is specified, exactly one of the following
+                                must also be set: days_of_month, days_of_week'
                               items:
                                 type: string
                               type: array
@@ -548,9 +558,11 @@ spec:
                               type: array
                               x-kubernetes-list-type: set
                             weeksOfMonth:
-                              description: Possible values are First, Second, Third,
+                              description: 'Possible values are First, Second, Third,
                                 Fourth and Last. Changing this forces a new Backup
-                                Policy Blob Storage to be created.
+                                Policy Blob Storage to be created. When this property
+                                is specified, exactly one of the following must also
+                                be set: days_of_month, days_of_week'
                               items:
                                 type: string
                               type: array

@@ -646,6 +646,7 @@ spec:
                       type: string
                     type: array
                   id:
+                    description: The ID of the Application Insights Web Test.
                     type: string
                   kind:
                     description: The kind of web test that this web test watches.
@@ -670,6 +671,7 @@ spec:
                     description: Allow for retries should this WebTest fail.
                     type: boolean
                   syntheticMonitorId:
+                    description: The ID of the Application Insights Web Test.
                     type: string
                   tags:
                     additionalProperties:

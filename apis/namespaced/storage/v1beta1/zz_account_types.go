@@ -82,7 +82,7 @@ type AccountInitParameters struct {
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The minimum supported TLS version for the storage account. Possible values are TLS1_0, TLS1_1, and TLS1_2. Defaults to TLS1_2 for new storage accounts.
+	// The minimum supported TLS version for the storage account. Possible values are TLS1_0, TLS1_1, TLS1_2 and TLS1_3. Defaults to TLS1_2 for new storage accounts.
 	MinTLSVersion *string `json:"minTlsVersion,omitempty" tf:"min_tls_version,omitempty"`
 
 	// A network_rules block as documented below.
@@ -90,6 +90,9 @@ type AccountInitParameters struct {
 
 	// Is NFSv3 protocol enabled? Changing this forces a new resource to be created. Defaults to false.
 	Nfsv3Enabled *bool `json:"nfsv3Enabled,omitempty" tf:"nfsv3_enabled,omitempty"`
+
+	// Specifies the version of the provisioned billing model (e.g. when account_kind = "FileStorage" for Storage File). Possible value is V2. Changing this forces a new resource to be created.
+	ProvisionedBillingModelVersion *string `json:"provisionedBillingModelVersion,omitempty" tf:"provisioned_billing_model_version,omitempty"`
 
 	// Whether the public network access is enabled? Defaults to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
@@ -197,7 +200,7 @@ type AccountObservation struct {
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The minimum supported TLS version for the storage account. Possible values are TLS1_0, TLS1_1, and TLS1_2. Defaults to TLS1_2 for new storage accounts.
+	// The minimum supported TLS version for the storage account. Possible values are TLS1_0, TLS1_1, TLS1_2 and TLS1_3. Defaults to TLS1_2 for new storage accounts.
 	MinTLSVersion *string `json:"minTlsVersion,omitempty" tf:"min_tls_version,omitempty"`
 
 	// A network_rules block as documented below.
@@ -304,6 +307,9 @@ type AccountObservation struct {
 
 	// The microsoft routing hostname with port if applicable for web storage in the primary location.
 	PrimaryWebMicrosoftHost *string `json:"primaryWebMicrosoftHost,omitempty" tf:"primary_web_microsoft_host,omitempty"`
+
+	// Specifies the version of the provisioned billing model (e.g. when account_kind = "FileStorage" for Storage File). Possible value is V2. Changing this forces a new resource to be created.
+	ProvisionedBillingModelVersion *string `json:"provisionedBillingModelVersion,omitempty" tf:"provisioned_billing_model_version,omitempty"`
 
 	// Whether the public network access is enabled? Defaults to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
@@ -532,7 +538,7 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The minimum supported TLS version for the storage account. Possible values are TLS1_0, TLS1_1, and TLS1_2. Defaults to TLS1_2 for new storage accounts.
+	// The minimum supported TLS version for the storage account. Possible values are TLS1_0, TLS1_1, TLS1_2 and TLS1_3. Defaults to TLS1_2 for new storage accounts.
 	// +kubebuilder:validation:Optional
 	MinTLSVersion *string `json:"minTlsVersion,omitempty" tf:"min_tls_version,omitempty"`
 
@@ -543,6 +549,10 @@ type AccountParameters struct {
 	// Is NFSv3 protocol enabled? Changing this forces a new resource to be created. Defaults to false.
 	// +kubebuilder:validation:Optional
 	Nfsv3Enabled *bool `json:"nfsv3Enabled,omitempty" tf:"nfsv3_enabled,omitempty"`
+
+	// Specifies the version of the provisioned billing model (e.g. when account_kind = "FileStorage" for Storage File). Possible value is V2. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	ProvisionedBillingModelVersion *string `json:"provisionedBillingModelVersion,omitempty" tf:"provisioned_billing_model_version,omitempty"`
 
 	// Whether the public network access is enabled? Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -677,7 +687,7 @@ type AzureFilesAuthenticationInitParameters struct {
 	// A active_directory block as defined below. Required when directory_type is AD.
 	ActiveDirectory *ActiveDirectoryInitParameters `json:"activeDirectory,omitempty" tf:"active_directory,omitempty"`
 
-	// Specifies the default share level permissions applied to all users. Possible values are StorageFileDataSmbShareReader, StorageFileDataSmbShareContributor, StorageFileDataSmbShareElevatedContributor, or None.
+	// Specifies the default share level permissions applied to all users. Possible values are StorageFileDataSmbShareReader, StorageFileDataSmbShareContributor, StorageFileDataSmbShareElevatedContributor, or None. Defaults to None.
 	DefaultShareLevelPermission *string `json:"defaultShareLevelPermission,omitempty" tf:"default_share_level_permission,omitempty"`
 
 	// Specifies the directory service used. Possible values are AADDS, AD and AADKERB.
@@ -689,7 +699,7 @@ type AzureFilesAuthenticationObservation struct {
 	// A active_directory block as defined below. Required when directory_type is AD.
 	ActiveDirectory *ActiveDirectoryObservation `json:"activeDirectory,omitempty" tf:"active_directory,omitempty"`
 
-	// Specifies the default share level permissions applied to all users. Possible values are StorageFileDataSmbShareReader, StorageFileDataSmbShareContributor, StorageFileDataSmbShareElevatedContributor, or None.
+	// Specifies the default share level permissions applied to all users. Possible values are StorageFileDataSmbShareReader, StorageFileDataSmbShareContributor, StorageFileDataSmbShareElevatedContributor, or None. Defaults to None.
 	DefaultShareLevelPermission *string `json:"defaultShareLevelPermission,omitempty" tf:"default_share_level_permission,omitempty"`
 
 	// Specifies the directory service used. Possible values are AADDS, AD and AADKERB.
@@ -702,7 +712,7 @@ type AzureFilesAuthenticationParameters struct {
 	// +kubebuilder:validation:Optional
 	ActiveDirectory *ActiveDirectoryParameters `json:"activeDirectory,omitempty" tf:"active_directory,omitempty"`
 
-	// Specifies the default share level permissions applied to all users. Possible values are StorageFileDataSmbShareReader, StorageFileDataSmbShareContributor, StorageFileDataSmbShareElevatedContributor, or None.
+	// Specifies the default share level permissions applied to all users. Possible values are StorageFileDataSmbShareReader, StorageFileDataSmbShareContributor, StorageFileDataSmbShareElevatedContributor, or None. Defaults to None.
 	// +kubebuilder:validation:Optional
 	DefaultShareLevelPermission *string `json:"defaultShareLevelPermission,omitempty" tf:"default_share_level_permission,omitempty"`
 
@@ -1083,7 +1093,7 @@ type ImmutabilityPolicyInitParameters struct {
 	// The immutability period for the blobs in the container since the policy creation, in days.
 	PeriodSinceCreationInDays *float64 `json:"periodSinceCreationInDays,omitempty" tf:"period_since_creation_in_days,omitempty"`
 
-	// Defines the mode of the policy. Disabled state disables the policy, Unlocked state allows increase and decrease of immutability retention time and also allows toggling allowProtectedAppendWrites property, Locked state only allows the increase of the immutability retention time. A policy can only be created in a Disabled or Unlocked state and can be toggled between the two states. Only a policy in an Unlocked state can transition to a Locked state which cannot be reverted. Changing from Locked forces a new resource to be created.
+	// Defines the mode of the policy. Disabled state disables the policy, Unlocked state allows increase and decrease of immutability retention time and also allows toggling allowProtectedAppendWrites property, Locked state only allows the increase of the immutability retention time. A policy can only be created in a Disabled or Unlocked state and can be toggled between the two states. Only a policy in an Unlocked state can transition to a Locked state which cannot be reverted.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 }
 
@@ -1095,7 +1105,7 @@ type ImmutabilityPolicyObservation struct {
 	// The immutability period for the blobs in the container since the policy creation, in days.
 	PeriodSinceCreationInDays *float64 `json:"periodSinceCreationInDays,omitempty" tf:"period_since_creation_in_days,omitempty"`
 
-	// Defines the mode of the policy. Disabled state disables the policy, Unlocked state allows increase and decrease of immutability retention time and also allows toggling allowProtectedAppendWrites property, Locked state only allows the increase of the immutability retention time. A policy can only be created in a Disabled or Unlocked state and can be toggled between the two states. Only a policy in an Unlocked state can transition to a Locked state which cannot be reverted. Changing from Locked forces a new resource to be created.
+	// Defines the mode of the policy. Disabled state disables the policy, Unlocked state allows increase and decrease of immutability retention time and also allows toggling allowProtectedAppendWrites property, Locked state only allows the increase of the immutability retention time. A policy can only be created in a Disabled or Unlocked state and can be toggled between the two states. Only a policy in an Unlocked state can transition to a Locked state which cannot be reverted.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 }
 
@@ -1109,7 +1119,7 @@ type ImmutabilityPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	PeriodSinceCreationInDays *float64 `json:"periodSinceCreationInDays" tf:"period_since_creation_in_days,omitempty"`
 
-	// Defines the mode of the policy. Disabled state disables the policy, Unlocked state allows increase and decrease of immutability retention time and also allows toggling allowProtectedAppendWrites property, Locked state only allows the increase of the immutability retention time. A policy can only be created in a Disabled or Unlocked state and can be toggled between the two states. Only a policy in an Unlocked state can transition to a Locked state which cannot be reverted. Changing from Locked forces a new resource to be created.
+	// Defines the mode of the policy. Disabled state disables the policy, Unlocked state allows increase and decrease of immutability retention time and also allows toggling allowProtectedAppendWrites property, Locked state only allows the increase of the immutability retention time. A policy can only be created in a Disabled or Unlocked state and can be toggled between the two states. Only a policy in an Unlocked state can transition to a Locked state which cannot be reverted.
 	// +kubebuilder:validation:Optional
 	State *string `json:"state" tf:"state,omitempty"`
 }
@@ -1529,7 +1539,7 @@ type RoutingParameters struct {
 
 type SASPolicyInitParameters struct {
 
-	// The SAS expiration action. The only possible value is Log at this moment. Defaults to Log.
+	// The SAS expiration action. Possible values are Log and Block. Defaults to Log.
 	ExpirationAction *string `json:"expirationAction,omitempty" tf:"expiration_action,omitempty"`
 
 	// The SAS expiration period in format of DD.HH:MM:SS.
@@ -1538,7 +1548,7 @@ type SASPolicyInitParameters struct {
 
 type SASPolicyObservation struct {
 
-	// The SAS expiration action. The only possible value is Log at this moment. Defaults to Log.
+	// The SAS expiration action. Possible values are Log and Block. Defaults to Log.
 	ExpirationAction *string `json:"expirationAction,omitempty" tf:"expiration_action,omitempty"`
 
 	// The SAS expiration period in format of DD.HH:MM:SS.
@@ -1547,7 +1557,7 @@ type SASPolicyObservation struct {
 
 type SASPolicyParameters struct {
 
-	// The SAS expiration action. The only possible value is Log at this moment. Defaults to Log.
+	// The SAS expiration action. Possible values are Log and Block. Defaults to Log.
 	// +kubebuilder:validation:Optional
 	ExpirationAction *string `json:"expirationAction,omitempty" tf:"expiration_action,omitempty"`
 
