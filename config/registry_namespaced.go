@@ -7,7 +7,6 @@ package config
 import (
 	"context"
 
-	"github.com/crossplane/upjet/v2/pkg/config"
 	ujconfig "github.com/crossplane/upjet/v2/pkg/config"
 	"github.com/crossplane/upjet/v2/pkg/registry/reference"
 	"github.com/crossplane/upjet/v2/pkg/schema/traverser"
@@ -92,8 +91,8 @@ func registerTerraformConversions(pc *ujconfig.Provider) {
 			continue
 		}
 
-		r.TerraformConversions = []config.TerraformConversion{
-			config.NewTFSingletonConversion(),
+		r.TerraformConversions = []ujconfig.TerraformConversion{
+			ujconfig.NewTFSingletonConversion(),
 		}
 		pc.Resources[name] = r
 	}

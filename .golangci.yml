@@ -6,7 +6,7 @@ version: "2"
 
 run:
   timeout: 90m
-  concurrency: 0
+  concurrency: 3
 
 output:
   formats:
