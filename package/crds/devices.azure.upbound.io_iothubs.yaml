@@ -114,11 +114,11 @@ spec:
                     type: array
                   eventHubPartitionCount:
                     description: The number of device-to-cloud partitions used by
-                      backing event hubs. Must be between 2 and 128.
+                      backing event hubs. Must be between 2 and 128. Defaults to 4.
                     type: number
                   eventHubRetentionInDays:
                     description: The event hub retention to use in days. Must be between
-                      1 and 7.
+                      1 and 7. Defaults to 1.
                     type: number
                   fileUpload:
                     description: A file_upload block as defined below.
@@ -183,8 +183,6 @@ spec:
                             8601 timespan duration. This value must be between 1 minute
                             and 24 hours. Defaults to PT1H.
                           type: string
-                      required:
-                      - connectionStringSecretRef
                       type: object
                     type: array
                   identity:
@@ -413,11 +411,11 @@ spec:
                     type: array
                   eventHubPartitionCount:
                     description: The number of device-to-cloud partitions used by
-                      backing event hubs. Must be between 2 and 128.
+                      backing event hubs. Must be between 2 and 128. Defaults to 4.
                     type: number
                   eventHubRetentionInDays:
                     description: The event hub retention to use in days. Must be between
-                      1 and 7.
+                      1 and 7. Defaults to 1.
                     type: number
                   fileUpload:
                     description: A file_upload block as defined below.
@@ -428,6 +426,24 @@ spec:
                             account. Possible values are keyBased and identityBased.
                             Defaults to keyBased.
                           type: string
+                        connectionStringSecretRef:
+                          description: The connection string for the Azure Storage
+                            account to which files are uploaded.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         containerName:
                           description: The name of the root container where the files
                             should be uploaded to. The container need not exist but
@@ -464,6 +480,8 @@ spec:
                             8601 timespan duration. This value must be between 1 minute
                             and 24 hours. Defaults to PT1H.
                           type: string
+                      required:
+                      - connectionStringSecretRef
                       type: object
                     type: array
                   identity:
@@ -763,6 +781,9 @@ spec:
                           description: The resource group in which the endpoint will
                             be created.
                           type: string
+                        subscriptionId:
+                          description: The subscription ID for the endpoint.
+                          type: string
                         type:
                           description: The type of the endpoint. Possible values are
                             AzureIotHub.StorageContainer, AzureIotHub.ServiceBusQueue,
@@ -808,11 +829,11 @@ spec:
                     type: string
                   eventHubPartitionCount:
                     description: The number of device-to-cloud partitions used by
-                      backing event hubs. Must be between 2 and 128.
+                      backing event hubs. Must be between 2 and 128. Defaults to 4.
                     type: number
                   eventHubRetentionInDays:
                     description: The event hub retention to use in days. Must be between
-                      1 and 7.
+                      1 and 7. Defaults to 1.
                     type: number
                   fallbackRoute:
                     description: A fallback_route block as defined below. If the fallback
@@ -826,7 +847,7 @@ spec:
                           type: string
                         enabled:
                           description: Used to specify whether the fallback route
-                            is enabled.
+                            is enabled. Defaults to true.
                           type: boolean
                         endpointNames:
                           description: The endpoints to which messages that satisfy

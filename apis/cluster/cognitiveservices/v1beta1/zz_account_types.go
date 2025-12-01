@@ -60,8 +60,14 @@ type AccountInitParameters struct {
 	// A network_acls block as defined below. When this property is specified, custom_subdomain_name is also required to be set.
 	NetworkAcls []NetworkAclsInitParameters `json:"networkAcls,omitempty" tf:"network_acls,omitempty"`
 
+	// A network_injection block as defined below. Only applicable if the kind is set to AIServices.
+	NetworkInjection []NetworkInjectionInitParameters `json:"networkInjection,omitempty" tf:"network_injection,omitempty"`
+
 	// Whether outbound network access is restricted for the Cognitive Account. Defaults to false.
 	OutboundNetworkAccessRestricted *bool `json:"outboundNetworkAccessRestricted,omitempty" tf:"outbound_network_access_restricted,omitempty"`
+
+	// Whether project management is enabled when the kind is set to AIServices. Once enabled, project_management_enabled cannot be disabled. Defaults to false.
+	ProjectManagementEnabled *bool `json:"projectManagementEnabled,omitempty" tf:"project_management_enabled,omitempty"`
 
 	// Whether public network access is allowed for the Cognitive Account. Defaults to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
@@ -130,8 +136,14 @@ type AccountObservation struct {
 	// A network_acls block as defined below. When this property is specified, custom_subdomain_name is also required to be set.
 	NetworkAcls []NetworkAclsObservation `json:"networkAcls,omitempty" tf:"network_acls,omitempty"`
 
+	// A network_injection block as defined below. Only applicable if the kind is set to AIServices.
+	NetworkInjection []NetworkInjectionObservation `json:"networkInjection,omitempty" tf:"network_injection,omitempty"`
+
 	// Whether outbound network access is restricted for the Cognitive Account. Defaults to false.
 	OutboundNetworkAccessRestricted *bool `json:"outboundNetworkAccessRestricted,omitempty" tf:"outbound_network_access_restricted,omitempty"`
+
+	// Whether project management is enabled when the kind is set to AIServices. Once enabled, project_management_enabled cannot be disabled. Defaults to false.
+	ProjectManagementEnabled *bool `json:"projectManagementEnabled,omitempty" tf:"project_management_enabled,omitempty"`
 
 	// Whether public network access is allowed for the Cognitive Account. Defaults to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
@@ -215,9 +227,17 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkAcls []NetworkAclsParameters `json:"networkAcls,omitempty" tf:"network_acls,omitempty"`
 
+	// A network_injection block as defined below. Only applicable if the kind is set to AIServices.
+	// +kubebuilder:validation:Optional
+	NetworkInjection []NetworkInjectionParameters `json:"networkInjection,omitempty" tf:"network_injection,omitempty"`
+
 	// Whether outbound network access is restricted for the Cognitive Account. Defaults to false.
 	// +kubebuilder:validation:Optional
 	OutboundNetworkAccessRestricted *bool `json:"outboundNetworkAccessRestricted,omitempty" tf:"outbound_network_access_restricted,omitempty"`
+
+	// Whether project management is enabled when the kind is set to AIServices. Once enabled, project_management_enabled cannot be disabled. Defaults to false.
+	// +kubebuilder:validation:Optional
+	ProjectManagementEnabled *bool `json:"projectManagementEnabled,omitempty" tf:"project_management_enabled,omitempty"`
 
 	// Whether public network access is allowed for the Cognitive Account. Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -391,6 +411,55 @@ type NetworkAclsParameters struct {
 	// A virtual_network_rules block as defined below.
 	// +kubebuilder:validation:Optional
 	VirtualNetworkRules []VirtualNetworkRulesParameters `json:"virtualNetworkRules,omitempty" tf:"virtual_network_rules,omitempty"`
+}
+
+type NetworkInjectionInitParameters struct {
+
+	// Specifies what features network injection applies to. The only possible value is agent.
+	Scenario *string `json:"scenario,omitempty" tf:"scenario,omitempty"`
+
+	// The ID of the subnet which the Agent Client is injected into.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+}
+
+type NetworkInjectionObservation struct {
+
+	// Specifies what features network injection applies to. The only possible value is agent.
+	Scenario *string `json:"scenario,omitempty" tf:"scenario,omitempty"`
+
+	// The ID of the subnet which the Agent Client is injected into.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+}
+
+type NetworkInjectionParameters struct {
+
+	// Specifies what features network injection applies to. The only possible value is agent.
+	// +kubebuilder:validation:Optional
+	Scenario *string `json:"scenario" tf:"scenario,omitempty"`
+
+	// The ID of the subnet which the Agent Client is injected into.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type StorageInitParameters struct {

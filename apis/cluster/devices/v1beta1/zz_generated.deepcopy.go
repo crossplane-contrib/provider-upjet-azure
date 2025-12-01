@@ -182,6 +182,11 @@ func (in *EndpointObservation) DeepCopyInto(out *EndpointObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.SubscriptionID != nil {
+		in, out := &in.SubscriptionID, &out.SubscriptionID
+		*out = new(string)
+		**out = **in
+	}
 	if in.Type != nil {
 		in, out := &in.Type, &out.Type
 		*out = new(string)
@@ -449,6 +454,7 @@ func (in *FileUploadInitParameters) DeepCopyInto(out *FileUploadInitParameters) 
 		*out = new(string)
 		**out = **in
 	}
+	in.ConnectionStringSecretRef.DeepCopyInto(&out.ConnectionStringSecretRef)
 	if in.ContainerName != nil {
 		in, out := &in.ContainerName, &out.ContainerName
 		*out = new(string)

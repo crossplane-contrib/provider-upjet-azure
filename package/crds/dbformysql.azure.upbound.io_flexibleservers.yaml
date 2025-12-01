@@ -133,6 +133,9 @@ spec:
                         keyVaultKeyId:
                           description: The ID of the Key Vault Key.
                           type: string
+                        managedHsmKeyId:
+                          description: The ID of the Managed HSM Key.
+                          type: string
                         primaryUserAssignedIdentityId:
                           description: Specifies the primary user managed identity
                             id for a Customer Managed Key. Should be added with identity_ids.
@@ -579,6 +582,9 @@ spec:
                         keyVaultKeyId:
                           description: The ID of the Key Vault Key.
                           type: string
+                        managedHsmKeyId:
+                          description: The ID of the Managed HSM Key.
+                          type: string
                         primaryUserAssignedIdentityId:
                           description: Specifies the primary user managed identity
                             id for a Customer Managed Key. Should be added with identity_ids.
@@ -1008,6 +1014,9 @@ spec:
                           type: string
                         keyVaultKeyId:
                           description: The ID of the Key Vault Key.
+                          type: string
+                        managedHsmKeyId:
+                          description: The ID of the Managed HSM Key.
                           type: string
                         primaryUserAssignedIdentityId:
                           description: Specifies the primary user managed identity

@@ -8956,6 +8956,11 @@ func (in *TemplateInitParameters) DeepCopyInto(out *TemplateInitParameters) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.CooldownPeriodInSeconds != nil {
+		in, out := &in.CooldownPeriodInSeconds, &out.CooldownPeriodInSeconds
+		*out = new(float64)
+		**out = **in
+	}
 	if in.CustomScaleRule != nil {
 		in, out := &in.CustomScaleRule, &out.CustomScaleRule
 		*out = make([]CustomScaleRuleInitParameters, len(*in))
@@ -8984,6 +8989,11 @@ func (in *TemplateInitParameters) DeepCopyInto(out *TemplateInitParameters) {
 	}
 	if in.MinReplicas != nil {
 		in, out := &in.MinReplicas, &out.MinReplicas
+		*out = new(float64)
+		**out = **in
+	}
+	if in.PollingIntervalInSeconds != nil {
+		in, out := &in.PollingIntervalInSeconds, &out.PollingIntervalInSeconds
 		*out = new(float64)
 		**out = **in
 	}
@@ -9040,6 +9050,11 @@ func (in *TemplateObservation) DeepCopyInto(out *TemplateObservation) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.CooldownPeriodInSeconds != nil {
+		in, out := &in.CooldownPeriodInSeconds, &out.CooldownPeriodInSeconds
+		*out = new(float64)
+		**out = **in
+	}
 	if in.CustomScaleRule != nil {
 		in, out := &in.CustomScaleRule, &out.CustomScaleRule
 		*out = make([]CustomScaleRuleObservation, len(*in))
@@ -9068,6 +9083,11 @@ func (in *TemplateObservation) DeepCopyInto(out *TemplateObservation) {
 	}
 	if in.MinReplicas != nil {
 		in, out := &in.MinReplicas, &out.MinReplicas
+		*out = new(float64)
+		**out = **in
+	}
+	if in.PollingIntervalInSeconds != nil {
+		in, out := &in.PollingIntervalInSeconds, &out.PollingIntervalInSeconds
 		*out = new(float64)
 		**out = **in
 	}
@@ -9124,6 +9144,11 @@ func (in *TemplateParameters) DeepCopyInto(out *TemplateParameters) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.CooldownPeriodInSeconds != nil {
+		in, out := &in.CooldownPeriodInSeconds, &out.CooldownPeriodInSeconds
+		*out = new(float64)
+		**out = **in
+	}
 	if in.CustomScaleRule != nil {
 		in, out := &in.CustomScaleRule, &out.CustomScaleRule
 		*out = make([]CustomScaleRuleParameters, len(*in))
@@ -9152,6 +9177,11 @@ func (in *TemplateParameters) DeepCopyInto(out *TemplateParameters) {
 	}
 	if in.MinReplicas != nil {
 		in, out := &in.MinReplicas, &out.MinReplicas
+		*out = new(float64)
+		**out = **in
+	}
+	if in.PollingIntervalInSeconds != nil {
+		in, out := &in.PollingIntervalInSeconds, &out.PollingIntervalInSeconds
 		*out = new(float64)
 		**out = **in
 	}

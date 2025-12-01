@@ -381,9 +381,105 @@ spec:
                           type: array
                       type: object
                     type: array
+                  networkInjection:
+                    description: A network_injection block as defined below. Only
+                      applicable if the kind is set to AIServices.
+                    items:
+                      properties:
+                        scenario:
+                          description: Specifies what features network injection applies
+                            to. The only possible value is agent.
+                          type: string
+                        subnetId:
+                          description: The ID of the subnet which the Agent Client
+                            is injected into.
+                          type: string
+                        subnetIdRef:
+                          description: Reference to a Subnet in network to populate
+                            subnetId.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        subnetIdSelector:
+                          description: Selector for a Subnet in network to populate
+                            subnetId.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
+                      type: object
+                    type: array
                   outboundNetworkAccessRestricted:
                     description: Whether outbound network access is restricted for
                       the Cognitive Account. Defaults to false.
+                    type: boolean
+                  projectManagementEnabled:
+                    description: Whether project management is enabled when the kind
+                      is set to AIServices. Once enabled, project_management_enabled
+                      cannot be disabled. Defaults to false.
                     type: boolean
                   publicNetworkAccessEnabled:
                     description: Whether public network access is allowed for the
@@ -972,9 +1068,105 @@ spec:
                           type: array
                       type: object
                     type: array
+                  networkInjection:
+                    description: A network_injection block as defined below. Only
+                      applicable if the kind is set to AIServices.
+                    items:
+                      properties:
+                        scenario:
+                          description: Specifies what features network injection applies
+                            to. The only possible value is agent.
+                          type: string
+                        subnetId:
+                          description: The ID of the subnet which the Agent Client
+                            is injected into.
+                          type: string
+                        subnetIdRef:
+                          description: Reference to a Subnet in network to populate
+                            subnetId.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        subnetIdSelector:
+                          description: Selector for a Subnet in network to populate
+                            subnetId.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
+                      type: object
+                    type: array
                   outboundNetworkAccessRestricted:
                     description: Whether outbound network access is restricted for
                       the Cognitive Account. Defaults to false.
+                    type: boolean
+                  projectManagementEnabled:
+                    description: Whether project management is enabled when the kind
+                      is set to AIServices. Once enabled, project_management_enabled
+                      cannot be disabled. Defaults to false.
                     type: boolean
                   publicNetworkAccessEnabled:
                     description: Whether public network access is allowed for the
@@ -1415,9 +1607,29 @@ spec:
                           type: array
                       type: object
                     type: array
+                  networkInjection:
+                    description: A network_injection block as defined below. Only
+                      applicable if the kind is set to AIServices.
+                    items:
+                      properties:
+                        scenario:
+                          description: Specifies what features network injection applies
+                            to. The only possible value is agent.
+                          type: string
+                        subnetId:
+                          description: The ID of the subnet which the Agent Client
+                            is injected into.
+                          type: string
+                      type: object
+                    type: array
                   outboundNetworkAccessRestricted:
                     description: Whether outbound network access is restricted for
                       the Cognitive Account. Defaults to false.
+                    type: boolean
+                  projectManagementEnabled:
+                    description: Whether project management is enabled when the kind
+                      is set to AIServices. Once enabled, project_management_enabled
+                      cannot be disabled. Defaults to false.
                     type: boolean
                   publicNetworkAccessEnabled:
                     description: Whether public network access is allowed for the

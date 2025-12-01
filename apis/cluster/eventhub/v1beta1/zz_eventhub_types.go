@@ -139,7 +139,7 @@ type EventHubInitParameters struct {
 	// Specifies the number of days to retain the events for this Event Hub.
 	MessageRetention *float64 `json:"messageRetention,omitempty" tf:"message_retention,omitempty"`
 
-	// Specifies the ID of the EventHub Namespace. Changing this forces a new resource to be created.
+	// Specifies the ID of the EventHub Namespace.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/eventhub/v1beta1.EventHubNamespace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
@@ -154,6 +154,9 @@ type EventHubInitParameters struct {
 
 	// Specifies the current number of shards on the Event Hub.
 	PartitionCount *float64 `json:"partitionCount,omitempty" tf:"partition_count,omitempty"`
+
+	// A retention_description block as defined below.
+	RetentionDescription []RetentionDescriptionInitParameters `json:"retentionDescription,omitempty" tf:"retention_description,omitempty"`
 
 	// Specifies the status of the Event Hub resource. Possible values are Active, Disabled and SendDisabled. Defaults to Active.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
@@ -170,7 +173,7 @@ type EventHubObservation struct {
 	// Specifies the number of days to retain the events for this Event Hub.
 	MessageRetention *float64 `json:"messageRetention,omitempty" tf:"message_retention,omitempty"`
 
-	// Specifies the ID of the EventHub Namespace. Changing this forces a new resource to be created.
+	// Specifies the ID of the EventHub Namespace.
 	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
 
 	// Specifies the name of the EventHub resource. Changing this forces a new resource to be created.
@@ -186,6 +189,9 @@ type EventHubObservation struct {
 	// Specifies the name of the EventHub resource. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
+	// A retention_description block as defined below.
+	RetentionDescription []RetentionDescriptionObservation `json:"retentionDescription,omitempty" tf:"retention_description,omitempty"`
+
 	// Specifies the status of the Event Hub resource. Possible values are Active, Disabled and SendDisabled. Defaults to Active.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
@@ -200,7 +206,7 @@ type EventHubParameters struct {
 	// +kubebuilder:validation:Optional
 	MessageRetention *float64 `json:"messageRetention,omitempty" tf:"message_retention,omitempty"`
 
-	// Specifies the ID of the EventHub Namespace. Changing this forces a new resource to be created.
+	// Specifies the ID of the EventHub Namespace.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/eventhub/v1beta1.EventHubNamespace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -244,9 +250,52 @@ type EventHubParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// A retention_description block as defined below.
+	// +kubebuilder:validation:Optional
+	RetentionDescription []RetentionDescriptionParameters `json:"retentionDescription,omitempty" tf:"retention_description,omitempty"`
+
 	// Specifies the status of the Event Hub resource. Possible values are Active, Disabled and SendDisabled. Defaults to Active.
 	// +kubebuilder:validation:Optional
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+}
+
+type RetentionDescriptionInitParameters struct {
+
+	// Specifies the Cleanup Policy for the EventHub. Possible values are Delete and Compact. Changing this forces a new resource to be created.
+	CleanupPolicy *string `json:"cleanupPolicy,omitempty" tf:"cleanup_policy,omitempty"`
+
+	// Specifies the number of hours to retain the events for this Event Hub. The value is only used when cleanup_policy is Delete.
+	RetentionTimeInHours *float64 `json:"retentionTimeInHours,omitempty" tf:"retention_time_in_hours,omitempty"`
+
+	// Specifies the number of hours to retain the tombstones markers of a compacted Event Hub. The value is only used when cleanup_policy is Compact.
+	TombstoneRetentionTimeInHours *float64 `json:"tombstoneRetentionTimeInHours,omitempty" tf:"tombstone_retention_time_in_hours,omitempty"`
+}
+
+type RetentionDescriptionObservation struct {
+
+	// Specifies the Cleanup Policy for the EventHub. Possible values are Delete and Compact. Changing this forces a new resource to be created.
+	CleanupPolicy *string `json:"cleanupPolicy,omitempty" tf:"cleanup_policy,omitempty"`
+
+	// Specifies the number of hours to retain the events for this Event Hub. The value is only used when cleanup_policy is Delete.
+	RetentionTimeInHours *float64 `json:"retentionTimeInHours,omitempty" tf:"retention_time_in_hours,omitempty"`
+
+	// Specifies the number of hours to retain the tombstones markers of a compacted Event Hub. The value is only used when cleanup_policy is Compact.
+	TombstoneRetentionTimeInHours *float64 `json:"tombstoneRetentionTimeInHours,omitempty" tf:"tombstone_retention_time_in_hours,omitempty"`
+}
+
+type RetentionDescriptionParameters struct {
+
+	// Specifies the Cleanup Policy for the EventHub. Possible values are Delete and Compact. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	CleanupPolicy *string `json:"cleanupPolicy" tf:"cleanup_policy,omitempty"`
+
+	// Specifies the number of hours to retain the events for this Event Hub. The value is only used when cleanup_policy is Delete.
+	// +kubebuilder:validation:Optional
+	RetentionTimeInHours *float64 `json:"retentionTimeInHours,omitempty" tf:"retention_time_in_hours,omitempty"`
+
+	// Specifies the number of hours to retain the tombstones markers of a compacted Event Hub. The value is only used when cleanup_policy is Compact.
+	// +kubebuilder:validation:Optional
+	TombstoneRetentionTimeInHours *float64 `json:"tombstoneRetentionTimeInHours,omitempty" tf:"tombstone_retention_time_in_hours,omitempty"`
 }
 
 // EventHubSpec defines the desired state of EventHub
@@ -285,7 +334,6 @@ type EventHubStatus struct {
 type EventHub struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.messageRetention) || (has(self.initProvider) && has(self.initProvider.messageRetention))",message="spec.forProvider.messageRetention is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.partitionCount) || (has(self.initProvider) && has(self.initProvider.partitionCount))",message="spec.forProvider.partitionCount is a required parameter"
 	Spec   EventHubSpec   `json:"spec"`
 	Status EventHubStatus `json:"status,omitempty"`

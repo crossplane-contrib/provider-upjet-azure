@@ -90,6 +90,9 @@ type EndpointObservation struct {
 	// The resource group in which the endpoint will be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
+	// The subscription ID for the endpoint.
+	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
+
 	// The type of the endpoint. Possible values are AzureIotHub.StorageContainer, AzureIotHub.ServiceBusQueue, AzureIotHub.ServiceBusTopic or AzureIotHub.EventHub.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
@@ -123,7 +126,7 @@ type FallbackRouteObservation struct {
 	// The condition that is evaluated to apply the routing rule. Defaults to true. For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language.
 	Condition *string `json:"condition,omitempty" tf:"condition,omitempty"`
 
-	// Used to specify whether the fallback route is enabled.
+	// Used to specify whether the fallback route is enabled. Defaults to true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The endpoints to which messages that satisfy the condition are routed. Currently only 1 endpoint is allowed.
@@ -179,6 +182,9 @@ type FileUploadInitParameters struct {
 
 	// The type used to authenticate against the storage account. Possible values are keyBased and identityBased. Defaults to keyBased.
 	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
+
+	// The connection string for the Azure Storage account to which files are uploaded.
+	ConnectionStringSecretRef v1.SecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
 
 	// The name of the root container where the files should be uploaded to. The container need not exist but should be creatable using the connection_string specified.
 	ContainerName *string `json:"containerName,omitempty" tf:"container_name,omitempty"`
@@ -236,7 +242,7 @@ type FileUploadParameters struct {
 	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
 
 	// The connection string for the Azure Storage account to which files are uploaded.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	ConnectionStringSecretRef v1.SecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
 
 	// The name of the root container where the files should be uploaded to. The container need not exist but should be creatable using the connection_string specified.
@@ -273,10 +279,10 @@ type IOTHubInitParameters struct {
 	// A cloud_to_device block as defined below.
 	CloudToDevice []CloudToDeviceInitParameters `json:"cloudToDevice,omitempty" tf:"cloud_to_device,omitempty"`
 
-	// The number of device-to-cloud partitions used by backing event hubs. Must be between 2 and 128.
+	// The number of device-to-cloud partitions used by backing event hubs. Must be between 2 and 128. Defaults to 4.
 	EventHubPartitionCount *float64 `json:"eventHubPartitionCount,omitempty" tf:"event_hub_partition_count,omitempty"`
 
-	// The event hub retention to use in days. Must be between 1 and 7.
+	// The event hub retention to use in days. Must be between 1 and 7. Defaults to 1.
 	EventHubRetentionInDays *float64 `json:"eventHubRetentionInDays,omitempty" tf:"event_hub_retention_in_days,omitempty"`
 
 	// A file_upload block as defined below.
@@ -334,10 +340,10 @@ type IOTHubObservation struct {
 	// The EventHub compatible path for operational data
 	EventHubOperationsPath *string `json:"eventHubOperationsPath,omitempty" tf:"event_hub_operations_path,omitempty"`
 
-	// The number of device-to-cloud partitions used by backing event hubs. Must be between 2 and 128.
+	// The number of device-to-cloud partitions used by backing event hubs. Must be between 2 and 128. Defaults to 4.
 	EventHubPartitionCount *float64 `json:"eventHubPartitionCount,omitempty" tf:"event_hub_partition_count,omitempty"`
 
-	// The event hub retention to use in days. Must be between 1 and 7.
+	// The event hub retention to use in days. Must be between 1 and 7. Defaults to 1.
 	EventHubRetentionInDays *float64 `json:"eventHubRetentionInDays,omitempty" tf:"event_hub_retention_in_days,omitempty"`
 
 	// A fallback_route block as defined below. If the fallback route is enabled, messages that don't match any of the supplied routes are automatically sent to this route. Defaults to messages/events.
@@ -396,11 +402,11 @@ type IOTHubParameters struct {
 	// +kubebuilder:validation:Optional
 	CloudToDevice []CloudToDeviceParameters `json:"cloudToDevice,omitempty" tf:"cloud_to_device,omitempty"`
 
-	// The number of device-to-cloud partitions used by backing event hubs. Must be between 2 and 128.
+	// The number of device-to-cloud partitions used by backing event hubs. Must be between 2 and 128. Defaults to 4.
 	// +kubebuilder:validation:Optional
 	EventHubPartitionCount *float64 `json:"eventHubPartitionCount,omitempty" tf:"event_hub_partition_count,omitempty"`
 
-	// The event hub retention to use in days. Must be between 1 and 7.
+	// The event hub retention to use in days. Must be between 1 and 7. Defaults to 1.
 	// +kubebuilder:validation:Optional
 	EventHubRetentionInDays *float64 `json:"eventHubRetentionInDays,omitempty" tf:"event_hub_retention_in_days,omitempty"`
 

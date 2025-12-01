@@ -430,7 +430,7 @@ spec:
                     type: object
                   retentionPolicyInDays:
                     description: The number of days to retain and untagged manifest
-                      after which it gets purged. Defaults to 7.
+                      after which it gets purged.
                     type: number
                   sku:
                     description: The SKU name of the container registry. Possible
@@ -741,7 +741,7 @@ spec:
                     type: boolean
                   retentionPolicyInDays:
                     description: The number of days to retain and untagged manifest
-                      after which it gets purged. Defaults to 7.
+                      after which it gets purged.
                     type: number
                   sku:
                     description: The SKU name of the container registry. Possible
@@ -881,6 +881,13 @@ spec:
                       Container Registry? This is only supported on resources with
                       the Premium SKU.
                     type: boolean
+                  dataEndpointHostNames:
+                    description: A set of data endpoint hostnames associated with
+                      the container registry if data endpoints are enabled.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   encryption:
                     description: An encryption block as documented below.
                     items:
@@ -1008,7 +1015,7 @@ spec:
                     type: string
                   retentionPolicyInDays:
                     description: The number of days to retain and untagged manifest
-                      after which it gets purged. Defaults to 7.
+                      after which it gets purged.
                     type: number
                   sku:
                     description: The SKU name of the container registry. Possible

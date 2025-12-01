@@ -89,7 +89,7 @@ metadata:
     meta.upbound.io/example-id: compute/v1beta1/linuxvirtualmachinescaleset
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: example-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     location: West Europe

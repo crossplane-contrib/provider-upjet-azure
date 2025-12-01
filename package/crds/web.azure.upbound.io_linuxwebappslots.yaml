@@ -1177,7 +1177,8 @@ spec:
                                 type: string
                               dotnetVersion:
                                 description: The version of .NET to use. Possible
-                                  values include 3.1, 5.0, 6.0, 7.0, 8.0 and 9.0.
+                                  values include 3.1, 5.0, 6.0, 7.0, 8.0, 9.0 and
+                                  10.0.
                                 type: string
                               goVersion:
                                 description: The version of Go to use. Possible values
@@ -1192,7 +1193,7 @@ spec:
                                 type: string
                               javaVersion:
                                 description: The Version of Java to use. Possible
-                                  values include 8, 11, and 17.
+                                  values are 8, 11, 17 and 21.
                                 type: string
                               nodeVersion:
                                 description: The version of Node to run. Possible
@@ -1201,7 +1202,7 @@ spec:
                                 type: string
                               phpVersion:
                                 description: The version of PHP to run. Possible values
-                                  are 7.4, 8.0, 8.1, 8.2 and 8.3.
+                                  are 7.4, 8.0, 8.1, 8.2, 8.3 and 8.4.
                                 type: string
                               pythonVersion:
                                 description: The version of Python to run. Possible
@@ -1561,9 +1562,9 @@ spec:
                             Integrated, Classic. Defaults to Integrated.'
                           type: string
                         minimumTlsVersion:
-                          description: 'The configures the minimum version of TLS
-                            required for SSL requests. Possible values include: 1.0,
-                            1.1, and 1.2. Defaults to 1.2.'
+                          description: The configures the minimum version of TLS required
+                            for SSL requests. Possible values are 1.0, 1.1, 1.2 and
+                            1.3. Defaults to 1.2.
                           type: string
                         remoteDebuggingEnabled:
                           description: Should Remote Debugging be enabled? Defaults
@@ -1729,9 +1730,9 @@ spec:
                             Allow and Deny. Defaults to Allow.
                           type: string
                         scmMinimumTlsVersion:
-                          description: 'The configures the minimum version of TLS
-                            required for SSL requests to the SCM site Possible values
-                            include: 1.0, 1.1, and 1.2. Defaults to 1.2.'
+                          description: The configures the minimum version of TLS required
+                            for SSL requests to the SCM site Possible values are 1.0,
+                            1.1, 1.2 and 1.3. Defaults to 1.2.
                           type: string
                         scmUseMainIpRestriction:
                           description: Should the Linux Web App ip_restriction configuration
@@ -1886,6 +1887,10 @@ spec:
                             type: string
                         type: object
                     type: object
+                  vnetImagePullEnabled:
+                    description: Should the traffic for the image pull be routed over
+                      virtual network enabled. Defaults to false.
+                    type: boolean
                   webdeployPublishBasicAuthenticationEnabled:
                     description: Should the default WebDeploy Basic Authentication
                       publishing credentials enabled. Defaults to true.
@@ -3019,7 +3024,8 @@ spec:
                                 type: string
                               dotnetVersion:
                                 description: The version of .NET to use. Possible
-                                  values include 3.1, 5.0, 6.0, 7.0, 8.0 and 9.0.
+                                  values include 3.1, 5.0, 6.0, 7.0, 8.0, 9.0 and
+                                  10.0.
                                 type: string
                               goVersion:
                                 description: The version of Go to use. Possible values
@@ -3034,7 +3040,7 @@ spec:
                                 type: string
                               javaVersion:
                                 description: The Version of Java to use. Possible
-                                  values include 8, 11, and 17.
+                                  values are 8, 11, 17 and 21.
                                 type: string
                               nodeVersion:
                                 description: The version of Node to run. Possible
@@ -3043,7 +3049,7 @@ spec:
                                 type: string
                               phpVersion:
                                 description: The version of PHP to run. Possible values
-                                  are 7.4, 8.0, 8.1, 8.2 and 8.3.
+                                  are 7.4, 8.0, 8.1, 8.2, 8.3 and 8.4.
                                 type: string
                               pythonVersion:
                                 description: The version of Python to run. Possible
@@ -3403,9 +3409,9 @@ spec:
                             Integrated, Classic. Defaults to Integrated.'
                           type: string
                         minimumTlsVersion:
-                          description: 'The configures the minimum version of TLS
-                            required for SSL requests. Possible values include: 1.0,
-                            1.1, and 1.2. Defaults to 1.2.'
+                          description: The configures the minimum version of TLS required
+                            for SSL requests. Possible values are 1.0, 1.1, 1.2 and
+                            1.3. Defaults to 1.2.
                           type: string
                         remoteDebuggingEnabled:
                           description: Should Remote Debugging be enabled? Defaults
@@ -3571,9 +3577,9 @@ spec:
                             Allow and Deny. Defaults to Allow.
                           type: string
                         scmMinimumTlsVersion:
-                          description: 'The configures the minimum version of TLS
-                            required for SSL requests to the SCM site Possible values
-                            include: 1.0, 1.1, and 1.2. Defaults to 1.2.'
+                          description: The configures the minimum version of TLS required
+                            for SSL requests to the SCM site Possible values are 1.0,
+                            1.1, 1.2 and 1.3. Defaults to 1.2.
                           type: string
                         scmUseMainIpRestriction:
                           description: Should the Linux Web App ip_restriction configuration
@@ -3730,6 +3736,10 @@ spec:
                             type: string
                         type: object
                     type: object
+                  vnetImagePullEnabled:
+                    description: Should the traffic for the image pull be routed over
+                      virtual network enabled. Defaults to false.
+                    type: boolean
                   webdeployPublishBasicAuthenticationEnabled:
                     description: Should the default WebDeploy Basic Authentication
                       publishing credentials enabled. Defaults to true.
@@ -4768,7 +4778,8 @@ spec:
                                 type: string
                               dotnetVersion:
                                 description: The version of .NET to use. Possible
-                                  values include 3.1, 5.0, 6.0, 7.0, 8.0 and 9.0.
+                                  values include 3.1, 5.0, 6.0, 7.0, 8.0, 9.0 and
+                                  10.0.
                                 type: string
                               goVersion:
                                 description: The version of Go to use. Possible values
@@ -4783,7 +4794,7 @@ spec:
                                 type: string
                               javaVersion:
                                 description: The Version of Java to use. Possible
-                                  values include 8, 11, and 17.
+                                  values are 8, 11, 17 and 21.
                                 type: string
                               nodeVersion:
                                 description: The version of Node to run. Possible
@@ -4792,7 +4803,7 @@ spec:
                                 type: string
                               phpVersion:
                                 description: The version of PHP to run. Possible values
-                                  are 7.4, 8.0, 8.1, 8.2 and 8.3.
+                                  are 7.4, 8.0, 8.1, 8.2, 8.3 and 8.4.
                                 type: string
                               pythonVersion:
                                 description: The version of Python to run. Possible
@@ -5082,9 +5093,9 @@ spec:
                             Integrated, Classic. Defaults to Integrated.'
                           type: string
                         minimumTlsVersion:
-                          description: 'The configures the minimum version of TLS
-                            required for SSL requests. Possible values include: 1.0,
-                            1.1, and 1.2. Defaults to 1.2.'
+                          description: The configures the minimum version of TLS required
+                            for SSL requests. Possible values are 1.0, 1.1, 1.2 and
+                            1.3. Defaults to 1.2.
                           type: string
                         remoteDebuggingEnabled:
                           description: Should Remote Debugging be enabled? Defaults
@@ -5174,9 +5185,9 @@ spec:
                             Allow and Deny. Defaults to Allow.
                           type: string
                         scmMinimumTlsVersion:
-                          description: 'The configures the minimum version of TLS
-                            required for SSL requests to the SCM site Possible values
-                            include: 1.0, 1.1, and 1.2. Defaults to 1.2.'
+                          description: The configures the minimum version of TLS required
+                            for SSL requests to the SCM site Possible values are 1.0,
+                            1.1, 1.2 and 1.3. Defaults to 1.2.
                           type: string
                         scmType:
                           type: string
@@ -5242,6 +5253,10 @@ spec:
                     description: The subnet id which will be used by this Web App
                       Slot for regional virtual network integration.
                     type: string
+                  vnetImagePullEnabled:
+                    description: Should the traffic for the image pull be routed over
+                      virtual network enabled. Defaults to false.
+                    type: boolean
                   webdeployPublishBasicAuthenticationEnabled:
                     description: Should the default WebDeploy Basic Authentication
                       publishing credentials enabled. Defaults to true.

@@ -1899,6 +1899,11 @@ func (in *OverridesSelectorsInitParameters) DeepCopyInto(out *OverridesSelectors
 			}
 		}
 	}
+	if in.Kind != nil {
+		in, out := &in.Kind, &out.Kind
+		*out = new(string)
+		**out = **in
+	}
 	if in.NotIn != nil {
 		in, out := &in.NotIn, &out.NotIn
 		*out = make([]*string, len(*in))
@@ -1977,6 +1982,11 @@ func (in *OverridesSelectorsParameters) DeepCopyInto(out *OverridesSelectorsPara
 				**out = **in
 			}
 		}
+	}
+	if in.Kind != nil {
+		in, out := &in.Kind, &out.Kind
+		*out = new(string)
+		**out = **in
 	}
 	if in.NotIn != nil {
 		in, out := &in.NotIn, &out.NotIn
@@ -6694,6 +6704,11 @@ func (in *SelectorsInitParameters) DeepCopyInto(out *SelectorsInitParameters) {
 			}
 		}
 	}
+	if in.Kind != nil {
+		in, out := &in.Kind, &out.Kind
+		*out = new(string)
+		**out = **in
+	}
 	if in.NotIn != nil {
 		in, out := &in.NotIn, &out.NotIn
 		*out = make([]*string, len(*in))
@@ -6772,6 +6787,11 @@ func (in *SelectorsParameters) DeepCopyInto(out *SelectorsParameters) {
 				**out = **in
 			}
 		}
+	}
+	if in.Kind != nil {
+		in, out := &in.Kind, &out.Kind
+		*out = new(string)
+		**out = **in
 	}
 	if in.NotIn != nil {
 		in, out := &in.NotIn, &out.NotIn
@@ -7331,6 +7351,11 @@ func (in *SubscriptionPolicyAssignmentOverridesSelectorsInitParameters) DeepCopy
 			}
 		}
 	}
+	if in.Kind != nil {
+		in, out := &in.Kind, &out.Kind
+		*out = new(string)
+		**out = **in
+	}
 	if in.NotIn != nil {
 		in, out := &in.NotIn, &out.NotIn
 		*out = make([]*string, len(*in))
@@ -7409,6 +7434,11 @@ func (in *SubscriptionPolicyAssignmentOverridesSelectorsParameters) DeepCopyInto
 				**out = **in
 			}
 		}
+	}
+	if in.Kind != nil {
+		in, out := &in.Kind, &out.Kind
+		*out = new(string)
+		**out = **in
 	}
 	if in.NotIn != nil {
 		in, out := &in.NotIn, &out.NotIn

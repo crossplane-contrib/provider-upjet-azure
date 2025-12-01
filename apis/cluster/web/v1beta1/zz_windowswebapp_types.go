@@ -2335,6 +2335,9 @@ type WindowsWebAppInitParameters struct {
 	// Whether backup and restore operations over the linked virtual network are enabled. Defaults to false.
 	VirtualNetworkBackupRestoreEnabled *bool `json:"virtualNetworkBackupRestoreEnabled,omitempty" tf:"virtual_network_backup_restore_enabled,omitempty"`
 
+	// Whether traffic for the image pull should be routed over the virtual network.
+	VirtualNetworkImagePullEnabled *bool `json:"virtualNetworkImagePullEnabled,omitempty" tf:"virtual_network_image_pull_enabled,omitempty"`
+
 	// The subnet id which will be used by this Web App for regional virtual network integration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
@@ -2590,6 +2593,9 @@ type WindowsWebAppObservation struct {
 	// Whether backup and restore operations over the linked virtual network are enabled. Defaults to false.
 	VirtualNetworkBackupRestoreEnabled *bool `json:"virtualNetworkBackupRestoreEnabled,omitempty" tf:"virtual_network_backup_restore_enabled,omitempty"`
 
+	// Whether traffic for the image pull should be routed over the virtual network.
+	VirtualNetworkImagePullEnabled *bool `json:"virtualNetworkImagePullEnabled,omitempty" tf:"virtual_network_image_pull_enabled,omitempty"`
+
 	// The subnet id which will be used by this Web App for regional virtual network integration.
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
@@ -2721,6 +2727,10 @@ type WindowsWebAppParameters struct {
 	// +kubebuilder:validation:Optional
 	VirtualNetworkBackupRestoreEnabled *bool `json:"virtualNetworkBackupRestoreEnabled,omitempty" tf:"virtual_network_backup_restore_enabled,omitempty"`
 
+	// Whether traffic for the image pull should be routed over the virtual network.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkImagePullEnabled *bool `json:"virtualNetworkImagePullEnabled,omitempty" tf:"virtual_network_image_pull_enabled,omitempty"`
+
 	// The subnet id which will be used by this Web App for regional virtual network integration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
@@ -2766,7 +2776,7 @@ type WindowsWebAppSiteConfigApplicationStackInitParameters struct {
 	// The version of DotNetCore to use.
 	DotnetCoreVersion *string `json:"dotnetCoreVersion,omitempty" tf:"dotnet_core_version,omitempty"`
 
-	// The version of .NET to use when current_stack is set to dotnet. Possible values include v2.0,v3.0, v4.0, v5.0, v6.0, v7.0, v8.0 and v9.0.
+	// The version of .NET to use when current_stack is set to dotnet. Possible values include v2.0,v3.0, v4.0, v5.0, v6.0, v7.0, v8.0, v9.0 and v10.0.
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
 	JavaContainer *string `json:"javaContainer,omitempty" tf:"java_container,omitempty"`
@@ -2811,7 +2821,7 @@ type WindowsWebAppSiteConfigApplicationStackObservation struct {
 	// The version of DotNetCore to use.
 	DotnetCoreVersion *string `json:"dotnetCoreVersion,omitempty" tf:"dotnet_core_version,omitempty"`
 
-	// The version of .NET to use when current_stack is set to dotnet. Possible values include v2.0,v3.0, v4.0, v5.0, v6.0, v7.0, v8.0 and v9.0.
+	// The version of .NET to use when current_stack is set to dotnet. Possible values include v2.0,v3.0, v4.0, v5.0, v6.0, v7.0, v8.0, v9.0 and v10.0.
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
 	JavaContainer *string `json:"javaContainer,omitempty" tf:"java_container,omitempty"`
@@ -2865,7 +2875,7 @@ type WindowsWebAppSiteConfigApplicationStackParameters struct {
 	// +kubebuilder:validation:Optional
 	DotnetCoreVersion *string `json:"dotnetCoreVersion,omitempty" tf:"dotnet_core_version,omitempty"`
 
-	// The version of .NET to use when current_stack is set to dotnet. Possible values include v2.0,v3.0, v4.0, v5.0, v6.0, v7.0, v8.0 and v9.0.
+	// The version of .NET to use when current_stack is set to dotnet. Possible values include v2.0,v3.0, v4.0, v5.0, v6.0, v7.0, v8.0, v9.0 and v10.0.
 	// +kubebuilder:validation:Optional
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
@@ -3225,7 +3235,7 @@ type WindowsWebAppSiteConfigInitParameters struct {
 	// The Default action for traffic that does not match any scm_ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
 	ScmIPRestrictionDefaultAction *string `json:"scmIpRestrictionDefaultAction,omitempty" tf:"scm_ip_restriction_default_action,omitempty"`
 
-	// The configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
+	// The configures the minimum version of TLS required for SSL requests to the SCM site Possible values are 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
 	ScmMinimumTLSVersion *string `json:"scmMinimumTlsVersion,omitempty" tf:"scm_minimum_tls_version,omitempty"`
 
 	// Should the Windows Web App ip_restriction configuration be used for the SCM also.
@@ -3331,7 +3341,7 @@ type WindowsWebAppSiteConfigObservation struct {
 	// The Default action for traffic that does not match any scm_ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
 	ScmIPRestrictionDefaultAction *string `json:"scmIpRestrictionDefaultAction,omitempty" tf:"scm_ip_restriction_default_action,omitempty"`
 
-	// The configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
+	// The configures the minimum version of TLS required for SSL requests to the SCM site Possible values are 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
 	ScmMinimumTLSVersion *string `json:"scmMinimumTlsVersion,omitempty" tf:"scm_minimum_tls_version,omitempty"`
 
 	ScmType *string `json:"scmType,omitempty" tf:"scm_type,omitempty"`
@@ -3461,7 +3471,7 @@ type WindowsWebAppSiteConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	ScmIPRestrictionDefaultAction *string `json:"scmIpRestrictionDefaultAction,omitempty" tf:"scm_ip_restriction_default_action,omitempty"`
 
-	// The configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
+	// The configures the minimum version of TLS required for SSL requests to the SCM site Possible values are 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
 	// +kubebuilder:validation:Optional
 	ScmMinimumTLSVersion *string `json:"scmMinimumTlsVersion,omitempty" tf:"scm_minimum_tls_version,omitempty"`
 

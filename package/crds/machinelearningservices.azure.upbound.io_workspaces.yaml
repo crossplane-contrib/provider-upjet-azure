@@ -631,6 +631,12 @@ spec:
                             Workspace. Possible values are Disabled, AllowOnlyApprovedOutbound,
                             and AllowInternetOutbound
                           type: string
+                        provisionOnCreationEnabled:
+                          description: Set to trigger the provisioning of the managed
+                            VNet with the default options when creating a Machine
+                            Learning Workspace with the managed VNet enabled. Defaults
+                            to false. Changing this forces a new resource to be created.
+                          type: boolean
                       type: object
                     type: array
                   primaryUserAssignedIdentity:
@@ -890,6 +896,11 @@ spec:
                           type: object
                       type: object
                     type: array
+                  serviceSideEncryptionEnabled:
+                    description: Whether to enable service-side encryption with customer-managed
+                      keys (CMK). Default to false. Changing this forces a new resource
+                      to be created.
+                    type: boolean
                   skuName:
                     description: SKU/edition of the Machine Learning Workspace, possible
                       values are Free, Basic, Standard and Premium. Defaults to Basic.
@@ -1556,6 +1567,12 @@ spec:
                             Workspace. Possible values are Disabled, AllowOnlyApprovedOutbound,
                             and AllowInternetOutbound
                           type: string
+                        provisionOnCreationEnabled:
+                          description: Set to trigger the provisioning of the managed
+                            VNet with the default options when creating a Machine
+                            Learning Workspace with the managed VNet enabled. Defaults
+                            to false. Changing this forces a new resource to be created.
+                          type: boolean
                       type: object
                     type: array
                   primaryUserAssignedIdentity:
@@ -1734,6 +1751,11 @@ spec:
                           type: object
                       type: object
                     type: array
+                  serviceSideEncryptionEnabled:
+                    description: Whether to enable service-side encryption with customer-managed
+                      keys (CMK). Default to false. Changing this forces a new resource
+                      to be created.
+                    type: boolean
                   skuName:
                     description: SKU/edition of the Machine Learning Workspace, possible
                       values are Free, Basic, Standard and Premium. Defaults to Basic.
@@ -2045,6 +2067,12 @@ spec:
                             Workspace. Possible values are Disabled, AllowOnlyApprovedOutbound,
                             and AllowInternetOutbound
                           type: string
+                        provisionOnCreationEnabled:
+                          description: Set to trigger the provisioning of the managed
+                            VNet with the default options when creating a Machine
+                            Learning Workspace with the managed VNet enabled. Defaults
+                            to false. Changing this forces a new resource to be created.
+                          type: boolean
                       type: object
                     type: array
                   primaryUserAssignedIdentity:
@@ -2076,6 +2104,11 @@ spec:
                           type: string
                       type: object
                     type: array
+                  serviceSideEncryptionEnabled:
+                    description: Whether to enable service-side encryption with customer-managed
+                      keys (CMK). Default to false. Changing this forces a new resource
+                      to be created.
+                    type: boolean
                   skuName:
                     description: SKU/edition of the Machine Learning Workspace, possible
                       values are Free, Basic, Standard and Premium. Defaults to Basic.
