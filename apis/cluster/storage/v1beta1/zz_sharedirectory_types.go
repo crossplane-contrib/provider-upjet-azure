@@ -23,7 +23,17 @@ type ShareDirectoryInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The ID of the Directory within the File Share.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Share
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	StorageShareID *string `json:"storageShareId,omitempty" tf:"storage_share_id,omitempty"`
+
+	// Reference to a Share in storage to populate storageShareId.
+	// +kubebuilder:validation:Optional
+	StorageShareIDRef *v1.Reference `json:"storageShareIdRef,omitempty" tf:"-"`
+
+	// Selector for a Share in storage to populate storageShareId.
+	// +kubebuilder:validation:Optional
+	StorageShareIDSelector *v1.Selector `json:"storageShareIdSelector,omitempty" tf:"-"`
 
 	// The Storage Share URL in which this file will be placed into. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Share
@@ -70,8 +80,18 @@ type ShareDirectoryParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The ID of the Directory within the File Share.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Share
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StorageShareID *string `json:"storageShareId,omitempty" tf:"storage_share_id,omitempty"`
+
+	// Reference to a Share in storage to populate storageShareId.
+	// +kubebuilder:validation:Optional
+	StorageShareIDRef *v1.Reference `json:"storageShareIdRef,omitempty" tf:"-"`
+
+	// Selector for a Share in storage to populate storageShareId.
+	// +kubebuilder:validation:Optional
+	StorageShareIDSelector *v1.Selector `json:"storageShareIdSelector,omitempty" tf:"-"`
 
 	// The Storage Share URL in which this file will be placed into. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Share

@@ -13,7 +13,7 @@ metadata:
 spec:
   forProvider:
     name: example
-    storageShareIdSelector:
+    storageShareUrlSelector:
       matchLabels:
         testing.upbound.io/example-name: example
 
@@ -26,7 +26,7 @@ metadata:
     meta.upbound.io/example-id: storage/v1beta1/sharedirectory
   labels:
     testing.upbound.io/example-name: example
-  name: sdexample
+  name: sdexample-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     location: West Europe
@@ -40,7 +40,7 @@ metadata:
     meta.upbound.io/example-id: storage/v1beta1/sharedirectory
   labels:
     testing.upbound.io/example-name: example
-  name: sdexamplebumptest55
+  name: sdexamplebumptest5524
 spec:
   forProvider:
     accountReplicationType: LRS

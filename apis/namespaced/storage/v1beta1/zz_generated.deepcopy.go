@@ -8947,6 +8947,16 @@ func (in *ShareDirectoryInitParameters) DeepCopyInto(out *ShareDirectoryInitPara
 		*out = new(string)
 		**out = **in
 	}
+	if in.StorageShareIDRef != nil {
+		in, out := &in.StorageShareIDRef, &out.StorageShareIDRef
+		*out = new(v1.NamespacedReference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.StorageShareIDSelector != nil {
+		in, out := &in.StorageShareIDSelector, &out.StorageShareIDSelector
+		*out = new(v1.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.StorageShareURL != nil {
 		in, out := &in.StorageShareURL, &out.StorageShareURL
 		*out = new(string)
@@ -9085,6 +9095,16 @@ func (in *ShareDirectoryParameters) DeepCopyInto(out *ShareDirectoryParameters) 
 		in, out := &in.StorageShareID, &out.StorageShareID
 		*out = new(string)
 		**out = **in
+	}
+	if in.StorageShareIDRef != nil {
+		in, out := &in.StorageShareIDRef, &out.StorageShareIDRef
+		*out = new(v1.NamespacedReference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.StorageShareIDSelector != nil {
+		in, out := &in.StorageShareIDSelector, &out.StorageShareIDSelector
+		*out = new(v1.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.StorageShareURL != nil {
 		in, out := &in.StorageShareURL, &out.StorageShareURL
