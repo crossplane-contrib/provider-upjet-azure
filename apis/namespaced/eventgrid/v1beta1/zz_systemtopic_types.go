@@ -61,7 +61,17 @@ type SystemTopicInitParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The ID of the Event Grid System Topic.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SourceArmResourceID *string `json:"sourceArmResourceId,omitempty" tf:"source_arm_resource_id,omitempty"`
+
+	// Reference to a Account in storage to populate sourceArmResourceId.
+	// +kubebuilder:validation:Optional
+	SourceArmResourceIDRef *v1.NamespacedReference `json:"sourceArmResourceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Account in storage to populate sourceArmResourceId.
+	// +kubebuilder:validation:Optional
+	SourceArmResourceIDSelector *v1.NamespacedSelector `json:"sourceArmResourceIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Event Grid System Topic ARM Source. Changing this forces a new Event Grid System Topic to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
@@ -142,8 +152,18 @@ type SystemTopicParameters struct {
 	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The ID of the Event Grid System Topic.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourceArmResourceID *string `json:"sourceArmResourceId,omitempty" tf:"source_arm_resource_id,omitempty"`
+
+	// Reference to a Account in storage to populate sourceArmResourceId.
+	// +kubebuilder:validation:Optional
+	SourceArmResourceIDRef *v1.NamespacedReference `json:"sourceArmResourceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Account in storage to populate sourceArmResourceId.
+	// +kubebuilder:validation:Optional
+	SourceArmResourceIDSelector *v1.NamespacedSelector `json:"sourceArmResourceIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Event Grid System Topic ARM Source. Changing this forces a new Event Grid System Topic to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account

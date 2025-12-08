@@ -8998,6 +8998,16 @@ func (in *SystemTopicInitParameters) DeepCopyInto(out *SystemTopicInitParameters
 		*out = new(string)
 		**out = **in
 	}
+	if in.SourceArmResourceIDRef != nil {
+		in, out := &in.SourceArmResourceIDRef, &out.SourceArmResourceIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SourceArmResourceIDSelector != nil {
+		in, out := &in.SourceArmResourceIDSelector, &out.SourceArmResourceIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.SourceResourceID != nil {
 		in, out := &in.SourceResourceID, &out.SourceResourceID
 		*out = new(string)
@@ -9190,6 +9200,16 @@ func (in *SystemTopicParameters) DeepCopyInto(out *SystemTopicParameters) {
 		in, out := &in.SourceArmResourceID, &out.SourceArmResourceID
 		*out = new(string)
 		**out = **in
+	}
+	if in.SourceArmResourceIDRef != nil {
+		in, out := &in.SourceArmResourceIDRef, &out.SourceArmResourceIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SourceArmResourceIDSelector != nil {
+		in, out := &in.SourceArmResourceIDSelector, &out.SourceArmResourceIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SourceResourceID != nil {
 		in, out := &in.SourceResourceID, &out.SourceResourceID
