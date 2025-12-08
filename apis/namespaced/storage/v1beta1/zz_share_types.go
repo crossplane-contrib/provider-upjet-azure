@@ -100,7 +100,7 @@ type ShareInitParameters struct {
 	// The maximum size of the share, in gigabytes.
 	Quota *float64 `json:"quota,omitempty" tf:"quota,omitempty"`
 
-	// Specifies the storage account in which to create the share. Changing this forces a new resource to be created.
+	// Specifies the storage account in which to create the share.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
@@ -138,10 +138,10 @@ type ShareObservation struct {
 	// The Resource Manager ID of this File Share.
 	ResourceManagerID *string `json:"resourceManagerId,omitempty" tf:"resource_manager_id,omitempty"`
 
-	// Specifies the storage account in which to create the share. Changing this forces a new resource to be created.
+	// Specifies the storage account in which to create the share.
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 
-	// Specifies the storage account in which to create the share. Changing this forces a new resource to be created. This property is deprecated in favour of storage_account_id.
+	// Specifies the storage account in which to create the share. This property is deprecated in favour of storage_account_id.
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 
 	// The URL of the File Share
@@ -171,7 +171,7 @@ type ShareParameters struct {
 	// +kubebuilder:validation:Optional
 	Quota *float64 `json:"quota,omitempty" tf:"quota,omitempty"`
 
-	// Specifies the storage account in which to create the share. Changing this forces a new resource to be created.
+	// Specifies the storage account in which to create the share.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -185,7 +185,7 @@ type ShareParameters struct {
 	// +kubebuilder:validation:Optional
 	StorageAccountIDSelector *v1.NamespacedSelector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 
-	// Specifies the storage account in which to create the share. Changing this forces a new resource to be created. This property is deprecated in favour of storage_account_id.
+	// Specifies the storage account in which to create the share. This property is deprecated in favour of storage_account_id.
 	// +kubebuilder:validation:Optional
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 }

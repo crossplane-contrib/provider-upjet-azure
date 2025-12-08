@@ -31,6 +31,11 @@ func (in *CustomerManagedKeyInitParameters) DeepCopyInto(out *CustomerManagedKey
 		*out = new(string)
 		**out = **in
 	}
+	if in.ManagedHSMKeyID != nil {
+		in, out := &in.ManagedHSMKeyID, &out.ManagedHSMKeyID
+		*out = new(string)
+		**out = **in
+	}
 	if in.PrimaryUserAssignedIdentityID != nil {
 		in, out := &in.PrimaryUserAssignedIdentityID, &out.PrimaryUserAssignedIdentityID
 		*out = new(string)
@@ -66,6 +71,11 @@ func (in *CustomerManagedKeyObservation) DeepCopyInto(out *CustomerManagedKeyObs
 		*out = new(string)
 		**out = **in
 	}
+	if in.ManagedHSMKeyID != nil {
+		in, out := &in.ManagedHSMKeyID, &out.ManagedHSMKeyID
+		*out = new(string)
+		**out = **in
+	}
 	if in.PrimaryUserAssignedIdentityID != nil {
 		in, out := &in.PrimaryUserAssignedIdentityID, &out.PrimaryUserAssignedIdentityID
 		*out = new(string)
@@ -98,6 +108,11 @@ func (in *CustomerManagedKeyParameters) DeepCopyInto(out *CustomerManagedKeyPara
 	}
 	if in.KeyVaultKeyID != nil {
 		in, out := &in.KeyVaultKeyID, &out.KeyVaultKeyID
+		*out = new(string)
+		**out = **in
+	}
+	if in.ManagedHSMKeyID != nil {
+		in, out := &in.ManagedHSMKeyID, &out.ManagedHSMKeyID
 		*out = new(string)
 		**out = **in
 	}

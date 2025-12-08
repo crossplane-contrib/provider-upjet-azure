@@ -108,7 +108,6 @@ import (
 	v1beta1management "github.com/upbound/provider-azure/v2/apis/cluster/management/v1beta1"
 	v1beta1maps "github.com/upbound/provider-azure/v2/apis/cluster/maps/v1beta1"
 	v1beta1marketplaceordering "github.com/upbound/provider-azure/v2/apis/cluster/marketplaceordering/v1beta1"
-	v1beta1mixedreality "github.com/upbound/provider-azure/v2/apis/cluster/mixedreality/v1beta1"
 	v1beta1netapp "github.com/upbound/provider-azure/v2/apis/cluster/netapp/v1beta1"
 	v1beta2netapp "github.com/upbound/provider-azure/v2/apis/cluster/netapp/v1beta2"
 	v1beta1network "github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta1"
@@ -263,7 +262,6 @@ func init() {
 		v1beta1management.SchemeBuilder.AddToScheme,
 		v1beta1maps.SchemeBuilder.AddToScheme,
 		v1beta1marketplaceordering.SchemeBuilder.AddToScheme,
-		v1beta1mixedreality.SchemeBuilder.AddToScheme,
 		v1beta1netapp.SchemeBuilder.AddToScheme,
 		v1beta2netapp.SchemeBuilder.AddToScheme,
 		v1beta1network.SchemeBuilder.AddToScheme,

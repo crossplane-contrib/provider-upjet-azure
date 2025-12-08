@@ -535,9 +535,6 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// /managementGroup/MyManagementGroup/subscription/12345678-1234-1234-1234-123456789012
 	"azurerm_management_group_subscription_association": managementGroupSubscriptionAssociation(),
 
-	// mixedreality
-	"azurerm_spatial_anchors_account": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.MixedReality/spatialAnchorsAccounts/{{ .external_name }}"),
-
 	// dbformysql
 	// dbformysql flexible variants
 	"azurerm_mysql_flexible_server":               config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DBforMySQL/flexibleServers/{{ .external_name }}"),

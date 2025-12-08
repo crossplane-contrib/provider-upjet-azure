@@ -593,6 +593,10 @@ spec:
                     description: The location of the source database. Changing this
                       forces a new resource to be created.
                     type: string
+                  protectionState:
+                    description: The protection state of the Backup Instance PostgreSQL
+                      Flexible Server.
+                    type: string
                   serverId:
                     description: The ID of the source server. Changing this forces
                       a new resource to be created.

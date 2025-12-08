@@ -76,6 +76,7 @@ spec:
                 properties:
                   backupDatasourceParameters:
                     description: A backup_datasource_parameters block as defined below.
+                      Changing this forces a new resource to be created.
                     properties:
                       clusterScopedResourcesEnabled:
                         description: Whether to include cluster scope resources during
@@ -460,6 +461,7 @@ spec:
                 properties:
                   backupDatasourceParameters:
                     description: A backup_datasource_parameters block as defined below.
+                      Changing this forces a new resource to be created.
                     properties:
                       clusterScopedResourcesEnabled:
                         description: Whether to include cluster scope resources during
@@ -847,6 +849,7 @@ spec:
                 properties:
                   backupDatasourceParameters:
                     description: A backup_datasource_parameters block as defined below.
+                      Changing this forces a new resource to be created.
                     properties:
                       clusterScopedResourcesEnabled:
                         description: Whether to include cluster scope resources during
@@ -904,6 +907,10 @@ spec:
                   location:
                     description: The location of the Backup Instance Kubernetes Cluster.
                       Changing this forces a new resource to be created.
+                    type: string
+                  protectionState:
+                    description: The protection state of the Backup Instance Kubernetes
+                      Cluster.
                     type: string
                   snapshotResourceGroupName:
                     description: The name of the Resource Group where snapshots are

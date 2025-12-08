@@ -155,12 +155,18 @@ type ManagedNetworkInitParameters struct {
 
 	// The isolation mode of the Machine Learning Workspace. Possible values are Disabled, AllowOnlyApprovedOutbound, and AllowInternetOutbound
 	IsolationMode *string `json:"isolationMode,omitempty" tf:"isolation_mode,omitempty"`
+
+	// Set to trigger the provisioning of the managed VNet with the default options when creating a Machine Learning Workspace with the managed VNet enabled. Defaults to false. Changing this forces a new resource to be created.
+	ProvisionOnCreationEnabled *bool `json:"provisionOnCreationEnabled,omitempty" tf:"provision_on_creation_enabled,omitempty"`
 }
 
 type ManagedNetworkObservation struct {
 
 	// The isolation mode of the Machine Learning Workspace. Possible values are Disabled, AllowOnlyApprovedOutbound, and AllowInternetOutbound
 	IsolationMode *string `json:"isolationMode,omitempty" tf:"isolation_mode,omitempty"`
+
+	// Set to trigger the provisioning of the managed VNet with the default options when creating a Machine Learning Workspace with the managed VNet enabled. Defaults to false. Changing this forces a new resource to be created.
+	ProvisionOnCreationEnabled *bool `json:"provisionOnCreationEnabled,omitempty" tf:"provision_on_creation_enabled,omitempty"`
 }
 
 type ManagedNetworkParameters struct {
@@ -168,6 +174,10 @@ type ManagedNetworkParameters struct {
 	// The isolation mode of the Machine Learning Workspace. Possible values are Disabled, AllowOnlyApprovedOutbound, and AllowInternetOutbound
 	// +kubebuilder:validation:Optional
 	IsolationMode *string `json:"isolationMode,omitempty" tf:"isolation_mode,omitempty"`
+
+	// Set to trigger the provisioning of the managed VNet with the default options when creating a Machine Learning Workspace with the managed VNet enabled. Defaults to false. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	ProvisionOnCreationEnabled *bool `json:"provisionOnCreationEnabled,omitempty" tf:"provision_on_creation_enabled,omitempty"`
 }
 
 type ServerlessComputeInitParameters struct {
@@ -357,6 +367,9 @@ type WorkspaceInitParameters struct {
 	// A serverless_compute block as defined below.
 	ServerlessCompute []ServerlessComputeInitParameters `json:"serverlessCompute,omitempty" tf:"serverless_compute,omitempty"`
 
+	// Whether to enable service-side encryption with customer-managed keys (CMK). Default to false. Changing this forces a new resource to be created.
+	ServiceSideEncryptionEnabled *bool `json:"serviceSideEncryptionEnabled,omitempty" tf:"service_side_encryption_enabled,omitempty"`
+
 	// SKU/edition of the Machine Learning Workspace, possible values are Free, Basic, Standard and Premium. Defaults to Basic.
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
@@ -439,6 +452,9 @@ type WorkspaceObservation struct {
 
 	// A serverless_compute block as defined below.
 	ServerlessCompute []ServerlessComputeObservation `json:"serverlessCompute,omitempty" tf:"serverless_compute,omitempty"`
+
+	// Whether to enable service-side encryption with customer-managed keys (CMK). Default to false. Changing this forces a new resource to be created.
+	ServiceSideEncryptionEnabled *bool `json:"serviceSideEncryptionEnabled,omitempty" tf:"service_side_encryption_enabled,omitempty"`
 
 	// SKU/edition of the Machine Learning Workspace, possible values are Free, Basic, Standard and Premium. Defaults to Basic.
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
@@ -565,6 +581,10 @@ type WorkspaceParameters struct {
 	// A serverless_compute block as defined below.
 	// +kubebuilder:validation:Optional
 	ServerlessCompute []ServerlessComputeParameters `json:"serverlessCompute,omitempty" tf:"serverless_compute,omitempty"`
+
+	// Whether to enable service-side encryption with customer-managed keys (CMK). Default to false. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	ServiceSideEncryptionEnabled *bool `json:"serviceSideEncryptionEnabled,omitempty" tf:"service_side_encryption_enabled,omitempty"`
 
 	// SKU/edition of the Machine Learning Workspace, possible values are Free, Basic, Standard and Premium. Defaults to Basic.
 	// +kubebuilder:validation:Optional

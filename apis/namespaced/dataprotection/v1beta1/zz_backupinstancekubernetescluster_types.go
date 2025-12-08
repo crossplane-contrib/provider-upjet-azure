@@ -95,7 +95,7 @@ type BackupDataSourceParametersParameters struct {
 
 type BackupInstanceKubernetesClusterInitParameters struct {
 
-	// A backup_datasource_parameters block as defined below.
+	// A backup_datasource_parameters block as defined below. Changing this forces a new resource to be created.
 	BackupDataSourceParameters *BackupDataSourceParametersInitParameters `json:"backupDatasourceParameters,omitempty" tf:"backup_datasource_parameters,omitempty"`
 
 	// The ID of the Backup Policy. Changing this forces a new resource to be created.
@@ -142,7 +142,7 @@ type BackupInstanceKubernetesClusterInitParameters struct {
 
 type BackupInstanceKubernetesClusterObservation struct {
 
-	// A backup_datasource_parameters block as defined below.
+	// A backup_datasource_parameters block as defined below. Changing this forces a new resource to be created.
 	BackupDataSourceParameters *BackupDataSourceParametersObservation `json:"backupDatasourceParameters,omitempty" tf:"backup_datasource_parameters,omitempty"`
 
 	// The ID of the Backup Policy. Changing this forces a new resource to be created.
@@ -157,6 +157,9 @@ type BackupInstanceKubernetesClusterObservation struct {
 	// The location of the Backup Instance Kubernetes Cluster. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// The protection state of the Backup Instance Kubernetes Cluster.
+	ProtectionState *string `json:"protectionState,omitempty" tf:"protection_state,omitempty"`
+
 	// The name of the Resource Group where snapshots are stored. Changing this forces a new resource to be created.
 	SnapshotResourceGroupName *string `json:"snapshotResourceGroupName,omitempty" tf:"snapshot_resource_group_name,omitempty"`
 
@@ -166,7 +169,7 @@ type BackupInstanceKubernetesClusterObservation struct {
 
 type BackupInstanceKubernetesClusterParameters struct {
 
-	// A backup_datasource_parameters block as defined below.
+	// A backup_datasource_parameters block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	BackupDataSourceParameters *BackupDataSourceParametersParameters `json:"backupDatasourceParameters,omitempty" tf:"backup_datasource_parameters,omitempty"`
 

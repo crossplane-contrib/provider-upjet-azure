@@ -14,6 +14,34 @@ metadata:
 spec:
   forProvider:
     operationalDefaultRetentionDuration: P30D
+    retentionRule:
+    - criteria:
+        daysOfWeek:
+        - Monday
+      lifeCycle:
+        dataStoreType: VaultStore
+        duration: P90D
+      name: Weekly
+      priority: 20
+    - criteria:
+        daysOfMonth:
+        - 1
+      lifeCycle:
+        dataStoreType: VaultStore
+        duration: P180D
+      name: Monthly
+      priority: 10
+    - criteria:
+        daysOfMonth:
+        - 1
+        monthsOfYear:
+        - January
+      lifeCycle:
+        dataStoreType: VaultStore
+        duration: P365D
+      name: Yearly
+      priority: 5
+    vaultDefaultRetentionDuration: P7D
     vaultIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example

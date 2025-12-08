@@ -1767,7 +1767,7 @@ spec:
                     x-kubernetes-map-type: granular
                   targetResourceId:
                     description: The ID of the Resource for which to enable flow logs
-                      for. Changing this forces a new resource to be created.
+                      for.
                     type: string
                   targetResourceIdRef:
                     description: Reference to a SecurityGroup in network to populate
@@ -2219,7 +2219,7 @@ spec:
                     x-kubernetes-map-type: granular
                   targetResourceId:
                     description: The ID of the Resource for which to enable flow logs
-                      for. Changing this forces a new resource to be created.
+                      for.
                     type: string
                   targetResourceIdRef:
                     description: Reference to a SecurityGroup in network to populate
@@ -2620,7 +2620,7 @@ spec:
                     x-kubernetes-map-type: granular
                   targetResourceId:
                     description: The ID of the Resource for which to enable flow logs
-                      for. Changing this forces a new resource to be created.
+                      for.
                     type: string
                   trafficAnalytics:
                     description: A traffic_analytics block as documented below.

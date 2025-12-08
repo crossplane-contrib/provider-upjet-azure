@@ -549,6 +549,8 @@ spec:
                     description: A long_term_retention_policy block as defined below.
                     properties:
                       immutableBackupsEnabled:
+                        description: Specifies if the backups are immutable. Defaults
+                          to false.
                         type: boolean
                       monthlyRetention:
                         description: The monthly retention policy for an LTR backup
@@ -692,6 +694,8 @@ spec:
                     description: A long_term_retention_policy block as defined below.
                     properties:
                       immutableBackupsEnabled:
+                        description: Specifies if the backups are immutable. Defaults
+                          to false.
                         type: boolean
                       monthlyRetention:
                         description: The monthly retention policy for an LTR backup
@@ -836,6 +840,8 @@ spec:
                     description: A long_term_retention_policy block as defined below.
                     properties:
                       immutableBackupsEnabled:
+                        description: Specifies if the backups are immutable. Defaults
+                          to false.
                         type: boolean
                       monthlyRetention:
                         description: The monthly retention policy for an LTR backup

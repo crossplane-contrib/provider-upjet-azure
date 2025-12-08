@@ -73,13 +73,11 @@ spec:
                       Tags like ‘Sql.WestEurope‘, ‘Storage.EastUS‘, etc. You can list
                       the available service tags with the CLI: shell az network list-service-tags
                       --location westcentralus. For further information please see
-                      Azure CLI - az network list-service-tags. This is required if
-                      destination_address_prefixes is not specified.'
+                      Azure CLI - az network list-service-tags.'
                     type: string
                   destinationAddressPrefixes:
                     description: List of destination address prefixes. Tags may not
-                      be used. This is required if destination_address_prefix is not
-                      specified.
+                      be used.
                     items:
                       type: string
                     type: array
@@ -295,12 +293,11 @@ spec:
                   sourceAddressPrefix:
                     description: CIDR or source IP range or * to match any IP. Tags
                       such as VirtualNetwork, AzureLoadBalancer and Internet can also
-                      be used. This is required if source_address_prefixes is not
-                      specified.
+                      be used.
                     type: string
                   sourceAddressPrefixes:
                     description: List of source address prefixes. Tags may not be
-                      used. This is required if source_address_prefix is not specified.
+                      used.
                     items:
                       type: string
                     type: array
@@ -351,13 +348,11 @@ spec:
                       Tags like ‘Sql.WestEurope‘, ‘Storage.EastUS‘, etc. You can list
                       the available service tags with the CLI: shell az network list-service-tags
                       --location westcentralus. For further information please see
-                      Azure CLI - az network list-service-tags. This is required if
-                      destination_address_prefixes is not specified.'
+                      Azure CLI - az network list-service-tags.'
                     type: string
                   destinationAddressPrefixes:
                     description: List of destination address prefixes. Tags may not
-                      be used. This is required if destination_address_prefix is not
-                      specified.
+                      be used.
                     items:
                       type: string
                     type: array
@@ -399,12 +394,11 @@ spec:
                   sourceAddressPrefix:
                     description: CIDR or source IP range or * to match any IP. Tags
                       such as VirtualNetwork, AzureLoadBalancer and Internet can also
-                      be used. This is required if source_address_prefixes is not
-                      specified.
+                      be used.
                     type: string
                   sourceAddressPrefixes:
                     description: List of source address prefixes. Tags may not be
-                      used. This is required if source_address_prefix is not specified.
+                      used.
                     items:
                       type: string
                     type: array
@@ -522,13 +516,11 @@ spec:
                       Tags like ‘Sql.WestEurope‘, ‘Storage.EastUS‘, etc. You can list
                       the available service tags with the CLI: shell az network list-service-tags
                       --location westcentralus. For further information please see
-                      Azure CLI - az network list-service-tags. This is required if
-                      destination_address_prefixes is not specified.'
+                      Azure CLI - az network list-service-tags.'
                     type: string
                   destinationAddressPrefixes:
                     description: List of destination address prefixes. Tags may not
-                      be used. This is required if destination_address_prefix is not
-                      specified.
+                      be used.
                     items:
                       type: string
                     type: array
@@ -583,12 +575,11 @@ spec:
                   sourceAddressPrefix:
                     description: CIDR or source IP range or * to match any IP. Tags
                       such as VirtualNetwork, AzureLoadBalancer and Internet can also
-                      be used. This is required if source_address_prefixes is not
-                      specified.
+                      be used.
                     type: string
                   sourceAddressPrefixes:
                     description: List of source address prefixes. Tags may not be
-                      used. This is required if source_address_prefix is not specified.
+                      used.
                     items:
                       type: string
                     type: array

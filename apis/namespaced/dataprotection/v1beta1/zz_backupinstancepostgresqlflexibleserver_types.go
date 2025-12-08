@@ -57,6 +57,9 @@ type BackupInstancePostgreSQLFlexibleServerObservation struct {
 	// The location of the source database. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// The protection state of the Backup Instance PostgreSQL Flexible Server.
+	ProtectionState *string `json:"protectionState,omitempty" tf:"protection_state,omitempty"`
+
 	// The ID of the source server. Changing this forces a new resource to be created.
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 

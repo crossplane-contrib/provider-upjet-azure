@@ -73,23 +73,22 @@ spec:
               forProvider:
                 properties:
                   contact:
-                    description: One or more contact block as defined below.
                     items:
                       properties:
                         email:
-                          description: E-mail address of the contact.
                           type: string
                         name:
-                          description: Name of the contact.
+                          description: Specifies the name of the Key Vault. Changing
+                            this forces a new resource to be created. The name must
+                            be globally unique. If the vault is in a recoverable state
+                            then the vault will need to be purged before reusing the
+                            name.
                           type: string
                         phone:
-                          description: Phone number of the contact.
                           type: string
                       type: object
                     type: array
                   enableRbacAuthorization:
-                    description: Boolean flag to specify whether Azure Key Vault uses
-                      Role Based Access Control (RBAC) for authorization of data actions.
                     type: boolean
                   enabledForDeployment:
                     description: Boolean flag to specify whether Azure Virtual Machines
@@ -143,6 +142,10 @@ spec:
                     type: boolean
                   purgeProtectionEnabled:
                     description: Is Purge Protection enabled for this Key Vault?
+                    type: boolean
+                  rbacAuthorizationEnabled:
+                    description: Boolean flag to specify whether Azure Key Vault uses
+                      Role Based Access Control (RBAC) for authorization of data actions.
                     type: boolean
                   resourceGroupName:
                     description: The name of the resource group in which to create
@@ -258,23 +261,22 @@ spec:
                   autoscaler.
                 properties:
                   contact:
-                    description: One or more contact block as defined below.
                     items:
                       properties:
                         email:
-                          description: E-mail address of the contact.
                           type: string
                         name:
-                          description: Name of the contact.
+                          description: Specifies the name of the Key Vault. Changing
+                            this forces a new resource to be created. The name must
+                            be globally unique. If the vault is in a recoverable state
+                            then the vault will need to be purged before reusing the
+                            name.
                           type: string
                         phone:
-                          description: Phone number of the contact.
                           type: string
                       type: object
                     type: array
                   enableRbacAuthorization:
-                    description: Boolean flag to specify whether Azure Key Vault uses
-                      Role Based Access Control (RBAC) for authorization of data actions.
                     type: boolean
                   enabledForDeployment:
                     description: Boolean flag to specify whether Azure Virtual Machines
@@ -328,6 +330,10 @@ spec:
                     type: boolean
                   purgeProtectionEnabled:
                     description: Is Purge Protection enabled for this Key Vault?
+                    type: boolean
+                  rbacAuthorizationEnabled:
+                    description: Boolean flag to specify whether Azure Key Vault uses
+                      Role Based Access Control (RBAC) for authorization of data actions.
                     type: boolean
                   skuName:
                     description: The Name of the SKU used for this Key Vault. Possible
@@ -509,23 +515,22 @@ spec:
                       type: object
                     type: array
                   contact:
-                    description: One or more contact block as defined below.
                     items:
                       properties:
                         email:
-                          description: E-mail address of the contact.
                           type: string
                         name:
-                          description: Name of the contact.
+                          description: Specifies the name of the Key Vault. Changing
+                            this forces a new resource to be created. The name must
+                            be globally unique. If the vault is in a recoverable state
+                            then the vault will need to be purged before reusing the
+                            name.
                           type: string
                         phone:
-                          description: Phone number of the contact.
                           type: string
                       type: object
                     type: array
                   enableRbacAuthorization:
-                    description: Boolean flag to specify whether Azure Key Vault uses
-                      Role Based Access Control (RBAC) for authorization of data actions.
                     type: boolean
                   enabledForDeployment:
                     description: Boolean flag to specify whether Azure Virtual Machines
@@ -582,6 +587,10 @@ spec:
                     type: boolean
                   purgeProtectionEnabled:
                     description: Is Purge Protection enabled for this Key Vault?
+                    type: boolean
+                  rbacAuthorizationEnabled:
+                    description: Boolean flag to specify whether Azure Key Vault uses
+                      Role Based Access Control (RBAC) for authorization of data actions.
                     type: boolean
                   resourceGroupName:
                     description: The name of the resource group in which to create
@@ -730,19 +739,19 @@ spec:
                     items:
                       properties:
                         email:
-                          description: E-mail address of the contact.
                           type: string
                         name:
-                          description: Name of the contact.
+                          description: Specifies the name of the Key Vault. Changing
+                            this forces a new resource to be created. The name must
+                            be globally unique. If the vault is in a recoverable state
+                            then the vault will need to be purged before reusing the
+                            name.
                           type: string
                         phone:
-                          description: Phone number of the contact.
                           type: string
                       type: object
                     type: array
                   enableRbacAuthorization:
-                    description: Boolean flag to specify whether Azure Key Vault uses
-                      Role Based Access Control (RBAC) for authorization of data actions.
                     type: boolean
                   enabledForDeployment:
                     description: Boolean flag to specify whether Azure Virtual Machines
@@ -794,6 +803,10 @@ spec:
                     type: boolean
                   purgeProtectionEnabled:
                     description: Is Purge Protection enabled for this Key Vault?
+                    type: boolean
+                  rbacAuthorizationEnabled:
+                    description: Boolean flag to specify whether Azure Key Vault uses
+                      Role Based Access Control (RBAC) for authorization of data actions.
                     type: boolean
                   resourceGroupName:
                     description: The name of the resource group in which to create
@@ -912,19 +925,19 @@ spec:
                     items:
                       properties:
                         email:
-                          description: E-mail address of the contact.
                           type: string
                         name:
-                          description: Name of the contact.
+                          description: Specifies the name of the Key Vault. Changing
+                            this forces a new resource to be created. The name must
+                            be globally unique. If the vault is in a recoverable state
+                            then the vault will need to be purged before reusing the
+                            name.
                           type: string
                         phone:
-                          description: Phone number of the contact.
                           type: string
                       type: object
                     type: array
                   enableRbacAuthorization:
-                    description: Boolean flag to specify whether Azure Key Vault uses
-                      Role Based Access Control (RBAC) for authorization of data actions.
                     type: boolean
                   enabledForDeployment:
                     description: Boolean flag to specify whether Azure Virtual Machines
@@ -976,6 +989,10 @@ spec:
                     type: boolean
                   purgeProtectionEnabled:
                     description: Is Purge Protection enabled for this Key Vault?
+                    type: boolean
+                  rbacAuthorizationEnabled:
+                    description: Boolean flag to specify whether Azure Key Vault uses
+                      Role Based Access Control (RBAC) for authorization of data actions.
                     type: boolean
                   skuName:
                     description: The Name of the SKU used for this Key Vault. Possible
@@ -1160,19 +1177,19 @@ spec:
                     items:
                       properties:
                         email:
-                          description: E-mail address of the contact.
                           type: string
                         name:
-                          description: Name of the contact.
+                          description: Specifies the name of the Key Vault. Changing
+                            this forces a new resource to be created. The name must
+                            be globally unique. If the vault is in a recoverable state
+                            then the vault will need to be purged before reusing the
+                            name.
                           type: string
                         phone:
-                          description: Phone number of the contact.
                           type: string
                       type: object
                     type: array
                   enableRbacAuthorization:
-                    description: Boolean flag to specify whether Azure Key Vault uses
-                      Role Based Access Control (RBAC) for authorization of data actions.
                     type: boolean
                   enabledForDeployment:
                     description: Boolean flag to specify whether Azure Virtual Machines
@@ -1227,6 +1244,10 @@ spec:
                     type: boolean
                   purgeProtectionEnabled:
                     description: Is Purge Protection enabled for this Key Vault?
+                    type: boolean
+                  rbacAuthorizationEnabled:
+                    description: Boolean flag to specify whether Azure Key Vault uses
+                      Role Based Access Control (RBAC) for authorization of data actions.
                     type: boolean
                   resourceGroupName:
                     description: The name of the resource group in which to create

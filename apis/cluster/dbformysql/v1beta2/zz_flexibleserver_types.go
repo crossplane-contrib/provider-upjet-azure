@@ -24,6 +24,9 @@ type CustomerManagedKeyInitParameters struct {
 	// The ID of the Key Vault Key.
 	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
 
+	// The ID of the Managed HSM Key.
+	ManagedHSMKeyID *string `json:"managedHsmKeyId,omitempty" tf:"managed_hsm_key_id,omitempty"`
+
 	// Specifies the primary user managed identity id for a Customer Managed Key. Should be added with identity_ids.
 	PrimaryUserAssignedIdentityID *string `json:"primaryUserAssignedIdentityId,omitempty" tf:"primary_user_assigned_identity_id,omitempty"`
 }
@@ -38,6 +41,9 @@ type CustomerManagedKeyObservation struct {
 
 	// The ID of the Key Vault Key.
 	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
+
+	// The ID of the Managed HSM Key.
+	ManagedHSMKeyID *string `json:"managedHsmKeyId,omitempty" tf:"managed_hsm_key_id,omitempty"`
 
 	// Specifies the primary user managed identity id for a Customer Managed Key. Should be added with identity_ids.
 	PrimaryUserAssignedIdentityID *string `json:"primaryUserAssignedIdentityId,omitempty" tf:"primary_user_assigned_identity_id,omitempty"`
@@ -56,6 +62,10 @@ type CustomerManagedKeyParameters struct {
 	// The ID of the Key Vault Key.
 	// +kubebuilder:validation:Optional
 	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
+
+	// The ID of the Managed HSM Key.
+	// +kubebuilder:validation:Optional
+	ManagedHSMKeyID *string `json:"managedHsmKeyId,omitempty" tf:"managed_hsm_key_id,omitempty"`
 
 	// Specifies the primary user managed identity id for a Customer Managed Key. Should be added with identity_ids.
 	// +kubebuilder:validation:Optional

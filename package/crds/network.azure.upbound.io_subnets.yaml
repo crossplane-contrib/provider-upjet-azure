@@ -149,6 +149,21 @@ spec:
                           type: array
                       type: object
                     type: array
+                  ipAddressPool:
+                    description: An ip_address_pool block as defined below.
+                    items:
+                      properties:
+                        id:
+                          description: The ID of the Network Manager IP Address Management
+                            (IPAM) Pool.
+                          type: string
+                        numberOfIpAddresses:
+                          description: The number of IP addresses to allocated to
+                            the subnet. The value must be a string that represents
+                            a positive number, e.g., "100".
+                          type: string
+                      type: object
+                    type: array
                   privateEndpointNetworkPolicies:
                     description: Enable or Disable network policies for the private
                       endpoint on the subnet. Possible values are Disabled, Enabled,
@@ -258,6 +273,10 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  sharingScope:
+                    description: The sharing scope of the subnet. Possible value is
+                      Tenant.
+                    type: string
                   virtualNetworkName:
                     description: The name of the virtual network to which to attach
                       the subnet. Changing this forces a new resource to be created.
@@ -428,6 +447,21 @@ spec:
                           type: array
                       type: object
                     type: array
+                  ipAddressPool:
+                    description: An ip_address_pool block as defined below.
+                    items:
+                      properties:
+                        id:
+                          description: The ID of the Network Manager IP Address Management
+                            (IPAM) Pool.
+                          type: string
+                        numberOfIpAddresses:
+                          description: The number of IP addresses to allocated to
+                            the subnet. The value must be a string that represents
+                            a positive number, e.g., "100".
+                          type: string
+                      type: object
+                    type: array
                   privateEndpointNetworkPolicies:
                     description: Enable or Disable network policies for the private
                       endpoint on the subnet. Possible values are Disabled, Enabled,
@@ -455,6 +489,10 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  sharingScope:
+                    description: The sharing scope of the subnet. Possible value is
+                      Tenant.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -542,11 +580,6 @@ spec:
             required:
             - forProvider
             type: object
-            x-kubernetes-validations:
-            - message: spec.forProvider.addressPrefixes is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.addressPrefixes)
-                || (has(self.initProvider) && has(self.initProvider.addressPrefixes))'
           status:
             description: SubnetStatus defines the observed state of Subnet.
             properties:
@@ -631,6 +664,27 @@ spec:
                   id:
                     description: The subnet ID.
                     type: string
+                  ipAddressPool:
+                    description: An ip_address_pool block as defined below.
+                    items:
+                      properties:
+                        allocatedIpAddressPrefixes:
+                          description: The list of IP address prefixes allocated to
+                            the subnet.
+                          items:
+                            type: string
+                          type: array
+                        id:
+                          description: The ID of the Network Manager IP Address Management
+                            (IPAM) Pool.
+                          type: string
+                        numberOfIpAddresses:
+                          description: The number of IP addresses to allocated to
+                            the subnet. The value must be a string that represents
+                            a positive number, e.g., "100".
+                          type: string
+                      type: object
+                    type: array
                   privateEndpointNetworkPolicies:
                     description: Enable or Disable network policies for the private
                       endpoint on the subnet. Possible values are Disabled, Enabled,
@@ -664,6 +718,10 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  sharingScope:
+                    description: The sharing scope of the subnet. Possible value is
+                      Tenant.
+                    type: string
                   virtualNetworkName:
                     description: The name of the virtual network to which to attach
                       the subnet. Changing this forces a new resource to be created.
@@ -857,6 +915,19 @@ spec:
                           type: object
                       type: object
                     type: array
+                  ipAddressPool:
+                    description: An ip_address_pool block as defined below.
+                    properties:
+                      id:
+                        description: The ID of the Network Manager IP Address Management
+                          (IPAM) Pool.
+                        type: string
+                      numberOfIpAddresses:
+                        description: The number of IP addresses to allocated to the
+                          subnet. The value must be a string that represents a positive
+                          number, e.g., "100".
+                        type: string
+                    type: object
                   privateEndpointNetworkPolicies:
                     description: Enable or Disable network policies for the private
                       endpoint on the subnet. Possible values are Disabled, Enabled,
@@ -966,6 +1037,10 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  sharingScope:
+                    description: The sharing scope of the subnet. Possible value is
+                      Tenant.
+                    type: string
                   virtualNetworkName:
                     description: The name of the virtual network to which to attach
                       the subnet. Changing this forces a new resource to be created.
@@ -1132,6 +1207,19 @@ spec:
                           type: object
                       type: object
                     type: array
+                  ipAddressPool:
+                    description: An ip_address_pool block as defined below.
+                    properties:
+                      id:
+                        description: The ID of the Network Manager IP Address Management
+                          (IPAM) Pool.
+                        type: string
+                      numberOfIpAddresses:
+                        description: The number of IP addresses to allocated to the
+                          subnet. The value must be a string that represents a positive
+                          number, e.g., "100".
+                        type: string
+                    type: object
                   privateEndpointNetworkPolicies:
                     description: Enable or Disable network policies for the private
                       endpoint on the subnet. Possible values are Disabled, Enabled,
@@ -1159,6 +1247,10 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  sharingScope:
+                    description: The sharing scope of the subnet. Possible value is
+                      Tenant.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -1246,11 +1338,6 @@ spec:
             required:
             - forProvider
             type: object
-            x-kubernetes-validations:
-            - message: spec.forProvider.addressPrefixes is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.addressPrefixes)
-                || (has(self.initProvider) && has(self.initProvider.addressPrefixes))'
           status:
             description: SubnetStatus defines the observed state of Subnet.
             properties:
@@ -1331,6 +1418,25 @@ spec:
                   id:
                     description: The subnet ID.
                     type: string
+                  ipAddressPool:
+                    description: An ip_address_pool block as defined below.
+                    properties:
+                      allocatedIpAddressPrefixes:
+                        description: The list of IP address prefixes allocated to
+                          the subnet.
+                        items:
+                          type: string
+                        type: array
+                      id:
+                        description: The ID of the Network Manager IP Address Management
+                          (IPAM) Pool.
+                        type: string
+                      numberOfIpAddresses:
+                        description: The number of IP addresses to allocated to the
+                          subnet. The value must be a string that represents a positive
+                          number, e.g., "100".
+                        type: string
+                    type: object
                   privateEndpointNetworkPolicies:
                     description: Enable or Disable network policies for the private
                       endpoint on the subnet. Possible values are Disabled, Enabled,
@@ -1364,6 +1470,10 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  sharingScope:
+                    description: The sharing scope of the subnet. Possible value is
+                      Tenant.
+                    type: string
                   virtualNetworkName:
                     description: The name of the virtual network to which to attach
                       the subnet. Changing this forces a new resource to be created.

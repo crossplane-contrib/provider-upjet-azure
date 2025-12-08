@@ -59,7 +59,7 @@ type JobInitParameters struct {
 	// The policy for storing stream analytics content. Possible values are JobStorageAccount, SystemAccount. Defaults to SystemAccount.
 	ContentStoragePolicy *string `json:"contentStoragePolicy,omitempty" tf:"content_storage_policy,omitempty"`
 
-	// Specifies the Data Locale of the Job, which should be a supported .NET Culture.
+	// Specifies the Data Locale of the Job, which should be a supported .NET Culture. Defaults to en-US.
 	DataLocale *string `json:"dataLocale,omitempty" tf:"data_locale,omitempty"`
 
 	// Specifies the maximum tolerable delay in seconds where events arriving late could be included. Supported range is -1 (indefinite) to 1814399 (20d 23h 59m 59s). Default is 5.
@@ -89,7 +89,7 @@ type JobInitParameters struct {
 	// The ID of an existing Stream Analytics Cluster where the Stream Analytics Job should run.
 	StreamAnalyticsClusterID *string `json:"streamAnalyticsClusterId,omitempty" tf:"stream_analytics_cluster_id,omitempty"`
 
-	// Specifies the number of streaming units that the streaming job uses. Supported values are 1, 3, 6 and multiples of 6 up to 120.
+	// Specifies the number of streaming units that the streaming job uses. Supported values are 1, 3, 6 and multiples of 6 up to 120. A conversion table for V2 streaming units can be found here
 	StreamingUnits *float64 `json:"streamingUnits,omitempty" tf:"streaming_units,omitempty"`
 
 	// A mapping of tags assigned to the resource.
@@ -111,7 +111,7 @@ type JobObservation struct {
 	// The policy for storing stream analytics content. Possible values are JobStorageAccount, SystemAccount. Defaults to SystemAccount.
 	ContentStoragePolicy *string `json:"contentStoragePolicy,omitempty" tf:"content_storage_policy,omitempty"`
 
-	// Specifies the Data Locale of the Job, which should be a supported .NET Culture.
+	// Specifies the Data Locale of the Job, which should be a supported .NET Culture. Defaults to en-US.
 	DataLocale *string `json:"dataLocale,omitempty" tf:"data_locale,omitempty"`
 
 	// Specifies the maximum tolerable delay in seconds where events arriving late could be included. Supported range is -1 (indefinite) to 1814399 (20d 23h 59m 59s). Default is 5.
@@ -150,7 +150,7 @@ type JobObservation struct {
 	// The ID of an existing Stream Analytics Cluster where the Stream Analytics Job should run.
 	StreamAnalyticsClusterID *string `json:"streamAnalyticsClusterId,omitempty" tf:"stream_analytics_cluster_id,omitempty"`
 
-	// Specifies the number of streaming units that the streaming job uses. Supported values are 1, 3, 6 and multiples of 6 up to 120.
+	// Specifies the number of streaming units that the streaming job uses. Supported values are 1, 3, 6 and multiples of 6 up to 120. A conversion table for V2 streaming units can be found here
 	StreamingUnits *float64 `json:"streamingUnits,omitempty" tf:"streaming_units,omitempty"`
 
 	// A mapping of tags assigned to the resource.
@@ -174,7 +174,7 @@ type JobParameters struct {
 	// +kubebuilder:validation:Optional
 	ContentStoragePolicy *string `json:"contentStoragePolicy,omitempty" tf:"content_storage_policy,omitempty"`
 
-	// Specifies the Data Locale of the Job, which should be a supported .NET Culture.
+	// Specifies the Data Locale of the Job, which should be a supported .NET Culture. Defaults to en-US.
 	// +kubebuilder:validation:Optional
 	DataLocale *string `json:"dataLocale,omitempty" tf:"data_locale,omitempty"`
 
@@ -227,7 +227,7 @@ type JobParameters struct {
 	// +kubebuilder:validation:Optional
 	StreamAnalyticsClusterID *string `json:"streamAnalyticsClusterId,omitempty" tf:"stream_analytics_cluster_id,omitempty"`
 
-	// Specifies the number of streaming units that the streaming job uses. Supported values are 1, 3, 6 and multiples of 6 up to 120.
+	// Specifies the number of streaming units that the streaming job uses. Supported values are 1, 3, 6 and multiples of 6 up to 120. A conversion table for V2 streaming units can be found here
 	// +kubebuilder:validation:Optional
 	StreamingUnits *float64 `json:"streamingUnits,omitempty" tf:"streaming_units,omitempty"`
 
@@ -247,10 +247,13 @@ type JobParameters struct {
 
 type JobStorageAccountInitParameters struct {
 
+	// The account key for the Azure storage account.
+	AccountKeySecretRef *v1.SecretKeySelector `json:"accountKeySecretRef,omitempty" tf:"-"`
+
 	// The name of the Azure storage account.
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
-	// The authentication mode of the storage account. The only supported value is ConnectionString. Defaults to ConnectionString.
+	// The authentication mode of the storage account. Possible values are ConnectionString and Msi. Defaults to ConnectionString.
 	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
 }
 
@@ -259,21 +262,21 @@ type JobStorageAccountObservation struct {
 	// The name of the Azure storage account.
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
-	// The authentication mode of the storage account. The only supported value is ConnectionString. Defaults to ConnectionString.
+	// The authentication mode of the storage account. Possible values are ConnectionString and Msi. Defaults to ConnectionString.
 	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
 }
 
 type JobStorageAccountParameters struct {
 
 	// The account key for the Azure storage account.
-	// +kubebuilder:validation:Required
-	AccountKeySecretRef v1.SecretKeySelector `json:"accountKeySecretRef" tf:"-"`
+	// +kubebuilder:validation:Optional
+	AccountKeySecretRef *v1.SecretKeySelector `json:"accountKeySecretRef,omitempty" tf:"-"`
 
 	// The name of the Azure storage account.
 	// +kubebuilder:validation:Optional
 	AccountName *string `json:"accountName" tf:"account_name,omitempty"`
 
-	// The authentication mode of the storage account. The only supported value is ConnectionString. Defaults to ConnectionString.
+	// The authentication mode of the storage account. Possible values are ConnectionString and Msi. Defaults to ConnectionString.
 	// +kubebuilder:validation:Optional
 	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
 }

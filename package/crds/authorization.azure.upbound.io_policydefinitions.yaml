@@ -177,7 +177,8 @@ spec:
                   parameters:
                     description: Parameters for the policy definition. This field
                       is a JSON string that allows you to parameterize your policy
-                      definition.
+                      definition. Reducing the number of parameters forces a new resource
+                      to be created.
                     type: string
                   policyRule:
                     description: The policy rule for the policy definition. This is
@@ -306,7 +307,8 @@ spec:
                   parameters:
                     description: Parameters for the policy definition. This field
                       is a JSON string that allows you to parameterize your policy
-                      definition.
+                      definition. Reducing the number of parameters forces a new resource
+                      to be created.
                     type: string
                   policyRule:
                     description: The policy rule for the policy definition. This is
@@ -453,7 +455,8 @@ spec:
                   parameters:
                     description: Parameters for the policy definition. This field
                       is a JSON string that allows you to parameterize your policy
-                      definition.
+                      definition. Reducing the number of parameters forces a new resource
+                      to be created.
                     type: string
                   policyRule:
                     description: The policy rule for the policy definition. This is

@@ -153,6 +153,10 @@ spec:
                             type: string
                         type: object
                     type: object
+                  callingEnabled:
+                    description: Specifies whether to enable Microsoft Teams channel
+                      calls. This defaults to false.
+                    type: boolean
                   callingWebHook:
                     description: Specifies the webhook for Microsoft Teams channel
                       calls.
@@ -163,8 +167,6 @@ spec:
                       Defaults to CommercialDeployment.
                     type: string
                   enableCalling:
-                    description: Specifies whether to enable Microsoft Teams channel
-                      calls. This defaults to false.
                     type: boolean
                   location:
                     description: The supported Azure location where the resource exists.
@@ -264,6 +266,10 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  callingEnabled:
+                    description: Specifies whether to enable Microsoft Teams channel
+                      calls. This defaults to false.
+                    type: boolean
                   callingWebHook:
                     description: Specifies the webhook for Microsoft Teams channel
                       calls.
@@ -274,8 +280,6 @@ spec:
                       Defaults to CommercialDeployment.
                     type: string
                   enableCalling:
-                    description: Specifies whether to enable Microsoft Teams channel
-                      calls. This defaults to false.
                     type: boolean
                   location:
                     description: The supported Azure location where the resource exists.
@@ -382,6 +386,10 @@ spec:
                     description: The name of the Bot Resource this channel will be
                       associated with. Changing this forces a new resource to be created.
                     type: string
+                  callingEnabled:
+                    description: Specifies whether to enable Microsoft Teams channel
+                      calls. This defaults to false.
+                    type: boolean
                   callingWebHook:
                     description: Specifies the webhook for Microsoft Teams channel
                       calls.
@@ -392,8 +400,6 @@ spec:
                       Defaults to CommercialDeployment.
                     type: string
                   enableCalling:
-                    description: Specifies whether to enable Microsoft Teams channel
-                      calls. This defaults to false.
                     type: boolean
                   id:
                     description: The ID of the Microsoft Teams Integration for a Bot

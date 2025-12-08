@@ -42,6 +42,38 @@ type DelegationParameters struct {
 	ServiceDelegation *ServiceDelegationParameters `json:"serviceDelegation" tf:"service_delegation,omitempty"`
 }
 
+type IPAddressPoolInitParameters struct {
+
+	// The ID of the Network Manager IP Address Management (IPAM) Pool.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The number of IP addresses to allocated to the subnet. The value must be a string that represents a positive number, e.g., "100".
+	NumberOfIPAddresses *string `json:"numberOfIpAddresses,omitempty" tf:"number_of_ip_addresses,omitempty"`
+}
+
+type IPAddressPoolObservation struct {
+
+	// The list of IP address prefixes allocated to the subnet.
+	AllocatedIPAddressPrefixes []*string `json:"allocatedIpAddressPrefixes,omitempty" tf:"allocated_ip_address_prefixes,omitempty"`
+
+	// The ID of the Network Manager IP Address Management (IPAM) Pool.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The number of IP addresses to allocated to the subnet. The value must be a string that represents a positive number, e.g., "100".
+	NumberOfIPAddresses *string `json:"numberOfIpAddresses,omitempty" tf:"number_of_ip_addresses,omitempty"`
+}
+
+type IPAddressPoolParameters struct {
+
+	// The ID of the Network Manager IP Address Management (IPAM) Pool.
+	// +kubebuilder:validation:Optional
+	ID *string `json:"id" tf:"id,omitempty"`
+
+	// The number of IP addresses to allocated to the subnet. The value must be a string that represents a positive number, e.g., "100".
+	// +kubebuilder:validation:Optional
+	NumberOfIPAddresses *string `json:"numberOfIpAddresses" tf:"number_of_ip_addresses,omitempty"`
+}
+
 type ServiceDelegationInitParameters struct {
 
 	// A list of Actions which should be delegated. This list is specific to the service to delegate to. Possible values are Microsoft.Network/networkinterfaces/*, Microsoft.Network/publicIPAddresses/join/action, Microsoft.Network/publicIPAddresses/read, Microsoft.Network/virtualNetworks/read, Microsoft.Network/virtualNetworks/subnets/action, Microsoft.Network/virtualNetworks/subnets/join/action, Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action, and Microsoft.Network/virtualNetworks/subnets/unprepareNetworkPolicies/action.
@@ -86,6 +118,9 @@ type SubnetInitParameters struct {
 	// +kubebuilder:validation:Optional
 	Delegation []DelegationInitParameters `json:"delegation" tf:"delegation"`
 
+	// An ip_address_pool block as defined below.
+	IPAddressPool *IPAddressPoolInitParameters `json:"ipAddressPool,omitempty" tf:"ip_address_pool,omitempty"`
+
 	// Enable or Disable network policies for the private endpoint on the subnet. Possible values are Disabled, Enabled, NetworkSecurityGroupEnabled and RouteTableEnabled. Defaults to Disabled.
 	PrivateEndpointNetworkPolicies *string `json:"privateEndpointNetworkPolicies,omitempty" tf:"private_endpoint_network_policies,omitempty"`
 
@@ -100,6 +135,9 @@ type SubnetInitParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	ServiceEndpoints []*string `json:"serviceEndpoints" tf:"service_endpoints"`
+
+	// The sharing scope of the subnet. Possible value is Tenant.
+	SharingScope *string `json:"sharingScope,omitempty" tf:"sharing_scope,omitempty"`
 }
 
 type SubnetObservation struct {
@@ -115,6 +153,9 @@ type SubnetObservation struct {
 
 	// The subnet ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// An ip_address_pool block as defined below.
+	IPAddressPool *IPAddressPoolObservation `json:"ipAddressPool,omitempty" tf:"ip_address_pool,omitempty"`
 
 	// Enable or Disable network policies for the private endpoint on the subnet. Possible values are Disabled, Enabled, NetworkSecurityGroupEnabled and RouteTableEnabled. Defaults to Disabled.
 	PrivateEndpointNetworkPolicies *string `json:"privateEndpointNetworkPolicies,omitempty" tf:"private_endpoint_network_policies,omitempty"`
@@ -133,6 +174,9 @@ type SubnetObservation struct {
 	// +listType=set
 	ServiceEndpoints []*string `json:"serviceEndpoints,omitempty" tf:"service_endpoints,omitempty"`
 
+	// The sharing scope of the subnet. Possible value is Tenant.
+	SharingScope *string `json:"sharingScope,omitempty" tf:"sharing_scope,omitempty"`
+
 	// The name of the virtual network to which to attach the subnet. Changing this forces a new resource to be created.
 	VirtualNetworkName *string `json:"virtualNetworkName,omitempty" tf:"virtual_network_name,omitempty"`
 }
@@ -150,6 +194,10 @@ type SubnetParameters struct {
 	// One or more delegation blocks as defined below.
 	// +kubebuilder:validation:Optional
 	Delegation []DelegationParameters `json:"delegation,omitempty" tf:"delegation,omitempty"`
+
+	// An ip_address_pool block as defined below.
+	// +kubebuilder:validation:Optional
+	IPAddressPool *IPAddressPoolParameters `json:"ipAddressPool,omitempty" tf:"ip_address_pool,omitempty"`
 
 	// Enable or Disable network policies for the private endpoint on the subnet. Possible values are Disabled, Enabled, NetworkSecurityGroupEnabled and RouteTableEnabled. Defaults to Disabled.
 	// +kubebuilder:validation:Optional
@@ -181,6 +229,10 @@ type SubnetParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	ServiceEndpoints []*string `json:"serviceEndpoints,omitempty" tf:"service_endpoints,omitempty"`
+
+	// The sharing scope of the subnet. Possible value is Tenant.
+	// +kubebuilder:validation:Optional
+	SharingScope *string `json:"sharingScope,omitempty" tf:"sharing_scope,omitempty"`
 
 	// The name of the virtual network to which to attach the subnet. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.VirtualNetwork
@@ -231,9 +283,8 @@ type SubnetStatus struct {
 type Subnet struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.addressPrefixes) || (has(self.initProvider) && has(self.initProvider.addressPrefixes))",message="spec.forProvider.addressPrefixes is a required parameter"
-	Spec   SubnetSpec   `json:"spec"`
-	Status SubnetStatus `json:"status,omitempty"`
+	Spec              SubnetSpec   `json:"spec"`
+	Status            SubnetStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

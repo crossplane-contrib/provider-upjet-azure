@@ -611,6 +611,10 @@ spec:
                     description: The location of the source Storage Account. Changing
                       this forces a new Backup Instance Blob Storage to be created.
                     type: string
+                  protectionState:
+                    description: The protection state of the Backup Instance Blob
+                      Storage.
+                    type: string
                   storageAccountContainerNames:
                     description: The list of the container names of the source Storage
                       Account.

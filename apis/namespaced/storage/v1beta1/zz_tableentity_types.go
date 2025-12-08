@@ -26,7 +26,7 @@ type TableEntityInitParameters struct {
 	// The key for the row where the entity will be inserted/merged. Changing this forces a new resource to be created.
 	RowKey *string `json:"rowKey,omitempty" tf:"row_key,omitempty"`
 
-	// The Storage Share ID in which this file will be placed into. Changing this forces a new resource to be created.
+	// The Storage Share ID in which this file will be placed into.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Table
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	StorageTableID *string `json:"storageTableId,omitempty" tf:"storage_table_id,omitempty"`
@@ -55,7 +55,7 @@ type TableEntityObservation struct {
 	// The key for the row where the entity will be inserted/merged. Changing this forces a new resource to be created.
 	RowKey *string `json:"rowKey,omitempty" tf:"row_key,omitempty"`
 
-	// The Storage Share ID in which this file will be placed into. Changing this forces a new resource to be created.
+	// The Storage Share ID in which this file will be placed into.
 	StorageTableID *string `json:"storageTableId,omitempty" tf:"storage_table_id,omitempty"`
 }
 
@@ -74,7 +74,7 @@ type TableEntityParameters struct {
 	// +kubebuilder:validation:Optional
 	RowKey *string `json:"rowKey,omitempty" tf:"row_key,omitempty"`
 
-	// The Storage Share ID in which this file will be placed into. Changing this forces a new resource to be created.
+	// The Storage Share ID in which this file will be placed into.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Table
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

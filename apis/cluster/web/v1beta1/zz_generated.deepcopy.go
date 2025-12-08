@@ -10364,6 +10364,11 @@ func (in *FunctionAppFlexConsumptionInitParameters) DeepCopyInto(out *FunctionAp
 		*out = new(bool)
 		**out = **in
 	}
+	if in.HTTPConcurrency != nil {
+		in, out := &in.HTTPConcurrency, &out.HTTPConcurrency
+		*out = new(float64)
+		**out = **in
+	}
 	if in.HTTPSOnly != nil {
 		in, out := &in.HTTPSOnly, &out.HTTPSOnly
 		*out = new(bool)
@@ -10637,6 +10642,11 @@ func (in *FunctionAppFlexConsumptionObservation) DeepCopyInto(out *FunctionAppFl
 		*out = new(bool)
 		**out = **in
 	}
+	if in.HTTPConcurrency != nil {
+		in, out := &in.HTTPConcurrency, &out.HTTPConcurrency
+		*out = new(float64)
+		**out = **in
+	}
 	if in.HTTPSOnly != nil {
 		in, out := &in.HTTPSOnly, &out.HTTPSOnly
 		*out = new(bool)
@@ -10873,6 +10883,11 @@ func (in *FunctionAppFlexConsumptionParameters) DeepCopyInto(out *FunctionAppFle
 	if in.Enabled != nil {
 		in, out := &in.Enabled, &out.Enabled
 		*out = new(bool)
+		**out = **in
+	}
+	if in.HTTPConcurrency != nil {
+		in, out := &in.HTTPConcurrency, &out.HTTPConcurrency
+		*out = new(float64)
 		**out = **in
 	}
 	if in.HTTPSOnly != nil {
@@ -27855,6 +27870,11 @@ func (in *LinuxWebAppInitParameters) DeepCopyInto(out *LinuxWebAppInitParameters
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.VnetImagePullEnabled != nil {
+		in, out := &in.VnetImagePullEnabled, &out.VnetImagePullEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.WebdeployPublishBasicAuthenticationEnabled != nil {
 		in, out := &in.WebdeployPublishBasicAuthenticationEnabled, &out.WebdeployPublishBasicAuthenticationEnabled
 		*out = new(bool)
@@ -28129,6 +28149,11 @@ func (in *LinuxWebAppObservation) DeepCopyInto(out *LinuxWebAppObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.VnetImagePullEnabled != nil {
+		in, out := &in.VnetImagePullEnabled, &out.VnetImagePullEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.WebdeployPublishBasicAuthenticationEnabled != nil {
 		in, out := &in.WebdeployPublishBasicAuthenticationEnabled, &out.WebdeployPublishBasicAuthenticationEnabled
 		*out = new(bool)
@@ -28348,6 +28373,11 @@ func (in *LinuxWebAppParameters) DeepCopyInto(out *LinuxWebAppParameters) {
 		in, out := &in.VirtualNetworkSubnetIDSelector, &out.VirtualNetworkSubnetIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.VnetImagePullEnabled != nil {
+		in, out := &in.VnetImagePullEnabled, &out.VnetImagePullEnabled
+		*out = new(bool)
+		**out = **in
 	}
 	if in.WebdeployPublishBasicAuthenticationEnabled != nil {
 		in, out := &in.WebdeployPublishBasicAuthenticationEnabled, &out.WebdeployPublishBasicAuthenticationEnabled
@@ -33640,6 +33670,11 @@ func (in *LinuxWebAppSlotInitParameters) DeepCopyInto(out *LinuxWebAppSlotInitPa
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.VnetImagePullEnabled != nil {
+		in, out := &in.VnetImagePullEnabled, &out.VnetImagePullEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.WebdeployPublishBasicAuthenticationEnabled != nil {
 		in, out := &in.WebdeployPublishBasicAuthenticationEnabled, &out.WebdeployPublishBasicAuthenticationEnabled
 		*out = new(bool)
@@ -34040,6 +34075,11 @@ func (in *LinuxWebAppSlotObservation) DeepCopyInto(out *LinuxWebAppSlotObservati
 		*out = new(string)
 		**out = **in
 	}
+	if in.VnetImagePullEnabled != nil {
+		in, out := &in.VnetImagePullEnabled, &out.VnetImagePullEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.WebdeployPublishBasicAuthenticationEnabled != nil {
 		in, out := &in.WebdeployPublishBasicAuthenticationEnabled, &out.WebdeployPublishBasicAuthenticationEnabled
 		*out = new(bool)
@@ -34242,6 +34282,11 @@ func (in *LinuxWebAppSlotParameters) DeepCopyInto(out *LinuxWebAppSlotParameters
 		in, out := &in.VirtualNetworkSubnetIDSelector, &out.VirtualNetworkSubnetIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.VnetImagePullEnabled != nil {
+		in, out := &in.VnetImagePullEnabled, &out.VnetImagePullEnabled
+		*out = new(bool)
+		**out = **in
 	}
 	if in.WebdeployPublishBasicAuthenticationEnabled != nil {
 		in, out := &in.WebdeployPublishBasicAuthenticationEnabled, &out.WebdeployPublishBasicAuthenticationEnabled
@@ -58757,6 +58802,11 @@ func (in *WindowsWebAppInitParameters) DeepCopyInto(out *WindowsWebAppInitParame
 		*out = new(bool)
 		**out = **in
 	}
+	if in.VirtualNetworkImagePullEnabled != nil {
+		in, out := &in.VirtualNetworkImagePullEnabled, &out.VirtualNetworkImagePullEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.VirtualNetworkSubnetID != nil {
 		in, out := &in.VirtualNetworkSubnetID, &out.VirtualNetworkSubnetID
 		*out = new(string)
@@ -59388,6 +59438,11 @@ func (in *WindowsWebAppObservation) DeepCopyInto(out *WindowsWebAppObservation) 
 		*out = new(bool)
 		**out = **in
 	}
+	if in.VirtualNetworkImagePullEnabled != nil {
+		in, out := &in.VirtualNetworkImagePullEnabled, &out.VirtualNetworkImagePullEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.VirtualNetworkSubnetID != nil {
 		in, out := &in.VirtualNetworkSubnetID, &out.VirtualNetworkSubnetID
 		*out = new(string)
@@ -59595,6 +59650,11 @@ func (in *WindowsWebAppParameters) DeepCopyInto(out *WindowsWebAppParameters) {
 	}
 	if in.VirtualNetworkBackupRestoreEnabled != nil {
 		in, out := &in.VirtualNetworkBackupRestoreEnabled, &out.VirtualNetworkBackupRestoreEnabled
+		*out = new(bool)
+		**out = **in
+	}
+	if in.VirtualNetworkImagePullEnabled != nil {
+		in, out := &in.VirtualNetworkImagePullEnabled, &out.VirtualNetworkImagePullEnabled
 		*out = new(bool)
 		**out = **in
 	}
@@ -65033,6 +65093,11 @@ func (in *WindowsWebAppSlotInitParameters) DeepCopyInto(out *WindowsWebAppSlotIn
 		*out = new(bool)
 		**out = **in
 	}
+	if in.VirtualNetworkImagePullEnabled != nil {
+		in, out := &in.VirtualNetworkImagePullEnabled, &out.VirtualNetworkImagePullEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.VirtualNetworkSubnetID != nil {
 		in, out := &in.VirtualNetworkSubnetID, &out.VirtualNetworkSubnetID
 		*out = new(string)
@@ -65817,6 +65882,11 @@ func (in *WindowsWebAppSlotObservation) DeepCopyInto(out *WindowsWebAppSlotObser
 		*out = new(bool)
 		**out = **in
 	}
+	if in.VirtualNetworkImagePullEnabled != nil {
+		in, out := &in.VirtualNetworkImagePullEnabled, &out.VirtualNetworkImagePullEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.VirtualNetworkSubnetID != nil {
 		in, out := &in.VirtualNetworkSubnetID, &out.VirtualNetworkSubnetID
 		*out = new(string)
@@ -66002,6 +66072,11 @@ func (in *WindowsWebAppSlotParameters) DeepCopyInto(out *WindowsWebAppSlotParame
 	}
 	if in.VirtualNetworkBackupRestoreEnabled != nil {
 		in, out := &in.VirtualNetworkBackupRestoreEnabled, &out.VirtualNetworkBackupRestoreEnabled
+		*out = new(bool)
+		**out = **in
+	}
+	if in.VirtualNetworkImagePullEnabled != nil {
+		in, out := &in.VirtualNetworkImagePullEnabled, &out.VirtualNetworkImagePullEnabled
 		*out = new(bool)
 		**out = **in
 	}

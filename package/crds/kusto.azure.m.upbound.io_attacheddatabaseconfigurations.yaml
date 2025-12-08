@@ -62,8 +62,7 @@ spec:
                 properties:
                   clusterId:
                     description: The resource id of the cluster where the databases
-                      you would like to attach reside. Changing this forces a new
-                      resource to be created.
+                      you would like to attach reside.
                     type: string
                   clusterName:
                     description: Specifies the name of the Kusto Cluster for which
@@ -478,8 +477,7 @@ spec:
                 properties:
                   clusterId:
                     description: The resource id of the cluster where the databases
-                      you would like to attach reside. Changing this forces a new
-                      resource to be created.
+                      you would like to attach reside.
                     type: string
                   clusterName:
                     description: Specifies the name of the Kusto Cluster for which
@@ -960,8 +958,7 @@ spec:
                     type: array
                   clusterId:
                     description: The resource id of the cluster where the databases
-                      you would like to attach reside. Changing this forces a new
-                      resource to be created.
+                      you would like to attach reside.
                     type: string
                   clusterName:
                     description: Specifies the name of the Kusto Cluster for which

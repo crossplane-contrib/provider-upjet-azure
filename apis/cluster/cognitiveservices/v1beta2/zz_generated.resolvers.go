@@ -73,6 +73,28 @@ func (mg *Account) ResolveReferences( // ResolveReferences of this Account.
 
 		}
 	}
+	if mg.Spec.ForProvider.NetworkInjection != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkInjection.SubnetID),
+				Extract:      rconfig.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.ForProvider.NetworkInjection.SubnetIDRef,
+				Selector:     mg.Spec.ForProvider.NetworkInjection.SubnetIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.NetworkInjection.SubnetID")
+		}
+		mg.Spec.ForProvider.NetworkInjection.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.NetworkInjection.SubnetIDRef = rsp.ResolvedReference
+
+	}
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
@@ -182,6 +204,28 @@ func (mg *Account) ResolveReferences( // ResolveReferences of this Account.
 			mg.Spec.InitProvider.NetworkAcls.VirtualNetworkRules[i4].SubnetIDRef = rsp.ResolvedReference
 
 		}
+	}
+	if mg.Spec.InitProvider.NetworkInjection != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkInjection.SubnetID),
+				Extract:      rconfig.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.InitProvider.NetworkInjection.SubnetIDRef,
+				Selector:     mg.Spec.InitProvider.NetworkInjection.SubnetIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.NetworkInjection.SubnetID")
+		}
+		mg.Spec.InitProvider.NetworkInjection.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.NetworkInjection.SubnetIDRef = rsp.ResolvedReference
+
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.Storage); i3++ {
 		{

@@ -34,7 +34,7 @@ type ServicePlanInitParameters struct {
 	// Should automatic scaling be enabled for the Premium SKU Plan. Defaults to false. Cannot be set unless using a Premium SKU.
 	PremiumPlanAutoScaleEnabled *bool `json:"premiumPlanAutoScaleEnabled,omitempty" tf:"premium_plan_auto_scale_enabled,omitempty"`
 
-	// The SKU for the plan. Possible values include B1, B2, B3, D1, F1, I1, I2, I3, I1v2, I1mv2, I2v2, I2mv2, I3v2, I3mv2, I4v2, I4mv2, I5v2, I5mv2, I6v2, P1v2, P2v2, P3v2, P0v3, P1v3, P2v3, P3v3, P1mv3, P2mv3, P3mv3, P4mv3, P5mv3, S1, S2, S3, SHARED, EP1, EP2, EP3, FC1, WS1, WS2, WS3, and Y1.
+	// The SKU for the plan. Possible values include B1, B2, B3, D1, F1, I1, I2, I3, I1v2, I1mv2, I2v2, I2mv2, I3v2, I3mv2, I4v2, I4mv2, I5v2, I5mv2, I6v2, P1v2, P2v2, P3v2, P0v3, P1v3, P2v3, P3v3, P1mv3, P2mv3, P3mv3, P4mv3, P5mv3, P0v4, P1v4, P2v4, P3v4, P1mv4, P2mv4, P3mv4, P4mv4, P5mv4, S1, S2, S3, SHARED, EP1, EP2, EP3, FC1, WS1, WS2, WS3, and Y1.
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// A mapping of tags which should be assigned to the AppService.
@@ -44,7 +44,7 @@ type ServicePlanInitParameters struct {
 	// The number of Workers (instances) to be allocated.
 	WorkerCount *float64 `json:"workerCount,omitempty" tf:"worker_count,omitempty"`
 
-	// Should the Service Plan balance across Availability Zones in the region. Changing this forces a new resource to be created.
+	// Should the Service Plan balance across Availability Zones in the region.
 	ZoneBalancingEnabled *bool `json:"zoneBalancingEnabled,omitempty" tf:"zone_balancing_enabled,omitempty"`
 }
 
@@ -80,7 +80,7 @@ type ServicePlanObservation struct {
 	// The name of the Resource Group where the Service Plan should exist. Changing this forces a new Service Plan to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// The SKU for the plan. Possible values include B1, B2, B3, D1, F1, I1, I2, I3, I1v2, I1mv2, I2v2, I2mv2, I3v2, I3mv2, I4v2, I4mv2, I5v2, I5mv2, I6v2, P1v2, P2v2, P3v2, P0v3, P1v3, P2v3, P3v3, P1mv3, P2mv3, P3mv3, P4mv3, P5mv3, S1, S2, S3, SHARED, EP1, EP2, EP3, FC1, WS1, WS2, WS3, and Y1.
+	// The SKU for the plan. Possible values include B1, B2, B3, D1, F1, I1, I2, I3, I1v2, I1mv2, I2v2, I2mv2, I3v2, I3mv2, I4v2, I4mv2, I5v2, I5mv2, I6v2, P1v2, P2v2, P3v2, P0v3, P1v3, P2v3, P3v3, P1mv3, P2mv3, P3mv3, P4mv3, P5mv3, P0v4, P1v4, P2v4, P3v4, P1mv4, P2mv4, P3mv4, P4mv4, P5mv4, S1, S2, S3, SHARED, EP1, EP2, EP3, FC1, WS1, WS2, WS3, and Y1.
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// A mapping of tags which should be assigned to the AppService.
@@ -90,7 +90,7 @@ type ServicePlanObservation struct {
 	// The number of Workers (instances) to be allocated.
 	WorkerCount *float64 `json:"workerCount,omitempty" tf:"worker_count,omitempty"`
 
-	// Should the Service Plan balance across Availability Zones in the region. Changing this forces a new resource to be created.
+	// Should the Service Plan balance across Availability Zones in the region.
 	ZoneBalancingEnabled *bool `json:"zoneBalancingEnabled,omitempty" tf:"zone_balancing_enabled,omitempty"`
 }
 
@@ -133,7 +133,7 @@ type ServicePlanParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// The SKU for the plan. Possible values include B1, B2, B3, D1, F1, I1, I2, I3, I1v2, I1mv2, I2v2, I2mv2, I3v2, I3mv2, I4v2, I4mv2, I5v2, I5mv2, I6v2, P1v2, P2v2, P3v2, P0v3, P1v3, P2v3, P3v3, P1mv3, P2mv3, P3mv3, P4mv3, P5mv3, S1, S2, S3, SHARED, EP1, EP2, EP3, FC1, WS1, WS2, WS3, and Y1.
+	// The SKU for the plan. Possible values include B1, B2, B3, D1, F1, I1, I2, I3, I1v2, I1mv2, I2v2, I2mv2, I3v2, I3mv2, I4v2, I4mv2, I5v2, I5mv2, I6v2, P1v2, P2v2, P3v2, P0v3, P1v3, P2v3, P3v3, P1mv3, P2mv3, P3mv3, P4mv3, P5mv3, P0v4, P1v4, P2v4, P3v4, P1mv4, P2mv4, P3mv4, P4mv4, P5mv4, S1, S2, S3, SHARED, EP1, EP2, EP3, FC1, WS1, WS2, WS3, and Y1.
 	// +kubebuilder:validation:Optional
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
@@ -146,7 +146,7 @@ type ServicePlanParameters struct {
 	// +kubebuilder:validation:Optional
 	WorkerCount *float64 `json:"workerCount,omitempty" tf:"worker_count,omitempty"`
 
-	// Should the Service Plan balance across Availability Zones in the region. Changing this forces a new resource to be created.
+	// Should the Service Plan balance across Availability Zones in the region.
 	// +kubebuilder:validation:Optional
 	ZoneBalancingEnabled *bool `json:"zoneBalancingEnabled,omitempty" tf:"zone_balancing_enabled,omitempty"`
 }

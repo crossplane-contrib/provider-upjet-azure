@@ -83,8 +83,7 @@ spec:
                     x-kubernetes-map-type: granular
                   storageAccountId:
                     description: The name of the Storage Account where the Container
-                      should be created. Changing this forces a new resource to be
-                      created.
+                      should be created.
                     type: string
                   storageAccountIdRef:
                     description: Reference to a Account in storage to populate storageAccountId.
@@ -168,8 +167,8 @@ spec:
                     type: object
                   storageAccountName:
                     description: The name of the Storage Account where the Container
-                      should be created. Changing this forces a new resource to be
-                      created. This property is deprecated in favour of storage_account_id.
+                      should be created. This property is deprecated in favour of
+                      storage_account_id.
                     type: string
                   storageAccountNameRef:
                     description: Reference to a Account in storage to populate storageAccountName.
@@ -289,8 +288,7 @@ spec:
                     x-kubernetes-map-type: granular
                   storageAccountId:
                     description: The name of the Storage Account where the Container
-                      should be created. Changing this forces a new resource to be
-                      created.
+                      should be created.
                     type: string
                   storageAccountIdRef:
                     description: Reference to a Account in storage to populate storageAccountId.
@@ -474,13 +472,12 @@ spec:
                     type: string
                   storageAccountId:
                     description: The name of the Storage Account where the Container
-                      should be created. Changing this forces a new resource to be
-                      created.
+                      should be created.
                     type: string
                   storageAccountName:
                     description: The name of the Storage Account where the Container
-                      should be created. Changing this forces a new resource to be
-                      created. This property is deprecated in favour of storage_account_id.
+                      should be created. This property is deprecated in favour of
+                      storage_account_id.
                     type: string
                 type: object
               conditions:

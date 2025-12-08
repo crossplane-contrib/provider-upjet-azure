@@ -60,6 +60,9 @@ type BackupInstanceBlobStorageObservation struct {
 	// The location of the source Storage Account. Changing this forces a new Backup Instance Blob Storage to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// The protection state of the Backup Instance Blob Storage.
+	ProtectionState *string `json:"protectionState,omitempty" tf:"protection_state,omitempty"`
+
 	// The list of the container names of the source Storage Account.
 	StorageAccountContainerNames []*string `json:"storageAccountContainerNames,omitempty" tf:"storage_account_container_names,omitempty"`
 

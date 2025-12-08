@@ -2238,11 +2238,11 @@ type WindowsFunctionAppSlotSiteConfigAppServiceLogsParameters struct {
 
 type WindowsFunctionAppSlotSiteConfigApplicationStackInitParameters struct {
 
-	// The version of .Net. Possible values are v3.0, v4.0, v6.0, v7.0, v8.0 and v9.0. Defaults to v4.0.
-	// The version of .Net. Possible values are `v3.0`, `v4.0`, `v6.0`, `v7.0`, `v8.0` and `v9.0`
+	// The version of .Net. Possible values are v3.0, v4.0, v6.0, v7.0, v8.0, v9.0 and v10.0. Defaults to v4.0.
+	// The version of .Net. Possible values are `v3.0`, `v4.0`, `v6.0`, `v7.0`, `v8.0`, `v9.0` and `v10.0`
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
-	// The version of Java to use. Possible values are 1.8, 11 and 17 (In-Preview).
+	// The version of Java to use. Possible values are 1.8, 11, 17 and 21.
 	// The version of Java to use. Possible values are `1.8`, `11`, `17`, and `21`
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
@@ -2265,11 +2265,11 @@ type WindowsFunctionAppSlotSiteConfigApplicationStackInitParameters struct {
 
 type WindowsFunctionAppSlotSiteConfigApplicationStackObservation struct {
 
-	// The version of .Net. Possible values are v3.0, v4.0, v6.0, v7.0, v8.0 and v9.0. Defaults to v4.0.
-	// The version of .Net. Possible values are `v3.0`, `v4.0`, `v6.0`, `v7.0`, `v8.0` and `v9.0`
+	// The version of .Net. Possible values are v3.0, v4.0, v6.0, v7.0, v8.0, v9.0 and v10.0. Defaults to v4.0.
+	// The version of .Net. Possible values are `v3.0`, `v4.0`, `v6.0`, `v7.0`, `v8.0`, `v9.0` and `v10.0`
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
-	// The version of Java to use. Possible values are 1.8, 11 and 17 (In-Preview).
+	// The version of Java to use. Possible values are 1.8, 11, 17 and 21.
 	// The version of Java to use. Possible values are `1.8`, `11`, `17`, and `21`
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
@@ -2292,12 +2292,12 @@ type WindowsFunctionAppSlotSiteConfigApplicationStackObservation struct {
 
 type WindowsFunctionAppSlotSiteConfigApplicationStackParameters struct {
 
-	// The version of .Net. Possible values are v3.0, v4.0, v6.0, v7.0, v8.0 and v9.0. Defaults to v4.0.
-	// The version of .Net. Possible values are `v3.0`, `v4.0`, `v6.0`, `v7.0`, `v8.0` and `v9.0`
+	// The version of .Net. Possible values are v3.0, v4.0, v6.0, v7.0, v8.0, v9.0 and v10.0. Defaults to v4.0.
+	// The version of .Net. Possible values are `v3.0`, `v4.0`, `v6.0`, `v7.0`, `v8.0`, `v9.0` and `v10.0`
 	// +kubebuilder:validation:Optional
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
-	// The version of Java to use. Possible values are 1.8, 11 and 17 (In-Preview).
+	// The version of Java to use. Possible values are 1.8, 11, 17 and 21.
 	// The version of Java to use. Possible values are `1.8`, `11`, `17`, and `21`
 	// +kubebuilder:validation:Optional
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`

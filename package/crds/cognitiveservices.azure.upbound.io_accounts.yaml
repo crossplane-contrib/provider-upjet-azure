@@ -381,9 +381,105 @@ spec:
                           type: array
                       type: object
                     type: array
+                  networkInjection:
+                    description: A network_injection block as defined below. Only
+                      applicable if the kind is set to AIServices.
+                    items:
+                      properties:
+                        scenario:
+                          description: Specifies what features network injection applies
+                            to. The only possible value is agent.
+                          type: string
+                        subnetId:
+                          description: The ID of the subnet which the Agent Client
+                            is injected into.
+                          type: string
+                        subnetIdRef:
+                          description: Reference to a Subnet in network to populate
+                            subnetId.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        subnetIdSelector:
+                          description: Selector for a Subnet in network to populate
+                            subnetId.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
+                      type: object
+                    type: array
                   outboundNetworkAccessRestricted:
                     description: Whether outbound network access is restricted for
                       the Cognitive Account. Defaults to false.
+                    type: boolean
+                  projectManagementEnabled:
+                    description: Whether project management is enabled when the kind
+                      is set to AIServices. Once enabled, project_management_enabled
+                      cannot be disabled. Defaults to false.
                     type: boolean
                   publicNetworkAccessEnabled:
                     description: Whether public network access is allowed for the
@@ -972,9 +1068,105 @@ spec:
                           type: array
                       type: object
                     type: array
+                  networkInjection:
+                    description: A network_injection block as defined below. Only
+                      applicable if the kind is set to AIServices.
+                    items:
+                      properties:
+                        scenario:
+                          description: Specifies what features network injection applies
+                            to. The only possible value is agent.
+                          type: string
+                        subnetId:
+                          description: The ID of the subnet which the Agent Client
+                            is injected into.
+                          type: string
+                        subnetIdRef:
+                          description: Reference to a Subnet in network to populate
+                            subnetId.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        subnetIdSelector:
+                          description: Selector for a Subnet in network to populate
+                            subnetId.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
+                      type: object
+                    type: array
                   outboundNetworkAccessRestricted:
                     description: Whether outbound network access is restricted for
                       the Cognitive Account. Defaults to false.
+                    type: boolean
+                  projectManagementEnabled:
+                    description: Whether project management is enabled when the kind
+                      is set to AIServices. Once enabled, project_management_enabled
+                      cannot be disabled. Defaults to false.
                     type: boolean
                   publicNetworkAccessEnabled:
                     description: Whether public network access is allowed for the
@@ -1415,9 +1607,29 @@ spec:
                           type: array
                       type: object
                     type: array
+                  networkInjection:
+                    description: A network_injection block as defined below. Only
+                      applicable if the kind is set to AIServices.
+                    items:
+                      properties:
+                        scenario:
+                          description: Specifies what features network injection applies
+                            to. The only possible value is agent.
+                          type: string
+                        subnetId:
+                          description: The ID of the subnet which the Agent Client
+                            is injected into.
+                          type: string
+                      type: object
+                    type: array
                   outboundNetworkAccessRestricted:
                     description: Whether outbound network access is restricted for
                       the Cognitive Account. Defaults to false.
+                    type: boolean
+                  projectManagementEnabled:
+                    description: Whether project management is enabled when the kind
+                      is set to AIServices. Once enabled, project_management_enabled
+                      cannot be disabled. Defaults to false.
                     type: boolean
                   publicNetworkAccessEnabled:
                     description: Whether public network access is allowed for the
@@ -1596,12 +1808,13 @@ spec:
                     - namespace
                     type: object
                   customSubdomainName:
-                    description: The subdomain name used for token-based authentication.
-                      This property is required when network_acls is specified. This
-                      property is also required when using the OpenAI service with
-                      libraries which assume the Azure OpenAI endpoint is a subdomain
-                      on https://openai.azure.com/, eg. https://<custom_subdomain_name>.openai.azure.com/.  Changing
-                      this forces a new resource to be created.
+                    description: The subdomain name used for Entra ID token-based
+                      authentication. This attribute is required when network_acls
+                      is specified. This attribute is also required when using the
+                      OpenAI service with libraries which assume the Azure OpenAI
+                      endpoint is a subdomain on https://openai.azure.com/, eg. https://<custom_subdomain_name>.openai.azure.com/.
+                      This can be specified during creation or added later, but once
+                      set changing this forces a new resource to be created.
                     type: string
                   customerManagedKey:
                     description: A customer_managed_key block as documented below.
@@ -1619,7 +1832,8 @@ spec:
                     type: object
                   dynamicThrottlingEnabled:
                     description: Whether to enable the dynamic throttling for this
-                      Cognitive Service Account.
+                      Cognitive Service Account. This attribute cannot be set when
+                      the kind is OpenAI or AIServices.
                     type: boolean
                   fqdns:
                     description: List of FQDNs allowed for the Cognitive Account.
@@ -1724,11 +1938,11 @@ spec:
                     type: object
                   kind:
                     description: Specifies the type of Cognitive Service Account that
-                      should be created. Possible values are Academic, AnomalyDetector,
-                      Bing.Autosuggest, Bing.Autosuggest.v7, Bing.CustomSearch, Bing.Search,
-                      Bing.Search.v7, Bing.Speech, Bing.SpellCheck, Bing.SpellCheck.v7,
-                      CognitiveServices, ComputerVision, ContentModerator, ContentSafety,
-                      CustomSpeech, CustomVision.Prediction, CustomVision.Training,
+                      should be created. Possible values are AIServices, Academic,
+                      AnomalyDetector, Bing.Autosuggest, Bing.Autosuggest.v7, Bing.CustomSearch,
+                      Bing.Search, Bing.Search.v7, Bing.Speech, Bing.SpellCheck, Bing.SpellCheck.v7,
+                      CognitiveServices, ComputerVision, ContentModerator, ConversationalLanguageUnderstanding,
+                      ContentSafety, CustomSpeech, CustomVision.Prediction, CustomVision.Training,
                       Emotion, Face, FormRecognizer, ImmersiveReader, LUIS, LUIS.Authoring,
                       MetricsAdvisor, OpenAI, Personalizer, QnAMaker, Recommendations,
                       SpeakerRecognition, Speech, SpeechServices, SpeechTranslation,
@@ -1790,7 +2004,7 @@ spec:
                           properties:
                             ignoreMissingVnetServiceEndpoint:
                               description: Whether ignore missing vnet service endpoint
-                                or not. Default to false.
+                                or not. Defaults to false.
                               type: boolean
                             subnetId:
                               description: The ID of the subnet which should be able
@@ -1875,9 +2089,103 @@ spec:
                           type: object
                         type: array
                     type: object
+                  networkInjection:
+                    description: A network_injection block as defined below. Only
+                      applicable if the kind is set to AIServices.
+                    properties:
+                      scenario:
+                        description: Specifies what features network injection applies
+                          to. The only possible value is agent.
+                        type: string
+                      subnetId:
+                        description: The ID of the subnet which the Agent Client is
+                          injected into.
+                        type: string
+                      subnetIdRef:
+                        description: Reference to a Subnet in network to populate
+                          subnetId.
+                        properties:
+                          name:
+                            description: Name of the referenced object.
+                            type: string
+                          policy:
+                            description: Policies for referencing.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        required:
+                        - name
+                        type: object
+                      subnetIdSelector:
+                        description: Selector for a Subnet in network to populate
+                          subnetId.
+                        properties:
+                          matchControllerRef:
+                            description: |-
+                              MatchControllerRef ensures an object with the same controller reference
+                              as the selecting object is selected.
+                            type: boolean
+                          matchLabels:
+                            additionalProperties:
+                              type: string
+                            description: MatchLabels ensures an object with matching
+                              labels is selected.
+                            type: object
+                          policy:
+                            description: Policies for selection.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        type: object
+                    type: object
                   outboundNetworkAccessRestricted:
                     description: Whether outbound network access is restricted for
                       the Cognitive Account. Defaults to false.
+                    type: boolean
+                  projectManagementEnabled:
+                    description: Whether project management is enabled when the kind
+                      is set to AIServices. Once enabled, project_management_enabled
+                      cannot be disabled. Defaults to false.
                     type: boolean
                   publicNetworkAccessEnabled:
                     description: Whether public network access is allowed for the
@@ -1970,8 +2278,8 @@ spec:
                     type: object
                   skuName:
                     description: Specifies the SKU Name for this Cognitive Service
-                      Account. Possible values are F0, F1, S0, S, S1, S2, S3, S4,
-                      S5, S6, P0, P1, P2, E0 and DC0.
+                      Account. Possible values are C2, C3, C4, D3, DC0, E0, F0, F1,
+                      P0, P1, P2, S, S0, S1, S2, S3, S4, S5 and S6.
                     type: string
                   storage:
                     description: A storage block as defined below.
@@ -2181,12 +2489,13 @@ spec:
                     - namespace
                     type: object
                   customSubdomainName:
-                    description: The subdomain name used for token-based authentication.
-                      This property is required when network_acls is specified. This
-                      property is also required when using the OpenAI service with
-                      libraries which assume the Azure OpenAI endpoint is a subdomain
-                      on https://openai.azure.com/, eg. https://<custom_subdomain_name>.openai.azure.com/.  Changing
-                      this forces a new resource to be created.
+                    description: The subdomain name used for Entra ID token-based
+                      authentication. This attribute is required when network_acls
+                      is specified. This attribute is also required when using the
+                      OpenAI service with libraries which assume the Azure OpenAI
+                      endpoint is a subdomain on https://openai.azure.com/, eg. https://<custom_subdomain_name>.openai.azure.com/.
+                      This can be specified during creation or added later, but once
+                      set changing this forces a new resource to be created.
                     type: string
                   customerManagedKey:
                     description: A customer_managed_key block as documented below.
@@ -2204,7 +2513,8 @@ spec:
                     type: object
                   dynamicThrottlingEnabled:
                     description: Whether to enable the dynamic throttling for this
-                      Cognitive Service Account.
+                      Cognitive Service Account. This attribute cannot be set when
+                      the kind is OpenAI or AIServices.
                     type: boolean
                   fqdns:
                     description: List of FQDNs allowed for the Cognitive Account.
@@ -2309,11 +2619,11 @@ spec:
                     type: object
                   kind:
                     description: Specifies the type of Cognitive Service Account that
-                      should be created. Possible values are Academic, AnomalyDetector,
-                      Bing.Autosuggest, Bing.Autosuggest.v7, Bing.CustomSearch, Bing.Search,
-                      Bing.Search.v7, Bing.Speech, Bing.SpellCheck, Bing.SpellCheck.v7,
-                      CognitiveServices, ComputerVision, ContentModerator, ContentSafety,
-                      CustomSpeech, CustomVision.Prediction, CustomVision.Training,
+                      should be created. Possible values are AIServices, Academic,
+                      AnomalyDetector, Bing.Autosuggest, Bing.Autosuggest.v7, Bing.CustomSearch,
+                      Bing.Search, Bing.Search.v7, Bing.Speech, Bing.SpellCheck, Bing.SpellCheck.v7,
+                      CognitiveServices, ComputerVision, ContentModerator, ConversationalLanguageUnderstanding,
+                      ContentSafety, CustomSpeech, CustomVision.Prediction, CustomVision.Training,
                       Emotion, Face, FormRecognizer, ImmersiveReader, LUIS, LUIS.Authoring,
                       MetricsAdvisor, OpenAI, Personalizer, QnAMaker, Recommendations,
                       SpeakerRecognition, Speech, SpeechServices, SpeechTranslation,
@@ -2375,7 +2685,7 @@ spec:
                           properties:
                             ignoreMissingVnetServiceEndpoint:
                               description: Whether ignore missing vnet service endpoint
-                                or not. Default to false.
+                                or not. Defaults to false.
                               type: boolean
                             subnetId:
                               description: The ID of the subnet which should be able
@@ -2460,9 +2770,103 @@ spec:
                           type: object
                         type: array
                     type: object
+                  networkInjection:
+                    description: A network_injection block as defined below. Only
+                      applicable if the kind is set to AIServices.
+                    properties:
+                      scenario:
+                        description: Specifies what features network injection applies
+                          to. The only possible value is agent.
+                        type: string
+                      subnetId:
+                        description: The ID of the subnet which the Agent Client is
+                          injected into.
+                        type: string
+                      subnetIdRef:
+                        description: Reference to a Subnet in network to populate
+                          subnetId.
+                        properties:
+                          name:
+                            description: Name of the referenced object.
+                            type: string
+                          policy:
+                            description: Policies for referencing.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        required:
+                        - name
+                        type: object
+                      subnetIdSelector:
+                        description: Selector for a Subnet in network to populate
+                          subnetId.
+                        properties:
+                          matchControllerRef:
+                            description: |-
+                              MatchControllerRef ensures an object with the same controller reference
+                              as the selecting object is selected.
+                            type: boolean
+                          matchLabels:
+                            additionalProperties:
+                              type: string
+                            description: MatchLabels ensures an object with matching
+                              labels is selected.
+                            type: object
+                          policy:
+                            description: Policies for selection.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        type: object
+                    type: object
                   outboundNetworkAccessRestricted:
                     description: Whether outbound network access is restricted for
                       the Cognitive Account. Defaults to false.
+                    type: boolean
+                  projectManagementEnabled:
+                    description: Whether project management is enabled when the kind
+                      is set to AIServices. Once enabled, project_management_enabled
+                      cannot be disabled. Defaults to false.
                     type: boolean
                   publicNetworkAccessEnabled:
                     description: Whether public network access is allowed for the
@@ -2474,8 +2878,8 @@ spec:
                     type: string
                   skuName:
                     description: Specifies the SKU Name for this Cognitive Service
-                      Account. Possible values are F0, F1, S0, S, S1, S2, S3, S4,
-                      S5, S6, P0, P1, P2, E0 and DC0.
+                      Account. Possible values are C2, C3, C4, D3, DC0, E0, F0, F1,
+                      P0, P1, P2, S, S0, S1, S2, S3, S4, S5 and S6.
                     type: string
                   storage:
                     description: A storage block as defined below.
@@ -2758,12 +3162,13 @@ spec:
                       the Search service.
                     type: string
                   customSubdomainName:
-                    description: The subdomain name used for token-based authentication.
-                      This property is required when network_acls is specified. This
-                      property is also required when using the OpenAI service with
-                      libraries which assume the Azure OpenAI endpoint is a subdomain
-                      on https://openai.azure.com/, eg. https://<custom_subdomain_name>.openai.azure.com/.  Changing
-                      this forces a new resource to be created.
+                    description: The subdomain name used for Entra ID token-based
+                      authentication. This attribute is required when network_acls
+                      is specified. This attribute is also required when using the
+                      OpenAI service with libraries which assume the Azure OpenAI
+                      endpoint is a subdomain on https://openai.azure.com/, eg. https://<custom_subdomain_name>.openai.azure.com/.
+                      This can be specified during creation or added later, but once
+                      set changing this forces a new resource to be created.
                     type: string
                   customerManagedKey:
                     description: A customer_managed_key block as documented below.
@@ -2781,7 +3186,8 @@ spec:
                     type: object
                   dynamicThrottlingEnabled:
                     description: Whether to enable the dynamic throttling for this
-                      Cognitive Service Account.
+                      Cognitive Service Account. This attribute cannot be set when
+                      the kind is OpenAI or AIServices.
                     type: boolean
                   endpoint:
                     description: The endpoint used to connect to the Cognitive Service
@@ -2822,11 +3228,11 @@ spec:
                     type: object
                   kind:
                     description: Specifies the type of Cognitive Service Account that
-                      should be created. Possible values are Academic, AnomalyDetector,
-                      Bing.Autosuggest, Bing.Autosuggest.v7, Bing.CustomSearch, Bing.Search,
-                      Bing.Search.v7, Bing.Speech, Bing.SpellCheck, Bing.SpellCheck.v7,
-                      CognitiveServices, ComputerVision, ContentModerator, ContentSafety,
-                      CustomSpeech, CustomVision.Prediction, CustomVision.Training,
+                      should be created. Possible values are AIServices, Academic,
+                      AnomalyDetector, Bing.Autosuggest, Bing.Autosuggest.v7, Bing.CustomSearch,
+                      Bing.Search, Bing.Search.v7, Bing.Speech, Bing.SpellCheck, Bing.SpellCheck.v7,
+                      CognitiveServices, ComputerVision, ContentModerator, ConversationalLanguageUnderstanding,
+                      ContentSafety, CustomSpeech, CustomVision.Prediction, CustomVision.Training,
                       Emotion, Face, FormRecognizer, ImmersiveReader, LUIS, LUIS.Authoring,
                       MetricsAdvisor, OpenAI, Personalizer, QnAMaker, Recommendations,
                       SpeakerRecognition, Speech, SpeechServices, SpeechTranslation,
@@ -2888,7 +3294,7 @@ spec:
                           properties:
                             ignoreMissingVnetServiceEndpoint:
                               description: Whether ignore missing vnet service endpoint
-                                or not. Default to false.
+                                or not. Defaults to false.
                               type: boolean
                             subnetId:
                               description: The ID of the subnet which should be able
@@ -2897,9 +3303,27 @@ spec:
                           type: object
                         type: array
                     type: object
+                  networkInjection:
+                    description: A network_injection block as defined below. Only
+                      applicable if the kind is set to AIServices.
+                    properties:
+                      scenario:
+                        description: Specifies what features network injection applies
+                          to. The only possible value is agent.
+                        type: string
+                      subnetId:
+                        description: The ID of the subnet which the Agent Client is
+                          injected into.
+                        type: string
+                    type: object
                   outboundNetworkAccessRestricted:
                     description: Whether outbound network access is restricted for
                       the Cognitive Account. Defaults to false.
+                    type: boolean
+                  projectManagementEnabled:
+                    description: Whether project management is enabled when the kind
+                      is set to AIServices. Once enabled, project_management_enabled
+                      cannot be disabled. Defaults to false.
                     type: boolean
                   publicNetworkAccessEnabled:
                     description: Whether public network access is allowed for the
@@ -2916,8 +3340,8 @@ spec:
                     type: string
                   skuName:
                     description: Specifies the SKU Name for this Cognitive Service
-                      Account. Possible values are F0, F1, S0, S, S1, S2, S3, S4,
-                      S5, S6, P0, P1, P2, E0 and DC0.
+                      Account. Possible values are C2, C3, C4, D3, DC0, E0, F0, F1,
+                      P0, P1, P2, S, S0, S1, S2, S3, S4, S5 and S6.
                     type: string
                   storage:
                     description: A storage block as defined below.

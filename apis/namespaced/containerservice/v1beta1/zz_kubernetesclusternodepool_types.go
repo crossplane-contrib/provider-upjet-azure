@@ -28,6 +28,9 @@ type KubernetesClusterNodePoolInitParameters struct {
 	// Should the nodes in this Node Pool have Federal Information Processing Standard enabled? Changing this property requires specifying temporary_name_for_rotation.
 	FipsEnabled *bool `json:"fipsEnabled,omitempty" tf:"fips_enabled,omitempty"`
 
+	// Specifies whether to install the GPU Driver for the nodes. Possible values are Install and None. Changing this forces a new resource to be created.
+	GpuDriver *string `json:"gpuDriver,omitempty" tf:"gpu_driver,omitempty"`
+
 	// Specifies the GPU MIG instance profile for supported GPU VM SKU. The allowed values are MIG1g, MIG2g, MIG3g, MIG4g and MIG7g. Changing this forces a new resource to be created.
 	GpuInstance *string `json:"gpuInstance,omitempty" tf:"gpu_instance,omitempty"`
 
@@ -86,7 +89,7 @@ type KubernetesClusterNodePoolInitParameters struct {
 	// The type of disk which should be used for the Operating System. Possible values are Ephemeral and Managed. Defaults to Managed. Changing this property requires specifying temporary_name_for_rotation.
 	OsDiskType *string `json:"osDiskType,omitempty" tf:"os_disk_type,omitempty"`
 
-	// Specifies the OS SKU used by the agent pool. Possible values are AzureLinux, Ubuntu, Windows2019 and Windows2022. If not specified, the default is Ubuntu if OSType=Linux or Windows2019 if OSType=Windows. And the default Windows OSSKU will be changed to Windows2022 after Windows2019 is deprecated. Changing this from AzureLinux or Ubuntu to AzureLinux or Ubuntu will not replace the resource, otherwise it forces a new resource to be created.
+	// Specifies the OS SKU used by the agent pool. Possible values are AzureLinux, AzureLinux3, Ubuntu, Ubuntu2204, Windows2019 and Windows2022. If not specified, the default is Ubuntu if OSType=Linux or Windows2019 if OSType=Windows. And the default Windows OSSKU will be changed to Windows2022 after Windows2019 is deprecated. Changing this from AzureLinux or Ubuntu to AzureLinux or Ubuntu will not replace the resource, otherwise it forces a new resource to be created.
 	OsSku *string `json:"osSku,omitempty" tf:"os_sku,omitempty"`
 
 	// The Operating System which should be used for this Node Pool. Changing this forces a new resource to be created. Possible values are Linux and Windows. Defaults to Linux.
@@ -280,10 +283,12 @@ type KubernetesClusterNodePoolLinuxOsConfigInitParameters struct {
 	// A sysctl_config block as defined below.
 	SysctlConfig *LinuxOsConfigSysctlConfigInitParameters `json:"sysctlConfig,omitempty" tf:"sysctl_config,omitempty"`
 
+	// Specifies the Transparent Huge Page configuration. Possible values are always, madvise and never.
+	TransparentHugePage *string `json:"transparentHugePage,omitempty" tf:"transparent_huge_page,omitempty"`
+
 	// specifies the defrag configuration for Transparent Huge Page. Possible values are always, defer, defer+madvise, madvise and never.
 	TransparentHugePageDefrag *string `json:"transparentHugePageDefrag,omitempty" tf:"transparent_huge_page_defrag,omitempty"`
 
-	// Specifies the Transparent Huge Page enabled configuration. Possible values are always, madvise and never.
 	TransparentHugePageEnabled *string `json:"transparentHugePageEnabled,omitempty" tf:"transparent_huge_page_enabled,omitempty"`
 }
 
@@ -295,10 +300,12 @@ type KubernetesClusterNodePoolLinuxOsConfigObservation struct {
 	// A sysctl_config block as defined below.
 	SysctlConfig *LinuxOsConfigSysctlConfigObservation `json:"sysctlConfig,omitempty" tf:"sysctl_config,omitempty"`
 
+	// Specifies the Transparent Huge Page configuration. Possible values are always, madvise and never.
+	TransparentHugePage *string `json:"transparentHugePage,omitempty" tf:"transparent_huge_page,omitempty"`
+
 	// specifies the defrag configuration for Transparent Huge Page. Possible values are always, defer, defer+madvise, madvise and never.
 	TransparentHugePageDefrag *string `json:"transparentHugePageDefrag,omitempty" tf:"transparent_huge_page_defrag,omitempty"`
 
-	// Specifies the Transparent Huge Page enabled configuration. Possible values are always, madvise and never.
 	TransparentHugePageEnabled *string `json:"transparentHugePageEnabled,omitempty" tf:"transparent_huge_page_enabled,omitempty"`
 }
 
@@ -312,11 +319,14 @@ type KubernetesClusterNodePoolLinuxOsConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	SysctlConfig *LinuxOsConfigSysctlConfigParameters `json:"sysctlConfig,omitempty" tf:"sysctl_config,omitempty"`
 
+	// Specifies the Transparent Huge Page configuration. Possible values are always, madvise and never.
+	// +kubebuilder:validation:Optional
+	TransparentHugePage *string `json:"transparentHugePage,omitempty" tf:"transparent_huge_page,omitempty"`
+
 	// specifies the defrag configuration for Transparent Huge Page. Possible values are always, defer, defer+madvise, madvise and never.
 	// +kubebuilder:validation:Optional
 	TransparentHugePageDefrag *string `json:"transparentHugePageDefrag,omitempty" tf:"transparent_huge_page_defrag,omitempty"`
 
-	// Specifies the Transparent Huge Page enabled configuration. Possible values are always, madvise and never.
 	// +kubebuilder:validation:Optional
 	TransparentHugePageEnabled *string `json:"transparentHugePageEnabled,omitempty" tf:"transparent_huge_page_enabled,omitempty"`
 }
@@ -376,6 +386,9 @@ type KubernetesClusterNodePoolObservation struct {
 
 	// Should the nodes in this Node Pool have Federal Information Processing Standard enabled? Changing this property requires specifying temporary_name_for_rotation.
 	FipsEnabled *bool `json:"fipsEnabled,omitempty" tf:"fips_enabled,omitempty"`
+
+	// Specifies whether to install the GPU Driver for the nodes. Possible values are Install and None. Changing this forces a new resource to be created.
+	GpuDriver *string `json:"gpuDriver,omitempty" tf:"gpu_driver,omitempty"`
 
 	// Specifies the GPU MIG instance profile for supported GPU VM SKU. The allowed values are MIG1g, MIG2g, MIG3g, MIG4g and MIG7g. Changing this forces a new resource to be created.
 	GpuInstance *string `json:"gpuInstance,omitempty" tf:"gpu_instance,omitempty"`
@@ -441,7 +454,7 @@ type KubernetesClusterNodePoolObservation struct {
 	// The type of disk which should be used for the Operating System. Possible values are Ephemeral and Managed. Defaults to Managed. Changing this property requires specifying temporary_name_for_rotation.
 	OsDiskType *string `json:"osDiskType,omitempty" tf:"os_disk_type,omitempty"`
 
-	// Specifies the OS SKU used by the agent pool. Possible values are AzureLinux, Ubuntu, Windows2019 and Windows2022. If not specified, the default is Ubuntu if OSType=Linux or Windows2019 if OSType=Windows. And the default Windows OSSKU will be changed to Windows2022 after Windows2019 is deprecated. Changing this from AzureLinux or Ubuntu to AzureLinux or Ubuntu will not replace the resource, otherwise it forces a new resource to be created.
+	// Specifies the OS SKU used by the agent pool. Possible values are AzureLinux, AzureLinux3, Ubuntu, Ubuntu2204, Windows2019 and Windows2022. If not specified, the default is Ubuntu if OSType=Linux or Windows2019 if OSType=Windows. And the default Windows OSSKU will be changed to Windows2022 after Windows2019 is deprecated. Changing this from AzureLinux or Ubuntu to AzureLinux or Ubuntu will not replace the resource, otherwise it forces a new resource to be created.
 	OsSku *string `json:"osSku,omitempty" tf:"os_sku,omitempty"`
 
 	// The Operating System which should be used for this Node Pool. Changing this forces a new resource to be created. Possible values are Linux and Windows. Defaults to Linux.
@@ -512,6 +525,10 @@ type KubernetesClusterNodePoolParameters struct {
 	// Should the nodes in this Node Pool have Federal Information Processing Standard enabled? Changing this property requires specifying temporary_name_for_rotation.
 	// +kubebuilder:validation:Optional
 	FipsEnabled *bool `json:"fipsEnabled,omitempty" tf:"fips_enabled,omitempty"`
+
+	// Specifies whether to install the GPU Driver for the nodes. Possible values are Install and None. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	GpuDriver *string `json:"gpuDriver,omitempty" tf:"gpu_driver,omitempty"`
 
 	// Specifies the GPU MIG instance profile for supported GPU VM SKU. The allowed values are MIG1g, MIG2g, MIG3g, MIG4g and MIG7g. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -604,7 +621,7 @@ type KubernetesClusterNodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	OsDiskType *string `json:"osDiskType,omitempty" tf:"os_disk_type,omitempty"`
 
-	// Specifies the OS SKU used by the agent pool. Possible values are AzureLinux, Ubuntu, Windows2019 and Windows2022. If not specified, the default is Ubuntu if OSType=Linux or Windows2019 if OSType=Windows. And the default Windows OSSKU will be changed to Windows2022 after Windows2019 is deprecated. Changing this from AzureLinux or Ubuntu to AzureLinux or Ubuntu will not replace the resource, otherwise it forces a new resource to be created.
+	// Specifies the OS SKU used by the agent pool. Possible values are AzureLinux, AzureLinux3, Ubuntu, Ubuntu2204, Windows2019 and Windows2022. If not specified, the default is Ubuntu if OSType=Linux or Windows2019 if OSType=Windows. And the default Windows OSSKU will be changed to Windows2022 after Windows2019 is deprecated. Changing this from AzureLinux or Ubuntu to AzureLinux or Ubuntu will not replace the resource, otherwise it forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	OsSku *string `json:"osSku,omitempty" tf:"os_sku,omitempty"`
 
@@ -703,8 +720,14 @@ type KubernetesClusterNodePoolUpgradeSettingsInitParameters struct {
 	// The maximum number or percentage of nodes which will be added to the Node Pool size during an upgrade.
 	MaxSurge *string `json:"maxSurge,omitempty" tf:"max_surge,omitempty"`
 
+	// The maximum number or percentage of nodes which can be unavailable during the upgrade.
+	MaxUnavailable *string `json:"maxUnavailable,omitempty" tf:"max_unavailable,omitempty"`
+
 	// The amount of time in minutes to wait after draining a node and before reimaging and moving on to next node.
 	NodeSoakDurationInMinutes *float64 `json:"nodeSoakDurationInMinutes,omitempty" tf:"node_soak_duration_in_minutes,omitempty"`
+
+	// Specifies the action when a node is undrainable during upgrade. Possible values are Cordon and Schedule. Unsetting this after configuring it will force a new resource to be created.
+	UndrainableNodeBehavior *string `json:"undrainableNodeBehavior,omitempty" tf:"undrainable_node_behavior,omitempty"`
 }
 
 type KubernetesClusterNodePoolUpgradeSettingsObservation struct {
@@ -715,8 +738,14 @@ type KubernetesClusterNodePoolUpgradeSettingsObservation struct {
 	// The maximum number or percentage of nodes which will be added to the Node Pool size during an upgrade.
 	MaxSurge *string `json:"maxSurge,omitempty" tf:"max_surge,omitempty"`
 
+	// The maximum number or percentage of nodes which can be unavailable during the upgrade.
+	MaxUnavailable *string `json:"maxUnavailable,omitempty" tf:"max_unavailable,omitempty"`
+
 	// The amount of time in minutes to wait after draining a node and before reimaging and moving on to next node.
 	NodeSoakDurationInMinutes *float64 `json:"nodeSoakDurationInMinutes,omitempty" tf:"node_soak_duration_in_minutes,omitempty"`
+
+	// Specifies the action when a node is undrainable during upgrade. Possible values are Cordon and Schedule. Unsetting this after configuring it will force a new resource to be created.
+	UndrainableNodeBehavior *string `json:"undrainableNodeBehavior,omitempty" tf:"undrainable_node_behavior,omitempty"`
 }
 
 type KubernetesClusterNodePoolUpgradeSettingsParameters struct {
@@ -727,11 +756,19 @@ type KubernetesClusterNodePoolUpgradeSettingsParameters struct {
 
 	// The maximum number or percentage of nodes which will be added to the Node Pool size during an upgrade.
 	// +kubebuilder:validation:Optional
-	MaxSurge *string `json:"maxSurge" tf:"max_surge,omitempty"`
+	MaxSurge *string `json:"maxSurge,omitempty" tf:"max_surge,omitempty"`
+
+	// The maximum number or percentage of nodes which can be unavailable during the upgrade.
+	// +kubebuilder:validation:Optional
+	MaxUnavailable *string `json:"maxUnavailable,omitempty" tf:"max_unavailable,omitempty"`
 
 	// The amount of time in minutes to wait after draining a node and before reimaging and moving on to next node.
 	// +kubebuilder:validation:Optional
 	NodeSoakDurationInMinutes *float64 `json:"nodeSoakDurationInMinutes,omitempty" tf:"node_soak_duration_in_minutes,omitempty"`
+
+	// Specifies the action when a node is undrainable during upgrade. Possible values are Cordon and Schedule. Unsetting this after configuring it will force a new resource to be created.
+	// +kubebuilder:validation:Optional
+	UndrainableNodeBehavior *string `json:"undrainableNodeBehavior,omitempty" tf:"undrainable_node_behavior,omitempty"`
 }
 
 type KubernetesClusterNodePoolWindowsProfileInitParameters struct {

@@ -75,8 +75,9 @@ spec:
               forProvider:
                 properties:
                   endIpAddress:
-                    description: The End IP Address associated with this PostgreSQL
-                      Flexible Server Firewall Rule.
+                    description: The IPv4 Address defining the end of the range of
+                      addresses associated with this PostgreSQL Flexible Server Firewall
+                      Rule.
                     type: string
                   serverId:
                     description: The ID of the PostgreSQL Flexible Server from which
@@ -161,8 +162,9 @@ spec:
                         type: object
                     type: object
                   startIpAddress:
-                    description: The Start IP Address associated with this PostgreSQL
-                      Flexible Server Firewall Rule.
+                    description: The IPv4 Address defining the start of the range
+                      of addresses associated with this PostgreSQL Flexible Server
+                      Firewall Rule.
                     type: string
                 type: object
               initProvider:
@@ -179,12 +181,14 @@ spec:
                   autoscaler.
                 properties:
                   endIpAddress:
-                    description: The End IP Address associated with this PostgreSQL
-                      Flexible Server Firewall Rule.
+                    description: The IPv4 Address defining the end of the range of
+                      addresses associated with this PostgreSQL Flexible Server Firewall
+                      Rule.
                     type: string
                   startIpAddress:
-                    description: The Start IP Address associated with this PostgreSQL
-                      Flexible Server Firewall Rule.
+                    description: The IPv4 Address defining the start of the range
+                      of addresses associated with this PostgreSQL Flexible Server
+                      Firewall Rule.
                     type: string
                 type: object
               managementPolicies:
@@ -289,8 +293,9 @@ spec:
               atProvider:
                 properties:
                   endIpAddress:
-                    description: The End IP Address associated with this PostgreSQL
-                      Flexible Server Firewall Rule.
+                    description: The IPv4 Address defining the end of the range of
+                      addresses associated with this PostgreSQL Flexible Server Firewall
+                      Rule.
                     type: string
                   id:
                     description: The ID of the PostgreSQL Flexible Server Firewall
@@ -303,8 +308,9 @@ spec:
                       be created.
                     type: string
                   startIpAddress:
-                    description: The Start IP Address associated with this PostgreSQL
-                      Flexible Server Firewall Rule.
+                    description: The IPv4 Address defining the start of the range
+                      of addresses associated with this PostgreSQL Flexible Server
+                      Firewall Rule.
                     type: string
                 type: object
               conditions:

@@ -654,8 +654,7 @@ spec:
                     type: string
                   lockDuration:
                     description: The lock duration for the subscription as an ISO
-                      8601 duration. The default value is 1 minute or P0DT0H1M0S .
-                      The maximum value is 5 minutes or P0DT0H5M0S . Defaults to PT1M.
+                      8601 duration. Defaults to PT1M.
                     type: string
                   maxDeliveryCount:
                     description: The maximum number of deliveries.
@@ -814,8 +813,7 @@ spec:
                     type: string
                   lockDuration:
                     description: The lock duration for the subscription as an ISO
-                      8601 duration. The default value is 1 minute or P0DT0H1M0S .
-                      The maximum value is 5 minutes or P0DT0H5M0S . Defaults to PT1M.
+                      8601 duration. Defaults to PT1M.
                     type: string
                   maxDeliveryCount:
                     description: The maximum number of deliveries.
@@ -987,8 +985,7 @@ spec:
                     type: string
                   lockDuration:
                     description: The lock duration for the subscription as an ISO
-                      8601 duration. The default value is 1 minute or P0DT0H1M0S .
-                      The maximum value is 5 minutes or P0DT0H5M0S . Defaults to PT1M.
+                      8601 duration. Defaults to PT1M.
                     type: string
                   maxDeliveryCount:
                     description: The maximum number of deliveries.

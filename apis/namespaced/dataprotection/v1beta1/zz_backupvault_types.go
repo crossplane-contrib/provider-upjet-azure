@@ -25,7 +25,7 @@ type BackupVaultInitParameters struct {
 	// An identity block as defined below.
 	Identity *IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
-	// The state of immutability for this Backup Vault. Possible values are Disabled, Locked, and Unlocked. Defaults to Disabled. Changing this from Locked to anything else forces a new Backup Vault to be created.
+	// The state of immutability for this Backup Vault. Possible values are Disabled, Locked, and Unlocked. Defaults to Disabled.
 	Immutability *string `json:"immutability,omitempty" tf:"immutability,omitempty"`
 
 	// The Azure Region where the Backup Vault should exist. Changing this forces a new Backup Vault to be created.
@@ -59,7 +59,7 @@ type BackupVaultObservation struct {
 	// An identity block as defined below.
 	Identity *IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
-	// The state of immutability for this Backup Vault. Possible values are Disabled, Locked, and Unlocked. Defaults to Disabled. Changing this from Locked to anything else forces a new Backup Vault to be created.
+	// The state of immutability for this Backup Vault. Possible values are Disabled, Locked, and Unlocked. Defaults to Disabled.
 	Immutability *string `json:"immutability,omitempty" tf:"immutability,omitempty"`
 
 	// The Azure Region where the Backup Vault should exist. Changing this forces a new Backup Vault to be created.
@@ -96,7 +96,7 @@ type BackupVaultParameters struct {
 	// +kubebuilder:validation:Optional
 	Identity *IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
-	// The state of immutability for this Backup Vault. Possible values are Disabled, Locked, and Unlocked. Defaults to Disabled. Changing this from Locked to anything else forces a new Backup Vault to be created.
+	// The state of immutability for this Backup Vault. Possible values are Disabled, Locked, and Unlocked. Defaults to Disabled.
 	// +kubebuilder:validation:Optional
 	Immutability *string `json:"immutability,omitempty" tf:"immutability,omitempty"`
 
@@ -137,11 +137,19 @@ type BackupVaultParameters struct {
 
 type IdentityInitParameters struct {
 
-	// Specifies the type of Managed Service Identity that should be configured on this Backup Vault. The only possible value is SystemAssigned.
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Backup Vault.
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Backup Vault. Possible values are SystemAssigned, UserAssigned and SystemAssigned, UserAssigned.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type IdentityObservation struct {
+
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Backup Vault.
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Principal ID for the Service Principal associated with the Identity of this Backup Vault.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
@@ -149,13 +157,18 @@ type IdentityObservation struct {
 	// The Tenant ID for the Service Principal associated with the Identity of this Backup Vault.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 
-	// Specifies the type of Managed Service Identity that should be configured on this Backup Vault. The only possible value is SystemAssigned.
+	// Specifies the type of Managed Service Identity that should be configured on this Backup Vault. Possible values are SystemAssigned, UserAssigned and SystemAssigned, UserAssigned.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type IdentityParameters struct {
 
-	// Specifies the type of Managed Service Identity that should be configured on this Backup Vault. The only possible value is SystemAssigned.
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Backup Vault.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Backup Vault. Possible values are SystemAssigned, UserAssigned and SystemAssigned, UserAssigned.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }

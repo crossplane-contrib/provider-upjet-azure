@@ -93,6 +93,45 @@ type ActionIncidentParameters struct {
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
+type ActionIncidentTaskInitParameters struct {
+
+	// The description of the incident task.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The execution order of this action.
+	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
+
+	// The title of the incident task.
+	Title *string `json:"title,omitempty" tf:"title,omitempty"`
+}
+
+type ActionIncidentTaskObservation struct {
+
+	// The description of the incident task.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The execution order of this action.
+	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
+
+	// The title of the incident task.
+	Title *string `json:"title,omitempty" tf:"title,omitempty"`
+}
+
+type ActionIncidentTaskParameters struct {
+
+	// The description of the incident task.
+	// +kubebuilder:validation:Optional
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The execution order of this action.
+	// +kubebuilder:validation:Optional
+	Order *float64 `json:"order" tf:"order,omitempty"`
+
+	// The title of the incident task.
+	// +kubebuilder:validation:Optional
+	Title *string `json:"title" tf:"title,omitempty"`
+}
+
 type ActionPlaybookInitParameters struct {
 
 	// The ID of the Logic App that defines the playbook's logic.
@@ -136,6 +175,9 @@ type SentinelAutomationRuleInitParameters struct {
 
 	// One or more action_incident blocks as defined below.
 	ActionIncident []ActionIncidentInitParameters `json:"actionIncident,omitempty" tf:"action_incident,omitempty"`
+
+	// One or more action_incident_task blocks as defined below.
+	ActionIncidentTask []ActionIncidentTaskInitParameters `json:"actionIncidentTask,omitempty" tf:"action_incident_task,omitempty"`
 
 	// One or more action_playbook blocks as defined below.
 	ActionPlaybook []ActionPlaybookInitParameters `json:"actionPlaybook,omitempty" tf:"action_playbook,omitempty"`
@@ -183,6 +225,9 @@ type SentinelAutomationRuleObservation struct {
 	// One or more action_incident blocks as defined below.
 	ActionIncident []ActionIncidentObservation `json:"actionIncident,omitempty" tf:"action_incident,omitempty"`
 
+	// One or more action_incident_task blocks as defined below.
+	ActionIncidentTask []ActionIncidentTaskObservation `json:"actionIncidentTask,omitempty" tf:"action_incident_task,omitempty"`
+
 	// One or more action_playbook blocks as defined below.
 	ActionPlaybook []ActionPlaybookObservation `json:"actionPlaybook,omitempty" tf:"action_playbook,omitempty"`
 
@@ -222,6 +267,10 @@ type SentinelAutomationRuleParameters struct {
 	// One or more action_incident blocks as defined below.
 	// +kubebuilder:validation:Optional
 	ActionIncident []ActionIncidentParameters `json:"actionIncident,omitempty" tf:"action_incident,omitempty"`
+
+	// One or more action_incident_task blocks as defined below.
+	// +kubebuilder:validation:Optional
+	ActionIncidentTask []ActionIncidentTaskParameters `json:"actionIncidentTask,omitempty" tf:"action_incident_task,omitempty"`
 
 	// One or more action_playbook blocks as defined below.
 	// +kubebuilder:validation:Optional

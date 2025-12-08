@@ -14,7 +14,7 @@ metadata:
 spec:
   forProvider:
     name: example
-    storageShareIdSelector:
+    storageShareUrlSelector:
       matchLabels:
         testing.upbound.io/example-name: example
 
@@ -67,4 +67,6 @@ metadata:
 spec:
   forProvider:
     quota: 50
-    storageAccountName: azureteststorage
+    storageAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

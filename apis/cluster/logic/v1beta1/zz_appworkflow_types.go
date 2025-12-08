@@ -389,7 +389,7 @@ type TriggerParameters struct {
 	// A list of the allowed caller IP address ranges.
 	// +kubebuilder:validation:Optional
 	// +listType=set
-	AllowedCallerIPAddressRange []*string `json:"allowedCallerIpAddressRange" tf:"allowed_caller_ip_address_range,omitempty"`
+	AllowedCallerIPAddressRange []*string `json:"allowedCallerIpAddressRange,omitempty" tf:"allowed_caller_ip_address_range,omitempty"`
 
 	// A open_authentication_policy block as defined below.
 	// +kubebuilder:validation:Optional

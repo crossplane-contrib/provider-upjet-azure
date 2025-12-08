@@ -143,7 +143,7 @@ type EventGridNamespaceInitParameters struct {
 	// Specifies the supported Azure location where the resource should exist. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// Whether or not public network access is allowed for this server. Defaults to Enabled.
+	// Whether or not public network access is allowed for this server. Possible values are Enabled and Disabled. Defaults to Enabled.
 	PublicNetworkAccess *string `json:"publicNetworkAccess,omitempty" tf:"public_network_access,omitempty"`
 
 	// Defines which tier to use. The only possible value is Standard. Defaults to Standard.
@@ -153,7 +153,7 @@ type EventGridNamespaceInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A topic_spaces_configuration block as defined below.
+	// A topic_spaces_configuration block as defined below. Changing this forces a new resource to be created.
 	TopicSpacesConfiguration []TopicSpacesConfigurationInitParameters `json:"topicSpacesConfiguration,omitempty" tf:"topic_spaces_configuration,omitempty"`
 }
 
@@ -174,7 +174,7 @@ type EventGridNamespaceObservation struct {
 	// Specifies the supported Azure location where the resource should exist. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// Whether or not public network access is allowed for this server. Defaults to Enabled.
+	// Whether or not public network access is allowed for this server. Possible values are Enabled and Disabled. Defaults to Enabled.
 	PublicNetworkAccess *string `json:"publicNetworkAccess,omitempty" tf:"public_network_access,omitempty"`
 
 	// The name of the resource group in which the Event Grid Namespace should exist. Changing this forces a new resource to be created.
@@ -187,7 +187,7 @@ type EventGridNamespaceObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A topic_spaces_configuration block as defined below.
+	// A topic_spaces_configuration block as defined below. Changing this forces a new resource to be created.
 	TopicSpacesConfiguration []TopicSpacesConfigurationObservation `json:"topicSpacesConfiguration,omitempty" tf:"topic_spaces_configuration,omitempty"`
 }
 
@@ -209,7 +209,7 @@ type EventGridNamespaceParameters struct {
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// Whether or not public network access is allowed for this server. Defaults to Enabled.
+	// Whether or not public network access is allowed for this server. Possible values are Enabled and Disabled. Defaults to Enabled.
 	// +kubebuilder:validation:Optional
 	PublicNetworkAccess *string `json:"publicNetworkAccess,omitempty" tf:"public_network_access,omitempty"`
 
@@ -235,7 +235,7 @@ type EventGridNamespaceParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A topic_spaces_configuration block as defined below.
+	// A topic_spaces_configuration block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	TopicSpacesConfiguration []TopicSpacesConfigurationParameters `json:"topicSpacesConfiguration,omitempty" tf:"topic_spaces_configuration,omitempty"`
 }

@@ -66,10 +66,14 @@ spec:
                       this Storage Queue.
                     type: object
                     x-kubernetes-map-type: granular
+                  storageAccountId:
+                    description: The name of the Storage Account where the Storage
+                      Queue should be created.
+                    type: string
                   storageAccountName:
-                    description: Specifies the Storage Account in which the Storage
-                      Queue should exist. Changing this forces a new resource to be
-                      created.
+                    description: The name of the Storage Account where the Storage
+                      Queue should be created. This property is deprecated in favour
+                      of storage_account_id.
                     type: string
                   storageAccountNameRef:
                     description: Reference to a Account in storage to populate storageAccountName.
@@ -172,6 +176,10 @@ spec:
                       this Storage Queue.
                     type: object
                     x-kubernetes-map-type: granular
+                  storageAccountId:
+                    description: The name of the Storage Account where the Storage
+                      Queue should be created.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -249,10 +257,18 @@ spec:
                   resourceManagerId:
                     description: The Resource Manager ID of this Storage Queue.
                     type: string
+                  storageAccountId:
+                    description: The name of the Storage Account where the Storage
+                      Queue should be created.
+                    type: string
                   storageAccountName:
-                    description: Specifies the Storage Account in which the Storage
-                      Queue should exist. Changing this forces a new resource to be
-                      created.
+                    description: The name of the Storage Account where the Storage
+                      Queue should be created. This property is deprecated in favour
+                      of storage_account_id.
+                    type: string
+                  url:
+                    description: The data plane URL of the Storage Queue in the format
+                      of <storage queue endpoint>/<queue name>. E.g. https://example.queue.core.windows.net/queue1.
                     type: string
                 type: object
               conditions:

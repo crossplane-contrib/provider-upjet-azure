@@ -83,8 +83,7 @@ spec:
                     type: string
                   createMode:
                     description: The creation mode for the MongoDB Cluster. Possibles
-                      values are Default and GeoReplica. Defaults to Default. Changing
-                      this forces a new resource to be created.
+                      values are Default and GeoReplica. Defaults to Default.
                     type: string
                   highAvailabilityMode:
                     description: The high availability mode for the MongoDB Cluster.
@@ -379,7 +378,7 @@ spec:
                     x-kubernetes-map-type: granular
                   version:
                     description: The version for the MongoDB Cluster. Possibles values
-                      are 5.0, 6.0 and 7.0.
+                      are 5.0, 6.0, 7.0 and 8.0.
                     type: string
                 type: object
               initProvider:
@@ -419,8 +418,7 @@ spec:
                     type: string
                   createMode:
                     description: The creation mode for the MongoDB Cluster. Possibles
-                      values are Default and GeoReplica. Defaults to Default. Changing
-                      this forces a new resource to be created.
+                      values are Default and GeoReplica. Defaults to Default.
                     type: string
                   highAvailabilityMode:
                     description: The high availability mode for the MongoDB Cluster.
@@ -628,7 +626,7 @@ spec:
                     x-kubernetes-map-type: granular
                   version:
                     description: The version for the MongoDB Cluster. Possibles values
-                      are 5.0, 6.0 and 7.0.
+                      are 5.0, 6.0, 7.0 and 8.0.
                     type: string
                 type: object
               managementPolicies:
@@ -710,8 +708,7 @@ spec:
                     type: string
                   createMode:
                     description: The creation mode for the MongoDB Cluster. Possibles
-                      values are Default and GeoReplica. Defaults to Default. Changing
-                      this forces a new resource to be created.
+                      values are Default and GeoReplica. Defaults to Default.
                     type: string
                   highAvailabilityMode:
                     description: The high availability mode for the MongoDB Cluster.
@@ -763,7 +760,7 @@ spec:
                     x-kubernetes-map-type: granular
                   version:
                     description: The version for the MongoDB Cluster. Possibles values
-                      are 5.0, 6.0 and 7.0.
+                      are 5.0, 6.0, 7.0 and 8.0.
                     type: string
                 type: object
               conditions:

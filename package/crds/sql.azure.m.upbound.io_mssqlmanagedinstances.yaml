@@ -108,8 +108,8 @@ spec:
                     type: object
                   collation:
                     description: Specifies how the SQL Managed Instance will be collated.
-                      Default value is SQL_Latin1_General_CP1_CI_AS. Changing this
-                      forces a new resource to be created.
+                      Defaults to SQL_Latin1_General_CP1_CI_AS. Changing this forces
+                      a new resource to be created.
                     type: string
                   databaseFormat:
                     description: Specifies the internal format of the SQL Managed
@@ -236,8 +236,8 @@ spec:
                     type: string
                   maintenanceConfigurationName:
                     description: The name of the Public Maintenance Configuration
-                      window to apply to the SQL Managed Instance. Valid values include
-                      SQL_Default or an Azure Location in the format SQL_{Location}_MI_{Size}(for
+                      window to apply to the SQL Managed Instance. Possible values
+                      are SQL_Default or an Azure Location in the format SQL_{Location}_MI_{Size}(for
                       example SQL_EastUS_MI_1). Defaults to SQL_Default.
                     type: string
                   minimumTlsVersion:
@@ -246,12 +246,12 @@ spec:
                     type: string
                   proxyOverride:
                     description: Specifies how the SQL Managed Instance will be accessed.
-                      Default value is Default. Valid values include Default, Proxy,
-                      and Redirect.
+                      Defaults to Default. Possible values are Default, Proxy, and
+                      Redirect.
                     type: string
                   publicDataEndpointEnabled:
-                    description: Is the public data endpoint enabled? Default value
-                      is false.
+                    description: Is the public data endpoint enabled? Defaults to
+                      false.
                     type: boolean
                   resourceGroupName:
                     description: The name of the resource group in which to create
@@ -346,7 +346,7 @@ spec:
                     type: string
                   skuName:
                     description: Specifies the SKU Name for the SQL Managed Instance.
-                      Valid values include GP_Gen4, GP_Gen5, GP_Gen8IM, GP_Gen8IH,
+                      Possible values are GP_Gen4, GP_Gen5, GP_Gen8IM, GP_Gen8IH,
                       BC_Gen4, BC_Gen5, BC_Gen8IM or BC_Gen8IH.
                     type: string
                   storageAccountType:
@@ -450,8 +450,8 @@ spec:
                     x-kubernetes-map-type: granular
                   timezoneId:
                     description: The TimeZone ID that the SQL Managed Instance will
-                      be operating in. Default value is UTC. Changing this forces
-                      a new resource to be created.
+                      be operating in. Defaults to UTC. Changing this forces a new
+                      resource to be created.
                     type: string
                   vcores:
                     description: Number of cores that should be assigned to the SQL
@@ -460,8 +460,8 @@ spec:
                       128 for Gen5 SKUs.
                     type: number
                   zoneRedundantEnabled:
-                    description: Specifies whether or not the SQL Managed Instance
-                      is zone redundant. Defaults to false.
+                    description: Specifies whether the SQL Managed Instance is zone
+                      redundant. Defaults to false.
                     type: boolean
                 type: object
               initProvider:
@@ -526,8 +526,8 @@ spec:
                     type: object
                   collation:
                     description: Specifies how the SQL Managed Instance will be collated.
-                      Default value is SQL_Latin1_General_CP1_CI_AS. Changing this
-                      forces a new resource to be created.
+                      Defaults to SQL_Latin1_General_CP1_CI_AS. Changing this forces
+                      a new resource to be created.
                     type: string
                   databaseFormat:
                     description: Specifies the internal format of the SQL Managed
@@ -654,8 +654,8 @@ spec:
                     type: string
                   maintenanceConfigurationName:
                     description: The name of the Public Maintenance Configuration
-                      window to apply to the SQL Managed Instance. Valid values include
-                      SQL_Default or an Azure Location in the format SQL_{Location}_MI_{Size}(for
+                      window to apply to the SQL Managed Instance. Possible values
+                      are SQL_Default or an Azure Location in the format SQL_{Location}_MI_{Size}(for
                       example SQL_EastUS_MI_1). Defaults to SQL_Default.
                     type: string
                   minimumTlsVersion:
@@ -664,12 +664,12 @@ spec:
                     type: string
                   proxyOverride:
                     description: Specifies how the SQL Managed Instance will be accessed.
-                      Default value is Default. Valid values include Default, Proxy,
-                      and Redirect.
+                      Defaults to Default. Possible values are Default, Proxy, and
+                      Redirect.
                     type: string
                   publicDataEndpointEnabled:
-                    description: Is the public data endpoint enabled? Default value
-                      is false.
+                    description: Is the public data endpoint enabled? Defaults to
+                      false.
                     type: boolean
                   servicePrincipalType:
                     description: The service principal type. The only possible value
@@ -677,7 +677,7 @@ spec:
                     type: string
                   skuName:
                     description: Specifies the SKU Name for the SQL Managed Instance.
-                      Valid values include GP_Gen4, GP_Gen5, GP_Gen8IM, GP_Gen8IH,
+                      Possible values are GP_Gen4, GP_Gen5, GP_Gen8IM, GP_Gen8IH,
                       BC_Gen4, BC_Gen5, BC_Gen8IM or BC_Gen8IH.
                     type: string
                   storageAccountType:
@@ -781,8 +781,8 @@ spec:
                     x-kubernetes-map-type: granular
                   timezoneId:
                     description: The TimeZone ID that the SQL Managed Instance will
-                      be operating in. Default value is UTC. Changing this forces
-                      a new resource to be created.
+                      be operating in. Defaults to UTC. Changing this forces a new
+                      resource to be created.
                     type: string
                   vcores:
                     description: Number of cores that should be assigned to the SQL
@@ -791,8 +791,8 @@ spec:
                       128 for Gen5 SKUs.
                     type: number
                   zoneRedundantEnabled:
-                    description: Specifies whether or not the SQL Managed Instance
-                      is zone redundant. Defaults to false.
+                    description: Specifies whether the SQL Managed Instance is zone
+                      redundant. Defaults to false.
                     type: boolean
                 type: object
               managementPolicies:
@@ -916,8 +916,8 @@ spec:
                     type: object
                   collation:
                     description: Specifies how the SQL Managed Instance will be collated.
-                      Default value is SQL_Latin1_General_CP1_CI_AS. Changing this
-                      forces a new resource to be created.
+                      Defaults to SQL_Latin1_General_CP1_CI_AS. Changing this forces
+                      a new resource to be created.
                     type: string
                   databaseFormat:
                     description: Specifies the internal format of the SQL Managed
@@ -980,8 +980,8 @@ spec:
                     type: string
                   maintenanceConfigurationName:
                     description: The name of the Public Maintenance Configuration
-                      window to apply to the SQL Managed Instance. Valid values include
-                      SQL_Default or an Azure Location in the format SQL_{Location}_MI_{Size}(for
+                      window to apply to the SQL Managed Instance. Possible values
+                      are SQL_Default or an Azure Location in the format SQL_{Location}_MI_{Size}(for
                       example SQL_EastUS_MI_1). Defaults to SQL_Default.
                     type: string
                   minimumTlsVersion:
@@ -990,12 +990,12 @@ spec:
                     type: string
                   proxyOverride:
                     description: Specifies how the SQL Managed Instance will be accessed.
-                      Default value is Default. Valid values include Default, Proxy,
-                      and Redirect.
+                      Defaults to Default. Possible values are Default, Proxy, and
+                      Redirect.
                     type: string
                   publicDataEndpointEnabled:
-                    description: Is the public data endpoint enabled? Default value
-                      is false.
+                    description: Is the public data endpoint enabled? Defaults to
+                      false.
                     type: boolean
                   resourceGroupName:
                     description: The name of the resource group in which to create
@@ -1008,7 +1008,7 @@ spec:
                     type: string
                   skuName:
                     description: Specifies the SKU Name for the SQL Managed Instance.
-                      Valid values include GP_Gen4, GP_Gen5, GP_Gen8IM, GP_Gen8IH,
+                      Possible values are GP_Gen4, GP_Gen5, GP_Gen8IM, GP_Gen8IH,
                       BC_Gen4, BC_Gen5, BC_Gen8IM or BC_Gen8IH.
                     type: string
                   storageAccountType:
@@ -1032,8 +1032,8 @@ spec:
                     x-kubernetes-map-type: granular
                   timezoneId:
                     description: The TimeZone ID that the SQL Managed Instance will
-                      be operating in. Default value is UTC. Changing this forces
-                      a new resource to be created.
+                      be operating in. Defaults to UTC. Changing this forces a new
+                      resource to be created.
                     type: string
                   vcores:
                     description: Number of cores that should be assigned to the SQL
@@ -1042,8 +1042,8 @@ spec:
                       128 for Gen5 SKUs.
                     type: number
                   zoneRedundantEnabled:
-                    description: Specifies whether or not the SQL Managed Instance
-                      is zone redundant. Defaults to false.
+                    description: Specifies whether the SQL Managed Instance is zone
+                      redundant. Defaults to false.
                     type: boolean
                 type: object
               conditions:

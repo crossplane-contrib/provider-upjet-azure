@@ -810,6 +810,9 @@ type OrchestratedVirtualMachineScaleSetInitParameters struct {
 	// The maximum price you're willing to pay for each Virtual Machine in this Scale Set, in US Dollars; which must be greater than the current spot price. If this bid price falls below the current spot price the Virtual Machines in the Scale Set will be evicted using the eviction_policy. Defaults to -1, which means that each Virtual Machine in the Scale Set should not be evicted for price reasons.
 	MaxBidPrice *float64 `json:"maxBidPrice,omitempty" tf:"max_bid_price,omitempty"`
 
+	// Specifies the Microsoft.Network API version used when creating networking resources in the Network Interface Configurations for Virtual Machine Scale Set. Possible values are 2020-11-01 and 2022-11-01. Defaults to 2020-11-01.
+	NetworkAPIVersion *string `json:"networkApiVersion,omitempty" tf:"network_api_version,omitempty"`
+
 	// One or more network_interface blocks as defined below.
 	NetworkInterface []OrchestratedVirtualMachineScaleSetNetworkInterfaceInitParameters `json:"networkInterface,omitempty" tf:"network_interface,omitempty"`
 
@@ -875,6 +878,12 @@ type OrchestratedVirtualMachineScaleSetInitParameters struct {
 
 type OrchestratedVirtualMachineScaleSetNetworkInterfaceInitParameters struct {
 
+	// Specifies the auxiliary mode used to enable network high-performance feature on Network Virtual Appliances (NVAs). This feature offers competitive performance in Connections Per Second (CPS) optimization, along with improvements to handling large amounts of simultaneous connections. Possible values are AcceleratedConnections and Floating.
+	AuxiliaryMode *string `json:"auxiliaryMode,omitempty" tf:"auxiliary_mode,omitempty"`
+
+	// Specifies the SKU used for the network high-performance feature on Network Virtual Appliances (NVAs). Possible values are A1, A2, A4 and A8.
+	AuxiliarySku *string `json:"auxiliarySku,omitempty" tf:"auxiliary_sku,omitempty"`
+
 	// A list of IP Addresses of DNS Servers which should be assigned to the Network Interface.
 	DNSServers []*string `json:"dnsServers,omitempty" tf:"dns_servers,omitempty"`
 
@@ -899,6 +908,12 @@ type OrchestratedVirtualMachineScaleSetNetworkInterfaceInitParameters struct {
 
 type OrchestratedVirtualMachineScaleSetNetworkInterfaceObservation struct {
 
+	// Specifies the auxiliary mode used to enable network high-performance feature on Network Virtual Appliances (NVAs). This feature offers competitive performance in Connections Per Second (CPS) optimization, along with improvements to handling large amounts of simultaneous connections. Possible values are AcceleratedConnections and Floating.
+	AuxiliaryMode *string `json:"auxiliaryMode,omitempty" tf:"auxiliary_mode,omitempty"`
+
+	// Specifies the SKU used for the network high-performance feature on Network Virtual Appliances (NVAs). Possible values are A1, A2, A4 and A8.
+	AuxiliarySku *string `json:"auxiliarySku,omitempty" tf:"auxiliary_sku,omitempty"`
+
 	// A list of IP Addresses of DNS Servers which should be assigned to the Network Interface.
 	DNSServers []*string `json:"dnsServers,omitempty" tf:"dns_servers,omitempty"`
 
@@ -922,6 +937,14 @@ type OrchestratedVirtualMachineScaleSetNetworkInterfaceObservation struct {
 }
 
 type OrchestratedVirtualMachineScaleSetNetworkInterfaceParameters struct {
+
+	// Specifies the auxiliary mode used to enable network high-performance feature on Network Virtual Appliances (NVAs). This feature offers competitive performance in Connections Per Second (CPS) optimization, along with improvements to handling large amounts of simultaneous connections. Possible values are AcceleratedConnections and Floating.
+	// +kubebuilder:validation:Optional
+	AuxiliaryMode *string `json:"auxiliaryMode,omitempty" tf:"auxiliary_mode,omitempty"`
+
+	// Specifies the SKU used for the network high-performance feature on Network Virtual Appliances (NVAs). Possible values are A1, A2, A4 and A8.
+	// +kubebuilder:validation:Optional
+	AuxiliarySku *string `json:"auxiliarySku,omitempty" tf:"auxiliary_sku,omitempty"`
 
 	// A list of IP Addresses of DNS Servers which should be assigned to the Network Interface.
 	// +kubebuilder:validation:Optional
@@ -1001,6 +1024,9 @@ type OrchestratedVirtualMachineScaleSetObservation struct {
 
 	// The maximum price you're willing to pay for each Virtual Machine in this Scale Set, in US Dollars; which must be greater than the current spot price. If this bid price falls below the current spot price the Virtual Machines in the Scale Set will be evicted using the eviction_policy. Defaults to -1, which means that each Virtual Machine in the Scale Set should not be evicted for price reasons.
 	MaxBidPrice *float64 `json:"maxBidPrice,omitempty" tf:"max_bid_price,omitempty"`
+
+	// Specifies the Microsoft.Network API version used when creating networking resources in the Network Interface Configurations for Virtual Machine Scale Set. Possible values are 2020-11-01 and 2022-11-01. Defaults to 2020-11-01.
+	NetworkAPIVersion *string `json:"networkApiVersion,omitempty" tf:"network_api_version,omitempty"`
 
 	// One or more network_interface blocks as defined below.
 	NetworkInterface []OrchestratedVirtualMachineScaleSetNetworkInterfaceObservation `json:"networkInterface,omitempty" tf:"network_interface,omitempty"`
@@ -1227,6 +1253,10 @@ type OrchestratedVirtualMachineScaleSetParameters struct {
 	// The maximum price you're willing to pay for each Virtual Machine in this Scale Set, in US Dollars; which must be greater than the current spot price. If this bid price falls below the current spot price the Virtual Machines in the Scale Set will be evicted using the eviction_policy. Defaults to -1, which means that each Virtual Machine in the Scale Set should not be evicted for price reasons.
 	// +kubebuilder:validation:Optional
 	MaxBidPrice *float64 `json:"maxBidPrice,omitempty" tf:"max_bid_price,omitempty"`
+
+	// Specifies the Microsoft.Network API version used when creating networking resources in the Network Interface Configurations for Virtual Machine Scale Set. Possible values are 2020-11-01 and 2022-11-01. Defaults to 2020-11-01.
+	// +kubebuilder:validation:Optional
+	NetworkAPIVersion *string `json:"networkApiVersion,omitempty" tf:"network_api_version,omitempty"`
 
 	// One or more network_interface blocks as defined below.
 	// +kubebuilder:validation:Optional
@@ -1616,7 +1646,7 @@ type PublicIPAddressIPTagParameters struct {
 
 type SkuProfileInitParameters struct {
 
-	// Specifies the allocation strategy for the virtual machine scale set based on which the VMs will be allocated. Possible values are LowestPrice and CapacityOptimized.
+	// Specifies the allocation strategy for the virtual machine scale set based on which the VMs will be allocated. Possible values are CapacityOptimized, LowestPrice and Prioritized.
 	AllocationStrategy *string `json:"allocationStrategy,omitempty" tf:"allocation_strategy,omitempty"`
 
 	// Specifies the VM sizes for the virtual machine scale set.
@@ -1626,7 +1656,7 @@ type SkuProfileInitParameters struct {
 
 type SkuProfileObservation struct {
 
-	// Specifies the allocation strategy for the virtual machine scale set based on which the VMs will be allocated. Possible values are LowestPrice and CapacityOptimized.
+	// Specifies the allocation strategy for the virtual machine scale set based on which the VMs will be allocated. Possible values are CapacityOptimized, LowestPrice and Prioritized.
 	AllocationStrategy *string `json:"allocationStrategy,omitempty" tf:"allocation_strategy,omitempty"`
 
 	// Specifies the VM sizes for the virtual machine scale set.
@@ -1636,7 +1666,7 @@ type SkuProfileObservation struct {
 
 type SkuProfileParameters struct {
 
-	// Specifies the allocation strategy for the virtual machine scale set based on which the VMs will be allocated. Possible values are LowestPrice and CapacityOptimized.
+	// Specifies the allocation strategy for the virtual machine scale set based on which the VMs will be allocated. Possible values are CapacityOptimized, LowestPrice and Prioritized.
 	// +kubebuilder:validation:Optional
 	AllocationStrategy *string `json:"allocationStrategy" tf:"allocation_strategy,omitempty"`
 

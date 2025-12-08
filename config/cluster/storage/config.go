@@ -89,6 +89,10 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			TerraformName: "azurerm_storage_account",
 			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",true)`,
 		}
+		r.References["storage_share_id"] = config.Reference{
+			TerraformName: "azurerm_storage_share",
+			Extractor:     "github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()",
+		}
 	})
 
 	p.AddResourceConfigurator("azurerm_storage_table_entity", func(r *config.Resource) {

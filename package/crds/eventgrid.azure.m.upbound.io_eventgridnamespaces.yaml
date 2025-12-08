@@ -184,7 +184,8 @@ spec:
                     type: string
                   publicNetworkAccess:
                     description: Whether or not public network access is allowed for
-                      this server. Defaults to Enabled.
+                      this server. Possible values are Enabled and Disabled. Defaults
+                      to Enabled.
                     type: string
                   resourceGroupName:
                     description: The name of the resource group in which the Event
@@ -285,6 +286,7 @@ spec:
                     x-kubernetes-map-type: granular
                   topicSpacesConfiguration:
                     description: A topic_spaces_configuration block as defined below.
+                      Changing this forces a new resource to be created.
                     items:
                       properties:
                         alternativeAuthenticationNameSource:
@@ -476,7 +478,8 @@ spec:
                     type: string
                   publicNetworkAccess:
                     description: Whether or not public network access is allowed for
-                      this server. Defaults to Enabled.
+                      this server. Possible values are Enabled and Disabled. Defaults
+                      to Enabled.
                     type: string
                   sku:
                     description: Defines which tier to use. The only possible value
@@ -490,6 +493,7 @@ spec:
                     x-kubernetes-map-type: granular
                   topicSpacesConfiguration:
                     description: A topic_spaces_configuration block as defined below.
+                      Changing this forces a new resource to be created.
                     items:
                       properties:
                         alternativeAuthenticationNameSource:
@@ -660,7 +664,8 @@ spec:
                     type: string
                   publicNetworkAccess:
                     description: Whether or not public network access is allowed for
-                      this server. Defaults to Enabled.
+                      this server. Possible values are Enabled and Disabled. Defaults
+                      to Enabled.
                     type: string
                   resourceGroupName:
                     description: The name of the resource group in which the Event
@@ -679,6 +684,7 @@ spec:
                     x-kubernetes-map-type: granular
                   topicSpacesConfiguration:
                     description: A topic_spaces_configuration block as defined below.
+                      Changing this forces a new resource to be created.
                     items:
                       properties:
                         alternativeAuthenticationNameSource:

@@ -75,7 +75,7 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: The description of the Network Manager.
+                    description: The description of the Network Manager Routing Configuration.
                     type: string
                   networkManagerId:
                     description: The ID of the Network Manager. Changing this forces
@@ -170,7 +170,7 @@ spec:
                   autoscaler.
                 properties:
                   description:
-                    description: The description of the Network Manager.
+                    description: The description of the Network Manager Routing Configuration.
                     type: string
                 type: object
               managementPolicies:
@@ -266,7 +266,7 @@ spec:
               atProvider:
                 properties:
                   description:
-                    description: The description of the Network Manager.
+                    description: The description of the Network Manager Routing Configuration.
                     type: string
                   id:
                     description: The ID of the Network Manager Routing Configuration.

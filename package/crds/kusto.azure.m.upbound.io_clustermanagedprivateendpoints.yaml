@@ -677,6 +677,8 @@ spec:
                       is created. Changing this forces a new resource to be created.
                     type: string
                   id:
+                    description: The ID of the Managed Private Endpoint for a Kusto
+                      Cluster.
                     type: string
                   privateLinkResourceId:
                     description: The ARM resource ID of the resource for which the

@@ -151,9 +151,6 @@ spec:
                         type: object
                     type: object
                   enableTcpReset:
-                    description: Receive bidirectional TCP Reset on TCP flow idle
-                      timeout or unexpected connection termination. This element is
-                      only used when the protocol is set to TCP.
                     type: boolean
                   frontendIpConfiguration:
                     description: One or more frontend_ip_configuration blocks as defined
@@ -259,6 +256,11 @@ spec:
                     description: The transport protocol for the external endpoint.
                       Possible values are Udp, Tcp or All.
                     type: string
+                  tcpResetEnabled:
+                    description: Receive bidirectional TCP Reset on TCP flow idle
+                      timeout or unexpected connection termination. This element is
+                      only used when the protocol is set to TCP.
+                    type: boolean
                 type: object
               initProvider:
                 description: |-
@@ -364,9 +366,6 @@ spec:
                         type: object
                     type: object
                   enableTcpReset:
-                    description: Receive bidirectional TCP Reset on TCP flow idle
-                      timeout or unexpected connection termination. This element is
-                      only used when the protocol is set to TCP.
                     type: boolean
                   frontendIpConfiguration:
                     description: One or more frontend_ip_configuration blocks as defined
@@ -386,6 +385,11 @@ spec:
                     description: The transport protocol for the external endpoint.
                       Possible values are Udp, Tcp or All.
                     type: string
+                  tcpResetEnabled:
+                    description: Receive bidirectional TCP Reset on TCP flow idle
+                      timeout or unexpected connection termination. This element is
+                      only used when the protocol is set to TCP.
+                    type: boolean
                 type: object
               managementPolicies:
                 default:
@@ -465,9 +469,6 @@ spec:
                       is randomly load balanced across IPs in the backend IPs.
                     type: string
                   enableTcpReset:
-                    description: Receive bidirectional TCP Reset on TCP flow idle
-                      timeout or unexpected connection termination. This element is
-                      only used when the protocol is set to TCP.
                     type: boolean
                   frontendIpConfiguration:
                     description: One or more frontend_ip_configuration blocks as defined
@@ -497,6 +498,11 @@ spec:
                     description: The transport protocol for the external endpoint.
                       Possible values are Udp, Tcp or All.
                     type: string
+                  tcpResetEnabled:
+                    description: Receive bidirectional TCP Reset on TCP flow idle
+                      timeout or unexpected connection termination. This element is
+                      only used when the protocol is set to TCP.
+                    type: boolean
                 type: object
               conditions:
                 description: Conditions of the resource.

@@ -158,7 +158,7 @@ type PolicySetDefinitionInitParameters struct {
 	// The metadata for the Policy Set Definition in JSON format.
 	Metadata *string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
-	// The parameters for the Policy Set Definition in JSON format.
+	// The parameters for the Policy Set Definition in JSON format. Reducing the number of parameters forces a new resource to be created.
 	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// One or more policy_definition_group blocks as defined below.
@@ -188,7 +188,7 @@ type PolicySetDefinitionObservation struct {
 	// The metadata for the Policy Set Definition in JSON format.
 	Metadata *string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
-	// The parameters for the Policy Set Definition in JSON format.
+	// The parameters for the Policy Set Definition in JSON format. Reducing the number of parameters forces a new resource to be created.
 	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// One or more policy_definition_group blocks as defined below.
@@ -229,7 +229,7 @@ type PolicySetDefinitionParameters struct {
 	// +kubebuilder:validation:Optional
 	Metadata *string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
-	// The parameters for the Policy Set Definition in JSON format.
+	// The parameters for the Policy Set Definition in JSON format. Reducing the number of parameters forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 

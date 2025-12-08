@@ -182,7 +182,7 @@ type WatcherFlowLogInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The ID of the Resource for which to enable flow logs for. Changing this forces a new resource to be created.
+	// The ID of the Resource for which to enable flow logs for.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
@@ -232,7 +232,7 @@ type WatcherFlowLogObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The ID of the Resource for which to enable flow logs for. Changing this forces a new resource to be created.
+	// The ID of the Resource for which to enable flow logs for.
 	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
 
 	// A traffic_analytics block as documented below.
@@ -315,7 +315,7 @@ type WatcherFlowLogParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The ID of the Resource for which to enable flow logs for. Changing this forces a new resource to be created.
+	// The ID of the Resource for which to enable flow logs for.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

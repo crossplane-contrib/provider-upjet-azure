@@ -4284,6 +4284,21 @@ func (in *SystemTopicInitParameters) DeepCopyInto(out *SystemTopicInitParameters
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.SourceResourceID != nil {
+		in, out := &in.SourceResourceID, &out.SourceResourceID
+		*out = new(string)
+		**out = **in
+	}
+	if in.SourceResourceIDRef != nil {
+		in, out := &in.SourceResourceIDRef, &out.SourceResourceIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SourceResourceIDSelector != nil {
+		in, out := &in.SourceResourceIDSelector, &out.SourceResourceIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -4372,6 +4387,11 @@ func (in *SystemTopicObservation) DeepCopyInto(out *SystemTopicObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.MetricResourceID != nil {
+		in, out := &in.MetricResourceID, &out.MetricResourceID
+		*out = new(string)
+		**out = **in
+	}
 	if in.ResourceGroupName != nil {
 		in, out := &in.ResourceGroupName, &out.ResourceGroupName
 		*out = new(string)
@@ -4379,6 +4399,11 @@ func (in *SystemTopicObservation) DeepCopyInto(out *SystemTopicObservation) {
 	}
 	if in.SourceArmResourceID != nil {
 		in, out := &in.SourceArmResourceID, &out.SourceArmResourceID
+		*out = new(string)
+		**out = **in
+	}
+	if in.SourceResourceID != nil {
+		in, out := &in.SourceResourceID, &out.SourceResourceID
 		*out = new(string)
 		**out = **in
 	}
@@ -4455,6 +4480,21 @@ func (in *SystemTopicParameters) DeepCopyInto(out *SystemTopicParameters) {
 	}
 	if in.SourceArmResourceIDSelector != nil {
 		in, out := &in.SourceArmResourceIDSelector, &out.SourceArmResourceIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SourceResourceID != nil {
+		in, out := &in.SourceResourceID, &out.SourceResourceID
+		*out = new(string)
+		**out = **in
+	}
+	if in.SourceResourceIDRef != nil {
+		in, out := &in.SourceResourceIDRef, &out.SourceResourceIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SourceResourceIDSelector != nil {
+		in, out := &in.SourceResourceIDSelector, &out.SourceResourceIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}

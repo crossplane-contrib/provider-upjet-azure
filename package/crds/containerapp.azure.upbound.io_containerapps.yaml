@@ -562,8 +562,8 @@ spec:
                                 type: array
                               cpu:
                                 description: |-
-                                  The amount of vCPU to allocate to the container. Possible values include 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, and 2.0. When there's a workload profile specified, there's no such constraint.
-                                  The amount of vCPU to allocate to the container. Possible values include `0.25`, `0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `1.75`, and `2.0`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.0` / `2.0` or `0.5` / `1.0`. When there's a workload profile specified, there's no such constraint.
+                                  The amount of vCPU to allocate to the container.
+                                  The amount of vCPU to allocate to the container.
                                 type: number
                               env:
                                 description: One or more env blocks as detailed below.
@@ -655,8 +655,8 @@ spec:
                                 type: array
                               memory:
                                 description: |-
-                                  The amount of memory to allocate to the container. Possible values are 0.5Gi, 1Gi, 1.5Gi, 2Gi, 2.5Gi, 3Gi, 3.5Gi and 4Gi. When there's a workload profile specified, there's no such constraint.
-                                  The amount of memory to allocate to the container. Possible values include `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`, `2.5Gi`, `3.0Gi`, `3.5Gi`, and `4.0Gi`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.25` / `2.5Gi` or `0.75` / `1.5Gi`. When there's a workload profile specified, there's no such constraint.
+                                  The amount of memory to allocate to the container.
+                                  The amount of memory to allocate to the container.
                                 type: string
                               name:
                                 description: |-
@@ -815,6 +815,11 @@ spec:
                                 type: array
                             type: object
                           type: array
+                        cooldownPeriodInSeconds:
+                          description: |-
+                            The number of seconds to wait before scaling down the number of instances again. Defaults to 300.
+                            The number of seconds to wait before scaling down the number of instances again.
+                          type: number
                         customScaleRule:
                           description: One or more custom_scale_rule blocks as defined
                             below.
@@ -918,8 +923,8 @@ spec:
                                 type: array
                               cpu:
                                 description: |-
-                                  The amount of vCPU to allocate to the container. Possible values include 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, and 2.0. When there's a workload profile specified, there's no such constraint.
-                                  The amount of vCPU to allocate to the container. Possible values include `0.25`, `0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `1.75`, and `2.0`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.0` / `2.0` or `0.5` / `1.0`. When there's a workload profile specified, there's no such constraint.
+                                  The amount of vCPU to allocate to the container.
+                                  The amount of vCPU to allocate to the container.
                                 type: number
                               env:
                                 description: One or more env blocks as detailed below.
@@ -949,8 +954,8 @@ spec:
                                 type: string
                               memory:
                                 description: |-
-                                  The amount of memory to allocate to the container. Possible values are 0.5Gi, 1Gi, 1.5Gi, 2Gi, 2.5Gi, 3Gi, 3.5Gi and 4Gi. When there's a workload profile specified, there's no such constraint.
-                                  The amount of memory to allocate to the container. Possible values include `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`, `2.5Gi`, `3.0Gi`, `3.5Gi`, and `4.0Gi`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.25` / `2.5Gi` or `0.75` / `1.5Gi`. When there's a workload profile specified, there's no such constraint.
+                                  The amount of memory to allocate to the container.
+                                  The amount of memory to allocate to the container.
                                 type: string
                               name:
                                 description: |-
@@ -989,6 +994,11 @@ spec:
                           description: |-
                             The minimum number of replicas for this container.
                             The minimum number of replicas for this container.
+                          type: number
+                        pollingIntervalInSeconds:
+                          description: |-
+                            The interval in seconds used for polling KEDA. Defaults to 30.
+                            The interval in seconds used for polling KEDA.
                           type: number
                         revisionSuffix:
                           description: |-
@@ -1051,7 +1061,7 @@ spec:
                                 type: string
                               storageType:
                                 description: |-
-                                  The type of storage volume. Possible values are AzureFile, EmptyDir and Secret. Defaults to EmptyDir.
+                                  The type of storage volume. Possible values are AzureFile, EmptyDir, NfsAzureFile and Secret. Defaults to EmptyDir.
                                   The type of storage volume. Possible values include `AzureFile` and `EmptyDir`. Defaults to `EmptyDir`.
                                 type: string
                             type: object
@@ -1486,8 +1496,8 @@ spec:
                                 type: array
                               cpu:
                                 description: |-
-                                  The amount of vCPU to allocate to the container. Possible values include 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, and 2.0. When there's a workload profile specified, there's no such constraint.
-                                  The amount of vCPU to allocate to the container. Possible values include `0.25`, `0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `1.75`, and `2.0`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.0` / `2.0` or `0.5` / `1.0`. When there's a workload profile specified, there's no such constraint.
+                                  The amount of vCPU to allocate to the container.
+                                  The amount of vCPU to allocate to the container.
                                 type: number
                               env:
                                 description: One or more env blocks as detailed below.
@@ -1579,8 +1589,8 @@ spec:
                                 type: array
                               memory:
                                 description: |-
-                                  The amount of memory to allocate to the container. Possible values are 0.5Gi, 1Gi, 1.5Gi, 2Gi, 2.5Gi, 3Gi, 3.5Gi and 4Gi. When there's a workload profile specified, there's no such constraint.
-                                  The amount of memory to allocate to the container. Possible values include `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`, `2.5Gi`, `3.0Gi`, `3.5Gi`, and `4.0Gi`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.25` / `2.5Gi` or `0.75` / `1.5Gi`. When there's a workload profile specified, there's no such constraint.
+                                  The amount of memory to allocate to the container.
+                                  The amount of memory to allocate to the container.
                                 type: string
                               name:
                                 description: |-
@@ -1739,6 +1749,11 @@ spec:
                                 type: array
                             type: object
                           type: array
+                        cooldownPeriodInSeconds:
+                          description: |-
+                            The number of seconds to wait before scaling down the number of instances again. Defaults to 300.
+                            The number of seconds to wait before scaling down the number of instances again.
+                          type: number
                         customScaleRule:
                           description: One or more custom_scale_rule blocks as defined
                             below.
@@ -1842,8 +1857,8 @@ spec:
                                 type: array
                               cpu:
                                 description: |-
-                                  The amount of vCPU to allocate to the container. Possible values include 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, and 2.0. When there's a workload profile specified, there's no such constraint.
-                                  The amount of vCPU to allocate to the container. Possible values include `0.25`, `0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `1.75`, and `2.0`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.0` / `2.0` or `0.5` / `1.0`. When there's a workload profile specified, there's no such constraint.
+                                  The amount of vCPU to allocate to the container.
+                                  The amount of vCPU to allocate to the container.
                                 type: number
                               env:
                                 description: One or more env blocks as detailed below.
@@ -1873,8 +1888,8 @@ spec:
                                 type: string
                               memory:
                                 description: |-
-                                  The amount of memory to allocate to the container. Possible values are 0.5Gi, 1Gi, 1.5Gi, 2Gi, 2.5Gi, 3Gi, 3.5Gi and 4Gi. When there's a workload profile specified, there's no such constraint.
-                                  The amount of memory to allocate to the container. Possible values include `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`, `2.5Gi`, `3.0Gi`, `3.5Gi`, and `4.0Gi`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.25` / `2.5Gi` or `0.75` / `1.5Gi`. When there's a workload profile specified, there's no such constraint.
+                                  The amount of memory to allocate to the container.
+                                  The amount of memory to allocate to the container.
                                 type: string
                               name:
                                 description: |-
@@ -1913,6 +1928,11 @@ spec:
                           description: |-
                             The minimum number of replicas for this container.
                             The minimum number of replicas for this container.
+                          type: number
+                        pollingIntervalInSeconds:
+                          description: |-
+                            The interval in seconds used for polling KEDA. Defaults to 30.
+                            The interval in seconds used for polling KEDA.
                           type: number
                         revisionSuffix:
                           description: |-
@@ -1975,7 +1995,7 @@ spec:
                                 type: string
                               storageType:
                                 description: |-
-                                  The type of storage volume. Possible values are AzureFile, EmptyDir and Secret. Defaults to EmptyDir.
+                                  The type of storage volume. Possible values are AzureFile, EmptyDir, NfsAzureFile and Secret. Defaults to EmptyDir.
                                   The type of storage volume. Possible values include `AzureFile` and `EmptyDir`. Defaults to `EmptyDir`.
                                 type: string
                             type: object
@@ -2437,8 +2457,8 @@ spec:
                                 type: array
                               cpu:
                                 description: |-
-                                  The amount of vCPU to allocate to the container. Possible values include 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, and 2.0. When there's a workload profile specified, there's no such constraint.
-                                  The amount of vCPU to allocate to the container. Possible values include `0.25`, `0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `1.75`, and `2.0`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.0` / `2.0` or `0.5` / `1.0`. When there's a workload profile specified, there's no such constraint.
+                                  The amount of vCPU to allocate to the container.
+                                  The amount of vCPU to allocate to the container.
                                 type: number
                               env:
                                 description: One or more env blocks as detailed below.
@@ -2540,8 +2560,8 @@ spec:
                                 type: array
                               memory:
                                 description: |-
-                                  The amount of memory to allocate to the container. Possible values are 0.5Gi, 1Gi, 1.5Gi, 2Gi, 2.5Gi, 3Gi, 3.5Gi and 4Gi. When there's a workload profile specified, there's no such constraint.
-                                  The amount of memory to allocate to the container. Possible values include `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`, `2.5Gi`, `3.0Gi`, `3.5Gi`, and `4.0Gi`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.25` / `2.5Gi` or `0.75` / `1.5Gi`. When there's a workload profile specified, there's no such constraint.
+                                  The amount of memory to allocate to the container.
+                                  The amount of memory to allocate to the container.
                                 type: string
                               name:
                                 description: |-
@@ -2705,6 +2725,11 @@ spec:
                                 type: array
                             type: object
                           type: array
+                        cooldownPeriodInSeconds:
+                          description: |-
+                            The number of seconds to wait before scaling down the number of instances again. Defaults to 300.
+                            The number of seconds to wait before scaling down the number of instances again.
+                          type: number
                         customScaleRule:
                           description: One or more custom_scale_rule blocks as defined
                             below.
@@ -2808,8 +2833,8 @@ spec:
                                 type: array
                               cpu:
                                 description: |-
-                                  The amount of vCPU to allocate to the container. Possible values include 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, and 2.0. When there's a workload profile specified, there's no such constraint.
-                                  The amount of vCPU to allocate to the container. Possible values include `0.25`, `0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `1.75`, and `2.0`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.0` / `2.0` or `0.5` / `1.0`. When there's a workload profile specified, there's no such constraint.
+                                  The amount of vCPU to allocate to the container.
+                                  The amount of vCPU to allocate to the container.
                                 type: number
                               env:
                                 description: One or more env blocks as detailed below.
@@ -2844,8 +2869,8 @@ spec:
                                 type: string
                               memory:
                                 description: |-
-                                  The amount of memory to allocate to the container. Possible values are 0.5Gi, 1Gi, 1.5Gi, 2Gi, 2.5Gi, 3Gi, 3.5Gi and 4Gi. When there's a workload profile specified, there's no such constraint.
-                                  The amount of memory to allocate to the container. Possible values include `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`, `2.5Gi`, `3.0Gi`, `3.5Gi`, and `4.0Gi`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.25` / `2.5Gi` or `0.75` / `1.5Gi`. When there's a workload profile specified, there's no such constraint.
+                                  The amount of memory to allocate to the container.
+                                  The amount of memory to allocate to the container.
                                 type: string
                               name:
                                 description: |-
@@ -2884,6 +2909,11 @@ spec:
                           description: |-
                             The minimum number of replicas for this container.
                             The minimum number of replicas for this container.
+                          type: number
+                        pollingIntervalInSeconds:
+                          description: |-
+                            The interval in seconds used for polling KEDA. Defaults to 30.
+                            The interval in seconds used for polling KEDA.
                           type: number
                         revisionSuffix:
                           description: |-
@@ -2946,7 +2976,7 @@ spec:
                                 type: string
                               storageType:
                                 description: |-
-                                  The type of storage volume. Possible values are AzureFile, EmptyDir and Secret. Defaults to EmptyDir.
+                                  The type of storage volume. Possible values are AzureFile, EmptyDir, NfsAzureFile and Secret. Defaults to EmptyDir.
                                   The type of storage volume. Possible values include `AzureFile` and `EmptyDir`. Defaults to `EmptyDir`.
                                 type: string
                             type: object
@@ -3550,8 +3580,8 @@ spec:
                               type: array
                             cpu:
                               description: |-
-                                The amount of vCPU to allocate to the container. Possible values include 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, and 2.0. When there's a workload profile specified, there's no such constraint.
-                                The amount of vCPU to allocate to the container. Possible values include `0.25`, `0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `1.75`, and `2.0`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.0` / `2.0` or `0.5` / `1.0`. When there's a workload profile specified, there's no such constraint.
+                                The amount of vCPU to allocate to the container.
+                                The amount of vCPU to allocate to the container.
                               type: number
                             env:
                               description: One or more env blocks as detailed below.
@@ -3643,8 +3673,8 @@ spec:
                               type: array
                             memory:
                               description: |-
-                                The amount of memory to allocate to the container. Possible values are 0.5Gi, 1Gi, 1.5Gi, 2Gi, 2.5Gi, 3Gi, 3.5Gi and 4Gi. When there's a workload profile specified, there's no such constraint.
-                                The amount of memory to allocate to the container. Possible values include `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`, `2.5Gi`, `3.0Gi`, `3.5Gi`, and `4.0Gi`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.25` / `2.5Gi` or `0.75` / `1.5Gi`. When there's a workload profile specified, there's no such constraint.
+                                The amount of memory to allocate to the container.
+                                The amount of memory to allocate to the container.
                               type: string
                             name:
                               description: |-
@@ -3803,6 +3833,11 @@ spec:
                               type: array
                           type: object
                         type: array
+                      cooldownPeriodInSeconds:
+                        description: |-
+                          The number of seconds to wait before scaling down the number of instances again. Defaults to 300.
+                          The number of seconds to wait before scaling down the number of instances again.
+                        type: number
                       customScaleRule:
                         description: One or more custom_scale_rule blocks as defined
                           below.
@@ -3904,8 +3939,8 @@ spec:
                               type: array
                             cpu:
                               description: |-
-                                The amount of vCPU to allocate to the container. Possible values include 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, and 2.0. When there's a workload profile specified, there's no such constraint.
-                                The amount of vCPU to allocate to the container. Possible values include `0.25`, `0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `1.75`, and `2.0`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.0` / `2.0` or `0.5` / `1.0`. When there's a workload profile specified, there's no such constraint.
+                                The amount of vCPU to allocate to the container.
+                                The amount of vCPU to allocate to the container.
                               type: number
                             env:
                               description: One or more env blocks as detailed below.
@@ -3935,8 +3970,8 @@ spec:
                               type: string
                             memory:
                               description: |-
-                                The amount of memory to allocate to the container. Possible values are 0.5Gi, 1Gi, 1.5Gi, 2Gi, 2.5Gi, 3Gi, 3.5Gi and 4Gi. When there's a workload profile specified, there's no such constraint.
-                                The amount of memory to allocate to the container. Possible values include `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`, `2.5Gi`, `3.0Gi`, `3.5Gi`, and `4.0Gi`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.25` / `2.5Gi` or `0.75` / `1.5Gi`. When there's a workload profile specified, there's no such constraint.
+                                The amount of memory to allocate to the container.
+                                The amount of memory to allocate to the container.
                               type: string
                             name:
                               description: |-
@@ -3975,6 +4010,11 @@ spec:
                         description: |-
                           The minimum number of replicas for this container.
                           The minimum number of replicas for this container.
+                        type: number
+                      pollingIntervalInSeconds:
+                        description: |-
+                          The interval in seconds used for polling KEDA. Defaults to 30.
+                          The interval in seconds used for polling KEDA.
                         type: number
                       revisionSuffix:
                         description: |-
@@ -4037,7 +4077,7 @@ spec:
                               type: string
                             storageType:
                               description: |-
-                                The type of storage volume. Possible values are AzureFile, EmptyDir and Secret. Defaults to EmptyDir.
+                                The type of storage volume. Possible values are AzureFile, EmptyDir, NfsAzureFile and Secret. Defaults to EmptyDir.
                                 The type of storage volume. Possible values include `AzureFile` and `EmptyDir`. Defaults to `EmptyDir`.
                               type: string
                           type: object
@@ -4458,8 +4498,8 @@ spec:
                               type: array
                             cpu:
                               description: |-
-                                The amount of vCPU to allocate to the container. Possible values include 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, and 2.0. When there's a workload profile specified, there's no such constraint.
-                                The amount of vCPU to allocate to the container. Possible values include `0.25`, `0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `1.75`, and `2.0`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.0` / `2.0` or `0.5` / `1.0`. When there's a workload profile specified, there's no such constraint.
+                                The amount of vCPU to allocate to the container.
+                                The amount of vCPU to allocate to the container.
                               type: number
                             env:
                               description: One or more env blocks as detailed below.
@@ -4551,8 +4591,8 @@ spec:
                               type: array
                             memory:
                               description: |-
-                                The amount of memory to allocate to the container. Possible values are 0.5Gi, 1Gi, 1.5Gi, 2Gi, 2.5Gi, 3Gi, 3.5Gi and 4Gi. When there's a workload profile specified, there's no such constraint.
-                                The amount of memory to allocate to the container. Possible values include `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`, `2.5Gi`, `3.0Gi`, `3.5Gi`, and `4.0Gi`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.25` / `2.5Gi` or `0.75` / `1.5Gi`. When there's a workload profile specified, there's no such constraint.
+                                The amount of memory to allocate to the container.
+                                The amount of memory to allocate to the container.
                               type: string
                             name:
                               description: |-
@@ -4711,6 +4751,11 @@ spec:
                               type: array
                           type: object
                         type: array
+                      cooldownPeriodInSeconds:
+                        description: |-
+                          The number of seconds to wait before scaling down the number of instances again. Defaults to 300.
+                          The number of seconds to wait before scaling down the number of instances again.
+                        type: number
                       customScaleRule:
                         description: One or more custom_scale_rule blocks as defined
                           below.
@@ -4812,8 +4857,8 @@ spec:
                               type: array
                             cpu:
                               description: |-
-                                The amount of vCPU to allocate to the container. Possible values include 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, and 2.0. When there's a workload profile specified, there's no such constraint.
-                                The amount of vCPU to allocate to the container. Possible values include `0.25`, `0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `1.75`, and `2.0`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.0` / `2.0` or `0.5` / `1.0`. When there's a workload profile specified, there's no such constraint.
+                                The amount of vCPU to allocate to the container.
+                                The amount of vCPU to allocate to the container.
                               type: number
                             env:
                               description: One or more env blocks as detailed below.
@@ -4843,8 +4888,8 @@ spec:
                               type: string
                             memory:
                               description: |-
-                                The amount of memory to allocate to the container. Possible values are 0.5Gi, 1Gi, 1.5Gi, 2Gi, 2.5Gi, 3Gi, 3.5Gi and 4Gi. When there's a workload profile specified, there's no such constraint.
-                                The amount of memory to allocate to the container. Possible values include `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`, `2.5Gi`, `3.0Gi`, `3.5Gi`, and `4.0Gi`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.25` / `2.5Gi` or `0.75` / `1.5Gi`. When there's a workload profile specified, there's no such constraint.
+                                The amount of memory to allocate to the container.
+                                The amount of memory to allocate to the container.
                               type: string
                             name:
                               description: |-
@@ -4883,6 +4928,11 @@ spec:
                         description: |-
                           The minimum number of replicas for this container.
                           The minimum number of replicas for this container.
+                        type: number
+                      pollingIntervalInSeconds:
+                        description: |-
+                          The interval in seconds used for polling KEDA. Defaults to 30.
+                          The interval in seconds used for polling KEDA.
                         type: number
                       revisionSuffix:
                         description: |-
@@ -4945,7 +4995,7 @@ spec:
                               type: string
                             storageType:
                               description: |-
-                                The type of storage volume. Possible values are AzureFile, EmptyDir and Secret. Defaults to EmptyDir.
+                                The type of storage volume. Possible values are AzureFile, EmptyDir, NfsAzureFile and Secret. Defaults to EmptyDir.
                                 The type of storage volume. Possible values include `AzureFile` and `EmptyDir`. Defaults to `EmptyDir`.
                               type: string
                           type: object
@@ -5392,8 +5442,8 @@ spec:
                               type: array
                             cpu:
                               description: |-
-                                The amount of vCPU to allocate to the container. Possible values include 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, and 2.0. When there's a workload profile specified, there's no such constraint.
-                                The amount of vCPU to allocate to the container. Possible values include `0.25`, `0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `1.75`, and `2.0`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.0` / `2.0` or `0.5` / `1.0`. When there's a workload profile specified, there's no such constraint.
+                                The amount of vCPU to allocate to the container.
+                                The amount of vCPU to allocate to the container.
                               type: number
                             env:
                               description: One or more env blocks as detailed below.
@@ -5495,8 +5545,8 @@ spec:
                               type: array
                             memory:
                               description: |-
-                                The amount of memory to allocate to the container. Possible values are 0.5Gi, 1Gi, 1.5Gi, 2Gi, 2.5Gi, 3Gi, 3.5Gi and 4Gi. When there's a workload profile specified, there's no such constraint.
-                                The amount of memory to allocate to the container. Possible values include `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`, `2.5Gi`, `3.0Gi`, `3.5Gi`, and `4.0Gi`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.25` / `2.5Gi` or `0.75` / `1.5Gi`. When there's a workload profile specified, there's no such constraint.
+                                The amount of memory to allocate to the container.
+                                The amount of memory to allocate to the container.
                               type: string
                             name:
                               description: |-
@@ -5660,6 +5710,11 @@ spec:
                               type: array
                           type: object
                         type: array
+                      cooldownPeriodInSeconds:
+                        description: |-
+                          The number of seconds to wait before scaling down the number of instances again. Defaults to 300.
+                          The number of seconds to wait before scaling down the number of instances again.
+                        type: number
                       customScaleRule:
                         description: One or more custom_scale_rule blocks as defined
                           below.
@@ -5761,8 +5816,8 @@ spec:
                               type: array
                             cpu:
                               description: |-
-                                The amount of vCPU to allocate to the container. Possible values include 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, and 2.0. When there's a workload profile specified, there's no such constraint.
-                                The amount of vCPU to allocate to the container. Possible values include `0.25`, `0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `1.75`, and `2.0`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.0` / `2.0` or `0.5` / `1.0`. When there's a workload profile specified, there's no such constraint.
+                                The amount of vCPU to allocate to the container.
+                                The amount of vCPU to allocate to the container.
                               type: number
                             env:
                               description: One or more env blocks as detailed below.
@@ -5797,8 +5852,8 @@ spec:
                               type: string
                             memory:
                               description: |-
-                                The amount of memory to allocate to the container. Possible values are 0.5Gi, 1Gi, 1.5Gi, 2Gi, 2.5Gi, 3Gi, 3.5Gi and 4Gi. When there's a workload profile specified, there's no such constraint.
-                                The amount of memory to allocate to the container. Possible values include `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`, `2.5Gi`, `3.0Gi`, `3.5Gi`, and `4.0Gi`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.25` / `2.5Gi` or `0.75` / `1.5Gi`. When there's a workload profile specified, there's no such constraint.
+                                The amount of memory to allocate to the container.
+                                The amount of memory to allocate to the container.
                               type: string
                             name:
                               description: |-
@@ -5837,6 +5892,11 @@ spec:
                         description: |-
                           The minimum number of replicas for this container.
                           The minimum number of replicas for this container.
+                        type: number
+                      pollingIntervalInSeconds:
+                        description: |-
+                          The interval in seconds used for polling KEDA. Defaults to 30.
+                          The interval in seconds used for polling KEDA.
                         type: number
                       revisionSuffix:
                         description: |-
@@ -5899,7 +5959,7 @@ spec:
                               type: string
                             storageType:
                               description: |-
-                                The type of storage volume. Possible values are AzureFile, EmptyDir and Secret. Defaults to EmptyDir.
+                                The type of storage volume. Possible values are AzureFile, EmptyDir, NfsAzureFile and Secret. Defaults to EmptyDir.
                                 The type of storage volume. Possible values include `AzureFile` and `EmptyDir`. Defaults to `EmptyDir`.
                               type: string
                           type: object

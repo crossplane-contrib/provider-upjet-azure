@@ -132,10 +132,11 @@ type EnvironmentDaprComponentParameters struct {
 
 type EnvironmentDaprComponentSecretInitParameters struct {
 
+	// The identity to use for accessing key vault reference. Possible values are the Resource ID of a User Assigned Managed Identity, or System to use the System Assigned Managed Identity.
 	// The identity to use for accessing key vault reference.
 	Identity *string `json:"identity,omitempty" tf:"identity,omitempty"`
 
-	// The ID of the Container App Environment Dapr Component
+	// The Key Vault Secret ID.
 	// The Key Vault Secret ID. Could be either one of `id` or `versionless_id`.
 	KeyVaultSecretID *string `json:"keyVaultSecretId,omitempty" tf:"key_vault_secret_id,omitempty"`
 
@@ -150,10 +151,11 @@ type EnvironmentDaprComponentSecretInitParameters struct {
 
 type EnvironmentDaprComponentSecretObservation struct {
 
+	// The identity to use for accessing key vault reference. Possible values are the Resource ID of a User Assigned Managed Identity, or System to use the System Assigned Managed Identity.
 	// The identity to use for accessing key vault reference.
 	Identity *string `json:"identity,omitempty" tf:"identity,omitempty"`
 
-	// The ID of the Container App Environment Dapr Component
+	// The Key Vault Secret ID.
 	// The Key Vault Secret ID. Could be either one of `id` or `versionless_id`.
 	KeyVaultSecretID *string `json:"keyVaultSecretId,omitempty" tf:"key_vault_secret_id,omitempty"`
 
@@ -164,11 +166,12 @@ type EnvironmentDaprComponentSecretObservation struct {
 
 type EnvironmentDaprComponentSecretParameters struct {
 
+	// The identity to use for accessing key vault reference. Possible values are the Resource ID of a User Assigned Managed Identity, or System to use the System Assigned Managed Identity.
 	// The identity to use for accessing key vault reference.
 	// +kubebuilder:validation:Optional
 	Identity *string `json:"identity,omitempty" tf:"identity,omitempty"`
 
-	// The ID of the Container App Environment Dapr Component
+	// The Key Vault Secret ID.
 	// The Key Vault Secret ID. Could be either one of `id` or `versionless_id`.
 	// +kubebuilder:validation:Optional
 	KeyVaultSecretID *string `json:"keyVaultSecretId,omitempty" tf:"key_vault_secret_id,omitempty"`

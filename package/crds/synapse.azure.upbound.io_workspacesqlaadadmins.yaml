@@ -74,16 +74,16 @@ spec:
               forProvider:
                 properties:
                   login:
-                    description: The login name of the Azure AD Administrator of this
-                      Synapse Workspace.
+                    description: The login name of the Azure AD SQL Administrator
+                      of this Synapse Workspace.
                     type: string
                   objectId:
-                    description: The object id of the Azure AD Administrator of this
-                      Synapse Workspace.
+                    description: The object id of the Azure AD SQL Administrator of
+                      this Synapse Workspace.
                     type: string
                   synapseWorkspaceId:
                     description: The ID of the Synapse Workspace where the Azure AD
-                      Administrator should be configured.
+                      SQL Administrator should be configured.
                     type: string
                   synapseWorkspaceIdRef:
                     description: Reference to a Workspace in synapse to populate synapseWorkspaceId.
@@ -160,8 +160,8 @@ spec:
                         type: object
                     type: object
                   tenantId:
-                    description: The tenant id of the Azure AD Administrator of this
-                      Synapse Workspace.
+                    description: The tenant id of the Azure AD SQL Administrator of
+                      this Synapse Workspace.
                     type: string
                 type: object
               initProvider:
@@ -178,16 +178,16 @@ spec:
                   autoscaler.
                 properties:
                   login:
-                    description: The login name of the Azure AD Administrator of this
-                      Synapse Workspace.
+                    description: The login name of the Azure AD SQL Administrator
+                      of this Synapse Workspace.
                     type: string
                   objectId:
-                    description: The object id of the Azure AD Administrator of this
-                      Synapse Workspace.
+                    description: The object id of the Azure AD SQL Administrator of
+                      this Synapse Workspace.
                     type: string
                   synapseWorkspaceId:
                     description: The ID of the Synapse Workspace where the Azure AD
-                      Administrator should be configured.
+                      SQL Administrator should be configured.
                     type: string
                   synapseWorkspaceIdRef:
                     description: Reference to a Workspace in synapse to populate synapseWorkspaceId.
@@ -264,8 +264,8 @@ spec:
                         type: object
                     type: object
                   tenantId:
-                    description: The tenant id of the Azure AD Administrator of this
-                      Synapse Workspace.
+                    description: The tenant id of the Azure AD SQL Administrator of
+                      this Synapse Workspace.
                     type: string
                 type: object
               managementPolicies:
@@ -374,22 +374,23 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Synapse Workspace Azure AD SQL Administrator.
                     type: string
                   login:
-                    description: The login name of the Azure AD Administrator of this
-                      Synapse Workspace.
+                    description: The login name of the Azure AD SQL Administrator
+                      of this Synapse Workspace.
                     type: string
                   objectId:
-                    description: The object id of the Azure AD Administrator of this
-                      Synapse Workspace.
+                    description: The object id of the Azure AD SQL Administrator of
+                      this Synapse Workspace.
                     type: string
                   synapseWorkspaceId:
                     description: The ID of the Synapse Workspace where the Azure AD
-                      Administrator should be configured.
+                      SQL Administrator should be configured.
                     type: string
                   tenantId:
-                    description: The tenant id of the Azure AD Administrator of this
-                      Synapse Workspace.
+                    description: The tenant id of the Azure AD SQL Administrator of
+                      this Synapse Workspace.
                     type: string
                 type: object
               conditions:

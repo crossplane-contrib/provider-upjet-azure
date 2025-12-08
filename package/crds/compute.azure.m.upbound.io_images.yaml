@@ -97,9 +97,9 @@ spec:
                       type: object
                     type: array
                   hyperVGeneration:
-                    description: The HyperVGenerationType of the VirtualMachine created
-                      from the image as V1, V2. Defaults to V1. Changing this forces
-                      a new resource to be created.
+                    description: The Hyper-V Generation Type of the Virtual Machine
+                      created from the image as V1, V2. Defaults to V1. Changing this
+                      forces a new resource to be created.
                     type: string
                   location:
                     description: Specified the supported Azure location where the
@@ -298,9 +298,9 @@ spec:
                       type: object
                     type: array
                   hyperVGeneration:
-                    description: The HyperVGenerationType of the VirtualMachine created
-                      from the image as V1, V2. Defaults to V1. Changing this forces
-                      a new resource to be created.
+                    description: The Hyper-V Generation Type of the Virtual Machine
+                      created from the image as V1, V2. Defaults to V1. Changing this
+                      forces a new resource to be created.
                     type: string
                   location:
                     description: Specified the supported Azure location where the
@@ -468,9 +468,9 @@ spec:
                       type: object
                     type: array
                   hyperVGeneration:
-                    description: The HyperVGenerationType of the VirtualMachine created
-                      from the image as V1, V2. Defaults to V1. Changing this forces
-                      a new resource to be created.
+                    description: The Hyper-V Generation Type of the Virtual Machine
+                      created from the image as V1, V2. Defaults to V1. Changing this
+                      forces a new resource to be created.
                     type: string
                   id:
                     description: The ID of the Image.

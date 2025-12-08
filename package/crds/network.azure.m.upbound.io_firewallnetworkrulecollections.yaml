@@ -450,6 +450,7 @@ spec:
                       resource to be created.
                     type: string
                   id:
+                    description: The ID of the Firewall Network Rule Collection.
                     type: string
                   priority:
                     description: Specifies the priority of the rule collection. Possible

@@ -276,8 +276,8 @@ type ContainerInitParameters struct {
 	// A list of args to pass to the container.
 	Args []*string `json:"args,omitempty" tf:"args,omitempty"`
 
-	// The amount of vCPU to allocate to the container. Possible values include 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, and 2.0. When there's a workload profile specified, there's no such constraint.
-	// The amount of vCPU to allocate to the container. Possible values include `0.25`, `0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `1.75`, and `2.0`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.0` / `2.0` or `0.5` / `1.0`. When there's a workload profile specified, there's no such constraint.
+	// The amount of vCPU to allocate to the container.
+	// The amount of vCPU to allocate to the container.
 	CPU *float64 `json:"cpu,omitempty" tf:"cpu,omitempty"`
 
 	// A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
@@ -294,8 +294,8 @@ type ContainerInitParameters struct {
 	// A liveness_probe block as detailed below.
 	LivenessProbe []LivenessProbeInitParameters `json:"livenessProbe,omitempty" tf:"liveness_probe,omitempty"`
 
-	// The amount of memory to allocate to the container. Possible values are 0.5Gi, 1Gi, 1.5Gi, 2Gi, 2.5Gi, 3Gi, 3.5Gi and 4Gi. When there's a workload profile specified, there's no such constraint.
-	// The amount of memory to allocate to the container. Possible values include `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`, `2.5Gi`, `3.0Gi`, `3.5Gi`, and `4.0Gi`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.25` / `2.5Gi` or `0.75` / `1.5Gi`. When there's a workload profile specified, there's no such constraint.
+	// The amount of memory to allocate to the container.
+	// The amount of memory to allocate to the container.
 	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
 
 	// The name of the Volume to be mounted in the container.
@@ -318,8 +318,8 @@ type ContainerObservation struct {
 	// A list of args to pass to the container.
 	Args []*string `json:"args,omitempty" tf:"args,omitempty"`
 
-	// The amount of vCPU to allocate to the container. Possible values include 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, and 2.0. When there's a workload profile specified, there's no such constraint.
-	// The amount of vCPU to allocate to the container. Possible values include `0.25`, `0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `1.75`, and `2.0`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.0` / `2.0` or `0.5` / `1.0`. When there's a workload profile specified, there's no such constraint.
+	// The amount of vCPU to allocate to the container.
+	// The amount of vCPU to allocate to the container.
 	CPU *float64 `json:"cpu,omitempty" tf:"cpu,omitempty"`
 
 	// A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
@@ -340,8 +340,8 @@ type ContainerObservation struct {
 	// A liveness_probe block as detailed below.
 	LivenessProbe []LivenessProbeObservation `json:"livenessProbe,omitempty" tf:"liveness_probe,omitempty"`
 
-	// The amount of memory to allocate to the container. Possible values are 0.5Gi, 1Gi, 1.5Gi, 2Gi, 2.5Gi, 3Gi, 3.5Gi and 4Gi. When there's a workload profile specified, there's no such constraint.
-	// The amount of memory to allocate to the container. Possible values include `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`, `2.5Gi`, `3.0Gi`, `3.5Gi`, and `4.0Gi`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.25` / `2.5Gi` or `0.75` / `1.5Gi`. When there's a workload profile specified, there's no such constraint.
+	// The amount of memory to allocate to the container.
+	// The amount of memory to allocate to the container.
 	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
 
 	// The name of the Volume to be mounted in the container.
@@ -365,8 +365,8 @@ type ContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	Args []*string `json:"args,omitempty" tf:"args,omitempty"`
 
-	// The amount of vCPU to allocate to the container. Possible values include 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, and 2.0. When there's a workload profile specified, there's no such constraint.
-	// The amount of vCPU to allocate to the container. Possible values include `0.25`, `0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `1.75`, and `2.0`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.0` / `2.0` or `0.5` / `1.0`. When there's a workload profile specified, there's no such constraint.
+	// The amount of vCPU to allocate to the container.
+	// The amount of vCPU to allocate to the container.
 	// +kubebuilder:validation:Optional
 	CPU *float64 `json:"cpu" tf:"cpu,omitempty"`
 
@@ -388,8 +388,8 @@ type ContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	LivenessProbe []LivenessProbeParameters `json:"livenessProbe,omitempty" tf:"liveness_probe,omitempty"`
 
-	// The amount of memory to allocate to the container. Possible values are 0.5Gi, 1Gi, 1.5Gi, 2Gi, 2.5Gi, 3Gi, 3.5Gi and 4Gi. When there's a workload profile specified, there's no such constraint.
-	// The amount of memory to allocate to the container. Possible values include `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`, `2.5Gi`, `3.0Gi`, `3.5Gi`, and `4.0Gi`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.25` / `2.5Gi` or `0.75` / `1.5Gi`. When there's a workload profile specified, there's no such constraint.
+	// The amount of memory to allocate to the container.
+	// The amount of memory to allocate to the container.
 	// +kubebuilder:validation:Optional
 	Memory *string `json:"memory" tf:"memory,omitempty"`
 
@@ -1055,8 +1055,8 @@ type InitContainerInitParameters struct {
 	// A list of args to pass to the container.
 	Args []*string `json:"args,omitempty" tf:"args,omitempty"`
 
-	// The amount of vCPU to allocate to the container. Possible values include 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, and 2.0. When there's a workload profile specified, there's no such constraint.
-	// The amount of vCPU to allocate to the container. Possible values include `0.25`, `0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `1.75`, and `2.0`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.0` / `2.0` or `0.5` / `1.0`. When there's a workload profile specified, there's no such constraint.
+	// The amount of vCPU to allocate to the container.
+	// The amount of vCPU to allocate to the container.
 	CPU *float64 `json:"cpu,omitempty" tf:"cpu,omitempty"`
 
 	// A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
@@ -1070,8 +1070,8 @@ type InitContainerInitParameters struct {
 	// The image to use to create the container.
 	Image *string `json:"image,omitempty" tf:"image,omitempty"`
 
-	// The amount of memory to allocate to the container. Possible values are 0.5Gi, 1Gi, 1.5Gi, 2Gi, 2.5Gi, 3Gi, 3.5Gi and 4Gi. When there's a workload profile specified, there's no such constraint.
-	// The amount of memory to allocate to the container. Possible values include `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`, `2.5Gi`, `3.0Gi`, `3.5Gi`, and `4.0Gi`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.25` / `2.5Gi` or `0.75` / `1.5Gi`. When there's a workload profile specified, there's no such constraint.
+	// The amount of memory to allocate to the container.
+	// The amount of memory to allocate to the container.
 	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
 
 	// The name of the Volume to be mounted in the container.
@@ -1088,8 +1088,8 @@ type InitContainerObservation struct {
 	// A list of args to pass to the container.
 	Args []*string `json:"args,omitempty" tf:"args,omitempty"`
 
-	// The amount of vCPU to allocate to the container. Possible values include 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, and 2.0. When there's a workload profile specified, there's no such constraint.
-	// The amount of vCPU to allocate to the container. Possible values include `0.25`, `0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `1.75`, and `2.0`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.0` / `2.0` or `0.5` / `1.0`. When there's a workload profile specified, there's no such constraint.
+	// The amount of vCPU to allocate to the container.
+	// The amount of vCPU to allocate to the container.
 	CPU *float64 `json:"cpu,omitempty" tf:"cpu,omitempty"`
 
 	// A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
@@ -1107,8 +1107,8 @@ type InitContainerObservation struct {
 	// The image to use to create the container.
 	Image *string `json:"image,omitempty" tf:"image,omitempty"`
 
-	// The amount of memory to allocate to the container. Possible values are 0.5Gi, 1Gi, 1.5Gi, 2Gi, 2.5Gi, 3Gi, 3.5Gi and 4Gi. When there's a workload profile specified, there's no such constraint.
-	// The amount of memory to allocate to the container. Possible values include `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`, `2.5Gi`, `3.0Gi`, `3.5Gi`, and `4.0Gi`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.25` / `2.5Gi` or `0.75` / `1.5Gi`. When there's a workload profile specified, there's no such constraint.
+	// The amount of memory to allocate to the container.
+	// The amount of memory to allocate to the container.
 	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
 
 	// The name of the Volume to be mounted in the container.
@@ -1126,8 +1126,8 @@ type InitContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	Args []*string `json:"args,omitempty" tf:"args,omitempty"`
 
-	// The amount of vCPU to allocate to the container. Possible values include 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, and 2.0. When there's a workload profile specified, there's no such constraint.
-	// The amount of vCPU to allocate to the container. Possible values include `0.25`, `0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `1.75`, and `2.0`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.0` / `2.0` or `0.5` / `1.0`. When there's a workload profile specified, there's no such constraint.
+	// The amount of vCPU to allocate to the container.
+	// The amount of vCPU to allocate to the container.
 	// +kubebuilder:validation:Optional
 	CPU *float64 `json:"cpu,omitempty" tf:"cpu,omitempty"`
 
@@ -1145,8 +1145,8 @@ type InitContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	Image *string `json:"image" tf:"image,omitempty"`
 
-	// The amount of memory to allocate to the container. Possible values are 0.5Gi, 1Gi, 1.5Gi, 2Gi, 2.5Gi, 3Gi, 3.5Gi and 4Gi. When there's a workload profile specified, there's no such constraint.
-	// The amount of memory to allocate to the container. Possible values include `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`, `2.5Gi`, `3.0Gi`, `3.5Gi`, and `4.0Gi`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.25` / `2.5Gi` or `0.75` / `1.5Gi`. When there's a workload profile specified, there's no such constraint.
+	// The amount of memory to allocate to the container.
+	// The amount of memory to allocate to the container.
 	// +kubebuilder:validation:Optional
 	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
 
@@ -1858,6 +1858,10 @@ type TemplateInitParameters struct {
 	// One or more container blocks as detailed below.
 	Container []ContainerInitParameters `json:"container,omitempty" tf:"container,omitempty"`
 
+	// The number of seconds to wait before scaling down the number of instances again. Defaults to 300.
+	// The number of seconds to wait before scaling down the number of instances again.
+	CooldownPeriodInSeconds *float64 `json:"cooldownPeriodInSeconds,omitempty" tf:"cooldown_period_in_seconds,omitempty"`
+
 	// One or more custom_scale_rule blocks as defined below.
 	CustomScaleRule []CustomScaleRuleInitParameters `json:"customScaleRule,omitempty" tf:"custom_scale_rule,omitempty"`
 
@@ -1874,6 +1878,10 @@ type TemplateInitParameters struct {
 	// The minimum number of replicas for this container.
 	// The minimum number of replicas for this container.
 	MinReplicas *float64 `json:"minReplicas,omitempty" tf:"min_replicas,omitempty"`
+
+	// The interval in seconds used for polling KEDA. Defaults to 30.
+	// The interval in seconds used for polling KEDA.
+	PollingIntervalInSeconds *float64 `json:"pollingIntervalInSeconds,omitempty" tf:"polling_interval_in_seconds,omitempty"`
 
 	// The suffix for the revision. This value must be unique for the lifetime of the Resource. If omitted the service will use a hash function to create one.
 	// The suffix for the revision. This value must be unique for the lifetime of the Resource. If omitted the service will use a hash function to create one.
@@ -1898,6 +1906,10 @@ type TemplateObservation struct {
 	// One or more container blocks as detailed below.
 	Container []ContainerObservation `json:"container,omitempty" tf:"container,omitempty"`
 
+	// The number of seconds to wait before scaling down the number of instances again. Defaults to 300.
+	// The number of seconds to wait before scaling down the number of instances again.
+	CooldownPeriodInSeconds *float64 `json:"cooldownPeriodInSeconds,omitempty" tf:"cooldown_period_in_seconds,omitempty"`
+
 	// One or more custom_scale_rule blocks as defined below.
 	CustomScaleRule []CustomScaleRuleObservation `json:"customScaleRule,omitempty" tf:"custom_scale_rule,omitempty"`
 
@@ -1914,6 +1926,10 @@ type TemplateObservation struct {
 	// The minimum number of replicas for this container.
 	// The minimum number of replicas for this container.
 	MinReplicas *float64 `json:"minReplicas,omitempty" tf:"min_replicas,omitempty"`
+
+	// The interval in seconds used for polling KEDA. Defaults to 30.
+	// The interval in seconds used for polling KEDA.
+	PollingIntervalInSeconds *float64 `json:"pollingIntervalInSeconds,omitempty" tf:"polling_interval_in_seconds,omitempty"`
 
 	// The suffix for the revision. This value must be unique for the lifetime of the Resource. If omitted the service will use a hash function to create one.
 	// The suffix for the revision. This value must be unique for the lifetime of the Resource. If omitted the service will use a hash function to create one.
@@ -1940,6 +1956,11 @@ type TemplateParameters struct {
 	// +kubebuilder:validation:Optional
 	Container []ContainerParameters `json:"container" tf:"container,omitempty"`
 
+	// The number of seconds to wait before scaling down the number of instances again. Defaults to 300.
+	// The number of seconds to wait before scaling down the number of instances again.
+	// +kubebuilder:validation:Optional
+	CooldownPeriodInSeconds *float64 `json:"cooldownPeriodInSeconds,omitempty" tf:"cooldown_period_in_seconds,omitempty"`
+
 	// One or more custom_scale_rule blocks as defined below.
 	// +kubebuilder:validation:Optional
 	CustomScaleRule []CustomScaleRuleParameters `json:"customScaleRule,omitempty" tf:"custom_scale_rule,omitempty"`
@@ -1961,6 +1982,11 @@ type TemplateParameters struct {
 	// The minimum number of replicas for this container.
 	// +kubebuilder:validation:Optional
 	MinReplicas *float64 `json:"minReplicas,omitempty" tf:"min_replicas,omitempty"`
+
+	// The interval in seconds used for polling KEDA. Defaults to 30.
+	// The interval in seconds used for polling KEDA.
+	// +kubebuilder:validation:Optional
+	PollingIntervalInSeconds *float64 `json:"pollingIntervalInSeconds,omitempty" tf:"polling_interval_in_seconds,omitempty"`
 
 	// The suffix for the revision. This value must be unique for the lifetime of the Resource. If omitted the service will use a hash function to create one.
 	// The suffix for the revision. This value must be unique for the lifetime of the Resource. If omitted the service will use a hash function to create one.
@@ -2056,7 +2082,7 @@ type VolumeInitParameters struct {
 	// The name of the `AzureFile` storage. Required when `storage_type` is `AzureFile`
 	StorageName *string `json:"storageName,omitempty" tf:"storage_name,omitempty"`
 
-	// The type of storage volume. Possible values are AzureFile, EmptyDir and Secret. Defaults to EmptyDir.
+	// The type of storage volume. Possible values are AzureFile, EmptyDir, NfsAzureFile and Secret. Defaults to EmptyDir.
 	// The type of storage volume. Possible values include `AzureFile` and `EmptyDir`. Defaults to `EmptyDir`.
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 }
@@ -2123,7 +2149,7 @@ type VolumeObservation struct {
 	// The name of the `AzureFile` storage. Required when `storage_type` is `AzureFile`
 	StorageName *string `json:"storageName,omitempty" tf:"storage_name,omitempty"`
 
-	// The type of storage volume. Possible values are AzureFile, EmptyDir and Secret. Defaults to EmptyDir.
+	// The type of storage volume. Possible values are AzureFile, EmptyDir, NfsAzureFile and Secret. Defaults to EmptyDir.
 	// The type of storage volume. Possible values include `AzureFile` and `EmptyDir`. Defaults to `EmptyDir`.
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 }
@@ -2145,7 +2171,7 @@ type VolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	StorageName *string `json:"storageName,omitempty" tf:"storage_name,omitempty"`
 
-	// The type of storage volume. Possible values are AzureFile, EmptyDir and Secret. Defaults to EmptyDir.
+	// The type of storage volume. Possible values are AzureFile, EmptyDir, NfsAzureFile and Secret. Defaults to EmptyDir.
 	// The type of storage volume. Possible values include `AzureFile` and `EmptyDir`. Defaults to `EmptyDir`.
 	// +kubebuilder:validation:Optional
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`

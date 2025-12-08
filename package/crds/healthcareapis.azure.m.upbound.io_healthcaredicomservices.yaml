@@ -125,7 +125,8 @@ spec:
                       enabled. Defaults to true.
                     type: boolean
                   storage:
-                    description: A storage block as defined below.
+                    description: A storage block as defined below. Changing this forces
+                      a new resource to be created.
                     properties:
                       fileSystemName:
                         description: The filesystem name of connected storage account.
@@ -311,7 +312,8 @@ spec:
                       enabled. Defaults to true.
                     type: boolean
                   storage:
-                    description: A storage block as defined below.
+                    description: A storage block as defined below. Changing this forces
+                      a new resource to be created.
                     properties:
                       fileSystemName:
                         description: The filesystem name of connected storage account.
@@ -508,7 +510,8 @@ spec:
                     description: The url of the Healthcare DICOM Services.
                     type: string
                   storage:
-                    description: A storage block as defined below.
+                    description: A storage block as defined below. Changing this forces
+                      a new resource to be created.
                     properties:
                       fileSystemName:
                         description: The filesystem name of connected storage account.

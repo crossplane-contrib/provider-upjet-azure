@@ -145,8 +145,8 @@ spec:
                       Defaults to /logs.
                     type: string
                   sparkVersion:
-                    description: The Apache Spark version. Possible values are 3.2,
-                      3.3, and 3.4.
+                    description: The Apache Spark version. Possible values are 3.4
+                      and 3.5.
                     type: string
                   synapseWorkspaceId:
                     description: The ID of the Synapse Workspace where the Synapse
@@ -340,8 +340,8 @@ spec:
                       Defaults to /logs.
                     type: string
                   sparkVersion:
-                    description: The Apache Spark version. Possible values are 3.2,
-                      3.3, and 3.4.
+                    description: The Apache Spark version. Possible values are 3.4
+                      and 3.5.
                     type: string
                   tags:
                     additionalProperties:
@@ -516,8 +516,8 @@ spec:
                       Defaults to /logs.
                     type: string
                   sparkVersion:
-                    description: The Apache Spark version. Possible values are 3.2,
-                      3.3, and 3.4.
+                    description: The Apache Spark version. Possible values are 3.4
+                      and 3.5.
                     type: string
                   synapseWorkspaceId:
                     description: The ID of the Synapse Workspace where the Synapse

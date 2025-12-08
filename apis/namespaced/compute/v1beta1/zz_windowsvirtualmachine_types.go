@@ -204,13 +204,16 @@ type WindowsVirtualMachineInitParameters struct {
 	AdditionalUnattendContent []WindowsVirtualMachineAdditionalUnattendContentInitParameters `json:"additionalUnattendContent,omitempty" tf:"additional_unattend_content,omitempty"`
 
 	// The Password which should be used for the local-administrator on this Virtual Machine. Changing this forces a new resource to be created.
-	AdminPasswordSecretRef v1.LocalSecretKeySelector `json:"adminPasswordSecretRef" tf:"-"`
+	AdminPasswordSecretRef *v1.LocalSecretKeySelector `json:"adminPasswordSecretRef,omitempty" tf:"-"`
 
 	// The username of the local administrator used for the Virtual Machine. Changing this forces a new resource to be created.
 	AdminUsername *string `json:"adminUsername,omitempty" tf:"admin_username,omitempty"`
 
 	// Should Extension Operations be allowed on this Virtual Machine? Defaults to true.
 	AllowExtensionOperations *bool `json:"allowExtensionOperations,omitempty" tf:"allow_extension_operations,omitempty"`
+
+	// Specifies if Automatic Updates are Enabled for the Windows Virtual Machine. Changing this forces a new resource to be created. Defaults to true.
+	AutomaticUpdatesEnabled *bool `json:"automaticUpdatesEnabled,omitempty" tf:"automatic_updates_enabled,omitempty"`
 
 	// Specifies the ID of the Availability Set in which the Virtual Machine should exist. Changing this forces a new resource to be created.
 	AvailabilitySetID *string `json:"availabilitySetId,omitempty" tf:"availability_set_id,omitempty"`
@@ -242,7 +245,6 @@ type WindowsVirtualMachineInitParameters struct {
 	// Specifies the Edge Zone within the Azure Region where this Windows Virtual Machine should exist. Changing this forces a new Windows Virtual Machine to be created.
 	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
 
-	// Specifies if Automatic Updates are Enabled for the Windows Virtual Machine. Changing this forces a new resource to be created. Defaults to true.
 	EnableAutomaticUpdates *bool `json:"enableAutomaticUpdates,omitempty" tf:"enable_automatic_updates,omitempty"`
 
 	// Should all of the disks (including the temp disk) attached to this Virtual Machine be encrypted by enabling Encryption at Host?
@@ -290,6 +292,9 @@ type WindowsVirtualMachineInitParameters struct {
 
 	// A os_image_notification block as defined below.
 	OsImageNotification *WindowsVirtualMachineOsImageNotificationInitParameters `json:"osImageNotification,omitempty" tf:"os_image_notification,omitempty"`
+
+	// The ID of an existing Managed Disk to use as the OS Disk for this Windows Virtual Machine. Changing this forces a new resource to be created.
+	OsManagedDiskID *string `json:"osManagedDiskId,omitempty" tf:"os_managed_disk_id,omitempty"`
 
 	// Specifies the mode of VM Guest Patching for the Virtual Machine. Possible values are AutomaticByPlatform or ImageDefault. Defaults to ImageDefault.
 	PatchAssessmentMode *string `json:"patchAssessmentMode,omitempty" tf:"patch_assessment_mode,omitempty"`
@@ -373,6 +378,9 @@ type WindowsVirtualMachineObservation struct {
 	// Should Extension Operations be allowed on this Virtual Machine? Defaults to true.
 	AllowExtensionOperations *bool `json:"allowExtensionOperations,omitempty" tf:"allow_extension_operations,omitempty"`
 
+	// Specifies if Automatic Updates are Enabled for the Windows Virtual Machine. Changing this forces a new resource to be created. Defaults to true.
+	AutomaticUpdatesEnabled *bool `json:"automaticUpdatesEnabled,omitempty" tf:"automatic_updates_enabled,omitempty"`
+
 	// Specifies the ID of the Availability Set in which the Virtual Machine should exist. Changing this forces a new resource to be created.
 	AvailabilitySetID *string `json:"availabilitySetId,omitempty" tf:"availability_set_id,omitempty"`
 
@@ -400,7 +408,6 @@ type WindowsVirtualMachineObservation struct {
 	// Specifies the Edge Zone within the Azure Region where this Windows Virtual Machine should exist. Changing this forces a new Windows Virtual Machine to be created.
 	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
 
-	// Specifies if Automatic Updates are Enabled for the Windows Virtual Machine. Changing this forces a new resource to be created. Defaults to true.
 	EnableAutomaticUpdates *bool `json:"enableAutomaticUpdates,omitempty" tf:"enable_automatic_updates,omitempty"`
 
 	// Should all of the disks (including the temp disk) attached to this Virtual Machine be encrypted by enabling Encryption at Host?
@@ -441,6 +448,9 @@ type WindowsVirtualMachineObservation struct {
 
 	// A os_image_notification block as defined below.
 	OsImageNotification *WindowsVirtualMachineOsImageNotificationObservation `json:"osImageNotification,omitempty" tf:"os_image_notification,omitempty"`
+
+	// The ID of an existing Managed Disk to use as the OS Disk for this Windows Virtual Machine. Changing this forces a new resource to be created.
+	OsManagedDiskID *string `json:"osManagedDiskId,omitempty" tf:"os_managed_disk_id,omitempty"`
 
 	// Specifies the mode of VM Guest Patching for the Virtual Machine. Possible values are AutomaticByPlatform or ImageDefault. Defaults to ImageDefault.
 	PatchAssessmentMode *string `json:"patchAssessmentMode,omitempty" tf:"patch_assessment_mode,omitempty"`
@@ -652,7 +662,7 @@ type WindowsVirtualMachineOsDiskParameters struct {
 
 	// The Type of Storage Account which should back this the Internal OS Disk. Possible values are Standard_LRS, StandardSSD_LRS, Premium_LRS, StandardSSD_ZRS and Premium_ZRS. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	StorageAccountType *string `json:"storageAccountType" tf:"storage_account_type,omitempty"`
+	StorageAccountType *string `json:"storageAccountType,omitempty" tf:"storage_account_type,omitempty"`
 
 	// Should Write Accelerator be Enabled for this OS Disk? Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -690,7 +700,7 @@ type WindowsVirtualMachineParameters struct {
 
 	// The Password which should be used for the local-administrator on this Virtual Machine. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	AdminPasswordSecretRef v1.LocalSecretKeySelector `json:"adminPasswordSecretRef" tf:"-"`
+	AdminPasswordSecretRef *v1.LocalSecretKeySelector `json:"adminPasswordSecretRef,omitempty" tf:"-"`
 
 	// The username of the local administrator used for the Virtual Machine. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -699,6 +709,10 @@ type WindowsVirtualMachineParameters struct {
 	// Should Extension Operations be allowed on this Virtual Machine? Defaults to true.
 	// +kubebuilder:validation:Optional
 	AllowExtensionOperations *bool `json:"allowExtensionOperations,omitempty" tf:"allow_extension_operations,omitempty"`
+
+	// Specifies if Automatic Updates are Enabled for the Windows Virtual Machine. Changing this forces a new resource to be created. Defaults to true.
+	// +kubebuilder:validation:Optional
+	AutomaticUpdatesEnabled *bool `json:"automaticUpdatesEnabled,omitempty" tf:"automatic_updates_enabled,omitempty"`
 
 	// Specifies the ID of the Availability Set in which the Virtual Machine should exist. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -740,7 +754,6 @@ type WindowsVirtualMachineParameters struct {
 	// +kubebuilder:validation:Optional
 	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
 
-	// Specifies if Automatic Updates are Enabled for the Windows Virtual Machine. Changing this forces a new resource to be created. Defaults to true.
 	// +kubebuilder:validation:Optional
 	EnableAutomaticUpdates *bool `json:"enableAutomaticUpdates,omitempty" tf:"enable_automatic_updates,omitempty"`
 
@@ -801,6 +814,10 @@ type WindowsVirtualMachineParameters struct {
 	// A os_image_notification block as defined below.
 	// +kubebuilder:validation:Optional
 	OsImageNotification *WindowsVirtualMachineOsImageNotificationParameters `json:"osImageNotification,omitempty" tf:"os_image_notification,omitempty"`
+
+	// The ID of an existing Managed Disk to use as the OS Disk for this Windows Virtual Machine. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	OsManagedDiskID *string `json:"osManagedDiskId,omitempty" tf:"os_managed_disk_id,omitempty"`
 
 	// Specifies the mode of VM Guest Patching for the Virtual Machine. Possible values are AutomaticByPlatform or ImageDefault. Defaults to ImageDefault.
 	// +kubebuilder:validation:Optional
@@ -1145,8 +1162,6 @@ type WindowsVirtualMachineStatus struct {
 type WindowsVirtualMachine struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.adminPasswordSecretRef)",message="spec.forProvider.adminPasswordSecretRef is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.adminUsername) || (has(self.initProvider) && has(self.initProvider.adminUsername))",message="spec.forProvider.adminUsername is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || (has(self.initProvider) && has(self.initProvider.location))",message="spec.forProvider.location is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.osDisk) || (has(self.initProvider) && has(self.initProvider.osDisk))",message="spec.forProvider.osDisk is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.size) || (has(self.initProvider) && has(self.initProvider.size))",message="spec.forProvider.size is a required parameter"

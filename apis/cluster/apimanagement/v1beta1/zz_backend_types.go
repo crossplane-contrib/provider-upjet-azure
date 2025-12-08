@@ -44,6 +44,9 @@ type AuthorizationParameters struct {
 
 type BackendInitParameters struct {
 
+	// A circuit_breaker_rule block as documented below.
+	CircuitBreakerRule []CircuitBreakerRuleInitParameters `json:"circuitBreakerRule,omitempty" tf:"circuit_breaker_rule,omitempty"`
+
 	// A credentials block as documented below.
 	Credentials []CredentialsInitParameters `json:"credentials,omitempty" tf:"credentials,omitempty"`
 
@@ -68,7 +71,7 @@ type BackendInitParameters struct {
 	// The title of the backend.
 	Title *string `json:"title,omitempty" tf:"title,omitempty"`
 
-	// The URL of the backend host.
+	// The backend host URL should be specified in the format "https://backend.com/api", avoiding trailing slashes (/) to minimize misconfiguration risks. Azure API Management instance will append the backend resource name to this URL. This URL typically serves as the base-url in the set-backend-service policy, enabling seamless transitions from frontend to backend.
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
@@ -76,6 +79,9 @@ type BackendObservation struct {
 
 	// The Name of the API Management Service where this backend should be created. Changing this forces a new resource to be created.
 	APIManagementName *string `json:"apiManagementName,omitempty" tf:"api_management_name,omitempty"`
+
+	// A circuit_breaker_rule block as documented below.
+	CircuitBreakerRule []CircuitBreakerRuleObservation `json:"circuitBreakerRule,omitempty" tf:"circuit_breaker_rule,omitempty"`
 
 	// A credentials block as documented below.
 	Credentials []CredentialsObservation `json:"credentials,omitempty" tf:"credentials,omitempty"`
@@ -107,7 +113,7 @@ type BackendObservation struct {
 	// The title of the backend.
 	Title *string `json:"title,omitempty" tf:"title,omitempty"`
 
-	// The URL of the backend host.
+	// The backend host URL should be specified in the format "https://backend.com/api", avoiding trailing slashes (/) to minimize misconfiguration risks. Azure API Management instance will append the backend resource name to this URL. This URL typically serves as the base-url in the set-backend-service policy, enabling seamless transitions from frontend to backend.
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
@@ -125,6 +131,10 @@ type BackendParameters struct {
 	// Selector for a Management in apimanagement to populate apiManagementName.
 	// +kubebuilder:validation:Optional
 	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
+
+	// A circuit_breaker_rule block as documented below.
+	// +kubebuilder:validation:Optional
+	CircuitBreakerRule []CircuitBreakerRuleParameters `json:"circuitBreakerRule,omitempty" tf:"circuit_breaker_rule,omitempty"`
 
 	// A credentials block as documented below.
 	// +kubebuilder:validation:Optional
@@ -171,12 +181,15 @@ type BackendParameters struct {
 	// +kubebuilder:validation:Optional
 	Title *string `json:"title,omitempty" tf:"title,omitempty"`
 
-	// The URL of the backend host.
+	// The backend host URL should be specified in the format "https://backend.com/api", avoiding trailing slashes (/) to minimize misconfiguration risks. Azure API Management instance will append the backend resource name to this URL. This URL typically serves as the base-url in the set-backend-service policy, enabling seamless transitions from frontend to backend.
 	// +kubebuilder:validation:Optional
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
 type BackendProxyInitParameters struct {
+
+	// The password to connect to the proxy server.
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// The URL of the proxy server.
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
@@ -207,6 +220,55 @@ type BackendProxyParameters struct {
 	// The username to connect to the proxy server.
 	// +kubebuilder:validation:Optional
 	Username *string `json:"username" tf:"username,omitempty"`
+}
+
+type CircuitBreakerRuleInitParameters struct {
+
+	// Specifies whether the circuit breaker should honor Retry-After requests. Defaults to false.
+	AcceptRetryAfterEnabled *bool `json:"acceptRetryAfterEnabled,omitempty" tf:"accept_retry_after_enabled,omitempty"`
+
+	// A failure_condition block as defined below.
+	FailureCondition []FailureConditionInitParameters `json:"failureCondition,omitempty" tf:"failure_condition,omitempty"`
+
+	// The name of the circuit breaker rule.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies the duration for which the circuit remains open before retrying, in ISO 8601 format.
+	TripDuration *string `json:"tripDuration,omitempty" tf:"trip_duration,omitempty"`
+}
+
+type CircuitBreakerRuleObservation struct {
+
+	// Specifies whether the circuit breaker should honor Retry-After requests. Defaults to false.
+	AcceptRetryAfterEnabled *bool `json:"acceptRetryAfterEnabled,omitempty" tf:"accept_retry_after_enabled,omitempty"`
+
+	// A failure_condition block as defined below.
+	FailureCondition []FailureConditionObservation `json:"failureCondition,omitempty" tf:"failure_condition,omitempty"`
+
+	// The name of the circuit breaker rule.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies the duration for which the circuit remains open before retrying, in ISO 8601 format.
+	TripDuration *string `json:"tripDuration,omitempty" tf:"trip_duration,omitempty"`
+}
+
+type CircuitBreakerRuleParameters struct {
+
+	// Specifies whether the circuit breaker should honor Retry-After requests. Defaults to false.
+	// +kubebuilder:validation:Optional
+	AcceptRetryAfterEnabled *bool `json:"acceptRetryAfterEnabled,omitempty" tf:"accept_retry_after_enabled,omitempty"`
+
+	// A failure_condition block as defined below.
+	// +kubebuilder:validation:Optional
+	FailureCondition []FailureConditionParameters `json:"failureCondition" tf:"failure_condition,omitempty"`
+
+	// The name of the circuit breaker rule.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// Specifies the duration for which the circuit remains open before retrying, in ISO 8601 format.
+	// +kubebuilder:validation:Optional
+	TripDuration *string `json:"tripDuration" tf:"trip_duration,omitempty"`
 }
 
 type CredentialsInitParameters struct {
@@ -262,6 +324,65 @@ type CredentialsParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Query map[string]*string `json:"query,omitempty" tf:"query,omitempty"`
+}
+
+type FailureConditionInitParameters struct {
+
+	// Specifies the number of failures within the specified interval that will trigger the circuit breaker. Possible values are between 1 and 10000.
+	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
+
+	// Specifies a list of error reasons to consider as failures.
+	ErrorReasons []*string `json:"errorReasons,omitempty" tf:"error_reasons,omitempty"`
+
+	// Specifies the time window over which failures are counted, in ISO 8601 format.
+	IntervalDuration *string `json:"intervalDuration,omitempty" tf:"interval_duration,omitempty"`
+
+	// Specifies the percentage of failures within the specified interval that will trigger the circuit breaker. Possible values are between 1 and 100.
+	Percentage *float64 `json:"percentage,omitempty" tf:"percentage,omitempty"`
+
+	// One or more status_code_range blocks as defined below.
+	StatusCodeRange []StatusCodeRangeInitParameters `json:"statusCodeRange,omitempty" tf:"status_code_range,omitempty"`
+}
+
+type FailureConditionObservation struct {
+
+	// Specifies the number of failures within the specified interval that will trigger the circuit breaker. Possible values are between 1 and 10000.
+	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
+
+	// Specifies a list of error reasons to consider as failures.
+	ErrorReasons []*string `json:"errorReasons,omitempty" tf:"error_reasons,omitempty"`
+
+	// Specifies the time window over which failures are counted, in ISO 8601 format.
+	IntervalDuration *string `json:"intervalDuration,omitempty" tf:"interval_duration,omitempty"`
+
+	// Specifies the percentage of failures within the specified interval that will trigger the circuit breaker. Possible values are between 1 and 100.
+	Percentage *float64 `json:"percentage,omitempty" tf:"percentage,omitempty"`
+
+	// One or more status_code_range blocks as defined below.
+	StatusCodeRange []StatusCodeRangeObservation `json:"statusCodeRange,omitempty" tf:"status_code_range,omitempty"`
+}
+
+type FailureConditionParameters struct {
+
+	// Specifies the number of failures within the specified interval that will trigger the circuit breaker. Possible values are between 1 and 10000.
+	// +kubebuilder:validation:Optional
+	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
+
+	// Specifies a list of error reasons to consider as failures.
+	// +kubebuilder:validation:Optional
+	ErrorReasons []*string `json:"errorReasons,omitempty" tf:"error_reasons,omitempty"`
+
+	// Specifies the time window over which failures are counted, in ISO 8601 format.
+	// +kubebuilder:validation:Optional
+	IntervalDuration *string `json:"intervalDuration" tf:"interval_duration,omitempty"`
+
+	// Specifies the percentage of failures within the specified interval that will trigger the circuit breaker. Possible values are between 1 and 100.
+	// +kubebuilder:validation:Optional
+	Percentage *float64 `json:"percentage,omitempty" tf:"percentage,omitempty"`
+
+	// One or more status_code_range blocks as defined below.
+	// +kubebuilder:validation:Optional
+	StatusCodeRange []StatusCodeRangeParameters `json:"statusCodeRange,omitempty" tf:"status_code_range,omitempty"`
 }
 
 type ServerX509NameInitParameters struct {
@@ -366,6 +487,35 @@ type ServiceFabricClusterParameters struct {
 	// One or more server_x509_name blocks as documented below.
 	// +kubebuilder:validation:Optional
 	ServerX509Name []ServerX509NameParameters `json:"serverX509Name,omitempty" tf:"server_x509_name,omitempty"`
+}
+
+type StatusCodeRangeInitParameters struct {
+
+	// Specifies the maximum HTTP status code to consider as a failure. Possible values are between 200 and 599.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Specifies the minimum HTTP status code to consider as a failure. Possible values are between 200 and 599.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type StatusCodeRangeObservation struct {
+
+	// Specifies the maximum HTTP status code to consider as a failure. Possible values are between 200 and 599.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Specifies the minimum HTTP status code to consider as a failure. Possible values are between 200 and 599.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type StatusCodeRangeParameters struct {
+
+	// Specifies the maximum HTTP status code to consider as a failure. Possible values are between 200 and 599.
+	// +kubebuilder:validation:Optional
+	Max *float64 `json:"max" tf:"max,omitempty"`
+
+	// Specifies the minimum HTTP status code to consider as a failure. Possible values are between 200 and 599.
+	// +kubebuilder:validation:Optional
+	Min *float64 `json:"min" tf:"min,omitempty"`
 }
 
 type TLSInitParameters struct {

@@ -19,6 +19,9 @@ type PoolInitParameters struct {
 	// Whether the NetApp Pool can hold cool access enabled volumes. Defaults to false.
 	CoolAccessEnabled *bool `json:"coolAccessEnabled,omitempty" tf:"cool_access_enabled,omitempty"`
 
+	// The custom throughput for the pool in MiB/s. Minimum value is 128. This field can only be set when service_level is set to Flexible and qos_type is set to Manual.
+	CustomThroughputMibps *float64 `json:"customThroughputMibps,omitempty" tf:"custom_throughput_mibps,omitempty"`
+
 	// The encryption type of the pool. Valid values include Single, and Double. Defaults to Single. Changing this forces a new resource to be created.
 	EncryptionType *string `json:"encryptionType,omitempty" tf:"encryption_type,omitempty"`
 
@@ -28,7 +31,7 @@ type PoolInitParameters struct {
 	// QoS Type of the pool. Valid values include Auto or Manual. Defaults to Auto.
 	QosType *string `json:"qosType,omitempty" tf:"qos_type,omitempty"`
 
-	// The service level of the file system. Valid values include Premium, Standard, and Ultra. Changing this forces a new resource to be created.
+	// The service level of the file system. Valid values include Premium, Standard, Ultra, and Flexible. Changing this forces a new resource to be created.
 	ServiceLevel *string `json:"serviceLevel,omitempty" tf:"service_level,omitempty"`
 
 	// Provisioned size of the pool in TB. Value must be between 1 and 2048.
@@ -47,6 +50,9 @@ type PoolObservation struct {
 	// Whether the NetApp Pool can hold cool access enabled volumes. Defaults to false.
 	CoolAccessEnabled *bool `json:"coolAccessEnabled,omitempty" tf:"cool_access_enabled,omitempty"`
 
+	// The custom throughput for the pool in MiB/s. Minimum value is 128. This field can only be set when service_level is set to Flexible and qos_type is set to Manual.
+	CustomThroughputMibps *float64 `json:"customThroughputMibps,omitempty" tf:"custom_throughput_mibps,omitempty"`
+
 	// The encryption type of the pool. Valid values include Single, and Double. Defaults to Single. Changing this forces a new resource to be created.
 	EncryptionType *string `json:"encryptionType,omitempty" tf:"encryption_type,omitempty"`
 
@@ -62,7 +68,7 @@ type PoolObservation struct {
 	// The name of the resource group where the NetApp Pool should be created. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// The service level of the file system. Valid values include Premium, Standard, and Ultra. Changing this forces a new resource to be created.
+	// The service level of the file system. Valid values include Premium, Standard, Ultra, and Flexible. Changing this forces a new resource to be created.
 	ServiceLevel *string `json:"serviceLevel,omitempty" tf:"service_level,omitempty"`
 
 	// Provisioned size of the pool in TB. Value must be between 1 and 2048.
@@ -92,6 +98,10 @@ type PoolParameters struct {
 	// +kubebuilder:validation:Optional
 	CoolAccessEnabled *bool `json:"coolAccessEnabled,omitempty" tf:"cool_access_enabled,omitempty"`
 
+	// The custom throughput for the pool in MiB/s. Minimum value is 128. This field can only be set when service_level is set to Flexible and qos_type is set to Manual.
+	// +kubebuilder:validation:Optional
+	CustomThroughputMibps *float64 `json:"customThroughputMibps,omitempty" tf:"custom_throughput_mibps,omitempty"`
+
 	// The encryption type of the pool. Valid values include Single, and Double. Defaults to Single. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	EncryptionType *string `json:"encryptionType,omitempty" tf:"encryption_type,omitempty"`
@@ -117,7 +127,7 @@ type PoolParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// The service level of the file system. Valid values include Premium, Standard, and Ultra. Changing this forces a new resource to be created.
+	// The service level of the file system. Valid values include Premium, Standard, Ultra, and Flexible. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	ServiceLevel *string `json:"serviceLevel,omitempty" tf:"service_level,omitempty"`
 

@@ -27,6 +27,8 @@ type WorkspaceAADAdminInitParameters struct {
 }
 
 type WorkspaceAADAdminObservation struct {
+
+	// The ID of the Synapse Workspace Azure AD Administrator.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The login name of the Azure AD Administrator of this Synapse Workspace.

@@ -15,13 +15,13 @@ import (
 
 type ManagerRoutingConfigurationInitParameters struct {
 
-	// The description of the Network Manager.
+	// The description of the Network Manager Routing Configuration.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 }
 
 type ManagerRoutingConfigurationObservation struct {
 
-	// The description of the Network Manager.
+	// The description of the Network Manager Routing Configuration.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The ID of the Network Manager Routing Configuration.
@@ -33,7 +33,7 @@ type ManagerRoutingConfigurationObservation struct {
 
 type ManagerRoutingConfigurationParameters struct {
 
-	// The description of the Network Manager.
+	// The description of the Network Manager Routing Configuration.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 

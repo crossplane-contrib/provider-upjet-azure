@@ -154,8 +154,8 @@ spec:
                     properties:
                       format:
                         description: The format of the Cognitive Services Account
-                          Deployment model. Possible values are OpenAI and Cohere.
-                          Changing this forces a new resource to be created.
+                          Deployment model. Changing this forces a new resource to
+                          be created.
                         type: string
                       name:
                         description: The name of the Cognitive Services Account Deployment
@@ -192,7 +192,8 @@ spec:
                         description: The name of the SKU. Possible values include
                           Standard, DataZoneBatch, DataZoneStandard, DataZoneProvisionedManaged,
                           GlobalBatch, GlobalProvisionedManaged, GlobalStandard, and
-                          ProvisionedManaged.
+                          ProvisionedManaged. Changing this forces a new resource
+                          to be created.
                         type: string
                       size:
                         description: The SKU size. When the name field is the combination
@@ -234,8 +235,8 @@ spec:
                     properties:
                       format:
                         description: The format of the Cognitive Services Account
-                          Deployment model. Possible values are OpenAI and Cohere.
-                          Changing this forces a new resource to be created.
+                          Deployment model. Changing this forces a new resource to
+                          be created.
                         type: string
                       name:
                         description: The name of the Cognitive Services Account Deployment
@@ -272,7 +273,8 @@ spec:
                         description: The name of the SKU. Possible values include
                           Standard, DataZoneBatch, DataZoneStandard, DataZoneProvisionedManaged,
                           GlobalBatch, GlobalProvisionedManaged, GlobalStandard, and
-                          ProvisionedManaged.
+                          ProvisionedManaged. Changing this forces a new resource
+                          to be created.
                         type: string
                       size:
                         description: The SKU size. When the name field is the combination
@@ -381,8 +383,8 @@ spec:
                     properties:
                       format:
                         description: The format of the Cognitive Services Account
-                          Deployment model. Possible values are OpenAI and Cohere.
-                          Changing this forces a new resource to be created.
+                          Deployment model. Changing this forces a new resource to
+                          be created.
                         type: string
                       name:
                         description: The name of the Cognitive Services Account Deployment
@@ -419,7 +421,8 @@ spec:
                         description: The name of the SKU. Possible values include
                           Standard, DataZoneBatch, DataZoneStandard, DataZoneProvisionedManaged,
                           GlobalBatch, GlobalProvisionedManaged, GlobalStandard, and
-                          ProvisionedManaged.
+                          ProvisionedManaged. Changing this forces a new resource
+                          to be created.
                         type: string
                       size:
                         description: The SKU size. When the name field is the combination

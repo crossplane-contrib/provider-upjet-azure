@@ -41,7 +41,7 @@ type PolicyDefinitionInitParameters struct {
 	// The policy resource manager mode that allows you to specify which resource types will be evaluated. Possible values are All, Indexed, Microsoft.ContainerService.Data, Microsoft.CustomerLockbox.Data, Microsoft.DataCatalog.Data, Microsoft.KeyVault.Data, Microsoft.Kubernetes.Data, Microsoft.MachineLearningServices.Data, Microsoft.Network.Data and Microsoft.Synapse.Data.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
-	// Parameters for the policy definition. This field is a JSON string that allows you to parameterize your policy definition.
+	// Parameters for the policy definition. This field is a JSON string that allows you to parameterize your policy definition. Reducing the number of parameters forces a new resource to be created.
 	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The policy rule for the policy definition. This is a JSON string representing the rule that contains an if and a then block.
@@ -71,7 +71,7 @@ type PolicyDefinitionObservation struct {
 	// The policy resource manager mode that allows you to specify which resource types will be evaluated. Possible values are All, Indexed, Microsoft.ContainerService.Data, Microsoft.CustomerLockbox.Data, Microsoft.DataCatalog.Data, Microsoft.KeyVault.Data, Microsoft.Kubernetes.Data, Microsoft.MachineLearningServices.Data, Microsoft.Network.Data and Microsoft.Synapse.Data.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
-	// Parameters for the policy definition. This field is a JSON string that allows you to parameterize your policy definition.
+	// Parameters for the policy definition. This field is a JSON string that allows you to parameterize your policy definition. Reducing the number of parameters forces a new resource to be created.
 	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The policy rule for the policy definition. This is a JSON string representing the rule that contains an if and a then block.
@@ -116,7 +116,7 @@ type PolicyDefinitionParameters struct {
 	// +kubebuilder:validation:Optional
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
-	// Parameters for the policy definition. This field is a JSON string that allows you to parameterize your policy definition.
+	// Parameters for the policy definition. This field is a JSON string that allows you to parameterize your policy definition. Reducing the number of parameters forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 

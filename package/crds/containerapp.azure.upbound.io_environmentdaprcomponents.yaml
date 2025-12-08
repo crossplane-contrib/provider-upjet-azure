@@ -203,12 +203,13 @@ spec:
                     items:
                       properties:
                         identity:
-                          description: The identity to use for accessing key vault
-                            reference.
+                          description: |-
+                            The identity to use for accessing key vault reference. Possible values are the Resource ID of a User Assigned Managed Identity, or System to use the System Assigned Managed Identity.
+                            The identity to use for accessing key vault reference.
                           type: string
                         keyVaultSecretId:
                           description: |-
-                            The ID of the Container App Environment Dapr Component
+                            The Key Vault Secret ID.
                             The Key Vault Secret ID. Could be either one of `id` or `versionless_id`.
                           type: string
                         name:
@@ -304,12 +305,13 @@ spec:
                     items:
                       properties:
                         identity:
-                          description: The identity to use for accessing key vault
-                            reference.
+                          description: |-
+                            The identity to use for accessing key vault reference. Possible values are the Resource ID of a User Assigned Managed Identity, or System to use the System Assigned Managed Identity.
+                            The identity to use for accessing key vault reference.
                           type: string
                         keyVaultSecretId:
                           description: |-
-                            The ID of the Container App Environment Dapr Component
+                            The Key Vault Secret ID.
                             The Key Vault Secret ID. Could be either one of `id` or `versionless_id`.
                           type: string
                         name:
@@ -501,12 +503,13 @@ spec:
                     items:
                       properties:
                         identity:
-                          description: The identity to use for accessing key vault
-                            reference.
+                          description: |-
+                            The identity to use for accessing key vault reference. Possible values are the Resource ID of a User Assigned Managed Identity, or System to use the System Assigned Managed Identity.
+                            The identity to use for accessing key vault reference.
                           type: string
                         keyVaultSecretId:
                           description: |-
-                            The ID of the Container App Environment Dapr Component
+                            The Key Vault Secret ID.
                             The Key Vault Secret ID. Could be either one of `id` or `versionless_id`.
                           type: string
                         name:

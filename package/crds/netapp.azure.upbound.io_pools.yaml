@@ -156,6 +156,11 @@ spec:
                     description: Whether the NetApp Pool can hold cool access enabled
                       volumes. Defaults to false.
                     type: boolean
+                  customThroughputMibps:
+                    description: The custom throughput for the pool in MiB/s. Minimum
+                      value is 128. This field can only be set when service_level
+                      is set to Flexible and qos_type is set to Manual.
+                    type: number
                   encryptionType:
                     description: The encryption type of the pool. Valid values include
                       Single, and Double. Defaults to Single. Changing this forces
@@ -252,8 +257,8 @@ spec:
                     type: object
                   serviceLevel:
                     description: The service level of the file system. Valid values
-                      include Premium, Standard, and Ultra. Changing this forces a
-                      new resource to be created.
+                      include Premium, Standard, Ultra, and Flexible. Changing this
+                      forces a new resource to be created.
                     type: string
                   sizeInTb:
                     description: Provisioned size of the pool in TB. Value must be
@@ -283,6 +288,11 @@ spec:
                     description: Whether the NetApp Pool can hold cool access enabled
                       volumes. Defaults to false.
                     type: boolean
+                  customThroughputMibps:
+                    description: The custom throughput for the pool in MiB/s. Minimum
+                      value is 128. This field can only be set when service_level
+                      is set to Flexible and qos_type is set to Manual.
+                    type: number
                   encryptionType:
                     description: The encryption type of the pool. Valid values include
                       Single, and Double. Defaults to Single. Changing this forces
@@ -298,8 +308,8 @@ spec:
                     type: string
                   serviceLevel:
                     description: The service level of the file system. Valid values
-                      include Premium, Standard, and Ultra. Changing this forces a
-                      new resource to be created.
+                      include Premium, Standard, Ultra, and Flexible. Changing this
+                      forces a new resource to be created.
                     type: string
                   sizeInTb:
                     description: Provisioned size of the pool in TB. Value must be
@@ -425,6 +435,11 @@ spec:
                     description: Whether the NetApp Pool can hold cool access enabled
                       volumes. Defaults to false.
                     type: boolean
+                  customThroughputMibps:
+                    description: The custom throughput for the pool in MiB/s. Minimum
+                      value is 128. This field can only be set when service_level
+                      is set to Flexible and qos_type is set to Manual.
+                    type: number
                   encryptionType:
                     description: The encryption type of the pool. Valid values include
                       Single, and Double. Defaults to Single. Changing this forces
@@ -448,8 +463,8 @@ spec:
                     type: string
                   serviceLevel:
                     description: The service level of the file system. Valid values
-                      include Premium, Standard, and Ultra. Changing this forces a
-                      new resource to be created.
+                      include Premium, Standard, Ultra, and Flexible. Changing this
+                      forces a new resource to be created.
                     type: string
                   sizeInTb:
                     description: Provisioned size of the pool in TB. Value must be

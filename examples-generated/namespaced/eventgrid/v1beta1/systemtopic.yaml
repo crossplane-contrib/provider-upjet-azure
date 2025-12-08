@@ -17,7 +17,7 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    sourceArmResourceIdSelector:
+    sourceResourceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
     topicType: Microsoft.Storage.StorageAccounts

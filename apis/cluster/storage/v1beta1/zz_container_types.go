@@ -28,7 +28,7 @@ type ContainerInitParameters struct {
 	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
-	// The name of the Storage Account where the Container should be created. Changing this forces a new resource to be created.
+	// The name of the Storage Account where the Container should be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
@@ -69,10 +69,10 @@ type ContainerObservation struct {
 	// The Resource Manager ID of this Storage Container.
 	ResourceManagerID *string `json:"resourceManagerId,omitempty" tf:"resource_manager_id,omitempty"`
 
-	// The name of the Storage Account where the Container should be created. Changing this forces a new resource to be created.
+	// The name of the Storage Account where the Container should be created.
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 
-	// The name of the Storage Account where the Container should be created. Changing this forces a new resource to be created. This property is deprecated in favour of storage_account_id.
+	// The name of the Storage Account where the Container should be created. This property is deprecated in favour of storage_account_id.
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 }
 
@@ -95,7 +95,7 @@ type ContainerParameters struct {
 	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
-	// The name of the Storage Account where the Container should be created. Changing this forces a new resource to be created.
+	// The name of the Storage Account where the Container should be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -109,7 +109,7 @@ type ContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 
-	// The name of the Storage Account where the Container should be created. Changing this forces a new resource to be created. This property is deprecated in favour of storage_account_id.
+	// The name of the Storage Account where the Container should be created. This property is deprecated in favour of storage_account_id.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
 	// +kubebuilder:validation:Optional
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`

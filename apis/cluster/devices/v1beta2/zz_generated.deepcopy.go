@@ -182,6 +182,11 @@ func (in *EndpointObservation) DeepCopyInto(out *EndpointObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.SubscriptionID != nil {
+		in, out := &in.SubscriptionID, &out.SubscriptionID
+		*out = new(string)
+		**out = **in
+	}
 	if in.Type != nil {
 		in, out := &in.Type, &out.Type
 		*out = new(string)

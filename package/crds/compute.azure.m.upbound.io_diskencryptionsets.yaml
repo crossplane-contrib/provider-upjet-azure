@@ -181,7 +181,7 @@ spec:
                       Set exists. Changing this forces a new resource to be created.
                     type: string
                   managedHsmKeyId:
-                    description: Key ID of a key in a managed HSM.  Exactly one of
+                    description: Key ID of a key in a managed HSM. Exactly one of
                       managed_hsm_key_id, key_vault_key_id must be specified.
                     type: string
                   resourceGroupName:
@@ -414,7 +414,7 @@ spec:
                       Set exists. Changing this forces a new resource to be created.
                     type: string
                   managedHsmKeyId:
-                    description: Key ID of a key in a managed HSM.  Exactly one of
+                    description: Key ID of a key in a managed HSM. Exactly one of
                       managed_hsm_key_id, key_vault_key_id must be specified.
                     type: string
                   tags:
@@ -553,7 +553,7 @@ spec:
                       Set exists. Changing this forces a new resource to be created.
                     type: string
                   managedHsmKeyId:
-                    description: Key ID of a key in a managed HSM.  Exactly one of
+                    description: Key ID of a key in a managed HSM. Exactly one of
                       managed_hsm_key_id, key_vault_key_id must be specified.
                     type: string
                   resourceGroupName:

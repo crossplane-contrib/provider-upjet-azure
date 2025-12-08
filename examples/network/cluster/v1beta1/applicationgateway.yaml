@@ -145,7 +145,7 @@ metadata:
     meta.upbound.io/example-id: network/v1beta1/applicationgateway
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: example-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     location: West Europe

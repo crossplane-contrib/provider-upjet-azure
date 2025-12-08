@@ -62,6 +62,9 @@ type IOTHubEndpointStorageContainerInitParameters struct {
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
+	// The subscription ID for the endpoint.
+	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
 }
 
 type IOTHubEndpointStorageContainerObservation struct {
@@ -98,6 +101,9 @@ type IOTHubEndpointStorageContainerObservation struct {
 
 	// The name of the resource group under which the Storage Container has been created. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The subscription ID for the endpoint.
+	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
 }
 
 type IOTHubEndpointStorageContainerParameters struct {
@@ -173,6 +179,10 @@ type IOTHubEndpointStorageContainerParameters struct {
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
+	// The subscription ID for the endpoint.
+	// +kubebuilder:validation:Optional
+	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
 }
 
 // IOTHubEndpointStorageContainerSpec defines the desired state of IOTHubEndpointStorageContainer

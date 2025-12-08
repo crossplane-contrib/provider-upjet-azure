@@ -214,8 +214,8 @@ spec:
                     type: number
                   sku:
                     description: Specifies the SKU of the Log Analytics Workspace.
-                      Possible values are PerNode, Premium, Standard, Standalone,
-                      Unlimited, CapacityReservation, PerGB2018, and LACluster. Defaults
+                      Possible values are PerGB2018, PerNode, Premium, Standalone,
+                      Standard, CapacityReservation, LACluster and Unlimited. Defaults
                       to PerGB2018.
                     type: string
                   tags:
@@ -306,8 +306,8 @@ spec:
                     type: number
                   sku:
                     description: Specifies the SKU of the Log Analytics Workspace.
-                      Possible values are PerNode, Premium, Standard, Standalone,
-                      Unlimited, CapacityReservation, PerGB2018, and LACluster. Defaults
+                      Possible values are PerGB2018, PerNode, Premium, Standalone,
+                      Standard, CapacityReservation, LACluster and Unlimited. Defaults
                       to PerGB2018.
                     type: string
                   tags:
@@ -467,8 +467,8 @@ spec:
                     type: number
                   sku:
                     description: Specifies the SKU of the Log Analytics Workspace.
-                      Possible values are PerNode, Premium, Standard, Standalone,
-                      Unlimited, CapacityReservation, PerGB2018, and LACluster. Defaults
+                      Possible values are PerGB2018, PerNode, Premium, Standalone,
+                      Standard, CapacityReservation, LACluster and Unlimited. Defaults
                       to PerGB2018.
                     type: string
                   tags:

@@ -13,6 +13,45 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
+type CoolAccessInitParameters struct {
+
+	// The coolness period in days for the volume. Possible vales are between 2 and 183.
+	CoolnessPeriodInDays *float64 `json:"coolnessPeriodInDays,omitempty" tf:"coolness_period_in_days,omitempty"`
+
+	// The cool access retrieval policy for the volume. Possible values are Default, Never and OnRead.
+	RetrievalPolicy *string `json:"retrievalPolicy,omitempty" tf:"retrieval_policy,omitempty"`
+
+	// The cool access tiering policy for the volume. Possible values are Auto and SnapshotOnly.
+	TieringPolicy *string `json:"tieringPolicy,omitempty" tf:"tiering_policy,omitempty"`
+}
+
+type CoolAccessObservation struct {
+
+	// The coolness period in days for the volume. Possible vales are between 2 and 183.
+	CoolnessPeriodInDays *float64 `json:"coolnessPeriodInDays,omitempty" tf:"coolness_period_in_days,omitempty"`
+
+	// The cool access retrieval policy for the volume. Possible values are Default, Never and OnRead.
+	RetrievalPolicy *string `json:"retrievalPolicy,omitempty" tf:"retrieval_policy,omitempty"`
+
+	// The cool access tiering policy for the volume. Possible values are Auto and SnapshotOnly.
+	TieringPolicy *string `json:"tieringPolicy,omitempty" tf:"tiering_policy,omitempty"`
+}
+
+type CoolAccessParameters struct {
+
+	// The coolness period in days for the volume. Possible vales are between 2 and 183.
+	// +kubebuilder:validation:Optional
+	CoolnessPeriodInDays *float64 `json:"coolnessPeriodInDays" tf:"coolness_period_in_days,omitempty"`
+
+	// The cool access retrieval policy for the volume. Possible values are Default, Never and OnRead.
+	// +kubebuilder:validation:Optional
+	RetrievalPolicy *string `json:"retrievalPolicy" tf:"retrieval_policy,omitempty"`
+
+	// The cool access tiering policy for the volume. Possible values are Auto and SnapshotOnly.
+	// +kubebuilder:validation:Optional
+	TieringPolicy *string `json:"tieringPolicy" tf:"tiering_policy,omitempty"`
+}
+
 type DataProtectionBackupPolicyInitParameters struct {
 
 	// Resource ID of the backup policy to apply to the volume.
@@ -193,7 +232,9 @@ type ExportPolicyRuleInitParameters struct {
 	// Is Kerberos 5 read/write permitted to this volume?
 	Kerberos5ReadWriteEnabled *bool `json:"kerberos5ReadWriteEnabled,omitempty" tf:"kerberos_5_read_write_enabled,omitempty"`
 
-	// A list of allowed protocols. Valid values include CIFS, NFSv3, or NFSv4.1. Only one value is supported at this time. This replaces the previous arguments: cifs_enabled, nfsv3_enabled and nfsv4_enabled.
+	// A list of allowed protocols. Valid values include CIFS, NFSv3, or NFSv4.1. Only a single element is supported at this time. This replaces the previous arguments: cifs_enabled, nfsv3_enabled and nfsv4_enabled.
+	Protocol []*string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
 	ProtocolsEnabled []*string `json:"protocolsEnabled,omitempty" tf:"protocols_enabled,omitempty"`
 
 	// Is root access permitted to this volume?
@@ -233,7 +274,9 @@ type ExportPolicyRuleObservation struct {
 	// Is Kerberos 5 read/write permitted to this volume?
 	Kerberos5ReadWriteEnabled *bool `json:"kerberos5ReadWriteEnabled,omitempty" tf:"kerberos_5_read_write_enabled,omitempty"`
 
-	// A list of allowed protocols. Valid values include CIFS, NFSv3, or NFSv4.1. Only one value is supported at this time. This replaces the previous arguments: cifs_enabled, nfsv3_enabled and nfsv4_enabled.
+	// A list of allowed protocols. Valid values include CIFS, NFSv3, or NFSv4.1. Only a single element is supported at this time. This replaces the previous arguments: cifs_enabled, nfsv3_enabled and nfsv4_enabled.
+	Protocol []*string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
 	ProtocolsEnabled []*string `json:"protocolsEnabled,omitempty" tf:"protocols_enabled,omitempty"`
 
 	// Is root access permitted to this volume?
@@ -280,7 +323,10 @@ type ExportPolicyRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	Kerberos5ReadWriteEnabled *bool `json:"kerberos5ReadWriteEnabled,omitempty" tf:"kerberos_5_read_write_enabled,omitempty"`
 
-	// A list of allowed protocols. Valid values include CIFS, NFSv3, or NFSv4.1. Only one value is supported at this time. This replaces the previous arguments: cifs_enabled, nfsv3_enabled and nfsv4_enabled.
+	// A list of allowed protocols. Valid values include CIFS, NFSv3, or NFSv4.1. Only a single element is supported at this time. This replaces the previous arguments: cifs_enabled, nfsv3_enabled and nfsv4_enabled.
+	// +kubebuilder:validation:Optional
+	Protocol []*string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
 	// +kubebuilder:validation:Optional
 	ProtocolsEnabled []*string `json:"protocolsEnabled,omitempty" tf:"protocols_enabled,omitempty"`
 
@@ -303,8 +349,15 @@ type ExportPolicyRuleParameters struct {
 
 type VolumeInitParameters struct {
 
+	// While auto splitting the short term clone volume, if the parent pool does not have enough space to accommodate the volume after split, it will be automatically resized, which will lead to increased billing. To accept capacity pool size auto grow and create a short term clone volume, set the property as Accepted. If Declined, the short term clone volume creation operation will fail. This property can only be used in conjunction with create_from_snapshot_resource_id. Changing this forces a new resource to be created.
+	// While auto splitting the short term clone volume, if the parent pool does not have enough space to accommodate the volume after split, it will be automatically resized, which will lead to increased billing. To accept capacity pool size auto grow and create a short term clone volume, set the property as accepted. Can only be used in conjunction with `create_from_snapshot_resource_id`.
+	AcceptGrowCapacityPoolForShortTermCloneSplit *string `json:"acceptGrowCapacityPoolForShortTermCloneSplit,omitempty" tf:"accept_grow_capacity_pool_for_short_term_clone_split,omitempty"`
+
 	// Is the NetApp Volume enabled for Azure VMware Solution (AVS) datastore purpose. Defaults to false. Changing this forces a new resource to be created.
 	AzureVMwareDataStoreEnabled *bool `json:"azureVmwareDataStoreEnabled,omitempty" tf:"azure_vmware_data_store_enabled,omitempty"`
+
+	// A cool_access block as defined below.
+	CoolAccess *CoolAccessInitParameters `json:"coolAccess,omitempty" tf:"cool_access,omitempty"`
 
 	// Creates volume from snapshot. Following properties must be the same as the original volume where the snapshot was taken from: protocols, subnet_id, location, service_level, resource_group_name and account_name. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/netapp/v1beta1.Snapshot
@@ -351,7 +404,7 @@ type VolumeInitParameters struct {
 	// Indicates which network feature to use, accepted values are Basic or Standard, it defaults to Basic if not defined. This is a feature in public preview and for more information about it and how to register, please refer to Configure network features for an Azure NetApp Files volume.
 	NetworkFeatures *string `json:"networkFeatures,omitempty" tf:"network_features,omitempty"`
 
-	// The target volume protocol expressed as a list. Supported single value include CIFS, NFSv3, or NFSv4.1. If argument is not defined it will default to NFSv3. Changing this forces a new resource to be created and data will be lost. Dual protocol scenario is supported for CIFS and NFSv3, for more information, please refer to Create a dual-protocol volume for Azure NetApp Files document.
+	// The target volume protocol expressed as a list. Supported single value include CIFS, NFSv3, or NFSv4.1. If argument is not defined it will default to NFSv3. Protocol conversion between NFSv3 and NFSv4.1 and vice-versa is supported without recreating the volume, however export policy rules must be updated accordingly to avoid configuration drift (e.g., when converting from NFSv3 to NFSv4.1, set nfsv3_enabled = false and nfsv41_enabled = true in export policy rules). Dual protocol scenario is supported for CIFS and NFSv3, for more information, please refer to Create a dual-protocol volume for Azure NetApp Files document.
 	// +listType=set
 	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
 
@@ -370,7 +423,7 @@ type VolumeInitParameters struct {
 	// Volume security style, accepted values are unix or ntfs. If not provided, single-protocol volume is created defaulting to unix if it is NFSv3 or NFSv4.1 volume, if CIFS, it will default to ntfs. In a dual-protocol volume, if not provided, its value will be ntfs. Changing this forces a new resource to be created.
 	SecurityStyle *string `json:"securityStyle,omitempty" tf:"security_style,omitempty"`
 
-	// The target performance of the file system. Valid values include Premium, Standard, or Ultra.
+	// The target performance of the file system. Possible values are Premium, Standard, Ultra and Flexible.
 	ServiceLevel *string `json:"serviceLevel,omitempty" tf:"service_level,omitempty"`
 
 	// Enable SMB encryption. Changing this forces a new resource to be created.
@@ -412,11 +465,18 @@ type VolumeInitParameters struct {
 
 type VolumeObservation struct {
 
+	// While auto splitting the short term clone volume, if the parent pool does not have enough space to accommodate the volume after split, it will be automatically resized, which will lead to increased billing. To accept capacity pool size auto grow and create a short term clone volume, set the property as Accepted. If Declined, the short term clone volume creation operation will fail. This property can only be used in conjunction with create_from_snapshot_resource_id. Changing this forces a new resource to be created.
+	// While auto splitting the short term clone volume, if the parent pool does not have enough space to accommodate the volume after split, it will be automatically resized, which will lead to increased billing. To accept capacity pool size auto grow and create a short term clone volume, set the property as accepted. Can only be used in conjunction with `create_from_snapshot_resource_id`.
+	AcceptGrowCapacityPoolForShortTermCloneSplit *string `json:"acceptGrowCapacityPoolForShortTermCloneSplit,omitempty" tf:"accept_grow_capacity_pool_for_short_term_clone_split,omitempty"`
+
 	// The name of the NetApp account in which the NetApp Pool should be created. Changing this forces a new resource to be created.
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
 	// Is the NetApp Volume enabled for Azure VMware Solution (AVS) datastore purpose. Defaults to false. Changing this forces a new resource to be created.
 	AzureVMwareDataStoreEnabled *bool `json:"azureVmwareDataStoreEnabled,omitempty" tf:"azure_vmware_data_store_enabled,omitempty"`
+
+	// A cool_access block as defined below.
+	CoolAccess *CoolAccessObservation `json:"coolAccess,omitempty" tf:"cool_access,omitempty"`
 
 	// Creates volume from snapshot. Following properties must be the same as the original volume where the snapshot was taken from: protocols, subnet_id, location, service_level, resource_group_name and account_name. Changing this forces a new resource to be created.
 	CreateFromSnapshotResourceID *string `json:"createFromSnapshotResourceId,omitempty" tf:"create_from_snapshot_resource_id,omitempty"`
@@ -462,7 +522,7 @@ type VolumeObservation struct {
 	// The name of the NetApp pool in which the NetApp Volume should be created.
 	PoolName *string `json:"poolName,omitempty" tf:"pool_name,omitempty"`
 
-	// The target volume protocol expressed as a list. Supported single value include CIFS, NFSv3, or NFSv4.1. If argument is not defined it will default to NFSv3. Changing this forces a new resource to be created and data will be lost. Dual protocol scenario is supported for CIFS and NFSv3, for more information, please refer to Create a dual-protocol volume for Azure NetApp Files document.
+	// The target volume protocol expressed as a list. Supported single value include CIFS, NFSv3, or NFSv4.1. If argument is not defined it will default to NFSv3. Protocol conversion between NFSv3 and NFSv4.1 and vice-versa is supported without recreating the volume, however export policy rules must be updated accordingly to avoid configuration drift (e.g., when converting from NFSv3 to NFSv4.1, set nfsv3_enabled = false and nfsv41_enabled = true in export policy rules). Dual protocol scenario is supported for CIFS and NFSv3, for more information, please refer to Create a dual-protocol volume for Azure NetApp Files document.
 	// +listType=set
 	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
 
@@ -484,7 +544,7 @@ type VolumeObservation struct {
 	// Volume security style, accepted values are unix or ntfs. If not provided, single-protocol volume is created defaulting to unix if it is NFSv3 or NFSv4.1 volume, if CIFS, it will default to ntfs. In a dual-protocol volume, if not provided, its value will be ntfs. Changing this forces a new resource to be created.
 	SecurityStyle *string `json:"securityStyle,omitempty" tf:"security_style,omitempty"`
 
-	// The target performance of the file system. Valid values include Premium, Standard, or Ultra.
+	// The target performance of the file system. Possible values are Premium, Standard, Ultra and Flexible.
 	ServiceLevel *string `json:"serviceLevel,omitempty" tf:"service_level,omitempty"`
 
 	// Enable SMB encryption. Changing this forces a new resource to be created.
@@ -516,6 +576,11 @@ type VolumeObservation struct {
 
 type VolumeParameters struct {
 
+	// While auto splitting the short term clone volume, if the parent pool does not have enough space to accommodate the volume after split, it will be automatically resized, which will lead to increased billing. To accept capacity pool size auto grow and create a short term clone volume, set the property as Accepted. If Declined, the short term clone volume creation operation will fail. This property can only be used in conjunction with create_from_snapshot_resource_id. Changing this forces a new resource to be created.
+	// While auto splitting the short term clone volume, if the parent pool does not have enough space to accommodate the volume after split, it will be automatically resized, which will lead to increased billing. To accept capacity pool size auto grow and create a short term clone volume, set the property as accepted. Can only be used in conjunction with `create_from_snapshot_resource_id`.
+	// +kubebuilder:validation:Optional
+	AcceptGrowCapacityPoolForShortTermCloneSplit *string `json:"acceptGrowCapacityPoolForShortTermCloneSplit,omitempty" tf:"accept_grow_capacity_pool_for_short_term_clone_split,omitempty"`
+
 	// The name of the NetApp account in which the NetApp Pool should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/netapp/v1beta2.Account
 	// +kubebuilder:validation:Optional
@@ -532,6 +597,10 @@ type VolumeParameters struct {
 	// Is the NetApp Volume enabled for Azure VMware Solution (AVS) datastore purpose. Defaults to false. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	AzureVMwareDataStoreEnabled *bool `json:"azureVmwareDataStoreEnabled,omitempty" tf:"azure_vmware_data_store_enabled,omitempty"`
+
+	// A cool_access block as defined below.
+	// +kubebuilder:validation:Optional
+	CoolAccess *CoolAccessParameters `json:"coolAccess,omitempty" tf:"cool_access,omitempty"`
 
 	// Creates volume from snapshot. Following properties must be the same as the original volume where the snapshot was taken from: protocols, subnet_id, location, service_level, resource_group_name and account_name. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/netapp/v1beta1.Snapshot
@@ -602,7 +671,7 @@ type VolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	PoolNameSelector *v1.Selector `json:"poolNameSelector,omitempty" tf:"-"`
 
-	// The target volume protocol expressed as a list. Supported single value include CIFS, NFSv3, or NFSv4.1. If argument is not defined it will default to NFSv3. Changing this forces a new resource to be created and data will be lost. Dual protocol scenario is supported for CIFS and NFSv3, for more information, please refer to Create a dual-protocol volume for Azure NetApp Files document.
+	// The target volume protocol expressed as a list. Supported single value include CIFS, NFSv3, or NFSv4.1. If argument is not defined it will default to NFSv3. Protocol conversion between NFSv3 and NFSv4.1 and vice-versa is supported without recreating the volume, however export policy rules must be updated accordingly to avoid configuration drift (e.g., when converting from NFSv3 to NFSv4.1, set nfsv3_enabled = false and nfsv41_enabled = true in export policy rules). Dual protocol scenario is supported for CIFS and NFSv3, for more information, please refer to Create a dual-protocol volume for Azure NetApp Files document.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
@@ -639,7 +708,7 @@ type VolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityStyle *string `json:"securityStyle,omitempty" tf:"security_style,omitempty"`
 
-	// The target performance of the file system. Valid values include Premium, Standard, or Ultra.
+	// The target performance of the file system. Possible values are Premium, Standard, Ultra and Flexible.
 	// +kubebuilder:validation:Optional
 	ServiceLevel *string `json:"serviceLevel,omitempty" tf:"service_level,omitempty"`
 

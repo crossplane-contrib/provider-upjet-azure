@@ -474,6 +474,20 @@ spec:
                     description: One or more network_interface blocks as defined below.
                     items:
                       properties:
+                        auxiliaryMode:
+                          description: Specifies the auxiliary mode used to enable
+                            network high-performance feature on Network Virtual Appliances
+                            (NVAs). This feature offers competitive performance in
+                            Connections Per Second (CPS) optimization, along with
+                            improvements to handling large amounts of simultaneous
+                            connections. Possible values are AcceleratedConnections
+                            and Floating.
+                          type: string
+                        auxiliarySku:
+                          description: Specifies the SKU used for the network high-performance
+                            feature on Network Virtual Appliances (NVAs). Possible
+                            values are A1, A2, A4 and A8.
+                          type: string
                         dnsServers:
                           description: A list of IP Addresses of DNS Servers which
                             should be assigned to the Network Interface.
@@ -794,6 +808,18 @@ spec:
                       the Virtual Machine Scale Set should be assigned to. Changing
                       this forces a new resource to be created.
                     type: string
+                  resilientVmCreationEnabled:
+                    description: Should resilient VM creation be enabled? When enabled,
+                      the service will attempt to create VMs in alternative fault
+                      domains or zones if the primary location fails during creation.
+                      Defaults to false.
+                    type: boolean
+                  resilientVmDeletionEnabled:
+                    description: Should resilient VM deletion be enabled? When enabled,
+                      the service will use a more resilient deletion process that
+                      attempts to gracefully handle failures during VM termination.
+                      Defaults to false.
+                    type: boolean
                   resourceGroupName:
                     description: The name of the Resource Group in which the Windows
                       Virtual Machine Scale Set should be exist. Changing this forces
@@ -1528,6 +1554,20 @@ spec:
                     description: One or more network_interface blocks as defined below.
                     items:
                       properties:
+                        auxiliaryMode:
+                          description: Specifies the auxiliary mode used to enable
+                            network high-performance feature on Network Virtual Appliances
+                            (NVAs). This feature offers competitive performance in
+                            Connections Per Second (CPS) optimization, along with
+                            improvements to handling large amounts of simultaneous
+                            connections. Possible values are AcceleratedConnections
+                            and Floating.
+                          type: string
+                        auxiliarySku:
+                          description: Specifies the SKU used for the network high-performance
+                            feature on Network Virtual Appliances (NVAs). Possible
+                            values are A1, A2, A4 and A8.
+                          type: string
                         dnsServers:
                           description: A list of IP Addresses of DNS Servers which
                             should be assigned to the Network Interface.
@@ -1848,6 +1888,18 @@ spec:
                       the Virtual Machine Scale Set should be assigned to. Changing
                       this forces a new resource to be created.
                     type: string
+                  resilientVmCreationEnabled:
+                    description: Should resilient VM creation be enabled? When enabled,
+                      the service will attempt to create VMs in alternative fault
+                      domains or zones if the primary location fails during creation.
+                      Defaults to false.
+                    type: boolean
+                  resilientVmDeletionEnabled:
+                    description: Should resilient VM deletion be enabled? When enabled,
+                      the service will use a more resilient deletion process that
+                      attempts to gracefully handle failures during VM termination.
+                      Defaults to false.
+                    type: boolean
                   rollingUpgradePolicy:
                     description: A rolling_upgrade_policy block as defined below.
                       This is Required and can only be specified when upgrade_mode
@@ -2545,6 +2597,20 @@ spec:
                     description: One or more network_interface blocks as defined below.
                     items:
                       properties:
+                        auxiliaryMode:
+                          description: Specifies the auxiliary mode used to enable
+                            network high-performance feature on Network Virtual Appliances
+                            (NVAs). This feature offers competitive performance in
+                            Connections Per Second (CPS) optimization, along with
+                            improvements to handling large amounts of simultaneous
+                            connections. Possible values are AcceleratedConnections
+                            and Floating.
+                          type: string
+                        auxiliarySku:
+                          description: Specifies the SKU used for the network high-performance
+                            feature on Network Virtual Appliances (NVAs). Possible
+                            values are A1, A2, A4 and A8.
+                          type: string
                         dnsServers:
                           description: A list of IP Addresses of DNS Servers which
                             should be assigned to the Network Interface.
@@ -2789,6 +2855,18 @@ spec:
                       the Virtual Machine Scale Set should be assigned to. Changing
                       this forces a new resource to be created.
                     type: string
+                  resilientVmCreationEnabled:
+                    description: Should resilient VM creation be enabled? When enabled,
+                      the service will attempt to create VMs in alternative fault
+                      domains or zones if the primary location fails during creation.
+                      Defaults to false.
+                    type: boolean
+                  resilientVmDeletionEnabled:
+                    description: Should resilient VM deletion be enabled? When enabled,
+                      the service will use a more resilient deletion process that
+                      attempts to gracefully handle failures during VM termination.
+                      Defaults to false.
+                    type: boolean
                   resourceGroupName:
                     description: The name of the Resource Group in which the Windows
                       Virtual Machine Scale Set should be exist. Changing this forces
@@ -3540,6 +3618,20 @@ spec:
                     description: One or more network_interface blocks as defined below.
                     items:
                       properties:
+                        auxiliaryMode:
+                          description: Specifies the auxiliary mode used to enable
+                            network high-performance feature on Network Virtual Appliances
+                            (NVAs). This feature offers competitive performance in
+                            Connections Per Second (CPS) optimization, along with
+                            improvements to handling large amounts of simultaneous
+                            connections. Possible values are AcceleratedConnections
+                            and Floating.
+                          type: string
+                        auxiliarySku:
+                          description: Specifies the SKU used for the network high-performance
+                            feature on Network Virtual Appliances (NVAs). Possible
+                            values are A1, A2, A4 and A8.
+                          type: string
                         dnsServers:
                           description: A list of IP Addresses of DNS Servers which
                             should be assigned to the Network Interface.
@@ -3852,6 +3944,18 @@ spec:
                       the Virtual Machine Scale Set should be assigned to. Changing
                       this forces a new resource to be created.
                     type: string
+                  resilientVmCreationEnabled:
+                    description: Should resilient VM creation be enabled? When enabled,
+                      the service will attempt to create VMs in alternative fault
+                      domains or zones if the primary location fails during creation.
+                      Defaults to false.
+                    type: boolean
+                  resilientVmDeletionEnabled:
+                    description: Should resilient VM deletion be enabled? When enabled,
+                      the service will use a more resilient deletion process that
+                      attempts to gracefully handle failures during VM termination.
+                      Defaults to false.
+                    type: boolean
                   resourceGroupName:
                     description: The name of the Resource Group in which the Windows
                       Virtual Machine Scale Set should be exist. Changing this forces
@@ -4560,6 +4664,20 @@ spec:
                     description: One or more network_interface blocks as defined below.
                     items:
                       properties:
+                        auxiliaryMode:
+                          description: Specifies the auxiliary mode used to enable
+                            network high-performance feature on Network Virtual Appliances
+                            (NVAs). This feature offers competitive performance in
+                            Connections Per Second (CPS) optimization, along with
+                            improvements to handling large amounts of simultaneous
+                            connections. Possible values are AcceleratedConnections
+                            and Floating.
+                          type: string
+                        auxiliarySku:
+                          description: Specifies the SKU used for the network high-performance
+                            feature on Network Virtual Appliances (NVAs). Possible
+                            values are A1, A2, A4 and A8.
+                          type: string
                         dnsServers:
                           description: A list of IP Addresses of DNS Servers which
                             should be assigned to the Network Interface.
@@ -4872,6 +4990,18 @@ spec:
                       the Virtual Machine Scale Set should be assigned to. Changing
                       this forces a new resource to be created.
                     type: string
+                  resilientVmCreationEnabled:
+                    description: Should resilient VM creation be enabled? When enabled,
+                      the service will attempt to create VMs in alternative fault
+                      domains or zones if the primary location fails during creation.
+                      Defaults to false.
+                    type: boolean
+                  resilientVmDeletionEnabled:
+                    description: Should resilient VM deletion be enabled? When enabled,
+                      the service will use a more resilient deletion process that
+                      attempts to gracefully handle failures during VM termination.
+                      Defaults to false.
+                    type: boolean
                   rollingUpgradePolicy:
                     description: A rolling_upgrade_policy block as defined below.
                       This is Required and can only be specified when upgrade_mode
@@ -5543,6 +5673,20 @@ spec:
                     description: One or more network_interface blocks as defined below.
                     items:
                       properties:
+                        auxiliaryMode:
+                          description: Specifies the auxiliary mode used to enable
+                            network high-performance feature on Network Virtual Appliances
+                            (NVAs). This feature offers competitive performance in
+                            Connections Per Second (CPS) optimization, along with
+                            improvements to handling large amounts of simultaneous
+                            connections. Possible values are AcceleratedConnections
+                            and Floating.
+                          type: string
+                        auxiliarySku:
+                          description: Specifies the SKU used for the network high-performance
+                            feature on Network Virtual Appliances (NVAs). Possible
+                            values are A1, A2, A4 and A8.
+                          type: string
                         dnsServers:
                           description: A list of IP Addresses of DNS Servers which
                             should be assigned to the Network Interface.
@@ -5779,6 +5923,18 @@ spec:
                       the Virtual Machine Scale Set should be assigned to. Changing
                       this forces a new resource to be created.
                     type: string
+                  resilientVmCreationEnabled:
+                    description: Should resilient VM creation be enabled? When enabled,
+                      the service will attempt to create VMs in alternative fault
+                      domains or zones if the primary location fails during creation.
+                      Defaults to false.
+                    type: boolean
+                  resilientVmDeletionEnabled:
+                    description: Should resilient VM deletion be enabled? When enabled,
+                      the service will use a more resilient deletion process that
+                      attempts to gracefully handle failures during VM termination.
+                      Defaults to false.
+                    type: boolean
                   resourceGroupName:
                     description: The name of the Resource Group in which the Windows
                       Virtual Machine Scale Set should be exist. Changing this forces

@@ -15,7 +15,7 @@ import (
 
 type AlwaysReadyInitParameters struct {
 
-	// The instance count of the always_ready of the  Function App. The minimum number is 0. The total number of instance_count should not exceed the maximum_instance_count.
+	// The instance count of the always_ready of the Function App. The minimum number is 0. The total number of instance_count should not exceed the maximum_instance_count.
 	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
 
 	// The name of the always_ready of the Function App.
@@ -24,7 +24,7 @@ type AlwaysReadyInitParameters struct {
 
 type AlwaysReadyObservation struct {
 
-	// The instance count of the always_ready of the  Function App. The minimum number is 0. The total number of instance_count should not exceed the maximum_instance_count.
+	// The instance count of the always_ready of the Function App. The minimum number is 0. The total number of instance_count should not exceed the maximum_instance_count.
 	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
 
 	// The name of the always_ready of the Function App.
@@ -33,7 +33,7 @@ type AlwaysReadyObservation struct {
 
 type AlwaysReadyParameters struct {
 
-	// The instance count of the always_ready of the  Function App. The minimum number is 0. The total number of instance_count should not exceed the maximum_instance_count.
+	// The instance count of the always_ready of the Function App. The minimum number is 0. The total number of instance_count should not exceed the maximum_instance_count.
 	// +kubebuilder:validation:Optional
 	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
 
@@ -1706,6 +1706,9 @@ type FunctionAppFlexConsumptionInitParameters struct {
 	// Is the Function App enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// The Http concurrency of the instances on which your app runs. The supported value are from 1 to 1000.
+	HTTPConcurrency *float64 `json:"httpConcurrency,omitempty" tf:"http_concurrency,omitempty"`
+
 	// Is Https Connection enforced to the function app. Defaults to false
 	// Can the Function App only be accessed via HTTPS?
 	HTTPSOnly *bool `json:"httpsOnly,omitempty" tf:"https_only,omitempty"`
@@ -1713,7 +1716,7 @@ type FunctionAppFlexConsumptionInitParameters struct {
 	// A identity block as defined below.
 	Identity *FunctionAppFlexConsumptionIdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
-	// The memory size of the instances on which your app runs. The currently supported values are 2048 or 4096.
+	// The memory size of the instances on which your app runs. Reference the Microsoft Documentation for the currently supported values. Defaults to 2048.
 	InstanceMemoryInMb *float64 `json:"instanceMemoryInMb,omitempty" tf:"instance_memory_in_mb,omitempty"`
 
 	// The Azure Region where the Function App should exist. Changing this forces a new Function App to be created.
@@ -1861,6 +1864,9 @@ type FunctionAppFlexConsumptionObservation struct {
 	// Is the Function App enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// The Http concurrency of the instances on which your app runs. The supported value are from 1 to 1000.
+	HTTPConcurrency *float64 `json:"httpConcurrency,omitempty" tf:"http_concurrency,omitempty"`
+
 	// Is Https Connection enforced to the function app. Defaults to false
 	// Can the Function App only be accessed via HTTPS?
 	HTTPSOnly *bool `json:"httpsOnly,omitempty" tf:"https_only,omitempty"`
@@ -1874,7 +1880,7 @@ type FunctionAppFlexConsumptionObservation struct {
 	// A identity block as defined below.
 	Identity *FunctionAppFlexConsumptionIdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
-	// The memory size of the instances on which your app runs. The currently supported values are 2048 or 4096.
+	// The memory size of the instances on which your app runs. Reference the Microsoft Documentation for the currently supported values. Defaults to 2048.
 	InstanceMemoryInMb *float64 `json:"instanceMemoryInMb,omitempty" tf:"instance_memory_in_mb,omitempty"`
 
 	// The Kind value for this Linux Function App.
@@ -1996,6 +2002,10 @@ type FunctionAppFlexConsumptionParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// The Http concurrency of the instances on which your app runs. The supported value are from 1 to 1000.
+	// +kubebuilder:validation:Optional
+	HTTPConcurrency *float64 `json:"httpConcurrency,omitempty" tf:"http_concurrency,omitempty"`
+
 	// Is Https Connection enforced to the function app. Defaults to false
 	// Can the Function App only be accessed via HTTPS?
 	// +kubebuilder:validation:Optional
@@ -2005,7 +2015,7 @@ type FunctionAppFlexConsumptionParameters struct {
 	// +kubebuilder:validation:Optional
 	Identity *FunctionAppFlexConsumptionIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
-	// The memory size of the instances on which your app runs. The currently supported values are 2048 or 4096.
+	// The memory size of the instances on which your app runs. Reference the Microsoft Documentation for the currently supported values. Defaults to 2048.
 	// +kubebuilder:validation:Optional
 	InstanceMemoryInMb *float64 `json:"instanceMemoryInMb,omitempty" tf:"instance_memory_in_mb,omitempty"`
 
@@ -2517,7 +2527,7 @@ type FunctionAppFlexConsumptionSiteConfigInitParameters struct {
 	// Should the Linux Function App `ip_restriction` configuration be used for the SCM also.
 	ScmUseMainIPRestriction *bool `json:"scmUseMainIpRestriction,omitempty" tf:"scm_use_main_ip_restriction,omitempty"`
 
-	// Should the Linux Web App  Linux Function App use a 32-bit worker. Defaults to false.
+	// Should the Linux Web App Linux Function App use a 32-bit worker. Defaults to false.
 	// Should the Linux Function App use a 32-bit worker.
 	Use32BitWorker *bool `json:"use32BitWorker,omitempty" tf:"use_32_bit_worker,omitempty"`
 
@@ -2632,7 +2642,7 @@ type FunctionAppFlexConsumptionSiteConfigObservation struct {
 	// Should the Linux Function App `ip_restriction` configuration be used for the SCM also.
 	ScmUseMainIPRestriction *bool `json:"scmUseMainIpRestriction,omitempty" tf:"scm_use_main_ip_restriction,omitempty"`
 
-	// Should the Linux Web App  Linux Function App use a 32-bit worker. Defaults to false.
+	// Should the Linux Web App Linux Function App use a 32-bit worker. Defaults to false.
 	// Should the Linux Function App use a 32-bit worker.
 	Use32BitWorker *bool `json:"use32BitWorker,omitempty" tf:"use_32_bit_worker,omitempty"`
 
@@ -2794,7 +2804,7 @@ type FunctionAppFlexConsumptionSiteConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	ScmUseMainIPRestriction *bool `json:"scmUseMainIpRestriction,omitempty" tf:"scm_use_main_ip_restriction,omitempty"`
 
-	// Should the Linux Web App  Linux Function App use a 32-bit worker. Defaults to false.
+	// Should the Linux Web App Linux Function App use a 32-bit worker. Defaults to false.
 	// Should the Linux Function App use a 32-bit worker.
 	// +kubebuilder:validation:Optional
 	Use32BitWorker *bool `json:"use32BitWorker,omitempty" tf:"use_32_bit_worker,omitempty"`

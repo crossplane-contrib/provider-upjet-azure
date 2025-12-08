@@ -16,7 +16,7 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: systemtopic-rg
-    sourceArmResourceIdSelector:
+    sourceResourceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: systemtopicacc
     topicType: Microsoft.Storage.StorageAccounts
@@ -44,7 +44,7 @@ metadata:
     meta.upbound.io/example-id: eventgrid/v1beta1/systemtopic
   labels:
     testing.upbound.io/example-name: systemtopicacc
-  name: systemtopicacc
+  name: systemtopicacc55
 spec:
   forProvider:
     accountReplicationType: LRS

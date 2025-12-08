@@ -75,7 +75,7 @@ type SubscriptionInitParameters struct {
 	// The name of a Queue or Topic to automatically forward messages to.
 	ForwardTo *string `json:"forwardTo,omitempty" tf:"forward_to,omitempty"`
 
-	// The lock duration for the subscription as an ISO 8601 duration. The default value is 1 minute or P0DT0H1M0S . The maximum value is 5 minutes or P0DT0H5M0S . Defaults to PT1M.
+	// The lock duration for the subscription as an ISO 8601 duration. Defaults to PT1M.
 	LockDuration *string `json:"lockDuration,omitempty" tf:"lock_duration,omitempty"`
 
 	// The maximum number of deliveries.
@@ -120,7 +120,7 @@ type SubscriptionObservation struct {
 	// The ServiceBus Subscription ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The lock duration for the subscription as an ISO 8601 duration. The default value is 1 minute or P0DT0H1M0S . The maximum value is 5 minutes or P0DT0H5M0S . Defaults to PT1M.
+	// The lock duration for the subscription as an ISO 8601 duration. Defaults to PT1M.
 	LockDuration *string `json:"lockDuration,omitempty" tf:"lock_duration,omitempty"`
 
 	// The maximum number of deliveries.
@@ -174,7 +174,7 @@ type SubscriptionParameters struct {
 	// +kubebuilder:validation:Optional
 	ForwardTo *string `json:"forwardTo,omitempty" tf:"forward_to,omitempty"`
 
-	// The lock duration for the subscription as an ISO 8601 duration. The default value is 1 minute or P0DT0H1M0S . The maximum value is 5 minutes or P0DT0H5M0S . Defaults to PT1M.
+	// The lock duration for the subscription as an ISO 8601 duration. Defaults to PT1M.
 	// +kubebuilder:validation:Optional
 	LockDuration *string `json:"lockDuration,omitempty" tf:"lock_duration,omitempty"`
 

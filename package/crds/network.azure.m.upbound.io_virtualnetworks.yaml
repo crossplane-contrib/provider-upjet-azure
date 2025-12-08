@@ -101,7 +101,7 @@ spec:
                       Possible values are between 4 and 30 minutes.
                     type: number
                   ipAddressPool:
-                    description: One or two ip_address_pool blocks as defined below.
+                    description: One or more ip_address_pool blocks as defined below.
                       Only one association of each IP type(IPv4 or IPv6) is allowed.
                     items:
                       properties:
@@ -273,7 +273,7 @@ spec:
                       Possible values are between 4 and 30 minutes.
                     type: number
                   ipAddressPool:
-                    description: One or two ip_address_pool blocks as defined below.
+                    description: One or more ip_address_pool blocks as defined below.
                       Only one association of each IP type(IPv4 or IPv6) is allowed.
                     items:
                       properties:
@@ -424,7 +424,7 @@ spec:
                     description: The Virtual Network ID.
                     type: string
                   ipAddressPool:
-                    description: One or two ip_address_pool blocks as defined below.
+                    description: One or more ip_address_pool blocks as defined below.
                       Only one association of each IP type(IPv4 or IPv6) is allowed.
                     items:
                       properties:

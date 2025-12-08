@@ -44,40 +44,32 @@ type AccessPolicyParameters struct {
 }
 
 type ContactInitParameters struct {
-
-	// E-mail address of the contact.
 	Email *string `json:"email,omitempty" tf:"email,omitempty"`
 
-	// Name of the contact.
+	// Specifies the name of the Key Vault. Changing this forces a new resource to be created. The name must be globally unique. If the vault is in a recoverable state then the vault will need to be purged before reusing the name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Phone number of the contact.
 	Phone *string `json:"phone,omitempty" tf:"phone,omitempty"`
 }
 
 type ContactObservation struct {
-
-	// E-mail address of the contact.
 	Email *string `json:"email,omitempty" tf:"email,omitempty"`
 
-	// Name of the contact.
+	// Specifies the name of the Key Vault. Changing this forces a new resource to be created. The name must be globally unique. If the vault is in a recoverable state then the vault will need to be purged before reusing the name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Phone number of the contact.
 	Phone *string `json:"phone,omitempty" tf:"phone,omitempty"`
 }
 
 type ContactParameters struct {
 
-	// E-mail address of the contact.
 	// +kubebuilder:validation:Optional
 	Email *string `json:"email" tf:"email,omitempty"`
 
-	// Name of the contact.
+	// Specifies the name of the Key Vault. Changing this forces a new resource to be created. The name must be globally unique. If the vault is in a recoverable state then the vault will need to be purged before reusing the name.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Phone number of the contact.
 	// +kubebuilder:validation:Optional
 	Phone *string `json:"phone,omitempty" tf:"phone,omitempty"`
 }
@@ -140,7 +132,6 @@ type NetworkAclsParameters struct {
 type VaultInitParameters struct {
 	Contact []ContactInitParameters `json:"contact,omitempty" tf:"contact,omitempty"`
 
-	// Boolean flag to specify whether Azure Key Vault uses Role Based Access Control (RBAC) for authorization of data actions.
 	EnableRbacAuthorization *bool `json:"enableRbacAuthorization,omitempty" tf:"enable_rbac_authorization,omitempty"`
 
 	// Boolean flag to specify whether Azure Virtual Machines are permitted to retrieve certificates stored as secrets from the key vault.
@@ -164,6 +155,9 @@ type VaultInitParameters struct {
 	// Is Purge Protection enabled for this Key Vault?
 	PurgeProtectionEnabled *bool `json:"purgeProtectionEnabled,omitempty" tf:"purge_protection_enabled,omitempty"`
 
+	// Boolean flag to specify whether Azure Key Vault uses Role Based Access Control (RBAC) for authorization of data actions.
+	RbacAuthorizationEnabled *bool `json:"rbacAuthorizationEnabled,omitempty" tf:"rbac_authorization_enabled,omitempty"`
+
 	// The Name of the SKU used for this Key Vault. Possible values are standard and premium.
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
@@ -185,7 +179,6 @@ type VaultObservation struct {
 
 	Contact []ContactObservation `json:"contact,omitempty" tf:"contact,omitempty"`
 
-	// Boolean flag to specify whether Azure Key Vault uses Role Based Access Control (RBAC) for authorization of data actions.
 	EnableRbacAuthorization *bool `json:"enableRbacAuthorization,omitempty" tf:"enable_rbac_authorization,omitempty"`
 
 	// Boolean flag to specify whether Azure Virtual Machines are permitted to retrieve certificates stored as secrets from the key vault.
@@ -212,6 +205,9 @@ type VaultObservation struct {
 	// Is Purge Protection enabled for this Key Vault?
 	PurgeProtectionEnabled *bool `json:"purgeProtectionEnabled,omitempty" tf:"purge_protection_enabled,omitempty"`
 
+	// Boolean flag to specify whether Azure Key Vault uses Role Based Access Control (RBAC) for authorization of data actions.
+	RbacAuthorizationEnabled *bool `json:"rbacAuthorizationEnabled,omitempty" tf:"rbac_authorization_enabled,omitempty"`
+
 	// The name of the resource group in which to create the Key Vault. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -237,7 +233,6 @@ type VaultParameters struct {
 	// +kubebuilder:validation:Optional
 	Contact []ContactParameters `json:"contact,omitempty" tf:"contact,omitempty"`
 
-	// Boolean flag to specify whether Azure Key Vault uses Role Based Access Control (RBAC) for authorization of data actions.
 	// +kubebuilder:validation:Optional
 	EnableRbacAuthorization *bool `json:"enableRbacAuthorization,omitempty" tf:"enable_rbac_authorization,omitempty"`
 
@@ -268,6 +263,10 @@ type VaultParameters struct {
 	// Is Purge Protection enabled for this Key Vault?
 	// +kubebuilder:validation:Optional
 	PurgeProtectionEnabled *bool `json:"purgeProtectionEnabled,omitempty" tf:"purge_protection_enabled,omitempty"`
+
+	// Boolean flag to specify whether Azure Key Vault uses Role Based Access Control (RBAC) for authorization of data actions.
+	// +kubebuilder:validation:Optional
+	RbacAuthorizationEnabled *bool `json:"rbacAuthorizationEnabled,omitempty" tf:"rbac_authorization_enabled,omitempty"`
 
 	// The name of the resource group in which to create the Key Vault. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup

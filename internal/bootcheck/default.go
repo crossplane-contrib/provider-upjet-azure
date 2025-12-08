@@ -1,5 +1,4 @@
 //go:build !custombootcheck
-// +build !custombootcheck
 
 // SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
 //

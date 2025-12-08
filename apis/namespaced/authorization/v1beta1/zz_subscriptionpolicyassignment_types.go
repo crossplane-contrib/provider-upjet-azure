@@ -212,6 +212,9 @@ type SubscriptionPolicyAssignmentOverridesSelectorsInitParameters struct {
 	// The list of allowed values for the specified kind. Cannot be used with not_in. Can contain up to 50 values.
 	In []*string `json:"in,omitempty" tf:"in,omitempty"`
 
+	// Specifies which characteristic will narrow down the set of evaluated resources. Possible values are resourceLocation, resourceType and resourceWithoutLocation.
+	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
+
 	// The list of not-allowed values for the specified kind. Cannot be used with in. Can contain up to 50 values.
 	NotIn []*string `json:"notIn,omitempty" tf:"not_in,omitempty"`
 }
@@ -233,6 +236,10 @@ type SubscriptionPolicyAssignmentOverridesSelectorsParameters struct {
 	// The list of allowed values for the specified kind. Cannot be used with not_in. Can contain up to 50 values.
 	// +kubebuilder:validation:Optional
 	In []*string `json:"in,omitempty" tf:"in,omitempty"`
+
+	// Specifies which characteristic will narrow down the set of evaluated resources. Possible values are resourceLocation, resourceType and resourceWithoutLocation.
+	// +kubebuilder:validation:Optional
+	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
 
 	// The list of not-allowed values for the specified kind. Cannot be used with in. Can contain up to 50 values.
 	// +kubebuilder:validation:Optional

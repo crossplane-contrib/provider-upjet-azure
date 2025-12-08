@@ -109,7 +109,7 @@ type HealthcareDICOMServiceInitParameters struct {
 	// Whether to enabled public networks when data plane traffic coming from public networks while private endpoint is enabled. Defaults to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
-	// A storage block as defined below.
+	// A storage block as defined below. Changing this forces a new resource to be created.
 	Storage *StorageInitParameters `json:"storage,omitempty" tf:"storage,omitempty"`
 
 	// A mapping of tags to assign to the Healthcare DICOM Service.
@@ -148,7 +148,7 @@ type HealthcareDICOMServiceObservation struct {
 	// The url of the Healthcare DICOM Services.
 	ServiceURL *string `json:"serviceUrl,omitempty" tf:"service_url,omitempty"`
 
-	// A storage block as defined below.
+	// A storage block as defined below. Changing this forces a new resource to be created.
 	Storage *StorageObservation `json:"storage,omitempty" tf:"storage,omitempty"`
 
 	// A mapping of tags to assign to the Healthcare DICOM Service.
@@ -185,7 +185,7 @@ type HealthcareDICOMServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
-	// A storage block as defined below.
+	// A storage block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Storage *StorageParameters `json:"storage,omitempty" tf:"storage,omitempty"`
 

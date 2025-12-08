@@ -15,7 +15,7 @@ import (
 
 type CustomDomainInitParameters_2 struct {
 
-	// The Certificate Binding type. Possible values include Disabled and SniEnabled.  Required with container_app_environment_certificate_id. Changing this forces a new resource to be created.
+	// The Certificate Binding type. Possible values are Auto, Disabled and SniEnabled. Required with container_app_environment_certificate_id. Changing this forces a new resource to be created.
 	// The Binding type. Possible values include `Disabled` and `SniEnabled`.
 	CertificateBindingType *string `json:"certificateBindingType,omitempty" tf:"certificate_binding_type,omitempty"`
 
@@ -35,7 +35,7 @@ type CustomDomainInitParameters_2 struct {
 
 type CustomDomainObservation_2 struct {
 
-	// The Certificate Binding type. Possible values include Disabled and SniEnabled.  Required with container_app_environment_certificate_id. Changing this forces a new resource to be created.
+	// The Certificate Binding type. Possible values are Auto, Disabled and SniEnabled. Required with container_app_environment_certificate_id. Changing this forces a new resource to be created.
 	// The Binding type. Possible values include `Disabled` and `SniEnabled`.
 	CertificateBindingType *string `json:"certificateBindingType,omitempty" tf:"certificate_binding_type,omitempty"`
 
@@ -53,7 +53,7 @@ type CustomDomainObservation_2 struct {
 
 type CustomDomainParameters_2 struct {
 
-	// The Certificate Binding type. Possible values include Disabled and SniEnabled.  Required with container_app_environment_certificate_id. Changing this forces a new resource to be created.
+	// The Certificate Binding type. Possible values are Auto, Disabled and SniEnabled. Required with container_app_environment_certificate_id. Changing this forces a new resource to be created.
 	// The Binding type. Possible values include `Disabled` and `SniEnabled`.
 	// +kubebuilder:validation:Optional
 	CertificateBindingType *string `json:"certificateBindingType,omitempty" tf:"certificate_binding_type,omitempty"`

@@ -501,7 +501,7 @@ func (mg *ContainerImmutabilityPolicy) ResolveReferences(ctx context.Context, c 
 
 		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageContainerResourceManagerID),
-			Extract:      resource.ExtractParamPath("resource_manager_id", true),
+			Extract:      resource.ExtractResourceID(),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.StorageContainerResourceManagerIDRef,
 			Selector:     mg.Spec.ForProvider.StorageContainerResourceManagerIDSelector,
@@ -1064,6 +1064,26 @@ func (mg *ShareDirectory) ResolveReferences(ctx context.Context, c client.Reader
 		}
 
 		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageShareURL),
+			Extract:      resource.ExtractParamPath("url", true),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.StorageShareURLRef,
+			Selector:     mg.Spec.ForProvider.StorageShareURLSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.StorageShareURL")
+	}
+	mg.Spec.ForProvider.StorageShareURL = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StorageShareURLRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta1", "Share", "ShareList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageShareID),
 			Extract:      resource.ExtractResourceID(),
 			Namespace:    mg.GetNamespace(),
@@ -1077,6 +1097,26 @@ func (mg *ShareDirectory) ResolveReferences(ctx context.Context, c client.Reader
 	}
 	mg.Spec.InitProvider.StorageShareID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.StorageShareIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta1", "Share", "ShareList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageShareURL),
+			Extract:      resource.ExtractParamPath("url", true),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.StorageShareURLRef,
+			Selector:     mg.Spec.InitProvider.StorageShareURLSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StorageShareURL")
+	}
+	mg.Spec.InitProvider.StorageShareURL = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageShareURLRef = rsp.ResolvedReference
 
 	return nil
 }

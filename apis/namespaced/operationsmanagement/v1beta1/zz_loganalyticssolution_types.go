@@ -68,6 +68,8 @@ type LogAnalyticsSolutionInitParameters struct {
 }
 
 type LogAnalyticsSolutionObservation struct {
+
+	// The ID of the Log Analytics Solution.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.

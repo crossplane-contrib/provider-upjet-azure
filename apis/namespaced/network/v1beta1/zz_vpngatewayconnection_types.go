@@ -272,6 +272,9 @@ type VPNLinkInitParameters struct {
 	// One or more custom_bgp_address blocks as defined below.
 	CustomBGPAddress []CustomBGPAddressInitParameters `json:"customBgpAddress,omitempty" tf:"custom_bgp_address,omitempty"`
 
+	// The dead peer detection timeout of this connection in seconds. Possible values are between 9 and 3600.
+	DpdTimeoutSeconds *float64 `json:"dpdTimeoutSeconds,omitempty" tf:"dpd_timeout_seconds,omitempty"`
+
 	// A list of the egress NAT Rule Ids.
 	// +listType=set
 	EgressNATRuleIds []*string `json:"egressNatRuleIds,omitempty" tf:"egress_nat_rule_ids,omitempty"`
@@ -411,6 +414,9 @@ type VPNLinkObservation struct {
 	// One or more custom_bgp_address blocks as defined below.
 	CustomBGPAddress []CustomBGPAddressObservation `json:"customBgpAddress,omitempty" tf:"custom_bgp_address,omitempty"`
 
+	// The dead peer detection timeout of this connection in seconds. Possible values are between 9 and 3600.
+	DpdTimeoutSeconds *float64 `json:"dpdTimeoutSeconds,omitempty" tf:"dpd_timeout_seconds,omitempty"`
+
 	// A list of the egress NAT Rule Ids.
 	// +listType=set
 	EgressNATRuleIds []*string `json:"egressNatRuleIds,omitempty" tf:"egress_nat_rule_ids,omitempty"`
@@ -464,6 +470,10 @@ type VPNLinkParameters struct {
 	// One or more custom_bgp_address blocks as defined below.
 	// +kubebuilder:validation:Optional
 	CustomBGPAddress []CustomBGPAddressParameters `json:"customBgpAddress,omitempty" tf:"custom_bgp_address,omitempty"`
+
+	// The dead peer detection timeout of this connection in seconds. Possible values are between 9 and 3600.
+	// +kubebuilder:validation:Optional
+	DpdTimeoutSeconds *float64 `json:"dpdTimeoutSeconds,omitempty" tf:"dpd_timeout_seconds,omitempty"`
 
 	// A list of the egress NAT Rule Ids.
 	// +kubebuilder:validation:Optional

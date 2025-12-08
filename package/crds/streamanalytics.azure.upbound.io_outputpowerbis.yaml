@@ -414,6 +414,8 @@ spec:
                       to help remember which specific Power BI group id was used.
                     type: string
                   id:
+                    description: The ID of the Stream Analytics Output to Power BI
+                      resource.
                     type: string
                   streamAnalyticsJobId:
                     description: The ID of the Stream Analytics Job. Changing this
