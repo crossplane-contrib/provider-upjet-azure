@@ -112,6 +112,7 @@ import (
 	virtualhubip "github.com/upbound/provider-azure/v2/internal/controller/namespaced/network/virtualhubip"
 	virtualhubroutetable "github.com/upbound/provider-azure/v2/internal/controller/namespaced/network/virtualhubroutetable"
 	virtualhubroutetableroute "github.com/upbound/provider-azure/v2/internal/controller/namespaced/network/virtualhubroutetableroute"
+	virtualhubroutingintent "github.com/upbound/provider-azure/v2/internal/controller/namespaced/network/virtualhubroutingintent"
 	virtualhubsecuritypartnerprovider "github.com/upbound/provider-azure/v2/internal/controller/namespaced/network/virtualhubsecuritypartnerprovider"
 	virtualnetwork "github.com/upbound/provider-azure/v2/internal/controller/namespaced/network/virtualnetwork"
 	virtualnetworkdnsservers "github.com/upbound/provider-azure/v2/internal/controller/namespaced/network/virtualnetworkdnsservers"
@@ -236,6 +237,7 @@ func Setup_network(mgr ctrl.Manager, o controller.Options) error {
 		virtualhubip.Setup,
 		virtualhubroutetable.Setup,
 		virtualhubroutetableroute.Setup,
+		virtualhubroutingintent.Setup,
 		virtualhubsecuritypartnerprovider.Setup,
 		virtualnetwork.Setup,
 		virtualnetworkdnsservers.Setup,
@@ -366,6 +368,7 @@ func SetupGated_network(mgr ctrl.Manager, o controller.Options) error {
 		virtualhubip.SetupGated,
 		virtualhubroutetable.SetupGated,
 		virtualhubroutetableroute.SetupGated,
+		virtualhubroutingintent.SetupGated,
 		virtualhubsecuritypartnerprovider.SetupGated,
 		virtualnetwork.SetupGated,
 		virtualnetworkdnsservers.SetupGated,

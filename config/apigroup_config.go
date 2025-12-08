@@ -36,3 +36,9 @@ var (
 		"documentdb": "cosmosdb",
 	}
 )
+
+func init() {
+	// Keep the maps referenced even when overrides.go is excluded by build tags.
+	_ = resourceAPIGroupMap
+	_ = apiGroupOverrides
+}

@@ -1,0 +1,165 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualHubRoutingIntent
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/virtualhubroutingintent
+  labels:
+    testing.upbound.io/example-name: vhubroutingintent
+  name: vhubroutingintent
+spec:
+  forProvider:
+    routingPolicy:
+      - destinations:
+          - Internet
+          - PrivateTraffic
+        name: default-routing
+        nextHopSelector:
+          matchLabels:
+            testing.upbound.io/example-name: vhubroutingintent-fw
+    virtualHubIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vhubroutingintent-vh
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Firewall
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/virtualhubroutingintent
+  labels:
+    testing.upbound.io/example-name: vhubroutingintent-fw
+  name: vhubroutingintent-fw
+spec:
+  forProvider:
+    ipConfiguration:
+      - name: configuration
+        publicIpAddressIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: vhubroutingintent-pip
+        subnetIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: vhubroutingintent-subnet
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vhubroutingintent-rg
+    skuName: AZFW_VNet
+    skuTier: Standard
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: PublicIP
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/virtualhubroutingintent
+  labels:
+    testing.upbound.io/example-name: vhubroutingintent-pip
+  name: vhubroutingintent-pip
+spec:
+  forProvider:
+    allocationMethod: Static
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vhubroutingintent-rg
+    sku: Standard
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    crossplane.io/external-name: AzureFirewallSubnet
+    meta.upbound.io/example-id: network/v1beta1/virtualhubroutingintent
+  labels:
+    testing.upbound.io/example-name: vhubroutingintent-subnet
+  name: vhubroutingintent-subnet
+spec:
+  forProvider:
+    addressPrefixes:
+      - 10.10.1.0/24
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vhubroutingintent-rg
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vhubroutingintent-vnet
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/virtualhubroutingintent
+  labels:
+    testing.upbound.io/example-name: vhubroutingintent-vnet
+  name: vhubroutingintent-vnet
+spec:
+  forProvider:
+    addressSpace:
+      - 10.10.0.0/16
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vhubroutingintent-rg
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualHub
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/virtualhubroutingintent
+    uptest.upbound.io/timeout: "7200"
+  labels:
+    testing.upbound.io/example-name: vhubroutingintent-vh
+  name: vhubroutingintent-vh
+spec:
+  forProvider:
+    addressPrefix: 10.20.0.0/24
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vhubroutingintent-rg
+    virtualWanIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vhubroutingintent-vwan
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualWAN
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/virtualhubroutingintent
+  labels:
+    testing.upbound.io/example-name: vhubroutingintent-vwan
+  name: vhubroutingintent-vwan
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vhubroutingintent-rg
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/virtualhubroutingintent
+  labels:
+    testing.upbound.io/example-name: vhubroutingintent-rg
+  name: vhubroutingintent-rg
+spec:
+  forProvider:
+    location: West Europe

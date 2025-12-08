@@ -648,6 +648,13 @@ func Configure(p *config.Provider) {
 		}
 	})
 
+	p.AddResourceConfigurator("azurerm_virtual_hub_routing_intent", func(r *config.Resource) {
+		r.References["virtual_hub_id"] = config.Reference{
+			TerraformName: "azurerm_virtual_hub",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
 	p.AddResourceConfigurator("azurerm_network_manager_static_member", func(r *config.Resource) {
 		r.References["target_virtual_network_id"] = config.Reference{
 			TerraformName: "azurerm_virtual_network",
