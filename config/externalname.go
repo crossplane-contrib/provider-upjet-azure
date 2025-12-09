@@ -2027,7 +2027,7 @@ func storageDataLakeGen2Filesystem() config.ExternalName {
 }
 
 // custom function for azurerm_management_group_subscription_association
-// /managementGroup/MyManagementGroup/subscription/12345678-1234-1234-1234-123456789012
+// /providers/Microsoft.Management/managementGroups/MyManagementGroup/subscriptions/12345678-1234-1234-1234-123456789012
 func managementGroupSubscriptionAssociation() config.ExternalName {
 	e := config.IdentifierFromProvider
 	e.GetExternalNameFn = func(tfstate map[string]interface{}) (string, error) {
@@ -2045,7 +2045,7 @@ func managementGroupSubscriptionAssociation() config.ExternalName {
 		w := strings.Split(externalName, "/")
 		managementGroupName := w[0]
 		subscriptionId := w[1]
-		return fmt.Sprintf("/managementGroup/%s/subscription/%s", managementGroupName, subscriptionId), nil
+		return fmt.Sprintf("/providers/Microsoft.Management/managementGroups/%s/subscriptions/%s", managementGroupName, subscriptionId), nil
 	}
 	return e
 }
