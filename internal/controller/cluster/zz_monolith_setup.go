@@ -124,6 +124,7 @@ import (
 	botchannelwebchat "github.com/upbound/provider-azure/v2/internal/controller/cluster/botservice/botchannelwebchat"
 	botconnection "github.com/upbound/provider-azure/v2/internal/controller/cluster/botservice/botconnection"
 	botwebapp "github.com/upbound/provider-azure/v2/internal/controller/cluster/botservice/botwebapp"
+	managedredis "github.com/upbound/provider-azure/v2/internal/controller/cluster/cache/managedredis"
 	rediscachecache "github.com/upbound/provider-azure/v2/internal/controller/cluster/cache/rediscache"
 	rediscacheaccesspolicy "github.com/upbound/provider-azure/v2/internal/controller/cluster/cache/rediscacheaccesspolicy"
 	rediscacheaccesspolicyassignment "github.com/upbound/provider-azure/v2/internal/controller/cluster/cache/rediscacheaccesspolicyassignment"
@@ -867,6 +868,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		botchannelwebchat.Setup,
 		botconnection.Setup,
 		botwebapp.Setup,
+		managedredis.Setup,
 		rediscachecache.Setup,
 		rediscacheaccesspolicy.Setup,
 		rediscacheaccesspolicyassignment.Setup,
@@ -1616,6 +1618,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		botchannelwebchat.SetupGated,
 		botconnection.SetupGated,
 		botwebapp.SetupGated,
+		managedredis.SetupGated,
 		rediscachecache.SetupGated,
 		rediscacheaccesspolicy.SetupGated,
 		rediscacheaccesspolicyassignment.SetupGated,

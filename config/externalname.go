@@ -710,6 +710,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_redis_linked_server":                  config.TemplatedStringAsIdentifier("", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Cache/redis/{{ .parameters.target_redis_cache_name }}/linkedServers/{{ .parameters.linked_redis_cache_name }}"),
 	"azurerm_redis_cache_access_policy":            config.TemplatedStringAsIdentifier("name", "{{ .parameters.redis_cache_id }}/accessPolicies/{{ .external_name }}"),
 	"azurerm_redis_cache_access_policy_assignment": config.TemplatedStringAsIdentifier("name", "{{ .parameters.redis_cache_id }}/accessPolicyAssignments/{{ .external_name }}"),
+	// terraform import azurerm_managed_redis.example /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Cache/redisEnterprise/cluster1
+	"azurerm_managed_redis": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Cache/redisEnterprise/{{ .external_name }}"),
 
 	// resource
 	"azurerm_resource_group_template_deployment": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Resources/deployments/{{ .external_name }}"),

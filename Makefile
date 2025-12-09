@@ -48,7 +48,7 @@ GO_TEST_PARALLEL := $(shell echo $$(( $(NPROCS) / 2 )))
 # correctly.
 export GOPRIVATE = github.com/upbound/*
 
-GO_REQUIRED_VERSION ?= 1.25.4
+GO_REQUIRED_VERSION ?= 1.25.5
 # GOLANGCILINT_VERSION is inherited from build submodule by default.
 # Uncomment below if you need to override the version.
 GOLANGCILINT_VERSION ?= 2.6.2
