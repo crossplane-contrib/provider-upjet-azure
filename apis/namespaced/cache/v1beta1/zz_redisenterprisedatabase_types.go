@@ -14,37 +14,6 @@ import (
 	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
 )
 
-type ModuleInitParameters struct {
-
-	// Configuration options for the module (e.g. ERROR_RATE 0.00 INITIAL_SIZE 400). Changing this forces a new resource to be created. Defaults to "".
-	Args *string `json:"args,omitempty" tf:"args,omitempty"`
-
-	// The name which should be used for this module. Possible values are RedisBloom, RedisTimeSeries, RediSearch and RedisJSON. Changing this forces a new Redis Enterprise Database to be created.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-}
-
-type ModuleObservation struct {
-
-	// Configuration options for the module (e.g. ERROR_RATE 0.00 INITIAL_SIZE 400). Changing this forces a new resource to be created. Defaults to "".
-	Args *string `json:"args,omitempty" tf:"args,omitempty"`
-
-	// The name which should be used for this module. Possible values are RedisBloom, RedisTimeSeries, RediSearch and RedisJSON. Changing this forces a new Redis Enterprise Database to be created.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	Version *string `json:"version,omitempty" tf:"version,omitempty"`
-}
-
-type ModuleParameters struct {
-
-	// Configuration options for the module (e.g. ERROR_RATE 0.00 INITIAL_SIZE 400). Changing this forces a new resource to be created. Defaults to "".
-	// +kubebuilder:validation:Optional
-	Args *string `json:"args,omitempty" tf:"args,omitempty"`
-
-	// The name which should be used for this module. Possible values are RedisBloom, RedisTimeSeries, RediSearch and RedisJSON. Changing this forces a new Redis Enterprise Database to be created.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name" tf:"name,omitempty"`
-}
-
 type RedisEnterpriseDatabaseInitParameters struct {
 
 	// Specifies whether redis clients can connect using TLS-encrypted or plaintext redis protocols. Possible values are Encrypted and Plaintext. Defaults to Encrypted. Changing this forces a new Redis Enterprise Database to be created.
@@ -64,10 +33,41 @@ type RedisEnterpriseDatabaseInitParameters struct {
 	LinkedDatabaseID []*string `json:"linkedDatabaseId,omitempty" tf:"linked_database_id,omitempty"`
 
 	// A module block as defined below. Changing this forces a new resource to be created.
-	Module []ModuleInitParameters `json:"module,omitempty" tf:"module,omitempty"`
+	Module []RedisEnterpriseDatabaseModuleInitParameters `json:"module,omitempty" tf:"module,omitempty"`
 
 	// TCP port of the database endpoint. Specified at create time. Defaults to an available port. Changing this forces a new Redis Enterprise Database to be created. Defaults to 10000.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+}
+
+type RedisEnterpriseDatabaseModuleInitParameters struct {
+
+	// Configuration options for the module (e.g. ERROR_RATE 0.00 INITIAL_SIZE 400). Changing this forces a new resource to be created. Defaults to "".
+	Args *string `json:"args,omitempty" tf:"args,omitempty"`
+
+	// The name which should be used for this module. Possible values are RedisBloom, RedisTimeSeries, RediSearch and RedisJSON. Changing this forces a new Redis Enterprise Database to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type RedisEnterpriseDatabaseModuleObservation struct {
+
+	// Configuration options for the module (e.g. ERROR_RATE 0.00 INITIAL_SIZE 400). Changing this forces a new resource to be created. Defaults to "".
+	Args *string `json:"args,omitempty" tf:"args,omitempty"`
+
+	// The name which should be used for this module. Possible values are RedisBloom, RedisTimeSeries, RediSearch and RedisJSON. Changing this forces a new Redis Enterprise Database to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+}
+
+type RedisEnterpriseDatabaseModuleParameters struct {
+
+	// Configuration options for the module (e.g. ERROR_RATE 0.00 INITIAL_SIZE 400). Changing this forces a new resource to be created. Defaults to "".
+	// +kubebuilder:validation:Optional
+	Args *string `json:"args,omitempty" tf:"args,omitempty"`
+
+	// The name which should be used for this module. Possible values are RedisBloom, RedisTimeSeries, RediSearch and RedisJSON. Changing this forces a new Redis Enterprise Database to be created.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type RedisEnterpriseDatabaseObservation struct {
@@ -95,7 +95,7 @@ type RedisEnterpriseDatabaseObservation struct {
 	LinkedDatabaseID []*string `json:"linkedDatabaseId,omitempty" tf:"linked_database_id,omitempty"`
 
 	// A module block as defined below. Changing this forces a new resource to be created.
-	Module []ModuleObservation `json:"module,omitempty" tf:"module,omitempty"`
+	Module []RedisEnterpriseDatabaseModuleObservation `json:"module,omitempty" tf:"module,omitempty"`
 
 	// TCP port of the database endpoint. Specified at create time. Defaults to an available port. Changing this forces a new Redis Enterprise Database to be created. Defaults to 10000.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
@@ -140,7 +140,7 @@ type RedisEnterpriseDatabaseParameters struct {
 
 	// A module block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Module []ModuleParameters `json:"module,omitempty" tf:"module,omitempty"`
+	Module []RedisEnterpriseDatabaseModuleParameters `json:"module,omitempty" tf:"module,omitempty"`
 
 	// TCP port of the database endpoint. Specified at create time. Defaults to an available port. Changing this forces a new Redis Enterprise Database to be created. Defaults to 10000.
 	// +kubebuilder:validation:Optional

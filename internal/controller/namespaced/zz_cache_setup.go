@@ -9,6 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
+	managedredis "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cache/managedredis"
 	rediscache "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cache/rediscache"
 	rediscacheaccesspolicy "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cache/rediscacheaccesspolicy"
 	rediscacheaccesspolicyassignment "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cache/rediscacheaccesspolicyassignment"
@@ -22,6 +23,7 @@ import (
 // the supplied manager.
 func Setup_cache(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		managedredis.Setup,
 		rediscache.Setup,
 		rediscacheaccesspolicy.Setup,
 		rediscacheaccesspolicyassignment.Setup,
@@ -41,6 +43,7 @@ func Setup_cache(mgr ctrl.Manager, o controller.Options) error {
 // the supplied manager gated.
 func SetupGated_cache(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		managedredis.SetupGated,
 		rediscache.SetupGated,
 		rediscacheaccesspolicy.SetupGated,
 		rediscacheaccesspolicyassignment.SetupGated,

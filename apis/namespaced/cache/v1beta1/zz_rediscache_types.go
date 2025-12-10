@@ -14,44 +14,6 @@ import (
 	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
 )
 
-type IdentityInitParameters struct {
-
-	// A list of User Assigned Managed Identity IDs to be assigned to this Redis Cluster.
-	// +listType=set
-	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
-
-	// Specifies the type of Managed Service Identity that should be configured on this Redis Cluster. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type IdentityObservation struct {
-
-	// A list of User Assigned Managed Identity IDs to be assigned to this Redis Cluster.
-	// +listType=set
-	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
-
-	// The Route ID.
-	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
-
-	// The Route ID.
-	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
-
-	// Specifies the type of Managed Service Identity that should be configured on this Redis Cluster. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type IdentityParameters struct {
-
-	// A list of User Assigned Managed Identity IDs to be assigned to this Redis Cluster.
-	// +kubebuilder:validation:Optional
-	// +listType=set
-	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
-
-	// Specifies the type of Managed Service Identity that should be configured on this Redis Cluster. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type" tf:"type,omitempty"`
-}
-
 type PatchScheduleInitParameters struct {
 
 	// the Weekday name - possible values include Monday, Tuesday, Wednesday etc.
@@ -91,6 +53,44 @@ type PatchScheduleParameters struct {
 	StartHourUtc *float64 `json:"startHourUtc,omitempty" tf:"start_hour_utc,omitempty"`
 }
 
+type RedisCacheIdentityInitParameters struct {
+
+	// A list of User Assigned Managed Identity IDs to be assigned to this Redis Cluster.
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Redis Cluster. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type RedisCacheIdentityObservation struct {
+
+	// A list of User Assigned Managed Identity IDs to be assigned to this Redis Cluster.
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// The Route ID.
+	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
+
+	// The Route ID.
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Redis Cluster. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type RedisCacheIdentityParameters struct {
+
+	// A list of User Assigned Managed Identity IDs to be assigned to this Redis Cluster.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Redis Cluster. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type" tf:"type,omitempty"`
+}
+
 type RedisCacheInitParameters struct {
 
 	// Whether access key authentication is enabled? Defaults to true. active_directory_authentication_enabled must be set to true to disable access key authentication.
@@ -103,7 +103,7 @@ type RedisCacheInitParameters struct {
 	Family *string `json:"family,omitempty" tf:"family,omitempty"`
 
 	// An identity block as defined below.
-	Identity *IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity *RedisCacheIdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The location of the resource group. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -185,7 +185,7 @@ type RedisCacheObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// An identity block as defined below.
-	Identity *IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity *RedisCacheIdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The location of the resource group. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -264,7 +264,7 @@ type RedisCacheParameters struct {
 
 	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
-	Identity *IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity *RedisCacheIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The location of the resource group. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional

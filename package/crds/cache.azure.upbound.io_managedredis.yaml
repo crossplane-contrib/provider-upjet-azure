@@ -1,0 +1,1243 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.18.0
+  name: managedredis.cache.azure.upbound.io
+spec:
+  group: cache.azure.upbound.io
+  names:
+    categories:
+    - crossplane
+    - managed
+    - azure
+    kind: ManagedRedis
+    listKind: ManagedRedisList
+    plural: managedredis
+    singular: managedredis
+  scope: Cluster
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1beta1
+    schema:
+      openAPIV3Schema:
+        description: ManagedRedis is the Schema for the ManagedRediss API. Manages
+          a Managed Redis instance.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: ManagedRedisSpec defines the desired state of ManagedRedis
+            properties:
+              deletionPolicy:
+                default: Delete
+                description: |-
+                  DeletionPolicy specifies what will happen to the underlying external
+                  when this managed resource is deleted - either "Delete" or "Orphan" the
+                  external resource.
+                  This field is planned to be deprecated in favor of the ManagementPolicies
+                  field in a future release. Currently, both could be set independently and
+                  non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                enum:
+                - Orphan
+                - Delete
+                type: string
+              forProvider:
+                properties:
+                  customerManagedKey:
+                    description: A customer_managed_key block as defined below.
+                    properties:
+                      keyVaultKeyId:
+                        description: 'The ID of the key vault key used for encryption.
+                          For example: https://example-vault-name.vault.azure.net/keys/example-key-name/a1b2c3d4.'
+                        type: string
+                      keyVaultKeyIdRef:
+                        description: Reference to a Key in keyvault to populate keyVaultKeyId.
+                        properties:
+                          name:
+                            description: Name of the referenced object.
+                            type: string
+                          policy:
+                            description: Policies for referencing.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        required:
+                        - name
+                        type: object
+                      keyVaultKeyIdSelector:
+                        description: Selector for a Key in keyvault to populate keyVaultKeyId.
+                        properties:
+                          matchControllerRef:
+                            description: |-
+                              MatchControllerRef ensures an object with the same controller reference
+                              as the selecting object is selected.
+                            type: boolean
+                          matchLabels:
+                            additionalProperties:
+                              type: string
+                            description: MatchLabels ensures an object with matching
+                              labels is selected.
+                            type: object
+                          policy:
+                            description: Policies for selection.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        type: object
+                      userAssignedIdentityId:
+                        description: The ID of the User Assigned Identity that has
+                          access to the Key Vault Key.
+                        type: string
+                      userAssignedIdentityIdRef:
+                        description: Reference to a UserAssignedIdentity in managedidentity
+                          to populate userAssignedIdentityId.
+                        properties:
+                          name:
+                            description: Name of the referenced object.
+                            type: string
+                          policy:
+                            description: Policies for referencing.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        required:
+                        - name
+                        type: object
+                      userAssignedIdentityIdSelector:
+                        description: Selector for a UserAssignedIdentity in managedidentity
+                          to populate userAssignedIdentityId.
+                        properties:
+                          matchControllerRef:
+                            description: |-
+                              MatchControllerRef ensures an object with the same controller reference
+                              as the selecting object is selected.
+                            type: boolean
+                          matchLabels:
+                            additionalProperties:
+                              type: string
+                            description: MatchLabels ensures an object with matching
+                              labels is selected.
+                            type: object
+                          policy:
+                            description: Policies for selection.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        type: object
+                    type: object
+                  defaultDatabase:
+                    description: A default_database block as defined below. A Managed
+                      Redis instance will not be functional without a database. This
+                      block is intentionally optional to allow removal and re-creation
+                      of the database for troubleshooting purposes. A default database
+                      can be created or deleted in-place, however most properties
+                      will trigger an entire cluster replacement if changed.
+                    properties:
+                      accessKeysAuthenticationEnabled:
+                        description: Whether access key authentication is enabled
+                          for the database. Defaults to false.
+                        type: boolean
+                      clientProtocol:
+                        description: Specifies whether redis clients can connect using
+                          TLS-encrypted or plaintext redis protocols. Possible values
+                          are Encrypted and Plaintext. Defaults to Encrypted.
+                        type: string
+                      clusteringPolicy:
+                        description: Clustering policy specified at create time. Possible
+                          values are EnterpriseCluster, OSSCluster and NoCluster.
+                          Defaults to OSSCluster.
+                        type: string
+                      evictionPolicy:
+                        description: Specifies the Redis eviction policy. Possible
+                          values are AllKeysLFU, AllKeysLRU, AllKeysRandom, VolatileLRU,
+                          VolatileLFU, VolatileTTL, VolatileRandom and NoEviction.
+                          Defaults to VolatileLRU.
+                        type: string
+                      geoReplicationGroupName:
+                        description: The name of the geo-replication group. If provided,
+                          a geo-replication group will be created for this database
+                          with itself as the only member. Use azurerm_managed_redis_database_geo_replication
+                          resource to manage group membership, linking and unlinking.
+                          All databases to be linked have to have the same group name.
+                          Refer to the Managed Redis geo-replication documentation
+                          for more information.
+                        type: string
+                      module:
+                        description: A module block as defined below. Refer to the
+                          modules documentation to learn more.
+                        items:
+                          properties:
+                            args:
+                              description: Configuration options for the module (e.g.
+                                ERROR_RATE 0.00 INITIAL_SIZE 400).
+                              type: string
+                            name:
+                              description: The name which should be used for this
+                                Managed Redis instance. Changing this forces a new
+                                Managed Redis instance to be created.
+                              type: string
+                          type: object
+                        type: array
+                      persistenceAppendOnlyFileBackupFrequency:
+                        description: The frequency of Append Only File (AOF) backups.
+                          The only possible value is 1s. Providing this value implies
+                          AOF persistence method is enabled. Conflicts with persistence_redis_database_backup_frequency,
+                          only one persistence method is allowed. Conflicts with geo_replication_group_name,
+                          persistence can only be enabled on non-geo-replicated databases.
+                          Refer to the persistence documentation to learn more.
+                        type: string
+                      persistenceRedisDatabaseBackupFrequency:
+                        description: The frequency of Redis Database (RDB) backups.
+                          Possible values are 1h, 6h and 12h. Providing this value
+                          implies RDB persistence method is enabled. Conflicts with
+                          persistence_append_only_file_backup_frequency, only one
+                          persistence method is allowed. Conflicts with geo_replication_group_name,
+                          persistence can only be enabled on non-geo-replicated databases.
+                          Refer to the persistence documentation to learn more.
+                        type: string
+                    type: object
+                  highAvailabilityEnabled:
+                    description: Whether to enable high availability for the Managed
+                      Redis instance. Defaults to true. Changing this forces a new
+                      Managed Redis instance to be created.
+                    type: boolean
+                  identity:
+                    description: An identity block as defined below.
+                    properties:
+                      identityIds:
+                        description: Specifies a list of User Assigned Managed Identity
+                          IDs to be assigned to this Managed Redis instance.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      identityIdsRefs:
+                        description: References to UserAssignedIdentity in managedidentity
+                          to populate identityIds.
+                        items:
+                          description: A Reference to a named object.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        type: array
+                      identityIdsSelector:
+                        description: Selector for a list of UserAssignedIdentity in
+                          managedidentity to populate identityIds.
+                        properties:
+                          matchControllerRef:
+                            description: |-
+                              MatchControllerRef ensures an object with the same controller reference
+                              as the selecting object is selected.
+                            type: boolean
+                          matchLabels:
+                            additionalProperties:
+                              type: string
+                            description: MatchLabels ensures an object with matching
+                              labels is selected.
+                            type: object
+                          policy:
+                            description: Policies for selection.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        type: object
+                      type:
+                        description: Specifies the type of Managed Service Identity
+                          that should be configured on this Managed Redis instance.
+                          Possible values are SystemAssigned, UserAssigned, SystemAssigned,
+                          UserAssigned (to enable both).
+                        type: string
+                    type: object
+                  location:
+                    description: The Azure Region where the Managed Redis instance
+                      should exist. Refer to "Redis Cache" on the product availability
+                      documentation for supported locations. Changing this forces
+                      a new Managed Redis instance to be created.
+                    type: string
+                  publicNetworkAccess:
+                    description: The public network access setting for the Managed
+                      Redis instance. Possible values are Enabled and Disabled. Defaults
+                      to Enabled.
+                    type: string
+                  resourceGroupName:
+                    description: The name of the Resource Group where the Managed
+                      Redis instance should exist. Changing this forces a new Managed
+                      Redis instance to be created.
+                    type: string
+                  resourceGroupNameRef:
+                    description: Reference to a ResourceGroup in azure to populate
+                      resourceGroupName.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  resourceGroupNameSelector:
+                    description: Selector for a ResourceGroup in azure to populate
+                      resourceGroupName.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  skuName:
+                    description: The features and specification of the Managed Redis
+                      instance to deploy. Possible values are Balanced_B0, Balanced_B1,
+                      Balanced_B10, Balanced_B100, Balanced_B1000, Balanced_B150,
+                      Balanced_B20, Balanced_B250, Balanced_B3, Balanced_B350, Balanced_B5,
+                      Balanced_B50, Balanced_B500, Balanced_B700, ComputeOptimized_X10,
+                      ComputeOptimized_X100, ComputeOptimized_X150, ComputeOptimized_X20,
+                      ComputeOptimized_X250, ComputeOptimized_X3, ComputeOptimized_X350,
+                      ComputeOptimized_X5, ComputeOptimized_X50, ComputeOptimized_X500,
+                      ComputeOptimized_X700, FlashOptimized_A1000, FlashOptimized_A1500,
+                      FlashOptimized_A2000, FlashOptimized_A250, FlashOptimized_A4500,
+                      FlashOptimized_A500, FlashOptimized_A700, MemoryOptimized_M10,
+                      MemoryOptimized_M100, MemoryOptimized_M1000, MemoryOptimized_M150,
+                      MemoryOptimized_M1500, MemoryOptimized_M20, MemoryOptimized_M2000,
+                      MemoryOptimized_M250, MemoryOptimized_M350, MemoryOptimized_M50,
+                      MemoryOptimized_M500 and MemoryOptimized_M700. Balanced_B3 SKU
+                      or higher is required for geo-replication. Changing this forces
+                      a new Managed Redis instance to be created.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      Managed Redis instance.
+                    type: object
+                    x-kubernetes-map-type: granular
+                type: object
+              initProvider:
+                description: |-
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
+                  InitProvider holds the same fields as ForProvider, with the exception
+                  of Identifier and other resource reference fields. The fields that are
+                  in InitProvider are merged into ForProvider when the resource is created.
+                  The same fields are also added to the terraform ignore_changes hook, to
+                  avoid updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after creation,
+                  for example because of an external controller is managing them, like an
+                  autoscaler.
+                properties:
+                  customerManagedKey:
+                    description: A customer_managed_key block as defined below.
+                    properties:
+                      keyVaultKeyId:
+                        description: 'The ID of the key vault key used for encryption.
+                          For example: https://example-vault-name.vault.azure.net/keys/example-key-name/a1b2c3d4.'
+                        type: string
+                      keyVaultKeyIdRef:
+                        description: Reference to a Key in keyvault to populate keyVaultKeyId.
+                        properties:
+                          name:
+                            description: Name of the referenced object.
+                            type: string
+                          policy:
+                            description: Policies for referencing.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        required:
+                        - name
+                        type: object
+                      keyVaultKeyIdSelector:
+                        description: Selector for a Key in keyvault to populate keyVaultKeyId.
+                        properties:
+                          matchControllerRef:
+                            description: |-
+                              MatchControllerRef ensures an object with the same controller reference
+                              as the selecting object is selected.
+                            type: boolean
+                          matchLabels:
+                            additionalProperties:
+                              type: string
+                            description: MatchLabels ensures an object with matching
+                              labels is selected.
+                            type: object
+                          policy:
+                            description: Policies for selection.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        type: object
+                      userAssignedIdentityId:
+                        description: The ID of the User Assigned Identity that has
+                          access to the Key Vault Key.
+                        type: string
+                      userAssignedIdentityIdRef:
+                        description: Reference to a UserAssignedIdentity in managedidentity
+                          to populate userAssignedIdentityId.
+                        properties:
+                          name:
+                            description: Name of the referenced object.
+                            type: string
+                          policy:
+                            description: Policies for referencing.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        required:
+                        - name
+                        type: object
+                      userAssignedIdentityIdSelector:
+                        description: Selector for a UserAssignedIdentity in managedidentity
+                          to populate userAssignedIdentityId.
+                        properties:
+                          matchControllerRef:
+                            description: |-
+                              MatchControllerRef ensures an object with the same controller reference
+                              as the selecting object is selected.
+                            type: boolean
+                          matchLabels:
+                            additionalProperties:
+                              type: string
+                            description: MatchLabels ensures an object with matching
+                              labels is selected.
+                            type: object
+                          policy:
+                            description: Policies for selection.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        type: object
+                    type: object
+                  defaultDatabase:
+                    description: A default_database block as defined below. A Managed
+                      Redis instance will not be functional without a database. This
+                      block is intentionally optional to allow removal and re-creation
+                      of the database for troubleshooting purposes. A default database
+                      can be created or deleted in-place, however most properties
+                      will trigger an entire cluster replacement if changed.
+                    properties:
+                      accessKeysAuthenticationEnabled:
+                        description: Whether access key authentication is enabled
+                          for the database. Defaults to false.
+                        type: boolean
+                      clientProtocol:
+                        description: Specifies whether redis clients can connect using
+                          TLS-encrypted or plaintext redis protocols. Possible values
+                          are Encrypted and Plaintext. Defaults to Encrypted.
+                        type: string
+                      clusteringPolicy:
+                        description: Clustering policy specified at create time. Possible
+                          values are EnterpriseCluster, OSSCluster and NoCluster.
+                          Defaults to OSSCluster.
+                        type: string
+                      evictionPolicy:
+                        description: Specifies the Redis eviction policy. Possible
+                          values are AllKeysLFU, AllKeysLRU, AllKeysRandom, VolatileLRU,
+                          VolatileLFU, VolatileTTL, VolatileRandom and NoEviction.
+                          Defaults to VolatileLRU.
+                        type: string
+                      geoReplicationGroupName:
+                        description: The name of the geo-replication group. If provided,
+                          a geo-replication group will be created for this database
+                          with itself as the only member. Use azurerm_managed_redis_database_geo_replication
+                          resource to manage group membership, linking and unlinking.
+                          All databases to be linked have to have the same group name.
+                          Refer to the Managed Redis geo-replication documentation
+                          for more information.
+                        type: string
+                      module:
+                        description: A module block as defined below. Refer to the
+                          modules documentation to learn more.
+                        items:
+                          properties:
+                            args:
+                              description: Configuration options for the module (e.g.
+                                ERROR_RATE 0.00 INITIAL_SIZE 400).
+                              type: string
+                            name:
+                              description: The name which should be used for this
+                                Managed Redis instance. Changing this forces a new
+                                Managed Redis instance to be created.
+                              type: string
+                          type: object
+                        type: array
+                      persistenceAppendOnlyFileBackupFrequency:
+                        description: The frequency of Append Only File (AOF) backups.
+                          The only possible value is 1s. Providing this value implies
+                          AOF persistence method is enabled. Conflicts with persistence_redis_database_backup_frequency,
+                          only one persistence method is allowed. Conflicts with geo_replication_group_name,
+                          persistence can only be enabled on non-geo-replicated databases.
+                          Refer to the persistence documentation to learn more.
+                        type: string
+                      persistenceRedisDatabaseBackupFrequency:
+                        description: The frequency of Redis Database (RDB) backups.
+                          Possible values are 1h, 6h and 12h. Providing this value
+                          implies RDB persistence method is enabled. Conflicts with
+                          persistence_append_only_file_backup_frequency, only one
+                          persistence method is allowed. Conflicts with geo_replication_group_name,
+                          persistence can only be enabled on non-geo-replicated databases.
+                          Refer to the persistence documentation to learn more.
+                        type: string
+                    type: object
+                  highAvailabilityEnabled:
+                    description: Whether to enable high availability for the Managed
+                      Redis instance. Defaults to true. Changing this forces a new
+                      Managed Redis instance to be created.
+                    type: boolean
+                  identity:
+                    description: An identity block as defined below.
+                    properties:
+                      identityIds:
+                        description: Specifies a list of User Assigned Managed Identity
+                          IDs to be assigned to this Managed Redis instance.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      identityIdsRefs:
+                        description: References to UserAssignedIdentity in managedidentity
+                          to populate identityIds.
+                        items:
+                          description: A Reference to a named object.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        type: array
+                      identityIdsSelector:
+                        description: Selector for a list of UserAssignedIdentity in
+                          managedidentity to populate identityIds.
+                        properties:
+                          matchControllerRef:
+                            description: |-
+                              MatchControllerRef ensures an object with the same controller reference
+                              as the selecting object is selected.
+                            type: boolean
+                          matchLabels:
+                            additionalProperties:
+                              type: string
+                            description: MatchLabels ensures an object with matching
+                              labels is selected.
+                            type: object
+                          policy:
+                            description: Policies for selection.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        type: object
+                      type:
+                        description: Specifies the type of Managed Service Identity
+                          that should be configured on this Managed Redis instance.
+                          Possible values are SystemAssigned, UserAssigned, SystemAssigned,
+                          UserAssigned (to enable both).
+                        type: string
+                    type: object
+                  location:
+                    description: The Azure Region where the Managed Redis instance
+                      should exist. Refer to "Redis Cache" on the product availability
+                      documentation for supported locations. Changing this forces
+                      a new Managed Redis instance to be created.
+                    type: string
+                  publicNetworkAccess:
+                    description: The public network access setting for the Managed
+                      Redis instance. Possible values are Enabled and Disabled. Defaults
+                      to Enabled.
+                    type: string
+                  skuName:
+                    description: The features and specification of the Managed Redis
+                      instance to deploy. Possible values are Balanced_B0, Balanced_B1,
+                      Balanced_B10, Balanced_B100, Balanced_B1000, Balanced_B150,
+                      Balanced_B20, Balanced_B250, Balanced_B3, Balanced_B350, Balanced_B5,
+                      Balanced_B50, Balanced_B500, Balanced_B700, ComputeOptimized_X10,
+                      ComputeOptimized_X100, ComputeOptimized_X150, ComputeOptimized_X20,
+                      ComputeOptimized_X250, ComputeOptimized_X3, ComputeOptimized_X350,
+                      ComputeOptimized_X5, ComputeOptimized_X50, ComputeOptimized_X500,
+                      ComputeOptimized_X700, FlashOptimized_A1000, FlashOptimized_A1500,
+                      FlashOptimized_A2000, FlashOptimized_A250, FlashOptimized_A4500,
+                      FlashOptimized_A500, FlashOptimized_A700, MemoryOptimized_M10,
+                      MemoryOptimized_M100, MemoryOptimized_M1000, MemoryOptimized_M150,
+                      MemoryOptimized_M1500, MemoryOptimized_M20, MemoryOptimized_M2000,
+                      MemoryOptimized_M250, MemoryOptimized_M350, MemoryOptimized_M50,
+                      MemoryOptimized_M500 and MemoryOptimized_M700. Balanced_B3 SKU
+                      or higher is required for geo-replication. Changing this forces
+                      a new Managed Redis instance to be created.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      Managed Redis instance.
+                    type: object
+                    x-kubernetes-map-type: granular
+                type: object
+              managementPolicies:
+                default:
+                - '*'
+                description: |-
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
+                  ManagementPolicies specify the array of actions Crossplane is allowed to
+                  take on the managed and external resources.
+                  This field is planned to replace the DeletionPolicy field in a future
+                  release. Currently, both could be set independently and non-default
+                  values would be honored if the feature flag is enabled. If both are
+                  custom, the DeletionPolicy field will be ignored.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md
+                items:
+                  description: |-
+                    A ManagementAction represents an action that the Crossplane controllers
+                    can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
+              providerConfigRef:
+                default:
+                  name: default
+                description: |-
+                  ProviderConfigReference specifies how the provider that will be used to
+                  create, observe, update, and delete this managed resource should be
+                  configured.
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                  policy:
+                    description: Policies for referencing.
+                    properties:
+                      resolution:
+                        default: Required
+                        description: |-
+                          Resolution specifies whether resolution of this reference is required.
+                          The default is 'Required', which means the reconcile will fail if the
+                          reference cannot be resolved. 'Optional' means this reference will be
+                          a no-op if it cannot be resolved.
+                        enum:
+                        - Required
+                        - Optional
+                        type: string
+                      resolve:
+                        description: |-
+                          Resolve specifies when this reference should be resolved. The default
+                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                          the corresponding field is not present. Use 'Always' to resolve the
+                          reference on every reconcile.
+                        enum:
+                        - Always
+                        - IfNotPresent
+                        type: string
+                    type: object
+                required:
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: |-
+                  WriteConnectionSecretToReference specifies the namespace and name of a
+                  Secret to which any connection details for this managed resource should
+                  be written. Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                  namespace:
+                    description: Namespace of the secret.
+                    type: string
+                required:
+                - name
+                - namespace
+                type: object
+            required:
+            - forProvider
+            type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.location is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || (has(self.initProvider) && has(self.initProvider.location))'
+            - message: spec.forProvider.skuName is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.skuName)
+                || (has(self.initProvider) && has(self.initProvider.skuName))'
+          status:
+            description: ManagedRedisStatus defines the observed state of ManagedRedis.
+            properties:
+              atProvider:
+                properties:
+                  customerManagedKey:
+                    description: A customer_managed_key block as defined below.
+                    properties:
+                      keyVaultKeyId:
+                        description: 'The ID of the key vault key used for encryption.
+                          For example: https://example-vault-name.vault.azure.net/keys/example-key-name/a1b2c3d4.'
+                        type: string
+                      userAssignedIdentityId:
+                        description: The ID of the User Assigned Identity that has
+                          access to the Key Vault Key.
+                        type: string
+                    type: object
+                  defaultDatabase:
+                    description: A default_database block as defined below. A Managed
+                      Redis instance will not be functional without a database. This
+                      block is intentionally optional to allow removal and re-creation
+                      of the database for troubleshooting purposes. A default database
+                      can be created or deleted in-place, however most properties
+                      will trigger an entire cluster replacement if changed.
+                    properties:
+                      accessKeysAuthenticationEnabled:
+                        description: Whether access key authentication is enabled
+                          for the database. Defaults to false.
+                        type: boolean
+                      clientProtocol:
+                        description: Specifies whether redis clients can connect using
+                          TLS-encrypted or plaintext redis protocols. Possible values
+                          are Encrypted and Plaintext. Defaults to Encrypted.
+                        type: string
+                      clusteringPolicy:
+                        description: Clustering policy specified at create time. Possible
+                          values are EnterpriseCluster, OSSCluster and NoCluster.
+                          Defaults to OSSCluster.
+                        type: string
+                      evictionPolicy:
+                        description: Specifies the Redis eviction policy. Possible
+                          values are AllKeysLFU, AllKeysLRU, AllKeysRandom, VolatileLRU,
+                          VolatileLFU, VolatileTTL, VolatileRandom and NoEviction.
+                          Defaults to VolatileLRU.
+                        type: string
+                      geoReplicationGroupName:
+                        description: The name of the geo-replication group. If provided,
+                          a geo-replication group will be created for this database
+                          with itself as the only member. Use azurerm_managed_redis_database_geo_replication
+                          resource to manage group membership, linking and unlinking.
+                          All databases to be linked have to have the same group name.
+                          Refer to the Managed Redis geo-replication documentation
+                          for more information.
+                        type: string
+                      id:
+                        description: The ID of the Managed Redis Database Instance.
+                        type: string
+                      module:
+                        description: A module block as defined below. Refer to the
+                          modules documentation to learn more.
+                        items:
+                          properties:
+                            args:
+                              description: Configuration options for the module (e.g.
+                                ERROR_RATE 0.00 INITIAL_SIZE 400).
+                              type: string
+                            name:
+                              description: The name which should be used for this
+                                Managed Redis instance. Changing this forces a new
+                                Managed Redis instance to be created.
+                              type: string
+                            version:
+                              description: Version of the module to be used.
+                              type: string
+                          type: object
+                        type: array
+                      persistenceAppendOnlyFileBackupFrequency:
+                        description: The frequency of Append Only File (AOF) backups.
+                          The only possible value is 1s. Providing this value implies
+                          AOF persistence method is enabled. Conflicts with persistence_redis_database_backup_frequency,
+                          only one persistence method is allowed. Conflicts with geo_replication_group_name,
+                          persistence can only be enabled on non-geo-replicated databases.
+                          Refer to the persistence documentation to learn more.
+                        type: string
+                      persistenceRedisDatabaseBackupFrequency:
+                        description: The frequency of Redis Database (RDB) backups.
+                          Possible values are 1h, 6h and 12h. Providing this value
+                          implies RDB persistence method is enabled. Conflicts with
+                          persistence_append_only_file_backup_frequency, only one
+                          persistence method is allowed. Conflicts with geo_replication_group_name,
+                          persistence can only be enabled on non-geo-replicated databases.
+                          Refer to the persistence documentation to learn more.
+                        type: string
+                      port:
+                        description: TCP port of the database endpoint.
+                        type: number
+                    type: object
+                  highAvailabilityEnabled:
+                    description: Whether to enable high availability for the Managed
+                      Redis instance. Defaults to true. Changing this forces a new
+                      Managed Redis instance to be created.
+                    type: boolean
+                  hostname:
+                    description: DNS name of the cluster endpoint.
+                    type: string
+                  id:
+                    description: The ID of the Managed Redis instance.
+                    type: string
+                  identity:
+                    description: An identity block as defined below.
+                    properties:
+                      identityIds:
+                        description: Specifies a list of User Assigned Managed Identity
+                          IDs to be assigned to this Managed Redis instance.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      principalId:
+                        description: The ID of the Managed Redis instance.
+                        type: string
+                      tenantId:
+                        description: The ID of the Managed Redis instance.
+                        type: string
+                      type:
+                        description: Specifies the type of Managed Service Identity
+                          that should be configured on this Managed Redis instance.
+                          Possible values are SystemAssigned, UserAssigned, SystemAssigned,
+                          UserAssigned (to enable both).
+                        type: string
+                    type: object
+                  location:
+                    description: The Azure Region where the Managed Redis instance
+                      should exist. Refer to "Redis Cache" on the product availability
+                      documentation for supported locations. Changing this forces
+                      a new Managed Redis instance to be created.
+                    type: string
+                  publicNetworkAccess:
+                    description: The public network access setting for the Managed
+                      Redis instance. Possible values are Enabled and Disabled. Defaults
+                      to Enabled.
+                    type: string
+                  resourceGroupName:
+                    description: The name of the Resource Group where the Managed
+                      Redis instance should exist. Changing this forces a new Managed
+                      Redis instance to be created.
+                    type: string
+                  skuName:
+                    description: The features and specification of the Managed Redis
+                      instance to deploy. Possible values are Balanced_B0, Balanced_B1,
+                      Balanced_B10, Balanced_B100, Balanced_B1000, Balanced_B150,
+                      Balanced_B20, Balanced_B250, Balanced_B3, Balanced_B350, Balanced_B5,
+                      Balanced_B50, Balanced_B500, Balanced_B700, ComputeOptimized_X10,
+                      ComputeOptimized_X100, ComputeOptimized_X150, ComputeOptimized_X20,
+                      ComputeOptimized_X250, ComputeOptimized_X3, ComputeOptimized_X350,
+                      ComputeOptimized_X5, ComputeOptimized_X50, ComputeOptimized_X500,
+                      ComputeOptimized_X700, FlashOptimized_A1000, FlashOptimized_A1500,
+                      FlashOptimized_A2000, FlashOptimized_A250, FlashOptimized_A4500,
+                      FlashOptimized_A500, FlashOptimized_A700, MemoryOptimized_M10,
+                      MemoryOptimized_M100, MemoryOptimized_M1000, MemoryOptimized_M150,
+                      MemoryOptimized_M1500, MemoryOptimized_M20, MemoryOptimized_M2000,
+                      MemoryOptimized_M250, MemoryOptimized_M350, MemoryOptimized_M50,
+                      MemoryOptimized_M500 and MemoryOptimized_M700. Balanced_B3 SKU
+                      or higher is required for geo-replication. Changing this forces
+                      a new Managed Redis instance to be created.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      Managed Redis instance.
+                    type: object
+                    x-kubernetes-map-type: granular
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: |-
+                        LastTransitionTime is the last time this condition transitioned from one
+                        status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: |-
+                        A Message containing details about this condition's last transition from
+                        one status to another, if any.
+                      type: string
+                    observedGeneration:
+                      description: |-
+                        ObservedGeneration represents the .metadata.generation that the condition was set based upon.
+                        For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+                        with respect to the current state of the instance.
+                      format: int64
+                      type: integer
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: |-
+                        Type of this condition. At most one of each condition type may apply to
+                        a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
+              observedGeneration:
+                description: |-
+                  ObservedGeneration is the latest metadata.generation
+                  which resulted in either a ready state, or stalled due to error
+                  it can not recover from without human intervention.
+                format: int64
+                type: integer
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
