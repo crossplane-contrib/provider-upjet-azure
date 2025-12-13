@@ -1,0 +1,60 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: authorization.azure.m.upbound.io/v1beta1
+kind: RoleManagementPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta1/rolemanagementpolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    activationRules:
+      approvalStage:
+        primaryApprover:
+        - objectId: ${data.azuread_group.approvers.object_id}
+          type: Group
+      maximumDuration: PT1H
+      requireApproval: true
+    activeAssignmentRules:
+      expireAfter: P365D
+    eligibleAssignmentRules:
+      expirationRequired: false
+    notificationRules:
+      eligibleActivations:
+        assigneeNotifications:
+          additionalRecipients:
+          - someone.else@example.com
+          defaultRecipients: true
+          notificationLevel: All
+      eligibleAssignments:
+        approverNotifications:
+          additionalRecipients:
+          - someone@example.com
+          defaultRecipients: false
+          notificationLevel: Critical
+    roleDefinitionIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_role_definition
+    scopeSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta1/rolemanagementpolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: East US

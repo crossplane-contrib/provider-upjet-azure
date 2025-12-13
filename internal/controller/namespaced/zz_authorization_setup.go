@@ -22,6 +22,7 @@ import (
 	resourcepolicyexemption "github.com/upbound/provider-azure/v2/internal/controller/namespaced/authorization/resourcepolicyexemption"
 	roleassignment "github.com/upbound/provider-azure/v2/internal/controller/namespaced/authorization/roleassignment"
 	roledefinition "github.com/upbound/provider-azure/v2/internal/controller/namespaced/authorization/roledefinition"
+	rolemanagementpolicy "github.com/upbound/provider-azure/v2/internal/controller/namespaced/authorization/rolemanagementpolicy"
 	subscriptionpolicyassignment "github.com/upbound/provider-azure/v2/internal/controller/namespaced/authorization/subscriptionpolicyassignment"
 	subscriptionpolicyexemption "github.com/upbound/provider-azure/v2/internal/controller/namespaced/authorization/subscriptionpolicyexemption"
 	trustedaccessrolebinding "github.com/upbound/provider-azure/v2/internal/controller/namespaced/authorization/trustedaccessrolebinding"
@@ -44,6 +45,7 @@ func Setup_authorization(mgr ctrl.Manager, o controller.Options) error {
 		resourcepolicyexemption.Setup,
 		roleassignment.Setup,
 		roledefinition.Setup,
+		rolemanagementpolicy.Setup,
 		subscriptionpolicyassignment.Setup,
 		subscriptionpolicyexemption.Setup,
 		trustedaccessrolebinding.Setup,
@@ -72,6 +74,7 @@ func SetupGated_authorization(mgr ctrl.Manager, o controller.Options) error {
 		resourcepolicyexemption.SetupGated,
 		roleassignment.SetupGated,
 		roledefinition.SetupGated,
+		rolemanagementpolicy.SetupGated,
 		subscriptionpolicyassignment.SetupGated,
 		subscriptionpolicyexemption.SetupGated,
 		trustedaccessrolebinding.SetupGated,

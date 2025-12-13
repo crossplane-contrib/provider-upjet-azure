@@ -93,6 +93,7 @@ import (
 	resourcepolicyexemption "github.com/upbound/provider-azure/v2/internal/controller/cluster/authorization/resourcepolicyexemption"
 	roleassignment "github.com/upbound/provider-azure/v2/internal/controller/cluster/authorization/roleassignment"
 	roledefinition "github.com/upbound/provider-azure/v2/internal/controller/cluster/authorization/roledefinition"
+	rolemanagementpolicy "github.com/upbound/provider-azure/v2/internal/controller/cluster/authorization/rolemanagementpolicy"
 	subscriptionpolicyassignment "github.com/upbound/provider-azure/v2/internal/controller/cluster/authorization/subscriptionpolicyassignment"
 	subscriptionpolicyexemption "github.com/upbound/provider-azure/v2/internal/controller/cluster/authorization/subscriptionpolicyexemption"
 	trustedaccessrolebinding "github.com/upbound/provider-azure/v2/internal/controller/cluster/authorization/trustedaccessrolebinding"
@@ -837,6 +838,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		resourcepolicyexemption.Setup,
 		roleassignment.Setup,
 		roledefinition.Setup,
+		rolemanagementpolicy.Setup,
 		subscriptionpolicyassignment.Setup,
 		subscriptionpolicyexemption.Setup,
 		trustedaccessrolebinding.Setup,
@@ -1587,6 +1589,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		resourcepolicyexemption.SetupGated,
 		roleassignment.SetupGated,
 		roledefinition.SetupGated,
+		rolemanagementpolicy.SetupGated,
 		subscriptionpolicyassignment.SetupGated,
 		subscriptionpolicyexemption.SetupGated,
 		trustedaccessrolebinding.SetupGated,

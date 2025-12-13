@@ -527,6 +527,46 @@ func (mg *RoleDefinition) SetWriteConnectionSecretToReference(r *xpv1.LocalSecre
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this RoleManagementPolicy.
+func (mg *RoleManagementPolicy) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetManagementPolicies of this RoleManagementPolicy.
+func (mg *RoleManagementPolicy) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this RoleManagementPolicy.
+func (mg *RoleManagementPolicy) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this RoleManagementPolicy.
+func (mg *RoleManagementPolicy) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this RoleManagementPolicy.
+func (mg *RoleManagementPolicy) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetManagementPolicies of this RoleManagementPolicy.
+func (mg *RoleManagementPolicy) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this RoleManagementPolicy.
+func (mg *RoleManagementPolicy) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this RoleManagementPolicy.
+func (mg *RoleManagementPolicy) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this SubscriptionPolicyAssignment.
 func (mg *SubscriptionPolicyAssignment) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
