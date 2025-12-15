@@ -2128,6 +2128,58 @@ func (mg *IPGroup) ResolveReferences(ctx context.Context, c client.Reader) error
 	return nil
 }
 
+// ResolveReferences of this IPGroupCidr.
+func (mg *IPGroupCidr) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "IPGroup", "IPGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IPGroupID),
+			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.IPGroupIDRef,
+			Selector:     mg.Spec.ForProvider.IPGroupIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.IPGroupID")
+	}
+	mg.Spec.ForProvider.IPGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.IPGroupIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "IPGroup", "IPGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IPGroupID),
+			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.IPGroupIDRef,
+			Selector:     mg.Spec.InitProvider.IPGroupIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.IPGroupID")
+	}
+	mg.Spec.InitProvider.IPGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.IPGroupIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this LoadBalancer.
 func (mg *LoadBalancer) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed

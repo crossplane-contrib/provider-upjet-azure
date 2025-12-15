@@ -558,6 +558,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// network
 	"azurerm_virtual_network":                             config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/virtualNetworks/{{ .external_name }}"),
 	"azurerm_ip_group":                                    config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/ipGroups/{{ .external_name }}"),
+	"azurerm_ip_group_cidr":                               ipGroupCidr(),
 	"azurerm_subnet":                                      config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/virtualNetworks/{{ .parameters.virtual_network_name }}/subnets/{{ .external_name }}"),
 	"azurerm_subnet_nat_gateway_association":              config.IdentifierFromProvider,
 	"azurerm_subnet_network_security_group_association":   config.IdentifierFromProvider,
@@ -2142,6 +2143,30 @@ func policyDefinitionExternalName(resourceType string) config.ExternalName {
 			"name_prefix",
 		},
 	}
+}
+
+// custom function for azurerm_ip_group_cidr
+// required as parameters.cidr has the "/" char replaced with "_" and replace function is not available in config.TemplatedStringAsIdentifier
+// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Network/ipGroups/test-ipgroup/cidrs/10.1.0.0_24
+func ipGroupCidr() config.ExternalName {
+	e := config.IdentifierFromProvider
+	e.GetExternalNameFn = func(tfstate map[string]interface{}) (string, error) {
+		id, ok := tfstate["id"]
+		if !ok {
+			return "", errors.New("id in tfstate cannot be empty")
+		}
+		w := strings.Split(id.(string), "/")
+		return w[len(w)-1], nil
+	}
+	e.GetIDFn = func(_ context.Context, externalName string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
+		ipGroupID, ok := parameters["ip_group_id"]
+		if !ok {
+			return "", errors.New("unable to extract 'ip_group_id' from parameters")
+		}
+
+		return fmt.Sprintf("%s/cidrs/%s", ipGroupID, externalName), nil
+	}
+	return e
 }
 
 // ResourceConfigurator applies all external name configs

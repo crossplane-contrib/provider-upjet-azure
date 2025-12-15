@@ -59,12 +59,6 @@ spec:
             properties:
               forProvider:
                 properties:
-                  cidrs:
-                    description: A list of CIDRs or IP addresses.
-                    items:
-                      type: string
-                    type: array
-                    x-kubernetes-list-type: set
                   location:
                     description: Specifies the supported Azure location where the
                       resource exists. Changing this forces a new resource to be created.
@@ -175,12 +169,6 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
-                  cidrs:
-                    description: A list of CIDRs or IP addresses.
-                    items:
-                      type: string
-                    type: array
-                    x-kubernetes-list-type: set
                   location:
                     description: Specifies the supported Azure location where the
                       resource exists. Changing this forces a new resource to be created.

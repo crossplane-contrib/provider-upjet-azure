@@ -477,6 +477,7 @@ import (
 	frontdoorfirewallpolicynetwork "github.com/upbound/provider-azure/v2/internal/controller/cluster/network/frontdoorfirewallpolicy"
 	frontdoorrulesengine "github.com/upbound/provider-azure/v2/internal/controller/cluster/network/frontdoorrulesengine"
 	ipgroup "github.com/upbound/provider-azure/v2/internal/controller/cluster/network/ipgroup"
+	ipgroupcidr "github.com/upbound/provider-azure/v2/internal/controller/cluster/network/ipgroupcidr"
 	loadbalancer "github.com/upbound/provider-azure/v2/internal/controller/cluster/network/loadbalancer"
 	loadbalancerbackendaddresspool "github.com/upbound/provider-azure/v2/internal/controller/cluster/network/loadbalancerbackendaddresspool"
 	loadbalancerbackendaddresspooladdress "github.com/upbound/provider-azure/v2/internal/controller/cluster/network/loadbalancerbackendaddresspooladdress"
@@ -1221,6 +1222,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		frontdoorfirewallpolicynetwork.Setup,
 		frontdoorrulesengine.Setup,
 		ipgroup.Setup,
+		ipgroupcidr.Setup,
 		loadbalancer.Setup,
 		loadbalancerbackendaddresspool.Setup,
 		loadbalancerbackendaddresspooladdress.Setup,
@@ -1971,6 +1973,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		frontdoorfirewallpolicynetwork.SetupGated,
 		frontdoorrulesengine.SetupGated,
 		ipgroup.SetupGated,
+		ipgroupcidr.SetupGated,
 		loadbalancer.SetupGated,
 		loadbalancerbackendaddresspool.SetupGated,
 		loadbalancerbackendaddresspooladdress.SetupGated,

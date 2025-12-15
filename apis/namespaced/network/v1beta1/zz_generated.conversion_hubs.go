@@ -106,6 +106,9 @@ func (tr *FrontdoorRulesEngine) Hub() {}
 func (tr *IPGroup) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *IPGroupCidr) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *LoadBalancer) Hub() {}
 
 // Hub marks this type as a conversion hub.

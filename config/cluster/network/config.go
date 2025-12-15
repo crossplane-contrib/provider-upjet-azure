@@ -19,6 +19,16 @@ import (
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_ip_group", func(r *config.Resource) {
 		r.Kind = "IPGroup"
+		config.MoveToStatus(r.TerraformResource, "cidrs")
+	})
+
+	p.AddResourceConfigurator("azurerm_ip_group_cidr", func(r *config.Resource) {
+		r.Kind = "IPGroupCidr"
+
+		r.References["ip_group_id"] = config.Reference{
+			TerraformName: "azurerm_ip_group",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
 	})
 
 	p.AddResourceConfigurator("azurerm_network_interface", func(r *config.Resource) {
