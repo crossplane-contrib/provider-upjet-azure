@@ -2151,21 +2151,29 @@ func policyDefinitionExternalName(resourceType string) config.ExternalName {
 func ipGroupCidr() config.ExternalName {
 	e := config.IdentifierFromProvider
 	e.GetExternalNameFn = func(tfstate map[string]interface{}) (string, error) {
-		id, ok := tfstate["id"]
+		id, ok := tfstate["id"].(string)
 		if !ok {
 			return "", errors.New("id in tfstate cannot be empty")
 		}
-		w := strings.Split(id.(string), "/")
+
+		w := strings.Split(id, "/")
 		return w[len(w)-1], nil
 	}
-	e.GetIDFn = func(_ context.Context, externalName string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
-		ipGroupID, ok := parameters["ip_group_id"]
+	e.GetIDFn = func(_ context.Context, _ string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
+		ipGroupID, ok := parameters["ip_group_id"].(string)
 		if !ok {
 			return "", errors.New("unable to extract 'ip_group_id' from parameters")
 		}
 
-		return fmt.Sprintf("%s/cidrs/%s", ipGroupID, externalName), nil
+		cidr, ok := parameters["cidr"].(string)
+		if !ok {
+			return "", errors.New("unable to extract 'cidr' from parameters")
+		}
+
+		idCidr := strings.Replace(cidr, "/", "_", 1)
+		return fmt.Sprintf("%s/cidrs/%s", ipGroupID, idCidr), nil
 	}
+
 	return e
 }
 
