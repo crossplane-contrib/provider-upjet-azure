@@ -15,10 +15,6 @@ import (
 
 type IPGroupInitParameters struct {
 
-	// A list of CIDRs or IP addresses.
-	// +listType=set
-	Cidrs []*string `json:"cidrs,omitempty" tf:"cidrs,omitempty"`
-
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -54,11 +50,6 @@ type IPGroupObservation struct {
 }
 
 type IPGroupParameters struct {
-
-	// A list of CIDRs or IP addresses.
-	// +kubebuilder:validation:Optional
-	// +listType=set
-	Cidrs []*string `json:"cidrs,omitempty" tf:"cidrs,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
