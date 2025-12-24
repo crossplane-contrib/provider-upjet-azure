@@ -85,5 +85,13 @@ func Configure(p *config.Provider) {
 			TerraformName: "azurerm_ai_foundry",
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
+		r.References["primary_user_assigned_identity"] = config.Reference{
+			TerraformName: "azurerm_user_assigned_identity",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["identity.identity_ids"] = config.Reference{
+			TerraformName: "azurerm_user_assigned_identity",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
 	})
 }

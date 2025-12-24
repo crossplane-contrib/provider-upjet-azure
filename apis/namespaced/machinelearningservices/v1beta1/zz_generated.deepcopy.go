@@ -536,6 +536,18 @@ func (in *AIFoundryProjectIdentityInitParameters) DeepCopyInto(out *AIFoundryPro
 			}
 		}
 	}
+	if in.IdentityIdsRefs != nil {
+		in, out := &in.IdentityIdsRefs, &out.IdentityIdsRefs
+		*out = make([]v1.NamespacedReference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.IdentityIdsSelector != nil {
+		in, out := &in.IdentityIdsSelector, &out.IdentityIdsSelector
+		*out = new(v1.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Type != nil {
 		in, out := &in.Type, &out.Type
 		*out = new(string)
@@ -608,6 +620,18 @@ func (in *AIFoundryProjectIdentityParameters) DeepCopyInto(out *AIFoundryProject
 			}
 		}
 	}
+	if in.IdentityIdsRefs != nil {
+		in, out := &in.IdentityIdsRefs, &out.IdentityIdsRefs
+		*out = make([]v1.NamespacedReference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.IdentityIdsSelector != nil {
+		in, out := &in.IdentityIdsSelector, &out.IdentityIdsSelector
+		*out = new(v1.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Type != nil {
 		in, out := &in.Type, &out.Type
 		*out = new(string)
@@ -672,6 +696,16 @@ func (in *AIFoundryProjectInitParameters) DeepCopyInto(out *AIFoundryProjectInit
 		in, out := &in.PrimaryUserAssignedIdentity, &out.PrimaryUserAssignedIdentity
 		*out = new(string)
 		**out = **in
+	}
+	if in.PrimaryUserAssignedIdentityRef != nil {
+		in, out := &in.PrimaryUserAssignedIdentityRef, &out.PrimaryUserAssignedIdentityRef
+		*out = new(v1.NamespacedReference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.PrimaryUserAssignedIdentitySelector != nil {
+		in, out := &in.PrimaryUserAssignedIdentitySelector, &out.PrimaryUserAssignedIdentitySelector
+		*out = new(v1.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
@@ -856,6 +890,16 @@ func (in *AIFoundryProjectParameters) DeepCopyInto(out *AIFoundryProjectParamete
 		in, out := &in.PrimaryUserAssignedIdentity, &out.PrimaryUserAssignedIdentity
 		*out = new(string)
 		**out = **in
+	}
+	if in.PrimaryUserAssignedIdentityRef != nil {
+		in, out := &in.PrimaryUserAssignedIdentityRef, &out.PrimaryUserAssignedIdentityRef
+		*out = new(v1.NamespacedReference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.PrimaryUserAssignedIdentitySelector != nil {
+		in, out := &in.PrimaryUserAssignedIdentitySelector, &out.PrimaryUserAssignedIdentitySelector
+		*out = new(v1.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
