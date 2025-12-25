@@ -1,0 +1,122 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: machinelearningservices.azure.upbound.io/v1beta1
+kind: AIFoundryProject
+metadata:
+  annotations:
+    meta.upbound.io/example-id: machinelearningservices/v1beta1/aifoundryproject
+  labels:
+    testing.upbound.io/example-name: example
+  name: exampleaifoundryproj
+spec:
+  forProvider:
+    identity:
+      type: SystemAssigned
+    aiServicesHubIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    location: westeurope
+
+---
+
+apiVersion: machinelearningservices.azure.upbound.io/v1beta1
+kind: AIFoundry
+metadata:
+  annotations:
+    meta.upbound.io/example-id: machinelearningservices/v1beta1/aifoundryproject
+  labels:
+    testing.upbound.io/example-name: example
+  name: exampleaifoundry
+spec:
+  forProvider:
+    identity:
+      type: SystemAssigned
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    location: westeurope
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    storageAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: keyvault.azure.upbound.io/v1beta2
+kind: Vault
+metadata:
+  annotations:
+    meta.upbound.io/example-id: machinelearningservices/v1beta1/aifoundryproject
+  labels:
+    testing.upbound.io/example-name: example
+  name: exampleaifoundryproj483a
+spec:
+  forProvider:
+    location: westeurope
+    purgeProtectionEnabled: true
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: standard
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+
+apiVersion: keyvault.azure.upbound.io/v1beta1
+kind: AccessPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: machinelearningservices/v1beta1/aifoundryproject
+  labels:
+    testing.upbound.io/example-name: example
+  name: exampleaifoundryproj
+spec:
+  forProvider:
+    keyPermissions:
+    - Create
+    - Get
+    - Delete
+    - Purge
+    - GetRotationPolicy
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    objectId: ${data.azurerm_client_config.current.object_id}
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: machinelearningservices/v1beta1/aifoundryproject
+  labels:
+    testing.upbound.io/example-name: example
+  name: exampleaifoundryproj
+spec:
+  forProvider:
+    location: westeurope
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: machinelearningservices/v1beta1/aifoundryproject
+  labels:
+    testing.upbound.io/example-name: example
+  name: exampleaifoundryproj483a
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: westeurope
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

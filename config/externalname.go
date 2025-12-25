@@ -1884,6 +1884,9 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// Machine Learning Workspace Network Outbound Rule Private Endpoint can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.MachineLearningServices/workspaces/workspace1/outboundRules/rule1
 	"azurerm_machine_learning_workspace_network_outbound_rule_private_endpoint": config.TemplatedStringAsIdentifier("name", "{{ .parameters.workspace_id }}/outboundRules/{{ .external_name }}"),
+	// AI Foundry Projects can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.MachineLearningServices/workspaces/project1
+	"azurerm_ai_foundry_project": aiFoundryProjectExternalName(),
 
 	// maintenance
 	//
@@ -2090,6 +2093,39 @@ func mongoDatabaseBasedId(nameField string, objectType string) config.ExternalNa
 			return strings.Join(append(accountId, objectType, databaseName+"."+externalName), "/"), nil
 		},
 	}
+}
+
+// aiFoundryProjectExternalName returns ExternalName config for azurerm_ai_foundry_project.
+// This resource requires custom external name handling because:
+//  1. It doesn't have a resource_group_name parameter - the resource group must be
+//     extracted from ai_services_hub_id to construct the Terraform resource ID.
+//  2. After resource creation, the external-name annotation gets set to the full Azure
+//     resource ID instead of just the workspace name, causing drift on subsequent
+//     reconciles. GetExternalNameFn extracts the workspace name from the id field's
+//     last path segment to prevent this.
+func aiFoundryProjectExternalName() config.ExternalName {
+	e := config.NameAsIdentifier
+	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
+		id, ok := tfstate["id"].(string)
+		if !ok {
+			return "", errors.New("id does not exist in tfstate")
+		}
+		parts := strings.Split(id, "/")
+		return parts[len(parts)-1], nil
+	}
+	e.GetIDFn = func(ctx context.Context, externalName string, parameters map[string]any, setup map[string]any) (string, error) {
+		hubID, ok := parameters["ai_services_hub_id"].(string)
+		if !ok || hubID == "" {
+			return "", errors.New("ai_services_hub_id is required to construct the resource ID")
+		}
+		parts := strings.Split(hubID, "/")
+		if len(parts) < 5 {
+			return "", fmt.Errorf("invalid ai_services_hub_id format: %s", hubID)
+		}
+		return fmt.Sprintf("/subscriptions/%s/resourceGroups/%s/providers/Microsoft.MachineLearningServices/workspaces/%s",
+			parts[2], parts[4], externalName), nil
+	}
+	return e
 }
 
 // policyDefinitionExternalName returns a custom ExternalName configuration

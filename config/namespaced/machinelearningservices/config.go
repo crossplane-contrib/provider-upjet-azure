@@ -77,4 +77,21 @@ func Configure(p *config.Provider) {
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
+
+	p.AddResourceConfigurator("azurerm_ai_foundry_project", func(r *config.Resource) {
+		r.ShortGroup = group
+		r.Kind = "AIFoundryProject"
+		r.References["ai_services_hub_id"] = config.Reference{
+			TerraformName: "azurerm_ai_foundry",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["primary_user_assigned_identity"] = config.Reference{
+			TerraformName: "azurerm_user_assigned_identity",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["identity.identity_ids"] = config.Reference{
+			TerraformName: "azurerm_user_assigned_identity",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+	})
 }
