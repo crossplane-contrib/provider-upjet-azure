@@ -46,6 +46,9 @@ func (tr *RoleAssignment) Hub() {}
 func (tr *RoleDefinition) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *RoleManagementPolicy) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *SubscriptionPolicyAssignment) Hub() {}
 
 // Hub marks this type as a conversion hub.

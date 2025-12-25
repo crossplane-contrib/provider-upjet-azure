@@ -45,4 +45,12 @@ func Configure(p *config.Provider) {
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
+
+	p.AddResourceConfigurator("azurerm_role_management_policy", func(r *config.Resource) {
+		r.Kind = "RoleManagementPolicy"
+		r.References["role_definition_id"] = config.Reference{
+			TerraformName: "azurerm_role_definition",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+	})
 }

@@ -1,0 +1,1614 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.18.0
+  name: rolemanagementpolicies.authorization.azure.m.upbound.io
+spec:
+  group: authorization.azure.m.upbound.io
+  names:
+    categories:
+    - crossplane
+    - managed
+    - azure
+    kind: RoleManagementPolicy
+    listKind: RoleManagementPolicyList
+    plural: rolemanagementpolicies
+    singular: rolemanagementpolicy
+  scope: Namespaced
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1beta1
+    schema:
+      openAPIV3Schema:
+        description: RoleManagementPolicy is the Schema for the RoleManagementPolicys
+          API. Manages Azure PIM Role Management Policies.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: RoleManagementPolicySpec defines the desired state of RoleManagementPolicy
+            properties:
+              forProvider:
+                properties:
+                  activationRules:
+                    description: |-
+                      An activation_rules block as defined below.
+                      The activation rules of the policy
+                    properties:
+                      approvalStage:
+                        description: |-
+                          An approval_stage block as defined below.
+                          The approval stages for the activation
+                        properties:
+                          primaryApprover:
+                            description: |-
+                              One or more primary_approver blocks as defined below.
+                              The IDs of the users or groups who can approve the activation
+                            items:
+                              properties:
+                                objectId:
+                                  description: |-
+                                    The ID of the object which will act as an approver.
+                                    The ID of the object to act as an approver
+                                  type: string
+                                type:
+                                  description: |-
+                                    The type of object acting as an approver. Possible options are User and Group.
+                                    The type of object acting as an approver
+                                  type: string
+                              type: object
+                            type: array
+                        type: object
+                      maximumDuration:
+                        description: |-
+                          The maximum length of time an activated role can be valid, in an ISO8601 Duration format (e.g. PT8H). Valid range is PT30M to PT23H30M, in 30 minute increments, or PT1D. Possible values are PT30M, PT1H, PT1H30M, PT2H, PT2H30M, PT3H, PT3H30M, PT4H, PT4H30M, PT5H, PT5H30M, PT6H, PT6H30M, PT7H, PT7H30M, PT8H, PT8H30M, PT9H, PT9H30M, PT10H, PT10H30M, PT11H, PT11H30M, PT12H, PT12H30M, PT13H, PT13H30M, PT14H, PT14H30M, PT15H, PT15H30M, PT16H, PT16H30M, PT17H, PT17H30M, PT18H, PT18H30M, PT19H, PT19H30M, PT20H, PT20H30M, PT21H, PT21H30M, PT22H, PT22H30M, PT23H, PT23H30M and P1D.
+                          The time after which the an activation can be valid for
+                        type: string
+                      requireApproval:
+                        description: |-
+                          Is approval required for activation. If true an approval_stage block must be provided.
+                          Whether an approval is required for activation
+                        type: boolean
+                      requireJustification:
+                        description: |-
+                          Is a justification required during activation of the role.
+                          Whether a justification is required during activation
+                        type: boolean
+                      requireMultifactorAuthentication:
+                        description: |-
+                          Is multi-factor authentication required to activate the role. Conflicts with required_conditional_access_authentication_context.
+                          Whether multi-factor authentication is required during activation
+                        type: boolean
+                      requireTicketInfo:
+                        description: |-
+                          Is ticket information requrired during activation of the role.
+                          Whether ticket information is required during activation
+                        type: boolean
+                      requiredConditionalAccessAuthenticationContext:
+                        description: |-
+                          The Entra ID Conditional Access context that must be present for activation. Conflicts with require_multifactor_authentication.
+                          Whether a conditional access context is required during activation
+                        type: string
+                    type: object
+                  activeAssignmentRules:
+                    description: |-
+                      An active_assignment_rules block as defined below.
+                      The rules for active assignment of the policy
+                    properties:
+                      expirationRequired:
+                        description: |-
+                          Must an assignment have an expiry date. false allows permanent assignment.
+                          Must the assignment have an expiry date
+                        type: boolean
+                      expireAfter:
+                        description: |-
+                          The maximum length of time an assignment can be valid, as an ISO8601 duration. Permitted values: P15D, P30D, P90D, P180D, or P365D.
+                          The duration after which assignments expire
+                        type: string
+                      requireJustification:
+                        description: |-
+                          Is a justification required to create new assignments.
+                          Whether a justification is required to make an assignment
+                        type: boolean
+                      requireMultifactorAuthentication:
+                        description: |-
+                          Is multi-factor authentication required to create new assignments.
+                          Whether multi-factor authentication is required to make an assignment
+                        type: boolean
+                      requireTicketInfo:
+                        description: |-
+                          Is ticket information required to create new assignments.
+                          Whether ticket information is required to make an assignment
+                        type: boolean
+                    type: object
+                  eligibleAssignmentRules:
+                    description: |-
+                      An eligible_assignment_rules block as defined below.
+                      The rules for eligible assignment of the policy
+                    properties:
+                      expirationRequired:
+                        description: |-
+                          Must an assignment have an expiry date. false allows permanent assignment.
+                          Must the assignment have an expiry date
+                        type: boolean
+                      expireAfter:
+                        description: |-
+                          The maximum length of time an assignment can be valid, as an ISO8601 duration. Permitted values: P15D, P30D, P90D, P180D, or P365D.
+                          The duration after which assignments expire
+                        type: string
+                    type: object
+                  notificationRules:
+                    description: |-
+                      A notification_rules block as defined below.
+                      The notification rules of the policy
+                    properties:
+                      activeAssignments:
+                        description: |-
+                          A notification_target block as defined below to configure notfications on active role assignments.
+                          Notifications about active assignments
+                        properties:
+                          adminNotifications:
+                            description: |-
+                              A notification_settings block as defined above.
+                              Admin notification settings
+                            properties:
+                              additionalRecipients:
+                                description: |-
+                                  A list of additional email addresses that will receive these notifications.
+                                  The additional recipients to notify
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              defaultRecipients:
+                                description: |-
+                                  Should the default recipients receive these notifications.
+                                  Whether the default recipients are notified
+                                type: boolean
+                              notificationLevel:
+                                description: |-
+                                  What level of notifications should be sent. Options are All or Critical.
+                                  What level of notifications are sent
+                                type: string
+                            type: object
+                          approverNotifications:
+                            description: |-
+                              A notification_settings block as defined above.
+                              Approver notification settings
+                            properties:
+                              additionalRecipients:
+                                description: |-
+                                  A list of additional email addresses that will receive these notifications.
+                                  The additional recipients to notify
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              defaultRecipients:
+                                description: |-
+                                  Should the default recipients receive these notifications.
+                                  Whether the default recipients are notified
+                                type: boolean
+                              notificationLevel:
+                                description: |-
+                                  What level of notifications should be sent. Options are All or Critical.
+                                  What level of notifications are sent
+                                type: string
+                            type: object
+                          assigneeNotifications:
+                            description: |-
+                              A notification_settings block as defined above.
+                              Assignee notification settings
+                            properties:
+                              additionalRecipients:
+                                description: |-
+                                  A list of additional email addresses that will receive these notifications.
+                                  The additional recipients to notify
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              defaultRecipients:
+                                description: |-
+                                  Should the default recipients receive these notifications.
+                                  Whether the default recipients are notified
+                                type: boolean
+                              notificationLevel:
+                                description: |-
+                                  What level of notifications should be sent. Options are All or Critical.
+                                  What level of notifications are sent
+                                type: string
+                            type: object
+                        type: object
+                      eligibleActivations:
+                        description: |-
+                          A notification_target block as defined below for configuring notifications on activation of eligible role.
+                          Notifications about activations of eligible assignments
+                        properties:
+                          adminNotifications:
+                            description: |-
+                              A notification_settings block as defined above.
+                              Admin notification settings
+                            properties:
+                              additionalRecipients:
+                                description: |-
+                                  A list of additional email addresses that will receive these notifications.
+                                  The additional recipients to notify
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              defaultRecipients:
+                                description: |-
+                                  Should the default recipients receive these notifications.
+                                  Whether the default recipients are notified
+                                type: boolean
+                              notificationLevel:
+                                description: |-
+                                  What level of notifications should be sent. Options are All or Critical.
+                                  What level of notifications are sent
+                                type: string
+                            type: object
+                          approverNotifications:
+                            description: |-
+                              A notification_settings block as defined above.
+                              Approver notification settings
+                            properties:
+                              additionalRecipients:
+                                description: |-
+                                  A list of additional email addresses that will receive these notifications.
+                                  The additional recipients to notify
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              defaultRecipients:
+                                description: |-
+                                  Should the default recipients receive these notifications.
+                                  Whether the default recipients are notified
+                                type: boolean
+                              notificationLevel:
+                                description: |-
+                                  What level of notifications should be sent. Options are All or Critical.
+                                  What level of notifications are sent
+                                type: string
+                            type: object
+                          assigneeNotifications:
+                            description: |-
+                              A notification_settings block as defined above.
+                              Assignee notification settings
+                            properties:
+                              additionalRecipients:
+                                description: |-
+                                  A list of additional email addresses that will receive these notifications.
+                                  The additional recipients to notify
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              defaultRecipients:
+                                description: |-
+                                  Should the default recipients receive these notifications.
+                                  Whether the default recipients are notified
+                                type: boolean
+                              notificationLevel:
+                                description: |-
+                                  What level of notifications should be sent. Options are All or Critical.
+                                  What level of notifications are sent
+                                type: string
+                            type: object
+                        type: object
+                      eligibleAssignments:
+                        description: |-
+                          A notification_target block as defined below to configure notification on eligible role assignments.
+                          Notifications about eligible assignments
+                        properties:
+                          adminNotifications:
+                            description: |-
+                              A notification_settings block as defined above.
+                              Admin notification settings
+                            properties:
+                              additionalRecipients:
+                                description: |-
+                                  A list of additional email addresses that will receive these notifications.
+                                  The additional recipients to notify
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              defaultRecipients:
+                                description: |-
+                                  Should the default recipients receive these notifications.
+                                  Whether the default recipients are notified
+                                type: boolean
+                              notificationLevel:
+                                description: |-
+                                  What level of notifications should be sent. Options are All or Critical.
+                                  What level of notifications are sent
+                                type: string
+                            type: object
+                          approverNotifications:
+                            description: |-
+                              A notification_settings block as defined above.
+                              Approver notification settings
+                            properties:
+                              additionalRecipients:
+                                description: |-
+                                  A list of additional email addresses that will receive these notifications.
+                                  The additional recipients to notify
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              defaultRecipients:
+                                description: |-
+                                  Should the default recipients receive these notifications.
+                                  Whether the default recipients are notified
+                                type: boolean
+                              notificationLevel:
+                                description: |-
+                                  What level of notifications should be sent. Options are All or Critical.
+                                  What level of notifications are sent
+                                type: string
+                            type: object
+                          assigneeNotifications:
+                            description: |-
+                              A notification_settings block as defined above.
+                              Assignee notification settings
+                            properties:
+                              additionalRecipients:
+                                description: |-
+                                  A list of additional email addresses that will receive these notifications.
+                                  The additional recipients to notify
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              defaultRecipients:
+                                description: |-
+                                  Should the default recipients receive these notifications.
+                                  Whether the default recipients are notified
+                                type: boolean
+                              notificationLevel:
+                                description: |-
+                                  What level of notifications should be sent. Options are All or Critical.
+                                  What level of notifications are sent
+                                type: string
+                            type: object
+                        type: object
+                    type: object
+                  roleDefinitionId:
+                    description: |-
+                      The scoped Role Definition ID of the role for which this policy will apply. Changing this forces a new resource to be created.
+                      ID of the Azure Role to which this policy is assigned
+                    type: string
+                  roleDefinitionIdRef:
+                    description: Reference to a RoleDefinition in authorization to
+                      populate roleDefinitionId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      namespace:
+                        description: Namespace of the referenced object
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  roleDefinitionIdSelector:
+                    description: Selector for a RoleDefinition in authorization to
+                      populate roleDefinitionId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      namespace:
+                        description: Namespace for the selector
+                        type: string
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  scope:
+                    description: |-
+                      The scope to which this Role Management Policy will apply. Can refer to a management group, a subscription, a resource group or a resource. Changing this forces a new resource to be created.
+                      The scope of the role to which this policy will apply
+                    type: string
+                  scopeRef:
+                    description: Reference to a ResourceGroup in azure to populate
+                      scope.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      namespace:
+                        description: Namespace of the referenced object
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  scopeSelector:
+                    description: Selector for a ResourceGroup in azure to populate
+                      scope.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      namespace:
+                        description: Namespace for the selector
+                        type: string
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                type: object
+              initProvider:
+                description: |-
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
+                  InitProvider holds the same fields as ForProvider, with the exception
+                  of Identifier and other resource reference fields. The fields that are
+                  in InitProvider are merged into ForProvider when the resource is created.
+                  The same fields are also added to the terraform ignore_changes hook, to
+                  avoid updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after creation,
+                  for example because of an external controller is managing them, like an
+                  autoscaler.
+                properties:
+                  activationRules:
+                    description: |-
+                      An activation_rules block as defined below.
+                      The activation rules of the policy
+                    properties:
+                      approvalStage:
+                        description: |-
+                          An approval_stage block as defined below.
+                          The approval stages for the activation
+                        properties:
+                          primaryApprover:
+                            description: |-
+                              One or more primary_approver blocks as defined below.
+                              The IDs of the users or groups who can approve the activation
+                            items:
+                              properties:
+                                objectId:
+                                  description: |-
+                                    The ID of the object which will act as an approver.
+                                    The ID of the object to act as an approver
+                                  type: string
+                                type:
+                                  description: |-
+                                    The type of object acting as an approver. Possible options are User and Group.
+                                    The type of object acting as an approver
+                                  type: string
+                              type: object
+                            type: array
+                        type: object
+                      maximumDuration:
+                        description: |-
+                          The maximum length of time an activated role can be valid, in an ISO8601 Duration format (e.g. PT8H). Valid range is PT30M to PT23H30M, in 30 minute increments, or PT1D. Possible values are PT30M, PT1H, PT1H30M, PT2H, PT2H30M, PT3H, PT3H30M, PT4H, PT4H30M, PT5H, PT5H30M, PT6H, PT6H30M, PT7H, PT7H30M, PT8H, PT8H30M, PT9H, PT9H30M, PT10H, PT10H30M, PT11H, PT11H30M, PT12H, PT12H30M, PT13H, PT13H30M, PT14H, PT14H30M, PT15H, PT15H30M, PT16H, PT16H30M, PT17H, PT17H30M, PT18H, PT18H30M, PT19H, PT19H30M, PT20H, PT20H30M, PT21H, PT21H30M, PT22H, PT22H30M, PT23H, PT23H30M and P1D.
+                          The time after which the an activation can be valid for
+                        type: string
+                      requireApproval:
+                        description: |-
+                          Is approval required for activation. If true an approval_stage block must be provided.
+                          Whether an approval is required for activation
+                        type: boolean
+                      requireJustification:
+                        description: |-
+                          Is a justification required during activation of the role.
+                          Whether a justification is required during activation
+                        type: boolean
+                      requireMultifactorAuthentication:
+                        description: |-
+                          Is multi-factor authentication required to activate the role. Conflicts with required_conditional_access_authentication_context.
+                          Whether multi-factor authentication is required during activation
+                        type: boolean
+                      requireTicketInfo:
+                        description: |-
+                          Is ticket information requrired during activation of the role.
+                          Whether ticket information is required during activation
+                        type: boolean
+                      requiredConditionalAccessAuthenticationContext:
+                        description: |-
+                          The Entra ID Conditional Access context that must be present for activation. Conflicts with require_multifactor_authentication.
+                          Whether a conditional access context is required during activation
+                        type: string
+                    type: object
+                  activeAssignmentRules:
+                    description: |-
+                      An active_assignment_rules block as defined below.
+                      The rules for active assignment of the policy
+                    properties:
+                      expirationRequired:
+                        description: |-
+                          Must an assignment have an expiry date. false allows permanent assignment.
+                          Must the assignment have an expiry date
+                        type: boolean
+                      expireAfter:
+                        description: |-
+                          The maximum length of time an assignment can be valid, as an ISO8601 duration. Permitted values: P15D, P30D, P90D, P180D, or P365D.
+                          The duration after which assignments expire
+                        type: string
+                      requireJustification:
+                        description: |-
+                          Is a justification required to create new assignments.
+                          Whether a justification is required to make an assignment
+                        type: boolean
+                      requireMultifactorAuthentication:
+                        description: |-
+                          Is multi-factor authentication required to create new assignments.
+                          Whether multi-factor authentication is required to make an assignment
+                        type: boolean
+                      requireTicketInfo:
+                        description: |-
+                          Is ticket information required to create new assignments.
+                          Whether ticket information is required to make an assignment
+                        type: boolean
+                    type: object
+                  eligibleAssignmentRules:
+                    description: |-
+                      An eligible_assignment_rules block as defined below.
+                      The rules for eligible assignment of the policy
+                    properties:
+                      expirationRequired:
+                        description: |-
+                          Must an assignment have an expiry date. false allows permanent assignment.
+                          Must the assignment have an expiry date
+                        type: boolean
+                      expireAfter:
+                        description: |-
+                          The maximum length of time an assignment can be valid, as an ISO8601 duration. Permitted values: P15D, P30D, P90D, P180D, or P365D.
+                          The duration after which assignments expire
+                        type: string
+                    type: object
+                  notificationRules:
+                    description: |-
+                      A notification_rules block as defined below.
+                      The notification rules of the policy
+                    properties:
+                      activeAssignments:
+                        description: |-
+                          A notification_target block as defined below to configure notfications on active role assignments.
+                          Notifications about active assignments
+                        properties:
+                          adminNotifications:
+                            description: |-
+                              A notification_settings block as defined above.
+                              Admin notification settings
+                            properties:
+                              additionalRecipients:
+                                description: |-
+                                  A list of additional email addresses that will receive these notifications.
+                                  The additional recipients to notify
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              defaultRecipients:
+                                description: |-
+                                  Should the default recipients receive these notifications.
+                                  Whether the default recipients are notified
+                                type: boolean
+                              notificationLevel:
+                                description: |-
+                                  What level of notifications should be sent. Options are All or Critical.
+                                  What level of notifications are sent
+                                type: string
+                            type: object
+                          approverNotifications:
+                            description: |-
+                              A notification_settings block as defined above.
+                              Approver notification settings
+                            properties:
+                              additionalRecipients:
+                                description: |-
+                                  A list of additional email addresses that will receive these notifications.
+                                  The additional recipients to notify
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              defaultRecipients:
+                                description: |-
+                                  Should the default recipients receive these notifications.
+                                  Whether the default recipients are notified
+                                type: boolean
+                              notificationLevel:
+                                description: |-
+                                  What level of notifications should be sent. Options are All or Critical.
+                                  What level of notifications are sent
+                                type: string
+                            type: object
+                          assigneeNotifications:
+                            description: |-
+                              A notification_settings block as defined above.
+                              Assignee notification settings
+                            properties:
+                              additionalRecipients:
+                                description: |-
+                                  A list of additional email addresses that will receive these notifications.
+                                  The additional recipients to notify
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              defaultRecipients:
+                                description: |-
+                                  Should the default recipients receive these notifications.
+                                  Whether the default recipients are notified
+                                type: boolean
+                              notificationLevel:
+                                description: |-
+                                  What level of notifications should be sent. Options are All or Critical.
+                                  What level of notifications are sent
+                                type: string
+                            type: object
+                        type: object
+                      eligibleActivations:
+                        description: |-
+                          A notification_target block as defined below for configuring notifications on activation of eligible role.
+                          Notifications about activations of eligible assignments
+                        properties:
+                          adminNotifications:
+                            description: |-
+                              A notification_settings block as defined above.
+                              Admin notification settings
+                            properties:
+                              additionalRecipients:
+                                description: |-
+                                  A list of additional email addresses that will receive these notifications.
+                                  The additional recipients to notify
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              defaultRecipients:
+                                description: |-
+                                  Should the default recipients receive these notifications.
+                                  Whether the default recipients are notified
+                                type: boolean
+                              notificationLevel:
+                                description: |-
+                                  What level of notifications should be sent. Options are All or Critical.
+                                  What level of notifications are sent
+                                type: string
+                            type: object
+                          approverNotifications:
+                            description: |-
+                              A notification_settings block as defined above.
+                              Approver notification settings
+                            properties:
+                              additionalRecipients:
+                                description: |-
+                                  A list of additional email addresses that will receive these notifications.
+                                  The additional recipients to notify
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              defaultRecipients:
+                                description: |-
+                                  Should the default recipients receive these notifications.
+                                  Whether the default recipients are notified
+                                type: boolean
+                              notificationLevel:
+                                description: |-
+                                  What level of notifications should be sent. Options are All or Critical.
+                                  What level of notifications are sent
+                                type: string
+                            type: object
+                          assigneeNotifications:
+                            description: |-
+                              A notification_settings block as defined above.
+                              Assignee notification settings
+                            properties:
+                              additionalRecipients:
+                                description: |-
+                                  A list of additional email addresses that will receive these notifications.
+                                  The additional recipients to notify
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              defaultRecipients:
+                                description: |-
+                                  Should the default recipients receive these notifications.
+                                  Whether the default recipients are notified
+                                type: boolean
+                              notificationLevel:
+                                description: |-
+                                  What level of notifications should be sent. Options are All or Critical.
+                                  What level of notifications are sent
+                                type: string
+                            type: object
+                        type: object
+                      eligibleAssignments:
+                        description: |-
+                          A notification_target block as defined below to configure notification on eligible role assignments.
+                          Notifications about eligible assignments
+                        properties:
+                          adminNotifications:
+                            description: |-
+                              A notification_settings block as defined above.
+                              Admin notification settings
+                            properties:
+                              additionalRecipients:
+                                description: |-
+                                  A list of additional email addresses that will receive these notifications.
+                                  The additional recipients to notify
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              defaultRecipients:
+                                description: |-
+                                  Should the default recipients receive these notifications.
+                                  Whether the default recipients are notified
+                                type: boolean
+                              notificationLevel:
+                                description: |-
+                                  What level of notifications should be sent. Options are All or Critical.
+                                  What level of notifications are sent
+                                type: string
+                            type: object
+                          approverNotifications:
+                            description: |-
+                              A notification_settings block as defined above.
+                              Approver notification settings
+                            properties:
+                              additionalRecipients:
+                                description: |-
+                                  A list of additional email addresses that will receive these notifications.
+                                  The additional recipients to notify
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              defaultRecipients:
+                                description: |-
+                                  Should the default recipients receive these notifications.
+                                  Whether the default recipients are notified
+                                type: boolean
+                              notificationLevel:
+                                description: |-
+                                  What level of notifications should be sent. Options are All or Critical.
+                                  What level of notifications are sent
+                                type: string
+                            type: object
+                          assigneeNotifications:
+                            description: |-
+                              A notification_settings block as defined above.
+                              Assignee notification settings
+                            properties:
+                              additionalRecipients:
+                                description: |-
+                                  A list of additional email addresses that will receive these notifications.
+                                  The additional recipients to notify
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              defaultRecipients:
+                                description: |-
+                                  Should the default recipients receive these notifications.
+                                  Whether the default recipients are notified
+                                type: boolean
+                              notificationLevel:
+                                description: |-
+                                  What level of notifications should be sent. Options are All or Critical.
+                                  What level of notifications are sent
+                                type: string
+                            type: object
+                        type: object
+                    type: object
+                  roleDefinitionId:
+                    description: |-
+                      The scoped Role Definition ID of the role for which this policy will apply. Changing this forces a new resource to be created.
+                      ID of the Azure Role to which this policy is assigned
+                    type: string
+                  roleDefinitionIdRef:
+                    description: Reference to a RoleDefinition in authorization to
+                      populate roleDefinitionId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      namespace:
+                        description: Namespace of the referenced object
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  roleDefinitionIdSelector:
+                    description: Selector for a RoleDefinition in authorization to
+                      populate roleDefinitionId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      namespace:
+                        description: Namespace for the selector
+                        type: string
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  scope:
+                    description: |-
+                      The scope to which this Role Management Policy will apply. Can refer to a management group, a subscription, a resource group or a resource. Changing this forces a new resource to be created.
+                      The scope of the role to which this policy will apply
+                    type: string
+                  scopeRef:
+                    description: Reference to a ResourceGroup in azure to populate
+                      scope.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      namespace:
+                        description: Namespace of the referenced object
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  scopeSelector:
+                    description: Selector for a ResourceGroup in azure to populate
+                      scope.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      namespace:
+                        description: Namespace for the selector
+                        type: string
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                type: object
+              managementPolicies:
+                default:
+                - '*'
+                description: |-
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
+                  ManagementPolicies specify the array of actions Crossplane is allowed to
+                  take on the managed and external resources.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md
+                items:
+                  description: |-
+                    A ManagementAction represents an action that the Crossplane controllers
+                    can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
+              providerConfigRef:
+                default:
+                  kind: ClusterProviderConfig
+                  name: default
+                description: |-
+                  ProviderConfigReference specifies how the provider that will be used to
+                  create, observe, update, and delete this managed resource should be
+                  configured.
+                properties:
+                  kind:
+                    description: Kind of the referenced object.
+                    type: string
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                required:
+                - kind
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: |-
+                  WriteConnectionSecretToReference specifies the namespace and name of a
+                  Secret to which any connection details for this managed resource should
+                  be written. Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                required:
+                - name
+                type: object
+            required:
+            - forProvider
+            type: object
+          status:
+            description: RoleManagementPolicyStatus defines the observed state of
+              RoleManagementPolicy.
+            properties:
+              atProvider:
+                properties:
+                  activationRules:
+                    description: |-
+                      An activation_rules block as defined below.
+                      The activation rules of the policy
+                    properties:
+                      approvalStage:
+                        description: |-
+                          An approval_stage block as defined below.
+                          The approval stages for the activation
+                        properties:
+                          primaryApprover:
+                            description: |-
+                              One or more primary_approver blocks as defined below.
+                              The IDs of the users or groups who can approve the activation
+                            items:
+                              properties:
+                                objectId:
+                                  description: |-
+                                    The ID of the object which will act as an approver.
+                                    The ID of the object to act as an approver
+                                  type: string
+                                type:
+                                  description: |-
+                                    The type of object acting as an approver. Possible options are User and Group.
+                                    The type of object acting as an approver
+                                  type: string
+                              type: object
+                            type: array
+                        type: object
+                      maximumDuration:
+                        description: |-
+                          The maximum length of time an activated role can be valid, in an ISO8601 Duration format (e.g. PT8H). Valid range is PT30M to PT23H30M, in 30 minute increments, or PT1D. Possible values are PT30M, PT1H, PT1H30M, PT2H, PT2H30M, PT3H, PT3H30M, PT4H, PT4H30M, PT5H, PT5H30M, PT6H, PT6H30M, PT7H, PT7H30M, PT8H, PT8H30M, PT9H, PT9H30M, PT10H, PT10H30M, PT11H, PT11H30M, PT12H, PT12H30M, PT13H, PT13H30M, PT14H, PT14H30M, PT15H, PT15H30M, PT16H, PT16H30M, PT17H, PT17H30M, PT18H, PT18H30M, PT19H, PT19H30M, PT20H, PT20H30M, PT21H, PT21H30M, PT22H, PT22H30M, PT23H, PT23H30M and P1D.
+                          The time after which the an activation can be valid for
+                        type: string
+                      requireApproval:
+                        description: |-
+                          Is approval required for activation. If true an approval_stage block must be provided.
+                          Whether an approval is required for activation
+                        type: boolean
+                      requireJustification:
+                        description: |-
+                          Is a justification required during activation of the role.
+                          Whether a justification is required during activation
+                        type: boolean
+                      requireMultifactorAuthentication:
+                        description: |-
+                          Is multi-factor authentication required to activate the role. Conflicts with required_conditional_access_authentication_context.
+                          Whether multi-factor authentication is required during activation
+                        type: boolean
+                      requireTicketInfo:
+                        description: |-
+                          Is ticket information requrired during activation of the role.
+                          Whether ticket information is required during activation
+                        type: boolean
+                      requiredConditionalAccessAuthenticationContext:
+                        description: |-
+                          The Entra ID Conditional Access context that must be present for activation. Conflicts with require_multifactor_authentication.
+                          Whether a conditional access context is required during activation
+                        type: string
+                    type: object
+                  activeAssignmentRules:
+                    description: |-
+                      An active_assignment_rules block as defined below.
+                      The rules for active assignment of the policy
+                    properties:
+                      expirationRequired:
+                        description: |-
+                          Must an assignment have an expiry date. false allows permanent assignment.
+                          Must the assignment have an expiry date
+                        type: boolean
+                      expireAfter:
+                        description: |-
+                          The maximum length of time an assignment can be valid, as an ISO8601 duration. Permitted values: P15D, P30D, P90D, P180D, or P365D.
+                          The duration after which assignments expire
+                        type: string
+                      requireJustification:
+                        description: |-
+                          Is a justification required to create new assignments.
+                          Whether a justification is required to make an assignment
+                        type: boolean
+                      requireMultifactorAuthentication:
+                        description: |-
+                          Is multi-factor authentication required to create new assignments.
+                          Whether multi-factor authentication is required to make an assignment
+                        type: boolean
+                      requireTicketInfo:
+                        description: |-
+                          Is ticket information required to create new assignments.
+                          Whether ticket information is required to make an assignment
+                        type: boolean
+                    type: object
+                  description:
+                    description: |-
+                      (String) The description of this policy.
+                      The Description of the policy
+                    type: string
+                  eligibleAssignmentRules:
+                    description: |-
+                      An eligible_assignment_rules block as defined below.
+                      The rules for eligible assignment of the policy
+                    properties:
+                      expirationRequired:
+                        description: |-
+                          Must an assignment have an expiry date. false allows permanent assignment.
+                          Must the assignment have an expiry date
+                        type: boolean
+                      expireAfter:
+                        description: |-
+                          The maximum length of time an assignment can be valid, as an ISO8601 duration. Permitted values: P15D, P30D, P90D, P180D, or P365D.
+                          The duration after which assignments expire
+                        type: string
+                    type: object
+                  id:
+                    description: (String) The ID of this policy.
+                    type: string
+                  name:
+                    description: |-
+                      (String) The name of this policy, which is typically a UUID and may change over time.
+                      The name of the policy
+                    type: string
+                  notificationRules:
+                    description: |-
+                      A notification_rules block as defined below.
+                      The notification rules of the policy
+                    properties:
+                      activeAssignments:
+                        description: |-
+                          A notification_target block as defined below to configure notfications on active role assignments.
+                          Notifications about active assignments
+                        properties:
+                          adminNotifications:
+                            description: |-
+                              A notification_settings block as defined above.
+                              Admin notification settings
+                            properties:
+                              additionalRecipients:
+                                description: |-
+                                  A list of additional email addresses that will receive these notifications.
+                                  The additional recipients to notify
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              defaultRecipients:
+                                description: |-
+                                  Should the default recipients receive these notifications.
+                                  Whether the default recipients are notified
+                                type: boolean
+                              notificationLevel:
+                                description: |-
+                                  What level of notifications should be sent. Options are All or Critical.
+                                  What level of notifications are sent
+                                type: string
+                            type: object
+                          approverNotifications:
+                            description: |-
+                              A notification_settings block as defined above.
+                              Approver notification settings
+                            properties:
+                              additionalRecipients:
+                                description: |-
+                                  A list of additional email addresses that will receive these notifications.
+                                  The additional recipients to notify
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              defaultRecipients:
+                                description: |-
+                                  Should the default recipients receive these notifications.
+                                  Whether the default recipients are notified
+                                type: boolean
+                              notificationLevel:
+                                description: |-
+                                  What level of notifications should be sent. Options are All or Critical.
+                                  What level of notifications are sent
+                                type: string
+                            type: object
+                          assigneeNotifications:
+                            description: |-
+                              A notification_settings block as defined above.
+                              Assignee notification settings
+                            properties:
+                              additionalRecipients:
+                                description: |-
+                                  A list of additional email addresses that will receive these notifications.
+                                  The additional recipients to notify
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              defaultRecipients:
+                                description: |-
+                                  Should the default recipients receive these notifications.
+                                  Whether the default recipients are notified
+                                type: boolean
+                              notificationLevel:
+                                description: |-
+                                  What level of notifications should be sent. Options are All or Critical.
+                                  What level of notifications are sent
+                                type: string
+                            type: object
+                        type: object
+                      eligibleActivations:
+                        description: |-
+                          A notification_target block as defined below for configuring notifications on activation of eligible role.
+                          Notifications about activations of eligible assignments
+                        properties:
+                          adminNotifications:
+                            description: |-
+                              A notification_settings block as defined above.
+                              Admin notification settings
+                            properties:
+                              additionalRecipients:
+                                description: |-
+                                  A list of additional email addresses that will receive these notifications.
+                                  The additional recipients to notify
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              defaultRecipients:
+                                description: |-
+                                  Should the default recipients receive these notifications.
+                                  Whether the default recipients are notified
+                                type: boolean
+                              notificationLevel:
+                                description: |-
+                                  What level of notifications should be sent. Options are All or Critical.
+                                  What level of notifications are sent
+                                type: string
+                            type: object
+                          approverNotifications:
+                            description: |-
+                              A notification_settings block as defined above.
+                              Approver notification settings
+                            properties:
+                              additionalRecipients:
+                                description: |-
+                                  A list of additional email addresses that will receive these notifications.
+                                  The additional recipients to notify
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              defaultRecipients:
+                                description: |-
+                                  Should the default recipients receive these notifications.
+                                  Whether the default recipients are notified
+                                type: boolean
+                              notificationLevel:
+                                description: |-
+                                  What level of notifications should be sent. Options are All or Critical.
+                                  What level of notifications are sent
+                                type: string
+                            type: object
+                          assigneeNotifications:
+                            description: |-
+                              A notification_settings block as defined above.
+                              Assignee notification settings
+                            properties:
+                              additionalRecipients:
+                                description: |-
+                                  A list of additional email addresses that will receive these notifications.
+                                  The additional recipients to notify
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              defaultRecipients:
+                                description: |-
+                                  Should the default recipients receive these notifications.
+                                  Whether the default recipients are notified
+                                type: boolean
+                              notificationLevel:
+                                description: |-
+                                  What level of notifications should be sent. Options are All or Critical.
+                                  What level of notifications are sent
+                                type: string
+                            type: object
+                        type: object
+                      eligibleAssignments:
+                        description: |-
+                          A notification_target block as defined below to configure notification on eligible role assignments.
+                          Notifications about eligible assignments
+                        properties:
+                          adminNotifications:
+                            description: |-
+                              A notification_settings block as defined above.
+                              Admin notification settings
+                            properties:
+                              additionalRecipients:
+                                description: |-
+                                  A list of additional email addresses that will receive these notifications.
+                                  The additional recipients to notify
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              defaultRecipients:
+                                description: |-
+                                  Should the default recipients receive these notifications.
+                                  Whether the default recipients are notified
+                                type: boolean
+                              notificationLevel:
+                                description: |-
+                                  What level of notifications should be sent. Options are All or Critical.
+                                  What level of notifications are sent
+                                type: string
+                            type: object
+                          approverNotifications:
+                            description: |-
+                              A notification_settings block as defined above.
+                              Approver notification settings
+                            properties:
+                              additionalRecipients:
+                                description: |-
+                                  A list of additional email addresses that will receive these notifications.
+                                  The additional recipients to notify
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              defaultRecipients:
+                                description: |-
+                                  Should the default recipients receive these notifications.
+                                  Whether the default recipients are notified
+                                type: boolean
+                              notificationLevel:
+                                description: |-
+                                  What level of notifications should be sent. Options are All or Critical.
+                                  What level of notifications are sent
+                                type: string
+                            type: object
+                          assigneeNotifications:
+                            description: |-
+                              A notification_settings block as defined above.
+                              Assignee notification settings
+                            properties:
+                              additionalRecipients:
+                                description: |-
+                                  A list of additional email addresses that will receive these notifications.
+                                  The additional recipients to notify
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              defaultRecipients:
+                                description: |-
+                                  Should the default recipients receive these notifications.
+                                  Whether the default recipients are notified
+                                type: boolean
+                              notificationLevel:
+                                description: |-
+                                  What level of notifications should be sent. Options are All or Critical.
+                                  What level of notifications are sent
+                                type: string
+                            type: object
+                        type: object
+                    type: object
+                  roleDefinitionId:
+                    description: |-
+                      The scoped Role Definition ID of the role for which this policy will apply. Changing this forces a new resource to be created.
+                      ID of the Azure Role to which this policy is assigned
+                    type: string
+                  scope:
+                    description: |-
+                      The scope to which this Role Management Policy will apply. Can refer to a management group, a subscription, a resource group or a resource. Changing this forces a new resource to be created.
+                      The scope of the role to which this policy will apply
+                    type: string
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: |-
+                        LastTransitionTime is the last time this condition transitioned from one
+                        status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: |-
+                        A Message containing details about this condition's last transition from
+                        one status to another, if any.
+                      type: string
+                    observedGeneration:
+                      description: |-
+                        ObservedGeneration represents the .metadata.generation that the condition was set based upon.
+                        For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+                        with respect to the current state of the instance.
+                      format: int64
+                      type: integer
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: |-
+                        Type of this condition. At most one of each condition type may apply to
+                        a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
+              observedGeneration:
+                description: |-
+                  ObservedGeneration is the latest metadata.generation
+                  which resulted in either a ready state, or stalled due to error
+                  it can not recover from without human intervention.
+                format: int64
+                type: integer
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
