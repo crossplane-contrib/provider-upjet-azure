@@ -51,6 +51,7 @@ import (
 	v1beta1costmanagement "github.com/upbound/provider-azure/v2/apis/cluster/costmanagement/v1beta1"
 	v1beta2costmanagement "github.com/upbound/provider-azure/v2/apis/cluster/costmanagement/v1beta2"
 	v1beta1customproviders "github.com/upbound/provider-azure/v2/apis/cluster/customproviders/v1beta1"
+	v1beta1dashboard "github.com/upbound/provider-azure/v2/apis/cluster/dashboard/v1beta1"
 	v1beta1databoxedge "github.com/upbound/provider-azure/v2/apis/cluster/databoxedge/v1beta1"
 	v1beta1databricks "github.com/upbound/provider-azure/v2/apis/cluster/databricks/v1beta1"
 	v1beta2databricks "github.com/upbound/provider-azure/v2/apis/cluster/databricks/v1beta2"
@@ -205,6 +206,7 @@ func init() {
 		v1beta1costmanagement.SchemeBuilder.AddToScheme,
 		v1beta2costmanagement.SchemeBuilder.AddToScheme,
 		v1beta1customproviders.SchemeBuilder.AddToScheme,
+		v1beta1dashboard.SchemeBuilder.AddToScheme,
 		v1beta1databoxedge.SchemeBuilder.AddToScheme,
 		v1beta1databricks.SchemeBuilder.AddToScheme,
 		v1beta2databricks.SchemeBuilder.AddToScheme,

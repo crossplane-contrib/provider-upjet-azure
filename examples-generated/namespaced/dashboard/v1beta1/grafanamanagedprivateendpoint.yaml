@@ -1,0 +1,85 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: dashboard.azure.m.upbound.io/v1beta1
+kind: GrafanaManagedPrivateEndpoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dashboard/v1beta1/grafanamanagedprivateendpoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    grafanaIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    groupIds:
+    - prometheusMetrics
+    location: West Europe
+    privateLinkResourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    privateLinkResourceRegionSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: dashboard.azure.m.upbound.io/v1beta1
+kind: Grafana
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dashboard/v1beta1/grafanamanagedprivateendpoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    azureMonitorWorkspaceIntegrations:
+    - resourceIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+    grafanaMajorVersion: 11
+    location: Canada Central
+    publicNetworkAccessEnabled: false
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: insights.azure.m.upbound.io/v1beta1
+kind: MonitorWorkspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dashboard/v1beta1/grafanamanagedprivateendpoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: Canada Central
+    publicNetworkAccessEnabled: false
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dashboard/v1beta1/grafanamanagedprivateendpoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: Canada Central

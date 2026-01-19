@@ -86,7 +86,6 @@ var skipList = []string{
 	"azurerm_virtual_desktop_host_pool_registration_info", // depends on azurerm_virtual_desktop_host_pool
 	// other upjet issues
 	"azurerm_container_registry_task",
-	"azurerm_dashboard",
 	// unsupported sensitive field type
 	"azurerm_security_center_automation",
 	"azurerm_data_factory_trigger_tumbling_window",

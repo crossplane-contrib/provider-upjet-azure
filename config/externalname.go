@@ -1911,6 +1911,13 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// An existing Load Test can be imported into Terraform using the resource id
 	// /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/loadTests/{loadTestName}
 	"azurerm_load_test": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.LoadTestService/loadTests/{{ .external_name }}"),
+
+	// dashboard_grafana
+	//
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.Dashboard/grafana/workspace1
+	"azurerm_dashboard_grafana": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Dashboard/grafana/{{ .external_name }}"),
+	// /subscriptions/12345678-1234-9876-4563-123456789012/resourceGroups/resGroup1/providers/Microsoft.Dashboard/grafana/workspace1/managedPrivateEndpoints/endpoint1
+	"azurerm_dashboard_grafana_managed_private_endpoint": config.TemplatedStringAsIdentifier("name", "{{ .parameters.grafana_id }}/managedPrivateEndpoints/{{ .external_name }}"),
 }
 
 var CLIReconciledExternalNameConfigs = map[string]config.ExternalName{}

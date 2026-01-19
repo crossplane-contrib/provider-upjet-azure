@@ -228,6 +228,8 @@ import (
 	resourcegroupcostmanagementexport "github.com/upbound/provider-azure/v2/internal/controller/cluster/costmanagement/resourcegroupcostmanagementexport"
 	subscriptioncostmanagementexport "github.com/upbound/provider-azure/v2/internal/controller/cluster/costmanagement/subscriptioncostmanagementexport"
 	customprovider "github.com/upbound/provider-azure/v2/internal/controller/cluster/customproviders/customprovider"
+	grafana "github.com/upbound/provider-azure/v2/internal/controller/cluster/dashboard/grafana"
+	grafanamanagedprivateendpoint "github.com/upbound/provider-azure/v2/internal/controller/cluster/dashboard/grafanamanagedprivateendpoint"
 	device "github.com/upbound/provider-azure/v2/internal/controller/cluster/databoxedge/device"
 	accessconnector "github.com/upbound/provider-azure/v2/internal/controller/cluster/databricks/accessconnector"
 	workspace "github.com/upbound/provider-azure/v2/internal/controller/cluster/databricks/workspace"
@@ -974,6 +976,8 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		resourcegroupcostmanagementexport.Setup,
 		subscriptioncostmanagementexport.Setup,
 		customprovider.Setup,
+		grafana.Setup,
+		grafanamanagedprivateendpoint.Setup,
 		device.Setup,
 		accessconnector.Setup,
 		workspace.Setup,
@@ -1726,6 +1730,8 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		resourcegroupcostmanagementexport.SetupGated,
 		subscriptioncostmanagementexport.SetupGated,
 		customprovider.SetupGated,
+		grafana.SetupGated,
+		grafanamanagedprivateendpoint.SetupGated,
 		device.SetupGated,
 		accessconnector.SetupGated,
 		workspace.SetupGated,
