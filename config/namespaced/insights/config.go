@@ -5,9 +5,10 @@
 package insights
 
 import (
-	"errors"
+	"fmt"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
+	"github.com/pkg/errors"
 	"github.com/upbound/provider-azure/v2/apis/namespaced/rconfig"
 
 	"github.com/crossplane/upjet/v2/pkg/config"
@@ -71,7 +72,7 @@ func Configure(p *config.Provider) {
 				}
 				rcString, ok := rcValue.(string)
 				if !ok {
-					continue
+					return diff, fmt.Errorf("%s must be a string", key)
 				}
 				stateValue, ok := state.Attributes[key]
 				if !ok {
