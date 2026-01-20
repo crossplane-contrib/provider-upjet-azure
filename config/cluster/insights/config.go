@@ -60,11 +60,11 @@ func Configure(p *config.Provider) {
 				return nil, errors.New("resource config cannot be nil")
 			}
 
-			duratioDiffKeys := []string{
+			durationDiffKeys := []string{
 				"evaluation_frequency",
 				"window_duration",
 			}
-			for _, key := range duratioDiffKeys {
+			for _, key := range durationDiffKeys {
 				rcValue, ok := config.Get(key)
 				if !ok {
 					continue
