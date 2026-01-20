@@ -7,15 +7,15 @@ package insights
 import (
 	"fmt"
 
+	"github.com/crossplane/upjet/v2/pkg/config"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 	"github.com/pkg/errors"
-	"github.com/upbound/provider-azure/v2/apis/cluster/rconfig"
 
-	"github.com/crossplane/upjet/v2/pkg/config"
+	"github.com/upbound/provider-azure/v2/apis/cluster/rconfig"
 )
 
 // Configure configures insights group
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("azurerm_monitor_metric_alert", func(r *config.Resource) {
 		r.References["scopes"] = config.Reference{
 			TerraformName: "azurerm_storage_account",
@@ -53,7 +53,7 @@ func Configure(p *config.Provider) {
 			TerraformName: "azurerm_application_insights",
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
-		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff, state *terraform.InstanceState, config *terraform.ResourceConfig) (*terraform.InstanceDiff, error) { //nolint:gocyclo
+		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff, state *terraform.InstanceState, config *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
 			if state == nil || state.Empty() || diff == nil || diff.Empty() || diff.Destroy || diff.Attributes == nil {
 				return diff, nil
 			}
