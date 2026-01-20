@@ -5,13 +5,17 @@
 package insights
 
 import (
-	"github.com/upbound/provider-azure/v2/apis/cluster/rconfig"
+	"fmt"
 
 	"github.com/crossplane/upjet/v2/pkg/config"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
+	"github.com/pkg/errors"
+
+	"github.com/upbound/provider-azure/v2/apis/cluster/rconfig"
 )
 
 // Configure configures insights group
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("azurerm_monitor_metric_alert", func(r *config.Resource) {
 		r.References["scopes"] = config.Reference{
 			TerraformName: "azurerm_storage_account",
@@ -48,6 +52,40 @@ func Configure(p *config.Provider) {
 		r.References["scopes"] = config.Reference{
 			TerraformName: "azurerm_application_insights",
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff, state *terraform.InstanceState, config *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
+			if state == nil || state.Empty() || diff == nil || diff.Empty() || diff.Destroy || diff.Attributes == nil {
+				return diff, nil
+			}
+			if config == nil {
+				return nil, errors.New("resource config cannot be nil")
+			}
+
+			durationDiffKeys := []string{
+				"evaluation_frequency",
+				"window_duration",
+			}
+			for _, key := range durationDiffKeys {
+				rcValue, ok := config.Get(key)
+				if !ok {
+					continue
+				}
+				rcString, ok := rcValue.(string)
+				if !ok {
+					return diff, fmt.Errorf("%s must be a string", key)
+				}
+				stateValue, ok := state.Attributes[key]
+				if !ok {
+					continue
+				}
+				if rcString == "PT60M" && stateValue == "PT1H" {
+					delete(diff.Attributes, key)
+				}
+				if rcString == "PT24H" && stateValue == "P1D" {
+					delete(diff.Attributes, key)
+				}
+			}
+			return diff, nil
 		}
 	})
 	p.AddResourceConfigurator("azurerm_monitor_diagnostic_setting", func(r *config.Resource) {
