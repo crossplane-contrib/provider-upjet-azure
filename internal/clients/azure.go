@@ -219,11 +219,10 @@ func oidcAuth(pcSpec *namespacedv1beta1.ProviderConfigSpec, ps *terraform.Setup)
 	ps.Configuration[keyTenantID] = *pcSpec.TenantID
 	ps.Configuration[keyClientID] = *pcSpec.ClientID
 	ps.Configuration[keyUseOIDC] = "true"
-	if pc.Spec.Environment != nil {
-		ps.Configuration[keyEnvironment] = *pc.Spec.Environment
+	if pcSpec.Environment != nil {
+		ps.Configuration[keyEnvironment] = *pcSpec.Environment
 	}
 	return nil
-
 }
 
 func upboundAuth(pcSpec *namespacedv1beta1.ProviderConfigSpec, ps *terraform.Setup) error {
@@ -241,11 +240,10 @@ func upboundAuth(pcSpec *namespacedv1beta1.ProviderConfigSpec, ps *terraform.Set
 	ps.Configuration[keyTenantID] = *pcSpec.TenantID
 	ps.Configuration[keyClientID] = *pcSpec.ClientID
 	ps.Configuration[keyUseOIDC] = "true"
-	if pc.Spec.Environment != nil {
-		ps.Configuration[keyEnvironment] = *pc.Spec.Environment
+	if pcSpec.Environment != nil {
+		ps.Configuration[keyEnvironment] = *pcSpec.Environment
 	}
 	return nil
-
 }
 
 func legacyToModernProviderConfigSpec(pc *clusterv1beta1.ProviderConfig) (*namespacedv1beta1.ProviderConfigSpec, error) {
