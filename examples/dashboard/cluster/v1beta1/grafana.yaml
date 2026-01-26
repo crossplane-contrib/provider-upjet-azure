@@ -1,0 +1,39 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: dashboard.azure.upbound.io/v1beta1
+kind: Grafana
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dashboard/v1beta1/grafana
+    uptest.upbound.io/timeout: "1800"
+  labels:
+    testing.upbound.io/example-name: grafana
+  name: grafana
+spec:
+  forProvider:
+    apiKeyEnabled: true
+    deterministicOutboundIpEnabled: true
+    grafanaMajorVersion: "11"
+    identity:
+      type: SystemAssigned
+    location: West Europe
+    publicNetworkAccessEnabled: true
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: grafana
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dashboard/v1beta1/grafana
+    uptest.upbound.io/timeout: "1800"
+  labels:
+    testing.upbound.io/example-name: grafana
+  name: grafana
+spec:
+  forProvider:
+    location: West Europe

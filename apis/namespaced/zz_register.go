@@ -35,6 +35,7 @@ import (
 	v1beta1cosmosdb "github.com/upbound/provider-azure/v2/apis/namespaced/cosmosdb/v1beta1"
 	v1beta1costmanagement "github.com/upbound/provider-azure/v2/apis/namespaced/costmanagement/v1beta1"
 	v1beta1customproviders "github.com/upbound/provider-azure/v2/apis/namespaced/customproviders/v1beta1"
+	v1beta1dashboard "github.com/upbound/provider-azure/v2/apis/namespaced/dashboard/v1beta1"
 	v1beta1databoxedge "github.com/upbound/provider-azure/v2/apis/namespaced/databoxedge/v1beta1"
 	v1beta1databricks "github.com/upbound/provider-azure/v2/apis/namespaced/databricks/v1beta1"
 	v1beta1datafactory "github.com/upbound/provider-azure/v2/apis/namespaced/datafactory/v1beta1"
@@ -128,6 +129,7 @@ func init() {
 		v1beta1cosmosdb.SchemeBuilder.AddToScheme,
 		v1beta1costmanagement.SchemeBuilder.AddToScheme,
 		v1beta1customproviders.SchemeBuilder.AddToScheme,
+		v1beta1dashboard.SchemeBuilder.AddToScheme,
 		v1beta1databoxedge.SchemeBuilder.AddToScheme,
 		v1beta1databricks.SchemeBuilder.AddToScheme,
 		v1beta1datafactory.SchemeBuilder.AddToScheme,
