@@ -1,0 +1,76 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: servicenetworking.azure.upbound.io/v1beta1
+kind: ApplicationLoadBalancerSecurityPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicenetworking/v1beta1/applicationloadbalancersecuritypolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    applicationLoadBalancerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    location: westeurope
+    webApplicationFirewallPolicyIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: servicenetworking.azure.upbound.io/v1beta1
+kind: ApplicationLoadBalancer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicenetworking/v1beta1/applicationloadbalancersecuritypolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: westeurope
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicenetworking/v1beta1/applicationloadbalancersecuritypolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: westeurope
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: WebApplicationFirewallPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicenetworking/v1beta1/applicationloadbalancersecuritypolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: westeurope
+    managedRules:
+      managedRuleSet:
+      - type: Microsoft_DefaultRuleSet
+        version: "2.1"
+    policySettings:
+      enabled: true
+      mode: Detection
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

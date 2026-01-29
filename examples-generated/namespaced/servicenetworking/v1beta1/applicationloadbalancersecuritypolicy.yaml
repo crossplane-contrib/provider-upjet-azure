@@ -1,0 +1,80 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: servicenetworking.azure.m.upbound.io/v1beta1
+kind: ApplicationLoadBalancerSecurityPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicenetworking/v1beta1/applicationloadbalancersecuritypolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    applicationLoadBalancerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    location: West Europe
+    webApplicationFirewallPolicyIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: servicenetworking.azure.m.upbound.io/v1beta1
+kind: ApplicationLoadBalancer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicenetworking/v1beta1/applicationloadbalancersecuritypolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicenetworking/v1beta1/applicationloadbalancersecuritypolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: WebApplicationFirewallPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicenetworking/v1beta1/applicationloadbalancersecuritypolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    managedRules:
+      managedRuleSet:
+      - type: Microsoft_DefaultRuleSet
+        version: "2.1"
+    policySettings:
+      enabled: true
+      mode: Detection
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

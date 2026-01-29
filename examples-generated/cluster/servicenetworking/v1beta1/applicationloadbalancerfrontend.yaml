@@ -1,0 +1,34 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: servicenetworking.azure.upbound.io/v1beta1
+kind: ApplicationLoadBalancerFrontend
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicenetworking/v1beta1/applicationloadbalancerfrontend
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    applicationLoadBalancerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: servicenetworking.azure.upbound.io/v1beta1
+kind: ApplicationLoadBalancer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicenetworking/v1beta1/applicationloadbalancerfrontend
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
