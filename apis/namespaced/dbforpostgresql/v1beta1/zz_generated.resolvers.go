@@ -469,6 +469,58 @@ func (mg *FlexibleServerActiveDirectoryAdministrator) ResolveReferences(ctx cont
 	return nil
 }
 
+// ResolveReferences of this FlexibleServerBackup.
+func (mg *FlexibleServerBackup) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("dbforpostgresql.azure.m.upbound.io", "v1beta1", "FlexibleServer", "FlexibleServerList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServerID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.ServerIDRef,
+			Selector:     mg.Spec.ForProvider.ServerIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ServerID")
+	}
+	mg.Spec.ForProvider.ServerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ServerIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("dbforpostgresql.azure.m.upbound.io", "v1beta1", "FlexibleServer", "FlexibleServerList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServerID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.ServerIDRef,
+			Selector:     mg.Spec.InitProvider.ServerIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ServerID")
+	}
+	mg.Spec.InitProvider.ServerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ServerIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this FlexibleServerConfiguration.
 func (mg *FlexibleServerConfiguration) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed

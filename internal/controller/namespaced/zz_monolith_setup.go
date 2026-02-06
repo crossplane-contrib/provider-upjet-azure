@@ -308,6 +308,7 @@ import (
 	firewallrule "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbforpostgresql/firewallrule"
 	flexibleserverdbforpostgresql "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbforpostgresql/flexibleserver"
 	flexibleserveractivedirectoryadministrator "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbforpostgresql/flexibleserveractivedirectoryadministrator"
+	flexibleserverbackup "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbforpostgresql/flexibleserverbackup"
 	flexibleserverconfigurationdbforpostgresql "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbforpostgresql/flexibleserverconfiguration"
 	flexibleserverdatabase "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbforpostgresql/flexibleserverdatabase"
 	flexibleserverfirewallruledbforpostgresql "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbforpostgresql/flexibleserverfirewallrule"
@@ -1056,6 +1057,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		firewallrule.Setup,
 		flexibleserverdbforpostgresql.Setup,
 		flexibleserveractivedirectoryadministrator.Setup,
+		flexibleserverbackup.Setup,
 		flexibleserverconfigurationdbforpostgresql.Setup,
 		flexibleserverdatabase.Setup,
 		flexibleserverfirewallruledbforpostgresql.Setup,
@@ -1810,6 +1812,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		firewallrule.SetupGated,
 		flexibleserverdbforpostgresql.SetupGated,
 		flexibleserveractivedirectoryadministrator.SetupGated,
+		flexibleserverbackup.SetupGated,
 		flexibleserverconfigurationdbforpostgresql.SetupGated,
 		flexibleserverdatabase.SetupGated,
 		flexibleserverfirewallruledbforpostgresql.SetupGated,
