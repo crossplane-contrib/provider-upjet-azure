@@ -6,6 +6,7 @@ apiVersion: dbforpostgresql.azure.m.upbound.io/v1beta1
 kind: FlexibleServerBackup
 metadata:
   annotations:
+    uptest.upbound.io/timeout: "3600"
     meta.upbound.io/example-id: dbforpostgresql/v1beta1/flexibleserverbackup
   labels:
     testing.upbound.io/example-name: example
@@ -24,6 +25,7 @@ apiVersion: dbforpostgresql.azure.m.upbound.io/v1beta1
 kind: FlexibleServer
 metadata:
   annotations:
+    uptest.upbound.io/timeout: "3600"
     meta.upbound.io/example-id: dbforpostgresql/v1beta1/flexibleserverbackup
   labels:
     testing.upbound.io/example-name: example
@@ -51,6 +53,7 @@ apiVersion: azure.m.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   annotations:
+    uptest.upbound.io/timeout: "3600"
     meta.upbound.io/example-id: dbforpostgresql/v1beta1/flexibleserverbackup
   labels:
     testing.upbound.io/example-name: example
