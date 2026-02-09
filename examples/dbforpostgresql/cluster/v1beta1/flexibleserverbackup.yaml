@@ -9,14 +9,14 @@ metadata:
     uptest.upbound.io/timeout: "3600"
     meta.upbound.io/example-id: dbforpostgresql/v1beta1/flexibleserverbackup
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: flexibleserverbackup
   name: example
 spec:
   forProvider:
     name: example-pfsb
     serverIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: flexibleserverbackup
 
 ---
 
@@ -27,7 +27,7 @@ metadata:
     uptest.upbound.io/timeout: "3600"
     meta.upbound.io/example-id: dbforpostgresql/v1beta1/flexibleserverbackup
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: flexibleserverbackup
   name: example-flex-server-backup-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
@@ -40,7 +40,7 @@ spec:
     location: westeurope
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: flexibleserverbackup
     skuName: GP_Standard_D2s_v3
     storageMb: 32768
     storageTier: P4
@@ -55,8 +55,8 @@ metadata:
     uptest.upbound.io/timeout: "3600"
     meta.upbound.io/example-id: dbforpostgresql/v1beta1/flexibleserverbackup
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: flexibleserverbackup
+  name: flexibleserverbackup
 spec:
   forProvider:
     location: westeurope
