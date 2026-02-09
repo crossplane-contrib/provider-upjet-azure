@@ -8,18 +8,18 @@ metadata:
   annotations:
     meta.upbound.io/example-id: servicenetworking/v1beta1/applicationloadbalancersecuritypolicy
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: applicationloadbalancersecuritypolicyns
+  name: applicationloadbalancersecuritypolicyns
   namespace: upbound-system
 spec:
   forProvider:
     applicationLoadBalancerIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: applicationloadbalancersecuritypolicyns
     location: westeurope
     webApplicationFirewallPolicyIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: applicationloadbalancersecuritypolicyns
 
 ---
 
@@ -29,15 +29,15 @@ metadata:
   annotations:
     meta.upbound.io/example-id: servicenetworking/v1beta1/applicationloadbalancersecuritypolicy
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: applicationloadbalancersecuritypolicyns
+  name: applicationloadbalancersecuritypolicyns
   namespace: upbound-system
 spec:
   forProvider:
     location: westeurope
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: applicationloadbalancersecuritypolicyns
 
 ---
 
@@ -47,8 +47,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: servicenetworking/v1beta1/applicationloadbalancersecuritypolicy
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: applicationloadbalancersecuritypolicyns
+  name: applicationloadbalancersecuritypolicyns
   namespace: upbound-system
 spec:
   forProvider:
@@ -62,8 +62,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: servicenetworking/v1beta1/applicationloadbalancersecuritypolicy
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: applicationloadbalancersecuritypolicyns
+  name: applicationloadbalancersecuritypolicyns
   namespace: upbound-system
 spec:
   forProvider:
@@ -77,4 +77,4 @@ spec:
       mode: Detection
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: applicationloadbalancersecuritypolicyns

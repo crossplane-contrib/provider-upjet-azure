@@ -8,14 +8,14 @@ metadata:
   annotations:
     meta.upbound.io/example-id: servicenetworking/v1beta1/applicationloadbalancerfrontend
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: applicationloadbalancerfrontendns
+  name: applicationloadbalancerfrontendns
   namespace: upbound-system
 spec:
   forProvider:
     applicationLoadBalancerIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: applicationloadbalancerfrontendns
 
 ---
 
@@ -25,15 +25,15 @@ metadata:
   annotations:
     meta.upbound.io/example-id: servicenetworking/v1beta1/applicationloadbalancerfrontend
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: applicationloadbalancerfrontendns
+  name: applicationloadbalancerfrontendns
   namespace: upbound-system
 spec:
   forProvider:
     location: westeurope
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: applicationloadbalancerfrontendns
 
 ---
 
@@ -43,8 +43,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: servicenetworking/v1beta1/applicationloadbalancerfrontend
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: applicationloadbalancerfrontendns
+  name: applicationloadbalancerfrontendns
   namespace: upbound-system
 spec:
   forProvider:

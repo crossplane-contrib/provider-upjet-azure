@@ -8,17 +8,17 @@ metadata:
   annotations:
     meta.upbound.io/example-id: servicenetworking/v1beta1/applicationloadbalancersubnetassociation
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: applicationloadbalancersubnetassociationns
+  name: applicationloadbalancersubnetassociationns
   namespace: upbound-system
 spec:
   forProvider:
     applicationLoadBalancerIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: applicationloadbalancersubnetassociationns
     subnetIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: applicationloadbalancersubnetassociationns
 
 ---
 
@@ -28,15 +28,15 @@ metadata:
   annotations:
     meta.upbound.io/example-id: servicenetworking/v1beta1/applicationloadbalancersubnetassociation
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: applicationloadbalancersubnetassociationns
+  name: applicationloadbalancersubnetassociationns
   namespace: upbound-system
 spec:
   forProvider:
     location: westeurope
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: applicationloadbalancersubnetassociationns
 
 ---
 
@@ -46,8 +46,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: servicenetworking/v1beta1/applicationloadbalancersubnetassociation
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: applicationloadbalancersubnetassociationns
+  name: applicationloadbalancersubnetassociationns
   namespace: upbound-system
 spec:
   forProvider:
@@ -61,8 +61,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: servicenetworking/v1beta1/applicationloadbalancersubnetassociation
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: applicationloadbalancersubnetassociationns
+  name: applicationloadbalancersubnetassociationns
   namespace: upbound-system
 spec:
   forProvider:
@@ -76,10 +76,10 @@ spec:
         name: Microsoft.ServiceNetworking/trafficControllers
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: applicationloadbalancersubnetassociationns
     virtualNetworkNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: applicationloadbalancersubnetassociationns
 
 ---
 
@@ -89,8 +89,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: servicenetworking/v1beta1/applicationloadbalancersubnetassociation
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: applicationloadbalancersubnetassociationns
+  name: applicationloadbalancersubnetassociationns
   namespace: upbound-system
 spec:
   forProvider:
@@ -99,4 +99,4 @@ spec:
     location: westeurope
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: applicationloadbalancersubnetassociationns

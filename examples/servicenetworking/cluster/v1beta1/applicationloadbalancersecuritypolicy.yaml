@@ -8,17 +8,17 @@ metadata:
   annotations:
     meta.upbound.io/example-id: servicenetworking/v1beta1/applicationloadbalancersecuritypolicy
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: applicationloadbalancersecuritypolicy
+  name: applicationloadbalancersecuritypolicy
 spec:
   forProvider:
     applicationLoadBalancerIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: applicationloadbalancersecuritypolicy
     location: westeurope
     webApplicationFirewallPolicyIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: applicationloadbalancersecuritypolicy
 
 ---
 
@@ -28,14 +28,14 @@ metadata:
   annotations:
     meta.upbound.io/example-id: servicenetworking/v1beta1/applicationloadbalancersecuritypolicy
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: applicationloadbalancersecuritypolicy
+  name: applicationloadbalancersecuritypolicy
 spec:
   forProvider:
     location: westeurope
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: applicationloadbalancersecuritypolicy
 
 ---
 
@@ -45,8 +45,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: servicenetworking/v1beta1/applicationloadbalancersecuritypolicy
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: applicationloadbalancersecuritypolicy
+  name: applicationloadbalancersecuritypolicy
 spec:
   forProvider:
     location: westeurope
@@ -59,8 +59,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: servicenetworking/v1beta1/applicationloadbalancersecuritypolicy
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: applicationloadbalancersecuritypolicy
+  name: applicationloadbalancersecuritypolicy
 spec:
   forProvider:
     location: westeurope
@@ -73,4 +73,4 @@ spec:
       mode: Detection
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: applicationloadbalancersecuritypolicy
