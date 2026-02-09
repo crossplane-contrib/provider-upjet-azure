@@ -52,6 +52,15 @@ func (l *FlexibleServerActiveDirectoryAdministratorList) GetItems() []resource.M
 	return items
 }
 
+// GetItems of this FlexibleServerBackupList.
+func (l *FlexibleServerBackupList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this FlexibleServerConfigurationList.
 func (l *FlexibleServerConfigurationList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))

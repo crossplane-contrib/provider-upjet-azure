@@ -1,0 +1,57 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: dbforpostgresql.azure.upbound.io/v1beta1
+kind: FlexibleServerBackup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1beta1/flexibleserverbackup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: example-pfsb
+    serverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: dbforpostgresql.azure.upbound.io/v1beta2
+kind: FlexibleServer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1beta1/flexibleserverbackup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    administratorLogin: adminTerraform
+    administratorPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: GP_Standard_D2s_v3
+    version: "12"
+    zone: "2"
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1beta1/flexibleserverbackup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

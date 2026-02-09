@@ -15,6 +15,7 @@ import (
 	firewallrule "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbforpostgresql/firewallrule"
 	flexibleserver "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbforpostgresql/flexibleserver"
 	flexibleserveractivedirectoryadministrator "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbforpostgresql/flexibleserveractivedirectoryadministrator"
+	flexibleserverbackup "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbforpostgresql/flexibleserverbackup"
 	flexibleserverconfiguration "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbforpostgresql/flexibleserverconfiguration"
 	flexibleserverdatabase "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbforpostgresql/flexibleserverdatabase"
 	flexibleserverfirewallrule "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbforpostgresql/flexibleserverfirewallrule"
@@ -34,6 +35,7 @@ func Setup_dbforpostgresql(mgr ctrl.Manager, o controller.Options) error {
 		firewallrule.Setup,
 		flexibleserver.Setup,
 		flexibleserveractivedirectoryadministrator.Setup,
+		flexibleserverbackup.Setup,
 		flexibleserverconfiguration.Setup,
 		flexibleserverdatabase.Setup,
 		flexibleserverfirewallrule.Setup,
@@ -59,6 +61,7 @@ func SetupGated_dbforpostgresql(mgr ctrl.Manager, o controller.Options) error {
 		firewallrule.SetupGated,
 		flexibleserver.SetupGated,
 		flexibleserveractivedirectoryadministrator.SetupGated,
+		flexibleserverbackup.SetupGated,
 		flexibleserverconfiguration.SetupGated,
 		flexibleserverdatabase.SetupGated,
 		flexibleserverfirewallrule.SetupGated,
