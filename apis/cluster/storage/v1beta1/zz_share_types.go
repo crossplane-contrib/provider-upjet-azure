@@ -111,6 +111,9 @@ type ShareInitParameters struct {
 	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
 	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+
+	// Specifies the storage account in which to create the share. This property is deprecated in favour of storage_account_id.
+	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 }
 
 type ShareObservation struct {

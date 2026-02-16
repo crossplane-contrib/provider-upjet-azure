@@ -357,6 +357,10 @@ spec:
                             type: string
                         type: object
                     type: object
+                  storageAccountName:
+                    description: Specifies the storage account in which to create
+                      the share. This property is deprecated in favour of storage_account_id.
+                    type: string
                 type: object
               managementPolicies:
                 default:

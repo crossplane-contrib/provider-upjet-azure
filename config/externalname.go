@@ -838,9 +838,9 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// This resource does not have its own identifier, but rather uses the name of storage account.
 	// Following _Case 6_ from the **Adding a New Resource** guide
 	"azurerm_storage_account_network_rules":         config.IdentifierFromProvider,
-	"azurerm_storage_blob":                          config.TemplatedStringAsIdentifier("name", "https://{{ .parameters.storage_account_name }}.blob.core.windows.net/{{ .parameters.storage_container_name }}/{{ .external_name }}"),
+	"azurerm_storage_blob":                          storageBlob(),
 	"azurerm_storage_blob_inventory_policy":         config.IdentifierFromProvider,
-	"azurerm_storage_container":                     config.TemplatedStringAsIdentifier("name", "https://{{ .parameters.storage_account_name }}.blob.core.windows.net/{{ .external_name }}"),
+	"azurerm_storage_container":                     storageContainer(),
 	"azurerm_storage_data_lake_gen2_filesystem":     storageDataLakeGen2Filesystem(),
 	"azurerm_storage_encryption_scope":              config.TemplatedStringAsIdentifier("name", "{{ .parameters.storage_account_id }}/encryptionScopes/{{ .external_name }}"),
 	"azurerm_storage_management_policy":             config.TemplatedStringAsIdentifier("", "{{ .parameters.storage_account_id }}/managementPolicies/default"),
@@ -848,8 +848,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// The id of this resource is a concatenation of 2 resource names, but in the terraform documentation
 	// this reasource does not have a name so instead it concatenates destination and target storage account IDs
 	"azurerm_storage_object_replication": config.IdentifierFromProvider,
-	"azurerm_storage_queue":              config.TemplatedStringAsIdentifier("name", "https://{{ .parameters.storage_account_name }}.queue.core.windows.net/{{ .external_name }}"),
-	"azurerm_storage_share":              config.TemplatedStringAsIdentifier("name", "https://{{ .parameters.storage_account_name }}.file.core.windows.net/{{ .external_name }}"),
+	"azurerm_storage_queue":              storageQueue(),
+	"azurerm_storage_share":              storageShare(),
 	// Table ID comes with an unusual https format there the name attribute is not separated by "/",
 	// but fits this remplate Tables('replace-with-table-name')
 	"azurerm_storage_table": config.IdentifierFromProvider,
@@ -1924,6 +1924,71 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 
 var CLIReconciledExternalNameConfigs = map[string]config.ExternalName{}
 
+// storageSuffixByEnvironment maps Azure environment names to storage endpoint suffixes.
+var storageSuffixByEnvironment = map[string]string{
+	"public":       "core.windows.net",
+	"usgovernment": "core.usgovcloudapi.net",
+	"china":        "core.chinacloudapi.cn",
+	"german":       "core.cloudapi.de", // legacy: Azure Germany retired Oct 2021
+}
+
+// keyVaultSuffixByEnvironment maps Azure environment names to KeyVault endpoint suffixes.
+var keyVaultSuffixByEnvironment = map[string]string{
+	"public":       "vault.azure.net",
+	"usgovernment": "vault.usgovcloudapi.net",
+	"china":        "vault.azure.cn",
+	"german":       "vault.microsoftazure.de", // legacy: Azure Germany retired Oct 2021
+}
+
+func getStorageSuffix(terraformProviderConfig map[string]interface{}) string {
+	conf, ok := terraformProviderConfig["configuration"].(terraform.ProviderConfiguration)
+	if !ok {
+		return storageSuffixByEnvironment["public"]
+	}
+	env, ok := conf["environment"].(string)
+	if !ok || env == "" {
+		return storageSuffixByEnvironment["public"]
+	}
+	if suffix, exists := storageSuffixByEnvironment[strings.ToLower(env)]; exists {
+		return suffix
+	}
+	return storageSuffixByEnvironment["public"]
+}
+
+func getKeyVaultSuffix(terraformProviderConfig map[string]interface{}) string {
+	conf, ok := terraformProviderConfig["configuration"].(terraform.ProviderConfiguration)
+	if !ok {
+		return keyVaultSuffixByEnvironment["public"]
+	}
+	env, ok := conf["environment"].(string)
+	if !ok || env == "" {
+		return keyVaultSuffixByEnvironment["public"]
+	}
+	if suffix, exists := keyVaultSuffixByEnvironment[strings.ToLower(env)]; exists {
+		return suffix
+	}
+	return keyVaultSuffixByEnvironment["public"]
+}
+
+func getStorageAccountName(parameters map[string]interface{}) (string, error) {
+	if name, ok := parameters["storage_account_name"]; ok && name != nil && name != "" {
+		nameStr, ok := name.(string)
+		if !ok {
+			return "", errors.New("storage_account_name is not a string")
+		}
+		return nameStr, nil
+	}
+	if id, ok := parameters["storage_account_id"]; ok && id != nil && id != "" {
+		idStr, ok := id.(string)
+		if !ok {
+			return "", errors.New("storage_account_id is not a string")
+		}
+		parts := strings.Split(idStr, "/")
+		return parts[len(parts)-1], nil
+	}
+	return "", errors.New("cannot get storage_account_name or storage_account_id")
+}
+
 func keyVaultURLIDConf(resourceType string) config.ExternalName {
 	e := config.IdentifierFromProvider
 	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
@@ -1934,7 +1999,7 @@ func keyVaultURLIDConf(resourceType string) config.ExternalName {
 		words := strings.Split(id.(string), "/")
 		return fmt.Sprintf("%s/%s", words[len(words)-2], words[len(words)-1]), nil
 	}
-	e.GetIDFn = func(_ context.Context, externalName string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
+	e.GetIDFn = func(_ context.Context, externalName string, parameters map[string]interface{}, terraformProviderConfig map[string]interface{}) (string, error) {
 		keyVaultID, ok := parameters["key_vault_id"]
 		if !ok {
 			return "", errors.New("cannot get key_vault_id")
@@ -1948,8 +2013,9 @@ func keyVaultURLIDConf(resourceType string) config.ExternalName {
 			}
 		}
 
-		return fmt.Sprintf("https://%s.vault.azure.net/%s/%s",
-			keyVaultName, resourceType, externalName), nil
+		suffix := getKeyVaultSuffix(terraformProviderConfig)
+		return fmt.Sprintf("https://%s.%s/%s/%s",
+			keyVaultName, suffix, resourceType, externalName), nil
 	}
 	return e
 }
@@ -1957,7 +2023,7 @@ func keyVaultURLIDConf(resourceType string) config.ExternalName {
 func keyVaultURLIDWithoutVersionConfFn(resourceType string) config.ExternalName {
 	e := config.NameAsIdentifier
 	e.GetExternalNameFn = getResourceNameFromIDURLFn(1)
-	e.GetIDFn = func(_ context.Context, _ string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
+	e.GetIDFn = func(_ context.Context, _ string, parameters map[string]interface{}, terraformProviderConfig map[string]interface{}) (string, error) {
 		keyVaultID, ok := parameters["key_vault_id"]
 		if !ok {
 			return "", errors.New("cannot get key_vault_id")
@@ -1970,8 +2036,9 @@ func keyVaultURLIDWithoutVersionConfFn(resourceType string) config.ExternalName 
 			return "", errors.New("cannot get name")
 		}
 
-		return fmt.Sprintf("https://%s.vault.azure.net/%s/%s",
-			keyVaultName, resourceType, name), nil
+		suffix := getKeyVaultSuffix(terraformProviderConfig)
+		return fmt.Sprintf("https://%s.%s/%s/%s",
+			keyVaultName, suffix, resourceType, name), nil
 	}
 	return e
 }
@@ -2019,6 +2086,111 @@ func keyVaultAccessPolicy() config.ExternalName {
 	return e
 }
 
+func storageBlob() config.ExternalName {
+	e := config.NameAsIdentifier
+	e.GetExternalNameFn = func(tfstate map[string]interface{}) (string, error) {
+		id, ok := tfstate["id"]
+		if !ok {
+			return "", errors.New("id in tfstate cannot be empty")
+		}
+		// URL format: https://<account>.blob.<suffix>/<container>/<blob>
+		idStr, ok := id.(string)
+		if !ok {
+			return "", errors.New("id in tfstate is not a string")
+		}
+		w := strings.Split(idStr, "/")
+		return w[len(w)-1], nil
+	}
+	e.GetIDFn = func(_ context.Context, externalName string, parameters map[string]interface{}, terraformProviderConfig map[string]interface{}) (string, error) {
+		storageAccountName, err := getStorageAccountName(parameters)
+		if err != nil {
+			return "", err
+		}
+		containerName, ok := parameters["storage_container_name"]
+		if !ok {
+			return "", errors.New("cannot get storage_container_name")
+		}
+		suffix := getStorageSuffix(terraformProviderConfig)
+		return fmt.Sprintf("https://%s.blob.%s/%s/%s", storageAccountName, suffix, containerName, externalName), nil
+	}
+	return e
+}
+
+func storageContainer() config.ExternalName {
+	e := config.NameAsIdentifier
+	e.GetExternalNameFn = func(tfstate map[string]interface{}) (string, error) {
+		id, ok := tfstate["id"]
+		if !ok {
+			return "", errors.New("id in tfstate cannot be empty")
+		}
+		idStr, ok := id.(string)
+		if !ok {
+			return "", errors.New("id in tfstate is not a string")
+		}
+		w := strings.Split(idStr, "/")
+		return w[len(w)-1], nil
+	}
+	e.GetIDFn = func(_ context.Context, externalName string, parameters map[string]interface{}, terraformProviderConfig map[string]interface{}) (string, error) {
+		storageAccountName, err := getStorageAccountName(parameters)
+		if err != nil {
+			return "", err
+		}
+		suffix := getStorageSuffix(terraformProviderConfig)
+		return fmt.Sprintf("https://%s.blob.%s/%s", storageAccountName, suffix, externalName), nil
+	}
+	return e
+}
+
+func storageQueue() config.ExternalName {
+	e := config.NameAsIdentifier
+	e.GetExternalNameFn = func(tfstate map[string]interface{}) (string, error) {
+		id, ok := tfstate["id"]
+		if !ok {
+			return "", errors.New("id in tfstate cannot be empty")
+		}
+		idStr, ok := id.(string)
+		if !ok {
+			return "", errors.New("id in tfstate is not a string")
+		}
+		w := strings.Split(idStr, "/")
+		return w[len(w)-1], nil
+	}
+	e.GetIDFn = func(_ context.Context, externalName string, parameters map[string]interface{}, terraformProviderConfig map[string]interface{}) (string, error) {
+		storageAccountName, err := getStorageAccountName(parameters)
+		if err != nil {
+			return "", err
+		}
+		suffix := getStorageSuffix(terraformProviderConfig)
+		return fmt.Sprintf("https://%s.queue.%s/%s", storageAccountName, suffix, externalName), nil
+	}
+	return e
+}
+
+func storageShare() config.ExternalName {
+	e := config.NameAsIdentifier
+	e.GetExternalNameFn = func(tfstate map[string]interface{}) (string, error) {
+		id, ok := tfstate["id"]
+		if !ok {
+			return "", errors.New("id in tfstate cannot be empty")
+		}
+		idStr, ok := id.(string)
+		if !ok {
+			return "", errors.New("id in tfstate is not a string")
+		}
+		w := strings.Split(idStr, "/")
+		return w[len(w)-1], nil
+	}
+	e.GetIDFn = func(_ context.Context, externalName string, parameters map[string]interface{}, terraformProviderConfig map[string]interface{}) (string, error) {
+		storageAccountName, err := getStorageAccountName(parameters)
+		if err != nil {
+			return "", err
+		}
+		suffix := getStorageSuffix(terraformProviderConfig)
+		return fmt.Sprintf("https://%s.file.%s/%s", storageAccountName, suffix, externalName), nil
+	}
+	return e
+}
+
 // custom function for azurerm_storage_data_lake_gen2_filesystem
 func storageDataLakeGen2Filesystem() config.ExternalName {
 	e := config.NameAsIdentifier
@@ -2027,17 +2199,26 @@ func storageDataLakeGen2Filesystem() config.ExternalName {
 		if !ok {
 			return "", errors.New("id in tfstate cannot be empty")
 		}
-		w := strings.Split(id.(string), "/")
+		idStr, ok := id.(string)
+		if !ok {
+			return "", errors.New("id in tfstate is not a string")
+		}
+		w := strings.Split(idStr, "/")
 		return w[len(w)-1], nil
 	}
-	e.GetIDFn = func(_ context.Context, externalName string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
+	e.GetIDFn = func(_ context.Context, externalName string, parameters map[string]interface{}, terraformProviderConfig map[string]interface{}) (string, error) {
 		storageAccountID, ok := parameters["storage_account_id"]
 		if !ok {
 			return "", errors.New("cannot get storage_account_id")
 		}
-		w := strings.Split(storageAccountID.(string), "/")
+		idStr, ok := storageAccountID.(string)
+		if !ok {
+			return "", errors.New("storage_account_id is not a string")
+		}
+		w := strings.Split(idStr, "/")
 		storageAccountName := w[len(w)-1]
-		return fmt.Sprintf("https://%s.dfs.core.windows.net/%s", storageAccountName, externalName), nil
+		suffix := getStorageSuffix(terraformProviderConfig)
+		return fmt.Sprintf("https://%s.dfs.%s/%s", storageAccountName, suffix, externalName), nil
 	}
 	return e
 }

@@ -50,6 +50,30 @@ type BlobInitParameters struct {
 	// The URI of an existing blob, or a file in the Azure File service, to use as the source contents for the blob to be created. Changing this forces a new resource to be created. This field cannot be specified for Append blobs and cannot be specified if source or source_content is specified.
 	SourceURI *string `json:"sourceUri,omitempty" tf:"source_uri,omitempty"`
 
+	// Specifies the storage account in which to create the storage container. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
+	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
+
+	// Reference to a Account in storage to populate storageAccountName.
+	// +kubebuilder:validation:Optional
+	StorageAccountNameRef *v1.NamespacedReference `json:"storageAccountNameRef,omitempty" tf:"-"`
+
+	// Selector for a Account in storage to populate storageAccountName.
+	// +kubebuilder:validation:Optional
+	StorageAccountNameSelector *v1.NamespacedSelector `json:"storageAccountNameSelector,omitempty" tf:"-"`
+
+	// The name of the storage container in which this blob should be created. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Container
+	StorageContainerName *string `json:"storageContainerName,omitempty" tf:"storage_container_name,omitempty"`
+
+	// Reference to a Container in storage to populate storageContainerName.
+	// +kubebuilder:validation:Optional
+	StorageContainerNameRef *v1.NamespacedReference `json:"storageContainerNameRef,omitempty" tf:"-"`
+
+	// Selector for a Container in storage to populate storageContainerName.
+	// +kubebuilder:validation:Optional
+	StorageContainerNameSelector *v1.NamespacedSelector `json:"storageContainerNameSelector,omitempty" tf:"-"`
+
 	// The type of the storage blob to be created. Possible values are Append, Block or Page. Changing this forces a new resource to be created.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
