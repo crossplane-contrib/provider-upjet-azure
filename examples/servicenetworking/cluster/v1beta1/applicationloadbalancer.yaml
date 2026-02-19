@@ -29,4 +29,4 @@ metadata:
   name: applicationloadbalancer
 spec:
   forProvider:
-    location: applicationloadbalancer
+    location: westeurope

@@ -28,7 +28,7 @@ metadata:
     meta.upbound.io/example-id: servicenetworking/v1beta1/applicationloadbalancersubnetassociation
   labels:
     testing.upbound.io/example-name: applicationloadbalancersubnetassociation
-  name: example
+  name: applicationloadbalancersubnetassociation
 spec:
   forProvider:
     location: westeurope
