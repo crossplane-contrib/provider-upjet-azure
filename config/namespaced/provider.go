@@ -28,6 +28,7 @@ import (
 	"github.com/upbound/provider-azure/v2/config/namespaced/dataprotection"
 	"github.com/upbound/provider-azure/v2/config/namespaced/datashare"
 	"github.com/upbound/provider-azure/v2/config/namespaced/dbformysql"
+	"github.com/upbound/provider-azure/v2/config/namespaced/desktopvirtualization"
 	"github.com/upbound/provider-azure/v2/config/namespaced/devices"
 	"github.com/upbound/provider-azure/v2/config/namespaced/eventgrid"
 	"github.com/upbound/provider-azure/v2/config/namespaced/eventhub"
@@ -108,4 +109,5 @@ func init() {
 	ProviderConfiguration.AddConfig(machinelearningservices.Configure)
 	ProviderConfiguration.AddConfig(eventgrid.Configure)
 	ProviderConfiguration.AddConfig(dashboard.Configure)
+	ProviderConfiguration.AddConfig(desktopvirtualization.Configure)
 }

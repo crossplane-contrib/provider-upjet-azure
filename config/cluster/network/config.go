@@ -505,24 +505,6 @@ func Configure(p *config.Provider) {
 		}
 	})
 
-	/*p.AddResourceConfigurator("azurerm_virtual_desktop_application", func(r *config.Resource) {
-		r.References = config.References{
-			"resource_group_name": config.Reference{
-				Type:      rconfig.APISPackagePath + "/azure/v1alpha1.ResourceGroup",
-			},
-		}
-		r.UseAsync = true
-	})*/
-
-	/*p.AddResourceConfigurator("azurerm_virtual_desktop_host_pool", func(r *config.Resource) {
-		r.References = config.References{
-			"resource_group_name": config.Reference{
-				Type:      rconfig.APISPackagePath + "/azure/v1alpha1.ResourceGroup",
-			},
-		}
-		r.UseAsync = true
-	})*/
-
 	p.AddResourceConfigurator("azurerm_virtual_network_gateway_connection", func(r *config.Resource) {
 		r.Kind = "VirtualNetworkGatewayConnection"
 		r.References["virtual_network_gateway_id"] = config.Reference{
@@ -534,15 +516,6 @@ func Configure(p *config.Provider) {
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
-
-	/*p.AddResourceConfigurator("azurerm_virtual_desktop_workspace", func(r *config.Resource) {
-		r.References = config.References{
-			"resource_group_name": config.Reference{
-				Type:      rconfig.APISPackagePath + "/azure/v1alpha1.ResourceGroup",
-			},
-		}
-		r.UseAsync = true
-	})*/
 
 	p.AddResourceConfigurator("azurerm_virtual_wan", func(r *config.Resource) {
 		r.Kind = "VirtualWAN"

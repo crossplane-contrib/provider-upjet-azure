@@ -1,0 +1,91 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: desktopvirtualization.azure.upbound.io/v1beta1
+kind: VirtualDesktopWorkspaceAppplicationGroupAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: desktopvirtualization/v1beta1/virtualdesktopworkspaceappplicationgroupassociation
+  labels:
+    testing.upbound.io/example-name: virtualdesktopworkspaceappplicationgroupassociation
+  name: virtualdesktopworkspaceappplicationgroupassociation
+spec:
+  forProvider:
+    applicationGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: virtualdesktopworkspaceappplicationgroupassociation
+    workspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: virtualdesktopworkspaceappplicationgroupassociation
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: desktopvirtualization/v1beta1/virtualdesktopworkspaceappplicationgroupassociation
+  labels:
+    testing.upbound.io/example-name: virtualdesktopworkspaceappplicationgroupassociation
+  name: virtualdesktopworkspaceappplicationgroupassociation
+spec:
+  forProvider:
+    location: westeurope
+
+---
+
+apiVersion: desktopvirtualization.azure.upbound.io/v1beta1
+kind: VirtualDesktopApplicationGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: desktopvirtualization/v1beta1/virtualdesktopworkspaceappplicationgroupassociation
+  labels:
+    testing.upbound.io/example-name: virtualdesktopworkspaceappplicationgroupassociation
+  name: virtualdesktopworkspaceappplicationgroupassociation
+spec:
+  forProvider:
+    hostPoolIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: virtualdesktopworkspaceappplicationgroupassociation
+    location: westeurope
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: virtualdesktopworkspaceappplicationgroupassociation
+    type: RemoteApp
+
+---
+
+apiVersion: desktopvirtualization.azure.upbound.io/v1beta1
+kind: VirtualDesktopHostPool
+metadata:
+  annotations:
+    meta.upbound.io/example-id: desktopvirtualization/v1beta1/virtualdesktopworkspaceappplicationgroupassociation
+  labels:
+    testing.upbound.io/example-name: virtualdesktopworkspaceappplicationgroupassociation
+  name: virtualdesktopworkspaceappplicationgroupassociation
+spec:
+  forProvider:
+    loadBalancerType: BreadthFirst
+    location: westeurope
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: virtualdesktopworkspaceappplicationgroupassociation
+    type: Pooled
+
+---
+
+apiVersion: desktopvirtualization.azure.upbound.io/v1beta1
+kind: VirtualDesktopWorkspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: desktopvirtualization/v1beta1/virtualdesktopworkspaceappplicationgroupassociation
+  labels:
+    testing.upbound.io/example-name: virtualdesktopworkspaceappplicationgroupassociation
+  name: virtualdesktopworkspaceappplicationgroupassociation
+spec:
+  forProvider:
+    location: westeurope
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: virtualdesktopworkspaceappplicationgroupassociation

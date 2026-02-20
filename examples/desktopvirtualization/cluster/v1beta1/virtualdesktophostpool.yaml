@@ -1,0 +1,45 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: desktopvirtualization.azure.upbound.io/v1beta1
+kind: VirtualDesktopHostPool
+metadata:
+  annotations:
+    meta.upbound.io/example-id: desktopvirtualization/v1beta1/virtualdesktophostpool
+  labels:
+    testing.upbound.io/example-name: virtualdesktophostpool
+  name: virtualdesktophostpool
+spec:
+  forProvider:
+    customRdpProperties: audiocapturemode:i:1;audiomode:i:0;
+    description: 'Acceptance Test: A pooled host pool - pooleddepthfirst'
+    friendlyName: pooleddepthfirst
+    loadBalancerType: DepthFirst
+    location: westeurope
+    maximumSessionsAllowed: 50
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: virtualdesktophostpool
+    scheduledAgentUpdates:
+      enabled: true
+      schedule:
+      - dayOfWeek: Saturday
+        hourOfDay: 2
+    startVmOnConnect: true
+    type: Pooled
+    validateEnvironment: true
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: desktopvirtualization/v1beta1/virtualdesktophostpool
+  labels:
+    testing.upbound.io/example-name: virtualdesktophostpool
+  name: virtualdesktophostpool
+spec:
+  forProvider:
+    location: westeurope

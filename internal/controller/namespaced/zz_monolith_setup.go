@@ -316,6 +316,11 @@ import (
 	serverdbforpostgresql "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbforpostgresql/server"
 	serverkey "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbforpostgresql/serverkey"
 	virtualnetworkrule "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbforpostgresql/virtualnetworkrule"
+	virtualdesktopapplicationgroup "github.com/upbound/provider-azure/v2/internal/controller/namespaced/desktopvirtualization/virtualdesktopapplicationgroup"
+	virtualdesktophostpool "github.com/upbound/provider-azure/v2/internal/controller/namespaced/desktopvirtualization/virtualdesktophostpool"
+	virtualdesktophostpoolregistrationinfo "github.com/upbound/provider-azure/v2/internal/controller/namespaced/desktopvirtualization/virtualdesktophostpoolregistrationinfo"
+	virtualdesktopworkspace "github.com/upbound/provider-azure/v2/internal/controller/namespaced/desktopvirtualization/virtualdesktopworkspace"
+	virtualdesktopworkspaceappplicationgroupassociation "github.com/upbound/provider-azure/v2/internal/controller/namespaced/desktopvirtualization/virtualdesktopworkspaceappplicationgroupassociation"
 	iothub "github.com/upbound/provider-azure/v2/internal/controller/namespaced/devices/iothub"
 	iothubcertificate "github.com/upbound/provider-azure/v2/internal/controller/namespaced/devices/iothubcertificate"
 	iothubconsumergroup "github.com/upbound/provider-azure/v2/internal/controller/namespaced/devices/iothubconsumergroup"
@@ -1069,6 +1074,11 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		serverdbforpostgresql.Setup,
 		serverkey.Setup,
 		virtualnetworkrule.Setup,
+		virtualdesktopapplicationgroup.Setup,
+		virtualdesktophostpool.Setup,
+		virtualdesktophostpoolregistrationinfo.Setup,
+		virtualdesktopworkspace.Setup,
+		virtualdesktopworkspaceappplicationgroupassociation.Setup,
 		iothub.Setup,
 		iothubcertificate.Setup,
 		iothubconsumergroup.Setup,
@@ -1828,6 +1838,11 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		serverdbforpostgresql.SetupGated,
 		serverkey.SetupGated,
 		virtualnetworkrule.SetupGated,
+		virtualdesktopapplicationgroup.SetupGated,
+		virtualdesktophostpool.SetupGated,
+		virtualdesktophostpoolregistrationinfo.SetupGated,
+		virtualdesktopworkspace.SetupGated,
+		virtualdesktopworkspaceappplicationgroupassociation.SetupGated,
 		iothub.SetupGated,
 		iothubcertificate.SetupGated,
 		iothubconsumergroup.SetupGated,

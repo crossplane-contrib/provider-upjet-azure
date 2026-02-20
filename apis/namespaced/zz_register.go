@@ -44,6 +44,7 @@ import (
 	v1beta1datashare "github.com/upbound/provider-azure/v2/apis/namespaced/datashare/v1beta1"
 	v1beta1dbformysql "github.com/upbound/provider-azure/v2/apis/namespaced/dbformysql/v1beta1"
 	v1beta1dbforpostgresql "github.com/upbound/provider-azure/v2/apis/namespaced/dbforpostgresql/v1beta1"
+	v1beta1desktopvirtualization "github.com/upbound/provider-azure/v2/apis/namespaced/desktopvirtualization/v1beta1"
 	v1beta1devices "github.com/upbound/provider-azure/v2/apis/namespaced/devices/v1beta1"
 	v1beta1deviceupdate "github.com/upbound/provider-azure/v2/apis/namespaced/deviceupdate/v1beta1"
 	v1beta1devtestlab "github.com/upbound/provider-azure/v2/apis/namespaced/devtestlab/v1beta1"
@@ -139,6 +140,7 @@ func init() {
 		v1beta1datashare.SchemeBuilder.AddToScheme,
 		v1beta1dbformysql.SchemeBuilder.AddToScheme,
 		v1beta1dbforpostgresql.SchemeBuilder.AddToScheme,
+		v1beta1desktopvirtualization.SchemeBuilder.AddToScheme,
 		v1beta1devices.SchemeBuilder.AddToScheme,
 		v1beta1deviceupdate.SchemeBuilder.AddToScheme,
 		v1beta1devtestlab.SchemeBuilder.AddToScheme,
