@@ -1,0 +1,55 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: desktopvirtualization.azure.m.upbound.io/v1beta1
+kind: VirtualDesktopHostPoolRegistrationInfo
+metadata:
+  annotations:
+    meta.upbound.io/example-id: desktopvirtualization/v1beta1/virtualdesktophostpoolregistrationinfo
+  labels:
+    testing.upbound.io/example-name: virtualdesktophostpoolregistrationinfons
+  name: virtualdesktophostpoolregistrationinfons
+  namespace: upbound-system
+spec:
+  forProvider:
+    expirationDate: "2026-03-17T23:40:52Z"
+    hostpoolIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: virtualdesktophostpoolregistrationinfons
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: desktopvirtualization/v1beta1/virtualdesktophostpoolregistrationinfo
+  labels:
+    testing.upbound.io/example-name: virtualdesktophostpoolregistrationinfons
+  name: virtualdesktophostpoolregistrationinfons
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: westeurope
+
+---
+
+apiVersion: desktopvirtualization.azure.m.upbound.io/v1beta1
+kind: VirtualDesktopHostPool
+metadata:
+  annotations:
+    meta.upbound.io/example-id: desktopvirtualization/v1beta1/virtualdesktophostpoolregistrationinfo
+  labels:
+    testing.upbound.io/example-name: virtualdesktophostpoolregistrationinfons
+  name: virtualdesktophostpoolregistrationinfons
+  namespace: upbound-system
+spec:
+  forProvider:
+    loadBalancerType: BreadthFirst
+    location: westeurope
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: virtualdesktophostpoolregistrationinfons
+    type: Pooled
+    validateEnvironment: true

@@ -1,0 +1,81 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: desktopvirtualization.azure.m.upbound.io/v1beta1
+kind: VirtualDesktopApplicationGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: desktopvirtualization/v1beta1/virtualdesktopapplicationgroup
+  labels:
+    testing.upbound.io/example-name: remoteapp
+  name: remoteapp
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: 'Acceptance Test: An application group'
+    friendlyName: TestAppGroup
+    hostPoolIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: pooledbreadthfirst
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    type: RemoteApp
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: desktopvirtualization/v1beta1/virtualdesktopapplicationgroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: desktopvirtualization.azure.m.upbound.io/v1beta1
+kind: VirtualDesktopHostPool
+metadata:
+  annotations:
+    meta.upbound.io/example-id: desktopvirtualization/v1beta1/virtualdesktopapplicationgroup
+  labels:
+    testing.upbound.io/example-name: personalautomatic
+  name: personalautomatic
+  namespace: upbound-system
+spec:
+  forProvider:
+    loadBalancerType: BreadthFirst
+    location: West Europe
+    personalDesktopAssignmentType: Automatic
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    type: Personal
+
+---
+
+apiVersion: desktopvirtualization.azure.m.upbound.io/v1beta1
+kind: VirtualDesktopHostPool
+metadata:
+  annotations:
+    meta.upbound.io/example-id: desktopvirtualization/v1beta1/virtualdesktopapplicationgroup
+  labels:
+    testing.upbound.io/example-name: pooledbreadthfirst
+  name: pooledbreadthfirst
+  namespace: upbound-system
+spec:
+  forProvider:
+    loadBalancerType: BreadthFirst
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    type: Pooled

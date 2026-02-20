@@ -1,0 +1,51 @@
+// SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
+package controller
+
+import (
+	ctrl "sigs.k8s.io/controller-runtime"
+
+	"github.com/crossplane/upjet/v2/pkg/controller"
+
+	virtualdesktopapplicationgroup "github.com/upbound/provider-azure/v2/internal/controller/namespaced/desktopvirtualization/virtualdesktopapplicationgroup"
+	virtualdesktophostpool "github.com/upbound/provider-azure/v2/internal/controller/namespaced/desktopvirtualization/virtualdesktophostpool"
+	virtualdesktophostpoolregistrationinfo "github.com/upbound/provider-azure/v2/internal/controller/namespaced/desktopvirtualization/virtualdesktophostpoolregistrationinfo"
+	virtualdesktopworkspace "github.com/upbound/provider-azure/v2/internal/controller/namespaced/desktopvirtualization/virtualdesktopworkspace"
+	virtualdesktopworkspaceappplicationgroupassociation "github.com/upbound/provider-azure/v2/internal/controller/namespaced/desktopvirtualization/virtualdesktopworkspaceappplicationgroupassociation"
+)
+
+// Setup_desktopvirtualization creates all controllers with the supplied logger and adds them to
+// the supplied manager.
+func Setup_desktopvirtualization(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		virtualdesktopapplicationgroup.Setup,
+		virtualdesktophostpool.Setup,
+		virtualdesktophostpoolregistrationinfo.Setup,
+		virtualdesktopworkspace.Setup,
+		virtualdesktopworkspaceappplicationgroupassociation.Setup,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// SetupGated_desktopvirtualization creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_desktopvirtualization(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		virtualdesktopapplicationgroup.SetupGated,
+		virtualdesktophostpool.SetupGated,
+		virtualdesktophostpoolregistrationinfo.SetupGated,
+		virtualdesktopworkspace.SetupGated,
+		virtualdesktopworkspaceappplicationgroupassociation.SetupGated,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}
