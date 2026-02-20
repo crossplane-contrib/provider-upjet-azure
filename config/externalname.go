@@ -1920,6 +1920,17 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_dashboard_grafana": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Dashboard/grafana/{{ .external_name }}"),
 	// /subscriptions/12345678-1234-9876-4563-123456789012/resourceGroups/resGroup1/providers/Microsoft.Dashboard/grafana/workspace1/managedPrivateEndpoints/endpoint1
 	"azurerm_dashboard_grafana_managed_private_endpoint": config.TemplatedStringAsIdentifier("name", "{{ .parameters.grafana_id }}/managedPrivateEndpoints/{{ .external_name }}"),
+
+	// servicenetworking
+	//
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.ServiceNetworking/trafficControllers/alb1
+	"azurerm_application_load_balancer": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.ServiceNetworking/trafficControllers/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.ServiceNetworking/trafficControllers/alb1/frontends/frontend1
+	"azurerm_application_load_balancer_frontend": config.TemplatedStringAsIdentifier("name", "{{ .parameters.application_load_balancer_id }}/frontends/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ServiceNetworking/trafficControllers/alb/securityPolicies/sp1
+	"azurerm_application_load_balancer_security_policy": config.TemplatedStringAsIdentifier("name", "{{ .parameters.application_load_balancer_id }}/securityPolicies/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ServiceNetworking/trafficControllers/alb1/associations/association1
+	"azurerm_application_load_balancer_subnet_association": config.TemplatedStringAsIdentifier("name", "{{ .parameters.application_load_balancer_id }}/associations/{{ .external_name }}"),
 }
 
 var CLIReconciledExternalNameConfigs = map[string]config.ExternalName{}

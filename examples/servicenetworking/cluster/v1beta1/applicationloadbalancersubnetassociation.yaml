@@ -1,0 +1,97 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: servicenetworking.azure.upbound.io/v1beta1
+kind: ApplicationLoadBalancerSubnetAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicenetworking/v1beta1/applicationloadbalancersubnetassociation
+  labels:
+    testing.upbound.io/example-name: applicationloadbalancersubnetassociation
+  name: applicationloadbalancersubnetassociation
+spec:
+  forProvider:
+    applicationLoadBalancerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: applicationloadbalancersubnetassociation
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: applicationloadbalancersubnetassociation
+
+---
+
+apiVersion: servicenetworking.azure.upbound.io/v1beta1
+kind: ApplicationLoadBalancer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicenetworking/v1beta1/applicationloadbalancersubnetassociation
+  labels:
+    testing.upbound.io/example-name: applicationloadbalancersubnetassociation
+  name: applicationloadbalancersubnetassociation
+spec:
+  forProvider:
+    location: westeurope
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: applicationloadbalancersubnetassociation
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicenetworking/v1beta1/applicationloadbalancersubnetassociation
+  labels:
+    testing.upbound.io/example-name: applicationloadbalancersubnetassociation
+  name: applicationloadbalancersubnetassociation
+spec:
+  forProvider:
+    location: westeurope
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicenetworking/v1beta1/applicationloadbalancersubnetassociation
+  labels:
+    testing.upbound.io/example-name: applicationloadbalancersubnetassociation
+  name: applicationloadbalancersubnetassociation
+spec:
+  forProvider:
+    addressPrefixes:
+    - 10.0.1.0/24
+    delegation:
+    - name: delegation
+      serviceDelegation:
+        actions:
+        - Microsoft.Network/virtualNetworks/subnets/join/action
+        name: Microsoft.ServiceNetworking/trafficControllers
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: applicationloadbalancersubnetassociation
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: applicationloadbalancersubnetassociation
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicenetworking/v1beta1/applicationloadbalancersubnetassociation
+  labels:
+    testing.upbound.io/example-name: applicationloadbalancersubnetassociation
+  name: applicationloadbalancersubnetassociation
+spec:
+  forProvider:
+    addressSpace:
+    - 10.0.0.0/16
+    location: westeurope
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: applicationloadbalancersubnetassociation

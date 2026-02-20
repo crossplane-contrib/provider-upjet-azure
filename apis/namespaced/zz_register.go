@@ -87,6 +87,7 @@ import (
 	v1beta1servicebus "github.com/upbound/provider-azure/v2/apis/namespaced/servicebus/v1beta1"
 	v1beta1servicefabric "github.com/upbound/provider-azure/v2/apis/namespaced/servicefabric/v1beta1"
 	v1beta1servicelinker "github.com/upbound/provider-azure/v2/apis/namespaced/servicelinker/v1beta1"
+	v1beta1servicenetworking "github.com/upbound/provider-azure/v2/apis/namespaced/servicenetworking/v1beta1"
 	v1beta1signalrservice "github.com/upbound/provider-azure/v2/apis/namespaced/signalrservice/v1beta1"
 	v1beta1solutions "github.com/upbound/provider-azure/v2/apis/namespaced/solutions/v1beta1"
 	v1beta1spring "github.com/upbound/provider-azure/v2/apis/namespaced/spring/v1beta1"
@@ -181,6 +182,7 @@ func init() {
 		v1beta1servicebus.SchemeBuilder.AddToScheme,
 		v1beta1servicefabric.SchemeBuilder.AddToScheme,
 		v1beta1servicelinker.SchemeBuilder.AddToScheme,
+		v1beta1servicenetworking.SchemeBuilder.AddToScheme,
 		v1beta1signalrservice.SchemeBuilder.AddToScheme,
 		v1beta1solutions.SchemeBuilder.AddToScheme,
 		v1beta1spring.SchemeBuilder.AddToScheme,

@@ -642,6 +642,10 @@ import (
 	clusterservicefabric "github.com/upbound/provider-azure/v2/internal/controller/cluster/servicefabric/cluster"
 	managedcluster "github.com/upbound/provider-azure/v2/internal/controller/cluster/servicefabric/managedcluster"
 	springcloudconnection "github.com/upbound/provider-azure/v2/internal/controller/cluster/servicelinker/springcloudconnection"
+	applicationloadbalancer "github.com/upbound/provider-azure/v2/internal/controller/cluster/servicenetworking/applicationloadbalancer"
+	applicationloadbalancerfrontend "github.com/upbound/provider-azure/v2/internal/controller/cluster/servicenetworking/applicationloadbalancerfrontend"
+	applicationloadbalancersecuritypolicy "github.com/upbound/provider-azure/v2/internal/controller/cluster/servicenetworking/applicationloadbalancersecuritypolicy"
+	applicationloadbalancersubnetassociation "github.com/upbound/provider-azure/v2/internal/controller/cluster/servicenetworking/applicationloadbalancersubnetassociation"
 	networkacl "github.com/upbound/provider-azure/v2/internal/controller/cluster/signalrservice/networkacl"
 	servicesignalrservice "github.com/upbound/provider-azure/v2/internal/controller/cluster/signalrservice/service"
 	signalrsharedprivatelinkresource "github.com/upbound/provider-azure/v2/internal/controller/cluster/signalrservice/signalrsharedprivatelinkresource"
@@ -1391,6 +1395,10 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		clusterservicefabric.Setup,
 		managedcluster.Setup,
 		springcloudconnection.Setup,
+		applicationloadbalancer.Setup,
+		applicationloadbalancerfrontend.Setup,
+		applicationloadbalancersecuritypolicy.Setup,
+		applicationloadbalancersubnetassociation.Setup,
 		networkacl.Setup,
 		servicesignalrservice.Setup,
 		signalrsharedprivatelinkresource.Setup,
@@ -2146,6 +2154,10 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		clusterservicefabric.SetupGated,
 		managedcluster.SetupGated,
 		springcloudconnection.SetupGated,
+		applicationloadbalancer.SetupGated,
+		applicationloadbalancerfrontend.SetupGated,
+		applicationloadbalancersecuritypolicy.SetupGated,
+		applicationloadbalancersubnetassociation.SetupGated,
 		networkacl.SetupGated,
 		servicesignalrservice.SetupGated,
 		signalrsharedprivatelinkresource.SetupGated,
