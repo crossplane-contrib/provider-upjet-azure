@@ -76,11 +76,11 @@ metadata:
     meta.upbound.io/example-id: apimanagement/v1beta1/subscription
   labels:
     testing.upbound.io/example-name: example
-  name: uptest-management-example
+  name: uptest-apim-management-example
 spec:
   forProvider:
     location: West Europe
-    publisherEmail: company@terraform.io
+    publisherEmail: company@crossplane.io
     publisherName: My Company
     resourceGroupNameSelector:
       matchLabels:
@@ -94,7 +94,7 @@ metadata:
     meta.upbound.io/example-id: apimanagement/v1beta1/subscription
   labels:
     testing.upbound.io/example-name: example
-  name: uptest-resourcegroup-example
+  name: uptest-apim-subscription-example-rg
 spec:
   forProvider:
     location: West Europe
