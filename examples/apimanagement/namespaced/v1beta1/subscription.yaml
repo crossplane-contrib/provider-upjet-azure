@@ -13,6 +13,7 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
+    displayName: "Example apim Subscription"
     apiManagementNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
