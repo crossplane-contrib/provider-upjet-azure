@@ -118,7 +118,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_api_management_redis_cache": config.TemplatedStringAsIdentifier("name", "{{ .parameters.api_management_id }}/caches/{{ .external_name }}"),
 	// API Management Subscriptions can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-resources/providers/Microsoft.ApiManagement/service/example-apim/subscriptions/subscription-name
-	"azurerm_api_management_subscription": config.TemplatedStringAsIdentifier("display_name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.ApiManagement/service/{{ .parameters.api_management_name }}/subscriptions/{{ .external_name }}"),
+	"azurerm_api_management_subscription": apiManagementSubscription(),
 	// API Management Tags can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.ApiManagement/service/service1/tags/tag1
 	"azurerm_api_management_tag": config.TemplatedStringAsIdentifier("name", "{{ .parameters.api_management_id }}/tags/{{ .external_name }}"),
@@ -2370,6 +2370,32 @@ func policyDefinitionExternalName(resourceType string) config.ExternalName {
 			"name_prefix",
 		},
 	}
+}
+
+func apiManagementSubscription() config.ExternalName {
+	e := config.TemplatedStringAsIdentifier("", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.ApiManagement/service/{{ .parameters.api_management_name }}/subscriptions/{{ .external_name }}")
+	templatedGetIDFn := e.GetIDFn
+	e.SetIdentifierArgumentFn = func(base map[string]any, externalName string) {
+		if len(externalName) == 0 {
+			return
+		}
+		if subId, ok := base["subscription_id"].(string); !ok || subId == "" {
+			base["subscription_id"] = externalName
+		}
+		// backward-compatible behavior for existing resources with
+		// no spec.forProvider.displayName set.
+		if displayName, ok := base["display_name"].(string); !ok || displayName == "" {
+			base["display_name"] = externalName
+		}
+	}
+	e.GetIDFn = func(ctx context.Context, externalName string, parameters map[string]any, terraformProviderConfig map[string]any) (string, error) {
+		if externalName == "" {
+			return "", nil
+		}
+		return templatedGetIDFn(ctx, externalName, parameters, terraformProviderConfig)
+	}
+	e.DisableNameInitializer = true
+	return e
 }
 
 // ResourceConfigurator applies all external name configs
