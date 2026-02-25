@@ -4,7 +4,7 @@
 
 module github.com/upbound/provider-azure/v2
 
-go 1.25.5
+go 1.25.7
 
 tool golang.org/x/tools/cmd/goimports
 
