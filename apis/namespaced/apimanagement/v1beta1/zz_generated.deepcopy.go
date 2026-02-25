@@ -19903,6 +19903,11 @@ func (in *SubscriptionInitParameters) DeepCopyInto(out *SubscriptionInitParamete
 		*out = new(bool)
 		**out = **in
 	}
+	if in.DisplayName != nil {
+		in, out := &in.DisplayName, &out.DisplayName
+		*out = new(string)
+		**out = **in
+	}
 	if in.PrimaryKeySecretRef != nil {
 		in, out := &in.PrimaryKeySecretRef, &out.PrimaryKeySecretRef
 		*out = new(v1.LocalSecretKeySelector)
@@ -20090,6 +20095,11 @@ func (in *SubscriptionObservation) DeepCopyInto(out *SubscriptionObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.DisplayName != nil {
+		in, out := &in.DisplayName, &out.DisplayName
+		*out = new(string)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
@@ -20158,6 +20168,11 @@ func (in *SubscriptionParameters) DeepCopyInto(out *SubscriptionParameters) {
 	if in.AllowTracing != nil {
 		in, out := &in.AllowTracing, &out.AllowTracing
 		*out = new(bool)
+		**out = **in
+	}
+	if in.DisplayName != nil {
+		in, out := &in.DisplayName, &out.DisplayName
+		*out = new(string)
 		**out = **in
 	}
 	if in.PrimaryKeySecretRef != nil {

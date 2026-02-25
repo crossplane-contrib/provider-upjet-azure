@@ -16,6 +16,7 @@ spec:
     apiManagementNameSelector:
       matchLabels:
         testing.upbound.io/example-name: azurerm_api_management
+    displayName: Parser API
     productIdSelector:
       matchLabels:
         testing.upbound.io/example-name: azurerm_api_management_product
