@@ -22,6 +22,9 @@ type SubscriptionInitParameters struct {
 	// Determines whether tracing can be enabled. Defaults to true.
 	AllowTracing *bool `json:"allowTracing,omitempty" tf:"allow_tracing,omitempty"`
 
+	// The display name of this Subscription.
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
 	// The primary subscription key to use for the subscription.
 	PrimaryKeySecretRef *v1.LocalSecretKeySelector `json:"primaryKeySecretRef,omitempty" tf:"-"`
 
@@ -72,6 +75,9 @@ type SubscriptionObservation struct {
 	// Determines whether tracing can be enabled. Defaults to true.
 	AllowTracing *bool `json:"allowTracing,omitempty" tf:"allow_tracing,omitempty"`
 
+	// The display name of this Subscription.
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
 	// The ID of the API Management Subscription.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -113,6 +119,10 @@ type SubscriptionParameters struct {
 	// Determines whether tracing can be enabled. Defaults to true.
 	// +kubebuilder:validation:Optional
 	AllowTracing *bool `json:"allowTracing,omitempty" tf:"allow_tracing,omitempty"`
+
+	// The display name of this Subscription.
+	// +kubebuilder:validation:Optional
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// The primary subscription key to use for the subscription.
 	// +kubebuilder:validation:Optional
@@ -208,8 +218,9 @@ type SubscriptionStatus struct {
 type Subscription struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SubscriptionSpec   `json:"spec"`
-	Status            SubscriptionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.displayName) || (has(self.initProvider) && has(self.initProvider.displayName))",message="spec.forProvider.displayName is a required parameter"
+	Spec   SubscriptionSpec   `json:"spec"`
+	Status SubscriptionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

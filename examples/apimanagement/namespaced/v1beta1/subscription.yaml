@@ -13,6 +13,7 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
+    displayName: "Example apim Subscription"
     apiManagementNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -65,7 +66,7 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    email: tom+tfdev@hashicorp.com
+    email: tom+tfdev@crossplane.io
     firstName: Example
     lastName: User
     state: active
@@ -78,12 +79,12 @@ metadata:
     meta.upbound.io/example-id: apimanagement/v1beta1/subscription
   labels:
     testing.upbound.io/example-name: example
-  name: uptest-management-example
+  name: uptest-apim-management-example
   namespace: upbound-system
 spec:
   forProvider:
     location: West Europe
-    publisherEmail: company@terraform.io
+    publisherEmail: company@crossplane.io
     publisherName: My Company
     resourceGroupNameSelector:
       matchLabels:
@@ -97,7 +98,7 @@ metadata:
     meta.upbound.io/example-id: apimanagement/v1beta1/subscription
   labels:
     testing.upbound.io/example-name: example
-  name: uptest-resourcegroup-example
+  name: uptest-apim-subscription-example-rg
   namespace: upbound-system
 spec:
   forProvider:
