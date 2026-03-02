@@ -167,6 +167,46 @@ func (mg *VirtualDesktopWorkspace) SetWriteConnectionSecretToReference(r *xpv1.L
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this VirtualDesktopWorkspaceApplicationGroupAssociation.
+func (mg *VirtualDesktopWorkspaceApplicationGroupAssociation) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetManagementPolicies of this VirtualDesktopWorkspaceApplicationGroupAssociation.
+func (mg *VirtualDesktopWorkspaceApplicationGroupAssociation) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this VirtualDesktopWorkspaceApplicationGroupAssociation.
+func (mg *VirtualDesktopWorkspaceApplicationGroupAssociation) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this VirtualDesktopWorkspaceApplicationGroupAssociation.
+func (mg *VirtualDesktopWorkspaceApplicationGroupAssociation) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this VirtualDesktopWorkspaceApplicationGroupAssociation.
+func (mg *VirtualDesktopWorkspaceApplicationGroupAssociation) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetManagementPolicies of this VirtualDesktopWorkspaceApplicationGroupAssociation.
+func (mg *VirtualDesktopWorkspaceApplicationGroupAssociation) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this VirtualDesktopWorkspaceApplicationGroupAssociation.
+func (mg *VirtualDesktopWorkspaceApplicationGroupAssociation) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this VirtualDesktopWorkspaceApplicationGroupAssociation.
+func (mg *VirtualDesktopWorkspaceApplicationGroupAssociation) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this VirtualDesktopWorkspaceAppplicationGroupAssociation.
 func (mg *VirtualDesktopWorkspaceAppplicationGroupAssociation) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)

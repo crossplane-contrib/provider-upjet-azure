@@ -13,7 +13,7 @@ import (
 	virtualdesktophostpool "github.com/upbound/provider-azure/v2/internal/controller/cluster/desktopvirtualization/virtualdesktophostpool"
 	virtualdesktophostpoolregistrationinfo "github.com/upbound/provider-azure/v2/internal/controller/cluster/desktopvirtualization/virtualdesktophostpoolregistrationinfo"
 	virtualdesktopworkspace "github.com/upbound/provider-azure/v2/internal/controller/cluster/desktopvirtualization/virtualdesktopworkspace"
-	virtualdesktopworkspaceappplicationgroupassociation "github.com/upbound/provider-azure/v2/internal/controller/cluster/desktopvirtualization/virtualdesktopworkspaceappplicationgroupassociation"
+	virtualdesktopworkspaceapplicationgroupassociation "github.com/upbound/provider-azure/v2/internal/controller/cluster/desktopvirtualization/virtualdesktopworkspaceapplicationgroupassociation"
 )
 
 // Setup_desktopvirtualization creates all controllers with the supplied logger and adds them to
@@ -24,7 +24,7 @@ func Setup_desktopvirtualization(mgr ctrl.Manager, o controller.Options) error {
 		virtualdesktophostpool.Setup,
 		virtualdesktophostpoolregistrationinfo.Setup,
 		virtualdesktopworkspace.Setup,
-		virtualdesktopworkspaceappplicationgroupassociation.Setup,
+		virtualdesktopworkspaceapplicationgroupassociation.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err
@@ -41,7 +41,7 @@ func SetupGated_desktopvirtualization(mgr ctrl.Manager, o controller.Options) er
 		virtualdesktophostpool.SetupGated,
 		virtualdesktophostpoolregistrationinfo.SetupGated,
 		virtualdesktopworkspace.SetupGated,
-		virtualdesktopworkspaceappplicationgroupassociation.SetupGated,
+		virtualdesktopworkspaceapplicationgroupassociation.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err
