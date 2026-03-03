@@ -2,15 +2,14 @@
 #
 # SPDX-License-Identifier: CC0-1.0
 
-apiVersion: desktopvirtualization.azure.m.upbound.io/v1beta1
-kind: VirtualDesktopWorkspaceAppplicationGroupAssociation
+apiVersion: desktopvirtualization.azure.upbound.io/v1beta1
+kind: VirtualDesktopWorkspaceApplicationGroupAssociation
 metadata:
   annotations:
-    meta.upbound.io/example-id: desktopvirtualization/v1beta1/virtualdesktopworkspaceappplicationgroupassociation
+    meta.upbound.io/example-id: desktopvirtualization/v1beta1/virtualdesktopworkspaceapplicationgroupassociation
   labels:
     testing.upbound.io/example-name: workspaceremoteapp
   name: workspaceremoteapp
-  namespace: upbound-system
 spec:
   forProvider:
     applicationGroupIdSelector:
@@ -22,30 +21,28 @@ spec:
 
 ---
 
-apiVersion: azure.m.upbound.io/v1beta1
+apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: desktopvirtualization/v1beta1/virtualdesktopworkspaceappplicationgroupassociation
+    meta.upbound.io/example-id: desktopvirtualization/v1beta1/virtualdesktopworkspaceapplicationgroupassociation
   labels:
     testing.upbound.io/example-name: example
   name: example
-  namespace: upbound-system
 spec:
   forProvider:
     location: West Europe
 
 ---
 
-apiVersion: desktopvirtualization.azure.m.upbound.io/v1beta1
+apiVersion: desktopvirtualization.azure.upbound.io/v1beta1
 kind: VirtualDesktopApplicationGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: desktopvirtualization/v1beta1/virtualdesktopworkspaceappplicationgroupassociation
+    meta.upbound.io/example-id: desktopvirtualization/v1beta1/virtualdesktopworkspaceapplicationgroupassociation
   labels:
     testing.upbound.io/example-name: remoteapp
   name: remoteapp
-  namespace: upbound-system
 spec:
   forProvider:
     hostPoolIdSelector:
@@ -59,15 +56,14 @@ spec:
 
 ---
 
-apiVersion: desktopvirtualization.azure.m.upbound.io/v1beta1
+apiVersion: desktopvirtualization.azure.upbound.io/v1beta1
 kind: VirtualDesktopHostPool
 metadata:
   annotations:
-    meta.upbound.io/example-id: desktopvirtualization/v1beta1/virtualdesktopworkspaceappplicationgroupassociation
+    meta.upbound.io/example-id: desktopvirtualization/v1beta1/virtualdesktopworkspaceapplicationgroupassociation
   labels:
     testing.upbound.io/example-name: pooledbreadthfirst
   name: pooledbreadthfirst
-  namespace: upbound-system
 spec:
   forProvider:
     loadBalancerType: BreadthFirst
@@ -79,15 +75,14 @@ spec:
 
 ---
 
-apiVersion: desktopvirtualization.azure.m.upbound.io/v1beta1
+apiVersion: desktopvirtualization.azure.upbound.io/v1beta1
 kind: VirtualDesktopWorkspace
 metadata:
   annotations:
-    meta.upbound.io/example-id: desktopvirtualization/v1beta1/virtualdesktopworkspaceappplicationgroupassociation
+    meta.upbound.io/example-id: desktopvirtualization/v1beta1/virtualdesktopworkspaceapplicationgroupassociation
   labels:
     testing.upbound.io/example-name: workspace
   name: workspace
-  namespace: upbound-system
 spec:
   forProvider:
     location: West Europe

@@ -320,7 +320,7 @@ import (
 	virtualdesktophostpool "github.com/upbound/provider-azure/v2/internal/controller/namespaced/desktopvirtualization/virtualdesktophostpool"
 	virtualdesktophostpoolregistrationinfo "github.com/upbound/provider-azure/v2/internal/controller/namespaced/desktopvirtualization/virtualdesktophostpoolregistrationinfo"
 	virtualdesktopworkspace "github.com/upbound/provider-azure/v2/internal/controller/namespaced/desktopvirtualization/virtualdesktopworkspace"
-	virtualdesktopworkspaceappplicationgroupassociation "github.com/upbound/provider-azure/v2/internal/controller/namespaced/desktopvirtualization/virtualdesktopworkspaceappplicationgroupassociation"
+	virtualdesktopworkspaceapplicationgroupassociation "github.com/upbound/provider-azure/v2/internal/controller/namespaced/desktopvirtualization/virtualdesktopworkspaceapplicationgroupassociation"
 	iothub "github.com/upbound/provider-azure/v2/internal/controller/namespaced/devices/iothub"
 	iothubcertificate "github.com/upbound/provider-azure/v2/internal/controller/namespaced/devices/iothubcertificate"
 	iothubconsumergroup "github.com/upbound/provider-azure/v2/internal/controller/namespaced/devices/iothubconsumergroup"
@@ -1078,7 +1078,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		virtualdesktophostpool.Setup,
 		virtualdesktophostpoolregistrationinfo.Setup,
 		virtualdesktopworkspace.Setup,
-		virtualdesktopworkspaceappplicationgroupassociation.Setup,
+		virtualdesktopworkspaceapplicationgroupassociation.Setup,
 		iothub.Setup,
 		iothubcertificate.Setup,
 		iothubconsumergroup.Setup,
@@ -1842,7 +1842,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		virtualdesktophostpool.SetupGated,
 		virtualdesktophostpoolregistrationinfo.SetupGated,
 		virtualdesktopworkspace.SetupGated,
-		virtualdesktopworkspaceappplicationgroupassociation.SetupGated,
+		virtualdesktopworkspaceapplicationgroupassociation.SetupGated,
 		iothub.SetupGated,
 		iothubcertificate.SetupGated,
 		iothubconsumergroup.SetupGated,

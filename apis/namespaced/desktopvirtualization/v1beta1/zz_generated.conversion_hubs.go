@@ -19,4 +19,4 @@ func (tr *VirtualDesktopHostPoolRegistrationInfo) Hub() {}
 func (tr *VirtualDesktopWorkspace) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *VirtualDesktopWorkspaceAppplicationGroupAssociation) Hub() {}
+func (tr *VirtualDesktopWorkspaceApplicationGroupAssociation) Hub() {}
