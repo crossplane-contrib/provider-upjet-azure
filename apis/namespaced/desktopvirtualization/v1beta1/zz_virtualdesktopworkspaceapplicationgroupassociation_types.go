@@ -14,7 +14,7 @@ import (
 	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
 )
 
-type VirtualDesktopWorkspaceAppplicationGroupAssociationInitParameters struct {
+type VirtualDesktopWorkspaceApplicationGroupAssociationInitParameters struct {
 
 	// The resource ID for the Virtual Desktop Application Group. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/desktopvirtualization/v1beta1.VirtualDesktopApplicationGroup
@@ -43,7 +43,7 @@ type VirtualDesktopWorkspaceAppplicationGroupAssociationInitParameters struct {
 	WorkspaceIDSelector *v1.NamespacedSelector `json:"workspaceIdSelector,omitempty" tf:"-"`
 }
 
-type VirtualDesktopWorkspaceAppplicationGroupAssociationObservation struct {
+type VirtualDesktopWorkspaceApplicationGroupAssociationObservation struct {
 
 	// The resource ID for the Virtual Desktop Application Group. Changing this forces a new resource to be created.
 	ApplicationGroupID *string `json:"applicationGroupId,omitempty" tf:"application_group_id,omitempty"`
@@ -55,7 +55,7 @@ type VirtualDesktopWorkspaceAppplicationGroupAssociationObservation struct {
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 }
 
-type VirtualDesktopWorkspaceAppplicationGroupAssociationParameters struct {
+type VirtualDesktopWorkspaceApplicationGroupAssociationParameters struct {
 
 	// The resource ID for the Virtual Desktop Application Group. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/desktopvirtualization/v1beta1.VirtualDesktopApplicationGroup
@@ -86,10 +86,10 @@ type VirtualDesktopWorkspaceAppplicationGroupAssociationParameters struct {
 	WorkspaceIDSelector *v1.NamespacedSelector `json:"workspaceIdSelector,omitempty" tf:"-"`
 }
 
-// VirtualDesktopWorkspaceAppplicationGroupAssociationSpec defines the desired state of VirtualDesktopWorkspaceAppplicationGroupAssociation
-type VirtualDesktopWorkspaceAppplicationGroupAssociationSpec struct {
+// VirtualDesktopWorkspaceApplicationGroupAssociationSpec defines the desired state of VirtualDesktopWorkspaceApplicationGroupAssociation
+type VirtualDesktopWorkspaceApplicationGroupAssociationSpec struct {
 	v2.ManagedResourceSpec `json:",inline"`
-	ForProvider            VirtualDesktopWorkspaceAppplicationGroupAssociationParameters `json:"forProvider"`
+	ForProvider            VirtualDesktopWorkspaceApplicationGroupAssociationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -100,49 +100,49 @@ type VirtualDesktopWorkspaceAppplicationGroupAssociationSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider VirtualDesktopWorkspaceAppplicationGroupAssociationInitParameters `json:"initProvider,omitempty"`
+	InitProvider VirtualDesktopWorkspaceApplicationGroupAssociationInitParameters `json:"initProvider,omitempty"`
 }
 
-// VirtualDesktopWorkspaceAppplicationGroupAssociationStatus defines the observed state of VirtualDesktopWorkspaceAppplicationGroupAssociation.
-type VirtualDesktopWorkspaceAppplicationGroupAssociationStatus struct {
+// VirtualDesktopWorkspaceApplicationGroupAssociationStatus defines the observed state of VirtualDesktopWorkspaceApplicationGroupAssociation.
+type VirtualDesktopWorkspaceApplicationGroupAssociationStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        VirtualDesktopWorkspaceAppplicationGroupAssociationObservation `json:"atProvider,omitempty"`
+	AtProvider        VirtualDesktopWorkspaceApplicationGroupAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// VirtualDesktopWorkspaceAppplicationGroupAssociation is the Schema for the VirtualDesktopWorkspaceAppplicationGroupAssociations API. Manages a Virtual Desktop Workspace Application Group Association.
+// VirtualDesktopWorkspaceApplicationGroupAssociation is the Schema for the VirtualDesktopWorkspaceApplicationGroupAssociations API. Manages a Virtual Desktop Workspace Application Group Association.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Namespaced,categories={crossplane,managed,azure}
-type VirtualDesktopWorkspaceAppplicationGroupAssociation struct {
+type VirtualDesktopWorkspaceApplicationGroupAssociation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VirtualDesktopWorkspaceAppplicationGroupAssociationSpec   `json:"spec"`
-	Status            VirtualDesktopWorkspaceAppplicationGroupAssociationStatus `json:"status,omitempty"`
+	Spec              VirtualDesktopWorkspaceApplicationGroupAssociationSpec   `json:"spec"`
+	Status            VirtualDesktopWorkspaceApplicationGroupAssociationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 
-// VirtualDesktopWorkspaceAppplicationGroupAssociationList contains a list of VirtualDesktopWorkspaceAppplicationGroupAssociations
-type VirtualDesktopWorkspaceAppplicationGroupAssociationList struct {
+// VirtualDesktopWorkspaceApplicationGroupAssociationList contains a list of VirtualDesktopWorkspaceApplicationGroupAssociations
+type VirtualDesktopWorkspaceApplicationGroupAssociationList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []VirtualDesktopWorkspaceAppplicationGroupAssociation `json:"items"`
+	Items           []VirtualDesktopWorkspaceApplicationGroupAssociation `json:"items"`
 }
 
 // Repository type metadata.
 var (
-	VirtualDesktopWorkspaceAppplicationGroupAssociation_Kind             = "VirtualDesktopWorkspaceAppplicationGroupAssociation"
-	VirtualDesktopWorkspaceAppplicationGroupAssociation_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: VirtualDesktopWorkspaceAppplicationGroupAssociation_Kind}.String()
-	VirtualDesktopWorkspaceAppplicationGroupAssociation_KindAPIVersion   = VirtualDesktopWorkspaceAppplicationGroupAssociation_Kind + "." + CRDGroupVersion.String()
-	VirtualDesktopWorkspaceAppplicationGroupAssociation_GroupVersionKind = CRDGroupVersion.WithKind(VirtualDesktopWorkspaceAppplicationGroupAssociation_Kind)
+	VirtualDesktopWorkspaceApplicationGroupAssociation_Kind             = "VirtualDesktopWorkspaceApplicationGroupAssociation"
+	VirtualDesktopWorkspaceApplicationGroupAssociation_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: VirtualDesktopWorkspaceApplicationGroupAssociation_Kind}.String()
+	VirtualDesktopWorkspaceApplicationGroupAssociation_KindAPIVersion   = VirtualDesktopWorkspaceApplicationGroupAssociation_Kind + "." + CRDGroupVersion.String()
+	VirtualDesktopWorkspaceApplicationGroupAssociation_GroupVersionKind = CRDGroupVersion.WithKind(VirtualDesktopWorkspaceApplicationGroupAssociation_Kind)
 )
 
 func init() {
-	SchemeBuilder.Register(&VirtualDesktopWorkspaceAppplicationGroupAssociation{}, &VirtualDesktopWorkspaceAppplicationGroupAssociationList{})
+	SchemeBuilder.Register(&VirtualDesktopWorkspaceApplicationGroupAssociation{}, &VirtualDesktopWorkspaceApplicationGroupAssociationList{})
 }

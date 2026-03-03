@@ -34,8 +34,8 @@ func (l *VirtualDesktopHostPoolRegistrationInfoList) GetItems() []resource.Manag
 	return items
 }
 
-// GetItems of this VirtualDesktopWorkspaceAppplicationGroupAssociationList.
-func (l *VirtualDesktopWorkspaceAppplicationGroupAssociationList) GetItems() []resource.Managed {
+// GetItems of this VirtualDesktopWorkspaceApplicationGroupAssociationList.
+func (l *VirtualDesktopWorkspaceApplicationGroupAssociationList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

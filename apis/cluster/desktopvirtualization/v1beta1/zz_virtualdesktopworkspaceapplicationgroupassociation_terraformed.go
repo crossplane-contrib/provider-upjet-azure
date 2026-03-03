@@ -14,18 +14,18 @@ import (
 	"github.com/crossplane/upjet/v2/pkg/resource/json"
 )
 
-// GetTerraformResourceType returns Terraform resource type for this VirtualDesktopWorkspaceAppplicationGroupAssociation
-func (mg *VirtualDesktopWorkspaceAppplicationGroupAssociation) GetTerraformResourceType() string {
+// GetTerraformResourceType returns Terraform resource type for this VirtualDesktopWorkspaceApplicationGroupAssociation
+func (mg *VirtualDesktopWorkspaceApplicationGroupAssociation) GetTerraformResourceType() string {
 	return "azurerm_virtual_desktop_workspace_application_group_association"
 }
 
-// GetConnectionDetailsMapping for this VirtualDesktopWorkspaceAppplicationGroupAssociation
-func (tr *VirtualDesktopWorkspaceAppplicationGroupAssociation) GetConnectionDetailsMapping() map[string]string {
+// GetConnectionDetailsMapping for this VirtualDesktopWorkspaceApplicationGroupAssociation
+func (tr *VirtualDesktopWorkspaceApplicationGroupAssociation) GetConnectionDetailsMapping() map[string]string {
 	return nil
 }
 
-// GetObservation of this VirtualDesktopWorkspaceAppplicationGroupAssociation
-func (tr *VirtualDesktopWorkspaceAppplicationGroupAssociation) GetObservation() (map[string]any, error) {
+// GetObservation of this VirtualDesktopWorkspaceApplicationGroupAssociation
+func (tr *VirtualDesktopWorkspaceApplicationGroupAssociation) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
@@ -34,8 +34,8 @@ func (tr *VirtualDesktopWorkspaceAppplicationGroupAssociation) GetObservation() 
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
-// SetObservation for this VirtualDesktopWorkspaceAppplicationGroupAssociation
-func (tr *VirtualDesktopWorkspaceAppplicationGroupAssociation) SetObservation(obs map[string]any) error {
+// SetObservation for this VirtualDesktopWorkspaceApplicationGroupAssociation
+func (tr *VirtualDesktopWorkspaceApplicationGroupAssociation) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -43,16 +43,16 @@ func (tr *VirtualDesktopWorkspaceAppplicationGroupAssociation) SetObservation(ob
 	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
 }
 
-// GetID returns ID of underlying Terraform resource of this VirtualDesktopWorkspaceAppplicationGroupAssociation
-func (tr *VirtualDesktopWorkspaceAppplicationGroupAssociation) GetID() string {
+// GetID returns ID of underlying Terraform resource of this VirtualDesktopWorkspaceApplicationGroupAssociation
+func (tr *VirtualDesktopWorkspaceApplicationGroupAssociation) GetID() string {
 	if tr.Status.AtProvider.ID == nil {
 		return ""
 	}
 	return *tr.Status.AtProvider.ID
 }
 
-// GetParameters of this VirtualDesktopWorkspaceAppplicationGroupAssociation
-func (tr *VirtualDesktopWorkspaceAppplicationGroupAssociation) GetParameters() (map[string]any, error) {
+// GetParameters of this VirtualDesktopWorkspaceApplicationGroupAssociation
+func (tr *VirtualDesktopWorkspaceApplicationGroupAssociation) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
@@ -61,8 +61,8 @@ func (tr *VirtualDesktopWorkspaceAppplicationGroupAssociation) GetParameters() (
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetParameters for this VirtualDesktopWorkspaceAppplicationGroupAssociation
-func (tr *VirtualDesktopWorkspaceAppplicationGroupAssociation) SetParameters(params map[string]any) error {
+// SetParameters for this VirtualDesktopWorkspaceApplicationGroupAssociation
+func (tr *VirtualDesktopWorkspaceApplicationGroupAssociation) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -70,8 +70,8 @@ func (tr *VirtualDesktopWorkspaceAppplicationGroupAssociation) SetParameters(par
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
-// GetInitParameters of this VirtualDesktopWorkspaceAppplicationGroupAssociation
-func (tr *VirtualDesktopWorkspaceAppplicationGroupAssociation) GetInitParameters() (map[string]any, error) {
+// GetInitParameters of this VirtualDesktopWorkspaceApplicationGroupAssociation
+func (tr *VirtualDesktopWorkspaceApplicationGroupAssociation) GetInitParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
 	if err != nil {
 		return nil, err
@@ -80,8 +80,8 @@ func (tr *VirtualDesktopWorkspaceAppplicationGroupAssociation) GetInitParameters
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// GetInitParameters of this VirtualDesktopWorkspaceAppplicationGroupAssociation
-func (tr *VirtualDesktopWorkspaceAppplicationGroupAssociation) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
+// GetInitParameters of this VirtualDesktopWorkspaceApplicationGroupAssociation
+func (tr *VirtualDesktopWorkspaceApplicationGroupAssociation) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource \"%s/%s\"", tr.GetNamespace(), tr.GetName())
@@ -110,10 +110,10 @@ func (tr *VirtualDesktopWorkspaceAppplicationGroupAssociation) GetMergedParamete
 	return params, nil
 }
 
-// LateInitialize this VirtualDesktopWorkspaceAppplicationGroupAssociation using its observed tfState.
+// LateInitialize this VirtualDesktopWorkspaceApplicationGroupAssociation using its observed tfState.
 // returns True if there are any spec changes for the resource.
-func (tr *VirtualDesktopWorkspaceAppplicationGroupAssociation) LateInitialize(attrs []byte) (bool, error) {
-	params := &VirtualDesktopWorkspaceAppplicationGroupAssociationParameters{}
+func (tr *VirtualDesktopWorkspaceApplicationGroupAssociation) LateInitialize(attrs []byte) (bool, error) {
+	params := &VirtualDesktopWorkspaceApplicationGroupAssociationParameters{}
 	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
 		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
 	}
@@ -124,6 +124,6 @@ func (tr *VirtualDesktopWorkspaceAppplicationGroupAssociation) LateInitialize(at
 }
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
-func (tr *VirtualDesktopWorkspaceAppplicationGroupAssociation) GetTerraformSchemaVersion() int {
+func (tr *VirtualDesktopWorkspaceApplicationGroupAssociation) GetTerraformSchemaVersion() int {
 	return 1
 }

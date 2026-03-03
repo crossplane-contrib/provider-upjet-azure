@@ -36,7 +36,7 @@ func Configure(p *config.Provider) {
 	})
 	p.AddResourceConfigurator("azurerm_virtual_desktop_workspace_application_group_association", func(r *config.Resource) {
 		r.ShortGroup = group
-		r.Kind = "VirtualDesktopWorkspaceAppplicationGroupAssociation"
+		r.Kind = "VirtualDesktopWorkspaceApplicationGroupAssociation"
 		r.References["workspace_id"] = config.Reference{
 			TerraformName: "azurerm_virtual_desktop_workspace",
 			Extractor:     rconfig.ExtractResourceIDFuncPath,

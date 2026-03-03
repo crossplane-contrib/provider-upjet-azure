@@ -204,8 +204,8 @@ func (mg *VirtualDesktopWorkspace) ResolveReferences(ctx context.Context, c clie
 	return nil
 }
 
-// ResolveReferences of this VirtualDesktopWorkspaceAppplicationGroupAssociation.
-func (mg *VirtualDesktopWorkspaceAppplicationGroupAssociation) ResolveReferences(ctx context.Context, c client.Reader) error {
+// ResolveReferences of this VirtualDesktopWorkspaceApplicationGroupAssociation.
+func (mg *VirtualDesktopWorkspaceApplicationGroupAssociation) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList
 	r := reference.NewAPIResolver(c, mg)

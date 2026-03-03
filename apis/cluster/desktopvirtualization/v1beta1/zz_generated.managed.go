@@ -207,52 +207,52 @@ func (mg *VirtualDesktopWorkspace) SetWriteConnectionSecretToReference(r *xpv1.S
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
-// GetCondition of this VirtualDesktopWorkspaceAppplicationGroupAssociation.
-func (mg *VirtualDesktopWorkspaceAppplicationGroupAssociation) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+// GetCondition of this VirtualDesktopWorkspaceApplicationGroupAssociation.
+func (mg *VirtualDesktopWorkspaceApplicationGroupAssociation) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
-// GetDeletionPolicy of this VirtualDesktopWorkspaceAppplicationGroupAssociation.
-func (mg *VirtualDesktopWorkspaceAppplicationGroupAssociation) GetDeletionPolicy() xpv1.DeletionPolicy {
+// GetDeletionPolicy of this VirtualDesktopWorkspaceApplicationGroupAssociation.
+func (mg *VirtualDesktopWorkspaceApplicationGroupAssociation) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicies of this VirtualDesktopWorkspaceAppplicationGroupAssociation.
-func (mg *VirtualDesktopWorkspaceAppplicationGroupAssociation) GetManagementPolicies() xpv1.ManagementPolicies {
+// GetManagementPolicies of this VirtualDesktopWorkspaceApplicationGroupAssociation.
+func (mg *VirtualDesktopWorkspaceApplicationGroupAssociation) GetManagementPolicies() xpv1.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
-// GetProviderConfigReference of this VirtualDesktopWorkspaceAppplicationGroupAssociation.
-func (mg *VirtualDesktopWorkspaceAppplicationGroupAssociation) GetProviderConfigReference() *xpv1.Reference {
+// GetProviderConfigReference of this VirtualDesktopWorkspaceApplicationGroupAssociation.
+func (mg *VirtualDesktopWorkspaceApplicationGroupAssociation) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetWriteConnectionSecretToReference of this VirtualDesktopWorkspaceAppplicationGroupAssociation.
-func (mg *VirtualDesktopWorkspaceAppplicationGroupAssociation) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+// GetWriteConnectionSecretToReference of this VirtualDesktopWorkspaceApplicationGroupAssociation.
+func (mg *VirtualDesktopWorkspaceApplicationGroupAssociation) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
-// SetConditions of this VirtualDesktopWorkspaceAppplicationGroupAssociation.
-func (mg *VirtualDesktopWorkspaceAppplicationGroupAssociation) SetConditions(c ...xpv1.Condition) {
+// SetConditions of this VirtualDesktopWorkspaceApplicationGroupAssociation.
+func (mg *VirtualDesktopWorkspaceApplicationGroupAssociation) SetConditions(c ...xpv1.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
-// SetDeletionPolicy of this VirtualDesktopWorkspaceAppplicationGroupAssociation.
-func (mg *VirtualDesktopWorkspaceAppplicationGroupAssociation) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+// SetDeletionPolicy of this VirtualDesktopWorkspaceApplicationGroupAssociation.
+func (mg *VirtualDesktopWorkspaceApplicationGroupAssociation) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicies of this VirtualDesktopWorkspaceAppplicationGroupAssociation.
-func (mg *VirtualDesktopWorkspaceAppplicationGroupAssociation) SetManagementPolicies(r xpv1.ManagementPolicies) {
+// SetManagementPolicies of this VirtualDesktopWorkspaceApplicationGroupAssociation.
+func (mg *VirtualDesktopWorkspaceApplicationGroupAssociation) SetManagementPolicies(r xpv1.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
-// SetProviderConfigReference of this VirtualDesktopWorkspaceAppplicationGroupAssociation.
-func (mg *VirtualDesktopWorkspaceAppplicationGroupAssociation) SetProviderConfigReference(r *xpv1.Reference) {
+// SetProviderConfigReference of this VirtualDesktopWorkspaceApplicationGroupAssociation.
+func (mg *VirtualDesktopWorkspaceApplicationGroupAssociation) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetWriteConnectionSecretToReference of this VirtualDesktopWorkspaceAppplicationGroupAssociation.
-func (mg *VirtualDesktopWorkspaceAppplicationGroupAssociation) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+// SetWriteConnectionSecretToReference of this VirtualDesktopWorkspaceApplicationGroupAssociation.
+func (mg *VirtualDesktopWorkspaceApplicationGroupAssociation) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
