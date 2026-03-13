@@ -74,6 +74,10 @@ func Configure(p *config.Provider) {
 			TerraformName: "azurerm_api_management_product",
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
+		r.References["api_id"] = config.Reference{
+			TerraformName: "azurerm_api_management_api",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
 		r.References["api_management_name"] = config.Reference{
 			TerraformName: "azurerm_api_management",
 		}

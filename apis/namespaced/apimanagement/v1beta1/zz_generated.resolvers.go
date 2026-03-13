@@ -2836,6 +2836,26 @@ func (mg *Subscription) ResolveReferences(ctx context.Context, c client.Reader) 
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
+		m, l, err = apisresolver.GetManagedResource("apimanagement.azure.m.upbound.io", "v1beta1", "API", "APIList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.APIID),
+			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.APIIDRef,
+			Selector:     mg.Spec.ForProvider.APIIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.APIID")
+	}
+	mg.Spec.ForProvider.APIID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.APIIDRef = rsp.ResolvedReference
+	{
 		m, l, err = apisresolver.GetManagedResource("apimanagement.azure.m.upbound.io", "v1beta1", "Management", "ManagementList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
@@ -2915,6 +2935,26 @@ func (mg *Subscription) ResolveReferences(ctx context.Context, c client.Reader) 
 	}
 	mg.Spec.ForProvider.UserID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.UserIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("apimanagement.azure.m.upbound.io", "v1beta1", "API", "APIList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.APIID),
+			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.APIIDRef,
+			Selector:     mg.Spec.InitProvider.APIIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.APIID")
+	}
+	mg.Spec.InitProvider.APIID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.APIIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("apimanagement.azure.m.upbound.io", "v1beta1", "Product", "ProductList")
 		if err != nil {
