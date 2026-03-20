@@ -33,6 +33,22 @@ the [Upbound Marketplace](https://marketplace.upbound.io/providers/upbound/provi
 For more information about monitoring the Upjet runtime, please
 see [Monitoring Guide](https://github.com/crossplane/upjet/blob/main/docs/monitoring.md)
 
+## Current Limitations
+
+### FederatedIdentityCredential claims matching expression
+
+`managedidentity.azure.upbound.io/FederatedIdentityCredential` currently supports
+`spec.forProvider.subject` but does not expose
+`claimsMatchingExpression`-style fields yet.
+
+This blocks wildcard-style federated subject matching from this provider, even
+though Azure ARM and CLI now expose preview support for claims matching
+expressions on managed identity federated credentials.
+
+Tracking:
+- Provider issue: https://github.com/crossplane-contrib/provider-upjet-azure/issues/1174
+- Upstream AzureRM provider request: https://github.com/hashicorp/terraform-provider-azurerm/issues/28538
+
 ## Contributing
 
 For the general contribution guide,
