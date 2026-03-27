@@ -588,6 +588,10 @@ import (
 	loganalyticssavedsearch "github.com/upbound/provider-azure/v2/internal/controller/cluster/operationalinsights/loganalyticssavedsearch"
 	workspaceoperationalinsights "github.com/upbound/provider-azure/v2/internal/controller/cluster/operationalinsights/workspace"
 	loganalyticssolution "github.com/upbound/provider-azure/v2/internal/controller/cluster/operationsmanagement/loganalyticssolution"
+	autonomousdatabase "github.com/upbound/provider-azure/v2/internal/controller/cluster/oracle/autonomousdatabase"
+	autonomousdatabasebackup "github.com/upbound/provider-azure/v2/internal/controller/cluster/oracle/autonomousdatabasebackup"
+	autonomousdatabaseclonefrombackup "github.com/upbound/provider-azure/v2/internal/controller/cluster/oracle/autonomousdatabaseclonefrombackup"
+	autonomousdatabaseclonefromdatabase "github.com/upbound/provider-azure/v2/internal/controller/cluster/oracle/autonomousdatabaseclonefromdatabase"
 	contactprofile "github.com/upbound/provider-azure/v2/internal/controller/cluster/orbital/contactprofile"
 	spacecraft "github.com/upbound/provider-azure/v2/internal/controller/cluster/orbital/spacecraft"
 	resourcepolicyremediation "github.com/upbound/provider-azure/v2/internal/controller/cluster/policyinsights/resourcepolicyremediation"
@@ -1348,6 +1352,10 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		loganalyticssavedsearch.Setup,
 		workspaceoperationalinsights.Setup,
 		loganalyticssolution.Setup,
+		autonomousdatabase.Setup,
+		autonomousdatabasebackup.Setup,
+		autonomousdatabaseclonefrombackup.Setup,
+		autonomousdatabaseclonefromdatabase.Setup,
 		contactprofile.Setup,
 		spacecraft.Setup,
 		resourcepolicyremediation.Setup,
@@ -2114,6 +2122,10 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		loganalyticssavedsearch.SetupGated,
 		workspaceoperationalinsights.SetupGated,
 		loganalyticssolution.SetupGated,
+		autonomousdatabase.SetupGated,
+		autonomousdatabasebackup.SetupGated,
+		autonomousdatabaseclonefrombackup.SetupGated,
+		autonomousdatabaseclonefromdatabase.SetupGated,
 		contactprofile.SetupGated,
 		spacecraft.SetupGated,
 		resourcepolicyremediation.SetupGated,

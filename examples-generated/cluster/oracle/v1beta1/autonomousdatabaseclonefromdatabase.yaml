@@ -1,0 +1,89 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: oracle.azure.upbound.io/v1beta1
+kind: AutonomousDatabaseCloneFromDatabase
+metadata:
+  annotations:
+    meta.upbound.io/example-id: oracle/v1beta1/autonomousdatabaseclonefromdatabase
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    adminPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    allowedIpAddresses: []
+    autoScalingEnabled: false
+    autoScalingForStorageEnabled: true
+    backupRetentionPeriodInDays: 7
+    characterSet: AL32UTF8
+    cloneType: Full
+    computeCount: 2
+    computeModel: ECPU
+    dataStorageSizeInTb: 1
+    databaseVersion: 19c
+    databaseWorkload: OLTP
+    displayName: ExampleClone
+    licenseModel: LicenseIncluded
+    location: West Europe
+    mtlsConnectionRequired: true
+    nationalCharacterSet: AL16UTF16
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sourceAutonomousDatabaseIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: oracle.azure.upbound.io/v1beta1
+kind: AutonomousDatabase
+metadata:
+  annotations:
+    meta.upbound.io/example-id: oracle/v1beta1/autonomousdatabaseclonefromdatabase
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    adminPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    allowedIps: []
+    autoScalingEnabled: false
+    autoScalingForStorageEnabled: true
+    backupRetentionPeriodInDays: 7
+    characterSet: AL32UTF8
+    computeCount: 2
+    computeModel: ECPU
+    dataStorageSizeInTbs: 1
+    dbVersion: 19c
+    dbWorkload: OLTP
+    displayName: Example
+    licenseModel: LicenseIncluded
+    location: eastus
+    mtlsConnectionRequired: true
+    nationalCharacterSet: AL16UTF16
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: oracle/v1beta1/autonomousdatabaseclonefromdatabase
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: eastus
