@@ -1945,7 +1945,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup1/providers/Microsoft.DesktopVirtualization/workspaces/myworkspace|/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup1/providers/Microsoft.DesktopVirtualization/applicationGroups/myapplicationgroup
 	"azurerm_virtual_desktop_workspace_application_group_association": config.IdentifierFromProvider,
 
-	// Oracle
+	// oracle
 	//
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup/providers/Oracle.Database/autonomousDatabases/autonomousDatabases1
 	"azurerm_oracle_autonomous_database": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Oracle.Database/autonomousDatabases/{{ .external_name }}"),

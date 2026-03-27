@@ -120,6 +120,7 @@ import (
 	v1beta2operationalinsights "github.com/upbound/provider-azure/v2/apis/cluster/operationalinsights/v1beta2"
 	v1beta1operationsmanagement "github.com/upbound/provider-azure/v2/apis/cluster/operationsmanagement/v1beta1"
 	v1beta2operationsmanagement "github.com/upbound/provider-azure/v2/apis/cluster/operationsmanagement/v1beta2"
+	v1beta1oracle "github.com/upbound/provider-azure/v2/apis/cluster/oracle/v1beta1"
 	v1beta1orbital "github.com/upbound/provider-azure/v2/apis/cluster/orbital/v1beta1"
 	v1beta1policyinsights "github.com/upbound/provider-azure/v2/apis/cluster/policyinsights/v1beta1"
 	v1beta1portal "github.com/upbound/provider-azure/v2/apis/cluster/portal/v1beta1"
@@ -277,6 +278,7 @@ func init() {
 		v1beta2operationalinsights.SchemeBuilder.AddToScheme,
 		v1beta1operationsmanagement.SchemeBuilder.AddToScheme,
 		v1beta2operationsmanagement.SchemeBuilder.AddToScheme,
+		v1beta1oracle.SchemeBuilder.AddToScheme,
 		v1beta1orbital.SchemeBuilder.AddToScheme,
 		v1beta1policyinsights.SchemeBuilder.AddToScheme,
 		v1beta1portal.SchemeBuilder.AddToScheme,
