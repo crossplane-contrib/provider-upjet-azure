@@ -15,7 +15,7 @@ spec:
     autonomousDatabaseIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    backup_type: Full
+    type: Full
     retentionPeriodInDays: 120
 
 ---

@@ -20,7 +20,6 @@ spec:
     autoScalingEnabled: false
     autoScalingForStorageEnabled: true
     backupRetentionPeriodInDays: 7
-    backupTimestamp: "2025-09-23T02:22:13.000Z"
     characterSet: AL32UTF8
     cloneType: Metadata
     computeCount: 2
@@ -88,3 +87,59 @@ metadata:
 spec:
   forProvider:
     location: eastus
+---
+apiVersion: oracle.azure.upbound.io/v1beta1
+kind: AutonomousDatabaseBackup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: oracle/v1beta1/autonomousdatabasebackup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    autonomousDatabaseIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    type: Full
+    retentionPeriodInDays: 120
+
+---
+
+apiVersion: oracle.azure.upbound.io/v1beta1
+kind: AutonomousDatabase
+metadata:
+  annotations:
+    meta.upbound.io/example-id: oracle/v1beta1/autonomousdatabasebackup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: East US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: oracle/v1beta1/autonomousdatabasebackup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: East US
+---
+apiVersion: v1
+data:
+  example-key: dXBiMHVuZHIwY2s1ITMxMzM3
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+type: Opaque

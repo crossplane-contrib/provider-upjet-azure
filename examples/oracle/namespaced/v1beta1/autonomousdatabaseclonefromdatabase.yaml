@@ -88,3 +88,12 @@ metadata:
 spec:
   forProvider:
     location: eastus
+---
+apiVersion: v1
+data:
+  example-key: dXBiMHVuZHIwY2s1ITMxMzM3
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+type: Opaque
