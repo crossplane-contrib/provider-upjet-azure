@@ -1,12 +1,13 @@
 # SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
 #
 # SPDX-License-Identifier: CC0-1.0
-apiVersion: oracle.azure.m.upbound.io/v1beta1
-kind: AutonomousDatabase
+
+apiVersion: oracle.azure.upbound.io/v1beta1
+kind: AutonomousDatabaseCloneFromBackup
 metadata:
   annotations:
     upjet.upbound.io/manual-intervention: This resource requires manual intervention.
-    meta.upbound.io/example-id: oracle/v1beta1/autonomousdatabase
+    meta.upbound.io/example-id: oracle/v1beta1/autonomousdatabaseclonefrombackup
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -16,9 +17,49 @@ spec:
     adminPasswordSecretRef:
       key: example-key
       name: example-secret
+      namespace: upbound-system
+    allowedIpAddresses: []
+    autoScalingEnabled: false
+    autoScalingForStorageEnabled: true
+    backupRetentionPeriodInDays: 7
+    characterSet: AL32UTF8
+    cloneType: Metadata
+    computeCount: 2
+    computeModel: ECPU
+    dataStorageSizeInTb: 1
+    databaseVersion: 19c
+    databaseWorkload: OLTP
+    displayName: ExampleClone
+    licenseModel: LicenseIncluded
+    location: eastus
+    mtlsConnectionRequired: true
+    nationalCharacterSet: AL16UTF16
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sourceAutonomousDatabaseIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: oracle.azure.upbound.io/v1beta1
+kind: AutonomousDatabase
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: This resource requires manual intervention.
+    meta.upbound.io/example-id: oracle/v1beta1/autonomousdatabasebackup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    adminPasswordSecretRef:
+      key: password
+      name: example-db-secret
+      namespace: upbound-system
     autoScalingEnabled: false
     autoScalingForStorageEnabled: false
-    backupRetentionPeriodInDays: 1
+    backupRetentionPeriodInDays: 60
     characterSet: AL32UTF8
     computeCount: 2
     computeModel: ECPU
@@ -27,7 +68,7 @@ spec:
     dbWorkload: OLTP
     displayName: example
     licenseModel: LicenseIncluded
-    location: West Europe
+    location: East US
     mtlsConnectionRequired: false
     nationalCharacterSet: AL16UTF16
     resourceGroupNameSelector:
@@ -37,21 +78,39 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
 ---
-apiVersion: azure.m.upbound.io/v1beta1
+apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   annotations:
     upjet.upbound.io/manual-intervention: This resource requires manual intervention.
-    meta.upbound.io/example-id: oracle/v1beta1/autonomousdatabase
+    meta.upbound.io/example-id: oracle/v1beta1/autonomousdatabaseclonefrombackup
   labels:
     testing.upbound.io/example-name: example
   name: example
   namespace: upbound-system
 spec:
   forProvider:
-    location: West Europe
+    location: eastus
 ---
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: oracle.azure.upbound.io/v1beta1
+kind: AutonomousDatabaseBackup
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: This resource requires manual intervention.
+    meta.upbound.io/example-id: oracle/v1beta1/autonomousdatabaseclonefrombackup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    autonomousDatabaseIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    type: LongTerm
+    retentionPeriodInDays: 120
+---
+apiVersion: network.azure.upbound.io/v1beta2
 kind: Subnet
 metadata:
   annotations:
@@ -76,7 +135,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
 ---
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta1
 kind: VirtualNetwork
 metadata:
   annotations:
@@ -90,7 +149,7 @@ spec:
   forProvider:
     addressSpace:
       - 10.0.0.0/16
-    location: West Europe
+    location: eastus
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
