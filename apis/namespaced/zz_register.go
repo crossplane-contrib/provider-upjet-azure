@@ -74,6 +74,7 @@ import (
 	v1beta1notificationhubs "github.com/upbound/provider-azure/v2/apis/namespaced/notificationhubs/v1beta1"
 	v1beta1operationalinsights "github.com/upbound/provider-azure/v2/apis/namespaced/operationalinsights/v1beta1"
 	v1beta1operationsmanagement "github.com/upbound/provider-azure/v2/apis/namespaced/operationsmanagement/v1beta1"
+	v1beta1oracle "github.com/upbound/provider-azure/v2/apis/namespaced/oracle/v1beta1"
 	v1beta1orbital "github.com/upbound/provider-azure/v2/apis/namespaced/orbital/v1beta1"
 	v1beta1policyinsights "github.com/upbound/provider-azure/v2/apis/namespaced/policyinsights/v1beta1"
 	v1beta1portal "github.com/upbound/provider-azure/v2/apis/namespaced/portal/v1beta1"
@@ -170,6 +171,7 @@ func init() {
 		v1beta1notificationhubs.SchemeBuilder.AddToScheme,
 		v1beta1operationalinsights.SchemeBuilder.AddToScheme,
 		v1beta1operationsmanagement.SchemeBuilder.AddToScheme,
+		v1beta1oracle.SchemeBuilder.AddToScheme,
 		v1beta1orbital.SchemeBuilder.AddToScheme,
 		v1beta1policyinsights.SchemeBuilder.AddToScheme,
 		v1beta1portal.SchemeBuilder.AddToScheme,

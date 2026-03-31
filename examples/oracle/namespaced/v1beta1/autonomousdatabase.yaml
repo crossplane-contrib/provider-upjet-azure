@@ -1,0 +1,103 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+apiVersion: oracle.azure.m.upbound.io/v1beta1
+kind: AutonomousDatabase
+metadata:
+  annotations:
+    meta.upbound.io/example-id: oracle/v1beta1/autonomousdatabase
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    adminPasswordSecretRef:
+      key: example-key
+      name: example-secret
+    autoScalingEnabled: false
+    autoScalingForStorageEnabled: false
+    backupRetentionPeriodInDays: 1
+    characterSet: AL32UTF8
+    computeCount: 2
+    computeModel: ECPU
+    dataStorageSizeInTbs: 1
+    dbVersion: "19c"
+    dbWorkload: OLTP
+    displayName: example
+    licenseModel: LicenseIncluded
+    location: West Europe
+    mtlsConnectionRequired: false
+    nationalCharacterSet: AL16UTF16
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: oracle/v1beta1/autonomousdatabase
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+---
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: oracle/v1beta1/autonomousdatabase
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    addressPrefixes:
+      - 10.0.2.0/24
+    delegation:
+      - name: oracle
+        serviceDelegation:
+          - name: Oracle.Database/networkAttachments
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    serviceEndpoints:
+      - Microsoft.Storage
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: oracle/v1beta1/autonomousdatabase
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    addressSpace:
+      - 10.0.0.0/16
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: v1
+data:
+  example-key: dXBiMHVuZHIwY2s1ITMxMzM3
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+type: Opaque
