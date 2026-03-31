@@ -38,14 +38,12 @@ spec:
     sourceAutonomousDatabaseIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-
 ---
-
 apiVersion: oracle.azure.m.upbound.io/v1beta1
 kind: AutonomousDatabase
 metadata:
   annotations:
-    meta.upbound.io/example-id: oracle/v1beta1/autonomousdatabaseclonefrombackup
+    meta.upbound.io/example-id: oracle/v1beta1/autonomousdatabasebackup
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -53,29 +51,29 @@ metadata:
 spec:
   forProvider:
     adminPasswordSecretRef:
-      key: example-key
-      name: example-secret
-    allowedIps: []
+      key: password
+      name: example-db-secret
     autoScalingEnabled: false
-    autoScalingForStorageEnabled: true
-    backupRetentionPeriodInDays: 7
+    autoScalingForStorageEnabled: false
+    backupRetentionPeriodInDays: 60
     characterSet: AL32UTF8
     computeCount: 2
     computeModel: ECPU
     dataStorageSizeInTbs: 1
-    dbVersion: 19c
+    dbVersion: "19c"
     dbWorkload: OLTP
-    displayName: Example
+    displayName: example
     licenseModel: LicenseIncluded
-    location: eastus
-    mtlsConnectionRequired: true
+    location: East US
+    mtlsConnectionRequired: false
     nationalCharacterSet: AL16UTF16
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
 ---
-
 apiVersion: azure.m.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
@@ -103,11 +101,9 @@ spec:
     autonomousDatabaseIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    type: Full
+    type: LongTerm
     retentionPeriodInDays: 120
-
 ---
-
 apiVersion: oracle.azure.m.upbound.io/v1beta1
 kind: AutonomousDatabase
 metadata:
@@ -119,13 +115,28 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
+    adminPasswordSecretRef:
+      key: example-key
+      name: example-secret
+    allowedIps: []
+    autoScalingEnabled: false
+    autoScalingForStorageEnabled: true
+    backupRetentionPeriodInDays: 7
+    characterSet: AL32UTF8
+    computeCount: 2
+    computeModel: ECPU
+    dataStorageSizeInTbs: 1
+    dbVersion: 19c
+    dbWorkload: OLTP
+    displayName: Example
+    licenseModel: LicenseIncluded
     location: East US
+    mtlsConnectionRequired: true
+    nationalCharacterSet: AL16UTF16
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-
 ---
-
 apiVersion: azure.m.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:

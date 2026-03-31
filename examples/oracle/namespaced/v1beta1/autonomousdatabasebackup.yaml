@@ -16,11 +16,9 @@ spec:
     autonomousDatabaseIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    type: Full
+    type: LongTerm
     retentionPeriodInDays: 120
-
 ---
-
 apiVersion: oracle.azure.m.upbound.io/v1beta1
 kind: AutonomousDatabase
 metadata:
@@ -32,13 +30,41 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
+    adminPasswordSecretRef:
+      key: password
+      name: example-db-secret
+    autoScalingEnabled: false
+    autoScalingForStorageEnabled: false
+    backupRetentionPeriodInDays: 60
+    characterSet: AL32UTF8
+    computeCount: 2
+    computeModel: ECPU
+    dataStorageSizeInTbs: 1
+    dbVersion: "19c"
+    dbWorkload: OLTP
+    displayName: example
+    licenseModel: LicenseIncluded
     location: East US
+    mtlsConnectionRequired: false
+    nationalCharacterSet: AL16UTF16
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
 ---
-
+apiVersion: v1
+kind: Secret
+metadata:
+  annotations:
+    meta.upbound.io/example-id: oracle/v1beta1/autonomousdatabasebackup
+  name: example-db-secret
+  namespace: upbound-system
+type: Opaque
+stringData:
+  password: "Placeholder1!"
+---
 apiVersion: azure.m.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
