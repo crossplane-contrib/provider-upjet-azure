@@ -13,6 +13,9 @@ func (tr *FlexibleDatabase) Hub() {}
 func (tr *FlexibleServer) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *FlexibleServerActiveDirectoryAdministrator) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *FlexibleServerConfiguration) Hub() {}
 
 // Hub marks this type as a conversion hub.

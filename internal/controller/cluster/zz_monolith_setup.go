@@ -300,6 +300,7 @@ import (
 	datashare "github.com/upbound/provider-azure/v2/internal/controller/cluster/datashare/datashare"
 	flexibledatabase "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbformysql/flexibledatabase"
 	flexibleserver "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbformysql/flexibleserver"
+	flexibleserveractivedirectoryadministrator "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbformysql/flexibleserveractivedirectoryadministrator"
 	flexibleserverconfiguration "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbformysql/flexibleserverconfiguration"
 	flexibleserverfirewallrule "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbformysql/flexibleserverfirewallrule"
 	activedirectoryadministrator "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbforpostgresql/activedirectoryadministrator"
@@ -307,7 +308,7 @@ import (
 	database "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbforpostgresql/database"
 	firewallrule "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbforpostgresql/firewallrule"
 	flexibleserverdbforpostgresql "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbforpostgresql/flexibleserver"
-	flexibleserveractivedirectoryadministrator "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbforpostgresql/flexibleserveractivedirectoryadministrator"
+	flexibleserveractivedirectoryadministratordbforpostgresql "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbforpostgresql/flexibleserveractivedirectoryadministrator"
 	flexibleserverbackup "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbforpostgresql/flexibleserverbackup"
 	flexibleserverconfigurationdbforpostgresql "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbforpostgresql/flexibleserverconfiguration"
 	flexibleserverdatabase "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbforpostgresql/flexibleserverdatabase"
@@ -1058,6 +1059,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		datashare.Setup,
 		flexibledatabase.Setup,
 		flexibleserver.Setup,
+		flexibleserveractivedirectoryadministrator.Setup,
 		flexibleserverconfiguration.Setup,
 		flexibleserverfirewallrule.Setup,
 		activedirectoryadministrator.Setup,
@@ -1065,7 +1067,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		database.Setup,
 		firewallrule.Setup,
 		flexibleserverdbforpostgresql.Setup,
-		flexibleserveractivedirectoryadministrator.Setup,
+		flexibleserveractivedirectoryadministratordbforpostgresql.Setup,
 		flexibleserverbackup.Setup,
 		flexibleserverconfigurationdbforpostgresql.Setup,
 		flexibleserverdatabase.Setup,
@@ -1822,6 +1824,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		datashare.SetupGated,
 		flexibledatabase.SetupGated,
 		flexibleserver.SetupGated,
+		flexibleserveractivedirectoryadministrator.SetupGated,
 		flexibleserverconfiguration.SetupGated,
 		flexibleserverfirewallrule.SetupGated,
 		activedirectoryadministrator.SetupGated,
@@ -1829,7 +1832,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		database.SetupGated,
 		firewallrule.SetupGated,
 		flexibleserverdbforpostgresql.SetupGated,
-		flexibleserveractivedirectoryadministrator.SetupGated,
+		flexibleserveractivedirectoryadministratordbforpostgresql.SetupGated,
 		flexibleserverbackup.SetupGated,
 		flexibleserverconfigurationdbforpostgresql.SetupGated,
 		flexibleserverdatabase.SetupGated,

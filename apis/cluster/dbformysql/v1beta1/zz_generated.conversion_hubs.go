@@ -10,6 +10,9 @@ package v1beta1
 func (tr *FlexibleDatabase) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *FlexibleServerActiveDirectoryAdministrator) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *FlexibleServerConfiguration) Hub() {}
 
 // Hub marks this type as a conversion hub.

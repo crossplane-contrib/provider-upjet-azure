@@ -11,6 +11,7 @@ import (
 
 	flexibledatabase "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbformysql/flexibledatabase"
 	flexibleserver "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbformysql/flexibleserver"
+	flexibleserveractivedirectoryadministrator "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbformysql/flexibleserveractivedirectoryadministrator"
 	flexibleserverconfiguration "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbformysql/flexibleserverconfiguration"
 	flexibleserverfirewallrule "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbformysql/flexibleserverfirewallrule"
 )
@@ -21,6 +22,7 @@ func Setup_dbformysql(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		flexibledatabase.Setup,
 		flexibleserver.Setup,
+		flexibleserveractivedirectoryadministrator.Setup,
 		flexibleserverconfiguration.Setup,
 		flexibleserverfirewallrule.Setup,
 	} {
@@ -37,6 +39,7 @@ func SetupGated_dbformysql(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		flexibledatabase.SetupGated,
 		flexibleserver.SetupGated,
+		flexibleserveractivedirectoryadministrator.SetupGated,
 		flexibleserverconfiguration.SetupGated,
 		flexibleserverfirewallrule.SetupGated,
 	} {
