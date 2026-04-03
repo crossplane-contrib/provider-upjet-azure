@@ -1,0 +1,95 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: dbformysql.azure.upbound.io/v1beta1
+kind: FlexibleServerActiveDirectoryAdministrator
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbformysql/v1beta1/flexibleserveractivedirectoryadministrator
+  labels:
+    testing.upbound.io/example-name: flexibleserveractivedirectoryadministrator
+  name: flexibleserveractivedirectoryadministrator
+spec:
+  forProvider:
+    identityIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: flexibleserveractivedirectoryadministrator
+    login: newsqladmin
+    objectId: ${data.azurerm_client_config.current.object_id}
+    serverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: flexibleserveractivedirectoryadministrator
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+
+apiVersion: dbformysql.azure.upbound.io/v1beta2
+kind: FlexibleServer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbformysql/v1beta1/flexibleserveractivedirectoryadministrator
+  labels:
+    testing.upbound.io/example-name: flexibleserveractivedirectoryadministrator
+  name: flexibleserveractivedirectoryadministrator-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    administratorLogin: mysqladmin
+    administratorPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    identity:
+      type: UserAssigned
+      identityIdsSelector:
+        matchLabels:
+          testing.upbound.io/example-name: flexibleserveractivedirectoryadministrator
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: flexibleserveractivedirectoryadministrator
+    skuName: B_Standard_B1ms
+    publicNetworkAccess: Enabled
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbformysql/v1beta1/flexibleserveractivedirectoryadministrator
+  labels:
+    testing.upbound.io/example-name: flexibleserveractivedirectoryadministrator
+  name: flexibleserveractivedirectoryadministrator-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: managedidentity.azure.upbound.io/v1beta1
+kind: UserAssignedIdentity
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbformysql/v1beta1/flexibleserveractivedirectoryadministrator
+  labels:
+    testing.upbound.io/example-name: flexibleserveractivedirectoryadministrator
+  name: flexibleserveractivedirectoryadministrator-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    location: West Europe
+    name: flexibleserveractivedirectoryadministrator
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: flexibleserveractivedirectoryadministrator
+
+---
+
+apiVersion: v1
+data:
+  example-key: dXBiMHVuZHIwY2s1ITMxMzM3Cg==
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+type: Opaque

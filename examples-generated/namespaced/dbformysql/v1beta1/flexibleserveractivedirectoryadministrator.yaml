@@ -1,0 +1,86 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: dbformysql.azure.m.upbound.io/v1beta1
+kind: FlexibleServerActiveDirectoryAdministrator
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbformysql/v1beta1/flexibleserveractivedirectoryadministrator
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    identityIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    login: sqladmin
+    objectId: ${data.azurerm_client_config.current.client_id}
+    serverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+
+apiVersion: dbformysql.azure.m.upbound.io/v1beta1
+kind: FlexibleServer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbformysql/v1beta1/flexibleserveractivedirectoryadministrator
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    administratorLogin: _admin_Terraform_892123456789312
+    administratorPasswordSecretRef:
+      key: example-key
+      name: example-secret
+    identity:
+      identityIdsRefs:
+      - name: example
+      type: UserAssigned
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: B_Standard_B1ms
+    zone: "2"
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbformysql/v1beta1/flexibleserveractivedirectoryadministrator
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: managedidentity.azure.m.upbound.io/v1beta1
+kind: UserAssignedIdentity
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbformysql/v1beta1/flexibleserveractivedirectoryadministrator
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    name: exampleUAI
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

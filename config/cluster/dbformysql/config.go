@@ -17,6 +17,10 @@ func Configure(p *config.Provider) {
 			TerraformName: "azurerm_private_dns_zone",
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
+		r.References["identity.identity_ids"] = config.Reference{
+			TerraformName: "azurerm_user_assigned_identity",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
 		r.LateInitializer = config.LateInitializer{
 			ConditionalIgnoredFields: []string{"zone"},
 		}
@@ -37,6 +41,13 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_mysql_flexible_server_firewall_rule", func(r *config.Resource) {
 		r.References["server_name"] = config.Reference{
 			TerraformName: "azurerm_mysql_flexible_server",
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_mysql_flexible_server_active_directory_administrator", func(r *config.Resource) {
+		r.References["server_id"] = config.Reference{
+			TerraformName: "azurerm_mysql_flexible_server",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 }
