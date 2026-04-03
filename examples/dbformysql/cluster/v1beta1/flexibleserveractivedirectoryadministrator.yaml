@@ -60,7 +60,7 @@ metadata:
     meta.upbound.io/example-id: dbformysql/v1beta1/flexibleserveractivedirectoryadministrator
   labels:
     testing.upbound.io/example-name: flexibleserveractivedirectoryadministrator
-  name: flexibleserveractivedirectoryadministrator
+  name: flexibleserveractivedirectoryadministrator-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     location: West Europe
@@ -74,7 +74,7 @@ metadata:
     meta.upbound.io/example-id: dbformysql/v1beta1/flexibleserveractivedirectoryadministrator
   labels:
     testing.upbound.io/example-name: flexibleserveractivedirectoryadministrator
-  name: flexibleserveractivedirectoryadministrator
+  name: flexibleserveractivedirectoryadministrator-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     location: West Europe
