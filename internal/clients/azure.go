@@ -7,6 +7,7 @@ package clients
 import (
 	"context"
 	"encoding/json"
+	"os"
 	"strings"
 	"sync/atomic"
 
@@ -32,8 +33,11 @@ const (
 	errExtractCredentials   = "cannot extract credentials"
 	errUnmarshalCredentials = "cannot unmarshal Azure credentials as JSON"
 	errSubscriptionIDNotSet = "subscription ID must be set in ProviderConfig when credential source is InjectedIdentity, OIDCTokenFile or Upbound"
-	errTenantIDNotSet       = "tenant ID must be set in ProviderConfig when credential source is InjectedIdentity, OIDCTokenFile or Upbound"
-	errClientIDNotSet       = "client ID must be set in ProviderConfig when credential source is OIDCTokenFile or Upbound"
+	errTenantIDNotSet       = "tenant ID must be set in ProviderConfig or AZURE_TENANT_ID env var when credential source is InjectedIdentity, OIDCTokenFile or Upbound"
+	errClientIDNotSet       = "client ID must be set in ProviderConfig or AZURE_CLIENT_ID env var when credential source is OIDCTokenFile or Upbound"
+	// Environment variable names for Azure Workload Identity webhook-injected values
+	envAzureClientID = "AZURE_CLIENT_ID"
+	envAzureTenantID = "AZURE_TENANT_ID"
 	// Azure service principal credentials file JSON keys
 	keyAzureSubscriptionID = "subscriptionId"
 	keyAzureClientID       = "clientId"
@@ -204,20 +208,35 @@ func oidcAuth(pcSpec *namespacedv1beta1.ProviderConfigSpec, ps *terraform.Setup)
 	if pcSpec.SubscriptionID == nil || len(*pcSpec.SubscriptionID) == 0 {
 		return errors.New(errSubscriptionIDNotSet)
 	}
-	if pcSpec.TenantID == nil || len(*pcSpec.TenantID) == 0 {
+
+	// tenantID and clientID are optional in the spec for OIDCTokenFile: when the
+	// Azure Workload Identity webhook is enabled on the provider pod, it injects
+	// AZURE_TENANT_ID and AZURE_CLIENT_ID per pod, enabling per-provider managed
+	// identities without a cluster-wide ClusterProviderConfig per identity.
+	tenantID := os.Getenv(envAzureTenantID)
+	if pcSpec.TenantID != nil && len(*pcSpec.TenantID) > 0 {
+		tenantID = *pcSpec.TenantID
+	}
+	if tenantID == "" {
 		return errors.New(errTenantIDNotSet)
 	}
-	if pcSpec.ClientID == nil || len(*pcSpec.ClientID) == 0 {
+
+	clientID := os.Getenv(envAzureClientID)
+	if pcSpec.ClientID != nil && len(*pcSpec.ClientID) > 0 {
+		clientID = *pcSpec.ClientID
+	}
+	if clientID == "" {
 		return errors.New(errClientIDNotSet)
 	}
+
 	// OIDC Token File Path defaults to a projected-volume path mounted in the pod running in the AKS cluster, when workload identity is enabled on the pod.
 	ps.Configuration[keyOidcTokenFilePath] = defaultOidcTokenFilePath
 	if pcSpec.OidcTokenFilePath != nil {
 		ps.Configuration[keyOidcTokenFilePath] = *pcSpec.OidcTokenFilePath
 	}
 	ps.Configuration[keySubscriptionID] = *pcSpec.SubscriptionID
-	ps.Configuration[keyTenantID] = *pcSpec.TenantID
-	ps.Configuration[keyClientID] = *pcSpec.ClientID
+	ps.Configuration[keyTenantID] = tenantID
+	ps.Configuration[keyClientID] = clientID
 	ps.Configuration[keyUseOIDC] = "true"
 	if pcSpec.Environment != nil {
 		ps.Configuration[keyEnvironment] = *pcSpec.Environment
