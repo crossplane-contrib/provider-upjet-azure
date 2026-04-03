@@ -16,10 +16,14 @@ type ProviderConfigSpec struct {
 	// Credentials required to authenticate to this provider.
 	Credentials ProviderCredentials `json:"credentials"`
 
-	// ClientID is the user-assigned managed identity's ID
-	// when Credentials.Source is `InjectedIdentity`. If unset and
-	// Credentials.Source is `InjectedIdentity`, then a system-assigned
-	// managed identity is used.
+	// ClientID is the client ID of the managed identity or service principal.
+	// When Credentials.Source is `InjectedIdentity` (MSI), this selects a
+	// user-assigned identity; if unset, the system-assigned identity is used.
+	// When Credentials.Source is `OIDCTokenFile`, this field is optional: if
+	// unset, the value is read from the AZURE_CLIENT_ID environment variable,
+	// which the Azure Workload Identity webhook injects per pod from the
+	// ServiceAccount annotation. This allows a single ClusterProviderConfig to
+	// serve multiple providers, each using its own managed identity.
 	// +optional
 	ClientID *string `json:"clientID,omitempty"`
 
@@ -32,6 +36,9 @@ type ProviderConfigSpec struct {
 	// TenantID is the Azure AD tenant ID to be used.
 	// If unset, tenant ID from Credentials will be used.
 	// Required if Credentials.Source is InjectedIdentity.
+	// When Credentials.Source is `OIDCTokenFile`, this field is optional: if
+	// unset, the value is read from the AZURE_TENANT_ID environment variable,
+	// which the Azure Workload Identity webhook injects per pod.
 	// +kubebuilder:validation:Optional
 	TenantID *string `json:"tenantID,omitempty"`
 
