@@ -17,7 +17,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: flexibleserveractivedirectoryadministratorns
     login: newsqladmin
-    objectId: ${data.azurerm_client_config.current.client_id}
+    objectId: ${data.azurerm_client_config.current.object_id}
     serverIdSelector:
       matchLabels:
         testing.upbound.io/example-name: flexibleserveractivedirectoryadministratorns
