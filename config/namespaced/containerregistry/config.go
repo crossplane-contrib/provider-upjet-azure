@@ -56,4 +56,15 @@ func Configure(p *config.Provider) {
 			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("versionless_id",true)`,
 		}
 	})
+
+	p.AddResourceConfigurator("azurerm_container_registry_cache_rule", func(r *config.Resource) {
+		r.References["container_registry_id"] = config.Reference{
+			TerraformName: "azurerm_container_registry",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["credential_set_id"] = config.Reference{
+			TerraformName: "azurerm_container_registry_credential_set",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+	})
 }
