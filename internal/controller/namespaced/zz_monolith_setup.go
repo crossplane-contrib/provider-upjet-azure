@@ -192,6 +192,7 @@ import (
 	environmentdaprcomponent "github.com/upbound/provider-azure/v2/internal/controller/namespaced/containerapp/environmentdaprcomponent"
 	environmentstorage "github.com/upbound/provider-azure/v2/internal/controller/namespaced/containerapp/environmentstorage"
 	agentpool "github.com/upbound/provider-azure/v2/internal/controller/namespaced/containerregistry/agentpool"
+	cacherule "github.com/upbound/provider-azure/v2/internal/controller/namespaced/containerregistry/cacherule"
 	containerconnectedregistry "github.com/upbound/provider-azure/v2/internal/controller/namespaced/containerregistry/containerconnectedregistry"
 	credentialset "github.com/upbound/provider-azure/v2/internal/controller/namespaced/containerregistry/credentialset"
 	registry "github.com/upbound/provider-azure/v2/internal/controller/namespaced/containerregistry/registry"
@@ -951,6 +952,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		environmentdaprcomponent.Setup,
 		environmentstorage.Setup,
 		agentpool.Setup,
+		cacherule.Setup,
 		containerconnectedregistry.Setup,
 		credentialset.Setup,
 		registry.Setup,
@@ -1716,6 +1718,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		environmentdaprcomponent.SetupGated,
 		environmentstorage.SetupGated,
 		agentpool.SetupGated,
+		cacherule.SetupGated,
 		containerconnectedregistry.SetupGated,
 		credentialset.SetupGated,
 		registry.SetupGated,

@@ -462,6 +462,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_container_registry_token_password": config.IdentifierFromProvider,
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.ContainerRegistry/registries/registry1/credentialSets/credentialSet1
 	"azurerm_container_registry_credential_set": config.TemplatedStringAsIdentifier("name", "{{ .parameters.container_registry_id }}/credentialSets/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.ContainerRegistry/registries/registry1/cacheRules/cacheRule1
+	"azurerm_container_registry_cache_rule": config.TemplatedStringAsIdentifier("name", "{{ .parameters.container_registry_id }}/cacheRules/{{ .external_name }}"),
 
 	// operationalinsights
 	"azurerm_log_analytics_workspace": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.OperationalInsights/workspaces/{{ .external_name }}"),

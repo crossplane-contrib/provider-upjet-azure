@@ -10,6 +10,9 @@ package v1beta1
 func (tr *AgentPool) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *CacheRule) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *ContainerConnectedRegistry) Hub() {}
 
 // Hub marks this type as a conversion hub.

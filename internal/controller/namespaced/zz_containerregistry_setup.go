@@ -10,6 +10,7 @@ import (
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	agentpool "github.com/upbound/provider-azure/v2/internal/controller/namespaced/containerregistry/agentpool"
+	cacherule "github.com/upbound/provider-azure/v2/internal/controller/namespaced/containerregistry/cacherule"
 	containerconnectedregistry "github.com/upbound/provider-azure/v2/internal/controller/namespaced/containerregistry/containerconnectedregistry"
 	credentialset "github.com/upbound/provider-azure/v2/internal/controller/namespaced/containerregistry/credentialset"
 	registry "github.com/upbound/provider-azure/v2/internal/controller/namespaced/containerregistry/registry"
@@ -24,6 +25,7 @@ import (
 func Setup_containerregistry(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		agentpool.Setup,
+		cacherule.Setup,
 		containerconnectedregistry.Setup,
 		credentialset.Setup,
 		registry.Setup,
@@ -44,6 +46,7 @@ func Setup_containerregistry(mgr ctrl.Manager, o controller.Options) error {
 func SetupGated_containerregistry(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		agentpool.SetupGated,
+		cacherule.SetupGated,
 		containerconnectedregistry.SetupGated,
 		credentialset.SetupGated,
 		registry.SetupGated,
