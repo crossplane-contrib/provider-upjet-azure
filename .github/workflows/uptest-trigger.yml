@@ -171,7 +171,7 @@ jobs:
         if: always()
         run: |
           eval $(make --no-print-directory build.vars)
-          ${KUBECTL} delete managed --all || true
+          ${KUBECTL} delete managed --all --all-namespaces || true
 
       - name: Create Unsuccessful Status Check
         if: failure()
