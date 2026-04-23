@@ -1041,6 +1041,16 @@ func (in *MSSQLDatabaseInitParameters) DeepCopyInto(out *MSSQLDatabaseInitParame
 		*out = new(string)
 		**out = **in
 	}
+	if in.ElasticPoolIDRef != nil {
+		in, out := &in.ElasticPoolIDRef, &out.ElasticPoolIDRef
+		*out = new(v1.NamespacedReference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ElasticPoolIDSelector != nil {
+		in, out := &in.ElasticPoolIDSelector, &out.ElasticPoolIDSelector
+		*out = new(v1.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.EnclaveType != nil {
 		in, out := &in.EnclaveType, &out.EnclaveType
 		*out = new(string)
@@ -1474,6 +1484,16 @@ func (in *MSSQLDatabaseParameters) DeepCopyInto(out *MSSQLDatabaseParameters) {
 		in, out := &in.ElasticPoolID, &out.ElasticPoolID
 		*out = new(string)
 		**out = **in
+	}
+	if in.ElasticPoolIDRef != nil {
+		in, out := &in.ElasticPoolIDRef, &out.ElasticPoolIDRef
+		*out = new(v1.NamespacedReference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ElasticPoolIDSelector != nil {
+		in, out := &in.ElasticPoolIDSelector, &out.ElasticPoolIDSelector
+		*out = new(v1.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.EnclaveType != nil {
 		in, out := &in.EnclaveType, &out.EnclaveType

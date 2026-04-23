@@ -212,7 +212,17 @@ type MSSQLDatabaseInitParameters struct {
 	CreationSourceDatabaseID *string `json:"creationSourceDatabaseId,omitempty" tf:"creation_source_database_id,omitempty"`
 
 	// Specifies the ID of the elastic pool containing this database.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/sql/v1beta2.MSSQLElasticPool
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	ElasticPoolID *string `json:"elasticPoolId,omitempty" tf:"elastic_pool_id,omitempty"`
+
+	// Reference to a MSSQLElasticPool in sql to populate elasticPoolId.
+	// +kubebuilder:validation:Optional
+	ElasticPoolIDRef *v1.Reference `json:"elasticPoolIdRef,omitempty" tf:"-"`
+
+	// Selector for a MSSQLElasticPool in sql to populate elasticPoolId.
+	// +kubebuilder:validation:Optional
+	ElasticPoolIDSelector *v1.Selector `json:"elasticPoolIdSelector,omitempty" tf:"-"`
 
 	// Specifies the type of enclave to be used by the elastic pool. When enclave_type is not specified (e.g., the default) enclaves are not enabled on the database. Once enabled (e.g., by specifying Default or VBS) removing the enclave_type field from the configuration file will force the creation of a new resource. Possible values are Default or VBS.
 	EnclaveType *string `json:"enclaveType,omitempty" tf:"enclave_type,omitempty"`
@@ -438,8 +448,18 @@ type MSSQLDatabaseParameters struct {
 	CreationSourceDatabaseID *string `json:"creationSourceDatabaseId,omitempty" tf:"creation_source_database_id,omitempty"`
 
 	// Specifies the ID of the elastic pool containing this database.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/sql/v1beta2.MSSQLElasticPool
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ElasticPoolID *string `json:"elasticPoolId,omitempty" tf:"elastic_pool_id,omitempty"`
+
+	// Reference to a MSSQLElasticPool in sql to populate elasticPoolId.
+	// +kubebuilder:validation:Optional
+	ElasticPoolIDRef *v1.Reference `json:"elasticPoolIdRef,omitempty" tf:"-"`
+
+	// Selector for a MSSQLElasticPool in sql to populate elasticPoolId.
+	// +kubebuilder:validation:Optional
+	ElasticPoolIDSelector *v1.Selector `json:"elasticPoolIdSelector,omitempty" tf:"-"`
 
 	// Specifies the type of enclave to be used by the elastic pool. When enclave_type is not specified (e.g., the default) enclaves are not enabled on the database. Once enabled (e.g., by specifying Default or VBS) removing the enclave_type field from the configuration file will force the creation of a new resource. Possible values are Default or VBS.
 	// +kubebuilder:validation:Optional

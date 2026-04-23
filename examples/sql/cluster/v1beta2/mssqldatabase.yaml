@@ -8,22 +8,49 @@ metadata:
   annotations:
     meta.upbound.io/example-id: sql/v1beta2/mssqldatabase
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: examplemssqldatabase
+  name: examplemssqldatabase
 spec:
   forProvider:
     collation: SQL_Latin1_General_CP1_CI_AS
-    enclaveType: VBS
-    licenseType: LicenseIncluded
-    maxSizeGb: 4
-    readScale: true
+    elasticPoolIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: mssqldatabasepool
     serverIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
-    skuName: S0
+        testing.upbound.io/example-name: mssqldatabasesrv
+    skuName: ElasticPool
     tags:
       foo: bar
-    zoneRedundant: true
+
+---
+
+apiVersion: sql.azure.upbound.io/v1beta2
+kind: MSSQLElasticPool
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta2/mssqldatabase
+  labels:
+    testing.upbound.io/example-name: mssqldatabasepool
+  name: mssqldatabasepool
+spec:
+  forProvider:
+    location: West Europe
+    maxSizeGb: 5
+    perDatabaseSettings:
+      maxCapacity: 4
+      minCapacity: 1
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: mssqldatabase-rg
+    serverNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: mssqldatabasesrv
+    sku:
+      capacity: 4
+      family: Gen5
+      name: GP_Gen5
+      tier: GeneralPurpose
 
 ---
 
@@ -32,9 +59,10 @@ kind: MSSQLServer
 metadata:
   annotations:
     meta.upbound.io/example-id: sql/v1beta2/mssqldatabase
+    uptest.upbound.io/timeout: "3600"
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: mssqldatabasesrv
+  name: sqldatabasev1beta2
 spec:
   forProvider:
     administratorLogin: 4dm1n157r470r
@@ -45,7 +73,7 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: mssqldatabase-rg
     version: "12.0"
 
 ---
@@ -56,27 +84,19 @@ metadata:
   annotations:
     meta.upbound.io/example-id: sql/v1beta2/mssqldatabase
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: mssqldatabase-rg
+  name: sqldatabasev1beta2
 spec:
   forProvider:
     location: West Europe
 
 ---
 
-apiVersion: storage.azure.upbound.io/v1beta2
-kind: Account
+apiVersion: v1
+data:
+  example-key: dGVzdFBhc3N3b3JkITEyMw==
+kind: Secret
 metadata:
-  annotations:
-    meta.upbound.io/example-id: sql/v1beta2/mssqldatabase
-  labels:
-    testing.upbound.io/example-name: example
-  name: example
-spec:
-  forProvider:
-    accountReplicationType: LRS
-    accountTier: Standard
-    location: West Europe
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
+  name: example-secret
+  namespace: upbound-system
+type: Opaque
