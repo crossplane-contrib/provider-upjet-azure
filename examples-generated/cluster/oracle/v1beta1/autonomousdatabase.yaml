@@ -1,0 +1,39 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: oracle.azure.upbound.io/v1beta1
+kind: AutonomousDatabase
+metadata:
+  annotations:
+    meta.upbound.io/example-id: oracle/v1beta1/autonomousdatabase
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    adminPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    autoScalingEnabled: example
+    autoScalingForStorageEnabled: false
+    backupRetentionPeriodInDays: 42
+    characterSet: example
+    computeCount: 1.23456
+    computeModel: example
+    data_storage_size_in_gbs: 42
+    dbVersion: example
+    dbWorkload: example
+    displayName: example
+    licenseModel: false
+    location: West Europe
+    mtlsConnectionRequired: false
+    nationalCharacterSet: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    virtualNetworkId: example
