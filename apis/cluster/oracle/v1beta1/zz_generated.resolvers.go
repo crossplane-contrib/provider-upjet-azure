@@ -117,26 +117,6 @@ func (mg *AutonomousDatabaseBackup) ResolveReferences(ctx context.Context, c cli
 	}
 	mg.Spec.ForProvider.AutonomousDatabaseID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AutonomousDatabaseIDRef = rsp.ResolvedReference
-	{
-		m, l, err = apisresolver.GetManagedResource("oracle.azure.upbound.io", "v1beta1", "AutonomousDatabase", "AutonomousDatabaseList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AutonomousDatabaseID),
-			Extract:      resource.ExtractResourceID(),
-			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.InitProvider.AutonomousDatabaseIDRef,
-			Selector:     mg.Spec.InitProvider.AutonomousDatabaseIDSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.AutonomousDatabaseID")
-	}
-	mg.Spec.InitProvider.AutonomousDatabaseID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.AutonomousDatabaseIDRef = rsp.ResolvedReference
 
 	return nil
 }

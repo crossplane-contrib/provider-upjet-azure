@@ -15,19 +15,6 @@ import (
 
 type AutonomousDatabaseBackupInitParameters struct {
 
-	// The azureId of the Autonomous Database that this backup is for. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/oracle/v1beta1.AutonomousDatabase
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
-	AutonomousDatabaseID *string `json:"autonomousDatabaseId,omitempty" tf:"autonomous_database_id,omitempty"`
-
-	// Reference to a AutonomousDatabase in oracle to populate autonomousDatabaseId.
-	// +kubebuilder:validation:Optional
-	AutonomousDatabaseIDRef *v1.Reference `json:"autonomousDatabaseIdRef,omitempty" tf:"-"`
-
-	// Selector for a AutonomousDatabase in oracle to populate autonomousDatabaseId.
-	// +kubebuilder:validation:Optional
-	AutonomousDatabaseIDSelector *v1.Selector `json:"autonomousDatabaseIdSelector,omitempty" tf:"-"`
-
 	// (Updatable) The number of days to retain the backup. Must be between 90 and 3650 days.
 	RetentionPeriodInDays *float64 `json:"retentionPeriodInDays,omitempty" tf:"retention_period_in_days,omitempty"`
 
