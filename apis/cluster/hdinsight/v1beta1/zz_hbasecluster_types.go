@@ -143,6 +143,8 @@ type HBaseClusterExtensionInitParameters struct {
 
 	// The workspace ID of the log analytics extension.
 	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId,omitempty" tf:"log_analytics_workspace_id,omitempty"`
+
+	PrimaryKeySecretRef v1.SecretKeySelector `json:"primaryKeySecretRef" tf:"-"`
 }
 
 type HBaseClusterExtensionObservation struct {
@@ -163,6 +165,8 @@ type HBaseClusterExtensionParameters struct {
 }
 
 type HBaseClusterGatewayInitParameters struct {
+
+	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The username used for the Ambari Portal. Changing this forces a new resource to be created.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
@@ -286,6 +290,8 @@ type HBaseClusterMonitorInitParameters struct {
 
 	// The Operations Management Suite (OMS) workspace ID.
 	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId,omitempty" tf:"log_analytics_workspace_id,omitempty"`
+
+	PrimaryKeySecretRef v1.SecretKeySelector `json:"primaryKeySecretRef" tf:"-"`
 }
 
 type HBaseClusterMonitorObservation struct {
@@ -580,6 +586,8 @@ type HBaseClusterSecurityProfileInitParameters struct {
 	// The name of the Azure Active Directory Domain. Changing this forces a new resource to be created.
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
+	DomainUserPasswordSecretRef v1.SecretKeySelector `json:"domainUserPasswordSecretRef" tf:"-"`
+
 	// The username of the Azure Active Directory Domain. Changing this forces a new resource to be created.
 	DomainUsername *string `json:"domainUsername,omitempty" tf:"domain_username,omitempty"`
 
@@ -701,6 +709,8 @@ type HBaseClusterStorageAccountInitParameters struct {
 	// Is this the Default Storage Account for the HDInsight Hadoop Cluster? Changing this forces a new resource to be created.
 	IsDefault *bool `json:"isDefault,omitempty" tf:"is_default,omitempty"`
 
+	StorageAccountKeySecretRef v1.SecretKeySelector `json:"storageAccountKeySecretRef" tf:"-"`
+
 	// The ID of the Storage Container. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Container
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
@@ -803,6 +813,8 @@ type MetastoresAmbariInitParameters struct {
 	// The external Oozie metastore's existing SQL database. Changing this forces a new resource to be created.
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
+	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+
 	// The fully-qualified domain name (FQDN) of the SQL server to use for the external Oozie metastore. Changing this forces a new resource to be created.
 	Server *string `json:"server,omitempty" tf:"server,omitempty"`
 
@@ -846,6 +858,8 @@ type MetastoresHiveInitParameters struct {
 	// The external Oozie metastore's existing SQL database. Changing this forces a new resource to be created.
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
+	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+
 	// The fully-qualified domain name (FQDN) of the SQL server to use for the external Oozie metastore. Changing this forces a new resource to be created.
 	Server *string `json:"server,omitempty" tf:"server,omitempty"`
 
@@ -888,6 +902,8 @@ type MetastoresOozieInitParameters struct {
 
 	// The external Oozie metastore's existing SQL database. Changing this forces a new resource to be created.
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+
+	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The fully-qualified domain name (FQDN) of the SQL server to use for the external Oozie metastore. Changing this forces a new resource to be created.
 	Server *string `json:"server,omitempty" tf:"server,omitempty"`

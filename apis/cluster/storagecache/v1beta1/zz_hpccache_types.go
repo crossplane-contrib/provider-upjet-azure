@@ -106,6 +106,9 @@ type BindInitParameters struct {
 
 	// The Bind Distinguished Name (DN) identity to be used in the secure LDAP connection.
 	Dn *string `json:"dn,omitempty" tf:"dn,omitempty"`
+
+	// The password of the Active Directory domain administrator.
+	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 }
 
 type BindObservation struct {
@@ -192,6 +195,9 @@ type DirectoryActiveDirectoryInitParameters struct {
 
 	// The username of the Active Directory domain administrator.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+
+	// The password of the Active Directory domain administrator.
+	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 }
 
 type DirectoryActiveDirectoryObservation struct {

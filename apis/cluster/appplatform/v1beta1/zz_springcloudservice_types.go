@@ -166,6 +166,12 @@ type ConfigServerGitSettingSSHAuthInitParameters struct {
 	// The host key algorithm, should be ssh-dss, ssh-rsa, ecdsa-sha2-nistp256, ecdsa-sha2-nistp384, or ecdsa-sha2-nistp521. Required only if host-key exists.
 	HostKeyAlgorithm *string `json:"hostKeyAlgorithm,omitempty" tf:"host_key_algorithm,omitempty"`
 
+	// The host key of the Git repository server, should not include the algorithm prefix as covered by host-key-algorithm.
+	HostKeySecretRef *v1.SecretKeySelector `json:"hostKeySecretRef,omitempty" tf:"-"`
+
+	// The SSH private key to access the Git repository, required when the URI starts with git@ or ssh://.
+	PrivateKeySecretRef v1.SecretKeySelector `json:"privateKeySecretRef" tf:"-"`
+
 	// Indicates whether the Config Server instance will fail to start if the host_key does not match. Defaults to true.
 	StrictHostKeyCheckingEnabled *bool `json:"strictHostKeyCheckingEnabled,omitempty" tf:"strict_host_key_checking_enabled,omitempty"`
 }
@@ -202,6 +208,9 @@ type ContainerRegistryInitParameters struct {
 
 	// Specifies the name of the container registry.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies the password of the container registry.
+	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// Specifies the login server of the container registry.
 	Server *string `json:"server,omitempty" tf:"server,omitempty"`
@@ -261,6 +270,9 @@ type DefaultBuildServiceParameters struct {
 }
 
 type HTTPBasicAuthInitParameters struct {
+
+	// The password used to access the Git repository server, required when the Git repository server supports HTTP Basic Authentication.
+	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The username that's used to access the Git repository server, required when the Git repository server supports HTTP Basic Authentication.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
@@ -443,6 +455,9 @@ type NetworkParameters struct {
 
 type RepositoryHTTPBasicAuthInitParameters struct {
 
+	// The password used to access the Git repository server, required when the Git repository server supports HTTP Basic Authentication.
+	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+
 	// The username that's used to access the Git repository server, required when the Git repository server supports HTTP Basic Authentication.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
@@ -468,6 +483,12 @@ type RepositorySSHAuthInitParameters struct {
 
 	// The host key algorithm, should be ssh-dss, ssh-rsa, ecdsa-sha2-nistp256, ecdsa-sha2-nistp384, or ecdsa-sha2-nistp521. Required only if host-key exists.
 	HostKeyAlgorithm *string `json:"hostKeyAlgorithm,omitempty" tf:"host_key_algorithm,omitempty"`
+
+	// The host key of the Git repository server, should not include the algorithm prefix as covered by host-key-algorithm.
+	HostKeySecretRef *v1.SecretKeySelector `json:"hostKeySecretRef,omitempty" tf:"-"`
+
+	// The SSH private key to access the Git repository, required when the URI starts with git@ or ssh://.
+	PrivateKeySecretRef v1.SecretKeySelector `json:"privateKeySecretRef" tf:"-"`
 
 	// Indicates whether the Config Server instance will fail to start if the host_key does not match. Defaults to true.
 	StrictHostKeyCheckingEnabled *bool `json:"strictHostKeyCheckingEnabled,omitempty" tf:"strict_host_key_checking_enabled,omitempty"`

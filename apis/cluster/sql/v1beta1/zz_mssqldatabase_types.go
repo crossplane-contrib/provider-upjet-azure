@@ -70,11 +70,17 @@ type ImportInitParameters struct {
 	// Specifies the name of the SQL administrator.
 	AdministratorLogin *string `json:"administratorLogin,omitempty" tf:"administrator_login,omitempty"`
 
+	// Specifies the password of the SQL administrator.
+	AdministratorLoginPasswordSecretRef v1.SecretKeySelector `json:"administratorLoginPasswordSecretRef" tf:"-"`
+
 	// Specifies the type of authentication used to access the server. Valid values are SQL or ADPassword.
 	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
 
 	// The resource id for the storage account used to store BACPAC file. If set, private endpoint connection will be created for the storage account. Must match storage account used for storage_uri parameter.
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+
+	// Specifies the access key for the storage account.
+	StorageKeySecretRef v1.SecretKeySelector `json:"storageKeySecretRef" tf:"-"`
 
 	// Specifies the type of access key for the storage account. Valid values are StorageAccessKey or SharedAccessKey.
 	StorageKeyType *string `json:"storageKeyType,omitempty" tf:"storage_key_type,omitempty"`
