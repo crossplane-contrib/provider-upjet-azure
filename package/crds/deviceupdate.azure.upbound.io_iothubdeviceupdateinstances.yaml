@@ -372,6 +372,24 @@ spec:
                     description: A diagnostic_storage_account block as defined below.
                     items:
                       properties:
+                        connectionStringSecretRef:
+                          description: Connection String of the Diagnostic Storage
+                            Account.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         id:
                           description: Resource ID of the Diagnostic Storage Account.
                           type: string
@@ -451,6 +469,8 @@ spec:
                                   type: string
                               type: object
                           type: object
+                      required:
+                      - connectionStringSecretRef
                       type: object
                     type: array
                   iothubId:

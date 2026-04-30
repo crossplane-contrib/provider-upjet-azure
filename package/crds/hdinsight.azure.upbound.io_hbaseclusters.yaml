@@ -1426,16 +1426,56 @@ spec:
                         logAnalyticsWorkspaceId:
                           description: The workspace ID of the log analytics extension.
                           type: string
+                        primaryKeySecretRef:
+                          description: A SecretKeySelector is a reference to a secret
+                            key in an arbitrary namespace.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                      required:
+                      - primaryKeySecretRef
                       type: object
                     type: array
                   gateway:
                     description: A gateway block as defined below.
                     items:
                       properties:
+                        passwordSecretRef:
+                          description: A SecretKeySelector is a reference to a secret
+                            key in an arbitrary namespace.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         username:
                           description: The username used for the Ambari Portal. Changing
                             this forces a new resource to be created.
                           type: string
+                      required:
+                      - passwordSecretRef
                       type: object
                     type: array
                   location:
@@ -1456,6 +1496,24 @@ spec:
                                   SQL database. Changing this forces a new resource
                                   to be created.
                                 type: string
+                              passwordSecretRef:
+                                description: A SecretKeySelector is a reference to
+                                  a secret key in an arbitrary namespace.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
                               server:
                                 description: The fully-qualified domain name (FQDN)
                                   of the SQL server to use for the external Oozie
@@ -1467,6 +1525,8 @@ spec:
                                   for the Zookeeper Nodes. Changing this forces a
                                   new resource to be created.
                                 type: string
+                            required:
+                            - passwordSecretRef
                             type: object
                           type: array
                         hive:
@@ -1478,6 +1538,24 @@ spec:
                                   SQL database. Changing this forces a new resource
                                   to be created.
                                 type: string
+                              passwordSecretRef:
+                                description: A SecretKeySelector is a reference to
+                                  a secret key in an arbitrary namespace.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
                               server:
                                 description: The fully-qualified domain name (FQDN)
                                   of the SQL server to use for the external Oozie
@@ -1489,6 +1567,8 @@ spec:
                                   for the Zookeeper Nodes. Changing this forces a
                                   new resource to be created.
                                 type: string
+                            required:
+                            - passwordSecretRef
                             type: object
                           type: array
                         oozie:
@@ -1500,6 +1580,24 @@ spec:
                                   SQL database. Changing this forces a new resource
                                   to be created.
                                 type: string
+                              passwordSecretRef:
+                                description: A SecretKeySelector is a reference to
+                                  a secret key in an arbitrary namespace.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
                               server:
                                 description: The fully-qualified domain name (FQDN)
                                   of the SQL server to use for the external Oozie
@@ -1511,6 +1609,8 @@ spec:
                                   for the Zookeeper Nodes. Changing this forces a
                                   new resource to be created.
                                 type: string
+                            required:
+                            - passwordSecretRef
                             type: object
                           type: array
                       type: object
@@ -1523,6 +1623,26 @@ spec:
                           description: The Operations Management Suite (OMS) workspace
                             ID.
                           type: string
+                        primaryKeySecretRef:
+                          description: A SecretKeySelector is a reference to a secret
+                            key in an arbitrary namespace.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                      required:
+                      - primaryKeySecretRef
                       type: object
                     type: array
                   network:
@@ -2254,6 +2374,24 @@ spec:
                           description: The name of the Azure Active Directory Domain.
                             Changing this forces a new resource to be created.
                           type: string
+                        domainUserPasswordSecretRef:
+                          description: A SecretKeySelector is a reference to a secret
+                            key in an arbitrary namespace.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         domainUsername:
                           description: The username of the Azure Active Directory
                             Domain. Changing this forces a new resource to be created.
@@ -2270,6 +2408,8 @@ spec:
                           description: The User Assigned Identity for the HDInsight
                             Cluster. Changing this forces a new resource to be created.
                           type: string
+                      required:
+                      - domainUserPasswordSecretRef
                       type: object
                     type: array
                   storageAccount:
@@ -2281,6 +2421,24 @@ spec:
                             HDInsight Hadoop Cluster? Changing this forces a new resource
                             to be created.
                           type: boolean
+                        storageAccountKeySecretRef:
+                          description: A SecretKeySelector is a reference to a secret
+                            key in an arbitrary namespace.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         storageContainerId:
                           description: The ID of the Storage Container. Changing this
                             forces a new resource to be created.
@@ -2365,6 +2523,8 @@ spec:
                           description: The ID of the Storage Account. Changing this
                             forces a new resource to be created.
                           type: string
+                      required:
+                      - storageAccountKeySecretRef
                       type: object
                     type: array
                   storageAccountGen2:

@@ -165,7 +165,6 @@ type HBaseClusterExtensionParameters struct {
 }
 
 type HBaseClusterGatewayInitParameters struct {
-
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The username used for the Ambari Portal. Changing this forces a new resource to be created.

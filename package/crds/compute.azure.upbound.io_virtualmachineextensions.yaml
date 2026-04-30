@@ -268,6 +268,24 @@ spec:
                           type: string
                       type: object
                     type: array
+                  protectedSettingsSecretRef:
+                    description: The protected_settings passed to the extension, like
+                      settings, these are specified as a JSON object in a string.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   provisionAfterExtensions:
                     description: Specifies the collection of extension names after
                       which this extension needs to be provisioned.

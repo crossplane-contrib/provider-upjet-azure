@@ -951,6 +951,23 @@ spec:
                         administratorLogin:
                           description: Specifies the name of the SQL administrator.
                           type: string
+                        administratorLoginPasswordSecretRef:
+                          description: Specifies the password of the SQL administrator.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         authenticationType:
                           description: Specifies the type of authentication used to
                             access the server. Valid values are SQL or ADPassword.
@@ -961,6 +978,23 @@ spec:
                             will be created for the storage account. Must match storage
                             account used for storage_uri parameter.
                           type: string
+                        storageKeySecretRef:
+                          description: Specifies the access key for the storage account.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         storageKeyType:
                           description: Specifies the type of access key for the storage
                             account. Valid values are StorageAccessKey or SharedAccessKey.
@@ -968,6 +1002,9 @@ spec:
                         storageUri:
                           description: Specifies the blob URI of the .bacpac file.
                           type: string
+                      required:
+                      - administratorLoginPasswordSecretRef
+                      - storageKeySecretRef
                       type: object
                     type: array
                   ledgerEnabled:
