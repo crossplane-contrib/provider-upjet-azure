@@ -2765,8 +2765,10 @@ func (in *HealthcareServiceParameters) DeepCopyInto(out *HealthcareServiceParame
 	}
 	if in.Identity != nil {
 		in, out := &in.Identity, &out.Identity
-		*out = new(HealthcareServiceIdentityParameters)
-		(*in).DeepCopyInto(*out)
+		*out = make([]HealthcareServiceIdentityParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.Kind != nil {
 		in, out := &in.Kind, &out.Kind
