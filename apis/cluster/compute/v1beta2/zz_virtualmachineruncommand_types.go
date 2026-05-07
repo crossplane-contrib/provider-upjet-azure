@@ -420,6 +420,7 @@ type VirtualMachineRunCommandStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // VirtualMachineRunCommand is the Schema for the VirtualMachineRunCommands API. Manages a Virtual Machine Run Command.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

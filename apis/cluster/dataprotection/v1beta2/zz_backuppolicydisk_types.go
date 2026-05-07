@@ -175,6 +175,7 @@ type BackupPolicyDiskStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // BackupPolicyDisk is the Schema for the BackupPolicyDisks API. Manages a Backup Policy Disk.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

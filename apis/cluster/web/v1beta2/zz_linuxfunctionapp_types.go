@@ -3458,6 +3458,7 @@ type LinuxFunctionAppStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // LinuxFunctionApp is the Schema for the LinuxFunctionApps API. Manages a Linux Function App.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

@@ -112,6 +112,7 @@ type KubernetesFleetManagerStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // KubernetesFleetManager is the Schema for the KubernetesFleetManagers API. Manages a Kubernetes Fleet Manager.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

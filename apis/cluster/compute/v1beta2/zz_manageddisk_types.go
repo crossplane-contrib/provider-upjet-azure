@@ -506,6 +506,7 @@ type ManagedDiskStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ManagedDisk is the Schema for the ManagedDisks API. Manages a Managed Disk.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

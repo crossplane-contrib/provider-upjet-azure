@@ -197,6 +197,7 @@ type BackupVaultStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // BackupVault is the Schema for the BackupVaults API. Manages a Backup Vault.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

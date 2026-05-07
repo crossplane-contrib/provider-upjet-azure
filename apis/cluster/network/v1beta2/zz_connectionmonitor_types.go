@@ -661,6 +661,7 @@ type ConnectionMonitorStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ConnectionMonitor is the Schema for the ConnectionMonitors API. Manages a Network Connection Monitor.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

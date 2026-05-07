@@ -807,6 +807,7 @@ type MonitorActionGroupStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // MonitorActionGroup is the Schema for the MonitorActionGroups API. Manages an Action Group within Azure Monitor
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

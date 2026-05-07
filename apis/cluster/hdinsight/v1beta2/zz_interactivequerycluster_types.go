@@ -1521,6 +1521,7 @@ type InteractiveQueryClusterStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // InteractiveQueryCluster is the Schema for the InteractiveQueryClusters API. Manages a HDInsight Interactive Query Cluster.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

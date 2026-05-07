@@ -286,6 +286,7 @@ type StreamInputEventHubStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // StreamInputEventHub is the Schema for the StreamInputEventHubs API. Manages a Stream Analytics Stream Input EventHub.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

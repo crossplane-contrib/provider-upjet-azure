@@ -169,6 +169,7 @@ type LinkedServiceOdbcStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // LinkedServiceOdbc is the Schema for the LinkedServiceOdbcs API. Manages a Linked Service (connection) between a Database and Azure Data Factory through ODBC protocol.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

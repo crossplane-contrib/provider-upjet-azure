@@ -231,6 +231,7 @@ type CassandraClusterStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // CassandraCluster is the Schema for the CassandraClusters API. Manages a Cassandra Cluster.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

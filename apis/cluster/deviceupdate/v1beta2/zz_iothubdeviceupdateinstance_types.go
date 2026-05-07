@@ -176,6 +176,7 @@ type IOTHubDeviceUpdateInstanceStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // IOTHubDeviceUpdateInstance is the Schema for the IOTHubDeviceUpdateInstances API. Manages an IoT Hub Device Update Instance.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

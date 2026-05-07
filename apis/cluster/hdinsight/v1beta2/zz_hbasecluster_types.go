@@ -1511,6 +1511,7 @@ type HBaseClusterStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // HBaseCluster is the Schema for the HBaseClusters API. Manages a HDInsight HBase Cluster.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

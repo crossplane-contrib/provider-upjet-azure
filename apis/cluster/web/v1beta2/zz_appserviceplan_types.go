@@ -211,6 +211,7 @@ type AppServicePlanStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // AppServicePlan is the Schema for the AppServicePlans API. Manages an App Service Plan component.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

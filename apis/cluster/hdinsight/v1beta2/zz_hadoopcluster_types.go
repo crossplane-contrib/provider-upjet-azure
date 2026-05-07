@@ -1756,6 +1756,7 @@ type HadoopClusterStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // HadoopCluster is the Schema for the HadoopClusters API. Manages a HDInsight Hadoop Cluster.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

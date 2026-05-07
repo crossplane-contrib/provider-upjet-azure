@@ -810,6 +810,7 @@ type SpringCloudServiceStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // SpringCloudService is the Schema for the SpringCloudServices API. Manages an Azure Spring Cloud Service.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

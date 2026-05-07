@@ -173,6 +173,7 @@ type StaticSiteStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // StaticSite is the Schema for the StaticSites API. Manages a Static Site.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

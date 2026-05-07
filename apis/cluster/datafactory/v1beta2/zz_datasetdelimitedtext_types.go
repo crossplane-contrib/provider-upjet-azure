@@ -517,6 +517,7 @@ type DataSetDelimitedTextStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // DataSetDelimitedText is the Schema for the DataSetDelimitedTexts API. Manages an Azure Delimited Text Dataset inside an Azure Data Factory.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

@@ -286,6 +286,7 @@ type OutputBlobStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // OutputBlob is the Schema for the OutputBlobs API. Manages a Stream Analytics Output to Blob Storage.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

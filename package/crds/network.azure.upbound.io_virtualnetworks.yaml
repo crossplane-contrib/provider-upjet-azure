@@ -31,12 +31,14 @@ spec:
     - jsonPath: .metadata.creationTimestamp
       name: AGE
       type: date
+    deprecated: true
+    deprecationWarning: This API version is deprecated. Deprecated since v2.6.0.
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: VirtualNetwork is the Schema for the VirtualNetworks API. Manages
-          a virtual network including any configured subnets. Each subnet can optionally
-          be configured with a security group to be associated with the subnet.
+        description: |-
+          VirtualNetwork is the Schema for the VirtualNetworks API. Manages a virtual network including any configured subnets. Each subnet can optionally be configured with a security group to be associated with the subnet.
+          Deprecated: This API version (v1beta1) has been deprecated in release v2.6.0.
         properties:
           apiVersion:
             description: |-
@@ -663,7 +665,7 @@ spec:
         - spec
         type: object
     served: true
-    storage: true
+    storage: false
     subresources:
       status: {}
   - additionalPrinterColumns:
@@ -1294,6 +1296,6 @@ spec:
         - spec
         type: object
     served: true
-    storage: false
+    storage: true
     subresources:
       status: {}

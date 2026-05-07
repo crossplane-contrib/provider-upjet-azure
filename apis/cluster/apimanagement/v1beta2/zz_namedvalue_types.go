@@ -158,6 +158,7 @@ type NamedValueStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // NamedValue is the Schema for the NamedValues API. Manages an API Management Named Value.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

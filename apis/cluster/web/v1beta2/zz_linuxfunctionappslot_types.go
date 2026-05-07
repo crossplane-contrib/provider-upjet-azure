@@ -3364,6 +3364,7 @@ type LinuxFunctionAppSlotStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // LinuxFunctionAppSlot is the Schema for the LinuxFunctionAppSlots API. Manages a Linux Function App Slot.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

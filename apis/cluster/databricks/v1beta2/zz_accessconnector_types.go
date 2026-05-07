@@ -137,6 +137,7 @@ type AccessConnectorStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // AccessConnector is the Schema for the AccessConnectors API. Manages a Databricks Access Connector
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

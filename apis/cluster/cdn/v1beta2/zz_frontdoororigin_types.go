@@ -286,6 +286,7 @@ type FrontdoorOriginStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // FrontdoorOrigin is the Schema for the FrontdoorOrigins API. Manages a Front Door (standard/premium) Origin.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

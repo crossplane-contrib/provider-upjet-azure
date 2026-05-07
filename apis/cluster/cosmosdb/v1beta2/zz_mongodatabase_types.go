@@ -121,6 +121,7 @@ type MongoDatabaseStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // MongoDatabase is the Schema for the MongoDatabases API. Manages a Mongo Database within a Cosmos DB Account.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

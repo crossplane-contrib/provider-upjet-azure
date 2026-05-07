@@ -281,6 +281,7 @@ type OutputServiceBusTopicStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // OutputServiceBusTopic is the Schema for the OutputServiceBusTopics API. Manages a Stream Analytics Output to a ServiceBus Topic.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

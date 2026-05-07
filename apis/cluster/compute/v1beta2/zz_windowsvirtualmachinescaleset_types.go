@@ -1879,6 +1879,7 @@ type WindowsVirtualMachineScaleSetStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // WindowsVirtualMachineScaleSet is the Schema for the WindowsVirtualMachineScaleSets API. Manages a Windows Virtual Machine Scale Set.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

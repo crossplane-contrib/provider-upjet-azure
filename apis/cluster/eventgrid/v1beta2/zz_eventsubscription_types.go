@@ -1399,6 +1399,7 @@ type EventSubscriptionStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // EventSubscription is the Schema for the EventSubscriptions API. Manages an EventGrid Event Subscription
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

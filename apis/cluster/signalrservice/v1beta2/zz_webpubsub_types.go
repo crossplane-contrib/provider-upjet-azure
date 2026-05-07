@@ -292,6 +292,7 @@ type WebPubsubStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // WebPubsub is the Schema for the WebPubsubs API. Manages an Azure Web PubSub service.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

@@ -210,6 +210,7 @@ type NetworkACLStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // NetworkACL is the Schema for the NetworkACLs API. Manages the Network ACL for a SignalR service.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

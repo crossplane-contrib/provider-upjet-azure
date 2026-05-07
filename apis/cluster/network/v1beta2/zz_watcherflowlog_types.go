@@ -363,6 +363,7 @@ type WatcherFlowLogStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // WatcherFlowLog is the Schema for the WatcherFlowLogs API. Manages a Network Watcher Flow Log.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

@@ -243,6 +243,7 @@ type NotificationHubStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // NotificationHub is the Schema for the NotificationHubs API. Manages a Notification Hub within a Notification Hub Namespace.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

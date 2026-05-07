@@ -219,6 +219,7 @@ type LogAnalyticsSolutionStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // LogAnalyticsSolution is the Schema for the LogAnalyticsSolutions API. Manages a Log Analytics (formally Operational Insights) Solution.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

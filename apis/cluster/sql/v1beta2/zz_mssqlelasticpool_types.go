@@ -263,6 +263,7 @@ type MSSQLElasticPoolStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // MSSQLElasticPool is the Schema for the MSSQLElasticPools API. Manages an Azure SQL Elastic Pool.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

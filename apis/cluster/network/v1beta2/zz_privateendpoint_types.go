@@ -416,6 +416,7 @@ type PrivateEndpointStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // PrivateEndpoint is the Schema for the PrivateEndpoints API. Manages a Private Endpoint.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

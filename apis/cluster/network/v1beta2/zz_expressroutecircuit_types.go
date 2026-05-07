@@ -208,6 +208,7 @@ type ExpressRouteCircuitStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ExpressRouteCircuit is the Schema for the ExpressRouteCircuits API. Manages an ExpressRoute circuit.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

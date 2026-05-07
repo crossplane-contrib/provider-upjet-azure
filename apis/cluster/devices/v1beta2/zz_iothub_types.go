@@ -670,6 +670,7 @@ type IOTHubStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // IOTHub is the Schema for the IOTHubs API. Manages an IotHub
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

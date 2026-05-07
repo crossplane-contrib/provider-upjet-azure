@@ -281,6 +281,7 @@ type OutputServiceBusQueueStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // OutputServiceBusQueue is the Schema for the OutputServiceBusQueues API. Manages a Stream Analytics Output to a ServiceBus Queue.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

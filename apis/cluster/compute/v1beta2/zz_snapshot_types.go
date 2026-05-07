@@ -299,6 +299,7 @@ type SnapshotStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Snapshot is the Schema for the Snapshots API. Manages a Disk Snapshot.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

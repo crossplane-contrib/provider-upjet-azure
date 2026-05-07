@@ -129,6 +129,7 @@ type CapacityReservationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // CapacityReservation is the Schema for the CapacityReservations API. Manages a Capacity Reservation within a Capacity Reservation Group.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

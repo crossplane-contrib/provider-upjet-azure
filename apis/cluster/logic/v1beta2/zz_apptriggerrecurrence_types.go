@@ -165,6 +165,7 @@ type AppTriggerRecurrenceStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // AppTriggerRecurrence is the Schema for the AppTriggerRecurrences API. Manages a Recurrence Trigger within a Logic App Workflow
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

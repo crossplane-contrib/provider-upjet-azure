@@ -3815,6 +3815,7 @@ type WindowsWebAppStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // WindowsWebApp is the Schema for the WindowsWebApps API. Manages a Windows Web App.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

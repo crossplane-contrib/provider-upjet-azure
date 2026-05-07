@@ -2612,6 +2612,7 @@ type ApplicationGatewayStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ApplicationGateway is the Schema for the ApplicationGateways API. Manages an Application Gateway.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

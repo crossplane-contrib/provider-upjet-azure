@@ -206,6 +206,7 @@ type LinkedServiceAzureFileStorageStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // LinkedServiceAzureFileStorage is the Schema for the LinkedServiceAzureFileStorages API. Manages a Linked Service (connection) between an Azure File Storage Account and Azure Data Factory.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

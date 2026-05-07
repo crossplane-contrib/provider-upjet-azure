@@ -268,6 +268,7 @@ type ReferenceInputBlobStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ReferenceInputBlob is the Schema for the ReferenceInputBlobs API. Manages a Stream Analytics Reference Input Blob.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

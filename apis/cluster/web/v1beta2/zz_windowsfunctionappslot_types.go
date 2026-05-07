@@ -3255,6 +3255,7 @@ type WindowsFunctionAppSlotStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // WindowsFunctionAppSlot is the Schema for the WindowsFunctionAppSlots API. Manages a Windows Function App Slot.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

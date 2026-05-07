@@ -196,6 +196,7 @@ type DNSZoneStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // DNSZone is the Schema for the DNSZones API. Manages a DNS Zone.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

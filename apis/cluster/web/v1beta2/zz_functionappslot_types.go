@@ -1281,6 +1281,7 @@ type FunctionAppSlotStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // FunctionAppSlot is the Schema for the FunctionAppSlots API. Manages a Function App Deployment Slot.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

@@ -544,6 +544,7 @@ type RedisCacheStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // RedisCache is the Schema for the RedisCaches API. Manages a Redis Cache
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

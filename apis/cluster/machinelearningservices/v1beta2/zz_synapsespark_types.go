@@ -188,6 +188,7 @@ type SynapseSparkStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // SynapseSpark is the Schema for the SynapseSparks API. Manages the linked service to link an Azure Machine learning workspace to an Azure Synapse workspace.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

@@ -443,6 +443,7 @@ type AppWorkflowStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // AppWorkflow is the Schema for the AppWorkflows API. Manages a Logic App Workflow.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

@@ -446,6 +446,7 @@ type SQLContainerStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // SQLContainer is the Schema for the SQLContainers API. Manages a SQL Container within a Cosmos DB Account.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

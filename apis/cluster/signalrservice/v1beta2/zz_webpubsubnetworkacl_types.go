@@ -210,6 +210,7 @@ type WebPubsubNetworkACLStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // WebPubsubNetworkACL is the Schema for the WebPubsubNetworkACLs API. Manages the Network ACL for a Web Pubsub service.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

@@ -261,6 +261,7 @@ type LinkedServiceAzureSQLDatabaseStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // LinkedServiceAzureSQLDatabase is the Schema for the LinkedServiceAzureSQLDatabases API. Manages a Linked Service (connection) between Azure SQL Database and Azure Data Factory.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

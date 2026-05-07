@@ -3607,6 +3607,7 @@ type LinuxWebAppStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // LinuxWebApp is the Schema for the LinuxWebApps API. Manages a Linux Web App.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

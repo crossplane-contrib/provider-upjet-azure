@@ -327,6 +327,7 @@ type SnapshotPolicyStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // SnapshotPolicy is the Schema for the SnapshotPolicys API. Manages a NetApp Snapshot Policy.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

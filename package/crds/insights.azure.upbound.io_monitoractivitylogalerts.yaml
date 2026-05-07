@@ -31,11 +31,14 @@ spec:
     - jsonPath: .metadata.creationTimestamp
       name: AGE
       type: date
+    deprecated: true
+    deprecationWarning: This API version is deprecated. Deprecated since v2.6.0.
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: MonitorActivityLogAlert is the Schema for the MonitorActivityLogAlerts
-          API. Manages an Activity Log Alert within Azure Monitor
+        description: |-
+          MonitorActivityLogAlert is the Schema for the MonitorActivityLogAlerts API. Manages an Activity Log Alert within Azure Monitor
+          Deprecated: This API version (v1beta1) has been deprecated in release v2.6.0.
         properties:
           apiVersion:
             description: |-
@@ -1524,7 +1527,7 @@ spec:
         - spec
         type: object
     served: true
-    storage: true
+    storage: false
     subresources:
       status: {}
   - additionalPrinterColumns:
@@ -3006,6 +3009,6 @@ spec:
         - spec
         type: object
     served: true
-    storage: false
+    storage: true
     subresources:
       status: {}

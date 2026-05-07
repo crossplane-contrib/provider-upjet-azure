@@ -299,6 +299,7 @@ type WebPubsubHubStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // WebPubsubHub is the Schema for the WebPubsubHubs API. Manages the hub settings for a Web Pubsub service.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

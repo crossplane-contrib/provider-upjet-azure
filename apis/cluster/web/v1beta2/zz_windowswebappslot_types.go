@@ -3755,6 +3755,7 @@ type WindowsWebAppSlotStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // WindowsWebAppSlot is the Schema for the WindowsWebAppSlots API. Manages a Windows Web App Slot.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

@@ -235,6 +235,7 @@ type OutputEventHubStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // OutputEventHub is the Schema for the OutputEventHubs API. Manages a Stream Analytics Output to an EventHub.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

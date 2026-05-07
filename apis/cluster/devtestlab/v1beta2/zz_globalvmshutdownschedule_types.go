@@ -192,6 +192,7 @@ type GlobalVMShutdownScheduleStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // GlobalVMShutdownSchedule is the Schema for the GlobalVMShutdownSchedules API. Manages automated shutdown schedules for Azure Resource Manager VMs outside of Dev Test Labs.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

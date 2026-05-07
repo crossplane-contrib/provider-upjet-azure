@@ -21,7 +21,7 @@ import (
 	"github.com/pkg/errors"
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	v1beta1 "github.com/upbound/provider-azure/v2/apis/cluster/machinelearningservices/v1beta1"
+	v1beta2 "github.com/upbound/provider-azure/v2/apis/cluster/machinelearningservices/v1beta2"
 	features "github.com/upbound/provider-azure/v2/internal/features"
 )
 
@@ -29,25 +29,25 @@ import (
 func SetupGated(mgr ctrl.Manager, o tjcontroller.Options) error {
 	o.Options.Gate.Register(func() {
 		if err := Setup(mgr, o); err != nil {
-			mgr.GetLogger().Error(err, "unable to setup reconciler", "gvk", v1beta1.ComputeCluster_GroupVersionKind.String())
+			mgr.GetLogger().Error(err, "unable to setup reconciler", "gvk", v1beta2.ComputeCluster_GroupVersionKind.String())
 		}
-	}, v1beta1.ComputeCluster_GroupVersionKind)
+	}, v1beta2.ComputeCluster_GroupVersionKind)
 	return nil
 }
 
 // Setup adds a controller that reconciles ComputeCluster managed resources.
 func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
-	name := managed.ControllerName(v1beta1.ComputeCluster_GroupVersionKind.String())
+	name := managed.ControllerName(v1beta2.ComputeCluster_GroupVersionKind.String())
 	var initializers managed.InitializerChain
-	eventHandler := handler.NewEventHandler(handler.WithLogger(o.Logger.WithValues("gvk", v1beta1.ComputeCluster_GroupVersionKind)))
-	ac := tjcontroller.NewAPICallbacks(mgr, xpresource.ManagedKind(v1beta1.ComputeCluster_GroupVersionKind), tjcontroller.WithEventHandler(eventHandler), tjcontroller.WithStatusUpdates(false))
+	eventHandler := handler.NewEventHandler(handler.WithLogger(o.Logger.WithValues("gvk", v1beta2.ComputeCluster_GroupVersionKind)))
+	ac := tjcontroller.NewAPICallbacks(mgr, xpresource.ManagedKind(v1beta2.ComputeCluster_GroupVersionKind), tjcontroller.WithEventHandler(eventHandler), tjcontroller.WithStatusUpdates(false))
 	opts := []managed.ReconcilerOption{
 		managed.WithExternalConnecter(
 			tjcontroller.NewTerraformPluginSDKAsyncConnector(mgr.GetClient(), o.OperationTrackerStore, o.SetupFn, o.Provider.Resources["azurerm_machine_learning_compute_cluster"],
 				tjcontroller.WithTerraformPluginSDKAsyncLogger(o.Logger),
 				tjcontroller.WithTerraformPluginSDKAsyncConnectorEventHandler(eventHandler),
 				tjcontroller.WithTerraformPluginSDKAsyncCallbackProvider(ac),
-				tjcontroller.WithTerraformPluginSDKAsyncMetricRecorder(metrics.NewMetricRecorder(v1beta1.ComputeCluster_GroupVersionKind, mgr, o.PollInterval)),
+				tjcontroller.WithTerraformPluginSDKAsyncMetricRecorder(metrics.NewMetricRecorder(v1beta2.ComputeCluster_GroupVersionKind, mgr, o.PollInterval)),
 				tjcontroller.WithTerraformPluginSDKAsyncManagementPolicies(o.Features.Enabled(features.EnableBetaManagementPolicies)))),
 		managed.WithLogger(o.Logger.WithValues("controller", name)),
 		managed.WithRecorder(event.NewAPIRecorder(mgr.GetEventRecorderFor(name))),
@@ -66,22 +66,22 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 		opts = append(opts, managed.WithMetricRecorder(o.MetricOptions.MRMetrics))
 	}
 
-	// register webhooks for the kind v1beta1.ComputeCluster
+	// register webhooks for the kind v1beta2.ComputeCluster
 	// if they're enabled.
 	if o.StartWebhooks {
 		if err := ctrl.NewWebhookManagedBy(mgr).
-			For(&v1beta1.ComputeCluster{}).
+			For(&v1beta2.ComputeCluster{}).
 			Complete(); err != nil {
-			return errors.Wrap(err, "cannot register webhook for the kind v1beta1.ComputeCluster")
+			return errors.Wrap(err, "cannot register webhook for the kind v1beta2.ComputeCluster")
 		}
 	}
 
 	if o.MetricOptions != nil && o.MetricOptions.MRStateMetrics != nil {
 		stateMetricsRecorder := statemetrics.NewMRStateRecorder(
-			mgr.GetClient(), o.Logger, o.MetricOptions.MRStateMetrics, &v1beta1.ComputeClusterList{}, o.MetricOptions.PollStateMetricInterval,
+			mgr.GetClient(), o.Logger, o.MetricOptions.MRStateMetrics, &v1beta2.ComputeClusterList{}, o.MetricOptions.PollStateMetricInterval,
 		)
 		if err := mgr.Add(stateMetricsRecorder); err != nil {
-			return errors.Wrap(err, "cannot register MR state metrics recorder for kind v1beta1.ComputeClusterList")
+			return errors.Wrap(err, "cannot register MR state metrics recorder for kind v1beta2.ComputeClusterList")
 		}
 	}
 
@@ -89,12 +89,12 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 		opts = append(opts, managed.WithChangeLogger(o.ChangeLogOptions.ChangeLogger))
 	}
 
-	r := managed.NewReconciler(mgr, xpresource.ManagedKind(v1beta1.ComputeCluster_GroupVersionKind), opts...)
+	r := managed.NewReconciler(mgr, xpresource.ManagedKind(v1beta2.ComputeCluster_GroupVersionKind), opts...)
 
 	return ctrl.NewControllerManagedBy(mgr).
 		Named(name).
 		WithOptions(o.ForControllerRuntime()).
 		WithEventFilter(xpresource.DesiredStateChanged()).
-		Watches(&v1beta1.ComputeCluster{}, eventHandler).
+		Watches(&v1beta2.ComputeCluster{}, eventHandler).
 		Complete(ratelimiter.NewReconciler(name, r, o.GlobalRateLimiter))
 }

@@ -168,6 +168,7 @@ type SpringCloudBuilderStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // SpringCloudBuilder is the Schema for the SpringCloudBuilders API. Manages a Spring Cloud Builder.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

@@ -172,6 +172,7 @@ type SecurityCenterAssessmentStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // SecurityCenterAssessment is the Schema for the SecurityCenterAssessments API. Manages the Security Center Assessment for Azure Security Center.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

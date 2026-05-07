@@ -199,6 +199,7 @@ type SpringCloudContainerDeploymentStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // SpringCloudContainerDeployment is the Schema for the SpringCloudContainerDeployments API. Manages a Spring Cloud Container Deployment.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

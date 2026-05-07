@@ -31,11 +31,14 @@ spec:
     - jsonPath: .metadata.creationTimestamp
       name: AGE
       type: date
+    deprecated: true
+    deprecationWarning: This API version is deprecated. Deprecated since v2.6.0.
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: SQLDatabase is the Schema for the SQLDatabases API. Manages a
-          SQL Database within a Cosmos DB Account.
+        description: |-
+          SQLDatabase is the Schema for the SQLDatabases API. Manages a SQL Database within a Cosmos DB Account.
+          Deprecated: This API version (v1beta1) has been deprecated in release v2.6.0.
         properties:
           apiVersion:
             description: |-
@@ -462,7 +465,7 @@ spec:
         - spec
         type: object
     served: true
-    storage: true
+    storage: false
     subresources:
       status: {}
   - additionalPrinterColumns:
@@ -903,6 +906,6 @@ spec:
         - spec
         type: object
     served: true
-    storage: false
+    storage: true
     subresources:
       status: {}

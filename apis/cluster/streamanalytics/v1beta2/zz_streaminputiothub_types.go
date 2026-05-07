@@ -248,6 +248,7 @@ type StreamInputIOTHubStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // StreamInputIOTHub is the Schema for the StreamInputIOTHubs API. Manages a Stream Analytics Stream Input IoTHub.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

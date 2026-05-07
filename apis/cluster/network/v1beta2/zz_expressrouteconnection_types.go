@@ -235,6 +235,7 @@ type ExpressRouteConnectionStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ExpressRouteConnection is the Schema for the ExpressRouteConnections API. Manages an Express Route Connection.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

@@ -346,6 +346,7 @@ type SparkPoolStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // SparkPool is the Schema for the SparkPools API. Manages a Synapse Spark Pool.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

@@ -617,6 +617,7 @@ type HPCCacheStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // HPCCache is the Schema for the HPCCaches API. Manages a HPC Cache.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
