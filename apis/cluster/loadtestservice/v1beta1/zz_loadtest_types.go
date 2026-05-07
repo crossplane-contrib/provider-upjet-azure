@@ -25,7 +25,7 @@ type EncryptionInitParameters struct {
 type EncryptionObservation struct {
 
 	// An identity block as defined below. Changing this forces a new Load Test to be created.
-	Identity *IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The URI specifying the Key vault and key to be used to encrypt data in this resource. The URI should include the key version. Changing this forces a new Load Test to be created.
 	KeyURL *string `json:"keyUrl,omitempty" tf:"key_url,omitempty"`
@@ -35,7 +35,7 @@ type EncryptionParameters struct {
 
 	// An identity block as defined below. Changing this forces a new Load Test to be created.
 	// +kubebuilder:validation:Optional
-	Identity *IdentityParameters `json:"identity" tf:"identity,omitempty"`
+	Identity []IdentityParameters `json:"identity" tf:"identity,omitempty"`
 
 	// The URI specifying the Key vault and key to be used to encrypt data in this resource. The URI should include the key version. Changing this forces a new Load Test to be created.
 	// +kubebuilder:validation:Optional
@@ -137,7 +137,7 @@ type LoadTestObservation struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// An encryption block as defined below. Changing this forces a new Load Test to be created.
-	Encryption *EncryptionObservation `json:"encryption,omitempty" tf:"encryption,omitempty"`
+	Encryption []EncryptionObservation `json:"encryption,omitempty" tf:"encryption,omitempty"`
 
 	// The ID of the Load Test.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -164,7 +164,7 @@ type LoadTestParameters struct {
 
 	// An encryption block as defined below. Changing this forces a new Load Test to be created.
 	// +kubebuilder:validation:Optional
-	Encryption *EncryptionParameters `json:"encryption,omitempty" tf:"encryption,omitempty"`
+	Encryption []EncryptionParameters `json:"encryption,omitempty" tf:"encryption,omitempty"`
 
 	// An identity block as defined below. Specifies the Managed Identity which should be assigned to this Load Test.
 	// +kubebuilder:validation:Optional

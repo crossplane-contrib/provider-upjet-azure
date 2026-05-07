@@ -256,7 +256,7 @@ type HealthcareServiceParameters struct {
 
 	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
-	Identity *HealthcareServiceIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity []HealthcareServiceIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The type of the service. Values at time of publication are: fhir, fhir-Stu3 and fhir-R4. Default value is fhir.
 	// +kubebuilder:validation:Optional

@@ -1509,6 +1509,11 @@ func (in *OutputBlobInitParameters) DeepCopyInto(out *OutputBlobInitParameters) 
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.StorageAccountKeySecretRef != nil {
+		in, out := &in.StorageAccountKeySecretRef, &out.StorageAccountKeySecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.StorageAccountName != nil {
 		in, out := &in.StorageAccountName, &out.StorageAccountName
 		*out = new(string)
@@ -1929,6 +1934,11 @@ func (in *OutputEventHubInitParameters) DeepCopyInto(out *OutputEventHubInitPara
 		in, out := &in.ServiceBusNamespaceSelector, &out.ServiceBusNamespaceSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.SharedAccessPolicyKeySecretRef != nil {
+		in, out := &in.SharedAccessPolicyKeySecretRef, &out.SharedAccessPolicyKeySecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
 	}
 	if in.SharedAccessPolicyName != nil {
 		in, out := &in.SharedAccessPolicyName, &out.SharedAccessPolicyName
@@ -3432,6 +3442,11 @@ func (in *OutputServiceBusQueueInitParameters) DeepCopyInto(out *OutputServiceBu
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.SharedAccessPolicyKeySecretRef != nil {
+		in, out := &in.SharedAccessPolicyKeySecretRef, &out.SharedAccessPolicyKeySecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.SharedAccessPolicyName != nil {
 		in, out := &in.SharedAccessPolicyName, &out.SharedAccessPolicyName
 		*out = new(string)
@@ -3957,6 +3972,11 @@ func (in *OutputServiceBusTopicInitParameters) DeepCopyInto(out *OutputServiceBu
 		in, out := &in.ServiceBusNamespaceSelector, &out.ServiceBusNamespaceSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.SharedAccessPolicyKeySecretRef != nil {
+		in, out := &in.SharedAccessPolicyKeySecretRef, &out.SharedAccessPolicyKeySecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
 	}
 	if in.SharedAccessPolicyName != nil {
 		in, out := &in.SharedAccessPolicyName, &out.SharedAccessPolicyName
@@ -5072,6 +5092,11 @@ func (in *ReferenceInputBlobInitParameters) DeepCopyInto(out *ReferenceInputBlob
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.StorageAccountKeySecretRef != nil {
+		in, out := &in.StorageAccountKeySecretRef, &out.StorageAccountKeySecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
 	}
 	if in.StorageAccountName != nil {
 		in, out := &in.StorageAccountName, &out.StorageAccountName
@@ -6501,6 +6526,11 @@ func (in *StreamInputEventHubInitParameters) DeepCopyInto(out *StreamInputEventH
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.SharedAccessPolicyKeySecretRef != nil {
+		in, out := &in.SharedAccessPolicyKeySecretRef, &out.SharedAccessPolicyKeySecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.SharedAccessPolicyName != nil {
 		in, out := &in.SharedAccessPolicyName, &out.SharedAccessPolicyName
 		*out = new(string)
@@ -6976,6 +7006,7 @@ func (in *StreamInputIOTHubInitParameters) DeepCopyInto(out *StreamInputIOTHubIn
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	in.SharedAccessPolicyKeySecretRef.DeepCopyInto(&out.SharedAccessPolicyKeySecretRef)
 	if in.SharedAccessPolicyName != nil {
 		in, out := &in.SharedAccessPolicyName, &out.SharedAccessPolicyName
 		*out = new(string)

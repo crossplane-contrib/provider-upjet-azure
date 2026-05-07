@@ -194,6 +194,9 @@ type CustomSetupScriptInitParameters struct {
 
 	// The blob endpoint for the container which contains a custom setup script that will be run on every node on startup. See https://docs.microsoft.com/azure/data-factory/how-to-configure-azure-ssis-ir-custom-setup for more information.
 	BlobContainerURI *string `json:"blobContainerUri,omitempty" tf:"blob_container_uri,omitempty"`
+
+	// A container SAS token that gives access to the files. See https://docs.microsoft.com/azure/data-factory/how-to-configure-azure-ssis-ir-custom-setup for more information.
+	SASTokenSecretRef v1.SecretKeySelector `json:"sasTokenSecretRef" tf:"-"`
 }
 
 type CustomSetupScriptObservation struct {

@@ -45,8 +45,10 @@ func (in *EncryptionObservation) DeepCopyInto(out *EncryptionObservation) {
 	*out = *in
 	if in.Identity != nil {
 		in, out := &in.Identity, &out.Identity
-		*out = new(IdentityObservation)
-		(*in).DeepCopyInto(*out)
+		*out = make([]IdentityObservation, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.KeyURL != nil {
 		in, out := &in.KeyURL, &out.KeyURL
@@ -70,8 +72,10 @@ func (in *EncryptionParameters) DeepCopyInto(out *EncryptionParameters) {
 	*out = *in
 	if in.Identity != nil {
 		in, out := &in.Identity, &out.Identity
-		*out = new(IdentityParameters)
-		(*in).DeepCopyInto(*out)
+		*out = make([]IdentityParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.KeyURL != nil {
 		in, out := &in.KeyURL, &out.KeyURL
@@ -397,8 +401,10 @@ func (in *LoadTestObservation) DeepCopyInto(out *LoadTestObservation) {
 	}
 	if in.Encryption != nil {
 		in, out := &in.Encryption, &out.Encryption
-		*out = new(EncryptionObservation)
-		(*in).DeepCopyInto(*out)
+		*out = make([]EncryptionObservation, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
@@ -460,8 +466,10 @@ func (in *LoadTestParameters) DeepCopyInto(out *LoadTestParameters) {
 	}
 	if in.Encryption != nil {
 		in, out := &in.Encryption, &out.Encryption
-		*out = new(EncryptionParameters)
-		(*in).DeepCopyInto(*out)
+		*out = make([]EncryptionParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.Identity != nil {
 		in, out := &in.Identity, &out.Identity

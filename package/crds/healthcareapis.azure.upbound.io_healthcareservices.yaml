@@ -146,12 +146,14 @@ spec:
                     type: number
                   identity:
                     description: An identity block as defined below.
-                    properties:
-                      type:
-                        description: The type of managed identity to assign. The only
-                          possible value is SystemAssigned.
-                        type: string
-                    type: object
+                    items:
+                      properties:
+                        type:
+                          description: The type of managed identity to assign. The
+                            only possible value is SystemAssigned.
+                          type: string
+                      type: object
+                    type: array
                   kind:
                     description: 'The type of the service. Values at time of publication
                       are: fhir, fhir-Stu3 and fhir-R4. Default value is fhir.'

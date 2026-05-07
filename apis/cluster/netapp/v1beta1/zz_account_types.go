@@ -133,6 +133,9 @@ type ActiveDirectoryInitParameters struct {
 
 	// The Username of Active Directory Domain Administrator.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+
+	// The password associated with the username.
+	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 }
 
 type ActiveDirectoryObservation struct {

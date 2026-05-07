@@ -835,6 +835,27 @@ spec:
                             startup. See https://docs.microsoft.com/azure/data-factory/how-to-configure-azure-ssis-ir-custom-setup
                             for more information.
                           type: string
+                        sasTokenSecretRef:
+                          description: A container SAS token that gives access to
+                            the files. See https://docs.microsoft.com/azure/data-factory/how-to-configure-azure-ssis-ir-custom-setup
+                            for more information.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                      required:
+                      - sasTokenSecretRef
                       type: object
                     type: array
                   description:

@@ -5029,6 +5029,7 @@ func (in *LinkedHubInitParameters) DeepCopyInto(out *LinkedHubInitParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	in.ConnectionStringSecretRef.DeepCopyInto(&out.ConnectionStringSecretRef)
 	if in.Location != nil {
 		in, out := &in.Location, &out.Location
 		*out = new(string)

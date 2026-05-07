@@ -6318,9 +6318,19 @@ func (in *WorkspaceVulnerabilityAssessmentInitParameters) DeepCopyInto(out *Work
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.StorageAccountAccessKeySecretRef != nil {
+		in, out := &in.StorageAccountAccessKeySecretRef, &out.StorageAccountAccessKeySecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.StorageContainerPath != nil {
 		in, out := &in.StorageContainerPath, &out.StorageContainerPath
 		*out = new(string)
+		**out = **in
+	}
+	if in.StorageContainerSASKeySecretRef != nil {
+		in, out := &in.StorageContainerSASKeySecretRef, &out.StorageContainerSASKeySecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.WorkspaceSecurityAlertPolicyID != nil {

@@ -425,6 +425,23 @@ spec:
                             The Organizational Unit (OU) within Active Directory where machines will be created. If blank, defaults to CN=Computers.
                             The Organizational Unit (OU) within the Windows Active Directory where machines will be created. If blank, defaults to 'CN=Computers'
                           type: string
+                        passwordSecretRef:
+                          description: The password associated with the username.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         serverRootCaCertificateSecretRef:
                           description: |-
                             When LDAP over SSL/TLS is enabled, the LDAP client is required to have a base64 encoded Active Directory Certificate Service's self-signed root CA certificate, this optional parameter is used only for dual protocol with LDAP user-mapping volumes. Required if ldap_over_tls_enabled is set to true.
@@ -457,6 +474,8 @@ spec:
                         username:
                           description: The Username of Active Directory Domain Administrator.
                           type: string
+                      required:
+                      - passwordSecretRef
                       type: object
                     type: array
                   identity:
