@@ -252,6 +252,7 @@ type SpringCloudConnectionStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // SpringCloudConnection is the Schema for the SpringCloudConnections API. Manages a service connector for spring cloud app.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

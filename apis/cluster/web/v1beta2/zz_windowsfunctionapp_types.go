@@ -3318,6 +3318,7 @@ type WindowsFunctionAppStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // WindowsFunctionApp is the Schema for the WindowsFunctionApps API. Manages a Windows Function App.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

@@ -529,6 +529,7 @@ type ManagementPolicyStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ManagementPolicy is the Schema for the ManagementPolicys API. Manages an Azure Storage Account Management Policy.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

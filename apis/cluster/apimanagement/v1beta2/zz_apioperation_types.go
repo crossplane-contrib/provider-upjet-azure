@@ -1468,6 +1468,7 @@ type APIOperationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // APIOperation is the Schema for the APIOperations API. Manages an API Operation within an API Management Service.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

@@ -282,6 +282,7 @@ type ComputeInstanceStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ComputeInstance is the Schema for the ComputeInstances API. Manages a Machine Learning Compute Instance.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

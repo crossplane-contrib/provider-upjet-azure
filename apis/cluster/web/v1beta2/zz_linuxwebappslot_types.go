@@ -3576,6 +3576,7 @@ type LinuxWebAppSlotStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // LinuxWebAppSlot is the Schema for the LinuxWebAppSlots API. Manages a Linux Web App Slot.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

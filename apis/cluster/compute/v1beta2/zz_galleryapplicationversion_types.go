@@ -350,6 +350,7 @@ type GalleryApplicationVersionStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // GalleryApplicationVersion is the Schema for the GalleryApplicationVersions API. Manages a Gallery Application Version.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

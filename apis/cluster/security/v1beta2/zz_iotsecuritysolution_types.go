@@ -442,6 +442,7 @@ type IOTSecuritySolutionStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // IOTSecuritySolution is the Schema for the IOTSecuritySolutions API. Manages an iot security solution.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

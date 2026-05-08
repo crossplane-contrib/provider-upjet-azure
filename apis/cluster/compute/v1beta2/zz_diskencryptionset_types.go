@@ -210,6 +210,7 @@ type DiskEncryptionSetStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // DiskEncryptionSet is the Schema for the DiskEncryptionSets API. Manages a Disk Encryption Set.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

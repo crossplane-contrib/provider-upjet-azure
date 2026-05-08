@@ -735,6 +735,7 @@ type MSSQLDatabaseStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // MSSQLDatabase is the Schema for the MSSQLDatabases API. Manages a MS SQL Database.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

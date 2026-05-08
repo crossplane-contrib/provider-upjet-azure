@@ -366,6 +366,7 @@ type SpringCloudAppStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // SpringCloudApp is the Schema for the SpringCloudApps API. Manage an Azure Spring Cloud Application.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

@@ -423,6 +423,7 @@ type ResourceGroupPolicyAssignmentStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ResourceGroupPolicyAssignment is the Schema for the ResourceGroupPolicyAssignments API. Manages a Resource Group Policy Assignment.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

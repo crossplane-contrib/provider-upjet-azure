@@ -530,6 +530,7 @@ type SpringCloudGatewayStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // SpringCloudGateway is the Schema for the SpringCloudGateways API. Manages a Spring Cloud Gateway.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

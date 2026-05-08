@@ -285,6 +285,7 @@ type IOTHubDPSStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // IOTHubDPS is the Schema for the IOTHubDPSs API. Manages an IoT Device Provisioning Service.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

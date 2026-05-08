@@ -182,6 +182,7 @@ type SpringCloudDevToolPortalStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // SpringCloudDevToolPortal is the Schema for the SpringCloudDevToolPortals API. Manages a Spring Cloud Dev Tool Portal.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

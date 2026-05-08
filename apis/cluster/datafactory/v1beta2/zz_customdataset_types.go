@@ -213,6 +213,7 @@ type CustomDataSetStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // CustomDataSet is the Schema for the CustomDataSets API. Manages a Dataset inside an Azure Data Factory. This is a generic resource that supports all different Dataset Types.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

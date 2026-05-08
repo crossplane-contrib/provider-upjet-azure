@@ -289,6 +289,7 @@ type TrafficManagerProfileStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // TrafficManagerProfile is the Schema for the TrafficManagerProfiles API. Manages a Traffic Manager Profile.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

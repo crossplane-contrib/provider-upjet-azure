@@ -404,6 +404,7 @@ type FactoryStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Factory is the Schema for the Factorys API. Manages an Azure Data Factory (Version 2).
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

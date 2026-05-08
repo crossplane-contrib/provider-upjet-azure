@@ -242,6 +242,7 @@ type VirtualNetworkStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // VirtualNetwork is the Schema for the VirtualNetworks API. Manages a Virtual Network within a DevTest Lab.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

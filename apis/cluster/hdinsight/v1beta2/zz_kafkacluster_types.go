@@ -1617,6 +1617,7 @@ type KafkaClusterStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // KafkaCluster is the Schema for the KafkaClusters API. Manages a HDInsight Kafka Cluster.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

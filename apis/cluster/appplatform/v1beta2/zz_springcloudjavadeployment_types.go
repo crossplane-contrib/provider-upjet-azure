@@ -149,6 +149,7 @@ type SpringCloudJavaDeploymentStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // SpringCloudJavaDeployment is the Schema for the SpringCloudJavaDeployments API. Manages an Azure Spring Cloud Deployment with a Java runtime.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

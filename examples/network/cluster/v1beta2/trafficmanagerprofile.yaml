@@ -9,11 +9,11 @@ metadata:
     meta.upbound.io/example-id: network/v1beta2/trafficmanagerprofile
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: upboundtest
 spec:
   forProvider:
     dnsConfig:
-      relativeName: example
+      relativeName: upboundtest
       ttl: 100
     monitorConfig:
       intervalInSeconds: 30

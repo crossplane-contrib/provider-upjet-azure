@@ -1566,6 +1566,7 @@ type FrontdoorRuleStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // FrontdoorRule is the Schema for the FrontdoorRules API. Manages a Front Door (standard/premium) Rule.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

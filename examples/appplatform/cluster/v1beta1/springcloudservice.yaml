@@ -7,6 +7,7 @@ kind: SpringCloudService
 metadata:
   annotations:
     meta.upbound.io/example-id: appplatform/v1beta1/springcloudservice
+    upjet.upbound.io/manual-intervention: "New users are not allowed to create Azure Spring Apps service instance."
   labels:
     testing.upbound.io/example-name: example
   name: example-service
@@ -24,6 +25,7 @@ kind: ResourceGroup
 metadata:
   annotations:
     meta.upbound.io/example-id: appplatform/v1beta1/springcloudservice
+    upjet.upbound.io/manual-intervention: "New users are not allowed to create Azure Spring Apps service instance."
   labels:
     testing.upbound.io/example-name: example
   name: example-group

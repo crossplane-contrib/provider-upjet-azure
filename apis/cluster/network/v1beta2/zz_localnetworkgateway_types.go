@@ -168,6 +168,7 @@ type LocalNetworkGatewayStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // LocalNetworkGateway is the Schema for the LocalNetworkGateways API. Manages a local network gateway connection over which specific connections can be configured.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

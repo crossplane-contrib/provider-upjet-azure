@@ -439,6 +439,7 @@ type MSSQLManagedInstanceStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // MSSQLManagedInstance is the Schema for the MSSQLManagedInstances API. Manages a Microsoft SQL Azure Managed Instance.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

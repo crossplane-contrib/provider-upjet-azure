@@ -189,6 +189,7 @@ type SQLPoolStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // SQLPool is the Schema for the SQLPools API. Manages a Synapse SQL Pool.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

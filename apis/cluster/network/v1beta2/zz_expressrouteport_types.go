@@ -360,6 +360,7 @@ type ExpressRoutePortStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ExpressRoutePort is the Schema for the ExpressRoutePorts API. Manages a Express Route Port.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

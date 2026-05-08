@@ -219,6 +219,7 @@ type ApplicationInsightsWorkbookStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ApplicationInsightsWorkbook is the Schema for the ApplicationInsightsWorkbooks API. Manages an Azure Workbook.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

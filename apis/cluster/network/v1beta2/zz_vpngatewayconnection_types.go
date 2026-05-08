@@ -546,6 +546,7 @@ type VPNGatewayConnectionStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // VPNGatewayConnection is the Schema for the VPNGatewayConnections API. Manages a VPN Gateway Connection.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

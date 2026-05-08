@@ -403,6 +403,7 @@ type SubscriptionPolicyAssignmentStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // SubscriptionPolicyAssignment is the Schema for the SubscriptionPolicyAssignments API. Manages a Subscription Policy Assignment.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

@@ -1573,6 +1573,7 @@ type SparkClusterStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // SparkCluster is the Schema for the SparkClusters API. Manages a HDInsight Spark Cluster.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

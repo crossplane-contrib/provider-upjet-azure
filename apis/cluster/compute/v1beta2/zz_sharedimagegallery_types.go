@@ -193,6 +193,7 @@ type SharedImageGalleryStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // SharedImageGallery is the Schema for the SharedImageGallerys API. Manages a Shared Image Gallery.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

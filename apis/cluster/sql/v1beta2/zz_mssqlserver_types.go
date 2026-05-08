@@ -416,6 +416,7 @@ type MSSQLServerStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // MSSQLServer is the Schema for the MSSQLServers API. Manages a Microsoft SQL Azure Database Server.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

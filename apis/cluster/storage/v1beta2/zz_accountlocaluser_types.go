@@ -262,6 +262,7 @@ type AccountLocalUserStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // AccountLocalUser is the Schema for the AccountLocalUsers API. Manages a Storage Account Local User.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

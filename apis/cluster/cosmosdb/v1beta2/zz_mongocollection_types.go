@@ -224,6 +224,7 @@ type MongoCollectionStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // MongoCollection is the Schema for the MongoCollections API. Manages a Mongo Collection within a Cosmos DB Account.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

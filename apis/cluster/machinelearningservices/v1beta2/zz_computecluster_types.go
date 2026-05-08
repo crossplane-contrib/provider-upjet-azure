@@ -349,6 +349,7 @@ type ComputeClusterStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ComputeCluster is the Schema for the ComputeClusters API. Manages a Machine Learning Compute Cluster.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

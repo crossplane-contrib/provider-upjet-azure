@@ -373,6 +373,7 @@ type BudgetSubscriptionStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // BudgetSubscription is the Schema for the BudgetSubscriptions API. Manages a Subscription Consumption Budget.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"

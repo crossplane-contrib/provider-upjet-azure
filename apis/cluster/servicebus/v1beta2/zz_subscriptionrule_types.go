@@ -211,6 +211,7 @@ type SubscriptionRuleStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // SubscriptionRule is the Schema for the SubscriptionRules API. Manages a ServiceBus Subscription Rule.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
