@@ -10,6 +10,7 @@ import (
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	authorizationrule "github.com/upbound/provider-azure/v2/internal/controller/namespaced/eventhub/authorizationrule"
+	cluster "github.com/upbound/provider-azure/v2/internal/controller/namespaced/eventhub/cluster"
 	consumergroup "github.com/upbound/provider-azure/v2/internal/controller/namespaced/eventhub/consumergroup"
 	eventhub "github.com/upbound/provider-azure/v2/internal/controller/namespaced/eventhub/eventhub"
 	eventhubnamespace "github.com/upbound/provider-azure/v2/internal/controller/namespaced/eventhub/eventhubnamespace"
@@ -23,6 +24,7 @@ import (
 func Setup_eventhub(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		authorizationrule.Setup,
+		cluster.Setup,
 		consumergroup.Setup,
 		eventhub.Setup,
 		eventhubnamespace.Setup,
@@ -42,6 +44,7 @@ func Setup_eventhub(mgr ctrl.Manager, o controller.Options) error {
 func SetupGated_eventhub(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		authorizationrule.SetupGated,
+		cluster.SetupGated,
 		consumergroup.SetupGated,
 		eventhub.SetupGated,
 		eventhubnamespace.SetupGated,

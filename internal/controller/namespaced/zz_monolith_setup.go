@@ -357,6 +357,7 @@ import (
 	systemtopiceventsubscription "github.com/upbound/provider-azure/v2/internal/controller/namespaced/eventgrid/systemtopiceventsubscription"
 	topic "github.com/upbound/provider-azure/v2/internal/controller/namespaced/eventgrid/topic"
 	authorizationrule "github.com/upbound/provider-azure/v2/internal/controller/namespaced/eventhub/authorizationrule"
+	clustereventhub "github.com/upbound/provider-azure/v2/internal/controller/namespaced/eventhub/cluster"
 	consumergroup "github.com/upbound/provider-azure/v2/internal/controller/namespaced/eventhub/consumergroup"
 	eventhub "github.com/upbound/provider-azure/v2/internal/controller/namespaced/eventhub/eventhub"
 	eventhubnamespace "github.com/upbound/provider-azure/v2/internal/controller/namespaced/eventhub/eventhubnamespace"
@@ -1121,6 +1122,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		systemtopiceventsubscription.Setup,
 		topic.Setup,
 		authorizationrule.Setup,
+		clustereventhub.Setup,
 		consumergroup.Setup,
 		eventhub.Setup,
 		eventhubnamespace.Setup,
@@ -1891,6 +1893,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		systemtopiceventsubscription.SetupGated,
 		topic.SetupGated,
 		authorizationrule.SetupGated,
+		clustereventhub.SetupGated,
 		consumergroup.SetupGated,
 		eventhub.SetupGated,
 		eventhubnamespace.SetupGated,
