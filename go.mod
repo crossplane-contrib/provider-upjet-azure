@@ -4,29 +4,29 @@
 
 module github.com/upbound/provider-azure/v2
 
-go 1.25.8
+go 1.25.10
 
 tool golang.org/x/tools/cmd/goimports
 
 require (
 	dario.cat/mergo v1.0.2
 	github.com/alecthomas/kingpin/v2 v2.4.0
-	github.com/crossplane/crossplane-runtime/v2 v2.2.0
-	github.com/crossplane/crossplane-tools v0.0.0-20250731192036-00d407d8b7ec
-	github.com/crossplane/upjet/v2 v2.2.1-0.20260324141823-52796ea2ad8d
+	github.com/crossplane/crossplane-runtime/v2 v2.2.1
+	github.com/crossplane/crossplane-tools v0.0.0-20251017183449-dd4517244339
+	github.com/crossplane/upjet/v2 v2.2.1-0.20260517113542-0beea8e928de
 	github.com/google/go-cmp v0.7.0
 	github.com/hashicorp/terraform-json v0.27.2
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.38.1
 	github.com/hashicorp/terraform-provider-azurerm v1.44.1-0.20230519070112-155958d2cb08
 	github.com/pkg/errors v0.9.1
 	google.golang.org/grpc v1.79.3
-	k8s.io/api v0.35.2
-	k8s.io/apiextensions-apiserver v0.35.0
-	k8s.io/apimachinery v0.35.2
-	k8s.io/client-go v0.35.2
-	k8s.io/utils v0.0.0-20260210185600-b8788abfbbc2
+	k8s.io/api v0.35.5
+	k8s.io/apiextensions-apiserver v0.35.5
+	k8s.io/apimachinery v0.35.5
+	k8s.io/client-go v0.35.5
+	k8s.io/utils v0.0.0-20260319190234-28399d86e0b5
 	sigs.k8s.io/controller-runtime v0.23.3
-	sigs.k8s.io/controller-tools v0.20.0
+	sigs.k8s.io/controller-tools v0.20.1
 )
 
 require (
@@ -175,8 +175,8 @@ require (
 	gopkg.in/inf.v0 v0.9.1 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
-	k8s.io/code-generator v0.35.0 // indirect
-	k8s.io/component-base v0.35.0 // indirect
+	k8s.io/code-generator v0.35.5 // indirect
+	k8s.io/component-base v0.35.5 // indirect
 	k8s.io/gengo/v2 v2.0.0-20251215205346-5ee0d033ba5b // indirect
 	k8s.io/klog/v2 v2.130.1 // indirect
 	k8s.io/kube-openapi v0.0.0-20260127142750-a19766b6e2d4 // indirect
