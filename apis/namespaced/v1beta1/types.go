@@ -55,6 +55,11 @@ type ProviderConfigSpec struct {
 	// rather than the SharedKey from the Storage Account.
 	// +kubebuilder:validation:Optional
 	StorageUseAzureAD *bool `json:"storageUseAzureAD,omitempty"`
+
+	// Features configures optional behaviors of the underlying Terraform
+	// AzureRM provider, mirroring its `features` block.
+	// +kubebuilder:validation:Optional
+	Features *Features `json:"features,omitempty"`
 }
 
 // ProviderCredentials required to authenticate.
@@ -147,4 +152,17 @@ type ProviderConfigUsageList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []ProviderConfigUsage `json:"items"`
+}
+
+// Features mirrors the Terraform AzureRM provider `features` block
+type Features struct {
+	// +kubebuilder:validation:Optional
+	PostgreSQLFlexibleServer *PostgreSQLFlexibleServer `json:"postgreSQLFlexibleServer,omitempty"`
+}
+
+// PostgreSQLFlexibleServer configures behaviors specific to Azure PostgreSQL Flexible Servers
+type PostgreSQLFlexibleServer struct {
+	// Should the PostgreSQL Flexible Server restart after static server parameter change or removal?
+	// +kubebuilder:validation:Optional
+	RestartServerOnConfigurationValueChange *bool `json:"restartServerOnConfigurationValueChange,omitempty"`
 }
