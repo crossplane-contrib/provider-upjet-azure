@@ -167,6 +167,19 @@ linters:
         linters:
           - gosec
           - gas
+      # mgr.GetEventRecorderFor is deprecated at controller-runtime
+      # in favor of mgr.GetEventRecorder.
+      # Suppress until crossplane-runtime adapts
+      - path: internal/controller/
+        text: "SA1019:.*GetEventRecorderFor is deprecated"
+        linters:
+          - staticcheck
+      # resource.LegacyManaged is deprecated for new implementations
+      # but we still handle legacy cluster-scoped resources
+      - path: internal/clients/azure.go
+        text: "SA1019:.*LegacyManaged is deprecated"
+        linters:
+          - staticcheck
 
 formatters:
   enable:
