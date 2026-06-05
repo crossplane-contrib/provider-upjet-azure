@@ -10,6 +10,7 @@ import (
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	configuration "github.com/upbound/provider-azure/v2/internal/controller/namespaced/appconfiguration/configuration"
+	key "github.com/upbound/provider-azure/v2/internal/controller/namespaced/appconfiguration/key"
 )
 
 // Setup_appconfiguration creates all controllers with the supplied logger and adds them to
@@ -17,6 +18,7 @@ import (
 func Setup_appconfiguration(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		configuration.Setup,
+		key.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err
@@ -30,6 +32,7 @@ func Setup_appconfiguration(mgr ctrl.Manager, o controller.Options) error {
 func SetupGated_appconfiguration(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		configuration.SetupGated,
+		key.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

@@ -1913,6 +1913,11 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// App Configurations can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resourceGroup1/providers/Microsoft.AppConfiguration/configurationStores/appConf1
 	"azurerm_app_configuration": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.AppConfiguration/configurationStores/{{ .external_name }}"),
+	// App Configuration Keys can be imported using the resource id, e.g.
+	// https://appconfname1.azconfig.io/kv/keyName?label=labelName
+	// If you wish to import a key with an empty label then simply leave label's name blank:
+	// https://appconfname1.azconfig.io/kv/keyName?label=
+	"azurerm_app_configuration_key": config.IdentifierFromProvider,
 
 	// load
 	//

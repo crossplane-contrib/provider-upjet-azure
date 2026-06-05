@@ -1,0 +1,67 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: appconfiguration.azure.upbound.io/v1beta1
+kind: Key
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appconfiguration/v1beta1/key
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    configurationStoreIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: appconf
+    key: appConfKey1
+    label: somelabel
+    value: a test
+
+---
+
+apiVersion: appconfiguration.azure.upbound.io/v1beta2
+kind: Configuration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appconfiguration/v1beta1/key
+  labels:
+    testing.upbound.io/example-name: appconf
+  name: appconf
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appconfiguration/v1beta1/key
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: authorization.azure.upbound.io/v1beta1
+kind: RoleAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appconfiguration/v1beta1/key
+  labels:
+    testing.upbound.io/example-name: appconf_dataowner
+  name: appconf-dataowner
+spec:
+  forProvider:
+    principalId: ${data.azurerm_client_config.current.object_id}
+    roleDefinitionName: App Configuration Data Owner
+    scope: ${azurerm_app_configuration.appconf.id}
