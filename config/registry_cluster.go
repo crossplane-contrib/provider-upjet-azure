@@ -18,6 +18,7 @@ import (
 
 	"github.com/upbound/provider-azure/v2/config/cluster"
 	"github.com/upbound/provider-azure/v2/config/cluster/common"
+	"github.com/upbound/provider-azure/v2/config/templates"
 	"github.com/upbound/provider-azure/v2/hack"
 )
 
@@ -45,6 +46,7 @@ func GetProvider(_ context.Context, sdkProvider *schema.Provider, generationProv
 		ujconfig.WithTerraformPluginSDKIncludeList(TerraformPluginSDKResourceList()),
 		ujconfig.WithSkipList(skipList),
 		ujconfig.WithDefaultResourceOptions(ResourceConfigurator()),
+		ujconfig.WithControllerTemplate(templates.ControllerTemplate),
 		ujconfig.WithReferenceInjectors([]ujconfig.ReferenceInjector{reference.NewInjector(modulePath)}),
 		ujconfig.WithFeaturesPackage("internal/features"),
 		ujconfig.WithMainTemplate(hack.MainTemplate),
