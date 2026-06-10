@@ -1,0 +1,56 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: appconfiguration.azure.m.upbound.io/v1beta1
+kind: Key
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appconfiguration/v1beta1/key
+  labels:
+    testing.upbound.io/example-name: test
+  name: test-${Rand.RFC1123Subdomain}
+  namespace: upbound-system
+spec:
+  forProvider:
+    configurationStoreIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: appconf
+    key: appConfKey1
+    label: somelabel
+    value: a test
+
+---
+
+apiVersion: appconfiguration.azure.m.upbound.io/v1beta1
+kind: Configuration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appconfiguration/v1beta1/key
+  labels:
+    testing.upbound.io/example-name: appconf
+  name: appconf-${Rand.RFC1123Subdomain}
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    sku: standard
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appconfiguration/v1beta1/key
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+

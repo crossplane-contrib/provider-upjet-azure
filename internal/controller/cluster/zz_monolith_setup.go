@@ -57,6 +57,7 @@ import (
 	tag "github.com/upbound/provider-azure/v2/internal/controller/cluster/apimanagement/tag"
 	user "github.com/upbound/provider-azure/v2/internal/controller/cluster/apimanagement/user"
 	configuration "github.com/upbound/provider-azure/v2/internal/controller/cluster/appconfiguration/configuration"
+	key "github.com/upbound/provider-azure/v2/internal/controller/cluster/appconfiguration/key"
 	springcloudaccelerator "github.com/upbound/provider-azure/v2/internal/controller/cluster/appplatform/springcloudaccelerator"
 	springcloudactivedeployment "github.com/upbound/provider-azure/v2/internal/controller/cluster/appplatform/springcloudactivedeployment"
 	springcloudapiportal "github.com/upbound/provider-azure/v2/internal/controller/cluster/appplatform/springcloudapiportal"
@@ -406,7 +407,7 @@ import (
 	certificatekeyvault "github.com/upbound/provider-azure/v2/internal/controller/cluster/keyvault/certificate"
 	certificatecontacts "github.com/upbound/provider-azure/v2/internal/controller/cluster/keyvault/certificatecontacts"
 	certificateissuer "github.com/upbound/provider-azure/v2/internal/controller/cluster/keyvault/certificateissuer"
-	key "github.com/upbound/provider-azure/v2/internal/controller/cluster/keyvault/key"
+	keykeyvault "github.com/upbound/provider-azure/v2/internal/controller/cluster/keyvault/key"
 	managedhardwaresecuritymodule "github.com/upbound/provider-azure/v2/internal/controller/cluster/keyvault/managedhardwaresecuritymodule"
 	managedstorageaccount "github.com/upbound/provider-azure/v2/internal/controller/cluster/keyvault/managedstorageaccount"
 	managedstorageaccountsastokendefinition "github.com/upbound/provider-azure/v2/internal/controller/cluster/keyvault/managedstorageaccountsastokendefinition"
@@ -822,6 +823,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		tag.Setup,
 		user.Setup,
 		configuration.Setup,
+		key.Setup,
 		springcloudaccelerator.Setup,
 		springcloudactivedeployment.Setup,
 		springcloudapiportal.Setup,
@@ -1171,7 +1173,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		certificatekeyvault.Setup,
 		certificatecontacts.Setup,
 		certificateissuer.Setup,
-		key.Setup,
+		keykeyvault.Setup,
 		managedhardwaresecuritymodule.Setup,
 		managedstorageaccount.Setup,
 		managedstorageaccountsastokendefinition.Setup,
@@ -1593,6 +1595,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		tag.SetupGated,
 		user.SetupGated,
 		configuration.SetupGated,
+		key.SetupGated,
 		springcloudaccelerator.SetupGated,
 		springcloudactivedeployment.SetupGated,
 		springcloudapiportal.SetupGated,
@@ -1942,7 +1945,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		certificatekeyvault.SetupGated,
 		certificatecontacts.SetupGated,
 		certificateissuer.SetupGated,
-		key.SetupGated,
+		keykeyvault.SetupGated,
 		managedhardwaresecuritymodule.SetupGated,
 		managedstorageaccount.SetupGated,
 		managedstorageaccountsastokendefinition.SetupGated,
