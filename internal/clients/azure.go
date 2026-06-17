@@ -42,20 +42,22 @@ const (
 	keyAzureClientCertPass = "clientCertificatePassword"
 	keyAzureTenantID       = "tenantId"
 	// Terraform Provider configuration block keys
-	keyTerraformFeatures        = "features"
-	keySkipProviderRegistration = "skip_provider_registration"
-	keyUseMSI                   = "use_msi"
-	keyClientID                 = "client_id"
-	keySubscriptionID           = "subscription_id"
-	keyTenantID                 = "tenant_id"
-	keyMSIEndpoint              = "msi_endpoint"
-	keyClientSecret             = "client_secret"
-	keyClientCert               = "client_certificate"
-	keyClientCertPassword       = "client_certificate_password"
-	keyEnvironment              = "environment"
-	keyOidcTokenFilePath        = "oidc_token_file_path"
-	keyUseOIDC                  = "use_oidc"
-	keyStorageUseAzureAD        = "storage_use_azuread"
+	keyTerraformFeatures                      = "features"
+	keySkipProviderRegistration               = "skip_provider_registration"
+	keyUseMSI                                 = "use_msi"
+	keyClientID                               = "client_id"
+	keySubscriptionID                         = "subscription_id"
+	keyTenantID                               = "tenant_id"
+	keyMSIEndpoint                            = "msi_endpoint"
+	keyClientSecret                           = "client_secret"
+	keyClientCert                             = "client_certificate"
+	keyClientCertPassword                     = "client_certificate_password"
+	keyEnvironment                            = "environment"
+	keyOidcTokenFilePath                      = "oidc_token_file_path"
+	keyUseOIDC                                = "use_oidc"
+	keyStorageUseAzureAD                      = "storage_use_azuread"
+	keyPostgreSQLFlexibleServer               = "postgresql_flexible_server"
+	keyPSQLRestartServerOnConfigurationChange = "restart_server_on_configuration_value_change"
 	// Default OidcTokenFilePath
 	defaultOidcTokenFilePath = "/var/run/secrets/azure/tokens/azure-identity-token"
 )
@@ -84,8 +86,9 @@ func TerraformSetupBuilder(tfProvider *schema.Provider) terraform.SetupFn { //no
 			return terraform.Setup{}, err
 		}
 
+		featuresBlock := map[string]interface{}{}
 		ps.Configuration = map[string]interface{}{
-			keyTerraformFeatures: map[string]interface{}{},
+			keyTerraformFeatures: []interface{}{featuresBlock}, // one features block
 			// Terraform AzureRM provider tries to register all resource providers
 			// in Azure just in case if the provider of the resource you're
 			// trying to create is not registered and the returned error is
@@ -97,6 +100,14 @@ func TerraformSetupBuilder(tfProvider *schema.Provider) terraform.SetupFn { //no
 
 		if pcSpec.StorageUseAzureAD != nil {
 			ps.Configuration[keyStorageUseAzureAD] = *pcSpec.StorageUseAzureAD
+		}
+
+		if pcSpec.Features != nil && pcSpec.Features.PostgreSQLFlexibleServer != nil && pcSpec.Features.PostgreSQLFlexibleServer.RestartServerOnConfigurationValueChange != nil {
+			featuresBlock[keyPostgreSQLFlexibleServer] = []interface{}{
+				map[string]interface{}{
+					keyPSQLRestartServerOnConfigurationChange: *pcSpec.Features.PostgreSQLFlexibleServer.RestartServerOnConfigurationValueChange,
+				},
+			}
 		}
 
 		switch pcSpec.Credentials.Source { //nolint:exhaustive
