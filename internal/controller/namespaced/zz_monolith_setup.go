@@ -324,6 +324,8 @@ import (
 	virtualdesktophostpoolregistrationinfo "github.com/upbound/provider-azure/v2/internal/controller/namespaced/desktopvirtualization/virtualdesktophostpoolregistrationinfo"
 	virtualdesktopworkspace "github.com/upbound/provider-azure/v2/internal/controller/namespaced/desktopvirtualization/virtualdesktopworkspace"
 	virtualdesktopworkspaceapplicationgroupassociation "github.com/upbound/provider-azure/v2/internal/controller/namespaced/desktopvirtualization/virtualdesktopworkspaceapplicationgroupassociation"
+	center "github.com/upbound/provider-azure/v2/internal/controller/namespaced/devcenter/center"
+	project "github.com/upbound/provider-azure/v2/internal/controller/namespaced/devcenter/project"
 	iothub "github.com/upbound/provider-azure/v2/internal/controller/namespaced/devices/iothub"
 	iothubcertificate "github.com/upbound/provider-azure/v2/internal/controller/namespaced/devices/iothubcertificate"
 	iothubconsumergroup "github.com/upbound/provider-azure/v2/internal/controller/namespaced/devices/iothubconsumergroup"
@@ -1090,6 +1092,8 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		virtualdesktophostpoolregistrationinfo.Setup,
 		virtualdesktopworkspace.Setup,
 		virtualdesktopworkspaceapplicationgroupassociation.Setup,
+		center.Setup,
+		project.Setup,
 		iothub.Setup,
 		iothubcertificate.Setup,
 		iothubconsumergroup.Setup,
@@ -1862,6 +1866,8 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		virtualdesktophostpoolregistrationinfo.SetupGated,
 		virtualdesktopworkspace.SetupGated,
 		virtualdesktopworkspaceapplicationgroupassociation.SetupGated,
+		center.SetupGated,
+		project.SetupGated,
 		iothub.SetupGated,
 		iothubcertificate.SetupGated,
 		iothubconsumergroup.SetupGated,

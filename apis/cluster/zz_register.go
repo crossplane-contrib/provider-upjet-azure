@@ -67,6 +67,7 @@ import (
 	v1beta1dbforpostgresql "github.com/upbound/provider-azure/v2/apis/cluster/dbforpostgresql/v1beta1"
 	v1beta2dbforpostgresql "github.com/upbound/provider-azure/v2/apis/cluster/dbforpostgresql/v1beta2"
 	v1beta1desktopvirtualization "github.com/upbound/provider-azure/v2/apis/cluster/desktopvirtualization/v1beta1"
+	v1beta1devcenter "github.com/upbound/provider-azure/v2/apis/cluster/devcenter/v1beta1"
 	v1beta1devices "github.com/upbound/provider-azure/v2/apis/cluster/devices/v1beta1"
 	v1beta2devices "github.com/upbound/provider-azure/v2/apis/cluster/devices/v1beta2"
 	v1beta1deviceupdate "github.com/upbound/provider-azure/v2/apis/cluster/deviceupdate/v1beta1"
@@ -225,6 +226,7 @@ func init() {
 		v1beta1dbforpostgresql.SchemeBuilder.AddToScheme,
 		v1beta2dbforpostgresql.SchemeBuilder.AddToScheme,
 		v1beta1desktopvirtualization.SchemeBuilder.AddToScheme,
+		v1beta1devcenter.SchemeBuilder.AddToScheme,
 		v1beta1devices.SchemeBuilder.AddToScheme,
 		v1beta2devices.SchemeBuilder.AddToScheme,
 		v1beta1deviceupdate.SchemeBuilder.AddToScheme,
