@@ -19,7 +19,7 @@ spec:
 
 ---
 
-apiVersion: resources.azure.upbound.io/v1beta1
+apiVersion: azure.m.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   annotations:
