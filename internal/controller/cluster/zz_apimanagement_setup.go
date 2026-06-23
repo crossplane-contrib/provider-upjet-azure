@@ -29,6 +29,7 @@ import (
 	gatewayapi "github.com/upbound/provider-azure/v2/internal/controller/cluster/apimanagement/gatewayapi"
 	globalschema "github.com/upbound/provider-azure/v2/internal/controller/cluster/apimanagement/globalschema"
 	group "github.com/upbound/provider-azure/v2/internal/controller/cluster/apimanagement/group"
+	groupuser "github.com/upbound/provider-azure/v2/internal/controller/cluster/apimanagement/groupuser"
 	identityprovideraad "github.com/upbound/provider-azure/v2/internal/controller/cluster/apimanagement/identityprovideraad"
 	identityproviderfacebook "github.com/upbound/provider-azure/v2/internal/controller/cluster/apimanagement/identityproviderfacebook"
 	identityprovidergoogle "github.com/upbound/provider-azure/v2/internal/controller/cluster/apimanagement/identityprovidergoogle"
@@ -77,6 +78,7 @@ func Setup_apimanagement(mgr ctrl.Manager, o controller.Options) error {
 		gatewayapi.Setup,
 		globalschema.Setup,
 		group.Setup,
+		groupuser.Setup,
 		identityprovideraad.Setup,
 		identityproviderfacebook.Setup,
 		identityprovidergoogle.Setup,
@@ -131,6 +133,7 @@ func SetupGated_apimanagement(mgr ctrl.Manager, o controller.Options) error {
 		gatewayapi.SetupGated,
 		globalschema.SetupGated,
 		group.SetupGated,
+		groupuser.SetupGated,
 		identityprovideraad.SetupGated,
 		identityproviderfacebook.SetupGated,
 		identityprovidergoogle.SetupGated,
