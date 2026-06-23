@@ -32,3 +32,22 @@ metadata:
 spec:
   forProvider:
     location: West Europe
+
+---
+
+apiVersion: managedidentity.azure.m.upbound.io/v1beta1
+kind: UserAssignedIdentity
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devcenter/v1beta1/center
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
