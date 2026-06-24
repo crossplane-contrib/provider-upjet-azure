@@ -49,6 +49,9 @@ func (tr *GlobalSchema) Hub() {}
 func (tr *Group) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *GroupUser) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *IdentityProviderAAD) Hub() {}
 
 // Hub marks this type as a conversion hub.

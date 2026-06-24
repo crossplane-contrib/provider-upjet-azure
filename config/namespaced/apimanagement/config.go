@@ -130,6 +130,17 @@ func Configure(p *config.Provider) {
 			TerraformName: "azurerm_api_management_api_operation",
 		}
 	})
+	p.AddResourceConfigurator("azurerm_api_management_group_user", func(r *config.Resource) {
+		r.References["user_id"] = config.Reference{
+			TerraformName: "azurerm_api_management_user",
+		}
+		r.References["group_name"] = config.Reference{
+			TerraformName: "azurerm_api_management_group",
+		}
+		r.References["api_management_name"] = config.Reference{
+			TerraformName: "azurerm_api_management",
+		}
+	})
 }
 
 func apiIdCustomDiff(diff *terraform.InstanceDiff, state *terraform.InstanceState, resourceConfig *terraform.ResourceConfig) (*terraform.InstanceDiff, error) { //nolint:gocyclo
