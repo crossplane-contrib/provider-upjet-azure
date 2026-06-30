@@ -7,6 +7,7 @@ package clients
 import (
 	"context"
 	"encoding/json"
+	"net/http"
 	"strings"
 	"sync/atomic"
 
@@ -15,7 +16,9 @@ import (
 
 	xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+	upjetmetrics "github.com/crossplane/upjet/v2/pkg/metrics"
 	"github.com/crossplane/upjet/v2/pkg/terraform"
+	tfazureclient "github.com/hashicorp/terraform-provider-azurerm/xpprovider"
 	"github.com/pkg/errors"
 	"k8s.io/apimachinery/pkg/types"
 	"sigs.k8s.io/controller-runtime/pkg/client"
@@ -73,6 +76,33 @@ var (
 	// Round-robin counter for service principal selection
 	servicePrincipalCounter uint64
 )
+
+// armServiceFromPath extracts a short service label from an ARM request path.
+//
+// Priority order:
+//  1. Resource provider namespace after /providers/ (most specific):
+//     .../providers/Microsoft.Compute/... → "Microsoft.Compute"
+//  2. Collection name after /subscriptions/{sub}/:
+//     /subscriptions/{sub}/resourceGroups/... → "resourceGroups"
+//     /subscriptions/{sub}                    → "subscriptions"
+//  3. "unknown" for anything else (e.g. data-plane endpoints)
+func armServiceFromPath(path string) string {
+	if _, after, ok := strings.Cut(path, "/providers/"); ok {
+		if ns, _, _ := strings.Cut(after, "/"); ns != "" {
+			return ns
+		}
+	}
+	if _, after, ok := strings.Cut(path, "/subscriptions/"); ok {
+		_, rest, found := strings.Cut(after, "/")
+		if !found {
+			return "subscriptions"
+		}
+		if seg, _, _ := strings.Cut(rest, "/"); seg != "" {
+			return seg
+		}
+	}
+	return "unknown"
+}
 
 // TerraformSetupBuilder returns Terraform setup with provider specific
 // configuration like provider credentials used to connect to cloud APIs in the
@@ -136,6 +166,13 @@ func configureNoForkAzureClient(ctx context.Context, ps *terraform.Setup, p sche
 		return errors.Errorf("failed to configure the provider: %v", diag)
 	}
 	ps.Meta = p.Meta()
+	tfazureclient.RegisterResponseMiddleware(ps.Meta, func(req *http.Request, resp *http.Response) (*http.Response, error) {
+		if req == nil || resp == nil {
+			return resp, nil
+		}
+		upjetmetrics.ExternalAPICalls.WithLabelValues(armServiceFromPath(req.URL.Path), req.Method).Inc()
+		return resp, nil
+	})
 	return nil
 }
 
