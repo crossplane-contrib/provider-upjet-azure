@@ -205,4 +205,4 @@ require (
 	software.sslmate.com/src/go-pkcs12 v0.6.0 // indirect
 )
 
-replace github.com/hashicorp/terraform-provider-azurerm => github.com/upbound/terraform-provider-azurerm v0.0.0-20251127122522-9029e3f708c4
+replace github.com/hashicorp/terraform-provider-azurerm => github.com/upbound/terraform-provider-azurerm v0.0.0-20260701132458-81005aad06a2
