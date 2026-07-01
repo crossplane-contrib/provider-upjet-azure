@@ -92,6 +92,32 @@ spec:
 
 ---
 
+apiVersion: sql.azure.upbound.io/v1beta2
+kind: MSSQLDatabase
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta2/mssqldatabase
+  labels:
+    testing.upbound.io/example-name: examplemssqldatabasecopy
+  name: examplemssqldatabasecopy
+spec:
+  forProvider:
+    collation: SQL_Latin1_General_CP1_CI_AS
+    createMode: Copy
+    creationSourceDatabaseIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: examplemssqldatabase
+    elasticPoolIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: mssqldatabasepool
+    serverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: mssqldatabasesrv
+    tags:
+      foo: bar
+
+---
+
 apiVersion: v1
 data:
   example-key: dGVzdFBhc3N3b3JkITEyMw==

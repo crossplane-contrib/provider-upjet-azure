@@ -27,6 +27,26 @@ func (mg *MSSQLDatabase) ResolveReferences( // ResolveReferences of this MSSQLDa
 	var mrsp reference.MultiResolutionResponse
 	var err error
 	{
+		m, l, err = apisresolver.GetManagedResource("sql.azure.upbound.io", "v1beta2", "MSSQLDatabase", "MSSQLDatabaseList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CreationSourceDatabaseID),
+			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.CreationSourceDatabaseIDRef,
+			Selector:     mg.Spec.ForProvider.CreationSourceDatabaseIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CreationSourceDatabaseID")
+	}
+	mg.Spec.ForProvider.CreationSourceDatabaseID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CreationSourceDatabaseIDRef = rsp.ResolvedReference
+	{
 		m, l, err = apisresolver.GetManagedResource("sql.azure.upbound.io", "v1beta2", "MSSQLElasticPool", "MSSQLElasticPoolList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
@@ -108,6 +128,26 @@ func (mg *MSSQLDatabase) ResolveReferences( // ResolveReferences of this MSSQLDa
 	}
 	mg.Spec.ForProvider.TransparentDataEncryptionKeyVaultKeyID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TransparentDataEncryptionKeyVaultKeyIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("sql.azure.upbound.io", "v1beta2", "MSSQLDatabase", "MSSQLDatabaseList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CreationSourceDatabaseID),
+			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.CreationSourceDatabaseIDRef,
+			Selector:     mg.Spec.InitProvider.CreationSourceDatabaseIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.CreationSourceDatabaseID")
+	}
+	mg.Spec.InitProvider.CreationSourceDatabaseID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.CreationSourceDatabaseIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("sql.azure.upbound.io", "v1beta2", "MSSQLElasticPool", "MSSQLElasticPoolList")
 		if err != nil {

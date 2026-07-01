@@ -1036,6 +1036,16 @@ func (in *MSSQLDatabaseInitParameters) DeepCopyInto(out *MSSQLDatabaseInitParame
 		*out = new(string)
 		**out = **in
 	}
+	if in.CreationSourceDatabaseIDRef != nil {
+		in, out := &in.CreationSourceDatabaseIDRef, &out.CreationSourceDatabaseIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.CreationSourceDatabaseIDSelector != nil {
+		in, out := &in.CreationSourceDatabaseIDSelector, &out.CreationSourceDatabaseIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.ElasticPoolID != nil {
 		in, out := &in.ElasticPoolID, &out.ElasticPoolID
 		*out = new(string)
@@ -1499,6 +1509,16 @@ func (in *MSSQLDatabaseParameters) DeepCopyInto(out *MSSQLDatabaseParameters) {
 		in, out := &in.CreationSourceDatabaseID, &out.CreationSourceDatabaseID
 		*out = new(string)
 		**out = **in
+	}
+	if in.CreationSourceDatabaseIDRef != nil {
+		in, out := &in.CreationSourceDatabaseIDRef, &out.CreationSourceDatabaseIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.CreationSourceDatabaseIDSelector != nil {
+		in, out := &in.CreationSourceDatabaseIDSelector, &out.CreationSourceDatabaseIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ElasticPoolID != nil {
 		in, out := &in.ElasticPoolID, &out.ElasticPoolID
