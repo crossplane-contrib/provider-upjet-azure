@@ -209,7 +209,17 @@ type MSSQLDatabaseInitParameters struct {
 	CreateMode *string `json:"createMode,omitempty" tf:"create_mode,omitempty"`
 
 	// The ID of the source database from which to create the new database. This should only be used for databases with create_mode values that use another database as reference. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/sql/v1beta2.MSSQLDatabase
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	CreationSourceDatabaseID *string `json:"creationSourceDatabaseId,omitempty" tf:"creation_source_database_id,omitempty"`
+
+	// Reference to a MSSQLDatabase in sql to populate creationSourceDatabaseId.
+	// +kubebuilder:validation:Optional
+	CreationSourceDatabaseIDRef *v1.Reference `json:"creationSourceDatabaseIdRef,omitempty" tf:"-"`
+
+	// Selector for a MSSQLDatabase in sql to populate creationSourceDatabaseId.
+	// +kubebuilder:validation:Optional
+	CreationSourceDatabaseIDSelector *v1.Selector `json:"creationSourceDatabaseIdSelector,omitempty" tf:"-"`
 
 	// Specifies the ID of the elastic pool containing this database.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/sql/v1beta2.MSSQLElasticPool
@@ -444,8 +454,18 @@ type MSSQLDatabaseParameters struct {
 	CreateMode *string `json:"createMode,omitempty" tf:"create_mode,omitempty"`
 
 	// The ID of the source database from which to create the new database. This should only be used for databases with create_mode values that use another database as reference. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/sql/v1beta2.MSSQLDatabase
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CreationSourceDatabaseID *string `json:"creationSourceDatabaseId,omitempty" tf:"creation_source_database_id,omitempty"`
+
+	// Reference to a MSSQLDatabase in sql to populate creationSourceDatabaseId.
+	// +kubebuilder:validation:Optional
+	CreationSourceDatabaseIDRef *v1.Reference `json:"creationSourceDatabaseIdRef,omitempty" tf:"-"`
+
+	// Selector for a MSSQLDatabase in sql to populate creationSourceDatabaseId.
+	// +kubebuilder:validation:Optional
+	CreationSourceDatabaseIDSelector *v1.Selector `json:"creationSourceDatabaseIdSelector,omitempty" tf:"-"`
 
 	// Specifies the ID of the elastic pool containing this database.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/sql/v1beta2.MSSQLElasticPool

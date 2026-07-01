@@ -130,6 +130,10 @@ func Configure(p *config.Provider) {
 			TerraformName: "azurerm_mssql_elasticpool",
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
+		r.References["creation_source_database_id"] = config.Reference{
+			TerraformName: "azurerm_mssql_database",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"maintenance_configuration_name", "elastic_pool_id"},
 		}
