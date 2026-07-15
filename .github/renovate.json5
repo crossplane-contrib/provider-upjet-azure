@@ -1,7 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:base"
+    "config:recommended"
   ],
 // The maximum number of PRs to be created in parallel
   "prConcurrentLimit": 5,
@@ -40,9 +40,9 @@
         "patch",
         "digest"
       ],
-      "matchPackagePrefixes": [
-        "k8s.io",
-        "sigs.k8s.io"
+      "matchPackageNames": [
+        "k8s.io{/,}**",
+        "sigs.k8s.io{/,}**"
       ]
     }, {
 // We want dedicated PRs for each minor and major bumps to kubernetes related
@@ -54,9 +54,9 @@
         "major",
         "minor"
       ],
-      "matchPackagePrefixes": [
-        "k8s.io",
-        "sigs.k8s.io"
+      "matchPackageNames": [
+        "k8s.io{/,}**",
+        "sigs.k8s.io{/,}**"
       ]
     }, {
 // We want dedicated PRs for each bump to non-kubernetes Go dependencies, but
@@ -64,14 +64,11 @@
       "matchDatasources": [
         "go"
       ],
-      "matchPackagePatterns": [
-        "*"
+      "matchPackageNames": [
+        "!k8s.io{/,}**",
+        "!sigs.k8s.io{/,}**"
       ],
       "enabled": false,
-      "excludePackagePrefixes": [
-        "k8s.io",
-        "sigs.k8s.io"
-      ],
       "matchUpdateTypes": [
         "major",
       ],
@@ -82,14 +79,11 @@
       "matchDatasources": [
         "go"
       ],
-      "matchPackagePatterns": [
-        "*"
+      "matchPackageNames": [
+        "!k8s.io{/,}**",
+        "!sigs.k8s.io{/,}**"
       ],
       "enabled": false,
-      "excludePackagePrefixes": [
-        "k8s.io",
-        "sigs.k8s.io"
-      ],
       "matchUpdateTypes": [
         "minor",
         "patch",
