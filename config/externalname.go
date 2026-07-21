@@ -1260,6 +1260,12 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.DevCenter/projects/example
 	"azurerm_dev_center_project": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DevCenter/projects/{{ .external_name }}"),
 
+	// devopsinfrastructure
+	//
+	// Managed DevOps Pool can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.DevOpsInfrastructure/pools/pool1
+	"azurerm_managed_devops_pool": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DevOpsInfrastructure/pools/{{ .external_name }}"),
+
 	// security
 	//
 	// Security Assessment can be imported using the resource id

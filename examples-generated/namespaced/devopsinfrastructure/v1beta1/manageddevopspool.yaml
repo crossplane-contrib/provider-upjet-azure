@@ -1,0 +1,86 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: devopsinfrastructure.azure.m.upbound.io/v1beta1
+kind: ManagedDevopsPool
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devopsinfrastructure/v1beta1/manageddevopspool
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    azureDevopsOrganization:
+      organization:
+      - parallelism: 1
+        url: https://dev.azure.com/example
+    devCenterProjectIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    location: West Europe
+    maximumConcurrency: 1
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    statelessAgent: {}
+    virtualMachineScaleSetFabric:
+      image:
+      - wellKnownImageName: ubuntu-24.04/buffer
+      skuName: Standard_D2ads_v5
+
+---
+
+apiVersion: devcenter.azure.m.upbound.io/v1beta1
+kind: Center
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devopsinfrastructure/v1beta1/manageddevopspool
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: devcenter.azure.m.upbound.io/v1beta1
+kind: Project
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devopsinfrastructure/v1beta1/manageddevopspool
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    devCenterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devopsinfrastructure/v1beta1/manageddevopspool
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

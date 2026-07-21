@@ -344,6 +344,7 @@ import (
 	iothubsharedaccesspolicy "github.com/upbound/provider-azure/v2/internal/controller/namespaced/devices/iothubsharedaccesspolicy"
 	iothubdeviceupdateaccount "github.com/upbound/provider-azure/v2/internal/controller/namespaced/deviceupdate/iothubdeviceupdateaccount"
 	iothubdeviceupdateinstance "github.com/upbound/provider-azure/v2/internal/controller/namespaced/deviceupdate/iothubdeviceupdateinstance"
+	manageddevopspool "github.com/upbound/provider-azure/v2/internal/controller/namespaced/devopsinfrastructure/manageddevopspool"
 	globalvmshutdownschedule "github.com/upbound/provider-azure/v2/internal/controller/namespaced/devtestlab/globalvmshutdownschedule"
 	lab "github.com/upbound/provider-azure/v2/internal/controller/namespaced/devtestlab/lab"
 	linuxvirtualmachinedevtestlab "github.com/upbound/provider-azure/v2/internal/controller/namespaced/devtestlab/linuxvirtualmachine"
@@ -1117,6 +1118,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		iothubsharedaccesspolicy.Setup,
 		iothubdeviceupdateaccount.Setup,
 		iothubdeviceupdateinstance.Setup,
+		manageddevopspool.Setup,
 		globalvmshutdownschedule.Setup,
 		lab.Setup,
 		linuxvirtualmachinedevtestlab.Setup,
@@ -1896,6 +1898,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		iothubsharedaccesspolicy.SetupGated,
 		iothubdeviceupdateaccount.SetupGated,
 		iothubdeviceupdateinstance.SetupGated,
+		manageddevopspool.SetupGated,
 		globalvmshutdownschedule.SetupGated,
 		lab.SetupGated,
 		linuxvirtualmachinedevtestlab.SetupGated,
@@ -2674,6 +2677,7 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		iothubsharedaccesspolicy.SetupWebhookWithManager,
 		iothubdeviceupdateaccount.SetupWebhookWithManager,
 		iothubdeviceupdateinstance.SetupWebhookWithManager,
+		manageddevopspool.SetupWebhookWithManager,
 		globalvmshutdownschedule.SetupWebhookWithManager,
 		lab.SetupWebhookWithManager,
 		linuxvirtualmachinedevtestlab.SetupWebhookWithManager,

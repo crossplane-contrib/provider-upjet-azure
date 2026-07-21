@@ -48,6 +48,7 @@ import (
 	v1beta1devcenter "github.com/upbound/provider-azure/v2/apis/namespaced/devcenter/v1beta1"
 	v1beta1devices "github.com/upbound/provider-azure/v2/apis/namespaced/devices/v1beta1"
 	v1beta1deviceupdate "github.com/upbound/provider-azure/v2/apis/namespaced/deviceupdate/v1beta1"
+	v1beta1devopsinfrastructure "github.com/upbound/provider-azure/v2/apis/namespaced/devopsinfrastructure/v1beta1"
 	v1beta1devtestlab "github.com/upbound/provider-azure/v2/apis/namespaced/devtestlab/v1beta1"
 	v1beta1digitaltwins "github.com/upbound/provider-azure/v2/apis/namespaced/digitaltwins/v1beta1"
 	v1beta1elastic "github.com/upbound/provider-azure/v2/apis/namespaced/elastic/v1beta1"
@@ -146,6 +147,7 @@ func init() {
 		v1beta1devcenter.SchemeBuilder.AddToScheme,
 		v1beta1devices.SchemeBuilder.AddToScheme,
 		v1beta1deviceupdate.SchemeBuilder.AddToScheme,
+		v1beta1devopsinfrastructure.SchemeBuilder.AddToScheme,
 		v1beta1devtestlab.SchemeBuilder.AddToScheme,
 		v1beta1digitaltwins.SchemeBuilder.AddToScheme,
 		v1beta1elastic.SchemeBuilder.AddToScheme,
