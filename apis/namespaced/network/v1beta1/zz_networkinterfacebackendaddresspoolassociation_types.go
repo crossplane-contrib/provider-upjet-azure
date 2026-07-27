@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type NetworkInterfaceBackendAddressPoolAssociationInitParameters struct {
@@ -23,11 +22,11 @@ type NetworkInterfaceBackendAddressPoolAssociationInitParameters struct {
 
 	// Reference to a LoadBalancerBackendAddressPool in network to populate backendAddressPoolId.
 	// +kubebuilder:validation:Optional
-	BackendAddressPoolIDRef *v1.NamespacedReference `json:"backendAddressPoolIdRef,omitempty" tf:"-"`
+	BackendAddressPoolIDRef *v2.NamespacedReference `json:"backendAddressPoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a LoadBalancerBackendAddressPool in network to populate backendAddressPoolId.
 	// +kubebuilder:validation:Optional
-	BackendAddressPoolIDSelector *v1.NamespacedSelector `json:"backendAddressPoolIdSelector,omitempty" tf:"-"`
+	BackendAddressPoolIDSelector *v2.NamespacedSelector `json:"backendAddressPoolIdSelector,omitempty" tf:"-"`
 
 	// The Name of the IP Configuration within the Network Interface which should be connected to the Backend Address Pool. Changing this forces a new resource to be created.
 	IPConfigurationName *string `json:"ipConfigurationName,omitempty" tf:"ip_configuration_name,omitempty"`
@@ -39,11 +38,11 @@ type NetworkInterfaceBackendAddressPoolAssociationInitParameters struct {
 
 	// Reference to a NetworkInterface in network to populate networkInterfaceId.
 	// +kubebuilder:validation:Optional
-	NetworkInterfaceIDRef *v1.NamespacedReference `json:"networkInterfaceIdRef,omitempty" tf:"-"`
+	NetworkInterfaceIDRef *v2.NamespacedReference `json:"networkInterfaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a NetworkInterface in network to populate networkInterfaceId.
 	// +kubebuilder:validation:Optional
-	NetworkInterfaceIDSelector *v1.NamespacedSelector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
+	NetworkInterfaceIDSelector *v2.NamespacedSelector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
 }
 
 type NetworkInterfaceBackendAddressPoolAssociationObservation struct {
@@ -70,11 +69,11 @@ type NetworkInterfaceBackendAddressPoolAssociationParameters struct {
 
 	// Reference to a LoadBalancerBackendAddressPool in network to populate backendAddressPoolId.
 	// +kubebuilder:validation:Optional
-	BackendAddressPoolIDRef *v1.NamespacedReference `json:"backendAddressPoolIdRef,omitempty" tf:"-"`
+	BackendAddressPoolIDRef *v2.NamespacedReference `json:"backendAddressPoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a LoadBalancerBackendAddressPool in network to populate backendAddressPoolId.
 	// +kubebuilder:validation:Optional
-	BackendAddressPoolIDSelector *v1.NamespacedSelector `json:"backendAddressPoolIdSelector,omitempty" tf:"-"`
+	BackendAddressPoolIDSelector *v2.NamespacedSelector `json:"backendAddressPoolIdSelector,omitempty" tf:"-"`
 
 	// The Name of the IP Configuration within the Network Interface which should be connected to the Backend Address Pool. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -88,11 +87,11 @@ type NetworkInterfaceBackendAddressPoolAssociationParameters struct {
 
 	// Reference to a NetworkInterface in network to populate networkInterfaceId.
 	// +kubebuilder:validation:Optional
-	NetworkInterfaceIDRef *v1.NamespacedReference `json:"networkInterfaceIdRef,omitempty" tf:"-"`
+	NetworkInterfaceIDRef *v2.NamespacedReference `json:"networkInterfaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a NetworkInterface in network to populate networkInterfaceId.
 	// +kubebuilder:validation:Optional
-	NetworkInterfaceIDSelector *v1.NamespacedSelector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
+	NetworkInterfaceIDSelector *v2.NamespacedSelector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
 }
 
 // NetworkInterfaceBackendAddressPoolAssociationSpec defines the desired state of NetworkInterfaceBackendAddressPoolAssociation
@@ -114,8 +113,8 @@ type NetworkInterfaceBackendAddressPoolAssociationSpec struct {
 
 // NetworkInterfaceBackendAddressPoolAssociationStatus defines the observed state of NetworkInterfaceBackendAddressPoolAssociation.
 type NetworkInterfaceBackendAddressPoolAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        NetworkInterfaceBackendAddressPoolAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               NetworkInterfaceBackendAddressPoolAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

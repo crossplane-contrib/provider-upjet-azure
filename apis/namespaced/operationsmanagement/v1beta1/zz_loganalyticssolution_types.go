@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type LogAnalyticsSolutionInitParameters struct {
@@ -28,11 +27,11 @@ type LogAnalyticsSolutionInitParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the solution to be deployed. See here for options.Changing this forces a new resource to be created.
 	SolutionName *string `json:"solutionName,omitempty" tf:"solution_name,omitempty"`
@@ -47,11 +46,11 @@ type LogAnalyticsSolutionInitParameters struct {
 
 	// Reference to a Workspace in operationalinsights to populate workspaceName.
 	// +kubebuilder:validation:Optional
-	WorkspaceNameRef *v1.NamespacedReference `json:"workspaceNameRef,omitempty" tf:"-"`
+	WorkspaceNameRef *v2.NamespacedReference `json:"workspaceNameRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in operationalinsights to populate workspaceName.
 	// +kubebuilder:validation:Optional
-	WorkspaceNameSelector *v1.NamespacedSelector `json:"workspaceNameSelector,omitempty" tf:"-"`
+	WorkspaceNameSelector *v2.NamespacedSelector `json:"workspaceNameSelector,omitempty" tf:"-"`
 
 	// The full resource ID of the Log Analytics workspace with which the solution will be linked. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/operationalinsights/v1beta1.Workspace
@@ -60,11 +59,11 @@ type LogAnalyticsSolutionInitParameters struct {
 
 	// Reference to a Workspace in operationalinsights to populate workspaceResourceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceResourceIDRef *v1.NamespacedReference `json:"workspaceResourceIdRef,omitempty" tf:"-"`
+	WorkspaceResourceIDRef *v2.NamespacedReference `json:"workspaceResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in operationalinsights to populate workspaceResourceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceResourceIDSelector *v1.NamespacedSelector `json:"workspaceResourceIdSelector,omitempty" tf:"-"`
+	WorkspaceResourceIDSelector *v2.NamespacedSelector `json:"workspaceResourceIdSelector,omitempty" tf:"-"`
 }
 
 type LogAnalyticsSolutionObservation struct {
@@ -112,11 +111,11 @@ type LogAnalyticsSolutionParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the solution to be deployed. See here for options.Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -134,11 +133,11 @@ type LogAnalyticsSolutionParameters struct {
 
 	// Reference to a Workspace in operationalinsights to populate workspaceName.
 	// +kubebuilder:validation:Optional
-	WorkspaceNameRef *v1.NamespacedReference `json:"workspaceNameRef,omitempty" tf:"-"`
+	WorkspaceNameRef *v2.NamespacedReference `json:"workspaceNameRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in operationalinsights to populate workspaceName.
 	// +kubebuilder:validation:Optional
-	WorkspaceNameSelector *v1.NamespacedSelector `json:"workspaceNameSelector,omitempty" tf:"-"`
+	WorkspaceNameSelector *v2.NamespacedSelector `json:"workspaceNameSelector,omitempty" tf:"-"`
 
 	// The full resource ID of the Log Analytics workspace with which the solution will be linked. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/operationalinsights/v1beta1.Workspace
@@ -148,11 +147,11 @@ type LogAnalyticsSolutionParameters struct {
 
 	// Reference to a Workspace in operationalinsights to populate workspaceResourceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceResourceIDRef *v1.NamespacedReference `json:"workspaceResourceIdRef,omitempty" tf:"-"`
+	WorkspaceResourceIDRef *v2.NamespacedReference `json:"workspaceResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in operationalinsights to populate workspaceResourceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceResourceIDSelector *v1.NamespacedSelector `json:"workspaceResourceIdSelector,omitempty" tf:"-"`
+	WorkspaceResourceIDSelector *v2.NamespacedSelector `json:"workspaceResourceIdSelector,omitempty" tf:"-"`
 }
 
 type PlanInitParameters struct {
@@ -214,8 +213,8 @@ type LogAnalyticsSolutionSpec struct {
 
 // LogAnalyticsSolutionStatus defines the observed state of LogAnalyticsSolution.
 type LogAnalyticsSolutionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LogAnalyticsSolutionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LogAnalyticsSolutionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ExpressRouteCircuitPeeringInitParameters struct {
@@ -38,7 +37,7 @@ type ExpressRouteCircuitPeeringInitParameters struct {
 	SecondaryPeerAddressPrefix *string `json:"secondaryPeerAddressPrefix,omitempty" tf:"secondary_peer_address_prefix,omitempty"`
 
 	// The shared key. Can be a maximum of 25 characters.
-	SharedKeySecretRef *v1.LocalSecretKeySelector `json:"sharedKeySecretRef,omitempty" tf:"-"`
+	SharedKeySecretRef *v2.LocalSecretKeySelector `json:"sharedKeySecretRef,omitempty" tf:"-"`
 
 	// A valid VLAN ID to establish this peering on.
 	VlanID *float64 `json:"vlanId,omitempty" tf:"vlan_id,omitempty"`
@@ -100,11 +99,11 @@ type ExpressRouteCircuitPeeringParameters struct {
 
 	// Reference to a ExpressRouteCircuit in network to populate expressRouteCircuitName.
 	// +kubebuilder:validation:Optional
-	ExpressRouteCircuitNameRef *v1.NamespacedReference `json:"expressRouteCircuitNameRef,omitempty" tf:"-"`
+	ExpressRouteCircuitNameRef *v2.NamespacedReference `json:"expressRouteCircuitNameRef,omitempty" tf:"-"`
 
 	// Selector for a ExpressRouteCircuit in network to populate expressRouteCircuitName.
 	// +kubebuilder:validation:Optional
-	ExpressRouteCircuitNameSelector *v1.NamespacedSelector `json:"expressRouteCircuitNameSelector,omitempty" tf:"-"`
+	ExpressRouteCircuitNameSelector *v2.NamespacedSelector `json:"expressRouteCircuitNameSelector,omitempty" tf:"-"`
 
 	// A boolean value indicating whether the IPv4 peering is enabled. Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -133,11 +132,11 @@ type ExpressRouteCircuitPeeringParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The ID of the Route Filter. Only available when peering_type is set to MicrosoftPeering.
 	// +kubebuilder:validation:Optional
@@ -149,7 +148,7 @@ type ExpressRouteCircuitPeeringParameters struct {
 
 	// The shared key. Can be a maximum of 25 characters.
 	// +kubebuilder:validation:Optional
-	SharedKeySecretRef *v1.LocalSecretKeySelector `json:"sharedKeySecretRef,omitempty" tf:"-"`
+	SharedKeySecretRef *v2.LocalSecretKeySelector `json:"sharedKeySecretRef,omitempty" tf:"-"`
 
 	// A valid VLAN ID to establish this peering on.
 	// +kubebuilder:validation:Optional
@@ -332,8 +331,8 @@ type ExpressRouteCircuitPeeringSpec struct {
 
 // ExpressRouteCircuitPeeringStatus defines the observed state of ExpressRouteCircuitPeering.
 type ExpressRouteCircuitPeeringStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ExpressRouteCircuitPeeringObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ExpressRouteCircuitPeeringObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

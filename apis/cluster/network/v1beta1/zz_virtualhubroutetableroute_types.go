@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type VirtualHubRouteTableRouteInitParameters_2 struct {
@@ -29,11 +29,11 @@ type VirtualHubRouteTableRouteInitParameters_2 struct {
 
 	// Reference to a VirtualHubConnection in network to populate nextHop.
 	// +kubebuilder:validation:Optional
-	NextHopRef *v1.Reference `json:"nextHopRef,omitempty" tf:"-"`
+	NextHopRef *v2.Reference `json:"nextHopRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualHubConnection in network to populate nextHop.
 	// +kubebuilder:validation:Optional
-	NextHopSelector *v1.Selector `json:"nextHopSelector,omitempty" tf:"-"`
+	NextHopSelector *v2.Selector `json:"nextHopSelector,omitempty" tf:"-"`
 
 	// The type of next hop. Currently the only possible value is ResourceId. Defaults to ResourceId.
 	NextHopType *string `json:"nextHopType,omitempty" tf:"next_hop_type,omitempty"`
@@ -80,11 +80,11 @@ type VirtualHubRouteTableRouteParameters_2 struct {
 
 	// Reference to a VirtualHubConnection in network to populate nextHop.
 	// +kubebuilder:validation:Optional
-	NextHopRef *v1.Reference `json:"nextHopRef,omitempty" tf:"-"`
+	NextHopRef *v2.Reference `json:"nextHopRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualHubConnection in network to populate nextHop.
 	// +kubebuilder:validation:Optional
-	NextHopSelector *v1.Selector `json:"nextHopSelector,omitempty" tf:"-"`
+	NextHopSelector *v2.Selector `json:"nextHopSelector,omitempty" tf:"-"`
 
 	// The type of next hop. Currently the only possible value is ResourceId. Defaults to ResourceId.
 	// +kubebuilder:validation:Optional
@@ -98,17 +98,17 @@ type VirtualHubRouteTableRouteParameters_2 struct {
 
 	// Reference to a VirtualHubRouteTable in network to populate routeTableId.
 	// +kubebuilder:validation:Optional
-	RouteTableIDRef *v1.Reference `json:"routeTableIdRef,omitempty" tf:"-"`
+	RouteTableIDRef *v2.Reference `json:"routeTableIdRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualHubRouteTable in network to populate routeTableId.
 	// +kubebuilder:validation:Optional
-	RouteTableIDSelector *v1.Selector `json:"routeTableIdSelector,omitempty" tf:"-"`
+	RouteTableIDSelector *v2.Selector `json:"routeTableIdSelector,omitempty" tf:"-"`
 }
 
 // VirtualHubRouteTableRouteSpec defines the desired state of VirtualHubRouteTableRoute
 type VirtualHubRouteTableRouteSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     VirtualHubRouteTableRouteParameters_2 `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   VirtualHubRouteTableRouteParameters_2 `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -124,8 +124,8 @@ type VirtualHubRouteTableRouteSpec struct {
 
 // VirtualHubRouteTableRouteStatus defines the observed state of VirtualHubRouteTableRoute.
 type VirtualHubRouteTableRouteStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VirtualHubRouteTableRouteObservation_2 `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VirtualHubRouteTableRouteObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

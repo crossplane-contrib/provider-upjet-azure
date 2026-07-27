@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SystemTopicIdentityInitParameters struct {
@@ -66,11 +66,11 @@ type SystemTopicInitParameters struct {
 
 	// Reference to a Account in storage to populate sourceArmResourceId.
 	// +kubebuilder:validation:Optional
-	SourceArmResourceIDRef *v1.Reference `json:"sourceArmResourceIdRef,omitempty" tf:"-"`
+	SourceArmResourceIDRef *v2.Reference `json:"sourceArmResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate sourceArmResourceId.
 	// +kubebuilder:validation:Optional
-	SourceArmResourceIDSelector *v1.Selector `json:"sourceArmResourceIdSelector,omitempty" tf:"-"`
+	SourceArmResourceIDSelector *v2.Selector `json:"sourceArmResourceIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Event Grid System Topic ARM Source. Changing this forces a new Event Grid System Topic to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
@@ -79,11 +79,11 @@ type SystemTopicInitParameters struct {
 
 	// Reference to a Account in storage to populate sourceResourceId.
 	// +kubebuilder:validation:Optional
-	SourceResourceIDRef *v1.Reference `json:"sourceResourceIdRef,omitempty" tf:"-"`
+	SourceResourceIDRef *v2.Reference `json:"sourceResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate sourceResourceId.
 	// +kubebuilder:validation:Optional
-	SourceResourceIDSelector *v1.Selector `json:"sourceResourceIdSelector,omitempty" tf:"-"`
+	SourceResourceIDSelector *v2.Selector `json:"sourceResourceIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Event Grid System Topic.
 	// +mapType=granular
@@ -144,11 +144,11 @@ type SystemTopicParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The ID of the Event Grid System Topic.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
@@ -158,11 +158,11 @@ type SystemTopicParameters struct {
 
 	// Reference to a Account in storage to populate sourceArmResourceId.
 	// +kubebuilder:validation:Optional
-	SourceArmResourceIDRef *v1.Reference `json:"sourceArmResourceIdRef,omitempty" tf:"-"`
+	SourceArmResourceIDRef *v2.Reference `json:"sourceArmResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate sourceArmResourceId.
 	// +kubebuilder:validation:Optional
-	SourceArmResourceIDSelector *v1.Selector `json:"sourceArmResourceIdSelector,omitempty" tf:"-"`
+	SourceArmResourceIDSelector *v2.Selector `json:"sourceArmResourceIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Event Grid System Topic ARM Source. Changing this forces a new Event Grid System Topic to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
@@ -172,11 +172,11 @@ type SystemTopicParameters struct {
 
 	// Reference to a Account in storage to populate sourceResourceId.
 	// +kubebuilder:validation:Optional
-	SourceResourceIDRef *v1.Reference `json:"sourceResourceIdRef,omitempty" tf:"-"`
+	SourceResourceIDRef *v2.Reference `json:"sourceResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate sourceResourceId.
 	// +kubebuilder:validation:Optional
-	SourceResourceIDSelector *v1.Selector `json:"sourceResourceIdSelector,omitempty" tf:"-"`
+	SourceResourceIDSelector *v2.Selector `json:"sourceResourceIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Event Grid System Topic.
 	// +kubebuilder:validation:Optional
@@ -190,8 +190,8 @@ type SystemTopicParameters struct {
 
 // SystemTopicSpec defines the desired state of SystemTopic
 type SystemTopicSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SystemTopicParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SystemTopicParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -207,8 +207,8 @@ type SystemTopicSpec struct {
 
 // SystemTopicStatus defines the observed state of SystemTopic.
 type SystemTopicStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SystemTopicObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SystemTopicObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

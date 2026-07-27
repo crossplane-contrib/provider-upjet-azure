@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ConnectionConfigurationInitParameters struct {
@@ -90,11 +90,11 @@ type PointToSiteVPNGatewayInitParameters struct {
 
 	// Reference to a VPNServerConfiguration in network to populate vpnServerConfigurationId.
 	// +kubebuilder:validation:Optional
-	VPNServerConfigurationIDRef *v1.Reference `json:"vpnServerConfigurationIdRef,omitempty" tf:"-"`
+	VPNServerConfigurationIDRef *v2.Reference `json:"vpnServerConfigurationIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPNServerConfiguration in network to populate vpnServerConfigurationId.
 	// +kubebuilder:validation:Optional
-	VPNServerConfigurationIDSelector *v1.Selector `json:"vpnServerConfigurationIdSelector,omitempty" tf:"-"`
+	VPNServerConfigurationIDSelector *v2.Selector `json:"vpnServerConfigurationIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Virtual Hub where this Point-to-Site VPN Gateway should exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta1.VirtualHub
@@ -103,11 +103,11 @@ type PointToSiteVPNGatewayInitParameters struct {
 
 	// Reference to a VirtualHub in network to populate virtualHubId.
 	// +kubebuilder:validation:Optional
-	VirtualHubIDRef *v1.Reference `json:"virtualHubIdRef,omitempty" tf:"-"`
+	VirtualHubIDRef *v2.Reference `json:"virtualHubIdRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualHub in network to populate virtualHubId.
 	// +kubebuilder:validation:Optional
-	VirtualHubIDSelector *v1.Selector `json:"virtualHubIdSelector,omitempty" tf:"-"`
+	VirtualHubIDSelector *v2.Selector `json:"virtualHubIdSelector,omitempty" tf:"-"`
 }
 
 type PointToSiteVPNGatewayObservation struct {
@@ -165,11 +165,11 @@ type PointToSiteVPNGatewayParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Is the Routing Preference for the Public IP Interface of the VPN Gateway enabled? Defaults to false. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -192,11 +192,11 @@ type PointToSiteVPNGatewayParameters struct {
 
 	// Reference to a VPNServerConfiguration in network to populate vpnServerConfigurationId.
 	// +kubebuilder:validation:Optional
-	VPNServerConfigurationIDRef *v1.Reference `json:"vpnServerConfigurationIdRef,omitempty" tf:"-"`
+	VPNServerConfigurationIDRef *v2.Reference `json:"vpnServerConfigurationIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPNServerConfiguration in network to populate vpnServerConfigurationId.
 	// +kubebuilder:validation:Optional
-	VPNServerConfigurationIDSelector *v1.Selector `json:"vpnServerConfigurationIdSelector,omitempty" tf:"-"`
+	VPNServerConfigurationIDSelector *v2.Selector `json:"vpnServerConfigurationIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Virtual Hub where this Point-to-Site VPN Gateway should exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta1.VirtualHub
@@ -206,11 +206,11 @@ type PointToSiteVPNGatewayParameters struct {
 
 	// Reference to a VirtualHub in network to populate virtualHubId.
 	// +kubebuilder:validation:Optional
-	VirtualHubIDRef *v1.Reference `json:"virtualHubIdRef,omitempty" tf:"-"`
+	VirtualHubIDRef *v2.Reference `json:"virtualHubIdRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualHub in network to populate virtualHubId.
 	// +kubebuilder:validation:Optional
-	VirtualHubIDSelector *v1.Selector `json:"virtualHubIdSelector,omitempty" tf:"-"`
+	VirtualHubIDSelector *v2.Selector `json:"virtualHubIdSelector,omitempty" tf:"-"`
 }
 
 type RouteInitParameters struct {
@@ -318,8 +318,8 @@ type VPNClientAddressPoolParameters struct {
 
 // PointToSiteVPNGatewaySpec defines the desired state of PointToSiteVPNGateway
 type PointToSiteVPNGatewaySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     PointToSiteVPNGatewayParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   PointToSiteVPNGatewayParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -335,8 +335,8 @@ type PointToSiteVPNGatewaySpec struct {
 
 // PointToSiteVPNGatewayStatus defines the observed state of PointToSiteVPNGateway.
 type PointToSiteVPNGatewayStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PointToSiteVPNGatewayObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PointToSiteVPNGatewayObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

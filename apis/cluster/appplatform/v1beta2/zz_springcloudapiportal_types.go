@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SpringCloudAPIPortalInitParameters struct {
@@ -26,11 +26,11 @@ type SpringCloudAPIPortalInitParameters struct {
 
 	// References to SpringCloudGateway in appplatform to populate gatewayIds.
 	// +kubebuilder:validation:Optional
-	GatewayIdsRefs []v1.Reference `json:"gatewayIdsRefs,omitempty" tf:"-"`
+	GatewayIdsRefs []v2.Reference `json:"gatewayIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SpringCloudGateway in appplatform to populate gatewayIds.
 	// +kubebuilder:validation:Optional
-	GatewayIdsSelector *v1.Selector `json:"gatewayIdsSelector,omitempty" tf:"-"`
+	GatewayIdsSelector *v2.Selector `json:"gatewayIdsSelector,omitempty" tf:"-"`
 
 	// is only https is allowed?
 	HTTPSOnlyEnabled *bool `json:"httpsOnlyEnabled,omitempty" tf:"https_only_enabled,omitempty"`
@@ -91,11 +91,11 @@ type SpringCloudAPIPortalParameters struct {
 
 	// References to SpringCloudGateway in appplatform to populate gatewayIds.
 	// +kubebuilder:validation:Optional
-	GatewayIdsRefs []v1.Reference `json:"gatewayIdsRefs,omitempty" tf:"-"`
+	GatewayIdsRefs []v2.Reference `json:"gatewayIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of SpringCloudGateway in appplatform to populate gatewayIds.
 	// +kubebuilder:validation:Optional
-	GatewayIdsSelector *v1.Selector `json:"gatewayIdsSelector,omitempty" tf:"-"`
+	GatewayIdsSelector *v2.Selector `json:"gatewayIdsSelector,omitempty" tf:"-"`
 
 	// is only https is allowed?
 	// +kubebuilder:validation:Optional
@@ -117,11 +117,11 @@ type SpringCloudAPIPortalParameters struct {
 
 	// Reference to a SpringCloudService in appplatform to populate springCloudServiceId.
 	// +kubebuilder:validation:Optional
-	SpringCloudServiceIDRef *v1.Reference `json:"springCloudServiceIdRef,omitempty" tf:"-"`
+	SpringCloudServiceIDRef *v2.Reference `json:"springCloudServiceIdRef,omitempty" tf:"-"`
 
 	// Selector for a SpringCloudService in appplatform to populate springCloudServiceId.
 	// +kubebuilder:validation:Optional
-	SpringCloudServiceIDSelector *v1.Selector `json:"springCloudServiceIdSelector,omitempty" tf:"-"`
+	SpringCloudServiceIDSelector *v2.Selector `json:"springCloudServiceIdSelector,omitempty" tf:"-"`
 
 	// A sso block as defined below.
 	// +kubebuilder:validation:Optional
@@ -182,8 +182,8 @@ type SsoParameters struct {
 
 // SpringCloudAPIPortalSpec defines the desired state of SpringCloudAPIPortal
 type SpringCloudAPIPortalSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SpringCloudAPIPortalParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SpringCloudAPIPortalParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -199,8 +199,8 @@ type SpringCloudAPIPortalSpec struct {
 
 // SpringCloudAPIPortalStatus defines the observed state of SpringCloudAPIPortal.
 type SpringCloudAPIPortalStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SpringCloudAPIPortalObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SpringCloudAPIPortalObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

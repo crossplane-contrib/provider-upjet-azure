@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DefinitionInitParameters struct {
@@ -33,11 +32,11 @@ type DefinitionInitParameters struct {
 
 	// References to ResourceGroup in azure to populate serviceResources.
 	// +kubebuilder:validation:Optional
-	ServiceResourcesRefs []v1.NamespacedReference `json:"serviceResourcesRefs,omitempty" tf:"-"`
+	ServiceResourcesRefs []v2.NamespacedReference `json:"serviceResourcesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of ResourceGroup in azure to populate serviceResources.
 	// +kubebuilder:validation:Optional
-	ServiceResourcesSelector *v1.NamespacedSelector `json:"serviceResourcesSelector,omitempty" tf:"-"`
+	ServiceResourcesSelector *v2.NamespacedSelector `json:"serviceResourcesSelector,omitempty" tf:"-"`
 }
 
 type DefinitionObservation struct {
@@ -79,11 +78,11 @@ type DefinitionParameters struct {
 
 	// References to ResourceGroup in azure to populate serviceResources.
 	// +kubebuilder:validation:Optional
-	ServiceResourcesRefs []v1.NamespacedReference `json:"serviceResourcesRefs,omitempty" tf:"-"`
+	ServiceResourcesRefs []v2.NamespacedReference `json:"serviceResourcesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of ResourceGroup in azure to populate serviceResources.
 	// +kubebuilder:validation:Optional
-	ServiceResourcesSelector *v1.NamespacedSelector `json:"serviceResourcesSelector,omitempty" tf:"-"`
+	ServiceResourcesSelector *v2.NamespacedSelector `json:"serviceResourcesSelector,omitempty" tf:"-"`
 }
 
 type SubnetServiceEndpointStoragePolicyInitParameters struct {
@@ -135,11 +134,11 @@ type SubnetServiceEndpointStoragePolicyParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Subnet Service Endpoint Storage Policy.
 	// +kubebuilder:validation:Optional
@@ -166,8 +165,8 @@ type SubnetServiceEndpointStoragePolicySpec struct {
 
 // SubnetServiceEndpointStoragePolicyStatus defines the observed state of SubnetServiceEndpointStoragePolicy.
 type SubnetServiceEndpointStoragePolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SubnetServiceEndpointStoragePolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SubnetServiceEndpointStoragePolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

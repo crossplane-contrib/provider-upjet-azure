@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type PowerBIEmbeddedInitParameters struct {
@@ -81,11 +81,11 @@ type PowerBIEmbeddedParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Sets the PowerBI Embedded's pricing level's SKU. Possible values include: A1, A2, A3, A4, A5, A6, A7 and A8.
 	// +kubebuilder:validation:Optional
@@ -99,8 +99,8 @@ type PowerBIEmbeddedParameters struct {
 
 // PowerBIEmbeddedSpec defines the desired state of PowerBIEmbedded
 type PowerBIEmbeddedSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     PowerBIEmbeddedParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   PowerBIEmbeddedParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -116,8 +116,8 @@ type PowerBIEmbeddedSpec struct {
 
 // PowerBIEmbeddedStatus defines the observed state of PowerBIEmbedded.
 type PowerBIEmbeddedStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PowerBIEmbeddedObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PowerBIEmbeddedObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ComputeClusterIdentityInitParameters struct {
@@ -73,11 +72,11 @@ type ComputeClusterInitParameters struct {
 
 	// Reference to a Workspace in machinelearningservices to populate machineLearningWorkspaceId.
 	// +kubebuilder:validation:Optional
-	MachineLearningWorkspaceIDRef *v1.NamespacedReference `json:"machineLearningWorkspaceIdRef,omitempty" tf:"-"`
+	MachineLearningWorkspaceIDRef *v2.NamespacedReference `json:"machineLearningWorkspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in machinelearningservices to populate machineLearningWorkspaceId.
 	// +kubebuilder:validation:Optional
-	MachineLearningWorkspaceIDSelector *v1.NamespacedSelector `json:"machineLearningWorkspaceIdSelector,omitempty" tf:"-"`
+	MachineLearningWorkspaceIDSelector *v2.NamespacedSelector `json:"machineLearningWorkspaceIdSelector,omitempty" tf:"-"`
 
 	// The name which should be used for this Machine Learning Compute Cluster. Changing this forces a new Machine Learning Compute Cluster to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -101,11 +100,11 @@ type ComputeClusterInitParameters struct {
 
 	// Reference to a Subnet in network to populate subnetResourceId.
 	// +kubebuilder:validation:Optional
-	SubnetResourceIDRef *v1.NamespacedReference `json:"subnetResourceIdRef,omitempty" tf:"-"`
+	SubnetResourceIDRef *v2.NamespacedReference `json:"subnetResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetResourceId.
 	// +kubebuilder:validation:Optional
-	SubnetResourceIDSelector *v1.NamespacedSelector `json:"subnetResourceIdSelector,omitempty" tf:"-"`
+	SubnetResourceIDSelector *v2.NamespacedSelector `json:"subnetResourceIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Machine Learning Compute Cluster.
 	// +mapType=granular
@@ -193,11 +192,11 @@ type ComputeClusterParameters struct {
 
 	// Reference to a Workspace in machinelearningservices to populate machineLearningWorkspaceId.
 	// +kubebuilder:validation:Optional
-	MachineLearningWorkspaceIDRef *v1.NamespacedReference `json:"machineLearningWorkspaceIdRef,omitempty" tf:"-"`
+	MachineLearningWorkspaceIDRef *v2.NamespacedReference `json:"machineLearningWorkspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in machinelearningservices to populate machineLearningWorkspaceId.
 	// +kubebuilder:validation:Optional
-	MachineLearningWorkspaceIDSelector *v1.NamespacedSelector `json:"machineLearningWorkspaceIdSelector,omitempty" tf:"-"`
+	MachineLearningWorkspaceIDSelector *v2.NamespacedSelector `json:"machineLearningWorkspaceIdSelector,omitempty" tf:"-"`
 
 	// The name which should be used for this Machine Learning Compute Cluster. Changing this forces a new Machine Learning Compute Cluster to be created.
 	// +kubebuilder:validation:Optional
@@ -227,11 +226,11 @@ type ComputeClusterParameters struct {
 
 	// Reference to a Subnet in network to populate subnetResourceId.
 	// +kubebuilder:validation:Optional
-	SubnetResourceIDRef *v1.NamespacedReference `json:"subnetResourceIdRef,omitempty" tf:"-"`
+	SubnetResourceIDRef *v2.NamespacedReference `json:"subnetResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetResourceId.
 	// +kubebuilder:validation:Optional
-	SubnetResourceIDSelector *v1.NamespacedSelector `json:"subnetResourceIdSelector,omitempty" tf:"-"`
+	SubnetResourceIDSelector *v2.NamespacedSelector `json:"subnetResourceIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Machine Learning Compute Cluster.
 	// +kubebuilder:validation:Optional
@@ -250,7 +249,7 @@ type ComputeClusterParameters struct {
 type SSHInitParameters struct {
 
 	// Password of the administrator user account. Changing this forces a new Machine Learning Compute Cluster to be created.
-	AdminPasswordSecretRef *v1.LocalSecretKeySelector `json:"adminPasswordSecretRef,omitempty" tf:"-"`
+	AdminPasswordSecretRef *v2.LocalSecretKeySelector `json:"adminPasswordSecretRef,omitempty" tf:"-"`
 
 	// Name of the administrator user account which can be used to SSH to nodes. Changing this forces a new Machine Learning Compute Cluster to be created.
 	AdminUsername *string `json:"adminUsername,omitempty" tf:"admin_username,omitempty"`
@@ -272,7 +271,7 @@ type SSHParameters struct {
 
 	// Password of the administrator user account. Changing this forces a new Machine Learning Compute Cluster to be created.
 	// +kubebuilder:validation:Optional
-	AdminPasswordSecretRef *v1.LocalSecretKeySelector `json:"adminPasswordSecretRef,omitempty" tf:"-"`
+	AdminPasswordSecretRef *v2.LocalSecretKeySelector `json:"adminPasswordSecretRef,omitempty" tf:"-"`
 
 	// Name of the administrator user account which can be used to SSH to nodes. Changing this forces a new Machine Learning Compute Cluster to be created.
 	// +kubebuilder:validation:Optional
@@ -341,8 +340,8 @@ type ComputeClusterSpec struct {
 
 // ComputeClusterStatus defines the observed state of ComputeCluster.
 type ComputeClusterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ComputeClusterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ComputeClusterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

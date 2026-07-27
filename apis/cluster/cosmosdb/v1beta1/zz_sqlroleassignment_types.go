@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SQLRoleAssignmentInitParameters struct {
@@ -21,11 +21,11 @@ type SQLRoleAssignmentInitParameters struct {
 
 	// Reference to a Account in cosmosdb to populate accountName.
 	// +kubebuilder:validation:Optional
-	AccountNameRef *v1.Reference `json:"accountNameRef,omitempty" tf:"-"`
+	AccountNameRef *v2.Reference `json:"accountNameRef,omitempty" tf:"-"`
 
 	// Selector for a Account in cosmosdb to populate accountName.
 	// +kubebuilder:validation:Optional
-	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
+	AccountNameSelector *v2.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
 	// The GUID as the name of the Cosmos DB SQL Role Assignment - one will be generated if not specified. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -39,11 +39,11 @@ type SQLRoleAssignmentInitParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The resource ID of the Cosmos DB SQL Role Definition.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/cosmosdb/v1beta1.SQLRoleDefinition
@@ -52,11 +52,11 @@ type SQLRoleAssignmentInitParameters struct {
 
 	// Reference to a SQLRoleDefinition in cosmosdb to populate roleDefinitionId.
 	// +kubebuilder:validation:Optional
-	RoleDefinitionIDRef *v1.Reference `json:"roleDefinitionIdRef,omitempty" tf:"-"`
+	RoleDefinitionIDRef *v2.Reference `json:"roleDefinitionIdRef,omitempty" tf:"-"`
 
 	// Selector for a SQLRoleDefinition in cosmosdb to populate roleDefinitionId.
 	// +kubebuilder:validation:Optional
-	RoleDefinitionIDSelector *v1.Selector `json:"roleDefinitionIdSelector,omitempty" tf:"-"`
+	RoleDefinitionIDSelector *v2.Selector `json:"roleDefinitionIdSelector,omitempty" tf:"-"`
 
 	// The data plane resource path for which access is being granted through this Cosmos DB SQL Role Assignment. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/cosmosdb/v1beta2.Account
@@ -65,11 +65,11 @@ type SQLRoleAssignmentInitParameters struct {
 
 	// Reference to a Account in cosmosdb to populate scope.
 	// +kubebuilder:validation:Optional
-	ScopeRef *v1.Reference `json:"scopeRef,omitempty" tf:"-"`
+	ScopeRef *v2.Reference `json:"scopeRef,omitempty" tf:"-"`
 
 	// Selector for a Account in cosmosdb to populate scope.
 	// +kubebuilder:validation:Optional
-	ScopeSelector *v1.Selector `json:"scopeSelector,omitempty" tf:"-"`
+	ScopeSelector *v2.Selector `json:"scopeSelector,omitempty" tf:"-"`
 }
 
 type SQLRoleAssignmentObservation struct {
@@ -105,11 +105,11 @@ type SQLRoleAssignmentParameters struct {
 
 	// Reference to a Account in cosmosdb to populate accountName.
 	// +kubebuilder:validation:Optional
-	AccountNameRef *v1.Reference `json:"accountNameRef,omitempty" tf:"-"`
+	AccountNameRef *v2.Reference `json:"accountNameRef,omitempty" tf:"-"`
 
 	// Selector for a Account in cosmosdb to populate accountName.
 	// +kubebuilder:validation:Optional
-	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
+	AccountNameSelector *v2.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
 	// The GUID as the name of the Cosmos DB SQL Role Assignment - one will be generated if not specified. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -126,11 +126,11 @@ type SQLRoleAssignmentParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The resource ID of the Cosmos DB SQL Role Definition.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/cosmosdb/v1beta1.SQLRoleDefinition
@@ -140,11 +140,11 @@ type SQLRoleAssignmentParameters struct {
 
 	// Reference to a SQLRoleDefinition in cosmosdb to populate roleDefinitionId.
 	// +kubebuilder:validation:Optional
-	RoleDefinitionIDRef *v1.Reference `json:"roleDefinitionIdRef,omitempty" tf:"-"`
+	RoleDefinitionIDRef *v2.Reference `json:"roleDefinitionIdRef,omitempty" tf:"-"`
 
 	// Selector for a SQLRoleDefinition in cosmosdb to populate roleDefinitionId.
 	// +kubebuilder:validation:Optional
-	RoleDefinitionIDSelector *v1.Selector `json:"roleDefinitionIdSelector,omitempty" tf:"-"`
+	RoleDefinitionIDSelector *v2.Selector `json:"roleDefinitionIdSelector,omitempty" tf:"-"`
 
 	// The data plane resource path for which access is being granted through this Cosmos DB SQL Role Assignment. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/cosmosdb/v1beta2.Account
@@ -154,17 +154,17 @@ type SQLRoleAssignmentParameters struct {
 
 	// Reference to a Account in cosmosdb to populate scope.
 	// +kubebuilder:validation:Optional
-	ScopeRef *v1.Reference `json:"scopeRef,omitempty" tf:"-"`
+	ScopeRef *v2.Reference `json:"scopeRef,omitempty" tf:"-"`
 
 	// Selector for a Account in cosmosdb to populate scope.
 	// +kubebuilder:validation:Optional
-	ScopeSelector *v1.Selector `json:"scopeSelector,omitempty" tf:"-"`
+	ScopeSelector *v2.Selector `json:"scopeSelector,omitempty" tf:"-"`
 }
 
 // SQLRoleAssignmentSpec defines the desired state of SQLRoleAssignment
 type SQLRoleAssignmentSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SQLRoleAssignmentParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SQLRoleAssignmentParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -180,8 +180,8 @@ type SQLRoleAssignmentSpec struct {
 
 // SQLRoleAssignmentStatus defines the observed state of SQLRoleAssignment.
 type SQLRoleAssignmentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SQLRoleAssignmentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SQLRoleAssignmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

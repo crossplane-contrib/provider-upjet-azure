@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type LoadBalancerProbeInitParameters struct {
@@ -78,11 +78,11 @@ type LoadBalancerProbeParameters struct {
 
 	// Reference to a LoadBalancer in network to populate loadbalancerId.
 	// +kubebuilder:validation:Optional
-	LoadbalancerIDRef *v1.Reference `json:"loadbalancerIdRef,omitempty" tf:"-"`
+	LoadbalancerIDRef *v2.Reference `json:"loadbalancerIdRef,omitempty" tf:"-"`
 
 	// Selector for a LoadBalancer in network to populate loadbalancerId.
 	// +kubebuilder:validation:Optional
-	LoadbalancerIDSelector *v1.Selector `json:"loadbalancerIdSelector,omitempty" tf:"-"`
+	LoadbalancerIDSelector *v2.Selector `json:"loadbalancerIdSelector,omitempty" tf:"-"`
 
 	// The number of failed probe attempts after which the backend endpoint is removed from rotation. Default to 2. NumberOfProbes multiplied by intervalInSeconds value must be greater or equal to 10.Endpoints are returned to rotation when at least one probe is successful.
 	// +kubebuilder:validation:Optional
@@ -107,8 +107,8 @@ type LoadBalancerProbeParameters struct {
 
 // LoadBalancerProbeSpec defines the desired state of LoadBalancerProbe
 type LoadBalancerProbeSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     LoadBalancerProbeParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   LoadBalancerProbeParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -124,8 +124,8 @@ type LoadBalancerProbeSpec struct {
 
 // LoadBalancerProbeStatus defines the observed state of LoadBalancerProbe.
 type LoadBalancerProbeStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LoadBalancerProbeObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LoadBalancerProbeObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

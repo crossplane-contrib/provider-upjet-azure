@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type WorkspaceSQLAADAdminInitParameters struct {
@@ -28,11 +28,11 @@ type WorkspaceSQLAADAdminInitParameters struct {
 
 	// Reference to a Workspace in synapse to populate synapseWorkspaceId.
 	// +kubebuilder:validation:Optional
-	SynapseWorkspaceIDRef *v1.Reference `json:"synapseWorkspaceIdRef,omitempty" tf:"-"`
+	SynapseWorkspaceIDRef *v2.Reference `json:"synapseWorkspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in synapse to populate synapseWorkspaceId.
 	// +kubebuilder:validation:Optional
-	SynapseWorkspaceIDSelector *v1.Selector `json:"synapseWorkspaceIdSelector,omitempty" tf:"-"`
+	SynapseWorkspaceIDSelector *v2.Selector `json:"synapseWorkspaceIdSelector,omitempty" tf:"-"`
 
 	// The tenant id of the Azure AD SQL Administrator of this Synapse Workspace.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
@@ -74,11 +74,11 @@ type WorkspaceSQLAADAdminParameters struct {
 
 	// Reference to a Workspace in synapse to populate synapseWorkspaceId.
 	// +kubebuilder:validation:Optional
-	SynapseWorkspaceIDRef *v1.Reference `json:"synapseWorkspaceIdRef,omitempty" tf:"-"`
+	SynapseWorkspaceIDRef *v2.Reference `json:"synapseWorkspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in synapse to populate synapseWorkspaceId.
 	// +kubebuilder:validation:Optional
-	SynapseWorkspaceIDSelector *v1.Selector `json:"synapseWorkspaceIdSelector,omitempty" tf:"-"`
+	SynapseWorkspaceIDSelector *v2.Selector `json:"synapseWorkspaceIdSelector,omitempty" tf:"-"`
 
 	// The tenant id of the Azure AD SQL Administrator of this Synapse Workspace.
 	// +kubebuilder:validation:Optional
@@ -87,8 +87,8 @@ type WorkspaceSQLAADAdminParameters struct {
 
 // WorkspaceSQLAADAdminSpec defines the desired state of WorkspaceSQLAADAdmin
 type WorkspaceSQLAADAdminSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     WorkspaceSQLAADAdminParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   WorkspaceSQLAADAdminParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -104,8 +104,8 @@ type WorkspaceSQLAADAdminSpec struct {
 
 // WorkspaceSQLAADAdminStatus defines the observed state of WorkspaceSQLAADAdmin.
 type WorkspaceSQLAADAdminStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        WorkspaceSQLAADAdminObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               WorkspaceSQLAADAdminObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

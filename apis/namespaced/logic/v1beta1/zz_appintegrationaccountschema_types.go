@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AppIntegrationAccountSchemaInitParameters struct {
@@ -65,11 +64,11 @@ type AppIntegrationAccountSchemaParameters struct {
 
 	// Reference to a AppIntegrationAccount in logic to populate integrationAccountName.
 	// +kubebuilder:validation:Optional
-	IntegrationAccountNameRef *v1.NamespacedReference `json:"integrationAccountNameRef,omitempty" tf:"-"`
+	IntegrationAccountNameRef *v2.NamespacedReference `json:"integrationAccountNameRef,omitempty" tf:"-"`
 
 	// Selector for a AppIntegrationAccount in logic to populate integrationAccountName.
 	// +kubebuilder:validation:Optional
-	IntegrationAccountNameSelector *v1.NamespacedSelector `json:"integrationAccountNameSelector,omitempty" tf:"-"`
+	IntegrationAccountNameSelector *v2.NamespacedSelector `json:"integrationAccountNameSelector,omitempty" tf:"-"`
 
 	// The metadata of the Logic App Integration Account Schema.
 	// +kubebuilder:validation:Optional
@@ -82,11 +81,11 @@ type AppIntegrationAccountSchemaParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 }
 
 // AppIntegrationAccountSchemaSpec defines the desired state of AppIntegrationAccountSchema
@@ -108,8 +107,8 @@ type AppIntegrationAccountSchemaSpec struct {
 
 // AppIntegrationAccountSchemaStatus defines the observed state of AppIntegrationAccountSchema.
 type AppIntegrationAccountSchemaStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AppIntegrationAccountSchemaObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AppIntegrationAccountSchemaObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

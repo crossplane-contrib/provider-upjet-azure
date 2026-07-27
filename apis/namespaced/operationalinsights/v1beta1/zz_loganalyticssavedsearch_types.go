@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type LogAnalyticsSavedSearchInitParameters struct {
@@ -90,11 +89,11 @@ type LogAnalyticsSavedSearchParameters struct {
 
 	// Reference to a Workspace in operationalinsights to populate logAnalyticsWorkspaceId.
 	// +kubebuilder:validation:Optional
-	LogAnalyticsWorkspaceIDRef *v1.NamespacedReference `json:"logAnalyticsWorkspaceIdRef,omitempty" tf:"-"`
+	LogAnalyticsWorkspaceIDRef *v2.NamespacedReference `json:"logAnalyticsWorkspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in operationalinsights to populate logAnalyticsWorkspaceId.
 	// +kubebuilder:validation:Optional
-	LogAnalyticsWorkspaceIDSelector *v1.NamespacedSelector `json:"logAnalyticsWorkspaceIdSelector,omitempty" tf:"-"`
+	LogAnalyticsWorkspaceIDSelector *v2.NamespacedSelector `json:"logAnalyticsWorkspaceIdSelector,omitempty" tf:"-"`
 
 	// The query expression for the saved search. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -125,8 +124,8 @@ type LogAnalyticsSavedSearchSpec struct {
 
 // LogAnalyticsSavedSearchStatus defines the observed state of LogAnalyticsSavedSearch.
 type LogAnalyticsSavedSearchStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LogAnalyticsSavedSearchObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LogAnalyticsSavedSearchObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

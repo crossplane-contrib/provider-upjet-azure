@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type FlexibleServerConfigurationInitParameters struct {
@@ -43,11 +43,11 @@ type FlexibleServerConfigurationParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the MySQL Flexible Server. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/dbformysql/v1beta2.FlexibleServer
@@ -56,11 +56,11 @@ type FlexibleServerConfigurationParameters struct {
 
 	// Reference to a FlexibleServer in dbformysql to populate serverName.
 	// +kubebuilder:validation:Optional
-	ServerNameRef *v1.Reference `json:"serverNameRef,omitempty" tf:"-"`
+	ServerNameRef *v2.Reference `json:"serverNameRef,omitempty" tf:"-"`
 
 	// Selector for a FlexibleServer in dbformysql to populate serverName.
 	// +kubebuilder:validation:Optional
-	ServerNameSelector *v1.Selector `json:"serverNameSelector,omitempty" tf:"-"`
+	ServerNameSelector *v2.Selector `json:"serverNameSelector,omitempty" tf:"-"`
 
 	// Specifies the value of the MySQL Flexible Server Configuration. See the MySQL documentation for valid values.
 	// +kubebuilder:validation:Optional
@@ -69,8 +69,8 @@ type FlexibleServerConfigurationParameters struct {
 
 // FlexibleServerConfigurationSpec defines the desired state of FlexibleServerConfiguration
 type FlexibleServerConfigurationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     FlexibleServerConfigurationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   FlexibleServerConfigurationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -86,8 +86,8 @@ type FlexibleServerConfigurationSpec struct {
 
 // FlexibleServerConfigurationStatus defines the observed state of FlexibleServerConfiguration.
 type FlexibleServerConfigurationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FlexibleServerConfigurationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FlexibleServerConfigurationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

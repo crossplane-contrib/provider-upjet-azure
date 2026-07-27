@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ApplicationLoadBalancerSubnetAssociationInitParameters struct {
@@ -23,11 +22,11 @@ type ApplicationLoadBalancerSubnetAssociationInitParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Application Gateway for Containers Association.
 	// +mapType=granular
@@ -60,11 +59,11 @@ type ApplicationLoadBalancerSubnetAssociationParameters struct {
 
 	// Reference to a ApplicationLoadBalancer in servicenetworking to populate applicationLoadBalancerId.
 	// +kubebuilder:validation:Optional
-	ApplicationLoadBalancerIDRef *v1.NamespacedReference `json:"applicationLoadBalancerIdRef,omitempty" tf:"-"`
+	ApplicationLoadBalancerIDRef *v2.NamespacedReference `json:"applicationLoadBalancerIdRef,omitempty" tf:"-"`
 
 	// Selector for a ApplicationLoadBalancer in servicenetworking to populate applicationLoadBalancerId.
 	// +kubebuilder:validation:Optional
-	ApplicationLoadBalancerIDSelector *v1.NamespacedSelector `json:"applicationLoadBalancerIdSelector,omitempty" tf:"-"`
+	ApplicationLoadBalancerIDSelector *v2.NamespacedSelector `json:"applicationLoadBalancerIdSelector,omitempty" tf:"-"`
 
 	// The ID of the subnet which the Application Gateway for Containers associated to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
@@ -74,11 +73,11 @@ type ApplicationLoadBalancerSubnetAssociationParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Application Gateway for Containers Association.
 	// +kubebuilder:validation:Optional
@@ -105,8 +104,8 @@ type ApplicationLoadBalancerSubnetAssociationSpec struct {
 
 // ApplicationLoadBalancerSubnetAssociationStatus defines the observed state of ApplicationLoadBalancerSubnetAssociation.
 type ApplicationLoadBalancerSubnetAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ApplicationLoadBalancerSubnetAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ApplicationLoadBalancerSubnetAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

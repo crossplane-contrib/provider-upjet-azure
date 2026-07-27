@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SQLPoolExtendedAuditingPolicyInitParameters struct {
@@ -25,7 +25,7 @@ type SQLPoolExtendedAuditingPolicyInitParameters struct {
 	StorageAccountAccessKeyIsSecondary *bool `json:"storageAccountAccessKeyIsSecondary,omitempty" tf:"storage_account_access_key_is_secondary,omitempty"`
 
 	// The access key to use for the auditing storage account.
-	StorageAccountAccessKeySecretRef *v1.SecretKeySelector `json:"storageAccountAccessKeySecretRef,omitempty" tf:"-"`
+	StorageAccountAccessKeySecretRef *v2.SecretKeySelector `json:"storageAccountAccessKeySecretRef,omitempty" tf:"-"`
 
 	// The blob storage endpoint (e.g. https://example.blob.core.windows.net). This blob storage will hold all extended auditing logs.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
@@ -34,11 +34,11 @@ type SQLPoolExtendedAuditingPolicyInitParameters struct {
 
 	// Reference to a Account in storage to populate storageEndpoint.
 	// +kubebuilder:validation:Optional
-	StorageEndpointRef *v1.Reference `json:"storageEndpointRef,omitempty" tf:"-"`
+	StorageEndpointRef *v2.Reference `json:"storageEndpointRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageEndpoint.
 	// +kubebuilder:validation:Optional
-	StorageEndpointSelector *v1.Selector `json:"storageEndpointSelector,omitempty" tf:"-"`
+	StorageEndpointSelector *v2.Selector `json:"storageEndpointSelector,omitempty" tf:"-"`
 }
 
 type SQLPoolExtendedAuditingPolicyObservation struct {
@@ -80,11 +80,11 @@ type SQLPoolExtendedAuditingPolicyParameters struct {
 
 	// Reference to a SQLPool in synapse to populate sqlPoolId.
 	// +kubebuilder:validation:Optional
-	SQLPoolIDRef *v1.Reference `json:"sqlPoolIdRef,omitempty" tf:"-"`
+	SQLPoolIDRef *v2.Reference `json:"sqlPoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a SQLPool in synapse to populate sqlPoolId.
 	// +kubebuilder:validation:Optional
-	SQLPoolIDSelector *v1.Selector `json:"sqlPoolIdSelector,omitempty" tf:"-"`
+	SQLPoolIDSelector *v2.Selector `json:"sqlPoolIdSelector,omitempty" tf:"-"`
 
 	// Is storage_account_access_key value the storage's secondary key?
 	// +kubebuilder:validation:Optional
@@ -92,7 +92,7 @@ type SQLPoolExtendedAuditingPolicyParameters struct {
 
 	// The access key to use for the auditing storage account.
 	// +kubebuilder:validation:Optional
-	StorageAccountAccessKeySecretRef *v1.SecretKeySelector `json:"storageAccountAccessKeySecretRef,omitempty" tf:"-"`
+	StorageAccountAccessKeySecretRef *v2.SecretKeySelector `json:"storageAccountAccessKeySecretRef,omitempty" tf:"-"`
 
 	// The blob storage endpoint (e.g. https://example.blob.core.windows.net). This blob storage will hold all extended auditing logs.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
@@ -102,17 +102,17 @@ type SQLPoolExtendedAuditingPolicyParameters struct {
 
 	// Reference to a Account in storage to populate storageEndpoint.
 	// +kubebuilder:validation:Optional
-	StorageEndpointRef *v1.Reference `json:"storageEndpointRef,omitempty" tf:"-"`
+	StorageEndpointRef *v2.Reference `json:"storageEndpointRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageEndpoint.
 	// +kubebuilder:validation:Optional
-	StorageEndpointSelector *v1.Selector `json:"storageEndpointSelector,omitempty" tf:"-"`
+	StorageEndpointSelector *v2.Selector `json:"storageEndpointSelector,omitempty" tf:"-"`
 }
 
 // SQLPoolExtendedAuditingPolicySpec defines the desired state of SQLPoolExtendedAuditingPolicy
 type SQLPoolExtendedAuditingPolicySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SQLPoolExtendedAuditingPolicyParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SQLPoolExtendedAuditingPolicyParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -128,8 +128,8 @@ type SQLPoolExtendedAuditingPolicySpec struct {
 
 // SQLPoolExtendedAuditingPolicyStatus defines the observed state of SQLPoolExtendedAuditingPolicy.
 type SQLPoolExtendedAuditingPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SQLPoolExtendedAuditingPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SQLPoolExtendedAuditingPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

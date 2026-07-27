@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type TopicAuthorizationRuleInitParameters struct {
@@ -65,17 +65,17 @@ type TopicAuthorizationRuleParameters struct {
 
 	// Reference to a Topic in servicebus to populate topicId.
 	// +kubebuilder:validation:Optional
-	TopicIDRef *v1.Reference `json:"topicIdRef,omitempty" tf:"-"`
+	TopicIDRef *v2.Reference `json:"topicIdRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in servicebus to populate topicId.
 	// +kubebuilder:validation:Optional
-	TopicIDSelector *v1.Selector `json:"topicIdSelector,omitempty" tf:"-"`
+	TopicIDSelector *v2.Selector `json:"topicIdSelector,omitempty" tf:"-"`
 }
 
 // TopicAuthorizationRuleSpec defines the desired state of TopicAuthorizationRule
 type TopicAuthorizationRuleSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     TopicAuthorizationRuleParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   TopicAuthorizationRuleParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -91,8 +91,8 @@ type TopicAuthorizationRuleSpec struct {
 
 // TopicAuthorizationRuleStatus defines the observed state of TopicAuthorizationRule.
 type TopicAuthorizationRuleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        TopicAuthorizationRuleObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               TopicAuthorizationRuleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DNSARecordInitParameters struct {
@@ -33,11 +33,11 @@ type DNSARecordInitParameters struct {
 
 	// Reference to a PublicIP in network to populate targetResourceId.
 	// +kubebuilder:validation:Optional
-	TargetResourceIDRef *v1.Reference `json:"targetResourceIdRef,omitempty" tf:"-"`
+	TargetResourceIDRef *v2.Reference `json:"targetResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a PublicIP in network to populate targetResourceId.
 	// +kubebuilder:validation:Optional
-	TargetResourceIDSelector *v1.Selector `json:"targetResourceIdSelector,omitempty" tf:"-"`
+	TargetResourceIDSelector *v2.Selector `json:"targetResourceIdSelector,omitempty" tf:"-"`
 }
 
 type DNSARecordObservation struct {
@@ -83,11 +83,11 @@ type DNSARecordParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The Time To Live (TTL) of the DNS record in seconds.
 	// +kubebuilder:validation:Optional
@@ -106,11 +106,11 @@ type DNSARecordParameters struct {
 
 	// Reference to a PublicIP in network to populate targetResourceId.
 	// +kubebuilder:validation:Optional
-	TargetResourceIDRef *v1.Reference `json:"targetResourceIdRef,omitempty" tf:"-"`
+	TargetResourceIDRef *v2.Reference `json:"targetResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a PublicIP in network to populate targetResourceId.
 	// +kubebuilder:validation:Optional
-	TargetResourceIDSelector *v1.Selector `json:"targetResourceIdSelector,omitempty" tf:"-"`
+	TargetResourceIDSelector *v2.Selector `json:"targetResourceIdSelector,omitempty" tf:"-"`
 
 	// Specifies the DNS Zone where the resource exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.DNSZone
@@ -119,17 +119,17 @@ type DNSARecordParameters struct {
 
 	// Reference to a DNSZone in network to populate zoneName.
 	// +kubebuilder:validation:Optional
-	ZoneNameRef *v1.Reference `json:"zoneNameRef,omitempty" tf:"-"`
+	ZoneNameRef *v2.Reference `json:"zoneNameRef,omitempty" tf:"-"`
 
 	// Selector for a DNSZone in network to populate zoneName.
 	// +kubebuilder:validation:Optional
-	ZoneNameSelector *v1.Selector `json:"zoneNameSelector,omitempty" tf:"-"`
+	ZoneNameSelector *v2.Selector `json:"zoneNameSelector,omitempty" tf:"-"`
 }
 
 // DNSARecordSpec defines the desired state of DNSARecord
 type DNSARecordSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     DNSARecordParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   DNSARecordParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -145,8 +145,8 @@ type DNSARecordSpec struct {
 
 // DNSARecordStatus defines the observed state of DNSARecord.
 type DNSARecordStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DNSARecordObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DNSARecordObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

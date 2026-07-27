@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type LaunchInitParameters struct {
@@ -91,11 +90,11 @@ type SpringCloudBuildPackBindingParameters struct {
 
 	// Reference to a SpringCloudBuilder in appplatform to populate springCloudBuilderId.
 	// +kubebuilder:validation:Optional
-	SpringCloudBuilderIDRef *v1.NamespacedReference `json:"springCloudBuilderIdRef,omitempty" tf:"-"`
+	SpringCloudBuilderIDRef *v2.NamespacedReference `json:"springCloudBuilderIdRef,omitempty" tf:"-"`
 
 	// Selector for a SpringCloudBuilder in appplatform to populate springCloudBuilderId.
 	// +kubebuilder:validation:Optional
-	SpringCloudBuilderIDSelector *v1.NamespacedSelector `json:"springCloudBuilderIdSelector,omitempty" tf:"-"`
+	SpringCloudBuilderIDSelector *v2.NamespacedSelector `json:"springCloudBuilderIdSelector,omitempty" tf:"-"`
 }
 
 // SpringCloudBuildPackBindingSpec defines the desired state of SpringCloudBuildPackBinding
@@ -117,8 +116,8 @@ type SpringCloudBuildPackBindingSpec struct {
 
 // SpringCloudBuildPackBindingStatus defines the observed state of SpringCloudBuildPackBinding.
 type SpringCloudBuildPackBindingStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SpringCloudBuildPackBindingObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SpringCloudBuildPackBindingObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

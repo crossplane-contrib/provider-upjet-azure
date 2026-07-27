@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AutonomousDatabaseBackupInitParameters struct {
@@ -47,11 +47,11 @@ type AutonomousDatabaseBackupParameters struct {
 
 	// Reference to a AutonomousDatabase in oracle to populate autonomousDatabaseId.
 	// +kubebuilder:validation:Optional
-	AutonomousDatabaseIDRef *v1.Reference `json:"autonomousDatabaseIdRef,omitempty" tf:"-"`
+	AutonomousDatabaseIDRef *v2.Reference `json:"autonomousDatabaseIdRef,omitempty" tf:"-"`
 
 	// Selector for a AutonomousDatabase in oracle to populate autonomousDatabaseId.
 	// +kubebuilder:validation:Optional
-	AutonomousDatabaseIDSelector *v1.Selector `json:"autonomousDatabaseIdSelector,omitempty" tf:"-"`
+	AutonomousDatabaseIDSelector *v2.Selector `json:"autonomousDatabaseIdSelector,omitempty" tf:"-"`
 
 	// (Updatable) The number of days to retain the backup. Must be between 90 and 3650 days.
 	// +kubebuilder:validation:Optional
@@ -64,8 +64,8 @@ type AutonomousDatabaseBackupParameters struct {
 
 // AutonomousDatabaseBackupSpec defines the desired state of AutonomousDatabaseBackup
 type AutonomousDatabaseBackupSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     AutonomousDatabaseBackupParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   AutonomousDatabaseBackupParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -81,8 +81,8 @@ type AutonomousDatabaseBackupSpec struct {
 
 // AutonomousDatabaseBackupStatus defines the observed state of AutonomousDatabaseBackup.
 type AutonomousDatabaseBackupStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AutonomousDatabaseBackupObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AutonomousDatabaseBackupObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

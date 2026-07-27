@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type LogAnalyticsSavedSearchInitParameters struct {
@@ -89,11 +89,11 @@ type LogAnalyticsSavedSearchParameters struct {
 
 	// Reference to a Workspace in operationalinsights to populate logAnalyticsWorkspaceId.
 	// +kubebuilder:validation:Optional
-	LogAnalyticsWorkspaceIDRef *v1.Reference `json:"logAnalyticsWorkspaceIdRef,omitempty" tf:"-"`
+	LogAnalyticsWorkspaceIDRef *v2.Reference `json:"logAnalyticsWorkspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in operationalinsights to populate logAnalyticsWorkspaceId.
 	// +kubebuilder:validation:Optional
-	LogAnalyticsWorkspaceIDSelector *v1.Selector `json:"logAnalyticsWorkspaceIdSelector,omitempty" tf:"-"`
+	LogAnalyticsWorkspaceIDSelector *v2.Selector `json:"logAnalyticsWorkspaceIdSelector,omitempty" tf:"-"`
 
 	// The query expression for the saved search. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -107,8 +107,8 @@ type LogAnalyticsSavedSearchParameters struct {
 
 // LogAnalyticsSavedSearchSpec defines the desired state of LogAnalyticsSavedSearch
 type LogAnalyticsSavedSearchSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     LogAnalyticsSavedSearchParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   LogAnalyticsSavedSearchParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -124,8 +124,8 @@ type LogAnalyticsSavedSearchSpec struct {
 
 // LogAnalyticsSavedSearchStatus defines the observed state of LogAnalyticsSavedSearch.
 type LogAnalyticsSavedSearchStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LogAnalyticsSavedSearchObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LogAnalyticsSavedSearchObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

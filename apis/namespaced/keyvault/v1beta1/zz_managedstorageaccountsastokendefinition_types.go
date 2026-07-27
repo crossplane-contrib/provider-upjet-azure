@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ManagedStorageAccountSASTokenDefinitionInitParameters struct {
@@ -65,11 +64,11 @@ type ManagedStorageAccountSASTokenDefinitionParameters struct {
 
 	// Reference to a ManagedStorageAccount in keyvault to populate managedStorageAccountId.
 	// +kubebuilder:validation:Optional
-	ManagedStorageAccountIDRef *v1.NamespacedReference `json:"managedStorageAccountIdRef,omitempty" tf:"-"`
+	ManagedStorageAccountIDRef *v2.NamespacedReference `json:"managedStorageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a ManagedStorageAccount in keyvault to populate managedStorageAccountId.
 	// +kubebuilder:validation:Optional
-	ManagedStorageAccountIDSelector *v1.NamespacedSelector `json:"managedStorageAccountIdSelector,omitempty" tf:"-"`
+	ManagedStorageAccountIDSelector *v2.NamespacedSelector `json:"managedStorageAccountIdSelector,omitempty" tf:"-"`
 
 	// The SAS definition token template signed with an arbitrary key. Tokens created according to the SAS definition will have the same properties as the template, but regenerated with a new validity period.
 	// +kubebuilder:validation:Optional
@@ -108,8 +107,8 @@ type ManagedStorageAccountSASTokenDefinitionSpec struct {
 
 // ManagedStorageAccountSASTokenDefinitionStatus defines the observed state of ManagedStorageAccountSASTokenDefinition.
 type ManagedStorageAccountSASTokenDefinitionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ManagedStorageAccountSASTokenDefinitionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ManagedStorageAccountSASTokenDefinitionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

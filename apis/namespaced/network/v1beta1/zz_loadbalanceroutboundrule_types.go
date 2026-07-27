@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type LoadBalancerOutboundRuleFrontendIPConfigurationInitParameters struct {
@@ -48,11 +47,11 @@ type LoadBalancerOutboundRuleInitParameters struct {
 
 	// Reference to a LoadBalancerBackendAddressPool in network to populate backendAddressPoolId.
 	// +kubebuilder:validation:Optional
-	BackendAddressPoolIDRef *v1.NamespacedReference `json:"backendAddressPoolIdRef,omitempty" tf:"-"`
+	BackendAddressPoolIDRef *v2.NamespacedReference `json:"backendAddressPoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a LoadBalancerBackendAddressPool in network to populate backendAddressPoolId.
 	// +kubebuilder:validation:Optional
-	BackendAddressPoolIDSelector *v1.NamespacedSelector `json:"backendAddressPoolIdSelector,omitempty" tf:"-"`
+	BackendAddressPoolIDSelector *v2.NamespacedSelector `json:"backendAddressPoolIdSelector,omitempty" tf:"-"`
 
 	EnableTCPReset *bool `json:"enableTcpReset,omitempty" tf:"enable_tcp_reset,omitempty"`
 
@@ -112,11 +111,11 @@ type LoadBalancerOutboundRuleParameters struct {
 
 	// Reference to a LoadBalancerBackendAddressPool in network to populate backendAddressPoolId.
 	// +kubebuilder:validation:Optional
-	BackendAddressPoolIDRef *v1.NamespacedReference `json:"backendAddressPoolIdRef,omitempty" tf:"-"`
+	BackendAddressPoolIDRef *v2.NamespacedReference `json:"backendAddressPoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a LoadBalancerBackendAddressPool in network to populate backendAddressPoolId.
 	// +kubebuilder:validation:Optional
-	BackendAddressPoolIDSelector *v1.NamespacedSelector `json:"backendAddressPoolIdSelector,omitempty" tf:"-"`
+	BackendAddressPoolIDSelector *v2.NamespacedSelector `json:"backendAddressPoolIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	EnableTCPReset *bool `json:"enableTcpReset,omitempty" tf:"enable_tcp_reset,omitempty"`
@@ -137,11 +136,11 @@ type LoadBalancerOutboundRuleParameters struct {
 
 	// Reference to a LoadBalancer in network to populate loadbalancerId.
 	// +kubebuilder:validation:Optional
-	LoadbalancerIDRef *v1.NamespacedReference `json:"loadbalancerIdRef,omitempty" tf:"-"`
+	LoadbalancerIDRef *v2.NamespacedReference `json:"loadbalancerIdRef,omitempty" tf:"-"`
 
 	// Selector for a LoadBalancer in network to populate loadbalancerId.
 	// +kubebuilder:validation:Optional
-	LoadbalancerIDSelector *v1.NamespacedSelector `json:"loadbalancerIdSelector,omitempty" tf:"-"`
+	LoadbalancerIDSelector *v2.NamespacedSelector `json:"loadbalancerIdSelector,omitempty" tf:"-"`
 
 	// The transport protocol for the external endpoint. Possible values are Udp, Tcp or All.
 	// +kubebuilder:validation:Optional
@@ -171,8 +170,8 @@ type LoadBalancerOutboundRuleSpec struct {
 
 // LoadBalancerOutboundRuleStatus defines the observed state of LoadBalancerOutboundRule.
 type LoadBalancerOutboundRuleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LoadBalancerOutboundRuleObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LoadBalancerOutboundRuleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

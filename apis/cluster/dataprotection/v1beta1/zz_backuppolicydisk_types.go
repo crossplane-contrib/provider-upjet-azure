@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BackupPolicyDiskInitParameters struct {
@@ -75,11 +75,11 @@ type BackupPolicyDiskParameters struct {
 
 	// Reference to a BackupVault in dataprotection to populate vaultId.
 	// +kubebuilder:validation:Optional
-	VaultIDRef *v1.Reference `json:"vaultIdRef,omitempty" tf:"-"`
+	VaultIDRef *v2.Reference `json:"vaultIdRef,omitempty" tf:"-"`
 
 	// Selector for a BackupVault in dataprotection to populate vaultId.
 	// +kubebuilder:validation:Optional
-	VaultIDSelector *v1.Selector `json:"vaultIdSelector,omitempty" tf:"-"`
+	VaultIDSelector *v2.Selector `json:"vaultIdSelector,omitempty" tf:"-"`
 }
 
 type CriteriaInitParameters struct {
@@ -152,8 +152,8 @@ type RetentionRuleParameters struct {
 
 // BackupPolicyDiskSpec defines the desired state of BackupPolicyDisk
 type BackupPolicyDiskSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     BackupPolicyDiskParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   BackupPolicyDiskParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -169,8 +169,8 @@ type BackupPolicyDiskSpec struct {
 
 // BackupPolicyDiskStatus defines the observed state of BackupPolicyDisk.
 type BackupPolicyDiskStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BackupPolicyDiskObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BackupPolicyDiskObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

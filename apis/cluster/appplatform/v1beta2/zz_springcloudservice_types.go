@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ConfigServerGitSettingInitParameters struct {
@@ -88,10 +88,10 @@ type ConfigServerGitSettingSSHAuthInitParameters struct {
 	HostKeyAlgorithm *string `json:"hostKeyAlgorithm,omitempty" tf:"host_key_algorithm,omitempty"`
 
 	// The host key of the Git repository server, should not include the algorithm prefix as covered by host-key-algorithm.
-	HostKeySecretRef *v1.SecretKeySelector `json:"hostKeySecretRef,omitempty" tf:"-"`
+	HostKeySecretRef *v2.SecretKeySelector `json:"hostKeySecretRef,omitempty" tf:"-"`
 
 	// The SSH private key to access the Git repository, required when the URI starts with git@ or ssh://.
-	PrivateKeySecretRef v1.SecretKeySelector `json:"privateKeySecretRef" tf:"-"`
+	PrivateKeySecretRef v2.SecretKeySelector `json:"privateKeySecretRef" tf:"-"`
 
 	// Indicates whether the Config Server instance will fail to start if the host_key does not match. Defaults to true.
 	StrictHostKeyCheckingEnabled *bool `json:"strictHostKeyCheckingEnabled,omitempty" tf:"strict_host_key_checking_enabled,omitempty"`
@@ -114,11 +114,11 @@ type ConfigServerGitSettingSSHAuthParameters struct {
 
 	// The host key of the Git repository server, should not include the algorithm prefix as covered by host-key-algorithm.
 	// +kubebuilder:validation:Optional
-	HostKeySecretRef *v1.SecretKeySelector `json:"hostKeySecretRef,omitempty" tf:"-"`
+	HostKeySecretRef *v2.SecretKeySelector `json:"hostKeySecretRef,omitempty" tf:"-"`
 
 	// The SSH private key to access the Git repository, required when the URI starts with git@ or ssh://.
 	// +kubebuilder:validation:Optional
-	PrivateKeySecretRef v1.SecretKeySelector `json:"privateKeySecretRef" tf:"-"`
+	PrivateKeySecretRef v2.SecretKeySelector `json:"privateKeySecretRef" tf:"-"`
 
 	// Indicates whether the Config Server instance will fail to start if the host_key does not match. Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -131,7 +131,7 @@ type ContainerRegistryInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the password of the container registry.
-	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// Specifies the login server of the container registry.
 	Server *string `json:"server,omitempty" tf:"server,omitempty"`
@@ -160,7 +160,7 @@ type ContainerRegistryParameters struct {
 
 	// Specifies the password of the container registry.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// Specifies the login server of the container registry.
 	// +kubebuilder:validation:Optional
@@ -193,7 +193,7 @@ type DefaultBuildServiceParameters struct {
 type HTTPBasicAuthInitParameters struct {
 
 	// The password used to access the Git repository server, required when the Git repository server supports HTTP Basic Authentication.
-	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The username that's used to access the Git repository server, required when the Git repository server supports HTTP Basic Authentication.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
@@ -209,7 +209,7 @@ type HTTPBasicAuthParameters struct {
 
 	// The password used to access the Git repository server, required when the Git repository server supports HTTP Basic Authentication.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The username that's used to access the Git repository server, required when the Git repository server supports HTTP Basic Authentication.
 	// +kubebuilder:validation:Optional
@@ -267,11 +267,11 @@ type NetworkInitParameters struct {
 
 	// Reference to a Subnet in network to populate appSubnetId.
 	// +kubebuilder:validation:Optional
-	AppSubnetIDRef *v1.Reference `json:"appSubnetIdRef,omitempty" tf:"-"`
+	AppSubnetIDRef *v2.Reference `json:"appSubnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate appSubnetId.
 	// +kubebuilder:validation:Optional
-	AppSubnetIDSelector *v1.Selector `json:"appSubnetIdSelector,omitempty" tf:"-"`
+	AppSubnetIDSelector *v2.Selector `json:"appSubnetIdSelector,omitempty" tf:"-"`
 
 	// A list of (at least 3) CIDR ranges (at least /16) which are used to host the Spring Cloud infrastructure, which must not overlap with any existing CIDR ranges in the Subnet. Changing this forces a new resource to be created.
 	CidrRanges []*string `json:"cidrRanges,omitempty" tf:"cidr_ranges,omitempty"`
@@ -292,11 +292,11 @@ type NetworkInitParameters struct {
 
 	// Reference to a Subnet in network to populate serviceRuntimeSubnetId.
 	// +kubebuilder:validation:Optional
-	ServiceRuntimeSubnetIDRef *v1.Reference `json:"serviceRuntimeSubnetIdRef,omitempty" tf:"-"`
+	ServiceRuntimeSubnetIDRef *v2.Reference `json:"serviceRuntimeSubnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate serviceRuntimeSubnetId.
 	// +kubebuilder:validation:Optional
-	ServiceRuntimeSubnetIDSelector *v1.Selector `json:"serviceRuntimeSubnetIdSelector,omitempty" tf:"-"`
+	ServiceRuntimeSubnetIDSelector *v2.Selector `json:"serviceRuntimeSubnetIdSelector,omitempty" tf:"-"`
 }
 
 type NetworkObservation struct {
@@ -337,11 +337,11 @@ type NetworkParameters struct {
 
 	// Reference to a Subnet in network to populate appSubnetId.
 	// +kubebuilder:validation:Optional
-	AppSubnetIDRef *v1.Reference `json:"appSubnetIdRef,omitempty" tf:"-"`
+	AppSubnetIDRef *v2.Reference `json:"appSubnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate appSubnetId.
 	// +kubebuilder:validation:Optional
-	AppSubnetIDSelector *v1.Selector `json:"appSubnetIdSelector,omitempty" tf:"-"`
+	AppSubnetIDSelector *v2.Selector `json:"appSubnetIdSelector,omitempty" tf:"-"`
 
 	// A list of (at least 3) CIDR ranges (at least /16) which are used to host the Spring Cloud infrastructure, which must not overlap with any existing CIDR ranges in the Subnet. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -367,17 +367,17 @@ type NetworkParameters struct {
 
 	// Reference to a Subnet in network to populate serviceRuntimeSubnetId.
 	// +kubebuilder:validation:Optional
-	ServiceRuntimeSubnetIDRef *v1.Reference `json:"serviceRuntimeSubnetIdRef,omitempty" tf:"-"`
+	ServiceRuntimeSubnetIDRef *v2.Reference `json:"serviceRuntimeSubnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate serviceRuntimeSubnetId.
 	// +kubebuilder:validation:Optional
-	ServiceRuntimeSubnetIDSelector *v1.Selector `json:"serviceRuntimeSubnetIdSelector,omitempty" tf:"-"`
+	ServiceRuntimeSubnetIDSelector *v2.Selector `json:"serviceRuntimeSubnetIdSelector,omitempty" tf:"-"`
 }
 
 type RepositoryHTTPBasicAuthInitParameters struct {
 
 	// The password used to access the Git repository server, required when the Git repository server supports HTTP Basic Authentication.
-	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The username that's used to access the Git repository server, required when the Git repository server supports HTTP Basic Authentication.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
@@ -393,7 +393,7 @@ type RepositoryHTTPBasicAuthParameters struct {
 
 	// The password used to access the Git repository server, required when the Git repository server supports HTTP Basic Authentication.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The username that's used to access the Git repository server, required when the Git repository server supports HTTP Basic Authentication.
 	// +kubebuilder:validation:Optional
@@ -485,10 +485,10 @@ type RepositorySSHAuthInitParameters struct {
 	HostKeyAlgorithm *string `json:"hostKeyAlgorithm,omitempty" tf:"host_key_algorithm,omitempty"`
 
 	// The host key of the Git repository server, should not include the algorithm prefix as covered by host-key-algorithm.
-	HostKeySecretRef *v1.SecretKeySelector `json:"hostKeySecretRef,omitempty" tf:"-"`
+	HostKeySecretRef *v2.SecretKeySelector `json:"hostKeySecretRef,omitempty" tf:"-"`
 
 	// The SSH private key to access the Git repository, required when the URI starts with git@ or ssh://.
-	PrivateKeySecretRef v1.SecretKeySelector `json:"privateKeySecretRef" tf:"-"`
+	PrivateKeySecretRef v2.SecretKeySelector `json:"privateKeySecretRef" tf:"-"`
 
 	// Indicates whether the Config Server instance will fail to start if the host_key does not match. Defaults to true.
 	StrictHostKeyCheckingEnabled *bool `json:"strictHostKeyCheckingEnabled,omitempty" tf:"strict_host_key_checking_enabled,omitempty"`
@@ -511,11 +511,11 @@ type RepositorySSHAuthParameters struct {
 
 	// The host key of the Git repository server, should not include the algorithm prefix as covered by host-key-algorithm.
 	// +kubebuilder:validation:Optional
-	HostKeySecretRef *v1.SecretKeySelector `json:"hostKeySecretRef,omitempty" tf:"-"`
+	HostKeySecretRef *v2.SecretKeySelector `json:"hostKeySecretRef,omitempty" tf:"-"`
 
 	// The SSH private key to access the Git repository, required when the URI starts with git@ or ssh://.
 	// +kubebuilder:validation:Optional
-	PrivateKeySecretRef v1.SecretKeySelector `json:"privateKeySecretRef" tf:"-"`
+	PrivateKeySecretRef v2.SecretKeySelector `json:"privateKeySecretRef" tf:"-"`
 
 	// Indicates whether the Config Server instance will fail to start if the host_key does not match. Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -704,11 +704,11 @@ type SpringCloudServiceParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Whether enable the default Service Registry. This field is applicable only for Spring Cloud Service with enterprise tier.
 	// +kubebuilder:validation:Optional
@@ -745,11 +745,11 @@ type TraceInitParameters struct {
 
 	// Reference to a ApplicationInsights in insights to populate connectionString.
 	// +kubebuilder:validation:Optional
-	ConnectionStringRef *v1.Reference `json:"connectionStringRef,omitempty" tf:"-"`
+	ConnectionStringRef *v2.Reference `json:"connectionStringRef,omitempty" tf:"-"`
 
 	// Selector for a ApplicationInsights in insights to populate connectionString.
 	// +kubebuilder:validation:Optional
-	ConnectionStringSelector *v1.Selector `json:"connectionStringSelector,omitempty" tf:"-"`
+	ConnectionStringSelector *v2.Selector `json:"connectionStringSelector,omitempty" tf:"-"`
 
 	// The sampling rate of Application Insights Agent. Must be between 0.0 and 100.0. Defaults to 10.0.
 	SampleRate *float64 `json:"sampleRate,omitempty" tf:"sample_rate,omitempty"`
@@ -774,11 +774,11 @@ type TraceParameters struct {
 
 	// Reference to a ApplicationInsights in insights to populate connectionString.
 	// +kubebuilder:validation:Optional
-	ConnectionStringRef *v1.Reference `json:"connectionStringRef,omitempty" tf:"-"`
+	ConnectionStringRef *v2.Reference `json:"connectionStringRef,omitempty" tf:"-"`
 
 	// Selector for a ApplicationInsights in insights to populate connectionString.
 	// +kubebuilder:validation:Optional
-	ConnectionStringSelector *v1.Selector `json:"connectionStringSelector,omitempty" tf:"-"`
+	ConnectionStringSelector *v2.Selector `json:"connectionStringSelector,omitempty" tf:"-"`
 
 	// The sampling rate of Application Insights Agent. Must be between 0.0 and 100.0. Defaults to 10.0.
 	// +kubebuilder:validation:Optional
@@ -787,8 +787,8 @@ type TraceParameters struct {
 
 // SpringCloudServiceSpec defines the desired state of SpringCloudService
 type SpringCloudServiceSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SpringCloudServiceParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SpringCloudServiceParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -804,8 +804,8 @@ type SpringCloudServiceSpec struct {
 
 // SpringCloudServiceStatus defines the observed state of SpringCloudService.
 type SpringCloudServiceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SpringCloudServiceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SpringCloudServiceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type HPCCacheAccessPolicyAccessRuleInitParameters struct {
@@ -115,11 +114,11 @@ type HPCCacheAccessPolicyInitParameters struct {
 
 	// Reference to a HPCCache in storagecache to populate hpcCacheId.
 	// +kubebuilder:validation:Optional
-	HPCCacheIDRef *v1.NamespacedReference `json:"hpcCacheIdRef,omitempty" tf:"-"`
+	HPCCacheIDRef *v2.NamespacedReference `json:"hpcCacheIdRef,omitempty" tf:"-"`
 
 	// Selector for a HPCCache in storagecache to populate hpcCacheId.
 	// +kubebuilder:validation:Optional
-	HPCCacheIDSelector *v1.NamespacedSelector `json:"hpcCacheIdSelector,omitempty" tf:"-"`
+	HPCCacheIDSelector *v2.NamespacedSelector `json:"hpcCacheIdSelector,omitempty" tf:"-"`
 }
 
 type HPCCacheAccessPolicyObservation struct {
@@ -148,11 +147,11 @@ type HPCCacheAccessPolicyParameters struct {
 
 	// Reference to a HPCCache in storagecache to populate hpcCacheId.
 	// +kubebuilder:validation:Optional
-	HPCCacheIDRef *v1.NamespacedReference `json:"hpcCacheIdRef,omitempty" tf:"-"`
+	HPCCacheIDRef *v2.NamespacedReference `json:"hpcCacheIdRef,omitempty" tf:"-"`
 
 	// Selector for a HPCCache in storagecache to populate hpcCacheId.
 	// +kubebuilder:validation:Optional
-	HPCCacheIDSelector *v1.NamespacedSelector `json:"hpcCacheIdSelector,omitempty" tf:"-"`
+	HPCCacheIDSelector *v2.NamespacedSelector `json:"hpcCacheIdSelector,omitempty" tf:"-"`
 }
 
 // HPCCacheAccessPolicySpec defines the desired state of HPCCacheAccessPolicy
@@ -174,8 +173,8 @@ type HPCCacheAccessPolicySpec struct {
 
 // HPCCacheAccessPolicyStatus defines the observed state of HPCCacheAccessPolicy.
 type HPCCacheAccessPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        HPCCacheAccessPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               HPCCacheAccessPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

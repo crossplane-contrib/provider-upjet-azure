@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SecurityCenterAssessmentInitParameters struct {
@@ -27,11 +26,11 @@ type SecurityCenterAssessmentInitParameters struct {
 
 	// Reference to a SecurityCenterAssessmentPolicy in security to populate assessmentPolicyId.
 	// +kubebuilder:validation:Optional
-	AssessmentPolicyIDRef *v1.NamespacedReference `json:"assessmentPolicyIdRef,omitempty" tf:"-"`
+	AssessmentPolicyIDRef *v2.NamespacedReference `json:"assessmentPolicyIdRef,omitempty" tf:"-"`
 
 	// Selector for a SecurityCenterAssessmentPolicy in security to populate assessmentPolicyId.
 	// +kubebuilder:validation:Optional
-	AssessmentPolicyIDSelector *v1.NamespacedSelector `json:"assessmentPolicyIdSelector,omitempty" tf:"-"`
+	AssessmentPolicyIDSelector *v2.NamespacedSelector `json:"assessmentPolicyIdSelector,omitempty" tf:"-"`
 
 	// A status block as defined below.
 	Status *StatusInitParameters `json:"status,omitempty" tf:"status,omitempty"`
@@ -43,11 +42,11 @@ type SecurityCenterAssessmentInitParameters struct {
 
 	// Reference to a LinuxVirtualMachineScaleSet in compute to populate targetResourceId.
 	// +kubebuilder:validation:Optional
-	TargetResourceIDRef *v1.NamespacedReference `json:"targetResourceIdRef,omitempty" tf:"-"`
+	TargetResourceIDRef *v2.NamespacedReference `json:"targetResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a LinuxVirtualMachineScaleSet in compute to populate targetResourceId.
 	// +kubebuilder:validation:Optional
-	TargetResourceIDSelector *v1.NamespacedSelector `json:"targetResourceIdSelector,omitempty" tf:"-"`
+	TargetResourceIDSelector *v2.NamespacedSelector `json:"targetResourceIdSelector,omitempty" tf:"-"`
 }
 
 type SecurityCenterAssessmentObservation struct {
@@ -84,11 +83,11 @@ type SecurityCenterAssessmentParameters struct {
 
 	// Reference to a SecurityCenterAssessmentPolicy in security to populate assessmentPolicyId.
 	// +kubebuilder:validation:Optional
-	AssessmentPolicyIDRef *v1.NamespacedReference `json:"assessmentPolicyIdRef,omitempty" tf:"-"`
+	AssessmentPolicyIDRef *v2.NamespacedReference `json:"assessmentPolicyIdRef,omitempty" tf:"-"`
 
 	// Selector for a SecurityCenterAssessmentPolicy in security to populate assessmentPolicyId.
 	// +kubebuilder:validation:Optional
-	AssessmentPolicyIDSelector *v1.NamespacedSelector `json:"assessmentPolicyIdSelector,omitempty" tf:"-"`
+	AssessmentPolicyIDSelector *v2.NamespacedSelector `json:"assessmentPolicyIdSelector,omitempty" tf:"-"`
 
 	// A status block as defined below.
 	// +kubebuilder:validation:Optional
@@ -102,11 +101,11 @@ type SecurityCenterAssessmentParameters struct {
 
 	// Reference to a LinuxVirtualMachineScaleSet in compute to populate targetResourceId.
 	// +kubebuilder:validation:Optional
-	TargetResourceIDRef *v1.NamespacedReference `json:"targetResourceIdRef,omitempty" tf:"-"`
+	TargetResourceIDRef *v2.NamespacedReference `json:"targetResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a LinuxVirtualMachineScaleSet in compute to populate targetResourceId.
 	// +kubebuilder:validation:Optional
-	TargetResourceIDSelector *v1.NamespacedSelector `json:"targetResourceIdSelector,omitempty" tf:"-"`
+	TargetResourceIDSelector *v2.NamespacedSelector `json:"targetResourceIdSelector,omitempty" tf:"-"`
 }
 
 type StatusInitParameters struct {
@@ -167,8 +166,8 @@ type SecurityCenterAssessmentSpec struct {
 
 // SecurityCenterAssessmentStatus defines the observed state of SecurityCenterAssessment.
 type SecurityCenterAssessmentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SecurityCenterAssessmentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SecurityCenterAssessmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type FunctionAppActiveSlotInitParameters struct {
@@ -27,11 +27,11 @@ type FunctionAppActiveSlotInitParameters struct {
 
 	// Reference to a WindowsFunctionAppSlot in web to populate slotId.
 	// +kubebuilder:validation:Optional
-	SlotIDRef *v1.Reference `json:"slotIdRef,omitempty" tf:"-"`
+	SlotIDRef *v2.Reference `json:"slotIdRef,omitempty" tf:"-"`
 
 	// Selector for a WindowsFunctionAppSlot in web to populate slotId.
 	// +kubebuilder:validation:Optional
-	SlotIDSelector *v1.Selector `json:"slotIdSelector,omitempty" tf:"-"`
+	SlotIDSelector *v2.Selector `json:"slotIdSelector,omitempty" tf:"-"`
 }
 
 type FunctionAppActiveSlotObservation struct {
@@ -68,17 +68,17 @@ type FunctionAppActiveSlotParameters struct {
 
 	// Reference to a WindowsFunctionAppSlot in web to populate slotId.
 	// +kubebuilder:validation:Optional
-	SlotIDRef *v1.Reference `json:"slotIdRef,omitempty" tf:"-"`
+	SlotIDRef *v2.Reference `json:"slotIdRef,omitempty" tf:"-"`
 
 	// Selector for a WindowsFunctionAppSlot in web to populate slotId.
 	// +kubebuilder:validation:Optional
-	SlotIDSelector *v1.Selector `json:"slotIdSelector,omitempty" tf:"-"`
+	SlotIDSelector *v2.Selector `json:"slotIdSelector,omitempty" tf:"-"`
 }
 
 // FunctionAppActiveSlotSpec defines the desired state of FunctionAppActiveSlot
 type FunctionAppActiveSlotSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     FunctionAppActiveSlotParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   FunctionAppActiveSlotParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -94,8 +94,8 @@ type FunctionAppActiveSlotSpec struct {
 
 // FunctionAppActiveSlotStatus defines the observed state of FunctionAppActiveSlot.
 type FunctionAppActiveSlotStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FunctionAppActiveSlotObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FunctionAppActiveSlotObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ProductTagInitParameters struct {
@@ -21,11 +21,11 @@ type ProductTagInitParameters struct {
 
 	// Reference to a Management in apimanagement to populate apiManagementName.
 	// +kubebuilder:validation:Optional
-	APIManagementNameRef *v1.Reference `json:"apiManagementNameRef,omitempty" tf:"-"`
+	APIManagementNameRef *v2.Reference `json:"apiManagementNameRef,omitempty" tf:"-"`
 
 	// Selector for a Management in apimanagement to populate apiManagementName.
 	// +kubebuilder:validation:Optional
-	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
+	APIManagementNameSelector *v2.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// The name of the API Management product. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/apimanagement/v1beta1.Product
@@ -33,11 +33,11 @@ type ProductTagInitParameters struct {
 
 	// Reference to a Product in apimanagement to populate apiManagementProductId.
 	// +kubebuilder:validation:Optional
-	APIManagementProductIDRef *v1.Reference `json:"apiManagementProductIdRef,omitempty" tf:"-"`
+	APIManagementProductIDRef *v2.Reference `json:"apiManagementProductIdRef,omitempty" tf:"-"`
 
 	// Selector for a Product in apimanagement to populate apiManagementProductId.
 	// +kubebuilder:validation:Optional
-	APIManagementProductIDSelector *v1.Selector `json:"apiManagementProductIdSelector,omitempty" tf:"-"`
+	APIManagementProductIDSelector *v2.Selector `json:"apiManagementProductIdSelector,omitempty" tf:"-"`
 
 	// The name which should be used for this API Management Tag. Changing this forces a new API Management Tag to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/apimanagement/v1beta1.Tag
@@ -45,11 +45,11 @@ type ProductTagInitParameters struct {
 
 	// Reference to a Tag in apimanagement to populate name.
 	// +kubebuilder:validation:Optional
-	NameRef *v1.Reference `json:"nameRef,omitempty" tf:"-"`
+	NameRef *v2.Reference `json:"nameRef,omitempty" tf:"-"`
 
 	// Selector for a Tag in apimanagement to populate name.
 	// +kubebuilder:validation:Optional
-	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
+	NameSelector *v2.Selector `json:"nameSelector,omitempty" tf:"-"`
 
 	// The name of the Resource Group in which the API Management Service should be exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
@@ -57,11 +57,11 @@ type ProductTagInitParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 }
 
 type ProductTagObservation struct {
@@ -91,11 +91,11 @@ type ProductTagParameters struct {
 
 	// Reference to a Management in apimanagement to populate apiManagementName.
 	// +kubebuilder:validation:Optional
-	APIManagementNameRef *v1.Reference `json:"apiManagementNameRef,omitempty" tf:"-"`
+	APIManagementNameRef *v2.Reference `json:"apiManagementNameRef,omitempty" tf:"-"`
 
 	// Selector for a Management in apimanagement to populate apiManagementName.
 	// +kubebuilder:validation:Optional
-	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
+	APIManagementNameSelector *v2.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// The name of the API Management product. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/apimanagement/v1beta1.Product
@@ -104,11 +104,11 @@ type ProductTagParameters struct {
 
 	// Reference to a Product in apimanagement to populate apiManagementProductId.
 	// +kubebuilder:validation:Optional
-	APIManagementProductIDRef *v1.Reference `json:"apiManagementProductIdRef,omitempty" tf:"-"`
+	APIManagementProductIDRef *v2.Reference `json:"apiManagementProductIdRef,omitempty" tf:"-"`
 
 	// Selector for a Product in apimanagement to populate apiManagementProductId.
 	// +kubebuilder:validation:Optional
-	APIManagementProductIDSelector *v1.Selector `json:"apiManagementProductIdSelector,omitempty" tf:"-"`
+	APIManagementProductIDSelector *v2.Selector `json:"apiManagementProductIdSelector,omitempty" tf:"-"`
 
 	// The name which should be used for this API Management Tag. Changing this forces a new API Management Tag to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/apimanagement/v1beta1.Tag
@@ -117,11 +117,11 @@ type ProductTagParameters struct {
 
 	// Reference to a Tag in apimanagement to populate name.
 	// +kubebuilder:validation:Optional
-	NameRef *v1.Reference `json:"nameRef,omitempty" tf:"-"`
+	NameRef *v2.Reference `json:"nameRef,omitempty" tf:"-"`
 
 	// Selector for a Tag in apimanagement to populate name.
 	// +kubebuilder:validation:Optional
-	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
+	NameSelector *v2.Selector `json:"nameSelector,omitempty" tf:"-"`
 
 	// The name of the Resource Group in which the API Management Service should be exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
@@ -130,17 +130,17 @@ type ProductTagParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 }
 
 // ProductTagSpec defines the desired state of ProductTag
 type ProductTagSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ProductTagParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ProductTagParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -156,8 +156,8 @@ type ProductTagSpec struct {
 
 // ProductTagStatus defines the observed state of ProductTag.
 type ProductTagStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ProductTagObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ProductTagObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

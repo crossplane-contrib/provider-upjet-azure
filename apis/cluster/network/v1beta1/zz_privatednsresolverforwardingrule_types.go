@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type PrivateDNSResolverForwardingRuleInitParameters struct {
@@ -61,11 +61,11 @@ type PrivateDNSResolverForwardingRuleParameters struct {
 
 	// Reference to a PrivateDNSResolverDNSForwardingRuleset in network to populate dnsForwardingRulesetId.
 	// +kubebuilder:validation:Optional
-	DNSForwardingRulesetIDRef *v1.Reference `json:"dnsForwardingRulesetIdRef,omitempty" tf:"-"`
+	DNSForwardingRulesetIDRef *v2.Reference `json:"dnsForwardingRulesetIdRef,omitempty" tf:"-"`
 
 	// Selector for a PrivateDNSResolverDNSForwardingRuleset in network to populate dnsForwardingRulesetId.
 	// +kubebuilder:validation:Optional
-	DNSForwardingRulesetIDSelector *v1.Selector `json:"dnsForwardingRulesetIdSelector,omitempty" tf:"-"`
+	DNSForwardingRulesetIDSelector *v2.Selector `json:"dnsForwardingRulesetIdSelector,omitempty" tf:"-"`
 
 	// Specifies the domain name for the Private DNS Resolver Forwarding Rule. Changing this forces a new Private DNS Resolver Forwarding Rule to be created.
 	// +kubebuilder:validation:Optional
@@ -116,8 +116,8 @@ type TargetDNSServersParameters struct {
 
 // PrivateDNSResolverForwardingRuleSpec defines the desired state of PrivateDNSResolverForwardingRule
 type PrivateDNSResolverForwardingRuleSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     PrivateDNSResolverForwardingRuleParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   PrivateDNSResolverForwardingRuleParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -133,8 +133,8 @@ type PrivateDNSResolverForwardingRuleSpec struct {
 
 // PrivateDNSResolverForwardingRuleStatus defines the observed state of PrivateDNSResolverForwardingRule.
 type PrivateDNSResolverForwardingRuleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PrivateDNSResolverForwardingRuleObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PrivateDNSResolverForwardingRuleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ContentLinkHashInitParameters struct {
@@ -322,11 +321,11 @@ type RunBookInitParameters struct {
 
 	// Reference to a Account in automation to populate automationAccountName.
 	// +kubebuilder:validation:Optional
-	AutomationAccountNameRef *v1.NamespacedReference `json:"automationAccountNameRef,omitempty" tf:"-"`
+	AutomationAccountNameRef *v2.NamespacedReference `json:"automationAccountNameRef,omitempty" tf:"-"`
 
 	// Selector for a Account in automation to populate automationAccountName.
 	// +kubebuilder:validation:Optional
-	AutomationAccountNameSelector *v1.NamespacedSelector `json:"automationAccountNameSelector,omitempty" tf:"-"`
+	AutomationAccountNameSelector *v2.NamespacedSelector `json:"automationAccountNameSelector,omitempty" tf:"-"`
 
 	// The desired content of the runbook.
 	Content *string `json:"content,omitempty" tf:"content,omitempty"`
@@ -364,11 +363,11 @@ type RunBookInitParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The type of the runbook - can be either Graph, GraphPowerShell, GraphPowerShellWorkflow, PowerShellWorkflow, PowerShell, PowerShell72, Python, Python3, Python2 or Script. Changing this forces a new resource to be created.
 	RunBookType *string `json:"runbookType,omitempty" tf:"runbook_type,omitempty"`
@@ -442,11 +441,11 @@ type RunBookParameters struct {
 
 	// Reference to a Account in automation to populate automationAccountName.
 	// +kubebuilder:validation:Optional
-	AutomationAccountNameRef *v1.NamespacedReference `json:"automationAccountNameRef,omitempty" tf:"-"`
+	AutomationAccountNameRef *v2.NamespacedReference `json:"automationAccountNameRef,omitempty" tf:"-"`
 
 	// Selector for a Account in automation to populate automationAccountName.
 	// +kubebuilder:validation:Optional
-	AutomationAccountNameSelector *v1.NamespacedSelector `json:"automationAccountNameSelector,omitempty" tf:"-"`
+	AutomationAccountNameSelector *v2.NamespacedSelector `json:"automationAccountNameSelector,omitempty" tf:"-"`
 
 	// The desired content of the runbook.
 	// +kubebuilder:validation:Optional
@@ -495,11 +494,11 @@ type RunBookParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The type of the runbook - can be either Graph, GraphPowerShell, GraphPowerShellWorkflow, PowerShellWorkflow, PowerShell, PowerShell72, Python, Python3, Python2 or Script. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -534,8 +533,8 @@ type RunBookSpec struct {
 
 // RunBookStatus defines the observed state of RunBook.
 type RunBookStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RunBookObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RunBookObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

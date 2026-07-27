@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type MSSQLManagedInstanceFailoverGroupInitParameters struct {
@@ -25,11 +25,11 @@ type MSSQLManagedInstanceFailoverGroupInitParameters struct {
 
 	// Reference to a MSSQLManagedInstance in sql to populate managedInstanceId.
 	// +kubebuilder:validation:Optional
-	ManagedInstanceIDRef *v1.Reference `json:"managedInstanceIdRef,omitempty" tf:"-"`
+	ManagedInstanceIDRef *v2.Reference `json:"managedInstanceIdRef,omitempty" tf:"-"`
 
 	// Selector for a MSSQLManagedInstance in sql to populate managedInstanceId.
 	// +kubebuilder:validation:Optional
-	ManagedInstanceIDSelector *v1.Selector `json:"managedInstanceIdSelector,omitempty" tf:"-"`
+	ManagedInstanceIDSelector *v2.Selector `json:"managedInstanceIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Azure SQL Managed Instance which will be replicated to. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/sql/v1beta2.MSSQLManagedInstance
@@ -38,11 +38,11 @@ type MSSQLManagedInstanceFailoverGroupInitParameters struct {
 
 	// Reference to a MSSQLManagedInstance in sql to populate partnerManagedInstanceId.
 	// +kubebuilder:validation:Optional
-	PartnerManagedInstanceIDRef *v1.Reference `json:"partnerManagedInstanceIdRef,omitempty" tf:"-"`
+	PartnerManagedInstanceIDRef *v2.Reference `json:"partnerManagedInstanceIdRef,omitempty" tf:"-"`
 
 	// Selector for a MSSQLManagedInstance in sql to populate partnerManagedInstanceId.
 	// +kubebuilder:validation:Optional
-	PartnerManagedInstanceIDSelector *v1.Selector `json:"partnerManagedInstanceIdSelector,omitempty" tf:"-"`
+	PartnerManagedInstanceIDSelector *v2.Selector `json:"partnerManagedInstanceIdSelector,omitempty" tf:"-"`
 
 	// A read_write_endpoint_failover_policy block as defined below.
 	ReadWriteEndpointFailoverPolicy *MSSQLManagedInstanceFailoverGroupReadWriteEndpointFailoverPolicyInitParameters `json:"readWriteEndpointFailoverPolicy,omitempty" tf:"read_write_endpoint_failover_policy,omitempty"`
@@ -98,11 +98,11 @@ type MSSQLManagedInstanceFailoverGroupParameters struct {
 
 	// Reference to a MSSQLManagedInstance in sql to populate managedInstanceId.
 	// +kubebuilder:validation:Optional
-	ManagedInstanceIDRef *v1.Reference `json:"managedInstanceIdRef,omitempty" tf:"-"`
+	ManagedInstanceIDRef *v2.Reference `json:"managedInstanceIdRef,omitempty" tf:"-"`
 
 	// Selector for a MSSQLManagedInstance in sql to populate managedInstanceId.
 	// +kubebuilder:validation:Optional
-	ManagedInstanceIDSelector *v1.Selector `json:"managedInstanceIdSelector,omitempty" tf:"-"`
+	ManagedInstanceIDSelector *v2.Selector `json:"managedInstanceIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Azure SQL Managed Instance which will be replicated to. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/sql/v1beta2.MSSQLManagedInstance
@@ -112,11 +112,11 @@ type MSSQLManagedInstanceFailoverGroupParameters struct {
 
 	// Reference to a MSSQLManagedInstance in sql to populate partnerManagedInstanceId.
 	// +kubebuilder:validation:Optional
-	PartnerManagedInstanceIDRef *v1.Reference `json:"partnerManagedInstanceIdRef,omitempty" tf:"-"`
+	PartnerManagedInstanceIDRef *v2.Reference `json:"partnerManagedInstanceIdRef,omitempty" tf:"-"`
 
 	// Selector for a MSSQLManagedInstance in sql to populate partnerManagedInstanceId.
 	// +kubebuilder:validation:Optional
-	PartnerManagedInstanceIDSelector *v1.Selector `json:"partnerManagedInstanceIdSelector,omitempty" tf:"-"`
+	PartnerManagedInstanceIDSelector *v2.Selector `json:"partnerManagedInstanceIdSelector,omitempty" tf:"-"`
 
 	// A read_write_endpoint_failover_policy block as defined below.
 	// +kubebuilder:validation:Optional
@@ -177,8 +177,8 @@ type PartnerRegionParameters struct {
 
 // MSSQLManagedInstanceFailoverGroupSpec defines the desired state of MSSQLManagedInstanceFailoverGroup
 type MSSQLManagedInstanceFailoverGroupSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     MSSQLManagedInstanceFailoverGroupParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   MSSQLManagedInstanceFailoverGroupParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -194,8 +194,8 @@ type MSSQLManagedInstanceFailoverGroupSpec struct {
 
 // MSSQLManagedInstanceFailoverGroupStatus defines the observed state of MSSQLManagedInstanceFailoverGroup.
 type MSSQLManagedInstanceFailoverGroupStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MSSQLManagedInstanceFailoverGroupObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MSSQLManagedInstanceFailoverGroupObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

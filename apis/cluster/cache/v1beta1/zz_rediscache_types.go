@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type IdentityInitParameters struct {
@@ -147,11 +147,11 @@ type RedisCacheInitParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
 	// +mapType=granular
@@ -312,11 +312,11 @@ type RedisCacheParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Only available when using the Premium SKU The number of Shards to create on the Redis Cluster.
 	// +kubebuilder:validation:Optional
@@ -334,11 +334,11 @@ type RedisCacheParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
@@ -365,10 +365,10 @@ type RedisConfigurationInitParameters struct {
 	AofBackupEnabled *bool `json:"aofBackupEnabled,omitempty" tf:"aof_backup_enabled,omitempty"`
 
 	// First Storage Account connection string for AOF persistence.
-	AofStorageConnectionString0SecretRef *v1.SecretKeySelector `json:"aofStorageConnectionString0SecretRef,omitempty" tf:"-"`
+	AofStorageConnectionString0SecretRef *v2.SecretKeySelector `json:"aofStorageConnectionString0SecretRef,omitempty" tf:"-"`
 
 	// Second Storage Account connection string for AOF persistence.
-	AofStorageConnectionString1SecretRef *v1.SecretKeySelector `json:"aofStorageConnectionString1SecretRef,omitempty" tf:"-"`
+	AofStorageConnectionString1SecretRef *v2.SecretKeySelector `json:"aofStorageConnectionString1SecretRef,omitempty" tf:"-"`
 
 	// If set to false, the Redis instance will be accessible without authentication. Defaults to true.
 	AuthenticationEnabled *bool `json:"authenticationEnabled,omitempty" tf:"authentication_enabled,omitempty"`
@@ -401,7 +401,7 @@ type RedisConfigurationInitParameters struct {
 	RdbBackupMaxSnapshotCount *float64 `json:"rdbBackupMaxSnapshotCount,omitempty" tf:"rdb_backup_max_snapshot_count,omitempty"`
 
 	// The Connection String to the Storage Account. Only supported for Premium SKUs. In the format: DefaultEndpointsProtocol=https;BlobEndpoint=${azurerm_storage_account.example.primary_blob_endpoint};AccountName=${azurerm_storage_account.example.name};AccountKey=${azurerm_storage_account.example.primary_access_key}.
-	RdbStorageConnectionStringSecretRef *v1.SecretKeySelector `json:"rdbStorageConnectionStringSecretRef,omitempty" tf:"-"`
+	RdbStorageConnectionStringSecretRef *v2.SecretKeySelector `json:"rdbStorageConnectionStringSecretRef,omitempty" tf:"-"`
 
 	// The ID of the Subscription containing the Storage Account.
 	StorageAccountSubscriptionID *string `json:"storageAccountSubscriptionId,omitempty" tf:"storage_account_subscription_id,omitempty"`
@@ -464,11 +464,11 @@ type RedisConfigurationParameters struct {
 
 	// First Storage Account connection string for AOF persistence.
 	// +kubebuilder:validation:Optional
-	AofStorageConnectionString0SecretRef *v1.SecretKeySelector `json:"aofStorageConnectionString0SecretRef,omitempty" tf:"-"`
+	AofStorageConnectionString0SecretRef *v2.SecretKeySelector `json:"aofStorageConnectionString0SecretRef,omitempty" tf:"-"`
 
 	// Second Storage Account connection string for AOF persistence.
 	// +kubebuilder:validation:Optional
-	AofStorageConnectionString1SecretRef *v1.SecretKeySelector `json:"aofStorageConnectionString1SecretRef,omitempty" tf:"-"`
+	AofStorageConnectionString1SecretRef *v2.SecretKeySelector `json:"aofStorageConnectionString1SecretRef,omitempty" tf:"-"`
 
 	// If set to false, the Redis instance will be accessible without authentication. Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -512,7 +512,7 @@ type RedisConfigurationParameters struct {
 
 	// The Connection String to the Storage Account. Only supported for Premium SKUs. In the format: DefaultEndpointsProtocol=https;BlobEndpoint=${azurerm_storage_account.example.primary_blob_endpoint};AccountName=${azurerm_storage_account.example.name};AccountKey=${azurerm_storage_account.example.primary_access_key}.
 	// +kubebuilder:validation:Optional
-	RdbStorageConnectionStringSecretRef *v1.SecretKeySelector `json:"rdbStorageConnectionStringSecretRef,omitempty" tf:"-"`
+	RdbStorageConnectionStringSecretRef *v2.SecretKeySelector `json:"rdbStorageConnectionStringSecretRef,omitempty" tf:"-"`
 
 	// The ID of the Subscription containing the Storage Account.
 	// +kubebuilder:validation:Optional
@@ -521,8 +521,8 @@ type RedisConfigurationParameters struct {
 
 // RedisCacheSpec defines the desired state of RedisCache
 type RedisCacheSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     RedisCacheParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   RedisCacheParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -538,8 +538,8 @@ type RedisCacheSpec struct {
 
 // RedisCacheStatus defines the observed state of RedisCache.
 type RedisCacheStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RedisCacheObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RedisCacheObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

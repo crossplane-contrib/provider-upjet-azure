@@ -5,204 +5,204 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this HPCCache.
-func (mg *HPCCache) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *HPCCache) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this HPCCache.
-func (mg *HPCCache) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *HPCCache) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this HPCCache.
-func (mg *HPCCache) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *HPCCache) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this HPCCache.
-func (mg *HPCCache) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *HPCCache) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this HPCCache.
-func (mg *HPCCache) SetConditions(c ...xpv1.Condition) {
+func (mg *HPCCache) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this HPCCache.
-func (mg *HPCCache) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *HPCCache) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this HPCCache.
-func (mg *HPCCache) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *HPCCache) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this HPCCache.
-func (mg *HPCCache) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *HPCCache) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this HPCCacheAccessPolicy.
-func (mg *HPCCacheAccessPolicy) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *HPCCacheAccessPolicy) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this HPCCacheAccessPolicy.
-func (mg *HPCCacheAccessPolicy) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *HPCCacheAccessPolicy) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this HPCCacheAccessPolicy.
-func (mg *HPCCacheAccessPolicy) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *HPCCacheAccessPolicy) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this HPCCacheAccessPolicy.
-func (mg *HPCCacheAccessPolicy) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *HPCCacheAccessPolicy) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this HPCCacheAccessPolicy.
-func (mg *HPCCacheAccessPolicy) SetConditions(c ...xpv1.Condition) {
+func (mg *HPCCacheAccessPolicy) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this HPCCacheAccessPolicy.
-func (mg *HPCCacheAccessPolicy) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *HPCCacheAccessPolicy) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this HPCCacheAccessPolicy.
-func (mg *HPCCacheAccessPolicy) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *HPCCacheAccessPolicy) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this HPCCacheAccessPolicy.
-func (mg *HPCCacheAccessPolicy) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *HPCCacheAccessPolicy) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this HPCCacheBlobNFSTarget.
-func (mg *HPCCacheBlobNFSTarget) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *HPCCacheBlobNFSTarget) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this HPCCacheBlobNFSTarget.
-func (mg *HPCCacheBlobNFSTarget) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *HPCCacheBlobNFSTarget) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this HPCCacheBlobNFSTarget.
-func (mg *HPCCacheBlobNFSTarget) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *HPCCacheBlobNFSTarget) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this HPCCacheBlobNFSTarget.
-func (mg *HPCCacheBlobNFSTarget) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *HPCCacheBlobNFSTarget) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this HPCCacheBlobNFSTarget.
-func (mg *HPCCacheBlobNFSTarget) SetConditions(c ...xpv1.Condition) {
+func (mg *HPCCacheBlobNFSTarget) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this HPCCacheBlobNFSTarget.
-func (mg *HPCCacheBlobNFSTarget) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *HPCCacheBlobNFSTarget) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this HPCCacheBlobNFSTarget.
-func (mg *HPCCacheBlobNFSTarget) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *HPCCacheBlobNFSTarget) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this HPCCacheBlobNFSTarget.
-func (mg *HPCCacheBlobNFSTarget) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *HPCCacheBlobNFSTarget) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this HPCCacheBlobTarget.
-func (mg *HPCCacheBlobTarget) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *HPCCacheBlobTarget) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this HPCCacheBlobTarget.
-func (mg *HPCCacheBlobTarget) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *HPCCacheBlobTarget) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this HPCCacheBlobTarget.
-func (mg *HPCCacheBlobTarget) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *HPCCacheBlobTarget) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this HPCCacheBlobTarget.
-func (mg *HPCCacheBlobTarget) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *HPCCacheBlobTarget) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this HPCCacheBlobTarget.
-func (mg *HPCCacheBlobTarget) SetConditions(c ...xpv1.Condition) {
+func (mg *HPCCacheBlobTarget) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this HPCCacheBlobTarget.
-func (mg *HPCCacheBlobTarget) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *HPCCacheBlobTarget) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this HPCCacheBlobTarget.
-func (mg *HPCCacheBlobTarget) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *HPCCacheBlobTarget) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this HPCCacheBlobTarget.
-func (mg *HPCCacheBlobTarget) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *HPCCacheBlobTarget) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this HPCCacheNFSTarget.
-func (mg *HPCCacheNFSTarget) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *HPCCacheNFSTarget) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this HPCCacheNFSTarget.
-func (mg *HPCCacheNFSTarget) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *HPCCacheNFSTarget) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this HPCCacheNFSTarget.
-func (mg *HPCCacheNFSTarget) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *HPCCacheNFSTarget) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this HPCCacheNFSTarget.
-func (mg *HPCCacheNFSTarget) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *HPCCacheNFSTarget) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this HPCCacheNFSTarget.
-func (mg *HPCCacheNFSTarget) SetConditions(c ...xpv1.Condition) {
+func (mg *HPCCacheNFSTarget) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this HPCCacheNFSTarget.
-func (mg *HPCCacheNFSTarget) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *HPCCacheNFSTarget) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this HPCCacheNFSTarget.
-func (mg *HPCCacheNFSTarget) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *HPCCacheNFSTarget) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this HPCCacheNFSTarget.
-func (mg *HPCCacheNFSTarget) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *HPCCacheNFSTarget) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

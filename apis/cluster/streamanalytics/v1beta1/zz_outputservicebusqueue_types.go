@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type OutputServiceBusQueueInitParameters struct {
@@ -30,11 +30,11 @@ type OutputServiceBusQueueInitParameters struct {
 
 	// Reference to a Queue in servicebus to populate queueName.
 	// +kubebuilder:validation:Optional
-	QueueNameRef *v1.Reference `json:"queueNameRef,omitempty" tf:"-"`
+	QueueNameRef *v2.Reference `json:"queueNameRef,omitempty" tf:"-"`
 
 	// Selector for a Queue in servicebus to populate queueName.
 	// +kubebuilder:validation:Optional
-	QueueNameSelector *v1.Selector `json:"queueNameSelector,omitempty" tf:"-"`
+	QueueNameSelector *v2.Selector `json:"queueNameSelector,omitempty" tf:"-"`
 
 	// The name of the Resource Group where the Stream Analytics Job exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
@@ -42,11 +42,11 @@ type OutputServiceBusQueueInitParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A serialization block as defined below.
 	Serialization []OutputServiceBusQueueSerializationInitParameters `json:"serialization,omitempty" tf:"serialization,omitempty"`
@@ -57,14 +57,14 @@ type OutputServiceBusQueueInitParameters struct {
 
 	// Reference to a ServiceBusNamespace in servicebus to populate servicebusNamespace.
 	// +kubebuilder:validation:Optional
-	ServiceBusNamespaceRef *v1.Reference `json:"servicebusNamespaceRef,omitempty" tf:"-"`
+	ServiceBusNamespaceRef *v2.Reference `json:"servicebusNamespaceRef,omitempty" tf:"-"`
 
 	// Selector for a ServiceBusNamespace in servicebus to populate servicebusNamespace.
 	// +kubebuilder:validation:Optional
-	ServiceBusNamespaceSelector *v1.Selector `json:"servicebusNamespaceSelector,omitempty" tf:"-"`
+	ServiceBusNamespaceSelector *v2.Selector `json:"servicebusNamespaceSelector,omitempty" tf:"-"`
 
 	// The shared access policy key for the specified shared access policy. Required if authentication_mode is ConnectionString.
-	SharedAccessPolicyKeySecretRef *v1.SecretKeySelector `json:"sharedAccessPolicyKeySecretRef,omitempty" tf:"-"`
+	SharedAccessPolicyKeySecretRef *v2.SecretKeySelector `json:"sharedAccessPolicyKeySecretRef,omitempty" tf:"-"`
 
 	// The shared access policy name for the Event Hub, Service Bus Queue, Service Bus Topic, etc. Required if authentication_mode is ConnectionString.
 	SharedAccessPolicyName *string `json:"sharedAccessPolicyName,omitempty" tf:"shared_access_policy_name,omitempty"`
@@ -75,11 +75,11 @@ type OutputServiceBusQueueInitParameters struct {
 
 	// Reference to a Job in streamanalytics to populate streamAnalyticsJobName.
 	// +kubebuilder:validation:Optional
-	StreamAnalyticsJobNameRef *v1.Reference `json:"streamAnalyticsJobNameRef,omitempty" tf:"-"`
+	StreamAnalyticsJobNameRef *v2.Reference `json:"streamAnalyticsJobNameRef,omitempty" tf:"-"`
 
 	// Selector for a Job in streamanalytics to populate streamAnalyticsJobName.
 	// +kubebuilder:validation:Optional
-	StreamAnalyticsJobNameSelector *v1.Selector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
+	StreamAnalyticsJobNameSelector *v2.Selector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
 
 	// A key-value pair of system property columns that will be attached to the outgoing messages for the Service Bus Queue Output.
 	// +mapType=granular
@@ -144,11 +144,11 @@ type OutputServiceBusQueueParameters struct {
 
 	// Reference to a Queue in servicebus to populate queueName.
 	// +kubebuilder:validation:Optional
-	QueueNameRef *v1.Reference `json:"queueNameRef,omitempty" tf:"-"`
+	QueueNameRef *v2.Reference `json:"queueNameRef,omitempty" tf:"-"`
 
 	// Selector for a Queue in servicebus to populate queueName.
 	// +kubebuilder:validation:Optional
-	QueueNameSelector *v1.Selector `json:"queueNameSelector,omitempty" tf:"-"`
+	QueueNameSelector *v2.Selector `json:"queueNameSelector,omitempty" tf:"-"`
 
 	// The name of the Resource Group where the Stream Analytics Job exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
@@ -157,11 +157,11 @@ type OutputServiceBusQueueParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A serialization block as defined below.
 	// +kubebuilder:validation:Optional
@@ -174,15 +174,15 @@ type OutputServiceBusQueueParameters struct {
 
 	// Reference to a ServiceBusNamespace in servicebus to populate servicebusNamespace.
 	// +kubebuilder:validation:Optional
-	ServiceBusNamespaceRef *v1.Reference `json:"servicebusNamespaceRef,omitempty" tf:"-"`
+	ServiceBusNamespaceRef *v2.Reference `json:"servicebusNamespaceRef,omitempty" tf:"-"`
 
 	// Selector for a ServiceBusNamespace in servicebus to populate servicebusNamespace.
 	// +kubebuilder:validation:Optional
-	ServiceBusNamespaceSelector *v1.Selector `json:"servicebusNamespaceSelector,omitempty" tf:"-"`
+	ServiceBusNamespaceSelector *v2.Selector `json:"servicebusNamespaceSelector,omitempty" tf:"-"`
 
 	// The shared access policy key for the specified shared access policy. Required if authentication_mode is ConnectionString.
 	// +kubebuilder:validation:Optional
-	SharedAccessPolicyKeySecretRef *v1.SecretKeySelector `json:"sharedAccessPolicyKeySecretRef,omitempty" tf:"-"`
+	SharedAccessPolicyKeySecretRef *v2.SecretKeySelector `json:"sharedAccessPolicyKeySecretRef,omitempty" tf:"-"`
 
 	// The shared access policy name for the Event Hub, Service Bus Queue, Service Bus Topic, etc. Required if authentication_mode is ConnectionString.
 	// +kubebuilder:validation:Optional
@@ -195,11 +195,11 @@ type OutputServiceBusQueueParameters struct {
 
 	// Reference to a Job in streamanalytics to populate streamAnalyticsJobName.
 	// +kubebuilder:validation:Optional
-	StreamAnalyticsJobNameRef *v1.Reference `json:"streamAnalyticsJobNameRef,omitempty" tf:"-"`
+	StreamAnalyticsJobNameRef *v2.Reference `json:"streamAnalyticsJobNameRef,omitempty" tf:"-"`
 
 	// Selector for a Job in streamanalytics to populate streamAnalyticsJobName.
 	// +kubebuilder:validation:Optional
-	StreamAnalyticsJobNameSelector *v1.Selector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
+	StreamAnalyticsJobNameSelector *v2.Selector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
 
 	// A key-value pair of system property columns that will be attached to the outgoing messages for the Service Bus Queue Output.
 	// +kubebuilder:validation:Optional
@@ -258,8 +258,8 @@ type OutputServiceBusQueueSerializationParameters struct {
 
 // OutputServiceBusQueueSpec defines the desired state of OutputServiceBusQueue
 type OutputServiceBusQueueSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     OutputServiceBusQueueParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   OutputServiceBusQueueParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -275,8 +275,8 @@ type OutputServiceBusQueueSpec struct {
 
 // OutputServiceBusQueueStatus defines the observed state of OutputServiceBusQueue.
 type OutputServiceBusQueueStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        OutputServiceBusQueueObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               OutputServiceBusQueueObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

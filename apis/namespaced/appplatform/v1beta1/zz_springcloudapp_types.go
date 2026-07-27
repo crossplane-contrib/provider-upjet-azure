@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CustomPersistentDiskInitParameters struct {
@@ -318,11 +317,11 @@ type SpringCloudAppParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the Spring Cloud Service resource. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/appplatform/v1beta1.SpringCloudService
@@ -331,11 +330,11 @@ type SpringCloudAppParameters struct {
 
 	// Reference to a SpringCloudService in appplatform to populate serviceName.
 	// +kubebuilder:validation:Optional
-	ServiceNameRef *v1.NamespacedReference `json:"serviceNameRef,omitempty" tf:"-"`
+	ServiceNameRef *v2.NamespacedReference `json:"serviceNameRef,omitempty" tf:"-"`
 
 	// Selector for a SpringCloudService in appplatform to populate serviceName.
 	// +kubebuilder:validation:Optional
-	ServiceNameSelector *v1.NamespacedSelector `json:"serviceNameSelector,omitempty" tf:"-"`
+	ServiceNameSelector *v2.NamespacedSelector `json:"serviceNameSelector,omitempty" tf:"-"`
 
 	// Is End to End TLS Enabled? Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -361,8 +360,8 @@ type SpringCloudAppSpec struct {
 
 // SpringCloudAppStatus defines the observed state of SpringCloudApp.
 type SpringCloudAppStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SpringCloudAppObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SpringCloudAppObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

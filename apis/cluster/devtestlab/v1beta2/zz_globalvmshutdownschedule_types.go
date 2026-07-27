@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type GlobalVMShutdownScheduleInitParameters struct {
@@ -41,11 +41,11 @@ type GlobalVMShutdownScheduleInitParameters struct {
 
 	// Reference to a LinuxVirtualMachine in compute to populate virtualMachineId.
 	// +kubebuilder:validation:Optional
-	VirtualMachineIDRef *v1.Reference `json:"virtualMachineIdRef,omitempty" tf:"-"`
+	VirtualMachineIDRef *v2.Reference `json:"virtualMachineIdRef,omitempty" tf:"-"`
 
 	// Selector for a LinuxVirtualMachine in compute to populate virtualMachineId.
 	// +kubebuilder:validation:Optional
-	VirtualMachineIDSelector *v1.Selector `json:"virtualMachineIdSelector,omitempty" tf:"-"`
+	VirtualMachineIDSelector *v2.Selector `json:"virtualMachineIdSelector,omitempty" tf:"-"`
 }
 
 type GlobalVMShutdownScheduleObservation struct {
@@ -111,11 +111,11 @@ type GlobalVMShutdownScheduleParameters struct {
 
 	// Reference to a LinuxVirtualMachine in compute to populate virtualMachineId.
 	// +kubebuilder:validation:Optional
-	VirtualMachineIDRef *v1.Reference `json:"virtualMachineIdRef,omitempty" tf:"-"`
+	VirtualMachineIDRef *v2.Reference `json:"virtualMachineIdRef,omitempty" tf:"-"`
 
 	// Selector for a LinuxVirtualMachine in compute to populate virtualMachineId.
 	// +kubebuilder:validation:Optional
-	VirtualMachineIDSelector *v1.Selector `json:"virtualMachineIdSelector,omitempty" tf:"-"`
+	VirtualMachineIDSelector *v2.Selector `json:"virtualMachineIdSelector,omitempty" tf:"-"`
 }
 
 type NotificationSettingsInitParameters struct {
@@ -169,8 +169,8 @@ type NotificationSettingsParameters struct {
 
 // GlobalVMShutdownScheduleSpec defines the desired state of GlobalVMShutdownSchedule
 type GlobalVMShutdownScheduleSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     GlobalVMShutdownScheduleParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   GlobalVMShutdownScheduleParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -186,8 +186,8 @@ type GlobalVMShutdownScheduleSpec struct {
 
 // GlobalVMShutdownScheduleStatus defines the observed state of GlobalVMShutdownSchedule.
 type GlobalVMShutdownScheduleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        GlobalVMShutdownScheduleObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               GlobalVMShutdownScheduleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

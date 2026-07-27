@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type VirtualMachineExtensionInitParameters struct {
@@ -29,7 +28,7 @@ type VirtualMachineExtensionInitParameters struct {
 	ProtectedSettingsFromKeyVault *VirtualMachineExtensionProtectedSettingsFromKeyVaultInitParameters `json:"protectedSettingsFromKeyVault,omitempty" tf:"protected_settings_from_key_vault,omitempty"`
 
 	// The protected_settings passed to the extension, like settings, these are specified as a JSON object in a string.
-	ProtectedSettingsSecretRef *v1.LocalSecretKeySelector `json:"protectedSettingsSecretRef,omitempty" tf:"-"`
+	ProtectedSettingsSecretRef *v2.LocalSecretKeySelector `json:"protectedSettingsSecretRef,omitempty" tf:"-"`
 
 	// Specifies the collection of extension names after which this extension needs to be provisioned.
 	ProvisionAfterExtensions []*string `json:"provisionAfterExtensions,omitempty" tf:"provision_after_extensions,omitempty"`
@@ -111,7 +110,7 @@ type VirtualMachineExtensionParameters struct {
 
 	// The protected_settings passed to the extension, like settings, these are specified as a JSON object in a string.
 	// +kubebuilder:validation:Optional
-	ProtectedSettingsSecretRef *v1.LocalSecretKeySelector `json:"protectedSettingsSecretRef,omitempty" tf:"-"`
+	ProtectedSettingsSecretRef *v2.LocalSecretKeySelector `json:"protectedSettingsSecretRef,omitempty" tf:"-"`
 
 	// Specifies the collection of extension names after which this extension needs to be provisioned.
 	// +kubebuilder:validation:Optional
@@ -146,11 +145,11 @@ type VirtualMachineExtensionParameters struct {
 
 	// Reference to a LinuxVirtualMachine in compute to populate virtualMachineId.
 	// +kubebuilder:validation:Optional
-	VirtualMachineIDRef *v1.NamespacedReference `json:"virtualMachineIdRef,omitempty" tf:"-"`
+	VirtualMachineIDRef *v2.NamespacedReference `json:"virtualMachineIdRef,omitempty" tf:"-"`
 
 	// Selector for a LinuxVirtualMachine in compute to populate virtualMachineId.
 	// +kubebuilder:validation:Optional
-	VirtualMachineIDSelector *v1.NamespacedSelector `json:"virtualMachineIdSelector,omitempty" tf:"-"`
+	VirtualMachineIDSelector *v2.NamespacedSelector `json:"virtualMachineIdSelector,omitempty" tf:"-"`
 }
 
 type VirtualMachineExtensionProtectedSettingsFromKeyVaultInitParameters struct {
@@ -201,8 +200,8 @@ type VirtualMachineExtensionSpec struct {
 
 // VirtualMachineExtensionStatus defines the observed state of VirtualMachineExtension.
 type VirtualMachineExtensionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VirtualMachineExtensionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VirtualMachineExtensionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

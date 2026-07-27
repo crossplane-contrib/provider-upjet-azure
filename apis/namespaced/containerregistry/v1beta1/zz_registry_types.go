@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type EncryptionInitParameters struct {
@@ -23,11 +22,11 @@ type EncryptionInitParameters struct {
 
 	// Reference to a UserAssignedIdentity in managedidentity to populate identityClientId.
 	// +kubebuilder:validation:Optional
-	IdentityClientIDRef *v1.NamespacedReference `json:"identityClientIdRef,omitempty" tf:"-"`
+	IdentityClientIDRef *v2.NamespacedReference `json:"identityClientIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserAssignedIdentity in managedidentity to populate identityClientId.
 	// +kubebuilder:validation:Optional
-	IdentityClientIDSelector *v1.NamespacedSelector `json:"identityClientIdSelector,omitempty" tf:"-"`
+	IdentityClientIDSelector *v2.NamespacedSelector `json:"identityClientIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Key Vault Key.
 	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id"`
@@ -52,11 +51,11 @@ type EncryptionParameters struct {
 
 	// Reference to a UserAssignedIdentity in managedidentity to populate identityClientId.
 	// +kubebuilder:validation:Optional
-	IdentityClientIDRef *v1.NamespacedReference `json:"identityClientIdRef,omitempty" tf:"-"`
+	IdentityClientIDRef *v2.NamespacedReference `json:"identityClientIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserAssignedIdentity in managedidentity to populate identityClientId.
 	// +kubebuilder:validation:Optional
-	IdentityClientIDSelector *v1.NamespacedSelector `json:"identityClientIdSelector,omitempty" tf:"-"`
+	IdentityClientIDSelector *v2.NamespacedSelector `json:"identityClientIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Key Vault Key.
 	// +kubebuilder:validation:Optional
@@ -154,11 +153,11 @@ type IdentityInitParameters struct {
 
 	// References to UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v1.NamespacedReference `json:"identityIdsRefs,omitempty" tf:"-"`
+	IdentityIdsRefs []v2.NamespacedReference `json:"identityIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v1.NamespacedSelector `json:"identityIdsSelector,omitempty" tf:"-"`
+	IdentityIdsSelector *v2.NamespacedSelector `json:"identityIdsSelector,omitempty" tf:"-"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Container Registry. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -191,11 +190,11 @@ type IdentityParameters struct {
 
 	// References to UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v1.NamespacedReference `json:"identityIdsRefs,omitempty" tf:"-"`
+	IdentityIdsRefs []v2.NamespacedReference `json:"identityIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v1.NamespacedSelector `json:"identityIdsSelector,omitempty" tf:"-"`
+	IdentityIdsSelector *v2.NamespacedSelector `json:"identityIdsSelector,omitempty" tf:"-"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Container Registry. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
 	// +kubebuilder:validation:Optional
@@ -414,11 +413,11 @@ type RegistryParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The number of days to retain and untagged manifest after which it gets purged.
 	// +kubebuilder:validation:Optional
@@ -461,8 +460,8 @@ type RegistrySpec struct {
 
 // RegistryStatus defines the observed state of Registry.
 type RegistryStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RegistryObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RegistryObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

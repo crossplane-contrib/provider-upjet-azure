@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type GalleryApplicationVersionInitParameters struct {
@@ -35,11 +34,11 @@ type GalleryApplicationVersionInitParameters struct {
 
 	// Reference to a GalleryApplication in compute to populate galleryApplicationId.
 	// +kubebuilder:validation:Optional
-	GalleryApplicationIDRef *v1.NamespacedReference `json:"galleryApplicationIdRef,omitempty" tf:"-"`
+	GalleryApplicationIDRef *v2.NamespacedReference `json:"galleryApplicationIdRef,omitempty" tf:"-"`
 
 	// Selector for a GalleryApplication in compute to populate galleryApplicationId.
 	// +kubebuilder:validation:Optional
-	GalleryApplicationIDSelector *v1.NamespacedSelector `json:"galleryApplicationIdSelector,omitempty" tf:"-"`
+	GalleryApplicationIDSelector *v2.NamespacedSelector `json:"galleryApplicationIdSelector,omitempty" tf:"-"`
 
 	// The Azure Region where the Gallery Application Version exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -133,11 +132,11 @@ type GalleryApplicationVersionParameters struct {
 
 	// Reference to a GalleryApplication in compute to populate galleryApplicationId.
 	// +kubebuilder:validation:Optional
-	GalleryApplicationIDRef *v1.NamespacedReference `json:"galleryApplicationIdRef,omitempty" tf:"-"`
+	GalleryApplicationIDRef *v2.NamespacedReference `json:"galleryApplicationIdRef,omitempty" tf:"-"`
 
 	// Selector for a GalleryApplication in compute to populate galleryApplicationId.
 	// +kubebuilder:validation:Optional
-	GalleryApplicationIDSelector *v1.NamespacedSelector `json:"galleryApplicationIdSelector,omitempty" tf:"-"`
+	GalleryApplicationIDSelector *v2.NamespacedSelector `json:"galleryApplicationIdSelector,omitempty" tf:"-"`
 
 	// The Azure Region where the Gallery Application Version exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -220,11 +219,11 @@ type SourceInitParameters struct {
 
 	// Reference to a Blob in storage to populate mediaLink.
 	// +kubebuilder:validation:Optional
-	MediaLinkRef *v1.NamespacedReference `json:"mediaLinkRef,omitempty" tf:"-"`
+	MediaLinkRef *v2.NamespacedReference `json:"mediaLinkRef,omitempty" tf:"-"`
 
 	// Selector for a Blob in storage to populate mediaLink.
 	// +kubebuilder:validation:Optional
-	MediaLinkSelector *v1.NamespacedSelector `json:"mediaLinkSelector,omitempty" tf:"-"`
+	MediaLinkSelector *v2.NamespacedSelector `json:"mediaLinkSelector,omitempty" tf:"-"`
 }
 
 type SourceObservation struct {
@@ -250,11 +249,11 @@ type SourceParameters struct {
 
 	// Reference to a Blob in storage to populate mediaLink.
 	// +kubebuilder:validation:Optional
-	MediaLinkRef *v1.NamespacedReference `json:"mediaLinkRef,omitempty" tf:"-"`
+	MediaLinkRef *v2.NamespacedReference `json:"mediaLinkRef,omitempty" tf:"-"`
 
 	// Selector for a Blob in storage to populate mediaLink.
 	// +kubebuilder:validation:Optional
-	MediaLinkSelector *v1.NamespacedSelector `json:"mediaLinkSelector,omitempty" tf:"-"`
+	MediaLinkSelector *v2.NamespacedSelector `json:"mediaLinkSelector,omitempty" tf:"-"`
 }
 
 type TargetRegionInitParameters struct {
@@ -269,11 +268,11 @@ type TargetRegionInitParameters struct {
 
 	// Reference to a GalleryApplication in compute to populate name.
 	// +kubebuilder:validation:Optional
-	NameRef *v1.NamespacedReference `json:"nameRef,omitempty" tf:"-"`
+	NameRef *v2.NamespacedReference `json:"nameRef,omitempty" tf:"-"`
 
 	// Selector for a GalleryApplication in compute to populate name.
 	// +kubebuilder:validation:Optional
-	NameSelector *v1.NamespacedSelector `json:"nameSelector,omitempty" tf:"-"`
+	NameSelector *v2.NamespacedSelector `json:"nameSelector,omitempty" tf:"-"`
 
 	// The number of replicas of the Gallery Application Version to be created per region. Possible values are between 1 and 10.
 	RegionalReplicaCount *float64 `json:"regionalReplicaCount,omitempty" tf:"regional_replica_count,omitempty"`
@@ -311,11 +310,11 @@ type TargetRegionParameters struct {
 
 	// Reference to a GalleryApplication in compute to populate name.
 	// +kubebuilder:validation:Optional
-	NameRef *v1.NamespacedReference `json:"nameRef,omitempty" tf:"-"`
+	NameRef *v2.NamespacedReference `json:"nameRef,omitempty" tf:"-"`
 
 	// Selector for a GalleryApplication in compute to populate name.
 	// +kubebuilder:validation:Optional
-	NameSelector *v1.NamespacedSelector `json:"nameSelector,omitempty" tf:"-"`
+	NameSelector *v2.NamespacedSelector `json:"nameSelector,omitempty" tf:"-"`
 
 	// The number of replicas of the Gallery Application Version to be created per region. Possible values are between 1 and 10.
 	// +kubebuilder:validation:Optional
@@ -345,8 +344,8 @@ type GalleryApplicationVersionSpec struct {
 
 // GalleryApplicationVersionStatus defines the observed state of GalleryApplicationVersion.
 type GalleryApplicationVersionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        GalleryApplicationVersionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               GalleryApplicationVersionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

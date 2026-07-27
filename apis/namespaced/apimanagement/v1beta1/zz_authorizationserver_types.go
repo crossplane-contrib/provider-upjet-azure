@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AuthorizationServerInitParameters struct {
@@ -38,7 +37,7 @@ type AuthorizationServerInitParameters struct {
 	ClientRegistrationEndpoint *string `json:"clientRegistrationEndpoint,omitempty" tf:"client_registration_endpoint,omitempty"`
 
 	// The Client/App Secret registered with this Authorization Server.
-	ClientSecretSecretRef *v1.LocalSecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
+	ClientSecretSecretRef *v2.LocalSecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
 
 	// The Default Scope used when requesting an Access Token, specified as a string containing space-delimited values.
 	DefaultScope *string `json:"defaultScope,omitempty" tf:"default_scope,omitempty"`
@@ -54,7 +53,7 @@ type AuthorizationServerInitParameters struct {
 	GrantTypes []*string `json:"grantTypes,omitempty" tf:"grant_types,omitempty"`
 
 	// The password associated with the Resource Owner.
-	ResourceOwnerPasswordSecretRef *v1.LocalSecretKeySelector `json:"resourceOwnerPasswordSecretRef,omitempty" tf:"-"`
+	ResourceOwnerPasswordSecretRef *v2.LocalSecretKeySelector `json:"resourceOwnerPasswordSecretRef,omitempty" tf:"-"`
 
 	// The username associated with the Resource Owner.
 	ResourceOwnerUsername *string `json:"resourceOwnerUsername,omitempty" tf:"resource_owner_username,omitempty"`
@@ -136,11 +135,11 @@ type AuthorizationServerParameters struct {
 
 	// Reference to a Management in apimanagement to populate apiManagementName.
 	// +kubebuilder:validation:Optional
-	APIManagementNameRef *v1.NamespacedReference `json:"apiManagementNameRef,omitempty" tf:"-"`
+	APIManagementNameRef *v2.NamespacedReference `json:"apiManagementNameRef,omitempty" tf:"-"`
 
 	// Selector for a Management in apimanagement to populate apiManagementName.
 	// +kubebuilder:validation:Optional
-	APIManagementNameSelector *v1.NamespacedSelector `json:"apiManagementNameSelector,omitempty" tf:"-"`
+	APIManagementNameSelector *v2.NamespacedSelector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// The OAUTH Authorization Endpoint.
 	// +kubebuilder:validation:Optional
@@ -171,7 +170,7 @@ type AuthorizationServerParameters struct {
 
 	// The Client/App Secret registered with this Authorization Server.
 	// +kubebuilder:validation:Optional
-	ClientSecretSecretRef *v1.LocalSecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
+	ClientSecretSecretRef *v2.LocalSecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
 
 	// The Default Scope used when requesting an Access Token, specified as a string containing space-delimited values.
 	// +kubebuilder:validation:Optional
@@ -197,15 +196,15 @@ type AuthorizationServerParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The password associated with the Resource Owner.
 	// +kubebuilder:validation:Optional
-	ResourceOwnerPasswordSecretRef *v1.LocalSecretKeySelector `json:"resourceOwnerPasswordSecretRef,omitempty" tf:"-"`
+	ResourceOwnerPasswordSecretRef *v2.LocalSecretKeySelector `json:"resourceOwnerPasswordSecretRef,omitempty" tf:"-"`
 
 	// The username associated with the Resource Owner.
 	// +kubebuilder:validation:Optional
@@ -272,8 +271,8 @@ type AuthorizationServerSpec struct {
 
 // AuthorizationServerStatus defines the observed state of AuthorizationServer.
 type AuthorizationServerStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AuthorizationServerObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AuthorizationServerObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DNSZoneInitParameters struct {
@@ -58,11 +58,11 @@ type DNSZoneParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A soa_record block as defined below.
 	// +kubebuilder:validation:Optional
@@ -174,8 +174,8 @@ type SoaRecordParameters struct {
 
 // DNSZoneSpec defines the desired state of DNSZone
 type DNSZoneSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     DNSZoneParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   DNSZoneParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -191,8 +191,8 @@ type DNSZoneSpec struct {
 
 // DNSZoneStatus defines the observed state of DNSZone.
 type DNSZoneStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DNSZoneObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DNSZoneObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CustomParametersInitParameters struct {
@@ -30,11 +30,11 @@ type CustomParametersInitParameters struct {
 
 	// Reference to a Subnet in network to populate privateSubnetName.
 	// +kubebuilder:validation:Optional
-	PrivateSubnetNameRef *v1.Reference `json:"privateSubnetNameRef,omitempty" tf:"-"`
+	PrivateSubnetNameRef *v2.Reference `json:"privateSubnetNameRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate privateSubnetName.
 	// +kubebuilder:validation:Optional
-	PrivateSubnetNameSelector *v1.Selector `json:"privateSubnetNameSelector,omitempty" tf:"-"`
+	PrivateSubnetNameSelector *v2.Selector `json:"privateSubnetNameSelector,omitempty" tf:"-"`
 
 	// The resource ID of the azurerm_subnet_network_security_group_association resource which is referred to by the private_subnet_name field. This is the same as the ID of the subnet referred to by the private_subnet_name field. Required if virtual_network_id is set.
 	PrivateSubnetNetworkSecurityGroupAssociationID *string `json:"privateSubnetNetworkSecurityGroupAssociationId,omitempty" tf:"private_subnet_network_security_group_association_id,omitempty"`
@@ -48,11 +48,11 @@ type CustomParametersInitParameters struct {
 
 	// Reference to a Subnet in network to populate publicSubnetName.
 	// +kubebuilder:validation:Optional
-	PublicSubnetNameRef *v1.Reference `json:"publicSubnetNameRef,omitempty" tf:"-"`
+	PublicSubnetNameRef *v2.Reference `json:"publicSubnetNameRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate publicSubnetName.
 	// +kubebuilder:validation:Optional
-	PublicSubnetNameSelector *v1.Selector `json:"publicSubnetNameSelector,omitempty" tf:"-"`
+	PublicSubnetNameSelector *v2.Selector `json:"publicSubnetNameSelector,omitempty" tf:"-"`
 
 	// The resource ID of the azurerm_subnet_network_security_group_association resource which is referred to by the public_subnet_name field. This is the same as the ID of the subnet referred to by the public_subnet_name field. Required if virtual_network_id is set.
 	PublicSubnetNetworkSecurityGroupAssociationID *string `json:"publicSubnetNetworkSecurityGroupAssociationId,omitempty" tf:"public_subnet_network_security_group_association_id,omitempty"`
@@ -130,11 +130,11 @@ type CustomParametersParameters struct {
 
 	// Reference to a Subnet in network to populate privateSubnetName.
 	// +kubebuilder:validation:Optional
-	PrivateSubnetNameRef *v1.Reference `json:"privateSubnetNameRef,omitempty" tf:"-"`
+	PrivateSubnetNameRef *v2.Reference `json:"privateSubnetNameRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate privateSubnetName.
 	// +kubebuilder:validation:Optional
-	PrivateSubnetNameSelector *v1.Selector `json:"privateSubnetNameSelector,omitempty" tf:"-"`
+	PrivateSubnetNameSelector *v2.Selector `json:"privateSubnetNameSelector,omitempty" tf:"-"`
 
 	// The resource ID of the azurerm_subnet_network_security_group_association resource which is referred to by the private_subnet_name field. This is the same as the ID of the subnet referred to by the private_subnet_name field. Required if virtual_network_id is set.
 	// +kubebuilder:validation:Optional
@@ -151,11 +151,11 @@ type CustomParametersParameters struct {
 
 	// Reference to a Subnet in network to populate publicSubnetName.
 	// +kubebuilder:validation:Optional
-	PublicSubnetNameRef *v1.Reference `json:"publicSubnetNameRef,omitempty" tf:"-"`
+	PublicSubnetNameRef *v2.Reference `json:"publicSubnetNameRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate publicSubnetName.
 	// +kubebuilder:validation:Optional
-	PublicSubnetNameSelector *v1.Selector `json:"publicSubnetNameSelector,omitempty" tf:"-"`
+	PublicSubnetNameSelector *v2.Selector `json:"publicSubnetNameSelector,omitempty" tf:"-"`
 
 	// The resource ID of the azurerm_subnet_network_security_group_association resource which is referred to by the public_subnet_name field. This is the same as the ID of the subnet referred to by the public_subnet_name field. Required if virtual_network_id is set.
 	// +kubebuilder:validation:Optional
@@ -307,11 +307,11 @@ type WorkspaceInitParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate managedResourceGroupName.
 	// +kubebuilder:validation:Optional
-	ManagedResourceGroupNameRef *v1.Reference `json:"managedResourceGroupNameRef,omitempty" tf:"-"`
+	ManagedResourceGroupNameRef *v2.Reference `json:"managedResourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate managedResourceGroupName.
 	// +kubebuilder:validation:Optional
-	ManagedResourceGroupNameSelector *v1.Selector `json:"managedResourceGroupNameSelector,omitempty" tf:"-"`
+	ManagedResourceGroupNameSelector *v2.Selector `json:"managedResourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Resource ID of the Key Vault which contains the managed_services_cmk_key_vault_key_id key.
 	ManagedServicesCmkKeyVaultID *string `json:"managedServicesCmkKeyVaultId,omitempty" tf:"managed_services_cmk_key_vault_id,omitempty"`
@@ -468,11 +468,11 @@ type WorkspaceParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate managedResourceGroupName.
 	// +kubebuilder:validation:Optional
-	ManagedResourceGroupNameRef *v1.Reference `json:"managedResourceGroupNameRef,omitempty" tf:"-"`
+	ManagedResourceGroupNameRef *v2.Reference `json:"managedResourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate managedResourceGroupName.
 	// +kubebuilder:validation:Optional
-	ManagedResourceGroupNameSelector *v1.Selector `json:"managedResourceGroupNameSelector,omitempty" tf:"-"`
+	ManagedResourceGroupNameSelector *v2.Selector `json:"managedResourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Resource ID of the Key Vault which contains the managed_services_cmk_key_vault_key_id key.
 	// +kubebuilder:validation:Optional
@@ -497,11 +497,11 @@ type WorkspaceParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The sku to use for the Databricks Workspace. Possible values are standard, premium, or trial.
 	// +kubebuilder:validation:Optional
@@ -515,8 +515,8 @@ type WorkspaceParameters struct {
 
 // WorkspaceSpec defines the desired state of Workspace
 type WorkspaceSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     WorkspaceParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   WorkspaceParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -532,8 +532,8 @@ type WorkspaceSpec struct {
 
 // WorkspaceStatus defines the observed state of Workspace.
 type WorkspaceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        WorkspaceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               WorkspaceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

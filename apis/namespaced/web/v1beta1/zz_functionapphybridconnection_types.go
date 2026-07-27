@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type FunctionAppHybridConnectionInitParameters struct {
@@ -24,11 +23,11 @@ type FunctionAppHybridConnectionInitParameters struct {
 
 	// Reference to a WindowsFunctionApp in web to populate functionAppId.
 	// +kubebuilder:validation:Optional
-	FunctionAppIDRef *v1.NamespacedReference `json:"functionAppIdRef,omitempty" tf:"-"`
+	FunctionAppIDRef *v2.NamespacedReference `json:"functionAppIdRef,omitempty" tf:"-"`
 
 	// Selector for a WindowsFunctionApp in web to populate functionAppId.
 	// +kubebuilder:validation:Optional
-	FunctionAppIDSelector *v1.NamespacedSelector `json:"functionAppIdSelector,omitempty" tf:"-"`
+	FunctionAppIDSelector *v2.NamespacedSelector `json:"functionAppIdSelector,omitempty" tf:"-"`
 
 	// The hostname of the endpoint.
 	// The hostname of the endpoint.
@@ -46,11 +45,11 @@ type FunctionAppHybridConnectionInitParameters struct {
 
 	// Reference to a HybridConnection in relay to populate relayId.
 	// +kubebuilder:validation:Optional
-	RelayIDRef *v1.NamespacedReference `json:"relayIdRef,omitempty" tf:"-"`
+	RelayIDRef *v2.NamespacedReference `json:"relayIdRef,omitempty" tf:"-"`
 
 	// Selector for a HybridConnection in relay to populate relayId.
 	// +kubebuilder:validation:Optional
-	RelayIDSelector *v1.NamespacedSelector `json:"relayIdSelector,omitempty" tf:"-"`
+	RelayIDSelector *v2.NamespacedSelector `json:"relayIdSelector,omitempty" tf:"-"`
 
 	// The name of the Relay key with Send permission to use. Defaults to RootManageSharedAccessKey
 	// The name of the Relay key with `Send` permission to use. Defaults to `RootManageSharedAccessKey`
@@ -110,11 +109,11 @@ type FunctionAppHybridConnectionParameters struct {
 
 	// Reference to a WindowsFunctionApp in web to populate functionAppId.
 	// +kubebuilder:validation:Optional
-	FunctionAppIDRef *v1.NamespacedReference `json:"functionAppIdRef,omitempty" tf:"-"`
+	FunctionAppIDRef *v2.NamespacedReference `json:"functionAppIdRef,omitempty" tf:"-"`
 
 	// Selector for a WindowsFunctionApp in web to populate functionAppId.
 	// +kubebuilder:validation:Optional
-	FunctionAppIDSelector *v1.NamespacedSelector `json:"functionAppIdSelector,omitempty" tf:"-"`
+	FunctionAppIDSelector *v2.NamespacedSelector `json:"functionAppIdSelector,omitempty" tf:"-"`
 
 	// The hostname of the endpoint.
 	// The hostname of the endpoint.
@@ -135,11 +134,11 @@ type FunctionAppHybridConnectionParameters struct {
 
 	// Reference to a HybridConnection in relay to populate relayId.
 	// +kubebuilder:validation:Optional
-	RelayIDRef *v1.NamespacedReference `json:"relayIdRef,omitempty" tf:"-"`
+	RelayIDRef *v2.NamespacedReference `json:"relayIdRef,omitempty" tf:"-"`
 
 	// Selector for a HybridConnection in relay to populate relayId.
 	// +kubebuilder:validation:Optional
-	RelayIDSelector *v1.NamespacedSelector `json:"relayIdSelector,omitempty" tf:"-"`
+	RelayIDSelector *v2.NamespacedSelector `json:"relayIdSelector,omitempty" tf:"-"`
 
 	// The name of the Relay key with Send permission to use. Defaults to RootManageSharedAccessKey
 	// The name of the Relay key with `Send` permission to use. Defaults to `RootManageSharedAccessKey`
@@ -166,8 +165,8 @@ type FunctionAppHybridConnectionSpec struct {
 
 // FunctionAppHybridConnectionStatus defines the observed state of FunctionAppHybridConnection.
 type FunctionAppHybridConnectionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FunctionAppHybridConnectionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FunctionAppHybridConnectionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SentinelWatchlistInitParameters struct {
@@ -86,11 +85,11 @@ type SentinelWatchlistParameters struct {
 
 	// Reference to a SentinelLogAnalyticsWorkspaceOnboarding in securityinsights to populate logAnalyticsWorkspaceId.
 	// +kubebuilder:validation:Optional
-	LogAnalyticsWorkspaceIDRef *v1.NamespacedReference `json:"logAnalyticsWorkspaceIdRef,omitempty" tf:"-"`
+	LogAnalyticsWorkspaceIDRef *v2.NamespacedReference `json:"logAnalyticsWorkspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a SentinelLogAnalyticsWorkspaceOnboarding in securityinsights to populate logAnalyticsWorkspaceId.
 	// +kubebuilder:validation:Optional
-	LogAnalyticsWorkspaceIDSelector *v1.NamespacedSelector `json:"logAnalyticsWorkspaceIdSelector,omitempty" tf:"-"`
+	LogAnalyticsWorkspaceIDSelector *v2.NamespacedSelector `json:"logAnalyticsWorkspaceIdSelector,omitempty" tf:"-"`
 }
 
 // SentinelWatchlistSpec defines the desired state of SentinelWatchlist
@@ -112,8 +111,8 @@ type SentinelWatchlistSpec struct {
 
 // SentinelWatchlistStatus defines the observed state of SentinelWatchlist.
 type SentinelWatchlistStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SentinelWatchlistObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SentinelWatchlistObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

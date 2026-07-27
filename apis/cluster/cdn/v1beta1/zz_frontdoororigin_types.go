@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type FrontdoorOriginInitParameters struct {
@@ -34,11 +34,11 @@ type FrontdoorOriginInitParameters struct {
 
 	// Reference to a Account in storage to populate hostName.
 	// +kubebuilder:validation:Optional
-	HostNameRef *v1.Reference `json:"hostNameRef,omitempty" tf:"-"`
+	HostNameRef *v2.Reference `json:"hostNameRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate hostName.
 	// +kubebuilder:validation:Optional
-	HostNameSelector *v1.Selector `json:"hostNameSelector,omitempty" tf:"-"`
+	HostNameSelector *v2.Selector `json:"hostNameSelector,omitempty" tf:"-"`
 
 	// The host header value (an IPv4 address, IPv6 address or Domain name) which is sent to the origin with each request. If unspecified the hostname from the request will be used.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Account
@@ -47,11 +47,11 @@ type FrontdoorOriginInitParameters struct {
 
 	// Reference to a Account in storage to populate originHostHeader.
 	// +kubebuilder:validation:Optional
-	OriginHostHeaderRef *v1.Reference `json:"originHostHeaderRef,omitempty" tf:"-"`
+	OriginHostHeaderRef *v2.Reference `json:"originHostHeaderRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate originHostHeader.
 	// +kubebuilder:validation:Optional
-	OriginHostHeaderSelector *v1.Selector `json:"originHostHeaderSelector,omitempty" tf:"-"`
+	OriginHostHeaderSelector *v2.Selector `json:"originHostHeaderSelector,omitempty" tf:"-"`
 
 	// Priority of origin in given origin group for load balancing. Higher priorities will not be used for load balancing if any lower priority origin is healthy. Must be between 1 and 5 (inclusive). Defaults to 1.
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
@@ -109,11 +109,11 @@ type FrontdoorOriginParameters struct {
 
 	// Reference to a FrontdoorOriginGroup in cdn to populate cdnFrontdoorOriginGroupId.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorOriginGroupIDRef *v1.Reference `json:"cdnFrontdoorOriginGroupIdRef,omitempty" tf:"-"`
+	CdnFrontdoorOriginGroupIDRef *v2.Reference `json:"cdnFrontdoorOriginGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a FrontdoorOriginGroup in cdn to populate cdnFrontdoorOriginGroupId.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorOriginGroupIDSelector *v1.Selector `json:"cdnFrontdoorOriginGroupIdSelector,omitempty" tf:"-"`
+	CdnFrontdoorOriginGroupIDSelector *v2.Selector `json:"cdnFrontdoorOriginGroupIdSelector,omitempty" tf:"-"`
 
 	// Specifies whether certificate name checks are enabled for this origin.
 	// +kubebuilder:validation:Optional
@@ -139,11 +139,11 @@ type FrontdoorOriginParameters struct {
 
 	// Reference to a Account in storage to populate hostName.
 	// +kubebuilder:validation:Optional
-	HostNameRef *v1.Reference `json:"hostNameRef,omitempty" tf:"-"`
+	HostNameRef *v2.Reference `json:"hostNameRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate hostName.
 	// +kubebuilder:validation:Optional
-	HostNameSelector *v1.Selector `json:"hostNameSelector,omitempty" tf:"-"`
+	HostNameSelector *v2.Selector `json:"hostNameSelector,omitempty" tf:"-"`
 
 	// The host header value (an IPv4 address, IPv6 address or Domain name) which is sent to the origin with each request. If unspecified the hostname from the request will be used.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Account
@@ -153,11 +153,11 @@ type FrontdoorOriginParameters struct {
 
 	// Reference to a Account in storage to populate originHostHeader.
 	// +kubebuilder:validation:Optional
-	OriginHostHeaderRef *v1.Reference `json:"originHostHeaderRef,omitempty" tf:"-"`
+	OriginHostHeaderRef *v2.Reference `json:"originHostHeaderRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate originHostHeader.
 	// +kubebuilder:validation:Optional
-	OriginHostHeaderSelector *v1.Selector `json:"originHostHeaderSelector,omitempty" tf:"-"`
+	OriginHostHeaderSelector *v2.Selector `json:"originHostHeaderSelector,omitempty" tf:"-"`
 
 	// Priority of origin in given origin group for load balancing. Higher priorities will not be used for load balancing if any lower priority origin is healthy. Must be between 1 and 5 (inclusive). Defaults to 1.
 	// +kubebuilder:validation:Optional
@@ -181,11 +181,11 @@ type PrivateLinkInitParameters struct {
 
 	// Reference to a Account in storage to populate location.
 	// +kubebuilder:validation:Optional
-	LocationRef *v1.Reference `json:"locationRef,omitempty" tf:"-"`
+	LocationRef *v2.Reference `json:"locationRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate location.
 	// +kubebuilder:validation:Optional
-	LocationSelector *v1.Selector `json:"locationSelector,omitempty" tf:"-"`
+	LocationSelector *v2.Selector `json:"locationSelector,omitempty" tf:"-"`
 
 	// The ID of the Azure Resource to connect to via the Private Link.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Account
@@ -194,11 +194,11 @@ type PrivateLinkInitParameters struct {
 
 	// Reference to a Account in storage to populate privateLinkTargetId.
 	// +kubebuilder:validation:Optional
-	PrivateLinkTargetIDRef *v1.Reference `json:"privateLinkTargetIdRef,omitempty" tf:"-"`
+	PrivateLinkTargetIDRef *v2.Reference `json:"privateLinkTargetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate privateLinkTargetId.
 	// +kubebuilder:validation:Optional
-	PrivateLinkTargetIDSelector *v1.Selector `json:"privateLinkTargetIdSelector,omitempty" tf:"-"`
+	PrivateLinkTargetIDSelector *v2.Selector `json:"privateLinkTargetIdSelector,omitempty" tf:"-"`
 
 	// Specifies the request message that will be submitted to the private_link_target_id when requesting the private link endpoint connection. Values must be between 1 and 140 characters in length. Defaults to Access request for CDN FrontDoor Private Link Origin.
 	RequestMessage *string `json:"requestMessage,omitempty" tf:"request_message,omitempty"`
@@ -232,11 +232,11 @@ type PrivateLinkParameters struct {
 
 	// Reference to a Account in storage to populate location.
 	// +kubebuilder:validation:Optional
-	LocationRef *v1.Reference `json:"locationRef,omitempty" tf:"-"`
+	LocationRef *v2.Reference `json:"locationRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate location.
 	// +kubebuilder:validation:Optional
-	LocationSelector *v1.Selector `json:"locationSelector,omitempty" tf:"-"`
+	LocationSelector *v2.Selector `json:"locationSelector,omitempty" tf:"-"`
 
 	// The ID of the Azure Resource to connect to via the Private Link.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Account
@@ -246,11 +246,11 @@ type PrivateLinkParameters struct {
 
 	// Reference to a Account in storage to populate privateLinkTargetId.
 	// +kubebuilder:validation:Optional
-	PrivateLinkTargetIDRef *v1.Reference `json:"privateLinkTargetIdRef,omitempty" tf:"-"`
+	PrivateLinkTargetIDRef *v2.Reference `json:"privateLinkTargetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate privateLinkTargetId.
 	// +kubebuilder:validation:Optional
-	PrivateLinkTargetIDSelector *v1.Selector `json:"privateLinkTargetIdSelector,omitempty" tf:"-"`
+	PrivateLinkTargetIDSelector *v2.Selector `json:"privateLinkTargetIdSelector,omitempty" tf:"-"`
 
 	// Specifies the request message that will be submitted to the private_link_target_id when requesting the private link endpoint connection. Values must be between 1 and 140 characters in length. Defaults to Access request for CDN FrontDoor Private Link Origin.
 	// +kubebuilder:validation:Optional
@@ -263,8 +263,8 @@ type PrivateLinkParameters struct {
 
 // FrontdoorOriginSpec defines the desired state of FrontdoorOrigin
 type FrontdoorOriginSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     FrontdoorOriginParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   FrontdoorOriginParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -280,8 +280,8 @@ type FrontdoorOriginSpec struct {
 
 // FrontdoorOriginStatus defines the observed state of FrontdoorOrigin.
 type FrontdoorOriginStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FrontdoorOriginObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FrontdoorOriginObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

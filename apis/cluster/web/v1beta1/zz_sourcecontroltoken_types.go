@@ -10,16 +10,16 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SourceControlTokenInitParameters struct {
 
 	// The Access Token.
-	TokenSecretRef v1.SecretKeySelector `json:"tokenSecretRef" tf:"-"`
+	TokenSecretRef v2.SecretKeySelector `json:"tokenSecretRef" tf:"-"`
 
 	// The Access Token Secret.
-	TokenSecretSecretRef *v1.SecretKeySelector `json:"tokenSecretSecretRef,omitempty" tf:"-"`
+	TokenSecretSecretRef *v2.SecretKeySelector `json:"tokenSecretSecretRef,omitempty" tf:"-"`
 
 	// The Token type. Possible values include Bitbucket, Dropbox, Github, and OneDrive.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -38,11 +38,11 @@ type SourceControlTokenParameters struct {
 
 	// The Access Token.
 	// +kubebuilder:validation:Optional
-	TokenSecretRef v1.SecretKeySelector `json:"tokenSecretRef" tf:"-"`
+	TokenSecretRef v2.SecretKeySelector `json:"tokenSecretRef" tf:"-"`
 
 	// The Access Token Secret.
 	// +kubebuilder:validation:Optional
-	TokenSecretSecretRef *v1.SecretKeySelector `json:"tokenSecretSecretRef,omitempty" tf:"-"`
+	TokenSecretSecretRef *v2.SecretKeySelector `json:"tokenSecretSecretRef,omitempty" tf:"-"`
 
 	// The Token type. Possible values include Bitbucket, Dropbox, Github, and OneDrive.
 	// +kubebuilder:validation:Optional
@@ -51,8 +51,8 @@ type SourceControlTokenParameters struct {
 
 // SourceControlTokenSpec defines the desired state of SourceControlToken
 type SourceControlTokenSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SourceControlTokenParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SourceControlTokenParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -68,8 +68,8 @@ type SourceControlTokenSpec struct {
 
 // SourceControlTokenStatus defines the observed state of SourceControlToken.
 type SourceControlTokenStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SourceControlTokenObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SourceControlTokenObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

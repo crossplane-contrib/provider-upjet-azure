@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BackupDataSourceParametersInitParameters struct {
@@ -104,11 +104,11 @@ type BackupInstanceKubernetesClusterInitParameters struct {
 
 	// Reference to a BackupPolicyKubernetesCluster in dataprotection to populate backupPolicyId.
 	// +kubebuilder:validation:Optional
-	BackupPolicyIDRef *v1.Reference `json:"backupPolicyIdRef,omitempty" tf:"-"`
+	BackupPolicyIDRef *v2.Reference `json:"backupPolicyIdRef,omitempty" tf:"-"`
 
 	// Selector for a BackupPolicyKubernetesCluster in dataprotection to populate backupPolicyId.
 	// +kubebuilder:validation:Optional
-	BackupPolicyIDSelector *v1.Selector `json:"backupPolicyIdSelector,omitempty" tf:"-"`
+	BackupPolicyIDSelector *v2.Selector `json:"backupPolicyIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Kubernetes Cluster. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/containerservice/v1beta2.KubernetesCluster
@@ -117,11 +117,11 @@ type BackupInstanceKubernetesClusterInitParameters struct {
 
 	// Reference to a KubernetesCluster in containerservice to populate kubernetesClusterId.
 	// +kubebuilder:validation:Optional
-	KubernetesClusterIDRef *v1.Reference `json:"kubernetesClusterIdRef,omitempty" tf:"-"`
+	KubernetesClusterIDRef *v2.Reference `json:"kubernetesClusterIdRef,omitempty" tf:"-"`
 
 	// Selector for a KubernetesCluster in containerservice to populate kubernetesClusterId.
 	// +kubebuilder:validation:Optional
-	KubernetesClusterIDSelector *v1.Selector `json:"kubernetesClusterIdSelector,omitempty" tf:"-"`
+	KubernetesClusterIDSelector *v2.Selector `json:"kubernetesClusterIdSelector,omitempty" tf:"-"`
 
 	// The location of the Backup Instance Kubernetes Cluster. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -132,11 +132,11 @@ type BackupInstanceKubernetesClusterInitParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate snapshotResourceGroupName.
 	// +kubebuilder:validation:Optional
-	SnapshotResourceGroupNameRef *v1.Reference `json:"snapshotResourceGroupNameRef,omitempty" tf:"-"`
+	SnapshotResourceGroupNameRef *v2.Reference `json:"snapshotResourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate snapshotResourceGroupName.
 	// +kubebuilder:validation:Optional
-	SnapshotResourceGroupNameSelector *v1.Selector `json:"snapshotResourceGroupNameSelector,omitempty" tf:"-"`
+	SnapshotResourceGroupNameSelector *v2.Selector `json:"snapshotResourceGroupNameSelector,omitempty" tf:"-"`
 }
 
 type BackupInstanceKubernetesClusterObservation struct {
@@ -180,11 +180,11 @@ type BackupInstanceKubernetesClusterParameters struct {
 
 	// Reference to a BackupPolicyKubernetesCluster in dataprotection to populate backupPolicyId.
 	// +kubebuilder:validation:Optional
-	BackupPolicyIDRef *v1.Reference `json:"backupPolicyIdRef,omitempty" tf:"-"`
+	BackupPolicyIDRef *v2.Reference `json:"backupPolicyIdRef,omitempty" tf:"-"`
 
 	// Selector for a BackupPolicyKubernetesCluster in dataprotection to populate backupPolicyId.
 	// +kubebuilder:validation:Optional
-	BackupPolicyIDSelector *v1.Selector `json:"backupPolicyIdSelector,omitempty" tf:"-"`
+	BackupPolicyIDSelector *v2.Selector `json:"backupPolicyIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Kubernetes Cluster. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/containerservice/v1beta2.KubernetesCluster
@@ -194,11 +194,11 @@ type BackupInstanceKubernetesClusterParameters struct {
 
 	// Reference to a KubernetesCluster in containerservice to populate kubernetesClusterId.
 	// +kubebuilder:validation:Optional
-	KubernetesClusterIDRef *v1.Reference `json:"kubernetesClusterIdRef,omitempty" tf:"-"`
+	KubernetesClusterIDRef *v2.Reference `json:"kubernetesClusterIdRef,omitempty" tf:"-"`
 
 	// Selector for a KubernetesCluster in containerservice to populate kubernetesClusterId.
 	// +kubebuilder:validation:Optional
-	KubernetesClusterIDSelector *v1.Selector `json:"kubernetesClusterIdSelector,omitempty" tf:"-"`
+	KubernetesClusterIDSelector *v2.Selector `json:"kubernetesClusterIdSelector,omitempty" tf:"-"`
 
 	// The location of the Backup Instance Kubernetes Cluster. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -211,11 +211,11 @@ type BackupInstanceKubernetesClusterParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate snapshotResourceGroupName.
 	// +kubebuilder:validation:Optional
-	SnapshotResourceGroupNameRef *v1.Reference `json:"snapshotResourceGroupNameRef,omitempty" tf:"-"`
+	SnapshotResourceGroupNameRef *v2.Reference `json:"snapshotResourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate snapshotResourceGroupName.
 	// +kubebuilder:validation:Optional
-	SnapshotResourceGroupNameSelector *v1.Selector `json:"snapshotResourceGroupNameSelector,omitempty" tf:"-"`
+	SnapshotResourceGroupNameSelector *v2.Selector `json:"snapshotResourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The ID of the Backup Vault within which the Backup Instance Kubernetes Cluster should exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/dataprotection/v1beta2.BackupVault
@@ -225,17 +225,17 @@ type BackupInstanceKubernetesClusterParameters struct {
 
 	// Reference to a BackupVault in dataprotection to populate vaultId.
 	// +kubebuilder:validation:Optional
-	VaultIDRef *v1.Reference `json:"vaultIdRef,omitempty" tf:"-"`
+	VaultIDRef *v2.Reference `json:"vaultIdRef,omitempty" tf:"-"`
 
 	// Selector for a BackupVault in dataprotection to populate vaultId.
 	// +kubebuilder:validation:Optional
-	VaultIDSelector *v1.Selector `json:"vaultIdSelector,omitempty" tf:"-"`
+	VaultIDSelector *v2.Selector `json:"vaultIdSelector,omitempty" tf:"-"`
 }
 
 // BackupInstanceKubernetesClusterSpec defines the desired state of BackupInstanceKubernetesCluster
 type BackupInstanceKubernetesClusterSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     BackupInstanceKubernetesClusterParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   BackupInstanceKubernetesClusterParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -251,8 +251,8 @@ type BackupInstanceKubernetesClusterSpec struct {
 
 // BackupInstanceKubernetesClusterStatus defines the observed state of BackupInstanceKubernetesCluster.
 type BackupInstanceKubernetesClusterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BackupInstanceKubernetesClusterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BackupInstanceKubernetesClusterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

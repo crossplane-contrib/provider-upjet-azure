@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type MaintenanceAssignmentVirtualMachineInitParameters struct {
@@ -26,11 +25,11 @@ type MaintenanceAssignmentVirtualMachineInitParameters struct {
 
 	// Reference to a MaintenanceConfiguration in maintenance to populate maintenanceConfigurationId.
 	// +kubebuilder:validation:Optional
-	MaintenanceConfigurationIDRef *v1.NamespacedReference `json:"maintenanceConfigurationIdRef,omitempty" tf:"-"`
+	MaintenanceConfigurationIDRef *v2.NamespacedReference `json:"maintenanceConfigurationIdRef,omitempty" tf:"-"`
 
 	// Selector for a MaintenanceConfiguration in maintenance to populate maintenanceConfigurationId.
 	// +kubebuilder:validation:Optional
-	MaintenanceConfigurationIDSelector *v1.NamespacedSelector `json:"maintenanceConfigurationIdSelector,omitempty" tf:"-"`
+	MaintenanceConfigurationIDSelector *v2.NamespacedSelector `json:"maintenanceConfigurationIdSelector,omitempty" tf:"-"`
 }
 
 type MaintenanceAssignmentVirtualMachineObservation struct {
@@ -62,11 +61,11 @@ type MaintenanceAssignmentVirtualMachineParameters struct {
 
 	// Reference to a MaintenanceConfiguration in maintenance to populate maintenanceConfigurationId.
 	// +kubebuilder:validation:Optional
-	MaintenanceConfigurationIDRef *v1.NamespacedReference `json:"maintenanceConfigurationIdRef,omitempty" tf:"-"`
+	MaintenanceConfigurationIDRef *v2.NamespacedReference `json:"maintenanceConfigurationIdRef,omitempty" tf:"-"`
 
 	// Selector for a MaintenanceConfiguration in maintenance to populate maintenanceConfigurationId.
 	// +kubebuilder:validation:Optional
-	MaintenanceConfigurationIDSelector *v1.NamespacedSelector `json:"maintenanceConfigurationIdSelector,omitempty" tf:"-"`
+	MaintenanceConfigurationIDSelector *v2.NamespacedSelector `json:"maintenanceConfigurationIdSelector,omitempty" tf:"-"`
 
 	// Specifies the Virtual Machine ID to which the Maintenance Configuration will be assigned. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/compute/v1beta1.LinuxVirtualMachine
@@ -76,11 +75,11 @@ type MaintenanceAssignmentVirtualMachineParameters struct {
 
 	// Reference to a LinuxVirtualMachine in compute to populate virtualMachineId.
 	// +kubebuilder:validation:Optional
-	VirtualMachineIDRef *v1.NamespacedReference `json:"virtualMachineIdRef,omitempty" tf:"-"`
+	VirtualMachineIDRef *v2.NamespacedReference `json:"virtualMachineIdRef,omitempty" tf:"-"`
 
 	// Selector for a LinuxVirtualMachine in compute to populate virtualMachineId.
 	// +kubebuilder:validation:Optional
-	VirtualMachineIDSelector *v1.NamespacedSelector `json:"virtualMachineIdSelector,omitempty" tf:"-"`
+	VirtualMachineIDSelector *v2.NamespacedSelector `json:"virtualMachineIdSelector,omitempty" tf:"-"`
 }
 
 // MaintenanceAssignmentVirtualMachineSpec defines the desired state of MaintenanceAssignmentVirtualMachine
@@ -102,8 +101,8 @@ type MaintenanceAssignmentVirtualMachineSpec struct {
 
 // MaintenanceAssignmentVirtualMachineStatus defines the observed state of MaintenanceAssignmentVirtualMachine.
 type MaintenanceAssignmentVirtualMachineStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MaintenanceAssignmentVirtualMachineObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MaintenanceAssignmentVirtualMachineObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

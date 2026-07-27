@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type FrontdoorOriginGroupInitParameters struct {
@@ -60,11 +59,11 @@ type FrontdoorOriginGroupParameters struct {
 
 	// Reference to a FrontdoorProfile in cdn to populate cdnFrontdoorProfileId.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorProfileIDRef *v1.NamespacedReference `json:"cdnFrontdoorProfileIdRef,omitempty" tf:"-"`
+	CdnFrontdoorProfileIDRef *v2.NamespacedReference `json:"cdnFrontdoorProfileIdRef,omitempty" tf:"-"`
 
 	// Selector for a FrontdoorProfile in cdn to populate cdnFrontdoorProfileId.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorProfileIDSelector *v1.NamespacedSelector `json:"cdnFrontdoorProfileIdSelector,omitempty" tf:"-"`
+	CdnFrontdoorProfileIDSelector *v2.NamespacedSelector `json:"cdnFrontdoorProfileIdSelector,omitempty" tf:"-"`
 
 	// A health_probe block as defined below.
 	// +kubebuilder:validation:Optional
@@ -190,8 +189,8 @@ type FrontdoorOriginGroupSpec struct {
 
 // FrontdoorOriginGroupStatus defines the observed state of FrontdoorOriginGroup.
 type FrontdoorOriginGroupStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FrontdoorOriginGroupObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FrontdoorOriginGroupObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

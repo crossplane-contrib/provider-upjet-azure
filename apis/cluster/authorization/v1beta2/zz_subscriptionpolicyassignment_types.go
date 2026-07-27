@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SubscriptionPolicyAssignmentIdentityInitParameters struct {
@@ -90,11 +90,11 @@ type SubscriptionPolicyAssignmentInitParameters struct {
 
 	// Reference to a PolicyDefinition in authorization to populate policyDefinitionId.
 	// +kubebuilder:validation:Optional
-	PolicyDefinitionIDRef *v1.Reference `json:"policyDefinitionIdRef,omitempty" tf:"-"`
+	PolicyDefinitionIDRef *v2.Reference `json:"policyDefinitionIdRef,omitempty" tf:"-"`
 
 	// Selector for a PolicyDefinition in authorization to populate policyDefinitionId.
 	// +kubebuilder:validation:Optional
-	PolicyDefinitionIDSelector *v1.Selector `json:"policyDefinitionIdSelector,omitempty" tf:"-"`
+	PolicyDefinitionIDSelector *v2.Selector `json:"policyDefinitionIdSelector,omitempty" tf:"-"`
 
 	// One or more resource_selectors blocks as defined below to filter polices by resource properties.
 	ResourceSelectors []SubscriptionPolicyAssignmentResourceSelectorsInitParameters `json:"resourceSelectors,omitempty" tf:"resource_selectors,omitempty"`
@@ -295,11 +295,11 @@ type SubscriptionPolicyAssignmentParameters struct {
 
 	// Reference to a PolicyDefinition in authorization to populate policyDefinitionId.
 	// +kubebuilder:validation:Optional
-	PolicyDefinitionIDRef *v1.Reference `json:"policyDefinitionIdRef,omitempty" tf:"-"`
+	PolicyDefinitionIDRef *v2.Reference `json:"policyDefinitionIdRef,omitempty" tf:"-"`
 
 	// Selector for a PolicyDefinition in authorization to populate policyDefinitionId.
 	// +kubebuilder:validation:Optional
-	PolicyDefinitionIDSelector *v1.Selector `json:"policyDefinitionIdSelector,omitempty" tf:"-"`
+	PolicyDefinitionIDSelector *v2.Selector `json:"policyDefinitionIdSelector,omitempty" tf:"-"`
 
 	// One or more resource_selectors blocks as defined below to filter polices by resource properties.
 	// +kubebuilder:validation:Optional
@@ -380,8 +380,8 @@ type SubscriptionPolicyAssignmentResourceSelectorsSelectorsParameters struct {
 
 // SubscriptionPolicyAssignmentSpec defines the desired state of SubscriptionPolicyAssignment
 type SubscriptionPolicyAssignmentSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SubscriptionPolicyAssignmentParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SubscriptionPolicyAssignmentParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -397,8 +397,8 @@ type SubscriptionPolicyAssignmentSpec struct {
 
 // SubscriptionPolicyAssignmentStatus defines the observed state of SubscriptionPolicyAssignment.
 type SubscriptionPolicyAssignmentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SubscriptionPolicyAssignmentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SubscriptionPolicyAssignmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

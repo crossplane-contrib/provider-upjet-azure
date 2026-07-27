@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ApplicationInsightsAnalyticsItemInitParameters struct {
@@ -23,11 +22,11 @@ type ApplicationInsightsAnalyticsItemInitParameters struct {
 
 	// Reference to a ApplicationInsights in insights to populate applicationInsightsId.
 	// +kubebuilder:validation:Optional
-	ApplicationInsightsIDRef *v1.NamespacedReference `json:"applicationInsightsIdRef,omitempty" tf:"-"`
+	ApplicationInsightsIDRef *v2.NamespacedReference `json:"applicationInsightsIdRef,omitempty" tf:"-"`
 
 	// Selector for a ApplicationInsights in insights to populate applicationInsightsId.
 	// +kubebuilder:validation:Optional
-	ApplicationInsightsIDSelector *v1.NamespacedSelector `json:"applicationInsightsIdSelector,omitempty" tf:"-"`
+	ApplicationInsightsIDSelector *v2.NamespacedSelector `json:"applicationInsightsIdSelector,omitempty" tf:"-"`
 
 	// The content for the Analytics Item, for example the query text if type is query.
 	Content *string `json:"content,omitempty" tf:"content,omitempty"`
@@ -88,11 +87,11 @@ type ApplicationInsightsAnalyticsItemParameters struct {
 
 	// Reference to a ApplicationInsights in insights to populate applicationInsightsId.
 	// +kubebuilder:validation:Optional
-	ApplicationInsightsIDRef *v1.NamespacedReference `json:"applicationInsightsIdRef,omitempty" tf:"-"`
+	ApplicationInsightsIDRef *v2.NamespacedReference `json:"applicationInsightsIdRef,omitempty" tf:"-"`
 
 	// Selector for a ApplicationInsights in insights to populate applicationInsightsId.
 	// +kubebuilder:validation:Optional
-	ApplicationInsightsIDSelector *v1.NamespacedSelector `json:"applicationInsightsIdSelector,omitempty" tf:"-"`
+	ApplicationInsightsIDSelector *v2.NamespacedSelector `json:"applicationInsightsIdSelector,omitempty" tf:"-"`
 
 	// The content for the Analytics Item, for example the query text if type is query.
 	// +kubebuilder:validation:Optional
@@ -134,8 +133,8 @@ type ApplicationInsightsAnalyticsItemSpec struct {
 
 // ApplicationInsightsAnalyticsItemStatus defines the observed state of ApplicationInsightsAnalyticsItem.
 type ApplicationInsightsAnalyticsItemStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ApplicationInsightsAnalyticsItemObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ApplicationInsightsAnalyticsItemObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

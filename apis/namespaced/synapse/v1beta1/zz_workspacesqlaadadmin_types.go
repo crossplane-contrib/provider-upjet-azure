@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type WorkspaceSQLAADAdminInitParameters struct {
@@ -29,11 +28,11 @@ type WorkspaceSQLAADAdminInitParameters struct {
 
 	// Reference to a Workspace in synapse to populate synapseWorkspaceId.
 	// +kubebuilder:validation:Optional
-	SynapseWorkspaceIDRef *v1.NamespacedReference `json:"synapseWorkspaceIdRef,omitempty" tf:"-"`
+	SynapseWorkspaceIDRef *v2.NamespacedReference `json:"synapseWorkspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in synapse to populate synapseWorkspaceId.
 	// +kubebuilder:validation:Optional
-	SynapseWorkspaceIDSelector *v1.NamespacedSelector `json:"synapseWorkspaceIdSelector,omitempty" tf:"-"`
+	SynapseWorkspaceIDSelector *v2.NamespacedSelector `json:"synapseWorkspaceIdSelector,omitempty" tf:"-"`
 
 	// The tenant id of the Azure AD SQL Administrator of this Synapse Workspace.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
@@ -75,11 +74,11 @@ type WorkspaceSQLAADAdminParameters struct {
 
 	// Reference to a Workspace in synapse to populate synapseWorkspaceId.
 	// +kubebuilder:validation:Optional
-	SynapseWorkspaceIDRef *v1.NamespacedReference `json:"synapseWorkspaceIdRef,omitempty" tf:"-"`
+	SynapseWorkspaceIDRef *v2.NamespacedReference `json:"synapseWorkspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in synapse to populate synapseWorkspaceId.
 	// +kubebuilder:validation:Optional
-	SynapseWorkspaceIDSelector *v1.NamespacedSelector `json:"synapseWorkspaceIdSelector,omitempty" tf:"-"`
+	SynapseWorkspaceIDSelector *v2.NamespacedSelector `json:"synapseWorkspaceIdSelector,omitempty" tf:"-"`
 
 	// The tenant id of the Azure AD SQL Administrator of this Synapse Workspace.
 	// +kubebuilder:validation:Optional
@@ -105,8 +104,8 @@ type WorkspaceSQLAADAdminSpec struct {
 
 // WorkspaceSQLAADAdminStatus defines the observed state of WorkspaceSQLAADAdmin.
 type WorkspaceSQLAADAdminStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        WorkspaceSQLAADAdminObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               WorkspaceSQLAADAdminObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

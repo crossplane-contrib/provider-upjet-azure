@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type LogAnalyticsLinkedStorageAccountInitParameters struct {
@@ -24,11 +24,11 @@ type LogAnalyticsLinkedStorageAccountInitParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The storage account resource ids to be linked.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
@@ -38,11 +38,11 @@ type LogAnalyticsLinkedStorageAccountInitParameters struct {
 
 	// References to Account in storage to populate storageAccountIds.
 	// +kubebuilder:validation:Optional
-	StorageAccountIdsRefs []v1.Reference `json:"storageAccountIdsRefs,omitempty" tf:"-"`
+	StorageAccountIdsRefs []v2.Reference `json:"storageAccountIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Account in storage to populate storageAccountIds.
 	// +kubebuilder:validation:Optional
-	StorageAccountIdsSelector *v1.Selector `json:"storageAccountIdsSelector,omitempty" tf:"-"`
+	StorageAccountIdsSelector *v2.Selector `json:"storageAccountIdsSelector,omitempty" tf:"-"`
 
 	// The resource ID of the Log Analytics Workspace. Changing this forces a new Log Analytics Linked Storage Account to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/operationalinsights/v1beta2.Workspace
@@ -51,11 +51,11 @@ type LogAnalyticsLinkedStorageAccountInitParameters struct {
 
 	// Reference to a Workspace in operationalinsights to populate workspaceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceIDRef *v1.Reference `json:"workspaceIdRef,omitempty" tf:"-"`
+	WorkspaceIDRef *v2.Reference `json:"workspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in operationalinsights to populate workspaceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceIDSelector *v1.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
+	WorkspaceIDSelector *v2.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Log Analytics Linked Storage Account.
 	WorkspaceResourceID *string `json:"workspaceResourceId,omitempty" tf:"workspace_resource_id,omitempty"`
@@ -96,11 +96,11 @@ type LogAnalyticsLinkedStorageAccountParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The storage account resource ids to be linked.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
@@ -111,11 +111,11 @@ type LogAnalyticsLinkedStorageAccountParameters struct {
 
 	// References to Account in storage to populate storageAccountIds.
 	// +kubebuilder:validation:Optional
-	StorageAccountIdsRefs []v1.Reference `json:"storageAccountIdsRefs,omitempty" tf:"-"`
+	StorageAccountIdsRefs []v2.Reference `json:"storageAccountIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Account in storage to populate storageAccountIds.
 	// +kubebuilder:validation:Optional
-	StorageAccountIdsSelector *v1.Selector `json:"storageAccountIdsSelector,omitempty" tf:"-"`
+	StorageAccountIdsSelector *v2.Selector `json:"storageAccountIdsSelector,omitempty" tf:"-"`
 
 	// The resource ID of the Log Analytics Workspace. Changing this forces a new Log Analytics Linked Storage Account to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/operationalinsights/v1beta2.Workspace
@@ -125,11 +125,11 @@ type LogAnalyticsLinkedStorageAccountParameters struct {
 
 	// Reference to a Workspace in operationalinsights to populate workspaceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceIDRef *v1.Reference `json:"workspaceIdRef,omitempty" tf:"-"`
+	WorkspaceIDRef *v2.Reference `json:"workspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in operationalinsights to populate workspaceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceIDSelector *v1.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
+	WorkspaceIDSelector *v2.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Log Analytics Linked Storage Account.
 	// +kubebuilder:validation:Optional
@@ -138,8 +138,8 @@ type LogAnalyticsLinkedStorageAccountParameters struct {
 
 // LogAnalyticsLinkedStorageAccountSpec defines the desired state of LogAnalyticsLinkedStorageAccount
 type LogAnalyticsLinkedStorageAccountSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     LogAnalyticsLinkedStorageAccountParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   LogAnalyticsLinkedStorageAccountParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -155,8 +155,8 @@ type LogAnalyticsLinkedStorageAccountSpec struct {
 
 // LogAnalyticsLinkedStorageAccountStatus defines the observed state of LogAnalyticsLinkedStorageAccount.
 type LogAnalyticsLinkedStorageAccountStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LogAnalyticsLinkedStorageAccountObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LogAnalyticsLinkedStorageAccountObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

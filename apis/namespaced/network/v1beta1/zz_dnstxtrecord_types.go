@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DNSTXTRecordInitParameters struct {
@@ -65,11 +64,11 @@ type DNSTXTRecordParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The Time To Live (TTL) of the DNS record in seconds.
 	// +kubebuilder:validation:Optional
@@ -87,11 +86,11 @@ type DNSTXTRecordParameters struct {
 
 	// Reference to a DNSZone in network to populate zoneName.
 	// +kubebuilder:validation:Optional
-	ZoneNameRef *v1.NamespacedReference `json:"zoneNameRef,omitempty" tf:"-"`
+	ZoneNameRef *v2.NamespacedReference `json:"zoneNameRef,omitempty" tf:"-"`
 
 	// Selector for a DNSZone in network to populate zoneName.
 	// +kubebuilder:validation:Optional
-	ZoneNameSelector *v1.NamespacedSelector `json:"zoneNameSelector,omitempty" tf:"-"`
+	ZoneNameSelector *v2.NamespacedSelector `json:"zoneNameSelector,omitempty" tf:"-"`
 }
 
 type DNSTXTRecordRecordInitParameters struct {
@@ -132,8 +131,8 @@ type DNSTXTRecordSpec struct {
 
 // DNSTXTRecordStatus defines the observed state of DNSTXTRecord.
 type DNSTXTRecordStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DNSTXTRecordObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DNSTXTRecordObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

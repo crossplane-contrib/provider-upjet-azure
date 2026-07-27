@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type VirtualDesktopHostPoolRegistrationInfoInitParameters struct {
@@ -26,11 +25,11 @@ type VirtualDesktopHostPoolRegistrationInfoInitParameters struct {
 
 	// Reference to a VirtualDesktopHostPool in desktopvirtualization to populate hostpoolId.
 	// +kubebuilder:validation:Optional
-	HostpoolIDRef *v1.NamespacedReference `json:"hostpoolIdRef,omitempty" tf:"-"`
+	HostpoolIDRef *v2.NamespacedReference `json:"hostpoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualDesktopHostPool in desktopvirtualization to populate hostpoolId.
 	// +kubebuilder:validation:Optional
-	HostpoolIDSelector *v1.NamespacedSelector `json:"hostpoolIdSelector,omitempty" tf:"-"`
+	HostpoolIDSelector *v2.NamespacedSelector `json:"hostpoolIdSelector,omitempty" tf:"-"`
 }
 
 type VirtualDesktopHostPoolRegistrationInfoObservation struct {
@@ -59,11 +58,11 @@ type VirtualDesktopHostPoolRegistrationInfoParameters struct {
 
 	// Reference to a VirtualDesktopHostPool in desktopvirtualization to populate hostpoolId.
 	// +kubebuilder:validation:Optional
-	HostpoolIDRef *v1.NamespacedReference `json:"hostpoolIdRef,omitempty" tf:"-"`
+	HostpoolIDRef *v2.NamespacedReference `json:"hostpoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualDesktopHostPool in desktopvirtualization to populate hostpoolId.
 	// +kubebuilder:validation:Optional
-	HostpoolIDSelector *v1.NamespacedSelector `json:"hostpoolIdSelector,omitempty" tf:"-"`
+	HostpoolIDSelector *v2.NamespacedSelector `json:"hostpoolIdSelector,omitempty" tf:"-"`
 }
 
 // VirtualDesktopHostPoolRegistrationInfoSpec defines the desired state of VirtualDesktopHostPoolRegistrationInfo
@@ -85,8 +84,8 @@ type VirtualDesktopHostPoolRegistrationInfoSpec struct {
 
 // VirtualDesktopHostPoolRegistrationInfoStatus defines the observed state of VirtualDesktopHostPoolRegistrationInfo.
 type VirtualDesktopHostPoolRegistrationInfoStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VirtualDesktopHostPoolRegistrationInfoObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VirtualDesktopHostPoolRegistrationInfoObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

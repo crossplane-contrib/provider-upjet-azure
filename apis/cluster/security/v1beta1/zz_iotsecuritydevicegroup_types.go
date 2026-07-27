@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AllowRuleInitParameters struct {
@@ -86,11 +86,11 @@ type IOTSecurityDeviceGroupInitParameters struct {
 
 	// Reference to a IOTHub in devices to populate iothubId.
 	// +kubebuilder:validation:Optional
-	IOTHubIDRef *v1.Reference `json:"iothubIdRef,omitempty" tf:"-"`
+	IOTHubIDRef *v2.Reference `json:"iothubIdRef,omitempty" tf:"-"`
 
 	// Selector for a IOTHub in devices to populate iothubId.
 	// +kubebuilder:validation:Optional
-	IOTHubIDSelector *v1.Selector `json:"iothubIdSelector,omitempty" tf:"-"`
+	IOTHubIDSelector *v2.Selector `json:"iothubIdSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the Device Security Group. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -131,11 +131,11 @@ type IOTSecurityDeviceGroupParameters struct {
 
 	// Reference to a IOTHub in devices to populate iothubId.
 	// +kubebuilder:validation:Optional
-	IOTHubIDRef *v1.Reference `json:"iothubIdRef,omitempty" tf:"-"`
+	IOTHubIDRef *v2.Reference `json:"iothubIdRef,omitempty" tf:"-"`
 
 	// Selector for a IOTHub in devices to populate iothubId.
 	// +kubebuilder:validation:Optional
-	IOTHubIDSelector *v1.Selector `json:"iothubIdSelector,omitempty" tf:"-"`
+	IOTHubIDSelector *v2.Selector `json:"iothubIdSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the Device Security Group. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -197,8 +197,8 @@ type RangeRuleParameters struct {
 
 // IOTSecurityDeviceGroupSpec defines the desired state of IOTSecurityDeviceGroup
 type IOTSecurityDeviceGroupSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     IOTSecurityDeviceGroupParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   IOTSecurityDeviceGroupParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -214,8 +214,8 @@ type IOTSecurityDeviceGroupSpec struct {
 
 // IOTSecurityDeviceGroupStatus defines the observed state of IOTSecurityDeviceGroup.
 type IOTSecurityDeviceGroupStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        IOTSecurityDeviceGroupObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               IOTSecurityDeviceGroupObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

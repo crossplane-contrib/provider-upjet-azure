@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AppIntegrationAccountSessionInitParameters struct {
@@ -48,11 +48,11 @@ type AppIntegrationAccountSessionParameters struct {
 
 	// Reference to a AppIntegrationAccount in logic to populate integrationAccountName.
 	// +kubebuilder:validation:Optional
-	IntegrationAccountNameRef *v1.Reference `json:"integrationAccountNameRef,omitempty" tf:"-"`
+	IntegrationAccountNameRef *v2.Reference `json:"integrationAccountNameRef,omitempty" tf:"-"`
 
 	// Selector for a AppIntegrationAccount in logic to populate integrationAccountName.
 	// +kubebuilder:validation:Optional
-	IntegrationAccountNameSelector *v1.Selector `json:"integrationAccountNameSelector,omitempty" tf:"-"`
+	IntegrationAccountNameSelector *v2.Selector `json:"integrationAccountNameSelector,omitempty" tf:"-"`
 
 	// The name of the Resource Group where the Logic App Integration Account Session should exist. Changing this forces a new Logic App Integration Account Session to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
@@ -61,17 +61,17 @@ type AppIntegrationAccountSessionParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 }
 
 // AppIntegrationAccountSessionSpec defines the desired state of AppIntegrationAccountSession
 type AppIntegrationAccountSessionSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     AppIntegrationAccountSessionParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   AppIntegrationAccountSessionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -87,8 +87,8 @@ type AppIntegrationAccountSessionSpec struct {
 
 // AppIntegrationAccountSessionStatus defines the observed state of AppIntegrationAccountSession.
 type AppIntegrationAccountSessionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AppIntegrationAccountSessionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AppIntegrationAccountSessionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

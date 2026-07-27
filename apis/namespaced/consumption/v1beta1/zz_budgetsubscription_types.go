@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BudgetSubscriptionFilterDimensionInitParameters struct {
@@ -28,11 +27,11 @@ type BudgetSubscriptionFilterDimensionInitParameters struct {
 
 	// References to ResourceGroup in azure to populate values.
 	// +kubebuilder:validation:Optional
-	ValuesRefs []v1.NamespacedReference `json:"valuesRefs,omitempty" tf:"-"`
+	ValuesRefs []v2.NamespacedReference `json:"valuesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of ResourceGroup in azure to populate values.
 	// +kubebuilder:validation:Optional
-	ValuesSelector *v1.NamespacedSelector `json:"valuesSelector,omitempty" tf:"-"`
+	ValuesSelector *v2.NamespacedSelector `json:"valuesSelector,omitempty" tf:"-"`
 }
 
 type BudgetSubscriptionFilterDimensionObservation struct {
@@ -64,11 +63,11 @@ type BudgetSubscriptionFilterDimensionParameters struct {
 
 	// References to ResourceGroup in azure to populate values.
 	// +kubebuilder:validation:Optional
-	ValuesRefs []v1.NamespacedReference `json:"valuesRefs,omitempty" tf:"-"`
+	ValuesRefs []v2.NamespacedReference `json:"valuesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of ResourceGroup in azure to populate values.
 	// +kubebuilder:validation:Optional
-	ValuesSelector *v1.NamespacedSelector `json:"valuesSelector,omitempty" tf:"-"`
+	ValuesSelector *v2.NamespacedSelector `json:"valuesSelector,omitempty" tf:"-"`
 }
 
 type BudgetSubscriptionFilterInitParameters struct {
@@ -175,11 +174,11 @@ type BudgetSubscriptionNotificationInitParameters struct {
 
 	// References to MonitorActionGroup in insights to populate contactGroups.
 	// +kubebuilder:validation:Optional
-	ContactGroupsRefs []v1.NamespacedReference `json:"contactGroupsRefs,omitempty" tf:"-"`
+	ContactGroupsRefs []v2.NamespacedReference `json:"contactGroupsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of MonitorActionGroup in insights to populate contactGroups.
 	// +kubebuilder:validation:Optional
-	ContactGroupsSelector *v1.NamespacedSelector `json:"contactGroupsSelector,omitempty" tf:"-"`
+	ContactGroupsSelector *v2.NamespacedSelector `json:"contactGroupsSelector,omitempty" tf:"-"`
 
 	// Specifies a list of contact roles to send the budget notification to when the threshold is exceeded.
 	ContactRoles []*string `json:"contactRoles,omitempty" tf:"contact_roles,omitempty"`
@@ -235,11 +234,11 @@ type BudgetSubscriptionNotificationParameters struct {
 
 	// References to MonitorActionGroup in insights to populate contactGroups.
 	// +kubebuilder:validation:Optional
-	ContactGroupsRefs []v1.NamespacedReference `json:"contactGroupsRefs,omitempty" tf:"-"`
+	ContactGroupsRefs []v2.NamespacedReference `json:"contactGroupsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of MonitorActionGroup in insights to populate contactGroups.
 	// +kubebuilder:validation:Optional
-	ContactGroupsSelector *v1.NamespacedSelector `json:"contactGroupsSelector,omitempty" tf:"-"`
+	ContactGroupsSelector *v2.NamespacedSelector `json:"contactGroupsSelector,omitempty" tf:"-"`
 
 	// Specifies a list of contact roles to send the budget notification to when the threshold is exceeded.
 	// +kubebuilder:validation:Optional
@@ -368,8 +367,8 @@ type BudgetSubscriptionSpec struct {
 
 // BudgetSubscriptionStatus defines the observed state of BudgetSubscription.
 type BudgetSubscriptionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BudgetSubscriptionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BudgetSubscriptionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

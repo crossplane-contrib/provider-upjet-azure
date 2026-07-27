@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type PrivateDNSResolverInitParameters struct {
@@ -30,11 +29,11 @@ type PrivateDNSResolverInitParameters struct {
 
 	// Reference to a VirtualNetwork in network to populate virtualNetworkId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkIDRef *v1.NamespacedReference `json:"virtualNetworkIdRef,omitempty" tf:"-"`
+	VirtualNetworkIDRef *v2.NamespacedReference `json:"virtualNetworkIdRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualNetwork in network to populate virtualNetworkId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkIDSelector *v1.NamespacedSelector `json:"virtualNetworkIdSelector,omitempty" tf:"-"`
+	VirtualNetworkIDSelector *v2.NamespacedSelector `json:"virtualNetworkIdSelector,omitempty" tf:"-"`
 }
 
 type PrivateDNSResolverObservation struct {
@@ -69,11 +68,11 @@ type PrivateDNSResolverParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Private DNS Resolver.
 	// +kubebuilder:validation:Optional
@@ -88,11 +87,11 @@ type PrivateDNSResolverParameters struct {
 
 	// Reference to a VirtualNetwork in network to populate virtualNetworkId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkIDRef *v1.NamespacedReference `json:"virtualNetworkIdRef,omitempty" tf:"-"`
+	VirtualNetworkIDRef *v2.NamespacedReference `json:"virtualNetworkIdRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualNetwork in network to populate virtualNetworkId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkIDSelector *v1.NamespacedSelector `json:"virtualNetworkIdSelector,omitempty" tf:"-"`
+	VirtualNetworkIDSelector *v2.NamespacedSelector `json:"virtualNetworkIdSelector,omitempty" tf:"-"`
 }
 
 // PrivateDNSResolverSpec defines the desired state of PrivateDNSResolver
@@ -114,8 +113,8 @@ type PrivateDNSResolverSpec struct {
 
 // PrivateDNSResolverStatus defines the observed state of PrivateDNSResolver.
 type PrivateDNSResolverStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PrivateDNSResolverObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PrivateDNSResolverObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

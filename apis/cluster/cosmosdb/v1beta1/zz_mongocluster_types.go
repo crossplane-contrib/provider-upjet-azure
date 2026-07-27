@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ConnectionStringsInitParameters struct {
@@ -95,7 +95,7 @@ type MongoClusterIdentityParameters struct {
 type MongoClusterInitParameters struct {
 
 	// The Password associated with the administrator_username for the MongoDB Cluster.
-	AdministratorPasswordSecretRef *v1.SecretKeySelector `json:"administratorPasswordSecretRef,omitempty" tf:"-"`
+	AdministratorPasswordSecretRef *v2.SecretKeySelector `json:"administratorPasswordSecretRef,omitempty" tf:"-"`
 
 	// The administrator username of the MongoDB Cluster. Changing this forces a new resource to be created.
 	AdministratorUsername *string `json:"administratorUsername,omitempty" tf:"administrator_username,omitempty"`
@@ -144,11 +144,11 @@ type MongoClusterInitParameters struct {
 
 	// Reference to a MongoCluster in cosmosdb to populate sourceLocation.
 	// +kubebuilder:validation:Optional
-	SourceLocationRef *v1.Reference `json:"sourceLocationRef,omitempty" tf:"-"`
+	SourceLocationRef *v2.Reference `json:"sourceLocationRef,omitempty" tf:"-"`
 
 	// Selector for a MongoCluster in cosmosdb to populate sourceLocation.
 	// +kubebuilder:validation:Optional
-	SourceLocationSelector *v1.Selector `json:"sourceLocationSelector,omitempty" tf:"-"`
+	SourceLocationSelector *v2.Selector `json:"sourceLocationSelector,omitempty" tf:"-"`
 
 	// The ID of the replication source MongoDB Cluster. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/cosmosdb/v1beta1.MongoCluster
@@ -157,11 +157,11 @@ type MongoClusterInitParameters struct {
 
 	// Reference to a MongoCluster in cosmosdb to populate sourceServerId.
 	// +kubebuilder:validation:Optional
-	SourceServerIDRef *v1.Reference `json:"sourceServerIdRef,omitempty" tf:"-"`
+	SourceServerIDRef *v2.Reference `json:"sourceServerIdRef,omitempty" tf:"-"`
 
 	// Selector for a MongoCluster in cosmosdb to populate sourceServerId.
 	// +kubebuilder:validation:Optional
-	SourceServerIDSelector *v1.Selector `json:"sourceServerIdSelector,omitempty" tf:"-"`
+	SourceServerIDSelector *v2.Selector `json:"sourceServerIdSelector,omitempty" tf:"-"`
 
 	// The size of the data disk space for the MongoDB Cluster.
 	StorageSizeInGb *float64 `json:"storageSizeInGb,omitempty" tf:"storage_size_in_gb,omitempty"`
@@ -249,7 +249,7 @@ type MongoClusterParameters struct {
 
 	// The Password associated with the administrator_username for the MongoDB Cluster.
 	// +kubebuilder:validation:Optional
-	AdministratorPasswordSecretRef *v1.SecretKeySelector `json:"administratorPasswordSecretRef,omitempty" tf:"-"`
+	AdministratorPasswordSecretRef *v2.SecretKeySelector `json:"administratorPasswordSecretRef,omitempty" tf:"-"`
 
 	// The administrator username of the MongoDB Cluster. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -303,11 +303,11 @@ type MongoClusterParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A restore block as defined below. Required when create_mode is set to PointInTimeRestore. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -325,11 +325,11 @@ type MongoClusterParameters struct {
 
 	// Reference to a MongoCluster in cosmosdb to populate sourceLocation.
 	// +kubebuilder:validation:Optional
-	SourceLocationRef *v1.Reference `json:"sourceLocationRef,omitempty" tf:"-"`
+	SourceLocationRef *v2.Reference `json:"sourceLocationRef,omitempty" tf:"-"`
 
 	// Selector for a MongoCluster in cosmosdb to populate sourceLocation.
 	// +kubebuilder:validation:Optional
-	SourceLocationSelector *v1.Selector `json:"sourceLocationSelector,omitempty" tf:"-"`
+	SourceLocationSelector *v2.Selector `json:"sourceLocationSelector,omitempty" tf:"-"`
 
 	// The ID of the replication source MongoDB Cluster. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/cosmosdb/v1beta1.MongoCluster
@@ -339,11 +339,11 @@ type MongoClusterParameters struct {
 
 	// Reference to a MongoCluster in cosmosdb to populate sourceServerId.
 	// +kubebuilder:validation:Optional
-	SourceServerIDRef *v1.Reference `json:"sourceServerIdRef,omitempty" tf:"-"`
+	SourceServerIDRef *v2.Reference `json:"sourceServerIdRef,omitempty" tf:"-"`
 
 	// Selector for a MongoCluster in cosmosdb to populate sourceServerId.
 	// +kubebuilder:validation:Optional
-	SourceServerIDSelector *v1.Selector `json:"sourceServerIdSelector,omitempty" tf:"-"`
+	SourceServerIDSelector *v2.Selector `json:"sourceServerIdSelector,omitempty" tf:"-"`
 
 	// The size of the data disk space for the MongoDB Cluster.
 	// +kubebuilder:validation:Optional
@@ -394,8 +394,8 @@ type MongoClusterRestoreParameters struct {
 
 // MongoClusterSpec defines the desired state of MongoCluster
 type MongoClusterSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     MongoClusterParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   MongoClusterParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -411,8 +411,8 @@ type MongoClusterSpec struct {
 
 // MongoClusterStatus defines the observed state of MongoCluster.
 type MongoClusterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MongoClusterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MongoClusterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

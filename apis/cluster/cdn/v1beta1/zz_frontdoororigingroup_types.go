@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type FrontdoorOriginGroupInitParameters struct {
@@ -59,11 +59,11 @@ type FrontdoorOriginGroupParameters struct {
 
 	// Reference to a FrontdoorProfile in cdn to populate cdnFrontdoorProfileId.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorProfileIDRef *v1.Reference `json:"cdnFrontdoorProfileIdRef,omitempty" tf:"-"`
+	CdnFrontdoorProfileIDRef *v2.Reference `json:"cdnFrontdoorProfileIdRef,omitempty" tf:"-"`
 
 	// Selector for a FrontdoorProfile in cdn to populate cdnFrontdoorProfileId.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorProfileIDSelector *v1.Selector `json:"cdnFrontdoorProfileIdSelector,omitempty" tf:"-"`
+	CdnFrontdoorProfileIDSelector *v2.Selector `json:"cdnFrontdoorProfileIdSelector,omitempty" tf:"-"`
 
 	// A health_probe block as defined below.
 	// +kubebuilder:validation:Optional
@@ -172,8 +172,8 @@ type LoadBalancingParameters struct {
 
 // FrontdoorOriginGroupSpec defines the desired state of FrontdoorOriginGroup
 type FrontdoorOriginGroupSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     FrontdoorOriginGroupParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   FrontdoorOriginGroupParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -189,8 +189,8 @@ type FrontdoorOriginGroupSpec struct {
 
 // FrontdoorOriginGroupStatus defines the observed state of FrontdoorOriginGroup.
 type FrontdoorOriginGroupStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FrontdoorOriginGroupObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FrontdoorOriginGroupObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

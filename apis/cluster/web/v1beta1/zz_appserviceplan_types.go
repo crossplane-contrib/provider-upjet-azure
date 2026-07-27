@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AppServicePlanInitParameters struct {
@@ -127,11 +127,11 @@ type AppServicePlanParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A sku block as documented below.
 	// +kubebuilder:validation:Optional
@@ -188,8 +188,8 @@ type SkuParameters struct {
 
 // AppServicePlanSpec defines the desired state of AppServicePlan
 type AppServicePlanSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     AppServicePlanParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   AppServicePlanParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -205,8 +205,8 @@ type AppServicePlanSpec struct {
 
 // AppServicePlanStatus defines the observed state of AppServicePlan.
 type AppServicePlanStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AppServicePlanObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AppServicePlanObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

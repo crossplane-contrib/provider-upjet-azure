@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type WorkspaceOutboundRulePrivateEndpointInitParameters struct {
@@ -22,11 +22,11 @@ type WorkspaceOutboundRulePrivateEndpointInitParameters struct {
 
 	// Reference to a Account in storage to populate serviceResourceId.
 	// +kubebuilder:validation:Optional
-	ServiceResourceIDRef *v1.Reference `json:"serviceResourceIdRef,omitempty" tf:"-"`
+	ServiceResourceIDRef *v2.Reference `json:"serviceResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate serviceResourceId.
 	// +kubebuilder:validation:Optional
-	ServiceResourceIDSelector *v1.Selector `json:"serviceResourceIdSelector,omitempty" tf:"-"`
+	ServiceResourceIDSelector *v2.Selector `json:"serviceResourceIdSelector,omitempty" tf:"-"`
 
 	// Whether to enable an additional private endpoint to be used by jobs running on Spark. Changing this forces a new resource to be created.
 	SparkEnabled *bool `json:"sparkEnabled,omitempty" tf:"spark_enabled,omitempty"`
@@ -63,11 +63,11 @@ type WorkspaceOutboundRulePrivateEndpointParameters struct {
 
 	// Reference to a Account in storage to populate serviceResourceId.
 	// +kubebuilder:validation:Optional
-	ServiceResourceIDRef *v1.Reference `json:"serviceResourceIdRef,omitempty" tf:"-"`
+	ServiceResourceIDRef *v2.Reference `json:"serviceResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate serviceResourceId.
 	// +kubebuilder:validation:Optional
-	ServiceResourceIDSelector *v1.Selector `json:"serviceResourceIdSelector,omitempty" tf:"-"`
+	ServiceResourceIDSelector *v2.Selector `json:"serviceResourceIdSelector,omitempty" tf:"-"`
 
 	// Whether to enable an additional private endpoint to be used by jobs running on Spark. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -85,17 +85,17 @@ type WorkspaceOutboundRulePrivateEndpointParameters struct {
 
 	// Reference to a Workspace in machinelearningservices to populate workspaceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceIDRef *v1.Reference `json:"workspaceIdRef,omitempty" tf:"-"`
+	WorkspaceIDRef *v2.Reference `json:"workspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in machinelearningservices to populate workspaceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceIDSelector *v1.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
+	WorkspaceIDSelector *v2.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
 }
 
 // WorkspaceOutboundRulePrivateEndpointSpec defines the desired state of WorkspaceOutboundRulePrivateEndpoint
 type WorkspaceOutboundRulePrivateEndpointSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     WorkspaceOutboundRulePrivateEndpointParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   WorkspaceOutboundRulePrivateEndpointParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -111,8 +111,8 @@ type WorkspaceOutboundRulePrivateEndpointSpec struct {
 
 // WorkspaceOutboundRulePrivateEndpointStatus defines the observed state of WorkspaceOutboundRulePrivateEndpoint.
 type WorkspaceOutboundRulePrivateEndpointStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        WorkspaceOutboundRulePrivateEndpointObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               WorkspaceOutboundRulePrivateEndpointObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

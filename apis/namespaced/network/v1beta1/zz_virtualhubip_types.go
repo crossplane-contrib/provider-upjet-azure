@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type VirtualHubIPInitParameters struct {
@@ -29,11 +28,11 @@ type VirtualHubIPInitParameters struct {
 
 	// Reference to a PublicIP in network to populate publicIpAddressId.
 	// +kubebuilder:validation:Optional
-	PublicIPAddressIDRef *v1.NamespacedReference `json:"publicIpAddressIdRef,omitempty" tf:"-"`
+	PublicIPAddressIDRef *v2.NamespacedReference `json:"publicIpAddressIdRef,omitempty" tf:"-"`
 
 	// Selector for a PublicIP in network to populate publicIpAddressId.
 	// +kubebuilder:validation:Optional
-	PublicIPAddressIDSelector *v1.NamespacedSelector `json:"publicIpAddressIdSelector,omitempty" tf:"-"`
+	PublicIPAddressIDSelector *v2.NamespacedSelector `json:"publicIpAddressIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Subnet that the IP will reside. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
@@ -42,11 +41,11 @@ type VirtualHubIPInitParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type VirtualHubIPObservation struct {
@@ -88,11 +87,11 @@ type VirtualHubIPParameters struct {
 
 	// Reference to a PublicIP in network to populate publicIpAddressId.
 	// +kubebuilder:validation:Optional
-	PublicIPAddressIDRef *v1.NamespacedReference `json:"publicIpAddressIdRef,omitempty" tf:"-"`
+	PublicIPAddressIDRef *v2.NamespacedReference `json:"publicIpAddressIdRef,omitempty" tf:"-"`
 
 	// Selector for a PublicIP in network to populate publicIpAddressId.
 	// +kubebuilder:validation:Optional
-	PublicIPAddressIDSelector *v1.NamespacedSelector `json:"publicIpAddressIdSelector,omitempty" tf:"-"`
+	PublicIPAddressIDSelector *v2.NamespacedSelector `json:"publicIpAddressIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Subnet that the IP will reside. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
@@ -102,11 +101,11 @@ type VirtualHubIPParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Virtual Hub within which this IP configuration should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.VirtualHub
@@ -116,11 +115,11 @@ type VirtualHubIPParameters struct {
 
 	// Reference to a VirtualHub in network to populate virtualHubId.
 	// +kubebuilder:validation:Optional
-	VirtualHubIDRef *v1.NamespacedReference `json:"virtualHubIdRef,omitempty" tf:"-"`
+	VirtualHubIDRef *v2.NamespacedReference `json:"virtualHubIdRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualHub in network to populate virtualHubId.
 	// +kubebuilder:validation:Optional
-	VirtualHubIDSelector *v1.NamespacedSelector `json:"virtualHubIdSelector,omitempty" tf:"-"`
+	VirtualHubIDSelector *v2.NamespacedSelector `json:"virtualHubIdSelector,omitempty" tf:"-"`
 }
 
 // VirtualHubIPSpec defines the desired state of VirtualHubIP
@@ -142,8 +141,8 @@ type VirtualHubIPSpec struct {
 
 // VirtualHubIPStatus defines the observed state of VirtualHubIP.
 type VirtualHubIPStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VirtualHubIPObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VirtualHubIPObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

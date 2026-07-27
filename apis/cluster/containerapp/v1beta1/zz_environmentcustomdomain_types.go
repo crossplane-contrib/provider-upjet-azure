@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type EnvironmentCustomDomainInitParameters struct {
@@ -21,7 +21,7 @@ type EnvironmentCustomDomainInitParameters struct {
 
 	// The password for the Certificate bundle.
 	// The Custom Domain Certificate password.
-	CertificatePasswordSecretRef v1.SecretKeySelector `json:"certificatePasswordSecretRef" tf:"-"`
+	CertificatePasswordSecretRef v2.SecretKeySelector `json:"certificatePasswordSecretRef" tf:"-"`
 
 	// The ID of the Container Apps Managed Environment. Changing this forces a new resource to be created.
 	// The Container App Managed Environment ID to configure this Custom Domain on.
@@ -31,11 +31,11 @@ type EnvironmentCustomDomainInitParameters struct {
 
 	// Reference to a Environment in containerapp to populate containerAppEnvironmentId.
 	// +kubebuilder:validation:Optional
-	ContainerAppEnvironmentIDRef *v1.Reference `json:"containerAppEnvironmentIdRef,omitempty" tf:"-"`
+	ContainerAppEnvironmentIDRef *v2.Reference `json:"containerAppEnvironmentIdRef,omitempty" tf:"-"`
 
 	// Selector for a Environment in containerapp to populate containerAppEnvironmentId.
 	// +kubebuilder:validation:Optional
-	ContainerAppEnvironmentIDSelector *v1.Selector `json:"containerAppEnvironmentIdSelector,omitempty" tf:"-"`
+	ContainerAppEnvironmentIDSelector *v2.Selector `json:"containerAppEnvironmentIdSelector,omitempty" tf:"-"`
 
 	// Custom DNS Suffix for the Container App Environment.
 	// The Custom Domain DNS suffix for this Container App Environment.
@@ -70,7 +70,7 @@ type EnvironmentCustomDomainParameters struct {
 	// The password for the Certificate bundle.
 	// The Custom Domain Certificate password.
 	// +kubebuilder:validation:Optional
-	CertificatePasswordSecretRef v1.SecretKeySelector `json:"certificatePasswordSecretRef" tf:"-"`
+	CertificatePasswordSecretRef v2.SecretKeySelector `json:"certificatePasswordSecretRef" tf:"-"`
 
 	// The ID of the Container Apps Managed Environment. Changing this forces a new resource to be created.
 	// The Container App Managed Environment ID to configure this Custom Domain on.
@@ -81,11 +81,11 @@ type EnvironmentCustomDomainParameters struct {
 
 	// Reference to a Environment in containerapp to populate containerAppEnvironmentId.
 	// +kubebuilder:validation:Optional
-	ContainerAppEnvironmentIDRef *v1.Reference `json:"containerAppEnvironmentIdRef,omitempty" tf:"-"`
+	ContainerAppEnvironmentIDRef *v2.Reference `json:"containerAppEnvironmentIdRef,omitempty" tf:"-"`
 
 	// Selector for a Environment in containerapp to populate containerAppEnvironmentId.
 	// +kubebuilder:validation:Optional
-	ContainerAppEnvironmentIDSelector *v1.Selector `json:"containerAppEnvironmentIdSelector,omitempty" tf:"-"`
+	ContainerAppEnvironmentIDSelector *v2.Selector `json:"containerAppEnvironmentIdSelector,omitempty" tf:"-"`
 
 	// Custom DNS Suffix for the Container App Environment.
 	// The Custom Domain DNS suffix for this Container App Environment.
@@ -95,8 +95,8 @@ type EnvironmentCustomDomainParameters struct {
 
 // EnvironmentCustomDomainSpec defines the desired state of EnvironmentCustomDomain
 type EnvironmentCustomDomainSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     EnvironmentCustomDomainParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   EnvironmentCustomDomainParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -112,8 +112,8 @@ type EnvironmentCustomDomainSpec struct {
 
 // EnvironmentCustomDomainStatus defines the observed state of EnvironmentCustomDomain.
 type EnvironmentCustomDomainStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        EnvironmentCustomDomainObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               EnvironmentCustomDomainObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

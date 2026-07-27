@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ReferenceInputMSSQLInitParameters struct {
@@ -22,11 +21,11 @@ type ReferenceInputMSSQLInitParameters struct {
 
 	// Reference to a MSSQLDatabase in sql to populate database.
 	// +kubebuilder:validation:Optional
-	DatabaseRef *v1.NamespacedReference `json:"databaseRef,omitempty" tf:"-"`
+	DatabaseRef *v2.NamespacedReference `json:"databaseRef,omitempty" tf:"-"`
 
 	// Selector for a MSSQLDatabase in sql to populate database.
 	// +kubebuilder:validation:Optional
-	DatabaseSelector *v1.NamespacedSelector `json:"databaseSelector,omitempty" tf:"-"`
+	DatabaseSelector *v2.NamespacedSelector `json:"databaseSelector,omitempty" tf:"-"`
 
 	// The query used to retrieve incremental changes in the reference data from the MS SQL database. Cannot be set when refresh_type is Static.
 	DeltaSnapshotQuery *string `json:"deltaSnapshotQuery,omitempty" tf:"delta_snapshot_query,omitempty"`
@@ -35,7 +34,7 @@ type ReferenceInputMSSQLInitParameters struct {
 	FullSnapshotQuery *string `json:"fullSnapshotQuery,omitempty" tf:"full_snapshot_query,omitempty"`
 
 	// The password to connect to the MS SQL database.
-	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The frequency in hh:mm:ss with which the reference data should be retrieved from the MS SQL database e.g. 00:20:00 for every 20 minutes. Must be set when refresh_type is RefreshPeriodicallyWithFull or RefreshPeriodicallyWithDelta.
 	RefreshIntervalDuration *string `json:"refreshIntervalDuration,omitempty" tf:"refresh_interval_duration,omitempty"`
@@ -50,11 +49,11 @@ type ReferenceInputMSSQLInitParameters struct {
 
 	// Reference to a MSSQLServer in sql to populate server.
 	// +kubebuilder:validation:Optional
-	ServerRef *v1.NamespacedReference `json:"serverRef,omitempty" tf:"-"`
+	ServerRef *v2.NamespacedReference `json:"serverRef,omitempty" tf:"-"`
 
 	// Selector for a MSSQLServer in sql to populate server.
 	// +kubebuilder:validation:Optional
-	ServerSelector *v1.NamespacedSelector `json:"serverSelector,omitempty" tf:"-"`
+	ServerSelector *v2.NamespacedSelector `json:"serverSelector,omitempty" tf:"-"`
 
 	// The name of the table in the Azure SQL database.
 	Table *string `json:"table,omitempty" tf:"table,omitempty"`
@@ -108,11 +107,11 @@ type ReferenceInputMSSQLParameters struct {
 
 	// Reference to a MSSQLDatabase in sql to populate database.
 	// +kubebuilder:validation:Optional
-	DatabaseRef *v1.NamespacedReference `json:"databaseRef,omitempty" tf:"-"`
+	DatabaseRef *v2.NamespacedReference `json:"databaseRef,omitempty" tf:"-"`
 
 	// Selector for a MSSQLDatabase in sql to populate database.
 	// +kubebuilder:validation:Optional
-	DatabaseSelector *v1.NamespacedSelector `json:"databaseSelector,omitempty" tf:"-"`
+	DatabaseSelector *v2.NamespacedSelector `json:"databaseSelector,omitempty" tf:"-"`
 
 	// The query used to retrieve incremental changes in the reference data from the MS SQL database. Cannot be set when refresh_type is Static.
 	// +kubebuilder:validation:Optional
@@ -124,7 +123,7 @@ type ReferenceInputMSSQLParameters struct {
 
 	// The password to connect to the MS SQL database.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The frequency in hh:mm:ss with which the reference data should be retrieved from the MS SQL database e.g. 00:20:00 for every 20 minutes. Must be set when refresh_type is RefreshPeriodicallyWithFull or RefreshPeriodicallyWithDelta.
 	// +kubebuilder:validation:Optional
@@ -141,11 +140,11 @@ type ReferenceInputMSSQLParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The fully qualified domain name of the MS SQL server.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/sql/v1beta1.MSSQLServer
@@ -155,11 +154,11 @@ type ReferenceInputMSSQLParameters struct {
 
 	// Reference to a MSSQLServer in sql to populate server.
 	// +kubebuilder:validation:Optional
-	ServerRef *v1.NamespacedReference `json:"serverRef,omitempty" tf:"-"`
+	ServerRef *v2.NamespacedReference `json:"serverRef,omitempty" tf:"-"`
 
 	// Selector for a MSSQLServer in sql to populate server.
 	// +kubebuilder:validation:Optional
-	ServerSelector *v1.NamespacedSelector `json:"serverSelector,omitempty" tf:"-"`
+	ServerSelector *v2.NamespacedSelector `json:"serverSelector,omitempty" tf:"-"`
 
 	// The name of the Stream Analytics Job. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
@@ -193,8 +192,8 @@ type ReferenceInputMSSQLSpec struct {
 
 // ReferenceInputMSSQLStatus defines the observed state of ReferenceInputMSSQL.
 type ReferenceInputMSSQLStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ReferenceInputMSSQLObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ReferenceInputMSSQLObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

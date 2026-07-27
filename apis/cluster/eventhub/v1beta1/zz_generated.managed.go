@@ -5,404 +5,404 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this AuthorizationRule.
-func (mg *AuthorizationRule) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *AuthorizationRule) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this AuthorizationRule.
-func (mg *AuthorizationRule) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *AuthorizationRule) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this AuthorizationRule.
-func (mg *AuthorizationRule) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *AuthorizationRule) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this AuthorizationRule.
-func (mg *AuthorizationRule) GetProviderConfigReference() *xpv1.Reference {
+func (mg *AuthorizationRule) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this AuthorizationRule.
-func (mg *AuthorizationRule) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *AuthorizationRule) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this AuthorizationRule.
-func (mg *AuthorizationRule) SetConditions(c ...xpv1.Condition) {
+func (mg *AuthorizationRule) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this AuthorizationRule.
-func (mg *AuthorizationRule) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *AuthorizationRule) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this AuthorizationRule.
-func (mg *AuthorizationRule) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *AuthorizationRule) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this AuthorizationRule.
-func (mg *AuthorizationRule) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *AuthorizationRule) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this AuthorizationRule.
-func (mg *AuthorizationRule) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *AuthorizationRule) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this Cluster.
-func (mg *Cluster) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *Cluster) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this Cluster.
-func (mg *Cluster) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *Cluster) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this Cluster.
-func (mg *Cluster) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *Cluster) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this Cluster.
-func (mg *Cluster) GetProviderConfigReference() *xpv1.Reference {
+func (mg *Cluster) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this Cluster.
-func (mg *Cluster) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *Cluster) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this Cluster.
-func (mg *Cluster) SetConditions(c ...xpv1.Condition) {
+func (mg *Cluster) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this Cluster.
-func (mg *Cluster) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *Cluster) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this Cluster.
-func (mg *Cluster) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *Cluster) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this Cluster.
-func (mg *Cluster) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *Cluster) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this Cluster.
-func (mg *Cluster) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *Cluster) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this ConsumerGroup.
-func (mg *ConsumerGroup) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *ConsumerGroup) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this ConsumerGroup.
-func (mg *ConsumerGroup) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *ConsumerGroup) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this ConsumerGroup.
-func (mg *ConsumerGroup) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *ConsumerGroup) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this ConsumerGroup.
-func (mg *ConsumerGroup) GetProviderConfigReference() *xpv1.Reference {
+func (mg *ConsumerGroup) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this ConsumerGroup.
-func (mg *ConsumerGroup) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *ConsumerGroup) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this ConsumerGroup.
-func (mg *ConsumerGroup) SetConditions(c ...xpv1.Condition) {
+func (mg *ConsumerGroup) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this ConsumerGroup.
-func (mg *ConsumerGroup) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *ConsumerGroup) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this ConsumerGroup.
-func (mg *ConsumerGroup) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *ConsumerGroup) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this ConsumerGroup.
-func (mg *ConsumerGroup) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *ConsumerGroup) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this ConsumerGroup.
-func (mg *ConsumerGroup) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *ConsumerGroup) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this EventHub.
-func (mg *EventHub) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *EventHub) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this EventHub.
-func (mg *EventHub) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *EventHub) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this EventHub.
-func (mg *EventHub) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *EventHub) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this EventHub.
-func (mg *EventHub) GetProviderConfigReference() *xpv1.Reference {
+func (mg *EventHub) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this EventHub.
-func (mg *EventHub) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *EventHub) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this EventHub.
-func (mg *EventHub) SetConditions(c ...xpv1.Condition) {
+func (mg *EventHub) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this EventHub.
-func (mg *EventHub) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *EventHub) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this EventHub.
-func (mg *EventHub) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *EventHub) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this EventHub.
-func (mg *EventHub) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *EventHub) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this EventHub.
-func (mg *EventHub) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *EventHub) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this EventHubNamespace.
-func (mg *EventHubNamespace) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *EventHubNamespace) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this EventHubNamespace.
-func (mg *EventHubNamespace) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *EventHubNamespace) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this EventHubNamespace.
-func (mg *EventHubNamespace) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *EventHubNamespace) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this EventHubNamespace.
-func (mg *EventHubNamespace) GetProviderConfigReference() *xpv1.Reference {
+func (mg *EventHubNamespace) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this EventHubNamespace.
-func (mg *EventHubNamespace) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *EventHubNamespace) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this EventHubNamespace.
-func (mg *EventHubNamespace) SetConditions(c ...xpv1.Condition) {
+func (mg *EventHubNamespace) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this EventHubNamespace.
-func (mg *EventHubNamespace) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *EventHubNamespace) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this EventHubNamespace.
-func (mg *EventHubNamespace) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *EventHubNamespace) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this EventHubNamespace.
-func (mg *EventHubNamespace) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *EventHubNamespace) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this EventHubNamespace.
-func (mg *EventHubNamespace) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *EventHubNamespace) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this NamespaceAuthorizationRule.
-func (mg *NamespaceAuthorizationRule) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *NamespaceAuthorizationRule) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this NamespaceAuthorizationRule.
-func (mg *NamespaceAuthorizationRule) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *NamespaceAuthorizationRule) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this NamespaceAuthorizationRule.
-func (mg *NamespaceAuthorizationRule) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *NamespaceAuthorizationRule) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this NamespaceAuthorizationRule.
-func (mg *NamespaceAuthorizationRule) GetProviderConfigReference() *xpv1.Reference {
+func (mg *NamespaceAuthorizationRule) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this NamespaceAuthorizationRule.
-func (mg *NamespaceAuthorizationRule) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *NamespaceAuthorizationRule) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this NamespaceAuthorizationRule.
-func (mg *NamespaceAuthorizationRule) SetConditions(c ...xpv1.Condition) {
+func (mg *NamespaceAuthorizationRule) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this NamespaceAuthorizationRule.
-func (mg *NamespaceAuthorizationRule) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *NamespaceAuthorizationRule) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this NamespaceAuthorizationRule.
-func (mg *NamespaceAuthorizationRule) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *NamespaceAuthorizationRule) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this NamespaceAuthorizationRule.
-func (mg *NamespaceAuthorizationRule) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *NamespaceAuthorizationRule) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this NamespaceAuthorizationRule.
-func (mg *NamespaceAuthorizationRule) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *NamespaceAuthorizationRule) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this NamespaceDisasterRecoveryConfig.
-func (mg *NamespaceDisasterRecoveryConfig) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *NamespaceDisasterRecoveryConfig) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this NamespaceDisasterRecoveryConfig.
-func (mg *NamespaceDisasterRecoveryConfig) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *NamespaceDisasterRecoveryConfig) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this NamespaceDisasterRecoveryConfig.
-func (mg *NamespaceDisasterRecoveryConfig) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *NamespaceDisasterRecoveryConfig) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this NamespaceDisasterRecoveryConfig.
-func (mg *NamespaceDisasterRecoveryConfig) GetProviderConfigReference() *xpv1.Reference {
+func (mg *NamespaceDisasterRecoveryConfig) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this NamespaceDisasterRecoveryConfig.
-func (mg *NamespaceDisasterRecoveryConfig) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *NamespaceDisasterRecoveryConfig) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this NamespaceDisasterRecoveryConfig.
-func (mg *NamespaceDisasterRecoveryConfig) SetConditions(c ...xpv1.Condition) {
+func (mg *NamespaceDisasterRecoveryConfig) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this NamespaceDisasterRecoveryConfig.
-func (mg *NamespaceDisasterRecoveryConfig) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *NamespaceDisasterRecoveryConfig) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this NamespaceDisasterRecoveryConfig.
-func (mg *NamespaceDisasterRecoveryConfig) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *NamespaceDisasterRecoveryConfig) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this NamespaceDisasterRecoveryConfig.
-func (mg *NamespaceDisasterRecoveryConfig) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *NamespaceDisasterRecoveryConfig) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this NamespaceDisasterRecoveryConfig.
-func (mg *NamespaceDisasterRecoveryConfig) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *NamespaceDisasterRecoveryConfig) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this NamespaceSchemaGroup.
-func (mg *NamespaceSchemaGroup) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *NamespaceSchemaGroup) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this NamespaceSchemaGroup.
-func (mg *NamespaceSchemaGroup) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *NamespaceSchemaGroup) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this NamespaceSchemaGroup.
-func (mg *NamespaceSchemaGroup) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *NamespaceSchemaGroup) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this NamespaceSchemaGroup.
-func (mg *NamespaceSchemaGroup) GetProviderConfigReference() *xpv1.Reference {
+func (mg *NamespaceSchemaGroup) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this NamespaceSchemaGroup.
-func (mg *NamespaceSchemaGroup) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *NamespaceSchemaGroup) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this NamespaceSchemaGroup.
-func (mg *NamespaceSchemaGroup) SetConditions(c ...xpv1.Condition) {
+func (mg *NamespaceSchemaGroup) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this NamespaceSchemaGroup.
-func (mg *NamespaceSchemaGroup) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *NamespaceSchemaGroup) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this NamespaceSchemaGroup.
-func (mg *NamespaceSchemaGroup) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *NamespaceSchemaGroup) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this NamespaceSchemaGroup.
-func (mg *NamespaceSchemaGroup) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *NamespaceSchemaGroup) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this NamespaceSchemaGroup.
-func (mg *NamespaceSchemaGroup) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *NamespaceSchemaGroup) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

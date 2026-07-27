@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ManagerSubscriptionConnectionInitParameters struct {
@@ -25,11 +25,11 @@ type ManagerSubscriptionConnectionInitParameters struct {
 
 	// Reference to a Manager in network to populate networkManagerId.
 	// +kubebuilder:validation:Optional
-	NetworkManagerIDRef *v1.Reference `json:"networkManagerIdRef,omitempty" tf:"-"`
+	NetworkManagerIDRef *v2.Reference `json:"networkManagerIdRef,omitempty" tf:"-"`
 
 	// Selector for a Manager in network to populate networkManagerId.
 	// +kubebuilder:validation:Optional
-	NetworkManagerIDSelector *v1.Selector `json:"networkManagerIdSelector,omitempty" tf:"-"`
+	NetworkManagerIDSelector *v2.Selector `json:"networkManagerIdSelector,omitempty" tf:"-"`
 
 	// Specifies the ID of the target Subscription. Changing this forces a new resource to be created.
 	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
@@ -67,11 +67,11 @@ type ManagerSubscriptionConnectionParameters struct {
 
 	// Reference to a Manager in network to populate networkManagerId.
 	// +kubebuilder:validation:Optional
-	NetworkManagerIDRef *v1.Reference `json:"networkManagerIdRef,omitempty" tf:"-"`
+	NetworkManagerIDRef *v2.Reference `json:"networkManagerIdRef,omitempty" tf:"-"`
 
 	// Selector for a Manager in network to populate networkManagerId.
 	// +kubebuilder:validation:Optional
-	NetworkManagerIDSelector *v1.Selector `json:"networkManagerIdSelector,omitempty" tf:"-"`
+	NetworkManagerIDSelector *v2.Selector `json:"networkManagerIdSelector,omitempty" tf:"-"`
 
 	// Specifies the ID of the target Subscription. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -80,8 +80,8 @@ type ManagerSubscriptionConnectionParameters struct {
 
 // ManagerSubscriptionConnectionSpec defines the desired state of ManagerSubscriptionConnection
 type ManagerSubscriptionConnectionSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ManagerSubscriptionConnectionParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ManagerSubscriptionConnectionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -97,8 +97,8 @@ type ManagerSubscriptionConnectionSpec struct {
 
 // ManagerSubscriptionConnectionStatus defines the observed state of ManagerSubscriptionConnection.
 type ManagerSubscriptionConnectionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ManagerSubscriptionConnectionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ManagerSubscriptionConnectionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

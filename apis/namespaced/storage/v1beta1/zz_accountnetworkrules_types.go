@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AccountNetworkRulesInitParameters struct {
@@ -37,11 +36,11 @@ type AccountNetworkRulesInitParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v1.NamespacedReference `json:"storageAccountIdRef,omitempty" tf:"-"`
+	StorageAccountIDRef *v2.NamespacedReference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v1.NamespacedSelector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+	StorageAccountIDSelector *v2.NamespacedSelector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 
 	// A list of virtual network subnet ids to secure the storage account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
@@ -51,11 +50,11 @@ type AccountNetworkRulesInitParameters struct {
 
 	// References to Subnet in network to populate virtualNetworkSubnetIds.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIdsRefs []v1.NamespacedReference `json:"virtualNetworkSubnetIdsRefs,omitempty" tf:"-"`
+	VirtualNetworkSubnetIdsRefs []v2.NamespacedReference `json:"virtualNetworkSubnetIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in network to populate virtualNetworkSubnetIds.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIdsSelector *v1.NamespacedSelector `json:"virtualNetworkSubnetIdsSelector,omitempty" tf:"-"`
+	VirtualNetworkSubnetIdsSelector *v2.NamespacedSelector `json:"virtualNetworkSubnetIdsSelector,omitempty" tf:"-"`
 }
 
 type AccountNetworkRulesObservation struct {
@@ -113,11 +112,11 @@ type AccountNetworkRulesParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v1.NamespacedReference `json:"storageAccountIdRef,omitempty" tf:"-"`
+	StorageAccountIDRef *v2.NamespacedReference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v1.NamespacedSelector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+	StorageAccountIDSelector *v2.NamespacedSelector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 
 	// A list of virtual network subnet ids to secure the storage account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
@@ -128,11 +127,11 @@ type AccountNetworkRulesParameters struct {
 
 	// References to Subnet in network to populate virtualNetworkSubnetIds.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIdsRefs []v1.NamespacedReference `json:"virtualNetworkSubnetIdsRefs,omitempty" tf:"-"`
+	VirtualNetworkSubnetIdsRefs []v2.NamespacedReference `json:"virtualNetworkSubnetIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in network to populate virtualNetworkSubnetIds.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIdsSelector *v1.NamespacedSelector `json:"virtualNetworkSubnetIdsSelector,omitempty" tf:"-"`
+	VirtualNetworkSubnetIdsSelector *v2.NamespacedSelector `json:"virtualNetworkSubnetIdsSelector,omitempty" tf:"-"`
 }
 
 type AccountNetworkRulesPrivateLinkAccessInitParameters struct {
@@ -183,8 +182,8 @@ type AccountNetworkRulesSpec struct {
 
 // AccountNetworkRulesStatus defines the observed state of AccountNetworkRules.
 type AccountNetworkRulesStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AccountNetworkRulesObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AccountNetworkRulesObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

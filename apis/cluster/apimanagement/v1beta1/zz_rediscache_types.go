@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type RedisCacheInitParameters struct {
@@ -19,7 +19,7 @@ type RedisCacheInitParameters struct {
 	CacheLocation *string `json:"cacheLocation,omitempty" tf:"cache_location,omitempty"`
 
 	// The connection string to the Cache for Redis.
-	ConnectionStringSecretRef v1.SecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
+	ConnectionStringSecretRef v2.SecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
 
 	// The description of the API Management Redis Cache.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -31,11 +31,11 @@ type RedisCacheInitParameters struct {
 
 	// Reference to a RedisCache in cache to populate redisCacheId.
 	// +kubebuilder:validation:Optional
-	RedisCacheIDRef *v1.Reference `json:"redisCacheIdRef,omitempty" tf:"-"`
+	RedisCacheIDRef *v2.Reference `json:"redisCacheIdRef,omitempty" tf:"-"`
 
 	// Selector for a RedisCache in cache to populate redisCacheId.
 	// +kubebuilder:validation:Optional
-	RedisCacheIDSelector *v1.Selector `json:"redisCacheIdSelector,omitempty" tf:"-"`
+	RedisCacheIDSelector *v2.Selector `json:"redisCacheIdSelector,omitempty" tf:"-"`
 }
 
 type RedisCacheObservation struct {
@@ -66,11 +66,11 @@ type RedisCacheParameters struct {
 
 	// Reference to a Management in apimanagement to populate apiManagementId.
 	// +kubebuilder:validation:Optional
-	APIManagementIDRef *v1.Reference `json:"apiManagementIdRef,omitempty" tf:"-"`
+	APIManagementIDRef *v2.Reference `json:"apiManagementIdRef,omitempty" tf:"-"`
 
 	// Selector for a Management in apimanagement to populate apiManagementId.
 	// +kubebuilder:validation:Optional
-	APIManagementIDSelector *v1.Selector `json:"apiManagementIdSelector,omitempty" tf:"-"`
+	APIManagementIDSelector *v2.Selector `json:"apiManagementIdSelector,omitempty" tf:"-"`
 
 	// The location where to use cache from. Possible values are default and valid Azure regions. Defaults to default.
 	// +kubebuilder:validation:Optional
@@ -78,7 +78,7 @@ type RedisCacheParameters struct {
 
 	// The connection string to the Cache for Redis.
 	// +kubebuilder:validation:Optional
-	ConnectionStringSecretRef v1.SecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
+	ConnectionStringSecretRef v2.SecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
 
 	// The description of the API Management Redis Cache.
 	// +kubebuilder:validation:Optional
@@ -92,17 +92,17 @@ type RedisCacheParameters struct {
 
 	// Reference to a RedisCache in cache to populate redisCacheId.
 	// +kubebuilder:validation:Optional
-	RedisCacheIDRef *v1.Reference `json:"redisCacheIdRef,omitempty" tf:"-"`
+	RedisCacheIDRef *v2.Reference `json:"redisCacheIdRef,omitempty" tf:"-"`
 
 	// Selector for a RedisCache in cache to populate redisCacheId.
 	// +kubebuilder:validation:Optional
-	RedisCacheIDSelector *v1.Selector `json:"redisCacheIdSelector,omitempty" tf:"-"`
+	RedisCacheIDSelector *v2.Selector `json:"redisCacheIdSelector,omitempty" tf:"-"`
 }
 
 // RedisCacheSpec defines the desired state of RedisCache
 type RedisCacheSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     RedisCacheParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   RedisCacheParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -118,8 +118,8 @@ type RedisCacheSpec struct {
 
 // RedisCacheStatus defines the observed state of RedisCache.
 type RedisCacheStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RedisCacheObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RedisCacheObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

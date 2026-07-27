@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ExpirationInitParameters struct {
@@ -88,11 +87,11 @@ type PimActiveRoleAssignmentInitParameters struct {
 
 	// Reference to a ManagementGroup in management to populate scope.
 	// +kubebuilder:validation:Optional
-	ScopeRef *v1.NamespacedReference `json:"scopeRef,omitempty" tf:"-"`
+	ScopeRef *v2.NamespacedReference `json:"scopeRef,omitempty" tf:"-"`
 
 	// Selector for a ManagementGroup in management to populate scope.
 	// +kubebuilder:validation:Optional
-	ScopeSelector *v1.NamespacedSelector `json:"scopeSelector,omitempty" tf:"-"`
+	ScopeSelector *v2.NamespacedSelector `json:"scopeSelector,omitempty" tf:"-"`
 
 	// A ticket block as defined below. Changing this forces a new resource to be created.
 	// Ticket details relating to the assignment
@@ -164,11 +163,11 @@ type PimActiveRoleAssignmentParameters struct {
 
 	// Reference to a ManagementGroup in management to populate scope.
 	// +kubebuilder:validation:Optional
-	ScopeRef *v1.NamespacedReference `json:"scopeRef,omitempty" tf:"-"`
+	ScopeRef *v2.NamespacedReference `json:"scopeRef,omitempty" tf:"-"`
 
 	// Selector for a ManagementGroup in management to populate scope.
 	// +kubebuilder:validation:Optional
-	ScopeSelector *v1.NamespacedSelector `json:"scopeSelector,omitempty" tf:"-"`
+	ScopeSelector *v2.NamespacedSelector `json:"scopeSelector,omitempty" tf:"-"`
 
 	// A ticket block as defined below. Changing this forces a new resource to be created.
 	// Ticket details relating to the assignment
@@ -262,8 +261,8 @@ type PimActiveRoleAssignmentSpec struct {
 
 // PimActiveRoleAssignmentStatus defines the observed state of PimActiveRoleAssignment.
 type PimActiveRoleAssignmentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PimActiveRoleAssignmentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PimActiveRoleAssignmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SQLDedicatedGatewayInitParameters struct {
@@ -48,11 +47,11 @@ type SQLDedicatedGatewayParameters struct {
 
 	// Reference to a Account in cosmosdb to populate cosmosdbAccountId.
 	// +kubebuilder:validation:Optional
-	CosmosDBAccountIDRef *v1.NamespacedReference `json:"cosmosdbAccountIdRef,omitempty" tf:"-"`
+	CosmosDBAccountIDRef *v2.NamespacedReference `json:"cosmosdbAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in cosmosdb to populate cosmosdbAccountId.
 	// +kubebuilder:validation:Optional
-	CosmosDBAccountIDSelector *v1.NamespacedSelector `json:"cosmosdbAccountIdSelector,omitempty" tf:"-"`
+	CosmosDBAccountIDSelector *v2.NamespacedSelector `json:"cosmosdbAccountIdSelector,omitempty" tf:"-"`
 
 	// The instance count for the CosmosDB SQL Dedicated Gateway. Possible value is between 1 and 5.
 	// +kubebuilder:validation:Optional
@@ -82,8 +81,8 @@ type SQLDedicatedGatewaySpec struct {
 
 // SQLDedicatedGatewayStatus defines the observed state of SQLDedicatedGateway.
 type SQLDedicatedGatewayStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SQLDedicatedGatewayObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SQLDedicatedGatewayObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

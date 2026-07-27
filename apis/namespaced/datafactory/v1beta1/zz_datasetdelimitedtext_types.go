@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AzureBlobFsLocationInitParameters struct {
@@ -259,11 +258,11 @@ type DataSetDelimitedTextInitParameters struct {
 
 	// Reference to a LinkedServiceWeb in datafactory to populate linkedServiceName.
 	// +kubebuilder:validation:Optional
-	LinkedServiceNameRef *v1.NamespacedReference `json:"linkedServiceNameRef,omitempty" tf:"-"`
+	LinkedServiceNameRef *v2.NamespacedReference `json:"linkedServiceNameRef,omitempty" tf:"-"`
 
 	// Selector for a LinkedServiceWeb in datafactory to populate linkedServiceName.
 	// +kubebuilder:validation:Optional
-	LinkedServiceNameSelector *v1.NamespacedSelector `json:"linkedServiceNameSelector,omitempty" tf:"-"`
+	LinkedServiceNameSelector *v2.NamespacedSelector `json:"linkedServiceNameSelector,omitempty" tf:"-"`
 
 	// The null value string. Defaults to "".
 	NullValue *string `json:"nullValue,omitempty" tf:"null_value,omitempty"`
@@ -389,11 +388,11 @@ type DataSetDelimitedTextParameters struct {
 
 	// Reference to a Factory in datafactory to populate dataFactoryId.
 	// +kubebuilder:validation:Optional
-	DataFactoryIDRef *v1.NamespacedReference `json:"dataFactoryIdRef,omitempty" tf:"-"`
+	DataFactoryIDRef *v2.NamespacedReference `json:"dataFactoryIdRef,omitempty" tf:"-"`
 
 	// Selector for a Factory in datafactory to populate dataFactoryId.
 	// +kubebuilder:validation:Optional
-	DataFactoryIDSelector *v1.NamespacedSelector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
+	DataFactoryIDSelector *v2.NamespacedSelector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
 
 	// The description for the Data Factory Dataset.
 	// +kubebuilder:validation:Optional
@@ -426,11 +425,11 @@ type DataSetDelimitedTextParameters struct {
 
 	// Reference to a LinkedServiceWeb in datafactory to populate linkedServiceName.
 	// +kubebuilder:validation:Optional
-	LinkedServiceNameRef *v1.NamespacedReference `json:"linkedServiceNameRef,omitempty" tf:"-"`
+	LinkedServiceNameRef *v2.NamespacedReference `json:"linkedServiceNameRef,omitempty" tf:"-"`
 
 	// Selector for a LinkedServiceWeb in datafactory to populate linkedServiceName.
 	// +kubebuilder:validation:Optional
-	LinkedServiceNameSelector *v1.NamespacedSelector `json:"linkedServiceNameSelector,omitempty" tf:"-"`
+	LinkedServiceNameSelector *v2.NamespacedSelector `json:"linkedServiceNameSelector,omitempty" tf:"-"`
 
 	// The null value string. Defaults to "".
 	// +kubebuilder:validation:Optional
@@ -512,8 +511,8 @@ type DataSetDelimitedTextSpec struct {
 
 // DataSetDelimitedTextStatus defines the observed state of DataSetDelimitedText.
 type DataSetDelimitedTextStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DataSetDelimitedTextObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DataSetDelimitedTextObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ApplicationInsightsSmartDetectionRuleInitParameters struct {
@@ -27,11 +26,11 @@ type ApplicationInsightsSmartDetectionRuleInitParameters struct {
 
 	// Reference to a ApplicationInsights in insights to populate applicationInsightsId.
 	// +kubebuilder:validation:Optional
-	ApplicationInsightsIDRef *v1.NamespacedReference `json:"applicationInsightsIdRef,omitempty" tf:"-"`
+	ApplicationInsightsIDRef *v2.NamespacedReference `json:"applicationInsightsIdRef,omitempty" tf:"-"`
 
 	// Selector for a ApplicationInsights in insights to populate applicationInsightsId.
 	// +kubebuilder:validation:Optional
-	ApplicationInsightsIDSelector *v1.NamespacedSelector `json:"applicationInsightsIdSelector,omitempty" tf:"-"`
+	ApplicationInsightsIDSelector *v2.NamespacedSelector `json:"applicationInsightsIdSelector,omitempty" tf:"-"`
 
 	// Is the Application Insights Smart Detection Rule enabled? Defaults to true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
@@ -80,11 +79,11 @@ type ApplicationInsightsSmartDetectionRuleParameters struct {
 
 	// Reference to a ApplicationInsights in insights to populate applicationInsightsId.
 	// +kubebuilder:validation:Optional
-	ApplicationInsightsIDRef *v1.NamespacedReference `json:"applicationInsightsIdRef,omitempty" tf:"-"`
+	ApplicationInsightsIDRef *v2.NamespacedReference `json:"applicationInsightsIdRef,omitempty" tf:"-"`
 
 	// Selector for a ApplicationInsights in insights to populate applicationInsightsId.
 	// +kubebuilder:validation:Optional
-	ApplicationInsightsIDSelector *v1.NamespacedSelector `json:"applicationInsightsIdSelector,omitempty" tf:"-"`
+	ApplicationInsightsIDSelector *v2.NamespacedSelector `json:"applicationInsightsIdSelector,omitempty" tf:"-"`
 
 	// Is the Application Insights Smart Detection Rule enabled? Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -118,8 +117,8 @@ type ApplicationInsightsSmartDetectionRuleSpec struct {
 
 // ApplicationInsightsSmartDetectionRuleStatus defines the observed state of ApplicationInsightsSmartDetectionRule.
 type ApplicationInsightsSmartDetectionRuleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ApplicationInsightsSmartDetectionRuleObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ApplicationInsightsSmartDetectionRuleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

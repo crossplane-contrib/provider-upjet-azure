@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ObjectReplicationInitParameters struct {
@@ -22,11 +22,11 @@ type ObjectReplicationInitParameters struct {
 
 	// Reference to a Account in storage to populate destinationStorageAccountId.
 	// +kubebuilder:validation:Optional
-	DestinationStorageAccountIDRef *v1.Reference `json:"destinationStorageAccountIdRef,omitempty" tf:"-"`
+	DestinationStorageAccountIDRef *v2.Reference `json:"destinationStorageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate destinationStorageAccountId.
 	// +kubebuilder:validation:Optional
-	DestinationStorageAccountIDSelector *v1.Selector `json:"destinationStorageAccountIdSelector,omitempty" tf:"-"`
+	DestinationStorageAccountIDSelector *v2.Selector `json:"destinationStorageAccountIdSelector,omitempty" tf:"-"`
 
 	// Whether metrics are enabled for this object replication. Defaults to false.
 	MetricsEnabled *bool `json:"metricsEnabled,omitempty" tf:"metrics_enabled,omitempty"`
@@ -41,11 +41,11 @@ type ObjectReplicationInitParameters struct {
 
 	// Reference to a Account in storage to populate sourceStorageAccountId.
 	// +kubebuilder:validation:Optional
-	SourceStorageAccountIDRef *v1.Reference `json:"sourceStorageAccountIdRef,omitempty" tf:"-"`
+	SourceStorageAccountIDRef *v2.Reference `json:"sourceStorageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate sourceStorageAccountId.
 	// +kubebuilder:validation:Optional
-	SourceStorageAccountIDSelector *v1.Selector `json:"sourceStorageAccountIdSelector,omitempty" tf:"-"`
+	SourceStorageAccountIDSelector *v2.Selector `json:"sourceStorageAccountIdSelector,omitempty" tf:"-"`
 }
 
 type ObjectReplicationObservation struct {
@@ -82,11 +82,11 @@ type ObjectReplicationParameters struct {
 
 	// Reference to a Account in storage to populate destinationStorageAccountId.
 	// +kubebuilder:validation:Optional
-	DestinationStorageAccountIDRef *v1.Reference `json:"destinationStorageAccountIdRef,omitempty" tf:"-"`
+	DestinationStorageAccountIDRef *v2.Reference `json:"destinationStorageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate destinationStorageAccountId.
 	// +kubebuilder:validation:Optional
-	DestinationStorageAccountIDSelector *v1.Selector `json:"destinationStorageAccountIdSelector,omitempty" tf:"-"`
+	DestinationStorageAccountIDSelector *v2.Selector `json:"destinationStorageAccountIdSelector,omitempty" tf:"-"`
 
 	// Whether metrics are enabled for this object replication. Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -104,11 +104,11 @@ type ObjectReplicationParameters struct {
 
 	// Reference to a Account in storage to populate sourceStorageAccountId.
 	// +kubebuilder:validation:Optional
-	SourceStorageAccountIDRef *v1.Reference `json:"sourceStorageAccountIdRef,omitempty" tf:"-"`
+	SourceStorageAccountIDRef *v2.Reference `json:"sourceStorageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate sourceStorageAccountId.
 	// +kubebuilder:validation:Optional
-	SourceStorageAccountIDSelector *v1.Selector `json:"sourceStorageAccountIdSelector,omitempty" tf:"-"`
+	SourceStorageAccountIDSelector *v2.Selector `json:"sourceStorageAccountIdSelector,omitempty" tf:"-"`
 }
 
 type ObjectReplicationRulesInitParameters struct {
@@ -122,11 +122,11 @@ type ObjectReplicationRulesInitParameters struct {
 
 	// Reference to a Container in storage to populate destinationContainerName.
 	// +kubebuilder:validation:Optional
-	DestinationContainerNameRef *v1.Reference `json:"destinationContainerNameRef,omitempty" tf:"-"`
+	DestinationContainerNameRef *v2.Reference `json:"destinationContainerNameRef,omitempty" tf:"-"`
 
 	// Selector for a Container in storage to populate destinationContainerName.
 	// +kubebuilder:validation:Optional
-	DestinationContainerNameSelector *v1.Selector `json:"destinationContainerNameSelector,omitempty" tf:"-"`
+	DestinationContainerNameSelector *v2.Selector `json:"destinationContainerNameSelector,omitempty" tf:"-"`
 
 	// Specifies a list of filters prefixes, the blobs whose names begin with which will be replicated.
 	// +listType=set
@@ -138,11 +138,11 @@ type ObjectReplicationRulesInitParameters struct {
 
 	// Reference to a Container in storage to populate sourceContainerName.
 	// +kubebuilder:validation:Optional
-	SourceContainerNameRef *v1.Reference `json:"sourceContainerNameRef,omitempty" tf:"-"`
+	SourceContainerNameRef *v2.Reference `json:"sourceContainerNameRef,omitempty" tf:"-"`
 
 	// Selector for a Container in storage to populate sourceContainerName.
 	// +kubebuilder:validation:Optional
-	SourceContainerNameSelector *v1.Selector `json:"sourceContainerNameSelector,omitempty" tf:"-"`
+	SourceContainerNameSelector *v2.Selector `json:"sourceContainerNameSelector,omitempty" tf:"-"`
 }
 
 type ObjectReplicationRulesObservation struct {
@@ -176,11 +176,11 @@ type ObjectReplicationRulesParameters struct {
 
 	// Reference to a Container in storage to populate destinationContainerName.
 	// +kubebuilder:validation:Optional
-	DestinationContainerNameRef *v1.Reference `json:"destinationContainerNameRef,omitempty" tf:"-"`
+	DestinationContainerNameRef *v2.Reference `json:"destinationContainerNameRef,omitempty" tf:"-"`
 
 	// Selector for a Container in storage to populate destinationContainerName.
 	// +kubebuilder:validation:Optional
-	DestinationContainerNameSelector *v1.Selector `json:"destinationContainerNameSelector,omitempty" tf:"-"`
+	DestinationContainerNameSelector *v2.Selector `json:"destinationContainerNameSelector,omitempty" tf:"-"`
 
 	// Specifies a list of filters prefixes, the blobs whose names begin with which will be replicated.
 	// +kubebuilder:validation:Optional
@@ -194,17 +194,17 @@ type ObjectReplicationRulesParameters struct {
 
 	// Reference to a Container in storage to populate sourceContainerName.
 	// +kubebuilder:validation:Optional
-	SourceContainerNameRef *v1.Reference `json:"sourceContainerNameRef,omitempty" tf:"-"`
+	SourceContainerNameRef *v2.Reference `json:"sourceContainerNameRef,omitempty" tf:"-"`
 
 	// Selector for a Container in storage to populate sourceContainerName.
 	// +kubebuilder:validation:Optional
-	SourceContainerNameSelector *v1.Selector `json:"sourceContainerNameSelector,omitempty" tf:"-"`
+	SourceContainerNameSelector *v2.Selector `json:"sourceContainerNameSelector,omitempty" tf:"-"`
 }
 
 // ObjectReplicationSpec defines the desired state of ObjectReplication
 type ObjectReplicationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ObjectReplicationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ObjectReplicationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -220,8 +220,8 @@ type ObjectReplicationSpec struct {
 
 // ObjectReplicationStatus defines the observed state of ObjectReplication.
 type ObjectReplicationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ObjectReplicationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ObjectReplicationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

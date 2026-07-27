@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ManagerRoutingConfigurationInitParameters struct {
@@ -51,11 +51,11 @@ type ManagerRoutingConfigurationParameters struct {
 
 	// Reference to a Manager in network to populate networkManagerId.
 	// +kubebuilder:validation:Optional
-	NetworkManagerIDRef *v1.Reference `json:"networkManagerIdRef,omitempty" tf:"-"`
+	NetworkManagerIDRef *v2.Reference `json:"networkManagerIdRef,omitempty" tf:"-"`
 
 	// Selector for a Manager in network to populate networkManagerId.
 	// +kubebuilder:validation:Optional
-	NetworkManagerIDSelector *v1.Selector `json:"networkManagerIdSelector,omitempty" tf:"-"`
+	NetworkManagerIDSelector *v2.Selector `json:"networkManagerIdSelector,omitempty" tf:"-"`
 
 	// The route table usage mode for the Network Manager Routing Configuration. Possible values are ManagedOnly and UseExisting. Defaults to ManagedOnly.
 	// +kubebuilder:validation:Optional
@@ -64,8 +64,8 @@ type ManagerRoutingConfigurationParameters struct {
 
 // ManagerRoutingConfigurationSpec defines the desired state of ManagerRoutingConfiguration
 type ManagerRoutingConfigurationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ManagerRoutingConfigurationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ManagerRoutingConfigurationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -81,8 +81,8 @@ type ManagerRoutingConfigurationSpec struct {
 
 // ManagerRoutingConfigurationStatus defines the observed state of ManagerRoutingConfiguration.
 type ManagerRoutingConfigurationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ManagerRoutingConfigurationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ManagerRoutingConfigurationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

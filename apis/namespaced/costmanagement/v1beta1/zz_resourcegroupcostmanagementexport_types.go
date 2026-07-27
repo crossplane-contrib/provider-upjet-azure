@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ExportDataOptionsInitParameters struct {
@@ -52,11 +51,11 @@ type ExportDataStorageLocationInitParameters struct {
 
 	// Reference to a Container in storage to populate containerId.
 	// +kubebuilder:validation:Optional
-	ContainerIDRef *v1.NamespacedReference `json:"containerIdRef,omitempty" tf:"-"`
+	ContainerIDRef *v2.NamespacedReference `json:"containerIdRef,omitempty" tf:"-"`
 
 	// Selector for a Container in storage to populate containerId.
 	// +kubebuilder:validation:Optional
-	ContainerIDSelector *v1.NamespacedSelector `json:"containerIdSelector,omitempty" tf:"-"`
+	ContainerIDSelector *v2.NamespacedSelector `json:"containerIdSelector,omitempty" tf:"-"`
 
 	// The path of the directory where exports will be uploaded. Changing this forces a new resource to be created.
 	RootFolderPath *string `json:"rootFolderPath,omitempty" tf:"root_folder_path,omitempty"`
@@ -81,11 +80,11 @@ type ExportDataStorageLocationParameters struct {
 
 	// Reference to a Container in storage to populate containerId.
 	// +kubebuilder:validation:Optional
-	ContainerIDRef *v1.NamespacedReference `json:"containerIdRef,omitempty" tf:"-"`
+	ContainerIDRef *v2.NamespacedReference `json:"containerIdRef,omitempty" tf:"-"`
 
 	// Selector for a Container in storage to populate containerId.
 	// +kubebuilder:validation:Optional
-	ContainerIDSelector *v1.NamespacedSelector `json:"containerIdSelector,omitempty" tf:"-"`
+	ContainerIDSelector *v2.NamespacedSelector `json:"containerIdSelector,omitempty" tf:"-"`
 
 	// The path of the directory where exports will be uploaded. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -122,11 +121,11 @@ type ResourceGroupCostManagementExportInitParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupId.
 	// +kubebuilder:validation:Optional
-	ResourceGroupIDRef *v1.NamespacedReference `json:"resourceGroupIdRef,omitempty" tf:"-"`
+	ResourceGroupIDRef *v2.NamespacedReference `json:"resourceGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupId.
 	// +kubebuilder:validation:Optional
-	ResourceGroupIDSelector *v1.NamespacedSelector `json:"resourceGroupIdSelector,omitempty" tf:"-"`
+	ResourceGroupIDSelector *v2.NamespacedSelector `json:"resourceGroupIdSelector,omitempty" tf:"-"`
 }
 
 type ResourceGroupCostManagementExportObservation struct {
@@ -197,11 +196,11 @@ type ResourceGroupCostManagementExportParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupId.
 	// +kubebuilder:validation:Optional
-	ResourceGroupIDRef *v1.NamespacedReference `json:"resourceGroupIdRef,omitempty" tf:"-"`
+	ResourceGroupIDRef *v2.NamespacedReference `json:"resourceGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupId.
 	// +kubebuilder:validation:Optional
-	ResourceGroupIDSelector *v1.NamespacedSelector `json:"resourceGroupIdSelector,omitempty" tf:"-"`
+	ResourceGroupIDSelector *v2.NamespacedSelector `json:"resourceGroupIdSelector,omitempty" tf:"-"`
 }
 
 // ResourceGroupCostManagementExportSpec defines the desired state of ResourceGroupCostManagementExport
@@ -223,8 +222,8 @@ type ResourceGroupCostManagementExportSpec struct {
 
 // ResourceGroupCostManagementExportStatus defines the observed state of ResourceGroupCostManagementExport.
 type ResourceGroupCostManagementExportStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ResourceGroupCostManagementExportObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ResourceGroupCostManagementExportObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

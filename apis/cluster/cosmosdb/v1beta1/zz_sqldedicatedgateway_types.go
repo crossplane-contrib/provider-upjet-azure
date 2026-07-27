@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SQLDedicatedGatewayInitParameters struct {
@@ -47,11 +47,11 @@ type SQLDedicatedGatewayParameters struct {
 
 	// Reference to a Account in cosmosdb to populate cosmosdbAccountId.
 	// +kubebuilder:validation:Optional
-	CosmosDBAccountIDRef *v1.Reference `json:"cosmosdbAccountIdRef,omitempty" tf:"-"`
+	CosmosDBAccountIDRef *v2.Reference `json:"cosmosdbAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in cosmosdb to populate cosmosdbAccountId.
 	// +kubebuilder:validation:Optional
-	CosmosDBAccountIDSelector *v1.Selector `json:"cosmosdbAccountIdSelector,omitempty" tf:"-"`
+	CosmosDBAccountIDSelector *v2.Selector `json:"cosmosdbAccountIdSelector,omitempty" tf:"-"`
 
 	// The instance count for the CosmosDB SQL Dedicated Gateway. Possible value is between 1 and 5.
 	// +kubebuilder:validation:Optional
@@ -64,8 +64,8 @@ type SQLDedicatedGatewayParameters struct {
 
 // SQLDedicatedGatewaySpec defines the desired state of SQLDedicatedGateway
 type SQLDedicatedGatewaySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SQLDedicatedGatewayParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SQLDedicatedGatewayParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -81,8 +81,8 @@ type SQLDedicatedGatewaySpec struct {
 
 // SQLDedicatedGatewayStatus defines the observed state of SQLDedicatedGateway.
 type SQLDedicatedGatewayStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SQLDedicatedGatewayObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SQLDedicatedGatewayObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

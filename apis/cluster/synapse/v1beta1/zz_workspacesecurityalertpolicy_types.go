@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type WorkspaceSecurityAlertPolicyInitParameters struct {
@@ -33,7 +33,7 @@ type WorkspaceSecurityAlertPolicyInitParameters struct {
 	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
 
 	// Specifies the identifier key of the Threat Detection audit storage account.
-	StorageAccountAccessKeySecretRef *v1.SecretKeySelector `json:"storageAccountAccessKeySecretRef,omitempty" tf:"-"`
+	StorageAccountAccessKeySecretRef *v2.SecretKeySelector `json:"storageAccountAccessKeySecretRef,omitempty" tf:"-"`
 
 	// Specifies the blob storage endpoint (e.g. https://example.blob.core.windows.net). This blob storage will hold all Threat Detection audit logs.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
@@ -42,11 +42,11 @@ type WorkspaceSecurityAlertPolicyInitParameters struct {
 
 	// Reference to a Account in storage to populate storageEndpoint.
 	// +kubebuilder:validation:Optional
-	StorageEndpointRef *v1.Reference `json:"storageEndpointRef,omitempty" tf:"-"`
+	StorageEndpointRef *v2.Reference `json:"storageEndpointRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageEndpoint.
 	// +kubebuilder:validation:Optional
-	StorageEndpointSelector *v1.Selector `json:"storageEndpointSelector,omitempty" tf:"-"`
+	StorageEndpointSelector *v2.Selector `json:"storageEndpointSelector,omitempty" tf:"-"`
 }
 
 type WorkspaceSecurityAlertPolicyObservation struct {
@@ -104,7 +104,7 @@ type WorkspaceSecurityAlertPolicyParameters struct {
 
 	// Specifies the identifier key of the Threat Detection audit storage account.
 	// +kubebuilder:validation:Optional
-	StorageAccountAccessKeySecretRef *v1.SecretKeySelector `json:"storageAccountAccessKeySecretRef,omitempty" tf:"-"`
+	StorageAccountAccessKeySecretRef *v2.SecretKeySelector `json:"storageAccountAccessKeySecretRef,omitempty" tf:"-"`
 
 	// Specifies the blob storage endpoint (e.g. https://example.blob.core.windows.net). This blob storage will hold all Threat Detection audit logs.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
@@ -114,11 +114,11 @@ type WorkspaceSecurityAlertPolicyParameters struct {
 
 	// Reference to a Account in storage to populate storageEndpoint.
 	// +kubebuilder:validation:Optional
-	StorageEndpointRef *v1.Reference `json:"storageEndpointRef,omitempty" tf:"-"`
+	StorageEndpointRef *v2.Reference `json:"storageEndpointRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageEndpoint.
 	// +kubebuilder:validation:Optional
-	StorageEndpointSelector *v1.Selector `json:"storageEndpointSelector,omitempty" tf:"-"`
+	StorageEndpointSelector *v2.Selector `json:"storageEndpointSelector,omitempty" tf:"-"`
 
 	// Specifies the ID of the Synapse Workspace. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/synapse/v1beta2.Workspace
@@ -128,17 +128,17 @@ type WorkspaceSecurityAlertPolicyParameters struct {
 
 	// Reference to a Workspace in synapse to populate synapseWorkspaceId.
 	// +kubebuilder:validation:Optional
-	SynapseWorkspaceIDRef *v1.Reference `json:"synapseWorkspaceIdRef,omitempty" tf:"-"`
+	SynapseWorkspaceIDRef *v2.Reference `json:"synapseWorkspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in synapse to populate synapseWorkspaceId.
 	// +kubebuilder:validation:Optional
-	SynapseWorkspaceIDSelector *v1.Selector `json:"synapseWorkspaceIdSelector,omitempty" tf:"-"`
+	SynapseWorkspaceIDSelector *v2.Selector `json:"synapseWorkspaceIdSelector,omitempty" tf:"-"`
 }
 
 // WorkspaceSecurityAlertPolicySpec defines the desired state of WorkspaceSecurityAlertPolicy
 type WorkspaceSecurityAlertPolicySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     WorkspaceSecurityAlertPolicyParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   WorkspaceSecurityAlertPolicyParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -154,8 +154,8 @@ type WorkspaceSecurityAlertPolicySpec struct {
 
 // WorkspaceSecurityAlertPolicyStatus defines the observed state of WorkspaceSecurityAlertPolicy.
 type WorkspaceSecurityAlertPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        WorkspaceSecurityAlertPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               WorkspaceSecurityAlertPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

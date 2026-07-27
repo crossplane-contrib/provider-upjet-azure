@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ManagerStaticMemberInitParameters struct {
@@ -23,11 +22,11 @@ type ManagerStaticMemberInitParameters struct {
 
 	// Reference to a VirtualNetwork in network to populate targetVirtualNetworkId.
 	// +kubebuilder:validation:Optional
-	TargetVirtualNetworkIDRef *v1.NamespacedReference `json:"targetVirtualNetworkIdRef,omitempty" tf:"-"`
+	TargetVirtualNetworkIDRef *v2.NamespacedReference `json:"targetVirtualNetworkIdRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualNetwork in network to populate targetVirtualNetworkId.
 	// +kubebuilder:validation:Optional
-	TargetVirtualNetworkIDSelector *v1.NamespacedSelector `json:"targetVirtualNetworkIdSelector,omitempty" tf:"-"`
+	TargetVirtualNetworkIDSelector *v2.NamespacedSelector `json:"targetVirtualNetworkIdSelector,omitempty" tf:"-"`
 }
 
 type ManagerStaticMemberObservation struct {
@@ -55,11 +54,11 @@ type ManagerStaticMemberParameters struct {
 
 	// Reference to a ManagerNetworkGroup in network to populate networkGroupId.
 	// +kubebuilder:validation:Optional
-	NetworkGroupIDRef *v1.NamespacedReference `json:"networkGroupIdRef,omitempty" tf:"-"`
+	NetworkGroupIDRef *v2.NamespacedReference `json:"networkGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a ManagerNetworkGroup in network to populate networkGroupId.
 	// +kubebuilder:validation:Optional
-	NetworkGroupIDSelector *v1.NamespacedSelector `json:"networkGroupIdSelector,omitempty" tf:"-"`
+	NetworkGroupIDSelector *v2.NamespacedSelector `json:"networkGroupIdSelector,omitempty" tf:"-"`
 
 	// Specifies the Resource ID of the Virtual Network or Subnet used as the Static Member. Changing this forces a new Network Manager Static Member to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.VirtualNetwork
@@ -69,11 +68,11 @@ type ManagerStaticMemberParameters struct {
 
 	// Reference to a VirtualNetwork in network to populate targetVirtualNetworkId.
 	// +kubebuilder:validation:Optional
-	TargetVirtualNetworkIDRef *v1.NamespacedReference `json:"targetVirtualNetworkIdRef,omitempty" tf:"-"`
+	TargetVirtualNetworkIDRef *v2.NamespacedReference `json:"targetVirtualNetworkIdRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualNetwork in network to populate targetVirtualNetworkId.
 	// +kubebuilder:validation:Optional
-	TargetVirtualNetworkIDSelector *v1.NamespacedSelector `json:"targetVirtualNetworkIdSelector,omitempty" tf:"-"`
+	TargetVirtualNetworkIDSelector *v2.NamespacedSelector `json:"targetVirtualNetworkIdSelector,omitempty" tf:"-"`
 }
 
 // ManagerStaticMemberSpec defines the desired state of ManagerStaticMember
@@ -95,8 +94,8 @@ type ManagerStaticMemberSpec struct {
 
 // ManagerStaticMemberStatus defines the observed state of ManagerStaticMember.
 type ManagerStaticMemberStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ManagerStaticMemberObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ManagerStaticMemberObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

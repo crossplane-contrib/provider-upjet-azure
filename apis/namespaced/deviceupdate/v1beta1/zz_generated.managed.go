@@ -5,84 +5,84 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this IOTHubDeviceUpdateAccount.
-func (mg *IOTHubDeviceUpdateAccount) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *IOTHubDeviceUpdateAccount) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this IOTHubDeviceUpdateAccount.
-func (mg *IOTHubDeviceUpdateAccount) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *IOTHubDeviceUpdateAccount) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this IOTHubDeviceUpdateAccount.
-func (mg *IOTHubDeviceUpdateAccount) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *IOTHubDeviceUpdateAccount) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this IOTHubDeviceUpdateAccount.
-func (mg *IOTHubDeviceUpdateAccount) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *IOTHubDeviceUpdateAccount) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this IOTHubDeviceUpdateAccount.
-func (mg *IOTHubDeviceUpdateAccount) SetConditions(c ...xpv1.Condition) {
+func (mg *IOTHubDeviceUpdateAccount) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this IOTHubDeviceUpdateAccount.
-func (mg *IOTHubDeviceUpdateAccount) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *IOTHubDeviceUpdateAccount) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this IOTHubDeviceUpdateAccount.
-func (mg *IOTHubDeviceUpdateAccount) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *IOTHubDeviceUpdateAccount) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this IOTHubDeviceUpdateAccount.
-func (mg *IOTHubDeviceUpdateAccount) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *IOTHubDeviceUpdateAccount) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this IOTHubDeviceUpdateInstance.
-func (mg *IOTHubDeviceUpdateInstance) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *IOTHubDeviceUpdateInstance) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this IOTHubDeviceUpdateInstance.
-func (mg *IOTHubDeviceUpdateInstance) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *IOTHubDeviceUpdateInstance) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this IOTHubDeviceUpdateInstance.
-func (mg *IOTHubDeviceUpdateInstance) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *IOTHubDeviceUpdateInstance) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this IOTHubDeviceUpdateInstance.
-func (mg *IOTHubDeviceUpdateInstance) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *IOTHubDeviceUpdateInstance) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this IOTHubDeviceUpdateInstance.
-func (mg *IOTHubDeviceUpdateInstance) SetConditions(c ...xpv1.Condition) {
+func (mg *IOTHubDeviceUpdateInstance) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this IOTHubDeviceUpdateInstance.
-func (mg *IOTHubDeviceUpdateInstance) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *IOTHubDeviceUpdateInstance) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this IOTHubDeviceUpdateInstance.
-func (mg *IOTHubDeviceUpdateInstance) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *IOTHubDeviceUpdateInstance) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this IOTHubDeviceUpdateInstance.
-func (mg *IOTHubDeviceUpdateInstance) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *IOTHubDeviceUpdateInstance) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

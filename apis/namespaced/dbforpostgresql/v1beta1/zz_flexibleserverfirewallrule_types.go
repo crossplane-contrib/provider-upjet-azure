@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type FlexibleServerFirewallRuleInitParameters struct {
@@ -52,11 +51,11 @@ type FlexibleServerFirewallRuleParameters struct {
 
 	// Reference to a FlexibleServer in dbforpostgresql to populate serverId.
 	// +kubebuilder:validation:Optional
-	ServerIDRef *v1.NamespacedReference `json:"serverIdRef,omitempty" tf:"-"`
+	ServerIDRef *v2.NamespacedReference `json:"serverIdRef,omitempty" tf:"-"`
 
 	// Selector for a FlexibleServer in dbforpostgresql to populate serverId.
 	// +kubebuilder:validation:Optional
-	ServerIDSelector *v1.NamespacedSelector `json:"serverIdSelector,omitempty" tf:"-"`
+	ServerIDSelector *v2.NamespacedSelector `json:"serverIdSelector,omitempty" tf:"-"`
 
 	// The IPv4 Address defining the start of the range of addresses associated with this PostgreSQL Flexible Server Firewall Rule.
 	// +kubebuilder:validation:Optional
@@ -82,8 +81,8 @@ type FlexibleServerFirewallRuleSpec struct {
 
 // FlexibleServerFirewallRuleStatus defines the observed state of FlexibleServerFirewallRule.
 type FlexibleServerFirewallRuleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FlexibleServerFirewallRuleObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FlexibleServerFirewallRuleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

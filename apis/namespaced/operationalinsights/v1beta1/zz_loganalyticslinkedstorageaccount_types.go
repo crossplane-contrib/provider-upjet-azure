@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type LogAnalyticsLinkedStorageAccountInitParameters struct {
@@ -25,11 +24,11 @@ type LogAnalyticsLinkedStorageAccountInitParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The storage account resource ids to be linked.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
@@ -39,11 +38,11 @@ type LogAnalyticsLinkedStorageAccountInitParameters struct {
 
 	// References to Account in storage to populate storageAccountIds.
 	// +kubebuilder:validation:Optional
-	StorageAccountIdsRefs []v1.NamespacedReference `json:"storageAccountIdsRefs,omitempty" tf:"-"`
+	StorageAccountIdsRefs []v2.NamespacedReference `json:"storageAccountIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Account in storage to populate storageAccountIds.
 	// +kubebuilder:validation:Optional
-	StorageAccountIdsSelector *v1.NamespacedSelector `json:"storageAccountIdsSelector,omitempty" tf:"-"`
+	StorageAccountIdsSelector *v2.NamespacedSelector `json:"storageAccountIdsSelector,omitempty" tf:"-"`
 
 	// The resource ID of the Log Analytics Workspace. Changing this forces a new Log Analytics Linked Storage Account to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/operationalinsights/v1beta1.Workspace
@@ -52,11 +51,11 @@ type LogAnalyticsLinkedStorageAccountInitParameters struct {
 
 	// Reference to a Workspace in operationalinsights to populate workspaceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceIDRef *v1.NamespacedReference `json:"workspaceIdRef,omitempty" tf:"-"`
+	WorkspaceIDRef *v2.NamespacedReference `json:"workspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in operationalinsights to populate workspaceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceIDSelector *v1.NamespacedSelector `json:"workspaceIdSelector,omitempty" tf:"-"`
+	WorkspaceIDSelector *v2.NamespacedSelector `json:"workspaceIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Log Analytics Linked Storage Account.
 	WorkspaceResourceID *string `json:"workspaceResourceId,omitempty" tf:"workspace_resource_id,omitempty"`
@@ -97,11 +96,11 @@ type LogAnalyticsLinkedStorageAccountParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The storage account resource ids to be linked.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
@@ -112,11 +111,11 @@ type LogAnalyticsLinkedStorageAccountParameters struct {
 
 	// References to Account in storage to populate storageAccountIds.
 	// +kubebuilder:validation:Optional
-	StorageAccountIdsRefs []v1.NamespacedReference `json:"storageAccountIdsRefs,omitempty" tf:"-"`
+	StorageAccountIdsRefs []v2.NamespacedReference `json:"storageAccountIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Account in storage to populate storageAccountIds.
 	// +kubebuilder:validation:Optional
-	StorageAccountIdsSelector *v1.NamespacedSelector `json:"storageAccountIdsSelector,omitempty" tf:"-"`
+	StorageAccountIdsSelector *v2.NamespacedSelector `json:"storageAccountIdsSelector,omitempty" tf:"-"`
 
 	// The resource ID of the Log Analytics Workspace. Changing this forces a new Log Analytics Linked Storage Account to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/operationalinsights/v1beta1.Workspace
@@ -126,11 +125,11 @@ type LogAnalyticsLinkedStorageAccountParameters struct {
 
 	// Reference to a Workspace in operationalinsights to populate workspaceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceIDRef *v1.NamespacedReference `json:"workspaceIdRef,omitempty" tf:"-"`
+	WorkspaceIDRef *v2.NamespacedReference `json:"workspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in operationalinsights to populate workspaceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceIDSelector *v1.NamespacedSelector `json:"workspaceIdSelector,omitempty" tf:"-"`
+	WorkspaceIDSelector *v2.NamespacedSelector `json:"workspaceIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Log Analytics Linked Storage Account.
 	// +kubebuilder:validation:Optional
@@ -156,8 +155,8 @@ type LogAnalyticsLinkedStorageAccountSpec struct {
 
 // LogAnalyticsLinkedStorageAccountStatus defines the observed state of LogAnalyticsLinkedStorageAccount.
 type LogAnalyticsLinkedStorageAccountStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LogAnalyticsLinkedStorageAccountObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LogAnalyticsLinkedStorageAccountObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

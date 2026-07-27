@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BotChannelWebChatInitParameters struct {
@@ -51,11 +50,11 @@ type BotChannelWebChatParameters struct {
 
 	// Reference to a BotChannelsRegistration in botservice to populate botName.
 	// +kubebuilder:validation:Optional
-	BotNameRef *v1.NamespacedReference `json:"botNameRef,omitempty" tf:"-"`
+	BotNameRef *v2.NamespacedReference `json:"botNameRef,omitempty" tf:"-"`
 
 	// Selector for a BotChannelsRegistration in botservice to populate botName.
 	// +kubebuilder:validation:Optional
-	BotNameSelector *v1.NamespacedSelector `json:"botNameSelector,omitempty" tf:"-"`
+	BotNameSelector *v2.NamespacedSelector `json:"botNameSelector,omitempty" tf:"-"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -68,11 +67,11 @@ type BotChannelWebChatParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A site represents a client application that you want to connect to your bot. One or more site blocks as defined below.
 	// +kubebuilder:validation:Optional
@@ -147,8 +146,8 @@ type BotChannelWebChatSpec struct {
 
 // BotChannelWebChatStatus defines the observed state of BotChannelWebChat.
 type BotChannelWebChatStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BotChannelWebChatObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BotChannelWebChatObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ApplicationInsightsStandardWebTestInitParameters struct {
@@ -22,11 +22,11 @@ type ApplicationInsightsStandardWebTestInitParameters struct {
 
 	// Reference to a ApplicationInsights in insights to populate applicationInsightsId.
 	// +kubebuilder:validation:Optional
-	ApplicationInsightsIDRef *v1.Reference `json:"applicationInsightsIdRef,omitempty" tf:"-"`
+	ApplicationInsightsIDRef *v2.Reference `json:"applicationInsightsIdRef,omitempty" tf:"-"`
 
 	// Selector for a ApplicationInsights in insights to populate applicationInsightsId.
 	// +kubebuilder:validation:Optional
-	ApplicationInsightsIDSelector *v1.Selector `json:"applicationInsightsIdSelector,omitempty" tf:"-"`
+	ApplicationInsightsIDSelector *v2.Selector `json:"applicationInsightsIdSelector,omitempty" tf:"-"`
 
 	// Purpose/user defined descriptive test for this WebTest.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -116,11 +116,11 @@ type ApplicationInsightsStandardWebTestParameters struct {
 
 	// Reference to a ApplicationInsights in insights to populate applicationInsightsId.
 	// +kubebuilder:validation:Optional
-	ApplicationInsightsIDRef *v1.Reference `json:"applicationInsightsIdRef,omitempty" tf:"-"`
+	ApplicationInsightsIDRef *v2.Reference `json:"applicationInsightsIdRef,omitempty" tf:"-"`
 
 	// Selector for a ApplicationInsights in insights to populate applicationInsightsId.
 	// +kubebuilder:validation:Optional
-	ApplicationInsightsIDSelector *v1.Selector `json:"applicationInsightsIdSelector,omitempty" tf:"-"`
+	ApplicationInsightsIDSelector *v2.Selector `json:"applicationInsightsIdSelector,omitempty" tf:"-"`
 
 	// Purpose/user defined descriptive test for this WebTest.
 	// +kubebuilder:validation:Optional
@@ -153,11 +153,11 @@ type ApplicationInsightsStandardWebTestParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Should the retry on WebTest failure be enabled?
 	// +kubebuilder:validation:Optional
@@ -365,8 +365,8 @@ type ValidationRulesParameters struct {
 
 // ApplicationInsightsStandardWebTestSpec defines the desired state of ApplicationInsightsStandardWebTest
 type ApplicationInsightsStandardWebTestSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ApplicationInsightsStandardWebTestParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ApplicationInsightsStandardWebTestParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -382,8 +382,8 @@ type ApplicationInsightsStandardWebTestSpec struct {
 
 // ApplicationInsightsStandardWebTestStatus defines the observed state of ApplicationInsightsStandardWebTest.
 type ApplicationInsightsStandardWebTestStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ApplicationInsightsStandardWebTestObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ApplicationInsightsStandardWebTestObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

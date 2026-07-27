@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SpringCloudAppRedisAssociationInitParameters struct {
@@ -22,11 +22,11 @@ type SpringCloudAppRedisAssociationInitParameters struct {
 
 	// Reference to a RedisCache in cache to populate redisAccessKey.
 	// +kubebuilder:validation:Optional
-	RedisAccessKeyRef *v1.Reference `json:"redisAccessKeyRef,omitempty" tf:"-"`
+	RedisAccessKeyRef *v2.Reference `json:"redisAccessKeyRef,omitempty" tf:"-"`
 
 	// Selector for a RedisCache in cache to populate redisAccessKey.
 	// +kubebuilder:validation:Optional
-	RedisAccessKeySelector *v1.Selector `json:"redisAccessKeySelector,omitempty" tf:"-"`
+	RedisAccessKeySelector *v2.Selector `json:"redisAccessKeySelector,omitempty" tf:"-"`
 
 	// Specifies the Redis Cache resource ID. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/cache/v1beta2.RedisCache
@@ -35,11 +35,11 @@ type SpringCloudAppRedisAssociationInitParameters struct {
 
 	// Reference to a RedisCache in cache to populate redisCacheId.
 	// +kubebuilder:validation:Optional
-	RedisCacheIDRef *v1.Reference `json:"redisCacheIdRef,omitempty" tf:"-"`
+	RedisCacheIDRef *v2.Reference `json:"redisCacheIdRef,omitempty" tf:"-"`
 
 	// Selector for a RedisCache in cache to populate redisCacheId.
 	// +kubebuilder:validation:Optional
-	RedisCacheIDSelector *v1.Selector `json:"redisCacheIdSelector,omitempty" tf:"-"`
+	RedisCacheIDSelector *v2.Selector `json:"redisCacheIdSelector,omitempty" tf:"-"`
 
 	// Should SSL be used when connecting to Redis? Defaults to true.
 	SSLEnabled *bool `json:"sslEnabled,omitempty" tf:"ssl_enabled,omitempty"`
@@ -73,11 +73,11 @@ type SpringCloudAppRedisAssociationParameters struct {
 
 	// Reference to a RedisCache in cache to populate redisAccessKey.
 	// +kubebuilder:validation:Optional
-	RedisAccessKeyRef *v1.Reference `json:"redisAccessKeyRef,omitempty" tf:"-"`
+	RedisAccessKeyRef *v2.Reference `json:"redisAccessKeyRef,omitempty" tf:"-"`
 
 	// Selector for a RedisCache in cache to populate redisAccessKey.
 	// +kubebuilder:validation:Optional
-	RedisAccessKeySelector *v1.Selector `json:"redisAccessKeySelector,omitempty" tf:"-"`
+	RedisAccessKeySelector *v2.Selector `json:"redisAccessKeySelector,omitempty" tf:"-"`
 
 	// Specifies the Redis Cache resource ID. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/cache/v1beta2.RedisCache
@@ -87,11 +87,11 @@ type SpringCloudAppRedisAssociationParameters struct {
 
 	// Reference to a RedisCache in cache to populate redisCacheId.
 	// +kubebuilder:validation:Optional
-	RedisCacheIDRef *v1.Reference `json:"redisCacheIdRef,omitempty" tf:"-"`
+	RedisCacheIDRef *v2.Reference `json:"redisCacheIdRef,omitempty" tf:"-"`
 
 	// Selector for a RedisCache in cache to populate redisCacheId.
 	// +kubebuilder:validation:Optional
-	RedisCacheIDSelector *v1.Selector `json:"redisCacheIdSelector,omitempty" tf:"-"`
+	RedisCacheIDSelector *v2.Selector `json:"redisCacheIdSelector,omitempty" tf:"-"`
 
 	// Should SSL be used when connecting to Redis? Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -105,17 +105,17 @@ type SpringCloudAppRedisAssociationParameters struct {
 
 	// Reference to a SpringCloudApp in appplatform to populate springCloudAppId.
 	// +kubebuilder:validation:Optional
-	SpringCloudAppIDRef *v1.Reference `json:"springCloudAppIdRef,omitempty" tf:"-"`
+	SpringCloudAppIDRef *v2.Reference `json:"springCloudAppIdRef,omitempty" tf:"-"`
 
 	// Selector for a SpringCloudApp in appplatform to populate springCloudAppId.
 	// +kubebuilder:validation:Optional
-	SpringCloudAppIDSelector *v1.Selector `json:"springCloudAppIdSelector,omitempty" tf:"-"`
+	SpringCloudAppIDSelector *v2.Selector `json:"springCloudAppIdSelector,omitempty" tf:"-"`
 }
 
 // SpringCloudAppRedisAssociationSpec defines the desired state of SpringCloudAppRedisAssociation
 type SpringCloudAppRedisAssociationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SpringCloudAppRedisAssociationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SpringCloudAppRedisAssociationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -131,8 +131,8 @@ type SpringCloudAppRedisAssociationSpec struct {
 
 // SpringCloudAppRedisAssociationStatus defines the observed state of SpringCloudAppRedisAssociation.
 type SpringCloudAppRedisAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SpringCloudAppRedisAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SpringCloudAppRedisAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

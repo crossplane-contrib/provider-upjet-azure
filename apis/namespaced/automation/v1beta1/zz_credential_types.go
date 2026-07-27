@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CredentialInitParameters struct {
@@ -20,7 +19,7 @@ type CredentialInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The password associated with this Automation Credential.
-	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The username associated with this Automation Credential.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
@@ -53,11 +52,11 @@ type CredentialParameters struct {
 
 	// Reference to a Account in automation to populate automationAccountName.
 	// +kubebuilder:validation:Optional
-	AutomationAccountNameRef *v1.NamespacedReference `json:"automationAccountNameRef,omitempty" tf:"-"`
+	AutomationAccountNameRef *v2.NamespacedReference `json:"automationAccountNameRef,omitempty" tf:"-"`
 
 	// Selector for a Account in automation to populate automationAccountName.
 	// +kubebuilder:validation:Optional
-	AutomationAccountNameSelector *v1.NamespacedSelector `json:"automationAccountNameSelector,omitempty" tf:"-"`
+	AutomationAccountNameSelector *v2.NamespacedSelector `json:"automationAccountNameSelector,omitempty" tf:"-"`
 
 	// The description associated with this Automation Credential.
 	// +kubebuilder:validation:Optional
@@ -65,7 +64,7 @@ type CredentialParameters struct {
 
 	// The password associated with this Automation Credential.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The name of the resource group in which the Credential is created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
@@ -74,11 +73,11 @@ type CredentialParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The username associated with this Automation Credential.
 	// +kubebuilder:validation:Optional
@@ -104,8 +103,8 @@ type CredentialSpec struct {
 
 // CredentialStatus defines the observed state of Credential.
 type CredentialStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        CredentialObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               CredentialObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

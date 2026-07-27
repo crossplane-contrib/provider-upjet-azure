@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type HealthcareMedtechServiceIdentityInitParameters struct {
@@ -63,11 +62,11 @@ type HealthcareMedtechServiceInitParameters struct {
 
 	// Reference to a ConsumerGroup in eventhub to populate eventhubConsumerGroupName.
 	// +kubebuilder:validation:Optional
-	EventHubConsumerGroupNameRef *v1.NamespacedReference `json:"eventhubConsumerGroupNameRef,omitempty" tf:"-"`
+	EventHubConsumerGroupNameRef *v2.NamespacedReference `json:"eventhubConsumerGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ConsumerGroup in eventhub to populate eventhubConsumerGroupName.
 	// +kubebuilder:validation:Optional
-	EventHubConsumerGroupNameSelector *v1.NamespacedSelector `json:"eventhubConsumerGroupNameSelector,omitempty" tf:"-"`
+	EventHubConsumerGroupNameSelector *v2.NamespacedSelector `json:"eventhubConsumerGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the Event Hub to connect to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/eventhub/v1beta1.EventHub
@@ -75,11 +74,11 @@ type HealthcareMedtechServiceInitParameters struct {
 
 	// Reference to a EventHub in eventhub to populate eventhubName.
 	// +kubebuilder:validation:Optional
-	EventHubNameRef *v1.NamespacedReference `json:"eventhubNameRef,omitempty" tf:"-"`
+	EventHubNameRef *v2.NamespacedReference `json:"eventhubNameRef,omitempty" tf:"-"`
 
 	// Selector for a EventHub in eventhub to populate eventhubName.
 	// +kubebuilder:validation:Optional
-	EventHubNameSelector *v1.NamespacedSelector `json:"eventhubNameSelector,omitempty" tf:"-"`
+	EventHubNameSelector *v2.NamespacedSelector `json:"eventhubNameSelector,omitempty" tf:"-"`
 
 	// Specifies the namespace name of the Event Hub to connect to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/eventhub/v1beta1.EventHubNamespace
@@ -87,11 +86,11 @@ type HealthcareMedtechServiceInitParameters struct {
 
 	// Reference to a EventHubNamespace in eventhub to populate eventhubNamespaceName.
 	// +kubebuilder:validation:Optional
-	EventHubNamespaceNameRef *v1.NamespacedReference `json:"eventhubNamespaceNameRef,omitempty" tf:"-"`
+	EventHubNamespaceNameRef *v2.NamespacedReference `json:"eventhubNamespaceNameRef,omitempty" tf:"-"`
 
 	// Selector for a EventHubNamespace in eventhub to populate eventhubNamespaceName.
 	// +kubebuilder:validation:Optional
-	EventHubNamespaceNameSelector *v1.NamespacedSelector `json:"eventhubNamespaceNameSelector,omitempty" tf:"-"`
+	EventHubNamespaceNameSelector *v2.NamespacedSelector `json:"eventhubNamespaceNameSelector,omitempty" tf:"-"`
 
 	// An identity block as defined below.
 	Identity *HealthcareMedtechServiceIdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
@@ -148,11 +147,11 @@ type HealthcareMedtechServiceParameters struct {
 
 	// Reference to a ConsumerGroup in eventhub to populate eventhubConsumerGroupName.
 	// +kubebuilder:validation:Optional
-	EventHubConsumerGroupNameRef *v1.NamespacedReference `json:"eventhubConsumerGroupNameRef,omitempty" tf:"-"`
+	EventHubConsumerGroupNameRef *v2.NamespacedReference `json:"eventhubConsumerGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ConsumerGroup in eventhub to populate eventhubConsumerGroupName.
 	// +kubebuilder:validation:Optional
-	EventHubConsumerGroupNameSelector *v1.NamespacedSelector `json:"eventhubConsumerGroupNameSelector,omitempty" tf:"-"`
+	EventHubConsumerGroupNameSelector *v2.NamespacedSelector `json:"eventhubConsumerGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the Event Hub to connect to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/eventhub/v1beta1.EventHub
@@ -161,11 +160,11 @@ type HealthcareMedtechServiceParameters struct {
 
 	// Reference to a EventHub in eventhub to populate eventhubName.
 	// +kubebuilder:validation:Optional
-	EventHubNameRef *v1.NamespacedReference `json:"eventhubNameRef,omitempty" tf:"-"`
+	EventHubNameRef *v2.NamespacedReference `json:"eventhubNameRef,omitempty" tf:"-"`
 
 	// Selector for a EventHub in eventhub to populate eventhubName.
 	// +kubebuilder:validation:Optional
-	EventHubNameSelector *v1.NamespacedSelector `json:"eventhubNameSelector,omitempty" tf:"-"`
+	EventHubNameSelector *v2.NamespacedSelector `json:"eventhubNameSelector,omitempty" tf:"-"`
 
 	// Specifies the namespace name of the Event Hub to connect to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/eventhub/v1beta1.EventHubNamespace
@@ -174,11 +173,11 @@ type HealthcareMedtechServiceParameters struct {
 
 	// Reference to a EventHubNamespace in eventhub to populate eventhubNamespaceName.
 	// +kubebuilder:validation:Optional
-	EventHubNamespaceNameRef *v1.NamespacedReference `json:"eventhubNamespaceNameRef,omitempty" tf:"-"`
+	EventHubNamespaceNameRef *v2.NamespacedReference `json:"eventhubNamespaceNameRef,omitempty" tf:"-"`
 
 	// Selector for a EventHubNamespace in eventhub to populate eventhubNamespaceName.
 	// +kubebuilder:validation:Optional
-	EventHubNamespaceNameSelector *v1.NamespacedSelector `json:"eventhubNamespaceNameSelector,omitempty" tf:"-"`
+	EventHubNamespaceNameSelector *v2.NamespacedSelector `json:"eventhubNamespaceNameSelector,omitempty" tf:"-"`
 
 	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
@@ -201,11 +200,11 @@ type HealthcareMedtechServiceParameters struct {
 
 	// Reference to a HealthcareWorkspace in healthcareapis to populate workspaceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceIDRef *v1.NamespacedReference `json:"workspaceIdRef,omitempty" tf:"-"`
+	WorkspaceIDRef *v2.NamespacedReference `json:"workspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a HealthcareWorkspace in healthcareapis to populate workspaceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceIDSelector *v1.NamespacedSelector `json:"workspaceIdSelector,omitempty" tf:"-"`
+	WorkspaceIDSelector *v2.NamespacedSelector `json:"workspaceIdSelector,omitempty" tf:"-"`
 }
 
 // HealthcareMedtechServiceSpec defines the desired state of HealthcareMedtechService
@@ -227,8 +226,8 @@ type HealthcareMedtechServiceSpec struct {
 
 // HealthcareMedtechServiceStatus defines the observed state of HealthcareMedtechService.
 type HealthcareMedtechServiceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        HealthcareMedtechServiceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               HealthcareMedtechServiceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

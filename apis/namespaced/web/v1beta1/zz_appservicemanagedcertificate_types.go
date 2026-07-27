@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AppServiceManagedCertificateInitParameters struct {
@@ -23,11 +22,11 @@ type AppServiceManagedCertificateInitParameters struct {
 
 	// Reference to a AppServiceCustomHostNameBinding in web to populate customHostnameBindingId.
 	// +kubebuilder:validation:Optional
-	CustomHostNameBindingIDRef *v1.NamespacedReference `json:"customHostnameBindingIdRef,omitempty" tf:"-"`
+	CustomHostNameBindingIDRef *v2.NamespacedReference `json:"customHostnameBindingIdRef,omitempty" tf:"-"`
 
 	// Selector for a AppServiceCustomHostNameBinding in web to populate customHostnameBindingId.
 	// +kubebuilder:validation:Optional
-	CustomHostNameBindingIDSelector *v1.NamespacedSelector `json:"customHostnameBindingIdSelector,omitempty" tf:"-"`
+	CustomHostNameBindingIDSelector *v2.NamespacedSelector `json:"customHostnameBindingIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the App Service Managed Certificate.
 	// +mapType=granular
@@ -81,11 +80,11 @@ type AppServiceManagedCertificateParameters struct {
 
 	// Reference to a AppServiceCustomHostNameBinding in web to populate customHostnameBindingId.
 	// +kubebuilder:validation:Optional
-	CustomHostNameBindingIDRef *v1.NamespacedReference `json:"customHostnameBindingIdRef,omitempty" tf:"-"`
+	CustomHostNameBindingIDRef *v2.NamespacedReference `json:"customHostnameBindingIdRef,omitempty" tf:"-"`
 
 	// Selector for a AppServiceCustomHostNameBinding in web to populate customHostnameBindingId.
 	// +kubebuilder:validation:Optional
-	CustomHostNameBindingIDSelector *v1.NamespacedSelector `json:"customHostnameBindingIdSelector,omitempty" tf:"-"`
+	CustomHostNameBindingIDSelector *v2.NamespacedSelector `json:"customHostnameBindingIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the App Service Managed Certificate.
 	// +kubebuilder:validation:Optional
@@ -112,8 +111,8 @@ type AppServiceManagedCertificateSpec struct {
 
 // AppServiceManagedCertificateStatus defines the observed state of AppServiceManagedCertificate.
 type AppServiceManagedCertificateStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AppServiceManagedCertificateObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AppServiceManagedCertificateObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type APIPolicyInitParameters struct {
@@ -53,11 +52,11 @@ type APIPolicyParameters struct {
 
 	// Reference to a Management in apimanagement to populate apiManagementName.
 	// +kubebuilder:validation:Optional
-	APIManagementNameRef *v1.NamespacedReference `json:"apiManagementNameRef,omitempty" tf:"-"`
+	APIManagementNameRef *v2.NamespacedReference `json:"apiManagementNameRef,omitempty" tf:"-"`
 
 	// Selector for a Management in apimanagement to populate apiManagementName.
 	// +kubebuilder:validation:Optional
-	APIManagementNameSelector *v1.NamespacedSelector `json:"apiManagementNameSelector,omitempty" tf:"-"`
+	APIManagementNameSelector *v2.NamespacedSelector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// The ID of the API Management API within the API Management Service. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta1.API
@@ -66,11 +65,11 @@ type APIPolicyParameters struct {
 
 	// Reference to a API in apimanagement to populate apiName.
 	// +kubebuilder:validation:Optional
-	APINameRef *v1.NamespacedReference `json:"apiNameRef,omitempty" tf:"-"`
+	APINameRef *v2.NamespacedReference `json:"apiNameRef,omitempty" tf:"-"`
 
 	// Selector for a API in apimanagement to populate apiName.
 	// +kubebuilder:validation:Optional
-	APINameSelector *v1.NamespacedSelector `json:"apiNameSelector,omitempty" tf:"-"`
+	APINameSelector *v2.NamespacedSelector `json:"apiNameSelector,omitempty" tf:"-"`
 
 	// The name of the Resource Group in which the API Management Service exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
@@ -79,11 +78,11 @@ type APIPolicyParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The XML Content for this Policy as a string.
 	// +kubebuilder:validation:Optional
@@ -113,8 +112,8 @@ type APIPolicySpec struct {
 
 // APIPolicyStatus defines the observed state of APIPolicy.
 type APIPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        APIPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               APIPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

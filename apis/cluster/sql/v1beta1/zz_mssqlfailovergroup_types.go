@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type MSSQLFailoverGroupInitParameters struct {
@@ -23,11 +23,11 @@ type MSSQLFailoverGroupInitParameters struct {
 
 	// References to MSSQLDatabase in sql to populate databases.
 	// +kubebuilder:validation:Optional
-	DatabasesRefs []v1.Reference `json:"databasesRefs,omitempty" tf:"-"`
+	DatabasesRefs []v2.Reference `json:"databasesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of MSSQLDatabase in sql to populate databases.
 	// +kubebuilder:validation:Optional
-	DatabasesSelector *v1.Selector `json:"databasesSelector,omitempty" tf:"-"`
+	DatabasesSelector *v2.Selector `json:"databasesSelector,omitempty" tf:"-"`
 
 	// A partner_server block as defined below.
 	PartnerServer []PartnerServerInitParameters `json:"partnerServer,omitempty" tf:"partner_server,omitempty"`
@@ -80,11 +80,11 @@ type MSSQLFailoverGroupParameters struct {
 
 	// References to MSSQLDatabase in sql to populate databases.
 	// +kubebuilder:validation:Optional
-	DatabasesRefs []v1.Reference `json:"databasesRefs,omitempty" tf:"-"`
+	DatabasesRefs []v2.Reference `json:"databasesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of MSSQLDatabase in sql to populate databases.
 	// +kubebuilder:validation:Optional
-	DatabasesSelector *v1.Selector `json:"databasesSelector,omitempty" tf:"-"`
+	DatabasesSelector *v2.Selector `json:"databasesSelector,omitempty" tf:"-"`
 
 	// A partner_server block as defined below.
 	// +kubebuilder:validation:Optional
@@ -106,11 +106,11 @@ type MSSQLFailoverGroupParameters struct {
 
 	// Reference to a MSSQLServer in sql to populate serverId.
 	// +kubebuilder:validation:Optional
-	ServerIDRef *v1.Reference `json:"serverIdRef,omitempty" tf:"-"`
+	ServerIDRef *v2.Reference `json:"serverIdRef,omitempty" tf:"-"`
 
 	// Selector for a MSSQLServer in sql to populate serverId.
 	// +kubebuilder:validation:Optional
-	ServerIDSelector *v1.Selector `json:"serverIdSelector,omitempty" tf:"-"`
+	ServerIDSelector *v2.Selector `json:"serverIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
@@ -127,11 +127,11 @@ type PartnerServerInitParameters struct {
 
 	// Reference to a MSSQLServer in sql to populate id.
 	// +kubebuilder:validation:Optional
-	IDRef *v1.Reference `json:"idRef,omitempty" tf:"-"`
+	IDRef *v2.Reference `json:"idRef,omitempty" tf:"-"`
 
 	// Selector for a MSSQLServer in sql to populate id.
 	// +kubebuilder:validation:Optional
-	IDSelector *v1.Selector `json:"idSelector,omitempty" tf:"-"`
+	IDSelector *v2.Selector `json:"idSelector,omitempty" tf:"-"`
 }
 
 type PartnerServerObservation struct {
@@ -156,11 +156,11 @@ type PartnerServerParameters struct {
 
 	// Reference to a MSSQLServer in sql to populate id.
 	// +kubebuilder:validation:Optional
-	IDRef *v1.Reference `json:"idRef,omitempty" tf:"-"`
+	IDRef *v2.Reference `json:"idRef,omitempty" tf:"-"`
 
 	// Selector for a MSSQLServer in sql to populate id.
 	// +kubebuilder:validation:Optional
-	IDSelector *v1.Selector `json:"idSelector,omitempty" tf:"-"`
+	IDSelector *v2.Selector `json:"idSelector,omitempty" tf:"-"`
 }
 
 type ReadWriteEndpointFailoverPolicyInitParameters struct {
@@ -194,8 +194,8 @@ type ReadWriteEndpointFailoverPolicyParameters struct {
 
 // MSSQLFailoverGroupSpec defines the desired state of MSSQLFailoverGroup
 type MSSQLFailoverGroupSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     MSSQLFailoverGroupParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   MSSQLFailoverGroupParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -211,8 +211,8 @@ type MSSQLFailoverGroupSpec struct {
 
 // MSSQLFailoverGroupStatus defines the observed state of MSSQLFailoverGroup.
 type MSSQLFailoverGroupStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MSSQLFailoverGroupObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MSSQLFailoverGroupObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type Password1InitParameters struct {
@@ -61,11 +60,11 @@ type TokenPasswordInitParameters struct {
 
 	// Reference to a Token in containerregistry to populate containerRegistryTokenId.
 	// +kubebuilder:validation:Optional
-	ContainerRegistryTokenIDRef *v1.NamespacedReference `json:"containerRegistryTokenIdRef,omitempty" tf:"-"`
+	ContainerRegistryTokenIDRef *v2.NamespacedReference `json:"containerRegistryTokenIdRef,omitempty" tf:"-"`
 
 	// Selector for a Token in containerregistry to populate containerRegistryTokenId.
 	// +kubebuilder:validation:Optional
-	ContainerRegistryTokenIDSelector *v1.NamespacedSelector `json:"containerRegistryTokenIdSelector,omitempty" tf:"-"`
+	ContainerRegistryTokenIDSelector *v2.NamespacedSelector `json:"containerRegistryTokenIdSelector,omitempty" tf:"-"`
 
 	// One password block as defined below.
 	Password1 *Password1InitParameters `json:"password1,omitempty" tf:"password1,omitempty"`
@@ -99,11 +98,11 @@ type TokenPasswordParameters struct {
 
 	// Reference to a Token in containerregistry to populate containerRegistryTokenId.
 	// +kubebuilder:validation:Optional
-	ContainerRegistryTokenIDRef *v1.NamespacedReference `json:"containerRegistryTokenIdRef,omitempty" tf:"-"`
+	ContainerRegistryTokenIDRef *v2.NamespacedReference `json:"containerRegistryTokenIdRef,omitempty" tf:"-"`
 
 	// Selector for a Token in containerregistry to populate containerRegistryTokenId.
 	// +kubebuilder:validation:Optional
-	ContainerRegistryTokenIDSelector *v1.NamespacedSelector `json:"containerRegistryTokenIdSelector,omitempty" tf:"-"`
+	ContainerRegistryTokenIDSelector *v2.NamespacedSelector `json:"containerRegistryTokenIdSelector,omitempty" tf:"-"`
 
 	// One password block as defined below.
 	// +kubebuilder:validation:Optional
@@ -133,8 +132,8 @@ type TokenPasswordSpec struct {
 
 // TokenPasswordStatus defines the observed state of TokenPassword.
 type TokenPasswordStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        TokenPasswordObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               TokenPasswordObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

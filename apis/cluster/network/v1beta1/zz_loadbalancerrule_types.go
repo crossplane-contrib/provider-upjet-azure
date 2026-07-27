@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type LoadBalancerRuleInitParameters struct {
@@ -150,11 +150,11 @@ type LoadBalancerRuleParameters struct {
 
 	// Reference to a LoadBalancer in network to populate loadbalancerId.
 	// +kubebuilder:validation:Optional
-	LoadbalancerIDRef *v1.Reference `json:"loadbalancerIdRef,omitempty" tf:"-"`
+	LoadbalancerIDRef *v2.Reference `json:"loadbalancerIdRef,omitempty" tf:"-"`
 
 	// Selector for a LoadBalancer in network to populate loadbalancerId.
 	// +kubebuilder:validation:Optional
-	LoadbalancerIDSelector *v1.Selector `json:"loadbalancerIdSelector,omitempty" tf:"-"`
+	LoadbalancerIDSelector *v2.Selector `json:"loadbalancerIdSelector,omitempty" tf:"-"`
 
 	// A reference to a Probe used by this Load Balancing Rule.
 	// +kubebuilder:validation:Optional
@@ -171,8 +171,8 @@ type LoadBalancerRuleParameters struct {
 
 // LoadBalancerRuleSpec defines the desired state of LoadBalancerRule
 type LoadBalancerRuleSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     LoadBalancerRuleParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   LoadBalancerRuleParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -188,8 +188,8 @@ type LoadBalancerRuleSpec struct {
 
 // LoadBalancerRuleStatus defines the observed state of LoadBalancerRule.
 type LoadBalancerRuleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LoadBalancerRuleObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LoadBalancerRuleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

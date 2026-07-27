@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type WorkspaceOutboundRuleServiceTagInitParameters struct {
@@ -66,11 +65,11 @@ type WorkspaceOutboundRuleServiceTagParameters struct {
 
 	// Reference to a Workspace in machinelearningservices to populate workspaceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceIDRef *v1.NamespacedReference `json:"workspaceIdRef,omitempty" tf:"-"`
+	WorkspaceIDRef *v2.NamespacedReference `json:"workspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in machinelearningservices to populate workspaceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceIDSelector *v1.NamespacedSelector `json:"workspaceIdSelector,omitempty" tf:"-"`
+	WorkspaceIDSelector *v2.NamespacedSelector `json:"workspaceIdSelector,omitempty" tf:"-"`
 }
 
 // WorkspaceOutboundRuleServiceTagSpec defines the desired state of WorkspaceOutboundRuleServiceTag
@@ -92,8 +91,8 @@ type WorkspaceOutboundRuleServiceTagSpec struct {
 
 // WorkspaceOutboundRuleServiceTagStatus defines the observed state of WorkspaceOutboundRuleServiceTag.
 type WorkspaceOutboundRuleServiceTagStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        WorkspaceOutboundRuleServiceTagObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               WorkspaceOutboundRuleServiceTagObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

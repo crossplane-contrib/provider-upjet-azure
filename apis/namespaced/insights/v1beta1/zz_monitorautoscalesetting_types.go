@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CapacityInitParameters struct {
@@ -191,11 +190,11 @@ type MetricTriggerInitParameters struct {
 
 	// Reference to a LinuxVirtualMachineScaleSet in compute to populate metricResourceId.
 	// +kubebuilder:validation:Optional
-	MetricResourceIDRef *v1.NamespacedReference `json:"metricResourceIdRef,omitempty" tf:"-"`
+	MetricResourceIDRef *v2.NamespacedReference `json:"metricResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a LinuxVirtualMachineScaleSet in compute to populate metricResourceId.
 	// +kubebuilder:validation:Optional
-	MetricResourceIDSelector *v1.NamespacedSelector `json:"metricResourceIdSelector,omitempty" tf:"-"`
+	MetricResourceIDSelector *v2.NamespacedSelector `json:"metricResourceIdSelector,omitempty" tf:"-"`
 
 	// Specifies the operator used to compare the metric data and threshold. Possible values are: Equals, NotEquals, GreaterThan, GreaterThanOrEqual, LessThan, LessThanOrEqual.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
@@ -278,11 +277,11 @@ type MetricTriggerParameters struct {
 
 	// Reference to a LinuxVirtualMachineScaleSet in compute to populate metricResourceId.
 	// +kubebuilder:validation:Optional
-	MetricResourceIDRef *v1.NamespacedReference `json:"metricResourceIdRef,omitempty" tf:"-"`
+	MetricResourceIDRef *v2.NamespacedReference `json:"metricResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a LinuxVirtualMachineScaleSet in compute to populate metricResourceId.
 	// +kubebuilder:validation:Optional
-	MetricResourceIDSelector *v1.NamespacedSelector `json:"metricResourceIdSelector,omitempty" tf:"-"`
+	MetricResourceIDSelector *v2.NamespacedSelector `json:"metricResourceIdSelector,omitempty" tf:"-"`
 
 	// Specifies the operator used to compare the metric data and threshold. Possible values are: Equals, NotEquals, GreaterThan, GreaterThanOrEqual, LessThan, LessThanOrEqual.
 	// +kubebuilder:validation:Optional
@@ -335,11 +334,11 @@ type MonitorAutoscaleSettingInitParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
 	// +mapType=granular
@@ -352,11 +351,11 @@ type MonitorAutoscaleSettingInitParameters struct {
 
 	// Reference to a LinuxVirtualMachineScaleSet in compute to populate targetResourceId.
 	// +kubebuilder:validation:Optional
-	TargetResourceIDRef *v1.NamespacedReference `json:"targetResourceIdRef,omitempty" tf:"-"`
+	TargetResourceIDRef *v2.NamespacedReference `json:"targetResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a LinuxVirtualMachineScaleSet in compute to populate targetResourceId.
 	// +kubebuilder:validation:Optional
-	TargetResourceIDSelector *v1.NamespacedSelector `json:"targetResourceIdSelector,omitempty" tf:"-"`
+	TargetResourceIDSelector *v2.NamespacedSelector `json:"targetResourceIdSelector,omitempty" tf:"-"`
 }
 
 type MonitorAutoscaleSettingObservation struct {
@@ -426,11 +425,11 @@ type MonitorAutoscaleSettingParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
@@ -445,11 +444,11 @@ type MonitorAutoscaleSettingParameters struct {
 
 	// Reference to a LinuxVirtualMachineScaleSet in compute to populate targetResourceId.
 	// +kubebuilder:validation:Optional
-	TargetResourceIDRef *v1.NamespacedReference `json:"targetResourceIdRef,omitempty" tf:"-"`
+	TargetResourceIDRef *v2.NamespacedReference `json:"targetResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a LinuxVirtualMachineScaleSet in compute to populate targetResourceId.
 	// +kubebuilder:validation:Optional
-	TargetResourceIDSelector *v1.NamespacedSelector `json:"targetResourceIdSelector,omitempty" tf:"-"`
+	TargetResourceIDSelector *v2.NamespacedSelector `json:"targetResourceIdSelector,omitempty" tf:"-"`
 }
 
 type NotificationInitParameters struct {
@@ -747,8 +746,8 @@ type MonitorAutoscaleSettingSpec struct {
 
 // MonitorAutoscaleSettingStatus defines the observed state of MonitorAutoscaleSetting.
 type MonitorAutoscaleSettingStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MonitorAutoscaleSettingObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MonitorAutoscaleSettingObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

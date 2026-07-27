@@ -5,1104 +5,1104 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this MSSQLDatabase.
-func (mg *MSSQLDatabase) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *MSSQLDatabase) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this MSSQLDatabase.
-func (mg *MSSQLDatabase) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *MSSQLDatabase) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this MSSQLDatabase.
-func (mg *MSSQLDatabase) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *MSSQLDatabase) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MSSQLDatabase.
-func (mg *MSSQLDatabase) GetProviderConfigReference() *xpv1.Reference {
+func (mg *MSSQLDatabase) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this MSSQLDatabase.
-func (mg *MSSQLDatabase) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *MSSQLDatabase) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this MSSQLDatabase.
-func (mg *MSSQLDatabase) SetConditions(c ...xpv1.Condition) {
+func (mg *MSSQLDatabase) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this MSSQLDatabase.
-func (mg *MSSQLDatabase) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *MSSQLDatabase) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this MSSQLDatabase.
-func (mg *MSSQLDatabase) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *MSSQLDatabase) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MSSQLDatabase.
-func (mg *MSSQLDatabase) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *MSSQLDatabase) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this MSSQLDatabase.
-func (mg *MSSQLDatabase) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *MSSQLDatabase) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this MSSQLDatabaseExtendedAuditingPolicy.
-func (mg *MSSQLDatabaseExtendedAuditingPolicy) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *MSSQLDatabaseExtendedAuditingPolicy) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this MSSQLDatabaseExtendedAuditingPolicy.
-func (mg *MSSQLDatabaseExtendedAuditingPolicy) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *MSSQLDatabaseExtendedAuditingPolicy) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this MSSQLDatabaseExtendedAuditingPolicy.
-func (mg *MSSQLDatabaseExtendedAuditingPolicy) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *MSSQLDatabaseExtendedAuditingPolicy) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MSSQLDatabaseExtendedAuditingPolicy.
-func (mg *MSSQLDatabaseExtendedAuditingPolicy) GetProviderConfigReference() *xpv1.Reference {
+func (mg *MSSQLDatabaseExtendedAuditingPolicy) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this MSSQLDatabaseExtendedAuditingPolicy.
-func (mg *MSSQLDatabaseExtendedAuditingPolicy) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *MSSQLDatabaseExtendedAuditingPolicy) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this MSSQLDatabaseExtendedAuditingPolicy.
-func (mg *MSSQLDatabaseExtendedAuditingPolicy) SetConditions(c ...xpv1.Condition) {
+func (mg *MSSQLDatabaseExtendedAuditingPolicy) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this MSSQLDatabaseExtendedAuditingPolicy.
-func (mg *MSSQLDatabaseExtendedAuditingPolicy) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *MSSQLDatabaseExtendedAuditingPolicy) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this MSSQLDatabaseExtendedAuditingPolicy.
-func (mg *MSSQLDatabaseExtendedAuditingPolicy) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *MSSQLDatabaseExtendedAuditingPolicy) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MSSQLDatabaseExtendedAuditingPolicy.
-func (mg *MSSQLDatabaseExtendedAuditingPolicy) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *MSSQLDatabaseExtendedAuditingPolicy) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this MSSQLDatabaseExtendedAuditingPolicy.
-func (mg *MSSQLDatabaseExtendedAuditingPolicy) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *MSSQLDatabaseExtendedAuditingPolicy) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this MSSQLDatabaseVulnerabilityAssessmentRuleBaseline.
-func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this MSSQLDatabaseVulnerabilityAssessmentRuleBaseline.
-func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this MSSQLDatabaseVulnerabilityAssessmentRuleBaseline.
-func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MSSQLDatabaseVulnerabilityAssessmentRuleBaseline.
-func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) GetProviderConfigReference() *xpv1.Reference {
+func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this MSSQLDatabaseVulnerabilityAssessmentRuleBaseline.
-func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this MSSQLDatabaseVulnerabilityAssessmentRuleBaseline.
-func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) SetConditions(c ...xpv1.Condition) {
+func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this MSSQLDatabaseVulnerabilityAssessmentRuleBaseline.
-func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this MSSQLDatabaseVulnerabilityAssessmentRuleBaseline.
-func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MSSQLDatabaseVulnerabilityAssessmentRuleBaseline.
-func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this MSSQLDatabaseVulnerabilityAssessmentRuleBaseline.
-func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this MSSQLElasticPool.
-func (mg *MSSQLElasticPool) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *MSSQLElasticPool) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this MSSQLElasticPool.
-func (mg *MSSQLElasticPool) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *MSSQLElasticPool) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this MSSQLElasticPool.
-func (mg *MSSQLElasticPool) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *MSSQLElasticPool) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MSSQLElasticPool.
-func (mg *MSSQLElasticPool) GetProviderConfigReference() *xpv1.Reference {
+func (mg *MSSQLElasticPool) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this MSSQLElasticPool.
-func (mg *MSSQLElasticPool) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *MSSQLElasticPool) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this MSSQLElasticPool.
-func (mg *MSSQLElasticPool) SetConditions(c ...xpv1.Condition) {
+func (mg *MSSQLElasticPool) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this MSSQLElasticPool.
-func (mg *MSSQLElasticPool) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *MSSQLElasticPool) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this MSSQLElasticPool.
-func (mg *MSSQLElasticPool) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *MSSQLElasticPool) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MSSQLElasticPool.
-func (mg *MSSQLElasticPool) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *MSSQLElasticPool) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this MSSQLElasticPool.
-func (mg *MSSQLElasticPool) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *MSSQLElasticPool) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this MSSQLFailoverGroup.
-func (mg *MSSQLFailoverGroup) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *MSSQLFailoverGroup) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this MSSQLFailoverGroup.
-func (mg *MSSQLFailoverGroup) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *MSSQLFailoverGroup) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this MSSQLFailoverGroup.
-func (mg *MSSQLFailoverGroup) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *MSSQLFailoverGroup) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MSSQLFailoverGroup.
-func (mg *MSSQLFailoverGroup) GetProviderConfigReference() *xpv1.Reference {
+func (mg *MSSQLFailoverGroup) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this MSSQLFailoverGroup.
-func (mg *MSSQLFailoverGroup) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *MSSQLFailoverGroup) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this MSSQLFailoverGroup.
-func (mg *MSSQLFailoverGroup) SetConditions(c ...xpv1.Condition) {
+func (mg *MSSQLFailoverGroup) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this MSSQLFailoverGroup.
-func (mg *MSSQLFailoverGroup) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *MSSQLFailoverGroup) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this MSSQLFailoverGroup.
-func (mg *MSSQLFailoverGroup) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *MSSQLFailoverGroup) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MSSQLFailoverGroup.
-func (mg *MSSQLFailoverGroup) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *MSSQLFailoverGroup) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this MSSQLFailoverGroup.
-func (mg *MSSQLFailoverGroup) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *MSSQLFailoverGroup) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this MSSQLFirewallRule.
-func (mg *MSSQLFirewallRule) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *MSSQLFirewallRule) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this MSSQLFirewallRule.
-func (mg *MSSQLFirewallRule) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *MSSQLFirewallRule) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this MSSQLFirewallRule.
-func (mg *MSSQLFirewallRule) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *MSSQLFirewallRule) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MSSQLFirewallRule.
-func (mg *MSSQLFirewallRule) GetProviderConfigReference() *xpv1.Reference {
+func (mg *MSSQLFirewallRule) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this MSSQLFirewallRule.
-func (mg *MSSQLFirewallRule) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *MSSQLFirewallRule) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this MSSQLFirewallRule.
-func (mg *MSSQLFirewallRule) SetConditions(c ...xpv1.Condition) {
+func (mg *MSSQLFirewallRule) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this MSSQLFirewallRule.
-func (mg *MSSQLFirewallRule) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *MSSQLFirewallRule) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this MSSQLFirewallRule.
-func (mg *MSSQLFirewallRule) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *MSSQLFirewallRule) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MSSQLFirewallRule.
-func (mg *MSSQLFirewallRule) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *MSSQLFirewallRule) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this MSSQLFirewallRule.
-func (mg *MSSQLFirewallRule) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *MSSQLFirewallRule) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this MSSQLJobAgent.
-func (mg *MSSQLJobAgent) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *MSSQLJobAgent) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this MSSQLJobAgent.
-func (mg *MSSQLJobAgent) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *MSSQLJobAgent) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this MSSQLJobAgent.
-func (mg *MSSQLJobAgent) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *MSSQLJobAgent) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MSSQLJobAgent.
-func (mg *MSSQLJobAgent) GetProviderConfigReference() *xpv1.Reference {
+func (mg *MSSQLJobAgent) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this MSSQLJobAgent.
-func (mg *MSSQLJobAgent) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *MSSQLJobAgent) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this MSSQLJobAgent.
-func (mg *MSSQLJobAgent) SetConditions(c ...xpv1.Condition) {
+func (mg *MSSQLJobAgent) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this MSSQLJobAgent.
-func (mg *MSSQLJobAgent) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *MSSQLJobAgent) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this MSSQLJobAgent.
-func (mg *MSSQLJobAgent) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *MSSQLJobAgent) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MSSQLJobAgent.
-func (mg *MSSQLJobAgent) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *MSSQLJobAgent) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this MSSQLJobAgent.
-func (mg *MSSQLJobAgent) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *MSSQLJobAgent) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this MSSQLJobCredential.
-func (mg *MSSQLJobCredential) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *MSSQLJobCredential) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this MSSQLJobCredential.
-func (mg *MSSQLJobCredential) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *MSSQLJobCredential) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this MSSQLJobCredential.
-func (mg *MSSQLJobCredential) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *MSSQLJobCredential) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MSSQLJobCredential.
-func (mg *MSSQLJobCredential) GetProviderConfigReference() *xpv1.Reference {
+func (mg *MSSQLJobCredential) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this MSSQLJobCredential.
-func (mg *MSSQLJobCredential) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *MSSQLJobCredential) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this MSSQLJobCredential.
-func (mg *MSSQLJobCredential) SetConditions(c ...xpv1.Condition) {
+func (mg *MSSQLJobCredential) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this MSSQLJobCredential.
-func (mg *MSSQLJobCredential) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *MSSQLJobCredential) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this MSSQLJobCredential.
-func (mg *MSSQLJobCredential) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *MSSQLJobCredential) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MSSQLJobCredential.
-func (mg *MSSQLJobCredential) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *MSSQLJobCredential) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this MSSQLJobCredential.
-func (mg *MSSQLJobCredential) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *MSSQLJobCredential) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this MSSQLManagedDatabase.
-func (mg *MSSQLManagedDatabase) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *MSSQLManagedDatabase) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this MSSQLManagedDatabase.
-func (mg *MSSQLManagedDatabase) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *MSSQLManagedDatabase) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this MSSQLManagedDatabase.
-func (mg *MSSQLManagedDatabase) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *MSSQLManagedDatabase) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MSSQLManagedDatabase.
-func (mg *MSSQLManagedDatabase) GetProviderConfigReference() *xpv1.Reference {
+func (mg *MSSQLManagedDatabase) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this MSSQLManagedDatabase.
-func (mg *MSSQLManagedDatabase) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *MSSQLManagedDatabase) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this MSSQLManagedDatabase.
-func (mg *MSSQLManagedDatabase) SetConditions(c ...xpv1.Condition) {
+func (mg *MSSQLManagedDatabase) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this MSSQLManagedDatabase.
-func (mg *MSSQLManagedDatabase) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *MSSQLManagedDatabase) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this MSSQLManagedDatabase.
-func (mg *MSSQLManagedDatabase) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *MSSQLManagedDatabase) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MSSQLManagedDatabase.
-func (mg *MSSQLManagedDatabase) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *MSSQLManagedDatabase) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this MSSQLManagedDatabase.
-func (mg *MSSQLManagedDatabase) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *MSSQLManagedDatabase) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this MSSQLManagedInstance.
-func (mg *MSSQLManagedInstance) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *MSSQLManagedInstance) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this MSSQLManagedInstance.
-func (mg *MSSQLManagedInstance) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *MSSQLManagedInstance) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this MSSQLManagedInstance.
-func (mg *MSSQLManagedInstance) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *MSSQLManagedInstance) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MSSQLManagedInstance.
-func (mg *MSSQLManagedInstance) GetProviderConfigReference() *xpv1.Reference {
+func (mg *MSSQLManagedInstance) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this MSSQLManagedInstance.
-func (mg *MSSQLManagedInstance) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *MSSQLManagedInstance) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this MSSQLManagedInstance.
-func (mg *MSSQLManagedInstance) SetConditions(c ...xpv1.Condition) {
+func (mg *MSSQLManagedInstance) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this MSSQLManagedInstance.
-func (mg *MSSQLManagedInstance) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *MSSQLManagedInstance) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this MSSQLManagedInstance.
-func (mg *MSSQLManagedInstance) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *MSSQLManagedInstance) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MSSQLManagedInstance.
-func (mg *MSSQLManagedInstance) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *MSSQLManagedInstance) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this MSSQLManagedInstance.
-func (mg *MSSQLManagedInstance) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *MSSQLManagedInstance) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this MSSQLManagedInstanceActiveDirectoryAdministrator.
-func (mg *MSSQLManagedInstanceActiveDirectoryAdministrator) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *MSSQLManagedInstanceActiveDirectoryAdministrator) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this MSSQLManagedInstanceActiveDirectoryAdministrator.
-func (mg *MSSQLManagedInstanceActiveDirectoryAdministrator) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *MSSQLManagedInstanceActiveDirectoryAdministrator) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this MSSQLManagedInstanceActiveDirectoryAdministrator.
-func (mg *MSSQLManagedInstanceActiveDirectoryAdministrator) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *MSSQLManagedInstanceActiveDirectoryAdministrator) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MSSQLManagedInstanceActiveDirectoryAdministrator.
-func (mg *MSSQLManagedInstanceActiveDirectoryAdministrator) GetProviderConfigReference() *xpv1.Reference {
+func (mg *MSSQLManagedInstanceActiveDirectoryAdministrator) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this MSSQLManagedInstanceActiveDirectoryAdministrator.
-func (mg *MSSQLManagedInstanceActiveDirectoryAdministrator) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *MSSQLManagedInstanceActiveDirectoryAdministrator) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this MSSQLManagedInstanceActiveDirectoryAdministrator.
-func (mg *MSSQLManagedInstanceActiveDirectoryAdministrator) SetConditions(c ...xpv1.Condition) {
+func (mg *MSSQLManagedInstanceActiveDirectoryAdministrator) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this MSSQLManagedInstanceActiveDirectoryAdministrator.
-func (mg *MSSQLManagedInstanceActiveDirectoryAdministrator) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *MSSQLManagedInstanceActiveDirectoryAdministrator) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this MSSQLManagedInstanceActiveDirectoryAdministrator.
-func (mg *MSSQLManagedInstanceActiveDirectoryAdministrator) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *MSSQLManagedInstanceActiveDirectoryAdministrator) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MSSQLManagedInstanceActiveDirectoryAdministrator.
-func (mg *MSSQLManagedInstanceActiveDirectoryAdministrator) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *MSSQLManagedInstanceActiveDirectoryAdministrator) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this MSSQLManagedInstanceActiveDirectoryAdministrator.
-func (mg *MSSQLManagedInstanceActiveDirectoryAdministrator) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *MSSQLManagedInstanceActiveDirectoryAdministrator) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this MSSQLManagedInstanceFailoverGroup.
-func (mg *MSSQLManagedInstanceFailoverGroup) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *MSSQLManagedInstanceFailoverGroup) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this MSSQLManagedInstanceFailoverGroup.
-func (mg *MSSQLManagedInstanceFailoverGroup) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *MSSQLManagedInstanceFailoverGroup) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this MSSQLManagedInstanceFailoverGroup.
-func (mg *MSSQLManagedInstanceFailoverGroup) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *MSSQLManagedInstanceFailoverGroup) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MSSQLManagedInstanceFailoverGroup.
-func (mg *MSSQLManagedInstanceFailoverGroup) GetProviderConfigReference() *xpv1.Reference {
+func (mg *MSSQLManagedInstanceFailoverGroup) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this MSSQLManagedInstanceFailoverGroup.
-func (mg *MSSQLManagedInstanceFailoverGroup) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *MSSQLManagedInstanceFailoverGroup) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this MSSQLManagedInstanceFailoverGroup.
-func (mg *MSSQLManagedInstanceFailoverGroup) SetConditions(c ...xpv1.Condition) {
+func (mg *MSSQLManagedInstanceFailoverGroup) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this MSSQLManagedInstanceFailoverGroup.
-func (mg *MSSQLManagedInstanceFailoverGroup) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *MSSQLManagedInstanceFailoverGroup) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this MSSQLManagedInstanceFailoverGroup.
-func (mg *MSSQLManagedInstanceFailoverGroup) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *MSSQLManagedInstanceFailoverGroup) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MSSQLManagedInstanceFailoverGroup.
-func (mg *MSSQLManagedInstanceFailoverGroup) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *MSSQLManagedInstanceFailoverGroup) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this MSSQLManagedInstanceFailoverGroup.
-func (mg *MSSQLManagedInstanceFailoverGroup) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *MSSQLManagedInstanceFailoverGroup) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this MSSQLManagedInstanceTransparentDataEncryption.
-func (mg *MSSQLManagedInstanceTransparentDataEncryption) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *MSSQLManagedInstanceTransparentDataEncryption) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this MSSQLManagedInstanceTransparentDataEncryption.
-func (mg *MSSQLManagedInstanceTransparentDataEncryption) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *MSSQLManagedInstanceTransparentDataEncryption) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this MSSQLManagedInstanceTransparentDataEncryption.
-func (mg *MSSQLManagedInstanceTransparentDataEncryption) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *MSSQLManagedInstanceTransparentDataEncryption) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MSSQLManagedInstanceTransparentDataEncryption.
-func (mg *MSSQLManagedInstanceTransparentDataEncryption) GetProviderConfigReference() *xpv1.Reference {
+func (mg *MSSQLManagedInstanceTransparentDataEncryption) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this MSSQLManagedInstanceTransparentDataEncryption.
-func (mg *MSSQLManagedInstanceTransparentDataEncryption) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *MSSQLManagedInstanceTransparentDataEncryption) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this MSSQLManagedInstanceTransparentDataEncryption.
-func (mg *MSSQLManagedInstanceTransparentDataEncryption) SetConditions(c ...xpv1.Condition) {
+func (mg *MSSQLManagedInstanceTransparentDataEncryption) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this MSSQLManagedInstanceTransparentDataEncryption.
-func (mg *MSSQLManagedInstanceTransparentDataEncryption) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *MSSQLManagedInstanceTransparentDataEncryption) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this MSSQLManagedInstanceTransparentDataEncryption.
-func (mg *MSSQLManagedInstanceTransparentDataEncryption) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *MSSQLManagedInstanceTransparentDataEncryption) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MSSQLManagedInstanceTransparentDataEncryption.
-func (mg *MSSQLManagedInstanceTransparentDataEncryption) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *MSSQLManagedInstanceTransparentDataEncryption) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this MSSQLManagedInstanceTransparentDataEncryption.
-func (mg *MSSQLManagedInstanceTransparentDataEncryption) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *MSSQLManagedInstanceTransparentDataEncryption) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this MSSQLManagedInstanceVulnerabilityAssessment.
-func (mg *MSSQLManagedInstanceVulnerabilityAssessment) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *MSSQLManagedInstanceVulnerabilityAssessment) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this MSSQLManagedInstanceVulnerabilityAssessment.
-func (mg *MSSQLManagedInstanceVulnerabilityAssessment) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *MSSQLManagedInstanceVulnerabilityAssessment) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this MSSQLManagedInstanceVulnerabilityAssessment.
-func (mg *MSSQLManagedInstanceVulnerabilityAssessment) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *MSSQLManagedInstanceVulnerabilityAssessment) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MSSQLManagedInstanceVulnerabilityAssessment.
-func (mg *MSSQLManagedInstanceVulnerabilityAssessment) GetProviderConfigReference() *xpv1.Reference {
+func (mg *MSSQLManagedInstanceVulnerabilityAssessment) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this MSSQLManagedInstanceVulnerabilityAssessment.
-func (mg *MSSQLManagedInstanceVulnerabilityAssessment) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *MSSQLManagedInstanceVulnerabilityAssessment) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this MSSQLManagedInstanceVulnerabilityAssessment.
-func (mg *MSSQLManagedInstanceVulnerabilityAssessment) SetConditions(c ...xpv1.Condition) {
+func (mg *MSSQLManagedInstanceVulnerabilityAssessment) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this MSSQLManagedInstanceVulnerabilityAssessment.
-func (mg *MSSQLManagedInstanceVulnerabilityAssessment) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *MSSQLManagedInstanceVulnerabilityAssessment) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this MSSQLManagedInstanceVulnerabilityAssessment.
-func (mg *MSSQLManagedInstanceVulnerabilityAssessment) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *MSSQLManagedInstanceVulnerabilityAssessment) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MSSQLManagedInstanceVulnerabilityAssessment.
-func (mg *MSSQLManagedInstanceVulnerabilityAssessment) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *MSSQLManagedInstanceVulnerabilityAssessment) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this MSSQLManagedInstanceVulnerabilityAssessment.
-func (mg *MSSQLManagedInstanceVulnerabilityAssessment) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *MSSQLManagedInstanceVulnerabilityAssessment) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this MSSQLOutboundFirewallRule.
-func (mg *MSSQLOutboundFirewallRule) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *MSSQLOutboundFirewallRule) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this MSSQLOutboundFirewallRule.
-func (mg *MSSQLOutboundFirewallRule) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *MSSQLOutboundFirewallRule) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this MSSQLOutboundFirewallRule.
-func (mg *MSSQLOutboundFirewallRule) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *MSSQLOutboundFirewallRule) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MSSQLOutboundFirewallRule.
-func (mg *MSSQLOutboundFirewallRule) GetProviderConfigReference() *xpv1.Reference {
+func (mg *MSSQLOutboundFirewallRule) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this MSSQLOutboundFirewallRule.
-func (mg *MSSQLOutboundFirewallRule) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *MSSQLOutboundFirewallRule) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this MSSQLOutboundFirewallRule.
-func (mg *MSSQLOutboundFirewallRule) SetConditions(c ...xpv1.Condition) {
+func (mg *MSSQLOutboundFirewallRule) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this MSSQLOutboundFirewallRule.
-func (mg *MSSQLOutboundFirewallRule) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *MSSQLOutboundFirewallRule) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this MSSQLOutboundFirewallRule.
-func (mg *MSSQLOutboundFirewallRule) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *MSSQLOutboundFirewallRule) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MSSQLOutboundFirewallRule.
-func (mg *MSSQLOutboundFirewallRule) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *MSSQLOutboundFirewallRule) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this MSSQLOutboundFirewallRule.
-func (mg *MSSQLOutboundFirewallRule) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *MSSQLOutboundFirewallRule) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this MSSQLServer.
-func (mg *MSSQLServer) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *MSSQLServer) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this MSSQLServer.
-func (mg *MSSQLServer) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *MSSQLServer) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this MSSQLServer.
-func (mg *MSSQLServer) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *MSSQLServer) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MSSQLServer.
-func (mg *MSSQLServer) GetProviderConfigReference() *xpv1.Reference {
+func (mg *MSSQLServer) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this MSSQLServer.
-func (mg *MSSQLServer) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *MSSQLServer) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this MSSQLServer.
-func (mg *MSSQLServer) SetConditions(c ...xpv1.Condition) {
+func (mg *MSSQLServer) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this MSSQLServer.
-func (mg *MSSQLServer) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *MSSQLServer) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this MSSQLServer.
-func (mg *MSSQLServer) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *MSSQLServer) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MSSQLServer.
-func (mg *MSSQLServer) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *MSSQLServer) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this MSSQLServer.
-func (mg *MSSQLServer) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *MSSQLServer) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this MSSQLServerDNSAlias.
-func (mg *MSSQLServerDNSAlias) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *MSSQLServerDNSAlias) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this MSSQLServerDNSAlias.
-func (mg *MSSQLServerDNSAlias) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *MSSQLServerDNSAlias) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this MSSQLServerDNSAlias.
-func (mg *MSSQLServerDNSAlias) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *MSSQLServerDNSAlias) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MSSQLServerDNSAlias.
-func (mg *MSSQLServerDNSAlias) GetProviderConfigReference() *xpv1.Reference {
+func (mg *MSSQLServerDNSAlias) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this MSSQLServerDNSAlias.
-func (mg *MSSQLServerDNSAlias) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *MSSQLServerDNSAlias) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this MSSQLServerDNSAlias.
-func (mg *MSSQLServerDNSAlias) SetConditions(c ...xpv1.Condition) {
+func (mg *MSSQLServerDNSAlias) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this MSSQLServerDNSAlias.
-func (mg *MSSQLServerDNSAlias) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *MSSQLServerDNSAlias) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this MSSQLServerDNSAlias.
-func (mg *MSSQLServerDNSAlias) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *MSSQLServerDNSAlias) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MSSQLServerDNSAlias.
-func (mg *MSSQLServerDNSAlias) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *MSSQLServerDNSAlias) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this MSSQLServerDNSAlias.
-func (mg *MSSQLServerDNSAlias) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *MSSQLServerDNSAlias) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this MSSQLServerMicrosoftSupportAuditingPolicy.
-func (mg *MSSQLServerMicrosoftSupportAuditingPolicy) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *MSSQLServerMicrosoftSupportAuditingPolicy) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this MSSQLServerMicrosoftSupportAuditingPolicy.
-func (mg *MSSQLServerMicrosoftSupportAuditingPolicy) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *MSSQLServerMicrosoftSupportAuditingPolicy) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this MSSQLServerMicrosoftSupportAuditingPolicy.
-func (mg *MSSQLServerMicrosoftSupportAuditingPolicy) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *MSSQLServerMicrosoftSupportAuditingPolicy) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MSSQLServerMicrosoftSupportAuditingPolicy.
-func (mg *MSSQLServerMicrosoftSupportAuditingPolicy) GetProviderConfigReference() *xpv1.Reference {
+func (mg *MSSQLServerMicrosoftSupportAuditingPolicy) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this MSSQLServerMicrosoftSupportAuditingPolicy.
-func (mg *MSSQLServerMicrosoftSupportAuditingPolicy) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *MSSQLServerMicrosoftSupportAuditingPolicy) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this MSSQLServerMicrosoftSupportAuditingPolicy.
-func (mg *MSSQLServerMicrosoftSupportAuditingPolicy) SetConditions(c ...xpv1.Condition) {
+func (mg *MSSQLServerMicrosoftSupportAuditingPolicy) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this MSSQLServerMicrosoftSupportAuditingPolicy.
-func (mg *MSSQLServerMicrosoftSupportAuditingPolicy) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *MSSQLServerMicrosoftSupportAuditingPolicy) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this MSSQLServerMicrosoftSupportAuditingPolicy.
-func (mg *MSSQLServerMicrosoftSupportAuditingPolicy) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *MSSQLServerMicrosoftSupportAuditingPolicy) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MSSQLServerMicrosoftSupportAuditingPolicy.
-func (mg *MSSQLServerMicrosoftSupportAuditingPolicy) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *MSSQLServerMicrosoftSupportAuditingPolicy) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this MSSQLServerMicrosoftSupportAuditingPolicy.
-func (mg *MSSQLServerMicrosoftSupportAuditingPolicy) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *MSSQLServerMicrosoftSupportAuditingPolicy) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this MSSQLServerSecurityAlertPolicy.
-func (mg *MSSQLServerSecurityAlertPolicy) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *MSSQLServerSecurityAlertPolicy) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this MSSQLServerSecurityAlertPolicy.
-func (mg *MSSQLServerSecurityAlertPolicy) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *MSSQLServerSecurityAlertPolicy) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this MSSQLServerSecurityAlertPolicy.
-func (mg *MSSQLServerSecurityAlertPolicy) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *MSSQLServerSecurityAlertPolicy) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MSSQLServerSecurityAlertPolicy.
-func (mg *MSSQLServerSecurityAlertPolicy) GetProviderConfigReference() *xpv1.Reference {
+func (mg *MSSQLServerSecurityAlertPolicy) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this MSSQLServerSecurityAlertPolicy.
-func (mg *MSSQLServerSecurityAlertPolicy) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *MSSQLServerSecurityAlertPolicy) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this MSSQLServerSecurityAlertPolicy.
-func (mg *MSSQLServerSecurityAlertPolicy) SetConditions(c ...xpv1.Condition) {
+func (mg *MSSQLServerSecurityAlertPolicy) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this MSSQLServerSecurityAlertPolicy.
-func (mg *MSSQLServerSecurityAlertPolicy) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *MSSQLServerSecurityAlertPolicy) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this MSSQLServerSecurityAlertPolicy.
-func (mg *MSSQLServerSecurityAlertPolicy) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *MSSQLServerSecurityAlertPolicy) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MSSQLServerSecurityAlertPolicy.
-func (mg *MSSQLServerSecurityAlertPolicy) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *MSSQLServerSecurityAlertPolicy) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this MSSQLServerSecurityAlertPolicy.
-func (mg *MSSQLServerSecurityAlertPolicy) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *MSSQLServerSecurityAlertPolicy) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this MSSQLServerTransparentDataEncryption.
-func (mg *MSSQLServerTransparentDataEncryption) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *MSSQLServerTransparentDataEncryption) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this MSSQLServerTransparentDataEncryption.
-func (mg *MSSQLServerTransparentDataEncryption) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *MSSQLServerTransparentDataEncryption) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this MSSQLServerTransparentDataEncryption.
-func (mg *MSSQLServerTransparentDataEncryption) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *MSSQLServerTransparentDataEncryption) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MSSQLServerTransparentDataEncryption.
-func (mg *MSSQLServerTransparentDataEncryption) GetProviderConfigReference() *xpv1.Reference {
+func (mg *MSSQLServerTransparentDataEncryption) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this MSSQLServerTransparentDataEncryption.
-func (mg *MSSQLServerTransparentDataEncryption) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *MSSQLServerTransparentDataEncryption) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this MSSQLServerTransparentDataEncryption.
-func (mg *MSSQLServerTransparentDataEncryption) SetConditions(c ...xpv1.Condition) {
+func (mg *MSSQLServerTransparentDataEncryption) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this MSSQLServerTransparentDataEncryption.
-func (mg *MSSQLServerTransparentDataEncryption) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *MSSQLServerTransparentDataEncryption) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this MSSQLServerTransparentDataEncryption.
-func (mg *MSSQLServerTransparentDataEncryption) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *MSSQLServerTransparentDataEncryption) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MSSQLServerTransparentDataEncryption.
-func (mg *MSSQLServerTransparentDataEncryption) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *MSSQLServerTransparentDataEncryption) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this MSSQLServerTransparentDataEncryption.
-func (mg *MSSQLServerTransparentDataEncryption) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *MSSQLServerTransparentDataEncryption) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this MSSQLServerVulnerabilityAssessment.
-func (mg *MSSQLServerVulnerabilityAssessment) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *MSSQLServerVulnerabilityAssessment) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this MSSQLServerVulnerabilityAssessment.
-func (mg *MSSQLServerVulnerabilityAssessment) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *MSSQLServerVulnerabilityAssessment) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this MSSQLServerVulnerabilityAssessment.
-func (mg *MSSQLServerVulnerabilityAssessment) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *MSSQLServerVulnerabilityAssessment) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MSSQLServerVulnerabilityAssessment.
-func (mg *MSSQLServerVulnerabilityAssessment) GetProviderConfigReference() *xpv1.Reference {
+func (mg *MSSQLServerVulnerabilityAssessment) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this MSSQLServerVulnerabilityAssessment.
-func (mg *MSSQLServerVulnerabilityAssessment) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *MSSQLServerVulnerabilityAssessment) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this MSSQLServerVulnerabilityAssessment.
-func (mg *MSSQLServerVulnerabilityAssessment) SetConditions(c ...xpv1.Condition) {
+func (mg *MSSQLServerVulnerabilityAssessment) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this MSSQLServerVulnerabilityAssessment.
-func (mg *MSSQLServerVulnerabilityAssessment) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *MSSQLServerVulnerabilityAssessment) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this MSSQLServerVulnerabilityAssessment.
-func (mg *MSSQLServerVulnerabilityAssessment) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *MSSQLServerVulnerabilityAssessment) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MSSQLServerVulnerabilityAssessment.
-func (mg *MSSQLServerVulnerabilityAssessment) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *MSSQLServerVulnerabilityAssessment) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this MSSQLServerVulnerabilityAssessment.
-func (mg *MSSQLServerVulnerabilityAssessment) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *MSSQLServerVulnerabilityAssessment) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this MSSQLVirtualNetworkRule.
-func (mg *MSSQLVirtualNetworkRule) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *MSSQLVirtualNetworkRule) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this MSSQLVirtualNetworkRule.
-func (mg *MSSQLVirtualNetworkRule) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *MSSQLVirtualNetworkRule) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this MSSQLVirtualNetworkRule.
-func (mg *MSSQLVirtualNetworkRule) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *MSSQLVirtualNetworkRule) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MSSQLVirtualNetworkRule.
-func (mg *MSSQLVirtualNetworkRule) GetProviderConfigReference() *xpv1.Reference {
+func (mg *MSSQLVirtualNetworkRule) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this MSSQLVirtualNetworkRule.
-func (mg *MSSQLVirtualNetworkRule) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *MSSQLVirtualNetworkRule) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this MSSQLVirtualNetworkRule.
-func (mg *MSSQLVirtualNetworkRule) SetConditions(c ...xpv1.Condition) {
+func (mg *MSSQLVirtualNetworkRule) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this MSSQLVirtualNetworkRule.
-func (mg *MSSQLVirtualNetworkRule) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *MSSQLVirtualNetworkRule) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this MSSQLVirtualNetworkRule.
-func (mg *MSSQLVirtualNetworkRule) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *MSSQLVirtualNetworkRule) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MSSQLVirtualNetworkRule.
-func (mg *MSSQLVirtualNetworkRule) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *MSSQLVirtualNetworkRule) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this MSSQLVirtualNetworkRule.
-func (mg *MSSQLVirtualNetworkRule) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *MSSQLVirtualNetworkRule) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

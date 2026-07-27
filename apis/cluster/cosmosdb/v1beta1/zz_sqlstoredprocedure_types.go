@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SQLStoredProcedureInitParameters struct {
@@ -49,11 +49,11 @@ type SQLStoredProcedureParameters struct {
 
 	// Reference to a Account in cosmosdb to populate accountName.
 	// +kubebuilder:validation:Optional
-	AccountNameRef *v1.Reference `json:"accountNameRef,omitempty" tf:"-"`
+	AccountNameRef *v2.Reference `json:"accountNameRef,omitempty" tf:"-"`
 
 	// Selector for a Account in cosmosdb to populate accountName.
 	// +kubebuilder:validation:Optional
-	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
+	AccountNameSelector *v2.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
 	// The body of the stored procedure.
 	// +kubebuilder:validation:Optional
@@ -66,11 +66,11 @@ type SQLStoredProcedureParameters struct {
 
 	// Reference to a SQLContainer in cosmosdb to populate containerName.
 	// +kubebuilder:validation:Optional
-	ContainerNameRef *v1.Reference `json:"containerNameRef,omitempty" tf:"-"`
+	ContainerNameRef *v2.Reference `json:"containerNameRef,omitempty" tf:"-"`
 
 	// Selector for a SQLContainer in cosmosdb to populate containerName.
 	// +kubebuilder:validation:Optional
-	ContainerNameSelector *v1.Selector `json:"containerNameSelector,omitempty" tf:"-"`
+	ContainerNameSelector *v2.Selector `json:"containerNameSelector,omitempty" tf:"-"`
 
 	// The name of the Cosmos DB SQL Database to create the stored procedure within. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/cosmosdb/v1beta2.SQLDatabase
@@ -79,11 +79,11 @@ type SQLStoredProcedureParameters struct {
 
 	// Reference to a SQLDatabase in cosmosdb to populate databaseName.
 	// +kubebuilder:validation:Optional
-	DatabaseNameRef *v1.Reference `json:"databaseNameRef,omitempty" tf:"-"`
+	DatabaseNameRef *v2.Reference `json:"databaseNameRef,omitempty" tf:"-"`
 
 	// Selector for a SQLDatabase in cosmosdb to populate databaseName.
 	// +kubebuilder:validation:Optional
-	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
+	DatabaseNameSelector *v2.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
 
 	// The name of the resource group in which the Cosmos DB SQL Database is created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
@@ -92,17 +92,17 @@ type SQLStoredProcedureParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 }
 
 // SQLStoredProcedureSpec defines the desired state of SQLStoredProcedure
 type SQLStoredProcedureSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SQLStoredProcedureParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SQLStoredProcedureParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -118,8 +118,8 @@ type SQLStoredProcedureSpec struct {
 
 // SQLStoredProcedureStatus defines the observed state of SQLStoredProcedure.
 type SQLStoredProcedureStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SQLStoredProcedureObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SQLStoredProcedureObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

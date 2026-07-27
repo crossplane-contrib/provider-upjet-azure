@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type PublicIPPrefixInitParameters struct {
@@ -105,11 +105,11 @@ type PublicIPPrefixParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The SKU of the Public IP Prefix. Possible values are Standard and StandardV2. Defaults to Standard. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -132,8 +132,8 @@ type PublicIPPrefixParameters struct {
 
 // PublicIPPrefixSpec defines the desired state of PublicIPPrefix
 type PublicIPPrefixSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     PublicIPPrefixParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   PublicIPPrefixParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -149,8 +149,8 @@ type PublicIPPrefixSpec struct {
 
 // PublicIPPrefixStatus defines the observed state of PublicIPPrefix.
 type PublicIPPrefixStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PublicIPPrefixObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PublicIPPrefixObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

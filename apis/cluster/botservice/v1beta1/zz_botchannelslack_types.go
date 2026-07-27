@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BotChannelSlackInitParameters struct {
@@ -19,7 +19,7 @@ type BotChannelSlackInitParameters struct {
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The Client Secret that will be used to authenticate with Slack.
-	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
+	ClientSecretSecretRef v2.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
 	// The Slack Landing Page URL.
 	LandingPageURL *string `json:"landingPageUrl,omitempty" tf:"landing_page_url,omitempty"`
@@ -28,10 +28,10 @@ type BotChannelSlackInitParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The Signing Secret that will be used to sign the requests.
-	SigningSecretSecretRef *v1.SecretKeySelector `json:"signingSecretSecretRef,omitempty" tf:"-"`
+	SigningSecretSecretRef *v2.SecretKeySelector `json:"signingSecretSecretRef,omitempty" tf:"-"`
 
 	// The Verification Token that will be used to authenticate with Slack.
-	VerificationTokenSecretRef v1.SecretKeySelector `json:"verificationTokenSecretRef" tf:"-"`
+	VerificationTokenSecretRef v2.SecretKeySelector `json:"verificationTokenSecretRef" tf:"-"`
 }
 
 type BotChannelSlackObservation struct {
@@ -65,11 +65,11 @@ type BotChannelSlackParameters struct {
 
 	// Reference to a BotChannelsRegistration in botservice to populate botName.
 	// +kubebuilder:validation:Optional
-	BotNameRef *v1.Reference `json:"botNameRef,omitempty" tf:"-"`
+	BotNameRef *v2.Reference `json:"botNameRef,omitempty" tf:"-"`
 
 	// Selector for a BotChannelsRegistration in botservice to populate botName.
 	// +kubebuilder:validation:Optional
-	BotNameSelector *v1.Selector `json:"botNameSelector,omitempty" tf:"-"`
+	BotNameSelector *v2.Selector `json:"botNameSelector,omitempty" tf:"-"`
 
 	// The Client ID that will be used to authenticate with Slack.
 	// +kubebuilder:validation:Optional
@@ -77,7 +77,7 @@ type BotChannelSlackParameters struct {
 
 	// The Client Secret that will be used to authenticate with Slack.
 	// +kubebuilder:validation:Optional
-	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
+	ClientSecretSecretRef v2.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
 	// The Slack Landing Page URL.
 	// +kubebuilder:validation:Optional
@@ -94,25 +94,25 @@ type BotChannelSlackParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The Signing Secret that will be used to sign the requests.
 	// +kubebuilder:validation:Optional
-	SigningSecretSecretRef *v1.SecretKeySelector `json:"signingSecretSecretRef,omitempty" tf:"-"`
+	SigningSecretSecretRef *v2.SecretKeySelector `json:"signingSecretSecretRef,omitempty" tf:"-"`
 
 	// The Verification Token that will be used to authenticate with Slack.
 	// +kubebuilder:validation:Optional
-	VerificationTokenSecretRef v1.SecretKeySelector `json:"verificationTokenSecretRef" tf:"-"`
+	VerificationTokenSecretRef v2.SecretKeySelector `json:"verificationTokenSecretRef" tf:"-"`
 }
 
 // BotChannelSlackSpec defines the desired state of BotChannelSlack
 type BotChannelSlackSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     BotChannelSlackParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   BotChannelSlackParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -128,8 +128,8 @@ type BotChannelSlackSpec struct {
 
 // BotChannelSlackStatus defines the observed state of BotChannelSlack.
 type BotChannelSlackStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BotChannelSlackObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BotChannelSlackObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

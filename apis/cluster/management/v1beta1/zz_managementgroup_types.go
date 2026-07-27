@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ManagementGroupInitParameters struct {
@@ -25,11 +25,11 @@ type ManagementGroupInitParameters struct {
 
 	// Reference to a ManagementGroup in management to populate parentManagementGroupId.
 	// +kubebuilder:validation:Optional
-	ParentManagementGroupIDRef *v1.Reference `json:"parentManagementGroupIdRef,omitempty" tf:"-"`
+	ParentManagementGroupIDRef *v2.Reference `json:"parentManagementGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a ManagementGroup in management to populate parentManagementGroupId.
 	// +kubebuilder:validation:Optional
-	ParentManagementGroupIDSelector *v1.Selector `json:"parentManagementGroupIdSelector,omitempty" tf:"-"`
+	ParentManagementGroupIDSelector *v2.Selector `json:"parentManagementGroupIdSelector,omitempty" tf:"-"`
 
 	// A list of Subscription GUIDs which should be assigned to the Management Group.
 	// +listType=set
@@ -69,11 +69,11 @@ type ManagementGroupParameters struct {
 
 	// Reference to a ManagementGroup in management to populate parentManagementGroupId.
 	// +kubebuilder:validation:Optional
-	ParentManagementGroupIDRef *v1.Reference `json:"parentManagementGroupIdRef,omitempty" tf:"-"`
+	ParentManagementGroupIDRef *v2.Reference `json:"parentManagementGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a ManagementGroup in management to populate parentManagementGroupId.
 	// +kubebuilder:validation:Optional
-	ParentManagementGroupIDSelector *v1.Selector `json:"parentManagementGroupIdSelector,omitempty" tf:"-"`
+	ParentManagementGroupIDSelector *v2.Selector `json:"parentManagementGroupIdSelector,omitempty" tf:"-"`
 
 	// A list of Subscription GUIDs which should be assigned to the Management Group.
 	// +kubebuilder:validation:Optional
@@ -83,8 +83,8 @@ type ManagementGroupParameters struct {
 
 // ManagementGroupSpec defines the desired state of ManagementGroup
 type ManagementGroupSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ManagementGroupParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ManagementGroupParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -100,8 +100,8 @@ type ManagementGroupSpec struct {
 
 // ManagementGroupStatus defines the observed state of ManagementGroup.
 type ManagementGroupStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ManagementGroupObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ManagementGroupObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

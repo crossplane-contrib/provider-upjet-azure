@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AppHybridConnectionInitParameters struct {
@@ -31,11 +31,11 @@ type AppHybridConnectionInitParameters struct {
 
 	// Reference to a HybridConnection in relay to populate relayId.
 	// +kubebuilder:validation:Optional
-	RelayIDRef *v1.Reference `json:"relayIdRef,omitempty" tf:"-"`
+	RelayIDRef *v2.Reference `json:"relayIdRef,omitempty" tf:"-"`
 
 	// Selector for a HybridConnection in relay to populate relayId.
 	// +kubebuilder:validation:Optional
-	RelayIDSelector *v1.Selector `json:"relayIdSelector,omitempty" tf:"-"`
+	RelayIDSelector *v2.Selector `json:"relayIdSelector,omitempty" tf:"-"`
 
 	// The name of the Relay key with Send permission to use. Defaults to RootManageSharedAccessKey
 	// The name of the Relay key with `Send` permission to use. Defaults to `RootManageSharedAccessKey`
@@ -49,11 +49,11 @@ type AppHybridConnectionInitParameters struct {
 
 	// Reference to a WindowsWebApp in web to populate webAppId.
 	// +kubebuilder:validation:Optional
-	WebAppIDRef *v1.Reference `json:"webAppIdRef,omitempty" tf:"-"`
+	WebAppIDRef *v2.Reference `json:"webAppIdRef,omitempty" tf:"-"`
 
 	// Selector for a WindowsWebApp in web to populate webAppId.
 	// +kubebuilder:validation:Optional
-	WebAppIDSelector *v1.Selector `json:"webAppIdSelector,omitempty" tf:"-"`
+	WebAppIDSelector *v2.Selector `json:"webAppIdSelector,omitempty" tf:"-"`
 }
 
 type AppHybridConnectionObservation struct {
@@ -119,11 +119,11 @@ type AppHybridConnectionParameters struct {
 
 	// Reference to a HybridConnection in relay to populate relayId.
 	// +kubebuilder:validation:Optional
-	RelayIDRef *v1.Reference `json:"relayIdRef,omitempty" tf:"-"`
+	RelayIDRef *v2.Reference `json:"relayIdRef,omitempty" tf:"-"`
 
 	// Selector for a HybridConnection in relay to populate relayId.
 	// +kubebuilder:validation:Optional
-	RelayIDSelector *v1.Selector `json:"relayIdSelector,omitempty" tf:"-"`
+	RelayIDSelector *v2.Selector `json:"relayIdSelector,omitempty" tf:"-"`
 
 	// The name of the Relay key with Send permission to use. Defaults to RootManageSharedAccessKey
 	// The name of the Relay key with `Send` permission to use. Defaults to `RootManageSharedAccessKey`
@@ -139,17 +139,17 @@ type AppHybridConnectionParameters struct {
 
 	// Reference to a WindowsWebApp in web to populate webAppId.
 	// +kubebuilder:validation:Optional
-	WebAppIDRef *v1.Reference `json:"webAppIdRef,omitempty" tf:"-"`
+	WebAppIDRef *v2.Reference `json:"webAppIdRef,omitempty" tf:"-"`
 
 	// Selector for a WindowsWebApp in web to populate webAppId.
 	// +kubebuilder:validation:Optional
-	WebAppIDSelector *v1.Selector `json:"webAppIdSelector,omitempty" tf:"-"`
+	WebAppIDSelector *v2.Selector `json:"webAppIdSelector,omitempty" tf:"-"`
 }
 
 // AppHybridConnectionSpec defines the desired state of AppHybridConnection
 type AppHybridConnectionSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     AppHybridConnectionParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   AppHybridConnectionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -165,8 +165,8 @@ type AppHybridConnectionSpec struct {
 
 // AppHybridConnectionStatus defines the observed state of AppHybridConnection.
 type AppHybridConnectionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AppHybridConnectionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AppHybridConnectionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AIFoundryEncryptionInitParameters struct {
@@ -25,11 +25,11 @@ type AIFoundryEncryptionInitParameters struct {
 
 	// Reference to a Vault in keyvault to populate keyVaultId.
 	// +kubebuilder:validation:Optional
-	KeyVaultIDRef *v1.Reference `json:"keyVaultIdRef,omitempty" tf:"-"`
+	KeyVaultIDRef *v2.Reference `json:"keyVaultIdRef,omitempty" tf:"-"`
 
 	// Selector for a Vault in keyvault to populate keyVaultId.
 	// +kubebuilder:validation:Optional
-	KeyVaultIDSelector *v1.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
+	KeyVaultIDSelector *v2.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
 
 	// The user assigned identity ID that has access to the encryption key.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
@@ -38,11 +38,11 @@ type AIFoundryEncryptionInitParameters struct {
 
 	// Reference to a UserAssignedIdentity in managedidentity to populate userAssignedIdentityId.
 	// +kubebuilder:validation:Optional
-	UserAssignedIdentityIDRef *v1.Reference `json:"userAssignedIdentityIdRef,omitempty" tf:"-"`
+	UserAssignedIdentityIDRef *v2.Reference `json:"userAssignedIdentityIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserAssignedIdentity in managedidentity to populate userAssignedIdentityId.
 	// +kubebuilder:validation:Optional
-	UserAssignedIdentityIDSelector *v1.Selector `json:"userAssignedIdentityIdSelector,omitempty" tf:"-"`
+	UserAssignedIdentityIDSelector *v2.Selector `json:"userAssignedIdentityIdSelector,omitempty" tf:"-"`
 }
 
 type AIFoundryEncryptionObservation struct {
@@ -71,11 +71,11 @@ type AIFoundryEncryptionParameters struct {
 
 	// Reference to a Vault in keyvault to populate keyVaultId.
 	// +kubebuilder:validation:Optional
-	KeyVaultIDRef *v1.Reference `json:"keyVaultIdRef,omitempty" tf:"-"`
+	KeyVaultIDRef *v2.Reference `json:"keyVaultIdRef,omitempty" tf:"-"`
 
 	// Selector for a Vault in keyvault to populate keyVaultId.
 	// +kubebuilder:validation:Optional
-	KeyVaultIDSelector *v1.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
+	KeyVaultIDSelector *v2.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
 
 	// The user assigned identity ID that has access to the encryption key.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
@@ -85,11 +85,11 @@ type AIFoundryEncryptionParameters struct {
 
 	// Reference to a UserAssignedIdentity in managedidentity to populate userAssignedIdentityId.
 	// +kubebuilder:validation:Optional
-	UserAssignedIdentityIDRef *v1.Reference `json:"userAssignedIdentityIdRef,omitempty" tf:"-"`
+	UserAssignedIdentityIDRef *v2.Reference `json:"userAssignedIdentityIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserAssignedIdentity in managedidentity to populate userAssignedIdentityId.
 	// +kubebuilder:validation:Optional
-	UserAssignedIdentityIDSelector *v1.Selector `json:"userAssignedIdentityIdSelector,omitempty" tf:"-"`
+	UserAssignedIdentityIDSelector *v2.Selector `json:"userAssignedIdentityIdSelector,omitempty" tf:"-"`
 }
 
 type AIFoundryIdentityInitParameters struct {
@@ -102,11 +102,11 @@ type AIFoundryIdentityInitParameters struct {
 
 	// References to UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v1.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
+	IdentityIdsRefs []v2.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v1.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
+	IdentityIdsSelector *v2.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this AI Foundry Hub. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -139,11 +139,11 @@ type AIFoundryIdentityParameters struct {
 
 	// References to UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v1.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
+	IdentityIdsRefs []v2.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v1.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
+	IdentityIdsSelector *v2.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this AI Foundry Hub. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
 	// +kubebuilder:validation:Optional
@@ -159,11 +159,11 @@ type AIFoundryInitParameters struct {
 
 	// Reference to a ApplicationInsights in insights to populate applicationInsightsId.
 	// +kubebuilder:validation:Optional
-	ApplicationInsightsIDRef *v1.Reference `json:"applicationInsightsIdRef,omitempty" tf:"-"`
+	ApplicationInsightsIDRef *v2.Reference `json:"applicationInsightsIdRef,omitempty" tf:"-"`
 
 	// Selector for a ApplicationInsights in insights to populate applicationInsightsId.
 	// +kubebuilder:validation:Optional
-	ApplicationInsightsIDSelector *v1.Selector `json:"applicationInsightsIdSelector,omitempty" tf:"-"`
+	ApplicationInsightsIDSelector *v2.Selector `json:"applicationInsightsIdSelector,omitempty" tf:"-"`
 
 	// The Container Registry ID that should be used by this AI Foundry Hub.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/containerregistry/v1beta2.Registry
@@ -172,11 +172,11 @@ type AIFoundryInitParameters struct {
 
 	// Reference to a Registry in containerregistry to populate containerRegistryId.
 	// +kubebuilder:validation:Optional
-	ContainerRegistryIDRef *v1.Reference `json:"containerRegistryIdRef,omitempty" tf:"-"`
+	ContainerRegistryIDRef *v2.Reference `json:"containerRegistryIdRef,omitempty" tf:"-"`
 
 	// Selector for a Registry in containerregistry to populate containerRegistryId.
 	// +kubebuilder:validation:Optional
-	ContainerRegistryIDSelector *v1.Selector `json:"containerRegistryIdSelector,omitempty" tf:"-"`
+	ContainerRegistryIDSelector *v2.Selector `json:"containerRegistryIdSelector,omitempty" tf:"-"`
 
 	// The description of this AI Foundry Hub.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -200,11 +200,11 @@ type AIFoundryInitParameters struct {
 
 	// Reference to a Vault in keyvault to populate keyVaultId.
 	// +kubebuilder:validation:Optional
-	KeyVaultIDRef *v1.Reference `json:"keyVaultIdRef,omitempty" tf:"-"`
+	KeyVaultIDRef *v2.Reference `json:"keyVaultIdRef,omitempty" tf:"-"`
 
 	// Selector for a Vault in keyvault to populate keyVaultId.
 	// +kubebuilder:validation:Optional
-	KeyVaultIDSelector *v1.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
+	KeyVaultIDSelector *v2.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
 
 	// The Azure Region where the AI Foundry Hub should exist. Changing this forces a new AI Foundry Hub to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -219,11 +219,11 @@ type AIFoundryInitParameters struct {
 
 	// Reference to a UserAssignedIdentity in managedidentity to populate primaryUserAssignedIdentity.
 	// +kubebuilder:validation:Optional
-	PrimaryUserAssignedIdentityRef *v1.Reference `json:"primaryUserAssignedIdentityRef,omitempty" tf:"-"`
+	PrimaryUserAssignedIdentityRef *v2.Reference `json:"primaryUserAssignedIdentityRef,omitempty" tf:"-"`
 
 	// Selector for a UserAssignedIdentity in managedidentity to populate primaryUserAssignedIdentity.
 	// +kubebuilder:validation:Optional
-	PrimaryUserAssignedIdentitySelector *v1.Selector `json:"primaryUserAssignedIdentitySelector,omitempty" tf:"-"`
+	PrimaryUserAssignedIdentitySelector *v2.Selector `json:"primaryUserAssignedIdentitySelector,omitempty" tf:"-"`
 
 	// Whether public network access for this AI Service Hub should be enabled. Possible values include Enabled and Disabled. Defaults to Enabled.
 	PublicNetworkAccess *string `json:"publicNetworkAccess,omitempty" tf:"public_network_access,omitempty"`
@@ -235,11 +235,11 @@ type AIFoundryInitParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+	StorageAccountIDRef *v2.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+	StorageAccountIDSelector *v2.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the AI Foundry Hub.
 	// +mapType=granular
@@ -333,11 +333,11 @@ type AIFoundryParameters struct {
 
 	// Reference to a ApplicationInsights in insights to populate applicationInsightsId.
 	// +kubebuilder:validation:Optional
-	ApplicationInsightsIDRef *v1.Reference `json:"applicationInsightsIdRef,omitempty" tf:"-"`
+	ApplicationInsightsIDRef *v2.Reference `json:"applicationInsightsIdRef,omitempty" tf:"-"`
 
 	// Selector for a ApplicationInsights in insights to populate applicationInsightsId.
 	// +kubebuilder:validation:Optional
-	ApplicationInsightsIDSelector *v1.Selector `json:"applicationInsightsIdSelector,omitempty" tf:"-"`
+	ApplicationInsightsIDSelector *v2.Selector `json:"applicationInsightsIdSelector,omitempty" tf:"-"`
 
 	// The Container Registry ID that should be used by this AI Foundry Hub.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/containerregistry/v1beta2.Registry
@@ -347,11 +347,11 @@ type AIFoundryParameters struct {
 
 	// Reference to a Registry in containerregistry to populate containerRegistryId.
 	// +kubebuilder:validation:Optional
-	ContainerRegistryIDRef *v1.Reference `json:"containerRegistryIdRef,omitempty" tf:"-"`
+	ContainerRegistryIDRef *v2.Reference `json:"containerRegistryIdRef,omitempty" tf:"-"`
 
 	// Selector for a Registry in containerregistry to populate containerRegistryId.
 	// +kubebuilder:validation:Optional
-	ContainerRegistryIDSelector *v1.Selector `json:"containerRegistryIdSelector,omitempty" tf:"-"`
+	ContainerRegistryIDSelector *v2.Selector `json:"containerRegistryIdSelector,omitempty" tf:"-"`
 
 	// The description of this AI Foundry Hub.
 	// +kubebuilder:validation:Optional
@@ -381,11 +381,11 @@ type AIFoundryParameters struct {
 
 	// Reference to a Vault in keyvault to populate keyVaultId.
 	// +kubebuilder:validation:Optional
-	KeyVaultIDRef *v1.Reference `json:"keyVaultIdRef,omitempty" tf:"-"`
+	KeyVaultIDRef *v2.Reference `json:"keyVaultIdRef,omitempty" tf:"-"`
 
 	// Selector for a Vault in keyvault to populate keyVaultId.
 	// +kubebuilder:validation:Optional
-	KeyVaultIDSelector *v1.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
+	KeyVaultIDSelector *v2.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
 
 	// The Azure Region where the AI Foundry Hub should exist. Changing this forces a new AI Foundry Hub to be created.
 	// +kubebuilder:validation:Optional
@@ -403,11 +403,11 @@ type AIFoundryParameters struct {
 
 	// Reference to a UserAssignedIdentity in managedidentity to populate primaryUserAssignedIdentity.
 	// +kubebuilder:validation:Optional
-	PrimaryUserAssignedIdentityRef *v1.Reference `json:"primaryUserAssignedIdentityRef,omitempty" tf:"-"`
+	PrimaryUserAssignedIdentityRef *v2.Reference `json:"primaryUserAssignedIdentityRef,omitempty" tf:"-"`
 
 	// Selector for a UserAssignedIdentity in managedidentity to populate primaryUserAssignedIdentity.
 	// +kubebuilder:validation:Optional
-	PrimaryUserAssignedIdentitySelector *v1.Selector `json:"primaryUserAssignedIdentitySelector,omitempty" tf:"-"`
+	PrimaryUserAssignedIdentitySelector *v2.Selector `json:"primaryUserAssignedIdentitySelector,omitempty" tf:"-"`
 
 	// Whether public network access for this AI Service Hub should be enabled. Possible values include Enabled and Disabled. Defaults to Enabled.
 	// +kubebuilder:validation:Optional
@@ -420,11 +420,11 @@ type AIFoundryParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The Storage Account ID that should be used by this AI Foundry Hub. Changing this forces a new AI Foundry Hub to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
@@ -434,11 +434,11 @@ type AIFoundryParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+	StorageAccountIDRef *v2.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+	StorageAccountIDSelector *v2.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the AI Foundry Hub.
 	// +kubebuilder:validation:Optional
@@ -448,8 +448,8 @@ type AIFoundryParameters struct {
 
 // AIFoundrySpec defines the desired state of AIFoundry
 type AIFoundrySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     AIFoundryParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   AIFoundryParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -465,8 +465,8 @@ type AIFoundrySpec struct {
 
 // AIFoundryStatus defines the observed state of AIFoundry.
 type AIFoundryStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AIFoundryObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AIFoundryObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

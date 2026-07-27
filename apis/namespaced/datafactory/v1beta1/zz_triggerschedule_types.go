@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type MonthlyInitParameters struct {
@@ -131,11 +130,11 @@ type TriggerScheduleInitParameters struct {
 
 	// Reference to a Pipeline in datafactory to populate pipelineName.
 	// +kubebuilder:validation:Optional
-	PipelineNameRef *v1.NamespacedReference `json:"pipelineNameRef,omitempty" tf:"-"`
+	PipelineNameRef *v2.NamespacedReference `json:"pipelineNameRef,omitempty" tf:"-"`
 
 	// Selector for a Pipeline in datafactory to populate pipelineName.
 	// +kubebuilder:validation:Optional
-	PipelineNameSelector *v1.NamespacedSelector `json:"pipelineNameSelector,omitempty" tf:"-"`
+	PipelineNameSelector *v2.NamespacedSelector `json:"pipelineNameSelector,omitempty" tf:"-"`
 
 	// The pipeline parameters that the trigger will act upon.
 	// +mapType=granular
@@ -215,11 +214,11 @@ type TriggerScheduleParameters struct {
 
 	// Reference to a Factory in datafactory to populate dataFactoryId.
 	// +kubebuilder:validation:Optional
-	DataFactoryIDRef *v1.NamespacedReference `json:"dataFactoryIdRef,omitempty" tf:"-"`
+	DataFactoryIDRef *v2.NamespacedReference `json:"dataFactoryIdRef,omitempty" tf:"-"`
 
 	// Selector for a Factory in datafactory to populate dataFactoryId.
 	// +kubebuilder:validation:Optional
-	DataFactoryIDSelector *v1.NamespacedSelector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
+	DataFactoryIDSelector *v2.NamespacedSelector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
 
 	// The Schedule Trigger's description.
 	// +kubebuilder:validation:Optional
@@ -248,11 +247,11 @@ type TriggerScheduleParameters struct {
 
 	// Reference to a Pipeline in datafactory to populate pipelineName.
 	// +kubebuilder:validation:Optional
-	PipelineNameRef *v1.NamespacedReference `json:"pipelineNameRef,omitempty" tf:"-"`
+	PipelineNameRef *v2.NamespacedReference `json:"pipelineNameRef,omitempty" tf:"-"`
 
 	// Selector for a Pipeline in datafactory to populate pipelineName.
 	// +kubebuilder:validation:Optional
-	PipelineNameSelector *v1.NamespacedSelector `json:"pipelineNameSelector,omitempty" tf:"-"`
+	PipelineNameSelector *v2.NamespacedSelector `json:"pipelineNameSelector,omitempty" tf:"-"`
 
 	// The pipeline parameters that the trigger will act upon.
 	// +kubebuilder:validation:Optional
@@ -323,8 +322,8 @@ type TriggerScheduleSpec struct {
 
 // TriggerScheduleStatus defines the observed state of TriggerSchedule.
 type TriggerScheduleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        TriggerScheduleObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               TriggerScheduleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

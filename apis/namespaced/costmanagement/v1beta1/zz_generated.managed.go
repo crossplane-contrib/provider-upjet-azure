@@ -5,124 +5,124 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this CostAnomalyAlert.
-func (mg *CostAnomalyAlert) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *CostAnomalyAlert) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this CostAnomalyAlert.
-func (mg *CostAnomalyAlert) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *CostAnomalyAlert) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this CostAnomalyAlert.
-func (mg *CostAnomalyAlert) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *CostAnomalyAlert) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this CostAnomalyAlert.
-func (mg *CostAnomalyAlert) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *CostAnomalyAlert) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this CostAnomalyAlert.
-func (mg *CostAnomalyAlert) SetConditions(c ...xpv1.Condition) {
+func (mg *CostAnomalyAlert) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this CostAnomalyAlert.
-func (mg *CostAnomalyAlert) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *CostAnomalyAlert) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this CostAnomalyAlert.
-func (mg *CostAnomalyAlert) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *CostAnomalyAlert) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this CostAnomalyAlert.
-func (mg *CostAnomalyAlert) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *CostAnomalyAlert) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this ResourceGroupCostManagementExport.
-func (mg *ResourceGroupCostManagementExport) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *ResourceGroupCostManagementExport) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this ResourceGroupCostManagementExport.
-func (mg *ResourceGroupCostManagementExport) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *ResourceGroupCostManagementExport) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this ResourceGroupCostManagementExport.
-func (mg *ResourceGroupCostManagementExport) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *ResourceGroupCostManagementExport) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this ResourceGroupCostManagementExport.
-func (mg *ResourceGroupCostManagementExport) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *ResourceGroupCostManagementExport) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this ResourceGroupCostManagementExport.
-func (mg *ResourceGroupCostManagementExport) SetConditions(c ...xpv1.Condition) {
+func (mg *ResourceGroupCostManagementExport) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this ResourceGroupCostManagementExport.
-func (mg *ResourceGroupCostManagementExport) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *ResourceGroupCostManagementExport) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this ResourceGroupCostManagementExport.
-func (mg *ResourceGroupCostManagementExport) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *ResourceGroupCostManagementExport) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this ResourceGroupCostManagementExport.
-func (mg *ResourceGroupCostManagementExport) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *ResourceGroupCostManagementExport) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this SubscriptionCostManagementExport.
-func (mg *SubscriptionCostManagementExport) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *SubscriptionCostManagementExport) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this SubscriptionCostManagementExport.
-func (mg *SubscriptionCostManagementExport) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *SubscriptionCostManagementExport) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this SubscriptionCostManagementExport.
-func (mg *SubscriptionCostManagementExport) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *SubscriptionCostManagementExport) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this SubscriptionCostManagementExport.
-func (mg *SubscriptionCostManagementExport) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *SubscriptionCostManagementExport) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this SubscriptionCostManagementExport.
-func (mg *SubscriptionCostManagementExport) SetConditions(c ...xpv1.Condition) {
+func (mg *SubscriptionCostManagementExport) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this SubscriptionCostManagementExport.
-func (mg *SubscriptionCostManagementExport) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *SubscriptionCostManagementExport) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this SubscriptionCostManagementExport.
-func (mg *SubscriptionCostManagementExport) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *SubscriptionCostManagementExport) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this SubscriptionCostManagementExport.
-func (mg *SubscriptionCostManagementExport) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *SubscriptionCostManagementExport) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

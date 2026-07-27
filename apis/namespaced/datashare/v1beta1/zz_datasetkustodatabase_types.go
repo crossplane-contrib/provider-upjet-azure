@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DataSetKustoDatabaseInitParameters struct {
@@ -23,11 +22,11 @@ type DataSetKustoDatabaseInitParameters struct {
 
 	// Reference to a Database in kusto to populate kustoDatabaseId.
 	// +kubebuilder:validation:Optional
-	KustoDatabaseIDRef *v1.NamespacedReference `json:"kustoDatabaseIdRef,omitempty" tf:"-"`
+	KustoDatabaseIDRef *v2.NamespacedReference `json:"kustoDatabaseIdRef,omitempty" tf:"-"`
 
 	// Selector for a Database in kusto to populate kustoDatabaseId.
 	// +kubebuilder:validation:Optional
-	KustoDatabaseIDSelector *v1.NamespacedSelector `json:"kustoDatabaseIdSelector,omitempty" tf:"-"`
+	KustoDatabaseIDSelector *v2.NamespacedSelector `json:"kustoDatabaseIdSelector,omitempty" tf:"-"`
 }
 
 type DataSetKustoDatabaseObservation struct {
@@ -58,11 +57,11 @@ type DataSetKustoDatabaseParameters struct {
 
 	// Reference to a Database in kusto to populate kustoDatabaseId.
 	// +kubebuilder:validation:Optional
-	KustoDatabaseIDRef *v1.NamespacedReference `json:"kustoDatabaseIdRef,omitempty" tf:"-"`
+	KustoDatabaseIDRef *v2.NamespacedReference `json:"kustoDatabaseIdRef,omitempty" tf:"-"`
 
 	// Selector for a Database in kusto to populate kustoDatabaseId.
 	// +kubebuilder:validation:Optional
-	KustoDatabaseIDSelector *v1.NamespacedSelector `json:"kustoDatabaseIdSelector,omitempty" tf:"-"`
+	KustoDatabaseIDSelector *v2.NamespacedSelector `json:"kustoDatabaseIdSelector,omitempty" tf:"-"`
 
 	// The resource ID of the Data Share where this Data Share Kusto Database Dataset should be created. Changing this forces a new Data Share Kusto Database Dataset to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/datashare/v1beta1.DataShare
@@ -72,11 +71,11 @@ type DataSetKustoDatabaseParameters struct {
 
 	// Reference to a DataShare in datashare to populate shareId.
 	// +kubebuilder:validation:Optional
-	ShareIDRef *v1.NamespacedReference `json:"shareIdRef,omitempty" tf:"-"`
+	ShareIDRef *v2.NamespacedReference `json:"shareIdRef,omitempty" tf:"-"`
 
 	// Selector for a DataShare in datashare to populate shareId.
 	// +kubebuilder:validation:Optional
-	ShareIDSelector *v1.NamespacedSelector `json:"shareIdSelector,omitempty" tf:"-"`
+	ShareIDSelector *v2.NamespacedSelector `json:"shareIdSelector,omitempty" tf:"-"`
 }
 
 // DataSetKustoDatabaseSpec defines the desired state of DataSetKustoDatabase
@@ -98,8 +97,8 @@ type DataSetKustoDatabaseSpec struct {
 
 // DataSetKustoDatabaseStatus defines the observed state of DataSetKustoDatabase.
 type DataSetKustoDatabaseStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DataSetKustoDatabaseObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DataSetKustoDatabaseObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

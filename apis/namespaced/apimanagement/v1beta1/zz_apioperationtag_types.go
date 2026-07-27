@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type APIOperationTagInitParameters struct {
@@ -42,11 +41,11 @@ type APIOperationTagParameters struct {
 
 	// Reference to a APIOperation in apimanagement to populate apiOperationId.
 	// +kubebuilder:validation:Optional
-	APIOperationIDRef *v1.NamespacedReference `json:"apiOperationIdRef,omitempty" tf:"-"`
+	APIOperationIDRef *v2.NamespacedReference `json:"apiOperationIdRef,omitempty" tf:"-"`
 
 	// Selector for a APIOperation in apimanagement to populate apiOperationId.
 	// +kubebuilder:validation:Optional
-	APIOperationIDSelector *v1.NamespacedSelector `json:"apiOperationIdSelector,omitempty" tf:"-"`
+	APIOperationIDSelector *v2.NamespacedSelector `json:"apiOperationIdSelector,omitempty" tf:"-"`
 
 	// The display name of the API Management API Operation Tag.
 	// +kubebuilder:validation:Optional
@@ -72,8 +71,8 @@ type APIOperationTagSpec struct {
 
 // APIOperationTagStatus defines the observed state of APIOperationTag.
 type APIOperationTagStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        APIOperationTagObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               APIOperationTagObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

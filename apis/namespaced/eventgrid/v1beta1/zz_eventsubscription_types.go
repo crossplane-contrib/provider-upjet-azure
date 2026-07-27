@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AdvancedFilterInitParameters struct {
@@ -354,7 +353,7 @@ type DeliveryPropertyInitParameters struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// If the type is Static, then provide the value to use
-	ValueSecretRef *v1.LocalSecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
+	ValueSecretRef *v2.LocalSecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
 type DeliveryPropertyObservation struct {
@@ -392,7 +391,7 @@ type DeliveryPropertyParameters struct {
 
 	// If the type is Static, then provide the value to use
 	// +kubebuilder:validation:Optional
-	ValueSecretRef *v1.LocalSecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
+	ValueSecretRef *v2.LocalSecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
 type EventSubscriptionInitParameters struct {
@@ -446,11 +445,11 @@ type EventSubscriptionInitParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate scope.
 	// +kubebuilder:validation:Optional
-	ScopeRef *v1.NamespacedReference `json:"scopeRef,omitempty" tf:"-"`
+	ScopeRef *v2.NamespacedReference `json:"scopeRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate scope.
 	// +kubebuilder:validation:Optional
-	ScopeSelector *v1.NamespacedSelector `json:"scopeSelector,omitempty" tf:"-"`
+	ScopeSelector *v2.NamespacedSelector `json:"scopeSelector,omitempty" tf:"-"`
 
 	// Specifies the id where the Service Bus Queue is located.
 	ServiceBusQueueEndpointID *string `json:"serviceBusQueueEndpointId,omitempty" tf:"service_bus_queue_endpoint_id,omitempty"`
@@ -606,11 +605,11 @@ type EventSubscriptionParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate scope.
 	// +kubebuilder:validation:Optional
-	ScopeRef *v1.NamespacedReference `json:"scopeRef,omitempty" tf:"-"`
+	ScopeRef *v2.NamespacedReference `json:"scopeRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate scope.
 	// +kubebuilder:validation:Optional
-	ScopeSelector *v1.NamespacedSelector `json:"scopeSelector,omitempty" tf:"-"`
+	ScopeSelector *v2.NamespacedSelector `json:"scopeSelector,omitempty" tf:"-"`
 
 	// Specifies the id where the Service Bus Queue is located.
 	// +kubebuilder:validation:Optional
@@ -976,11 +975,11 @@ type StorageQueueEndpointInitParameters struct {
 
 	// Reference to a Queue in storage to populate queueName.
 	// +kubebuilder:validation:Optional
-	QueueNameRef *v1.NamespacedReference `json:"queueNameRef,omitempty" tf:"-"`
+	QueueNameRef *v2.NamespacedReference `json:"queueNameRef,omitempty" tf:"-"`
 
 	// Selector for a Queue in storage to populate queueName.
 	// +kubebuilder:validation:Optional
-	QueueNameSelector *v1.NamespacedSelector `json:"queueNameSelector,omitempty" tf:"-"`
+	QueueNameSelector *v2.NamespacedSelector `json:"queueNameSelector,omitempty" tf:"-"`
 
 	// Specifies the id of the storage account id where the storage queue is located.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
@@ -989,11 +988,11 @@ type StorageQueueEndpointInitParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v1.NamespacedReference `json:"storageAccountIdRef,omitempty" tf:"-"`
+	StorageAccountIDRef *v2.NamespacedReference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v1.NamespacedSelector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+	StorageAccountIDSelector *v2.NamespacedSelector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }
 
 type StorageQueueEndpointObservation struct {
@@ -1021,11 +1020,11 @@ type StorageQueueEndpointParameters struct {
 
 	// Reference to a Queue in storage to populate queueName.
 	// +kubebuilder:validation:Optional
-	QueueNameRef *v1.NamespacedReference `json:"queueNameRef,omitempty" tf:"-"`
+	QueueNameRef *v2.NamespacedReference `json:"queueNameRef,omitempty" tf:"-"`
 
 	// Selector for a Queue in storage to populate queueName.
 	// +kubebuilder:validation:Optional
-	QueueNameSelector *v1.NamespacedSelector `json:"queueNameSelector,omitempty" tf:"-"`
+	QueueNameSelector *v2.NamespacedSelector `json:"queueNameSelector,omitempty" tf:"-"`
 
 	// Specifies the id of the storage account id where the storage queue is located.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
@@ -1035,11 +1034,11 @@ type StorageQueueEndpointParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v1.NamespacedReference `json:"storageAccountIdRef,omitempty" tf:"-"`
+	StorageAccountIDRef *v2.NamespacedReference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v1.NamespacedSelector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+	StorageAccountIDSelector *v2.NamespacedSelector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }
 
 type StringBeginsWithInitParameters struct {
@@ -1394,8 +1393,8 @@ type EventSubscriptionSpec struct {
 
 // EventSubscriptionStatus defines the observed state of EventSubscription.
 type EventSubscriptionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        EventSubscriptionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               EventSubscriptionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

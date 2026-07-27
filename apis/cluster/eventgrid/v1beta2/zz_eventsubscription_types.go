@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AdvancedFilterInitParameters struct {
@@ -353,7 +353,7 @@ type DeliveryPropertyInitParameters struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// If the type is Static, then provide the value to use
-	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
+	ValueSecretRef *v2.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
 type DeliveryPropertyObservation struct {
@@ -391,7 +391,7 @@ type DeliveryPropertyParameters struct {
 
 	// If the type is Static, then provide the value to use
 	// +kubebuilder:validation:Optional
-	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
+	ValueSecretRef *v2.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
 type EventSubscriptionInitParameters struct {
@@ -445,11 +445,11 @@ type EventSubscriptionInitParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate scope.
 	// +kubebuilder:validation:Optional
-	ScopeRef *v1.Reference `json:"scopeRef,omitempty" tf:"-"`
+	ScopeRef *v2.Reference `json:"scopeRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate scope.
 	// +kubebuilder:validation:Optional
-	ScopeSelector *v1.Selector `json:"scopeSelector,omitempty" tf:"-"`
+	ScopeSelector *v2.Selector `json:"scopeSelector,omitempty" tf:"-"`
 
 	// Specifies the id where the Service Bus Queue is located.
 	ServiceBusQueueEndpointID *string `json:"serviceBusQueueEndpointId,omitempty" tf:"service_bus_queue_endpoint_id,omitempty"`
@@ -605,11 +605,11 @@ type EventSubscriptionParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate scope.
 	// +kubebuilder:validation:Optional
-	ScopeRef *v1.Reference `json:"scopeRef,omitempty" tf:"-"`
+	ScopeRef *v2.Reference `json:"scopeRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate scope.
 	// +kubebuilder:validation:Optional
-	ScopeSelector *v1.Selector `json:"scopeSelector,omitempty" tf:"-"`
+	ScopeSelector *v2.Selector `json:"scopeSelector,omitempty" tf:"-"`
 
 	// Specifies the id where the Service Bus Queue is located.
 	// +kubebuilder:validation:Optional
@@ -975,11 +975,11 @@ type StorageQueueEndpointInitParameters struct {
 
 	// Reference to a Queue in storage to populate queueName.
 	// +kubebuilder:validation:Optional
-	QueueNameRef *v1.Reference `json:"queueNameRef,omitempty" tf:"-"`
+	QueueNameRef *v2.Reference `json:"queueNameRef,omitempty" tf:"-"`
 
 	// Selector for a Queue in storage to populate queueName.
 	// +kubebuilder:validation:Optional
-	QueueNameSelector *v1.Selector `json:"queueNameSelector,omitempty" tf:"-"`
+	QueueNameSelector *v2.Selector `json:"queueNameSelector,omitempty" tf:"-"`
 
 	// Specifies the id of the storage account id where the storage queue is located.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
@@ -988,11 +988,11 @@ type StorageQueueEndpointInitParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+	StorageAccountIDRef *v2.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+	StorageAccountIDSelector *v2.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }
 
 type StorageQueueEndpointObservation struct {
@@ -1020,11 +1020,11 @@ type StorageQueueEndpointParameters struct {
 
 	// Reference to a Queue in storage to populate queueName.
 	// +kubebuilder:validation:Optional
-	QueueNameRef *v1.Reference `json:"queueNameRef,omitempty" tf:"-"`
+	QueueNameRef *v2.Reference `json:"queueNameRef,omitempty" tf:"-"`
 
 	// Selector for a Queue in storage to populate queueName.
 	// +kubebuilder:validation:Optional
-	QueueNameSelector *v1.Selector `json:"queueNameSelector,omitempty" tf:"-"`
+	QueueNameSelector *v2.Selector `json:"queueNameSelector,omitempty" tf:"-"`
 
 	// Specifies the id of the storage account id where the storage queue is located.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
@@ -1034,11 +1034,11 @@ type StorageQueueEndpointParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+	StorageAccountIDRef *v2.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+	StorageAccountIDSelector *v2.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }
 
 type StringBeginsWithInitParameters struct {
@@ -1376,8 +1376,8 @@ type WebhookEndpointParameters struct {
 
 // EventSubscriptionSpec defines the desired state of EventSubscription
 type EventSubscriptionSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     EventSubscriptionParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   EventSubscriptionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -1393,8 +1393,8 @@ type EventSubscriptionSpec struct {
 
 // EventSubscriptionStatus defines the observed state of EventSubscription.
 type EventSubscriptionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        EventSubscriptionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               EventSubscriptionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

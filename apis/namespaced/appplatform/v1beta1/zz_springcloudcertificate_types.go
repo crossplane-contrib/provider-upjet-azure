@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SpringCloudCertificateInitParameters struct {
@@ -29,11 +28,11 @@ type SpringCloudCertificateInitParameters struct {
 
 	// Reference to a Certificate in keyvault to populate keyVaultCertificateId.
 	// +kubebuilder:validation:Optional
-	KeyVaultCertificateIDRef *v1.NamespacedReference `json:"keyVaultCertificateIdRef,omitempty" tf:"-"`
+	KeyVaultCertificateIDRef *v2.NamespacedReference `json:"keyVaultCertificateIdRef,omitempty" tf:"-"`
 
 	// Selector for a Certificate in keyvault to populate keyVaultCertificateId.
 	// +kubebuilder:validation:Optional
-	KeyVaultCertificateIDSelector *v1.NamespacedSelector `json:"keyVaultCertificateIdSelector,omitempty" tf:"-"`
+	KeyVaultCertificateIDSelector *v2.NamespacedSelector `json:"keyVaultCertificateIdSelector,omitempty" tf:"-"`
 }
 
 type SpringCloudCertificateObservation struct {
@@ -78,11 +77,11 @@ type SpringCloudCertificateParameters struct {
 
 	// Reference to a Certificate in keyvault to populate keyVaultCertificateId.
 	// +kubebuilder:validation:Optional
-	KeyVaultCertificateIDRef *v1.NamespacedReference `json:"keyVaultCertificateIdRef,omitempty" tf:"-"`
+	KeyVaultCertificateIDRef *v2.NamespacedReference `json:"keyVaultCertificateIdRef,omitempty" tf:"-"`
 
 	// Selector for a Certificate in keyvault to populate keyVaultCertificateId.
 	// +kubebuilder:validation:Optional
-	KeyVaultCertificateIDSelector *v1.NamespacedSelector `json:"keyVaultCertificateIdSelector,omitempty" tf:"-"`
+	KeyVaultCertificateIDSelector *v2.NamespacedSelector `json:"keyVaultCertificateIdSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the resource group in which to create the Spring Cloud Certificate. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
@@ -91,11 +90,11 @@ type SpringCloudCertificateParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the Spring Cloud Service resource. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/appplatform/v1beta1.SpringCloudService
@@ -104,11 +103,11 @@ type SpringCloudCertificateParameters struct {
 
 	// Reference to a SpringCloudService in appplatform to populate serviceName.
 	// +kubebuilder:validation:Optional
-	ServiceNameRef *v1.NamespacedReference `json:"serviceNameRef,omitempty" tf:"-"`
+	ServiceNameRef *v2.NamespacedReference `json:"serviceNameRef,omitempty" tf:"-"`
 
 	// Selector for a SpringCloudService in appplatform to populate serviceName.
 	// +kubebuilder:validation:Optional
-	ServiceNameSelector *v1.NamespacedSelector `json:"serviceNameSelector,omitempty" tf:"-"`
+	ServiceNameSelector *v2.NamespacedSelector `json:"serviceNameSelector,omitempty" tf:"-"`
 }
 
 // SpringCloudCertificateSpec defines the desired state of SpringCloudCertificate
@@ -130,8 +129,8 @@ type SpringCloudCertificateSpec struct {
 
 // SpringCloudCertificateStatus defines the observed state of SpringCloudCertificate.
 type SpringCloudCertificateStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SpringCloudCertificateObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SpringCloudCertificateObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SpringCloudGatewayCustomDomainInitParameters struct {
@@ -25,11 +25,11 @@ type SpringCloudGatewayCustomDomainInitParameters struct {
 
 	// Reference to a SpringCloudGateway in appplatform to populate springCloudGatewayId.
 	// +kubebuilder:validation:Optional
-	SpringCloudGatewayIDRef *v1.Reference `json:"springCloudGatewayIdRef,omitempty" tf:"-"`
+	SpringCloudGatewayIDRef *v2.Reference `json:"springCloudGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a SpringCloudGateway in appplatform to populate springCloudGatewayId.
 	// +kubebuilder:validation:Optional
-	SpringCloudGatewayIDSelector *v1.Selector `json:"springCloudGatewayIdSelector,omitempty" tf:"-"`
+	SpringCloudGatewayIDSelector *v2.Selector `json:"springCloudGatewayIdSelector,omitempty" tf:"-"`
 
 	// Specifies the thumbprint of the Spring Cloud Certificate that binds to the Spring Cloud Gateway Custom Domain.
 	Thumbprint *string `json:"thumbprint,omitempty" tf:"thumbprint,omitempty"`
@@ -64,11 +64,11 @@ type SpringCloudGatewayCustomDomainParameters struct {
 
 	// Reference to a SpringCloudGateway in appplatform to populate springCloudGatewayId.
 	// +kubebuilder:validation:Optional
-	SpringCloudGatewayIDRef *v1.Reference `json:"springCloudGatewayIdRef,omitempty" tf:"-"`
+	SpringCloudGatewayIDRef *v2.Reference `json:"springCloudGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a SpringCloudGateway in appplatform to populate springCloudGatewayId.
 	// +kubebuilder:validation:Optional
-	SpringCloudGatewayIDSelector *v1.Selector `json:"springCloudGatewayIdSelector,omitempty" tf:"-"`
+	SpringCloudGatewayIDSelector *v2.Selector `json:"springCloudGatewayIdSelector,omitempty" tf:"-"`
 
 	// Specifies the thumbprint of the Spring Cloud Certificate that binds to the Spring Cloud Gateway Custom Domain.
 	// +kubebuilder:validation:Optional
@@ -77,8 +77,8 @@ type SpringCloudGatewayCustomDomainParameters struct {
 
 // SpringCloudGatewayCustomDomainSpec defines the desired state of SpringCloudGatewayCustomDomain
 type SpringCloudGatewayCustomDomainSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SpringCloudGatewayCustomDomainParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SpringCloudGatewayCustomDomainParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -94,8 +94,8 @@ type SpringCloudGatewayCustomDomainSpec struct {
 
 // SpringCloudGatewayCustomDomainStatus defines the observed state of SpringCloudGatewayCustomDomain.
 type SpringCloudGatewayCustomDomainStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SpringCloudGatewayCustomDomainObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SpringCloudGatewayCustomDomainObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

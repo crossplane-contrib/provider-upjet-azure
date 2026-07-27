@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AssignToUserInitParameters struct {
@@ -111,11 +110,11 @@ type ComputeInstanceInitParameters struct {
 
 	// Reference to a Subnet in network to populate subnetResourceId.
 	// +kubebuilder:validation:Optional
-	SubnetResourceIDRef *v1.NamespacedReference `json:"subnetResourceIdRef,omitempty" tf:"-"`
+	SubnetResourceIDRef *v2.NamespacedReference `json:"subnetResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetResourceId.
 	// +kubebuilder:validation:Optional
-	SubnetResourceIDSelector *v1.NamespacedSelector `json:"subnetResourceIdSelector,omitempty" tf:"-"`
+	SubnetResourceIDSelector *v2.NamespacedSelector `json:"subnetResourceIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Machine Learning Compute Instance. Changing this forces a new Machine Learning Compute Instance to be created.
 	// +mapType=granular
@@ -195,11 +194,11 @@ type ComputeInstanceParameters struct {
 
 	// Reference to a Workspace in machinelearningservices to populate machineLearningWorkspaceId.
 	// +kubebuilder:validation:Optional
-	MachineLearningWorkspaceIDRef *v1.NamespacedReference `json:"machineLearningWorkspaceIdRef,omitempty" tf:"-"`
+	MachineLearningWorkspaceIDRef *v2.NamespacedReference `json:"machineLearningWorkspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in machinelearningservices to populate machineLearningWorkspaceId.
 	// +kubebuilder:validation:Optional
-	MachineLearningWorkspaceIDSelector *v1.NamespacedSelector `json:"machineLearningWorkspaceIdSelector,omitempty" tf:"-"`
+	MachineLearningWorkspaceIDSelector *v2.NamespacedSelector `json:"machineLearningWorkspaceIdSelector,omitempty" tf:"-"`
 
 	// Whether the compute instance will have a public ip. Defaults to true. Changing this forces a new Machine Learning Compute Cluster to be created.
 	// +kubebuilder:validation:Optional
@@ -217,11 +216,11 @@ type ComputeInstanceParameters struct {
 
 	// Reference to a Subnet in network to populate subnetResourceId.
 	// +kubebuilder:validation:Optional
-	SubnetResourceIDRef *v1.NamespacedReference `json:"subnetResourceIdRef,omitempty" tf:"-"`
+	SubnetResourceIDRef *v2.NamespacedReference `json:"subnetResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetResourceId.
 	// +kubebuilder:validation:Optional
-	SubnetResourceIDSelector *v1.NamespacedSelector `json:"subnetResourceIdSelector,omitempty" tf:"-"`
+	SubnetResourceIDSelector *v2.NamespacedSelector `json:"subnetResourceIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Machine Learning Compute Instance. Changing this forces a new Machine Learning Compute Instance to be created.
 	// +kubebuilder:validation:Optional
@@ -277,8 +276,8 @@ type ComputeInstanceSpec struct {
 
 // ComputeInstanceStatus defines the observed state of ComputeInstance.
 type ComputeInstanceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ComputeInstanceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ComputeInstanceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

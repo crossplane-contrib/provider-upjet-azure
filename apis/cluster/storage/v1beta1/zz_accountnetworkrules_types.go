@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AccountNetworkRulesInitParameters struct {
@@ -36,11 +36,11 @@ type AccountNetworkRulesInitParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+	StorageAccountIDRef *v2.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+	StorageAccountIDSelector *v2.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 
 	// A list of virtual network subnet ids to secure the storage account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
@@ -50,11 +50,11 @@ type AccountNetworkRulesInitParameters struct {
 
 	// References to Subnet in network to populate virtualNetworkSubnetIds.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIdsRefs []v1.Reference `json:"virtualNetworkSubnetIdsRefs,omitempty" tf:"-"`
+	VirtualNetworkSubnetIdsRefs []v2.Reference `json:"virtualNetworkSubnetIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in network to populate virtualNetworkSubnetIds.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIdsSelector *v1.Selector `json:"virtualNetworkSubnetIdsSelector,omitempty" tf:"-"`
+	VirtualNetworkSubnetIdsSelector *v2.Selector `json:"virtualNetworkSubnetIdsSelector,omitempty" tf:"-"`
 }
 
 type AccountNetworkRulesObservation struct {
@@ -112,11 +112,11 @@ type AccountNetworkRulesParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+	StorageAccountIDRef *v2.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+	StorageAccountIDSelector *v2.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 
 	// A list of virtual network subnet ids to secure the storage account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
@@ -127,11 +127,11 @@ type AccountNetworkRulesParameters struct {
 
 	// References to Subnet in network to populate virtualNetworkSubnetIds.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIdsRefs []v1.Reference `json:"virtualNetworkSubnetIdsRefs,omitempty" tf:"-"`
+	VirtualNetworkSubnetIdsRefs []v2.Reference `json:"virtualNetworkSubnetIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Subnet in network to populate virtualNetworkSubnetIds.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIdsSelector *v1.Selector `json:"virtualNetworkSubnetIdsSelector,omitempty" tf:"-"`
+	VirtualNetworkSubnetIdsSelector *v2.Selector `json:"virtualNetworkSubnetIdsSelector,omitempty" tf:"-"`
 }
 
 type AccountNetworkRulesPrivateLinkAccessInitParameters struct {
@@ -165,8 +165,8 @@ type AccountNetworkRulesPrivateLinkAccessParameters struct {
 
 // AccountNetworkRulesSpec defines the desired state of AccountNetworkRules
 type AccountNetworkRulesSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     AccountNetworkRulesParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   AccountNetworkRulesParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -182,8 +182,8 @@ type AccountNetworkRulesSpec struct {
 
 // AccountNetworkRulesStatus defines the observed state of AccountNetworkRules.
 type AccountNetworkRulesStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AccountNetworkRulesObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AccountNetworkRulesObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AccountRaiBlocklistInitParameters struct {
@@ -49,11 +49,11 @@ type AccountRaiBlocklistParameters struct {
 
 	// Reference to a Account in cognitiveservices to populate cognitiveAccountId.
 	// +kubebuilder:validation:Optional
-	CognitiveAccountIDRef *v1.Reference `json:"cognitiveAccountIdRef,omitempty" tf:"-"`
+	CognitiveAccountIDRef *v2.Reference `json:"cognitiveAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in cognitiveservices to populate cognitiveAccountId.
 	// +kubebuilder:validation:Optional
-	CognitiveAccountIDSelector *v1.Selector `json:"cognitiveAccountIdSelector,omitempty" tf:"-"`
+	CognitiveAccountIDSelector *v2.Selector `json:"cognitiveAccountIdSelector,omitempty" tf:"-"`
 
 	// A short description for the Cognitive Account Rai Blocklist.
 	// +kubebuilder:validation:Optional
@@ -67,8 +67,8 @@ type AccountRaiBlocklistParameters struct {
 
 // AccountRaiBlocklistSpec defines the desired state of AccountRaiBlocklist
 type AccountRaiBlocklistSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     AccountRaiBlocklistParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   AccountRaiBlocklistParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -84,8 +84,8 @@ type AccountRaiBlocklistSpec struct {
 
 // AccountRaiBlocklistStatus defines the observed state of AccountRaiBlocklist.
 type AccountRaiBlocklistStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AccountRaiBlocklistObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AccountRaiBlocklistObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

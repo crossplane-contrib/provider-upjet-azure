@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ConfigurationInitParameters struct {
@@ -159,11 +159,11 @@ type ConfigurationParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The SKU name of the App Configuration. Possible values are free, developer, standard and premium. Defaults to free.
 	// +kubebuilder:validation:Optional
@@ -188,11 +188,11 @@ type EncryptionInitParameters struct {
 
 	// Reference to a UserAssignedIdentity in managedidentity to populate identityClientId.
 	// +kubebuilder:validation:Optional
-	IdentityClientIDRef *v1.Reference `json:"identityClientIdRef,omitempty" tf:"-"`
+	IdentityClientIDRef *v2.Reference `json:"identityClientIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserAssignedIdentity in managedidentity to populate identityClientId.
 	// +kubebuilder:validation:Optional
-	IdentityClientIDSelector *v1.Selector `json:"identityClientIdSelector,omitempty" tf:"-"`
+	IdentityClientIDSelector *v2.Selector `json:"identityClientIdSelector,omitempty" tf:"-"`
 
 	// Specifies the URI of the key vault key used to encrypt data.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/keyvault/v1beta2.Key
@@ -201,11 +201,11 @@ type EncryptionInitParameters struct {
 
 	// Reference to a Key in keyvault to populate keyVaultKeyIdentifier.
 	// +kubebuilder:validation:Optional
-	KeyVaultKeyIdentifierRef *v1.Reference `json:"keyVaultKeyIdentifierRef,omitempty" tf:"-"`
+	KeyVaultKeyIdentifierRef *v2.Reference `json:"keyVaultKeyIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Key in keyvault to populate keyVaultKeyIdentifier.
 	// +kubebuilder:validation:Optional
-	KeyVaultKeyIdentifierSelector *v1.Selector `json:"keyVaultKeyIdentifierSelector,omitempty" tf:"-"`
+	KeyVaultKeyIdentifierSelector *v2.Selector `json:"keyVaultKeyIdentifierSelector,omitempty" tf:"-"`
 }
 
 type EncryptionObservation struct {
@@ -227,11 +227,11 @@ type EncryptionParameters struct {
 
 	// Reference to a UserAssignedIdentity in managedidentity to populate identityClientId.
 	// +kubebuilder:validation:Optional
-	IdentityClientIDRef *v1.Reference `json:"identityClientIdRef,omitempty" tf:"-"`
+	IdentityClientIDRef *v2.Reference `json:"identityClientIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserAssignedIdentity in managedidentity to populate identityClientId.
 	// +kubebuilder:validation:Optional
-	IdentityClientIDSelector *v1.Selector `json:"identityClientIdSelector,omitempty" tf:"-"`
+	IdentityClientIDSelector *v2.Selector `json:"identityClientIdSelector,omitempty" tf:"-"`
 
 	// Specifies the URI of the key vault key used to encrypt data.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/keyvault/v1beta2.Key
@@ -241,11 +241,11 @@ type EncryptionParameters struct {
 
 	// Reference to a Key in keyvault to populate keyVaultKeyIdentifier.
 	// +kubebuilder:validation:Optional
-	KeyVaultKeyIdentifierRef *v1.Reference `json:"keyVaultKeyIdentifierRef,omitempty" tf:"-"`
+	KeyVaultKeyIdentifierRef *v2.Reference `json:"keyVaultKeyIdentifierRef,omitempty" tf:"-"`
 
 	// Selector for a Key in keyvault to populate keyVaultKeyIdentifier.
 	// +kubebuilder:validation:Optional
-	KeyVaultKeyIdentifierSelector *v1.Selector `json:"keyVaultKeyIdentifierSelector,omitempty" tf:"-"`
+	KeyVaultKeyIdentifierSelector *v2.Selector `json:"keyVaultKeyIdentifierSelector,omitempty" tf:"-"`
 }
 
 type IdentityInitParameters struct {
@@ -258,11 +258,11 @@ type IdentityInitParameters struct {
 
 	// References to UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v1.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
+	IdentityIdsRefs []v2.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v1.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
+	IdentityIdsSelector *v2.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this App Configuration. Possible values are SystemAssigned, UserAssigned, and SystemAssigned, UserAssigned (to enable both).
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -295,11 +295,11 @@ type IdentityParameters struct {
 
 	// References to UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v1.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
+	IdentityIdsRefs []v2.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v1.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
+	IdentityIdsSelector *v2.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this App Configuration. Possible values are SystemAssigned, UserAssigned, and SystemAssigned, UserAssigned (to enable both).
 	// +kubebuilder:validation:Optional
@@ -415,8 +415,8 @@ type SecondaryWriteKeyParameters struct {
 
 // ConfigurationSpec defines the desired state of Configuration
 type ConfigurationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ConfigurationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ConfigurationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -432,8 +432,8 @@ type ConfigurationSpec struct {
 
 // ConfigurationStatus defines the observed state of Configuration.
 type ConfigurationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ConfigurationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ConfigurationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

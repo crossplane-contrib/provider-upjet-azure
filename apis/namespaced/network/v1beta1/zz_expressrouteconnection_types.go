@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ExpressRouteConnectionInitParameters struct {
@@ -28,11 +27,11 @@ type ExpressRouteConnectionInitParameters struct {
 
 	// Reference to a ExpressRouteCircuitPeering in network to populate expressRouteCircuitPeeringId.
 	// +kubebuilder:validation:Optional
-	ExpressRouteCircuitPeeringIDRef *v1.NamespacedReference `json:"expressRouteCircuitPeeringIdRef,omitempty" tf:"-"`
+	ExpressRouteCircuitPeeringIDRef *v2.NamespacedReference `json:"expressRouteCircuitPeeringIdRef,omitempty" tf:"-"`
 
 	// Selector for a ExpressRouteCircuitPeering in network to populate expressRouteCircuitPeeringId.
 	// +kubebuilder:validation:Optional
-	ExpressRouteCircuitPeeringIDSelector *v1.NamespacedSelector `json:"expressRouteCircuitPeeringIdSelector,omitempty" tf:"-"`
+	ExpressRouteCircuitPeeringIDSelector *v2.NamespacedSelector `json:"expressRouteCircuitPeeringIdSelector,omitempty" tf:"-"`
 
 	// Specified whether Fast Path is enabled for Virtual Wan Firewall Hub. Defaults to false.
 	ExpressRouteGatewayBypassEnabled *bool `json:"expressRouteGatewayBypassEnabled,omitempty" tf:"express_route_gateway_bypass_enabled,omitempty"`
@@ -97,11 +96,11 @@ type ExpressRouteConnectionParameters struct {
 
 	// Reference to a ExpressRouteCircuitPeering in network to populate expressRouteCircuitPeeringId.
 	// +kubebuilder:validation:Optional
-	ExpressRouteCircuitPeeringIDRef *v1.NamespacedReference `json:"expressRouteCircuitPeeringIdRef,omitempty" tf:"-"`
+	ExpressRouteCircuitPeeringIDRef *v2.NamespacedReference `json:"expressRouteCircuitPeeringIdRef,omitempty" tf:"-"`
 
 	// Selector for a ExpressRouteCircuitPeering in network to populate expressRouteCircuitPeeringId.
 	// +kubebuilder:validation:Optional
-	ExpressRouteCircuitPeeringIDSelector *v1.NamespacedSelector `json:"expressRouteCircuitPeeringIdSelector,omitempty" tf:"-"`
+	ExpressRouteCircuitPeeringIDSelector *v2.NamespacedSelector `json:"expressRouteCircuitPeeringIdSelector,omitempty" tf:"-"`
 
 	// Specified whether Fast Path is enabled for Virtual Wan Firewall Hub. Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -115,11 +114,11 @@ type ExpressRouteConnectionParameters struct {
 
 	// Reference to a ExpressRouteGateway in network to populate expressRouteGatewayId.
 	// +kubebuilder:validation:Optional
-	ExpressRouteGatewayIDRef *v1.NamespacedReference `json:"expressRouteGatewayIdRef,omitempty" tf:"-"`
+	ExpressRouteGatewayIDRef *v2.NamespacedReference `json:"expressRouteGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a ExpressRouteGateway in network to populate expressRouteGatewayId.
 	// +kubebuilder:validation:Optional
-	ExpressRouteGatewayIDSelector *v1.NamespacedSelector `json:"expressRouteGatewayIdSelector,omitempty" tf:"-"`
+	ExpressRouteGatewayIDSelector *v2.NamespacedSelector `json:"expressRouteGatewayIdSelector,omitempty" tf:"-"`
 
 	// Is Internet security enabled for this Express Route Connection? Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -237,8 +236,8 @@ type ExpressRouteConnectionSpec struct {
 
 // ExpressRouteConnectionStatus defines the observed state of ExpressRouteConnection.
 type ExpressRouteConnectionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ExpressRouteConnectionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ExpressRouteConnectionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

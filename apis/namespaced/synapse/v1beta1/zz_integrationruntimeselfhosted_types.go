@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type IntegrationRuntimeSelfHostedInitParameters struct {
@@ -52,11 +51,11 @@ type IntegrationRuntimeSelfHostedParameters struct {
 
 	// Reference to a Workspace in synapse to populate synapseWorkspaceId.
 	// +kubebuilder:validation:Optional
-	SynapseWorkspaceIDRef *v1.NamespacedReference `json:"synapseWorkspaceIdRef,omitempty" tf:"-"`
+	SynapseWorkspaceIDRef *v2.NamespacedReference `json:"synapseWorkspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in synapse to populate synapseWorkspaceId.
 	// +kubebuilder:validation:Optional
-	SynapseWorkspaceIDSelector *v1.NamespacedSelector `json:"synapseWorkspaceIdSelector,omitempty" tf:"-"`
+	SynapseWorkspaceIDSelector *v2.NamespacedSelector `json:"synapseWorkspaceIdSelector,omitempty" tf:"-"`
 }
 
 // IntegrationRuntimeSelfHostedSpec defines the desired state of IntegrationRuntimeSelfHosted
@@ -78,8 +77,8 @@ type IntegrationRuntimeSelfHostedSpec struct {
 
 // IntegrationRuntimeSelfHostedStatus defines the observed state of IntegrationRuntimeSelfHosted.
 type IntegrationRuntimeSelfHostedStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        IntegrationRuntimeSelfHostedObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               IntegrationRuntimeSelfHostedObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -5,154 +5,154 @@
 
 package v1beta2
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this IOTSecurityDeviceGroup.
-func (mg *IOTSecurityDeviceGroup) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *IOTSecurityDeviceGroup) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this IOTSecurityDeviceGroup.
-func (mg *IOTSecurityDeviceGroup) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *IOTSecurityDeviceGroup) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this IOTSecurityDeviceGroup.
-func (mg *IOTSecurityDeviceGroup) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *IOTSecurityDeviceGroup) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this IOTSecurityDeviceGroup.
-func (mg *IOTSecurityDeviceGroup) GetProviderConfigReference() *xpv1.Reference {
+func (mg *IOTSecurityDeviceGroup) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this IOTSecurityDeviceGroup.
-func (mg *IOTSecurityDeviceGroup) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *IOTSecurityDeviceGroup) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this IOTSecurityDeviceGroup.
-func (mg *IOTSecurityDeviceGroup) SetConditions(c ...xpv1.Condition) {
+func (mg *IOTSecurityDeviceGroup) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this IOTSecurityDeviceGroup.
-func (mg *IOTSecurityDeviceGroup) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *IOTSecurityDeviceGroup) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this IOTSecurityDeviceGroup.
-func (mg *IOTSecurityDeviceGroup) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *IOTSecurityDeviceGroup) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this IOTSecurityDeviceGroup.
-func (mg *IOTSecurityDeviceGroup) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *IOTSecurityDeviceGroup) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this IOTSecurityDeviceGroup.
-func (mg *IOTSecurityDeviceGroup) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *IOTSecurityDeviceGroup) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this IOTSecuritySolution.
-func (mg *IOTSecuritySolution) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *IOTSecuritySolution) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this IOTSecuritySolution.
-func (mg *IOTSecuritySolution) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *IOTSecuritySolution) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this IOTSecuritySolution.
-func (mg *IOTSecuritySolution) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *IOTSecuritySolution) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this IOTSecuritySolution.
-func (mg *IOTSecuritySolution) GetProviderConfigReference() *xpv1.Reference {
+func (mg *IOTSecuritySolution) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this IOTSecuritySolution.
-func (mg *IOTSecuritySolution) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *IOTSecuritySolution) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this IOTSecuritySolution.
-func (mg *IOTSecuritySolution) SetConditions(c ...xpv1.Condition) {
+func (mg *IOTSecuritySolution) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this IOTSecuritySolution.
-func (mg *IOTSecuritySolution) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *IOTSecuritySolution) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this IOTSecuritySolution.
-func (mg *IOTSecuritySolution) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *IOTSecuritySolution) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this IOTSecuritySolution.
-func (mg *IOTSecuritySolution) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *IOTSecuritySolution) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this IOTSecuritySolution.
-func (mg *IOTSecuritySolution) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *IOTSecuritySolution) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this SecurityCenterAssessment.
-func (mg *SecurityCenterAssessment) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *SecurityCenterAssessment) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this SecurityCenterAssessment.
-func (mg *SecurityCenterAssessment) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *SecurityCenterAssessment) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this SecurityCenterAssessment.
-func (mg *SecurityCenterAssessment) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *SecurityCenterAssessment) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this SecurityCenterAssessment.
-func (mg *SecurityCenterAssessment) GetProviderConfigReference() *xpv1.Reference {
+func (mg *SecurityCenterAssessment) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this SecurityCenterAssessment.
-func (mg *SecurityCenterAssessment) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *SecurityCenterAssessment) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this SecurityCenterAssessment.
-func (mg *SecurityCenterAssessment) SetConditions(c ...xpv1.Condition) {
+func (mg *SecurityCenterAssessment) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this SecurityCenterAssessment.
-func (mg *SecurityCenterAssessment) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *SecurityCenterAssessment) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this SecurityCenterAssessment.
-func (mg *SecurityCenterAssessment) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *SecurityCenterAssessment) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this SecurityCenterAssessment.
-func (mg *SecurityCenterAssessment) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *SecurityCenterAssessment) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this SecurityCenterAssessment.
-func (mg *SecurityCenterAssessment) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *SecurityCenterAssessment) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type TopicAuthorizationRuleInitParameters struct {
@@ -66,11 +65,11 @@ type TopicAuthorizationRuleParameters struct {
 
 	// Reference to a Topic in servicebus to populate topicId.
 	// +kubebuilder:validation:Optional
-	TopicIDRef *v1.NamespacedReference `json:"topicIdRef,omitempty" tf:"-"`
+	TopicIDRef *v2.NamespacedReference `json:"topicIdRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in servicebus to populate topicId.
 	// +kubebuilder:validation:Optional
-	TopicIDSelector *v1.NamespacedSelector `json:"topicIdSelector,omitempty" tf:"-"`
+	TopicIDSelector *v2.NamespacedSelector `json:"topicIdSelector,omitempty" tf:"-"`
 }
 
 // TopicAuthorizationRuleSpec defines the desired state of TopicAuthorizationRule
@@ -92,8 +91,8 @@ type TopicAuthorizationRuleSpec struct {
 
 // TopicAuthorizationRuleStatus defines the observed state of TopicAuthorizationRule.
 type TopicAuthorizationRuleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        TopicAuthorizationRuleObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               TopicAuthorizationRuleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

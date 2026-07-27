@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BackupInstanceDiskInitParameters struct {
@@ -22,11 +22,11 @@ type BackupInstanceDiskInitParameters struct {
 
 	// Reference to a BackupPolicyDisk in dataprotection to populate backupPolicyId.
 	// +kubebuilder:validation:Optional
-	BackupPolicyIDRef *v1.Reference `json:"backupPolicyIdRef,omitempty" tf:"-"`
+	BackupPolicyIDRef *v2.Reference `json:"backupPolicyIdRef,omitempty" tf:"-"`
 
 	// Selector for a BackupPolicyDisk in dataprotection to populate backupPolicyId.
 	// +kubebuilder:validation:Optional
-	BackupPolicyIDSelector *v1.Selector `json:"backupPolicyIdSelector,omitempty" tf:"-"`
+	BackupPolicyIDSelector *v2.Selector `json:"backupPolicyIdSelector,omitempty" tf:"-"`
 
 	// The ID of the source Disk. Changing this forces a new Backup Instance Disk to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/compute/v1beta2.ManagedDisk
@@ -35,11 +35,11 @@ type BackupInstanceDiskInitParameters struct {
 
 	// Reference to a ManagedDisk in compute to populate diskId.
 	// +kubebuilder:validation:Optional
-	DiskIDRef *v1.Reference `json:"diskIdRef,omitempty" tf:"-"`
+	DiskIDRef *v2.Reference `json:"diskIdRef,omitempty" tf:"-"`
 
 	// Selector for a ManagedDisk in compute to populate diskId.
 	// +kubebuilder:validation:Optional
-	DiskIDSelector *v1.Selector `json:"diskIdSelector,omitempty" tf:"-"`
+	DiskIDSelector *v2.Selector `json:"diskIdSelector,omitempty" tf:"-"`
 
 	// The Azure Region where the Backup Instance Disk should exist. Changing this forces a new Backup Instance Disk to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -50,11 +50,11 @@ type BackupInstanceDiskInitParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate snapshotResourceGroupName.
 	// +kubebuilder:validation:Optional
-	SnapshotResourceGroupNameRef *v1.Reference `json:"snapshotResourceGroupNameRef,omitempty" tf:"-"`
+	SnapshotResourceGroupNameRef *v2.Reference `json:"snapshotResourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate snapshotResourceGroupName.
 	// +kubebuilder:validation:Optional
-	SnapshotResourceGroupNameSelector *v1.Selector `json:"snapshotResourceGroupNameSelector,omitempty" tf:"-"`
+	SnapshotResourceGroupNameSelector *v2.Selector `json:"snapshotResourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The subscription ID of the Resource Group where snapshots are stored. The default value is the subscription ID of the Backup Vault. Changing this forces a new Backup Instance Disk to be created.
 	SnapshotSubscriptionID *string `json:"snapshotSubscriptionId,omitempty" tf:"snapshot_subscription_id,omitempty"`
@@ -97,11 +97,11 @@ type BackupInstanceDiskParameters struct {
 
 	// Reference to a BackupPolicyDisk in dataprotection to populate backupPolicyId.
 	// +kubebuilder:validation:Optional
-	BackupPolicyIDRef *v1.Reference `json:"backupPolicyIdRef,omitempty" tf:"-"`
+	BackupPolicyIDRef *v2.Reference `json:"backupPolicyIdRef,omitempty" tf:"-"`
 
 	// Selector for a BackupPolicyDisk in dataprotection to populate backupPolicyId.
 	// +kubebuilder:validation:Optional
-	BackupPolicyIDSelector *v1.Selector `json:"backupPolicyIdSelector,omitempty" tf:"-"`
+	BackupPolicyIDSelector *v2.Selector `json:"backupPolicyIdSelector,omitempty" tf:"-"`
 
 	// The ID of the source Disk. Changing this forces a new Backup Instance Disk to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/compute/v1beta2.ManagedDisk
@@ -111,11 +111,11 @@ type BackupInstanceDiskParameters struct {
 
 	// Reference to a ManagedDisk in compute to populate diskId.
 	// +kubebuilder:validation:Optional
-	DiskIDRef *v1.Reference `json:"diskIdRef,omitempty" tf:"-"`
+	DiskIDRef *v2.Reference `json:"diskIdRef,omitempty" tf:"-"`
 
 	// Selector for a ManagedDisk in compute to populate diskId.
 	// +kubebuilder:validation:Optional
-	DiskIDSelector *v1.Selector `json:"diskIdSelector,omitempty" tf:"-"`
+	DiskIDSelector *v2.Selector `json:"diskIdSelector,omitempty" tf:"-"`
 
 	// The Azure Region where the Backup Instance Disk should exist. Changing this forces a new Backup Instance Disk to be created.
 	// +kubebuilder:validation:Optional
@@ -128,11 +128,11 @@ type BackupInstanceDiskParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate snapshotResourceGroupName.
 	// +kubebuilder:validation:Optional
-	SnapshotResourceGroupNameRef *v1.Reference `json:"snapshotResourceGroupNameRef,omitempty" tf:"-"`
+	SnapshotResourceGroupNameRef *v2.Reference `json:"snapshotResourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate snapshotResourceGroupName.
 	// +kubebuilder:validation:Optional
-	SnapshotResourceGroupNameSelector *v1.Selector `json:"snapshotResourceGroupNameSelector,omitempty" tf:"-"`
+	SnapshotResourceGroupNameSelector *v2.Selector `json:"snapshotResourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The subscription ID of the Resource Group where snapshots are stored. The default value is the subscription ID of the Backup Vault. Changing this forces a new Backup Instance Disk to be created.
 	// +kubebuilder:validation:Optional
@@ -146,17 +146,17 @@ type BackupInstanceDiskParameters struct {
 
 	// Reference to a BackupVault in dataprotection to populate vaultId.
 	// +kubebuilder:validation:Optional
-	VaultIDRef *v1.Reference `json:"vaultIdRef,omitempty" tf:"-"`
+	VaultIDRef *v2.Reference `json:"vaultIdRef,omitempty" tf:"-"`
 
 	// Selector for a BackupVault in dataprotection to populate vaultId.
 	// +kubebuilder:validation:Optional
-	VaultIDSelector *v1.Selector `json:"vaultIdSelector,omitempty" tf:"-"`
+	VaultIDSelector *v2.Selector `json:"vaultIdSelector,omitempty" tf:"-"`
 }
 
 // BackupInstanceDiskSpec defines the desired state of BackupInstanceDisk
 type BackupInstanceDiskSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     BackupInstanceDiskParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   BackupInstanceDiskParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -172,8 +172,8 @@ type BackupInstanceDiskSpec struct {
 
 // BackupInstanceDiskStatus defines the observed state of BackupInstanceDisk.
 type BackupInstanceDiskStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BackupInstanceDiskObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BackupInstanceDiskObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

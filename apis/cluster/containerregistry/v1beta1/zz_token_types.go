@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type TokenInitParameters struct {
@@ -25,11 +25,11 @@ type TokenInitParameters struct {
 
 	// Reference to a ScopeMap in containerregistry to populate scopeMapId.
 	// +kubebuilder:validation:Optional
-	ScopeMapIDRef *v1.Reference `json:"scopeMapIdRef,omitempty" tf:"-"`
+	ScopeMapIDRef *v2.Reference `json:"scopeMapIdRef,omitempty" tf:"-"`
 
 	// Selector for a ScopeMap in containerregistry to populate scopeMapId.
 	// +kubebuilder:validation:Optional
-	ScopeMapIDSelector *v1.Selector `json:"scopeMapIdSelector,omitempty" tf:"-"`
+	ScopeMapIDSelector *v2.Selector `json:"scopeMapIdSelector,omitempty" tf:"-"`
 }
 
 type TokenObservation struct {
@@ -59,11 +59,11 @@ type TokenParameters struct {
 
 	// Reference to a Registry in containerregistry to populate containerRegistryName.
 	// +kubebuilder:validation:Optional
-	ContainerRegistryNameRef *v1.Reference `json:"containerRegistryNameRef,omitempty" tf:"-"`
+	ContainerRegistryNameRef *v2.Reference `json:"containerRegistryNameRef,omitempty" tf:"-"`
 
 	// Selector for a Registry in containerregistry to populate containerRegistryName.
 	// +kubebuilder:validation:Optional
-	ContainerRegistryNameSelector *v1.Selector `json:"containerRegistryNameSelector,omitempty" tf:"-"`
+	ContainerRegistryNameSelector *v2.Selector `json:"containerRegistryNameSelector,omitempty" tf:"-"`
 
 	// Should the Container Registry token be enabled? Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -76,11 +76,11 @@ type TokenParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The ID of the Container Registry Scope Map associated with the token.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/containerregistry/v1beta1.ScopeMap
@@ -90,17 +90,17 @@ type TokenParameters struct {
 
 	// Reference to a ScopeMap in containerregistry to populate scopeMapId.
 	// +kubebuilder:validation:Optional
-	ScopeMapIDRef *v1.Reference `json:"scopeMapIdRef,omitempty" tf:"-"`
+	ScopeMapIDRef *v2.Reference `json:"scopeMapIdRef,omitempty" tf:"-"`
 
 	// Selector for a ScopeMap in containerregistry to populate scopeMapId.
 	// +kubebuilder:validation:Optional
-	ScopeMapIDSelector *v1.Selector `json:"scopeMapIdSelector,omitempty" tf:"-"`
+	ScopeMapIDSelector *v2.Selector `json:"scopeMapIdSelector,omitempty" tf:"-"`
 }
 
 // TokenSpec defines the desired state of Token
 type TokenSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     TokenParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   TokenParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -116,8 +116,8 @@ type TokenSpec struct {
 
 // TokenStatus defines the observed state of Token.
 type TokenStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        TokenObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               TokenObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CustomerCertificateInitParameters struct {
@@ -22,11 +22,11 @@ type CustomerCertificateInitParameters struct {
 
 	// Reference to a Certificate in keyvault to populate keyVaultCertificateId.
 	// +kubebuilder:validation:Optional
-	KeyVaultCertificateIDRef *v1.Reference `json:"keyVaultCertificateIdRef,omitempty" tf:"-"`
+	KeyVaultCertificateIDRef *v2.Reference `json:"keyVaultCertificateIdRef,omitempty" tf:"-"`
 
 	// Selector for a Certificate in keyvault to populate keyVaultCertificateId.
 	// +kubebuilder:validation:Optional
-	KeyVaultCertificateIDSelector *v1.Selector `json:"keyVaultCertificateIdSelector,omitempty" tf:"-"`
+	KeyVaultCertificateIDSelector *v2.Selector `json:"keyVaultCertificateIdSelector,omitempty" tf:"-"`
 }
 
 type CustomerCertificateObservation struct {
@@ -48,11 +48,11 @@ type CustomerCertificateParameters struct {
 
 	// Reference to a Certificate in keyvault to populate keyVaultCertificateId.
 	// +kubebuilder:validation:Optional
-	KeyVaultCertificateIDRef *v1.Reference `json:"keyVaultCertificateIdRef,omitempty" tf:"-"`
+	KeyVaultCertificateIDRef *v2.Reference `json:"keyVaultCertificateIdRef,omitempty" tf:"-"`
 
 	// Selector for a Certificate in keyvault to populate keyVaultCertificateId.
 	// +kubebuilder:validation:Optional
-	KeyVaultCertificateIDSelector *v1.Selector `json:"keyVaultCertificateIdSelector,omitempty" tf:"-"`
+	KeyVaultCertificateIDSelector *v2.Selector `json:"keyVaultCertificateIdSelector,omitempty" tf:"-"`
 }
 
 type FrontdoorSecretInitParameters struct {
@@ -86,11 +86,11 @@ type FrontdoorSecretParameters struct {
 
 	// Reference to a FrontdoorProfile in cdn to populate cdnFrontdoorProfileId.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorProfileIDRef *v1.Reference `json:"cdnFrontdoorProfileIdRef,omitempty" tf:"-"`
+	CdnFrontdoorProfileIDRef *v2.Reference `json:"cdnFrontdoorProfileIdRef,omitempty" tf:"-"`
 
 	// Selector for a FrontdoorProfile in cdn to populate cdnFrontdoorProfileId.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorProfileIDSelector *v1.Selector `json:"cdnFrontdoorProfileIdSelector,omitempty" tf:"-"`
+	CdnFrontdoorProfileIDSelector *v2.Selector `json:"cdnFrontdoorProfileIdSelector,omitempty" tf:"-"`
 
 	// A secret block as defined below. Changing this forces a new Front Door Secret to be created.
 	// +kubebuilder:validation:Optional
@@ -118,8 +118,8 @@ type SecretParameters struct {
 
 // FrontdoorSecretSpec defines the desired state of FrontdoorSecret
 type FrontdoorSecretSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     FrontdoorSecretParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   FrontdoorSecretParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -135,8 +135,8 @@ type FrontdoorSecretSpec struct {
 
 // FrontdoorSecretStatus defines the observed state of FrontdoorSecret.
 type FrontdoorSecretStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FrontdoorSecretObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FrontdoorSecretObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

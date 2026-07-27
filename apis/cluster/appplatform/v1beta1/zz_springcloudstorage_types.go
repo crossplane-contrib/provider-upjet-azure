@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SpringCloudStorageInitParameters struct {
@@ -22,11 +22,11 @@ type SpringCloudStorageInitParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountKey.
 	// +kubebuilder:validation:Optional
-	StorageAccountKeyRef *v1.Reference `json:"storageAccountKeyRef,omitempty" tf:"-"`
+	StorageAccountKeyRef *v2.Reference `json:"storageAccountKeyRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountKey.
 	// +kubebuilder:validation:Optional
-	StorageAccountKeySelector *v1.Selector `json:"storageAccountKeySelector,omitempty" tf:"-"`
+	StorageAccountKeySelector *v2.Selector `json:"storageAccountKeySelector,omitempty" tf:"-"`
 
 	// The account name of the Azure Storage Account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
@@ -34,11 +34,11 @@ type SpringCloudStorageInitParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountName.
 	// +kubebuilder:validation:Optional
-	StorageAccountNameRef *v1.Reference `json:"storageAccountNameRef,omitempty" tf:"-"`
+	StorageAccountNameRef *v2.Reference `json:"storageAccountNameRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountName.
 	// +kubebuilder:validation:Optional
-	StorageAccountNameSelector *v1.Selector `json:"storageAccountNameSelector,omitempty" tf:"-"`
+	StorageAccountNameSelector *v2.Selector `json:"storageAccountNameSelector,omitempty" tf:"-"`
 }
 
 type SpringCloudStorageObservation struct {
@@ -66,11 +66,11 @@ type SpringCloudStorageParameters struct {
 
 	// Reference to a SpringCloudService in appplatform to populate springCloudServiceId.
 	// +kubebuilder:validation:Optional
-	SpringCloudServiceIDRef *v1.Reference `json:"springCloudServiceIdRef,omitempty" tf:"-"`
+	SpringCloudServiceIDRef *v2.Reference `json:"springCloudServiceIdRef,omitempty" tf:"-"`
 
 	// Selector for a SpringCloudService in appplatform to populate springCloudServiceId.
 	// +kubebuilder:validation:Optional
-	SpringCloudServiceIDSelector *v1.Selector `json:"springCloudServiceIdSelector,omitempty" tf:"-"`
+	SpringCloudServiceIDSelector *v2.Selector `json:"springCloudServiceIdSelector,omitempty" tf:"-"`
 
 	// The access key of the Azure Storage Account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
@@ -80,11 +80,11 @@ type SpringCloudStorageParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountKey.
 	// +kubebuilder:validation:Optional
-	StorageAccountKeyRef *v1.Reference `json:"storageAccountKeyRef,omitempty" tf:"-"`
+	StorageAccountKeyRef *v2.Reference `json:"storageAccountKeyRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountKey.
 	// +kubebuilder:validation:Optional
-	StorageAccountKeySelector *v1.Selector `json:"storageAccountKeySelector,omitempty" tf:"-"`
+	StorageAccountKeySelector *v2.Selector `json:"storageAccountKeySelector,omitempty" tf:"-"`
 
 	// The account name of the Azure Storage Account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
@@ -93,17 +93,17 @@ type SpringCloudStorageParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountName.
 	// +kubebuilder:validation:Optional
-	StorageAccountNameRef *v1.Reference `json:"storageAccountNameRef,omitempty" tf:"-"`
+	StorageAccountNameRef *v2.Reference `json:"storageAccountNameRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountName.
 	// +kubebuilder:validation:Optional
-	StorageAccountNameSelector *v1.Selector `json:"storageAccountNameSelector,omitempty" tf:"-"`
+	StorageAccountNameSelector *v2.Selector `json:"storageAccountNameSelector,omitempty" tf:"-"`
 }
 
 // SpringCloudStorageSpec defines the desired state of SpringCloudStorage
 type SpringCloudStorageSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SpringCloudStorageParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SpringCloudStorageParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -119,8 +119,8 @@ type SpringCloudStorageSpec struct {
 
 // SpringCloudStorageStatus defines the observed state of SpringCloudStorage.
 type SpringCloudStorageStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SpringCloudStorageObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SpringCloudStorageObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

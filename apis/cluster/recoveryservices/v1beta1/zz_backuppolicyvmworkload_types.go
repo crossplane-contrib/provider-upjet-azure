@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BackupPolicyVMWorkloadInitParameters struct {
@@ -59,11 +59,11 @@ type BackupPolicyVMWorkloadParameters struct {
 
 	// Reference to a Vault in recoveryservices to populate recoveryVaultName.
 	// +kubebuilder:validation:Optional
-	RecoveryVaultNameRef *v1.Reference `json:"recoveryVaultNameRef,omitempty" tf:"-"`
+	RecoveryVaultNameRef *v2.Reference `json:"recoveryVaultNameRef,omitempty" tf:"-"`
 
 	// Selector for a Vault in recoveryservices to populate recoveryVaultName.
 	// +kubebuilder:validation:Optional
-	RecoveryVaultNameSelector *v1.Selector `json:"recoveryVaultNameSelector,omitempty" tf:"-"`
+	RecoveryVaultNameSelector *v2.Selector `json:"recoveryVaultNameSelector,omitempty" tf:"-"`
 
 	// The name of the resource group in which to create the VM Workload Backup Policy. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
@@ -72,11 +72,11 @@ type BackupPolicyVMWorkloadParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A settings block as defined below.
 	// +kubebuilder:validation:Optional
@@ -468,8 +468,8 @@ type SimpleRetentionParameters struct {
 
 // BackupPolicyVMWorkloadSpec defines the desired state of BackupPolicyVMWorkload
 type BackupPolicyVMWorkloadSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     BackupPolicyVMWorkloadParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   BackupPolicyVMWorkloadParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -485,8 +485,8 @@ type BackupPolicyVMWorkloadSpec struct {
 
 // BackupPolicyVMWorkloadStatus defines the observed state of BackupPolicyVMWorkload.
 type BackupPolicyVMWorkloadStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BackupPolicyVMWorkloadObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BackupPolicyVMWorkloadObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ApplicationLoadBalancerSecurityPolicyInitParameters struct {
@@ -29,11 +29,11 @@ type ApplicationLoadBalancerSecurityPolicyInitParameters struct {
 
 	// Reference to a WebApplicationFirewallPolicy in network to populate webApplicationFirewallPolicyId.
 	// +kubebuilder:validation:Optional
-	WebApplicationFirewallPolicyIDRef *v1.Reference `json:"webApplicationFirewallPolicyIdRef,omitempty" tf:"-"`
+	WebApplicationFirewallPolicyIDRef *v2.Reference `json:"webApplicationFirewallPolicyIdRef,omitempty" tf:"-"`
 
 	// Selector for a WebApplicationFirewallPolicy in network to populate webApplicationFirewallPolicyId.
 	// +kubebuilder:validation:Optional
-	WebApplicationFirewallPolicyIDSelector *v1.Selector `json:"webApplicationFirewallPolicyIdSelector,omitempty" tf:"-"`
+	WebApplicationFirewallPolicyIDSelector *v2.Selector `json:"webApplicationFirewallPolicyIdSelector,omitempty" tf:"-"`
 }
 
 type ApplicationLoadBalancerSecurityPolicyObservation struct {
@@ -65,11 +65,11 @@ type ApplicationLoadBalancerSecurityPolicyParameters struct {
 
 	// Reference to a ApplicationLoadBalancer in servicenetworking to populate applicationLoadBalancerId.
 	// +kubebuilder:validation:Optional
-	ApplicationLoadBalancerIDRef *v1.Reference `json:"applicationLoadBalancerIdRef,omitempty" tf:"-"`
+	ApplicationLoadBalancerIDRef *v2.Reference `json:"applicationLoadBalancerIdRef,omitempty" tf:"-"`
 
 	// Selector for a ApplicationLoadBalancer in servicenetworking to populate applicationLoadBalancerId.
 	// +kubebuilder:validation:Optional
-	ApplicationLoadBalancerIDSelector *v1.Selector `json:"applicationLoadBalancerIdSelector,omitempty" tf:"-"`
+	ApplicationLoadBalancerIDSelector *v2.Selector `json:"applicationLoadBalancerIdSelector,omitempty" tf:"-"`
 
 	// The Azure Region where the Application Load Balancer Security Policy should exist. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -88,17 +88,17 @@ type ApplicationLoadBalancerSecurityPolicyParameters struct {
 
 	// Reference to a WebApplicationFirewallPolicy in network to populate webApplicationFirewallPolicyId.
 	// +kubebuilder:validation:Optional
-	WebApplicationFirewallPolicyIDRef *v1.Reference `json:"webApplicationFirewallPolicyIdRef,omitempty" tf:"-"`
+	WebApplicationFirewallPolicyIDRef *v2.Reference `json:"webApplicationFirewallPolicyIdRef,omitempty" tf:"-"`
 
 	// Selector for a WebApplicationFirewallPolicy in network to populate webApplicationFirewallPolicyId.
 	// +kubebuilder:validation:Optional
-	WebApplicationFirewallPolicyIDSelector *v1.Selector `json:"webApplicationFirewallPolicyIdSelector,omitempty" tf:"-"`
+	WebApplicationFirewallPolicyIDSelector *v2.Selector `json:"webApplicationFirewallPolicyIdSelector,omitempty" tf:"-"`
 }
 
 // ApplicationLoadBalancerSecurityPolicySpec defines the desired state of ApplicationLoadBalancerSecurityPolicy
 type ApplicationLoadBalancerSecurityPolicySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ApplicationLoadBalancerSecurityPolicyParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ApplicationLoadBalancerSecurityPolicyParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -114,8 +114,8 @@ type ApplicationLoadBalancerSecurityPolicySpec struct {
 
 // ApplicationLoadBalancerSecurityPolicyStatus defines the observed state of ApplicationLoadBalancerSecurityPolicy.
 type ApplicationLoadBalancerSecurityPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ApplicationLoadBalancerSecurityPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ApplicationLoadBalancerSecurityPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

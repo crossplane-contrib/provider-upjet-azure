@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type MSSQLServerDNSAliasInitParameters struct {
@@ -39,11 +38,11 @@ type MSSQLServerDNSAliasParameters struct {
 
 	// Reference to a MSSQLServer in sql to populate mssqlServerId.
 	// +kubebuilder:validation:Optional
-	MSSQLServerIDRef *v1.NamespacedReference `json:"mssqlServerIdRef,omitempty" tf:"-"`
+	MSSQLServerIDRef *v2.NamespacedReference `json:"mssqlServerIdRef,omitempty" tf:"-"`
 
 	// Selector for a MSSQLServer in sql to populate mssqlServerId.
 	// +kubebuilder:validation:Optional
-	MSSQLServerIDSelector *v1.NamespacedSelector `json:"mssqlServerIdSelector,omitempty" tf:"-"`
+	MSSQLServerIDSelector *v2.NamespacedSelector `json:"mssqlServerIdSelector,omitempty" tf:"-"`
 }
 
 // MSSQLServerDNSAliasSpec defines the desired state of MSSQLServerDNSAlias
@@ -65,8 +64,8 @@ type MSSQLServerDNSAliasSpec struct {
 
 // MSSQLServerDNSAliasStatus defines the observed state of MSSQLServerDNSAlias.
 type MSSQLServerDNSAliasStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MSSQLServerDNSAliasObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MSSQLServerDNSAliasObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

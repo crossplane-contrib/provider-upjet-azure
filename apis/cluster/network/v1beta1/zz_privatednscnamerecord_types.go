@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type PrivateDNSCNAMERecordInitParameters struct {
@@ -64,11 +64,11 @@ type PrivateDNSCNAMERecordParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The Time To Live (TTL) of the DNS record in seconds. Possible values are between 0 and 2147483647.
 	// +kubebuilder:validation:Optional
@@ -86,17 +86,17 @@ type PrivateDNSCNAMERecordParameters struct {
 
 	// Reference to a PrivateDNSZone in network to populate zoneName.
 	// +kubebuilder:validation:Optional
-	ZoneNameRef *v1.Reference `json:"zoneNameRef,omitempty" tf:"-"`
+	ZoneNameRef *v2.Reference `json:"zoneNameRef,omitempty" tf:"-"`
 
 	// Selector for a PrivateDNSZone in network to populate zoneName.
 	// +kubebuilder:validation:Optional
-	ZoneNameSelector *v1.Selector `json:"zoneNameSelector,omitempty" tf:"-"`
+	ZoneNameSelector *v2.Selector `json:"zoneNameSelector,omitempty" tf:"-"`
 }
 
 // PrivateDNSCNAMERecordSpec defines the desired state of PrivateDNSCNAMERecord
 type PrivateDNSCNAMERecordSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     PrivateDNSCNAMERecordParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   PrivateDNSCNAMERecordParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -112,8 +112,8 @@ type PrivateDNSCNAMERecordSpec struct {
 
 // PrivateDNSCNAMERecordStatus defines the observed state of PrivateDNSCNAMERecord.
 type PrivateDNSCNAMERecordStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PrivateDNSCNAMERecordObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PrivateDNSCNAMERecordObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

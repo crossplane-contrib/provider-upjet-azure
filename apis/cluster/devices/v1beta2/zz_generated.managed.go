@@ -5,104 +5,104 @@
 
 package v1beta2
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this IOTHub.
-func (mg *IOTHub) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *IOTHub) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this IOTHub.
-func (mg *IOTHub) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *IOTHub) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this IOTHub.
-func (mg *IOTHub) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *IOTHub) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this IOTHub.
-func (mg *IOTHub) GetProviderConfigReference() *xpv1.Reference {
+func (mg *IOTHub) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this IOTHub.
-func (mg *IOTHub) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *IOTHub) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this IOTHub.
-func (mg *IOTHub) SetConditions(c ...xpv1.Condition) {
+func (mg *IOTHub) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this IOTHub.
-func (mg *IOTHub) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *IOTHub) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this IOTHub.
-func (mg *IOTHub) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *IOTHub) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this IOTHub.
-func (mg *IOTHub) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *IOTHub) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this IOTHub.
-func (mg *IOTHub) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *IOTHub) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this IOTHubDPS.
-func (mg *IOTHubDPS) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *IOTHubDPS) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this IOTHubDPS.
-func (mg *IOTHubDPS) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *IOTHubDPS) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this IOTHubDPS.
-func (mg *IOTHubDPS) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *IOTHubDPS) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this IOTHubDPS.
-func (mg *IOTHubDPS) GetProviderConfigReference() *xpv1.Reference {
+func (mg *IOTHubDPS) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this IOTHubDPS.
-func (mg *IOTHubDPS) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *IOTHubDPS) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this IOTHubDPS.
-func (mg *IOTHubDPS) SetConditions(c ...xpv1.Condition) {
+func (mg *IOTHubDPS) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this IOTHubDPS.
-func (mg *IOTHubDPS) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *IOTHubDPS) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this IOTHubDPS.
-func (mg *IOTHubDPS) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *IOTHubDPS) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this IOTHubDPS.
-func (mg *IOTHubDPS) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *IOTHubDPS) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this IOTHubDPS.
-func (mg *IOTHubDPS) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *IOTHubDPS) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

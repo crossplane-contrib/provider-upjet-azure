@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type RetentionPolicyInitParameters struct {
@@ -57,11 +57,11 @@ type TrafficAnalyticsInitParameters struct {
 
 	// Reference to a Workspace in operationalinsights to populate workspaceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceIDRef *v1.Reference `json:"workspaceIdRef,omitempty" tf:"-"`
+	WorkspaceIDRef *v2.Reference `json:"workspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in operationalinsights to populate workspaceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceIDSelector *v1.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
+	WorkspaceIDSelector *v2.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
 
 	// The location of the attached workspace.
 	WorkspaceRegion *string `json:"workspaceRegion,omitempty" tf:"workspace_region,omitempty"`
@@ -73,11 +73,11 @@ type TrafficAnalyticsInitParameters struct {
 
 	// Reference to a Workspace in operationalinsights to populate workspaceResourceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceResourceIDRef *v1.Reference `json:"workspaceResourceIdRef,omitempty" tf:"-"`
+	WorkspaceResourceIDRef *v2.Reference `json:"workspaceResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in operationalinsights to populate workspaceResourceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceResourceIDSelector *v1.Selector `json:"workspaceResourceIdSelector,omitempty" tf:"-"`
+	WorkspaceResourceIDSelector *v2.Selector `json:"workspaceResourceIdSelector,omitempty" tf:"-"`
 }
 
 type TrafficAnalyticsObservation struct {
@@ -116,11 +116,11 @@ type TrafficAnalyticsParameters struct {
 
 	// Reference to a Workspace in operationalinsights to populate workspaceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceIDRef *v1.Reference `json:"workspaceIdRef,omitempty" tf:"-"`
+	WorkspaceIDRef *v2.Reference `json:"workspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in operationalinsights to populate workspaceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceIDSelector *v1.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
+	WorkspaceIDSelector *v2.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
 
 	// The location of the attached workspace.
 	// +kubebuilder:validation:Optional
@@ -134,11 +134,11 @@ type TrafficAnalyticsParameters struct {
 
 	// Reference to a Workspace in operationalinsights to populate workspaceResourceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceResourceIDRef *v1.Reference `json:"workspaceResourceIdRef,omitempty" tf:"-"`
+	WorkspaceResourceIDRef *v2.Reference `json:"workspaceResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in operationalinsights to populate workspaceResourceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceResourceIDSelector *v1.Selector `json:"workspaceResourceIdSelector,omitempty" tf:"-"`
+	WorkspaceResourceIDSelector *v2.Selector `json:"workspaceResourceIdSelector,omitempty" tf:"-"`
 }
 
 type WatcherFlowLogInitParameters struct {
@@ -156,11 +156,11 @@ type WatcherFlowLogInitParameters struct {
 
 	// Reference to a SecurityGroup in network to populate networkSecurityGroupId.
 	// +kubebuilder:validation:Optional
-	NetworkSecurityGroupIDRef *v1.Reference `json:"networkSecurityGroupIdRef,omitempty" tf:"-"`
+	NetworkSecurityGroupIDRef *v2.Reference `json:"networkSecurityGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a SecurityGroup in network to populate networkSecurityGroupId.
 	// +kubebuilder:validation:Optional
-	NetworkSecurityGroupIDSelector *v1.Selector `json:"networkSecurityGroupIdSelector,omitempty" tf:"-"`
+	NetworkSecurityGroupIDSelector *v2.Selector `json:"networkSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// A retention_policy block as documented below.
 	RetentionPolicy []RetentionPolicyInitParameters `json:"retentionPolicy,omitempty" tf:"retention_policy,omitempty"`
@@ -172,11 +172,11 @@ type WatcherFlowLogInitParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+	StorageAccountIDRef *v2.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+	StorageAccountIDSelector *v2.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Network Watcher Flow Log.
 	// +mapType=granular
@@ -189,11 +189,11 @@ type WatcherFlowLogInitParameters struct {
 
 	// Reference to a SecurityGroup in network to populate targetResourceId.
 	// +kubebuilder:validation:Optional
-	TargetResourceIDRef *v1.Reference `json:"targetResourceIdRef,omitempty" tf:"-"`
+	TargetResourceIDRef *v2.Reference `json:"targetResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a SecurityGroup in network to populate targetResourceId.
 	// +kubebuilder:validation:Optional
-	TargetResourceIDSelector *v1.Selector `json:"targetResourceIdSelector,omitempty" tf:"-"`
+	TargetResourceIDSelector *v2.Selector `json:"targetResourceIdSelector,omitempty" tf:"-"`
 
 	// A traffic_analytics block as documented below.
 	TrafficAnalytics []TrafficAnalyticsInitParameters `json:"trafficAnalytics,omitempty" tf:"traffic_analytics,omitempty"`
@@ -260,11 +260,11 @@ type WatcherFlowLogParameters struct {
 
 	// Reference to a SecurityGroup in network to populate networkSecurityGroupId.
 	// +kubebuilder:validation:Optional
-	NetworkSecurityGroupIDRef *v1.Reference `json:"networkSecurityGroupIdRef,omitempty" tf:"-"`
+	NetworkSecurityGroupIDRef *v2.Reference `json:"networkSecurityGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a SecurityGroup in network to populate networkSecurityGroupId.
 	// +kubebuilder:validation:Optional
-	NetworkSecurityGroupIDSelector *v1.Selector `json:"networkSecurityGroupIdSelector,omitempty" tf:"-"`
+	NetworkSecurityGroupIDSelector *v2.Selector `json:"networkSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// The name of the Network Watcher. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta1.Watcher
@@ -273,11 +273,11 @@ type WatcherFlowLogParameters struct {
 
 	// Reference to a Watcher in network to populate networkWatcherName.
 	// +kubebuilder:validation:Optional
-	NetworkWatcherNameRef *v1.Reference `json:"networkWatcherNameRef,omitempty" tf:"-"`
+	NetworkWatcherNameRef *v2.Reference `json:"networkWatcherNameRef,omitempty" tf:"-"`
 
 	// Selector for a Watcher in network to populate networkWatcherName.
 	// +kubebuilder:validation:Optional
-	NetworkWatcherNameSelector *v1.Selector `json:"networkWatcherNameSelector,omitempty" tf:"-"`
+	NetworkWatcherNameSelector *v2.Selector `json:"networkWatcherNameSelector,omitempty" tf:"-"`
 
 	// The name of the resource group in which the Network Watcher was deployed. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
@@ -286,11 +286,11 @@ type WatcherFlowLogParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A retention_policy block as documented below.
 	// +kubebuilder:validation:Optional
@@ -304,11 +304,11 @@ type WatcherFlowLogParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+	StorageAccountIDRef *v2.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+	StorageAccountIDSelector *v2.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Network Watcher Flow Log.
 	// +kubebuilder:validation:Optional
@@ -323,11 +323,11 @@ type WatcherFlowLogParameters struct {
 
 	// Reference to a SecurityGroup in network to populate targetResourceId.
 	// +kubebuilder:validation:Optional
-	TargetResourceIDRef *v1.Reference `json:"targetResourceIdRef,omitempty" tf:"-"`
+	TargetResourceIDRef *v2.Reference `json:"targetResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a SecurityGroup in network to populate targetResourceId.
 	// +kubebuilder:validation:Optional
-	TargetResourceIDSelector *v1.Selector `json:"targetResourceIdSelector,omitempty" tf:"-"`
+	TargetResourceIDSelector *v2.Selector `json:"targetResourceIdSelector,omitempty" tf:"-"`
 
 	// A traffic_analytics block as documented below.
 	// +kubebuilder:validation:Optional
@@ -340,8 +340,8 @@ type WatcherFlowLogParameters struct {
 
 // WatcherFlowLogSpec defines the desired state of WatcherFlowLog
 type WatcherFlowLogSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     WatcherFlowLogParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   WatcherFlowLogParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -357,8 +357,8 @@ type WatcherFlowLogSpec struct {
 
 // WatcherFlowLogStatus defines the observed state of WatcherFlowLog.
 type WatcherFlowLogStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        WatcherFlowLogObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               WatcherFlowLogObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CustomBGPAddressesInitParameters struct {
@@ -74,7 +74,7 @@ type TrafficSelectorPolicyParameters struct {
 type VirtualNetworkGatewayConnectionInitParameters struct {
 
 	// The authorization key associated with the Express Route Circuit. This field is required only if the type is an ExpressRoute connection.
-	AuthorizationKeySecretRef *v1.SecretKeySelector `json:"authorizationKeySecretRef,omitempty" tf:"-"`
+	AuthorizationKeySecretRef *v2.SecretKeySelector `json:"authorizationKeySecretRef,omitempty" tf:"-"`
 
 	// If true, BGP (Border Gateway Protocol) is enabled for this connection. Defaults to false.
 	BGPEnabled *bool `json:"bgpEnabled,omitempty" tf:"bgp_enabled,omitempty"`
@@ -125,11 +125,11 @@ type VirtualNetworkGatewayConnectionInitParameters struct {
 
 	// Reference to a LocalNetworkGateway in network to populate localNetworkGatewayId.
 	// +kubebuilder:validation:Optional
-	LocalNetworkGatewayIDRef *v1.Reference `json:"localNetworkGatewayIdRef,omitempty" tf:"-"`
+	LocalNetworkGatewayIDRef *v2.Reference `json:"localNetworkGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a LocalNetworkGateway in network to populate localNetworkGatewayId.
 	// +kubebuilder:validation:Optional
-	LocalNetworkGatewayIDSelector *v1.Selector `json:"localNetworkGatewayIdSelector,omitempty" tf:"-"`
+	LocalNetworkGatewayIDSelector *v2.Selector `json:"localNetworkGatewayIdSelector,omitempty" tf:"-"`
 
 	// The location/region where the connection is located. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -141,11 +141,11 @@ type VirtualNetworkGatewayConnectionInitParameters struct {
 
 	// Reference to a VirtualNetworkGateway in network to populate peerVirtualNetworkGatewayId.
 	// +kubebuilder:validation:Optional
-	PeerVirtualNetworkGatewayIDRef *v1.Reference `json:"peerVirtualNetworkGatewayIdRef,omitempty" tf:"-"`
+	PeerVirtualNetworkGatewayIDRef *v2.Reference `json:"peerVirtualNetworkGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualNetworkGateway in network to populate peerVirtualNetworkGatewayId.
 	// +kubebuilder:validation:Optional
-	PeerVirtualNetworkGatewayIDSelector *v1.Selector `json:"peerVirtualNetworkGatewayIdSelector,omitempty" tf:"-"`
+	PeerVirtualNetworkGatewayIDSelector *v2.Selector `json:"peerVirtualNetworkGatewayIdSelector,omitempty" tf:"-"`
 
 	// Bypass the Express Route gateway when accessing private-links. When enabled express_route_gateway_bypass must be set to true. Defaults to false.
 	PrivateLinkFastPathEnabled *bool `json:"privateLinkFastPathEnabled,omitempty" tf:"private_link_fast_path_enabled,omitempty"`
@@ -154,7 +154,7 @@ type VirtualNetworkGatewayConnectionInitParameters struct {
 	RoutingWeight *float64 `json:"routingWeight,omitempty" tf:"routing_weight,omitempty"`
 
 	// The shared IPSec key. A key could be provided if a Site-to-Site, VNet-to-VNet or ExpressRoute connection is created.
-	SharedKeySecretRef *v1.SecretKeySelector `json:"sharedKeySecretRef,omitempty" tf:"-"`
+	SharedKeySecretRef *v2.SecretKeySelector `json:"sharedKeySecretRef,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
 	// +mapType=granular
@@ -178,11 +178,11 @@ type VirtualNetworkGatewayConnectionInitParameters struct {
 
 	// Reference to a VirtualNetworkGateway in network to populate virtualNetworkGatewayId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkGatewayIDRef *v1.Reference `json:"virtualNetworkGatewayIdRef,omitempty" tf:"-"`
+	VirtualNetworkGatewayIDRef *v2.Reference `json:"virtualNetworkGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualNetworkGateway in network to populate virtualNetworkGatewayId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkGatewayIDSelector *v1.Selector `json:"virtualNetworkGatewayIdSelector,omitempty" tf:"-"`
+	VirtualNetworkGatewayIDSelector *v2.Selector `json:"virtualNetworkGatewayIdSelector,omitempty" tf:"-"`
 }
 
 type VirtualNetworkGatewayConnectionIpsecPolicyInitParameters struct {
@@ -368,7 +368,7 @@ type VirtualNetworkGatewayConnectionParameters struct {
 
 	// The authorization key associated with the Express Route Circuit. This field is required only if the type is an ExpressRoute connection.
 	// +kubebuilder:validation:Optional
-	AuthorizationKeySecretRef *v1.SecretKeySelector `json:"authorizationKeySecretRef,omitempty" tf:"-"`
+	AuthorizationKeySecretRef *v2.SecretKeySelector `json:"authorizationKeySecretRef,omitempty" tf:"-"`
 
 	// If true, BGP (Border Gateway Protocol) is enabled for this connection. Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -432,11 +432,11 @@ type VirtualNetworkGatewayConnectionParameters struct {
 
 	// Reference to a LocalNetworkGateway in network to populate localNetworkGatewayId.
 	// +kubebuilder:validation:Optional
-	LocalNetworkGatewayIDRef *v1.Reference `json:"localNetworkGatewayIdRef,omitempty" tf:"-"`
+	LocalNetworkGatewayIDRef *v2.Reference `json:"localNetworkGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a LocalNetworkGateway in network to populate localNetworkGatewayId.
 	// +kubebuilder:validation:Optional
-	LocalNetworkGatewayIDSelector *v1.Selector `json:"localNetworkGatewayIdSelector,omitempty" tf:"-"`
+	LocalNetworkGatewayIDSelector *v2.Selector `json:"localNetworkGatewayIdSelector,omitempty" tf:"-"`
 
 	// The location/region where the connection is located. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -450,11 +450,11 @@ type VirtualNetworkGatewayConnectionParameters struct {
 
 	// Reference to a VirtualNetworkGateway in network to populate peerVirtualNetworkGatewayId.
 	// +kubebuilder:validation:Optional
-	PeerVirtualNetworkGatewayIDRef *v1.Reference `json:"peerVirtualNetworkGatewayIdRef,omitempty" tf:"-"`
+	PeerVirtualNetworkGatewayIDRef *v2.Reference `json:"peerVirtualNetworkGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualNetworkGateway in network to populate peerVirtualNetworkGatewayId.
 	// +kubebuilder:validation:Optional
-	PeerVirtualNetworkGatewayIDSelector *v1.Selector `json:"peerVirtualNetworkGatewayIdSelector,omitempty" tf:"-"`
+	PeerVirtualNetworkGatewayIDSelector *v2.Selector `json:"peerVirtualNetworkGatewayIdSelector,omitempty" tf:"-"`
 
 	// Bypass the Express Route gateway when accessing private-links. When enabled express_route_gateway_bypass must be set to true. Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -467,11 +467,11 @@ type VirtualNetworkGatewayConnectionParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The routing weight. Defaults to 10.
 	// +kubebuilder:validation:Optional
@@ -479,7 +479,7 @@ type VirtualNetworkGatewayConnectionParameters struct {
 
 	// The shared IPSec key. A key could be provided if a Site-to-Site, VNet-to-VNet or ExpressRoute connection is created.
 	// +kubebuilder:validation:Optional
-	SharedKeySecretRef *v1.SecretKeySelector `json:"sharedKeySecretRef,omitempty" tf:"-"`
+	SharedKeySecretRef *v2.SecretKeySelector `json:"sharedKeySecretRef,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
@@ -508,17 +508,17 @@ type VirtualNetworkGatewayConnectionParameters struct {
 
 	// Reference to a VirtualNetworkGateway in network to populate virtualNetworkGatewayId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkGatewayIDRef *v1.Reference `json:"virtualNetworkGatewayIdRef,omitempty" tf:"-"`
+	VirtualNetworkGatewayIDRef *v2.Reference `json:"virtualNetworkGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualNetworkGateway in network to populate virtualNetworkGatewayId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkGatewayIDSelector *v1.Selector `json:"virtualNetworkGatewayIdSelector,omitempty" tf:"-"`
+	VirtualNetworkGatewayIDSelector *v2.Selector `json:"virtualNetworkGatewayIdSelector,omitempty" tf:"-"`
 }
 
 // VirtualNetworkGatewayConnectionSpec defines the desired state of VirtualNetworkGatewayConnection
 type VirtualNetworkGatewayConnectionSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     VirtualNetworkGatewayConnectionParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   VirtualNetworkGatewayConnectionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -534,8 +534,8 @@ type VirtualNetworkGatewayConnectionSpec struct {
 
 // VirtualNetworkGatewayConnectionStatus defines the observed state of VirtualNetworkGatewayConnection.
 type VirtualNetworkGatewayConnectionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VirtualNetworkGatewayConnectionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VirtualNetworkGatewayConnectionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CipherSuiteInitParameters struct {
@@ -87,11 +86,11 @@ type FrontdoorCustomDomainInitParameters struct {
 
 	// Reference to a DNSZone in network to populate dnsZoneId.
 	// +kubebuilder:validation:Optional
-	DNSZoneIDRef *v1.NamespacedReference `json:"dnsZoneIdRef,omitempty" tf:"-"`
+	DNSZoneIDRef *v2.NamespacedReference `json:"dnsZoneIdRef,omitempty" tf:"-"`
 
 	// Selector for a DNSZone in network to populate dnsZoneId.
 	// +kubebuilder:validation:Optional
-	DNSZoneIDSelector *v1.NamespacedSelector `json:"dnsZoneIdSelector,omitempty" tf:"-"`
+	DNSZoneIDSelector *v2.NamespacedSelector `json:"dnsZoneIdSelector,omitempty" tf:"-"`
 
 	// The host name of the domain. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cdn/v1beta1.FrontdoorOrigin
@@ -100,11 +99,11 @@ type FrontdoorCustomDomainInitParameters struct {
 
 	// Reference to a FrontdoorOrigin in cdn to populate hostName.
 	// +kubebuilder:validation:Optional
-	HostNameRef *v1.NamespacedReference `json:"hostNameRef,omitempty" tf:"-"`
+	HostNameRef *v2.NamespacedReference `json:"hostNameRef,omitempty" tf:"-"`
 
 	// Selector for a FrontdoorOrigin in cdn to populate hostName.
 	// +kubebuilder:validation:Optional
-	HostNameSelector *v1.NamespacedSelector `json:"hostNameSelector,omitempty" tf:"-"`
+	HostNameSelector *v2.NamespacedSelector `json:"hostNameSelector,omitempty" tf:"-"`
 
 	// A tls block as defined below.
 	TLS *TLSInitParameters `json:"tls,omitempty" tf:"tls,omitempty"`
@@ -144,11 +143,11 @@ type FrontdoorCustomDomainParameters struct {
 
 	// Reference to a FrontdoorProfile in cdn to populate cdnFrontdoorProfileId.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorProfileIDRef *v1.NamespacedReference `json:"cdnFrontdoorProfileIdRef,omitempty" tf:"-"`
+	CdnFrontdoorProfileIDRef *v2.NamespacedReference `json:"cdnFrontdoorProfileIdRef,omitempty" tf:"-"`
 
 	// Selector for a FrontdoorProfile in cdn to populate cdnFrontdoorProfileId.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorProfileIDSelector *v1.NamespacedSelector `json:"cdnFrontdoorProfileIdSelector,omitempty" tf:"-"`
+	CdnFrontdoorProfileIDSelector *v2.NamespacedSelector `json:"cdnFrontdoorProfileIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Azure DNS Zone which should be used for this Front Door Custom Domain.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.DNSZone
@@ -158,11 +157,11 @@ type FrontdoorCustomDomainParameters struct {
 
 	// Reference to a DNSZone in network to populate dnsZoneId.
 	// +kubebuilder:validation:Optional
-	DNSZoneIDRef *v1.NamespacedReference `json:"dnsZoneIdRef,omitempty" tf:"-"`
+	DNSZoneIDRef *v2.NamespacedReference `json:"dnsZoneIdRef,omitempty" tf:"-"`
 
 	// Selector for a DNSZone in network to populate dnsZoneId.
 	// +kubebuilder:validation:Optional
-	DNSZoneIDSelector *v1.NamespacedSelector `json:"dnsZoneIdSelector,omitempty" tf:"-"`
+	DNSZoneIDSelector *v2.NamespacedSelector `json:"dnsZoneIdSelector,omitempty" tf:"-"`
 
 	// The host name of the domain. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cdn/v1beta1.FrontdoorOrigin
@@ -172,11 +171,11 @@ type FrontdoorCustomDomainParameters struct {
 
 	// Reference to a FrontdoorOrigin in cdn to populate hostName.
 	// +kubebuilder:validation:Optional
-	HostNameRef *v1.NamespacedReference `json:"hostNameRef,omitempty" tf:"-"`
+	HostNameRef *v2.NamespacedReference `json:"hostNameRef,omitempty" tf:"-"`
 
 	// Selector for a FrontdoorOrigin in cdn to populate hostName.
 	// +kubebuilder:validation:Optional
-	HostNameSelector *v1.NamespacedSelector `json:"hostNameSelector,omitempty" tf:"-"`
+	HostNameSelector *v2.NamespacedSelector `json:"hostNameSelector,omitempty" tf:"-"`
 
 	// A tls block as defined below.
 	// +kubebuilder:validation:Optional
@@ -258,8 +257,8 @@ type FrontdoorCustomDomainSpec struct {
 
 // FrontdoorCustomDomainStatus defines the observed state of FrontdoorCustomDomain.
 type FrontdoorCustomDomainStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FrontdoorCustomDomainObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FrontdoorCustomDomainObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ManagedStorageAccountInitParameters struct {
@@ -22,11 +22,11 @@ type ManagedStorageAccountInitParameters struct {
 
 	// Reference to a Vault in keyvault to populate keyVaultId.
 	// +kubebuilder:validation:Optional
-	KeyVaultIDRef *v1.Reference `json:"keyVaultIdRef,omitempty" tf:"-"`
+	KeyVaultIDRef *v2.Reference `json:"keyVaultIdRef,omitempty" tf:"-"`
 
 	// Selector for a Vault in keyvault to populate keyVaultId.
 	// +kubebuilder:validation:Optional
-	KeyVaultIDSelector *v1.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
+	KeyVaultIDSelector *v2.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
 
 	// Should Storage Account access key be regenerated periodically?
 	RegenerateKeyAutomatically *bool `json:"regenerateKeyAutomatically,omitempty" tf:"regenerate_key_automatically,omitempty"`
@@ -41,11 +41,11 @@ type ManagedStorageAccountInitParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+	StorageAccountIDRef *v2.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+	StorageAccountIDSelector *v2.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 
 	// Which Storage Account access key that is managed by Key Vault. Possible values are key1 and key2.
 	StorageAccountKey *string `json:"storageAccountKey,omitempty" tf:"storage_account_key,omitempty"`
@@ -90,11 +90,11 @@ type ManagedStorageAccountParameters struct {
 
 	// Reference to a Vault in keyvault to populate keyVaultId.
 	// +kubebuilder:validation:Optional
-	KeyVaultIDRef *v1.Reference `json:"keyVaultIdRef,omitempty" tf:"-"`
+	KeyVaultIDRef *v2.Reference `json:"keyVaultIdRef,omitempty" tf:"-"`
 
 	// Selector for a Vault in keyvault to populate keyVaultId.
 	// +kubebuilder:validation:Optional
-	KeyVaultIDSelector *v1.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
+	KeyVaultIDSelector *v2.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
 
 	// Should Storage Account access key be regenerated periodically?
 	// +kubebuilder:validation:Optional
@@ -112,11 +112,11 @@ type ManagedStorageAccountParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+	StorageAccountIDRef *v2.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+	StorageAccountIDSelector *v2.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 
 	// Which Storage Account access key that is managed by Key Vault. Possible values are key1 and key2.
 	// +kubebuilder:validation:Optional
@@ -130,8 +130,8 @@ type ManagedStorageAccountParameters struct {
 
 // ManagedStorageAccountSpec defines the desired state of ManagedStorageAccount
 type ManagedStorageAccountSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ManagedStorageAccountParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ManagedStorageAccountParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -147,8 +147,8 @@ type ManagedStorageAccountSpec struct {
 
 // ManagedStorageAccountStatus defines the observed state of ManagedStorageAccount.
 type ManagedStorageAccountStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ManagedStorageAccountObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ManagedStorageAccountObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

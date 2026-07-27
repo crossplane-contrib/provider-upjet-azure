@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type APNSCredentialInitParameters struct {
@@ -29,7 +28,7 @@ type APNSCredentialInitParameters struct {
 	TeamID *string `json:"teamId,omitempty" tf:"team_id,omitempty"`
 
 	// The Push Token associated with the Apple Developer Account. This is the contents of the key downloaded from the Apple Developer Portal between the -----BEGIN PRIVATE KEY----- and -----END PRIVATE KEY----- blocks.
-	TokenSecretRef v1.LocalSecretKeySelector `json:"tokenSecretRef" tf:"-"`
+	TokenSecretRef v2.LocalSecretKeySelector `json:"tokenSecretRef" tf:"-"`
 }
 
 type APNSCredentialObservation struct {
@@ -67,7 +66,7 @@ type APNSCredentialParameters struct {
 
 	// The Push Token associated with the Apple Developer Account. This is the contents of the key downloaded from the Apple Developer Portal between the -----BEGIN PRIVATE KEY----- and -----END PRIVATE KEY----- blocks.
 	// +kubebuilder:validation:Optional
-	TokenSecretRef v1.LocalSecretKeySelector `json:"tokenSecretRef" tf:"-"`
+	TokenSecretRef v2.LocalSecretKeySelector `json:"tokenSecretRef" tf:"-"`
 }
 
 type BrowserCredentialInitParameters struct {
@@ -76,7 +75,7 @@ type BrowserCredentialInitParameters struct {
 	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
 
 	// The Voluntary Application Server Identification (VAPID) private key.
-	VapidPrivateKeySecretRef v1.LocalSecretKeySelector `json:"vapidPrivateKeySecretRef" tf:"-"`
+	VapidPrivateKeySecretRef v2.LocalSecretKeySelector `json:"vapidPrivateKeySecretRef" tf:"-"`
 
 	// The Voluntary Application Server Identification (VAPID) public key.
 	VapidPublicKey *string `json:"vapidPublicKey,omitempty" tf:"vapid_public_key,omitempty"`
@@ -99,7 +98,7 @@ type BrowserCredentialParameters struct {
 
 	// The Voluntary Application Server Identification (VAPID) private key.
 	// +kubebuilder:validation:Optional
-	VapidPrivateKeySecretRef v1.LocalSecretKeySelector `json:"vapidPrivateKeySecretRef" tf:"-"`
+	VapidPrivateKeySecretRef v2.LocalSecretKeySelector `json:"vapidPrivateKeySecretRef" tf:"-"`
 
 	// The Voluntary Application Server Identification (VAPID) public key.
 	// +kubebuilder:validation:Optional
@@ -109,7 +108,7 @@ type BrowserCredentialParameters struct {
 type GCMCredentialInitParameters struct {
 
 	// The API Key associated with the Google Cloud Messaging service.
-	APIKeySecretRef v1.LocalSecretKeySelector `json:"apiKeySecretRef" tf:"-"`
+	APIKeySecretRef v2.LocalSecretKeySelector `json:"apiKeySecretRef" tf:"-"`
 }
 
 type GCMCredentialObservation struct {
@@ -119,7 +118,7 @@ type GCMCredentialParameters struct {
 
 	// The API Key associated with the Google Cloud Messaging service.
 	// +kubebuilder:validation:Optional
-	APIKeySecretRef v1.LocalSecretKeySelector `json:"apiKeySecretRef" tf:"-"`
+	APIKeySecretRef v2.LocalSecretKeySelector `json:"apiKeySecretRef" tf:"-"`
 }
 
 type NotificationHubInitParameters struct {
@@ -194,11 +193,11 @@ type NotificationHubParameters struct {
 
 	// Reference to a NotificationHubNamespace in notificationhubs to populate namespaceName.
 	// +kubebuilder:validation:Optional
-	NamespaceNameRef *v1.NamespacedReference `json:"namespaceNameRef,omitempty" tf:"-"`
+	NamespaceNameRef *v2.NamespacedReference `json:"namespaceNameRef,omitempty" tf:"-"`
 
 	// Selector for a NotificationHubNamespace in notificationhubs to populate namespaceName.
 	// +kubebuilder:validation:Optional
-	NamespaceNameSelector *v1.NamespacedSelector `json:"namespaceNameSelector,omitempty" tf:"-"`
+	NamespaceNameSelector *v2.NamespacedSelector `json:"namespaceNameSelector,omitempty" tf:"-"`
 
 	// The name of the Resource Group in which the Notification Hub Namespace exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
@@ -207,11 +206,11 @@ type NotificationHubParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
@@ -238,8 +237,8 @@ type NotificationHubSpec struct {
 
 // NotificationHubStatus defines the observed state of NotificationHub.
 type NotificationHubStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        NotificationHubObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               NotificationHubObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

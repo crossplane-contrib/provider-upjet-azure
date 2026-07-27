@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type OverridesSelectorsInitParameters struct {
@@ -130,11 +129,11 @@ type ResourceGroupPolicyAssignmentInitParameters struct {
 
 	// Reference to a PolicyDefinition in authorization to populate policyDefinitionId.
 	// +kubebuilder:validation:Optional
-	PolicyDefinitionIDRef *v1.NamespacedReference `json:"policyDefinitionIdRef,omitempty" tf:"-"`
+	PolicyDefinitionIDRef *v2.NamespacedReference `json:"policyDefinitionIdRef,omitempty" tf:"-"`
 
 	// Selector for a PolicyDefinition in authorization to populate policyDefinitionId.
 	// +kubebuilder:validation:Optional
-	PolicyDefinitionIDSelector *v1.NamespacedSelector `json:"policyDefinitionIdSelector,omitempty" tf:"-"`
+	PolicyDefinitionIDSelector *v2.NamespacedSelector `json:"policyDefinitionIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Resource Group where this Policy Assignment should be created. Changing this forces a new Policy Assignment to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
@@ -143,11 +142,11 @@ type ResourceGroupPolicyAssignmentInitParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupId.
 	// +kubebuilder:validation:Optional
-	ResourceGroupIDRef *v1.NamespacedReference `json:"resourceGroupIdRef,omitempty" tf:"-"`
+	ResourceGroupIDRef *v2.NamespacedReference `json:"resourceGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupId.
 	// +kubebuilder:validation:Optional
-	ResourceGroupIDSelector *v1.NamespacedSelector `json:"resourceGroupIdSelector,omitempty" tf:"-"`
+	ResourceGroupIDSelector *v2.NamespacedSelector `json:"resourceGroupIdSelector,omitempty" tf:"-"`
 
 	// One or more resource_selectors blocks as defined below to filter polices by resource properties.
 	ResourceSelectors []ResourceGroupPolicyAssignmentResourceSelectorsInitParameters `json:"resourceSelectors,omitempty" tf:"resource_selectors,omitempty"`
@@ -306,11 +305,11 @@ type ResourceGroupPolicyAssignmentParameters struct {
 
 	// Reference to a PolicyDefinition in authorization to populate policyDefinitionId.
 	// +kubebuilder:validation:Optional
-	PolicyDefinitionIDRef *v1.NamespacedReference `json:"policyDefinitionIdRef,omitempty" tf:"-"`
+	PolicyDefinitionIDRef *v2.NamespacedReference `json:"policyDefinitionIdRef,omitempty" tf:"-"`
 
 	// Selector for a PolicyDefinition in authorization to populate policyDefinitionId.
 	// +kubebuilder:validation:Optional
-	PolicyDefinitionIDSelector *v1.NamespacedSelector `json:"policyDefinitionIdSelector,omitempty" tf:"-"`
+	PolicyDefinitionIDSelector *v2.NamespacedSelector `json:"policyDefinitionIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Resource Group where this Policy Assignment should be created. Changing this forces a new Policy Assignment to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
@@ -320,11 +319,11 @@ type ResourceGroupPolicyAssignmentParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupId.
 	// +kubebuilder:validation:Optional
-	ResourceGroupIDRef *v1.NamespacedReference `json:"resourceGroupIdRef,omitempty" tf:"-"`
+	ResourceGroupIDRef *v2.NamespacedReference `json:"resourceGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupId.
 	// +kubebuilder:validation:Optional
-	ResourceGroupIDSelector *v1.NamespacedSelector `json:"resourceGroupIdSelector,omitempty" tf:"-"`
+	ResourceGroupIDSelector *v2.NamespacedSelector `json:"resourceGroupIdSelector,omitempty" tf:"-"`
 
 	// One or more resource_selectors blocks as defined below to filter polices by resource properties.
 	// +kubebuilder:validation:Optional
@@ -418,8 +417,8 @@ type ResourceGroupPolicyAssignmentSpec struct {
 
 // ResourceGroupPolicyAssignmentStatus defines the observed state of ResourceGroupPolicyAssignment.
 type ResourceGroupPolicyAssignmentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ResourceGroupPolicyAssignmentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ResourceGroupPolicyAssignmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

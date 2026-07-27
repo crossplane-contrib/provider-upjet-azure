@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SpringCloudAppCosmosDBAssociationInitParameters struct {
@@ -25,11 +25,11 @@ type SpringCloudAppCosmosDBAssociationInitParameters struct {
 
 	// Reference to a Account in cosmosdb to populate cosmosdbAccessKey.
 	// +kubebuilder:validation:Optional
-	CosmosDBAccessKeyRef *v1.Reference `json:"cosmosdbAccessKeyRef,omitempty" tf:"-"`
+	CosmosDBAccessKeyRef *v2.Reference `json:"cosmosdbAccessKeyRef,omitempty" tf:"-"`
 
 	// Selector for a Account in cosmosdb to populate cosmosdbAccessKey.
 	// +kubebuilder:validation:Optional
-	CosmosDBAccessKeySelector *v1.Selector `json:"cosmosdbAccessKeySelector,omitempty" tf:"-"`
+	CosmosDBAccessKeySelector *v2.Selector `json:"cosmosdbAccessKeySelector,omitempty" tf:"-"`
 
 	// Specifies the ID of the CosmosDB Account. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/cosmosdb/v1beta2.Account
@@ -38,11 +38,11 @@ type SpringCloudAppCosmosDBAssociationInitParameters struct {
 
 	// Reference to a Account in cosmosdb to populate cosmosdbAccountId.
 	// +kubebuilder:validation:Optional
-	CosmosDBAccountIDRef *v1.Reference `json:"cosmosdbAccountIdRef,omitempty" tf:"-"`
+	CosmosDBAccountIDRef *v2.Reference `json:"cosmosdbAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in cosmosdb to populate cosmosdbAccountId.
 	// +kubebuilder:validation:Optional
-	CosmosDBAccountIDSelector *v1.Selector `json:"cosmosdbAccountIdSelector,omitempty" tf:"-"`
+	CosmosDBAccountIDSelector *v2.Selector `json:"cosmosdbAccountIdSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the Cassandra Keyspace which the Spring Cloud App should be associated with. Should only be set when api_type is cassandra.
 	CosmosDBCassandraKeySpaceName *string `json:"cosmosdbCassandraKeyspaceName,omitempty" tf:"cosmosdb_cassandra_keyspace_name,omitempty"`
@@ -107,11 +107,11 @@ type SpringCloudAppCosmosDBAssociationParameters struct {
 
 	// Reference to a Account in cosmosdb to populate cosmosdbAccessKey.
 	// +kubebuilder:validation:Optional
-	CosmosDBAccessKeyRef *v1.Reference `json:"cosmosdbAccessKeyRef,omitempty" tf:"-"`
+	CosmosDBAccessKeyRef *v2.Reference `json:"cosmosdbAccessKeyRef,omitempty" tf:"-"`
 
 	// Selector for a Account in cosmosdb to populate cosmosdbAccessKey.
 	// +kubebuilder:validation:Optional
-	CosmosDBAccessKeySelector *v1.Selector `json:"cosmosdbAccessKeySelector,omitempty" tf:"-"`
+	CosmosDBAccessKeySelector *v2.Selector `json:"cosmosdbAccessKeySelector,omitempty" tf:"-"`
 
 	// Specifies the ID of the CosmosDB Account. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/cosmosdb/v1beta2.Account
@@ -121,11 +121,11 @@ type SpringCloudAppCosmosDBAssociationParameters struct {
 
 	// Reference to a Account in cosmosdb to populate cosmosdbAccountId.
 	// +kubebuilder:validation:Optional
-	CosmosDBAccountIDRef *v1.Reference `json:"cosmosdbAccountIdRef,omitempty" tf:"-"`
+	CosmosDBAccountIDRef *v2.Reference `json:"cosmosdbAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in cosmosdb to populate cosmosdbAccountId.
 	// +kubebuilder:validation:Optional
-	CosmosDBAccountIDSelector *v1.Selector `json:"cosmosdbAccountIdSelector,omitempty" tf:"-"`
+	CosmosDBAccountIDSelector *v2.Selector `json:"cosmosdbAccountIdSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the Cassandra Keyspace which the Spring Cloud App should be associated with. Should only be set when api_type is cassandra.
 	// +kubebuilder:validation:Optional
@@ -155,17 +155,17 @@ type SpringCloudAppCosmosDBAssociationParameters struct {
 
 	// Reference to a SpringCloudApp in appplatform to populate springCloudAppId.
 	// +kubebuilder:validation:Optional
-	SpringCloudAppIDRef *v1.Reference `json:"springCloudAppIdRef,omitempty" tf:"-"`
+	SpringCloudAppIDRef *v2.Reference `json:"springCloudAppIdRef,omitempty" tf:"-"`
 
 	// Selector for a SpringCloudApp in appplatform to populate springCloudAppId.
 	// +kubebuilder:validation:Optional
-	SpringCloudAppIDSelector *v1.Selector `json:"springCloudAppIdSelector,omitempty" tf:"-"`
+	SpringCloudAppIDSelector *v2.Selector `json:"springCloudAppIdSelector,omitempty" tf:"-"`
 }
 
 // SpringCloudAppCosmosDBAssociationSpec defines the desired state of SpringCloudAppCosmosDBAssociation
 type SpringCloudAppCosmosDBAssociationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SpringCloudAppCosmosDBAssociationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SpringCloudAppCosmosDBAssociationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -181,8 +181,8 @@ type SpringCloudAppCosmosDBAssociationSpec struct {
 
 // SpringCloudAppCosmosDBAssociationStatus defines the observed state of SpringCloudAppCosmosDBAssociation.
 type SpringCloudAppCosmosDBAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SpringCloudAppCosmosDBAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SpringCloudAppCosmosDBAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

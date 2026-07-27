@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AuthenticationInitParameters struct {
@@ -102,11 +101,11 @@ type ContainerAppInitParameters struct {
 
 	// Reference to a Environment in containerapp to populate containerAppEnvironmentId.
 	// +kubebuilder:validation:Optional
-	ContainerAppEnvironmentIDRef *v1.NamespacedReference `json:"containerAppEnvironmentIdRef,omitempty" tf:"-"`
+	ContainerAppEnvironmentIDRef *v2.NamespacedReference `json:"containerAppEnvironmentIdRef,omitempty" tf:"-"`
 
 	// Selector for a Environment in containerapp to populate containerAppEnvironmentId.
 	// +kubebuilder:validation:Optional
-	ContainerAppEnvironmentIDSelector *v1.NamespacedSelector `json:"containerAppEnvironmentIdSelector,omitempty" tf:"-"`
+	ContainerAppEnvironmentIDSelector *v2.NamespacedSelector `json:"containerAppEnvironmentIdSelector,omitempty" tf:"-"`
 
 	// A dapr block as detailed below.
 	Dapr *DaprInitParameters `json:"dapr,omitempty" tf:"dapr,omitempty"`
@@ -209,11 +208,11 @@ type ContainerAppParameters struct {
 
 	// Reference to a Environment in containerapp to populate containerAppEnvironmentId.
 	// +kubebuilder:validation:Optional
-	ContainerAppEnvironmentIDRef *v1.NamespacedReference `json:"containerAppEnvironmentIdRef,omitempty" tf:"-"`
+	ContainerAppEnvironmentIDRef *v2.NamespacedReference `json:"containerAppEnvironmentIdRef,omitempty" tf:"-"`
 
 	// Selector for a Environment in containerapp to populate containerAppEnvironmentId.
 	// +kubebuilder:validation:Optional
-	ContainerAppEnvironmentIDSelector *v1.NamespacedSelector `json:"containerAppEnvironmentIdSelector,omitempty" tf:"-"`
+	ContainerAppEnvironmentIDSelector *v2.NamespacedSelector `json:"containerAppEnvironmentIdSelector,omitempty" tf:"-"`
 
 	// A dapr block as detailed below.
 	// +kubebuilder:validation:Optional
@@ -242,11 +241,11 @@ type ContainerAppParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The revisions operational mode for the Container App. Possible values include Single and Multiple. In Single mode, a single revision is in operation at any given time. In Multiple mode, more than one revision can be active at a time and can be configured with load distribution via the traffic_weight block in the ingress configuration.
 	// +kubebuilder:validation:Optional
@@ -1592,11 +1591,11 @@ type SecretInitParameters struct {
 
 	// The secret name.
 	// The secret name.
-	NameSecretRef v1.LocalSecretKeySelector `json:"nameSecretRef" tf:"-"`
+	NameSecretRef v2.LocalSecretKeySelector `json:"nameSecretRef" tf:"-"`
 
 	// The value for this secret.
 	// The value for this secret.
-	ValueSecretRef *v1.LocalSecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
+	ValueSecretRef *v2.LocalSecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
 type SecretObservation struct {
@@ -1625,12 +1624,12 @@ type SecretParameters struct {
 	// The secret name.
 	// The secret name.
 	// +kubebuilder:validation:Optional
-	NameSecretRef v1.LocalSecretKeySelector `json:"nameSecretRef" tf:"-"`
+	NameSecretRef v2.LocalSecretKeySelector `json:"nameSecretRef" tf:"-"`
 
 	// The value for this secret.
 	// The value for this secret.
 	// +kubebuilder:validation:Optional
-	ValueSecretRef *v1.LocalSecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
+	ValueSecretRef *v2.LocalSecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
 type StartupProbeHeaderInitParameters struct {
@@ -2209,8 +2208,8 @@ type ContainerAppSpec struct {
 
 // ContainerAppStatus defines the observed state of ContainerApp.
 type ContainerAppStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ContainerAppObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ContainerAppObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

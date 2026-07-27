@@ -5,84 +5,84 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this ManagementGroup.
-func (mg *ManagementGroup) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *ManagementGroup) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this ManagementGroup.
-func (mg *ManagementGroup) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *ManagementGroup) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this ManagementGroup.
-func (mg *ManagementGroup) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *ManagementGroup) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this ManagementGroup.
-func (mg *ManagementGroup) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *ManagementGroup) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this ManagementGroup.
-func (mg *ManagementGroup) SetConditions(c ...xpv1.Condition) {
+func (mg *ManagementGroup) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this ManagementGroup.
-func (mg *ManagementGroup) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *ManagementGroup) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this ManagementGroup.
-func (mg *ManagementGroup) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *ManagementGroup) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this ManagementGroup.
-func (mg *ManagementGroup) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *ManagementGroup) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this ManagementGroupSubscriptionAssociation.
-func (mg *ManagementGroupSubscriptionAssociation) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *ManagementGroupSubscriptionAssociation) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this ManagementGroupSubscriptionAssociation.
-func (mg *ManagementGroupSubscriptionAssociation) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *ManagementGroupSubscriptionAssociation) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this ManagementGroupSubscriptionAssociation.
-func (mg *ManagementGroupSubscriptionAssociation) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *ManagementGroupSubscriptionAssociation) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this ManagementGroupSubscriptionAssociation.
-func (mg *ManagementGroupSubscriptionAssociation) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *ManagementGroupSubscriptionAssociation) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this ManagementGroupSubscriptionAssociation.
-func (mg *ManagementGroupSubscriptionAssociation) SetConditions(c ...xpv1.Condition) {
+func (mg *ManagementGroupSubscriptionAssociation) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this ManagementGroupSubscriptionAssociation.
-func (mg *ManagementGroupSubscriptionAssociation) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *ManagementGroupSubscriptionAssociation) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this ManagementGroupSubscriptionAssociation.
-func (mg *ManagementGroupSubscriptionAssociation) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *ManagementGroupSubscriptionAssociation) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this ManagementGroupSubscriptionAssociation.
-func (mg *ManagementGroupSubscriptionAssociation) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *ManagementGroupSubscriptionAssociation) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

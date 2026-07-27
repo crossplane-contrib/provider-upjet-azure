@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type PrivateDNSZoneVirtualNetworkLinkInitParameters struct {
@@ -32,11 +32,11 @@ type PrivateDNSZoneVirtualNetworkLinkInitParameters struct {
 
 	// Reference to a VirtualNetwork in network to populate virtualNetworkId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkIDRef *v1.Reference `json:"virtualNetworkIdRef,omitempty" tf:"-"`
+	VirtualNetworkIDRef *v2.Reference `json:"virtualNetworkIdRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualNetwork in network to populate virtualNetworkId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkIDSelector *v1.Selector `json:"virtualNetworkIdSelector,omitempty" tf:"-"`
+	VirtualNetworkIDSelector *v2.Selector `json:"virtualNetworkIdSelector,omitempty" tf:"-"`
 }
 
 type PrivateDNSZoneVirtualNetworkLinkObservation struct {
@@ -73,11 +73,11 @@ type PrivateDNSZoneVirtualNetworkLinkParameters struct {
 
 	// Reference to a PrivateDNSZone in network to populate privateDnsZoneName.
 	// +kubebuilder:validation:Optional
-	PrivateDNSZoneNameRef *v1.Reference `json:"privateDnsZoneNameRef,omitempty" tf:"-"`
+	PrivateDNSZoneNameRef *v2.Reference `json:"privateDnsZoneNameRef,omitempty" tf:"-"`
 
 	// Selector for a PrivateDNSZone in network to populate privateDnsZoneName.
 	// +kubebuilder:validation:Optional
-	PrivateDNSZoneNameSelector *v1.Selector `json:"privateDnsZoneNameSelector,omitempty" tf:"-"`
+	PrivateDNSZoneNameSelector *v2.Selector `json:"privateDnsZoneNameSelector,omitempty" tf:"-"`
 
 	// Is auto-registration of virtual machine records in the virtual network in the Private DNS zone enabled? Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -94,11 +94,11 @@ type PrivateDNSZoneVirtualNetworkLinkParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
@@ -113,17 +113,17 @@ type PrivateDNSZoneVirtualNetworkLinkParameters struct {
 
 	// Reference to a VirtualNetwork in network to populate virtualNetworkId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkIDRef *v1.Reference `json:"virtualNetworkIdRef,omitempty" tf:"-"`
+	VirtualNetworkIDRef *v2.Reference `json:"virtualNetworkIdRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualNetwork in network to populate virtualNetworkId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkIDSelector *v1.Selector `json:"virtualNetworkIdSelector,omitempty" tf:"-"`
+	VirtualNetworkIDSelector *v2.Selector `json:"virtualNetworkIdSelector,omitempty" tf:"-"`
 }
 
 // PrivateDNSZoneVirtualNetworkLinkSpec defines the desired state of PrivateDNSZoneVirtualNetworkLink
 type PrivateDNSZoneVirtualNetworkLinkSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     PrivateDNSZoneVirtualNetworkLinkParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   PrivateDNSZoneVirtualNetworkLinkParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -139,8 +139,8 @@ type PrivateDNSZoneVirtualNetworkLinkSpec struct {
 
 // PrivateDNSZoneVirtualNetworkLinkStatus defines the observed state of PrivateDNSZoneVirtualNetworkLink.
 type PrivateDNSZoneVirtualNetworkLinkStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PrivateDNSZoneVirtualNetworkLinkObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PrivateDNSZoneVirtualNetworkLinkObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

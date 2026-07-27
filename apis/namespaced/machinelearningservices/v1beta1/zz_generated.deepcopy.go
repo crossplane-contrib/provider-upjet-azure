@@ -9,7 +9,7 @@
 package v1beta1
 
 import (
-	"github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	"github.com/crossplane/crossplane/apis/v2/core/v2"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 )
 
@@ -50,12 +50,12 @@ func (in *AIFoundryInitParameters) DeepCopyInto(out *AIFoundryInitParameters) {
 	}
 	if in.ApplicationInsightsIDRef != nil {
 		in, out := &in.ApplicationInsightsIDRef, &out.ApplicationInsightsIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ApplicationInsightsIDSelector != nil {
 		in, out := &in.ApplicationInsightsIDSelector, &out.ApplicationInsightsIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ContainerRegistryID != nil {
@@ -65,12 +65,12 @@ func (in *AIFoundryInitParameters) DeepCopyInto(out *AIFoundryInitParameters) {
 	}
 	if in.ContainerRegistryIDRef != nil {
 		in, out := &in.ContainerRegistryIDRef, &out.ContainerRegistryIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ContainerRegistryIDSelector != nil {
 		in, out := &in.ContainerRegistryIDSelector, &out.ContainerRegistryIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Description != nil {
@@ -105,12 +105,12 @@ func (in *AIFoundryInitParameters) DeepCopyInto(out *AIFoundryInitParameters) {
 	}
 	if in.KeyVaultIDRef != nil {
 		in, out := &in.KeyVaultIDRef, &out.KeyVaultIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.KeyVaultIDSelector != nil {
 		in, out := &in.KeyVaultIDSelector, &out.KeyVaultIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Location != nil {
@@ -130,12 +130,12 @@ func (in *AIFoundryInitParameters) DeepCopyInto(out *AIFoundryInitParameters) {
 	}
 	if in.PrimaryUserAssignedIdentityRef != nil {
 		in, out := &in.PrimaryUserAssignedIdentityRef, &out.PrimaryUserAssignedIdentityRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.PrimaryUserAssignedIdentitySelector != nil {
 		in, out := &in.PrimaryUserAssignedIdentitySelector, &out.PrimaryUserAssignedIdentitySelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.PublicNetworkAccess != nil {
@@ -150,12 +150,12 @@ func (in *AIFoundryInitParameters) DeepCopyInto(out *AIFoundryInitParameters) {
 	}
 	if in.StorageAccountIDRef != nil {
 		in, out := &in.StorageAccountIDRef, &out.StorageAccountIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.StorageAccountIDSelector != nil {
 		in, out := &in.StorageAccountIDSelector, &out.StorageAccountIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Tags != nil {
@@ -344,12 +344,12 @@ func (in *AIFoundryParameters) DeepCopyInto(out *AIFoundryParameters) {
 	}
 	if in.ApplicationInsightsIDRef != nil {
 		in, out := &in.ApplicationInsightsIDRef, &out.ApplicationInsightsIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ApplicationInsightsIDSelector != nil {
 		in, out := &in.ApplicationInsightsIDSelector, &out.ApplicationInsightsIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ContainerRegistryID != nil {
@@ -359,12 +359,12 @@ func (in *AIFoundryParameters) DeepCopyInto(out *AIFoundryParameters) {
 	}
 	if in.ContainerRegistryIDRef != nil {
 		in, out := &in.ContainerRegistryIDRef, &out.ContainerRegistryIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ContainerRegistryIDSelector != nil {
 		in, out := &in.ContainerRegistryIDSelector, &out.ContainerRegistryIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Description != nil {
@@ -399,12 +399,12 @@ func (in *AIFoundryParameters) DeepCopyInto(out *AIFoundryParameters) {
 	}
 	if in.KeyVaultIDRef != nil {
 		in, out := &in.KeyVaultIDRef, &out.KeyVaultIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.KeyVaultIDSelector != nil {
 		in, out := &in.KeyVaultIDSelector, &out.KeyVaultIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Location != nil {
@@ -424,12 +424,12 @@ func (in *AIFoundryParameters) DeepCopyInto(out *AIFoundryParameters) {
 	}
 	if in.PrimaryUserAssignedIdentityRef != nil {
 		in, out := &in.PrimaryUserAssignedIdentityRef, &out.PrimaryUserAssignedIdentityRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.PrimaryUserAssignedIdentitySelector != nil {
 		in, out := &in.PrimaryUserAssignedIdentitySelector, &out.PrimaryUserAssignedIdentitySelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.PublicNetworkAccess != nil {
@@ -444,12 +444,12 @@ func (in *AIFoundryParameters) DeepCopyInto(out *AIFoundryParameters) {
 	}
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.StorageAccountID != nil {
@@ -459,12 +459,12 @@ func (in *AIFoundryParameters) DeepCopyInto(out *AIFoundryParameters) {
 	}
 	if in.StorageAccountIDRef != nil {
 		in, out := &in.StorageAccountIDRef, &out.StorageAccountIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.StorageAccountIDSelector != nil {
 		in, out := &in.StorageAccountIDSelector, &out.StorageAccountIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Tags != nil {
@@ -538,14 +538,14 @@ func (in *AIFoundryProjectIdentityInitParameters) DeepCopyInto(out *AIFoundryPro
 	}
 	if in.IdentityIdsRefs != nil {
 		in, out := &in.IdentityIdsRefs, &out.IdentityIdsRefs
-		*out = make([]v1.NamespacedReference, len(*in))
+		*out = make([]v2.NamespacedReference, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.IdentityIdsSelector != nil {
 		in, out := &in.IdentityIdsSelector, &out.IdentityIdsSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Type != nil {
@@ -622,14 +622,14 @@ func (in *AIFoundryProjectIdentityParameters) DeepCopyInto(out *AIFoundryProject
 	}
 	if in.IdentityIdsRefs != nil {
 		in, out := &in.IdentityIdsRefs, &out.IdentityIdsRefs
-		*out = make([]v1.NamespacedReference, len(*in))
+		*out = make([]v2.NamespacedReference, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.IdentityIdsSelector != nil {
 		in, out := &in.IdentityIdsSelector, &out.IdentityIdsSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Type != nil {
@@ -659,12 +659,12 @@ func (in *AIFoundryProjectInitParameters) DeepCopyInto(out *AIFoundryProjectInit
 	}
 	if in.AIServicesHubIDRef != nil {
 		in, out := &in.AIServicesHubIDRef, &out.AIServicesHubIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.AIServicesHubIDSelector != nil {
 		in, out := &in.AIServicesHubIDSelector, &out.AIServicesHubIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Description != nil {
@@ -699,12 +699,12 @@ func (in *AIFoundryProjectInitParameters) DeepCopyInto(out *AIFoundryProjectInit
 	}
 	if in.PrimaryUserAssignedIdentityRef != nil {
 		in, out := &in.PrimaryUserAssignedIdentityRef, &out.PrimaryUserAssignedIdentityRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.PrimaryUserAssignedIdentitySelector != nil {
 		in, out := &in.PrimaryUserAssignedIdentitySelector, &out.PrimaryUserAssignedIdentitySelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Tags != nil {
@@ -853,12 +853,12 @@ func (in *AIFoundryProjectParameters) DeepCopyInto(out *AIFoundryProjectParamete
 	}
 	if in.AIServicesHubIDRef != nil {
 		in, out := &in.AIServicesHubIDRef, &out.AIServicesHubIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.AIServicesHubIDSelector != nil {
 		in, out := &in.AIServicesHubIDSelector, &out.AIServicesHubIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Description != nil {
@@ -893,12 +893,12 @@ func (in *AIFoundryProjectParameters) DeepCopyInto(out *AIFoundryProjectParamete
 	}
 	if in.PrimaryUserAssignedIdentityRef != nil {
 		in, out := &in.PrimaryUserAssignedIdentityRef, &out.PrimaryUserAssignedIdentityRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.PrimaryUserAssignedIdentitySelector != nil {
 		in, out := &in.PrimaryUserAssignedIdentitySelector, &out.PrimaryUserAssignedIdentitySelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Tags != nil {
@@ -950,7 +950,7 @@ func (in *AIFoundryProjectSpec) DeepCopy() *AIFoundryProjectSpec {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *AIFoundryProjectStatus) DeepCopyInto(out *AIFoundryProjectStatus) {
 	*out = *in
-	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.ManagedResourceStatus.DeepCopyInto(&out.ManagedResourceStatus)
 	in.AtProvider.DeepCopyInto(&out.AtProvider)
 }
 
@@ -985,7 +985,7 @@ func (in *AIFoundrySpec) DeepCopy() *AIFoundrySpec {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *AIFoundryStatus) DeepCopyInto(out *AIFoundryStatus) {
 	*out = *in
-	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.ManagedResourceStatus.DeepCopyInto(&out.ManagedResourceStatus)
 	in.AtProvider.DeepCopyInto(&out.AtProvider)
 }
 
@@ -1234,12 +1234,12 @@ func (in *ComputeClusterInitParameters) DeepCopyInto(out *ComputeClusterInitPara
 	}
 	if in.MachineLearningWorkspaceIDRef != nil {
 		in, out := &in.MachineLearningWorkspaceIDRef, &out.MachineLearningWorkspaceIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.MachineLearningWorkspaceIDSelector != nil {
 		in, out := &in.MachineLearningWorkspaceIDSelector, &out.MachineLearningWorkspaceIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Name != nil {
@@ -1274,12 +1274,12 @@ func (in *ComputeClusterInitParameters) DeepCopyInto(out *ComputeClusterInitPara
 	}
 	if in.SubnetResourceIDRef != nil {
 		in, out := &in.SubnetResourceIDRef, &out.SubnetResourceIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.SubnetResourceIDSelector != nil {
 		in, out := &in.SubnetResourceIDSelector, &out.SubnetResourceIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Tags != nil {
@@ -1483,12 +1483,12 @@ func (in *ComputeClusterParameters) DeepCopyInto(out *ComputeClusterParameters) 
 	}
 	if in.MachineLearningWorkspaceIDRef != nil {
 		in, out := &in.MachineLearningWorkspaceIDRef, &out.MachineLearningWorkspaceIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.MachineLearningWorkspaceIDSelector != nil {
 		in, out := &in.MachineLearningWorkspaceIDSelector, &out.MachineLearningWorkspaceIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Name != nil {
@@ -1523,12 +1523,12 @@ func (in *ComputeClusterParameters) DeepCopyInto(out *ComputeClusterParameters) 
 	}
 	if in.SubnetResourceIDRef != nil {
 		in, out := &in.SubnetResourceIDRef, &out.SubnetResourceIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.SubnetResourceIDSelector != nil {
 		in, out := &in.SubnetResourceIDSelector, &out.SubnetResourceIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Tags != nil {
@@ -1590,7 +1590,7 @@ func (in *ComputeClusterSpec) DeepCopy() *ComputeClusterSpec {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *ComputeClusterStatus) DeepCopyInto(out *ComputeClusterStatus) {
 	*out = *in
-	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.ManagedResourceStatus.DeepCopyInto(&out.ManagedResourceStatus)
 	in.AtProvider.DeepCopyInto(&out.AtProvider)
 }
 
@@ -1779,12 +1779,12 @@ func (in *ComputeInstanceInitParameters) DeepCopyInto(out *ComputeInstanceInitPa
 	}
 	if in.SubnetResourceIDRef != nil {
 		in, out := &in.SubnetResourceIDRef, &out.SubnetResourceIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.SubnetResourceIDSelector != nil {
 		in, out := &in.SubnetResourceIDSelector, &out.SubnetResourceIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Tags != nil {
@@ -1973,12 +1973,12 @@ func (in *ComputeInstanceParameters) DeepCopyInto(out *ComputeInstanceParameters
 	}
 	if in.MachineLearningWorkspaceIDRef != nil {
 		in, out := &in.MachineLearningWorkspaceIDRef, &out.MachineLearningWorkspaceIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.MachineLearningWorkspaceIDSelector != nil {
 		in, out := &in.MachineLearningWorkspaceIDSelector, &out.MachineLearningWorkspaceIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.NodePublicIPEnabled != nil {
@@ -1998,12 +1998,12 @@ func (in *ComputeInstanceParameters) DeepCopyInto(out *ComputeInstanceParameters
 	}
 	if in.SubnetResourceIDRef != nil {
 		in, out := &in.SubnetResourceIDRef, &out.SubnetResourceIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.SubnetResourceIDSelector != nil {
 		in, out := &in.SubnetResourceIDSelector, &out.SubnetResourceIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Tags != nil {
@@ -2130,7 +2130,7 @@ func (in *ComputeInstanceSpec) DeepCopy() *ComputeInstanceSpec {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *ComputeInstanceStatus) DeepCopyInto(out *ComputeInstanceStatus) {
 	*out = *in
-	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.ManagedResourceStatus.DeepCopyInto(&out.ManagedResourceStatus)
 	in.AtProvider.DeepCopyInto(&out.AtProvider)
 }
 
@@ -2159,12 +2159,12 @@ func (in *EncryptionInitParameters) DeepCopyInto(out *EncryptionInitParameters) 
 	}
 	if in.KeyVaultIDRef != nil {
 		in, out := &in.KeyVaultIDRef, &out.KeyVaultIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.KeyVaultIDSelector != nil {
 		in, out := &in.KeyVaultIDSelector, &out.KeyVaultIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.UserAssignedIdentityID != nil {
@@ -2174,12 +2174,12 @@ func (in *EncryptionInitParameters) DeepCopyInto(out *EncryptionInitParameters) 
 	}
 	if in.UserAssignedIdentityIDRef != nil {
 		in, out := &in.UserAssignedIdentityIDRef, &out.UserAssignedIdentityIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.UserAssignedIdentityIDSelector != nil {
 		in, out := &in.UserAssignedIdentityIDSelector, &out.UserAssignedIdentityIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 }
@@ -2239,12 +2239,12 @@ func (in *EncryptionParameters) DeepCopyInto(out *EncryptionParameters) {
 	}
 	if in.KeyVaultIDRef != nil {
 		in, out := &in.KeyVaultIDRef, &out.KeyVaultIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.KeyVaultIDSelector != nil {
 		in, out := &in.KeyVaultIDSelector, &out.KeyVaultIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.UserAssignedIdentityID != nil {
@@ -2254,12 +2254,12 @@ func (in *EncryptionParameters) DeepCopyInto(out *EncryptionParameters) {
 	}
 	if in.UserAssignedIdentityIDRef != nil {
 		in, out := &in.UserAssignedIdentityIDRef, &out.UserAssignedIdentityIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.UserAssignedIdentityIDSelector != nil {
 		in, out := &in.UserAssignedIdentityIDSelector, &out.UserAssignedIdentityIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 }
@@ -2380,14 +2380,14 @@ func (in *IdentityInitParameters) DeepCopyInto(out *IdentityInitParameters) {
 	}
 	if in.IdentityIdsRefs != nil {
 		in, out := &in.IdentityIdsRefs, &out.IdentityIdsRefs
-		*out = make([]v1.NamespacedReference, len(*in))
+		*out = make([]v2.NamespacedReference, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.IdentityIdsSelector != nil {
 		in, out := &in.IdentityIdsSelector, &out.IdentityIdsSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Type != nil {
@@ -2464,14 +2464,14 @@ func (in *IdentityParameters) DeepCopyInto(out *IdentityParameters) {
 	}
 	if in.IdentityIdsRefs != nil {
 		in, out := &in.IdentityIdsRefs, &out.IdentityIdsRefs
-		*out = make([]v1.NamespacedReference, len(*in))
+		*out = make([]v2.NamespacedReference, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.IdentityIdsSelector != nil {
 		in, out := &in.IdentityIdsSelector, &out.IdentityIdsSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Type != nil {
@@ -2556,7 +2556,7 @@ func (in *SSHInitParameters) DeepCopyInto(out *SSHInitParameters) {
 	*out = *in
 	if in.AdminPasswordSecretRef != nil {
 		in, out := &in.AdminPasswordSecretRef, &out.AdminPasswordSecretRef
-		*out = new(v1.LocalSecretKeySelector)
+		*out = new(v2.LocalSecretKeySelector)
 		**out = **in
 	}
 	if in.AdminUsername != nil {
@@ -2611,7 +2611,7 @@ func (in *SSHParameters) DeepCopyInto(out *SSHParameters) {
 	*out = *in
 	if in.AdminPasswordSecretRef != nil {
 		in, out := &in.AdminPasswordSecretRef, &out.AdminPasswordSecretRef
-		*out = new(v1.LocalSecretKeySelector)
+		*out = new(v2.LocalSecretKeySelector)
 		**out = **in
 	}
 	if in.AdminUsername != nil {
@@ -2741,12 +2741,12 @@ func (in *ServerlessComputeInitParameters) DeepCopyInto(out *ServerlessComputeIn
 	}
 	if in.SubnetIDRef != nil {
 		in, out := &in.SubnetIDRef, &out.SubnetIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.SubnetIDSelector != nil {
 		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 }
@@ -2801,12 +2801,12 @@ func (in *ServerlessComputeParameters) DeepCopyInto(out *ServerlessComputeParame
 	}
 	if in.SubnetIDRef != nil {
 		in, out := &in.SubnetIDRef, &out.SubnetIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.SubnetIDSelector != nil {
 		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 }
@@ -2981,12 +2981,12 @@ func (in *SynapseSparkInitParameters) DeepCopyInto(out *SynapseSparkInitParamete
 	}
 	if in.SynapseSparkPoolIDRef != nil {
 		in, out := &in.SynapseSparkPoolIDRef, &out.SynapseSparkPoolIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.SynapseSparkPoolIDSelector != nil {
 		in, out := &in.SynapseSparkPoolIDSelector, &out.SynapseSparkPoolIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Tags != nil {
@@ -3145,12 +3145,12 @@ func (in *SynapseSparkParameters) DeepCopyInto(out *SynapseSparkParameters) {
 	}
 	if in.MachineLearningWorkspaceIDRef != nil {
 		in, out := &in.MachineLearningWorkspaceIDRef, &out.MachineLearningWorkspaceIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.MachineLearningWorkspaceIDSelector != nil {
 		in, out := &in.MachineLearningWorkspaceIDSelector, &out.MachineLearningWorkspaceIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.SynapseSparkPoolID != nil {
@@ -3160,12 +3160,12 @@ func (in *SynapseSparkParameters) DeepCopyInto(out *SynapseSparkParameters) {
 	}
 	if in.SynapseSparkPoolIDRef != nil {
 		in, out := &in.SynapseSparkPoolIDRef, &out.SynapseSparkPoolIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.SynapseSparkPoolIDSelector != nil {
 		in, out := &in.SynapseSparkPoolIDSelector, &out.SynapseSparkPoolIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Tags != nil {
@@ -3217,7 +3217,7 @@ func (in *SynapseSparkSpec) DeepCopy() *SynapseSparkSpec {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *SynapseSparkStatus) DeepCopyInto(out *SynapseSparkStatus) {
 	*out = *in
-	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.ManagedResourceStatus.DeepCopyInto(&out.ManagedResourceStatus)
 	in.AtProvider.DeepCopyInto(&out.AtProvider)
 }
 
@@ -3268,12 +3268,12 @@ func (in *WorkspaceEncryptionInitParameters) DeepCopyInto(out *WorkspaceEncrypti
 	}
 	if in.KeyIDRef != nil {
 		in, out := &in.KeyIDRef, &out.KeyIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.KeyIDSelector != nil {
 		in, out := &in.KeyIDSelector, &out.KeyIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.KeyVaultID != nil {
@@ -3283,12 +3283,12 @@ func (in *WorkspaceEncryptionInitParameters) DeepCopyInto(out *WorkspaceEncrypti
 	}
 	if in.KeyVaultIDRef != nil {
 		in, out := &in.KeyVaultIDRef, &out.KeyVaultIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.KeyVaultIDSelector != nil {
 		in, out := &in.KeyVaultIDSelector, &out.KeyVaultIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.UserAssignedIdentityID != nil {
@@ -3298,12 +3298,12 @@ func (in *WorkspaceEncryptionInitParameters) DeepCopyInto(out *WorkspaceEncrypti
 	}
 	if in.UserAssignedIdentityIDRef != nil {
 		in, out := &in.UserAssignedIdentityIDRef, &out.UserAssignedIdentityIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.UserAssignedIdentityIDSelector != nil {
 		in, out := &in.UserAssignedIdentityIDSelector, &out.UserAssignedIdentityIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 }
@@ -3358,12 +3358,12 @@ func (in *WorkspaceEncryptionParameters) DeepCopyInto(out *WorkspaceEncryptionPa
 	}
 	if in.KeyIDRef != nil {
 		in, out := &in.KeyIDRef, &out.KeyIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.KeyIDSelector != nil {
 		in, out := &in.KeyIDSelector, &out.KeyIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.KeyVaultID != nil {
@@ -3373,12 +3373,12 @@ func (in *WorkspaceEncryptionParameters) DeepCopyInto(out *WorkspaceEncryptionPa
 	}
 	if in.KeyVaultIDRef != nil {
 		in, out := &in.KeyVaultIDRef, &out.KeyVaultIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.KeyVaultIDSelector != nil {
 		in, out := &in.KeyVaultIDSelector, &out.KeyVaultIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.UserAssignedIdentityID != nil {
@@ -3388,12 +3388,12 @@ func (in *WorkspaceEncryptionParameters) DeepCopyInto(out *WorkspaceEncryptionPa
 	}
 	if in.UserAssignedIdentityIDRef != nil {
 		in, out := &in.UserAssignedIdentityIDRef, &out.UserAssignedIdentityIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.UserAssignedIdentityIDSelector != nil {
 		in, out := &in.UserAssignedIdentityIDSelector, &out.UserAssignedIdentityIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 }
@@ -3424,14 +3424,14 @@ func (in *WorkspaceIdentityInitParameters) DeepCopyInto(out *WorkspaceIdentityIn
 	}
 	if in.IdentityIdsRefs != nil {
 		in, out := &in.IdentityIdsRefs, &out.IdentityIdsRefs
-		*out = make([]v1.NamespacedReference, len(*in))
+		*out = make([]v2.NamespacedReference, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.IdentityIdsSelector != nil {
 		in, out := &in.IdentityIdsSelector, &out.IdentityIdsSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Type != nil {
@@ -3508,14 +3508,14 @@ func (in *WorkspaceIdentityParameters) DeepCopyInto(out *WorkspaceIdentityParame
 	}
 	if in.IdentityIdsRefs != nil {
 		in, out := &in.IdentityIdsRefs, &out.IdentityIdsRefs
-		*out = make([]v1.NamespacedReference, len(*in))
+		*out = make([]v2.NamespacedReference, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.IdentityIdsSelector != nil {
 		in, out := &in.IdentityIdsSelector, &out.IdentityIdsSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Type != nil {
@@ -3545,12 +3545,12 @@ func (in *WorkspaceInitParameters) DeepCopyInto(out *WorkspaceInitParameters) {
 	}
 	if in.ApplicationInsightsIDRef != nil {
 		in, out := &in.ApplicationInsightsIDRef, &out.ApplicationInsightsIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ApplicationInsightsIDSelector != nil {
 		in, out := &in.ApplicationInsightsIDSelector, &out.ApplicationInsightsIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ContainerRegistryID != nil {
@@ -3600,12 +3600,12 @@ func (in *WorkspaceInitParameters) DeepCopyInto(out *WorkspaceInitParameters) {
 	}
 	if in.KeyVaultIDRef != nil {
 		in, out := &in.KeyVaultIDRef, &out.KeyVaultIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.KeyVaultIDSelector != nil {
 		in, out := &in.KeyVaultIDSelector, &out.KeyVaultIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Kind != nil {
@@ -3630,12 +3630,12 @@ func (in *WorkspaceInitParameters) DeepCopyInto(out *WorkspaceInitParameters) {
 	}
 	if in.PrimaryUserAssignedIdentityRef != nil {
 		in, out := &in.PrimaryUserAssignedIdentityRef, &out.PrimaryUserAssignedIdentityRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.PrimaryUserAssignedIdentitySelector != nil {
 		in, out := &in.PrimaryUserAssignedIdentitySelector, &out.PrimaryUserAssignedIdentitySelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.PublicNetworkAccessEnabled != nil {
@@ -3670,12 +3670,12 @@ func (in *WorkspaceInitParameters) DeepCopyInto(out *WorkspaceInitParameters) {
 	}
 	if in.StorageAccountIDRef != nil {
 		in, out := &in.StorageAccountIDRef, &out.StorageAccountIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.StorageAccountIDSelector != nil {
 		in, out := &in.StorageAccountIDSelector, &out.StorageAccountIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Tags != nil {
@@ -4098,12 +4098,12 @@ func (in *WorkspaceOutboundRuleFqdnParameters) DeepCopyInto(out *WorkspaceOutbou
 	}
 	if in.WorkspaceIDRef != nil {
 		in, out := &in.WorkspaceIDRef, &out.WorkspaceIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.WorkspaceIDSelector != nil {
 		in, out := &in.WorkspaceIDSelector, &out.WorkspaceIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 }
@@ -4139,7 +4139,7 @@ func (in *WorkspaceOutboundRuleFqdnSpec) DeepCopy() *WorkspaceOutboundRuleFqdnSp
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *WorkspaceOutboundRuleFqdnStatus) DeepCopyInto(out *WorkspaceOutboundRuleFqdnStatus) {
 	*out = *in
-	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.ManagedResourceStatus.DeepCopyInto(&out.ManagedResourceStatus)
 	in.AtProvider.DeepCopyInto(&out.AtProvider)
 }
 
@@ -4190,12 +4190,12 @@ func (in *WorkspaceOutboundRulePrivateEndpointInitParameters) DeepCopyInto(out *
 	}
 	if in.ServiceResourceIDRef != nil {
 		in, out := &in.ServiceResourceIDRef, &out.ServiceResourceIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ServiceResourceIDSelector != nil {
 		in, out := &in.ServiceResourceIDSelector, &out.ServiceResourceIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.SparkEnabled != nil {
@@ -4302,12 +4302,12 @@ func (in *WorkspaceOutboundRulePrivateEndpointParameters) DeepCopyInto(out *Work
 	}
 	if in.ServiceResourceIDRef != nil {
 		in, out := &in.ServiceResourceIDRef, &out.ServiceResourceIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ServiceResourceIDSelector != nil {
 		in, out := &in.ServiceResourceIDSelector, &out.ServiceResourceIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.SparkEnabled != nil {
@@ -4327,12 +4327,12 @@ func (in *WorkspaceOutboundRulePrivateEndpointParameters) DeepCopyInto(out *Work
 	}
 	if in.WorkspaceIDRef != nil {
 		in, out := &in.WorkspaceIDRef, &out.WorkspaceIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.WorkspaceIDSelector != nil {
 		in, out := &in.WorkspaceIDSelector, &out.WorkspaceIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 }
@@ -4368,7 +4368,7 @@ func (in *WorkspaceOutboundRulePrivateEndpointSpec) DeepCopy() *WorkspaceOutboun
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *WorkspaceOutboundRulePrivateEndpointStatus) DeepCopyInto(out *WorkspaceOutboundRulePrivateEndpointStatus) {
 	*out = *in
-	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.ManagedResourceStatus.DeepCopyInto(&out.ManagedResourceStatus)
 	in.AtProvider.DeepCopyInto(&out.AtProvider)
 }
 
@@ -4536,12 +4536,12 @@ func (in *WorkspaceOutboundRuleServiceTagParameters) DeepCopyInto(out *Workspace
 	}
 	if in.WorkspaceIDRef != nil {
 		in, out := &in.WorkspaceIDRef, &out.WorkspaceIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.WorkspaceIDSelector != nil {
 		in, out := &in.WorkspaceIDSelector, &out.WorkspaceIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 }
@@ -4577,7 +4577,7 @@ func (in *WorkspaceOutboundRuleServiceTagSpec) DeepCopy() *WorkspaceOutboundRule
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *WorkspaceOutboundRuleServiceTagStatus) DeepCopyInto(out *WorkspaceOutboundRuleServiceTagStatus) {
 	*out = *in
-	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.ManagedResourceStatus.DeepCopyInto(&out.ManagedResourceStatus)
 	in.AtProvider.DeepCopyInto(&out.AtProvider)
 }
 
@@ -4601,12 +4601,12 @@ func (in *WorkspaceParameters) DeepCopyInto(out *WorkspaceParameters) {
 	}
 	if in.ApplicationInsightsIDRef != nil {
 		in, out := &in.ApplicationInsightsIDRef, &out.ApplicationInsightsIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ApplicationInsightsIDSelector != nil {
 		in, out := &in.ApplicationInsightsIDSelector, &out.ApplicationInsightsIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ContainerRegistryID != nil {
@@ -4656,12 +4656,12 @@ func (in *WorkspaceParameters) DeepCopyInto(out *WorkspaceParameters) {
 	}
 	if in.KeyVaultIDRef != nil {
 		in, out := &in.KeyVaultIDRef, &out.KeyVaultIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.KeyVaultIDSelector != nil {
 		in, out := &in.KeyVaultIDSelector, &out.KeyVaultIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Kind != nil {
@@ -4686,12 +4686,12 @@ func (in *WorkspaceParameters) DeepCopyInto(out *WorkspaceParameters) {
 	}
 	if in.PrimaryUserAssignedIdentityRef != nil {
 		in, out := &in.PrimaryUserAssignedIdentityRef, &out.PrimaryUserAssignedIdentityRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.PrimaryUserAssignedIdentitySelector != nil {
 		in, out := &in.PrimaryUserAssignedIdentitySelector, &out.PrimaryUserAssignedIdentitySelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.PublicNetworkAccessEnabled != nil {
@@ -4706,12 +4706,12 @@ func (in *WorkspaceParameters) DeepCopyInto(out *WorkspaceParameters) {
 	}
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ServerlessCompute != nil {
@@ -4741,12 +4741,12 @@ func (in *WorkspaceParameters) DeepCopyInto(out *WorkspaceParameters) {
 	}
 	if in.StorageAccountIDRef != nil {
 		in, out := &in.StorageAccountIDRef, &out.StorageAccountIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.StorageAccountIDSelector != nil {
 		in, out := &in.StorageAccountIDSelector, &out.StorageAccountIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Tags != nil {
@@ -4803,7 +4803,7 @@ func (in *WorkspaceSpec) DeepCopy() *WorkspaceSpec {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *WorkspaceStatus) DeepCopyInto(out *WorkspaceStatus) {
 	*out = *in
-	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.ManagedResourceStatus.DeepCopyInto(&out.ManagedResourceStatus)
 	in.AtProvider.DeepCopyInto(&out.AtProvider)
 }
 

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AuthorizationRuleInitParameters struct {
@@ -67,11 +66,11 @@ type AuthorizationRuleParameters struct {
 
 	// Reference to a NotificationHubNamespace in notificationhubs to populate namespaceName.
 	// +kubebuilder:validation:Optional
-	NamespaceNameRef *v1.NamespacedReference `json:"namespaceNameRef,omitempty" tf:"-"`
+	NamespaceNameRef *v2.NamespacedReference `json:"namespaceNameRef,omitempty" tf:"-"`
 
 	// Selector for a NotificationHubNamespace in notificationhubs to populate namespaceName.
 	// +kubebuilder:validation:Optional
-	NamespaceNameSelector *v1.NamespacedSelector `json:"namespaceNameSelector,omitempty" tf:"-"`
+	NamespaceNameSelector *v2.NamespacedSelector `json:"namespaceNameSelector,omitempty" tf:"-"`
 
 	// The name of the Notification Hub for which the Authorization Rule should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/notificationhubs/v1beta1.NotificationHub
@@ -80,11 +79,11 @@ type AuthorizationRuleParameters struct {
 
 	// Reference to a NotificationHub in notificationhubs to populate notificationHubName.
 	// +kubebuilder:validation:Optional
-	NotificationHubNameRef *v1.NamespacedReference `json:"notificationHubNameRef,omitempty" tf:"-"`
+	NotificationHubNameRef *v2.NamespacedReference `json:"notificationHubNameRef,omitempty" tf:"-"`
 
 	// Selector for a NotificationHub in notificationhubs to populate notificationHubName.
 	// +kubebuilder:validation:Optional
-	NotificationHubNameSelector *v1.NamespacedSelector `json:"notificationHubNameSelector,omitempty" tf:"-"`
+	NotificationHubNameSelector *v2.NamespacedSelector `json:"notificationHubNameSelector,omitempty" tf:"-"`
 
 	// The name of the Resource Group in which the Notification Hub Namespace exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
@@ -93,11 +92,11 @@ type AuthorizationRuleParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Does this Authorization Rule have Send access to the Notification Hub? Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -123,8 +122,8 @@ type AuthorizationRuleSpec struct {
 
 // AuthorizationRuleStatus defines the observed state of AuthorizationRule.
 type AuthorizationRuleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AuthorizationRuleObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AuthorizationRuleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AzureMonitorMetricsInitParameters struct {
@@ -414,11 +414,11 @@ type EventHubInitParameters struct {
 
 	// Reference to a EventHub in eventhub to populate eventHubId.
 	// +kubebuilder:validation:Optional
-	EventHubIDRef *v1.Reference `json:"eventHubIdRef,omitempty" tf:"-"`
+	EventHubIDRef *v2.Reference `json:"eventHubIdRef,omitempty" tf:"-"`
 
 	// Selector for a EventHub in eventhub to populate eventHubId.
 	// +kubebuilder:validation:Optional
-	EventHubIDSelector *v1.Selector `json:"eventHubIdSelector,omitempty" tf:"-"`
+	EventHubIDSelector *v2.Selector `json:"eventHubIdSelector,omitempty" tf:"-"`
 
 	// The name which should be used for this data source. This name should be unique across all data sources regardless of type within the Data Collection Rule.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -443,11 +443,11 @@ type EventHubParameters struct {
 
 	// Reference to a EventHub in eventhub to populate eventHubId.
 	// +kubebuilder:validation:Optional
-	EventHubIDRef *v1.Reference `json:"eventHubIdRef,omitempty" tf:"-"`
+	EventHubIDRef *v2.Reference `json:"eventHubIdRef,omitempty" tf:"-"`
 
 	// Selector for a EventHub in eventhub to populate eventHubId.
 	// +kubebuilder:validation:Optional
-	EventHubIDSelector *v1.Selector `json:"eventHubIdSelector,omitempty" tf:"-"`
+	EventHubIDSelector *v2.Selector `json:"eventHubIdSelector,omitempty" tf:"-"`
 
 	// The name which should be used for this data source. This name should be unique across all data sources regardless of type within the Data Collection Rule.
 	// +kubebuilder:validation:Optional
@@ -593,11 +593,11 @@ type LogAnalyticsInitParameters struct {
 
 	// Reference to a Workspace in operationalinsights to populate workspaceResourceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceResourceIDRef *v1.Reference `json:"workspaceResourceIdRef,omitempty" tf:"-"`
+	WorkspaceResourceIDRef *v2.Reference `json:"workspaceResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in operationalinsights to populate workspaceResourceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceResourceIDSelector *v1.Selector `json:"workspaceResourceIdSelector,omitempty" tf:"-"`
+	WorkspaceResourceIDSelector *v2.Selector `json:"workspaceResourceIdSelector,omitempty" tf:"-"`
 }
 
 type LogAnalyticsObservation struct {
@@ -623,11 +623,11 @@ type LogAnalyticsParameters struct {
 
 	// Reference to a Workspace in operationalinsights to populate workspaceResourceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceResourceIDRef *v1.Reference `json:"workspaceResourceIdRef,omitempty" tf:"-"`
+	WorkspaceResourceIDRef *v2.Reference `json:"workspaceResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in operationalinsights to populate workspaceResourceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceResourceIDSelector *v1.Selector `json:"workspaceResourceIdSelector,omitempty" tf:"-"`
+	WorkspaceResourceIDSelector *v2.Selector `json:"workspaceResourceIdSelector,omitempty" tf:"-"`
 }
 
 type LogFileInitParameters struct {
@@ -728,11 +728,11 @@ type MonitorDataCollectionRuleIdentityInitParameters struct {
 
 	// References to UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v1.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
+	IdentityIdsRefs []v2.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v1.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
+	IdentityIdsSelector *v2.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Data Collection Rule. Possible values are SystemAssigned and UserAssigned.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -765,11 +765,11 @@ type MonitorDataCollectionRuleIdentityParameters struct {
 
 	// References to UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v1.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
+	IdentityIdsRefs []v2.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v1.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
+	IdentityIdsSelector *v2.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Data Collection Rule. Possible values are SystemAssigned and UserAssigned.
 	// +kubebuilder:validation:Optional
@@ -785,11 +785,11 @@ type MonitorDataCollectionRuleInitParameters struct {
 
 	// Reference to a MonitorDataCollectionEndpoint in insights to populate dataCollectionEndpointId.
 	// +kubebuilder:validation:Optional
-	DataCollectionEndpointIDRef *v1.Reference `json:"dataCollectionEndpointIdRef,omitempty" tf:"-"`
+	DataCollectionEndpointIDRef *v2.Reference `json:"dataCollectionEndpointIdRef,omitempty" tf:"-"`
 
 	// Selector for a MonitorDataCollectionEndpoint in insights to populate dataCollectionEndpointId.
 	// +kubebuilder:validation:Optional
-	DataCollectionEndpointIDSelector *v1.Selector `json:"dataCollectionEndpointIdSelector,omitempty" tf:"-"`
+	DataCollectionEndpointIDSelector *v2.Selector `json:"dataCollectionEndpointIdSelector,omitempty" tf:"-"`
 
 	// One or more data_flow blocks as defined below.
 	DataFlow []DataFlowInitParameters `json:"dataFlow,omitempty" tf:"data_flow,omitempty"`
@@ -873,11 +873,11 @@ type MonitorDataCollectionRuleParameters struct {
 
 	// Reference to a MonitorDataCollectionEndpoint in insights to populate dataCollectionEndpointId.
 	// +kubebuilder:validation:Optional
-	DataCollectionEndpointIDRef *v1.Reference `json:"dataCollectionEndpointIdRef,omitempty" tf:"-"`
+	DataCollectionEndpointIDRef *v2.Reference `json:"dataCollectionEndpointIdRef,omitempty" tf:"-"`
 
 	// Selector for a MonitorDataCollectionEndpoint in insights to populate dataCollectionEndpointId.
 	// +kubebuilder:validation:Optional
-	DataCollectionEndpointIDSelector *v1.Selector `json:"dataCollectionEndpointIdSelector,omitempty" tf:"-"`
+	DataCollectionEndpointIDSelector *v2.Selector `json:"dataCollectionEndpointIdSelector,omitempty" tf:"-"`
 
 	// One or more data_flow blocks as defined below.
 	// +kubebuilder:validation:Optional
@@ -914,11 +914,11 @@ type MonitorDataCollectionRuleParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A stream_declaration block as defined below.
 	// +kubebuilder:validation:Optional
@@ -1113,11 +1113,11 @@ type StorageBlobInitParameters struct {
 
 	// Reference to a Container in storage to populate containerName.
 	// +kubebuilder:validation:Optional
-	ContainerNameRef *v1.Reference `json:"containerNameRef,omitempty" tf:"-"`
+	ContainerNameRef *v2.Reference `json:"containerNameRef,omitempty" tf:"-"`
 
 	// Selector for a Container in storage to populate containerName.
 	// +kubebuilder:validation:Optional
-	ContainerNameSelector *v1.Selector `json:"containerNameSelector,omitempty" tf:"-"`
+	ContainerNameSelector *v2.Selector `json:"containerNameSelector,omitempty" tf:"-"`
 
 	// The name which should be used for this data source. This name should be unique across all data sources regardless of type within the Data Collection Rule.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -1129,11 +1129,11 @@ type StorageBlobInitParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+	StorageAccountIDRef *v2.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+	StorageAccountIDSelector *v2.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }
 
 type StorageBlobObservation struct {
@@ -1157,11 +1157,11 @@ type StorageBlobParameters struct {
 
 	// Reference to a Container in storage to populate containerName.
 	// +kubebuilder:validation:Optional
-	ContainerNameRef *v1.Reference `json:"containerNameRef,omitempty" tf:"-"`
+	ContainerNameRef *v2.Reference `json:"containerNameRef,omitempty" tf:"-"`
 
 	// Selector for a Container in storage to populate containerName.
 	// +kubebuilder:validation:Optional
-	ContainerNameSelector *v1.Selector `json:"containerNameSelector,omitempty" tf:"-"`
+	ContainerNameSelector *v2.Selector `json:"containerNameSelector,omitempty" tf:"-"`
 
 	// The name which should be used for this data source. This name should be unique across all data sources regardless of type within the Data Collection Rule.
 	// +kubebuilder:validation:Optional
@@ -1175,11 +1175,11 @@ type StorageBlobParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+	StorageAccountIDRef *v2.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+	StorageAccountIDSelector *v2.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }
 
 type StorageTableDirectInitParameters struct {
@@ -1388,8 +1388,8 @@ type WindowsFirewallLogParameters struct {
 
 // MonitorDataCollectionRuleSpec defines the desired state of MonitorDataCollectionRule
 type MonitorDataCollectionRuleSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     MonitorDataCollectionRuleParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   MonitorDataCollectionRuleParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -1405,8 +1405,8 @@ type MonitorDataCollectionRuleSpec struct {
 
 // MonitorDataCollectionRuleStatus defines the observed state of MonitorDataCollectionRule.
 type MonitorDataCollectionRuleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MonitorDataCollectionRuleObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MonitorDataCollectionRuleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

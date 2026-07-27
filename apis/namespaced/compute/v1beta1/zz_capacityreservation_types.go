@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CapacityReservationInitParameters struct {
@@ -56,11 +55,11 @@ type CapacityReservationParameters struct {
 
 	// Reference to a CapacityReservationGroup in compute to populate capacityReservationGroupId.
 	// +kubebuilder:validation:Optional
-	CapacityReservationGroupIDRef *v1.NamespacedReference `json:"capacityReservationGroupIdRef,omitempty" tf:"-"`
+	CapacityReservationGroupIDRef *v2.NamespacedReference `json:"capacityReservationGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a CapacityReservationGroup in compute to populate capacityReservationGroupId.
 	// +kubebuilder:validation:Optional
-	CapacityReservationGroupIDSelector *v1.NamespacedSelector `json:"capacityReservationGroupIdSelector,omitempty" tf:"-"`
+	CapacityReservationGroupIDSelector *v2.NamespacedSelector `json:"capacityReservationGroupIdSelector,omitempty" tf:"-"`
 
 	// A sku block as defined below.
 	// +kubebuilder:validation:Optional
@@ -124,8 +123,8 @@ type CapacityReservationSpec struct {
 
 // CapacityReservationStatus defines the observed state of CapacityReservation.
 type CapacityReservationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        CapacityReservationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               CapacityReservationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

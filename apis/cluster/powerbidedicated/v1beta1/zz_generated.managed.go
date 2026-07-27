@@ -5,54 +5,54 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this PowerBIEmbedded.
-func (mg *PowerBIEmbedded) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *PowerBIEmbedded) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this PowerBIEmbedded.
-func (mg *PowerBIEmbedded) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *PowerBIEmbedded) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this PowerBIEmbedded.
-func (mg *PowerBIEmbedded) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *PowerBIEmbedded) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this PowerBIEmbedded.
-func (mg *PowerBIEmbedded) GetProviderConfigReference() *xpv1.Reference {
+func (mg *PowerBIEmbedded) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this PowerBIEmbedded.
-func (mg *PowerBIEmbedded) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *PowerBIEmbedded) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this PowerBIEmbedded.
-func (mg *PowerBIEmbedded) SetConditions(c ...xpv1.Condition) {
+func (mg *PowerBIEmbedded) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this PowerBIEmbedded.
-func (mg *PowerBIEmbedded) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *PowerBIEmbedded) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this PowerBIEmbedded.
-func (mg *PowerBIEmbedded) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *PowerBIEmbedded) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this PowerBIEmbedded.
-func (mg *PowerBIEmbedded) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *PowerBIEmbedded) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this PowerBIEmbedded.
-func (mg *PowerBIEmbedded) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *PowerBIEmbedded) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

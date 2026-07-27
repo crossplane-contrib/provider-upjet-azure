@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CassandraTableAutoscaleSettingsInitParameters struct {
@@ -92,11 +92,11 @@ type CassandraTableParameters struct {
 
 	// Reference to a CassandraKeySpace in cosmosdb to populate cassandraKeyspaceId.
 	// +kubebuilder:validation:Optional
-	CassandraKeySpaceIDRef *v1.Reference `json:"cassandraKeyspaceIdRef,omitempty" tf:"-"`
+	CassandraKeySpaceIDRef *v2.Reference `json:"cassandraKeyspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a CassandraKeySpace in cosmosdb to populate cassandraKeyspaceId.
 	// +kubebuilder:validation:Optional
-	CassandraKeySpaceIDSelector *v1.Selector `json:"cassandraKeyspaceIdSelector,omitempty" tf:"-"`
+	CassandraKeySpaceIDSelector *v2.Selector `json:"cassandraKeyspaceIdSelector,omitempty" tf:"-"`
 
 	// Time to live of the Cosmos DB Cassandra table. Possible values are at least -1. -1 means the Cassandra table never expires.
 	// +kubebuilder:validation:Optional
@@ -229,8 +229,8 @@ type SchemaParameters struct {
 
 // CassandraTableSpec defines the desired state of CassandraTable
 type CassandraTableSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     CassandraTableParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   CassandraTableParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -246,8 +246,8 @@ type CassandraTableSpec struct {
 
 // CassandraTableStatus defines the observed state of CassandraTable.
 type CassandraTableStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        CassandraTableObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               CassandraTableObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

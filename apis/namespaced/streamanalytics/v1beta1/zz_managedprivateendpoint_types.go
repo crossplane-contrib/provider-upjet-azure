@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ManagedPrivateEndpointInitParameters struct {
@@ -26,11 +25,11 @@ type ManagedPrivateEndpointInitParameters struct {
 
 	// Reference to a Account in storage to populate targetResourceId.
 	// +kubebuilder:validation:Optional
-	TargetResourceIDRef *v1.NamespacedReference `json:"targetResourceIdRef,omitempty" tf:"-"`
+	TargetResourceIDRef *v2.NamespacedReference `json:"targetResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate targetResourceId.
 	// +kubebuilder:validation:Optional
-	TargetResourceIDSelector *v1.NamespacedSelector `json:"targetResourceIdSelector,omitempty" tf:"-"`
+	TargetResourceIDSelector *v2.NamespacedSelector `json:"targetResourceIdSelector,omitempty" tf:"-"`
 }
 
 type ManagedPrivateEndpointObservation struct {
@@ -60,11 +59,11 @@ type ManagedPrivateEndpointParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The name of the Stream Analytics Cluster where the Managed Private Endpoint should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/streamanalytics/v1beta1.Cluster
@@ -73,11 +72,11 @@ type ManagedPrivateEndpointParameters struct {
 
 	// Reference to a Cluster in streamanalytics to populate streamAnalyticsClusterName.
 	// +kubebuilder:validation:Optional
-	StreamAnalyticsClusterNameRef *v1.NamespacedReference `json:"streamAnalyticsClusterNameRef,omitempty" tf:"-"`
+	StreamAnalyticsClusterNameRef *v2.NamespacedReference `json:"streamAnalyticsClusterNameRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in streamanalytics to populate streamAnalyticsClusterName.
 	// +kubebuilder:validation:Optional
-	StreamAnalyticsClusterNameSelector *v1.NamespacedSelector `json:"streamAnalyticsClusterNameSelector,omitempty" tf:"-"`
+	StreamAnalyticsClusterNameSelector *v2.NamespacedSelector `json:"streamAnalyticsClusterNameSelector,omitempty" tf:"-"`
 
 	// Specifies the sub resource name which the Stream Analytics Private Endpoint is able to connect to. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -91,11 +90,11 @@ type ManagedPrivateEndpointParameters struct {
 
 	// Reference to a Account in storage to populate targetResourceId.
 	// +kubebuilder:validation:Optional
-	TargetResourceIDRef *v1.NamespacedReference `json:"targetResourceIdRef,omitempty" tf:"-"`
+	TargetResourceIDRef *v2.NamespacedReference `json:"targetResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate targetResourceId.
 	// +kubebuilder:validation:Optional
-	TargetResourceIDSelector *v1.NamespacedSelector `json:"targetResourceIdSelector,omitempty" tf:"-"`
+	TargetResourceIDSelector *v2.NamespacedSelector `json:"targetResourceIdSelector,omitempty" tf:"-"`
 }
 
 // ManagedPrivateEndpointSpec defines the desired state of ManagedPrivateEndpoint
@@ -117,8 +116,8 @@ type ManagedPrivateEndpointSpec struct {
 
 // ManagedPrivateEndpointStatus defines the observed state of ManagedPrivateEndpoint.
 type ManagedPrivateEndpointStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ManagedPrivateEndpointObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ManagedPrivateEndpointObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ApplicationLoadBalancerFrontendInitParameters struct {
@@ -47,11 +46,11 @@ type ApplicationLoadBalancerFrontendParameters struct {
 
 	// Reference to a ApplicationLoadBalancer in servicenetworking to populate applicationLoadBalancerId.
 	// +kubebuilder:validation:Optional
-	ApplicationLoadBalancerIDRef *v1.NamespacedReference `json:"applicationLoadBalancerIdRef,omitempty" tf:"-"`
+	ApplicationLoadBalancerIDRef *v2.NamespacedReference `json:"applicationLoadBalancerIdRef,omitempty" tf:"-"`
 
 	// Selector for a ApplicationLoadBalancer in servicenetworking to populate applicationLoadBalancerId.
 	// +kubebuilder:validation:Optional
-	ApplicationLoadBalancerIDSelector *v1.NamespacedSelector `json:"applicationLoadBalancerIdSelector,omitempty" tf:"-"`
+	ApplicationLoadBalancerIDSelector *v2.NamespacedSelector `json:"applicationLoadBalancerIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Application Gateway for Containers Frontend.
 	// +kubebuilder:validation:Optional
@@ -78,8 +77,8 @@ type ApplicationLoadBalancerFrontendSpec struct {
 
 // ApplicationLoadBalancerFrontendStatus defines the observed state of ApplicationLoadBalancerFrontend.
 type ApplicationLoadBalancerFrontendStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ApplicationLoadBalancerFrontendObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ApplicationLoadBalancerFrontendObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

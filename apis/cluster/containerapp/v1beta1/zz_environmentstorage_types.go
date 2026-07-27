@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type EnvironmentStorageInitParameters struct {
 
 	// The Storage Account Access Key.
 	// The Storage Account Access Key.
-	AccessKeySecretRef *v1.SecretKeySelector `json:"accessKeySecretRef,omitempty" tf:"-"`
+	AccessKeySecretRef *v2.SecretKeySelector `json:"accessKeySecretRef,omitempty" tf:"-"`
 
 	// The access mode to connect this storage to the Container App. Possible values include ReadOnly and ReadWrite. Changing this forces a new resource to be created.
 	// The access mode to connect this storage to the Container App. Possible values include `ReadOnly` and `ReadWrite`.
@@ -30,11 +30,11 @@ type EnvironmentStorageInitParameters struct {
 
 	// Reference to a Account in storage to populate accountName.
 	// +kubebuilder:validation:Optional
-	AccountNameRef *v1.Reference `json:"accountNameRef,omitempty" tf:"-"`
+	AccountNameRef *v2.Reference `json:"accountNameRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate accountName.
 	// +kubebuilder:validation:Optional
-	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
+	AccountNameSelector *v2.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
 	// The NFS server to use for the Azure File Share, the format will be yourstorageaccountname.file.core.windows.net. Changing this forces a new resource to be created.
 	NFSServerURL *string `json:"nfsServerUrl,omitempty" tf:"nfs_server_url,omitempty"`
@@ -46,11 +46,11 @@ type EnvironmentStorageInitParameters struct {
 
 	// Reference to a Share in storage to populate shareName.
 	// +kubebuilder:validation:Optional
-	ShareNameRef *v1.Reference `json:"shareNameRef,omitempty" tf:"-"`
+	ShareNameRef *v2.Reference `json:"shareNameRef,omitempty" tf:"-"`
 
 	// Selector for a Share in storage to populate shareName.
 	// +kubebuilder:validation:Optional
-	ShareNameSelector *v1.Selector `json:"shareNameSelector,omitempty" tf:"-"`
+	ShareNameSelector *v2.Selector `json:"shareNameSelector,omitempty" tf:"-"`
 }
 
 type EnvironmentStorageObservation struct {
@@ -83,7 +83,7 @@ type EnvironmentStorageParameters struct {
 	// The Storage Account Access Key.
 	// The Storage Account Access Key.
 	// +kubebuilder:validation:Optional
-	AccessKeySecretRef *v1.SecretKeySelector `json:"accessKeySecretRef,omitempty" tf:"-"`
+	AccessKeySecretRef *v2.SecretKeySelector `json:"accessKeySecretRef,omitempty" tf:"-"`
 
 	// The access mode to connect this storage to the Container App. Possible values include ReadOnly and ReadWrite. Changing this forces a new resource to be created.
 	// The access mode to connect this storage to the Container App. Possible values include `ReadOnly` and `ReadWrite`.
@@ -98,11 +98,11 @@ type EnvironmentStorageParameters struct {
 
 	// Reference to a Account in storage to populate accountName.
 	// +kubebuilder:validation:Optional
-	AccountNameRef *v1.Reference `json:"accountNameRef,omitempty" tf:"-"`
+	AccountNameRef *v2.Reference `json:"accountNameRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate accountName.
 	// +kubebuilder:validation:Optional
-	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
+	AccountNameSelector *v2.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
 	// The ID of the Container App Environment to which this storage belongs. Changing this forces a new resource to be created.
 	// The ID of the Container App Environment to which this storage belongs.
@@ -113,11 +113,11 @@ type EnvironmentStorageParameters struct {
 
 	// Reference to a Environment in containerapp to populate containerAppEnvironmentId.
 	// +kubebuilder:validation:Optional
-	ContainerAppEnvironmentIDRef *v1.Reference `json:"containerAppEnvironmentIdRef,omitempty" tf:"-"`
+	ContainerAppEnvironmentIDRef *v2.Reference `json:"containerAppEnvironmentIdRef,omitempty" tf:"-"`
 
 	// Selector for a Environment in containerapp to populate containerAppEnvironmentId.
 	// +kubebuilder:validation:Optional
-	ContainerAppEnvironmentIDSelector *v1.Selector `json:"containerAppEnvironmentIdSelector,omitempty" tf:"-"`
+	ContainerAppEnvironmentIDSelector *v2.Selector `json:"containerAppEnvironmentIdSelector,omitempty" tf:"-"`
 
 	// The NFS server to use for the Azure File Share, the format will be yourstorageaccountname.file.core.windows.net. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -131,17 +131,17 @@ type EnvironmentStorageParameters struct {
 
 	// Reference to a Share in storage to populate shareName.
 	// +kubebuilder:validation:Optional
-	ShareNameRef *v1.Reference `json:"shareNameRef,omitempty" tf:"-"`
+	ShareNameRef *v2.Reference `json:"shareNameRef,omitempty" tf:"-"`
 
 	// Selector for a Share in storage to populate shareName.
 	// +kubebuilder:validation:Optional
-	ShareNameSelector *v1.Selector `json:"shareNameSelector,omitempty" tf:"-"`
+	ShareNameSelector *v2.Selector `json:"shareNameSelector,omitempty" tf:"-"`
 }
 
 // EnvironmentStorageSpec defines the desired state of EnvironmentStorage
 type EnvironmentStorageSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     EnvironmentStorageParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   EnvironmentStorageParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -157,8 +157,8 @@ type EnvironmentStorageSpec struct {
 
 // EnvironmentStorageStatus defines the observed state of EnvironmentStorage.
 type EnvironmentStorageStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        EnvironmentStorageObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               EnvironmentStorageObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

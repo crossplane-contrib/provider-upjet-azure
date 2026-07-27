@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type RestoreInitParameters struct {
@@ -153,11 +152,11 @@ type SQLPoolParameters struct {
 
 	// Reference to a Workspace in synapse to populate synapseWorkspaceId.
 	// +kubebuilder:validation:Optional
-	SynapseWorkspaceIDRef *v1.NamespacedReference `json:"synapseWorkspaceIdRef,omitempty" tf:"-"`
+	SynapseWorkspaceIDRef *v2.NamespacedReference `json:"synapseWorkspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in synapse to populate synapseWorkspaceId.
 	// +kubebuilder:validation:Optional
-	SynapseWorkspaceIDSelector *v1.NamespacedSelector `json:"synapseWorkspaceIdSelector,omitempty" tf:"-"`
+	SynapseWorkspaceIDSelector *v2.NamespacedSelector `json:"synapseWorkspaceIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Synapse SQL Pool.
 	// +kubebuilder:validation:Optional
@@ -184,8 +183,8 @@ type SQLPoolSpec struct {
 
 // SQLPoolStatus defines the observed state of SQLPool.
 type SQLPoolStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SQLPoolObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SQLPoolObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

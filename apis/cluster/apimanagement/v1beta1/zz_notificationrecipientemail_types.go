@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type NotificationRecipientEmailInitParameters struct {
@@ -41,11 +41,11 @@ type NotificationRecipientEmailParameters struct {
 
 	// Reference to a Management in apimanagement to populate apiManagementId.
 	// +kubebuilder:validation:Optional
-	APIManagementIDRef *v1.Reference `json:"apiManagementIdRef,omitempty" tf:"-"`
+	APIManagementIDRef *v2.Reference `json:"apiManagementIdRef,omitempty" tf:"-"`
 
 	// Selector for a Management in apimanagement to populate apiManagementId.
 	// +kubebuilder:validation:Optional
-	APIManagementIDSelector *v1.Selector `json:"apiManagementIdSelector,omitempty" tf:"-"`
+	APIManagementIDSelector *v2.Selector `json:"apiManagementIdSelector,omitempty" tf:"-"`
 
 	// The recipient email address. Changing this forces a new API Management Notification Recipient Email to be created.
 	// +kubebuilder:validation:Required
@@ -58,8 +58,8 @@ type NotificationRecipientEmailParameters struct {
 
 // NotificationRecipientEmailSpec defines the desired state of NotificationRecipientEmail
 type NotificationRecipientEmailSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     NotificationRecipientEmailParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   NotificationRecipientEmailParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -75,8 +75,8 @@ type NotificationRecipientEmailSpec struct {
 
 // NotificationRecipientEmailStatus defines the observed state of NotificationRecipientEmail.
 type NotificationRecipientEmailStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        NotificationRecipientEmailObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               NotificationRecipientEmailObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

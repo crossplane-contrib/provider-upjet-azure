@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ManagerManagementGroupConnectionInitParameters struct {
@@ -25,11 +25,11 @@ type ManagerManagementGroupConnectionInitParameters struct {
 
 	// Reference to a Manager in network to populate networkManagerId.
 	// +kubebuilder:validation:Optional
-	NetworkManagerIDRef *v1.Reference `json:"networkManagerIdRef,omitempty" tf:"-"`
+	NetworkManagerIDRef *v2.Reference `json:"networkManagerIdRef,omitempty" tf:"-"`
 
 	// Selector for a Manager in network to populate networkManagerId.
 	// +kubebuilder:validation:Optional
-	NetworkManagerIDSelector *v1.Selector `json:"networkManagerIdSelector,omitempty" tf:"-"`
+	NetworkManagerIDSelector *v2.Selector `json:"networkManagerIdSelector,omitempty" tf:"-"`
 }
 
 type ManagerManagementGroupConnectionObservation struct {
@@ -64,11 +64,11 @@ type ManagerManagementGroupConnectionParameters struct {
 
 	// Reference to a ManagementGroup in management to populate managementGroupId.
 	// +kubebuilder:validation:Optional
-	ManagementGroupIDRef *v1.Reference `json:"managementGroupIdRef,omitempty" tf:"-"`
+	ManagementGroupIDRef *v2.Reference `json:"managementGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a ManagementGroup in management to populate managementGroupId.
 	// +kubebuilder:validation:Optional
-	ManagementGroupIDSelector *v1.Selector `json:"managementGroupIdSelector,omitempty" tf:"-"`
+	ManagementGroupIDSelector *v2.Selector `json:"managementGroupIdSelector,omitempty" tf:"-"`
 
 	// Specifies the ID of the Network Manager which the Management Group is connected to. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Manager
@@ -78,17 +78,17 @@ type ManagerManagementGroupConnectionParameters struct {
 
 	// Reference to a Manager in network to populate networkManagerId.
 	// +kubebuilder:validation:Optional
-	NetworkManagerIDRef *v1.Reference `json:"networkManagerIdRef,omitempty" tf:"-"`
+	NetworkManagerIDRef *v2.Reference `json:"networkManagerIdRef,omitempty" tf:"-"`
 
 	// Selector for a Manager in network to populate networkManagerId.
 	// +kubebuilder:validation:Optional
-	NetworkManagerIDSelector *v1.Selector `json:"networkManagerIdSelector,omitempty" tf:"-"`
+	NetworkManagerIDSelector *v2.Selector `json:"networkManagerIdSelector,omitempty" tf:"-"`
 }
 
 // ManagerManagementGroupConnectionSpec defines the desired state of ManagerManagementGroupConnection
 type ManagerManagementGroupConnectionSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ManagerManagementGroupConnectionParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ManagerManagementGroupConnectionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -104,8 +104,8 @@ type ManagerManagementGroupConnectionSpec struct {
 
 // ManagerManagementGroupConnectionStatus defines the observed state of ManagerManagementGroupConnection.
 type ManagerManagementGroupConnectionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ManagerManagementGroupConnectionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ManagerManagementGroupConnectionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ActionInitParameters struct {
@@ -83,11 +83,11 @@ type FrontdoorRulesEngineParameters struct {
 
 	// Reference to a FrontDoor in network to populate frontdoorName.
 	// +kubebuilder:validation:Optional
-	FrontdoorNameRef *v1.Reference `json:"frontdoorNameRef,omitempty" tf:"-"`
+	FrontdoorNameRef *v2.Reference `json:"frontdoorNameRef,omitempty" tf:"-"`
 
 	// Selector for a FrontDoor in network to populate frontdoorName.
 	// +kubebuilder:validation:Optional
-	FrontdoorNameSelector *v1.Selector `json:"frontdoorNameSelector,omitempty" tf:"-"`
+	FrontdoorNameSelector *v2.Selector `json:"frontdoorNameSelector,omitempty" tf:"-"`
 
 	// The name of the resource group. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
@@ -96,11 +96,11 @@ type FrontdoorRulesEngineParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A rule block as defined below.
 	// +kubebuilder:validation:Optional
@@ -305,8 +305,8 @@ type RuleMatchConditionParameters struct {
 
 // FrontdoorRulesEngineSpec defines the desired state of FrontdoorRulesEngine
 type FrontdoorRulesEngineSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     FrontdoorRulesEngineParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   FrontdoorRulesEngineParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -322,8 +322,8 @@ type FrontdoorRulesEngineSpec struct {
 
 // FrontdoorRulesEngineStatus defines the observed state of FrontdoorRulesEngine.
 type FrontdoorRulesEngineStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FrontdoorRulesEngineObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FrontdoorRulesEngineObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

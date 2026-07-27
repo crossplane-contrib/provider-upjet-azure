@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AzureActiveDirectoryAuthenticationInitParameters struct {
@@ -188,7 +187,7 @@ type ServerInitParameters struct {
 	Score *float64 `json:"score,omitempty" tf:"score,omitempty"`
 
 	// The Secret used to communicate with the Radius Server.
-	SecretSecretRef v1.LocalSecretKeySelector `json:"secretSecretRef" tf:"-"`
+	SecretSecretRef v2.LocalSecretKeySelector `json:"secretSecretRef" tf:"-"`
 }
 
 type ServerObservation struct {
@@ -212,7 +211,7 @@ type ServerParameters struct {
 
 	// The Secret used to communicate with the Radius Server.
 	// +kubebuilder:validation:Optional
-	SecretSecretRef v1.LocalSecretKeySelector `json:"secretSecretRef" tf:"-"`
+	SecretSecretRef v2.LocalSecretKeySelector `json:"secretSecretRef" tf:"-"`
 }
 
 type ServerRootCertificateInitParameters struct {
@@ -436,11 +435,11 @@ type VPNServerConfigurationParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
@@ -476,8 +475,8 @@ type VPNServerConfigurationSpec struct {
 
 // VPNServerConfigurationStatus defines the observed state of VPNServerConfiguration.
 type VPNServerConfigurationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VPNServerConfigurationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VPNServerConfigurationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

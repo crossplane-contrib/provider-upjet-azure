@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AgentPoolInitParameters struct {
@@ -36,11 +35,11 @@ type AgentPoolInitParameters struct {
 
 	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDRef *v1.NamespacedReference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
+	VirtualNetworkSubnetIDRef *v2.NamespacedReference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDSelector *v1.NamespacedSelector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
+	VirtualNetworkSubnetIDSelector *v2.NamespacedSelector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
 }
 
 type AgentPoolObservation struct {
@@ -80,11 +79,11 @@ type AgentPoolParameters struct {
 
 	// Reference to a Registry in containerregistry to populate containerRegistryName.
 	// +kubebuilder:validation:Optional
-	ContainerRegistryNameRef *v1.NamespacedReference `json:"containerRegistryNameRef,omitempty" tf:"-"`
+	ContainerRegistryNameRef *v2.NamespacedReference `json:"containerRegistryNameRef,omitempty" tf:"-"`
 
 	// Selector for a Registry in containerregistry to populate containerRegistryName.
 	// +kubebuilder:validation:Optional
-	ContainerRegistryNameSelector *v1.NamespacedSelector `json:"containerRegistryNameSelector,omitempty" tf:"-"`
+	ContainerRegistryNameSelector *v2.NamespacedSelector `json:"containerRegistryNameSelector,omitempty" tf:"-"`
 
 	// VMSS instance count. Defaults to 1.
 	// +kubebuilder:validation:Optional
@@ -101,11 +100,11 @@ type AgentPoolParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Azure Container Registry Agent Pool.
 	// +kubebuilder:validation:Optional
@@ -124,11 +123,11 @@ type AgentPoolParameters struct {
 
 	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDRef *v1.NamespacedReference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
+	VirtualNetworkSubnetIDRef *v2.NamespacedReference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDSelector *v1.NamespacedSelector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
+	VirtualNetworkSubnetIDSelector *v2.NamespacedSelector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
 }
 
 // AgentPoolSpec defines the desired state of AgentPool
@@ -150,8 +149,8 @@ type AgentPoolSpec struct {
 
 // AgentPoolStatus defines the observed state of AgentPool.
 type AgentPoolStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AgentPoolObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AgentPoolObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

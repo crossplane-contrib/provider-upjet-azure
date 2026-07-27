@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AppTriggerRecurrenceInitParameters struct {
@@ -73,11 +73,11 @@ type AppTriggerRecurrenceParameters struct {
 
 	// Reference to a AppWorkflow in logic to populate logicAppId.
 	// +kubebuilder:validation:Optional
-	LogicAppIDRef *v1.Reference `json:"logicAppIdRef,omitempty" tf:"-"`
+	LogicAppIDRef *v2.Reference `json:"logicAppIdRef,omitempty" tf:"-"`
 
 	// Selector for a AppWorkflow in logic to populate logicAppId.
 	// +kubebuilder:validation:Optional
-	LogicAppIDSelector *v1.Selector `json:"logicAppIdSelector,omitempty" tf:"-"`
+	LogicAppIDSelector *v2.Selector `json:"logicAppIdSelector,omitempty" tf:"-"`
 
 	// A schedule block as specified below.
 	// +kubebuilder:validation:Optional
@@ -142,8 +142,8 @@ type AppTriggerRecurrenceScheduleParameters struct {
 
 // AppTriggerRecurrenceSpec defines the desired state of AppTriggerRecurrence
 type AppTriggerRecurrenceSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     AppTriggerRecurrenceParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   AppTriggerRecurrenceParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -159,8 +159,8 @@ type AppTriggerRecurrenceSpec struct {
 
 // AppTriggerRecurrenceStatus defines the observed state of AppTriggerRecurrence.
 type AppTriggerRecurrenceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AppTriggerRecurrenceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AppTriggerRecurrenceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

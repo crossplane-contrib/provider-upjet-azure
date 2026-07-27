@@ -10,14 +10,13 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type MSSQLJobCredentialInitParameters struct {
 
 	// The password to use for this Elastic Job credential.
-	PasswordSecretRef *v1.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// The password to use for this Elastic Job credential.
 	PasswordWo *string `json:"passwordWo,omitempty" tf:"password_wo,omitempty"`
@@ -57,15 +56,15 @@ type MSSQLJobCredentialParameters struct {
 
 	// Reference to a MSSQLJobAgent in sql to populate jobAgentId.
 	// +kubebuilder:validation:Optional
-	JobAgentIDRef *v1.NamespacedReference `json:"jobAgentIdRef,omitempty" tf:"-"`
+	JobAgentIDRef *v2.NamespacedReference `json:"jobAgentIdRef,omitempty" tf:"-"`
 
 	// Selector for a MSSQLJobAgent in sql to populate jobAgentId.
 	// +kubebuilder:validation:Optional
-	JobAgentIDSelector *v1.NamespacedSelector `json:"jobAgentIdSelector,omitempty" tf:"-"`
+	JobAgentIDSelector *v2.NamespacedSelector `json:"jobAgentIdSelector,omitempty" tf:"-"`
 
 	// The password to use for this Elastic Job credential.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef *v1.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// The password to use for this Elastic Job credential.
 	// +kubebuilder:validation:Optional
@@ -99,8 +98,8 @@ type MSSQLJobCredentialSpec struct {
 
 // MSSQLJobCredentialStatus defines the observed state of MSSQLJobCredential.
 type MSSQLJobCredentialStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MSSQLJobCredentialObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MSSQLJobCredentialObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

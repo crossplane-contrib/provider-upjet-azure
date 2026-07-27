@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ConnectionTypeInitParameters struct {
@@ -22,11 +21,11 @@ type ConnectionTypeInitParameters struct {
 
 	// Reference to a Account in automation to populate automationAccountName.
 	// +kubebuilder:validation:Optional
-	AutomationAccountNameRef *v1.NamespacedReference `json:"automationAccountNameRef,omitempty" tf:"-"`
+	AutomationAccountNameRef *v2.NamespacedReference `json:"automationAccountNameRef,omitempty" tf:"-"`
 
 	// Selector for a Account in automation to populate automationAccountName.
 	// +kubebuilder:validation:Optional
-	AutomationAccountNameSelector *v1.NamespacedSelector `json:"automationAccountNameSelector,omitempty" tf:"-"`
+	AutomationAccountNameSelector *v2.NamespacedSelector `json:"automationAccountNameSelector,omitempty" tf:"-"`
 
 	// One or more field blocks as defined below. Changing this forces a new Automation to be created.
 	Field []FieldInitParameters `json:"field,omitempty" tf:"field,omitempty"`
@@ -43,11 +42,11 @@ type ConnectionTypeInitParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 }
 
 type ConnectionTypeObservation struct {
@@ -80,11 +79,11 @@ type ConnectionTypeParameters struct {
 
 	// Reference to a Account in automation to populate automationAccountName.
 	// +kubebuilder:validation:Optional
-	AutomationAccountNameRef *v1.NamespacedReference `json:"automationAccountNameRef,omitempty" tf:"-"`
+	AutomationAccountNameRef *v2.NamespacedReference `json:"automationAccountNameRef,omitempty" tf:"-"`
 
 	// Selector for a Account in automation to populate automationAccountName.
 	// +kubebuilder:validation:Optional
-	AutomationAccountNameSelector *v1.NamespacedSelector `json:"automationAccountNameSelector,omitempty" tf:"-"`
+	AutomationAccountNameSelector *v2.NamespacedSelector `json:"automationAccountNameSelector,omitempty" tf:"-"`
 
 	// One or more field blocks as defined below. Changing this forces a new Automation to be created.
 	// +kubebuilder:validation:Optional
@@ -105,11 +104,11 @@ type ConnectionTypeParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 }
 
 type FieldInitParameters struct {
@@ -180,8 +179,8 @@ type ConnectionTypeSpec struct {
 
 // ConnectionTypeStatus defines the observed state of ConnectionType.
 type ConnectionTypeStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ConnectionTypeObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ConnectionTypeObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

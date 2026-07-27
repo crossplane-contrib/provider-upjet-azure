@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type PimEligibleRoleAssignmentInitParameters struct {
@@ -46,11 +45,11 @@ type PimEligibleRoleAssignmentInitParameters struct {
 
 	// Reference to a ManagementGroup in management to populate scope.
 	// +kubebuilder:validation:Optional
-	ScopeRef *v1.NamespacedReference `json:"scopeRef,omitempty" tf:"-"`
+	ScopeRef *v2.NamespacedReference `json:"scopeRef,omitempty" tf:"-"`
 
 	// Selector for a ManagementGroup in management to populate scope.
 	// +kubebuilder:validation:Optional
-	ScopeSelector *v1.NamespacedSelector `json:"scopeSelector,omitempty" tf:"-"`
+	ScopeSelector *v2.NamespacedSelector `json:"scopeSelector,omitempty" tf:"-"`
 
 	// A ticket block as defined below. Changing this forces a new resource to be created.
 	// Ticket details relating to the eligible assignment
@@ -136,11 +135,11 @@ type PimEligibleRoleAssignmentParameters struct {
 
 	// Reference to a ManagementGroup in management to populate scope.
 	// +kubebuilder:validation:Optional
-	ScopeRef *v1.NamespacedReference `json:"scopeRef,omitempty" tf:"-"`
+	ScopeRef *v2.NamespacedReference `json:"scopeRef,omitempty" tf:"-"`
 
 	// Selector for a ManagementGroup in management to populate scope.
 	// +kubebuilder:validation:Optional
-	ScopeSelector *v1.NamespacedSelector `json:"scopeSelector,omitempty" tf:"-"`
+	ScopeSelector *v2.NamespacedSelector `json:"scopeSelector,omitempty" tf:"-"`
 
 	// A ticket block as defined below. Changing this forces a new resource to be created.
 	// Ticket details relating to the eligible assignment
@@ -282,8 +281,8 @@ type PimEligibleRoleAssignmentSpec struct {
 
 // PimEligibleRoleAssignmentStatus defines the observed state of PimEligibleRoleAssignment.
 type PimEligibleRoleAssignmentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PimEligibleRoleAssignmentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PimEligibleRoleAssignmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

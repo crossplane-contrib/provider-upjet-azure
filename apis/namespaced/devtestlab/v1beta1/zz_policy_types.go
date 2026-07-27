@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type PolicyInitParameters struct {
@@ -31,11 +30,11 @@ type PolicyInitParameters struct {
 
 	// Reference to a Lab in devtestlab to populate labName.
 	// +kubebuilder:validation:Optional
-	LabNameRef *v1.NamespacedReference `json:"labNameRef,omitempty" tf:"-"`
+	LabNameRef *v2.NamespacedReference `json:"labNameRef,omitempty" tf:"-"`
 
 	// Selector for a Lab in devtestlab to populate labName.
 	// +kubebuilder:validation:Optional
-	LabNameSelector *v1.NamespacedSelector `json:"labNameSelector,omitempty" tf:"-"`
+	LabNameSelector *v2.NamespacedSelector `json:"labNameSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the Dev Test Policy. Possible values are GalleryImage, LabPremiumVmCount, LabTargetCost, LabVmCount, LabVmSize, UserOwnedLabPremiumVmCount, UserOwnedLabVmCount and UserOwnedLabVmCountInSubnet. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -49,11 +48,11 @@ type PolicyInitParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
 	// +mapType=granular
@@ -118,11 +117,11 @@ type PolicyParameters struct {
 
 	// Reference to a Lab in devtestlab to populate labName.
 	// +kubebuilder:validation:Optional
-	LabNameRef *v1.NamespacedReference `json:"labNameRef,omitempty" tf:"-"`
+	LabNameRef *v2.NamespacedReference `json:"labNameRef,omitempty" tf:"-"`
 
 	// Selector for a Lab in devtestlab to populate labName.
 	// +kubebuilder:validation:Optional
-	LabNameSelector *v1.NamespacedSelector `json:"labNameSelector,omitempty" tf:"-"`
+	LabNameSelector *v2.NamespacedSelector `json:"labNameSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the Dev Test Policy. Possible values are GalleryImage, LabPremiumVmCount, LabTargetCost, LabVmCount, LabVmSize, UserOwnedLabPremiumVmCount, UserOwnedLabVmCount and UserOwnedLabVmCountInSubnet. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -139,11 +138,11 @@ type PolicyParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
@@ -174,8 +173,8 @@ type PolicySpec struct {
 
 // PolicyStatus defines the observed state of Policy.
 type PolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

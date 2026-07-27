@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AdvancedFilterBoolEqualsInitParameters struct {
@@ -856,7 +855,7 @@ type SystemTopicEventSubscriptionDeliveryPropertyInitParameters struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// If the type is Static, then provide the value to use.
-	ValueSecretRef *v1.LocalSecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
+	ValueSecretRef *v2.LocalSecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
 type SystemTopicEventSubscriptionDeliveryPropertyObservation struct {
@@ -894,7 +893,7 @@ type SystemTopicEventSubscriptionDeliveryPropertyParameters struct {
 
 	// If the type is Static, then provide the value to use.
 	// +kubebuilder:validation:Optional
-	ValueSecretRef *v1.LocalSecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
+	ValueSecretRef *v2.LocalSecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
 type SystemTopicEventSubscriptionInitParameters struct {
@@ -1083,11 +1082,11 @@ type SystemTopicEventSubscriptionParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A retry_policy block as defined below.
 	// +kubebuilder:validation:Optional
@@ -1120,11 +1119,11 @@ type SystemTopicEventSubscriptionParameters struct {
 
 	// Reference to a SystemTopic in eventgrid to populate systemTopic.
 	// +kubebuilder:validation:Optional
-	SystemTopicRef *v1.NamespacedReference `json:"systemTopicRef,omitempty" tf:"-"`
+	SystemTopicRef *v2.NamespacedReference `json:"systemTopicRef,omitempty" tf:"-"`
 
 	// Selector for a SystemTopic in eventgrid to populate systemTopic.
 	// +kubebuilder:validation:Optional
-	SystemTopicSelector *v1.NamespacedSelector `json:"systemTopicSelector,omitempty" tf:"-"`
+	SystemTopicSelector *v2.NamespacedSelector `json:"systemTopicSelector,omitempty" tf:"-"`
 
 	// A webhook_endpoint block as defined below.
 	// +kubebuilder:validation:Optional
@@ -1200,11 +1199,11 @@ type SystemTopicEventSubscriptionStorageQueueEndpointInitParameters struct {
 
 	// Reference to a Queue in storage to populate queueName.
 	// +kubebuilder:validation:Optional
-	QueueNameRef *v1.NamespacedReference `json:"queueNameRef,omitempty" tf:"-"`
+	QueueNameRef *v2.NamespacedReference `json:"queueNameRef,omitempty" tf:"-"`
 
 	// Selector for a Queue in storage to populate queueName.
 	// +kubebuilder:validation:Optional
-	QueueNameSelector *v1.NamespacedSelector `json:"queueNameSelector,omitempty" tf:"-"`
+	QueueNameSelector *v2.NamespacedSelector `json:"queueNameSelector,omitempty" tf:"-"`
 
 	// Specifies the id of the storage account id where the storage queue is located.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
@@ -1213,11 +1212,11 @@ type SystemTopicEventSubscriptionStorageQueueEndpointInitParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v1.NamespacedReference `json:"storageAccountIdRef,omitempty" tf:"-"`
+	StorageAccountIDRef *v2.NamespacedReference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v1.NamespacedSelector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+	StorageAccountIDSelector *v2.NamespacedSelector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }
 
 type SystemTopicEventSubscriptionStorageQueueEndpointObservation struct {
@@ -1245,11 +1244,11 @@ type SystemTopicEventSubscriptionStorageQueueEndpointParameters struct {
 
 	// Reference to a Queue in storage to populate queueName.
 	// +kubebuilder:validation:Optional
-	QueueNameRef *v1.NamespacedReference `json:"queueNameRef,omitempty" tf:"-"`
+	QueueNameRef *v2.NamespacedReference `json:"queueNameRef,omitempty" tf:"-"`
 
 	// Selector for a Queue in storage to populate queueName.
 	// +kubebuilder:validation:Optional
-	QueueNameSelector *v1.NamespacedSelector `json:"queueNameSelector,omitempty" tf:"-"`
+	QueueNameSelector *v2.NamespacedSelector `json:"queueNameSelector,omitempty" tf:"-"`
 
 	// Specifies the id of the storage account id where the storage queue is located.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
@@ -1259,11 +1258,11 @@ type SystemTopicEventSubscriptionStorageQueueEndpointParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v1.NamespacedReference `json:"storageAccountIdRef,omitempty" tf:"-"`
+	StorageAccountIDRef *v2.NamespacedReference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v1.NamespacedSelector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+	StorageAccountIDSelector *v2.NamespacedSelector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }
 
 type SystemTopicEventSubscriptionSubjectFilterInitParameters struct {
@@ -1386,8 +1385,8 @@ type SystemTopicEventSubscriptionSpec struct {
 
 // SystemTopicEventSubscriptionStatus defines the observed state of SystemTopicEventSubscription.
 type SystemTopicEventSubscriptionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SystemTopicEventSubscriptionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SystemTopicEventSubscriptionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type RestoreInitParameters struct {
@@ -152,11 +152,11 @@ type SQLPoolParameters struct {
 
 	// Reference to a Workspace in synapse to populate synapseWorkspaceId.
 	// +kubebuilder:validation:Optional
-	SynapseWorkspaceIDRef *v1.Reference `json:"synapseWorkspaceIdRef,omitempty" tf:"-"`
+	SynapseWorkspaceIDRef *v2.Reference `json:"synapseWorkspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in synapse to populate synapseWorkspaceId.
 	// +kubebuilder:validation:Optional
-	SynapseWorkspaceIDSelector *v1.Selector `json:"synapseWorkspaceIdSelector,omitempty" tf:"-"`
+	SynapseWorkspaceIDSelector *v2.Selector `json:"synapseWorkspaceIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Synapse SQL Pool.
 	// +kubebuilder:validation:Optional
@@ -166,8 +166,8 @@ type SQLPoolParameters struct {
 
 // SQLPoolSpec defines the desired state of SQLPool
 type SQLPoolSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SQLPoolParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SQLPoolParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -183,8 +183,8 @@ type SQLPoolSpec struct {
 
 // SQLPoolStatus defines the observed state of SQLPool.
 type SQLPoolStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SQLPoolObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SQLPoolObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

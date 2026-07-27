@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type HPCCacheAccessPolicyAccessRuleInitParameters struct {
@@ -114,11 +114,11 @@ type HPCCacheAccessPolicyInitParameters struct {
 
 	// Reference to a HPCCache in storagecache to populate hpcCacheId.
 	// +kubebuilder:validation:Optional
-	HPCCacheIDRef *v1.Reference `json:"hpcCacheIdRef,omitempty" tf:"-"`
+	HPCCacheIDRef *v2.Reference `json:"hpcCacheIdRef,omitempty" tf:"-"`
 
 	// Selector for a HPCCache in storagecache to populate hpcCacheId.
 	// +kubebuilder:validation:Optional
-	HPCCacheIDSelector *v1.Selector `json:"hpcCacheIdSelector,omitempty" tf:"-"`
+	HPCCacheIDSelector *v2.Selector `json:"hpcCacheIdSelector,omitempty" tf:"-"`
 }
 
 type HPCCacheAccessPolicyObservation struct {
@@ -147,17 +147,17 @@ type HPCCacheAccessPolicyParameters struct {
 
 	// Reference to a HPCCache in storagecache to populate hpcCacheId.
 	// +kubebuilder:validation:Optional
-	HPCCacheIDRef *v1.Reference `json:"hpcCacheIdRef,omitempty" tf:"-"`
+	HPCCacheIDRef *v2.Reference `json:"hpcCacheIdRef,omitempty" tf:"-"`
 
 	// Selector for a HPCCache in storagecache to populate hpcCacheId.
 	// +kubebuilder:validation:Optional
-	HPCCacheIDSelector *v1.Selector `json:"hpcCacheIdSelector,omitempty" tf:"-"`
+	HPCCacheIDSelector *v2.Selector `json:"hpcCacheIdSelector,omitempty" tf:"-"`
 }
 
 // HPCCacheAccessPolicySpec defines the desired state of HPCCacheAccessPolicy
 type HPCCacheAccessPolicySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     HPCCacheAccessPolicyParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   HPCCacheAccessPolicyParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -173,8 +173,8 @@ type HPCCacheAccessPolicySpec struct {
 
 // HPCCacheAccessPolicyStatus defines the observed state of HPCCacheAccessPolicy.
 type HPCCacheAccessPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        HPCCacheAccessPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               HPCCacheAccessPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

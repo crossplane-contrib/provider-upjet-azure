@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DeploymentInitParameters struct {
@@ -66,11 +65,11 @@ type DeploymentParameters struct {
 
 	// Reference to a Account in cognitiveservices to populate cognitiveAccountId.
 	// +kubebuilder:validation:Optional
-	CognitiveAccountIDRef *v1.NamespacedReference `json:"cognitiveAccountIdRef,omitempty" tf:"-"`
+	CognitiveAccountIDRef *v2.NamespacedReference `json:"cognitiveAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in cognitiveservices to populate cognitiveAccountId.
 	// +kubebuilder:validation:Optional
-	CognitiveAccountIDSelector *v1.NamespacedSelector `json:"cognitiveAccountIdSelector,omitempty" tf:"-"`
+	CognitiveAccountIDSelector *v2.NamespacedSelector `json:"cognitiveAccountIdSelector,omitempty" tf:"-"`
 
 	// Whether dynamic throttling is enabled.
 	// +kubebuilder:validation:Optional
@@ -210,8 +209,8 @@ type DeploymentSpec struct {
 
 // DeploymentStatus defines the observed state of Deployment.
 type DeploymentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DeploymentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DeploymentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

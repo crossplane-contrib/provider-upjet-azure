@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type WindowsVirtualMachineAdditionalCapabilitiesInitParameters struct {
@@ -45,7 +45,7 @@ type WindowsVirtualMachineAdditionalCapabilitiesParameters struct {
 type WindowsVirtualMachineAdditionalUnattendContentInitParameters struct {
 
 	// The XML formatted content that is added to the unattend.xml file for the specified path and component. Changing this forces a new resource to be created.
-	ContentSecretRef v1.SecretKeySelector `json:"contentSecretRef" tf:"-"`
+	ContentSecretRef v2.SecretKeySelector `json:"contentSecretRef" tf:"-"`
 
 	// The name of the setting to which the content applies. Possible values are AutoLogon and FirstLogonCommands. Changing this forces a new resource to be created.
 	Setting *string `json:"setting,omitempty" tf:"setting,omitempty"`
@@ -61,7 +61,7 @@ type WindowsVirtualMachineAdditionalUnattendContentParameters struct {
 
 	// The XML formatted content that is added to the unattend.xml file for the specified path and component. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	ContentSecretRef v1.SecretKeySelector `json:"contentSecretRef" tf:"-"`
+	ContentSecretRef v2.SecretKeySelector `json:"contentSecretRef" tf:"-"`
 
 	// The name of the setting to which the content applies. Possible values are AutoLogon and FirstLogonCommands. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -203,7 +203,7 @@ type WindowsVirtualMachineInitParameters struct {
 	AdditionalUnattendContent []WindowsVirtualMachineAdditionalUnattendContentInitParameters `json:"additionalUnattendContent,omitempty" tf:"additional_unattend_content,omitempty"`
 
 	// The Password which should be used for the local-administrator on this Virtual Machine. Changing this forces a new resource to be created.
-	AdminPasswordSecretRef *v1.SecretKeySelector `json:"adminPasswordSecretRef,omitempty" tf:"-"`
+	AdminPasswordSecretRef *v2.SecretKeySelector `json:"adminPasswordSecretRef,omitempty" tf:"-"`
 
 	// The username of the local administrator used for the Virtual Machine. Changing this forces a new resource to be created.
 	AdminUsername *string `json:"adminUsername,omitempty" tf:"admin_username,omitempty"`
@@ -230,7 +230,7 @@ type WindowsVirtualMachineInitParameters struct {
 	ComputerName *string `json:"computerName,omitempty" tf:"computer_name,omitempty"`
 
 	// The Base64-Encoded Custom Data which should be used for this Virtual Machine. Changing this forces a new resource to be created.
-	CustomDataSecretRef *v1.SecretKeySelector `json:"customDataSecretRef,omitempty" tf:"-"`
+	CustomDataSecretRef *v2.SecretKeySelector `json:"customDataSecretRef,omitempty" tf:"-"`
 
 	// The ID of a Dedicated Host Group that this Windows Virtual Machine should be run within. Conflicts with dedicated_host_id.
 	DedicatedHostGroupID *string `json:"dedicatedHostGroupId,omitempty" tf:"dedicated_host_group_id,omitempty"`
@@ -280,11 +280,11 @@ type WindowsVirtualMachineInitParameters struct {
 
 	// References to NetworkInterface in network to populate networkInterfaceIds.
 	// +kubebuilder:validation:Optional
-	NetworkInterfaceIdsRefs []v1.Reference `json:"networkInterfaceIdsRefs,omitempty" tf:"-"`
+	NetworkInterfaceIdsRefs []v2.Reference `json:"networkInterfaceIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of NetworkInterface in network to populate networkInterfaceIds.
 	// +kubebuilder:validation:Optional
-	NetworkInterfaceIdsSelector *v1.Selector `json:"networkInterfaceIdsSelector,omitempty" tf:"-"`
+	NetworkInterfaceIdsSelector *v2.Selector `json:"networkInterfaceIdsSelector,omitempty" tf:"-"`
 
 	// An os_disk block as defined below.
 	OsDisk []WindowsVirtualMachineOsDiskInitParameters `json:"osDisk,omitempty" tf:"os_disk,omitempty"`
@@ -699,7 +699,7 @@ type WindowsVirtualMachineParameters struct {
 
 	// The Password which should be used for the local-administrator on this Virtual Machine. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	AdminPasswordSecretRef *v1.SecretKeySelector `json:"adminPasswordSecretRef,omitempty" tf:"-"`
+	AdminPasswordSecretRef *v2.SecretKeySelector `json:"adminPasswordSecretRef,omitempty" tf:"-"`
 
 	// The username of the local administrator used for the Virtual Machine. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -735,7 +735,7 @@ type WindowsVirtualMachineParameters struct {
 
 	// The Base64-Encoded Custom Data which should be used for this Virtual Machine. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	CustomDataSecretRef *v1.SecretKeySelector `json:"customDataSecretRef,omitempty" tf:"-"`
+	CustomDataSecretRef *v2.SecretKeySelector `json:"customDataSecretRef,omitempty" tf:"-"`
 
 	// The ID of a Dedicated Host Group that this Windows Virtual Machine should be run within. Conflicts with dedicated_host_id.
 	// +kubebuilder:validation:Optional
@@ -800,11 +800,11 @@ type WindowsVirtualMachineParameters struct {
 
 	// References to NetworkInterface in network to populate networkInterfaceIds.
 	// +kubebuilder:validation:Optional
-	NetworkInterfaceIdsRefs []v1.Reference `json:"networkInterfaceIdsRefs,omitempty" tf:"-"`
+	NetworkInterfaceIdsRefs []v2.Reference `json:"networkInterfaceIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of NetworkInterface in network to populate networkInterfaceIds.
 	// +kubebuilder:validation:Optional
-	NetworkInterfaceIdsSelector *v1.Selector `json:"networkInterfaceIdsSelector,omitempty" tf:"-"`
+	NetworkInterfaceIdsSelector *v2.Selector `json:"networkInterfaceIdsSelector,omitempty" tf:"-"`
 
 	// An os_disk block as defined below.
 	// +kubebuilder:validation:Optional
@@ -857,11 +857,11 @@ type WindowsVirtualMachineParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// One or more secret blocks as defined below.
 	// +kubebuilder:validation:Optional
@@ -1127,8 +1127,8 @@ type WindowsVirtualMachineWinrmListenerParameters struct {
 
 // WindowsVirtualMachineSpec defines the desired state of WindowsVirtualMachine
 type WindowsVirtualMachineSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     WindowsVirtualMachineParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   WindowsVirtualMachineParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -1144,8 +1144,8 @@ type WindowsVirtualMachineSpec struct {
 
 // WindowsVirtualMachineStatus defines the observed state of WindowsVirtualMachine.
 type WindowsVirtualMachineStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        WindowsVirtualMachineObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               WindowsVirtualMachineObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

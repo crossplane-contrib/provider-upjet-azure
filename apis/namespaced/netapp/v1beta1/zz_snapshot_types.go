@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SnapshotInitParameters struct {
@@ -50,11 +49,11 @@ type SnapshotParameters struct {
 
 	// Reference to a Account in netapp to populate accountName.
 	// +kubebuilder:validation:Optional
-	AccountNameRef *v1.NamespacedReference `json:"accountNameRef,omitempty" tf:"-"`
+	AccountNameRef *v2.NamespacedReference `json:"accountNameRef,omitempty" tf:"-"`
 
 	// Selector for a Account in netapp to populate accountName.
 	// +kubebuilder:validation:Optional
-	AccountNameSelector *v1.NamespacedSelector `json:"accountNameSelector,omitempty" tf:"-"`
+	AccountNameSelector *v2.NamespacedSelector `json:"accountNameSelector,omitempty" tf:"-"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -67,11 +66,11 @@ type SnapshotParameters struct {
 
 	// Reference to a Pool in netapp to populate poolName.
 	// +kubebuilder:validation:Optional
-	PoolNameRef *v1.NamespacedReference `json:"poolNameRef,omitempty" tf:"-"`
+	PoolNameRef *v2.NamespacedReference `json:"poolNameRef,omitempty" tf:"-"`
 
 	// Selector for a Pool in netapp to populate poolName.
 	// +kubebuilder:validation:Optional
-	PoolNameSelector *v1.NamespacedSelector `json:"poolNameSelector,omitempty" tf:"-"`
+	PoolNameSelector *v2.NamespacedSelector `json:"poolNameSelector,omitempty" tf:"-"`
 
 	// The name of the resource group where the NetApp Snapshot should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
@@ -80,11 +79,11 @@ type SnapshotParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The name of the NetApp volume in which the NetApp Snapshot should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/netapp/v1beta1.Volume
@@ -93,11 +92,11 @@ type SnapshotParameters struct {
 
 	// Reference to a Volume in netapp to populate volumeName.
 	// +kubebuilder:validation:Optional
-	VolumeNameRef *v1.NamespacedReference `json:"volumeNameRef,omitempty" tf:"-"`
+	VolumeNameRef *v2.NamespacedReference `json:"volumeNameRef,omitempty" tf:"-"`
 
 	// Selector for a Volume in netapp to populate volumeName.
 	// +kubebuilder:validation:Optional
-	VolumeNameSelector *v1.NamespacedSelector `json:"volumeNameSelector,omitempty" tf:"-"`
+	VolumeNameSelector *v2.NamespacedSelector `json:"volumeNameSelector,omitempty" tf:"-"`
 }
 
 // SnapshotSpec defines the desired state of Snapshot
@@ -119,8 +118,8 @@ type SnapshotSpec struct {
 
 // SnapshotStatus defines the observed state of Snapshot.
 type SnapshotStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SnapshotObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SnapshotObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SentinelDataConnectorIOTInitParameters struct {
@@ -42,11 +41,11 @@ type SentinelDataConnectorIOTParameters struct {
 
 	// Reference to a SentinelLogAnalyticsWorkspaceOnboarding in securityinsights to populate logAnalyticsWorkspaceId.
 	// +kubebuilder:validation:Optional
-	LogAnalyticsWorkspaceIDRef *v1.NamespacedReference `json:"logAnalyticsWorkspaceIdRef,omitempty" tf:"-"`
+	LogAnalyticsWorkspaceIDRef *v2.NamespacedReference `json:"logAnalyticsWorkspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a SentinelLogAnalyticsWorkspaceOnboarding in securityinsights to populate logAnalyticsWorkspaceId.
 	// +kubebuilder:validation:Optional
-	LogAnalyticsWorkspaceIDSelector *v1.NamespacedSelector `json:"logAnalyticsWorkspaceIdSelector,omitempty" tf:"-"`
+	LogAnalyticsWorkspaceIDSelector *v2.NamespacedSelector `json:"logAnalyticsWorkspaceIdSelector,omitempty" tf:"-"`
 
 	// The ID of the subscription that this Iot Data Connector connects to. Changing this forces a new Iot Data Connector to be created.
 	// +kubebuilder:validation:Optional
@@ -72,8 +71,8 @@ type SentinelDataConnectorIOTSpec struct {
 
 // SentinelDataConnectorIOTStatus defines the observed state of SentinelDataConnectorIOT.
 type SentinelDataConnectorIOTStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SentinelDataConnectorIOTObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SentinelDataConnectorIOTObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type RoleAssignmentInitParameters struct {
@@ -43,11 +43,11 @@ type RoleAssignmentInitParameters struct {
 
 	// Reference to a RoleDefinition in authorization to populate roleDefinitionId.
 	// +kubebuilder:validation:Optional
-	RoleDefinitionIDRef *v1.Reference `json:"roleDefinitionIdRef,omitempty" tf:"-"`
+	RoleDefinitionIDRef *v2.Reference `json:"roleDefinitionIdRef,omitempty" tf:"-"`
 
 	// Selector for a RoleDefinition in authorization to populate roleDefinitionId.
 	// +kubebuilder:validation:Optional
-	RoleDefinitionIDSelector *v1.Selector `json:"roleDefinitionIdSelector,omitempty" tf:"-"`
+	RoleDefinitionIDSelector *v2.Selector `json:"roleDefinitionIdSelector,omitempty" tf:"-"`
 
 	// The name of a built-in Role. Changing this forces a new resource to be created.
 	RoleDefinitionName *string `json:"roleDefinitionName,omitempty" tf:"role_definition_name,omitempty"`
@@ -136,11 +136,11 @@ type RoleAssignmentParameters struct {
 
 	// Reference to a RoleDefinition in authorization to populate roleDefinitionId.
 	// +kubebuilder:validation:Optional
-	RoleDefinitionIDRef *v1.Reference `json:"roleDefinitionIdRef,omitempty" tf:"-"`
+	RoleDefinitionIDRef *v2.Reference `json:"roleDefinitionIdRef,omitempty" tf:"-"`
 
 	// Selector for a RoleDefinition in authorization to populate roleDefinitionId.
 	// +kubebuilder:validation:Optional
-	RoleDefinitionIDSelector *v1.Selector `json:"roleDefinitionIdSelector,omitempty" tf:"-"`
+	RoleDefinitionIDSelector *v2.Selector `json:"roleDefinitionIdSelector,omitempty" tf:"-"`
 
 	// The name of a built-in Role. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -157,8 +157,8 @@ type RoleAssignmentParameters struct {
 
 // RoleAssignmentSpec defines the desired state of RoleAssignment
 type RoleAssignmentSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     RoleAssignmentParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   RoleAssignmentParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -174,8 +174,8 @@ type RoleAssignmentSpec struct {
 
 // RoleAssignmentStatus defines the observed state of RoleAssignment.
 type RoleAssignmentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RoleAssignmentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RoleAssignmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

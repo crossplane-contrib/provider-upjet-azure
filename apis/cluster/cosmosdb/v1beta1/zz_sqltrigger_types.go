@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SQLTriggerInitParameters struct {
@@ -57,11 +57,11 @@ type SQLTriggerParameters struct {
 
 	// Reference to a SQLContainer in cosmosdb to populate containerId.
 	// +kubebuilder:validation:Optional
-	ContainerIDRef *v1.Reference `json:"containerIdRef,omitempty" tf:"-"`
+	ContainerIDRef *v2.Reference `json:"containerIdRef,omitempty" tf:"-"`
 
 	// Selector for a SQLContainer in cosmosdb to populate containerId.
 	// +kubebuilder:validation:Optional
-	ContainerIDSelector *v1.Selector `json:"containerIdSelector,omitempty" tf:"-"`
+	ContainerIDSelector *v2.Selector `json:"containerIdSelector,omitempty" tf:"-"`
 
 	// The operation the trigger is associated with. Possible values are All, Create, Update, Delete and Replace.
 	// +kubebuilder:validation:Optional
@@ -74,8 +74,8 @@ type SQLTriggerParameters struct {
 
 // SQLTriggerSpec defines the desired state of SQLTrigger
 type SQLTriggerSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SQLTriggerParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SQLTriggerParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -91,8 +91,8 @@ type SQLTriggerSpec struct {
 
 // SQLTriggerStatus defines the observed state of SQLTrigger.
 type SQLTriggerStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SQLTriggerObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SQLTriggerObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BotChannelsRegistrationInitParameters struct {
@@ -23,7 +22,7 @@ type BotChannelsRegistrationInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The Application Insights API Key to associate with the Bot Channels Registration.
-	DeveloperAppInsightsAPIKeySecretRef *v1.LocalSecretKeySelector `json:"developerAppInsightsApiKeySecretRef,omitempty" tf:"-"`
+	DeveloperAppInsightsAPIKeySecretRef *v2.LocalSecretKeySelector `json:"developerAppInsightsApiKeySecretRef,omitempty" tf:"-"`
 
 	// The Application Insights Application ID to associate with the Bot Channels Registration.
 	DeveloperAppInsightsApplicationID *string `json:"developerAppInsightsApplicationId,omitempty" tf:"developer_app_insights_application_id,omitempty"`
@@ -67,11 +66,11 @@ type BotChannelsRegistrationInitParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The SKU of the Bot Channels Registration. Valid values include F0 or S1. Changing this forces a new resource to be created.
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
@@ -157,7 +156,7 @@ type BotChannelsRegistrationParameters struct {
 
 	// The Application Insights API Key to associate with the Bot Channels Registration.
 	// +kubebuilder:validation:Optional
-	DeveloperAppInsightsAPIKeySecretRef *v1.LocalSecretKeySelector `json:"developerAppInsightsApiKeySecretRef,omitempty" tf:"-"`
+	DeveloperAppInsightsAPIKeySecretRef *v2.LocalSecretKeySelector `json:"developerAppInsightsApiKeySecretRef,omitempty" tf:"-"`
 
 	// The Application Insights Application ID to associate with the Bot Channels Registration.
 	// +kubebuilder:validation:Optional
@@ -214,11 +213,11 @@ type BotChannelsRegistrationParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The SKU of the Bot Channels Registration. Valid values include F0 or S1. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -253,8 +252,8 @@ type BotChannelsRegistrationSpec struct {
 
 // BotChannelsRegistrationStatus defines the observed state of BotChannelsRegistration.
 type BotChannelsRegistrationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BotChannelsRegistrationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BotChannelsRegistrationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type EnvironmentIdentityInitParameters struct {
@@ -55,7 +55,7 @@ type EnvironmentInitParameters struct {
 
 	// Application Insights connection string used by Dapr to export Service to Service communication telemetry. Changing this forces a new resource to be created.
 	// Application Insights connection string used by Dapr to export Service to Service communication telemetry.
-	DaprApplicationInsightsConnectionStringSecretRef *v1.SecretKeySelector `json:"daprApplicationInsightsConnectionStringSecretRef,omitempty" tf:"-"`
+	DaprApplicationInsightsConnectionStringSecretRef *v2.SecretKeySelector `json:"daprApplicationInsightsConnectionStringSecretRef,omitempty" tf:"-"`
 
 	// An identity block as defined below.
 	Identity *EnvironmentIdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
@@ -67,11 +67,11 @@ type EnvironmentInitParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate infrastructureResourceGroupName.
 	// +kubebuilder:validation:Optional
-	InfrastructureResourceGroupNameRef *v1.Reference `json:"infrastructureResourceGroupNameRef,omitempty" tf:"-"`
+	InfrastructureResourceGroupNameRef *v2.Reference `json:"infrastructureResourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate infrastructureResourceGroupName.
 	// +kubebuilder:validation:Optional
-	InfrastructureResourceGroupNameSelector *v1.Selector `json:"infrastructureResourceGroupNameSelector,omitempty" tf:"-"`
+	InfrastructureResourceGroupNameSelector *v2.Selector `json:"infrastructureResourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The existing Subnet to use for the Container Apps Control Plane. Changing this forces a new resource to be created.
 	// The existing Subnet to use for the Container Apps Control Plane. **NOTE:** The Subnet must have a `/21` or larger address space.
@@ -81,11 +81,11 @@ type EnvironmentInitParameters struct {
 
 	// Reference to a Subnet in network to populate infrastructureSubnetId.
 	// +kubebuilder:validation:Optional
-	InfrastructureSubnetIDRef *v1.Reference `json:"infrastructureSubnetIdRef,omitempty" tf:"-"`
+	InfrastructureSubnetIDRef *v2.Reference `json:"infrastructureSubnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate infrastructureSubnetId.
 	// +kubebuilder:validation:Optional
-	InfrastructureSubnetIDSelector *v1.Selector `json:"infrastructureSubnetIdSelector,omitempty" tf:"-"`
+	InfrastructureSubnetIDSelector *v2.Selector `json:"infrastructureSubnetIdSelector,omitempty" tf:"-"`
 
 	// Should the Container Environment operate in Internal Load Balancing Mode? Defaults to false. Changing this forces a new resource to be created.
 	// Should the Container Environment operate in Internal Load Balancing Mode? Defaults to `false`. **Note:** can only be set to `true` if `infrastructure_subnet_id` is specified.
@@ -102,11 +102,11 @@ type EnvironmentInitParameters struct {
 
 	// Reference to a Workspace in operationalinsights to populate logAnalyticsWorkspaceId.
 	// +kubebuilder:validation:Optional
-	LogAnalyticsWorkspaceIDRef *v1.Reference `json:"logAnalyticsWorkspaceIdRef,omitempty" tf:"-"`
+	LogAnalyticsWorkspaceIDRef *v2.Reference `json:"logAnalyticsWorkspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in operationalinsights to populate logAnalyticsWorkspaceId.
 	// +kubebuilder:validation:Optional
-	LogAnalyticsWorkspaceIDSelector *v1.Selector `json:"logAnalyticsWorkspaceIdSelector,omitempty" tf:"-"`
+	LogAnalyticsWorkspaceIDSelector *v2.Selector `json:"logAnalyticsWorkspaceIdSelector,omitempty" tf:"-"`
 
 	// Where the application logs will be saved for this Container Apps Managed Environment. Possible values include log-analytics and azure-monitor. Omitting this value will result in logs being streamed only.
 	LogsDestination *string `json:"logsDestination,omitempty" tf:"logs_destination,omitempty"`
@@ -211,7 +211,7 @@ type EnvironmentParameters struct {
 	// Application Insights connection string used by Dapr to export Service to Service communication telemetry. Changing this forces a new resource to be created.
 	// Application Insights connection string used by Dapr to export Service to Service communication telemetry.
 	// +kubebuilder:validation:Optional
-	DaprApplicationInsightsConnectionStringSecretRef *v1.SecretKeySelector `json:"daprApplicationInsightsConnectionStringSecretRef,omitempty" tf:"-"`
+	DaprApplicationInsightsConnectionStringSecretRef *v2.SecretKeySelector `json:"daprApplicationInsightsConnectionStringSecretRef,omitempty" tf:"-"`
 
 	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
@@ -225,11 +225,11 @@ type EnvironmentParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate infrastructureResourceGroupName.
 	// +kubebuilder:validation:Optional
-	InfrastructureResourceGroupNameRef *v1.Reference `json:"infrastructureResourceGroupNameRef,omitempty" tf:"-"`
+	InfrastructureResourceGroupNameRef *v2.Reference `json:"infrastructureResourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate infrastructureResourceGroupName.
 	// +kubebuilder:validation:Optional
-	InfrastructureResourceGroupNameSelector *v1.Selector `json:"infrastructureResourceGroupNameSelector,omitempty" tf:"-"`
+	InfrastructureResourceGroupNameSelector *v2.Selector `json:"infrastructureResourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The existing Subnet to use for the Container Apps Control Plane. Changing this forces a new resource to be created.
 	// The existing Subnet to use for the Container Apps Control Plane. **NOTE:** The Subnet must have a `/21` or larger address space.
@@ -240,11 +240,11 @@ type EnvironmentParameters struct {
 
 	// Reference to a Subnet in network to populate infrastructureSubnetId.
 	// +kubebuilder:validation:Optional
-	InfrastructureSubnetIDRef *v1.Reference `json:"infrastructureSubnetIdRef,omitempty" tf:"-"`
+	InfrastructureSubnetIDRef *v2.Reference `json:"infrastructureSubnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate infrastructureSubnetId.
 	// +kubebuilder:validation:Optional
-	InfrastructureSubnetIDSelector *v1.Selector `json:"infrastructureSubnetIdSelector,omitempty" tf:"-"`
+	InfrastructureSubnetIDSelector *v2.Selector `json:"infrastructureSubnetIdSelector,omitempty" tf:"-"`
 
 	// Should the Container Environment operate in Internal Load Balancing Mode? Defaults to false. Changing this forces a new resource to be created.
 	// Should the Container Environment operate in Internal Load Balancing Mode? Defaults to `false`. **Note:** can only be set to `true` if `infrastructure_subnet_id` is specified.
@@ -264,11 +264,11 @@ type EnvironmentParameters struct {
 
 	// Reference to a Workspace in operationalinsights to populate logAnalyticsWorkspaceId.
 	// +kubebuilder:validation:Optional
-	LogAnalyticsWorkspaceIDRef *v1.Reference `json:"logAnalyticsWorkspaceIdRef,omitempty" tf:"-"`
+	LogAnalyticsWorkspaceIDRef *v2.Reference `json:"logAnalyticsWorkspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in operationalinsights to populate logAnalyticsWorkspaceId.
 	// +kubebuilder:validation:Optional
-	LogAnalyticsWorkspaceIDSelector *v1.Selector `json:"logAnalyticsWorkspaceIdSelector,omitempty" tf:"-"`
+	LogAnalyticsWorkspaceIDSelector *v2.Selector `json:"logAnalyticsWorkspaceIdSelector,omitempty" tf:"-"`
 
 	// Where the application logs will be saved for this Container Apps Managed Environment. Possible values include log-analytics and azure-monitor. Omitting this value will result in logs being streamed only.
 	// +kubebuilder:validation:Optional
@@ -291,11 +291,11 @@ type EnvironmentParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
@@ -362,8 +362,8 @@ type WorkloadProfileParameters struct {
 
 // EnvironmentSpec defines the desired state of Environment
 type EnvironmentSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     EnvironmentParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   EnvironmentParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -379,8 +379,8 @@ type EnvironmentSpec struct {
 
 // EnvironmentStatus defines the observed state of Environment.
 type EnvironmentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        EnvironmentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               EnvironmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

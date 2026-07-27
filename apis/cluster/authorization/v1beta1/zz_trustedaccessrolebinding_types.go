@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type TrustedAccessRoleBindingInitParameters struct {
@@ -25,11 +25,11 @@ type TrustedAccessRoleBindingInitParameters struct {
 
 	// Reference to a Workspace in machinelearningservices to populate sourceResourceId.
 	// +kubebuilder:validation:Optional
-	SourceResourceIDRef *v1.Reference `json:"sourceResourceIdRef,omitempty" tf:"-"`
+	SourceResourceIDRef *v2.Reference `json:"sourceResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in machinelearningservices to populate sourceResourceId.
 	// +kubebuilder:validation:Optional
-	SourceResourceIDSelector *v1.Selector `json:"sourceResourceIdSelector,omitempty" tf:"-"`
+	SourceResourceIDSelector *v2.Selector `json:"sourceResourceIdSelector,omitempty" tf:"-"`
 }
 
 type TrustedAccessRoleBindingObservation struct {
@@ -57,11 +57,11 @@ type TrustedAccessRoleBindingParameters struct {
 
 	// Reference to a KubernetesCluster in containerservice to populate kubernetesClusterId.
 	// +kubebuilder:validation:Optional
-	KubernetesClusterIDRef *v1.Reference `json:"kubernetesClusterIdRef,omitempty" tf:"-"`
+	KubernetesClusterIDRef *v2.Reference `json:"kubernetesClusterIdRef,omitempty" tf:"-"`
 
 	// Selector for a KubernetesCluster in containerservice to populate kubernetesClusterId.
 	// +kubebuilder:validation:Optional
-	KubernetesClusterIDSelector *v1.Selector `json:"kubernetesClusterIdSelector,omitempty" tf:"-"`
+	KubernetesClusterIDSelector *v2.Selector `json:"kubernetesClusterIdSelector,omitempty" tf:"-"`
 
 	// A list of roles to bind, each item is a resource type qualified role name.
 	// +kubebuilder:validation:Optional
@@ -75,17 +75,17 @@ type TrustedAccessRoleBindingParameters struct {
 
 	// Reference to a Workspace in machinelearningservices to populate sourceResourceId.
 	// +kubebuilder:validation:Optional
-	SourceResourceIDRef *v1.Reference `json:"sourceResourceIdRef,omitempty" tf:"-"`
+	SourceResourceIDRef *v2.Reference `json:"sourceResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in machinelearningservices to populate sourceResourceId.
 	// +kubebuilder:validation:Optional
-	SourceResourceIDSelector *v1.Selector `json:"sourceResourceIdSelector,omitempty" tf:"-"`
+	SourceResourceIDSelector *v2.Selector `json:"sourceResourceIdSelector,omitempty" tf:"-"`
 }
 
 // TrustedAccessRoleBindingSpec defines the desired state of TrustedAccessRoleBinding
 type TrustedAccessRoleBindingSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     TrustedAccessRoleBindingParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   TrustedAccessRoleBindingParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -101,8 +101,8 @@ type TrustedAccessRoleBindingSpec struct {
 
 // TrustedAccessRoleBindingStatus defines the observed state of TrustedAccessRoleBinding.
 type TrustedAccessRoleBindingStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        TrustedAccessRoleBindingObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               TrustedAccessRoleBindingObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

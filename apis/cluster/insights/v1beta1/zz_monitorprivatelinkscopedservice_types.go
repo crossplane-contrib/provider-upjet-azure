@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type MonitorPrivateLinkScopedServiceInitParameters struct {
@@ -22,11 +22,11 @@ type MonitorPrivateLinkScopedServiceInitParameters struct {
 
 	// Reference to a ApplicationInsights in insights to populate linkedResourceId.
 	// +kubebuilder:validation:Optional
-	LinkedResourceIDRef *v1.Reference `json:"linkedResourceIdRef,omitempty" tf:"-"`
+	LinkedResourceIDRef *v2.Reference `json:"linkedResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a ApplicationInsights in insights to populate linkedResourceId.
 	// +kubebuilder:validation:Optional
-	LinkedResourceIDSelector *v1.Selector `json:"linkedResourceIdSelector,omitempty" tf:"-"`
+	LinkedResourceIDSelector *v2.Selector `json:"linkedResourceIdSelector,omitempty" tf:"-"`
 }
 
 type MonitorPrivateLinkScopedServiceObservation struct {
@@ -54,11 +54,11 @@ type MonitorPrivateLinkScopedServiceParameters struct {
 
 	// Reference to a ApplicationInsights in insights to populate linkedResourceId.
 	// +kubebuilder:validation:Optional
-	LinkedResourceIDRef *v1.Reference `json:"linkedResourceIdRef,omitempty" tf:"-"`
+	LinkedResourceIDRef *v2.Reference `json:"linkedResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a ApplicationInsights in insights to populate linkedResourceId.
 	// +kubebuilder:validation:Optional
-	LinkedResourceIDSelector *v1.Selector `json:"linkedResourceIdSelector,omitempty" tf:"-"`
+	LinkedResourceIDSelector *v2.Selector `json:"linkedResourceIdSelector,omitempty" tf:"-"`
 
 	// The name of the Resource Group where the Azure Monitor Private Link Scoped Service should exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
@@ -67,11 +67,11 @@ type MonitorPrivateLinkScopedServiceParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The name of the Azure Monitor Private Link Scope. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/insights/v1beta1.MonitorPrivateLinkScope
@@ -80,17 +80,17 @@ type MonitorPrivateLinkScopedServiceParameters struct {
 
 	// Reference to a MonitorPrivateLinkScope in insights to populate scopeName.
 	// +kubebuilder:validation:Optional
-	ScopeNameRef *v1.Reference `json:"scopeNameRef,omitempty" tf:"-"`
+	ScopeNameRef *v2.Reference `json:"scopeNameRef,omitempty" tf:"-"`
 
 	// Selector for a MonitorPrivateLinkScope in insights to populate scopeName.
 	// +kubebuilder:validation:Optional
-	ScopeNameSelector *v1.Selector `json:"scopeNameSelector,omitempty" tf:"-"`
+	ScopeNameSelector *v2.Selector `json:"scopeNameSelector,omitempty" tf:"-"`
 }
 
 // MonitorPrivateLinkScopedServiceSpec defines the desired state of MonitorPrivateLinkScopedService
 type MonitorPrivateLinkScopedServiceSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     MonitorPrivateLinkScopedServiceParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   MonitorPrivateLinkScopedServiceParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -106,8 +106,8 @@ type MonitorPrivateLinkScopedServiceSpec struct {
 
 // MonitorPrivateLinkScopedServiceStatus defines the observed state of MonitorPrivateLinkScopedService.
 type MonitorPrivateLinkScopedServiceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MonitorPrivateLinkScopedServiceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MonitorPrivateLinkScopedServiceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

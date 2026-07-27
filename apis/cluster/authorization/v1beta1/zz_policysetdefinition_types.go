@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type PolicyDefinitionGroupInitParameters struct {
@@ -149,11 +149,11 @@ type PolicySetDefinitionInitParameters struct {
 
 	// Reference to a ManagementGroup in management to populate managementGroupId.
 	// +kubebuilder:validation:Optional
-	ManagementGroupIDRef *v1.Reference `json:"managementGroupIdRef,omitempty" tf:"-"`
+	ManagementGroupIDRef *v2.Reference `json:"managementGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a ManagementGroup in management to populate managementGroupId.
 	// +kubebuilder:validation:Optional
-	ManagementGroupIDSelector *v1.Selector `json:"managementGroupIdSelector,omitempty" tf:"-"`
+	ManagementGroupIDSelector *v2.Selector `json:"managementGroupIdSelector,omitempty" tf:"-"`
 
 	// The metadata for the Policy Set Definition in JSON format.
 	Metadata *string `json:"metadata,omitempty" tf:"metadata,omitempty"`
@@ -219,11 +219,11 @@ type PolicySetDefinitionParameters struct {
 
 	// Reference to a ManagementGroup in management to populate managementGroupId.
 	// +kubebuilder:validation:Optional
-	ManagementGroupIDRef *v1.Reference `json:"managementGroupIdRef,omitempty" tf:"-"`
+	ManagementGroupIDRef *v2.Reference `json:"managementGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a ManagementGroup in management to populate managementGroupId.
 	// +kubebuilder:validation:Optional
-	ManagementGroupIDSelector *v1.Selector `json:"managementGroupIdSelector,omitempty" tf:"-"`
+	ManagementGroupIDSelector *v2.Selector `json:"managementGroupIdSelector,omitempty" tf:"-"`
 
 	// The metadata for the Policy Set Definition in JSON format.
 	// +kubebuilder:validation:Optional
@@ -248,8 +248,8 @@ type PolicySetDefinitionParameters struct {
 
 // PolicySetDefinitionSpec defines the desired state of PolicySetDefinition
 type PolicySetDefinitionSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     PolicySetDefinitionParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   PolicySetDefinitionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -265,8 +265,8 @@ type PolicySetDefinitionSpec struct {
 
 // PolicySetDefinitionStatus defines the observed state of PolicySetDefinition.
 type PolicySetDefinitionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PolicySetDefinitionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PolicySetDefinitionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

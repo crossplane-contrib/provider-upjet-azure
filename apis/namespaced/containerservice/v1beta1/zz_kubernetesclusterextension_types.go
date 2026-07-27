@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AksAssignedIdentityInitParameters struct {
@@ -112,11 +111,11 @@ type KubernetesClusterExtensionParameters struct {
 
 	// Reference to a KubernetesCluster in containerservice to populate clusterId.
 	// +kubebuilder:validation:Optional
-	ClusterIDRef *v1.NamespacedReference `json:"clusterIdRef,omitempty" tf:"-"`
+	ClusterIDRef *v2.NamespacedReference `json:"clusterIdRef,omitempty" tf:"-"`
 
 	// Selector for a KubernetesCluster in containerservice to populate clusterId.
 	// +kubebuilder:validation:Optional
-	ClusterIDSelector *v1.NamespacedSelector `json:"clusterIdSelector,omitempty" tf:"-"`
+	ClusterIDSelector *v2.NamespacedSelector `json:"clusterIdSelector,omitempty" tf:"-"`
 
 	// Configuration settings that are sensitive, as name-value pairs for configuring this extension.
 	// +kubebuilder:validation:Optional
@@ -231,8 +230,8 @@ type KubernetesClusterExtensionSpec struct {
 
 // KubernetesClusterExtensionStatus defines the observed state of KubernetesClusterExtension.
 type KubernetesClusterExtensionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        KubernetesClusterExtensionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               KubernetesClusterExtensionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

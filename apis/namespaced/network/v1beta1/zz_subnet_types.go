@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DelegationInitParameters struct {
@@ -215,11 +214,11 @@ type SubnetParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The list of IDs of Service Endpoint Policies to associate with the subnet.
 	// +kubebuilder:validation:Optional
@@ -242,11 +241,11 @@ type SubnetParameters struct {
 
 	// Reference to a VirtualNetwork in network to populate virtualNetworkName.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkNameRef *v1.NamespacedReference `json:"virtualNetworkNameRef,omitempty" tf:"-"`
+	VirtualNetworkNameRef *v2.NamespacedReference `json:"virtualNetworkNameRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualNetwork in network to populate virtualNetworkName.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkNameSelector *v1.NamespacedSelector `json:"virtualNetworkNameSelector,omitempty" tf:"-"`
+	VirtualNetworkNameSelector *v2.NamespacedSelector `json:"virtualNetworkNameSelector,omitempty" tf:"-"`
 }
 
 // SubnetSpec defines the desired state of Subnet
@@ -268,8 +267,8 @@ type SubnetSpec struct {
 
 // SubnetStatus defines the observed state of Subnet.
 type SubnetStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SubnetObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SubnetObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

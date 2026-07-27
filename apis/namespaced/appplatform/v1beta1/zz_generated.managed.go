@@ -5,884 +5,884 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this SpringCloudAPIPortal.
-func (mg *SpringCloudAPIPortal) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *SpringCloudAPIPortal) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this SpringCloudAPIPortal.
-func (mg *SpringCloudAPIPortal) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *SpringCloudAPIPortal) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this SpringCloudAPIPortal.
-func (mg *SpringCloudAPIPortal) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *SpringCloudAPIPortal) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this SpringCloudAPIPortal.
-func (mg *SpringCloudAPIPortal) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *SpringCloudAPIPortal) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this SpringCloudAPIPortal.
-func (mg *SpringCloudAPIPortal) SetConditions(c ...xpv1.Condition) {
+func (mg *SpringCloudAPIPortal) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this SpringCloudAPIPortal.
-func (mg *SpringCloudAPIPortal) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *SpringCloudAPIPortal) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this SpringCloudAPIPortal.
-func (mg *SpringCloudAPIPortal) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *SpringCloudAPIPortal) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this SpringCloudAPIPortal.
-func (mg *SpringCloudAPIPortal) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *SpringCloudAPIPortal) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this SpringCloudAPIPortalCustomDomain.
-func (mg *SpringCloudAPIPortalCustomDomain) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *SpringCloudAPIPortalCustomDomain) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this SpringCloudAPIPortalCustomDomain.
-func (mg *SpringCloudAPIPortalCustomDomain) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *SpringCloudAPIPortalCustomDomain) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this SpringCloudAPIPortalCustomDomain.
-func (mg *SpringCloudAPIPortalCustomDomain) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *SpringCloudAPIPortalCustomDomain) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this SpringCloudAPIPortalCustomDomain.
-func (mg *SpringCloudAPIPortalCustomDomain) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *SpringCloudAPIPortalCustomDomain) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this SpringCloudAPIPortalCustomDomain.
-func (mg *SpringCloudAPIPortalCustomDomain) SetConditions(c ...xpv1.Condition) {
+func (mg *SpringCloudAPIPortalCustomDomain) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this SpringCloudAPIPortalCustomDomain.
-func (mg *SpringCloudAPIPortalCustomDomain) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *SpringCloudAPIPortalCustomDomain) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this SpringCloudAPIPortalCustomDomain.
-func (mg *SpringCloudAPIPortalCustomDomain) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *SpringCloudAPIPortalCustomDomain) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this SpringCloudAPIPortalCustomDomain.
-func (mg *SpringCloudAPIPortalCustomDomain) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *SpringCloudAPIPortalCustomDomain) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this SpringCloudAccelerator.
-func (mg *SpringCloudAccelerator) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *SpringCloudAccelerator) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this SpringCloudAccelerator.
-func (mg *SpringCloudAccelerator) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *SpringCloudAccelerator) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this SpringCloudAccelerator.
-func (mg *SpringCloudAccelerator) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *SpringCloudAccelerator) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this SpringCloudAccelerator.
-func (mg *SpringCloudAccelerator) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *SpringCloudAccelerator) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this SpringCloudAccelerator.
-func (mg *SpringCloudAccelerator) SetConditions(c ...xpv1.Condition) {
+func (mg *SpringCloudAccelerator) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this SpringCloudAccelerator.
-func (mg *SpringCloudAccelerator) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *SpringCloudAccelerator) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this SpringCloudAccelerator.
-func (mg *SpringCloudAccelerator) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *SpringCloudAccelerator) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this SpringCloudAccelerator.
-func (mg *SpringCloudAccelerator) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *SpringCloudAccelerator) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this SpringCloudActiveDeployment.
-func (mg *SpringCloudActiveDeployment) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *SpringCloudActiveDeployment) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this SpringCloudActiveDeployment.
-func (mg *SpringCloudActiveDeployment) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *SpringCloudActiveDeployment) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this SpringCloudActiveDeployment.
-func (mg *SpringCloudActiveDeployment) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *SpringCloudActiveDeployment) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this SpringCloudActiveDeployment.
-func (mg *SpringCloudActiveDeployment) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *SpringCloudActiveDeployment) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this SpringCloudActiveDeployment.
-func (mg *SpringCloudActiveDeployment) SetConditions(c ...xpv1.Condition) {
+func (mg *SpringCloudActiveDeployment) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this SpringCloudActiveDeployment.
-func (mg *SpringCloudActiveDeployment) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *SpringCloudActiveDeployment) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this SpringCloudActiveDeployment.
-func (mg *SpringCloudActiveDeployment) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *SpringCloudActiveDeployment) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this SpringCloudActiveDeployment.
-func (mg *SpringCloudActiveDeployment) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *SpringCloudActiveDeployment) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this SpringCloudApp.
-func (mg *SpringCloudApp) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *SpringCloudApp) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this SpringCloudApp.
-func (mg *SpringCloudApp) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *SpringCloudApp) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this SpringCloudApp.
-func (mg *SpringCloudApp) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *SpringCloudApp) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this SpringCloudApp.
-func (mg *SpringCloudApp) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *SpringCloudApp) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this SpringCloudApp.
-func (mg *SpringCloudApp) SetConditions(c ...xpv1.Condition) {
+func (mg *SpringCloudApp) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this SpringCloudApp.
-func (mg *SpringCloudApp) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *SpringCloudApp) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this SpringCloudApp.
-func (mg *SpringCloudApp) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *SpringCloudApp) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this SpringCloudApp.
-func (mg *SpringCloudApp) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *SpringCloudApp) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this SpringCloudAppCosmosDBAssociation.
-func (mg *SpringCloudAppCosmosDBAssociation) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *SpringCloudAppCosmosDBAssociation) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this SpringCloudAppCosmosDBAssociation.
-func (mg *SpringCloudAppCosmosDBAssociation) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *SpringCloudAppCosmosDBAssociation) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this SpringCloudAppCosmosDBAssociation.
-func (mg *SpringCloudAppCosmosDBAssociation) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *SpringCloudAppCosmosDBAssociation) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this SpringCloudAppCosmosDBAssociation.
-func (mg *SpringCloudAppCosmosDBAssociation) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *SpringCloudAppCosmosDBAssociation) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this SpringCloudAppCosmosDBAssociation.
-func (mg *SpringCloudAppCosmosDBAssociation) SetConditions(c ...xpv1.Condition) {
+func (mg *SpringCloudAppCosmosDBAssociation) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this SpringCloudAppCosmosDBAssociation.
-func (mg *SpringCloudAppCosmosDBAssociation) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *SpringCloudAppCosmosDBAssociation) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this SpringCloudAppCosmosDBAssociation.
-func (mg *SpringCloudAppCosmosDBAssociation) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *SpringCloudAppCosmosDBAssociation) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this SpringCloudAppCosmosDBAssociation.
-func (mg *SpringCloudAppCosmosDBAssociation) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *SpringCloudAppCosmosDBAssociation) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this SpringCloudAppMySQLAssociation.
-func (mg *SpringCloudAppMySQLAssociation) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *SpringCloudAppMySQLAssociation) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this SpringCloudAppMySQLAssociation.
-func (mg *SpringCloudAppMySQLAssociation) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *SpringCloudAppMySQLAssociation) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this SpringCloudAppMySQLAssociation.
-func (mg *SpringCloudAppMySQLAssociation) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *SpringCloudAppMySQLAssociation) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this SpringCloudAppMySQLAssociation.
-func (mg *SpringCloudAppMySQLAssociation) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *SpringCloudAppMySQLAssociation) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this SpringCloudAppMySQLAssociation.
-func (mg *SpringCloudAppMySQLAssociation) SetConditions(c ...xpv1.Condition) {
+func (mg *SpringCloudAppMySQLAssociation) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this SpringCloudAppMySQLAssociation.
-func (mg *SpringCloudAppMySQLAssociation) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *SpringCloudAppMySQLAssociation) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this SpringCloudAppMySQLAssociation.
-func (mg *SpringCloudAppMySQLAssociation) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *SpringCloudAppMySQLAssociation) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this SpringCloudAppMySQLAssociation.
-func (mg *SpringCloudAppMySQLAssociation) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *SpringCloudAppMySQLAssociation) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this SpringCloudAppRedisAssociation.
-func (mg *SpringCloudAppRedisAssociation) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *SpringCloudAppRedisAssociation) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this SpringCloudAppRedisAssociation.
-func (mg *SpringCloudAppRedisAssociation) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *SpringCloudAppRedisAssociation) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this SpringCloudAppRedisAssociation.
-func (mg *SpringCloudAppRedisAssociation) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *SpringCloudAppRedisAssociation) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this SpringCloudAppRedisAssociation.
-func (mg *SpringCloudAppRedisAssociation) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *SpringCloudAppRedisAssociation) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this SpringCloudAppRedisAssociation.
-func (mg *SpringCloudAppRedisAssociation) SetConditions(c ...xpv1.Condition) {
+func (mg *SpringCloudAppRedisAssociation) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this SpringCloudAppRedisAssociation.
-func (mg *SpringCloudAppRedisAssociation) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *SpringCloudAppRedisAssociation) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this SpringCloudAppRedisAssociation.
-func (mg *SpringCloudAppRedisAssociation) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *SpringCloudAppRedisAssociation) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this SpringCloudAppRedisAssociation.
-func (mg *SpringCloudAppRedisAssociation) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *SpringCloudAppRedisAssociation) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this SpringCloudBuildDeployment.
-func (mg *SpringCloudBuildDeployment) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *SpringCloudBuildDeployment) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this SpringCloudBuildDeployment.
-func (mg *SpringCloudBuildDeployment) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *SpringCloudBuildDeployment) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this SpringCloudBuildDeployment.
-func (mg *SpringCloudBuildDeployment) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *SpringCloudBuildDeployment) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this SpringCloudBuildDeployment.
-func (mg *SpringCloudBuildDeployment) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *SpringCloudBuildDeployment) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this SpringCloudBuildDeployment.
-func (mg *SpringCloudBuildDeployment) SetConditions(c ...xpv1.Condition) {
+func (mg *SpringCloudBuildDeployment) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this SpringCloudBuildDeployment.
-func (mg *SpringCloudBuildDeployment) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *SpringCloudBuildDeployment) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this SpringCloudBuildDeployment.
-func (mg *SpringCloudBuildDeployment) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *SpringCloudBuildDeployment) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this SpringCloudBuildDeployment.
-func (mg *SpringCloudBuildDeployment) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *SpringCloudBuildDeployment) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this SpringCloudBuildPackBinding.
-func (mg *SpringCloudBuildPackBinding) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *SpringCloudBuildPackBinding) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this SpringCloudBuildPackBinding.
-func (mg *SpringCloudBuildPackBinding) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *SpringCloudBuildPackBinding) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this SpringCloudBuildPackBinding.
-func (mg *SpringCloudBuildPackBinding) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *SpringCloudBuildPackBinding) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this SpringCloudBuildPackBinding.
-func (mg *SpringCloudBuildPackBinding) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *SpringCloudBuildPackBinding) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this SpringCloudBuildPackBinding.
-func (mg *SpringCloudBuildPackBinding) SetConditions(c ...xpv1.Condition) {
+func (mg *SpringCloudBuildPackBinding) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this SpringCloudBuildPackBinding.
-func (mg *SpringCloudBuildPackBinding) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *SpringCloudBuildPackBinding) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this SpringCloudBuildPackBinding.
-func (mg *SpringCloudBuildPackBinding) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *SpringCloudBuildPackBinding) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this SpringCloudBuildPackBinding.
-func (mg *SpringCloudBuildPackBinding) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *SpringCloudBuildPackBinding) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this SpringCloudBuilder.
-func (mg *SpringCloudBuilder) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *SpringCloudBuilder) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this SpringCloudBuilder.
-func (mg *SpringCloudBuilder) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *SpringCloudBuilder) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this SpringCloudBuilder.
-func (mg *SpringCloudBuilder) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *SpringCloudBuilder) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this SpringCloudBuilder.
-func (mg *SpringCloudBuilder) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *SpringCloudBuilder) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this SpringCloudBuilder.
-func (mg *SpringCloudBuilder) SetConditions(c ...xpv1.Condition) {
+func (mg *SpringCloudBuilder) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this SpringCloudBuilder.
-func (mg *SpringCloudBuilder) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *SpringCloudBuilder) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this SpringCloudBuilder.
-func (mg *SpringCloudBuilder) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *SpringCloudBuilder) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this SpringCloudBuilder.
-func (mg *SpringCloudBuilder) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *SpringCloudBuilder) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this SpringCloudCertificate.
-func (mg *SpringCloudCertificate) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *SpringCloudCertificate) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this SpringCloudCertificate.
-func (mg *SpringCloudCertificate) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *SpringCloudCertificate) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this SpringCloudCertificate.
-func (mg *SpringCloudCertificate) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *SpringCloudCertificate) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this SpringCloudCertificate.
-func (mg *SpringCloudCertificate) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *SpringCloudCertificate) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this SpringCloudCertificate.
-func (mg *SpringCloudCertificate) SetConditions(c ...xpv1.Condition) {
+func (mg *SpringCloudCertificate) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this SpringCloudCertificate.
-func (mg *SpringCloudCertificate) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *SpringCloudCertificate) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this SpringCloudCertificate.
-func (mg *SpringCloudCertificate) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *SpringCloudCertificate) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this SpringCloudCertificate.
-func (mg *SpringCloudCertificate) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *SpringCloudCertificate) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this SpringCloudConfigurationService.
-func (mg *SpringCloudConfigurationService) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *SpringCloudConfigurationService) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this SpringCloudConfigurationService.
-func (mg *SpringCloudConfigurationService) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *SpringCloudConfigurationService) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this SpringCloudConfigurationService.
-func (mg *SpringCloudConfigurationService) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *SpringCloudConfigurationService) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this SpringCloudConfigurationService.
-func (mg *SpringCloudConfigurationService) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *SpringCloudConfigurationService) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this SpringCloudConfigurationService.
-func (mg *SpringCloudConfigurationService) SetConditions(c ...xpv1.Condition) {
+func (mg *SpringCloudConfigurationService) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this SpringCloudConfigurationService.
-func (mg *SpringCloudConfigurationService) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *SpringCloudConfigurationService) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this SpringCloudConfigurationService.
-func (mg *SpringCloudConfigurationService) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *SpringCloudConfigurationService) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this SpringCloudConfigurationService.
-func (mg *SpringCloudConfigurationService) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *SpringCloudConfigurationService) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this SpringCloudContainerDeployment.
-func (mg *SpringCloudContainerDeployment) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *SpringCloudContainerDeployment) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this SpringCloudContainerDeployment.
-func (mg *SpringCloudContainerDeployment) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *SpringCloudContainerDeployment) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this SpringCloudContainerDeployment.
-func (mg *SpringCloudContainerDeployment) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *SpringCloudContainerDeployment) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this SpringCloudContainerDeployment.
-func (mg *SpringCloudContainerDeployment) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *SpringCloudContainerDeployment) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this SpringCloudContainerDeployment.
-func (mg *SpringCloudContainerDeployment) SetConditions(c ...xpv1.Condition) {
+func (mg *SpringCloudContainerDeployment) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this SpringCloudContainerDeployment.
-func (mg *SpringCloudContainerDeployment) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *SpringCloudContainerDeployment) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this SpringCloudContainerDeployment.
-func (mg *SpringCloudContainerDeployment) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *SpringCloudContainerDeployment) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this SpringCloudContainerDeployment.
-func (mg *SpringCloudContainerDeployment) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *SpringCloudContainerDeployment) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this SpringCloudCustomDomain.
-func (mg *SpringCloudCustomDomain) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *SpringCloudCustomDomain) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this SpringCloudCustomDomain.
-func (mg *SpringCloudCustomDomain) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *SpringCloudCustomDomain) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this SpringCloudCustomDomain.
-func (mg *SpringCloudCustomDomain) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *SpringCloudCustomDomain) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this SpringCloudCustomDomain.
-func (mg *SpringCloudCustomDomain) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *SpringCloudCustomDomain) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this SpringCloudCustomDomain.
-func (mg *SpringCloudCustomDomain) SetConditions(c ...xpv1.Condition) {
+func (mg *SpringCloudCustomDomain) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this SpringCloudCustomDomain.
-func (mg *SpringCloudCustomDomain) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *SpringCloudCustomDomain) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this SpringCloudCustomDomain.
-func (mg *SpringCloudCustomDomain) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *SpringCloudCustomDomain) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this SpringCloudCustomDomain.
-func (mg *SpringCloudCustomDomain) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *SpringCloudCustomDomain) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this SpringCloudCustomizedAccelerator.
-func (mg *SpringCloudCustomizedAccelerator) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *SpringCloudCustomizedAccelerator) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this SpringCloudCustomizedAccelerator.
-func (mg *SpringCloudCustomizedAccelerator) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *SpringCloudCustomizedAccelerator) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this SpringCloudCustomizedAccelerator.
-func (mg *SpringCloudCustomizedAccelerator) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *SpringCloudCustomizedAccelerator) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this SpringCloudCustomizedAccelerator.
-func (mg *SpringCloudCustomizedAccelerator) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *SpringCloudCustomizedAccelerator) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this SpringCloudCustomizedAccelerator.
-func (mg *SpringCloudCustomizedAccelerator) SetConditions(c ...xpv1.Condition) {
+func (mg *SpringCloudCustomizedAccelerator) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this SpringCloudCustomizedAccelerator.
-func (mg *SpringCloudCustomizedAccelerator) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *SpringCloudCustomizedAccelerator) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this SpringCloudCustomizedAccelerator.
-func (mg *SpringCloudCustomizedAccelerator) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *SpringCloudCustomizedAccelerator) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this SpringCloudCustomizedAccelerator.
-func (mg *SpringCloudCustomizedAccelerator) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *SpringCloudCustomizedAccelerator) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this SpringCloudDevToolPortal.
-func (mg *SpringCloudDevToolPortal) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *SpringCloudDevToolPortal) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this SpringCloudDevToolPortal.
-func (mg *SpringCloudDevToolPortal) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *SpringCloudDevToolPortal) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this SpringCloudDevToolPortal.
-func (mg *SpringCloudDevToolPortal) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *SpringCloudDevToolPortal) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this SpringCloudDevToolPortal.
-func (mg *SpringCloudDevToolPortal) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *SpringCloudDevToolPortal) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this SpringCloudDevToolPortal.
-func (mg *SpringCloudDevToolPortal) SetConditions(c ...xpv1.Condition) {
+func (mg *SpringCloudDevToolPortal) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this SpringCloudDevToolPortal.
-func (mg *SpringCloudDevToolPortal) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *SpringCloudDevToolPortal) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this SpringCloudDevToolPortal.
-func (mg *SpringCloudDevToolPortal) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *SpringCloudDevToolPortal) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this SpringCloudDevToolPortal.
-func (mg *SpringCloudDevToolPortal) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *SpringCloudDevToolPortal) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this SpringCloudGateway.
-func (mg *SpringCloudGateway) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *SpringCloudGateway) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this SpringCloudGateway.
-func (mg *SpringCloudGateway) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *SpringCloudGateway) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this SpringCloudGateway.
-func (mg *SpringCloudGateway) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *SpringCloudGateway) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this SpringCloudGateway.
-func (mg *SpringCloudGateway) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *SpringCloudGateway) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this SpringCloudGateway.
-func (mg *SpringCloudGateway) SetConditions(c ...xpv1.Condition) {
+func (mg *SpringCloudGateway) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this SpringCloudGateway.
-func (mg *SpringCloudGateway) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *SpringCloudGateway) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this SpringCloudGateway.
-func (mg *SpringCloudGateway) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *SpringCloudGateway) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this SpringCloudGateway.
-func (mg *SpringCloudGateway) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *SpringCloudGateway) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this SpringCloudGatewayCustomDomain.
-func (mg *SpringCloudGatewayCustomDomain) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *SpringCloudGatewayCustomDomain) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this SpringCloudGatewayCustomDomain.
-func (mg *SpringCloudGatewayCustomDomain) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *SpringCloudGatewayCustomDomain) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this SpringCloudGatewayCustomDomain.
-func (mg *SpringCloudGatewayCustomDomain) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *SpringCloudGatewayCustomDomain) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this SpringCloudGatewayCustomDomain.
-func (mg *SpringCloudGatewayCustomDomain) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *SpringCloudGatewayCustomDomain) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this SpringCloudGatewayCustomDomain.
-func (mg *SpringCloudGatewayCustomDomain) SetConditions(c ...xpv1.Condition) {
+func (mg *SpringCloudGatewayCustomDomain) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this SpringCloudGatewayCustomDomain.
-func (mg *SpringCloudGatewayCustomDomain) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *SpringCloudGatewayCustomDomain) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this SpringCloudGatewayCustomDomain.
-func (mg *SpringCloudGatewayCustomDomain) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *SpringCloudGatewayCustomDomain) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this SpringCloudGatewayCustomDomain.
-func (mg *SpringCloudGatewayCustomDomain) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *SpringCloudGatewayCustomDomain) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this SpringCloudJavaDeployment.
-func (mg *SpringCloudJavaDeployment) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *SpringCloudJavaDeployment) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this SpringCloudJavaDeployment.
-func (mg *SpringCloudJavaDeployment) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *SpringCloudJavaDeployment) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this SpringCloudJavaDeployment.
-func (mg *SpringCloudJavaDeployment) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *SpringCloudJavaDeployment) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this SpringCloudJavaDeployment.
-func (mg *SpringCloudJavaDeployment) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *SpringCloudJavaDeployment) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this SpringCloudJavaDeployment.
-func (mg *SpringCloudJavaDeployment) SetConditions(c ...xpv1.Condition) {
+func (mg *SpringCloudJavaDeployment) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this SpringCloudJavaDeployment.
-func (mg *SpringCloudJavaDeployment) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *SpringCloudJavaDeployment) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this SpringCloudJavaDeployment.
-func (mg *SpringCloudJavaDeployment) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *SpringCloudJavaDeployment) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this SpringCloudJavaDeployment.
-func (mg *SpringCloudJavaDeployment) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *SpringCloudJavaDeployment) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this SpringCloudService.
-func (mg *SpringCloudService) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *SpringCloudService) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this SpringCloudService.
-func (mg *SpringCloudService) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *SpringCloudService) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this SpringCloudService.
-func (mg *SpringCloudService) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *SpringCloudService) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this SpringCloudService.
-func (mg *SpringCloudService) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *SpringCloudService) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this SpringCloudService.
-func (mg *SpringCloudService) SetConditions(c ...xpv1.Condition) {
+func (mg *SpringCloudService) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this SpringCloudService.
-func (mg *SpringCloudService) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *SpringCloudService) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this SpringCloudService.
-func (mg *SpringCloudService) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *SpringCloudService) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this SpringCloudService.
-func (mg *SpringCloudService) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *SpringCloudService) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this SpringCloudStorage.
-func (mg *SpringCloudStorage) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *SpringCloudStorage) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this SpringCloudStorage.
-func (mg *SpringCloudStorage) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *SpringCloudStorage) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this SpringCloudStorage.
-func (mg *SpringCloudStorage) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *SpringCloudStorage) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this SpringCloudStorage.
-func (mg *SpringCloudStorage) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *SpringCloudStorage) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this SpringCloudStorage.
-func (mg *SpringCloudStorage) SetConditions(c ...xpv1.Condition) {
+func (mg *SpringCloudStorage) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this SpringCloudStorage.
-func (mg *SpringCloudStorage) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *SpringCloudStorage) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this SpringCloudStorage.
-func (mg *SpringCloudStorage) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *SpringCloudStorage) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this SpringCloudStorage.
-func (mg *SpringCloudStorage) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *SpringCloudStorage) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

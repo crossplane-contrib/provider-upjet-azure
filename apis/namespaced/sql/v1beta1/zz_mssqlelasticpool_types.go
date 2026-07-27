@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type MSSQLElasticPoolInitParameters struct {
@@ -138,11 +137,11 @@ type MSSQLElasticPoolParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The name of the SQL Server on which to create the elastic pool. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/sql/v1beta1.MSSQLServer
@@ -151,11 +150,11 @@ type MSSQLElasticPoolParameters struct {
 
 	// Reference to a MSSQLServer in sql to populate serverName.
 	// +kubebuilder:validation:Optional
-	ServerNameRef *v1.NamespacedReference `json:"serverNameRef,omitempty" tf:"-"`
+	ServerNameRef *v2.NamespacedReference `json:"serverNameRef,omitempty" tf:"-"`
 
 	// Selector for a MSSQLServer in sql to populate serverName.
 	// +kubebuilder:validation:Optional
-	ServerNameSelector *v1.NamespacedSelector `json:"serverNameSelector,omitempty" tf:"-"`
+	ServerNameSelector *v2.NamespacedSelector `json:"serverNameSelector,omitempty" tf:"-"`
 
 	// A sku block as defined below.
 	// +kubebuilder:validation:Optional
@@ -268,8 +267,8 @@ type MSSQLElasticPoolSpec struct {
 
 // MSSQLElasticPoolStatus defines the observed state of MSSQLElasticPool.
 type MSSQLElasticPoolStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MSSQLElasticPoolObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MSSQLElasticPoolObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

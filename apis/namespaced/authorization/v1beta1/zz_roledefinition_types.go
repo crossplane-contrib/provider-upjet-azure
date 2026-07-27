@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type PermissionsInitParameters struct {
@@ -78,11 +77,11 @@ type RoleDefinitionInitParameters struct {
 
 	// References to ManagementGroup in management to populate assignableScopes.
 	// +kubebuilder:validation:Optional
-	AssignableScopesRefs []v1.NamespacedReference `json:"assignableScopesRefs,omitempty" tf:"-"`
+	AssignableScopesRefs []v2.NamespacedReference `json:"assignableScopesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of ManagementGroup in management to populate assignableScopes.
 	// +kubebuilder:validation:Optional
-	AssignableScopesSelector *v1.NamespacedSelector `json:"assignableScopesSelector,omitempty" tf:"-"`
+	AssignableScopesSelector *v2.NamespacedSelector `json:"assignableScopesSelector,omitempty" tf:"-"`
 
 	// A description of the Role Definition.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -103,11 +102,11 @@ type RoleDefinitionInitParameters struct {
 
 	// Reference to a ManagementGroup in management to populate scope.
 	// +kubebuilder:validation:Optional
-	ScopeRef *v1.NamespacedReference `json:"scopeRef,omitempty" tf:"-"`
+	ScopeRef *v2.NamespacedReference `json:"scopeRef,omitempty" tf:"-"`
 
 	// Selector for a ManagementGroup in management to populate scope.
 	// +kubebuilder:validation:Optional
-	ScopeSelector *v1.NamespacedSelector `json:"scopeSelector,omitempty" tf:"-"`
+	ScopeSelector *v2.NamespacedSelector `json:"scopeSelector,omitempty" tf:"-"`
 }
 
 type RoleDefinitionObservation struct {
@@ -146,11 +145,11 @@ type RoleDefinitionParameters struct {
 
 	// References to ManagementGroup in management to populate assignableScopes.
 	// +kubebuilder:validation:Optional
-	AssignableScopesRefs []v1.NamespacedReference `json:"assignableScopesRefs,omitempty" tf:"-"`
+	AssignableScopesRefs []v2.NamespacedReference `json:"assignableScopesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of ManagementGroup in management to populate assignableScopes.
 	// +kubebuilder:validation:Optional
-	AssignableScopesSelector *v1.NamespacedSelector `json:"assignableScopesSelector,omitempty" tf:"-"`
+	AssignableScopesSelector *v2.NamespacedSelector `json:"assignableScopesSelector,omitempty" tf:"-"`
 
 	// A description of the Role Definition.
 	// +kubebuilder:validation:Optional
@@ -176,11 +175,11 @@ type RoleDefinitionParameters struct {
 
 	// Reference to a ManagementGroup in management to populate scope.
 	// +kubebuilder:validation:Optional
-	ScopeRef *v1.NamespacedReference `json:"scopeRef,omitempty" tf:"-"`
+	ScopeRef *v2.NamespacedReference `json:"scopeRef,omitempty" tf:"-"`
 
 	// Selector for a ManagementGroup in management to populate scope.
 	// +kubebuilder:validation:Optional
-	ScopeSelector *v1.NamespacedSelector `json:"scopeSelector,omitempty" tf:"-"`
+	ScopeSelector *v2.NamespacedSelector `json:"scopeSelector,omitempty" tf:"-"`
 }
 
 // RoleDefinitionSpec defines the desired state of RoleDefinition
@@ -202,8 +201,8 @@ type RoleDefinitionSpec struct {
 
 // RoleDefinitionStatus defines the observed state of RoleDefinition.
 type RoleDefinitionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RoleDefinitionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RoleDefinitionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

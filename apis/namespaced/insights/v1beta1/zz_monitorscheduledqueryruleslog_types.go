@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type MonitorScheduledQueryRulesLogCriteriaDimensionInitParameters struct {
@@ -98,11 +97,11 @@ type MonitorScheduledQueryRulesLogInitParameters struct {
 
 	// Reference to a Workspace in operationalinsights to populate dataSourceId.
 	// +kubebuilder:validation:Optional
-	DataSourceIDRef *v1.NamespacedReference `json:"dataSourceIdRef,omitempty" tf:"-"`
+	DataSourceIDRef *v2.NamespacedReference `json:"dataSourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in operationalinsights to populate dataSourceId.
 	// +kubebuilder:validation:Optional
-	DataSourceIDSelector *v1.NamespacedSelector `json:"dataSourceIdSelector,omitempty" tf:"-"`
+	DataSourceIDSelector *v2.NamespacedSelector `json:"dataSourceIdSelector,omitempty" tf:"-"`
 
 	// The description of the scheduled query rule.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -122,11 +121,11 @@ type MonitorScheduledQueryRulesLogInitParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
 	// +mapType=granular
@@ -187,11 +186,11 @@ type MonitorScheduledQueryRulesLogParameters struct {
 
 	// Reference to a Workspace in operationalinsights to populate dataSourceId.
 	// +kubebuilder:validation:Optional
-	DataSourceIDRef *v1.NamespacedReference `json:"dataSourceIdRef,omitempty" tf:"-"`
+	DataSourceIDRef *v2.NamespacedReference `json:"dataSourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in operationalinsights to populate dataSourceId.
 	// +kubebuilder:validation:Optional
-	DataSourceIDSelector *v1.NamespacedSelector `json:"dataSourceIdSelector,omitempty" tf:"-"`
+	DataSourceIDSelector *v2.NamespacedSelector `json:"dataSourceIdSelector,omitempty" tf:"-"`
 
 	// The description of the scheduled query rule.
 	// +kubebuilder:validation:Optional
@@ -216,11 +215,11 @@ type MonitorScheduledQueryRulesLogParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
@@ -247,8 +246,8 @@ type MonitorScheduledQueryRulesLogSpec struct {
 
 // MonitorScheduledQueryRulesLogStatus defines the observed state of MonitorScheduledQueryRulesLog.
 type MonitorScheduledQueryRulesLogStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MonitorScheduledQueryRulesLogObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MonitorScheduledQueryRulesLogObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

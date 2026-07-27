@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SubscriptionPolicyExemptionInitParameters struct {
@@ -37,11 +37,11 @@ type SubscriptionPolicyExemptionInitParameters struct {
 
 	// Reference to a SubscriptionPolicyAssignment in authorization to populate policyAssignmentId.
 	// +kubebuilder:validation:Optional
-	PolicyAssignmentIDRef *v1.Reference `json:"policyAssignmentIdRef,omitempty" tf:"-"`
+	PolicyAssignmentIDRef *v2.Reference `json:"policyAssignmentIdRef,omitempty" tf:"-"`
 
 	// Selector for a SubscriptionPolicyAssignment in authorization to populate policyAssignmentId.
 	// +kubebuilder:validation:Optional
-	PolicyAssignmentIDSelector *v1.Selector `json:"policyAssignmentIdSelector,omitempty" tf:"-"`
+	PolicyAssignmentIDSelector *v2.Selector `json:"policyAssignmentIdSelector,omitempty" tf:"-"`
 
 	// The policy definition reference ID list when the associated policy assignment is an assignment of a policy set definition.
 	PolicyDefinitionReferenceIds []*string `json:"policyDefinitionReferenceIds,omitempty" tf:"policy_definition_reference_ids,omitempty"`
@@ -110,11 +110,11 @@ type SubscriptionPolicyExemptionParameters struct {
 
 	// Reference to a SubscriptionPolicyAssignment in authorization to populate policyAssignmentId.
 	// +kubebuilder:validation:Optional
-	PolicyAssignmentIDRef *v1.Reference `json:"policyAssignmentIdRef,omitempty" tf:"-"`
+	PolicyAssignmentIDRef *v2.Reference `json:"policyAssignmentIdRef,omitempty" tf:"-"`
 
 	// Selector for a SubscriptionPolicyAssignment in authorization to populate policyAssignmentId.
 	// +kubebuilder:validation:Optional
-	PolicyAssignmentIDSelector *v1.Selector `json:"policyAssignmentIdSelector,omitempty" tf:"-"`
+	PolicyAssignmentIDSelector *v2.Selector `json:"policyAssignmentIdSelector,omitempty" tf:"-"`
 
 	// The policy definition reference ID list when the associated policy assignment is an assignment of a policy set definition.
 	// +kubebuilder:validation:Optional
@@ -127,8 +127,8 @@ type SubscriptionPolicyExemptionParameters struct {
 
 // SubscriptionPolicyExemptionSpec defines the desired state of SubscriptionPolicyExemption
 type SubscriptionPolicyExemptionSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SubscriptionPolicyExemptionParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SubscriptionPolicyExemptionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -144,8 +144,8 @@ type SubscriptionPolicyExemptionSpec struct {
 
 // SubscriptionPolicyExemptionStatus defines the observed state of SubscriptionPolicyExemption.
 type SubscriptionPolicyExemptionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SubscriptionPolicyExemptionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SubscriptionPolicyExemptionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

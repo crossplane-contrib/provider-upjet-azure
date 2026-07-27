@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type GrafanaManagedPrivateEndpointInitParameters struct {
@@ -28,11 +28,11 @@ type GrafanaManagedPrivateEndpointInitParameters struct {
 
 	// Reference to a MonitorWorkspace in insights to populate privateLinkResourceId.
 	// +kubebuilder:validation:Optional
-	PrivateLinkResourceIDRef *v1.Reference `json:"privateLinkResourceIdRef,omitempty" tf:"-"`
+	PrivateLinkResourceIDRef *v2.Reference `json:"privateLinkResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a MonitorWorkspace in insights to populate privateLinkResourceId.
 	// +kubebuilder:validation:Optional
-	PrivateLinkResourceIDSelector *v1.Selector `json:"privateLinkResourceIdSelector,omitempty" tf:"-"`
+	PrivateLinkResourceIDSelector *v2.Selector `json:"privateLinkResourceIdSelector,omitempty" tf:"-"`
 
 	// The region in which to create the private link. Changing this forces a new Dashboard Grafana Managed Private Endpoint to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/dashboard/v1beta1.Grafana
@@ -41,11 +41,11 @@ type GrafanaManagedPrivateEndpointInitParameters struct {
 
 	// Reference to a Grafana in dashboard to populate privateLinkResourceRegion.
 	// +kubebuilder:validation:Optional
-	PrivateLinkResourceRegionRef *v1.Reference `json:"privateLinkResourceRegionRef,omitempty" tf:"-"`
+	PrivateLinkResourceRegionRef *v2.Reference `json:"privateLinkResourceRegionRef,omitempty" tf:"-"`
 
 	// Selector for a Grafana in dashboard to populate privateLinkResourceRegion.
 	// +kubebuilder:validation:Optional
-	PrivateLinkResourceRegionSelector *v1.Selector `json:"privateLinkResourceRegionSelector,omitempty" tf:"-"`
+	PrivateLinkResourceRegionSelector *v2.Selector `json:"privateLinkResourceRegionSelector,omitempty" tf:"-"`
 
 	// A domain name for this endpoint to be used within Grafana. Must be just a domain, without schema, and with at least three parts.
 	PrivateLinkServiceURL *string `json:"privateLinkServiceUrl,omitempty" tf:"private_link_service_url,omitempty"`
@@ -99,11 +99,11 @@ type GrafanaManagedPrivateEndpointParameters struct {
 
 	// Reference to a Grafana in dashboard to populate grafanaId.
 	// +kubebuilder:validation:Optional
-	GrafanaIDRef *v1.Reference `json:"grafanaIdRef,omitempty" tf:"-"`
+	GrafanaIDRef *v2.Reference `json:"grafanaIdRef,omitempty" tf:"-"`
 
 	// Selector for a Grafana in dashboard to populate grafanaId.
 	// +kubebuilder:validation:Optional
-	GrafanaIDSelector *v1.Selector `json:"grafanaIdSelector,omitempty" tf:"-"`
+	GrafanaIDSelector *v2.Selector `json:"grafanaIdSelector,omitempty" tf:"-"`
 
 	// Specifies a list of private link group IDs. The value of this will depend on the private link resource to which you are connecting. Changing this forces a new Dashboard Grafana Managed Private Endpoint to be created.
 	// +kubebuilder:validation:Optional
@@ -121,11 +121,11 @@ type GrafanaManagedPrivateEndpointParameters struct {
 
 	// Reference to a MonitorWorkspace in insights to populate privateLinkResourceId.
 	// +kubebuilder:validation:Optional
-	PrivateLinkResourceIDRef *v1.Reference `json:"privateLinkResourceIdRef,omitempty" tf:"-"`
+	PrivateLinkResourceIDRef *v2.Reference `json:"privateLinkResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a MonitorWorkspace in insights to populate privateLinkResourceId.
 	// +kubebuilder:validation:Optional
-	PrivateLinkResourceIDSelector *v1.Selector `json:"privateLinkResourceIdSelector,omitempty" tf:"-"`
+	PrivateLinkResourceIDSelector *v2.Selector `json:"privateLinkResourceIdSelector,omitempty" tf:"-"`
 
 	// The region in which to create the private link. Changing this forces a new Dashboard Grafana Managed Private Endpoint to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/dashboard/v1beta1.Grafana
@@ -135,11 +135,11 @@ type GrafanaManagedPrivateEndpointParameters struct {
 
 	// Reference to a Grafana in dashboard to populate privateLinkResourceRegion.
 	// +kubebuilder:validation:Optional
-	PrivateLinkResourceRegionRef *v1.Reference `json:"privateLinkResourceRegionRef,omitempty" tf:"-"`
+	PrivateLinkResourceRegionRef *v2.Reference `json:"privateLinkResourceRegionRef,omitempty" tf:"-"`
 
 	// Selector for a Grafana in dashboard to populate privateLinkResourceRegion.
 	// +kubebuilder:validation:Optional
-	PrivateLinkResourceRegionSelector *v1.Selector `json:"privateLinkResourceRegionSelector,omitempty" tf:"-"`
+	PrivateLinkResourceRegionSelector *v2.Selector `json:"privateLinkResourceRegionSelector,omitempty" tf:"-"`
 
 	// A domain name for this endpoint to be used within Grafana. Must be just a domain, without schema, and with at least three parts.
 	// +kubebuilder:validation:Optional
@@ -157,8 +157,8 @@ type GrafanaManagedPrivateEndpointParameters struct {
 
 // GrafanaManagedPrivateEndpointSpec defines the desired state of GrafanaManagedPrivateEndpoint
 type GrafanaManagedPrivateEndpointSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     GrafanaManagedPrivateEndpointParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   GrafanaManagedPrivateEndpointParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -174,8 +174,8 @@ type GrafanaManagedPrivateEndpointSpec struct {
 
 // GrafanaManagedPrivateEndpointStatus defines the observed state of GrafanaManagedPrivateEndpoint.
 type GrafanaManagedPrivateEndpointStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        GrafanaManagedPrivateEndpointObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               GrafanaManagedPrivateEndpointObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

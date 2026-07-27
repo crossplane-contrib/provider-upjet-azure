@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type IOTHubSharedAccessPolicyInitParameters struct {
@@ -66,11 +65,11 @@ type IOTHubSharedAccessPolicyParameters struct {
 
 	// Reference to a IOTHub in devices to populate iothubName.
 	// +kubebuilder:validation:Optional
-	IOTHubNameRef *v1.NamespacedReference `json:"iothubNameRef,omitempty" tf:"-"`
+	IOTHubNameRef *v2.NamespacedReference `json:"iothubNameRef,omitempty" tf:"-"`
 
 	// Selector for a IOTHub in devices to populate iothubName.
 	// +kubebuilder:validation:Optional
-	IOTHubNameSelector *v1.NamespacedSelector `json:"iothubNameSelector,omitempty" tf:"-"`
+	IOTHubNameSelector *v2.NamespacedSelector `json:"iothubNameSelector,omitempty" tf:"-"`
 
 	// Adds RegistryRead permission to this Shared Access Account. It allows read access to the identity registry.
 	// +kubebuilder:validation:Optional
@@ -87,11 +86,11 @@ type IOTHubSharedAccessPolicyParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Adds ServiceConnect permission to this Shared Access Account. It allows sending and receiving on the cloud-side endpoints.
 	// +kubebuilder:validation:Optional
@@ -117,8 +116,8 @@ type IOTHubSharedAccessPolicySpec struct {
 
 // IOTHubSharedAccessPolicyStatus defines the observed state of IOTHubSharedAccessPolicy.
 type IOTHubSharedAccessPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        IOTHubSharedAccessPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               IOTHubSharedAccessPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

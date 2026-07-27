@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BotConnectionInitParameters struct {
@@ -19,7 +19,7 @@ type BotConnectionInitParameters struct {
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The Client Secret that will be used to authenticate with the service provider.
-	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
+	ClientSecretSecretRef v2.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
 	// The supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -73,11 +73,11 @@ type BotConnectionParameters struct {
 
 	// Reference to a BotChannelsRegistration in botservice to populate botName.
 	// +kubebuilder:validation:Optional
-	BotNameRef *v1.Reference `json:"botNameRef,omitempty" tf:"-"`
+	BotNameRef *v2.Reference `json:"botNameRef,omitempty" tf:"-"`
 
 	// Selector for a BotChannelsRegistration in botservice to populate botName.
 	// +kubebuilder:validation:Optional
-	BotNameSelector *v1.Selector `json:"botNameSelector,omitempty" tf:"-"`
+	BotNameSelector *v2.Selector `json:"botNameSelector,omitempty" tf:"-"`
 
 	// The Client ID that will be used to authenticate with the service provider.
 	// +kubebuilder:validation:Optional
@@ -85,7 +85,7 @@ type BotConnectionParameters struct {
 
 	// The Client Secret that will be used to authenticate with the service provider.
 	// +kubebuilder:validation:Optional
-	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
+	ClientSecretSecretRef v2.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
 	// The supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -103,11 +103,11 @@ type BotConnectionParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The Scopes at which the connection should be applied.
 	// +kubebuilder:validation:Optional
@@ -120,8 +120,8 @@ type BotConnectionParameters struct {
 
 // BotConnectionSpec defines the desired state of BotConnection
 type BotConnectionSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     BotConnectionParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   BotConnectionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -137,8 +137,8 @@ type BotConnectionSpec struct {
 
 // BotConnectionStatus defines the observed state of BotConnection.
 type BotConnectionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BotConnectionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BotConnectionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

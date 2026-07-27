@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type MSSQLJobAgentIdentityInitParameters struct {
@@ -54,11 +54,11 @@ type MSSQLJobAgentInitParameters struct {
 
 	// Reference to a MSSQLDatabase in sql to populate databaseId.
 	// +kubebuilder:validation:Optional
-	DatabaseIDRef *v1.Reference `json:"databaseIdRef,omitempty" tf:"-"`
+	DatabaseIDRef *v2.Reference `json:"databaseIdRef,omitempty" tf:"-"`
 
 	// Selector for a MSSQLDatabase in sql to populate databaseId.
 	// +kubebuilder:validation:Optional
-	DatabaseIDSelector *v1.Selector `json:"databaseIdSelector,omitempty" tf:"-"`
+	DatabaseIDSelector *v2.Selector `json:"databaseIdSelector,omitempty" tf:"-"`
 
 	// An identity block as defined below.
 	Identity *MSSQLJobAgentIdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
@@ -112,11 +112,11 @@ type MSSQLJobAgentParameters struct {
 
 	// Reference to a MSSQLDatabase in sql to populate databaseId.
 	// +kubebuilder:validation:Optional
-	DatabaseIDRef *v1.Reference `json:"databaseIdRef,omitempty" tf:"-"`
+	DatabaseIDRef *v2.Reference `json:"databaseIdRef,omitempty" tf:"-"`
 
 	// Selector for a MSSQLDatabase in sql to populate databaseId.
 	// +kubebuilder:validation:Optional
-	DatabaseIDSelector *v1.Selector `json:"databaseIdSelector,omitempty" tf:"-"`
+	DatabaseIDSelector *v2.Selector `json:"databaseIdSelector,omitempty" tf:"-"`
 
 	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
@@ -142,8 +142,8 @@ type MSSQLJobAgentParameters struct {
 
 // MSSQLJobAgentSpec defines the desired state of MSSQLJobAgent
 type MSSQLJobAgentSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     MSSQLJobAgentParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   MSSQLJobAgentParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -159,8 +159,8 @@ type MSSQLJobAgentSpec struct {
 
 // MSSQLJobAgentStatus defines the observed state of MSSQLJobAgent.
 type MSSQLJobAgentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MSSQLJobAgentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MSSQLJobAgentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type MonitorDataCollectionRuleAssociationInitParameters struct {
@@ -22,11 +22,11 @@ type MonitorDataCollectionRuleAssociationInitParameters struct {
 
 	// Reference to a MonitorDataCollectionEndpoint in insights to populate dataCollectionEndpointId.
 	// +kubebuilder:validation:Optional
-	DataCollectionEndpointIDRef *v1.Reference `json:"dataCollectionEndpointIdRef,omitempty" tf:"-"`
+	DataCollectionEndpointIDRef *v2.Reference `json:"dataCollectionEndpointIdRef,omitempty" tf:"-"`
 
 	// Selector for a MonitorDataCollectionEndpoint in insights to populate dataCollectionEndpointId.
 	// +kubebuilder:validation:Optional
-	DataCollectionEndpointIDSelector *v1.Selector `json:"dataCollectionEndpointIdSelector,omitempty" tf:"-"`
+	DataCollectionEndpointIDSelector *v2.Selector `json:"dataCollectionEndpointIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Data Collection Rule which will be associated to the target resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/insights/v1beta2.MonitorDataCollectionRule
@@ -35,11 +35,11 @@ type MonitorDataCollectionRuleAssociationInitParameters struct {
 
 	// Reference to a MonitorDataCollectionRule in insights to populate dataCollectionRuleId.
 	// +kubebuilder:validation:Optional
-	DataCollectionRuleIDRef *v1.Reference `json:"dataCollectionRuleIdRef,omitempty" tf:"-"`
+	DataCollectionRuleIDRef *v2.Reference `json:"dataCollectionRuleIdRef,omitempty" tf:"-"`
 
 	// Selector for a MonitorDataCollectionRule in insights to populate dataCollectionRuleId.
 	// +kubebuilder:validation:Optional
-	DataCollectionRuleIDSelector *v1.Selector `json:"dataCollectionRuleIdSelector,omitempty" tf:"-"`
+	DataCollectionRuleIDSelector *v2.Selector `json:"dataCollectionRuleIdSelector,omitempty" tf:"-"`
 
 	// The description of the Data Collection Rule Association.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -73,11 +73,11 @@ type MonitorDataCollectionRuleAssociationParameters struct {
 
 	// Reference to a MonitorDataCollectionEndpoint in insights to populate dataCollectionEndpointId.
 	// +kubebuilder:validation:Optional
-	DataCollectionEndpointIDRef *v1.Reference `json:"dataCollectionEndpointIdRef,omitempty" tf:"-"`
+	DataCollectionEndpointIDRef *v2.Reference `json:"dataCollectionEndpointIdRef,omitempty" tf:"-"`
 
 	// Selector for a MonitorDataCollectionEndpoint in insights to populate dataCollectionEndpointId.
 	// +kubebuilder:validation:Optional
-	DataCollectionEndpointIDSelector *v1.Selector `json:"dataCollectionEndpointIdSelector,omitempty" tf:"-"`
+	DataCollectionEndpointIDSelector *v2.Selector `json:"dataCollectionEndpointIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Data Collection Rule which will be associated to the target resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/insights/v1beta2.MonitorDataCollectionRule
@@ -87,11 +87,11 @@ type MonitorDataCollectionRuleAssociationParameters struct {
 
 	// Reference to a MonitorDataCollectionRule in insights to populate dataCollectionRuleId.
 	// +kubebuilder:validation:Optional
-	DataCollectionRuleIDRef *v1.Reference `json:"dataCollectionRuleIdRef,omitempty" tf:"-"`
+	DataCollectionRuleIDRef *v2.Reference `json:"dataCollectionRuleIdRef,omitempty" tf:"-"`
 
 	// Selector for a MonitorDataCollectionRule in insights to populate dataCollectionRuleId.
 	// +kubebuilder:validation:Optional
-	DataCollectionRuleIDSelector *v1.Selector `json:"dataCollectionRuleIdSelector,omitempty" tf:"-"`
+	DataCollectionRuleIDSelector *v2.Selector `json:"dataCollectionRuleIdSelector,omitempty" tf:"-"`
 
 	// The description of the Data Collection Rule Association.
 	// +kubebuilder:validation:Optional
@@ -105,17 +105,17 @@ type MonitorDataCollectionRuleAssociationParameters struct {
 
 	// Reference to a LinuxVirtualMachine in compute to populate targetResourceId.
 	// +kubebuilder:validation:Optional
-	TargetResourceIDRef *v1.Reference `json:"targetResourceIdRef,omitempty" tf:"-"`
+	TargetResourceIDRef *v2.Reference `json:"targetResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a LinuxVirtualMachine in compute to populate targetResourceId.
 	// +kubebuilder:validation:Optional
-	TargetResourceIDSelector *v1.Selector `json:"targetResourceIdSelector,omitempty" tf:"-"`
+	TargetResourceIDSelector *v2.Selector `json:"targetResourceIdSelector,omitempty" tf:"-"`
 }
 
 // MonitorDataCollectionRuleAssociationSpec defines the desired state of MonitorDataCollectionRuleAssociation
 type MonitorDataCollectionRuleAssociationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     MonitorDataCollectionRuleAssociationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   MonitorDataCollectionRuleAssociationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -131,8 +131,8 @@ type MonitorDataCollectionRuleAssociationSpec struct {
 
 // MonitorDataCollectionRuleAssociationStatus defines the observed state of MonitorDataCollectionRuleAssociation.
 type MonitorDataCollectionRuleAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MonitorDataCollectionRuleAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MonitorDataCollectionRuleAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -5,204 +5,204 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this ResourceDeploymentScriptAzureCli.
-func (mg *ResourceDeploymentScriptAzureCli) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *ResourceDeploymentScriptAzureCli) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this ResourceDeploymentScriptAzureCli.
-func (mg *ResourceDeploymentScriptAzureCli) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *ResourceDeploymentScriptAzureCli) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this ResourceDeploymentScriptAzureCli.
-func (mg *ResourceDeploymentScriptAzureCli) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *ResourceDeploymentScriptAzureCli) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this ResourceDeploymentScriptAzureCli.
-func (mg *ResourceDeploymentScriptAzureCli) GetProviderConfigReference() *xpv1.Reference {
+func (mg *ResourceDeploymentScriptAzureCli) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this ResourceDeploymentScriptAzureCli.
-func (mg *ResourceDeploymentScriptAzureCli) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *ResourceDeploymentScriptAzureCli) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this ResourceDeploymentScriptAzureCli.
-func (mg *ResourceDeploymentScriptAzureCli) SetConditions(c ...xpv1.Condition) {
+func (mg *ResourceDeploymentScriptAzureCli) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this ResourceDeploymentScriptAzureCli.
-func (mg *ResourceDeploymentScriptAzureCli) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *ResourceDeploymentScriptAzureCli) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this ResourceDeploymentScriptAzureCli.
-func (mg *ResourceDeploymentScriptAzureCli) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *ResourceDeploymentScriptAzureCli) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this ResourceDeploymentScriptAzureCli.
-func (mg *ResourceDeploymentScriptAzureCli) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *ResourceDeploymentScriptAzureCli) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this ResourceDeploymentScriptAzureCli.
-func (mg *ResourceDeploymentScriptAzureCli) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *ResourceDeploymentScriptAzureCli) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this ResourceDeploymentScriptAzurePowerShell.
-func (mg *ResourceDeploymentScriptAzurePowerShell) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *ResourceDeploymentScriptAzurePowerShell) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this ResourceDeploymentScriptAzurePowerShell.
-func (mg *ResourceDeploymentScriptAzurePowerShell) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *ResourceDeploymentScriptAzurePowerShell) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this ResourceDeploymentScriptAzurePowerShell.
-func (mg *ResourceDeploymentScriptAzurePowerShell) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *ResourceDeploymentScriptAzurePowerShell) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this ResourceDeploymentScriptAzurePowerShell.
-func (mg *ResourceDeploymentScriptAzurePowerShell) GetProviderConfigReference() *xpv1.Reference {
+func (mg *ResourceDeploymentScriptAzurePowerShell) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this ResourceDeploymentScriptAzurePowerShell.
-func (mg *ResourceDeploymentScriptAzurePowerShell) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *ResourceDeploymentScriptAzurePowerShell) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this ResourceDeploymentScriptAzurePowerShell.
-func (mg *ResourceDeploymentScriptAzurePowerShell) SetConditions(c ...xpv1.Condition) {
+func (mg *ResourceDeploymentScriptAzurePowerShell) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this ResourceDeploymentScriptAzurePowerShell.
-func (mg *ResourceDeploymentScriptAzurePowerShell) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *ResourceDeploymentScriptAzurePowerShell) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this ResourceDeploymentScriptAzurePowerShell.
-func (mg *ResourceDeploymentScriptAzurePowerShell) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *ResourceDeploymentScriptAzurePowerShell) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this ResourceDeploymentScriptAzurePowerShell.
-func (mg *ResourceDeploymentScriptAzurePowerShell) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *ResourceDeploymentScriptAzurePowerShell) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this ResourceDeploymentScriptAzurePowerShell.
-func (mg *ResourceDeploymentScriptAzurePowerShell) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *ResourceDeploymentScriptAzurePowerShell) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this ResourceGroupTemplateDeployment.
-func (mg *ResourceGroupTemplateDeployment) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *ResourceGroupTemplateDeployment) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this ResourceGroupTemplateDeployment.
-func (mg *ResourceGroupTemplateDeployment) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *ResourceGroupTemplateDeployment) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this ResourceGroupTemplateDeployment.
-func (mg *ResourceGroupTemplateDeployment) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *ResourceGroupTemplateDeployment) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this ResourceGroupTemplateDeployment.
-func (mg *ResourceGroupTemplateDeployment) GetProviderConfigReference() *xpv1.Reference {
+func (mg *ResourceGroupTemplateDeployment) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this ResourceGroupTemplateDeployment.
-func (mg *ResourceGroupTemplateDeployment) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *ResourceGroupTemplateDeployment) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this ResourceGroupTemplateDeployment.
-func (mg *ResourceGroupTemplateDeployment) SetConditions(c ...xpv1.Condition) {
+func (mg *ResourceGroupTemplateDeployment) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this ResourceGroupTemplateDeployment.
-func (mg *ResourceGroupTemplateDeployment) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *ResourceGroupTemplateDeployment) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this ResourceGroupTemplateDeployment.
-func (mg *ResourceGroupTemplateDeployment) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *ResourceGroupTemplateDeployment) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this ResourceGroupTemplateDeployment.
-func (mg *ResourceGroupTemplateDeployment) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *ResourceGroupTemplateDeployment) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this ResourceGroupTemplateDeployment.
-func (mg *ResourceGroupTemplateDeployment) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *ResourceGroupTemplateDeployment) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this SubscriptionTemplateDeployment.
-func (mg *SubscriptionTemplateDeployment) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *SubscriptionTemplateDeployment) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this SubscriptionTemplateDeployment.
-func (mg *SubscriptionTemplateDeployment) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *SubscriptionTemplateDeployment) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this SubscriptionTemplateDeployment.
-func (mg *SubscriptionTemplateDeployment) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *SubscriptionTemplateDeployment) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this SubscriptionTemplateDeployment.
-func (mg *SubscriptionTemplateDeployment) GetProviderConfigReference() *xpv1.Reference {
+func (mg *SubscriptionTemplateDeployment) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this SubscriptionTemplateDeployment.
-func (mg *SubscriptionTemplateDeployment) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *SubscriptionTemplateDeployment) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this SubscriptionTemplateDeployment.
-func (mg *SubscriptionTemplateDeployment) SetConditions(c ...xpv1.Condition) {
+func (mg *SubscriptionTemplateDeployment) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this SubscriptionTemplateDeployment.
-func (mg *SubscriptionTemplateDeployment) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *SubscriptionTemplateDeployment) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this SubscriptionTemplateDeployment.
-func (mg *SubscriptionTemplateDeployment) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *SubscriptionTemplateDeployment) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this SubscriptionTemplateDeployment.
-func (mg *SubscriptionTemplateDeployment) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *SubscriptionTemplateDeployment) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this SubscriptionTemplateDeployment.
-func (mg *SubscriptionTemplateDeployment) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *SubscriptionTemplateDeployment) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

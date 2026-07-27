@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type PolicyInitParameters struct {
@@ -104,17 +104,17 @@ type VPNServerConfigurationPolicyGroupParameters struct {
 
 	// Reference to a VPNServerConfiguration in network to populate vpnServerConfigurationId.
 	// +kubebuilder:validation:Optional
-	VPNServerConfigurationIDRef *v1.Reference `json:"vpnServerConfigurationIdRef,omitempty" tf:"-"`
+	VPNServerConfigurationIDRef *v2.Reference `json:"vpnServerConfigurationIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPNServerConfiguration in network to populate vpnServerConfigurationId.
 	// +kubebuilder:validation:Optional
-	VPNServerConfigurationIDSelector *v1.Selector `json:"vpnServerConfigurationIdSelector,omitempty" tf:"-"`
+	VPNServerConfigurationIDSelector *v2.Selector `json:"vpnServerConfigurationIdSelector,omitempty" tf:"-"`
 }
 
 // VPNServerConfigurationPolicyGroupSpec defines the desired state of VPNServerConfigurationPolicyGroup
 type VPNServerConfigurationPolicyGroupSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     VPNServerConfigurationPolicyGroupParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   VPNServerConfigurationPolicyGroupParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -130,8 +130,8 @@ type VPNServerConfigurationPolicyGroupSpec struct {
 
 // VPNServerConfigurationPolicyGroupStatus defines the observed state of VPNServerConfigurationPolicyGroup.
 type VPNServerConfigurationPolicyGroupStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VPNServerConfigurationPolicyGroupObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VPNServerConfigurationPolicyGroupObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

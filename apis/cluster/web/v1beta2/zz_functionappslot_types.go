@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AuthSettingsActiveDirectoryInitParameters struct {
@@ -22,7 +22,7 @@ type AuthSettingsActiveDirectoryInitParameters struct {
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The OAuth 2.0 client secret that was created for the app used for authentication.
-	ClientSecretSecretRef *v1.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
+	ClientSecretSecretRef *v2.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
 }
 
 type AuthSettingsActiveDirectoryObservation struct {
@@ -46,7 +46,7 @@ type AuthSettingsActiveDirectoryParameters struct {
 
 	// The OAuth 2.0 client secret that was created for the app used for authentication.
 	// +kubebuilder:validation:Optional
-	ClientSecretSecretRef *v1.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
+	ClientSecretSecretRef *v2.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
 }
 
 type AuthSettingsFacebookInitParameters struct {
@@ -55,7 +55,7 @@ type AuthSettingsFacebookInitParameters struct {
 	AppID *string `json:"appId,omitempty" tf:"app_id,omitempty"`
 
 	// The App Secret of the Facebook app used for Facebook login.
-	AppSecretSecretRef v1.SecretKeySelector `json:"appSecretSecretRef" tf:"-"`
+	AppSecretSecretRef v2.SecretKeySelector `json:"appSecretSecretRef" tf:"-"`
 
 	// The OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. https://msdn.microsoft.com/en-us/library/dn631845.aspx
 	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
@@ -78,7 +78,7 @@ type AuthSettingsFacebookParameters struct {
 
 	// The App Secret of the Facebook app used for Facebook login.
 	// +kubebuilder:validation:Optional
-	AppSecretSecretRef v1.SecretKeySelector `json:"appSecretSecretRef" tf:"-"`
+	AppSecretSecretRef v2.SecretKeySelector `json:"appSecretSecretRef" tf:"-"`
 
 	// The OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. https://msdn.microsoft.com/en-us/library/dn631845.aspx
 	// +kubebuilder:validation:Optional
@@ -91,7 +91,7 @@ type AuthSettingsGoogleInitParameters struct {
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The OAuth 2.0 client secret that was created for the app used for authentication.
-	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
+	ClientSecretSecretRef v2.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
 	// The OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. https://msdn.microsoft.com/en-us/library/dn631845.aspx
 	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
@@ -114,7 +114,7 @@ type AuthSettingsGoogleParameters struct {
 
 	// The OAuth 2.0 client secret that was created for the app used for authentication.
 	// +kubebuilder:validation:Optional
-	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
+	ClientSecretSecretRef v2.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
 	// The OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. https://msdn.microsoft.com/en-us/library/dn631845.aspx
 	// +kubebuilder:validation:Optional
@@ -127,7 +127,7 @@ type AuthSettingsMicrosoftInitParameters struct {
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The OAuth 2.0 client secret that was created for the app used for authentication.
-	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
+	ClientSecretSecretRef v2.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
 	// The OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. https://msdn.microsoft.com/en-us/library/dn631845.aspx
 	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
@@ -150,7 +150,7 @@ type AuthSettingsMicrosoftParameters struct {
 
 	// The OAuth 2.0 client secret that was created for the app used for authentication.
 	// +kubebuilder:validation:Optional
-	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
+	ClientSecretSecretRef v2.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
 	// The OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. https://msdn.microsoft.com/en-us/library/dn631845.aspx
 	// +kubebuilder:validation:Optional
@@ -163,7 +163,7 @@ type AuthSettingsTwitterInitParameters struct {
 	ConsumerKey *string `json:"consumerKey,omitempty" tf:"consumer_key,omitempty"`
 
 	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in.
-	ConsumerSecretSecretRef v1.SecretKeySelector `json:"consumerSecretSecretRef" tf:"-"`
+	ConsumerSecretSecretRef v2.SecretKeySelector `json:"consumerSecretSecretRef" tf:"-"`
 }
 
 type AuthSettingsTwitterObservation struct {
@@ -180,7 +180,7 @@ type AuthSettingsTwitterParameters struct {
 
 	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in.
 	// +kubebuilder:validation:Optional
-	ConsumerSecretSecretRef v1.SecretKeySelector `json:"consumerSecretSecretRef" tf:"-"`
+	ConsumerSecretSecretRef v2.SecretKeySelector `json:"consumerSecretSecretRef" tf:"-"`
 }
 
 type FunctionAppSlotAuthSettingsInitParameters struct {
@@ -344,7 +344,7 @@ type FunctionAppSlotConnectionStringInitParameters struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// The value for the Connection String.
-	ValueSecretRef v1.SecretKeySelector `json:"valueSecretRef" tf:"-"`
+	ValueSecretRef v2.SecretKeySelector `json:"valueSecretRef" tf:"-"`
 }
 
 type FunctionAppSlotConnectionStringObservation struct {
@@ -368,7 +368,7 @@ type FunctionAppSlotConnectionStringParameters struct {
 
 	// The value for the Connection String.
 	// +kubebuilder:validation:Optional
-	ValueSecretRef v1.SecretKeySelector `json:"valueSecretRef" tf:"-"`
+	ValueSecretRef v2.SecretKeySelector `json:"valueSecretRef" tf:"-"`
 }
 
 type FunctionAppSlotIdentityInitParameters struct {
@@ -418,11 +418,11 @@ type FunctionAppSlotInitParameters struct {
 
 	// Reference to a AppServicePlan in web to populate appServicePlanId.
 	// +kubebuilder:validation:Optional
-	AppServicePlanIDRef *v1.Reference `json:"appServicePlanIdRef,omitempty" tf:"-"`
+	AppServicePlanIDRef *v2.Reference `json:"appServicePlanIdRef,omitempty" tf:"-"`
 
 	// Selector for a AppServicePlan in web to populate appServicePlanId.
 	// +kubebuilder:validation:Optional
-	AppServicePlanIDSelector *v1.Selector `json:"appServicePlanIdSelector,omitempty" tf:"-"`
+	AppServicePlanIDSelector *v2.Selector `json:"appServicePlanIdSelector,omitempty" tf:"-"`
 
 	// A key-value pair of App Settings.
 	// +mapType=granular
@@ -459,7 +459,7 @@ type FunctionAppSlotInitParameters struct {
 	SiteConfig *FunctionAppSlotSiteConfigInitParameters `json:"siteConfig,omitempty" tf:"site_config,omitempty"`
 
 	// The access key which will be used to access the backend storage account for the Function App.
-	StorageAccountAccessKeySecretRef v1.SecretKeySelector `json:"storageAccountAccessKeySecretRef" tf:"-"`
+	StorageAccountAccessKeySecretRef v2.SecretKeySelector `json:"storageAccountAccessKeySecretRef" tf:"-"`
 
 	// The backend storage account name which will be used by the Function App (such as the dashboard, logs). Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
@@ -467,11 +467,11 @@ type FunctionAppSlotInitParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountName.
 	// +kubebuilder:validation:Optional
-	StorageAccountNameRef *v1.Reference `json:"storageAccountNameRef,omitempty" tf:"-"`
+	StorageAccountNameRef *v2.Reference `json:"storageAccountNameRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountName.
 	// +kubebuilder:validation:Optional
-	StorageAccountNameSelector *v1.Selector `json:"storageAccountNameSelector,omitempty" tf:"-"`
+	StorageAccountNameSelector *v2.Selector `json:"storageAccountNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
 	// +mapType=granular
@@ -565,11 +565,11 @@ type FunctionAppSlotParameters struct {
 
 	// Reference to a AppServicePlan in web to populate appServicePlanId.
 	// +kubebuilder:validation:Optional
-	AppServicePlanIDRef *v1.Reference `json:"appServicePlanIdRef,omitempty" tf:"-"`
+	AppServicePlanIDRef *v2.Reference `json:"appServicePlanIdRef,omitempty" tf:"-"`
 
 	// Selector for a AppServicePlan in web to populate appServicePlanId.
 	// +kubebuilder:validation:Optional
-	AppServicePlanIDSelector *v1.Selector `json:"appServicePlanIdSelector,omitempty" tf:"-"`
+	AppServicePlanIDSelector *v2.Selector `json:"appServicePlanIdSelector,omitempty" tf:"-"`
 
 	// A key-value pair of App Settings.
 	// +kubebuilder:validation:Optional
@@ -604,11 +604,11 @@ type FunctionAppSlotParameters struct {
 
 	// Reference to a FunctionApp in web to populate functionAppName.
 	// +kubebuilder:validation:Optional
-	FunctionAppNameRef *v1.Reference `json:"functionAppNameRef,omitempty" tf:"-"`
+	FunctionAppNameRef *v2.Reference `json:"functionAppNameRef,omitempty" tf:"-"`
 
 	// Selector for a FunctionApp in web to populate functionAppName.
 	// +kubebuilder:validation:Optional
-	FunctionAppNameSelector *v1.Selector `json:"functionAppNameSelector,omitempty" tf:"-"`
+	FunctionAppNameSelector *v2.Selector `json:"functionAppNameSelector,omitempty" tf:"-"`
 
 	// Can the Function App only be accessed via HTTPS? Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -633,11 +633,11 @@ type FunctionAppSlotParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A site_config object as defined below.
 	// +kubebuilder:validation:Optional
@@ -645,7 +645,7 @@ type FunctionAppSlotParameters struct {
 
 	// The access key which will be used to access the backend storage account for the Function App.
 	// +kubebuilder:validation:Optional
-	StorageAccountAccessKeySecretRef v1.SecretKeySelector `json:"storageAccountAccessKeySecretRef" tf:"-"`
+	StorageAccountAccessKeySecretRef v2.SecretKeySelector `json:"storageAccountAccessKeySecretRef" tf:"-"`
 
 	// The backend storage account name which will be used by the Function App (such as the dashboard, logs). Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
@@ -654,11 +654,11 @@ type FunctionAppSlotParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountName.
 	// +kubebuilder:validation:Optional
-	StorageAccountNameRef *v1.Reference `json:"storageAccountNameRef,omitempty" tf:"-"`
+	StorageAccountNameRef *v2.Reference `json:"storageAccountNameRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountName.
 	// +kubebuilder:validation:Optional
-	StorageAccountNameSelector *v1.Selector `json:"storageAccountNameSelector,omitempty" tf:"-"`
+	StorageAccountNameSelector *v2.Selector `json:"storageAccountNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
@@ -1024,11 +1024,11 @@ type SiteConfigIPRestrictionInitParameters struct {
 
 	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDRef *v1.Reference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
+	VirtualNetworkSubnetIDRef *v2.Reference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDSelector *v1.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
+	VirtualNetworkSubnetIDSelector *v2.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
 }
 
 type SiteConfigIPRestrictionObservation struct {
@@ -1089,11 +1089,11 @@ type SiteConfigIPRestrictionParameters struct {
 
 	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDRef *v1.Reference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
+	VirtualNetworkSubnetIDRef *v2.Reference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDSelector *v1.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
+	VirtualNetworkSubnetIDSelector *v2.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
 }
 
 type SiteConfigScmIPRestrictionHeadersInitParameters struct {
@@ -1184,11 +1184,11 @@ type SiteConfigScmIPRestrictionInitParameters struct {
 
 	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDRef *v1.Reference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
+	VirtualNetworkSubnetIDRef *v2.Reference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDSelector *v1.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
+	VirtualNetworkSubnetIDSelector *v2.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
 }
 
 type SiteConfigScmIPRestrictionObservation struct {
@@ -1249,17 +1249,17 @@ type SiteConfigScmIPRestrictionParameters struct {
 
 	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDRef *v1.Reference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
+	VirtualNetworkSubnetIDRef *v2.Reference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDSelector *v1.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
+	VirtualNetworkSubnetIDSelector *v2.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
 }
 
 // FunctionAppSlotSpec defines the desired state of FunctionAppSlot
 type FunctionAppSlotSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     FunctionAppSlotParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   FunctionAppSlotParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -1275,8 +1275,8 @@ type FunctionAppSlotSpec struct {
 
 // FunctionAppSlotStatus defines the observed state of FunctionAppSlot.
 type FunctionAppSlotStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FunctionAppSlotObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FunctionAppSlotObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

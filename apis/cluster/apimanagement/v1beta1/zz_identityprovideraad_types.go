@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type IdentityProviderAADInitParameters struct {
@@ -25,7 +25,7 @@ type IdentityProviderAADInitParameters struct {
 	ClientLibrary *string `json:"clientLibrary,omitempty" tf:"client_library,omitempty"`
 
 	// Client secret of the Application in the AAD Identity Provider.
-	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
+	ClientSecretSecretRef v2.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
 	// The AAD Tenant to use instead of Common when logging into Active Directory.
 	SigninTenant *string `json:"signinTenant,omitempty" tf:"signin_tenant,omitempty"`
@@ -64,11 +64,11 @@ type IdentityProviderAADParameters struct {
 
 	// Reference to a Management in apimanagement to populate apiManagementName.
 	// +kubebuilder:validation:Optional
-	APIManagementNameRef *v1.Reference `json:"apiManagementNameRef,omitempty" tf:"-"`
+	APIManagementNameRef *v2.Reference `json:"apiManagementNameRef,omitempty" tf:"-"`
 
 	// Selector for a Management in apimanagement to populate apiManagementName.
 	// +kubebuilder:validation:Optional
-	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
+	APIManagementNameSelector *v2.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// List of allowed AAD Tenants.
 	// +kubebuilder:validation:Optional
@@ -84,7 +84,7 @@ type IdentityProviderAADParameters struct {
 
 	// Client secret of the Application in the AAD Identity Provider.
 	// +kubebuilder:validation:Optional
-	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
+	ClientSecretSecretRef v2.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
 	// The Name of the Resource Group where the API Management Service exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
@@ -93,11 +93,11 @@ type IdentityProviderAADParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The AAD Tenant to use instead of Common when logging into Active Directory.
 	// +kubebuilder:validation:Optional
@@ -106,8 +106,8 @@ type IdentityProviderAADParameters struct {
 
 // IdentityProviderAADSpec defines the desired state of IdentityProviderAAD
 type IdentityProviderAADSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     IdentityProviderAADParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   IdentityProviderAADParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -123,8 +123,8 @@ type IdentityProviderAADSpec struct {
 
 // IdentityProviderAADStatus defines the observed state of IdentityProviderAAD.
 type IdentityProviderAADStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        IdentityProviderAADObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               IdentityProviderAADObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

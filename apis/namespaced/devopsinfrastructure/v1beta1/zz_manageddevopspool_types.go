@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AdministratorAccountInitParameters struct {
@@ -262,11 +261,11 @@ type ManagedDevopsPoolInitParameters struct {
 
 	// Reference to a Project in devcenter to populate devCenterProjectId.
 	// +kubebuilder:validation:Optional
-	DevCenterProjectIDRef *v1.NamespacedReference `json:"devCenterProjectIdRef,omitempty" tf:"-"`
+	DevCenterProjectIDRef *v2.NamespacedReference `json:"devCenterProjectIdRef,omitempty" tf:"-"`
 
 	// Selector for a Project in devcenter to populate devCenterProjectId.
 	// +kubebuilder:validation:Optional
-	DevCenterProjectIDSelector *v1.NamespacedSelector `json:"devCenterProjectIdSelector,omitempty" tf:"-"`
+	DevCenterProjectIDSelector *v2.NamespacedSelector `json:"devCenterProjectIdSelector,omitempty" tf:"-"`
 
 	// An identity block as defined below.
 	Identity *IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
@@ -348,11 +347,11 @@ type ManagedDevopsPoolParameters struct {
 
 	// Reference to a Project in devcenter to populate devCenterProjectId.
 	// +kubebuilder:validation:Optional
-	DevCenterProjectIDRef *v1.NamespacedReference `json:"devCenterProjectIdRef,omitempty" tf:"-"`
+	DevCenterProjectIDRef *v2.NamespacedReference `json:"devCenterProjectIdRef,omitempty" tf:"-"`
 
 	// Selector for a Project in devcenter to populate devCenterProjectId.
 	// +kubebuilder:validation:Optional
-	DevCenterProjectIDSelector *v1.NamespacedSelector `json:"devCenterProjectIdSelector,omitempty" tf:"-"`
+	DevCenterProjectIDSelector *v2.NamespacedSelector `json:"devCenterProjectIdSelector,omitempty" tf:"-"`
 
 	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
@@ -373,11 +372,11 @@ type ManagedDevopsPoolParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A stateful_agent block as defined below.
 	// +kubebuilder:validation:Optional
@@ -1214,11 +1213,11 @@ type VirtualMachineScaleSetFabricInitParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type VirtualMachineScaleSetFabricObservation struct {
@@ -1272,11 +1271,11 @@ type VirtualMachineScaleSetFabricParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type WednesdayScheduleInitParameters struct {
@@ -1327,8 +1326,8 @@ type ManagedDevopsPoolSpec struct {
 
 // ManagedDevopsPoolStatus defines the observed state of ManagedDevopsPool.
 type ManagedDevopsPoolStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ManagedDevopsPoolObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ManagedDevopsPoolObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

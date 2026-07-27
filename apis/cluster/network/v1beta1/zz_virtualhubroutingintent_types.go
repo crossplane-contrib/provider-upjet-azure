@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type RoutingPolicyInitParameters struct {
@@ -28,11 +28,11 @@ type RoutingPolicyInitParameters struct {
 
 	// Reference to a Firewall in network to populate nextHop.
 	// +kubebuilder:validation:Optional
-	NextHopRef *v1.Reference `json:"nextHopRef,omitempty" tf:"-"`
+	NextHopRef *v2.Reference `json:"nextHopRef,omitempty" tf:"-"`
 
 	// Selector for a Firewall in network to populate nextHop.
 	// +kubebuilder:validation:Optional
-	NextHopSelector *v1.Selector `json:"nextHopSelector,omitempty" tf:"-"`
+	NextHopSelector *v2.Selector `json:"nextHopSelector,omitempty" tf:"-"`
 }
 
 type RoutingPolicyObservation struct {
@@ -65,11 +65,11 @@ type RoutingPolicyParameters struct {
 
 	// Reference to a Firewall in network to populate nextHop.
 	// +kubebuilder:validation:Optional
-	NextHopRef *v1.Reference `json:"nextHopRef,omitempty" tf:"-"`
+	NextHopRef *v2.Reference `json:"nextHopRef,omitempty" tf:"-"`
 
 	// Selector for a Firewall in network to populate nextHop.
 	// +kubebuilder:validation:Optional
-	NextHopSelector *v1.Selector `json:"nextHopSelector,omitempty" tf:"-"`
+	NextHopSelector *v2.Selector `json:"nextHopSelector,omitempty" tf:"-"`
 }
 
 type VirtualHubRoutingIntentInitParameters struct {
@@ -104,17 +104,17 @@ type VirtualHubRoutingIntentParameters struct {
 
 	// Reference to a VirtualHub in network to populate virtualHubId.
 	// +kubebuilder:validation:Optional
-	VirtualHubIDRef *v1.Reference `json:"virtualHubIdRef,omitempty" tf:"-"`
+	VirtualHubIDRef *v2.Reference `json:"virtualHubIdRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualHub in network to populate virtualHubId.
 	// +kubebuilder:validation:Optional
-	VirtualHubIDSelector *v1.Selector `json:"virtualHubIdSelector,omitempty" tf:"-"`
+	VirtualHubIDSelector *v2.Selector `json:"virtualHubIdSelector,omitempty" tf:"-"`
 }
 
 // VirtualHubRoutingIntentSpec defines the desired state of VirtualHubRoutingIntent
 type VirtualHubRoutingIntentSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     VirtualHubRoutingIntentParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   VirtualHubRoutingIntentParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -130,8 +130,8 @@ type VirtualHubRoutingIntentSpec struct {
 
 // VirtualHubRoutingIntentStatus defines the observed state of VirtualHubRoutingIntent.
 type VirtualHubRoutingIntentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VirtualHubRoutingIntentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VirtualHubRoutingIntentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

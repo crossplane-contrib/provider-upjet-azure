@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CloudApplicationLiveViewInitParameters struct {
@@ -35,17 +35,17 @@ type CloudApplicationLiveViewParameters struct {
 
 	// Reference to a SpringCloudService in appplatform to populate springCloudServiceId.
 	// +kubebuilder:validation:Optional
-	SpringCloudServiceIDRef *v1.Reference `json:"springCloudServiceIdRef,omitempty" tf:"-"`
+	SpringCloudServiceIDRef *v2.Reference `json:"springCloudServiceIdRef,omitempty" tf:"-"`
 
 	// Selector for a SpringCloudService in appplatform to populate springCloudServiceId.
 	// +kubebuilder:validation:Optional
-	SpringCloudServiceIDSelector *v1.Selector `json:"springCloudServiceIdSelector,omitempty" tf:"-"`
+	SpringCloudServiceIDSelector *v2.Selector `json:"springCloudServiceIdSelector,omitempty" tf:"-"`
 }
 
 // CloudApplicationLiveViewSpec defines the desired state of CloudApplicationLiveView
 type CloudApplicationLiveViewSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     CloudApplicationLiveViewParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   CloudApplicationLiveViewParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -61,8 +61,8 @@ type CloudApplicationLiveViewSpec struct {
 
 // CloudApplicationLiveViewStatus defines the observed state of CloudApplicationLiveView.
 type CloudApplicationLiveViewStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        CloudApplicationLiveViewObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               CloudApplicationLiveViewObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

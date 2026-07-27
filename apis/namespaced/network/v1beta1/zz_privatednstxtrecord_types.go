@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type PrivateDNSTXTRecordInitParameters struct {
@@ -65,11 +64,11 @@ type PrivateDNSTXTRecordParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The Time To Live (TTL) of the DNS record in seconds.
 	// +kubebuilder:validation:Optional
@@ -87,11 +86,11 @@ type PrivateDNSTXTRecordParameters struct {
 
 	// Reference to a PrivateDNSZone in network to populate zoneName.
 	// +kubebuilder:validation:Optional
-	ZoneNameRef *v1.NamespacedReference `json:"zoneNameRef,omitempty" tf:"-"`
+	ZoneNameRef *v2.NamespacedReference `json:"zoneNameRef,omitempty" tf:"-"`
 
 	// Selector for a PrivateDNSZone in network to populate zoneName.
 	// +kubebuilder:validation:Optional
-	ZoneNameSelector *v1.NamespacedSelector `json:"zoneNameSelector,omitempty" tf:"-"`
+	ZoneNameSelector *v2.NamespacedSelector `json:"zoneNameSelector,omitempty" tf:"-"`
 }
 
 type PrivateDNSTXTRecordRecordInitParameters struct {
@@ -132,8 +131,8 @@ type PrivateDNSTXTRecordSpec struct {
 
 // PrivateDNSTXTRecordStatus defines the observed state of PrivateDNSTXTRecord.
 type PrivateDNSTXTRecordStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PrivateDNSTXTRecordObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PrivateDNSTXTRecordObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

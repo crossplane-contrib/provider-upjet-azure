@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type NATGatewayInitParameters struct {
@@ -79,11 +79,11 @@ type NATGatewayParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The SKU which should be used. Possible values are Standard and StandardV2. Defaults to Standard. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -102,8 +102,8 @@ type NATGatewayParameters struct {
 
 // NATGatewaySpec defines the desired state of NATGateway
 type NATGatewaySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     NATGatewayParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   NATGatewayParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -119,8 +119,8 @@ type NATGatewaySpec struct {
 
 // NATGatewayStatus defines the observed state of NATGateway.
 type NATGatewayStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        NATGatewayObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               NATGatewayObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

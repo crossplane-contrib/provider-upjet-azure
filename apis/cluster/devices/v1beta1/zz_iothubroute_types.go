@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type IOTHubRouteInitParameters struct {
@@ -27,11 +27,11 @@ type IOTHubRouteInitParameters struct {
 
 	// References to IOTHubEndpointStorageContainer in devices to populate endpointNames.
 	// +kubebuilder:validation:Optional
-	EndpointNamesRefs []v1.Reference `json:"endpointNamesRefs,omitempty" tf:"-"`
+	EndpointNamesRefs []v2.Reference `json:"endpointNamesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of IOTHubEndpointStorageContainer in devices to populate endpointNames.
 	// +kubebuilder:validation:Optional
-	EndpointNamesSelector *v1.Selector `json:"endpointNamesSelector,omitempty" tf:"-"`
+	EndpointNamesSelector *v2.Selector `json:"endpointNamesSelector,omitempty" tf:"-"`
 
 	// The source that the routing rule is to be applied to. Possible values include: DeviceConnectionStateEvents, DeviceJobLifecycleEvents, DeviceLifecycleEvents, DeviceMessages, DigitalTwinChangeEvents, Invalid, TwinChangeEvents.
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
@@ -78,11 +78,11 @@ type IOTHubRouteParameters struct {
 
 	// References to IOTHubEndpointStorageContainer in devices to populate endpointNames.
 	// +kubebuilder:validation:Optional
-	EndpointNamesRefs []v1.Reference `json:"endpointNamesRefs,omitempty" tf:"-"`
+	EndpointNamesRefs []v2.Reference `json:"endpointNamesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of IOTHubEndpointStorageContainer in devices to populate endpointNames.
 	// +kubebuilder:validation:Optional
-	EndpointNamesSelector *v1.Selector `json:"endpointNamesSelector,omitempty" tf:"-"`
+	EndpointNamesSelector *v2.Selector `json:"endpointNamesSelector,omitempty" tf:"-"`
 
 	// The name of the IoTHub to which this Route belongs. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/devices/v1beta2.IOTHub
@@ -91,11 +91,11 @@ type IOTHubRouteParameters struct {
 
 	// Reference to a IOTHub in devices to populate iothubName.
 	// +kubebuilder:validation:Optional
-	IOTHubNameRef *v1.Reference `json:"iothubNameRef,omitempty" tf:"-"`
+	IOTHubNameRef *v2.Reference `json:"iothubNameRef,omitempty" tf:"-"`
 
 	// Selector for a IOTHub in devices to populate iothubName.
 	// +kubebuilder:validation:Optional
-	IOTHubNameSelector *v1.Selector `json:"iothubNameSelector,omitempty" tf:"-"`
+	IOTHubNameSelector *v2.Selector `json:"iothubNameSelector,omitempty" tf:"-"`
 
 	// The name of the resource group under which the IotHub Route resource has to be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
@@ -104,11 +104,11 @@ type IOTHubRouteParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The source that the routing rule is to be applied to. Possible values include: DeviceConnectionStateEvents, DeviceJobLifecycleEvents, DeviceLifecycleEvents, DeviceMessages, DigitalTwinChangeEvents, Invalid, TwinChangeEvents.
 	// +kubebuilder:validation:Optional
@@ -117,8 +117,8 @@ type IOTHubRouteParameters struct {
 
 // IOTHubRouteSpec defines the desired state of IOTHubRoute
 type IOTHubRouteSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     IOTHubRouteParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   IOTHubRouteParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -134,8 +134,8 @@ type IOTHubRouteSpec struct {
 
 // IOTHubRouteStatus defines the observed state of IOTHubRoute.
 type IOTHubRouteStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        IOTHubRouteObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               IOTHubRouteObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

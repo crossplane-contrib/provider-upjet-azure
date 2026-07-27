@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type OutputTableInitParameters struct {
@@ -29,7 +28,7 @@ type OutputTableInitParameters struct {
 	RowKey *string `json:"rowKey,omitempty" tf:"row_key,omitempty"`
 
 	// The Access Key which should be used to connect to this Storage Account.
-	StorageAccountKeySecretRef v1.LocalSecretKeySelector `json:"storageAccountKeySecretRef" tf:"-"`
+	StorageAccountKeySecretRef v2.LocalSecretKeySelector `json:"storageAccountKeySecretRef" tf:"-"`
 
 	// The name of the Storage Account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
@@ -37,11 +36,11 @@ type OutputTableInitParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountName.
 	// +kubebuilder:validation:Optional
-	StorageAccountNameRef *v1.NamespacedReference `json:"storageAccountNameRef,omitempty" tf:"-"`
+	StorageAccountNameRef *v2.NamespacedReference `json:"storageAccountNameRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountName.
 	// +kubebuilder:validation:Optional
-	StorageAccountNameSelector *v1.NamespacedSelector `json:"storageAccountNameSelector,omitempty" tf:"-"`
+	StorageAccountNameSelector *v2.NamespacedSelector `json:"storageAccountNameSelector,omitempty" tf:"-"`
 
 	// The name of the table where the stream should be output to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Table
@@ -50,11 +49,11 @@ type OutputTableInitParameters struct {
 
 	// Reference to a Table in storage to populate table.
 	// +kubebuilder:validation:Optional
-	TableRef *v1.NamespacedReference `json:"tableRef,omitempty" tf:"-"`
+	TableRef *v2.NamespacedReference `json:"tableRef,omitempty" tf:"-"`
 
 	// Selector for a Table in storage to populate table.
 	// +kubebuilder:validation:Optional
-	TableSelector *v1.NamespacedSelector `json:"tableSelector,omitempty" tf:"-"`
+	TableSelector *v2.NamespacedSelector `json:"tableSelector,omitempty" tf:"-"`
 }
 
 type OutputTableObservation struct {
@@ -108,11 +107,11 @@ type OutputTableParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The name of the output column that contains the row key.
 	// +kubebuilder:validation:Optional
@@ -120,7 +119,7 @@ type OutputTableParameters struct {
 
 	// The Access Key which should be used to connect to this Storage Account.
 	// +kubebuilder:validation:Optional
-	StorageAccountKeySecretRef v1.LocalSecretKeySelector `json:"storageAccountKeySecretRef" tf:"-"`
+	StorageAccountKeySecretRef v2.LocalSecretKeySelector `json:"storageAccountKeySecretRef" tf:"-"`
 
 	// The name of the Storage Account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
@@ -129,11 +128,11 @@ type OutputTableParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountName.
 	// +kubebuilder:validation:Optional
-	StorageAccountNameRef *v1.NamespacedReference `json:"storageAccountNameRef,omitempty" tf:"-"`
+	StorageAccountNameRef *v2.NamespacedReference `json:"storageAccountNameRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountName.
 	// +kubebuilder:validation:Optional
-	StorageAccountNameSelector *v1.NamespacedSelector `json:"storageAccountNameSelector,omitempty" tf:"-"`
+	StorageAccountNameSelector *v2.NamespacedSelector `json:"storageAccountNameSelector,omitempty" tf:"-"`
 
 	// The name of the Stream Analytics Job. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
@@ -147,11 +146,11 @@ type OutputTableParameters struct {
 
 	// Reference to a Table in storage to populate table.
 	// +kubebuilder:validation:Optional
-	TableRef *v1.NamespacedReference `json:"tableRef,omitempty" tf:"-"`
+	TableRef *v2.NamespacedReference `json:"tableRef,omitempty" tf:"-"`
 
 	// Selector for a Table in storage to populate table.
 	// +kubebuilder:validation:Optional
-	TableSelector *v1.NamespacedSelector `json:"tableSelector,omitempty" tf:"-"`
+	TableSelector *v2.NamespacedSelector `json:"tableSelector,omitempty" tf:"-"`
 }
 
 // OutputTableSpec defines the desired state of OutputTable
@@ -173,8 +172,8 @@ type OutputTableSpec struct {
 
 // OutputTableStatus defines the observed state of OutputTable.
 type OutputTableStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        OutputTableObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               OutputTableObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

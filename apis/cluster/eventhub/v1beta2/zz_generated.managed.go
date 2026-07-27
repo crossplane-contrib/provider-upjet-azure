@@ -5,104 +5,104 @@
 
 package v1beta2
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this EventHub.
-func (mg *EventHub) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *EventHub) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this EventHub.
-func (mg *EventHub) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *EventHub) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this EventHub.
-func (mg *EventHub) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *EventHub) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this EventHub.
-func (mg *EventHub) GetProviderConfigReference() *xpv1.Reference {
+func (mg *EventHub) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this EventHub.
-func (mg *EventHub) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *EventHub) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this EventHub.
-func (mg *EventHub) SetConditions(c ...xpv1.Condition) {
+func (mg *EventHub) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this EventHub.
-func (mg *EventHub) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *EventHub) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this EventHub.
-func (mg *EventHub) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *EventHub) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this EventHub.
-func (mg *EventHub) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *EventHub) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this EventHub.
-func (mg *EventHub) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *EventHub) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this EventHubNamespace.
-func (mg *EventHubNamespace) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *EventHubNamespace) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this EventHubNamespace.
-func (mg *EventHubNamespace) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *EventHubNamespace) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this EventHubNamespace.
-func (mg *EventHubNamespace) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *EventHubNamespace) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this EventHubNamespace.
-func (mg *EventHubNamespace) GetProviderConfigReference() *xpv1.Reference {
+func (mg *EventHubNamespace) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this EventHubNamespace.
-func (mg *EventHubNamespace) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *EventHubNamespace) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this EventHubNamespace.
-func (mg *EventHubNamespace) SetConditions(c ...xpv1.Condition) {
+func (mg *EventHubNamespace) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this EventHubNamespace.
-func (mg *EventHubNamespace) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *EventHubNamespace) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this EventHubNamespace.
-func (mg *EventHubNamespace) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *EventHubNamespace) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this EventHubNamespace.
-func (mg *EventHubNamespace) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *EventHubNamespace) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this EventHubNamespace.
-func (mg *EventHubNamespace) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *EventHubNamespace) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

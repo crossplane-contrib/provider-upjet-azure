@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AzureActiveDirectoryAdministratorInitParameters struct {
@@ -116,7 +116,7 @@ type MSSQLManagedInstanceInitParameters struct {
 	AdministratorLogin *string `json:"administratorLogin,omitempty" tf:"administrator_login,omitempty"`
 
 	// The password associated with the administrator_login user. Needs to comply with Azure's Password Policy
-	AdministratorLoginPasswordSecretRef *v1.SecretKeySelector `json:"administratorLoginPasswordSecretRef,omitempty" tf:"-"`
+	AdministratorLoginPasswordSecretRef *v2.SecretKeySelector `json:"administratorLoginPasswordSecretRef,omitempty" tf:"-"`
 
 	// An azure_active_directory_administrator block as defined below.
 	AzureActiveDirectoryAdministrator *AzureActiveDirectoryAdministratorInitParameters `json:"azureActiveDirectoryAdministrator,omitempty" tf:"azure_active_directory_administrator,omitempty"`
@@ -131,11 +131,11 @@ type MSSQLManagedInstanceInitParameters struct {
 
 	// Reference to a MSSQLManagedInstance in sql to populate dnsZonePartnerId.
 	// +kubebuilder:validation:Optional
-	DNSZonePartnerIDRef *v1.Reference `json:"dnsZonePartnerIdRef,omitempty" tf:"-"`
+	DNSZonePartnerIDRef *v2.Reference `json:"dnsZonePartnerIdRef,omitempty" tf:"-"`
 
 	// Selector for a MSSQLManagedInstance in sql to populate dnsZonePartnerId.
 	// +kubebuilder:validation:Optional
-	DNSZonePartnerIDSelector *v1.Selector `json:"dnsZonePartnerIdSelector,omitempty" tf:"-"`
+	DNSZonePartnerIDSelector *v2.Selector `json:"dnsZonePartnerIdSelector,omitempty" tf:"-"`
 
 	// Specifies the internal format of the SQL Managed Instance databases specific to the SQL engine version. Possible values are AlwaysUpToDate and SQLServer2022. Defaults to SQLServer2022.
 	DatabaseFormat *string `json:"databaseFormat,omitempty" tf:"database_format,omitempty"`
@@ -189,11 +189,11 @@ type MSSQLManagedInstanceInitParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
 	// +mapType=granular
@@ -305,7 +305,7 @@ type MSSQLManagedInstanceParameters struct {
 
 	// The password associated with the administrator_login user. Needs to comply with Azure's Password Policy
 	// +kubebuilder:validation:Optional
-	AdministratorLoginPasswordSecretRef *v1.SecretKeySelector `json:"administratorLoginPasswordSecretRef,omitempty" tf:"-"`
+	AdministratorLoginPasswordSecretRef *v2.SecretKeySelector `json:"administratorLoginPasswordSecretRef,omitempty" tf:"-"`
 
 	// An azure_active_directory_administrator block as defined below.
 	// +kubebuilder:validation:Optional
@@ -323,11 +323,11 @@ type MSSQLManagedInstanceParameters struct {
 
 	// Reference to a MSSQLManagedInstance in sql to populate dnsZonePartnerId.
 	// +kubebuilder:validation:Optional
-	DNSZonePartnerIDRef *v1.Reference `json:"dnsZonePartnerIdRef,omitempty" tf:"-"`
+	DNSZonePartnerIDRef *v2.Reference `json:"dnsZonePartnerIdRef,omitempty" tf:"-"`
 
 	// Selector for a MSSQLManagedInstance in sql to populate dnsZonePartnerId.
 	// +kubebuilder:validation:Optional
-	DNSZonePartnerIDSelector *v1.Selector `json:"dnsZonePartnerIdSelector,omitempty" tf:"-"`
+	DNSZonePartnerIDSelector *v2.Selector `json:"dnsZonePartnerIdSelector,omitempty" tf:"-"`
 
 	// Specifies the internal format of the SQL Managed Instance databases specific to the SQL engine version. Possible values are AlwaysUpToDate and SQLServer2022. Defaults to SQLServer2022.
 	// +kubebuilder:validation:Optional
@@ -376,11 +376,11 @@ type MSSQLManagedInstanceParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The service principal type. The only possible value is SystemAssigned.
 	// +kubebuilder:validation:Optional
@@ -410,11 +410,11 @@ type MSSQLManagedInstanceParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
@@ -436,8 +436,8 @@ type MSSQLManagedInstanceParameters struct {
 
 // MSSQLManagedInstanceSpec defines the desired state of MSSQLManagedInstance
 type MSSQLManagedInstanceSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     MSSQLManagedInstanceParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   MSSQLManagedInstanceParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -453,8 +453,8 @@ type MSSQLManagedInstanceSpec struct {
 
 // MSSQLManagedInstanceStatus defines the observed state of MSSQLManagedInstance.
 type MSSQLManagedInstanceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MSSQLManagedInstanceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MSSQLManagedInstanceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

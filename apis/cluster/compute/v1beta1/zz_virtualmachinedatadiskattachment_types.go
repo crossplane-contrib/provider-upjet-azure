@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type VirtualMachineDataDiskAttachmentInitParameters struct {
@@ -31,11 +31,11 @@ type VirtualMachineDataDiskAttachmentInitParameters struct {
 
 	// Reference to a ManagedDisk in compute to populate managedDiskId.
 	// +kubebuilder:validation:Optional
-	ManagedDiskIDRef *v1.Reference `json:"managedDiskIdRef,omitempty" tf:"-"`
+	ManagedDiskIDRef *v2.Reference `json:"managedDiskIdRef,omitempty" tf:"-"`
 
 	// Selector for a ManagedDisk in compute to populate managedDiskId.
 	// +kubebuilder:validation:Optional
-	ManagedDiskIDSelector *v1.Selector `json:"managedDiskIdSelector,omitempty" tf:"-"`
+	ManagedDiskIDSelector *v2.Selector `json:"managedDiskIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Virtual Machine to which the Data Disk should be attached. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/compute/v1beta2.LinuxVirtualMachine
@@ -44,11 +44,11 @@ type VirtualMachineDataDiskAttachmentInitParameters struct {
 
 	// Reference to a LinuxVirtualMachine in compute to populate virtualMachineId.
 	// +kubebuilder:validation:Optional
-	VirtualMachineIDRef *v1.Reference `json:"virtualMachineIdRef,omitempty" tf:"-"`
+	VirtualMachineIDRef *v2.Reference `json:"virtualMachineIdRef,omitempty" tf:"-"`
 
 	// Selector for a LinuxVirtualMachine in compute to populate virtualMachineId.
 	// +kubebuilder:validation:Optional
-	VirtualMachineIDSelector *v1.Selector `json:"virtualMachineIdSelector,omitempty" tf:"-"`
+	VirtualMachineIDSelector *v2.Selector `json:"virtualMachineIdSelector,omitempty" tf:"-"`
 
 	// Specifies if Write Accelerator is enabled on the disk. This can only be enabled on Premium_LRS managed disks with no caching and M-Series VMs. Defaults to false.
 	WriteAcceleratorEnabled *bool `json:"writeAcceleratorEnabled,omitempty" tf:"write_accelerator_enabled,omitempty"`
@@ -100,11 +100,11 @@ type VirtualMachineDataDiskAttachmentParameters struct {
 
 	// Reference to a ManagedDisk in compute to populate managedDiskId.
 	// +kubebuilder:validation:Optional
-	ManagedDiskIDRef *v1.Reference `json:"managedDiskIdRef,omitempty" tf:"-"`
+	ManagedDiskIDRef *v2.Reference `json:"managedDiskIdRef,omitempty" tf:"-"`
 
 	// Selector for a ManagedDisk in compute to populate managedDiskId.
 	// +kubebuilder:validation:Optional
-	ManagedDiskIDSelector *v1.Selector `json:"managedDiskIdSelector,omitempty" tf:"-"`
+	ManagedDiskIDSelector *v2.Selector `json:"managedDiskIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Virtual Machine to which the Data Disk should be attached. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/compute/v1beta2.LinuxVirtualMachine
@@ -114,11 +114,11 @@ type VirtualMachineDataDiskAttachmentParameters struct {
 
 	// Reference to a LinuxVirtualMachine in compute to populate virtualMachineId.
 	// +kubebuilder:validation:Optional
-	VirtualMachineIDRef *v1.Reference `json:"virtualMachineIdRef,omitempty" tf:"-"`
+	VirtualMachineIDRef *v2.Reference `json:"virtualMachineIdRef,omitempty" tf:"-"`
 
 	// Selector for a LinuxVirtualMachine in compute to populate virtualMachineId.
 	// +kubebuilder:validation:Optional
-	VirtualMachineIDSelector *v1.Selector `json:"virtualMachineIdSelector,omitempty" tf:"-"`
+	VirtualMachineIDSelector *v2.Selector `json:"virtualMachineIdSelector,omitempty" tf:"-"`
 
 	// Specifies if Write Accelerator is enabled on the disk. This can only be enabled on Premium_LRS managed disks with no caching and M-Series VMs. Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -127,8 +127,8 @@ type VirtualMachineDataDiskAttachmentParameters struct {
 
 // VirtualMachineDataDiskAttachmentSpec defines the desired state of VirtualMachineDataDiskAttachment
 type VirtualMachineDataDiskAttachmentSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     VirtualMachineDataDiskAttachmentParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   VirtualMachineDataDiskAttachmentParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -144,8 +144,8 @@ type VirtualMachineDataDiskAttachmentSpec struct {
 
 // VirtualMachineDataDiskAttachmentStatus defines the observed state of VirtualMachineDataDiskAttachment.
 type VirtualMachineDataDiskAttachmentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VirtualMachineDataDiskAttachmentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VirtualMachineDataDiskAttachmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

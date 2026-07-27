@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AksAssignedIdentityInitParameters struct {
@@ -111,11 +111,11 @@ type KubernetesClusterExtensionParameters struct {
 
 	// Reference to a KubernetesCluster in containerservice to populate clusterId.
 	// +kubebuilder:validation:Optional
-	ClusterIDRef *v1.Reference `json:"clusterIdRef,omitempty" tf:"-"`
+	ClusterIDRef *v2.Reference `json:"clusterIdRef,omitempty" tf:"-"`
 
 	// Selector for a KubernetesCluster in containerservice to populate clusterId.
 	// +kubebuilder:validation:Optional
-	ClusterIDSelector *v1.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
+	ClusterIDSelector *v2.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
 
 	// Configuration settings that are sensitive, as name-value pairs for configuring this extension.
 	// +kubebuilder:validation:Optional
@@ -213,8 +213,8 @@ type PlanParameters struct {
 
 // KubernetesClusterExtensionSpec defines the desired state of KubernetesClusterExtension
 type KubernetesClusterExtensionSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     KubernetesClusterExtensionParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   KubernetesClusterExtensionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -230,8 +230,8 @@ type KubernetesClusterExtensionSpec struct {
 
 // KubernetesClusterExtensionStatus defines the observed state of KubernetesClusterExtension.
 type KubernetesClusterExtensionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        KubernetesClusterExtensionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               KubernetesClusterExtensionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

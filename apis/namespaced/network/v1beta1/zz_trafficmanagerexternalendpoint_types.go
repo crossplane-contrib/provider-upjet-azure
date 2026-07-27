@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type TrafficManagerExternalEndpointCustomHeaderInitParameters struct {
@@ -143,11 +142,11 @@ type TrafficManagerExternalEndpointParameters struct {
 
 	// Reference to a TrafficManagerProfile in network to populate profileId.
 	// +kubebuilder:validation:Optional
-	ProfileIDRef *v1.NamespacedReference `json:"profileIdRef,omitempty" tf:"-"`
+	ProfileIDRef *v2.NamespacedReference `json:"profileIdRef,omitempty" tf:"-"`
 
 	// Selector for a TrafficManagerProfile in network to populate profileId.
 	// +kubebuilder:validation:Optional
-	ProfileIDSelector *v1.NamespacedSelector `json:"profileIdSelector,omitempty" tf:"-"`
+	ProfileIDSelector *v2.NamespacedSelector `json:"profileIdSelector,omitempty" tf:"-"`
 
 	// One or more subnet blocks as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -220,8 +219,8 @@ type TrafficManagerExternalEndpointSpec struct {
 
 // TrafficManagerExternalEndpointStatus defines the observed state of TrafficManagerExternalEndpoint.
 type TrafficManagerExternalEndpointStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        TrafficManagerExternalEndpointObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               TrafficManagerExternalEndpointObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

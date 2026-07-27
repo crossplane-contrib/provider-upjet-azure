@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AdditionalCapabilitiesInitParameters struct {
@@ -251,7 +251,7 @@ type LinuxVirtualMachineInitParameters struct {
 	AdditionalCapabilities []AdditionalCapabilitiesInitParameters `json:"additionalCapabilities,omitempty" tf:"additional_capabilities,omitempty"`
 
 	// The Password which should be used for the local-administrator on this Virtual Machine. Changing this forces a new resource to be created.
-	AdminPasswordSecretRef *v1.SecretKeySelector `json:"adminPasswordSecretRef,omitempty" tf:"-"`
+	AdminPasswordSecretRef *v2.SecretKeySelector `json:"adminPasswordSecretRef,omitempty" tf:"-"`
 
 	// One or more admin_ssh_key blocks as defined below. Changing this forces a new resource to be created.
 	AdminSSHKey []AdminSSHKeyInitParameters `json:"adminSshKey,omitempty" tf:"admin_ssh_key,omitempty"`
@@ -278,7 +278,7 @@ type LinuxVirtualMachineInitParameters struct {
 	ComputerName *string `json:"computerName,omitempty" tf:"computer_name,omitempty"`
 
 	// The Base64-Encoded Custom Data which should be used for this Virtual Machine. Changing this forces a new resource to be created.
-	CustomDataSecretRef *v1.SecretKeySelector `json:"customDataSecretRef,omitempty" tf:"-"`
+	CustomDataSecretRef *v2.SecretKeySelector `json:"customDataSecretRef,omitempty" tf:"-"`
 
 	// The ID of a Dedicated Host Group that this Linux Virtual Machine should be run within. Conflicts with dedicated_host_id.
 	DedicatedHostGroupID *string `json:"dedicatedHostGroupId,omitempty" tf:"dedicated_host_group_id,omitempty"`
@@ -326,11 +326,11 @@ type LinuxVirtualMachineInitParameters struct {
 
 	// References to NetworkInterface in network to populate networkInterfaceIds.
 	// +kubebuilder:validation:Optional
-	NetworkInterfaceIdsRefs []v1.Reference `json:"networkInterfaceIdsRefs,omitempty" tf:"-"`
+	NetworkInterfaceIdsRefs []v2.Reference `json:"networkInterfaceIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of NetworkInterface in network to populate networkInterfaceIds.
 	// +kubebuilder:validation:Optional
-	NetworkInterfaceIdsSelector *v1.Selector `json:"networkInterfaceIdsSelector,omitempty" tf:"-"`
+	NetworkInterfaceIdsSelector *v2.Selector `json:"networkInterfaceIdsSelector,omitempty" tf:"-"`
 
 	// A os_disk block as defined below.
 	OsDisk []LinuxVirtualMachineOsDiskInitParameters `json:"osDisk,omitempty" tf:"os_disk,omitempty"`
@@ -676,7 +676,7 @@ type LinuxVirtualMachineParameters struct {
 
 	// The Password which should be used for the local-administrator on this Virtual Machine. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	AdminPasswordSecretRef *v1.SecretKeySelector `json:"adminPasswordSecretRef,omitempty" tf:"-"`
+	AdminPasswordSecretRef *v2.SecretKeySelector `json:"adminPasswordSecretRef,omitempty" tf:"-"`
 
 	// One or more admin_ssh_key blocks as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -712,7 +712,7 @@ type LinuxVirtualMachineParameters struct {
 
 	// The Base64-Encoded Custom Data which should be used for this Virtual Machine. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	CustomDataSecretRef *v1.SecretKeySelector `json:"customDataSecretRef,omitempty" tf:"-"`
+	CustomDataSecretRef *v2.SecretKeySelector `json:"customDataSecretRef,omitempty" tf:"-"`
 
 	// The ID of a Dedicated Host Group that this Linux Virtual Machine should be run within. Conflicts with dedicated_host_id.
 	// +kubebuilder:validation:Optional
@@ -774,11 +774,11 @@ type LinuxVirtualMachineParameters struct {
 
 	// References to NetworkInterface in network to populate networkInterfaceIds.
 	// +kubebuilder:validation:Optional
-	NetworkInterfaceIdsRefs []v1.Reference `json:"networkInterfaceIdsRefs,omitempty" tf:"-"`
+	NetworkInterfaceIdsRefs []v2.Reference `json:"networkInterfaceIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of NetworkInterface in network to populate networkInterfaceIds.
 	// +kubebuilder:validation:Optional
-	NetworkInterfaceIdsSelector *v1.Selector `json:"networkInterfaceIdsSelector,omitempty" tf:"-"`
+	NetworkInterfaceIdsSelector *v2.Selector `json:"networkInterfaceIdsSelector,omitempty" tf:"-"`
 
 	// A os_disk block as defined below.
 	// +kubebuilder:validation:Optional
@@ -831,11 +831,11 @@ type LinuxVirtualMachineParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// One or more secret blocks as defined below.
 	// +kubebuilder:validation:Optional
@@ -1054,8 +1054,8 @@ type TerminationNotificationParameters struct {
 
 // LinuxVirtualMachineSpec defines the desired state of LinuxVirtualMachine
 type LinuxVirtualMachineSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     LinuxVirtualMachineParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   LinuxVirtualMachineParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -1071,8 +1071,8 @@ type LinuxVirtualMachineSpec struct {
 
 // LinuxVirtualMachineStatus defines the observed state of LinuxVirtualMachine.
 type LinuxVirtualMachineStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LinuxVirtualMachineObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LinuxVirtualMachineObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

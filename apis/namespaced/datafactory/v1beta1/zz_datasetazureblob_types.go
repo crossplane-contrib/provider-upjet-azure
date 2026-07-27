@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DataSetAzureBlobInitParameters struct {
@@ -44,11 +43,11 @@ type DataSetAzureBlobInitParameters struct {
 
 	// Reference to a LinkedServiceAzureBlobStorage in datafactory to populate linkedServiceName.
 	// +kubebuilder:validation:Optional
-	LinkedServiceNameRef *v1.NamespacedReference `json:"linkedServiceNameRef,omitempty" tf:"-"`
+	LinkedServiceNameRef *v2.NamespacedReference `json:"linkedServiceNameRef,omitempty" tf:"-"`
 
 	// Selector for a LinkedServiceAzureBlobStorage in datafactory to populate linkedServiceName.
 	// +kubebuilder:validation:Optional
-	LinkedServiceNameSelector *v1.NamespacedSelector `json:"linkedServiceNameSelector,omitempty" tf:"-"`
+	LinkedServiceNameSelector *v2.NamespacedSelector `json:"linkedServiceNameSelector,omitempty" tf:"-"`
 
 	// A map of parameters to associate with the Data Factory Dataset.
 	// +mapType=granular
@@ -124,11 +123,11 @@ type DataSetAzureBlobParameters struct {
 
 	// Reference to a Factory in datafactory to populate dataFactoryId.
 	// +kubebuilder:validation:Optional
-	DataFactoryIDRef *v1.NamespacedReference `json:"dataFactoryIdRef,omitempty" tf:"-"`
+	DataFactoryIDRef *v2.NamespacedReference `json:"dataFactoryIdRef,omitempty" tf:"-"`
 
 	// Selector for a Factory in datafactory to populate dataFactoryId.
 	// +kubebuilder:validation:Optional
-	DataFactoryIDSelector *v1.NamespacedSelector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
+	DataFactoryIDSelector *v2.NamespacedSelector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
 
 	// The description for the Data Factory Dataset.
 	// +kubebuilder:validation:Optional
@@ -157,11 +156,11 @@ type DataSetAzureBlobParameters struct {
 
 	// Reference to a LinkedServiceAzureBlobStorage in datafactory to populate linkedServiceName.
 	// +kubebuilder:validation:Optional
-	LinkedServiceNameRef *v1.NamespacedReference `json:"linkedServiceNameRef,omitempty" tf:"-"`
+	LinkedServiceNameRef *v2.NamespacedReference `json:"linkedServiceNameRef,omitempty" tf:"-"`
 
 	// Selector for a LinkedServiceAzureBlobStorage in datafactory to populate linkedServiceName.
 	// +kubebuilder:validation:Optional
-	LinkedServiceNameSelector *v1.NamespacedSelector `json:"linkedServiceNameSelector,omitempty" tf:"-"`
+	LinkedServiceNameSelector *v2.NamespacedSelector `json:"linkedServiceNameSelector,omitempty" tf:"-"`
 
 	// A map of parameters to associate with the Data Factory Dataset.
 	// +kubebuilder:validation:Optional
@@ -235,8 +234,8 @@ type DataSetAzureBlobSpec struct {
 
 // DataSetAzureBlobStatus defines the observed state of DataSetAzureBlob.
 type DataSetAzureBlobStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DataSetAzureBlobObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DataSetAzureBlobObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

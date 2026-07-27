@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type NATGatewayPublicIPAssociationInitParameters struct {
@@ -23,11 +22,11 @@ type NATGatewayPublicIPAssociationInitParameters struct {
 
 	// Reference to a NATGateway in network to populate natGatewayId.
 	// +kubebuilder:validation:Optional
-	NATGatewayIDRef *v1.NamespacedReference `json:"natGatewayIdRef,omitempty" tf:"-"`
+	NATGatewayIDRef *v2.NamespacedReference `json:"natGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a NATGateway in network to populate natGatewayId.
 	// +kubebuilder:validation:Optional
-	NATGatewayIDSelector *v1.NamespacedSelector `json:"natGatewayIdSelector,omitempty" tf:"-"`
+	NATGatewayIDSelector *v2.NamespacedSelector `json:"natGatewayIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Public IP Address which this NAT Gateway should be connected to. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.PublicIP
@@ -36,11 +35,11 @@ type NATGatewayPublicIPAssociationInitParameters struct {
 
 	// Reference to a PublicIP in network to populate publicIpAddressId.
 	// +kubebuilder:validation:Optional
-	PublicIPAddressIDRef *v1.NamespacedReference `json:"publicIpAddressIdRef,omitempty" tf:"-"`
+	PublicIPAddressIDRef *v2.NamespacedReference `json:"publicIpAddressIdRef,omitempty" tf:"-"`
 
 	// Selector for a PublicIP in network to populate publicIpAddressId.
 	// +kubebuilder:validation:Optional
-	PublicIPAddressIDSelector *v1.NamespacedSelector `json:"publicIpAddressIdSelector,omitempty" tf:"-"`
+	PublicIPAddressIDSelector *v2.NamespacedSelector `json:"publicIpAddressIdSelector,omitempty" tf:"-"`
 }
 
 type NATGatewayPublicIPAssociationObservation struct {
@@ -63,11 +62,11 @@ type NATGatewayPublicIPAssociationParameters struct {
 
 	// Reference to a NATGateway in network to populate natGatewayId.
 	// +kubebuilder:validation:Optional
-	NATGatewayIDRef *v1.NamespacedReference `json:"natGatewayIdRef,omitempty" tf:"-"`
+	NATGatewayIDRef *v2.NamespacedReference `json:"natGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a NATGateway in network to populate natGatewayId.
 	// +kubebuilder:validation:Optional
-	NATGatewayIDSelector *v1.NamespacedSelector `json:"natGatewayIdSelector,omitempty" tf:"-"`
+	NATGatewayIDSelector *v2.NamespacedSelector `json:"natGatewayIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Public IP Address which this NAT Gateway should be connected to. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.PublicIP
@@ -77,11 +76,11 @@ type NATGatewayPublicIPAssociationParameters struct {
 
 	// Reference to a PublicIP in network to populate publicIpAddressId.
 	// +kubebuilder:validation:Optional
-	PublicIPAddressIDRef *v1.NamespacedReference `json:"publicIpAddressIdRef,omitempty" tf:"-"`
+	PublicIPAddressIDRef *v2.NamespacedReference `json:"publicIpAddressIdRef,omitempty" tf:"-"`
 
 	// Selector for a PublicIP in network to populate publicIpAddressId.
 	// +kubebuilder:validation:Optional
-	PublicIPAddressIDSelector *v1.NamespacedSelector `json:"publicIpAddressIdSelector,omitempty" tf:"-"`
+	PublicIPAddressIDSelector *v2.NamespacedSelector `json:"publicIpAddressIdSelector,omitempty" tf:"-"`
 }
 
 // NATGatewayPublicIPAssociationSpec defines the desired state of NATGatewayPublicIPAssociation
@@ -103,8 +102,8 @@ type NATGatewayPublicIPAssociationSpec struct {
 
 // NATGatewayPublicIPAssociationStatus defines the observed state of NATGatewayPublicIPAssociation.
 type NATGatewayPublicIPAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        NATGatewayPublicIPAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               NATGatewayPublicIPAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

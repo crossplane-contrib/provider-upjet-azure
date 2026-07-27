@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CustomerManagedKeyInitParameters struct {
@@ -78,7 +78,7 @@ type FlexibleServerInitParameters struct {
 	AdministratorLogin *string `json:"administratorLogin,omitempty" tf:"administrator_login,omitempty"`
 
 	// The Password associated with the administrator_login for the MySQL Flexible Server.
-	AdministratorPasswordSecretRef *v1.SecretKeySelector `json:"administratorPasswordSecretRef,omitempty" tf:"-"`
+	AdministratorPasswordSecretRef *v2.SecretKeySelector `json:"administratorPasswordSecretRef,omitempty" tf:"-"`
 
 	// The Password associated with the administrator_login for the MySQL Flexible Server.
 	AdministratorPasswordWo *string `json:"administratorPasswordWo,omitempty" tf:"administrator_password_wo,omitempty"`
@@ -102,11 +102,11 @@ type FlexibleServerInitParameters struct {
 
 	// Reference to a Subnet in network to populate delegatedSubnetId.
 	// +kubebuilder:validation:Optional
-	DelegatedSubnetIDRef *v1.Reference `json:"delegatedSubnetIdRef,omitempty" tf:"-"`
+	DelegatedSubnetIDRef *v2.Reference `json:"delegatedSubnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate delegatedSubnetId.
 	// +kubebuilder:validation:Optional
-	DelegatedSubnetIDSelector *v1.Selector `json:"delegatedSubnetIdSelector,omitempty" tf:"-"`
+	DelegatedSubnetIDSelector *v2.Selector `json:"delegatedSubnetIdSelector,omitempty" tf:"-"`
 
 	// Should geo redundant backup enabled? Defaults to false. Changing this forces a new MySQL Flexible Server to be created.
 	GeoRedundantBackupEnabled *bool `json:"geoRedundantBackupEnabled,omitempty" tf:"geo_redundant_backup_enabled,omitempty"`
@@ -133,11 +133,11 @@ type FlexibleServerInitParameters struct {
 
 	// Reference to a PrivateDNSZone in network to populate privateDnsZoneId.
 	// +kubebuilder:validation:Optional
-	PrivateDNSZoneIDRef *v1.Reference `json:"privateDnsZoneIdRef,omitempty" tf:"-"`
+	PrivateDNSZoneIDRef *v2.Reference `json:"privateDnsZoneIdRef,omitempty" tf:"-"`
 
 	// Selector for a PrivateDNSZone in network to populate privateDnsZoneId.
 	// +kubebuilder:validation:Optional
-	PrivateDNSZoneIDSelector *v1.Selector `json:"privateDnsZoneIdSelector,omitempty" tf:"-"`
+	PrivateDNSZoneIDSelector *v2.Selector `json:"privateDnsZoneIdSelector,omitempty" tf:"-"`
 
 	// Whether approved public traffic is allowed through the firewall to this server. Possible values are Enabled and Disabled.
 	PublicNetworkAccess *string `json:"publicNetworkAccess,omitempty" tf:"public_network_access,omitempty"`
@@ -257,7 +257,7 @@ type FlexibleServerParameters struct {
 
 	// The Password associated with the administrator_login for the MySQL Flexible Server.
 	// +kubebuilder:validation:Optional
-	AdministratorPasswordSecretRef *v1.SecretKeySelector `json:"administratorPasswordSecretRef,omitempty" tf:"-"`
+	AdministratorPasswordSecretRef *v2.SecretKeySelector `json:"administratorPasswordSecretRef,omitempty" tf:"-"`
 
 	// The Password associated with the administrator_login for the MySQL Flexible Server.
 	// +kubebuilder:validation:Optional
@@ -287,11 +287,11 @@ type FlexibleServerParameters struct {
 
 	// Reference to a Subnet in network to populate delegatedSubnetId.
 	// +kubebuilder:validation:Optional
-	DelegatedSubnetIDRef *v1.Reference `json:"delegatedSubnetIdRef,omitempty" tf:"-"`
+	DelegatedSubnetIDRef *v2.Reference `json:"delegatedSubnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate delegatedSubnetId.
 	// +kubebuilder:validation:Optional
-	DelegatedSubnetIDSelector *v1.Selector `json:"delegatedSubnetIdSelector,omitempty" tf:"-"`
+	DelegatedSubnetIDSelector *v2.Selector `json:"delegatedSubnetIdSelector,omitempty" tf:"-"`
 
 	// Should geo redundant backup enabled? Defaults to false. Changing this forces a new MySQL Flexible Server to be created.
 	// +kubebuilder:validation:Optional
@@ -325,11 +325,11 @@ type FlexibleServerParameters struct {
 
 	// Reference to a PrivateDNSZone in network to populate privateDnsZoneId.
 	// +kubebuilder:validation:Optional
-	PrivateDNSZoneIDRef *v1.Reference `json:"privateDnsZoneIdRef,omitempty" tf:"-"`
+	PrivateDNSZoneIDRef *v2.Reference `json:"privateDnsZoneIdRef,omitempty" tf:"-"`
 
 	// Selector for a PrivateDNSZone in network to populate privateDnsZoneId.
 	// +kubebuilder:validation:Optional
-	PrivateDNSZoneIDSelector *v1.Selector `json:"privateDnsZoneIdSelector,omitempty" tf:"-"`
+	PrivateDNSZoneIDSelector *v2.Selector `json:"privateDnsZoneIdSelector,omitempty" tf:"-"`
 
 	// Whether approved public traffic is allowed through the firewall to this server. Possible values are Enabled and Disabled.
 	// +kubebuilder:validation:Optional
@@ -346,11 +346,11 @@ type FlexibleServerParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The SKU Name for the MySQL Flexible Server.
 	// +kubebuilder:validation:Optional
@@ -417,11 +417,11 @@ type IdentityInitParameters struct {
 
 	// References to UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v1.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
+	IdentityIdsRefs []v2.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v1.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
+	IdentityIdsSelector *v2.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this MySQL Flexible Server. The only possible value is UserAssigned.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -448,11 +448,11 @@ type IdentityParameters struct {
 
 	// References to UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v1.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
+	IdentityIdsRefs []v2.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v1.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
+	IdentityIdsSelector *v2.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this MySQL Flexible Server. The only possible value is UserAssigned.
 	// +kubebuilder:validation:Optional
@@ -559,8 +559,8 @@ type StorageParameters struct {
 
 // FlexibleServerSpec defines the desired state of FlexibleServer
 type FlexibleServerSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     FlexibleServerParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   FlexibleServerParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -576,8 +576,8 @@ type FlexibleServerSpec struct {
 
 // FlexibleServerStatus defines the observed state of FlexibleServer.
 type FlexibleServerStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FlexibleServerObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FlexibleServerObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

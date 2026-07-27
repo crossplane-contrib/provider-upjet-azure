@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CassandraClusterIdentityInitParameters struct {
@@ -48,7 +47,7 @@ type CassandraClusterInitParameters struct {
 	ClientCertificatePems []*string `json:"clientCertificatePems,omitempty" tf:"client_certificate_pems,omitempty"`
 
 	// The initial admin password for this Cassandra Cluster. Changing this forces a new resource to be created.
-	DefaultAdminPasswordSecretRef v1.LocalSecretKeySelector `json:"defaultAdminPasswordSecretRef" tf:"-"`
+	DefaultAdminPasswordSecretRef v2.LocalSecretKeySelector `json:"defaultAdminPasswordSecretRef" tf:"-"`
 
 	// The ID of the delegated management subnet for this Cassandra Cluster. Changing this forces a new Cassandra Cluster to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
@@ -57,11 +56,11 @@ type CassandraClusterInitParameters struct {
 
 	// Reference to a Subnet in network to populate delegatedManagementSubnetId.
 	// +kubebuilder:validation:Optional
-	DelegatedManagementSubnetIDRef *v1.NamespacedReference `json:"delegatedManagementSubnetIdRef,omitempty" tf:"-"`
+	DelegatedManagementSubnetIDRef *v2.NamespacedReference `json:"delegatedManagementSubnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate delegatedManagementSubnetId.
 	// +kubebuilder:validation:Optional
-	DelegatedManagementSubnetIDSelector *v1.NamespacedSelector `json:"delegatedManagementSubnetIdSelector,omitempty" tf:"-"`
+	DelegatedManagementSubnetIDSelector *v2.NamespacedSelector `json:"delegatedManagementSubnetIdSelector,omitempty" tf:"-"`
 
 	// A list of TLS certificates that is used to authorize gossip from unmanaged Cassandra Data Center.
 	ExternalGossipCertificatePems []*string `json:"externalGossipCertificatePems,omitempty" tf:"external_gossip_certificate_pems,omitempty"`
@@ -144,7 +143,7 @@ type CassandraClusterParameters struct {
 
 	// The initial admin password for this Cassandra Cluster. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	DefaultAdminPasswordSecretRef v1.LocalSecretKeySelector `json:"defaultAdminPasswordSecretRef" tf:"-"`
+	DefaultAdminPasswordSecretRef v2.LocalSecretKeySelector `json:"defaultAdminPasswordSecretRef" tf:"-"`
 
 	// The ID of the delegated management subnet for this Cassandra Cluster. Changing this forces a new Cassandra Cluster to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
@@ -154,11 +153,11 @@ type CassandraClusterParameters struct {
 
 	// Reference to a Subnet in network to populate delegatedManagementSubnetId.
 	// +kubebuilder:validation:Optional
-	DelegatedManagementSubnetIDRef *v1.NamespacedReference `json:"delegatedManagementSubnetIdRef,omitempty" tf:"-"`
+	DelegatedManagementSubnetIDRef *v2.NamespacedReference `json:"delegatedManagementSubnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate delegatedManagementSubnetId.
 	// +kubebuilder:validation:Optional
-	DelegatedManagementSubnetIDSelector *v1.NamespacedSelector `json:"delegatedManagementSubnetIdSelector,omitempty" tf:"-"`
+	DelegatedManagementSubnetIDSelector *v2.NamespacedSelector `json:"delegatedManagementSubnetIdSelector,omitempty" tf:"-"`
 
 	// A list of TLS certificates that is used to authorize gossip from unmanaged Cassandra Data Center.
 	// +kubebuilder:validation:Optional
@@ -191,11 +190,11 @@ type CassandraClusterParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags assigned to the resource.
 	// +kubebuilder:validation:Optional
@@ -226,8 +225,8 @@ type CassandraClusterSpec struct {
 
 // CassandraClusterStatus defines the observed state of CassandraCluster.
 type CassandraClusterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        CassandraClusterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               CassandraClusterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

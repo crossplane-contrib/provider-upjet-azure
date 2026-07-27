@@ -5,254 +5,254 @@
 
 package v1beta2
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this GlobalVMShutdownSchedule.
-func (mg *GlobalVMShutdownSchedule) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *GlobalVMShutdownSchedule) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this GlobalVMShutdownSchedule.
-func (mg *GlobalVMShutdownSchedule) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *GlobalVMShutdownSchedule) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this GlobalVMShutdownSchedule.
-func (mg *GlobalVMShutdownSchedule) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *GlobalVMShutdownSchedule) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this GlobalVMShutdownSchedule.
-func (mg *GlobalVMShutdownSchedule) GetProviderConfigReference() *xpv1.Reference {
+func (mg *GlobalVMShutdownSchedule) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this GlobalVMShutdownSchedule.
-func (mg *GlobalVMShutdownSchedule) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *GlobalVMShutdownSchedule) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this GlobalVMShutdownSchedule.
-func (mg *GlobalVMShutdownSchedule) SetConditions(c ...xpv1.Condition) {
+func (mg *GlobalVMShutdownSchedule) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this GlobalVMShutdownSchedule.
-func (mg *GlobalVMShutdownSchedule) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *GlobalVMShutdownSchedule) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this GlobalVMShutdownSchedule.
-func (mg *GlobalVMShutdownSchedule) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *GlobalVMShutdownSchedule) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this GlobalVMShutdownSchedule.
-func (mg *GlobalVMShutdownSchedule) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *GlobalVMShutdownSchedule) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this GlobalVMShutdownSchedule.
-func (mg *GlobalVMShutdownSchedule) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *GlobalVMShutdownSchedule) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this LinuxVirtualMachine.
-func (mg *LinuxVirtualMachine) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *LinuxVirtualMachine) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this LinuxVirtualMachine.
-func (mg *LinuxVirtualMachine) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *LinuxVirtualMachine) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this LinuxVirtualMachine.
-func (mg *LinuxVirtualMachine) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *LinuxVirtualMachine) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this LinuxVirtualMachine.
-func (mg *LinuxVirtualMachine) GetProviderConfigReference() *xpv1.Reference {
+func (mg *LinuxVirtualMachine) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this LinuxVirtualMachine.
-func (mg *LinuxVirtualMachine) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *LinuxVirtualMachine) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this LinuxVirtualMachine.
-func (mg *LinuxVirtualMachine) SetConditions(c ...xpv1.Condition) {
+func (mg *LinuxVirtualMachine) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this LinuxVirtualMachine.
-func (mg *LinuxVirtualMachine) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *LinuxVirtualMachine) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this LinuxVirtualMachine.
-func (mg *LinuxVirtualMachine) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *LinuxVirtualMachine) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this LinuxVirtualMachine.
-func (mg *LinuxVirtualMachine) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *LinuxVirtualMachine) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this LinuxVirtualMachine.
-func (mg *LinuxVirtualMachine) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *LinuxVirtualMachine) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this Schedule.
-func (mg *Schedule) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *Schedule) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this Schedule.
-func (mg *Schedule) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *Schedule) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this Schedule.
-func (mg *Schedule) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *Schedule) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this Schedule.
-func (mg *Schedule) GetProviderConfigReference() *xpv1.Reference {
+func (mg *Schedule) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this Schedule.
-func (mg *Schedule) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *Schedule) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this Schedule.
-func (mg *Schedule) SetConditions(c ...xpv1.Condition) {
+func (mg *Schedule) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this Schedule.
-func (mg *Schedule) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *Schedule) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this Schedule.
-func (mg *Schedule) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *Schedule) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this Schedule.
-func (mg *Schedule) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *Schedule) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this Schedule.
-func (mg *Schedule) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *Schedule) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this VirtualNetwork.
-func (mg *VirtualNetwork) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *VirtualNetwork) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this VirtualNetwork.
-func (mg *VirtualNetwork) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *VirtualNetwork) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this VirtualNetwork.
-func (mg *VirtualNetwork) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *VirtualNetwork) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this VirtualNetwork.
-func (mg *VirtualNetwork) GetProviderConfigReference() *xpv1.Reference {
+func (mg *VirtualNetwork) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this VirtualNetwork.
-func (mg *VirtualNetwork) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *VirtualNetwork) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this VirtualNetwork.
-func (mg *VirtualNetwork) SetConditions(c ...xpv1.Condition) {
+func (mg *VirtualNetwork) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this VirtualNetwork.
-func (mg *VirtualNetwork) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *VirtualNetwork) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this VirtualNetwork.
-func (mg *VirtualNetwork) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *VirtualNetwork) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this VirtualNetwork.
-func (mg *VirtualNetwork) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *VirtualNetwork) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this VirtualNetwork.
-func (mg *VirtualNetwork) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *VirtualNetwork) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this WindowsVirtualMachine.
-func (mg *WindowsVirtualMachine) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *WindowsVirtualMachine) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this WindowsVirtualMachine.
-func (mg *WindowsVirtualMachine) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *WindowsVirtualMachine) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this WindowsVirtualMachine.
-func (mg *WindowsVirtualMachine) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *WindowsVirtualMachine) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this WindowsVirtualMachine.
-func (mg *WindowsVirtualMachine) GetProviderConfigReference() *xpv1.Reference {
+func (mg *WindowsVirtualMachine) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this WindowsVirtualMachine.
-func (mg *WindowsVirtualMachine) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *WindowsVirtualMachine) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this WindowsVirtualMachine.
-func (mg *WindowsVirtualMachine) SetConditions(c ...xpv1.Condition) {
+func (mg *WindowsVirtualMachine) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this WindowsVirtualMachine.
-func (mg *WindowsVirtualMachine) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *WindowsVirtualMachine) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this WindowsVirtualMachine.
-func (mg *WindowsVirtualMachine) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *WindowsVirtualMachine) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this WindowsVirtualMachine.
-func (mg *WindowsVirtualMachine) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *WindowsVirtualMachine) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this WindowsVirtualMachine.
-func (mg *WindowsVirtualMachine) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *WindowsVirtualMachine) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

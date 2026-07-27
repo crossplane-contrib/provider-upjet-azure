@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AppIntegrationAccountSessionInitParameters struct {
@@ -49,11 +48,11 @@ type AppIntegrationAccountSessionParameters struct {
 
 	// Reference to a AppIntegrationAccount in logic to populate integrationAccountName.
 	// +kubebuilder:validation:Optional
-	IntegrationAccountNameRef *v1.NamespacedReference `json:"integrationAccountNameRef,omitempty" tf:"-"`
+	IntegrationAccountNameRef *v2.NamespacedReference `json:"integrationAccountNameRef,omitempty" tf:"-"`
 
 	// Selector for a AppIntegrationAccount in logic to populate integrationAccountName.
 	// +kubebuilder:validation:Optional
-	IntegrationAccountNameSelector *v1.NamespacedSelector `json:"integrationAccountNameSelector,omitempty" tf:"-"`
+	IntegrationAccountNameSelector *v2.NamespacedSelector `json:"integrationAccountNameSelector,omitempty" tf:"-"`
 
 	// The name of the Resource Group where the Logic App Integration Account Session should exist. Changing this forces a new Logic App Integration Account Session to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
@@ -62,11 +61,11 @@ type AppIntegrationAccountSessionParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 }
 
 // AppIntegrationAccountSessionSpec defines the desired state of AppIntegrationAccountSession
@@ -88,8 +87,8 @@ type AppIntegrationAccountSessionSpec struct {
 
 // AppIntegrationAccountSessionStatus defines the observed state of AppIntegrationAccountSession.
 type AppIntegrationAccountSessionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AppIntegrationAccountSessionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AppIntegrationAccountSessionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -5,564 +5,564 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this Endpoint.
-func (mg *Endpoint) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *Endpoint) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this Endpoint.
-func (mg *Endpoint) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *Endpoint) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this Endpoint.
-func (mg *Endpoint) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *Endpoint) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this Endpoint.
-func (mg *Endpoint) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *Endpoint) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this Endpoint.
-func (mg *Endpoint) SetConditions(c ...xpv1.Condition) {
+func (mg *Endpoint) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this Endpoint.
-func (mg *Endpoint) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *Endpoint) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this Endpoint.
-func (mg *Endpoint) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *Endpoint) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this Endpoint.
-func (mg *Endpoint) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *Endpoint) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this FrontdoorCustomDomain.
-func (mg *FrontdoorCustomDomain) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *FrontdoorCustomDomain) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this FrontdoorCustomDomain.
-func (mg *FrontdoorCustomDomain) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *FrontdoorCustomDomain) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this FrontdoorCustomDomain.
-func (mg *FrontdoorCustomDomain) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *FrontdoorCustomDomain) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this FrontdoorCustomDomain.
-func (mg *FrontdoorCustomDomain) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *FrontdoorCustomDomain) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this FrontdoorCustomDomain.
-func (mg *FrontdoorCustomDomain) SetConditions(c ...xpv1.Condition) {
+func (mg *FrontdoorCustomDomain) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this FrontdoorCustomDomain.
-func (mg *FrontdoorCustomDomain) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *FrontdoorCustomDomain) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this FrontdoorCustomDomain.
-func (mg *FrontdoorCustomDomain) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *FrontdoorCustomDomain) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this FrontdoorCustomDomain.
-func (mg *FrontdoorCustomDomain) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *FrontdoorCustomDomain) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this FrontdoorCustomDomainAssociation.
-func (mg *FrontdoorCustomDomainAssociation) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *FrontdoorCustomDomainAssociation) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this FrontdoorCustomDomainAssociation.
-func (mg *FrontdoorCustomDomainAssociation) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *FrontdoorCustomDomainAssociation) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this FrontdoorCustomDomainAssociation.
-func (mg *FrontdoorCustomDomainAssociation) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *FrontdoorCustomDomainAssociation) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this FrontdoorCustomDomainAssociation.
-func (mg *FrontdoorCustomDomainAssociation) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *FrontdoorCustomDomainAssociation) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this FrontdoorCustomDomainAssociation.
-func (mg *FrontdoorCustomDomainAssociation) SetConditions(c ...xpv1.Condition) {
+func (mg *FrontdoorCustomDomainAssociation) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this FrontdoorCustomDomainAssociation.
-func (mg *FrontdoorCustomDomainAssociation) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *FrontdoorCustomDomainAssociation) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this FrontdoorCustomDomainAssociation.
-func (mg *FrontdoorCustomDomainAssociation) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *FrontdoorCustomDomainAssociation) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this FrontdoorCustomDomainAssociation.
-func (mg *FrontdoorCustomDomainAssociation) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *FrontdoorCustomDomainAssociation) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this FrontdoorEndpoint.
-func (mg *FrontdoorEndpoint) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *FrontdoorEndpoint) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this FrontdoorEndpoint.
-func (mg *FrontdoorEndpoint) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *FrontdoorEndpoint) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this FrontdoorEndpoint.
-func (mg *FrontdoorEndpoint) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *FrontdoorEndpoint) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this FrontdoorEndpoint.
-func (mg *FrontdoorEndpoint) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *FrontdoorEndpoint) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this FrontdoorEndpoint.
-func (mg *FrontdoorEndpoint) SetConditions(c ...xpv1.Condition) {
+func (mg *FrontdoorEndpoint) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this FrontdoorEndpoint.
-func (mg *FrontdoorEndpoint) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *FrontdoorEndpoint) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this FrontdoorEndpoint.
-func (mg *FrontdoorEndpoint) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *FrontdoorEndpoint) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this FrontdoorEndpoint.
-func (mg *FrontdoorEndpoint) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *FrontdoorEndpoint) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this FrontdoorFirewallPolicy.
-func (mg *FrontdoorFirewallPolicy) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *FrontdoorFirewallPolicy) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this FrontdoorFirewallPolicy.
-func (mg *FrontdoorFirewallPolicy) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *FrontdoorFirewallPolicy) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this FrontdoorFirewallPolicy.
-func (mg *FrontdoorFirewallPolicy) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *FrontdoorFirewallPolicy) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this FrontdoorFirewallPolicy.
-func (mg *FrontdoorFirewallPolicy) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *FrontdoorFirewallPolicy) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this FrontdoorFirewallPolicy.
-func (mg *FrontdoorFirewallPolicy) SetConditions(c ...xpv1.Condition) {
+func (mg *FrontdoorFirewallPolicy) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this FrontdoorFirewallPolicy.
-func (mg *FrontdoorFirewallPolicy) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *FrontdoorFirewallPolicy) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this FrontdoorFirewallPolicy.
-func (mg *FrontdoorFirewallPolicy) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *FrontdoorFirewallPolicy) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this FrontdoorFirewallPolicy.
-func (mg *FrontdoorFirewallPolicy) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *FrontdoorFirewallPolicy) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this FrontdoorOrigin.
-func (mg *FrontdoorOrigin) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *FrontdoorOrigin) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this FrontdoorOrigin.
-func (mg *FrontdoorOrigin) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *FrontdoorOrigin) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this FrontdoorOrigin.
-func (mg *FrontdoorOrigin) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *FrontdoorOrigin) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this FrontdoorOrigin.
-func (mg *FrontdoorOrigin) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *FrontdoorOrigin) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this FrontdoorOrigin.
-func (mg *FrontdoorOrigin) SetConditions(c ...xpv1.Condition) {
+func (mg *FrontdoorOrigin) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this FrontdoorOrigin.
-func (mg *FrontdoorOrigin) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *FrontdoorOrigin) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this FrontdoorOrigin.
-func (mg *FrontdoorOrigin) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *FrontdoorOrigin) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this FrontdoorOrigin.
-func (mg *FrontdoorOrigin) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *FrontdoorOrigin) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this FrontdoorOriginGroup.
-func (mg *FrontdoorOriginGroup) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *FrontdoorOriginGroup) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this FrontdoorOriginGroup.
-func (mg *FrontdoorOriginGroup) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *FrontdoorOriginGroup) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this FrontdoorOriginGroup.
-func (mg *FrontdoorOriginGroup) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *FrontdoorOriginGroup) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this FrontdoorOriginGroup.
-func (mg *FrontdoorOriginGroup) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *FrontdoorOriginGroup) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this FrontdoorOriginGroup.
-func (mg *FrontdoorOriginGroup) SetConditions(c ...xpv1.Condition) {
+func (mg *FrontdoorOriginGroup) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this FrontdoorOriginGroup.
-func (mg *FrontdoorOriginGroup) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *FrontdoorOriginGroup) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this FrontdoorOriginGroup.
-func (mg *FrontdoorOriginGroup) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *FrontdoorOriginGroup) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this FrontdoorOriginGroup.
-func (mg *FrontdoorOriginGroup) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *FrontdoorOriginGroup) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this FrontdoorProfile.
-func (mg *FrontdoorProfile) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *FrontdoorProfile) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this FrontdoorProfile.
-func (mg *FrontdoorProfile) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *FrontdoorProfile) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this FrontdoorProfile.
-func (mg *FrontdoorProfile) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *FrontdoorProfile) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this FrontdoorProfile.
-func (mg *FrontdoorProfile) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *FrontdoorProfile) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this FrontdoorProfile.
-func (mg *FrontdoorProfile) SetConditions(c ...xpv1.Condition) {
+func (mg *FrontdoorProfile) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this FrontdoorProfile.
-func (mg *FrontdoorProfile) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *FrontdoorProfile) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this FrontdoorProfile.
-func (mg *FrontdoorProfile) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *FrontdoorProfile) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this FrontdoorProfile.
-func (mg *FrontdoorProfile) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *FrontdoorProfile) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this FrontdoorRoute.
-func (mg *FrontdoorRoute) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *FrontdoorRoute) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this FrontdoorRoute.
-func (mg *FrontdoorRoute) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *FrontdoorRoute) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this FrontdoorRoute.
-func (mg *FrontdoorRoute) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *FrontdoorRoute) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this FrontdoorRoute.
-func (mg *FrontdoorRoute) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *FrontdoorRoute) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this FrontdoorRoute.
-func (mg *FrontdoorRoute) SetConditions(c ...xpv1.Condition) {
+func (mg *FrontdoorRoute) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this FrontdoorRoute.
-func (mg *FrontdoorRoute) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *FrontdoorRoute) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this FrontdoorRoute.
-func (mg *FrontdoorRoute) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *FrontdoorRoute) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this FrontdoorRoute.
-func (mg *FrontdoorRoute) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *FrontdoorRoute) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this FrontdoorRule.
-func (mg *FrontdoorRule) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *FrontdoorRule) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this FrontdoorRule.
-func (mg *FrontdoorRule) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *FrontdoorRule) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this FrontdoorRule.
-func (mg *FrontdoorRule) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *FrontdoorRule) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this FrontdoorRule.
-func (mg *FrontdoorRule) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *FrontdoorRule) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this FrontdoorRule.
-func (mg *FrontdoorRule) SetConditions(c ...xpv1.Condition) {
+func (mg *FrontdoorRule) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this FrontdoorRule.
-func (mg *FrontdoorRule) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *FrontdoorRule) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this FrontdoorRule.
-func (mg *FrontdoorRule) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *FrontdoorRule) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this FrontdoorRule.
-func (mg *FrontdoorRule) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *FrontdoorRule) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this FrontdoorRuleSet.
-func (mg *FrontdoorRuleSet) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *FrontdoorRuleSet) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this FrontdoorRuleSet.
-func (mg *FrontdoorRuleSet) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *FrontdoorRuleSet) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this FrontdoorRuleSet.
-func (mg *FrontdoorRuleSet) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *FrontdoorRuleSet) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this FrontdoorRuleSet.
-func (mg *FrontdoorRuleSet) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *FrontdoorRuleSet) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this FrontdoorRuleSet.
-func (mg *FrontdoorRuleSet) SetConditions(c ...xpv1.Condition) {
+func (mg *FrontdoorRuleSet) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this FrontdoorRuleSet.
-func (mg *FrontdoorRuleSet) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *FrontdoorRuleSet) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this FrontdoorRuleSet.
-func (mg *FrontdoorRuleSet) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *FrontdoorRuleSet) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this FrontdoorRuleSet.
-func (mg *FrontdoorRuleSet) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *FrontdoorRuleSet) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this FrontdoorSecret.
-func (mg *FrontdoorSecret) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *FrontdoorSecret) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this FrontdoorSecret.
-func (mg *FrontdoorSecret) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *FrontdoorSecret) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this FrontdoorSecret.
-func (mg *FrontdoorSecret) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *FrontdoorSecret) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this FrontdoorSecret.
-func (mg *FrontdoorSecret) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *FrontdoorSecret) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this FrontdoorSecret.
-func (mg *FrontdoorSecret) SetConditions(c ...xpv1.Condition) {
+func (mg *FrontdoorSecret) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this FrontdoorSecret.
-func (mg *FrontdoorSecret) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *FrontdoorSecret) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this FrontdoorSecret.
-func (mg *FrontdoorSecret) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *FrontdoorSecret) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this FrontdoorSecret.
-func (mg *FrontdoorSecret) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *FrontdoorSecret) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this FrontdoorSecurityPolicy.
-func (mg *FrontdoorSecurityPolicy) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *FrontdoorSecurityPolicy) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this FrontdoorSecurityPolicy.
-func (mg *FrontdoorSecurityPolicy) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *FrontdoorSecurityPolicy) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this FrontdoorSecurityPolicy.
-func (mg *FrontdoorSecurityPolicy) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *FrontdoorSecurityPolicy) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this FrontdoorSecurityPolicy.
-func (mg *FrontdoorSecurityPolicy) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *FrontdoorSecurityPolicy) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this FrontdoorSecurityPolicy.
-func (mg *FrontdoorSecurityPolicy) SetConditions(c ...xpv1.Condition) {
+func (mg *FrontdoorSecurityPolicy) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this FrontdoorSecurityPolicy.
-func (mg *FrontdoorSecurityPolicy) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *FrontdoorSecurityPolicy) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this FrontdoorSecurityPolicy.
-func (mg *FrontdoorSecurityPolicy) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *FrontdoorSecurityPolicy) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this FrontdoorSecurityPolicy.
-func (mg *FrontdoorSecurityPolicy) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *FrontdoorSecurityPolicy) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this Profile.
-func (mg *Profile) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *Profile) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this Profile.
-func (mg *Profile) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *Profile) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this Profile.
-func (mg *Profile) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *Profile) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this Profile.
-func (mg *Profile) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *Profile) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this Profile.
-func (mg *Profile) SetConditions(c ...xpv1.Condition) {
+func (mg *Profile) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this Profile.
-func (mg *Profile) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *Profile) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this Profile.
-func (mg *Profile) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *Profile) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this Profile.
-func (mg *Profile) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *Profile) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

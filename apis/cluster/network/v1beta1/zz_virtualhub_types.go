@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type VirtualHubInitParameters_2 struct {
@@ -47,11 +47,11 @@ type VirtualHubInitParameters_2 struct {
 
 	// Reference to a VirtualWAN in network to populate virtualWanId.
 	// +kubebuilder:validation:Optional
-	VirtualWanIDRef *v1.Reference `json:"virtualWanIdRef,omitempty" tf:"-"`
+	VirtualWanIDRef *v2.Reference `json:"virtualWanIdRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualWAN in network to populate virtualWanId.
 	// +kubebuilder:validation:Optional
-	VirtualWanIDSelector *v1.Selector `json:"virtualWanIdSelector,omitempty" tf:"-"`
+	VirtualWanIDSelector *v2.Selector `json:"virtualWanIdSelector,omitempty" tf:"-"`
 }
 
 type VirtualHubObservation_2 struct {
@@ -125,11 +125,11 @@ type VirtualHubParameters_2 struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// One or more route blocks as defined below.
 	// +kubebuilder:validation:Optional
@@ -156,11 +156,11 @@ type VirtualHubParameters_2 struct {
 
 	// Reference to a VirtualWAN in network to populate virtualWanId.
 	// +kubebuilder:validation:Optional
-	VirtualWanIDRef *v1.Reference `json:"virtualWanIdRef,omitempty" tf:"-"`
+	VirtualWanIDRef *v2.Reference `json:"virtualWanIdRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualWAN in network to populate virtualWanId.
 	// +kubebuilder:validation:Optional
-	VirtualWanIDSelector *v1.Selector `json:"virtualWanIdSelector,omitempty" tf:"-"`
+	VirtualWanIDSelector *v2.Selector `json:"virtualWanIdSelector,omitempty" tf:"-"`
 }
 
 type VirtualHubRouteInitParameters struct {
@@ -194,8 +194,8 @@ type VirtualHubRouteParameters struct {
 
 // VirtualHubSpec defines the desired state of VirtualHub
 type VirtualHubSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     VirtualHubParameters_2 `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   VirtualHubParameters_2 `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -211,8 +211,8 @@ type VirtualHubSpec struct {
 
 // VirtualHubStatus defines the observed state of VirtualHub.
 type VirtualHubStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VirtualHubObservation_2 `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VirtualHubObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

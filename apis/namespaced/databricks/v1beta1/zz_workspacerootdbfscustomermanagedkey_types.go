@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type WorkspaceRootDbfsCustomerManagedKeyInitParameters struct {
@@ -26,11 +25,11 @@ type WorkspaceRootDbfsCustomerManagedKeyInitParameters struct {
 
 	// Reference to a Key in keyvault to populate keyVaultKeyId.
 	// +kubebuilder:validation:Optional
-	KeyVaultKeyIDRef *v1.NamespacedReference `json:"keyVaultKeyIdRef,omitempty" tf:"-"`
+	KeyVaultKeyIDRef *v2.NamespacedReference `json:"keyVaultKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in keyvault to populate keyVaultKeyId.
 	// +kubebuilder:validation:Optional
-	KeyVaultKeyIDSelector *v1.NamespacedSelector `json:"keyVaultKeyIdSelector,omitempty" tf:"-"`
+	KeyVaultKeyIDSelector *v2.NamespacedSelector `json:"keyVaultKeyIdSelector,omitempty" tf:"-"`
 }
 
 type WorkspaceRootDbfsCustomerManagedKeyObservation struct {
@@ -62,11 +61,11 @@ type WorkspaceRootDbfsCustomerManagedKeyParameters struct {
 
 	// Reference to a Key in keyvault to populate keyVaultKeyId.
 	// +kubebuilder:validation:Optional
-	KeyVaultKeyIDRef *v1.NamespacedReference `json:"keyVaultKeyIdRef,omitempty" tf:"-"`
+	KeyVaultKeyIDRef *v2.NamespacedReference `json:"keyVaultKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in keyvault to populate keyVaultKeyId.
 	// +kubebuilder:validation:Optional
-	KeyVaultKeyIDSelector *v1.NamespacedSelector `json:"keyVaultKeyIdSelector,omitempty" tf:"-"`
+	KeyVaultKeyIDSelector *v2.NamespacedSelector `json:"keyVaultKeyIdSelector,omitempty" tf:"-"`
 
 	// The Resource ID of the Databricks Workspace.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/databricks/v1beta1.Workspace
@@ -76,11 +75,11 @@ type WorkspaceRootDbfsCustomerManagedKeyParameters struct {
 
 	// Reference to a Workspace in databricks to populate workspaceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceIDRef *v1.NamespacedReference `json:"workspaceIdRef,omitempty" tf:"-"`
+	WorkspaceIDRef *v2.NamespacedReference `json:"workspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in databricks to populate workspaceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceIDSelector *v1.NamespacedSelector `json:"workspaceIdSelector,omitempty" tf:"-"`
+	WorkspaceIDSelector *v2.NamespacedSelector `json:"workspaceIdSelector,omitempty" tf:"-"`
 }
 
 // WorkspaceRootDbfsCustomerManagedKeySpec defines the desired state of WorkspaceRootDbfsCustomerManagedKey
@@ -102,8 +101,8 @@ type WorkspaceRootDbfsCustomerManagedKeySpec struct {
 
 // WorkspaceRootDbfsCustomerManagedKeyStatus defines the observed state of WorkspaceRootDbfsCustomerManagedKey.
 type WorkspaceRootDbfsCustomerManagedKeyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        WorkspaceRootDbfsCustomerManagedKeyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               WorkspaceRootDbfsCustomerManagedKeyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

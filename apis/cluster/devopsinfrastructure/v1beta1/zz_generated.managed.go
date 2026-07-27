@@ -5,54 +5,54 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this ManagedDevopsPool.
-func (mg *ManagedDevopsPool) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *ManagedDevopsPool) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this ManagedDevopsPool.
-func (mg *ManagedDevopsPool) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *ManagedDevopsPool) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this ManagedDevopsPool.
-func (mg *ManagedDevopsPool) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *ManagedDevopsPool) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this ManagedDevopsPool.
-func (mg *ManagedDevopsPool) GetProviderConfigReference() *xpv1.Reference {
+func (mg *ManagedDevopsPool) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this ManagedDevopsPool.
-func (mg *ManagedDevopsPool) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *ManagedDevopsPool) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this ManagedDevopsPool.
-func (mg *ManagedDevopsPool) SetConditions(c ...xpv1.Condition) {
+func (mg *ManagedDevopsPool) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this ManagedDevopsPool.
-func (mg *ManagedDevopsPool) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *ManagedDevopsPool) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this ManagedDevopsPool.
-func (mg *ManagedDevopsPool) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *ManagedDevopsPool) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this ManagedDevopsPool.
-func (mg *ManagedDevopsPool) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *ManagedDevopsPool) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this ManagedDevopsPool.
-func (mg *ManagedDevopsPool) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *ManagedDevopsPool) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

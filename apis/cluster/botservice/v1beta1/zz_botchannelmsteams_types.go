@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BotChannelMSTeamsInitParameters struct {
@@ -66,11 +66,11 @@ type BotChannelMSTeamsParameters struct {
 
 	// Reference to a BotChannelsRegistration in botservice to populate botName.
 	// +kubebuilder:validation:Optional
-	BotNameRef *v1.Reference `json:"botNameRef,omitempty" tf:"-"`
+	BotNameRef *v2.Reference `json:"botNameRef,omitempty" tf:"-"`
 
 	// Selector for a BotChannelsRegistration in botservice to populate botName.
 	// +kubebuilder:validation:Optional
-	BotNameSelector *v1.Selector `json:"botNameSelector,omitempty" tf:"-"`
+	BotNameSelector *v2.Selector `json:"botNameSelector,omitempty" tf:"-"`
 
 	// Specifies whether to enable Microsoft Teams channel calls. This defaults to false.
 	// +kubebuilder:validation:Optional
@@ -98,17 +98,17 @@ type BotChannelMSTeamsParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 }
 
 // BotChannelMSTeamsSpec defines the desired state of BotChannelMSTeams
 type BotChannelMSTeamsSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     BotChannelMSTeamsParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   BotChannelMSTeamsParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -124,8 +124,8 @@ type BotChannelMSTeamsSpec struct {
 
 // BotChannelMSTeamsStatus defines the observed state of BotChannelMSTeams.
 type BotChannelMSTeamsStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BotChannelMSTeamsObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BotChannelMSTeamsObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

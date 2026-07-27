@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CertificateKeyVaultInitParameters struct {
@@ -23,11 +22,11 @@ type CertificateKeyVaultInitParameters struct {
 
 	// Reference to a UserAssignedIdentity in managedidentity to populate identity.
 	// +kubebuilder:validation:Optional
-	IdentityRef *v1.NamespacedReference `json:"identityRef,omitempty" tf:"-"`
+	IdentityRef *v2.NamespacedReference `json:"identityRef,omitempty" tf:"-"`
 
 	// Selector for a UserAssignedIdentity in managedidentity to populate identity.
 	// +kubebuilder:validation:Optional
-	IdentitySelector *v1.NamespacedSelector `json:"identitySelector,omitempty" tf:"-"`
+	IdentitySelector *v2.NamespacedSelector `json:"identitySelector,omitempty" tf:"-"`
 
 	// The ID of the Key Vault Secret containing the certificate. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/keyvault/v1beta1.Certificate
@@ -36,11 +35,11 @@ type CertificateKeyVaultInitParameters struct {
 
 	// Reference to a Certificate in keyvault to populate keyVaultSecretId.
 	// +kubebuilder:validation:Optional
-	KeyVaultSecretIDRef *v1.NamespacedReference `json:"keyVaultSecretIdRef,omitempty" tf:"-"`
+	KeyVaultSecretIDRef *v2.NamespacedReference `json:"keyVaultSecretIdRef,omitempty" tf:"-"`
 
 	// Selector for a Certificate in keyvault to populate keyVaultSecretId.
 	// +kubebuilder:validation:Optional
-	KeyVaultSecretIDSelector *v1.NamespacedSelector `json:"keyVaultSecretIdSelector,omitempty" tf:"-"`
+	KeyVaultSecretIDSelector *v2.NamespacedSelector `json:"keyVaultSecretIdSelector,omitempty" tf:"-"`
 }
 
 type CertificateKeyVaultObservation struct {
@@ -62,11 +61,11 @@ type CertificateKeyVaultParameters struct {
 
 	// Reference to a UserAssignedIdentity in managedidentity to populate identity.
 	// +kubebuilder:validation:Optional
-	IdentityRef *v1.NamespacedReference `json:"identityRef,omitempty" tf:"-"`
+	IdentityRef *v2.NamespacedReference `json:"identityRef,omitempty" tf:"-"`
 
 	// Selector for a UserAssignedIdentity in managedidentity to populate identity.
 	// +kubebuilder:validation:Optional
-	IdentitySelector *v1.NamespacedSelector `json:"identitySelector,omitempty" tf:"-"`
+	IdentitySelector *v2.NamespacedSelector `json:"identitySelector,omitempty" tf:"-"`
 
 	// The ID of the Key Vault Secret containing the certificate. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/keyvault/v1beta1.Certificate
@@ -76,11 +75,11 @@ type CertificateKeyVaultParameters struct {
 
 	// Reference to a Certificate in keyvault to populate keyVaultSecretId.
 	// +kubebuilder:validation:Optional
-	KeyVaultSecretIDRef *v1.NamespacedReference `json:"keyVaultSecretIdRef,omitempty" tf:"-"`
+	KeyVaultSecretIDRef *v2.NamespacedReference `json:"keyVaultSecretIdRef,omitempty" tf:"-"`
 
 	// Selector for a Certificate in keyvault to populate keyVaultSecretId.
 	// +kubebuilder:validation:Optional
-	KeyVaultSecretIDSelector *v1.NamespacedSelector `json:"keyVaultSecretIdSelector,omitempty" tf:"-"`
+	KeyVaultSecretIDSelector *v2.NamespacedSelector `json:"keyVaultSecretIdSelector,omitempty" tf:"-"`
 }
 
 type EnvironmentCertificateInitParameters struct {
@@ -92,7 +91,7 @@ type EnvironmentCertificateInitParameters struct {
 	CertificateKeyVault *CertificateKeyVaultInitParameters `json:"certificateKeyVault,omitempty" tf:"certificate_key_vault,omitempty"`
 
 	// The password for the Certificate. Changing this forces a new resource to be created.
-	CertificatePasswordSecretRef *v1.LocalSecretKeySelector `json:"certificatePasswordSecretRef,omitempty" tf:"-"`
+	CertificatePasswordSecretRef *v2.LocalSecretKeySelector `json:"certificatePasswordSecretRef,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
 	// +mapType=granular
@@ -150,7 +149,7 @@ type EnvironmentCertificateParameters struct {
 
 	// The password for the Certificate. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	CertificatePasswordSecretRef *v1.LocalSecretKeySelector `json:"certificatePasswordSecretRef,omitempty" tf:"-"`
+	CertificatePasswordSecretRef *v2.LocalSecretKeySelector `json:"certificatePasswordSecretRef,omitempty" tf:"-"`
 
 	// The Container App Managed Environment ID to configure this Certificate on. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/containerapp/v1beta1.Environment
@@ -160,11 +159,11 @@ type EnvironmentCertificateParameters struct {
 
 	// Reference to a Environment in containerapp to populate containerAppEnvironmentId.
 	// +kubebuilder:validation:Optional
-	ContainerAppEnvironmentIDRef *v1.NamespacedReference `json:"containerAppEnvironmentIdRef,omitempty" tf:"-"`
+	ContainerAppEnvironmentIDRef *v2.NamespacedReference `json:"containerAppEnvironmentIdRef,omitempty" tf:"-"`
 
 	// Selector for a Environment in containerapp to populate containerAppEnvironmentId.
 	// +kubebuilder:validation:Optional
-	ContainerAppEnvironmentIDSelector *v1.NamespacedSelector `json:"containerAppEnvironmentIdSelector,omitempty" tf:"-"`
+	ContainerAppEnvironmentIDSelector *v2.NamespacedSelector `json:"containerAppEnvironmentIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
@@ -191,8 +190,8 @@ type EnvironmentCertificateSpec struct {
 
 // EnvironmentCertificateStatus defines the observed state of EnvironmentCertificate.
 type EnvironmentCertificateStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        EnvironmentCertificateObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               EnvironmentCertificateObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ShareDirectoryInitParameters struct {
@@ -30,11 +29,11 @@ type ShareDirectoryInitParameters struct {
 
 	// Reference to a Share in storage to populate storageShareId.
 	// +kubebuilder:validation:Optional
-	StorageShareIDRef *v1.NamespacedReference `json:"storageShareIdRef,omitempty" tf:"-"`
+	StorageShareIDRef *v2.NamespacedReference `json:"storageShareIdRef,omitempty" tf:"-"`
 
 	// Selector for a Share in storage to populate storageShareId.
 	// +kubebuilder:validation:Optional
-	StorageShareIDSelector *v1.NamespacedSelector `json:"storageShareIdSelector,omitempty" tf:"-"`
+	StorageShareIDSelector *v2.NamespacedSelector `json:"storageShareIdSelector,omitempty" tf:"-"`
 
 	// The Storage Share URL in which this file will be placed into. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Share
@@ -43,11 +42,11 @@ type ShareDirectoryInitParameters struct {
 
 	// Reference to a Share in storage to populate storageShareUrl.
 	// +kubebuilder:validation:Optional
-	StorageShareURLRef *v1.NamespacedReference `json:"storageShareUrlRef,omitempty" tf:"-"`
+	StorageShareURLRef *v2.NamespacedReference `json:"storageShareUrlRef,omitempty" tf:"-"`
 
 	// Selector for a Share in storage to populate storageShareUrl.
 	// +kubebuilder:validation:Optional
-	StorageShareURLSelector *v1.NamespacedSelector `json:"storageShareUrlSelector,omitempty" tf:"-"`
+	StorageShareURLSelector *v2.NamespacedSelector `json:"storageShareUrlSelector,omitempty" tf:"-"`
 }
 
 type ShareDirectoryObservation struct {
@@ -88,11 +87,11 @@ type ShareDirectoryParameters struct {
 
 	// Reference to a Share in storage to populate storageShareId.
 	// +kubebuilder:validation:Optional
-	StorageShareIDRef *v1.NamespacedReference `json:"storageShareIdRef,omitempty" tf:"-"`
+	StorageShareIDRef *v2.NamespacedReference `json:"storageShareIdRef,omitempty" tf:"-"`
 
 	// Selector for a Share in storage to populate storageShareId.
 	// +kubebuilder:validation:Optional
-	StorageShareIDSelector *v1.NamespacedSelector `json:"storageShareIdSelector,omitempty" tf:"-"`
+	StorageShareIDSelector *v2.NamespacedSelector `json:"storageShareIdSelector,omitempty" tf:"-"`
 
 	// The Storage Share URL in which this file will be placed into. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Share
@@ -102,11 +101,11 @@ type ShareDirectoryParameters struct {
 
 	// Reference to a Share in storage to populate storageShareUrl.
 	// +kubebuilder:validation:Optional
-	StorageShareURLRef *v1.NamespacedReference `json:"storageShareUrlRef,omitempty" tf:"-"`
+	StorageShareURLRef *v2.NamespacedReference `json:"storageShareUrlRef,omitempty" tf:"-"`
 
 	// Selector for a Share in storage to populate storageShareUrl.
 	// +kubebuilder:validation:Optional
-	StorageShareURLSelector *v1.NamespacedSelector `json:"storageShareUrlSelector,omitempty" tf:"-"`
+	StorageShareURLSelector *v2.NamespacedSelector `json:"storageShareUrlSelector,omitempty" tf:"-"`
 }
 
 // ShareDirectorySpec defines the desired state of ShareDirectory
@@ -128,8 +127,8 @@ type ShareDirectorySpec struct {
 
 // ShareDirectoryStatus defines the observed state of ShareDirectory.
 type ShareDirectoryStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ShareDirectoryObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ShareDirectoryObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

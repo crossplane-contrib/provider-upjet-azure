@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type IntegrationRuntimeAzureInitParameters struct {
@@ -82,11 +81,11 @@ type IntegrationRuntimeAzureParameters struct {
 
 	// Reference to a Workspace in synapse to populate synapseWorkspaceId.
 	// +kubebuilder:validation:Optional
-	SynapseWorkspaceIDRef *v1.NamespacedReference `json:"synapseWorkspaceIdRef,omitempty" tf:"-"`
+	SynapseWorkspaceIDRef *v2.NamespacedReference `json:"synapseWorkspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in synapse to populate synapseWorkspaceId.
 	// +kubebuilder:validation:Optional
-	SynapseWorkspaceIDSelector *v1.NamespacedSelector `json:"synapseWorkspaceIdSelector,omitempty" tf:"-"`
+	SynapseWorkspaceIDSelector *v2.NamespacedSelector `json:"synapseWorkspaceIdSelector,omitempty" tf:"-"`
 
 	// Time to live (in minutes) setting of the cluster which will execute data flow job. Defaults to 0.
 	// +kubebuilder:validation:Optional
@@ -112,8 +111,8 @@ type IntegrationRuntimeAzureSpec struct {
 
 // IntegrationRuntimeAzureStatus defines the observed state of IntegrationRuntimeAzure.
 type IntegrationRuntimeAzureStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        IntegrationRuntimeAzureObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               IntegrationRuntimeAzureObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

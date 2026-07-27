@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type PoolInitParameters struct {
@@ -87,11 +87,11 @@ type PoolParameters struct {
 
 	// Reference to a Account in netapp to populate accountName.
 	// +kubebuilder:validation:Optional
-	AccountNameRef *v1.Reference `json:"accountNameRef,omitempty" tf:"-"`
+	AccountNameRef *v2.Reference `json:"accountNameRef,omitempty" tf:"-"`
 
 	// Selector for a Account in netapp to populate accountName.
 	// +kubebuilder:validation:Optional
-	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
+	AccountNameSelector *v2.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
 	// Whether the NetApp Pool can hold cool access enabled volumes. Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -120,11 +120,11 @@ type PoolParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The service level of the file system. Valid values include Premium, Standard, Ultra, and Flexible. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -142,8 +142,8 @@ type PoolParameters struct {
 
 // PoolSpec defines the desired state of Pool
 type PoolSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     PoolParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   PoolParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -159,8 +159,8 @@ type PoolSpec struct {
 
 // PoolStatus defines the observed state of Pool.
 type PoolStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PoolObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PoolObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

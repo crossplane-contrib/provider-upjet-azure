@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type FlexibleServerFirewallRuleInitParameters struct {
@@ -51,11 +51,11 @@ type FlexibleServerFirewallRuleParameters struct {
 
 	// Reference to a FlexibleServer in dbforpostgresql to populate serverId.
 	// +kubebuilder:validation:Optional
-	ServerIDRef *v1.Reference `json:"serverIdRef,omitempty" tf:"-"`
+	ServerIDRef *v2.Reference `json:"serverIdRef,omitempty" tf:"-"`
 
 	// Selector for a FlexibleServer in dbforpostgresql to populate serverId.
 	// +kubebuilder:validation:Optional
-	ServerIDSelector *v1.Selector `json:"serverIdSelector,omitempty" tf:"-"`
+	ServerIDSelector *v2.Selector `json:"serverIdSelector,omitempty" tf:"-"`
 
 	// The IPv4 Address defining the start of the range of addresses associated with this PostgreSQL Flexible Server Firewall Rule.
 	// +kubebuilder:validation:Optional
@@ -64,8 +64,8 @@ type FlexibleServerFirewallRuleParameters struct {
 
 // FlexibleServerFirewallRuleSpec defines the desired state of FlexibleServerFirewallRule
 type FlexibleServerFirewallRuleSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     FlexibleServerFirewallRuleParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   FlexibleServerFirewallRuleParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -81,8 +81,8 @@ type FlexibleServerFirewallRuleSpec struct {
 
 // FlexibleServerFirewallRuleStatus defines the observed state of FlexibleServerFirewallRule.
 type FlexibleServerFirewallRuleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FlexibleServerFirewallRuleObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FlexibleServerFirewallRuleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

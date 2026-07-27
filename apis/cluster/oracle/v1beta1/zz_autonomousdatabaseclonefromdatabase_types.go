@@ -10,13 +10,13 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AutonomousDatabaseCloneFromDatabaseInitParameters struct {
 
 	// The password for the SYS, SYSTEM, and PDB Admin users. The password must be at least 12 characters long, and contain at least 1 uppercase, 1 lowercase, and 1 numeric character. It cannot contain the double quote symbol (") or the username "admin", regardless of casing. Changing this forces a new Autonomous Database Clone to be created.
-	AdminPasswordSecretRef v1.SecretKeySelector `json:"adminPasswordSecretRef" tf:"-"`
+	AdminPasswordSecretRef v2.SecretKeySelector `json:"adminPasswordSecretRef" tf:"-"`
 
 	// Defines the network access type for the Autonomous Database. If the property is explicitly set to an empty list, it allows secure public access to the database from any IP address. If specific ACL (Access Control List) values are provided, access will be restricted to only the specified IP addresses. Changing this forces a new Autonomous Database Clone to be created.
 	// +listType=set
@@ -80,11 +80,11 @@ type AutonomousDatabaseCloneFromDatabaseInitParameters struct {
 
 	// Reference to a AutonomousDatabase in oracle to populate sourceAutonomousDatabaseId.
 	// +kubebuilder:validation:Optional
-	SourceAutonomousDatabaseIDRef *v1.Reference `json:"sourceAutonomousDatabaseIdRef,omitempty" tf:"-"`
+	SourceAutonomousDatabaseIDRef *v2.Reference `json:"sourceAutonomousDatabaseIdRef,omitempty" tf:"-"`
 
 	// Selector for a AutonomousDatabase in oracle to populate sourceAutonomousDatabaseId.
 	// +kubebuilder:validation:Optional
-	SourceAutonomousDatabaseIDSelector *v1.Selector `json:"sourceAutonomousDatabaseIdSelector,omitempty" tf:"-"`
+	SourceAutonomousDatabaseIDSelector *v2.Selector `json:"sourceAutonomousDatabaseIdSelector,omitempty" tf:"-"`
 
 	// The ID of the subnet the resource is associated with. Changing this forces a new Autonomous Database Clone to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
@@ -93,11 +93,11 @@ type AutonomousDatabaseCloneFromDatabaseInitParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the Autonomous Database Clone. Changing this forces a new Autonomous Database Clone to be created.
 	// +mapType=granular
@@ -188,7 +188,7 @@ type AutonomousDatabaseCloneFromDatabaseParameters struct {
 
 	// The password for the SYS, SYSTEM, and PDB Admin users. The password must be at least 12 characters long, and contain at least 1 uppercase, 1 lowercase, and 1 numeric character. It cannot contain the double quote symbol (") or the username "admin", regardless of casing. Changing this forces a new Autonomous Database Clone to be created.
 	// +kubebuilder:validation:Optional
-	AdminPasswordSecretRef v1.SecretKeySelector `json:"adminPasswordSecretRef" tf:"-"`
+	AdminPasswordSecretRef v2.SecretKeySelector `json:"adminPasswordSecretRef" tf:"-"`
 
 	// Defines the network access type for the Autonomous Database. If the property is explicitly set to an empty list, it allows secure public access to the database from any IP address. If specific ACL (Access Control List) values are provided, access will be restricted to only the specified IP addresses. Changing this forces a new Autonomous Database Clone to be created.
 	// +kubebuilder:validation:Optional
@@ -270,11 +270,11 @@ type AutonomousDatabaseCloneFromDatabaseParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The ID of the source Autonomous Database to clone from. Changing this forces a new Autonomous Database Clone to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/oracle/v1beta1.AutonomousDatabase
@@ -284,11 +284,11 @@ type AutonomousDatabaseCloneFromDatabaseParameters struct {
 
 	// Reference to a AutonomousDatabase in oracle to populate sourceAutonomousDatabaseId.
 	// +kubebuilder:validation:Optional
-	SourceAutonomousDatabaseIDRef *v1.Reference `json:"sourceAutonomousDatabaseIdRef,omitempty" tf:"-"`
+	SourceAutonomousDatabaseIDRef *v2.Reference `json:"sourceAutonomousDatabaseIdRef,omitempty" tf:"-"`
 
 	// Selector for a AutonomousDatabase in oracle to populate sourceAutonomousDatabaseId.
 	// +kubebuilder:validation:Optional
-	SourceAutonomousDatabaseIDSelector *v1.Selector `json:"sourceAutonomousDatabaseIdSelector,omitempty" tf:"-"`
+	SourceAutonomousDatabaseIDSelector *v2.Selector `json:"sourceAutonomousDatabaseIdSelector,omitempty" tf:"-"`
 
 	// The ID of the subnet the resource is associated with. Changing this forces a new Autonomous Database Clone to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
@@ -298,11 +298,11 @@ type AutonomousDatabaseCloneFromDatabaseParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the Autonomous Database Clone. Changing this forces a new Autonomous Database Clone to be created.
 	// +kubebuilder:validation:Optional
@@ -316,8 +316,8 @@ type AutonomousDatabaseCloneFromDatabaseParameters struct {
 
 // AutonomousDatabaseCloneFromDatabaseSpec defines the desired state of AutonomousDatabaseCloneFromDatabase
 type AutonomousDatabaseCloneFromDatabaseSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     AutonomousDatabaseCloneFromDatabaseParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   AutonomousDatabaseCloneFromDatabaseParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -333,8 +333,8 @@ type AutonomousDatabaseCloneFromDatabaseSpec struct {
 
 // AutonomousDatabaseCloneFromDatabaseStatus defines the observed state of AutonomousDatabaseCloneFromDatabase.
 type AutonomousDatabaseCloneFromDatabaseStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AutonomousDatabaseCloneFromDatabaseObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AutonomousDatabaseCloneFromDatabaseObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

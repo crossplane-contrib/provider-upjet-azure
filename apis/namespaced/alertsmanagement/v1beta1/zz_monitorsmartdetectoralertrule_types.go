@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ActionGroupInitParameters struct {
@@ -27,11 +26,11 @@ type ActionGroupInitParameters struct {
 
 	// References to MonitorActionGroup in insights to populate ids.
 	// +kubebuilder:validation:Optional
-	IdsRefs []v1.NamespacedReference `json:"idsRefs,omitempty" tf:"-"`
+	IdsRefs []v2.NamespacedReference `json:"idsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of MonitorActionGroup in insights to populate ids.
 	// +kubebuilder:validation:Optional
-	IdsSelector *v1.NamespacedSelector `json:"idsSelector,omitempty" tf:"-"`
+	IdsSelector *v2.NamespacedSelector `json:"idsSelector,omitempty" tf:"-"`
 
 	// A JSON String which Specifies the custom webhook payload if Webhook Receiver is specified in Monitor Action Group resource.
 	WebhookPayload *string `json:"webhookPayload,omitempty" tf:"webhook_payload,omitempty"`
@@ -65,11 +64,11 @@ type ActionGroupParameters struct {
 
 	// References to MonitorActionGroup in insights to populate ids.
 	// +kubebuilder:validation:Optional
-	IdsRefs []v1.NamespacedReference `json:"idsRefs,omitempty" tf:"-"`
+	IdsRefs []v2.NamespacedReference `json:"idsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of MonitorActionGroup in insights to populate ids.
 	// +kubebuilder:validation:Optional
-	IdsSelector *v1.NamespacedSelector `json:"idsSelector,omitempty" tf:"-"`
+	IdsSelector *v2.NamespacedSelector `json:"idsSelector,omitempty" tf:"-"`
 
 	// A JSON String which Specifies the custom webhook payload if Webhook Receiver is specified in Monitor Action Group resource.
 	// +kubebuilder:validation:Optional
@@ -102,11 +101,11 @@ type MonitorSmartDetectorAlertRuleInitParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the scopes of this Smart Detector Alert Rule.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/insights/v1beta1.ApplicationInsights
@@ -116,11 +115,11 @@ type MonitorSmartDetectorAlertRuleInitParameters struct {
 
 	// References to ApplicationInsights in insights to populate scopeResourceIds.
 	// +kubebuilder:validation:Optional
-	ScopeResourceIdsRefs []v1.NamespacedReference `json:"scopeResourceIdsRefs,omitempty" tf:"-"`
+	ScopeResourceIdsRefs []v2.NamespacedReference `json:"scopeResourceIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of ApplicationInsights in insights to populate scopeResourceIds.
 	// +kubebuilder:validation:Optional
-	ScopeResourceIdsSelector *v1.NamespacedSelector `json:"scopeResourceIdsSelector,omitempty" tf:"-"`
+	ScopeResourceIdsSelector *v2.NamespacedSelector `json:"scopeResourceIdsSelector,omitempty" tf:"-"`
 
 	// Specifies the severity of this Smart Detector Alert Rule. Possible values are Sev0, Sev1, Sev2, Sev3 or Sev4.
 	Severity *string `json:"severity,omitempty" tf:"severity,omitempty"`
@@ -207,11 +206,11 @@ type MonitorSmartDetectorAlertRuleParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the scopes of this Smart Detector Alert Rule.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/insights/v1beta1.ApplicationInsights
@@ -222,11 +221,11 @@ type MonitorSmartDetectorAlertRuleParameters struct {
 
 	// References to ApplicationInsights in insights to populate scopeResourceIds.
 	// +kubebuilder:validation:Optional
-	ScopeResourceIdsRefs []v1.NamespacedReference `json:"scopeResourceIdsRefs,omitempty" tf:"-"`
+	ScopeResourceIdsRefs []v2.NamespacedReference `json:"scopeResourceIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of ApplicationInsights in insights to populate scopeResourceIds.
 	// +kubebuilder:validation:Optional
-	ScopeResourceIdsSelector *v1.NamespacedSelector `json:"scopeResourceIdsSelector,omitempty" tf:"-"`
+	ScopeResourceIdsSelector *v2.NamespacedSelector `json:"scopeResourceIdsSelector,omitempty" tf:"-"`
 
 	// Specifies the severity of this Smart Detector Alert Rule. Possible values are Sev0, Sev1, Sev2, Sev3 or Sev4.
 	// +kubebuilder:validation:Optional
@@ -261,8 +260,8 @@ type MonitorSmartDetectorAlertRuleSpec struct {
 
 // MonitorSmartDetectorAlertRuleStatus defines the observed state of MonitorSmartDetectorAlertRule.
 type MonitorSmartDetectorAlertRuleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MonitorSmartDetectorAlertRuleObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MonitorSmartDetectorAlertRuleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

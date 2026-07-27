@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type FrontdoorRuleSetInitParameters struct {
@@ -36,11 +35,11 @@ type FrontdoorRuleSetParameters struct {
 
 	// Reference to a FrontdoorProfile in cdn to populate cdnFrontdoorProfileId.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorProfileIDRef *v1.NamespacedReference `json:"cdnFrontdoorProfileIdRef,omitempty" tf:"-"`
+	CdnFrontdoorProfileIDRef *v2.NamespacedReference `json:"cdnFrontdoorProfileIdRef,omitempty" tf:"-"`
 
 	// Selector for a FrontdoorProfile in cdn to populate cdnFrontdoorProfileId.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorProfileIDSelector *v1.NamespacedSelector `json:"cdnFrontdoorProfileIdSelector,omitempty" tf:"-"`
+	CdnFrontdoorProfileIDSelector *v2.NamespacedSelector `json:"cdnFrontdoorProfileIdSelector,omitempty" tf:"-"`
 }
 
 // FrontdoorRuleSetSpec defines the desired state of FrontdoorRuleSet
@@ -62,8 +61,8 @@ type FrontdoorRuleSetSpec struct {
 
 // FrontdoorRuleSetStatus defines the observed state of FrontdoorRuleSet.
 type FrontdoorRuleSetStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FrontdoorRuleSetObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FrontdoorRuleSetObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

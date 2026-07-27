@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ManagementGroupPolicyExemptionInitParameters struct {
@@ -38,11 +37,11 @@ type ManagementGroupPolicyExemptionInitParameters struct {
 
 	// Reference to a ManagementGroupPolicyAssignment in authorization to populate policyAssignmentId.
 	// +kubebuilder:validation:Optional
-	PolicyAssignmentIDRef *v1.NamespacedReference `json:"policyAssignmentIdRef,omitempty" tf:"-"`
+	PolicyAssignmentIDRef *v2.NamespacedReference `json:"policyAssignmentIdRef,omitempty" tf:"-"`
 
 	// Selector for a ManagementGroupPolicyAssignment in authorization to populate policyAssignmentId.
 	// +kubebuilder:validation:Optional
-	PolicyAssignmentIDSelector *v1.NamespacedSelector `json:"policyAssignmentIdSelector,omitempty" tf:"-"`
+	PolicyAssignmentIDSelector *v2.NamespacedSelector `json:"policyAssignmentIdSelector,omitempty" tf:"-"`
 
 	// The policy definition reference ID list when the associated policy assignment is an assignment of a policy set definition.
 	PolicyDefinitionReferenceIds []*string `json:"policyDefinitionReferenceIds,omitempty" tf:"policy_definition_reference_ids,omitempty"`
@@ -104,11 +103,11 @@ type ManagementGroupPolicyExemptionParameters struct {
 
 	// Reference to a ManagementGroup in management to populate managementGroupId.
 	// +kubebuilder:validation:Optional
-	ManagementGroupIDRef *v1.NamespacedReference `json:"managementGroupIdRef,omitempty" tf:"-"`
+	ManagementGroupIDRef *v2.NamespacedReference `json:"managementGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a ManagementGroup in management to populate managementGroupId.
 	// +kubebuilder:validation:Optional
-	ManagementGroupIDSelector *v1.NamespacedSelector `json:"managementGroupIdSelector,omitempty" tf:"-"`
+	ManagementGroupIDSelector *v2.NamespacedSelector `json:"managementGroupIdSelector,omitempty" tf:"-"`
 
 	// The metadata for this policy exemption. This is a JSON string representing additional metadata that should be stored with the policy exemption.
 	// +kubebuilder:validation:Optional
@@ -122,11 +121,11 @@ type ManagementGroupPolicyExemptionParameters struct {
 
 	// Reference to a ManagementGroupPolicyAssignment in authorization to populate policyAssignmentId.
 	// +kubebuilder:validation:Optional
-	PolicyAssignmentIDRef *v1.NamespacedReference `json:"policyAssignmentIdRef,omitempty" tf:"-"`
+	PolicyAssignmentIDRef *v2.NamespacedReference `json:"policyAssignmentIdRef,omitempty" tf:"-"`
 
 	// Selector for a ManagementGroupPolicyAssignment in authorization to populate policyAssignmentId.
 	// +kubebuilder:validation:Optional
-	PolicyAssignmentIDSelector *v1.NamespacedSelector `json:"policyAssignmentIdSelector,omitempty" tf:"-"`
+	PolicyAssignmentIDSelector *v2.NamespacedSelector `json:"policyAssignmentIdSelector,omitempty" tf:"-"`
 
 	// The policy definition reference ID list when the associated policy assignment is an assignment of a policy set definition.
 	// +kubebuilder:validation:Optional
@@ -152,8 +151,8 @@ type ManagementGroupPolicyExemptionSpec struct {
 
 // ManagementGroupPolicyExemptionStatus defines the observed state of ManagementGroupPolicyExemption.
 type ManagementGroupPolicyExemptionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ManagementGroupPolicyExemptionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ManagementGroupPolicyExemptionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

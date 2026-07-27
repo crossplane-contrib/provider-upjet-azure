@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type MongoRoleDefinitionInitParameters struct {
@@ -22,11 +22,11 @@ type MongoRoleDefinitionInitParameters struct {
 
 	// Reference to a MongoDatabase in cosmosdb to populate cosmosMongoDatabaseId.
 	// +kubebuilder:validation:Optional
-	CosmosMongoDatabaseIDRef *v1.Reference `json:"cosmosMongoDatabaseIdRef,omitempty" tf:"-"`
+	CosmosMongoDatabaseIDRef *v2.Reference `json:"cosmosMongoDatabaseIdRef,omitempty" tf:"-"`
 
 	// Selector for a MongoDatabase in cosmosdb to populate cosmosMongoDatabaseId.
 	// +kubebuilder:validation:Optional
-	CosmosMongoDatabaseIDSelector *v1.Selector `json:"cosmosMongoDatabaseIdSelector,omitempty" tf:"-"`
+	CosmosMongoDatabaseIDSelector *v2.Selector `json:"cosmosMongoDatabaseIdSelector,omitempty" tf:"-"`
 
 	// A list of Mongo Roles which are inherited to the Mongo Role Definition.
 	InheritedRoleNames []*string `json:"inheritedRoleNames,omitempty" tf:"inherited_role_names,omitempty"`
@@ -60,11 +60,11 @@ type MongoRoleDefinitionParameters struct {
 
 	// Reference to a MongoDatabase in cosmosdb to populate cosmosMongoDatabaseId.
 	// +kubebuilder:validation:Optional
-	CosmosMongoDatabaseIDRef *v1.Reference `json:"cosmosMongoDatabaseIdRef,omitempty" tf:"-"`
+	CosmosMongoDatabaseIDRef *v2.Reference `json:"cosmosMongoDatabaseIdRef,omitempty" tf:"-"`
 
 	// Selector for a MongoDatabase in cosmosdb to populate cosmosMongoDatabaseId.
 	// +kubebuilder:validation:Optional
-	CosmosMongoDatabaseIDSelector *v1.Selector `json:"cosmosMongoDatabaseIdSelector,omitempty" tf:"-"`
+	CosmosMongoDatabaseIDSelector *v2.Selector `json:"cosmosMongoDatabaseIdSelector,omitempty" tf:"-"`
 
 	// A list of Mongo Roles which are inherited to the Mongo Role Definition.
 	// +kubebuilder:validation:Optional
@@ -135,8 +135,8 @@ type ResourceParameters struct {
 
 // MongoRoleDefinitionSpec defines the desired state of MongoRoleDefinition
 type MongoRoleDefinitionSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     MongoRoleDefinitionParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   MongoRoleDefinitionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -152,8 +152,8 @@ type MongoRoleDefinitionSpec struct {
 
 // MongoRoleDefinitionStatus defines the observed state of MongoRoleDefinition.
 type MongoRoleDefinitionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MongoRoleDefinitionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MongoRoleDefinitionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

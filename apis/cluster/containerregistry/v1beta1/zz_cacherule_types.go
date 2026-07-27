@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CacheRuleInitParameters struct {
@@ -23,11 +23,11 @@ type CacheRuleInitParameters struct {
 
 	// Reference to a CredentialSet in containerregistry to populate credentialSetId.
 	// +kubebuilder:validation:Optional
-	CredentialSetIDRef *v1.Reference `json:"credentialSetIdRef,omitempty" tf:"-"`
+	CredentialSetIDRef *v2.Reference `json:"credentialSetIdRef,omitempty" tf:"-"`
 
 	// Selector for a CredentialSet in containerregistry to populate credentialSetId.
 	// +kubebuilder:validation:Optional
-	CredentialSetIDSelector *v1.Selector `json:"credentialSetIdSelector,omitempty" tf:"-"`
+	CredentialSetIDSelector *v2.Selector `json:"credentialSetIdSelector,omitempty" tf:"-"`
 
 	// The name of the source repository path. Changing this forces a new resource to be created.
 	// The full source repository path such as 'docker.io/library/ubuntu'.
@@ -69,11 +69,11 @@ type CacheRuleParameters struct {
 
 	// Reference to a Registry in containerregistry to populate containerRegistryId.
 	// +kubebuilder:validation:Optional
-	ContainerRegistryIDRef *v1.Reference `json:"containerRegistryIdRef,omitempty" tf:"-"`
+	ContainerRegistryIDRef *v2.Reference `json:"containerRegistryIdRef,omitempty" tf:"-"`
 
 	// Selector for a Registry in containerregistry to populate containerRegistryId.
 	// +kubebuilder:validation:Optional
-	ContainerRegistryIDSelector *v1.Selector `json:"containerRegistryIdSelector,omitempty" tf:"-"`
+	ContainerRegistryIDSelector *v2.Selector `json:"containerRegistryIdSelector,omitempty" tf:"-"`
 
 	// The ARM resource ID of the Credential Store which is associated with the Cache Rule.
 	// The ARM resource ID of the credential store which is associated with the cache rule.
@@ -84,11 +84,11 @@ type CacheRuleParameters struct {
 
 	// Reference to a CredentialSet in containerregistry to populate credentialSetId.
 	// +kubebuilder:validation:Optional
-	CredentialSetIDRef *v1.Reference `json:"credentialSetIdRef,omitempty" tf:"-"`
+	CredentialSetIDRef *v2.Reference `json:"credentialSetIdRef,omitempty" tf:"-"`
 
 	// Selector for a CredentialSet in containerregistry to populate credentialSetId.
 	// +kubebuilder:validation:Optional
-	CredentialSetIDSelector *v1.Selector `json:"credentialSetIdSelector,omitempty" tf:"-"`
+	CredentialSetIDSelector *v2.Selector `json:"credentialSetIdSelector,omitempty" tf:"-"`
 
 	// The name of the source repository path. Changing this forces a new resource to be created.
 	// The full source repository path such as 'docker.io/library/ubuntu'.
@@ -103,8 +103,8 @@ type CacheRuleParameters struct {
 
 // CacheRuleSpec defines the desired state of CacheRule
 type CacheRuleSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     CacheRuleParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   CacheRuleParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -120,8 +120,8 @@ type CacheRuleSpec struct {
 
 // CacheRuleStatus defines the observed state of CacheRule.
 type CacheRuleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        CacheRuleObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               CacheRuleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

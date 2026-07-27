@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ManagedRedisAccessPolicyAssignmentInitParameters struct {
@@ -39,11 +38,11 @@ type ManagedRedisAccessPolicyAssignmentParameters struct {
 
 	// Reference to a ManagedRedis in cache to populate managedRedisId.
 	// +kubebuilder:validation:Optional
-	ManagedRedisIDRef *v1.NamespacedReference `json:"managedRedisIdRef,omitempty" tf:"-"`
+	ManagedRedisIDRef *v2.NamespacedReference `json:"managedRedisIdRef,omitempty" tf:"-"`
 
 	// Selector for a ManagedRedis in cache to populate managedRedisId.
 	// +kubebuilder:validation:Optional
-	ManagedRedisIDSelector *v1.NamespacedSelector `json:"managedRedisIdSelector,omitempty" tf:"-"`
+	ManagedRedisIDSelector *v2.NamespacedSelector `json:"managedRedisIdSelector,omitempty" tf:"-"`
 
 	// The object ID of the Azure Active Directory user, group, service principal, or managed identity to assign the access policy to. Changing this forces a new Access Policy Assignment to be created.
 	// +kubebuilder:validation:Required
@@ -69,8 +68,8 @@ type ManagedRedisAccessPolicyAssignmentSpec struct {
 
 // ManagedRedisAccessPolicyAssignmentStatus defines the observed state of ManagedRedisAccessPolicyAssignment.
 type ManagedRedisAccessPolicyAssignmentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ManagedRedisAccessPolicyAssignmentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ManagedRedisAccessPolicyAssignmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SecurityCenterAutoProvisioningInitParameters struct {
@@ -37,8 +37,8 @@ type SecurityCenterAutoProvisioningParameters struct {
 
 // SecurityCenterAutoProvisioningSpec defines the desired state of SecurityCenterAutoProvisioning
 type SecurityCenterAutoProvisioningSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SecurityCenterAutoProvisioningParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SecurityCenterAutoProvisioningParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -54,8 +54,8 @@ type SecurityCenterAutoProvisioningSpec struct {
 
 // SecurityCenterAutoProvisioningStatus defines the observed state of SecurityCenterAutoProvisioning.
 type SecurityCenterAutoProvisioningStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SecurityCenterAutoProvisioningObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SecurityCenterAutoProvisioningObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

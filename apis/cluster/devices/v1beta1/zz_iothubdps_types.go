@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type IOTHubDPSInitParameters struct {
@@ -117,11 +117,11 @@ type IOTHubDPSParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A sku block as defined below.
 	// +kubebuilder:validation:Optional
@@ -220,7 +220,7 @@ type LinkedHubInitParameters struct {
 	ApplyAllocationPolicy *bool `json:"applyAllocationPolicy,omitempty" tf:"apply_allocation_policy,omitempty"`
 
 	// The connection string to connect to the IoT Hub.
-	ConnectionStringSecretRef v1.SecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
+	ConnectionStringSecretRef v2.SecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
 
 	// The location of the IoT hub.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -253,7 +253,7 @@ type LinkedHubParameters struct {
 
 	// The connection string to connect to the IoT Hub.
 	// +kubebuilder:validation:Required
-	ConnectionStringSecretRef v1.SecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
+	ConnectionStringSecretRef v2.SecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
 
 	// The location of the IoT hub.
 	// +kubebuilder:validation:Optional
@@ -262,8 +262,8 @@ type LinkedHubParameters struct {
 
 // IOTHubDPSSpec defines the desired state of IOTHubDPS
 type IOTHubDPSSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     IOTHubDPSParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   IOTHubDPSParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -279,8 +279,8 @@ type IOTHubDPSSpec struct {
 
 // IOTHubDPSStatus defines the observed state of IOTHubDPS.
 type IOTHubDPSStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        IOTHubDPSObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               IOTHubDPSObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

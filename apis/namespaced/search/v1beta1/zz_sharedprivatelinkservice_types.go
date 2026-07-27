@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SharedPrivateLinkServiceInitParameters struct {
@@ -29,11 +28,11 @@ type SharedPrivateLinkServiceInitParameters struct {
 
 	// Reference to a Account in storage to populate targetResourceId.
 	// +kubebuilder:validation:Optional
-	TargetResourceIDRef *v1.NamespacedReference `json:"targetResourceIdRef,omitempty" tf:"-"`
+	TargetResourceIDRef *v2.NamespacedReference `json:"targetResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate targetResourceId.
 	// +kubebuilder:validation:Optional
-	TargetResourceIDSelector *v1.NamespacedSelector `json:"targetResourceIdSelector,omitempty" tf:"-"`
+	TargetResourceIDSelector *v2.NamespacedSelector `json:"targetResourceIdSelector,omitempty" tf:"-"`
 }
 
 type SharedPrivateLinkServiceObservation struct {
@@ -71,11 +70,11 @@ type SharedPrivateLinkServiceParameters struct {
 
 	// Reference to a Service in search to populate searchServiceId.
 	// +kubebuilder:validation:Optional
-	SearchServiceIDRef *v1.NamespacedReference `json:"searchServiceIdRef,omitempty" tf:"-"`
+	SearchServiceIDRef *v2.NamespacedReference `json:"searchServiceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Service in search to populate searchServiceId.
 	// +kubebuilder:validation:Optional
-	SearchServiceIDSelector *v1.NamespacedSelector `json:"searchServiceIdSelector,omitempty" tf:"-"`
+	SearchServiceIDSelector *v2.NamespacedSelector `json:"searchServiceIdSelector,omitempty" tf:"-"`
 
 	// Specify the sub resource name which the Azure Search Private Endpoint is able to connect to. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -89,11 +88,11 @@ type SharedPrivateLinkServiceParameters struct {
 
 	// Reference to a Account in storage to populate targetResourceId.
 	// +kubebuilder:validation:Optional
-	TargetResourceIDRef *v1.NamespacedReference `json:"targetResourceIdRef,omitempty" tf:"-"`
+	TargetResourceIDRef *v2.NamespacedReference `json:"targetResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate targetResourceId.
 	// +kubebuilder:validation:Optional
-	TargetResourceIDSelector *v1.NamespacedSelector `json:"targetResourceIdSelector,omitempty" tf:"-"`
+	TargetResourceIDSelector *v2.NamespacedSelector `json:"targetResourceIdSelector,omitempty" tf:"-"`
 }
 
 // SharedPrivateLinkServiceSpec defines the desired state of SharedPrivateLinkService
@@ -115,8 +114,8 @@ type SharedPrivateLinkServiceSpec struct {
 
 // SharedPrivateLinkServiceStatus defines the observed state of SharedPrivateLinkService.
 type SharedPrivateLinkServiceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SharedPrivateLinkServiceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SharedPrivateLinkServiceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

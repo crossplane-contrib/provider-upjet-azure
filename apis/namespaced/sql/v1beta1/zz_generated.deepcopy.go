@@ -9,7 +9,7 @@
 package v1beta1
 
 import (
-	"github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	"github.com/crossplane/crossplane/apis/v2/core/v2"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 )
 
@@ -148,12 +148,12 @@ func (in *AzureadAdministratorInitParameters) DeepCopyInto(out *AzureadAdministr
 	}
 	if in.LoginUsernameRef != nil {
 		in, out := &in.LoginUsernameRef, &out.LoginUsernameRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.LoginUsernameSelector != nil {
 		in, out := &in.LoginUsernameSelector, &out.LoginUsernameSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ObjectID != nil {
@@ -163,12 +163,12 @@ func (in *AzureadAdministratorInitParameters) DeepCopyInto(out *AzureadAdministr
 	}
 	if in.ObjectIDRef != nil {
 		in, out := &in.ObjectIDRef, &out.ObjectIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ObjectIDSelector != nil {
 		in, out := &in.ObjectIDSelector, &out.ObjectIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.TenantID != nil {
@@ -238,12 +238,12 @@ func (in *AzureadAdministratorParameters) DeepCopyInto(out *AzureadAdministrator
 	}
 	if in.LoginUsernameRef != nil {
 		in, out := &in.LoginUsernameRef, &out.LoginUsernameRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.LoginUsernameSelector != nil {
 		in, out := &in.LoginUsernameSelector, &out.LoginUsernameSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ObjectID != nil {
@@ -253,12 +253,12 @@ func (in *AzureadAdministratorParameters) DeepCopyInto(out *AzureadAdministrator
 	}
 	if in.ObjectIDRef != nil {
 		in, out := &in.ObjectIDRef, &out.ObjectIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ObjectIDSelector != nil {
 		in, out := &in.ObjectIDSelector, &out.ObjectIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.TenantID != nil {
@@ -372,14 +372,14 @@ func (in *IdentityInitParameters) DeepCopyInto(out *IdentityInitParameters) {
 	}
 	if in.IdentityIdsRefs != nil {
 		in, out := &in.IdentityIdsRefs, &out.IdentityIdsRefs
-		*out = make([]v1.NamespacedReference, len(*in))
+		*out = make([]v2.NamespacedReference, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.IdentityIdsSelector != nil {
 		in, out := &in.IdentityIdsSelector, &out.IdentityIdsSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Type != nil {
@@ -446,14 +446,14 @@ func (in *IdentityParameters) DeepCopyInto(out *IdentityParameters) {
 	}
 	if in.IdentityIdsRefs != nil {
 		in, out := &in.IdentityIdsRefs, &out.IdentityIdsRefs
-		*out = make([]v1.NamespacedReference, len(*in))
+		*out = make([]v2.NamespacedReference, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.IdentityIdsSelector != nil {
 		in, out := &in.IdentityIdsSelector, &out.IdentityIdsSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Type != nil {
@@ -481,7 +481,7 @@ func (in *ImportInitParameters) DeepCopyInto(out *ImportInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	in.AdministratorLoginPasswordSecretRef.DeepCopyInto(&out.AdministratorLoginPasswordSecretRef)
+	out.AdministratorLoginPasswordSecretRef = in.AdministratorLoginPasswordSecretRef
 	if in.AuthenticationType != nil {
 		in, out := &in.AuthenticationType, &out.AuthenticationType
 		*out = new(string)
@@ -492,7 +492,7 @@ func (in *ImportInitParameters) DeepCopyInto(out *ImportInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	in.StorageKeySecretRef.DeepCopyInto(&out.StorageKeySecretRef)
+	out.StorageKeySecretRef = in.StorageKeySecretRef
 	if in.StorageKeyType != nil {
 		in, out := &in.StorageKeyType, &out.StorageKeyType
 		*out = new(string)
@@ -563,7 +563,7 @@ func (in *ImportParameters) DeepCopyInto(out *ImportParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	in.AdministratorLoginPasswordSecretRef.DeepCopyInto(&out.AdministratorLoginPasswordSecretRef)
+	out.AdministratorLoginPasswordSecretRef = in.AdministratorLoginPasswordSecretRef
 	if in.AuthenticationType != nil {
 		in, out := &in.AuthenticationType, &out.AuthenticationType
 		*out = new(string)
@@ -574,7 +574,7 @@ func (in *ImportParameters) DeepCopyInto(out *ImportParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	in.StorageKeySecretRef.DeepCopyInto(&out.StorageKeySecretRef)
+	out.StorageKeySecretRef = in.StorageKeySecretRef
 	if in.StorageKeyType != nil {
 		in, out := &in.StorageKeyType, &out.StorageKeyType
 		*out = new(string)
@@ -796,7 +796,7 @@ func (in *MSSQLDatabaseExtendedAuditingPolicyInitParameters) DeepCopyInto(out *M
 	}
 	if in.StorageAccountAccessKeySecretRef != nil {
 		in, out := &in.StorageAccountAccessKeySecretRef, &out.StorageAccountAccessKeySecretRef
-		*out = new(v1.LocalSecretKeySelector)
+		*out = new(v2.LocalSecretKeySelector)
 		**out = **in
 	}
 	if in.StorageEndpoint != nil {
@@ -806,12 +806,12 @@ func (in *MSSQLDatabaseExtendedAuditingPolicyInitParameters) DeepCopyInto(out *M
 	}
 	if in.StorageEndpointRef != nil {
 		in, out := &in.StorageEndpointRef, &out.StorageEndpointRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.StorageEndpointSelector != nil {
 		in, out := &in.StorageEndpointSelector, &out.StorageEndpointSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 }
@@ -918,12 +918,12 @@ func (in *MSSQLDatabaseExtendedAuditingPolicyParameters) DeepCopyInto(out *MSSQL
 	}
 	if in.DatabaseIDRef != nil {
 		in, out := &in.DatabaseIDRef, &out.DatabaseIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.DatabaseIDSelector != nil {
 		in, out := &in.DatabaseIDSelector, &out.DatabaseIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Enabled != nil {
@@ -948,7 +948,7 @@ func (in *MSSQLDatabaseExtendedAuditingPolicyParameters) DeepCopyInto(out *MSSQL
 	}
 	if in.StorageAccountAccessKeySecretRef != nil {
 		in, out := &in.StorageAccountAccessKeySecretRef, &out.StorageAccountAccessKeySecretRef
-		*out = new(v1.LocalSecretKeySelector)
+		*out = new(v2.LocalSecretKeySelector)
 		**out = **in
 	}
 	if in.StorageEndpoint != nil {
@@ -958,12 +958,12 @@ func (in *MSSQLDatabaseExtendedAuditingPolicyParameters) DeepCopyInto(out *MSSQL
 	}
 	if in.StorageEndpointRef != nil {
 		in, out := &in.StorageEndpointRef, &out.StorageEndpointRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.StorageEndpointSelector != nil {
 		in, out := &in.StorageEndpointSelector, &out.StorageEndpointSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 }
@@ -999,7 +999,7 @@ func (in *MSSQLDatabaseExtendedAuditingPolicySpec) DeepCopy() *MSSQLDatabaseExte
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *MSSQLDatabaseExtendedAuditingPolicyStatus) DeepCopyInto(out *MSSQLDatabaseExtendedAuditingPolicyStatus) {
 	*out = *in
-	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.ManagedResourceStatus.DeepCopyInto(&out.ManagedResourceStatus)
 	in.AtProvider.DeepCopyInto(&out.AtProvider)
 }
 
@@ -1038,12 +1038,12 @@ func (in *MSSQLDatabaseInitParameters) DeepCopyInto(out *MSSQLDatabaseInitParame
 	}
 	if in.CreationSourceDatabaseIDRef != nil {
 		in, out := &in.CreationSourceDatabaseIDRef, &out.CreationSourceDatabaseIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.CreationSourceDatabaseIDSelector != nil {
 		in, out := &in.CreationSourceDatabaseIDSelector, &out.CreationSourceDatabaseIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ElasticPoolID != nil {
@@ -1053,12 +1053,12 @@ func (in *MSSQLDatabaseInitParameters) DeepCopyInto(out *MSSQLDatabaseInitParame
 	}
 	if in.ElasticPoolIDRef != nil {
 		in, out := &in.ElasticPoolIDRef, &out.ElasticPoolIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ElasticPoolIDSelector != nil {
 		in, out := &in.ElasticPoolIDSelector, &out.ElasticPoolIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.EnclaveType != nil {
@@ -1209,12 +1209,12 @@ func (in *MSSQLDatabaseInitParameters) DeepCopyInto(out *MSSQLDatabaseInitParame
 	}
 	if in.TransparentDataEncryptionKeyVaultKeyIDRef != nil {
 		in, out := &in.TransparentDataEncryptionKeyVaultKeyIDRef, &out.TransparentDataEncryptionKeyVaultKeyIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.TransparentDataEncryptionKeyVaultKeyIDSelector != nil {
 		in, out := &in.TransparentDataEncryptionKeyVaultKeyIDSelector, &out.TransparentDataEncryptionKeyVaultKeyIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ZoneRedundant != nil {
@@ -1492,12 +1492,12 @@ func (in *MSSQLDatabaseParameters) DeepCopyInto(out *MSSQLDatabaseParameters) {
 	}
 	if in.CreationSourceDatabaseIDRef != nil {
 		in, out := &in.CreationSourceDatabaseIDRef, &out.CreationSourceDatabaseIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.CreationSourceDatabaseIDSelector != nil {
 		in, out := &in.CreationSourceDatabaseIDSelector, &out.CreationSourceDatabaseIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ElasticPoolID != nil {
@@ -1507,12 +1507,12 @@ func (in *MSSQLDatabaseParameters) DeepCopyInto(out *MSSQLDatabaseParameters) {
 	}
 	if in.ElasticPoolIDRef != nil {
 		in, out := &in.ElasticPoolIDRef, &out.ElasticPoolIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ElasticPoolIDSelector != nil {
 		in, out := &in.ElasticPoolIDSelector, &out.ElasticPoolIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.EnclaveType != nil {
@@ -1617,12 +1617,12 @@ func (in *MSSQLDatabaseParameters) DeepCopyInto(out *MSSQLDatabaseParameters) {
 	}
 	if in.ServerIDRef != nil {
 		in, out := &in.ServerIDRef, &out.ServerIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ServerIDSelector != nil {
 		in, out := &in.ServerIDSelector, &out.ServerIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ShortTermRetentionPolicy != nil {
@@ -1678,12 +1678,12 @@ func (in *MSSQLDatabaseParameters) DeepCopyInto(out *MSSQLDatabaseParameters) {
 	}
 	if in.TransparentDataEncryptionKeyVaultKeyIDRef != nil {
 		in, out := &in.TransparentDataEncryptionKeyVaultKeyIDRef, &out.TransparentDataEncryptionKeyVaultKeyIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.TransparentDataEncryptionKeyVaultKeyIDSelector != nil {
 		in, out := &in.TransparentDataEncryptionKeyVaultKeyIDSelector, &out.TransparentDataEncryptionKeyVaultKeyIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ZoneRedundant != nil {
@@ -1724,7 +1724,7 @@ func (in *MSSQLDatabaseSpec) DeepCopy() *MSSQLDatabaseSpec {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *MSSQLDatabaseStatus) DeepCopyInto(out *MSSQLDatabaseStatus) {
 	*out = *in
-	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.ManagedResourceStatus.DeepCopyInto(&out.ManagedResourceStatus)
 	in.AtProvider.DeepCopyInto(&out.AtProvider)
 }
 
@@ -1787,12 +1787,12 @@ func (in *MSSQLDatabaseVulnerabilityAssessmentRuleBaselineInitParameters) DeepCo
 	}
 	if in.DatabaseNameRef != nil {
 		in, out := &in.DatabaseNameRef, &out.DatabaseNameRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.DatabaseNameSelector != nil {
 		in, out := &in.DatabaseNameSelector, &out.DatabaseNameSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.RuleID != nil {
@@ -1807,12 +1807,12 @@ func (in *MSSQLDatabaseVulnerabilityAssessmentRuleBaselineInitParameters) DeepCo
 	}
 	if in.ServerVulnerabilityAssessmentIDRef != nil {
 		in, out := &in.ServerVulnerabilityAssessmentIDRef, &out.ServerVulnerabilityAssessmentIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ServerVulnerabilityAssessmentIDSelector != nil {
 		in, out := &in.ServerVulnerabilityAssessmentIDSelector, &out.ServerVulnerabilityAssessmentIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 }
@@ -1928,12 +1928,12 @@ func (in *MSSQLDatabaseVulnerabilityAssessmentRuleBaselineParameters) DeepCopyIn
 	}
 	if in.DatabaseNameRef != nil {
 		in, out := &in.DatabaseNameRef, &out.DatabaseNameRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.DatabaseNameSelector != nil {
 		in, out := &in.DatabaseNameSelector, &out.DatabaseNameSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.RuleID != nil {
@@ -1948,12 +1948,12 @@ func (in *MSSQLDatabaseVulnerabilityAssessmentRuleBaselineParameters) DeepCopyIn
 	}
 	if in.ServerVulnerabilityAssessmentIDRef != nil {
 		in, out := &in.ServerVulnerabilityAssessmentIDRef, &out.ServerVulnerabilityAssessmentIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ServerVulnerabilityAssessmentIDSelector != nil {
 		in, out := &in.ServerVulnerabilityAssessmentIDSelector, &out.ServerVulnerabilityAssessmentIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 }
@@ -1989,7 +1989,7 @@ func (in *MSSQLDatabaseVulnerabilityAssessmentRuleBaselineSpec) DeepCopy() *MSSQ
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *MSSQLDatabaseVulnerabilityAssessmentRuleBaselineStatus) DeepCopyInto(out *MSSQLDatabaseVulnerabilityAssessmentRuleBaselineStatus) {
 	*out = *in
-	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.ManagedResourceStatus.DeepCopyInto(&out.ManagedResourceStatus)
 	in.AtProvider.DeepCopyInto(&out.AtProvider)
 }
 
@@ -2289,12 +2289,12 @@ func (in *MSSQLElasticPoolParameters) DeepCopyInto(out *MSSQLElasticPoolParamete
 	}
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ServerName != nil {
@@ -2304,12 +2304,12 @@ func (in *MSSQLElasticPoolParameters) DeepCopyInto(out *MSSQLElasticPoolParamete
 	}
 	if in.ServerNameRef != nil {
 		in, out := &in.ServerNameRef, &out.ServerNameRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ServerNameSelector != nil {
 		in, out := &in.ServerNameSelector, &out.ServerNameSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Sku != nil {
@@ -2371,7 +2371,7 @@ func (in *MSSQLElasticPoolSpec) DeepCopy() *MSSQLElasticPoolSpec {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *MSSQLElasticPoolStatus) DeepCopyInto(out *MSSQLElasticPoolStatus) {
 	*out = *in
-	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.ManagedResourceStatus.DeepCopyInto(&out.ManagedResourceStatus)
 	in.AtProvider.DeepCopyInto(&out.AtProvider)
 }
 
@@ -2428,14 +2428,14 @@ func (in *MSSQLFailoverGroupInitParameters) DeepCopyInto(out *MSSQLFailoverGroup
 	}
 	if in.DatabasesRefs != nil {
 		in, out := &in.DatabasesRefs, &out.DatabasesRefs
-		*out = make([]v1.NamespacedReference, len(*in))
+		*out = make([]v2.NamespacedReference, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.DatabasesSelector != nil {
 		in, out := &in.DatabasesSelector, &out.DatabasesSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.PartnerServer != nil {
@@ -2600,14 +2600,14 @@ func (in *MSSQLFailoverGroupParameters) DeepCopyInto(out *MSSQLFailoverGroupPara
 	}
 	if in.DatabasesRefs != nil {
 		in, out := &in.DatabasesRefs, &out.DatabasesRefs
-		*out = make([]v1.NamespacedReference, len(*in))
+		*out = make([]v2.NamespacedReference, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.DatabasesSelector != nil {
 		in, out := &in.DatabasesSelector, &out.DatabasesSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.PartnerServer != nil {
@@ -2634,12 +2634,12 @@ func (in *MSSQLFailoverGroupParameters) DeepCopyInto(out *MSSQLFailoverGroupPara
 	}
 	if in.ServerIDRef != nil {
 		in, out := &in.ServerIDRef, &out.ServerIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ServerIDSelector != nil {
 		in, out := &in.ServerIDSelector, &out.ServerIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Tags != nil {
@@ -2691,7 +2691,7 @@ func (in *MSSQLFailoverGroupSpec) DeepCopy() *MSSQLFailoverGroupSpec {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *MSSQLFailoverGroupStatus) DeepCopyInto(out *MSSQLFailoverGroupStatus) {
 	*out = *in
-	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.ManagedResourceStatus.DeepCopyInto(&out.ManagedResourceStatus)
 	in.AtProvider.DeepCopyInto(&out.AtProvider)
 }
 
@@ -2839,12 +2839,12 @@ func (in *MSSQLFirewallRuleParameters) DeepCopyInto(out *MSSQLFirewallRuleParame
 	}
 	if in.ServerIDRef != nil {
 		in, out := &in.ServerIDRef, &out.ServerIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ServerIDSelector != nil {
 		in, out := &in.ServerIDSelector, &out.ServerIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.StartIPAddress != nil {
@@ -2885,7 +2885,7 @@ func (in *MSSQLFirewallRuleSpec) DeepCopy() *MSSQLFirewallRuleSpec {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *MSSQLFirewallRuleStatus) DeepCopyInto(out *MSSQLFirewallRuleStatus) {
 	*out = *in
-	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.ManagedResourceStatus.DeepCopyInto(&out.ManagedResourceStatus)
 	in.AtProvider.DeepCopyInto(&out.AtProvider)
 }
 
@@ -3029,12 +3029,12 @@ func (in *MSSQLJobAgentInitParameters) DeepCopyInto(out *MSSQLJobAgentInitParame
 	}
 	if in.DatabaseIDRef != nil {
 		in, out := &in.DatabaseIDRef, &out.DatabaseIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.DatabaseIDSelector != nil {
 		in, out := &in.DatabaseIDSelector, &out.DatabaseIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Identity != nil {
@@ -3188,12 +3188,12 @@ func (in *MSSQLJobAgentParameters) DeepCopyInto(out *MSSQLJobAgentParameters) {
 	}
 	if in.DatabaseIDRef != nil {
 		in, out := &in.DatabaseIDRef, &out.DatabaseIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.DatabaseIDSelector != nil {
 		in, out := &in.DatabaseIDSelector, &out.DatabaseIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Identity != nil {
@@ -3265,7 +3265,7 @@ func (in *MSSQLJobAgentSpec) DeepCopy() *MSSQLJobAgentSpec {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *MSSQLJobAgentStatus) DeepCopyInto(out *MSSQLJobAgentStatus) {
 	*out = *in
-	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.ManagedResourceStatus.DeepCopyInto(&out.ManagedResourceStatus)
 	in.AtProvider.DeepCopyInto(&out.AtProvider)
 }
 
@@ -3311,7 +3311,7 @@ func (in *MSSQLJobCredentialInitParameters) DeepCopyInto(out *MSSQLJobCredential
 	*out = *in
 	if in.PasswordSecretRef != nil {
 		in, out := &in.PasswordSecretRef, &out.PasswordSecretRef
-		*out = new(v1.LocalSecretKeySelector)
+		*out = new(v2.LocalSecretKeySelector)
 		**out = **in
 	}
 	if in.PasswordWo != nil {
@@ -3423,17 +3423,17 @@ func (in *MSSQLJobCredentialParameters) DeepCopyInto(out *MSSQLJobCredentialPara
 	}
 	if in.JobAgentIDRef != nil {
 		in, out := &in.JobAgentIDRef, &out.JobAgentIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.JobAgentIDSelector != nil {
 		in, out := &in.JobAgentIDSelector, &out.JobAgentIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.PasswordSecretRef != nil {
 		in, out := &in.PasswordSecretRef, &out.PasswordSecretRef
-		*out = new(v1.LocalSecretKeySelector)
+		*out = new(v2.LocalSecretKeySelector)
 		**out = **in
 	}
 	if in.PasswordWo != nil {
@@ -3484,7 +3484,7 @@ func (in *MSSQLJobCredentialSpec) DeepCopy() *MSSQLJobCredentialSpec {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *MSSQLJobCredentialStatus) DeepCopyInto(out *MSSQLJobCredentialStatus) {
 	*out = *in
-	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.ManagedResourceStatus.DeepCopyInto(&out.ManagedResourceStatus)
 	in.AtProvider.DeepCopyInto(&out.AtProvider)
 }
 
@@ -3794,12 +3794,12 @@ func (in *MSSQLManagedDatabaseParameters) DeepCopyInto(out *MSSQLManagedDatabase
 	}
 	if in.ManagedInstanceIDRef != nil {
 		in, out := &in.ManagedInstanceIDRef, &out.ManagedInstanceIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ManagedInstanceIDSelector != nil {
 		in, out := &in.ManagedInstanceIDSelector, &out.ManagedInstanceIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.PointInTimeRestore != nil {
@@ -3861,7 +3861,7 @@ func (in *MSSQLManagedDatabaseSpec) DeepCopy() *MSSQLManagedDatabaseSpec {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *MSSQLManagedDatabaseStatus) DeepCopyInto(out *MSSQLManagedDatabaseStatus) {
 	*out = *in
-	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.ManagedResourceStatus.DeepCopyInto(&out.ManagedResourceStatus)
 	in.AtProvider.DeepCopyInto(&out.AtProvider)
 }
 
@@ -4061,12 +4061,12 @@ func (in *MSSQLManagedInstanceActiveDirectoryAdministratorParameters) DeepCopyIn
 	}
 	if in.ManagedInstanceIDRef != nil {
 		in, out := &in.ManagedInstanceIDRef, &out.ManagedInstanceIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ManagedInstanceIDSelector != nil {
 		in, out := &in.ManagedInstanceIDSelector, &out.ManagedInstanceIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ObjectID != nil {
@@ -4112,7 +4112,7 @@ func (in *MSSQLManagedInstanceActiveDirectoryAdministratorSpec) DeepCopy() *MSSQ
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *MSSQLManagedInstanceActiveDirectoryAdministratorStatus) DeepCopyInto(out *MSSQLManagedInstanceActiveDirectoryAdministratorStatus) {
 	*out = *in
-	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.ManagedResourceStatus.DeepCopyInto(&out.ManagedResourceStatus)
 	in.AtProvider.DeepCopyInto(&out.AtProvider)
 }
 
@@ -4168,12 +4168,12 @@ func (in *MSSQLManagedInstanceFailoverGroupInitParameters) DeepCopyInto(out *MSS
 	}
 	if in.ManagedInstanceIDRef != nil {
 		in, out := &in.ManagedInstanceIDRef, &out.ManagedInstanceIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ManagedInstanceIDSelector != nil {
 		in, out := &in.ManagedInstanceIDSelector, &out.ManagedInstanceIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.PartnerManagedInstanceID != nil {
@@ -4183,12 +4183,12 @@ func (in *MSSQLManagedInstanceFailoverGroupInitParameters) DeepCopyInto(out *MSS
 	}
 	if in.PartnerManagedInstanceIDRef != nil {
 		in, out := &in.PartnerManagedInstanceIDRef, &out.PartnerManagedInstanceIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.PartnerManagedInstanceIDSelector != nil {
 		in, out := &in.PartnerManagedInstanceIDSelector, &out.PartnerManagedInstanceIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ReadWriteEndpointFailoverPolicy != nil {
@@ -4327,12 +4327,12 @@ func (in *MSSQLManagedInstanceFailoverGroupParameters) DeepCopyInto(out *MSSQLMa
 	}
 	if in.ManagedInstanceIDRef != nil {
 		in, out := &in.ManagedInstanceIDRef, &out.ManagedInstanceIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ManagedInstanceIDSelector != nil {
 		in, out := &in.ManagedInstanceIDSelector, &out.ManagedInstanceIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.PartnerManagedInstanceID != nil {
@@ -4342,12 +4342,12 @@ func (in *MSSQLManagedInstanceFailoverGroupParameters) DeepCopyInto(out *MSSQLMa
 	}
 	if in.PartnerManagedInstanceIDRef != nil {
 		in, out := &in.PartnerManagedInstanceIDRef, &out.PartnerManagedInstanceIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.PartnerManagedInstanceIDSelector != nil {
 		in, out := &in.PartnerManagedInstanceIDSelector, &out.PartnerManagedInstanceIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ReadWriteEndpointFailoverPolicy != nil {
@@ -4473,7 +4473,7 @@ func (in *MSSQLManagedInstanceFailoverGroupSpec) DeepCopy() *MSSQLManagedInstanc
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *MSSQLManagedInstanceFailoverGroupStatus) DeepCopyInto(out *MSSQLManagedInstanceFailoverGroupStatus) {
 	*out = *in
-	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.ManagedResourceStatus.DeepCopyInto(&out.ManagedResourceStatus)
 	in.AtProvider.DeepCopyInto(&out.AtProvider)
 }
 
@@ -4600,7 +4600,7 @@ func (in *MSSQLManagedInstanceInitParameters) DeepCopyInto(out *MSSQLManagedInst
 	}
 	if in.AdministratorLoginPasswordSecretRef != nil {
 		in, out := &in.AdministratorLoginPasswordSecretRef, &out.AdministratorLoginPasswordSecretRef
-		*out = new(v1.LocalSecretKeySelector)
+		*out = new(v2.LocalSecretKeySelector)
 		**out = **in
 	}
 	if in.AzureActiveDirectoryAdministrator != nil {
@@ -4620,12 +4620,12 @@ func (in *MSSQLManagedInstanceInitParameters) DeepCopyInto(out *MSSQLManagedInst
 	}
 	if in.DNSZonePartnerIDRef != nil {
 		in, out := &in.DNSZonePartnerIDRef, &out.DNSZonePartnerIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.DNSZonePartnerIDSelector != nil {
 		in, out := &in.DNSZonePartnerIDSelector, &out.DNSZonePartnerIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.DatabaseFormat != nil {
@@ -4710,12 +4710,12 @@ func (in *MSSQLManagedInstanceInitParameters) DeepCopyInto(out *MSSQLManagedInst
 	}
 	if in.SubnetIDRef != nil {
 		in, out := &in.SubnetIDRef, &out.SubnetIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.SubnetIDSelector != nil {
 		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Tags != nil {
@@ -4969,7 +4969,7 @@ func (in *MSSQLManagedInstanceParameters) DeepCopyInto(out *MSSQLManagedInstance
 	}
 	if in.AdministratorLoginPasswordSecretRef != nil {
 		in, out := &in.AdministratorLoginPasswordSecretRef, &out.AdministratorLoginPasswordSecretRef
-		*out = new(v1.LocalSecretKeySelector)
+		*out = new(v2.LocalSecretKeySelector)
 		**out = **in
 	}
 	if in.AzureActiveDirectoryAdministrator != nil {
@@ -4989,12 +4989,12 @@ func (in *MSSQLManagedInstanceParameters) DeepCopyInto(out *MSSQLManagedInstance
 	}
 	if in.DNSZonePartnerIDRef != nil {
 		in, out := &in.DNSZonePartnerIDRef, &out.DNSZonePartnerIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.DNSZonePartnerIDSelector != nil {
 		in, out := &in.DNSZonePartnerIDSelector, &out.DNSZonePartnerIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.DatabaseFormat != nil {
@@ -5054,12 +5054,12 @@ func (in *MSSQLManagedInstanceParameters) DeepCopyInto(out *MSSQLManagedInstance
 	}
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ServicePrincipalType != nil {
@@ -5094,12 +5094,12 @@ func (in *MSSQLManagedInstanceParameters) DeepCopyInto(out *MSSQLManagedInstance
 	}
 	if in.SubnetIDRef != nil {
 		in, out := &in.SubnetIDRef, &out.SubnetIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.SubnetIDSelector != nil {
 		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Tags != nil {
@@ -5166,7 +5166,7 @@ func (in *MSSQLManagedInstanceSpec) DeepCopy() *MSSQLManagedInstanceSpec {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *MSSQLManagedInstanceStatus) DeepCopyInto(out *MSSQLManagedInstanceStatus) {
 	*out = *in
-	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.ManagedResourceStatus.DeepCopyInto(&out.ManagedResourceStatus)
 	in.AtProvider.DeepCopyInto(&out.AtProvider)
 }
 
@@ -5222,12 +5222,12 @@ func (in *MSSQLManagedInstanceTransparentDataEncryptionInitParameters) DeepCopyI
 	}
 	if in.KeyVaultKeyIDRef != nil {
 		in, out := &in.KeyVaultKeyIDRef, &out.KeyVaultKeyIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.KeyVaultKeyIDSelector != nil {
 		in, out := &in.KeyVaultKeyIDSelector, &out.KeyVaultKeyIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ManagedHSMKeyID != nil {
@@ -5334,12 +5334,12 @@ func (in *MSSQLManagedInstanceTransparentDataEncryptionParameters) DeepCopyInto(
 	}
 	if in.KeyVaultKeyIDRef != nil {
 		in, out := &in.KeyVaultKeyIDRef, &out.KeyVaultKeyIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.KeyVaultKeyIDSelector != nil {
 		in, out := &in.KeyVaultKeyIDSelector, &out.KeyVaultKeyIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ManagedHSMKeyID != nil {
@@ -5354,12 +5354,12 @@ func (in *MSSQLManagedInstanceTransparentDataEncryptionParameters) DeepCopyInto(
 	}
 	if in.ManagedInstanceIDRef != nil {
 		in, out := &in.ManagedInstanceIDRef, &out.ManagedInstanceIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ManagedInstanceIDSelector != nil {
 		in, out := &in.ManagedInstanceIDSelector, &out.ManagedInstanceIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 }
@@ -5395,7 +5395,7 @@ func (in *MSSQLManagedInstanceTransparentDataEncryptionSpec) DeepCopy() *MSSQLMa
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *MSSQLManagedInstanceTransparentDataEncryptionStatus) DeepCopyInto(out *MSSQLManagedInstanceTransparentDataEncryptionStatus) {
 	*out = *in
-	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.ManagedResourceStatus.DeepCopyInto(&out.ManagedResourceStatus)
 	in.AtProvider.DeepCopyInto(&out.AtProvider)
 }
 
@@ -5446,7 +5446,7 @@ func (in *MSSQLManagedInstanceVulnerabilityAssessmentInitParameters) DeepCopyInt
 	}
 	if in.StorageAccountAccessKeySecretRef != nil {
 		in, out := &in.StorageAccountAccessKeySecretRef, &out.StorageAccountAccessKeySecretRef
-		*out = new(v1.LocalSecretKeySelector)
+		*out = new(v2.LocalSecretKeySelector)
 		**out = **in
 	}
 	if in.StorageContainerPath != nil {
@@ -5456,7 +5456,7 @@ func (in *MSSQLManagedInstanceVulnerabilityAssessmentInitParameters) DeepCopyInt
 	}
 	if in.StorageContainerSASKeySecretRef != nil {
 		in, out := &in.StorageContainerSASKeySecretRef, &out.StorageContainerSASKeySecretRef
-		*out = new(v1.LocalSecretKeySelector)
+		*out = new(v2.LocalSecretKeySelector)
 		**out = **in
 	}
 }
@@ -5548,12 +5548,12 @@ func (in *MSSQLManagedInstanceVulnerabilityAssessmentParameters) DeepCopyInto(ou
 	}
 	if in.ManagedInstanceIDRef != nil {
 		in, out := &in.ManagedInstanceIDRef, &out.ManagedInstanceIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ManagedInstanceIDSelector != nil {
 		in, out := &in.ManagedInstanceIDSelector, &out.ManagedInstanceIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.RecurringScans != nil {
@@ -5563,7 +5563,7 @@ func (in *MSSQLManagedInstanceVulnerabilityAssessmentParameters) DeepCopyInto(ou
 	}
 	if in.StorageAccountAccessKeySecretRef != nil {
 		in, out := &in.StorageAccountAccessKeySecretRef, &out.StorageAccountAccessKeySecretRef
-		*out = new(v1.LocalSecretKeySelector)
+		*out = new(v2.LocalSecretKeySelector)
 		**out = **in
 	}
 	if in.StorageContainerPath != nil {
@@ -5573,7 +5573,7 @@ func (in *MSSQLManagedInstanceVulnerabilityAssessmentParameters) DeepCopyInto(ou
 	}
 	if in.StorageContainerSASKeySecretRef != nil {
 		in, out := &in.StorageContainerSASKeySecretRef, &out.StorageContainerSASKeySecretRef
-		*out = new(v1.LocalSecretKeySelector)
+		*out = new(v2.LocalSecretKeySelector)
 		**out = **in
 	}
 }
@@ -5609,7 +5609,7 @@ func (in *MSSQLManagedInstanceVulnerabilityAssessmentSpec) DeepCopy() *MSSQLMana
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *MSSQLManagedInstanceVulnerabilityAssessmentStatus) DeepCopyInto(out *MSSQLManagedInstanceVulnerabilityAssessmentStatus) {
 	*out = *in
-	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.ManagedResourceStatus.DeepCopyInto(&out.ManagedResourceStatus)
 	in.AtProvider.DeepCopyInto(&out.AtProvider)
 }
 
@@ -5732,12 +5732,12 @@ func (in *MSSQLOutboundFirewallRuleParameters) DeepCopyInto(out *MSSQLOutboundFi
 	}
 	if in.ServerIDRef != nil {
 		in, out := &in.ServerIDRef, &out.ServerIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ServerIDSelector != nil {
 		in, out := &in.ServerIDSelector, &out.ServerIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 }
@@ -5773,7 +5773,7 @@ func (in *MSSQLOutboundFirewallRuleSpec) DeepCopy() *MSSQLOutboundFirewallRuleSp
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *MSSQLOutboundFirewallRuleStatus) DeepCopyInto(out *MSSQLOutboundFirewallRuleStatus) {
 	*out = *in
-	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.ManagedResourceStatus.DeepCopyInto(&out.ManagedResourceStatus)
 	in.AtProvider.DeepCopyInto(&out.AtProvider)
 }
 
@@ -5928,12 +5928,12 @@ func (in *MSSQLServerDNSAliasParameters) DeepCopyInto(out *MSSQLServerDNSAliasPa
 	}
 	if in.MSSQLServerIDRef != nil {
 		in, out := &in.MSSQLServerIDRef, &out.MSSQLServerIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.MSSQLServerIDSelector != nil {
 		in, out := &in.MSSQLServerIDSelector, &out.MSSQLServerIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 }
@@ -5969,7 +5969,7 @@ func (in *MSSQLServerDNSAliasSpec) DeepCopy() *MSSQLServerDNSAliasSpec {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *MSSQLServerDNSAliasStatus) DeepCopyInto(out *MSSQLServerDNSAliasStatus) {
 	*out = *in
-	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.ManagedResourceStatus.DeepCopyInto(&out.ManagedResourceStatus)
 	in.AtProvider.DeepCopyInto(&out.AtProvider)
 }
 
@@ -5999,14 +5999,14 @@ func (in *MSSQLServerIdentityInitParameters) DeepCopyInto(out *MSSQLServerIdenti
 	}
 	if in.IdentityIdsRefs != nil {
 		in, out := &in.IdentityIdsRefs, &out.IdentityIdsRefs
-		*out = make([]v1.NamespacedReference, len(*in))
+		*out = make([]v2.NamespacedReference, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.IdentityIdsSelector != nil {
 		in, out := &in.IdentityIdsSelector, &out.IdentityIdsSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Type != nil {
@@ -6083,14 +6083,14 @@ func (in *MSSQLServerIdentityParameters) DeepCopyInto(out *MSSQLServerIdentityPa
 	}
 	if in.IdentityIdsRefs != nil {
 		in, out := &in.IdentityIdsRefs, &out.IdentityIdsRefs
-		*out = make([]v1.NamespacedReference, len(*in))
+		*out = make([]v2.NamespacedReference, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.IdentityIdsSelector != nil {
 		in, out := &in.IdentityIdsSelector, &out.IdentityIdsSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Type != nil {
@@ -6120,12 +6120,12 @@ func (in *MSSQLServerInitParameters) DeepCopyInto(out *MSSQLServerInitParameters
 	}
 	if in.AdministratorLoginPasswordSecretRef != nil {
 		in, out := &in.AdministratorLoginPasswordSecretRef, &out.AdministratorLoginPasswordSecretRef
-		*out = new(v1.LocalSecretKeySelector)
+		*out = new(v2.LocalSecretKeySelector)
 		**out = **in
 	}
 	if in.AdministratorLoginPasswordWoSecretRef != nil {
 		in, out := &in.AdministratorLoginPasswordWoSecretRef, &out.AdministratorLoginPasswordWoSecretRef
-		*out = new(v1.LocalSecretKeySelector)
+		*out = new(v2.LocalSecretKeySelector)
 		**out = **in
 	}
 	if in.AdministratorLoginPasswordWoVersion != nil {
@@ -6175,12 +6175,12 @@ func (in *MSSQLServerInitParameters) DeepCopyInto(out *MSSQLServerInitParameters
 	}
 	if in.PrimaryUserAssignedIdentityIDRef != nil {
 		in, out := &in.PrimaryUserAssignedIdentityIDRef, &out.PrimaryUserAssignedIdentityIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.PrimaryUserAssignedIdentityIDSelector != nil {
 		in, out := &in.PrimaryUserAssignedIdentityIDSelector, &out.PrimaryUserAssignedIdentityIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.PublicNetworkAccessEnabled != nil {
@@ -6211,12 +6211,12 @@ func (in *MSSQLServerInitParameters) DeepCopyInto(out *MSSQLServerInitParameters
 	}
 	if in.TransparentDataEncryptionKeyVaultKeyIDRef != nil {
 		in, out := &in.TransparentDataEncryptionKeyVaultKeyIDRef, &out.TransparentDataEncryptionKeyVaultKeyIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.TransparentDataEncryptionKeyVaultKeyIDSelector != nil {
 		in, out := &in.TransparentDataEncryptionKeyVaultKeyIDSelector, &out.TransparentDataEncryptionKeyVaultKeyIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Version != nil {
@@ -6305,12 +6305,12 @@ func (in *MSSQLServerMicrosoftSupportAuditingPolicyInitParameters) DeepCopyInto(
 	}
 	if in.BlobStorageEndpointRef != nil {
 		in, out := &in.BlobStorageEndpointRef, &out.BlobStorageEndpointRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.BlobStorageEndpointSelector != nil {
 		in, out := &in.BlobStorageEndpointSelector, &out.BlobStorageEndpointSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Enabled != nil {
@@ -6325,12 +6325,12 @@ func (in *MSSQLServerMicrosoftSupportAuditingPolicyInitParameters) DeepCopyInto(
 	}
 	if in.StorageAccountAccessKeySecretRef != nil {
 		in, out := &in.StorageAccountAccessKeySecretRef, &out.StorageAccountAccessKeySecretRef
-		*out = new(v1.LocalSecretKeySelector)
+		*out = new(v2.LocalSecretKeySelector)
 		**out = **in
 	}
 	if in.StorageAccountSubscriptionIDSecretRef != nil {
 		in, out := &in.StorageAccountSubscriptionIDSecretRef, &out.StorageAccountSubscriptionIDSecretRef
-		*out = new(v1.LocalSecretKeySelector)
+		*out = new(v2.LocalSecretKeySelector)
 		**out = **in
 	}
 }
@@ -6427,12 +6427,12 @@ func (in *MSSQLServerMicrosoftSupportAuditingPolicyParameters) DeepCopyInto(out 
 	}
 	if in.BlobStorageEndpointRef != nil {
 		in, out := &in.BlobStorageEndpointRef, &out.BlobStorageEndpointRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.BlobStorageEndpointSelector != nil {
 		in, out := &in.BlobStorageEndpointSelector, &out.BlobStorageEndpointSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Enabled != nil {
@@ -6452,22 +6452,22 @@ func (in *MSSQLServerMicrosoftSupportAuditingPolicyParameters) DeepCopyInto(out 
 	}
 	if in.ServerIDRef != nil {
 		in, out := &in.ServerIDRef, &out.ServerIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ServerIDSelector != nil {
 		in, out := &in.ServerIDSelector, &out.ServerIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.StorageAccountAccessKeySecretRef != nil {
 		in, out := &in.StorageAccountAccessKeySecretRef, &out.StorageAccountAccessKeySecretRef
-		*out = new(v1.LocalSecretKeySelector)
+		*out = new(v2.LocalSecretKeySelector)
 		**out = **in
 	}
 	if in.StorageAccountSubscriptionIDSecretRef != nil {
 		in, out := &in.StorageAccountSubscriptionIDSecretRef, &out.StorageAccountSubscriptionIDSecretRef
-		*out = new(v1.LocalSecretKeySelector)
+		*out = new(v2.LocalSecretKeySelector)
 		**out = **in
 	}
 }
@@ -6503,7 +6503,7 @@ func (in *MSSQLServerMicrosoftSupportAuditingPolicySpec) DeepCopy() *MSSQLServer
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *MSSQLServerMicrosoftSupportAuditingPolicyStatus) DeepCopyInto(out *MSSQLServerMicrosoftSupportAuditingPolicyStatus) {
 	*out = *in
-	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.ManagedResourceStatus.DeepCopyInto(&out.ManagedResourceStatus)
 	in.AtProvider.DeepCopyInto(&out.AtProvider)
 }
 
@@ -6649,12 +6649,12 @@ func (in *MSSQLServerParameters) DeepCopyInto(out *MSSQLServerParameters) {
 	}
 	if in.AdministratorLoginPasswordSecretRef != nil {
 		in, out := &in.AdministratorLoginPasswordSecretRef, &out.AdministratorLoginPasswordSecretRef
-		*out = new(v1.LocalSecretKeySelector)
+		*out = new(v2.LocalSecretKeySelector)
 		**out = **in
 	}
 	if in.AdministratorLoginPasswordWoSecretRef != nil {
 		in, out := &in.AdministratorLoginPasswordWoSecretRef, &out.AdministratorLoginPasswordWoSecretRef
-		*out = new(v1.LocalSecretKeySelector)
+		*out = new(v2.LocalSecretKeySelector)
 		**out = **in
 	}
 	if in.AdministratorLoginPasswordWoVersion != nil {
@@ -6704,12 +6704,12 @@ func (in *MSSQLServerParameters) DeepCopyInto(out *MSSQLServerParameters) {
 	}
 	if in.PrimaryUserAssignedIdentityIDRef != nil {
 		in, out := &in.PrimaryUserAssignedIdentityIDRef, &out.PrimaryUserAssignedIdentityIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.PrimaryUserAssignedIdentityIDSelector != nil {
 		in, out := &in.PrimaryUserAssignedIdentityIDSelector, &out.PrimaryUserAssignedIdentityIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.PublicNetworkAccessEnabled != nil {
@@ -6724,12 +6724,12 @@ func (in *MSSQLServerParameters) DeepCopyInto(out *MSSQLServerParameters) {
 	}
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Tags != nil {
@@ -6755,12 +6755,12 @@ func (in *MSSQLServerParameters) DeepCopyInto(out *MSSQLServerParameters) {
 	}
 	if in.TransparentDataEncryptionKeyVaultKeyIDRef != nil {
 		in, out := &in.TransparentDataEncryptionKeyVaultKeyIDRef, &out.TransparentDataEncryptionKeyVaultKeyIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.TransparentDataEncryptionKeyVaultKeyIDSelector != nil {
 		in, out := &in.TransparentDataEncryptionKeyVaultKeyIDSelector, &out.TransparentDataEncryptionKeyVaultKeyIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Version != nil {
@@ -6849,7 +6849,7 @@ func (in *MSSQLServerSecurityAlertPolicyInitParameters) DeepCopyInto(out *MSSQLS
 	}
 	if in.StorageAccountAccessKeySecretRef != nil {
 		in, out := &in.StorageAccountAccessKeySecretRef, &out.StorageAccountAccessKeySecretRef
-		*out = new(v1.LocalSecretKeySelector)
+		*out = new(v2.LocalSecretKeySelector)
 		**out = **in
 	}
 	if in.StorageEndpoint != nil {
@@ -6859,12 +6859,12 @@ func (in *MSSQLServerSecurityAlertPolicyInitParameters) DeepCopyInto(out *MSSQLS
 	}
 	if in.StorageEndpointRef != nil {
 		in, out := &in.StorageEndpointRef, &out.StorageEndpointRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.StorageEndpointSelector != nil {
 		in, out := &in.StorageEndpointSelector, &out.StorageEndpointSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 }
@@ -7020,12 +7020,12 @@ func (in *MSSQLServerSecurityAlertPolicyParameters) DeepCopyInto(out *MSSQLServe
 	}
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.RetentionDays != nil {
@@ -7040,12 +7040,12 @@ func (in *MSSQLServerSecurityAlertPolicyParameters) DeepCopyInto(out *MSSQLServe
 	}
 	if in.ServerNameRef != nil {
 		in, out := &in.ServerNameRef, &out.ServerNameRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ServerNameSelector != nil {
 		in, out := &in.ServerNameSelector, &out.ServerNameSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.State != nil {
@@ -7055,7 +7055,7 @@ func (in *MSSQLServerSecurityAlertPolicyParameters) DeepCopyInto(out *MSSQLServe
 	}
 	if in.StorageAccountAccessKeySecretRef != nil {
 		in, out := &in.StorageAccountAccessKeySecretRef, &out.StorageAccountAccessKeySecretRef
-		*out = new(v1.LocalSecretKeySelector)
+		*out = new(v2.LocalSecretKeySelector)
 		**out = **in
 	}
 	if in.StorageEndpoint != nil {
@@ -7065,12 +7065,12 @@ func (in *MSSQLServerSecurityAlertPolicyParameters) DeepCopyInto(out *MSSQLServe
 	}
 	if in.StorageEndpointRef != nil {
 		in, out := &in.StorageEndpointRef, &out.StorageEndpointRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.StorageEndpointSelector != nil {
 		in, out := &in.StorageEndpointSelector, &out.StorageEndpointSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 }
@@ -7106,7 +7106,7 @@ func (in *MSSQLServerSecurityAlertPolicySpec) DeepCopy() *MSSQLServerSecurityAle
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *MSSQLServerSecurityAlertPolicyStatus) DeepCopyInto(out *MSSQLServerSecurityAlertPolicyStatus) {
 	*out = *in
-	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.ManagedResourceStatus.DeepCopyInto(&out.ManagedResourceStatus)
 	in.AtProvider.DeepCopyInto(&out.AtProvider)
 }
 
@@ -7141,7 +7141,7 @@ func (in *MSSQLServerSpec) DeepCopy() *MSSQLServerSpec {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *MSSQLServerStatus) DeepCopyInto(out *MSSQLServerStatus) {
 	*out = *in
-	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.ManagedResourceStatus.DeepCopyInto(&out.ManagedResourceStatus)
 	in.AtProvider.DeepCopyInto(&out.AtProvider)
 }
 
@@ -7197,12 +7197,12 @@ func (in *MSSQLServerTransparentDataEncryptionInitParameters) DeepCopyInto(out *
 	}
 	if in.KeyVaultKeyIDRef != nil {
 		in, out := &in.KeyVaultKeyIDRef, &out.KeyVaultKeyIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.KeyVaultKeyIDSelector != nil {
 		in, out := &in.KeyVaultKeyIDSelector, &out.KeyVaultKeyIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ManagedHSMKeyID != nil {
@@ -7309,12 +7309,12 @@ func (in *MSSQLServerTransparentDataEncryptionParameters) DeepCopyInto(out *MSSQ
 	}
 	if in.KeyVaultKeyIDRef != nil {
 		in, out := &in.KeyVaultKeyIDRef, &out.KeyVaultKeyIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.KeyVaultKeyIDSelector != nil {
 		in, out := &in.KeyVaultKeyIDSelector, &out.KeyVaultKeyIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ManagedHSMKeyID != nil {
@@ -7329,12 +7329,12 @@ func (in *MSSQLServerTransparentDataEncryptionParameters) DeepCopyInto(out *MSSQ
 	}
 	if in.ServerIDRef != nil {
 		in, out := &in.ServerIDRef, &out.ServerIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ServerIDSelector != nil {
 		in, out := &in.ServerIDSelector, &out.ServerIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 }
@@ -7370,7 +7370,7 @@ func (in *MSSQLServerTransparentDataEncryptionSpec) DeepCopy() *MSSQLServerTrans
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *MSSQLServerTransparentDataEncryptionStatus) DeepCopyInto(out *MSSQLServerTransparentDataEncryptionStatus) {
 	*out = *in
-	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.ManagedResourceStatus.DeepCopyInto(&out.ManagedResourceStatus)
 	in.AtProvider.DeepCopyInto(&out.AtProvider)
 }
 
@@ -7426,17 +7426,17 @@ func (in *MSSQLServerVulnerabilityAssessmentInitParameters) DeepCopyInto(out *MS
 	}
 	if in.ServerSecurityAlertPolicyIDRef != nil {
 		in, out := &in.ServerSecurityAlertPolicyIDRef, &out.ServerSecurityAlertPolicyIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ServerSecurityAlertPolicyIDSelector != nil {
 		in, out := &in.ServerSecurityAlertPolicyIDSelector, &out.ServerSecurityAlertPolicyIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.StorageAccountAccessKeySecretRef != nil {
 		in, out := &in.StorageAccountAccessKeySecretRef, &out.StorageAccountAccessKeySecretRef
-		*out = new(v1.LocalSecretKeySelector)
+		*out = new(v2.LocalSecretKeySelector)
 		**out = **in
 	}
 	if in.StorageContainerPath != nil {
@@ -7446,7 +7446,7 @@ func (in *MSSQLServerVulnerabilityAssessmentInitParameters) DeepCopyInto(out *MS
 	}
 	if in.StorageContainerSASKeySecretRef != nil {
 		in, out := &in.StorageContainerSASKeySecretRef, &out.StorageContainerSASKeySecretRef
-		*out = new(v1.LocalSecretKeySelector)
+		*out = new(v2.LocalSecretKeySelector)
 		**out = **in
 	}
 }
@@ -7543,17 +7543,17 @@ func (in *MSSQLServerVulnerabilityAssessmentParameters) DeepCopyInto(out *MSSQLS
 	}
 	if in.ServerSecurityAlertPolicyIDRef != nil {
 		in, out := &in.ServerSecurityAlertPolicyIDRef, &out.ServerSecurityAlertPolicyIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ServerSecurityAlertPolicyIDSelector != nil {
 		in, out := &in.ServerSecurityAlertPolicyIDSelector, &out.ServerSecurityAlertPolicyIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.StorageAccountAccessKeySecretRef != nil {
 		in, out := &in.StorageAccountAccessKeySecretRef, &out.StorageAccountAccessKeySecretRef
-		*out = new(v1.LocalSecretKeySelector)
+		*out = new(v2.LocalSecretKeySelector)
 		**out = **in
 	}
 	if in.StorageContainerPath != nil {
@@ -7563,7 +7563,7 @@ func (in *MSSQLServerVulnerabilityAssessmentParameters) DeepCopyInto(out *MSSQLS
 	}
 	if in.StorageContainerSASKeySecretRef != nil {
 		in, out := &in.StorageContainerSASKeySecretRef, &out.StorageContainerSASKeySecretRef
-		*out = new(v1.LocalSecretKeySelector)
+		*out = new(v2.LocalSecretKeySelector)
 		**out = **in
 	}
 }
@@ -7707,7 +7707,7 @@ func (in *MSSQLServerVulnerabilityAssessmentSpec) DeepCopy() *MSSQLServerVulnera
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *MSSQLServerVulnerabilityAssessmentStatus) DeepCopyInto(out *MSSQLServerVulnerabilityAssessmentStatus) {
 	*out = *in
-	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.ManagedResourceStatus.DeepCopyInto(&out.ManagedResourceStatus)
 	in.AtProvider.DeepCopyInto(&out.AtProvider)
 }
 
@@ -7763,12 +7763,12 @@ func (in *MSSQLVirtualNetworkRuleInitParameters) DeepCopyInto(out *MSSQLVirtualN
 	}
 	if in.SubnetIDRef != nil {
 		in, out := &in.SubnetIDRef, &out.SubnetIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.SubnetIDSelector != nil {
 		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 }
@@ -7865,12 +7865,12 @@ func (in *MSSQLVirtualNetworkRuleParameters) DeepCopyInto(out *MSSQLVirtualNetwo
 	}
 	if in.ServerIDRef != nil {
 		in, out := &in.ServerIDRef, &out.ServerIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ServerIDSelector != nil {
 		in, out := &in.ServerIDSelector, &out.ServerIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.SubnetID != nil {
@@ -7880,12 +7880,12 @@ func (in *MSSQLVirtualNetworkRuleParameters) DeepCopyInto(out *MSSQLVirtualNetwo
 	}
 	if in.SubnetIDRef != nil {
 		in, out := &in.SubnetIDRef, &out.SubnetIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.SubnetIDSelector != nil {
 		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 }
@@ -7921,7 +7921,7 @@ func (in *MSSQLVirtualNetworkRuleSpec) DeepCopy() *MSSQLVirtualNetworkRuleSpec {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *MSSQLVirtualNetworkRuleStatus) DeepCopyInto(out *MSSQLVirtualNetworkRuleStatus) {
 	*out = *in
-	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.ManagedResourceStatus.DeepCopyInto(&out.ManagedResourceStatus)
 	in.AtProvider.DeepCopyInto(&out.AtProvider)
 }
 
@@ -8000,12 +8000,12 @@ func (in *PartnerServerInitParameters) DeepCopyInto(out *PartnerServerInitParame
 	}
 	if in.IDRef != nil {
 		in, out := &in.IDRef, &out.IDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.IDSelector != nil {
 		in, out := &in.IDSelector, &out.IDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 }
@@ -8060,12 +8060,12 @@ func (in *PartnerServerParameters) DeepCopyInto(out *PartnerServerParameters) {
 	}
 	if in.IDRef != nil {
 		in, out := &in.IDRef, &out.IDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.IDSelector != nil {
 		in, out := &in.IDSelector, &out.IDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 }
@@ -8635,7 +8635,7 @@ func (in *ThreatDetectionPolicyInitParameters) DeepCopyInto(out *ThreatDetection
 	}
 	if in.StorageAccountAccessKeySecretRef != nil {
 		in, out := &in.StorageAccountAccessKeySecretRef, &out.StorageAccountAccessKeySecretRef
-		*out = new(v1.LocalSecretKeySelector)
+		*out = new(v2.LocalSecretKeySelector)
 		**out = **in
 	}
 	if in.StorageEndpoint != nil {
@@ -8754,7 +8754,7 @@ func (in *ThreatDetectionPolicyParameters) DeepCopyInto(out *ThreatDetectionPoli
 	}
 	if in.StorageAccountAccessKeySecretRef != nil {
 		in, out := &in.StorageAccountAccessKeySecretRef, &out.StorageAccountAccessKeySecretRef
-		*out = new(v1.LocalSecretKeySelector)
+		*out = new(v2.LocalSecretKeySelector)
 		**out = **in
 	}
 	if in.StorageEndpoint != nil {

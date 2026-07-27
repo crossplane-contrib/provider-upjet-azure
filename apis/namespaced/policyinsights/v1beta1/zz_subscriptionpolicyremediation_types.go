@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SubscriptionPolicyRemediationInitParameters struct {
@@ -32,11 +31,11 @@ type SubscriptionPolicyRemediationInitParameters struct {
 
 	// Reference to a SubscriptionPolicyAssignment in authorization to populate policyAssignmentId.
 	// +kubebuilder:validation:Optional
-	PolicyAssignmentIDRef *v1.NamespacedReference `json:"policyAssignmentIdRef,omitempty" tf:"-"`
+	PolicyAssignmentIDRef *v2.NamespacedReference `json:"policyAssignmentIdRef,omitempty" tf:"-"`
 
 	// Selector for a SubscriptionPolicyAssignment in authorization to populate policyAssignmentId.
 	// +kubebuilder:validation:Optional
-	PolicyAssignmentIDSelector *v1.NamespacedSelector `json:"policyAssignmentIdSelector,omitempty" tf:"-"`
+	PolicyAssignmentIDSelector *v2.NamespacedSelector `json:"policyAssignmentIdSelector,omitempty" tf:"-"`
 
 	// The unique ID for the policy definition reference within the policy set definition that should be remediated. Required when the policy assignment being remediated assigns a policy set definition.
 	PolicyDefinitionReferenceID *string `json:"policyDefinitionReferenceId,omitempty" tf:"policy_definition_reference_id,omitempty"`
@@ -103,11 +102,11 @@ type SubscriptionPolicyRemediationParameters struct {
 
 	// Reference to a SubscriptionPolicyAssignment in authorization to populate policyAssignmentId.
 	// +kubebuilder:validation:Optional
-	PolicyAssignmentIDRef *v1.NamespacedReference `json:"policyAssignmentIdRef,omitempty" tf:"-"`
+	PolicyAssignmentIDRef *v2.NamespacedReference `json:"policyAssignmentIdRef,omitempty" tf:"-"`
 
 	// Selector for a SubscriptionPolicyAssignment in authorization to populate policyAssignmentId.
 	// +kubebuilder:validation:Optional
-	PolicyAssignmentIDSelector *v1.NamespacedSelector `json:"policyAssignmentIdSelector,omitempty" tf:"-"`
+	PolicyAssignmentIDSelector *v2.NamespacedSelector `json:"policyAssignmentIdSelector,omitempty" tf:"-"`
 
 	// The unique ID for the policy definition reference within the policy set definition that should be remediated. Required when the policy assignment being remediated assigns a policy set definition.
 	// +kubebuilder:validation:Optional
@@ -145,8 +144,8 @@ type SubscriptionPolicyRemediationSpec struct {
 
 // SubscriptionPolicyRemediationStatus defines the observed state of SubscriptionPolicyRemediation.
 type SubscriptionPolicyRemediationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SubscriptionPolicyRemediationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SubscriptionPolicyRemediationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

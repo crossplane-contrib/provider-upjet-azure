@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ConfigurationInitParameters struct {
@@ -143,17 +143,17 @@ type PolicyVirtualMachineConfigurationAssignmentParameters struct {
 
 	// Reference to a WindowsVirtualMachine in compute to populate virtualMachineId.
 	// +kubebuilder:validation:Optional
-	VirtualMachineIDRef *v1.Reference `json:"virtualMachineIdRef,omitempty" tf:"-"`
+	VirtualMachineIDRef *v2.Reference `json:"virtualMachineIdRef,omitempty" tf:"-"`
 
 	// Selector for a WindowsVirtualMachine in compute to populate virtualMachineId.
 	// +kubebuilder:validation:Optional
-	VirtualMachineIDSelector *v1.Selector `json:"virtualMachineIdSelector,omitempty" tf:"-"`
+	VirtualMachineIDSelector *v2.Selector `json:"virtualMachineIdSelector,omitempty" tf:"-"`
 }
 
 // PolicyVirtualMachineConfigurationAssignmentSpec defines the desired state of PolicyVirtualMachineConfigurationAssignment
 type PolicyVirtualMachineConfigurationAssignmentSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     PolicyVirtualMachineConfigurationAssignmentParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   PolicyVirtualMachineConfigurationAssignmentParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -169,8 +169,8 @@ type PolicyVirtualMachineConfigurationAssignmentSpec struct {
 
 // PolicyVirtualMachineConfigurationAssignmentStatus defines the observed state of PolicyVirtualMachineConfigurationAssignment.
 type PolicyVirtualMachineConfigurationAssignmentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PolicyVirtualMachineConfigurationAssignmentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PolicyVirtualMachineConfigurationAssignmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

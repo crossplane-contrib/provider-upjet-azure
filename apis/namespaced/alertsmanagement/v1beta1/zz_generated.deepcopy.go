@@ -9,7 +9,7 @@
 package v1beta1
 
 import (
-	"github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	"github.com/crossplane/crossplane/apis/v2/core/v2"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 )
 
@@ -34,14 +34,14 @@ func (in *ActionGroupInitParameters) DeepCopyInto(out *ActionGroupInitParameters
 	}
 	if in.IdsRefs != nil {
 		in, out := &in.IdsRefs, &out.IdsRefs
-		*out = make([]v1.NamespacedReference, len(*in))
+		*out = make([]v2.NamespacedReference, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.IdsSelector != nil {
 		in, out := &in.IdsSelector, &out.IdsSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.WebhookPayload != nil {
@@ -118,14 +118,14 @@ func (in *ActionGroupParameters) DeepCopyInto(out *ActionGroupParameters) {
 	}
 	if in.IdsRefs != nil {
 		in, out := &in.IdsRefs, &out.IdsRefs
-		*out = make([]v1.NamespacedReference, len(*in))
+		*out = make([]v2.NamespacedReference, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.IdsSelector != nil {
 		in, out := &in.IdsSelector, &out.IdsSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.WebhookPayload != nil {
@@ -155,12 +155,12 @@ func (in *ActionInitParameters) DeepCopyInto(out *ActionInitParameters) {
 	}
 	if in.ActionGroupIDRef != nil {
 		in, out := &in.ActionGroupIDRef, &out.ActionGroupIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ActionGroupIDSelector != nil {
 		in, out := &in.ActionGroupIDSelector, &out.ActionGroupIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ActionProperties != nil {
@@ -237,12 +237,12 @@ func (in *ActionParameters) DeepCopyInto(out *ActionParameters) {
 	}
 	if in.ActionGroupIDRef != nil {
 		in, out := &in.ActionGroupIDRef, &out.ActionGroupIDRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ActionGroupIDSelector != nil {
 		in, out := &in.ActionGroupIDSelector, &out.ActionGroupIDSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ActionProperties != nil {
@@ -2071,14 +2071,14 @@ func (in *MonitorAlertProcessingRuleActionGroupInitParameters) DeepCopyInto(out 
 	}
 	if in.AddActionGroupIdsRefs != nil {
 		in, out := &in.AddActionGroupIdsRefs, &out.AddActionGroupIdsRefs
-		*out = make([]v1.NamespacedReference, len(*in))
+		*out = make([]v2.NamespacedReference, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.AddActionGroupIdsSelector != nil {
 		in, out := &in.AddActionGroupIdsSelector, &out.AddActionGroupIdsSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Condition != nil {
@@ -2114,14 +2114,14 @@ func (in *MonitorAlertProcessingRuleActionGroupInitParameters) DeepCopyInto(out 
 	}
 	if in.ScopesRefs != nil {
 		in, out := &in.ScopesRefs, &out.ScopesRefs
-		*out = make([]v1.NamespacedReference, len(*in))
+		*out = make([]v2.NamespacedReference, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.ScopesSelector != nil {
 		in, out := &in.ScopesSelector, &out.ScopesSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Tags != nil {
@@ -2283,14 +2283,14 @@ func (in *MonitorAlertProcessingRuleActionGroupParameters) DeepCopyInto(out *Mon
 	}
 	if in.AddActionGroupIdsRefs != nil {
 		in, out := &in.AddActionGroupIdsRefs, &out.AddActionGroupIdsRefs
-		*out = make([]v1.NamespacedReference, len(*in))
+		*out = make([]v2.NamespacedReference, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.AddActionGroupIdsSelector != nil {
 		in, out := &in.AddActionGroupIdsSelector, &out.AddActionGroupIdsSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Condition != nil {
@@ -2315,12 +2315,12 @@ func (in *MonitorAlertProcessingRuleActionGroupParameters) DeepCopyInto(out *Mon
 	}
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Schedule != nil {
@@ -2341,14 +2341,14 @@ func (in *MonitorAlertProcessingRuleActionGroupParameters) DeepCopyInto(out *Mon
 	}
 	if in.ScopesRefs != nil {
 		in, out := &in.ScopesRefs, &out.ScopesRefs
-		*out = make([]v1.NamespacedReference, len(*in))
+		*out = make([]v2.NamespacedReference, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.ScopesSelector != nil {
 		in, out := &in.ScopesSelector, &out.ScopesSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Tags != nil {
@@ -2400,7 +2400,7 @@ func (in *MonitorAlertProcessingRuleActionGroupSpec) DeepCopy() *MonitorAlertPro
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *MonitorAlertProcessingRuleActionGroupStatus) DeepCopyInto(out *MonitorAlertProcessingRuleActionGroupStatus) {
 	*out = *in
-	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.ManagedResourceStatus.DeepCopyInto(&out.ManagedResourceStatus)
 	in.AtProvider.DeepCopyInto(&out.AtProvider)
 }
 
@@ -2687,14 +2687,14 @@ func (in *MonitorAlertProcessingRuleSuppressionInitParameters) DeepCopyInto(out 
 	}
 	if in.ScopesRefs != nil {
 		in, out := &in.ScopesRefs, &out.ScopesRefs
-		*out = make([]v1.NamespacedReference, len(*in))
+		*out = make([]v2.NamespacedReference, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.ScopesSelector != nil {
 		in, out := &in.ScopesSelector, &out.ScopesSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Tags != nil {
@@ -2854,12 +2854,12 @@ func (in *MonitorAlertProcessingRuleSuppressionParameters) DeepCopyInto(out *Mon
 	}
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Schedule != nil {
@@ -2880,14 +2880,14 @@ func (in *MonitorAlertProcessingRuleSuppressionParameters) DeepCopyInto(out *Mon
 	}
 	if in.ScopesRefs != nil {
 		in, out := &in.ScopesRefs, &out.ScopesRefs
-		*out = make([]v1.NamespacedReference, len(*in))
+		*out = make([]v2.NamespacedReference, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.ScopesSelector != nil {
 		in, out := &in.ScopesSelector, &out.ScopesSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Tags != nil {
@@ -3044,7 +3044,7 @@ func (in *MonitorAlertProcessingRuleSuppressionSpec) DeepCopy() *MonitorAlertPro
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *MonitorAlertProcessingRuleSuppressionStatus) DeepCopyInto(out *MonitorAlertProcessingRuleSuppressionStatus) {
 	*out = *in
-	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.ManagedResourceStatus.DeepCopyInto(&out.ManagedResourceStatus)
 	in.AtProvider.DeepCopyInto(&out.AtProvider)
 }
 
@@ -3095,12 +3095,12 @@ func (in *MonitorAlertPrometheusRuleGroupInitParameters) DeepCopyInto(out *Monit
 	}
 	if in.ClusterNameRef != nil {
 		in, out := &in.ClusterNameRef, &out.ClusterNameRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ClusterNameSelector != nil {
 		in, out := &in.ClusterNameSelector, &out.ClusterNameSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Description != nil {
@@ -3143,14 +3143,14 @@ func (in *MonitorAlertPrometheusRuleGroupInitParameters) DeepCopyInto(out *Monit
 	}
 	if in.ScopesRefs != nil {
 		in, out := &in.ScopesRefs, &out.ScopesRefs
-		*out = make([]v1.NamespacedReference, len(*in))
+		*out = make([]v2.NamespacedReference, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.ScopesSelector != nil {
 		in, out := &in.ScopesSelector, &out.ScopesSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Tags != nil {
@@ -3307,12 +3307,12 @@ func (in *MonitorAlertPrometheusRuleGroupParameters) DeepCopyInto(out *MonitorAl
 	}
 	if in.ClusterNameRef != nil {
 		in, out := &in.ClusterNameRef, &out.ClusterNameRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ClusterNameSelector != nil {
 		in, out := &in.ClusterNameSelector, &out.ClusterNameSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Description != nil {
@@ -3337,12 +3337,12 @@ func (in *MonitorAlertPrometheusRuleGroupParameters) DeepCopyInto(out *MonitorAl
 	}
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Rule != nil {
@@ -3370,14 +3370,14 @@ func (in *MonitorAlertPrometheusRuleGroupParameters) DeepCopyInto(out *MonitorAl
 	}
 	if in.ScopesRefs != nil {
 		in, out := &in.ScopesRefs, &out.ScopesRefs
-		*out = make([]v1.NamespacedReference, len(*in))
+		*out = make([]v2.NamespacedReference, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.ScopesSelector != nil {
 		in, out := &in.ScopesSelector, &out.ScopesSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Tags != nil {
@@ -3429,7 +3429,7 @@ func (in *MonitorAlertPrometheusRuleGroupSpec) DeepCopy() *MonitorAlertPrometheu
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *MonitorAlertPrometheusRuleGroupStatus) DeepCopyInto(out *MonitorAlertPrometheusRuleGroupStatus) {
 	*out = *in
-	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.ManagedResourceStatus.DeepCopyInto(&out.ManagedResourceStatus)
 	in.AtProvider.DeepCopyInto(&out.AtProvider)
 }
 
@@ -3696,12 +3696,12 @@ func (in *MonitorSmartDetectorAlertRuleInitParameters) DeepCopyInto(out *Monitor
 	}
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ScopeResourceIds != nil {
@@ -3717,14 +3717,14 @@ func (in *MonitorSmartDetectorAlertRuleInitParameters) DeepCopyInto(out *Monitor
 	}
 	if in.ScopeResourceIdsRefs != nil {
 		in, out := &in.ScopeResourceIdsRefs, &out.ScopeResourceIdsRefs
-		*out = make([]v1.NamespacedReference, len(*in))
+		*out = make([]v2.NamespacedReference, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.ScopeResourceIdsSelector != nil {
 		in, out := &in.ScopeResourceIdsSelector, &out.ScopeResourceIdsSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Severity != nil {
@@ -3929,12 +3929,12 @@ func (in *MonitorSmartDetectorAlertRuleParameters) DeepCopyInto(out *MonitorSmar
 	}
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
-		*out = new(v1.NamespacedReference)
+		*out = new(v2.NamespacedReference)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.ScopeResourceIds != nil {
@@ -3950,14 +3950,14 @@ func (in *MonitorSmartDetectorAlertRuleParameters) DeepCopyInto(out *MonitorSmar
 	}
 	if in.ScopeResourceIdsRefs != nil {
 		in, out := &in.ScopeResourceIdsRefs, &out.ScopeResourceIdsRefs
-		*out = make([]v1.NamespacedReference, len(*in))
+		*out = make([]v2.NamespacedReference, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.ScopeResourceIdsSelector != nil {
 		in, out := &in.ScopeResourceIdsSelector, &out.ScopeResourceIdsSelector
-		*out = new(v1.NamespacedSelector)
+		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
 	if in.Severity != nil {
@@ -4019,7 +4019,7 @@ func (in *MonitorSmartDetectorAlertRuleSpec) DeepCopy() *MonitorSmartDetectorAle
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *MonitorSmartDetectorAlertRuleStatus) DeepCopyInto(out *MonitorSmartDetectorAlertRuleStatus) {
 	*out = *in
-	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.ManagedResourceStatus.DeepCopyInto(&out.ManagedResourceStatus)
 	in.AtProvider.DeepCopyInto(&out.AtProvider)
 }
 

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type MSSQLOutboundFirewallRuleInitParameters struct {
@@ -36,11 +35,11 @@ type MSSQLOutboundFirewallRuleParameters struct {
 
 	// Reference to a MSSQLServer in sql to populate serverId.
 	// +kubebuilder:validation:Optional
-	ServerIDRef *v1.NamespacedReference `json:"serverIdRef,omitempty" tf:"-"`
+	ServerIDRef *v2.NamespacedReference `json:"serverIdRef,omitempty" tf:"-"`
 
 	// Selector for a MSSQLServer in sql to populate serverId.
 	// +kubebuilder:validation:Optional
-	ServerIDSelector *v1.NamespacedSelector `json:"serverIdSelector,omitempty" tf:"-"`
+	ServerIDSelector *v2.NamespacedSelector `json:"serverIdSelector,omitempty" tf:"-"`
 }
 
 // MSSQLOutboundFirewallRuleSpec defines the desired state of MSSQLOutboundFirewallRule
@@ -62,8 +61,8 @@ type MSSQLOutboundFirewallRuleSpec struct {
 
 // MSSQLOutboundFirewallRuleStatus defines the observed state of MSSQLOutboundFirewallRule.
 type MSSQLOutboundFirewallRuleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MSSQLOutboundFirewallRuleObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MSSQLOutboundFirewallRuleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

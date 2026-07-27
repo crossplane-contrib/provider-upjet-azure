@@ -5,164 +5,164 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this MonitorAlertProcessingRuleActionGroup.
-func (mg *MonitorAlertProcessingRuleActionGroup) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *MonitorAlertProcessingRuleActionGroup) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this MonitorAlertProcessingRuleActionGroup.
-func (mg *MonitorAlertProcessingRuleActionGroup) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *MonitorAlertProcessingRuleActionGroup) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MonitorAlertProcessingRuleActionGroup.
-func (mg *MonitorAlertProcessingRuleActionGroup) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *MonitorAlertProcessingRuleActionGroup) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this MonitorAlertProcessingRuleActionGroup.
-func (mg *MonitorAlertProcessingRuleActionGroup) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *MonitorAlertProcessingRuleActionGroup) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this MonitorAlertProcessingRuleActionGroup.
-func (mg *MonitorAlertProcessingRuleActionGroup) SetConditions(c ...xpv1.Condition) {
+func (mg *MonitorAlertProcessingRuleActionGroup) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this MonitorAlertProcessingRuleActionGroup.
-func (mg *MonitorAlertProcessingRuleActionGroup) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *MonitorAlertProcessingRuleActionGroup) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MonitorAlertProcessingRuleActionGroup.
-func (mg *MonitorAlertProcessingRuleActionGroup) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *MonitorAlertProcessingRuleActionGroup) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this MonitorAlertProcessingRuleActionGroup.
-func (mg *MonitorAlertProcessingRuleActionGroup) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *MonitorAlertProcessingRuleActionGroup) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this MonitorAlertProcessingRuleSuppression.
-func (mg *MonitorAlertProcessingRuleSuppression) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *MonitorAlertProcessingRuleSuppression) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this MonitorAlertProcessingRuleSuppression.
-func (mg *MonitorAlertProcessingRuleSuppression) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *MonitorAlertProcessingRuleSuppression) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MonitorAlertProcessingRuleSuppression.
-func (mg *MonitorAlertProcessingRuleSuppression) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *MonitorAlertProcessingRuleSuppression) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this MonitorAlertProcessingRuleSuppression.
-func (mg *MonitorAlertProcessingRuleSuppression) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *MonitorAlertProcessingRuleSuppression) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this MonitorAlertProcessingRuleSuppression.
-func (mg *MonitorAlertProcessingRuleSuppression) SetConditions(c ...xpv1.Condition) {
+func (mg *MonitorAlertProcessingRuleSuppression) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this MonitorAlertProcessingRuleSuppression.
-func (mg *MonitorAlertProcessingRuleSuppression) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *MonitorAlertProcessingRuleSuppression) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MonitorAlertProcessingRuleSuppression.
-func (mg *MonitorAlertProcessingRuleSuppression) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *MonitorAlertProcessingRuleSuppression) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this MonitorAlertProcessingRuleSuppression.
-func (mg *MonitorAlertProcessingRuleSuppression) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *MonitorAlertProcessingRuleSuppression) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this MonitorAlertPrometheusRuleGroup.
-func (mg *MonitorAlertPrometheusRuleGroup) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *MonitorAlertPrometheusRuleGroup) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this MonitorAlertPrometheusRuleGroup.
-func (mg *MonitorAlertPrometheusRuleGroup) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *MonitorAlertPrometheusRuleGroup) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MonitorAlertPrometheusRuleGroup.
-func (mg *MonitorAlertPrometheusRuleGroup) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *MonitorAlertPrometheusRuleGroup) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this MonitorAlertPrometheusRuleGroup.
-func (mg *MonitorAlertPrometheusRuleGroup) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *MonitorAlertPrometheusRuleGroup) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this MonitorAlertPrometheusRuleGroup.
-func (mg *MonitorAlertPrometheusRuleGroup) SetConditions(c ...xpv1.Condition) {
+func (mg *MonitorAlertPrometheusRuleGroup) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this MonitorAlertPrometheusRuleGroup.
-func (mg *MonitorAlertPrometheusRuleGroup) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *MonitorAlertPrometheusRuleGroup) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MonitorAlertPrometheusRuleGroup.
-func (mg *MonitorAlertPrometheusRuleGroup) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *MonitorAlertPrometheusRuleGroup) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this MonitorAlertPrometheusRuleGroup.
-func (mg *MonitorAlertPrometheusRuleGroup) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *MonitorAlertPrometheusRuleGroup) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this MonitorSmartDetectorAlertRule.
-func (mg *MonitorSmartDetectorAlertRule) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *MonitorSmartDetectorAlertRule) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this MonitorSmartDetectorAlertRule.
-func (mg *MonitorSmartDetectorAlertRule) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *MonitorSmartDetectorAlertRule) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MonitorSmartDetectorAlertRule.
-func (mg *MonitorSmartDetectorAlertRule) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *MonitorSmartDetectorAlertRule) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this MonitorSmartDetectorAlertRule.
-func (mg *MonitorSmartDetectorAlertRule) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *MonitorSmartDetectorAlertRule) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this MonitorSmartDetectorAlertRule.
-func (mg *MonitorSmartDetectorAlertRule) SetConditions(c ...xpv1.Condition) {
+func (mg *MonitorSmartDetectorAlertRule) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this MonitorSmartDetectorAlertRule.
-func (mg *MonitorSmartDetectorAlertRule) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *MonitorSmartDetectorAlertRule) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MonitorSmartDetectorAlertRule.
-func (mg *MonitorSmartDetectorAlertRule) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *MonitorSmartDetectorAlertRule) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this MonitorSmartDetectorAlertRule.
-func (mg *MonitorSmartDetectorAlertRule) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *MonitorSmartDetectorAlertRule) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

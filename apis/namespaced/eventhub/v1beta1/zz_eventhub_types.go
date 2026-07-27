@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CaptureDescriptionInitParameters struct {
@@ -167,11 +166,11 @@ type EventHubInitParameters struct {
 
 	// Reference to a EventHubNamespace in eventhub to populate namespaceId.
 	// +kubebuilder:validation:Optional
-	NamespaceIDRef *v1.NamespacedReference `json:"namespaceIdRef,omitempty" tf:"-"`
+	NamespaceIDRef *v2.NamespacedReference `json:"namespaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a EventHubNamespace in eventhub to populate namespaceId.
 	// +kubebuilder:validation:Optional
-	NamespaceIDSelector *v1.NamespacedSelector `json:"namespaceIdSelector,omitempty" tf:"-"`
+	NamespaceIDSelector *v2.NamespacedSelector `json:"namespaceIdSelector,omitempty" tf:"-"`
 
 	// Specifies the current number of shards on the Event Hub.
 	PartitionCount *float64 `json:"partitionCount,omitempty" tf:"partition_count,omitempty"`
@@ -235,11 +234,11 @@ type EventHubParameters struct {
 
 	// Reference to a EventHubNamespace in eventhub to populate namespaceId.
 	// +kubebuilder:validation:Optional
-	NamespaceIDRef *v1.NamespacedReference `json:"namespaceIdRef,omitempty" tf:"-"`
+	NamespaceIDRef *v2.NamespacedReference `json:"namespaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a EventHubNamespace in eventhub to populate namespaceId.
 	// +kubebuilder:validation:Optional
-	NamespaceIDSelector *v1.NamespacedSelector `json:"namespaceIdSelector,omitempty" tf:"-"`
+	NamespaceIDSelector *v2.NamespacedSelector `json:"namespaceIdSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the EventHub resource. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/eventhub/v1beta1.EventHubNamespace
@@ -248,11 +247,11 @@ type EventHubParameters struct {
 
 	// Reference to a EventHubNamespace in eventhub to populate namespaceName.
 	// +kubebuilder:validation:Optional
-	NamespaceNameRef *v1.NamespacedReference `json:"namespaceNameRef,omitempty" tf:"-"`
+	NamespaceNameRef *v2.NamespacedReference `json:"namespaceNameRef,omitempty" tf:"-"`
 
 	// Selector for a EventHubNamespace in eventhub to populate namespaceName.
 	// +kubebuilder:validation:Optional
-	NamespaceNameSelector *v1.NamespacedSelector `json:"namespaceNameSelector,omitempty" tf:"-"`
+	NamespaceNameSelector *v2.NamespacedSelector `json:"namespaceNameSelector,omitempty" tf:"-"`
 
 	// Specifies the current number of shards on the Event Hub.
 	// +kubebuilder:validation:Optional
@@ -265,11 +264,11 @@ type EventHubParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A retention_description block as defined below.
 	// +kubebuilder:validation:Optional
@@ -338,8 +337,8 @@ type EventHubSpec struct {
 
 // EventHubStatus defines the observed state of EventHub.
 type EventHubStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        EventHubObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               EventHubObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type StreamInputEventHubInitParameters struct {
@@ -25,11 +24,11 @@ type StreamInputEventHubInitParameters struct {
 
 	// Reference to a ConsumerGroup in eventhub to populate eventhubConsumerGroupName.
 	// +kubebuilder:validation:Optional
-	EventHubConsumerGroupNameRef *v1.NamespacedReference `json:"eventhubConsumerGroupNameRef,omitempty" tf:"-"`
+	EventHubConsumerGroupNameRef *v2.NamespacedReference `json:"eventhubConsumerGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ConsumerGroup in eventhub to populate eventhubConsumerGroupName.
 	// +kubebuilder:validation:Optional
-	EventHubConsumerGroupNameSelector *v1.NamespacedSelector `json:"eventhubConsumerGroupNameSelector,omitempty" tf:"-"`
+	EventHubConsumerGroupNameSelector *v2.NamespacedSelector `json:"eventhubConsumerGroupNameSelector,omitempty" tf:"-"`
 
 	// The name of the Event Hub.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/eventhub/v1beta1.EventHub
@@ -37,11 +36,11 @@ type StreamInputEventHubInitParameters struct {
 
 	// Reference to a EventHub in eventhub to populate eventhubName.
 	// +kubebuilder:validation:Optional
-	EventHubNameRef *v1.NamespacedReference `json:"eventhubNameRef,omitempty" tf:"-"`
+	EventHubNameRef *v2.NamespacedReference `json:"eventhubNameRef,omitempty" tf:"-"`
 
 	// Selector for a EventHub in eventhub to populate eventhubName.
 	// +kubebuilder:validation:Optional
-	EventHubNameSelector *v1.NamespacedSelector `json:"eventhubNameSelector,omitempty" tf:"-"`
+	EventHubNameSelector *v2.NamespacedSelector `json:"eventhubNameSelector,omitempty" tf:"-"`
 
 	// The name of the Stream Input EventHub. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -55,11 +54,11 @@ type StreamInputEventHubInitParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A serialization block as defined below.
 	Serialization *StreamInputEventHubSerializationInitParameters `json:"serialization,omitempty" tf:"serialization,omitempty"`
@@ -70,14 +69,14 @@ type StreamInputEventHubInitParameters struct {
 
 	// Reference to a EventHubNamespace in eventhub to populate servicebusNamespace.
 	// +kubebuilder:validation:Optional
-	ServiceBusNamespaceRef *v1.NamespacedReference `json:"servicebusNamespaceRef,omitempty" tf:"-"`
+	ServiceBusNamespaceRef *v2.NamespacedReference `json:"servicebusNamespaceRef,omitempty" tf:"-"`
 
 	// Selector for a EventHubNamespace in eventhub to populate servicebusNamespace.
 	// +kubebuilder:validation:Optional
-	ServiceBusNamespaceSelector *v1.NamespacedSelector `json:"servicebusNamespaceSelector,omitempty" tf:"-"`
+	ServiceBusNamespaceSelector *v2.NamespacedSelector `json:"servicebusNamespaceSelector,omitempty" tf:"-"`
 
 	// The shared access policy key for the specified shared access policy.
-	SharedAccessPolicyKeySecretRef *v1.LocalSecretKeySelector `json:"sharedAccessPolicyKeySecretRef,omitempty" tf:"-"`
+	SharedAccessPolicyKeySecretRef *v2.LocalSecretKeySelector `json:"sharedAccessPolicyKeySecretRef,omitempty" tf:"-"`
 
 	// The shared access policy name for the Event Hub, Service Bus Queue, Service Bus Topic, etc.
 	SharedAccessPolicyName *string `json:"sharedAccessPolicyName,omitempty" tf:"shared_access_policy_name,omitempty"`
@@ -88,11 +87,11 @@ type StreamInputEventHubInitParameters struct {
 
 	// Reference to a Job in streamanalytics to populate streamAnalyticsJobName.
 	// +kubebuilder:validation:Optional
-	StreamAnalyticsJobNameRef *v1.NamespacedReference `json:"streamAnalyticsJobNameRef,omitempty" tf:"-"`
+	StreamAnalyticsJobNameRef *v2.NamespacedReference `json:"streamAnalyticsJobNameRef,omitempty" tf:"-"`
 
 	// Selector for a Job in streamanalytics to populate streamAnalyticsJobName.
 	// +kubebuilder:validation:Optional
-	StreamAnalyticsJobNameSelector *v1.NamespacedSelector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
+	StreamAnalyticsJobNameSelector *v2.NamespacedSelector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
 }
 
 type StreamInputEventHubObservation struct {
@@ -144,11 +143,11 @@ type StreamInputEventHubParameters struct {
 
 	// Reference to a ConsumerGroup in eventhub to populate eventhubConsumerGroupName.
 	// +kubebuilder:validation:Optional
-	EventHubConsumerGroupNameRef *v1.NamespacedReference `json:"eventhubConsumerGroupNameRef,omitempty" tf:"-"`
+	EventHubConsumerGroupNameRef *v2.NamespacedReference `json:"eventhubConsumerGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ConsumerGroup in eventhub to populate eventhubConsumerGroupName.
 	// +kubebuilder:validation:Optional
-	EventHubConsumerGroupNameSelector *v1.NamespacedSelector `json:"eventhubConsumerGroupNameSelector,omitempty" tf:"-"`
+	EventHubConsumerGroupNameSelector *v2.NamespacedSelector `json:"eventhubConsumerGroupNameSelector,omitempty" tf:"-"`
 
 	// The name of the Event Hub.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/eventhub/v1beta1.EventHub
@@ -157,11 +156,11 @@ type StreamInputEventHubParameters struct {
 
 	// Reference to a EventHub in eventhub to populate eventhubName.
 	// +kubebuilder:validation:Optional
-	EventHubNameRef *v1.NamespacedReference `json:"eventhubNameRef,omitempty" tf:"-"`
+	EventHubNameRef *v2.NamespacedReference `json:"eventhubNameRef,omitempty" tf:"-"`
 
 	// Selector for a EventHub in eventhub to populate eventhubName.
 	// +kubebuilder:validation:Optional
-	EventHubNameSelector *v1.NamespacedSelector `json:"eventhubNameSelector,omitempty" tf:"-"`
+	EventHubNameSelector *v2.NamespacedSelector `json:"eventhubNameSelector,omitempty" tf:"-"`
 
 	// The name of the Stream Input EventHub. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -178,11 +177,11 @@ type StreamInputEventHubParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A serialization block as defined below.
 	// +kubebuilder:validation:Optional
@@ -195,15 +194,15 @@ type StreamInputEventHubParameters struct {
 
 	// Reference to a EventHubNamespace in eventhub to populate servicebusNamespace.
 	// +kubebuilder:validation:Optional
-	ServiceBusNamespaceRef *v1.NamespacedReference `json:"servicebusNamespaceRef,omitempty" tf:"-"`
+	ServiceBusNamespaceRef *v2.NamespacedReference `json:"servicebusNamespaceRef,omitempty" tf:"-"`
 
 	// Selector for a EventHubNamespace in eventhub to populate servicebusNamespace.
 	// +kubebuilder:validation:Optional
-	ServiceBusNamespaceSelector *v1.NamespacedSelector `json:"servicebusNamespaceSelector,omitempty" tf:"-"`
+	ServiceBusNamespaceSelector *v2.NamespacedSelector `json:"servicebusNamespaceSelector,omitempty" tf:"-"`
 
 	// The shared access policy key for the specified shared access policy.
 	// +kubebuilder:validation:Optional
-	SharedAccessPolicyKeySecretRef *v1.LocalSecretKeySelector `json:"sharedAccessPolicyKeySecretRef,omitempty" tf:"-"`
+	SharedAccessPolicyKeySecretRef *v2.LocalSecretKeySelector `json:"sharedAccessPolicyKeySecretRef,omitempty" tf:"-"`
 
 	// The shared access policy name for the Event Hub, Service Bus Queue, Service Bus Topic, etc.
 	// +kubebuilder:validation:Optional
@@ -216,11 +215,11 @@ type StreamInputEventHubParameters struct {
 
 	// Reference to a Job in streamanalytics to populate streamAnalyticsJobName.
 	// +kubebuilder:validation:Optional
-	StreamAnalyticsJobNameRef *v1.NamespacedReference `json:"streamAnalyticsJobNameRef,omitempty" tf:"-"`
+	StreamAnalyticsJobNameRef *v2.NamespacedReference `json:"streamAnalyticsJobNameRef,omitempty" tf:"-"`
 
 	// Selector for a Job in streamanalytics to populate streamAnalyticsJobName.
 	// +kubebuilder:validation:Optional
-	StreamAnalyticsJobNameSelector *v1.NamespacedSelector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
+	StreamAnalyticsJobNameSelector *v2.NamespacedSelector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
 }
 
 type StreamInputEventHubSerializationInitParameters struct {
@@ -281,8 +280,8 @@ type StreamInputEventHubSpec struct {
 
 // StreamInputEventHubStatus defines the observed state of StreamInputEventHub.
 type StreamInputEventHubStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        StreamInputEventHubObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               StreamInputEventHubObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

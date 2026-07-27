@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type InstancePoolInitParameters struct {
@@ -65,7 +65,7 @@ type InstancePoolParameters struct {
 type LinkedServiceAzureDatabricksInitParameters struct {
 
 	// Authenticate to ADB via an access token.
-	AccessTokenSecretRef *v1.SecretKeySelector `json:"accessTokenSecretRef,omitempty" tf:"-"`
+	AccessTokenSecretRef *v2.SecretKeySelector `json:"accessTokenSecretRef,omitempty" tf:"-"`
 
 	// The domain URL of the databricks instance.
 	AdbDomain *string `json:"adbDomain,omitempty" tf:"adb_domain,omitempty"`
@@ -99,11 +99,11 @@ type LinkedServiceAzureDatabricksInitParameters struct {
 
 	// Reference to a Workspace in databricks to populate msiWorkSpaceResourceId.
 	// +kubebuilder:validation:Optional
-	MsiWorkSpaceResourceIDRef *v1.Reference `json:"msiWorkSpaceResourceIdRef,omitempty" tf:"-"`
+	MsiWorkSpaceResourceIDRef *v2.Reference `json:"msiWorkSpaceResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in databricks to populate msiWorkSpaceResourceId.
 	// +kubebuilder:validation:Optional
-	MsiWorkSpaceResourceIDSelector *v1.Selector `json:"msiWorkSpaceResourceIdSelector,omitempty" tf:"-"`
+	MsiWorkSpaceResourceIDSelector *v2.Selector `json:"msiWorkSpaceResourceIdSelector,omitempty" tf:"-"`
 
 	// Authenticate to ADB via managed service identity.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/databricks/v1beta2.Workspace
@@ -112,11 +112,11 @@ type LinkedServiceAzureDatabricksInitParameters struct {
 
 	// Reference to a Workspace in databricks to populate msiWorkspaceId.
 	// +kubebuilder:validation:Optional
-	MsiWorkspaceIDRef *v1.Reference `json:"msiWorkspaceIdRef,omitempty" tf:"-"`
+	MsiWorkspaceIDRef *v2.Reference `json:"msiWorkspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in databricks to populate msiWorkspaceId.
 	// +kubebuilder:validation:Optional
-	MsiWorkspaceIDSelector *v1.Selector `json:"msiWorkspaceIdSelector,omitempty" tf:"-"`
+	MsiWorkspaceIDSelector *v2.Selector `json:"msiWorkspaceIdSelector,omitempty" tf:"-"`
 
 	// Creates new clusters within the linked ADB instance as defined in the new_cluster_config block below.
 	NewClusterConfig *NewClusterConfigInitParameters `json:"newClusterConfig,omitempty" tf:"new_cluster_config,omitempty"`
@@ -206,7 +206,7 @@ type LinkedServiceAzureDatabricksParameters struct {
 
 	// Authenticate to ADB via an access token.
 	// +kubebuilder:validation:Optional
-	AccessTokenSecretRef *v1.SecretKeySelector `json:"accessTokenSecretRef,omitempty" tf:"-"`
+	AccessTokenSecretRef *v2.SecretKeySelector `json:"accessTokenSecretRef,omitempty" tf:"-"`
 
 	// The domain URL of the databricks instance.
 	// +kubebuilder:validation:Optional
@@ -229,11 +229,11 @@ type LinkedServiceAzureDatabricksParameters struct {
 
 	// Reference to a Factory in datafactory to populate dataFactoryId.
 	// +kubebuilder:validation:Optional
-	DataFactoryIDRef *v1.Reference `json:"dataFactoryIdRef,omitempty" tf:"-"`
+	DataFactoryIDRef *v2.Reference `json:"dataFactoryIdRef,omitempty" tf:"-"`
 
 	// Selector for a Factory in datafactory to populate dataFactoryId.
 	// +kubebuilder:validation:Optional
-	DataFactoryIDSelector *v1.Selector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
+	DataFactoryIDSelector *v2.Selector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
 
 	// The description for the Data Factory Linked Service.
 	// +kubebuilder:validation:Optional
@@ -263,11 +263,11 @@ type LinkedServiceAzureDatabricksParameters struct {
 
 	// Reference to a Workspace in databricks to populate msiWorkSpaceResourceId.
 	// +kubebuilder:validation:Optional
-	MsiWorkSpaceResourceIDRef *v1.Reference `json:"msiWorkSpaceResourceIdRef,omitempty" tf:"-"`
+	MsiWorkSpaceResourceIDRef *v2.Reference `json:"msiWorkSpaceResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in databricks to populate msiWorkSpaceResourceId.
 	// +kubebuilder:validation:Optional
-	MsiWorkSpaceResourceIDSelector *v1.Selector `json:"msiWorkSpaceResourceIdSelector,omitempty" tf:"-"`
+	MsiWorkSpaceResourceIDSelector *v2.Selector `json:"msiWorkSpaceResourceIdSelector,omitempty" tf:"-"`
 
 	// Authenticate to ADB via managed service identity.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/databricks/v1beta2.Workspace
@@ -277,11 +277,11 @@ type LinkedServiceAzureDatabricksParameters struct {
 
 	// Reference to a Workspace in databricks to populate msiWorkspaceId.
 	// +kubebuilder:validation:Optional
-	MsiWorkspaceIDRef *v1.Reference `json:"msiWorkspaceIdRef,omitempty" tf:"-"`
+	MsiWorkspaceIDRef *v2.Reference `json:"msiWorkspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in databricks to populate msiWorkspaceId.
 	// +kubebuilder:validation:Optional
-	MsiWorkspaceIDSelector *v1.Selector `json:"msiWorkspaceIdSelector,omitempty" tf:"-"`
+	MsiWorkspaceIDSelector *v2.Selector `json:"msiWorkspaceIdSelector,omitempty" tf:"-"`
 
 	// Creates new clusters within the linked ADB instance as defined in the new_cluster_config block below.
 	// +kubebuilder:validation:Optional
@@ -413,8 +413,8 @@ type NewClusterConfigParameters struct {
 
 // LinkedServiceAzureDatabricksSpec defines the desired state of LinkedServiceAzureDatabricks
 type LinkedServiceAzureDatabricksSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     LinkedServiceAzureDatabricksParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   LinkedServiceAzureDatabricksParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -430,8 +430,8 @@ type LinkedServiceAzureDatabricksSpec struct {
 
 // LinkedServiceAzureDatabricksStatus defines the observed state of LinkedServiceAzureDatabricks.
 type LinkedServiceAzureDatabricksStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LinkedServiceAzureDatabricksObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LinkedServiceAzureDatabricksObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

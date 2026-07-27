@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type KeyVaultSASTokenInitParameters struct {
@@ -21,11 +21,11 @@ type KeyVaultSASTokenInitParameters struct {
 
 	// Reference to a LinkedServiceKeyVault in datafactory to populate linkedServiceName.
 	// +kubebuilder:validation:Optional
-	LinkedServiceNameRef *v1.Reference `json:"linkedServiceNameRef,omitempty" tf:"-"`
+	LinkedServiceNameRef *v2.Reference `json:"linkedServiceNameRef,omitempty" tf:"-"`
 
 	// Selector for a LinkedServiceKeyVault in datafactory to populate linkedServiceName.
 	// +kubebuilder:validation:Optional
-	LinkedServiceNameSelector *v1.Selector `json:"linkedServiceNameSelector,omitempty" tf:"-"`
+	LinkedServiceNameSelector *v2.Selector `json:"linkedServiceNameSelector,omitempty" tf:"-"`
 
 	// Specifies the secret name in Azure Key Vault that stores the Service Principal key.
 	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
@@ -49,11 +49,11 @@ type KeyVaultSASTokenParameters struct {
 
 	// Reference to a LinkedServiceKeyVault in datafactory to populate linkedServiceName.
 	// +kubebuilder:validation:Optional
-	LinkedServiceNameRef *v1.Reference `json:"linkedServiceNameRef,omitempty" tf:"-"`
+	LinkedServiceNameRef *v2.Reference `json:"linkedServiceNameRef,omitempty" tf:"-"`
 
 	// Selector for a LinkedServiceKeyVault in datafactory to populate linkedServiceName.
 	// +kubebuilder:validation:Optional
-	LinkedServiceNameSelector *v1.Selector `json:"linkedServiceNameSelector,omitempty" tf:"-"`
+	LinkedServiceNameSelector *v2.Selector `json:"linkedServiceNameSelector,omitempty" tf:"-"`
 
 	// Specifies the secret name in Azure Key Vault that stores the Service Principal key.
 	// +kubebuilder:validation:Optional
@@ -73,7 +73,7 @@ type LinkedServiceAzureBlobStorageInitParameters struct {
 	ConnectionStringInsecure *string `json:"connectionStringInsecure,omitempty" tf:"connection_string_insecure,omitempty"`
 
 	// The connection string. Conflicts with connection_string_insecure, sas_uri and service_endpoint.
-	ConnectionStringSecretRef *v1.SecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
+	ConnectionStringSecretRef *v2.SecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
 
 	// The description for the Data Factory Linked Service.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -98,10 +98,10 @@ type LinkedServiceAzureBlobStorageInitParameters struct {
 	ServicePrincipalKey *string `json:"servicePrincipalKey,omitempty" tf:"service_principal_key,omitempty"`
 
 	// The SAS URI. Conflicts with connection_string_insecure, connection_string and service_endpoint.
-	SASURISecretRef *v1.SecretKeySelector `json:"sasuriSecretRef,omitempty" tf:"-"`
+	SASURISecretRef *v2.SecretKeySelector `json:"sasuriSecretRef,omitempty" tf:"-"`
 
 	// The Service Endpoint. Conflicts with connection_string, connection_string_insecure and sas_uri.
-	ServiceEndpointSecretRef *v1.SecretKeySelector `json:"serviceEndpointSecretRef,omitempty" tf:"-"`
+	ServiceEndpointSecretRef *v2.SecretKeySelector `json:"serviceEndpointSecretRef,omitempty" tf:"-"`
 
 	// A service_principal_linked_key_vault_key block as defined below. Use this argument to store Service Principal key in an existing Key Vault. It needs an existing Key Vault Data Factory Linked Service.
 	ServicePrincipalLinkedKeyVaultKey []ServicePrincipalLinkedKeyVaultKeyInitParameters `json:"servicePrincipalLinkedKeyVaultKey,omitempty" tf:"service_principal_linked_key_vault_key,omitempty"`
@@ -186,7 +186,7 @@ type LinkedServiceAzureBlobStorageParameters struct {
 
 	// The connection string. Conflicts with connection_string_insecure, sas_uri and service_endpoint.
 	// +kubebuilder:validation:Optional
-	ConnectionStringSecretRef *v1.SecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
+	ConnectionStringSecretRef *v2.SecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
 
 	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/datafactory/v1beta1.Factory
@@ -196,11 +196,11 @@ type LinkedServiceAzureBlobStorageParameters struct {
 
 	// Reference to a Factory in datafactory to populate dataFactoryId.
 	// +kubebuilder:validation:Optional
-	DataFactoryIDRef *v1.Reference `json:"dataFactoryIdRef,omitempty" tf:"-"`
+	DataFactoryIDRef *v2.Reference `json:"dataFactoryIdRef,omitempty" tf:"-"`
 
 	// Selector for a Factory in datafactory to populate dataFactoryId.
 	// +kubebuilder:validation:Optional
-	DataFactoryIDSelector *v1.Selector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
+	DataFactoryIDSelector *v2.Selector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
 
 	// The description for the Data Factory Linked Service.
 	// +kubebuilder:validation:Optional
@@ -225,11 +225,11 @@ type LinkedServiceAzureBlobStorageParameters struct {
 
 	// The SAS URI. Conflicts with connection_string_insecure, connection_string and service_endpoint.
 	// +kubebuilder:validation:Optional
-	SASURISecretRef *v1.SecretKeySelector `json:"sasuriSecretRef,omitempty" tf:"-"`
+	SASURISecretRef *v2.SecretKeySelector `json:"sasuriSecretRef,omitempty" tf:"-"`
 
 	// The Service Endpoint. Conflicts with connection_string, connection_string_insecure and sas_uri.
 	// +kubebuilder:validation:Optional
-	ServiceEndpointSecretRef *v1.SecretKeySelector `json:"serviceEndpointSecretRef,omitempty" tf:"-"`
+	ServiceEndpointSecretRef *v2.SecretKeySelector `json:"serviceEndpointSecretRef,omitempty" tf:"-"`
 
 	// The service principal id in which to authenticate against the Azure Blob Storage account.
 	// +kubebuilder:validation:Optional
@@ -293,11 +293,11 @@ type ServicePrincipalLinkedKeyVaultKeyInitParameters struct {
 
 	// Reference to a LinkedServiceKeyVault in datafactory to populate linkedServiceName.
 	// +kubebuilder:validation:Optional
-	LinkedServiceNameRef *v1.Reference `json:"linkedServiceNameRef,omitempty" tf:"-"`
+	LinkedServiceNameRef *v2.Reference `json:"linkedServiceNameRef,omitempty" tf:"-"`
 
 	// Selector for a LinkedServiceKeyVault in datafactory to populate linkedServiceName.
 	// +kubebuilder:validation:Optional
-	LinkedServiceNameSelector *v1.Selector `json:"linkedServiceNameSelector,omitempty" tf:"-"`
+	LinkedServiceNameSelector *v2.Selector `json:"linkedServiceNameSelector,omitempty" tf:"-"`
 
 	// Specifies the secret name in Azure Key Vault that stores the Service Principal key.
 	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
@@ -321,11 +321,11 @@ type ServicePrincipalLinkedKeyVaultKeyParameters struct {
 
 	// Reference to a LinkedServiceKeyVault in datafactory to populate linkedServiceName.
 	// +kubebuilder:validation:Optional
-	LinkedServiceNameRef *v1.Reference `json:"linkedServiceNameRef,omitempty" tf:"-"`
+	LinkedServiceNameRef *v2.Reference `json:"linkedServiceNameRef,omitempty" tf:"-"`
 
 	// Selector for a LinkedServiceKeyVault in datafactory to populate linkedServiceName.
 	// +kubebuilder:validation:Optional
-	LinkedServiceNameSelector *v1.Selector `json:"linkedServiceNameSelector,omitempty" tf:"-"`
+	LinkedServiceNameSelector *v2.Selector `json:"linkedServiceNameSelector,omitempty" tf:"-"`
 
 	// Specifies the secret name in Azure Key Vault that stores the Service Principal key.
 	// +kubebuilder:validation:Optional
@@ -334,8 +334,8 @@ type ServicePrincipalLinkedKeyVaultKeyParameters struct {
 
 // LinkedServiceAzureBlobStorageSpec defines the desired state of LinkedServiceAzureBlobStorage
 type LinkedServiceAzureBlobStorageSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     LinkedServiceAzureBlobStorageParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   LinkedServiceAzureBlobStorageParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -351,8 +351,8 @@ type LinkedServiceAzureBlobStorageSpec struct {
 
 // LinkedServiceAzureBlobStorageStatus defines the observed state of LinkedServiceAzureBlobStorage.
 type LinkedServiceAzureBlobStorageStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LinkedServiceAzureBlobStorageObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LinkedServiceAzureBlobStorageObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

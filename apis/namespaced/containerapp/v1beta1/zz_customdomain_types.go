@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CustomDomainInitParameters_2 struct {
@@ -27,11 +26,11 @@ type CustomDomainInitParameters_2 struct {
 
 	// Reference to a EnvironmentCertificate in containerapp to populate containerAppEnvironmentCertificateId.
 	// +kubebuilder:validation:Optional
-	ContainerAppEnvironmentCertificateIDRef *v1.NamespacedReference `json:"containerAppEnvironmentCertificateIdRef,omitempty" tf:"-"`
+	ContainerAppEnvironmentCertificateIDRef *v2.NamespacedReference `json:"containerAppEnvironmentCertificateIdRef,omitempty" tf:"-"`
 
 	// Selector for a EnvironmentCertificate in containerapp to populate containerAppEnvironmentCertificateId.
 	// +kubebuilder:validation:Optional
-	ContainerAppEnvironmentCertificateIDSelector *v1.NamespacedSelector `json:"containerAppEnvironmentCertificateIdSelector,omitempty" tf:"-"`
+	ContainerAppEnvironmentCertificateIDSelector *v2.NamespacedSelector `json:"containerAppEnvironmentCertificateIdSelector,omitempty" tf:"-"`
 }
 
 type CustomDomainObservation_2 struct {
@@ -67,11 +66,11 @@ type CustomDomainParameters_2 struct {
 
 	// Reference to a EnvironmentCertificate in containerapp to populate containerAppEnvironmentCertificateId.
 	// +kubebuilder:validation:Optional
-	ContainerAppEnvironmentCertificateIDRef *v1.NamespacedReference `json:"containerAppEnvironmentCertificateIdRef,omitempty" tf:"-"`
+	ContainerAppEnvironmentCertificateIDRef *v2.NamespacedReference `json:"containerAppEnvironmentCertificateIdRef,omitempty" tf:"-"`
 
 	// Selector for a EnvironmentCertificate in containerapp to populate containerAppEnvironmentCertificateId.
 	// +kubebuilder:validation:Optional
-	ContainerAppEnvironmentCertificateIDSelector *v1.NamespacedSelector `json:"containerAppEnvironmentCertificateIdSelector,omitempty" tf:"-"`
+	ContainerAppEnvironmentCertificateIDSelector *v2.NamespacedSelector `json:"containerAppEnvironmentCertificateIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Container App to which this Custom Domain should be bound. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/containerapp/v1beta1.ContainerApp
@@ -81,11 +80,11 @@ type CustomDomainParameters_2 struct {
 
 	// Reference to a ContainerApp in containerapp to populate containerAppId.
 	// +kubebuilder:validation:Optional
-	ContainerAppIDRef *v1.NamespacedReference `json:"containerAppIdRef,omitempty" tf:"-"`
+	ContainerAppIDRef *v2.NamespacedReference `json:"containerAppIdRef,omitempty" tf:"-"`
 
 	// Selector for a ContainerApp in containerapp to populate containerAppId.
 	// +kubebuilder:validation:Optional
-	ContainerAppIDSelector *v1.NamespacedSelector `json:"containerAppIdSelector,omitempty" tf:"-"`
+	ContainerAppIDSelector *v2.NamespacedSelector `json:"containerAppIdSelector,omitempty" tf:"-"`
 }
 
 // CustomDomainSpec defines the desired state of CustomDomain
@@ -107,8 +106,8 @@ type CustomDomainSpec struct {
 
 // CustomDomainStatus defines the observed state of CustomDomain.
 type CustomDomainStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        CustomDomainObservation_2 `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               CustomDomainObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

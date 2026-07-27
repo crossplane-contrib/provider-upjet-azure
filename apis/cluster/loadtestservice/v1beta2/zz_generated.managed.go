@@ -5,54 +5,54 @@
 
 package v1beta2
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this LoadTest.
-func (mg *LoadTest) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *LoadTest) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this LoadTest.
-func (mg *LoadTest) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *LoadTest) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this LoadTest.
-func (mg *LoadTest) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *LoadTest) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this LoadTest.
-func (mg *LoadTest) GetProviderConfigReference() *xpv1.Reference {
+func (mg *LoadTest) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this LoadTest.
-func (mg *LoadTest) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *LoadTest) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this LoadTest.
-func (mg *LoadTest) SetConditions(c ...xpv1.Condition) {
+func (mg *LoadTest) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this LoadTest.
-func (mg *LoadTest) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *LoadTest) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this LoadTest.
-func (mg *LoadTest) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *LoadTest) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this LoadTest.
-func (mg *LoadTest) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *LoadTest) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this LoadTest.
-func (mg *LoadTest) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *LoadTest) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

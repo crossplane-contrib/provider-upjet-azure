@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ResourcePolicyRemediationInitParameters struct {
@@ -34,11 +34,11 @@ type ResourcePolicyRemediationInitParameters struct {
 
 	// Reference to a ResourceGroupPolicyAssignment in authorization to populate policyAssignmentId.
 	// +kubebuilder:validation:Optional
-	PolicyAssignmentIDRef *v1.Reference `json:"policyAssignmentIdRef,omitempty" tf:"-"`
+	PolicyAssignmentIDRef *v2.Reference `json:"policyAssignmentIdRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroupPolicyAssignment in authorization to populate policyAssignmentId.
 	// +kubebuilder:validation:Optional
-	PolicyAssignmentIDSelector *v1.Selector `json:"policyAssignmentIdSelector,omitempty" tf:"-"`
+	PolicyAssignmentIDSelector *v2.Selector `json:"policyAssignmentIdSelector,omitempty" tf:"-"`
 
 	// The unique ID for the policy definition reference within the policy set definition that should be remediated. Required when the policy assignment being remediated assigns a policy set definition.
 	PolicyDefinitionReferenceID *string `json:"policyDefinitionReferenceId,omitempty" tf:"policy_definition_reference_id,omitempty"`
@@ -56,11 +56,11 @@ type ResourcePolicyRemediationInitParameters struct {
 
 	// Reference to a VirtualNetwork in network to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDRef *v1.Reference `json:"resourceIdRef,omitempty" tf:"-"`
+	ResourceIDRef *v2.Reference `json:"resourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualNetwork in network to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
+	ResourceIDSelector *v2.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 }
 
 type ResourcePolicyRemediationObservation struct {
@@ -122,11 +122,11 @@ type ResourcePolicyRemediationParameters struct {
 
 	// Reference to a ResourceGroupPolicyAssignment in authorization to populate policyAssignmentId.
 	// +kubebuilder:validation:Optional
-	PolicyAssignmentIDRef *v1.Reference `json:"policyAssignmentIdRef,omitempty" tf:"-"`
+	PolicyAssignmentIDRef *v2.Reference `json:"policyAssignmentIdRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroupPolicyAssignment in authorization to populate policyAssignmentId.
 	// +kubebuilder:validation:Optional
-	PolicyAssignmentIDSelector *v1.Selector `json:"policyAssignmentIdSelector,omitempty" tf:"-"`
+	PolicyAssignmentIDSelector *v2.Selector `json:"policyAssignmentIdSelector,omitempty" tf:"-"`
 
 	// The unique ID for the policy definition reference within the policy set definition that should be remediated. Required when the policy assignment being remediated assigns a policy set definition.
 	// +kubebuilder:validation:Optional
@@ -148,17 +148,17 @@ type ResourcePolicyRemediationParameters struct {
 
 	// Reference to a VirtualNetwork in network to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDRef *v1.Reference `json:"resourceIdRef,omitempty" tf:"-"`
+	ResourceIDRef *v2.Reference `json:"resourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualNetwork in network to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
+	ResourceIDSelector *v2.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 }
 
 // ResourcePolicyRemediationSpec defines the desired state of ResourcePolicyRemediation
 type ResourcePolicyRemediationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ResourcePolicyRemediationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ResourcePolicyRemediationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -174,8 +174,8 @@ type ResourcePolicyRemediationSpec struct {
 
 // ResourcePolicyRemediationStatus defines the observed state of ResourcePolicyRemediation.
 type ResourcePolicyRemediationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ResourcePolicyRemediationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ResourcePolicyRemediationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

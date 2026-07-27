@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ElasticityProfileInitParameters struct {
@@ -52,11 +51,11 @@ type VirtualMachineScaleSetStandbyPoolInitParameters struct {
 
 	// Reference to a OrchestratedVirtualMachineScaleSet in compute to populate attachedVirtualMachineScaleSetId.
 	// +kubebuilder:validation:Optional
-	AttachedVirtualMachineScaleSetIDRef *v1.NamespacedReference `json:"attachedVirtualMachineScaleSetIdRef,omitempty" tf:"-"`
+	AttachedVirtualMachineScaleSetIDRef *v2.NamespacedReference `json:"attachedVirtualMachineScaleSetIdRef,omitempty" tf:"-"`
 
 	// Selector for a OrchestratedVirtualMachineScaleSet in compute to populate attachedVirtualMachineScaleSetId.
 	// +kubebuilder:validation:Optional
-	AttachedVirtualMachineScaleSetIDSelector *v1.NamespacedSelector `json:"attachedVirtualMachineScaleSetIdSelector,omitempty" tf:"-"`
+	AttachedVirtualMachineScaleSetIDSelector *v2.NamespacedSelector `json:"attachedVirtualMachineScaleSetIdSelector,omitempty" tf:"-"`
 
 	// An elasticity_profile block as defined below.
 	ElasticityProfile *ElasticityProfileInitParameters `json:"elasticityProfile,omitempty" tf:"elasticity_profile,omitempty"`
@@ -107,11 +106,11 @@ type VirtualMachineScaleSetStandbyPoolParameters struct {
 
 	// Reference to a OrchestratedVirtualMachineScaleSet in compute to populate attachedVirtualMachineScaleSetId.
 	// +kubebuilder:validation:Optional
-	AttachedVirtualMachineScaleSetIDRef *v1.NamespacedReference `json:"attachedVirtualMachineScaleSetIdRef,omitempty" tf:"-"`
+	AttachedVirtualMachineScaleSetIDRef *v2.NamespacedReference `json:"attachedVirtualMachineScaleSetIdRef,omitempty" tf:"-"`
 
 	// Selector for a OrchestratedVirtualMachineScaleSet in compute to populate attachedVirtualMachineScaleSetId.
 	// +kubebuilder:validation:Optional
-	AttachedVirtualMachineScaleSetIDSelector *v1.NamespacedSelector `json:"attachedVirtualMachineScaleSetIdSelector,omitempty" tf:"-"`
+	AttachedVirtualMachineScaleSetIDSelector *v2.NamespacedSelector `json:"attachedVirtualMachineScaleSetIdSelector,omitempty" tf:"-"`
 
 	// An elasticity_profile block as defined below.
 	// +kubebuilder:validation:Optional
@@ -128,11 +127,11 @@ type VirtualMachineScaleSetStandbyPoolParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Standby Pool.
 	// +kubebuilder:validation:Optional
@@ -163,8 +162,8 @@ type VirtualMachineScaleSetStandbyPoolSpec struct {
 
 // VirtualMachineScaleSetStandbyPoolStatus defines the observed state of VirtualMachineScaleSetStandbyPool.
 type VirtualMachineScaleSetStandbyPoolStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VirtualMachineScaleSetStandbyPoolObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VirtualMachineScaleSetStandbyPoolObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

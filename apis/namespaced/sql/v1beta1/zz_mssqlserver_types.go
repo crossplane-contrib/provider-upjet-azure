@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AzureadAdministratorInitParameters struct {
@@ -26,11 +25,11 @@ type AzureadAdministratorInitParameters struct {
 
 	// Reference to a UserAssignedIdentity in managedidentity to populate loginUsername.
 	// +kubebuilder:validation:Optional
-	LoginUsernameRef *v1.NamespacedReference `json:"loginUsernameRef,omitempty" tf:"-"`
+	LoginUsernameRef *v2.NamespacedReference `json:"loginUsernameRef,omitempty" tf:"-"`
 
 	// Selector for a UserAssignedIdentity in managedidentity to populate loginUsername.
 	// +kubebuilder:validation:Optional
-	LoginUsernameSelector *v1.NamespacedSelector `json:"loginUsernameSelector,omitempty" tf:"-"`
+	LoginUsernameSelector *v2.NamespacedSelector `json:"loginUsernameSelector,omitempty" tf:"-"`
 
 	// The object id of the Azure AD Administrator of this SQL Server.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
@@ -39,11 +38,11 @@ type AzureadAdministratorInitParameters struct {
 
 	// Reference to a UserAssignedIdentity in managedidentity to populate objectId.
 	// +kubebuilder:validation:Optional
-	ObjectIDRef *v1.NamespacedReference `json:"objectIdRef,omitempty" tf:"-"`
+	ObjectIDRef *v2.NamespacedReference `json:"objectIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserAssignedIdentity in managedidentity to populate objectId.
 	// +kubebuilder:validation:Optional
-	ObjectIDSelector *v1.NamespacedSelector `json:"objectIdSelector,omitempty" tf:"-"`
+	ObjectIDSelector *v2.NamespacedSelector `json:"objectIdSelector,omitempty" tf:"-"`
 
 	// The tenant id of the Azure AD Administrator of this SQL Server.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
@@ -78,11 +77,11 @@ type AzureadAdministratorParameters struct {
 
 	// Reference to a UserAssignedIdentity in managedidentity to populate loginUsername.
 	// +kubebuilder:validation:Optional
-	LoginUsernameRef *v1.NamespacedReference `json:"loginUsernameRef,omitempty" tf:"-"`
+	LoginUsernameRef *v2.NamespacedReference `json:"loginUsernameRef,omitempty" tf:"-"`
 
 	// Selector for a UserAssignedIdentity in managedidentity to populate loginUsername.
 	// +kubebuilder:validation:Optional
-	LoginUsernameSelector *v1.NamespacedSelector `json:"loginUsernameSelector,omitempty" tf:"-"`
+	LoginUsernameSelector *v2.NamespacedSelector `json:"loginUsernameSelector,omitempty" tf:"-"`
 
 	// The object id of the Azure AD Administrator of this SQL Server.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
@@ -92,11 +91,11 @@ type AzureadAdministratorParameters struct {
 
 	// Reference to a UserAssignedIdentity in managedidentity to populate objectId.
 	// +kubebuilder:validation:Optional
-	ObjectIDRef *v1.NamespacedReference `json:"objectIdRef,omitempty" tf:"-"`
+	ObjectIDRef *v2.NamespacedReference `json:"objectIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserAssignedIdentity in managedidentity to populate objectId.
 	// +kubebuilder:validation:Optional
-	ObjectIDSelector *v1.NamespacedSelector `json:"objectIdSelector,omitempty" tf:"-"`
+	ObjectIDSelector *v2.NamespacedSelector `json:"objectIdSelector,omitempty" tf:"-"`
 
 	// The tenant id of the Azure AD Administrator of this SQL Server.
 	// +kubebuilder:validation:Optional
@@ -113,11 +112,11 @@ type MSSQLServerIdentityInitParameters struct {
 
 	// References to UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v1.NamespacedReference `json:"identityIdsRefs,omitempty" tf:"-"`
+	IdentityIdsRefs []v2.NamespacedReference `json:"identityIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v1.NamespacedSelector `json:"identityIdsSelector,omitempty" tf:"-"`
+	IdentityIdsSelector *v2.NamespacedSelector `json:"identityIdsSelector,omitempty" tf:"-"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this SQL Server. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -150,11 +149,11 @@ type MSSQLServerIdentityParameters struct {
 
 	// References to UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v1.NamespacedReference `json:"identityIdsRefs,omitempty" tf:"-"`
+	IdentityIdsRefs []v2.NamespacedReference `json:"identityIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v1.NamespacedSelector `json:"identityIdsSelector,omitempty" tf:"-"`
+	IdentityIdsSelector *v2.NamespacedSelector `json:"identityIdsSelector,omitempty" tf:"-"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this SQL Server. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
 	// +kubebuilder:validation:Optional
@@ -167,10 +166,10 @@ type MSSQLServerInitParameters struct {
 	AdministratorLogin *string `json:"administratorLogin,omitempty" tf:"administrator_login,omitempty"`
 
 	// The password associated with the administrator_login user. Needs to comply with Azure's Password Policy.
-	AdministratorLoginPasswordSecretRef *v1.LocalSecretKeySelector `json:"administratorLoginPasswordSecretRef,omitempty" tf:"-"`
+	AdministratorLoginPasswordSecretRef *v2.LocalSecretKeySelector `json:"administratorLoginPasswordSecretRef,omitempty" tf:"-"`
 
 	// The Password associated with the administrator_login user. Needs to comply with Azure's Password Policy.
-	AdministratorLoginPasswordWoSecretRef *v1.LocalSecretKeySelector `json:"administratorLoginPasswordWoSecretRef,omitempty" tf:"-"`
+	AdministratorLoginPasswordWoSecretRef *v2.LocalSecretKeySelector `json:"administratorLoginPasswordWoSecretRef,omitempty" tf:"-"`
 
 	// An integer value used to trigger an update for administrator_login_password_wo. This property should be incremented when updating administrator_login_password_wo.
 	AdministratorLoginPasswordWoVersion *float64 `json:"administratorLoginPasswordWoVersion,omitempty" tf:"administrator_login_password_wo_version,omitempty"`
@@ -203,11 +202,11 @@ type MSSQLServerInitParameters struct {
 
 	// Reference to a UserAssignedIdentity in managedidentity to populate primaryUserAssignedIdentityId.
 	// +kubebuilder:validation:Optional
-	PrimaryUserAssignedIdentityIDRef *v1.NamespacedReference `json:"primaryUserAssignedIdentityIdRef,omitempty" tf:"-"`
+	PrimaryUserAssignedIdentityIDRef *v2.NamespacedReference `json:"primaryUserAssignedIdentityIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserAssignedIdentity in managedidentity to populate primaryUserAssignedIdentityId.
 	// +kubebuilder:validation:Optional
-	PrimaryUserAssignedIdentityIDSelector *v1.NamespacedSelector `json:"primaryUserAssignedIdentityIdSelector,omitempty" tf:"-"`
+	PrimaryUserAssignedIdentityIDSelector *v2.NamespacedSelector `json:"primaryUserAssignedIdentityIdSelector,omitempty" tf:"-"`
 
 	// Whether public network access is allowed for this server. Defaults to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
@@ -223,11 +222,11 @@ type MSSQLServerInitParameters struct {
 
 	// Reference to a Key in keyvault to populate transparentDataEncryptionKeyVaultKeyId.
 	// +kubebuilder:validation:Optional
-	TransparentDataEncryptionKeyVaultKeyIDRef *v1.NamespacedReference `json:"transparentDataEncryptionKeyVaultKeyIdRef,omitempty" tf:"-"`
+	TransparentDataEncryptionKeyVaultKeyIDRef *v2.NamespacedReference `json:"transparentDataEncryptionKeyVaultKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in keyvault to populate transparentDataEncryptionKeyVaultKeyId.
 	// +kubebuilder:validation:Optional
-	TransparentDataEncryptionKeyVaultKeyIDSelector *v1.NamespacedSelector `json:"transparentDataEncryptionKeyVaultKeyIdSelector,omitempty" tf:"-"`
+	TransparentDataEncryptionKeyVaultKeyIDSelector *v2.NamespacedSelector `json:"transparentDataEncryptionKeyVaultKeyIdSelector,omitempty" tf:"-"`
 
 	// The version for the new server. Valid values are: 2.0 (for v11 server) and 12.0 (for v12 server). Changing this forces a new resource to be created.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
@@ -299,11 +298,11 @@ type MSSQLServerParameters struct {
 
 	// The password associated with the administrator_login user. Needs to comply with Azure's Password Policy.
 	// +kubebuilder:validation:Optional
-	AdministratorLoginPasswordSecretRef *v1.LocalSecretKeySelector `json:"administratorLoginPasswordSecretRef,omitempty" tf:"-"`
+	AdministratorLoginPasswordSecretRef *v2.LocalSecretKeySelector `json:"administratorLoginPasswordSecretRef,omitempty" tf:"-"`
 
 	// The Password associated with the administrator_login user. Needs to comply with Azure's Password Policy.
 	// +kubebuilder:validation:Optional
-	AdministratorLoginPasswordWoSecretRef *v1.LocalSecretKeySelector `json:"administratorLoginPasswordWoSecretRef,omitempty" tf:"-"`
+	AdministratorLoginPasswordWoSecretRef *v2.LocalSecretKeySelector `json:"administratorLoginPasswordWoSecretRef,omitempty" tf:"-"`
 
 	// An integer value used to trigger an update for administrator_login_password_wo. This property should be incremented when updating administrator_login_password_wo.
 	// +kubebuilder:validation:Optional
@@ -345,11 +344,11 @@ type MSSQLServerParameters struct {
 
 	// Reference to a UserAssignedIdentity in managedidentity to populate primaryUserAssignedIdentityId.
 	// +kubebuilder:validation:Optional
-	PrimaryUserAssignedIdentityIDRef *v1.NamespacedReference `json:"primaryUserAssignedIdentityIdRef,omitempty" tf:"-"`
+	PrimaryUserAssignedIdentityIDRef *v2.NamespacedReference `json:"primaryUserAssignedIdentityIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserAssignedIdentity in managedidentity to populate primaryUserAssignedIdentityId.
 	// +kubebuilder:validation:Optional
-	PrimaryUserAssignedIdentityIDSelector *v1.NamespacedSelector `json:"primaryUserAssignedIdentityIdSelector,omitempty" tf:"-"`
+	PrimaryUserAssignedIdentityIDSelector *v2.NamespacedSelector `json:"primaryUserAssignedIdentityIdSelector,omitempty" tf:"-"`
 
 	// Whether public network access is allowed for this server. Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -362,11 +361,11 @@ type MSSQLServerParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
@@ -381,11 +380,11 @@ type MSSQLServerParameters struct {
 
 	// Reference to a Key in keyvault to populate transparentDataEncryptionKeyVaultKeyId.
 	// +kubebuilder:validation:Optional
-	TransparentDataEncryptionKeyVaultKeyIDRef *v1.NamespacedReference `json:"transparentDataEncryptionKeyVaultKeyIdRef,omitempty" tf:"-"`
+	TransparentDataEncryptionKeyVaultKeyIDRef *v2.NamespacedReference `json:"transparentDataEncryptionKeyVaultKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in keyvault to populate transparentDataEncryptionKeyVaultKeyId.
 	// +kubebuilder:validation:Optional
-	TransparentDataEncryptionKeyVaultKeyIDSelector *v1.NamespacedSelector `json:"transparentDataEncryptionKeyVaultKeyIdSelector,omitempty" tf:"-"`
+	TransparentDataEncryptionKeyVaultKeyIDSelector *v2.NamespacedSelector `json:"transparentDataEncryptionKeyVaultKeyIdSelector,omitempty" tf:"-"`
 
 	// The version for the new server. Valid values are: 2.0 (for v11 server) and 12.0 (for v12 server). Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -411,8 +410,8 @@ type MSSQLServerSpec struct {
 
 // MSSQLServerStatus defines the observed state of MSSQLServer.
 type MSSQLServerStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MSSQLServerObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MSSQLServerObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

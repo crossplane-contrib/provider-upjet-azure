@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BackupPolicyBlobStorageInitParameters struct {
@@ -86,11 +85,11 @@ type BackupPolicyBlobStorageParameters struct {
 
 	// Reference to a BackupVault in dataprotection to populate vaultId.
 	// +kubebuilder:validation:Optional
-	VaultIDRef *v1.NamespacedReference `json:"vaultIdRef,omitempty" tf:"-"`
+	VaultIDRef *v2.NamespacedReference `json:"vaultIdRef,omitempty" tf:"-"`
 
 	// Selector for a BackupVault in dataprotection to populate vaultId.
 	// +kubebuilder:validation:Optional
-	VaultIDSelector *v1.NamespacedSelector `json:"vaultIdSelector,omitempty" tf:"-"`
+	VaultIDSelector *v2.NamespacedSelector `json:"vaultIdSelector,omitempty" tf:"-"`
 }
 
 type CriteriaInitParameters struct {
@@ -274,8 +273,8 @@ type BackupPolicyBlobStorageSpec struct {
 
 // BackupPolicyBlobStorageStatus defines the observed state of BackupPolicyBlobStorage.
 type BackupPolicyBlobStorageStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BackupPolicyBlobStorageObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BackupPolicyBlobStorageObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

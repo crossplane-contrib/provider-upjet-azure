@@ -5,364 +5,364 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this ManagedRedis.
-func (mg *ManagedRedis) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *ManagedRedis) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this ManagedRedis.
-func (mg *ManagedRedis) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *ManagedRedis) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this ManagedRedis.
-func (mg *ManagedRedis) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *ManagedRedis) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this ManagedRedis.
-func (mg *ManagedRedis) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *ManagedRedis) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this ManagedRedis.
-func (mg *ManagedRedis) SetConditions(c ...xpv1.Condition) {
+func (mg *ManagedRedis) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this ManagedRedis.
-func (mg *ManagedRedis) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *ManagedRedis) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this ManagedRedis.
-func (mg *ManagedRedis) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *ManagedRedis) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this ManagedRedis.
-func (mg *ManagedRedis) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *ManagedRedis) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this ManagedRedisAccessPolicyAssignment.
-func (mg *ManagedRedisAccessPolicyAssignment) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *ManagedRedisAccessPolicyAssignment) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this ManagedRedisAccessPolicyAssignment.
-func (mg *ManagedRedisAccessPolicyAssignment) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *ManagedRedisAccessPolicyAssignment) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this ManagedRedisAccessPolicyAssignment.
-func (mg *ManagedRedisAccessPolicyAssignment) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *ManagedRedisAccessPolicyAssignment) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this ManagedRedisAccessPolicyAssignment.
-func (mg *ManagedRedisAccessPolicyAssignment) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *ManagedRedisAccessPolicyAssignment) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this ManagedRedisAccessPolicyAssignment.
-func (mg *ManagedRedisAccessPolicyAssignment) SetConditions(c ...xpv1.Condition) {
+func (mg *ManagedRedisAccessPolicyAssignment) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this ManagedRedisAccessPolicyAssignment.
-func (mg *ManagedRedisAccessPolicyAssignment) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *ManagedRedisAccessPolicyAssignment) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this ManagedRedisAccessPolicyAssignment.
-func (mg *ManagedRedisAccessPolicyAssignment) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *ManagedRedisAccessPolicyAssignment) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this ManagedRedisAccessPolicyAssignment.
-func (mg *ManagedRedisAccessPolicyAssignment) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *ManagedRedisAccessPolicyAssignment) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this RedisCache.
-func (mg *RedisCache) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *RedisCache) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this RedisCache.
-func (mg *RedisCache) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *RedisCache) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this RedisCache.
-func (mg *RedisCache) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *RedisCache) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this RedisCache.
-func (mg *RedisCache) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *RedisCache) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this RedisCache.
-func (mg *RedisCache) SetConditions(c ...xpv1.Condition) {
+func (mg *RedisCache) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this RedisCache.
-func (mg *RedisCache) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *RedisCache) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this RedisCache.
-func (mg *RedisCache) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *RedisCache) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this RedisCache.
-func (mg *RedisCache) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *RedisCache) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this RedisCacheAccessPolicy.
-func (mg *RedisCacheAccessPolicy) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *RedisCacheAccessPolicy) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this RedisCacheAccessPolicy.
-func (mg *RedisCacheAccessPolicy) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *RedisCacheAccessPolicy) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this RedisCacheAccessPolicy.
-func (mg *RedisCacheAccessPolicy) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *RedisCacheAccessPolicy) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this RedisCacheAccessPolicy.
-func (mg *RedisCacheAccessPolicy) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *RedisCacheAccessPolicy) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this RedisCacheAccessPolicy.
-func (mg *RedisCacheAccessPolicy) SetConditions(c ...xpv1.Condition) {
+func (mg *RedisCacheAccessPolicy) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this RedisCacheAccessPolicy.
-func (mg *RedisCacheAccessPolicy) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *RedisCacheAccessPolicy) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this RedisCacheAccessPolicy.
-func (mg *RedisCacheAccessPolicy) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *RedisCacheAccessPolicy) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this RedisCacheAccessPolicy.
-func (mg *RedisCacheAccessPolicy) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *RedisCacheAccessPolicy) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this RedisCacheAccessPolicyAssignment.
-func (mg *RedisCacheAccessPolicyAssignment) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *RedisCacheAccessPolicyAssignment) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this RedisCacheAccessPolicyAssignment.
-func (mg *RedisCacheAccessPolicyAssignment) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *RedisCacheAccessPolicyAssignment) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this RedisCacheAccessPolicyAssignment.
-func (mg *RedisCacheAccessPolicyAssignment) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *RedisCacheAccessPolicyAssignment) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this RedisCacheAccessPolicyAssignment.
-func (mg *RedisCacheAccessPolicyAssignment) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *RedisCacheAccessPolicyAssignment) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this RedisCacheAccessPolicyAssignment.
-func (mg *RedisCacheAccessPolicyAssignment) SetConditions(c ...xpv1.Condition) {
+func (mg *RedisCacheAccessPolicyAssignment) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this RedisCacheAccessPolicyAssignment.
-func (mg *RedisCacheAccessPolicyAssignment) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *RedisCacheAccessPolicyAssignment) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this RedisCacheAccessPolicyAssignment.
-func (mg *RedisCacheAccessPolicyAssignment) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *RedisCacheAccessPolicyAssignment) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this RedisCacheAccessPolicyAssignment.
-func (mg *RedisCacheAccessPolicyAssignment) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *RedisCacheAccessPolicyAssignment) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this RedisEnterpriseCluster.
-func (mg *RedisEnterpriseCluster) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *RedisEnterpriseCluster) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this RedisEnterpriseCluster.
-func (mg *RedisEnterpriseCluster) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *RedisEnterpriseCluster) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this RedisEnterpriseCluster.
-func (mg *RedisEnterpriseCluster) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *RedisEnterpriseCluster) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this RedisEnterpriseCluster.
-func (mg *RedisEnterpriseCluster) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *RedisEnterpriseCluster) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this RedisEnterpriseCluster.
-func (mg *RedisEnterpriseCluster) SetConditions(c ...xpv1.Condition) {
+func (mg *RedisEnterpriseCluster) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this RedisEnterpriseCluster.
-func (mg *RedisEnterpriseCluster) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *RedisEnterpriseCluster) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this RedisEnterpriseCluster.
-func (mg *RedisEnterpriseCluster) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *RedisEnterpriseCluster) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this RedisEnterpriseCluster.
-func (mg *RedisEnterpriseCluster) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *RedisEnterpriseCluster) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this RedisEnterpriseDatabase.
-func (mg *RedisEnterpriseDatabase) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *RedisEnterpriseDatabase) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this RedisEnterpriseDatabase.
-func (mg *RedisEnterpriseDatabase) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *RedisEnterpriseDatabase) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this RedisEnterpriseDatabase.
-func (mg *RedisEnterpriseDatabase) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *RedisEnterpriseDatabase) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this RedisEnterpriseDatabase.
-func (mg *RedisEnterpriseDatabase) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *RedisEnterpriseDatabase) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this RedisEnterpriseDatabase.
-func (mg *RedisEnterpriseDatabase) SetConditions(c ...xpv1.Condition) {
+func (mg *RedisEnterpriseDatabase) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this RedisEnterpriseDatabase.
-func (mg *RedisEnterpriseDatabase) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *RedisEnterpriseDatabase) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this RedisEnterpriseDatabase.
-func (mg *RedisEnterpriseDatabase) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *RedisEnterpriseDatabase) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this RedisEnterpriseDatabase.
-func (mg *RedisEnterpriseDatabase) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *RedisEnterpriseDatabase) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this RedisFirewallRule.
-func (mg *RedisFirewallRule) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *RedisFirewallRule) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this RedisFirewallRule.
-func (mg *RedisFirewallRule) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *RedisFirewallRule) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this RedisFirewallRule.
-func (mg *RedisFirewallRule) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *RedisFirewallRule) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this RedisFirewallRule.
-func (mg *RedisFirewallRule) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *RedisFirewallRule) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this RedisFirewallRule.
-func (mg *RedisFirewallRule) SetConditions(c ...xpv1.Condition) {
+func (mg *RedisFirewallRule) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this RedisFirewallRule.
-func (mg *RedisFirewallRule) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *RedisFirewallRule) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this RedisFirewallRule.
-func (mg *RedisFirewallRule) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *RedisFirewallRule) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this RedisFirewallRule.
-func (mg *RedisFirewallRule) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *RedisFirewallRule) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this RedisLinkedServer.
-func (mg *RedisLinkedServer) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *RedisLinkedServer) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this RedisLinkedServer.
-func (mg *RedisLinkedServer) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *RedisLinkedServer) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this RedisLinkedServer.
-func (mg *RedisLinkedServer) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *RedisLinkedServer) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this RedisLinkedServer.
-func (mg *RedisLinkedServer) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *RedisLinkedServer) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this RedisLinkedServer.
-func (mg *RedisLinkedServer) SetConditions(c ...xpv1.Condition) {
+func (mg *RedisLinkedServer) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this RedisLinkedServer.
-func (mg *RedisLinkedServer) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *RedisLinkedServer) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this RedisLinkedServer.
-func (mg *RedisLinkedServer) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *RedisLinkedServer) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this RedisLinkedServer.
-func (mg *RedisLinkedServer) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *RedisLinkedServer) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
