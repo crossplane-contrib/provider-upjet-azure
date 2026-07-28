@@ -67,7 +67,7 @@ func init() {
 	}
 }
 
-func main() {
+func main() { //nolint:gocyclo // easier to follow as a unit
 	var (
 		app                     = kingpin.New(filepath.Base(os.Args[0]), "Terraform based Crossplane provider for Azure").DefaultEnvars()
 		debug                   = app.Flag("debug", "Run with debug logging.").Short('d').Bool()
@@ -195,7 +195,6 @@ func main() {
 		SetupFn:               clients.TerraformSetupBuilder(clusterProvider.TerraformProvider),
 		PollJitter:            pollJitter,
 		OperationTrackerStore: tjcontroller.NewOperationStore(logr),
-		StartWebhooks:         *certsDir != "",
 	}
 
 	namespacedOpts := tjcontroller.Options{
@@ -215,7 +214,6 @@ func main() {
 		SetupFn:               clients.TerraformSetupBuilder(namespacedProvider.TerraformProvider),
 		PollJitter:            pollJitter,
 		OperationTrackerStore: tjcontroller.NewOperationStore(logr),
-		StartWebhooks:         *certsDir != "",
 	}
 
 	if *enableManagementPolicies {
@@ -239,6 +237,15 @@ func main() {
 		}
 		clusterOpts.ChangeLogOptions = &clo
 		namespacedOpts.ChangeLogOptions = &clo
+	}
+
+	// Webhooks are registered eagerly on all pods before mgr.Start() so that
+	// every replica (leader and followers alike) can serve conversion requests.
+	// Reconciler setup is deferred to the gate and only runs on the leader.
+	startWebhooks := *certsDir != ""
+	if startWebhooks {
+		kingpin.FatalIfError(clustercontroller.SetupWebhookWithManager_securityinsights(mgr), "Cannot setup cluster-scoped webhooks")
+		kingpin.FatalIfError(namespacedcontroller.SetupWebhookWithManager_securityinsights(mgr), "Cannot setup namespaced webhooks")
 	}
 
 	canSafeStart, err := canWatchCRD(ctx, mgr)
